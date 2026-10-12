@@ -1,0 +1,29 @@
+#!/bin/bash
+# What this does: sets up the explainer-film kit in a working folder: copies the kit (engine, tools,
+# templates, examples, docs) there, installs the drawing engine's packages with npm, and checks that
+# Python's packages, ffmpeg and a Chromium browser are available. Safe to run again: it never
+# overwrites a file that already exists in the folder, so your own pages and pictures are kept.
+#
+# Use: explainer-film-setup /path/to/work/film-kit
+set -u
+TARGET="${1:?Use: explainer-film-setup /path/to/work/film-kit}"
+HERE="$(cd "$(dirname "$0")/.." && pwd)"
+mkdir -p "$TARGET"
+# copy the kit without overwriting anything already there
+(cd "$HERE/kit" && find . -type f | while read -r f; do
+  if [ ! -e "$TARGET/$f" ]; then mkdir -p "$TARGET/$(dirname "$f")"; cp "$f" "$TARGET/$f"; fi
+done)
+mkdir -p "$TARGET/assets/reliefs" "$TARGET/assets/paintings" "$TARGET/paper-film/pieces" "$TARGET/paper-film/out"
+echo "kit copied to $TARGET"
+if [ ! -d "$TARGET/paper-film/node_modules/three" ]; then
+  (cd "$TARGET/paper-film" && npm install --no-audit --no-fund) || echo "npm install failed: install Node.js 18+ and run 'npm install' in $TARGET/paper-film"
+fi
+echo "--- checks ---"
+command -v ffmpeg >/dev/null && echo "ffmpeg: ok" || echo "ffmpeg: MISSING (install ffmpeg with libx264)"
+python3 -c "import numpy, PIL, cv2" 2>/dev/null && echo "python packages: ok" || echo "python packages: MISSING (pip install numpy pillow opencv-python-headless)"
+if [ -n "${PAPER_FILM_BROWSER:-}" ] || ls /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell >/dev/null 2>&1 || ls ~/.cache/ms-playwright/chromium* >/dev/null 2>&1 || command -v chromium >/dev/null; then
+  echo "browser: found"
+else
+  echo "browser: MISSING (cd $TARGET/paper-film && npx playwright-core install chromium, or set PAPER_FILM_BROWSER)"
+fi
+echo "next: read the make-explainer-film skill; docs are in $TARGET/docs"
