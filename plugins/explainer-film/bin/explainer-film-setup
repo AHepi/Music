@@ -26,4 +26,9 @@ if [ -n "${PAPER_FILM_BROWSER:-}" ] || ls /opt/pw-browsers/chromium_headless_she
 else
   echo "browser: MISSING (cd $TARGET/paper-film && npx playwright-core install chromium, or set PAPER_FILM_BROWSER)"
 fi
+if [ -n "${BLENDER_PYTHON:-}" ] && "$BLENDER_PYTHON" -c "import bpy, PIL" 2>/dev/null; then
+  echo "blender (for detailed models): ok ($BLENDER_PYTHON)"
+else
+  echo "blender (optional, for detailed models): python3 -m venv ~/blender-env && ~/blender-env/bin/pip install bpy pillow, then BLENDER_PYTHON=~/blender-env/bin/python (needs Python 3.13 for bpy 5.x)"
+fi
 echo "next: read the make-explainer-film skill; docs are in $TARGET/docs"

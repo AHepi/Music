@@ -79,6 +79,7 @@ export class CinemaKit {
     this.scene.environment = environmentTexture();
     this.camera = new THREE.PerspectiveCamera(40, FRAME_WIDTH / FRAME_HEIGHT, 0.05, 400);
     this.shakes = [];
+    this.cameraPlans = [];   // every stillShot made on this page, for the camera check
     this.lights = null;
     this.t = 0;
     this.lightRig();
@@ -164,7 +165,42 @@ export class CinemaKit {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.receiveShadow = true;
     this.scene.add(mesh);
-    return { mesh, pointAt, distanceAt, fov, tanX, tanY, near, far };
+    // How far a 3D thing stands in front of the painted surface behind it (world units; negative =
+    // it pokes into the painting, which shows as clipping). Checks up to `samples` of its corners.
+    // Call it while testing, after posing the thing for a moment, e.g.
+    //   console.warn('basket clearance', room.clearance(basket.anchor).toFixed(3));
+    // It checks each corner and also points spread across each face (a flat card's middle can
+    // cross a sloping floor even when its corners are clear).
+    const clearance = (object, { samples = 600 } = {}) => {
+      object.updateMatrixWorld(true);
+      let least = Infinity;
+      const p = new THREE.Vector3(), a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
+      const test = (point) => {
+        if (point.z >= -0.01) return;
+        const d = -point.z, u = (point.x / d / tanX + 1) / 2, v = (point.y / d / tanY + 1) / 2;
+        if (u < 0 || u > 1 || v < 0 || v > 1) return;
+        least = Math.min(least, distanceAt(u, v) - d);
+      };
+      const visible = (o) => { for (let x = o; x; x = x.parent) if (!x.visible) return false; return true; };
+      object.traverse((o) => {
+        if (!o.isMesh || !visible(o)) return;
+        const position = o.geometry.attributes.position, index = o.geometry.index;
+        const triangles = index ? index.count / 3 : position.count / 3;
+        const stride = Math.max(1, Math.floor(triangles / samples));
+        const corner = (k) => (index ? index.getX(k) : k);
+        for (let t = 0; t < triangles; t += stride) {
+          a.fromBufferAttribute(position, corner(t * 3)).applyMatrix4(o.matrixWorld);
+          b.fromBufferAttribute(position, corner(t * 3 + 1)).applyMatrix4(o.matrixWorld);
+          c.fromBufferAttribute(position, corner(t * 3 + 2)).applyMatrix4(o.matrixWorld);
+          for (const [wa, wb] of [[1, 0], [0, 1], [0, 0], [1 / 3, 1 / 3], [0.5, 0.5], [0.5, 0], [0, 0.5], [0.2, 0.2], [0.6, 0.2], [0.2, 0.6]]) {
+            p.set(0, 0, 0).addScaledVector(a, wa).addScaledVector(b, wb).addScaledVector(c, 1 - wa - wb);
+            test(p);
+          }
+        }
+      });
+      return least;
+    };
+    return { mesh, pointAt, distanceAt, clearance, fov, tanX, tanY, near, far };
   }
 
   // A flat painted backdrop (no depth), as a big card standing far back.
@@ -240,8 +276,9 @@ export class CinemaKit {
   // ---------------------------------------------------------------------------- the camera
   // keys: [{ t, position: [x, y, z], target: [x, y, z], fov, focus (a point [x,y,z] or a distance) }]
   // The camera glides through the keys (no stops in between, easing in at the first key and out at the
-  // last). handheld: a slight breathing drift (world units).
-  shot(keys, { handheld = 0.012, seed = 1 } = {}) {
+  // last). handheld: a slight breathing drift (world units; off by default - the camera rule says hold
+  // still). New pages should use stillShot below, which holds still between at most three moves.
+  shot(keys, { handheld = 0, seed = 1 } = {}) {
     const times = keys.map((k) => k.t);
     const tracks = {
       position: keys.map((k) => vector(k.position)),
@@ -273,6 +310,69 @@ export class CinemaKit {
         handheld * (Math.sin(t * 0.61 + phases[2]) + 0.5 * Math.sin(t * 1.17 + phases[3])),
         0);
       return { position: position.add(drift), target, fov, roll, focus };
+    };
+  }
+
+  // A still camera with a few deliberate moves: the film's camera rule. The camera holds still at
+  // `start` and only moves during the listed moves; between moves it holds still again. At most three
+  // moves per shot (a shot ends at a cut); a page that needs more needs another shot.
+  //   start: { position, target, fov, focus }  (focus: a point [x, y, z] or a distance)
+  //   moves: [{ from, to, kind, position?, target?, fov?, focus? }] in time order, not overlapping;
+  //          anything a move leaves out stays as it was. Each move eases in and out.
+  // kind says why the camera moves (the camera grammar):
+  //   'zoom out'  make room for what comes next      'zoom in'   narrow the view onto what matters now
+  //   'pan left' / 'pan right'  shift perspective    'pan up'    toward ideals   'pan down'  pressure
+  //   'move up'   see the bigger picture             'move down' show the small details
+  //   'focus'     only the focus changes (does not count as a move)
+  stillShot(start, moves = [], { name = 'shot' } = {}) {
+    const KINDS = ['zoom out', 'zoom in', 'pan left', 'pan right', 'pan up', 'pan down', 'move up', 'move down', 'focus'];
+    const counted = moves.filter((m) => m.kind !== 'focus');
+    const where = `page ${this.number}, ${name}`;
+    for (const m of moves) {
+      if (!KINDS.includes(m.kind)) throw new Error(`${where}: camera move kind "${m.kind}" is not one of: ${KINDS.join(', ')}`);
+      if (!(m.to > m.from)) throw new Error(`${where}: camera move "${m.kind}" must end after it starts (from ${m.from}, to ${m.to})`);
+      if (m.kind === 'focus' && (m.position || m.target || m.fov !== undefined)) throw new Error(`${where}: a 'focus' move may only change focus`);
+    }
+    for (let i = 1; i < moves.length; i++) {
+      if (moves[i].from < moves[i - 1].to - 1e-6 && moves[i].kind !== 'focus' && moves[i - 1].kind !== 'focus') {
+        throw new Error(`${where}: camera moves overlap ("${moves[i - 1].kind}" until ${moves[i - 1].to.toFixed(2)}, "${moves[i].kind}" from ${moves[i].from.toFixed(2)})`);
+      }
+    }
+    if (counted.length > 3) throw new Error(`${where}: ${counted.length} camera moves; the rule is at most 3 per shot (cut to a new shot instead)`);
+    // the pose before and after each move
+    const poses = [{ position: vector(start.position), target: vector(start.target), fov: start.fov ?? 40, focus: start.focus }];
+    for (const m of moves) {
+      const before = poses[poses.length - 1];
+      poses.push({
+        position: m.position ? vector(m.position) : before.position.clone(),
+        target: m.target ? vector(m.target) : before.target.clone(),
+        fov: m.fov ?? before.fov,
+        focus: m.focus ?? before.focus,
+      });
+    }
+    const focusDistance = (f, position, target) => {
+      if (f === undefined) return target.distanceTo(position);
+      if (typeof f === 'number') return f;
+      const view = target.clone().sub(position).normalize();
+      return Math.max(0.2, vector(f).sub(position).dot(view));
+    };
+    this.cameraPlans.push({ name, start, moves: moves.map(({ from, to, kind }) => ({ from, to, kind })) });
+    return (t) => {
+      this.shotShowing = name;   // tells the camera check which shot is on screen
+      let position = poses[0].position.clone(), target = poses[0].target.clone(), fov = poses[0].fov;
+      let focus = focusDistance(poses[0].focus, position, target);
+      moves.forEach((m, i) => {
+        if (t <= m.from) return;
+        const k = smoother(clamp01((t - m.from) / (m.to - m.from)));
+        const a = poses[i], b = poses[i + 1];
+        if (m.kind !== 'focus') {
+          position = a.position.clone().lerp(b.position, k);
+          target = a.target.clone().lerp(b.target, k);
+          fov = lerp(a.fov, b.fov, k);
+        }
+        focus = lerp(focusDistance(a.focus, position, target), focusDistance(b.focus, position, target), k);
+      });
+      return { position, target, fov, roll: 0, focus };
     };
   }
 
@@ -384,6 +484,13 @@ export class CutOut {
     this.mover.rotation.set(0, 0, roll);
     this.mover.scale.setScalar(scale);
     this.hinge.rotation.set(fold, 0, 0);
+    if (opacity !== undefined) {
+      this.hinge.traverse((o) => {
+        if (!o.isMesh) return;
+        o.material.transparent = opacity < 1;
+        o.material.opacity = opacity;
+      });
+    }
   }
 }
 
@@ -433,3 +540,26 @@ export async function cardTexture(lines, { fontPx = 150, cardColour = '#e8e0cc',
 }
 
 export { spring, clamp01, easeInOut };
+
+// Whether two 3D things' boxes overlap (true = they may clip into each other), and by how much (the
+// overlap's smallest side, world units). Rough: a box is bigger than a slanted card, so a small
+// overlap can be fine; look at a still to be sure. Use while testing, e.g.
+//   console.warn('envelope vs workers', JSON.stringify(boxesOverlap(envelope.anchor, workers.anchor)));
+export function boxesOverlap(a, b) {
+  a.updateMatrixWorld(true); b.updateMatrixWorld(true);
+  // only the parts that are showing count
+  const shownBox = (root) => {
+    const box = new THREE.Box3();
+    root.traverse((o) => {
+      if (!o.isMesh) return;
+      for (let x = o; x; x = x.parent) if (!x.visible) return;
+      box.union(new THREE.Box3().setFromObject(o, true));
+    });
+    return box;
+  };
+  const boxA = shownBox(a), boxB = shownBox(b);
+  if (boxA.isEmpty() || boxB.isEmpty()) return { overlap: false, by: 0 };
+  if (!boxA.intersectsBox(boxB)) return { overlap: false, by: 0 };
+  const both = boxA.clone().intersect(boxB), size = both.getSize(new THREE.Vector3());
+  return { overlap: true, by: Math.min(size.x, size.y, size.z) };
+}

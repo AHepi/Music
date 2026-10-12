@@ -53,6 +53,17 @@ on the CPU does, and bakes.
 5. Look at it in the stage before using it:
    `PAPER_FILM_QUERY="model=/assets/models/<chapter>/X.glb&cam=3.6,2.4,7.5&look=0,1,0&fov=42" node paper-film/tools/render-paper-film.mjs model-preview OUT --stills 1`
 
+## Chapter 2's models
+
+The worked example (`kit/paper-film/scenes/inflation-chapter-2/`) loads four models that are not
+shipped as files; make them once (about 5 minutes):
+```
+cd <kit>/paper-film/blender && B=$BLENDER_PYTHON; M=<kit>/assets/models/inflation-chapter-2
+$B build_factory.py $M/factory-a.glb --brick red --office left --seed 1
+$B build_factory.py $M/factory-b.glb --brick brown --office right --seed 2
+$B build_town.py $M/town.glb && $B build_desk.py $M/desk.glb && $B build_props.py $M/props.glb
+```
+
 ## Use it in a page
 
 ```js

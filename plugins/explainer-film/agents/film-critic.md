@@ -21,5 +21,14 @@ some pages, or the code.
   before (separate stretches); look for carried state, randomness, camera keys out of order, word
   lookups hitting the wrong occurrence, events outside the page window, things left visible after a
   cut, canvas state leaking. Cite file and line.
+- Camera (a viewer's rule, strict): the camera holds still unless a move lands a point; each move is
+  one of zoom in / zoom out / pan left / pan right / pan up / pan down / move up / move down, with
+  the meaning in `${CLAUDE_PLUGIN_ROOT}/skills/build-cinema-page/camera-and-framing.md`; at most 3
+  moves per shot. Measure it: `node paper-film/tools/render-paper-film.mjs SCENE --camera FILE.json 3`
+  then `python3 -I paper-film/tools/camera_audit.py FILE.json` (any PROBLEM line is a finding).
+- Frame filling: the subject large (60-80% of the width), the top and bottom thirds used, no big
+  empty dark floor, table or sky.
+- Clipping: nothing passing into the painted room, the floor or another thing at any moment (look
+  at landings, pop-ups and swings close up).
 - Each finding: page, moment, what, why it matters to a viewer, smallest fix, evidence you actually
   saw. No padding, no invented problems. Do not edit files.

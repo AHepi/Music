@@ -192,17 +192,71 @@ export async function build(kit) {
   const boardFocus = boardHome.toArray();
   const stackFocus = [-0.6, -1.8, -8.7];
   const CUT = T.november - 0.5, DIP = 0.2;
+  // the locked gate, framed tight (2 degrees tighter than the soldiers' framing) with the padlock and
+  // the steel low in the frame, so the snow in front does not take the bottom quarter
+  const GATE_FOV = 35, GATE_AIM = [0.0, -0.75, -30];
   const gateShot = kit.stillShot({ position: [0, 0.3, 0.35], target: [0, -0.1, -30], fov: 40, focus: 14 }, [
     { from: T.prices - 0.3, to: T.prices + 0.2, kind: 'focus', focus: boardFocus },
     { from: T.french - 0.45, to: T.french + 0.75, kind: 'zoom in', position: [0, -0.02, -0.25], target: [0, -1.2, -30], fov: 37, focus: 8 },
     { from: T.heartland - 0.2, to: T.heartland + 0.3, kind: 'focus', focus: 7.2 },
-    { from: T.government - 0.15, to: T.stop + 0.3, kind: 'zoom in', position: [-0.05, -0.3, -1.2], target: [0.0, -1.2, -30], focus: [lockAt.x, lockAt.y, lockAt.z] },
+    { from: T.government - 0.15, to: T.stop + 0.3, kind: 'zoom in', position: [-0.05, -0.3, -1.2], target: GATE_AIM, fov: GATE_FOV, focus: [lockAt.x, lockAt.y, lockAt.z] },
     { from: T.paying - 0.1, to: T.paying + 0.4, kind: 'focus', focus: stackFocus },
   ], { name: 'the works gate' });
   const novemberShot = kit.stillShot({ position: [0, 0.1, -0.55], target: [0, -0.1, -30], fov: 40, focus: boardFocus }, [
     { from: T.push - 0.35, to: T.push + 0.85, kind: 'zoom in', position: [-0.05, -0.3, -1.6], target: [0, -1.1, -30], focus: [-0.3, -1.9, -8.8] },
   ], { name: 'November' });
   const shot = (t) => (t < CUT ? gateShot(t) : novemberShot(t));
+
+  // Keep every fall path (notes and bundles) clear of the words on screen: for each faller, find the
+  // highest start that keeps its whole path, as the camera sees it at each moment, out of the boxes
+  // the words fill at that moment. A faller that has to start lower fades in out of the snowy air.
+  const lens = new THREE.PerspectiveCamera(40, 1080 / 1920, 0.1, 200);
+  const onScreen = (point, t) => {
+    const c = shot(t);
+    lens.position.copy(c.position); lens.up.set(0, 1, 0); lens.lookAt(c.target);
+    lens.fov = c.fov; lens.updateProjectionMatrix(); lens.updateMatrixWorld();
+    const p = new THREE.Vector3(...point).project(lens);
+    return { x: (p.x + 1) / 2 * 1080, y: (1 - p.y) / 2 * 1920 };
+  };
+  const wordBoxes = (t) => {
+    const boxes = [];   // [left, top, right, bottom] in pixels, with a margin
+    if (t > T.stop - 0.1 && t < T.keeps) boxes.push([200, 215, 880, 455]);
+    if (t > T.paying - 0.1 && t < T.november - 0.25) boxes.push([200, 215, 880, 455]);
+    if (t > T.november - 0.1 && t < T.thisTime + 0.2) {
+      const top = onScreen([boardHome.x, boardHome.y + 0.2, boardHome.z], t), bottom = onScreen([boardHome.x, boardHome.y - 0.2, boardHome.z], t);
+      boxes.push([100, top.y - 100, 920, bottom.y + 165]);
+    }
+    if (t > T.push - 0.1) boxes.push([190, 155, 890, 455]);
+    return boxes;
+  };
+  const pathClear = (from, length, at) => {
+    for (let k = 0; k <= 1.0001; k += 0.04) {
+      const t = from + k * length, [x, y, z, r] = at(k, t);
+      const centre = onScreen([x, y, z], t), edge = onScreen([x + r, y, z], t);
+      const radius = Math.abs(edge.x - centre.x);
+      for (const [l, top, right, bottom] of wordBoxes(t)) {
+        if (centre.x + radius > l && centre.x - radius < right && centre.y + radius > top && centre.y - radius < bottom) return false;
+      }
+    }
+    return true;
+  };
+  for (const n of notes) {
+    const from = n.land - n.fall, { x, z } = n.piece.rest;
+    n.drop = 4.4;
+    while (n.drop > 0.4 && !pathClear(from, n.fall, (k, t) => [x + n.drift * (1 - k) + 0.12 * Math.sin((t - from) * 3 + n.phase), -2.2 + n.drop * (1 - k) + n.rest + 0.12, z, 0.32])) n.drop -= 0.05;
+    for (const m of [n.piece.front.material, n.piece.back.material]) m.alphaTest = 0.5;
+  }
+  console.warn('DBG note drops', notes.map((n) => n.drop.toFixed(2)).join(' '));
+  {
+    const levels = new Map(stacks.map((st) => [st, 0]));
+    for (const b of bundles) {
+      const base = levels.get(b.stack); levels.set(b.stack, base + b.height + 0.009);
+      b.drop = 3.6;
+      while (b.drop > 0.3 && !pathClear(b.landAt - 0.45, 0.45, (k) => [b.stack.x, -2.2 + base + b.drop * (1 - k * k) + b.height / 2, b.stack.z, 0.36])) b.drop -= 0.05;
+      b.materials = [];
+      b.group.traverse((o) => { if (o.material) [].concat(o.material).forEach((m) => { if (!b.materials.includes(m)) b.materials.push(m); }); });
+    }
+  }
   kit.shake(T.stop + 0.15, 0.01, 0.15);
   kit.shake(T.trillion + 0.05, 0.012, 0.18);
 
@@ -217,6 +271,7 @@ export async function build(kit) {
     return arrive + go;
   };
 
+  console.warn('DBG bundle drops', bundles.map((b) => b.drop.toFixed(2)).join(' '));
   function pose(t) {
     snow.set(t);
     for (const c of chimneys) c.smoke.set({ t, origin: c.at, until: T.stop + 0.05, scale: c.scale, wind: 0.6 });
@@ -239,10 +294,13 @@ export async function build(kit) {
       const age = t - (n.land - n.fall);
       if (age < 0) { n.piece.set({ visible: false }); continue; }
       const k = Math.min(1, age / n.fall);
+      // a note that starts low (to keep clear of the words) fades in out of the snowy air
+      const opacity = n.drop < 4.35 ? smooth(clamp01(age / 0.3)) : 1;
+      for (const m of [n.piece.front.material, n.piece.back.material]) m.alphaTest = opacity < 1 ? 0.02 : 0.5;
       if (k < 1) {
-        n.piece.set({ dy: 4.4 * (1 - k) + n.rest, dx: n.drift * (1 - k) + 0.12 * Math.sin(age * 3 + n.phase), roll: n.spin * (1 - k),
+        n.piece.set({ opacity, dy: n.drop * (1 - k) + n.rest, dx: n.drift * (1 - k) + 0.12 * Math.sin(age * 3 + n.phase), roll: n.spin * (1 - k),
           fold: -0.6 + 0.9 * Math.sin(age * n.tumble + n.phase) * (1 - k) - 0.95 * k, yaw: 0.8 * Math.sin(age * 2 + n.phase) });
-      } else n.piece.set({ fold: -(Math.PI / 2 - 0.02), dy: n.rest });
+      } else n.piece.set({ opacity: 1, fold: -(Math.PI / 2 - 0.02), dy: n.rest });
     }
 
     // bundles land and stack up
@@ -255,7 +313,10 @@ export async function build(kit) {
       const settle = t > b.landAt ? Math.exp(-(t - b.landAt) * 10) * Math.sin((t - b.landAt) * 30) * 0.05 : 0;
       const tilt = b.twist * (1 - k) + settle;
       b.group.rotation.z = tilt;
-      b.group.position.set(b.stack.x + b.shift[0], -2.2 + 0.004 + base + 3.6 * (1 - k * k) + Math.abs(Math.sin(tilt)) * 0.32, b.stack.z + b.shift[1]);
+      b.group.position.set(b.stack.x + b.shift[0], -2.2 + 0.004 + base + b.drop * (1 - k * k) + Math.abs(Math.sin(tilt)) * 0.32, b.stack.z + b.shift[1]);
+      // a bundle that starts low (to keep clear of the words) fades in as it drops
+      const fade = b.drop < 3.55 ? smooth(clamp01(k / 0.35)) : 1;
+      for (const m of b.materials) { m.transparent = fade < 1; m.opacity = fade; m.depthWrite = true; }
       heights.set(b.stack, base + b.height + 0.009);   // the paper band stands 0.004 proud top and bottom
     });
 
@@ -282,7 +343,7 @@ export async function build(kit) {
     hook(ctx, t, { at: T.ruhr, until: T.government - 0.2, text: 'THE RUHR', y: 290, size: 100 });
     hook(ctx, t, { at: T.coal, until: T.government - 0.2, text: 'COAL AND STEEL', y: 400, size: 66, colour: INK.amber });
     hook(ctx, t, { at: T.stop, until: T.keeps - 0.15, text: 'STOP WORK', y: 290, size: 100 });
-    hook(ctx, t, { at: T.protest, until: T.keeps - 0.15, text: 'IN PROTEST', y: 400, size: 58, colour: INK.muted });
+    hook(ctx, t, { at: T.protest, until: T.keeps - 0.15, text: 'IN PROTEST', y: 400, size: 58, colour: INK.amber });
     hook(ctx, t, { at: T.paying, until: T.november - 0.3, text: 'STILL PAID', y: 290, size: 96 });
     hook(ctx, t, { at: T.newMoney, until: T.november - 0.3, text: 'WITH NEW MONEY', y: 400, size: 66, colour: INK.amber });
 

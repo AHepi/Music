@@ -89,9 +89,9 @@ export async function build(kit) {
   const tags = [];
   const tagCount = 4;
   for (let i = 0; i < tagCount; i++) {
-    const u = 0.25 + i * 0.17;
+    const u = 0.30 + i * 0.18;
     const at = floor(u, 0.075);
-    const tag = priceTag({ width: 0.38, text: '↑', accent: '#b8402c' });
+    const tag = priceTag({ width: 0.48, text: '↑', accent: '#b8402c' });
     // no string: on a row of tags lying side by side, each string would reach into its neighbour
     tag.group.children.filter((c) => c !== tag.card).forEach((c) => { c.visible = false; tag.group.remove(c); });
     const pivot = new THREE.Group();
@@ -126,12 +126,12 @@ export async function build(kit) {
   // zooms in onto the barrel as she says "the price of oil" (it lands as the camera settles), holds on
   // the counter through x4 and "three months"; then zooms out on "almost everything" to make room for
   // the row of price tags, and holds there to the end of part A.
-  const shotA = kit.stillShot({ position: [0.05, 0.0, -0.4], target: [0.25, -0.5, -30], fov: 38, focus: 13 }, [
+  const shotA = kit.stillShot({ position: [0.2, -0.75, -1.3], target: [0.45, -0.35, -30], fov: 32, focus: 13 }, [
     { from: T.price - 0.55, to: T.oil + 0.05, kind: 'zoom in', position: [0.25, -0.25, -1.4], target: [barrelAt.x + 0.03, barrelAt.y + 1.12, barrelAt.z], fov: 31, focus: barrelMid },
-    { from: T.months + 0.25, to: T.everything, kind: 'zoom out', position: [0.05, -0.2, -0.75], target: [0.2, -0.62, -9], fov: 35, focus: [0, barrelAt.y, barrelAt.z + 0.55] },
+    { from: T.months + 0.25, to: T.everything, kind: 'zoom out', position: [0.2, -0.3, -1.25], target: [0.2, -1.3, -9], fov: 34, focus: [0, barrelAt.y, barrelAt.z + 0.55] },
   ], { name: 'the forecourt, 1973' });
   // shot B, New Zealand: holds still so the bars panel reads
-  const shotB = kit.stillShot({ position: [-0.1, 0.1, -0.3], target: [-0.35, -0.1, -30], fov: 38, focus: 15 }, [], { name: 'a New Zealand street' });
+  const shotB = kit.stillShot({ position: [-0.3, -0.35, -0.8], target: [-2.6, -0.2, -30], fov: 38, focus: 15 }, [], { name: 'a New Zealand street' });
   kit.shake(T.oil + 0.05, 0.03, 0.18);
 
   function pose(t) {
@@ -174,7 +174,7 @@ export async function build(kit) {
   }
 
   // prices rose 4.1% with fuel, 2.9% without: two bars, the second added on "two point nine"
-  function twoBars(ctx, t, { at, until, x = 260, y = 640, width = 560, height = 500 }) {
+  function twoBars(ctx, t, { at, until, x = 260, y = 800, width = 560, height = 500 }) {
     const a = presence(t, at, until, 0.3, 0.4);
     if (a <= 0) return;
     const max = 5;

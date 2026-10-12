@@ -11,16 +11,17 @@
 //   node render-paper-film.mjs SCENE OUTPUT_FOLDER --stills 57.5 66.0 ...   pictures of those moments
 //   node render-paper-film.mjs SCENE --info                        prints the scene's start, end,
 //                                                                  frame count and page edges (JSON)
+//   node render-paper-film.mjs SCENE --camera OUTPUT.json [STEP]   writes where the camera is every
+//                                                                  STEP frames (default 3) without
+//                                                                  drawing, for tools/camera_audit.py
 // Times are seconds on the chapter timeline; frame 0 is the scene's start.
 //
 // The hidden browser is Chromium. It is found in this order: the PAPER_FILM_BROWSER setting (a path
 // to the browser program), Playwright's own downloaded Chromium, then the usual install places.
 // Filming speed on a 2-processor machine with software graphics: about 0.6 to 0.9 seconds a frame
 // for the paper stage. A cinema chapter (a scene that calls buildCinemaChapter) opens the cinema
-// stage instead (cinema-stage.html); PAPER_FILM_STAGE can force one or the other.
-// For the cinema test scene (cinema-test-pages), PAPER_FILM_CHAPTER names the chapter folder and
-// PAPER_FILM_PAGES the pages to draw, e.g. PAPER_FILM_CHAPTER=my-chapter PAPER_FILM_PAGES=3,4.
-// Still times are separated by spaces, not commas.
+// stage instead (cinema-stage.html); PAPER_FILM_STAGE can force one or the other. PAPER_FILM_QUERY adds
+// settings to the stage's address (model-preview.js reads its model and camera from there).
 
 import http from 'node:http';
 import fs from 'node:fs';
@@ -31,7 +32,7 @@ import { chromium } from 'playwright-core';
 const KIT_FOLDER = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const FRAMES_PER_SECOND = 30;
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json',
-  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2' };
+  '.glb': 'model/gltf-binary', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2' };
 
 function findBrowser() {
   const candidates = [process.env.PAPER_FILM_BROWSER];
@@ -79,7 +80,7 @@ async function openStage(sceneName) {
   page.on('pageerror', (error) => console.log('[stage error]', error.message));
   // a cinema chapter (scenes/<name>.js marked as one) uses the cinema stage; others the paper stage
   const stageName = process.env.PAPER_FILM_STAGE ?? (fs.readFileSync(path.join(KIT_FOLDER, 'paper-film/scenes', `${sceneName}.js`), 'utf8').includes('buildCinemaChapter') ? 'cinema-stage' : 'paper-stage');
-  await page.goto(`http://127.0.0.1:${server.address().port}/paper-film/stage/${stageName}.html?scene=${sceneName}${process.env.PAPER_FILM_PAGES ? `&pages=${process.env.PAPER_FILM_PAGES}` : ''}${process.env.PAPER_FILM_CHAPTER ? `&chapter=${process.env.PAPER_FILM_CHAPTER}` : ''}`);
+  await page.goto(`http://127.0.0.1:${server.address().port}/paper-film/stage/${stageName}.html?scene=${sceneName}${process.env.PAPER_FILM_PAGES ? `&pages=${process.env.PAPER_FILM_PAGES}` : ''}${process.env.PAPER_FILM_QUERY ? `&${process.env.PAPER_FILM_QUERY}` : ''}`);
   await page.waitForFunction('window.stageReady === true || window.stageFailed', null, { timeout: 300000 });
   const failed = await page.evaluate(() => window.stageFailed);
   if (failed) throw new Error(`the scene did not load: ${failed}`);
@@ -98,6 +99,15 @@ async function main() {
     if (output === '--info') {
       const pageEdges = (info.pageEdges ?? []).map((seconds) => Math.round((seconds - info.start) * FRAMES_PER_SECOND));
       console.log(JSON.stringify({ scene: sceneName, start: info.start, end: info.end, frames: frameCount, page_edge_frames: pageEdges }));
+      return;
+    }
+    if (output === '--camera') {
+      const file = rest[0] ?? `${sceneName}-camera.json`, step = Number(rest[1] ?? 3);
+      const samples = [];
+      for (let frame = 0; frame < frameCount; frame += step) samples.push(await page.evaluate((t) => window.built.cameraAt?.(t), info.start + frame / FRAMES_PER_SECOND));
+      const plans = await page.evaluate(() => window.built.cameraPlans?.() ?? []);
+      fs.writeFileSync(file, JSON.stringify({ scene: sceneName, fps: FRAMES_PER_SECOND, step, page_edges: info.pageEdges ?? [], samples, plans }));
+      console.log(`wrote ${file}: ${samples.length} camera samples`);
       return;
     }
     if (rest[0] === '--stills') {

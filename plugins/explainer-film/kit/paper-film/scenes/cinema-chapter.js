@@ -59,5 +59,19 @@ export async function buildCinemaChapter({ timelineUrl, piecesFolder, reliefFold
     return grabFrame();
   }
 
-  return { start: 0, end, pageEdges, renderFrame, kits, pages, joins };
+  // Where the camera is at moment t, without drawing (for the camera check): the page showing (the
+  // outgoing one during a join), its camera position, aim and lens, and the page's still-shot plans.
+  function cameraAt(t) {
+    let i = 0;
+    while (i < pages.length - 1 && t >= joins[i].end) i++;
+    const kit = kits[i];
+    kit.t = t;
+    kit.shotShowing = null;
+    const camera = (pages[i].pose(t) ?? {}).camera;
+    if (!camera) return { page: kit.number, t };
+    return { page: kit.number, t, shot: kit.shotShowing, position: camera.position.toArray(), target: camera.target.toArray(), fov: camera.fov, focus: camera.focus };
+  }
+  const cameraPlans = () => kits.map((kit) => ({ page: kit.number, plans: kit.cameraPlans }));
+
+  return { start: 0, end, pageEdges, renderFrame, cameraAt, cameraPlans, kits, pages, joins };
 }

@@ -88,9 +88,24 @@ code lives in `chapter-2-inflation/film-code/` (it sits on top of the film kit).
    `cinema-kit.js` (lamp, painted rooms, cut-outs, words, camera paths), card models in
    `models.js`, effects in `effects.js` and flat graphics in `graphics.js`. Every event is timed
    to a word with `kit.at('word')`. `19 Guide - building a cinema page.md` is the full how-to.
+   Since round 20 the camera follows your rule ("stay still unless it's essential ... 3 movements per
+   frame, max"): each shot is a `kit.stillShot` (still, with at most three named moves: zoom in or
+   out, pan left, right, up or down, move up or down); more moves means a cut to a new shot.
+   `20 Guide - camera rule, filling the frame, no clipping.md` is the how-to.
+3a. Models: detailed buildings, the town, the desk and props are built in Blender by script
+   (`film-code/blender/build_*.py`, run with Blender's Python module) and saved as `.glb` files in
+   `pictures/models/`; pages load them with `model-loader.js`. To look at one model alone:
+   `PAPER_FILM_QUERY="model=/assets/models/inflation-chapter-2/NAME.glb&cam=X,Y,Z&look=X,Y,Z&fov=42" node paper-film/tools/render-paper-film.mjs model-preview FOLDER --stills 1`.
+3b. Frame a shot with numbers before rendering: `python3 -I film-code/tools/frame_check.py CAMERA TARGET FOV name=x,y,z ...`
+   says where each thing lands in the tall frame.
 4. Check stills often:
    `PAPER_FILM_PAGES=N node paper-film/tools/render-paper-film.mjs cinema-test-pages FOLDER --stills T1 T2 ...`
    (times separated by spaces), then a contact sheet, and look at every beat.
+4a. Check the camera rule by measurement (about 10 seconds for the whole film):
+   `node paper-film/tools/render-paper-film.mjs inflation-chapter-2 --camera CAMERA.json 3` then
+   `python3 -I film-code/tools/camera_audit.py CAMERA.json` (must end "0 problem(s)").
+4b. Check nothing passes through anything: `room.clearance(thing)` (how far in front of the painted
+   room; negative = poking through) and `boxesOverlap(a, b)`, at the moments things land or move.
 5. Check the page turns from the whole chapter (`... inflation-chapter-2 FOLDER --stills` at each
    last word plus 0.7 s): each page's words must stay on its own page.
 6. Film: `bash paper-film/tools/film-chapter-parallel.sh inflation-chapter-2 2 240` (35 chunks, two at
