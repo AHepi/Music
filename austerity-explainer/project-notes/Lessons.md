@@ -226,6 +226,52 @@ Only failures in doing the work belong here. Newest at the bottom.
     filming script again (finished stretches are kept); the watcher now also stops when the script is
     no longer running.
 
+57. **A camera that never stops reads as restless on a phone.** Most pages crept or drifted for their
+    whole length (page 1: one slow push for 20 seconds; pages 3 and 8 never held still). The camera
+    rule is now built into the engine: `kit.stillShot` holds still and allows only named moves from
+    the viewer's grammar, at most three per shot, and refuses a fourth. A checker measures every shot
+    of the film in seconds (`--camera` then `camera_audit.py`).
+58. **Measure camera moves against the thing in focus, not the aim point.** In a painted room the
+    camera aims at a point 30 units away, so a real one-unit move looked tiny to the first checker.
+    Using the focus distance fixed it.
+59. **Plain card boxes look poor beside detailed paintings.** The old factory was about 2,000
+    triangles with printed brick; the new one, built in Blender by script, is about 22,000 with real
+    window openings, sills, copings, gutters, a sawtooth roof with lit glass and a chimney with bands.
+    It is still light enough for the software renderer.
+60. **Blender's MCP server works headless and earns its place.** It does pass Python to Blender (which
+    `pip install bpy` also allows), but its own guidance, its search of Blender's bundled manual and
+    Python reference, its scene inspection and its quick thumbnails taught the model-making (lesson
+    67). Blender's renderer is far too slow to film with here (35 to 90 seconds a frame), so Blender
+    builds the models and the stage films them.
+61. **Baking corner shading: keep it local and small.** Blender's default reach (10 units) darkened
+    whole walls, and 2048 pixels at 48 samples took 12 minutes on a busy machine. A reach of 0.6,
+    1024 pixels and 32 samples took 2 minutes and looks right. A part left out of the bake must not
+    share a material with a baked part, or it turns dark brown (the kerb did).
+62. **Blender adds ".glb" to any file name that doesn't end in it** ("factory-a.glb.new" became
+    "factory-a.glb.new.glb", and the rename after it failed).
+63. **Frame with numbers before rendering.** `frame_check.py` says where each thing lands in the tall
+    frame for a camera position, in a second. It found price boards off the edge and cut-outs too
+    wide for the frame before any still was made.
+64. **A tall frame needs things stacked in depth, not side by side.** Three cut-outs in a row were 2.4
+    units wide and fell off both edges; staggered front to back, they fit large. Soft barrels, crates
+    and a cart in the near corners fill the bottom third.
+65. **Corner checks miss a flat card's middle.** The clearance check now samples points across every
+    face, and the overlap check ignores hidden parts (both found by the reviewer).
+66. **Words over a busy set need a soft dark band** (chimneys, papers on a desk), as the street
+    already had.
+67. **The Blender MCP's own guidance caught real faults.** Its rules and its bundled manual showed
+    that my bevels shaded as hard facets (harden normals was off) and the cut brick walls had razor
+    corners; following them, and joining parts by material (232 parts to 19), made each works about
+    34,000 triangles and visibly finer. Its sandbox refuses `read_factory_settings` (use
+    `read_homefile(use_empty=True, use_factory_startup=True)`), Blender's default renderer crashes
+    without a graphics card (switch to Cycles before any render), and Blender needs `--online-mode`
+    for the add-on's local connection.
+68. **A detail can read as something else on a phone.** New stone blocks beside round gutter ends
+    looked like little cameras on the wall; dark glass lenses made reading glasses look like
+    sunglasses; a figured wood pattern looked like a contour map. A before-and-after judge in the
+    real film frame caught all three.
+
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.

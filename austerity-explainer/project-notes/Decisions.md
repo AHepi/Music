@@ -414,6 +414,7 @@ overturn any of them in one line. Changes to the project must follow this file.
 
 ### Claude's calls for item 26
 
+- This replaces item 25's call "Blender, without its MCP server": the official server is now used.
 - Installed Blender 5.2.2 (the full program, checksum checked) with Blender Lab's official MCP server
   and its add-on, running without a screen on this machine, and registered it with Claude Code for
   later sessions. In this session its tools are called through a small command-line client that
