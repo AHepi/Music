@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-12.**
+**As of 2026-10-12, evening.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -71,18 +71,37 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Not checked: watching at full speed (only single frames can be looked at here), and how it plays on
   a phone screen.
 
-## Chapter 2: what really causes inflation (started 2026-10-12)
+## Chapter 2: what really causes inflation (finished 2026-10-12)
 
-- Research ledger: `chapter-2-inflation/18 Research - chapter 2 - what really causes inflation.md`
-  (72 sourced facts, ids C2-H, C2-C, C2-N, C2-M; 43 unconfirmed claims listed and kept out).
-- Three outlines: `chapter-2-inflation/18 Outlines - chapter 2 - what really causes inflation.md`
-  (A back to the shell factory, my pick; B what happened next; C five price tags). Each about 4 minutes,
-  ten pages, about US$1.50-1.75 of new paintings and about 3,500 ElevenLabs credits.
-- Nothing recorded, painted or spent.
+- Sent: `chapter-2-inflation/deliver/19 Chapter 2 - what really causes inflation.mp4` (4 min 30 s,
+  27 MB), `19 Captions - chapter 2.srt` / `.vtt`, `19 Cover - chapter 2 - what really causes inflation.jpg`.
+- Script with research ids: `chapter-2-inflation/19 Script - chapter 2 - what really causes inflation.md`;
+  research ledger (72 facts, 21 more from the script check, and a second fact check of 31 claims):
+  `18 Research - chapter 2 - what really causes inflation.md`; raw recheck `fact-recheck-2026-10-12.json`.
+- Sound: `chapter-2-inflation/narration/` (ten recordings, transcripts, word times, timeline) and
+  `mix/chapter-2-mix.mp3`.
+- Pictures: `chapter-2-inflation/pictures/` (11 paintings and masks, 12 painted rooms with depth, 29
+  cut-out pieces; the politician's original blue tie kept as `politician-face-blue-tie-original.png`).
+- Film code: `chapter-2-inflation/film-code/` (cinema stage, kit, models, effects, graphics, the ten
+  pages, tools); the page guide `19 Guide - building a cinema page.md`.
+- Checks: 8,110 frames, 30 a second; sound 0.00 ms off at every page; -15.0 LUFS, peak -1.6 dB;
+  every page's stills checked before filming; independent critique (7 critics and a skeptic), fixes,
+  and an independent check of the fixes; page turns checked in one run; the finished film looked at
+  every 3 seconds. Not checked: the voice by ear, full-speed playback, a phone screen.
+- The full-quality master (902 MB) is only in this session's working folder (too big for the
+  repository); it can be filmed again from the repository files.
+
+## The plugin (2026-10-12)
+
+- `plugins/explainer-film` with `.claude-plugin/marketplace.json` at the repository root. Seven skills,
+  four workflows (verify-facts, critique-film, check-fixes, build-pages), three helper definitions,
+  the setup command `explainer-film-setup`, and the film kit. Passed `claude plugin validate`; a fresh
+  setup drew a picture end to end. Not tested: installation by another person or a smaller model.
 
 ## Waiting on you
 
-- Your choice of outline for chapter 2.
+- Your view of chapter 2 on your phone.
+- Before publishing: whether page 10's "is raising" still holds after 28 October.
 - Nothing for chapter 1 (you said "This is fantastic."). The kit is ready to hand to the agent making
   the series on the enclosures.
 
@@ -93,7 +112,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Spend so far
 
-About US$5 in all.
+About US$6.80 in all (chapter 2: about US$1.06 on fal and about 4,300 ElevenLabs credits, about 75 US cents).
 - fal, about US$4.25: chapter 1's paintings, about US$2.55 (17 large pictures at about 10 US cents,
   30 small ones at about 2.5 cents, 37 cut-out masks at about a fifth of a cent); the page 3 test,
   about 82 US cents; the five animated style samples, about 90 US cents.
