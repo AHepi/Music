@@ -1,0 +1,812 @@
+{
+ "verdicts": [
+  {
+   "group": "Britain in the First World War (pages 2 and 3)",
+   "claims": [
+    {
+     "claim": "Britain, 1915: unemployment under one percent. On screen: UNDER 1%, and 100 dots with one empty.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "The Bank of England's 'Millennium of Macroeconomic Data' annual UK unemployment series, which FRED publishes as UNRTUKA, gives 3.16% for 1914, 0.95% for 1915, 0.33% for 1916, 0.47% for 1917 and 0.65% for 1918. Board of Trade Labour Gazette trade-union returns for 1915 are 1.3% (March), 1.0% (June) and 0.9% (September). So 'under 1%' is right for the 1915 annual average, but only just. Early 1915 months were slightly above 1%.",
+     "sources": [
+      {
+       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRTUKA",
+       "what": "FRED / Bank of England Millennium dataset, UK annual unemployment rate (data downloaded)",
+       "opened": true
+      },
+      {
+       "url": "https://lse-atom.arkivum.net/uploads/r/lse-digital-library/e/c/9/ec9afb867e0cd8aa02052c23caca262ff5c5f717c131f4181436933d543ec37d/535c5db7-6359-4a61-b2f3-3ef7fedeca79-UKLSE_DL1_EH01_001_024_0008_0001.pdf",
+       "what": "Labour Gazette 1915-16 trade union unemployment returns (seen via search excerpts)",
+       "opened": false
+      }
+     ],
+     "problem": "0.95% is under 1%, so the words are right. But a panel of 100 dots with exactly one empty shows 1%, not 'under 1%'. A sharp viewer could spot the mismatch.",
+     "fix": "Optional: show the last dot only mostly empty (for example 95% hollow), or leave it and accept it as a rounded picture. No narration change needed.",
+     "severity": "minor"
+    },
+    {
+     "claim": "The war is paid for partly with new money.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "In August 1914 the Treasury issued unbacked \u00a31 and 10-shilling currency notes ('Bradburys'), under the Currency and Bank Notes Act. Spending was financed with Treasury bills and Ways and Means advances from the Bank of England. The NBER chapter says the emergency measures 'set the stage for credit inflation'. Bank Underground (Bank of England staff blog) shows the Bank secretly bought the unsold part of the 1914 War Loan with its own money. Most war spending was still covered by borrowing and taxes, so 'partly' is the right word.",
+     "sources": [
+      {
+       "url": "https://bankunderground.co.uk/2017/08/08/your-country-needs-funds-the-extraordinary-story-of-britains-early-efforts-to-finance-the-first-world-war/",
+       "what": "Bank of England staff blog: the Bank secretly funded the 1914 War Loan shortfall; debt rose from 25% to 125% of GDP",
+       "opened": true
+      },
+      {
+       "url": "https://www.natwestgroupremembers.com/banking-in-wartime/banking-business/gold-banknotes-and-money-supply-in-the-first-world-war.html",
+       "what": "NatWest Group heritage page: Treasury notes (Bradburys) issued from 6 August 1914",
+       "opened": true
+      },
+      {
+       "url": "https://www.nber.org/system/files/chapters/c5171/c5171.pdf",
+       "what": "NBER chapter on WWI finance: Treasury bills, credit inflation (seen in search excerpt)",
+       "opened": false
+      },
+      {
+       "url": "https://www.bankofengland.co.uk/-/media/boe/files/archive/ww/boe-1914-1921-vol1-chapter3.pdf",
+       "what": "Bank of England official history 1914-21: Ways and Means advances (seen in search excerpt)",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "Submarines are sinking supply ships, and factories are turned over to war work.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "Germany began a U-boat campaign against merchant shipping around Britain in February 1915 (the Lusitania was sunk in May 1915). The campaign peaked in 1917, when food stocks fell to a few weeks' supply. In 1915 the Ministry of Munitions and the Munitions of War Act turned industry over to war production after the 'shell crisis'. This is standard history and matches the script's 'shell factory' framing.",
+     "sources": [
+      {
+       "url": "https://www.warmuseum.ca/firstworldwar/?p=2137",
+       "what": "Canadian War Museum: U-boat sinkings worsened food shortages (seen in search results)",
+       "opened": false
+      },
+      {
+       "url": "https://www.cambridge.org/core/product/F37DC0DD23DDB5A986DC6E1AA5F6CDBF",
+       "what": "Cambridge chapter: April 1917 worst month, food stocks 3-10 weeks (seen in search results)",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "By the end of the war prices have roughly doubled since it began. On screen: PRICES, with bars 1914 = x1 and 1918 = x2.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "FRED / Bank of England Millennium dataset UK CPI inflation: +12.5% in 1915, +18.1% in 1916, +25.2% in 1917 and +22.0% in 1918. Compounded, the 1918 annual average is 2.03 times the 1914 average, so x2 is exact to one significant figure. Measured month to month from July 1914 to November 1918, the official cost-of-living index rose more, to about x2.2. 'Roughly doubled' and 'x2' are both fair, and if anything slightly understate the rise.",
+     "sources": [
+      {
+       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIIUKA",
+       "what": "FRED / Bank of England Millennium dataset, UK annual CPI inflation (data downloaded and compounded)",
+       "opened": true
+      },
+      {
+       "url": "https://hansard.parliament.uk/html/Commons/1936-03-19/CommonsChamber",
+       "what": "Hansard 1936: Ministry of Labour cost of living index table, July 1914 base (page returned 403)",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "Optional: a small source line on screen, 'Annual average consumer prices, Bank of England data'.",
+     "severity": "none"
+    },
+    {
+     "claim": "Britain at war was close to the second factory: short of workers, materials and machines.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "Unemployment was 0.3-0.95% from 1915 to 1918 (Bank of England data), which is effectively full employment. U-boat losses cut imported food and materials. The 1915 shell shortage and the creation of the Ministry of Munitions show that factory capacity was stretched. This is a fair plain-language reading.",
+     "sources": [
+      {
+       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRTUKA",
+       "what": "UK unemployment 1915-18, Bank of England Millennium dataset",
+       "opened": true
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    }
+   ],
+   "other_notes": "No claim on these pages is wrong, and none needs a narration re-record. The one optional on-screen tweak is the dot panel: one fully empty dot out of 100 shows 1%, but the true 1915 figure is 0.95%, so a partly empty last dot would match 'UNDER 1%'. The key numbers come from the Bank of England's Millennium dataset, downloaded directly from FRED. Unemployment was 3.16% in 1914, 0.95% in 1915 and 0.33% in 1916. Annual CPI inflation from 1915 to 1918 compounds to 2.03 times 1914 prices. The 1914-1918 Online encyclopedia page on war finance and the 1936 Hansard page could not be opened (bot block / 403)."
+  },
+  {
+   "group": "Glasgow rent strikes, 1915 (page 4)",
+   "claims": [
+    {
+     "claim": "Narration: \"In 1915, workers poured into Glasgow for war work, and landlords pushed rents up... by as much as a quarter.\" On screen: GLASGOW 1915 and +25%.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "The influx of munitions and shipyard workers is well documented. Gray (2018, citing Damer 1980) describes rent rises of \"up to 25 percent in some districts\" in spring 1915. The 25% figure is also the rise landlords announced in February 1915 (Wikipedia, Scottish Housing News). An official finding from October 1915, quoted by Counterfire (I only saw this in search results), puts the actual rises at 11.67% to 23.08% in Govan and Fairfield, the centre of the strike, and about 5% for a third of rents elsewhere. So \"as much as a quarter\" works as a ceiling. A bare \"+25%\" on screen suggests that all rents rose 25%, which they did not.",
+     "sources": [
+      {
+       "url": "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf",
+       "what": "Neil Gray, introduction to Rent Unrest (2018): influx of munitions workers; rises 'up to 25 percent in some districts' (Damer 1980)",
+       "opened": true
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/1915_Glasgow_rent_strikes",
+       "what": "Landlords announced 25% increase Feb 1915",
+       "opened": true
+      },
+      {
+       "url": "https://scottishhousingnews.com/article/our-housing-heritage-how-glasgow-tenants-fought-the-huns-at-home-during-world-war-one",
+       "what": "Influx of war workers; announced 25% rise",
+       "opened": true
+      },
+      {
+       "url": "https://www.counterfire.org/?p=13919",
+       "what": "Oct 1915 government finding: Govan/Fairfield rises 11.67%-23.08%; a third of rents +5%",
+       "opened": false
+      }
+     ],
+     "problem": "The on-screen \"+25%\" has no \"up to\", so it reads as a citywide rise. Measured rises were mostly lower (top measured figure about 23%).",
+     "fix": "Change on-screen text to \"UP TO +25%\" (narration can stay).",
+     "severity": "minor"
+    },
+    {
+     "claim": "Narration: \"By November, about twenty thousand households were refusing to pay the rise.\" On screen: counter to 20,000 HOUSEHOLDS.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "Gray: \"By November 1915, around 20,000 people were on rent strike\" (citing Damer, Melling, Castells, Smyth). Gray also cites Melling 1983 for \"an estimated 25,000 tenants\" by November. Wikipedia: peak in November 1915 with \"around 20,000 families\", with a range of 20,000 to 25,000 households in its infobox. Some popular accounts give 25,000 to 30,000. Strikers were tenancies, so \"households\" is a fair unit. 20,000 is the conservative, most-cited figure.",
+     "sources": [
+      {
+       "url": "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf",
+       "what": "Around 20,000 on rent strike by Nov 1915; Melling estimate 25,000 tenants",
+       "opened": true
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/1915_Glasgow_rent_strikes",
+       "what": "Peak Nov 1915, around 20,000 families; infobox 20,000-25,000",
+       "opened": true
+      },
+      {
+       "url": "https://scottishhousingnews.com/article/our-housing-heritage-how-glasgow-tenants-fought-the-huns-at-home-during-world-war-one",
+       "what": "Over 25,000 families; ~30,000 at peak (secondary, less careful)",
+       "opened": true
+      }
+     ],
+     "problem": "Estimates range from 20,000 to 25,000 (some say up to 30,000). 20,000 is the low, conservative end, which is defensible. Nothing is wrong.",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "Narration: \"Within weeks, Parliament froze rents.\" (Increase of Rent and Mortgage Interest (War Restrictions) Act 1915.)",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "The decisive Small Debts Court trial took place on 17 November 1915. The next day the government announced a rent-restriction bill. The bill was introduced in late November (Gray says 28 Nov, Wikipedia 25 Nov), and its restrictions bit from 25 November. It received Royal Assent on 23 December 1915 (the Act's Wikipedia page; Gray's 'December 25' looks like an error). That is about 5 weeks after the peak, so 'within weeks' holds. The Act fixed rents of small dwellings at the 'standard rent', the rent payable on 3 August 1914 (pre-war level), applied retrospectively. It allowed increases only for improvements and higher rates, and it also froze mortgage interest. Any rise above the pre-war rent was irrecoverable, so 'froze' is a fair plain-language summary. Strictly, it rolled rents back to pre-war levels and covered small houses only (rateable value up to \u00a330 in Scotland).",
+     "sources": [
+      {
+       "url": "https://en.wikipedia.org/wiki/Increase_of_Rent_and_Mortgage_Interest_(War_Restrictions)_Act_1915",
+       "what": "Royal assent 23 Dec 1915; in place from 25 Nov 1915; retrospective to 4 Aug 1914; small dwellings",
+       "opened": true
+      },
+      {
+       "url": "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf",
+       "what": "17 Nov trial; bill announced next day; introduced 28 Nov; Royal Assent Dec 1915",
+       "opened": true
+      },
+      {
+       "url": "https://dynamic-rsnz.natlib.govt.nz/newspapers/DOM19170326.2.6",
+       "what": "Contemporary notice: rent cannot exceed that payable on 3 August 1914, save improvements/rates",
+       "opened": false
+      },
+      {
+       "url": "https://www.marxists.org/archive/maclean/1915/12/rent-victories.htm",
+       "what": "John MacLean, Vanguard Dec 1915: bill returns rents to pre-war level and mortgage interest to old rates",
+       "opened": true
+      }
+     ],
+     "problem": "Nothing wrong in the narration. If on-screen text gives a date, use 23 Dec 1915 (Royal Assent), not 25 Nov or 25 Dec.",
+     "fix": "If an on-screen caption is added, use \"RENTS FROZEN AT PRE-WAR LEVELS - DEC 1915\" (avoid 'Nov 1915' for the Act itself).",
+     "severity": "none"
+    },
+    {
+     "claim": "Narration: \"Homes can't be built in a hurry.\" (housing supply slow to expand; wartime Glasgow)",
+     "verdict": "confirmed",
+     "what_the_sources_say": "Gray describes the war influx 'exacerbating an already acute and well-documented housing crisis', with Glasgow the most densely populated city in Britain by 1914. Merrett and Sykes, Housing Finance and Development (1965), quoted second-hand, say house building 'virtually ceased with the advent of war' and rents rose most in munitions areas. Labour and materials were diverted to the war. As a general point, and for wartime Glasgow specifically, the line is fair. Glasgow house building had already slumped before 1914, which only strengthens it.",
+     "sources": [
+      {
+       "url": "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf",
+       "what": "Acute pre-existing housing crisis worsened by munitions influx",
+       "opened": true
+      },
+      {
+       "url": "https://worldsocialism.org/spgb/?p=233205",
+       "what": "Quotes Merrett & Sykes (1965): house building virtually ceased with the war (second-hand)",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    }
+   ],
+   "other_notes": "No claim is wrong. The only change I recommend is on screen: '+25%' should read 'UP TO +25%'. The October 1915 government finding put the measured rises at 11.67% to 23.08% even in Govan, the worst-hit area, so 25% is a ceiling, not a typical rise. Sources disagree on two details: striker numbers (20,000 to 30,000; 20,000 is the safe low figure) and the Act's dates (bill announced 18 Nov, introduced 25 or 28 Nov, Royal Assent 23 Dec 1915; Gray's '25 December' looks like a typo). I could not open the primary parliamentary papers: the October 1915 committee report and the Act's original text. The 11.67% to 23.08% figures and the 3 August 1914 standard-rent date come from secondary or contemporary sources that I only saw in search results."
+  },
+  {
+   "group": "Japan from 2013 and the Bank of England after 2008 (page 5)",
+   "claims": [
+    {
+     "claim": "Japan 2013: the central bank sets out to double the money it has created, in two years. On screen: JAPAN 2013, x2 MONEY, IN TWO YEARS.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "In its statement of 4 April 2013, the Bank of Japan says it \"will double the monetary base and the amounts outstanding of JGBs as well as ETFs in two years\", aiming for 2% inflation \"with a time horizon of about two years\". The monetary base is the money the central bank has created, so the narration's description is fair.",
+     "sources": [
+      {
+       "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2013/k130404a.pdf",
+       "what": "BoJ statement 'Introduction of the Quantitative and Qualitative Monetary Easing', 4 April 2013",
+       "opened": true
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "For eight years prices barely move, about half a percent a year. On screen: flat prices line, 0.5% A YEAR.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "World Bank/IMF data for Japan's headline CPI, year by year: 2013 0.3, 2014 2.8, 2015 0.8, 2016 -0.1, 2017 0.5, 2018 1.0, 2019 0.5, 2020 0.0, 2021 -0.2. The price level rose from 99.7 (2012) to 105.5 (2020), about 0.7% a year over 8 years. From 2012 to 2021 it reached 105.2, about 0.6% a year; from 2013 to 2021 it was about 0.63% a year. The April 2014 consumption-tax rise from 5% to 8% added about 2 points to CPI on its own (Bank of Japan's mechanical estimate, via the Statistics Bureau). With that taken out, the average is about 0.4-0.5%. So 'about half a percent' is fair as narration, and 'eight years' (2013 to 2021, before the 2022 surge) is fair. But the headline average is closer to 0.6-0.7%, so an exact '0.5%' on screen slightly understates it.",
+     "sources": [
+      {
+       "url": "https://api.worldbank.org/v2/country/JPN/indicator/FP.CPI.TOTL.ZG?format=json&date=2012:2022",
+       "what": "World Bank: Japan CPI inflation, annual %",
+       "opened": true
+      },
+      {
+       "url": "https://api.worldbank.org/v2/country/JPN/indicator/FP.CPI.TOTL?format=json&date=2012:2022",
+       "what": "World Bank: Japan CPI index level",
+       "opened": true
+      },
+      {
+       "url": "https://www.stat.go.jp/english/data/cpi/report/2014np/pdf/fu8.pdf",
+       "what": "Statistics Bureau note on the 2014 consumption tax effect (about +2.0 points, BoJ estimate)",
+       "opened": false
+      }
+     ],
+     "problem": "The exact on-screen '0.5% A YEAR' is below the headline CPI average for any 8-year window of the period (0.6-0.7%). It only matches once the tax rise is excluded.",
+     "fix": "Change on screen to 'UNDER 1% A YEAR', or round up to 'ABOUT 0.6% A YEAR'. The narration ('about half a percent') can stay.",
+     "severity": "minor"
+    },
+    {
+     "claim": "After the 2008 crash, the Bank of England creates hundreds of billions of pounds. On screen: HUNDREDS OF BILLIONS, BANK OF ENGLAND / AFTER 2008.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "The Bank of England says it began QE in March 2009 and bought \u00a3895bn of bonds in total, with the last increase in November 2020. Its 2012 paper confirms \u00a3200bn of purchases between March 2009 and January 2010, and \u00a3325bn by May 2012 (it reached \u00a3375bn in July 2012). The total was already in the hundreds of billions within a year of starting.",
+     "sources": [
+      {
+       "url": "https://www.bankofengland.co.uk/monetary-policy/quantitative-easing",
+       "what": "BoE QE explainer page",
+       "opened": true
+      },
+      {
+       "url": "https://www.bankofengland.co.uk/-/media/boe/files/news/2012/july/the-distributional-effects-of-asset-purchases-paper.pdf",
+       "what": "BoE 2012 paper (para 22: \u00a3200bn and \u00a3325bn figures)",
+       "opened": true
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "The Bank's own study finds the new money pushed up the prices of shares and other investments, and the gains went to whoever owned the most. On screen: BANK OF ENGLAND STUDY, 2012; GAINS TO THE BIGGEST OWNERS.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "The Bank of England's July 2012 paper 'The distributional effects of asset purchases' says asset purchases \"increased the prices of a wide range of assets\" and pushed up equity prices \"by at least as much as\" gilt prices. It says \"the benefits from these wealth effects will accrue to those households holding most financial assets\", and that the \"top 5% of households\" held about 40% of household financial assets (average \u00a3175,000, against a median of about \u00a31,500). The paper also stresses that without QE \"most people... would have been worse off\".",
+     "sources": [
+      {
+       "url": "https://www.bankofengland.co.uk/-/media/boe/files/news/2012/july/the-distributional-effects-of-asset-purchases-paper.pdf",
+       "what": "BoE, 'The distributional effects of asset purchases', July 2012",
+       "opened": true
+      }
+     ],
+     "problem": "'Went to whoever owned the most' is a fair paraphrase of the Bank's 'accrue to those households holding most financial assets'. Read strictly, it suggests the gains went only to the biggest owners, while the Bank said they rose in proportion to holdings and were heavily skewed. The Bank's own caveat (most people better off than without QE) is left out, but that does not make the claim false.",
+     "fix": "Optional: on screen, 'MOST GAINS TO THE BIGGEST OWNERS' or 'TOP 5% HELD 40% OF ASSETS'. No re-record needed.",
+     "severity": "minor"
+    }
+   ],
+   "other_notes": "The Bank of England paper and the Bank of Japan statement were PDFs; I extracted their text and read the passages quoted above. For Japan's CPI I used the World Bank series (from IMF data), not the Statistics Bureau's own tables. The 2-point tax effect on Japan's CPI was seen only in search results (Statistics Bureau and Bank of Japan sources); I did not open them."
+  },
+  {
+   "group": "Germany, 1923 (page 6)",
+   "claims": [
+    {
+     "claim": "\"Germany, 1923. Prices are already racing.\" (German inflation was already rapid in 1922, before the Ruhr occupation.)",
+     "verdict": "confirmed",
+     "what_the_sources_say": "The dollar rate went from about 190 marks in January 1922 to about 7,400 marks by December 1922 (Wikipedia's Weimar hyperinflation article). The mark briefly steadied near 320 per dollar in mid-1922 and then collapsed that summer. The Bundestag says prices were rising sharply all through 1922, before the occupation on 11 January 1923. Holtfrerich (Wirtschaftsdienst 2023) dates the dramatic price rises to mid-1922. The Bundestag page gives different 1922 numbers (45 to 1,807), but they also show steep rises, so the claim holds either way.",
+     "sources": [
+      {
+       "url": "https://www.bundestag.de/parlament/geschichte/100-jahre-weimar/hyperinflation-970722",
+       "what": "German Bundestag history page on the 1923 hyperinflation",
+       "opened": true
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic",
+       "what": "Gives about 7,400 marks per dollar by December 1922",
+       "opened": false
+      },
+      {
+       "url": "https://www.wirtschaftsdienst.eu/inhalt/jahr/2023/heft/2/beitrag/hyperinflation-kollektives-gedaechtnis-und-zentralbankunabhaengigkeit.html",
+       "what": "Holtfrerich, 2023: dramatic price rises began in mid-1922",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "\"Then French and Belgian soldiers march into the Ruhr, Germany's coal and steel heartland.\" (Occupation began 11 January 1923.)",
+     "verdict": "confirmed",
+     "what_the_sources_say": "The Bundestag says French and Belgian troops occupied the Ruhr on 11 January 1923 because Germany was behind on reparations. Secondary sources say the region produced roughly 80% of Germany's steel and 71% of its coal.",
+     "sources": [
+      {
+       "url": "https://www.bundestag.de/parlament/geschichte/100-jahre-weimar/hyperinflation-970722",
+       "what": "Gives the date 11 January 1923 and says French and Belgian troops",
+       "opened": true
+      },
+      {
+       "url": "https://resources.hwb.gov.wales/VTC/ngfl/history/120/1923/Hyperinflation/Ruhr and Hyperinflation Revision Sheet.doc",
+       "what": "Gives the coal and steel shares (a teaching resource)",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "\"The government tells workers to stop work in protest... and keeps paying them, with new money.\" (Passive resistance, paid for by printing money.)",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "Two days after the occupation, the national government declared passive resistance. It paid the wages of striking workers, civil servants and railway staff in the occupied area. The Bundestag says it paid for this with more borrowing, using the printing press. Strictly, passive resistance meant refusing to work for, or obey, the occupiers rather than a general strike, and the government also paid money to companies. As a plain summary the line is fair.",
+     "sources": [
+      {
+       "url": "https://www.bundestag.de/parlament/geschichte/100-jahre-weimar/hyperinflation-970722",
+       "what": "Covers passive resistance, the wages taken over by the government, and the use of the printing press",
+       "opened": true
+      }
+     ],
+     "problem": "Small simplification: passive resistance meant refusing to cooperate with the occupiers, not a general strike.",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "\"By November, one American dollar costs more than four trillion German marks.\" On screen: 4,200,000,000,000 and MARKS FOR ONE DOLLAR.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "In his memoirs, Schacht says that on 20 November 1923 the Reichsbank let the dollar rise to 4.2 trillion marks and then held it there. The Bundestag says that at the peak of the crisis in November 1923, one dollar was worth 4.2 trillion marks. On 20 November, Schacht also set 1 Rentenmark at 1 trillion paper marks, which matched 4.2 Rentenmarks to the dollar (Wikipedia). Black-market rates were briefly higher, with reports of up to 11 to 12 trillion. Some sources give 4,210,500,000,000, which is the old gold parity of 4.2105 marks per dollar times 1 trillion. The official rate reached 4.2 trillion only on 20 November; before that it was lower (about 2.5 trillion around 15 November). So 'by November' is loose but fine, since the rate passed four trillion in November. The on-screen number matches the official Berlin rate exactly.",
+     "sources": [
+      {
+       "url": "https://www.wissen.de/lexikon/massnahmen-gegen-die-inflation",
+       "what": "Quotes Schacht's memoirs: on 20 November 1923 the dollar was let rise to 4.2 Billionen (trillion) marks",
+       "opened": true
+      },
+      {
+       "url": "https://www.bundestag.de/parlament/geschichte/100-jahre-weimar/hyperinflation-970722",
+       "what": "November 1923: 1 dollar = 4.2 Billionen (trillion) marks",
+       "opened": true
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Rentenmark",
+       "what": "Rate set on 20 November: 1 Rentenmark = 1 trillion marks, and 4.2 Rentenmarks per dollar",
+       "opened": true
+      }
+     ],
+     "problem": "No error. Optional precision: the 4.2 trillion figure is the official rate, reached and fixed on 20 November 1923.",
+     "fix": "Optional: add a small date caption under the counter, '20 NOVEMBER 1923'. No narration change needed.",
+     "severity": "minor"
+    },
+    {
+     "claim": "\"This time, new money really did push prices up... while less and less was being made.\" (Output fell in 1923.)",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "A contemporary analysis by Rolf Wagenf\u00fchr, reproduced by the German Historical Institute (GHDI), says the volume of production fell by 'a good third' from 1922 to 1923. Producer-goods industries fell by up to 50% and consumer goods by 27%. This comes from search-result excerpts; the PDF itself returned a 503 error. The occupation also halted production in the Ruhr itself. Holtfrerich and the Bundestag both name money-financed government deficits as the main driver. Some historians stress the collapsing exchange rate and expectations alongside the money supply, but the line is a fair plain summary.",
+     "sources": [
+      {
+       "url": "https://ghdi.ghi-dc.org/pdf/eng/ES_WAGENF\u00dcHR_ENGL.pdf",
+       "what": "Wagenf\u00fchr: production fell by a good third from 1922 to 1923 (seen only in search excerpts; the fetch failed with a 503)",
+       "opened": false
+      },
+      {
+       "url": "https://www.bundestag.de/parlament/geschichte/100-jahre-weimar/hyperinflation-970722",
+       "what": "Deficits were financed with the printing press",
+       "opened": true
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    }
+   ],
+   "other_notes": "All five claims hold up, and the on-screen number 4,200,000,000,000 is exact for the official rate on 20 November 1923. The only optional fix is a '20 NOVEMBER 1923' caption under the counter. Nothing needs re-recording. Be careful not to use the 4,210,500,000,000 figure seen on some sites: it is the gold parity of 4.2105 marks per dollar times one trillion, not the quoted rate."
+  },
+  {
+   "group": "The 1973 oil shock (page 7, first half)",
+   "claims": [
+    {
+     "claim": "Narration: 'Late 1973. Prices are already climbing when the price of oil nearly quadruples, in about three months...' On screen: LATE 1973, counter $2.90 -> $11.65 A BARREL, NEARLY x4.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "Federal Reserve History (opened) says the cuts 'nearly quadrupled the price of oil from $2.90 a barrel before the embargo to $11.65 a barrel in January 1974'. The series is the posted price of Saudi Arabian Light, the Gulf marker crude. $11.651 took effect on 1 January 1974: OPEC's Gulf members decided it on 22 December 1973 (Wikipedia chronology and Posted oil price pages opened; CIA table in search results). But $2.90 (about $2.898) was the mid-1973 posting. By 1 October 1973 the posted price was $3.011, and on 16 October it went to $5.119 (Taylor & Francis chapter, search snippet only; Wikipedia says '$3.00 to $5.11'). So the narrowly 'late 1973' start price is about $3.01. Timing: 1 or 16 October 1973 to 1 January 1974 is 2.5 to 3 months, so 'about three months' is fair. The ratios: 11.65 / 2.90 = 4.02, which is slightly MORE than four times, so on screen '$2.90 ... NEARLY x4' contradicts itself. 11.65 / 3.01 = 3.87, which really is nearly four times.",
+     "sources": [
+      {
+       "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1973-74",
+       "what": "Federal Reserve History, Oil Shock of 1973-74: $2.90 before the embargo to $11.65 in Jan 1974, 'nearly quadrupled'",
+       "opened": true
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Posted_oil_price",
+       "what": "Posted price raised from $3.00 to $5.11 in October 1973, then to $11.65 (11.651) in January 1974",
+       "opened": true
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/1970%E2%80%931979_world_oil_market_chronology",
+       "what": "Dec 22, 1973: marker crude raised from $5.12 to $11.65 effective Jan 1, 1974",
+       "opened": true
+      },
+      {
+       "url": "https://www.taylorfrancis.com/books/9780203702529/chapters/10.4324/9780203702529-1",
+       "what": "Saudi light benchmark $3.011 (1 Oct 1973) to $5.119 (16 Oct 1973); 403 when opened, snippet only",
+       "opened": false
+      },
+      {
+       "url": "https://www.cia.gov/readingroom/print/835331",
+       "what": "CIA table: 1 Jan 1974 OPEC second unilateral posted price 11.651 (snippet; page redirected when opened)",
+       "opened": false
+      }
+     ],
+     " problem": "",
+     "problem": "On screen, $2.90 -> $11.65 is 4.02x, which is more than four times, not 'nearly' four times. $2.90 is also the mid-1973 posted price, not the late-1973 one ($3.01 on 1 Oct). Neither the narration nor the on-screen text says which price series this is.",
+     "fix": "No re-record needed. Change the counter to '$3.01 -> $11.65 A BARREL' (or '$3 -> $11.65'), keep 'NEARLY x4', and add a small source line: 'Posted price, Saudi Arabian Light, Oct 1973 - Jan 1974'. If the team keeps $2.90 to match the Fed essay, change 'NEARLY x4' to 'x4' and the date label to '1973 - JAN 1974'.",
+     "severity": "should fix"
+    },
+    {
+     "claim": "Narration: '...and almost everything made or moved with fuel gets dearer. So sometimes the cause isn't spending. It's costs.' (cost-push; prices already rising before the embargo)",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "US CPI year-on-year (FRED CPIAUCNS, computed by me): 3.4% Dec 1972, 6.0% Jun 1973, 7.4% Sep 1973, then 8.7% Dec 1973 and 12.3% Dec 1974. Inflation was clearly already rising before the 17 October embargo. The Fed History essay quotes Arthur Burns: by mid-1973 wholesale industrial prices were 'already rising at an annual rate of more than 10 per cent'. Blinder and Rudd (NBER w14563) support the supply-shock (cost-push) explanation for the 1973-74 inflation spike, with food, energy and the end of price controls as the drivers. Barsky and Kilian argue that monetary policy and demand mattered more and that the oil price was partly a result of them, not only a cause. Since the narration says 'sometimes', it stays within mainstream views.",
+     "sources": [
+      {
+       "url": "https://fred.stlouisfed.org/series/CPIAUCNS",
+       "what": "US CPI-U monthly data (downloaded CSV, year-on-year computed)",
+       "opened": true
+      },
+      {
+       "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1973-74",
+       "what": "Burns: wholesale industrial prices already rising >10% a year by mid-1973",
+       "opened": true
+      },
+      {
+       "url": "https://www.nber.org/papers/w14563",
+       "what": "Blinder & Rudd, The Supply-Shock Explanation of the Great Stagflation Revisited (2008)",
+       "opened": false
+      }
+     ],
+     "problem": "Small nuance only: economists still debate how much of the 1970s inflation came from oil and how much from earlier loose money. Because the narration says 'sometimes', it is fine. 'Prices are already climbing' is well supported.",
+     "fix": "",
+     "severity": "none"
+    }
+   ],
+   "other_notes": "The main issue is on screen only. $2.90 -> $11.65 is slightly more than four times, so 'NEARLY x4' does not match. Use $3.01 (the Arabian Light posted price on 1 Oct 1973) or relabel. For a NZ audience, it may help to label it as the Gulf 'posted' price, which was set by the producer countries, not a market spot price. Spot and realised prices were lower: SSB lists the Arabian Light/Dubai spot price averaging $2.83 in 1973 and $10.41 in 1974. I could not open a primary OPEC or MEES table for the exact $2.898 and $3.011 postings. They rest on a Taylor & Francis snippet, Wikipedia's '$3.00', and the Fed essay's '$2.90 before the embargo'."
+  },
+  {
+   "group": "New Zealand, 2021 to October 2026 (pages 7, 8 and 10)",
+   "claims": [
+    {
+     "claim": "Page 7: prices rose 4.1% in the year to June; leave fuel out and it's 2.9%. On screen: 4.1% PRICES, 2.9% WITHOUT FUEL, STATS NZ, YEAR TO JUNE 2026.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "Stats NZ: CPI rose 4.1% in the 12 months to the June 2026 quarter, released 21 July 2026. Stats NZ's wording is: 'If petrol and diesel prices had not changed, the CPI would have risen 2.9 percent in the year ended June 2026.' Westpac gives CPI ex-fuel as +2.9%. The September 2026 quarter CPI comes out on 22 October 2026, so the June figure is still the latest on 12 October. The nuance: Stats NZ's 2.9% holds petrol and diesel unchanged, not every fuel. 'WITHOUT FUEL' is a fair plain-language summary.",
+     "sources": [
+      {
+       "url": "https://www.stats.govt.nz/news/annual-inflation-at-4-1-percent-in-june-2026/",
+       "what": "Stats NZ headline: annual inflation 4.1% in June 2026 (only the headline loaded)",
+       "opened": true
+      },
+      {
+       "url": "https://www.miragenews.com/fuel-costs-rise-for-households-businesses-in-1749255/",
+       "what": "Republished Stats NZ snapshot with the exact 2.9% petrol-and-diesel sentence",
+       "opened": true
+      },
+      {
+       "url": "https://www.westpaciq.com.au/economics/2026/07/first-impressions-nz-consumer-prices-june-quarter-2026",
+       "what": "Westpac, 21 July 2026: 4.1% annual, CPI ex-fuel +2.9%",
+       "opened": true
+      },
+      {
+       "url": "https://www.miragenews.com/stats-nz-updates-price-index-methods-for-1756572/",
+       "what": "Stats NZ notice: September 2026 quarter CPI due 22 October 2026",
+       "opened": false
+      }
+     ],
+     "problem": "None of substance. The 2.9% excludes petrol and diesel changes specifically, not all fuel.",
+     "fix": "Optional: change the on-screen line to '2.9% WITHOUT PETROL & DIESEL'. No re-record needed.",
+     "severity": "none"
+    },
+    {
+     "claim": "Page 8: in 2021 unemployment hit its lowest since records began. On screen: 3.2% UNEMPLOYMENT, LOWEST ON RECORD, NEW ZEALAND 2021.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "Stats NZ's HLFS put the December 2021 quarter at 3.2% (seasonally adjusted), 'the lowest rate recorded since the HLFS series began in 1986'. The September 2026 Orphanides/Archer review also cites an 'unsustainable historic low' of 3.2% in late 2021.",
+     "sources": [
+      {
+       "url": "https://www.1news.co.nz/2022/02/02/unemployment-in-nz-drops-to-32-lowest-it-has-ever-been/",
+       "what": "News report of the Stats NZ December 2021 quarter HLFS release",
+       "opened": false
+      },
+      {
+       "url": "https://www.miragenews.com/unemployment-rate-at-3-2-percent-716744/",
+       "what": "Republished Stats NZ release: 3.2%, lowest since 1986",
+       "opened": false
+      },
+      {
+       "url": "https://www.interest.co.nz/public-policy/140361/government-commissioned-independent-review-rbnzs-covid-19-response-says-it",
+       "what": "Review cites 3.2% in late 2021",
+       "opened": true
+      }
+     ],
+     "problem": "'On record' means the HLFS record, which starts in 1986. That is acceptable for a general audience.",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "Page 8: house prices rose about 30% in twelve months. On screen: +30% IN 12 MONTHS.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "The REINZ House Price Index rose 30.6% year on year to July 2021 (some reports say 30.5%), the highest annual rise since records began. It was 29.8% to May 2021. The median price rose by a different amount (about 25-32%), so the figure should be credited to the HPI.",
+     "sources": [
+      {
+       "url": "https://www.scoop.co.nz/stories/BU2108/S00233.htm",
+       "what": "REINZ July 2021 data release (HPI +30.6%)",
+       "opened": false
+      },
+      {
+       "url": "https://newshub.co.nz/home/money/2021/06/housing-crisis-prices-going-up-fastest-since-records-began.html",
+       "what": "Report of the record HPI growth in 2021",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "Optional source credit: 'REINZ HOUSE PRICE INDEX, YEAR TO JULY 2021'.",
+     "severity": "none"
+    },
+    {
+     "claim": "Page 8: an independent review says the support from the Reserve Bank and the government together was right at first but too strong, for too long. On screen: INDEPENDENT REVIEW / RESERVE BANK, INDEPENDENT REVIEW, SEPTEMBER 2026, stamps RIGHT AT FIRST and TOO STRONG, FOR TOO LONG.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "The review was released 22 September 2026. It was written by Athanasios Orphanides and David Archer and commissioned by the Government (Nicola Willis launched it in February 2026). Its wording: 'With regards to monetary and fiscal policy interactions, with the benefit of hindsight, the combined stimulus, while appropriate in the early stages, was too strong for too long.' So it does refer to combined monetary and fiscal stimulus. It is a review of the RBNZ's Covid-19 response.",
+     "sources": [
+      {
+       "url": "https://www.interest.co.nz/public-policy/140361/government-commissioned-independent-review-rbnzs-covid-19-response-says-it",
+       "what": "interest.co.nz, 22 September 2026, quoting the review",
+       "opened": true
+      }
+     ],
+     "problem": "'RIGHT AT FIRST' paraphrases 'appropriate in the early stages'. That is fine as long as it is not shown in quotation marks. 'TOO STRONG, FOR TOO LONG' matches the review's words. I did not open the review document itself, only a news report quoting it.",
+     "fix": "Keep the stamps without quotation marks. If quote marks are used, use the review's own words: 'APPROPRIATE IN THE EARLY STAGES' and 'TOO STRONG FOR TOO LONG'.",
+     "severity": "minor"
+    },
+    {
+     "claim": "Page 10: the Reserve Bank pushed its rate from a quarter of a percent to five and a half percent by 2023. On screen: dial 0.25% -> 5.5%, 2023.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "The OCR was 0.25% from March 2020 until the first rise in October 2021. It reached 5.5% in May 2023 and stayed there until August 2024.",
+     "sources": [
+      {
+       "url": "https://www.asb.co.nz/documents/economic-research/home-loan-rate-report/lots-of-action-between-rbnz-meetings.html",
+       "what": "ASB: OCR held at 5.5% from May 2023 to August 2024",
+       "opened": false
+      },
+      {
+       "url": "https://www.interest.co.nz/bonds/118544/reserve-bank-has-raised-official-cash-rate-level-not-seen-2008-now-sees-ocr-peaking-55",
+       "what": "May 2023 rise to 5.5%",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "Page 10: since the end of 2021, unemployment has climbed from 3.2% to 5.6%. On screen: counter 3.2% -> 5.6% UNEMPLOYMENT.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "Stats NZ's HLFS gives 5.6% for the June 2026 quarter (released August 2026), up from a revised 5.4% in March. Westpac calls it the highest since September 2015. The next labour market release is on 4 November 2026, so 5.6% is still the latest on 12 October.",
+     "sources": [
+      {
+       "url": "https://www.stats.govt.nz/news/unemployment-rate-at-5-6-percent-in-the-june-2026-quarter/",
+       "what": "Stats NZ: unemployment 5.6% in the June 2026 quarter",
+       "opened": true
+      },
+      {
+       "url": "https://www.westpaciq.com.au/economics/2026/08/first-impressions-nz-labour-market-june-quarter-2026",
+       "what": "Westpac commentary on the June 2026 quarter",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "Optional source line: 'STATS NZ, JUNE 2026 QUARTER'.",
+     "severity": "none"
+    },
+    {
+     "claim": "Page 10: this year the Reserve Bank is raising its interest rate again. On screen: dial 2.25% -> 2.75%, 2026, RISING AGAIN.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "The OCR was cut from 2.50% to 2.25% on 26 November 2025. It was raised to 2.50% on 8 July 2026, the first rise since 2023, and to 2.75% on 2 September 2026. The next decision is on 28 October 2026, after today, so 2.75% is the current rate.",
+     "sources": [
+      {
+       "url": "https://www.interest.co.nz/economy/136225/future-moves-ocr-will-depend-how-outlook-medium-term-inflation-and-economy-evolve",
+       "what": "Cut to 2.25% on 26 November 2025",
+       "opened": true
+      },
+      {
+       "url": "https://www.westpaciq.com.au/economics/2026/07/first-impressions-rbnz-monetary-policy-review-july-2026-",
+       "what": "July 2026 rise to 2.50%",
+       "opened": false
+      },
+      {
+       "url": "https://www.rbnz.govt.nz/news-and-events/news/2026/09/ocr-increased-by-25-basis-points-to-2-75",
+       "what": "RBNZ: OCR raised to 2.75% (opening it returned 403; seen in search results)",
+       "opened": false
+      },
+      {
+       "url": "https://www.rbnz.govt.nz/news-and-events/events/2026/october/monetary-policy-review-and-ocr-october-2026",
+       "what": "Next decision 28 October 2026",
+       "opened": false
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    }
+   ],
+   "other_notes": "All seven claims hold up. None needs a narration re-record. There are two optional on-screen tweaks. (1) Stats NZ's 2.9% excludes petrol and diesel, so 'WITHOUT PETROL & DIESEL' is more exact than 'WITHOUT FUEL'. (2) Keep the review stamps without quotation marks, because 'RIGHT AT FIRST' paraphrases the review's 'appropriate in the early stages'. Watch these dates: the September quarter CPI comes out on 22 October, the next OCR decision is on 28 October, and the next HLFS release is on 4 November 2026. If the film is published after any of them, the 'latest' figures on pages 7 and 10 (4.1%, 2.9%, 5.6%, 2.75%) need re-checking. Opening the Stats NZ and RBNZ pages directly failed (only page titles came back, or HTTP 403), so some figures rest on Stats NZ text republished by Mirage News and on bank and news reports."
+  },
+  {
+   "group": "Britain 1920-21 and Mattei (page 9)",
+   "claims": [
+    {
+     "claim": "Narration: 'Britain, 1920. The Bank of England pushes its interest rate, the price of borrowing, up to seven percent.' On screen: BRITAIN 1920, dial 6% -> 7%.",
+     "verdict": "confirmed",
+     "what_the_sources_say": "The Bank of England's own wartime history (1914-1921, vol. 1) has a chronology listing '6 November 1919: Bank Rate 6%' and '15 April 1920: Bank Rate 7%'. Bank Rate then stayed at 7% for about a year and was cut in spring 1921 (to 6.5% on 28 April 1921, then 6% in June). Mattei herself dates the rise to April 1920 (Spectre interview).",
+     "sources": [
+      {
+       "url": "https://www.bankofengland.co.uk/-/media/boe/files/archive/ww/boe-1914-1921-vol1-introduction.pdf",
+       "what": "Bank of England archive, history 1914-1921 vol 1, with a chronology of Bank Rate changes (text extracted from the PDF)",
+       "opened": true
+      },
+      {
+       "url": "https://spectrejournal.com/austerity-fascism-and-the-order-of-capital/",
+       "what": "Mattei interview: 'In April 1920, the Bank of England and the British Treasury raised interest rates dramatically'",
+       "opened": true
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "Narration: 'Within a year, unemployment jumps from about two percent to eleven percent.' On screen: bars 2% (1920) -> 11% (1921) UNEMPLOYMENT.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "In the Bank of England 'Millennium of Macroeconomic Data' (FRED UNRTUKA), the annual UK unemployment rate is 3.02% in 1919, 1.95% in 1920, 11.02% in 1921 and 9.68% in 1922, so the on-screen 2% and 11% are exact when rounded. The monthly insured-unemployment series (NBER/FRED M082ABGBM513NNBR) shows the same thing more sharply: about 2.6-2.8% in April-July 1920 (when the 7% rate began), 7.9% in December 1920, 11.2% in January 1921, and a peak of 23.4% in May 1921, partly swollen by the coal lockout. Insured workers are a narrower group, so their rate is higher than the whole-economy rate. 'Within a year' fits both series. One caveat: 1920 was the low point, because unemployment was higher in 1919 (3%).",
+     "sources": [
+      {
+       "url": "https://fred.stlouisfed.org/data/UNRTUKA",
+       "what": "FRED copy of the BoE millennium dataset annual UK unemployment rate (1920 1.95, 1921 11.02)",
+       "opened": true
+      },
+      {
+       "url": "https://fred.stlouisfed.org/series/M082ABGBM513NNBR",
+       "what": "Monthly insured workers unemployed, UK, as a percentage (CSV downloaded): 2.6-2.8% in mid-1920, 23.4% in May 1921",
+       "opened": true
+      }
+     ],
+     "problem": "The figures are correct as annual averages. The monthly insured series shows an even larger rise, so the claim understates rather than exaggerates. I did not open Feinstein's tables directly; the BoE dataset is the source checked.",
+     "fix": "Optional: add a small on-screen source line such as 'Annual averages. Source: Bank of England'. No narration change needed.",
+     "severity": "none"
+    },
+    {
+     "claim": "Narration: 'Prices do fall... but people pay with their jobs.'",
+     "verdict": "confirmed",
+     "what_the_sources_say": "In the BoE millennium dataset, the annual UK consumer price index goes from 3.29 (1920) to 3.01 (1921) to 2.58 (1922) to 2.43 (1923). That is about -8.5% in 1921 and -14% in 1922, which is strong deflation alongside the unemployment surge.",
+     "sources": [
+      {
+       "url": "https://fred.stlouisfed.org/series/CPIUKA",
+       "what": "FRED copy of the BoE millennium dataset UK CPI (CSV downloaded)",
+       "opened": true
+      }
+     ],
+     "problem": "",
+     "fix": "",
+     "severity": "none"
+    },
+    {
+     "claim": "Narration: 'Mattei argues that was part of the point. With fewer jobs to go round, she says, workers lose the power to ask for more.' On screen: THE CAPITAL ORDER; CLARA E. MATTEI, THE CAPITAL ORDER (2022); MATTEI: PART OF THE POINT.",
+     "verdict": "confirmed with nuance",
+     "what_the_sources_say": "In her own words (Spectre Journal interview, 22 Oct 2025), Mattei says that in April 1920 the Bank of England and Treasury raised rates sharply, causing mass unemployment in 1921 that demobilised strikes. She describes Treasury officials and central bankers as 'deliberately engineering unemployment and insecurity to subdue the labor movement' and says 'Unemployment had succeeded in disempowering the majority'. In a 2023 RevDem interview she says 'unemployment serves as the best disciplinary device to suppress wages'. Summaries of the book (University of Chicago Press, 2022) say the same: austerity, including higher rates, was meant to protect the capital order against labour. Her reading is disputed by other historians. Glasner (Uneasy Money) argues she misreads Hawtrey and that the deflation went far beyond what officials intended. Tomlinson's review argues her evidence of deliberate intent is thin.",
+     "sources": [
+      {
+       "url": "https://spectrejournal.com/austerity-fascism-and-the-order-of-capital/",
+       "what": "Mattei interview by David McNally (Oct 2025): April 1920 rate rise, 'deliberately engineering unemployment and insecurity to subdue the labor movement'",
+       "opened": true
+      },
+      {
+       "url": "https://revdem.ceu.edu/2023/04/27/clara-mattei-why-is-austerity-so-persistent/",
+       "what": "Mattei interview: 'unemployment serves as the best disciplinary device to suppress wages'",
+       "opened": true
+      },
+      {
+       "url": "https://uneasymoney.com/2023/12",
+       "what": "David Glasner's critique of Mattei's account of Hawtrey and the 1920 Bank Rate rise",
+       "opened": true
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/The_Capital_Order",
+       "what": "Book summary (University of Chicago Press, 2022)",
+       "opened": true
+      },
+      {
+       "url": "https://eprints.gla.ac.uk/314052/1/314052.pdf",
+       "what": "Tomlinson review 'The Limits of Austerity', which questions the evidence for intent (fetch returned HTTP 503; seen only via a search snippet)",
+       "opened": false
+      }
+     ],
+     "problem": "Attributing the view to Mattei is accurate, and the 2022 publication date is correct. The narration already frames it as her argument ('Mattei argues', 'she says'), and the claim is contested, so it must not appear as an unattributed fact on screen.",
+     "fix": "Keep 'MATTEI:' on the 'PART OF THE POINT' caption, as already planned. Do not show it as an unattributed caption.",
+     "severity": "none"
+    }
+   ],
+   "other_notes": "'Loans cost more, and people spend less' simplifies what happened. The 1920-21 slump also came from deep budget cuts, the end of the post-war boom and a world-wide downturn, and the 1921 coal lockout added to unemployment. For a plain-language summary this is fine (minor at most). The Bank of England's 1914-1921 history PDF was read by extracting its text locally. FRED series were checked by downloading the CSVs."
+  }
+ ],
+ "critic": {
+  "must_fix": [],
+  "should_fix": [
+   {
+    "page": "7 (oil, on screen only)",
+    "what": "The counter shows $2.90 -> $11.65 with NEARLY x4. But 11.65 / 2.90 = 4.02, which is slightly more than four times, so the label contradicts its own numbers. $2.90 was also the mid-1973 price, not the late-1973 one: the posted price was already $3.01 on 1 October 1973. The narration ('nearly quadruples, in about three months') is fine.",
+    "fix": "On screen only, no re-record. Either use '$3.01 -> $11.65 A BARREL' (3.87 times, so NEARLY x4 is true) with a small line 'Gulf posted price, Oct 1973 - Jan 1974', or keep $2.90 and change NEARLY x4 to 'x4'.",
+    "evidence": "I opened Federal Reserve History myself. It says: 'These cuts nearly quadrupled the price of oil from $2.90 a barrel before the embargo to $11.65 a barrel in January 1974.' So the Fed uses the same loose wording, but the arithmetic is 4.02. The $3.01 price on 1 October rests on a Taylor & Francis search snippet and Wikipedia's '$3.00 to $5.11' (October 1973)."
+   },
+   {
+    "page": "5 (Japan, on screen only)",
+    "what": "On screen, '0.5% A YEAR' is a little low. With the 2014 sales-tax rise included, Japan's headline prices rose about 0.6% a year from 2013 to 2021, and about 0.7% a year from 2013 to 2020. Only with the tax rise taken out is it about 0.4-0.5%. The spoken 'about half a percent' is fine.",
+    "fix": "On screen only, no re-record: 'UNDER 1% A YEAR' (the safest) or 'ABOUT 0.6% A YEAR'.",
+    "evidence": "I recompounded the World Bank figures the checker and research note C2-XB04 used (2013 0.34, 2014 2.76, 2015 0.80, 2016 -0.13, 2017 0.48, 2018 0.99, 2019 0.47, 2020 -0.02, 2021 -0.23). That gives 0.60% a year for 2013-21, 0.64% for 2014-21 and 0.71% for 2013-20."
+   },
+   {
+    "page": "4 (Glasgow, on screen only)",
+    "what": "A bare '+25%' reads as if every Glasgow rent went up a quarter. 25% was the top rise ('up to 25 percent in some districts'). An official inquiry in October 1915 measured rises of about 12-23% even in Govan, the worst-hit area.",
+    "fix": "On screen only: 'UP TO +25%'. The narration already says 'by as much as a quarter', so no re-record.",
+    "evidence": "Gray (2018), via OpenLearn and opened by the checker: 'up to 25 percent in some districts'. The 11.67-23.08% inquiry figures were seen only in a search snippet (Counterfire). Two checkers agree; there is no conflict."
+   },
+   {
+    "page": "8 (record-low unemployment)",
+    "what": "'Lowest since records began' is true only for Stats NZ's Household Labour Force Survey, which began in 1986. Older official counts show New Zealand had almost no unemployment in the 1950s to early 1970s, so viewers who remember that era could call this wrong.",
+    "fix": "On screen: change 'LOWEST ON RECORD' to 'LOWEST SINCE 1986'. Changing the narration ('its lowest since records began in 1986', or 'its lowest in more than thirty years') would mean re-recording page 8. That is optional, but the on-screen fix is strongly advised.",
+    "evidence": "Stats NZ's December 2021 release, as reported by 1News, Newshub and Mirage News, gives 3.2%, 'the lowest since the HLFS series began in 1986'. I confirmed this by search. The near-zero unemployment before 1977 is my own general knowledge from the older registered-unemployment counts; I did not look it up for this check."
+   },
+   {
+    "page": "5 (title 'lots of new money, flat prices' and the Bank of England example)",
+    "what": "Britain's everyday prices were not flat after 2008: UK inflation was about 2-4.5% a year from 2009 to 2012. The narration doesn't claim they were. It says the new money lifted share prices. But if the page title 'LOTS OF NEW MONEY, FLAT PRICES' appears on screen over the Bank of England part, it suggests something false.",
+    "fix": "On screen only: keep any 'FLAT PRICES' title on the Japan half, or put 'SHARES UP' over the Bank of England half. No re-record.",
+    "evidence": "Research note C2-XB06 already warns to tie the 'flat prices' framing to the post-2008 round only. The UK inflation figures (2009 about 2.2%, 2010 about 3.3%, 2011 about 4.5%) are from my general knowledge; I did not look them up for this check. No checker covered this point."
+   },
+   {
+    "page": "10 (rate rising 'this year')",
+    "what": "'This year, the Reserve Bank is raising its interest rate again' is true today: it raised the rate to 2.50% on 8 July and to 2.75% on 2 September 2026. But the governor has hinted at a pause, and the next decision is on 28 October. The project's own research note (C2-XD04) says to use 'has started raising' rather than 'is raising'.",
+    "fix": "Fine as recorded if the film comes out before 28 October, or if the Bank raises again then. If the Bank holds and the film comes out later, consider re-recording page 10 with 'has raised its interest rate again'. The on-screen '2.25% -> 2.75%, 2026, RISING AGAIN' can stay, or become 'RAISED AGAIN'.",
+    "evidence": "I searched and found the 2 September 2026 rise to 2.75% (Squirrel, Focus Economics), next decision 28 October. The governor's pause hint is from interest.co.nz, cited in C2-XD04."
+   },
+   {
+    "page": "2 (dot panel, on screen only, low priority)",
+    "what": "Out of 100 dots, one fully empty dot shows exactly 1%, while the words say 'UNDER 1%'. The 1915 figure is 0.95%.",
+    "fix": "Optional: draw the last dot partly empty, or accept it as a rounded picture. On screen only.",
+    "evidence": "Bank of England Millennium dataset (FRED UNRTUKA), downloaded by the checker: 1915 = 0.95%."
+   },
+   {
+    "page": "10 (unemployment rise beside the rate rise, low priority)",
+    "what": "Putting 'rate up to 5.5%' next to 'unemployment from 3.2% to 5.6%' suggests the rate rise caused all of the job losses. Unemployment kept rising through 2024-25 while the rate was being cut, and other causes played a part, such as the 2023 cyclones.",
+    "fix": "No change is needed for accuracy, because the narration doesn't claim cause. If wanted, add a small 'other causes too' on screen, or leave it. Re-recording is not justified.",
+    "evidence": "Research note C2-XD05 and Outline A's 'still open' list both flag this."
+   }
+  ],
+  "gaps": [
+   "The final on-screen words were not in the project files I could see. The outline's on-screen text differs from what the checkers quoted, so I relied on the checkers' descriptions of the screen (for example '$2.90 -> $11.65 NEARLY x4', '+25%', '0.5% A YEAR').",
+   "The 2026 New Zealand figures (4.1% and 2.9% inflation, 5.6% unemployment, 2.75% interest rate) are confirmed only through news, bank and republished sources. Stats NZ's own page loaded only its headline, and the Reserve Bank's pages are blocked. My own searches agree with all four numbers.",
+   "Watch these dates: September-quarter inflation comes out on 22 October 2026, the next Reserve Bank decision is on 28 October, and the next unemployment figure is on 4 November. If the film is published after any of them, pages 7 and 10 say 'latest' or 'this year' and need re-checking.",
+   "The independent review (Orphanides and Archer, September 2026) was read only through interest.co.nz's quotes, not the review itself. Keep the stamps without quotation marks.",
+   "Mattei's book was not read directly. Her view comes from her interviews (Spectre 2025, RevDem 2023), and the narration attributes it to her. The critical Tomlinson review could not be opened.",
+   "Some supporting details rest on search snippets only: the $3.01 oil price on 1 October 1973, the October 1915 Glasgow rent inquiry figures, Germany's one-third fall in output in 1923, and the 2-point effect of Japan's 2014 tax rise.",
+   "Britain's 1920 unemployment figure (about 2%) uses the Bank of England whole-economy series. Other series, such as insured workers, give higher figures for 1920 and 1921, so 'about two percent' depends on which series is used. It is defensible but worth a source line on screen.",
+   "Claims no group covered, which I judged low-risk without a web check: page 1's definition of inflation (backed by research C2-XA04, Bank of England), page 3's two-factory picture (IMF output-gap explainer, C2-XA03), page 8's general 'new money can push prices up when...' line, page 9's 'loans cost more, people spend less' (Bank of England explainer, C2-XD01), and page 5's 'if new money on its own pushed prices up, they'd soar'. The last is a fair argument but simplified: most of Japan's new money sat in bank reserves and was never spent, which supports the film's 'spent on what?' point.",
+   "Not facts, but worth a listen: 'Mattei' written as /m\u0259\u02c8te\u026ai/ may come out as three syllables. The Italian is two syllables, roughly 'mat-TAY'."
+  ],
+  "summary": "I read all seven checkers' reports, read the whole script, and re-checked anything that rested on thin evidence or appeared as a number on screen. I checked the oil prices, the Japan average, the New Zealand inflation, unemployment and interest-rate figures, and the 2021 record low myself. Nothing in the film is plainly wrong, and nothing has to be re-recorded.\n\nWhat holds up:\n- Britain in the First World War: under 1% unemployment, prices roughly doubled.\n- Glasgow 1915: about 20,000 households on rent strike, rents frozen within weeks.\n- Japan's plan to double its money in two years.\n- The Bank of England's hundreds of billions and its 2012 study.\n- Germany 1923 and the 4.2 trillion marks to the dollar.\n- Prices already rising before the 1973 oil shock.\n- New Zealand's 4.1% inflation (2.9% without petrol and diesel), the 3.2% low in 2021, house prices up about 30%, the review's 'too strong for too long', the rate going from 0.25% to 5.5% and now 2.75%, and unemployment at 5.6%.\n- Britain 1920 (rate up to 7%, unemployment about 2% to 11%) and Mattei's view, which the film already presents as hers.\n\nWhat should change, mostly words on screen only:\n1. Oil: $2.90 to $11.65 is a little more than four times, so 'NEARLY x4' doesn't match. Start the counter at $3.01, or change the label to 'x4'.\n2. Japan: show 'UNDER 1% A YEAR' instead of '0.5% A YEAR'. The true average is about 0.6%.\n3. Glasgow: show 'UP TO +25%', not '+25%'.\n4. The 2021 low: show 'LOWEST SINCE 1986', because the record only goes back to 1986 and New Zealand had almost no unemployment in the 1950s-60s. Fixing the spoken line too would mean re-recording page 8, which is optional.\n5. Don't put 'FLAT PRICES' over the Bank of England part, because Britain's prices weren't flat after 2008.\n6. Page 10 says the Reserve Bank 'is raising' its rate. That is true today, but if the Bank holds on 28 October and the film comes out later, consider re-recording it as 'has raised'.\n7. Two small optional tweaks: draw the last of the 100 dots only partly empty, since 1915's figure is 0.95%, not exactly 1%. And unemployment didn't rise only because of the rate rises, though the narration never says it did.\n\nThe newest New Zealand numbers will be out of date after 22 October (inflation), 28 October (interest rate) and 4 November (unemployment). Re-check them if the film is published after those dates."
+ }
+}
