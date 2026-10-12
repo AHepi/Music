@@ -100,6 +100,33 @@ crowd doubles as she says it. Your soundtrack plays underneath, dipping while sh
     becomes the script, which then follows the same path as chapter 1 (recording, timing, mix,
     paintings, paper pieces, page files, filming, finishing).
 
+**Chapter 2 in the cinema look (a concrete example first).** On page 3 Malina says "and prices climb"
+at 66.98 seconds. Page 3's file asks for "climb", and at that moment the flip counter on the second
+card factory flips from £1.25 to £1.60 to £2.00 while coins stack up beside it and a red label
+PRICES CLIMB draws its line to the counter; the camera is already close on the counter, with the
+factory behind it softly out of focus. Every moving thing in the film is timed like that, to a word.
+
+16. **Script** (`chapter-2-inflation/19 Script - chapter 2 - what really causes inflation.md`): the
+    words Malina recorded, each page with the research ids its facts come from. Hands the words to
+    the recording.
+17. **Recording and sound** (`chapter-2-inflation/narration/`, `mix/chapter-2-mix.mp3`): ten
+    recordings, their transcripts (the time of every word), the chapter timeline and the mix over
+    your soundtrack. Hands the word times to the pages and the mix to the finishing step.
+18. **Painted rooms with depth** (`chapter-2-inflation/pictures/`): 11 new paintings plus four from
+    chapter 1, each with a distance picture, turned into rooms the camera can move a little way into;
+    and 29 cut-out pieces. Hands them to the pages.
+19. **Cinema stage and page files** (`chapter-2-inflation/film-code/`): the stage draws each page as a
+    3D scene with lens blur, glow and a film finish, with flat documentary graphics on top, and joins
+    pages with a page peel. The ten page files say what happens on each word. Hands pictures to the
+    filming.
+20. **Filming and finishing** (`film-code/tools/film-chapter-parallel.sh`, then the kit's
+    `finish_film.sh`, `make_captions.py` and `check_sound_alignment.py`): films the chapter in 35
+    short stretches, two at a time, joins them, adds the mix, squeezes a sendable copy, writes the
+    captions and checks the sound lines up.
+21. **Fact recheck** (`chapter-2-inflation/fact-recheck-2026-10-12.json`, summarised at the end of the
+    research ledger): every spoken and on-screen fact checked again from fresh sources after
+    recording. Hands any changes to the page files.
+
 ## Word list
 
 | Word | Plain meaning |
@@ -144,6 +171,15 @@ crowd doubles as she says it. Your soundtrack plays underneath, dipping while sh
 | Honest edge | The part of the chapter that admits creating money does push prices up when it's spent where nothing more can be made. |
 | Outline | A page-by-page plan of a chapter: what Malina says and what appears, before any script is written. |
 | Verdict card | In outline C, a paper card stamped with what caused each price rise: the money, a shortage, or where it was spent. |
+| Cinema look | Chapter 2's look: each page is a real 3D scene with a camera that moves like a film camera, light, depth and film grain, with documentary graphics on top, still joined by page peels. |
+| Painted room with depth | A painting pushed back into 3D using its distance picture, so the camera can move a little way into it and near things shift against far ones. |
+| Card model | A simple 3D object built in code from flat card surfaces (factory, house, price tag, flip counter, dial), lit by the lamp like a real model. |
+| Flip counter | A board of little flaps that flip to show a new price or number, like an old station departures board. |
+| Hook | A few big words on screen, a short form of what Malina is saying. |
+| Callout | A short label with a thin line pointing at something in the picture. |
+| Dip to black | A very quick fade to black and back, used to hide a cut from one place to another within a page. |
+| Page helper | A helper agent that builds one page file from the written guide, checks its stills and reports back. |
+| Fact recheck | A second check of every fact, by checkers told to try to prove each one wrong from fresh sources. |
 
 ## Log (added to, never rewritten)
 

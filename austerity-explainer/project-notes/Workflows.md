@@ -72,6 +72,32 @@ Re-recording one page changes every time after it: redo steps 2 to 7 for the who
    captions with `python3 -I tools/make_captions.py <timeline> <output>`, take a cover frame, and
    check frame count, loudness, true peak and that sound and picture line up.
 
+## How a chapter is made in the cinema look (chapter 2)
+
+The cinema look keeps the paper pop-up book's page peel but makes every page a real 3D scene. The
+code lives in `chapter-2-inflation/film-code/` (it sits on top of the film kit).
+
+1. Research ledger, outlines, script, recording, word times, timeline and mix: as in the paper look.
+   Before recording, fact checkers read the script against the ledger; after the pages are built,
+   independent checkers try to prove every spoken and on-screen fact wrong from fresh sources.
+2. Paintings (fal): one painted room per setting (9:16, no words in the picture), plus cut-out pieces.
+   For each room a distance picture is made (fal, Depth Anything v2), then
+   `film-code/tools/prepare_relief.py PAINTING DEPTH FOLDER NAME --blur 3` makes the painted room
+   with depth.
+3. Pages: each page is `film-code/scenes/inflation-chapter-2/page-N.js`, built from the kit in
+   `cinema-kit.js` (lamp, painted rooms, cut-outs, words, camera paths), card models in
+   `models.js`, effects in `effects.js` and flat graphics in `graphics.js`. Every event is timed
+   to a word with `kit.at('word')`. `19 Guide - building a cinema page.md` is the full how-to.
+4. Check stills often:
+   `PAPER_FILM_PAGES=N node paper-film/tools/render-paper-film.mjs cinema-test-pages FOLDER --stills T1 T2 ...`
+   (times separated by spaces), then a contact sheet, and look at every beat.
+5. Check the page turns from the whole chapter (`... inflation-chapter-2 FOLDER --stills` at each
+   last word plus 0.7 s): each page's words must stay on its own page.
+6. Film: `bash paper-film/tools/film-chapter-parallel.sh inflation-chapter-2 2 240` (35 chunks, two at
+   a time, about 3.5 hours; run it again to carry on after a stop).
+7. Finish: `narration-tools/finish_film.sh` with the mix, then captions (`make_captions.py`), the
+   sound alignment check and the loudness check, as in the paper look.
+
 ## The reusable kit
 
 `kit/paper-pop-up-film-kit/` is a general copy of the paper film tools for other series (made for a
@@ -114,6 +140,7 @@ the kit's smoke test (`00 START HERE.md`, step 4) and pack the zips again.
   feature); the paper stage uses the plain kind with softened edges instead.
 - Dust and smoke must be made through the page kit (`kit.effect(...)`), or they are not put away
   with their page.
-- Filming two chunks at once is no faster on this machine; film one after another.
+- Filming two chunks at once is no faster on a 2-processor machine; on 4 processors (chapter 2) two at
+  once is about 17% faster, and three is not worth it.
 - In a one-page picture, folded props must not push their shadows along the face (Lessons 36), or
   they go dark.
