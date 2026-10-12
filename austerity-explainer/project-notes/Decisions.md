@@ -409,6 +409,20 @@ overturn any of them in one line. Changes to the project must follow this file.
   suggested, rather than faking reflections.
 - **Seven page helpers, then reviewers, at medium effort**, as you set earlier.
 
+26. **Use the Blender MCP as well** (your words): "Oh use blender MCP as well
+    It'll teach you how to use it to get food detailed results"
+
+### Claude's calls for item 26
+
+- Installed Blender 5.2.2 (the full program, checksum checked) with Blender Lab's official MCP server
+  and its add-on, running without a screen on this machine, and registered it with Claude Code for
+  later sessions. In this session its tools are called through a small command-line client that
+  speaks to the real server.
+- Its guidance and its bundled manual and Python reference were turned into modelling notes; then
+  one helper per model (the works, the town, the desk, the props) inspected each model through the
+  server, rendered thumbnails, improved the model and checked it in the film's stage; a reviewer
+  compared before and after, and any model that got worse keeps its old version.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

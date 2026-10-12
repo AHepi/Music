@@ -66,7 +66,7 @@ export async function build(kit) {
 
   // the oil barrel, on the forecourt a little right of centre, with an OIL card on its side
   const barrelAt = floor(0.57, 0.15);
-  const barrel = oilBarrel({ height: 1.05, colour: 0x9a3d1f });
+  const barrel = oilBarrel({ height: 1.2, colour: 0x9a3d1f });
   barrel.group.position.copy(barrelAt);
   barrel.group.rotation.y = 0;
   kit.scene.add(barrel.group);
@@ -89,9 +89,9 @@ export async function build(kit) {
   const tags = [];
   const tagCount = 4;
   for (let i = 0; i < tagCount; i++) {
-    const u = 0.30 + i * 0.18;
+    const u = 0.57 + (i - (tagCount - 1) / 2) * 0.155;
     const at = floor(u, 0.075);
-    const tag = priceTag({ width: 0.48, text: '↑', accent: '#b8402c' });
+    const tag = priceTag({ width: 0.40, text: '↑', accent: '#b8402c' });
     // no string: on a row of tags lying side by side, each string would reach into its neighbour
     tag.group.children.filter((c) => c !== tag.card).forEach((c) => { c.visible = false; tag.group.remove(c); });
     const pivot = new THREE.Group();
@@ -117,7 +117,7 @@ export async function build(kit) {
   const partA = [station.mesh, barrel.group, flap.group, motes.points, ...tags.map((x) => x.pivot)];
 
   // ------------------------------------------------------------------ part B: a New Zealand street
-  const suburb = await kit.relief('410-bg-nz-suburb', { near: 6, far: 70, fov: 40 });
+  const suburb = await kit.relief('410-bg-nz-suburb', { near: 6, far: 70, fov: 40, margin: 0.22 });
   suburb.mesh.visible = false;
 
   // ------------------------------------------------------------------ the camera
@@ -126,12 +126,12 @@ export async function build(kit) {
   // zooms in onto the barrel as she says "the price of oil" (it lands as the camera settles), holds on
   // the counter through x4 and "three months"; then zooms out on "almost everything" to make room for
   // the row of price tags, and holds there to the end of part A.
-  const shotA = kit.stillShot({ position: [0.2, -0.75, -1.3], target: [0.45, -0.35, -30], fov: 32, focus: 13 }, [
-    { from: T.price - 0.55, to: T.oil + 0.05, kind: 'zoom in', position: [0.25, -0.25, -1.4], target: [barrelAt.x + 0.03, barrelAt.y + 1.12, barrelAt.z], fov: 31, focus: barrelMid },
-    { from: T.months + 0.25, to: T.everything, kind: 'zoom out', position: [0.2, -0.3, -1.25], target: [0.2, -1.3, -9], fov: 34, focus: [0, barrelAt.y, barrelAt.z + 0.55] },
+  const shotA = kit.stillShot({ position: [0.25, -1.1, -1.6], target: [0.55, 2.4, -30], fov: 30, focus: 13 }, [
+    { from: T.price - 0.55, to: T.oil + 0.05, kind: 'zoom in', position: [0.25, -0.25, -1.4], target: [barrelAt.x + 0.03, barrelAt.y + barrel.height + 0.07, barrelAt.z], fov: 31, focus: barrelMid },
+    { from: T.months + 0.25, to: T.everything, kind: 'zoom out', position: [0.2, -0.3, -1.45], target: [0.2, -1.42, -9], fov: 34, focus: [0, barrelAt.y, barrelAt.z + 0.55] },
   ], { name: 'the forecourt, 1973' });
   // shot B, New Zealand: holds still so the bars panel reads
-  const shotB = kit.stillShot({ position: [-0.3, -0.35, -0.8], target: [-2.6, -0.2, -30], fov: 38, focus: 15 }, [], { name: 'a New Zealand street' });
+  const shotB = kit.stillShot({ position: [0.0, -0.6, -1.0], target: [-1.0, 1.1, -30], fov: 36, focus: 15 }, [], { name: 'a New Zealand street' });
   kit.shake(T.oil + 0.05, 0.03, 0.18);
 
   function pose(t) {
@@ -174,7 +174,7 @@ export async function build(kit) {
   }
 
   // prices rose 4.1% with fuel, 2.9% without: two bars, the second added on "two point nine"
-  function twoBars(ctx, t, { at, until, x = 260, y = 800, width = 560, height = 500 }) {
+  function twoBars(ctx, t, { at, until, x = 260, y = 880, width = 560, height = 500 }) {
     const a = presence(t, at, until, 0.3, 0.4);
     if (a <= 0) return;
     const max = 5;
@@ -259,9 +259,9 @@ export async function build(kit) {
       hook(ctx, t, { at: T.quadruples + 0.1, until: T.almost - 0.1, text: '×4', y: 300, size: 170, colour: INK.amber });
       hook(ctx, t, { at: T.three - 0.05, until: T.almost - 0.1, text: 'IN ABOUT 3 MONTHS', y: 440, size: 58 });
       hook(ctx, t, { at: T.dearer, until: T.so - 0.1, text: 'DEARER', y: 330, size: 120, colour: INK.amber });
-      hook(ctx, t, { at: T.sometimes, until: cut + 0.1, text: 'SOMETIMES', y: 196, size: 48, colour: INK.muted });
-      struck(ctx, t, { at: T.isnt - 0.05, strikeAt: T.spending + 0.35, until: cut + 0.1, text: 'NOT SPENDING', y: 300, size: 84 });
-      hook(ctx, t, { at: T.costs, until: cut + 0.1, text: 'COSTS', y: 440, size: 140, colour: INK.amber });
+      hook(ctx, t, { at: T.sometimes, until: cut + 0.1, text: 'SOMETIMES', y: 172, size: 48, colour: INK.muted });
+      struck(ctx, t, { at: T.isnt - 0.05, strikeAt: T.spending + 0.35, until: cut + 0.1, text: 'NOT SPENDING', y: 262, size: 84 });
+      hook(ctx, t, { at: T.costs, until: cut + 0.1, text: 'COSTS', y: 384, size: 128, colour: INK.amber });
     } else {
       twoBars(ctx, t, { at: T.here + 0.1, until: T.end + 2 });
     }

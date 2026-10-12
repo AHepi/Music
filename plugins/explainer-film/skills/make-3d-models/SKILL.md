@@ -19,6 +19,38 @@ north lights, a tapered chimney, an office with a slate roof, a water tank on a 
 forecourt. 22,000 triangles, 4 MB. It replaced a 2,000-triangle card box; the viewer's frames went
 from a white box on a black table to a lit works in a full town.
 
+## The official Blender MCP server (use it: its guidance and tools)
+
+The owner asked for it ("use blender MCP as well. It'll teach you how to use it to get good detailed
+results"). Blender Lab's server runs without a screen:
+```
+# Blender itself (the full program, ~400 MB; check the published checksum)
+curl -O https://download.blender.org/release/Blender5.2/blender-5.2.2-linux-x64.tar.xz && tar -xf blender-5.2.2-linux-x64.tar.xz
+B=$PWD/blender-5.2.2-linux-x64/blender
+# the server's add-on, built and installed into Blender
+git clone https://projects.blender.org/lab/blender_mcp.git
+$B --factory-startup --command extension build --source-dir blender_mcp/addon/blender_mcp_addon --output-dir .
+$B --command extension install-file -r user_default -e mcp-1.0.0.zip
+# the server itself
+python3 -m venv mcp-env && mcp-env/bin/pip install ./blender_mcp/mcp
+# run Blender headless, listening only on this machine (--online-mode allows the add-on's local socket)
+$B --background --online-mode --command blender_mcp --host 127.0.0.1 --port 9876 &
+```
+Connect it to Claude Code for the next session: `claude mcp add blender -e BLENDER_MCP_HOST=127.0.0.1
+-e BLENDER_MCP_PORT=9876 -e BLENDER_PATH=$B -- $PWD/mcp-env/bin/blender-mcp` (a running session does
+not pick up new servers). In the meantime, or for helpers, call its tools with the bundled client:
+`BLENDER_MCP_SERVER=$PWD/mcp-env/bin/blender-mcp mcp-env/bin/python ${CLAUDE_PLUGIN_ROOT}/kit/paper-film/blender/blender_mcp_call.py guide | tools | TOOL '{json}' | run-file SCRIPT.py`.
+
+What it gives: its own instructions to models (`guide`: inspect before changing, operators versus
+the data API, modes, selection, coordinate spaces), full-text search of Blender's bundled manual and
+Python API (`search_manual_docs`, `search_api_docs`, `get_python_api_docs`), scene inspection
+(`get_objects_summary`, `get_object_detail_summary`), code execution in Blender
+(`execute_blender_code`) and quick Cycles thumbnails (`render_thumbnail_to_path`).
+Traps found here: its sandbox refuses `bpy.ops.wm.read_factory_settings` (use
+`bpy.ops.wm.read_homefile(use_empty=True, use_factory_startup=True)`); set the render engine to
+Cycles before any render (EEVEE needs a GPU and crashes Blender without one); thumbnails are written
+into Blender's temp folder (the reply gives the path). One headless Blender per helper (own port).
+
 ## Set up (once)
 
 ```

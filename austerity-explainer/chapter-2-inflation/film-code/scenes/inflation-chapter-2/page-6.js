@@ -102,12 +102,17 @@ export async function build(kit) {
   const marchFrom = T.french - 0.35, marchSpeed = 1.1;
 
   // coal and steel: a stack of girders, bricks and timber standing by the sheds on the right
-  // (placed centre-right in the snow, level with the money stacks, so its shrinking reads clearly)
-  const steel = await kit.cutout('materials', { at: [0.62, -2.14, -8.75], width: 1.3 });   // clear of the phone-button zones
+  // (placed centre-right in the snow just behind the money stacks, so its shrinking reads clearly and
+  // stacks and steel together fit the tight gate framing, clear of the phone-button zones)
+  const STEEL = { x: 0.48, z: -9.3 };
+  const steel = await kit.cutout('materials', { at: [STEEL.x, -2.14, STEEL.z], width: 1.4 });
 
   // the padlock on the gate
   const lockAt = works.pointAt(0.624, 0.3);
   const padlock = await kit.cutout('padlock', { at: [lockAt.x, lockAt.y + 0.04, lockAt.z + 0.25], width: 0.5 });
+
+  // where the two stacks of bundles stand (drawn in a little so stacks and steel fit the tight gate framing)
+  const stacks = [{ x: -0.8, z: -8.5 }, { x: -0.15, z: -8.9 }];
 
   // new money: flat notes tumbling down, and bundles stacking up in the snow before the gate
   const random = seededRandom(23);
@@ -115,7 +120,7 @@ export async function build(kit) {
   for (let i = 0; i < 26; i++) {
     let x = lerp(-1.6, 1.0, random()), z = lerp(-7.6, -9.8, random());
     // keep the notes that lie in the snow clear of the two bundle stacks and the steel (no clipping)
-    for (const s of [{ x: -0.95, z: -8.6 }, { x: -0.25, z: -8.9 }]) {
+    for (const s of stacks) {
       if (Math.abs(x - s.x) < 0.62 && Math.abs(z - s.z) < 0.5) z = s.z + (z < s.z ? -0.75 : 0.75);
     }
     const piece = await kit.cutout('banknotes', { at: [x, -2.2, z], width: 0.42 + random() * 0.1, yaw: (random() - 0.5) * 0.8 });
@@ -124,14 +129,15 @@ export async function build(kit) {
     const note = { piece, rest: 0.03 + i * 0.003, land: from + fall, fall, spin: (random() - 0.5) * 9, tumble: 4 + random() * 4, phase: random() * 6.28, drift: (random() - 0.5) * 0.8 };
     // the whole fall (drift and sway) must stay clear of the stacks too: if its path passes over one,
     // it falls in front of or behind it instead
-    for (let pass = 0; pass < 2; pass++) for (const s of [{ x: -0.95, z: -8.6 }, { x: -0.25, z: -8.9 }]) {
+    // (and the same for the standing steel)
+    const obstacles = [...stacks.map((s) => ({ ...s, half: 0.62, depth: 0.75 })), { ...STEEL, half: 0.95, depth: 0.45 }];
+    for (let pass = 0; pass < 3; pass++) for (const s of obstacles) {
       const near = Math.min(Math.abs(x - s.x), Math.abs(x + note.drift - s.x)) - 0.12;
       const between = (x - s.x) * (x + note.drift - s.x) < 0;
-      if ((near < 0.62 || between) && Math.abs(piece.rest.z - s.z) < 0.75) piece.rest.z = s.z + (piece.rest.z < s.z ? -0.75 : 0.75);
+      if ((near < s.half || between) && Math.abs(piece.rest.z - s.z) < s.depth) piece.rest.z = s.z + (piece.rest.z < s.z ? -s.depth : s.depth);
     }
     notes.push(note);
   }
-  const stacks = [{ x: -0.95, z: -8.6 }, { x: -0.25, z: -8.9 }];
   const bundles = [];
   for (let i = 0; i < 16; i++) {
     const b = banknoteBundle({ width: 0.6, depth: 0.3, notes: 32 });
@@ -194,7 +200,7 @@ export async function build(kit) {
   const CUT = T.november - 0.5, DIP = 0.2;
   // the locked gate, framed tight (2 degrees tighter than the soldiers' framing) with the padlock and
   // the steel low in the frame, so the snow in front does not take the bottom quarter
-  const GATE_FOV = 35, GATE_AIM = [0.0, -0.75, -30];
+  const GATE_FOV = 35, GATE_AIM = [0.3, -0.6, -30];
   const gateShot = kit.stillShot({ position: [0, 0.3, 0.35], target: [0, -0.1, -30], fov: 40, focus: 14 }, [
     { from: T.prices - 0.3, to: T.prices + 0.2, kind: 'focus', focus: boardFocus },
     { from: T.french - 0.45, to: T.french + 0.75, kind: 'zoom in', position: [0, -0.02, -0.25], target: [0, -1.2, -30], fov: 37, focus: 8 },
@@ -209,7 +215,7 @@ export async function build(kit) {
 
   // Keep every fall path (notes and bundles) clear of the words on screen: for each faller, find the
   // highest start that keeps its whole path, as the camera sees it at each moment, out of the boxes
-  // the words fill at that moment. A faller that has to start lower fades in out of the snowy air.
+  // the words fill at that moment. A note that has to start lower fades in out of the snowy air; a bundle pops into being.
   const lens = new THREE.PerspectiveCamera(40, 1080 / 1920, 0.1, 200);
   const onScreen = (point, t) => {
     const c = shot(t);
@@ -231,11 +237,10 @@ export async function build(kit) {
   };
   const pathClear = (from, length, at) => {
     for (let k = 0; k <= 1.0001; k += 0.04) {
-      const t = from + k * length, [x, y, z, r] = at(k, t);
-      const centre = onScreen([x, y, z], t), edge = onScreen([x + r, y, z], t);
-      const radius = Math.abs(edge.x - centre.x);
+      const t = from + k * length, [x, y, z, rx, ry] = at(k, t);
+      const a = onScreen([x - rx, y + ry, z], t), b = onScreen([x + rx, y - ry, z], t);   // its box on screen
       for (const [l, top, right, bottom] of wordBoxes(t)) {
-        if (centre.x + radius > l && centre.x - radius < right && centre.y + radius > top && centre.y - radius < bottom) return false;
+        if (b.x > l && a.x < right && b.y > top && a.y < bottom) return false;
       }
     }
     return true;
@@ -243,18 +248,15 @@ export async function build(kit) {
   for (const n of notes) {
     const from = n.land - n.fall, { x, z } = n.piece.rest;
     n.drop = 4.4;
-    while (n.drop > 0.4 && !pathClear(from, n.fall, (k, t) => [x + n.drift * (1 - k) + 0.12 * Math.sin((t - from) * 3 + n.phase), -2.2 + n.drop * (1 - k) + n.rest + 0.12, z, 0.32])) n.drop -= 0.05;
+    while (n.drop > 0.4 && !pathClear(from, n.fall, (k, t) => [x + n.drift * (1 - k) + 0.12 * Math.sin((t - from) * 3 + n.phase), -2.2 + n.drop * (1 - k) + n.rest + 0.12, z, 0.3, 0.3])) n.drop -= 0.05;
     for (const m of [n.piece.front.material, n.piece.back.material]) m.alphaTest = 0.5;
   }
-  console.warn('DBG note drops', notes.map((n) => n.drop.toFixed(2)).join(' '));
   {
     const levels = new Map(stacks.map((st) => [st, 0]));
     for (const b of bundles) {
       const base = levels.get(b.stack); levels.set(b.stack, base + b.height + 0.009);
       b.drop = 3.6;
-      while (b.drop > 0.3 && !pathClear(b.landAt - 0.45, 0.45, (k) => [b.stack.x, -2.2 + base + b.drop * (1 - k * k) + b.height / 2, b.stack.z, 0.36])) b.drop -= 0.05;
-      b.materials = [];
-      b.group.traverse((o) => { if (o.material) [].concat(o.material).forEach((m) => { if (!b.materials.includes(m)) b.materials.push(m); }); });
+      while (b.drop > 0.3 && !pathClear(b.landAt - 0.45, 0.45, (k) => [b.stack.x, -2.2 + base + b.drop * (1 - k * k) + b.height / 2, b.stack.z, 0.36, 0.16])) b.drop -= 0.05;
     }
   }
   kit.shake(T.stop + 0.15, 0.01, 0.15);
@@ -271,7 +273,6 @@ export async function build(kit) {
     return arrive + go;
   };
 
-  console.warn('DBG bundle drops', bundles.map((b) => b.drop.toFixed(2)).join(' '));
   function pose(t) {
     snow.set(t);
     for (const c of chimneys) c.smoke.set({ t, origin: c.at, until: T.stop + 0.05, scale: c.scale, wind: 0.6 });
@@ -283,7 +284,9 @@ export async function build(kit) {
 
     // the stack of steel stands up on "heartland" and shrinks as less and less is made
     const steelUp = popUp(t, T.heartland - 0.05, { height: 0.7, restZ: 0.15 });
-    steel.set({ ...steelUp, scale: lerp(1, 0.6, smooth(ramp(t, T.less - 0.1, T.made + 0.4))) });
+    // (it shrinks toward its right end, so it stays in view beside the growing money)
+    const steelScale = lerp(1, 0.6, smooth(ramp(t, T.less - 0.1, T.made + 0.4)));
+    steel.set({ ...steelUp, scale: steelScale, dx: (1 - steelScale) * 0.7 });
 
     // the padlock pops onto the gate
     const lockAge = t - T.stop;
@@ -314,9 +317,8 @@ export async function build(kit) {
       const tilt = b.twist * (1 - k) + settle;
       b.group.rotation.z = tilt;
       b.group.position.set(b.stack.x + b.shift[0], -2.2 + 0.004 + base + b.drop * (1 - k * k) + Math.abs(Math.sin(tilt)) * 0.32, b.stack.z + b.shift[1]);
-      // a bundle that starts low (to keep clear of the words) fades in as it drops
-      const fade = b.drop < 3.55 ? smooth(clamp01(k / 0.35)) : 1;
-      for (const m of b.materials) { m.transparent = fade < 1; m.opacity = fade; m.depthWrite = true; }
+      // a bundle that starts low (to keep clear of the words) pops into being as it drops, paper-style
+      b.group.scale.setScalar(b.drop < 3.55 ? 0.3 + 0.7 * smooth(clamp01(k / 0.3)) : 1);
       heights.set(b.stack, base + b.height + 0.009);   // the paper band stands 0.004 proud top and bottom
     });
 
