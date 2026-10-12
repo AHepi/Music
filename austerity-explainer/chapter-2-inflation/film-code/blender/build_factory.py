@@ -13,6 +13,12 @@
 # Run with Blender's Python module:
 #   /home/user/work/blender-env/bin/python build_factory.py OUT.glb [--brick red|brown|yellow]
 #       [--office left|right] [--seed N] [--no-bake]
+# Finish (worked out with the official Blender MCP, see chapter-2/reference/22): soft hardened-normal
+# bevels on walls and trims, stone voussoirs with keystones, cast-iron glazing bars and frames in
+# deeper reveals, coping stones with joints, kneelers and apex blocks, plank door leaves with ledges,
+# braces and strap hinges, machines and a line shaft in silhouette inside the door, a framed sign, a
+# lantern on a scrolled bracket, a corbelled chimney cap with straps; parts sharing a material are
+# joined (about 19 meshes instead of 232) for cheaper drawing.
 # Lit parts are named so the page can turn them up and down: materials 'window-glow' (windows),
 # 'roof-glow' (north lights), 'door-glow' (the works seen through the door), 'lamp-glow'.
 # Markers (empties): chimney_top, door, yard, door_lamp, office_door.
@@ -89,27 +95,6 @@ def arch_outline(half_width, sill, spring, rise, steps=10):
     return points
 
 
-def arch_band(name, x, face_y, half_width, spring, rise, thickness=0.035, proud=0.012, material=stone, along='x'):
-    """The ring of bricks or stones over an arched opening, standing a little proud of the wall."""
-    radius = (half_width ** 2 + rise ** 2) / (2 * rise)
-    centre = spring + rise - radius
-    start = math.asin(half_width / radius)
-    outer, inner = [], []
-    steps = 12
-    for i in range(steps + 1):
-        a = start - 2 * start * i / steps
-        outer.append(((radius + thickness) * math.sin(a), centre + (radius + thickness) * math.cos(a)))
-        inner.append((radius * math.sin(a), centre + radius * math.cos(a)))
-    outline = outer + inner[::-1]
-    part = mk.prism(name, outline, proud * 2, at=(0, 0, 0), material=material, axis='y')
-    if along == 'x':
-        part.location = (x, face_y, 0)
-    else:   # on a side wall: turn to face +-x
-        part.rotation_euler = (0, 0, math.pi / 2)
-        part.location = (face_y, x, 0)
-    return part
-
-
 def frustum(name, bottom_half, top_half, height, at, material, bevel=0.0):
     """A tapering square stack (a chimney)."""
     part = mk.box(name, (bottom_half * 2, bottom_half * 2, height), at=(at[0], at[1], at[2] + height / 2), material=None, map_units=False)
@@ -123,6 +108,164 @@ def frustum(name, bottom_half, top_half, height, at, material, bevel=0.0):
     return part
 
 
+# ------------------------------------------------- finishing helpers (Blender MCP notes B1, B2, B6, B15)
+import bpy  # noqa: E402
+import bmesh  # noqa: E402
+from mathutils import Euler, Matrix, Vector  # noqa: E402
+
+
+def soften(obj, width, segments=1, angle=30):
+    """Soft edges that catch the light: a bevel with hardened normals (flat faces stay flat, only the
+    bevel shades round), smooth shading, then weighted normals. Replaces any plain 'bevel'."""
+    for m in [m for m in obj.modifiers if m.type == 'BEVEL']: obj.modifiers.remove(m)
+    b = obj.modifiers.new('bevel', 'BEVEL')
+    b.width = width; b.segments = segments
+    b.limit_method = 'ANGLE'; b.angle_limit = math.radians(angle)
+    b.use_clamp_overlap = True; b.miter_outer = 'MITER_ARC'
+    b.harden_normals = True; b.face_strength_mode = 'FSTR_AFFECTED'
+    obj.data.polygons.foreach_set('use_smooth', [True] * len(obj.data.polygons))
+    w = obj.modifiers.new('weighted', 'WEIGHTED_NORMAL')
+    w.mode = 'FACE_AREA'; w.keep_sharp = True; w.use_face_influence = True
+    return obj
+
+
+def _cube(bm, size, at, rotate=(0, 0, 0)):
+    made = bmesh.ops.create_cube(bm, size=1.0)
+    matrix = Matrix.Translation(Vector(at)) @ Euler(rotate).to_matrix().to_4x4() @ Matrix.Diagonal((size[0], size[1], size[2], 1.0))
+    bmesh.ops.transform(bm, matrix=matrix, verts=made['verts'])
+
+
+def _block(bm, outline, y0, y1):
+    """A block whose face is a 4-point outline (x, z), from y0 to y1."""
+    front = [bm.verts.new((x, y0, z)) for x, z in outline]
+    back = [bm.verts.new((x, y1, z)) for x, z in outline]
+    bm.faces.new(front); bm.faces.new(back[::-1])
+    for i in range(len(outline)):
+        j = (i + 1) % len(outline)
+        bm.faces.new((front[i], front[j], back[j], back[i]))
+
+
+def _ring(bm, half, spring, rise, inner, thick, count, y0, y1, gap=0.0, alternate=0.0, alternate_proud=0.0, key=0.0, key_proud=0.0):
+    """Wedge blocks round a segmental arch (voussoirs), radiating from the arch's centre.
+    inner: added to the opening's radius for the ring's inside edge. Odd blocks stand out by
+    alternate (longer) and alternate_proud; the middle block (keystone) by key and key_proud."""
+    radius = (half ** 2 + rise ** 2) / (2 * rise)
+    centre = spring + rise - radius
+    start = math.asin(half / radius)
+    r0 = radius + inner
+    pad = gap / max(r0, 0.01) / 2
+    for i in range(count):
+        a0 = -start + 2 * start * i / count + pad
+        a1 = -start + 2 * start * (i + 1) / count - pad
+        keystone = count % 2 == 1 and i == count // 2
+        t = thick + (alternate if i % 2 else 0) + (key if keystone else 0)
+        proud = (alternate_proud if i % 2 == 0 else 0) + (key_proud if keystone else 0)
+        r1 = r0 + t
+        outline = [(r0 * math.sin(a0), centre + r0 * math.cos(a0)), (r0 * math.sin(a1), centre + r0 * math.cos(a1)),
+                   (r1 * math.sin(a1), centre + r1 * math.cos(a1)), (r1 * math.sin(a0), centre + r1 * math.cos(a0))]
+        _block(bm, outline, y0 - proud, y1)
+
+
+def built(name, bm, material, place=Matrix(), bevel=0.0, segments=1, map_units=None):
+    """Turn a bmesh drawn in a local frame into a part: the placement is baked into the vertices
+    (the part sits at the origin), so box_map projects the texture without smearing."""
+    bmesh.ops.transform(bm, matrix=place, verts=bm.verts)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    mesh = bpy.data.meshes.new(name); bm.to_mesh(mesh); bm.free()
+    obj = bpy.data.objects.new(name, mesh); bpy.context.scene.collection.objects.link(obj)
+    obj.data.materials.append(material)
+    if map_units is not False: mk.box_map(obj, map_units)
+    if bevel: soften(obj, bevel, segments)
+    return obj
+
+
+def boxes(name, specs, material, place=Matrix(), bevel=0.0, segments=1):
+    """Many boxes as one part: specs = [(size, at) or (size, at, rotate)]."""
+    bm = bmesh.new()
+    for spec in specs: _cube(bm, *spec)
+    return built(name, bm, material, place, bevel, segments)
+
+
+def wall_frame(x, face, side=0):
+    """Placement for parts drawn on a wall in a local frame (x along the wall, z up, the wall face
+    at y = 0, outside towards -y): the front wall (side 0) or a side wall (side -1 / +1)."""
+    if side == 0: return Matrix.Translation((x, face, 0))
+    return Matrix.Translation((face, x, 0)) @ Matrix.Rotation(side * math.pi / 2, 4, 'Z')
+
+
+def voussoirs(name, place, half, spring, rise, count, thick=0.035, proud=0.012, gap=0.0018, bevel=0.003):
+    """Stone voussoirs round an arched opening with a keystone, alternate stones a little longer and
+    prouder, with real joints (the wall shows between them)."""
+    bm = bmesh.new()
+    _ring(bm, half, spring, rise, 0.0, thick, count, -proud, 0.01, gap=gap, alternate=thick * 0.3,
+          alternate_proud=0.006, key=thick * 0.45, key_proud=0.008)
+    return built(name, bm, stone, place, bevel=bevel, segments=1)
+
+
+def window_grid(name, place, half, sill, spring, rise, columns, rows, depth, bar=0.008, frame=0.016):
+    """Cast-iron glazing bars and an outer frame standing just in front of the glass (which sits at
+    local y = depth), lined up with the panes painted on the glass picture."""
+    radius = (half ** 2 + rise ** 2) / (2 * rise)
+    centre = spring + rise - radius
+    top_at = lambda x: centre + math.sqrt(max(radius ** 2 - x ** 2, 0.0))
+    height = spring + rise - sill
+    y_bar, y_frame = depth - 0.01, depth - 0.008
+    bm = bmesh.new()
+    for c in range(1, columns):
+        x = -half + 2 * half * c / columns
+        top = top_at(x) - 0.004
+        _cube(bm, (bar, 0.01, top - sill), (x, y_bar, (sill + top) / 2))
+    for r in range(1, rows):
+        z = sill + height * r / rows
+        span = 2 * half if z <= spring else 2 * math.sqrt(max(radius ** 2 - (z - centre) ** 2, 0.0)) - 0.01
+        if span > 0.03: _cube(bm, (span, 0.01, bar), (0, y_bar, z))
+    for s in (-1, 1):
+        _cube(bm, (frame, 0.016, spring - sill), (s * (half - frame / 2), y_frame, (sill + spring) / 2))
+    _cube(bm, (2 * half, 0.016, frame), (0, y_frame, sill + frame / 2))
+    _ring(bm, half, spring, rise, -frame, frame, 6, y_frame - 0.008, y_frame + 0.008)
+    return built(name, bm, iron, place)
+
+
+def tube(name, points, radius, material, resolution=8):
+    """A smooth iron rod along points (a NURBS curve with a round section), made into a mesh."""
+    curve = bpy.data.curves.new(name, 'CURVE'); curve.dimensions = '3D'
+    curve.bevel_depth = radius; curve.bevel_resolution = 1; curve.resolution_u = resolution; curve.use_fill_caps = True
+    spline = curve.splines.new('NURBS'); spline.points.add(len(points) - 1)
+    for p, co in zip(spline.points, points): p.co = (*co, 1.0)
+    spline.order_u = 3; spline.use_endpoint_u = True
+    temp = bpy.data.objects.new(name + '-curve', curve); bpy.context.scene.collection.objects.link(temp)
+    graph = bpy.context.evaluated_depsgraph_get()
+    mesh = bpy.data.meshes.new_from_object(temp.evaluated_get(graph))
+    bpy.data.objects.remove(temp, do_unlink=True)
+    obj = bpy.data.objects.new(name, mesh); bpy.context.scene.collection.objects.link(obj)
+    mesh.materials.clear(); mesh.materials.append(material)
+    mesh.polygons.foreach_set('use_smooth', [True] * len(mesh.polygons))
+    return obj
+
+
+def join_by_material(keep_apart=()):
+    """Fewer parts, cheaper drawing (notes B15): apply every part's modifiers, then join the parts that
+    share a material into one mesh named after it. Parts whose names start with one of keep_apart
+    (left out of the shading bake) are joined among themselves under that prefix."""
+    meshes = [o for o in bpy.context.scene.objects if o.type == 'MESH']
+    for o in meshes: mk.apply_modifiers(o)
+    groups = {}
+    for o in meshes:
+        materials = [m for m in o.data.materials if m]
+        if len(materials) != 1: continue
+        prefix = next((p for p in keep_apart if o.name.startswith(p)), '')
+        groups.setdefault((materials[0].name, prefix), []).append(o)
+    for (material_name, prefix), objects in groups.items():
+        target = objects[0]
+        if len(objects) > 1:
+            bpy.ops.object.select_all(action='DESELECT')
+            for o in objects: o.select_set(True)
+            bpy.context.view_layer.objects.active = target
+            bpy.ops.object.join()
+        target.name = f'{prefix}-{material_name}' if prefix else f'{material_name}-parts'
+        target.data.name = target.name
+
+
 parts = []
 add = lambda p: parts.append(p) or p
 
@@ -132,32 +275,47 @@ cutters = []
 FRONT_WINDOWS = [-1.38, -1.02, -0.55, 0.55, 1.02, 1.38]
 SIDE_WINDOWS = [-0.55, 0.0, 0.55]
 SILL, SPRING, RISE, HALF = 0.36, 0.84, 0.05, 0.11
+REVEAL, GLASS = 0.08, 0.07       # how deep the window openings go, and how far back the glass sits
 for x in FRONT_WINDOWS:
-    c = mk.prism('cut', arch_outline(HALF, SILL, SPRING, RISE), 0.12, at=(x, FRONT, 0), axis='y', map_units=False)
+    c = mk.prism('cut', arch_outline(HALF, SILL, SPRING, RISE), REVEAL * 2, at=(x, FRONT, 0), axis='y', map_units=False)
     cutters.append(c)
 for side in (-1, 1):
     for y in SIDE_WINDOWS:
         if side == OFFICE_SIDE and y < 0.3: continue      # the office stands against this side's front half
-        c = mk.prism('cut', arch_outline(HALF, SILL, SPRING, RISE), 0.12, at=(0, 0, 0), axis='y', map_units=False)
+        c = mk.prism('cut', arch_outline(HALF, SILL, SPRING, RISE), REVEAL * 2, at=(0, 0, 0), axis='y', map_units=False)
         c.rotation_euler = (0, 0, math.pi / 2); c.location = (side * W / 2, y, 0)
         cutters.append(c)
 # the loading door: a wide arched opening, deep enough to see into
 DOOR_HALF, DOOR_TOP = 0.27, 0.74
-cutters.append(mk.prism('cut', arch_outline(DOOR_HALF, -0.05, DOOR_TOP, 0.07), 0.5, at=(0, FRONT, 0), axis='y', map_units=False))
+DOOR_DEEP = 0.34                  # how far back the works inside can be seen
+cutters.append(mk.prism('cut', arch_outline(DOOR_HALF, -0.05, DOOR_TOP, 0.07), DOOR_DEEP * 2 + 0.02, at=(0, FRONT, 0), axis='y', map_units=False))
 mk.cut(walls, cutters)
 mk.box_map(walls)
+soften(walls, 0.011, segments=2)   # after the cut (a bevel before the boolean breaks the openings)
 
 # glass in each window, set back in the opening
+def sill_stone(bm, half):
+    """A stone sill in the local wall frame: a block running into the wall, a projecting top that
+    catches the lamp light, and a nose hanging below its front edge (the drip)."""
+    _cube(bm, (half * 2 + 0.06, 0.07, 0.022), (0, -0.015, SILL - 0.017))                          # body, into the wall
+    _block(bm, [(-half - 0.03, SILL - 0.006), (half + 0.03, SILL - 0.006), (half + 0.03, SILL), (-half - 0.03, SILL)], -0.05, 0.0)  # weathered top
+    _cube(bm, (half * 2 + 0.06, 0.012, 0.008), (0, -0.044, SILL - 0.031))                         # the nose below the drip
+
+
 for i, x in enumerate(FRONT_WINDOWS):
-    add(mk.plane(f'window-{i}', (HALF * 2, SPRING + RISE - SILL), at=(x, FRONT + 0.05, (SILL + SPRING + RISE) / 2), material=window, rotate=(math.pi / 2, 0, 0)))
-    add(arch_band(f'arch-{i}', x, FRONT, HALF, SPRING, RISE))
-    add(mk.box(f'sill-{i}', (HALF * 2 + 0.06, 0.06, 0.028), at=(x, FRONT - 0.02, SILL - 0.014), material=stone, bevel=0.006))
+    place = wall_frame(x, FRONT)
+    add(mk.plane(f'window-{i}', (HALF * 2, SPRING + RISE - SILL), at=(x, FRONT + GLASS, (SILL + SPRING + RISE) / 2), material=window, rotate=(math.pi / 2, 0, 0)))
+    add(voussoirs(f'arch-{i}', place, HALF, SPRING, RISE, 11))
+    add(window_grid(f'window-bars-{i}', place, HALF, SILL, SPRING, RISE, 4, 7, GLASS))
+    bm = bmesh.new(); sill_stone(bm, HALF); add(built(f'sill-{i}', bm, stone, place, bevel=0.004))
 for side in (-1, 1):
     for j, y in enumerate(SIDE_WINDOWS):
         if side == OFFICE_SIDE and y < 0.3: continue
-        add(mk.plane(f'window-side-{side}-{j}', (HALF * 2, SPRING + RISE - SILL), at=(side * (W / 2 - 0.05), y, (SILL + SPRING + RISE) / 2), material=window, rotate=(math.pi / 2, 0, side * math.pi / 2)))
-        add(arch_band(f'arch-side-{side}-{j}', y, side * W / 2, HALF, SPRING, RISE, along='y'))
-        add(mk.box(f'sill-side-{side}-{j}', (0.06, HALF * 2 + 0.06, 0.028), at=(side * (W / 2 + 0.02), y, SILL - 0.014), material=stone, bevel=0.006))
+        place = wall_frame(y, side * W / 2, side)
+        add(mk.plane(f'window-side-{side}-{j}', (HALF * 2, SPRING + RISE - SILL), at=(side * (W / 2 - GLASS), y, (SILL + SPRING + RISE) / 2), material=window, rotate=(math.pi / 2, 0, side * math.pi / 2)))
+        add(voussoirs(f'arch-side-{side}-{j}', place, HALF, SPRING, RISE, 11, bevel=0))   # side walls: seen little, no bevel
+        add(window_grid(f'window-bars-side-{side}-{j}', place, HALF, SILL, SPRING, RISE, 4, 7, GLASS))
+        bm = bmesh.new(); sill_stone(bm, HALF); add(built(f'sill-side-{side}-{j}', bm, stone, place, bevel=0.004))
 
 # plinth, pilasters, cornice
 add(mk.box('plinth', (W + 0.05, D + 0.05, 0.1), at=(0, 0, 0.05), material=stone, bevel=0.008))
@@ -182,15 +340,31 @@ for i in range(BAYS):
     sheet.rotation_mode = 'ZYX'; sheet.rotation_euler = (0, -angle, math.pi / 2)
     sheet.location = (x0 + BAY / 2, 0, H + 0.02 + TOOTH / 2 + 0.012)
     mk.box_map(sheet, (1, 1)); add(sheet)
-    for y in (FRONT - 0.015, BACK + 0.015):
-        add(mk.box(f'coping-{i}-{y:+.1f}', (slope + 0.02, 0.09, 0.03), at=(x0 + BAY / 2, y, H + 0.03 + TOOTH / 2), material=stone, rotate=(0, -angle, 0), bevel=0.006))
-    # the glazed north light on the tooth's upright face, with iron glazing bars
+    # copings: on the front gables (seen against the bright sky) separate stones with real joints,
+    # a kneeler at the foot and a block at the apex; the back ones stay one slab
+    centre = Vector((x0 + BAY / 2, 0, H + 0.03 + TOOTH / 2))
+    run = Vector((math.cos(angle), 0, math.sin(angle)))
+    length, count = slope + 0.02, 8
+    pitch = length / count
+    stones = []
+    for k in range(count):
+        at = centre + run * (-length / 2 + pitch * (k + 0.5))
+        stones.append(((pitch - 0.003, 0.09 + (0.006 if k % 2 else 0), 0.03), (at.x, FRONT - 0.015, at.z), (0, -angle, 0)))
+    # (no kneeler: next to the valley gutter's end it read as a little camera on the wall)
+    stones.append(((0.07, 0.1, 0.05), (x0 + BAY - 0.035, FRONT - 0.015, H + 0.02 + TOOTH + 0.012)))   # apex block
+    add(boxes(f'coping-{i}-front', stones, stone, bevel=0.005))
+    add(mk.box(f'coping-{i}-back', (slope + 0.02, 0.09, 0.03), at=(x0 + BAY / 2, BACK + 0.015, H + 0.03 + TOOTH / 2), material=stone, rotate=(0, -angle, 0), bevel=0.006))
+    # the glazed north light on the tooth's upright face, with iron glazing bars and a frame
     xg = x0 + BAY
     add(mk.plane(f'north-light-{i}', (TOOTH - 0.05, D - 0.14), at=(xg + 0.004, 0, H + 0.02 + TOOTH / 2), material=roof_glass, rotate=(0, math.pi / 2, 0)))
-    for k in range(9):
-        add(mk.box(f'glazing-bar-{i}-{k}', (0.012, 0.014, TOOTH - 0.04), at=(xg + 0.012, -D / 2 + 0.07 + k * (D - 0.14) / 8, H + 0.02 + TOOTH / 2), material=iron))
+    bars = [((0.012, 0.014, TOOTH - 0.04), (xg + 0.012, -D / 2 + 0.07 + k * (D - 0.14) / 8, H + 0.02 + TOOTH / 2)) for k in range(9)]
+    for z in (H + 0.02 + 0.03, H + 0.02 + TOOTH / 2, H + 0.02 + TOOTH - 0.03):
+        bars.append(((0.016, D - 0.12, 0.014), (xg + 0.014, 0, z)))
+    add(boxes(f'glazing-bar-{i}', bars, iron))
     add(mk.box(f'ridge-{i}', (0.05, D + 0.1, 0.022), at=(xg - 0.012, 0, H + 0.02 + TOOTH + 0.006), material=iron, bevel=0.004))
-    add(mk.cylinder(f'valley-gutter-{i}', 0.022, D + 0.14, at=(xg + 0.02, 0, H + 0.04), material=iron, rotate=(math.pi / 2, 0, 0), sides=10))
+    add(mk.cylinder(f'ridge-roll-{i}', 0.012, D - 0.04, at=(xg - 0.012, 0, H + 0.02 + TOOTH + 0.02), material=iron, sides=10, rotate=(math.pi / 2, 0, 0)))
+    # the gutter's ends stop inside the gables (round iron ends poking out read as camera lenses)
+    add(mk.cylinder(f'valley-gutter-{i}', 0.022, D - 0.04, at=(xg + 0.02, 0, H + 0.04), material=iron, rotate=(math.pi / 2, 0, 0), sides=10))
 
 # downpipes with hopper heads, on the front
 for x in (-W / 2 + 0.07, -0.8, 0.8, W / 2 - 0.07):
@@ -207,32 +381,60 @@ for i, x in enumerate((-0.4, 1.2)):
     add(mk.cylinder(f'vent-cap-{i}', 0.09, 0.05, at=(x - 0.1, 0.25 - i * 0.5, H + TOOTH * 0.75 + 0.11), material=iron, sides=4, radius_top=0.005, rotate=(0, 0, math.pi / 4)))
 
 # ----------------------------------------------------------------------------- the loading door
-add(arch_band('door-arch', 0, FRONT, DOOR_HALF, DOOR_TOP, 0.07, thickness=0.05))
-add(mk.plane('door-inside', (DOOR_HALF * 2 + 0.04, DOOR_TOP + 0.1), at=(0, FRONT + 0.24, (DOOR_TOP + 0.1) / 2 - 0.02), material=door_glow, rotate=(math.pi / 2, 0, 0)))
+add(voussoirs('door-arch', wall_frame(0, FRONT), DOOR_HALF, DOOR_TOP, 0.07, 15, thick=0.05, proud=0.014))
+add(mk.plane('door-inside', (DOOR_HALF * 2 + 0.04, DOOR_TOP + 0.1), at=(0, FRONT + DOOR_DEEP, (DOOR_TOP + 0.1) / 2 - 0.02), material=door_glow, rotate=(math.pi / 2, 0, 0)))
+# the works inside: small machines, a line shaft and its belts in silhouette just in front of the
+# lit back (they move against it as the camera moves, which the flat picture alone cannot do)
+machines = [((0.08, 0.04, 0.11), (-0.16, FRONT + DOOR_DEEP - 0.05, 0.1 + 0.055)), ((0.03, 0.03, 0.04), (-0.16, FRONT + DOOR_DEEP - 0.05, 0.23)),   # a drill
+            ((0.13, 0.04, 0.05), (0.13, FRONT + DOOR_DEEP - 0.07, 0.1 + 0.025)), ((0.03, 0.04, 0.04), (0.08, FRONT + DOOR_DEEP - 0.07, 0.17)),     # a lathe bed and head
+            ((DOOR_HALF * 2 + 0.04, 0.016, 0.016), (0, FRONT + DOOR_DEEP - 0.03, 0.66)),                                         # the shaft hanger beam
+            ((0.005, 0.003, 0.4), (-0.16, FRONT + DOOR_DEEP - 0.045, 0.44), (0, 0.1, 0)), ((0.005, 0.003, 0.42), (0.1, FRONT + DOOR_DEEP - 0.06, 0.42), (0, -0.12, 0))]   # belts
+add(boxes('works-machines', machines, iron, bevel=0.003))
+add(mk.cylinder('works-shaft', 0.007, DOOR_HALF * 2 + 0.04, at=(0, FRONT + DOOR_DEEP - 0.045, 0.63), material=iron, sides=8, rotate=(0, math.pi / 2, 0)))
+add(mk.cylinder('works-flywheel', 0.045, 0.014, at=(0.19, FRONT + DOOR_DEEP - 0.07, 0.2), material=iron, sides=16, rotate=(math.pi / 2, 0, 0)))
 for side in (-1, 1):   # the two leaves, swung open outwards
-    # hinged at the opening's edge, closed it would reach the middle; swung 110 degrees outwards
-    leaf = mk.box(f'door-leaf-{side}', (DOOR_HALF, 0.025, DOOR_TOP - 0.02), at=(0, 0, 0), material=planks, bevel=0.004)
-    for v in leaf.data.vertices: v.co.x -= side * DOOR_HALF / 2
-    leaf.rotation_euler = (0, 0, side * math.radians(110))
-    leaf.location = (side * DOOR_HALF, FRONT - 0.02, (DOOR_TOP - 0.02) / 2)
-    mk.box_map(leaf); add(leaf)
-    for k, z in enumerate((0.12, 0.6)):
-        b = mk.box(f'door-strap-{side}-{k}', (DOOR_HALF * 0.9, 0.012, 0.025), at=(0, 0, 0), material=iron)
-        for v in b.data.vertices: v.co.x -= side * DOOR_HALF * 0.47; v.co.y -= 0.018
-        b.rotation_euler = (0, 0, side * math.radians(110)); b.location = (side * DOOR_HALF, FRONT - 0.02, z)
-        add(b)
+    # hinged at the opening's edge, closed it would reach the middle; swung 110 degrees outwards.
+    # Drawn closed (hinge at x = 0, the leaf reaching towards the middle, its outside face at -y),
+    # then turned and moved into place.
+    place = Matrix.Translation((side * DOOR_HALF, FRONT - 0.02, 0)) @ Matrix.Rotation(side * math.radians(110), 4, 'Z')
+    tall, gap = DOOR_TOP - 0.02, 0.0018
+    plank = (DOOR_HALF - 6 * gap) / 7
+    leaf = [((plank, 0.02, tall), (-side * (k * (plank + gap) + plank / 2), 0, tall / 2)) for k in range(7)]
+    for z in (0.1, 0.36, 0.62):    # ledges on the inside face
+        leaf.append(((DOOR_HALF * 0.9, 0.014, 0.05), (-side * DOOR_HALF / 2, 0.016, z)))
+    rise_, run = 0.26 - 0.05, DOOR_HALF * 0.7
+    for z0 in (0.1, 0.36):         # the braces between them, rising away from the hinge
+        leaf.append(((math.hypot(rise_, run), 0.012, 0.04), (-side * DOOR_HALF / 2, 0.015, z0 + 0.13), (0, side * math.atan2(rise_, run), 0)))
+    add(boxes(f'door-leaf-{side}', leaf, planks, place, bevel=0.003))
+    straps = []
+    for z in (0.12, 0.6):          # strap hinges on the outside, with a pointed end
+        straps.append(((DOOR_HALF * 0.8, 0.005, 0.022), (-side * DOOR_HALF * 0.4, -0.0125, z)))
+        straps.append(((0.024, 0.005, 0.024), (-side * DOOR_HALF * 0.8, -0.0125, z), (0, math.pi / 4, 0)))
+        straps.append(((0.016, 0.03, 0.03), (side * 0.006, -0.004, z)))   # the hinge knuckle on the wall
+    add(boxes(f'door-strap-{side}', straps, iron, place, bevel=0.002))
 add(mk.box('sign', (0.9, 0.02, 0.12), at=(0, FRONT - 0.03, DOOR_TOP + 0.22), material=sign, bevel=0.004, map_units=False))
 sign_part = parts[-1]
 # map the sign picture once over its front
-import bmesh  # noqa: E402
 bm = bmesh.new(); bm.from_mesh(sign_part.data)
 uv = bm.loops.layers.uv.get('UVMap') or bm.loops.layers.uv.new('UVMap')
 for f in bm.faces:
     for loop in f.loops: loop[uv].uv = (loop.vert.co.x / 0.9 + 0.5, loop.vert.co.z / 0.12 + 0.5)
 bm.to_mesh(sign_part.data); bm.free()
-add(mk.box('lamp-bracket', (0.012, 0.09, 0.012), at=(0, FRONT - 0.05, DOOR_TOP + 0.4), material=iron))
-add(mk.box('lamp', (0.04, 0.04, 0.05), at=(0, FRONT - 0.1, DOOR_TOP + 0.37), material=lamp, bevel=0.004))
-add(mk.cylinder('lamp-hood', 0.04, 0.02, at=(0, FRONT - 0.1, DOOR_TOP + 0.405), material=iron, sides=8, radius_top=0.012))
+SZ = DOOR_TOP + 0.22   # a moulded frame round the board
+add(boxes('sign-frame', [((0.95, 0.03, 0.022), (0, FRONT - 0.035, SZ + 0.07)), ((0.95, 0.03, 0.022), (0, FRONT - 0.035, SZ - 0.07)),
+                         ((0.025, 0.03, 0.118), (-0.4625, FRONT - 0.035, SZ)), ((0.025, 0.03, 0.118), (0.4625, FRONT - 0.035, SZ))], stone, bevel=0.005))
+# the lantern: glass on four sides in an iron frame, a pyramid hood with a finial, on a curled bracket
+LZ = DOOR_TOP + 0.37
+add(mk.box('lamp', (0.04, 0.04, 0.056), at=(0, FRONT - 0.1, LZ), material=lamp))
+frame = [((0.006, 0.006, 0.064), (sx * 0.022, FRONT - 0.1 + sy * 0.022, LZ)) for sx in (-1, 1) for sy in (-1, 1)]
+frame += [((0.056, 0.056, 0.008), (0, FRONT - 0.1, LZ - 0.034)), ((0.058, 0.058, 0.006), (0, FRONT - 0.1, LZ + 0.033))]
+add(boxes('lantern-frame', frame, iron, bevel=0.0015))
+add(mk.cylinder('lamp-hood', 0.047, 0.03, at=(0, FRONT - 0.1, LZ + 0.051), material=iron, sides=4, radius_top=0.006, rotate=(0, 0, math.pi / 4)))
+add(mk.cylinder('lamp-finial', 0.007, 0.022, at=(0, FRONT - 0.1, LZ + 0.075), material=iron, sides=8, radius_top=0.002))
+add(mk.cylinder('lamp-drop', 0.012, 0.016, at=(0, FRONT - 0.1, LZ - 0.046), material=iron, sides=8, radius_top=0.004, rotate=(math.pi, 0, 0)))
+add(tube('lamp-bracket', [(0, FRONT + 0.005, LZ + 0.12), (0, FRONT - 0.06, LZ + 0.13), (0, FRONT - 0.1, LZ + 0.12), (0, FRONT - 0.1, LZ + 0.086)], 0.0045, iron))
+add(tube('lamp-bracket-scroll', [(0, FRONT + 0.005, LZ - 0.02), (0, FRONT - 0.03, LZ + 0.03), (0, FRONT - 0.045, LZ + 0.1), (0, FRONT - 0.07, LZ + 0.126)], 0.0035, iron))
+add(boxes('lamp-plate', [((0.03, 0.008, 0.17), (0, FRONT - 0.002, LZ + 0.05))], iron, bevel=0.002))
 mk.marker('door_lamp', (0, FRONT - 0.1, DOOR_TOP + 0.36))
 
 # ------------------------------------------------------------------------------------ the chimney
@@ -243,10 +445,18 @@ for z in (1.1, 2.0):
     half = 0.15 - (0.05 * (z - 0.3) / 2.75)
     add(mk.box(f'chimney-band-{z}', (half * 2 + 0.03, half * 2 + 0.03, 0.04), at=(CX, CY, z), material=stone, bevel=0.005))
 top = 0.3 + 2.75
-for k, (grow, height) in enumerate(((0.025, 0.05), (0.045, 0.05), (0.06, 0.04))):
-    add(mk.box(f'chimney-cap-{k}', (0.2 + grow * 2, 0.2 + grow * 2, height), at=(CX, CY, top + 0.025 + k * 0.05), material=brick if k < 2 else stone, bevel=0.004))
-add(mk.box('chimney-soot', (0.17, 0.17, 0.02), at=(CX, CY, top + 0.16), material=iron))
+# a corbelled cap: five courses stepping out, then a stone capping; two iron straps lower down
+courses = ((0.012, 0.03, brick), (0.026, 0.03, brick), (0.04, 0.03, brick), (0.052, 0.035, stone), (0.04, 0.025, brick))
+z = top
+for k, (grow, height, material_) in enumerate(courses):
+    add(mk.box(f'chimney-cap-{k}', (0.2 + grow * 2, 0.2 + grow * 2, height), at=(CX, CY, z + height / 2), material=material_, bevel=0.005))
+    z += height
+for zs in (1.55, 2.5):
+    half = 0.15 - (0.05 * (zs - 0.3) / 2.75)
+    add(mk.box(f'chimney-strap-{zs}', (half * 2 + 0.008, half * 2 + 0.008, 0.014), at=(CX, CY, zs), material=iron, bevel=0.002))
+add(mk.box('chimney-soot', (0.17, 0.17, 0.02), at=(CX, CY, z + 0.005), material=iron))
 add(mk.cylinder('lightning-rod', 0.005, 3.3, at=(CX + 0.1, CY - 0.1, 1.65 + 0.15), material=iron, sides=6))
+add(mk.cylinder('lightning-rod-tip', 0.009, 0.05, at=(CX + 0.1, CY - 0.1, 3.475), material=iron, sides=6, radius_top=0.0005))
 mk.marker('chimney_top', (CX, CY, top + 0.2))
 
 # ------------------------------------------------------------------------------------- the office
@@ -262,14 +472,19 @@ for floor, z in ((0, 0.2), (1, 0.95)):
         c.rotation_euler = (0, 0, math.pi / 2); c.location = (OX + OFFICE_SIDE * OW / 2, OY + y, 0)
         office_cuts.append(c)
 mk.cut(office, office_cuts); mk.box_map(office)
+soften(office, 0.01, segments=2)
 for floor, z in ((0, 0.2), (1, 0.95)):
     for k, x in enumerate((-0.22, 0.22)):
+        place = wall_frame(OX + x, OY - OD / 2)
         add(mk.plane(f'office-window-{floor}-{k}', (0.17, 0.45), at=(OX + x, OY - OD / 2 + 0.04, z + 0.225), material=office_window, rotate=(math.pi / 2, 0, 0)))
         add(mk.box(f'office-sill-{floor}-{k}', (0.23, 0.05, 0.025), at=(OX + x, OY - OD / 2 - 0.015, z - 0.012), material=stone, bevel=0.005))
-        add(arch_band(f'office-arch-{floor}-{k}', OX + x, OY - OD / 2, 0.085, z + 0.42, 0.03, thickness=0.025))
+        add(voussoirs(f'office-arch-{floor}-{k}', place, 0.085, z + 0.42, 0.03, 9, thick=0.028, bevel=0))
+        add(window_grid(f'office-bars-{floor}-{k}', place, 0.085, z, z + 0.42, 0.03, 2, 4, 0.04, bar=0.007, frame=0.012))
     for k, y in enumerate((-0.2, 0.25)):
+        place = wall_frame(OY + y, OX + OFFICE_SIDE * OW / 2, OFFICE_SIDE)
         add(mk.plane(f'office-side-window-{floor}-{k}', (0.17, 0.45), at=(OX + OFFICE_SIDE * (OW / 2 - 0.04), OY + y, z + 0.225), material=office_window, rotate=(math.pi / 2, 0, OFFICE_SIDE * math.pi / 2)))
         add(mk.box(f'office-side-sill-{floor}-{k}', (0.05, 0.23, 0.025), at=(OX + OFFICE_SIDE * (OW / 2 + 0.015), OY + y, z - 0.012), material=stone, bevel=0.005))
+        add(window_grid(f'office-side-bars-{floor}-{k}', place, 0.085, z, z + 0.42, 0.03, 2, 4, 0.04, bar=0.007, frame=0.012))
 add(mk.box('office-plinth', (OW + 0.04, OD + 0.04, 0.08), at=(OX, OY, 0.04), material=stone, bevel=0.006))
 add(mk.box('office-string-course', (OW + 0.04, OD + 0.04, 0.035), at=(OX, OY, 0.8), material=stone, bevel=0.005))
 add(mk.box('office-cornice', (OW + 0.07, OD + 0.07, 0.045), at=(OX, OY, OH), material=stone, bevel=0.008))
@@ -344,4 +559,16 @@ for k, (dx, dy, dz) in enumerate(((0, 0, 0), (0.21, 0.02, 0), (0.1, 0.01, 0.2)))
 mk.marker('door', (0, FRONT - 0.05, 0))
 mk.marker('yard', (-0.1, FRONT - 1.1, 0))
 
-mk.finish(OUT, bake='--no-bake' not in arguments, bake_skip=('forecourt', 'kerb', 'rail'))
+# finishing pass (notes B1/B2): every part still carrying the kit's plain faceted bevel gets the soft,
+# hardened one instead (two segments on the larger trims, one on small parts); the brick gables too
+for part in [o for o in bpy.context.scene.objects if o.type == 'MESH']:
+    plain = [m for m in part.modifiers if m.type == 'BEVEL' and not m.harden_normals]
+    if plain:
+        width = plain[0].width
+        soften(part, max(width, 0.005), segments=2 if width >= 0.008 else 1)
+    elif part.name.startswith(('gable-', 'pilaster-', 'chimney-band')) and not part.modifiers.get('weighted'):
+        soften(part, 0.006 if part.name.startswith('gable-') else 0.004)
+print('triangles before joining:', mk.count_triangles())
+BAKE_SKIP = ('forecourt', 'kerb', 'rail')
+join_by_material(keep_apart=BAKE_SKIP)
+mk.finish(OUT, bake='--no-bake' not in arguments, bake_skip=BAKE_SKIP)
