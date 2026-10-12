@@ -127,7 +127,7 @@ export async function build(kit) {
   // the counter through x4 and "three months"; then zooms out on "almost everything" to make room for
   // the row of price tags, and holds there to the end of part A.
   const shotA = kit.stillShot({ position: [0.25, -1.1, -1.6], target: [0.55, 2.4, -30], fov: 30, focus: 13 }, [
-    { from: T.price - 0.55, to: T.oil + 0.05, kind: 'zoom in', position: [0.25, -0.25, -1.4], target: [barrelAt.x + 0.03, barrelAt.y + barrel.height + 0.07, barrelAt.z], fov: 31, focus: barrelMid },
+    { from: T.price - 0.55, to: T.oil + 0.05, kind: 'pan down',   /* pressure: the oil price */ position: [0.25, -0.25, -1.4], target: [barrelAt.x + 0.03, barrelAt.y + barrel.height + 0.07, barrelAt.z], fov: 31, focus: barrelMid },
     { from: T.months + 0.25, to: T.everything, kind: 'zoom out', position: [0.2, -0.3, -1.45], target: [0.2, -1.42, -9], fov: 34, focus: [0, barrelAt.y, barrelAt.z + 0.55] },
   ], { name: 'the forecourt, 1973' });
   // shot B, New Zealand: holds still so the bars panel reads
@@ -259,7 +259,7 @@ export async function build(kit) {
       hook(ctx, t, { at: T.quadruples + 0.1, until: T.almost - 0.1, text: '×4', y: 300, size: 170, colour: INK.amber });
       hook(ctx, t, { at: T.three - 0.05, until: T.almost - 0.1, text: 'IN ABOUT 3 MONTHS', y: 440, size: 58 });
       hook(ctx, t, { at: T.dearer, until: T.so - 0.1, text: 'DEARER', y: 330, size: 120, colour: INK.amber });
-      hook(ctx, t, { at: T.sometimes, until: cut + 0.1, text: 'SOMETIMES', y: 172, size: 48, colour: INK.muted });
+      hook(ctx, t, { at: T.sometimes, until: cut + 0.1, text: 'SOMETIMES', y: 172, size: 48, colour: INK.paper });
       struck(ctx, t, { at: T.isnt - 0.05, strikeAt: T.spending + 0.35, until: cut + 0.1, text: 'NOT SPENDING', y: 262, size: 84 });
       hook(ctx, t, { at: T.costs, until: cut + 0.1, text: 'COSTS', y: 384, size: 128, colour: INK.amber });
     } else {

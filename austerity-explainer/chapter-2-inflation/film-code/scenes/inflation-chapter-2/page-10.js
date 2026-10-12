@@ -99,9 +99,13 @@ export async function build(kit) {
   // rate; zoom out on "since" to make room for the hundred dots; zoom in on the dial again on "this
   // year ... raising".
   const dialPoint = [dialCentre.x, dialCentre.y, dialCentre.z];
-  const STREET_WIDE = { position: [0.15, -0.2, -0.6], target: [-0.3, 1.8, -30], fov: 34, focus: dialPoint };
-  const STREET_DIAL = { position: [0.35, -0.05, -2.0], target: [1.95, 0.6, -30], fov: 28.5 };
-  const streetShot = kit.stillShot(STREET_WIDE, [
+  // the opening: closer and lower than the wide framing, the dial big at the kerb (the street's road
+  // no longer an empty band across the bottom)
+  const STREET_OPEN = { position: [0.3, -0.35, -1.3], target: [1.15, 1.6, -30], fov: 29, focus: dialPoint };
+  // the wide framing that makes room for the hundred dots (the dial kept clear of the right-hand buttons)
+  const STREET_WIDE = { position: [0.15, -0.2, -0.6], target: [0.4, 1.8, -30], fov: 34 };
+  const STREET_DIAL = { position: [0.35, -0.05, -2.0], target: [1.95, 0.95, -30], fov: 26.5 };
+  const streetShot = kit.stillShot(STREET_OPEN, [
     { from: T.pushed - 0.3, to: T.pushed + 0.9, kind: 'zoom in', ...STREET_DIAL },
     { from: T.since - 0.35, to: T.since + 0.75, kind: 'zoom out', position: STREET_WIDE.position, target: STREET_WIDE.target, fov: STREET_WIDE.fov },
     { from: T.thisYear - 0.15, to: T.thisYear + 1.0, kind: 'zoom in', ...STREET_DIAL },
@@ -179,24 +183,42 @@ export async function build(kit) {
     ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 900);
   }
 
-  // a hundred dots, one per hundred workers: the empty ones are out of work (rounded); the ones
-  // emptied since the end of 2021 are ringed in red
-  function hundredDots(ctx, t, { at, until, x, y, gap = 40, radius = 12, empty, firstEmpty }) {
+  // a hundred dots, one per hundred workers: the ones out of work (rounded) are filled solid red. A small
+  // key on its own dark plate beside them says what a dot and a red dot mean.
+  function hundredDots(ctx, t, { at, until, x, y, gap = 40, radius = 15, empty }) {
     const a = presence(t, at, until, 0.3, 0.35);
     if (a <= 0) return;
     ctx.save();
     ctx.globalAlpha = a;
-    ctx.fillStyle = 'rgba(12,16,18,0.55)';
+    ctx.fillStyle = 'rgba(12,16,18,0.62)';
     ctx.beginPath(); ctx.roundRect(x - 36, y - 36, gap * 9 + 72, gap * 9 + 72, 22); ctx.fill();
     for (let i = 0; i < 100; i++) {
       const cx = x + (i % 10) * gap, cy = y + Math.floor(i / 10) * gap;
       const k = clamp01((t - at - 0.1 - i * 0.01) / 0.25);
       if (k <= 0) continue;
       ctx.beginPath(); ctx.arc(cx, cy, radius * k, 0, Math.PI * 2);
-      const fromEnd = 99 - i;
-      if (fromEnd < empty) { ctx.strokeStyle = fromEnd < firstEmpty ? INK.paper : INK.red; ctx.lineWidth = 3; ctx.stroke(); }
-      else { ctx.fillStyle = INK.amber; ctx.fill(); }
+      ctx.fillStyle = 99 - i < empty ? INK.red : INK.amber;
+      ctx.fill();
     }
+    ctx.restore();
+  }
+  function dotsKey(ctx, t, { at, until, x, y }) {
+    const a = presence(t, at, until, 0.3, 0.35);
+    if (a <= 0) return;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = 'rgba(12,16,18,0.62)';
+    ctx.beginPath(); ctx.roundRect(x, y, 400, 262, 22); ctx.fill();
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    const row = (cy, colour, label) => {
+      ctx.fillStyle = colour; ctx.beginPath(); ctx.arc(x + 46, cy, 16, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = INK.paper; ctx.font = '800 36px Inter'; ctx.fillText(label, x + 80, cy + 2);
+    };
+    row(y + 50, INK.red, 'OUT OF WORK');
+    row(y + 106, INK.amber, 'IN WORK');
+    ctx.fillStyle = INK.paper; ctx.font = '700 31px Inter';
+    ctx.fillText('EACH DOT =', x + 30, y + 168);
+    ctx.fillText('1 IN 100 WORKERS', x + 30, y + 210);
     ctx.restore();
   }
 
@@ -207,16 +229,16 @@ export async function build(kit) {
     const shownRate = t < T.to ? 0.25 : Math.min(5.5, Math.max(0.25, rateAt(t)));
     figure(ctx, t, { at: T.from, until: T.since - 0.2, value: Math.round(shownRate * 100) / 100, caption: 'Interest rate', y: 500 });
     hook(ctx, t, { at: T.by, until: T.since - 0.2, text: '2023', y: 625, size: 54, colour: INK.paper });
-    hook(ctx, t, { at: T.bring, until: T.since - 0.2, text: 'TO BRING PRICES DOWN', y: 700, size: 40, colour: INK.muted });
+    hook(ctx, t, { at: T.bring, until: T.since - 0.2, text: 'TO BRING PRICES DOWN', y: 700, size: 48, colour: INK.paper });
 
     // the count lands on 5.6 as she says "five", then holds still until "this year"
     const jobless = lerp(3.2, 5.6, smooth(ramp(t, T.to2 - 0.1, T.five2 + 0.25)));
     const joblessUntil = T.thisYear + 0.2;
-    hook(ctx, t, { at: T.since, until: T.thisYear - 0.05, text: 'SINCE THE END OF 2021', y: 260, size: 40, colour: INK.muted });
+    hook(ctx, t, { at: T.since, until: T.thisYear - 0.05, text: 'SINCE THE END OF 2021', y: 260, size: 44, colour: INK.paper });
     figure(ctx, t, { at: T.three, until: joblessUntil, value: jobless, caption: 'Unemployment', y: 470, format: tenths });
-    hundredDots(ctx, t, { at: T.unemployment, until: joblessUntil, x: 130, y: 660, empty: Math.round(jobless), firstEmpty: 3 });
-    hook(ctx, t, { at: T.unemployment + 0.4, until: joblessUntil, text: 'EACH DOT = 1 IN 100 WORKERS', x: 310, y: 1095, size: 26, colour: INK.muted });
-    credit(ctx, t, { at: T.from, until: T.cut - 0.15, text: 'Stats NZ; Reserve Bank of New Zealand' });
+    hundredDots(ctx, t, { at: T.unemployment, until: joblessUntil, x: 100, y: 650, empty: Math.round(jobless) });
+    dotsKey(ctx, t, { at: T.unemployment + 0.4, until: joblessUntil, x: 520, y: 614 });
+    credit(ctx, t, { at: T.from, until: T.cut - 0.15, text: 'Stats NZ; Reserve Bank of New Zealand', y: 1505, plate: true });
 
     const later = 2.25 + 0.25 * smooth(ramp(t, T.raising, T.raising + 0.35)) + 0.25 * smooth(ramp(t, T.again - 0.25, T.again + 0.1));
     hook(ctx, t, { at: T.thisYear, until: T.cut - 0.15, text: '2026', y: 260, size: 54, colour: INK.paper });

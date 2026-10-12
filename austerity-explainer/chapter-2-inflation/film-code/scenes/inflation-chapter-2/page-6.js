@@ -376,7 +376,7 @@ export async function build(kit) {
     }
 
     hook(ctx, t, { at: T.push, until: T.end, text: 'PRICES UP', y: 230, size: 100, colour: INK.red });
-    hook(ctx, t, { at: T.less, until: T.end, lines: ['LESS AND LESS', 'MADE'], y: 350, size: 66, colour: INK.amber });
+    hook(ctx, t, { at: T.less, until: T.end, lines: ['LESS AND LESS', 'MADE'], y: 350, size: 66, colour: INK.paper });   // paper white: amber was lost on the amber sky
     return true;
   }
 

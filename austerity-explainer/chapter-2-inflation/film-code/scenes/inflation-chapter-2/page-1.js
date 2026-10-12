@@ -91,7 +91,7 @@ export async function build(kit) {
   tagFlip.add(tagBefore.group, tagAfter.group);
   const tagHolder = new THREE.Group();
   tagHolder.add(tagFlip);
-  const tagOffset = new THREE.Vector3(basketWidth * 0.3, basketWidth * 0.66, 0.6);
+  const tagOffset = new THREE.Vector3(basketWidth * 0.3 - 0.05, basketWidth * 0.66, 0.6);   // its card clear of the right 140 px
   kit.scene.add(tagHolder);
   // the callouts point at the tag's top rim (above the digits), so the leader line never crosses the price
   const tagRim = () => tagFlip.localToWorld(new THREE.Vector3(tagBefore.width * 0.5, tagBefore.height * 0.47, 0));
@@ -272,14 +272,14 @@ export async function build(kit) {
     callout(ctx, t, { at: T.costs + 0.3, until: T.thats - 0.1, point: tagPoint, text: 'NOW', dx: -150, dy: -260, size: 52, accent: INK.red });
     hook(ctx, t, { at: T.same, until: T.costs - 0.05, text: 'THE SAME BASKET', y: 300, size: 68 });
     hook(ctx, t, { at: T.more, until: T.thats - 0.1, text: 'COSTS MORE', y: 300, size: 92, colour: INK.amber });
-    credit(ctx, t, { at: T.same, until: T.thats - 0.1, text: 'Example prices', y: 400, size: 28 });
+    credit(ctx, t, { at: T.same, until: T.thats - 0.1, text: 'Example prices', y: 400, size: 30, plate: true });
     // what inflation is
     hook(ctx, t, { at: T.inflation, until: T.not - 0.1, text: 'INFLATION', y: 300, size: 124 });
     hook(ctx, t, { at: T.prices, until: T.not - 0.1, lines: ['PRICES IN GENERAL,', 'GOING UP'], y: 440, size: 58, colour: INK.amber });
     // one tag, then the whole basket
     hook(ctx, t, { at: T.not, until: T.whole - 0.1, text: 'NOT ONE PRICE TAG', y: 300, size: 66 });
     hook(ctx, t, { at: T.whole, until: T.to + 0.1, text: 'THE WHOLE BASKET', y: 300, size: 78, colour: INK.amber });
-    credit(ctx, t, { at: T.whole, until: T.to + 0.1, text: 'Example prices', y: 400, size: 28 });
+    credit(ctx, t, { at: T.whole, until: T.to + 0.1, text: 'Example prices', y: 400, size: 30, plate: true });
     // what really drives it? the shell factory
     hook(ctx, t, { at: T.drives - 0.2, until: T.shell - 0.1, text: 'WHAT REALLY DRIVES IT?', y: 300, size: 64 });
     hook(ctx, t, { at: T.shell, until: T.last + 3, lines: ['BACK TO', 'THE SHELL FACTORY'], y: 320, size: 66, colour: INK.amber });

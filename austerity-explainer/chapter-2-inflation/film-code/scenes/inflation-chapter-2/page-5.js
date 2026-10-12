@@ -435,7 +435,7 @@ export async function build(kit) {
       hook(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, text: 'BRITAIN’S CENTRAL BANK', y: 490, size: 46, colour: INK.muted });
       hook(ctx, t, { at: T.hundreds, until: T.study - 0.2, lines: ['HUNDREDS OF', 'BILLIONS'], y: 330, size: 104 });
       hook(ctx, t, { at: T.pounds, until: T.study - 0.2, text: 'OF POUNDS', y: 500, size: 70, colour: INK.amber });
-      sourceCredit(ctx, t, { at: T.study, until: T.last + 2, text: 'Bank of England study, 2012', y: 180 });
+      sourceCredit(ctx, t, { at: T.study, until: T.last + 2, text: 'Bank of England study, 2012', y: 152 });   // above the falling bundles' path
       risingArrow(ctx, t, { at: T.pushed2 - 0.1, until: T.gains - 0.15, box: [210, 330, 560, 380] });
       plate(ctx, t, { at: T.shares, until: T.gains - 0.15, x: 540, y: 890, w: 820, h: 220 });
       hook(ctx, t, { at: T.shares, until: T.gains - 0.15, text: 'SHARES ↑', y: 840, size: 78 });

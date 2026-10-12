@@ -362,10 +362,10 @@ export async function build(kit) {
       ctx.beginPath(); ctx.roundRect(150, 455 - 46, 780, 92, 18); ctx.fill(); ctx.restore();
     }
     hook(ctx, t, { at: T.quarter, until: T.november - 0.1, text: 'AS MUCH AS A QUARTER', y: 455, size: 52, colour: INK.paper });
-    hook(ctx, t, { at: T.november, until: T.within - 0.2, text: 'BY NOVEMBER', y: 150, size: 38, colour: INK.muted });
+    hook(ctx, t, { at: T.november, until: T.within - 0.2, text: 'BY NOVEMBER', y: 165, size: 38, colour: INK.paper });
     counter(ctx, t, { at: T.twenty - 0.05, until: T.within - 0.2, duration: 0.9, from: 0, to: 20000, y: 350, size: 150,
       format: (v) => (Math.round(v / 100) * 100).toLocaleString('en-GB') });
-    hook(ctx, t, { at: T.about, until: T.within - 0.2, text: 'ABOUT', y: 205, size: 44, colour: INK.muted });
+    hook(ctx, t, { at: T.about, until: T.within - 0.2, text: 'ABOUT', y: 220, size: 44, colour: INK.paper });
     hook(ctx, t, { at: T.refusing, until: T.within - 0.2, lines: ['HOUSEHOLDS', 'REFUSING TO PAY'], y: 480, size: 54, colour: INK.amber });
     hook(ctx, t, { at: T.parliament, until: T.homes2 - 0.2, text: 'PARLIAMENT', y: 200, size: 56, colour: INK.paper });
     hook(ctx, t, { at: T.homes2, until: T.last + 2, lines: ['HOMES CAN\u2019T', 'BE BUILT'], y: 330, size: 74 });
