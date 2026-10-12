@@ -14,6 +14,10 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 ## Where things stand
 
+- **Chapter 2, "what really causes inflation", has three outlines waiting for your choice**
+  ("18 Outlines - chapter 2 - what really causes inflation"), built on a new research ledger of 72
+  sourced facts ("18 Research - chapter 2 - what really causes inflation"). My pick is outline A, "Back
+  to the shell factory". Nothing recorded, painted or spent yet.
 - **Chapter 1 is finished in the paper look**: "13 Chapter 1 - where austerity came from - paper
   pop-up.mp4" (3 minutes 41 seconds), with captions ("13 Captions") and a cover picture ("13 Cover").
   All ten pages pop up, crash in and turn like a book on Malina's words; no hands.
@@ -84,6 +88,18 @@ crowd doubles as she says it. Your soundtrack plays underneath, dipping while sh
     `tools/check_sound_alignment.py`): joins the mix, makes the copy small enough to send, writes the
     captions, and measures that sound and pictures line up.
 
+**Chapter 2, so far (the same pieces as chapter 1, one step earlier):**
+
+14. **Research ledger for chapter 2** (`chapter-2-inflation/18 Research - chapter 2 - what really
+    causes inflation.md`): 72 facts in four parts (C2-H the history after chapter 1, C2-C real cases,
+    C2-N New Zealand now, C2-M how inflation works), each with its source and how sure it is. Written
+    from the research results (`chapter-2-inflation/research-and-outlines-raw.json`) by
+    `tools/write_research_ledger.py`. Hands facts to the outlines.
+15. **Outlines** (`chapter-2-inflation/18 Outlines - chapter 2 - what really causes inflation.md`):
+    three ways to tell the chapter, page by page, each fact tied to a ledger id. The one you choose
+    becomes the script, which then follows the same path as chapter 1 (recording, timing, mix,
+    paintings, paper pieces, page files, filming, finishing).
+
 ## Word list
 
 | Word | Plain meaning |
@@ -120,6 +136,14 @@ crowd doubles as she says it. Your soundtrack plays underneath, dipping while sh
 | Folded prop | A paper object built as a real folded shape with flat faces (not a painted cut-out), so each fold is lit differently. |
 | Distance picture | A grey picture of how far every point is from the camera (near dark, far light), drawn alongside a still so the finishing tool knows what to blur. |
 | Background blur | Softening what is nearer or farther than the point in focus, the way a camera lens does close up; it makes a model look photographed. |
+| Inflation | Prices in general going up over time, usually measured over a year: the whole shopping basket, not one price tag. |
+| New money | Money a government or its central bank creates, rather than collects in tax or borrows from savers. |
+| Central bank | The bank that issues a country's money and sets its main interest rate. New Zealand's is the Reserve Bank. |
+| Interest rate | The price of borrowing. Raising it is the usual cure for inflation: loans cost more, people spend less. |
+| Flat out | Every worker and machine already busy, so new money can't make more things, only push prices up. |
+| Honest edge | The part of the chapter that admits creating money does push prices up when it's spent where nothing more can be made. |
+| Outline | A page-by-page plan of a chapter: what Malina says and what appears, before any script is written. |
+| Verdict card | In outline C, a paper card stamped with what caused each price rise: the money, a shortage, or where it was spent. |
 
 ## Log (added to, never rewritten)
 
@@ -296,12 +320,36 @@ crowd doubles as she says it. Your soundtrack plays underneath, dipping while sh
     it looks on your phone. Unsure: the sheep are still the weakest part (white on white; their shadows
     read more clearly than they do).
 
+17. **Chapter 1 packed for handing over.** The research, notes, decisions, tools and rules behind
+    chapter 1 were packed into one zip ("17 Chapter 1 - research notes, decisions, tools and rules").
+    (Recorded here from the zip you uploaded; the session that made it isn't available, so this entry
+    has no more detail.)
+
+18. **Chapter 2 researched; three outlines.** You asked for part two on inflation, explained within
+    the first video, with about three outlines before anything is made, up to US$10 on fal for
+    paintings and ElevenLabs only for speech, and every helper at medium effort. Set the project up
+    in your repository (chapter 1's notes, research, scripts and rules, copied from the zip). Four
+    research helpers gathered 72 sourced facts (the history after chapter 1, real cases, New Zealand
+    now, how inflation works); 43 more claims they could not confirm were left out. Three outlines
+    were drafted from three angles (back to the shell factory; what happened next; five price tags)
+    and each was checked against the facts, your rules and chapter 1, then fixed. The checks caught,
+    among others: a line saying today's price rise is "mostly fuel" (wrong: without fuel it's still
+    2.9%); "too strong for too long" put on the wrong report; Britain's money creation shown beside a
+    0% inflation figure that really came from falling fuel and food prices; and Germany in 1923 said
+    to "stop" making coal and steel (the sources say only that output fell). Ten helpers in all, about
+    17 minutes. No cost. Not checked: Mattei's book itself; official Reserve Bank and Statistics New
+    Zealand pages, which refused automated reading (their figures come from bank and news reports and
+    your deficits report). A pull request couldn't be opened, because the repository has only this one
+    branch.
+
 ## Next step
 
-Tell me what you think of the open pop-up book picture.
+Tell me which outline to make (A, B or C, or a mix you name).
 
 ## Traps
 
+- The latest New Zealand inflation figure (4.1%, year to June 2026) may be replaced on 22 October 2026:
+  check it on the day chapter 2 is recorded.
 - Mattei's interpretations stay marked as hers ("Mattei says", "her answer"), however urgent the
   wording gets.
 - Your soundtrack is loud and dense (about -13 LUFS); it must always be turned down under Malina.

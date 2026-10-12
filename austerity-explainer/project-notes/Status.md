@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-12, 07:10 Brisbane time.**
+**As of 2026-10-12.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -71,15 +71,23 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Not checked: watching at full speed (only single frames can be looked at here), and how it plays on
   a phone screen.
 
+## Chapter 2: what really causes inflation (started 2026-10-12)
+
+- Research ledger: `chapter-2-inflation/18 Research - chapter 2 - what really causes inflation.md`
+  (72 sourced facts, ids C2-H, C2-C, C2-N, C2-M; 43 unconfirmed claims listed and kept out).
+- Three outlines: `chapter-2-inflation/18 Outlines - chapter 2 - what really causes inflation.md`
+  (A back to the shell factory, my pick; B what happened next; C five price tags). Each about 4 minutes,
+  ten pages, about US$1.50-1.75 of new paintings and about 3,500 ElevenLabs credits.
+- Nothing recorded, painted or spent.
+
 ## Waiting on you
 
+- Your choice of outline for chapter 2.
 - Nothing for chapter 1 (you said "This is fantastic."). The kit is ready to hand to the agent making
   the series on the enclosures.
 
 ## Not started
 
-- Chapter 2: what really causes inflation (your request: money creation is not the same as
-  inflation; it depends on where and how the money is spent).
 - Chapters 3 onward (where austerity was tested; Thatcher; social spending; New Zealand and
   Australia; what it did to people; bargaining power; why it is oppressive).
 
@@ -95,6 +103,8 @@ About US$5 in all.
 
 ## Traps
 
+- Chapter 2's newest New Zealand figures (4.1% inflation in the year to June 2026) may be replaced
+  on 22 October 2026; check before recording.
 - Re-recording any page of chapter 1 moves every time after it: redo the timing, the mix and the
   filming for the whole chapter (see `Workflows.md`).
 - Changing one page's file means filming that page's chunk again (delete it and run
