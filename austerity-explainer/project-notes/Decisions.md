@@ -321,6 +321,54 @@ overturn any of them in one line. Changes to the project must follow this file.
 - Eight page helpers built pages 1 and 4 to 10 in parallel from a written guide and the two finished
   pages (2 and 3), all at medium effort; I then checked every page's pictures myself.
 
+21. **Check the facts again** (your words): "Oh and do the research to ensure your facts are correct"
+
+### Claude's calls for item 21 (overturn any in one line)
+
+- Seven independent checkers each tried to prove one group of claims wrong from fresh, mostly primary
+  sources, including every number planned for the screen; a final reviewer settled disagreements and
+  looked for claims no group covered. Nothing was wrong; nothing was re-recorded.
+- Changed on screen: UP TO +25% (Glasgow), LOWEST ON RECORD with "Records began in 1986" (2021
+  unemployment), the last of the hundred dots nearly empty (1915 was 0.95%). Kept: ×4 for oil
+  ($2.90 to $11.65 is 4.02 times) and "about ½% a year" for Japan (the Bank of Japan's own figure).
+- Left for you to watch: page 10 says the Reserve Bank "is raising" its rate; its next decision is
+  28 October. New figures come out on 22 October (prices) and 4 November (unemployment).
+
+22. **Independent critique** (your words): "You need to use subagents to double check your work and
+    critique it."
+
+### Claude's calls for item 22
+
+- Seven critics and a skeptic before filming finished; filming was stopped and restarted after the
+  fixes, rather than patching a half-filmed chapter.
+- After the fixes, a second independent check confirmed each fix and caught four new problems the
+  fixes had caused; those were fixed too.
+- The politician's blue tie was recoloured charcoal (the critics read it as a possible party colour
+  in an election period); the original picture is kept.
+- The top-hatted "owners" caricature was removed (it added a claim the narration does not make); the
+  gains are shown as coins pouring onto the taller tower of notes.
+
+23. **A plugin** (your words): "I'm sorry to keep bothering you. But save your workflow and Dev a plugin
+    when you're done. You may need to save your generic scripts as you go so that other smaller models
+    can use the plugin."
+
+### Claude's calls for item 23
+
+- Named "explainer-film", kept in your repository (`plugins/explainer-film`) with a catalogue file at
+  the root, so it installs with two commands. It holds instructions, workflows, helper definitions,
+  the film engine and tools, and the two chapters as worked examples, but not your paintings,
+  recordings or music (those stay in the project).
+- Written step by step, with exact commands, costs and traps, so a smaller model can follow it.
+
+24. **The house** (your words): "Just one critique, that 3d house is sparse in detail. It doesn't stand
+    out as visually complete." and "Oh I saw that. Those shots look amazing. Thank you!"
+
+### Claude's calls for item 24
+
+- Rebuilt as a detailed New Zealand card villa with a small garden; reviewed by two critics before use.
+- On the model table its price tag climbs in arrows (↑ to ↑↑↑) rather than pounds, so no currency is
+  shown before the film reaches New Zealand; in the street it climbs in dollars.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
