@@ -215,6 +215,12 @@ Only failures in doing the work belong here. Newest at the bottom.
 54. **Stopping a filming job with a name pattern can stop your own command.** `pkill -f` with the
     script's name matched the shell running the command and killed it. Fix: stop the job manager and
     each drawing process by its number.
+55. **The card house looked unfinished** (your note: "sparse in detail"). It was a box with a roof and two
+    lit squares. Fix: a detailed card villa (weatherboards, hipped iron roof with ridge caps, chimney
+    with pots, bay window under a gable with fretwork, tall sash windows, a verandah with brackets
+    and a railing, a panelled door) on a small lawn with a picket fence, turned to show its depth in
+    the street. Two critics (a model maker and a film director) reviewed it first; their best points
+    went in. Lesson: a hero prop needs as much detail as the paintings around it.
 
 ## Traps
 
