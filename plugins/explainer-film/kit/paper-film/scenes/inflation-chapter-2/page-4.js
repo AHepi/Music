@@ -6,13 +6,13 @@
 //   - "workers poured into Glasgow for war work": three long files of workers stream in from the
 //     right and walk away up the street, one after another.
 //   - "landlords pushed rents up... by as much as a quarter": the camera turns to a notice board on the
-//     left-hand pavement; a printed notice (RENT RAISED) slaps onto it, then UP TO +25% / A QUARTER MORE.
+//     left-hand pavement; a printed notice (RENT RAISED) slaps onto it, then UP TO +25% / AS MUCH AS A QUARTER.
 //   - "By November, about twenty thousand households were refusing to pay the rise": a row of
 //     rent strikers with placards pops up on the pavement under the notice; 20,000 counts up,
 //     HOUSEHOLDS REFUSING TO PAY.
 //   - "Within weeks, Parliament froze rents": a rubber stamp slams down on the notice (shake, dust)
 //     and lifts away, leaving a red RENTS FROZEN stamp on it.
-//   - "Homes can't be built in a hurry": the camera comes back down the street to a small card house
+//   - "Homes can't be built in a hurry": a quick dip to black on "homes" cuts to a small card house
 //     on the cobbles, its walls going up one slow course at a time beside the faint outline of the
 //     finished house; HOMES CAN'T BE BUILT / IN A HURRY.
 // Narration words used are listed in T below; every time comes from Malina's recording.
@@ -48,7 +48,11 @@ export async function build(kit) {
     last: kit.lastWordEnd,
   };
   T.slam = T.froze + 0.12;
-  T.clear = T.homes2 + 0.45; // the wall scene folds away
+  // "Homes can't be built": a quick dip to black that bottoms out on "homes"; under the black the
+  // wall scene (board, notice, stamp, strikers) is hidden and the camera cuts to the building site,
+  // so the foundation shot starts clean
+  T.cut = T.homes2;
+  T.dipIn = 0.22; T.dipOut = 0.26;
 
   kit.lightRig({ keyColour: 0xffc887, keyShare: 0.72, keyFrom: [4, 6, -4], keyTarget: [-1.5, -2, -15], fillSky: 0x5f7a92, fillGround: 0x2a241e,
     fillShare: 0.22, haze: 0x182230, hazeDensity: 0.005, shadowBox: 12, shadowSoftness: 5, background: 0x0f1720, reflections: 0.3 });
@@ -174,13 +178,13 @@ export async function build(kit) {
     }
   }
   house.add(outline);
-  // one course every 0.8 s, from "homes" on: only a few are up by the end
-  const courseAt = (i) => T.homes2 + 0.75 + i * 0.75;
+  // one course every 0.75 s, from just after the cut: only a few are up by the end
+  const courseAt = (i) => T.cut + 0.45 + i * 0.75;
 
   // ------------------------------------------------------------------ the camera
   const noticeFocus = [noticeCentre.x, noticeCentre.y, noticeCentre.z];
   const wallTarget2 = [noticeCentre.x + 0.4, noticeCentre.y - 0.22, noticeCentre.z];
-  const shot = kit.shot([
+  const wallShot = kit.shot([
     { t: T.start, position: [0, 0.25, 0.6], target: [0, -0.5, -30], fov: 40, focus: 18 },
     { t: T.y1915 + 0.3, position: [0.05, 0.1, -0.2], target: [0, -0.75, -30], fov: 39, focus: 14 },
     { t: T.glasgow, position: [0.15, -0.15, -0.9], target: [0.1, -1.25, -30], fov: 38, focus: 12 },
@@ -188,10 +192,16 @@ export async function build(kit) {
     { t: T.november, position: [0.4, -0.25, -1.3], target: [wallTarget2[0], wallTarget2[1] - 0.1, wallTarget2[2]], fov: 23.5, focus: noticeFocus },
     { t: T.rise, position: [0.45, -0.3, -1.5], target: [wallTarget2[0], wallTarget2[1] - 0.1, wallTarget2[2]], fov: 23, focus: [strikersAt[0], strikersAt[1] + 0.7, strikersAt[2]] },
     { t: T.parliament, position: [0.45, -0.3, -1.6], target: [wallTarget2[0], wallTarget2[1], wallTarget2[2]], fov: 21, focus: noticeFocus },
-    { t: T.homes2 + 0.35, position: [0.45, -0.32, -1.7], target: [wallTarget2[0], wallTarget2[1], wallTarget2[2]], fov: 20.5, focus: noticeFocus },
-    { t: T.hurry + 0.35, position: [0.3, -0.55, -2.0], target: [site.x, site.y + 0.55, site.z], fov: 30, focus: [site.x, site.y + 0.4, site.z] },
-    { t: T.last + 1.4, position: [0.25, -0.65, -2.4], target: [site.x, site.y + 0.5, site.z], fov: 28, focus: [site.x, site.y + 0.4, site.z] },
+    { t: T.cut, position: [0.45, -0.32, -1.68], target: [wallTarget2[0], wallTarget2[1], wallTarget2[2]], fov: 20.6, focus: noticeFocus },
   ], { handheld: 0.01, seed: 4 });
+  // after the cut: a slow push in on the building site
+  const siteFocus = [site.x, site.y + 0.4, site.z];
+  const siteShot = kit.shot([
+    { t: T.cut, position: [0.34, -0.47, -1.7], target: [site.x, site.y + 0.58, site.z], fov: 31, focus: siteFocus },
+    { t: T.hurry + 0.35, position: [0.3, -0.55, -2.0], target: [site.x, site.y + 0.55, site.z], fov: 30, focus: siteFocus },
+    { t: T.last + 1.4, position: [0.25, -0.65, -2.4], target: [site.x, site.y + 0.5, site.z], fov: 28, focus: siteFocus },
+  ], { handheld: 0.01, seed: 5 });
+  const shot = (t) => (t < T.cut ? wallShot(t) : siteShot(t));
   kit.shake(T.pushed + 0.12, 0.006, 0.12);
   kit.shake(T.slam, 0.02, 0.16);
 
@@ -208,12 +218,12 @@ export async function build(kit) {
     }
     // the board pops up on "landlords"
     const boardUp = t < T.landlords - 0.1 ? 0 : 1 - spring(t - (T.landlords - 0.1), { stiffness: 14, damping: 0.6 });
-    const boardDown = foldDown(t, T.clear, 0.3);
-    boardGroup.visible = t > T.landlords - 0.1 && boardDown.visible;
-    boardGroup.rotation.x = (Math.PI / 2) * (1 - boardUp) + (t > T.clear ? -boardDown.fold : 0);
+    const wall = t < T.cut; // everything at the wall is hidden under the dip, never lowered or tipped
+    boardGroup.visible = t > T.landlords - 0.1 && wall;
+    boardGroup.rotation.x = (Math.PI / 2) * (1 - boardUp);
     // the notice slaps onto the board
     if (t < T.pushed) notice.set({ visible: false });
-    else if (t > T.clear) notice.set(foldDown(t, T.clear, 0.3));
+    else if (!wall) notice.set({ visible: false });
     else {
       const age = t - T.pushed;
       const k = spring(age, { stiffness: 18, damping: 0.6 });
@@ -230,24 +240,24 @@ export async function build(kit) {
       const squash = t >= stampDown && t < stampDown + 0.3 ? 1 - 0.04 * Math.exp(-(t - stampDown) / 0.08) : 1;
       stamp.set({ dy, lift: 0.12, scale: squash, roll: t < stampDown ? 0.05 * (1 - ramp(t, stampDown - 0.6, stampDown)) : 0 });
     }
-    if (t < T.slam) frozen.set({ visible: false });
-    else if (t > T.clear) frozen.set({ ...foldDown(t, T.clear, 0.3), lift: 0.03, roll: -0.13 });
+    if (t < T.slam || !wall) frozen.set({ visible: false });
     else frozen.set({ lift: 0.03, roll: -0.13, scale: 1 + 0.12 * Math.exp(-(t - T.slam) / 0.07) });
-    if (t > T.slam - 0.05 && t < T.slam + 1.3) dust.set({ origin: [noticeCentre.x + 0.1, noticeCentre.y - 0.25, noticeCentre.z + 0.3], width: 1.0, age: t - T.slam, scale: 0.35 });
+    if (t > T.slam - 0.05 && t < Math.min(T.slam + 1.3, T.cut)) dust.set({ origin: [noticeCentre.x + 0.1, noticeCentre.y - 0.25, noticeCentre.z + 0.3], width: 1.0, age: t - T.slam, scale: 0.35 });
     else dust.hide();
     // the strikers pop up on "about" and stay until the camera leaves
-    strikers.set(t < T.clear ? popUp(t, T.about - 0.15, { height: 1.18, restZ: 0.3 }) : foldDown(t, T.clear, 0.3));
+    strikers.set(wall ? popUp(t, T.about - 0.15, { height: 1.18, restZ: 0.3 }) : { visible: false });
     // the house: courses drop into place one by one; the outline fades in
-    const show = t > T.clear + 0.15;
-    house.visible = show;
-    lineMaterial.opacity = 0.75 * smooth(ramp(t, T.homes2 + 0.8, T.homes2 + 1.4));
+    house.visible = !wall;
+    lineMaterial.opacity = 0.75 * smooth(ramp(t, T.cut + 0.3, T.cut + 0.9));
     courses.forEach((course, i) => {
       const at = courseAt(i);
       const k = clamp01((t - (at - 0.25)) / 0.25);
       course.visible = t > at - 0.25;
       course.position.y = course.userData.y + 0.35 * (1 - k * k) + knock(t - at, 0.004, 6, 0.1);
     });
-    return { camera: shot(t), look: { aperture: 8, maxBlur: 14, exposure: 0.95, glowThreshold: 0.93, glowStrength: 0.68, contrast: 1.06 } };
+    // the dip: black exactly on the cut, picture back about a quarter second later
+    const fade = t < T.cut ? smooth(ramp(t, T.cut - T.dipIn, T.cut)) : 1 - smooth(ramp(t, T.cut, T.cut + T.dipOut));
+    return { camera: shot(t), look: { aperture: 8, maxBlur: 14, exposure: 0.95, glowThreshold: 0.93, glowStrength: 0.68, contrast: 1.06, fade } };
   }
 
   function draw2D(ctx, t) {
@@ -255,14 +265,14 @@ export async function build(kit) {
     placeTitle(ctx, t, { at: T.y1915, until: T.landlords - 0.2, place: 'Glasgow', year: 1915, y: 280 });
     hook(ctx, t, { at: T.workers + 0.2, until: T.landlords - 0.1, lines: ['WORKERS POUR IN'], y: 420, size: 62, colour: INK.muted });
     hook(ctx, t, { at: T.quarter - 0.1, until: T.november - 0.1, text: 'UP TO +25%', y: 330, size: 112, colour: INK.amber });
-    hook(ctx, t, { at: T.quarter + 0.25, until: T.november - 0.1, text: 'A QUARTER MORE', y: 455, size: 52 });
-    hook(ctx, t, { at: T.november, until: T.within - 0.2, text: 'BY NOVEMBER', y: 190, size: 38, colour: INK.muted });
-    counter(ctx, t, { at: T.twenty - 0.05, until: T.within - 0.2, duration: 0.9, from: 0, to: 20000, y: 420, size: 150,
+    hook(ctx, t, { at: T.quarter + 0.25, until: T.november - 0.1, text: 'AS MUCH AS A QUARTER', y: 455, size: 52 });
+    hook(ctx, t, { at: T.november, until: T.within - 0.2, text: 'BY NOVEMBER', y: 150, size: 38, colour: INK.muted });
+    counter(ctx, t, { at: T.twenty - 0.05, until: T.within - 0.2, duration: 0.9, from: 0, to: 20000, y: 350, size: 150,
       format: (v) => (Math.round(v / 100) * 100).toLocaleString('en-GB') });
-    hook(ctx, t, { at: T.about, until: T.within - 0.2, text: 'ABOUT', y: 255, size: 44, colour: INK.muted });
-    hook(ctx, t, { at: T.refusing, until: T.within - 0.2, lines: ['HOUSEHOLDS', 'REFUSING TO PAY'], y: 555, size: 54, colour: INK.amber });
-    hook(ctx, t, { at: T.parliament, until: T.homes2 - 0.2, text: 'PARLIAMENT', y: 300, size: 56, colour: INK.muted });
-    hook(ctx, t, { at: T.homes2, until: T.last + 2, lines: ["HOMES CAN'T", 'BE BUILT'], y: 330, size: 74 });
+    hook(ctx, t, { at: T.about, until: T.within - 0.2, text: 'ABOUT', y: 205, size: 44, colour: INK.muted });
+    hook(ctx, t, { at: T.refusing, until: T.within - 0.2, lines: ['HOUSEHOLDS', 'REFUSING TO PAY'], y: 480, size: 54, colour: INK.amber });
+    hook(ctx, t, { at: T.parliament, until: T.homes2 - 0.2, text: 'PARLIAMENT', y: 300, size: 56, colour: INK.paper });
+    hook(ctx, t, { at: T.homes2, until: T.last + 2, lines: ['HOMES CAN\u2019T', 'BE BUILT'], y: 330, size: 74 });
     hook(ctx, t, { at: T.hurry - 0.05, until: T.last + 2, text: 'IN A HURRY', y: 470, size: 74, colour: INK.amber });
     return true;
   }

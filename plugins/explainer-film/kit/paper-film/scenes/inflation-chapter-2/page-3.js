@@ -14,7 +14,7 @@
 
 import { THREE, popUp, foldDown, clamp01, smooth, ramp, lerp, degrees, spring } from '../cinema-kit.js';
 import { CoinRain, DustBurst } from '../effects.js';
-import { callout, hook, INK } from '../graphics.js';
+import { callout, hook, credit, INK } from '../graphics.js';
 import { buildTwoFactories, FACTORY_A, FACTORY_B } from './two-factories-set.js';
 
 export async function build(kit) {
@@ -67,19 +67,22 @@ export async function build(kit) {
   }
 
   // the camera: a crane down onto both factories, then to A, across to B, and back to settle on B
+  // (close-ups are framed so each price board sits fully inside x 140..940 of the frame; while the
+  // shells come out the camera pulls back so the shells and A's board share the picture)
   const shot = kit.shot([
     { t: T.start, position: [0.2, 8.5, 21], target: [0.1, 1.6, -3.0], fov: 40, focus: [0, 0.6, -1] },
     { t: T.two + 0.5, position: [0.5, 5.6, 14.5], target: [0.1, 1.2, -2.2], fov: 40, focus: [0, 0.6, -1] },
-    { t: T.first + 1.5, position: [0.3, 3.9, 10.2], target: [-1.2, 0.75, 2.6], fov: 38, focus: [-1.3, 0.6, 3.2] },
-    { t: T.money1, position: [0.4, 3.6, 9.6], target: [-1.2, 0.55, 2.9], fov: 38, focus: [a.yard.x, 0.1, a.yard.z] },
-    { t: T.shells + 0.6, position: [-0.2, 2.6, 8.2], target: [-1.6, 0.45, 3.2], fov: 38, focus: [-2.4, 0.2, 3.55] },
-    { t: T.barely + 0.6, position: [0.6, 2.3, 7.4], target: [-0.3, 0.9, 3.4], fov: 36, focus: [a.boardAt.x, a.boardAt.y, a.boardAt.z] },
-    { t: T.second + 1.4, position: [3.0, 3.9, 3.8], target: [1.5, 0.75, -3.8], fov: 38, focus: [1.5, 0.6, -3.2] },
-    { t: T.money2, position: [3.1, 3.6, 3.2], target: [1.5, 0.55, -3.5], fov: 38, focus: [b.yard.x, 0.1, b.yard.z] },
-    { t: T.bid, position: [3.9, 2.5, 2.2], target: [2.5, 0.85, -2.9], fov: 36, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
-    { t: T.climb + 1.0, position: [3.8, 2.3, 1.8], target: [2.6, 0.95, -2.8], fov: 34, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
-    { t: T.britain + 0.8, position: [2.4, 5.0, 6.5], target: [1.6, 0.9, -3.6], fov: 38, focus: [1.6, 0.8, -3.4] },
-    { t: T.end + 1.2, position: [1.9, 2.7, 4.6], target: [1.7, 0.55, -1.8], fov: 38, focus: [1.7, 0.3, -1.6] },
+    { t: T.first + 1.5, position: [0.8, 3.9, 10.2], target: [-0.7, 0.75, 2.6], fov: 38, focus: [-1.0, 0.6, 3.2] },
+    { t: T.money1, position: [0.8, 3.7, 9.9], target: [-0.8, 0.55, 2.9], fov: 38, focus: [a.yard.x, 0.1, a.yard.z] },
+    { t: T.shells + 0.6, position: [0.1, 4.6, 14.2], target: [-1.2, 0.5, 3.2], fov: 38, focus: [-1.3, 0.3, 3.6] },
+    { t: T.barely + 0.6, position: [0.4, 3.8, 12.6], target: [-0.9, 0.8, 3.4], fov: 36, focus: [a.boardAt.x, a.boardAt.y, a.boardAt.z] },
+    { t: T.second + 1.0, position: [3.9, 4.85, 6.1], target: [1.95, 0.75, -3.8], fov: 38, focus: [1.8, 0.6, -3.0] },
+    { t: T.money2, position: [3.85, 4.5, 5.6], target: [1.95, 0.55, -3.5], fov: 38, focus: [b.yard.x, 0.1, b.yard.z] },
+    { t: T.noMore + 0.9, position: [3.85, 4.1, 4.9], target: [2.05, 0.6, -3.3], fov: 38, focus: [1.9, 0.3, -2.9] },
+    { t: T.bid, position: [3.9, 2.6, 2.4], target: [2.6, 0.85, -2.9], fov: 36, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
+    { t: T.climb + 1.0, position: [3.8, 2.3, 1.8], target: [2.7, 0.95, -2.8], fov: 34, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
+    { t: T.britain + 0.8, position: [2.55, 5.0, 6.5], target: [1.95, 0.9, -3.6], fov: 38, focus: [1.8, 0.8, -3.4] },
+    { t: T.end + 1.2, position: [2.05, 3.9, 8.4], target: [1.85, 0.5, -1.8], fov: 38, focus: [1.8, 0.3, -1.6] },
 ], { handheld: 0.015, seed: 3 });
 
   // the prices on each counter
@@ -138,13 +141,19 @@ export async function build(kit) {
 
   function draw2D(ctx, t) {
     const at = (p) => kit.toScreen(p);
-    callout(ctx, t, { at: T.idle, until: T.goIn + 0.2, point: at([FACTORY_A.x - 0.8, 0.95, FACTORY_A.z + 1.05]), text: 'IDLE', dx: -120, dy: -240 });
-    callout(ctx, t, { at: T.shells + 0.5, until: T.prices1 - 0.1, point: at(a.shellAt(2).setY(0.3)), text: 'MORE SHELLS', dx: -60, dy: -300 });
-    callout(ctx, t, { at: T.prices1, until: T.second - 0.2, point: at(a.boardAt.clone().setY(1.17)), text: 'BARELY MOVE', dx: 60, dy: -260 });
-    callout(ctx, t, { at: T.flat, until: T.money2 - 0.1, point: at([FACTORY_B.x - 0.8, 0.95, FACTORY_B.z + 1.05]), text: 'FLAT OUT', dx: -100, dy: -260 });
-    callout(ctx, t, { at: T.noMore + 0.1, until: T.bid - 0.1, point: at(b.shellAt(4).setY(0.3)), text: 'NO MORE SHELLS', dx: -80, dy: -300 });
-    callout(ctx, t, { at: T.climb, until: T.britain - 0.1, point: at(b.boardAt.clone().setY(1.17)), text: 'PRICES CLIMB', dx: -120, dy: -260, accent: INK.red });
-    hook(ctx, t, { at: T.britain, until: T.short - 0.2, lines: ['BRITAIN', 'AT WAR'], x: 540, y: 330, size: 92 });
+    // labels sit on dark plates (the walls and roofs behind them are pale); board callouts point at
+    // the board's top rim, not through its digits
+    const rim = (board) => at(board.clone().setY(1.27));
+    const label = { plate: true, size: 52, margin: 140 };
+    callout(ctx, t, { ...label, at: T.idle, until: T.goIn + 0.2, point: at([FACTORY_A.x + 0.35, 0.95, FACTORY_A.z + 1.05]), text: 'IDLE', dx: 60, dy: -300 });   // a window that stays in frame
+    callout(ctx, t, { ...label, at: T.shells + 0.1, until: T.barely - 0.1, point: at(a.shellAt(2).setY(0.3)), text: 'MORE SHELLS', dx: 60, dy: -300 });
+    callout(ctx, t, { ...label, at: T.barely, until: T.second - 0.2, point: rim(a.boardAt), text: 'BARELY MOVE', dx: -60, dy: -260 });
+    callout(ctx, t, { ...label, at: T.flat, until: T.money2 - 0.1, point: at([FACTORY_B.x - 0.8, 0.95, FACTORY_B.z + 1.05]), text: 'FLAT OUT', dx: 100, dy: -260 });
+    callout(ctx, t, { ...label, at: T.noMore + 0.1, until: T.bid - 0.1, point: at(b.shellAt(6).setY(0.3)), text: 'NO MORE SHELLS', dx: -60, dy: -300 });
+    callout(ctx, t, { ...label, at: T.climb, until: T.britain - 0.1, point: rim(b.boardAt.clone().setX(b.boardAt.x + 0.3)), text: 'PRICES CLIMB', dx: -140, dy: -260, accent: INK.red });
+    hook(ctx, t, { at: T.britain, until: T.short - 0.2, lines: ['BRITAIN', 'AT WAR'], x: 470, y: 290, size: 92 });   // clear of factory B's chimney
+    hook(ctx, t, { at: T.short, until: T.end + 1.2, text: 'SHORT OF', x: 470, y: 290, size: 80 });
+    credit(ctx, t, { at: T.first, until: T.britain, text: 'Example prices', y: 1460, size: 28 });
     return true;
   }
 

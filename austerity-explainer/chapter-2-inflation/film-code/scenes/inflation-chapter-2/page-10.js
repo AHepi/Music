@@ -16,7 +16,7 @@
 import { THREE, popUp, clamp01, smooth, smoother, ramp, lerp, spring } from '../cinema-kit.js';
 import { dial, PAPER, paper } from '../models.js';
 import { Motes } from '../effects.js';
-import { placeTitle, hook, counter, presence, INK } from '../graphics.js';
+import { placeTitle, hook, counter, credit, presence, INK } from '../graphics.js';
 
 const FACE_TURN = Math.PI / 2;
 
@@ -67,8 +67,8 @@ export async function build(kit) {
   const daylight = new THREE.Color(0xffffff), dusk = new THREE.Color(0xe2ae90);
 
   // the interest-rate dial on a post at the kerb, right of frame
-  const dialFoot = street.pointAt(0.72, 0.27);
-  const rate = dial({ radius: 0.62, min: 0, max: 6, step: 1, label: 'INTEREST RATE', unit: '%' });
+  const dialFoot = street.pointAt(0.69, 0.27);   // a little left, clear of the right-hand phone buttons
+  const rate = dial({ radius: 0.62, min: 0, max: 6, step: 1, label: 'INTEREST', unit: '%' });
   const dialCentre = new THREE.Vector3(dialFoot.x, dialFoot.y + 1.6, dialFoot.z);
   rate.group.position.copy(dialCentre);
   rate.group.rotation.y = -0.12;
@@ -109,12 +109,15 @@ export async function build(kit) {
     { t: T.fadeEnd + 0.3, position: [0, -0.05, -0.55], target: [0, 0.8, -30], fov: 38, focus: [faceAt.x, faceAt.y, faceAt.z] },
   ], { handheld: 0.01, seed: 11 });
 
-  // the needle: 0.25 at the start, swings to 5.5 on "five and a half", eases down out of focus
-  // while the queue is shown (the cuts of 2024-25), then ticks up twice on "raising ... again"
+  // the needle: 0.25 at the start, swings to 5.5 on "five and a half" (capped: it never passes the
+  // 5.5 she says) and holds there through the unemployment beat; it only resets to the 2026 level
+  // on "this year", then ticks up twice on "raising ... again"
   function rateAt(t) {
     let v = 0.25;
-    if (t > T.to) v = lerp(0.25, 5.5, 1 - spring((t - T.to) * 0.9, { stiffness: 9, damping: 0.6 }));
-    const ease = smoother(ramp(t, T.unemployment + 0.6, T.thisYear - 0.2));
+    if (t > T.to) v = Math.min(5.5, lerp(0.25, 5.5, 1 - spring((t - T.to) * 0.9, { stiffness: 9, damping: 0.6 })));
+    // the jump back to 2.25 (the cuts of 2024-25, not narrated) happens inside a quick pop of the dial on
+    // "this year", while it is small, so the needle is never seen falling while she says "raising"
+    const ease = smoother(ramp(t, T.thisYear + 0.05, T.thisYear + 0.3));
     v = lerp(v, 2.25, ease);
     v += 0.25 * smooth(ramp(t, T.raising, T.raising + 0.35)) + 0.25 * smooth(ramp(t, T.again - 0.25, T.again + 0.1));
     return v;
@@ -131,6 +134,8 @@ export async function build(kit) {
     streetMaterial.emissive.copy(daylight).lerp(dusk, 0.25 + 0.5 * k);
 
     rate.setValue(rateAt(t));
+    const pop = Math.sin(Math.PI * clamp01((t - (T.thisYear - 0.05)) / 0.45));
+    rate.group.scale.setScalar(1 - 0.85 * pop);
     // small knock of the dial as the needle hits 5.5
     const knockAge = t - (T.half + 0.1);
     rate.group.rotation.z = knockAge > 0 && knockAge < 1.2 ? 0.02 * Math.exp(-knockAge * 5) * Math.sin(knockAge * 30) : 0;
@@ -198,12 +203,16 @@ export async function build(kit) {
     const shownRate = t < T.to ? 0.25 : Math.min(5.5, Math.max(0.25, rateAt(t)));
     figure(ctx, t, { at: T.from, until: T.since - 0.2, value: Math.round(shownRate * 100) / 100, caption: 'Interest rate', y: 500 });
     hook(ctx, t, { at: T.by, until: T.since - 0.2, text: '2023', y: 625, size: 54, colour: INK.paper });
-    hook(ctx, t, { at: T.bring, until: T.since - 0.2, text: 'to bring prices down', y: 700, size: 40, colour: INK.muted });
+    hook(ctx, t, { at: T.bring, until: T.since - 0.2, text: 'TO BRING PRICES DOWN', y: 700, size: 40, colour: INK.muted });
 
-    const jobless = lerp(3.2, 5.6, smooth(ramp(t, T.to2, T.six + 0.2)));
-    hook(ctx, t, { at: T.since, until: T.and - 0.1, text: 'SINCE THE END OF 2021', y: 260, size: 40, colour: INK.muted });
-    figure(ctx, t, { at: T.three, until: T.and - 0.1, value: jobless, caption: 'Unemployment', y: 470, format: tenths });
-    hundredDots(ctx, t, { at: T.unemployment, until: T.and - 0.1, x: 130, y: 660, empty: Math.round(jobless), firstEmpty: 3 });
+    // the count lands on 5.6 as she says "five", then holds still until "this year"
+    const jobless = lerp(3.2, 5.6, smooth(ramp(t, T.to2 - 0.1, T.five2 + 0.25)));
+    const joblessUntil = T.thisYear + 0.2;
+    hook(ctx, t, { at: T.since, until: T.thisYear - 0.05, text: 'SINCE THE END OF 2021', y: 260, size: 40, colour: INK.muted });
+    figure(ctx, t, { at: T.three, until: joblessUntil, value: jobless, caption: 'Unemployment', y: 470, format: tenths });
+    hundredDots(ctx, t, { at: T.unemployment, until: joblessUntil, x: 130, y: 660, empty: Math.round(jobless), firstEmpty: 3 });
+    hook(ctx, t, { at: T.unemployment + 0.4, until: joblessUntil, text: 'EACH DOT = 1 IN 100 WORKERS', x: 310, y: 1095, size: 26, colour: INK.muted });
+    credit(ctx, t, { at: T.from, until: T.cut - 0.15, text: 'Stats NZ; Reserve Bank of New Zealand' });
 
     const later = 2.25 + 0.25 * smooth(ramp(t, T.raising, T.raising + 0.35)) + 0.25 * smooth(ramp(t, T.again - 0.25, T.again + 0.1));
     hook(ctx, t, { at: T.thisYear, until: T.cut - 0.15, text: '2026', y: 260, size: 54, colour: INK.paper });
@@ -212,15 +221,8 @@ export async function build(kit) {
 
     // ---- B
     if (t >= T.cut) {
-      const quote = presence(t, T.newMoney, T.ask - 0.1, 0.25, 0.3);
-      if (quote > 0) {
-        ctx.save(); ctx.globalAlpha = quote;
-        ctx.shadowColor = INK.shadow; ctx.shadowBlur = 22; ctx.shadowOffsetY = 3;
-        ctx.fillStyle = INK.paper; ctx.font = 'italic 600 52px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('“New money causes', 520, 300);
-        ctx.fillText('inflation.”', 520, 366);
-        ctx.restore();
-      }
+      // what 'someone' says, as an upright hook
+      hook(ctx, t, { at: T.newMoney, until: T.ask - 0.1, lines: ['“New money causes', 'inflation.”'], y: 330, size: 72 });
       hook(ctx, t, { at: T.spent, until: T.fadeEnd + 1, text: 'SPENT ON WHAT?', y: 290, size: 88 });
       hook(ctx, t, { at: T.who, until: T.fadeEnd + 1, lines: ['WHO PAYS', 'TO STOP IT?'], y: 440, size: 88, colour: INK.amber });
     }

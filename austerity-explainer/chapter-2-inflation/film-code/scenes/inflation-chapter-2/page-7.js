@@ -38,6 +38,7 @@ export async function build(kit) {
     fuel: kit.at('fuel'),
     dearer: kit.at('dearer'),
     so: kit.at('so'),
+    sometimes: kit.at('sometimes'),
     isnt: kit.at("isn't"),
     spending: kit.at('spending'),
     costs: kit.at('costs'),
@@ -54,7 +55,7 @@ export async function build(kit) {
     end: kit.lastWordEnd,
   };
   // the cut to New Zealand, hidden in a quick dip to black on "And"
-  const cut = T.and + 0.05;
+  const cut = T.and + 0.2;
 
   // ------------------------------------------------------------------ part A: the petrol station
   kit.lightRig({ keyColour: 0xffd09a, keyShare: 0.75, keyFrom: [2.8, 5.5, -3.5], keyTarget: [0, -2.1, -7.6], fillSky: 0x6f86a0, fillGround: 0x1c1a18,
@@ -76,9 +77,9 @@ export async function build(kit) {
   const flap = splitFlap({ cells: 6, cellWidth: 0.15, gap: 0.03, flipTime: 0.14 });
   const flapBase = barrelAt.clone().add(new THREE.Vector3(0, barrel.height, 0));
   kit.scene.add(flap.group);
-  const flapUp = T.oil + 0.35;
+  const flapUp = T.oil + 0.05;
   const priceSchedule = [{ t: flapUp - 0.01, text: '$2.90' },
-    ...countSchedule({ from: 2.9, to: 11.65, start: T.nearly + 0.05, finish: T.quadruples + 0.75, steps: 12, format: (v) => `$${v.toFixed(2)}` }).slice(1)];
+    ...countSchedule({ from: 2.9, to: 11.65, start: T.quadruples + 0.2, finish: T.quadruples + 1.0, steps: 12, format: (v) => `$${v.toFixed(2)}` }).slice(1)];
 
   // a row of price tags lying on the concrete in front, flipping up one after another
   const tags = [];
@@ -236,16 +237,21 @@ export async function build(kit) {
       const ca = presence(t, T.oil + 0.6, T.almost - 0.1, 0.3, 0.3);
       if (ca > 0) {
         ctx.save(); ctx.globalAlpha = ca;
-        ctx.shadowColor = INK.shadow; ctx.shadowBlur = 16;
-        ctx.fillStyle = INK.paper; ctx.font = '800 46px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-        ctx.fillText('A BARREL', flapTop.x, flapTop.y + 34);
+        // on a dark plate just under the counter, so it reads over the red barrel
+        ctx.font = '800 42px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        const cw = ctx.measureText('A BARREL').width + 40, cy = flapTop.y + 40;
+        ctx.fillStyle = 'rgba(12,16,18,0.78)';
+        ctx.beginPath(); ctx.roundRect(flapTop.x - cw / 2, cy - 30, cw, 60, 14); ctx.fill();
+        ctx.fillStyle = INK.paper;
+        ctx.fillText('A BARREL', flapTop.x, cy + 2);
         ctx.restore();
       }
       hook(ctx, t, { at: T.quadruples + 0.1, until: T.almost - 0.1, text: '×4', y: 300, size: 170, colour: INK.amber });
       hook(ctx, t, { at: T.three - 0.05, until: T.almost - 0.1, text: 'IN ABOUT 3 MONTHS', y: 440, size: 58 });
       hook(ctx, t, { at: T.dearer, until: T.so - 0.1, text: 'DEARER', y: 330, size: 120, colour: INK.amber });
-      struck(ctx, t, { at: T.isnt - 0.05, strikeAt: T.spending + 0.35, until: cut - 0.2, text: 'NOT SPENDING', y: 300, size: 84 });
-      hook(ctx, t, { at: T.costs, until: cut - 0.2, text: 'COSTS', y: 440, size: 140, colour: INK.amber });
+      hook(ctx, t, { at: T.sometimes, until: cut + 0.1, text: 'SOMETIMES', y: 196, size: 48, colour: INK.muted });
+      struck(ctx, t, { at: T.isnt - 0.05, strikeAt: T.spending + 0.35, until: cut + 0.1, text: 'NOT SPENDING', y: 300, size: 84 });
+      hook(ctx, t, { at: T.costs, until: cut + 0.1, text: 'COSTS', y: 440, size: 140, colour: INK.amber });
     } else {
       twoBars(ctx, t, { at: T.here + 0.1, until: T.end + 2 });
     }

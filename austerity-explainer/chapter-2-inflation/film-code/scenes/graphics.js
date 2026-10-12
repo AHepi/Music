@@ -101,7 +101,8 @@ export function counter(ctx, t, { at, until = at + 4, duration = 1.2, from = 0, 
 
 // A label with a thin line pointing at a spot in the picture (`point` in pixels, e.g. from
 // kit.toScreen). The line draws out from the spot, then the words appear at its end.
-export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70 }) {
+// plate: true draws a dark rounded plate behind the words, so they read over pale walls or sky.
+export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, plate = false }) {
   const a = presence(t, at, until, 0.01, 0.3);
   if (a <= 0 || !point || point.behind) return false;
   const age = t - at;
@@ -123,6 +124,14 @@ export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy 
   ctx.beginPath(); ctx.moveTo(point.x, point.y); ctx.lineTo(end.x, end.y); ctx.lineTo(end.x + side * 40 * k, end.y); ctx.stroke();
   ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(point.x, point.y, 7, 0, Math.PI * 2); ctx.fill();
   ctx.globalAlpha = a * clamp01((age - 0.3) / 0.25);
+  if (plate) {
+    const textWidth = labelWidth - 52, padX = size * 0.45, padY = size * 0.32;
+    const left = side > 0 ? end.x + side * 52 - padX : end.x + side * 52 - textWidth - padX;
+    noShadow(ctx);
+    ctx.fillStyle = 'rgba(12,16,18,0.72)';
+    ctx.beginPath(); ctx.roundRect(left, end.y - size / 2 - padY, textWidth + 2 * padX, size + 2 * padY, size * 0.3); ctx.fill();
+    withShadow(ctx, 12);
+  }
   ctx.fillStyle = colour; ctx.textBaseline = 'middle';
   ctx.textAlign = side > 0 ? 'left' : 'right';
   ctx.fillText(text, end.x + side * 52, end.y);

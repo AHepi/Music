@@ -79,11 +79,13 @@ export async function build(kit) {
   kit.scene.add(meterRig);
   const meterCentre = postAt.clone().add(new THREE.Vector3(0, 2.35, 0));
   // a stack of coins on the pavement (people's spending money), pulled back to the bank coin by coin
-  const stackAt = street.pointAt(0.6, 0.06);
+  // (moved up from v 0.06, where it sat half off the bottom edge, and right of the bank; with the camera tipped down a
+  // little on "loans" it sits on the pavement in mid-frame, screen y about 1300)
+  const stackAt = street.pointAt(0.645, 0.125);
   const coins = [];
   const random = seededRandom(9);
   for (let i = 0; i < 9; i++) {
-    const c = coin({ radius: 0.19, thickness: 0.04 });
+    const c = coin({ radius: 0.26, thickness: 0.05 });
     c.shift = [(random() - 0.5) * 0.03, (random() - 0.5) * 0.03];
     c.leaveAt = T.loans + 0.25 + (8 - i) * 0.3; // the top coin leaves first
     kit.scene.add(c.group);
@@ -96,7 +98,7 @@ export async function build(kit) {
   // ------------------------------------------------------------------ part B: the factory gate
   const gate = await kit.relief('109-bg-factory-gate', { near: 6, far: 70, fov: 40 });
   // the dole queue grows from the gate toward us: four copies, the far one first
-  const queueSpots = [[0.44, 0.31], [0.36, 0.25], [0.27, 0.18], [0.15, 0.1]];
+  const queueSpots = [[0.44, 0.31], [0.36, 0.25], [0.24, 0.18], [0.1, 0.1]];   // the near two moved left, clear of the weight and packet
   const queueTimes = [T.unemployment - 0.1, T.jumps, T.two + 0.1, T.eleven];
   const queue = [];
   for (const [i, [u, v]] of queueSpots.entries()) {
@@ -107,7 +109,16 @@ export async function build(kit) {
   const book = await kit.cutout('book', { at: [bookAt.x, bookAt.y, bookAt.z], width: 1.0, yaw: -0.25 });
   const packetAt = gate.pointAt(0.52, 0.15);
   const packet = await kit.cutout('pay-packet', { at: [packetAt.x, packetAt.y, packetAt.z], width: 1.2 });
-  const weight = await kit.cutout('iron-weight', { at: [packetAt.x, packetAt.y + 0.02, packetAt.z + 0.45], width: 0.95 });
+  // WAGES printed on the lower half of the packet (below the flap), so it reads standing and lying flat
+  const wagesLabel = await kit.card(['WAGES'], { size: 0.17, thickness: 0, at: [0, 0.04, 0.006], parent: packet.hinge, look: { cardColour: '#efe7d2' } });
+  wagesLabel.set({});
+  // the weight slaps the packet down backwards, face up, and pins its top edge to a low slope
+  // (PACKET_SLOPE above the ground): fully flat it is edge-on from this low camera and WAGES is lost
+  const PACKET_SLOPE = 0.38;
+  const pinAt = packet.height * 0.82;
+  const PACKET_FLAT_Z = packetAt.z - pinAt * Math.cos(PACKET_SLOPE);
+  const PIN_DY = pinAt * Math.sin(PACKET_SLOPE);
+  const weight = await kit.cutout('iron-weight', { at: [packetAt.x, packetAt.y + 0.02, PACKET_FLAT_Z], width: 0.95 });
   const dust = new DustBurst(kit.scene, { count: 22, seed: 12 });
   const gateMotes = new Motes(kit.scene, { count: 160, min: [-2, -2.2, -14], max: [2, 1.5, -4], size: 0.025, seed: 23, opacity: 0.45 });
   const partB = [gate.mesh, ...queue.map((q) => q.anchor), book.anchor, packet.anchor, weight.anchor, gateMotes.points];
@@ -119,8 +130,8 @@ export async function build(kit) {
     { t: T.bank - 0.2, position: [0, 0.05, -0.2], target: [0, -0.9, -30], fov: 40, focus: [bankAt.x, bankAt.y + 1, bankAt.z] },
     { t: T.price, position: [0.15, -0.05, -0.8], target: [0.15, -0.6, -30], fov: 39, focus: meterFocus },
     { t: T.seven + 0.3, position: [0.3, -0.1, -1.3], target: [0.35, -0.4, -30], fov: 38, focus: meterFocus },
-    { t: T.loans + 0.5, position: [0.1, -0.05, -0.9], target: [0.05, -1.0, -30], fov: 39, focus: [stackAt.x, stackAt.y, stackAt.z] },
-    { t: CUT, position: [0.05, 0.0, -0.7], target: [0.0, -0.95, -30], fov: 40, focus: [stackAt.x, stackAt.y, stackAt.z] },
+    { t: T.loans + 0.5, position: [0.1, -0.05, -0.9], target: [0.05, -2.9, -30], fov: 39, focus: [stackAt.x, stackAt.y, stackAt.z] },
+    { t: CUT, position: [0.05, 0.0, -0.7], target: [0.0, -2.7, -30], fov: 40, focus: [stackAt.x, stackAt.y, stackAt.z] },
   ], { handheld: 0.012, seed: 9 });
   const qMid = queue[1].rest;
   const shotB = kit.shot([
@@ -163,7 +174,7 @@ export async function build(kit) {
       const bankDoor = bankAt.clone().add(new THREE.Vector3(0.1, 0.45, 0.1));
       coins.forEach((c, i) => {
         const appear = clamp01((t - T.loans + 0.25 - i * 0.03) / 0.2);
-        const rest = new THREE.Vector3(stackAt.x + c.shift[0], stackAt.y + 0.04 * (i + 0.5), stackAt.z + c.shift[1]);
+        const rest = new THREE.Vector3(stackAt.x + c.shift[0], stackAt.y + 0.05 * (i + 0.5), stackAt.z + c.shift[1]);
         const k = smooth(clamp01((t - c.leaveAt) / 0.55));
         c.group.visible = appear > 0 && k < 1;
         c.group.position.lerpVectors(rest, bankDoor, k);
@@ -180,10 +191,11 @@ export async function build(kit) {
       gateMotes.set(t);
       queue.forEach((q, i) => q.set(popUp(t, queueTimes[i] - 0.1, { height: 1.4, restZ: 0.25 })));
       book.set(popUp(t, T.mattei - 0.1, { height: 1.6, restZ: 0.2 }));
-      packet.set(t < WEIGHT_LANDS ? popUp(t, T.workers - 0.2, { height: 0.9, restZ: 0.25 }) : slapFlat(t, WEIGHT_LANDS - 0.04, 0.08));
+      const faceUp = (p) => ({ ...p, fold: -p.fold * (Math.PI / 2 - PACKET_SLOPE) / (Math.PI / 2), dy: 0.025 });
+      packet.set(t < WEIGHT_LANDS ? popUp(t, T.workers - 0.2, { height: 0.9, restZ: 0.25 }) : faceUp(slapFlat(t, WEIGHT_LANDS - 0.04, 0.08)));
       const drop = dropIn(t, WEIGHT_LANDS, { fall: 0.38, height: 5, roll: 6, bounce: 0.12 });
-      weight.set(drop.visible ? { ...drop, dy: (drop.dy ?? 0) + 0.04 } : drop);
-      if (t >= WEIGHT_LANDS) dust.set({ origin: [packetAt.x, packetAt.y + 0.05, packetAt.z], width: 1.2, age: t - WEIGHT_LANDS, scale: 0.55 });
+      weight.set(drop.visible ? { ...drop, dy: (drop.dy ?? 0) + PIN_DY } : drop);
+      if (t >= WEIGHT_LANDS) dust.set({ origin: [packetAt.x, packetAt.y + 0.05, PACKET_FLAT_Z], width: 1.2, age: t - WEIGHT_LANDS, scale: 0.55 });
       else dust.hide();
       exposure = 0.93;
     }
@@ -209,6 +221,7 @@ export async function build(kit) {
     hook(ctx, t, { at: CUT + 0.1, until: T.two - 0.35, text: 'WITHIN A YEAR', y: 300, size: 64, colour: INK.muted });
     bars(ctx, t, { at: T.two - 0.25, until: T.prices - 0.1, box: [300, 360, 480, 360], values: [2, 11], maxValue: 13, labels: ['1920', '1921'], title: 'Unemployment',
       valueText: (v) => `${v}%`, colours: [INK.paper, INK.red], stagger: T.eleven - T.two, rise: 0.6 });
+    credit(ctx, t, { at: T.two - 0.25, until: T.prices - 0.1, text: 'Source: Bank of England data', x: 300, y: 800, size: 22 });
     hook(ctx, t, { at: T.prices, until: T.pay - 0.15, text: 'PRICES DO FALL...', y: 330, size: 72 });
     hook(ctx, t, { at: T.pay, until: T.mattei - 0.15, lines: ['PAID WITH', 'THEIR JOBS'], y: 350, size: 96, colour: INK.amber });
     credit(ctx, t, { at: T.mattei, until: T.last + 2, text: 'Clara E. Mattei, The Capital Order (2022)', y: 560, size: 28 });

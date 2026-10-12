@@ -14,13 +14,14 @@
 //     the bank; HUNDREDS OF BILLIONS OF POUNDS.
 //   - "Its own study finds the new money pushed up the prices of shares and other investments": a
 //     rising arrow, SHARES / OTHER INVESTMENTS; credit line BANK OF ENGLAND STUDY, 2012.
-//   - "the gains went to whoever owned the most": the owners pop up in the foreground, the towers
-//     slide over to them and gold coins rain at their feet; GAINS TO THE BIGGEST OWNERS.
+//   - "the gains went to whoever owned the most": no figure; the money itself shows it. Gold coins
+//     pour onto ONE of the two towers of notes and more bundles land on it, so it grows clearly
+//     taller than the other; THE GAINS / TO THE BIGGEST OWNERS.
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, popUp, clamp01, smooth, smoother, ramp, lerp, seededRandom } from '../cinema-kit.js';
-import { banknoteBundle, priceTag } from '../models.js';
-import { Motes, Smoke, CoinRain } from '../effects.js';
+import { banknoteBundle, priceTag, coin } from '../models.js';
+import { Motes, Smoke } from '../effects.js';
 import { placeTitle, hook, callout, credit, presence, INK } from '../graphics.js';
 
 export async function build(kit) {
@@ -116,13 +117,39 @@ export async function build(kit) {
     }
     return { base, bundles };
   });
-  // the owners: invented top-hatted figures, standing big in the foreground
-  const ownersAt = plaza.pointAt(0.5, 0.155);
-  const owners = await kit.cutout('owners', { at: [ownersAt.x, ownersAt.y, ownersAt.z], width: 3.0 });
-  // where the towers end up: either side of the owners, just behind them
-  const towerEnds = [new THREE.Vector3(ownersAt.x - 1.25, ownersAt.y, ownersAt.z - 1.6), new THREE.Vector3(ownersAt.x + 1.25, ownersAt.y, ownersAt.z - 1.6)];
-  const gold = new CoinRain(kit.scene, { count: 26, centre: [ownersAt.x, ownersAt.y, ownersAt.z + 0.55], radius: 1.1, floorY: ownersAt.y,
-    height: 5, start: T.owned - 0.1, spread: 0.9, coinRadius: 0.075, seed: 23 });
+  // "the gains went to whoever owned the most": more bundles land on the right-hand tower only,
+  // so it grows clearly taller than the left one, while gold coins pour onto its top and spill to a pile at its foot
+  const GROW = 11;
+  const rich = towers[1];
+  {
+    const r = seededRandom(77);
+    for (let i = 0; i < GROW; i++) {
+      const b = banknoteBundle({ width: 0.8, depth: 0.4, notes: 44 });
+      b.group.traverse((o) => { if (o.material) [].concat(o.material).forEach((m) => { m.color.multiplyScalar(0.8); }); });
+      b.group.scale.setScalar(1.15);
+      b.height *= 1.15;
+      b.group.rotation.y = (r() - 0.5) * 0.4;
+      b.twist = (r() - 0.5) * 0.3;
+      b.shift = [(r() - 0.5) * 0.08, (r() - 0.5) * 0.08];
+      b.landAt = T.went - 0.05 + i * 0.13;
+      kit.scene.add(b.group);
+      rich.bundles.push(b);
+    }
+  }
+  // the height of a tower's top at moment t (bundles that have landed by then)
+  const topAt = (tower, t) => tower.base.y + tower.bundles.reduce((h, b) => h + (t >= b.landAt ? b.height : 0), 0);
+  const pour = [];
+  {
+    const r = seededRandom(23);
+    const count = 64, from = T.gains + 0.05, to = T.last + 0.5;
+    for (let i = 0; i < count; i++) {
+      const c = coin({ radius: 0.12, thickness: 0.022 });
+      kit.scene.add(c.group);
+      pour.push({ group: c.group, land: from + (i / count) * (to - from) + r() * 0.04,
+        dx: (r() - 0.5) * 0.44, dz: (r() - 0.5) * 0.2, drop: 1.6 + r() * 0.8, spin: 6 + r() * 8, tilt0: r() * Math.PI, yaw: r() * Math.PI * 2,
+        spillX: (r() - 0.5) * 0.9, spillZ: 0.35 + r() * 0.45, layer: r() * 0.05 });
+    }
+  }
   const plazaMotes = new Motes(kit.scene, { count: 120, min: [-2.5, -2.2, -18], max: [2.5, 2.5, -7], size: 0.03, seed: 29, opacity: 0.35, colour: 0xdfe6ee });
 
   // ------------------------------------------------------------------------------ the camera
@@ -134,13 +161,14 @@ export async function build(kit) {
     { t: T.forEight, position: [-0.25, 0.0, -0.9], target: [-0.4, -0.25, -24], fov: 36, focus: [bowlAt.x, bowlAt.y + 0.4, bowlAt.z] },
     { t: CUT + 0.6, position: [-0.3, 0.0, -1.1], target: [-0.4, -0.25, -24], fov: 36, focus: [bowlAt.x, bowlAt.y + 0.4, bowlAt.z] },
   ], { handheld: 0.012, seed: 5 });
+  const richFocus = [towerBases[1].x, towerBases[1].y + 3, towerBases[1].z];
   const shotB = kit.shot([
     { t: CUT - 0.5, position: [0, 0.05, 0.8], target: [0, 0.2, -30], fov: 40, focus: 30 },
     { t: T.creates2 - 0.2, position: [0, -0.05, 0.2], target: [0, 0.1, -30], fov: 40, focus: 16 },
     { t: T.pounds + 0.4, position: [0, 0.1, -0.4], target: [0, 0.7, -30], fov: 40, focus: 16 },
     { t: T.gains - 0.1, position: [0, 0.0, -0.5], target: [0, 0.3, -30], fov: 40, focus: 15 },
-    { t: T.owned, position: [0, -0.15, 0.2], target: [0, -0.4, -30], fov: 41, focus: [ownersAt.x, ownersAt.y + 1, ownersAt.z] },
-    { t: T.last + 1.4, position: [0, -0.2, 0.5], target: [0, -0.5, -30], fov: 41, focus: [ownersAt.x, ownersAt.y + 1, ownersAt.z] },
+    { t: T.owned, position: [0.1, 0.05, 0.1], target: [0.42, 0.9, -30], fov: 41, focus: richFocus },
+    { t: T.last + 1.4, position: [0.12, 0.05, 0.35], target: [0.5, 1.0, -30], fov: 41, focus: richFocus },
   ], { handheld: 0.012, seed: 6 });
   kit.shake(T.double + 0.1, 0.008, 0.15);
   kit.shake(T.creates2 + 0.3, 0.01, 0.2);
@@ -184,21 +212,42 @@ export async function build(kit) {
     shopMotes.set(t, { visible: a });
 
     // part B things
-    const slide = smoother(ramp(t, T.went - 0.1, T.went + 1.0));
-    towers.forEach((tower, side) => {
+    towers.forEach((tower) => {
       let h = 0;
-      const base = tower.base.clone().lerp(towerEnds[side], slide);
-      // a little hop as the stack sets off and lands
-      base.y += 0.12 * Math.sin(Math.PI * slide);
+      const base = tower.base;
       tower.bundles.forEach((b) => {
         if (a) { b.group.visible = false; return; }
-        dropBundle(b, t, base.x, base.y + h, base.z, 0.36, 4);
-        b.group.rotation.x = -0.08 * Math.sin(Math.PI * slide) * (side ? 1 : 1);
+        dropBundle(b, t, base.x, base.y + h, base.z, 0.36, 2.6);   // enter from just above, not through the credit line
         h += b.height;
       });
     });
-    owners.set(a ? { visible: false } : popUp(t, T.gains - 0.05, { height: 1.7, restZ: 0.2 }));
-    gold.pose(t, { visible: !a });
+    // the coins pouring onto the taller tower: each falls onto the top as it is at its landing
+    // moment (later bundles land over it), the last ones stay lying on the top
+    const richBase = rich.base;
+    pour.forEach((c) => {
+      const fall = Math.sqrt(2 * c.drop / 30), age = t - c.land;
+      if (a || age < -fall) { c.group.visible = false; return; }
+      c.group.visible = true;
+      const restY = topAt(rich, c.land) + 0.01;
+      if (age < 0) {
+        const k = 1 + age / fall;
+        c.group.position.set(richBase.x + c.dx, restY + c.drop * (1 - k * k), richBase.z + c.dz);
+        c.group.rotation.set(c.tilt0 + age * c.spin, c.yaw, 0);
+      } else if (age < 0.12) {
+        const bounce = 0.06 * Math.exp(-age / 0.08) * Math.abs(Math.sin(Math.PI * age / 0.11));
+        c.group.position.set(richBase.x + c.dx, restY + bounce, richBase.z + c.dz);
+        c.group.rotation.set(0.04 * Math.exp(-age * 6), c.yaw, 0);
+      } else {
+        // the top overflows: the coin slides off the front and falls to a pile at the tower's foot,
+        // where the camera (looking up at the tower) can see the gains piling up
+        const height = restY - richBase.y, spillFall = Math.sqrt(2 * height / 30);
+        const k = clamp01((age - 0.12) / spillFall);
+        const x = richBase.x + c.dx + c.spillX * k, z = richBase.z + c.dz + 0.25 + c.spillZ * k;
+        const y = k < 1 ? restY - height * k * k : richBase.y + 0.012 + c.layer;
+        c.group.position.set(x, y, z);
+        c.group.rotation.set(k < 1 ? c.tilt0 + (age - 0.12) * c.spin : 0.05, c.yaw, 0);
+      }
+    });
     plazaMotes.set(t, { visible: !a });
 
     // the dip to black that hides the cut
@@ -225,7 +274,7 @@ export async function build(kit) {
     ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, by + bh); ctx.lineTo(bx + bw, by + bh); ctx.stroke();
     ctx.fillStyle = INK.muted; ctx.font = '600 30px Inter'; ctx.textBaseline = 'top';
     ctx.textAlign = 'left'; ctx.fillText('2013', bx - 10, by + bh + 14);
-    ctx.textAlign = 'right'; ctx.fillText('8 YEARS', bx + bw, by + bh + 14);
+    ctx.textAlign = 'right'; ctx.fillText('2021', bx + bw, by + bh + 14);
     const baseY = by + bh * 0.82;
     // what new money on its own would do: a curve that runs off the top (no numbers: it never happened)
     const ifK = clamp01((t - T.newMoney) / (T.soar + 0.3 - T.newMoney));
@@ -302,27 +351,50 @@ export async function build(kit) {
     ctx.restore();
   }
 
+  // a dark rounded plate behind words over pale or busy parts of the picture
+  function plate(ctx, t, { at, until, x, y, w, h }) {
+    const a = presence(t, at, until, 0.12, 0.3);
+    if (a <= 0) return;
+    ctx.save(); ctx.globalAlpha = a * 0.72; ctx.fillStyle = 'rgb(12,16,18)';
+    ctx.beginPath(); ctx.roundRect(x - w / 2, y - h / 2, w, h, 28); ctx.fill();
+    ctx.restore();
+  }
+  // the source credit, in paper white so it reads over the sky
+  function sourceCredit(ctx, t, { at, until, text, x = 84, y = 180, size = 34 }) {
+    const a = presence(t, at, until, 0.3, 0.4);
+    if (a <= 0) return;
+    ctx.save(); ctx.globalAlpha = a;
+    ctx.shadowColor = INK.shadow; ctx.shadowBlur = 16; ctx.shadowOffsetY = 3;
+    ctx.fillStyle = INK.paper; ctx.font = `700 ${size}px Inter`; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    ctx.letterSpacing = '3px';
+    ctx.fillText(text.toUpperCase(), x, y);
+    ctx.restore();
+  }
+
   function draw2D(ctx, t) {
     const at = (p) => kit.toScreen(p);
     if (partA(t)) {
       placeTitle(ctx, t, { at: T.japan, until: T.double - 0.15, place: 'Japan', year: 2013, y: 260 });
-      callout(ctx, t, { at: T.yen, until: T.double - 0.1, point: at([stackBase.x, stackTop(5) + 0.05, stackBase.z]), text: 'YEN', dx: 120, dy: -260, size: 52 });
+      // the line starts early so its label is up by the word "yen"
+      callout(ctx, t, { at: T.creates + 0.62, until: T.double - 0.1, point: at([stackBase.x, stackTop(5) + 0.05, stackBase.z]), text: 'YEN', dx: 120, dy: -260, size: 52, plate: true });
+      plate(ctx, t, { at: T.double, until: T.if - 0.2, x: 540, y: 355, w: 680, h: 260 });
       hook(ctx, t, { at: T.double, until: T.if - 0.2, text: '×2 MONEY', y: 300, size: 120 });
-      hook(ctx, t, { at: T.inTwo, until: T.if - 0.2, text: 'IN TWO YEARS', y: 420, size: 64, colour: INK.amber });
+      hook(ctx, t, { at: T.inTwo, until: T.if - 0.2, text: 'IN TWO YEARS', y: 420, size: 64 });
       pricesChart(ctx, t, { at: T.if - 0.1, until: CUT - 0.1, box: [190, 300, 700, 330] });
       hook(ctx, t, { at: T.about, until: CUT - 0.1, text: 'ABOUT ½% A YEAR', y: 790, size: 64, colour: INK.amber });
     } else {
       placeTitle(ctx, t, { at: CUT + 0.2, until: T.creates2 - 0.1, place: 'After the crash', year: 2008, y: 260, size: 44 });
       hook(ctx, t, { at: T.bank, until: T.creates2 - 0.1, text: 'BANK OF ENGLAND', y: 400, size: 76 });
-      hook(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, text: "BRITAIN'S CENTRAL BANK", y: 490, size: 46, colour: INK.muted });
+      hook(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, text: 'BRITAIN’S CENTRAL BANK', y: 490, size: 46, colour: INK.muted });
       hook(ctx, t, { at: T.hundreds, until: T.study - 0.2, lines: ['HUNDREDS OF', 'BILLIONS'], y: 330, size: 104 });
       hook(ctx, t, { at: T.pounds, until: T.study - 0.2, text: 'OF POUNDS', y: 500, size: 70, colour: INK.amber });
-      credit(ctx, t, { at: T.study, until: T.last + 2, text: 'Bank of England study, 2012', y: 180 });
+      sourceCredit(ctx, t, { at: T.study, until: T.last + 2, text: 'Bank of England study, 2012', y: 180 });
       risingArrow(ctx, t, { at: T.pushed2 - 0.1, until: T.gains - 0.15, box: [210, 330, 560, 380] });
+      plate(ctx, t, { at: T.shares, until: T.gains - 0.15, x: 540, y: 890, w: 820, h: 220 });
       hook(ctx, t, { at: T.shares, until: T.gains - 0.15, text: 'SHARES ↑', y: 840, size: 78 });
-      hook(ctx, t, { at: T.investments, until: T.gains - 0.15, text: 'OTHER INVESTMENTS ↑', y: 940, size: 58, colour: INK.amber });
-      hook(ctx, t, { at: T.gains, until: T.last + 2, text: 'THE GAINS', y: 300, size: 96, colour: INK.amber });
-      hook(ctx, t, { at: T.owned - 0.1, until: T.last + 2, lines: ['TO THE BIGGEST', 'OWNERS'], y: 450, size: 82 });
+      hook(ctx, t, { at: T.investments - 0.12, until: T.gains - 0.15, text: 'OTHER INVESTMENTS ↑', y: 940, size: 58 });
+      hook(ctx, t, { at: T.gains, until: T.last + 2, text: 'THE GAINS', x: 84, y: 300, size: 88, colour: INK.amber, align: 'left' });
+      hook(ctx, t, { at: T.owned - 0.1, until: T.last + 2, lines: ['TO THE BIGGEST', 'OWNERS'], x: 84, y: 440, size: 62, align: 'left' });
     }
     return true;
   }

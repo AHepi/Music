@@ -29,7 +29,7 @@ and opencv, ffmpeg, and a Chromium browser). Paid steps use the ElevenLabs (voic
 | `skills/check-and-critique` | Stills, page turns, and an independent critique (workflow `critique-film`). |
 | `skills/film-and-finish` | Filming in parallel stretches, sound, sendable copy, captions, cover, measurements. |
 | `agents/` | `page-builder`, `fact-checker`, `film-critic` (all at medium effort). |
-| `workflows/` | `verify-facts`, `critique-film`, `build-pages` (run as `/explainer-film:NAME`, or with the Workflow tool). |
+| `workflows/` | `verify-facts`, `critique-film`, `check-fixes`, `build-pages` (run as `/explainer-film:NAME`, or with the Workflow tool). |
 | `bin/explainer-film-setup` | Sets up the kit in a working folder (on the PATH once installed). |
 | `kit/` | The film kit: `paper-film/` (stage, scenes, tools, templates), `narration-tools/`, `examples/` (word timelines of chapters 1 and 2), `docs/` (the paper look's full how-to). |
 

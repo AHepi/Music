@@ -45,7 +45,20 @@ area, all at once, then one more agent to verify and rank their findings.
 
 Then run `check-facts` again with `onScreen` set to the page files, so every number shown is checked.
 
-## 4. Fix, then look again
+## 4. Fix, then check the fixes independently
 
-Fix every confirmed must-fix and should-fix item, re-draw the affected stills and look at them.
-Record each fault and its fix in Lessons.md. Only then film.
+- Write each page's confirmed findings to its own file and give one fixing helper per page (agent
+  type `explainer-film:page-builder`, all at once) its file; each edits only its page and draws stills.
+  Shared changes (a new option in graphics.js, a recoloured piece, a shared model set) you make first.
+- Then an independent check (checkers who did not make the fixes), comparing every finding with the
+  new stills AND the code, and looking for new problems the fixes caused (in chapter 2 they found
+  four: a camera change that pushed another label off screen, a needle now falling on the word
+  "raising", coins landing where the camera could not see them, a stray line moved rather than removed):
+  ```
+  Workflow({ name: "explainer-film:check-fixes", args: { kit, chapter, guide, wordTimes,
+    groups: [ { label: "pages 1-3", pages: [1,2,3], findings: "/abs/fixes/page-1.md ... page-3.md", stills: "new sheets ..." }, ... ],
+    joins: "/abs/joins/sheet.jpg", changes: "what shared things changed", effort: "medium" } })
+  ```
+- Fix what it finds, look again, and record each fault and its fix in Lessons.md. Only then film.
+- If filming has already started: a stretch only needs re-filming if its page changed after the
+  stretch started (compare the stretch file's time with the page file's).

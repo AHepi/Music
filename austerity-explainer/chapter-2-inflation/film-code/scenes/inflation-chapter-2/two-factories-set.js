@@ -19,7 +19,19 @@ export async function buildTwoFactories(kit, { shellsA = 6, shellsB = 8 } = {}) 
     fillShare: 0.24, haze: 0x1a2228, hazeDensity: 0.018, shadowBox: 10, shadowSoftness: 6, background: 0x10161b });
   const backdrop = await kit.backdrop('402-bg-dusk-skyline', { distance: 52, fov: 40 });
   backdrop.position.set(0, 13, -52);
-  backdrop.scale.setScalar(1.65); // wide enough to fill the frame from the far opening camera
+  // wide enough to fill the frame from the far opening camera and past the left edge on the low
+  // close-ups of factory B (at 1.65 a black corner showed top left)
+  backdrop.scale.setScalar(2.1);
+  // a soft band of dusk haze standing at the far edge of the table, so the table's edge melts into
+  // the painting instead of cutting a hard line across it
+  const hazeCanvas = document.createElement('canvas'); hazeCanvas.width = 4; hazeCanvas.height = 256;
+  const hazeInk = hazeCanvas.getContext('2d'), fall = hazeInk.createLinearGradient(0, 0, 0, 256);
+  fall.addColorStop(0, 'rgba(44,36,27,0)'); fall.addColorStop(0.6, 'rgba(44,36,27,0.6)'); fall.addColorStop(1, 'rgba(44,36,27,1)');
+  hazeInk.fillStyle = fall; hazeInk.fillRect(0, 0, 4, 256);
+  const hazeTexture = new THREE.CanvasTexture(hazeCanvas); hazeTexture.colorSpace = THREE.SRGBColorSpace;
+  const haze = new THREE.Mesh(new THREE.PlaneGeometry(140, 6), new THREE.MeshBasicMaterial({ map: hazeTexture, transparent: true, depthWrite: false, fog: false }));
+  haze.position.set(0, 2.5, -37.6);
+  kit.scene.add(haze);
   const table = paperGround({ at: [0, 0, -8], width: 70, depth: 60, colour: 0x2e2c28 });
   kit.scene.add(table.group);
 

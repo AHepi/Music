@@ -73,13 +73,15 @@ export async function build(kit) {
   const tagHome = new THREE.Vector3(belt.x - 0.25 + basketWidth * 0.36, belt.y + basketWidth * 0.62, belt.z + 0.35);
   tagHolder.position.copy(tagHome);
   kit.scene.add(tagHolder);
-  const tagCentre = () => tagHolder.localToWorld(new THREE.Vector3(tagBefore.width * 0.4, 0, 0));
+  // the callouts point at the tag's top rim (above the digits), so the leader line never crosses the price
+  const tagRim = () => tagHolder.localToWorld(new THREE.Vector3(tagBefore.width * 0.5, tagBefore.height * 0.47, 0));
 
   // the whole basket: tags all across the shelves (example prices, each up about the same share)
   const shelfSpots = [
     [0.12, 0.62, '$2.50', '$2.60'], [0.21, 0.69, '$4.00', '$4.16'], [0.08, 0.73, '$6.80', '$7.08'], [0.25, 0.58, '$3.20', '$3.33'],
     [0.44, 0.71, '$1.90', '$1.98'], [0.57, 0.67, '$5.40', '$5.62'], [0.33, 0.77, '$8.50', '$8.85'], [0.62, 0.76, '$2.20', '$2.29'],
-    [0.86, 0.66, '$3.60', '$3.75'], [0.94, 0.6, '$7.50', '$7.81'], [0.8, 0.73, '$12.00', '$12.49'], [0.76, 0.79, '$4.80', '$5.00'],
+    // the right-hand spots (u > 0.85) hang their tags to the LEFT of the spot, so none is cut at the frame edge
+    [0.87, 0.66, '$3.60', '$3.75'], [0.91, 0.58, '$7.50', '$7.81'], [0.9, 0.74, '$12.00', '$12.49'], [0.88, 0.82, '$4.80', '$5.00'],
   ];
   const random = seededRandom(7);
   const shelfTags = shelfSpots.map(([u, v, before, after], i) => {
@@ -89,6 +91,7 @@ export async function build(kit) {
     const b = priceTag({ width: size, text: after, accent: '#b23a2a' });
     const inner = new THREE.Group();
     inner.add(a.group, b.group);
+    if (u > 0.85) inner.position.x = -0.85 * size; // card reaches inward from the spot
     const group = new THREE.Group();
     group.add(inner);
     group.position.copy(at);
@@ -210,7 +213,7 @@ export async function build(kit) {
       ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 640);
     }
     // the same basket, a year apart
-    const tagPoint = at(tagCentre());
+    const tagPoint = at(tagRim());
     callout(ctx, t, { at: T.basket, until: T.costs + 0.2, point: tagPoint, text: 'A YEAR AGO', dx: -150, dy: -260, size: 44 });
     callout(ctx, t, { at: T.costs + 0.3, until: T.thats - 0.1, point: tagPoint, text: 'NOW', dx: -150, dy: -260, size: 52, accent: INK.red });
     hook(ctx, t, { at: T.same, until: T.costs - 0.05, text: 'THE SAME BASKET', y: 300, size: 68 });
@@ -221,7 +224,7 @@ export async function build(kit) {
     hook(ctx, t, { at: T.prices, until: T.not - 0.1, lines: ['PRICES IN GENERAL,', 'GOING UP'], y: 440, size: 58, colour: INK.amber });
     // one tag, then the whole basket
     hook(ctx, t, { at: T.not, until: T.whole - 0.1, text: 'NOT ONE PRICE TAG', y: 300, size: 66 });
-    hook(ctx, t, { at: T.whole, until: T.to + 0.1, text: 'THE WHOLE BASKET', y: 300, size: 92, colour: INK.amber });
+    hook(ctx, t, { at: T.whole, until: T.to + 0.1, text: 'THE WHOLE BASKET', y: 300, size: 78, colour: INK.amber });
     credit(ctx, t, { at: T.whole, until: T.to + 0.1, text: 'Example prices', y: 1460, size: 28 });
     // what really drives it? the shell factory
     hook(ctx, t, { at: T.drives - 0.2, until: T.shell - 0.1, text: 'WHAT REALLY DRIVES IT?', y: 300, size: 64 });

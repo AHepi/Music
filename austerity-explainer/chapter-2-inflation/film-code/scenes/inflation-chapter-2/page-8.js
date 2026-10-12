@@ -4,9 +4,10 @@
 //      can't make more of in a hurry" a card house pops up on the table and its price tag climbs
 //      (£, ££, £££ - plainly illustrative, no figures).
 //   B. "In twenty twenty-one": a painted New Zealand street (a painting with depth). Title NEW ZEALAND
-//      2021; at "lowest" the figure 3.2% with UNEMPLOYMENT, LOWEST SINCE 1986 (when the survey began). "House prices rose about
-//      thirty percent in twelve months": a card house rises on a pop-up plinth in the street while its
-//      tag climbs a post, +0% to +30%; +30% / IN 12 MONTHS.
+//      2021; at "lowest" the figure 3.2% with UNEMPLOYMENT, LOWEST ON RECORD and a small line "Records
+//      began in 1986". "House prices rose about thirty percent in twelve months": a card house pops up
+//      on the pavement while its tag climbs a post ($, $$, $$$, plainly illustrative); +30% / IN 12
+//      MONTHS as words only. Credit STATS NZ; REINZ.
 //   C. "An independent review of the Reserve Bank": back on the card table, a printed report drops
 //      and lies flat (INDEPENDENT REVIEW / RESERVE BANK; credit INDEPENDENT REVIEW, SEPTEMBER 2026). The
 //      rubber stamp comes down twice: RIGHT AT FIRST (teal) and TOO STRONG, FOR TOO LONG (red), each
@@ -16,7 +17,7 @@
 import { THREE, popUp, clamp01, smooth, ramp, lerp, spring } from '../cinema-kit.js';
 import { paperHouse, priceTag, paper, PAPER, contactShadow } from '../models.js';
 import { CoinRain, DustBurst, Motes } from '../effects.js';
-import { placeTitle, hook, counter, callout, credit, INK } from '../graphics.js';
+import { placeTitle, hook, counter, callout, credit, presence, INK } from '../graphics.js';
 import { buildTwoFactories, FACTORY_B } from './two-factories-set.js';
 
 export async function build(kit) {
@@ -117,29 +118,27 @@ export async function build(kit) {
   const streetThings = [street.mesh];
   const floor = street.pointAt(0.52, 0.3);
   const HOUSE_B = new THREE.Vector3(floor.x - 0.35, floor.y, floor.z);
-  const plinth = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1, 1.15), paper(PAPER.cream));
-  plinth.castShadow = true; plinth.receiveShadow = true;
   const houseB = paperHouse({ width: 1.15, depth: 0.95, height: 0.55, glow: 1.2 });
   const postB = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 1, 10), paper(PAPER.charcoal));
   postB.castShadow = true;
-  const tagB = priceTag({ width: 0.62, text: '+0%' });
+  const tagB = priceTag({ width: 0.62, text: '$' });   // New Zealand: dollars
   const groundShadow = contactShadow(2.0, 1.5, 0.55);
   groundShadow.position.set(HOUSE_B.x, HOUSE_B.y + 0.02, HOUSE_B.z);
-  kit.scene.add(plinth, houseB.group, postB, tagB.group, groundShadow);
-  streetThings.push(plinth, houseB.group, postB, tagB.group, groundShadow);
+  kit.scene.add(houseB.group, postB, tagB.group, groundShadow);
+  streetThings.push(houseB.group, postB, tagB.group, groundShadow);
   const streetMotes = new Motes(kit.scene, { count: 120, min: [-1.6, -1.6, -10], max: [1.6, 1.2, -3], size: 0.02, seed: 31, opacity: 0.5 });
   streetThings.push(streetMotes.points);
-  const tagSteps = 15;
-  const tagTextB = Array.from({ length: tagSteps + 1 }, (_, i) => ({ t: lerp(T.rose + 0.1, T.percent + 0.1, smooth(i / tagSteps)), text: `+${i * 2}%` }));
+  // the tag says only "dearer" ($ to $$$, New Zealand dollars); the figure itself is the +30% word hook, not repeated in 3D
+  const tagTextB = [{ t: -1e9, text: '$' }, { t: T.rose, text: '$$' }, { t: T.thirty, text: '$$$' }];
 
   // ------------------------------------------------------------------ cameras
   const boardB = [b.boardAt.x, b.boardAt.y, b.boardAt.z];
   const shotA = kit.shot([
-    { t: T.start, position: [0.6, 5.4, 12.5], target: [0.2, 0.9, -1.4], fov: 40, focus: [0, 0.6, -1] },
-    { t: T.yes + 0.8, position: [1.1, 4.6, 10.2], target: [0.6, 0.8, -1.9], fov: 40, focus: [0.3, 0.6, -1.4] },
-    { t: T.spent, position: [2.9, 3.7, 4.0], target: [1.6, 0.6, -3.3], fov: 38, focus: [b.yard.x, 0.1, b.yard.z] },
-    { t: T.flat + 0.2, position: [4.1, 2.6, 2.4], target: [2.65, 0.85, -2.9], fov: 36, focus: boardB },
-    { t: T.things - 0.1, position: [3.0, 2.8, 3.4], target: [1.4, 0.7, -2.4], fov: 38, focus: boardB },
+    { t: T.start, position: [0.9, 5.4, 12.5], target: [0.55, 0.05, -1.4], fov: 43, focus: [0, 0.6, -1] }, // board B clear of the right edge; seam out of frame
+    { t: T.yes + 0.8, position: [1.35, 4.6, 10.2], target: [0.95, 0.1, -1.9], fov: 42, focus: [0.3, 0.6, -1.4] },
+    { t: T.spent, position: [2.9, 3.7, 4.0], target: [1.95, 0.5, -3.3], fov: 39, focus: [b.yard.x, 0.1, b.yard.z] },
+    { t: T.flat + 0.2, position: [4.1, 2.6, 2.4], target: [3.0, 0.85, -2.85], fov: 36, focus: boardB },
+    { t: T.things + 0.25, position: [3.9, 2.65, 2.6], target: [2.85, 0.82, -2.8], fov: 37, focus: boardB },   // hold on the board until £2.00 has read
     { t: T.make, position: [2.2, 3.0, 3.3], target: [-0.3, 0.5, -1.35], fov: 38, focus: [HOUSE_A.x + 0.3, 0.4, HOUSE_A.z + 0.3] },
     { t: CUT_B + 0.5, position: [2.0, 2.8, 3.0], target: [-0.3, 0.5, -1.3], fov: 38, focus: [HOUSE_A.x + 0.3, 0.4, HOUSE_A.z + 0.3] },
   ], { handheld: 0.012, seed: 8 });
@@ -232,14 +231,11 @@ export async function build(kit) {
     } else {
       a.smoke.hide(); b.smoke.hide(); dust.hide();
       for (const o of [...tableThings, ...own]) o.visible = false;
-      // B: the house rises on its plinth as prices rise; the tag climbs the post
+      // B: the house pops up on the pavement; as prices rise its tag climbs the post
       const appear = t < T.house - 0.15 ? 0 : 1 - spring(t - (T.house - 0.15), { stiffness: 13, damping: 0.6 });
       const rise = smooth(ramp(t, T.rose, T.percent + 0.4));
-      const plinthHeight = 0.08 + 0.5 * rise;
-      plinth.visible = houseB.group.visible = postB.visible = tagB.group.visible = groundShadow.visible = appear > 0.001;
-      plinth.scale.set(1, plinthHeight, 1);
-      plinth.position.set(HOUSE_B.x, HOUSE_B.y + plinthHeight / 2, HOUSE_B.z);
-      houseB.group.position.set(HOUSE_B.x, HOUSE_B.y + plinthHeight, HOUSE_B.z);
+      houseB.group.visible = postB.visible = tagB.group.visible = groundShadow.visible = appear > 0.001;
+      houseB.group.position.set(HOUSE_B.x, HOUSE_B.y, HOUSE_B.z);
       houseB.group.scale.set(1, Math.max(0.001, appear), 1);
       const postX = HOUSE_B.x + 0.72, postZ = HOUSE_B.z + 0.45, postHeight = 1.7;
       postB.scale.y = postHeight * Math.max(0.001, appear);
@@ -247,7 +243,8 @@ export async function build(kit) {
       let current = 0;
       while (current + 1 < tagTextB.length && tagTextB[current + 1].t <= t) current++;
       tagB.setText(tagTextB[current].text);
-      tagB.group.position.set(postX + 0.03, HOUSE_B.y + (0.5 + 0.7 * rise) * appear, postZ + 0.03);
+      const bump = current > 0 ? 0.06 * Math.exp(-(t - tagTextB[current].t) / 0.12) : 0;
+      tagB.group.position.set(postX + 0.03, HOUSE_B.y + (0.45 + 0.95 * rise + bump) * appear, postZ + 0.03);
       tagB.group.rotation.set(0, -0.1, 0.05 * Math.sin(t * 2.3));
       streetMotes.set(t);
     }
@@ -266,8 +263,8 @@ export async function build(kit) {
     const phase = phaseOf(t);
     if (phase === 'A') {
       hook(ctx, t, { at: T.yes, until: T.spent - 0.1, lines: ['YES,', 'IT CAN'], y: 340, size: 104 });
-      callout(ctx, t, { at: T.flat, until: T.things - 0.15, point: at([FACTORY_B.x - 0.6, 1.0, FACTORY_B.z + 1.05]), text: 'FLAT OUT', dx: -120, dy: -260 });
-      callout(ctx, t, { at: T.flat + 0.35, until: T.things - 0.15, point: at(b.boardAt.clone().setY(1.17)), text: 'PRICES UP', dx: -140, dy: -170, accent: INK.red });
+      callout(ctx, t, { at: T.flat, until: T.things + 0.2, point: at([FACTORY_B.x + 0.2, 1.1, FACTORY_B.z + 1.0]), text: 'FLAT OUT', dx: -120, dy: -330, size: 52, plate: true, margin: 140 });   // a spot on the front wall that stays in frame
+      callout(ctx, t, { at: T.flat + 0.35, until: T.things + 0.2, point: at(b.boardAt.clone().setY(1.27)), text: 'PRICES UP', dx: -140, dy: -220, accent: INK.red, size: 52, plate: true, margin: 140 });  // points at the board's top rim, not through the digits
       hook(ctx, t, { at: T.things, until: CUT_B - 0.05, lines: ["CAN'T MAKE MORE", 'IN A HURRY'], y: 320, size: 70 });
     } else if (phase === 'B') {
       // a soft dark band at the top, so the words read over the bright painting
@@ -276,10 +273,23 @@ export async function build(kit) {
       ctx.save(); ctx.fillStyle = band; ctx.fillRect(0, 0, 1080, 900); ctx.restore();
       placeTitle(ctx, t, { at: T.twenty, until: T.house - 0.2, place: 'New Zealand', year: 2021, y: 260 });
       hook(ctx, t, { at: T.unemployment, until: T.house - 0.2, text: 'UNEMPLOYMENT', y: 470, size: 56, colour: INK.muted });
-      counter(ctx, t, { at: T.lowest - 0.05, until: T.house - 0.2, duration: 0.01, from: 3.2, to: 3.2, format: (v) => `${v.toFixed(1)}%`, y: 700, size: 190, caption: 'Lowest since 1986', captionColour: INK.paper });
+      counter(ctx, t, { at: T.lowest - 0.05, until: T.house - 0.2, duration: 0.01, from: 3.2, to: 3.2, format: (v) => `${v.toFixed(1)}%`, y: 700, size: 190, caption: 'Lowest on record', captionColour: INK.paper });
+      // so the caption isn't misread: 1986 is when the survey began (C2-N09)
+      const note = presence(t, T.lowest + 0.25, T.house - 0.2, 0.3, 0.35);
+      if (note > 0) {
+        ctx.save(); ctx.globalAlpha = note;
+        ctx.font = '600 30px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        const w = ctx.measureText('Records began in 1986').width + 40;
+        ctx.fillStyle = 'rgba(12,16,18,0.55)'; ctx.beginPath(); ctx.roundRect(540 - w / 2, 815, w, 50, 12); ctx.fill();
+        ctx.fillStyle = INK.paper; ctx.globalAlpha = note * 0.85;
+        ctx.fillText('Records began in 1986', 540, 841);
+        ctx.restore();
+      }
       hook(ctx, t, { at: T.house, until: CUT_C - 0.05, text: 'HOUSE PRICES', y: 260, size: 58, colour: INK.muted });
       hook(ctx, t, { at: T.thirty, until: CUT_C - 0.05, text: '+30%', y: 390, size: 150, colour: INK.amber });
       hook(ctx, t, { at: T.twelve, until: CUT_C - 0.05, text: 'IN 12 MONTHS', y: 520, size: 70 });
+      credit(ctx, t, { at: T.unemployment, until: T.house - 0.2, text: 'Source: Stats NZ', y: 1460 });
+      credit(ctx, t, { at: T.house, until: CUT_C - 0.05, text: 'Source: REINZ', y: 1460 });
     } else {
       credit(ctx, t, { at: T.review + 0.3, until: T.end + 2, text: 'Independent review, September 2026', y: 1460 });
       hook(ctx, t, { at: T.support, until: T.was - 0.05, lines: ['SUPPORT FROM', 'BANK + GOVERNMENT'], y: 330, size: 66 });

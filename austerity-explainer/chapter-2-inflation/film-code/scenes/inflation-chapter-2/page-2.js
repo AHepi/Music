@@ -5,7 +5,7 @@
 //   - "Unemployment ... under one percent": a row of munition women rises up in the foreground; a
 //     panel of a hundred dots fills in, all but one, under the words UNDER 1%.
 //   - "paid for partly with new money": bundles of banknotes drop onto the floor and stack up.
-//   - "Submarines are sinking supply ships": three paper boats on a puddle tip over and sink.
+//   - "Submarines are sinking supply ships": three paper boats pop up, tip over and fade away.
 //   - "factories are turned over to war work": the camera turns to the benches of shells.
 //   - "more money is chasing fewer things to buy": more bundles land and the stack grows, while a
 //     basket of shopping shrinks; MORE MONEY / FEWER THINGS.
@@ -74,7 +74,9 @@ export async function build(kit) {
     boat.group.position.copy(at);
     boat.home = at;
     boat.group.rotation.y = 0.3 - i * 0.25;
-    boat.sinkAt = T.submarines + 0.35 + i * 0.55;
+    boat.sinkAt = T.submarines + 0.45 + i * 0.55;
+    boat.mesh = boat.group.children[0];
+    boat.mesh.material.transparent = true;
     kit.scene.add(boat.group);
     return boat;
   });
@@ -113,15 +115,17 @@ export async function build(kit) {
       b.group.rotation.z = b.twist * (1 - k) + settle;
       height += b.height;
     });
-    // the boats bob, then tip and sink into the puddle
+    // the boats pop up on "submarines", bob, then tip over and fade away (they never sink through the floor)
     boats.forEach((boat) => {
       const age = t - boat.sinkAt;
-      const sink = smooth(clamp01(age / 1.3));
-      const appear = clamp01((t - (T.submarines - 0.6)) / 0.35);
-      boat.group.visible = sink < 1 && appear > 0;
+      const gone = smooth(clamp01((age - 0.25) / 1.0));
+      const appear = clamp01((t - T.submarines) / 0.35);
+      boat.group.visible = gone < 1 && appear > 0;
       boat.group.scale.setScalar(smooth(appear));
-      boat.group.position.set(boat.home.x, boat.home.y - 0.32 * sink + 0.01 * Math.sin(t * 2.6 + boat.home.x * 5), boat.home.z);
+      boat.group.position.set(boat.home.x, boat.home.y + 0.01 * Math.sin(t * 2.6 + boat.home.x * 5), boat.home.z);
       boat.group.rotation.z = 0.55 * smooth(clamp01(age / 0.5)) + 0.04 * Math.sin(t * 1.9 + boat.home.z);
+      boat.mesh.material.opacity = 1 - gone;
+      boat.mesh.castShadow = gone < 0.5;
     });
     // the basket appears with the boats gone, then shrinks
     const basketUp = popUp(t, T.more - 0.1, { height: 0.9, restZ: 0.1 });
@@ -153,9 +157,13 @@ export async function build(kit) {
   function draw2D(ctx, t) {
     const at = (p) => kit.toScreen(p);
     placeTitle(ctx, t, { at: T.britain, until: T.unemployment - 0.1, place: 'Britain', year: 1915, y: 260 });
-    hook(ctx, t, { at: T.unemployment, until: T.newMoney - 0.3, text: 'OUT OF WORK', y: 250, size: 54, colour: INK.muted });
+    hook(ctx, t, { at: T.unemployment, until: T.newMoney - 0.3, text: '100 WORKERS', y: 250, size: 54, colour: INK.muted });
     hundredDots(ctx, t, { at: T.unemployment + 0.4, until: T.newMoney - 0.3, x: 342, y: 360 });
-    hook(ctx, t, { at: T.under, until: T.newMoney - 0.3, text: 'UNDER 1%', y: 860, size: 120 });
+    // the one empty dot (bottom right, x 342 + 9 * 44, y 360 + 9 * 44) is the one out of work: label it,
+    // pointing at the ring's lower-left edge so the leader's dot does not fill it
+    callout(ctx, t, { at: T.under, until: T.newMoney - 0.3, point: { x: 342 + 9 * 44 - 12, y: 360 + 9 * 44 + 14 }, text: 'OUT OF WORK',
+      dx: -70, dy: 96, size: 40, accent: INK.paper, plate: true });
+    hook(ctx, t, { at: T.under, until: T.newMoney - 0.3, text: 'UNDER 1%', y: 990, size: 120 });
     hook(ctx, t, { at: T.newMoney, until: T.submarines + 0.2, text: 'NEW MONEY', y: 330, size: 92 });
     const top = stackBase.clone(); top.y += 0.5;
     callout(ctx, t, { at: T.submarines + 0.3, until: T.factories - 0.1, point: at(boats[1].home), text: 'SUPPLY SHIPS SUNK', dx: -40, dy: -330 });

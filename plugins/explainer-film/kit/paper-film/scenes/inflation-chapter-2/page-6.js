@@ -102,8 +102,8 @@ export async function build(kit) {
   const marchFrom = T.french - 0.35, marchSpeed = 1.1;
 
   // coal and steel: a stack of girders, bricks and timber standing by the sheds on the right
-  const steelAt = works.pointAt(0.8, 0.165);
-  const steel = await kit.cutout('materials', { at: [steelAt.x + 0.2, steelAt.y, steelAt.z + 0.3], width: 1.3 });
+  // (placed centre-right in the snow, level with the money stacks, so its shrinking reads clearly)
+  const steel = await kit.cutout('materials', { at: [0.62, -2.22, -8.75], width: 1.3 });   // clear of the phone-button zones
 
   // the padlock on the gate
   const lockAt = works.pointAt(0.624, 0.3);
@@ -141,13 +141,25 @@ export async function build(kit) {
   const boardHome = new THREE.Vector3(-0.08, 1.0, -6.2);
   kit.scene.add(board.group);
   const glow = kit.glow([-0.08, 1.2, -5.2], { colour: 0xffd8a8, strength: 1.6, reach: 3 });
+  // while prices race, every cell is its own one-cell counter flipping on its own beat, so the digits
+  // are always mid-flip and the board never rests on a readable number
   const spin = seededRandom(5);
-  const racing = [];
-  for (let t = T.prices - 0.25; t < T.then + 0.8; t += 0.05) {
-    const length = Math.min(13, 4 + Math.floor((t - T.prices) * 3));
-    let digits = String(1 + Math.floor(spin() * 9));
-    for (let i = 1; i < length; i++) digits += Math.floor(spin() * 10);
-    racing.push({ t, text: Number(digits).toLocaleString('en-US') });
+  const racing = [{ t: 0, text: '' }];
+  const raceCells = [];
+  for (let n = 0; n < 17; n++) {   // one layer only: a doubled ghost layer read as a rendering fault
+    const i = n % 17, ghost = n >= 17;
+    const cell = splitFlap({ cells: 1, cellWidth: 0.088, gap: 0.008, flipTime: 0.075, housing: false });
+    cell.group.position.set((i - 8) * 0.096, ghost ? 0.012 : 0, ghost ? 0.03 : 0.012);
+    if (ghost) cell.group.traverse((o) => { if (o.material) { o.material.transparent = true; o.material.opacity = 0.5; o.material.depthWrite = false; } });
+    board.group.add(cell.group);
+    const fromRight = 16 - i, schedule = [];
+    for (let t = T.prices - 0.25 + spin() * 0.08; t < T.then + 0.8; t += 0.08) {
+      const length = Math.min(13, 4 + Math.floor(Math.max(0, t - T.prices) * 3));
+      const width = length + Math.floor((length - 1) / 3);
+      const text = fromRight >= width ? '' : (fromRight + 1) % 4 === 0 ? ',' : String(Math.floor(spin() * 10));
+      schedule.push({ t, text });
+    }
+    raceCells.push({ cell, schedule });
   }
   const FINAL = 4.2e12;
   const count = [{ t: T.november - 0.4, text: '' }];
@@ -199,21 +211,21 @@ export async function build(kit) {
 
     // the stack of steel stands up on "heartland" and shrinks as less and less is made
     const steelUp = popUp(t, T.heartland - 0.05, { height: 0.7, restZ: 0.15 });
-    steel.set({ ...steelUp, scale: lerp(1, 0.3, smooth(ramp(t, T.less - 0.1, T.made + 0.4))) });
+    steel.set({ ...steelUp, scale: lerp(1, 0.6, smooth(ramp(t, T.less - 0.1, T.made + 0.4))) });
 
     // the padlock pops onto the gate
     const lockAge = t - T.stop;
     padlock.set({ visible: lockAge > 0, scale: lockAge > 0 ? 1 - spring(lockAge, { stiffness: 15, damping: 0.45 }) : 0, dz: 0 });
 
-    // notes tumbling out of the sky, then lying flat in the snow
+    // notes tumbling out of the sky, then lying flat in the snow face-up (negative fold = printed side up)
     for (const n of notes) {
       const age = t - (n.land - n.fall);
       if (age < 0) { n.piece.set({ visible: false }); continue; }
       const k = Math.min(1, age / n.fall);
       if (k < 1) {
-        n.piece.set({ dy: 4.4 * (1 - k), dx: n.drift * (1 - k) + 0.12 * Math.sin(age * 3 + n.phase), roll: n.spin * (1 - k),
-          fold: 0.6 + 0.9 * Math.sin(age * n.tumble + n.phase) * (1 - k) + 0.9 * k, yaw: 0.8 * Math.sin(age * 2 + n.phase) });
-      } else n.piece.set({ fold: Math.PI / 2 - 0.02, dy: 0.01 });
+        n.piece.set({ dy: 4.4 * (1 - k) + 0.04, dx: n.drift * (1 - k) + 0.12 * Math.sin(age * 3 + n.phase), roll: n.spin * (1 - k),
+          fold: -0.6 + 0.9 * Math.sin(age * n.tumble + n.phase) * (1 - k) - 0.95 * k, yaw: 0.8 * Math.sin(age * 2 + n.phase) });
+      } else n.piece.set({ fold: -(Math.PI / 2 - 0.02), dy: 0.04 });
     }
 
     // bundles land and stack up
@@ -236,7 +248,9 @@ export async function build(kit) {
     if (drop !== null) {
       board.group.position.set(boardHome.x, boardHome.y + drop, boardHome.z);
       board.group.rotation.x = -0.05 * drop;
-      board.pose(t, t < T.november - 0.5 ? racing : count);
+      const inRace = t < T.november - 0.5;
+      board.pose(t, inRace ? racing : count);
+      for (const r of raceCells) { r.cell.group.visible = inRace; if (inRace) r.cell.pose(t, r.schedule); }
     }
 
     const dim = smooth(ramp(t, T.less - 0.2, T.made + 0.6));
@@ -280,8 +294,8 @@ export async function build(kit) {
       ctx.restore();
     }
 
-    hook(ctx, t, { at: T.push, until: T.end, text: 'PRICES UP', y: 290, size: 100, colour: INK.red });
-    hook(ctx, t, { at: T.less, until: T.end, lines: ['LESS AND LESS', 'MADE'], y: 440, size: 66, colour: INK.amber });
+    hook(ctx, t, { at: T.push, until: T.end, text: 'PRICES UP', y: 230, size: 100, colour: INK.red });
+    hook(ctx, t, { at: T.less, until: T.end, lines: ['LESS AND LESS', 'MADE'], y: 350, size: 66, colour: INK.amber });
     return true;
   }
 
