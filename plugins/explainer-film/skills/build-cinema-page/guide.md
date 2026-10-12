@@ -145,3 +145,35 @@ number or word shown on screen with its research id, and anything you were unsur
 - A flip counter needs every character it shows in its alphabet; commas and % signs are there.
 - Unspoken numbers (a figure the narrator never says) need a reason and a research id, or leave them out.
 - A figure counting through in-between values is fine; random digits that settle on nothing read as data.
+
+## 9. Lessons from the independent critique (chapter 2, before filming)
+
+Seven critics and a skeptic found these; each cost a re-film. Check for them yourself first.
+- **The key readout must be fully in frame.** A price board that carries the whole argument was cut
+  off at the right edge in most close-ups. Frame the readout at x 600-900 of 1080, never in the right
+  140 px, and check it at every close-up moment.
+- **Pale words on pale surfaces vanish.** Light labels over ivory walls or bright sky could not be
+  read. Use `callout(..., { plate: true })` (a dark plate behind the words) or place labels over dark
+  ground; check legibility at phone size.
+- **A label's line must not cross its number.** Lines ending in the middle of a price read as a
+  strike-through. Point at the tag's or board's top edge.
+- **Hold the key number still.** A figure still counting while it is said, then fading at once, is
+  never read. Finish counts on the word and hold for at least a second after.
+- **Nothing should move that the narration does not explain.** A dial sliding down "as if rates were
+  cut" beside an unemployment figure implies something unsaid. Keep unexplained movements out of
+  the frame or out of focus, and cap springs so needles do not overshoot past the value said.
+- **Transitions inside a page must read cleanly frame by frame.** Props sinking through the ground,
+  a notice hanging in mid-air when its board tips: fade or slide things out, or cut with a short dip.
+- **Show the idea, not an inventory.** "Short of workers, materials and machines" needs SHORT OF (or
+  empty slots), not just the three things.
+- **Label example numbers as examples** ("Example prices") when they sit next to real data.
+- **Colours with meaning:** in an election period, avoid ties, flags or props in party colours; use
+  charcoal, grey or ivory for invented officials.
+- **Caricatures editorialise.** Top-hatted plutocrats add a claim the narration does not make; show
+  the money itself instead.
+- **Face-down paper is blank.** Notes and envelopes that land face-down read as tan smudges; land
+  them face-up or hide them.
+- **A model on a bare block looks unfinished.** Give plinths the paper material and a contact shadow,
+  or drop them.
+- **Fill the frame past painted edges.** Black corners beyond a backdrop read as a rendering fault:
+  scale the backdrop up for close shots.

@@ -201,6 +201,20 @@ Only failures in doing the work belong here. Newest at the bottom.
     as fine green lines.
 50. **"43.2,47.5" is not two times.** The filming tool wants still times separated by spaces; with a
     comma it reads one broken number and fails on the second still.
+51. **One page's words showed on the next during page turns.** Only when frames were drawn one after
+    another; a single test frame looked clean. The browser sometimes reused an old copy of the
+    graphics layer when two pages were drawn in one frame. Fix: the graphics layer is copied out pixel
+    by pixel for every page, and fully reset before each. Check page turns in ONE run of stills.
+52. **Period figures in a present-day street.** 1920s out-of-work men stood in today's New Zealand
+    street on page 10. Fix: a hundred-dot panel (3 then 6 empty), echoing page 2's 1915 panel.
+53. **The independent critique found what the page builders and I had missed** (seven critics and a
+    skeptic): price boards cut off at the right edge on the central page; pale labels on pale walls;
+    a key figure still counting while said; a dial sliding as if rates were cut; a broken transition;
+    a party-coloured tie; a caricature adding a claim. Fix: all repaired before filming; the lessons
+    are now in the plugin's page guide. Lesson: get the critique BEFORE filming starts, not during.
+54. **Stopping a filming job with a name pattern can stop your own command.** `pkill -f` with the
+    script's name matched the shell running the command and killed it. Fix: stop the job manager and
+    each drawing process by its number.
 
 ## Traps
 
@@ -222,3 +236,5 @@ Only failures in doing the work belong here. Newest at the bottom.
 - From an angle, upright strokes printed on a flat page read as a wall; print shapes that only read
   as lying flat.
 - Inside a painted room, keep camera moves small and turn reflections down (lessons 48, 49).
+- Draw page turns in one run of stills: some faults only show when frames follow each other (lesson 51).
+- Run the independent critique before filming (lesson 53).
