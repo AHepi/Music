@@ -1,0 +1,200 @@
+# Lessons
+
+What this file is: things that went wrong while building or testing, and how each was fixed.
+Only failures in doing the work belong here. Newest at the bottom.
+
+## 2026-10-11
+
+1. **The skill pointed to a folder that did not exist.** Its instructions named
+   /mnt/skills/plugins/.../anidoodle, which was missing. The real files are under
+   /root/.claude/plugins/synced/.../skills/anidoodle. Fix: searched the machine for the skill's
+   tool files and used that folder.
+2. **The skill's style-list helper failed inside a new project.** `registry.mjs` needs
+   `styles.legacy.json`, which the project setup tool does not copy. Fix: read the style list from
+   the skill's own `references/styles/INDEX.md` instead.
+3. **A wrong label on a sample sheet.** The lighthouse sample was labelled "two-ink print" but uses
+   several ink layers. Fix: relabelled "layered-ink print" and rebuilt the sheet before sending.
+4. **Some research websites refused automated reading.** The 1914-1918 Online encyclopedia, Papers
+   Past and the 1920 conference records on archive.org could not be opened. Fix: used other sources,
+   and left out the facts that only those pages would have confirmed (listed in the research file).
+
+5. **The sound check came out 3 seconds short.** The loudness step (ffmpeg's loudnorm) quietly
+   switches audio to 192,000 samples a second, and the padding after it then miscounted. Fix:
+   convert back to 48,000 right after the loudness step, and pad to an exact length
+   (`apad=whole_dur`). Checked: 23 seconds asked, 23.04 seconds delivered.
+6. **The music nearly vanished under the voice.** The first ducking setting pushed the music 31 dB
+   under Malina. Fix: tried four settings, measured each, chose the one that puts the music about
+   18 dB under the voice.
+7. **The first temple engraving read as graph paper.** Shadows on the wall and in the doorway were
+   ruled in a square grid of horizontal and vertical lines. Fix: cast shadows in horizontal lines
+   only; deep shadow in horizontal lines crossed on a slant. Checked in close-ups at double size.
+8. **The doorway then read as chain-link fence.** Three sets of crossing lines left large, regular
+   white diamonds. Fix: two sets only, ruled heavier, so only small slivers of paper show.
+9. **The columns looked flat and had a spiky fringe at the top.** The lit side had no lines at all,
+   and the capital's shadow was drawn with short vertical strokes. Fix: hairlines across the lit
+   side swelling into the shadow, and the capital's shadow in horizontal lines fading downward.
+10. **A faint ring at the bottom of the page read as a drawn circle.** The old-spill mark was a
+    closed ring in the middle of an empty area. Fix: a broken arc, fainter, in the corner.
+
+11. **Levelling the narration pushed its peaks past full scale.** Turning every page to -16 LUFS
+    left peaks at +0.2 dB, which would clip in an ordinary audio file. Fix: the narration track is
+    kept in floating-point samples (which can go past full scale without damage) and the final mix's
+    limiter holds the delivered peaks at -1.6 dB. Checked by measuring the finished mix.
+12. **Some marks were tied to the wrong word.** Words that come twice on a page ("shells", "in",
+    "a", "its", "it", "and", "prices", "the") were looked up by their first appearance, so a mark
+    would have landed on the earlier word. Fix: every lookup now names which appearance it means
+    (for example the second "shells"). Caught by checking every lookup against the recording before
+    the first test picture.
+13. **A cut-out T read as I** ("THREE PARIS"), a narrow cut-out I read as two lines or as a slash.
+    Serif fonts give the T a foot like an I; outline and slanted fonts thin an I into strokes. Fix:
+    those letters skip those fonts. Checked: every title re-drawn and read at full size; page 5's
+    approved picture came out byte-for-byte unchanged.
+14. **Layout collisions found in close-ups.** The BORN stamp covered the last letter of MATTEI; the
+    birthday candle reached into the header strip; WORK MORE and CONSUME LESS overlapped; the flag on
+    the factory was a tiny scribble; the shells and gold bars sat small and off-centre. Fix: moved and
+    resized each, gave the flag a solid red cloth, re-centred both engravings, re-checked every page.
+
+15. **The sound came out 5 milliseconds late.** The limiter that keeps peaks under clipping looks
+    5 ms ahead, which delays everything by 5 ms. Found by lining up the film's sound against the
+    narration track at every page. Fix: switched on the limiter's own delay compensation. Checked:
+    0.00 ms at all ten pages. (5 ms cannot be heard, but the fix costs nothing.)
+16. **The quality check counted a typing pause as a freeze.** Typing that waits for Malina's next
+    word ("GENOA, 1922:" ... "SAME ADVICE") left 0.7 seconds with nothing new on screen, which the
+    check flags unless it is declared. Fix: pauses in typing are now declared as rests, worked out
+    from the typing itself. No picture changed, so the film did not need rendering again.
+
+17. **The timing tool counted the accent instruction as spoken words.** The new instruction is
+    several words long ("[in a warm, steady New Zealand accent]"), and the tool only knew one-word
+    cues, so "a", "warm", "New", "Zealand" would have been timed as words Malina says. Fix: everything
+    from the opening bracket to the closing one is now the instruction. Checked: the word counts match
+    the script again. Still open: after a long instruction, ElevenLabs places the first real word up to
+    0.3 seconds late (measured against the recording's actual start); to correct before re-timing pages.
+
+18. **The late first word, fixed.** (Open item from 17.) Measured all ten new pages: ElevenLabs put
+    the first word between 0.03 and 0.32 seconds after Malina actually starts (page 2 worst). Fix: the
+    timing tool now finds where her voice begins in each recording and moves the first word back to
+    it when the gap is more than 0.03 s, printing each change. Checked: nine pages corrected, page 3
+    left alone (its first word was already right).
+19. **The video samples got history wrong in ways the prompt did not ask for.** All five drew tanks
+    from the Second World War (a turret on top), not the boxy First World War kind; all five show a
+    tank rolling at the crowd, though the research says troops and tanks came after the clash. The
+    linocut sample put a symbol on a placard that can read like a hooked cross; the night sample
+    added a red-and-black flag, a real political flag of a particular movement. Fix for the real
+    film: describe the tank's shape in the prompt (or give a reference picture), stage scenes from
+    the research ledger, ask for blank placards, and check every clip frame by frame before use.
+
+20. **No shadows at all in the first paper test.** Every piece is a flat sheet facing the lamp, and the
+    3D library draws shadows from a sheet's back face only (to avoid speckles on solid objects), so a
+    sheet lit from the front cast nothing. Found by lighting the scene with the lamp alone (shadows
+    would show black: none did) and by a bare test with one card and one wall. Fix: every sheet casts
+    from both faces. Checked: shadows show in the lamp-only picture and in the real frames.
+21. **The smoothest soft shadows do not work in the hidden browser.** That kind needs a graphics
+    feature the software renderer lacks (smooth filtering of half-precision images); it failed
+    silently. Fix: the plain kind of shadow with widened, softened edges.
+22. **The shadows were too small to see.** Pieces stood only half a unit in front of their page, so
+    each shadow hid behind the piece's own paper margin, and dark cobbles hid the rest. Fix: pieces
+    stand further out (soldiers 0.7, back crowd 1.25, tank 1.95, front crowd 2.7, miner 1.6), and the
+    lamp is a larger share of the light. Then the words' shadows were so far off they read as a second,
+    ghostly word; words now stand closer (0.55).
+23. **The first page turn looked like a door swinging, and left white strips.** The page swung toward
+    the camera around its left edge, and the pieces folded flat with it, showing as pale strips. Fix:
+    the page peels from its bottom-right corner over a rolling cylinder of paper, and the pieces fold
+    down and are put away before it turns.
+24. **The first paper mouth looked like a black bar.** The jaw was cut as a wide rectangle and also
+    tipped toward the camera, which made it look bigger and boxy. Fix: a narrower jaw with rounded top
+    corners, a smaller drop, no tipping, and a mouth that opens only on the louder syllables (it hung
+    open before because the loudness thresholds were too low).
+25. **The dust from the tank's landing was invisible.** It burst behind the front crowd. Fix: the dust
+    starts higher and in front of the tank, so it rises above the crowd's heads.
+
+## 2026-10-12
+
+26. **Two paintings failed their check.** The row of 1915 shells came out looking like rifle
+    cartridges (brass cases, bullet tips), and a re-painted tank came out an odd shape. Fix: the shells
+    were painted again as steel artillery shells with copper bands, one row of seven, and cut into seven
+    separate pieces; the tank was dropped and page 3 keeps its approved tank. Found on contact sheets of
+    every painting before cutting.
+27. **The background remover dropped parts of three pictures.** It left out the politician's wooden
+    lectern, made Sardinia faint on the map of Italy, and left the coal heap beside the small pithead
+    half see-through. Found by laying every cut-out over bright magenta, where missing or faint parts
+    show at once. Fix: the lectern is put back from its outline (measured from the painting's colours);
+    the map is printed on a small paper card, with the land found by its colour against the plain
+    background; the pithead uses a lower threshold for "solid".
+28. **Words spoken twice were asked for by their first time, again** (Lesson 12): "war", "get" and
+    "prices" each come twice on their page, so the shells, the BACK TO GOLD card and a price tag would
+    have come in early. Caught by checking every word lookup against the page's text before filming.
+29. **Dust stayed on screen after its page had gone.** When single moments were drawn out of order for
+    checking, dust from page 8's gold landing showed up on pages 9 and 10 and on the last blank page.
+    Dust and smoke were not put away with their page's pieces. Fix: they now belong to their page and
+    are hidden with it. (Filming in order would mostly have hidden this, but a chunk starting mid-way
+    could not rely on it.)
+30. **Knocked-down pieces near the bottom of the frame showed as pale shapes.** A piece "slapped flat"
+    lies toward the camera like a shelf; seen from above, the kitchen table's legs and the flattened pay
+    packet showed their plain paper backs as pale blobs. Fix: those pieces fold down and disappear; only
+    the squashed pay packet under the iron weight on page 1 (high in the frame, where it reads as
+    squashed) stays flat for a moment.
+31. **Pieces near the sides were cut off by the frame edge.** A piece standing in front of the page
+    looks bigger than its size on the page (it is nearer the camera), so pieces placed to the page's edge
+    poked out of the frame. Fix: the factory, price tag, pay packet, basket, school, farm and pithead
+    were moved in or made a little smaller; the rule is to keep a piece's edge within the frame at its
+    own distance (about 4.1 units from the middle, less for pieces further forward).
+32. **A falling word looked washed out, with a ghost behind it.** POWER stood far from the page, so its
+    shadow read as a second word (Lesson 22 again), and the dust from its landing burst in front of it.
+    Fix: falling words stand at the same distance as other words (0.55) and their dust bursts behind them.
+33. **The motion maths divided by zero for a walk with no bounce.** A spring set to no overshoot at all
+    (damping 1) gave "not a number", which would have frozen the worker on page 9. Caught when reading
+    the code before filming. Fix: the spring has a separate formula for no overshoot.
+34. **Filming two halves at once was no faster.** Two hidden browsers side by side took as long for 90
+    frames as one browser alone (the machine's two processors are already busy with one). Fix: the
+    chapter is filmed one page-sized chunk after another (about 0.85 seconds a frame), which also lets a
+    single page be filmed again alone.
+
+35. **Two mistakes in the kit's papers, caught on re-reading.** The paintings ledger filed the shell
+    painting as a figure (its number starts with 2, which the sorting rule took for figures), and the
+    guide first gave chapter 1 as about 2,500 words (it is about 520 spoken words). Fix: the shells are
+    filed as an object and the prompts guide's tables were remade; the word count was corrected
+    against the word times.
+36. **The folded-paper trees came out almost black.** The lamp clearly lit the paper around them, but
+    the trees stayed dark even in plain white. A check with their shadows switched off showed them lit
+    properly, so they were shading themselves: the shadow is pushed off each surface along the way
+    the surface faces, and the tree surfaces had been built facing inward, so the push went into the
+    tree. Fix: no push along the surface for folded props, a slightly larger plain depth margin instead.
+37. **The paper crane did not read as a crane from above.** Seen from a high camera, its wings and
+    neck flattened into a jumble of spikes (its shadow looked more like a bird than it did). Fix: it is
+    turned side-on with the neck rising at the front, the head folded down, the tail rising at the back
+    and both wings raised, and the camera came down a little. Checked in close-ups after each change.
+38. **The oak's leaves were chopped off in a straight line.** Its sheet of paper was narrower than its
+    crown, so leaves past the edge were simply missing. Fix: a wider sheet, with the tree's shape
+    measured from its height so widening the sheet doesn't stretch it.
+39. **The open pages read as upright walls.** The printed meadow was tiny upright strokes, which from
+    the reader's angle look like grain on a wall, and a dark band beside the spine plus a hard crease
+    made a box corner. Fix: a rounded fold, a lighter band, and printed things that only read as lying
+    flat (a pond drawn as an ellipse, garden rows, round flowers, a stone path).
+40. **Faint rings rippled across the pages, and the moon's shadows criss-crossed the lamp's.** The
+    rings came from the lamp's shadow being set too tight; the moon's own shadows made the page
+    confusing. Fix: a larger shadow margin, and the moon lights without casting shadows.
+41. **The first distance picture was too coarse, and the first blur ate the detail.** The paper stage's
+    built-in distance drawing squeezed near and far into a few shades, and a strong blur turned the
+    oak's leaves and the hills to mush. Fix: a small custom distance drawing spread evenly from near to
+    far, and a much gentler blur.
+42. **Light leaked out of the cottage's back windows** onto the cypresses, making an odd orange block
+    behind the house. Fix: the back wall is solid.
+## Traps
+
+- Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
+- A video model adds things nobody asked for (symbols, flags, the wrong era's machines): check
+  every generated clip frame by frame before it goes in the film.
+- Before trusting a skill's stated folder, check it exists.
+- A word spoken twice on a page must be asked for by which time it is spoken.
+- Check every title letter by letter at full size: a cut-out font can turn one letter into another.
+- Measure, don't assume, that sound and pictures line up; filters can add delay.
+- A fact that only a blocked page could confirm stays out of the film.
+- Lay every cut-out over a loud colour (magenta) before using it: missing and faint parts show at once.
+- Anything a page shows (pieces, dust, smoke) must be put away with that page, or it can linger.
+- A paper piece's edge must stay inside the frame at the piece's own distance from the camera.
+- Folded paper props are built with faces pointing either way: never push shadows along the face
+  for them, or they shade themselves dark.
+- A cut-out's sheet must be bigger than everything drawn on it, or the overflow is cut off in a
+  straight line.
+- From an angle, upright strokes printed on a flat page read as a wall; print shapes that only read
+  as lying flat.
