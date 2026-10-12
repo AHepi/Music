@@ -85,17 +85,18 @@ export async function build(kit) {
 
   // a card house on the table, for "things we can't make more of in a hurry", with its tag on a post
   const HOUSE_A = new THREE.Vector3(-0.55, 0, -1.25);
-  const houseA = paperHouse({ width: 1.0, depth: 0.95, height: 0.5, glow: 0.9 });
+  const houseA = paperHouse({ width: 1.0, depth: 0.95, height: 0.5, glow: 0.9, garden: true });
   houseA.group.position.copy(HOUSE_A);
   houseA.group.add(contactShadow(1.5, 1.4, 0.5));
   kit.scene.add(track(houseA.group));
   const postA = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1, 10), paper(PAPER.charcoal));
   postA.castShadow = true;
   kit.scene.add(track(postA));
-  const tagA = priceTag({ width: 0.55, text: '£' });
+  const tagA = priceTag({ width: 0.55, text: '↑' });
   kit.scene.add(track(tagA.group));
-  const POST_A = new THREE.Vector3(HOUSE_A.x + 0.78, 0, HOUSE_A.z + 0.45);
-  const tagTextA = [{ t: -1e9, text: '£' }, { t: T.cant, text: '££' }, { t: T.of, text: '£££' }];
+  const POST_A = new THREE.Vector3(HOUSE_A.x + 1.0, 0, HOUSE_A.z + 0.8);   // at the garden's corner, clear of the roof
+  // arrows, not a currency: this is the general idea on the model table, before the New Zealand street
+  const tagTextA = [{ t: -1e9, text: '↑' }, { t: T.cant, text: '↑↑' }, { t: T.of, text: '↑↑↑' }];
 
   // C: the review on the table, in front of factory A
   const R = new THREE.Vector3(0.35, 0, 7.6); // centre of the bottom edge of the report (nearest the camera)
@@ -118,11 +119,12 @@ export async function build(kit) {
   const streetThings = [street.mesh];
   const floor = street.pointAt(0.52, 0.3);
   const HOUSE_B = new THREE.Vector3(floor.x - 0.35, floor.y, floor.z);
-  const houseB = paperHouse({ width: 1.15, depth: 0.95, height: 0.55, glow: 1.2 });
+  const houseB = paperHouse({ width: 1.45, depth: 1.15, height: 0.68, glow: 1.2, garden: true });
+  const HOUSE_B_TURN = 0.6;    // turned so its side, roof and verandah show, like the painted villas
   const postB = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 1, 10), paper(PAPER.charcoal));
   postB.castShadow = true;
   const tagB = priceTag({ width: 0.62, text: '$' });   // New Zealand: dollars
-  const groundShadow = contactShadow(2.0, 1.5, 0.55);
+  const groundShadow = contactShadow(2.6, 2.4, 0.55);
   groundShadow.position.set(HOUSE_B.x, HOUSE_B.y + 0.02, HOUSE_B.z);
   kit.scene.add(houseB.group, postB, tagB.group, groundShadow);
   streetThings.push(houseB.group, postB, tagB.group, groundShadow);
@@ -236,8 +238,9 @@ export async function build(kit) {
       const rise = smooth(ramp(t, T.rose, T.percent + 0.4));
       houseB.group.visible = postB.visible = tagB.group.visible = groundShadow.visible = appear > 0.001;
       houseB.group.position.set(HOUSE_B.x, HOUSE_B.y, HOUSE_B.z);
+      houseB.group.rotation.y = HOUSE_B_TURN;
       houseB.group.scale.set(1, Math.max(0.001, appear), 1);
-      const postX = HOUSE_B.x + 0.72, postZ = HOUSE_B.z + 0.45, postHeight = 1.7;
+      const postX = HOUSE_B.x + 0.9, postZ = HOUSE_B.z + 1.05, postHeight = 1.7;
       postB.scale.y = postHeight * Math.max(0.001, appear);
       postB.position.set(postX, HOUSE_B.y + postHeight * appear / 2, postZ);
       let current = 0;

@@ -71,6 +71,20 @@ function printedCard(kind, base) {
   } else if (kind === 'roof') {
     ctx.strokeStyle = 'rgba(0,0,0,0.25)'; ctx.lineWidth = 2;
     for (let x = 0; x < 512; x += 10) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 256); ctx.stroke(); }
+  } else if (kind === 'weatherboard') {
+    // painted horizontal boards: a thin shadow line under each lap, a lighter top edge, a little wear
+    for (let y = 0; y < 256; y += 16) {
+      ctx.fillStyle = 'rgba(70,58,40,0.20)'; ctx.fillRect(0, y + 13, 512, 3);
+      ctx.fillStyle = 'rgba(255,255,255,0.18)'; ctx.fillRect(0, y, 512, 2);
+    }
+    for (let i = 0; i < 60; i++) { ctx.fillStyle = `rgba(90,75,55,${0.03 + random() * 0.04})`; ctx.fillRect(random() * 512, random() * 256, 20 + random() * 60, 3 + random() * 6); }
+  } else if (kind === 'iron') {
+    // corrugated iron: soft light and dark ridges, a few faint rust streaks
+    for (let x = 0; x < 512; x += 8) {
+      ctx.fillStyle = 'rgba(255,255,255,0.10)'; ctx.fillRect(x, 0, 3, 256);
+      ctx.fillStyle = 'rgba(0,0,0,0.22)'; ctx.fillRect(x + 4, 0, 3, 256);
+    }
+    for (let i = 0; i < 14; i++) { ctx.fillStyle = `rgba(120,60,30,${0.05 + random() * 0.07})`; ctx.fillRect(random() * 512, random() * 128, 3 + random() * 5, 60 + random() * 140); }
   }
   const texture = canvasTexture(canvas);
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -91,6 +105,21 @@ function windowPanes() {
     windowTexture = canvasTexture(canvas, { colour: false });
   }
   return windowTexture;
+}
+// A villa sash window: a white border, one meeting rail across the middle (one-over-one), dark glass
+// that glows warm when lit.
+let sashTexture = null;
+function sashPanes() {
+  if (!sashTexture) {
+    const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 192;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, 96, 192);
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, 96, 9); ctx.fillRect(0, 183, 96, 9); ctx.fillRect(0, 0, 9, 192); ctx.fillRect(87, 0, 9, 192);
+    ctx.fillRect(0, 90, 96, 11);
+    sashTexture = canvasTexture(canvas, { colour: false });
+  }
+  return sashTexture;
 }
 // A card model of a factory: a long brick body with a saw-tooth roof of `bays` teeth, tall paned
 // windows along the front (they glow warm when the factory runs), a door, a sign band and a chimney.
@@ -190,36 +219,162 @@ export function contactShadow(width, depth, darkness = 0.5) {
 
 // ------------------------------------------------------------------------------------- house
 // A card model of a New Zealand villa: a box with a gabled roof, a front bay and a verandah.
-export function paperHouse({ width = 1.6, depth = 1.6, height = 0.8, colour = PAPER.ivory, roofColour = PAPER.slate, glow = 0 } = {}) {
+export function paperHouse({ width = 1.6, depth = 1.6, height = 0.8, colour = PAPER.ivory, roofColour = PAPER.slate, glow = 0, garden = false } = {}) {
+  // A card model of a small New Zealand villa (front faces +z): painted weatherboards over a painted
+  // skirting with vents, white corner boards, a hipped corrugated-iron roof with ridge caps, deep eaves,
+  // a fascia, gutter and downpipe, a brick chimney with a corbel and pots, a front bay with a
+  // weatherboarded gable (barge boards, apex fretwork, a finial) and three tall sash windows under a
+  // small hood, a lean-to verandah with posts, fretwork brackets, a frieze rail, a balustrade, a deck
+  // and steps up to a panelled door with a glowing fanlight, and tall one-over-one sash windows with
+  // facings, heads and sills. garden: true adds a lawn plinth, a picket fence with a gate, a path and
+  // a hedge. setGlow(level) lights the windows. Same footprint as before (plus the garden if asked).
+  const w = width, d = depth, h = height;
   const group = new THREE.Group();
-  const wall = paper(colour);
-  const body = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), wall);
-  body.position.y = height / 2; group.add(body);
-  const roofShape = new THREE.Shape();
-  roofShape.moveTo(-width / 2 - 0.08, 0); roofShape.lineTo(0, height * 0.75); roofShape.lineTo(width / 2 + 0.08, 0); roofShape.lineTo(-width / 2 - 0.08, 0);
-  const roof = new THREE.Mesh(new THREE.ExtrudeGeometry(roofShape, { depth: depth + 0.16, bevelEnabled: false }), paper(roofColour));
-  roof.position.set(0, height, -depth / 2 - 0.08); group.add(roof);
-  const bay = new THREE.Mesh(new THREE.BoxGeometry(width * 0.42, height * 0.95, 0.4), wall);
-  bay.position.set(-width * 0.22, height * 0.475, depth / 2 + 0.2); group.add(bay);
-  const bayRoofShape = new THREE.Shape();
-  bayRoofShape.moveTo(-width * 0.23, 0); bayRoofShape.lineTo(0, height * 0.42); bayRoofShape.lineTo(width * 0.23, 0); bayRoofShape.lineTo(-width * 0.23, 0);
-  const bayRoof = new THREE.Mesh(new THREE.ExtrudeGeometry(bayRoofShape, { depth: 0.46, bevelEnabled: false }), paper(roofColour));
-  bayRoof.position.set(-width * 0.22, height * 0.95, depth / 2 - 0.02); group.add(bayRoof);
-  const verandah = new THREE.Mesh(new THREE.BoxGeometry(width * 0.5, 0.03, 0.38), paper(roofColour));
-  verandah.position.set(width * 0.24, height * 0.82, depth / 2 + 0.19); group.add(verandah);
-  for (const x of [0.04, 0.46]) {
-    const post = new THREE.Mesh(new THREE.BoxGeometry(0.03, height * 0.82, 0.03), wall);
-    post.position.set(width * x, height * 0.41, depth / 2 + 0.36); group.add(post);
+  const add = (geometry, material, x, y, z, ry = 0) => { const m = new THREE.Mesh(geometry, material); m.position.set(x, y, z); m.rotation.y = ry; group.add(m); return m; };
+  const beam = (from, to, thickness, material) => {   // a thin strip from one point to another
+    const a = new THREE.Vector3(...from), b = new THREE.Vector3(...to);
+    const m = new THREE.Mesh(new THREE.BoxGeometry(thickness, thickness, a.distanceTo(b)), material);
+    m.position.copy(a).add(b).multiplyScalar(0.5); m.lookAt(b); group.add(m); return m;
+  };
+  const boardTexture = (repeatX, repeatY) => { const t = printedCard('weatherboard', '#' + new THREE.Color(colour).getHexString()).clone(); t.needsUpdate = true; t.repeat.set(repeatX, repeatY); return t; };
+  const wallMaterial = (rx, ry) => new THREE.MeshStandardMaterial({ color: 0xffffff, map: boardTexture(rx, ry), roughness: 0.9, envMapIntensity: 0.25, side: THREE.DoubleSide });
+  const ironTexture = printedCard('iron', '#' + new THREE.Color(roofColour).getHexString()).clone(); ironTexture.needsUpdate = true; ironTexture.repeat.set(3, 2);
+  const iron = new THREE.MeshStandardMaterial({ color: 0xffffff, map: ironTexture, roughness: 0.7, metalness: 0.15, envMapIntensity: 0.35, side: THREE.DoubleSide });
+  const trim = paper(0xeae4d6, { side: THREE.DoubleSide }), dark = paper(0x3a3631), sillColour = paper(0xe2dbcb);
+  const skirtPaint = paper(0x8f8676), ridge = paper(0x7d858c);
+  const glass = new THREE.MeshStandardMaterial({ color: 0x2a3034, roughness: 0.3, metalness: 0.2, map: sashPanes(), emissive: 0xffb25e, emissiveMap: sashPanes(), emissiveIntensity: glow });
+  const skirt = h * 0.12, wallH = h - skirt;
+
+  // body on a painted skirting with dark vents, white corner boards
+  add(new THREE.BoxGeometry(w + 0.03, skirt, d + 0.03), skirtPaint, 0, skirt / 2, 0);
+  for (let i = 0; i < 4; i++) add(new THREE.PlaneGeometry(0.05, skirt * 0.35), dark, -w * 0.38 + i * w * 0.25, skirt * 0.5, d / 2 + 0.017);
+  add(new THREE.BoxGeometry(w, wallH, d), wallMaterial(w / 0.5, wallH / 0.25), 0, skirt + wallH / 2, 0);
+  for (const [x, z] of [[-w / 2, -d / 2], [w / 2, -d / 2], [-w / 2, d / 2], [w / 2, d / 2]]) add(new THREE.BoxGeometry(0.035, wallH, 0.035), trim, x, skirt + wallH / 2, z);
+
+  // hipped roof (a four-sided pyramid stretched to the eaves), ridge caps on the hips, fascia, gutter
+  const eave = Math.min(w, d) * 0.1, roofRise = h * 0.62, apex = [0, h + roofRise, 0];
+  const hip = new THREE.ConeGeometry(Math.SQRT2, roofRise, 4, 1, true);
+  hip.rotateY(Math.PI / 4);
+  add(hip, iron, 0, h + roofRise / 2, 0).scale.set(w / 2 + eave, 1, d / 2 + eave);
+  for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) beam(apex, [sx * (w / 2 + eave), h, sz * (d / 2 + eave)], 0.022, ridge);
+  add(new THREE.BoxGeometry(w + 2 * eave, 0.035, d + 2 * eave), trim, 0, h + 0.005, 0);
+  add(new THREE.BoxGeometry(w + 2 * eave, 0.03, 0.035), dark, 0, h - 0.01, d / 2 + eave);
+  add(new THREE.CylinderGeometry(0.012, 0.012, wallH, 8), dark, w / 2 + eave * 0.6, skirt + wallH / 2, d / 2 + eave * 0.6);
+
+  // brick chimney with a corbel band, a cap and two pots
+  const chimneyTexture = printedCard('brick', '#9c5a43').clone(); chimneyTexture.needsUpdate = true; chimneyTexture.repeat.set(0.4, 1.2);
+  const brick = new THREE.MeshStandardMaterial({ map: chimneyTexture, roughness: 0.9 });
+  const cw = w * 0.11, chimneyHeight = h + roofRise * 1.05, cx = -w * 0.26, cz = -d * 0.12;
+  add(new THREE.BoxGeometry(cw, chimneyHeight, cw), brick, cx, chimneyHeight / 2, cz);
+  add(new THREE.BoxGeometry(cw * 1.3, 0.03, cw * 1.3), brick, cx, chimneyHeight - 0.06, cz);
+  add(new THREE.BoxGeometry(cw * 1.35, 0.03, cw * 1.35), dark, cx, chimneyHeight + 0.015, cz);
+  for (const k of [-1, 1]) add(new THREE.CylinderGeometry(0.016, 0.02, 0.06, 10), paper(0xa8573c), cx + k * cw * 0.25, chimneyHeight + 0.06, cz);
+
+  // front bay with its own weatherboarded gable, barge boards, apex fretwork and a finial
+  const bayW = w * 0.44, bayD = Math.min(0.4, d * 0.42), bayX = -w * 0.22;
+  add(new THREE.BoxGeometry(bayW + 0.03, skirt, bayD), skirtPaint, bayX, skirt / 2, d / 2 + bayD / 2);
+  add(new THREE.BoxGeometry(bayW, wallH, bayD), wallMaterial(bayW / 0.5, wallH / 0.25), bayX, skirt + wallH / 2, d / 2 + bayD / 2);
+  const gableRise = h * 0.5, gableOver = 0.05, faceZ = d / 2 + bayD + eave * 0.5 + 0.082;
+  const gable = new THREE.Shape();
+  gable.moveTo(-bayW / 2 - gableOver, 0); gable.lineTo(0, gableRise); gable.lineTo(bayW / 2 + gableOver, 0); gable.lineTo(-bayW / 2 - gableOver, 0);
+  add(new THREE.ExtrudeGeometry(gable, { depth: bayD + 0.08 + eave * 0.5, bevelEnabled: false }), iron, bayX, h, d / 2);
+  const face = new THREE.Shape(); face.moveTo(-bayW / 2, 0); face.lineTo(0, gableRise * 0.92); face.lineTo(bayW / 2, 0); face.lineTo(-bayW / 2, 0);
+  const faceGeometry = new THREE.ShapeGeometry(face);
+  { const uv = faceGeometry.attributes.uv, pos = faceGeometry.attributes.position; for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / 0.5, pos.getY(i) / 0.25); }
+  add(faceGeometry, wallMaterial(1, 1), bayX, h + 0.004, faceZ);
+  add(new THREE.BoxGeometry(bayW + 0.04, 0.025, 0.02), trim, bayX, h + 0.012, faceZ + 0.006);                 // band at the base of the gable
+  const slope = Math.atan2(gableRise, bayW / 2 + gableOver), rafter = Math.hypot(gableRise, bayW / 2 + gableOver);
+  for (const side of [-1, 1]) {
+    const barge = add(new THREE.BoxGeometry(rafter, 0.045, 0.02), trim, bayX + side * (bayW / 2 + gableOver) / 2, h + gableRise / 2 - 0.01, faceZ + 0.008);
+    barge.rotation.z = -side * slope;
   }
-  const windowMaterial = paper(0x2a3034, { roughness: 0.5, emissive: 0xffb25e, emissiveIntensity: glow });
-  for (const [x, z, w] of [[-width * 0.22, depth / 2 + 0.405, width * 0.22], [width * 0.24, depth / 2 + 0.004, width * 0.14]]) {
-    const pane = new THREE.Mesh(new THREE.PlaneGeometry(w, height * 0.42), windowMaterial);
-    pane.position.set(x, height * 0.5, z); group.add(pane);
+  const fretwork = new THREE.Shape();                                                                        // a pierced fan at the apex
+  const fanR = bayW * 0.16, fanY = h + gableRise * 0.62;
+  fretwork.moveTo(-fanR, 0); fretwork.lineTo(0, fanR * 0.9); fretwork.lineTo(fanR, 0); fretwork.lineTo(-fanR, 0);
+  for (let i = 0; i < 4; i++) { const hole = new THREE.Path(); const hx = -fanR * 0.6 + i * fanR * 0.4; hole.moveTo(hx, 0.012); hole.lineTo(hx + fanR * 0.12, 0.012); hole.lineTo(hx + fanR * 0.06, fanR * 0.35); hole.lineTo(hx, 0.012); fretwork.holes.push(hole); }
+  add(new THREE.ShapeGeometry(fretwork), trim, bayX, fanY, faceZ + 0.012);
+  add(new THREE.ConeGeometry(0.018, 0.1, 8), trim, bayX, h + gableRise + 0.045, faceZ + 0.008);
+
+  // windows: tall one-over-one sashes with wide white facings, a head and a sill
+  const sash = (x, y, z, ry, sw, sh) => {
+    add(new THREE.PlaneGeometry(sw, sh), glass, x, y + sh / 2, z, ry);
+    const back = (amount) => [Math.sin(ry) * amount, Math.cos(ry) * amount];
+    const [bx, bz] = back(-0.008);
+    add(new THREE.BoxGeometry(sw + 0.05, sh + 0.05, 0.01), trim, x + bx, y + sh / 2, z + bz, ry);              // facings, just behind the glass
+    const [hx, hz] = back(0.012);
+    add(new THREE.BoxGeometry(sw + 0.08, 0.022, 0.03), trim, x + hx, y + sh + 0.035, z + hz, ry);            // head
+    const [sx, sz] = back(0.02);
+    add(new THREE.BoxGeometry(sw + 0.07, 0.022, 0.045), sillColour, x + sx, y - 0.022, z + sz, ry);           // sill
+  };
+  const bayZ = d / 2 + bayD + 0.004, lightW = bayW * 0.24, lightH = wallH * 0.62, bayY = skirt + wallH * 0.16;
+  for (const k of [-1, 0, 1]) sash(bayX + k * lightW * 1.22, bayY, bayZ, 0, lightW, lightH);
+  const hood = add(new THREE.BoxGeometry(bayW + 0.06, 0.018, 0.09), iron, bayX, bayY + lightH + 0.07, bayZ + 0.04);   // a small iron hood over the bay window
+  hood.rotation.x = 0.35;
+  const sashW = w * 0.09, sashH = wallH * 0.6, sashY = skirt + wallH * 0.18;
+  sash(w * 0.12, sashY, d / 2 + 0.004, 0, sashW, sashH);
+  sash(-w / 2 - 0.004, sashY, -d * 0.16, -Math.PI / 2, d * 0.14, sashH);
+  sash(-w / 2 - 0.004, sashY, d * 0.2, -Math.PI / 2, d * 0.14, sashH);
+  sash(w / 2 + 0.004, sashY, -d * 0.12, Math.PI / 2, d * 0.15, sashH);
+
+  // panelled door with facings and a glowing fanlight
+  const doorX = w * 0.36, doorW = w * 0.12, doorH = wallH * 0.66, front = d / 2 + 0.004;
+  add(new THREE.BoxGeometry(doorW + 0.05, doorH + doorH * 0.22, 0.012), trim, doorX, skirt + (doorH * 1.22) / 2, front);
+  add(new THREE.BoxGeometry(doorW, doorH, 0.016), paper(0x6e2f2a), doorX, skirt + doorH / 2, front + 0.006);
+  for (const k of [0.3, 0.72]) add(new THREE.BoxGeometry(doorW * 0.6, doorH * 0.22, 0.008), paper(0x5a2622), doorX, skirt + doorH * k, front + 0.016);
+  add(new THREE.CylinderGeometry(0.008, 0.008, 0.012, 8), paper(PAPER.ochre), doorX + doorW * 0.32, skirt + doorH * 0.5, front + 0.02).rotation.x = Math.PI / 2;
+  add(new THREE.PlaneGeometry(doorW, doorH * 0.16), glass, doorX, skirt + doorH + doorH * 0.1, front + 0.007);
+
+  // verandah: deck with an edge board, steps up to the door, posts, brackets, frieze rail, balustrade,
+  // and a lean-to iron roof from under the main eaves down to the beam
+  const verX = w * 0.24, verW = w * 0.5, verD = bayD * 0.95, verH = h * 0.8, deckY = skirt * 0.7;
+  add(new THREE.BoxGeometry(verW, deckY, verD), paper(0x8b7b66), verX, deckY / 2, d / 2 + verD / 2);
+  add(new THREE.BoxGeometry(verW + 0.01, 0.02, 0.012), trim, verX, deckY - 0.01, d / 2 + verD + 0.006);
+  for (let i = 0; i < 2; i++) add(new THREE.BoxGeometry(doorW * 1.6, deckY * 0.5 * (2 - i), 0.07), paper(0x9c8b74), doorX, deckY * 0.25 * (2 - i), d / 2 + verD + 0.035 + i * 0.07);
+  const roofTop = [verX, h - 0.012, d / 2], roofLow = [verX, verH + 0.03, d / 2 + verD + 0.05];
+  const rise = roofTop[1] - roofLow[1], run = roofLow[2] - roofTop[2];
+  const lean = add(new THREE.BoxGeometry(verW + 0.06, 0.018, Math.hypot(rise, run)), iron, verX, (roofTop[1] + roofLow[1]) / 2, (roofTop[2] + roofLow[2]) / 2);
+  lean.rotation.x = Math.atan2(rise, run);
+  add(new THREE.BoxGeometry(verW + 0.06, 0.03, 0.018), trim, verX, verH + 0.02, d / 2 + verD + 0.055);         // fascia on the verandah edge
+  const postZ = d / 2 + verD - 0.03, posts = [verX - verW / 2 + 0.02, verX - verW * 0.06, verX + verW / 2 - 0.02];
+  for (const x of posts) {
+    add(new THREE.BoxGeometry(0.03, verH - deckY, 0.03), trim, x, deckY + (verH - deckY) / 2, postZ);
+    for (const side of [-1, 1]) {
+      const bracket = new THREE.Shape(); bracket.moveTo(0, 0); bracket.lineTo(side * 0.11, 0); bracket.quadraticCurveTo(side * 0.02, -0.02, 0, -0.11); bracket.lineTo(0, 0);
+      const hole = new THREE.Path(); hole.moveTo(side * 0.015, -0.015); hole.lineTo(side * 0.05, -0.015); hole.lineTo(side * 0.015, -0.05); hole.lineTo(side * 0.015, -0.015); bracket.holes.push(hole);
+      add(new THREE.ShapeGeometry(bracket), trim, x, verH - 0.012, postZ + 0.017);
+    }
   }
-  const door = new THREE.Mesh(new THREE.PlaneGeometry(width * 0.12, height * 0.6), paper(PAPER.teal));
-  door.position.set(width * 0.38, height * 0.3, depth / 2 + 0.005); group.add(door);
+  add(new THREE.BoxGeometry(verW, 0.025, 0.02), trim, verX, verH - 0.012, postZ + 0.012);                      // the beam
+  add(new THREE.BoxGeometry(verW, 0.012, 0.012), trim, verX, verH - 0.07, postZ + 0.012);                      // frieze rail
+  for (let x = verX - verW / 2 + 0.03; x < verX + verW / 2 - 0.02; x += 0.035) add(new THREE.BoxGeometry(0.006, 0.05, 0.006), trim, x, verH - 0.042, postZ + 0.012);
+  const railY = deckY + 0.12, gapFrom = doorX - doorW * 0.9, gapTo = doorX + doorW * 0.9;                      // balustrade, open at the steps
+  for (const [x0, x1] of [[verX - verW / 2 + 0.02, gapFrom], [gapTo, verX + verW / 2 - 0.02]]) {
+    if (x1 - x0 < 0.03) continue;
+    add(new THREE.BoxGeometry(x1 - x0, 0.015, 0.02), trim, (x0 + x1) / 2, railY, postZ);
+    for (let x = x0 + 0.02; x < x1 - 0.01; x += 0.04) add(new THREE.BoxGeometry(0.008, railY - deckY, 0.008), trim, x, deckY + (railY - deckY) / 2, postZ);
+  }
+
+  // an optional garden: lawn plinth, path, picket fence with a gate gap, a rounded hedge
+  if (garden) {
+    const gw = w * 1.55, gd = d + bayD + 0.55, gz = (d / 2 + bayD + 0.55) - gd / 2;
+    add(new THREE.BoxGeometry(gw, 0.03, gd), paper(0x6f7a46), 0, -0.012, gz);
+    add(new THREE.BoxGeometry(doorW * 1.6, 0.034, 0.55 - 0.07), paper(0xc9c1b0), doorX, -0.008, d / 2 + verD + 0.14 + (0.55 - 0.14) / 2);
+    const fenceZ = d / 2 + bayD + 0.5, picket = paper(0xf2ede2);
+    for (let x = -gw / 2 + 0.02; x < gw / 2; x += 0.045) {
+      if (Math.abs(x - doorX) < doorW * 0.9) continue;
+      add(new THREE.BoxGeometry(0.018, 0.13, 0.008), picket, x, 0.065, fenceZ);
+      add(new THREE.ConeGeometry(0.011, 0.02, 4), picket, x, 0.14, fenceZ).rotation.y = Math.PI / 4;
+    }
+    for (const y of [0.04, 0.1]) {
+      for (const [x0, x1] of [[-gw / 2, doorX - doorW * 0.9], [doorX + doorW * 0.9, gw / 2]]) add(new THREE.BoxGeometry(x1 - x0, 0.012, 0.008), picket, (x0 + x1) / 2, y, fenceZ - 0.008);
+    }
+    const hedge = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 12), paper(0x3f5a33));
+    hedge.scale.set(1.4, 0.8, 1); hedge.position.set(-gw / 2 + 0.2, 0.08, fenceZ - 0.2); group.add(hedge);
+  }
+
   shadowing(group);
-  return { group, setGlow(level) { windowMaterial.emissiveIntensity = level; } };
+  group.traverse((o) => { if (o.isMesh && o.material === glass) o.castShadow = false; });
+  return { group, setGlow(level) { glass.emissiveIntensity = level; } };
 }
 
 // ------------------------------------------------------------------------------------- shells
