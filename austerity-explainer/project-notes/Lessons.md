@@ -221,6 +221,10 @@ Only failures in doing the work belong here. Newest at the bottom.
     and a railing, a panelled door) on a small lawn with a picket fence, turned to show its depth in
     the street. Two critics (a model maker and a film director) reviewed it first; their best points
     went in. Lesson: a hero prop needs as much detail as the paintings around it.
+56. **Filming stopped silently for 90 minutes.** The cloud machine restarted at about 5pm and ended the
+    background filming job; the watcher only looked for "finished", so nothing noticed. Fix: run the
+    filming script again (finished stretches are kept); the watcher now also stops when the script is
+    no longer running.
 
 ## Traps
 

@@ -14,7 +14,9 @@ processors (about 1.4-2.4 s a frame), about 3.5 hours; then about 10 minutes of 
 cd KIT && nohup setsid bash paper-film/tools/film-chapter-parallel.sh <chapter> 2 240 > paper-film/out/<chapter>-filming.stdout 2>&1 < /dev/null &
 ```
 - Progress: `paper-film/out/<chapter>-filming.log` (one line per finished stretch). Wait with a
-  background command that loops until the log says `joined:` or `chunks missing`.
+  background command that loops until the log says `joined:` or `chunks missing` OR the filming
+  script is no longer running (`pgrep -f film-chapter-parallel.sh`): a cloud machine can restart and
+  silently end background jobs (chapter 2 lost 90 minutes that way). Check the log's last time too.
 - Check the FIRST finished stretch at once (pull frames with
   `ffmpeg -ss SECONDS -i paper-film/out/<chapter>-chunks/chunk-00000-to-00205.mp4 -frames:v 1 f.jpg`)
   so a problem does not waste hours.
