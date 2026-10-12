@@ -6,10 +6,28 @@ description: Build one page file of an explainer film in the cinema look (a 3D s
 # Build a cinema page
 
 Read the full guide first: `${CLAUDE_PLUGIN_ROOT}/skills/build-cinema-page/guide.md` (what to read in
-the kit, what a page file is, how to test, lessons, and the strict on-screen rules).
+the kit, what a page file is, how to test, lessons, and the strict on-screen rules), then
+`${CLAUDE_PLUGIN_ROOT}/skills/build-cinema-page/camera-and-framing.md` (strict, from a viewer's
+feedback on chapter 2):
+- **The camera holds still** and moves only to land a point, each move meaning one thing: zoom in
+  (narrow onto what matters now), zoom out (make room), pan left/right (shift perspective), pan up
+  (ideals), pan down (pressure), move up (the bigger picture), move down (the small details). **At
+  most 3 moves per shot**; more means cut to another shot. Write it with `kit.stillShot(start,
+  moves, { name })` (it refuses a 4th move or an unknown kind) and check it with
+  `node paper-film/tools/render-paper-film.mjs SCENE --camera FILE.json 3` then
+  `python3 -I paper-film/tools/camera_audit.py FILE.json [--window FROM TO]` (must say 0 problems).
+- **Fill the tall frame**: the subject 60-80% of the width; something in the top third (sky, smoke,
+  chimneys) and the bottom third (soft near props), never big empty dark floor. Frame with numbers
+  first: `python3 -I paper-film/tools/frame_check.py CAM TARGET FOV name=x,y,z ...`.
+- **Nothing passes through anything**: `room.clearance(object)` (distance in front of the painting;
+  negative = poking through), `boxesOverlap(a, b)`; standing things sit ON the floor point; falling
+  things stop on the surface they land on.
+- Plain card models look poor next to paintings: make detailed ones in Blender (skill `make-3d-models`).
+- Words at the top over a busy set need a soft dark band behind them (see chapter 2 page 8).
 
-**Example.** Page 2 of chapter 2 ("Britain, 1915"): the camera creeps down a painted munitions hall
-with sunlight and dust; on "Unemployment" munition women rise in the foreground and a panel of 100
+**Example.** Page 2 of chapter 2 ("Britain, 1915"): the camera holds on a painted munitions hall
+with sunlight and dust, moves down to the floor once as new money lands, and pans right once to the
+benches; on "Unemployment" munition women rise in the foreground and a panel of 100
 dots fills, all but one, under UNDER 1%; on "new money" banknote bundles drop and stack; on
 "Submarines" paper boats sink in a puddle; on "doubled" two bars show prices ×2.
 

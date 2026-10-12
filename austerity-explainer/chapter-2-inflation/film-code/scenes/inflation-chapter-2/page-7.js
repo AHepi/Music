@@ -33,6 +33,7 @@ export async function build(kit) {
     three: kit.at('three'),
     months: kit.at('months'),
     almost: kit.at('almost'),
+    everything: kit.at('everything'),
     made: kit.at('made'),
     moved: kit.at('moved'),
     fuel: kit.at('fuel'),
@@ -69,6 +70,9 @@ export async function build(kit) {
   barrel.group.position.copy(barrelAt);
   barrel.group.rotation.y = 0;
   kit.scene.add(barrel.group);
+  // the painted forecourt rises a little behind the barrel's foot: lift it until its whole base stands
+  // on (not in) the painted concrete
+  for (let i = 0; i < 40 && station.clearance(barrel.group) < 0.04; i++) { barrelAt.y += 0.01; barrel.group.position.copy(barrelAt); }
   const oilCard = await kit.card('OIL', { size: 0.15, at: [0, barrel.height * 0.38, barrel.radius + 0.045], parent: barrel.group });
   const barrelLight = kit.glow([barrelAt.x - 0.6, barrelAt.y + 1.6, barrelAt.z + 1.4], { colour: 0xffc27a, strength: 3.5, reach: 5 });
   const dust = new DustBurst(kit.scene, { count: 22, seed: 7, colour: 'rgba(150,140,124,0.9)' });
@@ -85,17 +89,26 @@ export async function build(kit) {
   const tags = [];
   const tagCount = 4;
   for (let i = 0; i < tagCount; i++) {
-    const u = 0.29 + i * 0.145;
+    const u = 0.25 + i * 0.17;
     const at = floor(u, 0.075);
-    const tag = priceTag({ width: 0.46, text: '↑', accent: '#b8402c' });
+    const tag = priceTag({ width: 0.38, text: '↑', accent: '#b8402c' });
+    // no string: on a row of tags lying side by side, each string would reach into its neighbour
+    tag.group.children.filter((c) => c !== tag.card).forEach((c) => { c.visible = false; tag.group.remove(c); });
     const pivot = new THREE.Group();
     // the tag hangs from its hole; sit its bottom edge on the pivot (its hinge), centred
     tag.group.position.set(-tag.width / 2 + tag.width * 62 / 512, tag.height / 2, 0);
     pivot.add(tag.group);
     pivot.position.copy(at);
-    pivot.rotation.y = (i - 1.5) * -0.06;
+    pivot.rotation.y = 0;
     kit.scene.add(pivot);
-    tags.push({ pivot, tag, upAt: T.almost + 0.1 + i * ((T.fuel - T.almost) / (tagCount - 1)) });
+    // stand it on (not in) the painted concrete, lying flat and upright
+    for (let k = 0; k < 30; k++) {
+      pivot.rotation.x = -Math.PI / 2; const flat = station.clearance(pivot);
+      pivot.rotation.x = 0; const upright = station.clearance(pivot);
+      if (Math.min(flat, upright) >= 0.03) break;
+      pivot.position.y += 0.01;
+    }
+    tags.push({ pivot, tag, upAt: T.everything + 0.05 + i * ((T.fuel - T.everything) / (tagCount - 1)) });
   }
 
   // warm specks drifting under the canopy lights
@@ -109,19 +122,16 @@ export async function build(kit) {
 
   // ------------------------------------------------------------------ the camera
   const barrelMid = [barrelAt.x, barrelAt.y + 0.75, barrelAt.z];
-  const shotA = kit.shot([
-    { t: T.start, position: [0, 0.25, 0.6], target: [0.2, -0.9, -30], fov: 40, focus: 14 },
-    { t: T.climbing + 0.4, position: [0.1, 0.05, -0.2], target: [0.4, -1.0, -30], fov: 39, focus: 13 },
-    { t: T.oil, position: [0.2, -0.2, -1.0], target: [barrelAt.x + 0.05, barrelAt.y + 0.85, barrelAt.z], fov: 36, focus: barrelMid },
-    { t: T.months + 0.3, position: [0.3, -0.3, -1.6], target: [barrelAt.x, barrelAt.y + 0.9, barrelAt.z], fov: 33, focus: barrelMid },
-    { t: T.made + 0.3, position: [0.05, -0.1, -0.6], target: [0.15, -1.3, -9], fov: 38, focus: [0, barrelAt.y, barrelAt.z + 0.6] },
-    { t: T.dearer + 0.6, position: [0.05, -0.15, -0.9], target: [0.2, -1.25, -9], fov: 37, focus: [0, barrelAt.y, barrelAt.z + 0.5] },
-    { t: cut + 0.5, position: [0.15, -0.05, -1.3], target: [0.3, -1.15, -9], fov: 35, focus: barrelMid },
-  ], { handheld: 0.012, seed: 7 });
-  const shotB = kit.shot([
-    { t: cut - 0.5, position: [-0.1, 0.15, 0.4], target: [0.15, -0.55, -30], fov: 41, focus: 16 },
-    { t: T.end + 1.4, position: [0.2, 0.0, -1.3], target: [0.35, -0.6, -30], fov: 39, focus: 14 },
-  ], { handheld: 0.01, seed: 8 });
+  // shot A, the forecourt: holds wide on the station for "Late 1973 ... prices already climbing";
+  // zooms in onto the barrel as she says "the price of oil" (it lands as the camera settles), holds on
+  // the counter through x4 and "three months"; then zooms out on "almost everything" to make room for
+  // the row of price tags, and holds there to the end of part A.
+  const shotA = kit.stillShot({ position: [0.05, 0.0, -0.4], target: [0.25, -0.5, -30], fov: 38, focus: 13 }, [
+    { from: T.price - 0.55, to: T.oil + 0.05, kind: 'zoom in', position: [0.25, -0.25, -1.4], target: [barrelAt.x + 0.03, barrelAt.y + 1.12, barrelAt.z], fov: 31, focus: barrelMid },
+    { from: T.months + 0.25, to: T.everything, kind: 'zoom out', position: [0.05, -0.2, -0.75], target: [0.2, -0.62, -9], fov: 35, focus: [0, barrelAt.y, barrelAt.z + 0.55] },
+  ], { name: 'the forecourt, 1973' });
+  // shot B, New Zealand: holds still so the bars panel reads
+  const shotB = kit.stillShot({ position: [-0.1, 0.1, -0.3], target: [-0.35, -0.1, -30], fov: 38, focus: 15 }, [], { name: 'a New Zealand street' });
   kit.shake(T.oil + 0.05, 0.03, 0.18);
 
   function pose(t) {

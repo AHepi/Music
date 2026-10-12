@@ -47,43 +47,53 @@ export async function build(kit) {
   };
 
   // the queue of workers waiting at factory A's gate (a painted cut-out, side view, facing left)
-  const queue = await kit.cutout('workers-queue', { at: [FACTORY_A.x + 1.05, 0, FACTORY_A.z + 1.2], width: 1.7, yaw: 0 });
+  const queue = await kit.cutout('workers-queue', { at: [FACTORY_A.x + 0.95, 0, FACTORY_A.z + 1.2], width: 1.4, yaw: 0 });
   // new money: coins raining into each yard
-  const coinsA = new CoinRain(kit.scene, { count: 22, centre: [a.yard.x, 0, a.yard.z], radius: 0.7, start: T.money1 + 0.05, spread: 0.9, coinRadius: 0.06, seed: 5 });
-  const coinsB = new CoinRain(kit.scene, { count: 22, centre: [b.yard.x, 0, b.yard.z], radius: 0.7, start: T.money2 + 0.05, spread: 0.9, coinRadius: 0.06, seed: 8 });
+  const coinsA = new CoinRain(kit.scene, { count: 22, centre: [a.yard.x, 0, a.yard.z], radius: 0.55, start: T.money1 + 0.05, spread: 0.9, coinRadius: 0.06, seed: 5 });
+  const coinsB = new CoinRain(kit.scene, { count: 22, centre: [b.yard.x, 0, b.yard.z], radius: 0.55, start: T.money2 + 0.05, spread: 0.9, coinRadius: 0.06, seed: 8 });
   // buyers' bids: a stack of coins growing beside B's price counter
   const bids = new CoinRain(kit.scene, { count: 14, centre: [b.boardAt.x - 0.32, 0, b.boardAt.z + 0.25], height: 2.5, start: T.bid, spread: T.climb - T.bid + 0.6, coinRadius: 0.055, seed: 3, stack: true });
   const dust = new DustBurst(kit.scene, { count: 18, seed: 4 });
 
   // short of workers, materials and machines: three cut-outs and their words in front of B
+  // staggered in depth (worker in front left, materials in the middle, the lathe behind right) so
+  // all three fit the tall frame large
   const shortOf = [
-    { name: 'worker-standing', width: 0.42, x: FACTORY_B.x - 0.95, word: 'WORKERS', at: T.wordWorkers },
-    { name: 'materials', width: 0.8, x: FACTORY_B.x + 0.05, word: 'MATERIALS', at: T.wordMaterials },
-    { name: 'lathe', width: 0.8, x: FACTORY_B.x + 1.05, word: 'MACHINES', at: T.wordMachines },
+    { name: 'worker-standing', width: 0.42, x: FACTORY_B.x - 0.5, z: FACTORY_B.z + 2.9, word: 'WORKERS', at: T.wordWorkers },
+    { name: 'materials', width: 0.8, x: FACTORY_B.x + 0.15, z: FACTORY_B.z + 2.65, word: 'MATERIALS', at: T.wordMaterials },
+    { name: 'lathe', width: 0.8, x: FACTORY_B.x + 0.75, z: FACTORY_B.z + 2.3, word: 'MACHINES', at: T.wordMachines },
   ];
+  // soft foreground at the bottom corners of the last shot (barrels left, crates right)
+  set.prop('barrels', [1.3, 0, 0.9], 0.4);
+  set.prop('crates', [2.3, 0, 0.75], -0.3);
+  // and in the near corners of the opening shot: a hand cart, a gas lamp and barrels
+  set.prop('cart', [-1.35, 0, 8.9], 0.5);
+  set.prop('lamp-post', [-0.3, 0, 7.4]);
+  set.prop('barrels', [-2.55, 0, 9.6], -0.2);
   for (const item of shortOf) {
-    item.piece = await kit.cutout(item.name, { at: [item.x, 0, FACTORY_B.z + 2.55], width: item.width });
-    item.label = await kit.word(item.word, { at: [item.x, 0, FACTORY_B.z + 2.95], size: 0.12 });
+    item.piece = await kit.cutout(item.name, { at: [item.x, 0, item.z], width: item.width });
+    item.label = await kit.word(item.word, { at: [item.x, 0, item.z + 0.4], size: 0.085 });
   }
 
-  // the camera: a crane down onto both factories, then to A, across to B, and back to settle on B
-  // (close-ups are framed so each price board sits fully inside x 140..940 of the frame; while the
-  // shells come out the camera pulls back so the shells and A's board share the picture)
-  const shot = kit.shot([
-    { t: T.start, position: [0.2, 8.5, 21], target: [0.1, 1.6, -3.0], fov: 40, focus: [0, 0.6, -1] },
-    { t: T.two + 0.5, position: [0.5, 5.6, 14.5], target: [0.1, 1.2, -2.2], fov: 40, focus: [0, 0.6, -1] },
-    { t: T.first + 1.5, position: [0.8, 3.9, 10.2], target: [-0.7, 0.75, 2.6], fov: 38, focus: [-1.0, 0.6, 3.2] },
-    { t: T.money1, position: [0.8, 3.7, 9.9], target: [-0.8, 0.55, 2.9], fov: 38, focus: [a.yard.x, 0.1, a.yard.z] },
-    { t: T.shells + 0.6, position: [0.1, 4.6, 14.2], target: [-1.2, 0.5, 3.2], fov: 38, focus: [-1.3, 0.3, 3.6] },
-    { t: T.barely + 0.6, position: [0.4, 3.8, 12.6], target: [-0.9, 0.8, 3.4], fov: 36, focus: [a.boardAt.x, a.boardAt.y, a.boardAt.z] },
-    { t: T.second + 1.0, position: [3.9, 4.85, 6.1], target: [1.95, 0.75, -3.8], fov: 38, focus: [1.8, 0.6, -3.0] },
-    { t: T.money2, position: [3.85, 4.5, 5.6], target: [1.95, 0.55, -3.5], fov: 38, focus: [b.yard.x, 0.1, b.yard.z] },
-    { t: T.noMore + 0.9, position: [3.85, 4.1, 4.9], target: [2.05, 0.6, -3.3], fov: 38, focus: [1.9, 0.3, -2.9] },
-    { t: T.bid, position: [3.9, 2.6, 2.4], target: [2.6, 0.85, -2.9], fov: 36, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
-    { t: T.climb + 1.0, position: [3.8, 2.3, 1.8], target: [2.7, 0.95, -2.8], fov: 34, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
-    { t: T.britain + 0.8, position: [2.55, 5.0, 6.5], target: [1.95, 0.9, -3.6], fov: 38, focus: [1.8, 0.8, -3.4] },
-    { t: T.end + 1.2, position: [2.05, 3.9, 8.4], target: [1.85, 0.5, -1.8], fov: 38, focus: [1.8, 0.3, -1.6] },
-], { handheld: 0.015, seed: 3 });
+  // the camera (round 20: still unless a move lands a point, at most 3 moves per shot): three shots,
+  // cut on Malina's words. 1: both works, low and wide, the town behind. 2: works A (idle, then busy);
+  // it zooms in on A's price board as "prices barely move". 3: works B (flat out); it zooms in on B's
+  // board as buyers bid and prices climb, then zooms out to make room for the three things Britain
+  // was short of.
+  const CUT_A = T.first - 0.12, CUT_B = T.second - 0.2;
+  const boardA = [a.boardAt.x, a.boardAt.y, a.boardAt.z], boardB = [b.boardAt.x, b.boardAt.y, b.boardAt.z];
+  const shotBoth = kit.stillShot({ position: [-2.6, 1.25, 12.6], target: [0.4, 1.05, -1.8], fov: 44, focus: [-0.6, 0.8, 3.0] }, [], { name: 'both works' });
+  const shotA = kit.stillShot({ position: [1.8, 1.3, 9.2], target: [-1.0, 0.95, 3.2], fov: 41, focus: [-0.9, 0.6, 3.5] }, [
+    { from: T.money1 - 0.3, to: T.money1 + 0.2, kind: 'focus', focus: [a.yard.x, 0.1, a.yard.z] },
+    { from: T.shells - 0.2, to: T.shells + 0.3, kind: 'focus', focus: [-1.95, 0.3, 3.55] },
+    { from: T.prices1 - 0.15, to: T.barely + 0.5, kind: 'zoom in', position: [0.7, 1.2, 6.6], target: [-0.2, 1.0, 3.6], focus: boardA },
+  ], { name: 'works A' });
+  const shotB = kit.stillShot({ position: [4.8, 1.3, 2.8], target: [2.0, 0.95, -3.2], fov: 41, focus: [1.7, 0.6, -2.7] }, [
+    { from: T.money2 - 0.3, to: T.money2 + 0.2, kind: 'focus', focus: [b.yard.x, 0.1, b.yard.z] },
+    { from: T.bid - 0.2, to: T.bid + 0.7, kind: 'zoom in', position: [3.75, 1.2, 0.6], target: [2.6, 1.0, -2.6], focus: boardB },
+    { from: T.britain - 0.1, to: T.britain + 0.9, kind: 'zoom out', position: [1.8, 1.25, 3.9], target: [1.75, 0.95, -2.3], fov: 46, focus: [1.75, 0.4, -1.55] },
+  ], { name: 'works B' });
+  const shot = (t) => (t < CUT_A ? shotBoth(t) : t < CUT_B ? shotA(t) : shotB(t));
 
   // the prices on each counter
   const priceA = [{ t: T.start - 1, text: '£1.00' }];
@@ -136,6 +146,7 @@ export async function build(kit) {
       item.label.set(popUp(t, item.at - 0.05, { height: 0.3, restZ: 0.1 }));
     }
     set.motes.set(t);
+    set.townSmoke(t);
     return { camera: shot(t), look: { aperture: 9, maxBlur: 16, exposure: 0.92, glowThreshold: 0.95, glowStrength: 0.75, contrast: 1.08 } };
   }
 

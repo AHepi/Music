@@ -77,37 +77,41 @@ export async function build(kit) {
   rate.group.children[0].rotation.y = FACE_TURN;
   kit.scene.add(rate.group);
   const post = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 1.6, 16), paper(0x6a6f70));
-  post.position.set(dialFoot.x, dialFoot.y + 0.8, dialFoot.z - 0.06);
+  // behind the dial's face; its foot sits just on the kerb (the painted ground rises steeply behind
+  // the foot point, so it is lifted a hair to stay clear of it)
+  post.position.set(dialFoot.x, dialFoot.y + 0.8 + 0.055, dialFoot.z - 0.06);
   post.castShadow = true;
   kit.scene.add(post);
-
-  // where the camera drifts during the unemployment beat (the footpath). Unemployment itself is
-  // shown as a panel of a hundred dots (as on page 2), not by figures in period clothes.
-  const queueFoot = street.pointAt(0.28, 0.09);
 
   const motes = new Motes(kit.scene, { count: 140, min: [-2.2, -2.2, -12], max: [2.2, 2.0, -4], size: 0.028, seed: 10, opacity: 0.45 });
 
   // -------------------------------------------------------------------- B: the chamber
   const chamber = await kit.relief('101-bg-parliament', { near: 6, far: 70, fov: 40 });
-  const chamberFloor = chamber.pointAt(0.5, 0.12);
-  const politician = await kit.speaker('politician', { at: [chamberFloor.x, chamberFloor.y - 0.25, chamberFloor.z + 1.0], width: 2.4 });
-  const faceAt = new THREE.Vector3(chamberFloor.x, chamberFloor.y - 0.25 + 2.4 * 2048 / 1656 * 0.78, chamberFloor.z + 1.0);
+  // the politician stands exactly where he stood on page 1 (the film ends where it began), his foot
+  // on the painted floor
+  const manFloor = chamber.pointAt(0.47, 0.14);
+  const politician = await kit.speaker('politician', { at: [manFloor.x, manFloor.y + 0.01, manFloor.z], width: 2.0 });
+  const faceAt = new THREE.Vector3(manFloor.x, manFloor.y + 2.0, manFloor.z);
 
   // ------------------------------------------------------------------------- the cameras
-  const streetShot = kit.shot([
-    { t: T.start, position: [0.2, 0.1, 0.5], target: [0.25, 0.25, -30], fov: 40, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-    { t: T.half + 0.4, position: [0.2, 0.0, -0.1], target: [0.45, 0.1, -30], fov: 39, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-    { t: T.unemployment + 0.5, position: [-0.05, -0.1, -0.3], target: [-0.3, -0.35, -30], fov: 40, focus: [queueFoot.x, queueFoot.y + 0.8, queueFoot.z] },
-    { t: T.sixEnd, position: [-0.1, -0.15, -0.45], target: [-0.35, -0.4, -30], fov: 40, focus: [queueFoot.x, queueFoot.y + 0.8, queueFoot.z] },
-    { t: T.raising, position: [0.15, -0.05, -0.55], target: [0.5, 0.05, -30], fov: 39, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-    { t: T.cut + 0.3, position: [0.2, -0.05, -0.7], target: [0.55, 0.05, -30], fov: 38, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-  ], { handheld: 0.012, seed: 10 });
-  const chamberShot = kit.shot([
-    { t: T.cut, position: [0, 0.0, 0.35], target: [0, 0.45, -30], fov: 40, focus: [faceAt.x, faceAt.y, faceAt.z] },
-    { t: T.ask, position: [0, -0.02, 0.15], target: [0, 0.5, -30], fov: 40, focus: [faceAt.x, faceAt.y, faceAt.z] },
-    { t: T.who + 0.4, position: [0, -0.05, -0.3], target: [0, 0.8, -30], fov: 39, focus: [faceAt.x, faceAt.y, faceAt.z] },
-    { t: T.fadeEnd + 0.3, position: [0, -0.05, -0.55], target: [0, 0.8, -30], fov: 38, focus: [faceAt.x, faceAt.y, faceAt.z] },
-  ], { handheld: 0.01, seed: 11 });
+  // The camera rule: each shot holds still and moves only to land a point (at most 3 moves a shot).
+  // Street shot: the street with the dial at the kerb; zoom in on the dial as she names the interest
+  // rate; zoom out on "since" to make room for the hundred dots; zoom in on the dial again on "this
+  // year ... raising".
+  const dialPoint = [dialCentre.x, dialCentre.y, dialCentre.z];
+  const STREET_WIDE = { position: [0.15, -0.2, -0.6], target: [-0.3, 1.8, -30], fov: 34, focus: dialPoint };
+  const STREET_DIAL = { position: [0.35, -0.05, -2.0], target: [1.95, 0.6, -30], fov: 28.5 };
+  const streetShot = kit.stillShot(STREET_WIDE, [
+    { from: T.pushed - 0.3, to: T.pushed + 0.9, kind: 'zoom in', ...STREET_DIAL },
+    { from: T.since - 0.35, to: T.since + 0.75, kind: 'zoom out', position: STREET_WIDE.position, target: STREET_WIDE.target, fov: STREET_WIDE.fov },
+    { from: T.thisYear - 0.15, to: T.thisYear + 1.0, kind: 'zoom in', ...STREET_DIAL },
+  ], { name: 'the street and the dial' });
+  // Chamber shot: page 1's picture again. It holds on the politician while he says it; one short zoom
+  // in on "ask them", onto him (to page 1's close framing), as the two questions land; then still.
+  const faceFocus = [faceAt.x, faceAt.y, faceAt.z];
+  const chamberShot = kit.stillShot({ position: [0, 0.1, -0.3], target: [0, -0.35, -30], fov: 35, focus: faceFocus }, [
+    { from: T.ask - 0.1, to: T.ask + 1.0, kind: 'zoom in', position: [0, 0.05, -0.8], target: [-0.05, -0.1, -30], fov: 30 },
+  ], { name: 'the chamber and the question' });
 
   // the needle: 0.25 at the start, swings to 5.5 on "five and a half" (capped: it never passes the
   // 5.5 she says) and holds there through the unemployment beat; it only resets to the 2026 level

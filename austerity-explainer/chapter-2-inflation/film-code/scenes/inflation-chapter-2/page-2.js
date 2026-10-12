@@ -85,17 +85,17 @@ export async function build(kit) {
   const basketAt = floorAt(0.36, 0.1);
   const basket = await kit.cutout('basket', { at: [basketAt.x, basketAt.y, basketAt.z], width: 0.9 });
 
-  // the camera: from where the hall was painted, creeping down the aisle, dipping to the floor,
-  // turning to the benches of shells, then back down the aisle
-  const shot = kit.shot([
-    { t: T.start, position: [0, 0.15, 0.4], target: [0, -0.4, -30], fov: 40, focus: 16 },
-    { t: T.unemployment + 0.4, position: [0, -0.1, -0.5], target: [0, -0.9, -30], fov: 40, focus: 9.0 },
-    { t: T.newMoney - 0.2, position: [0.15, -0.35, -1.1], target: [0.1, -1.8, -30], fov: 40, focus: [stackBase.x, stackBase.y, stackBase.z] },
-    { t: T.submarines + 1.2, position: [-0.05, -0.4, -1.3], target: [-0.3, -1.9, -30], fov: 39, focus: [boats[1].home.x, boats[1].home.y, boats[1].home.z] },
-    { t: T.warWork + 0.6, position: [0.05, -0.2, -1.2], target: [1.3, -1.1, -22], fov: 39, focus: 11.5 },
-    { t: T.more + 0.4, position: [0.1, -0.4, -1.4], target: [0, -1.8, -30], fov: 40, focus: [stackBase.x, stackBase.y, stackBase.z] },
-    { t: T.last + 1.0, position: [0.05, -0.3, -2.0], target: [0, -1.4, -30], fov: 40, focus: 10 },
-  ], { handheld: 0.012, seed: 2 });
+  // the camera (still unless a move is essential, three moves at most): it holds on the hall from
+  // where it was painted; moves down to the floor for the small details as the new money lands; then
+  // pans a little right as the factories turn to war work, and holds there (the money stack, the
+  // basket and the benches all in view) to the end
+  const stackPoint = [stackBase.x, stackBase.y, stackBase.z];
+  const shot = kit.stillShot({ position: [0, 0.1, 0.2], target: [0, -0.5, -30], fov: 40, focus: 12 }, [
+    { from: T.unemployment + 0.2, to: T.unemployment + 0.8, kind: 'focus', focus: 9.0 },
+    { from: T.newMoney - 0.9, to: T.newMoney + 0.3, kind: 'move down', position: [0.05, -0.35, -1.2], target: [0, -1.8, -30], focus: stackPoint },
+    { from: T.submarines - 0.1, to: T.submarines + 0.4, kind: 'focus', focus: [boats[1].home.x, boats[1].home.y, boats[1].home.z] },
+    { from: T.factories - 0.1, to: T.warWork + 0.5, kind: 'pan right', target: [0.9, -1.6, -26], focus: stackPoint },
+  ], { name: 'the munitions hall' });
   kit.shake(T.newMoney + 0.3, 0.012, 0.18);
 
   function pose(t) {

@@ -1,20 +1,23 @@
 // What this does: page 8 of chapter 2, "so yes... and here, 2021". Three places, joined by quick dips:
-//   A. The two-factories model set from page 3. "So yes": YES, IT CAN. The camera moves onto factory B
-//      (flat out): coins rain into its yard and its price counter flips up at "flat out". At "things we
-//      can't make more of in a hurry" a card house pops up on the table and its price tag climbs
-//      (£, ££, £££ - plainly illustrative, no figures).
+//   A. The two-factories model set from page 3 (round 20: detailed Blender works in a model town).
+//      "So yes": YES, IT CAN, held on works B (flat out): coins rain into its yard and its price
+//      counter flips up at "flat out". At "things we can't make more of in a hurry" the camera zooms
+//      out to make room as a card house pops up in front of works B and its tag climbs (arrows, plainly
+//      illustrative, no figures).
 //   B. "In twenty twenty-one": a painted New Zealand street (a painting with depth). Title NEW ZEALAND
 //      2021; at "lowest" the figure 3.2% with UNEMPLOYMENT, LOWEST ON RECORD and a small line "Records
 //      began in 1986". "House prices rose about thirty percent in twelve months": a card house pops up
 //      on the pavement while its tag climbs a post ($, $$, $$$, plainly illustrative); +30% / IN 12
 //      MONTHS as words only. Credit STATS NZ; REINZ.
-//   C. "An independent review of the Reserve Bank": back on the card table, a printed report drops
-//      and lies flat (INDEPENDENT REVIEW / RESERVE BANK; credit INDEPENDENT REVIEW, SEPTEMBER 2026). The
+//   C. "An independent review of the Reserve Bank": a reviewer's desk (Blender: wood, a leather
+//      blotter, a banker's lamp, folders, typed papers, an ink pad, a pen, glasses, tea, bookshelves);
+//      a printed report drops onto the blotter and lies flat (INDEPENDENT REVIEW / RESERVE BANK; credit INDEPENDENT REVIEW, SEPTEMBER 2026). The
 //      rubber stamp comes down twice: RIGHT AT FIRST (teal) and TOO STRONG, FOR TOO LONG (red), each
 //      also as a word hook under THE REVIEW: (it is the review's judgement).
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, popUp, clamp01, smooth, ramp, lerp, spring } from '../cinema-kit.js';
+import { loadModel, markerAt } from '../model-loader.js';
 import { paperHouse, priceTag, paper, PAPER, contactShadow } from '../models.js';
 import { CoinRain, DustBurst, Motes } from '../effects.js';
 import { placeTitle, hook, counter, callout, credit, presence, INK } from '../graphics.js';
@@ -77,16 +80,17 @@ export async function build(kit) {
 
   // coins raining into factory B's yard, as the money is spent where it is flat out
   const beforeCoins = new Set(kit.scene.children);
-  const coinsB = new CoinRain(kit.scene, { count: 24, centre: [b.yard.x, 0, b.yard.z], radius: 0.7, start: T.spent + 0.1, spread: 1.4, coinRadius: 0.06, seed: 12 });
+  const coinsB = new CoinRain(kit.scene, { count: 22, centre: [b.yard.x + 0.2, 0, b.yard.z - 0.3], radius: 0.45, start: T.spent + 0.1, spread: 1.4, coinRadius: 0.06, seed: 12 });
   const dust = new DustBurst(kit.scene, { count: 16, seed: 9 });
   kit.scene.children.filter((o) => !beforeCoins.has(o)).forEach(track);
   const priceA = [{ t: T.start - 1, text: '£1.00' }];
   const priceB = [{ t: T.start - 1, text: '£1.00' }, { t: T.flat - 0.05, text: '£1.30' }, { t: T.flat + 0.3, text: '£1.70' }, { t: T.flat + 0.65, text: '£2.00' }];
 
   // a card house on the table, for "things we can't make more of in a hurry", with its tag on a post
-  const HOUSE_A = new THREE.Vector3(-0.55, 0, -1.25);
+  const HOUSE_A = new THREE.Vector3(1.6, 0.012, -1.4);   // in front of works B, its board behind it
   const houseA = paperHouse({ width: 1.0, depth: 0.95, height: 0.5, glow: 0.9, garden: true });
   houseA.group.position.copy(HOUSE_A);
+  houseA.group.rotation.y = 0.5;
   houseA.group.add(contactShadow(1.5, 1.4, 0.5));
   kit.scene.add(track(houseA.group));
   const postA = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1, 10), paper(PAPER.charcoal));
@@ -94,12 +98,19 @@ export async function build(kit) {
   kit.scene.add(track(postA));
   const tagA = priceTag({ width: 0.55, text: '↑' });
   kit.scene.add(track(tagA.group));
-  const POST_A = new THREE.Vector3(HOUSE_A.x + 1.0, 0, HOUSE_A.z + 0.8);   // at the garden's corner, clear of the roof
+  const POST_A = new THREE.Vector3(2.45, 0, -0.65);   // at the garden's front right corner, clear of the roof
   // arrows, not a currency: this is the general idea on the model table, before the New Zealand street
   const tagTextA = [{ t: -1e9, text: '↑' }, { t: T.cant, text: '↑↑' }, { t: T.of, text: '↑↑↑' }];
 
-  // C: the review on the table, in front of factory A
+  // C: the review on a reviewer's desk (its own place: the town and works are hidden then)
   const R = new THREE.Vector3(0.35, 0, 7.6); // centre of the bottom edge of the report (nearest the camera)
+  const desk = await loadModel('/assets/models/inflation-chapter-2/desk.glb');
+  desk.position.set(R.x, 0, R.z - 0.85);         // the blotter's middle, under the report's middle
+  kit.scene.add(desk);
+  const deskLamp = new THREE.PointLight(0xffc27a, 2.2, 4.5, 2);
+  deskLamp.position.copy(markerAt(desk, 'desk_lamp')).add(desk.position);
+  kit.scene.add(deskLamp);
+  const deskThings = [desk, deskLamp];
   const report = await kit.card(['INDEPENDENT REVIEW', 'OF THE', 'RESERVE BANK', '', '', '', '', '', ''],
     { size: 0.1, at: [R.x, 0.026, R.z], look: { aspect: 1.25, cardColour: '#ece4cf', inkColour: '#1f2a33' } });
   own.push(report.anchor);
@@ -134,42 +145,39 @@ export async function build(kit) {
   const tagTextB = [{ t: -1e9, text: '$' }, { t: T.rose, text: '$$' }, { t: T.thirty, text: '$$$' }];
 
   // ------------------------------------------------------------------ cameras
-  const boardB = [b.boardAt.x, b.boardAt.y, b.boardAt.z];
-  const shotA = kit.shot([
-    { t: T.start, position: [0.9, 5.4, 12.5], target: [0.55, 0.05, -1.4], fov: 43, focus: [0, 0.6, -1] }, // board B clear of the right edge; seam out of frame
-    { t: T.yes + 0.8, position: [1.35, 4.6, 10.2], target: [0.95, 0.1, -1.9], fov: 42, focus: [0.3, 0.6, -1.4] },
-    { t: T.spent, position: [2.9, 3.7, 4.0], target: [1.95, 0.5, -3.3], fov: 39, focus: [b.yard.x, 0.1, b.yard.z] },
-    { t: T.flat + 0.2, position: [4.1, 2.6, 2.4], target: [3.0, 0.85, -2.85], fov: 36, focus: boardB },
-    { t: T.things + 0.25, position: [3.9, 2.65, 2.6], target: [2.85, 0.82, -2.8], fov: 37, focus: boardB },   // hold on the board until £2.00 has read
-    { t: T.make, position: [2.2, 3.0, 3.3], target: [-0.3, 0.5, -1.35], fov: 38, focus: [HOUSE_A.x + 0.3, 0.4, HOUSE_A.z + 0.3] },
-    { t: CUT_B + 0.5, position: [2.0, 2.8, 3.0], target: [-0.3, 0.5, -1.3], fov: 38, focus: [HOUSE_A.x + 0.3, 0.4, HOUSE_A.z + 0.3] },
-  ], { handheld: 0.012, seed: 8 });
+  // round 20: still unless a move lands a point, at most 3 moves per shot (one each here)
   const houseFocus = [HOUSE_B.x, HOUSE_B.y + 0.5, HOUSE_B.z];
-  const shotB = kit.shot([
-    { t: CUT_B - 0.5, position: [0, 0.15, 0.3], target: [0, -0.3, -30], fov: 40, focus: 16 },
-    { t: T.began, position: [0, -0.05, -0.35], target: [0, -0.6, -30], fov: 40, focus: 12 },
-    { t: T.house + 0.6, position: [0.05, -0.35, -1.1], target: [0.05, -1.7, -30], fov: 40, focus: houseFocus },
-    { t: CUT_C + 0.5, position: [0.08, -0.45, -1.7], target: [0.05, -1.8, -30], fov: 40, focus: houseFocus },
-  ], { handheld: 0.01, seed: 4 });
+  // A: held on works B, its board readable; zooms out to make room as the house pops up
+  const shotA = kit.stillShot({ position: [4.3, 1.25, 1.9], target: [2.2, 0.95, -3.0], fov: 40, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] }, [
+    { from: T.spent - 0.2, to: T.spent + 0.3, kind: 'focus', focus: [b.yard.x + 0.2, 0.1, b.yard.z - 0.3] },
+    { from: T.flat - 0.3, to: T.flat + 0.1, kind: 'focus', focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
+    { from: T.things - 0.25, to: T.things + 0.8, kind: 'zoom out', position: [2.5, 1.4, 3.6], target: [2.05, 0.8, -1.9], fov: 44, focus: [HOUSE_A.x, 0.4, HOUSE_A.z] },
+  ], { name: 'works B' });
+  // B: the New Zealand street, from where it was painted; moves down to the house as prices rise
+  const shotB = kit.stillShot({ position: [0, 0.1, 0.2], target: [0, -0.4, -30], fov: 40, focus: 14 }, [
+    { from: T.house - 0.45, to: T.house + 0.6, kind: 'move down', position: [0.06, -0.4, -1.5], target: [0.05, -1.75, -30], focus: houseFocus },
+  ], { name: 'New Zealand street' });
+  // C: the whole desk around the report; zooms in on the report as the review gives its verdict
   const cardMid = [R.x, 0.03, R.z - 0.85];
-  const shotC = kit.shot([
-    { t: CUT_C - 0.5, position: [0.6, 4.1, 10.4], target: [0.35, 0.0, 6.85], fov: 40, focus: cardMid },
-    { t: T.reserve, position: [0.5, 3.8, 9.9], target: [0.35, 0.0, 6.9], fov: 40, focus: cardMid },
-    { t: T.right - 0.2, position: [0.42, 3.55, 9.55], target: [0.35, 0.0, 6.95], fov: 40, focus: cardMid },
-    { t: T.end + 1.4, position: [0.35, 3.2, 9.15], target: [0.35, 0.0, 7.0], fov: 40, focus: cardMid },
-  ], { handheld: 0.01, seed: 6 });
+  const shotC = kit.stillShot({ position: [0.35, 4.9, 10.0], target: [0.35, 0.0, 6.6], fov: 44, focus: cardMid }, [
+    { from: T.says - 0.2, to: T.says + 0.9, kind: 'zoom in', position: [0.35, 4.4, 9.4], target: [0.35, 0.0, 6.75], fov: 40 },
+  ], { name: 'the review desk' });
   kit.shake(reportLands, 0.012, 0.15);
   for (const hit of stampHits) kit.shake(hit.at, 0.02, 0.14);
 
   function pose(t) {
     const phase = phaseOf(t);
     const onTable = phase !== 'B';
-    for (const o of [...tableThings, ...own]) o.visible = onTable;
-    for (const o of streetThings) o.visible = !onTable;
+    // A: the works and town; B: the New Zealand street; C: the desk (with the report and stamp)
+    for (const o of [...tableThings, ...own]) o.visible = phase === 'A';
+    for (const o of [report.anchor, markRight.anchor, markLong.anchor, stamp.anchor]) o.visible = phase === 'C';
+    for (const o of deskThings) o.visible = phase === 'C';
+    for (const o of streetThings) o.visible = phase === 'B';
+    for (const f of [a.factory, b.factory]) if (f.doorLight) f.doorLight.visible = phase === 'A';
 
     // the light: the set's lamp on the table; a low sun from the left in the street
     if (onTable) {
-      const toCard = phase === 'C' ? new THREE.Vector3(0.3, 0, 4.5).sub(setLight.keyTarget) : new THREE.Vector3();
+      const toCard = phase === 'C' ? new THREE.Vector3(0.35, 0, 6.75).sub(setLight.keyTarget) : new THREE.Vector3();
       key.position.copy(setLight.keyPos).add(toCard); key.target.position.copy(setLight.keyTarget).add(toCard);
       key.intensity = setLight.key; fill.intensity = setLight.fill;
       if (kit.scene.fog) kit.scene.fog.density = setLight.fog;
@@ -182,6 +190,7 @@ export async function build(kit) {
     }
     key.target.updateMatrixWorld();
 
+    if (phase === 'A') set.townSmoke(t); else set.hideTownSmoke();
     if (onTable) {
       a.factory.setRunning(1);
       b.factory.setRunning(1);
@@ -192,7 +201,7 @@ export async function build(kit) {
       a.shells.forEach((s, i) => { s.group.visible = i < set.shellsA; s.group.position.copy(a.shellAt(i)); });
       b.shells.forEach((s, i) => { s.group.visible = i < set.shellsB; s.group.position.copy(b.shellAt(i)); });
       coinsB.pose(t);
-      dust.set({ origin: [b.yard.x, 0.02, b.yard.z], width: 1.2, age: t - T.spent - 0.6, scale: 0.3 });
+      dust.set({ origin: [b.yard.x + 0.2, 0.02, b.yard.z - 0.3], width: 1.0, age: t - T.spent - 0.6, scale: 0.3 });
       set.motes.set(t);
 
       // the house pops up on "things", and its tag climbs the post
@@ -264,6 +273,13 @@ export async function build(kit) {
   function draw2D(ctx, t) {
     const at = (p) => kit.toScreen(p);
     const phase = phaseOf(t);
+    // a soft dark band at the top, so the words read over the busy set (chimneys; the desk's papers)
+    if (phase !== 'B') {
+      const band = ctx.createLinearGradient(0, 0, 0, 760);
+      const strength = phase === 'C' ? 0.62 : 0.5;
+      band.addColorStop(0, `rgba(10,14,16,${strength})`); band.addColorStop(0.65, `rgba(10,14,16,${strength * 0.55})`); band.addColorStop(1, 'rgba(10,14,16,0)');
+      ctx.save(); ctx.fillStyle = band; ctx.fillRect(0, 0, 1080, 760); ctx.restore();
+    }
     if (phase === 'A') {
       hook(ctx, t, { at: T.yes, until: T.spent - 0.1, lines: ['YES,', 'IT CAN'], y: 340, size: 104 });
       callout(ctx, t, { at: T.flat, until: T.things + 0.2, point: at([FACTORY_B.x + 0.2, 1.1, FACTORY_B.z + 1.0]), text: 'FLAT OUT', dx: -120, dy: -330, size: 52, plate: true, margin: 140 });   // a spot on the front wall that stays in frame

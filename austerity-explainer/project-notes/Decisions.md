@@ -369,6 +369,46 @@ overturn any of them in one line. Changes to the project must follow this file.
 - On the model table its price tag climbs in arrows (↑ to ↑↑↑) rather than pounds, so no currency is
   shown before the film reaches New Zealand; in the street it climbs in dollars.
 
+25. **Round 20: the phone screenshots** (your words, with seven screenshots): "I love the fact theirs
+    depth in these. Just a few issues. Picture number:
+    1. His face is weirdly over saturated compared to other faces and pop ups.
+    2 and 3. The price tags clip other objects and the bread basket clips the conveyor belt.
+    4. These are great 3d perspectives but there is a sudden drop in visual quality. Keep the 3d, but
+    you probably need to do some research on how to fill the frame. Also the model needs to be
+    significantly higher quality. Blender has an official MCP to use for this. There are others as
+    well. Take a look.
+    5. The envelope clips the workers and the ground. Also the book probably needs to be significantly
+    bigger because it's being treated as authority. Zooming out should fix the clipping issue and
+    placing the book further back should leave space for the workers and envelope.
+    6. The coins disappear through the ground and the both the notes and coins have no reflection.
+    Maybe the source image shouldn't depict a wet ground.
+    7. There's no detail again. It looks plain and boring.
+    Maybe the blender MCP can help you with either fixing some of these issues or help you redesign
+    how the visuals are created and arranged.
+    The camera also sometimes moves around too much. It needs to stay still unless it's essential to
+    land an important point. Then movement makes sense. Zoom out to make room, zoom in to narrow
+    perspective or transition to the next frame when a particular object become the main focus, pan
+    left or right to shift perspective, pan up to signal ideals, pan down to signal pressure. Move up
+    to see the bigger picture, move down expose the minor details.
+    3 movements per frame, max. If you need more, make more frames."
+
+### Claude's calls for item 25
+
+- **The camera rule is now part of the engine**: a "still shot" holds still and allows only the
+  moves you named (zoom in or out, pan left, right, up or down, move up or down), at most 3 per shot;
+  a fourth stops the page from loading. A checker measures every shot of the film. "Frame" was taken
+  to mean a shot (from one cut to the next); where a page needed more moves it was cut into more shots.
+- **Blender, without its MCP server**: Blender Lab's official MCP server and the community ones mostly
+  pass Python instructions to a running Blender. Here Blender runs headless as a Python module, so the
+  instructions go to it directly, with the same result and no extra pieces. Blender builds the
+  models; the existing stage still films them (Blender's own renderer would need 80 to 200 hours on
+  this machine).
+- **New models**: two detailed munitions works, a model industrial town around them, a reviewer's
+  desk, and foreground props. All are built by script, so a smaller model can change or reuse them.
+- **The wet street was repainted dry** (about 10 US cents of the US$10 picture allowance), as you
+  suggested, rather than faking reflections.
+- **Seven page helpers, then reviewers, at medium effort**, as you set earlier.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

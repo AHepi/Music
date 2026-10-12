@@ -5,8 +5,8 @@
 //   - "In 1915": a place-and-year title, GLASGOW 1915.
 //   - "workers poured into Glasgow for war work": three long files of workers stream in from the
 //     right and walk away up the street, one after another.
-//   - "landlords pushed rents up... by as much as a quarter": the camera turns to a notice board on the
-//     left-hand pavement; a printed notice (RENT RAISED) slaps onto it, then UP TO +25% / AS MUCH AS A QUARTER.
+//   - "landlords pushed rents up... by as much as a quarter": the camera closes in on a notice board
+//     standing in the street; a printed notice (RENT RAISED) slaps onto it, then UP TO +25% / AS MUCH AS A QUARTER.
 //   - "By November, about twenty thousand households were refusing to pay the rise": a row of
 //     rent strikers with placards pops up on the pavement under the notice; 20,000 counts up,
 //     HOUSEHOLDS REFUSING TO PAY.
@@ -18,7 +18,7 @@
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, popUp, foldDown, clamp01, smooth, ramp, lerp, seededRandom, spring, walkBob, knock } from '../cinema-kit.js';
-import { paper, PAPER } from '../models.js';
+import { paper, PAPER, contactShadow } from '../models.js';
 import { Motes, DustBurst } from '../effects.js';
 import { placeTitle, hook, counter, presence, INK } from '../graphics.js';
 
@@ -59,6 +59,38 @@ export async function build(kit) {
   const street = await kit.relief('403-bg-glasgow-tenements', { near: 6, far: 70, fov: 40 });
   const P = (u, v, k = 1) => street.pointAt(u, v).multiplyScalar(k);
 
+  // ------------------------------------------------------------------ nothing passes into the street
+  // gapAt: how far a world point stands in front of the painted surface behind it (negative = inside
+  // the painting). objectGap samples every vertex of an object's meshes (plus extra points along the
+  // bottom of flat cut-outs and the slab, since a box or card has corners only). liftFor finds the
+  // smallest raise that keeps an object clear in every pose it will take; all of it runs once, here
+  // in build, so pose(t) stays a function of t alone.
+  const gapAt = (p) => {
+    const d = -p.z;
+    if (d < 0.05) return Infinity;
+    return street.distanceAt((p.x / d / street.tanX + 1) / 2, (p.y / d / street.tanY + 1) / 2) - d;
+  };
+  const objectGap = (object, extra = []) => {
+    object.updateMatrixWorld(true);
+    let least = Infinity;
+    const p = new THREE.Vector3();
+    object.traverse((o) => {
+      if (!o.isMesh) return;
+      const position = o.geometry.attributes.position;
+      for (let i = 0; i < position.count; i++) least = Math.min(least, gapAt(p.fromBufferAttribute(position, i).applyMatrix4(o.matrixWorld)));
+    });
+    for (const [o, local] of extra) least = Math.min(least, gapAt(o.localToWorld(local.clone())));
+    return least;
+  };
+  const cardEdge = (piece) => Array.from({ length: 13 }, (_, i) => [piece.hinge, new THREE.Vector3((i / 12 - 0.5) * piece.width, 0, 0)]);
+  // the smallest raise (world units, upward) at which `measure(raise)` (posing the object every way it
+  // will be posed, returning the least gap) reaches `wanted`
+  const liftFor = (measure, wanted) => {
+    let lo = -0.6, hi = 1.2;
+    for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; if (measure(mid) >= wanted) hi = mid; else lo = mid; }
+    return hi;
+  };
+
   // ------------------------------------------------------------------ rain and haze
   const motes = new Motes(kit.scene, { count: 160, min: [-3, -2.2, -20], max: [3, 2.5, -5], size: 0.035, colour: 0xcfe0ff, seed: 41, opacity: 0.45 });
   const RAIN = 520, rainTop = 3.5, rainHeight = 6.2, dropLength = 0.32;
@@ -87,20 +119,49 @@ export async function build(kit) {
   const along = new THREE.Vector3(-Math.cos(yaw), 0, Math.sin(yaw)); // the way they face and walk
   const files = [];
   const fileSpecs = [
-    { start: [1.0, -2.13, -8.0], width: 3.0, at: T.workers - 0.1, speed: 1.1 },
-    { start: [2.0, -2.08, -11.0], width: 3.2, at: T.poured, speed: 1.05 },
-    { start: [2.9, -2.03, -14.5], width: 3.4, at: T.glasgow, speed: 1.0 },
+    // the first file walks in from beyond the right edge under "1915", so the street is never empty
+    // for long; each starts out of frame (pushed back along its line by `back`) and ends about where it did
+    { start: [1.0, -2.13, -8.0], back: 2.1, width: 3.0, at: T.y1915 - 0.7, speed: 1.15 },
+    { start: [2.0, -2.08, -11.0], back: 1.6, width: 3.2, at: T.workers - 1.2, speed: 1.1 },
+    { start: [2.9, -2.03, -14.5], back: 1.6, width: 3.4, at: T.workers - 0.4, speed: 1.21 },
   ];
   for (const spec of fileSpecs) {
+    spec.start = new THREE.Vector3(...spec.start).addScaledVector(along, -spec.back).toArray();
     const piece = await kit.cutout('workers-queue', { at: spec.start, width: spec.width, yaw });
     files.push({ piece, ...spec });
   }
+  // they walk until the camera has panned away to the notice board (by then they are out of frame),
+  // then go; along their walk the cobbles rise and fall, so each file gets a raise for every 0.1 s
+  // that keeps its feet on (never in) the street, bob included
+  T.workersFold = T.landlords - 0.42; T.workersGone = T.workersFold + 0.25; // gone before the board rises where they stood
+  for (const f of files) {
+    const steps = Math.ceil((T.workersFold - f.at) / 0.1) + 1;
+    const raw = Array.from({ length: steps + 1 }, (_, i) => {
+      const move = along.clone().multiplyScalar(f.speed * i * 0.1);
+      return liftFor((dy) => { f.piece.set({ dx: move.x, dz: move.z, dy }); return objectGap(f.piece.anchor, cardEdge(f.piece)); }, 0.06);
+    });
+    // never dip between samples: each step keeps the larger of itself and its neighbours
+    f.lift = raw.map((v, i) => Math.max(v, raw[i - 1] ?? v, raw[i + 1] ?? v));
+    f.liftAt = (t) => { const x = clamp01((t - f.at) / ((steps) * 0.1)) * steps, i = Math.min(steps - 1, Math.floor(x)); return lerp(f.lift[i], f.lift[i + 1], x - i); };
+    // folding away: a raise for each fold angle, at the spot where the fold happens
+    const at = along.clone().multiplyScalar(f.speed * (T.workersFold - f.at));
+    f.foldLift = [0, 0.3, 0.6, 0.9, 1.2, Math.PI / 2].map((fold) => [fold, liftFor((dy) => {
+      f.piece.set({ fold, dx: at.x, dz: at.z, dy }); return objectGap(f.piece.anchor, cardEdge(f.piece)); }, 0.06)]);
+    f.piece.set({ visible: false });
+  }
+  const foldLiftAt = (f, fold) => {
+    const L = f.foldLift;
+    for (let i = 1; i < L.length; i++) if (fold <= L[i][0]) return Math.max(L[i - 1][1], L[i][1]);
+    return L[L.length - 1][1];
+  };
 
   // ------------------------------------------------------------------ the notice on the wall
   // a wooden notice board on two posts, standing on the left-hand pavement; the landlords' notice
   // is slapped onto it
-  const boardFoot = P(0.2, 0.31, 1.0);
-  boardFoot.x += 0.45; boardFoot.z = -13; // pavement edge, clear of the wall
+  // it stands in the roadway on flat cobbles (u about 0.37-0.63, v 0.24), right of and in front of
+  // the painted puddle that read as a pit under the posts when the board stood at u 0.13-0.36
+  const boardFoot = P(0.5, 0.25, 1.0);
+  boardFoot.x = 0.22; boardFoot.z = -11.0;
   const noticeYaw = 0.22;
   const boardW = 1.55, boardH = 0.78, postH = 1.25;
   const boardGroup = new THREE.Group();
@@ -110,12 +171,24 @@ export async function build(kit) {
   const panel = new THREE.Mesh(new THREE.BoxGeometry(boardW, boardH, 0.05), wood);
   panel.position.set(0, postH + boardH / 2, 0);
   const posts = [-1, 1].map((side) => { const m = new THREE.Mesh(new THREE.BoxGeometry(0.07, postH + boardH * 0.9, 0.07), wood); m.position.set(side * boardW * 0.4, (postH + boardH * 0.9) / 2, -0.06); return m; });
-  boardGroup.add(panel, ...posts);
+  // a foot plate under each post and a soft contact shadow, so the board stands on the street
+  const feet = [-1, 1].map((side) => { const m = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.05, 0.3), paper(0x4a3524, { roughness: 0.9 })); m.position.set(side * boardW * 0.4, 0.025, -0.06); return m; });
+  boardGroup.add(panel, ...posts, ...feet);
   boardGroup.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   kit.scene.add(boardGroup);
+  // stand the board on the pavement: the least raise that keeps its posts clear of the painted
+  // street (it grows up from its feet, so it never lies on the cobbles)
+  const boardLift = liftFor((dy) => { boardGroup.position.y = boardFoot.y + dy; return objectGap(boardGroup); }, 0.05);
+  boardGroup.position.y = boardFoot.y + boardLift;
+  boardFoot.y += boardLift;
+  // the contact shadow: a soft dark patch just above the cobbles under the foot plates
+  const boardShadow = contactShadow(boardW * 1.2, 0.6, 0.75);
+  boardGroup.add(boardShadow);
+  const shadowLift = liftFor((dy) => { boardShadow.position.set(0, dy, -0.06); return street.clearance(boardShadow); }, 0.006);
+  boardShadow.position.set(0, shadowLift, -0.06);
   const facing = new THREE.Vector3(Math.sin(noticeYaw), 0, Math.cos(noticeYaw));
   const onBoard = (y, out = 0.03) => new THREE.Vector3(boardFoot.x, boardFoot.y + y, boardFoot.z).addScaledVector(facing, out);
-  const noticeBase = onBoard(postH + 0.12);
+  const noticeBase = onBoard(postH + 0.12, 0.05); // its back 0.005 in front of the board face
   const notice = await kit.card(['NOTICE', 'RENT RAISED'], { size: 0.15, at: noticeBase.toArray(), yaw: noticeYaw });
   const noticeCentre = noticeBase.clone().add(new THREE.Vector3(0, notice.height * 0.5, 0));
   const frozen = await kit.card(['RENTS', 'FROZEN'], { size: 0.145, at: onBoard(postH + 0.2, 0.06).toArray(), yaw: noticeYaw,
@@ -124,8 +197,14 @@ export async function build(kit) {
   const dust = new DustBurst(kit.scene, { count: 20, seed: 9, colour: 'rgba(150,140,128,0.9)' });
 
   // ------------------------------------------------------------------ the rent strikers
-  const strikersAt = [boardFoot.x + 0.5, boardFoot.y - 0.08, -11.3];
-  const strikers = await kit.cutout('rent-strikers', { at: strikersAt, width: 2.9, yaw: 0.15 });
+  const strikersAt = [boardFoot.x + 0.45, boardFoot.y - 0.08, -9.6];
+  const strikers = await kit.cutout('rent-strikers', { at: strikersAt, width: 2.55, yaw: 0.15 });
+  // their bottom edge on the cobbles in every fold of the pop-up (lying flat to standing)
+  const strikersPop = { height: 1.18, restZ: 0.3 };
+  const strikersLift = liftFor((dy) => Math.min(...[Math.PI / 2, 1.2, 0.8, 0.4, 0, -0.2].map((fold) => {
+    strikers.set({ fold, dy }); return objectGap(strikers.anchor, cardEdge(strikers));
+  })), 0.06);
+  strikers.set({ visible: false });
 
   // ------------------------------------------------------------------ the house going up slowly
   const site = P(0.56, 0.205, 1.0);
@@ -151,7 +230,7 @@ export async function build(kit) {
       const b = new THREE.Mesh(new THREE.BoxGeometry(w, courseH * 0.94, d), m);
       b.position.set(x, 0, z); b.castShadow = b.receiveShadow = true; course.add(b);
     }
-    course.userData.y = courseH * (i + 0.5);
+    course.userData.y = 0.034 + courseH * (i + 0.5); // on the slab (top 0.03), never in it
     house.add(course);
     courses.push(course);
   }
@@ -177,32 +256,33 @@ export async function build(kit) {
       outline.add(rod);
     }
   }
+  outline.position.y = 0.034;
   house.add(outline);
+  // the slab sits on the cobbles: raise the house until the slab's whole underside clears the street
+  const slabUnder = [];
+  for (let i = 0; i <= 8; i++) for (let j = 0; j <= 6; j++) slabUnder.push([slab, new THREE.Vector3((i / 8 - 0.5) * (W + 0.16), -0.015, (j / 6 - 0.5) * (D + 0.16))]);
+  courses.forEach((course) => { course.position.y = course.userData.y; });
+  const houseLift = liftFor((dy) => { house.position.y = site.y + dy; return objectGap(house, slabUnder); }, 0.05);
+  house.position.y = site.y + houseLift;
   // one course every 0.75 s, from just after the cut: only a few are up by the end
   const courseAt = (i) => T.cut + 0.45 + i * 0.75;
 
   // ------------------------------------------------------------------ the camera
   const noticeFocus = [noticeCentre.x, noticeCentre.y, noticeCentre.z];
-  const wallTarget2 = [noticeCentre.x + 0.4, noticeCentre.y - 0.22, noticeCentre.z];
-  const wallShot = kit.shot([
-    { t: T.start, position: [0, 0.25, 0.6], target: [0, -0.5, -30], fov: 40, focus: 18 },
-    { t: T.y1915 + 0.3, position: [0.05, 0.1, -0.2], target: [0, -0.75, -30], fov: 39, focus: 14 },
-    { t: T.glasgow, position: [0.15, -0.15, -0.9], target: [0.1, -1.25, -30], fov: 38, focus: 12 },
-    { t: T.pushed + 0.15, position: [0.35, -0.2, -1.0], target: wallTarget2, fov: 24, focus: noticeFocus },
-    { t: T.november, position: [0.4, -0.25, -1.3], target: [wallTarget2[0], wallTarget2[1] - 0.1, wallTarget2[2]], fov: 23.5, focus: noticeFocus },
-    { t: T.rise, position: [0.45, -0.3, -1.5], target: [wallTarget2[0], wallTarget2[1] - 0.1, wallTarget2[2]], fov: 23, focus: [strikersAt[0], strikersAt[1] + 0.7, strikersAt[2]] },
-    { t: T.parliament, position: [0.45, -0.3, -1.6], target: [wallTarget2[0], wallTarget2[1], wallTarget2[2]], fov: 21, focus: noticeFocus },
-    { t: T.cut, position: [0.45, -0.32, -1.68], target: [wallTarget2[0], wallTarget2[1], wallTarget2[2]], fov: 20.6, focus: noticeFocus },
-  ], { handheld: 0.01, seed: 4 });
-  // after the cut: a slow push in on the building site
+  const wallTarget2 = [noticeCentre.x + 0.3, noticeCentre.y - 0.22, noticeCentre.z]; // board sits a little right of the left edge
+  // shot 1, the street: it holds still while the workers pour in; on "landlords" it zooms in onto
+  // the notice board standing in the roadway and holds there through the
+  // notice, the strikers and the count; on "within weeks" it narrows onto the notice for the stamp.
+  const wallShot = kit.stillShot({ position: [0.1, -0.05, -0.5], target: [0.05, -1.0, -30], fov: 39, focus: 12 }, [
+    { from: T.landlords - 0.15, to: T.pushed + 0.45, kind: 'zoom in', position: [0.4, -0.25, -1.3], target: [wallTarget2[0], wallTarget2[1] - 0.1, wallTarget2[2]], fov: 27.5, focus: noticeFocus },
+    { from: T.rise - 0.2, to: T.rise + 0.3, kind: 'focus', focus: [strikersAt[0], strikersAt[1] + 0.7, strikersAt[2]] },
+    { from: T.within, to: T.parliament + 0.4, kind: 'zoom in', position: [0.45, -0.3, -1.6], target: wallTarget2, fov: 24.5, focus: noticeFocus },
+  ], { name: 'the street and the notice' });
+  // shot 2, after the dip: the building site, held still while the walls creep up
   const siteFocus = [site.x, site.y + 0.4, site.z];
-  const siteShot = kit.shot([
-    { t: T.cut, position: [0.34, -0.47, -1.7], target: [site.x, site.y + 0.58, site.z], fov: 31, focus: siteFocus },
-    { t: T.hurry + 0.35, position: [0.3, -0.55, -2.0], target: [site.x, site.y + 0.55, site.z], fov: 30, focus: siteFocus },
-    { t: T.last + 1.4, position: [0.25, -0.65, -2.4], target: [site.x, site.y + 0.5, site.z], fov: 28, focus: siteFocus },
-  ], { handheld: 0.01, seed: 5 });
+  const siteShot = kit.stillShot({ position: [0.25, -0.65, -2.4], target: [site.x, site.y + 0.8, site.z], fov: 25, focus: siteFocus }, [],
+    { name: 'the building site' });
   const shot = (t) => (t < T.cut ? wallShot(t) : siteShot(t));
-  kit.shake(T.pushed + 0.12, 0.006, 0.12);
   kit.shake(T.slam, 0.02, 0.16);
 
   function pose(t) {
@@ -210,17 +290,21 @@ export async function build(kit) {
     setRain(t);
     // workers stream in and fold away as the camera turns to the wall
     for (const f of files) {
-      if (t < f.at || t > T.pushed + 0.5) { f.piece.set({ visible: false }); continue; }
-      const s = f.speed * (t - f.at);
-      const move = along.clone().multiplyScalar(s);
-      const base = t < T.landlords - 0.2 ? { visible: true, fold: 0 } : foldDown(t, T.landlords - 0.2, 0.25);
-      f.piece.set({ ...base, dx: move.x, dz: move.z, dy: walkBob(t, f.at, Infinity, 0.025, 2.2) });
+      if (t < f.at || t > T.workersGone) { f.piece.set({ visible: false }); continue; }
+      const move = along.clone().multiplyScalar(f.speed * (Math.min(t, T.workersFold) - f.at));
+      if (t < T.workersFold) f.piece.set({ dx: move.x, dz: move.z, dy: f.liftAt(t) + walkBob(t, f.at, Infinity, 0.025, 2.2) });
+      else {
+        // they fold away (flat toward the camera) just before the camera turns, raised enough at every
+        // angle that no part of them dips into the cobbles
+        const folding = foldDown(t, T.workersFold, 0.25);
+        f.piece.set({ ...folding, dx: move.x, dz: move.z, dy: Math.max(f.liftAt(T.workersFold), foldLiftAt(f, folding.fold)) });
+      }
     }
     // the board pops up on "landlords"
     const boardUp = t < T.landlords - 0.1 ? 0 : 1 - spring(t - (T.landlords - 0.1), { stiffness: 14, damping: 0.6 });
     const wall = t < T.cut; // everything at the wall is hidden under the dip, never lowered or tipped
     boardGroup.visible = t > T.landlords - 0.1 && wall;
-    boardGroup.rotation.x = (Math.PI / 2) * (1 - boardUp);
+    boardGroup.scale.set(1, Math.max(0.001, boardUp), 1);
     // the notice slaps onto the board
     if (t < T.pushed) notice.set({ visible: false });
     else if (!wall) notice.set({ visible: false });
@@ -229,23 +313,29 @@ export async function build(kit) {
       const k = spring(age, { stiffness: 18, damping: 0.6 });
       notice.set({ lift: 0.5 * Math.max(0, k), scale: 1 + 0.25 * Math.max(0, k), roll: -0.05 + 0.25 * k + knock(age - 0.15, 0.02) });
     }
-    // the stamp: rises into view above, slams down on "froze", lifts away
-    const stampDown = T.slam, stampFall = 0.22;
-    if (t < T.within + 0.3 || t > stampDown + 1.0) stamp.set({ visible: false });
+    // the stamp: fades in hovering just above the notice (below the PARLIAMENT words), slams down on
+    // "froze", then lifts a little and fades away within half a second, so RENTS FROZEN reads clear
+    const stampDown = T.slam, stampFall = 0.2, hover = 0.42;
+    if (t < T.within + 0.3 || t > stampDown + 0.5) stamp.set({ visible: false });
     else {
-      let dy;
-      if (t < stampDown - stampFall) dy = lerp(3.2, 0.75, smooth(ramp(t, T.within + 0.3, stampDown - stampFall - 0.1)));
-      else if (t < stampDown) { const x = ramp(t, stampDown - stampFall, stampDown); dy = 0.75 * (1 - x * x); }
-      else dy = 0.02 * Math.exp(-(t - stampDown) / 0.06) + lerp(0, 3.4, smooth(ramp(t, stampDown + 0.25, stampDown + 0.85)));
+      let dy, opacity = 1;
+      if (t < stampDown - stampFall) {
+        dy = hover + 0.04 * Math.sin((t - T.within) * 5);
+        opacity = smooth(ramp(t, T.within + 0.3, T.within + 0.6));
+      } else if (t < stampDown) { const x = ramp(t, stampDown - stampFall, stampDown); dy = (hover + 0.04 * Math.sin((stampDown - stampFall - T.within) * 5)) * (1 - x * x); }
+      else {
+        dy = 0.02 * Math.exp(-(t - stampDown) / 0.06) + 0.35 * smooth(ramp(t, stampDown + 0.1, stampDown + 0.45));
+        opacity = 1 - smooth(ramp(t, stampDown + 0.12, stampDown + 0.42));
+      }
       const squash = t >= stampDown && t < stampDown + 0.3 ? 1 - 0.04 * Math.exp(-(t - stampDown) / 0.08) : 1;
-      stamp.set({ dy, lift: 0.12, scale: squash, roll: t < stampDown ? 0.05 * (1 - ramp(t, stampDown - 0.6, stampDown)) : 0 });
+      stamp.set({ visible: true, dy, lift: 0.12, scale: squash, opacity, roll: t < stampDown ? 0.05 * (1 - ramp(t, stampDown - 0.6, stampDown)) : 0 });
     }
     if (t < T.slam || !wall) frozen.set({ visible: false });
     else frozen.set({ lift: 0.03, roll: -0.13, scale: 1 + 0.12 * Math.exp(-(t - T.slam) / 0.07) });
     if (t > T.slam - 0.05 && t < Math.min(T.slam + 1.3, T.cut)) dust.set({ origin: [noticeCentre.x + 0.1, noticeCentre.y - 0.25, noticeCentre.z + 0.3], width: 1.0, age: t - T.slam, scale: 0.35 });
     else dust.hide();
     // the strikers pop up on "about" and stay until the camera leaves
-    strikers.set(wall ? popUp(t, T.about - 0.15, { height: 1.18, restZ: 0.3 }) : { visible: false });
+    strikers.set(wall ? { ...popUp(t, T.about - 0.15, strikersPop), dy: strikersLift } : { visible: false });
     // the house: courses drop into place one by one; the outline fades in
     house.visible = !wall;
     lineMaterial.opacity = 0.75 * smooth(ramp(t, T.cut + 0.3, T.cut + 0.9));
@@ -253,7 +343,7 @@ export async function build(kit) {
       const at = courseAt(i);
       const k = clamp01((t - (at - 0.25)) / 0.25);
       course.visible = t > at - 0.25;
-      course.position.y = course.userData.y + 0.35 * (1 - k * k) + knock(t - at, 0.004, 6, 0.1);
+      course.position.y = course.userData.y + 0.35 * (1 - k * k) + Math.max(0, knock(t - at, 0.004, 6, 0.1));
     });
     // the dip: black exactly on the cut, picture back about a quarter second later
     const fade = t < T.cut ? smooth(ramp(t, T.cut - T.dipIn, T.cut)) : 1 - smooth(ramp(t, T.cut, T.cut + T.dipOut));
@@ -265,13 +355,19 @@ export async function build(kit) {
     placeTitle(ctx, t, { at: T.y1915, until: T.landlords - 0.2, place: 'Glasgow', year: 1915, y: 280 });
     hook(ctx, t, { at: T.workers + 0.2, until: T.landlords - 0.1, lines: ['WORKERS POUR IN'], y: 420, size: 62, colour: INK.muted });
     hook(ctx, t, { at: T.quarter - 0.1, until: T.november - 0.1, text: 'UP TO +25%', y: 330, size: 112, colour: INK.amber });
-    hook(ctx, t, { at: T.quarter + 0.25, until: T.november - 0.1, text: 'AS MUCH AS A QUARTER', y: 455, size: 52 });
+    // on a dark plate, so it reads over the lit building
+    const plate = presence(t, T.quarter, T.november - 0.1, 0.12, 0.3);
+    if (plate > 0) {
+      ctx.save(); ctx.globalAlpha = 0.62 * plate; ctx.fillStyle = '#0b0f14';
+      ctx.beginPath(); ctx.roundRect(150, 455 - 46, 780, 92, 18); ctx.fill(); ctx.restore();
+    }
+    hook(ctx, t, { at: T.quarter, until: T.november - 0.1, text: 'AS MUCH AS A QUARTER', y: 455, size: 52, colour: INK.paper });
     hook(ctx, t, { at: T.november, until: T.within - 0.2, text: 'BY NOVEMBER', y: 150, size: 38, colour: INK.muted });
     counter(ctx, t, { at: T.twenty - 0.05, until: T.within - 0.2, duration: 0.9, from: 0, to: 20000, y: 350, size: 150,
       format: (v) => (Math.round(v / 100) * 100).toLocaleString('en-GB') });
     hook(ctx, t, { at: T.about, until: T.within - 0.2, text: 'ABOUT', y: 205, size: 44, colour: INK.muted });
     hook(ctx, t, { at: T.refusing, until: T.within - 0.2, lines: ['HOUSEHOLDS', 'REFUSING TO PAY'], y: 480, size: 54, colour: INK.amber });
-    hook(ctx, t, { at: T.parliament, until: T.homes2 - 0.2, text: 'PARLIAMENT', y: 300, size: 56, colour: INK.paper });
+    hook(ctx, t, { at: T.parliament, until: T.homes2 - 0.2, text: 'PARLIAMENT', y: 200, size: 56, colour: INK.paper });
     hook(ctx, t, { at: T.homes2, until: T.last + 2, lines: ['HOMES CAN\u2019T', 'BE BUILT'], y: 330, size: 74 });
     hook(ctx, t, { at: T.hurry - 0.05, until: T.last + 2, text: 'IN A HURRY', y: 470, size: 74, colour: INK.amber });
     return true;
