@@ -288,6 +288,39 @@ overturn any of them in one line. Changes to the project must follow this file.
 - Fal is for paintings and cut-outs only, within US$10; ElevenLabs only for Malina's speech (and its
   free transcripts, which give the time of every word).
 
+20. **Chapter 2: outline A, made cinematic** (your words): "Definitely A. But I want you to elevate the
+    visuals. Mix 2d with 3d with compelling animation and motion graphics. I'll leave the aesthetic
+    choices to you. It has to be cinematic, yet still carry the informational quality."
+
+### Claude's calls for item 20 (overturn any in one line)
+
+- The script was written from outline A and checked by four fact checkers and one rules reader
+  before recording; their fixes were made (dates and starting points, "close to the second
+  factory", Mattei's view said as hers, the review's wording, numbers as said aloud).
+- Malina was recorded once per page (one take each, no retakes), with the same accent instruction as
+  chapter 1. Steadiness was checked by measurement, not by ear: pitch spread across pages 2.2
+  semitones (chapter 1: 3.0), no word much louder than the rest. Mixed at -15 LUFS over "Tension and
+  Gravity".
+- The look: a "cinema stage" instead of chapter 1's flat paper pages. Each page is a real 3D scene:
+  - Painted rooms with depth: each painting is given a distance picture (made by fal) and pushed back
+    into 3D, so the camera can move a little inside it and near things shift against far ones.
+  - Card models built in code (factories, houses, shells, coins, banknotes, price tags, flip
+    counters, dials, oil barrel, paper boats) and chapter 1-style paper cut-outs standing in the rooms.
+  - A camera that moves like a film camera: slow pushes and cranes, focus that falls off with
+    distance, a little handheld drift, small shakes when something heavy lands.
+  - Light: one warm lamp with soft shadows, beams through windows, drifting dust, smoke, a glow
+    round bright things, and a film finish (teal shadows, warm highlights, grain, soft dark corners).
+  - Documentary graphics on top (2D): place-and-year titles, big counting figures, labels with lines
+    pointing at things, bars and line charts that draw themselves. Every word is a short form of
+    what Malina says at that moment.
+  - Pages hand over with a page peel, so it still feels like the same book as chapter 1.
+- The centre of the chapter, the two factories, is built as a model set on a table in front of a
+  painted skyline, used again on page 8.
+- Fal was used for 11 new paintings (1k and 2k), distance pictures and cut-out masks only; about
+  US$1.06 so far of the US$10 allowed.
+- Eight page helpers built pages 1 and 4 to 10 in parallel from a written guide and the two finished
+  pages (2 and 3), all at medium effort; I then checked every page's pictures myself.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

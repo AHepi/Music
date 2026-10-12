@@ -179,6 +179,29 @@ Only failures in doing the work belong here. Newest at the bottom.
     far, and a much gentler blur.
 42. **Light leaked out of the cottage's back windows** onto the cypresses, making an odd orange block
     behind the house. Fix: the back wall is solid.
+43. **The browser in this machine refused the old "headless" mode.** Fix: the filming tool now looks
+    for Playwright's small headless browser first.
+44. **A shared 3D helper failed to load inside the browser** because it named its library in a way
+    browsers can't follow on their own. Fix: the stage page tells the browser where that library is.
+45. **Words said with a trailing "..." didn't match.** "arrives..." wasn't found as "arrives". Fix: all
+    trailing dots are dropped when matching words to times.
+46. **A word said twice matched the wrong time.** "the machines stand idle" was found instead of the
+    later "machines". Fix: ask for the second time it is said (lesson from chapter 1, again).
+47. **The first factories page was too close, too bright and cut its labels off.** White boxes filled
+    the frame and labels ran off the edge. Fix: the factories stand on a diagonal, the camera starts
+    wide, brick and window panes are printed on the card, exposure is lower, and every label keeps
+    itself inside the frame.
+48. **Moving the camera far inside a painted room tears it.** Thin near things (pillars, cables)
+    smear, and the camera sees past the painting's bottom edge as stretched streaks. Fix: small
+    moves (1 to 2 units), a softer distance picture, and past the edge the painting is mirrored, which
+    passes for more floor.
+49. **Models inside a dark painting looked white.** Banknotes came out as white bricks: the soft grey
+    "reflection room" that lights shiny things was lighting them far more than the painting's own
+    light. Fix: a reflections setting, turned down to 0.3 inside paintings, and banknote edges printed
+    as fine green lines.
+50. **"43.2,47.5" is not two times.** The filming tool wants still times separated by spaces; with a
+    comma it reads one broken number and fails on the second still.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -198,3 +221,4 @@ Only failures in doing the work belong here. Newest at the bottom.
   straight line.
 - From an angle, upright strokes printed on a flat page read as a wall; print shapes that only read
   as lying flat.
+- Inside a painted room, keep camera moves small and turn reflections down (lessons 48, 49).
