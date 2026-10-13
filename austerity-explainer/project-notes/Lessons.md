@@ -312,6 +312,17 @@ Only failures in doing the work belong here. Newest at the bottom.
     painted edges by about 45 pixels; fit shapes to their painted corners instead. Faces seen almost
     edge-on from the painting's view must still wear the painting, or they draw dark.
 
+81. **Rooms lit by their own glow are cheap and can change on a word.** Each room of the house shows
+    its walls and cut-outs by their own light, scaled by a light level, instead of a dozen real lamps:
+    about 1.8 seconds a frame here when filming two at a time, and lights go out on a beat (log 27).
+82. **In a dark room, the cut-outs must go dark too.** Moonlight kept their white paper edges glowing
+    as outlines; scale their colour as well as their glow by the room's light.
+83. **Check the pictures against the history, not only the words.** Gold dropping into an empty vault
+    said "Britain gained gold"; a shrinking kitchen pay packet said "every family's pay fell". The fix
+    was a padlock on gold already there, and the miners' packet. Give the facts checker the pictures.
+84. **A street needs its own light to read as outside.** People standing just in front of lit rooms
+    look as if they are inside them; a lit pavement and a lamp pool separate the street.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.

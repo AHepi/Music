@@ -511,6 +511,17 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The picture allowance: US$10 from chapter 2's start, about US$1.28 spent since, so about US$8.70
   left (the helpers were told US$3 by mistake).
 
+32. **A sample of the house** (your words): "Ok do a sample video of the house and how it would work."
+
+### Claude's calls for item 32
+
+- Built free from chapter 1's paintings and cut-outs; no new paintings, no narration (music only, your
+  soundtrack), the words on screen carry it.
+- Britain only (1922 to 1926); Italy is left for the real chapter.
+- The history on screen was checked, but the sample says plainly that chapter 3's history is not yet
+  researched, and names Mattei as the source of the "who decides, who pays" idea.
+- The video and music are kept out of the repository (decision 30); the code and a frame sheet are in.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

@@ -176,9 +176,17 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   3D scenes and cheap effects", "26 Plans - the look from chapter 3 on". Recommended: plan 2, the
   house. Nothing built yet; no cost.
 
+## The house sample (log 27, 2026-10-13)
+
+- 37 seconds, music only, sent as "27 Sample - the house" (not in the repository: video). Frame sheet:
+  `experiments/27 Sample - the house - one frame a second.jpg`. Scene: `film-kit/paper-film/scenes/
+  house-sample.js` with `house-sample/page-1.js` and `house-set.js`; timing `film-kit/examples/
+  house-sample/timeline.json`. Checked by two helpers before filming and one after. No cost.
+
 ## Waiting on you
 
-- Which plan for chapter 3's look (log 26). The house's first test is free.
+- Your view of the house sample (log 27); if yes, about ten wall paintings for the rooms (about 35 US
+  cents).
 
 
 - Your view of chapter 2 (round 20) on your phone.

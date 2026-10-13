@@ -46,6 +46,9 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
   chapter 2's 2,300 check pictures and its models are in `austerity-explainer/working-files/`. The
   rest (notes, scripts, logs, this session's working folder) was stopped by the safety check and waits
   for your decision.
+- **A 37-second sample of "the house"** ("27 Sample - the house", log 27): Britain in the 1920s as one
+  cut-away building at night, from the cuts of 1922 to the miners' lockout of 1926, with music and no
+  narration. Built free from chapter 1's paintings and cut-outs. Waiting for your view.
 - **A review of chapter 2's look, research on fully 3D scenes, and four plans for chapter 3 on**
   (log 26, in `experiments/`). Recommended: "the house", each chapter staged in one cut-away
   building of society, decisions at the top and work and homes at the bottom. Waiting for your
@@ -247,6 +250,7 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Paint-over | Flux repainting a plain picture of a set in the series' painted style, keeping the shapes where they are. |
 | Splat world | A 3D place made of millions of soft coloured dots, made by a paid service from one picture. |
 | Background still | The unchanging part of a still shot, drawn once and reused behind everything that moves. |
+| Cut-away | A building shown with its front taken off, like a doll's house, so every room can be seen at once. |
 
 ## Log (added to, never rewritten)
 
@@ -753,12 +757,50 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       2 to 4 are estimates. The helpers' test pictures stay in this session's working folder. Cost:
       none.
 
+27. **A sample of the house.** You said "Ok do a sample video of the house and how it would work."
+    - **What I built** (no cost): 37 seconds, music only (your soundtrack), with the words on screen
+      telling the story. One tall British building at night, cut open at the front: the Treasury and
+      the Bank's vault on the top floor, a council-house building site and a school in the middle, a
+      factory floor and a kitchen on the ground floor, the mine in the cellar, and a pavement in
+      front. The rooms are real 3D boxes; their back walls wear crops of chapter 1's paintings (the
+      boardroom, the munitions hall, the kitchen, a town street); the people and objects are chapter
+      1's cut-outs. Each room has its own light, so lights go out on a beat.
+    - **What happens:** 1922: the floors light up from the top down and are named. THE CUTS: scissors
+      appear on the committee's table, then land in the building site; the scaffolding falls and the
+      floor goes dark; the school keeps some light. The camera moves in to the vault: BACK ON GOLD, AT
+      THE PRE-WAR PRICE, and a padlock lands on the gold. It moves down through the house, dust falling
+      from the lit rooms' ceilings, to the mine: COAL OWNERS WANT LOWER PAY, LONGER HOURS, the ceiling
+      comes down, the miners bow, their wages packet shrinks. It pulls back: 1926, THE GENERAL STRIKE,
+      the factory and mine go dark, the chimneys stop, a crowd fills the street. LOCKED OUT, THE MINERS
+      HELD OUT TILL NOVEMBER, THEN LOST, in falling snow. The end: everything dims except the committee
+      room (DECIDES) and the miners outside (PAYS): ONE HOUSE, WHO DECIDES, WHO PAYS, with a note that
+      it is a sample after Clara E. Mattei's argument and its history is not yet researched. One shot
+      with three camera moves, so your camera rule holds.
+    - **Checked before filming by two independent helpers**, then fixed: the strike crowd and the
+      miners looked as if they stood inside the factory (now a lit pavement and a smaller crowd further
+      forward); the scissors fell through the vault (now they start on the committee's table); gold
+      dropping into an empty vault wrongly said Britain gained gold (now the gold is there all along and
+      a padlock locks it); the shrinking pay was the kitchen's, but the pay cut sought was the miners'
+      (moved to the mine); "held out for months" read as a win (now "locked out ... then lost"); the
+      "who decides, who pays" idea is Mattei's argument (now named in the note); dark rooms kept glowing
+      paper outlines; the miners' lamps glared over their faces; the dust billowed upward; snow fell
+      inside the rooms; a flickering slab edge. The facts on screen were confirmed for Britain (the
+      1922 cuts, gold at the pre-war rate in April 1925, the owners' demands, the General Strike of May
+      1926, the lockout until November).
+    - **Filming:** 1,110 frames in 33 minutes (about 1.8 seconds a frame, filmed two at a time). Sent as
+      "27 Sample - the house" (20 MB). As your rule says, the video and music are not in the repository;
+      the code, the timing file and a sheet of one frame a second are.
+    - **Not done:** new wall paintings (the rooms reuse old ones, so some walls don't quite match their
+      rooms, and the vault and mine walls are plain painted surfaces); narration; Italy; checking which
+      trades struck first in 1926 (the factory dims to a quarter rather than going dark, until that is
+      researched). Cost: none.
+
 
 ## Next step
 
-Choose a plan (log 26). If it's the house: I build its free first test, Britain's house as plain
-boxes with chapter 1's cut-outs, lit at night, with a pan down from the vault to the mine, and send you
-three pictures and a short move to judge on your phone.
+Your view of the house sample on your phone. If it works for you: about ten new wall paintings made for
+the rooms (about 35 US cents of the picture allowance, with your yes), then chapter 3's research and
+script.
 
 ## Traps
 
