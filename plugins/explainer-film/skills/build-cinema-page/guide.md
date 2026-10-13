@@ -177,3 +177,10 @@ Seven critics and a skeptic found these; each cost a re-film. Check for them you
   or drop them.
 - **Fill the frame past painted edges.** Black corners beyond a backdrop read as a rendering fault:
   scale the backdrop up for close shots.
+- **Opacity fades on cut-outs snap.** `.set({ opacity })` leaves a piece solid, then it vanishes at
+  half opacity: a piece first drawn solid keeps a drawing recipe that ignores see-through, and
+  cut-outs are only drawn where at least half solid. Build fading pieces see-through once
+  (`material.transparent = true; material.needsUpdate = true`) and lower `alphaTest` to about 0.02
+  while they fade (see `setFading` in the austerity project's `house-sample/page-1.js`).
+- **Two surfaces in one plane flicker when the camera moves.** Keep built walls, floors and ceilings a
+  hair (about 0.01 units) apart from the boxes behind them.
