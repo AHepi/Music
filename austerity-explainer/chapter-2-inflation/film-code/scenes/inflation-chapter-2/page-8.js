@@ -2,7 +2,7 @@
 //   A. The two-factories model set from page 3 (round 20: detailed Blender works in a model town).
 //      "So yes": YES, IT CAN, held on works B (flat out): coins rain into its yard and its price
 //      counter flips up at "flat out". At "things we can't make more of in a hurry" the camera zooms
-//      out to make room as a card house pops up in front of works B and its tag climbs (arrows, plainly
+//      out to make room as a card house pops up left of works B (not under its board) and its tag climbs (arrows, plainly
 //      illustrative, no figures).
 //   B. "In twenty twenty-one": a painted New Zealand street (a painting with depth). Title NEW ZEALAND
 //      2021; at "lowest" the figure 3.2% with UNEMPLOYMENT, LOWEST ON RECORD and a small line "Records
@@ -74,7 +74,7 @@ export async function build(kit) {
   const { a, b } = set;
   const tableThings = kit.scene.children.filter((o) => !before.has(o) && !o.isLight && o !== kit.lights.key.target);
   const key = kit.lights.key, fill = kit.lights.fill;
-  const setLight = { keyPos: key.position.clone(), keyTarget: key.target.position.clone(), key: key.intensity, fill: fill.intensity, fog: kit.scene.fog?.density ?? 0 };
+  const setLight = { keyPos: key.position.clone(), keyTarget: key.target.position.clone(), key: key.intensity, fill: fill.intensity, fog: kit.scene.fog?.density ?? 0, env: kit.scene.environmentIntensity };   // the rig's reflections (0.3), as on page 3
   const own = []; // things of this page that belong to the table set (hidden in the street)
   const track = (o) => { own.push(o); return o; };
 
@@ -87,18 +87,21 @@ export async function build(kit) {
   const priceB = [{ t: T.start - 1, text: '£1.00' }, { t: T.flat - 0.05, text: '£1.30' }, { t: T.flat + 0.3, text: '£1.70' }, { t: T.flat + 0.65, text: '£2.00' }];
 
   // a card house on the table, for "things we can't make more of in a hurry", with its tag on a post
-  const HOUSE_A = new THREE.Vector3(1.6, 0.012, -1.4);   // in front of works B, its board behind it
-  const houseA = paperHouse({ width: 1.0, depth: 0.95, height: 0.5, glow: 0.9, garden: true });
+  // left of works B, not under its board (so it can't read as 'this house costs £2'). Its lawn (x 0.18 to 1.42,
+  // z -2.40 to -0.86) lies on works B's forecourt, clear of that forecourt's front kerb (z -0.78 to -0.72), the
+  // street's kerbs, the shells (z -2.85) and the coins' landing ring (over 0.5 from centre 1.95, -2.55)
+  const HOUSE_A = new THREE.Vector3(0.8, 0.012, -2.05);
+  const houseA = paperHouse({ width: 0.8, depth: 0.7, height: 0.45, glow: 0.9, garden: true });
   houseA.group.position.copy(HOUSE_A);
-  houseA.group.rotation.y = 0.5;
-  houseA.group.add(contactShadow(1.5, 1.4, 0.5));
+  houseA.group.rotation.y = 0;
+  houseA.group.add(contactShadow(1.2, 1.1, 0.5));
   kit.scene.add(track(houseA.group));
   const postA = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1, 10), paper(PAPER.charcoal));
   postA.castShadow = true;
   kit.scene.add(track(postA));
   const tagA = priceTag({ width: 0.55, text: '↑' });
   kit.scene.add(track(tagA.group));
-  const POST_A = new THREE.Vector3(2.45, 0, -0.65);   // at the garden's front right corner, clear of the roof
+  const POST_A = new THREE.Vector3(0.15, 0, -1.05);   // just left of the garden's front, away from works B's board
   // arrows, not a currency: this is the general idea on the model table, before the New Zealand street
   const tagTextA = [{ t: -1e9, text: '↑' }, { t: T.cant, text: '↑↑' }, { t: T.of, text: '↑↑↑' }];
 
@@ -151,15 +154,16 @@ export async function build(kit) {
   const shotA = kit.stillShot({ position: [4.3, 1.25, 1.9], target: [2.2, 0.95, -3.0], fov: 40, focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] }, [
     { from: T.spent - 0.2, to: T.spent + 0.3, kind: 'focus', focus: [b.yard.x + 0.2, 0.1, b.yard.z - 0.3] },
     { from: T.flat - 0.3, to: T.flat + 0.1, kind: 'focus', focus: [b.boardAt.x, b.boardAt.y, b.boardAt.z] },
-    { from: T.things - 0.25, to: T.things + 0.8, kind: 'zoom out', position: [2.5, 1.4, 3.6], target: [2.05, 0.8, -1.9], fov: 44, focus: [HOUSE_A.x, 0.4, HOUSE_A.z] },
+    { from: T.things - 0.25, to: T.things + 0.9, kind: 'zoom out', position: [1.55, 1.0, 4.4], target: [1.6, 1.9, -1.9], fov: 56, focus: [HOUSE_A.x, 0.4, HOUSE_A.z] },
   ], { name: 'works B' });
   // B: the New Zealand street, from where it was painted; moves down to the house as prices rise
-  const shotB = kit.stillShot({ position: [0, 0.1, 0.2], target: [0, -0.4, -30], fov: 40, focus: 14 }, [
-    { from: T.house - 0.45, to: T.house + 0.6, kind: 'move down', position: [0.06, -0.4, -1.5], target: [0.05, -1.75, -30], focus: houseFocus },
+  // aimed a little up and a little tighter than the painting's own view, so the houses sit lower and less empty road shows
+  const shotB = kit.stillShot({ position: [0, 0.1, 0.2], target: [0, 2.3, -30], fov: 36, focus: 14 }, [
+    { from: T.house - 0.45, to: T.house + 0.6, kind: 'move down', position: [0.06, -0.3, -1.5], target: [0.05, 0.6, -30], focus: houseFocus },
   ], { name: 'New Zealand street' });
   // C: the whole desk around the report; zooms in on the report as the review gives its verdict
   const cardMid = [R.x, 0.03, R.z - 0.85];
-  const shotC = kit.stillShot({ position: [0.35, 4.9, 10.0], target: [0.35, 0.0, 6.6], fov: 44, focus: cardMid }, [
+  const shotC = kit.stillShot({ position: [0.35, 4.6, 9.7], target: [0.35, 0.0, 6.3], fov: 44, focus: cardMid }, [
     { from: T.says - 0.2, to: T.says + 0.9, kind: 'zoom in', position: [0.35, 4.4, 9.4], target: [0.35, 0.0, 6.75], fov: 40 },
   ], { name: 'the review desk' });
   kit.shake(reportLands, 0.012, 0.15);
@@ -181,7 +185,7 @@ export async function build(kit) {
       key.position.copy(setLight.keyPos).add(toCard); key.target.position.copy(setLight.keyTarget).add(toCard);
       key.intensity = setLight.key; fill.intensity = setLight.fill;
       if (kit.scene.fog) kit.scene.fog.density = setLight.fog;
-      kit.scene.environmentIntensity = 1;
+      kit.scene.environmentIntensity = setLight.env;
     } else {
       key.position.set(HOUSE_B.x - 9, HOUSE_B.y + 5.5, HOUSE_B.z - 3); key.target.position.copy(HOUSE_B);
       key.intensity = Math.PI * 0.75; fill.intensity = Math.PI * 0.2;
@@ -190,7 +194,7 @@ export async function build(kit) {
     }
     key.target.updateMatrixWorld();
 
-    if (phase === 'A') set.townSmoke(t); else set.hideTownSmoke();
+    if (phase === 'A') { set.townSmoke(t); set.heavySmokeB(t); } else { set.hideTownSmoke(); set.hideHeavySmokeB(); }
     if (onTable) {
       a.factory.setRunning(1);
       b.factory.setRunning(1);
@@ -249,7 +253,7 @@ export async function build(kit) {
       houseB.group.position.set(HOUSE_B.x, HOUSE_B.y, HOUSE_B.z);
       houseB.group.rotation.y = HOUSE_B_TURN;
       houseB.group.scale.set(1, Math.max(0.001, appear), 1);
-      const postX = HOUSE_B.x + 0.9, postZ = HOUSE_B.z + 1.05, postHeight = 1.7;
+      const postX = HOUSE_B.x + 0.55, postZ = HOUSE_B.z + 1.05, postHeight = 1.7;   // the $$$ tag clear of the right 140 px
       postB.scale.y = postHeight * Math.max(0.001, appear);
       postB.position.set(postX, HOUSE_B.y + postHeight * appear / 2, postZ);
       let current = 0;
@@ -284,14 +288,14 @@ export async function build(kit) {
       hook(ctx, t, { at: T.yes, until: T.spent - 0.1, lines: ['YES,', 'IT CAN'], y: 340, size: 104 });
       callout(ctx, t, { at: T.flat, until: T.things + 0.2, point: at([FACTORY_B.x + 0.2, 1.1, FACTORY_B.z + 1.0]), text: 'FLAT OUT', dx: -120, dy: -330, size: 52, plate: true, margin: 140 });   // a spot on the front wall that stays in frame
       callout(ctx, t, { at: T.flat + 0.35, until: T.things + 0.2, point: at(b.boardAt.clone().setY(1.27)), text: 'PRICES UP', dx: -140, dy: -220, accent: INK.red, size: 52, plate: true, margin: 140 });  // points at the board's top rim, not through the digits
-      hook(ctx, t, { at: T.things, until: CUT_B - 0.05, lines: ["CAN'T MAKE MORE", 'IN A HURRY'], y: 320, size: 70 });
+      hook(ctx, t, { at: T.things, until: CUT_B - 0.05, lines: ['CAN’T MAKE MORE', 'IN A HURRY'], y: 320, size: 70 });
     } else if (phase === 'B') {
       // a soft dark band at the top, so the words read over the bright painting
       const band = ctx.createLinearGradient(0, 0, 0, 900);
       band.addColorStop(0, 'rgba(10,14,16,0.6)'); band.addColorStop(0.6, 'rgba(10,14,16,0.35)'); band.addColorStop(1, 'rgba(10,14,16,0)');
       ctx.save(); ctx.fillStyle = band; ctx.fillRect(0, 0, 1080, 900); ctx.restore();
       placeTitle(ctx, t, { at: T.twenty, until: T.house - 0.2, place: 'New Zealand', year: 2021, y: 260 });
-      hook(ctx, t, { at: T.unemployment, until: T.house - 0.2, text: 'UNEMPLOYMENT', y: 470, size: 56, colour: INK.muted });
+      hook(ctx, t, { at: T.unemployment, until: T.house - 0.2, text: 'UNEMPLOYMENT', y: 470, size: 56, colour: INK.paper });
       counter(ctx, t, { at: T.lowest - 0.05, until: T.house - 0.2, duration: 0.01, from: 3.2, to: 3.2, format: (v) => `${v.toFixed(1)}%`, y: 700, size: 190, caption: 'Lowest on record', captionColour: INK.paper });
       // so the caption isn't misread: 1986 is when the survey began (C2-N09)
       const note = presence(t, T.lowest + 0.25, T.house - 0.2, 0.3, 0.35);
@@ -307,8 +311,8 @@ export async function build(kit) {
       hook(ctx, t, { at: T.house, until: CUT_C - 0.05, text: 'HOUSE PRICES', y: 260, size: 58, colour: INK.muted });
       hook(ctx, t, { at: T.thirty, until: CUT_C - 0.05, text: '+30%', y: 390, size: 150, colour: INK.amber });
       hook(ctx, t, { at: T.twelve, until: CUT_C - 0.05, text: 'IN 12 MONTHS', y: 520, size: 70 });
-      credit(ctx, t, { at: T.unemployment, until: T.house - 0.2, text: 'Source: Stats NZ', y: 1460 });
-      credit(ctx, t, { at: T.house, until: CUT_C - 0.05, text: 'Source: REINZ', y: 1460 });
+      credit(ctx, t, { at: T.unemployment, until: T.house - 0.2, text: 'Source: Stats NZ', y: 1460, plate: true });
+      credit(ctx, t, { at: T.house, until: CUT_C - 0.05, text: 'Source: REINZ', y: 1460, plate: true });
     } else {
       credit(ctx, t, { at: T.review + 0.3, until: T.end + 2, text: 'Independent review, September 2026', y: 1460 });
       hook(ctx, t, { at: T.support, until: T.was - 0.05, lines: ['SUPPORT FROM', 'BANK + GOVERNMENT'], y: 330, size: 66 });

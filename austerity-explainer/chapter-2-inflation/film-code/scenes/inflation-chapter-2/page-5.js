@@ -215,8 +215,11 @@ export async function build(kit) {
   // rise; on "the gains went to whoever owned the most" one zoom in narrows onto the rich tower as it
   // grows and the coins pour down by it; then it holds to the end.
   const richFocus = [rich.base.x, rich.base.y + 1.4, rich.base.z];
-  const shotB = kit.stillShot({ position: [0, -0.4, 0], target: [0, -0.8, -30], fov: 40, focus: 10 }, [
-    { from: T.gains - 0.1, to: T.went + 0.8, kind: 'zoom in', position: [0.1, -0.4, -1.0], target: [-0.15, -0.9, -30], fov: 38, focus: richFocus },
+  // It stands 0.7 in from the painting's eye point: from further back (at the origin, a little below
+  // the eye line) the frame saw past the painting's bottom edge and a black band ran along the bottom.
+  // At z -0.7 that edge (and its mirrored margin) lies below the frame (frame_check: y 1978 of 1920).
+  const shotB = kit.stillShot({ position: [0, -0.4, -0.7], target: [0, -0.8, -30], fov: 40, focus: 9.2 }, [
+    { from: T.gains - 0.1, to: T.went + 0.8, kind: 'zoom in', position: [0.14, -0.4, -1.5], target: [-0.12, -0.9, -30], fov: 37, focus: richFocus },
   ], { name: 'the bank street' });
   kit.shake(T.double + 0.1, 0.008, 0.15);
   kit.shake(T.creates2 + 0.3, 0.008, 0.2);
@@ -397,22 +400,24 @@ export async function build(kit) {
   }
 
   // a dark rounded plate behind words over pale or busy parts of the picture
-  function plate(ctx, t, { at, until, x, y, w, h }) {
+  function plate(ctx, t, { at, until, x, y, w, h, grow }) {
     const a = presence(t, at, until, 0.12, 0.3);
     if (a <= 0) return;
+    // grow: { at, h, y } lets the plate reach down to take a second line when it appears
+    if (grow) { const k = smooth(clamp01((t - grow.at) / 0.25)); h = lerp(h, grow.h, k); y = lerp(y, grow.y, k); }
     ctx.save(); ctx.globalAlpha = a * 0.72; ctx.fillStyle = 'rgb(12,16,18)';
     ctx.beginPath(); ctx.roundRect(x - w / 2, y - h / 2, w, h, 28); ctx.fill();
     ctx.restore();
   }
   // the source credit, in paper white so it reads over the sky
-  function sourceCredit(ctx, t, { at, until, text, x = 84, y = 180, size = 34 }) {
+  function sourceCredit(ctx, t, { at, until, text, lines, x = 84, y = 180, size = 34, gap = 1.25 }) {
     const a = presence(t, at, until, 0.3, 0.4);
     if (a <= 0) return;
     ctx.save(); ctx.globalAlpha = a;
     ctx.shadowColor = INK.shadow; ctx.shadowBlur = 16; ctx.shadowOffsetY = 3;
     ctx.fillStyle = INK.paper; ctx.font = `700 ${size}px Inter`; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
     ctx.letterSpacing = '3px';
-    ctx.fillText(text.toUpperCase(), x, y);
+    (lines ?? [text]).forEach((row, i) => ctx.fillText(row.toUpperCase(), x, y + i * size * gap));
     ctx.restore();
   }
 
@@ -422,9 +427,14 @@ export async function build(kit) {
       placeTitle(ctx, t, { at: T.japan, until: T.double - 0.15, place: 'Japan', year: 2013, y: 260 });
       // the line starts early so its label is up by the word "yen"
       callout(ctx, t, { at: T.creates + 0.62, until: T.double - 0.1, point: at([stackBase.x, stackTop(5) + 0.05, stackBase.z]), text: 'YEN', dx: 120, dy: -260, size: 52, plate: true });
-      plate(ctx, t, { at: T.double, until: T.if - 0.2, x: 540, y: 355, w: 680, h: 260 });
-      hook(ctx, t, { at: T.double, until: T.if - 0.2, text: '×2 MONEY', y: 300, size: 120 });
-      hook(ctx, t, { at: T.inTwo, until: T.if - 0.2, text: 'IN TWO YEARS', y: 420, size: 64 });
+      // on the left, clear of the bundles falling onto the stack (on screen x 500-850 all the way up);
+      // the plate fits ×2 MONEY, then reaches down for IN TWO YEARS when she says it
+      plate(ctx, t, { at: T.double, until: T.if - 0.2, x: 250, y: 335, w: 400, h: 250, grow: { at: T.inTwo, h: 340, y: 380 } });
+      hook(ctx, t, { at: T.double, until: T.if - 0.2, text: '×2', x: 250, y: 280, size: 130 });
+      hook(ctx, t, { at: T.double + 0.1, until: T.if - 0.2, text: 'MONEY', x: 250, y: 400, size: 84 });
+      hook(ctx, t, { at: T.inTwo, until: T.if - 0.2, text: 'IN TWO YEARS', x: 250, y: 492, size: 48 });
+      // the ¥800 is invented: say so, as pages 1 and 3 do (above the bowl, left of the stack)
+      credit(ctx, t, { at: T.japan, until: CUT - 0.1, text: 'Example price', x: 84, y: 1050, size: 28, plate: true });
       pricesChart(ctx, t, { at: T.if - 0.1, until: CUT - 0.1, box: [190, 300, 700, 330] });
       // just under the chart, above the stack of yen and the bowl
       plate(ctx, t, { at: T.about, until: CUT - 0.1, x: 540, y: 775, w: 700, h: 110 });
@@ -432,16 +442,19 @@ export async function build(kit) {
     } else {
       placeTitle(ctx, t, { at: CUT + 0.2, until: T.creates2 - 0.1, place: 'After the crash', year: 2008, y: 260, size: 44 });
       hook(ctx, t, { at: T.bank, until: T.creates2 - 0.1, text: 'BANK OF ENGLAND', y: 400, size: 76 });
-      hook(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, text: 'BRITAIN’S CENTRAL BANK', y: 490, size: 46, colour: INK.muted });
+      plate(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, x: 540, y: 490, w: 700, h: 76 });
+      hook(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, text: 'BRITAIN’S CENTRAL BANK', y: 490, size: 46 });
       hook(ctx, t, { at: T.hundreds, until: T.study - 0.2, lines: ['HUNDREDS OF', 'BILLIONS'], y: 330, size: 104 });
       hook(ctx, t, { at: T.pounds, until: T.study - 0.2, text: 'OF POUNDS', y: 500, size: 70, colour: INK.amber });
-      sourceCredit(ctx, t, { at: T.study, until: T.last + 2, text: 'Bank of England study, 2012', y: 152 });   // above the falling bundles' path
-      risingArrow(ctx, t, { at: T.pushed2 - 0.1, until: T.gains - 0.15, box: [210, 330, 560, 380] });
-      plate(ctx, t, { at: T.shares, until: T.gains - 0.15, x: 540, y: 890, w: 820, h: 220 });
-      hook(ctx, t, { at: T.shares, until: T.gains - 0.15, text: 'SHARES ↑', y: 840, size: 78 });
-      hook(ctx, t, { at: T.investments - 0.12, until: T.gains - 0.15, text: 'OTHER INVESTMENTS ↑', y: 940, size: 58 });
-      hook(ctx, t, { at: T.gains, until: T.last + 2, text: 'THE GAINS', x: 54, y: 300, size: 88, colour: INK.amber, align: 'left' });
-      hook(ctx, t, { at: T.owned - 0.1, until: T.last + 2, lines: ['TO THE BIGGEST', 'OWNERS'], x: 54, y: 440, size: 62, align: 'left' });
+      // two short lines on the left (x 84-470): the bundles that land later all fall onto the right
+      // tower (on screen x 530 and right), so none crosses it; its top sits at y ~197
+      sourceCredit(ctx, t, { at: T.study, until: T.last + 2, lines: ['Bank of England', 'study, 2012'], y: 220, size: 32, gap: 1.2 });
+      risingArrow(ctx, t, { at: T.pushed2 - 0.1, until: T.gains - 0.15, box: [210, 335, 560, 320] });   // kept above the tower tops (the camera now stands closer)
+      plate(ctx, t, { at: T.shares, until: T.gains - 0.15, x: 540, y: 828, w: 820, h: 176 });
+      hook(ctx, t, { at: T.shares, until: T.gains - 0.15, text: 'SHARES ↑', y: 788, size: 74 });
+      hook(ctx, t, { at: T.investments - 0.12, until: T.gains - 0.15, text: 'OTHER INVESTMENTS ↑', y: 873, size: 56 });
+      hook(ctx, t, { at: T.gains, until: T.last + 2, text: 'THE GAINS', x: 54, y: 345, size: 88, colour: INK.amber, align: 'left' });
+      hook(ctx, t, { at: T.owned - 0.1, until: T.last + 2, lines: ['TO THE BIGGEST', 'OWNERS'], x: 54, y: 480, size: 62, align: 'left' });
     }
     return true;
   }

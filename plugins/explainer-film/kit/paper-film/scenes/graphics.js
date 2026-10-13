@@ -232,11 +232,19 @@ export function bars(ctx, t, { at, until = Infinity, box, values, labels = [], v
 }
 
 // A small attribution line (who said it), lower left, like a documentary source credit.
-export function credit(ctx, t, { at, until = at + 4, text, x = 84, y = 1440, size = 30 }) {
+// plate: true puts the line on a soft dark plate in paper white (for busy or bright backgrounds)
+export function credit(ctx, t, { at, until = at + 4, text, x = 84, y = 1440, size = 30, plate = false }) {
   const a = presence(t, at, until, 0.3, 0.4);
   if (a <= 0) return false;
-  ctx.save(); ctx.globalAlpha = a * 0.9; withShadow(ctx, 14);
-  ctx.fillStyle = INK.muted; ctx.font = `600 ${size}px Inter`; ctx.textBaseline = 'alphabetic';
+  ctx.save(); ctx.globalAlpha = a * 0.9;
+  ctx.font = `600 ${size}px Inter`; ctx.textBaseline = 'alphabetic';
+  if (plate) {
+    const width = ctx.measureText(text.toUpperCase()).width + 3 * text.length;
+    ctx.fillStyle = 'rgba(12,14,18,0.74)';
+    ctx.beginPath(); ctx.roundRect(x - 18, y - size * 0.95, width + 36, size * 1.5, 10); ctx.fill();
+  }
+  withShadow(ctx, 14);
+  ctx.fillStyle = plate ? INK.paper : INK.muted;
   spaced(ctx, text.toUpperCase(), x, y, 3);
   ctx.restore();
   return true;

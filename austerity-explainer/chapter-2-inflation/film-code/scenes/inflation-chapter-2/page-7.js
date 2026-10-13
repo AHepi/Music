@@ -16,7 +16,7 @@
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, clamp01, smooth, smoother, ramp, lerp, spring, seededRandom, degrees } from '../cinema-kit.js';
-import { oilBarrel, splitFlap, countSchedule, priceTag } from '../models.js';
+import { oilBarrel, splitFlap, countSchedule, priceTag, contactShadow } from '../models.js';
 import { Motes, DustBurst } from '../effects.js';
 import { placeTitle, hook, presence, INK } from '../graphics.js';
 
@@ -73,6 +73,29 @@ export async function build(kit) {
   // the painted forecourt rises a little behind the barrel's foot: lift it until its whole base stands
   // on (not in) the painted concrete
   for (let i = 0; i < 40 && station.clearance(barrel.group) < 0.04; i++) { barrelAt.y += 0.01; barrel.group.position.copy(barrelAt); }
+  // ...but no higher than needed: settle it down until it just stands on the concrete (about 0.03)
+  for (let i = 0; i < 40 && station.clearance(barrel.group) > 0.035; i++) { barrelAt.y -= 0.005; barrel.group.position.copy(barrelAt); }
+  // a soft contact shadow on the concrete under the barrel's foot (it stays on the floor while the
+  // barrel falls, darkening and tightening as the barrel comes down)
+  const barrelShadow = contactShadow(barrel.radius * 2 * 1.9, barrel.radius * 2 * 1.75, 0.8);
+  const shadowDarkness = 0.8;
+  // the painted concrete rises gently away from us (about 7 degrees): lay the shadow on that slope,
+  // just above the paint, centred under the barrel and a touch forward and left (the key is behind right)
+  {
+    const nearPt = floor(0.565, 0.11), farPt = floor(0.565, 0.19), mid = floor(0.565, 0.14);
+    const slope = Math.atan2(farPt.y - nearPt.y, nearPt.z - farPt.z);
+    barrelShadow.rotation.x = -Math.PI / 2 + slope;
+    barrelShadow.position.set(mid.x, mid.y + 0.012, mid.z);
+    for (let i = 0; i < 20 && station.clearance(barrelShadow) < 0.008; i++) barrelShadow.position.y += 0.004;
+  }
+  // and a tighter, darker core right under the rim, where the drum meets the concrete
+  const barrelCore = contactShadow(barrel.radius * 2 * 1.2, barrel.radius * 2 * 1.1, 0.75);
+  barrelCore.rotation.x = barrelShadow.rotation.x;
+  barrelCore.position.set(barrelAt.x, barrelShadow.position.y + 0.003 + (barrelShadow.position.z - barrelAt.z) * Math.tan(barrelShadow.rotation.x + Math.PI / 2), barrelAt.z);
+  for (let i = 0; i < 20 && station.clearance(barrelCore) > 0.016; i++) barrelCore.position.y -= 0.004;
+  barrelCore.renderOrder = 2;
+  kit.scene.add(barrelCore);
+  kit.scene.add(barrelShadow);
   const oilCard = await kit.card('OIL', { size: 0.15, at: [0, barrel.height * 0.38, barrel.radius + 0.045], parent: barrel.group });
   const barrelLight = kit.glow([barrelAt.x - 0.6, barrelAt.y + 1.6, barrelAt.z + 1.4], { colour: 0xffc27a, strength: 3.5, reach: 5 });
   const dust = new DustBurst(kit.scene, { count: 22, seed: 7, colour: 'rgba(150,140,124,0.9)' });
@@ -114,7 +137,7 @@ export async function build(kit) {
   // warm specks drifting under the canopy lights
   const motes = new Motes(kit.scene, { count: 140, min: [-1.8, -2.0, -11], max: [2.4, 0.8, -5], size: 0.025, colour: 0xffe2b8, seed: 9, opacity: 0.5 });
 
-  const partA = [station.mesh, barrel.group, flap.group, motes.points, ...tags.map((x) => x.pivot)];
+  const partA = [station.mesh, barrel.group, barrelShadow, barrelCore, flap.group, motes.points, ...tags.map((x) => x.pivot)];
 
   // ------------------------------------------------------------------ part B: a New Zealand street
   const suburb = await kit.relief('410-bg-nz-suburb', { near: 6, far: 70, fov: 40, margin: 0.22 });
@@ -153,6 +176,10 @@ export async function build(kit) {
     const rock = after > 0 ? 0.07 * Math.exp(-after * 6) * Math.sin(after * 26) : 0;
     barrel.group.position.set(barrelAt.x, barrelAt.y + 4.5 * (1 - k * k), barrelAt.z);
     barrel.group.rotation.set(rock, 0, degrees(6) * (1 - k) + rock * 0.6);
+    barrelShadow.visible = barrel.group.visible;
+    barrelShadow.material.opacity = shadowDarkness * k * k;
+    barrelCore.visible = barrel.group.visible;
+    barrelCore.material.opacity = 0.75 * clamp01((k - 0.7) / 0.3);
     dust.set({ origin: [barrelAt.x, barrelAt.y + 0.02, barrelAt.z + 0.1], width: 0.9, age: after, scale: 0.5 });
     // the counter rises out of the lid, then counts
     const rise = t < flapUp ? 0 : 1 - spring(t - flapUp, { stiffness: 14, damping: 0.6 });
@@ -249,11 +276,11 @@ export async function build(kit) {
         ctx.save(); ctx.globalAlpha = ca;
         // on a dark plate just under the counter, so it reads over the red barrel
         ctx.font = '800 42px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        const cw = ctx.measureText('A BARREL').width + 40, cy = flapTop.y + 40;
+        const cw = ctx.measureText('US$ A BARREL').width + 40, cy = flapTop.y + 40;
         ctx.fillStyle = 'rgba(12,16,18,0.78)';
         ctx.beginPath(); ctx.roundRect(flapTop.x - cw / 2, cy - 30, cw, 60, 14); ctx.fill();
         ctx.fillStyle = INK.paper;
-        ctx.fillText('A BARREL', flapTop.x, cy + 2);
+        ctx.fillText('US$ A BARREL', flapTop.x, cy + 2);
         ctx.restore();
       }
       hook(ctx, t, { at: T.quadruples + 0.1, until: T.almost - 0.1, text: '×4', y: 300, size: 170, colour: INK.amber });

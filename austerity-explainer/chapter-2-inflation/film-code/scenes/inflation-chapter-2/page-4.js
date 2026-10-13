@@ -6,21 +6,21 @@
 //   - "workers poured into Glasgow for war work": three long files of workers stream in from the
 //     right and walk away up the street, one after another.
 //   - "landlords pushed rents up... by as much as a quarter": the camera closes in on a notice board
-//     standing in the street; a printed notice (RENT RAISED) slaps onto it, then UP TO +25% / AS MUCH AS A QUARTER.
+//     standing in the street; a printed notice (RENT RAISED) slaps onto it, then UP TO +25%.
 //   - "By November, about twenty thousand households were refusing to pay the rise": a row of
-//     rent strikers with placards pops up on the pavement under the notice; 20,000 counts up,
+//     rent strikers with placards pops up on the pavement under the notice; 20 then 20,000,
 //     HOUSEHOLDS REFUSING TO PAY.
 //   - "Within weeks, Parliament froze rents": a rubber stamp slams down on the notice (shake, dust)
 //     and lifts away, leaving a red RENTS FROZEN stamp on it.
-//   - "Homes can't be built in a hurry": a quick dip to black on "homes" cuts to a small card house
-//     on the cobbles, its walls going up one slow course at a time beside the faint outline of the
-//     finished house; HOMES CAN'T BE BUILT / IN A HURRY.
+//   - "Homes can’t be built in a hurry": a quick dip to black on "homes" cuts to a small house
+//     seated on the cobbles: its timber frame stands, and red brick courses rise inside it one at a
+//     time; HOMES CAN’T BE BUILT / IN A HURRY.
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, popUp, foldDown, clamp01, smooth, ramp, lerp, seededRandom, spring, walkBob, knock } from '../cinema-kit.js';
 import { paper, PAPER, contactShadow } from '../models.js';
 import { Motes, DustBurst } from '../effects.js';
-import { placeTitle, hook, counter, presence, INK } from '../graphics.js';
+import { placeTitle, hook, counter, INK } from '../graphics.js';
 
 export async function build(kit) {
   const T = {
@@ -37,6 +37,7 @@ export async function build(kit) {
     november: kit.at('november'),
     about: kit.at('about'),
     twenty: kit.at('twenty'),
+    thousand: kit.at('thousand'),
     households: kit.at('households'),
     refusing: kit.at('refusing'),
     rise: kit.at('rise'),
@@ -197,75 +198,218 @@ export async function build(kit) {
   const dust = new DustBurst(kit.scene, { count: 20, seed: 9, colour: 'rgba(150,140,128,0.9)' });
 
   // ------------------------------------------------------------------ the rent strikers
-  const strikersAt = [boardFoot.x + 0.45, boardFoot.y - 0.08, -9.6];
-  const strikers = await kit.cutout('rent-strikers', { at: strikersAt, width: 2.55, yaw: 0.15 });
-  // their bottom edge on the cobbles in every fold of the pop-up (lying flat to standing)
-  const strikersPop = { height: 1.18, restZ: 0.3 };
-  const strikersLift = liftFor((dy) => Math.min(...[Math.PI / 2, 1.2, 0.8, 0.4, 0, -0.2].map((fold) => {
-    strikers.set({ fold, dy }); return objectGap(strikers.anchor, cardEdge(strikers));
-  })), 0.06);
+  // the painted piece stops mid-skirt (a dead-straight cut), which read as women sunk into the street;
+  // here it is redrawn on a taller canvas with each skirt carried down to a hem and a pair of boots,
+  // so they stand ON the cobbles, with a soft shadow at their feet
+  const strikersRaw = await kit.cutout('rent-strikers', { at: [0, -50, -20], width: 1 });
+  const strikersImage = strikersRaw.front.material.map.image;
+  kit.scene.remove(strikersRaw.anchor);
+  const SW = strikersImage.width, SH = strikersImage.height, EXT = 190;
+  const strikersCanvas = document.createElement('canvas');
+  strikersCanvas.width = SW; strikersCanvas.height = SH + EXT;
+  {
+    const g = strikersCanvas.getContext('2d');
+    g.drawImage(strikersImage, 0, 0);
+    // the skirts at the cut (image pixels: left, right), one per woman
+    const skirts = [[26, 353], [353, 604], [604, 880], [880, 1188], [1188, 1464], [1464, 1741], [1741, 2028]];
+    const hem = 128; // how far each skirt carries on below the cut
+    const hemDrop = [6, -4, 10, 0, 8, -6, 4]; // each skirt a little different in length
+    const skirtPath = (l, r, y0, grow, n) => {
+      const bottom = y0 + hem + hemDrop[n];
+      g.beginPath();
+      g.moveTo(l + 5, y0 - 1);
+      g.lineTo(l + 9 - grow, bottom - 14);
+      g.bezierCurveTo(l + (r - l) * 0.3, bottom + 10, l + (r - l) * 0.7, bottom + 10, r - 9 + grow, bottom - 14);
+      g.lineTo(r - 5, y0 - 1);
+      g.closePath();
+    };
+    const boots = (draw) => skirts.forEach(([l, r], n) => {
+      const c = (l + r) / 2, half = (r - l) / 2;
+      for (const side of [-1, 1]) draw(c + side * half * 0.28 + ((n * 37) % 11) - 5, SH + hem + hemDrop[n] + 12, side);
+    });
+    const boot = (x, y, side, grow) => { g.beginPath(); g.ellipse(x + side * 10, y, 36 + grow, 19 + grow, side * 0.12, 0, Math.PI * 2); g.fill(); g.fillRect(x - 22 - grow, y - 40, 44 + 2 * grow, 40); };
+    // 1: the light sticker edge round everything new (drawn first, so it shows only on the outside)
+    g.fillStyle = '#efe9dd'; g.strokeStyle = '#efe9dd'; g.lineWidth = 16; g.lineJoin = 'round';
+    boots((x, y, side) => boot(x, y, side, 8));
+    skirts.forEach(([l, r], n) => { skirtPath(l, r, SH, 8, n); g.stroke(); g.fill(); });
+    // 2: the painted figures again on top of that edge
+    g.drawImage(strikersImage, 0, 0);
+    // 3: the boots (dark leather, a small highlight on each toe), then the skirts over their tops
+    boots((x, y, side) => {
+      g.fillStyle = '#1b1816'; boot(x, y, side, 0);
+      g.fillStyle = 'rgba(255,236,205,0.22)'; g.beginPath(); g.ellipse(x + side * 18, y - 5, 10, 4, 0, 0, Math.PI * 2); g.fill();
+    });
+    skirts.forEach(([l, r], n) => {
+      // the last rows of the painted skirt drawn on downward (their folds become long streaks),
+      // darkening toward a curved hem
+      g.save(); skirtPath(l, r, SH, 8, n); g.clip();
+      g.drawImage(strikersImage, l - 14, SH - 6, r - l + 28, 6, l - 14, SH - 4, r - l + 28, hem + 30);
+      const shade = g.createLinearGradient(0, SH, 0, SH + hem + 12);
+      shade.addColorStop(0, 'rgba(10,12,16,0)'); shade.addColorStop(0.7, 'rgba(10,12,16,0.22)'); shade.addColorStop(1, 'rgba(10,12,16,0.5)');
+      g.fillStyle = shade; g.fillRect(l - 20, SH - 4, r - l + 40, hem + 30);
+      g.restore();
+    });
+  }
+  const strikersTexture = new THREE.CanvasTexture(strikersCanvas);
+  strikersTexture.colorSpace = THREE.SRGBColorSpace;
+  strikersTexture.anisotropy = 8;
+  const strikersAt = [boardFoot.x + 0.45, boardFoot.y, -9.6];
+  const strikers = kit.addCutout(strikersTexture, { at: strikersAt, width: 2.35, yaw: 0.15 });
+  const strikersPop = { height: strikers.height, restZ: 0.3 };
+  // the boots stand on the cobbles: for each fold of the pop-up, the raise at which the lowest point
+  // of the bottom edge just clears the street (about 0.02 when standing)
+  const strikerFolds = [-0.3, -0.15, 0, 0.2, 0.4, 0.8, 1.2, Math.PI / 2];
+  const strikerLifts = strikerFolds.map((fold) => liftFor((dy) => { strikers.set({ fold, dy }); return objectGap(strikers.anchor, cardEdge(strikers)); }, 0.05));
+  const strikersLiftAt = (fold) => {
+    for (let i = 1; i < strikerFolds.length; i++) if (fold <= strikerFolds[i]) return Math.max(strikerLifts[i - 1], strikerLifts[i]);
+    return strikerLifts[strikerLifts.length - 1];
+  };
   strikers.set({ visible: false });
+  // a soft shadow pooled under their feet, just above the cobbles
+  const strikersShadow = contactShadow(2.7, 0.7, 0.85);
+  strikersShadow.rotation.z = -0.15;
+  kit.scene.add(strikersShadow);
+  const strikersShadowLift = liftFor((dy) => { strikersShadow.position.set(strikersAt[0], strikersAt[1] + dy, strikersAt[2] + 0.04); return street.clearance(strikersShadow); }, 0.006);
+  strikersShadow.position.set(strikersAt[0], strikersAt[1] + strikersShadowLift, strikersAt[2] + 0.04);
 
   // ------------------------------------------------------------------ the house going up slowly
-  const site = P(0.56, 0.205, 1.0);
+  // a small brick house on a stone footing seated on the cobbles: the timber frame of the whole
+  // house (posts, wall plates, gable rafters, ridge) already stands, and red brick courses rise inside
+  // it one by one, so it reads as a home being built, slowly
+  const site = P(0.53, 0.2, 1.0);
   const house = new THREE.Group();
   house.position.copy(site);
-  house.rotation.y = -0.5;
   kit.scene.add(house);
-  const W = 1.3, D = 0.95, H = 0.9, COURSES = 10, courseH = H / COURSES, wallT = 0.07;
-  const brickA = paper(PAPER.cream), brickB = paper(PAPER.card);
+  const W = 1.05, D = 0.8, H = 0.85, COURSES = 13, courseH = H / COURSES, wallT = 0.09, FOOT = 0.1;
+  // the brick face: one course of bricks with mortar joints, drawn once and repeated along each wall
+  const brickCanvas = document.createElement('canvas'); brickCanvas.width = 512; brickCanvas.height = 64;
+  {
+    const g = brickCanvas.getContext('2d');
+    g.fillStyle = '#cfc4b0'; g.fillRect(0, 0, 512, 64); // mortar
+    const random = seededRandom(5);
+    for (let i = 0; i < 4; i++) {
+      const r = 138 + random() * 34, gg = 60 + random() * 20, bb = 46 + random() * 14;
+      g.fillStyle = `rgb(${r | 0},${gg | 0},${bb | 0})`;
+      g.fillRect(i * 128 + 5, 6, 118, 52);
+      g.fillStyle = 'rgba(255,220,180,0.12)'; g.fillRect(i * 128 + 5, 6, 118, 8);
+      g.fillStyle = 'rgba(0,0,0,0.14)'; g.fillRect(i * 128 + 5, 50, 118, 8);
+    }
+  }
+  const brickLength = 0.14; // world units per brick
+  const brickMaterial = (length, offset) => {
+    const map = new THREE.CanvasTexture(brickCanvas);
+    map.colorSpace = THREE.SRGBColorSpace; map.anisotropy = 8;
+    map.wrapS = THREE.RepeatWrapping; map.repeat.set(length / (4 * brickLength), 1); map.offset.x = offset;
+    return new THREE.MeshStandardMaterial({ map, roughness: 0.92, metalness: 0 });
+  };
+  const courseMaterials = [0, 0.125].map((offset) => ({ long: brickMaterial(W, offset), short: brickMaterial(D - 2 * wallT, offset), door: brickMaterial(W * 0.36, offset) }));
   const courses = [];
   for (let i = 0; i < COURSES; i++) {
     const course = new THREE.Group();
-    const m = i % 2 ? brickA : brickB;
-    for (const [w, d, x, z] of [[W, wallT, 0, D / 2 - wallT / 2], [W, wallT, 0, -D / 2 + wallT / 2], [wallT, D - 2 * wallT, W / 2 - wallT / 2, 0], [wallT, D - 2 * wallT, -W / 2 + wallT / 2, 0]]) {
-      // a gap for the door in the front wall's lower courses
-      if (z > 0 && i < 6) {
-        for (const [ww, xx] of [[W * 0.38, -W * 0.31], [W * 0.38, W * 0.31]]) {
-          const b = new THREE.Mesh(new THREE.BoxGeometry(ww, courseH * 0.94, d), m);
-          b.position.set(xx, 0, z); b.castShadow = b.receiveShadow = true; course.add(b);
-        }
-        continue;
-      }
-      const b = new THREE.Mesh(new THREE.BoxGeometry(w, courseH * 0.94, d), m);
+    const m = courseMaterials[i % 2];
+    const add = (w, d, x, z, material) => {
+      const b = new THREE.Mesh(new THREE.BoxGeometry(w, courseH * 0.98, d), material);
       b.position.set(x, 0, z); b.castShadow = b.receiveShadow = true; course.add(b);
-    }
-    course.userData.y = 0.034 + courseH * (i + 0.5); // on the slab (top 0.03), never in it
+    };
+    // front wall, with a doorway in its lower courses
+    if (i < 8) for (const x of [-W * 0.32, W * 0.32]) add(W * 0.36, wallT, x, D / 2 - wallT / 2, m.door);
+    else add(W, wallT, 0, D / 2 - wallT / 2, m.long);
+    add(W, wallT, 0, -D / 2 + wallT / 2, m.long);
+    for (const x of [W / 2 - wallT / 2, -W / 2 + wallT / 2]) add(wallT, D - 2 * wallT, x, 0, m.short);
+    course.userData.y = FOOT + 0.004 + courseH * (i + 0.5);
     house.add(course);
     courses.push(course);
   }
-  const slab = new THREE.Mesh(new THREE.BoxGeometry(W + 0.16, 0.03, D + 0.16), paper(PAPER.card));
-  slab.position.y = 0.015; slab.receiveShadow = true; house.add(slab);
-  // the faint outline of the finished house (walls and a pitched roof), drawn as thin glowing rods
-  const outline = new THREE.Group();
-  const lineMaterial = new THREE.MeshBasicMaterial({ color: 0xe8a33d, transparent: true, opacity: 0, depthWrite: false, fog: false });
-  const corners = [];
-  for (const y of [0, H]) for (const [x, z] of [[-W / 2, -D / 2], [W / 2, -D / 2], [W / 2, D / 2], [-W / 2, D / 2]]) corners.push(new THREE.Vector3(x, y, z));
-  const ridgeF = new THREE.Vector3(0, H + 0.5, D / 2), ridgeB = new THREE.Vector3(0, H + 0.5, -D / 2);
-  const edges = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]].map(([i, j]) => [corners[i], corners[j]]);
-  edges.push([corners[7], ridgeF], [corners[6], ridgeF], [corners[4], ridgeB], [corners[5], ridgeB], [ridgeF, ridgeB]);
-  for (const [p, q] of edges) {
+  // the stone footing (a plinth a little wider than the walls)
+  const stone = paper(0x6d6a66, { roughness: 0.95 });
+  const footing = new THREE.Mesh(new THREE.BoxGeometry(W + 0.2, FOOT, D + 0.2, 18, 1, 14), stone);
+  footing.position.y = FOOT / 2; footing.castShadow = footing.receiveShadow = true; house.add(footing);
+  // the timber frame: corner and door posts, wall plates, gable rafters and the ridge
+  const timber = paper(0xb88a55, { roughness: 0.8 });
+  const frame = new THREE.Group();
+  const beam = (p, q, size = 0.055) => {
     const length = p.distanceTo(q);
-    // dashed: short rods along the edge
-    const dashes = Math.max(2, Math.round(length / 0.09));
-    for (let i = 0; i < dashes; i++) {
-      const a0 = p.clone().lerp(q, i / dashes), a1 = p.clone().lerp(q, (i + 0.6) / dashes);
-      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.009, 0.009, a0.distanceTo(a1), 5), lineMaterial);
-      rod.position.copy(a0).add(a1).multiplyScalar(0.5);
-      rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), a1.clone().sub(a0).normalize());
-      outline.add(rod);
-    }
+    const m = new THREE.Mesh(new THREE.BoxGeometry(size, length, size), timber);
+    m.position.copy(p).add(q).multiplyScalar(0.5);
+    m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), q.clone().sub(p).normalize());
+    m.castShadow = m.receiveShadow = true; frame.add(m);
+  };
+  const y0 = FOOT, y1 = FOOT + H, ridge = y1 + 0.46;
+  const cx = W / 2 + 0.03, cz = D / 2 + 0.03; // just outside the brick, never in it
+  const V = (x, y, z) => new THREE.Vector3(x, y, z);
+  for (const [x, z] of [[-cx, -cz], [cx, -cz], [cx, cz], [-cx, cz]]) beam(V(x, y0, z), V(x, y1 + 0.03, z));
+  for (const z of [-cz, cz]) beam(V(-cx - 0.03, y1 + 0.03, z), V(cx + 0.03, y1 + 0.03, z));
+  for (const x of [-cx, cx]) beam(V(x, y1 + 0.03, -cz), V(x, y1 + 0.03, cz));
+  for (const z of [-cz, cz]) { beam(V(-cx - 0.08, y1 + 0.02, z), V(0, ridge, z)); beam(V(cx + 0.08, y1 + 0.02, z), V(0, ridge, z)); }
+  beam(V(0, ridge, -cz - 0.05), V(0, ridge, cz + 0.05));
+  for (const x of [-W * 0.14, W * 0.14]) beam(V(x, y0, cz), V(x, FOOT + courseH * 8 + 0.02, cz), 0.045); // door posts
+  beam(V(-W * 0.14 - 0.03, FOOT + courseH * 8 + 0.02, cz), V(W * 0.14 + 0.03, FOOT + courseH * 8 + 0.02, cz), 0.05); // lintel
+  for (const s of [-1, 1]) for (const k of [0.33, 0.66]) { // rafters along the roof
+    const x = s * cx * (1 - k), y = y1 + 0.03 + (ridge - y1 - 0.03) * k;
+    beam(V(x, y, -cz), V(x, y, cz), 0.04);
   }
-  outline.position.y = 0.034;
-  house.add(outline);
-  // the slab sits on the cobbles: raise the house until the slab's whole underside clears the street
-  const slabUnder = [];
-  for (let i = 0; i <= 8; i++) for (let j = 0; j <= 6; j++) slabUnder.push([slab, new THREE.Vector3((i / 8 - 0.5) * (W + 0.16), -0.015, (j / 6 - 0.5) * (D + 0.16))]);
+  house.add(frame);
+  // seat it on the cobbles: tilt it to the street's slope under its footprint (a plane fitted to the
+  // painted surface there), then lower it until the footing's underside just clears the stones
+  const footprint = [];
+  for (let i = 0; i <= 10; i++) for (let j = 0; j <= 8; j++) footprint.push([(i / 10 - 0.5) * (W + 0.2), (j / 8 - 0.5) * (D + 0.2)]);
+  house.rotation.set(0, -0.3, 0);
+  house.updateMatrixWorld(true);
+  const groundAt = (x, z) => { // the street's height under a world (x, z): where a point there stops clearing it
+    let lo = site.y - 0.6, hi = site.y + 0.6;
+    for (let k = 0; k < 30; k++) { const mid = (lo + hi) / 2; if (gapAt(new THREE.Vector3(x, mid, z)) > 0) hi = mid; else lo = mid; }
+    return hi;
+  };
+  {
+    // least squares: y = a + b*lx + c*lz in the house's own floor coordinates
+    let n = 0, sx = 0, sz = 0, sy = 0, sxx = 0, szz = 0, sxz = 0, sxy = 0, szy = 0;
+    const yawC = Math.cos(house.rotation.y), yawS = Math.sin(house.rotation.y);
+    for (const [lx, lz] of footprint) {
+      const wx = site.x + lx * yawC + lz * yawS, wz = site.z - lx * yawS + lz * yawC;
+      const y = groundAt(wx, wz);
+      n++; sx += lx; sz += lz; sy += y; sxx += lx * lx; szz += lz * lz; sxz += lx * lz; sxy += lx * y; szy += lz * y;
+    }
+    // the footprint is symmetric, so the cross terms vanish
+    const b = (sxy - sx * sy / n) / (sxx - sx * sx / n), c = (szy - sz * sy / n) / (szz - sz * sz / n);
+    house.rotation.set(-Math.atan(c), -0.3, Math.atan(b), 'YXZ');
+  }
+  const footUnder = footprint.map(([lx, lz]) => [footing, new THREE.Vector3(lx, -FOOT / 2, lz)]);
   courses.forEach((course) => { course.position.y = course.userData.y; });
-  const houseLift = liftFor((dy) => { house.position.y = site.y + dy; return objectGap(house, slabUnder); }, 0.05);
+  const houseLift = liftFor((dy) => { house.position.y = site.y + dy; return objectGap(house, footUnder); }, 0.03);
   house.position.y = site.y + houseLift;
-  // one course every 0.75 s, from just after the cut: only a few are up by the end
-  const courseAt = (i) => T.cut + 0.45 + i * 0.75;
+  // the footing's underside follows the stones: each bottom corner of its mesh is lowered (never
+  // raised) to 0.03 above the street under it, so it sits on the cobbles with no gap and no overlap
+  house.updateMatrixWorld(true);
+  const conform = (mesh, isBottom, above) => {
+    const position = mesh.geometry.attributes.position, p = new THREE.Vector3();
+    for (let i = 0; i < position.count; i++) {
+      p.fromBufferAttribute(position, i);
+      if (!isBottom(p)) continue;
+      const w = mesh.localToWorld(p.clone());
+      const target = mesh.worldToLocal(new THREE.Vector3(w.x, groundAt(w.x, w.z) + above, w.z));
+      position.setY(i, Math.min(p.y, target.y));
+    }
+    position.needsUpdate = true; mesh.geometry.computeVertexNormals(); mesh.geometry.computeBoundingSphere();
+  };
+  conform(footing, (p) => p.y < 0, 0.03);
+  // a soft shadow where the footing meets the stones, laid over the cobbles' own rise and fall
+  const houseShadow = contactShadow(W + 0.75, D + 0.7, 0.8);
+  houseShadow.geometry = new THREE.PlaneGeometry(W + 0.75, D + 0.7, 28, 22);
+  houseShadow.position.y = 0.0; house.add(houseShadow);
+  house.updateMatrixWorld(true);
+  { // set every shadow vertex just above the stones (the shadow lies flat: its local z is the world's up)
+    const position = houseShadow.geometry.attributes.position, p = new THREE.Vector3();
+    for (let i = 0; i < position.count; i++) {
+      p.fromBufferAttribute(position, i);
+      const w = houseShadow.localToWorld(p.clone());
+      const target = houseShadow.worldToLocal(new THREE.Vector3(w.x, groundAt(w.x, w.z) + 0.016, w.z));
+      position.setXYZ(i, target.x, target.y, target.z);
+    }
+    position.needsUpdate = true; houseShadow.geometry.computeBoundingSphere();
+  }
+
+  // one course every 0.3 s, from just after the cut: about half the walls are up by the end
+  const courseAt = (i) => T.cut + 0.4 + i * 0.38;
 
   // ------------------------------------------------------------------ the camera
   const noticeFocus = [noticeCentre.x, noticeCentre.y, noticeCentre.z];
@@ -280,7 +424,7 @@ export async function build(kit) {
   ], { name: 'the street and the notice' });
   // shot 2, after the dip: the building site, held still while the walls creep up
   const siteFocus = [site.x, site.y + 0.4, site.z];
-  const siteShot = kit.stillShot({ position: [0.25, -0.65, -2.4], target: [site.x, site.y + 0.8, site.z], fov: 25, focus: siteFocus }, [],
+  const siteShot = kit.stillShot({ position: [0.15, -1.3, -2.9], target: [site.x, site.y + 0.66, site.z], fov: 30, focus: siteFocus }, [],
     { name: 'the building site' });
   const shot = (t) => (t < T.cut ? wallShot(t) : siteShot(t));
   kit.shake(T.slam, 0.02, 0.16);
@@ -335,15 +479,17 @@ export async function build(kit) {
     if (t > T.slam - 0.05 && t < Math.min(T.slam + 1.3, T.cut)) dust.set({ origin: [noticeCentre.x + 0.1, noticeCentre.y - 0.25, noticeCentre.z + 0.3], width: 1.0, age: t - T.slam, scale: 0.35 });
     else dust.hide();
     // the strikers pop up on "about" and stay until the camera leaves
-    strikers.set(wall ? { ...popUp(t, T.about - 0.15, strikersPop), dy: strikersLift } : { visible: false });
-    // the house: courses drop into place one by one; the outline fades in
+    const strikersPose = wall ? popUp(t, T.about - 0.15, strikersPop) : { visible: false };
+    strikers.set(strikersPose.visible ? { ...strikersPose, dy: strikersLiftAt(strikersPose.fold) } : strikersPose);
+    strikersShadow.visible = strikersPose.visible === true;
+    strikersShadow.material.opacity = strikersPose.visible ? 0.85 * clamp01(1 - Math.abs(strikersPose.fold) / 0.9) : 0;
+    // the house: courses drop into place one by one
     house.visible = !wall;
-    lineMaterial.opacity = 0.75 * smooth(ramp(t, T.cut + 0.3, T.cut + 0.9));
     courses.forEach((course, i) => {
       const at = courseAt(i);
-      const k = clamp01((t - (at - 0.25)) / 0.25);
-      course.visible = t > at - 0.25;
-      course.position.y = course.userData.y + 0.35 * (1 - k * k) + Math.max(0, knock(t - at, 0.004, 6, 0.1));
+      const k = clamp01((t - (at - 0.2)) / 0.2);
+      course.visible = t > at - 0.2;
+      course.position.y = course.userData.y + 0.05 * (1 - k * k) + Math.max(0, knock(t - at, 0.003, 6, 0.1));
     });
     // the dip: black exactly on the cut, picture back about a quarter second later
     const fade = t < T.cut ? smooth(ramp(t, T.cut - T.dipIn, T.cut)) : 1 - smooth(ramp(t, T.cut, T.cut + T.dipOut));
@@ -355,21 +501,15 @@ export async function build(kit) {
     placeTitle(ctx, t, { at: T.y1915, until: T.landlords - 0.2, place: 'Glasgow', year: 1915, y: 280 });
     hook(ctx, t, { at: T.workers + 0.2, until: T.landlords - 0.1, lines: ['WORKERS POUR IN'], y: 420, size: 62, colour: INK.muted });
     hook(ctx, t, { at: T.quarter - 0.1, until: T.november - 0.1, text: 'UP TO +25%', y: 330, size: 112, colour: INK.amber });
-    // on a dark plate, so it reads over the lit building
-    const plate = presence(t, T.quarter, T.november - 0.1, 0.12, 0.3);
-    if (plate > 0) {
-      ctx.save(); ctx.globalAlpha = 0.62 * plate; ctx.fillStyle = '#0b0f14';
-      ctx.beginPath(); ctx.roundRect(150, 455 - 46, 780, 92, 18); ctx.fill(); ctx.restore();
-    }
-    hook(ctx, t, { at: T.quarter, until: T.november - 0.1, text: 'AS MUCH AS A QUARTER', y: 455, size: 52, colour: INK.paper });
     hook(ctx, t, { at: T.november, until: T.within - 0.2, text: 'BY NOVEMBER', y: 165, size: 38, colour: INK.paper });
-    counter(ctx, t, { at: T.twenty - 0.05, until: T.within - 0.2, duration: 0.9, from: 0, to: 20000, y: 350, size: 150,
-      format: (v) => (Math.round(v / 100) * 100).toLocaleString('en-GB') });
+    // the figure as she says it: 20 on "twenty", 20,000 on "thousand" (never a figure she hasn't reached)
+    counter(ctx, t, { at: T.twenty - 0.05, until: T.within - 0.2, duration: 0.01, from: 20000, to: 20000, y: 350, size: 150,
+      format: () => (t < T.thousand - 0.04 ? '20' : '20,000') });
     hook(ctx, t, { at: T.about, until: T.within - 0.2, text: 'ABOUT', y: 220, size: 44, colour: INK.paper });
     hook(ctx, t, { at: T.refusing, until: T.within - 0.2, lines: ['HOUSEHOLDS', 'REFUSING TO PAY'], y: 480, size: 54, colour: INK.amber });
     hook(ctx, t, { at: T.parliament, until: T.homes2 - 0.2, text: 'PARLIAMENT', y: 200, size: 56, colour: INK.paper });
-    hook(ctx, t, { at: T.homes2, until: T.last + 2, lines: ['HOMES CAN\u2019T', 'BE BUILT'], y: 330, size: 74 });
-    hook(ctx, t, { at: T.hurry - 0.05, until: T.last + 2, text: 'IN A HURRY', y: 470, size: 74, colour: INK.amber });
+    hook(ctx, t, { at: T.homes2, until: T.last + 2, lines: ['HOMES CAN\u2019T', 'BE BUILT'], y: 260, size: 74 });
+    hook(ctx, t, { at: T.hurry - 0.05, until: T.last + 2, text: 'IN A HURRY', y: 400, size: 74, colour: INK.amber });
     return true;
   }
 

@@ -51,6 +51,12 @@ Traps found here: its sandbox refuses `bpy.ops.wm.read_factory_settings` (use
 Cycles before any render (EEVEE needs a GPU and crashes Blender without one); thumbnails are written
 into Blender's temp folder (the reply gives the path). One headless Blender per helper (own port).
 
+Modelling guidance learned through the server (its rules, tested bpy settings with manual
+sources, sizes that show on a phone, traps): `${CLAUDE_PLUGIN_ROOT}/skills/make-3d-models/blender-mcp-notes.md`.
+Most visible first: bevels with `harden_normals=True` plus a Weighted Normal modifier and smooth
+shading (plain bevels show as hard facets); bevel walls after cutting their openings; join parts by
+material (232 parts to 19) to draw faster.
+
 ## Set up (once)
 
 ```

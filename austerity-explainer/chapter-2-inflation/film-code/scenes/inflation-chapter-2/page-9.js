@@ -49,6 +49,16 @@ function plateCredit(ctx, t, { at, until, text, y, size = 30 }) {
   return true;
 }
 
+// a pop-up that is never seen lying flat: the card stays hidden while it is nearly flat on the
+// ground (a flat cut-out from this low camera reads as a sheared sticker on the road) and fades in
+// as it rises
+function standUp(t, start, piece, options) {
+  const p = popUp(t, start, piece, options);
+  if (!p.visible) return p;
+  const show = clamp01((1.0 - p.fold) / 0.35);
+  return show <= 0.01 ? { visible: false } : { ...p, opacity: show };
+}
+
 const FACE_TURN = Math.PI / 2;
 const BOOK_WIDTH = 2.95;
 const BOOK_LIFT = 0.06;
@@ -92,7 +102,7 @@ export async function build(kit) {
 
   // ------------------------------------------------------------------ part A: the town street
   const street = await kit.relief('107-bg-town-street', { near: 6, far: 70, fov: 40 });
-  const bankAt = street.pointAt(0.345, 0.1);
+  const bankAt = street.pointAt(0.44, 0.1);   // r20d: 0.3 units right of 0.345, so the eased-in shot keeps the whole bank
   const bank = await kit.cutout('bank', { at: [bankAt.x, bankAt.y, bankAt.z], width: 1.8, yaw: 0.12 });
   // the interest-rate meter on a post, on the pavement right of the bank
   const postAt = street.pointAt(0.78, 0.15);   // on the raised pavement, clear of the kerb
@@ -180,7 +190,7 @@ export async function build(kit) {
   const stackFocus = [stackAt.x, stackAt.y, stackAt.z];
   const shotA = kit.stillShot({ position: [0, -0.1, 0], target: [0.05, -0.8, -30], fov: 40, focus: [bankAt.x, bankAt.y + 1, bankAt.z] }, [
     // the rate becomes the main focus: narrow onto the meter as she names "the price of borrowing"
-    { from: T.interest - 0.1, to: T.price + 0.5, kind: 'zoom in', position: [0.3, -0.05, -0.6], target: [0.42, -0.6, -30], fov: 37, focus: meterFocus },
+    { from: T.interest - 0.1, to: T.price + 0.5, kind: 'zoom in', position: [0.2, -0.05, -0.5], target: [0.36, -0.6, -30], fov: 38.5, focus: meterFocus },
     // loans cost more, people spend less: down onto the coins being pulled away (pressure)
     { from: T.loans - 0.3, to: T.loans + 0.6, kind: 'pan down', position: [0.25, 0.4, 0.0], fov: 41, target: [0.2, -1.7, -30], focus: stackFocus },
   ], { name: 'the town street' });
@@ -211,7 +221,8 @@ export async function build(kit) {
     let exposure = 0.95, vignette;
     if (inA) {
       streetMotes.set(t);
-      bank.set({ ...popUp(t, T.start + 0.05, { height: 2.2, restZ: 0.2 }), dy: BANK_LIFT });
+      // r20d: pops up on her first word, after the page turn (never lying flat in the road during the peel)
+      bank.set({ ...standUp(t, T.so - 0.1, { height: 2.2, restZ: 0.2 }), dy: BANK_LIFT });
       // the meter grows up from its foot on the pavement on "pushes" (never through the pavement)
       const rise = t < T.pushes - 0.2 ? 0 : 1 - spring(t - T.pushes + 0.2, { stiffness: 12, damping: 0.6 });
       meterRig.visible = rise > 0.01;
@@ -237,7 +248,7 @@ export async function build(kit) {
       vignette = lerp(0.35, 0.6, dim);
     } else {
       gateMotes.set(t);
-      queue.forEach((q, i) => q.set({ ...popUp(t, queueTimes[i] - 0.1, { height: q.height, restZ: 0.25 }), dy: q.lift }));
+      queue.forEach((q, i) => q.set({ ...standUp(t, queueTimes[i] - 0.1, { height: q.height, restZ: 0.25 }), dy: q.lift }));
       // the book grows up out of the street, standing upright the whole time (lying down it would
       // sweep through the queue): no fold, it scales up from its bottom edge with a small overshoot
       const grow = t < T.mattei - 0.1 ? 0 : 1 - spring(t - T.mattei + 0.1, { stiffness: 11, damping: 0.6 });
@@ -284,16 +295,19 @@ export async function build(kit) {
     hook(ctx, t, { at: T.spend, until: CUT - 0.1, text: 'SPEND LESS', y: 360, size: 76, colour: INK.amber });
     // part B
     hook(ctx, t, { at: CUT + 0.1, until: T.two - 0.35, text: 'WITHIN A YEAR', y: 300, size: 64, colour: INK.paper });
-    bars(ctx, t, { at: T.two - 0.25, until: T.prices - 0.1, box: [300, 360, 480, 360], values: [2, 11], maxValue: 13, labels: ['1920', '1921'], title: 'Unemployment',
+    // r20d: the chart stays up through "prices do fall" and "pay with their jobs" (11% held for about
+    // 4 s), below those words; a compact box whose bars use its height, the source line inside it
+    const CHART_END = T.pay + 0.6;
+    bars(ctx, t, { at: T.two - 0.25, until: CHART_END, box: [300, 600, 480, 260], values: [2, 11], maxValue: 13, labels: ['1920', '1921'], title: 'Unemployment',
       valueText: (v) => `${v}%`, colours: [INK.paper, INK.red], stagger: T.eleven - T.two, rise: 0.6 });
-    credit(ctx, t, { at: T.two - 0.25, until: T.prices - 0.1, text: 'Source: Bank of England data', x: 300, y: 800, size: 22 });
+    credit(ctx, t, { at: T.two - 0.25, until: CHART_END, text: 'Source: Bank of England data', x: 300, y: 940, size: 20 });
     hook(ctx, t, { at: T.prices, until: T.pay - 0.15, text: 'PRICES DO FALL...', y: 330, size: 72 });
     hook(ctx, t, { at: T.pay, until: T.mattei - 0.15, lines: ['PAID WITH', 'THEIR JOBS'], y: 350, size: 96, colour: INK.amber });
     plateCredit(ctx, t, { at: T.mattei, until: T.last + 2, text: 'Clara E. Mattei, The Capital Order (2022)', y: 450, size: 30 });
-    hook(ctx, t, { at: T.mattei + 0.1, until: T.with - 0.15, text: 'MATTEI:', y: 205, size: 48, colour: INK.amber });
+    // r20d: one MATTEI: tag stays up from her name to the end, so every claim after it reads as hers
+    hook(ctx, t, { at: T.mattei + 0.1, until: T.last + 2, text: 'MATTEI:', y: 200, size: 46, colour: INK.amber });
     hook(ctx, t, { at: T.part, until: T.with - 0.15, lines: ['PART OF', 'THE POINT'], y: 335, size: 88 });
     hook(ctx, t, { at: T.fewer, until: T.workers - 0.1, text: 'FEWER JOBS', y: 320, size: 88 });
-    hook(ctx, t, { at: T.power - 0.1, until: T.last + 2, text: 'MATTEI:', y: 215, size: 44, colour: INK.amber });
     hook(ctx, t, { at: T.power, until: T.last + 2, lines: ['LESS POWER', 'TO ASK FOR MORE'], y: 320, size: 80 });
     return true;
   }

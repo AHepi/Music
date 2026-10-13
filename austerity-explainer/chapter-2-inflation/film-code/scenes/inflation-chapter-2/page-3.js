@@ -13,8 +13,8 @@
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, popUp, foldDown, clamp01, smooth, ramp, lerp, degrees, spring } from '../cinema-kit.js';
-import { CoinRain, DustBurst } from '../effects.js';
-import { callout, hook, credit, INK } from '../graphics.js';
+import { CoinRain, DustBurst, Smoke } from '../effects.js';
+import { callout, hook, credit, presence, INK } from '../graphics.js';
 import { buildTwoFactories, FACTORY_A, FACTORY_B } from './two-factories-set.js';
 
 export async function build(kit) {
@@ -54,6 +54,12 @@ export async function build(kit) {
   // buyers' bids: a stack of coins growing beside B's price counter
   const bids = new CoinRain(kit.scene, { count: 14, centre: [b.boardAt.x - 0.32, 0, b.boardAt.z + 0.25], height: 2.5, start: T.bid, spread: T.climb - T.bid + 0.6, coinRadius: 0.055, seed: 3, stack: true });
   const dust = new DustBurst(kit.scene, { count: 18, seed: 4 });
+
+  // the closing shot's near barrels and crates sit in a warm pool of their own lamp light, so the
+  // bottom of the frame reads as lit cobbles and props rather than black smudges
+  const nearLight = new THREE.PointLight(0xffb36b, 0, 3.2, 2);
+  nearLight.position.set(1.8, 1.05, 1.45);
+  kit.scene.add(nearLight);
 
   // short of workers, materials and machines: three cut-outs and their words in front of B
   // staggered in depth (worker in front left, materials in the middle, the lathe behind right) so
@@ -107,7 +113,9 @@ export async function build(kit) {
     a.factory.setRunning(runA);
     b.factory.setRunning(1);
     a.smoke.set({ t, origin: a.chimney.toArray(), from: T.goIn + 0.6, scale: 0.9 });
-    b.smoke.set({ t, origin: b.chimney.toArray(), scale: 0.9 });
+    b.smoke.set({ t, origin: b.chimney.toArray(), scale: 1.15 });
+    set.heavySmokeB(t);   // B's thick coal smoke (two-factories-set.js)
+    nearLight.intensity = t >= CUT_B ? 3.5 : 0;
     a.board.pose(t, priceA);
     b.board.pose(t, priceB);
     // A's shells: none at first, then one by one out of the door after "shells"
@@ -160,8 +168,13 @@ export async function build(kit) {
     callout(ctx, t, { ...label, at: T.shells + 0.1, until: T.barely - 0.1, point: at(a.shellAt(2).setY(0.3)), text: 'MORE SHELLS', dx: 60, dy: -300 });
     callout(ctx, t, { ...label, at: T.barely, until: T.second - 0.2, point: rim(a.boardAt), text: 'BARELY MOVE', dx: -60, dy: -260 });
     callout(ctx, t, { ...label, at: T.flat, until: T.money2 - 0.1, point: at([FACTORY_B.x - 0.8, 0.95, FACTORY_B.z + 1.05]), text: 'FLAT OUT', dx: 100, dy: -260 });
-    callout(ctx, t, { ...label, at: T.noMore + 0.1, until: T.bid - 0.1, point: at(b.shellAt(6).setY(0.3)), text: 'NO MORE SHELLS', dx: -60, dy: -300 });
-    callout(ctx, t, { ...label, at: T.climb, until: T.britain - 0.1, point: rim(b.boardAt.clone().setX(b.boardAt.x + 0.3)), text: 'PRICES CLIMB', dx: -140, dy: -260, accent: INK.red });
+    callout(ctx, t, { ...label, at: T.noMore + 0.1, until: T.bid - 0.1, point: at(b.shellAt(6).setY(0.3)), text: 'NO MORE SHELLS', dx: 60, dy: -520 });   // above the roofline, clear of the board
+    solidCallout(ctx, t, { ...label, at: T.climb, until: T.britain + 0.6, point: at(b.boardAt.clone().setY(b.boardAt.y + 0.06)), text: 'PRICES CLIMB', dx: -100, dy: -260, accent: INK.red });
+    // which works we are looking at: '1' and '2' in the opening shot, then a corner tag on each visit
+    solidCallout(ctx, t, { ...label, at: T.two - 0.7, until: CUT_A + 0.02, point: at([FACTORY_A.x - 0.2, 1.45, FACTORY_A.z + 0.7]), text: 'FACTORY 1', dx: 20, dy: -380, centre: true });
+    solidCallout(ctx, t, { ...label, at: T.two - 0.25, until: CUT_A + 0.02, point: at([FACTORY_B.x + 0.8, 1.4, FACTORY_B.z + 1.1]), text: 'FACTORY 2', dx: 10, dy: -250, centre: true });
+    credit(ctx, t, { at: T.first, until: CUT_B, text: 'Factory 1 · spare capacity', x: 84, y: 214, size: 40, plate: true });
+    credit(ctx, t, { at: CUT_B, until: T.britain, text: 'Factory 2 · flat out', x: 84, y: 214, size: 40, plate: true });
     hook(ctx, t, { at: T.britain, until: T.short - 0.2, lines: ['BRITAIN', 'AT WAR'], x: 470, y: 290, size: 92 });   // clear of factory B's chimney
     hook(ctx, t, { at: T.short, until: T.end + 1.2, text: 'SHORT OF', x: 470, y: 290, size: 80 });
     credit(ctx, t, { at: T.first, until: T.britain, text: 'Example prices', y: 1460, size: 28 });
@@ -169,4 +182,56 @@ export async function build(kit) {
   }
 
   return { pose, draw2D };
+}
+
+// graphics.js callout with an opaque dark plate that comes up with the leader (so the words read
+// at once over the pale glazed roof), not a translucent one that fades in after it
+// centre: true puts the words centred just above the leader's end (kept inside the margins)
+function solidCallout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, centre = false }) {
+  const a = presence(t, at, until, 0.01, 0.3);
+  if (a <= 0 || !point || point.behind) return false;
+  const age = t - at;
+  const k = 1 - (1 - clamp01(age / 0.3)) ** 3;
+  ctx.save();
+  ctx.font = `800 ${size}px Inter`;
+  const textWidth = ctx.measureText(text).width, labelWidth = textWidth + 52;
+  let side = Math.sign(dx || 1);
+  const endX = point.x + dx;
+  if (side > 0 && endX + 40 + labelWidth > 1080 - margin) side = -1;
+  if (side < 0 && endX - 40 - labelWidth < margin) side = 1;
+  const reach = Math.abs(dx) * side;
+  const endY = Math.min(1500, Math.max(150, point.y + dy));
+  const end = { x: point.x + reach * k, y: point.y + (endY - point.y) * k };
+  ctx.globalAlpha = a;
+  ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 12;
+  ctx.strokeStyle = accent; ctx.lineWidth = 4;
+  const padX = size * 0.45, padY = size * 0.32;
+  if (centre) {
+    end.x = point.x + dx * k;
+    ctx.beginPath(); ctx.moveTo(point.x, point.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+    ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(point.x, point.y, 8, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = a * clamp01((age - 0.12) / 0.12);
+    const w = textWidth + 2 * padX, h = size + 2 * padY;
+    const left = Math.min(1080 - margin - w, Math.max(margin, end.x - w / 2)), top = end.y - h;
+    ctx.shadowBlur = 0; ctx.fillStyle = 'rgb(14,16,19)';
+    ctx.beginPath(); ctx.roundRect(left, top, w, h, size * 0.3); ctx.fill();
+    ctx.strokeStyle = accent; ctx.lineWidth = 3; ctx.stroke();
+    ctx.fillStyle = colour; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
+    ctx.fillText(text, left + w / 2, top + h / 2);
+    ctx.restore();
+    return true;
+  }
+  ctx.beginPath(); ctx.moveTo(point.x, point.y); ctx.lineTo(end.x, end.y); ctx.lineTo(end.x + side * 40 * k, end.y); ctx.stroke();
+  ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(point.x, point.y, 8, 0, Math.PI * 2); ctx.fill();
+  ctx.globalAlpha = a * clamp01((age - 0.12) / 0.12);
+  const left = side > 0 ? end.x + side * 52 - padX : end.x + side * 52 - textWidth - padX;
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = 'rgb(14,16,19)';
+  ctx.beginPath(); ctx.roundRect(left, end.y - size / 2 - padY, textWidth + 2 * padX, size + 2 * padY, size * 0.3); ctx.fill();
+  ctx.strokeStyle = accent; ctx.lineWidth = 3; ctx.stroke();
+  ctx.fillStyle = colour; ctx.textBaseline = 'middle';
+  ctx.textAlign = side > 0 ? 'left' : 'right';
+  ctx.fillText(text, end.x + side * 52, end.y);
+  ctx.restore();
+  return true;
 }

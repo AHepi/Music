@@ -14,18 +14,59 @@
 //     words MATTEI: PART OF THE POINT.
 //   - "workers lose the power to ask for more": an iron weight drops onto a pay packet and crushes
 //     it flat (jolt, dust); LESS POWER TO ASK FOR MORE (the credit to her stays on screen).
+// Round 20 (viewer's notes): one still shot per place (kit.stillShot, at most 3 moves each); the gate
+// shot starts wide so the queue, the packet and the book all have room. Her book stands far back
+// behind the queue, as tall as about 40% of the frame (it stands for authority); the packet stands
+// in its own space in front of the queue. Every cut-out, the meter and the coins are seated just
+// above the painted ground (checked with room.clearance and boxesOverlap over the whole window).
+// Round 20b (reviewer's notes): the bank pops up and the coin stack (people's spending money) drops
+// onto the pavement from the first word, so the opening street is not empty; the "loans" pan down also
+// eases back a little so the whole bank and the dial's numbers stay in frame, with the hook text above
+// the dial; the gate shot uses the painting's own lens and pans down partly by lifting the camera, with a
+// soft dark band over the bottom of the frame, so the painting's edge never shows; the pay packet stands
+// a little further back so WAGES sits above the bottom 380 px; the credit to Mattei sits on a dark plate.
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, popUp, foldDown, slapFlat, dropIn, spring, clamp01, smooth, ramp, lerp, seededRandom } from '../cinema-kit.js';
 import { dial, coin, PAPER } from '../models.js';
 import { Motes, DustBurst } from '../effects.js';
-import { placeTitle, hook, callout, bars, credit, INK } from '../graphics.js';
+import { placeTitle, hook, callout, bars, credit, presence, INK } from '../graphics.js';
+
+// the source credit for her argument, on a dark plate so it reads over sky and smoke (the shared
+// credit() is small and muted, fine for data sources but too faint for this attribution)
+function plateCredit(ctx, t, { at, until, text, y, size = 30 }) {
+  const a = presence(t, at, until, 0.3, 0.4);
+  if (a <= 0) return false;
+  ctx.save();
+  ctx.globalAlpha = a;
+  ctx.font = `600 ${size}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  const w = ctx.measureText(text).width + 44, h = size + 22, x = 500;
+  ctx.fillStyle = 'rgba(12,14,18,0.72)';
+  ctx.beginPath(); ctx.roundRect(x - w / 2, y - h / 2, w, h, 12); ctx.fill();
+  ctx.fillStyle = INK.paper;
+  ctx.fillText(text, x, y + 1);
+  ctx.restore();
+  return true;
+}
+
+// a pop-up that is never seen lying flat: the card stays hidden while it is nearly flat on the
+// ground (a flat cut-out from this low camera reads as a sheared sticker on the road) and fades in
+// as it rises
+function standUp(t, start, piece, options) {
+  const p = popUp(t, start, piece, options);
+  if (!p.visible) return p;
+  const show = clamp01((1.0 - p.fold) / 0.35);
+  return show <= 0.01 ? { visible: false } : { ...p, opacity: show };
+}
 
 const FACE_TURN = Math.PI / 2;
+const BOOK_WIDTH = 2.95;
+const BOOK_LIFT = 0.06;
 
 export async function build(kit) {
   const T = {
     start: kit.firstWordAt - 0.8,
+    so: kit.firstWordAt,
     cure: kit.at('cure'),
     britain: kit.at('britain'),
     bank: kit.at('bank'),
@@ -61,10 +102,10 @@ export async function build(kit) {
 
   // ------------------------------------------------------------------ part A: the town street
   const street = await kit.relief('107-bg-town-street', { near: 6, far: 70, fov: 40 });
-  const bankAt = street.pointAt(0.35, 0.13);
+  const bankAt = street.pointAt(0.44, 0.1);   // r20d: 0.3 units right of 0.345, so the eased-in shot keeps the whole bank
   const bank = await kit.cutout('bank', { at: [bankAt.x, bankAt.y, bankAt.z], width: 1.8, yaw: 0.12 });
   // the interest-rate meter on a post, on the pavement right of the bank
-  const postAt = street.pointAt(0.69, 0.15);
+  const postAt = street.pointAt(0.78, 0.15);   // on the raised pavement, clear of the kerb
   const meter = dial({ radius: 0.62, min: 0, max: 8, step: 1, label: 'INTEREST', unit: '%' });
   const post = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 1.8, 12), new THREE.MeshStandardMaterial({ color: 0x2d3236, roughness: 0.6 }));
   post.castShadow = true;
@@ -81,7 +122,7 @@ export async function build(kit) {
   // a stack of coins on the pavement (people's spending money), pulled back to the bank coin by coin
   // (moved up from v 0.06, where it sat half off the bottom edge, and right of the bank; with the camera tipped down a
   // little on "loans" it sits on the pavement in mid-frame, screen y about 1300)
-  const stackAt = street.pointAt(0.645, 0.125);
+  const stackAt = street.pointAt(0.74, 0.1);   // on the pavement in front of the meter
   const coins = [];
   const random = seededRandom(9);
   for (let i = 0; i < 9; i++) {
@@ -91,6 +132,19 @@ export async function build(kit) {
     kit.scene.add(c.group);
     coins.push(c);
   }
+  // seat things on the painted pavement: the smallest lift that keeps them clear of the painting
+  // (the pavement is not quite flat), worked out once here from where each one rests
+  const liftNeeded = (place, measure, need) => {
+    for (let dy = 0; dy < 1; dy += 0.005) { place(dy); if (measure() >= need) return dy; }
+    return 1;
+  };
+  const BANK_LIFT = Math.max(
+    liftNeeded((dy) => bank.set({ dy }), () => street.clearance(bank.anchor), 0.05),
+    liftNeeded((dy) => bank.set({ dy, fold: Math.PI / 2 }), () => street.clearance(bank.anchor), 0.05));
+  const METER_LIFT = liftNeeded((dy) => meterRig.position.set(postAt.x, postAt.y + dy, postAt.z), () => street.clearance(meterRig), 0.05);
+  const coinRest = (c, i, lift) => new THREE.Vector3(stackAt.x + c.shift[0], stackAt.y + lift + 0.05 * (i + 0.5), stackAt.z + c.shift[1]);
+  const STACK_LIFT = liftNeeded((dy) => coins.forEach((c, i) => c.group.position.copy(coinRest(c, i, dy))),
+    () => Math.min(...coins.map((c) => street.clearance(c.group))), 0.03);
   const shopLight = kit.glow(street.pointAt(0.86, 0.3).add(new THREE.Vector3(-0.6, 0.6, 1.5)), { colour: 0xffb25e, strength: 6, reach: 7 });
   const streetMotes = new Motes(kit.scene, { count: 140, min: [-2, -2.4, -12], max: [2, 1.5, -4], size: 0.025, seed: 19, opacity: 0.45 });
   const partA = [street.mesh, bank.anchor, meterRig, ...coins.map((c) => c.group), shopLight, streetMotes.points];
@@ -98,50 +152,54 @@ export async function build(kit) {
   // ------------------------------------------------------------------ part B: the factory gate
   const gate = await kit.relief('109-bg-factory-gate', { near: 6, far: 70, fov: 40 });
   // the dole queue grows from the gate toward us: four copies, the far one first
-  const queueSpots = [[0.44, 0.31], [0.36, 0.25], [0.24, 0.18], [0.1, 0.1]];   // the near two moved left, clear of the weight and packet
+  // [u, v, yaw, lift]: each spot and turn chosen so the cut-out stands clear of the painted kerb and
+  // gate (lift: its bottom edge rests just on the cobbles, never in them)
+  const queueSpots = [[0.44, 0.31, 0.5, 0.04], [0.36, 0.25, 0.35, 0.05], [0.24, 0.18, 0.35, 0.07], [0.18, 0.06, 0.5, 0.04]];
   const queueTimes = [T.unemployment - 0.1, T.jumps, T.two + 0.1, T.eleven];
   const queue = [];
-  for (const [i, [u, v]] of queueSpots.entries()) {
+  for (const [u, v, yaw, lift] of queueSpots) {
     const p = gate.pointAt(u, v);
-    queue.push(await kit.cutout('dole-queue', { at: [p.x, p.y, p.z], width: 1.8, yaw: 0.35 }));
+    const q = await kit.cutout('dole-queue', { at: [p.x, p.y, p.z], width: 1.8, yaw });
+    q.lift = lift;
+    queue.push(q);
   }
-  const bookAt = gate.pointAt(0.76, 0.15);
-  const book = await kit.cutout('book', { at: [bookAt.x, bookAt.y, bookAt.z], width: 1.0, yaw: -0.25 });
-  const packetAt = gate.pointAt(0.52, 0.15);
+  // her book stands far back on the right of the street, towering over the queue (it stands for
+  // authority); the pay packet stands in its own space in front of the queue, nearest the camera
+  const bookAt = gate.pointAt(0.7, 0.32);
+  const book = await kit.cutout('book', { at: [bookAt.x, bookAt.y, bookAt.z], width: BOOK_WIDTH, yaw: 0 });
+  const packetAt = gate.pointAt(0.7, 0.165);
   const packet = await kit.cutout('pay-packet', { at: [packetAt.x, packetAt.y, packetAt.z], width: 1.2 });
   // WAGES printed on the lower half of the packet (below the flap), so it reads standing and lying flat
-  const wagesLabel = await kit.card(['WAGES'], { size: 0.17, thickness: 0, at: [0, 0.04, 0.006], parent: packet.hinge, look: { cardColour: '#efe7d2' } });
+  const wagesLabel = await kit.card(['WAGES'], { size: 0.15, thickness: 0, at: [0, 0.035, 0.006], parent: packet.hinge, look: { cardColour: '#efe7d2' } });
   wagesLabel.set({});
   // the weight slaps the packet down backwards, face up, and pins its top edge to a low slope
   // (PACKET_SLOPE above the ground): fully flat it is edge-on from this low camera and WAGES is lost
   const PACKET_SLOPE = 0.38;
+  const PACKET_LIFT = 0.05;   // the packet's bottom edge rests just on the cobbles, never in them
   const pinAt = packet.height * 0.82;
   const PACKET_FLAT_Z = packetAt.z - pinAt * Math.cos(PACKET_SLOPE);
-  const PIN_DY = pinAt * Math.sin(PACKET_SLOPE);
-  const weight = await kit.cutout('iron-weight', { at: [packetAt.x, packetAt.y + 0.02, PACKET_FLAT_Z], width: 0.95 });
+  const PIN_DY = pinAt * Math.sin(PACKET_SLOPE) + PACKET_LIFT + 0.015;
+  const weight = await kit.cutout('iron-weight', { at: [packetAt.x, packetAt.y, PACKET_FLAT_Z], width: 0.9 });
   const dust = new DustBurst(kit.scene, { count: 22, seed: 12 });
   const gateMotes = new Motes(kit.scene, { count: 160, min: [-2, -2.2, -14], max: [2, 1.5, -4], size: 0.025, seed: 23, opacity: 0.45 });
   const partB = [gate.mesh, ...queue.map((q) => q.anchor), book.anchor, packet.anchor, weight.anchor, gateMotes.points];
 
   // ------------------------------------------------------------------ cameras
   const meterFocus = [meterCentre.x, meterCentre.y, meterCentre.z];
-  const shotA = kit.shot([
-    { t: T.start, position: [0, 0.2, 0.3], target: [0, -0.3, -30], fov: 40, focus: 14 },
-    { t: T.bank - 0.2, position: [0, 0.05, -0.2], target: [0, -0.9, -30], fov: 40, focus: [bankAt.x, bankAt.y + 1, bankAt.z] },
-    { t: T.price, position: [0.15, -0.05, -0.8], target: [0.15, -0.6, -30], fov: 39, focus: meterFocus },
-    { t: T.seven + 0.3, position: [0.3, -0.1, -1.3], target: [0.35, -0.4, -30], fov: 38, focus: meterFocus },
-    { t: T.loans + 0.5, position: [0.1, -0.05, -0.9], target: [0.05, -2.9, -30], fov: 39, focus: [stackAt.x, stackAt.y, stackAt.z] },
-    { t: CUT, position: [0.05, 0.0, -0.7], target: [0.0, -2.7, -30], fov: 40, focus: [stackAt.x, stackAt.y, stackAt.z] },
-  ], { handheld: 0.012, seed: 9 });
+  // the camera rule: each place is one still shot with a few deliberate moves
+  const stackFocus = [stackAt.x, stackAt.y, stackAt.z];
+  const shotA = kit.stillShot({ position: [0, -0.1, 0], target: [0.05, -0.8, -30], fov: 40, focus: [bankAt.x, bankAt.y + 1, bankAt.z] }, [
+    // the rate becomes the main focus: narrow onto the meter as she names "the price of borrowing"
+    { from: T.interest - 0.1, to: T.price + 0.5, kind: 'zoom in', position: [0.2, -0.05, -0.5], target: [0.36, -0.6, -30], fov: 38.5, focus: meterFocus },
+    // loans cost more, people spend less: down onto the coins being pulled away (pressure)
+    { from: T.loans - 0.3, to: T.loans + 0.6, kind: 'pan down', position: [0.25, 0.4, 0.0], fov: 41, target: [0.2, -1.7, -30], focus: stackFocus },
+  ], { name: 'the town street' });
   const qMid = queue[1].rest;
-  const shotB = kit.shot([
-    { t: CUT, position: [0, 0.15, 0.4], target: [-0.4, -0.4, -30], fov: 40, focus: [qMid.x, qMid.y + 0.8, qMid.z] },
-    { t: T.eleven + 0.5, position: [-0.1, 0.0, -0.5], target: [-0.5, -0.8, -30], fov: 40, focus: [qMid.x, qMid.y + 0.8, qMid.z] },
-    { t: T.pay + 0.4, position: [0.0, -0.05, -0.9], target: [-0.2, -0.9, -30], fov: 39, focus: queue[2].rest.toArray() },
-    { t: T.part, position: [0.35, -0.2, -1.1], target: [0.6, -1.0, -30], fov: 39, focus: [bookAt.x, bookAt.y + 0.8, bookAt.z] },
-    { t: T.lose - 0.3, position: [0.15, -0.3, -1.4], target: [0.2, -1.3, -30], fov: 39, focus: [packetAt.x, packetAt.y + 0.3, packetAt.z] },
-    { t: T.last + 1.3, position: [0.15, -0.35, -1.8], target: [0.2, -1.4, -30], fov: 39, focus: [packetAt.x, packetAt.y + 0.3, packetAt.z] },
-  ], { handheld: 0.012, seed: 10 });
+  const shotB = kit.stillShot({ position: [0, 0.2, 0.5], target: [0.1, 0.2, -30], fov: 40, focus: [qMid.x, qMid.y + 0.8, qMid.z] }, [
+    { from: T.mattei - 0.2, to: T.mattei + 0.4, kind: 'focus', focus: [bookAt.x, bookAt.y + 1.6, bookAt.z] },
+    // workers lose the power to ask for more: down onto the pay packet under the weight (pressure)
+    { from: T.workers - 0.6, to: T.workers + 0.3, kind: 'pan down', position: [0, 0.5, 0.5], target: [0.15, -1.5, -30], fov: 40, focus: [packetAt.x, packetAt.y + 0.3, packetAt.z] },
+  ], { name: 'the factory gate' });
   kit.shake(T.seven + 0.08, 0.05, 0.2);
   kit.shake(T.lose + 0.2, 0.045, 0.2);
   const WEIGHT_LANDS = T.lose + 0.2;
@@ -163,18 +221,19 @@ export async function build(kit) {
     let exposure = 0.95, vignette;
     if (inA) {
       streetMotes.set(t);
-      bank.set(popUp(t, T.bank - 0.1, { height: 2.2, restZ: 0.2 }));
-      // the meter rises out of the pavement on "pushes"
-      const rise = clamp01((t - T.pushes + 0.2) / 0.45);
-      meterRig.visible = rise > 0;
-      meterRig.position.set(postAt.x, postAt.y - 2.6 * (1 - smooth(rise)) * (1 - smooth(rise)), postAt.z);
-      meterRig.rotation.z = rise > 0 ? 0.08 * Math.exp(-(t - T.pushes) * 4) * Math.sin((t - T.pushes) * 14) : 0;
+      // r20d: pops up on her first word, after the page turn (never lying flat in the road during the peel)
+      bank.set({ ...standUp(t, T.so - 0.1, { height: 2.2, restZ: 0.2 }), dy: BANK_LIFT });
+      // the meter grows up from its foot on the pavement on "pushes" (never through the pavement)
+      const rise = t < T.pushes - 0.2 ? 0 : 1 - spring(t - T.pushes + 0.2, { stiffness: 12, damping: 0.6 });
+      meterRig.visible = rise > 0.01;
+      meterRig.position.set(postAt.x, postAt.y + METER_LIFT, postAt.z);
+      meterRig.scale.setScalar(Math.max(0.01, rise));
       meter.setValue(rate(t));
       // the coins appear on "loans", then fly back to the bank one by one
       const bankDoor = bankAt.clone().add(new THREE.Vector3(0.1, 0.45, 0.1));
       coins.forEach((c, i) => {
-        const appear = clamp01((t - T.loans + 0.25 - i * 0.03) / 0.2);
-        const rest = new THREE.Vector3(stackAt.x + c.shift[0], stackAt.y + 0.05 * (i + 0.5), stackAt.z + c.shift[1]);
+        const appear = clamp01((t - T.so - 0.3 - i * 0.03) / 0.2);
+        const rest = coinRest(c, i, STACK_LIFT);
         const k = smooth(clamp01((t - c.leaveAt) / 0.55));
         c.group.visible = appear > 0 && k < 1;
         c.group.position.lerpVectors(rest, bankDoor, k);
@@ -189,10 +248,13 @@ export async function build(kit) {
       vignette = lerp(0.35, 0.6, dim);
     } else {
       gateMotes.set(t);
-      queue.forEach((q, i) => q.set(popUp(t, queueTimes[i] - 0.1, { height: 1.4, restZ: 0.25 })));
-      book.set(popUp(t, T.mattei - 0.1, { height: 1.6, restZ: 0.2 }));
-      const faceUp = (p) => ({ ...p, fold: -p.fold * (Math.PI / 2 - PACKET_SLOPE) / (Math.PI / 2), dy: 0.025 });
-      packet.set(t < WEIGHT_LANDS ? popUp(t, T.workers - 0.2, { height: 0.9, restZ: 0.25 }) : faceUp(slapFlat(t, WEIGHT_LANDS - 0.04, 0.08)));
+      queue.forEach((q, i) => q.set({ ...standUp(t, queueTimes[i] - 0.1, { height: q.height, restZ: 0.25 }), dy: q.lift }));
+      // the book grows up out of the street, standing upright the whole time (lying down it would
+      // sweep through the queue): no fold, it scales up from its bottom edge with a small overshoot
+      const grow = t < T.mattei - 0.1 ? 0 : 1 - spring(t - T.mattei + 0.1, { stiffness: 11, damping: 0.6 });
+      book.set(grow > 0.01 ? { scale: grow, dy: BOOK_LIFT } : { visible: false });
+      const faceUp = (p) => ({ ...p, fold: -p.fold * (Math.PI / 2 - PACKET_SLOPE) / (Math.PI / 2), dy: PACKET_LIFT });
+      packet.set(t < WEIGHT_LANDS ? { ...popUp(t, T.workers - 0.2, { height: packet.height, restZ: 0.25 }), dy: PACKET_LIFT } : faceUp(slapFlat(t, WEIGHT_LANDS - 0.04, 0.08)));
       const drop = dropIn(t, WEIGHT_LANDS, { fall: 0.38, height: 5, roll: 6, bounce: 0.12 });
       weight.set(drop.visible ? { ...drop, dy: (drop.dy ?? 0) + PIN_DY } : drop);
       if (t >= WEIGHT_LANDS) dust.set({ origin: [packetAt.x, packetAt.y + 0.05, PACKET_FLAT_Z], width: 1.2, age: t - WEIGHT_LANDS, scale: 0.55 });
@@ -208,6 +270,20 @@ export async function build(kit) {
 
   function draw2D(ctx, t) {
     const at = (p) => kit.toScreen(p);
+    // a soft dark band over the bottom of the frame, so the ground fades out rather than showing the
+    // painting's mirrored edge when the camera looks down (both places)
+    {
+      const shade = ctx.createLinearGradient(0, 1920 - 200, 0, 1920);
+      shade.addColorStop(0, 'rgba(8,10,13,0)'); shade.addColorStop(1, 'rgba(8,10,13,0.78)');
+      ctx.save(); ctx.fillStyle = shade; ctx.fillRect(0, 1920 - 200, 1080, 200); ctx.restore();
+      // at the gate, the painting's bottom right corner holds dark streaks that read as a ghostly
+      // figure: shade that corner a little more (clear of the pay packet)
+      if (t >= CUT) {
+        const corner = ctx.createRadialGradient(1080, 1920, 0, 1080, 1920, 470);
+        corner.addColorStop(0, 'rgba(8,10,13,0.8)'); corner.addColorStop(1, 'rgba(8,10,13,0)');
+        ctx.save(); ctx.globalAlpha = clamp01((t - CUT) / 0.25); ctx.fillStyle = corner; ctx.fillRect(600, 1440, 480, 480); ctx.restore();
+      }
+    }
     // part A
     hook(ctx, t, { at: T.cure - 0.05, until: T.britain - 0.15, lines: ['THE USUAL', 'CURE?'], y: 360, size: 104 });
     placeTitle(ctx, t, { at: T.britain, until: T.interest - 0.15, place: 'Britain', year: 1920, y: 290 });
@@ -215,21 +291,24 @@ export async function build(kit) {
     hook(ctx, t, { at: T.interest, until: T.seven - 0.1, lines: ['INTEREST RATE'], y: 300, size: 76 });
     hook(ctx, t, { at: T.price, until: T.seven - 0.1, lines: ['THE PRICE OF BORROWING'], y: 390, size: 42, colour: INK.amber });
     hook(ctx, t, { at: T.seven, until: T.loans - 0.15, text: '7%', y: 350, size: 200, colour: INK.red });
-    hook(ctx, t, { at: T.loans, until: CUT - 0.1, text: 'LOANS COST MORE', y: 300, size: 76 });
-    hook(ctx, t, { at: T.spend, until: CUT - 0.1, text: 'SPEND LESS', y: 400, size: 76, colour: INK.amber });
+    hook(ctx, t, { at: T.loans, until: CUT - 0.1, text: 'LOANS COST MORE', y: 260, size: 76 });
+    hook(ctx, t, { at: T.spend, until: CUT - 0.1, text: 'SPEND LESS', y: 360, size: 76, colour: INK.amber });
     // part B
-    hook(ctx, t, { at: CUT + 0.1, until: T.two - 0.35, text: 'WITHIN A YEAR', y: 300, size: 64, colour: INK.muted });
-    bars(ctx, t, { at: T.two - 0.25, until: T.prices - 0.1, box: [300, 360, 480, 360], values: [2, 11], maxValue: 13, labels: ['1920', '1921'], title: 'Unemployment',
+    hook(ctx, t, { at: CUT + 0.1, until: T.two - 0.35, text: 'WITHIN A YEAR', y: 300, size: 64, colour: INK.paper });
+    // r20d: the chart stays up through "prices do fall" and "pay with their jobs" (11% held for about
+    // 4 s), below those words; a compact box whose bars use its height, the source line inside it
+    const CHART_END = T.pay + 0.6;
+    bars(ctx, t, { at: T.two - 0.25, until: CHART_END, box: [300, 600, 480, 260], values: [2, 11], maxValue: 13, labels: ['1920', '1921'], title: 'Unemployment',
       valueText: (v) => `${v}%`, colours: [INK.paper, INK.red], stagger: T.eleven - T.two, rise: 0.6 });
-    credit(ctx, t, { at: T.two - 0.25, until: T.prices - 0.1, text: 'Source: Bank of England data', x: 300, y: 800, size: 22 });
+    credit(ctx, t, { at: T.two - 0.25, until: CHART_END, text: 'Source: Bank of England data', x: 300, y: 940, size: 20 });
     hook(ctx, t, { at: T.prices, until: T.pay - 0.15, text: 'PRICES DO FALL...', y: 330, size: 72 });
     hook(ctx, t, { at: T.pay, until: T.mattei - 0.15, lines: ['PAID WITH', 'THEIR JOBS'], y: 350, size: 96, colour: INK.amber });
-    credit(ctx, t, { at: T.mattei, until: T.last + 2, text: 'Clara E. Mattei, The Capital Order (2022)', y: 560, size: 28 });
-    hook(ctx, t, { at: T.mattei + 0.1, until: T.with - 0.15, text: 'MATTEI:', y: 270, size: 52, colour: INK.amber });
-    hook(ctx, t, { at: T.part, until: T.with - 0.15, lines: ['PART OF', 'THE POINT'], y: 400, size: 96 });
-    hook(ctx, t, { at: T.fewer, until: T.workers - 0.1, text: 'FEWER JOBS', y: 340, size: 88 });
-    hook(ctx, t, { at: T.power - 0.1, until: T.last + 2, text: 'MATTEI:', y: 250, size: 44, colour: INK.amber });
-    hook(ctx, t, { at: T.power, until: T.last + 2, lines: ['LESS POWER', 'TO ASK FOR MORE'], y: 370, size: 84 });
+    plateCredit(ctx, t, { at: T.mattei, until: T.last + 2, text: 'Clara E. Mattei, The Capital Order (2022)', y: 450, size: 30 });
+    // r20d: one MATTEI: tag stays up from her name to the end, so every claim after it reads as hers
+    hook(ctx, t, { at: T.mattei + 0.1, until: T.last + 2, text: 'MATTEI:', y: 200, size: 46, colour: INK.amber });
+    hook(ctx, t, { at: T.part, until: T.with - 0.15, lines: ['PART OF', 'THE POINT'], y: 335, size: 88 });
+    hook(ctx, t, { at: T.fewer, until: T.workers - 0.1, text: 'FEWER JOBS', y: 320, size: 88 });
+    hook(ctx, t, { at: T.power, until: T.last + 2, lines: ['LESS POWER', 'TO ASK FOR MORE'], y: 320, size: 80 });
     return true;
   }
 

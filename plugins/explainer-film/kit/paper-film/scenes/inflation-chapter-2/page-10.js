@@ -77,37 +77,45 @@ export async function build(kit) {
   rate.group.children[0].rotation.y = FACE_TURN;
   kit.scene.add(rate.group);
   const post = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 1.6, 16), paper(0x6a6f70));
-  post.position.set(dialFoot.x, dialFoot.y + 0.8, dialFoot.z - 0.06);
+  // behind the dial's face; its foot sits just on the kerb (the painted ground rises steeply behind
+  // the foot point, so it is lifted a hair to stay clear of it)
+  post.position.set(dialFoot.x, dialFoot.y + 0.8 + 0.055, dialFoot.z - 0.06);
   post.castShadow = true;
   kit.scene.add(post);
-
-  // where the camera drifts during the unemployment beat (the footpath). Unemployment itself is
-  // shown as a panel of a hundred dots (as on page 2), not by figures in period clothes.
-  const queueFoot = street.pointAt(0.28, 0.09);
 
   const motes = new Motes(kit.scene, { count: 140, min: [-2.2, -2.2, -12], max: [2.2, 2.0, -4], size: 0.028, seed: 10, opacity: 0.45 });
 
   // -------------------------------------------------------------------- B: the chamber
   const chamber = await kit.relief('101-bg-parliament', { near: 6, far: 70, fov: 40 });
-  const chamberFloor = chamber.pointAt(0.5, 0.12);
-  const politician = await kit.speaker('politician', { at: [chamberFloor.x, chamberFloor.y - 0.25, chamberFloor.z + 1.0], width: 2.4 });
-  const faceAt = new THREE.Vector3(chamberFloor.x, chamberFloor.y - 0.25 + 2.4 * 2048 / 1656 * 0.78, chamberFloor.z + 1.0);
+  // the politician stands exactly where he stood on page 1 (the film ends where it began), his foot
+  // on the painted floor
+  const manFloor = chamber.pointAt(0.47, 0.14);
+  const politician = await kit.speaker('politician', { at: [manFloor.x, manFloor.y + 0.01, manFloor.z], width: 2.0 });
+  const faceAt = new THREE.Vector3(manFloor.x, manFloor.y + 2.0, manFloor.z);
 
   // ------------------------------------------------------------------------- the cameras
-  const streetShot = kit.shot([
-    { t: T.start, position: [0.2, 0.1, 0.5], target: [0.25, 0.25, -30], fov: 40, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-    { t: T.half + 0.4, position: [0.2, 0.0, -0.1], target: [0.45, 0.1, -30], fov: 39, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-    { t: T.unemployment + 0.5, position: [-0.05, -0.1, -0.3], target: [-0.3, -0.35, -30], fov: 40, focus: [queueFoot.x, queueFoot.y + 0.8, queueFoot.z] },
-    { t: T.sixEnd, position: [-0.1, -0.15, -0.45], target: [-0.35, -0.4, -30], fov: 40, focus: [queueFoot.x, queueFoot.y + 0.8, queueFoot.z] },
-    { t: T.raising, position: [0.15, -0.05, -0.55], target: [0.5, 0.05, -30], fov: 39, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-    { t: T.cut + 0.3, position: [0.2, -0.05, -0.7], target: [0.55, 0.05, -30], fov: 38, focus: [dialCentre.x, dialCentre.y, dialCentre.z] },
-  ], { handheld: 0.012, seed: 10 });
-  const chamberShot = kit.shot([
-    { t: T.cut, position: [0, 0.0, 0.35], target: [0, 0.45, -30], fov: 40, focus: [faceAt.x, faceAt.y, faceAt.z] },
-    { t: T.ask, position: [0, -0.02, 0.15], target: [0, 0.5, -30], fov: 40, focus: [faceAt.x, faceAt.y, faceAt.z] },
-    { t: T.who + 0.4, position: [0, -0.05, -0.3], target: [0, 0.8, -30], fov: 39, focus: [faceAt.x, faceAt.y, faceAt.z] },
-    { t: T.fadeEnd + 0.3, position: [0, -0.05, -0.55], target: [0, 0.8, -30], fov: 38, focus: [faceAt.x, faceAt.y, faceAt.z] },
-  ], { handheld: 0.01, seed: 11 });
+  // The camera rule: each shot holds still and moves only to land a point (at most 3 moves a shot).
+  // Street shot: the street with the dial at the kerb; zoom in on the dial as she names the interest
+  // rate; zoom out on "since" to make room for the hundred dots; zoom in on the dial again on "this
+  // year ... raising".
+  const dialPoint = [dialCentre.x, dialCentre.y, dialCentre.z];
+  // the opening: closer and lower than the wide framing, the dial big at the kerb (the street's road
+  // no longer an empty band across the bottom)
+  const STREET_OPEN = { position: [0.3, -0.35, -1.3], target: [1.15, 1.6, -30], fov: 29, focus: dialPoint };
+  // the wide framing that makes room for the hundred dots (the dial kept clear of the right-hand buttons)
+  const STREET_WIDE = { position: [0.15, -0.2, -0.6], target: [0.4, 1.8, -30], fov: 34 };
+  const STREET_DIAL = { position: [0.35, -0.05, -2.0], target: [1.95, 0.95, -30], fov: 26.5 };
+  const streetShot = kit.stillShot(STREET_OPEN, [
+    { from: T.pushed - 0.3, to: T.pushed + 0.9, kind: 'zoom in', ...STREET_DIAL },
+    { from: T.since - 0.35, to: T.since + 0.75, kind: 'zoom out', position: STREET_WIDE.position, target: STREET_WIDE.target, fov: STREET_WIDE.fov },
+    { from: T.thisYear - 0.15, to: T.thisYear + 1.0, kind: 'zoom in', ...STREET_DIAL },
+  ], { name: 'the street and the dial' });
+  // Chamber shot: page 1's picture again. It holds on the politician while he says it; one short zoom
+  // in on "ask them", onto him (to page 1's close framing), as the two questions land; then still.
+  const faceFocus = [faceAt.x, faceAt.y, faceAt.z];
+  const chamberShot = kit.stillShot({ position: [0, 0.1, -0.3], target: [0, -0.35, -30], fov: 35, focus: faceFocus }, [
+    { from: T.ask - 0.1, to: T.ask + 1.0, kind: 'zoom in', position: [0, 0.05, -0.8], target: [-0.05, -0.1, -30], fov: 30 },
+  ], { name: 'the chamber and the question' });
 
   // the needle: 0.25 at the start, swings to 5.5 on "five and a half" (capped: it never passes the
   // 5.5 she says) and holds there through the unemployment beat; it only resets to the 2026 level
@@ -175,24 +183,42 @@ export async function build(kit) {
     ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 900);
   }
 
-  // a hundred dots, one per hundred workers: the empty ones are out of work (rounded); the ones
-  // emptied since the end of 2021 are ringed in red
-  function hundredDots(ctx, t, { at, until, x, y, gap = 40, radius = 12, empty, firstEmpty }) {
+  // a hundred dots, one per hundred workers: the ones out of work (rounded) are filled solid red. A small
+  // key on its own dark plate beside them says what a dot and a red dot mean.
+  function hundredDots(ctx, t, { at, until, x, y, gap = 40, radius = 15, empty }) {
     const a = presence(t, at, until, 0.3, 0.35);
     if (a <= 0) return;
     ctx.save();
     ctx.globalAlpha = a;
-    ctx.fillStyle = 'rgba(12,16,18,0.55)';
+    ctx.fillStyle = 'rgba(12,16,18,0.62)';
     ctx.beginPath(); ctx.roundRect(x - 36, y - 36, gap * 9 + 72, gap * 9 + 72, 22); ctx.fill();
     for (let i = 0; i < 100; i++) {
       const cx = x + (i % 10) * gap, cy = y + Math.floor(i / 10) * gap;
       const k = clamp01((t - at - 0.1 - i * 0.01) / 0.25);
       if (k <= 0) continue;
       ctx.beginPath(); ctx.arc(cx, cy, radius * k, 0, Math.PI * 2);
-      const fromEnd = 99 - i;
-      if (fromEnd < empty) { ctx.strokeStyle = fromEnd < firstEmpty ? INK.paper : INK.red; ctx.lineWidth = 3; ctx.stroke(); }
-      else { ctx.fillStyle = INK.amber; ctx.fill(); }
+      ctx.fillStyle = 99 - i < empty ? INK.red : INK.amber;
+      ctx.fill();
     }
+    ctx.restore();
+  }
+  function dotsKey(ctx, t, { at, until, x, y }) {
+    const a = presence(t, at, until, 0.3, 0.35);
+    if (a <= 0) return;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = 'rgba(12,16,18,0.62)';
+    ctx.beginPath(); ctx.roundRect(x, y, 400, 262, 22); ctx.fill();
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    const row = (cy, colour, label) => {
+      ctx.fillStyle = colour; ctx.beginPath(); ctx.arc(x + 46, cy, 16, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = INK.paper; ctx.font = '800 36px Inter'; ctx.fillText(label, x + 80, cy + 2);
+    };
+    row(y + 50, INK.red, 'OUT OF WORK');
+    row(y + 106, INK.amber, 'IN WORK');
+    ctx.fillStyle = INK.paper; ctx.font = '700 31px Inter';
+    ctx.fillText('EACH DOT =', x + 30, y + 168);
+    ctx.fillText('1 IN 100 WORKERS', x + 30, y + 210);
     ctx.restore();
   }
 
@@ -203,16 +229,16 @@ export async function build(kit) {
     const shownRate = t < T.to ? 0.25 : Math.min(5.5, Math.max(0.25, rateAt(t)));
     figure(ctx, t, { at: T.from, until: T.since - 0.2, value: Math.round(shownRate * 100) / 100, caption: 'Interest rate', y: 500 });
     hook(ctx, t, { at: T.by, until: T.since - 0.2, text: '2023', y: 625, size: 54, colour: INK.paper });
-    hook(ctx, t, { at: T.bring, until: T.since - 0.2, text: 'TO BRING PRICES DOWN', y: 700, size: 40, colour: INK.muted });
+    hook(ctx, t, { at: T.bring, until: T.since - 0.2, text: 'TO BRING PRICES DOWN', y: 700, size: 48, colour: INK.paper });
 
     // the count lands on 5.6 as she says "five", then holds still until "this year"
     const jobless = lerp(3.2, 5.6, smooth(ramp(t, T.to2 - 0.1, T.five2 + 0.25)));
     const joblessUntil = T.thisYear + 0.2;
-    hook(ctx, t, { at: T.since, until: T.thisYear - 0.05, text: 'SINCE THE END OF 2021', y: 260, size: 40, colour: INK.muted });
+    hook(ctx, t, { at: T.since, until: T.thisYear - 0.05, text: 'SINCE THE END OF 2021', y: 260, size: 44, colour: INK.paper });
     figure(ctx, t, { at: T.three, until: joblessUntil, value: jobless, caption: 'Unemployment', y: 470, format: tenths });
-    hundredDots(ctx, t, { at: T.unemployment, until: joblessUntil, x: 130, y: 660, empty: Math.round(jobless), firstEmpty: 3 });
-    hook(ctx, t, { at: T.unemployment + 0.4, until: joblessUntil, text: 'EACH DOT = 1 IN 100 WORKERS', x: 310, y: 1095, size: 26, colour: INK.muted });
-    credit(ctx, t, { at: T.from, until: T.cut - 0.15, text: 'Stats NZ; Reserve Bank of New Zealand' });
+    hundredDots(ctx, t, { at: T.unemployment, until: joblessUntil, x: 100, y: 650, empty: Math.round(jobless) });
+    dotsKey(ctx, t, { at: T.unemployment + 0.4, until: joblessUntil, x: 520, y: 614 });
+    credit(ctx, t, { at: T.from, until: T.cut - 0.15, text: 'Stats NZ; Reserve Bank of New Zealand', y: 1505, plate: true });
 
     const later = 2.25 + 0.25 * smooth(ramp(t, T.raising, T.raising + 0.35)) + 0.25 * smooth(ramp(t, T.again - 0.25, T.again + 0.1));
     hook(ctx, t, { at: T.thisYear, until: T.cut - 0.15, text: '2026', y: 260, size: 54, colour: INK.paper });

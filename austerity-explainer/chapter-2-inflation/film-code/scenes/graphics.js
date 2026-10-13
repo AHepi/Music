@@ -240,7 +240,7 @@ export function credit(ctx, t, { at, until = at + 4, text, x = 84, y = 1440, siz
   ctx.font = `600 ${size}px Inter`; ctx.textBaseline = 'alphabetic';
   if (plate) {
     const width = ctx.measureText(text.toUpperCase()).width + 3 * text.length;
-    ctx.fillStyle = 'rgba(12,14,18,0.62)';
+    ctx.fillStyle = 'rgba(12,14,18,0.74)';
     ctx.beginPath(); ctx.roundRect(x - 18, y - size * 0.95, width + 36, size * 1.5, 10); ctx.fill();
   }
   withShadow(ctx, 14);

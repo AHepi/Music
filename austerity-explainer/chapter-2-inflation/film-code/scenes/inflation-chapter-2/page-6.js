@@ -11,7 +11,7 @@
 //     land and stack up in the snow.
 //   - "one American dollar costs more than four trillion German marks": the flip counter returns and
 //     counts up to 4,200,000,000,000 (research C2-C03: about 4.2 trillion marks per dollar in
-//     November 1923); MARKS FOR ONE DOLLAR.
+//     November 1923); MARKS (from the start of the count), FOR ONE US DOLLAR, on dark plates.
 //   - "new money really did push prices up... while less and less was being made": the counter lifts
 //     away, the money keeps landing, the chimneys stay cold and the stack of steel shrinks; PRICES UP,
 //     LESS AND LESS MADE.
@@ -74,6 +74,7 @@ export async function build(kit) {
     newMoney: kit.at('new'),
     money: kit.at('money'),
     november: kit.at('november'),
+    american: kit.at('american'),
     four: kit.at('four'),
     trillion: kit.at('trillion'),
     marks: kit.at('marks'),
@@ -230,7 +231,7 @@ export async function build(kit) {
     if (t > T.paying - 0.1 && t < T.november - 0.25) boxes.push([200, 215, 880, 455]);
     if (t > T.november - 0.1 && t < T.thisTime + 0.2) {
       const top = onScreen([boardHome.x, boardHome.y + 0.2, boardHome.z], t), bottom = onScreen([boardHome.x, boardHome.y - 0.2, boardHome.z], t);
-      boxes.push([100, top.y - 100, 920, bottom.y + 165]);
+      boxes.push([100, top.y - 120, 920, bottom.y + 215]);
     }
     if (t > T.push - 0.1) boxes.push([190, 155, 890, 455]);
     return boxes;
@@ -349,31 +350,35 @@ export async function build(kit) {
     hook(ctx, t, { at: T.paying, until: T.november - 0.3, text: 'STILL PAID', y: 290, size: 96 });
     hook(ctx, t, { at: T.newMoney, until: T.november - 0.3, text: 'WITH NEW MONEY', y: 400, size: 66, colour: INK.amber });
 
-    // the November counter's captions, placed around the board on screen
+    // the November counter's captions, placed around the board on screen, each on a dark plate in
+    // paper white so they read over the grey headframe and the amber sky. MARKS stands under the
+    // counter from the moment it starts racing (the unit is there while the number climbs);
+    // FOR ONE US DOLLAR comes in as she says "one American dollar" (US, so a New Zealand viewer
+    // does not read it as NZ$).
     const top = kit.toScreen([boardHome.x, boardHome.y + 0.2, boardHome.z]);
     const bottom = kit.toScreen([boardHome.x, boardHome.y - 0.2, boardHome.z]);
-    const a = presence(t, T.november, T.thisTime + 0.1, 0.3, 0.3);
-    if (a > 0) {
+    const plated = (alpha, text, size, weight, y) => {
+      if (alpha <= 0) return;
       ctx.save();
-      ctx.globalAlpha = a;
-      ctx.shadowColor = INK.shadow; ctx.shadowBlur = 20; ctx.shadowOffsetY = 3;
-      ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-      ctx.fillStyle = INK.amber; ctx.font = '700 40px Inter';
-      ctx.fillText('NOVEMBER 1923', 500, top.y - 40);
+      ctx.globalAlpha = alpha;
+      ctx.font = `${weight} ${size}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const w = ctx.measureText(text).width;
+      ctx.fillStyle = 'rgba(12,16,18,0.78)';
+      ctx.beginPath(); ctx.roundRect(500 - w / 2 - 26, y - size * 0.72, w + 52, size * 1.44, 12); ctx.fill();
+      ctx.fillStyle = INK.paper;
+      ctx.fillText(text, 500, y + size * 0.04);
       ctx.restore();
+    };
+    // the unit under the racing counter too ("prices are already racing"), following the board as it
+    // drops in
+    const raceUnit = presence(t, T.prices + 0.1, T.then + 0.1, 0.3, 0.3);
+    if (raceUnit > 0) {
+      const under = kit.toScreen([boardHome.x, boardHome.y - 0.2 + (boardDrop(t) ?? 0), boardHome.z]);
+      plated(raceUnit, 'MARKS', 56, 800, under.y + 62);
     }
-    const c = presence(t, T.trillion - 0.2, T.thisTime + 0.1, 0.3, 0.3);
-    if (c > 0) {
-      ctx.save();
-      ctx.globalAlpha = c;
-      ctx.shadowColor = INK.shadow; ctx.shadowBlur = 22; ctx.shadowOffsetY = 3;
-      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-      ctx.fillStyle = INK.paper; ctx.font = '800 56px Inter';
-      ctx.fillText('MARKS', 500, bottom.y + 34);
-      ctx.fillStyle = INK.muted; ctx.font = '700 40px Inter';
-      ctx.fillText('FOR ONE DOLLAR', 500, bottom.y + 100);
-      ctx.restore();
-    }
+    plated(presence(t, T.november, T.thisTime + 0.1, 0.3, 0.3), 'NOVEMBER 1923', 50, 700, top.y - 62);
+    plated(presence(t, T.november + 0.1, T.thisTime + 0.1, 0.3, 0.3), 'MARKS', 64, 800, bottom.y + 72);
+    plated(presence(t, T.american - 0.1, T.thisTime + 0.1, 0.3, 0.3), 'FOR ONE US DOLLAR', 50, 700, bottom.y + 168);
 
     hook(ctx, t, { at: T.push, until: T.end, text: 'PRICES UP', y: 230, size: 100, colour: INK.red });
     hook(ctx, t, { at: T.less, until: T.end, lines: ['LESS AND LESS', 'MADE'], y: 350, size: 66, colour: INK.paper });   // paper white: amber was lost on the amber sky

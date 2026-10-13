@@ -20,7 +20,7 @@
 // Narration words used are listed in T below; every time comes from Malina's recording.
 
 import { THREE, popUp, clamp01, smooth, smoother, ramp, lerp, seededRandom } from '../cinema-kit.js';
-import { banknoteBundle, priceTag, coin } from '../models.js';
+import { banknoteBundle, priceTag, coin, contactShadow } from '../models.js';
 import { Motes, Smoke } from '../effects.js';
 import { placeTitle, hook, callout, credit, presence, INK } from '../graphics.js';
 
@@ -32,6 +32,7 @@ export async function build(kit) {
     central: kit.at('central'),
     creates: kit.at('creates'),
     yen: kit.at('yen'),
+    sets: kit.at('sets'),
     double: kit.at('double'),
     created: kit.at('created'),
     inTwo: kit.at('two'),
@@ -70,9 +71,10 @@ export async function build(kit) {
   // ------------------------------------------------------------------ part A: the noodle shop
   const shop = await kit.relief('405-bg-noodle-shop', { near: 6, far: 70, fov: 40 });
   const stackBase = shop.pointAt(0.46, 0.36);
-  stackBase.y = -1.15;
+  stackBase.y = -1.09;   // just on the painted counter top (at -1.15 its bottom bundle sank into it)
   const bowlAt = shop.pointAt(0.24, 0.31);
-  bowlAt.y = -1.18;
+  bowlAt.y = -1.11;   // on the painted counter top, not into it
+  bowlAt.z += 0.4;    // a little forward on the counter: the bigger bowl stays clear of the painted back of the counter
   const random = seededRandom(51);
   const yenBundles = [];
   for (let i = 0; i < 10; i++) {
@@ -89,89 +91,138 @@ export async function build(kit) {
   const stackTop = (count) => stackBase.y + yenBundles.slice(0, count).reduce((h, b) => h + b.height, 0);
 
   // the bowl of ramen and its price tag (an illustrative menu price, the same all page long)
-  const bowl = await kit.cutout('ramen-bowl', { at: [bowlAt.x, bowlAt.y, bowlAt.z], width: 0.95, yaw: 0.2 });
-  const tag = priceTag({ width: 0.5, text: '¥800' });
-  tag.group.position.set(bowlAt.x + 0.36, bowlAt.y + 0.5, bowlAt.z + 0.2);
-  tag.group.rotation.set(0, 0.2, -0.32);
+  const bowl = await kit.cutout('ramen-bowl', { at: [bowlAt.x, bowlAt.y, bowlAt.z], width: 1.2, yaw: 0.2 });
+  const tag = priceTag({ width: 0.44, text: '¥800' });
+  tag.group.position.set(bowlAt.x - 0.5, bowlAt.y + 0.5, bowlAt.z + 0.25);   // hung on the bowl's left side, clear of the stack of yen
+  tag.group.rotation.set(0, 0.2, -0.5);
   kit.scene.add(tag.group);
   const steam = new Smoke(kit.scene, { count: 8, life: 2.8, seed: 12, colour: [222, 214, 200] });
   const shopMotes = new Motes(kit.scene, { count: 140, min: [-2.2, -1.2, -16], max: [1.6, 2.4, -6], size: 0.028, seed: 15, opacity: 0.45, colour: 0xffe2b0 });
 
-  // ------------------------------------------------------------- part B: the Bank of England
-  const plaza = await kit.relief('406-bg-london-bank', { near: 6, far: 70, fov: 40 });
-  const towerBases = [plaza.pointAt(0.27, 0.29), plaza.pointAt(0.73, 0.29)];
-  const towers = towerBases.map((base, side) => {
+  // ------------------------------------------------------- part B: a City of London bank street
+  // a dry painting (no wet reflections the 3D money could not match): the bank at an angle on the
+  // left, open flagstones on the right and across the bottom. The towers stand on that pavement.
+  const plaza = await kit.relief('406b-bg-london-bank-dry', { near: 6, far: 70, fov: 40 });
+  // the floor under a spot: its point and its slope (the angle the flagstones rise toward us)
+  const floorAt = (u, v) => {
+    const p = plaza.pointAt(u, v), q = plaza.pointAt(u, v + 0.02);
+    return { point: p, slope: Math.atan2(p.y - q.y, p.z - q.z) };   // rise per unit toward the camera
+  };
+  // the painted floor's height at a world spot (x, z): find the spot on the painting whose floor point
+  // lies there (z grows toward us as v falls, so a bisection on v)
+  const floorHeight = (x, z) => {
+    let lo = 0, hi = 0.3, p = null;
+    for (let i = 0; i < 30; i++) {
+      const v = (lo + hi) / 2;
+      p = plaza.pointAt(0.5 + x / (-z) / plaza.tanX / 2, v);
+      if (p.z < z) hi = v; else lo = v;
+    }
+    return p.y;
+  };
+  // the highest floor point under a disc of radius r (so a thing resting there never sinks in)
+  const floorUnder = (x, z, r) => {
+    let top = -Infinity;
+    for (let i = 0; i <= 12; i++) {
+      const a = (i / 12) * Math.PI * 2, rr = i === 12 ? 0 : r;
+      top = Math.max(top, floorHeight(x + rr * Math.cos(a), z + rr * Math.sin(a)));
+    }
+    return top;
+  };
+  const BUNDLE = 1.15, FIRST = 9, GROW = 6;
+  const towers = [floorAt(0.3, 0.12), floorAt(0.7, 0.12)].map((floor, side) => {
+    const base = floor.point.clone();
+    base.y += 0.03;   // the front edge of a bundle meets the slightly rising flagstones: lift so it never sinks in
     const r = seededRandom(70 + side);
     const bundles = [];
-    for (let i = 0; i < 18; i++) {
+    const count = FIRST + (side === 1 ? GROW : 0);
+    for (let i = 0; i < count; i++) {
       const b = banknoteBundle({ width: 0.8, depth: 0.4, notes: 44 });
       b.group.traverse((o) => { if (o.material) [].concat(o.material).forEach((m) => { m.color.multiplyScalar(0.8); }); }); // notes read as green, not white, in this light
-      b.group.scale.setScalar(1.15);
-      b.height *= 1.15;
-      b.group.rotation.y = (r() - 0.5) * 0.4;
+      b.group.scale.setScalar(BUNDLE);
+      b.height *= BUNDLE;
+      b.group.rotation.y = (r() - 0.5) * 0.3;
       b.twist = (r() - 0.5) * 0.3;
-      b.shift = [(r() - 0.5) * 0.08, (r() - 0.5) * 0.08];
-      b.landAt = T.creates2 - 0.05 + i * 0.095 + side * 0.05;
+      b.shift = [(r() - 0.5) * 0.06, (r() - 0.5) * 0.06];
+      // the first ones land on "creates hundreds of billions"; on the right tower, more land on
+      // "the gains went", so it grows clearly taller than the left one
+      b.landAt = i < FIRST ? T.creates2 - 0.05 + i * 0.13 + side * 0.06 : T.went - 0.1 + (i - FIRST) * 0.14;
       kit.scene.add(b.group);
       bundles.push(b);
     }
-    return { base, bundles };
+    // a soft contact shadow under the tower, lying on the flagstones (tilted with them)
+    const shadow = contactShadow(1.5, 0.95, 0.75);
+    const shadowHolder = new THREE.Group();
+    shadowHolder.add(shadow);
+    shadowHolder.position.set(floor.point.x, floor.point.y + 0.012, floor.point.z);
+    shadowHolder.rotation.x = -floor.slope;
+    kit.scene.add(shadowHolder);
+    return { base, bundles, floor, shadowHolder };
   });
-  // "the gains went to whoever owned the most": more bundles land on the right-hand tower only,
-  // so it grows clearly taller than the left one, while gold coins pour onto its top and spill to a pile at its foot
-  const GROW = 11;
   const rich = towers[1];
-  {
-    const r = seededRandom(77);
-    for (let i = 0; i < GROW; i++) {
-      const b = banknoteBundle({ width: 0.8, depth: 0.4, notes: 44 });
-      b.group.traverse((o) => { if (o.material) [].concat(o.material).forEach((m) => { m.color.multiplyScalar(0.8); }); });
-      b.group.scale.setScalar(1.15);
-      b.height *= 1.15;
-      b.group.rotation.y = (r() - 0.5) * 0.4;
-      b.twist = (r() - 0.5) * 0.3;
-      b.shift = [(r() - 0.5) * 0.08, (r() - 0.5) * 0.08];
-      b.landAt = T.went - 0.05 + i * 0.13;
-      kit.scene.add(b.group);
-      rich.bundles.push(b);
-    }
-  }
-  // the height of a tower's top at moment t (bundles that have landed by then)
-  const topAt = (tower, t) => tower.base.y + tower.bundles.reduce((h, b) => h + (t >= b.landAt ? b.height : 0), 0);
+  const richTop = rich.base.y + rich.bundles.reduce((h, b) => h + b.height, 0);
+  const lastBundle = rich.bundles[rich.bundles.length - 1];
+  // the gold coins: they pour down by the rich tower. Each one falls straight down onto its own spot
+  // and stays there: before the tower has finished growing they land in little stacks on the
+  // flagstones at its foot; after, on its top. Every coin rests exactly on the surface or coin below.
+  const COIN_R = 0.13, COIN_T = 0.03;
   const pour = [];
+  let coinFloorSpots = [];
   {
     const r = seededRandom(23);
-    const count = 64, from = T.gains + 0.05, to = T.last + 0.5;
+    const floorSpots = [];
+    // spots in front of and beside the tower's foot, clear of its footprint (a bundle reaches at most
+    // about 0.33 forward and 0.5 sideways of its centre; a coin is 0.13 across its radius)
+    [[-0.45, 0.6], [-0.15, 0.62], [0.15, 0.6], [0.45, 0.62], [-0.3, 0.9], [0.0, 0.92], [0.3, 0.9], [0.75, 0.3], [0.78, 0.0], [-0.76, 0.3], [0.6, 0.85]]
+      .forEach(([dx, dz]) => { const x = rich.floor.point.x + dx, z = rich.floor.point.z + dz; floorSpots.push({ x, y: floorUnder(x, z, COIN_R + 0.02), z, slope: 0, count: 0 }); });
+    // spots on the top of the tower (inside the top bundle's face, 0.3 apart so stacks never touch)
+    const topSpots = [[-0.3, -0.03], [0, 0.04], [0.3, -0.03]]
+      .map(([dx, dz]) => ({ x: rich.base.x + lastBundle.shift[0] + dx, y: richTop + 0.006, z: rich.base.z + lastBundle.shift[1] + dz, slope: 0, count: 0 }));
+    const count = 56, from = T.gains + 0.05, to = T.last + 0.6;
+    const topFrom = lastBundle.landAt + 0.35;
     for (let i = 0; i < count; i++) {
-      const c = coin({ radius: 0.12, thickness: 0.022 });
+      const c = coin({ radius: COIN_R, thickness: COIN_T });
       kit.scene.add(c.group);
-      pour.push({ group: c.group, land: from + (i / count) * (to - from) + r() * 0.04,
-        dx: (r() - 0.5) * 0.44, dz: (r() - 0.5) * 0.2, drop: 1.6 + r() * 0.8, spin: 6 + r() * 8, tilt0: r() * Math.PI, yaw: r() * Math.PI * 2,
-        spillX: (r() - 0.5) * 0.9, spillZ: 0.35 + r() * 0.45, layer: r() * 0.05 });
+      const land = from + (i / count) * (to - from) + r() * 0.03;
+      const spots = land > topFrom && i % 3 !== 0 ? topSpots : floorSpots;
+      const spot = spots[Math.floor(r() * spots.length)];
+      const layer = spot.count++;
+      pour.push({ group: c.group, mesh: c.group.children[0], land, spot, restY: spot.y + COIN_T * (layer + 0.5) + 0.004 + layer * 0.001,
+        drop: 2.2 + r() * 0.8, spin: 6 + r() * 8, tilt0: r() * Math.PI, yaw: r() * Math.PI * 2 });
     }
+    // small shadows under the coin stacks on the flagstones
+    floorSpots.filter((s) => s.count > 0).forEach((s) => {
+      const holder = new THREE.Group(); holder.add(contactShadow(0.42, 0.3, 0.55));
+      holder.position.set(s.x, s.y + 0.006, s.z); holder.rotation.x = -s.slope;
+      s.shadow = holder; kit.scene.add(holder);
+      s.firstLand = Math.min(...pour.filter((c) => c.spot === s).map((c) => c.land));
+    });
+    coinFloorSpots = floorSpots;
   }
-  const plazaMotes = new Motes(kit.scene, { count: 120, min: [-2.5, -2.2, -18], max: [2.5, 2.5, -7], size: 0.03, seed: 29, opacity: 0.35, colour: 0xdfe6ee });
+  const plazaMotes = new Motes(kit.scene, { count: 120, min: [-2.5, -2.2, -14], max: [2.5, 2.5, -6], size: 0.03, seed: 29, opacity: 0.35, colour: 0xdfe6ee });
 
   // ------------------------------------------------------------------------------ the camera
+  // The camera rule: still unless a move lands the point; at most three moves per shot.
+  // Shot 1, the noodle shop: it holds on the counter (the empty spot where the money will land, the
+  // bowl and its price); one zoom in as the bank "sets out to double the money", narrowing onto the
+  // stack as it doubles; then it holds. Focus slides to the bowl for "they barely move" (free).
   const stackFocus = [stackBase.x, stackBase.y + 0.6, stackBase.z];
-  const shotA = kit.shot([
-    { t: T.start, position: [0, 0.15, 0.6], target: [0, -0.3, -30], fov: 40, focus: 12 },
-    { t: T.creates - 0.3, position: [-0.1, 0.05, -0.2], target: [-0.3, -0.4, -24], fov: 38, focus: stackFocus },
-    { t: T.double + 1.2, position: [-0.2, 0.0, -0.7], target: [-0.4, -0.3, -24], fov: 36, focus: stackFocus },
-    { t: T.forEight, position: [-0.25, 0.0, -0.9], target: [-0.4, -0.25, -24], fov: 36, focus: [bowlAt.x, bowlAt.y + 0.4, bowlAt.z] },
-    { t: CUT + 0.6, position: [-0.3, 0.0, -1.1], target: [-0.4, -0.25, -24], fov: 36, focus: [bowlAt.x, bowlAt.y + 0.4, bowlAt.z] },
-  ], { handheld: 0.012, seed: 5 });
-  const richFocus = [towerBases[1].x, towerBases[1].y + 3, towerBases[1].z];
-  const shotB = kit.shot([
-    { t: CUT - 0.5, position: [0, 0.05, 0.8], target: [0, 0.2, -30], fov: 40, focus: 30 },
-    { t: T.creates2 - 0.2, position: [0, -0.05, 0.2], target: [0, 0.1, -30], fov: 40, focus: 16 },
-    { t: T.pounds + 0.4, position: [0, 0.1, -0.4], target: [0, 0.7, -30], fov: 40, focus: 16 },
-    { t: T.gains - 0.1, position: [0, 0.0, -0.5], target: [0, 0.3, -30], fov: 40, focus: 15 },
-    { t: T.owned, position: [0.1, 0.05, 0.1], target: [0.42, 0.9, -30], fov: 41, focus: richFocus },
-    { t: T.last + 1.4, position: [0.12, 0.05, 0.35], target: [0.5, 1.0, -30], fov: 41, focus: richFocus },
-  ], { handheld: 0.012, seed: 6 });
+  const bowlFocus = [bowlAt.x, bowlAt.y + 0.4, bowlAt.z];
+  const shotA = kit.stillShot({ position: [-0.45, -0.1, -0.6], target: [-0.75, 1.1, -24], fov: 32, focus: stackFocus }, [
+    { from: T.sets - 0.1, to: T.double + 0.6, kind: 'zoom in', position: [-0.5, -0.2, -1.4], target: [-0.6, 0.45, -24], fov: 30 },
+    { from: T.forEight, to: T.forEight + 0.6, kind: 'focus', focus: bowlFocus },
+  ], { name: 'the noodle shop' });
+  // Shot 2, the bank street: it holds low on the pavement with the bank behind while both towers
+  // rise; on "the gains went to whoever owned the most" one zoom in narrows onto the rich tower as it
+  // grows and the coins pour down by it; then it holds to the end.
+  const richFocus = [rich.base.x, rich.base.y + 1.4, rich.base.z];
+  // It stands 0.7 in from the painting's eye point: from further back (at the origin, a little below
+  // the eye line) the frame saw past the painting's bottom edge and a black band ran along the bottom.
+  // At z -0.7 that edge (and its mirrored margin) lies below the frame (frame_check: y 1978 of 1920).
+  const shotB = kit.stillShot({ position: [0, -0.4, -0.7], target: [0, -0.8, -30], fov: 40, focus: 9.2 }, [
+    { from: T.gains - 0.1, to: T.went + 0.8, kind: 'zoom in', position: [0.14, -0.4, -1.5], target: [-0.12, -0.9, -30], fov: 37, focus: richFocus },
+  ], { name: 'the bank street' });
   kit.shake(T.double + 0.1, 0.008, 0.15);
-  kit.shake(T.creates2 + 0.3, 0.01, 0.2);
+  kit.shake(T.creates2 + 0.3, 0.008, 0.2);
 
   // a bundle falling onto a stack at landAt, resting at restY
   function dropBundle(b, t, x, restY, z, fall = 0.4, drop = 3) {
@@ -207,47 +258,44 @@ export async function build(kit) {
     });
     bowl.set(a ? { visible: true } : { visible: false });
     tag.group.visible = a;
-    tag.group.rotation.z = -0.32 + 0.025 * Math.sin(t * 1.3);
-    if (a) steam.set({ t, origin: [bowlAt.x + 0.05, bowlAt.y + 0.35, bowlAt.z], scale: 0.32, wind: 0.15 }); else steam.hide();
+    tag.group.rotation.z = -0.5 + 0.025 * Math.sin(t * 1.3);
+    if (a) steam.set({ t, origin: [bowlAt.x + 0.06, bowlAt.y + 0.44, bowlAt.z], scale: 0.38, wind: 0.15 }); else steam.hide();
     shopMotes.set(t, { visible: a });
 
     // part B things
     towers.forEach((tower) => {
       let h = 0;
       const base = tower.base;
+      tower.shadowHolder.visible = !a && t >= tower.bundles[0].landAt - 0.05;
       tower.bundles.forEach((b) => {
         if (a) { b.group.visible = false; return; }
-        dropBundle(b, t, base.x, base.y + h, base.z, 0.36, 2.6);   // enter from just above, not through the credit line
+        dropBundle(b, t, base.x, base.y + h, base.z, 0.36, 2.6);
         h += b.height;
       });
     });
-    // the coins pouring onto the taller tower: each falls onto the top as it is at its landing
-    // moment (later bundles land over it), the last ones stay lying on the top
-    const richBase = rich.base;
+    // the coins: each falls straight down onto its spot (the flagstones, the coin below it, or the
+    // top of the rich tower) and stays there, lying with the slope of the surface
     pour.forEach((c) => {
       const fall = Math.sqrt(2 * c.drop / 30), age = t - c.land;
       if (a || age < -fall) { c.group.visible = false; return; }
       c.group.visible = true;
-      const restY = topAt(rich, c.land) + 0.01;
+      // its shadow shows only once it has landed (so no shadow ovals on the towers while it falls)
+      c.mesh.castShadow = age >= 0;
       if (age < 0) {
         const k = 1 + age / fall;
-        c.group.position.set(richBase.x + c.dx, restY + c.drop * (1 - k * k), richBase.z + c.dz);
-        c.group.rotation.set(c.tilt0 + age * c.spin, c.yaw, 0);
-      } else if (age < 0.12) {
-        const bounce = 0.06 * Math.exp(-age / 0.08) * Math.abs(Math.sin(Math.PI * age / 0.11));
-        c.group.position.set(richBase.x + c.dx, restY + bounce, richBase.z + c.dz);
-        c.group.rotation.set(0.04 * Math.exp(-age * 6), c.yaw, 0);
+        c.group.position.set(c.spot.x, c.restY + c.drop * (1 - k * k), c.spot.z);
+        // it tumbles as it falls but comes in flat: the tilt fades out over the last quarter second,
+        // faster than it drops, so its rim never reaches below the surface
+        const tumble = (Math.PI / 2) * Math.sin(c.tilt0 + age * c.spin) * smooth(clamp01(-age / 0.25));
+        c.group.rotation.set(-c.spot.slope + tumble, c.yaw, 0, 'XYZ');
       } else {
-        // the top overflows: the coin slides off the front and falls to a pile at the tower's foot,
-        // where the camera (looking up at the tower) can see the gains piling up
-        const height = restY - richBase.y, spillFall = Math.sqrt(2 * height / 30);
-        const k = clamp01((age - 0.12) / spillFall);
-        const x = richBase.x + c.dx + c.spillX * k, z = richBase.z + c.dz + 0.25 + c.spillZ * k;
-        const y = k < 1 ? restY - height * k * k : richBase.y + 0.012 + c.layer;
-        c.group.position.set(x, y, z);
-        c.group.rotation.set(k < 1 ? c.tilt0 + (age - 0.12) * c.spin : 0.05, c.yaw, 0);
+        // a tiny hop just after landing (always upward from the resting height), then still
+        const hop = 0.025 * Math.exp(-age / 0.06) * Math.abs(Math.sin(Math.PI * age / 0.1));
+        c.group.position.set(c.spot.x, c.restY + hop, c.spot.z);
+        c.group.rotation.set(-c.spot.slope, c.yaw, 0, 'XYZ');
       }
     });
+    coinFloorSpots.forEach((s) => { if (s.shadow) s.shadow.visible = !a && t >= s.firstLand; });
     plazaMotes.set(t, { visible: !a });
 
     // the dip to black that hides the cut
@@ -352,22 +400,24 @@ export async function build(kit) {
   }
 
   // a dark rounded plate behind words over pale or busy parts of the picture
-  function plate(ctx, t, { at, until, x, y, w, h }) {
+  function plate(ctx, t, { at, until, x, y, w, h, grow }) {
     const a = presence(t, at, until, 0.12, 0.3);
     if (a <= 0) return;
+    // grow: { at, h, y } lets the plate reach down to take a second line when it appears
+    if (grow) { const k = smooth(clamp01((t - grow.at) / 0.25)); h = lerp(h, grow.h, k); y = lerp(y, grow.y, k); }
     ctx.save(); ctx.globalAlpha = a * 0.72; ctx.fillStyle = 'rgb(12,16,18)';
     ctx.beginPath(); ctx.roundRect(x - w / 2, y - h / 2, w, h, 28); ctx.fill();
     ctx.restore();
   }
   // the source credit, in paper white so it reads over the sky
-  function sourceCredit(ctx, t, { at, until, text, x = 84, y = 180, size = 34 }) {
+  function sourceCredit(ctx, t, { at, until, text, lines, x = 84, y = 180, size = 34, gap = 1.25 }) {
     const a = presence(t, at, until, 0.3, 0.4);
     if (a <= 0) return;
     ctx.save(); ctx.globalAlpha = a;
     ctx.shadowColor = INK.shadow; ctx.shadowBlur = 16; ctx.shadowOffsetY = 3;
     ctx.fillStyle = INK.paper; ctx.font = `700 ${size}px Inter`; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
     ctx.letterSpacing = '3px';
-    ctx.fillText(text.toUpperCase(), x, y);
+    (lines ?? [text]).forEach((row, i) => ctx.fillText(row.toUpperCase(), x, y + i * size * gap));
     ctx.restore();
   }
 
@@ -377,24 +427,34 @@ export async function build(kit) {
       placeTitle(ctx, t, { at: T.japan, until: T.double - 0.15, place: 'Japan', year: 2013, y: 260 });
       // the line starts early so its label is up by the word "yen"
       callout(ctx, t, { at: T.creates + 0.62, until: T.double - 0.1, point: at([stackBase.x, stackTop(5) + 0.05, stackBase.z]), text: 'YEN', dx: 120, dy: -260, size: 52, plate: true });
-      plate(ctx, t, { at: T.double, until: T.if - 0.2, x: 540, y: 355, w: 680, h: 260 });
-      hook(ctx, t, { at: T.double, until: T.if - 0.2, text: '×2 MONEY', y: 300, size: 120 });
-      hook(ctx, t, { at: T.inTwo, until: T.if - 0.2, text: 'IN TWO YEARS', y: 420, size: 64 });
+      // on the left, clear of the bundles falling onto the stack (on screen x 500-850 all the way up);
+      // the plate fits ×2 MONEY, then reaches down for IN TWO YEARS when she says it
+      plate(ctx, t, { at: T.double, until: T.if - 0.2, x: 250, y: 335, w: 400, h: 250, grow: { at: T.inTwo, h: 340, y: 380 } });
+      hook(ctx, t, { at: T.double, until: T.if - 0.2, text: '×2', x: 250, y: 280, size: 130 });
+      hook(ctx, t, { at: T.double + 0.1, until: T.if - 0.2, text: 'MONEY', x: 250, y: 400, size: 84 });
+      hook(ctx, t, { at: T.inTwo, until: T.if - 0.2, text: 'IN TWO YEARS', x: 250, y: 492, size: 48 });
+      // the ¥800 is invented: say so, as pages 1 and 3 do (above the bowl, left of the stack)
+      credit(ctx, t, { at: T.japan, until: CUT - 0.1, text: 'Example price', x: 84, y: 1050, size: 28, plate: true });
       pricesChart(ctx, t, { at: T.if - 0.1, until: CUT - 0.1, box: [190, 300, 700, 330] });
-      hook(ctx, t, { at: T.about, until: CUT - 0.1, text: 'ABOUT ½% A YEAR', y: 790, size: 64, colour: INK.amber });
+      // just under the chart, above the stack of yen and the bowl
+      plate(ctx, t, { at: T.about, until: CUT - 0.1, x: 540, y: 775, w: 700, h: 110 });
+      hook(ctx, t, { at: T.about, until: CUT - 0.1, text: 'ABOUT ½% A YEAR', y: 797, size: 64, colour: INK.amber });
     } else {
       placeTitle(ctx, t, { at: CUT + 0.2, until: T.creates2 - 0.1, place: 'After the crash', year: 2008, y: 260, size: 44 });
       hook(ctx, t, { at: T.bank, until: T.creates2 - 0.1, text: 'BANK OF ENGLAND', y: 400, size: 76 });
-      hook(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, text: 'BRITAIN’S CENTRAL BANK', y: 490, size: 46, colour: INK.muted });
+      plate(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, x: 540, y: 490, w: 700, h: 76 });
+      hook(ctx, t, { at: T.britains + 0.1, until: T.creates2 - 0.1, text: 'BRITAIN’S CENTRAL BANK', y: 490, size: 46 });
       hook(ctx, t, { at: T.hundreds, until: T.study - 0.2, lines: ['HUNDREDS OF', 'BILLIONS'], y: 330, size: 104 });
       hook(ctx, t, { at: T.pounds, until: T.study - 0.2, text: 'OF POUNDS', y: 500, size: 70, colour: INK.amber });
-      sourceCredit(ctx, t, { at: T.study, until: T.last + 2, text: 'Bank of England study, 2012', y: 180 });
-      risingArrow(ctx, t, { at: T.pushed2 - 0.1, until: T.gains - 0.15, box: [210, 330, 560, 380] });
-      plate(ctx, t, { at: T.shares, until: T.gains - 0.15, x: 540, y: 890, w: 820, h: 220 });
-      hook(ctx, t, { at: T.shares, until: T.gains - 0.15, text: 'SHARES ↑', y: 840, size: 78 });
-      hook(ctx, t, { at: T.investments - 0.12, until: T.gains - 0.15, text: 'OTHER INVESTMENTS ↑', y: 940, size: 58 });
-      hook(ctx, t, { at: T.gains, until: T.last + 2, text: 'THE GAINS', x: 84, y: 300, size: 88, colour: INK.amber, align: 'left' });
-      hook(ctx, t, { at: T.owned - 0.1, until: T.last + 2, lines: ['TO THE BIGGEST', 'OWNERS'], x: 84, y: 440, size: 62, align: 'left' });
+      // two short lines on the left (x 84-470): the bundles that land later all fall onto the right
+      // tower (on screen x 530 and right), so none crosses it; its top sits at y ~197
+      sourceCredit(ctx, t, { at: T.study, until: T.last + 2, lines: ['Bank of England', 'study, 2012'], y: 220, size: 32, gap: 1.2 });
+      risingArrow(ctx, t, { at: T.pushed2 - 0.1, until: T.gains - 0.15, box: [210, 335, 560, 320] });   // kept above the tower tops (the camera now stands closer)
+      plate(ctx, t, { at: T.shares, until: T.gains - 0.15, x: 540, y: 828, w: 820, h: 176 });
+      hook(ctx, t, { at: T.shares, until: T.gains - 0.15, text: 'SHARES ↑', y: 788, size: 74 });
+      hook(ctx, t, { at: T.investments - 0.12, until: T.gains - 0.15, text: 'OTHER INVESTMENTS ↑', y: 873, size: 56 });
+      hook(ctx, t, { at: T.gains, until: T.last + 2, text: 'THE GAINS', x: 54, y: 345, size: 88, colour: INK.amber, align: 'left' });
+      hook(ctx, t, { at: T.owned - 0.1, until: T.last + 2, lines: ['TO THE BIGGEST', 'OWNERS'], x: 54, y: 480, size: 62, align: 'left' });
     }
     return true;
   }

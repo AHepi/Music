@@ -25,12 +25,14 @@ and opencv, ffmpeg, and a Chromium browser). Paid steps use the ElevenLabs (voic
 | `skills/check-facts` | Skeptical fact checking of spoken and on-screen claims (workflow `verify-facts`). |
 | `skills/record-narration` | ElevenLabs recording page by page, word times, timeline, mix, voice checks. |
 | `skills/paint-and-cut` | fal paintings, depth maps to make rooms with depth, cut-out pieces. |
-| `skills/build-cinema-page` | Building a page file; `guide.md` is the full guide; parallel helpers via workflow `build-pages`. |
+| `skills/build-cinema-page` | Building a page file; `guide.md` is the full guide; `camera-and-framing.md` the strict camera rule (still, at most 3 named moves per shot), filling a tall frame and no clipping; parallel helpers via workflow `build-pages`. |
+| `skills/make-3d-models` | Detailed models (buildings, a town, a desk, props) built in Blender by script, with the official Blender MCP server (set-up, client, and the modelling notes learned through it). |
 | `skills/check-and-critique` | Stills, page turns, and an independent critique (workflow `critique-film`). |
 | `skills/film-and-finish` | Filming in parallel stretches, sound, sendable copy, captions, cover, measurements. |
 | `agents/` | `page-builder`, `fact-checker`, `film-critic` (all at medium effort). |
 | `workflows/` | `verify-facts`, `critique-film`, `check-fixes`, `build-pages` (run as `/explainer-film:NAME`, or with the Workflow tool). |
-| `bin/explainer-film-setup` | Sets up the kit in a working folder (on the PATH once installed). |
+| `bin/explainer-film-setup` | Sets up the kit in a working folder (on the PATH once installed); checks for Blender's Python module too. |
+| Checking tools | `paper-film/tools/camera_audit.py` (measures every camera move per shot), `frame_check.py` (where things land in the frame for a camera, before rendering), `tone_piece.py` (calms an over-coloured cut-out), `room.clearance()` and `boxesOverlap()` in the engine (nothing passing through anything). |
 | `kit/` | The film kit: `paper-film/` (stage, scenes, tools, templates), `narration-tools/`, `examples/` (word timelines of chapters 1 and 2), `docs/` (the paper look's full how-to). |
 
 The kit holds code and timelines, not pictures or sound: a chapter's paintings, cut-outs and

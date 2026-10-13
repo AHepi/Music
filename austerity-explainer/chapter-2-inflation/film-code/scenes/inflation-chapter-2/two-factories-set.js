@@ -81,6 +81,47 @@ export async function buildTwoFactories(kit, { shellsA = 6, shellsB = 8 } = {}) 
       yard: new THREE.Vector3(at.x + 0.15, 0, at.z + 1.95), door: factory.doorAt.clone().add(at) };
   };
   const a = await make('factory-a.glb', FACTORY_A, 31), b = await make('factory-b.glb', FACTORY_B, 47);
+  // works B must not look like works A (round 20 critique; pages 3 and 8 both): an oxblood door (B's own copies of the 'door-planks'
+  // material, the plank texture turned grey and tinted) and heavier, darker, denser smoke
+  const OXBLOOD = new THREE.Color(0x8a2a22);
+  let oxbloodMap = null;
+  b.factory.group.traverse((o) => {
+    if (!o.isMesh || !o.material.name.startsWith('door-planks')) return;
+    const m = o.material;
+    if (m.map && m.map.image && !oxbloodMap) {
+      const img = m.map.image, canvas = document.createElement('canvas');
+      canvas.width = img.width; canvas.height = img.height;
+      const ink = canvas.getContext('2d');
+      ink.drawImage(img, 0, 0);
+      const px = ink.getImageData(0, 0, canvas.width, canvas.height), d = px.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const grey = 0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2];
+        const v = Math.min(255, 70 + grey * 0.9);
+        d[i] = d[i + 1] = d[i + 2] = v;
+      }
+      ink.putImageData(px, 0, 0);
+      oxbloodMap = new THREE.CanvasTexture(canvas);
+      for (const key of ['flipY', 'wrapS', 'wrapT', 'colorSpace', 'channel', 'magFilter', 'minFilter', 'anisotropy']) oxbloodMap[key] = m.map[key];
+      oxbloodMap.repeat.copy(m.map.repeat); oxbloodMap.offset.copy(m.map.offset); oxbloodMap.rotation = m.map.rotation; oxbloodMap.center.copy(m.map.center);
+      oxbloodMap.needsUpdate = true;
+    }
+    if (oxbloodMap) m.map = oxbloodMap;
+    m.color.copy(OXBLOOD);
+    m.needsUpdate = true;
+  });
+
+  const heavySmoke = new Smoke(kit.scene, { count: 30, life: 4.2, seed: 93, colour: [74, 70, 68] });
+  // B's coal smoke: a thick, dark, slow column that stays over its chimney (rise squashed, puffs
+  // more opaque than the kit's light wisps). Call from pose while the set shows.
+  const heavySmokeB = (t) => {
+    heavySmoke.set({ t: t + 7, origin: b.chimney.toArray(), scale: 1.3, wind: 0.45 });
+    for (const puff of heavySmoke.puffs) {
+      if (!puff.sprite.visible) continue;
+      puff.sprite.position.y = b.chimney.y + 0.05 + (puff.sprite.position.y - b.chimney.y) * 0.5;
+      puff.sprite.material.opacity = Math.min(0.85, puff.sprite.material.opacity * 1.8);
+    }
+  };
+  const hideHeavySmokeB = () => heavySmoke.hide();
   const motes = new Motes(kit.scene, { count: 200, min: [-5, 0.2, -8], max: [5, 4, 5], size: 0.025, seed: 11, opacity: 0.55 });
   // loose things for the near foreground (blender/build_props.py): 'barrels', 'crates', 'lamp-post', 'cart'
   const props = await loadModel(`${MODELS}/props.glb`);
@@ -93,5 +134,5 @@ export async function buildTwoFactories(kit, { shellsA = 6, shellsB = 8 } = {}) 
   // the far chimneys smoke all the time (call from pose)
   const townSmoke = (t) => { for (const s of farSmoke) s.smoke.set({ t: t + 20, origin: s.top.toArray(), scale: 1.6 }); };
   const hideTownSmoke = () => { for (const s of farSmoke) s.smoke.hide(); };
-  return { a, b, motes, shellsA, shellsB, town, townSmoke, hideTownSmoke, prop };
+  return { a, b, motes, shellsA, shellsB, town, townSmoke, hideTownSmoke, prop, heavySmokeB, hideHeavySmokeB };
 }
