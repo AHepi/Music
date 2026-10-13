@@ -707,7 +707,7 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     - **Stopped by the safety check** (which guards against data leaking out of this machine): the
       notes, scripts and logs, and anything from this session's own working folder. It stopped three
       tries; I didn't try to get around it. Waiting for your decision.
-    - The repository is now about 1.7 GB, more than GitHub's suggested 1 GB, so downloading all of it
+    - The repository is now about 1.6 GB, more than GitHub's suggested 1 GB, so downloading all of it
       takes longer. Cost: none.
 
 
