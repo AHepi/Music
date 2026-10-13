@@ -170,9 +170,16 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Stopped by the safety check, waiting on you: notes, scripts, logs and this session's working folder.
 - Left out on purpose: other people's publications and code, installed software.
 
+## The look from chapter 3 on (log 26, 2026-10-13)
+
+- Reports in `experiments/`: "26 Review - design of chapter 2 and a direction", "26 Research - fully
+  3D scenes and cheap effects", "26 Plans - the look from chapter 3 on". Recommended: plan 2, the
+  house. Nothing built yet; no cost.
+
 ## Waiting on you
 
-- Whether to spend about 10 US cents on repainting what's behind the station (the second test, log 24).
+- Which plan for chapter 3's look (log 26). The house's first test is free.
+
 
 - Your view of chapter 2 (round 20) on your phone.
 - Before publishing: whether page 10's "is raising" still holds after 28 October.
@@ -190,7 +197,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Spend so far
 
-About US$7.00 in all (SAM 3D test, log 22: about 12 US cents; chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
+Picture allowance: about US$8.70 left of the "upto $10 in Fal" given when chapter 2 started (about
+US$1.28 spent since). About US$7.00 in all (SAM 3D test, log 22: about 12 US cents; chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
 bank street, and about 4,300 ElevenLabs credits, about 75 US cents).
 - fal, about US$4.25: chapter 1's paintings, about US$2.55 (17 large pictures at about 10 US cents,
   30 small ones at about 2.5 cents, 37 cut-out masks at about a fifth of a cent); the page 3 test,

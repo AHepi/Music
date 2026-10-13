@@ -46,6 +46,10 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
   chapter 2's 2,300 check pictures and its models are in `austerity-explainer/working-files/`. The
   rest (notes, scripts, logs, this session's working folder) was stopped by the safety check and waits
   for your decision.
+- **A review of chapter 2's look, research on fully 3D scenes, and four plans for chapter 3 on**
+  (log 26, in `experiments/`). Recommended: "the house", each chapter staged in one cut-away
+  building of society, decisions at the top and work and homes at the bottom. Waiting for your
+  choice; its first test costs nothing.
 - **A one-page picture with origami props** ("15 One page"): a blank page at an angle on a dark desk,
   with a folded cottage, trees, crane and fence, lit by one low warm lamp. You liked the idea but not
   the beauty, so it led to the next one.
@@ -239,6 +243,10 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Stand-in | A simple 3D shape (here a box) put where something in a painting stands, dressed in the painting, so it looks the same from the painting's view and stays solid when the camera moves. |
 | Push | The camera moving straight forward into the picture. "A 1.25 times push" makes things ahead look a quarter bigger. |
 | Safety check | An automatic guard on the machine I work on that stops anything that could leak data out of it. It can stop a step even when you asked for it; then you decide. |
+| Set | A real 3D place built from shapes and models, which the camera can move through without tearing. |
+| Paint-over | Flux repainting a plain picture of a set in the series' painted style, keeping the shapes where they are. |
+| Splat world | A 3D place made of millions of soft coloured dots, made by a paid service from one picture. |
+| Background still | The unchanging part of a still shot, drawn once and reused behind everything that moves. |
 
 ## Log (added to, never rewritten)
 
@@ -710,11 +718,47 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     - The repository is now about 1.6 GB, more than GitHub's suggested 1 GB, so downloading all of it
       takes longer. Cost: none.
 
+26. **A review of the look, research on 3D scenes, and plans.** You said "That's fine." about the
+    files the safety check stopped (left as they are), then asked what's next ("Britain and Italy in
+    the 1920s", chapter 3), then: "I need you to set two Opus 5.5 agents on max effort to do the
+    following jobs" (a design review of chapter 2, and a search for free tools to make fully 3D
+    scenes, including platforms like Tripo, plus cheap effects), "When those two are done, one more max
+    Opus 5.5 agent to synthesize the results and put forward alternative plans".
+    - **Design review** ("26 Review - design of chapter 2 and a direction"): the paintings, the
+      numbers arriving on their words and the returning objects work. The three biggest problems: the
+      film looks like a collage of five kinds of image (plain code-built props such as the banknote
+      bundles look like soap); the story sits in a middle band and the bottom of the frame is empty
+      floor (in about 70% of frames the bottom fifth is more than 30% darker than the middle); people
+      are props (copied strips, cut-off heads, empty streets while unemployment is spoken).
+    - **Research** ("26 Research - fully 3D scenes and cheap effects"): Blender's fast drawing mode can
+      run here with a pretend screen, about 20 seconds a picture (too slow for every frame, fine for
+      one background per shot). Object makers (SAM 3D, TRELLIS, 2 US cents a model; Tripo through
+      fal, 20 to 40 cents) make single objects, not scenes. Never use Tripo's free plan: its terms
+      give Tripo rights to what free users make. Whole-world makers (World Labs) cost about US$1.26 a
+      world with a US$5 minimum, need an account and uploads of your paintings. Most effects (rain,
+      snow, haze, dust, smoke, flicker) cost almost nothing to draw here.
+    - **Plans** ("26 Plans - the look from chapter 3 on"): four plans, checked against the film and
+      the tools' own pages: 1. painted places, refilled (cheapest, not 3D); 2. the house (each
+      chapter in one cut-away building of society: decisions at the top, public services in the
+      middle, work and homes at the bottom, the street in front); 3. built places, painted over
+      (Blender sets painted by Flux and shone back); 4. generated worlds (World Labs, about US$10 a
+      chapter). Recommended: plan 2, with a free first test.
+    - **Found on the way:** the petrol station tear in chapter 2 came from the camera rising during a
+      "pan down"; pure turns and pure zooms never tear a painted room. The painting prompts' rule
+      "the lower quarter of the picture is the empty floor" is where the empty bottom comes from.
+    - **Corrected:** I told the helpers about US$3 was left for pictures. Your "upto $10 in Fal" was
+      given when chapter 2 started, and about US$1.28 has been spent since, so about US$8.70 is left.
+      Every plan was costed to fit US$3 anyway.
+    - Not checked: any paid step; the house itself (nobody has built it yet); filming times for plans
+      2 to 4 are estimates. The helpers' test pictures stay in this session's working folder. Cost:
+      none.
+
 
 ## Next step
 
-Your decision on the files the safety check stopped (see log 25); then, if you want it, the second
-3D petrol station test (about 10 US cents).
+Choose a plan (log 26). If it's the house: I build its free first test, Britain's house as plain
+boxes with chapter 1's cut-outs, lit at night, with a pan down from the vault to the mine, and send you
+three pictures and a short move to judge on your phone.
 
 ## Traps
 

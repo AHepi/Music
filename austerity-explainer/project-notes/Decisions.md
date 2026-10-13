@@ -491,6 +491,26 @@ overturn any of them in one line. Changes to the project must follow this file.
 - What the safety check stopped is left for your decision, not forced through.
 - "That's ok" was not taken as a yes to spending on the second petrol station test.
 
+31. **A design review, 3D research and plans, at maximum effort** (your words): "I need you to set two
+    Opus 5.5 agents on max effort to do the following jobs' One to review the current outputs of the
+    last video. Analysing aesthetic and design qualities, where things could be improved design wise,
+    and propose a direction that is not only visually striking, but also narratively relevant. And
+    how to fill the screen so it's balanced, doesn't feel empty and works with the story being told.
+    The other one to scope the internet for free workflows or tools that can help replace the painted
+    backdrop with fully 3d rendered scenes. Platforms like Tripo are viable too, but must be scoped.
+    And look for VFX that might enhance the experience while remaining computationally cheap. This
+    agent will need access to pictures to get an idea of what it's looking for. When those two are
+    done, one more max Opus 5.5 agent to synthesize the results and put forward alternative plans"
+    This overrides "no higher than medium" (item 19) for this job.
+
+### Claude's calls for item 31
+
+- The helpers could not spend money, sign up anywhere, or upload your pictures; they read public
+  pages and ran free tests on this machine.
+- The three reports are kept in `experiments/` as "26 Review", "26 Research" and "26 Plans".
+- The picture allowance: US$10 from chapter 2's start, about US$1.28 spent since, so about US$8.70
+  left (the helpers were told US$3 by mistake).
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
