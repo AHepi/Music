@@ -173,6 +173,12 @@ three zip files.
 3. A failure while building or testing goes into `Lessons.md`.
 4. New terms from the authority source go into `Glossary.md`.
 
+## Saving to the repository (your rule, decision 30)
+
+- After each piece of work, save everything made to the repository except videos and audio: pictures,
+  models, code, notes, logs and records. Leave out other people's publications and code, and installed
+  software. Check text files for passwords and keys first. Upload big sets in batches under 400 MB.
+
 ## Traps
 
 - Files sent to you start with the log number they belong to. Never reuse a number for a new log entry.

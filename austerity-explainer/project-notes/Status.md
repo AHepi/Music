@@ -162,6 +162,14 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   post. Not done: forecourt and road as 3D, queued cars as upright cut-outs, real lamps, a moving shot.
   No cost.
 
+## Working files (log 25, 2026-10-13)
+
+- Rule from you: save everything to the repository except videos and audio.
+- Saved in `working-files/`: chapter 2's check pictures and models (2,323 files, 1.3 GB) and 25
+  filming and setup pictures. Index: `working-files/25 Working files - what is here.md`.
+- Stopped by the safety check, waiting on you: notes, scripts, logs and this session's working folder.
+- Left out on purpose: other people's publications and code, installed software.
+
 ## Waiting on you
 
 - Whether to spend about 10 US cents on repainting what's behind the station (the second test, log 24).
@@ -170,9 +178,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Before publishing: whether page 10's "is raising" still holds after 28 October.
 - Nothing for chapter 1 (you said "This is fantastic."). The kit is ready to hand to the agent making
   the series on the enclosures.
-- Whether to add the held-back working files of chapter 2 (session scripts, fix briefs, speed tests,
-  round-20 working pictures, drafts, the painting service's job numbers): the safety check blocked
-  saving them twice; they are kept aside on the working machine only.
+- The working files the safety check stopped (log 25): notes, scripts and logs from chapter 2's
+  working folder and the film kit, and everything in this session's working folder (including the
+  chapter 2 files held back earlier). All checked: no passwords, keys or personal details. They exist
+  only on this machine and are lost when the session ends.
 
 ## Not started
 

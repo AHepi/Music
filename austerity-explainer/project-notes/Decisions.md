@@ -479,6 +479,18 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The bollard, the queued cars and a proper repaint behind the station are left for a second test.
 - The test stays a test: chapter 2's film is unchanged.
 
+30. **Save everything but videos and audio** (your words): "That's ok. Just keep saving assets to
+    repo. Everything but the videos and audio. Everything else goes to repo."
+
+### Claude's calls for item 30
+
+- Other people's work stays out even so (downloaded publications, Blender's manual, other authors'
+  code), because the repository is public; the research ledger cites the publications.
+- Installed software stays out (Blender, Python environments, downloaded tools).
+- Files already in the repository aren't copied twice; big uploads go in batches under GitHub's limit.
+- What the safety check stopped is left for your decision, not forced through.
+- "That's ok" was not taken as a yes to spending on the second petrol station test.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

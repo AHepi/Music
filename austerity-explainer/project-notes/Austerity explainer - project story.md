@@ -42,6 +42,10 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
   painting's own light kept. From the painting's view it matches the painting; on a push in, the
   posts and canopy stay straight where today's painted room bends them. A sideways step still shows a
   rough smear behind the station, and the forecourt and road are not 3D yet.
+- **The working files are being saved to your repository** (log 25), all but videos and audio:
+  chapter 2's 2,300 check pictures and its models are in `austerity-explainer/working-files/`. The
+  rest (notes, scripts, logs, this session's working folder) was stopped by the safety check and waits
+  for your decision.
 - **A one-page picture with origami props** ("15 One page"): a blank page at an angle on a dark desk,
   with a folded cottage, trees, crane and fence, lit by one low warm lamp. You liked the idea but not
   the beauty, so it led to the next one.
@@ -234,6 +238,7 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Projection | Shining the painting onto a 3D model from where it was painted, like a slide projector, so the model wears the painting's own brushwork wherever the painting showed it. |
 | Stand-in | A simple 3D shape (here a box) put where something in a painting stands, dressed in the painting, so it looks the same from the painting's view and stays solid when the camera moves. |
 | Push | The camera moving straight forward into the picture. "A 1.25 times push" makes things ahead look a quarter bigger. |
+| Safety check | An automatic guard on the machine I work on that stops anything that could leak data out of it. It can stop a step even when you asked for it; then you decide. |
 
 ## Log (added to, never rewritten)
 
@@ -686,13 +691,30 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     - Saved: the code, boxes and cleaned background in the film kit; the method in the plugin's 3D
       models instructions (plugin version 1.1.2).
 
+25. **Saving everything but videos and audio.** You said "That's ok. Just keep saving assets to repo.
+    Everything but the videos and audio. Everything else goes to repo."
+    - I listed every file made so far that wasn't in the repository: about 3,500 files (1.5 GB) once
+      videos, audio, installed software and files already saved were set aside.
+    - **Checked by three independent helpers before copying.** No passwords, keys or personal details
+      anywhere (every text file was read in full). They found other people's work that must stay out
+      of a public repository (a book chapter, central bank papers, pages of Blender's manual, and a
+      copy of another author's animation engine), and about 30 MB of Blender renders and textures I
+      had missed. One of my own sorting rules wrongly counted some program files as video (the same
+      ending is used for both); those files turned out to be the other author's engine anyway.
+    - **Saved:** chapter 2's check pictures and models, 2,323 files (1.3 GB), uploaded in four batches
+      so each stays under GitHub's limit; also 25 filming and setup pictures. A note in the folder,
+      "25 Working files - what is here", lists what is there and what isn't.
+    - **Stopped by the safety check** (which guards against data leaking out of this machine): the
+      notes, scripts and logs, and anything from this session's own working folder. It stopped three
+      tries; I didn't try to get around it. Waiting for your decision.
+    - The repository is now about 1.7 GB, more than GitHub's suggested 1 GB, so downloading all of it
+      takes longer. Cost: none.
+
 
 ## Next step
 
-A second test: repaint what's behind the station properly with Flux 3 (about 10 US cents, within the
-picture allowance; needs your yes), make the forecourt and road 3D with the queued cars and the bollard
-as upright cut-outs, then film a few seconds of a push with a small sideways step, so you can judge
-it moving.
+Your decision on the files the safety check stopped (see log 25); then, if you want it, the second
+3D petrol station test (about 10 US cents).
 
 ## Traps
 

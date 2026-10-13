@@ -11,6 +11,8 @@
   - The film kit, with everything needed to make or remake either chapter (every painting, paper
     piece and model, the tools, chapter 1's recordings, both chapters as worked examples), is in
     `austerity-explainer/film-kit/`. Start with its `00 START HERE.md`.
+- `austerity-explainer/working-files/`: working files saved along the way (check pictures, models
+  and records), everything but videos and audio. Start with its "25 Working files - what is here".
 - `plugins/explainer-film/`: the method as a Claude Code plugin, so another model can make the next
   chapter. Install with `/plugin marketplace add AHepi/Music` then
   `/plugin install explainer-film@ahepi-music`.
