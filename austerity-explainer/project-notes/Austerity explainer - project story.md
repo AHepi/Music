@@ -137,6 +137,15 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     fresh checkers confirm each one and look for new problems. Hands fixes to the page files.
 23. **The plugin** (`plugins/explainer-film`): all of the above as instructions, workflows, helper
     definitions and tools, so another model can make the next chapter. Hands the method on.
+24. **Blender models** (`film-code/blender/`, models in `pictures/models/`):
+    scripts that build the two brick works, the model town, the near-corner props and the reviewer's
+    desk in Blender, bake their corner shading, and save each as one model file (.glb). The Blender
+    MCP server was used to inspect and improve them. Hands finished models to the cinema stage, which
+    lights and films them.
+25. **Camera and frame checks** (`film-code/tools/camera_audit.py`, `frame_check.py`): the first
+    measures every shot of the film against your camera rule (still unless a move is needed, at most
+    three moves a shot); the second says where each object lands in the tall frame for a camera
+    position, before anything is drawn. Hands problems back to the page files.
 
 ## Word list
 
@@ -191,6 +200,16 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Dip to black | A very quick fade to black and back, used to hide a cut from one place to another within a page. |
 | Page helper | A helper agent that builds one page file from the written guide, checks its stills and reports back. |
 | Fact recheck | A second check of every fact, by checkers told to try to prove each one wrong from fresh sources. |
+| Still shot | A stretch of a page where the camera holds still, except for at most three named camera moves. The engine refuses a fourth. |
+| Camera move | One of the moves from your camera rule: zoom in or out, pan left, right, up or down, move up or down. |
+| Blender | A free program for making 3D models. Here it builds the factories, town, props and desk by script; the cinema stage films them. |
+| MCP server | A small program that lets me drive another program through a set of named tools. Blender's official one also gives building advice and searches Blender's manual. |
+| Triangle | The small flat pieces a 3D model's surface is made of. More triangles means finer shapes, but slower drawing. |
+| Baked shading | Soft shadows in corners and creases worked out once in Blender and painted onto the model, so the stage doesn't have to work them out every frame. |
+| Camera check | The tool that measures every shot's camera against your rule and lists any that break it. |
+| Frame check | The tool that says where each object will land in the tall frame for a camera position, before any picture is drawn. |
+| Near corners | The bottom corners of the frame, closest to the camera. Filled with soft barrels, crates and a cart so the bottom third isn't empty. |
+| Button zone | The strip down the right side and along the bottom of a phone video where apps put their like and share buttons; words are kept out of it. |
 
 ## Log (added to, never rewritten)
 
@@ -469,6 +488,55 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     - Not checked: the voice by ear; the film at full speed (only single frames can be looked at
       here); how it plays on a phone; the plugin installed by another person or a smaller model. Cost this round: about US$1.06 on fal and about 4,300
       ElevenLabs credits for the recording (about 75 US cents by the same count as chapter 1).
+
+20. **Round 20: your phone screenshots, the camera rule, Blender.** You sent seven screenshots ("I love
+    the fact theirs depth in these. Just a few issues.") and a camera rule ("stay still unless it's
+    essential to land an important point ... 3 movements per frame, max"), then added "Oh use
+    blender MCP as well".
+    - **The camera rule is now part of the engine.** A "still shot" holds still and allows only your
+      moves (zoom in or out, pan left, right, up or down, move up or down), at most three per shot;
+      a fourth stops the page loading. A checker measures every shot of the film in about ten
+      seconds. Before: 9 shots broke the rule (page 1 crept for 20 seconds; pages 3 and 8 never held
+      still). After: 21 shots, 0 problems.
+    - **Picture 1, the politician's face:** it was about 1.7 times as colourful as the other painted
+      people; all three layers (face, jaw, mouth) were calmed to match (pages 1 and 10).
+    - **Pictures 2 and 3, the checkout:** the price tags now float in clear air in front of the
+      shelves (measured: none within 15 units of the painting, none touching each other); the basket
+      stands on the belt (0.05 clear) and fades as it folds away instead of hovering.
+    - **Picture 4, the factories:** rebuilt in Blender by script: two detailed brick works (about
+      22,000 triangles each, against about 2,000 before) in a model industrial town (terraced streets,
+      far works and chimneys, a gasholder, a viaduct, gas lamps), with soft barrels, crates and a cart
+      in the near corners. Research on filling a tall frame (miniature and vertical-video
+      cinematography) led to low, close cameras, subjects stacked in depth, and chimneys and sky in
+      the top third. Pages 3 and 8 were reframed shot by shot with a new tool that says where each
+      thing lands in the frame before any picture is drawn.
+    - **Picture 5, page 9:** the book is much bigger and stands at the back as the authority; the
+      start is wider; the envelope stands clear of the workers and the ground.
+    - **Picture 6, page 5:** the bank street was repainted with a dry pavement (about 10 US cents);
+      coins now land on the pavement or the towers and stay there; their shadows show only once landed.
+    - **Picture 7, the review:** the report now lands on a detailed reviewer's desk made in Blender
+      (a leather blotter, a banker's lamp with its own warm light, folders, typed papers, an ink pad
+      for the stamp, a pen, glasses, tea, bookshelves); a soft dark band keeps the words readable.
+    - **The Blender MCP:** Blender Lab's official server was installed and run without a screen on
+      this machine (Blender 5.2.2, checksum checked), and registered with Claude Code for later
+      sessions; in this session its tools were used through a small client. Its own guidance and its
+      bundled manual found two faults in the first models (bevelled edges shading as hard facets, cut
+      walls with razor corners), and helpers improved each model through it. The works went from about 22,000 to about 34,000
+      triangles each (bevelled edges now shade smoothly, brick openings have soft corners, 232 parts
+      joined into 19), the town to about 63,000 with more street detail, the props to about 5,600,
+      and the desk got smoother wood, a softer lamp shade and pale glasses. A before-and-after judge
+      looked at each in the real film frame and caught three details that read as something else on
+      a phone (stone blocks by the gutters that looked like little cameras, figured wood that looked
+      like a contour map, dark lenses that made the reading glasses look like sunglasses); all three
+      were fixed.
+    - **Checking:** seven page helpers, an independent reviewer (which failed three pages), seven more
+      helpers, a fresh reviewer (one page left, fixed), then a last check of the fixes. It found three more, all fixed and measured: page 2's SUPPLY
+      SHIPS SUNK label sat where phone apps put their buttons (moved in); works B's door looked
+      different on pages 3 and 8 (the look now lives in the shared set, so both pages match); and a
+      $$$ tag sat in the same button zone (moved in).
+    - **Filming:** FILMING_RESULT
+    - Not checked: the film at full speed and on a phone; whether Blender's MCP would add more with a
+      screen (its screenshot tools need one). Cost this round: about 10 US cents on fal; nothing else.
 
 ## Next step
 
