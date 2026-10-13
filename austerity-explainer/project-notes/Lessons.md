@@ -280,6 +280,10 @@ Only failures in doing the work belong here. Newest at the bottom.
     tool (`profile_frame.mjs`) showed the realistic materials of the works and town were most of
     page 3's 12 seconds a picture; matte materials halve it but looked flatter and darker, so the
     realistic look was kept and the time accepted.
+71. **Save long work often: the cloud machine can restart without warning.** It restarted at 02:53
+    and lost both chunks in progress (about 30 minutes of page 3). The filming tool now keeps every
+    60 frames as it finishes them, so a restart or the 2-hour stop costs at most one piece per worker
+    (about 13 minutes on the slowest page), and running it again carries on.
 
 ## Traps
 

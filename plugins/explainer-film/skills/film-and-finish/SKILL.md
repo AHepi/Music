@@ -30,6 +30,10 @@ detailed models can take 5 hours (chapter 2's model pages drew at 12 to 15 secon
 others at about 2.7). Film in stretches that each fit: `FILM_FROM=<frame> FILM_TO=<frame> bash
 paper-film/tools/film-chapter-parallel.sh SCENE 2 240` (page edges in frames come from
 `render-paper-film.mjs SCENE --info`); finished pieces are kept, and the last stretch joins them.
+The cloud machine can also restart without warning. Each chunk is filmed in pieces of 60 frames
+(`PIECE_FRAMES`), each kept when finished, so a restart or a stopped job loses at most one piece per
+worker: run the same command again and it carries on. Because of that, a stretch may simply be
+everything left (`FILM_FROM=<frame>` with no `FILM_TO`), run again after each stop.
 Find what makes a page slow with `node paper-film/tools/profile_frame.mjs PAGE TIME`.
 
 ## 2. Finish

@@ -12,6 +12,11 @@
 #   FILM_FROM=1766 FILM_TO=2241 bash paper-film/tools/film-chapter-parallel.sh SCENE 2 240
 # It films only the chunks inside that stretch, then joins if every chunk of the chapter exists.
 #
+# Restarts: each chunk is filmed in pieces of at most PIECE_FRAMES frames (default 60) and each piece
+# is kept as soon as it is finished, so a machine restart or a stopped job loses at most one piece
+# per worker (about 13 minutes on the slowest pages) instead of a whole chunk. Run the script again
+# and it carries on from the last finished piece; the pieces are joined into the chunk at the end.
+#
 # Use (from the kit folder): bash paper-film/tools/film-chapter-parallel.sh SCENE [WORKERS] [CHUNK_FRAMES]
 #   writes paper-film/out/SCENE-chunks/chunk-FROM-to-TO.mp4 and paper-film/out/SCENE-silent.mp4,
 #   and paper-film/out/SCENE-filming.log (one line per chunk). Then join the sound with
@@ -39,15 +44,31 @@ echo "$SCENE: $(echo "$CHUNKS" | wc -l) chunks, $WORKERS at a time ($(date +%H:%
 film_one() {
   local from=$1 to=$2 file="$OUT/chunk-$(printf %05d "$1")-to-$(printf %05d "$2").mp4"
   if [ -s "$file" ]; then return 0; fi
-  local started=$(date +%s)
-  if node tools/render-paper-film.mjs "$SCENE" "$file.part.mp4" --frames "$from" "$to" > "$file.log" 2>&1; then
-    mv "$file.part.mp4" "$file"; mv "$file.part.json" "${file%.mp4}.json"
+  local started=$(date +%s) pieces="$file.pieces.txt" a b piece
+  : > "$pieces"
+  for (( a = from; a < to; a += PIECE_FRAMES )); do
+    b=$(( a + PIECE_FRAMES < to ? a + PIECE_FRAMES : to ))
+    piece="$file.piece-$(printf %05d "$a")-to-$(printf %05d "$b").mp4"
+    if [ ! -s "$piece" ]; then
+      if node tools/render-paper-film.mjs "$SCENE" "$piece.part.mp4" --frames "$a" "$b" >> "$file.log" 2>&1; then
+        mv "$piece.part.mp4" "$piece"; rm -f "$piece.part.json"
+      else
+        echo "frames $a-$b FAILED, see $file.log ($(date +%H:%M:%S))" >> "$LOG"; return 0
+      fi
+    fi
+    echo "file '$(realpath "$piece")'" >> "$pieces"
+  done
+  if ffmpeg -hide_banner -loglevel error -y -f concat -safe 0 -i "$pieces" -c copy "$file.part.mp4" >> "$file.log" 2>&1; then
+    python3 -c "import json, sys; print(json.dumps({'scene': sys.argv[1], 'first_frame': int(sys.argv[2]), 'last_frame': int(sys.argv[3]) - 1, 'fps': 30}, indent=1))" \
+      "$SCENE" "$from" "$to" > "${file%.mp4}.json"
+    mv "$file.part.mp4" "$file"; rm -f "$pieces" "$file".piece-*.mp4
     echo "frames $from-$to filmed in $(( $(date +%s) - started )) s ($(date +%H:%M:%S))" >> "$LOG"
   else
-    echo "frames $from-$to FAILED, see $file.log ($(date +%H:%M:%S))" >> "$LOG"
+    echo "frames $from-$to FAILED to join its pieces, see $file.log ($(date +%H:%M:%S))" >> "$LOG"
   fi
 }
-export -f film_one; export OUT SCENE LOG
+PIECE_FRAMES="${PIECE_FRAMES:-60}"
+export -f film_one; export OUT SCENE LOG PIECE_FRAMES
 FROM_LIMIT="${FILM_FROM:-0}"; TO_LIMIT="${FILM_TO:-999999999}"
 echo "$CHUNKS" | awk -v a="$FROM_LIMIT" -v b="$TO_LIMIT" '$1 >= a && $2 <= b' | xargs -P "$WORKERS" -L 1 bash -c 'film_one "$0" "$1"'
 
