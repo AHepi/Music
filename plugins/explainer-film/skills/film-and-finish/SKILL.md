@@ -25,6 +25,13 @@ cd KIT && nohup setsid bash paper-film/tools/film-chapter-parallel.sh <chapter> 
   fix, delete that page's `chunk-*.mp4` files and run it again.
 - Result: `paper-film/out/<chapter>-silent.mp4`.
 
+**Long films in a cloud session:** background commands are stopped after 2 hours, and a film with
+detailed models can take 5 hours (chapter 2's model pages drew at 12 to 15 seconds a picture, the
+others at about 2.7). Film in stretches that each fit: `FILM_FROM=<frame> FILM_TO=<frame> bash
+paper-film/tools/film-chapter-parallel.sh SCENE 2 240` (page edges in frames come from
+`render-paper-film.mjs SCENE --info`); finished pieces are kept, and the last stretch joins them.
+Find what makes a page slow with `node paper-film/tools/profile_frame.mjs PAGE TIME`.
+
 ## 2. Finish
 
 ```

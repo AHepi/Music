@@ -272,6 +272,15 @@ Only failures in doing the work belong here. Newest at the bottom.
     real film frame caught all three.
 
 
+69. **Background jobs in a cloud session stop after 2 hours.** The chapter's filming (about 5 hours,
+    because the detailed model pages draw at 12 to 15 seconds a picture against 2.7 for the others)
+    was stopped mid-way, losing two pieces in progress (finished pieces were kept). Fix: film in
+    stretches that each fit (`FILM_FROM` / `FILM_TO` on the filming script).
+70. **Detailed models cost drawing time, mostly in their surfaces, not their shapes.** A profiling
+    tool (`profile_frame.mjs`) showed the realistic materials of the works and town were most of
+    page 3's 12 seconds a picture; matte materials halve it but looked flatter and darker, so the
+    realistic look was kept and the time accepted.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.

@@ -7,6 +7,11 @@
 # Chunks that already exist are kept, so if filming stops, run the script again and it carries on.
 # A change to one page only needs that page's chunks deleted and the script run again.
 #
+# Long chapters: a run can be limited to a stretch of frames with FILM_FROM and FILM_TO (frame
+# numbers), so each run fits a time limit (a cloud session stops background jobs after 2 hours):
+#   FILM_FROM=1766 FILM_TO=2241 bash paper-film/tools/film-chapter-parallel.sh SCENE 2 240
+# It films only the chunks inside that stretch, then joins if every chunk of the chapter exists.
+#
 # Use (from the kit folder): bash paper-film/tools/film-chapter-parallel.sh SCENE [WORKERS] [CHUNK_FRAMES]
 #   writes paper-film/out/SCENE-chunks/chunk-FROM-to-TO.mp4 and paper-film/out/SCENE-silent.mp4,
 #   and paper-film/out/SCENE-filming.log (one line per chunk). Then join the sound with
@@ -43,7 +48,8 @@ film_one() {
   fi
 }
 export -f film_one; export OUT SCENE LOG
-echo "$CHUNKS" | xargs -P "$WORKERS" -L 1 bash -c 'film_one "$0" "$1"'
+FROM_LIMIT="${FILM_FROM:-0}"; TO_LIMIT="${FILM_TO:-999999999}"
+echo "$CHUNKS" | awk -v a="$FROM_LIMIT" -v b="$TO_LIMIT" '$1 >= a && $2 <= b' | xargs -P "$WORKERS" -L 1 bash -c 'film_one "$0" "$1"'
 
 # join only when every chunk exists
 LIST="$OUT/join-list.txt"; : > "$LIST"; MISSING=0
