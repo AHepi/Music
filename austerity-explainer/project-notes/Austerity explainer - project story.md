@@ -215,6 +215,9 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Frame check | The tool that says where each object will land in the tall frame for a camera position, before any picture is drawn. |
 | Near corners | The bottom corners of the frame, closest to the camera. Filled with soft barrels, crates and a cart so the bottom third isn't empty. |
 | Button zone | The strip down the right side and along the bottom of a phone video where apps put their like and share buttons; words are kept out of it. |
+| SAM 3D | A tool on fal (by Meta) that turns things in one picture into separate 3D models, one per thing, each with its own painted surface and its place in the picture. |
+| Clean plate | A copy of a painting with some things painted out, so 3D models of those things can stand in their place. |
+| Projection | Shining the painting onto a 3D model from where it was painted, like a slide projector, so the model wears the painting's own brushwork wherever the painting showed it. |
 
 ## Log (added to, never rewritten)
 

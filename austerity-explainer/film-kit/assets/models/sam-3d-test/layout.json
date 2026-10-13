@@ -1,0 +1,117 @@
+{
+ "what": "SAM 3D layout of the five objects of painting 409 (fal-ai/sam-3/3d-objects). Rotation is given w first and is applied inverted, the model files are turned a quarter-turn about x, and SAM imagined a lens with tanX 0.300 (x points left); found by fit_layout.py (mean outline match 0.85).",
+ "sam_tan_x": 0.3,
+ "painting_size": [
+  1536,
+  2736
+ ],
+ "objects": [
+  {
+   "name": "object-1-red-car",
+   "file": "object-1-red-car.glb",
+   "scale": 0.4121982455253601,
+   "rotation_wxyz": [
+    0.19015657901763916,
+    0.20894494652748108,
+    0.7288877964019775,
+    0.623599112033844
+   ],
+   "translation": [
+    0.2348501831293106,
+    -0.12639358639717102,
+    1.298340916633606
+   ],
+   "mask": "mask-1.png",
+   "ground": [
+    -0.02743,
+    -0.11903,
+    -3.04583
+   ]
+  },
+  {
+   "name": "object-2-teal-car",
+   "file": "object-2-teal-car.glb",
+   "scale": 0.4298597574234009,
+   "rotation_wxyz": [
+    0.17357058823108673,
+    0.1998043656349182,
+    0.7370434403419495,
+    0.6218640804290771
+   ],
+   "translation": [
+    0.29105615615844727,
+    0.014903217554092407,
+    2.3292860984802246
+   ],
+   "mask": "kept-painted-mask-2-teal-car.png",
+   "keep_painted": true
+  },
+  {
+   "name": "object-3-pump-left",
+   "file": "object-3-pump-left.glb",
+   "scale": 0.19728919863700867,
+   "rotation_wxyz": [
+    0.3186526596546173,
+    0.37007418274879456,
+    -0.6469113230705261,
+    -0.5857046842575073
+   ],
+   "translation": [
+    -0.01316070556640625,
+    -0.01361083984375,
+    1.64453125
+   ],
+   "mask": "mask-3.png",
+   "ground": [
+    0.0,
+    -0.06354,
+    -1.9004
+   ]
+  },
+  {
+   "name": "object-4-pump-middle",
+   "file": "object-4-pump-middle.glb",
+   "scale": 0.20264588296413422,
+   "rotation_wxyz": [
+    0.3154609799385071,
+    0.34716448187828064,
+    -0.6454380750656128,
+    -0.6029081344604492
+   ],
+   "translation": [
+    -0.1044921875,
+    -0.043487548828125,
+    1.474609375
+   ],
+   "mask": "mask-4.png",
+   "ground": [
+    -0.07138,
+    -0.13472,
+    -3.15346
+   ]
+  },
+  {
+   "name": "object-5-pump-right",
+   "file": "object-5-pump-right.glb",
+   "scale": 0.2527519166469574,
+   "rotation_wxyz": [
+    0.34589332342147827,
+    0.3706905245780945,
+    -0.6489527225494385,
+    -0.5672769546508789
+   ],
+   "translation": [
+    -0.1944861263036728,
+    -0.04419912397861481,
+    1.2773544788360596
+   ],
+   "mask": "mask-5.png",
+   "ground": [
+    0.0,
+    -0.06295,
+    -2.05768
+   ]
+  }
+ ],
+ "note_teal_car": "kept as painted: it is far back (a painted room is enough there), and SAM placed it 30-40 px off and gave it pink trim"
+}

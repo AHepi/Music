@@ -122,3 +122,33 @@ Copy a prop group: `props.getObjectByName('barrels').clone(true)`. Chapter 2's
   a cart, a lamp post) in the near corners, never bare dark ground.
 - Frame with numbers first: `python3 -I paper-film/tools/frame_check.py CAM TARGET FOV name=x,y,z ...`
   says where each thing lands in the 1080 x 1920 frame, in a second, before any still is made.
+
+## Or: lift things out of a painting with SAM 3D (tested once, log 22 of the austerity project)
+
+Turns things in one painting (a car, pumps) into 3D models that stand where they were and still look
+painted. About 12 US cents a painting on fal (confirm spending first). Worked example:
+`paper-film/scenes/sam-3d-petrol-station-test.js` in the austerity project's film kit.
+
+1. Mark a box round each thing in the painting (pixels). Send the painting and the boxes to
+   `fal-ai/sam-3/3d-objects` in ONE run (`box_prompts`, `export_textured_glb: true`): one model per box
+   plus each model's size, turn and position in SAM's own camera (`metadata`).
+2. `blender-env/bin/python paper-film/tools/sam3d_fit_layout.py metadata.json GLB_FOLDER boxes.json`
+   finds how SAM's layout maps onto the painting (for the first painting: model files a quarter-turn
+   about x, turn given w first and applied inverted, x pointing left, lens tanX 0.300).
+3. `sam3d_make_clean_plate.py masks` (Blender's Python) then `plate` (system Python) draws each
+   model's outline as a mask and makes a rough clean plate; repaint the plate properly with an image
+   edit model (Flux 3 edit, about 10 US cents: "remove the ... keep everything else") and blend it in
+   only inside the outlines with `composite_fill.py`.
+4. `ground_under_objects.py` fits the ground around each thing's base and puts a flat floor in the
+   clean depth picture where it stood (without this the models float or sink).
+5. In the page: place each model on its line of sight, standing on that ground; let it wear the
+   painting projected from where it was painted on every surface the painting showed, and SAM's own
+   surface only on hidden sides; give it only a touch of the lamp (see the worked example).
+
+Traps found in the test:
+- SAM's model files carry no surface directions: call `geometry.computeVertexNormals()` or they
+  draw as black blocks.
+- Keep the stage's standard colour handling for both the painting and the models' surfaces.
+- Far or small things are better left painted (SAM placed the far car 30-40 px off with pink trim).
+- The painted room still tears beyond a short push (canopy posts, building edges): keep moves small,
+  or split such buildings into their own layers.
