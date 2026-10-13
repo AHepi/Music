@@ -796,7 +796,9 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       surfaces now sit a hair apart; people fade in and out standing up; one pair of scissors travels
       from the table, past the floor below, to the site; the padlock fades in as it drops and its glow
       builds over a few frames; the pavement is wider, so the crowd and the miners stand clearly outside.
-      Then filmed again.
+      Then filmed again. A frame-to-frame scan of the new film found one more jump: the crowd vanished
+      half way through fading out (cut-outs are only drawn where at least half solid); fixed for every
+      fading piece, and the four stretches with fades filmed again.
     - **Filming:** 1,110 frames in about 33 minutes (about 1.8 seconds a frame, filmed two at a time).
       Sent as "27 Sample - the house" (about 20 MB). As your rule says, the video and music are not in the repository;
       the code, the timing file and a sheet of one frame a second are.

@@ -77,6 +77,14 @@ function platedHook(ctx, t, { at, until, lines, y, size, colour = INK.paper }) {
   return hook(ctx, t, { at, until, lines, y, size, colour });
 }
 
+// Sets a cut-out's pose; while it is fading, it is drawn down to nearly see-through (cut-outs are
+// normally drawn only where they are at least half solid, so a fade would snap off at half way).
+function setFading(piece, pose) {
+  piece.set(pose);
+  const fading = pose.opacity !== undefined && pose.opacity < 0.999;
+  piece.front.material.alphaTest = fading ? 0.02 : 0.5;
+}
+
 export async function build(kit) {
   // night: a cool moon from the upper left, a dark sky; the rooms are lit by their own lamps
   kit.lightRig({ keyColour: 0xa9bde0, keyShare: 0.8, keyFrom: [-9, 22, 20], keyTarget: [0, 7, 0], fillSky: 0x4a5a7a, fillGround: 0x1a1612,
@@ -240,18 +248,18 @@ export async function build(kit) {
     if (t < T.scissorsUp) scissors.set({ visible: false });
     else if (t < T.scissorsLeave) {
       const k = smooth((t - T.scissorsUp) / 0.2);
-      scissors.set({ ...onTable, dy: onTable.dy + 0.15 * (1 - k), opacity: k });
+      setFading(scissors, { ...onTable, dy: onTable.dy + 0.15 * (1 - k), opacity: k });
     } else if (t < T.scissorsLand) {
       const u = (t - T.scissorsLeave) / (T.scissorsLand - T.scissorsLeave);
-      scissors.set({ dx: lerp(onTable.dx, 0, smooth(u)), dy: onTable.dy * (1 - u * u), dz: lerp(onTable.dz, 0, u) + 1.4 * Math.sin(Math.PI * u),
-        scale: lerp(onTable.scale, 1, smooth(u)), roll: 0.35 * Math.sin(Math.PI * u) });
+      setFading(scissors, { dx: lerp(onTable.dx, 0, smooth(u)), dy: onTable.dy * (1 - u * u), dz: lerp(onTable.dz, 0, u) + 1.4 * Math.sin(Math.PI * u),
+        scale: lerp(onTable.scale, 1, smooth(u)), roll: 0.35 * Math.sin(Math.PI * u), opacity: 1 });
     } else if (t < T.scissorsLand + 2.2) {
       const landed = dropIn(t, T.scissorsLand, { bounce: 0.2, roll: 0.3 });
       const snip = 0.18 * Math.sin((t - T.scissorsLand) * 14) * Math.exp(-(t - T.scissorsLand) * 1.4);
-      scissors.set({ ...landed, fold: 0, roll: (landed.roll ?? 0) + snip });
+      setFading(scissors, { ...landed, fold: 0, roll: (landed.roll ?? 0) + snip, opacity: 1 });
     } else {
       const k = smooth((t - (T.scissorsLand + 2.2)) / 0.5);
-      scissors.set(k >= 1 ? { visible: false } : { opacity: 1 - k });
+      setFading(scissors, k >= 1 ? { visible: false } : { opacity: 1 - k });
     }
     const fall = smooth((t - (T.scissorsLand + 0.2)) / 0.9);
     scaffold.rotation.z = -1.25 * fall * fall;
@@ -276,25 +284,25 @@ export async function build(kit) {
     }
     // the padlock fades in as it starts to fall from just under the vault's ceiling
     const padlockPose = dropIn(t, T.padlock, { fall: 0.45, height: 1.45, roll: 0.2, bounce: 0.22 });
-    padlock.set(padlockPose.visible ? { ...padlockPose, opacity: smooth((t - (T.padlock - 0.45)) / 0.15) } : padlockPose);
+    setFading(padlock, padlockPose.visible ? { ...padlockPose, opacity: smooth((t - (T.padlock - 0.45)) / 0.15) } : padlockPose);
     kitchenPacket.set({});
     // the miners' pay packet shrinks when the owners want lower pay
     const shrink = smooth((t - (T.owners + 0.15)) / 0.8);
     const gone = (start, length = 0.45) => { const k = smooth((t - start) / length); return k >= 1 ? { visible: false } : { opacity: 1 - k }; };
-    packet.set(t < T.walkOut + 0.3 ? { scale: lerp(1, 0.45, shrink) } : { ...gone(T.walkOut + 0.3), scale: 0.45 });
+    setFading(packet, t < T.walkOut + 0.3 ? { scale: lerp(1, 0.45, shrink), opacity: 1 } : { ...gone(T.walkOut + 0.3), scale: 0.45 });
     // the mine's ceiling comes down; the miners bow
     const squeeze = smooth((t - T.squeeze[0]) / (T.squeeze[1] - T.squeeze[0]));
     house.setMineCeiling(lerp(F.cellar.top, F.cellar.top - 0.95, squeeze));
     for (const [i, m] of miners.entries()) {
       const leave = T.walkOut + 0.1 * i;
-      if (t < leave) m.miner.set({ fold: 0.22 * squeeze, dy: -0.04 * squeeze });
-      else m.miner.set({ ...gone(leave, 0.4), fold: 0.22 });
+      if (t < leave) setFading(m.miner, { fold: 0.22 * squeeze, dy: -0.04 * squeeze, opacity: 1 });
+      else setFading(m.miner, { ...gone(leave, 0.4), fold: 0.22 });
       const lit = t < leave ? 1 : 1 - smooth((t - leave) / 0.4);
       m.lamp.material.opacity = 0.6 * lit; m.halo.material.opacity = 0.1 * lit;
       m.lamp.position.y = F.cellar.bottom + 1.3 - 0.1 * squeeze; m.halo.position.y = m.lamp.position.y + 0.1;
     }
     // the machinist walks out with the strike
-    machinist.set(t < T.walkOut ? {} : gone(T.walkOut, 0.45));
+    setFading(machinist, t < T.walkOut ? { opacity: 1 } : gone(T.walkOut, 0.45));
 
     // the street: the crowd pops up on "strike", folds away on "months", the miners stay
     // (they fade in and out standing up: a cut-out folded flat low in the frame shows its pale back)
@@ -303,8 +311,8 @@ export async function build(kit) {
       const k = smooth((t - start) / length);
       return { opacity: k, dy: -0.25 * (1 - k) };
     };
-    crowd.set(t < T.months ? arrive(T.walkOut + 0.25, 0.6) : gone(T.months, 0.7));
-    for (const [i, m] of streetMiners.entries()) m.set(arrive(T.months + 0.35 + 0.15 * i, 0.45));
+    setFading(crowd, t < T.months ? arrive(T.walkOut + 0.25, 0.6) : gone(T.months, 0.7));
+    for (const [i, m] of streetMiners.entries()) setFading(m, arrive(T.months + 0.35 + 0.15 * i, 0.45));
 
     // air
     for (const s of smoke) s.effect.set({ t, origin: s.origin, until: T.walkOut + 0.4, scale: 0.9, wind: 0.6 });

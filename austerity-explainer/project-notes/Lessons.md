@@ -328,6 +328,9 @@ Only failures in doing the work belong here. Newest at the bottom.
 86. **Check the film in motion, not only stills.** Pieces popping in for one frame, things passing
     through floors and flat pale cards only showed in the moving film; a frame-to-frame difference
     measure finds them quickly.
+87. **A cut-out snaps off half way through a fade unless told otherwise.** Cut-outs are drawn only
+    where they are at least half solid, so lowering their opacity made the strike crowd vanish in one
+    frame at 50%. While a piece fades, lower that threshold (setFading in house-sample/page-1.js).
 
 ## Traps
 
