@@ -797,8 +797,13 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       from the table, past the floor below, to the site; the padlock fades in as it drops and its glow
       builds over a few frames; the pavement is wider, so the crowd and the miners stand clearly outside.
       Then filmed again. A frame-to-frame scan of the new film found one more jump: the crowd vanished
-      half way through fading out (cut-outs are only drawn where at least half solid); fixed for every
-      fading piece, and the four stretches with fades filmed again.
+      half way through fading out (a cut-out first drawn solid stays solid, then vanishes at half
+      opacity); fixed for every fading piece, and the four stretches with fades filmed again. A second
+      motion check then found the strike crowd showing as a hard-edged rectangle (the picture is cut
+      straight along its bottom and sides), crossfades that overlapped like a double exposure, music
+      that came in at once instead of fading in, and the 1925 title lingering through the move down.
+      Fixed (soft edges with the crowd's bottom behind the kerb, fades one after another, a 2-second
+      music fade-in, the title clears as the camera moves) and the last three stretches filmed again.
     - **Filming:** 1,110 frames in about 33 minutes (about 1.8 seconds a frame, filmed two at a time).
       Sent as "27 Sample - the house" (about 20 MB). As your rule says, the video and music are not in the repository;
       the code, the timing file and a sheet of one frame a second are.

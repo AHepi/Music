@@ -31,6 +31,7 @@ import { contactShadow } from '../models.js';
 import { Smoke } from '../effects.js';
 import { placeTitle, hook, presence, INK } from '../graphics.js';
 import { buildHouse, Snow, FallingDust, glowSprite, FLOORS, LEFT, RIGHT, DIVIDE, STREET, FRONT } from './house-set.js';
+import { loadTexture, canvasTexture } from '../../stage/cinema-stage.js';
 
 // a name for a floor: a small amber rule and white words on a dark plate, at the left edge
 function floorLabel(ctx, t, { at, until, y, text, size = 30 }) {
@@ -82,14 +83,32 @@ function platedHook(ctx, t, { at, until, lines, y, size, colour = INK.paper }) {
 // drawn as solid keeps a drawing recipe that ignores see-through until the recipe is rebuilt. So a
 // fading piece is always drawn as see-through-capable (its recipe built once), and while it fades it
 // is drawn down to nearly see-through.
-function setFading(piece, pose) {
+function setFading(piece, pose, { soft = false } = {}) {
   piece.set(pose);
   for (const mesh of [piece.front, piece.back]) {
     mesh.material.transparent = true;
     if (!mesh.material.userData.fadeReady) { mesh.material.needsUpdate = true; mesh.material.userData.fadeReady = true; }
   }
   const fading = pose.opacity !== undefined && pose.opacity < 0.999;
-  piece.front.material.alphaTest = fading ? 0.02 : 0.5;
+  piece.front.material.alphaTest = fading || soft ? 0.02 : 0.5;
+}
+
+// The strike crowd is cut straight along its bottom and sides; feather those edges so it reads as a
+// crowd standing in the dark street, not a rectangle.
+async function featheredCrowd(kit, url, { at, width }) {
+  const source = await loadTexture(url);
+  const image = source.image, canvas = document.createElement('canvas');
+  canvas.width = image.width; canvas.height = image.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(image, 0, 0);
+  ctx.globalCompositeOperation = 'destination-in';
+  const across = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  across.addColorStop(0, 'rgba(0,0,0,0)'); across.addColorStop(0.09, 'rgba(0,0,0,1)'); across.addColorStop(0.91, 'rgba(0,0,0,1)'); across.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = across; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const down = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  down.addColorStop(0, 'rgba(0,0,0,1)'); down.addColorStop(0.72, 'rgba(0,0,0,1)'); down.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = down; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  return kit.addCutout(canvasTexture(canvas), { at, width });
 }
 
 export async function build(kit) {
@@ -198,7 +217,7 @@ export async function build(kit) {
   shadowUnder(1.05, F.cellar.bottom, -0.5, 0.8, 0.25);
 
   // ---- the street: a crowd with placards, then the miners who stay out (on the lit pavement)
-  const crowd = await kit.cutout('crowd-back', { at: [0.3, STREET, 3.6], width: 5.6 });
+  const crowd = await featheredCrowd(kit, '/paper-film/pieces/austerity-chapter-1/crowd-back.png', { at: [0.3, STREET - 0.45, 3.6], width: 6.2 });
   const streetMiners = [];
   for (const [i, [x, width, yaw]] of [[-2.6, 0.66, 0.18], [-0.6, 0.72, -0.06], [1.2, 0.68, -0.2]].entries()) {
     streetMiners.push(await kit.cutout('worker-standing', { at: [x, STREET, 3.7 + 0.1 * i], width, yaw }));
@@ -244,7 +263,7 @@ export async function build(kit) {
     school.front.material.color.copy(school.front.material.userData.baseColour).multiplyScalar(0.05 + 0.95 * schoolLevel);
     rooms.site.schoolLamp.material.opacity = 0.35 * schoolLevel;
     const struck = smooth((t - (T.walkOut + 0.2)) / 0.9);
-    rooms.factory.setLevel(dimAtEnd(on(T.home) * lerp(1, 0.25, struck), 0.06));
+    rooms.factory.setLevel(dimAtEnd(on(T.home) * lerp(1, 0.12, struck), 0.06));
     rooms.kitchen.setLevel(dimAtEnd(on(T.home), 0.15));
     const mineLevel = on(T.mine) * lerp(1, 0.8, smooth((t - T.squeeze[0]) / 1.2)) * lerp(1, 0.22, struck);   // left empty, faintly lit
     rooms.mine.setLevel(dimAtEnd(mineLevel, 0.08));
@@ -318,8 +337,10 @@ export async function build(kit) {
       const k = smooth((t - start) / length);
       return { opacity: k, dy: -0.25 * (1 - k) };
     };
-    setFading(crowd, t < T.months ? arrive(T.walkOut + 0.25, 0.6) : gone(T.months, 0.7));
-    for (const [i, m] of streetMiners.entries()) setFading(m, arrive(T.months + 0.35 + 0.15 * i, 0.45));
+    // one after another, never overlapping: the workers leave the rooms, the crowd fills the street,
+    // the crowd goes, then the locked-out miners stand in the street
+    setFading(crowd, t < T.months ? arrive(T.walkOut + 0.5, 0.6) : gone(T.months, 0.6), { soft: true });
+    for (const [i, m] of streetMiners.entries()) setFading(m, arrive(T.months + 0.65 + 0.12 * i, 0.45));
 
     // air
     for (const s of smoke) s.effect.set({ t, origin: s.origin, until: T.walkOut + 0.4, scale: 0.9, wind: 0.6 });
@@ -342,7 +363,7 @@ export async function build(kit) {
     floorLabel(ctx, t, { at: T.home + 0.2, until: T.cuts - 0.3, y: screenY(LEFT, FLOORS.ground.top - 0.4), text: 'WORK AND HOME' });
     floorLabel(ctx, t, { at: T.mine + 0.2, until: T.cuts - 0.3, y: screenY(LEFT, FLOORS.cellar.top - 0.45), text: 'THE MINE' });
     hook(ctx, t, { at: T.cuts, until: T.zoomIn[0] - 0.2, text: 'THE CUTS', y: 215, size: 88 });
-    placeTitle(ctx, t, { at: T.gold - 0.5, until: T.down[1], place: 'Britain', year: 1925, y: 180 });
+    placeTitle(ctx, t, { at: T.gold - 0.5, until: T.down[0] + 0.3, place: 'Britain', year: 1925, y: 180 });
     hook(ctx, t, { at: T.gold, until: T.down[0] + 1.0, text: 'BACK ON GOLD', y: 300, size: 80, colour: INK.amber });
     hook(ctx, t, { at: T.gold + 0.35, until: T.down[0] + 1.0, text: 'AT THE PRE-WAR PRICE', y: 375, size: 40 });
     // over the band of rock between the ground floor and the mine, where the beat happens
