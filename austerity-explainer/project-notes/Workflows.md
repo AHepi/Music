@@ -152,6 +152,19 @@ three zip files.
    a distance picture. Give the finishing tool the point to keep sharp: `--focus 790 1150` (the
    cottage). Check the fine detail at full size after finishing: the blur must not soften it.
 
+## Making near, upright things in a painting solid (3D stand-ins, test only)
+
+1. Find the near, upright things that bend on a camera move (posts, a canopy, a building front).
+2. Fit a box to each one's painted edges, in the painted room's own space
+   (`fit_station_proxies.py`); for a shape whose perspective doesn't add up, use its painted corners.
+   Check the boxes on a wireframe drawn over the painting before drawing anything.
+3. Paint those things out of the background picture and push that part of its depth back
+   (`station_plates.py`), so they aren't shown twice.
+4. Dress each box in the painting shone onto it from where it was painted (`projectedMaterial` in
+   `painted-projection.js`), with no lamp on the boxes or the background, so the painted light stays.
+5. Draw the painting's view (must match the painting) and a push (posts must stay straight), then
+   have independent helpers check both before showing anyone.
+
 ## How to edit the documentation
 
 1. Every change to the project updates `Status.md`, and the project story log gets a new numbered

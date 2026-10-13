@@ -131,7 +131,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## The plugin (2026-10-12)
 
-- `plugins/explainer-film` (version 1.1.1) with `.claude-plugin/marketplace.json` at the repository root. Nine skills,
+- `plugins/explainer-film` (version 1.1.2: the 3D models skill now covers stand-ins, log 24) with `.claude-plugin/marketplace.json` at the repository root. Nine skills,
   four workflows (verify-facts, critique-film, check-fixes, build-pages), three helper definitions,
   the setup command `explainer-film-setup`, and the film kit. Passed `claude plugin validate`; a fresh
   setup drew a picture end to end. Not tested: installation by another person or a smaller model.
@@ -146,9 +146,25 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   head left on the background, lifted rear wheels when moving, the headlight pool under the bumper,
   and the painted background tearing. Not tried in a moving shot.
 
+## 3D petrol station, first test (log 24, 2026-10-13)
+
+- Comparison sheet: `experiments/24 Test - 3D petrol station.jpg`. Plan: `experiments/23 Plan - 3D
+  petrol station with painted light.md`. Scene: `film-kit/paper-film/scenes/station-proxies-test.js`
+  (views painting, push, push-side, original, original-push), shared code `painted-projection.js` (also
+  in the plugin's kit); tools `fit_station_proxies.py`, `station_plates.py`; boxes in
+  `film-kit/assets/models/station-test/proxies.json`; cleaned background in
+  `film-kit/assets/reliefs/station-test/`.
+- Passed both pass marks: matches the painting from its own view (mean 4.08 levels, 6.4% of pixels
+  off by more than 12); on a 1.25 times push the posts and canopy stay straight and slide in front of
+  the kiosk. Checked by two independent helpers.
+- Still wrong: the smear behind the station shows on a sideways step; the bollard lies flat; the left
+  pump has no display head; small edge rims around the 3D car and pumps; a faint strip beside the rear
+  post. Not done: forecourt and road as 3D, queued cars as upright cut-outs, real lamps, a moving shot.
+  No cost.
+
 ## Waiting on you
 
-- Whether the SAM 3D direction (log 22) is worth pursuing.
+- Whether to spend about 10 US cents on repainting what's behind the station (the second test, log 24).
 
 - Your view of chapter 2 (round 20) on your phone.
 - Before publishing: whether page 10's "is raising" still holds after 28 October.

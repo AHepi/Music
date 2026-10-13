@@ -5,9 +5,10 @@
 // station-proxies-test.js.
 //   projectPainting / paintedMaterial: for 3D models (SAM 3D) that wear the painting where it showed
 //     them and their own surface elsewhere, with a touch of the lamp.
-//   projectedMaterial: for plain stand-in shapes (posts, walls, decks) that wear a picture exactly,
-//     unlit, worked out per pixel so big flat faces don't distort; faces turned away from the painting
-//     get a plain colour (its shaded side).
+//   projectedMaterial: for plain stand-in shapes (posts, walls, decks) that wear a picture, lit the
+//     same way as the painted room (with lit: 0, neither takes any lamp: the painting exactly), worked
+//     out per pixel so big flat faces don't distort; faces turned away from the painting get a plain
+//     colour (its shaded side).
 //   boxMesh: an upright box from its eight corners.
 import { THREE } from './cinema-kit.js';
 import { loadTexture } from '../stage/cinema-stage.js';
@@ -116,7 +117,8 @@ export function groundGap(model, room) {
 // A material for plain stand-in shapes: shows `picture` as projected from the painting camera, per
 // pixel (so big flat faces don't distort), and is lit exactly as the painted room is lit (the same
 // share of its own colour and of the lamp, and the same facing: towards the painting camera), so a
-// stand-in matches the painted room around it from the painting's view and catches the same shadows.
+// stand-in matches the painted room around it from the painting's view. With lit: 0 it takes no lamp
+// at all, so it shows no shadows either (the station test uses lit: 0; shadows go on shadowCatcher).
 // Faces the painting camera can't see (a post's side, seen from the painting's view) show `fallback`.
 export function projectedMaterial(picture, room, { fallback = new THREE.Color(0.1, 0.1, 0.1), lit = 0.35 } = {}) {
   const material = new THREE.MeshLambertMaterial({ color: new THREE.Color(lit / 0.45, lit / 0.45, lit / 0.45), emissive: 0xffffff, emissiveIntensity: 1 - lit });

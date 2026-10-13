@@ -464,6 +464,21 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The models wear the painting projected from where it was painted, rather than SAM's own colours.
 - The test stays a test: chapter 2's film is unchanged.
 
+29. **The station and the road as 3D, light kept** (your words): "Yeah so the petrol station itself,
+    the road its on need to also be 3d objects. The rest of the cars and everything else remains part
+    of the background. Hmm. How would you do this because lighting is important here." then "Go"
+
+### Claude's calls for item 29
+
+- Plan 23, the film backdrop approach (simple shapes that wear the painting), was chosen by two judges
+  from three designs.
+- The painting's own light is kept exactly: no stage lamp on the background or the stand-ins; shadows
+  of the car and pumps fall on a see-through ground.
+- The first test left the forecourt and road painted (they didn't bend on a straight push), although
+  the plan included the forecourt.
+- The bollard, the queued cars and a proper repaint behind the station are left for a second test.
+- The test stays a test: chapter 2's film is unchanged.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

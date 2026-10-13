@@ -302,6 +302,15 @@ Only failures in doing the work belong here. Newest at the bottom.
     ground from the forecourt around the object's base, and flatten the depth there.
 77. **A painted room tears at near, upright things.** Even a short camera move bends canopy posts and
     building edges; solid foreground objects make the tearing behind them more noticeable, not less.
+78. **A stand-in is only as good as what's behind it.** Boxes that wear the painting keep posts and a
+    canopy straight on a push, but the background they hide must be properly repainted: a quick free
+    smear is covered on a straight push and shows on any sideways step (log 24).
+79. **Keep the painted light by giving no lamp to anything that shows the painting.** When the
+    stand-ins took some lamp and the background didn't, their edges showed as a brightness jump.
+    Showing the painting exactly on both, and putting shadows on a see-through ground, matched them.
+80. **An AI painting's perspective doesn't add up.** A true rectangle fitted to the canopy missed its
+    painted edges by about 45 pixels; fit shapes to their painted corners instead. Faces seen almost
+    edge-on from the painting's view must still wear the painting, or they draw dark.
 
 ## Traps
 

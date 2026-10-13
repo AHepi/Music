@@ -152,3 +152,20 @@ Traps found in the test:
 - Far or small things are better left painted (SAM placed the far car 30-40 px off with pink trim).
 - The painted room still tears beyond a short push (canopy posts, building edges): keep moves small,
   or split such buildings into their own layers.
+
+## Or: make a painting's near, upright parts solid with stand-ins (tested once, log 24)
+
+When a push bends posts, a canopy or a building front, replace just those with simple boxes that
+wear the painting (shared code `paper-film/scenes/painted-projection.js`; worked example in the
+austerity project's film kit, `station-proxies-test.js`, `fit_station_proxies.py`, `station_plates.py`):
+1. Fit a box to each thing's painted edges in the painted room's space; if the painting's perspective
+   doesn't add up (AI paintings rarely do), fit to the painted corners instead of a true rectangle.
+   Check on a wireframe over the painting first.
+2. Paint those things out of the background and push that part of its depth back, so they aren't
+   shown twice. Repaint that part properly (an image edit model): a free smear is hidden on a straight
+   push but shows on any sideways step.
+3. Dress each box with `projectedMaterial(picture, room, { fallback, lit: 0 })` and give the painted
+   room `lit: 0` too: both show the painting exactly, with its painted light and no lamp, so their
+   edges don't jump in brightness. Put shadows of 3D models on `shadowCatcher(...)`.
+4. Check: the painting's view must match the painting; on a 1.25 times push the posts must stay
+   straight and slide in front of what's behind them.

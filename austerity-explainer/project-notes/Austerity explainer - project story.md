@@ -37,6 +37,11 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
   petrol station's red car and pumps rebuilt as 3D models that wear the painting. Close to the
   painting from its own view and solid on a short push; the painted background still tears on moves.
   Waiting for your view.
+- **A first test of the petrol station itself as 3D** ("24 Test - 3D petrol station", log 24): the
+  canopy posts, canopy, kiosk and pump island are simple 3D shapes that wear the painting, with the
+  painting's own light kept. From the painting's view it matches the painting; on a push in, the
+  posts and canopy stay straight where today's painted room bends them. A sideways step still shows a
+  rough smear behind the station, and the forecourt and road are not 3D yet.
 - **A one-page picture with origami props** ("15 One page"): a blank page at an angle on a dark desk,
   with a folded cottage, trees, crane and fence, lit by one low warm lamp. You liked the idea but not
   the beauty, so it led to the next one.
@@ -155,6 +160,11 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     measures every shot of the film against your camera rule (still unless a move is needed, at most
     three moves a shot); the second says where each object lands in the tall frame for a camera
     position, before anything is drawn. Hands problems back to the page files.
+26. **3D stand-ins in a painting** (test only; `film-kit/paper-film/tools/fit_station_proxies.py`,
+    `station_plates.py`, scene `station-proxies-test.js`, shared code `painted-projection.js`): fits
+    simple boxes to the edges of near, upright things in a painting (posts, a canopy, a kiosk), paints
+    those things out of the background picture, and dresses each box in the painting shone onto it
+    from where it was painted. Hands the boxes and the cleaned background to the cinema stage.
 
 ## Word list
 
@@ -222,6 +232,8 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | SAM 3D | A tool on fal (by Meta) that turns things in one picture into separate 3D models, one per thing, each with its own painted surface and its place in the picture. |
 | Clean plate | A copy of a painting with some things painted out, so 3D models of those things can stand in their place. |
 | Projection | Shining the painting onto a 3D model from where it was painted, like a slide projector, so the model wears the painting's own brushwork wherever the painting showed it. |
+| Stand-in | A simple 3D shape (here a box) put where something in a painting stands, dressed in the painting, so it looks the same from the painting's view and stays solid when the camera moves. |
+| Push | The camera moving straight forward into the picture. "A 1.25 times push" makes things ahead look a quarter bigger. |
 
 ## Log (added to, never rewritten)
 
@@ -634,11 +646,53 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       cost.
 
 
+24. **First test of the 3D petrol station (plan 23).** You said "Go".
+    - **What I built** (no cost): the petrol station in page 7's painting as simple 3D shapes
+      (stand-ins). The two canopy posts, the canopy, the kiosk and the pump island are boxes fitted to
+      their edges in the painting, and each wears the painting shone onto it from where it was
+      painted. The red car and the three pumps are the 3D models from log 22. The station was painted
+      out of the background picture, so it isn't shown twice.
+    - **Light:** the painting's own light is kept exactly; no stage lamp shines on the background or the
+      stand-ins. The car and pumps take a small share of the lamp, mainly to shape their hidden sides,
+      and their shadows fall on a see-through ground that shows only shadows.
+    - **Went wrong on the way, and fixed:** the canopy wouldn't fit as a true rectangle, because the
+      painting's perspective isn't consistent (AI paintings rarely are), so it is fitted to its four
+      painted corners instead. Ghosts of a post and the kiosk showed in the background until the
+      painted-out areas were made wider. The stand-ins came out brighter than the background until
+      both were set to show the painting with no lamp. A grey block stood in front of the kiosk until
+      the painted-out part of the background was pushed further back. The canopy's underside drew
+      dark until surfaces seen almost edge-on were allowed to wear the painting.
+    - **Result** ("24 Test - 3D petrol station"): from the painting's own view it matches the
+      painting closely: on average about 4 levels out of 255 off, and 6.4% of the picture off by more
+      than 12. The posts, canopy and kiosk match best; the pump island least, because of edges around
+      the 3D pumps. On a push in, where the film's painted room today bends the posts and makes the
+      canopy edge wavy, the 3D posts and canopy stay straight and the posts slide in front of the
+      kiosk. Both of the test's pass marks are met.
+    - **Checked by two independent helpers.** Both agree the push passes and the sheet is honest. They
+      also found: the bollard (the U-shaped rail at the island's end) lies flat and reads as a bench on
+      the push; when the camera also steps sideways, the rough smear left where the station was
+      painted out shows behind the rear post (a blue, see-through-looking patch with a faint ghost of
+      a post in it); the left pump has no display head (from log 22); the 3D car's outline differs a
+      little from the painted one; there is a faint strip beside the rear post under the canopy. I
+      corrected one caption (it now says the car and pumps are 3D too) and four notes in the code
+      that claimed more than the code does, and checked the tidied code draws the same picture.
+    - **Not done:** the forecourt and road are still the painted background, not 3D (the plan put the
+      forecourt in this test; it didn't bend on this push, so I left it); the queued cars are not yet
+      upright cut-outs; no real lamps yet; the shapes' edges were checked against the painting by
+      eye, not measured to the plan's 3 pixels; only still pictures, no moving shot.
+    - **What it means:** the idea fixes what was breaking: the near, upright parts of the station now
+      stay solid on a push. The limit now is what's behind them: the painted-out background is a
+      rough smear, and any sideways move shows it. Cost: none.
+    - Saved: the code, boxes and cleaned background in the film kit; the method in the plugin's 3D
+      models instructions (plugin version 1.1.2).
+
+
 ## Next step
 
-Say go and I'll run the plan's first test (no cost): the forecourt, island, two posts and kiosk front
-as 3D shapes wearing the painting, checked against the painting and drawn from the painting's view
-and after a short push.
+A second test: repaint what's behind the station properly with Flux 3 (about 10 US cents, within the
+picture allowance; needs your yes), make the forecourt and road 3D with the queued cars and the bollard
+as upright cut-outs, then film a few seconds of a push with a small sideways step, so you can judge
+it moving.
 
 ## Traps
 

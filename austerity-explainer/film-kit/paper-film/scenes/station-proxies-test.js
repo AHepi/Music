@@ -2,10 +2,12 @@
 // station becomes simple 3D stand-ins that wear the painting: the two canopy posts, the kiosk, the
 // canopy deck and the pump island are boxes fitted to their painted edges (fit_station_proxies.py),
 // each showing the painting shone onto it from where it was painted, and lit exactly as the painted
-// room is lit, so the painted light stays as painted. The red car and the three pumps are the SAM 3D models of log 22. Everything else
-// (the forecourt, the road, the queued cars, hedges, houses, sky) stays the painted room with depth,
-// but with the station painted out of it and flattened back (station_plates.py), so nothing near and
-// upright is left in it to tear.
+// room is lit, so the painted light stays as painted. The red car and the three pumps are the SAM 3D
+// models of log 22. Everything else (the forecourt, the road, the queued cars, hedges, houses, sky)
+// stays the painted room with depth, but with the station painted out of it and flattened back
+// (station_plates.py), so nothing near and upright is left in it to tear. The painted-out part is a
+// rough smear: hidden from the painting's view and on a straight push, but a sideways step shows some
+// of it behind the rear post (log 24).
 //
 // Which picture each part wears:
 //   posts                       the original painting
@@ -14,8 +16,9 @@
 //                               of the post or pump
 //   painted room behind         plate Q: plate P with the kiosk and canopy painted out too
 // Light: the painted room and the stand-ins show the painting exactly, with its painted light (no stage
-// lamp on them). The car and pumps take a touch of the lamp on their hidden sides, and their shadows
-// fall on a see-through ground that shows only shadows.
+// lamp on them). The car and pumps keep mostly the painting's own light with a small share of the lamp
+// on all their sides (it mainly shapes the sides the painting never showed), and their shadows fall on
+// a see-through ground that shows only shadows (it sits on the forecourt, so not on the island top).
 //
 // Views (?view=): painting (from where it was painted: must match the painting), push (a 1.25x push
 // toward the pump island: the posts must stay straight and slide in front of the kiosk), push-side
@@ -43,7 +46,7 @@ const testPage = {
     const room = await kit.relief(original ? '409-bg-petrol-station-1973' : '409-station-backdrop', { near: 6, far: 70, fov: 40, margin: 0.22, lit: 0 });
     kit.reliefFolder = chapterReliefs;
     const proxies = await (await fetch('/assets/models/station-test/proxies.json')).json();
-    // the camera aims at the pump island's middle in every view (so the comparison views match)
+    // the pushes move toward the pump island's middle; every view looks straight ahead, the painting's way
     const island = proxies.boxes.island.reduce((sum, p) => sum.add(new THREE.Vector3(...p)), new THREE.Vector3()).multiplyScalar(1 / 8);
     if (!original) {
       const painting = await loadTexture(PAINTING), plateP = await loadTexture(`${PLATES}/409-station-plate-p.jpg`);
@@ -66,13 +69,12 @@ const testPage = {
       kit.scene.add(shadowCatcher(proxies.ground, { at: island.clone(), darkness: 0.5 }));
     }
     const target = island;
-    const lookAt = target.clone().add(new THREE.Vector3(0, 1.4, 0));
     const toward = (share, sideways = 0) => new THREE.Vector3(0, 0, 0).lerp(target, share).add(new THREE.Vector3(sideways, 0.0, 0));
     const cameras = {
       painting: { position: new THREE.Vector3(0, 0, 0), target: new THREE.Vector3(0, 0, -30) },
       original: { position: new THREE.Vector3(0, 0, 0), target: new THREE.Vector3(0, 0, -30) },
       // a 1.25x push: the distance to the island shrinks to 80%, still looking the painting's way
-      push: { position: toward(0.2), target: new THREE.Vector3(0, 0, -30).lerp(lookAt, 0.0).add(toward(0.2)) },
+      push: { position: toward(0.2), target: new THREE.Vector3(0, 0, -30).add(toward(0.2)) },
       'push-side': { position: toward(0.2, -0.6), target: new THREE.Vector3(0, 0, -30).add(toward(0.2, -0.6)) },
     };
     // the same push on the plain painted room, as the film has it today (for comparison)
