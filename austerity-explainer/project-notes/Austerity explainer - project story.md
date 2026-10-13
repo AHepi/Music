@@ -620,12 +620,25 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     - Not checked: a moving shot (only single pictures). Cost: about 12 US cents on fal.
 
 
+23. **How to make the station and road 3D, with the light kept.** You said "the petrol station
+    itself, the road its on need to also be 3d objects. The rest of the cars and everything else
+    remains part of the background. Hmm. How would you do this because lighting is important here."
+    - Three helpers each designed one way: a film backdrop approach (simple shapes that wear the
+      painting, real lights only where paint can't be right), a full Blender rebuild lit to match the
+      painting, and splitting the painting's light into separate layers with AI edits. Two judges, one
+      for look and light and one for what this machine can build, both chose the backdrop approach
+      (8.5 and 8 out of 10, against 6 to 6.5), with the best ideas of the others grafted on (wet-ground
+      glints, a contact shadow under the car, headlight pools from the original painting, a wireframe
+      check before any drawing).
+    - The plan: "23 Plan - 3D petrol station with painted light" (in `experiments/`). Not built yet. No
+      cost.
+
+
 ## Next step
 
-Look at "22 Snapshot - SAM 3D petrol station" and say whether this direction is worth pursuing. If
-it is, the next test would give the canopy and kiosk their own layers so the camera can move further.
-Before publishing chapter 2: check page 10's "is raising" after the 28 October rate decision, and the
-price figures due on 22 October.
+Say go and I'll run the plan's first test (no cost): the forecourt, island, two posts and kiosk front
+as 3D shapes wearing the painting, checked against the painting and drawn from the painting's view
+and after a short push.
 
 ## Traps
 
