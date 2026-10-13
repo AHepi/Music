@@ -18,13 +18,35 @@ const loader = new GLTFLoader();
 const cache = new Map();
 
 // Load a .glb and return a fresh copy of it, ready to add to a page's scene.
-export async function loadModel(url, { reflections = 0.3, shadows = true } = {}) {
+// matte: true swaps the realistic (Standard) materials for matte (Lambert) ones with the same
+// pictures, bumps, baked shading and glow: about half the drawing time in the software renderer
+// (chapter 2, page 3: the detailed works and town took 4 times as long as other pages to film),
+// at the cost of the soft reflections on metal and glass. Use it for big or distant models.
+// matteFill: matte materials get no soft light from the surroundings (the realistic ones do, and it
+// lifts their shadowed sides), so each surface also glows faintly with its own colour by this
+// much, standing in for that light.
+export async function loadModel(url, { reflections = 0.3, shadows = true, matte = false, matteFill = 0.3 } = {}) {
   if (!cache.has(url)) cache.set(url, loader.loadAsync(url));
   const gltf = await cache.get(url);
   const root = gltf.scene.clone(true);
   root.traverse((o) => {
     if (!o.isMesh) return;
     o.material = o.material.clone();
+    if (matte && o.material.isMeshStandardMaterial) {
+      const m = o.material;
+      const lambert = new THREE.MeshLambertMaterial({
+        map: m.map, color: m.color, emissive: m.emissive, emissiveMap: m.emissiveMap, emissiveIntensity: m.emissiveIntensity,
+        aoMap: m.aoMap, aoMapIntensity: m.aoMapIntensity, normalMap: m.normalMap, normalScale: m.normalScale,
+        transparent: m.transparent, opacity: m.opacity, side: m.side, alphaTest: m.alphaTest, vertexColors: m.vertexColors,
+      });
+      lambert.name = m.name;
+      if (!/-glow$/.test(m.name) && matteFill > 0) {
+        lambert.emissiveMap = m.map;
+        lambert.emissive = m.color.clone().multiplyScalar(matteFill);
+        lambert.emissiveIntensity = 1;
+      }
+      o.material = lambert;
+    }
     const glowing = /-glow$/.test(o.material.name);
     o.castShadow = shadows && !glowing;
     o.receiveShadow = shadows;

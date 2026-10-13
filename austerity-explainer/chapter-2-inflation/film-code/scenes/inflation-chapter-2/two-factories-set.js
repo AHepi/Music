@@ -22,6 +22,11 @@ import { loadModel, modelFactory, markerAt } from '../model-loader.js';
 export const FACTORY_A = new THREE.Vector3(-1.4, 0, 2.2);
 export const FACTORY_B = new THREE.Vector3(1.6, 0, -4.2);
 const MODELS = '/assets/models/inflation-chapter-2';
+// matte materials for the models (half the drawing time; see model-loader.js). A test can force
+// either with the stage address (?matte=1 or ?matte=0).
+const MATTE_QUERY = new URLSearchParams(location.search).get('matte');
+const MATTE = MATTE_QUERY === null ? false : MATTE_QUERY === '1';
+const MATTE_FILL = Number(new URLSearchParams(location.search).get('fill') ?? 0.3);
 
 export async function buildTwoFactories(kit, { shellsA = 6, shellsB = 8 } = {}) {
   kit.lightRig({ keyColour: 0xffc98a, keyShare: 0.8, keyFrom: [-12, 6.5, 7], keyTarget: [0, 0, -1], fillSky: 0x6f8796, fillGround: 0x241e18,
@@ -40,7 +45,7 @@ export async function buildTwoFactories(kit, { shellsA = 6, shellsB = 8 } = {}) 
   kit.scene.add(haze);
 
   // the town (ground, streets, terraces, far works, gasholder, viaduct, lamps, near wall and crates)
-  const town = await loadModel(`${MODELS}/town.glb`);
+  const town = await loadModel(`${MODELS}/town.glb`, { matte: MATTE, matteFill: MATTE_FILL });
   kit.scene.add(town);
   const farSmoke = [];
   for (let k = 0; k < 6; k++) {
@@ -49,7 +54,7 @@ export async function buildTwoFactories(kit, { shellsA = 6, shellsB = 8 } = {}) 
   }
 
   const make = async (file, at, seed) => {
-    const factory = await modelFactory(`${MODELS}/${file}`);
+    const factory = await modelFactory(`${MODELS}/${file}`, { matte: MATTE, matteFill: MATTE_FILL });
     factory.group.position.copy(at);
     kit.scene.add(factory.group);
     const smoke = new Smoke(kit.scene, { count: 12, life: 3.4, seed });
@@ -124,7 +129,7 @@ export async function buildTwoFactories(kit, { shellsA = 6, shellsB = 8 } = {}) 
   const hideHeavySmokeB = () => heavySmoke.hide();
   const motes = new Motes(kit.scene, { count: 200, min: [-5, 0.2, -8], max: [5, 4, 5], size: 0.025, seed: 11, opacity: 0.55 });
   // loose things for the near foreground (blender/build_props.py): 'barrels', 'crates', 'lamp-post', 'cart'
-  const props = await loadModel(`${MODELS}/props.glb`);
+  const props = await loadModel(`${MODELS}/props.glb`, { matte: MATTE, matteFill: MATTE_FILL });
   const prop = (name, at, turn = 0) => {
     const copy = props.getObjectByName(name).clone(true);
     copy.position.set(...at); copy.rotation.y = turn;
