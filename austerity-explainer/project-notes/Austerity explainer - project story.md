@@ -28,9 +28,11 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 - **Chapter 1 is finished in the paper look**: "13 Chapter 1 - where austerity came from - paper
   pop-up.mp4" (3 minutes 41 seconds), with captions ("13 Captions") and a cover picture ("13 Cover").
   All ten pages pop up, crash in and turn like a book on Malina's words; no hands.
-- **A kit for new series is ready**: three zip files ("14 Paper pop-up film kit", parts 1 to 3) with every
-  painting, the tools, this chapter as a worked example and step-by-step instructions, for the agent
-  starting a series on the enclosures.
+- **The film kit is in your repository** at `austerity-explainer/film-kit/`, complete for both
+  chapters: every painting, the paper pieces, painted rooms, Blender models, the stage, page files,
+  tools, chapter 1's recordings, and both chapters as worked examples, with step-by-step instructions
+  for the agent starting a series on the enclosures. Only your soundtrack is left out, because the
+  repository is public. (Its first version was three zip files, "14 Paper pop-up film kit".)
 - **A one-page picture with origami props** ("15 One page"): a blank page at an angle on a dark desk,
   with a folded cottage, trees, crane and fence, lit by one low warm lamp. You liked the idea but not
   the beauty, so it led to the next one.
@@ -53,7 +55,9 @@ in 1914, 8.3 million in 1920). ElevenLabs recorded the page and reported that sh
 gets 56.48 seconds, and folds the second, bigger crowd up from flat 0.1 seconds before it, so the
 crowd doubles as she says it. Your soundtrack plays underneath, dipping while she talks.
 
-**The pieces, in order:**
+**The pieces, in order:** (these are chapter 1's original working-folder names; in the repository the
+same tools and files are in `austerity-explainer/film-kit/`, under `narration-tools/`, `paper-film/`
+and `examples/austerity-chapter-1/`)
 
 1. **Research ledger** (`research/02 ...`): every fact, its source, how sure we are. Hands facts
    to the script.
@@ -548,12 +552,42 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     - Not checked: the film at full speed and on a phone; whether Blender's MCP would add more with a
       screen (its screenshot tools need one). Cost this round: about 10 US cents on fal; nothing else.
 
+21. **Everything pushed to your repository.** You said "That's fantastic. Not perfect, but good enough.
+    Can you push all assets and scripts to repo."
+    - **What went in:** the whole film kit as one folder, `austerity-explainer/film-kit/`, laid out
+      exactly like the working kit so it works straight from a copy: chapter 1's 53 paintings and 43
+      masks, chapter 2's paintings, both chapters' paper pieces already made, the painted rooms, the
+      five Blender models and their build scripts, the stage, all page files, every tool, chapter 1's
+      page recordings and transcripts, and both chapters as worked examples. Also chapter 2's raw
+      depth pictures from fal, contact sheets, the painting prompts, and the mix and narration as
+      lossless sound files. Git keeps one copy of any file that was already there, so it added about
+      115 MB.
+    - **Checked:** a helper made a fresh copy of the repository and drew six moments from it (two of
+      chapter 1, four of chapter 2, including the Blender factories and desk); all six were identical
+      to the working kit's, pixel for pixel, with no missing files. The sound check read the new
+      lossless mix and found the sound lined up to 0.00 ms on every page. Two more helpers checked
+      the notes for wrong paths (16 found, all fixed: most still said the kit was in zip files) and
+      looked for anything still missing (nothing that matters).
+    - **A fault found and fixed in the plugin:** its test pictures always showed chapter 2's pages,
+      whatever chapter was named, because the chapter setting never reached the page. Fixed in every
+      copy and tested (a named chapter now loads that chapter's pages); plugin version 1.1.1.
+    - **Left out on purpose:** your soundtrack (the repository is public, so the track would be
+      downloadable on its own); the full-quality films (about 800 MB each, over GitHub's 100 MB limit);
+      the review screenshots (1.3 GB) and old video pieces, which are checking by-products.
+    - **Held back for your decision:** chapter 2's working files from this session (session scripts,
+      fix briefs, speed tests, round-20 working pictures, drafts, helper results, the painting
+      service's job numbers). Claude Code's safety check blocked saving them twice, the second time as
+      possible leaking of a password or key. A search found none (only job numbers and this session's
+      folder paths), but I stopped rather than force them through. They are kept aside on the working
+      machine, which is cleared when this session ends.
+    - Not checked: installing the plugin from the repository on another computer. No cost.
+
 ## Next step
 
-Watch "20 Chapter 2 - what really causes inflation" on your phone and tell me what to change. Two
-things to decide before you publish: whether page 10's "the Reserve Bank is raising its interest rate
-again" still holds (its next decision is 28 October), and whether to publish before New Zealand's new
-price figures come out on 22 October.
+Tell me whether to add chapter 2's held-back working files to the repository (they are only on this
+session's machine and will be gone when it ends). Before publishing chapter 2: check page 10's
+"the Reserve Bank is raising its interest rate again" after the 28 October decision, and the price
+figures due on 22 October.
 
 ## Traps
 
@@ -568,12 +602,15 @@ price figures come out on 22 October.
 - The film's first frame is page 1's empty parliament, before the politician folds up. Where an app
   lets you pick a cover, use "13 Cover".
 - The sent film is squeezed to fit under 30 MB. For uploading to a video site, the full-quality master
-  (`paper-film/out/chapter-1-paper-master.mp4`, 290 MB) looks sharper; ask and I'll find a way to get it to you.
+  (`paper-film/out/chapter-1-paper-master.mp4`, 290 MB) looks sharper, but it was on an earlier
+  session's machine and is not in the repository; it can be filmed again from the film kit.
 - Chapter 2's newest figures go out of date soon: prices (4.1%, year to June 2026) on 22 October,
   the Reserve Bank's rate decision on 28 October, unemployment (5.6%) on 4 November. Page 7 says
   "the latest figures" and page 10 says "this year ... is raising"; recheck before publishing late.
-- Chapter 2's full-quality master (808 MB, round 20) lives only in this session's working folder, which is
-  cleared when the session ends. It can be made again from the repository (film code, pictures,
-  mix) in about 6 hours of filming. The 27.6 MB copy and captions are kept in the repository.
+- Chapter 2's full-quality master (808 MB, round 20) is not in the repository (GitHub refuses files over
+  100 MB). It can be made again from `austerity-explainer/film-kit/` with the mix and timeline in
+  `chapter-2-inflation/`, in about 6 hours of filming. The 27.6 MB copy and captions are kept.
+- The repository is public: never add the soundtrack, recordings of anyone but Malina, or anything
+  with a password or key in it.
 - A cloud machine can restart and silently end long jobs: watch for a job stopping, not only for it
   finishing (lesson 56).

@@ -2,7 +2,10 @@
 
 What this file is: the written guide the eight page helpers followed (log 19). Paths are those of
 the working copy of the film kit (`/home/user/work/paper-pop-up-film-kit`); the same files are kept
-in this folder under `film-code/` and `pictures/`.
+in this folder under `film-code/` and `pictures/`. In the repository the whole kit is
+`austerity-explainer/film-kit/`, and the paths below are inside it. The reference files it names are
+`narration/page-words.txt` and `pictures/reliefs/contact-sheet-reliefs.jpg` and
+`pictures/pieces/contact-sheet-pieces.jpg` in this folder.
 
 You are building ONE page file of a 4.5-minute vertical film (1080 x 1920, 30 frames a second) for a
 general audience. The narrator, Malina, is already recorded. Every page is a 3D scene drawn by

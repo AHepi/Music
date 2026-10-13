@@ -1,32 +1,31 @@
 # Start here
 
 **What this is:** everything needed to make more films in the paper pop-up look of "Where austerity
-came from" (chapter 1 of the austerity explainer): the tools, step-by-step instructions, the whole
-chapter as a worked example with every painting, and your soundtrack "Tension and Gravity".
-Made on 12 October 2026.
+came from" (chapter 1 of the austerity explainer) and the cinema look of "What really causes
+inflation" (chapter 2): the tools, step-by-step instructions, and both chapters as worked examples
+with every painting, paper piece and model. First made on 12 October 2026 as three zip files; since
+13 October 2026 it lives in the repository as this folder, `austerity-explainer/film-kit/`.
 
 ## For you, in plain words
 
-- **Three zip files, one folder.** A single file can't be bigger than 30 MB in a Claude chat, so the
-  kit is split in three. Unzip all three into the same place: together they make one folder called
-  `paper-pop-up-film-kit`.
-  - part 1: the tools, the instructions, the example chapter's words, recordings and timings, the
-    cut-out masks, and the soundtrack;
-  - part 2: the background paintings;
-  - part 3: the paintings of figures and objects.
+- **One folder, nothing to unzip.** This folder is the kit. (The first version was sent as three zip
+  files called "14 Paper pop-up film kit", because a single file can't be bigger than 30 MB in a
+  Claude chat.)
 - **What to tell the other agent:** "Read `00 START HERE.md` in the kit first, then follow
   `01 How to make a film with this kit.md`."
-- **What it can make with this:** a new series (for example on the enclosures) in the same look:
+- **What it can make with this:** a new series (for example on the enclosures) in either look:
   narration in Malina's voice, new paintings, pieces that pop up, crash in and turn like a book on
-  the narrator's words, with no hands.
-- **What is not inside:** the austerity project's research, script history and decisions (they
-  belong to that project); the full-length sound files of chapter 1 (the kit can rebuild them from
-  the page recordings that are inside); and the original PNG files of the paintings. The kit has
-  high-quality JPEG copies instead, which look the same and are a quarter of the size.
+  the narrator's words, or 3D scenes with models, lamp light and a still camera.
+- **What is not inside:** your soundtrack "Tension and Gravity" (the repository is public, so the
+  track is kept out; copy it into `assets/soundtrack/` before mixing); the austerity project's
+  research, script history and decisions (they are elsewhere in the repository); the full-length
+  sound files of chapter 1 (the kit can rebuild them from the page recordings that are inside); and
+  the original PNG files of chapter 1's paintings, which are high-quality JPEG copies here (they look
+  the same and are a quarter of the size). Chapter 2's paintings are the original PNG files.
 
 ## For the agent: first steps
 
-1. Unzip all three parts into one folder. Work from inside `paper-pop-up-film-kit/`.
+1. Work from inside this folder (`austerity-explainer/film-kit/` in the repository).
 2. Install what the tools need (details in `01`, section "What you need"):
    ```
    cd paper-film && npm install && cd ..
@@ -34,7 +33,8 @@ Made on 12 October 2026.
    ```
    You also need `ffmpeg`, a Chromium browser (Playwright's, or set `PAPER_FILM_BROWSER`), and a bold
    font for printed labels (DejaVu Sans Bold, or set `PAPER_FILM_LABEL_FONT`).
-3. Make the example's paper pieces from its paintings (about 2 minutes):
+3. The paper pieces of both chapters are already made and kept in `paper-film/pieces/`. To rebuild
+   chapter 1's from its paintings (about 2 minutes):
    ```
    python3 -I paper-film/tools/prepare_paper_pieces.py examples/austerity-chapter-1/cut-list.json .
    ```
@@ -62,11 +62,23 @@ Made on 12 October 2026.
 | `examples/austerity-chapter-1/` | The example's narration script, recordings, transcripts, word times, timeline, mouth tracks, cut list, plan, captions, cover and stills. |
 | `examples/new-chapter-template/` | Empty narration script and cut list to copy. |
 | `assets/paintings/austerity-chapter-1/` | 53 paintings, 43 cut-out masks, and `paintings.json` with the exact prompt of each. |
-| `assets/soundtrack/` | "Tension and Gravity" (the user's own track). |
+| `assets/soundtrack/` | Where the user's soundtrack "Tension and Gravity" goes; not stored, because the repository is public. |
+| `paper-film/pieces/` | The paper pieces of both chapters, already made (`austerity-chapter-1/`, `inflation-chapter-2/`). |
+| `paper-film/stage/cinema-stage.*` | The cinema stage used by chapter 2: 3D scenes with lens blur, glow and a film finish. |
+| `paper-film/scenes/cinema-*.js`, `graphics.js`, `effects.js`, `models.js`, `model-loader.js` | The cinema kit: still shots, painted rooms with depth, card models, Blender models, titles, labels and charts. |
+| `paper-film/scenes/inflation-chapter-2.js` and `inflation-chapter-2/` | Chapter 2's ten page files and the shared two-factories set. |
+| `paper-film/blender/` | Scripts that build chapter 2's models in Blender (works, town, props, desk), and the Blender MCP client. |
+| `examples/inflation-chapter-2/` | Chapter 2's word times and timeline. |
+| `assets/paintings/inflation-chapter-2/` | Chapter 2's 11 first paintings (PNG), masks and `paintings.json`; the round-20 repaint of the bank street (406b) is kept as a painted room in `assets/reliefs/`. |
+| `assets/reliefs/inflation-chapter-2/` | Painted rooms with depth (each painting with its distance picture). |
+| `assets/models/inflation-chapter-2/` | The Blender models (.glb): two works, the town, the props, the reviewer's desk. |
 
 ## Traps
 
-- Unzip all three parts into the same folder, or the example's paintings will be missing.
+- Anyone given the old zip files must unzip all three parts into the same folder, or the example's
+  paintings will be missing.
 - The folder `paper-film` must keep that name: the stage loads its libraries from `/paper-film/`.
-- Run the commands from inside `paper-pop-up-film-kit/`; paths in the cut lists and scenes start there.
-- The soundtrack belongs to the user; use it for the user's own films only.
+- Run the commands from inside this folder (called `paper-pop-up-film-kit/` in the old zips); paths in
+  the cut lists and scenes start there.
+- The soundtrack belongs to the user; use it for the user's own films only, and never add it to the
+  public repository.

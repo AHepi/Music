@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-13, morning.**
+**As of 2026-10-13, late morning.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -13,7 +13,13 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Chapter 1 narration in Malina's steadier voice, all ten pages, with the time of every word
   (`narration/chapter-1-timeline-steady-accent.json`), mixed over "Tension and Gravity" with the music a
   little louder (`mix/chapter-1-mix-steady-accent.wav`).
-- **Chapter 1 in the paper look, finished:**
+- **Chapter 1 in the paper look, finished.** The paths below are chapter 1's original working folder
+  (an earlier session's machine). In the repository: paintings and masks in
+  `film-kit/assets/paintings/austerity-chapter-1/`, pieces in `film-kit/paper-film/pieces/austerity-chapter-1/`,
+  cut list, recordings, word times and timeline in `film-kit/examples/austerity-chapter-1/`, pages in
+  `film-kit/paper-film/scenes/austerity-chapter-1/`, filming script `film-kit/paper-film/tools/film-chapter.sh`.
+  Chapter 1's film files, its mix as a .wav, and the one-page pictures (logs 15 and 16) and their
+  scripts are not in the repository.
   - Paintings: `downloads/fal/chapter-1-paper/` (47 pictures and their masks; ledger `00-requests.json`)
     plus page 3's in `downloads/fal/page3-paper-test/`.
   - Paper pieces: `paper-film/pieces/chapter-1/` (10 backgrounds, 55 pieces), made from the cut list
@@ -26,7 +32,17 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   - Sent: `deliver/13 Chapter 1 - where austerity came from - paper pop-up.mp4` (28.2 MB),
     `13 Captions - chapter 1.srt` / `.vtt`, `13 Cover - chapter 1 - the capital order.jpg`.
 
-- **A reusable kit for new series** (log 14): `kit/paper-pop-up-film-kit/`, sent as three zip files
+- **The film kit is in the repository** (2026-10-13): `austerity-explainer/film-kit/`, complete for both
+  chapters: every painting (chapter 1 as JPEG copies, chapter 2 as PNG), the paper pieces already
+  made, painted rooms with depth, the Blender models and their build scripts, the stage and page
+  files, all tools, chapter 1's page recordings, and both chapters as worked examples. Rebuilt from a
+  clean copy, six test pictures (two of chapter 1, four of chapter 2) matched the originals exactly.
+  Left out on purpose: the soundtrack (the repository is public). Chapter 2's raw depth pictures from
+  fal are in `chapter-2-inflation/pictures/depth-from-fal/`; its mix and narration as lossless .flac in
+  `mix/` and `narration/` (the mix matches the original sample for sample; the narration is 24-bit,
+  within -138 dB of the 32-bit original).
+- **A reusable kit for new series** (log 14, first version): `kit/paper-pop-up-film-kit/` on that
+  session's machine, sent as three zip files
   (`deliver/14 Paper pop-up film kit - part 1 of 3 ...`, `part 2 of 3 ...`, `part 3 of 3 ...`; 20.8, 17.5
   and 24.8 MB). Tools made general for any series, with austerity chapter 1 as the worked example, a
   new-chapter template, and instructions for another agent (start page `00 START HERE.md`).
@@ -88,8 +104,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   every page's stills checked before filming; independent critique (7 critics and a skeptic), fixes,
   and an independent check of the fixes; page turns checked in one run; the finished film looked at
   every 3 seconds. Not checked: the voice by ear, full-speed playback, a phone screen.
-- The full-quality master (902 MB) is only in this session's working folder (too big for the
-  repository); it can be filmed again from the repository files.
+- The round-19 full-quality master (902 MB) is not kept (too big for the repository).
 
 ## Chapter 2, round 20 (finished 2026-10-13)
 
@@ -107,12 +122,14 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   seven page helpers, an independent reviewer, fixing helpers, a fresh reviewer, a last fix check;
   the finished film looked at every 3 seconds; the only black moments are planned dips between shots.
   Not checked: full-speed playback, a phone screen.
-- The full-quality master (808 MB) is only in this session's working folder; it can be filmed again
-  from the repository files (about 6 hours; the filming tool keeps every 60 frames, so stops lose little).
+- The full-quality master (808 MB) is not kept in the repository (too big for GitHub); it can be filmed
+  again from `austerity-explainer/film-kit/` (stage, pages, pieces, models, tools) with the mix and
+  timeline in `chapter-2-inflation/` (about 6 hours; the filming tool keeps every 60 frames, so stops
+  lose little).
 
 ## The plugin (2026-10-12)
 
-- `plugins/explainer-film` with `.claude-plugin/marketplace.json` at the repository root. Seven skills,
+- `plugins/explainer-film` (version 1.1.1) with `.claude-plugin/marketplace.json` at the repository root. Seven skills,
   four workflows (verify-facts, critique-film, check-fixes, build-pages), three helper definitions,
   the setup command `explainer-film-setup`, and the film kit. Passed `claude plugin validate`; a fresh
   setup drew a picture end to end. Not tested: installation by another person or a smaller model.
@@ -123,6 +140,9 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Before publishing: whether page 10's "is raising" still holds after 28 October.
 - Nothing for chapter 1 (you said "This is fantastic."). The kit is ready to hand to the agent making
   the series on the enclosures.
+- Whether to add the held-back working files of chapter 2 (session scripts, fix briefs, speed tests,
+  round-20 working pictures, drafts, the painting service's job numbers): the safety check blocked
+  saving them twice; they are kept aside on the working machine only.
 
 ## Not started
 

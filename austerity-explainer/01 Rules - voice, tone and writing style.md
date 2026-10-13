@@ -61,7 +61,7 @@ was about stopping something"); and Mattei's interpretation is said as hers ("sh
 **After recording**
 - Download every recording straight away: ElevenLabs links stop working after 2 hours.
 - Ask ElevenLabs for the transcript of each recording (free); it gives the time of every word.
-- `tools/extract_word_times.py` refuses a transcript that doesn't match the script, and moves each
+- `tools/extract_word_times.py` (in the repository: `film-kit/narration-tools/extract_word_times.py`) refuses a transcript that doesn't match the script, and moves each
   page's first word back to where the voice really starts (ElevenLabs can place it up to 0.3 s late
   after a long accent instruction).
 - Always listen to a take before building on it: an accent instruction is followed, not guaranteed.
@@ -108,7 +108,8 @@ was about stopping something"); and Mattei's interpretation is said as hers ("sh
 
 ## 3. Writing style (from your Steven Pinker Teaching and Writing Toolkit)
 
-Your toolkit is included unchanged in `pinker-toolkit/` (three parts: write for readers, teach for
+Your toolkit was included unchanged in `pinker-toolkit/` in the chapter 1 zip (not in this
+repository; three parts: write for readers, teach for
 understanding, and a clarity workflow). This is how it was applied to the narration.
 
 - **Open with something the viewer already knows**, then turn it ("You've heard the speech ... But

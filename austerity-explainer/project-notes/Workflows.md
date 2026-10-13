@@ -39,9 +39,15 @@ Re-recording one page changes every time after it: redo steps 2 to 7 for the who
 
 ## How a chapter is made in the paper pop-up look (the approved look)
 
+The paths in this section are chapter 1's original working folder. In the repository the same tools
+and files are in `austerity-explainer/film-kit/` under the kit's names: `narration-tools/*.py` and
+`*.sh`, `examples/austerity-chapter-1/cut-list.json`, `paper-film/pieces/austerity-chapter-1/`,
+`paper-film/scenes/austerity-chapter-1/page-N.js` and `austerity-chapter-1.js`,
+`paper-film/tools/film-chapter.sh`. The one-page picture scenes and scripts are not in the repository.
+
 1. **Plan the pages** from the narration: which word brings in which piece, and how (folds up, slides
    in, drops in, crashes down, folds away). Words on screen: few, plain, only to help memory.
-   Chapter 1's plan: `plans/12 Plan - chapter 1 in paper pop-up.md`.
+   Chapter 1's plan: `scripts-and-plans/12 Plan - chapter 1 in paper pop-up.md`.
 2. **Paint the pictures** with fal (Flux 3): one background per page (tall, nothing standing in it),
    and each figure or object on its own on plain grey, with the same style words every time. Big
    pictures cost about 10 US cents, small objects about 2.5 cents. Record each request in the
@@ -75,7 +81,8 @@ Re-recording one page changes every time after it: redo steps 2 to 7 for the who
 ## How a chapter is made in the cinema look (chapter 2)
 
 The cinema look keeps the paper pop-up book's page peel but makes every page a real 3D scene. The
-code lives in `chapter-2-inflation/film-code/` (it sits on top of the film kit).
+code lives in `chapter-2-inflation/film-code/` (a copy of chapter 2's part of the film kit); the kit
+itself is `austerity-explainer/film-kit/`, and every command below runs from inside that folder.
 
 1. Research ledger, outlines, script, recording, word times, timeline and mix: as in the paper look.
    Before recording, fact checkers read the script against the ledger; after the pages are built,
@@ -118,10 +125,13 @@ code lives in `chapter-2-inflation/film-code/` (it sits on top of the film kit).
 
 ## The reusable kit
 
-`kit/paper-pop-up-film-kit/` is a general copy of the paper film tools for other series (made for a
-series on the enclosures), with this chapter as its worked example. It is a separate copy: changes
-here do not change it. To refresh it after a fix here, copy the fixed file across, adjust paths, run
-the kit's smoke test (`00 START HERE.md`, step 4) and pack the zips again.
+The film kit is in the repository at `austerity-explainer/film-kit/`, complete for both chapters
+(paintings, paper pieces, painted rooms, Blender models, stage, pages, tools, examples). Run its
+commands from inside that folder, and copy the soundtrack into `assets/soundtrack/` before mixing (it
+is not stored: the repository is public). The plugin (`plugins/explainer-film/kit/`) carries the same
+code for new chapters; after fixing a tool, copy the fixed file to the kit, to
+`chapter-2-inflation/film-code/` and to the plugin. The first version of the kit (log 14) was sent as
+three zip files.
 
 ## A one-page picture (still) with folded paper props
 

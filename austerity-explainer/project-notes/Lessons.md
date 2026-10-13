@@ -284,6 +284,13 @@ Only failures in doing the work belong here. Newest at the bottom.
     and lost both chunks in progress (about 30 minutes of page 3). The filming tool now keeps every
     60 frames as it finishes them, so a restart or the 2-hour stop costs at most one piece per worker
     (about 13 minutes on the slowest page), and running it again carries on.
+72. **Check whether a repository is public before pushing everything.** This one is, so the
+    soundtrack stayed out, and every new file was searched for passwords, keys and personal details
+    first. When Claude Code's safety check blocks a save, take out what it most likely objects to
+    (session records, job numbers, machine paths) and ask, rather than forcing it through.
+73. **Prove a repository is complete by rebuilding from a fresh copy.** Drawing the same moments from
+    a clean clone and from the working kit, and comparing them pixel for pixel, showed nothing was
+    missing; reading the notes against the files found 16 stale paths that a file count would miss.
 
 ## Traps
 

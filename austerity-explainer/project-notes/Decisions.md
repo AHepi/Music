@@ -167,7 +167,7 @@ overturn any of them in one line. Changes to the project must follow this file.
 
 14. **Paper pop-up look approved** (your words, after watching the page 3 test): "This is great!"
     The scrapbook look (log 08) and the five animated samples (log 10) are set aside. Next: all ten
-    pages of chapter 1 in this look, planned in `plans/12 Plan - chapter 1 in paper pop-up.md`; the
+    pages of chapter 1 in this look, planned in `scripts-and-plans/12 Plan - chapter 1 in paper pop-up.md`; the
     painting cost is confirmed with you before any is spent.
 
 15. **Go-ahead for the whole chapter in the paper look** (your words): "Do it!" (to painting about
@@ -423,6 +423,30 @@ overturn any of them in one line. Changes to the project must follow this file.
   one helper per model (the works, the town, the desk, the props) inspected each model through the
   server, rendered thumbnails, improved the model and checked it in the film's stage; a reviewer
   compared before and after, and any model that got worse keeps its old version.
+
+27. **Chapter 2, round 20, accepted; push everything** (your words): "That's fantastic. Not perfect,
+    but good enough. Can you push all assets and scripts to repo."
+
+### Claude's calls for item 27
+
+- The whole film kit went into the repository as one folder, `austerity-explainer/film-kit/`, in the
+  same layout as the working kit, so it can be used straight from a clone: every painting of both
+  chapters, the paper pieces already made, painted rooms, Blender models and their scripts, the
+  stage, page files, tools, examples and chapter 1's page recordings. Files the repository already
+  had are stored once by git, so the copy adds only what was new (about 115 MB).
+- The repository is public, so the soundtrack "Tension and Gravity.mp3" was left out (a note in
+  `film-kit/assets/soundtrack/` says where it goes); the finished films and chapter 2's mix already
+  carry it under the voice.
+- The full-quality films (about 800 MB each) were left out: GitHub refuses files over 100 MB, and
+  storing them another way could cost money. They can be filmed again from the kit.
+- Chapter 2's mix and narration went in as lossless .flac files (about half the size of .wav).
+- Chapter 2's working files from this session (session scripts, fix briefs, speed tests, round-20
+  working pictures, drafts, helper results, the painting service's job numbers) were held back:
+  Claude Code's safety check blocked saving them twice, the second time as possible credential
+  leakage. A search found no passwords or keys (only job numbers and this session's folder paths),
+  but they wait for your decision rather than being forced through.
+- Review screenshots (about 1.3 GB) and old video pieces were not pushed: they are checking
+  by-products, not assets.
 
 ## Traps
 

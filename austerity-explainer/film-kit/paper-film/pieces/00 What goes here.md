@@ -1,8 +1,9 @@
 # What goes here
 
 `prepare_paper_pieces.py` writes each chapter's paper pieces here, one folder per chapter (for example
-`austerity-chapter-1/`, made from `examples/austerity-chapter-1/cut-list.json`). They are made, not
-kept: delete a folder and run the tool again to rebuild it.
+`austerity-chapter-1/`, made from `examples/austerity-chapter-1/cut-list.json`). The pieces of
+`austerity-chapter-1/` and `inflation-chapter-2/` are kept here already made; running the tool again
+on a chapter's cut list rebuilds that folder.
 
 ## Traps
 

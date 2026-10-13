@@ -1,7 +1,9 @@
 # Guide, round 20: the camera rule, filling the frame, and nothing passing through anything
 
-This adds to `/home/user/work/chapter-2/reference/20 Guide - building a cinema page.md` (read that
-first; everything in it still holds). The film is finished and the viewer has watched it on a phone.
+This adds to `/home/user/work/chapter-2/reference/20 Guide - building a cinema page.md` (in the
+repository: `19 Guide - building a cinema page.md` in this folder; read that first; everything in it
+still holds). Paths such as `paper-film/scenes/...` are inside the film kit, `austerity-explainer/film-kit/`;
+`/home/user/work/...` paths were the working machine's. The film is finished and the viewer has watched it on a phone.
 These are the viewer's words:
 
 > "The camera also sometimes moves around too much. It needs to stay still unless it's essential to

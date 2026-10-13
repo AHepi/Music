@@ -1,4 +1,4 @@
-# 22 Blender MCP notes: detailed models
+# 20 Blender MCP notes: detailed models
 
 These notes are for the helpers who will rebuild the chapter 2 models: the two 1915 munitions works,
 the model town, the reviewer's desk and the loose props. The viewer asked for "significantly higher
@@ -8,7 +8,8 @@ get good detailed results". Everything below was checked against the official Bl
 current `.glb` files were loaded into it and rendered, and every code snippet in section B was run
 through `execute_blender_code` unless it is marked otherwise.
 
-Read it with `20 Guide - building a cinema page.md` and `21 Guide - camera rule, filling the frame, no clipping.md`.
+Read it with `19 Guide - building a cinema page.md` and `20 Guide - camera rule, filling the frame, no clipping.md`
+(both in this folder). Paths such as `paper-film/blender/` are inside the film kit, `austerity-explainer/film-kit/`.
 
 Sources are given as paths inside the server's bundled docs
 (`/home/user/work/blender-mcp/src/mcp/blmcp/data/`), in the form the search tools return them

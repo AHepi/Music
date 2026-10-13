@@ -2,8 +2,8 @@
 
 **What this is:** the whole path from a script to a finished tall-screen film in the paper pop-up
 look, with the exact commands, settings, times and costs used for "Where austerity came from"
-(the worked example in `examples/austerity-chapter-1/`). Run every command from inside
-`paper-pop-up-film-kit/`.
+(the worked example in `examples/austerity-chapter-1/`). Run every command from inside the kit
+folder (`austerity-explainer/film-kit/` in the repository; `paper-pop-up-film-kit/` in the old zips).
 
 ## A concrete example first
 
@@ -99,6 +99,8 @@ loudness by a plain volume change. The timeline is what the page files read.
 
 ### 5. Mix
 
+The soundtrack is not stored in the repository (it is public): copy "Tension and Gravity.mp3" into
+`assets/soundtrack/` first (see the note there).
 ```
 bash narration-tools/mix_narration_over_music.sh "assets/soundtrack/Tension and Gravity.mp3" narration.wav mix.wav mix.mp3
 ```

@@ -22,6 +22,8 @@
 // for the paper stage. A cinema chapter (a scene that calls buildCinemaChapter) opens the cinema
 // stage instead (cinema-stage.html); PAPER_FILM_STAGE can force one or the other. PAPER_FILM_QUERY adds
 // settings to the stage's address (model-preview.js reads its model and camera from there).
+// PAPER_FILM_CHAPTER and PAPER_FILM_PAGES choose the chapter and pages cinema-test-pages draws
+// (PAPER_FILM_CHAPTER=my-chapter PAPER_FILM_PAGES=3,4); without PAPER_FILM_CHAPTER it draws chapter 2.
 
 import http from 'node:http';
 import fs from 'node:fs';
@@ -80,7 +82,7 @@ async function openStage(sceneName) {
   page.on('pageerror', (error) => console.log('[stage error]', error.message));
   // a cinema chapter (scenes/<name>.js marked as one) uses the cinema stage; others the paper stage
   const stageName = process.env.PAPER_FILM_STAGE ?? (fs.readFileSync(path.join(KIT_FOLDER, 'paper-film/scenes', `${sceneName}.js`), 'utf8').includes('buildCinemaChapter') ? 'cinema-stage' : 'paper-stage');
-  await page.goto(`http://127.0.0.1:${server.address().port}/paper-film/stage/${stageName}.html?scene=${sceneName}${process.env.PAPER_FILM_PAGES ? `&pages=${process.env.PAPER_FILM_PAGES}` : ''}${process.env.PAPER_FILM_QUERY ? `&${process.env.PAPER_FILM_QUERY}` : ''}`);
+  await page.goto(`http://127.0.0.1:${server.address().port}/paper-film/stage/${stageName}.html?scene=${sceneName}${process.env.PAPER_FILM_CHAPTER ? `&chapter=${process.env.PAPER_FILM_CHAPTER}` : ''}${process.env.PAPER_FILM_PAGES ? `&pages=${process.env.PAPER_FILM_PAGES}` : ''}${process.env.PAPER_FILM_QUERY ? `&${process.env.PAPER_FILM_QUERY}` : ''}`);
   await page.waitForFunction('window.stageReady === true || window.stageFailed', null, { timeout: 300000 });
   const failed = await page.evaluate(() => window.stageFailed);
   if (failed) throw new Error(`the scene did not load: ${failed}`);
