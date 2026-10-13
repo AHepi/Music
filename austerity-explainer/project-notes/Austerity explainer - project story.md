@@ -804,8 +804,10 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       that came in at once instead of fading in, and the 1925 title lingering through the move down.
       Fixed (soft edges with the crowd's bottom behind the kerb, fades one after another, a 2-second
       music fade-in, the title clears as the camera moves) and the last three stretches filmed again.
-    - **Filming:** 1,110 frames in about 33 minutes (about 1.8 seconds a frame, filmed two at a time).
-      Sent as "27 Sample - the house" (about 20 MB). As your rule says, the video and music are not in the repository;
+    - **Filming:** 1,110 frames in about 33 minutes (about 1.8 seconds a frame, filmed two at a time),
+      filmed in full twice and in parts three more times as the checks found faults. The final film
+      has no single-frame jumps (checked frame by frame) and the music sits at -17 LUFS with no
+      clipping. Sent as "27 Sample - the house" (about 20 MB). As your rule says, the video and music are not in the repository;
       the code, the timing file and a sheet of one frame a second are.
     - **Not done:** new wall paintings (the rooms reuse old ones, so some walls don't quite match their
       rooms, and the vault and mine walls are plain painted surfaces); narration; Italy; checking which
