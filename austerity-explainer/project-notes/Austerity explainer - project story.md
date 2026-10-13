@@ -14,12 +14,13 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 ## Where things stand
 
-- **Chapter 2, "what really causes inflation", is finished** in a new cinema look: "19 Chapter 2 -
-  what really causes inflation.mp4" (4 minutes 30 seconds, 27 MB), with captions ("19 Captions -
-  chapter 2", .srt and .vtt) and a cover ("19 Cover"). Each page is a 3D scene timed to Malina's
-  words: painted rooms with depth, card models, paper cut-outs, lamp light and dust, with
-  documentary titles, figures and charts on top, joined by page turns. Every fact was checked twice;
-  the pictures and on-screen words were critiqued by independent helpers and fixed before filming.
+- **Chapter 2, "what really causes inflation", is remade with your round-20 changes**: "20 Chapter
+  2 - what really causes inflation.mp4" (4 minutes 30 seconds, 27.6 MB), with captions ("20 Captions
+  - chapter 2", .srt and .vtt) and a new cover ("20 Cover"). The camera now holds still except for
+  your named moves (at most three a shot); the factories, the town and the reviewer's desk are
+  detailed models made in Blender; the six picture problems from your screenshots are fixed. It
+  replaces "19 Chapter 2", which is kept for the record. Each page is a 3D scene timed to Malina's
+  words, with documentary titles, figures and charts on top, joined by page turns.
 - **A plugin, "explainer-film"**, holds the whole method (skills, workflows, helper definitions, the
   film engine and tools) so another model can make the next chapter. It is in your repository under
   `plugins/explainer-film` and installs with `/plugin marketplace add AHepi/Music` then
@@ -39,8 +40,8 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 - **The narration is the steadier voice**, with the music a little louder ("10 Narration").
 - The earlier scrapbook film (08), the five animated samples (10) and the page 3 test (11) are kept
   for the record; the new film replaces them.
-- Spent so far: about US$6.80 in all. Chapter 1 and earlier: about US$5 (ElevenLabs about 75 US cents;
-  fal about US$4.25). Chapter 2: about US$1.06 on fal (11 paintings, depth maps, 3 masks; US$10 was
+- Spent so far: about US$6.90 in all. Chapter 1 and earlier: about US$5 (ElevenLabs about 75 US cents;
+  fal about US$4.25). Chapter 2: about US$1.16 on fal (12 paintings, depth maps, 3 masks; US$10 was
   allowed) and about 4,300 ElevenLabs credits (about 75 US cents).
 
 ## How the pieces fit
@@ -534,13 +535,22 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       SHIPS SUNK label sat where phone apps put their buttons (moved in); works B's door looked
       different on pages 3 and 8 (the look now lives in the shared set, so both pages match); and a
       $$$ tag sat in the same button zone (moved in).
-    - **Filming:** FILMING_RESULT
+    - **Filming:** 35 stretches, two at a time: 8,110 frames, 4 minutes 30 seconds, about 7 hours from
+      start to finish (the pages with detailed models drew at 12 to 16 seconds a picture, the others
+      at about 3). It was stopped twice: by the 2-hour limit on background jobs, and by the cloud
+      machine restarting at 02:53, which lost about 30 minutes of page 3. The filming tool now keeps
+      every 60 frames as soon as they are drawn, so the next stop lost nothing; the joins between kept
+      pieces measure as smooth as any two frames in a row. Sound lines up to 0.00 ms at every page;
+      loudness -15.0 LUFS, highest peak -1.6 dB, the same as before. The sendable copy is 27.6 MB. I
+      looked at one frame every 3 seconds of the finished film; the only black moments are the planned
+      quick dips between shots (one is new: page 6 is now two shots, to stay within three moves).
+      New cover: page 3's brick works at dusk.
     - Not checked: the film at full speed and on a phone; whether Blender's MCP would add more with a
       screen (its screenshot tools need one). Cost this round: about 10 US cents on fal; nothing else.
 
 ## Next step
 
-Watch "19 Chapter 2 - what really causes inflation" on your phone and tell me what to change. Two
+Watch "20 Chapter 2 - what really causes inflation" on your phone and tell me what to change. Two
 things to decide before you publish: whether page 10's "the Reserve Bank is raising its interest rate
 again" still holds (its next decision is 28 October), and whether to publish before New Zealand's new
 price figures come out on 22 October.
@@ -562,8 +572,8 @@ price figures come out on 22 October.
 - Chapter 2's newest figures go out of date soon: prices (4.1%, year to June 2026) on 22 October,
   the Reserve Bank's rate decision on 28 October, unemployment (5.6%) on 4 November. Page 7 says
   "the latest figures" and page 10 says "this year ... is raising"; recheck before publishing late.
-- Chapter 2's full-quality master (902 MB) lives only in this session's working folder, which is
+- Chapter 2's full-quality master (808 MB, round 20) lives only in this session's working folder, which is
   cleared when the session ends. It can be made again from the repository (film code, pictures,
-  mix) in about 3.5 hours of filming. The 27 MB copy and captions are kept in the repository.
+  mix) in about 6 hours of filming. The 27.6 MB copy and captions are kept in the repository.
 - A cloud machine can restart and silently end long jobs: watch for a job stopping, not only for it
   finishing (lesson 56).

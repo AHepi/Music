@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-12, evening.**
+**As of 2026-10-13, morning.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -91,6 +91,25 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - The full-quality master (902 MB) is only in this session's working folder (too big for the
   repository); it can be filmed again from the repository files.
 
+## Chapter 2, round 20 (finished 2026-10-13)
+
+- Sent: `chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4` (4 min 30 s,
+  27.6 MB), `20 Captions - chapter 2.srt` / `.vtt` (the same narration as round 19),
+  `20 Cover - chapter 2 - what really causes inflation.jpg`. Round 19's files are kept for the record.
+- What changed (your seven screenshots and camera rule): the camera holds still except for at most
+  three named moves a shot (21 shots, 0 problems on the camera check); detailed Blender models of the
+  two works, the town, near-corner props and the reviewer's desk (`chapter-2-inflation/pictures/models/`,
+  built by `film-code/blender/`, improved through the Blender MCP server); the politician's face calmed;
+  price tags and basket clear of everything; page 9's book bigger and further back; page 5's street
+  repainted dry, with coins that land and stay; the review on a detailed desk.
+- Guides: `20 Guide - camera rule, filling the frame, no clipping.md`, `20 Blender MCP notes - detailed models.md`.
+- Checks: 8,110 frames, 30 a second; sound 0.00 ms off at every page; -15.0 LUFS, peak -1.6 dB;
+  seven page helpers, an independent reviewer, fixing helpers, a fresh reviewer, a last fix check;
+  the finished film looked at every 3 seconds; the only black moments are planned dips between shots.
+  Not checked: full-speed playback, a phone screen.
+- The full-quality master (808 MB) is only in this session's working folder; it can be filmed again
+  from the repository files (about 6 hours; the filming tool keeps every 60 frames, so stops lose little).
+
 ## The plugin (2026-10-12)
 
 - `plugins/explainer-film` with `.claude-plugin/marketplace.json` at the repository root. Seven skills,
@@ -100,7 +119,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your view of chapter 2 on your phone.
+- Your view of chapter 2 (round 20) on your phone.
 - Before publishing: whether page 10's "is raising" still holds after 28 October.
 - Nothing for chapter 1 (you said "This is fantastic."). The kit is ready to hand to the agent making
   the series on the enclosures.
@@ -112,7 +131,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Spend so far
 
-About US$6.80 in all (chapter 2: about US$1.06 on fal and about 4,300 ElevenLabs credits, about 75 US cents).
+About US$6.90 in all (chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
+bank street, and about 4,300 ElevenLabs credits, about 75 US cents).
 - fal, about US$4.25: chapter 1's paintings, about US$2.55 (17 large pictures at about 10 US cents,
   30 small ones at about 2.5 cents, 37 cut-out masks at about a fifth of a cent); the page 3 test,
   about 82 US cents; the five animated style samples, about 90 US cents.

@@ -109,7 +109,10 @@ code lives in `chapter-2-inflation/film-code/` (it sits on top of the film kit).
 5. Check the page turns from the whole chapter (`... inflation-chapter-2 FOLDER --stills` at each
    last word plus 0.7 s): each page's words must stay on its own page.
 6. Film: `bash paper-film/tools/film-chapter-parallel.sh inflation-chapter-2 2 240` (35 chunks, two at
-   a time, about 3.5 hours; run it again to carry on after a stop).
+   a time, about 6 hours with the detailed models; run it again to carry on after a stop). A cloud
+   session stops background jobs after 2 hours, so film in stretches that fit, with
+   `FILM_FROM=<frame> FILM_TO=<frame>` (page edges from `render-paper-film.mjs SCENE --info`); each
+   chunk is kept in 60-frame pieces as it goes, so a stop or a machine restart loses at most one piece.
 7. Finish: `narration-tools/finish_film.sh` with the mix, then captions (`make_captions.py`), the
    sound alignment check and the loudness check, as in the paper look.
 
