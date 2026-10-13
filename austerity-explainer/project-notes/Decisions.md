@@ -450,6 +450,20 @@ overturn any of them in one line. Changes to the project must follow this file.
 - Review screenshots (about 1.3 GB) and old video pieces were not pushed: they are checking
   by-products, not assets.
 
+28. **WorldSculpt, then SAM 3D** (your words): "Would this help with videos?
+    https://alaya-lab.github.io/WorldSculpt/" then "Hmm. Try SAM 3D in the painted style, compile a
+    scene, then show me a snapshot."
+
+### Claude's calls for item 28
+
+- WorldSculpt was judged not usable here (graphics card, inputs, not hosted); SAM 3D on fal was tried
+  instead, on page 7's petrol station.
+- The background was repainted with Flux 3 edit (about 10 US cents, within the US$10 picture
+  allowance) because a free paint-out smeared; only the parts inside the objects' outlines are used.
+- The teal car was left painted after a checker found SAM had misplaced and miscoloured it.
+- The models wear the painting projected from where it was painted, rather than SAM's own colours.
+- The test stays a test: chapter 2's film is unchanged.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

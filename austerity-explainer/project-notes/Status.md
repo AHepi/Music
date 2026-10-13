@@ -136,7 +136,19 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   the setup command `explainer-film-setup`, and the film kit. Passed `claude plugin validate`; a fresh
   setup drew a picture end to end. Not tested: installation by another person or a smaller model.
 
+## SAM 3D test (log 22, 2026-10-13)
+
+- Snapshot: `experiments/22 Snapshot - SAM 3D petrol station.jpg`. Scene:
+  `film-kit/paper-film/scenes/sam-3d-petrol-station-test.js`; models and layout in
+  `film-kit/assets/models/sam-3d-test/`; clean background and masks in `film-kit/assets/reliefs/sam-3d-test/`;
+  tools `sam3d_fit_layout.py`, `sam3d_make_clean_plate.py`, `composite_fill.py`, `ground_under_objects.py`.
+- Works from the painting's view and on a short push; still wrong: ghost edges on two pumps, a pump
+  head left on the background, lifted rear wheels when moving, the headlight pool under the bumper,
+  and the painted background tearing. Not tried in a moving shot.
+
 ## Waiting on you
+
+- Whether the SAM 3D direction (log 22) is worth pursuing.
 
 - Your view of chapter 2 (round 20) on your phone.
 - Before publishing: whether page 10's "is raising" still holds after 28 October.
@@ -153,7 +165,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Spend so far
 
-About US$6.90 in all (chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
+About US$7.00 in all (SAM 3D test, log 22: about 12 US cents; chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
 bank street, and about 4,300 ElevenLabs credits, about 75 US cents).
 - fal, about US$4.25: chapter 1's paintings, about US$2.55 (17 large pictures at about 10 US cents,
   30 small ones at about 2.5 cents, 37 cut-out masks at about a fifth of a cent); the page 3 test,

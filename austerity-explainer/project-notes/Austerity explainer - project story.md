@@ -33,6 +33,10 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
   tools, chapter 1's recordings, and both chapters as worked examples, with step-by-step instructions
   for the agent starting a series on the enclosures. Only your soundtrack is left out, because the
   repository is public. (Its first version was three zip files, "14 Paper pop-up film kit".)
+- **A test of 3D models lifted out of a painting** ("22 Snapshot - SAM 3D petrol station", log 22): the
+  petrol station's red car and pumps rebuilt as 3D models that wear the painting. Close to the
+  painting from its own view and solid on a short push; the painted background still tears on moves.
+  Waiting for your view.
 - **A one-page picture with origami props** ("15 One page"): a blank page at an angle on a dark desk,
   with a folded cottage, trees, crane and fence, lit by one low warm lamp. You liked the idea but not
   the beauty, so it led to the next one.
@@ -42,7 +46,7 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 - **The narration is the steadier voice**, with the music a little louder ("10 Narration").
 - The earlier scrapbook film (08), the five animated samples (10) and the page 3 test (11) are kept
   for the record; the new film replaces them.
-- Spent so far: about US$6.90 in all. Chapter 1 and earlier: about US$5 (ElevenLabs about 75 US cents;
+- Spent so far: about US$7.00 in all (about 12 US cents more for the SAM 3D test, log 22). Chapter 1 and earlier: about US$5 (ElevenLabs about 75 US cents;
   fal about US$4.25). Chapter 2: about US$1.16 on fal (12 paintings, depth maps, 3 masks; US$10 was
   allowed) and about 4,300 ElevenLabs credits (about 75 US cents).
 
@@ -586,12 +590,42 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       machine, which is cleared when this session ends.
     - Not checked: installing the plugin from the repository on another computer. No cost.
 
+22. **WorldSculpt, then a SAM 3D test on a painting.** You asked "Would this help with videos?" about
+    WorldSculpt, then said "Hmm. Try SAM 3D in the painted style, compile a scene, then show me a
+    snapshot."
+    - **WorldSculpt** (checked by two helpers, nothing installed): it turns many posed views of a 3D
+      scene, with every object outlined and boxed, into separate 3D models. Not usable here: it needs
+      a large NVIDIA graphics card, it isn't offered on fal, and your films start from single
+      paintings. A fal tool, SAM 3D, does a similar job from one picture.
+    - **The test:** the 1973 petrol station painting (page 7). SAM 3D turned the red car, the teal car
+      and the three pumps into 3D models in one run (2 US cents). I worked out how its layout maps onto
+      the painting, painted the objects out of the background with Flux 3 (about 10 US cents, used
+      only inside their outlines), fitted the real ground under each one, and stood the models on it in
+      the film stage. Each model wears the painting itself, projected from where it was painted, on
+      every surface the painting showed; only hidden sides use SAM's own surface.
+    - **Checked by three helpers over two rounds**, and fixed between them: the teal car was misplaced,
+      floating and pink-trimmed (now left painted); one colour over each whole model had turned chrome
+      and headlights cyan (now they glow as painted); models floated about half a unit above the
+      ground (now 0.01 to 0.03); my colour check was circular (replaced); the models first drew as
+      black blocks (their files carry no surface directions, now worked out on loading); my colour
+      handling was wrong twice (now the stage's own). Measured at the end: the car's colour within a
+      few levels of the painting; the pumps about 10% darker.
+    - **Result** ("22 Snapshot - SAM 3D petrol station"): from the painting's own view the scene is very
+      close to the painting, with real 3D objects in it. On a short push in, the car and pumps hold up
+      as solid painted objects. Still wrong: ghost edges on two pumps and one pump's display head left
+      on the background; the car's rear wheels look lifted when the camera moves; the headlight pool
+      under the bumper is broken; and the painted background still tears (canopy posts, kiosk).
+    - **What it means:** it works for a few solid things in the foreground on short moves. The
+      background is now the limit, not the objects: the canopy and kiosk would need their own layers.
+    - Not checked: a moving shot (only single pictures). Cost: about 12 US cents on fal.
+
+
 ## Next step
 
-Tell me whether to add chapter 2's held-back working files to the repository (they are only on this
-session's machine and will be gone when it ends). Before publishing chapter 2: check page 10's
-"the Reserve Bank is raising its interest rate again" after the 28 October decision, and the price
-figures due on 22 October.
+Look at "22 Snapshot - SAM 3D petrol station" and say whether this direction is worth pursuing. If
+it is, the next test would give the canopy and kiosk their own layers so the camera can move further.
+Before publishing chapter 2: check page 10's "is raising" after the 28 October rate decision, and the
+price figures due on 22 October.
 
 ## Traps
 

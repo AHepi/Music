@@ -291,6 +291,17 @@ Only failures in doing the work belong here. Newest at the bottom.
 73. **Prove a repository is complete by rebuilding from a fresh copy.** Drawing the same moments from
     a clean clone and from the working kit, and comparing them pixel for pixel, showed nothing was
     missing; reading the notes against the files found 16 stale paths that a file count would miss.
+74. **Projection makes 3D models belong in a painting.** SAM 3D's own surfaces looked like toys
+    beside the brushwork; letting each model wear the painting, shone onto it from where it was
+    painted, brought back the headlights' glow, the windscreen's interior and the brushwork. Only the
+    sides the painting never showed need the model's own surface.
+75. **Check what a model file carries before lighting it.** SAM 3D's files have no surface directions
+    (normals), so they drew as black blocks until those were worked out on loading.
+76. **"Clear of the painted surface" is not "standing on the ground".** Sliding a model back until it
+    touches the painted room stopped on smeared background and left the wheels half a unit up. Fit the
+    ground from the forecourt around the object's base, and flatten the depth there.
+77. **A painted room tears at near, upright things.** Even a short camera move bends canopy posts and
+    building edges; solid foreground objects make the tearing behind them more noticeable, not less.
 
 ## Traps
 

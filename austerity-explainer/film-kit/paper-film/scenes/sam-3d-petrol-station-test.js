@@ -175,7 +175,7 @@ function projectPainting(mesh, room, paint, mask, map) {
     const d = -p.z, u = (p.x / d / room.tanX + 1) / 2, v = (p.y / d / room.tanY + 1) / 2;
     paintUv[i * 2] = u; paintUv[i * 2 + 1] = v;
     const facing = n.dot(p.clone().negate().normalize());
-    const weight = THREE.MathUtils.smoothstep(facing, 0.12, 0.4) * inside(u, v);
+    const weight = THREE.MathUtils.smoothstep(facing, 0.04, 0.22) * inside(u, v);
     paintWeight[i] = weight;
     if (weight > 0.6 && own && uv) {
       const a = pixelAt(paint, u * paint.width, (1 - v) * paint.height);
@@ -187,7 +187,7 @@ function projectPainting(mesh, room, paint, mask, map) {
   // per colour, but pulled halfway to an even change, so neutral parts (chrome, glass) don't shift hue
   const ratio = sums.paint.map((v, c) => v / Math.max(1, sums.own[c]));
   const even = (ratio[0] + ratio[1] + ratio[2]) / 3;
-  const tint = new THREE.Color(...ratio.map((r) => Math.min(3, Math.max(0.3, 0.5 * r + 0.5 * even))));
+  const tint = new THREE.Color(...ratio.map((r) => Math.min(4, Math.max(0.3, 0.5 * r + 0.5 * even))));
   return { paintUv, paintWeight, tint };
 }
 function pixelsOfSync(image) {
@@ -201,7 +201,7 @@ function pixelsOfSync(image) {
 // The painting already has its light painted in, so the models take only a touch of the lamp (enough
 // to shade their sides and cast shadows) and show mostly their own colour: `glow` is how much of its
 // colour a surface shows by itself, `lamp` how much the lamp adds.
-const LIGHT = { glow: 0.8, lamp: 0.22 };
+const LIGHT = { glow: 0.75, lamp: 0.2 };
 function paintedMaterial(map, paintTexture, tint) {
   const material = new THREE.MeshLambertMaterial({ map, color: 0xffffff, emissive: 0xffffff, emissiveIntensity: LIGHT.glow });
   material.onBeforeCompile = (shader) => {
