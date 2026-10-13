@@ -1,0 +1,647 @@
+{
+ "note": "What this is: the cut list for the austerity chapter 1 example. prepare_paper_pieces.py reads it and writes paper-film/pieces/austerity-chapter-1/. Paths are from the kit folder. margin = width of the paper margin as a share of the source picture's longest side; grade = how strongly colours are nudged toward the page paintings (0 to 1); longest_side = largest size of the finished piece in pixels. Copy this file to start a new chapter's cut list.",
+ "output_folder": "paper-film/pieces/austerity-chapter-1",
+ "backgrounds": {
+  "parliament": "assets/paintings/austerity-chapter-1/101-bg-parliament.jpg",
+  "munitions-factory": "assets/paintings/austerity-chapter-1/102-bg-munitions-factory.jpg",
+  "glasgow-square": "assets/paintings/austerity-chapter-1/1-glasgow-square.jpg",
+  "pithead": "assets/paintings/austerity-chapter-1/6-pithead.jpg",
+  "turin-street": "assets/paintings/austerity-chapter-1/104-bg-turin-street.jpg",
+  "boardroom": "assets/paintings/austerity-chapter-1/105-bg-boardroom.jpg",
+  "conference-hall": "assets/paintings/austerity-chapter-1/106-bg-conference-hall.jpg",
+  "town-street": "assets/paintings/austerity-chapter-1/107-bg-town-street.jpg",
+  "kitchen": "assets/paintings/austerity-chapter-1/108-bg-kitchen.jpg",
+  "factory-gate": "assets/paintings/austerity-chapter-1/109-bg-factory-gate.jpg"
+ },
+ "pieces": {
+  "crowd-back": {
+   "image": "assets/paintings/austerity-chapter-1/2-crowd-back.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/2-crowd-back-mask.png",
+   "margin": 0.0045,
+   "grade": 0.6
+  },
+  "crowd-front": {
+   "image": "assets/paintings/austerity-chapter-1/3-crowd-front.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/3-crowd-front-mask.png",
+   "margin": 0.0045,
+   "grade": 0.6
+  },
+  "soldiers": {
+   "image": "assets/paintings/austerity-chapter-1/4-soldiers.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/4-soldiers-mask.png",
+   "margin": 0.0045,
+   "grade": 0.6
+  },
+  "tank": {
+   "image": "assets/paintings/austerity-chapter-1/5-tank.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/5-tank-mask.png",
+   "margin": 0.006,
+   "grade": 0.25,
+   "leave_out_boxes": [
+    [
+     618,
+     470,
+     692,
+     614
+    ]
+   ],
+   "why": "the leave-out box removes a small pale fin on the roof that could read as a flag"
+  },
+  "miner": {
+   "image": "assets/paintings/austerity-chapter-1/7-miner.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/7-miner-mask.png",
+   "margin": 0.006,
+   "grade": 0.35,
+   "jaw": {
+    "jaw_polygon": [
+     [
+      790,
+      1264
+     ],
+     [
+      795,
+      1246
+     ],
+     [
+      810,
+      1237
+     ],
+     [
+      900,
+      1234
+     ],
+     [
+      990,
+      1237
+     ],
+     [
+      1005,
+      1246
+     ],
+     [
+      1010,
+      1264
+     ],
+     [
+      1010,
+      1470
+     ],
+     [
+      985,
+      1515
+     ],
+     [
+      940,
+      1545
+     ],
+     [
+      900,
+      1552
+     ],
+     [
+      860,
+      1545
+     ],
+     [
+      815,
+      1515
+     ],
+     [
+      790,
+      1470
+     ]
+    ],
+    "mouth_polygon": [
+     [
+      784,
+      1262
+     ],
+     [
+      790,
+      1240
+     ],
+     [
+      808,
+      1228
+     ],
+     [
+      900,
+      1225
+     ],
+     [
+      992,
+      1228
+     ],
+     [
+      1010,
+      1240
+     ],
+     [
+      1016,
+      1262
+     ],
+     [
+      1012,
+      1300
+     ],
+     [
+      900,
+      1310
+     ],
+     [
+      788,
+      1300
+     ]
+    ]
+   }
+  },
+  "report": {
+   "image": "assets/paintings/austerity-chapter-1/8-report.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/8-report-mask.png",
+   "margin": 0.008,
+   "grade": 0.3,
+   "labels": [
+    {
+     "lines": [
+      "ROYAL",
+      "COMMISSION"
+     ],
+     "font_share": 0.062,
+     "centre_x": 0.56,
+     "top_y": 0.25,
+     "colour": [
+      28,
+      34,
+      42,
+      235
+     ],
+     "line_gap": 1.45
+    }
+   ]
+  },
+  "politician": {
+   "image": "assets/paintings/austerity-chapter-1/201-politician.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/201-politician-mask.png",
+   "margin": 0.006,
+   "grade": 0.35,
+   "add_polygons": [
+    [
+     [
+      140,
+      1972
+     ],
+     [
+      1692,
+      1972
+     ],
+     [
+      1692,
+      2034
+     ],
+     [
+      1660,
+      2034
+     ],
+     [
+      1660,
+      2288
+     ],
+     [
+      172,
+      2288
+     ],
+     [
+      172,
+      2034
+     ],
+     [
+      140,
+      2034
+     ]
+    ]
+   ],
+   "why": "the background remover dropped the wooden lectern; the polygon puts it back",
+   "jaw": {
+    "jaw_polygon": [
+     [
+      850,
+      838
+     ],
+     [
+      855,
+      826
+     ],
+     [
+      868,
+      821
+     ],
+     [
+      920,
+      820
+     ],
+     [
+      972,
+      821
+     ],
+     [
+      985,
+      826
+     ],
+     [
+      990,
+      838
+     ],
+     [
+      990,
+      925
+     ],
+     [
+      970,
+      950
+     ],
+     [
+      945,
+      962
+     ],
+     [
+      920,
+      966
+     ],
+     [
+      895,
+      962
+     ],
+     [
+      870,
+      950
+     ],
+     [
+      850,
+      925
+     ]
+    ],
+    "mouth_polygon": [
+     [
+      844,
+      836
+     ],
+     [
+      850,
+      822
+     ],
+     [
+      866,
+      815
+     ],
+     [
+      920,
+      813
+     ],
+     [
+      974,
+      815
+     ],
+     [
+      990,
+      822
+     ],
+     [
+      996,
+      836
+     ],
+     [
+      992,
+      880
+     ],
+     [
+      920,
+      888
+     ],
+     [
+      848,
+      880
+     ]
+    ]
+   }
+  },
+  "shell": {
+   "image": "assets/paintings/austerity-chapter-1/209-shells-row.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/209-shells-row-mask.png",
+   "margin": 0.004,
+   "grade": 0.3,
+   "longest_side": 1024,
+   "split_shapes": true,
+   "why": "each shell becomes its own piece (shell-1 to shell-7, left to right) so they can pile up and run out one by one"
+  },
+  "munition-women": {
+   "image": "assets/paintings/austerity-chapter-1/203-munition-women.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/203-munition-women-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "italian-strikers": {
+   "image": "assets/paintings/austerity-chapter-1/204-italian-strikers.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/204-italian-strikers-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "owners": {
+   "image": "assets/paintings/austerity-chapter-1/205-owners.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/205-owners-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "workers-queue": {
+   "image": "assets/paintings/austerity-chapter-1/206-workers-queue.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/206-workers-queue-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "delegates": {
+   "image": "assets/paintings/austerity-chapter-1/207-delegates.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/207-delegates-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "scissors-chain": {
+   "image": "assets/paintings/austerity-chapter-1/301-scissors-chain.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/301-scissors-chain-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "coins-arrow": {
+   "image": "assets/paintings/austerity-chapter-1/302-coins-arrow.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/302-coins-arrow-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "iron-weight": {
+   "image": "assets/paintings/austerity-chapter-1/303-iron-weight.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/303-iron-weight-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "cake": {
+   "image": "assets/paintings/austerity-chapter-1/304-cake.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/304-cake-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "archive-boxes": {
+   "image": "assets/paintings/austerity-chapter-1/305-archive-boxes.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/305-archive-boxes-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "book": {
+   "image": "assets/paintings/austerity-chapter-1/306-book.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/306-book-mask.png",
+   "margin": 0.011,
+   "grade": 0.3,
+   "longest_side": 1024,
+   "labels": [
+    {
+     "lines": [
+      "THE CAPITAL",
+      "ORDER"
+     ],
+     "font_share": 0.092,
+     "centre_x": 0.545,
+     "top_y": 0.2,
+     "colour": [
+      222,
+      200,
+      140,
+      240
+     ],
+     "line_gap": 1.35
+    },
+    {
+     "lines": [
+      "CLARA E. MATTEI"
+     ],
+     "font_share": 0.058,
+     "centre_x": 0.545,
+     "top_y": 0.74,
+     "colour": [
+      222,
+      200,
+      140,
+      230
+     ],
+     "line_gap": 1.3
+    }
+   ]
+  },
+  "ledger": {
+   "image": "assets/paintings/austerity-chapter-1/306-book.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/306-book-mask.png",
+   "margin": 0.011,
+   "grade": 0.3,
+   "longest_side": 1024,
+   "why": "the same plain book with no title: the government's account book on page 10"
+  },
+  "money-bag": {
+   "image": "assets/paintings/austerity-chapter-1/307-money-bag.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/307-money-bag-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "rubber-stamp": {
+   "image": "assets/paintings/austerity-chapter-1/308-rubber-stamp.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/308-rubber-stamp-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "factory-small": {
+   "image": "assets/paintings/austerity-chapter-1/309-factory-small.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/309-factory-small-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1536
+  },
+  "price-tag": {
+   "image": "assets/paintings/austerity-chapter-1/310-price-tag.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/310-price-tag-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "tax-tag": {
+   "image": "assets/paintings/austerity-chapter-1/310-price-tag.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/310-price-tag-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024,
+   "labels": [
+    {
+     "lines": [
+      "TAX"
+     ],
+     "font_share": 0.16,
+     "colour": [
+      70,
+      30,
+      26,
+      235
+     ],
+     "along_long_side": true
+    }
+   ]
+  },
+  "pay-packet": {
+   "image": "assets/paintings/austerity-chapter-1/311-pay-packet.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/311-pay-packet-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "italy-map": {
+   "image": "assets/paintings/austerity-chapter-1/312-italy-map.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/312-italy-map-mask.png",
+   "grade": 0.3,
+   "longest_side": 1024,
+   "map_card": {
+    "background_tolerance": 16,
+    "padding_share": 0.07,
+    "corner_share": 0.035
+   },
+   "why": "printed on a small paper card: the islands (Sardinia, Sicily) cannot be cut as one paper piece, and the background remover made Sardinia faint"
+  },
+  "red-flag": {
+   "image": "assets/paintings/austerity-chapter-1/313-red-flag.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/313-red-flag-mask.png",
+   "margin": 0.011,
+   "grade": 0.3,
+   "longest_side": 1024
+  },
+  "farmland": {
+   "image": "assets/paintings/austerity-chapter-1/314-farmland.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/314-farmland-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "mine-small": {
+   "image": "assets/paintings/austerity-chapter-1/315-mine-small.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/315-mine-small-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024,
+   "mask_threshold": 70,
+   "why": "the background remover left the coal heap half see-through; a lower threshold keeps it"
+  },
+  "worker-standing": {
+   "image": "assets/paintings/austerity-chapter-1/316-worker-standing.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/316-worker-standing-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1360
+  },
+  "door": {
+   "image": "assets/paintings/austerity-chapter-1/317-door.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/317-door-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1360
+  },
+  "gold-bars": {
+   "image": "assets/paintings/austerity-chapter-1/318-gold-bars.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/318-gold-bars-mask.png",
+   "margin": 0.011,
+   "grade": 0.25,
+   "longest_side": 1024
+  },
+  "school": {
+   "image": "assets/paintings/austerity-chapter-1/319-school.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/319-school-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "basket": {
+   "image": "assets/paintings/austerity-chapter-1/320-basket.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/320-basket-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "bank": {
+   "image": "assets/paintings/austerity-chapter-1/321-bank.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/321-bank-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "padlock": {
+   "image": "assets/paintings/austerity-chapter-1/322-padlock.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/322-padlock-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "locomotive": {
+   "image": "assets/paintings/austerity-chapter-1/323-locomotive.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/323-locomotive-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "banner": {
+   "image": "assets/paintings/austerity-chapter-1/324-banner.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/324-banner-mask.png",
+   "margin": 0.009,
+   "grade": 0.3,
+   "longest_side": 1248
+  },
+  "kitchen-table": {
+   "image": "assets/paintings/austerity-chapter-1/325-kitchen-table.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/325-kitchen-table-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "banknotes": {
+   "image": "assets/paintings/austerity-chapter-1/326-banknotes.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/326-banknotes-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "materials": {
+   "image": "assets/paintings/austerity-chapter-1/327-materials.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/327-materials-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "lathe": {
+   "image": "assets/paintings/austerity-chapter-1/328-lathe.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/328-lathe-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "council-houses": {
+   "image": "assets/paintings/austerity-chapter-1/329-council-houses.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/329-council-houses-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "dole-queue": {
+   "image": "assets/paintings/austerity-chapter-1/330-dole-queue.jpg",
+   "mask": "assets/paintings/austerity-chapter-1/masks/330-dole-queue-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  }
+ }
+}
