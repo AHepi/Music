@@ -328,9 +328,12 @@ Only failures in doing the work belong here. Newest at the bottom.
 86. **Check the film in motion, not only stills.** Pieces popping in for one frame, things passing
     through floors and flat pale cards only showed in the moving film; a frame-to-frame difference
     measure finds them quickly.
-87. **A cut-out snaps off half way through a fade unless told otherwise.** Cut-outs are drawn only
-    where they are at least half solid, so lowering their opacity made the strike crowd vanish in one
-    frame at 50%. While a piece fades, lower that threshold (setFading in house-sample/page-1.js).
+87. **A cut-out snaps off half way through a fade unless told otherwise.** Two causes: cut-outs are
+    drawn only where they are at least half solid, and a piece first drawn as solid keeps a drawing
+    recipe that ignores see-through (setting its opacity later does nothing until the recipe is
+    rebuilt). So the strike crowd stayed solid, then vanished in one frame. Fix: build fading pieces as
+    see-through once and lower the threshold while they fade (setFading in house-sample/page-1.js). The
+    shared kit's cut-outs have the same fault, so chapter 2's fades snap too.
 
 ## Traps
 

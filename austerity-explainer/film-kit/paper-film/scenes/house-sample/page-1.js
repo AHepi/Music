@@ -77,10 +77,17 @@ function platedHook(ctx, t, { at, until, lines, y, size, colour = INK.paper }) {
   return hook(ctx, t, { at, until, lines, y, size, colour });
 }
 
-// Sets a cut-out's pose; while it is fading, it is drawn down to nearly see-through (cut-outs are
-// normally drawn only where they are at least half solid, so a fade would snap off at half way).
+// Sets a cut-out's pose so that it can fade smoothly. Two things stop a plain cut-out from fading:
+// it is drawn only where it is at least half solid (so a fade snaps off half way), and a piece first
+// drawn as solid keeps a drawing recipe that ignores see-through until the recipe is rebuilt. So a
+// fading piece is always drawn as see-through-capable (its recipe built once), and while it fades it
+// is drawn down to nearly see-through.
 function setFading(piece, pose) {
   piece.set(pose);
+  for (const mesh of [piece.front, piece.back]) {
+    mesh.material.transparent = true;
+    if (!mesh.material.userData.fadeReady) { mesh.material.needsUpdate = true; mesh.material.userData.fadeReady = true; }
+  }
   const fading = pose.opacity !== undefined && pose.opacity < 0.999;
   piece.front.material.alphaTest = fading ? 0.02 : 0.5;
 }

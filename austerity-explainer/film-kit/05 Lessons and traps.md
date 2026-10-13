@@ -83,3 +83,8 @@ new series doesn't walk into the same holes.
 - Anything a page shows (pieces, dust, smoke) must be put away with that page.
 - Measure, don't assume, that sound and picture line up; filters can add delay.
 - A word spoken twice on a page must be asked for by which time it is spoken.
+
+- Fading a cut-out with `.set({ opacity })` snaps instead of fading: the piece stays solid, then
+  vanishes at half opacity (a piece first drawn solid keeps a recipe that ignores see-through, and
+  cut-outs are only drawn where at least half solid). Use `setFading` from
+  `paper-film/scenes/house-sample/page-1.js` (log 27, lesson 87 of the project notes).
