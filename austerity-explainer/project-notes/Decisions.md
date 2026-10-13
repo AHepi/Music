@@ -29,14 +29,16 @@ overturn any of them in one line. Changes to the project must follow this file.
 7. **Soundtrack and voice** (your words): "Use this soundtrack and my custom made voice called
    Manila", then "Sorry Malina".
    - Soundtrack: your file "Tension and Gravity" (6 minutes 0 seconds). Your original upload is left
-     untouched; the project works on a copy in `soundtrack/`.
+     untouched; the project works on a copy in `soundtrack/` (chapter 1's original working folder; not in
+     this repository).
    - Voice: your ElevenLabs voice "Malina" (voice id JNDHNvYV2jhVoAQjIjY6), model eleven_v4.
    - This replaces the music the skill would have composed and the voice auditions.
 
 8. **Tone** (your words): "The script needs to be more conversational. It's way too formal and
    like I'm listening to a lecture. It needs to be a little less formal and a little more urgent
    like Naomi Klein." You also supplied your "Steven Pinker Teaching and Writing Toolkit"; the
-   rewrite follows it. (Kept in `downloads/pinker-toolkit/`; read as guidance, never changed.)
+   rewrite follows it. (Kept in `downloads/pinker-toolkit/` in chapter 1's original working folder, not in this
+   repository; read as guidance, never changed.)
 
 9. **Inflation needs its own explanation** (your words): "Yeah that will need explaining in the
    next video. Because it quite evidently makes no sense that money minting = Inflation. It depends

@@ -182,7 +182,7 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Sheet | One painted background printed on a sheet of paper, the page's backdrop. Most pages have one; pages 3 and 8 have two (one turns over to show the next), and the film ends on a plain dark one. |
 | Cut list | The file that lists every painting and paper piece, with its paper margin, colour nudge, size and any repairs or printed words. The cutting tool works from it. |
 | Chunk | One page's stretch of the film, filmed on its own and then joined to the others, so one page can be filmed again without the rest. |
-| Master | The full-quality film with sound, kept in the project (about 280 MB, too big to send here). |
+| Master | The full-quality film with sound (about 290 MB for chapter 1, about 800 MB for chapter 2): too big to send here or to keep in the repository; it can be filmed again from the film kit. |
 | Sendable copy | The film squeezed under the 30 MB limit for sending files here, in the most common video format so any phone or computer plays it. |
 | Kit | The reusable copy of the tools, paintings and instructions for making other films in the paper look. |
 | Folded prop | A paper object built as a real folded shape with flat faces (not a painted cut-out), so each fold is lit differently. |
@@ -566,7 +566,8 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       chapter 1, four of chapter 2, including the Blender factories and desk); all six were identical
       to the working kit's, pixel for pixel, with no missing files. The sound check read the new
       lossless mix and found the sound lined up to 0.00 ms on every page. Two more helpers checked
-      the notes for wrong paths (16 found, all fixed: most still said the kit was in zip files) and
+      the notes for wrong paths (16 found, all fixed: most still said the kit was in zip files; a fresh
+      recheck then found 8 smaller ones, also fixed) and
       looked for anything still missing (nothing that matters).
     - **A fault found and fixed in the plugin:** its test pictures always showed chapter 2's pages,
       whatever chapter was named, because the chapter setting never reached the page. Fixed in every

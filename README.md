@@ -20,5 +20,6 @@
 - This repository is public. The soundtrack "Tension and Gravity.mp3" is not stored here, so the
   track can't be downloaded on its own: copy it into `austerity-explainer/film-kit/assets/soundtrack/`
   before mixing a new chapter.
-- The full-quality film files (about 800 MB each) are too big for GitHub; the sendable copies are in
-  each chapter's `deliver/` folder, and the full-quality ones can be filmed again from the kit.
+- The full-quality film files (about 300 to 800 MB) are too big for GitHub. Chapter 2's sendable copies
+  are in `austerity-explainer/chapter-2-inflation/deliver/`; chapter 1's sendable copy is not in the
+  repository. Both chapters' films can be filmed again from the kit.

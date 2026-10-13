@@ -20,6 +20,10 @@ What this file is: how to read, change and document this project. It grows as th
 
 ## How a chapter is made (in order)
 
+The paths in this section are chapter 1's original working folder (the earlier scrapbook version). In
+the repository the tools are in `austerity-explainer/film-kit/narration-tools/`
+(`extract_word_times.py`, `assemble_chapter_narration.py`, `mix_narration_over_music.sh`).
+
 1. **Narration text** goes in `narration/chapter-N-narration.json` (exact words, delivery cues in
    square brackets, Mattei in phonetic symbols). Each page is recorded on its own in Malina.
 2. **Download** each recording at once (ElevenLabs links stop working after 2 hours) into
@@ -81,17 +85,17 @@ and files are in `austerity-explainer/film-kit/` under the kit's names: `narrati
 ## How a chapter is made in the cinema look (chapter 2)
 
 The cinema look keeps the paper pop-up book's page peel but makes every page a real 3D scene. The
-code lives in `chapter-2-inflation/film-code/` (a copy of chapter 2's part of the film kit); the kit
-itself is `austerity-explainer/film-kit/`, and every command below runs from inside that folder.
+code is part of the film kit, `austerity-explainer/film-kit/`; every path and command below is inside
+that folder. (`chapter-2-inflation/film-code/` and `pictures/` keep a copy of chapter 2's part of it.)
 
 1. Research ledger, outlines, script, recording, word times, timeline and mix: as in the paper look.
    Before recording, fact checkers read the script against the ledger; after the pages are built,
    independent checkers try to prove every spoken and on-screen fact wrong from fresh sources.
 2. Paintings (fal): one painted room per setting (9:16, no words in the picture), plus cut-out pieces.
    For each room a distance picture is made (fal, Depth Anything v2), then
-   `film-code/tools/prepare_relief.py PAINTING DEPTH FOLDER NAME --blur 3` makes the painted room
+   `paper-film/tools/prepare_relief.py PAINTING DEPTH FOLDER NAME --blur 3` makes the painted room
    with depth.
-3. Pages: each page is `film-code/scenes/inflation-chapter-2/page-N.js`, built from the kit in
+3. Pages: each page is `paper-film/scenes/inflation-chapter-2/page-N.js`, built from the kit in
    `cinema-kit.js` (lamp, painted rooms, cut-outs, words, camera paths), card models in
    `models.js`, effects in `effects.js` and flat graphics in `graphics.js`. Every event is timed
    to a word with `kit.at('word')`. `19 Guide - building a cinema page.md` is the full how-to.
@@ -100,17 +104,17 @@ itself is `austerity-explainer/film-kit/`, and every command below runs from ins
    out, pan left, right, up or down, move up or down); more moves means a cut to a new shot.
    `20 Guide - camera rule, filling the frame, no clipping.md` is the how-to.
 3a. Models: detailed buildings, the town, the desk and props are built in Blender by script
-   (`film-code/blender/build_*.py`, run with Blender's Python module) and saved as `.glb` files in
-   `pictures/models/`; pages load them with `model-loader.js`. To look at one model alone:
+   (`paper-film/blender/build_*.py`, run with Blender's Python module) and saved as `.glb` files in
+   `assets/models/inflation-chapter-2/`; pages load them with `model-loader.js`. To look at one model alone:
    `PAPER_FILM_QUERY="model=/assets/models/inflation-chapter-2/NAME.glb&cam=X,Y,Z&look=X,Y,Z&fov=42" node paper-film/tools/render-paper-film.mjs model-preview FOLDER --stills 1`.
-3b. Frame a shot with numbers before rendering: `python3 -I film-code/tools/frame_check.py CAMERA TARGET FOV name=x,y,z ...`
+3b. Frame a shot with numbers before rendering: `python3 -I paper-film/tools/frame_check.py CAMERA TARGET FOV name=x,y,z ...`
    says where each thing lands in the tall frame.
 4. Check stills often:
    `PAPER_FILM_PAGES=N node paper-film/tools/render-paper-film.mjs cinema-test-pages FOLDER --stills T1 T2 ...`
    (times separated by spaces), then a contact sheet, and look at every beat.
 4a. Check the camera rule by measurement (about 10 seconds for the whole film):
    `node paper-film/tools/render-paper-film.mjs inflation-chapter-2 --camera CAMERA.json 3` then
-   `python3 -I film-code/tools/camera_audit.py CAMERA.json` (must end "0 problem(s)").
+   `python3 -I paper-film/tools/camera_audit.py CAMERA.json` (must end "0 problem(s)").
 4b. Check nothing passes through anything: `room.clearance(thing)` (how far in front of the painted
    room; negative = poking through) and `boxesOverlap(a, b)`, at the moments things land or move.
 5. Check the page turns from the whole chapter (`... inflation-chapter-2 FOLDER --stills` at each

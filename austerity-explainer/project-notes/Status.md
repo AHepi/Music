@@ -11,8 +11,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   ("This is great!") and the whole chapter approved ("Do it!").
 - Chapter 1 research: 29 sourced facts (`research/02 Research - chapter 1 - where austerity came from.md`).
 - Chapter 1 narration in Malina's steadier voice, all ten pages, with the time of every word
-  (`narration/chapter-1-timeline-steady-accent.json`), mixed over "Tension and Gravity" with the music a
-  little louder (`mix/chapter-1-mix-steady-accent.wav`).
+  (`narration/chapter-1-timeline-steady-accent.json` in chapter 1's original working folder; in the
+  repository `film-kit/examples/austerity-chapter-1/timeline.json`), mixed over "Tension and Gravity"
+  with the music a little louder (`mix/chapter-1-mix-steady-accent.wav`, not in the repository; the kit
+  rebuilds it from the page recordings and the soundtrack).
 - **Chapter 1 in the paper look, finished.** The paths below are chapter 1's original working folder
   (an earlier session's machine). In the repository: paintings and masks in
   `film-kit/assets/paintings/austerity-chapter-1/`, pieces in `film-kit/paper-film/pieces/austerity-chapter-1/`,
@@ -129,7 +131,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## The plugin (2026-10-12)
 
-- `plugins/explainer-film` (version 1.1.1) with `.claude-plugin/marketplace.json` at the repository root. Seven skills,
+- `plugins/explainer-film` (version 1.1.1) with `.claude-plugin/marketplace.json` at the repository root. Nine skills,
   four workflows (verify-facts, critique-film, check-fixes, build-pages), three helper definitions,
   the setup command `explainer-film-setup`, and the film kit. Passed `claude plugin validate`; a fresh
   setup drew a picture end to end. Not tested: installation by another person or a smaller model.
@@ -167,7 +169,8 @@ bank street, and about 4,300 ElevenLabs credits, about 75 US cents).
 - Re-recording any page of chapter 1 moves every time after it: redo the timing, the mix and the
   filming for the whole chapter (see `Workflows.md`).
 - Changing one page's file means filming that page's chunk again (delete it and run
-  `paper-film/tools/film-chapter-1.sh`); changing the shared kit or the stage means filming all of it.
+  `bash paper-film/tools/film-chapter.sh austerity-chapter-1` from inside `austerity-explainer/film-kit/`);
+  changing the shared kit or the stage means filming all of it.
 - ElevenLabs download links expire after 2 hours; download recordings as soon as they finish.
 - The video's first frame is page 1's empty parliament; use the cover picture where an app lets you
   choose one.
