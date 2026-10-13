@@ -787,8 +787,18 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       inside the rooms; a flickering slab edge. The facts on screen were confirmed for Britain (the
       1922 cuts, gold at the pre-war rate in April 1925, the owners' demands, the General Strike of May
       1926, the lockout until November).
-    - **Filming:** 1,110 frames in 33 minutes (about 1.8 seconds a frame, filmed two at a time). Sent as
-      "27 Sample - the house" (20 MB). As your rule says, the video and music are not in the repository;
+    - **Checked again after filming, in motion, by a third helper**, which found what still pictures
+      can't show: the strike crowd rose out of a pale flat card and later sank through the floor, the
+      street miners popped up from flat shapes, the scissors jumped from the table to the building site
+      in one frame, the padlock appeared in mid-air with a glow that switched on in one frame, and the
+      kitchen ceiling changed colour in one frame. That last one was two surfaces sharing a plane (each
+      room's ceiling sat exactly on the slab above it), which flickers as the camera moves. Fixed: the
+      surfaces now sit a hair apart; people fade in and out standing up; one pair of scissors travels
+      from the table, past the floor below, to the site; the padlock fades in as it drops and its glow
+      builds over a few frames; the pavement is wider, so the crowd and the miners stand clearly outside.
+      Then filmed again.
+    - **Filming:** 1,110 frames in about 33 minutes (about 1.8 seconds a frame, filmed two at a time).
+      Sent as "27 Sample - the house" (about 20 MB). As your rule says, the video and music are not in the repository;
       the code, the timing file and a sheet of one frame a second are.
     - **Not done:** new wall paintings (the rooms reuse old ones, so some walls don't quite match their
       rooms, and the vault and mine walls are plain painted surfaces); narration; Italy; checking which

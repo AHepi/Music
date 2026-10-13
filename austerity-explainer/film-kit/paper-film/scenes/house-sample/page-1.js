@@ -89,7 +89,8 @@ export async function build(kit) {
     house: kit.at('house'), end: kit.at('end'),
   };
   T.scissorsUp = T.cuts - 0.05;          // the scissors appear on the committee's table...
-  T.scissorsLand = T.cuts + 0.8;          // ...and land in the building site below
+  T.scissorsLeave = T.cuts + 0.35;        // ...leave it, passing in front of the floor below...
+  T.scissorsLand = T.cuts + 0.85;         // ...and land in the building site
   T.zoomIn = [T.cuts + 3.8, T.cuts + 5.8];
   T.padlock = T.gold + 0.55;              // the pound locked to gold
   T.down = [T.gold + 2.6, T.gold + 6.6];
@@ -151,8 +152,10 @@ export async function build(kit) {
   const bricklayerDown = rooms.site.holds(await kit.cutout('worker-standing', { at: [-0.25, F.middle.bottom, -0.55], width: 0.6, yaw: -0.2 }));
   const materials = rooms.site.holds(await kit.cutout('materials', { at: [0.95, F.middle.bottom, -0.7], width: 1.35 }));
   shadowUnder(-0.25, F.middle.bottom, -0.5, 0.7, 0.3); shadowUnder(0.95, F.middle.bottom, -0.65, 1.3, 0.4); shadowUnder(2.65, F.middle.bottom, -1.65, 2.2, 0.5);
-  const scissors = await kit.cutout('scissors-chain', { at: [0.95, F.middle.bottom + 0.05, -0.35], width: 2.0 });
-  const scissorsOnTable = rooms.treasury.holds(await kit.cutout('scissors-chain', { at: [-1.25, F.top.bottom, -0.45], width: 1.05 }));
+  // one pair of scissors: it stands on the committee's table, then travels down to the building site
+  const scissorsRest = [0.95, F.middle.bottom + 0.05, -0.35];
+  const scissors = await kit.cutout('scissors-chain', { at: scissorsRest, width: 2.0 });
+  const onTable = { dx: -1.25 - scissorsRest[0], dy: F.top.bottom - scissorsRest[1], dz: -0.45 - scissorsRest[2], scale: 0.525 };
 
   // ---- the factory floor and the kitchen
   const lathe = rooms.factory.holds(await kit.cutout('lathe', { at: [-2.45, F.ground.bottom, -1.35], width: 2.05 }));
@@ -180,10 +183,10 @@ export async function build(kit) {
   shadowUnder(1.05, F.cellar.bottom, -0.5, 0.8, 0.25);
 
   // ---- the street: a crowd with placards, then the miners who stay out (on the lit pavement)
-  const crowd = await kit.cutout('crowd-back', { at: [0.3, STREET, 1.7], width: 5.6 });
+  const crowd = await kit.cutout('crowd-back', { at: [0.3, STREET, 3.6], width: 5.6 });
   const streetMiners = [];
   for (const [i, [x, width, yaw]] of [[-2.6, 0.66, 0.18], [-0.6, 0.72, -0.06], [1.2, 0.68, -0.2]].entries()) {
-    streetMiners.push(await kit.cutout('worker-standing', { at: [x, STREET, 1.85 + 0.08 * i], width, yaw }));
+    streetMiners.push(await kit.cutout('worker-standing', { at: [x, STREET, 3.7 + 0.1 * i], width, yaw }));
   }
 
   // ---- air: chimney smoke, dust falling from ceilings, snow
@@ -232,17 +235,24 @@ export async function build(kit) {
     rooms.mine.setLevel(dimAtEnd(mineLevel, 0.08));
 
     // the cuts
-    // on the committee's table first, then gone (they are on their way down)
-    if (t < T.scissorsUp) scissorsOnTable.set({ visible: false });
-    else if (t < T.scissorsUp + 0.55) scissorsOnTable.set(popUp(t, T.scissorsUp, { height: scissorsOnTable.height, restZ: 0.3 }, { stiffness: 22, damping: 0.55 }));
-    else { const k = smooth((t - (T.scissorsUp + 0.55)) / 0.2); scissorsOnTable.set(k >= 1 ? { visible: false } : { opacity: 1 - k }); }
-    const scissorsPose = dropIn(t, T.scissorsLand, { fall: 0.3, height: 1.0, roll: 0.4, bounce: 0.25 });
-    if (scissorsPose.visible && t < T.scissorsLand + 2.2) {
-      const snip = t > T.scissorsLand ? 0.18 * Math.sin((t - T.scissorsLand) * 14) * Math.exp(-(t - T.scissorsLand) * 1.4) : 0;
-      scissors.set({ ...scissorsPose, roll: (scissorsPose.roll ?? 0) + snip });
-    } else if (t >= T.scissorsLand + 2.2) {
-      scissors.set(foldDown(t, T.scissorsLand + 2.2, 0.5));
-    } else scissors.set({ visible: false });
+    // the scissors: fade in on the committee's table, travel down in front of the floor below, land and
+    // snip in the building site, then fade away
+    if (t < T.scissorsUp) scissors.set({ visible: false });
+    else if (t < T.scissorsLeave) {
+      const k = smooth((t - T.scissorsUp) / 0.2);
+      scissors.set({ ...onTable, dy: onTable.dy + 0.15 * (1 - k), opacity: k });
+    } else if (t < T.scissorsLand) {
+      const u = (t - T.scissorsLeave) / (T.scissorsLand - T.scissorsLeave);
+      scissors.set({ dx: lerp(onTable.dx, 0, smooth(u)), dy: onTable.dy * (1 - u * u), dz: lerp(onTable.dz, 0, u) + 1.4 * Math.sin(Math.PI * u),
+        scale: lerp(onTable.scale, 1, smooth(u)), roll: 0.35 * Math.sin(Math.PI * u) });
+    } else if (t < T.scissorsLand + 2.2) {
+      const landed = dropIn(t, T.scissorsLand, { bounce: 0.2, roll: 0.3 });
+      const snip = 0.18 * Math.sin((t - T.scissorsLand) * 14) * Math.exp(-(t - T.scissorsLand) * 1.4);
+      scissors.set({ ...landed, fold: 0, roll: (landed.roll ?? 0) + snip });
+    } else {
+      const k = smooth((t - (T.scissorsLand + 2.2)) / 0.5);
+      scissors.set(k >= 1 ? { visible: false } : { opacity: 1 - k });
+    }
     const fall = smooth((t - (T.scissorsLand + 0.2)) / 0.9);
     scaffold.rotation.z = -1.25 * fall * fall;
     scaffold.position.y = F.middle.bottom - 0.15 * fall;
@@ -259,36 +269,42 @@ export async function build(kit) {
 
     // the gold glints; a padlock lands on it (the pound locked to gold at the pre-war price)
     const padlockAge = t - T.padlock;
+    const flash = padlockAge < 0 ? 0 : 0.6 * smooth(padlockAge / 0.12) * Math.exp(-padlockAge * 3);
     for (const g of goldBars) {
       g.bars.set({});
-      g.glint.material.opacity = top * (0.2 + (padlockAge < 0 ? 0 : 0.8 * Math.exp(-padlockAge * 2.2)));
+      g.glint.material.opacity = top * (0.12 + flash);
     }
-    padlock.set(dropIn(t, T.padlock, { fall: 0.3, height: 1.1, roll: 0.2, bounce: 0.22 }));
+    // the padlock fades in as it starts to fall from just under the vault's ceiling
+    const padlockPose = dropIn(t, T.padlock, { fall: 0.45, height: 1.45, roll: 0.2, bounce: 0.22 });
+    padlock.set(padlockPose.visible ? { ...padlockPose, opacity: smooth((t - (T.padlock - 0.45)) / 0.15) } : padlockPose);
     kitchenPacket.set({});
     // the miners' pay packet shrinks when the owners want lower pay
     const shrink = smooth((t - (T.owners + 0.15)) / 0.8);
-    packet.set(t < T.walkOut ? { scale: lerp(1, 0.45, shrink) } : foldDown(t, T.walkOut + 0.3, 0.4));
+    const gone = (start, length = 0.45) => { const k = smooth((t - start) / length); return k >= 1 ? { visible: false } : { opacity: 1 - k }; };
+    packet.set(t < T.walkOut + 0.3 ? { scale: lerp(1, 0.45, shrink) } : { ...gone(T.walkOut + 0.3), scale: 0.45 });
     // the mine's ceiling comes down; the miners bow
     const squeeze = smooth((t - T.squeeze[0]) / (T.squeeze[1] - T.squeeze[0]));
-    house.setMineCeiling(lerp(F.cellar.top, F.cellar.top - 0.75, squeeze));
+    house.setMineCeiling(lerp(F.cellar.top, F.cellar.top - 0.95, squeeze));
     for (const [i, m] of miners.entries()) {
       const leave = T.walkOut + 0.1 * i;
       if (t < leave) m.miner.set({ fold: 0.22 * squeeze, dy: -0.04 * squeeze });
-      else m.miner.set(foldDown(t, leave, 0.4));
+      else m.miner.set({ ...gone(leave, 0.4), fold: 0.22 });
       const lit = t < leave ? 1 : 1 - smooth((t - leave) / 0.4);
       m.lamp.material.opacity = 0.6 * lit; m.halo.material.opacity = 0.1 * lit;
       m.lamp.position.y = F.cellar.bottom + 1.3 - 0.1 * squeeze; m.halo.position.y = m.lamp.position.y + 0.1;
     }
     // the machinist walks out with the strike
-    machinist.set(t < T.walkOut ? {} : foldDown(t, T.walkOut, 0.45));
+    machinist.set(t < T.walkOut ? {} : gone(T.walkOut, 0.45));
 
     // the street: the crowd pops up on "strike", folds away on "months", the miners stay
-    if (t < T.months) crowd.set(popUp(t, T.walkOut + 0.25, { height: crowd.height, restZ: 0.4 }, { stiffness: 16, damping: 0.6 }));
-    else {   // the crowd sinks out of sight and fades (folding it flat would show its pale paper back)
-      const k = smooth((t - T.months) / 0.7);
-      crowd.set(k >= 1 ? { visible: false } : { dy: -1.6 * k, opacity: 1 - k });
-    }
-    for (const [i, m] of streetMiners.entries()) m.set(popUp(t, T.months + 0.35 + 0.15 * i, { height: m.height, restZ: 0.4 }, { stiffness: 18, damping: 0.6 }));
+    // (they fade in and out standing up: a cut-out folded flat low in the frame shows its pale back)
+    const arrive = (start, length = 0.5) => {
+      if (t < start) return { visible: false };
+      const k = smooth((t - start) / length);
+      return { opacity: k, dy: -0.25 * (1 - k) };
+    };
+    crowd.set(t < T.months ? arrive(T.walkOut + 0.25, 0.6) : gone(T.months, 0.7));
+    for (const [i, m] of streetMiners.entries()) m.set(arrive(T.months + 0.35 + 0.15 * i, 0.45));
 
     // air
     for (const s of smoke) s.effect.set({ t, origin: s.origin, until: T.walkOut + 0.4, scale: 0.9, wind: 0.6 });
@@ -322,7 +338,7 @@ export async function build(kit) {
     platedHook(ctx, t, { at: T.house, until: T.end + 0.9, lines: ['ONE HOUSE'], y: 250, size: 92 });
     hook(ctx, t, { at: T.house + 0.5, until: T.end + 0.9, text: 'WHO DECIDES, WHO PAYS', y: 345, size: 54, colour: INK.amber });
     floorLabel(ctx, t, { at: T.house + 0.9, until: T.end + 0.9, y: screenY(LEFT, FLOORS.top.top - 1.3), text: 'DECIDES' });
-    floorLabel(ctx, t, { at: T.house + 1.3, until: T.end + 0.9, y: kit.toScreen(new THREE.Vector3(LEFT, STREET + 1.75, 1.9)).y, text: 'PAYS' });
+    floorLabel(ctx, t, { at: T.house + 1.3, until: T.end + 0.9, y: kit.toScreen(new THREE.Vector3(LEFT, STREET + 1.75, 3.8)).y, text: 'PAYS' });
     note(ctx, t, { at: T.house + 1.6, until: T.end + 0.9, y: 1440, lines: ["A sample of the look for chapter 3, after Clara E. Mattei's", 'argument. History not yet researched.'] });
     return true;
   }

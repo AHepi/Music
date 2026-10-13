@@ -156,17 +156,18 @@ class Room {
     // floor and ceiling
     const floorMaterial = keep(roomMaterial(texture(surface(floor), width / 3, 1), { tint: warmth, glow: 0.8 }));
     const ground = add(plane(width, DEPTH, floorMaterial));
-    ground.rotation.x = -Math.PI / 2; ground.position.set(middle, y0, FRONT - DEPTH / 2);
+    const INSET = 0.008;   // a hair inside the slabs and walls: surfaces sharing a plane flicker
+    ground.rotation.x = -Math.PI / 2; ground.position.set(middle, y0 + INSET, FRONT - DEPTH / 2);
     const ceilingMaterial = keep(roomMaterial(texture(surface(sides), width / 2, 1), { tint: sideTint, glow: 0.45 }));
     const ceiling = add(plane(width, DEPTH, ceilingMaterial));
-    ceiling.rotation.x = Math.PI / 2; ceiling.position.set(middle, y1, FRONT - DEPTH / 2);
+    ceiling.rotation.x = Math.PI / 2; ceiling.position.set(middle, y1 - INSET, FRONT - DEPTH / 2);
     this.ceiling = ceiling;
     // side walls
     const sideMaterial = keep(roomMaterial(texture(surface(sides), 1, height / 3), { tint: sideTint, glow: 0.45 }));
     const left = add(plane(DEPTH, height, sideMaterial));
-    left.rotation.y = Math.PI / 2; left.position.set(x0, (y0 + y1) / 2, FRONT - DEPTH / 2);
+    left.rotation.y = Math.PI / 2; left.position.set(x0 + INSET, (y0 + y1) / 2, FRONT - DEPTH / 2);
     const right = add(plane(DEPTH, height, sideMaterial));
-    right.rotation.y = -Math.PI / 2; right.position.set(x1, (y0 + y1) / 2, FRONT - DEPTH / 2);
+    right.rotation.y = -Math.PI / 2; right.position.set(x1 - INSET, (y0 + y1) / 2, FRONT - DEPTH / 2);
     // a hanging lamp and the pool of light it throws on the back wall
     if (lamp) {
       const at = new THREE.Vector3(lerp(x0, x1, lamp[0]), lerp(y0, y1, lamp[1]), FRONT - DEPTH * 0.45);
@@ -307,7 +308,8 @@ export async function buildHouse(kit) {
 
   // the mine's ceiling can come down (the pressure): a block of rock whose underside moves down, with
   // timber props under it; both brighten and darken with the mine's light
-  const rockMaterial = new THREE.MeshLambertMaterial({ map: texture(surface('rock'), 3, 0.5), color: 0x8a786a, emissive: 0xd8a070, emissiveMap: texture(surface('rock'), 3, 0.5), emissiveIntensity: 0.8 });
+  const rockMap = texture(surface('rock'), 3, 0.5);
+  const rockMaterial = new THREE.MeshLambertMaterial({ map: rockMap, color: 0x8a786a, emissive: 0xd8a070, emissiveMap: rockMap, emissiveIntensity: 0.8 });
   rockMaterial.userData.glow = 0.8;
   const mineCeiling = box(RIGHT - LEFT - 0.01, 1, DEPTH - 0.01, rockMaterial);
   scene.add(mineCeiling);
@@ -322,8 +324,9 @@ export async function buildHouse(kit) {
     return { post, cap, x };
   });
   const setMineCeiling = (top) => {
-    const underside = top - 0.3, above = FLOORS.cellar.top;
+    const underside = top - 0.3, above = FLOORS.cellar.top - 0.01;
     mineCeiling.scale.y = above - underside; mineCeiling.position.set(0, (above + underside) / 2, FRONT - DEPTH / 2);
+    rockMap.repeat.y = 0.5 * (above - underside) / 0.3;   // the rock's texture keeps its size as the block grows
     const height = underside - FLOORS.cellar.bottom;
     for (const p of props) {
       p.post.scale.y = height; p.post.position.set(p.x, FLOORS.cellar.bottom + height / 2, FRONT - 0.7);
@@ -335,16 +338,16 @@ export async function buildHouse(kit) {
 
   // the pavement in front (where people stand when they walk out), with a gas lamp and its pool of light
   const pavementMap = texture(surface('pavement'), 6, 1.1);
-  const pavement = box(14, 0.15, 2.6, new THREE.MeshLambertMaterial({ map: pavementMap, color: 0xb4b8be, emissive: 0x6a5238, emissiveMap: pavementMap, emissiveIntensity: 0.45 }));
-  pavement.position.set(0, STREET - 0.075, FRONT + 1.3);
+  const pavement = box(14, 0.15, 4.6, new THREE.MeshLambertMaterial({ map: pavementMap, color: 0xb4b8be, emissive: 0x6a5238, emissiveMap: pavementMap, emissiveIntensity: 0.45 }));
+  pavement.position.set(0, STREET - 0.075, FRONT + 2.3);
   scene.add(pavement);
   const post = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.07, 3.0, 8), new THREE.MeshLambertMaterial({ color: 0x1e2428 }));
-  post.position.set(-3.9, STREET + 1.5, FRONT + 2.1);
+  post.position.set(-3.9, STREET + 1.5, FRONT + 3.9);
   scene.add(post);
-  const lantern = glowSprite(0xffcf8a, 0.7, 1); lantern.position.set(-3.9, STREET + 3.05, FRONT + 2.1); scene.add(lantern);
+  const lantern = glowSprite(0xffcf8a, 0.7, 1); lantern.position.set(-3.9, STREET + 3.05, FRONT + 3.9); scene.add(lantern);
   const lanternHalo = glowSprite(0xffb867, 3.2, 0.35); lanternHalo.position.copy(lantern.position); scene.add(lanternHalo);
   const pool = new THREE.Mesh(new THREE.PlaneGeometry(6, 2.6), new THREE.MeshBasicMaterial({ map: glowSprite().material.map, color: 0xffb867, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false }));
-  pool.rotation.x = -Math.PI / 2; pool.position.set(-2.6, STREET + 0.01, FRONT + 1.4);
+  pool.rotation.x = -Math.PI / 2; pool.position.set(-2.4, STREET + 0.01, FRONT + 3.2);
   scene.add(pool);
 
   return { rooms, chimneys, setMineCeiling, lantern: [lantern, lanternHalo] };

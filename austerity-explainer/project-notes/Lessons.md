@@ -322,6 +322,12 @@ Only failures in doing the work belong here. Newest at the bottom.
     was a padlock on gold already there, and the miners' packet. Give the facts checker the pictures.
 84. **A street needs its own light to read as outside.** People standing just in front of lit rooms
     look as if they are inside them; a lit pavement and a lamp pool separate the street.
+85. **Two surfaces in the same plane flicker when the camera moves.** A room's ceiling sat exactly on
+    the slab above it and swapped colour in one frame at the start of a move; keep built surfaces a hair
+    apart (log 27).
+86. **Check the film in motion, not only stills.** Pieces popping in for one frame, things passing
+    through floors and flat pale cards only showed in the moving film; a frame-to-frame difference
+    measure finds them quickly.
 
 ## Traps
 
