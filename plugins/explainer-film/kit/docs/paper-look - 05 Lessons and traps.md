@@ -85,13 +85,13 @@ new series doesn't walk into the same holes.
 - A word spoken twice on a page must be asked for by which time it is spoken.
 
 - Composing a shot (log 30; full rules in `07 Composing a shot.md`):
-  - A shot looks arranged when its strong things agree: where the street's lines meet, the biggest
-    bright shape, the biggest near props and the warm light all fall on the subject. Even weight left
+  - A shot looks arranged when its strong things agree: where the street's lines meet, the
+    brightest parts, the biggest near props and the warm light all fall on the subject. Even weight left
     and right is not enough. Check with `paper-film/tools/measure_composition.py`.
-  - Aim the street by turning the camera; move it only by sliding. A turn during a move slides the point
-    where the lines meet across the frame.
+  - Aim the street by turning the camera; move it only by sliding. A turn during a move slides where the
+    lines meet across the frame.
   - Stand the camera where a person would stand to look at the subject, at eye height, level.
   - Story props touch and overlap as one group; work props stay small and far; nothing big and dark in
     the bottom left, where the eye enters.
-  - Image models are good layout sketches when allowed to choose the camera, but never use their
-    lettering: all of them garbled the notice.
+  - In one run, Nano Banana Pro made a good sketch of the composition when free to choose the camera;
+    never use a program's lettering: the notices came back garbled.

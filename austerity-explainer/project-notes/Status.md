@@ -200,20 +200,22 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   of the filmed clip; filmed, scanned frame by frame and sent as "29 Test - pit village lockout" (not in
   the repository: video). Frame sheet: `experiments/29 Test - pit village lockout - two frames a second.jpg`.
 
-## Arranging test and why it works (log 30, 2026-10-14)
+## Composition test and why it works (log 30, 2026-10-14)
 
 - Our empty street and ten prop pictures given to Nano Banana Pro (twice: our camera, its own camera),
   Flux 3 (our camera) and Seedance 2.5 (a 10-second draft video). Results in `experiments/` ("30 Test -
   composed by ..."); the exact requests in "30 Composition test - the four requests"; the pictures sent
   in "30 Composition test - pictures given to the models". The Seedance video was sent, not saved to
   the repository (video).
-- Judged by three critics and a skeptic: Nano Banana's own-camera picture arranges best (the user agrees);
-  Seedance's way of moving is best; nothing generated can go on screen (every model garbled the notice).
+- Judged by three critics and a skeptic: Nano Banana Pro's own-camera picture is composed best (the user
+  agrees); Seedance's way of moving is best; nothing the programs made can go on screen (their notices
+  are garbled).
 - Why the own-camera picture works: measured with the new `film-kit/paper-film/tools/measure_composition.py`
   and checked by five critics and a skeptic. Every strong thing points at the notice corner. Checked
-  reasons, the measurements and a rebuild plan (on paper, not rendered): `experiments/30 Why it works - ...`.
-- Twelve rules with checks for placing props and the camera: `film-kit/07 Composing a shot.md` (also in
-  the plugin's kit docs).
+  reasons, the measurements and a rebuild plan (worked out by calculation, not yet drawn in Blender):
+  `experiments/30 Why it works - ...`.
+- A main rule and twelve more, each with a check, for placing props and the camera:
+  `film-kit/07 Composing a shot.md` (also in the plugin's kit documents).
 
 ## Waiting on you
 
@@ -238,8 +240,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 ## Spend so far
 
 Picture allowance: about US$5.40 left of the "upto $10 in Fal" given when chapter 2 started (about
-US$4.58 spent since). About US$10.30 in all (arranging test, log 30: about US$2.80, of which Seedance's
-draft about US$2.06, Nano Banana Pro 30 US cents, Flux up to about 45 US cents; plan 3 test, log 29:
+US$4.58 spent since). About US$10.30 in all (composition test, log 30: about US$2.80, of which Seedance's
+draft about US$2.06, Nano Banana Pro 30 US cents, Flux up to about 43 US cents; plan 3 test, log 29:
 about 50 US cents for five Flux repaints;
 SAM 3D test, log 22: about 12 US cents; chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
 bank street, and about 4,300 ElevenLabs credits, about 75 US cents).

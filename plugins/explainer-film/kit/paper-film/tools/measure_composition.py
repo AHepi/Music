@@ -6,7 +6,7 @@ counts where the picture's visual weight sits.
 Use: python3 measure_composition.py PICTURE OUTPUT_FOLDER [OBJECT_BOXES.json]
 OBJECT_BOXES.json (optional) names the objects to report, each as [left, top, right, bottom] in
 fractions of the picture's width and height (0 = left or top, 1 = right or bottom), for example
-{"notice paper": [0.744, 0.4525, 0.914, 0.645]}. Output: five pictures and measurements.json.
+{"notice paper": [0.744, 0.4525, 0.914, 0.645]}. Output: five pictures and "06 measurements.json".
 Needs Python with OpenCV (cv2) and NumPy. If fewer than about 15 slanted lines are found, the
 "where the lines meet" figure is unreliable (soft frames give few lines): trace the kerbs and
 gutters by hand instead. The rules these numbers check are in "07 Composing a shot.md" (in the film kit)."""
@@ -127,7 +127,7 @@ if meeting_points:
 for name in elements:
     left, top, right, bottom = box_in_pixels(elements[name])
     cv2.rectangle(guide, (left, top), (right, bottom), (255, 120, 0), thick)
-save('01 thirds grid and converging lines.jpg', guide)
+save('01 thirds grid and where the lines meet.jpg', guide)
 
 squint = cv2.GaussianBlur(grey, (0, 0), width / 60)
 levels = np.floor(squint * 5) / 5 + 0.1
@@ -145,7 +145,7 @@ cv2.drawMarker(weight_view, (int(centre[0] * width), int(centre[1] * height)), (
 cv2.line(weight_view, (width // 2, 0), (width // 2, height), (255, 255, 255), thick)
 save('05 where the visual weight sits.jpg', weight_view)
 
-json.dump(numbers, open(f'{output_folder}/measurements.json', 'w'), indent=1)
+json.dump(numbers, open(f'{output_folder}/06 measurements.json', 'w'), indent=1)
 print(json.dumps({k: v for k, v in numbers.items() if k != 'elements'}, indent=1))
 for name, values in element_numbers.items():
     print(name, values)

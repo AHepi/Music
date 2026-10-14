@@ -192,9 +192,10 @@ three zip files.
    film in motion.
 
 Before step 2 (from log 30): compose the shot with `film-kit/07 Composing a shot.md`. Optionally sketch
-the layout first by giving Nano Banana Pro (on fal, 15 US cents) the empty street and the prop pictures and
-letting it choose the camera; rebuild its layout with our own props, never its lettering. Run
-`paper-film/tools/measure_composition.py` on a test render and check the main rule: where the lines meet,
+the composition first by giving Nano Banana Pro (on fal, 15 US cents) the empty street and the prop
+pictures and letting it choose the camera (it worked once, log 30); rebuild its composition with our own
+props, never its lettering. Run `paper-film/tools/measure_composition.py` on a test picture drawn in
+Blender and check the main rule: where the lines meet,
 the brightest parts and the biggest near props all fall on the subject. Move the camera by sliding, never
 turning.
 

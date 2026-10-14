@@ -552,12 +552,15 @@ overturn any of them in one line. Changes to the project must follow this file.
 
 ### Claude's calls for item 35
 
-- Both routes tried at once with the same pictures (the empty painted street plus ten prop pictures):
-  Nano Banana Pro twice (keeping our camera view, and choosing its own camera), Flux 3 once (our view),
-  and Seedance 2.5 once as a 10-second draft at 480p (its cheapest size; it can be finished at 1080p within
-  7 days without being made again).
+- Both routes tried at once with the same pictures (the empty painted street plus ten prop pictures;
+  Flux takes only ten in all, so it got all but the pail): Nano Banana Pro twice (keeping our camera, and
+  choosing its own camera), Flux 3 once (keeping our camera), and Seedance 2.5 once as a 10-second draft
+  480 pixels wide (its cheapest size; it can be finished at full size, 1,080 pixels wide, within 7 days
+  without being made again).
 - The results are judged as guides first: what they teach about where props go and how the camera moves.
   Whether a model's video could replace our own 3D shots is judged separately.
+- After the critique: nothing a program made goes on screen (their notices are garbled), and the
+  recommended route is to rebuild the own-camera picture in our own 3D street. Overturn in one line.
 
 36. **The own-camera picture is good** (your words, about "30 Test - composed by Nano Banana - own
     camera"): "Just a note: this image is good. I'm not sure why, though. Seat next to fire makes sense
@@ -568,8 +571,8 @@ overturn any of them in one line. Changes to the project must follow this file.
 
 ### Claude's calls for item 36
 
-- The picture was measured (where its lines meet, its light and dark areas, its warm light, where its
-  weight sits) and its reasons tested by independent critics, so the answer rests on evidence.
+- The picture was measured (where its street lines meet, its brightest parts, its warm light, and where
+  its weight sits: how strongly each part pulls the eye) and its reasons tested by independent critics, so the answer rests on evidence.
 - The reasons that survive become rules for placing props and the camera in our own 3D shots.
 
 ## Traps

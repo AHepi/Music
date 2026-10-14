@@ -5,7 +5,7 @@
 A 15 to 20 minute narrated explainer for a tall phone screen, made of painted pictures moved like
 paper (the paper pop-up look you chose in log 12; the old-scrapbook look came first), telling where
 austerity came from and what it does, from Clara E. Mattei's book *The Capital Order* (2022), seen
-through the eyes of economists who study how modern money works (never named as MMT in the film).
+through the eyes of economists who study how modern money works (never named in the film).
 Easy to understand, yet thorough; conversational and a little urgent. Narrated by your voice Malina,
 over your soundtrack "Tension and Gravity".
 
@@ -14,15 +14,16 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 ## Where things stand
 
-- **Why a shot looks arranged, worked out** (log 30): fal's models were given our empty street and our
-  props to arrange. Nano Banana Pro, choosing its own camera, made the picture you liked ("30 Test -
-  composed by Nano Banana - own camera"). Measured and checked by critics, it works because every strong
-  thing in it (where the street's lines meet, the brightest shape, the biggest near props, the warm light,
-  the touching group of props) points at the notice; in our clip they point at three different places.
-  Seedance's 10-second video showed a better kind of move (straight toward the notice, no turning) but
-  can't be used as it is. None of the models' pictures can go on screen: all garbled the notice. Twelve
-  rules for future shots are in the film kit ("07 Composing a shot"). Next: rebuild that picture in our
-  own 3D street.
+- **Why a shot looks arranged, worked out** (log 30, the composition test): fal's picture- and
+  video-making programs were given our empty street and our props to arrange. Nano Banana Pro, choosing
+  its own camera, made the picture you liked ("30 Test - composed by Nano Banana - own camera"). Measured
+  and checked by critics, it works because every strong thing in it (where the street's lines meet, the
+  brightest parts, the biggest near props, the warm light, the touching group of props) points at the
+  notice corner; in our clip they point at three different places. Seedance's 10-second video showed a
+  better kind of move (one approach up the street, barely turning, with a long slowdown) but can't be
+  used as it is. None of the programs' pictures can go on screen: the notices are garbled. A main rule
+  and twelve more for future shots are in the film kit ("07 Composing a shot"). Recommended next: rebuild
+  that picture in our own 3D street.
 - **A 12-second test of plan 3** ("29 Test - pit village lockout", log 29): a 1926 pit village street
   built in 3D in Blender, repainted by Flux in the series' style, with the painting shone back onto the
   3D street so the camera can move up it, then a cut to a sharp, readable lock-out notice and LOCKED
@@ -76,9 +77,11 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 - **The narration is the steadier voice**, with the music a little louder ("10 Narration").
 - The earlier scrapbook film (08), the five animated samples (10) and the page 3 test (11) are kept
   for the record; the new film replaces them.
-- Spent so far: about US$10.30 in all (about US$2.80 for the arranging test, log 30; about 50 US cents for plan 3's repaints, log 29; about 12 US cents for the SAM 3D test, log 22). Chapter 1 and earlier: about US$5 (ElevenLabs about 75 US cents;
-  fal about US$4.25). Chapter 2: about US$1.16 on fal (12 paintings, depth maps, 3 masks; US$10 was
-  allowed) and about 4,300 ElevenLabs credits (about 75 US cents).
+- Spent so far: about US$10.30 in all: about US$2.80 for the composition test (log 30), about 50 US
+  cents for plan 3's paint-overs (log 29), about 12 US cents for the SAM 3D test (log 22), about US$5 for
+  chapter 1 and earlier (ElevenLabs about 75 US cents; fal about US$4.25), and about US$1.91 for chapter 2
+  (US$1.16 on fal for 12 paintings, depth maps and 3 masks, and about 4,300 ElevenLabs credits, about 75
+  US cents).
 
 ## How the pieces fit
 
@@ -289,9 +292,11 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Composition | How the things in a picture are arranged: where each stands, how big and how bright it is, and so where the eye goes. |
 | Where the lines meet | The spot where a street's straight lines (kerbs, gutters, roof edges) run together in the distance. It moves only when the camera turns, not when it slides. |
 | Brightest parts | The brightest 3 per cent of a picture after a slight blur: where the eye tends to land first. |
+| Weight | How strongly each part of a picture pulls the eye, from its size, brightness and detail. |
 | Nano Banana Pro | Google's picture-making program on fal; it can combine up to 14 pictures into one new picture. |
-| Seedance | A video-making program on fal (by ByteDance) that makes a short video from a description and up to 30 pictures. |
-| Draft | Seedance's quick, small, cheaper first version of a video (480 pixels wide); it can be finished at full size within 7 days without being made again. |
+| Seedance | A video-making program on fal (by ByteDance) that makes a short video from a description and several reference pictures (this test sent 11). |
+| Flux 3 | Black Forest Labs' picture-making program on fal; it repaints our plain pictures in the series' style and takes at most ten pictures at once. |
+| Seedance draft | Seedance's quick, small, cheaper first version of a video (480 pixels wide); it can be finished at full size within 7 days without being made again. |
 
 ## Log (added to, never rewritten)
 
@@ -935,84 +940,98 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       painted out). About US$8.20 of the picture allowance is left.
 
 
-30. **Letting fal arrange the props and move the camera, and why the best picture works.** You said
-    "It looks ok. The props look great. But there's no sense aesthetics with regards to their
-    composition. The camera movement is a little odd too. Hmm. Try fal. Feed a top quality image
-    generator with an image of the background set and images of the props and see how it organises
-    everything. Or alternatively, use seedance this way, and see how it composes everything and moves the
-    camera" (decision 35).
-    - **What was sent:** the same pictures to every model: the empty painted street (the props-removed
-      painting from log 29) and ten of our 3D props, each drawn alone on grey (handcart, coal sacks, the
-      oil-drum brazier, the notice on its board, two dustbins, a barrel, a coal tub on rails, a wooden pail,
-      a white kitchen chair, a hurricane lantern). Each was asked to dress the street and choose the camera
-      like a film's designer: which props, where, near and far layers, one clear subject, the notice easy
-      to find, the brazier burning, no people. The exact words are in "30 Composition test - the four
-      requests".
+30. **The composition test: letting fal arrange the props and move the camera, and why the best
+    picture works.** You said "It looks ok. The props look great. But there's no sense aesthetics with
+    regards to their composition. The camera movement is a little odd too. Hmm. Try fal. Feed a top
+    quality image generator with an image of the background set and images of the props and see how it
+    organises everything. Or alternatively, use seedance this way, and see how it composes everything and
+    moves the camera" (decision 35).
+    - **What was sent:** the same pictures to every program (Flux takes only ten, so it got all but the
+      pail): the empty painted street (the props-removed painting from log 29) and ten of our 3D props,
+      each drawn alone on grey (handcart, coal sacks, the drum (an oil drum used for a fire), the notice on
+      its board, two dustbins, a barrel, a coal tub on rails, a wooden pail, a white kitchen chair, a
+      hurricane lantern). Each was asked to dress the street like a film's designer (which props, where,
+      near and far layers, one clear subject, the notice easy to find, the drum's fire lit, no people);
+      two of the four were also asked to choose the camera. The exact words are in "30 Composition test -
+      the four requests".
     - **The four results** (all in `experiments/`, except the video):
       - Nano Banana Pro, keeping our camera ("30 Test - composed by Nano Banana - same view"): all ten
         props, each with a reason (bins by doors, barrels by walls), but spread evenly like a catalogue;
-        the handcart blocks the middle of the road; it swapped our oil drum for a wire basket.
+        the handcart blocks the middle of the road; it swapped our drum for a wire basket.
       - Nano Banana Pro, choosing its own camera ("30 Test - composed by Nano Banana - own camera"): stood on
-        the right-hand pavement at standing height and built one group at the notice: the burning drum in
+        the right-hand pavement at standing height and built one group at the notice: the drum burning in
         front, the chair against the board with the lantern on its seat and the pail at its foot, a street
-        lamp above; the handcart and sacks small on the far left; the road empty up to the pit. The critics'
-        clear winner (8 of 10) and yours: "this image is good". But it redrew the street, gave the board a
-        roof, and garbled the notice (dated 1756).
+        lamp above; the handcart and sacks small on the far left; the road clear up to the pit apart from a
+        small coal tub on a loose length of rail. The critics' clear winner (7 to 8 of 10) and yours: "this
+        image is good". But it redrew the street, gave the board a roof, and garbled the notice (dated
+        1756, "FRIDAY, 50H, APRIL").
       - Flux 3, keeping our camera ("30 Test - composed by Flux - same view"): kept the street almost pixel
-        for pixel, but jammed the props into one corner, lit the fire on the ground beside a cold drum and
-        made the lantern nearly as tall as the chair. Lowest (3.5 to 4 of 10). Flux takes only ten pictures,
-        so the pail was left out.
+        for pixel, but jammed most props into one tight group on the right (with the cart, barrel and a bin
+        in a second clump on the left), lit the fire on the ground beside a cold drum and made the lantern
+        nearly as tall as the chair. Lowest of the four in every round (3.5 to 5 of 10).
       - Seedance 2.5, a 10-second video ("30 Test - composed by Seedance - 10-second draft", sent; not in the
-        repository): one continuous move, no cut, starting low among the props, travelling up the street and
-        slowing onto the notice, which ends big. But its props look like 3D models rather than paintings,
-        several stand alone in the road, the drum steams with no flame, the notice appears from nowhere at
-        2.7 seconds, the camera is at hip height and moves at jogging pace, and the notice's dates are
-        garbled. It is a draft (480 pixels wide); it could be finished at full size within 7 days.
-    - **Checked by three critics** (layout, camera, usefulness) and a skeptic who re-checked 33 of their
-      claims against the pictures and rejected 11 (for example, "Seedance ends at an angle to the notice":
-      it ends nearly square-on).
-    - **What it means:** copy the layout and the kind of move, not the pictures. Every model garbled the
-      notice; only our own 3D notice reads correctly ("FRIDAY, 30th APRIL, 1926"). A model also redraws the
-      street and props differently each time, so its pictures can't be cut together with ours. The route
-      chosen: rebuild the own-camera picture in our 3D street with our props and notice.
+        repository): one continuous move, no cut, starting low among the props, travelling up the street,
+        barely turning, and slowing down for a long time onto the notice, which ends big. But its props look
+        like 3D objects rather than paintings, several stand alone in the road, the drum steams with no
+        flame, the notice appears from nowhere at 2.7 seconds, the camera is at hip height and moves at
+        jogging pace, and the notice's dates are garbled ("PRIDAY", "1828"). It is a draft, 480 pixels
+        wide; it could be finished at full size within 7 days.
+    - **Checked by three critics** (composition, camera, usefulness) and a skeptic who re-checked 35 of
+      their claims against the pictures and rejected 11 (for example, "Seedance ends at an angle to the
+      notice": it ends nearly square-on).
+    - **What it means:** copy the composition and the kind of move, not the pictures. Nano Banana Pro and
+      Seedance garbled the notice, and Flux's looks wrong too (too small to read for sure); only our own 3D
+      notice reads correctly ("FRIDAY, 30th APRIL, 1926"). Nano Banana Pro and Seedance also redraw the
+      street, and every program redraws the props, so their pictures can't be cut together with ours. I
+      recommend (yours to decide) rebuilding the own-camera picture in our 3D street with our props and
+      notice.
     - **Why the own-camera picture works** (decision 36; you said "this image is good. I'm not sure why ...
-      It's genuinely hard to vary"). I measured it (where its lines meet, its bright areas, its warm light,
-      where its weight sits) with a new tool, `measure_composition.py`, and five critics gave reasons that a
+      It's genuinely hard to vary"). I measured it with a new measuring tool (now in the film kit): where
+      its street lines meet, its brightest parts, its warm light, and where its weight sits (how strongly
+      each part pulls the eye, from its size, brightness and detail). Then five critics gave reasons that a
       skeptic checked against the picture and against our clip. The answer: **every strong thing in the
-      picture points at the same corner.** The street's lines all meet right beside the notice; the notice is
-      the biggest bright shape (63% of the brightest parts fall on it; in our clip about 20%, the rest on
-      clouds); the biggest near things (drum, chair) stand there; the warm light is there; and the props
-      there touch and overlap, so they read as one group. Because everything agrees, almost any change
-      either takes one signal away or makes a second place to look, which is why it is hard to vary. The
-      "balance" you feel is that agreement, not an even weight: our clip is just as even left and right (46
-      to 54 per cent against 43 to 57). In our clip the lines meet at the colliery door, the brightest spot
-      is a cloud and the biggest near thing is the coal sacks: three different places. The picture "30 Why
-      it works - do the strongest things agree" shows this side by side.
-    - **Your two observations hold, and do layout work too:** the chair by the fire and the lantern on the
-      seat say "someone sat here and has just stepped away", so a street with no people feels lived in; the
-      pale seat also repeats the paper's pale tone just below it, so the eye moves between them.
-    - **Why our camera move felt odd** (both critiques agree): it turned while it moved. Where the street's
-      lines meet depends only on which way the camera faces, so the turn slid that point toward a doorway
-      at the frame's edge and slid the pithead out of frame; then a cut jumped to a flat close-up. A move
-      that slides straight toward the subject without turning keeps everything pointing at it.
-    - **Rules for future shots:** twelve rules, each with a check, are in the film kit as "07 Composing a
-      shot" (and in the plugin). The checked reasons, a worked plan for rebuilding this picture in our
-      street, and the measurements are in `experiments/` ("30 Why it works - ...").
-    - **Rejected reasons** (true of almost any picture, or not supported by the measurements): "things sit
-      on the one-third lines", "the cool blue makes the orange strong", "the subject is on the right because
-      we read left to right" (the mirror image still works), "the three flames make a triangle".
-    - **Not checked, or unsure:** one run of each model only; another run could arrange things differently.
-      The rebuild plan's positions come from a helper's calculation on paper, not a render, and the two
-      critiques disagree on the camera's height (about 1.5 m or about 1.85 m); a test render settles it.
-      Flux's price may count the pictures sent as well as the one made; I've assumed it does.
-    - **Cost:** about US$2.80 on fal (Nano Banana Pro 30 cents for two pictures; Flux up to about 45 cents;
-      the Seedance draft about US$2.06). About US$5.40 of the picture allowance is left.
+      picture points at the same corner, the notice corner.** The street's lines all meet right beside the
+      notice; the notice is the biggest bright shape (about half to two thirds of the brightest parts fall
+      on it; in our clip about a fifth, the rest scattered over the sky, the fire's glow on the road and the
+      lamps); the biggest near props (the drum, the chair) stand there; the warm light is there; and the
+      props there touch and overlap, so they read as one group. Because everything agrees, almost any change
+      either takes one strong thing away or makes a second place to look, which is why it is hard to vary.
+      The balance you feel is that agreement, not an even weight: our clip is just as even left and right
+      (46 to 54 per cent against 43 to 57). In our clip the lines meet at the colliery door, the brightest
+      parts are scattered, and the biggest near prop is the coal sacks: three different places. The
+      picture "30 Why it works - do the strongest things agree" shows this side by side.
+    - **Your two observations hold, and help the composition too:** the chair by the fire and the lantern
+      on the seat say "someone sat here and has just stepped away", so a street with no people feels lived
+      in; the pale seat also repeats the notice's pale tone just below it, so the eye moves between them.
+    - **Why our camera move felt odd** (both rounds of critics agree): it turned while it moved. Where the
+      lines meet depends only on which way the camera faces, so the turn slid where the lines meet toward
+      the colliery door at the frame's edge and slid the pithead out of frame; then a cut jumped to a
+      close-up of the notice seen straight on, with no street or fire. A move that slides straight toward
+      the subject without turning keeps everything pointing at it.
+    - **Rules for future shots:** a main rule and twelve more, each with a check, are in the film kit as
+      "07 Composing a shot" (and in the plugin). The checked reasons, a worked plan for rebuilding this
+      picture in our street, and the measurements are in `experiments/` ("30 Why it works - ...").
+    - **Reasons thrown out** (true of almost any picture, or not supported by the measurements): "things
+      sit on the lines that divide the picture into thirds", "the cool blue makes the orange strong", "the
+      subject is on the right because we read left to right" (the mirror image still works), "the three
+      flames make a triangle".
+    - **The picture's own faults, to fix in the rebuild:** the notice's right edge, the chair and the pail
+      crowd the right edge, where phone apps put their buttons; three pairs of edges just touch (the street
+      lamp and a winding wheel, the drum and the board's corner, the lantern and the board's bottom); the
+      chair is spotless white in a sooty street; the chimney pours smoke although the pit is closed.
+    - **Not checked, or unsure:** one run of each program only; another run could arrange things
+      differently. The rebuild plan's positions come from a helper's calculation, not a picture drawn in
+      Blender, and the two rounds of critics disagree on the camera's height (about 1.5 m or about
+      1.85 m); a test picture drawn in Blender settles it. Flux's price may count the pictures sent as well
+      as the one made; I've assumed it does.
+    - **Cost:** about US$2.80 on fal (Nano Banana Pro 30 US cents for two pictures; Flux up to about 43 US
+      cents; the Seedance draft about US$2.06). About US$5.40 of the picture allowance is left.
 
 ## Next step
 
 Rebuild the picture you liked in our own 3D street, with our props and the correct notice, following
-"07 Composing a shot", and show you the still before anything is filmed. If you like it, film one slow
-push toward the notice that never turns. The repaint costs about 10 to 50 US cents.
+"07 Composing a shot", and show you the picture before anything is filmed. Painting it over in the
+series' style (a paint-over) costs about 10 to 50 US cents.
 
 ## Traps
 
