@@ -1,0 +1,93 @@
+launched 
+started verify:follow-the-advice
+started verify:new-faults
+result 
+started verify:code
+result 
+started verify:plain-words
+result 
+result 
+started skeptic
+===== The tool does most of its job. On the eight measured scenes its turn and tilt signs agree with Blender to within 0.4 px for every light and for where the lines meet. The camera-height, rule 1, rule 12 slide/turn and reference-size formulas check out (metres per pixel = distance/focal). Re-run with the current tool, all seven planted faults still come out as problem 1, except d, where the pail appears only at the end of problem 1's fix. But it gives wrong answers in cases close to the ones it was built for. A prop sunk into the pavement is called floating, and the fix says to lower it further. A prop just past the frame edge is called "hidden behind the set". The camera's lean (roll) has the opposite sign in the projection. A check file with no "lines" always fails rule 1. A landscape frame with the portrait reference gets "turn 16.3 degrees" as Fix first. Several checks can never fail: a prop up to 40% cut off at the bottom or left, a title zone given in pixels or with no area. Three unusual inputs crash it with a raw traceback.
+
+- wrong answer | A prop sunk into the ground is reported as floating, and the fix says to lower it further
+   where: shot_facts.py, the per-group loop (ray starts at low.z + 0.05, current line 214); check_shot.py check_resting (only air > 0.03 is checked, a negative value is never flagged)
+   evidence: Measured with the current shot_facts.py (md5 157e2c30) using --break "wooden-pail:0,0,-0.10;brazier:0,0,-0.30", saved to $S/verify-code/m-sunk-2. The pail is sunk 0.10 m: its bottom is at 1.518 against the pavement at 1.618, yet facts say stands_above_surface_below = +0.072. The drum is sunk 0.30 m and reads +0.167. Report $S/verify-code/out3/m-sunk-2/report.md, problem 1: 'drum is floating: there is 0.17 m of air ... Fix: Lower drum by 0.17 m'. Problem 2: 'Lower pail by 0.07 m'. Cause: once the bottom is more than 5 cm below the surface, the ray starts underneath it and finds a surface lower down. A sink of under 5 cm reads as negative air and passes as 'within 3 cm'. The old shot_facts.py 
+   fix: In shot_facts.py, also cast a ray upward from low.z, up to the group's centre and ignoring its own parts. If it meets an upward-facing surface, record a negative stands_above_surface_below, meaning sunk by that much. Or cast downward from the group's top, ignoring its own parts and anything that rests on it. In check_resting, flag air < -0.03 as 'sunk X m: raise it X m'.
+
+- wrong answer | A prop just past the frame edge is reported as 'in the frame but hidden behind the set'
+   where: check_shot.py check_missing, the 'else' branch (hider = ... 'the set (a wall or a house)'); shot_facts.py screen_box_unclipped (a box from the 8 corners of each bounding box)
+   evidence: Measured with --break "wooden-pail:0.50,0,0", saved to $S/verify-code/m-pail-just-out. The pail's solo picture has 0 pixels: it is wholly past the right edge. But its bounding-box screen box is [0.9773, 0.7921, 1.1903, 0.9515], whose left side is below the 0.99 that side_words needs. Report $S/verify-code/out3/m-pail-just-out/report.md, problem 1: 'pail is in the frame but hidden behind the set (a wall or a house). Fix: Move pail out from behind the set'. The bounding box sticks out past the outline (here by 0.026 of the width on the left), so this happens over a band of positions about 3 cm wide, not one exact spot.
+   fix: In check_missing, test shot.alone[g].any() first. If the solo picture is empty, the prop is outside the frame: name the side from the box's centre or the edge it crosses, and give the move. Only call a prop hidden when its solo picture has pixels in the frame.
+
+- wrong answer | The camera's lean (roll) has the opposite sign in check_shot's projection
+   where: check_shot.py camera_axes (current line 422), used by project(), our_projection() and ground_point()
+   evidence: Measured a camera leaned with Blender Euler Y = +5 degrees (my script $S/verify-code/roll_camera.py), saved to $S/verify-code/m-rolled; facts give roll_degrees 5.0. For 23 lights, check_shot.project() with that roll misses Blender's own on-screen positions by 25 to 1074 px. With the roll negated it matches to within 0.4 px (run against the copy check_shot.final-tested.py). Worked out directly: Euler Y = +5 moves the camera's right side down, (0.989, 0.119, -0.087), while camera_axes moves it up, (0.989, 0.119, +0.087); see $S/verify-code/roll_test.py. This only matters for a leaning camera, which rule 2 already flags. In that case two numbers come out wrong: where a floating out-of-frame pro
+   fix: In camera_axes, return right*cos(lean) - up*sin(lean) and up*cos(lean) + right*sin(lean), or write roll_degrees with the opposite sign in shot_facts.py. Then test it against the m-rolled lights.
+
+- wrong answer | With no street lines in the check file, rule 1 always fails, as 'the camera faces down the street'
+   where: check_shot.py Shot.__init__ (self.meet = lines_meet.get(key)) and check_lines (meet None means 'behind the camera')
+   evidence: shot_facts.py writes lines_meet only for the check file's 'lines'. I emptied lines_meet in a copy of the composed-end facts ($S/verify-code/f-nolines) and used chk-nolines.json (no 'lines' and no 'lines_key'). Report out3/nolines/report.md, problem 1: 'The street's lines meet behind the camera: it faces down the street. Fix: Turn the camera to face up the street.' The camera actually faces up the street. A 'lines_key' that names a line not in 'lines' takes the same path.
+   fix: Tell 'no lines given' (lines_key missing from the check's lines, or lines_meet empty) apart from 'the lines meet behind the camera' (the key is present in lines_meet with the value None). Turn the first case into a note that rule 1 was not checked.
+
+- wrong answer | A landscape frame is judged against the portrait reference's fractions: Fix first says turn 16.3 degrees while the camera match says ours matches
+   where: check_shot.py check_reference_lines, check_reference_places, check_camera_match (scale = shot.width / size[0]); Shot.__init__ (check 'size' never compared with facts 'size'; picture silently resized)
+   evidence: Measured with chk-landscape.json (size 1920x1080), saved to $S/verify-code/m-landscape. Report out3/m-landscape/report.md, Fix first: 'Ours meet 0.15 of the frame width left of the reference's: turn the camera about 16.3 degrees left'. The same report passes 'reference: the camera: within ... 0.1 degrees of turn'. The pixel misses are scaled by 1920/1536 = 1.25 where the focal lengths differ by about 0.39 (928 against 2365 px), so 'misses by up to 110 pixels' is inflated. Two related gaps: a landscape check file run on the portrait facts gives a report identical to the portrait one with no warning (out/landscape-check). A 1920x1080 picture given with portrait facts is silently stretched to 1
+   fix: Compare check['size'] with facts['size'] and with the reference picture_size's shape. When the shapes differ, skip the reference's lines_meet and boxes with a note, or redraw them through the matched camera. Scale pixel errors by the ratio of focal lengths, not widths. Refuse a --picture whose shape differs from the facts.
+
+- misleading | A story prop cut by the bottom or left edge passes unless less than 60% of it is inside
+   where: check_shot.py check_cut_by_edge (if 0.02 < share < 0.6); check_right_edge covers only the right side
+   evidence: Measured with --break "wooden-pail:-0.3,-0.6,-0.042", saved to $S/verify-code/m-pail-cut-bottom. The pail's box runs 0.858 to 1.057 down, so 71% is inside and 29% is below the frame. out3/m-pail-cut-bottom/report.md has 0 'cut by the frame edge' problems, and rule 3's box quietly ends at 'pail's bottom (1.00)'. Pushed off the right side (scene d: 69% inside), rule 12's phone-button check catches it; nothing catches the bottom or left. A prop at most 2% inside that still shows is not flagged either.
+   fix: Flag any story prop or must_read group with share below about 0.95, or whose solo picture touches the frame edge, on any side. Treat share <= 0.02 as cut too, rather than skipping it.
+
+- misleading | The reference-camera fix can push the camera past rule 2's eye height, and it is ranked first
+   where: check_shot.py check_camera_match (fit is not bounded by check['eye_height']; how_bad = 10 + ...)
+   evidence: chk-highref.json redraws the reference's landmarks as a camera 0.45 m higher than ours would see them. Report out3/highref/report.md, Fix first: 'Raise the camera about 0.45 m'. The same report passes 'rule 2: stand at eye height: 1.81 m (1.50 to 1.90)'. Following problem 1 puts the eye at 2.26 m, which breaks rule 2, and the next run would say lower it again.
+   fix: Fit the reference camera with its height held inside the eye_height range, and say plainly when the reference can't be matched within rule 2. Or rank the reference fix below rule 2 and make sure its fix keeps to that range.
+
+- misleading | A painted reference's lines-meet point 0.035 off becomes a camera fault and stalls every other fix
+   where: check_shot.py check_reference_lines (kind='camera'); main() sets shot.camera_fault from any failed 'camera' item
+   evidence: chk-vp-off.json moves the reference's lines_meet 0.035 to the right of ours, just past its 0.03 allowance. Report out3/vp-off/report.md: problem 1 is 'turn the camera about 1.3 degrees left'. Four composing fixes get the prefix 'Fix the camera first ... this may change', and the 'where each prop stands' checks are replaced by 'Not judged: the camera is wrong'. A pure turn moves every prop on screen together. Overlaps, box sizes and light don't change, so there is nothing to wait for. The text also reads 'Ours meet 0.03 ... (0.03 either way is allowed)' while counting it as a fault.
+   fix: Give the reference's lines-meet check the 'reference' kind, or its own kind after the composing rules, and don't let it set camera_fault. Print the difference to 3 decimals.
+
+- misleading | The title-zone check can't fail when the zone is given in pixels or has no area
+   where: check_shot.py check_titles (zone not validated; the mean of an empty slice is nan, and every comparison with nan is false)
+   evidence: chk-title-pixels.json uses title_zone [54, 38, 670, 230] (pixels by mistake). chk-title-empty.json uses [0.30, 0.02, 0.30, 0.12]. Both reports (out3/title-pixels, out3/title-empty) pass with 'The title area (54.00 to 670.00 across ...) is dim, empty sky.' As a control, a zone over the notice in fractions (chk-title-busy.json) does fail: 'Only 9% of the title area is sky'.
+   fix: Require 0 <= left < right <= 1 and 0 <= top < bottom <= 1, with a few pixels of area. Otherwise stop with a clear message about the check file.
+
+- misleading | With no 'subject' in the check file, 'None is the biggest bright thing' fails forever
+   where: check_shot.py check_light, check_lines, rule 10 (subject used without checking it exists)
+   evidence: chk-nosubject.json has no 'subject' and no 'support'. Report out3/nosubject/report.md, Fix first: 'Problem 1 (rule 5: None is the biggest bright thing). Dim notice (the marked bright patch), or light None more.' Rule 10 says 'away from None', and rule 1's note says 'None does not show'.
+   fix: Make 'subject' required, and stop with a clear message if it is missing or not a measured group. Or skip the subject-based rules with a note.
+
+- minor | Three unusual inputs crash with a raw traceback
+   where: check_shot.py Shot.__init__ (solo picture and --picture not checked after cv2.imread); check_story_props (min() of an empty box list)
+   evidence: Pail's solo picture deleted ($S/verify-code/f-nosolo): AttributeError: 'NoneType' object has no attribute 'max' (out3-nosolo.txt). A --picture path that doesn't exist: AttributeError ... 'shape' (out3-badpic.txt). box_excludes covering the subject and every shown story prop (chk-allexcluded.json): ValueError: min() iterable argument is empty (out3-allexcluded.txt). Facts missing 'lights' or 'stands_on' are handled well: a note, or 'none found'.
+   fix: After each cv2.imread, stop with 'missing picture: PATH (measure again)'. In check_story_props, skip the box check with a note when in_box is empty.
+
+- minor | The 'worst first' ranking compares numbers on different scales
+   where: check_shot.py Report.rank and the how_bad of each check
+   evidence: Rule 12's how_bad is right edge / limit, so even a prop well off the frame scores only about 1.1 to 1.6. In scene d the pail is 6% of the frame past the edge and scores 1.12. A 1-pixel rule-4 gap scores 17.58 (scene a: lamp post and winding wheels). 'Lit from below' scores 0.10/lift, which reached 5.29 in composed-end. Rule 3 'apart' scores 3 per prop, and rule 10 'outshines' is a flat 2. So which problem in tier 5 comes first depends on how each formula happens to scale, not on how far past its limit each one is. See the RANK lines from $S/verify-code/rank_dump_final.py.
+   fix: Measure every how_bad the same way: how far past the limit as a share of the limit, e.g. (value - limit) / limit, capped, with the same direction for 'too much' and 'too little'. Or rank the composing rules in a fixed order.
+
+- minor | The Fix first section can contradict itself, and the warm-light problem can come with no fix
+   where: check_shot.py write_report (adds the camera line whenever camera_fault is set); check_set_up (the fix doesn't name the group); check_light rule 6 (no fix when all the warm light is near the story prop
+   evidence: Scene e's facts with missing_groups ['ghost'] ($S/verify-code/f-tilted-ghost). out3/tilted-ghost/report.md reads 'Problem 1 (set-up). Check its name patterns ...' and then 'Fix the camera before anything else'; 'its' never says which group. A picture with the warm light outside the story props' box turned grey ($S/verify-code/warm-only-near-story.png): out3/warm-near/report.md, problem 2 'Warm light covers 5.5% of the frame, 1.8 times the most allowed' has no Fix line.
+   fix: Add the camera line only when problem 1 is a camera item, and name the group in the set-up fix. For too much warm light near the props, add 'lower the fire's and the lantern's strength'.
+
+- minor | Rule 1's view-angle formula leaves out the camera's turn
+   where: check_shot.py check_reference_lines (view = 2*atan(slope / (2*above)))
+   evidence: For a level camera turned by yaw, the lines meet (slope / (2*tan(fov/2)*cos(yaw))) of the frame height above the middle. Putting composed-end's own numbers in (meet 0.43949 down, slope 0.069927, yaw 6.87 degrees), the formula gives 60.03 degrees for a camera whose true view is 60.4. Including cos(yaw) gives 60.40.
+   fix: view = 2*atan(slope / (2*above*cos(radians(turn)))).
+
+- minor | 'Landed on something high' measures from a surface below the pavement, so its 0.5 m limit shifts from place to place
+   where: shot_facts.py lowest_surface_below ('lowest' = the lowest upward-facing surface); check_shot.py check_resting (high > 0.5)
+   evidence: composed-end facts: board, chair and pail stand on the pavement with 0.0 air, yet stands_above_ground is 0.179 to 0.183. The handcart on the road reads 0.366. So 'the ground' is a surface 0.18 to 0.37 m below the visible street, and a prop is flagged only when it is 0.13 to 0.32 m above the actual street.
+   fix: Measure 'high' against the street's own height (the pavement or road model at that x, y, or y*tan(4 degrees) plus the kerb), not the lowest surface below.
+
+- minor | The saved reports b to g are from an older tool, and in d the planted fault comes only at the end of problem 1's fix
+   where: $S/b-...-report to $S/g-...-report; '07 Composing a shot.md' ('Each time the report's first fix named the planted fault')
+   evidence: Re-running the current tool on the same facts ($S/verify-code/rerun) changes rule 12 in b to g. The saved reports say 'board reaches 1.01' and 'Move the camera about 0.20 m ... turn 2.1 degrees'. The current tool says 0.99, 0.14 m and 1.5 degrees, and d's pail move changes from 0.05 m to 0.11 m. In d, problem 1 is rule 12. Its fix leads with a camera slide for the board/notice fault that the good frame already has, and the pushed pail comes last: 'Move pail about 0.11 m to the left (after the camera move)'. check_shot.py was also changed at least five times while I was checking (md5 8e30af95, 7c4e5304, 5f8e2ded, 9a084165, 90300bd8, 85fc733f).
+   fix: Re-measure and re-check the eight scenes with one fixed version and keep its VERSION hash in each report. Soften the docs' claim for d, or fix the good frame's rule 12 so the planted fault becomes problem 1.
+
+NOT CHECKED: My final runs used a copy of check_shot.py with md5 90300bd8 ($S/verify-code/check_shot.final-tested.py) and shot_facts.py with md5 157e2c30. Another session kept editing check_shot.py during my check. The latest version I saw (85fc733f) was not tested. Two problems I found earlier are already fixed in newer versions: in scene a, the camera-match item and the lines-meet item gave two different turn amounts (1.0 against 1.7 degrees), now handled by one_camera_fix; and the pail's reference target 

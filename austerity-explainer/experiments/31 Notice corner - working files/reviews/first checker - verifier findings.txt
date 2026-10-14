@@ -1,0 +1,288 @@
+=== VERDICT: The checker runs without crashing on all six facts folders. It catches the faults planted in tests b (pail lifted), c (the lantern left floating when the chair moved; caught only by the new stands_on check) and e (tilt). In test a it finds the camera fault only through the reference camera match. Without a reference it blames the wrong cause and suggests a turn that changes nothing. Test d does not test what its name says: the pail's unclipped box is 1.12 to 1.38 across, so the pail is entirely out of frame and the "cut by the frame edge" check is never exercised.
+
+Note: check_shot.py and shot
+
+[0] wrong answer | paper-film/tools/check_shot.py check_reference, line 431 (reference: where the lines meet)
+   P: The turn direction is reversed. When our meeting point is left of the reference's (dx < 0), the fix says turn RIGHT. Turning the camera left (positive turn_degrees) is what moves the meeting point right.
+   E: Test a: ours meet at 0.659 and the reference's at 0.706, and the report says 'Turn the camera about 1.8 degrees right'. The facts show the direction: turn 5.9 degrees meets at 0.659 and turn 6.87 meets at 0.684, so more left turn moves the point right. Rotation model (diag/turn.py): turning left 1.6 degrees gives 0.703, near the reference; turning right gives 0.616, further away. The same report's camera match (problem 22) says 'turn it 1.0 degrees left', so the report contradicts itself.
+   F: Use "left" if dx < 0 else "right".
+
+[1] wrong answer | paper-film/tools/check_shot.py check_reference, lines 426-431
+   P: The check fails if either dx or dy is over 0.03, but the fix only mentions a sideways turn. When dy is the failure (a tilted camera or wrong height), the advice is beside the point.
+   E: Test e (3-degree tilt): dx = 0.684 - 0.706 = -0.023, within the limit; dy = 0.485 - 0.424 = 0.061, the actual failure. The fix says 'Turn the camera about 0.9 degrees right to match': the wrong axis, and the wrong direction as well.
+   F: Only give a turn when |dx| fails. When |dy| fails, give a tilt or level fix: tilt = atan(dy * 2 * tan(vfov/2)).
+
+[2] wrong answer | paper-film/tools/check_shot.py check_lines, lines 299-305 (rule 1 fix)
+   P: The fix 'Turn the camera about N degrees ...' cannot close the gap. A pure rotation moves the meeting point and the board together, so their distance stays the same. The turn is also worked out from the sideways part of the gap only, even when the gap is mainly vertical. Its direction is wrong even by its own note: the board's edge is left of the meeting point, yet it says turn left, which moves the point right, away from the board.
+   E: Test a, current code: the gap is 0.097 of the width (46 px sideways, 94 px vertically). Fix: 'Turn the camera about 1.6 degrees left'. Turning the frame in diag/turn.py: after 1.6 left the gap is 0.0971, after 1.6 right 0.0964, unchanged. Test e is a pure rotation and its gap is 0.006, the same as the composed frame. The real cause is the camera standing 0.42 m too high (eye 2.22 m). Without a reference (verify/a-noref) the report's 'Fix first' is this useless turn.
+   F: Report the gap as distance only. Say a turn moves the meeting point and the props together, so the fix is moving the camera (sideways or in height, by gap × distance to the board / focal length) or moving the support. Use the vertical part to suggest a height change.
+
+[3] wrong answer | paper-film/tools/check_shot.py check_pairs, lines 187-190 (and docstring line 21)
+   P: The rule 4 limits are applied as 20 px overlap and 25 px gap at 1080 wide. '07 Composing a shot.md' rule 4 sets them 'on a frame 1,536 pixels wide', which is 14 px and 18 px at 1080. The tool is 42% stricter and reports near-touches the rules allow.
+   E: diag/rule4.py: at the document's scale the composed frame's 'lamp post and winding wheels almost touch: 22 px apart' passes (22 > 17.6). In the current report this false alarm is 'Fix first' for the composed frame, and it also tops tests c and d. Test a's 'chair only just overlaps notice: 17 px' also passes at the document's limit (17 > 14.1).
+   F: Use scale = width / 1536 (or state the limits in fractions of the width) so they match the rules document.
+
+[4] wrong answer | paper-film/tools/check_shot.py check_raised, line 149 (stands_on)
+   P: The test 'stands_above_ground > 0.15' passes a prop that sits on the pavement. In this street every pavement prop measures about 0.18 m above 'ground', because the lowest upward-facing surface is below the pavement. So a lantern that fell off the chair onto the pavement is reported as standing on the chair.
+   E: Facts for pavement props: board 0.182, chair 0.18, pail 0.181, lamp post 0.179 above ground, each with about 0 cm to the surface under it. Test c's facts with the lantern set to those values (verify/r-lantern-on-pavement) give, under Passed: 'lantern should stand on chair: it stands 0.18 m above the ground, 0 cm above the surface just under it'. Rule 9 of the rules document names exactly this fault: 'Move the lantern to the ground and the chair just looks free'.
+   F: Check that the surface the ray meets belongs to the named support group. Have shot_facts record the hit object's group, or compare the hit height with the support's top. Do not rely on a height threshold.
+
+[5] wrong answer | paper-film/tools/check_shot.py check_grounding, line 133
+   P: Since the threshold was raised to 1.0 m, an on_ground prop that has landed on another prop (a chair seat about 0.5 m, a drum rim about 0.9 m, a barrel top) is no longer reported. The elif branch only looks at the gap to the surface just under it, which is about 0. The message still names 'another prop' as a cause it catches.
+   E: Composed facts with the pail set to what the lantern on the seat measures (0.66 m above ground, 0 above the seat), verify/r-pail-on-seat: no grounding problem is reported. The old 0.3 m threshold would have caught it.
+   F: Flag stands_above_ground above the local pavement step (about 0.25 m here), or check that the hit object is ground or set and not a named group. Handle buried layers under the road by ignoring hidden or non-rendering objects in the ray cast, not by raising the threshold.
+
+[6] wrong answer | paper-film/tools/check_shot.py check_reference, lines 448-458 (vertical fix for on_ground props)
+   P: (1) The size of the move is worked out from the foot's distance below the horizon, but applied to the compared point (centre or top), so it is wrong. (2) For a point above the horizon (the lamp post's top) the direction is reversed: nearer moves it UP the screen. (3) When a ground prop's foot is hidden, the fix becomes 'raise it by X m', which lifts a ground prop into the air.
+   E: Chair (composed), wanted 0.06 higher: the tool's formula gives 0.81 m further; the correct value from the centre's own offset (0.232) is 1.34 m. Lamp post with a reference top at 0.15 (verify/end-lamplower): 'move it about 1.07 m nearer'. That puts its top at -0.021, off the frame; reaching 0.15 needs 0.88 m further. Test a: 'lamp post: ... raise it by about 0.81 m', because its visible bottom is at 0.507, just under the horizon at 0.5.
+   F: Use the anchor point's own offset from the horizon, (oy - horizon): d_new = d × (oy - h) / (wy - h), with the sign following from that. Never suggest raising an on_ground prop.
+
+[7] wrong answer | paper-film/blender/shot_facts.py line 159 (vertical_fov)
+   P: With Blender's default sensor fit (AUTO) on a portrait 9:16 frame, the sensor width covers the LONGER side (the height), so camera.data.angle is already the vertical field of view. The code widens it again by H/W. Everything built on it (metres_per_pixel, check_shot's horizontal field of view and turns, the camera-match lens) would be wrong on such a shot.
+   E: Default 50 mm lens and 36 mm sensor: the true vertical field of view is 39.6 degrees, shot_facts writes 65.2, and metres per pixel come out 1.78 times too big. This shot is not affected only because assemble_notice_corner.py sets sensor_fit 'VERTICAL' (line 184). Other scripts in the kit (render_contact_sheet.py, readability_test.py) leave it at AUTO.
+   F: For AUTO, if WIDTH >= HEIGHT treat the angle as horizontal, otherwise as vertical. Or use camera.data.angle_y after setting the fit.
+
+[8] misleading | paper-film/tools/check_shot.py check_camera_match and project, lines 474-482 and 522-555
+   P: The camera model is always level (no tilt or roll), and our own landmark errors are worked out from it. A tilted camera therefore passes 'reference: the camera' with landmark errors that are not its real ones.
+   E: Test e (tilted 3 degrees): 'reference: the camera' is under Passed with exactly the composed frame's numbers (wheel hubs 32 px, gate 5 and 3 px). A tilted projection that reproduces the facts' meeting point exactly (0.68358, 0.48457), in diag/tilt.py, gives real errors of 126, 125, 44, 92 and 86 px.
+   F: Include facts tilt and roll in project() for 'ours'. Fit tilt too, or fail the match when the camera is not level.
+
+[9] misleading | paper-film/tools/check_shot.py check_frame_edges, line 160; check_story_group, line 259; check_reference, lines 433-434
+   P: A story prop that is entirely out of frame or entirely hidden is never reported unless a reference lists it. Even then it gets only 'not visible' with no reason and no fix, though screen_box_unclipped says exactly where it went.
+   E: Test d: the pail's unclipped box is 1.12 to 1.38 across, so it is entirely to the right of the frame. With the reference removed (verify/d-noref): 5 problems, against 6 for the good composed frame. Losing the pail even removes the 'pail reaches 0.96' fault, and 'pail' appears nowhere in the report. With the reference: 'pail is in the reference but not visible in our frame' and no fix.
+   F: For every story or subject group with an empty visible mask, report it as missing. Use screen_box_unclipped to say whether it is off frame (which side, how far in metres) or hidden behind something.
+
+[10] misleading | paper-film/tools/check_shot.py check_grounding, lines 133-137
+   P: When stands_above_ground exceeds the threshold, the message always says 'it has landed on something high (a roof edge, a wall top or another prop)'. It never looks at stands_above_surface_below, so a prop floating in the air gets the same diagnosis.
+   E: Test b's facts: the pail was moved by exactly (+0.55, 0, +5.0), and stands_above_surface_below is 4.99, so nothing lies under its centre for 4.99 m. The report still says it 'has landed on something high'.
+   F: If stands_above_surface_below is also large, say it floats X m above what is under it. Only say it landed on something high when the surface just below is about 0.
+
+[11] misleading | paper-film/tools/check_shot.py check_camera, lines 309-314 (rule 2)
+   P: Rule 2 says 'at standing eye height', but the check only tests tilt and roll. It prints the eye height and never judges it, so a camera 0.42 m too high passes.
+   E: Test a, the fault the user saw: 'rule 2 ... its eye is 2.22 m above the ground' is under Passed. Without a reference (verify/a-noref) nothing reports the camera height at all.
+   F: Fail rule 2 when eye_height is outside a standing range (about 1.5 to 1.9 m, or a value set in the check file).
+
+[12] minor | paper-film/blender/shot_facts.py group_of, lines 51-56 (and shot-check.json 'Cube*')
+   P: Groups are tried in file order, and a match on any ancestor's name counts. So a parent's group listed earlier beats the object's own name. A lantern parented to its chair (the natural set-up for 'stands on the seat') would be counted as the chair. Separately, the board's 'Cube*' pattern catches every default-named primitive cube in the scene.
+   E: Running the group_of logic as written with the check file's groups: 'hurricane-lantern' parented to 'kitchen-chair' gives chair, and its glass child gives chair. A stray 'Cube.004' gives board. Not triggered in this scene: the lantern is not parented, and the board has 4 objects.
+   F: Try names nearest-first: the object's own name against all groups, then its parent's, and so on. Rename the posts made by wooden_post (for example 'board-post') and drop 'Cube*'.
+
+[13] minor | paper-film/tools/check_shot.py check_light, lines 408-416 (main rule)
+   P: The rules document's check requires the four spots to fit in one box 'that holds the subject'. The tool only measures how far apart the spots are, so four spots that agree somewhere away from the subject would pass.
+   E: The rules document, main rule, Check: 'All four fall inside one box at most 0.40 of the frame wide and 0.50 tall that holds the subject.' The code has no test involving the subject's position.
+   F: Add the subject's visible box to the extent being tested, or require it to overlap the spots' box.
+
+=== VERDICT: The tool gets the injected camera faults right, but it misses the biggest visible fault in the real frame, and some of its turn instructions are wrong.
+
+**Real frame (composed-end), stored report:** 9 of its 13 problems are real and correctly placed:
+- the lamp post nearly touching the winding wheels (22 px);
+- notice, board, chair and pail past the right-edge limits (0.93 / 1.00 / 0.97 / 0.96);
+- warm light 11.2%;
+- notice only +0.02 warmer at the bottom;
+- weight 34/66;
+- notice 0.72 times and pail 1.27 times the reference's size, and the handcart's place.
+
+The reference picture passes the t
+
+[0] wrong answer | composed-end report; check_shot.py check_work_props (the 'big and dark where the eye enters' test)
+   P: Missed: the long dark shadow across the bottom-left road. Rule 8 says nothing big and dark sits in the bottom left, but no problem is reported.
+   E: The shadow is one crisp wedge of 155,969 px (7.5% of the frame). It runs from the frame's bottom-left corner up to the gutter at 0.50 across, 0.75 down. Its mean brightness is 0.21, against 0.45 to 0.55 for the lit road beside it. The test only counts pixels under half the frame average (0.16), so only 8% of the quarter counts and it passes. Back-projected, the shadow is a straight-edged rectangle on the road at x 1.6 to 2.5 m, y 20.8 to 23.1 m, with nothing in view to cast it. Earlier renders s
+   F: Measure darkness against the lit road next to the patch (for example under 0.6 of the quarter's 75th-percentile brightness), and report the largest dark piece's area and box. Here that piece is 7.5% of the frame against a 1% limit. In the scene, re-render with a larger shadow pool, or with each warm light's shadow turned off in turn, to find what casts it.
+
+[1] wrong answer | check_shot.py check_reference, 'reference: where the lines meet' fix (tests a and e)
+   P: The turn direction is backwards. The tool says 'right' when our meeting point lies left of the reference's; turning right would move it further left.
+   E: Test a: the meeting point is at 0.659, the reference's at 0.706, and the fix says 'Turn the camera about 1.8 degrees right'. In the same report the camera match says 'turn it 1.0 degrees left'. The facts settle it: a turn of 5.9 degrees gives 0.659 and 6.87 degrees gives 0.684, so turning left moves the point right. My projection with a 1.6 degree left turn gives 0.703. Test e also says 'turn 0.9 degrees right'. There the real difference is 0.061 of the frame height down, caused by the tilt, whi
+   F: Use "left" if dx < 0 else "right". When dy is larger than about 0.03, point to the tilt (rule 2) instead of a turn.
+
+[2] wrong answer | check_shot.py check_camera_match / project() (test e)
+   P: The camera match assumes a level camera and ignores tilt and roll. So for a tilted camera it reports false landmark errors and passes.
+   E: In e (tilted 3 degrees up) the line passes and lists exactly the level frame's errors: wheel hubs 32 px, chimney 70 px, kerbs 40 and 18 px. A 3 degree tilt actually moves every landmark about 86 px. project() builds 'ahead' with z = 0 and up = (0, 0, 1) from (x, y, z, turn, fov) only.
+   F: Use facts camera tilt_degrees and roll_degrees in project(). Fit tilt too, or fail the match when the camera is not level.
+
+[3] wrong answer | composed-end stored report problem 3; current check_pairs overlap measure
+   P: The lantern's body really does just touch the board's bottom edge. The stored report measured the wrong part and gave a wrong fix, and the current tool now passes it.
+   E: In the lantern's own picture the body (12 px wide or more) starts at row 1297. The board's bottom edge is at rows 1293 to 1295, so the glass top sits 2 to 4 px below the edge. Only the thin wire handle (2 to 9 px wide) rises about 50 px into the board. The stored '2 px thick' is the wire's thickness. Its fix, 'move lantern 0.05 m up the screen', would lift a lantern that stands on the seat into the air. The current measure (how far one reaches into the other) counts the hairline wire as a clear 
+   F: Ignore parts thinner than about 6 px (open the mask first) before measuring overlap. For a prop that stands on another, word the fix as moving it back or forward on its support, or scaling it, not raising it.
+
+[4] misleading | check_shot.py check_lines (rule 1 fix), test a
+   P: The rule 1 fix 'turn the camera' cannot work. Turning moves the board and the meeting point together on screen.
+   E: Test a says 'Turn the camera about 1.6 degrees left ... or move board sideways'. Projected: the meeting point is 128 px from the board's top-left corner, and still 129 px after turning 1.6 degrees left. With the fitted camera (0.42 m lower, 0.29 m left) it is about 36 px. Test e is a pure rotation and shows the same thing: the edge distance stayed 0.006. The gap in a is mostly vertical (camera too high), so a sideways board move cannot close it either.
+   F: Drop the turn option from rule 1. Say to move the camera (height and sideways) or the prop, and work the size of the move out from the vertical and horizontal parts of the gap separately.
+
+[5] misleading | check_shot.py check_camera (rule 2), test a
+   P: Rule 2 asks for standing eye height, but only tilt and roll are checked. The user's original fault (camera too high) is caught only because a reference picture exists.
+   E: Test a passes rule 2 with 'its eye is 2.22 m above the ground under it'. The composed frame uses 1.81 m.
+   F: Fail when eye_height is outside about 1.5 to 1.85 m. Give the fix in metres; for test a that is 'lower 0.41 m'.
+
+[6] misleading | test d (d-pail-half-out) and check_frame_edges / check_story_group
+   P: Test d did not test a prop cut by the frame edge. The pail left the frame entirely, and no composition rule notices a story prop going missing.
+   E: The pail's centre moved from x 3.361 to 4.111. Its box would now sit at 1.12 to 1.38 across, wholly outside the frame. It also spans x 3.875 to 4.347, about 0.2 m inside the cottage front (HOUSE_FRONT_X 4.15). The frame-edge check only fires between 2% and 60% inside, so it never ran. Rule 3 quietly drops story props that are not visible. The only sign is 'pail is in the reference but not visible in our frame', with no fix. The d report lists 9 problems, against 13 for the good frame.
+   F: Fail rule 3/9 when a story prop has no visible pixels, and give its screen box. Rebuild test d with about +0.25 m, which puts the pail's centre at the frame edge. A 3D check of props against walls would need shot_facts.py support.
+
+[7] misleading | test c (c-chair-touching), stored c report
+   P: What c actually did: moving the chair 0.17 m toward the board created no touch on screen. Instead it left the lantern hanging in mid-air, which the stored report missed.
+   E: Chair y went from 21.75 to 21.92 and its distance from 3.83 to 4.00 m. On screen it shrank slightly (right edge 0.97 to 0.96, bottom 0.878 to 0.861) and still clearly overlaps the board and drum. None of it is hidden by the board, so there is nothing for rule 4 to catch. Its 3D box now reaches 0.17 m into the board's box, which a 2D check cannot see. The lantern did not move with the chair: its 'stands_above_surface_below' went from 0.012 to 0.482 m. The stored report says nothing. The current t
+   F: Keep the stands_on check. To test rule 4, move the chair sideways so an edge just meets the drum or the board's leg on screen, rather than moving it back.
+
+[8] misleading | composed-end problem 16 (rule 6 warm light) and the main-rule pass
+   P: The 11.2% warm light is real, but the fix does not say where the spill is or which light makes it. The main rule passes only because the centre of a spread-out spill happens to land by the drum.
+   E: 68% of warm pixels are on the set (the lit cobbles in the bottom-left, the pavement under the chair, the right-hand wall), 16% on the board and 14% on the drum. Only 45% fall inside the story props' box, but rule 6 wants most of it round the story props. The centre of the warm light is 0.55 across, 0.75 down, the average of a spread-out patch. The fix says 'lamps, the fire's reach' without naming a light. Likely sources, unconfirmed: the street's gas lamp 1 just out of frame left (x -3.03, y 25,
+   F: Report the share of warm light inside the story box and mark the largest warm patch outside it. Have shot_facts.py list the lights and their positions so the fix can name one.
+
+[9] misleading | composed-end problem 6 (rule 3 box), check_story_group
+   P: The measurement is right, but the picture the user liked fails the same limit. The fix also does not say which props set the box's edges.
+   E: Ours: 0.48 wide x 0.52 tall. The edges are the drum's left side (0.52), the board at the frame edge (1.00), the board's top (0.42) and the pail's bottom (0.94). The reference, from the check file's boxes plus its board (about 0.64 to 1.00 across, top about 0.34): drum 0.504 to board 1.0 makes about 0.50 wide, board top 0.34 to pail bottom 0.895 makes about 0.56 tall. Without the board it is still 0.46 wide.
+   F: Name the props on each edge. Either leave the tall board out of the box or loosen the limit to what the reference measures; otherwise this check fails on every good frame of this shot.
+
+[10] minor | composed-end problems 8, 21, 25; e problems 18 and 21
+   P: Some fixes are wrong in size or clash with other rules.
+   E: Board 'move left 0.14 m' uses the clipped edge (1.00); its true right edge is at 1.008, so the move is 0.16 m. Notice 'move 1.21 m nearer or scale 1.38 times' would push its right edge further past the 0.90 limit (problem 7). Pail '0.88 m further' would put it at y 22.03, inside the chair's footprint (21.39 to 22.11); only 'scale 0.78 times' works. In e: 'lantern: raise it 0.23 m' (it stands on the seat) and 'handcart: move it about 35.73 m further from the camera'. The four rule-12 moves are li
+   F: Use the screen box before clipping for edge fixes. Re-check each fix against rule 12 and grounding before suggesting it. Suppress placement fixes when a camera fault is listed first.
+
+[11] minor | check_shot.py ORDER / 'Fix first'
+   P: 'Fix first' picks the smallest fault in the real frame.
+   E: The current tool ranks the lamp post / winding wheels near-touch first: 22 px against a 25 px gap limit, in the background. It ranks it above the board cut by the frame edge, the 11.2% warm spill and the missed shadow. The 10:50 version ranked the lantern's 2 px wire first.
+   F: Rank faults by size relative to their limit and by where they are (story props and the entry corner first), not only by rule number.
+
+[12] minor | check_shot.py check_grounding (10:55 change, 0.3 m raised to 1.0 m)
+   P: The higher 'landed on something high' limit lets props on low perches pass.
+   E: Every grounded group already reads 0.17 to 0.23 m above 'ground', because the lowest-surface ray finds a buried slab, so 0.3 m worked. At 1.0 m, a pail dropped onto the chair seat (about 0.65 m) or a window sill passes: stands_above_surface_below is about 0, so the float test does not fire either.
+   F: Measure height above the street's own pavement or road height at that spot (pavement_height(y), or the surface under the camera), and keep a limit of about 0.3 m.
+
+[13] minor | test b fix
+   P: Following the fix at the reported spot would still leave the pail out of the shot.
+   E: In b the pail's x also moved 0.55 m right (3.361 to 3.911). Dropped at (3.91, 21.15), it lands flush against the cottage front (3.911 + 0.236 = 4.147, wall at 4.15) and about 1.02 across, outside the frame.
+   F: Say the prop is also out of frame at that spot. Give the move back to its intended place (0.55 m left, to x 3.36), using the reference box or the previous facts.
+
+[14] minor | marked.jpg and report headers (all runs)
+   P: The marked pictures do not show every numbered problem, and the stored reports come from three tool versions.
+   E: Box 8's label (board) is drawn off the right edge (x 1086), and labels 9 and 10 are cut off. The white 'brightest parts' spot is drawn on the white notice and can't be seen. The light problems (16, 17, 18) have no mark. check-end and b to e have the old header ('Numbers in brackets...'); a has the 10:50 one; my re-runs use the 10:55 one.
+   F: Keep labels inside the frame. Draw the spots with a dark outline. Mark where the warm and dark areas are. Re-run all stored reports with the final tool.
+
+[15] minor | check_shot.py (rules not covered)
+   P: Several rules in the rules file are not checked.
+   E: title_zone is documented but never read, so 'titles in dim sky' is unchecked (this frame would pass: 97% sky, chimney top 3,516 px). Also unchecked: rule 7 (columns), rule 9 (chair under the notice, seat visible, lantern lit) beyond stands_on, rule 11 (no-turn move), and rule 5's 'nothing large and bright in the top third' (the lamp head is the second brightest thing at 0.83; 8% of the brightest parts, so acceptable here).
+   F: Add these checks, or list them in the report as 'not checked'.
+
+=== VERDICT: The reports are mostly plain and full of numbers. In test a, the "Fix first" line ("Lower the camera by 0.42 m; move it 0.29 m left; turn it 1.0 degrees left") undoes the planted fault exactly. Read the way the user would read them, though, they are not yet safe to act on, for five reasons. (1) Some fixes point the wrong way or cannot work. The "reference: where the lines meet" turn is backwards. The rule 1 fix says to turn the camera, but turning cannot move the meeting point onto the board. A camera tilted 3 degrees passes the camera match. Prop moves measured with a wrong camera ask for thi
+
+[0] wrong answer | check_shot.py check_reference, report item 'reference: where the lines meet' (tests a and e)
+   P: The turn direction is backwards. In test e the real difference is up and down (the tilt), but the fix only talks about turning.
+   E: Test a: "Ours meet at 0.659, 0.439; the reference's at 0.706, 0.424. Fix: Turn the camera about 1.8 degrees right to match." The tool's own camera model puts the meeting point at 0.658, 0.685 and 0.712 across for turns of 5.9, 6.9 and 7.9 degrees (+ is left), so turning left moves it right. The camera item in the same report says "turn it 1.0 degrees left". Test e: ours are at 0.485 down against the reference's 0.424, yet the fix is "Turn the camera about 0.9 degrees right". The code says "right
+   F: Swap to `"left" if dx < 0 else "right"`. Suggested wording: "Ours meet 0.05 of the frame width left of the reference's: turn the camera about 1.8 degrees left (turning left slides everything on screen to the right)." When the up-and-down gap is over 0.03: "Ours meet 0.06 of the frame height lower than the reference's: the camera is tilted 3.0 degrees up (problem 3). Tilt it down to level and check again."
+
+[1] wrong answer | check_shot.py check_lines, report item 'rule 1: aim the street at the story' (test a)
+   P: "Turn the camera" cannot close this gap, because turning slides the meeting point and the board together. The gap is also mostly up and down, so "move board sideways" does not close it either.
+   E: Test a: "the nearest edge of board is 0.097 of the frame width away ... Fix: Turn the camera about 1.6 degrees left (the meeting point moves the other way), or move board sideways..." The lines meet at pixel 712, 843 across and down. The board's nearest edge is at 666, 937: 94 pixels lower and 46 to the left. Using the tool's own camera model with the old camera, board corner minus meeting point stays at about -89, +92 pixels for turns of 4.3, 5.9 and 7.5 degrees. Lowering the camera 0.25 m brin
+   F: Base the fix on the direction of the gap. Up and down: "The street's lines meet 0.05 of the frame height above board's top. Turning the camera will not help, because it moves both together. Lower the camera about 0.3 m (the lines meet at the camera's own height), or raise board about 0.3 m." (metres = gap in pixels x board's metres per pixel = 94 x 0.0034.) Sideways: "move the camera sideways about X m, or move board X m". Correct rule 1 in the rules file the same way.
+
+[2] wrong answer | check_shot.py check_pairs (rule 4) and the top comment line 'Pixel limits are scaled from a 1080-pixel-wide frame'
+   P: The tool applies the rule's 20 and 25 pixels to a 1080-pixel-wide frame, but the rule sets them on a 1,536-pixel-wide frame, which is 14 and 18 pixels at 1080. The end frame's "Fix first" therefore fails a prop pair that the written rule passes.
+   E: Rule 4 in the rules file: "on a frame 1,536 pixels wide, overlaps of at least 20 pixels and gaps of at least 25." Code: need_overlap, need_gap = 20*width/1080, 25*width/1080. End frame Fix first: "lamp post and winding wheels almost touch ... 22 px apart (need ... a gap of 25 px)". 22 is more than 18, so it passes the rule. In test a, "chair only just overlaps notice ... 17 px" also passes (17 is more than 14).
+   F: Scale from 1536: 20*width/1536 and 25*width/1536. Report it as "need an overlap of 14 pixels or a gap of 18 pixels (the rule's 20 and 25 on a 1,536-pixel-wide frame)". If 20 and 25 at 1080 is what the user wants, change the rules file to say so instead.
+
+[3] wrong answer | check_shot.py check_camera_match, report item 'reference: the camera' (test e)
+   P: A camera tilted 3 degrees up passes the camera match. The landmark errors it quotes are those of a level camera, because the match ignores tilt and roll.
+   E: Test e, under Passed: "ours is 3.19 m high, 2.96 across, turned 6.9, lens 60.4. Our landmarks are off by left wheel hub 32 px, right wheel hub 32 px, chimney top 70 px...". This is word for word the same as the level end frame. project() has no tilt. The Notes in the same report show winding wheels at 0.28 down against the reference's 0.22, and the meeting point is 0.046 lower than in the end frame.
+   F: Put tilt and roll into the match. Failing that, when tilt or roll is not 0, fail the item and say: "Not compared: our camera is tilted 3.0 degrees up (problem 3). Level it, then check again."
+
+[4] wrong answer | check_shot.py write_report / check_reference fixes when a camera check fails (tests a and e)
+   P: Prop moves are measured with the wrong camera but still come with exact-looking metres, and some are absurd. Following them would wreck a set that is in fact correct.
+   E: Test e (only the camera changed): "handcart: ... move it about 35.73 m further from the camera", "drum: move it about 0.60 m further", "chair: ... 0.77 m further", "pail: ... 0.66 m further", "lantern: raise it by about 0.23 m". Test a has seven moves caused only by the camera, for example "notice: ... move it about 2.47 m nearer, or scale it 1.78 times". The Fix first note warns that these will change, but the list still gives them as instructions.
+   F: When rule 1, rule 2, 'reference: where the lines meet' or 'reference: the camera' fails, replace each prop-placement fix with: "Measured with the wrong camera: fix the camera first (problem N), then check again. Do not move notice yet." Leave their boxes and arrows off marked.jpg.
+
+[5] misleading | Saved reports: plan3/corner/check-end/report.md and tests/*-report/report.md
+   P: The reports the user would open were made by older versions of check_shot.py (changed 10:55; reports written 10:48 to 10:52). They give different problem counts and first fixes from today's tool.
+   E: check-end: "13 problems ... Fix first: Problem 3 ... Move lantern about 0.05 m up the screen". Today's tool gives "12 problems ... Fix first: Problem 4 ... Move lamp post about 0.15 m left". The saved test reports b to e use the old legend "Numbers in brackets match the red boxes", have no 'Fix first' section and say "Move it left" without naming the prop. Saved a: 14 problems out of 21; today: 11 out of 19. The saved c report does not mention the lantern off its chair at all.
+   F: Re-run all six with the final tool and delete or replace the old folders. For example: check_shot.py --check shot-check.json --facts facts-end --picture composed-end.png --out check-end, and --facts tests/NAME --out tests/NAME-report for each test. Fresh copies are already in plan3/corner/verify/wording/.
+
+[6] misleading | check_shot.py write_report 'Fix first' (ORDER), end frame and test d
+   P: 'Fix first' picks a 3-pixel near-touch between the background lamp post and the winding wheels over much bigger faults. In test d it buries the planted fault.
+   E: End frame: "Fix first: Problem 4 ... Move lamp post about 0.15 m left ... or about 0.03 m right" (it passes the written rule; see the rule 4 item). Meanwhile warm light covers 11.2% against a 3% limit, and board runs to 1.00 across. Test d: the same lamp post comes first while the pail, the planted fault, has left the frame (problem 18, no fix).
+   F: Rank: camera, then props resting wrongly, then a story prop missing or out of the frame, then story-prop faults by how far past their limit, then pairs_also near-touches last. For d: "Fix first: problem 18. pail is outside the frame, past the right edge: move pail about 0.74 m left."
+
+[7] misleading | check_shot.py check_reference (missing prop) and check_story_group (tests b and d)
+   P: "pail is in the reference but not visible in our frame." has no fix and does not say where the pail went. Rule 3 still passes ("Every story prop touches or overlaps another") with the pail gone.
+   E: In test d's facts the pail's box would run 1.12 to 1.38 across (entirely right of the frame); its middle moved from x 3.361 to 4.111 m. In test b's facts it would run 1.02 to 1.28 across and -0.61 to -0.37 down (above the frame). The tool has this box (screen_box_unclipped) but does not use it here.
+   F: Test d: "pail is outside the frame, past the right edge (it would sit 1.12 to 1.38 across; the reference has it at 0.82 to 0.96). Move pail about 0.74 m left." Test b: "pail is outside the frame, above the top (see problem 1: it is 5 m up)." When a prop is missing from the frame, change the rule 3 line to: "Every story prop that shows touches another; pail does not show (problem N)."
+
+[8] misleading | check_shot.py check_grounding (test b)
+   P: The report says the pail "has landed on something high", but the measurements say it is floating in the air. The fix also uses words the user cannot act on.
+   E: "pail stands 5.18 m above the ground under it: it has landed on something high (a roof edge, a wall top or another prop). (bottom at 6.62 m; spot (3.91, 21.15))". Fix: "Drop it from just above the pavement (the start of its ray) instead of from high up." The facts say there are 4.99 m of air between the pail and the first surface under it (stands_above_surface_below 4.99).
+   F: "pail is floating: its bottom is 6.62 m up, with 4.99 m of air between it and the pavement under it (at Blender x 3.91, y 21.15). Fix: lower pail by 4.99 m so it stands on the pavement." Use "has landed on something high" only when the gap to the surface under it is near 0.
+
+[9] misleading | check_shot.py check_raised and the rule name 'props stand on the ground' (test c)
+   P: Test c's planted fault (the chair pushed 0.17 m up the street into the board) is never named. The report blames the lantern, calls a chair seat "the ground", mixes metres and centimetres, and says "drop it".
+   E: "props stand on the ground. lantern should stand on chair: it stands 0.66 m above the ground, 48 cm above the surface just under it. Fix: Put lantern back on chair: move it over chair's top, then drop it from just above." In the facts, the chair's middle moved from y 21.75 to 21.92 m and the lantern stayed at 21.63. No line mentions the chair.
+   F: Rename the item "props rest where they should". Wording: "lantern should rest on chair's seat, but there is 0.48 m of air under it. chair's middle is 0.29 m further up the street than lantern's (chair at y 21.92 m, lantern at 21.63 m), so one of them has moved. Either move chair back under lantern, or move lantern over the seat and lower it 0.48 m onto it."
+
+[10] misleading | check_shot.py check_camera, item 'rule 2: stand where a person would stand' (test a)
+   P: The rule's name promises a check of the camera's height, but only tilt and roll are judged. So the user's own fault (camera too high) passes this rule.
+   E: Test a, under Passed: "rule 2: stand where a person would stand: ... its eye is 2.22 m above the ground under it." The planted fault is 0.42 m too high, and rule 2 in the rules file says "at standing eye height".
+   F: Either rename it "rule 2: keep the camera level", or add a height limit and say: "its eye is 2.22 m above the pavement; a standing person's eye is about 1.6 m: lower the camera about 0.6 m." Measure from the pavement (see the next item).
+
+[11] misleading | Camera wording: check_camera, check_camera_match, shot_facts.py eye_height and stands_above_ground
+   P: The same camera gets two different heights. "The ground" means a layer 0.18 m below the pavement, not where things stand.
+   E: End frame: rule 2 says "its eye is 1.807 m above the ground under it", while the camera item says "ours is 3.19 m high" (a Blender height). Every prop on the pavement reads 0.18 m above "the ground" (board 0.182, chair 0.18, pail 0.181), so the camera's 1.807 m is probably about 1.63 m above the pavement it stands over. The grounding fix says "pavement" while the item title says "ground".
+   F: Use one meaning: height above the pavement, or whatever surface is directly under. Print the camera match's heights on that same footing (best camera: 3.17 - (3.19 - 1.81) = 1.79 m). Wording: "the best camera is 1.79 m above the pavement, 2.97 m right of the street's middle line, turned 7.0 degrees left of straight up the street ...; ours is 1.81 m, 2.96 m, 6.9 degrees".
+
+[12] misleading | check_camera_match wording ('lens'), shot_facts.py top comment ('lens', --fov)
+   P: "lens 61.1" is the camera's view angle in degrees, top to bottom. Anyone who opens Blender will read it as a 61 mm focal length.
+   E: "turned 7.0 degrees, lens 61.1"; the fix words are "narrow/widen the lens by X degrees". The facts key is vertical_fov_degrees. shot_facts.py's comment lists "lens" while its option is --fov.
+   F: "view 61.1 degrees top to bottom"; fix: "widen the view by 2.5 degrees (top to bottom)". In shot_facts.py: "the camera (place, height above the pavement under it, turn, tilt, roll, view angle top to bottom)".
+
+[13] misleading | Rule names and messages across check_light, check_story_group and check_light balance
+   P: Two names for one thing: "subject" and "notice"; "story group" and "story props".
+   E: "rule 5: the subject is the biggest bright thing", "rule 5: the subject is bright", "Bring the outlying props in toward the subject", "Lower the warm light (fire, lantern) below the subject", "The subject's side is too heavy"; next to "notice reaches 0.93 across". Also "92% in the story group (need 75%)" against "The story props fill a box".
+   F: Always print the group's own name: "rule 5: notice is the biggest bright thing", "rule 5: notice is bright", "... and 92% on the story props (need 75%)". Give the second rule 3 item its own title: "rule 3: story props close together".
+
+[14] misleading | check_frame_edges, items 'rule 12: room for phone buttons' (end frame, problems 7 to 10)
+   P: There are four separate moves. Two count the same move twice, because notice hangs on board. Moving board breaks rule 1, which passes now. The reference itself breaks rule 12, so these items conflict with the reference items that pass.
+   E: "Move notice left by about 0.09 m", "Move board left by about 0.14 m", chair 0.06 m, pail 0.02 m. Rule 1 passes because board's edge is 0.006 from where the lines meet. The boxes in shot-check.json give the reference's notice reaching 0.914 across, chair 0.968 and pail 0.961; the rules file says "fix it in the rebuild". Board's right edge is at 0.999. Turning the camera 1.8 degrees right slides everything about 0.049 left (board 0.95, notice 0.88, chair 0.93, pail 0.91).
+   F: Merge them into one item: "notice reaches 0.93 across (limit 0.90), and board 1.00, chair 0.97 and pail 0.96 (limit 0.95). Fix: turn the camera about 1.8 degrees right. Everything slides left together, so the lines still meet at board's edge (rule 1). The reference has the same fault (its notice reaches 0.91, chair 0.97), so the reference checks will then show the camera 1.8 degrees off: that is expected."
+
+[15] misleading | check_story_group, item 'rule 3: one touching group' box
+   P: "Bring the outlying props in toward the subject" does not say which props, which way or how far.
+   E: End frame: "The story props fill a box 0.48 of the frame wide and 0.52 tall (limit 0.40 x 0.50)." The box runs from drum's left edge (0.52 across) to board's right edge (1.00), and from board's top (0.42 down) to pail's bottom (0.94).
+   F: "The story props run from drum's left edge (0.52 across) to board's right edge (1.00 across): 0.08 too wide. They also run from board's top (0.42 down) to pail's bottom (0.94 down): 0.02 too tall. Move drum about N m right, and bring board's right edge in to 0.95 (see rule 12). Move pail about N m further from the camera." The tool works out N from metres per pixel.
+
+[16] misleading | check_light, items for rule 6 (warm light, lit from below) and rule 10
+   P: The fixes cannot be acted on. They name no light and no side, "+0.02 warmer" has no unit, and "Lower the warm light (fire, lantern)" cannot be done to a fire in a drum.
+   E: "Turn down the warm lights that spill widely (lamps, the fire's reach)." I measured where the warm pixels are: 79% in the bottom third of the frame and 68% on unnamed pavement and road (board 16%, drum 14%). "notice is +0.02 warmer at its bottom than its top (need +0.12...)". "The subject's side is too heavy: add a little quiet detail or light on the other side."
+   F: "Warm light covers 11.2% of the frame, nearly 4 times the most allowed (3%). Four fifths of it is the glow on the pavement and road in the bottom third: shorten the reach of the drum's fire on the ground first." Next: "The bottom of notice is hardly warmer than its top (warmth difference 0.02; needs 0.12): bring the lantern or the fire's light closer below notice." Next: "The right half (with notice) holds 66% of the weight; add a few small dim lights or details in the left half (a lit window, a distant lamp) until it holds about 40%."
+
+[17] misleading | check_pairs wording (rule 4 items)
+   P: "Move ... up the screen" by some metres is a fix nobody can carry out for a prop standing on the pavement. The metres given are a lift, not a move along the ground. "px", "flattens the depth" and "one reaches only 17 px into the other" are unclear.
+   E: Test a: "chair only just overlaps notice: one reaches only 17 px into the other (needs 20). Fix: Move chair about 0.03 m up the screen...". The chair is 5.11 m away and its top is 0.85 m below eye height. By the tool's own formula (describe_vertical_fix, which is written but never called), 9 pixels higher means about 0.16 m further from the camera, not 0.03 m.
+   F: For props on the ground use describe_vertical_fix: "chair covers only 17 pixels of notice's edge (a clear overlap is at least 14 pixels deep). Move chair about 0.16 m further from the camera (it then sits higher in the frame), or about N m nearer to leave a clear gap." Write "pixels", not "px", and replace "a near-touch flattens the depth" with "edges that just touch make near and far things look stuck together".
+
+[18] minor | draw_marked and the report header 'Numbers match the boxes on marked.jpg (red: a spot; orange: an area)'
+   P: One box has no number, several marks are never explained, red means two things, and the numbering is confusing.
+   E: In the end frame's marked.jpg, the label for problem 8 (board) is drawn at x 1085 on a 1080-wide picture, so it is lost. The four circles, the yellow arrows and the two dashed lines at 0.90 and 0.95 are not explained. Red is used both for spot boxes and for the 'lines meet' circle. Problems are numbered 4, 6, 7 ... 27 for 12 problems, and test a's Fix first says "Problem 22" with 11 problems. Tests a to e are drawn on the flat-colour picture without saying so.
+   F: Number the problems 1 to N and keep labels inside the picture. Header: "Boxes on marked.jpg carry the problem's number (red: a small place, orange: a large area). Dashed lines: the 0.90 and 0.95 limits of rule 12. Yellow arrows: from where a prop is to where the reference has it. Circles (main rule): white, the centre of the brightest parts; orange, the warm light; blue, the story props; purple, where the lines meet." When there is no picture, add: "(drawn on the flat-colour picture because no finished picture was given)".
+
+[19] minor | check_reference wording (reference: where each prop stands)
+   P: Several phrases can be misread, and the words are not consistent.
+   E: "move it about 1.03 m right across the frame" ("right across" means "all the way across" in British English). "0.72 times its height" (whose height?). "move it about 1.21 m nearer" against "nearer to the camera" elsewhere. "scale it 1.38 times". "0.84 across, 0.58 down" is never explained in the report. Test e: "lantern: raise it by about 0.23 m", though lantern must rest on chair. Sizes come from the parts that show: chair reads 0.95 in the end frame but 1.04 in tests b and d, where the pail no
+   F: "handcart: move it about 1.03 m to the right"; "ours is 0.72 times as tall as the reference's"; "move it about 1.21 m nearer to the camera, or make it 1.38 times bigger". Add a first line: "Places are fractions of the frame: 0 across is the left edge, 1 the right; 0 down is the top, 1 the bottom." For a prop that rests on another, write "move chair (lantern rests on it)". Measure size from solo/NAME.png.
+
+[20] minor | check_camera_match passed text and the Notes 'reference: landmarks (the camera match judges these)'
+   P: The text is long and contradicts itself: the 'best' camera misses some landmarks by more than ours. Distances and turns have no direction, and "camera match" is jargon.
+   E: "...ours is 3.19 m high, 2.96 across, turned 6.9, lens 60.4. Our landmarks are off by left wheel hub 32 px ... the best camera leaves left wheel hub 38 ... The worst for ours: chimney top." Notes: "reference: landmarks (the camera match judges these): winding wheels ...". The camera check actually uses wheel hubs, the chimney top, gates, the left roofline and the kerbs.
+   F: "reference: the camera. Our camera is within 0.02 m in height, 0.01 m sideways, 0.1 degrees of turn and 0.7 degrees of view of the camera that best matches the reference. Even that best camera misses the reference's landmarks by up to 62 pixels (the reference is a painting, not an exact photo), so differences this small mean nothing." Notes: "winding wheels and chimney are buildings, not props: they are not moved; they only show whether the camera matches."
+
+[21] minor | shot_facts.py top comment
+   P: It leaves out options the code reads, lists one the script does not read, and uses jargon and two names for one thing.
+   E: --pitch is read (line 43), only works together with --yaw, and is not listed. --view end is listed but shot_facts.py never reads it (the scene script does). "D" is unexplained. "turn" is called --yaw and "lens" is called --fov. Other words: "fnmatch patterns", "mesh", "(needs a virtual screen, like EEVEE)". The 'sky' key is not documented, "height above the ground under it" is not defined, and roll is written to facts.json but not listed.
+   F: "[--camera-at x,y,z --yaw DEGREES (turn, + is left) [--pitch DEGREES (tilt, + is up; only with --yaw)] --fov DEGREES (view angle, top to bottom)]. --view end is read by the scene script, not by this one." "Each object belongs to the first group whose name pattern matches its own name or the name of anything it hangs from; * stands for any letters (e.g. \"kitchen-chair*\"). Objects matching \"sky\" (default sky_dome*) are left out of the flat pictures." "Needs the same virtual screen the EEVEE renders use (DISPLAY=:96)." Define the ground as the surface the height is measured from.
+
+[22] minor | check_shot.py top comment
+   P: Several keys the code uses are not documented. title_zone is documented but never checked, and the report does not say that titles were skipped. Some wording contradicts the rules file.
+   E: Keys used but undocumented: "pairs_also" (check_pairs), "size", the boxes' "compare": "top" and "landmark": true. No code reads title_zone. "lines: street directions in Blender space". "in plain words and metres", yet the reports use "px" and Blender x, y. "Pixel limits are scaled from a 1080-pixel-wide frame" contradicts rule 4's 1,536.
+   F: Add: "pairs_also: more groups checked for near-touches (rule 4), e.g. the lamp post and the winding wheels"; "size: frame width and height in pixels"; "boxes: compare: top judges the box's top instead of its middle (for things cut by the frame); landmark: true lists it under Notes as a building used to match the camera"; "lines: street directions as Blender x, y, z steps (the street rises 0.07 m per metre)". Either check title_zone, or add a Note: "titles: not checked yet". Fix the pixel-limit sentence (see the rule 4 item).
+
+[23] minor | Number formatting across check_camera, check_work_props and the 'light rules' note
+   P: Small formatting faults make the numbers harder to read.
+   E: "tilted -0.0 degrees and rolled -0.0"; "1.807 m" next to "2.22 m"; "sacks covers 0.0% of the frame"; "(limit 0.75 of it)"; "light rules: Not checked: no finished picture was given (--picture)."
+   F: "The camera is level (tilt 0.0, roll 0.0 degrees); its eye is 1.81 m above the pavement." "sacks hardly shows (under 0.1% of the frame)". "brightness 0.14; it must stay under 0.24 (three quarters of the frame's average, 0.32)". "Light rules (5, 6, 10 and the main rule) not checked: they need the finished picture, and none was given."
+

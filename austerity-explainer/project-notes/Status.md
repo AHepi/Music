@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-14, morning.**
+**As of 2026-10-14, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -217,10 +217,22 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - A main rule and twelve more, each with a check, for placing props and the camera:
   `film-kit/07 Composing a shot.md` (also in the plugin's kit documents).
 
+## The picture you liked, rebuilt, and the shot checker (log 31, 2026-10-14)
+
+- The notice corner rebuilt in the 3D street with our props (`film-kit/paper-film/blender/pit-village/
+  assemble_notice_corner.py`, shared helpers in `set_dressing.py`), the camera matched to the picture you
+  liked, then relit after four critics. Pictures: `experiments/31 Notice corner - ...`.
+- The shot checker: `film-kit/paper-film/tools/check-shot.sh` (with `check_shot.py` and
+  `paper-film/blender/shot_facts.py`), explained in `film-kit/07 Composing a shot.md`; also in the plugin.
+  Its tests: `paper-film/blender/tests/run-checker-tests.sh` (eleven planted faults, each named first).
+- The rebuilt frame passes 30 of 36 checks; open: the quiet side's weight (34%, aim 40) and the notice's
+  warmth from below (0.07, need 0.10). Two critics and a skeptic are checking it before the repaint.
+- The plate for painting is being drawn with the new lighting. Not painted or filmed yet. Nothing spent.
+
 ## Waiting on you
 
-- Whether to rebuild the picture you liked ("30 Test - composed by Nano Banana - own camera") in our own
-  3D street, as a still first (the recommended next step; about 10 to 50 US cents).
+- Your view of the rebuilt notice corner ("31 Notice corner - before and after") and of the shot checker's
+  report.
 
 
 - Your view of chapter 2 (round 20) on your phone.
