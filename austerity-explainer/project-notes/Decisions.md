@@ -530,6 +530,20 @@ overturn any of them in one line. Changes to the project must follow this file.
 - Plan 2 (the house) is dropped. The real 3D (rooms the camera moves through without tearing) is kept
   as the thing to build on; the other plans in log 26 are put back to you.
 
+34. **Plan 3, with better props** (your words): "Do plan 3. And a short clip. Use props as well that are
+    higher quality instead of plain. Don't worry about budget because they are reusable. Just no more
+    books and signs with no details."
+
+### Claude's calls for item 34
+
+- The test place is a 1926 pit village street at dusk (the lockout), built in Blender with free
+  Poly Haven surfaces and props (CC0, any use), plus detailed props built by script where Poly Haven
+  has none (a coal tub on rails, a handcart, a miner's lamp, signs with real lettering).
+- The repaint uses Flux 3 edit on fal with a chapter 2 painting as the style to copy (about 10 US
+  cents a repaint). Spending on reusable props and repaints is allowed by your words above; it is
+  still reported.
+- No blank signs, placards, book covers or plain boxes standing in for objects, from now on.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

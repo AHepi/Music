@@ -185,8 +185,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- The house sample was rejected (log 28): "It looks terrible. The 3d looks fantastic though." Waiting
-  for your choice among plans 1, 3 and 4 (and the money machine and pop-up book looks).
+- Nothing: plan 3's test clip is being built (decision 34).
 
 
 - Your view of chapter 2 (round 20) on your phone.
