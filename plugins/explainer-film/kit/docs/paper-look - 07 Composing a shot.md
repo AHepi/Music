@@ -3,8 +3,8 @@
 What this file is: the rules for placing props and the camera so a shot looks arranged rather than
 scattered. They come from log 30 of the project story (the composition test). Nano Banana Pro, given our
 empty pit village street and our props and free to choose its own camera, made a picture the user liked
-("30 Test - composed by Nano Banana - own camera" in the austerity project's
-`austerity-explainer/experiments/`; below, "the picture the user liked"). It was measured and taken apart by independent critics, and a skeptic checked each reason
+("30 Test - composed by Nano Banana - own camera" in `experiments/`; below, "the picture the user
+liked"). It was measured and taken apart by independent critics, and a skeptic checked each reason
 against the picture and against our own clip 29, which the user found unarranged. Reasons were kept only
 if they told the two apart, or (like balance, rule 10) were needed by both.
 
@@ -49,14 +49,16 @@ the frame wide and 0.50 tall that holds the subject.
 
 ## The rules that make it happen
 
-1. **Aim the street at the story.** Turn the camera so the lines meet right at the edge of the subject,
-   never on a doorway, a gap in the clouds or empty road. Where the lines meet depends only on which way
-   the camera faces, not where it stands: set the turn first, then move the camera or the props for size
-   and overlap. (In Blender, 1 degree of turn moves where the lines meet about 0.027 of the frame's width
-   when the camera sees 60 degrees from the top to the bottom of the tall frame.)
+1. **Aim the street at the story.** The lines meet right at the edge of the subject, never on a doorway,
+   a gap in the clouds or empty road. Where the lines meet depends only on which way the camera faces,
+   not where it stands. So turn the camera first, to put where the lines meet where you want it in the
+   frame (in Blender, 1 degree of turn moves it about 0.027 of the frame's width when the camera sees
+   60 degrees from the top to the bottom of the tall frame). Then bring the subject's edge to that spot by
+   sliding the camera (sideways, or up and down) or by moving the subject. A turn can't close the gap
+   between them: it moves where the lines meet and every prop together (log 31).
    Check: all crossings of the kerb and gutter lines fall in one small box (about 0.10 of the frame wide,
    0.08 tall) beside the subject. If the tool finds fewer than about 15 of the street's straight lines,
-   trace them by hand.
+   trace them by hand. The shot checker (below) works the meeting point out from the camera, so it is exact.
 
 2. **Stand where a person would stand.** Put the camera where someone would stand to look at the subject
    (for the notice: on the pavement, an arm's length in from the kerb), at standing eye height, high
@@ -136,6 +138,53 @@ the frame wide and 0.50 tall that holds the subject.
     above the middle to near the bottom. Put titles in dim sky, away from the brightest lamp.
     Check: the notice's right edge is at or left of 0.90 (the picture the user liked: 0.91, with the
     chair and pail at 0.96 to 0.97, so fix it in the rebuild).
+
+## Checking a shot automatically
+
+The shot checker measures a frame against these rules (and, if you give it one, against a reference
+picture) and says what is wrong and what to change, in metres (log 31). It measures the 3D scene itself,
+not just a picture, so where the lines meet, what each prop stands on and how far away it is are exact.
+
+Run it from the kit's top folder:
+
+    paper-film/tools/check-shot.sh SHOT_SCRIPT CHECK_FILE OUT_FOLDER [FINISHED_PICTURE] [-- Blender options]
+
+For example, for the notice corner:
+
+    paper-film/tools/check-shot.sh paper-film/blender/pit-village/assemble_notice_corner.py \
+        examples/notice-corner/shot-check.json /tmp/check-corner composed.png -- --view end
+
+It takes about a minute and writes two files. `report.md` lists the problems worst first, each with a
+fix in metres, then what passed, notes, and what it does not check. `marked.jpg` is the frame with each
+problem's place boxed and numbered. The check file names which objects make up each prop and their parts
+in the story (the subject, the story props, the work props, what should stand on what); see
+`examples/notice-corner/shot-check.json`. A finished picture of the same view (an EEVEE still) adds the
+light rules; give the log Blender wrote while rendering it as `RENDER_LOG=...` to catch render faults.
+
+How it works: `paper-film/blender/shot_facts.py` runs inside Blender after the scene script. It draws each
+prop in its own flat colour, once as the camera sees it (what hides what) and once alone, and writes the
+camera, where the street's lines meet, the lights, and for each prop its distance, size and what it
+stands on. `paper-film/tools/check_shot.py` reads those and checks every rule it can.
+
+What it knows that is easy to get wrong by eye:
+
+- The camera comes first. A wrong camera moves every prop on screen, so the report says to fix the camera
+  before moving any prop.
+- A turn moves where the lines meet and every prop together; sliding the camera moves near props more than
+  far ones and leaves where the lines meet where it is. So rule 1's gap is closed by sliding the camera or
+  moving the subject, and rule 12's crowded right edge is best cleared by sliding the camera sideways.
+- A prop standing on the ground can't be raised on screen: it rises on screen as it moves further away.
+  The checker turns "higher" or "lower" into "further from" or "nearer to the camera", and says when that
+  spot is already taken by another prop.
+- A render that runs out of shadow memory ("Shadow buffer full" in its log) draws false hard shadows.
+  Judge the light rules only on a clean render.
+
+It was tested on the notice corner with seven faults planted on purpose (`paper-film/blender/tests/
+break_scene.py` moves props by name): a camera too high, a camera tilted, a pail lifted into the air, a
+pail pushed out of the frame, a chair pushed away from its lantern, a lantern dropped on the pavement and
+a drum moved so its edge just meets the chair's. Each time the report's first fix named the planted fault.
+It does not check rule 7 (columns), most of rule 9, rule 11 (check the film's first, middle and last
+frames), or whether props poke into each other in 3D.
 
 ## What a picture-making program can and can't do for you
 
