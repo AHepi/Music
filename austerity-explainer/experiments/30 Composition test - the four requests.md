@@ -1,0 +1,54 @@
+# 30 Composition test - the four requests
+
+What this file is: the exact words and settings sent to fal on 2026-10-14 for log 30, so the test can be
+repeated. Every request was given the same pictures: the empty painted street first, then the props in the
+order listed (they are in "30 Composition test - pictures given to the models"). The web addresses of the
+uploaded copies are left out: they expire.
+
+## Nano Banana Pro edit, same view
+
+Model: `fal-ai/nano-banana-pro/edit`
+
+Settings: `{"resolution": "2K", "aspect_ratio": "9:16", "num_images": 1, "output_format": "png"}`
+
+Words sent:
+
+> Image 1 is an empty painted street: a British pit village in 1926 at dusk, terraced miners' cottages climbing to a colliery with a steel pithead, in a hand-painted documentary illustration style with dark ink outlines. Images 2 to 11 are props built for this street: (2) a wooden coal merchant's handcart, (3) a stack of hessian coal sacks, (4) a rusty steel drum used as a brazier, (5) a lock-out notice pasted on a black wooden notice board, (6) two galvanised dustbins, (7) a wooden barrel, (8) a coal tub on narrow-gauge rails, (9) a wooden pail, (10) a white-painted kitchen chair, (11) a hurricane lantern.
+>
+> Place these props into the street of image 1 to make the most beautiful, balanced and storytelling composition you can for one frame of a tall 9:16 film about the miners' lockout of May 1926. You decide which props to use, how many, where each stands, at what scale and how they group, the way a film production designer and a cinematographer would dress the set: a foreground, a middle ground and a background, leading lines, one clear focal point, breathing room, nothing scattered at random. The story: the pits are closed and the families are locked out; the notice announcing it should be easy to find. The brazier can be burning with a low coal fire. Keep the street, the cottages, the pithead and the sky of image 1 and keep its camera view. Paint the props in exactly the same painted style, light and colours as image 1 so they belong there, each sitting firmly on the ground with its shadow. Keep each prop's design recognisable. No people, no animals, and no writing other than what is on the notice.
+
+## Nano Banana Pro edit, own camera
+
+Model: `fal-ai/nano-banana-pro/edit`
+
+Settings: `{"resolution": "2K", "aspect_ratio": "9:16", "num_images": 1, "output_format": "png"}`
+
+Words sent:
+
+> Image 1 is an empty painted street: a British pit village in 1926 at dusk, terraced miners' cottages climbing to a colliery with a steel pithead, in a hand-painted documentary illustration style with dark ink outlines. Images 2 to 11 are props built for this street: (2) a wooden coal merchant's handcart, (3) a stack of hessian coal sacks, (4) a rusty steel drum used as a brazier, (5) a lock-out notice pasted on a black wooden notice board, (6) two galvanised dustbins, (7) a wooden barrel, (8) a coal tub on narrow-gauge rails, (9) a wooden pail, (10) a white-painted kitchen chair, (11) a hurricane lantern.
+>
+> Make the most beautiful, balanced and storytelling single frame you can for a tall 9:16 film about the miners' lockout of May 1926, set in this street. You are the cinematographer and the production designer: choose the camera position, height, lens and angle in this same street (low, close, from the pavement, looking across or up the hill, whatever makes the strongest picture), and decide which props to use, how many, where each stands, at what scale and how they group: a foreground, a middle ground and a background, leading lines, one clear focal point, breathing room, nothing scattered at random. The story: the pits are closed and the families are locked out; the notice announcing it should be easy to find. The brazier can be burning with a low coal fire. Keep the same street, cottages, pithead, dusk sky and painted look as image 1. Paint the props in exactly the same painted style, light and colours so they belong there, each sitting firmly on the ground with its shadow. Keep each prop's design recognisable. No people, no animals, and no writing other than what is on the notice.
+
+## Flux 3 edit, same view (only 10 pictures allowed, so the wooden pail was left out)
+
+Model: `blackforestlabs/flux-3/edit-image`
+
+Settings: `{"resolution": "2k", "aspect_ratio": "9:16", "output_format": "png", "safety_tolerance": 2}`
+
+Words sent:
+
+> Image 1 is an empty painted street: a British pit village in 1926 at dusk, terraced miners' cottages climbing to a colliery with a steel pithead, in a hand-painted documentary illustration style with dark ink outlines. Images 2 to 10 are props built for this street: (2) a wooden coal merchant's handcart, (3) a stack of hessian coal sacks, (4) a rusty steel drum used as a brazier, (5) a lock-out notice pasted on a black wooden notice board, (6) two galvanised dustbins, (7) a wooden barrel, (8) a coal tub on narrow-gauge rails, (9) a white-painted kitchen chair, (10) a hurricane lantern.
+>
+> Place these props into the street of image 1 to make the most beautiful, balanced and storytelling composition you can for one frame of a tall 9:16 film about the miners' lockout of May 1926. You decide which props to use, how many, where each stands, at what scale and how they group, the way a film production designer and a cinematographer would dress the set: a foreground, a middle ground and a background, leading lines, one clear focal point, breathing room, nothing scattered at random. The story: the pits are closed and the families are locked out; the notice announcing it should be easy to find. The brazier can be burning with a low coal fire. Keep the street, the cottages, the pithead and the sky of image 1 and keep its camera view. Paint the props in exactly the same painted style, light and colours as image 1 so they belong there, each sitting firmly on the ground with its shadow. Keep each prop's design recognisable. No people, no animals, and no writing other than what is on the notice.
+
+## Seedance 2.5 reference-to-video, 10-second draft at 480p
+
+Model: `bytedance/seedance-2.5/reference-to-video`
+
+Settings: `{"draft": true, "duration": "10", "aspect_ratio": "9:16", "generate_audio": false, "task": "reference"}`
+
+Words sent:
+
+> @Image1 is the set: an empty street in a British pit village in 1926 at dusk, terraced miners' cottages climbing to a colliery with a steel pithead, painted in a hand-painted documentary illustration style with dark ink outlines. @Image2 to @Image11 are the props built for this street: @Image2 a wooden coal merchant's handcart, @Image3 a stack of hessian coal sacks, @Image4 a rusty steel drum used as a brazier, @Image5 a lock-out notice pasted on a black wooden notice board, @Image6 two galvanised dustbins, @Image7 a wooden barrel, @Image8 a coal tub on narrow-gauge rails, @Image9 a wooden pail, @Image10 a white-painted kitchen chair, @Image11 a hurricane lantern.
+>
+> One continuous 10-second shot for a tall vertical film about the miners' lockout of May 1926. You are the cinematographer and the production designer: dress the street of @Image1 with these props in the most beautiful, balanced and storytelling arrangement you can (a foreground, a middle ground and a background, one clear focal point, nothing scattered at random), and choose one graceful, motivated camera move through it that ends on the lock-out notice @Image5 so it can be read. The brazier @Image4 burns with a low coal fire, sparks and thin smoke; the gas lamps glow; nothing else moves. Keep the street, the cottages, the pithead, the dusk sky and the painted look of @Image1 throughout, with the props painted in the same style and light. No people, no animals, no text other than what is on the notice.

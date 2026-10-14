@@ -544,6 +544,21 @@ overturn any of them in one line. Changes to the project must follow this file.
   still reported.
 - No blank signs, placards, book covers or plain boxes standing in for objects, from now on.
 
+35. **Let fal arrange the props and move the camera** (your words): "It looks ok. The props look great. But
+    there's no sense aesthetics with regards to their composition. The camera movement is a little odd too.
+    Hmm. Try fal. Feed a top quality image generator with an image of the background set and images of the
+    props and see how it organises everything. Or alternatively, use seedance this way, and see how it
+    composes everything and moves the camera"
+
+### Claude's calls for item 35
+
+- Both routes tried at once with the same pictures (the empty painted street plus ten prop pictures):
+  Nano Banana Pro twice (keeping our camera view, and choosing its own camera), Flux 3 once (our view),
+  and Seedance 2.5 once as a 10-second draft at 480p (its cheapest size; it can be finished at 1080p within
+  7 days without being made again).
+- The results are judged as guides first: what they teach about where props go and how the camera moves.
+  Whether a model's video could replace our own 3D shots is judged separately.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
