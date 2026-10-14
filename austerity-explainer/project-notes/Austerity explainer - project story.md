@@ -815,11 +815,19 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       researched). Cost: none.
 
 
+28. **The house rejected.** You said "It doesn't. It looks terrible.  The 3d looks fantastic though.
+    What were the other options". So the doll's-house idea is dropped, but real 3D stays. The other
+    options from log 26 were put back to you: plan 1 (today's paintings, filled better, not 3D), plan 3
+    (real 3D places built in Blender, then painted over by Flux so they look painted), plan 4 (3D worlds
+    made by World Labs from each painting), and the review's two other looks (the money machine, the
+    pop-up book). Recommended: plan 3, the one that keeps the real 3D. No cost.
+
+
 ## Next step
 
-Your view of the house sample on your phone. If it works for you: about ten new wall paintings made for
-the rooms (about 35 US cents of the picture allowance, with your yes), then chapter 3's research and
-script.
+Your choice of plan (log 28). If it's plan 3: its first test, one place (the pit village street) built
+in Blender, painted over once by Flux (about 10 to 15 US cents, with your yes), and a two-second camera
+move to see whether the paint stays on the 3D shapes.
 
 ## Traps
 

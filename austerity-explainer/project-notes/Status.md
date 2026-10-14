@@ -185,8 +185,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your view of the house sample (log 27); if yes, about ten wall paintings for the rooms (about 35 US
-  cents).
+- The house sample was rejected (log 28): "It looks terrible. The 3d looks fantastic though." Waiting
+  for your choice among plans 1, 3 and 4 (and the money machine and pop-up book looks).
 
 
 - Your view of chapter 2 (round 20) on your phone.

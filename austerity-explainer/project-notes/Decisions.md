@@ -522,6 +522,14 @@ overturn any of them in one line. Changes to the project must follow this file.
   researched, and names Mattei as the source of the "who decides, who pays" idea.
 - The video and music are kept out of the repository (decision 30); the code and a frame sheet are in.
 
+33. **The house rejected; the 3D liked** (your words): "It doesn't. It looks terrible.  The 3d looks
+    fantastic though. What were the other options"
+
+### Claude's calls for item 33
+
+- Plan 2 (the house) is dropped. The real 3D (rooms the camera moves through without tearing) is kept
+  as the thing to build on; the other plans in log 26 are put back to you.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
