@@ -182,10 +182,25 @@ What it knows that is easy to get wrong by eye:
 - The story props together in the street, not only on screen: a drum moved behind the board can still look
   close on screen.
 - Edges that run along each other for a long stretch (a post standing exactly at the board's edge), even
-  when a hidden part overlaps deeply somewhere else; and words of the notice hidden by a prop in front.
+  when a hidden part overlaps deeply somewhere else; it measures the longest stretch that touches, so a
+  board's panel passing deep behind a drum's top doesn't excuse its post running 2 pixels behind the drum's
+  side lower down (log 32). And words of the notice hidden by a prop in front.
+- Background props too, when the check file lists them under `pairs_also` (the far lamp, the handcart, the
+  sacks and the dustbins): their edges can just meet as well. A group the scene doesn't have is a note,
+  unless it is the subject, its support or a story prop.
+- A prop that is itself a light (the check file's `lights_in_story`, for example a lit lantern): its flame
+  may outshine the subject, but not its glass and body. It is flagged only when more than 10% of it is as
+  bright as the subject (a small flame: about 6%).
+- Which lights reach which props. With Blender's light linking (`light_reaches` in set_dressing.py), a light
+  can reach only some objects (the warm light aimed at the notice reaches only the notice and its board) or
+  skip some (the lantern's light skips the lantern itself); the checker never names a light for a prop it
+  can't reach.
 - A render that runs out of shadow memory ("Shadow buffer full" in its log) draws false hard shadows, and
   one that can't set up its shadow memory ("Could not allocate shadow atlas") draws none. A finished
   picture made before the scene changed doesn't match it. In both cases the light rules aren't judged.
+  It finds a picture's edges by colour as well as brightness (a rusty drum against a blue-grey road is about
+  as bright as the road), and calls a picture out of date only when a prop lines up clearly better with the
+  picture once its outline is slid a little: a prop that has moved does, a prop with faint edges doesn't.
 
 Every report says which version of the tool made it; a report from another version may give other numbers.
 

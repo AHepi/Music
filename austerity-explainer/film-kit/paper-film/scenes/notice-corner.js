@@ -88,6 +88,19 @@ const page = {
     const lanternLight = new THREE.PointLight(0xffa860, 0.8, 3, 2);
     lanternLight.position.copy(lanternFlame);
     kit.scene.add(fireLight, lanternLight);
+    // the warm light from just over the coals onto the notice's bottom edge, a copy of Blender's (rule 6): the
+    // notice wears its own surface here, so without it the notice was lit evenly, not warmer at its bottom
+    // (the second critics' skeptic, log 31); as strong against the fire's light as in Blender
+    const glowSettings = shot.notice_glow;
+    const noticeGlowStrength = glowSettings ? 4 * glowSettings.watts / glowSettings.fire_watts : 0;
+    const noticeGlow = new THREE.SpotLight(0xffad61, noticeGlowStrength,   // Blender's (1, 0.42, 0.12) as a colour code
+      glowSettings?.reach ?? 1.4,
+      THREE.MathUtils.degToRad((glowSettings?.cone_degrees ?? 50) / 2), glowSettings?.blend ?? 0.9, 2);
+    if (glowSettings) {
+      noticeGlow.position.copy(fromBlender(glowSettings.at));
+      noticeGlow.target.position.copy(fromBlender(glowSettings.aim_at));
+      kit.scene.add(noticeGlow, noticeGlow.target);
+    }
 
     const projection = projectPaintingOnto(kit, everything, painting, projector, {
       ownSurface: ['notice-paper', 'colliery-board-paint', ...[...boardMaterials].map((name) => [name, 'notice-paper'])],
@@ -151,6 +164,7 @@ const page = {
       fireGlow.material.opacity = 0.38 * flicker;
       fireGlow.scale.setScalar(1.25 + 0.1 * Math.sin(t * 11.7));
       fireLight.intensity = 4 * (0.75 + 0.25 * flicker);
+      noticeGlow.intensity = noticeGlowStrength * (0.75 + 0.25 * flicker);
       const lanternFlicker = 0.9 + 0.06 * Math.sin(t * 9.1) + 0.04 * Math.sin(t * 23.7 + 0.6);
       lanternGlow.material.opacity = 0.5 * lanternFlicker;
       lanternLight.intensity = 0.8 * lanternFlicker;

@@ -333,10 +333,30 @@ def edge_run(shot, front, back, need_overlap, scale):
         band = cv2.dilate(segment.astype(np.uint8), np.ones((2 * depth + 1, 2 * depth + 1), np.uint8)).astype(bool) & seen_front
         if band.sum() == 0:
             continue
-        under = (band & shot.alone[back]).sum() / band.sum()   # how much of the front edge's band has the back prop under it
-        if under < 0.35 and (best is None or length > best[0]):
-            across = 'sideways' if stats[k, cv2.CC_STAT_HEIGHT] >= stats[k, cv2.CC_STAT_WIDTH] else 'up and down'
-            best = (int(length), segment, across)
+        # how much of the front edge's band has the back prop under it, row by row along an upright edge (column by
+        # column along a level one): the longest stretch where it hasn't is the run. Judged as a whole, a board's panel
+        # passing deep behind the drum's top excused its post running 2 pixels behind the drum's side below (log 32)
+        upright = stats[k, cv2.CC_STAT_HEIGHT] >= stats[k, cv2.CC_STAT_WIDTH]
+        axis = 1 if upright else 0
+        in_band = band.sum(axis=axis)
+        under = (band & shot.alone[back]).sum(axis=axis)
+        lines = np.nonzero(in_band)[0]
+        touching = np.zeros(len(in_band), bool)
+        touching[lines] = under[lines] < 0.35 * in_band[lines]
+        run, start, longest, longest_at = 0, 0, 0, (0, 0)
+        for i, t in enumerate(touching):
+            run = run + 1 if t else 0
+            if run == 1:
+                start = i
+            if run > longest:
+                longest, longest_at = run, (start, i + 1)
+        if longest >= 40 * scale and (best is None or longest > best[0]):
+            stretch = np.zeros_like(segment)
+            if upright:
+                stretch[longest_at[0]:longest_at[1], :] = segment[longest_at[0]:longest_at[1], :]
+            else:
+                stretch[:, longest_at[0]:longest_at[1]] = segment[:, longest_at[0]:longest_at[1]]
+            best = (int(longest), stretch, 'sideways' if upright else 'up and down')
     return best
 
 
@@ -1528,17 +1548,28 @@ def check_light(report, shot, story_union, blurred):
             if g in (subject, shot.support) or not shot.shows(g) or shot.visible[g].sum() < 400:
                 continue
             top5 = float(np.percentile(grey[shot.visible[g]], 95))
-            if top5 >= paper - 0.05:
-                glaring.append((g, top5))
+            if g in shot.check.get('lights_in_story', []):
+                # a prop that is itself a light (a lit lantern): its flame may outshine the notice, but not its glass and
+                # body; a small flame lit 6% of the lantern this bright, its whole glass glowing 18 to 22% (log 32)
+                share = float((grey[shot.visible[g]] >= paper - 0.05).mean())
+                if share > 0.10:
+                    glaring.append((g, top5, share))
+            elif top5 >= paper - 0.05:
+                glaring.append((g, top5, None))
         lights_on = lambda g: [x for x in sorted(((light_reaching(l, shot.info(g)['centre'], g), l['name']) for l in shot.facts.get('lights', [])),
                                                  reverse=True)[:1] if x[0] > 0]
+        lit = [g for g in shot.story if g in shot.check.get('lights_in_story', []) and shot.shows(g)]
         report.add(f'rule 5: nothing in the story group as bright as {subject}', not glaring,
-                   ('; '.join(f'the brightest parts of {g} reach {v:.2f}, as bright as {subject} ({paper:.2f})' for g, v in glaring) + '.') if glaring
-                   else f'Every story prop stays darker than {subject} ({paper:.2f}).',
-                   fix=' '.join(f'Make {g} darker (its own colour) or move it further from the light on it'
-                                + (f' ({lights_on(g)[0][1]})' if lights_on(g) else '') + '.' for g, _ in glaring),
-                   mark=box_of(np.any([shot.visible[g] for g, _ in glaring], axis=0)) if glaring else None, kind='light',
-                   how_bad=max([past(v, paper - 0.05, 0.05) for _, v in glaring] or [1]))
+                   ('; '.join(f'the brightest parts of {g} reach {v:.2f}, as bright as {subject} ({paper:.2f})'
+                              + (f': {share:.0%} of it, where a lamp\'s flame alone is about 6%' if share is not None else '')
+                              for g, v, share in glaring) + '.') if glaring
+                   else f'Every story prop stays darker than {subject} ({paper:.2f})'
+                        + (f', apart from the small flame of {", ".join(lit)}' if lit else '') + '.',
+                   fix=' '.join((f'Dim {g}\'s glass or glow, so only its flame is as bright as {subject}' if share is not None else
+                                 f'Make {g} darker (its own colour) or move it further from the light on it'
+                                 + (f' ({lights_on(g)[0][1]})' if lights_on(g) else '')) + '.' for g, _, share in glaring),
+                   mark=box_of(np.any([shot.visible[g] for g, _, _ in glaring], axis=0)) if glaring else None, kind='light',
+                   how_bad=max([past(v, paper - 0.05, 0.05) for _, v, _ in glaring] or [1]))
     # burnt-out colour: pure white or one colour at its limit loses all detail, and the painter can't recover it
     clipped = picture.max(axis=2) >= 254
     burnt = []

@@ -430,6 +430,28 @@ Only failures in doing the work belong here. Newest at the bottom.
     fire and hid the lantern. -40 degrees puts its back to the board and its seat to the fire (a critic's find).
 115. **Stopping a job by a broad name pattern stopped this session's own shell again** (exit 144). Stop a
     job only by its own process number.
+116. **A helper's size, used without measuring the model, made a new fault.** The skeptic's sooty lining for the
+    drum was 0.365 m across its radius; the drum is 0.296 m, so the lining stuck out as a flat orange band and
+    brought the drum's edge to 9 pixels from the notice. Measure the model in Blender before using any size a
+    helper worked out from a picture (log 32).
+117. **Finding edges by brightness alone missed a whole side of the drum.** A rusty orange drum against a
+    blue-grey road is about as bright as the road, so the checker took a correct picture for an out-of-date
+    one. It now finds edges by colour as well, and calls a picture out of date only when a prop lines up
+    clearly better once slid a little (log 32).
+118. **A strong light spread wide burnt the notice white, and white has no warmth.** At 700 W in a 50-degree
+    beam, 8% of the notice went pure white and its bottom measured less warm than before (0.04 against
+    0.09). Spread a light wider only with its strength cut (200 W) (log 32).
+119. **Importing a prop a second time gives its parts the first one's names with ".001" added**, so the
+    checker and the film page took the second gas lamp for the first. Rename a second copy's parts at once
+    (log 32).
+120. **A light aimed at one thing lights everything in its beam.** The warm light meant for the notice lit
+    the chair's top rail as bright as the notice, and the lantern's light lit its own brass frame. Blender's
+    light linking (`light_reaches` in set_dressing.py) now chooses what each reaches. In Blender 5.2 a
+    collection's light-linking entries don't name their object: pair them with the collection's objects in
+    order (log 32).
+121. **A check limited to the story props missed a background near-touch.** The second gas lamp's post just
+    met the dustbins' edge, and the handcart overlapped the dustbins by only 11 pixels, both unseen until the
+    background props were added to the check file's list (log 32).
 
 ## Traps
 
@@ -457,3 +479,4 @@ Only failures in doing the work belong here. Newest at the bottom.
 - In any shot, check that where the lines meet, the brightest parts and the biggest near props agree on the subject (lesson 98).
 - Before judging a finished picture's light, read its render log for "Shadow buffer full" or "Could not allocate shadow atlas" (lesson 110).
 - Follow a tool's advice once to test it, not only read it (lesson 108).
+- Measure the model before using a size a helper worked out from a picture (lesson 116).

@@ -145,6 +145,16 @@ def light_reaches(light, objects, only=True):
     return receivers
 
 
+def see_through(material, alpha):
+    """Makes a material part see-through. An imported glTF glass takes its see-through value from its picture,
+    which has none, so a number set on the input was ignored (log 32): the picture is unhooked first."""
+    socket = material.node_tree.nodes['Principled BSDF'].inputs['Alpha']
+    for link in list(socket.links):
+        material.node_tree.links.remove(link)
+    socket.default_value = alpha
+    return socket
+
+
 def tint(objects, colour):
     """Darkens and colours every material of these objects by multiplying their base colour (a clean
     white chair made grubby cream). The materials are copied first, so other props keep theirs."""

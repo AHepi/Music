@@ -1,0 +1,555 @@
+{
+ "note": "What this file is: the third critique of the notice corner (log 32): three critics (composition and light, before the repaint, period and story) and a skeptic, as they wrote it. Session folders are shortened to SCRATCH, KIT and REPO.",
+ "critics": [
+  {
+   "summary": "Verdict: the composition holds and the notice clearly wins. Most of the listed fixes work. Two did not take effect, and one fix from the last round changed nothing. Nothing I found is a must-fix, but four should-fix items are worth one more preview before the paid repaint.\n\nWhat the eye does, judged at phone size and from a blurred copy: 1st, the notice. It is the one big bright shape, holding 65% of the brightest 3% of the frame, and it is 3.2 times as bright as the frame's average. 2nd, the drum: a big orange cylinder covering 3.9% of the frame, almost twice the notice's 2.1%. 3rd, the gas lamp's amber head at the top of the notice column. 4th, the lantern on the chair seat.\n\nThe story props read as one touching group. Both columns line up:\n- notice column: lamp 0.81, notice 0.80, lantern 0.76 and pail 0.77 across;\n- pit column: wheels 0.61, gates 0.60 and drum 0.57 across.\nThe top third holds the lamp head and the winding wheels. The chair stands under the notice (0.75 across against 0.80), its seat shows and the lantern is lit.\n\nFixes that hold:\n- The orange oval on the wall is gone (0.24 to 0.15 brightness).\n- The black lamp foot is gone: the lowest visible lamp-post pixel is at 0.466 down, behind the board.\n- The chair is now 0.2 darker than the paper along their shared edge.\n- The lantern glass is amber (0.52), with a dark frame and no clipping.\n- The drum mouth fell from 0.76 to 0.32, with no orange band showing outside the drum.\n- The handcart overlaps the bins by 37 px.\n\nDid not take effect:\n- No new lit window on the left: nothing in the left houses got brighter by even 0.01.\n- The corner lamp glass is amber but still one flat tone (0.51 ± 0.03 in every row). The mantle never shows through.\n- The colliery yard light made no difference: the doorway behind the shut gates is still 0.028 (0.027 before), so the gates are lost.\n\nWorse than the still before:\n- The whole frame got darker: average 0.248 down to 0.212, against 0.323 in the picture the user liked. The ground is a dim brown floor.\n- The chair is now so dark that its legs are darker than the pavement (0.16 against 0.20). In a squint it drops out, where the user's picture has a white chair as the second-brightest shape.\n\nNew faults:\n- The drum mouth is a flat, saturated orange disc with a pale ring as bright as the notice paper.\n- The new left lamp's head is squeezed between two downpipes, 11 and 12 px away.\n\nBalance: the left half is still light, but closer to the reference. By my measures, the left half holds:\n- 33% of the above-average light (reference 39%, previous still 22%);\n- 35% of the local contrast (reference 41%).\nMost of that gain came from the right side getting darker. The cheapest real fix is the fire's warm patch on the road. It is in the right place (0.37, 0.70) but only 0.29 bright, against 0.63 in the reference.",
+   "findings": [
+    {
+     "title": "The whole frame is a third darker than the liked picture, and the ground is dim brown",
+     "where": "Whole frame, worst in the bottom third: pavement 0.45-1.0 across, 0.88-1.0 down; near-left road 0-0.33 across, 0.83-1.0 down; left houses 0-0.45 across, 0.2-0.5 down",
+     "what": "Frame average 0.212 (previous still 0.248, the liked picture 0.323). Bottom third, left/right: 0.19/0.22 (previous still 0.25/0.32, reference 0.35/0.33). Pavement 0.24, colour 75,59,43 (reference 0.35, 92,88,89). Near-left road 0.19, colour 62,47,35 (reference 0.27, 68,67,74). Left houses 0.19 (reference 0.26). Sky top-left 0.28 (reference 0.40). Below mid-frame only 15% of pixels are bluer than red (reference 43%). The notice is unchanged against the reference (0.68 against 0.69), so the notice's lead over everything else (3.2 times the frame average, against about 2.1 in the reference) comes from a darker world.",
+     "why": "The painter copies light and dark, so the painting will be a darker, more night-like picture than the one the user liked. On a phone, the quiet side's brick and cobbles at 0.19 sink into mud. The film page also adds a 0.3 vignette, which darkens the edges further, including the quiet left side. A dark, brown ground also blunts rule 6's contrast of warm people's lights against a cool night.",
+     "fix": "Raise only the cool sky light, not any warm light. An earlier critic named dusk_world's Background strength (1.4 to about 2.0); I have not checked that node. Try it in a --preview. Targets: frame average 0.26-0.30; notice still at least 2.5 times the average; top third under 0.36 (the checker's limit); bottom third about 0.27; red-minus-blue on the bottom third away from the drum at +0.06 or less. This also adds weight to the left half, which is mostly lit by the sky.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The drum's mouth is now a flat, saturated orange disc with a pale salmon ring as bright as the notice",
+     "where": "Drum top, 0.46-0.67 across, 0.626-0.648 down (the drum prop)",
+     "what": "Mouth: 0.32 brightness (down from 0.76, meeting the 0.45 target), but colour 137,71,13 with saturation 0.94 and one even tone and a sharp edge. It looks like orange paint or liquid filling a tub, not soot with a glow deep inside. No coals show. The lip ring is still 0.74, colour 244,177,147, against a target of 0.65 or less. The notice paper's median is 0.736, so the ring is as bright as the subject. It forms the 4th-largest patch of the brightest 3%, an ellipse outline right beside the notice's lower-left corner. The drum's lit inside is now the only thing the liner fix changed; the liner does sit inside the wall, with no band showing outside.",
+     "why": "The painter is told not to paint flames, so it will copy an orange lid or a bowl of liquid, and the film's live flames will stand on it. A pale ring at the notice's brightness, inside the story group, competes with the notice's edge.",
+     "fix": "(1) Keep the drum object: line 124, drum = place_prop('brazier-drum.glb', ...). After line 128 add light_reaches(bpy.data.objects['brazier_light'], drum.children_recursive, only=False), the same skip used for the lantern at line 186. The fire's light then stops lighting the drum's own rim from 0.4 m above; the film's live flames light it instead. (2) Make the liner dark at the top and glowing only low down. Lower its glow from 0.15 to about 0.05 on a near-black base, or drive its emission strength with a top-to-bottom gradient (strong at the coals, zero 5 cm below the rim). Targets: mouth average 0.15-0.25, visibly darker just under the rim than deeper in; lip 0.55 or less; saturation under 0.7.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The shut colliery gates are still lost in a pure-black doorway; the yard light changed nothing",
+     "where": "0.57-0.64 across, 0.41-0.47 down, beside where the street's lines meet (0.684, 0.439)",
+     "what": "Doorway 0.028 in this still against 0.027 in the previous one: colliery_yard_light (lines 255-258, 40 W at Blender (0, 77, 8.3)) made no measurable difference. Gates (prop mask) 0.050, with the 90th percentile at 0.085. The reference's doorway is 0.131, colour 30,34,41, with the gate bars clearly in silhouette. At phone size and in a squint the gates do not show; only faint railings show against the brick at either side.",
+     "why": "The brief names the shut gates as part of the picture: they are the lockout in one image, and the middle of the 'pit' column (wheels, gates, drum; rule 7). The street's lines lead the eye straight to this spot, so a black hole there is a strong dark accent. The painter will fill it with something it invents, such as an open tunnel or a lit door, or leave it flat black.",
+     "fix": "First find what fills the doorway in street.blend (a dark material or the building's inside). I could not open it. Then do one of these: give the doorway's back face a dim cool emission of about 0.1, or move the yard light to just inside the opening (about y 73.5, 2 m behind the gate line), raise it to about 300 W, colour (0.7, 0.8, 1.0), shadows off. Target: doorway 0.08-0.13, still below the frame average, with the gate bars visible against it. Painter words as backup: 'the colliery gates are shut; a dim yard shows through the bars, no open tunnel, no lit door'.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The left half is still light. The cheapest cure is the fire's road patch; the promised extra lit window is missing",
+     "where": "Left half: the road patch at about 0.37 across, 0.70 down; the left houses 0.05-0.42 across, 0.25-0.48 down; the left lamps at 0.36 and 0.42 across, 0.38-0.50 down",
+     "what": "The checker gives 36% (aim 40-48%). My left-half shares, this still / previous still / reference:\n- brightness: 48.6 / 45.2 / 49.0%\n- above-average light: 33.4 / 21.8 / 39.4%\n- local contrast: 34.8 / 31.0 / 40.6%\n- edges: 38.3 / 36.5 / 45.2%\nThe right half's average fell from 0.273 to 0.218 while the left's barely moved (0.224 to 0.206), so most of the gain came from the right getting darker.\nThe fire's road patch is in the reference's place: its peak is 0.29 at (0.37, 0.70), against the reference's 0.63 at (0.35, 0.71). It is only 1.43 times the road around it (reference 1.77) and 1.4 times the frame average (reference 1.95).\nNo window on the left got brighter between the two stills (no spot brighter by even 0.01). The previous still's log lit only one window. light_left_windows keeps every second candidate ([::2]), so with two or fewer candidates it lights only one; this is my guess, because this still's log line has not been written yet.\nThe reference's left lamp is nearer (0.23 across), bright (0.59) and throws a glow on the wall. Ours are both small and far (0.36 and 0.42 across) and add no glow on the wall: the area round the new lamp's head measures 0.168 in both stills.",
+     "why": "Rule 10: the quiet side should be quiet, not empty. The reference's warm cobbles also lead the eye from the bottom-left entry to the drum and the notice. A painter usually flattens fine far detail, so small dim things on the left will weigh even less once painted.",
+     "fix": "(a) Line 67, ROAD_GLOW_WATTS 250 to about 500-700. Target: patch peak 0.40-0.45 at about (0.37, 0.70); the checker's warm share still 3% or less (now 2.5%). (b) In light_left_windows, drop the [::2] or widen its box so 2-3 windows actually light, at emission 1.2, spread between 0.05 and 0.42 across. Check the log's 'lit windows:' line. (c) Give the new left lamp a visible bright core and a little glow on the wall (see the lamp-glass finding). Raise left_lamp_light from 10 W to about 40-60 W so it lights the brick round it. Re-run the checker after each step; stop at about 42%.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The chair is now too dark to read as the empty white chair",
+     "where": "Chair, 0.61-0.89 across, 0.61-0.88 down: seat 0.66-0.85 across, 0.725-0.765 down; legs 0.60-0.90 across, 0.77-0.88 down",
+     "what": "The tint went to 0.18; the critics proposed 0.34 or 0.42. Chair average 0.32 (previous still 0.54). Seat top 0.36, colour 102,88,77. The legs average 0.16, darker than the pavement right around them (0.20). Chair back where it crosses the notice: 0.51 against 0.71 for the paper beside it, a good separation, and the brightest 5% of the chair (0.66) stays under the paper's median (0.74). The front edge of the seat is still the 3rd-largest bright patch (0.17% of the frame, 0.54), so the seat does show. But in a blurred phone-size view the chair almost vanishes into the ground. In the reference the white chair's seat measures 0.74 and is the second-brightest shape, carrying the notice column down from notice to lantern to chair to pail.",
+     "why": "Rule 9: the empty chair made for a person is how the shot shows the missing person. It now reads as a grey-blue chair the colour of the pavement. The painter will copy a mid-grey chair, not a worn white one.",
+     "fix": "Line 160: tint (0.18, 0.18, 0.18) to about (0.26, 0.26, 0.25). In the same --preview, check the chair back against the paper beside it. If the gap falls under 0.12, also make brazier_light skip the chair (add chair.children_recursive to the light_reaches(..., only=False) call from the drum fix). The back is lit mainly by that light from 0.6 m, while the seat is lit by the lantern. Targets: seat top at least 0.45; legs at least as light as the pavement round them (0.20 or more); chair back at least 0.12 below the paper beside it; the chair's brightest 5% at 0.70 or less.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The notice's top is too warm, and the film's fire light sits three quarters of the way up the notice",
+     "where": "Notice paper, 0.71-0.88 across, 0.51-0.65 down",
+     "what": "Paper only (letters left out), in six bands from top to bottom, brightness / red-minus-blue:\n- this still: 0.754/+0.259, 0.764/+0.255, 0.749/+0.266, 0.763/+0.271, 0.811/+0.262, 0.777/+0.296\n- reference: 0.626/+0.101 rising to 0.736/+0.315\nSo the problem is that the top is warm, not that the bottom is cool. Across, the paper dims from 0.80 at its left to 0.71 at its right.\nIn notice-corner.js, fireLight (line 87) sits at Blender z 2.93, 73% of the way up the notice (2.37-3.14), so the film's top will be warm too. By my geometry the film's noticeGlow (cone half-angle 25 degrees, penumbra 0.9, aimed 4 cm under the notice's bottom edge) lights about the lower 40% of the notice and almost nothing at its middle. I did not render the film.",
+     "why": "Rule 6: cool at the top, warm at the bottom. Its source is the people's own fire. In the film the notice wears its own surface, so only the page's lights decide this; the checker's 0.08 against 0.10 on the still does not reach the film.",
+     "fix": "In notice-corner.js, put fireLight at the flames' height rather than Blender's: for example coals.clone().add(new THREE.Vector3(0, 0.25, 0)) (about z 2.63) instead of fromBlender(shot.fire_light). Or cut its intensity from 4 to about 2.5 and let noticeGlow carry the warmth. Then judge the film's end frame. Targets: top band red-minus-blue +0.15 or less; bottom band at least +0.10 warmer than the top; nothing on the paper above 0.85.",
+     "fix_kind": "film-page",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The corner lamp's glass is amber but still one flat tone, and the street's lamps now come in two colours",
+     "where": "Corner lamp glass, 0.77-0.85 across, 0.20-0.29 down; left lamps at 0.34-0.38 across (new) and 0.41-0.43 across (the street's own), 0.38-0.43 down",
+     "what": "Corner glass: average 0.50, saturation 0.62, colour 171,120,64. Every row from 0.24 to 0.28 down measures 0.51 ± 0.03, with no brighter core. The 'part see-through, the mantle shows' change made no visible difference. The new left lamp's glass is the same: 0.50, colour 172,119,63. The street's own lamp just beside it is 0.81, colour 226,202,174, with a visible bright core and 7% clipped. So the nearer lamp is dimmer than the farther one, and the two differ in colour. Reference lamp glass: 0.70, colour 211,175,127, saturation 0.39, a flame visible. The corner lamp head is also smaller since it moved back. It is still the strongest small eye-catch at the top of the notice column.",
+     "why": "Rule 7's notice column starts with this lamp. A flat amber card reads as a paper shade, and the painter will copy two kinds of street lamp in one street.",
+     "fix": "In the glass branches (lines 198-200 and 217-219), get the transparency to show: in Blender 5.x EEVEE that may also need the material's render method set to blended or dithered. Or give the glass's glow a top-to-bottom gradient peaking at the mantle height (3.27 m). Use a paler amber, about make_glow(m, (1.0, 0.62, 0.3), 0.45). Give the street's own lamp glass (gas_lamp_3) the same material so all lamps match. Targets: glass average 0.55-0.65, a core of at least 0.8, saturation 0.35-0.5, and the nearer left lamp at least as bright as the farther one.",
+     "fix_kind": "3d-before-painting",
+     "severity": "minor"
+    },
+    {
+     "title": "The new left lamp's head nearly touches two downpipes",
+     "where": "0.348-0.369 across, 0.385-0.40 down (lamp head); downpipes at 0.336 and 0.379 across on the left house fronts",
+     "what": "At 0.392 down the head spans pixels 376-398. The left downpipe is at 362-364 (a 12 px gap) and the right one at 409-411 (an 11 px gap). Rule 4 needs at least 18 px on this 1080-wide frame. The post runs between the two pipes about 20 px from each. The shot checker does not see the street's own downpipes.",
+     "why": "Rule 4: edges that just touch make near and far things look stuck together. Once painted, the lamp will merge with the pipes into one dark fitting on the wall.",
+     "fix": "Line 75: move LEFT_LAMP_POST along the kerb and check in a --preview that the head and post clear both pipes by at least 18 px, or that the head covers a pipe by 18 px or more. Pipes about 46 px apart cannot fit a 22 px head cleanly, so try a nearer place where the pipes spread wider on screen, such as y 38. By my projection that puts the head at about 0.25 across, 0.38 down, the reference's place. Let the handcart overlap the foot by at least 20 px. Re-run the checker's rule 4 with the cart, bins and sacks.",
+     "fix_kind": "3d-before-painting",
+     "severity": "minor"
+    },
+    {
+     "title": "The drum is the second-strongest shape: bigger than the reference's and more orange",
+     "where": "Drum body, 0.46-0.67 across, 0.63-0.84 down",
+     "what": "Covers 3.9% of the frame against the notice's 2.1%; the checker measures it 1.22 times as wide and tall as the reference's drum. Body brightness matches the reference (0.19 against 0.21), but it is more orange: saturation 0.58 and red-minus-blue +0.18, against 0.32 and +0.09 (colour 73,43,27 against 68,50,46). It is the second-strongest shape in a blurred phone-size view. In the film, live flames, sparks, smoke and a 1.25 m glow sprite are added on top of it.",
+     "why": "Rule 5: the subject must win. In the reference the drum is dull rust-brown and only its fire is bright. A big orange drum plus moving fire can pull the eye off the notice in the film.",
+     "fix": "Painter words: 'the fire drum is a dull, dark rust-brown, not orange; only the fire inside is bright'. If it still competes in the film's end frame, desaturate the drum a little in 3D (a tint that keeps its brightness), not its size.",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    },
+    {
+     "title": "The corner lamp's top-left corner meets the house's eave bracket and the winding rope's end",
+     "where": "About 0.75-0.78 across, 0.23-0.25 down",
+     "what": "Since the lamp moved left, its glass's top-left edge (pixel 831-837 across) sits directly against a dark bracket on the right-hand house (0.02-0.06 brightness right up to its edge at 0.245 down). The rope from the right winding wheel ends at that bracket about 24 px left of the lamp's corner, so the rope seems to tie on to the lamp.",
+     "why": "Rule 4: a near-tangent where the pit column hands over to the notice column. The painter may fuse lamp, bracket and rope into one fitting. It might also read as a useful line from pit to notice, so it is a judgement call.",
+     "fix": "Painter words: 'the gas lamp stands free on its own post; the rope from the winding wheel runs to the house wall, not to the lamp'. Only if the plate shows them fused, nudge LAMP_POST about 0.1 m right (x 3.82) and recheck rule 7 (lamp centre within 0.07 of the notice's).",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    },
+    {
+     "title": "The gutter and kerb at the frame's entry still look stepped",
+     "where": "0.24-0.40 across, 0.90-1.0 down, and 0.38-0.47 across, 0.75-0.82 down",
+     "what": "Stripe contrast halved: fine-detail spread 0.054 to 0.027 at the bottom and 0.031 to 0.025 higher up. Part of that comes from the darker light. The stacked slab look is still plain by eye. The reference has one clean kerb line and a smooth gutter here.",
+     "why": "This is where the eye enters the frame. The kerb is the leading line from the bottom-left toward the drum and the notice, and the steps break it.",
+     "fix": "Painter words: 'the gutter beside the kerb is a shallow, smooth stone channel: no steps, no grating'. The other critic covers the 3D side.",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    },
+    {
+     "title": "At phone size only the notice's heading reads comfortably",
+     "where": "Notice lettering, 0.715-0.875 across: 'NOTICE' at 0.523-0.534 down; 'PITS WILL BE CLOSED' at 0.571-0.576; 'NEW TERMS' at 0.590-0.595",
+     "what": "Ink heights on the 1920-tall frame: 'NOTICE' 23 px; 'PITS WILL BE CLOSED' and 'NEW TERMS' 11 px each. On a 6.1-inch phone held at 35 cm that is about 16 and 8 minutes of arc. 8 is about 1.6 times the eye's limit: readable with effort, not at a glance. The notice is 2.1% of the frame against the reference's 3.4%. That is its shape (1.4 to 1 against 2.06 to 1), a content change the earlier critics already put off.",
+     "why": "The end frame is the notice's biggest moment in the film. The film's own titles (LOCKED OUT / FROM 1 MAY 1926) carry the message, so the notice need only be recognised.",
+     "fix": "Keep the hold on the composed frame at least the planned 3.5 s (8.5-12 s). No change to 3D.",
+     "fix_kind": "leave",
+     "severity": "minor"
+    },
+    {
+     "title": "The pail sits in the band where video apps put captions",
+     "where": "Pail 0.68-0.87 across, 0.82-0.94 down",
+     "what": "Reels, TikTok and Shorts lay caption and account text over roughly the bottom fifth of the frame, left and centre. The pail falls inside it, as do the chair's feet (to 0.876 down). Rule 12 in the checker covers only the right-hand button strip. The notice, the lantern and the drum's mouth are all above 0.76.",
+     "why": "Only the least important story prop is at risk.",
+     "fix": "Nothing to change; keep any burned-in captions out of the lower right.",
+     "fix_kind": "leave",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "- The plate (notice-corner-plate-2.png) had not finished by the end of my work: Blender was still running, and the still's log had not yet written its 'lit windows:' line. So I judged the still only. The old plate (14:25) predates this round; I looked at it only for framing.\n- I ran no Blender and no film render. Every target value is an estimate from the measured brightness and the light settings, not a test render. In particular, I did not check:\n  - how the film page's fireLight, noticeGlow, glow sprite, flames and 0.3 vignette change the notice's warmth, the balance or which thing the eye goes to first;\n  - what fills the colliery doorway in street.blend;\n  - whether Blender 5.x EEVEE needs a render-method change for the glass transparency;\n  - why the extra lit window did not appear (my [::2] explanation is a likely cause, not a confirmed one).\n- How I measured:\n  - Prop masks come from next/next26/ids.png (15:52). They line up with this still: for example, the lamp post's lowest visible pixel sits behind the board, and the per-prop numbers are consistent. They were not re-rendered for this exact run.\n  - The reference's boxes were placed by hand (about ±0.01).\n  - Brightness is Rec.709 luma on 0-1 values; 'warmth' is red minus blue.\n  - The eye-order judgement combines my own look at phone size (360 x 640) and blurred, the brightest-3% split, and a rough centre-surround contrast map. It is not a real eye-tracking model.\n- Not checked: rule 11 (first, middle and last frames of the slide); props poking into each other in 3D; title text extents against the chimney top; the notice's text accuracy; how the painter will actually treat any of this.\n- My scripts and crops are in SCRATCH/plan3/corner/critique-32/work-composition-and-light/ (common.py, m1-m11.py, crops.py, group_v4_v5.png, group_v5_ref.png, phone_v4_v5_ref.png, squint_v4_v5_ref.png, drum_v4_v5.png, zoom_lamp.png, zoom_leftlamps.png, gates_v4_v5_ref.png, diff_v5_minus_v4.png)."
+  },
+  {
+   "summary": "Verdict: not ready for the paid repaint yet. One fault must be fixed in 3D first, and the painter needs a strict brief. The new plate (notice-corner-plate-2.png, finished 16:42, no shadow faults in its log) has the same light as the still: frame 0.207 against 0.212, notice paper 0.729 against 0.733. Everything below holds for both.\n\nWorst fault: the drum's mouth. It is one flat burnt-orange colour (RGB 128,62,0; brightness 0.28; almost no variation from pixel to pixel) inside a pale rim that is as bright as the notice (0.74 against 0.73). A painter will read that as a pot of orange soup or paint, or an enamel lid. The film's live flames would then stand on it. The cause is the new liner: it only glows, with a black base, so nothing shades it. From both cameras the coals sit too low to be seen.\n\nSecond: anything the painter adds near a near prop breaks during the slide. Flames painted over the drum land on the kerb 6.6 m behind it and slide about 44 px off by the end. Halos, smoke, a pail handle or longer shadows close round a prop flip to the behind painting early in the move, so they blink out. The picture the user liked has exactly these extras, so the brief must forbid them.\n\nShould-fix in 3D, each a few lines:\n- The colliery doorway is still pure black (0.021, the same as before the yard light was added). The shut gates vanish inside it, so the gate reads as open, right beside where the lines meet. The yard light sits behind the gates and lights their backs.\n- The drum's right edge runs 2 to 3 px from the board's left post for about 160 px of height, and stays within 12 px of it through the whole slide.\n- The step-like bands in the gutter and kerb are still there; the bump-map change halved them but did not remove them.\n- The gas-lamp glass and the lantern glass are flat amber cards with no flame showing. The pool of lantern light on the seat (0.84) is brighter than the lantern glass that casts it (0.54).\n- The street's own far lamp is near-white (peak 0.98) beside the new amber lamp, and its post runs exactly along a house downpipe.\n\nConfirmed fixed: the orange patch on the house wall (0.155 now against 0.244), and the lamp post's black foot (hidden behind the board). The checker's left-weight shortfall is not a painter risk.\n\nPainter instructions (one paragraph): Repaint this exact picture in a painted documentary-illustration style: a pit-village street at dusk on 1 May 1926. Keep every shape, outline, size and position exactly where it is, and keep the picture's pattern of light and dark; change only the brushwork and colour handling. Keep the rusty oil drum with its open top; the pale grey kitchen chair with the small hurricane lantern on its seat; the wooden pail, with no handle, in front of the chair legs; the dark timber board on two posts with the cream notice; the black gas lamp on its post above the board; the brick terraces, the colliery building, its chimney and winding wheels; and the small handcart, coal sacks and dustbins far up on the left (the handcart is seen from behind). Paint the inside of the drum as a dark, sooty hollow with only a faint orange glow low down just behind its front rim, and its rim as a dull rusty lip. The colliery gates are shut: a row of thin dark iron bars standing right across a dim grey doorway. The notice is plain cream paper with grey rows of print-like marks and no readable letters. Every gas lamp has the same warm amber glass with a small bright mantle; the lantern has amber glass with a small flame inside. The gutter beside the kerb is a smooth, shallow stone channel with no steps, ridges or grating. The road, pavement and walls are cool blue-grey dusk, and warm light stays only where it already is: round the drum, on the board, on the chair seat, at the lamps and the few lit windows. Nothing is brighter than the notice. Thin parts (the lantern's wire handle, lamp arms, gate bars, chair rungs) stay thin and exactly in place, or are left out. Where two things meet or nearly meet (the drum's side and the board's left post, the lamp head and the wall pipe, the chair back across the notice's bottom), keep each edge exactly where it is and never join them. Never add: flames, sparks, smoke or steam anywhere (not from the drum, not from any chimney); glows, halos or light rays round any light, the notice or the drum; a handle on the pail; people, animals or birds; extra props (no coal tub, rails, barrel, crates or litter in the road or on the pavement); puddles or reflections; a moon, stars or bright clouds; new signs or lettering; new or longer shadows.\n\nMeasuring scripts (m1.py to m8.py, proj.py, slide.py, flames.py) and crops are in SCRATCH/plan3/corner/critique-32/work-before-the-repaint/.",
+   "findings": [
+    {
+     "title": "The drum's mouth is a flat orange disc in a bright rim: it will be painted as soup, paint or a lid",
+     "where": "The drum's mouth. Still: 0.46 to 0.67 across, 0.63 to 0.65 down. Plate: 0.54 to 0.69 across, 0.585 to 0.60 down (only about 27 to 46 px tall on the 2730 px plate). It shows the brazier_soot liner (script lines 131 to 137) and the drum's lip.",
+     "what": "Inside the rim is one single colour: RGB 128,62,0 in the still and 126,64,9 in the plate, brightness 0.28 to 0.29, with no blue. Its left, middle and right thirds are identical, and pixel-to-pixel variation is 0.0017. There are no coals, no darker back and no glow at the front. The rim reads 0.74 on average and its back lip up to 0.85, in both still and plate, the same as the notice paper (0.73). Cause: the liner uses glow_material, which has a black base and only glows, so nothing shades it into a hollow. Seen over the near rim, the far inside wall shows only down to 2.43 m above the street's base level (end camera) or 2.455 m (plate camera); the coal bed sits at about 2.38 m, so no coal ever shows. The lip is lit from 0.4 m away by brazier_light.",
+     "why": "An even, saturated oval filling a bright lip is how a painter draws a full pot: orange soup or paint, or an enamel lid. In the film the live flames stand at the coals, just behind the near rim, so they would rise out of soup or off a lid. The bright, sourceless rim also invites the painter to add its own flames, as the picture the user liked has; see the next finding for what that does. And the drum's lip is as bright as the subject (rule 5).",
+     "fix": "In assemble_notice_corner.py:\n(1) Line 124: keep the drum, as drum = place_prop('brazier-drum.glb', ...).\n(2) Line 137: replace the flat glow with one that fades up the liner's wall:\nm = glow_material('brazier soot', (1.0, 0.25, 0.04), 1.0); n, k = m.node_tree.nodes, m.node_tree.links\nh = n.new('ShaderNodeSeparateXYZ'); k.new(n.new('ShaderNodeTexCoord').outputs['Object'], h.inputs[0])\nf = n.new('ShaderNodeMapRange'); f.inputs['From Min'].default_value, f.inputs['From Max'].default_value = -0.02, 0.05; f.inputs['To Min'].default_value, f.inputs['To Max'].default_value = 0.6, 0.0\nk.new(h.outputs['Z'], f.inputs['Value']); k.new(f.outputs['Result'], n['Principled BSDF'].inputs['Emission Strength'])\nsoot.data.materials.append(m)\nThe tube's own heights run from -0.065 to +0.065, so it glows near the coals and is black near the top. Optionally multiply in a Noise texture so the glow is uneven.\n(3) After brazier_fire, add light_reaches(bpy.data.objects['brazier_light'], list(drum.children_recursive), only=False), so the fire light stops whitening the lip. The outer wall faces away from that light anyway; in the film the live flames and glow brighten the lip again.\nDon't raise COAL_TOP: the lumps would poke over the rim.\nTargets, in a start-view preview and then the plate: mouth average 0.18 or less; its lowest third (just behind the near rim) at least 0.12 brighter than its top third; pixel-to-pixel variation above 0.01; lip 0.55 or less; no channel at 255.",
+     "fix_kind": "3d-before-painting",
+     "severity": "must-fix"
+    },
+    {
+     "title": "What the painter adds round the near props will blink out or slide away once the camera moves",
+     "where": "Round every near prop in the plate: above the drum (0.55 to 0.70 across, 0.50 to 0.59 down), round the gas-lamp head (0.76 to 0.81, 0.28 to 0.34), the lantern and the pail, and along the outlines of the board, notice and posts (0.66 to 0.84, 0.47 to 0.66).",
+     "what": "Projected from the plate camera (this projection matches facts.json to 4 decimals): a painted flame tip 15 cm above the drum's far rim is shone onto the kerb about 6.6 m behind the drum. In the first frame it sits on the drum; by the last frame it is 34 px right and 28 px above where it belongs (of 1080 x 1920), and higher painted flames or smoke drift further. projected-set.js switches the background to the behind painting, within 0.05 of the frame's height round each near prop, as soon as the camera has moved about half a degree. So painted halos, smoke, longer shadows or a pail handle close to a prop show in the first frame, then vanish early in the slide; further out they stay and slide. Over the notice, board and posts, which keep their own 3D surfaces, painted additions are cut off sharply along those outlines. The picture the user liked contains exactly these extras: flames and smoke from the drum, smoke from the chimney, a candle flame in the gas lamp, a tall wire handle on the pail, and a coal tub on rails and a barrel in the road.",
+     "why": "Blinking and sliding ghosts during the 8.5 s slide are the surest way to give the trick away. The page already adds live flames, sparks, smoke, the lantern's glow and soft shadows under the props, so painted ones would double them.",
+     "fix": "Use the painter instructions in the summary, and send the same words when the behind painting is made. After painting, play the slide in weights-move view and look at the drum and lamp in the first second for anything appearing or vanishing.",
+     "fix_kind": "painter-words",
+     "severity": "must-fix"
+    },
+    {
+     "title": "The colliery doorway is still pure black and the shut gates vanish in it: the gate reads as open",
+     "where": "The colliery doorway behind the gates. Still: 0.575 to 0.64 across, 0.415 to 0.468 down, 0.05 to 0.11 of the width left of where the street's lines meet (0.684, 0.439). Plate: 0.565 to 0.632 across, 0.425 to 0.468 down.",
+     "what": "Doorway brightness 0.021 in the still, the same as before this round (0.020), and 0.026 in the plate, with 86% of it below 0.05. It is the largest black shape in the frame (0.36% of it). The gate bars are about 1 px wide and only 0.05 bright, so across the doorway they all but disappear. The railings show plainly on the brick at both sides, and the gap between them looks like an open gateway. Cause: colliery_yard_light (line 255) stands at 77 m up the street, between the gates (71.5 m) and the building front (about 81.6 m). It lights the backs of the gates, the yard and the tub (which now shows), but not the opening behind the bars.",
+     "why": "The story needs the gates shut. A painter copies light and dark, so it will paint an open black tunnel or entrance next to where the street's lines meet. That is the spot rule 1 says must never fall on a doorway, and it pulls the eye.",
+     "fix": "Line 255: move the light inside the opening, location (0.0, 84.0, 84 * RISE_PER_METRE + 2.0), energy about 25, colour (0.7, 0.8, 1.0), no shadow. Or keep it and add a second light like it there. If the opening turns out to be a closed face rather than a room, give that face a dim blue-grey colour instead. Targets: doorway average 0.07 to 0.11 in still and plate, the bars at least 0.03 darker than the gaps between them, nothing in it above 0.2. The painter words also say the gates are shut.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The drum's right edge runs along the board's left post (rule 4) through the whole slide",
+     "where": "Below the board panel, 0.66 to 0.745 down, at 0.669 to 0.674 across in the still; in the plate at about 0.689 across, 0.62 to 0.66 down.",
+     "what": "Using the flat-colour masks (ids.png and the props drawn alone): the post's left edge is at 0.6694 and the drum's right edge at 0.6704 to 0.6713, so they overlap by 2 to 3 px over about 160 px of height. Projected through the slide: about 6 px at the end (my projection reads about 3 px high against the masks), about 9 px in the film's first frame, and about 12 px of 1536 in the plate. Seen in the plate crop, the post seems to grow out of the drum's side. The checker passes this pair because the drum overlaps the board panel's corner by 22 px higher up (0.64 down).",
+     "why": "Edges that just touch make near and far look glued together, and a painter tends to join them. In the film the post keeps its own sharp surface, so a crisp timber edge would sit right against the soft painted edge of the drum, for the slide and the 3.5 s hold.",
+     "fix": "Line 117: change for dx in (-0.32, 0.32) to (-0.365, 0.32), which moves only the left post 4.5 cm left. Projected: about 16 to 19 px overlap in the end and first frames, about 26 px of 1536 in the plate, with about 12 to 14 px of post still showing; the lantern's left side (0.717) stays clear. The other way, DRUM x 2.78 to 2.82 (22, 21 and 28 px), needs a 3D check that the drum doesn't meet the chair. Don't move the post right: it would then touch the lantern.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The gutter and kerb still show stacked step-like bands where the eye enters the plate",
+     "where": "Still: 0.25 to 0.48 across, 0.93 to 1.0 down, and 0.38 to 0.46 across, 0.79 to 0.82 down. Plate: the bottom centre, 0.30 to 0.55 across, 0.70 to 1.0 down. These are the channel_stones and kerb_stone materials.",
+     "what": "Across the bands, the brightness of each row still runs from 0.08 to 0.21. Turning the bump map down to 0.3 halved the banding (row-to-row spread 0.056 to 0.031 at the bottom, 0.028 to 0.022 mid-frame), but by eye still 5 looks like still 4: three or four parallel ridges like steps or a grating, every few metres. The channel's shape is a smooth 2.5 cm dish (build_street.py), so what remains is most likely the colour picture (large_sandstone_blocks, its chiselled block edges stretched along the channel).",
+     "why": "The painter will paint steps going down into the road, or a drain. That sits in the bare foreground of the plate, where the eye enters the frame, and in the opening frames of the film.",
+     "fix": "At the end of build_scene, give street_channels and street_kerbs a plain material instead of the block picture, for example a new material with base colour (0.16, 0.16, 0.17), roughness 0.8 and no image. Or put the 'street_setts' material on the channel. Target: row-to-row spread below 0.015 in both boxes of the end still. The painter words also say 'smooth shallow stone channel'.",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The gas lamp and the lantern look unlit (flat amber cards), while the seat under the lantern is near-white",
+     "where": "Corner gas lamp glass: still 0.773 to 0.847 across, 0.20 to 0.29 down; plate about 0.765 to 0.80 across, 0.29 to 0.33 down. Lantern glass: still 0.733 to 0.775 across, 0.66 to 0.75 down. Seat patch under the lantern: 0.749 to 0.766 across, 0.755 to 0.760 down.",
+     "what": "Lamp glass: 0.51 in every row from 0.24 to 0.29 down (spread within a row 0.01 to 0.03), RGB 173,121,64, no mantle visible although its alpha is 0.5. The plate is the same (middle 0.511, 90th percentile 0.515). Lantern glass: 0.54 (spread 0.04), RGB 179,132,81; no flame shows. The seat right under the lantern reaches 0.84, brighter than the glass that lights it and as bright as the notice. The amber now has the right colour; what is missing is a visible source.",
+     "why": "The painter will either paint the lamps as unlit amber panes or invent a flame of its own size and place. In the film the live lantern glow sits at the 3D flame's place, so a painted flame elsewhere doubles it. A bright patch on the seat with no visible source may be painted as a white cloth or paper on the chair.",
+     "fix": "Lantern, line 176: also set m.node_tree.nodes['Principled BSDF'].inputs['Alpha'].default_value = 0.45, so the flame (glow 30) shows through. Gas lamp: check in a preview whether street_lamp_01_bulb sits inside the glass. If it doesn't show, add a small glowing ball at glass_at, made like lantern_flame (radius about 0.03, glow_material (1.0, 0.75, 0.45) at about 12). Targets: a core of 0.8 or more, no wider than a third of the glass, the rest 0.40 to 0.55; the seat patch 0.70 or less (LANTERN_WATTS 2 to 1 if it stays brighter).",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The far street lamp is near-white, unlike the new amber lamp beside it, and its post runs along a downpipe",
+     "where": "The street's own gas_lamp_3 (53 m up the street): still 0.411 to 0.428 across, 0.38 to 0.415 down; plate 0.432 to 0.444 across, 0.414 to 0.425 down. The new left lamp is at 0.34 to 0.39 across (plate about 0.39). A lit window at 0.203 to 0.21 across, 0.32 to 0.36 down (plate 0.258 to 0.263, 0.354 to 0.38).",
+     "what": "The gas_lamp_3 glass averages 0.733 with a peak of 0.98 and 3.7% of it at 255; the plate peaks at 0.984. The new left lamp next to it is amber at 0.454. So the further lamp is the brighter, and the two look like different kinds of lamp. These are the brightest points on the quiet side, above the notice's brightest (0.85). The window panes read 0.90 to 0.93. The far lamp's post runs exactly along a house downpipe from the lamp head to the pavement. The script restyles only its own two lamps; gas_lamp_3's glass is untouched.",
+     "why": "A painter blooms small near-white points into halos, which pull the eye up the quiet side. It will likely join the post and the pipe into one thick pipe, or turn it into a wall lamp. These are far away, so the slide moves them only about 1 to 2 px: this is about how the painting reads, not a film break.",
+     "fix": "In build_scene, after removing lamps 2 and 4, give every remaining object named gas_lamp_*_glass the same treatment as the corner lamp: make_glow(m, (1.0, 0.45, 0.12), 0.3) and alpha 0.5. If its material has no Principled BSDF, set its emission colour and strength the same way. Keep gas_lamp_3_light's watts, since the quiet side needs its light. Target: its glass 0.6 or less, red minus blue about +0.4, nothing in the left half above 0.80. The post along the pipe is covered by the painter words ('never join edges').",
+     "fix_kind": "3d-before-painting",
+     "severity": "minor"
+    },
+    {
+     "title": "The notice's and board's colour in the film is partly set by the painted chair",
+     "where": "The notice in the plate: 0.711 to 0.836 across, 0.506 to 0.604 down. Its colour-matching box covers the middle 60%, 0.525 to 0.584 down. The chair back's top rail starts at 0.574 down.",
+     "what": "projected-set.js sets the notice's own-surface tint from the painting's average divided by the page-lit average over that middle-60% box, and the board's timber copies the same tint (sameTintAs). In the plate the chair's top rail fills the bottom 18% of the box's height, about a tenth of its area. So any difference between the painted chair and the page-lit chair shifts the notice's and the board's colour in the film.",
+     "why": "If the painter paints the chair dirtier or paler than the page lights it, the notice and board come out darker or lighter than the painting round them. A visible seam at the board's outline is the very thing the colour match is there to stop.",
+     "fix": "In the film page or projected-set.js: give 'notice-paper' its own smaller box, its top half, clear of the chair (careful: that code's box y runs upward). Then check the board's edge against the painting in the end view.",
+     "fix_kind": "film-page",
+     "severity": "minor"
+    },
+    {
+     "title": "The gas-lamp head nearly touches a rusty pipe on the house wall",
+     "where": "The right edge of the lamp glass at 0.842 across and the pipe at 0.847, 0.20 to 0.29 down in the still; plate about 0.809 against 0.814.",
+     "what": "5 px apart in the end frame, about 6 px in the film's first frame and 8 px of 1536 in the plate, with the lamp's 3 px black frame between them. They stay that close through the whole slide because the pair sits near the point the camera slides toward.",
+     "why": "A painter may fix the lamp to the pipe, making it a wall lamp, or merge the frame and the pipe (rule 4: gaps of at least 25 px on a 1536 frame).",
+     "fix": "LAMP_POST (3.72, 25.5) to (3.60, 25.5): the head moves about 26 px left, a gap of about 30 px. The foot moves about 0.02 of the width left and stays behind the board (0.64 to 0.96 across). The head stays about 0.035 clear of the winding wheels. Check with a preview and the checker; I could not check the house front at 25.5 m.",
+     "fix_kind": "3d-before-painting",
+     "severity": "minor"
+    },
+    {
+     "title": "In the end frame the board's top-left corner just touches the colliery doorway's edge",
+     "where": "0.638 to 0.643 across, 0.446 to 0.468 down, end frame only.",
+     "what": "The board's left edge (0.638 to 0.642) overlaps the doorway's right edge (0.640 to 0.643) by about 5 px. In the plate there is a 40 px gap (of 1536) and in the film's first frame 31 px, so the painter sees a clear gap. The touch appears only near the end of the slide and in the hold.",
+     "why": "Rule 4: in the held frame a sharp 3D board corner sits glued to the edge of the painted dark doorway. It does not affect the repaint.",
+     "fix": "Leave it for now. Look at it in the film's end frame; lighting the doorway (finding 3) makes the touch more visible or less.",
+     "fix_kind": "leave",
+     "severity": "minor"
+    },
+    {
+     "title": "Thin parts will be lost or redrawn",
+     "where": "Lantern wire handle: 0.735 to 0.778 across, 0.660 to 0.676 down, over the chair's back splat. Gate bars: 0.52 to 0.68, 0.42 to 0.47. Lamp cross-arm: 0.74 to 0.88 across, 0.339 down. Chair rungs: 0.63 to 0.88, about 0.78 down. Far lamp arms: 0.34 to 0.44, 0.40 to 0.42.",
+     "what": "The handle is 2 px per side of the lantern on each row. The gate bars are about 1 px. The lamp's cross-arm is about 5 px. In the plate these are about the same size or smaller (the lantern is about 0.93 times its end-frame size). If the painter works below the plate's resolution, which I could not check, the handle and bars drop under 1 px.",
+     "why": "Small risk in the film. A painted handle that misses the 3D one lands on the chair splat, which is a near prop, so there is no switch to the behind painting; it then slides only about 5 px against the chair. Gates redrawn open would harm the story (finding 3).",
+     "fix": "Painter words: keep thin parts thin and in place, or leave them out; never thicken them.",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    },
+    {
+     "title": "The handcart, seen end-on, reads as a box on two legs; plain areas invite inventions",
+     "where": "Handcart: 0.10 to 0.32 across, 0.50 to 0.60 down. Plain areas: the far road, 0.37 to 0.65 across, 0.47 to 0.55 down (flat, 0.18); the bare foreground of the plate (bottom quarter); the sky (16% of the frame is flat).",
+     "what": "Seen from behind, the cart's wheels are thin slivers and its two props look like table legs. The far road is an empty flat grey just where the liked picture has a coal tub on rails and a barrel.",
+     "why": "The painter may paint a table or stand, or fill the empty road and pavement with tubs, rails, puddles or litter. The handcart is not a near prop, so a wrongly painted outline would slip about 17 px against the road over the slide. Anything invented on flat ground stays flat on the ground.",
+     "fix": "Painter words: 'a small two-wheeled handcart seen from behind'; nothing in the road or on the pavement; no puddles, no moon or bright clouds.",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "I ran no Blender, so none of the suggested changes has been rendered. Unchecked: whether the drum still clears the chair if it moves; whether a lamp post at x 3.60 meets anything on the house front; whether the colliery doorway opens into a room a light can reach; where the gas lamp's bulb sits inside its glass; whether the gas_lamp_3 glass material has a Principled BSDF.\n\nI called no paid service. My predictions of what the painter will do come from what the picture shows and from the extras in the picture the user liked, not from a test repaint. I don't know the painter's working resolution.\n\nI did not see the behind painting or how it is made, and I did not render the film page. Every slip in pixels is a single-point projection from the camera in facts.json, which matches its screen positions to 4 decimals; none is a per-pixel measure. The plate has no flat-colour id picture, so plate positions come from that projection plus measuring by eye. The still's masks come from next26/ids.png, whose facts are identical to the final run's facts5.\n\nNot checked: rule 7 (columns), rule 11 (where the lines meet in the first, middle and last film frames), whether the notice's words read, and whether props poke into each other in 3D. The cause of the gutter bands (colour picture rather than shape) is a likely reading, not confirmed."
+  },
+  {
+   "summary": "Verdict: for the period, the still is mostly right, and the story mostly reads. I measured the finished still (composed-end-5.png) and looked at the finished plate (notice-corner-plate-2.png, 16:42; its log has 0 \"Shadow buffer full\" lines). The plate shows the same faults as the still.\n\nWhat is right for 1 May 1926:\n- The notice. Its full text (in paint_prop_pictures.py) is dated Friday 16 April 1926. It gives the end of the Government subsidy as the reason, ends contracts on Friday 30 April and closes the pits from Saturday 1 May \"until the Workmen are prepared to accept the NEW TERMS\". The weekdays are correct; I checked them with Python. The type faces are the fat face and slab-serif poster types of a provincial printer.\n- Lit gas lamps and a few warm upstairs windows (oil or gas light, no electric white) suit dusk on the first day.\n- The hurricane lantern is the right lamp. A miner's flame safety lamp would have stayed in the colliery lamp room, so don't swap in safety-lamp.glb.\n- The handcart, the dark coal sacks and the galvanised dustbins are plausible for the first day. Coal ran short only in the weeks after.\n- The colliery stack with no smoke reads as idle.\n\nThe story reads from the top down. The notice comes first, then the empty chair with its lit lantern beside the fire. It says \"someone sat watch here and has just stepped away\". The lit lantern says they mean to come back; the empty street adds \"gone\".\n\nFour things weaken it:\n1. The shut colliery gates don't read. Their bars vanish against a pitch-black doorway (brightness 0.019) at 0.575-0.635 across, 0.415-0.465 down, right beside where the street's lines meet. It reads as an open black entrance, and a painter will paint one.\n2. The notice's key words are small on a phone. In the end frame, the capital letters of \"PITS WILL BE CLOSED\" and \"NEW TERMS\" are 11 px tall. The picture the user liked has 18 and 22 px at the same width. Without those words, an empty chair with a lit lamp can also read as a memorial.\n3. The drum's mouth is a perfectly flat orange disc: rows at 0.636-0.642 down measure 0.280 brightness with a spread of 0.002. It reads as a lid or a drum of orange liquid, not a fire burning low.\n4. The corner and left gas lamps are flat amber cards with no glowing mantle (about 0.51 brightness, peak 0.60). They stand beside the street's own lamp, which is bright cream (0.81) and only 8 m away on the same kerb.\n\nItems 1, 3 and 4 should be fixed before the paid repaint. Item 2 can wait: the notice is its own surface in the film, so it can be fixed after painting.\n\nSmaller points:\n- The gutter still has its step-like stripes.\n- The chair looks like a modern painted chair.\n- The brick is cleaner and redder than a soot-darkened pit village.\n- To British eyes, an oil-drum brazier says 1984 more than 1926.\n- An optional pick by the chair would tie the empty chair to the notice's own line about tools.\n\nMy scripts and crops are in SCRATCH/plan3/corner/critique-32/work-period-and-story/ (crop.py, measure.py, measure2.py, measure3.py, letters.py, letters_ref.py, crops/).",
+   "findings": [
+    {
+     "title": "The colliery's shut gates don't read: the bars vanish against a pitch-black doorway",
+     "where": "Still: the doorway at 0.575-0.635 across, 0.415-0.465 down (the gates span 0.51-0.68 across, 0.42-0.47 down), 0.05-0.11 left of where the street's lines meet (0.684, 0.439). Plate: the dark doorway at 0.55-0.66 across, 0.40-0.47 down, 0.30% of the frame.",
+     "what": "Brightness: the doorway 0.019; the gate bars 0.050; the brick front beside the door 0.12-0.14. So the bars show only where they cross the brick at either side. Across the middle, the part that closes the road, they disappear into the black. The colliery_yard_light (40 W, 3 m up at y 77, about 4.6 m in front of the building) does not reach the doorway: the spot where it falls on screen measures 0.011. Only the coal tub shows, faintly. At phone size (crops/phone-size.png) the top of the street reads as an open black entrance between two stretches of railing.",
+     "why": "Shut gates are the lockout in one picture, and this is what I was asked to check. The eye is led up the street straight to this spot. The painter keeps the plate's light and dark, so it will paint an open tunnel or doorway, and the pit will look open: the opposite of the story.",
+     "fix": "In assemble_notice_corner.py, next to the colliery_yard_light lines:\n(a) Close the opening: add a plane of shut timber doors filling the pithead building's doorway, a few cm behind its front (about y 81.6). From its on-screen size (about 65 x 96 px at roughly 0.039 m per px) the opening is about 2.5 m wide and 3.5 m tall. Give it dark timber with base brightness about 0.10-0.15.\n(b) Raise colliery_yard_light from 40 W to about 300 W, still cool (0.7, 0.8, 1.0) and without shadows. Lower it to about 2 m above the ground at y 79-80, so the doors, the ground and the tub catch some light.\nTarget: the doorway 0.08-0.12 (still below the frame average of 0.21), with the gate bars clearly darker than what is behind them.\nPainter's words as well: \"At the top of the street the colliery's iron gates are shut across the road; behind them the pithead building's big doors are closed. No open dark tunnel, no lit doorway.\"",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The notice's key words are too small to read on a phone",
+     "where": "The notice at 0.71-0.885 across, 0.51-0.65 down in the end frame. \"PITS WILL BE CLOSED\" at 0.571-0.577 down, \"NEW TERMS\" at 0.590-0.595 down, \"NOTICE\" at 0.523-0.535 down.",
+     "what": "Capital-letter heights in the 1080 x 1920 end frame (rows of dark ink, measured with letters.py): NOTICE 23 px, PITS WILL BE CLOSED 11 px, NEW TERMS 11 px. The dates are smaller still. The picture the user liked, scaled to the same 1080 width: 40, 18 and 22 px. On a typical phone, 11 px is under 1 mm. \"PITS WILL BE CLOSED\" already fills about 83% of the sheet's width, so the type can't simply be enlarged on one line. The end frame is the closest view in the slide, so the words never get bigger.",
+     "why": "The notice is the subject: its words are the story. Without them, an empty chair with a lit lamp can read as a memorial vigil (an empty chair and a lit lamp are both mourning signs in coalfield memorials) until the LOCKED OUT title arrives at 8.5 s.",
+     "fix": "In paint_prop_pictures.py NOTICE_LINES (lines 160-178):\n- Split 'PITS WILL BE CLOSED' into two lines, 'PITS WILL BE' and 'CLOSED', at about size 180 instead of 112.\n- Set 'NEW TERMS' to about 170.\n- To make room, shrink the 46-size small print to about 40 and drop the printer's line. Or make the sheet taller: ours is 1.40 times as tall as it is wide, the reference's 2.06.\nTarget: at least 17 px capitals for both key lines in the end still.\nThen rebuild the notice picture and notice-on-board.glb and re-export notice-corner-signs.glb. In the film the notice and board wear their own surfaces, not the painting, so this needs no repaint and can be done after painting.",
+     "fix_kind": "film-page",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The drum's mouth is a flat orange disc: it reads as a lid or a drum of orange liquid, not a low coal fire",
+     "where": "The drum's top, 0.47-0.66 across, 0.630-0.648 down. The same in the plate, and in final/drum-mouth-5.png.",
+     "what": "Brightness row by row from the lip down:\n- 0.630 down (the lip): 0.724, a pale pink 236,173,145.\n- 0.632: 0.543.\n- 0.634: 0.323.\n- 0.636 to 0.642: exactly 0.280, colour 127,61,0, with a spread within each row of only 0.002.\n- 0.644 to 0.646: 0.31-0.37.\nThe brazier_soot liner has a black base and one even glow (glow_material at 0.15), so the far inside wall shows as a single flat colour with no depth. No coals and no glow from deep down are visible.",
+     "why": "A flat, even colour reads as a surface: a lid, or liquid filled to the brim. The painter will copy it. Last round's painter's words say the mouth \"stays a dark, sooty opening\", which this picture contradicts. The live flames will then rise out of an orange surface rather than out of a fire inside a drum.",
+     "fix": "In assemble_notice_corner.py, after the brazier_soot material is made (about line 124), make its glow fade toward the top. Wire Texture Coordinate (Generated) into Separate XYZ, take Z into a Map Range set to give 0.6 at Z 0 (the coal end) and 0.0 at Z 1 (the top), and feed the result to the Principled BSDF's Emission Strength.\nThe top of the mouth (the far rim) then goes dark and sooty, and the part toward the near rim glows: fire seen deep inside.\nTarget: rows just under the lip at most 0.10 brightness, the lowest visible rows 0.30-0.45, and no row as flat as today's 0.002 spread.\nPainter's words: \"The fire drum's inside is dark and sooty near the rim, glowing orange deeper down; no lid, no liquid, no flames.\"",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The gas lamps are flat amber cards with no glowing mantle, and the two left-hand lamps don't match",
+     "where": "Corner lamp glass at 0.77-0.85 across, 0.23-0.28 down. Our left lamp (y 45) at 0.36 across, 0.38-0.40 down. The street's own gas_lamp_3 (y 53) at 0.42 across, 0.40-0.42 down.",
+     "what": "Corner lamp glass, rows 0.24-0.27 down: brightness 0.509-0.513, spread within a row 0.02-0.04, colour 178,122,62, saturation 0.65. The brightest pixel in the whole lamp head is 0.60, so the gas mantle (glow 8) never shows through the 'part see-through' glass. Our left lamp's lit part is the same flat amber: 0.495, saturation 0.64. The street's own lamp 8 m further up the same kerb is bright cream with a visible core: 0.805, peak 0.98, saturation 0.25. The street's own lamps stand 14 m apart and alternate sides; these two stand 8 m apart on the same side.",
+     "why": "A 1926 street gas lamp is clear glass with a small, white-hot mantle glowing inside. Flat amber panes read as an electric lantern with a tinted shade, or as a paper lantern. The painter copies light and dark, so it will paint flat orange cards, with one orange and one white lamp side by side in the quiet half.",
+     "fix": "In the glass branch of both lamps in assemble_notice_corner.py (lines about 182 and 200):\n- make_glow(m, (1.0, 0.45, 0.12), 0.3): lower the glow from 0.3 to about 0.08.\n- Alpha: 0.5 to about 0.2.\n- The bulb glow: 8 to about 20.\nThen check in a preview that the mantle shows. If it still doesn't, the glass's see-through setting isn't working in EEVEE; I couldn't check that.\nTarget: glass averaging 0.30-0.45, with a small core of at least 0.75. The core stays tiny next to the notice's 35,700 px.\nMatch gas_lamp_3 to it: the same treatment for its glass, with its light lowered from 260 W to about 80 W. Or remove gas_lamp_3 the way lamps 2 and 4 already are, and recheck rule 10.\nPainter's words: \"The gas lamps are dark iron lanterns with clear glass panes and a small, bright gas mantle glowing inside each; not solid orange panes.\"",
+     "fix_kind": "3d-before-painting",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The gutter nearest the camera still looks like stone steps or a drain",
+     "where": "Still: 0.24-0.48 across, 0.80-1.0 down. Plate: 0.30-0.54 across, 0.70-1.0 down, where the eye enters the frame.",
+     "what": "Down a line through the channel, brightness jumps sharply (by more than 0.04 between neighbouring rows) 6 times at 0.30 across and 9 times at 0.44 across. The bands look like stacked ledges (crops/gutter.png, crops/plate_bottom.png). Setting the normal-map strength to 0.3 did not remove them, so the cause may be in the colour picture or the shape. I did not confirm which.",
+     "why": "A staircase going down beside the drum is a wrong shape exactly where the eye enters. It distracts from the story group, and the painter will paint steps.",
+     "fix": "Keep last round's painter's words: \"The gutter beside the kerb is a shallow, smooth stone channel: no steps, no grating, no drain.\" If there is time for a test before painting, give street_channels the 'street_setts' material, as the skeptic suggested.",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    },
+    {
+     "title": "Optional: nothing says the person who sat here was a miner; the notice's own small print offers the clue",
+     "where": "Around the chair and the board, 0.61-0.95 across, 0.60-0.92 down.",
+     "what": "The empty chair, lit lantern and fire read as \"someone kept watch and stepped away\", but nothing marks the watcher as a miner. The notice's small print says \"All Workmen must remove their Tools from the Pit on or before Friday, 30th April.\" The kit has pick-axe.glb (a dirty iron pick on a wooden shaft, 1.12 m) and spade.glb.",
+     "why": "A pick by the chair would tie the empty chair to this notice and this day: the men brought their tools home. Its shaft is about 4 cm thick, about 17 px at 3.9 m, so it is thick enough for the painter. But the story group is already crowded, and rules 3, 4 and 12 limit where it can go.",
+     "fix": "Only if a test frame shows room: lean pick-axe.glb against the board's right post behind the chair (its head kept left of 0.95 across), or lay it on the pavement right of the pail. Re-run the shot checker for rules 3, 4 and 12. Otherwise leave it.",
+     "fix_kind": "3d-before-painting",
+     "severity": "minor"
+    },
+    {
+     "title": "The chair looks like a modern painted chair",
+     "where": "The chair, 0.61-0.89 across, 0.61-0.88 down.",
+     "what": "Square legs, a vase-shaped back splat, a seat that reads as planks with gaps, and a cool grey paint (mean colour 93,80,68; blue edges from the dusk fill). A 1926 pit-house kitchen chair would more likely be scrubbed or dark-stained wood, with turned legs and a solid seat.",
+     "why": "It's a small step out of period on the prop that carries the missing person. The painter will keep its shape, but words can age its surface.",
+     "fix": "Painter's words: \"The chair is an old wooden kitchen chair, its paint worn and grubby.\" Its shape stays, because the composition needs the pale chair shape below the notice.",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    },
+    {
+     "title": "The brick is cleaner and redder than a soot-darkened pit village",
+     "where": "The left terrace, 0.0-0.48 across, 0.25-0.55 down (in the plate, the near house at 0.0-0.18 across, 0.15-0.55 down).",
+     "what": "Our terrace walls measure saturation 0.28-0.39 and red-minus-blue +0.06 to +0.08, with crisp pale mortar. The reference's measure 0.21-0.23 and +0.02 to +0.05: grey-brown, like brick darkened by coal smoke.",
+     "why": "Soot-darkened brick is one of the quickest signs of a pit village of the time. Clean red brick looks like a restored heritage street.",
+     "fix": "Painter's words: \"The brick and stone are darkened by years of coal smoke, as in a 1920s pit village.\"",
+     "fix_kind": "painter-words",
+     "severity": "minor"
+    },
+    {
+     "title": "An oil-drum brazier says 1984 more than 1926",
+     "where": "The drum, 0.43-0.71 across, 0.63-0.85 down.",
+     "what": "It is a rolled steel drum with two rolling hoops and punched holes near the bottom. To many British viewers, an oil-drum brazier is the picture of the 1984-85 picket lines. The common street brazier of the 1920s was an iron fire basket on legs, like a night watchman's. Steel drums did exist in 1926, so it isn't wrong. This is from my own knowledge; I looked nothing up.",
+     "why": "It pulls the picture toward the wrong decade. The BRITAIN 1926 title and the notice's dates correct that.",
+     "fix": "Leave it in this shot: the user liked it and the composition depends on it. If later shots need a fire, consider a fire basket on legs.",
+     "fix_kind": "leave",
+     "severity": "minor"
+    },
+    {
+     "title": "The notice board stands across the whole pavement",
+     "where": "The board and its posts, 0.64-0.96 across, 0.44-0.76 down.",
+     "what": "The board (0.99 m wide, at x 3.45) faces down the street. It fills the pavement between the kerb top (x 2.68) and the house fronts (x 4.15), with only about 0.2-0.3 m to spare on each side. A real notice board would be fixed to a wall, or stand at the pit gate or the colliery office.",
+     "why": "It's a staging cheat that few viewers will notice. It even echoes the shut gates as a barrier in the viewer's path.",
+     "fix": "Leave it: the composition depends on it.",
+     "fix_kind": "leave",
+     "severity": "minor"
+    },
+    {
+     "title": "Only two cottage chimneys smoke in the film",
+     "where": "The film page (notice-corner.js, chimneyTops) puts smoke on two left-terrace chimneys. The still has no smoke anywhere; the stacks are at 0.0-0.35 across, 0.13-0.30 down.",
+     "what": "The page's comment gives the reason as \"coal was scarce in the lockout\". On the first evening it wasn't yet: kitchen ranges would mostly be lit for supper. A colliery would also often keep its boilers going for the pumps, so a wisp from the stack would be true to life. I didn't render the film, so I didn't see the smoke itself.",
+     "why": "It's a historical nit. More smoke would rise into the dim sky where the titles go (rule 12), and a smoking pit stack would weaken the reading that the pit is idle.",
+     "fix": "Leave it as it is.",
+     "fix_kind": "leave",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "I didn't run Blender, so none of the fixes or target numbers has been tested in a render. Not checked:\n- The doorway's real 3D shape and coordinates, or whether the pithead building has an inside for a light to reach. The door size is estimated from its size on screen.\n- Why the lamp glass's 'part see-through' setting doesn't show the mantle (the EEVEE see-through setting, or the bulb's place in the model).\n- The film itself: the live flames, sparks and smoke, the chimney smokes, the titles, and the film page's lights on the notice and board.\n- Any painting.\n- Rule 11 (the slide), and whether props poke into each other in 3D.\n\nThe history points (how lockout notices were worded, when coal became scarce, braziers in 1926 against 1984, safety lamps staying in the lamp room) come from my own knowledge. I looked up no sources. I did check the notice's weekdays with Python.\n\nLetter heights were measured with a simple dark-ink threshold. The reference was scaled to 1080 wide and its rows judged by position, so expect about ±2 px. Everything I measured is on the 1080 x 1920 end still. I looked at the plate (it exists, 16:42, 0 shadow faults in still5-and-plate.log) and measured only its doorway, its near-left window (it shows only sky reflection, not an out-of-period electric glow) and its sky."
+  }
+ ],
+ "skeptic": {
+  "summary": "The still is not ready for the paid repaint yet. One thing must change in 3D first: the drum's mouth. It is one flat orange disc (0.28 brightness, almost no change from pixel to pixel) inside a pale rim as bright as the notice (0.75 against the paper's 0.74). It reads as a pot of orange soup or a lid, and the plate shows the same. The painter also needs a strict brief, because anything it adds round a near prop will blink out or slide once the camera moves. Several cheap should-fixes can go into the same preview round. Two of them are plain bugs in the script, which explains why last round's fixes did nothing. (1) The lit-window picker reads the camera's old position, because set_camera never updates the scene. Both windows it lit (row a, cottages 5 and 6) are off-frame to the left; the critic's [::2] guess was wrong, since the log shows two windows were lit. (2) The lamp and lantern glass take their see-through value from a linked picture input, so setting Alpha to 0.5 is ignored. That is why the glass is a flat amber card with no mantle showing. The other should-fixes: the colliery doorway is pure black (0.021); its real shape is in build_street.py, and one critic's light at y 84 would sit inside the solid building and light nothing. The frame got darker (0.248 to 0.212) because the fire light was cut from 160 to 70 W, not because of the sky. The chair is now too dark, with legs darker than the pavement. The drum's right edge runs only 1 to 4 px over the board's left post for 140 px of height. The gutter still looks like steps. Fix the drum mouth, the two bugs, the doorway, the chair and the post in one --preview. Then re-render the still and the plate, re-run the checker, and send the painter the words below.",
+  "confirmed": [
+   {
+    "title": "The drum's mouth is a flat orange disc in a rim as bright as the notice: it reads as soup or a lid",
+    "from": "before-the-repaint (must-fix); composition-and-light, period-and-story (should-fix)",
+    "evidence": "Still, the mouth's middle rows at 0.640-0.642 down measure 0.280 brightness with a spread of 0.002 across the row, colour 128,62,0, saturation 1.0. The rim and its inside strip at 0.629-0.631 down measure 0.75-0.76 (colour 246,182,153), with a peak of 0.85; the notice paper's median is 0.736. Zoomed (work-skeptic/drum_mouth_x3.png) it is plainly an orange-filled tub, and the plate crop (plate_drum_x2.png) looks the same. Geometry from facts.json: the drum's ground is at z 1.668 and its rim at 2.524. The coals' top is at 2.368 and brazier_light at 2.93, 0.4 m over the rim. Looking over the near rim from the end camera (z 3.188), the far inside wall shows only down to z 2.43, so the coals never show. The visible inside is the liner (0.70-0.83 m) plus a 2.6 cm strip of bare drum wall above it, which brazier_light lights from above. The liner uses glow_material at a flat 0.15 on a black base, so nothing gives it depth. The liner itself fits: radius 0.255 inside a wall of 0.26-0.28.",
+    "fix": "In assemble_notice_corner.py: (1) Line 124: keep the holder: drum = place_prop('brazier-drum.glb', ...). After the chair is placed (line 159), add ONE call: light_reaches(bpy.data.objects['brazier_light'], list(drum.children_recursive), only=False). Add list(chair.children_recursive) to the same list if the chair finding needs it. A light holds only one receiver collection, so a second light_reaches call on brazier_light would undo the first. (2) Line 137: make the liner's glow fade upward, using Generated coordinates. Their z runs 0 to 1 over the liner, and the cameras see only z of about 0.48 to 1.0:\nm = glow_material('brazier soot', (1.0, 0.3, 0.06), 0.15); n, k = m.node_tree.nodes, m.node_tree.links\nxyz = n.new('ShaderNodeSeparateXYZ'); k.new(n.new('ShaderNodeTexCoord').outputs['Generated'], xyz.inputs['Vector'])\nfade = n.new('ShaderNodeMapRange'); fade.inputs['To Min'].default_value, fade.inputs['To Max'].default_value = 0.6, 0.0\nk.new(xyz.outputs['Z'], fade.inputs['Value']); k.new(fade.outputs['Result'], n['Principled BSDF'].inputs['Emission Strength'])\nsoot.data.materials.append(m)\nThis gives about 0.31 glow just behind the near rim and 0 under the far lip. Leave COAL_TOP alone, or the lumps poke over the rim. Targets in the end preview, then the plate: rows just under the far lip 0.10 or less; the lowest visible rows 0.30-0.45; the mouth's average 0.25 or less; no row as flat as today's 0.002 spread; the rim 0.55 or less. The film's live flames and glow brighten the rim again.",
+    "fix_kind": "3d-before-painting",
+    "severity": "must-fix"
+   },
+   {
+    "title": "Anything the painter adds round the near props will blink out or slide during the camera move",
+    "from": "before-the-repaint",
+    "evidence": "projected-set.js: round each near prop (reach 0.05 of the frame's height), the background switches to the behind painting once the camera has moved about half a degree (quickMove 0.00003). I worked the projection out myself from the plate camera (2.993, 16.354, 3.188). A painted flame tip 15 cm over the drum's far rim lands on the kerb about 7-8 m behind the drum (the critic says 6.6 m; same conclusion), so it would slide away from the drum during the move. The notice, board and posts keep their own 3D surfaces, so painted extras that overlap them get cut off sharply. The liked picture has exactly these extras: flames and smoke from the drum, chimney smoke, a candle flame in the lamp, a pail handle, and a coal tub on rails with a barrel in the road.",
+    "fix": "Use the painter instructions below, and send the same words when the behind painting is made. After painting, play the slide in the weights-move view and watch the drum and lamp in the first second for anything appearing or vanishing.",
+    "fix_kind": "painter-words",
+    "severity": "must-fix"
+   },
+   {
+    "title": "The colliery doorway is pure black, so the shut gates don't read; the yard light changed nothing",
+    "from": "all three critics",
+    "evidence": "Doorway (0.575-0.64 across, 0.415-0.468 down): 0.021 in this still and 0.020 in the last; 95% of it is below 0.05. The gate bars inside it measure 0.029 against 0.019 for the gaps, so the bars are a touch LIGHTER than the hole and vanish. The same area in the liked picture measures 0.17. build_street.py (build_heapstead) says what fills the opening. The heapstead front wall is at y0 = 81.6. The opening runs x -1.8 to 1.8 and from ground (COLLIERY_GROUND 5.31) to 4.4 m up, with stone jambs from |x| 1.6 to 2.0. Its back is a closed box face 0.5 m in (y 82.1-82.2), made in 'interior_dark' plaster tinted (0.07, 0.06, 0.05), almost black. colliery_yard_light (40 W at y 77, 4.6 m in front) cannot lift a face that dark.",
+    "fix": "After the gates are placed, put a dim panel of shut doors in the opening: bpy.ops.mesh.primitive_plane_add(size=1, location=(0.0, 81.7, 76 * RISE_PER_METRE + 2.2), rotation=(math.radians(90), 0, 0)); doors = bpy.context.active_object; doors.name = 'heapstead_shut_doors'; doors.scale = (3.5, 4.4, 1); doors.data.materials.append(glow_material('shut doors', (0.55, 0.62, 0.75), 0.05)). The plane faces the camera, sits 10 cm inside the front, and its edges are hidden by the jambs and the lintel. Tune the strength so the doorway measures 0.07-0.11 and nothing in it goes above 0.2; the bars should then read darker than the gaps. Keep the yard light. Afterwards, check where the board's top-left corner meets the doorway's right edge at 0.638-0.643 across: the lighter doorway will make that touch more visible.",
+    "fix_kind": "3d-before-painting",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The lamp and lantern glass are flat opaque cards because the 'see-through' setting never took effect",
+    "from": "all three critics (each found the symptom; none found the cause)",
+    "evidence": "Corner lamp glass: 0.51 in every row, opaque, no mantle visible (work-skeptic/lamp_head_x3.png). The new left lamp's glass is the same, while the street's own gas_lamp_3 nearby is cream with a bright core (peak 0.98). The lantern glass shows no flame, and the seat patch under the lantern (0.84) is brighter than the glass. The cause, read from the glTF files: in gas-lamp-post.glb the glass material is alphaMode BLEND with an RGB base-colour picture, which has no alpha channel. hurricane-lantern.glb's glass is the same. Blender's glTF importer wires a BLEND material's picture alpha into the BSDF's Alpha input; an RGB picture gives 1.0, and a linked socket ignores default_value. So 'Alpha = 0.5' at lines 200 and 219 did nothing. The bulb (radius 0.03 m, 3.23-3.30 m up inside glass that spans 3.14-3.51 m) is in the right place. The importer behaviour is inferred from the files, not seen in Blender.",
+    "fix": "For both lamps' glass (lines 200 and 219) and the lantern glass (line 176), unlink the input first: a = m.node_tree.nodes['Principled BSDF'].inputs['Alpha']; [m.node_tree.links.remove(l) for l in list(a.links)]; a.default_value = 0.5 for the lamps and 0.45 for the lantern. Print a.is_linked in the preview log to confirm. Targets: lamp glass 0.30-0.50 with a core of 0.75 or more, no wider than a third of the glass; the nearer left lamp at least as bright as gas_lamp_3; the lantern's flame visible. If the seat patch under the lantern stays above 0.75, lower LANTERN_WATTS from 2 to 1.",
+    "fix_kind": "3d-before-painting",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The left half is still light (36%); the extra lit window landed off-frame because of a camera bug",
+    "from": "composition-and-light (finding confirmed; cause corrected)",
+    "evidence": "The checker gives 36% (aim 40-48%). The fire's road patch peaks at 0.29 at (0.37, 0.70) against 0.60 in the liked picture. The log line reads lit windows: ['left_row_a_cottage_05_glass_upper_1', 'left_row_a_cottage_06_glass_upper_1'], so two windows were lit and the [::2] guess is wrong. By build_street.py those windows are on the left house fronts (x -4.15) at y 18.8 and 25.2. From the end camera they are 82 and 45 degrees left of the view; the frame's left edge only reaches the left house fronts from about y 33. facts.json puts the street's own lights for those cottages at -5.27 and -1.05 across, off-frame. set_camera() changes the camera's location and rotation but never calls bpy.context.view_layer.update(). So world_to_camera_view used street.blend's own camera at (0, 3.0), where those windows do fall at about 0.10 and 0.21 across.",
+    "fix": "(a) Add bpy.context.view_layer.update() at the end of set_camera(), before return. Check that the log's 'lit windows:' line now names left_row_b windows. (b) Line 67: ROAD_GLOW_WATTS 250 to about 450, so the patch peaks at 0.40-0.45 near (0.37, 0.70), keeping the checker's warm share at 3% or less (now 2.5%). (c) Only if the left half is still under 40%: left_lamp_light 10 to about 40 W. Re-run the checker after each step and stop at about 42%.",
+    "fix_kind": "3d-before-painting",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The frame got about 15% darker this round and the ground went brown",
+    "from": "composition-and-light (cause corrected)",
+    "evidence": "Frame average: 0.212 now, 0.248 in the last still, 0.323 in the liked picture. Bottom third: 0.208 now, 0.283 before, 0.340 in the reference. A change map (work-skeptic/m2.py) shows the top 40% of the frame and all the left houses unchanged (within 0.005). The whole drop is in the bottom third (-0.03 to -0.13) and round the board. facts.json says why: brazier_light went from 160 to 70 W, fire_glow_on_notice from 480 to 200 W and lantern_light from 5 to 2 W. The sky did not change. Pavement colour is 75,59,43 against the reference's 92,88,89. Below mid-frame, 15% of pixels are bluer than red, against 42% in the reference. dusk_world exists (build_street.py sets Colour (0.05, 0.075, 0.1), Strength 1.4). The visible sky is the sky_dome mesh, not the world background.",
+    "fix": "Don't bring the fire light back up on its own, since it is what whitened the chair back and the drum's rim. Read dusk_world's Background Strength in street.blend first (its sun energies differ from build_street.py, so the value may too) and raise it about 1.4 times in a preview. That adds cool light everywhere and also adds weight to the left half. Targets: frame 0.25-0.28; bottom third about 0.25 or more; the notice still at least 2.5 times the average; top third under 0.36; warm share 3% or less. Only once the drum and chair skip brazier_light can it go back toward 100-120 W if the near ground is still dim.",
+    "fix_kind": "3d-before-painting",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The chair is now too dark to read as the empty pale chair",
+    "from": "composition-and-light",
+    "evidence": "Seat 0.33 (0.55 in the last still); legs 0.14 against 0.23 for the pavement round them; the chair back over the notice 0.56 against 0.77 for the paper beside it (gap 0.20). The chair's brightest 5% is 0.66. The lit patch on the seat just under the lantern peaks at 0.84. In the phone-size blurred view (phone_s4_s5_ref.png) the chair is a mid-grey shape; in the liked picture it is the second-brightest.",
+    "fix": "Line 160: tint (0.18, 0.18, 0.18) to about (0.25, 0.25, 0.24), and LANTERN_WATTS 2 to 1 so the seat patch, which brightens with the tint, stays at 0.75 or less. Preview. If the gap between the chair back and the paper falls under 0.12, add list(chair.children_recursive) to the same single light_reaches call on brazier_light used for the drum. Targets: seat top 0.45 or more; legs at least as light as the pavement round them; chair back at least 0.12 under the paper beside it; the chair's brightest 5% at 0.70 or less.",
+    "fix_kind": "3d-before-painting",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The drum's right edge runs along the board's left post",
+    "from": "before-the-repaint",
+    "evidence": "From the solo masks (facts5/solo): between 0.677 and 0.750 down (about 140 px of height), the drum's right edge (pixels 723-726, 0.669-0.672 across) overlaps the post's left edge (pixel 723) by only 1-4 px. The post is 32 px wide. The checker passes the pair only because the drum overlaps the board panel's corner by 18-21 px higher up. In the film the post keeps its own sharp surface right against the painted drum edge.",
+    "fix": "Line 117: change dx (-0.32, 0.32) to (-0.365, 0.32). Only the left post moves, about 5 cm (the board's scale is 1.11) or about 16 px left. It then sits clearly behind the drum by about 17-20 px with about 15 px still showing, and stays inside the board's end. Don't move it right, toward the lantern. Re-run the checker's rule 4 with the post as its own item if possible.",
+    "fix_kind": "3d-before-painting",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The gutter at the frame's entry still looks like steps or a drain",
+    "from": "before-the-repaint (3D); composition-and-light, period-and-story (painter words)",
+    "evidence": "By eye in the still (gutter_s5_ref.png) and in the plate's bottom quarter (plate_gutter.png): stacked ridges like stone steps, every few metres along the channel. The reference has one clean kerb line. The normal-map change to 0.3 did not remove them. Both channel_stones and kerb_stone use the large_sandstone_blocks picture (build_street.py lines 202-203), so the ridges most likely come from the picture's block edges stretched along the channel.",
+    "fix": "At the end of build_scene, give street_channels a plain material: a new material with base colour (0.16, 0.16, 0.17), roughness 0.8 and no picture. Do the same for street_kerbs only if its face still shows ridges. Target: row-to-row spread under 0.015 in 0.24-0.48 across, 0.80-1.0 down. Keep the painter words as well.",
+    "fix_kind": "3d-before-painting",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The corner lamp's head is boxed in by a wall pipe on its right and a dark bracket and rope end on its left",
+    "from": "composition-and-light and before-the-repaint (merged)",
+    "evidence": "The glass's top-right corner (0.850 across, 0.232-0.247 down) meets a rusty pipe starting at 0.850 (gaps of 0-3 px). A dark bracket (0.754-0.773 across, 0.237-0.267 down, brightness 0.02-0.09) touches the glass's left edge at 0.773. The rope from the right winding wheel ends on that bracket at about (0.751, 0.236).",
+    "fix": "Painter words: the lamp stands free on its post and is not joined to the pipe, bracket or rope. If the plate shows them fused, nudge LAMP_POST to the RIGHT, to about x 3.79-3.80 (about 15-17 px). The glass then crosses the pipe clearly and clears the bracket. Don't go past 3.80: the cross-arm reaches 0.352 m and the house front is at 4.15. Recheck rule 7.",
+    "fix_kind": "painter-words",
+    "severity": "minor"
+   },
+   {
+    "title": "The far left lamps crowd the house downpipes and don't match each other",
+    "from": "composition-and-light, before-the-repaint, period-and-story",
+    "evidence": "By eye at 4x zoom (left_lamps_x4.png): the new left lamp's head has about 10 px to each downpipe; gas_lamp_3's post runs right along a downpipe; gas_lamp_3's glass is cream with a bright core while the new lamp's is flat amber. All are 27 m away or more, and the slide moves them only 1-2 px.",
+    "fix": "Fix the glass alpha bug first and compare. If gas_lamp_3 still outshines the nearer left lamp, lower the street's own 'lamp_glass_glow' emission from 8 to about 4-5; keep gas_lamp_3_light's watts. Cover the touching edges with painter words.",
+    "fix_kind": "painter-words",
+    "severity": "minor"
+   },
+   {
+    "title": "The drum is big and more orange than the reference's",
+    "from": "composition-and-light",
+    "evidence": "The drum covers 3.9% of the frame against the notice's 2.1%. Its body brightness matches the reference's (0.19-0.20), but it is more saturated. It is the second shape you see in the blurred view.",
+    "fix": "Painter words: a dull, dark rust-brown drum, not orange. Leave its size.",
+    "fix_kind": "painter-words",
+    "severity": "minor"
+   },
+   {
+    "title": "Thin parts and the end-on handcart may be redrawn; plain areas invite inventions",
+    "from": "before-the-repaint",
+    "evidence": "The gate bars are about 1 px wide; the lantern's handle is 2 px; the handcart seen from behind looks like a box on two legs; the far road is flat and empty where the reference has a tub and a barrel.",
+    "fix": "Painter words (included below).",
+    "fix_kind": "painter-words",
+    "severity": "minor"
+   },
+   {
+    "title": "The chair looks modern and the brick is cleaner and redder than a pit village",
+    "from": "period-and-story",
+    "evidence": "By eye: a square-legged chair with a vase-shaped back splat in cool grey paint, and crisp red brick.",
+    "fix": "Painter words: an old wooden kitchen chair with worn, grubby pale paint; brick weathered and greyed by coal smoke WITHOUT getting darker (\"soot-darkened\" would darken the quiet side and hurt the left half's weight).",
+    "fix_kind": "painter-words",
+    "severity": "minor"
+   },
+   {
+    "title": "The notice's key words are small on a phone",
+    "from": "period-and-story, composition-and-light",
+    "evidence": "The critics measured cap heights of 23 px for NOTICE and 11 px for PITS WILL BE CLOSED and NEW TERMS, against 18-22 px in the reference; I did not re-measure. In the film the notice wears its own surface, so this does not need a repaint.",
+    "fix": "After painting, if wanted: re-lay NOTICE_LINES in paint_prop_pictures.py (larger key lines, smaller print), keeping the key words above the chair back's top at about 0.607 down. Otherwise keep the 3.5 s hold.",
+    "fix_kind": "film-page",
+    "severity": "minor"
+   },
+   {
+    "title": "The notice's top is already warm; the film's lights decide the warmth",
+    "from": "composition-and-light",
+    "evidence": "Paper bands from top to bottom, red minus blue: +0.275, +0.271, +0.284, +0.291, +0.284, +0.314. So the top is warm rather than the bottom cool. notice-corner.js: fireLight sits at Blender z 2.93, about three quarters of the way up the notice. The page's key light is also a warm (0xffc48a) DirectionalLight, which lights the whole notice evenly. noticeGlow (25-degree half cone, penumbra 0.9) lights mainly the lower 20-30%. Not rendered.",
+    "fix": "Judge the film's end frame after painting. If the top reads warm, lower fireLight to about coals + 0.25 m or cut it to about 2.5, and/or make the page key paler; lowering fireLight alone won't cool the top.",
+    "fix_kind": "film-page",
+    "severity": "minor"
+   },
+   {
+    "title": "The painted chair partly sets the notice's and board's colour in the film",
+    "from": "before-the-repaint",
+    "evidence": "projected-set.js: an own surface's tint is the painting's average over the middle 60% of its projected box divided by the page-lit average over the same box. The board copies the notice's tint (sameTintAs). The chair's top rail falls inside the notice's box.",
+    "fix": "In the film page: give notice-paper a box clear of the chair (its top half; the box's y runs upward). Check the board's outline against the painting in the end view.",
+    "fix_kind": "film-page",
+    "severity": "minor"
+   },
+   {
+    "title": "Leave as is: the pail in the caption band, the oil-drum brazier's period, the board across the pavement, two chimney smokes",
+    "from": "composition-and-light, period-and-story",
+    "evidence": "The pail at 0.82-0.94 down is the least important story prop. The other three are judgement calls the critics themselves left alone.",
+    "fix": "No change; keep burned-in captions out of the lower right.",
+    "fix_kind": "leave",
+    "severity": "minor"
+   }
+  ],
+  "rejected": [
+   {
+    "title": "The extra window didn't light because light_left_windows keeps every second candidate ([::2])",
+    "from": "composition-and-light",
+    "why": "The log shows two windows were lit (left_row_a cottages 05 and 06, upper_1). Both sit at y 18.8 and 25.2 on the left house fronts, off-frame. The real cause is set_camera() not calling view_layer.update(), so the picker used street.blend's own camera. See the confirmed rule 10 finding."
+   },
+   {
+    "title": "Move the colliery yard light inside the opening, to (0, 84, ground + 2) at 25 W",
+    "from": "before-the-repaint",
+    "why": "build_heapstead in build_street.py closes the opening with an interior_dark box face at y 82.1-82.2, facing the street. A light at y 84 sits behind that face, inside the solid heapstead, and lights nothing the camera sees."
+   },
+   {
+    "title": "A shut-door panel about 2.5 m wide and 3.5 m tall",
+    "from": "period-and-story",
+    "why": "The opening is 3.6 m wide and 4.4 m tall (cutter at plus or minus 1.8 m, 0 to 4.4 m up; jambs from 1.6 m). A 2.5 x 3.5 m panel leaves black gaps round it. Use 3.5 x 4.4 m at y 81.7, as in the confirmed fix."
+   },
+   {
+    "title": "A yard light moved to y 73.5 at 300 W, or raised to 300 W at y 79-80, as the doorway fix",
+    "from": "composition-and-light, period-and-story",
+    "why": "The back face is almost black (tint 0.07), so even 300 W would brighten the brick, gates and yard long before the opening reached 0.08. A dim self-lit panel fixes the doorway alone."
+   },
+   {
+    "title": "Move the corner lamp 0.12 m left (x 3.60) to clear the pipe",
+    "from": "before-the-repaint",
+    "why": "It clears the pipe but moves the glass's top-left corner (now at about 0.773 across) onto the dark bracket's left edge and onto the end of the winding rope at about (0.751, 0.236). The rope would then seem to tie onto the lamp. Moving right, as far as about x 3.80, fixes both sides."
+   },
+   {
+    "title": "Move the new left lamp to about y 38",
+    "from": "composition-and-light",
+    "why": "The script's own note (line 76) says that at 37-38.5 m its post met the edges of the handcart, sacks and dustbins (rule 4). The lamp is 27 m away and touches only the house's own pipes, so painter words cost less."
+   },
+   {
+    "title": "Lower the drum liner's glow to a flat 0.05",
+    "from": "composition-and-light",
+    "why": "A flat glow is still flat: it would give a dark orange lid instead of a bright one. The fault is the even tone, and a gradient fixes it."
+   },
+   {
+    "title": "Liner gradient over Object z from -0.02 to 0.05, mapped to 0.6 down to 0",
+    "from": "before-the-repaint",
+    "why": "The cameras see the liner only from object z -0.003 up to 0.065. That mapping puts about 0.45 glow at the visible bottom, three times today's 0.15, and by my estimate misses the critic's own target of a mouth average of 0.18. The Generated-z version (0.6 to 0), which tops out at about 0.31 where it shows, fits."
+   },
+   {
+    "title": "Lamp glass: glow 0.08, Alpha 0.2, bulb 20; cut gas_lamp_3_light from 260 to 80 W",
+    "from": "period-and-story",
+    "why": "Any Alpha value is ignored while the socket is linked (see the glass finding). Cutting gas_lamp_3's light would darken the quiet side, which already holds too little weight (rule 10)."
+   },
+   {
+    "title": "Give gas_lamp_3's glass the amber make_glow treatment",
+    "from": "before-the-repaint",
+    "why": "That would turn the one lamp that shows a bright core into another flat amber card. Fix the new lamps' glass first; if needed, dim the street's lamp_glass_glow from 8 to about 4-5."
+   },
+   {
+    "title": "Lean a pick-axe by the chair",
+    "from": "period-and-story",
+    "why": "The story group is already at the checker's size limit, and rules 3, 4 and 12 constrain the spot. It adds a 3D test and risk before the paid repaint for an optional clue."
+   }
+  ],
+  "painter_instructions": "Repaint this exact picture as a painted documentary illustration: a pit-village street at dusk on 1 May 1926. Keep every shape, outline, size and position exactly where it is. Keep the camera and framing, and keep the picture's pattern of light and dark; change only the brushwork and the colour handling. Keep: the rusty oil drum with its open top; the empty old wooden kitchen chair, its paint pale, worn and grubby (darker than the notice), its back to the board and a small hurricane lantern on its seat; the wooden pail at the chair's feet, with no handle; the dark timber notice board on its two posts with the cream notice; the black gas lamp standing free on its own post above the board; the brick terraces, the colliery building, its chimney and winding wheels; and, far up on the left, the small two-wheeled handcart seen from behind, the coal sacks and the dustbins. The drum is dull, dark rust-brown, not orange. Its open top is a dark, sooty hollow with only a faint orange glow low down just behind the front rim, and its rim is a dull rusty lip. The colliery gates are shut: thin dark iron bars standing right across a dim grey doorway whose big doors are closed. No open tunnel, no lit door. The notice is plain cream paper with grey rows of print-like marks and no readable letters. Every gas lamp has the same warm amber glass with a small bright gas mantle inside (no candle flame). The lantern has amber glass with a small flame inside. The gutter beside the kerb is a shallow, smooth stone channel with no steps, ridges or grating. The road, pavement and walls are cool blue-grey dusk, and the brick is weathered and greyed by coal smoke without getting any darker. Warm light stays only where it already is: round the drum, on the board, on the chair seat, at the lamps and in the few lit windows. Nothing is brighter than the notice. Thin parts (the lantern's wire handle, the lamp arms, the gate bars, the chair rungs, the winding rope) stay thin and exactly in place, or are left out; never thicken them. Where two things meet or nearly meet, keep each edge exactly where it is and never join them: the drum's side and the board's left post; the gas-lamp head and the wall pipe and bracket beside it; the far lamps and the house downpipes; the chair back across the bottom of the notice. The winding rope never joins the lamp. Never add: flames, sparks, smoke or steam anywhere (not from the drum, not from any chimney); glows, halos or light rays round any light, the notice or the drum; a handle on the pail; people, animals or birds; extra props (no coal tub, rails, barrel, crates or litter in the road or on the pavement); puddles or reflections; a moon, stars or bright clouds; new signs or lettering; new or longer shadows.",
+  "not_checked": "- I ran no Blender and no film render, so none of the suggested changes or target values has been tested in a render.\n- The glass bug is inferred, not seen in Blender. It rests on the glTF files (alphaMode BLEND with RGB pictures) and on how Blender's glTF importer usually wires alpha; printing a.is_linked in the preview log confirms it.\n- The window bug is inferred from the code (set_camera never calls view_layer.update()) and from where build_street.py puts those windows, not from running the picker.\n- The heapstead opening's size and position come from build_street.py. I did not confirm that street.blend still matches it: its sun energies differ from the file (0.3/0.2 against 0.35/0.25), so read dusk_world's strength before changing it. The effect of the world-strength change is an estimate.\n- I measured the end still (1080 x 1920) with masks from facts5/ids.png and the solo pictures. I looked at the plate (notice-corner-plate-2.png, 16:42) only by eye, for the drum mouth and the gutter; its doorway and the lamp head were not measured.\n- The notice letter heights, the 7-8 m flame-slip distance and the per-pixel slide amounts are the critics' figures or my single-point projections.\n- Not checked: rule 11 (where the lines meet in the first, middle and last film frames); props poking into each other in 3D (for example the lamp cross-arm against the house front if the lamp moves right, or the moved post); the film page's lights, vignette, flames and colour match; how the painter will actually behave.\n- Scripts and crops are in SCRATCH/plan3/corner/critique-32/work-skeptic/: common.py, m1.py, m2.py, glb.py, glbtex.py, drum_mouth_x3.png, gates_x4.png, chair_x2.png, lamp_head_x3.png, left_lamps_x4.png, gutter_s5_ref.png, plate_gutter.png, plate_drum_x2.png, phone_s4_s5_ref.png and diff_s5_minus_s4.png."
+ }
+}
