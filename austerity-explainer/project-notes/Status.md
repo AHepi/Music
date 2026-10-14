@@ -236,8 +236,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Painted by Flux 3 with the critics' painter words, plus a copy with the near props painted out; both lined
   up with the plate by the new `paper-film/tools/align_painting.py` (`film-kit/assets/models/pit-village/
   notice-corner-painted.jpg`, `notice-corner-behind.jpg`, their record in `notice-corner-paintings.json`).
-- Filmed: "32 Test - notice corner slide" (13 seconds, music only, a section of your soundtrack at
-  -17.7 LUFS; not in the repository, like every video). Frames: "32 Notice corner - the film, two frames a
+- Filmed three times: "32 Test - notice corner slide" (13 seconds, music only, a section of your soundtrack at
+  -14 LUFS; not in the repository, like every video). Helpers checking in motion found the fire's shadows
+  fading off the pavement, then a pale outline round the pail left by the first fix; both fixed
+  (`keep_painted_shadows.py`). Frames: "32 Notice corner - the film, two frames a
   second". New tools: `add_music_bed.sh`, `find_jumps.py`.
 - The shot checker learnt five things this round (colour edges, out-of-date pictures, touching stretches,
   background props, lights in props); its 11 planted-fault tests still pass.

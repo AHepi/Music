@@ -463,6 +463,10 @@ Only failures in doing the work belong here. Newest at the bottom.
 124. **A file changed while helpers were checking it.** The music was raised after one helper measured it; the
     skeptic noticed from the file times and set that finding aside. Note what was changed while a check runs
     (log 32).
+125. **Keeping the shadows left a pale strip round the pail.** The gap kept round each prop, so the painter's
+    ink lines don't stay on the road, had no shadow in it; once the camera moved it showed as a pale outline
+    between the pail and its shadow (a fresh helper found it). The shadows' darkening is now carried into the
+    gap and under the props. A fix can make its own fault: check the fixed film again (log 32).
 
 ## Traps
 
