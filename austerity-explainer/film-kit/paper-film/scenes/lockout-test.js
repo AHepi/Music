@@ -52,20 +52,30 @@ function glow(colour, size, opacity) {
 }
 
 // a flame tongue, solid like the painting's shapes: a red-orange body, an orange-yellow middle and a
-// pale yellow heart, each a pointed teardrop inside the last, only the tip fading out
-function flamePicture() {
+// pale yellow heart, each inside the last, with ragged, licking edges and a bent tip that fades out.
+// `seed` gives each of a few shapes its own wobble and bend, so no two tongues match.
+function flamePicture(seed) {
+  const random = seededRandom(seed);
   const canvas = document.createElement('canvas'); canvas.width = 64; canvas.height = 128;
   const ctx = canvas.getContext('2d');
-  ctx.filter = 'blur(1px)';
+  ctx.filter = 'blur(1.2px)';
+  const bend = (random() - 0.5) * 22, wobble = Array.from({ length: 12 }, () => random() - 0.5);
   const tongue = (scale, top, colourTop, colourBottom) => {
     const g = ctx.createLinearGradient(0, 128, 0, top);
-    g.addColorStop(0, colourBottom); g.addColorStop(0.65, colourTop); g.addColorStop(1, colourTop.replace(/[\d.]+\)$/, '0)'));
+    g.addColorStop(0, colourBottom); g.addColorStop(0.55, colourTop); g.addColorStop(1, colourTop.replace(/[\d.]+\)$/, '0)'));
     ctx.fillStyle = g;
-    const w = 26 * scale;
+    const w = 26 * scale, rows = 24, left = [], right = [];
+    for (let i = 0; i <= rows; i++) {
+      const k = i / rows, y = top + (124 - top) * k;                       // tip (k = 0) to root
+      const half = w * Math.sin(Math.PI * Math.min(1, k * 0.95 + 0.05) * 0.62) * (0.75 + 0.25 * k);
+      const lick = 3.5 * scale * wobble[Math.floor(k * 11)] * (1 - k);     // ragged edges, most near the tip
+      const x = 32 + bend * (1 - k) * (1 - k);
+      left.push([x - half + lick, y]); right.push([x + half + lick * 0.6, y]);
+    }
     ctx.beginPath();
-    ctx.moveTo(32, top);
-    ctx.bezierCurveTo(32 + w * 0.3, top + 30, 32 + w, 72, 32 + w * 0.85, 104); ctx.bezierCurveTo(32 + w * 0.6, 124, 32 - w * 0.6, 124, 32 - w * 0.85, 104);
-    ctx.bezierCurveTo(32 - w, 72, 32 - w * 0.3, top + 30, 32, top);
+    ctx.moveTo(...left[0]);
+    for (const p of right) ctx.lineTo(...p);
+    for (const p of left.reverse()) ctx.lineTo(...p);
     ctx.fill();
   };
   tongue(1.0, 4, 'rgba(214,62,14,1)', 'rgba(255,120,30,1)');
@@ -78,25 +88,29 @@ function flamePicture() {
 // swaying, with a brighter core added on top
 class Flames {
   constructor(scene, base, { seed = 17 } = {}) {
-    const random = seededRandom(seed), picture = flamePicture();
+    const random = seededRandom(seed), pictures = [flamePicture(3), flamePicture(8), flamePicture(14)];
     this.base = base;
     this.tongues = [[0, 0, 0.46, 0.16], [0.1, -0.04, 0.34, 0.12], [-0.09, 0.05, 0.38, 0.13], [0.04, 0.11, 0.3, 0.11],
       [-0.06, -0.1, 0.29, 0.11], [0.14, 0.07, 0.22, 0.09], [-0.14, -0.02, 0.25, 0.1], [0.06, -0.12, 0.2, 0.09], [-0.03, 0.14, 0.24, 0.1]]
-      .map(([dx, dz, height, width]) => {
+      .map(([dx, dz, height, width], i) => {
+        const picture = pictures[i % pictures.length];
         const body = new THREE.Sprite(new THREE.SpriteMaterial({ map: picture, transparent: true, depthWrite: false, fog: false }));
         const core = new THREE.Sprite(new THREE.SpriteMaterial({ map: picture, transparent: true, depthWrite: false, fog: false, blending: THREE.AdditiveBlending, opacity: 0.35, color: 0xffd090 }));
         body.center.set(0.5, 0.04); core.center.set(0.5, 0.04);
         scene.add(body, core);
-        return { body, core, dx, dz, height, width, speed: 7 + random() * 6, phase: random() * 6.28, lean: (random() - 0.5) * 0.2 };
+        // sizes, leans and how deep in the coals each stands all differ, so they don't form a row
+        const size = 0.7 + random() * 0.6;
+        return { body, core, dx, dz, height: height * size, width: width * (0.8 + random() * 0.4), sink: random() * 0.05,
+          speed: 6 + random() * 8, phase: random() * 6.28, lean: (random() - 0.5) * 0.5 };
       });
   }
   set(t) {
     for (const f of this.tongues) {
       const flicker = 0.72 + 0.18 * Math.sin(t * f.speed + f.phase) + 0.1 * Math.sin(t * f.speed * 2.3 + f.phase * 1.7);
       const x = this.base.x + f.dx + 0.015 * Math.sin(t * 5.1 + f.phase);
-      f.body.position.set(x, this.base.y, this.base.z + f.dz);
+      f.body.position.set(x, this.base.y - f.sink, this.base.z + f.dz);
       f.body.scale.set(f.width * (0.9 + 0.1 * flicker), f.height * flicker, 1);
-      f.body.material.rotation = f.lean + 0.08 * Math.sin(t * 3.3 + f.phase);
+      f.body.material.rotation = f.lean + 0.12 * Math.sin(t * 3.3 + f.phase) + 0.05 * Math.sin(t * 7.9 + f.phase * 2);
       f.core.position.copy(f.body.position);
       f.core.scale.set(f.width * 0.5, f.height * flicker * 0.55, 1);
       f.core.material.rotation = f.body.material.rotation;
@@ -257,9 +271,9 @@ const page = {
     kit.scene.background = skyColour.clone();
     if (VIEW === 'weights' || VIEW === 'weights-move') { projection.showWeights(true); skyProjection.showWeights(true); }
 
-    // soft contact shadows under the coal sacks and the handcart (placed in assemble_lockout.py:
+    // soft contact shadows under the coal sacks, the handcart and the brazier (placed in assemble_lockout.py:
     // Blender (x, y, turn) -> three.js (x, -y), turned about y), faded in as the move begins
-    const shadows = [[-0.2, 8.4, 18, 1.5, 1.9], [-1.75, 9.6, -70, 1.9, 1.2]].map(([x, y, turn, width, depth]) => {
+    const shadows = [[-0.2, 8.4, 18, 1.5, 1.9], [-1.75, 9.6, -70, 1.9, 1.2], [0.95, 10.4, 0, 1.15, 1.15]].map(([x, y, turn, width, depth]) => {
       const shadow = contactShadow(width, depth);
       shadow.holder.position.set(x, groundUnder(set, x, -y, nearProps) + 0.012, -y);
       shadow.holder.rotation.y = THREE.MathUtils.degToRad(turn);
@@ -321,7 +335,7 @@ const page = {
       flames.set(t);
       sparks.set(t);
       for (const shadow of shadows) shadow.material.opacity = 0.6 * smooth((t - T.move) / 0.7);
-      brazierSmoke.set({ t, origin: brazierTop.clone().add(new THREE.Vector3(0, 0.4, 0)).toArray(), scale: 0.55, wind: 0.35 });
+      brazierSmoke.set({ t, origin: brazierTop.clone().add(new THREE.Vector3(0, 0.35, 0)).toArray(), scale: 0.75, wind: 0.9 });
       for (const c of chimneySmoke) c.effect.set({ t, origin: c.top.toArray(), scale: 0.9, wind: 0.8 });
       const fade = Math.max(1 - clamp01(t / 1.0), smooth((t - T.end) / 1.0));
       const close = onBoard(t);
@@ -329,7 +343,7 @@ const page = {
         look: { exposure: 1.0, aperture: close ? 1.6 : 2.5, maxBlur: close ? 10 : 7, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.3, fade } };
     }
     function draw2D(ctx, t) {
-      placeTitle(ctx, t, { at: T.title, until: T.move + 3.5, place: 'Britain', year: 1926, y: 300 });
+      placeTitle(ctx, t, { at: T.title, until: T.move + 3.5, place: 'Britain', year: 1926, y: 300, size: 64 });
       // a soft dark fade down from the top behind LOCKED OUT, so it reads over the board and the lit window
       const shade = clamp01((t - T.locked + 0.2) / 0.5) * (1 - clamp01((t - T.end - 0.4) / 0.5));
       if (shade > 0) {

@@ -196,7 +196,9 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   surfaces. Clip scene: `film-kit/paper-film/scenes/lockout-test.js`, timing
   `film-kit/examples/lockout-test/timeline.json`.
 - 12 seconds, music only: BRITAIN 1926, a move up the street, a cut to the lock-out notice, LOCKED OUT /
-  FROM 1 MAY 1926. Two rounds of three independent critics (looks, history, faults).
+  FROM 1 MAY 1926. Two rounds of three independent critics (looks, history, faults) and a motion check
+  of the filmed clip; filmed, scanned frame by frame and sent as "29 Test - pit village lockout" (not in
+  the repository: video). Frame sheet: `experiments/29 Test - pit village lockout - two frames a second.jpg`.
 
 ## Waiting on you
 

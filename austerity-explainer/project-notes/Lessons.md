@@ -369,7 +369,8 @@ Only failures in doing the work belong here. Newest at the bottom.
 96. **Hand over before the eye can see the gap.** Round near props the painting gave way to the
     props-removed painting only after the camera had swung 1.4 degrees round a point; further up the
     road that took half the move, and the ink lines showed meanwhile. Half a degree works; a soft 3D
-    shadow, faded in at the same time, replaces the painted shadow the handover removes.
+    shadow, faded in at the same time, replaces the painted shadow the handover removes. Every near
+    prop needs one: the brazier lost its painted scorch ring and seemed to float until it had its own.
 97. **Flux's strength varies from run to run.** The same request gave a near-photograph once and a
     true painting the next; asking for the reference's thick strokes and ink outlines, "nothing should
     look like a 3D render", got the painted one. Look before using, and re-ask if it isn't painted.

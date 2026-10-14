@@ -14,6 +14,10 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 ## Where things stand
 
+- **A 12-second test of plan 3** ("29 Test - pit village lockout", log 29): a 1926 pit village street
+  built in 3D in Blender, repainted by Flux in the series' style, with the painting shone back onto the
+  3D street so the camera can move up it, then a cut to a sharp, readable lock-out notice and LOCKED
+  OUT / FROM 1 MAY 1926. Music only. Waiting for your view.
 - **Chapter 2, "what really causes inflation", is remade with your round-20 changes**: "20 Chapter
   2 - what really causes inflation.mp4" (4 minutes 30 seconds, 27.6 MB), with captions ("20 Captions
   - chapter 2", .srt and .vtt) and a new cover ("20 Cover"). The camera now holds still except for
@@ -62,7 +66,7 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 - **The narration is the steadier voice**, with the music a little louder ("10 Narration").
 - The earlier scrapbook film (08), the five animated samples (10) and the page 3 test (11) are kept
   for the record; the new film replaces them.
-- Spent so far: about US$7.00 in all (about 12 US cents more for the SAM 3D test, log 22). Chapter 1 and earlier: about US$5 (ElevenLabs about 75 US cents;
+- Spent so far: about US$7.50 in all (about 50 US cents for plan 3's repaints, log 29; about 12 US cents for the SAM 3D test, log 22). Chapter 1 and earlier: about US$5 (ElevenLabs about 75 US cents;
   fal about US$4.25). Chapter 2: about US$1.16 on fal (12 paintings, depth maps, 3 masks; US$10 was
   allowed) and about 4,300 ElevenLabs credits (about 75 US cents).
 
@@ -890,18 +894,36 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       1 May a Saturday, 16 April a Friday; the wording matches a real 1926 letter from a colliery,
       National Coal Mining Museum) and suggested the subsidy line, the austerity link: the
       government's subsidy to miners' wages ended on 30 April 1926.
+    - **Checked in motion by a fourth helper**, frame by frame, after filming: the switch to the
+      props-removed painting is invisible, the cut is clean, the notice's small print holds steady, and
+      a frame-to-frame scan finds no jumps except the planned cut at 7.3 seconds. It found the barrel's
+      painted scorch ring fading away at 3.4 seconds (the barrel then seemed to float), flames that
+      read as a neat row of cartoon teardrops, smoke rising as a stiff sheet, and a small opening title.
+      Fixed (a soft shadow under the barrel, flames of three ragged shapes in different sizes and
+      leans, drifting smoke, a larger title) and the clip filmed again.
     - **Kept as it is, on purpose:** the two winding ropes run in opposite directions to two winding
       houses either side of the pithead; both houses are hidden behind the cottages from this street,
       so the ropes seem to end at the roofs. A helper flagged it; the 3D is right, the view hides it.
+    - **The result:** "29 Test - pit village lockout" (12 seconds, 8.8 MB, music at -17.7 LUFS with no
+      clipping). Filmed four times in all (twice stopped part way when checks found faults); the last
+      filming took about 40 minutes for 360 frames. A frame-by-frame scan of the final film finds no
+      jumps except the planned cut. As your rule says, the video and music are not in the repository;
+      the scripts, models, paintings and a sheet of two frames a second are.
+    - **Not checked, or unsure:** I have not seen it on a phone. The fourth helper's points were fixed
+      and the final film was scanned and spot-checked by me, not by a fresh helper. The notice board's
+      wood looks more like a 3D model than a painting in the close shot; the coal sacks are smooth
+      pillows rather than lumpy sacks; faint lines from the painted board posts may show beside the
+      real posts for the last two seconds of the street move. Filming is slow (about 12 seconds a frame,
+      two at once), so a full chapter in this look would take many hours of filming.
     - **Cost:** about 50 US cents on fal (five Flux repaints: four of the street and one with the props
       painted out). About US$8.20 of the picture allowance is left.
 
 
 ## Next step
 
-Your choice of plan (log 28). If it's plan 3: its first test, one place (the pit village street) built
-in Blender, painted over once by Flux (about 10 to 15 US cents, with your yes), and a two-second camera
-move to see whether the paint stays on the 3D shapes.
+Watch "29 Test - pit village lockout" on your phone and say whether this look (real 3D places, painted
+over) is the one for chapter 3 on. If it is, the next step is chapter 3's script and a list of the
+places it needs, each built and painted the same way.
 
 ## Traps
 
