@@ -132,6 +132,19 @@ def brazier_fire(x, y, light_above_coals=0.6, coal_top=0.80, dark_every=4, glow=
     return light
 
 
+def light_reaches(light, objects, only=True):
+    """Chooses which objects a light reaches (Blender's light linking). only=True: the light reaches these
+    objects and nothing else; only=False: it reaches everything except these."""
+    receivers = bpy.data.collections.new(f'{light.name} reaches')
+    for o in objects:
+        if o.type == 'MESH':
+            receivers.objects.link(o)
+    light.light_linking.receiver_collection = receivers
+    for item in receivers.collection_objects:
+        item.light_linking.link_state = 'INCLUDE' if only else 'EXCLUDE'
+    return receivers
+
+
 def tint(objects, colour):
     """Darkens and colours every material of these objects by multiplying their base colour (a clean
     white chair made grubby cream). The materials are copied first, so other props keep theirs."""

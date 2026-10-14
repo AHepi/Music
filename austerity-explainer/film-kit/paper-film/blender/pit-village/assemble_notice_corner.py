@@ -31,7 +31,7 @@ import bpy
 from mathutils import Euler, Vector
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from set_dressing import SET_FOLDER, ground_height, place_prop, wooden_post, glow_material, make_glow, brazier_fire, tint, render, export_for_film   # noqa: E402
+from set_dressing import SET_FOLDER, ground_height, place_prop, wooden_post, glow_material, make_glow, brazier_fire, tint, light_reaches, render, export_for_film   # noqa: E402
 
 arguments = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 def option(name, default=None):
@@ -58,17 +58,22 @@ CHAIR_SCALE = 1.05                   # notice's bottom edge from standing height
 COAL_TOP = 0.70                      # the coal bed's height above the ground (the drum is 0.86 m)
 FIRE_LIGHT_ABOVE_COALS = 0.55        # the fire's light 0.4 m over the rim, where the live flames are: lower, the rim
                                      # throws a wide hard shadow ring and floods the road beyond it (critics, log 31)
-FIRE_WATTS = 160                     # was 900: the drum's top, the notice and the board came out pure white; 300 still
+FIRE_WATTS = 70                      # was 900: the drum's top, the notice and the board came out pure white; 300 still
                                      # spread warm light over 4.4% of the frame (rule 6 allows 3); in deep orange 220 W
-                                     # spread 6.3% and 140 W 4.5%, so it keeps its own, paler orange
-LANTERN_WATTS = 5                    # was 60, then 15: the seat right under it came out the brightest thing in the
+                                     # spread 6.3% and 140 W 4.5%, so it keeps its own, paler orange; 160 W made the chair
+                                     # back, 0.6 m from it, as bright as the notice (second critics, log 31)
+LANTERN_WATTS = 2                    # was 60, 15, 5, then 3: the seat right under it came out the brightest thing in the
                                      # frame (its flicker is added live in the film)
-NOTICE_GLOW_WATTS = 480              # a warm spot from just over the coals onto the notice's lower part: lit from below (rule 6)
+ROAD_GLOW_WATTS = 250               # the fire's warm patch on the road beside the drum, as in the picture the user liked
+NOTICE_GLOW_WATTS = 200              # a warm spot from just over the coals onto the notice's lower part: lit from below (rule 6);
+                                     # 700 W in a wide beam turned 8% of the notice pure white (log 31)
 BOARD_DARKER = 0.5                   # the board's timber at half its colour, so the cream notice stands out on it
 PAIL = Vector((3.28, 21.15))         # in front of the chair's legs
 PAIL_SCALE = 0.85                    # the reference draws it a little smaller next to the chair
 LANTERN_SCALE = 1.28                 # the lantern reads on a phone (rule 8); its handle clearly over the board's bottom edge and clear of the notice (rule 4)
-LAMP_POST = Vector((3.72, 23.25))     # a gas lamp on its post behind the board, its head above the notice
+LAMP_POST = Vector((3.72, 25.5))      # a gas lamp on its post behind the board, its head above the notice
+LEFT_LAMP_POST = Vector((-2.75, 45.0))   # its head about 0.36 across, 0.40 down, clear of the handcart, sacks and dustbins;
+                                         # at 37 to 38.5 m (the reference's place, 0.23 across) its post just met their edges (rule 4)
                                      # as in the picture the user liked, clear of the winding wheels (rule 4)
 
 # the camera (rule 2: where a person would stand; rule 1: turned so the lines meet by the board).
@@ -121,6 +126,15 @@ def build_scene():
     # look of a full bright bed painted badly, critic, log 31); the light stays just over the rim
     brazier_fire(DRUM.x, DRUM.y, light_above_coals=FIRE_LIGHT_ABOVE_COALS, coal_top=COAL_TOP, dark_every=1.33, glow=3.0,
                  energy=FIRE_WATTS, shadow_soft=0.35)
+    # a sooty liner inside the drum, from the coals to just under the rim: the camera sees the far inside wall,
+    # which the fire's light turned into a pale salmon bowl as bright as the notice (second critics, log 31)
+    ground = bpy.data.objects['brazier_light'].location.z - FIRE_LIGHT_ABOVE_COALS - COAL_TOP
+    bpy.ops.mesh.primitive_cylinder_add(vertices=48, radius=0.255, depth=0.13,   # inside the drum's wall (0.26 to 0.28 inside, 0.296 outside)
+                                        end_fill_type='NOTHING',
+                                        location=(DRUM.x, DRUM.y, ground + COAL_TOP + 0.065))
+    soot = bpy.context.active_object
+    soot.name = 'brazier_soot'   # 'brazier...' so the film treats it as part of the drum
+    soot.data.materials.append(glow_material('brazier soot', (1.0, 0.3, 0.06), 0.15))
     # the fire's glow on the notice: a warm spot just over the coals, aimed at the notice, its cone narrow
     # enough to stay off the road (the fire's own light is kept low so the road isn't floodlit)
     coals = Vector((DRUM.x, DRUM.y, ground_height(DRUM.x, DRUM.y) + COAL_TOP + 0.25))
@@ -129,14 +143,21 @@ def build_scene():
     glow.name = 'fire_glow_on_notice'
     glow.data.color = (1.0, 0.42, 0.12)   # deep orange: where it is strong the paper still reads warm, not white
     glow.data.energy = NOTICE_GLOW_WATTS
-    glow.data.spot_size = math.radians(20)
+    glow.data.spot_size = math.radians(50)   # it reaches only the notice and board, so it can be wide: at 20 degrees it warmed
+                                             # only a patch behind the chair's back (the shot checker, log 31)
     glow.data.spot_blend = 0.9   # strongest at the notice's bottom, fading toward its top
-    glow.data.use_shadow = False   # the chair's back stands in its way and would shade the notice's bottom
+    glow.data.use_shadow = False
+    glow.data.use_custom_distance = True   # without shadows its beam went on through the board and lit an orange oval
+    glow.data.cutoff_distance = 1.4        # on the house wall: the notice is 1.0 to 1.2 m away, the wall 2.1 m
     glow.rotation_mode = 'QUATERNION'
-    glow.rotation_quaternion = (notice_centre() - Vector((0, 0, 0.36 * BOARD_SCALE)) - coals).to_track_quat('-Z', 'Y')   # its bottom edge
+    glow.rotation_quaternion = (notice_centre() - Vector((0, 0, 0.46 * BOARD_SCALE)) - coals).to_track_quat('-Z', 'Y')   # just under its bottom edge,
+    # so the beam fades from the notice's bottom to its top
+    # it reaches only the notice and its board: it lit the chair's top rail, in front of the notice, as bright as the
+    # notice itself (the shot checker, log 31)
+    light_reaches(glow, list(board.children_recursive) + posts)
     # the empty chair, the lantern on its seat (stood on whatever the ray finds first: the seat), the pail
     chair = place_prop('kitchen-chair.glb', CHAIR.x, CHAIR.y, turn_degrees=CHAIR_TURN_DEGREES, scale=CHAIR_SCALE, start=low(CHAIR.y))
-    tint(chair.children_recursive, (0.52, 0.47, 0.38))   # grubby cream, not clean white: stays under the notice (rule 5)
+    tint(chair.children_recursive, (0.18, 0.18, 0.18))   # grubby cream, not clean white: stays under the notice (rule 5)
     bpy.context.view_layer.update()
     seat = CHAIR + Vector((0.005, -0.18))   # the front of the seat, toward the fire: its top clearly over the board's bottom edge
                                              # and clear of the lamp post behind (rule 4; the shot checker, log 31)
@@ -152,7 +173,7 @@ def build_scene():
     for o in lantern.children_recursive:
         for m in (o.data.materials if o.type == 'MESH' else []):
             if m and 'glass' in m.name:
-                make_glow(m, (1.0, 0.7, 0.4), 2.0)
+                make_glow(m, (1.0, 0.5, 0.15), 0.3)   # amber glass; the flame inside is the only near-white point
     bpy.ops.object.light_add(type='POINT', location=flame_at)
     lantern_light = bpy.context.active_object
     lantern_light.name = 'lantern_light'
@@ -160,6 +181,9 @@ def build_scene():
     lantern_light.data.energy = LANTERN_WATTS
     lantern_light.data.shadow_soft_size = 0.03
     lantern_light.data.use_shadow = False   # the glass and the lantern's own frame would block it
+    # it skips the lantern itself: from a few centimetres it lit the brass frame and the glass's inside as
+    # bright as the notice, and the glass looked cream, not amber (the shot checker and critics, log 31)
+    light_reaches(lantern_light, lantern.children_recursive, only=False)
     pail = place_prop('wooden-pail.glb', PAIL.x, PAIL.y, turn_degrees=30, scale=PAIL_SCALE, start=pavement_height(PAIL.y) + 1.2)
     for o in list(pail.children_recursive):   # its thin wire handle would be smeared by the painter and left as a ghost
         if o.name.startswith('wooden_bucket_01_handle'):
@@ -172,7 +196,8 @@ def build_scene():
             if m and m.name.endswith('_bulb'):
                 make_glow(m, (1.0, 0.72, 0.4), 8.0)   # the mantle: small and bright, but not a white blaze
             elif m and m.name.endswith('_glass'):
-                make_glow(m, (1.0, 0.6, 0.25), 0.6)   # amber gas light, clearly darker than the notice (it was near white)
+                make_glow(m, (1.0, 0.45, 0.12), 0.3)   # amber gas light, clearly darker than the notice (it was a flat beige card)
+                m.node_tree.nodes['Principled BSDF'].inputs['Alpha'].default_value = 0.5   # part see-through: the mantle shows
     glass_at = lamp.location + Vector((0, 0, 3.27))   # the gas mantle inside its glass
     bpy.ops.object.light_add(type='POINT', location=glass_at)
     lamp_light = bpy.context.active_object
@@ -180,6 +205,24 @@ def build_scene():
     lamp_light.data.color = (1.0, 0.97, 0.94)   # paler than the fire, so the notice's top reads cooler than its bottom
     lamp_light.data.energy = 12   # its glass glows on its own; the notice is lit from below, cool at the top (rule 6)
     lamp_light.data.shadow_soft_size = 0.12
+    # a second gas lamp, on the left-hand kerb where the picture the user liked has one: a small lit detail on the
+    # quiet side, which held only 36% of the frame's weight against the reference's 42% (rule 10, log 31)
+    left_lamp = place_prop('gas-lamp-post.glb', LEFT_LAMP_POST.x, LEFT_LAMP_POST.y, turn_degrees=180, name='left-gas-lamp-post',
+                           start=low(LEFT_LAMP_POST.y))
+    for i, o in enumerate(left_lamp.children_recursive):   # its parts came in as 'gas-lamp-post.001': renamed, so neither
+        o.name = f'left_lamp_part_{i}'                     # the shot checker nor the film page takes it for the corner lamp
+        for m in (o.data.materials if o.type == 'MESH' else []):
+            if m and m.name.split('.')[0].endswith('_bulb'):
+                make_glow(m, (1.0, 0.72, 0.4), 8.0)
+            elif m and m.name.split('.')[0].endswith('_glass'):
+                make_glow(m, (1.0, 0.45, 0.12), 0.3)
+                m.node_tree.nodes['Principled BSDF'].inputs['Alpha'].default_value = 0.5
+    bpy.ops.object.light_add(type='POINT', location=left_lamp.location + Vector((0, 0, 3.27)))
+    left_light = bpy.context.active_object
+    left_light.name = 'left_lamp_light'
+    left_light.data.color = (1.0, 0.97, 0.94)   # pale, like the corner lamp: the warm light stays round the story props (rule 6)
+    left_light.data.energy = 10
+    left_light.data.shadow_soft_size = 0.12
     # the work props, small and far up the street (rule 8)
     # the handcart loaded with coal sacks, and more sacks against the house wall: a small, dim echo of
     # the story group on the other side of the street, as in the picture the user liked
@@ -191,7 +234,8 @@ def build_scene():
             if o.name.startswith('sack-standing'):
                 bpy.data.objects.remove(o, do_unlink=True)
     place_prop('wooden-barrel.glb', 3.72, 30.6, start=low(30.6))
-    place_prop('dustbins.glb', -3.4, 38.0, turn_degrees=-90, start=low(38.0))   # sacks and bins in view on the quiet side (rule 10)
+    place_prop('dustbins.glb', -3.4, 36.5, turn_degrees=-90, start=low(36.5))   # sacks and bins in view on the quiet side (rule 10);
+    # at 38 m the handcart overlapped them by only 11 pixels, an edge that just meets (rule 4, the shot checker)
     # a soft cool light on the left-hand house fronts, so the quiet side is dim but not an empty black mass
     # (rule 10: the picture the user liked has its houses at about 0.6 of its sky's brightness)
     bpy.ops.object.light_add(type='AREA', location=(0.5, 33.0, pavement_height(33.0) + 5.0))
@@ -200,7 +244,7 @@ def build_scene():
     fill.data.shape = 'RECTANGLE'
     fill.data.size, fill.data.size_y = 3.0, 18.0
     fill.data.color = (0.62, 0.72, 1.0)
-    fill.data.energy = 350   # the houses at about 0.6 of the sky's brightness
+    fill.data.energy = 350   # the houses at about 0.6 of the sky's brightness (500 W only took the quiet side's weight from 36% to 37%)
     fill.data.use_shadow = False
     fill.rotation_euler = (0, math.radians(75), 0)   # facing the left-hand house fronts (-x), a little downward
     # the colliery gates shut across the top of the street, its name board, and the idle tub inside
@@ -208,11 +252,30 @@ def build_scene():
     place_prop('iron-gates-pair.glb', 1.5, 71.5)
     place_prop('colliery-name-board.glb', 0.0, 72.4, collection='signs', scale=1.35)
     place_prop('coal-tub-on-track.glb', -1.0, 76.5, turn_degrees=90)
+    bpy.ops.object.light_add(type='POINT', location=(0.0, 77.0, 76 * RISE_PER_METRE + 3.0))
+    yard = bpy.context.active_object
+    yard.name = 'colliery_yard_light'   # the shut gates and the idle tub just read; the doorway was pure black
+    yard.data.energy, yard.data.color, yard.data.use_shadow = 40, (0.7, 0.8, 1.0), False
+    # the fire's warm patch on the road beside the drum (rule 10: the picture the user liked has one)
+    fire = bpy.data.objects['brazier_light'].location
+    bpy.ops.object.light_add(type='SPOT', location=fire)
+    road = bpy.context.active_object
+    road.name = 'fire_glow_on_road'
+    road.data.energy, road.data.color, road.data.use_shadow = ROAD_GLOW_WATTS, (1.0, 0.45, 0.15), False
+    road.data.spot_size, road.data.spot_blend = math.radians(40), 0.8
+    road.rotation_mode = 'QUATERNION'
+    road.rotation_quaternion = (Vector((1.4, 25.0, 25.0 * RISE_PER_METRE)) - fire).to_track_quat('-Z', 'Y')
+    # 7. the gutter and kerb nearest the camera showed step-like stripes: flatten their bumps
+    for name in ('channel_stones', 'kerb_stone'):
+        material = bpy.data.materials.get(name)
+        for node in (material.node_tree.nodes if material and material.use_nodes else []):
+            if node.type == 'NORMAL_MAP':
+                node.inputs['Strength'].default_value = 0.3
 
 
 def light_left_windows(camera, how_many=2):
     """Lights a couple of dark upstairs windows on the left-hand terrace, dimly: one or two small lights on the
-    quiet side (rule 10), between 0.05 and 0.35 across and 0.28 and 0.45 down in the composed frame."""
+    quiet side (rule 10), between 0.05 and 0.42 across and 0.25 and 0.48 down in the composed frame."""
     from bpy_extras.object_utils import world_to_camera_view
     scene = bpy.context.scene
     lit = bpy.data.materials.get('window_lit_glow_1')
@@ -228,9 +291,9 @@ def light_left_windows(camera, how_many=2):
         if o.type != 'MESH' or not o.material_slots or not any(s.material and s.material.name.startswith('window_dark') for s in o.material_slots):
             continue
         where = world_to_camera_view(scene, camera, o.matrix_world.translation)
-        if where.z > 0 and 0.05 <= where.x <= 0.35 and 0.28 <= 1 - where.y <= 0.45 and o.matrix_world.translation.x < 0:
+        if where.z > 0 and 0.05 <= where.x <= 0.42 and 0.25 <= 1 - where.y <= 0.48 and o.matrix_world.translation.x < 0:
             chosen.append((where.x, o))
-    picked = [o for _, o in sorted(chosen, key=lambda c: c[0])][::3][:how_many]   # spread out, not side by side
+    picked = [o for _, o in sorted(chosen, key=lambda c: c[0])][::2][:how_many]   # spread out, not side by side
     for o in picked:
         for slot in o.material_slots:
             if slot.material and slot.material.name.startswith('window_dark'):

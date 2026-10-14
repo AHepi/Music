@@ -191,9 +191,26 @@ for light in scene.objects:
     if light.type != 'LIGHT' or light.hide_render:
         continue
     where, depth = on_screen(light.matrix_world.translation)
-    facts['lights'].append({'name': light.name, 'kind': light.data.type, 'at': [round(v, 3) for v in light.matrix_world.translation],
-                            'on_screen': where if depth > 0 else None, 'energy': round(light.data.energy, 1),
-                            'colour': [round(c, 3) for c in light.data.color]})
+    entry = {'name': light.name, 'kind': light.data.type, 'at': [round(v, 3) for v in light.matrix_world.translation],
+             'on_screen': where if depth > 0 else None, 'energy': round(light.data.energy, 1),
+             'colour': [round(c, 3) for c in light.data.color]}
+    if light.data.type == 'SPOT':   # its beam: how wide (degrees, edge to edge) and which way it points
+        entry['spot_degrees'] = round(math.degrees(light.data.spot_size), 2)
+        entry['aim'] = [round(v, 4) for v in (light.matrix_world.to_quaternion() @ Vector((0, 0, -1)))]
+    if getattr(light.data, 'use_custom_distance', False):   # light that stops at a set distance
+        entry['reach'] = round(light.data.cutoff_distance, 3)
+    linking = getattr(light, 'light_linking', None)
+    receivers = linking.receiver_collection if linking else None
+    if receivers:   # light linking: the light reaches only some objects, or everything but some
+        # each entry's setting, in the same order as the collection's objects (the entry doesn't name its object)
+        states = {o.name: item.light_linking.link_state for o, item in zip(receivers.objects, receivers.collection_objects)}
+        reached = [o for o in receivers.objects if states.get(o.name) == 'INCLUDE']
+        skipped = [o for o in receivers.objects if states.get(o.name) == 'EXCLUDE']
+        if reached:   # it reaches these groups and nothing else (not the street itself)
+            entry['reaches_only'] = sorted({group_of(o) for o in reached} - {None})
+        elif skipped:   # it skips a group when it skips every one of the group's objects
+            entry['skips'] = sorted(g for g, objects in members.items() if objects and all(o in skipped for o in objects))
+    facts['lights'].append(entry)
 for name, direction in check.get('lines', {}).items():
     far = eye + Vector(direction).normalized() * 1e5
     where, depth = on_screen(far)

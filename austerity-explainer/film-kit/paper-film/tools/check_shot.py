@@ -391,25 +391,50 @@ def ground_point(shot, px, py):
 
 def picture_mismatch(shot):
     """The props whose outlines in the finished picture don't line up with where Blender measured them (a picture
-    made before the scene changed). A prop that matches has most of its outline on an edge in the picture."""
-    edges = cv2.Canny(cv2.GaussianBlur(cv2.cvtColor(shot.picture, cv2.COLOR_BGR2GRAY), (0, 0), 1.5), 20, 60) > 0
+    made before the scene changed). A prop that moved lines up clearly better with the picture's edges when its
+    outline is slid a little; a prop whose edges are just faint (dark on dark) lines up no better anywhere."""
+    # edges in brightness and in colour: a rusty orange drum against a blue-grey road is about as bright as the road,
+    # so a brightness-only edge finder missed its whole side (log 31)
+    lab = cv2.cvtColor(cv2.GaussianBlur(shot.picture, (0, 0), 1.5), cv2.COLOR_BGR2LAB)
+    edges = cv2.Canny(lab[:, :, 0], 20, 60) > 0
+    for colour in (1, 2):
+        edges |= cv2.Canny(lab[:, :, colour], 10, 30) > 0
     near = cv2.dilate(edges.astype(np.uint8), np.ones((7, 7), np.uint8)) > 0
+    step, reach = max(2, shot.width // 270), shot.width // 30   # slides of up to a thirtieth of the frame's width
     off = []
     for g in dict.fromkeys(shot.core + shot.check.get('pairs_also', [])):
         if not shot.shows(g) or shot.visible[g].sum() < 400:
             continue
+        # the story props always; others only when they cover 0.5% of the frame: small far dustbins among the
+        # houses' windows lined up with some other edge when slid, by chance (gain 0.19 in an up-to-date picture)
+        if g not in shot.core and shot.visible[g].sum() < 0.005 * shot.width * shot.height:
+            continue
         mask = shot.visible[g].astype(np.uint8)
-        outline = (mask - cv2.erode(mask, np.ones((3, 3), np.uint8))) > 0
-        agree = (outline & near).sum() / max(1, outline.sum())
-        if agree < 0.6:   # matching pictures measured 0.73 or more; a picture with props moved, 0.27 to 0.54 (log 31)
-            off.append(f'{g} ({agree:.0%} of its outline lines up)')
+        ys, xs = np.nonzero((mask - cv2.erode(mask, np.ones((3, 3), np.uint8))) > 0)
+
+        def agree(dx, dy):
+            y, x = ys + dy, xs + dx
+            inside = (y >= 0) & (y < shot.height) & (x >= 0) & (x < shot.width)
+            return near[y[inside], x[inside]].sum() / max(1, inside.sum())
+        here = agree(0, 0)
+        best, dx, dy = max((agree(dx, dy), dx, dy) for dx in range(-reach, reach + 1, step) for dy in range(-reach, reach + 1, step))
+        # up-to-date pictures: no prop lined up better when slid (gain 0, even a dim drum at 0.64); props that had
+        # since moved gained 0.09 to 0.23, or lined up under 0.45 everywhere (log 31)
+        if best - here >= 0.08 or best < 0.45:
+            ways = [f'{abs(dx)} pixels {"right" if dx > 0 else "left"}'] * (dx != 0) + [f'{abs(dy)} pixels {"down" if dy > 0 else "up"}'] * (dy != 0)
+            slid = f'; {best:.0%} when slid {" and ".join(ways)}' if best - here >= 0.08 else ''
+            off.append(f'{g} ({here:.0%} of its outline lines up{slid})')
     return off
 
 
 def check_set_up(report, shot):
     for g in shot.facts.get('missing_groups', []):
-        report.add('set-up', False, f'No object in the scene matches the group "{g}", so it was not measured.',
-                   fix=f'Check the name patterns of "{g}" in the check file against the objects\' names in Blender.', kind='set-up', how_bad=10)
+        if g in [shot.subject, shot.support] + shot.story:   # the shot can't be judged without it
+            report.add('set-up', False, f'No object in the scene matches the group "{g}", so it was not measured.',
+                       fix=f'Check the name patterns of "{g}" in the check file against the objects\' names in Blender.', kind='set-up', how_bad=10)
+        else:   # a background prop this version of the scene may simply not have
+            report.note('set-up', f'No object in the scene matches the group "{g}", so it was not measured (if the scene should have it, '
+                                  f'check the name patterns of "{g}" in the check file against the objects\' names in Blender).')
 
 
 def check_camera(report, shot):
@@ -1346,6 +1371,27 @@ def check_dark_entry(report, shot):
 
 
 # ---------------------------------------------------------------------------------------- the light rules (5, 6, 10) and the main rule
+def light_reaching(light, point, group=None):
+    """How strongly a light reaches a point in the street (its strength over distance squared), or 0 when the
+    point is outside a spotlight's beam, past the light's set reach, or on something the light was set not to
+    reach (light linking; group None is the street itself). Anything shading it is ignored."""
+    if light['kind'] == 'SUN':
+        return 0.0
+    if 'reaches_only' in light and group not in light['reaches_only']:
+        return 0.0
+    if group is not None and group in light.get('skips', []):
+        return 0.0
+    offset = np.array(point, float) - np.array(light['at'], float)
+    distance = float(np.linalg.norm(offset))
+    if light.get('reach') is not None and distance > light['reach']:
+        return 0.0
+    if light['kind'] == 'SPOT' and light.get('aim') is not None and distance > 1e-6:
+        angle = math.degrees(math.acos(max(-1.0, min(1.0, float(np.dot(offset / distance, light['aim']))))))
+        if angle > light['spot_degrees'] / 2:
+            return 0.0
+    return light['energy'] / max(distance, 0.3) ** 2
+
+
 def warm_lights_near(shot, px, py):
     """The warm lights that send the most light to the spot of ground seen at pixel (px, py): each light's
     strength over its distance squared (ignoring anything that shades it), as words."""
@@ -1360,7 +1406,9 @@ def warm_lights_near(shot, px, py):
         distance = float(np.linalg.norm(np.array(light['at']) - spot))
         seen = light['on_screen']
         where = 'in the frame' if seen and 0 <= seen[0] <= 1 and 0 <= seen[1] <= 1 else 'out of the frame'
-        found.append((light['energy'] / max(distance, 0.5) ** 2, light['name'], distance, where))
+        strength = light_reaching(light, spot)
+        if strength > 0:
+            found.append((strength, light['name'], distance, where))
     total = sum(f[0] for f in found) or 1
     return [f'{name} ({distance:.1f} m from it, {where}; about {strength / total:.0%} of the warm light reaching it if nothing shades it)'
             for strength, name, distance, where in sorted(found, reverse=True)[:2]]
@@ -1371,9 +1419,12 @@ def lit_from_below_fix(shot, subject, spread_too_wide):
     info = shot.info(subject)
     middle = info['centre'][2]
     near = lambda l, metres: l['kind'] == 'SUN' or float(np.linalg.norm(np.array(l['at']) - np.array(info['centre']))) <= metres
-    lights = shot.facts.get('lights', [])
+    can_reach = lambda l: ('reaches_only' not in l or subject in l['reaches_only']) and subject not in l.get('skips', [])   # light linking
+    lights = [l for l in shot.facts.get('lights', []) if can_reach(l)]
     warm_below = [l['name'] for l in lights if l['colour'][0] - l['colour'][2] >= 0.15 and l['kind'] != 'SUN' and l['at'][2] < middle and near(l, 3)]
-    cool_above = [l['name'] for l in lights if (l['colour'][2] > l['colour'][0] and near(l, 8)) or (l['kind'] != 'SUN' and l['at'][2] > middle and near(l, 4))]
+    eye = np.array(shot.camera['at'])
+    facing = lambda l: l['kind'] == 'SUN' or np.dot(np.array(l['at']) - np.array(info['centre']), eye - np.array(info['centre'])) > 0
+    cool_above = [l['name'] for l in lights if facing(l) and ((l['colour'][2] > l['colour'][0] and near(l, 8)) or (l['kind'] != 'SUN' and l['at'][2] > middle and near(l, 4)))]
     words = f'Give {subject}\'s bottom more warm light than its top: '
     below = (f'bring the warm light below it closer under its bottom edge, or aim it there ({", ".join(warm_below)})' if warm_below
              else 'add a warm light below it, aimed at its bottom edge')
@@ -1469,6 +1520,58 @@ def check_light(report, shot, story_union, blurred):
                    f'pure blue; it needs 0.10 (the reference measures about 0.17).',
                    fix=lit_from_below_fix(shot, subject, share_warm > 0.03), name='lit-below',
                    mark=box_of(shot.visible[subject]), kind='light', how_bad=past(lift, 0.10, 0.05))
+    # rule 5: no story prop as bright as the subject ("dirty the chair a little so it stays darker than the notice")
+    if has_subject:
+        paper = float(np.median(grey[shot.visible[subject]]))
+        glaring = []
+        for g in shot.story:
+            if g in (subject, shot.support) or not shot.shows(g) or shot.visible[g].sum() < 400:
+                continue
+            top5 = float(np.percentile(grey[shot.visible[g]], 95))
+            if top5 >= paper - 0.05:
+                glaring.append((g, top5))
+        lights_on = lambda g: [x for x in sorted(((light_reaching(l, shot.info(g)['centre'], g), l['name']) for l in shot.facts.get('lights', [])),
+                                                 reverse=True)[:1] if x[0] > 0]
+        report.add(f'rule 5: nothing in the story group as bright as {subject}', not glaring,
+                   ('; '.join(f'the brightest parts of {g} reach {v:.2f}, as bright as {subject} ({paper:.2f})' for g, v in glaring) + '.') if glaring
+                   else f'Every story prop stays darker than {subject} ({paper:.2f}).',
+                   fix=' '.join(f'Make {g} darker (its own colour) or move it further from the light on it'
+                                + (f' ({lights_on(g)[0][1]})' if lights_on(g) else '') + '.' for g, _ in glaring),
+                   mark=box_of(np.any([shot.visible[g] for g, _ in glaring], axis=0)) if glaring else None, kind='light',
+                   how_bad=max([past(v, paper - 0.05, 0.05) for _, v in glaring] or [1]))
+    # burnt-out colour: pure white or one colour at its limit loses all detail, and the painter can't recover it
+    clipped = picture.max(axis=2) >= 254
+    burnt = []
+    for g, mask in shot.visible.items():
+        n = int((clipped & mask).sum())
+        if n > 0.0002 * width * height and n > 0.03 * mask.sum():
+            burnt.append((g, n / mask.sum(), box_of(clipped & mask)))
+    rest = clipped & ~np.any(list(shot.visible.values()), axis=0)
+    if rest.sum() > 0.001 * width * height:
+        burnt.append(('the set (walls, road or sky)', rest.sum() / (width * height), box_of(rest)))
+    report.add('rule 5: no burnt-out colour', not burnt,
+               ('Colour at its limit (pure white, or one colour at full strength), where all detail is lost: ' +
+                '; '.join(f'{g} ({share:.0%} of it)' if not g.startswith('the set') else f'{g} ({share:.2%} of the frame)' for g, share, _ in burnt) + '.')
+               if burnt else 'Nothing apart from tiny highlights is at its colour limit.',
+               fix='Dim the light on it, or darken its own colour or glow, until nothing but a lamp\'s flame reaches the limit.',
+               mark=burnt[0][2] if burnt else None, kind='light', how_bad=1 + 2 * len(burnt))
+    # a warm patch away from the story props, however dim: is it lit by something meant?
+    hue = (red - blue) / np.maximum(red + blue, 1)
+    stray = (hue > 0.25) & (grey > 0.25) & ~np.any([shot.visible[g] for g in shot.visible], axis=0)
+    stray = cv2.morphologyEx(stray.astype(np.uint8), cv2.MORPH_OPEN, np.ones((9, 9), np.uint8))
+    m, parts, part_stats, _ = cv2.connectedComponentsWithStats(stray)
+    patches = sorted(((part_stats[k, cv2.CC_STAT_AREA], k) for k in range(1, m)), reverse=True)[:3]
+    patches = [(area, k) for area, k in patches if area > 0.002 * width * height]
+    if patches:
+        words = []
+        for area, k in patches:
+            px, py = centre_of(parts == k)
+            lit_by = warm_lights_near(shot, px, py)
+            words.append(f'at {px / width:.2f} across, {py / height:.2f} down ({area / (width * height):.1%} of the frame' +
+                         (f'; lit most by {lit_by[0].split(" (")[0]}' if lit_by else '') + ')')
+        report.note('rule 6: warm light from the people\'s own lights',
+                    'Warm patches on the set (walls, road): ' + '; '.join(words) + '. Check each is lit by something you meant (a window, a lamp, '
+                    'the fire\'s glow on the road), not by a light meant for the notice that shines through or past it.')
     # rule 10: the quiet side
     edges = cv2.GaussianBlur(np.abs(cv2.Laplacian(cv2.GaussianBlur(grey, (0, 0), 2), cv2.CV_32F)), (0, 0), 25)
     contrast = np.abs(grey - grey.mean())
@@ -1789,7 +1892,7 @@ def main():
     off = picture_mismatch(shot) if shot.picture is not None else []
     if off:
         report.add('set-up: the finished picture matches the scene', False,
-                   'The finished picture does not match the scene as measured: ' + ', '.join(off) + ' stand somewhere else in it. '
+                   'The finished picture does not match the scene as measured: ' + ', '.join(off) + (' stand' if len(off) > 1 else ' stands') + ' somewhere else in it. '
                    'It was probably made before the scene changed, so the light rules were not judged.',
                    fix='Render a new finished picture of the scene as it is now, and check again.', kind='set-up', how_bad=6)
     elif shot.grey is not None:
