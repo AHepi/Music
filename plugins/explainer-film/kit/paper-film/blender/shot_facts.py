@@ -200,14 +200,35 @@ for name, direction in check.get('lines', {}).items():
     facts['lines_meet'][name] = where if depth > 0 else None
 
 metres_per_pixel = lambda distance: 2 * distance * math.tan(vertical_fov / 2) / HEIGHT
+depsgraph_now = bpy.context.evaluated_depsgraph_get()
 for g in names:
     points = [o.matrix_world @ Vector(c) for o in members[g] for c in o.bound_box]
     low = Vector((min(p.x for p in points), min(p.y for p in points), min(p.z for p in points)))
     high = Vector((max(p.x for p in points), max(p.y for p in points), max(p.z for p in points)))
     centre = (low + high) / 2
     distance = (centre - eye).dot(looking)
-    # from just above the group's foot, passing through its own parts, so the first surface met is what it stands on
-    first, first_object, lowest = lowest_surface_below(Vector((centre.x, centre.y, low.z + 0.05)), ignore={o.name for o in members[g]})
+    # from just above the group's foot, passing through its own parts, so the first surface met is what it stands on.
+    # Five spots across its base, keeping the highest surface met: one line can slip between the planks of a seat
+    own = {o.name for o in members[g]}
+    first, first_object, lowest = None, None, None
+    for fx, fy in ((0, 0), (-0.25, -0.25), (0.25, -0.25), (-0.25, 0.25), (0.25, 0.25)):
+        spot = Vector((centre.x + fx * (high.x - low.x), centre.y + fy * (high.y - low.y), low.z + 0.05))
+        hit, hit_object, deepest = lowest_surface_below(spot, ignore=own)
+        if hit is not None and (first is None or hit.z > first.z):
+            first, first_object = hit, hit_object
+        if deepest is not None and (lowest is None or deepest.z < lowest.z):
+            lowest = deepest
+    # sunk into the ground? Looking up from its bottom, an upward-facing surface of the set (not of any prop) within
+    # half its height means it stands below that surface: record that as negative air
+    sunk = None
+    origin = Vector((centre.x, centre.y, low.z + 0.001))
+    for _ in range(16):
+        hit, location, normal, index, hit_object, matrix = scene.ray_cast(depsgraph_now, origin, Vector((0, 0, 1)), distance=0.5 * (high.z - low.z))
+        if not hit:
+            break
+        if hit_object.name not in own and not hit_object.hide_render and group_of(hit_object) is None and normal.z > 0.5:
+            sunk = location.copy()   # keep looking: the highest such surface is the street's own (a buried layer lies lower)
+        origin = location + Vector((0, 0, 0.001))
     corners = [on_screen(p) for p in points]
     in_front = [c for c, depth in corners if depth > 0]
     facts['groups'][g] = {
@@ -216,7 +237,8 @@ for g in names:
         'width': round(high.x - low.x, 3), 'depth': round(high.y - low.y, 3), 'height': round(high.z - low.z, 3),
         'distance': round(distance, 3),
         'metres_per_pixel': round(metres_per_pixel(max(distance, 0.1)), 6),
-        'stands_above_surface_below': round(low.z - first.z, 3) if first else None,
+        # sunk: negative; otherwise the air under it (never below 0: looking up found nothing it is sunk into)
+        'stands_above_surface_below': round(low.z - sunk.z, 3) if sunk else (max(0.0, round(low.z - first.z, 3)) if first else None),
         'stands_above_ground': round(low.z - lowest.z, 3) if lowest else None,
         'stands_on': (group_of(first_object) or 'the set') if first_object else None,
         # where the whole group would land on screen if nothing hid it and the frame went on for ever
@@ -224,6 +246,28 @@ for g in names:
                                  round(max(c[0] for c in in_front), 4), round(max(c[1] for c in in_front), 4)] if in_front else None,
         'colour': colour_of[g],
     }
+# for each prop that should rest on another (a lantern on a chair), the top of that support where the prop would
+# stand: the first surface of the support's own parts met coming down over the support's middle (the seat, not the back)
+facts['support_tops'] = {}
+depsgraph = bpy.context.evaluated_depsgraph_get()
+for g, support in check.get('stands_on', {}).items():
+    if support not in facts['groups'] or g not in facts['groups']:
+        continue
+    info = facts['groups'][support]
+    x, y = info['centre'][0], info['centre'][1]
+    tops = []
+    for fx, fy in ((0, 0), (-0.15, -0.15), (0.15, -0.15), (-0.15, 0.15), (0.15, 0.15)):
+        origin = Vector((x + fx * info['width'], y + fy * info['depth'], info['bottom'] + 0.75 * info['height']))
+        for _ in range(16):
+            hit, location, normal, index, hit_object, matrix = scene.ray_cast(depsgraph, origin, Vector((0, 0, -1)))
+            if not hit:
+                break
+            if group_of(hit_object) == support and normal.z > 0.5:
+                tops.append(location.z)
+                break
+            origin = location - Vector((0, 0, 0.001))
+    if tops:
+        facts['support_tops'][g] = {'support': support, 'top': round(sorted(tops)[len(tops) // 2], 3)}
 with open(os.path.join(out_folder, 'facts.json'), 'w') as handle:
     json.dump(facts, handle, indent=1)
 print('shot_facts: done', out_folder)

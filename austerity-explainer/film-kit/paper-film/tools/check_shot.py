@@ -33,6 +33,7 @@ Positions are fractions of the frame: 0 across is the left edge, 1 the right; 0 
 Pixel limits are the rules file's, which are set on a frame 1,536 pixels wide, scaled to this frame's width.
 """
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -40,6 +41,8 @@ import re
 
 import cv2
 import numpy as np
+
+VERSION = hashlib.sha1(open(__file__, 'rb').read()).hexdigest()[:8]
 
 # the kinds of problem, and the order to fix them in: the camera moves everything, so it comes first; then props
 # resting in the wrong place or missing; then the main rule; then the other composing faults, worst (furthest past
@@ -55,6 +58,12 @@ def plain(value, digits=2):
     """A number without a minus sign on zero ("0.0", never "-0.0")."""
     text = f'{value:.{digits}f}'
     return text[1:] if text.startswith('-') and float(text) == 0 else text
+
+
+def past(value, limit, unit):
+    """How far a value is past its limit, counted in steps of `unit` (a step a viewer would notice): 1 at the limit,
+    2 one step past, at most 10. Every composing problem is scored this way, so "worst first" compares like with like."""
+    return 1 + min(9.0, abs(value - limit) / unit)
 
 
 def box_of(mask):
@@ -129,11 +138,19 @@ class Shot:
         for g, info in self.facts['groups'].items():
             self.visible[g] = without_specks(np.abs(ids - np.array(info['colour'])).sum(axis=2) < 24)
             solo = cv2.imread(os.path.join(args.facts, 'solo', f'{g}.png'))
+            if solo is None:
+                raise SystemExit(f'check_shot: the flat-colour picture of "{g}" is missing ({args.facts}/solo/{g}.png): measure the scene again.')
             self.alone[g] = solo.max(axis=2) > 8
         self.picture = None
         if args.picture:
             self.picture = cv2.imread(args.picture)
-            if self.picture.shape[:2] != (self.height, self.width):
+            if self.picture is None:
+                raise SystemExit(f'check_shot: can\'t read the finished picture {args.picture}.')
+            ph, pw = self.picture.shape[:2]
+            if abs(pw / ph - self.width / self.height) > 0.01:
+                raise SystemExit(f'check_shot: the finished picture is {pw} x {ph}, a different shape from the measured frame '
+                                 f'({self.width} x {self.height}): it can\'t be the same view.')
+            if (ph, pw) != (self.height, self.width):
                 self.picture = cv2.resize(self.picture, (self.width, self.height), interpolation=cv2.INTER_AREA)
         self.grey = cv2.cvtColor(self.picture, cv2.COLOR_BGR2GRAY).astype(np.float32) / 255 if self.picture is not None else None
         self.camera = self.facts['camera']
@@ -149,13 +166,25 @@ class Shot:
         # prop on the ground ends up as it goes further away
         self.ground_horizon = (self.meet or self.facts['lines_meet'].get('level') or [0.5, 0.5])[1] * self.height
         self.subject = self.check.get('subject')
+        if self.subject not in self.facts['groups']:
+            raise SystemExit(f'check_shot: the check file must name the shot\'s "subject", one of its measured groups '
+                             f'({", ".join(self.facts["groups"])}); it gives {self.subject!r}.')
         self.support = self.check.get('support')
         self.story = [g for g in self.check.get('story', []) if g in self.facts['groups']]
         self.core = [g for g in dict.fromkeys([self.subject] + self.story) if g in self.facts['groups']]
         self.on_ground = set(self.check.get('on_ground', []))
         self.rests_on = self.check.get('stands_on', {})
         self.reference = self.check.get('reference') or {}
+        self.reference_note = ''
+        shape = (self.reference.get('camera_match') or {}).get('picture_size')
+        if shape and abs(shape[0] / shape[1] - self.width / self.height) > 0.02:
+            self.reference_note = (f'The reference picture is {shape[0]} x {shape[1]}, a different shape from this frame ({self.width} x '
+                                   f'{self.height}), so its places can\'t be compared as fractions of the frame: only its landmarks are used.')
+            self.reference = {'camera_match': self.reference.get('camera_match')}
         self.camera_fault = False
+        self.fitted_eye = None
+        self.rule12_over = set()
+        self.apart = []
 
     def info(self, g):
         return self.facts['groups'].get(g)
@@ -180,13 +209,16 @@ class Report:
     def __init__(self):
         self.items = []
 
-    def add(self, rule, passed, what, numbers='', fix='', mark=None, area=False, kind='story', how_bad=1.0, arrow=None, name=None):
+    def add(self, rule, passed, what, numbers='', fix='', mark=None, area=False, kind='story', how_bad=1.0, arrow=None, name=None, pair=None):
         """One check. `kind` (see KINDS) and `how_bad` (how far past its limit) set the order of the problems;
         `name` lets other problems point at this one ("<<name>>" in their text becomes "problem N")."""
         passed = bool(passed)   # numpy's yes/no would slip past the report's checks
+        if mark is not None and not area:
+            l, t, r, b = mark
+            area = (r - l) > 130 or (b - t) > 160   # bigger than a small place on a 1080-wide frame: draw it as an area
         item = dict(rule=rule, passed=passed, what=what, numbers=numbers, fix='' if passed else fix,
                     mark=None if passed else mark, area=area, kind=kind, how_bad=float(how_bad),
-                    arrow=None if passed else arrow, name=name, number=None)
+                    arrow=None if passed else arrow, name=name, number=None, pair=pair)
         self.items.append(item)
         return item
 
@@ -228,9 +260,9 @@ def spot_taken(shot, g, change):
     another prop already stands? Returns that prop's name, or None."""
     info = shot.info(g)
     x, y = np.array(info['centre'][:2]) + shot.ahead * change
-    half_w, half_d = info['width'] / 2 - 0.03, info['depth'] / 2 - 0.03
+    half_w, half_d = 0.7 * info['width'] / 2, 0.7 * info['depth'] / 2   # a round drum or a turned chair fills about 70% of its box
     riding = {h for h, on in shot.rests_on.items() if on == g} | {shot.rests_on.get(g)} | {g, shot.subject}
-    clash = lambda px, py, o: abs(px - o['centre'][0]) < half_w + o['width'] / 2 - 0.03 and abs(py - o['centre'][1]) < half_d + o['depth'] / 2 - 0.03
+    clash = lambda px, py, o: abs(px - o['centre'][0]) < half_w + 0.35 * o['width'] and abs(py - o['centre'][1]) < half_d + 0.35 * o['depth']
     for other in sorted(shot.on_ground | set(shot.story)):
         if other in riding or not shot.info(other):
             continue
@@ -273,6 +305,37 @@ def move_words(shot, g, dx, dy, anchor_y=None):
     if not parts:
         return f'leave {name} where it is'
     return f'move {name} ' + ' and '.join(parts)
+
+
+def edge_run(shot, front, back, need_overlap, scale):
+    """A long stretch where the back prop's visible edge runs right along the front prop's edge and stops there,
+    instead of clearly passing behind it (a post standing exactly at a board's edge). Measured on what shows, so a
+    deep overlap somewhere else (a hidden collar) doesn't excuse it. Returns (length in pixels, the stretch, 'sideways'
+    or 'up and down': which way to move to fix it), or None."""
+    seen_front = without_wires(shot.visible[front], shot.width)
+    seen_back = without_wires(shot.visible[back], shot.width)
+    if not (seen_front.any() and seen_back.any()):
+        return None
+    near = seen_back & cv2.dilate(seen_front.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool)   # back pixels within 2 of the front
+    if near.sum() < 20 * scale:
+        return None
+    joined = cv2.dilate(near.astype(np.uint8), np.ones((5, 5), np.uint8))
+    n, labels, stats, _ = cv2.connectedComponentsWithStats(joined)
+    depth = int(math.ceil(need_overlap))
+    best = None
+    for k in range(1, n):
+        segment = (labels == k) & near
+        length = max(stats[k, cv2.CC_STAT_WIDTH], stats[k, cv2.CC_STAT_HEIGHT])
+        if length < 40 * scale:
+            continue
+        band = cv2.dilate(segment.astype(np.uint8), np.ones((2 * depth + 1, 2 * depth + 1), np.uint8)).astype(bool) & seen_front
+        if band.sum() == 0:
+            continue
+        under = (band & shot.alone[back]).sum() / band.sum()   # how much of the front edge's band has the back prop under it
+        if under < 0.35 and (best is None or length > best[0]):
+            across = 'sideways' if stats[k, cv2.CC_STAT_HEIGHT] >= stats[k, cv2.CC_STAT_WIDTH] else 'up and down'
+            best = (int(length), segment, across)
+    return best
 
 
 def two_ways(shot, front, back, into, away, anchor_y):
@@ -324,10 +387,27 @@ def ground_point(shot, px, py):
     return eye + direction * (base - eye[2]) / falling
 
 
+def picture_mismatch(shot):
+    """The props whose outlines in the finished picture don't line up with where Blender measured them (a picture
+    made before the scene changed). A prop that matches has most of its outline on an edge in the picture."""
+    edges = cv2.Canny(cv2.GaussianBlur(cv2.cvtColor(shot.picture, cv2.COLOR_BGR2GRAY), (0, 0), 1.5), 20, 60) > 0
+    near = cv2.dilate(edges.astype(np.uint8), np.ones((7, 7), np.uint8)) > 0
+    off = []
+    for g in dict.fromkeys(shot.core + shot.check.get('pairs_also', [])):
+        if not shot.shows(g) or shot.visible[g].sum() < 400:
+            continue
+        mask = shot.visible[g].astype(np.uint8)
+        outline = (mask - cv2.erode(mask, np.ones((3, 3), np.uint8))) > 0
+        agree = (outline & near).sum() / max(1, outline.sum())
+        if agree < 0.6:   # matching pictures measured 0.73 or more; a picture with props moved, 0.27 to 0.54 (log 31)
+            off.append(f'{g} ({agree:.0%} of its outline lines up)')
+    return off
+
+
 def check_set_up(report, shot):
     for g in shot.facts.get('missing_groups', []):
         report.add('set-up', False, f'No object in the scene matches the group "{g}", so it was not measured.',
-                   fix='Check its name patterns in the check file against the objects\' names in Blender.', kind='set-up', how_bad=10)
+                   fix=f'Check the name patterns of "{g}" in the check file against the objects\' names in Blender.', kind='set-up', how_bad=10)
 
 
 def check_camera(report, shot):
@@ -336,9 +416,9 @@ def check_camera(report, shot):
     level = not shot.tilted()
     fixes = []
     if abs(tilt) > 0.5:
-        fixes.append(f'tilt it {plain(abs(tilt), 1)} degrees {"down" if tilt > 0 else "up"}')
+        fixes.append(f'tilt the camera {plain(abs(tilt), 1)} degrees {"down" if tilt > 0 else "up"} (level)')
     if abs(roll) > 0.5:
-        fixes.append(f'take out its {plain(abs(roll), 1)}-degree lean')
+        fixes.append(f'take out the camera\'s {plain(abs(roll), 1)}-degree lean')
     report.add('rule 2: keep the camera level', level,
                f'The camera is not level: tilted {plain(abs(tilt), 1)} degrees {"up" if tilt > 0 else "down"} and leaning {plain(abs(roll), 1)} degrees to one side.'
                if not level else f'The camera is level (tilt {plain(tilt, 1)}, lean {plain(roll, 1)} degrees).',
@@ -363,7 +443,7 @@ def camera_axes(turn, tilt=0.0, roll=0.0):
     ahead = np.array([-math.sin(yaw) * math.cos(pitch), math.cos(yaw) * math.cos(pitch), math.sin(pitch)])
     right = np.array([math.cos(yaw), math.sin(yaw), 0.0])
     up = np.cross(right, ahead)
-    return ahead, right * math.cos(lean) + up * math.sin(lean), up * math.cos(lean) - right * math.sin(lean)
+    return ahead, right * math.cos(lean) - up * math.sin(lean), up * math.cos(lean) + right * math.sin(lean)
 
 
 def project(camera, point, size, tilt=0.0, roll=0.0):
@@ -442,6 +522,13 @@ def check_camera_match(report, shot):
     ours_errors = {k: v * scale for k, v in camera_errors(ours, match, size).items()}
     fit_errors = {k: v * scale for k, v in camera_errors(fitted, match, size).items()}
     pavement = cam['at'][2] - (cam.get('eye_height') or 0)
+    low_eye, high_eye = shot.check.get('eye_height', [1.5, 1.9])
+    beyond = ''
+    if cam.get('eye_height') is not None and not low_eye <= fitted[2] - pavement <= high_eye:   # the reference's camera stands too high or low
+        kept = min(max(fitted[2] - pavement, low_eye), high_eye)
+        beyond = (f' The reference\'s camera is {fitted[2] - pavement:.2f} m above the pavement, outside a standing person\'s eye height '
+                  f'({low_eye:.2f} to {high_eye:.2f} m, rule 2), so the fix keeps it at {kept:.2f} m.')
+        fitted = (fitted[0], fitted[1], pavement + kept, fitted[3], fitted[4])
     height, side, turn, view = ours[2] - fitted[2], ours[0] - fitted[0], ours[3] - fitted[3], ours[4] - fitted[4]
     ok = abs(height) <= 0.1 and abs(side) <= 0.15 and abs(turn) <= 0.75 and abs(view) <= 2
     fixes = []
@@ -459,20 +546,63 @@ def check_camera_match(report, shot):
         facing = f'turned {abs(c[3]):.1f} degrees {"left" if c[3] > 0 else "right"} of straight up the street'
         return f'{c[2] - pavement:.2f} m above the pavement, {across}, {facing}, seeing {c[4]:.1f} degrees top to bottom'
     worst_best = max(fit_errors.values())
+    shot.fitted_eye = fitted[2] - pavement
     if ok:
         what = (f'Our camera is within {abs(height):.2f} m in height, {abs(side):.2f} m sideways, {abs(turn):.1f} degrees of turn '
                 f'and {abs(view):.1f} degrees of view of the camera that best matches the reference. Even that best camera misses '
                 f'the reference\'s landmarks by up to {worst_best:.0f} pixels (the reference is a painting, not an exact photo), '
-                f'so differences this small mean nothing.')
+                f'so differences this small mean nothing.' + beyond)
     else:
         worst = max(ours_errors, key=ours_errors.get)
         what = (f'The camera that best matches the reference (at our distance up the street) is {describe(fitted)}; ours is '
                 f'{describe(ours)}. Ours misses the reference\'s landmarks by up to {ours_errors[worst]:.0f} pixels ({worst}); '
-                f'the best camera by up to {worst_best:.0f}.')
+                f'the best camera by up to {worst_best:.0f}.' + beyond)
     report.add('reference: the camera', ok, what,
                'landmarks missed by ours, in pixels: ' + ', '.join(f'{k} {v:.0f}' for k, v in ours_errors.items()),
                fix=capital('; '.join(fixes)) + '.' if fixes else '', kind='camera',
                how_bad=10 + max(abs(height) / 0.1, abs(side) / 0.15, abs(turn) / 0.75, abs(view) / 2), name='camera-match')   # the fullest camera fix
+
+
+def one_camera_fix(report, shot):
+    """When the reference camera's fix fails, it already moves and turns the camera fully: the other camera items
+    point to it instead of giving their own, different moves."""
+    match = next((i for i in report.items if i.get('name') == 'camera-match' and i['passed'] is False), None)
+    if not match:
+        return
+    for i in report.items:
+        if i['passed'] is False and i.get('name') == 'camera-height':
+            i['fix'] = (f'The camera fix in <<camera-match>> covers this: it puts the camera\'s eye {shot.fitted_eye:.2f} m above the pavement. '
+                        'Check again after it.')
+        if i['passed'] is False and i.get('name') == 'camera-lines':
+            i['fix'] = 'This follows from the camera: the fix in <<camera-match>> moves where the lines meet too. Check again after it.'
+
+
+def check_camera_distance(report, shot):
+    """If most props look bigger or smaller than in the reference by about the same amount, the camera stands too near
+    or too far, not every prop: one camera move instead of a move for each prop."""
+    sizes = []
+    for g, wanted in shot.reference.get('boxes', {}).items():
+        info = shot.info(g)
+        if wanted.get('landmark') or wanted.get('compare') == 'top' or not info or not shot.alone[g].any():
+            continue
+        l, t, r, b = box_of(shot.alone[g])
+        want = wanted['box']
+        if t <= 1 or b >= shot.height - 2:
+            continue   # cut by the frame: its height is not its own
+        sizes.append((g, (b - t) / shot.height / max(1e-6, want[3] - want[1]), info['distance']))
+    if len(sizes) < 4:
+        return
+    middle = float(np.median([s for _, s, _ in sizes]))
+    agree = [x for x in sizes if abs(x[1] - middle) <= 0.15]
+    if abs(middle - 1) <= 0.15 or len(agree) < 0.75 * len(sizes):
+        report.add('reference: how far the camera stands', True, f'The props are about the reference\'s size (middle of {len(sizes)}: {middle:.2f} times).', kind='camera')
+        return
+    move = float(np.median([d * (1 - s) for _, s, d in agree]))   # + is nearer
+    report.add('reference: how far the camera stands', False,
+               f'Most props look {middle:.2f} times as tall as in the reference (' + ', '.join(f'{g} {s:.2f}' for g, s, _ in sizes) + '): the camera stands '
+               f'too {"far from" if middle < 1 else "near to"} them, not the props in the wrong places.',
+               fix=f'Move the camera about {abs(move):.2f} m {"toward the props (up the street)" if move > 0 else "back (down the street)"}, without turning it, then check again.',
+               kind='camera', how_bad=10 + abs(middle - 1) / 0.15, name='camera-distance')
 
 
 def check_reference_lines(report, shot):
@@ -486,7 +616,7 @@ def check_reference_lines(report, shot):
         ours_angle = math.atan((meet[0] - 0.5) * shot.width / shot.focal)
         wanted_angle = math.atan((wanted[0] - 0.5) * shot.width / shot.focal)
         turn = math.degrees(wanted_angle - ours_angle)   # + means the meeting point must slide right: turn left
-        fixes.append(f'Ours meet {abs(dx):.2f} of the frame width {"left" if dx < 0 else "right"} of the reference\'s: turn the camera '
+        fixes.append(f'Ours meet {abs(dx):.3f} of the frame width {"left" if dx < 0 else "right"} of the reference\'s: turn the camera '
                      f'about {abs(turn):.1f} degrees {"left" if turn > 0 else "right"} (turning left slides everything on screen to the right).')
     if abs(dy) > 0.03:
         where = 'lower' if dy > 0 else 'higher'
@@ -496,7 +626,7 @@ def check_reference_lines(report, shot):
         else:
             above = 0.5 - wanted[1]   # how far above the middle the reference's lines meet
             if above > 0.005 and shot.street_slope > 0:
-                view = 2 * math.degrees(math.atan(shot.street_slope / (2 * above)))
+                view = 2 * math.degrees(math.atan(shot.street_slope / (2 * above * math.cos(math.radians(shot.camera['turn_degrees'])))))
                 fixes.append(f'Ours meet {abs(dy):.2f} of the frame height {where} than the reference\'s. Our camera is level, so that '
                              f'height is set by the view angle: about {view:.0f} degrees top to bottom would match (ours is '
                              f'{shot.camera["vertical_fov_degrees"]:.1f}). Compare with the camera item first: the reference is a painting, '
@@ -505,9 +635,10 @@ def check_reference_lines(report, shot):
                 fixes.append(f'Ours meet {abs(dy):.2f} of the frame height {where} than the reference\'s; with a level camera this is the view angle.')
     ok = not fixes
     report.add('reference: where the lines meet', ok,
-               f'Ours meet at {meet[0]:.3f} across, {meet[1]:.3f} down; the reference\'s at {wanted[0]:.3f}, {wanted[1]:.3f} '
+               f'Ours meet at {meet[0]:.3f} across, {meet[1]:.3f} down; the reference\'s at {wanted[0]:.3f}, {wanted[1]:.3f}: '
+               f'{abs(dx):.3f} of the frame width and {abs(dy):.3f} of its height apart '
                f'(a drawn picture\'s lines rarely meet at one exact point, so 0.03 either way is allowed).',
-               fix=' '.join(fixes), kind='camera', how_bad=max(abs(dx), abs(dy)) / 0.03, name='camera-lines',
+               fix=' '.join(fixes), kind='reference', how_bad=10 + max(abs(dx), abs(dy)) / 0.03, name='camera-lines',
                mark=(meet[0] * shot.width - 22, meet[1] * shot.height - 22, meet[0] * shot.width + 22, meet[1] * shot.height + 22))
 
 
@@ -518,14 +649,21 @@ def check_resting(report, shot):
         info = shot.info(g)
         if not info:
             continue
-        air, on, high = info['stands_above_surface_below'], info.get('stands_on'), info['stands_above_ground']
+        air, on = info['stands_above_surface_below'], info.get('stands_on')
         x, y = info['centre'][:2]
+        street = shot.camera['at'][2] - (shot.camera.get('eye_height') or 0) + shot.street_slope * (y - shot.camera['at'][1])
+        known = shot.camera.get('eye_height') is not None and shot.check.get('lines_key', 'street') in shot.check.get('lines', {})
+        high = info['bottom'] - street if known else info['stands_above_ground']
         spot = f'at Blender x {x:.2f}, y {y:.2f}'
         if air is None:
             report.add('props rest where they should', False, f'{g} has nothing under it at all ({spot}): it is off the edge of the set.',
                        fix=f'Move {g} back over the street.', kind='resting', how_bad=10, name=f'resting:{g}')
+        elif air < -0.05:   # a few centimetres sunk can't be seen
+            report.add('props rest where they should', False, f'{g} is sunk {-air:.2f} m into the pavement or road ({spot}).',
+                       fix=f'Raise {g} by {-air:.2f} m so it stands on top.', mark=box_of(shot.alone[g]) if shot.alone[g].any() else None,
+                       kind='resting', how_bad=-air / 0.03, name=f'resting:{g}')
         elif air > 0.03:
-            under = f'the top of {on}' if on and on != 'the set' else 'the surface'
+            under = f'the top of {on}' if on and on != 'the set' else 'the pavement or road'
             fix = f'Lower {g} by {air:.2f} m so it stands on what is under it.'
             if high is not None and high - air > 0.5:
                 fix = (f'Put {g} back on the pavement: lowering it {air:.2f} m would land it on something {high - air:.2f} m above the street '
@@ -543,7 +681,7 @@ def check_resting(report, shot):
         else:
             good.append(g)
     if good:
-        report.add('props rest where they should', True, f'{", ".join(good)} stand on the ground (within 3 cm).', kind='resting')
+        report.add('props rest where they should', True, f'{", ".join(good)} stand on the pavement or road (within 3 cm).', kind='resting')
     for g, support in shot.rests_on.items():
         info, under = shot.info(g), shot.info(support)
         if not info or not under:
@@ -556,17 +694,34 @@ def check_resting(report, shot):
         if on == support and air <= 0.03:
             report.add('props rest where they should', True, f'{g} rests on {support}.', kind='resting')
             continue
-        apart = math.hypot(under['centre'][0] - info['centre'][0], under['centre'][1] - info['centre'][1])
-        moved = (f' {support}\'s middle is {apart:.2f} m from {g}\'s ({support} at Blender x {under["centre"][0]:.2f}, y {under["centre"][1]:.2f}; '
-                 f'{g} at x {info["centre"][0]:.2f}, y {info["centre"][1]:.2f}), so one of them has moved.') if apart > 0.1 else ''
+        dx, dy = under['centre'][0] - info['centre'][0], under['centre'][1] - info['centre'][1]
+        apart = math.hypot(dx, dy)
+        top = (shot.facts.get('support_tops', {}).get(g) or {}).get('top')
+
+        def go(x_metres, y_metres):
+            """Words for a move in the street: across it (Blender x) and along it (Blender y)."""
+            parts = []
+            if abs(x_metres) >= 0.03:
+                parts.append(f'about {abs(x_metres):.2f} m to the {"right" if x_metres > 0 else "left"} (across the street)')
+            if abs(y_metres) >= 0.03:
+                parts.append(f'about {abs(y_metres):.2f} m {"up the street, away from the camera" if y_metres > 0 else "down the street, toward the camera"}')
+            return ' and '.join(parts)
+        lift = (top - info['bottom']) if top is not None else None
+        onto = ''
+        if lift is not None and abs(lift) >= 0.03:
+            onto = f', and {"lift" if lift > 0 else "lower"} it {abs(lift):.2f} m so it stands on {support}\'s seat or top (Blender height {top:.2f} m)'
+        where = (f' {support} stands {apart:.2f} m from {g} ({support}\'s middle at Blender x {under["centre"][0]:.2f}, y {under["centre"][1]:.2f}; '
+                 f'{g}\'s at x {info["centre"][0]:.2f}, y {info["centre"][1]:.2f}), so one of them has moved.') if apart > 0.1 else ''
+        put_back = (f'move {g} {go(dx, dy)} so it is over the middle of {support}' if apart > 0.1 else f'keep {g} where it is') + onto
+        mark = box_of(shot.alone[g]) if shot.alone[g].any() else None
         if air > 0.03:
-            report.add('props rest where they should', False, f'{g} should rest on {support}, but there is {air:.2f} m of air under it.{moved}',
-                       fix=f'Either move {support} back under {g}, or move {g} over {support} and lower it {air:.2f} m onto it.',
-                       kind='resting', how_bad=air / 0.03, name=f'resting:{g}')
+            report.add('props rest where they should', False, f'{g} should rest on {support}, but there is {air:.2f} m of air under it.{where}',
+                       fix=(f'Move {support} {go(-dx, -dy)} so it is back under {g}; or {put_back}.' if apart > 0.1 else capital(put_back) + '.'),
+                       mark=mark, kind='resting', how_bad=air / 0.03, name=f'resting:{g}')
         else:
             report.add('props rest where they should', False,
-                       f'{g} should rest on {support}, but it stands on {"the ground" if on in (None, "the set") else on} instead.{moved}',
-                       fix=f'Put {g} back on {support}: move it over {support}, then lower it onto the top.', kind='resting', how_bad=8, name=f'resting:{g}')
+                       f'{g} should rest on {support}, but it stands on {"the pavement" if on in (None, "the set") else on} instead.{where}',
+                       fix=capital(put_back) + '.', mark=mark, kind='resting', how_bad=8, name=f'resting:{g}')
 
 
 # ---------------------------------------------------------------------------------------- story props missing or cut by the frame
@@ -583,6 +738,10 @@ def check_missing(report, shot):
             continue
         l, t, r, b = box
         outside = side_words(box)
+        if not outside and not shot.alone[g].any():   # its box reaches into the frame, but none of it does
+            cx_, cy_ = (l + r) / 2, (t + b) / 2
+            outside = ('past the right edge' if cx_ > 1 else 'past the left edge' if cx_ < 0 else 'below the bottom' if cy_ > 1 else
+                       'above the top' if cy_ < 0 else 'just outside the edge')
         resting = f' (it is also not resting where it should: <<resting:{g}>>)' if any(i.get('name') == f'resting:{g}' and i['passed'] is False for i in report.items) else ''
         if outside:
             wanted = shot.reference.get('boxes', {}).get(g, {}).get('box')
@@ -606,6 +765,10 @@ def check_missing(report, shot):
             if wanted:
                 tx, ty = (wanted[0] + wanted[2]) / 2, (wanted[1] + wanted[3]) / 2
                 aim = f'the reference has it at {wanted[0]:.2f} to {wanted[2]:.2f} across'
+                limit = 0.90 if g in shot.check.get('must_read', []) else 0.95
+                if tx + (r - l) / 2 > limit - 0.01:   # the reference's own spot may break rule 12: stop short of the buttons
+                    tx = limit - 0.01 - (r - l) / 2
+                    aim += f', but its right edge should stay left of {limit:.2f} (rule 12)'
             else:
                 tx = min(max(cx, 0.05 + (r - l) / 2), 0.95 - (r - l) / 2)
                 ty = min(max(cy, 0.03 + (b - t) / 2), 0.97 - (b - t) / 2)
@@ -613,36 +776,102 @@ def check_missing(report, shot):
             words = move_words(shot, g, (tx - cx) * shot.width, (ty - cy) * shot.height, cy * shot.height) \
                 or move_words(shot, g, (tx - cx) * shot.width, 0, cy * shot.height)
             fix = (capital(words) + f' ({aim}).') if words else f'Moving {g} along the ground can\'t bring it into the frame: move the camera.'
+            ex, ey = min(max(cx, 0.03), 0.97) * shot.width, min(max(cy, 0.03), 0.97) * shot.height   # where it leaves the frame
             report.add('rule 3: story props in the frame', False,
                        f'{g} is outside the frame, {outside}: it would sit {l:.2f} to {r:.2f} across, {t:.2f} to {b:.2f} down.{resting}',
-                       fix=fix, kind='missing', how_bad=10, name=f'missing:{g}')
+                       fix=fix, mark=(ex - 35, ey - 35, ex + 35, ey + 35), kind='missing', how_bad=10, name=f'missing:{g}')
         else:
             under = shot.alone[g]
             covered = {o: int((shot.visible[o] & under).sum()) for o in shot.visible if o != g}
             hider = max(covered, key=covered.get) if covered and max(covered.values()) > 0 else 'the set (a wall or a house)'
             report.add('rule 3: story props in the frame', False, f'{g} is in the frame but hidden behind {hider}.{resting}',
-                       fix=f'Move {g} out from behind {hider}, or in front of it.', kind='missing', how_bad=9, name=f'missing:{g}')
+                       fix=f'Move {g} out from behind {hider}, or in front of it.', mark=box_of(under), kind='missing', how_bad=9, name=f'missing:{g}')
+
+
+def check_words_hidden(report, shot):
+    """Words to read (the notice) hidden by a prop in front. Its bottom fifth may be covered (rule 3: the chair's back
+    may hide the signature, never the key words)."""
+    for g in shot.check.get('must_read', []):
+        if not shot.shows(g):
+            continue
+        whole = shot.alone[g]
+        l, t, r, b = box_of(whole)
+        upper = whole.copy()
+        upper[int(b - 0.2 * (b - t)):] = False
+        hidden = upper & ~shot.visible[g]
+        share = hidden.sum() / max(1, upper.sum())
+        if share <= 0.05:
+            report.add('rule 3: nothing hides the words', True, f'{share:.0%} of {g}\'s words are hidden (its bottom fifth, the signature, may be covered).', kind='story')
+            continue
+        covering = {o: int((shot.visible[o] & hidden).sum()) for o in shot.visible if o != g}
+        hider = max(covering, key=covering.get) if covering and max(covering.values()) > 0.3 * hidden.sum() else None
+        hx, hy = centre_of(hidden)
+        cx = (l + r) / 2
+        fix = f'Move whatever stands in front of {g} out of the way.'
+        if hider:
+            ways = []
+            hl, ht, hr, hb = box_of(shot.alone[hider])
+            columns = np.nonzero(hidden.any(axis=0))[0]
+            # slide it sideways off the words (away from their middle, by the width it covers plus a clear gap), unless that
+            # takes it past the phone buttons or out of the frame
+            push = (columns.max() - columns.min() + 25 * shot.width / 1536) * (1 if hx > cx else -1)
+            limit = 0.95 if hider in shot.story else 1.0
+            if (push > 0 and (hr + push) / shot.width <= limit) or (push < 0 and (hl + push) / shot.width >= 0.05):
+                words = move_words(shot, hider, push, 0)
+                if words:
+                    ways.append(words)
+            # a prop below the words, standing on the ground: nearer the camera it drops on screen, off the words
+            if shot.grounded(hider) and hy < (ht + hb) / 2:
+                for k in range(5, int(0.3 * shot.height), 5):
+                    dropped = np.zeros_like(shot.alone[hider])
+                    dropped[k:] = shot.alone[hider][:-k]
+                    if (upper & dropped).sum() / max(1, upper.sum()) <= 0.05:   # what it would still cover of the words
+                        words = move_words(shot, hider, 0, k, ht)
+                        if words:
+                            ways.append(words)
+                        break
+            # a prop that isn't part of the story can go behind the board instead
+            behind = shot.carrier(g) or g
+            back = shot.info(behind)['distance'] + 0.3 - shot.info(hider)['distance']
+            if back > 0 and hider not in shot.core:
+                ways.append(f'move {hider} about {back:.2f} m further from the camera, behind {behind}')
+            if ways:
+                fix = capital('; or '.join(ways)) + f', so it no longer hides {g}\'s words.'
+        report.add('rule 3: nothing hides the words', False,
+                   f'{share:.0%} of {g}\'s words are hidden' + (f' behind {hider}' if hider else '') + ' (only its bottom fifth, the signature, may be covered).',
+                   f'the hidden part is around {hx / shot.width:.2f} across, {hy / shot.height:.2f} down', fix=fix, mark=box_of(hidden),
+                   kind='story', how_bad=past(share, 0.05, 0.05))
 
 
 def check_cut_by_edge(report, shot):
+    """Story props cut by the frame's left, top or bottom edge (the right edge is rule 12's, with the phone buttons)."""
     for g in shot.core:
         info = shot.info(g)
         if not shot.shows(g) or not info.get('screen_box_unclipped'):
             continue
+        whole = shot.alone[g]
+        sides = [side for side, touches in (('left', whole[:, :2].any()), ('top', whole[:2].any()), ('bottom', whole[-2:].any())) if touches]
+        if not sides or g == shot.support and sides == ['top']:
+            continue
         l, t, r, b = info['screen_box_unclipped']
         inside = max(0, min(r, 1) - max(l, 0)) * max(0, min(b, 1) - max(t, 0))
         share = inside / max(1e-6, (r - l) * (b - t))
-        if 0.02 < share < 0.6:
-            dx = -(r - 0.95) * shot.width if r > 1 else (0.05 - l) * shot.width if l < 0 else 0
-            dy = -(b - 0.97) * shot.height if b > 1 else (0.03 - t) * shot.height if t < 0 else 0
-            report.add('rule 12: nothing important cut by the frame edge', False,
-                       f'{g} is cut by the frame edge: only {share:.0%} of it is inside.', f'it would sit {l:.2f} to {r:.2f} across, {t:.2f} to {b:.2f} down',
-                       capital(move_words(shot, g, dx, dy, (t + b) / 2 * shot.height) or 'turn or move the camera') + ' to bring it all in.',
-                       mark=box_of(shot.visible[g]), kind='edges', how_bad=1 / share)
+        dx = (0.03 - l) * shot.width if 'left' in sides else 0
+        dy = -(b - 0.97) * shot.height if 'bottom' in sides else (0.03 - t) * shot.height if 'top' in sides else 0
+        words = move_words(shot, g, dx, dy, (t + b) / 2 * shot.height)
+        report.add('rule 12: nothing important cut by the frame edge', False,
+                   f'{g} is cut by the frame\'s {" and ".join(sides)} edge: about {share:.0%} of it is inside.',
+                   f'it would sit {l:.2f} to {r:.2f} across, {t:.2f} to {b:.2f} down',
+                   (capital(words) + ' to bring it all in.') if words else 'Move the camera back or sideways to bring it all in.',
+                   mark=box_of(shot.visible[g]), kind='edges', how_bad=past(1 - share, 0, 0.05))
 
 
 # ---------------------------------------------------------------------------------------- rule 1: where the lines meet
 def check_lines(report, shot):
+    key = shot.check.get('lines_key', 'street')
+    if key not in shot.facts.get('lines_meet', {}):
+        report.note('rule 1: aim the street at the story', f'Not checked: the check file gives no street direction "{key}" under "lines".')
+        return
     if shot.meet is None:
         report.add('rule 1: aim the street at the story', False, 'The street\'s lines meet behind the camera: it faces down the street.',
                    fix='Turn the camera to face up the street.', kind='lines', how_bad=10)
@@ -674,7 +903,7 @@ def check_lines(report, shot):
                                               f'{"below" if dy > 0 else "above"}.' if not ok else '.'),
                f'{target} spans {l / shot.width:.2f} to {r / shot.width:.2f} across, {t / shot.height:.2f} to {b / shot.height:.2f} down',
                'Turning the camera won\'t help: it moves where the lines meet and the props together. ' + capital('; and '.join(fixes)) + '.',
-               mark=(mx - 22, my - 22, mx + 22, my + 22), kind='lines', how_bad=gap / 0.03)
+               mark=(mx - 22, my - 22, mx + 22, my + 22), kind='lines', how_bad=past(gap, 0.03, 0.03))
 
 
 # ---------------------------------------------------------------------------------------- rules 3 and 4: the story props as one group
@@ -682,7 +911,8 @@ def check_pairs(report, shot):
     """Every pair of the listed groups: a clear overlap or a clear gap, never two edges just touching (rule 4).
     Returns which pairs touch or overlap at all (for rule 3)."""
     scale = shot.width / 1536
-    need_overlap, need_gap, margin = 20 * scale, 25 * scale, 4 * scale
+    # the rules' 20 and 25 pixels on a 1,536-wide frame, rounded up to whole pixels here so the printed limit is the one used
+    need_overlap, need_gap, margin = math.ceil(20 * scale), math.ceil(25 * scale), 4 * scale
     names = [g for g in dict.fromkeys(shot.core + shot.check.get('pairs_also', [])) if g in shot.alone and shot.alone[g].any()]
     solid = {g: without_wires(shot.alone[g], shot.width) for g in names}
     touching = {}
@@ -691,17 +921,44 @@ def check_pairs(report, shot):
         for b in names[i + 1:]:
             if {a, b} <= {shot.subject, shot.support}:
                 continue   # the subject hangs on its support: they always share an edge
+            if shot.rests_on.get(a) == b or shot.rests_on.get(b) == a:
+                continue   # one stands on the other (the lantern on the chair): they always share an edge
             whole_overlap = shot.alone[a] & shot.alone[b]
             touching[(a, b)] = bool(whole_overlap.any()) or float(np.where(shot.alone[b], distance_outside(shot.alone[a]), np.inf).min()) <= 3 * scale
             front, back = sorted((a, b), key=lambda g: shot.info(g)['distance'])
-            kind = 'story' if a in shot.core and b in shot.core else 'background'
+            kind = 'story' if a in shot.core or b in shot.core else 'background'   # anything against a story prop is part of the story group
+            run = edge_run(shot, front, back, need_overlap, scale)
+            if run:
+                length, segment, across = run
+                found += 1
+                sx, sy = centre_of(segment)
+                fx, fy = centre_of(shot.visible[front])
+                mover = back if back not in (shot.subject, shot.support) else front
+                sign = (1 if fx > sx else -1) * (1 if mover == back else -1)   # toward passing behind the front one
+                dx, dy = ((sign, 0) if across == 'sideways' else (0, (1 if fy > sy else -1) * (1 if mover == back else -1)))
+                into = move_words(shot, mover, dx * (need_overlap + margin), dy * (need_overlap + margin), sy)
+                apart = move_words(shot, mover, -dx * (need_gap + margin), -dy * (need_gap + margin), sy)
+                ways = ([f'{into} so {back} clearly passes behind {front}'] if into else []) + ([f'{apart} to leave a clear gap'] if apart else [])
+                l, t, r, b_ = box_of(segment)
+                report.add('rule 4: overlap clearly or leave a clear gap', False,
+                           f'{back}\'s edge runs right along {front}\'s edge for {pixels(length)}, without clearly passing behind it. '
+                           f'Edges that just meet make near and far things look stuck together.',
+                           f'from {t / shot.height:.2f} to {b_ / shot.height:.2f} down, around {sx / shot.width:.2f} across; {front} is nearer the camera',
+                           capital(', or '.join(ways)) + '.' if ways else f'Move {back} or {front} sideways.',
+                           mark=(l - 10, t - 10, r + 10, b_ + 10), kind=kind, pair=(a, b), how_bad=past(length, 40 * scale, 40 * scale))
+                continue
             both = solid[a] & solid[b]
             if both.any():
                 showing = both & (shot.visible[a] | shot.visible[b])
                 if showing.sum() < 0.3 * both.sum():
                     continue   # a third thing in front hides the overlap
+                if float(np.where(showing, distance_outside(shot.visible[back]), np.inf).min()) > need_gap:
+                    continue   # the back one's part there can't be seen (hidden by a third thing): nothing for the eye to judge
                 depth = float(max(distance_inside(solid[a])[showing].max(), distance_inside(solid[b])[showing].max()))
                 if depth >= need_overlap:
+                    if depth < 1.3 * need_overlap:
+                        report.note('rule 4: overlap clearly or leave a clear gap', f'{front} overlaps {back} by {pixels(depth)}: it passes, but only '
+                                    f'just (the limit is {need_overlap}); a small move of the camera could make the overlap too shallow.')
                     continue
                 cx, cy = centre_of(showing)
                 fx, fy = centre_of(solid[front])
@@ -713,11 +970,14 @@ def check_pairs(report, shot):
                            f'things look stuck together (a clear overlap is at least {need_overlap:.0f} pixels deep; a clear gap at least {need_gap:.0f}).',
                            f'at {cx / shot.width:.2f} across, {cy / shot.height:.2f} down; {front} is nearer the camera',
                            two_ways(shot, front, back, (ux * more, uy * more), (-ux * less, -uy * less), cy),
-                           mark=box_of(showing), kind=kind, how_bad=need_overlap / max(depth, 1))
+                           mark=box_of(showing), kind=kind, pair=(a, b), how_bad=past(depth, need_overlap, need_overlap / 2))
                 continue
             # no clear overlap: how far apart are the parts that show? Where only thin parts (a wire) overlap,
             # leave the thin parts out
-            va, vb = shot.visible[a], shot.visible[b]
+            # what shows, plus the outline just behind a thin thing in front (a chair post hiding a board's edge)
+            near = lambda g: cv2.dilate(shot.visible[g].astype(np.uint8), np.ones((41, 41), np.uint8)).astype(bool)
+            va = shot.visible[a] | (shot.alone[a] & near(a) & ~shot.alone[b])
+            vb = shot.visible[b] | (shot.alone[b] & near(b) & ~shot.alone[a])
             if whole_overlap.any():
                 va, vb = without_wires(va, shot.width), without_wires(vb, shot.width)
             if not (va.any() and vb.any()):
@@ -725,6 +985,9 @@ def check_pairs(report, shot):
             gaps = np.where(vb, distance_outside(va), np.inf)
             gap = float(gaps.min())
             if gap >= need_gap:
+                if gap < 1.3 * need_gap:
+                    report.note('rule 4: overlap clearly or leave a clear gap', f'{a} and {b} are {pixels(gap)} apart: they pass, but only just '
+                                f'(the limit is {need_gap}); a small move of the camera could make them nearly touch.')
                 continue
             y, x = np.unravel_index(np.argmin(gaps), gaps.shape)
             ax, ay = nearest_point(va, x, y)
@@ -741,11 +1004,64 @@ def check_pairs(report, shot):
                        f'(a clear overlap is at least {need_overlap:.0f} pixels deep; a clear gap at least {need_gap:.0f}).',
                        f'at {x / shot.width:.2f} across, {y / shot.height:.2f} down; {front} is nearer the camera',
                        two_ways(shot, front, back, (ux * more, uy * more), (-ux * less, -uy * less), front_point[1]),
-                       mark=(min(x, ax) - 14, min(y, ay) - 14, max(x, ax) + 14, max(y, ay) + 14), kind=kind, how_bad=need_gap / max(gap, 1))
+                       mark=(min(x, ax) - 14, min(y, ay) - 14, max(x, ax) + 14, max(y, ay) + 14), kind=kind, pair=(a, b), how_bad=past(gap, need_gap, need_gap / 2))
     if not found:
         report.add('rule 4: overlap clearly or leave a clear gap', True,
                    f'No two of {", ".join(names)} just touch (overlaps at least {need_overlap:.0f} pixels deep, gaps at least {need_gap:.0f}).')
     return touching
+
+
+def check_story_in_3d(report, shot):
+    """The story props stand together in the street, not only on screen: each one in front of the support (the board
+    is the backdrop), and none more than 0.3 m from every other one (footprints, Blender metres)."""
+    support = shot.info(shot.support) if shot.support else None
+    standing = [g for g in shot.story if g != shot.support and g in shot.on_ground and shot.info(g)]
+    for g in standing:
+        info = shot.info(g)
+        if support and info['distance'] > support['distance'] + 0.1:
+            back = info['distance'] - support['distance'] + 0.3
+            report.add('rule 3: story props together in the street', False,
+                       f'{g} stands behind {shot.support}: {info["distance"]:.2f} m from the camera against {support["distance"]:.2f} m. On screen it '
+                       f'may still look close, but the story props stand in front of {shot.support}.',
+                       fix=f'Move {g} about {back:.2f} m nearer to the camera, in front of {shot.support}.',
+                       mark=box_of(shot.alone[g]) if shot.alone[g].any() else None, kind='story', how_bad=past(back, 0.3, 0.3), name=f'depth:{g}')
+            continue
+        gaps = []
+        for o in shot.story:
+            if o == g or not shot.info(o):
+                continue
+            p = shot.info(o)
+            gx = max(0.0, abs(info['centre'][0] - p['centre'][0]) - (info['width'] + p['width']) / 2)
+            gy = max(0.0, abs(info['centre'][1] - p['centre'][1]) - (info['depth'] + p['depth']) / 2)
+            gaps.append((math.hypot(gx, gy), o))
+        if gaps and min(gaps)[0] > 0.3:
+            gap, o = min(gaps)
+            p = shot.info(o)
+            dx, dy = p['centre'][0] - info['centre'][0], p['centre'][1] - info['centre'][1]
+            scale = (gap - 0.1) / max(1e-6, math.hypot(dx, dy))
+            report.add('rule 3: story props together in the street', False,
+                       f'{g} stands {gap:.2f} m from the nearest other story prop ({o}) in the street: the group should stand together.',
+                       fix=f'Move {g} about {abs(dx * scale):.2f} m {"right" if dx > 0 else "left"} (across the street) and {abs(dy * scale):.2f} m '
+                           f'{"up" if dy > 0 else "down"} the street, toward {o}.',
+                       mark=box_of(shot.alone[g]) if shot.alone[g].any() else None, kind='story', how_bad=past(gap, 0.3, 0.3), name=f'depth:{g}')
+    if support and standing:
+        gaps = []
+        for g in standing:
+            p = shot.info(g)
+            gx = max(0.0, abs(support['centre'][0] - p['centre'][0]) - (support['width'] + p['width']) / 2)
+            gy = max(0.0, abs(support['centre'][1] - p['centre'][1]) - (support['depth'] + p['depth']) / 2)
+            gaps.append((math.hypot(gx, gy), g))
+        gap, nearest = min(gaps)
+        if gap > 0.3:
+            p = shot.info(nearest)
+            dy = p['centre'][1] - support['centre'][1]
+            report.add('rule 3: story props together in the street', False,
+                       f'{shot.support} stands {gap:.2f} m from the nearest story prop ({nearest}): the group should stand together.',
+                       fix=f'Move {shot.support} about {gap - 0.1:.2f} m {"up" if dy > 0 else "down"} the street, toward {nearest}.',
+                       mark=box_of(shot.alone[shot.support]) if shot.alone[shot.support].any() else None, kind='story',
+                       how_bad=past(gap, 0.3, 0.3), name=f'depth:{shot.support}')
+    if standing and not any(i.get('name', '') and i['name'].startswith('depth:') for i in report.items):
+        report.add('rule 3: story props together in the street', True, f'{", ".join(standing)} stand in front of {shot.support} and within 0.3 m of each other.', kind='story')
 
 
 def check_story_props(report, shot, touching):
@@ -777,10 +1093,16 @@ def check_story_props(report, shot, touching):
         reach = math.hypot(ox - px, oy - py) + 20 * shot.width / 1536 + 6
         words = move_words(shot, g, ux * reach, uy * reach, py)
         fixes.append(f'{words} so it overlaps {nearest}' if words else f'move {nearest} toward {g} until they overlap')
-    report.add('rule 3: one touching group', not apart, what, fix=capital('; '.join(fixes)) + '.' if fixes else '', kind='story', how_bad=3 * len(apart))
+    apart_mask = np.any([shot.visible[g] for g in apart], axis=0) if apart else None
+    report.add('rule 3: one touching group', not apart, what, fix=capital('; '.join(fixes)) + '.' if fixes else '',
+               mark=box_of(apart_mask) if apart else None, kind='story', how_bad=1 + 3 * len(apart), name='apart')
+    shot.apart = apart
     # how big a box the group fills (a tall board on its own would set the top, so the check file can leave it out)
     excluded = set(shot.check.get('box_excludes', []))
     in_box = [g for g in dict.fromkeys([shot.subject] + shown) if g not in excluded and shot.shows(g)]
+    if not in_box:
+        report.note('rule 3: story props close together', 'Not checked: no story prop shows once "box_excludes" are left out.')
+        return np.any([shot.visible[g] for g in shown], axis=0)
     boxes = {g: box_of(shot.visible[g]) for g in in_box}
     l, t = min(v[0] for v in boxes.values()), min(v[1] for v in boxes.values())
     r, b = max(v[2] for v in boxes.values()), max(v[3] for v in boxes.values())
@@ -795,26 +1117,33 @@ def check_story_props(report, shot, touching):
         rh = max(v[3] for v in wanted.values()) - min(v[1] for v in wanted.values())
         if rw + 0.02 > limit_w or rh + 0.02 > limit_h:
             limit_w, limit_h = max(limit_w, round(rw + 0.02, 2)), max(limit_h, round(rh + 0.02, 2))
-            reference_words = f' The rule\'s limit is 0.40 x 0.50, but the reference measures {rw:.2f} x {rh:.2f} by the same count, so its size plus 0.02 is allowed.'
+            reference_words = (f' (The rule says 0.40 wide and 0.50 tall, but the reference fills {rw:.2f} by {rh:.2f}, so up to '
+                               f'{limit_w:.2f} by {limit_h:.2f} is allowed.)')
     ok = w <= limit_w and h <= limit_h
     fixes = []
     sx, sy = centre_of(shot.visible[shot.subject]) if shot.shows(shot.subject) else ((l + r) / 2, (t + b) / 2)
     if w > limit_w:
         far = edge['left'] if abs(boxes[edge['left']][0] - sx) > abs(boxes[edge['right']][2] - sx) else edge['right']
         push = (w - limit_w) * shot.width + 4
-        fixes.append(move_words(shot, far, push if far == edge['left'] else -push, 0) or f'bring {far} in toward {shot.subject}')
+        cut_right = boxes[edge['right']][2] >= shot.width - 2 or (shot.info(edge['right']).get('screen_box_unclipped') or [0, 0, 0])[2] > 0.95
+        if far == edge['right'] and cut_right:
+            fixes.append(f'this follows from <<rule12>>: once {far} is moved in from the right edge, the box narrows')
+        else:
+            fixes.append(move_words(shot, far, push if far == edge['left'] else -push, 0) or f'bring {far} in toward {shot.subject}')
     if h > limit_h:
         far = edge['top'] if abs(boxes[edge['top']][1] - sy) > abs(boxes[edge['bottom']][3] - sy) else edge['bottom']
         push = (h - limit_h) * shot.height + 4
         anchor = boxes[far][1] if far == edge['top'] else boxes[far][3]
         fixes.append(move_words(shot, far, 0, push if far == edge['top'] else -push, anchor) or f'bring {far} in toward {shot.subject}')
+    unclipped = shot.info(edge['right']).get('screen_box_unclipped')
+    right_text = (f'{unclipped[2]:.2f}, past the frame\'s edge' if r >= shot.width - 2 and unclipped and unclipped[2] > 1 else f'{r / shot.width:.2f}')
     report.add('rule 3: story props close together', ok,
                f'The story props{" (leaving out " + ", ".join(sorted(excluded)) + ")" if excluded else ""} fill a box {w:.2f} of the frame wide '
                f'and {h:.2f} tall (limit {limit_w:.2f} x {limit_h:.2f}). Its edges: {edge["left"]}\'s left side ({l / shot.width:.2f} across), '
-               f'{edge["right"]}\'s right side ({r / shot.width:.2f}), {edge["top"]}\'s top ({t / shot.height:.2f} down) and {edge["bottom"]}\'s '
+               f'{edge["right"]}\'s right side ({right_text}), {edge["top"]}\'s top ({t / shot.height:.2f} down) and {edge["bottom"]}\'s '
                f'bottom ({b / shot.height:.2f}).{reference_words}',
                fix=capital('; '.join(fixes)) + '.' if fixes else '', mark=(l, t, r, b), area=True, kind='story',
-               how_bad=max(w / limit_w, h / limit_h))
+               how_bad=max(past(w, limit_w, 0.04) if w > limit_w else 1, past(h, limit_h, 0.04) if h > limit_h else 1))
     return np.any([shot.visible[g] for g in dict.fromkeys([shot.subject] + shown) if shot.shows(g)], axis=0)
 
 
@@ -842,6 +1171,7 @@ def check_right_edge(report, shot):
         rows.append(f'{g} {right:.2f}')
         if right > limit:
             over.append((g, right, limit))
+    shot.rule12_over = {g for g, _, _ in over}
     if not over:
         report.add('rule 12: room for phone buttons', True, f'Everything to read is left of 0.90 across, and the story props left of 0.95 '
                    f'where the buttons are ({", ".join(rows)}).', kind='edges')
@@ -859,33 +1189,47 @@ def check_right_edge(report, shot):
             wanted = math.atan((limit - 0.005 - 0.5) * shot.width / shot.focal)
             turn = max(turn, math.degrees(now - wanted))
     after_slide = lambda g, right: right - slide / shot.info(g)['metres_per_pixel'] / shot.width
-    reads = [f'{g} reaches {right:.2f} across (limit {limit:.2f})' for g, right, limit in over]
+    exact = lambda v, limit: f'{v:.3f}' if abs(v - limit) < 0.005 else f'{v:.2f}'   # "0.95 (limit 0.95)" would read as a pass
+    reads = [f'{g} reaches {exact(right, limit)} across (limit {limit:.2f})' for g, right, limit in over]
     same = [f'{g} {v["box"][2]:.2f}' for g, v in shot.reference.get('boxes', {}).items() if g in limits and v['box'][2] > limits[g]]
-    fixes = []
+    if same:
+        reads.append(f'(the reference has the same fault: {", ".join(same)})')
+    camera_fixes = []
     if slide > 0:
-        fixes.append(f'Move the camera about {slide:.2f} m to the right without turning it: near props slide left on screen more than '
-                     f'far ones, and where the lines meet stays where it is (check rule 1 again afterwards). Or turn the camera about '
-                     f'{turn:.1f} degrees right: everything slides left together, but where the lines meet moves too.')
-        if same:
-            fixes.append(f'(The reference has the same fault: {", ".join(same)}.)')
-    for g, right, limit in over:
-        if g in tied or after_slide(g, right) <= limit:
-            continue
-        words = move_words(shot, g, -(after_slide(g, right) - limit + 0.005) * shot.width, 0)
-        fixes.append(capital(words) + (' (after the camera move).' if slide > 0 else '.'))
+        held = [g for g, _, _ in over if g in tied]
+        camera_fixes.append(f'For {" and ".join(held)}: move the camera about {slide:.2f} m to the right without turning it. Near props slide '
+                            f'left on screen more than far ones, and where the lines meet stays where it is. Then check again: the props '
+                            f'slide by different amounts, so their overlaps change (rule 4).')
+        if shot.reference.get('camera_match') or shot.reference.get('lines_meet'):
+            camera_fixes.append('Don\'t turn the camera instead: that would move where the lines meet away from the reference\'s.')
+        else:
+            camera_fixes.append(f'Or turn the camera about {turn:.1f} degrees right: everything slides left together, where the lines meet too.')
+    # props past the limit on their own: when one sticks out further than the board and notice, its own move comes first
+    own = [(g, right, limit) for g, right, limit in over if g not in tied and (slide == 0 or after_slide(g, right) > limit)]
+    own_first = bool(own) and max(r - l for _, r, l in own) > max([r - l for g, r, l in over if g in tied] or [0])
+    own_fixes = []
+    for g, right, limit in own:
+        reach = (right if own_first or slide == 0 else after_slide(g, right)) - limit + 0.005
+        words = move_words(shot, g, -reach * shot.width, 0)
+        own_fixes.append(capital(words) + ('.' if own_first or slide == 0 else ' (after the camera move).'))
+    fixes = own_fixes + camera_fixes if own_first else camera_fixes + own_fixes
     fix = ' '.join(fixes)
     worst = max(over, key=lambda o: o[1] - o[2])
     marks = [box_of(shot.visible[g]) for g, _, _ in over]
     report.add('rule 12: room for phone buttons', False,
                '; '.join(reads) + '. Video apps put their buttons down the right edge, from a little above the middle to near the bottom.',
                fix=fix, mark=(min(m[0] for m in marks), min(m[1] for m in marks), shot.width - 1, max(m[3] for m in marks)), area=True,
-               kind='edges', how_bad=worst[1] / worst[2])
+               kind='edges', how_bad=past(worst[1], worst[2], 0.02), name='rule12')
 
 
 def check_titles(report, shot, blurred):
     zone = shot.check.get('title_zone')
     if not zone:
         report.note('rule 12: titles in dim sky', 'Not checked: the check file has no "title_zone".')
+        return
+    if not (0 <= zone[0] < zone[2] <= 1 and 0 <= zone[1] < zone[3] <= 1) or (zone[2] - zone[0]) * (zone[3] - zone[1]) < 0.001:
+        report.add('set-up', False, f'The check file\'s "title_zone" {zone} is not an area given in fractions of the frame (0 to 1).',
+                   fix='Give it as [left, top, right, bottom], each between 0 and 1, for example [0.05, 0.02, 0.62, 0.12].', kind='set-up', how_bad=3)
         return
     l, t, r, b = int(zone[0] * shot.width), int(zone[1] * shot.height), int(zone[2] * shot.width), int(zone[3] * shot.height)
     sky = float(shot.sky[t:b, l:r].mean())
@@ -932,8 +1276,13 @@ def check_work_props(report, shot):
             what += f', its brightness {mean:.2f} (it must stay under the frame\'s average, {average:.2f})'
             if mean >= average:
                 problems.append('it is brighter than the frame\'s average')
+        cy = centre_of(shot.visible[g])[1]
+        target = min(max(cy / shot.height, 0.47), 0.60)   # just inside the middle band: the smallest move that does
+        words = move_words(shot, g, 0, (target - cy / shot.height) * shot.height, cy) if abs(target - cy / shot.height) > 0.01 else None
+        fix = (capital(words) + f' (its middle then sits about {target:.2f} down)' + (', and keep it in shadow.' if average is not None else '.')) if words \
+            else f'Keep {g} where it is but in shadow.'
         report.add('rule 8: work props small, far and dim', not problems, (what + '. ' + capital('; '.join(problems)) + '.') if problems else what + '.',
-                   fix=f'Move {g} further up the street, or into shadow.', mark=box_of(shot.visible[g]), kind='background', how_bad=1 + len(problems))
+                   fix=fix, mark=box_of(shot.visible[g]), kind='background', how_bad=1 + len(problems))
     corner = np.zeros((shot.height, shot.width), bool)
     corner[shot.height // 2:, :shot.width // 2] = True
     big = []
@@ -941,19 +1290,27 @@ def check_work_props(report, shot):
         share = (mask & corner).sum() / total
         if share > 0.01:
             big.append(g)
+            fix = f'Move {g} out of the bottom-left quarter.'
+            if g in shot.check.get('work', []):   # a work prop belongs further up the street, in the middle band
+                cy = centre_of(mask)[1]
+                words = move_words(shot, g, 0, (0.60 * shot.height - cy), cy)
+                fix = capital(words) + ' (its middle then about 0.60 down, out of the corner and just inside the middle band, rule 8).' if words else fix
             report.add('rule 8: nothing big where the eye enters', False, f'{g} fills {share:.1%} of the frame in the bottom-left quarter, where the eye enters (limit 1%).',
-                       fix=f'Move {g} out of the bottom-left quarter.', mark=box_of(mask & corner), kind='story', how_bad=share / 0.01)
+                       fix=fix, mark=box_of(mask & corner), kind='story', how_bad=past(share, 0.01, 0.01))
     if not big:
         report.add('rule 8: nothing big where the eye enters', True, 'No prop fills more than 1% of the frame in the bottom-left quarter.', kind='story')
 
 
 def check_dark_entry(report, shot):
     """A big dark shape (a long shadow, a dark lump) in the bottom-left quarter, measured against the lit
-    ground around it rather than the whole frame, which is dark at night anyway."""
+    ground around it rather than the whole frame, which is dark at night anyway. The story props' own shaded
+    sides don't count: they belong to the group the eye is led to (the picture the user liked has a dark drum there)."""
     top, right = shot.height // 2, shot.width // 2
     quarter = cv2.GaussianBlur(shot.grey[top:, :right], (0, 0), max(1.0, 0.004 * shot.width))
     lit = float(np.percentile(quarter, 75))
     dark = quarter < 0.6 * lit
+    story = np.any([shot.visible[g] for g in shot.core if shot.shows(g)] or [np.zeros((shot.height, shot.width), bool)], axis=0)
+    dark &= ~story[top:, :right]
     size = max(3, int(0.01 * shot.width) | 1)
     dark = cv2.morphologyEx(dark.astype(np.uint8), cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (size, size)))
     n, labels, stats, _ = cv2.connectedComponentsWithStats(dark)
@@ -962,7 +1319,7 @@ def check_dark_entry(report, shot):
     shapes = [k for k in range(1, n) if k not in far]
     if not shapes:
         report.add('rule 8: nothing big and dark where the eye enters', True, 'Nothing in the bottom-left quarter is much darker than the lit ground '
-                   'around it (the far street fading into the dark is left out).', kind='light')
+                   'around it (the far street fading into the dark, and the story props\' own shaded sides, are left out).', kind='light')
         return
     biggest = max(shapes, key=lambda k: stats[k, cv2.CC_STAT_AREA])
     piece = np.zeros((shot.height, shot.width), bool)
@@ -972,18 +1329,18 @@ def check_dark_entry(report, shot):
     owners = {g: int((m & piece).sum()) for g, m in shot.visible.items()}
     owner = max(owners, key=owners.get) if owners and max(owners.values()) > 0.3 * piece.sum() else None
     l, t, r, b = box_of(piece)
-    what = (f'The biggest dark shape where the eye enters (the bottom-left quarter) covers {share:.1%} of the frame (limit 1%): brightness '
+    what = (f'The biggest dark shape where the eye enters (the bottom-left quarter) covers {share:.{2 if abs(share - 0.01) < 0.001 else 1}%} of the frame (limit 1%): brightness '
             f'{float(shot.grey[piece].mean()):.2f} against {lit:.2f} for the lit ground around it.')
     if owner:
         what += f' Most of it is {owner}.'
         fix = f'Move {owner} out of the bottom-left quarter, or light it.'
     else:
         what += ' It is not a prop: probably a shadow cast across the ground.'
-        fix = ('First look at the render\'s log: if it says "Shadow buffer full", the shadow is a fault of the render (it ran out of '
-               'shadow memory), not of the lighting; render again with a larger shadow_pool_size. Otherwise find what casts it: turn off '
-               'each light\'s shadow in turn (the warm lights first), see which one makes it vanish, and move that light or the thing in its way.')
+        fix = ('First give the tool the log Blender wrote while rendering the picture (--render-log, or RENDER_LOG=... with check-shot.sh): '
+               'a render that ran out of shadow memory draws false hard shadows. If the log is clean, find what casts it: switch off each '
+               'light\'s shadow one at a time (the warm lights first), see which one makes it vanish, and move that light or the thing in its way.')
     report.add('rule 8: nothing big and dark where the eye enters', ok, what, f'from {l / shot.width:.2f} to {r / shot.width:.2f} across, '
-               f'{t / shot.height:.2f} to {b / shot.height:.2f} down', fix=fix, mark=(l, t, r, b), area=True, kind='light', how_bad=share / 0.01)
+               f'{t / shot.height:.2f} to {b / shot.height:.2f} down', fix=fix, mark=(l, t, r, b), area=True, kind='light', how_bad=past(share, 0.01, 0.01))
 
 
 # ---------------------------------------------------------------------------------------- the light rules (5, 6, 10) and the main rule
@@ -1005,6 +1362,25 @@ def warm_lights_near(shot, px, py):
     total = sum(f[0] for f in found) or 1
     return [f'{name} ({distance:.1f} m from it, {where}; about {strength / total:.0%} of the warm light reaching it if nothing shades it)'
             for strength, name, distance, where in sorted(found, reverse=True)[:2]]
+
+
+def lit_from_below_fix(shot, subject, spread_too_wide):
+    """Words for warming the subject's bottom more than its top, naming the lights by their Blender names."""
+    info = shot.info(subject)
+    middle = info['centre'][2]
+    near = lambda l, metres: l['kind'] == 'SUN' or float(np.linalg.norm(np.array(l['at']) - np.array(info['centre']))) <= metres
+    lights = shot.facts.get('lights', [])
+    warm_below = [l['name'] for l in lights if l['colour'][0] - l['colour'][2] >= 0.15 and l['kind'] != 'SUN' and l['at'][2] < middle and near(l, 3)]
+    cool_above = [l['name'] for l in lights if (l['colour'][2] > l['colour'][0] and near(l, 8)) or (l['kind'] != 'SUN' and l['at'][2] > middle and near(l, 4))]
+    words = f'Give {subject}\'s bottom more warm light than its top: '
+    below = (f'bring the warm light below it closer under its bottom edge, or aim it there ({", ".join(warm_below)})' if warm_below
+             else 'add a warm light below it, aimed at its bottom edge')
+    above = f'dim or whiten the light from above ({", ".join(cool_above)})' if cool_above else ''
+    if spread_too_wide and above:   # warm light already spreads too far: cool the top rather than add warmth
+        words += above + f'; or {below}'
+    else:
+        words += below + (f'; or {above}' if above else '')
+    return words + '. Then check again.'
 
 
 def check_light(report, shot, story_union, blurred):
@@ -1029,15 +1405,15 @@ def check_light(report, shot, story_union, blurred):
                f'Of the brightest parts (the brightest 3% of the frame), {share_subject:.0%} lie on {subject} (need 40%) and {share_group:.0%} in the '
                f'story props\' box (need 75%). The largest bright patch belongs to {owner}.',
                fix=f'Dim {owner} (the marked bright patch), or light {subject} more.' if owner != subject else f'Light {subject} more, or dim what is around it.',
-               mark=box_of(biggest) if owner != subject else box_of(on_subject), area=True, kind='light', how_bad=max(0.40 / max(share_subject, 0.01), 0.75 / max(share_group, 0.01)))
+               mark=box_of(biggest) if owner != subject else box_of(on_subject), area=True, kind='light', how_bad=max(past(share_subject, 0.40, 0.1) if share_subject < 0.40 else 1, past(share_group, 0.75, 0.1) if share_group < 0.75 else 1))
     if has_subject:
         ratio = float(grey[shot.visible[subject]].mean() / grey.mean())
         report.add(f'rule 5: {subject} is bright', ratio >= 1.8, f'{subject} is {ratio:.2f} times as bright as the frame\'s average (need 1.8).',
-                   fix=f'Light {subject} more, or darken what is around it.', mark=box_of(shot.visible[subject]), kind='light', how_bad=1.8 / max(ratio, 0.1))
+                   fix=f'Light {subject} more, or darken what is around it.', mark=box_of(shot.visible[subject]), kind='light', how_bad=past(ratio, 1.8, 0.3))
     top_row = [float(grey[:height // 3, a:b].mean()) for a, b in ((0, width // 3), (width // 3, 2 * width // 3), (2 * width // 3, width))]
     report.add('rule 5: keep the sky dim', max(top_row) <= 0.36,
                f'The top third\'s brightness, left to right: {", ".join(f"{v:.2f}" for v in top_row)} (limit 0.36).',
-               fix='Darken the sky (or ask the painter for a darker sky).', mark=(0, 0, width - 1, height // 3), area=True, kind='light', how_bad=max(top_row) / 0.36)
+               fix='Darken the sky (or ask the painter for a darker sky).', mark=(0, 0, width - 1, height // 3), area=True, kind='light', how_bad=past(max(top_row), 0.36, 0.05))
     # rule 6: warm light, mostly round the story props
     blue, _, red = [c.astype(np.float32) for c in cv2.split(picture)]
     warmth = np.clip((red - blue) / 255, 0, 1)
@@ -1047,10 +1423,13 @@ def check_light(report, shot, story_union, blurred):
     inside = (warm & near_story).sum() / max(1, warm.sum())
     problems, fixes, mark = [], [], None
     if share_warm > 0.03:
-        problems.append(f'warm light covers {share_warm:.1%} of the frame, {share_warm / 0.03:.1f} times the most allowed (3%)')
+        problems.append(f'warm light covers {share_warm:.{2 if share_warm < 0.031 else 1}%} of the frame, {share_warm / 0.03:.{2 if share_warm < 0.031 else 1}f} times the most allowed (3%)')
     if share_warm < 0.015:
         problems.append(f'warm light covers only {share_warm:.1%} of the frame (aim for 1.5 to 3%)')
         fixes.append('Let the fire and the lantern light more.')
+    elif share_warm > 0.03 and inside >= 0.5:
+        fixes.append('Most of it is round the story props: shorten how far the fire\'s and the lantern\'s light reaches, or lower the '
+                     'lantern\'s strength a little (the fire\'s light also lights the notice from below).')
     if warm.any() and inside < 0.5:
         problems.append(f'only {inside:.0%} of it lies round the story props (need most of it)')
     if share_warm > 0.03 or (warm.any() and inside < 0.5):
@@ -1061,28 +1440,33 @@ def check_light(report, shot, story_union, blurred):
             patch = parts == (1 + int(np.argmax(part_stats[1:, cv2.CC_STAT_AREA])))
             px, py = centre_of(patch)
             on = {g: int((v & patch).sum()) for g, v in shot.visible.items()}
-            surface = max(on, key=on.get) if on and max(on.values()) > 0.3 * patch.sum() else 'the ground and walls'
+            surface = max(on, key=on.get) if on and max(on.values()) > 0.3 * patch.sum() else \
+                ('the road or pavement' if ground_point(shot, px, py) is not None else 'the house walls')
             lights = warm_lights_near(shot, px, py)
             mark = box_of(patch)
             fixes.append(f'{1 - inside:.0%} of the warm light is away from the story props; the largest patch is on {surface} at {px / width:.2f} across, '
                          f'{py / height:.2f} down (marked). The warm lights lighting it most: {"; ".join(lights) if lights else "none found"}. '
-                         f'Shorten their reach (lower their strength or the distance their light travels) first.')
+                         f'Shorten how far their light reaches (Blender\'s "custom distance" for a light) rather than their strength, so the '
+                         f'notice keeps its warm light from below.')
     report.add('rule 6: warm light from the people\'s own lights', not problems,
                (capital('; '.join(problems)) + '.') if problems else f'Warm light covers {share_warm:.1%} of the frame, {inside:.0%} of it round the story props.',
                f'warm: red clearly stronger than blue in a lit part (the same measure as measure_composition.py)', fix=' '.join(fixes),
-               mark=mark, area=True, kind='light', how_bad=max(share_warm / 0.03, 0.015 / max(share_warm, 1e-4), 0.5 / max(inside, 0.01)))
+               mark=mark, area=True, kind='light', how_bad=max(past(share_warm, 0.03, 0.01) if share_warm > 0.03 else 1, past(share_warm, 0.015, 0.005) if share_warm < 0.015 else 1,
+                                                                past(inside, 0.5, 0.1) if inside < 0.5 else 1))
     if has_subject:
         ys, xs = np.nonzero(shot.visible[subject])
         rows = np.arange(height)[:, None]
         span = ys.max() - ys.min()
         top_band = shot.visible[subject] & (rows < ys.min() + 0.15 * span)
         bottom_band = shot.visible[subject] & (rows > ys.max() - 0.15 * span)
-        lift = float(warmth[bottom_band].mean() - warmth[top_band].mean())
-        report.add('rule 6: lit from below', lift >= 0.12,
-                   f'The bottom of {subject} is {plain(lift)} warmer than its top, on a scale of 0 (grey) to 1 (pure red-orange); it needs 0.12 '
-                   f'(the reference measures about 0.19).',
-                   fix=f'Bring the lantern or the fire\'s light closer below {subject}, or turn down the cool light from above.',
-                   mark=box_of(shot.visible[subject]), kind='light', how_bad=0.12 / max(lift, 0.01))
+        # how much redder than blue each part is, whatever its brightness (a dim cream and a bright cream count the same)
+        hue = (red - blue) / np.maximum(red + blue, 1)
+        lift = float(hue[bottom_band].mean() - hue[top_band].mean())
+        report.add('rule 6: lit from below', lift >= 0.10,
+                   f'The bottom of {subject} is {plain(lift, 3 if abs(lift - 0.10) < 0.005 else 2)} warmer than its top, on a scale where 0 is the same colour and 1 is pure red against '
+                   f'pure blue; it needs 0.10 (the reference measures about 0.17).',
+                   fix=lit_from_below_fix(shot, subject, share_warm > 0.03), name='lit-below',
+                   mark=box_of(shot.visible[subject]), kind='light', how_bad=past(lift, 0.10, 0.05))
     # rule 10: the quiet side
     edges = cv2.GaussianBlur(np.abs(cv2.Laplacian(cv2.GaussianBlur(grey, (0, 0), 2), cv2.CV_32F)), (0, 0), 25)
     contrast = np.abs(grey - grey.mean())
@@ -1096,7 +1480,7 @@ def check_light(report, shot, story_union, blurred):
                f'The {quiet_name} half (away from {subject}) holds {quiet:.0%} of the weight (aim for 40 to 48%).',
                fix=(f'Add a few small dim lights or details in the {quiet_name} half (a lit window, a distant lamp) until it holds about 42%.'
                     if quiet < 0.40 else f'The {quiet_name} half is too busy: dim or remove some of its detail.'), kind='light',
-               how_bad=0.40 / max(quiet, 0.01) if quiet < 0.40 else quiet / 0.48)
+               how_bad=0.8 * past(quiet, 0.40 if quiet < 0.40 else 0.48, 0.04))   # the weakest rule: it doesn't make a shot work on its own
     if has_subject:
         notice_bright = float(grey[shot.visible[subject]].mean())
         side = blurred[:, quiet_cols]
@@ -1137,7 +1521,7 @@ def check_light(report, shot, story_union, blurred):
                '; '.join(f'{k} {v[0]:.2f} across, {v[1]:.2f} down' for k, v in spots.items()) +
                f'. Together they span {r - l:.2f} of the frame wide and {b - t:.2f} tall (limit 0.40 x 0.50, holding {subject}).',
                fix=f'The odd one out is the {odd}: fix that first.', mark=(l * width, t * height, r * width, b * height), area=True,
-               kind='main', how_bad=max((r - l) / 0.40, (b - t) / 0.50))
+               kind='main', how_bad=max(past(r - l, 0.40, 0.05) if r - l > 0.40 else 1, past(b - t, 0.50, 0.05) if b - t > 0.50 else 1))
     return spots
 
 
@@ -1163,8 +1547,12 @@ def check_reference_places(report, shot):
                 want = ((wanted['box'][0] + wanted['box'][2]) / 2, wanted['box'][1] if wanted.get('compare') == 'top' else (wanted['box'][1] + wanted['box'][3]) / 2)
                 landmarks.append(f'{g} ours at {ours[0]:.2f} across, {ours[1]:.2f} down; the reference\'s at {want[0]:.2f}, {want[1]:.2f}')
             continue
-        if any(i.get('name') == f'resting:{g}' and i['passed'] is False for i in report.items):
-            report.note('reference: where each prop stands', f'{g}: not compared until it rests where it should (<<resting:{g}>>).')
+        first_move = next((i['name'] for i in report.items if i['passed'] is False and i.get('name') in (f'resting:{g}', f'depth:{g}', f'missing:{g}')), None)
+        if first_move:
+            report.note('reference: where each prop stands', f'{g}: compare with the reference again after <<{first_move}>>.')
+            continue
+        if g in shot.rule12_over:
+            report.note('reference: where each prop stands', f'{g}: compare with the reference again after <<rule12>> (it is past the phone-button limit).')
             continue
         if not shot.alone[g].any():
             if g not in shot.core:
@@ -1179,12 +1567,19 @@ def check_reference_places(report, shot):
         top = wanted.get('compare') == 'top'
         point = lambda box: ((box[0] + box[2]) / 2, box[1] if top else (box[1] + box[3]) / 2)
         (ox, oy), (wx, wy) = point(ours), point(want)
-        size = (ours[3] - ours[1]) / max(1e-6, want[3] - want[1])
+        size = (ours[3] - ours[1]) / max(1e-6, want[3] - want[1])   # how tall, against the reference
+        cut = max(ours[2], want[2]) > 0.995 or min(ours[0], want[0]) < 0.005   # a box cut by the frame edge has no true width
+        wide = None if cut else (ours[2] - ours[0]) / max(1e-6, want[2] - want[0])
         size_ok = top or 0.8 <= size <= 1.25
         fixes = []
         across_off = abs(ox - wx) > 0.04
         limit = 0.90 if g in shot.check.get('must_read', []) else 0.95 if g in shot.story else None
         new_right = (r / shot.width) + (wx - ox)
+        carrier = shot.carrier(g)
+        if carrier and shot.alone[carrier].any() and carrier in shot.story:   # the prop it rides on moves too
+            carrier_right = box_of(shot.alone[carrier])[2] / shot.width + (wx - ox)
+            if carrier_right - 0.95 > new_right - (limit or 1):
+                new_right, limit = carrier_right, 0.95
         if across_off and wx > ox and limit and new_right > limit:
             report.note('reference: where each prop stands',
                         f'{g}: the reference has it {wx - ox:.2f} of the frame width further right (ours at {ox:.2f} across, the reference\'s at '
@@ -1196,14 +1591,27 @@ def check_reference_places(report, shot):
                                     (wy - oy) * shot.height if abs(oy - wy) > 0.04 else 0, oy * shot.height)
                          or f'moving {g} along the ground can\'t bring it to that height on screen; the camera or the reference differs')
         if not size_ok:
-            mover = shot.carrier(g)
-            fixes.append(f'it is {size:.2f} times as tall as the reference\'s: make it {1 / size:.2f} times {"bigger" if size < 1 else "smaller"}, '
-                         f'or move {f"{mover} (with {g} on it)" if mover else "it"} about {abs(info["distance"] * (1 - size)):.2f} m '
-                         f'{"nearer to" if size < 1 else "further from"} the camera (which also moves it on screen)')
+            if wide is not None and 0.9 <= wide <= 1.1:   # as wide as the reference's: only its shape differs
+                fixes.append(f'it is as wide as the reference\'s ({ours[2] - ours[0]:.2f} against {want[2] - want[0]:.2f} of the frame) but '
+                             f'{size:.2f} times as tall: make it about {1 / size:.2f} times {"taller" if size < 1 else "shorter"} without making it wider')
+            else:
+                mover = shot.carrier(g) or g
+                change = info['distance'] * (1 - size)   # + is nearer
+                words = f'make it {1 / size:.2f} times {"bigger" if size < 1 else "smaller"}'
+                taken = spot_taken(shot, mover, -change)
+                crowded = change > 0 and any(i['rule'].startswith('rule 12: room') and i['passed'] is False for i in report.items)
+                if taken:
+                    words += f' (moving {mover} {abs(change):.2f} m {"nearer" if change > 0 else "further"} instead would put it where {taken} stands)'
+                elif crowded:
+                    words += f' (don\'t move {mover} nearer instead: that would push it further into the phone buttons, rule 12)'
+                else:
+                    words += (f', or move {f"{mover} (with {g} on it)" if mover != g else "it"} about {abs(change):.2f} m '
+                              f'{"nearer to" if change > 0 else "further from"} the camera (which also moves it on screen)')
+                fixes.append(words)
         ok = not across_off and abs(oy - wy) <= 0.04 and size_ok
         report.add('reference: where each prop stands', ok,
                    f'{g}: ours at {ox:.2f} across, {oy:.2f} down; the reference\'s at {wx:.2f}, {wy:.2f}' +
-                   ('' if top else f'; ours is {size:.2f} times as tall as the reference\'s') + '.',
+                   ('' if top else f'; ours is ' + (f'{wide:.2f} times as wide and ' if wide is not None else '') + f'{size:.2f} times as tall as the reference\'s') + '.',
                    fix=(capital('; '.join(fixes)) + '.') if fixes else '', mark=(l, t, r, b), area=True, kind='reference',
                    how_bad=max(abs(ox - wx) if across_off else 0, abs(oy - wy)) / 0.04 + (0 if size_ok else abs(math.log(size)) * 4),
                    arrow=((ox * shot.width, oy * shot.height), (wx * shot.width, wy * shot.height)))
@@ -1213,9 +1621,16 @@ def check_reference_places(report, shot):
 
 
 # ---------------------------------------------------------------------------------------- drawing and writing
-LEGEND = ('Boxes on marked.jpg carry the problem\'s number (red: a small place; orange: a large area). Dashed lines: the 0.90 and 0.95 '
-          'limits of rule 12. Yellow arrows: from where a prop is to where the reference has it. Circles (main rule): purple, where the '
-          'lines meet; white, the centre of the brightest parts; orange, the warm light; blue, the story props; green, the subject.')
+LEGEND = ('On marked.jpg each problem\'s place is boxed, with its number on a dark tag (red: a small place; orange: a large area). '
+          'Dashed lines: the 0.90 and 0.95 limits of rule 12. Cyan arrows: from where a prop is to where the reference has it. Circles '
+          '(main rule): purple, where the lines meet; white, the centre of the brightest parts; pink, the centre of the warm light; blue, '
+          'the centre of the story props; green, the centre of the subject. A camera problem has no box: it changes the whole frame.')
+
+WORDS = ('Words used: "where the lines meet" is the spot where the street\'s straight edges (kerbs, gutters, roof lines) run together '
+         'in the distance. The subject is the thing the shot is about; story props are the props that tell the story; work props are '
+         'the rest (the check file names them). Weight (rule 10) is how strongly a part of the picture pulls the eye, from its size, '
+         'brightness and detail. The reference is the picture the shot is meant to match. The flat-colour picture shows each prop '
+         'in one plain colour, as measured in Blender.')
 
 NOT_CHECKED = [
     'rule 7 (story props stacked in upright columns, something in the top third): judge by eye.',
@@ -1224,15 +1639,28 @@ NOT_CHECKED = [
     'whether a prop pokes into a wall or another prop in 3D: only what shows on screen is measured.',
 ]
 
+# words in Blender's log that mean the finished picture's light can't be trusted, and what each does
+RENDER_FAULTS = {'Shadow buffer full': 'it ran out of shadow memory, which draws false hard shadows',
+                 'Could not allocate shadow atlas': 'it could not set up its shadow memory at all, so shadows are missing'}
+
 SPOT_COLOURS = {'where the lines meet': (200, 60, 200), 'centre of the brightest parts': (255, 255, 255),
-                'centre of the warm light': (0, 150, 255), 'centre of the story props': (255, 140, 30)}
+                'centre of the warm light': (180, 105, 255), 'centre of the story props': (255, 140, 30)}
 
 
-def label(image, text, x, y, colour):
+def label(image, text, x, y, colour, taken):
+    """The problem's number on a small dark tag at (x, y), moved down until it covers no other tag, kept in the frame."""
     height, width = image.shape[:2]
-    x, y = int(min(max(x, 4), width - 18 * len(text) - 6)), int(min(max(y, 30), height - 8))
-    cv2.putText(image, text, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 6, cv2.LINE_AA)
-    cv2.putText(image, text, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, colour, 2, cv2.LINE_AA)
+    (w, h), _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, 1.0, 2)
+    w, h = w + 12, h + 14
+    x, y = int(min(max(x, 2), width - w - 2)), int(min(max(y, 2), height - h - 2))
+    while any(x < tx + tw and tx < x + w and y < ty + th and ty < y + h for tx, ty, tw, th in taken):
+        y += h + 2
+        if y > height - h - 2:
+            y, x = 2, min(x + w + 2, width - w - 2)
+    taken.append((x, y, w, h))
+    cv2.rectangle(image, (x, y), (x + w, y + h), (20, 20, 20), -1)
+    cv2.rectangle(image, (x, y), (x + w, y + h), colour, 2)
+    cv2.putText(image, text, (x + 6, y + h - 8), cv2.FONT_HERSHEY_SIMPLEX, 1.0, colour, 2, cv2.LINE_AA)
 
 
 def draw_marked(path, shot, ranked, spots):
@@ -1241,26 +1669,31 @@ def draw_marked(path, shot, ranked, spots):
     for x in (0.90, 0.95):   # rule 12's right-edge limits
         for y in range(0, height, 24):
             cv2.line(image, (int(x * width), y), (int(x * width), y + 12), (0, 200, 255), 2)
-    for item in sorted([i for i in ranked if i['mark'] is not None], key=lambda i: not i['area']):   # areas first, small places on top
+    for name, (x, y) in (spots or {}).items():   # the main rule's circles first, so no number tag hides under one
+        colour = SPOT_COLOURS.get(name, (60, 220, 60))
+        centre = (int(x * width), int(y * height))
+        cv2.circle(image, centre, 18, (0, 0, 0), 9, cv2.LINE_AA)
+        cv2.circle(image, centre, 18, colour, 4, cv2.LINE_AA)
+    taken = []
+    marked = [i for i in ranked if i['mark'] is not None]
+    for item in sorted(marked, key=lambda i: not i['area']):   # areas first, small places on top
         l, t, r, b = (int(v) for v in item['mark'])
         l, t, r, b = max(l, 1), max(t, 1), min(r, width - 2), min(b, height - 2)
         colour, thick = ((0, 170, 255), 2) if item['area'] else ((40, 40, 255), 4)
         cv2.rectangle(image, (l, t), (r, b), (0, 0, 0), thick + 3)
         cv2.rectangle(image, (l, t), (r, b), colour, thick)
+    for item in sorted(marked, key=lambda i: i['area']):   # small places' tags first, beside their boxes
+        l, t, r, b = (int(v) for v in item['mark'])
+        colour = (0, 170, 255) if item['area'] else (40, 40, 255)
         if item['area']:
-            label(image, str(item['number']), l + 6, b - 10, colour)
+            label(image, str(item['number']), l + 4, t + 4, colour, taken)   # inside the box, at its top-left
         else:
-            label(image, str(item['number']), r + 6, t + 26, colour)
+            label(image, str(item['number']), r + 6, t, colour, taken)
     for item in ranked:
         if item['arrow']:
             (x0, y0), (x1, y1) = item['arrow']
             cv2.arrowedLine(image, (int(x0), int(y0)), (int(x1), int(y1)), (0, 0, 0), 7, cv2.LINE_AA, tipLength=0.2)
-            cv2.arrowedLine(image, (int(x0), int(y0)), (int(x1), int(y1)), (0, 220, 255), 3, cv2.LINE_AA, tipLength=0.2)
-    for name, (x, y) in (spots or {}).items():
-        colour = SPOT_COLOURS.get(name, (60, 220, 60))
-        centre = (int(x * width), int(y * height))
-        cv2.circle(image, centre, 18, (0, 0, 0), 9, cv2.LINE_AA)
-        cv2.circle(image, centre, 18, colour, 4, cv2.LINE_AA)
+            cv2.arrowedLine(image, (int(x0), int(y0)), (int(x1), int(y1)), (255, 255, 0), 3, cv2.LINE_AA, tipLength=0.2)
     if shot.picture is None:
         cv2.rectangle(image, (0, height - 50), (width, height), (0, 0, 0), -1)
         cv2.putText(image, 'flat-colour picture: no finished picture was given', (14, height - 16), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 2, cv2.LINE_AA)
@@ -1274,14 +1707,15 @@ def write_report(path, report, ranked, title, shot):
              'because it moves everything on screen).', '',
              f'How to read this: places are fractions of the frame (0 across is the left edge, 1 the right; 0 down is the top, 1 the bottom). '
              f'Pixels are this frame\'s ({shot.width} wide). Metres are metres in the street; "Blender x, y" is a spot on the street\'s map '
-             '(x across the street, y up it). ' + LEGEND, '']
+             '(x across the street, y up it). ' + LEGEND, '', WORDS, '',
+             f'Made by check_shot.py version {VERSION}; a report made by another version may give other numbers.', '']
     if shot.picture is None:
         lines += ['No finished picture was given, so marked.jpg is drawn on the flat-colour picture and the light rules (5, 6, 10, the main '
                   'rule, and the dark shape in rule 8) are not checked.', '']
     if ranked:
         first = ranked[0]
         lines += ['## Fix first', '', f'Problem 1 ({first["rule"]}). ' + (first['fix'] or first['what'])]
-        if shot.camera_fault:
+        if first['kind'] == 'camera':
             lines.append('Fix the camera before anything else, then check again: the places of the props on screen will all change.')
         lines += ['', '## Problems', '']
         for item in ranked:
@@ -1313,29 +1747,50 @@ def main():
     shot = Shot(args)
     report = Report()
     check_set_up(report, shot)
+    if shot.reference_note:
+        report.note('reference', shot.reference_note)
+    size = shot.check.get('size')
+    if size and list(size) != [shot.width, shot.height]:
+        report.add('set-up', False, f'The check file is for a {size[0]} x {size[1]} frame, but the measured frame is {shot.width} x {shot.height}.',
+                   fix='Use the check file made for this frame, or measure the scene at the check file\'s size.', kind='set-up', how_bad=8)
     if args.render_log:
-        full = open(args.render_log, errors='replace').read().count('Shadow buffer full')
-        report.add('set-up: the finished picture rendered cleanly', not full,
-                   f'The render\'s log says "Shadow buffer full" {full} times: the render ran out of shadow memory, which draws false hard shadows.'
-                   if full else 'The render\'s log has no "Shadow buffer full" faults.',
-                   fix='Render again with a larger shadow memory (scene.eevee.shadow_pool_size, e.g. \'2048\'), and judge the light rules on that picture.',
-                   kind='set-up', how_bad=5)
+        log = open(args.render_log, errors='replace').read()
+        faults = {words: log.count(words) for words in RENDER_FAULTS if words in log}
+        report.add('set-up: the finished picture rendered cleanly', not faults,
+                   'The render\'s log says ' + '; '.join(f'"{w}" {n} time{"s" if n != 1 else ""} ({RENDER_FAULTS[w]})' for w, n in faults.items()) + '.'
+                   if faults else 'The render\'s log shows no shadow-memory faults.',
+                   fix='Render again so the log is clean (set_dressing.render keeps the shadow memory at \'1024\' and lowers the shadows\' '
+                       'resolution for wide pictures), and judge the light rules on that picture.', kind='set-up', how_bad=5)
     check_camera(report, shot)
     check_camera_match(report, shot)
     check_reference_lines(report, shot)
+    check_camera_distance(report, shot)
+    one_camera_fix(report, shot)
     shot.camera_fault = any(i['kind'] == 'camera' and i['passed'] is False for i in report.items)
     check_resting(report, shot)
     check_missing(report, shot)
     check_lines(report, shot)
     touching = check_pairs(report, shot)
+    check_story_in_3d(report, shot)
     story_union = check_story_props(report, shot, touching)
+    for item in report.problems():   # a prop standing apart: its rule 3 move fixes its near-touches too; don't undo it
+        loner = next((g for g in (item.get('pair') or ()) if g in shot.apart), None)
+        if loner and item['rule'].startswith('rule 4'):
+            item['fix'] = f'The move in <<apart>> (bringing {loner} into the group) fixes this too, if it ends in a clear overlap; check again after it.'
+    check_words_hidden(report, shot)
     check_cut_by_edge(report, shot)
     check_right_edge(report, shot)
     blurred = cv2.GaussianBlur(shot.grey, (0, 0), shot.width * 0.01) if shot.grey is not None else None
     check_titles(report, shot, blurred)
     check_work_props(report, shot)
     spots = None
-    if shot.grey is not None:
+    off = picture_mismatch(shot) if shot.picture is not None else []
+    if off:
+        report.add('set-up: the finished picture matches the scene', False,
+                   'The finished picture does not match the scene as measured: ' + ', '.join(off) + ' stand somewhere else in it. '
+                   'It was probably made before the scene changed, so the light rules were not judged.',
+                   fix='Render a new finished picture of the scene as it is now, and check again.', kind='set-up', how_bad=6)
+    elif shot.grey is not None:
         check_dark_entry(report, shot)
         spots = check_light(report, shot, story_union, blurred)
     check_reference_places(report, shot)

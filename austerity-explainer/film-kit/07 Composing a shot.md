@@ -169,22 +169,35 @@ stands on. `paper-film/tools/check_shot.py` reads those and checks every rule it
 What it knows that is easy to get wrong by eye:
 
 - The camera comes first. A wrong camera moves every prop on screen, so the report says to fix the camera
-  before moving any prop.
+  before moving any prop. If most props look bigger or smaller than in the reference by the same amount,
+  it says the camera stands too near or too far, rather than telling you to move every prop.
 - A turn moves where the lines meet and every prop together; sliding the camera moves near props more than
   far ones and leaves where the lines meet where it is. So rule 1's gap is closed by sliding the camera or
   moving the subject, and rule 12's crowded right edge is best cleared by sliding the camera sideways.
 - A prop standing on the ground can't be raised on screen: it rises on screen as it moves further away.
   The checker turns "higher" or "lower" into "further from" or "nearer to the camera", and says when that
   spot is already taken by another prop.
-- A render that runs out of shadow memory ("Shadow buffer full" in its log) draws false hard shadows.
-  Judge the light rules only on a clean render.
+- What rests on what: a prop floating, sunk into the pavement, landed on a roof edge, or left in the air
+  when its chair moved, with the move and the lift back onto the seat in metres.
+- The story props together in the street, not only on screen: a drum moved behind the board can still look
+  close on screen.
+- Edges that run along each other for a long stretch (a post standing exactly at the board's edge), even
+  when a hidden part overlaps deeply somewhere else; and words of the notice hidden by a prop in front.
+- A render that runs out of shadow memory ("Shadow buffer full" in its log) draws false hard shadows, and
+  one that can't set up its shadow memory ("Could not allocate shadow atlas") draws none. A finished
+  picture made before the scene changed doesn't match it. In both cases the light rules aren't judged.
 
-It was tested on the notice corner with seven faults planted on purpose (`paper-film/blender/tests/
-break_scene.py` moves props by name): a camera too high, a camera tilted, a pail lifted into the air, a
-pail pushed out of the frame, a chair pushed away from its lantern, a lantern dropped on the pavement and
-a drum moved so its edge just meets the chair's. Each time the report's first fix named the planted fault.
-It does not check rule 7 (columns), most of rule 9, rule 11 (check the film's first, middle and last
-frames), or whether props poke into each other in 3D.
+Every report says which version of the tool made it; a report from another version may give other numbers.
+
+It was tested on the notice corner with faults planted on purpose (`paper-film/blender/tests/
+break_scene.py` moves props by name): a camera too high, too wide or tilted; a pail lifted into the air,
+pushed out of the frame, or sunk into the pavement; a chair pushed away from its lantern; a lantern dropped
+on the pavement; a drum moved behind the board or so its edge just meets the chair's; a barrel in the
+bottom-left corner; a lamp post along the board's edge or across the notice. Each time the report's first
+fix named the planted fault. Five independent helpers then followed its advice, planted new faults, read
+the code and read the reports as a non-programmer would; their findings are fixed (log 31). It does not
+check rule 7 (columns), most of rule 9, rule 11 (check the film's first, middle and last frames), or
+whether props poke into each other in 3D beyond their outline boxes.
 
 ## What a picture-making program can and can't do for you
 
