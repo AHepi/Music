@@ -192,3 +192,14 @@ Seven critics and a skeptic found these; each cost a re-film. Check for them you
   shadows; keep signs' own lettering with `ownSurface`; put the painted sky on a far card with
   `paintedSkyOnly`; draw flames live rather than painting them. Check the `weights` view at the end of
   each move and the moving frames, not only stills.
+
+## 10. Composing a shot (from the austerity project's log 30)
+
+Before placing props or the camera, read the kit's `07 Composing a shot` (in `kit/docs/` as
+`paper-look - 07 Composing a shot.md`). The main rule: where the street's lines meet, the biggest
+bright shape, the biggest near props and the warm light must all fall on the subject. Turn the camera
+to aim the lines, then move it only by sliding; stand it where a person would stand; group the story
+props so they touch; keep work props small and far. Check a test frame with
+`kit/paper-film/tools/measure_composition.py`. An image model given the empty set and the prop pictures,
+free to choose its own camera, makes a useful layout sketch; never use its lettering.
+

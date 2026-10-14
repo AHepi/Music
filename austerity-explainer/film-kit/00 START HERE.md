@@ -46,7 +46,7 @@ with every painting, paper piece and model. First made on 12 October 2026 as thr
    66.1 s is the tank landing on page 3; 99.6 s is the cover picture (page 5).
 5. Read, in order: `01 How to make a film with this kit.md`, `02 The look - style rules.md`,
    `03 How a page file works.md`, `04 Painting prompts.md`, `05 Lessons and traps.md`,
-   `06 House rules for the project.md`.
+   `06 House rules for the project.md`, `07 Composing a shot.md`.
 
 ## What is where
 

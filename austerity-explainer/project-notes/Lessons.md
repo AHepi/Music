@@ -375,6 +375,31 @@ Only failures in doing the work belong here. Newest at the bottom.
     true painting the next; asking for the reference's thick strokes and ink outlines, "nothing should
     look like a 3D render", got the painted one. Look before using, and re-ask if it isn't painted.
 
+## 2026-10-14 (the arranging test and why the best picture works, log 30)
+
+98. **A shot looks arranged when its strong signals agree.** Where the street's lines meet, the biggest
+    bright shape, the biggest near props, the warm light and the story's cause and effect should all point
+    at the subject. Even weight left and right is not enough: clip 29 was as even as the picture the user
+    liked and still looked scattered. Full rules: `film-kit/07 Composing a shot.md`.
+99. **Turn the camera to aim the street; slide it to move.** Where the lines meet depends only on which
+    way the camera faces. Set it with the turn, then never turn during a move: clip 29's turn slid the
+    meeting point to a doorway at the edge and the pithead out of frame.
+100. **Stand the camera where a person would stand.** A camera in the middle of an empty road belongs to
+    no one. On the pavement at eye height, looking down into the drum and onto the seat, the view is a
+    villager's.
+101. **Props that touch read as a story; props apart read as a list.** Overlap the story props into one
+    group; keep work props small and far; never put a big dark prop where the eye enters the frame
+    (bottom left).
+102. **Image models arrange well when they choose the camera.** Nano Banana Pro kept to our camera spread
+    the props like a catalogue; given a free camera it made the best picture. Use it as a layout sketch.
+103. **Never use a model's lettering.** Nano Banana, Flux and Seedance all garbled the notice (1756, 1828,
+    "PITS WILL DE CLOSED"); our own 3D notice is the only correct one. Models also redraw the street and
+    props a little differently each time, so their pictures can't be cut together with ours.
+104. **Measure a picture before explaining it.** `measure_composition.py` (lines, bright parts, warmth,
+    weight) turned "I'm not sure why it's good" into reasons that could be checked, and the skeptic threw
+    out the reasons that were true of almost any picture (thirds lines, a triangle of lights). Its
+    line-finder needs crisp lines: on soft frames (under about 15 lines found) trace them by hand.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -398,3 +423,4 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Draw page turns in one run of stills: some faults only show when frames follow each other (lesson 51).
 - Run the independent critique before filming (lesson 53).
 - In a projected set, check the weights view at the end of every move: blue at a frame edge means the camera left the painting (lesson 90).
+- In any shot, check that where the lines meet, the brightest parts and the biggest near props agree on the subject (lesson 98).

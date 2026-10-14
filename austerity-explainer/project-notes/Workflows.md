@@ -191,6 +191,13 @@ three zip files.
 7. Have independent helpers critique the stills, film with `film-chapter-parallel.sh`, then check the
    film in motion.
 
+Before step 2 (from log 30): compose the shot with `film-kit/07 Composing a shot.md`. Optionally sketch
+the layout first by giving Nano Banana Pro (on fal, 15 US cents) the empty street and the prop pictures and
+letting it choose the camera; rebuild its layout with our own props, never its lettering. Run
+`paper-film/tools/measure_composition.py` on a test render and check the main rule: where the lines meet,
+the brightest parts and the biggest near props all fall on the subject. Move the camera by sliding, never
+turning.
+
 ## How to edit the documentation
 
 1. Every change to the project updates `Status.md`, and the project story log gets a new numbered
