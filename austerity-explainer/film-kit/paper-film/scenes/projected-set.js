@@ -84,6 +84,10 @@ passQuad.frustumCulled = false;
 passScene.add(passQuad);
 const passVertex = 'varying vec2 vUv;\nvoid main() { vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }';
 function runPass(material, target) {
+  // a full-frame pass ignores depth: a target that also served as the distance picture still holds
+  // the set's depths, which would hide most of the pass
+  material.depthTest = false;
+  material.depthWrite = false;
   passQuad.material = material;
   renderer.setRenderTarget(target);
   renderer.render(passScene, passCamera);
@@ -172,6 +176,137 @@ export function averageColourOf(texture) {
   return new THREE.Color(sum[0] / count, sum[1] / count, sum[2] / count);
 }
 
+// The painting's sky alone, for a far sky card: every pixel where the projector saw something nearer
+// than `farther` (houses, a pithead) is filled from the painted sky round it, so when the camera
+// moves, the sky uncovered behind a tower is painted sky, not a flat colour or a ghost of the tower.
+// `projection` is the result of projectPaintingOnto for the set (its distance map says what is sky);
+// `grow` (painting pixels) also replaces a thin band round each outline, where the painter's brush
+// crosses it. Returns a texture (sRGB) the size of the painting.
+export function paintedSkyOnly(projection, painting, { farther = 1000, grow = 4 } = {}) {
+  const target = projection.visibility, mapWidth = target.width, mapHeight = target.height;
+  const float = target.texture.type === THREE.FloatType;
+  const raw = float ? new Float32Array(mapWidth * mapHeight * 4) : new Uint16Array(mapWidth * mapHeight * 4);
+  renderer.readRenderTargetPixels(target, 0, 0, mapWidth, mapHeight, raw);
+  const distanceAt = float ? (i) => raw[i * 4] : (i) => THREE.DataUtils.fromHalfFloat(raw[i * 4]);
+  const image = painting.image, width = image.width, height = image.height;
+  const canvas = document.createElement('canvas');
+  canvas.width = width; canvas.height = height;
+  const context = canvas.getContext('2d');
+  context.drawImage(image, 0, 0);
+  const pixels = context.getImageData(0, 0, width, height);
+  const data = pixels.data;
+  // sky = farther than `farther` in the distance map (its rows run bottom up)
+  const solid = new Uint8Array(width * height);
+  for (let y = 0; y < height; y++) {
+    const mapRow = mapHeight - 1 - Math.min(mapHeight - 1, Math.floor((y + 0.5) / height * mapHeight));
+    for (let x = 0; x < width; x++) {
+      const mapColumn = Math.min(mapWidth - 1, Math.floor((x + 0.5) / width * mapWidth));
+      solid[y * width + x] = distanceAt(mapRow * mapWidth + mapColumn) < farther ? 1 : 0;
+    }
+  }
+  // grow the solid parts by `grow` pixels (a square reach, rows then columns)
+  const grown = new Uint8Array(solid);
+  if (grow > 0) {
+    const across = new Uint8Array(width * height);
+    for (let y = 0; y < height; y++) {
+      let last = -Infinity;
+      for (let x = 0; x < width; x++) { if (solid[y * width + x]) last = x; if (x - last <= grow) across[y * width + x] = 1; }
+      last = Infinity;
+      for (let x = width - 1; x >= 0; x--) { if (solid[y * width + x]) last = x; if (last - x <= grow) across[y * width + x] = 1; }
+    }
+    for (let x = 0; x < width; x++) {
+      let last = -Infinity;
+      for (let y = 0; y < height; y++) { if (across[y * width + x]) last = y; grown[y * width + x] = y - last <= grow ? 1 : 0; }
+      last = Infinity;
+      for (let y = height - 1; y >= 0; y--) { if (across[y * width + x]) last = y; if (last - y <= grow) grown[y * width + x] = 1; }
+    }
+  }
+  // fill the solid parts from the sky round them: average the sky down a pyramid of halvings, then
+  // bring it back up, each level filling its gaps from the smoother level below it
+  const levels = [];
+  let w = width, h = height;
+  let colour = new Float32Array(w * h * 3), weight = new Float32Array(w * h);
+  for (let i = 0; i < w * h; i++) {
+    if (grown[i]) continue;
+    weight[i] = 1;
+    for (let c = 0; c < 3; c++) colour[i * 3 + c] = data[i * 4 + c];
+  }
+  levels.push({ w, h, colour, weight });
+  while (w > 1 || h > 1) {
+    const nw = Math.max(1, Math.ceil(w / 2)), nh = Math.max(1, Math.ceil(h / 2));
+    const ncolour = new Float32Array(nw * nh * 3), nweight = new Float32Array(nw * nh);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = y * w + x, j = (y >> 1) * nw + (x >> 1);
+      nweight[j] += weight[i];
+      for (let c = 0; c < 3; c++) ncolour[j * 3 + c] += colour[i * 3 + c];
+    }
+    w = nw; h = nh; colour = ncolour; weight = nweight;
+    levels.push({ w, h, colour, weight });
+  }
+  // colours as averages (sum / weight); from the top down, gaps take the level below, read smoothly
+  const average = (level, i, c) => level.colour[i * 3 + c] / level.weight[i];
+  const filled = levels.map((level) => new Float32Array(level.w * level.h * 3));
+  const top = levels.length - 1;
+  for (let c = 0; c < 3; c++) filled[top][c] = levels[top].weight[0] > 0 ? average(levels[top], 0, c) : 128;
+  for (let k = top - 1; k >= 0; k--) {
+    const level = levels[k], below = levels[k + 1], belowFilled = filled[k + 1];
+    for (let y = 0; y < level.h; y++) for (let x = 0; x < level.w; x++) {
+      const i = y * level.w + x;
+      const share = Math.min(1, level.weight[i]);
+      // the level below at this point, between its four nearest pixels
+      const bx = Math.min(below.w - 1, Math.max(0, (x + 0.5) / 2 - 0.5)), by = Math.min(below.h - 1, Math.max(0, (y + 0.5) / 2 - 0.5));
+      const x0 = Math.floor(bx), y0 = Math.floor(by), x1 = Math.min(below.w - 1, x0 + 1), y1 = Math.min(below.h - 1, y0 + 1);
+      const fx = bx - x0, fy = by - y0;
+      for (let c = 0; c < 3; c++) {
+        const smooth = (belowFilled[(y0 * below.w + x0) * 3 + c] * (1 - fx) + belowFilled[(y0 * below.w + x1) * 3 + c] * fx) * (1 - fy)
+          + (belowFilled[(y1 * below.w + x0) * 3 + c] * (1 - fx) + belowFilled[(y1 * below.w + x1) * 3 + c] * fx) * fy;
+        filled[k][i * 3 + c] = share > 0 ? average(level, i, c) * share + smooth * (1 - share) : smooth;
+      }
+    }
+  }
+  for (let i = 0; i < width * height; i++) {
+    if (!grown[i]) continue;
+    for (let c = 0; c < 3; c++) data[i * 4 + c] = filled[0][i * 3 + c];
+  }
+  context.putImageData(pixels, 0, 0);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 4;
+  return texture;
+}
+
+// The zone round the near props, for the behind painting: 1 where a near prop stood in front of the
+// background (the set's distance is nearer than the background's alone) and close round it, falling
+// to 0 at `radius` texels. There the painting's own edges belong to the props (the painter's ink
+// outlines, smears), so the background takes the behind painting as soon as the camera moves.
+const zoneMaterial = new THREE.ShaderMaterial({
+  vertexShader: passVertex,
+  uniforms: { withProps: { value: null }, withoutProps: { value: null }, mask: { value: null }, useMask: { value: 0 },
+    texel: { value: new THREE.Vector2() }, radius: { value: 30 }, jump: { value: 0.03 } },
+  fragmentShader: `
+    varying vec2 vUv; uniform sampler2D withProps; uniform sampler2D withoutProps; uniform sampler2D mask; uniform float useMask;
+    uniform vec2 texel; uniform float radius; uniform float jump;
+    const int STEPS = 6;
+    // a near prop here? (from the two distance maps; or, for the second, wide step, from the first)
+    float propAt(vec2 at) {
+      if (useMask > 0.5) return step(0.01, texture2D(mask, at).r);
+      float near = texture2D(withProps, at).r, far = texture2D(withoutProps, at).r;
+      return step(jump * near, far - near);
+    }
+    void main() {
+      float zone = 0.0;
+      for (int y = -STEPS; y <= STEPS; y++) {
+        for (int x = -STEPS; x <= STEPS; x++) {
+          vec2 offset = vec2(float(x), float(y)) / float(STEPS);
+          float reach = length(offset);
+          if (reach > 1.0) continue;
+          zone = max(zone, propAt(vUv + offset * radius * texel) * clamp(2.0 * (1.0 - reach), 0.0, 1.0));
+        }
+      }
+      gl_FragColor = vec4(zone, 0.0, 0.0, 1.0);
+    }`,
+});
+
 // ------------------------------------------------------------------------------ the materials
 
 const VERTEX_DECLARATIONS = 'varying vec3 vProjectionWorld;\nvarying vec3 vProjectionNormal;';
@@ -206,16 +341,23 @@ const FRAGMENT_DECLARATIONS = `
   #ifdef PROJECTION_OWN
     uniform vec3 projectionOwnTint;
   #endif
-  // How much of the painting this point wears (0..1), and the painting's colour there.
-  float projectionWeight(out vec3 paintColour) {
+  #ifdef PROJECTION_FRONT
+    uniform vec2 projectionFrontStretch;
+  #endif
+  #ifdef PROJECTION_BEHIND
+    uniform sampler2D projectionBehindPainting;
+    uniform sampler2D projectionBehindVisibility;
+    uniform sampler2D projectionNearZone;
+    uniform float projectionQuickMove;
+  #endif
+  // How much of one painting this point wears (0..1), tested against that painting's distance map,
+  // and the painting's colour there.
+  float projectionSeenIn(sampler2D painting, sampler2D visibilityMap, out vec3 paintColour) {
     vec4 clip = projectorViewProjection * vec4(vProjectionWorld, 1.0);
     vec2 at = clip.xy / max(clip.w, 1e-4) * 0.5 + 0.5;
     // (both pictures are read before any early return, so the painting's mipmaps stay smooth)
-    paintColour = texture2D(projectionPainting, clamp(at, 0.0, 1.0)).rgb;
-    vec2 visibility = texture2D(projectionVisibility, clamp(at, 0.0, 1.0)).rg;
-    #ifdef PROJECTION_OWN
-      return 0.0;   // keeps its own picture everywhere (sharp lettering), matched to the painting by its own tint
-    #endif
+    paintColour = texture2D(painting, clamp(at, 0.0, 1.0)).rgb;
+    vec2 visibility = texture2D(visibilityMap, clamp(at, 0.0, 1.0)).rg;
     if (clip.w <= 0.0) return 0.0;
     // inside the projector's frame (hard edge: past it the painting has nothing, only streaks)
     if (at.x < 0.0 || at.x > 1.0 || at.y < 0.0 || at.y > 1.0) return 0.0;
@@ -234,7 +376,12 @@ const FRAGMENT_DECLARATIONS = `
     float moved = smoothstep(0.0, projectionMoveAngle, 1.0 - dot(toCamera, toProjector / distanceToProjector));
     // stretch: seen nearly edge-on by the projector, now seen more face-on
     float stretch = max(0.0, dot(surfaceNormal, toCamera)) / max(facingProjector, 1e-4);
-    seen *= 1.0 - smoothstep(projectionStretch.x, projectionStretch.y, stretch);
+    #ifdef PROJECTION_FRONT
+      vec2 stretchLimits = projectionFrontStretch;   // near props: their stretched rims carry the painter's misplaced outlines
+    #else
+      vec2 stretchLimits = projectionStretch;
+    #endif
+    seen *= 1.0 - smoothstep(stretchLimits.x, stretchLimits.y, stretch);
     seen *= smoothstep(0.0, 0.004, facingProjector);
     // the far side of a near thing's outline
     seen *= 1.0 - visibility.g * moved;
@@ -242,11 +389,35 @@ const FRAGMENT_DECLARATIONS = `
     vec2 fromEdge = min(at, 1.0 - at);
     seen *= mix(1.0, smoothstep(0.0, projectionFrameEdge, min(fromEdge.x, fromEdge.y)), moved);
     return seen * projectionStrength;
+  }
+  // How much painting this point wears (0..1) and its colour: the painting where the projector saw
+  // the point; else, with a "behind" painting, that one where only the near props hid it.
+  float projectionWeight(out vec3 paintColour, out float behindShare) {
+    float amount = projectionSeenIn(projectionPainting, projectionVisibility, paintColour);
+    behindShare = 0.0;
+    #ifdef PROJECTION_BEHIND
+      // round the near props, the painting gives way to the behind painting as soon as the camera moves
+      vec4 zoneClip = projectorViewProjection * vec4(vProjectionWorld, 1.0);
+      float zone = texture2D(projectionNearZone, clamp(zoneClip.xy / max(zoneClip.w, 1e-4) * 0.5 + 0.5, 0.0, 1.0)).r;
+      float quick = smoothstep(0.0, projectionQuickMove, 1.0 - dot(normalize(cameraPosition - vProjectionWorld), normalize(projectorPosition - vProjectionWorld)));
+      amount *= 1.0 - zone * quick;
+      vec3 behindColour;
+      float behind = projectionSeenIn(projectionBehindPainting, projectionBehindVisibility, behindColour);
+      behindShare = behind * (1.0 - amount);
+      paintColour = (paintColour * amount + behindColour * behindShare) / max(amount + behindShare, 1e-4);
+      amount += behindShare;
+    #endif
+    #ifdef PROJECTION_OWN
+      behindShare = 0.0;
+      return 0.0;   // keeps its own picture everywhere (sharp lettering), matched to the painting by its own tint
+    #endif
+    return amount;
   }`;
 const FRAGMENT_MAP = `
   #include <map_fragment>
   vec3 projectionPaint;
-  float projectionAmount = projectionWeight(projectionPaint);
+  float projectionBehindShare;
+  float projectionAmount = projectionWeight(projectionPaint, projectionBehindShare);
   #ifdef PROJECTION_OWN
     diffuseColor.rgb *= projectionOwnTint;        // its own surface, matched to the painting where it stands
   #else
@@ -278,7 +449,8 @@ const FRAGMENT_LIGHTS_END = `
 const FRAGMENT_END = `
   #include <fog_fragment>
   gl_FragColor.rgb = mix(gl_FragColor.rgb, projectionPaint, projectionAmount);   // at its painted brightness
-  if (projectionShowWeights > 0.5) gl_FragColor.rgb = mix(vec3(0.05, 0.12, 0.5), vec3(1.0, 0.55, 0.15), projectionAmount) * (0.35 + 0.65 * dot(gl_FragColor.rgb, vec3(0.3, 0.59, 0.11)) / max(0.05, dot(projectionPaint, vec3(0.3, 0.59, 0.11)) + 0.05));`;
+  // weights view: orange = the painting, green = the behind painting, blue = its own surface
+  if (projectionShowWeights > 0.5) gl_FragColor.rgb = (vec3(0.05, 0.12, 0.5) * (1.0 - projectionAmount) + vec3(1.0, 0.55, 0.15) * (projectionAmount - projectionBehindShare) + vec3(0.2, 0.85, 0.3) * projectionBehindShare) * (0.35 + 0.65 * dot(gl_FragColor.rgb, vec3(0.3, 0.59, 0.11)) / max(0.05, dot(projectionPaint, vec3(0.3, 0.59, 0.11)) + 0.05));`;
 
 // A matte (Lambert) copy of a material with the same pictures, bumps, baked shading and glow.
 function matteCopy(m) {
@@ -294,7 +466,7 @@ function matteCopy(m) {
 
 // Gives one material the projection (in place). Lambert, Phong, Standard and Physical materials keep
 // their kind; anything else (Basic, Toon...) becomes a matte copy first. Returns the material to use.
-function projectedVersion(material, uniforms, matte, own = null) {
+function projectedVersion(material, uniforms, matte, own = null, behind = false, front = false) {
   // unlit (Basic) materials stay unlit: a painted sky card, a glowing sign
   const keepKind = material.isMeshBasicMaterial || material.isMeshLambertMaterial || material.isMeshPhongMaterial || material.isMeshStandardMaterial;
   const projected = keepKind && !(matte && material.isMeshStandardMaterial) ? material.clone() : matteCopy(material);
@@ -303,6 +475,8 @@ function projectedVersion(material, uniforms, matte, own = null) {
     projected.defines = { ...(projected.defines ?? {}), PROJECTION_OWN: '' };
     uniforms = { ...uniforms, projectionOwnTint: own };
   }
+  if (behind) projected.defines = { ...(projected.defines ?? {}), PROJECTION_BEHIND: '' };
+  if (front) projected.defines = { ...(projected.defines ?? {}), PROJECTION_FRONT: '' };
   projected.name = material.name;
   const previousCompile = projected.onBeforeCompile;
   projected.onBeforeCompile = (shader, three) => {
@@ -319,7 +493,7 @@ function projectedVersion(material, uniforms, matte, own = null) {
       .replace('#include <aomap_fragment>', FRAGMENT_LIGHTS_END)
       .replace('#include <fog_fragment>', FRAGMENT_END);
   };
-  projected.customProgramCacheKey = () => `projected-set-3|${own ? 'own' : ''}|${material.customProgramCacheKey?.() ?? ''}`;
+  projected.customProgramCacheKey = () => `projected-set-5|${own ? 'own' : ''}|${behind ? 'behind' : ''}|${front ? 'front' : ''}|${material.customProgramCacheKey?.() ?? ''}`;
   projected.needsUpdate = true;
   return projected;
 }
@@ -352,11 +526,23 @@ function projectedVersion(material, uniforms, matte, own = null) {
 //                  picture) sets the tint and only `darken` sets the brightness.
 //   matte          turn realistic (Standard) materials into matte ones: about half the drawing time
 //                  in the software renderer, without soft reflections; true
+//   behind         { painting, hide }: a second painting of the same view with the near props in `hide`
+//                  (objects of the set) painted out. Surfaces those props hid from the projector, uncovered
+//                  as the camera moves (the road behind a cart), wear it instead of their own tinted
+//                  surface. A second distance map is drawn without the props. The props' own materials
+//                  never use it. Round the props (out to `reach`, a share of the frame height; 0.05) the
+//                  background gives way to it as soon as the camera moves (`quickMove`, 1 - cos of the
+//                  angle; 0.00003, about half a degree): the painter's outlines round a prop are on the
+//                  background, and would be left behind as ghosts. The props themselves fade to their
+//                  own surfaces sooner where the move stretches the painting on them (`frontStretch`,
+//                  [1.3, 1.9]): their rims, seen edge-on in the plate, carry the painter's misplaced
+//                  outline and a sliver of road.
 //   ownSurface     names of materials that never wear the painting and keep their own pictures, for
 //                  lettering the painter blurred or garbled (a notice, a sign). They still hide what
 //                  is behind them in the distance map. With calibrate, each is matched in brightness
 //                  and colour to the painting where it stands (the middle of its outline as the
-//                  projector sees it); without, it gets the hidden surfaces' tint; []
+//                  projector sees it); without, it gets the hidden surfaces' tint. An entry can be
+//                  [name, sameTintAs] to give it another own material's tint (a board round a notice); []
 // Unlit (Basic) meshes, such as a sky card, are left out of the calibration drawings, so a big card
 // does not sway the match; its colour is the page's to set (divide by fallbackTint and
 // uniforms.projectionUnlitLift to see a colour exactly where the painting does not reach).
@@ -366,8 +552,10 @@ function projectedVersion(material, uniforms, matte, own = null) {
 export function projectPaintingOnto(kit, setGroup, painting, projector, options = {}) {
   const {
     mapSize = 2048, bias = 0.004, jump = 0.03, edgeWidth = 0.006, stretch = [2.5, 5], moveAngle = 0.01, frameEdge = 0.03,
-    darken = 0.75, darkenUnlit = 1, tint = 0.6, fill = 0.35, calibrate = true, matte = true, ownSurface = [],
+    darken = 0.75, darkenUnlit = 1, tint = 0.6, fill = 0.35, calibrate = true, matte = true, ownSurface = [], behind = null,
   } = options;
+  const ownNames = ownSurface.map((entry) => (Array.isArray(entry) ? entry[0] : entry));
+  const sameTintAs = new Map(ownSurface.filter(Array.isArray).map(([name, other]) => [name, other]));
   const averageColour = options.averageColour ?? (calibrate ? null : averageColourOf(painting));
   const camera = projector.isPerspectiveCamera ? projector : projectorCamera(projector);
   camera.updateMatrixWorld(true);
@@ -378,6 +566,9 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
   const distances = distanceTarget(width, height, true);
   const jumps = distanceTarget(width, height, false);
   const visibility = distanceTarget(width, height, false);
+  const behindVisibility = behind ? distanceTarget(width, height, false) : null;
+  const nearZone = behind ? distanceTarget(width, height, false) : null;
+  if (behind) behind.painting.wrapS = behind.painting.wrapT = THREE.ClampToEdgeWrapping;
 
   const fallbackTint = new THREE.Vector3(darken, darken, darken);
   if (averageColour) {
@@ -400,14 +591,44 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     projectionFrameEdge: { value: frameEdge },
     projectionFill: { value: fill },
     projectionUnlitLift: { value: darkenUnlit / Math.max(1e-3, darken) },
+    ...(behind ? { projectionBehindPainting: { value: behind.painting }, projectionBehindVisibility: { value: behindVisibility.texture },
+      projectionNearZone: { value: nearZone.texture }, projectionQuickMove: { value: behind.quickMove ?? 0.00003 },
+      projectionFrontStretch: { value: new THREE.Vector2(...(behind.frontStretch ?? [1.3, 1.9])) } } : {}),
   };
+  // the meshes of the near props the behind painting leaves out
+  const hiddenInBehind = new Set();
+  for (const object of behind?.hide ?? []) object.traverse((o) => { if (o.isMesh) hiddenInBehind.add(o); });
 
-  // the distance map: the set alone, from the projector, then its outlines and their bands
+  // the distance map: the set alone, from the projector, then its outlines and their bands (and the
+  // same without the near props, for the behind painting)
   const refresh = () => {
     const started = performance.now();
     camera.updateMatrixWorld(true);
     uniforms.projectorViewProjection.value.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
     uniforms.projectorPosition.value.setFromMatrixPosition(camera.matrixWorld);
+    drawDistanceMap(visibility, []);
+    if (behind) {
+      drawDistanceMap(behindVisibility, [...hiddenInBehind]);
+      const previousTarget = renderer.getRenderTarget();
+      zoneMaterial.uniforms.withProps.value = visibility.texture;
+      zoneMaterial.uniforms.withoutProps.value = behindVisibility.texture;
+      zoneMaterial.uniforms.texel.value.set(1 / width, 1 / height);
+      zoneMaterial.uniforms.jump.value = jump;
+      // in two steps, like the outline band: a narrow zone first (thin props such as a cart's
+      // handles are only a few texels wide, and the wide pass's 13 x 13 points would miss them),
+      // then the wide one round it (the distance picture is free by now, so it holds the narrow zone)
+      zoneMaterial.uniforms.useMask.value = 0;
+      zoneMaterial.uniforms.radius.value = 8;
+      runPass(zoneMaterial, distances);
+      zoneMaterial.uniforms.useMask.value = 1;
+      zoneMaterial.uniforms.mask.value = distances.texture;
+      zoneMaterial.uniforms.radius.value = Math.max(1, (behind.reach ?? 0.05) * height);
+      runPass(zoneMaterial, nearZone);
+      renderer.setRenderTarget(previousTarget);
+    }
+    return performance.now() - started;
+  };
+  const drawDistanceMap = (result, leftOut) => {
     const parent = setGroup.parent;
     setGroup.updateMatrixWorld(true);
     const holder = new THREE.Group();   // keeps the set where its parent puts it while drawn alone
@@ -417,7 +638,8 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     alone.overrideMaterial = distanceMaterial;
     alone.add(holder);
     holder.add(setGroup);
-    const hidden = [];
+    const hidden = leftOut.map((o) => [o, o.visible]);
+    for (const o of leftOut) o.visible = false;
     setGroup.traverse((o) => { if (o.isPoints || o.isLine || o.isSprite) { hidden.push([o, o.visible]); o.visible = false; } });
     const previousTarget = renderer.getRenderTarget(), previousClear = renderer.getClearColor(new THREE.Color()), previousAlpha = renderer.getClearAlpha();
     const previousShadows = renderer.shadowMap.autoUpdate;
@@ -438,33 +660,46 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     jumpMaterial.uniforms.texel.value.copy(texel);
     jumpMaterial.uniforms.jump.value = jump;
     runPass(jumpMaterial, jumps);
-    bandMaterial.uniforms.jumpMap.value = jumps.texture;
     bandMaterial.uniforms.texel.value.copy(texel);
-    bandMaterial.uniforms.radius.value = Math.max(1, edgeWidth * height);
     bandMaterial.uniforms.sameSurface.value = jump;
-    runPass(bandMaterial, visibility);
+    const radius = Math.max(1, edgeWidth * height);
+    if (radius > 8) {
+      // a wide band in two steps: the band pass looks at 13 x 13 points round each texel, which at a
+      // wide reach fall between the one-texel outline marks; a narrow band first gives the wide pass
+      // thick marks to find (the distance picture is free by now, so it holds the narrow band)
+      bandMaterial.uniforms.jumpMap.value = jumps.texture;
+      bandMaterial.uniforms.radius.value = 6;
+      runPass(bandMaterial, distances);
+      bandMaterial.uniforms.jumpMap.value = distances.texture;
+    } else {
+      bandMaterial.uniforms.jumpMap.value = jumps.texture;
+    }
+    bandMaterial.uniforms.radius.value = radius;
+    runPass(bandMaterial, result);
     renderer.setRenderTarget(previousTarget);
-    return performance.now() - started;
   };
 
+  // materials worn by the near props never use the behind painting (it has the props painted out)
+  const frontMaterials = new Set();
+  for (const mesh of hiddenInBehind) for (const m of [mesh.material].flat()) frontMaterials.add(m);
   const materials = new Map();   // one projected material for each original material
   const ownTints = new Map();    // material name -> { value: tint } for the ownSurface materials
   const ownMeshes = new Map();   // material name -> the meshes wearing it (for their outline)
   setGroup.traverse((o) => {
     if (!o.isMesh) return;
     const swap = (m) => {
-      const own = ownSurface.includes(m.name);
+      const own = ownNames.includes(m.name);
       if (own) {
         if (!ownTints.has(m.name)) ownTints.set(m.name, { value: fallbackTint.clone() });
         if (!ownMeshes.has(m.name)) ownMeshes.set(m.name, new Set());
         ownMeshes.get(m.name).add(o);
       }
-      if (!materials.has(m)) materials.set(m, projectedVersion(m, uniforms, matte, own ? ownTints.get(m.name) : null));
+      if (!materials.has(m)) materials.set(m, projectedVersion(m, uniforms, matte, own ? ownTints.get(m.name) : null, behind && !frontMaterials.has(m), frontMaterials.has(m)));
       return materials.get(m);
     };
     o.material = Array.isArray(o.material) ? o.material.map(swap) : swap(o.material);
   });
-  const missing = ownSurface.filter((name) => !ownTints.has(name));
+  const missing = ownNames.filter((name) => !ownTints.has(name));
   if (missing.length) console.warn(`projected-set: ownSurface names not found on the set: ${missing.join(', ')}`);
   const drawMilliseconds = refresh();
 
@@ -505,6 +740,7 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     // corners, projected; the middle 60%, so the box's edges and what shows round it count little)
     const ownBoxes = new Map();
     for (const [name, meshes] of ownMeshes) {
+      if (sameTintAs.has(name)) continue;
       const box = new THREE.Box3();
       for (const mesh of meshes) box.expandByObject(mesh);
       const corner = new THREE.Vector3(), lo = [Infinity, Infinity], hi = [-Infinity, -Infinity];
@@ -565,9 +801,11 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     fallbackTint.set(...ratio.map((r) => Math.min(8, Math.max(0.05, darken * (tint * r + (1 - tint) * even)))));
     // own surfaces the projector could not see (outside its frame) take the hidden surfaces' tint
     for (const [name, tintUniform] of ownTints) if (!ownBoxes.has(name)) tintUniform.value.copy(fallbackTint);
+    for (const [name, other] of sameTintAs) if (ownTints.has(name) && ownTints.has(other)) ownTints.get(name).value.copy(ownTints.get(other).value);
     calibration = ` (painting average ${paint.map((v) => v.toFixed(3)).join(', ')}, own surfaces ${own.map((v) => v.toFixed(3)).join(', ')})`;
   }
-  const ownReport = [...ownTints].map(([name, t]) => ` ${name} ${t.value.toArray().map((v) => v.toFixed(2)).join(', ')}`).join(';');
+  const ownReport = [...ownTints].map(([name, t]) => ` ${name} ${t.value.toArray().map((v) => v.toFixed(2)).join(', ')}`).join(';')
+    + (behind ? `; behind painting: ${hiddenInBehind.size} prop meshes left out, their ${frontMaterials.size} materials: ${[...frontMaterials].map((m) => m.name).join(', ')}` : '');
   console.warn(`projected-set: distance map ${width} x ${height} (${distances.texture.type === THREE.FloatType ? '32' : '16'}-bit) drawn in ${drawMilliseconds.toFixed(0)} ms; ${materials.size} materials; hidden surfaces tinted ${fallbackTint.toArray().map((v) => v.toFixed(2)).join(', ')}${calibration}${ownReport ? `; own surfaces tinted${ownReport}` : ''}`);
 
   return {
@@ -575,6 +813,7 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     ownTints: new Map([...ownTints].map(([name, t]) => [name, t.value])),
     setStrength: (k) => { uniforms.projectionStrength.value = k; },
     showWeights: (on) => { uniforms.projectionShowWeights.value = on ? 1 : 0; },
-    dispose: () => { distances.dispose(); jumps.dispose(); visibility.dispose(); for (const m of materials.values()) m.dispose(); },
+    behindVisibility,
+    dispose: () => { distances.dispose(); jumps.dispose(); visibility.dispose(); behindVisibility?.dispose(); nearZone?.dispose(); for (const m of materials.values()) m.dispose(); },
   };
 }

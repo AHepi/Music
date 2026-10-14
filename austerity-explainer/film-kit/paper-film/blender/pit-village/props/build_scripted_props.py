@@ -670,7 +670,7 @@ def colliery_name_board():
 
 
 NOTICE_WIDTH, NOTICE_HEIGHT = 0.50, 0.70
-TACK_PIXELS = ((150, 150), (1222, 260), (1312, 1898), (330, 1878))
+TACK_PIXELS = ((100, 100), (1420, 300), (1312, 1898), (330, 1878))   # the same places as the rust runs in paint_prop_pictures.py
 
 
 def notice_sheet(centre, material):
@@ -705,7 +705,7 @@ def notice_material():
     return kit.picture_material('notice-paper', 'notice.png', see_through=True, roughness=0.9)
 
 
-NOTICE_TEXT = 'ABBOTSCLOUGH COAL & IRON COMPANY, LTD. / NOTICE / TO ALL WORKMEN / The present Contracts of Service will terminate on FRIDAY, 30th APRIL, 1926, and these PITS WILL BE CLOSED from SATURDAY, 1st MAY, 1926, until the Workmen are prepared to accept the NEW TERMS now offered by the Owners ... By Order, T. H. WARBRECK, Agent. (all names invented)'
+NOTICE_TEXT = 'ABBOTSCLOUGH COAL & IRON COMPANY, LTD. / NOTICE / TO ALL WORKMEN / Owing to the cessation of the Government Subsidy, the present Contracts of Service will terminate on FRIDAY, 30th APRIL, 1926, and these PITS WILL BE CLOSED from SATURDAY, 1st MAY, 1926, until the Workmen are prepared to accept the NEW TERMS now offered by the Owners ... By Order, T. H. WARBRECK, Agent. (all names invented)'
 
 
 def notice_paper():
@@ -722,6 +722,8 @@ def notice_on_board():
     wood = grey_wood()
     width, height, centre_z = 0.72, 0.98, 0.49
     parts = []
+    # a black backing behind the boards, so no light shows through the gaps between them
+    parts.append(kit.box('backing', (width, 0.008, height), (0, 0.016, centre_z), painted))
     # vertical tongue-and-groove boards
     for k in range(6):
         x = -width / 2 + width / 12 + k * width / 6

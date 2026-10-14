@@ -335,6 +335,45 @@ Only failures in doing the work belong here. Newest at the bottom.
     see-through once and lower the threshold while they fade (setFading in house-sample/page-1.js). The
     shared kit's cut-outs have the same fault, so chapter 2's fades snap too.
 
+## 2026-10-14 (plan 3, the pit village test, log 29)
+
+88. **A ray cast straight down hits whatever is above the ground first.** The notice board's posts were
+    placed by casting down from the sky: one landed on top of the board itself, and the other at the
+    street's start because the board's new place wasn't worked out yet. Start the ray under the thing,
+    and update Blender's scene before reading where an object is (`assemble_lockout.py`).
+89. **A glowing shape lit by its own lamp renders white.** The brazier's flames sat under the fire's
+    lamp and came out as pale paper cones. Give glowing things a black base colour; better still, leave
+    flames out of the plate (painted, they read as cut-outs) and draw them live in the film.
+90. **The painted area is only as wide as the plate.** With a 44-degree plate and the film's 40-degree
+    lens, the camera can turn only about 1 degree each side before part of the frame has no painting
+    (a seam of plain surfaces). Push in with the lens (a lens change uncovers nothing new) and keep
+    the camera's own movement short; check with the weights view (blue at an edge = no painting).
+91. **Moving the camera uncovers what the near props hid.** The road behind the coal sacks and the
+    cart showed as pale, jagged copies of their outlines. Fix: a second painting of the same view with
+    the near props painted out (Flux), worn by the surfaces those props hid (`behind` in
+    projected-set.js), and a warm light at the fire for anything still uncovered.
+92. **The painter garbles small lettering.** Flux kept NOTICE and NEW TERMS but turned the dates into
+    nonsense. Keep a sign's own surface (`ownSurface`), matched in colour to the painting where it
+    stands; a whole board can share the paper's colour match.
+93. **A painted sky needs somewhere to land, and something behind the tower.** With no sky surface the
+    painted clouds were lost; with a far card, the strip of card behind the pithead (hidden in the
+    plate) showed as a pale double edge once the camera moved. Fix: the card wears the painted sky
+    alone, with the tower and buildings filled in from the sky round them (`paintedSkyOnly`).
+94. **Ask the critics for history as well as looks.** They caught snow-like blotches on the road on
+    1 May, coal heaps in a lockout when coal was scarce, sacks that read as clay jars, and a colliery
+    sign cut to stray letters at the frame edge.
+95. **A full-frame helper step must ignore depth.** The handover zone and the wide outline band were
+    built in a working picture that also held the street's depths, so most of each step was silently
+    thrown away and the fixes seemed to do nothing. Turn depth testing off for such steps
+    (`runPass` in projected-set.js), and when a fix changes nothing, measure the in-between picture.
+96. **Hand over before the eye can see the gap.** Round near props the painting gave way to the
+    props-removed painting only after the camera had swung 1.4 degrees round a point; further up the
+    road that took half the move, and the ink lines showed meanwhile. Half a degree works; a soft 3D
+    shadow, faded in at the same time, replaces the painted shadow the handover removes.
+97. **Flux's strength varies from run to run.** The same request gave a near-photograph once and a
+    true painting the next; asking for the reference's thick strokes and ink outlines, "nothing should
+    look like a 3D render", got the painted one. Look before using, and re-ask if it isn't painted.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -357,3 +396,4 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Inside a painted room, keep camera moves small and turn reflections down (lessons 48, 49).
 - Draw page turns in one run of stills: some faults only show when frames follow each other (lesson 51).
 - Run the independent critique before filming (lesson 53).
+- In a projected set, check the weights view at the end of every move: blue at a frame edge means the camera left the painting (lesson 90).

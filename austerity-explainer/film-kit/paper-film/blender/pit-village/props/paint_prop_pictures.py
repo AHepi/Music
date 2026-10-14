@@ -158,8 +158,10 @@ NOTICE_LINES = [
     # (text, font, size, extra letter spacing, gap after)
     (COMPANY.replace(', LIMITED', ', LTD.'), 'OldStandard-Bold.ttf', 50, 2, 26),
     ('NOTICE', 'AbrilFatface-Regular.ttf', 270, 18, 10),
-    ('TO ALL WORKMEN', 'OldStandard-Bold.ttf', 84, 8, 30),
-    ('The present Contracts of Service will terminate on', 'OldStandard-Regular.ttf', 46, 0, 6),
+    ('TO ALL WORKMEN', 'OldStandard-Bold.ttf', 84, 8, 22),
+    # the reason, as the owners gave it: the Government's subsidy in aid of wages ended on 30 April 1926
+    ('Owing to the cessation of the Government Subsidy,', 'OldStandard-Italic.ttf', 46, 0, 4),
+    ('the present Contracts of Service will terminate on', 'OldStandard-Regular.ttf', 46, 0, 6),
     ('FRIDAY, 30th APRIL, 1926,', 'OldStandard-Bold.ttf', 74, 2, 6),
     ('and these', 'OldStandard-Italic.ttf', 46, 0, 4),
     ('PITS WILL BE CLOSED', 'AlfaSlabOne-Regular.ttf', 112, 2, 6),
@@ -167,9 +169,9 @@ NOTICE_LINES = [
     ('until the Workmen are prepared to accept the', 'OldStandard-Regular.ttf', 46, 0, 4),
     ('NEW TERMS', 'AlfaSlabOne-Regular.ttf', 112, 6, 6),
     ('now offered by the Owners, copies of which may be', 'OldStandard-Regular.ttf', 46, 0, 2),
-    ('seen at the Colliery Office.', 'OldStandard-Regular.ttf', 46, 0, 24),
+    ('seen at the Colliery Office.', 'OldStandard-Regular.ttf', 46, 0, 16),
     ('All Workmen must remove their Tools from the Pit', 'OldStandard-Regular.ttf', 46, 0, 2),
-    ('on or before Friday, 30th April.', 'OldStandard-Regular.ttf', 46, 0, 40),
+    ('on or before Friday, 30th April.', 'OldStandard-Regular.ttf', 46, 0, 28),
     ('By Order,', 'OldStandard-Italic.ttf', 50, 0, 6),
     ('T. H. WARBRECK, Agent.', 'OldStandard-Bold.ttf', 60, 3, 22),
     ('Colliery Office, Abbotsclough, 16th April, 1926.', 'OldStandard-Italic.ttf', 40, 0, 26),
@@ -256,7 +258,9 @@ def notice(folder, width=1462, height=2048):
     foxing = np.clip((spots - (0.80 - 0.10 * near_edge)) * 8, 0, 1)
     paper = paper * (1 - 0.35 * foxing[..., None] * np.array([0.25, 0.55, 1.0]))
     # rust runs from the four tacks that hold it up
-    for tack_x, tack_y in ((150, 150), (width - 240, 260), (width - 150, height - 150), (330, height - 170)):
+    # (the top-left tack sits in the corner, clear of the company's name: at (150, 150) its rust hid the A)
+    # (the top-right tack sits in the right margin: at (width - 240, 260) it punched a hole in the E of NOTICE)
+    for tack_x, tack_y in ((100, 100), (width - 42, 300), (width - 150, height - 150), (330, height - 170)):
         rows = np.arange(height)[:, None]; cols = np.arange(width)[None, :]
         run = np.exp(-((cols - tack_x) ** 2) / (2 * 9 ** 2)) * np.clip(1 - (rows - tack_y) / 260.0, 0, 1) * (rows >= tack_y - 10)
         blot = np.exp(-((cols - tack_x) ** 2 + (rows - tack_y) ** 2) / (2 * 22 ** 2))

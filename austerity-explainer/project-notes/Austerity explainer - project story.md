@@ -176,6 +176,21 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     simple boxes to the edges of near, upright things in a painting (posts, a canopy, a kiosk), paints
     those things out of the background picture, and dresses each box in the painting shone onto it
     from where it was painted. Hands the boxes and the cleaned background to the cinema stage.
+27. **A built place, painted over (plan 3)** (`film-kit/paper-film/blender/pit-village/`, models in
+    `film-kit/assets/models/pit-village/`). A concrete example: the lock-out notice is a real 3D board
+    with a printed paper on it, its lettering drawn by script ("PITS WILL BE CLOSED from SATURDAY, 1st
+    MAY, 1926"). Blender draws the whole street once from the main camera (the plate); Flux repaints
+    that picture in the series' style; the film shines the painting back onto the same street, so the
+    camera can move up it. The notice keeps its own sharp lettering, so the close shot can read it.
+    - `build_street.py` builds the street, cottages, lamps and colliery; `props/` builds or converts
+      the 46 props; `assemble_lockout.py` places the props for the shot, draws the plate and exports
+      the set and the camera. Hands the plate to Flux and the set to the film.
+    - Flux 3 edit (fal) repaints the plate, and then paints the near props out of the painting.
+      Hands two paintings to the film.
+    - `projected-set.js` shines the paintings onto the set: the painting where the camera saw a
+      surface, the props-removed painting where a near prop hid it, the painted sky alone on a far
+      card, and the sign's own surfaces. Hands a moving, painted street to the cinema stage, which
+      films it like the other pages.
 
 ## Word list
 
@@ -251,6 +266,12 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Splat world | A 3D place made of millions of soft coloured dots, made by a paid service from one picture. |
 | Background still | The unchanging part of a still shot, drawn once and reused behind everything that moves. |
 | Cut-away | A building shown with its front taken off, like a doll's house, so every room can be seen at once. |
+| Plate | The one picture Blender draws of a set from the main camera; Flux repaints it, and the painting is shone back onto the set from the same spot. |
+| Projector | The camera the plate was drawn from, used in the film to shine the painting back onto the set. |
+| Behind painting | A copy of the painting with the near props painted out, worn by the road and walls those props hid, so moving past them uncovers painted street. |
+| Weights view | A check picture of a projected set: orange where it wears the painting, green the behind painting, blue its own surface. Blue at a frame edge means the camera left the painting. |
+| Own surface | A 3D object's own pictures and colours, not the painting; signs keep theirs so their lettering stays sharp. |
+| Ghost outline | A prop's painted outline left lying on the road behind it once the camera moves, because the painting can't tell the prop's edge from the road. |
 
 ## Log (added to, never rewritten)
 
@@ -821,6 +842,59 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     (real 3D places built in Blender, then painted over by Flux so they look painted), plan 4 (3D worlds
     made by World Labs from each painting), and the review's two other looks (the money machine, the
     pop-up book). Recommended: plan 3, the one that keeps the real 3D. No cost.
+
+
+29. **Plan 3: a pit village built in 3D, painted over (a 12-second test).** You said "Do plan 3. And a
+    short clip. Use props as well that are higher quality instead of plain. Don't worry about budget
+    because they are reusable. Just no more books and signs with no details."
+    - **The place:** Britain, 1 May 1926, the first day of the miners' lockout. A street of 28 stone
+      and brick cottages climbing to a colliery, with a steel pithead, two winding houses, a tall
+      chimney, gas lamps and a cobbled road, built by script in Blender. 46 props: Poly Haven models
+      (free for any use) and props built by script with real lettering: a coal tub on rails, a
+      handcart, coal sacks stencilled "J. HARTWELL COAL MERCHANT", the colliery's name board
+      "ABBOTSCLOUGH COLLIERY", and a printed lock-out notice. All the names are invented.
+    - **How it is made:** Blender draws the street once from the main camera (the plate). Flux repaints
+      the plate in the series' painted style. The film shines the painting back onto the same 3D
+      street, so the camera can move up it while everything stays painted. A second painting with the
+      near props painted out covers the road they hid; the painted sky lands on a far card; the notice
+      board keeps its own sharp surfaces so it can be read close up.
+    - **The clip:** BRITAIN 1926 over the street at dusk; the camera moves up the street past coal
+      sacks and a burning brazier; a cut to the notice ("Owing to the cessation of the Government
+      Subsidy, the present Contracts of Service will terminate on FRIDAY, 30th APRIL, 1926, and these
+      PITS WILL BE CLOSED from SATURDAY, 1st MAY, 1926, until the Workmen are prepared to accept the
+      NEW TERMS"); LOCKED OUT / FROM 1 MAY 1926; fade out. Music only (your soundtrack). One camera
+      move a shot, so your camera rule holds.
+    - **What went wrong and was fixed along the way:**
+      - The notice board floated in mid-air (its posts landed on top of it and at the street's
+        start); the brazier's flames rendered as white paper cones (lit by the fire's own lamp).
+      - The first repaint garbled the notice's small print, so the notice now keeps its own lettering.
+      - The painted clouds had nowhere to land; then the strip of sky behind the pithead showed as a
+        pale double edge once the camera moved. Fixed with a sky card wearing the painted sky alone.
+      - Turning the camera too far showed a strip of unpainted houses at the frame's edge: the plate is
+        only a little wider than the film's frame. The push in is now mostly a lens zoom.
+      - Moving the camera uncovered the road behind the sacks and the cart as pale, jagged copies of
+        their outlines, then (after a first fix) as dark ink lines: the painter's outlines round the
+        props lie on the road. Fixed with the props-removed painting, handed over round the props as
+        soon as the camera moves, and soft 3D shadows under the sacks to replace the painted ones.
+        Finding why the handover didn't work took three tries: it waited for too much camera movement,
+        and a helper step was silently half thrown away by leftover depth in a working picture.
+      - A rust stain from a tack hid the A of ABBOTSCLOUGH, and another tack punched a hole in the E of
+        NOTICE; both tacks moved.
+    - **Checked by two rounds of three independent helpers** (looks, history, faults). The first found
+      the ghost outlines, the paper-crown flame, snow-like blotches on a May road (the painter added
+      them), sacks shaped like clay jars, too much coal for a lockout (coal was scarce), the colliery
+      sign cut to stray letters, and a move that never reached the notice. The second confirmed most
+      were fixed and found the remaining ink ghosts, a see-through flame, the cut letters still there,
+      a weak end to the move, a pin hole in NOTICE, and gaps of light between the board's planks; all
+      were fixed. The history helper checked every line of the notice (30 April 1926 was a Friday,
+      1 May a Saturday, 16 April a Friday; the wording matches a real 1926 letter from a colliery,
+      National Coal Mining Museum) and suggested the subsidy line, the austerity link: the
+      government's subsidy to miners' wages ended on 30 April 1926.
+    - **Kept as it is, on purpose:** the two winding ropes run in opposite directions to two winding
+      houses either side of the pithead; both houses are hidden behind the cottages from this street,
+      so the ropes seem to end at the roofs. A helper flagged it; the 3D is right, the view hides it.
+    - **Cost:** about 50 US cents on fal (five Flux repaints: four of the street and one with the props
+      painted out). About US$8.20 of the picture allowance is left.
 
 
 ## Next step

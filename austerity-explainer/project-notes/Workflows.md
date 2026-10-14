@@ -165,6 +165,32 @@ three zip files.
 5. Draw the painting's view (must match the painting) and a push (posts must stay straight), then
    have independent helpers check both before showing anyone.
 
+## A built place, painted over (plan 3, test clip log 29)
+
+1. Build the place in Blender by script, with free Poly Haven surfaces and models (CC0) and detailed
+   props built by script where Poly Haven has none (`film-kit/paper-film/blender/pit-village/`:
+   `build_street.py` for the street, `props/` for the prop library, `assemble_lockout.py` to place the
+   props for one shot). No blank signs, book covers or plain boxes: every sign carries real lettering.
+2. Pick the camera for the plate a little wider than the film's lens (the lockout plate: 44 degrees
+   against the film's 40), and stand near things close to the middle: the tall frame is narrow.
+3. Draw the plate in Blender (EEVEE, about 10 minutes at 1536 x 2730) and export the set as .glb with
+   the camera as `camera.json` (`assemble_lockout.py --plate --export`).
+4. Repaint the plate with Flux 3 edit on fal, image 1 the plate, image 2 a chapter 2 painting as the
+   style (about 10 US cents). Ask it to keep every element where it is and to add no people. Resize the
+   result to the plate's exact size.
+5. Ask Flux once more, with the painting as the only picture, to paint the near props out; keep the
+   result the same size. In the page, load the set and shine the painting onto it
+   (`projectPaintingOnto` in `projected-set.js`) with `behind: { painting, hide: nearProps }` and the
+   lettered materials in `ownSurface` (the painter garbles small print). Then shine
+   `paintedSkyOnly(projection, painting)` onto a far sky card as a second projection, and put soft
+   contact shadows under the near props, faded in as the camera starts to move.
+6. Check four stills before filming: the projector's own view (must match the painting), the end of
+   the move, a middle moment, and the `weights` view (orange wears the painting, blue its own
+   surface). Blue showing at a frame edge means the camera left the painted area: turn less, and push
+   in with the lens rather than moving forward.
+7. Have independent helpers critique the stills, film with `film-chapter-parallel.sh`, then check the
+   film in motion.
+
 ## How to edit the documentation
 
 1. Every change to the project updates `Status.md`, and the project story log gets a new numbered

@@ -184,3 +184,11 @@ Seven critics and a skeptic found these; each cost a re-film. Check for them you
   while they fade (see `setFading` in the austerity project's `house-sample/page-1.js`).
 - **Two surfaces in one plane flicker when the camera moves.** Keep built walls, floors and ceilings a
   hair (about 0.01 units) apart from the boxes behind them.
+- **A place built in 3D and painted over** (plan 3: the austerity project's pit village,
+  `paper-film/scenes/lockout-test.js` with `projected-set.js`): Blender draws the set once (the plate),
+  Flux repaints it, and the page shines the painting back onto the set. Keep camera turns within a
+  degree or two of the plate (its frame is only a little wider than the film's) and push in with the
+  lens; give near props a `behind` painting (Flux paints them out of the painting) and soft contact
+  shadows; keep signs' own lettering with `ownSurface`; put the painted sky on a far card with
+  `paintedSkyOnly`; draw flames live rather than painting them. Check the `weights` view at the end of
+  each move and the moving frames, not only stills.

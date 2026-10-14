@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-13, late morning.**
+**As of 2026-10-14, early morning.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -183,9 +183,24 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   house-sample.js` with `house-sample/page-1.js` and `house-set.js`; timing `film-kit/examples/
   house-sample/timeline.json`. Checked by two helpers before filming and one after. No cost.
 
+## Plan 3 test clip: the pit village (log 29, 2026-10-14)
+
+- A pit village street at dusk in May 1926 built in Blender: 28 cottages, a colliery with a steel
+  headframe, two winding houses, gas lamps, and 46 props (Poly Haven CC0 models and props built by
+  script with real lettering). Scripts: `film-kit/paper-film/blender/pit-village/`; models:
+  `film-kit/assets/models/pit-village/` (the street, the lockout set, the props, the paintings).
+- Drawn once from the main camera, repainted by Flux 3 edit (four repaints and one props-removed copy
+  in all, about 50 US cents), and the paintings shone back onto the set
+  (`film-kit/paper-film/scenes/projected-set.js`): the painting, a second painting with the near props
+  painted out for what they hid, the painted sky alone on a far card, and the notice board's own sharp
+  surfaces. Clip scene: `film-kit/paper-film/scenes/lockout-test.js`, timing
+  `film-kit/examples/lockout-test/timeline.json`.
+- 12 seconds, music only: BRITAIN 1926, a move up the street, a cut to the lock-out notice, LOCKED OUT /
+  FROM 1 MAY 1926. Two rounds of three independent critics (looks, history, faults).
+
 ## Waiting on you
 
-- Nothing: plan 3's test clip is being built (decision 34).
+- Your view of plan 3's test clip ("29 Test - pit village lockout").
 
 
 - Your view of chapter 2 (round 20) on your phone.
@@ -204,8 +219,9 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Spend so far
 
-Picture allowance: about US$8.70 left of the "upto $10 in Fal" given when chapter 2 started (about
-US$1.28 spent since). About US$7.00 in all (SAM 3D test, log 22: about 12 US cents; chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
+Picture allowance: about US$8.20 left of the "upto $10 in Fal" given when chapter 2 started (about
+US$1.78 spent since). About US$7.50 in all (plan 3 test, log 29: about 50 US cents for five Flux repaints;
+SAM 3D test, log 22: about 12 US cents; chapter 2: about US$1.16 on fal, of which about 10 US cents in round 20 for the dry
 bank street, and about 4,300 ElevenLabs credits, about 75 US cents).
 - fal, about US$4.25: chapter 1's paintings, about US$2.55 (17 large pictures at about 10 US cents,
   30 small ones at about 2.5 cents, 37 cut-out masks at about a fifth of a cent); the page 3 test,

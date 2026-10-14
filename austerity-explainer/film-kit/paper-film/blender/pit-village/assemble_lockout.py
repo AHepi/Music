@@ -19,6 +19,7 @@
 
 import json
 import math
+import random
 import os
 import sys
 
@@ -101,24 +102,41 @@ def wooden_post(x, y, height, collection='signs', start=60.0, material=None, tur
     return post
 
 
-def brazier_fire(x, y):
-    """Glowing coals and low flames inside the brazier drum, and the warm light it throws."""
-    top = ground_height(x, y) + 0.80
-    flame = bpy.data.materials.new('brazier flame')
-    flame.use_nodes = True
-    nodes = flame.node_tree.nodes
-    principled = nodes['Principled BSDF']
-    # glow only: a black base, so the fire's own lamp just above can't light the flames white
+def glow_material(name, colour, strength):
+    """A material that only glows: a black base, so a lamp just above can't light it white."""
+    material = bpy.data.materials.new(name)
+    material.use_nodes = True
+    principled = material.node_tree.nodes['Principled BSDF']
     principled.inputs['Base Color'].default_value = (0.0, 0.0, 0.0, 1)
     principled.inputs['Specular IOR Level'].default_value = 0.0
     principled.inputs['Roughness'].default_value = 1.0
-    principled.inputs['Emission Color'].default_value = (1.0, 0.22, 0.02, 1)
-    principled.inputs['Emission Strength'].default_value = 1.1
-    for i, (dx, dy, height, radius) in enumerate([(0, 0, 0.22, 0.12), (0.09, 0.05, 0.16, 0.08), (-0.08, -0.04, 0.19, 0.09), (0.03, -0.1, 0.13, 0.07), (-0.05, 0.09, 0.12, 0.07)]):
-        bpy.ops.mesh.primitive_cone_add(vertices=10, radius1=radius, radius2=0.0, depth=height, location=(x + dx, y + dy, top + height / 2))
-        cone = bpy.context.active_object
-        cone.name = f'brazier_flame_{i}'
-        cone.data.materials.append(flame)
+    principled.inputs['Emission Color'].default_value = (*colour, 1)
+    principled.inputs['Emission Strength'].default_value = strength
+    return material
+
+
+def brazier_fire(x, y):
+    """A heaped bed of coals in the brazier drum, glowing orange with some dark lumps among them,
+    and the warm light it throws. The flames themselves are drawn live in the film (lockout-test.js):
+    flame shapes in the plate looked like paper cut-outs once painted."""
+    top = ground_height(x, y) + 0.80
+    glowing = glow_material('brazier coals', (1.0, 0.16, 0.015), 1.0)
+    dark = bpy.data.materials.new('brazier dark coal')
+    dark.use_nodes = True
+    dark.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.02, 0.018, 0.016, 1)
+    dark.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = 0.5
+    rng = random.Random(7)
+    for i in range(22):
+        angle, reach = rng.uniform(0, 2 * math.pi), 0.2 * math.sqrt(rng.random())
+        size = rng.uniform(0.035, 0.06)
+        heap = 0.06 * (1 - reach / 0.2)   # heaped a little in the middle
+        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=size,
+                                              location=(x + reach * math.cos(angle), y + reach * math.sin(angle), top - 0.01 + heap + rng.uniform(0, 0.02)))
+        lump = bpy.context.active_object
+        lump.name = f'brazier_coal_{i}'
+        lump.scale = (1.0, rng.uniform(0.7, 1.1), rng.uniform(0.6, 0.9))
+        lump.rotation_euler = (rng.uniform(0, 3), rng.uniform(0, 3), rng.uniform(0, 3))
+        lump.data.materials.append(dark if i % 4 == 3 else glowing)
     bpy.ops.object.light_add(type='POINT', location=(x, y, top + 0.6))
     light = bpy.context.active_object
     light.name = 'brazier_light'
@@ -135,9 +153,12 @@ def build_scene():
             bpy.context.scene.collection.children.link(collection)
     # near the camera: the handcart with coal sacks, and a few lumps of coal in the road
     # (the sacks go down first, so they stand on the road, not on the cart)
-    place_prop('coal-sacks.glb', -0.2, 8.4, turn_degrees=18)
+    sacks = place_prop('coal-sacks.glb', -0.2, 8.4, turn_degrees=18)
+    for o in list(sacks.children_recursive):   # the two standing sacks read as clay jars once painted
+        if o.name.startswith('sack-standing'):
+            bpy.data.objects.remove(o, do_unlink=True)
     place_prop('handcart.glb', -1.75, 9.6, turn_degrees=-70)
-    place_prop('coal-pile.glb', 0.75, 8.0, turn_degrees=-20, scale=0.45)
+    place_prop('coal-pile.glb', 0.75, 8.0, turn_degrees=-20, scale=0.25)   # a few picked lumps: coal was scarce
     place_prop('wooden-pail.glb', 1.75, 9.0, turn_degrees=40)
     place_prop('hurricane-lantern.glb', -0.55, 10.1, turn_degrees=10)
     place_prop('spade.glb', -1.15, 8.9, turn_degrees=70)
@@ -157,12 +178,12 @@ def build_scene():
     place_prop('wooden-barrel.glb', -3.6, 15.5)
     place_prop('wooden-pail.glb', 3.6, 19.3)
     place_prop('wooden-wash-tub.glb', -3.55, 22.0)
-    place_prop('coal-pile.glb', 3.2, 24.5, turn_degrees=30, scale=0.7)
+    place_prop('coal-pile.glb', 3.2, 24.5, turn_degrees=30, scale=0.35)
     place_prop('step-ladder.glb', -3.7, 28.0, turn_degrees=90)
     # the colliery gates shut across the top of the street, with the name board beside them
     place_prop('iron-gates-pair.glb', -1.5, 71.5)
     place_prop('iron-gates-pair.glb', 1.5, 71.5)
-    place_prop('colliery-name-board.glb', 0.0, 72.4, collection='signs')
+    place_prop('colliery-name-board.glb', 0.0, 72.4, collection='signs', scale=1.35)   # big enough to read from the street
     place_prop('coal-tub-on-track.glb', -1.0, 76.5, turn_degrees=90)
 
 

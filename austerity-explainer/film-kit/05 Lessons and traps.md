@@ -88,3 +88,15 @@ new series doesn't walk into the same holes.
   vanishes at half opacity (a piece first drawn solid keeps a recipe that ignores see-through, and
   cut-outs are only drawn where at least half solid). Use `setFading` from
   `paper-film/scenes/house-sample/page-1.js` (log 27, lesson 87 of the project notes).
+
+- Built places, painted over (`paper-film/scenes/projected-set.js`, the pit village test, log 29):
+  - The plate's frame is only a little wider than the film's: turn the camera at most a degree or two
+    and push in with the lens. Check the `weights` view at the end of every move (blue at an edge =
+    no painting there).
+  - Moving past near props uncovers what they hid, and the painter's outlines round them lie on the
+    road: give the projection a `behind` painting (the same painting with the near props painted out
+    by Flux) and soft contact shadows under those props.
+  - Signs keep their own sharp surfaces (`ownSurface`); the painter garbles small print.
+  - Leave flames out of the plate (painted, they read as paper cut-outs); draw them live.
+  - A full-frame helper pass must not test depth (`runPass` turns it off): a working picture that held
+    the set's depths silently hid most of a pass.
