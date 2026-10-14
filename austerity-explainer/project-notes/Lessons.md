@@ -401,6 +401,36 @@ Only failures in doing the work belong here. Newest at the bottom.
     figure for the clip was wrong; under about 15 lines found, trace them by hand. (The tool otherwise
     turned "I'm not sure why it's good" into reasons that could be checked.)
 
+105. **"The lines don't converge the same way" is the camera, not the props.** Matching the liked picture's
+    landmarks (wheel hubs, chimney top, gate, roofline, kerbs) found our camera 0.42 m too high and 1 degree
+    off; fitted, the lines meet within 0.02 of the picture's. Match the camera to landmarks before moving props.
+106. **A turn can't close the gap between where the lines meet and the subject**: it moves both together.
+    Slide the camera (sideways or up and down) or move the subject. Rule 1 in "07 Composing a shot" was
+    corrected.
+107. **Slide the camera sideways to clear the phone buttons**: near props slide left more than far ones and
+    where the lines meet stays put; a turn moves the meeting point off the reference's.
+108. **A tool's advice must be followed to be tested.** A helper who did exactly what the reports said found
+    "lower the lantern 0.47 m onto the seat" would have dropped it to the pavement (0.47 m was the drop to the
+    ground, the chair having moved). Fixes are now worked out from the support's own top.
+109. **One downward line can slip between the planks of a seat.** The tool once said the lantern floated
+    0.46 m up when it sat on the chair; it now looks down at five spots under each prop and keeps the highest.
+110. **Shadow memory has two failures.** At '1024' the 1,536-wide plate ran out ("Shadow buffer full") and
+    drew a false hard black wedge across the road, which three critics first blamed on the lighting; at
+    '2048' this machine could not set it up at all ("Could not allocate shadow atlas") and drew no shadows.
+    Keep '1024' and lower the shadows' resolution for wide pictures; read the render's log before judging light.
+111. **Measure warmth apart from brightness.** Where the notice's lower part was lit strongly it went nearly
+    white and read less warm; comparing red against blue as a share of both (not their difference) gave the
+    liked picture +0.17 and told our tests apart properly.
+112. **Lighting knobs pull against each other.** A deeper orange fire lit the notice from below but spread
+    warm light over 6.3% of the frame (limit 3%); the fire's own light kept its paler orange, and a narrow
+    deep-orange spot lights just the notice.
+113. **Helpers checking a tool that is still changing see different tools.** The code reader saw six
+    versions. Each report now says which version made it; freeze the tool while it is being checked.
+114. **The chair model faces the other way** from what its turn assumed: at 140 degrees its back faced the
+    fire and hid the lantern. -40 degrees puts its back to the board and its seat to the fire (a critic's find).
+115. **Stopping a job by a broad name pattern stopped this session's own shell again** (exit 144). Stop a
+    job only by its own process number.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -425,3 +455,5 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Run the independent critique before filming (lesson 53).
 - In a projected set, check the weights view at the end of every move: blue at a frame edge means the camera left the painting (lesson 90).
 - In any shot, check that where the lines meet, the brightest parts and the biggest near props agree on the subject (lesson 98).
+- Before judging a finished picture's light, read its render log for "Shadow buffer full" or "Could not allocate shadow atlas" (lesson 110).
+- Follow a tool's advice once to test it, not only read it (lesson 108).

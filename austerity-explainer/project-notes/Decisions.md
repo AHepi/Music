@@ -575,6 +575,23 @@ overturn any of them in one line. Changes to the project must follow this file.
   its weight sits: how strongly each part pulls the eye) and its reasons tested by independent critics, so the answer rests on evidence.
 - The reasons that survive become rules for placing props and the camera in our own 3D shots.
 
+37. **Rebuild the liked picture with our props, then a tool that finds what is wrong** (your words, log 31):
+    "Yup redo with your props. See if new understanding of camera movement can help."
+    "The camera angle is wrong as well. The lines don't converge the same way."
+    "You were right here." (about the yellow lines in "30 Why it works - do the strongest things agree")
+    "Can you develop a tool that can calculate these things automatically and pinpoint what exactly is wrong."
+
+### Claude's calls for item 37
+
+- The camera was matched to the liked picture by lining up its landmarks (winding wheel hubs, chimney top,
+  colliery gate, left roofline, kerbs) with ours, rather than by eye.
+- The tool measures the 3D scene itself in Blender (what each prop stands on, where the lines meet, how far
+  each prop is), not only a picture, so it can give fixes in metres. It is tested by breaking the scene on
+  purpose, and by independent helpers who follow its advice, plant new faults, read its code and read its
+  reports as you would.
+- The critics' lighting fixes were made in 3D before any paid repaint (the painter copies the plate's light
+  and dark), using the tool as the judge. Overturn in one line.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

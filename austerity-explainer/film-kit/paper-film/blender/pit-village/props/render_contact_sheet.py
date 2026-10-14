@@ -4,7 +4,7 @@
 #
 # Run (EEVEE needs a virtual screen):
 #   Xvfb :94 -screen 0 1920x1080x24 &
-#   DISPLAY=:94 blender -b --python render_contact_sheet.py -- OUT_FOLDER [prop-file-name ...]
+#   DISPLAY=:94 blender -b --python render_contact_sheet.py -- OUT_FOLDER [--size 1024] [prop-file-name ...]
 
 import json
 import math
@@ -21,7 +21,7 @@ import prop_library as library  # noqa: E402
 def stage(size):
     scene = bpy.context.scene
     scene.render.engine = 'BLENDER_EEVEE'
-    scene.eevee.taa_render_samples = 16
+    scene.eevee.taa_render_samples = 32
     scene.render.resolution_x, scene.render.resolution_y = size
     scene.render.film_transparent = False
     world = bpy.data.worlds.new('world'); scene.world = world
@@ -59,10 +59,14 @@ def frame(camera, low, high, aspect):
 
 if __name__ == '__main__':
     arguments = sys.argv[sys.argv.index('--') + 1:]
+    # --size N draws larger pictures (for example 1024, as references for an image model)
+    side = 420
+    if '--size' in arguments:
+        at = arguments.index('--size'); side = int(arguments[at + 1]); del arguments[at:at + 2]
     out_folder, only = arguments[0], arguments[1:]
     os.makedirs(out_folder, exist_ok=True)
     with open(library.INDEX_PATH) as f: index = json.load(f)
-    size = (420, 420)
+    size = (side, side)
     for entry in index:
         name = entry['file'][:-4]
         if only and name not in only: continue

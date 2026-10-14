@@ -17,18 +17,15 @@
 #   DISPLAY=:96 blender -b assets/models/pit-village/street.blend --python paper-film/blender/pit-village/assemble_lockout.py -- --preview out.png
 # Units are metres; Blender is z-up, the street runs along +y and rises 4 degrees.
 
-import json
 import math
-import random
 import os
 import sys
 
 import bpy
-from mathutils import Euler, Quaternion, Vector
+from mathutils import Euler, Vector
 
-KIT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))   # the kit's top folder
-SET_FOLDER = os.path.join(KIT_FOLDER, 'assets/models/pit-village')
-PROPS_FOLDER = os.path.join(SET_FOLDER, 'props')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from set_dressing import ground_height, place_prop, wooden_post, brazier_fire, render, export_for_film   # noqa: E402
 
 arguments = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 def option(name, default=None):
@@ -43,107 +40,6 @@ CAMERA_EYE_HEIGHT = 1.55
 CAMERA_YAW_DEGREES = -6.0          # turn to the right (negative about z)
 CAMERA_PITCH_DEGREES = 8.0         # look up a little
 PLATE_FOV_DEGREES = 44.0
-
-
-def ground_height(x, y, start=60.0):
-    """The height of whatever surface is under (x, y), found by casting a ray straight down from
-    `start` (start below a prop to find the ground under it rather than the prop's top)."""
-    depsgraph = bpy.context.evaluated_depsgraph_get()
-    hit, location, normal, index, hit_object, matrix = bpy.context.scene.ray_cast(depsgraph, Vector((x, y, start)), Vector((0, 0, -1)))
-    return location.z if hit else min(y, 76) * math.tan(math.radians(4))
-
-
-def place_prop(file_name, x, y, turn_degrees=0.0, name=None, lift=0.0, collection='props', scale=1.0):
-    """Imports a prop from the library and stands it on the surface at (x, y), turned about z."""
-    before = set(bpy.data.objects)
-    bpy.ops.import_scene.gltf(filepath=os.path.join(PROPS_FOLDER, file_name))
-    imported = [o for o in bpy.data.objects if o not in before]
-    roots = [o for o in imported if o.parent is None]
-    holder = bpy.data.objects.new(name or file_name.replace('.glb', ''), None)
-    target = bpy.data.collections.get(collection) or bpy.data.collections.new(collection)
-    if target.name not in bpy.context.scene.collection.children:
-        bpy.context.scene.collection.children.link(target)
-    target.objects.link(holder)
-    for o in imported:
-        for c in list(o.users_collection):
-            c.objects.unlink(o)
-        target.objects.link(o)
-    for root in roots:
-        root.parent = holder
-    holder.location = (x, y, ground_height(x, y) + lift)
-    holder.rotation_euler = (0, 0, math.radians(turn_degrees))
-    holder.scale = (scale, scale, scale)
-    return holder
-
-
-def wooden_post(x, y, height, collection='signs', start=60.0, material=None, turn_degrees=0.0):
-    """A square timber post standing on the ground at (x, y). With `material` (for example the
-    notice board's own timber) it wears that, its picture repeating once a metre."""
-    ground = ground_height(x, y, start)
-    bpy.ops.mesh.primitive_cube_add(size=1)
-    post = bpy.context.active_object
-    post.scale = (0.09, 0.09, height)
-    post.location = (x, y, ground + height / 2)
-    post.rotation_euler = (0, 0, math.radians(turn_degrees))
-    if material is None:
-        material = bpy.data.materials.get('weathered post') or bpy.data.materials.new('weathered post')
-        material.use_nodes = True
-        material.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.11, 0.08, 0.06, 1)
-        material.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = 0.9
-    post.data.materials.append(material)
-    for c in list(post.users_collection):
-        c.objects.unlink(post)
-    bpy.data.collections[collection].objects.link(post)
-    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-    bpy.ops.object.mode_set(mode='EDIT')
-    bpy.ops.mesh.select_all(action='SELECT')
-    bpy.ops.uv.cube_project(cube_size=1.0)
-    bpy.ops.object.mode_set(mode='OBJECT')
-    return post
-
-
-def glow_material(name, colour, strength):
-    """A material that only glows: a black base, so a lamp just above can't light it white."""
-    material = bpy.data.materials.new(name)
-    material.use_nodes = True
-    principled = material.node_tree.nodes['Principled BSDF']
-    principled.inputs['Base Color'].default_value = (0.0, 0.0, 0.0, 1)
-    principled.inputs['Specular IOR Level'].default_value = 0.0
-    principled.inputs['Roughness'].default_value = 1.0
-    principled.inputs['Emission Color'].default_value = (*colour, 1)
-    principled.inputs['Emission Strength'].default_value = strength
-    return material
-
-
-def brazier_fire(x, y):
-    """A heaped bed of coals in the brazier drum, glowing orange with some dark lumps among them,
-    and the warm light it throws. The flames themselves are drawn live in the film (lockout-test.js):
-    flame shapes in the plate looked like paper cut-outs once painted."""
-    top = ground_height(x, y) + 0.80
-    glowing = glow_material('brazier coals', (1.0, 0.16, 0.015), 1.0)
-    dark = bpy.data.materials.new('brazier dark coal')
-    dark.use_nodes = True
-    dark.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.02, 0.018, 0.016, 1)
-    dark.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = 0.5
-    rng = random.Random(7)
-    for i in range(22):
-        angle, reach = rng.uniform(0, 2 * math.pi), 0.2 * math.sqrt(rng.random())
-        size = rng.uniform(0.035, 0.06)
-        heap = 0.06 * (1 - reach / 0.2)   # heaped a little in the middle
-        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=size,
-                                              location=(x + reach * math.cos(angle), y + reach * math.sin(angle), top - 0.01 + heap + rng.uniform(0, 0.02)))
-        lump = bpy.context.active_object
-        lump.name = f'brazier_coal_{i}'
-        lump.scale = (1.0, rng.uniform(0.7, 1.1), rng.uniform(0.6, 0.9))
-        lump.rotation_euler = (rng.uniform(0, 3), rng.uniform(0, 3), rng.uniform(0, 3))
-        lump.data.materials.append(dark if i % 4 == 3 else glowing)
-    bpy.ops.object.light_add(type='POINT', location=(x, y, top + 0.6))
-    light = bpy.context.active_object
-    light.name = 'brazier_light'
-    light.data.color = (1.0, 0.55, 0.25)
-    light.data.energy = 900
-    light.data.shadow_soft_size = 0.25
-    return light
 
 
 def build_scene():
@@ -202,49 +98,6 @@ def set_camera():
     return camera
 
 
-def render(path, width, height, samples):
-    scene = bpy.context.scene
-    scene.render.engine = 'BLENDER_EEVEE' if 'BLENDER_EEVEE' in [e.identifier for e in bpy.types.RenderSettings.bl_rna.properties['engine'].enum_items] else 'BLENDER_EEVEE_NEXT'
-    scene.eevee.taa_render_samples = samples
-    scene.render.resolution_x, scene.render.resolution_y = width, height
-    scene.render.resolution_percentage = 100
-    scene.render.filepath = path
-    scene.render.image_settings.file_format = 'PNG'
-    bpy.ops.render.render(write_still=True)
-
-
-def export(camera):
-    # the signs keep their own lettering, so they go in their own file
-    def select_collection(names):
-        bpy.ops.object.select_all(action='DESELECT')
-        for o in bpy.context.scene.objects:
-            in_wanted = any(c.name in names for c in o.users_collection)
-            if in_wanted and o.type in ('MESH', 'EMPTY'):
-                o.select_set(True)
-    sign_names = {'signs'}
-    bpy.ops.object.select_all(action='DESELECT')
-    for o in bpy.context.scene.objects:
-        if o.type in ('MESH', 'EMPTY') and not any(c.name in sign_names for c in o.users_collection) and not any(c.name in ('cameras', 'preview_lights') for c in o.users_collection):
-            o.select_set(True)
-    bpy.ops.export_scene.gltf(filepath=os.path.join(SET_FOLDER, 'lockout-set.glb'), export_format='GLB', use_selection=True, export_yup=True, export_cameras=False, export_lights=False, export_apply=True)
-    select_collection(sign_names)
-    bpy.ops.export_scene.gltf(filepath=os.path.join(SET_FOLDER, 'lockout-signs.glb'), export_format='GLB', use_selection=True, export_yup=True, export_cameras=False, export_lights=False, export_apply=True)
-    # the projector: the plate camera in three.js space
-    q_blender = camera.matrix_world.to_quaternion()
-    turn = Quaternion((1, 0, 0), math.radians(-90))
-    q_three = turn @ q_blender
-    location = camera.matrix_world.translation
-    settings = {
-        'about': 'The plate camera of the lockout scene (assemble_lockout.py), as the projector for projected-set.js. three.js space (y-up): position (x, z, -y) of Blender; quaternion = rotation(-90 deg about x) * Blender quaternion.',
-        'position': [round(location.x, 5), round(location.z, 5), round(-location.y, 5)],
-        'quaternion': [round(q_three.x, 6), round(q_three.y, 6), round(q_three.z, 6), round(q_three.w, 6)],
-        'fov': PLATE_FOV_DEGREES, 'aspect': 1080 / 1920, 'near': 0.1, 'far': 1500,
-        'blender': {'location': [round(v, 5) for v in location], 'rotation_quaternion_wxyz': [round(v, 6) for v in q_blender]},
-    }
-    with open(os.path.join(SET_FOLDER, 'lockout-camera.json'), 'w') as handle:
-        json.dump(settings, handle, indent=1)
-
-
 build_scene()
 camera = set_camera()
 if option('--preview'):
@@ -252,7 +105,7 @@ if option('--preview'):
 if option('--plate'):
     render(option('--plate'), 1536, 2730, int(option('--samples', '48')))
 if '--export' in arguments:
-    export(camera)
+    export_for_film(camera, 'lockout', PLATE_FOV_DEGREES, 'assemble_lockout.py')
 if option('--save'):
     bpy.ops.wm.save_as_mainfile(filepath=option('--save'), relative_remap=True)
 print('assemble_lockout: done')

@@ -207,6 +207,16 @@ turning.
 3. A failure while building or testing goes into `Lessons.md`.
 4. New terms from the authority source go into `Glossary.md`.
 
+## Checking a shot (log 31)
+
+- After dressing a 3D shot, run the shot checker (`film-kit/paper-film/tools/check-shot.sh`, explained in
+  "07 Composing a shot") on the composed frame and on a finished still with its render log. Fix the first
+  problem, then check again: a camera fix moves everything, so props are judged after it.
+- Before trusting a change to the checker, rerun its tests (`paper-film/blender/tests/run-checker-tests.sh`):
+  each report's first fix should name the fault planted in that scene.
+- Before a paid repaint, the plate must render cleanly (no shadow-memory faults in its log) and pass the
+  light rules.
+
 ## Saving to the repository (your rule, decision 30)
 
 - After each piece of work, save everything made to the repository except videos and audio: pictures,

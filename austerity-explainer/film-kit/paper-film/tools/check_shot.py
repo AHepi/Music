@@ -278,10 +278,12 @@ def move_words(shot, g, dx, dy, anchor_y=None):
     nearer, so an up or down slide becomes a move nearer to or further from the camera. A prop resting on
     another moves with it."""
     carrier = shot.carrier(g)
-    mover = carrier or g
-    name = f'{carrier} (with {g} on it)' if carrier else g
     info = shot.info(g)
     metres = info['metres_per_pixel']
+    # a small move of a prop that rests on another is made on its seat or top; a big one moves what carries it
+    small = carrier and g != shot.subject and max(abs(dx), abs(dy)) * metres * 4 <= 0.12
+    mover = g if small or not carrier else carrier
+    name = (f'{g} on {carrier}\'s seat or top' if small else f'{carrier} (with {g} on it)') if carrier else g
     parts = []
     if abs(dx) >= 1 and abs(dx) >= 0.3 * abs(dy):
         parts.append(f'about {abs(dx) * metres:.2f} m to the {"right" if dx > 0 else "left"}')
