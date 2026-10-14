@@ -559,6 +559,19 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The results are judged as guides first: what they teach about where props go and how the camera moves.
   Whether a model's video could replace our own 3D shots is judged separately.
 
+36. **The own-camera picture is good** (your words, about "30 Test - composed by Nano Banana - own
+    camera"): "Just a note: this image is good. I'm not sure why, though. Seat next to fire makes sense
+    because fires are used to warm people that likely sat next to the fire at some point. Lamp on seat also
+    makes sense since people use them to see in the dark.
+    I don't understand why the composition balance works, though. It's genuinely hard to vary without
+    taking something away aesthetically and narratively."
+
+### Claude's calls for item 36
+
+- The picture was measured (where its lines meet, its light and dark areas, its warm light, where its
+  weight sits) and its reasons tested by independent critics, so the answer rests on evidence.
+- The reasons that survive become rules for placing props and the camera in our own 3D shots.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
