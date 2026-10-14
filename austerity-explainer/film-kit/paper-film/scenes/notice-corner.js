@@ -14,8 +14,8 @@
 // in the series' style, and the painting is shone back onto the same 3D shapes (projected-set.js), with
 // a "behind" painting (the near props painted out) for what they hid, the painted sky on a far card,
 // and the notice board's own sharp surfaces (the painter garbles small print).
-// Live on top: the drum's flames, sparks and smoke, the lantern's flicker, a few thin chimney smokes,
-// and soft shadows under the near props once the camera moves.
+// Live on top: the drum's flames, sparks and smoke, the lantern's flicker, and soft shadows under the
+// near props once the camera moves. (Two chimney smokes were dropped: both chimneys are out of the frame, log 32.)
 // Views (PAPER_FILM_QUERY=view=NAME): move (default), projector (holds the first frame), end (holds the
 // composed frame), weights (the composed frame: orange wears the painting, green the behind painting,
 // blue its own surface), weights-move (the same colours through the whole slide).
@@ -134,17 +134,13 @@ const page = {
       return shadow;
     });
 
-    // the fire: flames on the coals, a flickering glow, sparks, smoke; the lantern's small glow; a few
-    // thin smokes from the cottages' chimneys (coal was scarce in the lockout)
+    // the fire: flames on the coals, a flickering glow, sparks, smoke; the lantern's small glow
     const fireGlow = glow(0xff9a40, 1.3, 0.38); fireGlow.position.copy(brazierTop); kit.scene.add(fireGlow);
     const flames = new Flames(kit.scene, coals);
     const sparks = new Sparks(kit.scene, coals.clone().add(new THREE.Vector3(0, 0.08, 0)));
     const lanternGlow = glow(0xffb060, 0.32, 0.5); lanternGlow.position.copy(lanternFlame); kit.scene.add(lanternGlow);
     const brazierSmoke = new Smoke(kit.scene, { count: 14, life: 3.6, seed: 21, colour: [150, 146, 140] });
     for (const puff of brazierSmoke.puffs) puff.sprite.material.color.setRGB(0.5, 0.48, 0.46);
-    const chimneyTops = [[-7.65, 26.5, 12.998], [-7.65, 39.5, 13.908]].map((top) => fromBlender(top).add(new THREE.Vector3(0, 0.4, 0)));
-    const chimneySmoke = chimneyTops.map((top, i) => ({ top, effect: new Smoke(kit.scene, { count: 10, life: 4.2, seed: 31 + i, colour: [120, 126, 136] }) }));
-    for (const c of chimneySmoke) for (const puff of c.effect.puffs) puff.sprite.material.color.setRGB(0.6, 0.62, 0.66);
 
     // the slide: from the plate's own place (the frame is the middle of the painting, which is drawn a
     // little wider than the film's lens) toward the notice, facing the same way throughout
@@ -162,7 +158,7 @@ const page = {
     function poseAt(t) {
       const flicker = 0.75 + 0.15 * Math.sin(t * 17.3) + 0.1 * Math.sin(t * 29.1 + 1.3);
       fireGlow.material.opacity = 0.38 * flicker;
-      fireGlow.scale.setScalar(1.25 + 0.1 * Math.sin(t * 11.7));
+      fireGlow.scale.setScalar(1.25 + 0.02 * Math.sin(t * 11.7));   // its size barely breathes: its rim slid 20 pixels on the road (log 32)
       fireLight.intensity = 4 * (0.75 + 0.25 * flicker);
       noticeGlow.intensity = noticeGlowStrength * (0.75 + 0.25 * flicker);
       const lanternFlicker = 0.9 + 0.06 * Math.sin(t * 9.1) + 0.04 * Math.sin(t * 23.7 + 0.6);
@@ -172,12 +168,18 @@ const page = {
       sparks.set(t);
       for (const shadow of shadows) shadow.material.opacity = 0.55 * smooth((t - T.move) / 0.8);
       brazierSmoke.set({ t, origin: brazierTop.clone().add(new THREE.Vector3(0, 0.35, 0)).toArray(), scale: 0.75, wind: 0.9 });
-      for (const c of chimneySmoke) c.effect.set({ t, origin: c.top.toArray(), scale: 0.8, wind: 0.8 });
       const fade = Math.max(1 - clamp01(t / 1.0), smooth((t - T.end) / 1.0));
       return { camera: camera(t), look: { exposure: 1.0, aperture: 4.0, maxBlur: 2, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.3, fade } };
     }
     function draw2D(ctx, t) {
-      // titles in the dim sky, top left, clear of the gas lamp (rule 12)
+      // titles in the dim sky, top left, clear of the gas lamp (rule 12); a soft dark band behind the first as
+      // behind the last, so the amber 1926 stands out from the sky (it measured 2.2 to 1 against it, log 32)
+      const firstShade = clamp01((t - T.title + 0.2) / 0.5) * (1 - clamp01((t - T.title - 4.0) / 0.5));
+      if (firstShade > 0) {
+        const g = ctx.createLinearGradient(0, 0, 0, 320);
+        g.addColorStop(0, `rgba(5,8,12,${0.5 * firstShade})`); g.addColorStop(1, 'rgba(5,8,12,0)');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 320);
+      }
       placeTitle(ctx, t, { at: T.title, until: T.title + 4.0, place: 'Britain', year: 1926, x: 70, y: 150, size: 56 });
       const shade = clamp01((t - T.locked + 0.2) / 0.5) * (1 - clamp01((t - T.end - 0.4) / 0.5));
       if (shade > 0) {

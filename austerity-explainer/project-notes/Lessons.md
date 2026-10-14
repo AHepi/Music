@@ -452,6 +452,17 @@ Only failures in doing the work belong here. Newest at the bottom.
 121. **A check limited to the story props missed a background near-touch.** The second gas lamp's post just
     met the dustbins' edge, and the handcart overlapped the dustbins by only 11 pixels, both unseen until the
     background props were added to the check file's list (log 32).
+122. **The painter took the props' shadows away with the props.** In the painting with the near props painted
+    out, the long shadows the fire threw from the pail and the chair were gone too, so they faded off the
+    pavement 2 seconds into the slide, when the film switches to that painting round the near props (a
+    helper watching frame by frame found it). Keep the main painting everywhere except inside the props' own
+    outlines (`keep_painted_shadows.py`) (log 32).
+123. **A painter can stretch or shift its picture by a few pixels.** Flux returned the notice corner 0.65%
+    larger and 3 pixels off; shone back onto the 3D set, every painted edge would have sat beside the real
+    one. Line every painting up with the plate before using it (`align_painting.py`) (log 32).
+124. **A file changed while helpers were checking it.** The music was raised after one helper measured it; the
+    skeptic noticed from the file times and set that finding aside. Note what was changed while a check runs
+    (log 32).
 
 ## Traps
 
@@ -480,3 +491,4 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Before judging a finished picture's light, read its render log for "Shadow buffer full" or "Could not allocate shadow atlas" (lesson 110).
 - Follow a tool's advice once to test it, not only read it (lesson 108).
 - Measure the model before using a size a helper worked out from a picture (lesson 116).
+- Line every painting up with its plate, and keep the painted shadows in the props-removed copy (lessons 122, 123).

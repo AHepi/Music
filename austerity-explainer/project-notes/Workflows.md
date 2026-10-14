@@ -177,9 +177,16 @@ three zip files.
    the camera as `camera.json` (`assemble_lockout.py --plate --export`).
 4. Repaint the plate with Flux 3 edit on fal, image 1 the plate, image 2 a chapter 2 painting as the
    style (about 10 US cents). Ask it to keep every element where it is and to add no people. Resize the
-   result to the plate's exact size.
-5. Ask Flux once more, with the painting as the only picture, to paint the near props out; keep the
-   result the same size. In the page, load the set and shine the painting onto it
+   result to the plate's exact size, then line it up: `paper-film/tools/align_painting.py` finds the small
+   stretch and shift the painter added (the notice corner's: 0.65% and 3 pixels, log 32) from the props'
+   outlines measured for the plate's own camera (`shot_facts.py --camera-at ... --fov PLATE_LENS`). Give the
+   painter the critics' painter words: what to keep, and never to add flames, smoke, glows or new shadows
+   round the near props (they would slide or blink out once the camera moves).
+5. Ask Flux once more, with the lined-up painting as the only picture, to paint the near props out; keep
+   the result the same size and line it up against the first (`align_painting.py ... --against PAINTING`).
+   The painter removes the props' shadows with the props, so keep the first painting everywhere except
+   inside the near props' own outlines (`keep_painted_shadows.py`), or the shadows fade off the ground as
+   soon as the camera moves (log 32). In the page, load the set and shine the painting onto it
    (`projectPaintingOnto` in `projected-set.js`) with `behind: { painting, hide: nearProps }` and the
    lettered materials in `ownSurface` (the painter garbles small print). Then shine
    `paintedSkyOnly(projection, painting)` onto a far sky card as a second projection, and put soft
@@ -188,8 +195,11 @@ three zip files.
    the move, a middle moment, and the `weights` view (orange wears the painting, blue its own
    surface). Blue showing at a frame edge means the camera left the painted area: turn less, and push
    in with the lens rather than moving forward.
-7. Have independent helpers critique the stills, film with `film-chapter-parallel.sh`, then check the
-   film in motion.
+7. Run the shot checker on the film page's own end frame (its camera is Blender's composed one): the notice
+   and board wear their own surfaces there, lit by the page, so their light is judged there. Have independent
+   helpers critique the stills, film with `film-chapter-parallel.sh`, lay music under a clip without
+   narration with `paper-film/tools/add_music_bed.sh` (the music never goes into the repository), then
+   check the film in motion.
 
 Before step 2 (from log 30): compose the shot with `film-kit/07 Composing a shot.md`. Optionally sketch
 the composition first by giving Nano Banana Pro (on fal, 15 US cents) the empty street and the prop

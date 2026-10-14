@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-14, afternoon.**
+**As of 2026-10-14, evening.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -227,12 +227,26 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   Its tests: `paper-film/blender/tests/run-checker-tests.sh` (eleven planted faults, each named first).
 - The rebuilt frame passes 30 of 36 checks; open: the quiet side's weight (34%, aim 40) and the notice's
   warmth from below (0.07, need 0.10). Two critics and a skeptic are checking it before the repaint.
-- The plate for painting is being drawn with the new lighting. Not painted or filmed yet. Nothing spent.
+- Painted and filmed in log 32 (below).
+
+## The notice corner, painted and filmed (log 32, 2026-10-14)
+
+- Three rounds of critics' fixes made in 3D (`assemble_notice_corner.py`, `set_dressing.py`), then the
+  final still ("32 Notice corner - relit and checked", 32 of 38 checks pass) and the plate drawn.
+- Painted by Flux 3 with the critics' painter words, plus a copy with the near props painted out; both lined
+  up with the plate by the new `paper-film/tools/align_painting.py` (`film-kit/assets/models/pit-village/
+  notice-corner-painted.jpg`, `notice-corner-behind.jpg`, their record in `notice-corner-paintings.json`).
+- Filmed: "32 Test - notice corner slide" (13 seconds, music only, a section of your soundtrack at
+  -17.7 LUFS; not in the repository, like every video). Frames: "32 Notice corner - the film, two frames a
+  second". New tools: `add_music_bed.sh`, `find_jumps.py`.
+- The shot checker learnt five things this round (colour edges, out-of-date pictures, touching stretches,
+  background props, lights in props); its 11 planted-fault tests still pass.
+- Spent this round: about 20 to 45 US cents on fal (two paintings).
 
 ## Waiting on you
 
-- Your view of the rebuilt notice corner ("31 Notice corner - before and after") and of the shot checker's
-  report.
+- Your view of the notice corner slide ("32 Test - notice corner slide").
+
 
 
 - Your view of chapter 2 (round 20) on your phone.

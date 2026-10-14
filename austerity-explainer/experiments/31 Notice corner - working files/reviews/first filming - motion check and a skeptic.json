@@ -1,0 +1,283 @@
+{
+ "note": "What this file is: the motion check of the first filming of the notice corner slide (log 32): a helper checking faults in motion, a helper watching as a phone viewer, and a skeptic. Session folders shortened to SCRATCH, KIT and REPO.",
+ "watchers": [
+  {
+   "summary": "I watched it as a phone viewer would. I looked at a sheet with one frame per second, at full-size and zoomed crops (every frame from 0 to 2 s, every 5th frame after that, and every frame around the second title), and at copies shrunk to phone size. I measured the sound with ebur128 and my own short-window level checks.\n\nOverall it holds together. The fade-in runs evenly from black (frame 0) to full at 1.0 s. The fade-out is eased from 12.03 s to black at 12.97 s. The slide is smooth and has stopped moving by about 7.7 s. The lantern moves about 110 px down the frame and the notice grows about 28%. I saw no ghosts or doubled edges where the props hide the ground. The dates on the notice are right: Friday 30 April and Saturday 1 May 1926. I saw nothing out of period: gas lamps, a hurricane lantern, a wooden pail, a handcart, metal bins, the pit headframe and the brick terraces. Both titles sit on plain sky, never on busy detail.\n\nThe eye goes to the group at the lower right (about 0.46 to 0.88 across, 0.50 to 0.84 down). It lands first on the moving fire in the middle and then on the white notice right beside it. The drum is about twice the notice's area and grows just as much, so the slide feels like a move toward the fire as much as toward the notice. A rough attention measure gave the notice, the fire and the chair each about twice their area's share.\n\nThe story \"pits closed, locked out\" is clear from the notice plus the titles. \"Someone kept watch and stepped away\" comes through only faintly.\n\nPace suits 13 s. There are 3.9 s with no title (5.0 to 8.9 s) to read the notice, and the last title is held about 3 s before the fade.\n\nThe sound starts cleanly: about -65 dB in the first 0.02 s, then rising. A 4 dB step at 0.42 s is a note starting, not a click, and I found no clicks anywhere. It starts fading at about 11.7 s, 0.3 s before the picture, and is down to -90 dB in the last 0.01 s. Notes are still starting during the fade (level bumps at 12.05 and 12.45 s), so it fades out mid-phrase rather than ending on a final chord.\n\nThe biggest problems are size and sound. The notice's key words are tiny on a phone, the music will sound faint on a phone speaker, and the year in the first title is pale.\n\nWork folder: SCRATCH/plan3/corner/motion-check/work-viewer (frames/, crops/, ebur128.txt, sheet_1s.png).",
+   "findings": [
+    {
+     "title": "The notice's key words are only just readable on a phone",
+     "when": "Whole clip; worst from 1 to 5 s",
+     "where": "The notice paper: about 0.73 to 0.86 across at 1 s, 0.71 to 0.88 across and 0.51 to 0.64 down from about 7.7 s on",
+     "what": "Measured letter heights:\n- \"NOTICE\": 19 px at 1 s, 25 px at 10 s.\n- \"PITS WILL BE CLOSED\": 8 px at 1 s, 11 px at 10 s.\n- \"NEW TERMS\": 9 px at 1 s, 12 px at 10 s.\nOn a phone screen about 6.5 cm wide, 11 px is about 0.7 mm, close to the smallest letters a sharp eye can read at arm's length. In my phone-size copy, NOTICE reads easily, PITS WILL BE CLOSED and NEW TERMS only just, and the rest is grey lines. Contrast is excellent (about 10:1), so size is the only problem. The paper grows only about 28% during the slide (about 0.13 to 0.17 of the frame width). The chair back covers its lower third, starting just below NEW TERMS. The drum next to it is about twice its area.",
+     "fix": "End the slide closer to the notice, or make the notice bigger on the board. Aim for PITS WILL BE CLOSED at about 18 to 20 px tall by the time the camera stops. Or print the two key lines larger on the notice itself. Keep the chair's top rail below NEW TERMS.",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The music is low and bass-heavy, so it will be faint on a phone speaker",
+     "when": "Whole clip",
+     "where": "Soundtrack",
+     "what": "- Overall loudness is -17.7 LUFS, with a true peak of -4.3 dBFS. That is about 4 dB below the usual -14 LUFS streaming level.\n- About 66% of the sound energy is between 100 and 300 Hz and 9% is below 100 Hz. Only 6% is between 1 and 3 kHz, and almost none is above 3 kHz.\n- As a rough stand-in for a small phone speaker, I cut everything below 300 Hz and then below 500 Hz. Loudness fell to -22.8 and -24.6 LUFS.\nThis is measured only; I could not listen.",
+     "fix": "Raise the overall level to about -14 LUFS, keeping peaks under -1 dBFS. Lift the 1 to 4 kHz range, or choose or add a higher instrument line so the tune carries on small speakers.",
+     "severity": "should-fix"
+    },
+    {
+     "title": "\"1926\" in the first title is pale against the sky",
+     "when": "1.2 to 5.0 s (fully shown 1.57 to 4.6 s)",
+     "where": "BRITAIN 1926, about 0.07 to 0.49 across, 0.045 to 0.066 down; \"1926\" is about 0.35 to 0.49 across",
+     "what": "- The grey BRITAIN measures 3.8:1 against the sky.\n- The amber 1926 measures only 2.2:1, so the year is the faintest part of the title even though it is the key fact.\n- The second title gets a dark shade over the top fifth of the frame: the sky darkens by up to about 30 levels between 8.7 and 9.2 s. That shade lifts LOCKED OUT to 7.5:1 and FROM 1 MAY 1926 to 3.3:1. The first title has no shade.",
+     "fix": "Give the first title the same top shade, faded in from about 1.0 s, or make the amber of 1926 lighter.",
+     "severity": "should-fix"
+    },
+    {
+     "title": "\"Someone kept watch and stepped away\" only partly comes across",
+     "when": "Whole clip",
+     "where": "Chair, lantern and pail, about 0.62 to 0.88 across, 0.61 to 0.84 down at the end",
+     "what": "What a viewer sees: the closed-pit notice, a burning drum, an empty chair with a lit lantern on its seat, a pail, an empty street and the colliery. \"Pits closed / locked out\" is clear. The watcher is not: nothing personal is left behind. The lantern on the seat suggests no one was sitting there, so the chair can read as a lantern stand. This is my judgement, not a measurement.",
+     "fix": "Leave a sign of the person: a cap or jacket over the chair back, or a tin mug on the seat or kerb. Move the lantern to the ground beside the chair so the seat looks just left.",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The flames look like flat cut-out shapes; the sparks look like dust",
+     "when": "Whole clip; most noticeable from 6.5 to 9 s when the flames are tallest",
+     "where": "Above the drum, about 0.47 to 0.65 across, 0.57 to 0.64 down",
+     "what": "The flames are smooth yellow-to-orange tongues with crisp edges, 3 or 4 separate spikes. The scene around them is brushy and painted. At full size they look like a cartoon sticker on a painting. They do change every frame and never die out; the flame area dropped below a quarter of its usual size only at 2.23 to 2.27 s. The sparks are pale cream dots drifting up and to the left, and at phone size could pass for dust or snow. The warm light on the cobbles left of the drum does pulse with the fire (8 to 12 levels within about 0.2 of the frame width), which helps.",
+     "fix": "Soften the flame edges and add some brush texture inside them. Let the tongues overlap and blur into a glow at the base. Tint the sparks orange.",
+     "severity": "minor"
+    },
+    {
+     "title": "I could not find the two chimney smokes",
+     "when": "Whole clip",
+     "where": "Cottage chimneys on the left terrace, about 0.0 to 0.35 across, 0.13 to 0.30 down, and the sky",
+     "what": "The page says there are two thin chimney smokes. I saw none in zoomed crops at 1.97, 6.67 and 11.0 s. I also found no moving wisps in a frame-to-frame search of the top 0.36 of the frame (5.2 to 8.2 s) or the top 0.47 (9.6 to 11.9 s; this search left out the title area). They may be out of frame, behind the title area, or too faint to see.",
+     "fix": "Check where the two smokes land on screen. If they should be seen, make them a little denser or darker against the sky and keep them clear of the titles.",
+     "severity": "minor"
+    },
+    {
+     "title": "The second title comes in later than planned and is crowded by the chimney",
+     "when": "8.7 to 9.5 s, then held to 12 s",
+     "where": "LOCKED OUT, about 0.07 to 0.61 across, 0.04 to 0.07 down; FROM 1 MAY 1926 ends at about 0.41 across, 0.09 to 0.11 down; the chimney top is about 0.44 to 0.49 across, 0.078 down",
+     "what": "- The dark shade starts at 8.7 s.\n- LOCKED OUT pops in between 8.93 and 9.03 s (3 frames), shrinking from about 13% too big. The plan said 8.5 s.\n- FROM 1 MAY 1926 shrinks in at 9.43 to 9.47 s. On the frame at 9.43 s its \"1926\" touches the chimney top.\n- In the held frame the chimney top sits about 15 px under \"OUT\" and about 0.03 of the frame width right of \"1926\", so it looks wedged into the title.\n- The camera has stopped by about 7.7 s, so there is about 1.2 s with no move and no text before the title arrives.\n- The pop entrance is a different style from the 0.4 s soft fade of BRITAIN 1926.",
+     "fix": "Bring LOCKED OUT in at 8.5 s as planned, or as soon as the camera stops. Nudge the title block up or left, or make it a little smaller, so the chimney top has clear sky around it. Choose one entrance style for both titles.",
+     "severity": "minor"
+    },
+    {
+     "title": "The notice paper's edges are stair-stepped when zoomed",
+     "when": "Whole clip; clearest at 5.0 s and 8.3 s",
+     "where": "The paper's left edge and its torn top-right and bottom-left corners, about 0.71 and 0.87 across, 0.51 to 0.64 down",
+     "what": "At 1.5x to 3x zoom the torn corners and the left edge show pixel steps rather than a soft torn edge. At phone size they are barely visible.",
+     "fix": "Smooth the edge of the paper cut-out.",
+     "severity": "minor"
+    },
+    {
+     "title": "The music leans to the left",
+     "when": "Whole clip",
+     "where": "Soundtrack",
+     "what": "The left channel is louder in every second, by 1.2 to 5.3 dB (2.6 dB overall). On headphones the music sits slightly left. Played through a single speaker it loses nothing that matters (both channels combined measure -22.0 dBFS).",
+     "fix": "Even out the left and right levels.",
+     "severity": "minor"
+    },
+    {
+     "title": "Slow start for a scrolling feed",
+     "when": "0 to 1.57 s",
+     "where": "Whole frame",
+     "what": "Frame 0 is pure black. The picture fades in evenly to full at 1.0 s. The first title starts at 1.2 s and is fully shown at 1.57 s. If an app uses the first frame as the cover image, the cover will be black. The slide is very gentle, so little changes in the first moments.",
+     "fix": "Shorten the fade-in to about 0.5 s, or bring BRITAIN 1926 in by about 0.5 s. Pick a cover frame from the hold.",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "- I could not play the sound, so I judged the music only by measurements. I can't say how it feels or whether it suits the scene.\n- I did not watch on a real phone or inside any app. I could not check whether app buttons or captions cover anything. The notice's right edge (0.88 across) is where some apps put their side buttons, and LOCKED OUT (0.04 to 0.07 down) is where some apps put top tabs.\n- I did not look at every frame between 2 and 13 s. I looked at every 5th frame, plus every frame at 0 to 2 s, 8.87 to 9.07 s and 9.43 to 9.47 s, and 9.90 and 10.07 s.\n- The phone legibility figures assume a screen about 6.5 cm wide viewed at about 30 cm.\n- The attention measure is rough.\n- I did not find where the chimney smokes are supposed to appear on screen.\n- I did not check colour on other screens.\n- I read only the title-timing and smoke lines of notice-corner.js, and changed nothing outside my work folder."
+  },
+  {
+   "summary": "I pulled all 390 frames (0 to 13 s) into the work folder and looked at about 100 crops at full size and zoomed in. I also measured every frame: point tracking, motion-corrected differences between frames 0.2 and 0.3 s apart, maps of what changes during the hold, and brightness checks on fixed spots.\n\nThe worst fault: between about 1.75 and 2.3 s the shadows that the fire throws from the pail and the chair fade off the pavement. The camera has barely moved at that point and the picture is already at full brightness. After that only small rings under the feet remain.\n\nThe second fault: the side edges of the sharp notice paper buzz with a fine saw-tooth that comes and goes from frame to frame for the whole slide.\n\nSmaller points:\n- The fire glow is a round warm patch that swells and shrinks about twice a second, and its rim on the road is faintly visible.\n- The sparks rise in tidy, evenly paced strings that all go out at the same height.\n- The two chimney smokes cannot be seen anywhere in the frame.\n- The video encoding makes every 4th frame slightly crisper than the others.\n- The end titles snap on at about 8.9 to 9.5 s, not at 8.5 s.\n\nWhat came out clean:\n- **No turning.** All motion spreads out from one fixed spot at about 0.80 across, 0.49 down. Anything left over is 3 pixels or less across the whole slide.\n- **Smooth move.** It starts at 0.3 s, peaks at about 2 pixels per frame at 4.7 s and stops by 8.4 s, with no stutter. The hold is still.\n- **No blinks.** I found no single-frame blinks outside the fire and the titles, and no overall flicker: fixed areas change by 0.4 or less on a 0-255 scale from frame to frame.\n- **Nothing left behind.** No ghost copies or painted outlines are left where the drum, chair, pail, lamp or board posts moved away.\n- **Edges hold up.** Nothing smears at the frame edges, and there are no seams round the board's top or posts.\n- **Notice print is steady.** Its small print does not shimmer beyond what my own image shifting causes.\n\nEvidence is in SCRATCH/plan3/corner/motion-check/work-motion/crops:\n- pail_grid.png, db_grid.png and stab_seq.png show the shadow loss.\n- edge_seq.png and re_stack.png show the notice edges.\n- tstd_hold.png, glow_cmp.png and spark_tracks_both.png show the glow and the sparks.\n\nAll 390 frames are in work-motion/all; they take 1.4 GB and can be deleted.",
+   "findings": [
+    {
+     "title": "The fire's shadows of the pail and chair fade away early in the slide",
+     "when": "Fading from about 1.75 s, gone by about 2.3-2.4 s; missing for the rest of the clip",
+     "where": "Ground right of the pail, about 0.76-0.98 across, 0.73-0.80 down; under the chair seat, about 0.69-0.79 across, 0.69-0.73 down (positions at 2 s)",
+     "what": "At 1.0-1.7 s a long soft dark shadow runs from the pail to the right across the flagstone, and the ground under the chair seat is dark too. These are the shadows thrown by the fire on the left. Between 1.75 and 2.3 s they lighten and disappear while the camera has moved only a few pixels. A fixed patch right of the pail goes from 62 to 88 on the 0-255 scale (about 40% brighter); a road patch used as a check stays at 72. After that only small soft rings are left under the pail, chair feet and drum, and the flagstones round the props look evenly lit. A still-framed comparison at 1, 3, 5 and 8.5 s (stab_seq.png) shows the shadow present at 1 s and gone from 3 s on. It happens at full brightness after the fade-in, so it is not hidden. My guess from the page code: this is the moment the props-removed painting takes over on that ground, and that painting has no prop shadows. I did not confirm this with a weights render.",
+     "fix": "Paint the fire-thrown shadows of the pail and chair into the props-removed painting, or keep the original painting on those shadow areas. Or make the live shadows long, soft and pointing away from the fire instead of small rings. If the switch must stay, make it finish inside the first-second fade-in.",
+     "severity": "must-fix"
+    },
+    {
+     "title": "The notice paper's side edges buzz with a saw-tooth as the camera moves",
+     "when": "Throughout the slide, about 1.4-8.1 s, switching every 1-3 frames; the left edge stays saw-toothed in the hold 8.5-12 s",
+     "where": "Left edge of the notice about 0.71-0.73 across, right edge about 0.86-0.88 across, between 0.52 and 0.60 down; the torn top-right corner near 0.87 across, 0.51 down",
+     "what": "I measured how straight the paper edges are, frame by frame, over 100 rows. On some frames an edge is clean (wobble 0.01-0.02 pixels). On the next it is a 1-pixel stair-step of white and dark teeth (wobble 0.4-0.5 pixels), for example clean on frames 101-104 and toothed on 100 and 105. Zoomed in, a fine white saw-tooth flickers on and off along both sides of the paper. A thin red-brown line also runs down the right edge. In the hold the left edge keeps a fixed saw-tooth that looks like stamp perforations, and the torn corner is stair-stepped. The print on the notice is fine: after lining frames up, its change is no more than shifting the image itself causes.",
+     "fix": "Give the paper's cut-out edge a soft, smoothed boundary instead of a hard cut, or render with more samples (multisampling or supersampling) so thin high-contrast edges stop flickering.",
+     "severity": "should-fix"
+    },
+    {
+     "title": "The fire glow is a round patch that swells and shrinks, with a faintly visible rim",
+     "when": "Whole clip, clearest in the hold 8.5-12 s; pulses about twice a second",
+     "where": "A round patch centred on the drum top, about 0.33-0.80 across and 0.53-0.75 down; its rim on the road runs near 0.34-0.35 across at 0.62 down",
+     "what": "On the road left of the drum, brightness swings between 92 and 105 (0-255) as the glow pulses. Just outside the patch the road stays still (84.1-84.7). The map of what changes during the hold shows a clean circle. On the road the glow climbs from nothing to about 7 levels within about 40 pixels, so its edge is a defined curve that slides back and forth by about 20 pixels as the glow changes size. The patch also lies over the board's left post, the kerb and the colliery gate. At normal contrast it reads as a warm haze breathing round the drum, and the circular edge is faint but present.",
+     "fix": "Let the glow fade to nothing much more gradually well before its edge, or use a bigger, softer glow. Cut the size pulse (now plus or minus 0.1 on a scale of 1.25) and keep mostly the brightness flicker.",
+     "severity": "minor"
+    },
+    {
+     "title": "Sparks rise in tidy, evenly paced strings and all die at the same height",
+     "when": "Whole clip; traced over 9.0-12.0 s",
+     "where": "A fan above the drum, about 0.48-0.66 across, from the coals (about 0.64 down) up to about 0.52 down",
+     "what": "Tracing the sparks' paths over 1 s and 3 s of the hold shows about a dozen gently wavy, nearly vertical strings of evenly spaced dots. That means each spark rises at a constant speed without slowing. All the strings stop at about the same height, which makes a flat ceiling. The fan spreads evenly to both sides and does not lean with the drum smoke, which drifts to the right. In single frames the sparks are pale, soft dots that look more like dust specks than embers. In frames 258-260 a group of 4-5 sparks moved together in a short arc.",
+     "fix": "Vary each spark's speed (slowing as it rises), its lifetime (so they die at different heights), its size and its brightness, and give them the same sideways drift as the smoke.",
+     "severity": "minor"
+    },
+    {
+     "title": "Drum smoke is a steady soft column with little curling",
+     "when": "Whole clip; drifting right over the lamp post at about 9.7-11 s",
+     "where": "Column about 0.55-0.68 across, from about 0.55 down up to about 0.29 down; later over the gas lamp post and windows about 0.75-0.90 across, 0.30-0.45 down",
+     "what": "Frames 0.5 s apart in the hold look almost the same: a broad, even, see-through grey column from the drum past the board top and over the colliery gate. It is soft and not a hard sheet, but it hardly billows. Averaged over 2.8 s it is still a plain vertical haze. Its most changing part is high up at the gate, plus a band drifting right over the board top.",
+     "fix": "Add more puffs with varied size, speed and spin so the column curls and breaks up; optional.",
+     "severity": "minor"
+    },
+    {
+     "title": "The two chimney smokes cannot be seen anywhere",
+     "when": "Whole clip",
+     "where": "Expected near the left terrace chimneys, about 0.0-0.35 across, 0.1-0.3 down",
+     "what": "No chimney smoke shows in the frames I viewed, and the map of what changes during the steady hold (9.2-12 s) shows nothing round any chimney. The top-left corner at 0.5, 1, 2, 3 and 5 s shows none either. From the camera and shot files I worked out where the two chimney tops land on screen. One is far off-screen to the left. The other is at about 0.01 across, 0.11 down at the start and off the left edge by the end. So both smokes are probably out of shot (this is calculated, not seen).",
+     "fix": "Move the smokes to chimneys that are inside the frame (for example the stacks at about 0.1-0.3 across), or drop them.",
+     "severity": "minor"
+    },
+    {
+     "title": "Every 4th frame is crisper than the three between it (an encoding rhythm)",
+     "when": "Whole clip; clearest in the hold; extra whole-frame jumps at 2, 4, 6, 6.5, 8.5, 10.5 and 12.5 s",
+     "where": "Whole frame; most noticeable on large dark flat areas such as the road (0-0.4 across, 0.68-0.95 down) and the sky",
+     "what": "In the encoded file, every 4th frame carries far more data than the frames between (about 160-300 kB against about 55-100 kB). On those frames, a measure of fine detail on the road is about 18% higher (218-224 against 182-192), a rhythm of 7.5 times a second. At each full keyframe the whole picture also changes by about 1.2 extra brightness levels compared with neighbouring frames. During the hold this may show as a faint texture shimmer on phone screens. It comes from the encoder settings, not the scene.",
+     "fix": "Re-encode with more even quality between frames: a lower quality setting number, fewer or no B-frames, or a grain-preserving tune. Or make the film grain weaker or slower.",
+     "severity": "minor"
+    },
+    {
+     "title": "End titles snap on late, at 8.9-9.5 s",
+     "when": "LOCKED OUT: nothing at 8.90 s, full by about 9.03 s, growing slightly until about 9.3 s. FROM 1 MAY 1926: nothing at 9.47 s, mostly on at 9.50 s. The dark band behind them fades in from 8.73 s.",
+     "where": "Top left, about 0.06-0.62 across, 0.04-0.11 down",
+     "what": "Both lines arrive in about 2-4 frames instead of fading in. The brief says the end titles start at 8.5 s; the measured start is about 0.4-1.0 s later. They fade out normally from about 12.07 s with the picture. BRITAIN 1926 fades in over about 1.27-1.6 s and out over about 4.6-5.0 s, which is fine.",
+     "fix": "If a punchy arrival is wanted, keep it; otherwise fade each line in over about 0.3-0.5 s and start at 8.5 s.",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "- I could not watch the clip at real speed. All judgements come from stills, zoomed crops and measurements, so how noticeable each fault is in playback on a phone is an estimate.\n- I extracted and measured all 390 frames, but looked by eye at only about 100 crops, not every frame.\n- In the first second, the switch to the props-removed painting is hidden under the fade-in. Removing the fade showed no pop, but I cannot say how it would look without the fade.\n- The cause of the shadow loss (the props-removed painting taking over) is my guess from the page code, not confirmed with the page's colour-coded \"weights\" view (I did not render anything).\n- The chimney-smoke positions were worked out from the camera and shot files, not seen.\n- Not checked: the music, colour and grade, composition and historical details, and which way the drum smoke should drift."
+  }
+ ],
+ "skeptic": {
+  "summary": "The clip should not go out as it is. One fault needs fixing first. Between about 1.75 and 2.4 s, the long dark shadows that the fire throws from the pail and the chair fade off the pavement in the main group of props. The picture is at full brightness then and the camera has hardly moved. Side by side at phone size the change is plain to see. After that the chair and pail look lighter and less grounded for the rest of the clip.\n\nThe next most useful fix is a should-fix: the notice's key words are only just readable on a phone.\n\nEverything else I could confirm is minor:\n- small flaws in the fire, sparks and smoke\n- the notice edge's 1-pixel saw-tooth\n- titles arriving later than the brief says\n- missing chimney smokes\n- the encoding rhythm\n- bass-heavy, left-leaning music\n\nOne helper finding no longer holds. The viewer measured the sound at 19:12, but the clip file was rewritten at 19:31:58. The music is now at a normal loudness (-13.7 LUFS, peak -0.9 dBFS), not faint. The picture is unchanged: six frames I compared with the motion helper's frames are identical to the pixel.\n\nMy frames and crops are in SCRATCH/plan3/corner/motion-check/work-skeptic. All 390 frames are in f/ (they can be deleted) and the views are in c/. The key views are shadow_grid.png, phone_shadow.png, leftedge_98_107.png, hold_std.png, sparks_max.png, flames_2x.png and titles.png.",
+  "confirmed": [
+   {
+    "title": "The fire's shadows of the pail and chair fade off the pavement at 1.75-2.4 s and never come back",
+    "from": "motion",
+    "evidence": "I put crops of the pail and chair area at 1.0, 1.5, 1.73, 1.9, 2.0, 2.13, 2.3, 2.5, 3.0 and 5.0 s side by side (shadow_grid.png). At 1.0-1.73 s a long dark shadow runs right from the pail across the flagstone, and the ground under the chair seat is dark. At 1.9 s it is lighter, and by 2.13 s it is gone. I measured fixed patches:\n- right of the pail (0.85-0.95 across, 0.75-0.785 down): 70 at 1.0-1.6 s, then 72.5 at 1.8 s, 77.6 at 2.0 s, 85.7 at 2.2 s and 88 at 2.4 s\n- under the seat (0.70-0.76 across, 0.70-0.72 down): 66 at 1.7 s, then 93 at 2.4 s\n- a road check patch (0.1-0.3 across, 0.80-0.85 down): stays at 59.6-61.6\n- the whole frame: changes by less than 1 level\nAt phone size (phone_shadow.png: 1.5, 2.0 and 2.5 s) the pavement round the pail and chair plainly gets lighter. At 5 s (group150.png) the chair legs and pail have hardly any shadow and look a little pasted on. The page's own live contact shadows have finished fading in by 1.1 s, so they are not the cause. The page code does hand the area round the near props to the props-removed painting as the camera moves away. That fits the cause the helper suggested, but I did not render the colour-coded weights view to prove it. It is a gradual change over about 0.5 s, not a pop, and the viewer helper did not notice it. Still, it happens in the group the eye is on, at full brightness, while little else changes.",
+    "fix": "Keep the fire-thrown shadows on the pavement after the handover. Either paint them into the props-removed painting, or keep the original painting on the shadow areas right of the pail and under the chair. Another option is to make the live shadows long, soft and pointing away from the fire, at the strength of the painted ones. If the handover has to stay, finish it inside the first-second fade-in.",
+    "severity": "must-fix"
+   },
+   {
+    "title": "The notice's key words are only just readable on a phone",
+    "from": "viewer",
+    "evidence": "I measured the heights of the dark text rows inside the paper at 10 s:\n- NOTICE: 24 px\n- PITS WILL BE CLOSED: 11 px\n- NEW TERMS: 12 px\nThis matches the viewer's 25, 11 and 12 px. In a 360 px wide phone-size copy (phone3.png), NOTICE reads easily, while PITS WILL BE CLOSED and NEW TERMS only just read. The chair back covers the lower part of the paper, starting just below NEW TERMS (notice300_3x.png). The print itself is sharp, with good contrast.",
+    "fix": "End the slide closer to the notice, or make the notice or its two key lines bigger, so PITS WILL BE CLOSED is about 18-20 px tall in the hold. Keep the chair's top rail below NEW TERMS.",
+    "severity": "should-fix"
+   },
+   {
+    "title": "The notice paper's edges have a 1-pixel saw-tooth that switches on and off during the slide (merged from both helpers)",
+    "from": "motion, viewer",
+    "evidence": "I measured how straight the left edge of the paper is (rows 1010-1110, about 0.53-0.58 down, at about 0.71-0.73 across), frame by frame.\n- During the slide (1.4-8.1 s) it switches between clean (0.00 px wobble) and toothed (0.4-0.5 px) in runs of 2-6 frames. Frames 101-104 are clean and 97-99 and 105-107 are toothed, exactly as the helper said.\n- From about 8.3 s on it stays toothed.\nAt 6x zoom (leftedge_98_107.png, rightedge_98_107.png), the teeth are single white pixels poking out along the edge. There is also a 1 px red-brown line down the right edge. At 3x the torn corners look stair-stepped. At 1x and at phone size I cannot see it (notice300_1x.png, phone3.png). So I rank it lower than the motion helper's should-fix.",
+    "fix": "Soften the paper's cut-out edge (a smoothed alpha edge instead of a hard cut), or render with multisampling or supersampling.",
+    "severity": "minor"
+   },
+   {
+    "title": "\"1926\" in the first title is paler than \"BRITAIN\"",
+    "from": "viewer",
+    "evidence": "At 3.0 s:\n- the amber 1926 is about RGB 189,132,50 and measures 2.2:1 against the sky behind it (63,91,111)\n- the grey BRITAIN measures 3.4:1 (the viewer measured 3.8:1)\nAt full size and at phone size, 1926 still reads clearly, because orange stands out against blue (britain090.png, phone3.png). So I rank it lower than the viewer's should-fix. The first title has no dark shade behind it; the second title does.",
+    "fix": "Lighten the amber a little, or give the first title the same soft top shade as the second.",
+    "severity": "minor"
+   },
+   {
+    "title": "The music is bass-heavy, so it will lose body on a phone speaker (the loudness part no longer holds)",
+    "from": "viewer",
+    "evidence": "On the current file:\n- 66% of the sound energy is between 100 and 300 Hz, 9% is below 100 Hz, 6% is between 1 and 3 kHz, and 0.2% is above 3 kHz\n- cutting everything below 300 Hz drops the loudness from -13.7 to -18.9 LUFS\nThe overall level is now fine (see the rejected item). I could not listen.",
+    "fix": "Add or lift a higher instrument line, or boost 1-4 kHz, so the tune carries on small speakers. Optionally bring the peak to -1 dBFS or lower (now -0.9).",
+    "severity": "minor"
+   },
+   {
+    "title": "The flames look like flat cut-outs; the sparks rise in tidy dotted strings and stop at one height",
+    "from": "viewer, motion",
+    "evidence": "At 2x zoom at 6.67, 7.67 and 10.67 s (flames_2x.png), the flames are 3-4 smooth yellow-to-orange tongues with crisp edges. They look like a sticker against the brushy painting round them. The sparks are pale cream soft dots. I traced the sparks by taking the brightest moment of each pixel over 9.0-10.0 s and 10.0-12.0 s (sparks_max.png). They form about a dozen gently wavy, nearly upright strings of evenly spaced dots, and all stop at about 0.52 down. At phone size the fire still reads as fire.",
+    "fix": "Soften the flame edges and give them some brush texture. Vary each spark's speed, lifetime, size and brightness, tint them orange, and let them drift with the smoke.",
+    "severity": "minor"
+   },
+   {
+    "title": "The fire glow is a round patch whose edge you can just see as it swells and shrinks",
+    "from": "motion",
+    "evidence": "Over 9.2-12.0 s, the map of what changes shows a clean rounded patch left of the drum, with its edge near 0.33 across at 0.62 down (hold_std.png). On the road inside the patch (0.36-0.40 across, 0.62-0.65 down), brightness swings between 86 and 97. Just outside (0.25-0.32 across) it stays at 81.6-82.3. Along a row at 0.62 down, the change climbs from 0 to about 7 levels within about 30-40 px, and the climb moves with the pulse. In a single frame the edge is hard to see (glow300.png). In playback it should read as a breathing warm haze.",
+    "fix": "Make the glow fade out more gradually, or make it bigger and softer. Cut the size pulse and keep mostly the brightness flicker.",
+    "severity": "minor"
+   },
+   {
+    "title": "The two chimney smokes cannot be seen",
+    "from": "motion, viewer",
+    "evidence": "There is no smoke in the top-left crops at 1.0, 2.0, 4.0 and 6.67 s (topleft.png). The map of frame-to-frame change in the top-left corner over 1-2 s shows only the title (topleft_diff.png). The hold change map shows nothing at any chimney. I redid the helper's calculation from the camera and shot files:\n- chimney 1 lands far off-screen to the left and above\n- chimney 2 lands at about 0.01 across, 0.11 down at the start and just off the left edge at the end\nThe brief lists these smokes, but a viewer will not miss them.",
+    "fix": "Move the smokes onto chimneys inside the frame (the stacks at about 0.1-0.3 across, 0.12-0.2 down) or drop them, and keep them clear of the title area.",
+    "severity": "minor"
+   },
+   {
+    "title": "The end titles arrive at 8.9 and 9.4 s, not 8.5 s, with a pop; the colliery chimney sits tight under them",
+    "from": "motion, viewer",
+    "evidence": "In frames 262-300 (titles.png):\n- the dark shade begins at about 8.73 s\n- LOCKED OUT appears from 8.93 s, oversized at first, and settles by about 9.03 s\n- FROM 1 MAY 1926 appears from 9.43 s; at that frame its oversized '1926' touches the chimney top\nThis is set on purpose in the timeline file (examples/notice-corner/timeline.json has \"locked\" at 8.9 s) and in the page ('hook' with a 0.12 s fade and a bounce). The brief and the page header say 8.5 s. In the hold, the chimney top sits about 17 px under OUT and about 0.04 of the frame width right of '1926'.",
+    "fix": "Decide on 8.5 s or 8.9 s and make the brief and the timeline agree. If the titles are kept where they are, nudge the block up or left a little so the chimney top has clear sky round it. Consider the same soft entrance as BRITAIN 1926.",
+    "severity": "minor"
+   },
+   {
+    "title": "The drum smoke is a soft, steady haze that hardly curls",
+    "from": "motion",
+    "evidence": "Crops at 10.0, 10.5 and 11.0 s (smoke_hold.png) show a soft see-through grey haze over the board top, rising toward the colliery gate. It changes only slightly every half second. It is not a hard sheet. This is a matter of taste rather than a fault.",
+    "fix": "Optional: more puffs, with varied size, speed and spin.",
+    "severity": "minor"
+   },
+   {
+    "title": "Every 4th frame is a little crisper (encoder rhythm)",
+    "from": "motion",
+    "evidence": "The frame pattern is P B B B, with full keyframes at 0, 2, 4, 6, 6.5, 8.5, 10.5 and 12.5 s. In the hold:\n- P frames are 93-301 kB (median 269) and B frames are 48-102 kB (median 56)\n- a fine-detail measure on the road (0-0.4 across, 0.70-0.95 down) is 10.3 on P frames against 9.0-9.4 on B frames, about 13% higher, 7.5 times a second\nAt keyframes the frame-to-frame pixel change rises by about 1.2 levels (for example 1.32 to 2.60 at 8.5 s). That is grain texture changing, not a brightness jump; the whole-frame average moves by 0.3 levels or less.",
+    "fix": "Re-encode with steadier quality from frame to frame (fewer B-frames, or a film-grain tune), or make the grain weaker or slower. Apps re-encode uploads anyway.",
+    "severity": "minor"
+   },
+   {
+    "title": "The music leans left",
+    "from": "viewer",
+    "evidence": "Overall loudness: left channel -15.1 dB, right channel -17.7 dB. A 2.6 dB lean, the same as the viewer measured.",
+    "fix": "Even out the left and right levels.",
+    "severity": "minor"
+   },
+   {
+    "title": "Black first frame and a gentle first second",
+    "from": "viewer",
+    "evidence": "Frame 0 is pure black (average 0.0). BRITAIN 1926 starts to show at about 1.17-1.2 s and is fully on by about 1.6 s. If an app uses the first frame as the cover, the cover will be black.",
+    "fix": "Choose a cover frame from the hold, or shorten the fade-in.",
+    "severity": "minor"
+   },
+   {
+    "title": "\"Someone kept watch and stepped away\" only partly comes across",
+    "from": "viewer",
+    "evidence": "What I see: an empty chair with a lit lantern on its seat, a pail and the burning drum. Nothing personal is left behind (group150.png). This is a judgement about the story, not a measured fault.",
+    "fix": "Optional: a cap or jacket on the chair back, or a mug, with the lantern moved to the ground.",
+    "severity": "minor"
+   }
+  ],
+  "rejected": [
+   {
+    "title": "The music is low (-17.7 LUFS, true peak -4.3 dBFS), so it will be faint on a phone",
+    "why": "This was measured on an older soundtrack. The viewer's ebur128.txt is dated 19:12, but the clip was rewritten at 19:31:58. The picture did not change (frames 0, 30, 60, 150, 300 and 389 are identical to the pixel with the helper's frames), but the sound did. The current file measures -13.7 LUFS integrated, true peak -0.9 dBFS, which is at the usual streaming level. Only the bass-heavy part still holds, and I kept it above as a minor point."
+   },
+   {
+    "title": "Extra whole-frame brightness jumps of about 1.2 levels at each keyframe (part of the encoding finding)",
+    "why": "The 1.2 is the rise in average pixel-by-pixel change between frames, which comes from the grain texture changing. The whole-frame average brightness moves by 0.3 levels or less at those frames (for example 72.12 to 71.79 round 8.5 s). There is no brightness jump. I kept the rest of the encoding finding as minor."
+   },
+   {
+    "title": "The notice edge saw-tooth as a should-fix",
+    "why": "The edge flicker is real, but it is a 1-pixel effect that I cannot see at 1x or at phone size. I moved it to minor."
+   },
+   {
+    "title": "The pale \"1926\" as a should-fix",
+    "why": "It is real (2.2:1), but it reads clearly at phone size because the orange stands out against the blue sky. I moved it to minor."
+   }
+  ],
+  "not_checked": "- I could not play the clip at real speed or listen to the sound. All judgements come from stills, zoomed crops and measurements, so how noticeable each fault is in playback is an estimate.\n- I extracted all 390 frames, but I looked by eye at about 20 composite views covering roughly 60 frames, not every frame.\n- I did not render the page's weights view, so the cause of the shadow loss (the props-removed painting taking over round the near props) is likely from the code but not confirmed.\n- The chimney-smoke positions are calculated from the camera and shot files, not seen.\n- Not checked: how the props-removed handover looks inside the first-second fade-in; colour on other screens; app buttons covering the frame; historical details beyond what the helpers said; the viewer's attention measure.\n- I changed nothing outside my work folder and spent no money."
+ }
+}

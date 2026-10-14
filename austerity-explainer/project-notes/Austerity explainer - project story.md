@@ -322,6 +322,9 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Camera match | Finding the camera that lines up the reference's landmarks (wheel hubs, chimney top, gate, roofline, kerbs) with our street's. |
 | Near-touch | Two edges at different distances that just meet on screen, which makes near and far things look stuck together (rule 4). |
 | Render log | The notes Blender writes while drawing a picture; "Shadow buffer full" in it means some shadows came out wrong. |
+| Light linking | Blender's way of choosing which objects a light reaches: the warm light aimed at the notice reaches only the notice and its board. |
+| Lining up a painting | Undoing the small stretch and shift a painter adds, so the painting's edges land exactly on the 3D props when it is shone back. |
+| Music bed | A stretch of music laid under a clip that has no narration, faded in and out. |
 
 ## Log (added to, never rewritten)
 
