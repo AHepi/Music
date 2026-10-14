@@ -592,6 +592,25 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The critics' lighting fixes were made in 3D before any paid repaint (the painter copies the plate's light
   and dark), using the tool as the judge. Overturn in one line.
 
+38. **Keep the notice corner** (your words, about "32 Test - notice corner slide", log 32): "Wow that's
+    incredible. Yes keep it."
+
+39. **Rewrite a script for newcomers** (your words, log 33): "With this new experience and plugin, could you
+    rewrite a script to be more introduction friendly. I've had a few people get lost trying to understand
+    the last video because it moves to quickly and uses terms that your average person isn't familiar with.
+    Keep the writing in the voice of Naomi Klein. See if this attachment helps with pedagogy and prose"
+    (the attachment: your "Steven Pinker Teaching and Writing Toolkit" again, three parts: teach for
+    understanding, write for readers, and a clarity workflow).
+
+### Claude's calls for item 39
+
+- "The last video" is chapter 2, "what really causes inflation" (the last one with narration; the notice
+  corner clip has none). Its script is the one rewritten.
+- "The voice of Naomi Klein" keeps decision 8's meaning: her urgency, direct questions, stakes up front and
+  who-pays focus, never her wording or coined phrases.
+- Only facts already in chapter 2's checked research ledger are used, so the rewrite needs no new research;
+  anything new would be researched and checked first. Overturn in one line.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
