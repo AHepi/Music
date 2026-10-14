@@ -1,0 +1,773 @@
+[
+ {
+  "file": "brazier-drum.glb",
+  "what": "rusted iron drum with burnt holes (pickets' brazier)",
+  "size_metres": {
+   "width_x": 0.593,
+   "depth": 0.593,
+   "height": 0.856
+  },
+  "triangles": 9216,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2098,
+  "source": "Poly Haven \"Barrel Stove\" (https://polyhaven.com/a/barrel_stove) by MP, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "coal-pile.glb",
+  "what": "heap of coal: about 300 angular lumps on a bed of slack, 2 m across, 0.6 m high",
+  "size_metres": {
+   "width_x": 2.256,
+   "depth": 1.885,
+   "height": 0.666
+  },
+  "triangles": 25284,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 3566,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)"
+ },
+ {
+  "file": "coal-sacks.glb",
+  "what": "stack of filled hessian coal sacks (five lying, two standing tied at the neck); faded stencils \"J. HARTWELL COAL MERCHANT ABBOTSCLOUGH 1 CWT.\" and \"A. C. & I. Co. No. 2 PIT BEST HOUSE\" (all invented)",
+  "size_metres": {
+   "width_x": 1.373,
+   "depth": 1.424,
+   "height": 0.587
+  },
+  "triangles": 7960,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2729,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)"
+ },
+ {
+  "file": "coal-tub-on-track.glb",
+  "what": "the coal tub standing on the 3 m length of narrow-gauge track; wheels turn as in coal-tub",
+  "size_metres": {
+   "width_x": 3.0,
+   "depth": 1.101,
+   "height": 1.223
+  },
+  "triangles": 29508,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 11606,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)",
+  "turning_parts": [
+   "wheel_front_left",
+   "wheel_front_right",
+   "wheel_back_left",
+   "wheel_back_right"
+  ]
+ },
+ {
+  "file": "coal-tub.glb",
+  "what": "pit coal tub: riveted steel body, oak sole bars, cast-iron flanged wheels (22-inch gauge), coupling chain, heaped with coal; wheels wheel_front_left / _right, wheel_back_left / _right turn about their axle",
+  "size_metres": {
+   "width_x": 1.324,
+   "depth": 0.733,
+   "height": 1.05
+  },
+  "triangles": 24492,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 6743,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)",
+  "turning_parts": [
+   "wheel_front_left",
+   "wheel_front_right",
+   "wheel_back_left",
+   "wheel_back_right"
+  ],
+  "turn_axis": "local Y in Blender (three.js: rotate wheel.rotation.z after export, axle runs along the model's depth)"
+ },
+ {
+  "file": "colliery-name-board.glb",
+  "what": "painted colliery name board \"ABBOTSCLOUGH COLLIERY / ABBOTSCLOUGH COAL & IRON COMPANY, LIMITED / No. 2 PIT\" (invented): sign-writer lettering shaded in red on chipped green paint over six weathered planks, iron straps and bolts, on two 4.35 m posts with forged brackets; board 2.4 x 1.2 m centred 3.55 m up (object \"posts\" can be hidden to hang the board elsewhere)",
+  "size_metres": {
+   "width_x": 2.864,
+   "depth": 0.208,
+   "height": 4.43
+  },
+  "triangles": 2332,
+  "textures": [
+   "1024x1024",
+   "2048x1024"
+  ],
+  "kilobytes": 6718,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)",
+  "lettering": [
+   "ABBOTSCLOUGH",
+   "COLLIERY",
+   "ABBOTSCLOUGH COAL & IRON COMPANY, LIMITED",
+   "No. 2 PIT"
+  ],
+  "texture": "colliery-board 2048x1024"
+ },
+ {
+  "file": "crowbar.glb",
+  "what": "iron crowbar",
+  "size_metres": {
+   "width_x": 0.04,
+   "depth": 0.128,
+   "height": 0.555
+  },
+  "triangles": 2300,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1550,
+  "source": "Poly Haven \"Crowbar 01\" (https://polyhaven.com/a/crowbar_01) by Alexander Otterbeck, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "dustbins.glb",
+  "what": "two galvanised dustbins with lids",
+  "size_metres": {
+   "width_x": 1.778,
+   "depth": 0.556,
+   "height": 0.906
+  },
+  "triangles": 13960,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 4882,
+  "source": "Poly Haven \"Metal Trash Can\" (https://polyhaven.com/a/metal_trash_can) by GurJas Studios, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "felling-axe.glb",
+  "what": "long-handled axe",
+  "size_metres": {
+   "width_x": 0.047,
+   "depth": 0.214,
+   "height": 0.63
+  },
+  "triangles": 3348,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1981,
+  "source": "Poly Haven \"Wooden Axe\" (https://polyhaven.com/a/wooden_axe) by Ulan Cabanilla, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "flowered-jug.glb",
+  "what": "china jug with flowers",
+  "size_metres": {
+   "width_x": 0.275,
+   "depth": 0.168,
+   "height": 0.211
+  },
+  "triangles": 5770,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1198,
+  "source": "Poly Haven \"Jug 01\" (https://polyhaven.com/a/jug_01) by Kuutti Siitonen, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "folding-stool.glb",
+  "what": "folding wooden stool",
+  "size_metres": {
+   "width_x": 0.528,
+   "depth": 0.547,
+   "height": 0.442
+  },
+  "triangles": 6324,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2216,
+  "source": "Poly Haven \"Folding Wooden Stool\" (https://polyhaven.com/a/folding_wooden_stool) by Ulan Cabanilla, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "gas-lamp-post.glb",
+  "what": "Victorian cast-iron gas lamp on a post (street lamp)",
+  "size_metres": {
+   "width_x": 0.704,
+   "depth": 0.386,
+   "height": 3.871
+  },
+  "triangles": 28000,
+  "textures": [
+   "2048x2048"
+  ],
+  "kilobytes": 8279,
+  "source": "Poly Haven \"Street Lamp 01\" (https://polyhaven.com/a/street_lamp_01) by Josh Dean, 2k textures",
+  "licence": "CC0 1.0 (public domain)",
+  "triangles_before_thinning": 30610
+ },
+ {
+  "file": "gas-lamp-wall-bracket.glb",
+  "what": "gas lantern on a wrought-iron wall bracket",
+  "size_metres": {
+   "width_x": 0.386,
+   "depth": 0.807,
+   "height": 1.675
+  },
+  "triangles": 20338,
+  "textures": [
+   "2048x2048"
+  ],
+  "kilobytes": 7479,
+  "source": "Poly Haven \"Street Lamp 02\" (https://polyhaven.com/a/street_lamp_02) by Josh Dean, 2k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "hammer.glb",
+  "what": "cross-pein hammer with wooden handle",
+  "size_metres": {
+   "width_x": 0.099,
+   "depth": 0.024,
+   "height": 0.3
+  },
+  "triangles": 2124,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1472,
+  "source": "Poly Haven \"Cross Pein Hammer\" (https://polyhaven.com/a/cross_pein_hammer) by Tics, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "handcart.glb",
+  "what": "coal merchant's two-wheeled handcart: 1.1 m spoked wooden wheels with iron tyres, plank bed with side boards on stakes, iron straps and bolts, shafts with handle bar, prop legs, a little coal and an empty sack in the bed; wheel_left / wheel_right turn about their axle",
+  "size_metres": {
+   "width_x": 2.282,
+   "depth": 1.45,
+   "height": 1.103
+  },
+  "triangles": 9792,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 8131,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)",
+  "turning_parts": [
+   "wheel_left",
+   "wheel_right"
+  ]
+ },
+ {
+  "file": "handsaw.glb",
+  "what": "wood-handled handsaw",
+  "size_metres": {
+   "width_x": 0.041,
+   "depth": 0.633,
+   "height": 0.167
+  },
+  "triangles": 2548,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2423,
+  "source": "Poly Haven \"Handsaw Wood\" (https://polyhaven.com/a/handsaw_wood) by Konrad Sza\u0142ankiewicz, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "hurricane-lantern.glb",
+  "what": "brass hurricane lantern with glass globe",
+  "size_metres": {
+   "width_x": 0.122,
+   "depth": 0.097,
+   "height": 0.294
+  },
+  "triangles": 27998,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2375,
+  "source": "Poly Haven \"Lantern 01\" (https://polyhaven.com/a/Lantern_01) by Rajil Jose Macatangay, 1k textures",
+  "licence": "CC0 1.0 (public domain)",
+  "triangles_before_thinning": 33902
+ },
+ {
+  "file": "iron-gates-pair.glb",
+  "what": "pair of tall wrought-iron gates (pithead or yard gate)",
+  "size_metres": {
+   "width_x": 2.95,
+   "depth": 0.097,
+   "height": 2.929
+  },
+  "triangles": 27995,
+  "textures": [
+   "2048x2048"
+  ],
+  "kilobytes": 8354,
+  "source": "Poly Haven \"Large Iron Gate\" (https://polyhaven.com/a/large_iron_gate) by Josh Dean, 2k textures",
+  "licence": "CC0 1.0 (public domain)",
+  "triangles_before_thinning": 38140
+ },
+ {
+  "file": "kitchen-chair.glb",
+  "what": "painted kitchen chair",
+  "size_metres": {
+   "width_x": 0.432,
+   "depth": 0.54,
+   "height": 0.956
+  },
+  "triangles": 724,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 481,
+  "source": "Poly Haven \"Painted Wooden Chair 01\" (https://polyhaven.com/a/painted_wooden_chair_01) by Kuutti Siitonen, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "kitchen-dresser.glb",
+  "what": "chipped painted kitchen cupboard",
+  "size_metres": {
+   "width_x": 1.195,
+   "depth": 0.617,
+   "height": 1.182
+  },
+  "triangles": 2227,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1815,
+  "source": "Poly Haven \"Painted Wooden Cabinet\" (https://polyhaven.com/a/painted_wooden_cabinet) by Kirill Sannikov, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "kitchen-table.glb",
+  "what": "plain wooden kitchen table",
+  "size_metres": {
+   "width_x": 1.134,
+   "depth": 0.706,
+   "height": 0.8
+  },
+  "triangles": 196,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 473,
+  "source": "Poly Haven \"Wooden Table 02\" (https://polyhaven.com/a/wooden_table_02) by Serhii Khromov, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "mantel-clock.glb",
+  "what": "wooden mantel clock",
+  "size_metres": {
+   "width_x": 0.342,
+   "depth": 0.126,
+   "height": 0.16
+  },
+  "triangles": 25721,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 3715,
+  "source": "Poly Haven \"Mantel Clock 01\" (https://polyhaven.com/a/mantel_clock_01) by Yann Kervran, Rico Cilliers, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "milk-can.glb",
+  "what": "small galvanised milk can (29 cm; a dairy churn would be about 70 cm)",
+  "size_metres": {
+   "width_x": 0.197,
+   "depth": 0.195,
+   "height": 0.288
+  },
+  "triangles": 6040,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1751,
+  "source": "Poly Haven \"Metal Jug\" (https://polyhaven.com/a/metal_jug) by Anzor Lezhava, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "narrow-gauge-track.glb",
+  "what": "3 m of narrow-gauge pit railway (22-inch gauge): flat-bottomed rails on weathered sleepers, dog spikes, bolted fishplates, spilt coal; rails run along x; rail top at 0.17 m",
+  "size_metres": {
+   "width_x": 3.0,
+   "depth": 1.101,
+   "height": 0.195
+  },
+  "triangles": 5016,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 7815,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)"
+ },
+ {
+  "file": "notice-on-board.glb",
+  "what": "the printed lock-out notice pasted on a black-painted notice board (vertical boards, timber frame, sloping rain hood); 0.88 x 1.17 m; hang on a wall or post",
+  "size_metres": {
+   "width_x": 0.88,
+   "depth": 0.196,
+   "height": 1.175
+  },
+  "triangles": 1876,
+  "textures": [
+   "1024x1024",
+   "1462x2048"
+  ],
+  "kilobytes": 9268,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)",
+  "text": "ABBOTSCLOUGH COAL & IRON COMPANY, LTD. / NOTICE / TO ALL WORKMEN / The present Contracts of Service will terminate on FRIDAY, 30th APRIL, 1926, and these PITS WILL BE CLOSED from SATURDAY, 1st MAY, 1926, until the Workmen are prepared to accept the NEW TERMS now offered by the Owners ... By Order, T. H. WARBRECK, Agent. (all names invented)"
+ },
+ {
+  "file": "notice-paper.glb",
+  "what": "printed lock-out notice on weathered, foxed, rust-stained paper with two torn corners (see-through), held by four tacks; 0.5 x 0.7 m; paste it on any wall (front faces -y in Blender, +z in three.js)",
+  "size_metres": {
+   "width_x": 0.5,
+   "depth": 0.008,
+   "height": 0.7
+  },
+  "triangles": 472,
+  "textures": [
+   "1024x1024",
+   "1462x2048"
+  ],
+  "kilobytes": 5607,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)",
+  "text": "ABBOTSCLOUGH COAL & IRON COMPANY, LTD. / NOTICE / TO ALL WORKMEN / The present Contracts of Service will terminate on FRIDAY, 30th APRIL, 1926, and these PITS WILL BE CLOSED from SATURDAY, 1st MAY, 1926, until the Workmen are prepared to accept the NEW TERMS now offered by the Owners ... By Order, T. H. WARBRECK, Agent. (all names invented)",
+  "texture": "notice 1462x2048 with transparency"
+ },
+ {
+  "file": "oil-can.glb",
+  "what": "pump oil can with long spout",
+  "size_metres": {
+   "width_x": 0.266,
+   "depth": 0.104,
+   "height": 0.237
+  },
+  "triangles": 16746,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 918,
+  "source": "Poly Haven \"Small Oil Can 01\" (https://polyhaven.com/a/small_oil_can_01) by Raven van de Werken, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "paraffin-tin.glb",
+  "what": "black square paraffin tin",
+  "size_metres": {
+   "width_x": 0.115,
+   "depth": 0.154,
+   "height": 0.205
+  },
+  "triangles": 2834,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2038,
+  "source": "Poly Haven \"Oil Tin\" (https://polyhaven.com/a/oil_tin) by Niklas, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "parlour-oil-lamp.glb",
+  "what": "parlour paraffin lamp with painted glass font",
+  "size_metres": {
+   "width_x": 0.22,
+   "depth": 0.22,
+   "height": 0.802
+  },
+  "triangles": 7208,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2304,
+  "source": "Poly Haven \"Vintage Oil Lamp\" (https://polyhaven.com/a/vintage_oil_lamp) by Monsta3D, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "pick-axe.glb",
+  "what": "dirty iron pick with wooden shaft",
+  "size_metres": {
+   "width_x": 0.55,
+   "depth": 0.069,
+   "height": 1.116
+  },
+  "triangles": 6196,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2182,
+  "source": "Poly Haven \"Picke Dirty 01\" (https://polyhaven.com/a/picke_dirty_01) by Dennis Halbeck, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "rocking-chair.glb",
+  "what": "wooden rocking chair",
+  "size_metres": {
+   "width_x": 0.708,
+   "depth": 0.833,
+   "height": 0.995
+  },
+  "triangles": 11866,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 796,
+  "source": "Poly Haven \"Rockingchair 01\" (https://polyhaven.com/a/Rockingchair_01) by Jorge Camacho, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "safety-lamp.glb",
+  "what": "Davy-style miner's safety lamp: brass oil vessel with knurled locking ring, double brass wire gauze (see-through), three iron pillars, brass cap, carrying ring and hook, small glowing flame (material 'lamp-flame' for the page to flicker)",
+  "size_metres": {
+   "width_x": 0.084,
+   "depth": 0.084,
+   "height": 0.302
+  },
+  "triangles": 3024,
+  "textures": [
+   "1024x1024",
+   "512x512"
+  ],
+  "kilobytes": 3660,
+  "source": "Built by script (paper-film/blender/pit-village/props/build_scripted_props.py) with Poly Haven CC0 surface textures",
+  "licence": "Own work; textures CC0 1.0 (Poly Haven); lettering fonts: Ultra (Apache 2.0), Old Standard TT, Abril Fatface, Alfa Slab One (SIL Open Font Licence)"
+ },
+ {
+  "file": "settle-bench.glb",
+  "what": "painted wooden settle bench",
+  "size_metres": {
+   "width_x": 1.165,
+   "depth": 0.497,
+   "height": 0.889
+  },
+  "triangles": 630,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1942,
+  "source": "Poly Haven \"Painted Wooden Bench\" (https://polyhaven.com/a/painted_wooden_bench) by Kirill Sannikov, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "spade.glb",
+  "what": "rusted spade with wooden D-handle",
+  "size_metres": {
+   "width_x": 0.168,
+   "depth": 0.046,
+   "height": 1.101
+  },
+  "triangles": 11436,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2429,
+  "source": "Poly Haven \"Rusted Spade 01\" (https://polyhaven.com/a/rusted_spade_01) by Blemonade, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "step-ladder.glb",
+  "what": "wooden step ladder",
+  "size_metres": {
+   "width_x": 0.959,
+   "depth": 0.5,
+   "height": 1.335
+  },
+  "triangles": 8492,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2538,
+  "source": "Poly Haven \"Wooden Ladder\" (https://polyhaven.com/a/wooden_ladder) by Miroslav Turura, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "tea-set.glb",
+  "what": "china tea set (pot, cups, saucers)",
+  "size_metres": {
+   "width_x": 0.918,
+   "depth": 0.484,
+   "height": 0.165
+  },
+  "triangles": 27990,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 1953,
+  "source": "Poly Haven \"Tea Set 01\" (https://polyhaven.com/a/tea_set_01) by James Ray Cock, Rico Cilliers, Jurita Burger, 1k textures",
+  "licence": "CC0 1.0 (public domain)",
+  "triangles_before_thinning": 40296
+ },
+ {
+  "file": "watering-can.glb",
+  "what": "galvanised watering can",
+  "size_metres": {
+   "width_x": 0.191,
+   "depth": 0.452,
+   "height": 0.197
+  },
+  "triangles": 11837,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2552,
+  "source": "Poly Haven \"Watering Can Metal 01\" (https://polyhaven.com/a/watering_can_metal_01) by Charles Nderitu, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wicker-basket-lidded.glb",
+  "what": "square wicker basket with lid",
+  "size_metres": {
+   "width_x": 0.347,
+   "depth": 0.254,
+   "height": 0.2
+  },
+  "triangles": 17850,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2991,
+  "source": "Poly Haven \"Wicker Basket 02\" (https://polyhaven.com/a/wicker_basket_02) by Kuutti Siitonen, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wicker-basket-tray.glb",
+  "what": "shallow wicker basket",
+  "size_metres": {
+   "width_x": 0.383,
+   "depth": 0.295,
+   "height": 0.117
+  },
+  "triangles": 22276,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2665,
+  "source": "Poly Haven \"Wicker Basket 01\" (https://polyhaven.com/a/wicker_basket_01) by Kuutti Siitonen, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wooden-barrel.glb",
+  "what": "oak barrel with iron hoops (beer or water barrel)",
+  "size_metres": {
+   "width_x": 0.742,
+   "depth": 0.756,
+   "height": 0.871
+  },
+  "triangles": 10820,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 930,
+  "source": "Poly Haven \"Wine Barrel 01\" (https://polyhaven.com/a/wine_barrel_01) by James Ray Cock, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wooden-chest-lettered.glb",
+  "what": "wooden chest with carved initials W E C",
+  "size_metres": {
+   "width_x": 0.529,
+   "depth": 1.166,
+   "height": 0.464
+  },
+  "triangles": 5176,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2182,
+  "source": "Poly Haven \"Wooden Crate 02\" (https://polyhaven.com/a/wooden_crate_02) by James Ray Cock, Jurita Burger, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wooden-chest.glb",
+  "what": "iron-handled wooden chest",
+  "size_metres": {
+   "width_x": 0.825,
+   "depth": 0.409,
+   "height": 0.35
+  },
+  "triangles": 6576,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2223,
+  "source": "Poly Haven \"Wooden Crate 01\" (https://polyhaven.com/a/wooden_crate_01) by James Ray Cock, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wooden-lantern.glb",
+  "what": "wooden-framed candle lantern with carry handle",
+  "size_metres": {
+   "width_x": 0.221,
+   "depth": 0.235,
+   "height": 0.53
+  },
+  "triangles": 8321,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 4270,
+  "source": "Poly Haven \"Wooden Lantern 01\" (https://polyhaven.com/a/wooden_lantern_01) by James Ray Cock, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wooden-pail.glb",
+  "what": "wooden pail with iron hoops and handle",
+  "size_metres": {
+   "width_x": 0.367,
+   "depth": 0.342,
+   "height": 0.55
+  },
+  "triangles": 5116,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2275,
+  "source": "Poly Haven \"Wooden Bucket 01\" (https://polyhaven.com/a/wooden_bucket_01) by James Ray Cock, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wooden-stool.glb",
+  "what": "turned wooden stool",
+  "size_metres": {
+   "width_x": 0.425,
+   "depth": 0.442,
+   "height": 0.437
+  },
+  "triangles": 10946,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 939,
+  "source": "Poly Haven \"Wooden Stool 01\" (https://polyhaven.com/a/wooden_stool_01) by Kuutti Siitonen, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ },
+ {
+  "file": "wooden-wash-tub.glb",
+  "what": "wooden wash tub with iron hoops",
+  "size_metres": {
+   "width_x": 0.615,
+   "depth": 0.616,
+   "height": 0.35
+  },
+  "triangles": 7252,
+  "textures": [
+   "1024x1024"
+  ],
+  "kilobytes": 2452,
+  "source": "Poly Haven \"Wooden Bucket 02\" (https://polyhaven.com/a/wooden_bucket_02) by James Ray Cock, 1k textures",
+  "licence": "CC0 1.0 (public domain)"
+ }
+]
