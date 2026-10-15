@@ -106,7 +106,10 @@ async function main() {
     if (output === '--camera') {
       const file = rest[0] ?? `${sceneName}-camera.json`, step = Number(rest[1] ?? 3);
       const samples = [];
-      for (let frame = 0; frame < frameCount; frame += step) samples.push(await page.evaluate((t) => window.built.cameraAt?.(t), info.start + frame / FRAMES_PER_SECOND));
+      for (let frame = 0; frame < frameCount; frame += step) {
+        await page.evaluate((t) => window.prepareFrame?.(t), info.start + frame / FRAMES_PER_SECOND);
+        samples.push(await page.evaluate((t) => window.built.cameraAt?.(t), info.start + frame / FRAMES_PER_SECOND));
+      }
       const plans = await page.evaluate(() => window.built.cameraPlans?.() ?? []);
       fs.writeFileSync(file, JSON.stringify({ scene: sceneName, fps: FRAMES_PER_SECOND, step, page_edges: info.pageEdges ?? [], samples, plans }));
       console.log(`wrote ${file}: ${samples.length} camera samples`);
@@ -116,6 +119,7 @@ async function main() {
       fs.mkdirSync(output, { recursive: true });
       for (const time of rest.slice(1).map(Number)) {
         const started = Date.now();
+        await page.evaluate((t) => window.prepareFrame?.(t), time);
         const dataUrl = await page.evaluate((t) => window.renderFrame(t), time);
         const file = path.join(output, `still-${time.toFixed(2)}.jpg`);
         fs.writeFileSync(file, frameBytes(dataUrl));
@@ -131,9 +135,13 @@ async function main() {
       { stdio: ['pipe', 'inherit', 'inherit'] });
     const started = Date.now();
     // a chunk starts a few frames early, without keeping them, so dust and smoke are already in place
-    for (let frame = Math.max(0, firstFrame - 3); frame < firstFrame; frame++) await page.evaluate((t) => window.renderFrame(t), info.start + frame / FRAMES_PER_SECOND);
+    for (let frame = Math.max(0, firstFrame - 3); frame < firstFrame; frame++) {
+      await page.evaluate((t) => window.prepareFrame?.(t), info.start + frame / FRAMES_PER_SECOND);
+      await page.evaluate((t) => window.renderFrame(t), info.start + frame / FRAMES_PER_SECOND);
+    }
     for (let frame = firstFrame; frame < lastFrame; frame++) {
       const time = info.start + frame / FRAMES_PER_SECOND;
+      await page.evaluate((t) => window.prepareFrame?.(t), time);   // a lazy chapter builds a page the first time it shows
       const dataUrl = await page.evaluate((t) => window.renderFrame(t), time);
       if (!encoder.stdin.write(frameBytes(dataUrl))) await new Promise((resolve) => encoder.stdin.once('drain', resolve));
       const done = frame - firstFrame + 1;

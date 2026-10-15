@@ -25,6 +25,8 @@
     const built = await sceneModule.build();
     window.sceneInfo = { start: built.start, end: built.end, pageEdges: built.pageEdges ?? [] };
     window.renderFrame = (seconds) => built.renderFrame(seconds);
+    // a lazy chapter builds the pages a moment shows when asked (cinema-chapter.js); others need nothing
+    window.prepareFrame = (seconds) => built.prepare?.(seconds);
     window.built = built;
     window.stageReady = true;
   } catch (error) {
