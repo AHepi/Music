@@ -6,6 +6,10 @@
 #
 # Every shape is a Blender object; its texture coordinates are laid out by projecting each face from
 # the side it faces, in metres, so a plank's grain is the same size everywhere.
+#
+# Chapter 2's props (inflation-chapter-2-newcomers/props/build_chapter_2_props.py) use it too; the
+# surface downloads and painted pictures are looked up in the scratch folder prop_library is set to
+# (prop_library.use_scratch), each time they are needed.
 
 import math
 import os
@@ -17,8 +21,16 @@ from mathutils import Matrix, Vector
 
 import prop_library as library
 
-SURFACES = os.path.join(library.DOWNLOADS, 'surfaces')
-PICTURES = os.path.join(library.SCRATCH, 'pictures')
+
+def surfaces_folder():
+    """The Poly Haven surface downloads (asked for each time, so library.use_scratch can move them)."""
+    return os.path.join(library.DOWNLOADS, 'surfaces')
+
+
+def pictures_folder():
+    """The painted pictures the props wear (paint_prop_pictures.py and chapter 2's own)."""
+    return os.path.join(library.SCRATCH, 'pictures')
+
 
 _materials = {}
 
@@ -42,7 +54,7 @@ def tinted_image(asset_id, tint, name, strength=1.0):
     key = f'tint-{name}'
     if key in bpy.data.images: return bpy.data.images[key]
     import numpy as np
-    source = _load(os.path.join(SURFACES, asset_id, 'Diffuse.jpg'))
+    source = _load(os.path.join(surfaces_folder(), asset_id, 'Diffuse.jpg'))
     width, height = source.size
     pixels = np.empty(width * height * 4, np.float32)
     source.pixels.foreach_get(pixels)
@@ -64,7 +76,7 @@ def surface_material(name, asset_id, tile_metres=1.0, tint=None, tint_strength=1
     """A material wearing a Poly Haven surface. tile_metres: how many metres one copy of the picture
     covers. metallic / roughness: None to use the picture's own maps, or a number."""
     if name in _materials: return _materials[name]
-    folder = os.path.join(SURFACES, asset_id)
+    folder = os.path.join(surfaces_folder(), asset_id)
     m = bpy.data.materials.new(name)
     m.use_nodes = True
     nodes, links = m.node_tree.nodes, m.node_tree.links
@@ -105,7 +117,7 @@ def picture_material(name, picture_file, see_through=False, normal_file=None, ro
     shader = nodes['Principled BSDF']
     shader.inputs['Roughness'].default_value = roughness
     shader.inputs['Metallic'].default_value = metallic
-    picture = nodes.new('ShaderNodeTexImage'); picture.image = _load(os.path.join(PICTURES, picture_file))
+    picture = nodes.new('ShaderNodeTexImage'); picture.image = _load(os.path.join(pictures_folder(), picture_file))
     links.new(picture.outputs['Color'], shader.inputs['Base Color'])
     if see_through == 'blend':
         # see-through by degrees (glTF 'alpha blend'): fine wire gauze seen from a distance
@@ -117,7 +129,7 @@ def picture_material(name, picture_file, see_through=False, normal_file=None, ro
         links.new(picture.outputs['Alpha'], cut.inputs[0])
         links.new(cut.outputs['Value'], shader.inputs['Alpha'])
     if normal_file:
-        relief = nodes.new('ShaderNodeTexImage'); relief.image = _load(os.path.join(PICTURES, normal_file), False)
+        relief = nodes.new('ShaderNodeTexImage'); relief.image = _load(os.path.join(pictures_folder(), normal_file), False)
         normal_map = nodes.new('ShaderNodeNormalMap')
         links.new(relief.outputs['Color'], normal_map.inputs['Color'])
         links.new(normal_map.outputs['Normal'], shader.inputs['Normal'])

@@ -6,6 +6,11 @@
 # Run (after download_poly_haven.py):
 #   blender -b --python convert_poly_haven.py              (every choice)
 #   blender -b --python convert_poly_haven.py -- Lantern_01 (just some)
+# Settings, after "--" (without them it works on the pit village's list and library, as before):
+#   --choices FILE             another choices list (chapter 2's: inflation-chapter-2-newcomers/props/chapter_2_choices.py);
+#                              its props go to the library the list names (LIBRARY), with their own index.json
+#   --library NAME_OR_FOLDER   the prop library to write to, if not the list's own
+#   --scratch FOLDER           where the downloads are (FOLDER/downloads), instead of PIT_VILLAGE_SCRATCH
 
 import json
 import os
@@ -15,10 +20,10 @@ import bpy
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import prop_library as library  # noqa: E402
-from poly_haven_choices import CHOICES, TRIANGLE_LIMIT  # noqa: E402
+from poly_haven_choices import load_choices  # noqa: E402
 
 
-def convert(asset_id, file_name, description, size):
+def convert(asset_id, file_name, description, size, triangle_limit):
     folder = os.path.join(library.DOWNLOADS, asset_id)
     gltf = [f for f in os.listdir(folder) if f.endswith('.gltf')][0]
     with open(os.path.join(folder, 'info.json')) as f: info = json.load(f)
@@ -26,7 +31,7 @@ def convert(asset_id, file_name, description, size):
     bpy.ops.import_scene.gltf(filepath=os.path.join(folder, gltf))
     library.stand_on_ground(file_name)
     before = library.count_triangles()
-    after = library.reduce_triangles(TRIANGLE_LIMIT - 2000)
+    after = library.reduce_triangles(triangle_limit - 2000)
     # Poly Haven gives real size in millimetres; compare with what we imported (metres)
     low, high = library.bounds()
     expected_height = info['dimensions'][2] / 1000
@@ -41,7 +46,15 @@ def convert(asset_id, file_name, description, size):
 
 
 if __name__ == '__main__':
-    wanted = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else None
-    for asset_id, file_name, description, size in CHOICES:
+    arguments = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
+    choices_file = None
+    if '--choices' in arguments:
+        at = arguments.index('--choices'); choices_file = arguments[at + 1]; del arguments[at:at + 2]
+    chosen = load_choices(choices_file)
+    if getattr(chosen, 'LIBRARY', None):
+        library.use_library(chosen.LIBRARY)
+    wanted = library.take_folder_settings(arguments)   # --library here overrides the list's own
+    print('writing props to', library.PROPS_FOLDER)
+    for asset_id, file_name, description, size in chosen.CHOICES:
         if wanted and asset_id not in wanted: continue
-        convert(asset_id, file_name, description, size)
+        convert(asset_id, file_name, description, size, getattr(chosen, 'TRIANGLE_LIMIT', 30000))

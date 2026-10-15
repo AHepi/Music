@@ -1,7 +1,8 @@
 # What this does: lays the per-prop pictures from render_contact_sheet.py out as one labelled
 # contact sheet (name, real size and triangle count under each).
 #
-# Run: python3 -I make_sheet.py PICTURE_FOLDER OUT.png
+# Run: python3 -I make_sheet.py PICTURE_FOLDER OUT.png [--library FOLDER]
+#   (--library: another prop library's folder, holding its index.json; the pit village's by default)
 
 import json
 import os
@@ -11,7 +12,12 @@ from PIL import Image, ImageDraw, ImageFont
 
 INDEX = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'models', 'pit-village', 'props', 'index.json')
 
-folder, out = sys.argv[1], sys.argv[2]
+arguments = sys.argv[1:]
+if '--library' in arguments:
+    at = arguments.index('--library')
+    INDEX = os.path.join(arguments[at + 1], 'index.json')
+    del arguments[at:at + 2]
+folder, out = arguments[0], arguments[1]
 with open(INDEX) as f: index = json.load(f)
 cell, label = 420, 54
 columns = 6

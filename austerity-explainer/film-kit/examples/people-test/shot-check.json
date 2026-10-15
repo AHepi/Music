@@ -1,0 +1,31 @@
+{
+ "about": "What this file is: the shot check for the people test (assemble_people_test.py, plan 34 part 'People'): which objects make up each figure and prop, so the shot checker lists every figure as a prop (its distance, size on the frame, what it overlaps) and draws its outline (solo/NAME.png), for counting the figures in a painting against the plate. The composing rules were written for the notice corner; here the brazier stands in as the subject. Used by paper-film/blender/shot_facts.py and paper-film/tools/check_shot.py.",
+ "size": [1080, 1920],
+ "groups": {
+  "brazier": ["brazier-drum*", "brazier_coal_*", "brazier_soot*"],
+  "man stooped": ["figure-stooped"],
+  "man arms folded": ["figure-arms-folded"],
+  "man hand on bar": ["figure-hand-on-bar"],
+  "man leaning": ["figure-leaning"],
+  "man facing": ["figure-facing"],
+  "walker 1": ["figure-walker-1"],
+  "walker 2": ["figure-walker-2"],
+  "walker 3": ["figure-walker-3"],
+  "walker 4": ["figure-walker-4"],
+  "walker 5": ["figure-walker-5"],
+  "walker 6": ["figure-walker-6"],
+  "lamp post": ["gas-lamp-post*"],
+  "gates": ["iron-gates-pair*"],
+  "chimney": ["colliery_chimney*"],
+  "winding wheels": ["winding_wheel_*"]
+ },
+ "subject": "brazier",
+ "story": ["brazier", "man stooped", "man arms folded", "man hand on bar", "man leaning", "man facing"],
+ "pairs_also": ["lamp post", "walker 1", "walker 2", "walker 3", "walker 4", "walker 5", "walker 6"],
+ "work": [],
+ "on_ground": ["brazier", "man stooped", "man arms folded", "man hand on bar", "man leaning", "man facing", "lamp post"],
+ "must_read": [],
+ "lines": {"street": [0, 1, 0.069927], "level": [0, 1, 0]},
+ "lines_key": "street",
+ "eye_height": [1.5, 1.9]
+}

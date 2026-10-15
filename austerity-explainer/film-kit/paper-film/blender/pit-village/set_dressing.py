@@ -3,6 +3,13 @@
 # a spot, standing a prop from the props library there, timber posts, glowing materials, the brazier's
 # fire, and drawing a picture with EEVEE. Run inside Blender (import it from an assemble script).
 # Units are metres; Blender is z-up, the street runs along +y and rises 4 degrees.
+#
+# Other sets (chapter 2's Works lane, built by build_street.py with its settings) use it too:
+#   - set_ground_fallback(slope_degrees, level_from_y): the ground assumed where a ray down finds
+#     nothing (the pit village street's 4 degree rise, level from y = 76, unless changed; 0 for level)
+#   - place_prop(..., folder=...): stand a prop from another prop library (chapter 2's own)
+#   - export_for_film(..., folder=...): write the film's files somewhere other than the pit village
+#     folder (which holds the notice corner, the shot the user kept)
 
 import json
 import math
@@ -17,19 +24,33 @@ SET_FOLDER = os.path.join(KIT_FOLDER, 'assets/models/pit-village')
 PROPS_FOLDER = os.path.join(SET_FOLDER, 'props')
 
 
+# the ground assumed where a ray finds no surface: the pit village street's (set_ground_fallback changes it)
+GROUND_FALLBACK = {'slope_degrees': 4.0, 'level_from_y': 76.0}
+
+
+def set_ground_fallback(slope_degrees, level_from_y=76.0):
+    """Sets the ground that ground_height assumes where a ray down meets nothing: rising
+    slope_degrees up +y from y = 0, level from level_from_y on (0 degrees: level ground at height 0)."""
+    GROUND_FALLBACK['slope_degrees'] = slope_degrees
+    GROUND_FALLBACK['level_from_y'] = level_from_y
+
+
 def ground_height(x, y, start=60.0):
     """The height of whatever surface is under (x, y), found by casting a ray straight down from
     `start` (start below a prop to find the ground under it rather than the prop's top)."""
     depsgraph = bpy.context.evaluated_depsgraph_get()
     hit, location, normal, index, hit_object, matrix = bpy.context.scene.ray_cast(depsgraph, Vector((x, y, start)), Vector((0, 0, -1)))
-    return location.z if hit else min(y, 76) * math.tan(math.radians(4))
+    if hit:
+        return location.z
+    return min(y, GROUND_FALLBACK['level_from_y']) * math.tan(math.radians(GROUND_FALLBACK['slope_degrees']))
 
 
-def place_prop(file_name, x, y, turn_degrees=0.0, name=None, lift=0.0, collection='props', scale=1.0, start=60.0):
+def place_prop(file_name, x, y, turn_degrees=0.0, name=None, lift=0.0, collection='props', scale=1.0, start=60.0, folder=None):
     """Imports a prop from the library and stands it on the surface at (x, y), turned about z: on
-    the first surface a ray going straight down from `start` meets (so a prop can stand on another)."""
+    the first surface a ray going straight down from `start` meets (so a prop can stand on another).
+    folder: another prop library (default the pit village's)."""
     before = set(bpy.data.objects)
-    bpy.ops.import_scene.gltf(filepath=os.path.join(PROPS_FOLDER, file_name))
+    bpy.ops.import_scene.gltf(filepath=os.path.join(folder or PROPS_FOLDER, file_name))
     imported = [o for o in bpy.data.objects if o not in before]
     roots = [o for o in imported if o.parent is None]
     holder = bpy.data.objects.new(name or file_name.replace('.glb', ''), None)
@@ -200,10 +221,12 @@ def render(path, width, height, samples):
     bpy.ops.render.render(write_still=True)
 
 
-def export_for_film(camera, name, fov_degrees, script_name):
+def export_for_film(camera, name, fov_degrees, script_name, folder=SET_FOLDER):
     """Writes the dressed set for the film engine: NAME-set.glb (everything the painting is shone onto),
     NAME-signs.glb (the 'signs' collection: boards and notices, which keep their own lettering) and
-    NAME-camera.json (the plate camera, as the projector for projected-set.js)."""
+    NAME-camera.json (the plate camera, as the projector for projected-set.js), into folder (the pit
+    village's by default)."""
+    os.makedirs(folder, exist_ok=True)
     def select_collection(names):
         bpy.ops.object.select_all(action='DESELECT')
         for o in bpy.context.scene.objects:
@@ -215,9 +238,9 @@ def export_for_film(camera, name, fov_degrees, script_name):
     for o in bpy.context.scene.objects:
         if o.type in ('MESH', 'EMPTY') and not any(c.name in sign_names for c in o.users_collection) and not any(c.name in ('cameras', 'preview_lights') for c in o.users_collection):
             o.select_set(True)
-    bpy.ops.export_scene.gltf(filepath=os.path.join(SET_FOLDER, f'{name}-set.glb'), export_format='GLB', use_selection=True, export_yup=True, export_cameras=False, export_lights=False, export_apply=True)
+    bpy.ops.export_scene.gltf(filepath=os.path.join(folder, f'{name}-set.glb'), export_format='GLB', use_selection=True, export_yup=True, export_cameras=False, export_lights=False, export_apply=True)
     select_collection(sign_names)
-    bpy.ops.export_scene.gltf(filepath=os.path.join(SET_FOLDER, f'{name}-signs.glb'), export_format='GLB', use_selection=True, export_yup=True, export_cameras=False, export_lights=False, export_apply=True)
+    bpy.ops.export_scene.gltf(filepath=os.path.join(folder, f'{name}-signs.glb'), export_format='GLB', use_selection=True, export_yup=True, export_cameras=False, export_lights=False, export_apply=True)
     # the projector: the plate camera in three.js space
     q_blender = camera.matrix_world.to_quaternion()
     turn = Quaternion((1, 0, 0), math.radians(-90))
@@ -230,5 +253,5 @@ def export_for_film(camera, name, fov_degrees, script_name):
         'fov': fov_degrees, 'aspect': 1080 / 1920, 'near': 0.1, 'far': 1500,
         'blender': {'location': [round(v, 5) for v in location], 'rotation_quaternion_wxyz': [round(v, 6) for v in q_blender]},
     }
-    with open(os.path.join(SET_FOLDER, f'{name}-camera.json'), 'w') as handle:
+    with open(os.path.join(folder, f'{name}-camera.json'), 'w') as handle:
         json.dump(settings, handle, indent=1)

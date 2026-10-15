@@ -5,6 +5,7 @@
 # Run (EEVEE needs a virtual screen):
 #   Xvfb :94 -screen 0 1920x1080x24 &
 #   DISPLAY=:94 blender -b --python render_contact_sheet.py -- OUT_FOLDER [--size 1024] [prop-file-name ...]
+#   (add --library inflation-chapter-2-newcomers, or a folder, to draw another library's props)
 
 import json
 import math
@@ -58,7 +59,7 @@ def frame(camera, low, high, aspect):
 
 
 if __name__ == '__main__':
-    arguments = sys.argv[sys.argv.index('--') + 1:]
+    arguments = library.take_folder_settings(sys.argv[sys.argv.index('--') + 1:])
     # --size N draws larger pictures (for example 1024, as references for an image model)
     side = 420
     if '--size' in arguments:

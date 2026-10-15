@@ -1,12 +1,17 @@
 # What this does: the list of Poly Haven models (all CC0, free) chosen for the 1920s British pit
 # village, each with what it is in the film, the texture size to fetch, and a target triangle budget.
 # Both download_poly_haven.py (outside Blender) and convert_poly_haven.py (inside Blender) read it.
+# They can read another list written the same way instead (--choices FILE, through load_choices), such
+# as chapter 2's (paper-film/blender/inflation-chapter-2-newcomers/props/chapter_2_choices.py).
 #
 # Chosen by looking at Poly Haven's pictures of each model. Left out on purpose: modern oil drums
 # (Barrel_01, Barrel_02, barrel_03), the green military crates, the car wheel rim, the zinc gate
 # latch, the fibreglass sledgehammer, the rubber-gripped hatchet, the flame-painted enamel pot,
 # green wellingtons, the labelled rusty can, the "WATER" manhole cover, the sticker suitcase
 # and the yard broom (its handle has a modern blue band).
+
+import os
+import sys
 
 CHOICES = [
     # (Poly Haven id, file name in the film, what it is, texture size)
@@ -49,3 +54,19 @@ CHOICES = [
 ]
 
 TRIANGLE_LIMIT = 30000
+
+
+def load_choices(path=None):
+    """The choices list to work from: this file's (the pit village's) when path is None, or another
+    .py file written the same way. Besides CHOICES it may give TRIANGLE_LIMIT, LIBRARY (the prop library
+    its props go to, a name in prop_library.LIBRARIES or a folder), SURFACES (Poly Haven surfaces the
+    scripted props wear) and SET_SURFACES (surfaces a set wears, {id: colour picture size}).
+    Only lists of our own: the file is run as Python."""
+    if path is None:
+        return sys.modules[__name__]
+    import importlib.util
+    specification = importlib.util.spec_from_file_location('chosen_poly_haven_list', os.path.abspath(path))
+    chosen = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(chosen)
+    return chosen
+

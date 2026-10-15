@@ -1,5 +1,5 @@
 # What this does: builds the pit village street set for chapter 3 (a British coalfield village in
-# 1926, the miners' lockout, at dusk) in Blender by script, and writes:
+# 1926, the miners' lockout, at dusk) in Blender by script, and writes (with no settings, see below):
 #   assets/models/pit-village/street.blend   (the set, with lights and both cameras, for plate renders)
 #   assets/models/pit-village/street.glb     (the same set for the three.js stage; textures inside)
 #   assets/models/pit-village/camera.json    (the main camera in Blender space and in three.js space)
@@ -20,14 +20,40 @@
 # behind and dark moorland hills, all under a dusk sky dome.
 #
 # Space is left clear for props: the pavements and the street surface carry nothing but lamps.
+# The settings below build other lanes from the same parts: wider or narrower, shorter, level, with no
+# colliery (chapter 2's Works lane), into another folder.
 #
 # Units are metres. Blender is z-up; the .glb is written y-up (three.js), so a Blender point
 # (x, y, z) is (x, z, -y) in three.js.
 #
 # Run (needs the textures first, see fetch_street_textures.py beside this file):
-#   DISPLAY=:92 blender -b --python build_street.py -- [--preview FOLDER] [--samples N]
+#   DISPLAY=:92 blender -b --python build_street.py -- [--preview FOLDER] [--samples N] [settings]
 # With --preview FOLDER it also renders preview.png (main camera) and preview_side.png (2 m to the
 # right) at 540 x 960 with EEVEE (needs a virtual screen: Xvfb :92 -screen 0 1920x1080x24 &).
+#
+# Settings (all optional; with none of them it builds exactly today's pit village street):
+#   --out FOLDER          where the files go (default assets/models/pit-village)
+#   --name NAME           the files' base name: NAME.blend, NAME.glb and NAME-camera.json (default
+#                         "street", whose camera file keeps its old name, camera.json)
+#   --replace             allow it to write over files that are already there. Without it, it stops
+#                         rather than overwrite anything (the notice corner, the shot the user kept,
+#                         is built on street.blend)
+#   --textures FOLDER     where the surface pictures are (default assets/models/pit-village/textures)
+#   --colliery on|off     the colliery at the top of the street, its spoil heaps and the hills behind
+#                         (default on)
+#   --carriageway METRES  the road's width, kerb face to kerb face (default 5)
+#   --pavement METRES     each pavement's width, kerb face to the house fronts, the kerb stone
+#                         included (default 1.65)
+#   --length METRES       how far the lane runs from its mouth (y = 0, where the terraces begin) to its
+#                         head, where the setts stop (default 72)
+#   --behind METRES       how far the setts and pavements run on behind the mouth (default 12; 0 for a
+#                         lane that opens onto a cross street built by another script)
+#   --slope DEGREES       how steeply the lane rises (default 4; 0 for level ground)
+#   --cottages 8,6        how many cottages in each terrace row, rows parted by a 4 m back lane (both
+#                         sides the same). Without it the rows are filled to 5.5 m short of the head,
+#                         at most 8 cottages a row (8,6 for the default length)
+# For example, chapter 2's Works lane: --out SOMEWHERE --name works-lane --colliery off
+#   --carriageway 6 --pavement 2.2 --length 22 --behind 0 --slope 0
 
 import json
 import math
@@ -42,25 +68,42 @@ from mathutils import Euler, Matrix, Quaternion, Vector
 # ------------------------------------------------------------------------------------ settings
 
 KIT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))   # the kit's top folder
-OUTPUT_FOLDER = os.path.join(KIT_FOLDER, 'assets/models/pit-village')
-TEXTURE_FOLDER = os.path.join(OUTPUT_FOLDER, 'textures')
-BLEND_PATH = os.path.join(OUTPUT_FOLDER, 'street.blend')
-GLB_PATH = os.path.join(OUTPUT_FOLDER, 'street.glb')
-CAMERA_JSON_PATH = os.path.join(OUTPUT_FOLDER, 'camera.json')
+PIT_VILLAGE_FOLDER = os.path.join(KIT_FOLDER, 'assets/models/pit-village')
 
 arguments = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
-PREVIEW_FOLDER = arguments[arguments.index('--preview') + 1] if '--preview' in arguments else None
-PREVIEW_SAMPLES = int(arguments[arguments.index('--samples') + 1]) if '--samples' in arguments else 16
+def option(name, default=None):
+    return arguments[arguments.index(name) + 1] if name in arguments else default
 
-SLOPE = math.radians(4.0)
+PREVIEW_FOLDER = option('--preview')
+PREVIEW_SAMPLES = int(option('--samples', '16'))
+
+OUTPUT_FOLDER = os.path.abspath(option('--out', PIT_VILLAGE_FOLDER))
+BASE_NAME = option('--name', 'street')
+TEXTURE_FOLDER = os.path.abspath(option('--textures', os.path.join(PIT_VILLAGE_FOLDER, 'textures')))
+BLEND_PATH = os.path.join(OUTPUT_FOLDER, f'{BASE_NAME}.blend')
+GLB_PATH = os.path.join(OUTPUT_FOLDER, f'{BASE_NAME}.glb')
+CAMERA_JSON_PATH = os.path.join(OUTPUT_FOLDER, 'camera.json' if BASE_NAME == 'street' else f'{BASE_NAME}-camera.json')
+REPLACE_FILES = '--replace' in arguments
+
+WITH_COLLIERY = option('--colliery', 'on') != 'off'
+CARRIAGEWAY_WIDTH = float(option('--carriageway', '5.0'))   # kerb face to kerb face
+PAVEMENT_WIDTH = float(option('--pavement', '1.65'))        # kerb face to the house fronts, the kerb included
+SLOPE_DEGREES = float(option('--slope', '4.0'))
+COTTAGES_PER_ROW = [int(count) for count in option('--cottages').split(',')] if option('--cottages') else None
+
+SLOPE = math.radians(SLOPE_DEGREES)
 RISE_PER_METRE = math.tan(SLOPE)
-STREET_HALF_WIDTH = 2.5           # kerb face to kerb face is 5 m
+STREET_HALF_WIDTH = CARRIAGEWAY_WIDTH / 2   # 2.5 for the pit village
 CHANNEL_WIDTH = 0.3               # the dished gutter channel along each kerb
 KERB_WIDTH = 0.18
 KERB_HEIGHT = 0.13                # kerb top above the channel
-HOUSE_FRONT_X = 4.15              # the cottage fronts (pavement is about 1.3 m wide)
-STREET_END_Y = 72.0               # where the setts stop and the colliery yard begins
-PLATEAU_Y = 76.0                  # the colliery stands on level ground from here
+HOUSE_FRONT_X = STREET_HALF_WIDTH + PAVEMENT_WIDTH   # the cottage fronts: 4.15 for the pit village
+WIDER_THAN_PIT_VILLAGE = HOUSE_FRONT_X - 4.15   # how much further out the house fronts stand (0 for the pit village)
+STREET_END_Y = float(option('--length', '72.0'))      # where the setts stop (and the colliery yard begins)
+STREET_START_Y = 0.0 - float(option('--behind', '12.0'))   # where the setts and pavements begin, behind the mouth
+PLATEAU_Y = STREET_END_Y + 4.0    # the ground is level from here (the colliery stands on it): 76 for the pit village
+TERRACE_START_Y = max(-0.5, STREET_START_Y)   # the first cottage's downhill gable
+BACK_LANE_WIDTH = 4.0             # the gap between two terrace rows
 COTTAGE_WIDTH = 4.5
 COTTAGE_DEPTH = 7.0
 EAVES_HEIGHT = 6.0
@@ -73,6 +116,28 @@ CAMERA_VERTICAL_FOV = 40.0
 CAMERA_PITCH_UP = 6.5             # degrees above level, so the headframe sits in the upper middle
 CAMERA_NEAR, CAMERA_FAR = 0.1, 1500.0
 FRAME_WIDTH, FRAME_HEIGHT = 1080, 1920
+
+
+def arguments_changing_the_set():
+    """The settings given that change what is built (not where it is written), as typed."""
+    given = []
+    for name in ('--colliery', '--carriageway', '--pavement', '--length', '--behind', '--slope', '--cottages', '--textures'):
+        if name in arguments:
+            given += [name, option(name)]
+    return given
+
+
+def cottage_rows():
+    """How many cottages stand in each terrace row, from the mouth up (the same on both sides)."""
+    if COTTAGES_PER_ROW:
+        return COTTAGES_PER_ROW
+    rows = []
+    room = STREET_END_Y - 5.5 - TERRACE_START_Y    # the terraces stop 5.5 m short of the lane's head
+    while room >= COTTAGE_WIDTH:
+        count = min(8, int(room // COTTAGE_WIDTH))
+        rows.append(count)
+        room -= count * COTTAGE_WIDTH + BACK_LANE_WIDTH
+    return rows
 
 
 def ground_height(y):
@@ -498,7 +563,7 @@ def marker(name, location, collection_name='markers'):
 
 def build_street():
     """Setts, channels, kerbs and pavements from just behind the camera to the colliery yard."""
-    y_start, y_end = -12.0, STREET_END_Y
+    y_start, y_end = STREET_START_Y, STREET_END_Y
     inner = STREET_HALF_WIDTH - CHANNEL_WIDTH
     # the cambered carriageway
     builder = MeshBuilder()
@@ -565,7 +630,10 @@ def build_ground():
     """The land under and around everything: the muddy colliery yard and the slopes behind the
     cottages, following the street's rise and then levelling out for the colliery."""
     builder = MeshBuilder()
-    xs = np.concatenate([np.linspace(-160, -12, 12), np.linspace(-11, 11, 12), np.linspace(12, 160, 12)])
+    # the house backs reach x = +-11 in the pit village; a wider lane moves them (and this band) out
+    back_x = 11.0 + WIDER_THAN_PIT_VILLAGE
+    under_setts_x = 2.3 + (STREET_HALF_WIDTH - 2.5)
+    xs = np.concatenate([np.linspace(-160, -(back_x + 1), 12), np.linspace(-back_x, back_x, 12), np.linspace(back_x + 1, 160, 12)])
     ys = np.concatenate([np.linspace(-40, STREET_END_Y - 1, 12), np.linspace(STREET_END_Y, 140, 40), np.linspace(145, 260, 10)])
     noise_random = np.random.default_rng(5)
     grid = []
@@ -573,11 +641,11 @@ def build_ground():
         row = []
         for x in xs:
             z = ground_height(y) - 0.04
-            if abs(x) > 11 and y < STREET_END_Y:
+            if abs(x) > back_x and y < STREET_END_Y:
                 z -= 0.4                          # back yards and gardens sit a little lower
             if y > STREET_END_Y + 2 and abs(x) > 3:
                 z += 0.12 * noise_random.random()  # trodden, rutted yard
-            if abs(x) < 2.3 and y < STREET_END_Y:
+            if abs(x) < under_setts_x and y < STREET_END_Y:
                 z -= 0.3                          # stay under the setts
             row.append(builder.bm.verts.new((float(x), float(y), z)))
         grid.append(row)
@@ -970,6 +1038,8 @@ def place_gas_lamps():
     iron, glass = build_gas_lamp()
     spots = [(1, 11.0), (-1, 25.0), (1, 39.0), (-1, 53.0), (1, 64.5)]
     for index, (side, y) in enumerate(spots):
+        if y > STREET_END_Y - 7.5:     # a shorter lane keeps only the lamps that stand along it
+            continue
         x = side * (STREET_HALF_WIDTH + KERB_WIDTH + 0.35)
         location = (x, y, pavement_height(y))
         linked_copy(iron, f'gas_lamp_{index}_post', location, 0.0, 'lamps')
@@ -1585,11 +1655,11 @@ def write_camera_json(camera):
     world_turn = Quaternion((1, 0, 0), math.radians(-90))
     three_quaternion = world_turn @ quaternion
     data = {
-        'about': 'Main camera of the pit village street set (street.glb). Blender space is z-up; '
+        'about': f'Main camera of the pit village street set ({BASE_NAME}.glb). Blender space is z-up; '
                  'three.js space is y-up: positions convert as (x, y, z) -> (x, z, -y); the camera quaternion converts as '
                  'q_three = rotation(-90 degrees about x) * q_blender, because a camera looks down its own -z with +y up in both. '
                  '(For ordinary objects the glTF exporter instead writes (w, x, z, -y), since their vertices are converted too.) '
-                 'The camera is also inside street.glb as the node "main_camera" (and "side_camera", 2 m to the right).',
+                 f'The camera is also inside {BASE_NAME}.glb as the node "main_camera" (and "side_camera", 2 m to the right).',
         'frame': {'width': FRAME_WIDTH, 'height': FRAME_HEIGHT, 'aspect': FRAME_WIDTH / FRAME_HEIGHT},
         'vertical_fov_degrees': CAMERA_VERTICAL_FOV,
         'horizontal_fov_degrees': math.degrees(2 * math.atan(math.tan(math.radians(CAMERA_VERTICAL_FOV / 2)) * FRAME_WIDTH / FRAME_HEIGHT)),
@@ -1607,11 +1677,11 @@ def write_camera_json(camera):
             'fov': CAMERA_VERTICAL_FOV,
         },
         'set_notes': {
-            'street_slope_degrees': 4.0,
-            'street_runs_along': 'Blender +y (three.js -z), uphill',
+            'street_slope_degrees': SLOPE_DEGREES,
+            'street_runs_along': 'Blender +y (three.js -z), uphill' if SLOPE_DEGREES else 'Blender +y (three.js -z), level',
             'street_half_width': STREET_HALF_WIDTH,
             'house_front_x': HOUSE_FRONT_X,
-            'ground_height_formula': 'z = min(y, 76) * tan(4 deg) (channel line); pavement top = that + 0.13; road crown + 0.08',
+            'ground_height_formula': f'z = min(y, {PLATEAU_Y:g}) * tan({SLOPE_DEGREES:g} deg) (channel line); pavement top = that + 0.13; road crown + 0.08',
             'winding_wheels': 'nodes winding_wheel_left and winding_wheel_right, each with its origin on its own axle and no rotation; '
                               'the axles run along Blender y, which is three.js -z, so turn them with wheel.rotation.z in three.js '
                               '(rotation_euler y in Blender). The wheels face the camera; ropes are a separate static object (winding_ropes).',
@@ -1620,6 +1690,17 @@ def write_camera_json(camera):
             'glowing_material_names': 'window_lit_glow_0..2 (lit cottage windows), engine_window_glow, lamp_glass_glow, sky_dome_glow',
         },
     }
+    if not WITH_COLLIERY:
+        notes = data['set_notes']
+        del notes['winding_wheels']
+        notes['markers'] = 'empties: lamp_N (lamp heads), <row>_cottage_NN_doorway, <row>_cottage_NN_chimney_top'
+        notes['glowing_material_names'] = 'window_lit_glow_0..2 (lit cottage windows), lamp_glass_glow, sky_dome_glow'
+    if arguments_changing_the_set():
+        # what this set was built with (the pit village's own camera.json, built with none, has no such note)
+        data['set_notes']['built_with'] = 'build_street.py -- ' + ' '.join(arguments_changing_the_set())
+        data['set_notes']['lane'] = {'starts_y': STREET_START_Y, 'setts_end_y': STREET_END_Y, 'level_from_y': PLATEAU_Y,
+                                     'terrace_rows': cottage_rows(), 'terraces_start_y': TERRACE_START_Y,
+                                     'colliery': WITH_COLLIERY}
     with open(CAMERA_JSON_PATH, 'w') as handle:
         json.dump(data, handle, indent=2)
     return data
@@ -1648,6 +1729,8 @@ def preview_lighting():
     glow_object.rotation_euler = (math.radians(-84), 0, math.radians(180))
     collection('preview_lights').objects.link(glow_object)
     # engine house lit windows spill
+    if not WITH_COLLIERY:
+        return
     x0, x1, y0, y1 = ENGINE_HOUSE
     for name, location in (('engine_house_light_front', (x0 + 2.5, y0 - 1.2, COLLIERY_GROUND + 4.0)),
                            ('engine_house_light_side', (x1 + 1.2, (y0 + y1) / 2, COLLIERY_GROUND + 4.0))):
@@ -1659,8 +1742,10 @@ def preview_lighting():
         collection('preview_lights').objects.link(light_object)
 
 
-def render_previews(cameras, folder):
-    os.makedirs(folder, exist_ok=True)
+def picture_settings():
+    """The EEVEE and colour settings saved in the .blend: the shots built on the set (the notice corner)
+    draw their pictures with them. They used to be set only when previews were drawn, so a build without
+    --preview saved a darker, flatter look; now every build saves the same."""
     scene.render.engine = 'BLENDER_EEVEE'
     scene.eevee.taa_render_samples = PREVIEW_SAMPLES
     try:
@@ -1668,11 +1753,16 @@ def render_previews(cameras, folder):
         scene.eevee.use_raytracing = False
     except AttributeError:
         pass
-    scene.render.resolution_x, scene.render.resolution_y = 540, 960
     scene.render.resolution_percentage = 100
     scene.view_settings.view_transform = 'AgX'
     scene.view_settings.look = 'AgX - Medium High Contrast'
     scene.view_settings.exposure = 0.6
+
+
+def render_previews(cameras, folder):
+    os.makedirs(folder, exist_ok=True)
+    picture_settings()
+    scene.render.resolution_x, scene.render.resolution_y = 540, 960
     for name, file_name in (('main_camera', 'preview.png'), ('side_camera', 'preview_side.png')):
         scene.camera = cameras[name]
         scene.render.filepath = os.path.join(folder, file_name)
@@ -1701,23 +1791,37 @@ def count_triangles():
 
 # ==================================================================================== main
 
+def stop_if_files_exist():
+    """Never write over a set that is already there unless asked to (--replace): the notice corner,
+    the shot the user kept, is built on the pit village's street.blend."""
+    existing = [path for path in (BLEND_PATH, GLB_PATH, CAMERA_JSON_PATH) if os.path.exists(path)]
+    if existing and not REPLACE_FILES:
+        print('build_street.py: stopped, these files are already there:', ', '.join(existing))
+        print('  choose another folder (--out) or name (--name), or add --replace to write over them')
+        sys.exit(1)
+
+
 def main():
+    stop_if_files_exist()
     make_materials()
     build_street()
     build_ground()
     lit = 0
-    # right side: rubble sandstone; left side: dark red brick. 8 cottages, a back lane, 6 more.
-    lit += place_cottage_row(1, -0.5, 8, 'cottage_stone', 'right_row_a')
-    lit += place_cottage_row(1, -0.5 + 8 * COTTAGE_WIDTH + 4.0, 6, 'cottage_stone', 'right_row_b')
-    lit += place_cottage_row(-1, -0.5, 8, 'cottage_brick', 'left_row_a')
-    lit += place_cottage_row(-1, -0.5 + 8 * COTTAGE_WIDTH + 4.0, 6, 'cottage_brick', 'left_row_b')
+    # right side: rubble sandstone; left side: dark red brick. In the pit village 8 cottages, a back
+    # lane, 6 more (cottage_rows)
+    for side, wall_material, side_name in ((1, 'cottage_stone', 'right'), (-1, 'cottage_brick', 'left')):
+        first_y = TERRACE_START_Y
+        for row_index, count in enumerate(cottage_rows()):
+            lit += place_cottage_row(side, first_y, count, wall_material, f'{side_name}_row_{"abcdefgh"[row_index]}')
+            first_y += count * COTTAGE_WIDTH + BACK_LANE_WIDTH
     place_gas_lamps()
-    build_headframe()
-    build_heapstead()
-    build_engine_house()
-    build_second_winding_house()
-    build_chimney()
-    build_spoil_heap_and_hills()
+    if WITH_COLLIERY:
+        build_headframe()
+        build_heapstead()
+        build_engine_house()
+        build_second_winding_house()
+        build_chimney()
+        build_spoil_heap_and_hills()
     build_sky_dome()
     # hide the kits (their meshes are used by the placed copies)
     for kit_name in ('cottage_kit', 'lamp_kit'):
@@ -1731,8 +1835,9 @@ def main():
     preview_lighting()
     total, per_collection = count_triangles()
     print('TRIANGLES', total, per_collection, 'lit windows', lit)
-    write_camera_json(cameras['main_camera'])
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+    write_camera_json(cameras['main_camera'])
+    picture_settings()
     if PREVIEW_FOLDER:
         render_previews(cameras, PREVIEW_FOLDER)
     bpy.ops.wm.save_as_mainfile(filepath=BLEND_PATH)

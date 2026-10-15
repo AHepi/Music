@@ -4,6 +4,12 @@
 # three.js) and adding the prop's line to index.json.
 #
 # Every prop .glb has one root empty named after the prop; all its parts hang under it.
+#
+# The finished props go to the pit village's library unless a script chooses another with
+# use_library (chapter 2's props go to assets/models/inflation-chapter-2-newcomers/props, with their
+# own index.json). Scripts take the choice on their command line, after "--":
+#   --library NAME_OR_FOLDER   a library named in LIBRARIES, or any folder
+#   --scratch FOLDER           where downloads and in-between pictures are (instead of PIT_VILLAGE_SCRATCH)
 
 import json
 import os
@@ -13,11 +19,44 @@ import bpy
 from mathutils import Vector
 
 KIT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..'))
-PROPS_FOLDER = os.path.join(KIT, 'assets', 'models', 'pit-village', 'props')
+LIBRARIES = {
+    'pit-village': os.path.join(KIT, 'assets', 'models', 'pit-village', 'props'),
+    'inflation-chapter-2-newcomers': os.path.join(KIT, 'assets', 'models', 'inflation-chapter-2-newcomers', 'props'),
+}
+PROPS_FOLDER = LIBRARIES['pit-village']
 INDEX_PATH = os.path.join(PROPS_FOLDER, 'index.json')
-# downloads and in-between pictures (not kept); set PIT_VILLAGE_SCRATCH to choose the folder
+# downloads and in-between pictures (not kept); set PIT_VILLAGE_SCRATCH (or use_scratch) to choose the folder
 SCRATCH = os.environ.get('PIT_VILLAGE_SCRATCH', os.path.join(tempfile.gettempdir(), 'pit-village-props'))
 DOWNLOADS = os.path.join(SCRATCH, 'downloads')
+
+
+def use_library(name_or_folder):
+    """Send the finished props (and their index.json lines) to another library: a name in LIBRARIES
+    or a folder."""
+    global PROPS_FOLDER, INDEX_PATH
+    PROPS_FOLDER = LIBRARIES.get(name_or_folder) or os.path.abspath(name_or_folder)
+    INDEX_PATH = os.path.join(PROPS_FOLDER, 'index.json')
+    return PROPS_FOLDER
+
+
+def use_scratch(folder):
+    """Take downloads from FOLDER/downloads and keep in-between pictures under FOLDER."""
+    global SCRATCH, DOWNLOADS
+    SCRATCH = os.path.abspath(folder)
+    DOWNLOADS = os.path.join(SCRATCH, 'downloads')
+    return SCRATCH
+
+
+def take_folder_settings(arguments):
+    """Applies --library NAME_OR_FOLDER and --scratch FOLDER from a script's arguments (after "--") and
+    returns the arguments that are left (prop names and other settings)."""
+    left = list(arguments)
+    for setting, apply in (('--library', use_library), ('--scratch', use_scratch)):
+        if setting in left:
+            at = left.index(setting)
+            apply(left[at + 1])
+            del left[at:at + 2]
+    return left
 
 
 def empty_scene():
