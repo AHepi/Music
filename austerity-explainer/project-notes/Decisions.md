@@ -611,6 +611,22 @@ overturn any of them in one line. Changes to the project must follow this file.
 - Only facts already in chapter 2's checked research ledger are used, so the rewrite needs no new research;
   anything new would be researched and checked first. Overturn in one line.
 
+40. **The full redesign, with a new budget** (your words, log 34): "Better. Now's the real test. The full
+    redesign. New budget starting from now is $20. Go!"
+
+### Claude's calls for item 40
+
+- "The full redesign" is the whole of chapter 2 for newcomers (log 33's script) made in the new look you
+  kept in log 32: built 3D places painted over, composed by "07 Composing a shot", the camera sliding
+  without turning, checked by the shot checker.
+- The US$20 starts now and covers the narration (about US$1.10) and the paintings; spending is reported
+  in each log entry.
+- "The real test" is read as: make the film, then show it to the people who got lost (the listener
+  questions in the script file).
+- The paid steps (the recording and the paintings) were refused by this session's automatic safety check
+  on 15 October, despite the budget. They wait for your approval; everything free is done first.
+  Overturn any of these in one line.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
