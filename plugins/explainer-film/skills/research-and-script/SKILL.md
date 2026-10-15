@@ -33,8 +33,8 @@ was written from it and checked before recording.
 - Pages of 15-35 seconds, one idea each. Plan the length at the voice's measured speed, not a
   guess: Malina read chapter 2 at 164 words a minute against the 140 planned, so plan at about 160.
 - Spoken style: short sentences, "..." for a pause; numbers written as said ("twenty twenty-one",
-  "four point one percent"); explain each term in a few words the first time ("unemployment, the
-  share of workers without a job").
+  "four point one percent"); explain each term the first time, in a plain sentence of its own
+  ("Interest is the extra you pay back when you borrow."), never as an aside (see step 4).
 - No capitals for emphasis (the voice shouts them). No delivery cues except the one accent line at
   the start of every page (e.g. `[in a warm, steady New Zealand accent]`).
 - Names the voice gets wrong: write them in phonetic symbols in the text and map them back in
@@ -55,7 +55,7 @@ was written from it and checked before recording.
 
 **Example.** Viewers got lost in chapter 2 as recorded: eight real cases in about 4 and a half
 minutes, jumping back and forth in time, at 164 words a minute, with words like "unemployment" and
-"central bank" left unexplained. The newcomer version uses one imagined picture (two factories, each
+"central bank" explained only in quick asides. The newcomer version uses one imagined picture (two factories, each
 standing for a whole country), four real cases in time order, each placed on the picture out loud,
 three guesses, and the rule said twice in the same words. It came out about 7 minutes long.
 
@@ -68,14 +68,19 @@ three guesses, and the rule said twice in the same words. It came out about 7 mi
   things (e.g. "banks" for ordinary banks and the central bank).
 - **"Before I tell you, guess" moments** at the end of a page, with about 4 seconds held in the film
   (a written "..." gives under a second). **Recaps in the same words each time.**
-- **Numbers**: never two new numbers in one sentence, except a "from... to" pair; give each a plain
+- **Numbers**: never two new numbers in one sentence, except a "from... to" pair or a date with one
+  figure; give each a plain
   anchor ("about three in a hundred"; a hundred-dollar basket going to about a hundred and four).
 - **Short sentences**, about 8 to 10 words, and never an aside between a subject and its verb.
-- **A rule only as strong as its evidence** ("new money, once it's spent, mostly...").
+- **A rule only as strong as its evidence** ("When new money is spent... and there are spare workers,
+  materials and machines... it mostly gets more things made").
+- **Listener questions**: end the script file with "Before recording", a few questions to ask a real
+  newcomer after they hear it (the key one asks them to use the idea on a new case).
 - **Test it**: run the workflow `test-script-with-newcomers` (args: `script`, `ledger`, `work`,
-  `today`, and optionally `rules`, `older`, `viewer`, `voice`, `wordsPerMinute`). Four fresh helpers
-  (imagined newcomers who see only what a viewer sees, a fact checker, a rules-and-voice reader, a
-  skeptic), then a fixer that makes only confirmed fixes, then a re-check of every changed sentence.
+  `today`, and optionally `rules`, `older`, `viewer`, `voice`, `wordsPerMinute`). A viewer copy (if
+  none is given), four fresh helpers (imagined newcomers who see only what a viewer sees, a fact
+  checker, a rules-and-voice reader, a skeptic), a fixer that makes only confirmed fixes, a re-check of
+  every changed sentence, and a last fixer if the re-check finds anything above minor.
   Then read the script to one or two real newcomers before recording: imagined viewers are only a
   first filter. Chapter 2's finished example: `austerity-explainer/chapter-2-inflation/33 Script -
   chapter 2 - what really causes inflation - for newcomers.md`.

@@ -158,13 +158,15 @@ cases (Britain at war, Glasgow, Japan, New Zealand), in time order, and places e
 - **"Before I tell you, guess" moments** at the end of a page, with the gap held about 4 seconds in
   the film. A written "..." gives less than a second, so the thinking time has to come from the film.
 - **Short recaps in the same words each time**, so the second time feels like recognition.
-- **Numbers:** never two new numbers in one sentence, except a "from... to" pair. Give each a plain
+- **Numbers:** never two new numbers in one sentence, except a "from... to" pair or a date with one
+  figure ("By the middle of twenty twenty-six... nearly six in a hundred"). Give each a plain
   anchor ("about three in a hundred"), and use the same unit when two numbers are compared.
 - **Short sentences**, about 8 to 10 words, and never an aside between a subject and its verb.
 - **Plan the length at Malina's measured speed**, about 160 words a minute, not 140. The recorded
   chapter 2 ran at 164, and its fastest pages carried the main idea.
-- **A rule is said only as strongly as its evidence:** "new money, once it's spent, mostly gets more
-  things made", because the research speaks of spending, and Japan's new money mostly wasn't spent.
+- **A rule is said only as strongly as its evidence:** "When new money is spent... and there are spare
+  workers, materials and machines... it mostly gets more things made", because the research speaks of
+  spending, and Japan's new money mostly wasn't spent.
 - **Test with real newcomers before recording**: read the script to one or two people who don't know
   the subject and ask them the listener questions in the chapter's script file. Imagined listeners
   are only a first filter.

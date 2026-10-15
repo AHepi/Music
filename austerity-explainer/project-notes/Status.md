@@ -252,20 +252,21 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   `33 Narration script - chapter 2 for newcomers.json` (ready to record; not recorded).
 - Every step, round by round: `chapter-2-inflation/33 Chapter 2 for newcomers - working files/` (first round:
   audit, teaching plan, voice brief, fact choice, three drafts; second round: judges, combined script, tests,
-  revision; third round: what the viewer-only tester saw, findings, fixes and re-check).
+  revision; third round: what the newcomer tester saw, findings, fixes and re-check).
 - The ledger: Powell's "unfortunate costs" sentence added to C2-M17 and Stats NZ's "main driver" sentences to
-  C2-N02 (both re-read on 15 October).
-- The writing rules have a newcomer section (section 4). The film plugin (1.2.0) has a new step,
-  `test-script-with-newcomers`, tried only with stand-in helpers.
+  C2-N02 (Powell's on the Federal Reserve's page; Stats NZ's in a news site's copy of its release,
+  because Stats NZ's own page could not be found; both read on 15 October).
+- The writing rules have a newcomer section (section 4). The film plugin (1.2.0) has a new workflow,
+  `test-script-with-newcomers`, tried only in a practice run with pretend helpers that do no real work.
 - Not heard by a real newcomer, not recorded, not filmed. Spent nothing.
 
 ## Waiting on you
 
-- The newcomer script: read it to one or two of the people who got lost (the questions are in the file),
+- The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),
   then whether to record it (about 6,300 ElevenLabs credits, about US$1.10).
-- Chapter 2 (round 20): some viewers got lost in it (decision 39); the newcomer script above answers that.
-  Its page 8 and page 10 also say a little more than the ledger allows (log 33).
-- Before publishing: whether page 10's "is raising" still holds after 28 October.
+- Whether to correct pages 8 and 10 of the recorded chapter 2 (round 20), which say a little more than the
+  ledger allows (log 33), or leave that film as it is now that the newcomer version replaces it.
+- Before publishing the recorded chapter 2: whether its page 10's "is raising" still holds after 28 October.
 - Nothing for chapter 1 (you said "This is fantastic."). The kit is ready to hand to the agent making
   the series on the enclosures.
 - The working files the safety check stopped (log 25): notes, scripts and logs from chapter 2's

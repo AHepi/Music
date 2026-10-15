@@ -16,9 +16,10 @@ and who pays, never her words. Every fact comes from the checked research ledger
 
 **How it was made** (every step is in `33 Chapter 2 for newcomers - working files/`): an audit of
 where newcomers get lost in the recording, a teaching plan, a voice brief, a choice of facts, three
-drafts, three judges, one combined script, two rounds of testing by four fresh helpers each
-(imagined newcomers, a fact checker, a rules-and-voice reader, and a skeptic comparing it with the
-recording), fixes after each round, and a re-check of every changed sentence.
+drafts and three judges (the first round); one combined script, tested by three fresh helpers
+(imagined newcomers, a fact checker, a rules-and-voice reader) and fixed (the second round); then a
+final check by four fresh helpers (the same three kinds, plus a skeptic who compared it with the
+recorded script's words), fixes, and a re-check of every changed sentence (the third round).
 
 **Not tested yet:** no real newcomer has heard it, Malina hasn't read it, and nothing is filmed.
 The narration file ready for recording is `33 Narration script - chapter 2 for newcomers.json`.
@@ -33,12 +34,15 @@ The narration file ready for recording is `33 Narration script - chapter 2 for n
   - The recorded chapter 2 is about 4 minutes 30. The extra time is explanation and thinking time,
     not more facts: about 28 spoken figures against 37, and four real cases against eight.
   - Ready cuts of 32 words are listed under "If a slowed read runs long".
+  - The time in each page's heading is at the planned 140 words a minute (about 8 minutes 20 seconds
+    in all); at Malina's 164, each page is about a sixth shorter.
 - **Places:** Britain (with Glasgow inside it), Japan, New Zealand. America appears once, as the
   speaker of the central banks' view, not as a case. Time runs forward.
 - **Spoken figures:** about 28 (the recording had about 37). Every number and year is written as said.
   4.1% and 2.9% are now said as a basket going from a hundred dollars to about a hundred and four.
 - **Sentences:** about 9 words on average. The longest are 20 words (pages 14 and 15).
-- **Checks run on the narration** (after every change, the last on 15 October 2026):
+- **Checks run on the narration** (the voice checker and counter after the last three small changes;
+  the sound scan and word search again on 15 October, in a separate check; none found anything):
   - the project's voice checker: no never-use words, capitals, digits, brackets or exclamation marks;
     Mattei is written /məˈteɪi/ and marked "she argues", "she says";
   - the sound scan: no "rise" anywhere (so no rise/raise clash), no "cost" used as a figure of speech;
@@ -64,9 +68,10 @@ You've felt it at the checkout. The same basket of shopping costs more than it d
   loans", people spend less, businesses hire less; "can").
 - **Terms explained:** inflation ("prices in general, going up... the whole basket"); the usual cure (it
   "makes many loans cost more"; in full on page 12).
-- **Pictures:** as before (page-1 reused, parts swapped, code only). The politician still mouths the
-  warning: NEW MONEY → PRICES UP?, then IS THAT ALWAYS TRUE?, then MANY LOANS COST MORE → OUT OF WORK.
-  The one-tag-swings beat is shortened to match the cut line: every tag flips: THE WHOLE BASKET.
+- **Pictures:** page 1's checkout and chamber, reused (code only). The basket's shelf tags show
+  up-arrows, not prices (the old example prices come off, so they can't be mixed up with page 15's
+  real basket); every tag flips together: THE WHOLE BASKET. The politician mouths the warning: NEW
+  MONEY → PRICES UP?, then IS THAT ALWAYS TRUE?, then MANY LOANS COST MORE → OUT OF WORK.
 
 ### Page 2 - Who can create new money (about 23 s)
 
@@ -98,17 +103,17 @@ Picture two factories. Think of each one as a whole country... all its workers, 
   the new money in the picture; why prices barely move (more money, and more things to buy).
 - **Pictures:** page-3's works A; A WHOLE COUNTRY: WORKERS, MATERIALS, MACHINES; THE QUIET FACTORY;
   coins rain in: THE GOVERNMENT SPENDS NEW MONEY; the workers go in and goods come out: MORE MONEY /
-  MORE THINGS TO BUY (the same layout page 6 uses for MORE MONEY / FEWER THINGS); the price counter
-  stays put.
+  MORE THINGS TO BUY (the same layout page 6 uses for MORE MONEY / FEWER THINGS TO BUY); the price
+  arrow on the factory stays level.
 
 ### Page 4 - The flat-out factory, the first guess (about 21 s, then a 4 s hold)
 
 In the second factory, every worker and every machine is already busy... working as hard as they can. No one waits at the gate. Call it the flat-out factory. The same new money is spent on what this factory makes. What happens to prices? Have a guess.
 
 - **Research:** C2-XA03, C2-M05.
-- **Terms explained:** flat out; the flat-out factory. The guess now names what to guess about.
+- **Terms explained:** flat out; the flat-out factory. The guess says what to guess about (prices).
 - **Pictures:** page-3's works B, gate empty, labelled THE FLAT-OUT FACTORY with a small line under it:
-  FLAT OUT = WORKING AS HARD AS THEY CAN. Coins rain in; the counter freezes. WHAT HAPPENS TO PRICES?
+  FLAT OUT = WORKING AS HARD AS THEY CAN. Coins rain in; the price arrow freezes. WHAT HAPPENS TO PRICES?
   held about 4 seconds, with a small on-screen marker that the film is waiting for a guess.
 
 ### Page 5 - The rule (about 30 s)
@@ -122,7 +127,7 @@ No spare workers, materials or machines... so no extra things get made. More mon
 - **Terms explained:** spare; why prices go up (businesses can ask more); the rule (recap 1, repeated word
   for word on page 16), now with "spent" first, in the same order as page 9's "whether it's spent...
   and on what".
-- **Pictures:** works B's counter flips up; the three cut-outs return stamped NO SPARE, with MORE MONEY /
+- **Pictures:** works B's price arrow climbs; the three cut-outs return stamped NO SPARE, with MORE MONEY /
   SAME THINGS TO BUY, then BUSINESSES CAN ASK MORE, and a small MOST ECONOMISTS AGREE. Then the wide shot of
   both works with two rule cards: NEW MONEY SPENT + SPARE → MOSTLY MORE THINGS MADE and NOTHING SPARE
   → MOSTLY PRICES UP. **Hold the rule cards about 2 seconds after Malina stops**, with the music up,
@@ -140,7 +145,7 @@ Now a real case. Britain, during the First World War. Millions went to fight. So
   to fight).
 - **Pictures:** page-2's munitions hall, words matched (code only): BRITAIN, FIRST WORLD WAR; a typed
   card MILLIONS WENT TO FIGHT; the 100 dots, last nearly empty: FEWER THAN 1 IN 100 OUT OF WORK; SHIPS
-  SUNK: FOOD, MATERIALS; PARTLY NEW MONEY; MORE MONEY / FEWER THINGS; bars 1914 ×1 and 1918 ABOUT ×2;
+  SUNK: FOOD, MATERIALS; PARTLY NEW MONEY; MORE MONEY / FEWER THINGS TO BUY; two bars, BEFORE THE WAR and END OF THE WAR: ROUGHLY ×2;
   quick cut to works B: CLOSE TO THE FLAT-OUT FACTORY.
 
 ### Page 7 - Glasgow's homes (about 38 s)
@@ -153,15 +158,15 @@ By nineteen fifteen, crowds of war workers had come to Glasgow. There were alrea
   after the November peak), second fact check (influx in 1915 confirmed; house building "virtually
   ceased"; labour and materials went to the war; Glasgow building had slumped even before 1914). The
   builders-and-materials line rests on that fact-check row, whose Merrett and Sykes quote was seen
-  second-hand: open a source before recording (see the notes for the ledger's owner).
+  second-hand: open a source before recording (see "Sources still to open" below).
 - **Terms explained:** too few homes (plain words in place of "homes were already short"); the picture
   standing for one kind of thing, said aloud before it is used; the swap (builders busy with the war,
   so few new homes); Britain's Parliament.
 - **Pictures:** page-4's Glasgow tenement street (code only), titled GLASGOW 1915, with TOO FEW HOMES
   ALREADY; workers stream in; the building-site shot: BUILDERS AND MATERIALS GONE TO WAR / FEW NEW
   HOMES; a quick wide shot of works B shrinking to a row of tenements, with the small card ONE KIND OF
-  THING; the tag FOR HOMES: LIKE THE FLAT-OUT FACTORY; RENT RAISED / UP TO +25% IN PLACES; the counter
-  to 20,000 FAMILIES REFUSING THE EXTRA; the stamp RENTS BACK TO BEFORE THE WAR. Never WON or RENTS
+  THING; the tag FOR HOMES: LIKE THE FLAT-OUT FACTORY; RENT RAISED / UP TO A QUARTER MORE, IN PLACES; the
+  counter to ABOUT 20,000 FAMILIES REFUSING THE EXTRA; the stamp RENTS BACK TO BEFORE THE WAR. Never WON or RENTS
   FROZEN. No Mary Barbour card. Never "NOT ENOUGH HOMES" (a Naomi Klein title).
 
 ### Page 8 - Japan, the second guess (about 17 s, then a 4 s hold)
@@ -172,9 +177,10 @@ Japan, twenty thirteen. Japan's version of our Reserve Bank planned to double th
   "will double the monetary base... in two years"; the monetary base is the money the central bank
   has created).
 - **Terms explained:** Japan's version of our Reserve Bank (meaningful, since page 2 said what ours
-  does). "Planned to" replaces "set out to".
-- **Pictures:** unchanged (page-5 part A, JAPAN 2013, ×2 MONEY / IN TWO YEARS, the dashed line IF THE
-  WARNING IS RIGHT climbs under WHAT HAPPENED?), hold about 4 seconds.
+  does); "planned to", not the idiom "set out to".
+- **Pictures:** page 5 part A, relabelled (code only): JAPAN 2013, ×2 MONEY / IN TWO YEARS, the dashed
+  line IF THE WARNING IS RIGHT climbs under WHAT HAPPENED?, held about 4 seconds. Take off the YEN card
+  and the ¥800 noodle-bowl tag with its EXAMPLE PRICE credit (Malina says neither).
 
 ### Page 9 - Japan, the answer (about 33 s)
 
@@ -184,8 +190,9 @@ Prices barely moved... for about eight years. On average, they went up about hal
   about 2.8%, so "on average" stays); C2-C06 and C2-XB03 (most of the new money sat in the banks;
   "one reason"); C2-XA03 and C2-M09 (the "on what" question).
 - **Terms explained:** money created but not spent; recap 2, and what "on what" asks. The two numbers
-  are now in separate sentences.
-- **Pictures:** as before (the almost-level line ABOUT ½% A YEAR; coins piling up in front of the card
+  are in separate sentences.
+- **Pictures:** page 5 part B, relabelled (code only): the almost-level line ABOUT ½% A YEAR (its old
+  label REAL PRICES becomes PRICES); coins piling up in front of the card
   bank: MOST SAT IN THE BANKS; NOT JUST HOW MUCH / WHETHER IT'S SPENT, AND ON WHAT), then the typed
   card SPARE WORKERS, MATERIALS, MACHINES TO MAKE WHAT IT BUYS? **Hold that card about 2 seconds
   after Malina stops**, before the page turn.
@@ -201,8 +208,7 @@ Now, here. When Covid hit in twenty twenty, the Reserve Bank created new money. 
   government's money went on (paying wages); "almost everyone looking for work had found it".
 - **Pictures:** page-8 part B's New Zealand street (code only): NEW ZEALAND 2020; notes land: NEW
   MONEY; GOVERNMENT SPENT MORE / INCLUDING HELP PAYING WAGES; 2021 with the 100-dot panel, 3 empty:
-  ABOUT 3 IN 100 OUT OF WORK, credited Stats NZ (the LOWEST IN 30+ YEARS card is removed with its
-  line); wide shot of both factories: WHICH ONE?, held about 4 seconds.
+  ABOUT 3 IN 100 OUT OF WORK, credited Stats NZ (no LOWEST IN 30+ YEARS card); wide shot of both factories: WHICH ONE?, held about 4 seconds.
 
 ### Page 11 - New Zealand, the answer (about 23 s)
 
@@ -215,7 +221,8 @@ Close to the flat-out factory. Almost no one was waiting at the gate. And prices
   sides; medium confidence, read from the user's report, not a full page), C2-N01 (7.3% in the year to
   June 2022, the fastest in 32 years: "went up fast" and "the peak"), C2-N03 (imported prices up 8.2%
   against 6.6% for home-grown), C2-N02 (petrol and diesel up sharply on world oil prices; Stats NZ's
-  release, opened by the third-round fact checker: "The main driver for the 7.3 percent annual
+  release, read in a news site's copy by the fact checker in the final check and again on 15
+  October: "The main driver for the 7.3 percent annual
   inflation to the June 2022 quarter was the housing and household utilities group, due to rising
   prices for construction and rentals for housing", with transport, petrol and diesel, next).
 - **Terms explained:** none new. It says the outcome and gives both causes in plain words: "more was
@@ -236,8 +243,11 @@ So what's the usual cure? The Reserve Bank raises its interest rate. Interest is
   down", not "not down").
 - **Terms explained:** interest and interest rate; the usual cure in full; "prices go up more slowly.
   Usually not down".
-- **Pictures:** as before. Ends on works B: smoke thins, the lights dim, the queue returns: MORE WORKERS
-  AT THE GATE.
+- **Pictures** (code only): page-10 part A's New Zealand street at dusk; the card dial relabelled
+  INTEREST RATE, its needle rising with no figures; INTEREST = THE EXTRA YOU PAY BACK. From page-9
+  part A: coins pulled back into the card bank (LOANS COST MORE), a shop light going out (LESS TO
+  SPEND), then FEWER HIRED. PRICES GO UP MORE SLOWLY / USUALLY NOT DOWN. Ends on works B: smoke thins, the lights dim, the queue
+  returns: MORE WORKERS AT THE GATE.
 
 ### Page 13 - Who pays, here (about 35 s)
 
@@ -263,7 +273,7 @@ America's version of our Reserve Bank has said the cure would probably mean fewe
 - **Research:** C2-M17 (Powell, chair of America's central bank, 26 Aug 2022: "very likely be some
   softening of labor market conditions", "some pain to households and businesses"; the plain version
   says "including fewer jobs"; the simplified-or-contested column: central banks frame job losses as
-  an "unfortunate cost", not a goal. The third-round fact checker opened the speech: "These are the
+  an "unfortunate cost", not a goal. The fact checker in the final check opened the speech, and it was read again on 15 October: "These are the
   unfortunate costs of reducing inflation."), C2-H18 (Mattei: "The main objective of interest rate
   hikes is to cool down the labor market"; "Fewer job openings and higher unemployment diminish the
   bargaining power of workers"; "unemployment serves as the best disciplinary device to suppress
@@ -274,7 +284,7 @@ America's version of our Reserve Bank has said the cure would probably mean fewe
   (one name with page 10's wages).
 - **Pictures:** page-9 part B (code only): AMERICA'S VERSION OF OUR RESERVE BANK: FEWER JOBS:
   UNFORTUNATE, NOT THE GOAL (no quotation marks; small credit US FEDERAL RESERVE); her book with
-  CLARA E. MATTEI, THE CAPITAL ORDER (2022); MATTEI ARGUES: FEWER JOBS ARE THE MAIN GOAL; the queue
+  CLARA E. MATTEI, THE CAPITAL ORDER (a small source credit, without the year); MATTEI ARGUES: FEWER JOBS ARE THE MAIN GOAL; the queue
   grows and the iron weight drops on the pay packet: LESS POWER TO ASK FOR HIGHER WAGES. No portrait.
 
 ### Page 15 - Back at the checkout (about 33 s)
@@ -295,7 +305,7 @@ And the checkout? Imagine the basket cost a hundred dollars in June twenty twent
 - **Pictures:** a brief return to page-1's basket with a tag: $100, JUNE 2025; it flips to ABOUT $104, A
   YEAR LATER; a ghost tag beside it: ABOUT $103 IF PETROL AND DIESEL PRICES HADN'T CHANGED, credited
   STATS NZ (no 4.1%, 2.9% or 2026 on screen, since Malina doesn't say them on this page); the
-  two-factories wide shot, the oil barrel lands by each works and both counters flip up: BOTH
+  two-factories wide shot, the oil barrel lands by each works and both price arrows climb: BOTH
   FACTORIES; back to the basket with PART OF IT: PETROL AND DIESEL.
 
 ### Page 16 - Spent on what? (about 30 s, then the 4 s fade)
@@ -313,7 +323,8 @@ Does new money always push prices up? No. When new money is spent... and there a
   SPARE TO MAKE WHAT IT BUYS?; then WHO PAYS FOR THE CURE?; both hold; the 4-second fade.
 
 **Every picture change is code only:** relabels, reorders, re-cuts and typed word cards. Words on
-screen stay short forms of what Malina says. Newly off the screen: LOWEST IN 30+ YEARS, 4.1% and 2.9%,
+screen stay short forms of what Malina says. Example prices come off everywhere: page 1's tags and the
+factories' price counters show arrows, not figures. Newly off the screen: LOWEST IN 30+ YEARS, 4.1% and 2.9%,
 MILLIONS IN UNIFORM, HOMES ALREADY SHORT, BIGGEST PUSH: BUILDING NEW HOMES, AND RENTS, OUR RESERVE BANK
 AND OTHERS LIKE IT, MATTEI ARGUES: THE MAIN GOAL, LESS POWER TO ASK FOR MORE PAY, and PART OF IT: NOT
 NEW MONEY SPENT.
@@ -385,7 +396,7 @@ factory ("What happens to prices?"), Japan, New Zealand.
 
 **Recaps:** the rule twice in the same words (pages 5 and 16); "whether it's spent... and on what"
 after Japan; "Who pays for the cure?" asked and answered on page 13 and asked again at the end;
-"Spent on what... and is anything spare to make what it buys?", which joins the closing question to
+"Spent on what, and is anything spare to make what it buys?", which joins the closing question to
 the test and ends in page 9's words.
 
 **Naomi Klein in spirit, never her words:** stakes in the first 30 seconds; the viewer's own questions
@@ -442,8 +453,8 @@ Compared with `19 Script - chapter 2` (10 pages, about 4:26 of speech, about 37 
   without the petrol and diesel rise; part of the rise came from petrol and diesel. The 1973 oil story
   is gone.
 - **Cut:** Bank of England after 2008; Germany 1923; oil in 1973; Britain 1920; New Zealand house
-  prices; the 0.25% to 5.5% figures; the 1-3% target; the 2026 rate rises.
-- **Closing:** "Spent on what... and is anything spare to make what it buys? And who pays for the
+  prices; the 0.25% to 5.5% figures; the 2026 rate rises.
+- **Closing:** "Spent on what, and is anything spare to make what it buys? And who pays for the
   cure?"
 
 ## Facts that change soon (re-check before recording or publishing)
@@ -463,14 +474,14 @@ Compared with `19 Script - chapter 2` (10 pages, about 4:26 of speech, about 37 
 
 ## If a slowed read runs long
 
-These cuts take out about 32 words (about 13 seconds at 140 a minute), bringing the script back to
+These cuts take out about 32 words (about 14 seconds at 140 a minute), bringing the script back to
 about 990 words, in this order:
 
 | Page | Cut | Words |
 |---|---|---|
 | 10 | Only "almost everyone looking for work had found it", read as "By the end of twenty twenty-one... only about three in a hundred were out of work." (the date stays with the figure, as C2-N09 needs, and the pause matches page 13's dated figure) | 8 |
-| 11 | "At the peak, the biggest push came from the price of building new homes... and rents." (Glasgow still carries "on what") | 16 |
-| 6 | "German submarines sank ships carrying food and materials." (weakens "fewer things to buy") | 8 |
+| 11 | "At the peak, the biggest push came from the price of building new homes... and rents." (Glasgow still carries "on what"); drop its AT THE PEAK card too | 16 |
+| 6 | "German submarines sank ships carrying food and materials." (weakens "fewer things to buy"); drop its SHIPS SUNK card too | 8 |
 
 Don't cut page 4's "No one waits at the gate.", page 6's "Now a real case." (the only spoken line
 that marks the change from imagined picture to evidence), or page 7's "Our picture works for one kind
@@ -479,8 +490,10 @@ of thing too."
 ## Sources still to open
 
 Two of the fact checker's notes are done: Powell's sentence "These are the unfortunate costs of
-reducing inflation." (26 August 2022) is now in C2-M17's claim column, and Stats NZ's own "main
-driver" sentences are now in C2-N02's (both re-read on 15 October 2026). Still open:
+reducing inflation." (26 August 2022) is now in C2-M17's claim column, and Stats NZ's "main driver"
+sentences are now in C2-N02's (Powell's on the Federal Reserve's own page; Stats NZ's in a news
+site's copy of its release, because Stats NZ's own page could not be found; both read on 15 October
+2026). Still open:
 
 - If a Reserve Bank of New Zealand statement on job losses is found, page 14 could name our own
   Reserve Bank. Until then it names America's (C2-M17 rests on Powell).
@@ -498,14 +511,14 @@ driver" sentences are now in C2-N02's (both re-read on 15 October 2026). Still o
 - Every factual sentence against its ledger entry, including the "simplified or contested" column,
   the second fact check of 12 October and the Traps, in two rounds by fresh fact checkers; then every
   changed sentence again by a re-checker (45 sentences; no factual errors found).
-- Powell's speech and Stats NZ's June 2022 release, opened again on 15 October 2026 for pages 14
-  and 11.
+- Powell's speech (on the Federal Reserve's page) and a news site's copy of Stats NZ's June 2022
+  release (Stats NZ's own page could not be found), read again on 15 October 2026 for pages 14 and 11.
 - The project's voice checker and sound scan, and a word count, on the final narration: no capitals,
   digits, brackets, exclamation marks, never-use words or the school's name; Mattei in sound symbols
   and marked as hers; no sentence over 20 words.
 - After the last check, three small wording changes (Claude's): "businesses" for "sellers" on page 5
-  (one name with page 12), "More money... and the same things to buy" (the same words as pages 3 and
-  6), and a comma in page 16's first question so "ask two questions" isn't heard as three. The voice
+  (one name with page 12), "More money... and the same things to buy" (the same pattern as pages 3
+  and 6), and a comma in page 16's first question so "ask two questions" isn't heard as three. The voice
   checker and counter were re-run afterwards.
 
 **Not checked:**
@@ -515,12 +528,14 @@ driver" sentences are now in C2-N02's (both re-read on 15 October 2026). Still o
 - Malina hasn't read it, so every time is an estimate.
 - The picture notes are plans only; nothing is drawn or filmed.
 - Whether ElevenLabs lets Malina's speed be set lower: not checked yet.
+- No fact checker has read page 16's closing question as it now stands, or the three small changes on
+  pages 5 and 16; only the voice checker and counter ran on them.
 
 ## Traps
 
 - Page 11's homes line is the price of building new homes, and rents, which are in the price figure.
   Never "building new homes" on its own, and never house prices, +30% or the Royal Commission next to
-  it. Keep "At the peak".
+  it. Keep "At the peak" while the line stays.
 - Keep "partly... and partly" on page 11. New Zealand's price rise has no published split.
 - Keep "When new money is spent" in both rule pages, word for word.
 - Page 14's other side is America's version of our Reserve Bank (Powell, 2022). Never "our Reserve
@@ -539,6 +554,8 @@ driver" sentences are now in C2-N02's (both re-read on 15 October 2026). Still o
   Never write WON.
 - "Nearly six in a hundred" is the June 2026 quarter. Keep "The interest rate isn't the only reason
   for that" and "many" in the answer that follows.
-- Never put a figure on screen that Malina doesn't say.
+- Never put a figure on screen that Malina doesn't say. Small source credits (Stats NZ, US FEDERAL
+  RESERVE, the book's title) are the one exception, and they carry no figures. Example prices never
+  go on screen: price counters show arrows.
 - Prices always "go up". If a later edit brings back "rise" for prices, check it never shares a sentence
   with "raises". Wages are "wages", never "pay"; petrol and diesel are never "fuel".

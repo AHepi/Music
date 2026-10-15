@@ -232,7 +232,7 @@ turning.
 - Write it with the newcomer rules (section 4 of "01 Rules - voice, tone and writing style"): one idea,
   one picture first, about four real cases in time order, guesses, recaps in the same words, every
   unfamiliar word explained.
-- Run the plugin's `test-script-with-newcomers` step: four fresh helpers (imagined newcomers who see only
+- Run the plugin's `test-script-with-newcomers` workflow: four fresh helpers (imagined newcomers who see only
   what a viewer sees, a fact checker, a rules-and-voice reader, a skeptic), then a fixer that makes only
   confirmed fixes, then a re-check of every changed sentence.
 - Then read it to one or two real newcomers with the script's listener questions, before paying to record.

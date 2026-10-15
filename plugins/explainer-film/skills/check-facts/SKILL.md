@@ -37,7 +37,9 @@ Workflow({ name: "explainer-film:test-script-with-newcomers", args: {
 ```
 
 It returns every finding, what the fixer did with each, and the path of the final script
-(`final_script`). Without workflows, run the same five prompts by hand with the Agent tool.
+(`final_script`). Without workflows, run the same prompts by hand with the Agent tool: the viewer copy (if there
+isn't one), the four testers, the fixer, the re-checker, and a last fixer if the re-check finds
+anything above minor.
 
 ## Then
 

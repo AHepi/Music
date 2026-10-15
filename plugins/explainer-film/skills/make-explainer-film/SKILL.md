@@ -31,7 +31,7 @@ at the counter. The whole film is built like that.
 | Step | Skill | Hands on |
 |---|---|---|
 | 1. Research, outlines, script | `research-and-script` | a research ledger (every fact with a source), 2-3 outlines for the user to choose, the script (`narration-script.json`) |
-| 2. Fact check the script, and test it on newcomers | `check-facts` (workflows `verify-facts`, then `test-script-with-newcomers`) | fixes before recording; a short list of questions to ask one or two real newcomers |
+| 2. Fact check the script, and test it on newcomers | `check-facts` (workflows `verify-facts`, then `test-script-with-newcomers`) | fixes before recording; then read it to one or two real newcomers with the script's listener questions |
 | 3. Record and time the voice | `record-narration` | recordings, word times, `timeline.json`, the mix |
 | 4. Paintings, rooms with depth, cut-outs | `paint-and-cut` | `assets/reliefs/<chapter>/`, `paper-film/pieces/<chapter>/` |
 | 5. Pages | `build-cinema-page` (workflow `build-pages` for many at once) | `paper-film/scenes/<chapter>/page-N.js` and `<chapter>.js` |

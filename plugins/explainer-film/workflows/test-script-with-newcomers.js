@@ -78,7 +78,7 @@ general rule stated more broadly than its evidence; a fact with no id or a wrong
 any figure that goes out of date soon after ${A.today}. Every factual error is a must-fix.` },
   { key: 'rules-and-voice', ask: `Check the rules and the voice: numbers written as said; "..." for pauses; no capitals for
 emphasis; no bracketed cues; one name for each thing (list every synonym swap, and every word used in two senses); every term
-explained at first use; never two new numbers in one sentence except a "from... to" pair; no aside between a subject and its
+explained at first use; never two new numbers in one sentence except a "from... to" pair or a date with one figure; no aside between a subject and its
 verb; no stock phrases; nothing that trips the tongue. Does the voice still have life and stakes, or has it gone flat? Count
 spoken words and estimate the length at ${SPEED} words a minute plus about 0.6 seconds for each "...".` },
   { key: 'skeptic', ask: `${A.older ? `Viewers got lost in an older version (${A.older}). Read it, then this one.` : 'Read the script.'}
@@ -115,9 +115,14 @@ const VERIFY = { type: 'object', properties: {
   summary: { type: 'string' }, changed_sentences_checked: { type: 'number' }, findings: FINDINGS.properties.findings,
 }, required: ['summary', 'changed_sentences_checked', 'findings'] }
 
+if (!fixed) {
+  log('the fixer failed: no re-check, and no final script')
+  return { viewer, tested: TESTS.map((t, i) => ({ key: t.key, ...(tested[i] || {}) })), fixed: null, verified: null, last: null, final_script: null, rechecked: false }
+}
+
 phase('Verify')
 const verified = await agent(`${CONTEXT}\n\nYour work folder: ${W}/verify (create it).\n\nA fixer has just changed the script. Before:
-${A.script}. After: ${W}/fix/script.md. The fixer's notes:\n${fixed ? fixed.fixes_made : '(none: the fixer failed)'}\n\nYOUR TASK: compare the
+${A.script}. After: ${W}/fix/script.md. The fixer's notes:\n${fixed.fixes_made}\n\nYOUR TASK: compare the
 narration page by page and list every changed sentence. Check each one afresh, as a skeptic: against its ledger entry, against
 every rule above, and by ear. Also check that nothing was changed by accident, and that the page notes still match the words.
 A finding only for a real problem; every factual error is a must-fix.`, { label: 'verify', phase: 'Verify', schema: VERIFY })
@@ -128,8 +133,10 @@ if (verified && verified.findings.some((f) => f.severity !== 'minor')) {
 ${JSON.stringify(verified.findings, null, 1)}\n\nCheck each against the ledger and the script yourself; fix the confirmed must-fix
 and should-fix ones only, changing nothing else. Return the full script and, in fixes_made, every finding with what you did
 and why. Write it to ${W}/last-fix/script.md too.`, { label: 'last fix', phase: 'Verify', schema: SCRIPT })
+} else if (!verified) {
+  log('the re-check did not run (its helper failed): read the fixer\'s changes yourself')
 } else {
   log('the re-check found nothing above minor: no last fix')
 }
 return { viewer, tested: TESTS.map((t, i) => ({ key: t.key, ...(tested[i] || {}) })), fixed, verified, last,
-  final_script: last ? `${W}/last-fix/script.md` : `${W}/fix/script.md` }
+  final_script: last ? `${W}/last-fix/script.md` : `${W}/fix/script.md`, rechecked: Boolean(verified) }
