@@ -6,8 +6,8 @@
 #                                      lettering on near-black paint over three planks (a narrow plank
 #                                      above and below a wide one that carries all the lettering, so no
 #                                      joint runs through a letter), with a painted moulding
-#   bank-hanging-sign                  "BANK" in gilt on both faces of a board hung from a wrought-iron
-#                                      wall bracket
+#   bank-hanging-sign                  "BANK" in gilt (letters about 0.3 m high) on both faces of a 1.5 x
+#                                      0.75 m board hung from a wrought-iron wall bracket
 #   bank-brass-plate                   "BANK" engraved on a brass door plate with four screws
 #   steel-drum-petrol, steel-drum-diesel   dull grey-black steel drums with rolling hoops, stencilled
 #                                      "PETROL" and "DIESEL" in off-white
@@ -15,13 +15,19 @@
 #                                      "THIS WAY UP" under two arrows on both long sides
 #   chain-and-padlock                  a loop of iron chain (to go round the two gates' meeting bars),
 #                                      a short hanging end, and an old iron padlock
-#   lunch-tin                          a dull, dented tinplate lunch tin with its lid on
-#   jacket-and-cap-on-nail             a wool work jacket hung by its collar on a nail, and beside it, on
-#                                      its own nail and lower down, a tweed cap: nothing round sits above
-#                                      the collar (a cap hung over the collar read as a headless man)
+#   lunch-tin                          a dull, dented tinplate lunch tin with its lid on, a rolled bead
+#                                      round the lid, a wire hinge, a hasp, bright worn edges, rust spots
+#   jacket-and-cap-on-nail             a wool work jacket with a collar and lapels, hung by its collar's
+#                                      loop on a nail, its empty shoulders slumped, and beside it, on its own
+#                                      nail and lower down, a tweed cap hung turned, its peak in profile:
+#                                      nothing round sits above the collar (a cap hung over the collar read
+#                                      as a headless man)
 #   tin-mug                            an enamelled tin mug, dark blue-black, chipped at the rim and foot
 #   wages-envelope                     a thin brown paper pay envelope printed "WAGES", lying flat, with a
 #                                      faint fold below the word
+#   tin-mug-and-wages-envelope         the tin mug with the pay envelope stood up against its front, "WAGES"
+#                                      facing the camera (for the crate in No. 2's yard, W4: lying flat, the
+#                                      word was foreshortened to nothing)
 # The wooden-chest model in the pit village library was not reused for the crate: it is a lidded chest
 # with iron handles, not a nailed packing crate.
 #
@@ -30,7 +36,7 @@
 # their own names ("<prop>-body", "wages-envelope-paper"), never the prop's own, and
 # prop_library.stand_on_ground stops if one does. Lettering is on its own materials (listed in each index
 # line as "lettering_materials"), so the film can keep it as its own surface: the painter garbles small
-# print. Lettered faces face Blender -y (three.js +z), except the envelope's, which faces up. The only
+# print. Lettered faces face Blender -y (three.js +z), except the flat envelope's, which faces up. The only
 # figures (digits) are the gate boards' "1" and "2".
 #
 # Every size, letter height and hanging point written into index.json is measured from the finished
@@ -369,11 +375,13 @@ def rounded_outline(length, width, corner, corner_steps=6, long_steps=12, short_
     return outline
 
 
-def dented_tin(name, length, width, height, corner, bottom, material, dents=(), rows=7, lip=0.0025):
+def dented_tin(name, length, width, height, corner, bottom, material, dents=(), rows=7, lip=0.0025, dome=0.0, worn=None):
     """A tinplate box with rounded upright corners and rolled, rounded top and bottom edges (a tin, its
-    lid), closed top and bottom, finely enough divided to take soft dents. dents: (centre, radius, depth,
-    push) each, push being the way the metal is pushed in."""
-    outline = rounded_outline(length, width, corner)
+    lid), closed top and bottom, finely enough divided (every 8 to 9 mm round the sides and across the top)
+    that a dent catches the light. dents: (centre, radius, depth, push) each, push being the way the metal is
+    pushed in; dome: how much the top rises in its middle (a lid's pressed crown). worn: a second material for
+    patches of the rounded top edge and the corners, where hands and knocks rub the dull skin off."""
+    outline = rounded_outline(length, width, corner, corner_steps=8, long_steps=22, short_steps=13)
 
     def drawn_in(scale_by):
         """The outline drawn in toward the middle by scale_by of the way."""
@@ -382,15 +390,27 @@ def dented_tin(name, length, width, height, corner, bottom, material, dents=(), 
     lip_in = lip / (width / 2)
     side_heights = [bottom + lip + (height - 2 * lip) * k / rows for k in range(rows + 1)]
     rings = [(drawn_in(lip_in), bottom)] + [(outline, z) for z in side_heights] + [(drawn_in(lip_in), bottom + height)]
-    rings += [(drawn_in(lip_in + (1 - lip_in) * fraction), bottom + height) for fraction in (0.12, 0.24, 0.36, 0.48, 0.60, 0.72, 0.84, 0.94)]
+    top_shares = [0.06 * k for k in range(1, 17)]                      # 0.06 to 0.96 of the way in
+    rings += [(drawn_in(lip_in + (1 - lip_in) * share), bottom + height + dome * (1 - (1 - share) ** 2)) for share in top_shares]
+    first_top = rows + 2                                                # the ring at the top's rolled edge
     bm = bmesh.new()
     vertex_rings = [[bm.verts.new((x, y, z)) for x, y in ring] for ring, z in rings]
     count = len(outline)
-    for lower, upper in zip(vertex_rings, vertex_rings[1:]):
+    corner_points = {index for index, (x, y) in enumerate(outline)
+                     if abs(x) > length / 2 - corner * 0.9 and abs(y) > width / 2 - corner * 0.9}
+    worn_faces = []
+    for ring_index, (lower, upper) in enumerate(zip(vertex_rings, vertex_rings[1:])):
         for i in range(count):
             j = (i + 1) % count
-            bm.faces.new([lower[i], lower[j], upper[j], upper[i]])
-    top_middle = bm.verts.new((0, 0, bottom + height))
+            face = bm.faces.new([lower[i], lower[j], upper[j], upper[i]])
+            # rubbed bright in patches along the rounded top edge (always at the corners, where it is held and
+            # knocked), and at the corners of the bottom edge; never in even bands, which read as metal trim
+            patch = math.sin(i * 0.9 + 1.3) + 0.8 * math.sin(i * 0.37 + ring_index * 2.1) > 0.5
+            top_edge = first_top - 1 <= ring_index <= first_top and (i in corner_points or patch)
+            bottom_edge = ring_index == 0 and i in corner_points and patch
+            if top_edge or bottom_edge:
+                worn_faces.append(face)
+    top_middle = bm.verts.new((0, 0, bottom + height + dome))
     bottom_middle = bm.verts.new((0, 0, bottom))
     for i in range(count):
         j = (i + 1) % count
@@ -403,9 +423,24 @@ def dented_tin(name, length, width, height, corner, bottom, material, dents=(), 
             if distance < radius:
                 vertex.co += push * depth * 0.5 * (1 + math.cos(math.pi * distance / radius))
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    if worn is not None:
+        for face in worn_faces:
+            face.material_index = 1
     part = kit._object(name, bm, material, (0, 0, 0), (0, 0, 0), 0, smooth=True)
+    if worn is not None:
+        part.data.materials.append(worn)
     kit.project_by_facing(part)
     return part
+
+
+def rolled_bead(name, outline, z, radius, material, outward=0.0):
+    """A rolled edge (a lid's bead) round an outline at height z: a tube of the given radius, pushed out
+    from the outline by `outward`, joined round on itself."""
+    points = []
+    for x, y in outline + outline[:1]:
+        out = Vector((x, y, 0)).normalized() * outward
+        points.append(Vector((x, y, z)) + out)
+    return bent_bar(name, points, radius, material, sides=8, bend_plane=(0, 0, 1))
 
 
 def loft(name, rings, material, close_top=True, close_bottom=True):
@@ -507,14 +542,16 @@ def gate_board_no_2():
 # -------------------------------------------------------------------------------------- the bank
 
 def bank_hanging_sign():
-    """A board 1.2 x 0.6 m painted "BANK" in gilt on both faces, framed, hung on two eye rods from a
-    wrought-iron bracket: a wall plate at the left end, a square top bar, a stay and a scroll, a ball
-    finial. The board faces -y and +y, so a camera looking along the lane sees it face-on."""
+    """A board 1.5 x 0.75 m painted "BANK" in gilt on both faces (letters about 0.3 m high), framed, hung
+    on two eye rods from a wrought-iron bracket: a wall plate at the left end, a square top bar, a stay and
+    a scroll, a ball finial. The board faces -y and +y, so a camera looking along the lane sees it face-on.
+    (Round 2's board was 1.2 x 0.6 m with letters 0.2 m high: only 15 to 17 pixels a letter from W3's camera,
+    marginal for page 9, where the bank has to be found.)"""
     kit.reset()
     sizes = lettering_sizes()['bank-sign.jpg']
     lettering = kit.picture_material('bank-sign-lettering', 'bank-sign.jpg', roughness=0.5)
     paint, iron = board_paint(), pit_village.black_iron()
-    width, height, thickness = 1.2, 0.6, 0.045
+    width, height, thickness = 1.5, 0.75, 0.045
     board = kit.box('sign-board', (width, thickness, height), (0, 0, height / 2), paint, bevel=0.004)
     picture_on_faces(board, lettering, width, height, (0, 0, height / 2), both_sides=True)
     frame = []
@@ -539,7 +576,7 @@ def bank_hanging_sign():
               for share, angle in ((k / 40, math.radians(170 - 600 * k / 40)) for k in range(41))]
     bracket.append(bent_bar('scroll', [Vector((wall_x + 0.005, 0, centre.z + 0.02))] + spiral, 0.0075, iron, flatten=0.6))
     # two eye rods from the bar to the board's top, with an eye at each end
-    for x in (-0.42, 0.42):
+    for x in (-0.52, 0.52):
         bracket.append(kit.rod('hanger', (x, 0, height + 0.02), (x, 0, bar_z - 0.03), 0.006, iron, sides=8))
         for z in (height + 0.02, bar_z - 0.03):
             bracket.append(kit.ring('eye', 0.012, 0.019, 0.008, at=(x, 0, z), material=iron, segments=20, rotate=(math.pi / 2, 0, 0)))
@@ -777,31 +814,53 @@ def chain_and_padlock():
 # ------------------------------------------------------------------------ lunch tin, mug, envelope
 
 def lunch_tin():
-    """A tinplate lunch tin with rounded corners, its lid on (overlapping 2.5 cm), a hinge along the back
-    and a small clasp at the front: dull, darkened tinplate, the lid dented twice on top and knocked at
-    one corner, the box dented once at the front."""
+    """A working man's tinplate lunch tin with rounded corners, its lid on (overlapping 2.5 cm) with a
+    pressed crown and a rolled bead round its lower edge, a wire hinge with four knuckles along the back,
+    and a hasp over a stud at the front. Dull, darkened tinplate with rust spots, rubbed bright on its edges,
+    bead, hinge and hasp; dented deeply enough to catch the light: twice in the lid's top, a knock at the
+    lid's front corner, a dent in the box's front and one in its right end. (Round 2's dents, 2 to 4 mm on
+    a coarse top, didn't show: it read as a smooth modern plastic box with a clip.)"""
     kit.reset()
     tin = dull_tinplate()
-    parts = [dented_tin('tin', 0.19, 0.12, 0.058, 0.016, 0.0, tin,
-                        dents=[((-0.045, -0.062, 0.026), 0.024, 0.003, (0, 1, 0))]),
-             dented_tin('lid', 0.194, 0.124, 0.026, 0.017, 0.05, tin,
-                        dents=[((0.042, -0.018, 0.076), 0.032, 0.0038, (0, 0, -1)),
-                               ((-0.058, 0.028, 0.076), 0.02, 0.0022, (0, 0, -1)),
-                               ((0.093, -0.058, 0.073), 0.016, 0.0025, (-0.5, 0.6, -0.6))]),
-             kit.rod('hinge', (-0.075, 0.063, 0.062), (0.075, 0.063, 0.062), 0.0028, tin, sides=8),
-             kit.box('clasp', (0.024, 0.004, 0.022), (0, -0.0635, 0.05), tin, bevel=0.001)]
+    worn = kit.picture_material('lunch-tin-worn-tinplate', 'tinplate-worn.jpg', roughness=0.32, metallic=0.8, tile_metres=0.25)
+    length, width, lid_bottom, lid_top = 0.19, 0.12, 0.05, 0.076
+    parts = [dented_tin('tin', length, width, 0.058, 0.016, 0.0, tin, worn=worn,
+                        dents=[((-0.045, -0.0625, 0.027), 0.019, 0.0055, (0.15, 1, 0.1)),
+                               ((0.0955, 0.018, 0.022), 0.015, 0.004, (-1, 0, 0.1))]),
+             dented_tin('lid', length + 0.004, width + 0.004, lid_top - lid_bottom, 0.017, lid_bottom, tin, dome=0.003, worn=worn,
+                        dents=[((0.040, -0.016, lid_top + 0.003), 0.024, 0.0065, (0.1, 0.1, -1)),
+                               ((-0.060, 0.030, lid_top + 0.002), 0.016, 0.0045, (0, 0, -1)),
+                               ((0.093, -0.058, lid_top - 0.003), 0.019, 0.006, (-0.5, 0.6, -0.6))])]
+    # the lid's rolled bead, round its lower edge
+    bead_outline = rounded_outline(length + 0.004, width + 0.004, 0.017, corner_steps=8, long_steps=22, short_steps=13)
+    parts.append(rolled_bead('lid-bead', bead_outline, lid_bottom + 0.0024, 0.0024, tin, outward=0.0006))
+    # the wire hinge along the back: a wire through four rolled knuckles, the outer two on the box, the inner
+    # two on the lid, each with a little strap down (the box's) or up (the lid's) onto the tin
+    back = width / 2 + 0.0026 + 0.0032
+    hinge_z = lid_bottom - 0.001
+    parts.append(kit.rod('hinge-wire', (-0.072, back, hinge_z), (0.072, back, hinge_z), 0.0013, worn, sides=8))
+    for centre_x, on_lid in ((-0.058, False), (-0.02, True), (0.02, True), (0.058, False)):
+        parts.append(kit.rod('hinge-knuckle', (centre_x - 0.009, back, hinge_z), (centre_x + 0.009, back, hinge_z), 0.003, worn, sides=10))
+        strap_z = hinge_z + (0.005 if on_lid else -0.005)
+        parts.append(kit.box('hinge-strap', (0.016, 0.001, 0.007), (centre_x, width / 2 + 0.0031, strap_z), worn, bevel=0.0003))
+    # the hasp at the front: a strap from the lid down over the box's front, with a slot over a round stud
+    front = -(width / 2 + 0.0026)
+    parts.append(kit.box('hasp', (0.016, 0.0012, 0.03), (0, front - 0.0008, lid_bottom - 0.004), worn, bevel=0.0004))
+    parts.append(kit.cylinder('hasp-stud', 0.0032, 0.004, at=(0, front - 0.0026, lid_bottom - 0.012), material=worn, sides=12,
+                              rotate=(math.pi / 2, 0, 0)))
     kit.join('lunch-tin-body', parts)
     library.stand_on_ground('lunch-tin')
     low, high = part_bounds('lunch-tin-body')
-    save('lunch-tin', f'a lunch tin of dull, darkened tinplate (mottled, scratched, a few rust freckles) with rounded corners, its lid on, two soft '
-         f'dents in the lid and a knock at its front corner, a dent in the box\'s front, a hinge along the back and a clasp at the front; '
-         f'{metres_text(high.x - low.x)} x {metres_text(high.y - low.y)} x {metres_text(high.z - low.z)} m over its hinge and clasp; no lettering', {})
+    save('lunch-tin', f'a working man\'s lunch tin of dull, darkened tinplate (mottled, scratched, rust spots), its edges, rolled lid bead, wire '
+         f'hinge and hasp rubbed bright; rounded corners, its lid on with a pressed crown, dented twice in the lid\'s top, knocked at the '
+         f'lid\'s front corner, dented in the box\'s front and right end; a wire hinge with four knuckles along the back, a hasp over a stud '
+         f'at the front; {metres_text(high.x - low.x)} x {metres_text(high.y - low.y)} x {metres_text(high.z - low.z)} m over its hinge and '
+         f'hasp; no lettering', {})
 
 
-def tin_mug():
-    """An enamelled tin mug (0.085 m across, 0.09 m tall) with a rolled rim, a strap handle and a dark tea
-    stain inside: dark blue-black enamel, chipped to the black iron at the rim and the foot."""
-    kit.reset()
+def mug_body(name):
+    """The enamelled tin mug's parts, joined as one part called name: the rolled-rim body, a strap handle on
+    its +x side and the tea stain inside."""
     enamel = dark_enamel()
     profile = [(0.0, 0.004), (0.0395, 0.004), (0.0395, 0.087), (0.0405, 0.0905), (0.0428, 0.0912), (0.0438, 0.0885),
                (0.042, 0.0845), (0.042, 0.004), (0.0408, 0.0), (0.0, 0.0)]
@@ -811,7 +870,14 @@ def tin_mug():
     handle = bent_bar('handle', [Vector((0.038, 0, handle_points[0].z))] + handle_points + [Vector((0.038, 0, handle_points[-1].z))], 0.006, enamel,
                       flatten=0.3)   # a flat strap of tin, 12 mm wide
     stain = kit.cylinder('tea-stain', 0.0392, 0.001, at=(0, 0, 0.0047), material=kit.plain_material('tea-stain', (0.13, 0.08, 0.045), roughness=0.4))
-    kit.join('tin-mug-body', [mug, handle, stain])
+    return kit.join(name, [mug, handle, stain])
+
+
+def tin_mug():
+    """An enamelled tin mug (0.085 m across, 0.09 m tall) with a rolled rim, a strap handle and a dark tea
+    stain inside: dark blue-black enamel, chipped to the black iron at the rim and the foot."""
+    kit.reset()
+    mug_body('tin-mug-body')
     library.stand_on_ground('tin-mug')
     low, high = part_bounds('tin-mug-body')
     save('tin-mug', f'an enamelled tin mug in dark blue-black enamel, chipped to the black iron at the rolled rim and the foot, with a strap handle on '
@@ -819,11 +885,12 @@ def tin_mug():
          f'{metres_text(high.x - low.x)} m with the handle; no lettering', {})
 
 
-def wages_envelope():
-    """A brown pay envelope (0.114 x 0.076 m) of thin paper, lying flat, a little filled out in the middle
-    by what is inside: "WAGES" printed on top, the gummed flap underneath, and a faint fold across below
-    the word where it was once folded and flattened again (the paper beyond the fold lifts a little)."""
-    kit.reset()
+def envelope_paper(name):
+    """The brown pay envelope (0.114 x 0.076 m) of thin paper as one part called name, lying flat round the
+    origin: "WAGES" printed on top (reading from the -y side), the gummed flap underneath, a little filled out
+    in the middle by what is inside, and a faint fold across below the word where it was once folded and
+    flattened again (the paper beyond the fold lifts a little). Returns the part, the picture's lettering
+    sizes and where the fold lies across the printed face."""
     sizes = lettering_sizes()['wages-envelope-front.jpg']
     length, width = 0.114, 0.076
     edge, swell = 0.0006, 0.0012          # the paper's edge (two layers), and how much the notes inside fill it out
@@ -873,9 +940,16 @@ def wages_envelope():
         textured(bm.faces.new([under[a], under[b], top[b], top[a]]), [a, b, b, a], False, 0)
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
     mesh = bpy.data.meshes.new('envelope'); bm.to_mesh(mesh); bm.free()
-    envelope = bpy.data.objects.new('wages-envelope-paper', mesh); bpy.context.scene.collection.objects.link(envelope)
+    envelope = bpy.data.objects.new(name, mesh); bpy.context.scene.collection.objects.link(envelope)
     envelope.data.materials.append(front); envelope.data.materials.append(back)
     for polygon in mesh.polygons: polygon.use_smooth = True
+    return envelope, sizes, fold
+
+
+def wages_envelope():
+    """The pay envelope lying flat: "WAGES" faces up."""
+    kit.reset()
+    _, sizes, fold = envelope_paper('wages-envelope-paper')
     library.stand_on_ground('wages-envelope')
     # measured from the finished model
     low, high = part_bounds('wages-envelope-paper')
@@ -894,27 +968,79 @@ def wages_envelope():
          fonts=[sizes['font']])
 
 
+ENVELOPE_LEAN_DEGREES = 14     # how far the stood-up envelope leans back against the mug from upright
+
+
+def tin_mug_and_wages_envelope():
+    """The tin mug with the pay envelope stood up on its long edge against the mug's front, leaning back a
+    little, its printed face "WAGES" facing -y (toward the camera), for the upturned crate in No. 2's yard (W4).
+    Round 2's envelope lay flat on the crate: from W4's camera about 6 m away its letters were about 5 pixels
+    tall and only 1 to 2 pixels deep, foreshortened. Stood up it faces the camera; even so its letters (1.8 cm)
+    are only about 5 pixels tall at 6 m, so the typed words on screen do the reading. The envelope stays its
+    own part (wages-envelope-paper-standing, its print the material wages-envelope-printing), so the film can
+    keep it as its own surface with sharp edges."""
+    kit.reset()
+    mug = mug_body('tin-mug-and-wages-envelope-mug')
+    paper, sizes, fold = envelope_paper('wages-envelope-paper-standing')
+    paper.rotation_euler = (math.radians(90 - ENVELOPE_LEAN_DEGREES), 0.0, 0.0)   # face -y, letters upright, top leaning back
+    bpy.context.view_layer.update()
+    mug_low, mug_high = part_bounds('tin-mug-and-wages-envelope-mug')
+    mug_front = mug_low.y                                    # the mug's front, at its rolled rim
+    points = part_points('wages-envelope-paper-standing')
+    lowest = min(point.z for point in points)
+    furthest_back = max(point.y for point in points)         # the top edge, resting on the mug
+    paper.location = (0.0, mug_front - 0.0005 - furthest_back, -lowest)
+    bpy.context.view_layer.update()
+    library.stand_on_ground('tin-mug-and-wages-envelope')
+    # measured from the finished model
+    low, high = part_bounds('tin-mug-and-wages-envelope-mug', 'wages-envelope-paper-standing')
+    paper_low, paper_high = part_bounds('wages-envelope-paper-standing')
+    _, _, picture_metres, _ = picture_on_model('wages-envelope-printing', axis='z')
+    letters = letter_height(sizes, picture_metres) / math.cos(math.radians(ENVELOPE_LEAN_DEGREES))
+    save('tin-mug-and-wages-envelope', f'the dark blue-black enamelled tin mug with the brown pay envelope stood up on its long edge against the '
+         f'mug\'s front, leaning back {ENVELOPE_LEAN_DEGREES} degrees, "WAGES" printed large in heavy black letters on its face toward -y '
+         f'(three.js +z: turn the prop so that side faces the camera); the envelope {metres_text(paper_high.x - paper_low.x)} m wide and '
+         f'{metres_text(paper_high.z - paper_low.z)} m tall as it stands, letters about {metres_text(letters)} m high (about 5 pixels at 6 m with the '
+         f'film\'s lens: the typed words do the reading); the whole {metres_text(high.x - low.x)} x {metres_text(high.y - low.y)} x '
+         f'{metres_text(high.z - low.z)} m; for the upturned crate in No. 2\'s yard (W4)',
+         {'lettering': ['WAGES'], 'lettering_materials': ['wages-envelope-printing'],
+          'texture': f'wages-envelope-front and -back {picture_size("wages-envelope-front.jpg")}, enamel-mug {picture_size("enamel-mug.jpg")}',
+          'letter_height_metres': round(letters, 3), 'lean_back_degrees': ENVELOPE_LEAN_DEGREES,
+          'own_surface_part': 'wages-envelope-paper-standing'},
+         fonts=[sizes['font']])
+
+
 # --------------------------------------------------------------------------- jacket and cap on nails
 
 NAIL_HEIGHT = 0.84      # the jacket's nail above its hem, before standing the prop on the ground
 CAP_NAIL_ACROSS, CAP_NAIL_DROP = 0.40, 0.20     # the cap's own nail: right of the jacket's (+x) and below it
-CAP_SWING_DEGREES = -35     # the hung cap swung round on its nail, its peak jutting down and away from the jacket
-CAP_TURN_DEGREES = 20       # and turned on the nail so one side of it shows: seen straight on, crown out, a cap is a
-                            # plain round disc; swung and turned, its sloping crown and its peak read as a cap
+# how the cap hangs. Seen straight on, crown out, a cap is a plain round disc (round 1), and swung 35 degrees and
+# turned only 20 it still read as a round disc or plaque from W4's 6.5 m (round 2's check). So it is hooked by
+# the inside of its band on the side toward the jacket and hangs turned well round on the nail, its crown facing
+# out and away from the jacket at a slant, its peak tipped down: from the front the crown is seen at an angle
+# and the peak sticks out below it in profile, the flat cap's own outline
+CAP_TIP_DEGREES = 60        # the crown turned out from the wall (90: square to the wall, crown straight out)
+CAP_SWING_DEGREES = -45     # swung on the nail, its peak tipped down and away from the jacket
+CAP_TURN_DEGREES = 76       # and turned on the nail, crown away from the jacket, so its side and peak show
 
 
 def jacket_and_cap_on_nail():
-    """A wool work jacket hung by its collar on a nail (the wall or post is the plane y = 0 behind it),
-    so its shoulders droop from the nail and drape folds fan out below; sleeves hanging at the sides,
-    three buttons, two pocket flaps. Beside it, on its own short nail lower down, a tweed flat cap hangs
-    against the wall by the back of its band, crown out, peak down. Nothing round sits above the collar:
-    a cap hung over the collar read as a hunched man with a blank head."""
+    """A wool work jacket hung by the loop inside its collar on a nail (the wall or post is the plane y = 0
+    behind it): a turned-down collar that runs on down the front as two lapels, the dark lining showing in
+    the V between them, the empty shoulders slumped down and forward from the collar, drape folds fanning out
+    below, sleeves hanging at the sides, three buttons, two pocket flaps, a hem that hangs a little unevenly.
+    (Round 2's had no collar, and its top came to a tent-like point at the nail.) Beside it, on its own short
+    nail lower down, a tweed flat cap hangs turned well round on the nail, crown out at a slant, its peak
+    tipped down in profile. Nothing round sits above the collar: a cap hung over the collar read as a hunched
+    man with a blank head."""
     kit.reset()
     wool, tweed = jacket_wool(), cap_tweed()
     nail_z = NAIL_HEIGHT
     # the body: rings from the nail down to the hem; (drop below the nail, half width, thickness)
-    shape = [(0.0, 0.02, 0.025), (0.035, 0.07, 0.045), (0.08, 0.14, 0.07), (0.14, 0.205, 0.085), (0.21, 0.232, 0.095),
-             (0.33, 0.243, 0.095), (0.48, 0.25, 0.09), (0.64, 0.255, 0.08), (0.78, 0.258, 0.07)]
+    # the neck opening is about 15 cm across at the top (the collar lies round it); below it the empty shoulders
+    # fall steeply, then round over into the sleeves' tops
+    shape = [(0.012, 0.072, 0.03), (0.035, 0.09, 0.04), (0.07, 0.128, 0.055), (0.115, 0.172, 0.07), (0.17, 0.208, 0.082),
+             (0.23, 0.23, 0.09), (0.33, 0.243, 0.095), (0.48, 0.25, 0.09), (0.64, 0.255, 0.08), (0.78, 0.258, 0.07)]
 
     def size_at(drop):
         """The body's half width and thickness at this drop below the nail."""
@@ -941,21 +1067,60 @@ def jacket_and_cap_on_nail():
         sine = -math.sqrt(max(0.0, 1 - (x / half_width) ** 2))
         return body_y(x, sine, drop, thickness)
 
+    def hem_lift(x):
+        """The hem hangs a little unevenly: the front edges dip, one side hangs lower than the other."""
+        return 0.012 * math.sin(x * 21.0 + 0.7) + 0.008 * math.sin(x * 47.0) - 0.01 * x / 0.26
+
     around = 48
     rings = []
-    for drop, half_width, thickness in shape:
+    for index, (drop, half_width, thickness) in enumerate(shape):
         ring = []
         for k in range(around):
             angle = 2 * math.pi * k / around
             x = half_width * math.cos(angle)
-            ring.append(Vector((x, body_y(x, math.sin(angle), drop, thickness), nail_z - drop - 0.006)))
+            lift = hem_lift(x) if index == len(shape) - 1 else 0.0
+            ring.append(Vector((x, body_y(x, math.sin(angle), drop, thickness), nail_z - drop - 0.006 + lift)))
         rings.append(ring)
     body = loft('jacket-body', rings, wool)
     parts = [body]
+    # the collar: a turned-down band of the same cloth round the neck opening and over the back of the neck, running
+    # on down the front as the two lapels to the top button; a strap 5 cm wide and 1.4 cm thick
+    collar_path = []
+    for k in range(25):
+        share = k / 24                                   # 0: the left lapel's foot, 0.5: the back of the neck, 1: the right's
+        side = -1 if share < 0.5 else 1
+        reach = abs(share - 0.5) * 2                     # 0 at the back of the neck, 1 at a lapel's foot
+        if reach < 0.35:                                 # round the back of the neck, over the top
+            around_neck = reach / 0.35
+            x = side * 0.075 * math.sin(around_neck * math.pi / 2)
+            drop = -0.004 + 0.03 * (1 - math.cos(around_neck * math.pi / 2))
+        else:                                            # down the front as a lapel, toward the middle
+            down = (reach - 0.35) / 0.65
+            x = side * (0.075 - 0.055 * down)
+            drop = 0.026 + 0.2 * down
+        collar_path.append(Vector((x, front_y(x, max(drop, 0.012)) - 0.009, nail_z - drop - 0.006)))
+    parts.append(bent_bar('collar', collar_path, 0.007, wool, sides=12, flatten=3.6, bend_plane=(0, 1, 0)))
+    # the dark lining in the V between the lapels
+    lining = kit.plain_material('jacket-lining', (0.025, 0.022, 0.02), roughness=0.9)
+    v_bottom, v_top = 0.21, 0.035
+    v_points = [Vector((-0.05, front_y(-0.05, v_top) - 0.0015, nail_z - v_top - 0.006)), Vector((0.05, front_y(0.05, v_top) - 0.0015, nail_z - v_top - 0.006)),
+                Vector((0.0, front_y(0.0, v_bottom) - 0.0015, nail_z - v_bottom - 0.006))]
+    lining_mesh = bmesh.new()
+    lining_mesh.faces.new([lining_mesh.verts.new(point) for point in v_points])
+    bmesh.ops.recalc_face_normals(lining_mesh, faces=lining_mesh.faces)
+    for face in lining_mesh.faces:
+        face.normal_update()
+        if face.normal.y > 0:
+            face.normal_flip()
+    parts.append(kit._object('lining', lining_mesh, lining, (0, 0, 0), (0, 0, 0), 0))
+    # the hanging loop inside the back of the collar, over the nail
+    parts.append(bent_bar('loop', [Vector((-0.012, -0.02, nail_z - 0.03)), Vector((-0.009, -0.03, nail_z + 0.004)), Vector((0.0, -0.034, nail_z + 0.012)),
+                                   Vector((0.009, -0.03, nail_z + 0.004)), Vector((0.012, -0.02, nail_z - 0.03))], 0.003, wool, sides=8, flatten=0.5))
     # sleeves: from the drooping shoulders down the body's sides, a little in front of it, bowed forward
     for side in (-1, 1):
-        # it starts inside the shoulder, so its top doesn't stand up above the drooping shoulder line
-        sleeve = [Vector((side * (0.15 + 0.06 * math.sin(math.pi * fraction / 2)), -0.055 - 0.035 * math.sin(math.pi * fraction), nail_z - 0.15 - 0.53 * fraction))
+        # it starts well inside the slumped shoulder, so its top end is hidden in the body and the shoulder's line
+        # runs on smoothly into the sleeve (starting at the shoulder's edge, its flat top stood up like a box's corner)
+        sleeve = [Vector((side * (0.115 + 0.095 * math.sin(math.pi * fraction / 2)), -0.045 - 0.045 * math.sin(math.pi * fraction), nail_z - 0.13 - 0.55 * fraction))
                   for fraction in (k / 10 for k in range(11))]
         parts.append(bent_bar('sleeve', sleeve, 0.052, wool, sides=16, radius_end=0.046, flatten=0.85, bend_plane=(1, 0, 0)))
     # three buttons on the button line and two pocket flaps
@@ -1009,8 +1174,8 @@ def jacket_and_cap_on_nail():
     # hung on its nail: turned crown out (-y) and peak down, swung and turned on the nail, and moved so the
     # point inside the crown 3 cm in from the back of the band (where the nail holds it) sits on the nail's
     # head; then moved out from the wall just enough that no part of it goes behind the wall's plane
-    cap.rotation_euler = (math.pi / 2, math.radians(CAP_SWING_DEGREES), math.radians(CAP_TURN_DEGREES))
-    hook = Vector((0, 0.075, 0.030))
+    cap.rotation_euler = (math.radians(CAP_TIP_DEGREES), math.radians(CAP_SWING_DEGREES), math.radians(CAP_TURN_DEGREES))
+    hook = Vector((-0.06, 0.05, 0.030))      # inside the band, toward its back on the side nearest the jacket
     nail_head = Vector((CAP_NAIL_ACROSS, -0.031, nail_z - CAP_NAIL_DROP))
     cap.location = nail_head - cap.rotation_euler.to_matrix() @ hook
     bpy.context.view_layer.update()
@@ -1030,12 +1195,13 @@ def jacket_and_cap_on_nail():
     cap_nail_at = (cap_nail_low + cap_nail_high) / 2
     if cap_high.z > jacket_high.z - 0.08 or cap_low.x < jacket_high.x:
         raise SystemExit('jacket-and-cap-on-nail: the cap is above the collar or overlaps the jacket; it must hang beside it, lower down')
-    save('jacket-and-cap-on-nail', f'a dark wool work jacket hung by its collar on a forged nail (shoulders drooping from the nail, drape folds, sleeves '
-         f'hanging at the sides, three horn buttons, two pocket flaps), {metres_text(jacket_high.x - jacket_low.x)} m wide and '
+    save('jacket-and-cap-on-nail', f'a dark wool work jacket hung by the loop in its collar on a forged nail (a turned-down collar running on into two '
+         f'lapels with the dark lining in the V, empty shoulders slumped from the collar, drape folds, sleeves hanging at the sides, three horn '
+         f'buttons, two pocket flaps, a slightly uneven hem), {metres_text(jacket_high.x - jacket_low.x)} m wide and '
          f'{metres_text(jacket_nail_at.z - jacket_low.z)} m from hem to nail; beside it on the +x side, on its own short nail '
          f'{metres_text(cap_nail_at.x - jacket_nail_at.x)} m across and {metres_text(jacket_nail_at.z - cap_nail_at.z)} m lower, a grey-brown tweed '
-         f'flat cap hung by the back of its band, crown out, swung and turned a little on the nail so its peak juts down and away from the jacket, its top {metres_text(jacket_high.z - cap_high.z)} m below the collar, so '
-         f'nothing round sits above the collar; the backs of both are flat against the plane of the wall or post (the prop\'s +y side), the nails '
+         f'flat cap hooked by the inside of its band and hung turned well round on the nail, its crown out at a slant and its peak tipped down and '
+         f'away from the jacket in profile, its top {metres_text(jacket_high.z - cap_high.z)} m below the collar, so nothing round sits above the collar; the backs of both are flat against the plane of the wall or post (the prop\'s +y side), the nails '
          f'sticking out toward -y; no lettering',
          {'jacket_nail_metres': {'x': round(jacket_nail_at.x, 3), 'height_above_base': round(jacket_nail_at.z, 3)},
           'cap_nail_metres': {'x': round(cap_nail_at.x, 3), 'height_above_base': round(cap_nail_at.z, 3)},
@@ -1048,7 +1214,7 @@ BUILDERS = {
     'steel-drum-petrol': steel_drum_petrol, 'steel-drum-diesel': steel_drum_diesel,
     'crate-this-way-up': crate_this_way_up, 'chain-and-padlock': chain_and_padlock,
     'lunch-tin': lunch_tin, 'jacket-and-cap-on-nail': jacket_and_cap_on_nail,
-    'tin-mug': tin_mug, 'wages-envelope': wages_envelope,
+    'tin-mug': tin_mug, 'wages-envelope': wages_envelope, 'tin-mug-and-wages-envelope': tin_mug_and_wages_envelope,
 }
 
 if __name__ == '__main__':

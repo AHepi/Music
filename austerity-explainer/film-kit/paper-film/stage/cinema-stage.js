@@ -425,8 +425,18 @@ const blendMaterial = pass(/* glsl */`
   }`, { fromPicture: { value: null }, toPicture: { value: null }, mixAmount: { value: 0 }, dip: { value: 0.25 } });
 
 // Joins two finished pictures: kind 'peel' or 'dissolve'; progress 0 (old page) to 1 (new page).
+// 'run-on' (log 34): a plain blend with no darkening in the middle, for a page that runs on into the next in the same
+// frame (chapter 2 for newcomers, page 4 into page 5): the two pictures are the same, so nothing shows.
 export function drawJoin(kind, progress, fromTarget, toTarget) {
   renderer.setRenderTarget(null);
+  if (kind === 'run-on') {
+    blendMaterial.uniforms.fromPicture.value = fromTarget.texture;
+    blendMaterial.uniforms.toPicture.value = toTarget.texture;
+    blendMaterial.uniforms.mixAmount.value = progress;
+    blendMaterial.uniforms.dip.value = 0;
+    runPass(blendMaterial, null);
+    return;
+  }
   if (kind === 'dissolve' || kind === 'dip') {
     blendMaterial.uniforms.fromPicture.value = fromTarget.texture;
     blendMaterial.uniforms.toPicture.value = toTarget.texture;

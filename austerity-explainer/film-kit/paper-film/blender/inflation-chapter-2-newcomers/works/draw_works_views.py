@@ -67,9 +67,9 @@ def import_model(file_name):
     """Load a .glb and put its one root at the works wall."""
     before = set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=os.path.join(MODELS, file_name))
-    imported = [o for o in bpy.data.objects if o not in before]
-    roots = [o for o in imported if o.parent is None]
-    assert len(roots) == 1, f'{file_name} has {len(roots)} roots: {[r.name for r in roots]}'
+    imported = [part for part in bpy.data.objects if part not in before]
+    roots = [part for part in imported if part.parent is None]
+    assert len(roots) == 1, f'{file_name} has {len(roots)} roots: {[root.name for root in roots]}'
     roots[0].location = (0, WALL_AT, 0)
     return roots[0], imported
 
@@ -81,9 +81,9 @@ def stand_in_wall():
     builder = kit.MeshBuilder()
     y0, y1 = WALL_AT, WALL_AT + 0.6
     edges = [-40.0, -5.0, -2.0, 2.0, 5.0, 40.0]
-    for a, b in zip(edges[::2], edges[1::2]):
-        builder.box((a, y0, 0.0), (b, y1, 4.0), stone)
-        builder.box((a - 0.05, y0 - 0.08, 4.0), (b + 0.05, y1 + 0.08, 4.2), stone)
+    for wall_start, wall_end in zip(edges[::2], edges[1::2]):
+        builder.box((wall_start, y0, 0.0), (wall_end, y1, 4.0), stone)
+        builder.box((wall_start - 0.05, y0 - 0.08, 4.0), (wall_end + 0.05, y1 + 0.08, 4.2), stone)
     for x in (-5.6, -2.0, 1.4, 5.0):                                   # gate piers
         builder.box((x, y0 - 0.1, 0.0), (x + 0.6, y1 + 0.1, 4.6), stone)
         builder.box((x - 0.06, y0 - 0.16, 4.6), (x + 0.66, y1 + 0.16, 4.8), stone)
@@ -182,7 +182,7 @@ def main():
     scene.render.resolution_x, scene.render.resolution_y = 540, 960
     scene.render.resolution_percentage = 100
     written, measured = {}, {}
-    for name in [n for n in VIEWS if not ONLY or n in ONLY]:
+    for name in [view_name for view_name in VIEWS if not ONLY or view_name in ONLY]:
         working = name == 'w3-working'
         kit.set_windows('no-1', {1, 2, 3} if working else set())
         kit.set_doorway('no-1', working)

@@ -52,7 +52,11 @@ Use: python3 -I make_state_picture.py MAIN_PAINTING SECOND_PAINTING PLATE HELPER
 MAIN_PAINTING is the painting of the plate (the state before the cut); SECOND_PAINTING the painting of the helper plate
 (the state after). For the free test, give the plate and the helper plate as the two paintings. All the pictures
 must show the same view; the paintings and masks are resized to the plate's size, and the state picture is written at
-that size (a JPEG, quality 93). OUT_MASK is the mask as a grey picture (white: the second painting). --look writes a
+that size, losslessly: OUT_PICTURE must end in .png (or .webp, written as lossless WebP). A JPEG is refused: saving
+as a JPEG again changes every pixel a little (round 2's check: 0.48 levels on average and up to 9 outside the mask), so
+the state picture would no longer be exactly the main painting where nothing changed. After writing, the tool reads
+the picture back and prints the largest difference from the main painting where the mask is zero; it must be 0
+(it stops with an error if it is not). OUT_MASK is the mask as a grey picture (white: the second painting). --look writes a
 picture to judge the mask by: the main painting dimmed, the plates' difference (a) in orange, the outlines (b) in
 blue, the soft edge as a thin line. Pixel sizes are for a 1536-pixel-wide plate and scale with the plate's width.
 """
@@ -62,6 +66,9 @@ import sys
 
 import cv2
 import numpy as np
+
+# how each lossless kind of picture is written (OpenCV: PNG at its usual compression; WebP quality over 100 is lossless)
+LOSSLESS_SETTINGS = {'.png': [cv2.IMWRITE_PNG_COMPRESSION, 6], '.webp': [cv2.IMWRITE_WEBP_QUALITY, 101]}
 
 
 def option(name, default=None, many=False):
@@ -114,6 +121,10 @@ def outlines_from_facts(facts_folder, groups, size):
 
 def main():
     main_path, second_path, plate_path, helper_path, out_path, mask_path = sys.argv[1:7]
+    ending = os.path.splitext(out_path)[1].lower()
+    if ending not in LOSSLESS_SETTINGS:
+        raise SystemExit(f'make_state_picture: write the state picture losslessly, as .png or .webp (not "{ending or out_path}"): '
+                         f'a JPEG changes every pixel a little, so outside the mask it would no longer be the main painting')
     threshold = float(option('--threshold', 6))
     faint = float(option('--faint', 3))
     plate, helper = read(plate_path), read(helper_path)
@@ -168,11 +179,23 @@ def main():
     # widened, then softened: the soft join lies outside every changed pixel
     widened = cv2.dilate(core.astype(np.uint8), disc(widen)).astype(np.float32)
     weight = np.maximum(cv2.GaussianBlur(widened, (0, 0), soften), core.astype(np.float32))
-    weight = np.clip(weight, 0, 1)[:, :, None]
+    weight = np.clip(weight, 0, 1)
+    # a weight that the mask picture would write as 0 (or 255) is made exactly 0 (or 1), so where the mask picture is
+    # 0 the state picture is the main painting to the last level, and where it is 255, the second painting
+    weight[weight < 0.5 / 255] = 0.0
+    weight[weight > 1 - 0.5 / 255] = 1.0
+    weight = weight[:, :, None]
 
     state = main_painting.astype(np.float32) * (1 - weight) + second_painting.astype(np.float32) * weight
-    cv2.imwrite(out_path, np.clip(state + 0.5, 0, 255).astype(np.uint8), [cv2.IMWRITE_JPEG_QUALITY, 93])
+    if not cv2.imwrite(out_path, np.clip(state + 0.5, 0, 255).astype(np.uint8), LOSSLESS_SETTINGS[ending]):
+        raise SystemExit(f'make_state_picture: could not write {out_path}')
     cv2.imwrite(mask_path, np.clip(weight[:, :, 0] * 255 + 0.5, 0, 255).astype(np.uint8))
+
+    # read back what was written: outside the mask it must be the main painting exactly
+    written, written_mask = read(out_path), read(mask_path, grey=True)
+    outside = written_mask == 0
+    off_outside = np.abs(written.astype(np.int16) - main_painting.astype(np.int16)).max(axis=2)[outside]
+    largest_outside = int(off_outside.max()) if off_outside.size else 0
 
     # what is left: how far the state picture is from the second painting where the plates differ by more than
     # 2 levels but the mask doesn't reach (the faint changes left behind with the main painting)
@@ -195,7 +218,11 @@ def main():
     seam = np.abs(main_painting.astype(np.float32) - second_painting.astype(np.float32)).max(axis=2)
     print(f'  the two paintings across the soft join differ by {float(seam[edge].mean()) if edge.any() else 0:.1f} levels on average '
           f'(a large number here shows as a seam)')
-    print(f'  wrote {out_path} and {mask_path}')
+    print(f'  largest difference from the main painting where the mask is zero ({outside.mean():.1%} of the frame), read back '
+          f'from the written picture: {largest_outside} levels (must be 0)')
+    print(f'  wrote {out_path} (lossless) and {mask_path}')
+    if largest_outside:
+        raise SystemExit(f'make_state_picture: outside the mask the state picture is up to {largest_outside} levels off the main painting')
 
     look = option('--look')
     if look:

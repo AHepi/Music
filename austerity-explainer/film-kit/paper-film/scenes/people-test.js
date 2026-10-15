@@ -8,7 +8,7 @@
 // Two versions (PAPER_FILM_QUERY=view=NAME):
 //   painted (default)  the figures are part of the plate ("painted people"). At 2.0 s a time cut swaps to the
 //                      STATE PICTURE and the figures leave the set: the men are simply gone (plan: "the film
-//                      makes a time cut to the state picture"). The state picture (people-test-state.jpg, made by
+//                      makes a time cut to the state picture"). The state picture (people-test-state.png, made by
 //                      paper-film/tools/make_state_picture.py) is the plate everywhere except where the men were
 //                      and where the light and shadows they changed fall (found by comparing the plate with the
 //                      helper plate, joined with the men's outlines): there it is the helper plate (the same view
@@ -83,7 +83,7 @@ const page = {
     const [set, signs, figures, projector, shot] = await Promise.all([loadModel(`${FOLDER}/people-test-set.glb`), loadModel(`${FOLDER}/people-test-signs.glb`),
       loadModel(`${FOLDER}/people-test-figures.glb`), loadProjector(`${FOLDER}/people-test-camera.json`), fetch(`${FOLDER}/people-test-shot.json`).then((r) => r.json())]);
     const [plate, helperPlate, statePicture] = await Promise.all([loadTexture(`${FOLDER}/people-test-plate.jpg`),
-      loadTexture(`${FOLDER}/people-test-helper-plate.jpg`), loadTexture(`${FOLDER}/people-test-state.jpg`)]);
+      loadTexture(`${FOLDER}/people-test-helper-plate.jpg`), loadTexture(`${FOLDER}/people-test-state.png`)]);
 
     // the painted version shines the plate onto the people too; the silhouettes stand outside the projection, so
     // the ground behind them still wears the plate where they hide it

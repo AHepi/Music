@@ -4,6 +4,8 @@
 // line draws itself. They are drawn on a transparent 1080 x 1920 canvas each frame (a page's
 // draw2D(context, t)), so they stay crisp; the finishing step lays them over the picture and adds
 // the same grain, so they sit in the film rather than on it.
+// At the end: the words of the redesigned chapter 2 for newcomers (log 34): plain heavy words in the top band that
+// build on spoken words, rule cards, the guess ring, small name tags, a price arrow and a small pointer.
 //
 // Every function takes the moment t and its own times (at, until), and draws nothing outside them.
 // Positions are in pixels: x from the left, y from the top. Phone apps cover roughly the bottom 380
@@ -300,6 +302,226 @@ export function dotPanel(ctx, t, { at, until = Infinity, x = 84, y = 300, spacin
     withShadow(ctx, 14);
     spaced(ctx, caption.toUpperCase(), x, y + size + 22, 2);
   }
+  ctx.restore();
+  return true;
+}
+
+// ------------------------------------------------------------------------ words for chapter 2 for newcomers (log 34)
+// The redesigned chapter's words on screen (plan 34, part 2): plain heavy type in the top band (about 0.05 to 0.22 of
+// the frame's height down), left-aligned from 0.06 across and never past 0.90 across (TEXT_LEFT, TEXT_RIGHT), clear
+// of the phone's own buttons; a soft dark band behind words that cross the sky, smoke or a chimney; rule cards stacked
+// over that band; the guess ring; small name tags over the two factories; a price arrow over a factory.
+// The type (Inter) has no arrow sign, so a part of the words that starts with '→' gets a drawn arrow instead.
+export const TEXT_LEFT = 65;     // 0.06 of the frame's width
+export const TEXT_RIGHT = 972;   // 0.90 of the frame's width
+
+// A soft dark band from the top of the frame down to `bottom` (pixels), strongest at the top; `amount` 0 to 1.
+export function topShade(ctx, amount, { bottom = 470, strength = 0.62 } = {}) {
+  if (amount <= 0) return;
+  ctx.save();
+  const g = ctx.createLinearGradient(0, 0, 0, bottom);
+  g.addColorStop(0, `rgba(5,8,12,${strength * amount})`);
+  g.addColorStop(0.7, `rgba(5,8,12,${0.55 * strength * amount})`);
+  g.addColorStop(1, 'rgba(5,8,12,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 1080, bottom);
+  ctx.restore();
+}
+
+// A drawn arrow sign the size of a letter of `size` pixels, its left end at x, centred on the middle of the letters
+// at baseline y; returns its width.
+function arrowSign(ctx, x, y, size, colour) {
+  const width = size * 0.9, middle = y - size * 0.36, head = size * 0.3;
+  ctx.save();
+  ctx.strokeStyle = colour; ctx.fillStyle = colour; ctx.lineWidth = Math.max(3, size * 0.12); ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x + size * 0.05, middle); ctx.lineTo(x + width - head * 0.6, middle); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x + width, middle); ctx.lineTo(x + width - head * 1.1, middle - head); ctx.lineTo(x + width - head * 1.1, middle + head); ctx.closePath(); ctx.fill();
+  ctx.restore();
+  return width;
+}
+
+// How wide a part of words is at `size` (a leading '→' counts as the drawn arrow and a space).
+function partWidth(ctx, text, size) {
+  if (!text.startsWith('→')) return ctx.measureText(text).width;
+  return size * 0.9 + ctx.measureText(text.slice(1)).width;
+}
+
+// Words that build part by part on spoken words: parts [{ text, at, colour? }], each popping in at its own moment
+// (a part with no `at` comes with the first). The parts run left to right from x on baseline y; a part that would
+// pass `right` starts a new line under the first. If one part alone is wider than the room, every part shrinks to fit.
+// Everything fades out at `until`. Returns the drawn box { left, top, right, bottom } (null when nothing shows),
+// for lines and arrows to start from.
+export function buildWords(ctx, t, { parts, until = Infinity, x = TEXT_LEFT, y, size = 52, right = TEXT_RIGHT, colour = INK.paper,
+  lineGap = 1.22, weight = 800, shadow = true, fadeOut = 0.3 }) {
+  const first = parts.find((p) => p.at !== undefined)?.at ?? 0;
+  if (t < first || t > until) return null;
+  ctx.save();
+  ctx.font = `${weight} ${size}px Inter`;
+  const space = ctx.measureText(' ').width;
+  const widest = Math.max(...parts.map((p) => partWidth(ctx, p.text, size)));
+  const scale = Math.min(1, (right - x) / Math.max(1, widest));
+  const fontSize = size * scale;
+  ctx.font = `${weight} ${fontSize}px Inter`;
+  ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+  let cursor = x, line = 0, box = null;
+  for (const part of parts) {
+    const width = partWidth(ctx, part.text, fontSize);
+    if (cursor > x && cursor + width > right) { cursor = x; line++; }
+    const partAt = part.at ?? first;
+    const a = presence(t, partAt, until, 0.14, fadeOut);
+    const baseline = y + line * fontSize * lineGap;
+    if (a > 0) {
+      const age = t - partAt;
+      const rise = 10 * (1 - easeOut(age / 0.25));
+      ctx.globalAlpha = a;
+      if (shadow) withShadow(ctx, 18); else noShadow(ctx);
+      const ink = part.colour ?? colour;
+      ctx.fillStyle = ink;
+      let left = cursor;
+      if (part.text.startsWith('→')) { left += arrowSign(ctx, cursor, baseline + rise, fontSize, ink) + space * 0.6; ctx.fillText(part.text.slice(1).trimStart(), left, baseline + rise); }
+      else ctx.fillText(part.text, cursor, baseline + rise);
+      box = box ?? { left: x, top: baseline - fontSize * 0.78, right: cursor + width, bottom: baseline + fontSize * 0.22 };
+      box.right = Math.max(box.right, cursor + width);
+      box.bottom = Math.max(box.bottom, baseline + fontSize * 0.22);
+    }
+    cursor += width + space;
+  }
+  ctx.restore();
+  return box;
+}
+
+// A rule card (page 5 and page 16, the same on both): a soft dark plate filling `box` [x, y, width, height] in pixels,
+// with words that build part by part (buildWords, from the plate's left inner edge), and an optional thin line from
+// the plate to a spot in the picture: line { at, from: [x, y] on the plate's edge, to: { x, y } (kit.toScreen), via:
+// [[x, y], ...] corners on the way, so the line can go round another card }. The plate appears with its first part.
+export function ruleCard(ctx, t, { at, until = Infinity, box, parts, size = 50, line = null, plate = 'rgba(10,13,17,0.66)', accent = INK.amber }) {
+  const a = presence(t, at, until, 0.25, 0.35);
+  if (a <= 0) return false;
+  const [bx, by, bw, bh] = box;
+  ctx.save();
+  ctx.globalAlpha = a;
+  ctx.fillStyle = plate;
+  ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 18); ctx.fill();
+  ctx.fillStyle = accent; ctx.fillRect(bx, by + 16, 6, bh - 32);   // a thin amber rule down its left edge
+  ctx.restore();
+  buildWords(ctx, t, { parts, until, x: bx + 30, y: by + size * 1.12, size, right: bx + bw - 24, lineGap: 1.18 });
+  if (line && line.to && !line.to.behind) {
+    const k = easeOut((t - line.at) / 0.5);
+    if (k > 0 && t <= until) {
+      const points = [line.from, ...(line.via ?? []), [line.to.x, line.to.y]];
+      const lengths = points.slice(1).map((p, i) => Math.hypot(p[0] - points[i][0], p[1] - points[i][1]));
+      let left = k * lengths.reduce((s, v) => s + v, 0);
+      ctx.save();
+      ctx.globalAlpha = a;
+      withShadow(ctx, 8);
+      ctx.strokeStyle = accent; ctx.lineWidth = 3; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(...points[0]);
+      let end = points[0];
+      for (let i = 1; i < points.length && left > 0; i++) {
+        const step = Math.min(1, left / Math.max(1e-6, lengths[i - 1]));
+        end = [points[i - 1][0] + (points[i][0] - points[i - 1][0]) * step, points[i - 1][1] + (points[i][1] - points[i - 1][1]) * step];
+        ctx.lineTo(...end);
+        left -= lengths[i - 1];
+      }
+      ctx.stroke();
+      ctx.fillStyle = accent;
+      ctx.beginPath(); ctx.arc(...points[0], 6, 0, Math.PI * 2); ctx.fill();
+      if (k >= 1) { ctx.beginPath(); ctx.arc(line.to.x, line.to.y, 8, 0, Math.PI * 2); ctx.fill(); }
+      ctx.restore();
+    }
+  }
+  return true;
+}
+
+// The guess ring: a thin circle at (x, y) whose amber arc fills clockwise from the top over `length` seconds from
+// `at` (the time to have a guess), then stays full.
+export function guessRing(ctx, t, { at, until = Infinity, length = 4, x, y, radius = 24, width = 7, colour = INK.amber }) {
+  const a = presence(t, at, until, 0.2, 0.3);
+  if (a <= 0) return false;
+  const k = clamp01((t - at) / length);
+  ctx.save();
+  ctx.globalAlpha = a;
+  withShadow(ctx, 10);
+  ctx.lineWidth = width; ctx.lineCap = 'round';
+  ctx.strokeStyle = 'rgba(242,237,227,0.32)';
+  ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.stroke();
+  if (k > 0) {
+    ctx.strokeStyle = colour;
+    ctx.beginPath(); ctx.arc(x, y, radius, -Math.PI / 2, -Math.PI / 2 + k * Math.PI * 2); ctx.stroke();
+  }
+  ctx.restore();
+  return true;
+}
+
+// A small name tag over a column of the picture (QUIET, FLAT OUT): small heavy words on a dark rounded plate centred
+// on x, its bottom at y, with a short tick under it pointing down at the column.
+export function nameTag(ctx, t, { at, until = Infinity, text, x, y, size = 34, accent = INK.amber }) {
+  const a = presence(t, at, until, 0.25, 0.3);
+  if (a <= 0) return false;
+  ctx.save();
+  ctx.globalAlpha = a;
+  ctx.font = `800 ${size}px Inter`;
+  const letters = [...text];
+  const spacing = size * 0.08;
+  const width = letters.reduce((s, c) => s + ctx.measureText(c).width, 0) + spacing * (letters.length - 1);
+  const padX = size * 0.5, height = size * 1.55;
+  const left = Math.max(TEXT_LEFT, Math.min(TEXT_RIGHT - width - 2 * padX, x - width / 2 - padX));
+  ctx.fillStyle = 'rgba(10,13,17,0.72)';
+  ctx.beginPath(); ctx.roundRect(left, y - height, width + 2 * padX, height, height / 2); ctx.fill();
+  ctx.strokeStyle = accent; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + size * 0.6); ctx.stroke();
+  ctx.fillStyle = INK.paper; ctx.textBaseline = 'middle';
+  spaced(ctx, text, left + padX, y - height / 2 + size * 0.04, spacing);
+  ctx.restore();
+  return true;
+}
+
+// A price arrow drawn over the picture: it draws itself from `from` ({ x, y } in pixels) for `length` pixels at
+// `angle` degrees (0 = level, 30 = climbing) over `drawFor` seconds, with a head, and an optional small word at its
+// tail (PRICES).
+export function priceArrow(ctx, t, { at, until = Infinity, from, length = 300, angle = 0, drawFor = 0.9, colour = INK.amber, width = 10, word = null, size = 30 }) {
+  const a = presence(t, at, until, 0.01, 0.3);
+  if (a <= 0 || !from) return false;
+  const k = easeInOut((t - at) / drawFor);
+  const radians = -angle * Math.PI / 180;
+  const end = { x: from.x + Math.cos(radians) * length * k, y: from.y + Math.sin(radians) * length * k };
+  ctx.save();
+  ctx.globalAlpha = a;
+  withShadow(ctx, 14);
+  ctx.strokeStyle = colour; ctx.fillStyle = colour; ctx.lineWidth = width; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(from.x, from.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+  if (k > 0.05) {
+    const head = width * 2.6;
+    ctx.save();
+    ctx.translate(end.x, end.y); ctx.rotate(radians);
+    ctx.beginPath(); ctx.moveTo(head * 0.6, 0); ctx.lineTo(-head * 0.9, -head); ctx.lineTo(-head * 0.9, head); ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+  if (word) {
+    ctx.globalAlpha = a * clamp01((t - at) / 0.3);
+    ctx.fillStyle = INK.paper; ctx.font = `800 ${size}px Inter`; ctx.textAlign = 'left'; ctx.textBaseline = 'bottom';
+    ctx.fillText(word, from.x, from.y - width - 6);
+  }
+  ctx.restore();
+  return true;
+}
+
+// A small arrow pointing at a spot in the picture (NEW MONEY SPENT going into a gate): a thin line from `from` to
+// `to` (pixels) that draws itself, with a head at `to`.
+export function pointer(ctx, t, { at, until = Infinity, from, to, colour = INK.amber, width = 4, drawFor = 0.45 }) {
+  const a = presence(t, at, until, 0.01, 0.3);
+  if (a <= 0 || !from || !to || to.behind) return false;
+  const k = easeOut((t - at) / drawFor);
+  const end = { x: from.x + (to.x - from.x) * k, y: from.y + (to.y - from.y) * k };
+  const direction = Math.atan2(to.y - from.y, to.x - from.x);
+  ctx.save();
+  ctx.globalAlpha = a;
+  withShadow(ctx, 10);
+  ctx.strokeStyle = colour; ctx.fillStyle = colour; ctx.lineWidth = width; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(from.x, from.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+  const head = width * 4;
+  ctx.translate(end.x, end.y); ctx.rotate(direction);
+  ctx.beginPath(); ctx.moveTo(head * 0.5, 0); ctx.lineTo(-head, -head * 0.7); ctx.lineTo(-head, head * 0.7); ctx.closePath(); ctx.fill();
   ctx.restore();
   return true;
 }

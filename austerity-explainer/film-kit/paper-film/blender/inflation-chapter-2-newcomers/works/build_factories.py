@@ -13,7 +13,9 @@
 #     front's top; no water tank; a two-storey mill front with upper windows; a cart doorway behind the
 #     gate, its doors shut.
 #   No. 2, the flat-out factory: pale buff-grey brick (white_sandstone_bricks, toned); TWO SQUARE chimneys
-#     (25 m and 23 m); a water tank on a steel trestle standing over its roof; long pitched shed roofs
+#     (25 m and 23 m) of a paler buff still, sooted only in a narrow band under the cap, their faces toward
+#     the lane and their sides lit warm by No. 2's own blazing yard (so that from the lane, where only their
+#     tops show, they stay pale against the dusk and never read as No. 1's: round 2's check); a water tank on a steel trestle standing over its roof; long pitched shed roofs
 #     (three spans, gables to the lane) with glazed roof lanterns along their ridges; a two-storey mill
 #     front with upper windows; a cart doorway behind the gate with its doors open on a lit works, and a
 #     taking-in door with a hoist beam above it.
@@ -82,6 +84,17 @@ GLASS_SET_BACK = 0.22            # how far the glass stands back from the wall's
 PILASTER = 0.6                   # pilaster width; they stand out 0.14 m
 TOOTH = 2.4                      # No. 1's sawtooth: how far each tooth rises above the eaves
 PITCH = math.radians(25)         # No. 2's roof pitch
+# No. 2's chimneys. Round 2's check: from street level (W1) only their top 8 to 9 m show over the roofs, and that
+# part was sooted dark, so they came out dark red-brown against the dusk (about 15 levels of 255 against the sky's
+# 75) and seemed to rise out of No. 1's own roof: No. 1 looked as if it had three chimneys. Now their brick is a
+# paler buff than the mill's, the soot is a narrow band just under the cap, and each brick and stone face toward
+# the lane (-y) wears a warm lit twin that gives off a little light of its own, as if lit from below by No. 2's
+# lit windows and open doorway (its sides less, its back none). The dark cap stays: a pale shaft with a dark crown.
+NO_2_CHIMNEY_BRICK = (1.0, 0.95, 0.84)          # tint over white_sandstone_bricks (the mill's is 0.92, 0.86, 0.74)
+NO_2_CHIMNEY_SOOT = (0.88, 0.96)                # where the soot starts, and where it turns black, as shares of the
+                                                # shaft (No. 1's: 0.62 and 0.82)
+NO_2_YARD_GLOW = (1.0, 0.72, 0.46)              # the colour of the yard's light on the brick
+NO_2_GLOW_STRENGTH = {'lane-side': 0.45, 'sides': 0.22}   # how strongly each face gives off that light
 YARD_DEPTH = 42.0
 FRONT = WALL_TO_MILL
 BACK = WALL_TO_MILL + MILL_DEPTH
@@ -100,49 +113,49 @@ CHIMNEYS_2 = [numbers(part) for part in kit.option('--chimneys-2', '5.3,35,25;8.
 class Wall:
     """One straight wall of a mill, described from outside. axis 'x': the wall runs along x with its face
     at y = plane; axis 'y': along y with its face at x = plane. out: which way its face looks along the
-    other axis (-1 or +1). Points on it are given as (u, depth, z): u along the wall, depth into the wall
+    other axis (-1 or +1). Points on it are given as (along, depth, z): along the wall, depth into the wall
     from its face (negative: standing out in front of it), z up."""
 
-    def __init__(self, name, axis, plane, out, u0, u1):
-        self.name, self.axis, self.plane, self.out, self.u0, self.u1 = name, axis, plane, out, u0, u1
+    def __init__(self, name, axis, plane, out, start_along, end_along):
+        self.name, self.axis, self.plane, self.out, self.start_along, self.end_along = name, axis, plane, out, start_along, end_along
 
-    def point(self, u, depth, z):
+    def point(self, along, depth, z):
         across = self.plane - self.out * depth
-        return Vector((u, across, z)) if self.axis == 'x' else Vector((across, u, z))
+        return Vector((along, across, z)) if self.axis == 'x' else Vector((across, along, z))
 
     def right(self):
         """The direction to a viewer's right as they face the wall from outside."""
         outward = Vector((0, self.out, 0)) if self.axis == 'x' else Vector((self.out, 0, 0))
         return (-outward).cross(Vector((0, 0, 1)))
 
-    def box(self, builder, u0, u1, d0, d1, z0, z1, material):
-        a, b = self.point(u0, d0, z0), self.point(u1, d1, z1)
-        builder.box(tuple(map(min, a, b)), tuple(map(max, a, b)), material)
+    def box(self, builder, start_along, end_along, near_depth, far_depth, z0, z1, material):
+        one_corner, other_corner = self.point(start_along, near_depth, z0), self.point(end_along, far_depth, z1)
+        builder.box(tuple(map(min, one_corner, other_corner)), tuple(map(max, one_corner, other_corner)), material)
 
-    def face_corners(self, u0, u1, depth, z0, z1):
+    def face_corners(self, start_along, end_along, depth, z0, z1):
         """Corners of a flat piece on the wall (glass), bottom left, bottom right, top right, top left
         as seen from outside."""
-        left, right = (u0, u1) if self.right().dot(self.point(1, 0, 0) - self.point(0, 0, 0)) > 0 else (u1, u0)
+        left, right = (start_along, end_along) if self.right().dot(self.point(1, 0, 0) - self.point(0, 0, 0)) > 0 else (end_along, start_along)
         return [self.point(left, depth, z0), self.point(right, depth, z0), self.point(right, depth, z1), self.point(left, depth, z1)]
 
 
 def wall_with_openings(builder, wall, z0, z1, openings, material, thickness=WALL):
-    """The wall's brickwork from z0 to z1 with rectangular openings [(u0, u1, z0, z1)] left open: built of
+    """The wall's brickwork from z0 to z1 with rectangular openings [(start_along, end_along, z0, z1)] left open: built of
     boxes round the openings, so each opening's sides (the reveals) are brick too."""
-    us = sorted({wall.u0, wall.u1} | {o[0] for o in openings} | {o[1] for o in openings})
-    zs = sorted({z0, z1} | {o[2] for o in openings if z0 < o[2] < z1} | {o[3] for o in openings if z0 < o[3] < z1})
-    for za, zb in zip(zs, zs[1:]):
+    cuts_along = sorted({wall.start_along, wall.end_along} | {opening[0] for opening in openings} | {opening[1] for opening in openings})
+    cuts_up = sorted({z0, z1} | {opening[2] for opening in openings if z0 < opening[2] < z1} | {opening[3] for opening in openings if z0 < opening[3] < z1})
+    for lower, upper in zip(cuts_up, cuts_up[1:]):
         run_start = None
-        for ua, ub in zip(us, us[1:]):
-            middle_u, middle_z = (ua + ub) / 2, (za + zb) / 2
-            open_here = any(o[0] < middle_u < o[1] and o[2] < middle_z < o[3] for o in openings)
+        for run_from, run_to in zip(cuts_along, cuts_along[1:]):
+            middle_along, middle_z = (run_from + run_to) / 2, (lower + upper) / 2
+            open_here = any(opening[0] < middle_along < opening[1] and opening[2] < middle_z < opening[3] for opening in openings)
             if not open_here and run_start is None:
-                run_start = ua
+                run_start = run_from
             if open_here and run_start is not None:
-                wall.box(builder, run_start, ua, 0, thickness, za, zb, material)
+                wall.box(builder, run_start, run_from, 0, thickness, lower, upper, material)
                 run_start = None
         if run_start is not None:
-            wall.box(builder, run_start, us[-1], 0, thickness, za, zb, material)
+            wall.box(builder, run_start, cuts_along[-1], 0, thickness, lower, upper, material)
 
 
 def spread(clear_start, clear_end, count, width):
@@ -175,9 +188,20 @@ class Factory:
         else:
             self.brick = kit.surface_material('no-2-brick', 'white_sandstone_bricks', tint=(0.92, 0.86, 0.74))
             self.stone = kit.surface_material('no-2-stone', 'large_sandstone_blocks', tint=(0.6, 0.58, 0.54), tile_metres=1.5)
-            self.chimney_bricks = [self.brick,
-                                   kit.surface_material('no-2-brick-sooted', 'white_sandstone_bricks', tint=(0.5, 0.46, 0.4)),
-                                   kit.surface_material('no-2-brick-black', 'white_sandstone_bricks', tint=(0.16, 0.15, 0.14))]
+            # the chimneys' own paler brick, and for each brick and the stone bands a warm lit twin for the faces toward
+            # the lane and the sides (lit_from_the_yard); the black under the cap has no twin, it stays dark
+            shades = [('no-2-chimney-brick', 'white_sandstone_bricks', NO_2_CHIMNEY_BRICK, None, 1.0),
+                      ('no-2-chimney-brick-sooted', 'white_sandstone_bricks', (0.56, 0.52, 0.46), None, 0.7),
+                      ('no-2-stone', 'large_sandstone_blocks', (0.6, 0.58, 0.54), 1.5, 0.7)]
+            self.chimney_lit_twins = {}
+            for name, surface, tint, tile, share in shades:
+                self.chimney_lit_twins[name] = {
+                    facing: kit.surface_material(f'{name}-lit-{facing}', surface, tint=tint, tile_metres=tile,
+                                                 glow=(NO_2_YARD_GLOW, NO_2_GLOW_STRENGTH[facing] * share))
+                    for facing in NO_2_GLOW_STRENGTH}
+            self.chimney_bricks = [kit.surface_material('no-2-chimney-brick', 'white_sandstone_bricks', tint=NO_2_CHIMNEY_BRICK),
+                                   kit.surface_material('no-2-chimney-brick-sooted', 'white_sandstone_bricks', tint=(0.56, 0.52, 0.46)),
+                                   kit.surface_material('no-2-chimney-brick-black', 'white_sandstone_bricks', tint=(0.16, 0.15, 0.14))]
             self.window_type = 'mill-window-wide'
             self.roof_glass_type = 'lantern-light'
             self.door_paint = kit.surface_material('no-2-door-timber', 'distressed_painted_planks', tint=(0.27, 0.22, 0.17), roughness=0.7)
@@ -227,7 +251,7 @@ class Factory:
 # --------------------------------------------------------------------------------------- the mill
 
 def window_openings(wall, centres, width, floors, skip=()):
-    """Openings for windows: [(u0, u1, sill, head)] at each centre on each floor, leaving out the
+    """Openings for windows: [(start_along, end_along, sill, head)] at each centre on each floor, leaving out the
     (centre index, floor index) pairs in skip."""
     found = []
     for floor_index, (sill, head) in enumerate(floors):
@@ -241,65 +265,65 @@ def dress_wall(factory, wall, walls, dressings, iron, pilasters, openings, glass
     """Everything on one wall's face: pilasters, the plinth (broken at doorways), a string course at the
     first floor, a band under the eaves, stone sills and lintels at every window, and the glass."""
     for centre in pilasters:
-        u0, u1 = max(wall.u0, centre - PILASTER / 2), min(wall.u1, centre + PILASTER / 2)
-        if centre <= wall.u0 + 0.01:
-            u0, u1 = wall.u0, wall.u0 + PILASTER
-        if centre >= wall.u1 - 0.01:
-            u0, u1 = wall.u1 - PILASTER, wall.u1
-        wall.box(walls, u0, u1, -0.14, 0.02, PLINTH, EAVES - 0.3, factory.brick)
+        start_along, end_along = max(wall.start_along, centre - PILASTER / 2), min(wall.end_along, centre + PILASTER / 2)
+        if centre <= wall.start_along + 0.01:
+            start_along, end_along = wall.start_along, wall.start_along + PILASTER
+        if centre >= wall.end_along - 0.01:
+            start_along, end_along = wall.end_along - PILASTER, wall.end_along
+        wall.box(walls, start_along, end_along, -0.14, 0.02, PLINTH, EAVES - 0.3, factory.brick)
     cuts = sorted(doorways)
-    start = wall.u0 - 0.2
-    for door_u0, door_u1 in cuts + [(wall.u1 + 0.2, wall.u1 + 0.2)]:
-        if door_u0 > start:
-            wall.box(dressings, start, door_u0, -0.2, 0.05, 0.0, PLINTH, factory.stone)
-        start = door_u1
-    wall.box(dressings, wall.u0 - 0.05, wall.u1 + 0.05, -0.07, 0.02, FIRST_FLOOR, FIRST_FLOOR + 0.25, factory.stone)
+    start = wall.start_along - 0.2
+    for door_start, door_end in cuts + [(wall.end_along + 0.2, wall.end_along + 0.2)]:
+        if door_start > start:
+            wall.box(dressings, start, door_start, -0.2, 0.05, 0.0, PLINTH, factory.stone)
+        start = door_end
+    wall.box(dressings, wall.start_along - 0.05, wall.end_along + 0.05, -0.07, 0.02, FIRST_FLOOR, FIRST_FLOOR + 0.25, factory.stone)
     if eaves:
-        wall.box(dressings, wall.u0 - 0.2, wall.u1 + 0.2, -0.2, 0.02, EAVES - 0.35, EAVES, factory.stone)
-    for u0, u1, sill, head in openings:
-        wall.box(dressings, u0 - 0.1, u1 + 0.1, -0.08, GLASS_SET_BACK, sill - 0.14, sill + 0.02, factory.stone)
-        wall.box(dressings, u0 - 0.15, u1 + 0.15, -0.03, 0.03, head, head + 0.32, factory.stone)
+        wall.box(dressings, wall.start_along - 0.2, wall.end_along + 0.2, -0.2, 0.02, EAVES - 0.35, EAVES, factory.stone)
+    for start_along, end_along, sill, head in openings:
+        wall.box(dressings, start_along - 0.1, end_along + 0.1, -0.08, GLASS_SET_BACK, sill - 0.14, sill + 0.02, factory.stone)
+        wall.box(dressings, start_along - 0.15, end_along + 0.15, -0.03, 0.03, head, head + 0.32, factory.stone)
         row = 'ground' if sill < FIRST_FLOOR else 'upper'
         number = len(factory.glass_rows.get((wall.name, row), [])) + 1
-        factory.glass(f'window-{wall.name}-{row}-{number:02d}', wall.face_corners(u0, u1, GLASS_SET_BACK, sill + 0.02, head),
+        factory.glass(f'window-{wall.name}-{row}-{number:02d}', wall.face_corners(start_along, end_along, GLASS_SET_BACK, sill + 0.02, head),
                       glass_type, (wall.name, row))
 
 
 def doorway(factory, wall, walls, dressings, centre, width, height, open_doors):
     """A cart doorway: an opening with a stone lintel and kerbs, a dark room behind it with the lit (or
     dark) inside of the works on its back wall, and two plank door leaves, each turning about its hinge."""
-    u0, u1 = centre - width / 2, centre + width / 2
-    wall.box(dressings, u0 - 0.25, u1 + 0.25, -0.05, 0.05, height, height + 0.4, factory.stone)
-    for u in (u0 - 0.12, u1 + 0.12):        # guard stones at the jambs' feet, against cart wheels
-        wall.box(dressings, u - 0.12, u + 0.12, -0.25, 0.0, 0.0, 0.7, factory.stone)
+    start_along, end_along = centre - width / 2, centre + width / 2
+    wall.box(dressings, start_along - 0.25, end_along + 0.25, -0.05, 0.05, height, height + 0.4, factory.stone)
+    for along in (start_along - 0.12, end_along + 0.12):        # guard stones at the jambs' feet, against cart wheels
+        wall.box(dressings, along - 0.12, along + 0.12, -0.25, 0.0, 0.0, 0.7, factory.stone)
     room = kit.MeshBuilder()
     depth = 3.0
-    wall.box(room, u0 - 0.3, u1 + 0.3, WALL, depth, -0.02, 0.0, factory.inside_dark)                  # floor
-    wall.box(room, u0 - 0.3, u1 + 0.3, WALL, depth, height + 0.6, height + 0.7, factory.inside_dark)  # ceiling
-    for u in (u0 - 0.4, u1 + 0.3):
-        wall.box(room, u, u + 0.1, WALL, depth, 0.0, height + 0.6, factory.inside_dark)               # sides
+    wall.box(room, start_along - 0.3, end_along + 0.3, WALL, depth, -0.02, 0.0, factory.inside_dark)                  # floor
+    wall.box(room, start_along - 0.3, end_along + 0.3, WALL, depth, height + 0.6, height + 0.7, factory.inside_dark)  # ceiling
+    for along in (start_along - 0.4, end_along + 0.3):
+        wall.box(room, along, along + 0.1, WALL, depth, 0.0, height + 0.6, factory.inside_dark)               # sides
     doorway_group = factory.group('doorway')
     room.finish(f'{factory.prefix}-doorway-room', parent=doorway_group)
-    inside = kit.glass_piece(f'{factory.prefix}-doorway-inside', wall.face_corners(u0 - 0.3, u1 + 0.3, depth - 0.05, 0.0, height + 0.6),
+    inside = kit.glass_piece(f'{factory.prefix}-doorway-inside', wall.face_corners(start_along - 0.3, end_along + 0.3, depth - 0.05, 0.0, height + 0.6),
                              factory.prefix, 'doorway-inside', 'lit' if open_doors else 'dark', variant=0, step=0, parent=doorway_group)
     inside['window_step'] = 0
     # the two leaves: vertical planks with ledges and braces behind and strap hinges in front
     leaf_width, leaf_height, thickness = width / 2 - 0.01, height - 0.05, 0.08
-    for side, hinge_u in (('left', u0), ('right', u1)):
-        toward = 1 if hinge_u == u0 else -1
+    for side, hinge_along in (('left', start_along), ('right', end_along)):
+        toward = 1 if hinge_along == start_along else -1
         leaf = kit.MeshBuilder()
         planks = 7
         plank = (leaf_width - 0.01 * (planks - 1)) / planks
         for k in range(planks):
-            a = hinge_u + toward * (k * (plank + 0.01))
-            wall.box(leaf, min(a, a + toward * plank), max(a, a + toward * plank), 0.04, 0.04 + thickness, 0.03, leaf_height, factory.door_paint)
+            plank_start = hinge_along + toward * (k * (plank + 0.01))
+            wall.box(leaf, min(plank_start, plank_start + toward * plank), max(plank_start, plank_start + toward * plank), 0.04, 0.04 + thickness, 0.03, leaf_height, factory.door_paint)
         for z in (0.4, leaf_height / 2, leaf_height - 0.4):
-            wall.box(leaf, min(hinge_u, hinge_u + toward * leaf_width), max(hinge_u, hinge_u + toward * leaf_width),
+            wall.box(leaf, min(hinge_along, hinge_along + toward * leaf_width), max(hinge_along, hinge_along + toward * leaf_width),
                      0.04 + thickness, 0.04 + thickness + 0.05, z - 0.11, z + 0.11, factory.door_paint)
         for z in (0.55, leaf_height - 0.55):
-            wall.box(leaf, min(hinge_u, hinge_u + toward * leaf_width * 0.75), max(hinge_u, hinge_u + toward * leaf_width * 0.75),
+            wall.box(leaf, min(hinge_along, hinge_along + toward * leaf_width * 0.75), max(hinge_along, hinge_along + toward * leaf_width * 0.75),
                      0.02, 0.04, z - 0.04, z + 0.04, factory.iron)
-        hinge = wall.point(hinge_u, 0.04, 0.0)
+        hinge = wall.point(hinge_along, 0.04, 0.0)
         part = leaf.finish(f'{factory.prefix}-loading-door-{side}', parent=doorway_group, origin=hinge)
         if open_doors:
             # swung outwards (towards the lane) about 100 degrees, standing out from the wall like open
@@ -315,8 +339,8 @@ def gable_coping(builder, factory, x_low, z_low, x_high, z_high, y0, y1):
     lift = Vector((-run.y, run.x)) * 0.18
     if lift.y < 0:
         lift = -lift                     # always above the sloping edge
-    a, b = Vector((x_low, z_low)) - run * 0.15, Vector((x_high, z_high))
-    outline = [tuple(a), tuple(b), tuple(b + lift), tuple(a + lift)]
+    low_end, high_end = Vector((x_low, z_low)) - run * 0.15, Vector((x_high, z_high))
+    outline = [tuple(low_end), tuple(high_end), tuple(high_end + lift), tuple(low_end + lift)]
     builder.prism(outline, y0 - 0.08, y1 + 0.08, factory.stone, axis='y')
 
 
@@ -335,8 +359,8 @@ def build_sawtooth_mill(factory):
     inner_end = Wall('inner-end', 'y', inner, 1, FRONT + WALL, BACK - WALL)
     width = 1.3
     centres = []
-    for a, b in zip(bay_lines, bay_lines[1:]):
-        centres += spread(a + PILASTER / 2, b - PILASTER / 2, 2, width)
+    for bay_start, bay_end in zip(bay_lines, bay_lines[1:]):
+        centres += spread(bay_start + PILASTER / 2, bay_end - PILASTER / 2, 2, width)
     door_centre, door_width, door_height = -3.4, 3.0, 3.8
     for wall in (front, back):
         skip = {(len(centres) - 2, 0), (len(centres) - 1, 0)} if wall is front else set()
@@ -344,18 +368,18 @@ def build_sawtooth_mill(factory):
         doors = [(door_centre - door_width / 2, door_centre + door_width / 2, 0.0, door_height)] if wall is front else []
         wall_with_openings(walls, wall, 0.0, EAVES, openings + doors, factory.brick)
         dress_wall(factory, wall, walls, dressings, ironwork, bay_lines, openings, factory.window_type,
-                   doorways=[(d[0], d[1]) for d in doors])
+                   doorways=[(door[0], door[1]) for door in doors])
         if wall is front:
             doorway(factory, wall, walls, dressings, door_centre, door_width, door_height, open_doors=False)
     side_lines = [FRONT + bay * k for k in range(5)]
     side_centres = []
-    for a, b in zip(side_lines, side_lines[1:]):
-        side_centres += spread(a + PILASTER / 2, b - PILASTER / 2, 2, width)
+    for bay_start, bay_end in zip(side_lines, side_lines[1:]):
+        side_centres += spread(bay_start + PILASTER / 2, bay_end - PILASTER / 2, 2, width)
     openings = window_openings(outer_end, side_centres, width, floors)
     wall_with_openings(walls, outer_end, 0.0, EAVES, openings, factory.brick)
     dress_wall(factory, outer_end, walls, dressings, ironwork, side_lines, openings, factory.window_type)
     wall_with_openings(walls, inner_end, 0.0, EAVES, [], factory.brick)          # the blank party end
-    inner_end.box(dressings, inner_end.u0, inner_end.u1, -0.05, 0.02, EAVES - 0.35, EAVES, factory.stone)
+    inner_end.box(dressings, inner_end.start_along, inner_end.end_along, -0.05, 0.02, EAVES - 0.35, EAVES, factory.stone)
     # the teeth: a gable triangle on the front and back walls for each bay, a slate slope rising towards
     # the centre line, and the north light glazing on each tooth's upright face (facing the centre line)
     for index, (low, high) in enumerate(zip(bay_lines, bay_lines[1:])):
@@ -373,10 +397,10 @@ def build_sawtooth_mill(factory):
         panels = 7
         panel = (y_to - y_from) / panels
         for k in range(panels):
-            a, b = y_from + k * panel + 0.06, y_from + (k + 1) * panel - 0.06
-            corners = [Vector((high, a, EAVES + 0.3)), Vector((high, b, EAVES + 0.3)), Vector((high, b, EAVES + TOOTH - 0.14)), Vector((high, a, EAVES + TOOTH - 0.14))]
+            panel_start, panel_end = y_from + k * panel + 0.06, y_from + (k + 1) * panel - 0.06
+            corners = [Vector((high, panel_start, EAVES + 0.3)), Vector((high, panel_end, EAVES + 0.3)), Vector((high, panel_end, EAVES + TOOTH - 0.14)), Vector((high, panel_start, EAVES + TOOTH - 0.14))]
             factory.glass(f'north-light-{index + 1}-panel-{k + 1}', corners, factory.roof_glass_type, ('north-light', index))
-            ironwork.box((high - 0.03, b - 0.0, EAVES + 0.28), (high + 0.06, b + 0.12, EAVES + TOOTH - 0.1), factory.iron)  # mullion
+            ironwork.box((high - 0.03, panel_end, EAVES + 0.28), (high + 0.06, panel_end + 0.12, EAVES + TOOTH - 0.1), factory.iron)  # mullion
         ironwork.box((high - 0.03, y_from, EAVES + TOOTH - 0.16), (high + 0.06, y_to, EAVES + TOOTH - 0.08), factory.iron)  # head rail
         # downpipes from the valley gutters, down the front and back
         if index > 0:
@@ -409,9 +433,9 @@ def build_pitched_mill(factory):
     loft_door = (2.2, 3.6, FIRST_FLOOR + 0.25, EAVES - 0.8)
     for wall in (front, back):
         openings, centres = [], []
-        for index, (a, b) in enumerate(spans):
+        for index, (span_start, span_end) in enumerate(spans):
             count = 1 if index == 0 else 3
-            these = spread(a + PILASTER / 2 + 0.05, b - PILASTER / 2 - 0.05, count, width)
+            these = spread(span_start + PILASTER / 2 + 0.05, span_end - PILASTER / 2 - 0.05, count, width)
             if wall is front and index == 0:
                 continue                     # the doorway and the taking-in door instead
             centres += these
@@ -423,15 +447,15 @@ def build_pitched_mill(factory):
         if wall is front:
             doorway(factory, wall, walls, dressings, door_centre, door_width, door_height, open_doors=True)
             # the taking-in door: two plank leaves, shut, a stone sill, a hoist beam from the gable's apex
-            u0, u1, z0, z1 = loft_door
-            wall.box(dressings, u0 - 0.1, u1 + 0.1, -0.1, 0.3, z0 - 0.12, z0 + 0.02, factory.stone)
-            wall.box(dressings, u0 - 0.15, u1 + 0.15, -0.03, 0.03, z1, z1 + 0.3, factory.stone)
+            door_start, door_end, z0, z1 = loft_door
+            wall.box(dressings, door_start - 0.1, door_end + 0.1, -0.1, 0.3, z0 - 0.12, z0 + 0.02, factory.stone)
+            wall.box(dressings, door_start - 0.15, door_end + 0.15, -0.03, 0.03, z1, z1 + 0.3, factory.stone)
             for k in range(6):
-                a = u0 + k * (u1 - u0) / 6
-                wall.box(timber, a + 0.005, a + (u1 - u0) / 6 - 0.005, 0.12, 0.2, z0 + 0.02, z1, factory.door_paint)
+                plank_start = door_start + k * (door_end - door_start) / 6
+                wall.box(timber, plank_start + 0.005, plank_start + (door_end - door_start) / 6 - 0.005, 0.12, 0.2, z0 + 0.02, z1, factory.door_paint)
             for z in (z0 + 0.4, z1 - 0.4):
-                wall.box(ironwork, u0 + 0.1, u0 + 0.6, 0.1, 0.12, z - 0.04, z + 0.04, factory.iron)
-                wall.box(ironwork, u1 - 0.6, u1 - 0.1, 0.1, 0.12, z - 0.04, z + 0.04, factory.iron)
+                wall.box(ironwork, door_start + 0.1, door_start + 0.6, 0.1, 0.12, z - 0.04, z + 0.04, factory.iron)
+                wall.box(ironwork, door_end - 0.6, door_end - 0.1, 0.1, 0.12, z - 0.04, z + 0.04, factory.iron)
             apex = EAVES + (5.0 - inner) / 2 * math.tan(PITCH)
             beam_u = (inner + 5.0) / 2
             wall.box(timber, beam_u - 0.14, beam_u + 0.14, -1.4, 0.4, apex - 0.75, apex - 0.47, factory.door_paint)
@@ -440,32 +464,32 @@ def build_pitched_mill(factory):
             ironwork.centred_box(tuple(wall.point(beam_u, -1.25, apex - 2.7)), (0.08, 0.06, 0.18), factory.iron)         # hook
     side_lines = [FRONT + MILL_DEPTH / 4 * k for k in range(5)]
     side_centres = []
-    for a, b in zip(side_lines, side_lines[1:]):
-        side_centres += spread(a + PILASTER / 2, b - PILASTER / 2, 2, width)
+    for bay_start, bay_end in zip(side_lines, side_lines[1:]):
+        side_centres += spread(bay_start + PILASTER / 2, bay_end - PILASTER / 2, 2, width)
     openings = window_openings(outer_end, side_centres, width, floors)
     wall_with_openings(walls, outer_end, 0.0, EAVES, openings, factory.brick)
     dress_wall(factory, outer_end, walls, dressings, ironwork, side_lines, openings, factory.window_type)
     wall_with_openings(walls, inner_end, 0.0, EAVES, [], factory.brick)
-    inner_end.box(dressings, inner_end.u0, inner_end.u1, -0.2, 0.02, EAVES - 0.35, EAVES, factory.stone)
+    inner_end.box(dressings, inner_end.start_along, inner_end.end_along, -0.2, 0.02, EAVES - 0.35, EAVES, factory.stone)
     # the spans: gables with copings on the front and back walls, two slate slopes, a ridge roll,
     # gutters in the valleys and along the two eaves, downpipes; a lantern along each ridge
     tan = math.tan(PITCH)
     y_from, y_to = FRONT + WALL - 0.02, BACK - WALL + 0.02
-    for index, (a, b) in enumerate(spans):
-        middle, half = (a + b) / 2, (b - a) / 2
+    for index, (span_start, span_end) in enumerate(spans):
+        middle, half = (span_start + span_end) / 2, (span_end - span_start) / 2
         ridge = EAVES + half * tan
         for y0, y1 in ((FRONT, FRONT + WALL), (BACK - WALL, BACK)):
-            walls.prism([(a, EAVES), (b, EAVES), (middle, ridge)], y0, y1, factory.brick, axis='y')
-            gable_coping(dressings, factory, a, EAVES, middle + 0.01, ridge, y0, y1)
-            gable_coping(dressings, factory, b, EAVES, middle - 0.01, ridge, y0, y1)
+            walls.prism([(span_start, EAVES), (span_end, EAVES), (middle, ridge)], y0, y1, factory.brick, axis='y')
+            gable_coping(dressings, factory, span_start, EAVES, middle + 0.01, ridge, y0, y1)
+            gable_coping(dressings, factory, span_end, EAVES, middle - 0.01, ridge, y0, y1)
             dressings.box((middle - 0.3, y0 - 0.1, ridge - 0.05), (middle + 0.3, y1 + 0.1, ridge + 0.35), factory.stone)   # apex
-            for x in (a, b):
+            for x in (span_start, span_end):
                 dressings.box((x - 0.35, y0 - 0.1, EAVES - 0.25), (x + 0.35, y1 + 0.1, EAVES + 0.22), factory.stone)       # kneelers
-        roof.roof_slope((a + 0.25 if a != inner else a - 0.35, y_from, EAVES + 0.12 + (0.25 if a != inner else -0.35) * tan),
-                        (a + 0.25 if a != inner else a - 0.35, y_to, EAVES + 0.12 + (0.25 if a != inner else -0.35) * tan),
+        roof.roof_slope((span_start + 0.25 if span_start != inner else span_start - 0.35, y_from, EAVES + 0.12 + (0.25 if span_start != inner else -0.35) * tan),
+                        (span_start + 0.25 if span_start != inner else span_start - 0.35, y_to, EAVES + 0.12 + (0.25 if span_start != inner else -0.35) * tan),
                         (middle, y_to, ridge + 0.12), (middle, y_from, ridge + 0.12), factory.slate)
-        roof.roof_slope((b - 0.25 if b != outer else b + 0.35, y_to, EAVES + 0.12 + (0.25 if b != outer else -0.35) * tan),
-                        (b - 0.25 if b != outer else b + 0.35, y_from, EAVES + 0.12 + (0.25 if b != outer else -0.35) * tan),
+        roof.roof_slope((span_end - 0.25 if span_end != outer else span_end + 0.35, y_to, EAVES + 0.12 + (0.25 if span_end != outer else -0.35) * tan),
+                        (span_end - 0.25 if span_end != outer else span_end + 0.35, y_from, EAVES + 0.12 + (0.25 if span_end != outer else -0.35) * tan),
                         (middle, y_from, ridge + 0.12), (middle, y_to, ridge + 0.12), factory.slate)
         roof.rod((middle, y_from, ridge + 0.14), (middle, y_to, ridge + 0.14), 0.11, factory.flashing, sides=10)       # ridge roll
         # the lantern: a raised glazed louvre along the ridge with its own little roof
@@ -531,21 +555,21 @@ def build_tank(factory, span):
         trestle.box((x0 - 0.1, y - 0.15, bottom - 0.4), (x1 + 0.1, y + 0.15, bottom - 0.05), factory.iron)
     for x in (x0 + 0.9, x0 + 1.5, x1 - 0.9):
         trestle.box((x - 0.08, y0, bottom - 0.2), (x + 0.08, y1, bottom - 0.02), factory.iron)
-    for (xa, ya), (xb, yb) in zip(legs, legs[1:] + legs[:1]):    # bracing on each face: a tie and a cross
-        za, zb = roof_at(xa) + 0.3, roof_at(xb) + 0.3
-        middle_z = (max(za, zb) + bottom - 0.4) / 2
-        trestle.beam((xa, ya, middle_z), (xb, yb, middle_z), 0.1, 0.14, factory.iron)
-        trestle.beam((xa, ya, za), (xb, yb, bottom - 0.45), 0.03, 0.12, factory.iron)
-        trestle.beam((xb, yb, zb), (xa, ya, bottom - 0.45), 0.03, 0.12, factory.iron)
+    for (from_x, from_y), (to_x, to_y) in zip(legs, legs[1:] + legs[:1]):    # bracing on each face: a tie and a cross
+        from_z, to_z = roof_at(from_x) + 0.3, roof_at(to_x) + 0.3
+        middle_z = (max(from_z, to_z) + bottom - 0.4) / 2
+        trestle.beam((from_x, from_y, middle_z), (to_x, to_y, middle_z), 0.1, 0.14, factory.iron)
+        trestle.beam((from_x, from_y, from_z), (to_x, to_y, bottom - 0.45), 0.03, 0.12, factory.iron)
+        trestle.beam((to_x, to_y, to_z), (from_x, from_y, bottom - 0.45), 0.03, 0.12, factory.iron)
     tank.box((x0, y0, bottom), (x1, y1, bottom + height), factory.tank_steel)
     flange = 0.05
     for k in range(5):                                            # flanges: upright, then across, on every side
         x = x0 + (x1 - x0) * k / 4
         y = y0 + (y1 - y0) * k / 4
-        for yy in (y0, y1):
-            tank.box((x - 0.03, yy - flange if yy == y0 else yy, bottom), (x + 0.03, yy if yy == y0 else yy + flange, bottom + height), factory.tank_steel)
-        for xx in (x0, x1):
-            tank.box((xx - flange if xx == x0 else xx, y - 0.03, bottom), (xx if xx == x0 else xx + flange, y + 0.03, bottom + height), factory.tank_steel)
+        for side_y in (y0, y1):
+            tank.box((x - 0.03, side_y - flange if side_y == y0 else side_y, bottom), (x + 0.03, side_y if side_y == y0 else side_y + flange, bottom + height), factory.tank_steel)
+        for side_x in (x0, x1):
+            tank.box((side_x - flange if side_x == x0 else side_x, y - 0.03, bottom), (side_x if side_x == x0 else side_x + flange, y + 0.03, bottom + height), factory.tank_steel)
     for k in range(1, 4):
         z = bottom + height * k / 4
         tank.box((x0 - flange, y0 - flange, z - 0.03), (x1 + flange, y1 + flange, z + 0.03), factory.tank_steel)
@@ -555,8 +579,8 @@ def build_tank(factory, span):
     posts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1), ((x0 + x1) / 2, y0), ((x0 + x1) / 2, y1)]
     for x, y in posts:
         trestle.rod((x, y, bottom + height), (x, y, rail_top), 0.025, factory.iron, sides=6)
-    for (xa, ya), (xb, yb) in zip(posts[:4], posts[1:4] + posts[:1]):
-        trestle.rod((xa, ya, rail_top), (xb, yb, rail_top), 0.025, factory.iron, sides=6)
+    for (from_x, from_y), (to_x, to_y) in zip(posts[:4], posts[1:4] + posts[:1]):
+        trestle.rod((from_x, from_y, rail_top), (to_x, to_y, rail_top), 0.025, factory.iron, sides=6)
     ladder_x = x0 - 0.35                                          # a ladder up the trestle's side
     for y in (y0 + 1.1, y0 + 1.6):
         trestle.rod((ladder_x, y, roof_at(x0) + 0.2), (ladder_x, y, rail_top), 0.025, factory.iron, sides=6)
@@ -572,10 +596,12 @@ def build_tank(factory, span):
 
 # ------------------------------------------------------------------------------------- chimneys
 
-def soot_segments(z0, z1):
-    """Where a chimney's brick turns sooted and then black towards its top: [(from, to, shade)]."""
+def soot_segments(z0, z1, soot=(0.62, 0.82)):
+    """Where a chimney's brick turns sooted and then black towards its top: [(from, to, shade)]. soot: where
+    the soot starts and where it turns black, as shares of the shaft's height."""
     span = z1 - z0
-    return [(z0, z0 + span * 0.62, 0), (z0 + span * 0.62, z0 + span * 0.82, 1), (z0 + span * 0.82, z1, 2)]
+    sooted, black = soot
+    return [(z0, z0 + span * sooted, 0), (z0 + span * sooted, z0 + span * black, 1), (z0 + span * black, z1, 2)]
 
 
 def build_round_chimney(factory, x, y, height, name):
@@ -608,8 +634,8 @@ def build_round_chimney(factory, x, y, height, name):
     conductor = [Vector((x + bottom_radius + 0.04, y, plinth_top + 0.35)), Vector((x + top_radius + 0.04, y, shaft_top)),
                  Vector((x + top_radius + 0.34, y, shaft_top + 0.75)), Vector((x + top_radius + 0.34, y, height + 1.0))]
     builder.rod((x + 1.95, y, 0.0), (x + 1.95, y, plinth_top), 0.02, factory.iron, sides=6)
-    for a, b in zip(conductor, conductor[1:]):
-        builder.rod(a, b, 0.025, factory.iron, sides=6)
+    for start, end in zip(conductor, conductor[1:]):
+        builder.rod(start, end, 0.025, factory.iron, sides=6)
     part = builder.finish(f'{factory.prefix}-{name}', parent=factory.group('chimneys'))
     return part
 
@@ -626,7 +652,7 @@ def build_square_chimney(factory, x, y, height, name):
     shaft_top = height - 1.5
     bottom_half, top_half = 1.0, 0.68
     half_at = lambda z: bottom_half + (top_half - bottom_half) * (z - plinth_top) / (shaft_top - plinth_top)
-    for z0, z1, shade in soot_segments(plinth_top, shaft_top):
+    for z0, z1, shade in soot_segments(plinth_top, shaft_top, NO_2_CHIMNEY_SOOT):
         builder.lathe([(half_at(z0), z0), (half_at(z1), z1)], factory.chimney_bricks[shade], centre=(x, y, 0), square=True)
     for fraction in (0.36, 0.68):
         z = plinth_top + (shaft_top - plinth_top) * fraction
@@ -638,7 +664,30 @@ def build_square_chimney(factory, x, y, height, name):
                   factory.chimney_bricks[2], centre=(x, y, 0), square=True)
     builder.lathe([(top + 0.36, shaft_top + 0.95), (top + 0.36, height - 0.25), (top + 0.22, height), (top - 0.18, height),
                    (top - 0.18, height - 0.7), (0.001, height - 0.7)], factory.cap_stone, centre=(x, y, 0), square=True)
-    return builder.finish(f'{factory.prefix}-{name}', parent=factory.group('chimneys'))
+    part = builder.finish(f'{factory.prefix}-{name}', parent=factory.group('chimneys'))
+    lit_from_the_yard(factory, part)
+    return part
+
+
+def lit_from_the_yard(factory, part):
+    """No. 2's chimneys: each brick or stone face toward the lane (-y) takes its warm lit twin ('lane-side'),
+    each face toward the sides (+x or -x) its half-lit twin ('sides'); the back, the tops and the black under the
+    cap stay as they are. The shaft is square to the lane, so its faces look straight along x or y."""
+    mesh = part.data
+    names = [material.name for material in mesh.materials]
+    for polygon in mesh.polygons:
+        twins = factory.chimney_lit_twins.get(names[polygon.material_index])
+        if twins is None:
+            continue
+        normal = polygon.normal
+        facing = 'lane-side' if normal.y < -0.6 else 'sides' if abs(normal.x) > 0.6 else None
+        if facing is None:
+            continue
+        twin = twins[facing]
+        if twin.name not in names:
+            mesh.materials.append(twin)
+            names.append(twin.name)
+        polygon.material_index = names.index(twin.name)
 
 
 def build_boiler_house(factory, x0, x1, chimney):
@@ -647,8 +696,8 @@ def build_boiler_house(factory, x0, x1, chimney):
     builder = kit.MeshBuilder()
     y0, y1, walls_top = BACK + 1.0, BACK + 10.0, 4.8
     front = Wall('boiler-front', 'x', y0, -1, x0, x1)
-    door_u = (x0 + x1) / 2
-    wall_with_openings(builder, front, 0.0, walls_top, [(door_u - 1.2, door_u + 1.2, 0.0, 3.2)], factory.brick)
+    door_along = (x0 + x1) / 2
+    wall_with_openings(builder, front, 0.0, walls_top, [(door_along - 1.2, door_along + 1.2, 0.0, 3.2)], factory.brick)
     builder.box((x0, y1 - WALL, 0.0), (x1, y1, walls_top), factory.brick)
     builder.box((x0, y0 + WALL, 0.0), (x0 + WALL, y1 - WALL, walls_top), factory.brick)
     builder.box((x1 - WALL, y0 + WALL, 0.0), (x1, y1 - WALL, walls_top), factory.brick)
@@ -659,13 +708,13 @@ def build_boiler_house(factory, x0, x1, chimney):
                        (middle, y1 + 0.3, walls_top + rise + 0.25), (middle, y0 - 0.3, walls_top + rise + 0.25), factory.slate)
     builder.roof_slope((x1 + 0.3, y1 + 0.3, walls_top - 0.05), (x1 + 0.3, y0 - 0.3, walls_top - 0.05),
                        (middle, y0 - 0.3, walls_top + rise + 0.25), (middle, y1 + 0.3, walls_top + rise + 0.25), factory.slate)
-    front.box(builder, door_u - 1.3, door_u + 1.3, -0.04, 0.04, 3.2, 3.5, factory.stone)
+    front.box(builder, door_along - 1.3, door_along + 1.3, -0.04, 0.04, 3.2, 3.5, factory.stone)
     for k in range(6):
-        a = door_u - 1.2 + k * 0.4
-        front.box(builder, a + 0.005, a + 0.395, 0.1, 0.18, 0.02, 3.18, factory.door_paint)
-    cx, cy = chimney[0], chimney[1]
-    near_x = x0 if abs(x0 - cx) < abs(x1 - cx) else x1
-    builder.box((min(near_x, cx), cy - 0.8, 0.0), (max(near_x, cx), cy + 0.8, 1.6), factory.brick)        # the flue
+        plank_start = door_along - 1.2 + k * 0.4
+        front.box(builder, plank_start + 0.005, plank_start + 0.395, 0.1, 0.18, 0.02, 3.18, factory.door_paint)
+    chimney_x, chimney_y = chimney[0], chimney[1]
+    near_x = x0 if abs(x0 - chimney_x) < abs(x1 - chimney_x) else x1
+    builder.box((min(near_x, chimney_x), chimney_y - 0.8, 0.0), (max(near_x, chimney_x), chimney_y + 0.8, 1.6), factory.brick)        # the flue
     return builder.finish(f'{factory.prefix}-boiler-house-building', parent=factory.group('boiler-house'))
 
 
@@ -720,7 +769,8 @@ DESCRIPTIONS = {
     1: ('No. 1, the quiet factory (always on the left): dark red-brown brick, one tall round chimney, a four-bay '
         'sawtooth roof, no water tank, a two-storey mill front with upper windows, cart doors shut. Saved with every '
         'window dark.'),
-    2: ('No. 2, the flat-out factory (always on the right): pale buff-grey brick, two square chimneys, a water tank '
+    2: ('No. 2, the flat-out factory (always on the right): pale buff-grey brick, two square chimneys of a paler buff '
+        '(sooted only just under the cap, their faces toward the lane and their sides lit warm by the yard), a water tank '
         'on a steel trestle, long pitched shed roofs with glazed lanterns, a two-storey mill front with upper windows, '
         'cart doors open on a lit works, a taking-in door with a hoist beam. Saved with every window lit.'),
 }

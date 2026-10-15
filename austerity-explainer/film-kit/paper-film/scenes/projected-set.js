@@ -628,6 +628,9 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
       // handles are only a few texels wide, and the wide pass's 13 x 13 points would miss them),
       // then the wide one round it (the distance picture is free by now, so it holds the narrow zone)
       zoneMaterial.uniforms.useMask.value = 0;
+      // no mask in this first step: a mask left from an earlier refresh is this projection's own distance picture,
+      // which this step draws into (WebGL refuses that draw as a "feedback loop", log 34, page 3's refresh at a cut)
+      zoneMaterial.uniforms.mask.value = null;
       zoneMaterial.uniforms.radius.value = 8;
       runPass(zoneMaterial, distances);
       zoneMaterial.uniforms.useMask.value = 1;

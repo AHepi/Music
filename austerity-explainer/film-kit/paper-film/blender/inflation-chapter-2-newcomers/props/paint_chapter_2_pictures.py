@@ -12,8 +12,10 @@
 #   wages-envelope-front.jpg, wages-envelope-back.jpg
 #                                               a thin brown paper pay envelope printed "WAGES" with a
 #                                               faint fold below the word, and its flap side
-#   tinplate-dull.jpg                           dull, darkened tinplate, mottled and scratched, for the
-#                                               lunch tin
+#   tinplate-dull.jpg                           dull, darkened tinplate, mottled and scratched, with rust
+#                                               freckles and a few rust spots, for the lunch tin
+#   tinplate-worn.jpg                           the same tinplate rubbed bright where hands and knocks wear
+#                                               it (the lunch tin's edges, rolled rim, hinge and clasp)
 #   enamel-mug.jpg                              dark blue-black enamel with chips showing the black iron
 #                                               (most at the rim and the foot), wrapped once round the mug
 # The lettering rules (plan, part 1): real lettering on every sign, no figure (digit) except "No. 1" and
@@ -157,8 +159,11 @@ def gate_board(folder, words, file_name, seed, width=2048, height=878):
 # -------------------------------------------------------------------------------------- the bank
 
 def bank_sign(folder, width=2048, height=1024):
-    """The bank's hanging sign (1.2 x 0.6 m, both faces): "BANK" in gilt with a dark shade and a gilt
-    lined border with small corner diamonds, on near-black; kept well, so only lightly weathered."""
+    """The bank's hanging sign (1.5 x 0.75 m, both faces): "BANK" in gilt with a dark shade and a gilt
+    lined border with small corner diamonds, on near-black; kept well, so only lightly weathered. The word
+    fills 0.84 of the board's width, so its capitals are about 0.3 m high: about 22 to 25 pixels a letter
+    from W3's camera 20 to 22 m away, where page 9 has to find the bank (at 0.2 m they were 15 to 17,
+    round 2's check)."""
     ground = np.ones((height, width, 3), np.float32) * np.array([0.10, 0.09, 0.085])
     ground = ground * (0.92 + 0.08 * noise(height, width, 61, 2.2, 2)[..., None])
     gilt = Image.new('L', (width, height), 0)
@@ -169,7 +174,7 @@ def bank_sign(folder, width=2048, height=1024):
     draw_gilt.rectangle((inset + 26, inset + 26, width - inset - 26, height - inset - 26), outline=255, width=3)
     for corner_x, corner_y in ((inset + 70, inset + 70), (width - inset - 70, inset + 70), (inset + 70, height - inset - 70), (width - inset - 70, height - inset - 70)):
         draw_gilt.polygon([(corner_x, corner_y - 18), (corner_x + 18, corner_y), (corner_x, corner_y + 18), (corner_x - 18, corner_y)], fill=255)
-    typeface = fitted_font('AbrilFatface-Regular.ttf', 600, 'BANK', width * 0.70, spacing=30)
+    typeface = fitted_font('AbrilFatface-Regular.ttf', 700, 'BANK', width * 0.84, spacing=30)
     top, bottom = typeface.getbbox('BANK')[1], typeface.getbbox('BANK')[3]
     y = (height - (bottom - top)) / 2 - top
     centred_text(draw_shade, y + 12, 'BANK', typeface, 255, width, spacing=30)
@@ -407,8 +412,45 @@ def tinplate_dull(folder, size=1024):
     freckles = ((noise(size, size, 114, 0.5, 1) > 0.86) & (cloudy[..., 0] > 0.55)).astype(np.float32)
     freckles = blurred(freckles, 1.2)[..., None]
     tin = tin * (1 - 0.7 * freckles) + np.array([0.33, 0.19, 0.11]) * 0.7 * freckles
+    # a few rust spots big enough to see on the tin from a couple of metres (4 to 9 mm across: the picture is
+    # 0.25 m, about 4 pixels a millimetre), each a darker core in a ragged orange-brown stain
+    spots = Image.new('L', (size, size), 0)
+    draw_spots = ImageDraw.Draw(spots)
+    for _ in range(9):
+        x, y, radius = rng.uniform(0, size), rng.uniform(0, size), rng.uniform(8, 18)
+        corners = 11
+        draw_spots.polygon([(x + radius * (0.55 + 0.45 * rng.random()) * math.cos(2 * math.pi * k / corners),
+                             y + radius * (0.55 + 0.45 * rng.random()) * math.sin(2 * math.pi * k / corners)) for k in range(corners)], fill=255)
+    stain = np.clip(blurred(np.asarray(spots, np.float32) / 255, 8.0) * 1.6, 0, 1)[..., None]
+    stain = stain * (0.6 + 0.4 * noise(size, size, 115, 0.4, 1)[..., None])
+    core = np.clip((blurred(np.asarray(spots, np.float32) / 255, 1.5) - 0.6) * 2.5, 0, 1)[..., None]
+    tin = tin * (1 - 0.6 * stain) + np.array([0.42, 0.24, 0.11]) * 0.6 * stain
+    tin = tin * (1 - 0.55 * core) + np.array([0.20, 0.10, 0.05]) * 0.55 * core
     as_picture(tin).save(os.path.join(folder, 'tinplate-dull.jpg'), quality=92)
     print('painted tinplate-dull.jpg')
+
+
+def tinplate_worn(folder, size=1024):
+    """Tinplate rubbed bright (the picture covers 0.25 x 0.25 m, laid on the same way as tinplate-dull.jpg):
+    where fingers, knocks and the coping's stone have worn the dull skin off the lunch tin's edges, rolled
+    rim, hinge and clasp, the tin shows light and a little shiny, scratched every way, with patches of the
+    dull tarnish left in the hollows."""
+    rng = np.random.default_rng(131)
+    grain = noise(size, size, 132, 0.5, 1)[..., None]
+    tin = np.array([0.66, 0.66, 0.63]) * (0.88 + 0.12 * grain)
+    left = np.clip((noise(size, size, 133, 1.6, 2) - 0.55) * 2.5, 0, 1)[..., None]
+    tin = tin * (1 - 0.55 * left) + np.array([0.30, 0.29, 0.26]) * 0.55 * left
+    scratches = Image.new('L', (size, size), 0)
+    draw = ImageDraw.Draw(scratches)
+    for _ in range(420):
+        x, y = rng.uniform(0, size), rng.uniform(0, size)
+        angle = rng.uniform(0, math.pi)
+        length = rng.uniform(10, 70)
+        draw.line((x, y, x + length * math.cos(angle), y + length * math.sin(angle)), fill=int(rng.uniform(80, 200)), width=1)
+    lines = np.asarray(scratches, np.float32)[..., None] / 255
+    tin = tin * (1 - 0.3 * lines) + np.array([0.82, 0.82, 0.80]) * 0.3 * lines
+    as_picture(tin).save(os.path.join(folder, 'tinplate-worn.jpg'), quality=92)
+    print('painted tinplate-worn.jpg')
 
 
 def enamel_mug(folder, width=1024, height=512):
@@ -464,6 +506,7 @@ if __name__ == '__main__':
     crate_stencil(folder)
     wages_envelope(folder)
     tinplate_dull(folder)
+    tinplate_worn(folder)
     enamel_mug(folder)
     with open(os.path.join(folder, 'lettering-sizes.json'), 'w') as handle:
         json.dump(LETTERING_SIZES, handle, indent=1)

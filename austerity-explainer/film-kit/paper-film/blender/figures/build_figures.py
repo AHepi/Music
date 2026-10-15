@@ -3,9 +3,18 @@
 # in dull browns and greys, in five waiting poses (hands in pockets, arms folded, one hand raised on a
 # gate bar, stooped toward a brazier, leaning on a wall), and walking men and women, some with a bundle
 # or a bag, for far-off crowds. They are made to read as people from behind and in silhouette at 6 to
-# 9 m, not as mannequins or capsules: heads with ears, necks, sloping shoulders, arms that bend at the
-# elbow, hands as simple mitts, coat skirts with folds, trouser legs, boots, and each man his own height,
-# build, stance and colours. No faces: they are seen from behind or dark.
+# 9 m, not as mannequins, capsules or shop dummies: heads with ears, necks, sloping shoulders, arms that
+# bend at the elbow with the sleeve creased there, hands bent round what they hold (a gate bar) or drooping
+# from the cuff, coat skirts hanging in deep folds to an uneven hem, creases across the back, trouser legs,
+# boots of a real size, and each man his own height, build, stance and colours. No faces: they are seen from
+# behind or dark.
+# Round 2's check found them still toy-like at the plate's full size: smooth tubes for arms ending in rounded
+# mitts (the hand on the bar read as a stump), coat folds too shallow to see, dead straight hems, big flat
+# blocks for boots. So the folds are now 2.4 times deeper (and the coat's rings twice as fine, so they show),
+# with creases at the elbows and across the back, the hem broken, the boots 14 per cent shorter and narrower,
+# the hand on the bar wrapped round it, the warming hands bent down from their cuffs, and the two men seen in
+# profile by the fire have their heads turned 18 degrees away from the light on the cheek a camera behind them
+# sees (a lit cheek and ear in profile could be painted as a face).
 # Seen from behind, a head must never read as a bald scalp or a blank face (round 1's check, log 34):
 #   - dark, matt hair covers the back and sides of every head from under the cap down into the collar
 #     (a shiny dark hair caught the street lamps and came out paler than the coats, like a bald head)
@@ -20,7 +29,8 @@
 #     and legs always keep their length
 #   - each piece of clothing is a smooth shell lofted round those joints: rings round the body for the
 #     coat (its skirt hangs straight down round the legs, wide enough to hold them), tubes along the
-#     arms and legs, rings round the head for the cap, a D-shaped loft along each foot for the boots
+#     arms and legs, rings round the head for the cap, a D-shaped loft along each foot for the boots;
+#     a hand that holds a bar is lofted round the bar itself (grip_bar, grip_bar_radius)
 #   - the cloth wears a free Poly Haven surface (CC0: wool, tweed, corduroy, leather, knitted wool,
 #     linen), tinted dull and mottled a little so it reads as worn cloth, not plastic. The mottling is
 #     seeded from the cloth's name (zlib.crc32, the same on every run), and each tinted picture's file
@@ -37,6 +47,7 @@
 #   python3 -I fetch_cloth_textures.py SCRATCH
 #   FIGURES_SCRATCH=SCRATCH blender -b --python build_figures.py                        (all)
 #   FIGURES_SCRATCH=SCRATCH blender -b --python build_figures.py -- worker-arms-folded  (some)
+#   FIGURES_OUT=FOLDER ...   writes the figures and an index.json into FOLDER instead (a trial build)
 # Units are metres.
 
 import json
@@ -52,7 +63,8 @@ import numpy
 from mathutils import Matrix, Vector
 
 KIT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
-FIGURES_FOLDER = os.path.join(KIT_FOLDER, 'assets', 'models', 'inflation-chapter-2-newcomers', 'figures')
+# where the figures and their index.json go: the chapter's figures folder, or FIGURES_OUT (a trial build in scratch)
+FIGURES_FOLDER = os.environ.get('FIGURES_OUT') or os.path.join(KIT_FOLDER, 'assets', 'models', 'inflation-chapter-2-newcomers', 'figures')
 INDEX_PATH = os.path.join(FIGURES_FOLDER, 'index.json')
 # downloads and the tinted cloth pictures (not kept in the repository); FIGURES_SCRATCH chooses the folder
 SCRATCH = os.environ.get('FIGURES_SCRATCH', os.path.join(tempfile.gettempdir(), 'figures'))
@@ -113,7 +125,10 @@ FIGURES = {
         'kind': 'man', 'height': 1.70, 'build': 1.09, 'coat': ('coat grey', 0.42), 'collar': 'down', 'muffler': 'muffler oatmeal',
         'cap': 'cap brown tweed', 'trousers': 'trousers brown corduroy', 'seed': 2,
         'pose': {
-            'lean': (-3, 0, 0), 'chest': (3, 0, 0), 'head': (6, 2, -10), 'shoulders_forward': 0.03,
+            # his head turned 18 degrees to his left (from 10 degrees right to 8 left), away from the light that reaches
+            # the cheek a camera behind him sees: in round 2's plate his lit cheek, ear and nose showed in profile
+            # (turned further right, more of his face showed)
+            'lean': (-3, 0, 0), 'chest': (3, 0, 0), 'head': (6, 2, 8), 'shoulders_forward': 0.03,
             'right_arm': {'wrist': (-0.10, 0.215, 1.20), 'elbow': (0.5, 0.2, -1), 'hand': 'hidden'},
             'left_arm': {'wrist': (0.11, 0.235, 1.16), 'elbow': (-0.5, 0.2, -1), 'hand': 'hidden'},
             'right_foot': {'at': (0.14, 0.01), 'turn': 14},
@@ -121,11 +136,13 @@ FIGURES = {
         },
     },
     'worker-hand-on-bar': {
-        'what': 'tall, thin working man in a long olive-brown tweed coat, collar up, flat cap, his right hand '
-                'raised gripping an upright bar in front of him (a gate bar) at shoulder height, his left in his pocket',
-        'kind': 'man', 'height': 1.78, 'build': 0.95, 'coat': ('coat olive tweed', 0.43), 'collar': 'up', 'muffler': None,
+        'what': 'tall, thin working man in a long slate-grey tweed coat (grey-brown in warm light), collar up, flat cap, his right '
+                'hand raised gripping an upright bar in front of him (a gate bar) at shoulder height, wrapped round it, his left '
+                'in his pocket',
+        'kind': 'man', 'height': 1.78, 'build': 0.95, 'coat': ('coat slate grey tweed', 0.43), 'collar': 'up', 'muffler': None,
         'cap': 'cap dark tweed', 'trousers': 'trousers dark corduroy', 'seed': 3,
         'grip_bar': (0.15, 0.40),   # where the bar it holds stands (x, y), so the shot can put one there
+        'grip_bar_radius': 0.03,    # the bar's radius the hand closes round (a gate bar; a thicker post just hides the fingertips)
         'pose': {
             'pelvis': (0.02, 0.0, 0.0), 'pelvis_turn': (0, 2, -4), 'lean': (4, 2, -6), 'chest': (3, 1, -4), 'head': (-4, 0, -4),
             'right_arm': {'wrist': (0.13, 0.36, 1.50), 'elbow': (1, -0.2, -1), 'hand': 'grip', 'hand_direction': (0.05, 1, 0.05),
@@ -145,19 +162,23 @@ FIGURES = {
         # his hands hover over the fire, about 12 cm higher than in round 1 (they seemed to rest on the hot rim of the
         # 0.86 m brazier drum); index.json gives the hands' lowest point, so a shot can check the gap to its rim
         'pose': {
-            'pelvis': (0.0, -0.08, -0.07), 'lean': (26, 0, 0), 'chest': (14, 0, 0), 'head': (-22, 0, 0),
-            'right_arm': {'wrist': (0.11, 0.40, 1.13), 'elbow': (0.7, 0, -1), 'hand': 'warming', 'hand_direction': (0.05, 1, -0.1),
+            # his head turned 18 degrees to his right, away from the light that reaches the cheek a camera behind him
+            # sees: in round 2's plate his lit cheek and ear showed in profile and could be painted as a face (turned
+            # the other way, to his left, more of his face showed)
+            'pelvis': (0.0, -0.08, -0.07), 'lean': (26, 0, 0), 'chest': (14, 0, 0), 'head': (-22, 0, -18),
+            # the hands bent a little down from the wrist, fingers curled toward the fire
+            'right_arm': {'wrist': (0.11, 0.40, 1.13), 'elbow': (0.7, 0, -1), 'hand': 'warming', 'hand_direction': (0.05, 1, -0.2),
                           'hand_back': (0, 0, 1)},
-            'left_arm': {'wrist': (-0.12, 0.38, 1.15), 'elbow': (-0.7, 0, -1), 'hand': 'warming', 'hand_direction': (-0.05, 1, -0.1),
+            'left_arm': {'wrist': (-0.12, 0.38, 1.15), 'elbow': (-0.7, 0, -1), 'hand': 'warming', 'hand_direction': (-0.05, 1, -0.2),
                          'hand_back': (0, 0, 1)},
             'right_foot': {'at': (0.13, 0.08), 'turn': 10},
             'left_foot': {'at': (-0.12, 0.0), 'turn': 13},
         },
     },
     'worker-leaning-on-wall': {
-        'what': 'working man in a long fawn tweed coat, collar up, flat cap, leaning his right shoulder on a '
-                'wall, legs crossed at the ankles, hands in his pockets',
-        'kind': 'man', 'height': 1.72, 'build': 0.98, 'coat': ('coat fawn tweed', 0.41), 'collar': 'up', 'muffler': None,
+        'what': 'working man in a long grey tweed coat (grey-brown in warm light), collar up, flat cap, leaning his '
+                'right shoulder on a wall, legs crossed at the ankles, hands in his pockets',
+        'kind': 'man', 'height': 1.72, 'build': 0.98, 'coat': ('coat grey tweed', 0.41), 'collar': 'up', 'muffler': None,
         'cap': 'cap dark tweed', 'trousers': 'trousers dark corduroy', 'seed': 5,
         'wall_side': 'right',   # the wall touches his right shoulder
         'pose': {
@@ -266,8 +287,17 @@ CLOTHS = {
     'coat grey': ('caban', (0.128, 0.126, 0.118)),
     'coat grey brown': ('caban', (0.118, 0.105, 0.088)),
     'coat charcoal': ('caban', (0.068, 0.067, 0.066)),
-    'coat olive tweed': ('poly_wool_herringbone', (0.112, 0.100, 0.068)),
-    'coat fawn tweed': ('poly_wool_herringbone', (0.175, 0.140, 0.098)),
+    # the two men who stand nearest the lamp and the fire. Round 2 gave them olive (0.112, 0.100, 0.068) and fawn
+    # (0.175, 0.140, 0.098) tweed: tan-brown in the plate (about 40, 26, 13 of 255), but the film's grade crushes
+    # everything darker than about 28 levels to black, so their green and blue went and the coats came out deep
+    # crimson (26, 1, 0). Measured in the people test's plate: the lamp and the fire light the hand-on-bar man's
+    # coat about 1 : 0.57 : 0.35 (red : green : blue) and the leaning man's about 1 : 0.68 : 0.52, and the film keeps
+    # a channel only above about 30 levels. So the cloths are greys, one a little on the cool (slate) side: in that
+    # warm light both come out a dull grey-brown in the plate (about 46, 38, 30) and a dull brown in the film, with
+    # no channel crushed to nothing (a lighter grey, 0.22 to 0.32, came out pale lilac-grey in the plate and drew
+    # the eye)
+    'coat slate grey tweed': ('poly_wool_herringbone', (0.13, 0.165, 0.185)),
+    'coat grey tweed': ('poly_wool_herringbone', (0.19, 0.205, 0.198)),
     'cap grey tweed': ('poly_wool_herringbone', (0.115, 0.112, 0.105)),
     'cap brown tweed': ('poly_wool_herringbone', (0.120, 0.090, 0.064)),
     'cap dark tweed': ('poly_wool_herringbone', (0.062, 0.058, 0.052)),
@@ -305,7 +335,7 @@ def cloth_picture(cloth_name):
     surface, colour = CLOTHS[cloth_name]
     # the file name carries a fingerprint of the surface and the colour, so a changed colour paints a new picture
     # instead of reusing the old one from the scratch folder
-    fingerprint = zlib.crc32(repr((surface, tuple(round(v, 4) for v in colour))).encode())
+    fingerprint = zlib.crc32(repr((surface, tuple(round(value, 4) for value in colour))).encode())
     path = os.path.join(CLOTH_PICTURES, f"{cloth_name.replace(' ', '-')}-{fingerprint:08x}.jpg")
     if not os.path.exists(path):
         source = bpy.data.images.load(os.path.join(SURFACES, surface, 'Diffuse.jpg'), check_existing=True)
@@ -358,7 +388,7 @@ def hair_picture():
     """Close-cut hair combed down: fine streaks running down the head (the hair shell's pictures run from its
     bottom to its top), each a little lighter or darker, so the head reads as hair, not as a smooth dark scalp.
     Seeded with zlib.crc32, so every run paints the same picture."""
-    fingerprint = zlib.crc32(repr(tuple(round(v, 4) for v in HAIR)).encode())
+    fingerprint = zlib.crc32(repr(tuple(round(value, 4) for value in HAIR)).encode())
     path = os.path.join(CLOTH_PICTURES, f'hair-{fingerprint:08x}.jpg')
     if not os.path.exists(path):
         size = 256
@@ -520,30 +550,30 @@ def lofted_object(name, rings, material, close_start=False, close_end=False, sub
     uv_layer = bm.loops.layers.uv.new('UVMap')
     tile = material.get('tile_metres', 1.0)
     count = len(rings[0])
-    verts = [[bm.verts.new(p) for p in r] for r in rings]
-    centres = [sum(r, Vector()) / len(r) for r in rings]
+    verts = [[bm.verts.new(point) for point in ring_points] for ring_points in rings]
+    centres = [sum(ring_points, Vector()) / len(ring_points) for ring_points in rings]
     along = [0.0]
     for i in range(1, len(rings)):
         along.append(along[-1] + (centres[i] - centres[i - 1]).length)
     round_distance = []
-    for r in rings:
+    for ring_points in rings:
         distances = [0.0]
         for k in range(1, count + 1):
-            distances.append(distances[-1] + (r[k % count] - r[k - 1]).length)
+            distances.append(distances[-1] + (ring_points[k % count] - ring_points[k - 1]).length)
         round_distance.append(distances)
     spans = list(range(len(rings) - 1)) + ([len(rings) - 1] if closed_path else [])
     for i in spans:
         j = (i + 1) % len(rings)
-        v_here, v_next = along[i], along[i] + (centres[j] - centres[i]).length
+        along_here, along_next = along[i], along[i] + (centres[j] - centres[i]).length
         for k in range(count):
             if skip_face and skip_face(i, k):
                 continue
-            k2 = (k + 1) % count
-            face = bm.faces.new((verts[i][k], verts[i][k2], verts[j][k2], verts[j][k]))
-            corners = ((round_distance[i][k], v_here), (round_distance[i][k + 1], v_here),
-                       (round_distance[j][k + 1], v_next), (round_distance[j][k], v_next))
-            for loop, (u, v) in zip(face.loops, corners):
-                loop[uv_layer].uv = (u / tile, v / tile)
+            next_k = (k + 1) % count
+            face = bm.faces.new((verts[i][k], verts[i][next_k], verts[j][next_k], verts[j][k]))
+            corners = ((round_distance[i][k], along_here), (round_distance[i][k + 1], along_here),
+                       (round_distance[j][k + 1], along_next), (round_distance[j][k], along_next))
+            for loop, (round_metres, along_metres) in zip(face.loops, corners):
+                loop[uv_layer].uv = (round_metres / tile, along_metres / tile)
     for end, wanted, flip in ((0, close_start, True), (len(rings) - 1, close_end, False)):
         if not wanted:
             continue
@@ -565,9 +595,9 @@ def ellipsoid_object(name, centre, half_sizes, rotation, material, segments=16, 
     bm.loops.layers.uv.new('UVMap')
     bmesh.ops.create_uvsphere(bm, u_segments=segments, v_segments=rings, radius=1.0, calc_uvs=True)
     if keep:
-        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not keep(v.co.x, v.co.y, v.co.z)], context='VERTS')
-    for v in bm.verts:
-        v.co = centre + rotation @ Vector((v.co.x * half_sizes[0], v.co.y * half_sizes[1], v.co.z * half_sizes[2]))
+        bmesh.ops.delete(bm, geom=[vertex for vertex in bm.verts if not keep(vertex.co.x, vertex.co.y, vertex.co.z)], context='VERTS')
+    for vertex in bm.verts:
+        vertex.co = centre + rotation @ Vector((vertex.co.x * half_sizes[0], vertex.co.y * half_sizes[1], vertex.co.z * half_sizes[2]))
     return finish_object(name, bm, material, subdivide, thickness)
 
 
@@ -671,19 +701,41 @@ def leg_point_at_height(joints, side, height):
 # ----------------------------------------------------------------------------------- the clothing
 
 def folds(seed, amplitude, every=7, vent=0.0):
-    """Cloth folds round a ring: a few uneven waves, each figure its own; vent: a crease this deep down the
-    middle of the back (a coat's back vent, where its two halves overlap)."""
+    """Cloth folds round a ring: a few uneven waves, each figure its own, sharper in the hollows than on the
+    ridges (cloth hangs in rounded ridges and narrow creases); vent: a crease this deep down the middle of the
+    back (a coat's back vent, where its two halves overlap)."""
     phase_one, phase_two = seed * 1.7, seed * 2.9
     def offset(angle):
         from_back = (angle + math.pi / 2 + math.pi) % (2 * math.pi) - math.pi   # 0 at the middle of the back
-        return (amplitude * (0.6 * math.sin(every * angle + phase_one) + 0.4 * math.sin((every + 4) * angle + phase_two))
-                - vent * math.exp(-(from_back / 0.16) ** 2))
+        wave = 0.6 * math.sin(every * angle + phase_one) + 0.4 * math.sin((every + 4) * angle + phase_two)
+        wave = wave if wave > 0 else 1.4 * wave            # the creases cut in deeper than the ridges stand out
+        return amplitude * wave - vent * math.exp(-(from_back / 0.16) ** 2)
     return offset
 
 
-def hanging_skirt_rings(joints, top_height, hem_height, top_size, hem_size, seed, fold_depth, count=32, steps=4, back=0.02, vent=0.0):
+def creases(seed, depth, every=5, back_only=True):
+    """Shallow creases round a ring of the body (across the back of a coat, where it pulls between the
+    shoulder blades and bunches above the belt): waves only on the back half unless back_only is False."""
+    phase = seed * 2.3
+    def offset(angle):
+        back = max(0.0, -math.sin(angle)) if back_only else 1.0     # the ring's +y is the front; -y the back
+        return depth * back * (0.7 * math.sin(every * angle + phase) + 0.3 * math.sin((every + 3) * angle + 2 * phase))
+    return offset
+
+
+def hem_line(seed, depth):
+    """How far each point of a hem drops below its height or rises above it, round the ring: a coat's hem is
+    never dead level (it hangs longer where the cloth folds, and the front edges dip)."""
+    phase_one, phase_two = seed * 1.3, seed * 3.1
+    return lambda angle: depth * (0.55 * math.sin(2 * angle + phase_one) + 0.3 * math.sin(5 * angle + phase_two)
+                                  - 0.35 * max(0.0, math.sin(angle)) ** 4)
+
+
+def hanging_skirt_rings(joints, top_height, hem_height, top_size, hem_size, seed, fold_depth, count=48, steps=4, back=0.02, vent=0.0,
+                        hem_depth=0.0):
     """Rings for cloth that hangs straight down from top_height to its hem (a coat's skirt, a long skirt),
-    each wide enough to hold both legs where they cross its height, folds deepening toward the hem."""
+    each wide enough to hold both legs where they cross its height, folds deepening toward the hem, the hem
+    itself broken up and down by hem_depth (and the ring above it by half as much)."""
     scale = joints['scale']
     twist = joints['pelvis_turn']
     x_axis = (twist @ Vector((1, 0, 0))).to_3d()
@@ -707,17 +759,23 @@ def hanging_skirt_rings(joints, top_height, hem_height, top_size, hem_size, seed
         reach_y = max(abs((leg - middle).dot(y_axis)) for leg in (right, left)) + leg_room + 0.02 * scale
         half_width = max(top_size[0] + (hem_size[0] - top_size[0]) * (1 - share), reach_x)
         half_depth = max(top_size[1] + (hem_size[1] - top_size[1]) * (1 - share), reach_y)
-        rings.append(ring(middle, x_axis, y_axis, half_width, half_depth, exponent=2.2, count=count,
-                          offset=folds(seed, fold_depth * (1 - share) * scale, vent=vent * (1 - share) * scale)))
+        points = ring(middle, x_axis, y_axis, half_width, half_depth, exponent=2.2, count=count,
+                      offset=folds(seed, fold_depth * (1 - share) * scale, vent=vent * (1 - share) * scale))
+        if hem_depth and step < 2:
+            uneven = hem_line(seed, hem_depth * scale * (1.0 if step == 0 else 0.5))
+            for k, point in enumerate(points):
+                point.z += uneven(2 * math.pi * k / count)
+        rings.append(points)
     return rings
 
 
-def spine_ring(joints, frame_name, point, size, up=0.0, forward=0.0, exponent=2.4, count=32):
-    """A ring round the body square to part of the spine (its turn), at a point lifted `up` along it."""
+def spine_ring(joints, frame_name, point, size, up=0.0, forward=0.0, exponent=2.4, count=48, offset=None):
+    """A ring round the body square to part of the spine (its turn), at a point lifted `up` along it; offset
+    (as for ring) pushes its points out or in (creases)."""
     frame = joints[frame_name]
     scale = joints['scale']
     centre = point + frame @ Vector((0, forward * scale, up * scale))
-    return ring(centre, frame @ Vector((1, 0, 0)), frame @ Vector((0, 1, 0)), size[0] * scale, size[1] * scale, exponent, count)
+    return ring(centre, frame @ Vector((1, 0, 0)), frame @ Vector((0, 1, 0)), size[0] * scale, size[1] * scale, exponent, count, offset)
 
 
 def build_coat(figure, joints, cloth):
@@ -730,14 +788,18 @@ def build_coat(figure, joints, cloth):
     scale = joints['scale']
     hem = figure['coat'][1] * scale
     seat = pelvis.z - 0.10 * scale
+    # folds 2.4 times round 2's (0.019 m deep at the hem: too shallow to see in the plate), a hem broken by up to
+    # about 2.5 cm, and creases across the back above the belt and between the shoulder blades
     rings = hanging_skirt_rings(joints, seat, hem, width(0.200 * scale, 0.148 * scale), width(0.236 * scale, 0.176 * scale),
-                                seed, 0.019, steps=4 if hem < 0.6 * scale else 2, vent=0.010)
+                                seed, 0.046, steps=4 if hem < 0.6 * scale else 2, vent=0.012, hem_depth=0.026)
     shrug = figure['pose'].get('shrug', 0.0)
     rings += [
-        spine_ring(joints, 'pelvis_turn', pelvis, width(0.196, 0.140)),
-        spine_ring(joints, 'lower', waist, width(0.176, 0.128), forward=0.004),            # a little fitted at the waist
-        spine_ring(joints, 'upper', chest, width(0.192, 0.138), forward=0.006),
-        spine_ring(joints, 'upper', chest, width(0.192, 0.128), up=0.070, forward=0.004),  # under the arms
+        spine_ring(joints, 'pelvis_turn', pelvis, width(0.196, 0.140), offset=creases(seed, 0.014 * scale, every=6)),
+        spine_ring(joints, 'lower', waist, width(0.176, 0.128), forward=0.004,             # a little fitted at the waist
+                   offset=creases(seed + 1, 0.018 * scale)),
+        spine_ring(joints, 'upper', chest, width(0.192, 0.138), forward=0.006, offset=creases(seed + 2, 0.020 * scale, every=4)),
+        spine_ring(joints, 'upper', chest, width(0.192, 0.128), up=0.070, forward=0.004,  # under the arms
+                   offset=creases(seed + 3, 0.015 * scale, every=4)),
         # the shoulders: from the seam just inside the arm, sloping up to the neck (the sleeve's cap is the
         # rounded top of the arm, a little lower than the neck)
         spine_ring(joints, 'upper', chest, width(0.180, 0.104), up=SHOULDER_UP + 0.030 + shrug, exponent=2.6),
@@ -785,7 +847,7 @@ def build_bodice_and_skirt(figure, joints, skirt_cloth, bodice_cloth):
     build = figure.get('build', 1.0)
     pelvis, waist, chest, neck = joints['pelvis'], joints['waist'], joints['chest'], joints['neck']
     rings = hanging_skirt_rings(joints, pelvis.z - 0.04 * scale, 0.055 * scale, (0.190 * build * scale, 0.155 * build * scale),
-                                (0.255 * scale, 0.235 * scale), seed, 0.016, steps=5, back=0.03)
+                                (0.255 * scale, 0.235 * scale), seed, 0.032, steps=5, back=0.03, hem_depth=0.014)
     rings += [spine_ring(joints, 'lower', waist, (0.140 * build, 0.110 * build), up=-0.03)]
     skirt = lofted_object(f"{figure['name']}-skirt", rings, skirt_cloth, subdivide=2, thickness=0.010 * scale)
     bodice = lofted_object(f"{figure['name']}-bodice", [
@@ -815,7 +877,7 @@ def build_shawl(figure, joints, cloth):
         centre = chest + upper @ (Vector((0, forward, up)) * scale)
         drop = lambda angle: -drop_at_back * scale * max(0.0, -math.sin(angle)) ** 1.6
         points = ring(centre, upper @ Vector((1, 0, 0)), upper @ Vector((0, 1, 0)), half_width * build * scale, half_depth * build * scale, 2.2, count)
-        return [p + upper @ Vector((0, 0, drop(2 * math.pi * k / count))) for k, p in enumerate(points)]
+        return [point + upper @ Vector((0, 0, drop(2 * math.pi * k / count))) for k, point in enumerate(points)]
 
     rings = [
         body_ring(-0.21, 0.236, 0.170, drop_at_back=0.13, forward=0.014),   # the lower edge, down to the waist at the sides and
@@ -838,7 +900,7 @@ def build_shawl(figure, joints, cloth):
 
 def build_sleeves(figure, joints, cloth, woman=False):
     """Each sleeve: a tube from inside the shoulder, over the shoulder's cap, bending at the elbow (where the
-    cloth bunches a little) to a cuff at the wrist."""
+    cloth bunches and creases round the bend) to a turned-back cuff at the wrist."""
     scale = joints['scale']
     build = figure.get('build', 1.0)
     parts = []
@@ -847,13 +909,21 @@ def build_sleeves(figure, joints, cloth, woman=False):
         shoulder, elbow, wrist = joints[f'{side}_shoulder'], joints[f'{side}_elbow'], joints[f'{side}_wrist']
         inside = shoulder + joints['upper'] @ (Vector((-sign * 0.065, 0, -0.045)) * scale)
         path, positions = smooth_path([inside, shoulder, elbow, wrist], samples_per_span=6)
-        profile = [(0, 0.050), (1, 0.061), (1.5, 0.057), (2, 0.052), (2.4, 0.050), (2.85, 0.050), (3, 0.054)]
+        profile = [(0, 0.050), (1, 0.061), (1.5, 0.057), (2, 0.052), (2.4, 0.050), (2.8, 0.049), (2.88, 0.056), (3, 0.057)]
         radii = []
         for position in positions:
-            bunching = 1 + 0.06 * math.sin(position * 19.0) if 1.85 < position < 2.6 else 1.0
+            bunching = 1 + 0.10 * math.sin(position * 19.0) if 1.7 < position < 2.7 else 1.0
             radii.append(along_profile(profile, position) * scale * build * thin * bunching)
-        parts.append(lofted_object(f"{figure['name']}-sleeve-{side}", tube_rings(path, radii, count=16), cloth,
-                                   close_start=True, close_end=True, subdivide=1))
+        rings = tube_rings(path, radii, count=16)
+        # creases round the elbow: the cloth pushed out and in round each ring, strongest at the bend
+        for ring_points, position in zip(rings, positions):
+            if 1.6 < position < 2.8:
+                strength = math.sin(math.pi * (position - 1.6) / 1.2) * 0.022 * scale
+                centre = sum(ring_points, Vector()) / len(ring_points)
+                for k, point in enumerate(ring_points):
+                    outward = (point - centre).normalized()
+                    ring_points[k] = point + outward * strength * math.sin(3 * 2 * math.pi * k / len(ring_points) + position * 6.0 + sign)
+        parts.append(lofted_object(f"{figure['name']}-sleeve-{side}", rings, cloth, close_start=True, close_end=True, subdivide=1))
     return parts
 
 
@@ -878,12 +948,14 @@ def build_legs_and_boots(figure, joints, trouser_cloth, boot_cloth, woman=False)
             parts.append(lofted_object(f"{figure['name']}-trousers-{side}", tube_rings(path, radii, count=16), trouser_cloth,
                                        close_start=True, close_end=True, subdivide=1))
         else:   # dark stockings under the long skirt
-            parts.append(lofted_object(f"{figure['name']}-leg-{side}", tube_rings(path, [r * 0.8 for r in radii], count=12),
+            parts.append(lofted_object(f"{figure['name']}-leg-{side}", tube_rings(path, [radius * 0.8 for radius in radii], count=12),
                                        trouser_cloth, close_start=True, close_end=True, subdivide=1))
         # the boot: stations along the foot (where along, half its width, its top's height)
         stations = [(-0.078, 0.020, 0.040), (-0.070, 0.034, 0.080), (-0.045, 0.041, 0.100), (0.015, 0.044, 0.096),
                     (0.075, 0.047, 0.074), (0.135, 0.049, 0.060), (0.180, 0.044, 0.052), (0.207, 0.031, 0.044), (0.222, 0.012, 0.034)]
+        # 14 per cent shorter and 10 per cent narrower than round 2's (they read as big flat blocks in the plate)
         boot_size = 0.93 if woman else 1.0
+        boot_length, boot_width = 0.86, 0.90
         rings = []
         for along, half_width, top_height in stations:
             points = []
@@ -891,19 +963,62 @@ def build_legs_and_boots(figure, joints, trouser_cloth, boot_cloth, woman=False)
                 angle = 2 * math.pi * k / 16
                 cosine, sine = math.cos(angle), math.sin(angle)
                 height = top_height * abs(sine) ** 0.8 if sine > 0 else 0.004 * abs(sine)
-                points.append(foot @ (Vector((-half_width * cosine, along, height)) * scale * boot_size))
+                points.append(foot @ (Vector((-half_width * boot_width * cosine, along * boot_length, height)) * scale * boot_size))
             rings.append(points)
         parts.append(lofted_object(f"{figure['name']}-boot-{side}", rings, boot_cloth, close_start=True, close_end=True, subdivide=1))
         shaft_path = [foot @ (Vector((0, -0.012, 0.03)) * scale * boot_size), foot @ (Vector((0, -0.012, 0.14)) * scale * boot_size)]
         shaft_path, _ = smooth_path(shaft_path, samples_per_span=3)
-        parts.append(lofted_object(f"{figure['name']}-boot-shaft-{side}", tube_rings(shaft_path, [0.047 * scale * boot_size] * len(shaft_path), count=12),
+        parts.append(lofted_object(f"{figure['name']}-boot-shaft-{side}", tube_rings(shaft_path, [0.044 * scale * boot_size] * len(shaft_path), count=12),
                                    boot_cloth, close_start=True, close_end=True, subdivide=1))
     return parts
 
 
+def build_grip_round_bar(figure, joints, skin, side):
+    """A hand closed round an upright bar (grip_bar, grip_bar_radius): the back of the hand and the knuckles on
+    the bar's outer side, the fingers wrapped round its front and back toward the palm, the thumb round its
+    near side below them, all lofted round the bar's axis so the hand bends round it (round 2's mitt beside
+    the bar read as a stump)."""
+    scale = joints['scale']
+    name = figure['name']
+    wrist = joints[f'{side}_wrist']
+    bar = Vector((figure['grip_bar'][0] * scale, figure['grip_bar'][1] * scale, wrist.z))
+    bar_radius = figure.get('grip_bar_radius', 0.03)
+    up = Vector((0, 0, 1))
+    toward_wrist = (wrist - bar).to_2d()
+    start_angle = math.atan2(toward_wrist.y, toward_wrist.x)        # where the wrist is, seen round the bar
+    sweep = 1 if side == 'right' else -1                             # the fingers go round the far side of the bar
+
+    def around(angle, radius, height):
+        return bar + Vector((math.cos(angle) * radius, math.sin(angle) * radius, height))
+
+    def outward(angle):
+        return Vector((math.cos(angle), math.sin(angle), 0))
+
+    # the palm and fingers: (how far round from the wrist in degrees, half width along the bar, half thickness)
+    stations = [(25, 0.040, 0.019), (60, 0.044, 0.018), (95, 0.045, 0.016), (135, 0.042, 0.012), (175, 0.040, 0.010),
+                (215, 0.037, 0.0095), (250, 0.032, 0.009)]
+    rings = [ring(wrist, up, (wrist - bar).normalized(), 0.030 * scale, 0.020 * scale, count=12)]
+    for degrees, half_width, half_thickness in stations:
+        angle = start_angle + sweep * math.radians(degrees)
+        radius = bar_radius + half_thickness * scale + 0.002
+        # the hand's knuckle end sits a little lower than the wrist, the fingers lower still
+        rings.append(ring(around(angle, radius, -0.006 * scale * degrees / 250), up, outward(angle), half_width * scale,
+                          half_thickness * scale, count=12))
+    parts = [lofted_object(f'{name}-hand-{side}', rings, skin, close_start=True, close_end=True, subdivide=1)]
+    # the thumb, round the near side of the bar the other way, below the fingers
+    thumb = [around(start_angle + sweep * math.radians(degrees), bar_radius + 0.011 * scale, -0.04 * scale)
+             for degrees in (10, -25, -60, -90)]
+    thumb[0] = wrist + Vector((0, 0, -0.02 * scale)) + (bar - wrist).normalized() * 0.01
+    path, _ = smooth_path(thumb, samples_per_span=3)
+    parts.append(lofted_object(f'{name}-thumb-{side}', tube_rings(path, [0.012 * scale] * (len(path) - 1) + [0.009 * scale], count=8),
+                               skin, close_start=True, close_end=True, subdivide=1))
+    return parts
+
+
 def build_hands(figure, joints, skin):
-    """Hands as simple mitts: a palm widening to the knuckles, the fingers together and curled toward the
-    palm (a little when relaxed or warming, right round when gripping), and a thumb."""
+    """Hands: a palm widening to the knuckles, the fingers together and curled toward the palm (a little when
+    relaxed, more when warming over a fire, palms down and bent down from the wrist), and a thumb. A hand that
+    holds a gate bar (grip_bar) is wrapped round the bar (build_grip_round_bar)."""
     scale = joints['scale'] * (0.92 if figure['kind'] == 'woman' else 1.0)
     parts = []
     for side, sign in (('right', 1), ('left', -1)):
@@ -911,12 +1026,15 @@ def build_hands(figure, joints, skin):
         kind = arm.get('hand', 'relaxed')
         if kind == 'hidden':
             continue
+        if kind == 'grip' and 'grip_bar' in figure and side == 'right':
+            parts += build_grip_round_bar(figure, joints, skin, side)
+            continue
         wrist, elbow = joints[f'{side}_wrist'], joints[f'{side}_elbow']
         direction = Vector(arm['hand_direction']).normalized() if 'hand_direction' in arm else (wrist - elbow).normalized()
         back = Vector(arm['hand_back']) if 'hand_back' in arm else Vector((sign, 0, 0))
         back = (back - direction * back.dot(direction)).normalized()
         across = direction.cross(back)
-        curl = {'relaxed': 0.8, 'grip': 1.9, 'warming': 0.25}[kind]
+        curl = {'relaxed': 0.8, 'grip': 1.9, 'warming': 0.45}[kind]
         rings = []
         for along, half_width, half_thickness in ((-0.035, 0.026, 0.019), (0.0, 0.029, 0.020), (0.045, 0.039, 0.021), (0.085, 0.043, 0.019),
                                                   (0.120, 0.040, 0.016), (0.150, 0.033, 0.012), (0.168, 0.018, 0.008)):
@@ -951,7 +1069,7 @@ def build_head(figure, joints, skin, hair, cap_cloth):
     scale = joints['scale'] * (0.95 if figure['kind'] == 'woman' else 1.0)
     head, turn, neck = joints['head'], joints['head_turn'], joints['neck']
     name = figure['name']
-    head_half_width, head_half_depth, head_half_height = (v * scale for v in HEAD_HALF_SIZE)
+    head_half_width, head_half_depth, head_half_height = (value * scale for value in HEAD_HALF_SIZE)
     head_half_sizes = (head_half_width, head_half_depth, head_half_height)
     # the hair's cut edge is stepped until smoothed: a walker (drawn with one level of smoothing less) keeps one level
     hair_smoothing = 2 if figure.get('walker') else 1
@@ -971,11 +1089,11 @@ def build_head(figure, joints, skin, hair, cap_cloth):
                                close_start=True, close_end=True, subdivide=1))
     if figure['kind'] == 'woman':
         if not figure.get('shawl_over_head', True):   # bare-headed, her hair pinned up: a bun high at the back or a low knot
-            parts.append(ellipsoid_object(f'{name}-hair', head, tuple(v * 1.05 for v in head_half_sizes), turn, hair, segments=28, rings=18,
+            parts.append(ellipsoid_object(f'{name}-hair', head, tuple(value * 1.05 for value in head_half_sizes), turn, hair, segments=28, rings=18,
                                           subdivide=hair_smoothing, keep=lambda x, y, z: hair_bottom(y, -0.88, -0.30) < z and not (y > 0.45 and z < 0.62)))
             knot_low = figure.get('hair_style') == 'low knot'
             parts.append(ellipsoid_object(f'{name}-hair-bun', head + turn @ (Vector((0, -0.092, -0.040 if knot_low else 0.045)) * scale),
-                                          tuple(v * scale for v in ((0.050, 0.034, 0.036) if knot_low else (0.046, 0.036, 0.042))),
+                                          tuple(value * scale for value in ((0.050, 0.034, 0.036) if knot_low else (0.046, 0.036, 0.042))),
                                           turn, hair, segments=12, rings=8))
         return parts   # otherwise the shawl covers her head
     # short hair: a shell over the back and sides of the head, cut away over the face, down into the collar at the
@@ -1009,8 +1127,8 @@ def build_head(figure, joints, skin, hair, cap_cloth):
         outer.append(cap_centre + cap_turn @ (Vector(((0.084 + reach * 0.6) * across, (0.106 + reach) * ahead, 0.030 - 0.45 * reach)) * scale))
     bm = bmesh.new()
     uv_layer = bm.loops.layers.uv.new('UVMap')
-    inner_verts = [bm.verts.new(p) for p in inner]
-    outer_verts = [bm.verts.new(p) for p in outer]
+    inner_verts = [bm.verts.new(point) for point in inner]
+    outer_verts = [bm.verts.new(point) for point in outer]
     for k in range(10):
         face = bm.faces.new((inner_verts[k], outer_verts[k], outer_verts[k + 1], inner_verts[k + 1]))
         for loop in face.loops:
@@ -1033,7 +1151,7 @@ def build_bundle(figure, joints):
     bundle = figure['bundle']
     scale = joints['scale']
     material = cloth_material(bundle['cloth'])
-    width, depth, height = (v * scale for v in bundle['size'])
+    width, depth, height = (value * scale for value in bundle['size'])
     if bundle.get('hang_from'):
         wrist = joints[f"{bundle['hang_from']}_wrist"]
         centre = wrist - Vector((0, 0, 0.05 * scale + height / 2))
@@ -1054,7 +1172,7 @@ def build_bag(figure, joints):
     bag = figure['bag']
     scale = joints['scale']
     material = cloth_material(bag['cloth'])
-    width, depth, height = (v * scale for v in bag['size'])
+    width, depth, height = (value * scale for value in bag['size'])
     wrist = joints['right_wrist']
     top = wrist - Vector((0, 0, 0.06 * scale))
     rings = []
@@ -1100,8 +1218,8 @@ def build_figure(name):
     bpy.context.view_layer.objects.active = parts[0]
     bpy.ops.object.convert(target='MESH')
     # the lowest point of the bare hands (for a shot to check the gap between warming hands and a brazier's rim)
-    hand_heights = [(part.matrix_world @ v.co).z for part in parts if '-hand-' in part.name or '-thumb-' in part.name
-                    for v in part.data.vertices]
+    hand_heights = [(part.matrix_world @ vertex.co).z for part in parts if '-hand-' in part.name or '-thumb-' in part.name
+                    for vertex in part.data.vertices]
     joints['hands_lowest'] = min(hand_heights) if hand_heights else None
     bpy.ops.object.join()
     body = bpy.context.view_layer.objects.active
@@ -1115,7 +1233,7 @@ def build_figure(name):
 
 
 def measure(body):
-    corners = [body.matrix_world @ Vector(c) for c in body.bound_box]
+    corners = [body.matrix_world @ Vector(corner) for corner in body.bound_box]
     low = Vector(map(min, *corners))
     high = Vector(map(max, *corners))
     body.data.calc_loop_triangles()
@@ -1142,8 +1260,10 @@ def save_figure(figure, joints, root, body):
         'licence': LICENCE,
     }
     if 'grip_bar' in figure:
-        entry['grip_bar_at'] = [round(v * joints['scale'], 3) for v in figure['grip_bar']]
-        entry['grip_bar_note'] = 'where the upright bar its right hand holds stands, from its origin (Blender x, y)'
+        entry['grip_bar_at'] = [round(value * joints['scale'], 3) for value in figure['grip_bar']]
+        entry['grip_bar_radius'] = figure.get('grip_bar_radius', 0.03)
+        entry['grip_bar_note'] = ('where the upright bar its right hand holds stands, from its origin (Blender x, y), and the radius '
+                                  'its fingers close round')
     if 'brazier_ahead' in figure:
         entry['brazier_ahead'] = round(figure['brazier_ahead'] * joints['scale'], 3)
         entry['brazier_note'] = 'the brazier\'s middle this far in front of its origin (Blender +y)'

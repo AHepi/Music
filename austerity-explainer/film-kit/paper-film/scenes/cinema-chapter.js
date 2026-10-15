@@ -6,7 +6,7 @@
 // How it fits: a chapter scene (for example inflation-chapter-2.js) calls buildCinemaChapter() with
 // its pages. Each page file exports build(kit) and returns { pose(t), draw2D(context, t), join }.
 // pose(t) returns { camera: <state from kit.shot>, look: { exposure, aperture, ... } }. join (optional)
-// says how this page leaves: { kind: 'peel' | 'dissolve' | 'dip', after: seconds after the last word,
+// says how this page leaves: { kind: 'peel' | 'dissolve' | 'dip' | 'run-on', after: seconds after the last word,
 // length: seconds }. The filming tool asks renderFrame(t) for every frame and gets one finished JPEG.
 
 import { drawPage, drawJoin, pageTargets, grabFrame } from '../stage/cinema-stage.js';

@@ -35,8 +35,9 @@
 #       --python paper-film/blender/shot_facts.py -- --plate PLATE.png --helper-plate HELPER.png --export \
 #       --check examples/people-test/shot-check.json --facts PLATE_FACTS --fov 64.4
 #   (save the two plates as people-test-plate.jpg and people-test-helper-plate.jpg in the people-test folder)
-#   python3 -I paper-film/tools/make_state_picture.py PLATE.jpg HELPER.jpg PLATE.jpg HELPER.jpg people-test-state.jpg \
+#   python3 -I paper-film/tools/make_state_picture.py PLATE.jpg HELPER.jpg PLATE.jpg HELPER.jpg people-test-state.png \
 #       people-test-state-mask.png --outlines PLATE_FACTS "man stooped" "man arms folded" ... "walker 6"
+#   (the state picture is written losslessly, as a PNG, so outside the mask it is the plate to the last level)
 # Units are metres; Blender is z-up, the street runs along +y and rises 4 degrees.
 
 import json
