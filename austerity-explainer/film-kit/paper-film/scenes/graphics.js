@@ -249,3 +249,57 @@ export function credit(ctx, t, { at, until = at + 4, text, x = 84, y = 1440, siz
   ctx.restore();
   return true;
 }
+
+// A panel of 100 dots, ten by ten, for "about 3 in 100 out of work" (log 34): every dot lit (paper white), then,
+// from `emptyAt`, the last `empty` dots go hollow one after another (a fraction empties the last one only in part:
+// 0.4 leaves it 60% lit, for "fewer than one in a hundred"). `ghost` marks that many of the hollow dots, the
+// earliest ones, with a dashed ring from `ghostAt` (for "up from about three": 3 of the nearly 6). Words: `heading`
+// above, `caption` below (a figure Malina says); the dark panel widens to fit them.
+export function dotPanel(ctx, t, { at, until = Infinity, x = 84, y = 300, spacing = 34, radius = 12, empty = 0, emptyAt = at + 0.6,
+  emptyStep = 0.18, ghost = 0, ghostAt = emptyAt, heading, caption, captionAt = emptyAt, panel = true, colour = INK.paper, hollowColour = INK.amber }) {
+  const a = presence(t, at, until, 0.3, 0.4);
+  if (a <= 0) return false;
+  const size = spacing * 10;
+  ctx.save(); ctx.globalAlpha = a;
+  if (panel) {
+    ctx.font = '800 40px Inter';
+    const captionWidth = caption ? ctx.measureText(caption.toUpperCase()).width + 2 * caption.length : 0;
+    ctx.font = '700 34px Inter';
+    const headingWidth = heading ? ctx.measureText(heading.toUpperCase()).width + 3 * heading.length : 0;
+    const width = Math.max(size, captionWidth, headingWidth);
+    ctx.fillStyle = 'rgba(12,16,18,0.55)';
+    ctx.beginPath(); ctx.roundRect(x - 30, y - (heading ? 84 : 30), width + 60, size + (heading ? 84 : 30) + (caption ? 104 : 30), 22); ctx.fill();
+  }
+  if (heading) { ctx.fillStyle = INK.paper; ctx.font = '700 34px Inter'; ctx.textBaseline = 'alphabetic'; spaced(ctx, heading.toUpperCase(), x, y - 34, 3); }
+  const whole = Math.ceil(empty);
+  for (let i = 0; i < 100; i++) {
+    const cx = x + (i % 10) * spacing + spacing / 2, cy = y + Math.floor(i / 10) * spacing + spacing / 2;
+    const fromEnd = 99 - i;                       // 0 = the last dot
+    let lit = 1;
+    if (fromEnd < whole) {
+      const k = easeOut((t - emptyAt - (whole - 1 - fromEnd) * emptyStep) / 0.3);
+      const part = fromEnd === 0 && empty % 1 > 0 ? empty % 1 : 1;   // the last dot may empty only in part
+      lit = 1 - k * part;
+    }
+    const isGhost = fromEnd < whole && fromEnd >= whole - ghost;   // the earliest hollow dots
+    ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.fillStyle = colour; ctx.globalAlpha = a * lit; ctx.fill();
+    if (lit < 1) { ctx.globalAlpha = a; ctx.lineWidth = 3; ctx.strokeStyle = hollowColour; ctx.stroke(); }
+    if (isGhost) {
+      const g = easeOut((t - ghostAt) / 0.5);
+      if (g > 0) {
+        ctx.beginPath(); ctx.arc(cx, cy, radius * 0.55, 0, Math.PI * 2);
+        ctx.globalAlpha = a * 0.85 * g; ctx.lineWidth = 2.5; ctx.setLineDash([4, 3]); ctx.strokeStyle = INK.paper; ctx.stroke(); ctx.setLineDash([]);
+      }
+    }
+  }
+  ctx.globalAlpha = a;
+  if (caption) {
+    ctx.globalAlpha = a * clamp01((t - captionAt) / 0.3);
+    ctx.fillStyle = INK.paper; ctx.font = '800 40px Inter'; ctx.textBaseline = 'top';
+    withShadow(ctx, 14);
+    spaced(ctx, caption.toUpperCase(), x, y + size + 22, 2);
+  }
+  ctx.restore();
+  return true;
+}

@@ -338,6 +338,8 @@ const FRAGMENT_DECLARATIONS = `
   uniform float projectionFill;
   uniform float projectionUnlitLift;
   uniform float projectionShowWeights;
+  uniform sampler2D projectionNextPainting;   // a second painting of the same view, blended in (a state change, log 34)
+  uniform float projectionNextAmount;
   #ifdef PROJECTION_OWN
     uniform vec3 projectionOwnTint;
   #endif
@@ -394,6 +396,12 @@ const FRAGMENT_DECLARATIONS = `
   // the point; else, with a "behind" painting, that one where only the near props hid it.
   float projectionWeight(out vec3 paintColour, out float behindShare) {
     float amount = projectionSeenIn(projectionPainting, projectionVisibility, paintColour);
+    if (projectionNextAmount > 0.0) {
+      // the next painting is the same view, so it is read at the same place and seen on the same points
+      vec4 nextClip = projectorViewProjection * vec4(vProjectionWorld, 1.0);
+      vec3 nextColour = texture2D(projectionNextPainting, clamp(nextClip.xy / max(nextClip.w, 1e-4) * 0.5 + 0.5, 0.0, 1.0)).rgb;
+      paintColour = mix(paintColour, nextColour, projectionNextAmount);
+    }
     behindShare = 0.0;
     #ifdef PROJECTION_BEHIND
       // round the near props, the painting gives way to the behind painting as soon as the camera moves
@@ -588,6 +596,8 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     projectionFallbackTint: { value: fallbackTint },
     projectionStrength: { value: 1 },
     projectionShowWeights: { value: 0 },
+    projectionNextPainting: { value: painting },
+    projectionNextAmount: { value: 0 },
     projectionFrameEdge: { value: frameEdge },
     projectionFill: { value: fill },
     projectionUnlitLift: { value: darkenUnlit / Math.max(1e-3, darken) },
@@ -812,6 +822,44 @@ export function projectPaintingOnto(kit, setGroup, painting, projector, options 
     projector: camera, materials: [...materials.values()], uniforms, fallbackTint, visibility, refresh,
     ownTints: new Map([...ownTints].map(([name, t]) => [name, t.value])),
     setStrength: (k) => { uniforms.projectionStrength.value = k; },
+    // State changes on a held shot (log 34). All the set's materials share these settings, so each is one change.
+    // A time cut: another painting of the same view (for example the men gone) in place of the first.
+    setPainting: (texture, behindTexture) => {
+      texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+      uniforms.projectionPainting.value = texture;
+      if (behindTexture && uniforms.projectionBehindPainting) {
+        behindTexture.wrapS = behindTexture.wrapT = THREE.ClampToEdgeWrapping;
+        uniforms.projectionBehindPainting.value = behindTexture;
+      }
+    },
+    // A blend: amount 0 shows the painting, 1 the next one (the held set is drawn again for every step of a blend,
+    // so keep blends short; the page's still key must include the amount).
+    blendTo: (texture, amount) => {
+      texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+      uniforms.projectionNextPainting.value = texture;
+      uniforms.projectionNextAmount.value = amount;
+    },
+    // Another view of the same set at a cut (two views of one place on a page share one set): the projector moves to
+    // the new plate's camera and the distance maps are drawn again from there (well under a second).
+    setView: (newProjector, texture, behindTexture) => {
+      const from = newProjector.isPerspectiveCamera ? newProjector : projectorCamera(newProjector);
+      camera.position.copy(from.position);
+      camera.quaternion.copy(from.quaternion);
+      camera.fov = from.fov; camera.aspect = from.aspect; camera.near = from.near; camera.far = from.far;
+      camera.updateProjectionMatrix();
+      camera.updateMatrixWorld(true);
+      uniforms.projectorTexelAngle.value = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / height;
+      if (texture) {
+        texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+        uniforms.projectionPainting.value = texture;
+        uniforms.projectionNextAmount.value = 0;
+      }
+      if (behindTexture && uniforms.projectionBehindPainting) {
+        behindTexture.wrapS = behindTexture.wrapT = THREE.ClampToEdgeWrapping;
+        uniforms.projectionBehindPainting.value = behindTexture;
+      }
+      return refresh();
+    },
     showWeights: (on) => { uniforms.projectionShowWeights.value = on ? 1 : 0; },
     behindVisibility,
     dispose: () => { distances.dispose(); jumps.dispose(); visibility.dispose(); behindVisibility?.dispose(); nearZone?.dispose(); for (const m of materials.values()) m.dispose(); },
