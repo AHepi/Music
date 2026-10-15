@@ -135,6 +135,43 @@ understanding, and a clarity workflow). This is how it was applied to the narrat
 - Credit where due (from the toolkit): "classic style" is Thomas and Turner's; "curse of knowledge" is
   Camerer, Loewenstein and Weber's; Pinker applies both to writing.
 
+## 4. Writing for newcomers (learnt rewriting chapter 2, log 33)
+
+People got lost in the recorded chapter 2: it moved too fast and used words an ordinary viewer
+doesn't know. These rules come from fixing that, using the toolkit's "teach for understanding" part.
+Example: the recorded chapter 2 crammed eight real cases into about 4 and a half minutes, jumping
+back and forth in time; the newcomer version uses one imagined picture (two factories) and four real
+cases (Britain at war, Glasgow, Japan, New Zealand), in time order, and places each on the picture.
+
+- **One idea per chapter, said in one sentence a viewer could repeat.** Chapter 2's: whether new
+  money pushes prices up depends on whether it's spent, and on what.
+- **One picture first, then the real cases.** Say what the picture stands for ("think of each one as
+  a whole country"), and say aloud where each real case sits on it ("Britain at war was close to the
+  flat-out factory"). Say where the picture stops working (money that is never spent).
+- **About four real cases, in at most three places, with time running one way.**
+- **Every unfamiliar word explained the first time, in a few plain words, or left out.** "Interest is
+  the extra you pay back when you borrow." Words to avoid in chapter 2: unemployment (say "out of
+  work"), central bank, rates, printing money.
+- **One name for each thing, both ways:** never two words for one thing, and never one word for two
+  things ("banks" meant both ordinary banks and the Reserve Bank; "costs" meant both prices and what
+  it costs to make things).
+- **"Before I tell you, guess" moments** at the end of a page, with the gap held about 4 seconds in
+  the film. A written "..." gives less than a second, so the thinking time has to come from the film.
+- **Short recaps in the same words each time**, so the second time feels like recognition.
+- **Numbers:** never two new numbers in one sentence, except a "from... to" pair. Give each a plain
+  anchor ("about three in a hundred"), and use the same unit when two numbers are compared.
+- **Short sentences**, about 8 to 10 words, and never an aside between a subject and its verb.
+- **Plan the length at Malina's measured speed**, about 160 words a minute, not 140. The recorded
+  chapter 2 ran at 164, and its fastest pages carried the main idea.
+- **A rule is said only as strongly as its evidence:** "new money, once it's spent, mostly gets more
+  things made", because the research speaks of spending, and Japan's new money mostly wasn't spent.
+- **Test with real newcomers before recording**: read the script to one or two people who don't know
+  the subject and ask them the listener questions in the chapter's script file. Imagined listeners
+  are only a first filter.
+- **Naomi Klein in spirit, still:** the stakes in the first 30 seconds, the viewer's own question,
+  who gains and who pays side by side, one fair line for the other side, then Mattei's view, marked
+  as hers.
+
 ## Traps
 
 - One accent instruction per page and nothing else in brackets: adding mood cues brings the accent
