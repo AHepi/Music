@@ -23,6 +23,22 @@ If workflows are not available, do the same by hand with the Agent tool: one age
 (at most 7) with the prompt in `${CLAUDE_PLUGIN_ROOT}/workflows/verify-facts.js` (`verifyPrompt`),
 then one final reviewer agent given all their verdicts.
 
+## Then test it on newcomers
+
+Before recording, run the newcomer test (see `research-and-script`, step 4):
+
+```
+Workflow({ name: "explainer-film:test-script-with-newcomers", args: {
+  script: "/abs/path/NN Script - chapter.md", ledger: "/abs/path/NN Research - chapter.md",
+  work: "/abs/path/scratch/newcomer-test", today: "15 October 2026",
+  rules: "/abs/path/01 Rules - voice, tone and writing style.md",      // optional
+  older: "/abs/path/the version people got lost in.md"                  // optional
+} })
+```
+
+It returns every finding, what the fixer did with each, and the path of the final script
+(`final_script`). Without workflows, run the same five prompts by hand with the Agent tool.
+
 ## Then
 
 - Apply must-fix and should-fix items. Prefer changing on-screen words; a spoken change means

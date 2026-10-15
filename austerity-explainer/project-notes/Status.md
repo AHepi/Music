@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-14, evening.**
+**As of 2026-10-15, morning.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -245,13 +245,26 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   background props, lights in props); its 11 planted-fault tests still pass.
 - Spent this round: about 20 to 45 US cents on fal (two paintings).
 
+## Chapter 2 for newcomers (log 33, 2026-10-15)
+
+- The script: `chapter-2-inflation/33 Script - chapter 2 - what really causes inflation - for newcomers.md`
+  (16 pages, 1,021 words, about 7 and a quarter minutes at Malina's measured speed), and its narration file
+  `33 Narration script - chapter 2 for newcomers.json` (ready to record; not recorded).
+- Every step, round by round: `chapter-2-inflation/33 Chapter 2 for newcomers - working files/` (first round:
+  audit, teaching plan, voice brief, fact choice, three drafts; second round: judges, combined script, tests,
+  revision; third round: what the viewer-only tester saw, findings, fixes and re-check).
+- The ledger: Powell's "unfortunate costs" sentence added to C2-M17 and Stats NZ's "main driver" sentences to
+  C2-N02 (both re-read on 15 October).
+- The writing rules have a newcomer section (section 4). The film plugin (1.2.0) has a new step,
+  `test-script-with-newcomers`, tried only with stand-in helpers.
+- Not heard by a real newcomer, not recorded, not filmed. Spent nothing.
+
 ## Waiting on you
 
-- Your view of the notice corner slide ("32 Test - notice corner slide").
-
-
-
-- Your view of chapter 2 (round 20) on your phone.
+- The newcomer script: read it to one or two of the people who got lost (the questions are in the file),
+  then whether to record it (about 6,300 ElevenLabs credits, about US$1.10).
+- Chapter 2 (round 20): some viewers got lost in it (decision 39); the newcomer script above answers that.
+  Its page 8 and page 10 also say a little more than the ledger allows (log 33).
 - Before publishing: whether page 10's "is raising" still holds after 28 October.
 - Nothing for chapter 1 (you said "This is fantastic."). The kit is ready to hand to the agent making
   the series on the enclosures.

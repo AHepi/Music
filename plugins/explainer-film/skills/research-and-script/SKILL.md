@@ -30,7 +30,8 @@ was written from it and checked before recording.
 
 ## 3. Script
 
-- Pages of 15-35 seconds, one idea each; about 150 spoken words a minute.
+- Pages of 15-35 seconds, one idea each. Plan the length at the voice's measured speed, not a
+  guess: Malina read chapter 2 at 164 words a minute against the 140 planned, so plan at about 160.
 - Spoken style: short sentences, "..." for a pause; numbers written as said ("twenty twenty-one",
   "four point one percent"); explain each term in a few words the first time ("unemployment, the
   share of workers without a job").
@@ -49,3 +50,32 @@ was written from it and checked before recording.
   (the film kit's `examples/new-chapter-template/narration-script.json` is a blank copy).
 - Also write a readable script file (`NN Script - <chapter>.md`) with each page's research ids.
 - Then run the `check-facts` skill before recording.
+
+## 4. Writing for newcomers (from rewriting chapter 2, log 33)
+
+**Example.** Viewers got lost in chapter 2 as recorded: eight real cases in about 4 and a half
+minutes, jumping back and forth in time, at 164 words a minute, with words like "unemployment" and
+"central bank" left unexplained. The newcomer version uses one imagined picture (two factories, each
+standing for a whole country), four real cases in time order, each placed on the picture out loud,
+three guesses, and the rule said twice in the same words. It came out about 7 minutes long.
+
+- **One idea per chapter**, said in one sentence a viewer could repeat.
+- **One picture first, then the real cases**: say what the picture stands for, say aloud where each
+  case sits on it, and say where the picture stops working.
+- **About four real cases, in at most three places, with time running one way.**
+- **Every unfamiliar word explained the first time, in a few plain words, or left out.**
+- **One name for each thing, both ways**: never two words for one thing, never one word for two
+  things (e.g. "banks" for ordinary banks and the central bank).
+- **"Before I tell you, guess" moments** at the end of a page, with about 4 seconds held in the film
+  (a written "..." gives under a second). **Recaps in the same words each time.**
+- **Numbers**: never two new numbers in one sentence, except a "from... to" pair; give each a plain
+  anchor ("about three in a hundred"; a hundred-dollar basket going to about a hundred and four).
+- **Short sentences**, about 8 to 10 words, and never an aside between a subject and its verb.
+- **A rule only as strong as its evidence** ("new money, once it's spent, mostly...").
+- **Test it**: run the workflow `test-script-with-newcomers` (args: `script`, `ledger`, `work`,
+  `today`, and optionally `rules`, `older`, `viewer`, `voice`, `wordsPerMinute`). Four fresh helpers
+  (imagined newcomers who see only what a viewer sees, a fact checker, a rules-and-voice reader, a
+  skeptic), then a fixer that makes only confirmed fixes, then a re-check of every changed sentence.
+  Then read the script to one or two real newcomers before recording: imagined viewers are only a
+  first filter. Chapter 2's finished example: `austerity-explainer/chapter-2-inflation/33 Script -
+  chapter 2 - what really causes inflation - for newcomers.md`.

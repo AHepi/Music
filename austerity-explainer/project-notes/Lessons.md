@@ -468,6 +468,29 @@ Only failures in doing the work belong here. Newest at the bottom.
     between the pail and its shadow (a fresh helper found it). The shadows' darkening is now carried into the
     gap and under the props. A fix can make its own fault: check the fixed film again (log 32).
 
+## 2026-10-15 (chapter 2 for newcomers, log 33)
+
+126. **The narrator was faster than planned, and the fastest pages carried the main idea.** Malina read
+    chapter 2 at 164 words a minute against the 140 planned, and the page with the one sentence the
+    chapter depends on was the second fastest (175). Plan a chapter's length at her measured speed (about
+    160) and give the main idea room (log 33).
+127. **The rule was said more broadly than its evidence.** "New money mostly gets more things made" was
+    contradicted by the film's own Japan case, where most new money was never spent; the research speaks of
+    money that is spent. A fact tester caught it. Say a rule exactly as broadly as its evidence: "When new
+    money is spent..." (log 33).
+128. **One word for two things confuses as much as two words for one.** "Banks" meant both ordinary banks
+    and the Reserve Bank; "pay" meant both wages and who carries the harm; "price" meant six things in the
+    recording. Check the one-name rule both ways (log 33).
+129. **A written pause is not thinking time.** Each "..." gave Malina under a second, no longer than a full
+    stop. A guess needs about 4 seconds held in the film after the page ends (log 33).
+130. **A tester who reads the notes can understand too much.** The second-round testers were handed the
+    whole script, notes and all, and the notes explain what the words leave out. The last newcomer tester
+    was given only what a viewer hears and sees. Whether that changed what it found can't be told from one
+    round, but it is the fairer test (log 33).
+131. **A line about our own Reserve Bank had only America's central bank behind it.** The ledger's support
+    was Powell's speech, so the line now names America's. Check whose words stand behind a "they say"
+    (log 33).
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -496,3 +519,4 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Follow a tool's advice once to test it, not only read it (lesson 108).
 - Measure the model before using a size a helper worked out from a picture (lesson 116).
 - Line every painting up with its plate, and keep the painted shadows in the props-removed copy (lessons 122, 123).
+- Plan a script at the narrator's measured speed, and test it on someone who sees only what a viewer sees (lessons 126, 130).
