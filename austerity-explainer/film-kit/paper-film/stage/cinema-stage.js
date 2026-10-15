@@ -354,26 +354,31 @@ export function drawPage(shot, target) {
 // The old page's finished picture, printed on a sheet of paper that peels from its bottom-right
 // corner, rolls over (showing its plain back) and leaves, uncovering the new page. The new page
 // darkens a little where the curl hangs over it.
+// The sheet's own shading (lit as paper) comes in over the first part of the peel (PEEL_SHADING_IN of
+// its length, about 8 frames of a 0.85 s peel), not at once: lit as a flat sheet the whole old page is
+// about 11% darker, and at once that showed as a small dimming jump on each page turn's first frame
+// (log 34, round 3).
 const PEEL_WIDTH = 2, PEEL_HEIGHT = 2 * H / W;   // the frame, in the join's own units
 const CURL_DIRECTION = new THREE.Vector2(0.93, -0.36).normalize();
 const CURL_RADIUS = 0.16;
+const PEEL_SHADING_IN = 0.3;
 const peelGeometry = new THREE.PlaneGeometry(PEEL_WIDTH, PEEL_HEIGHT, 48, 86);
 const peelRest = peelGeometry.attributes.position.array.slice();
 const peelMaterial = new THREE.ShaderMaterial({
-  uniforms: { picture: { value: null }, lightDirection: { value: new THREE.Vector3(-0.45, 0.55, 0.7).normalize() } },
+  uniforms: { picture: { value: null }, lightDirection: { value: new THREE.Vector3(-0.45, 0.55, 0.7).normalize() }, shading: { value: 1 } },
   side: THREE.DoubleSide,
   vertexShader: /* glsl */`
     varying vec2 vUv; varying vec3 vNormal;
     void main() { vUv = uv; vNormal = normal; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
   fragmentShader: /* glsl */`
-    varying vec2 vUv; varying vec3 vNormal; uniform sampler2D picture; uniform vec3 lightDirection;
+    varying vec2 vUv; varying vec3 vNormal; uniform sampler2D picture; uniform vec3 lightDirection; uniform float shading;
     void main() {
       vec3 n = normalize(vNormal);
       float light;
       vec3 colour;
       if (gl_FrontFacing) { light = 0.55 + 0.45 * max(0.0, dot(n, lightDirection)); colour = texture2D(picture, vUv).rgb; }
       else { light = 0.5 + 0.5 * max(0.0, dot(-n, lightDirection)); colour = vec3(0.85, 0.82, 0.76); }
-      gl_FragColor = vec4(colour * mix(1.0, light, 0.85) * (gl_FrontFacing ? 1.0 : 1.0), 1.0);
+      gl_FragColor = vec4(colour * mix(1.0, light, 0.85 * shading) * (gl_FrontFacing ? 1.0 : 1.0), 1.0);
     }`,
 });
 const peelMesh = new THREE.Mesh(peelGeometry, peelMaterial);
@@ -450,6 +455,7 @@ export function drawJoin(kind, progress, fromTarget, toTarget) {
   underMaterial.uniforms.fold.value = fold;
   runPass(underMaterial, null);
   peelMaterial.uniforms.picture.value = fromTarget.texture;
+  peelMaterial.uniforms.shading.value = THREE.MathUtils.smoothstep(progress, 0, PEEL_SHADING_IN);
   renderer.autoClear = false;
   renderer.setRenderTarget(null);
   renderer.clearDepth();

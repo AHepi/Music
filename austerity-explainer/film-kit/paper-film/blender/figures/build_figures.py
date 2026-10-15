@@ -162,10 +162,12 @@ FIGURES = {
         # his hands hover over the fire, about 12 cm higher than in round 1 (they seemed to rest on the hot rim of the
         # 0.86 m brazier drum); index.json gives the hands' lowest point, so a shot can check the gap to its rim
         'pose': {
-            # his head turned 18 degrees to his right, away from the light that reaches the cheek a camera behind him
+            # his head turned 24 degrees to his right, away from the light that reaches the cheek a camera behind him
             # sees: in round 2's plate his lit cheek and ear showed in profile and could be painted as a face (turned
-            # the other way, to his left, more of his face showed)
-            'pelvis': (0.0, -0.08, -0.07), 'lean': (26, 0, 0), 'chest': (14, 0, 0), 'head': (-22, 0, -18),
+            # the other way, to his left, more of his face showed). Round 3's check: the fire still lit his face in
+            # profile, so his head is now bowed over the fire as well (22 degrees further down), his cap's peak
+            # shading his face from the coals below it
+            'pelvis': (0.0, -0.08, -0.07), 'lean': (26, 0, 0), 'chest': (14, 0, 0), 'head': (0, 0, -24),
             # the hands bent a little down from the wrist, fingers curled toward the fire
             'right_arm': {'wrist': (0.11, 0.40, 1.13), 'elbow': (0.7, 0, -1), 'hand': 'warming', 'hand_direction': (0.05, 1, -0.2),
                           'hand_back': (0, 0, 1)},

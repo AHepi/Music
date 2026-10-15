@@ -4,8 +4,9 @@
 #
 # It opens the Works lane (works-lane.blend, built by pit-village/build_street.py with the settings in
 # LANE_SETTINGS below; see build_works.sh) and adds:
-#   - the cross street at the lane's mouth and, across it, a terrace whose middle house's upstairs window is
-#     W3's camera; a yard wall along the lane's corner houses
+#   - the cross street at the lane's mouth and, across it, a terrace on a raised footway (1 m up, a stone retaining
+#     wall with railings and steps) whose middle house's upstairs window is W3's camera (eye 5.6 m above the lane);
+#     a yard wall along the lane's corner houses
 #   - the bank: a small stone-fronted building in place of the left terrace's third cottage, with a canted bay
 #     window (its own glass, a material named bank-window-glass, dark until page 9), iron bars, a shallow room
 #     behind (its light off unless --bank-lit), a brass plate "BANK" by the door and a hanging sign "BANK" on a
@@ -14,22 +15,27 @@
 #   - low walls with stone copings from the terraces' ends to the works wall
 #   - the works wall across the lane's head (4 m, stone coping): No. 1's half dark red-brown brick, No. 2's
 #     half pale buff; two 3 m gateways, each between brick piers with stone caps and a wrought-iron arch over
-#     it (the gate arch) carrying the gate board; the high dividing wall between the two yards [T15]
+#     it (the gate arch) carrying the gate board; the high dividing wall between the two yards [T15], dark on the
+#     lane's side and No. 1's, No. 2's buff brick inside No. 2's yard
 #   - the two factories and the far town (assets/models/inflation-chapter-2-newcomers/works/*.glb), with the
 #     ground levelled under the yards' setts (round 2: the lane's rutted ground showed through them)
 #   - the two iron gates: OWN SURFACES, never in a plate; their leaves are separate objects the film swings
 #     (works-gates.glb), No. 1's chained and padlocked
-#   - the gate boards "No. 1" and "No. 2"; PETROL and DIESEL drums at both gates' outer piers; a gas lamp on
-#     each outer pier; the brazier, a lit hurricane lantern and a lunch tin at No. 1
+#   - the gate boards "No. 1" and "No. 2"; PETROL and DIESEL drums side by side against both gates' outer piers,
+#     both words turned to the gate view's camera; a gas lamp on each outer pier; the brazier against No. 1's left
+#     gate leaf beside the drums, a lit hurricane lantern and a lunch tin on the drums' lids
 #   - crates in No. 2's gateway with the hand truck, a handcart of crates coming up the lane, and the crates
 #     that pop up in No. 1's gateway on "things" (own surfaces, never in a plate: works-pop-up.glb)
-#   - the queue of seven men at No. 1 (backs to the camera, single file along the pavement, the nearest at
-#     least 6 m from W1's camera) and the eight men for No. 2's slowed state (works-no-2-men.glb: painted in
-#     W2's slowed helper plate, dark own-surface silhouettes in W4)
+#   - the queue of seven men at No. 1 (backs to the camera, single file down the pavement 1.1 m apart, each half a
+#     body to one side of the one in front, the last 6 m from W1's composed spot and about 0.70 down in W3) and the
+#     eight men for No. 2's slowed state (works-no-2-men.glb: painted in W2's slowed helper plate, dark own-surface
+#     silhouettes in W4)
 #   - inside No. 2's yard, for W4: a jacket and cap on nails on the gate's inside post, an upturned crate at
 #     the post's foot with a tin mug and the pay envelope "WAGES" stood up on it
 #   - the people's own lights: the brazier's fire, the lantern, the gate lamps, the lane's gas lamps, No. 2's
-#     lit doorway and gateway; and four named cameras
+#     lit doorway and gateway and the warm beam from its yard out through the gateway onto the pavement, a light
+#     in each doorway's room of machines; No. 1's empty yard in a faint cool dusk light (so its shut gate's bars
+#     show as a silhouette); one curtained window dimly lit on each gate view's quiet side; and four named cameras
 #
 # The four views (each camera level, at a person's spot, facing straight along the lane, never turning):
 #   W3  both gates, from the end house's upstairs window across the cross street, on the lane's centre line
@@ -116,6 +122,10 @@ KERB_X = 3.0                 # the kerb's face (the carriageway is 6 m)
 KERB_TOP_X = 3.18            # the kerb stone's back edge, where the pavement's flags begin
 HOUSE_FRONT_X = 5.2          # the terraces' fronts (the pavements are 2.2 m, kerb included)
 PAVEMENT_MIDDLE_X = (KERB_X + HOUSE_FRONT_X) / 2
+# W1 and W2 stand on their pavement 0.4 m toward the kerb from its middle (1.5 m from the house fronts): round 4. The
+# nearest house front then fills less of the frame's side (to about 0.2 across, from 0.28), the lane head's corner by
+# the outer pier (the brazier, the drums) shows clear of the terrace's end, and the lines still meet on the gate.
+GATE_VIEW_X = PAVEMENT_MIDDLE_X - 0.4
 COTTAGE_WIDTH = 4.5
 TERRACE_END_Y = 18.0         # four cottages from the mouth (y = 0)
 WALL_Y = 22.0                # the works wall's face on the lane side (the lane's length)
@@ -135,6 +145,13 @@ DIVIDING_WALL_HEIGHT = 5.5   # higher than the works wall, so it shows over it a
 SIDE_WALL_HEIGHT = 1.8       # the yard walls closing the corners at the lane's head
 CROSS_STREET = {'north_kerb_y': -1.5, 'south_kerb_y': -6.5, 'far_side_y': -8.0}   # its carriageway is 5 m
 END_TERRACE_FRONT_Y = CROSS_STREET['far_side_y']
+# The end terrace stands on a raised footway 1 m above the cross street (a stone retaining wall with railings and a
+# flight of steps), so W3's camera at its middle house's upstairs window has its eye 5.6 m above the lane. Round 3's
+# check wanted the queue's tail in W3's bottom third (0.70 to 0.75 down) while W1, which stands on the same pavement
+# to join the queue, keeps every man at least 6 m away: with the eye 4.6 m up the tail's feet could only reach 0.66.
+RAISED_FOOTWAY = 1.0
+STREET_TOP = 0.14            # the pavements' top, from which the views' eye heights are measured
+W3_EYE = 5.6
 BANK_Y = (2 * COTTAGE_WIDTH, 3 * COTTAGE_WIDTH)          # the bank stands where the left terrace's third cottage was
 BANK_SIGN_Y = BANK_Y[0] + 0.42                           # its hanging sign, at the bank's near corner
 BANK_SIGN_BOTTOM = 3.75                                  # first-floor height: above W1's frame (W1 stands under it)
@@ -169,7 +186,7 @@ def gate_view_x(prefix):
     side = -1 if prefix == 'no-1' else 1
     if GATE_VIEWS == 'pier':
         return outer_pier_inner_edge(prefix) - side * 0.02
-    return side * PAVEMENT_MIDDLE_X
+    return side * GATE_VIEW_X
 
 
 # the views: plate spot and composed spot (x, y), eye height above what the camera stands on, which way it
@@ -178,7 +195,9 @@ def views():
     w1_x, w2_x = gate_view_x('no-1'), gate_view_x('no-2')
     hinge_x = inner_pier_gate_edge('no-2') + 0.03       # in line with No. 2's inner leaf's hinge post
     return {
-        'w3': {'plate': (0.0, END_TERRACE_FRONT_Y + 0.05), 'composed': None, 'eye': 4.6, 'faces': 1, 'stands_on': 'the end house\'s upstairs floor (the eye 4.6 m above the street)',
+        'w3': {'plate': (0.0, END_TERRACE_FRONT_Y + 0.05), 'composed': None, 'eye': W3_EYE, 'base': STREET_TOP, 'faces': 1,
+               'stands_on': f'the end house\'s upstairs floor (the end terrace stands on a raised footway {RAISED_FOOTWAY:g} m above the '
+                            f'street; the eye {W3_EYE:g} m above the lane\'s pavements)',
                'subject': (0.0, WALL_Y, 2.0), 'about': 'both gates, from the end house\'s upstairs window across the cross street'},
         'w1': {'plate': (w1_x, WALL_Y - 13.0), 'composed': (w1_x, WALL_Y - 11.8), 'eye': 1.7, 'faces': 1, 'stands_on': 'the pavement',
                'subject': (gate_centre('no-1'), GATE_PLANE_Y, 1.5), 'about': 'No. 1\'s shut gate at the head of the queue'},
@@ -364,6 +383,25 @@ def move_lane_lamps():
         point_light(f'gas_lamp_{index}_light', (x, y, foot + 3.08), 200.0, (1.0, 0.72, 0.4), soft=0.12, collection_name='preview_lights')
 
 
+DIM_WINDOWS = ('left_row_a_cottage_04_glass_upper_1', 'right_row_a_cottage_04_glass_upper_0')
+DIM_SHARE = 0.6              # how bright a curtained window glows beside a lit one
+
+
+def dim_window_material(lit_name):
+    """A copy of a cottage's lit window glowing at DIM_SHARE of its brightness (a lamp behind drawn curtains)."""
+    name = lit_name.replace('window_lit_glow_', 'window_dim_glow_')
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    material = bpy.data.materials[lit_name].copy()
+    material.name = name
+    for node in material.node_tree.nodes:
+        for socket_name in ('Emission Strength', 'Strength'):
+            socket = node.inputs.get(socket_name)
+            if socket is not None and not socket.is_linked:
+                socket.default_value *= DIM_SHARE
+    return material
+
+
 def cottage_objects(prefix):
     return [o for o in bpy.data.objects if o.name.startswith(prefix + '_') and o.type in ('MESH', 'LIGHT')]
 
@@ -388,7 +426,7 @@ def end_terrace():
         for o in cottage_objects(source):
             copy = o.copy()
             copy.name = o.name.replace(source, f'end_row_cottage_{index + 1:02d}')
-            copy.matrix_world = target @ o.matrix_world
+            copy.matrix_world = Matrix.Translation(Vector((0.0, 0.0, RAISED_FOOTWAY))) @ target @ o.matrix_world
             for c in o.users_collection:
                 c.objects.link(copy)
             made += 1
@@ -418,8 +456,32 @@ def cross_street():
     for x0, x1 in ((-reach, -KERB_X), (KERB_X, reach)):
         builder.box((x0, north, -0.2), (x1, north + 0.18, 0.13), kerb)
         builder.box((x0, north + 0.18, -0.1), (x1, 0.0, 0.14), flags)
-    builder.box((-reach, south - 0.18, -0.2), (reach, south, 0.13), kerb)
-    builder.box((-reach, far, -0.1), (reach, south - 0.18, 0.14), flags)
+    # the far side: a raised footway in front of the end terrace, a stone retaining wall at the carriageway's edge with
+    # a coping and iron railings, and a flight of steps down to the street on the left
+    stone = kit.surface_material('footway-wall-stone', 'large_sandstone_blocks', tint=(0.48, 0.46, 0.42), tile_metres=1.5)
+    iron = kit.surface_material('footway-railing-iron', 'rusty_metal_02', tint=(0.07, 0.07, 0.07), roughness=0.55, metallic=0.6)
+    top = STREET_TOP + RAISED_FOOTWAY
+    wall_face, wall_back = south, south - 0.35
+    steps = (-8.6, -7.1)                                    # the flight's ends along the street (outside W4's gateway)
+    for x0, x1 in ((-reach, steps[0]), (steps[1], reach)):
+        builder.box((x0, wall_back, -0.1), (x1, wall_face, top), stone)
+        builder.box((x0, wall_back - 0.03, top), (x1, wall_face + 0.05, top + 0.12), stone)                 # the coping
+    builder.box((-reach, far, -0.1), (reach, wall_back, top), flags)
+    # the steps: five treads coming down from the footway into the street, between two sloping cheek walls
+    treads = 5
+    for k in range(treads):
+        builder.box((steps[0], wall_back, -0.1), (steps[1], wall_face + 0.3 * (k + 1), top - (k + 1) * top / (treads + 1)), stone)
+    for x in steps:
+        builder.prism([(wall_back, -0.1), (wall_face + 0.3 * treads, -0.1), (wall_face + 0.3 * treads, 0.3), (wall_face, top + 0.25), (wall_back, top + 0.25)],
+                      x - 0.12, x + 0.12, stone, axis='x')
+    # the railings: posts every 0.25 m on the coping where the lane meets the street, a top rail and a foot rail
+    for x0, x1 in ((-16.0, steps[0] - 0.15), (steps[1] + 0.15, 16.0)):
+        x = x0
+        while x <= x1 + 0.001:
+            builder.rod((x, wall_back + 0.15, top + 0.12), (x, wall_back + 0.15, top + 1.0), 0.012, iron, sides=5)
+            x += 0.25
+        for z in (top + 0.24, top + 0.98):
+            builder.rod((x0, wall_back + 0.15, z), (x1, wall_back + 0.15, z), 0.02, iron, sides=6)
     for side in (-1, 1):
         builder.box((side * 12.3 if side > 0 else -reach, -0.25, 0.0), (reach if side > 0 else -12.3, 0.0, 2.1), brick)
     builder.finish('cross-street', collection_name='cross-street')
@@ -519,6 +581,11 @@ def works_wall():
     divider.box((m0, y0 - 0.06, PIER_HEIGHT), (m1, y1 + 0.06, PIER_HEIGHT + 0.18), stone)
     divider.box((-0.25, y1, 0.0), (0.25, WALL_Y + 20.0, DIVIDING_WALL_HEIGHT), sooty)
     divider.box((-0.31, y1, DIVIDING_WALL_HEIGHT), (0.31, WALL_Y + 20.0, DIVIDING_WALL_HEIGHT + 0.18), stone)
+    # inside No. 2's yard its faces are No. 2's own buff brick (round 3's check: W4 saw No. 1's red brick right beside
+    # No. 2's buff pier): a thin facing on the dividing wall's No. 2 side and on the yard side of its end between the
+    # gates; the lane side and No. 1's side stay dark
+    divider.box((0.25, y1, 0.0), (0.27, WALL_Y + 20.0, DIVIDING_WALL_HEIGHT), brick['no-2'])
+    divider.box((0.0, y1, 0.0), (m1, y1 + 0.02, PIER_HEIGHT), brick['no-2'])
     divider.finish('dividing-wall', collection_name='works-wall')
     return pieces
 
@@ -675,6 +742,7 @@ def factories_and_town():
 # ------------------------------------------------------------------------------------------ gates, gate furniture, people
 
 GATE_LEAVES = {}     # prefix: [(leaf object, its rest matrix, hinge point, +1 turns left / -1 right)]
+CHAIN_HEIGHT = 2.05
 
 
 def gates():
@@ -702,7 +770,9 @@ def gates():
         found[prefix] = {'centre': [gate_centre(prefix), GATE_PLANE_Y, 0.0], 'width': 2.95,
                          'hinges': {('left' if sign > 0 else 'right'): [round(v, 3) for v in hinge] for _, _, hinge, sign in leaves},
                          'leaf_height': 2.929, 'opening': [gate_centre(prefix) - GATE_WIDTH / 2, gate_centre(prefix) + GATE_WIDTH / 2]}
-    chain = import_glb(os.path.join(PROPS_2, 'chain-and-padlock.glb'), (gate_centre('no-1'), GATE_PLANE_Y, 1.3), 0, 'gates', 'no-1-chain')
+    # the chain round the meeting stiles high up, above the waiting men's heads, where W1 sees it (round 3: at 1.3 m it
+    # was hidden behind the front man)
+    chain = import_glb(os.path.join(PROPS_2, 'chain-and-padlock.glb'), (gate_centre('no-1'), GATE_PLANE_Y, CHAIN_HEIGHT), 0, 'gates', 'no-1-chain')
     found['no-1']['chain'] = [round(v, 3) for v in chain.location]
     return found
 
@@ -760,6 +830,11 @@ def brazier_and_lantern(coping_top):
     drum = prop('brazier-drum.glb', x, y, 25, name='brazier-drum', folder=PIT_PROPS)
     fire = dressing.brazier_fire(x, y, light_above_coals=0.55, coal_top=0.84, dark_every=1.33, glow=3.5, energy=110, shadow_soft=0.35)
     coals = [o for o in bpy.data.objects if o.name.startswith('brazier_coal_')]
+    # brazier_fire finds the ground with a ray from high above, which can meet the gate arch or board over the brazier
+    # (it now stands against the gate leaf): the coals and the fire's light go into the drum whatever the ray met
+    drop = (fire.location.z - 0.55) - (drum.location.z + 0.84)
+    for o in coals + [fire]:
+        o.location.z -= drop
     move_to_collection(coals + [fire], 'props')
     move_to_collection([fire], 'works-lights')
     dressing.light_reaches(fire, list(drum.children_recursive), only=False)
@@ -783,35 +858,49 @@ LEAN_AT = FIGURE_FACTS['worker-leaning-on-wall']['wall_at_x']
 # No. 1's gate furniture and queue (x, y in metres; turn in degrees, 0 = back to a camera looking up the lane)
 _N1 = -GATE_CENTRE_X                     # No. 1's gateway middle
 _N1_OUTER = _N1 - GATE_WIDTH / 2         # its outer pier's inner face
-BRAZIER = (-(HOUSE_FRONT_X - 0.32), WALL_Y - PIER_PROUD - 0.36)          # against the outer pier, in the low wall's corner
-LANTERN = (-(HOUSE_FRONT_X + 0.34), WALL_Y - PIER_PROUD - 1.12)   # on the DIESEL drum's lid, toward the camera
-LUNCH_TIN = (-(HOUSE_FRONT_X + 0.42), WALL_Y - PIER_PROUD - 0.42)   # on the PETROL drum's lid
-DRUM_SPOTS = {    # x, y, turn (degrees): in the corner in front of each outer pier, stencils turned to its gate view's camera
-    'no-1': {'petrol': (-(HOUSE_FRONT_X + 0.38), WALL_Y - PIER_PROUD - 0.38, 7.5), 'diesel': (-(HOUSE_FRONT_X + 0.4), WALL_Y - PIER_PROUD - 1.0, 7.5)},
-    'no-2': {'petrol': (HOUSE_FRONT_X + 0.38, WALL_Y - PIER_PROUD - 0.38, -7.5), 'diesel': (HOUSE_FRONT_X + 0.4, WALL_Y - PIER_PROUD - 1.0, -7.5)},
+# No. 1's gate group, from left to right as W1 sees it (round 4): the brazier against the outer pier in the lane
+# head's corner, the stooped man warming his hands at it from its front-left, the PETROL drum standing in front of
+# the brazier's right side, then a clear gap and the DIESEL drum against the gate's left leaf, both words turned to
+# W1's camera; the lantern on DIESEL's lid, the lunch tin on PETROL's. The queue stands to the right of them all
+# along the kerb, so from W1 nothing stands in front of the drums' words, and from W3 the tail of the queue is clear
+# of the brazier. (Round 3 stood the drums in the corner one behind the other: the house front hid all but "SEL" in W1
+# and "DIE" in W2, and PETROL never showed.) No. 2's drums stand against its outer pier, DIESEL in front of PETROL's
+# left side, PETROL's word turned a little away from it.
+DRUM_SPOTS = {    # x, y, turn (degrees; the stencil faces -y at 0, + turns it toward +x)
+    'no-1': {'petrol': (-4.5, 21.05, 4.0), 'diesel': (-3.75, 21.35, 0.0)},
+    'no-2': {'petrol': (5.15, 21.5, 7.0), 'diesel': (4.62, 20.9, -4.6)},
 }
+BRAZIER = (-5.0, 21.55)                                            # against No. 1's outer pier, in the corner
+LANTERN = (DRUM_SPOTS['no-1']['diesel'][0] - 0.08, DRUM_SPOTS['no-1']['diesel'][1] - 0.2)   # on DIESEL's lid, at its front
+LUNCH_TIN = (DRUM_SPOTS['no-1']['petrol'][0] + 0.06, DRUM_SPOTS['no-1']['petrol'][1] - 0.18)   # on PETROL's lid, at its front
+STOOP_GAP = 0.1          # the stooped man stands this far further from the brazier than his pose's own reach (round 3's
+                         # check: his coat met the drum)
+QUEUE_SPACING = 1.1      # feet to feet along the queue
+QUEUE_TAIL_Y = 16.2      # the last man: 6 m in front of W1's composed spot, at about 0.70 down in W3
 MEN_1 = [
-    # the front man's right hand round a bar of the left leaf, just behind the brazier (from W3 nobody stands between
-    # the fire and the camera)
-    ('worker-hand-on-bar', 'man-1', (_N1_OUTER + 1.45 - GRIP[0], GATE_PLANE_Y - 0.03 - GRIP[1]), 0),
-    # stooped over the brazier from its gate side, turned toward it
-    ('worker-stooped-to-brazier', 'man-2', (BRAZIER[0] + 0.45 * math.sin(math.radians(45)), BRAZIER[1] - 0.45 * math.cos(math.radians(45))), 45),
-    # the queue: from the fire at the gate's left leaf back along the pavement to the kerb's edge, on a slant, so that
-    # from W1 each man stands half a body to the side of the one in front of him (a queue straight up the camera's line
-    # hides behind its last man; at eye height every head is on the horizon, so they can only show side by side)
-    ('worker-arms-folded', 'man-3', (_N1_OUTER + 0.93, WALL_Y - 1.75), 6),
-    ('worker-hands-in-pockets', 'man-4', (_N1_OUTER + 1.26, WALL_Y - 2.53), -8),
-    ('worker-arms-folded', 'man-5', (_N1_OUTER + 1.57, WALL_Y - 3.31), 14),
-    ('worker-hands-in-pockets', 'man-6', (_N1_OUTER + 1.52, WALL_Y - 4.09), 4),
-    ('worker-hands-in-pockets', 'man-7', (_N1_OUTER + 1.81, WALL_Y - 4.87), -14),
+    # the front man's right hand round a bar of the right leaf, so the chain where the leaves meet shows beside him
+    ('worker-hand-on-bar', 'man-1', (-2.75 - GRIP[0], GATE_PLANE_Y - 0.03 - GRIP[1]), 0),
+    # stooped over the brazier from its front-left (the corner side), turned toward it, his back to W1 and W3
+    ('worker-stooped-to-brazier', 'man-2', (BRAZIER[0] - (STOOP_AHEAD + STOOP_GAP) * math.sin(math.radians(45)),
+                                            BRAZIER[1] - (STOOP_AHEAD + STOOP_GAP) * math.cos(math.radians(45))), -45),
+    # the queue: single file along the kerb toward the camera, 1.1 m apart, drifting a little out toward the gutter as
+    # it lengthens (the last man stands with his heels on the kerb's edge): from W1 each man stands half a body to the
+    # right of the one in front, a line leading up to the gate; from W3, which looks down on them, each head shows above
+    # the shoulders of the man in front, and the whole line stays clear of the brazier and the drums (round 3: a dark
+    # smudge on a phone, the brazier among them); the tail 6 m from W1's composed spot
+    ('worker-arms-folded', 'man-3', (-3.02, QUEUE_TAIL_Y + 4 * QUEUE_SPACING), 8),
+    ('worker-hands-in-pockets', 'man-4', (-2.96, QUEUE_TAIL_Y + 3 * QUEUE_SPACING), -6),
+    ('worker-arms-folded', 'man-5', (-2.9, QUEUE_TAIL_Y + 2 * QUEUE_SPACING), 12),
+    ('worker-hands-in-pockets', 'man-6', (-2.84, QUEUE_TAIL_Y + QUEUE_SPACING), 3),
+    ('worker-hands-in-pockets', 'man-7', (-2.78, QUEUE_TAIL_Y), -12),
 ]
 # No. 2's eight (its slowed state): in single file along its pavement's kerb edge, just left of W2's camera line (the
 # mirror of No. 1's queue), the last one at least 6 m from W2's composed spot
 _N2 = GATE_CENTRE_X
 MEN_2 = [
     ('worker-hands-in-pockets', 'no-2-man-1', (_N2 + 0.25, WALL_Y - 0.45), -6),
-    ('worker-arms-folded', 'no-2-man-2', (_N2 + 0.55, WALL_Y - 1.15), 8),
-    ('worker-hands-in-pockets', 'no-2-man-3', (_N2 + 0.57, WALL_Y - 1.75), -12),
+    ('worker-arms-folded', 'no-2-man-2', (_N2 + 0.3, WALL_Y - 1.15), 8),
+    ('worker-hands-in-pockets', 'no-2-man-3', (_N2 + 0.36, WALL_Y - 1.75), -12),
     ('worker-arms-folded', 'no-2-man-4', (_N2 + 0.24, WALL_Y - 2.53), 4),
     ('worker-hands-in-pockets', 'no-2-man-5', (_N2 - 0.07, WALL_Y - 3.31), 10),
     ('worker-arms-folded', 'no-2-man-6', (_N2 - 0.02, WALL_Y - 4.09), -16),
@@ -882,7 +971,7 @@ def yard_things(pieces):
     truck = prop('hand-truck.glb', n2 + 1.1, crate_y + 1.05, 200, name='hand-truck', start=0.5)
     dressing.tint([o for o in truck.children_recursive], (0.45, 0.4, 0.38))
     found['no-2-crates'] = [round(n2 + 0.8, 3), crate_y, 0.75]
-    # the handcart, loaded with crates, standing in the road by the right kerb, its shafts toward the works
+    # the handcart, loaded with crates, on the right pavement, its shafts toward the works
     cart = prop('handcart.glb', HANDCART[0], HANDCART[1], 90, name='handcart', folder=PIT_PROPS)
     for k, (dx, dy, lift) in enumerate(((0.0, -0.45, 0.62), (0.0, 0.42, 0.62))):
         prop('crate-this-way-up.glb', HANDCART[0] + dx, HANDCART[1] + dy, 90, name=f'handcart-crate-{k + 1}', lift=0.0, start=1.5)
@@ -902,6 +991,16 @@ def yard_things(pieces):
     post_middle = (post[0] + post[1]) / 2
     jacket = import_glb(os.path.join(PROPS_2, 'jacket-and-cap-on-nail.glb'), (post_middle, post_face + 0.111, 0.0), 180, 'props', 'jacket-and-cap')
     jacket.location.z = 0.02 + 0.98
+    # the cap turned on its nail so W4 sees its round crown with the peak standing out to one side, the outline of a
+    # flat cap (round 3's check: hung square on, from 6 m it read as a flat dark disc; turned the other way it showed
+    # edge on, a thin blade)
+    bpy.context.view_layer.update()
+    cap = next((o for o in jacket.children_recursive if re.sub(r'\.\d{3}$', '', o.name) == 'cap'), None)
+    nail = next((o for o in jacket.children_recursive if re.sub(r'\.\d{3}$', '', o.name) == 'cap-nail'), None)
+    if cap is not None and nail is not None:
+        low, high = bounds_of([nail])
+        pivot = Vector(((low.x + high.x) / 2, (low.y + high.y) / 2, high.z))
+        cap.matrix_world = (Matrix.Translation(pivot) @ Matrix.Rotation(math.radians(CAP_TURN), 4, 'Z') @ Matrix.Translation(-pivot)) @ cap.matrix_world
     # the crate stands at the post's foot, its end in front of the hinge, so from W4 it overlaps the gate's leaf
     crate = prop('crate-this-way-up.glb', post[1] + 0.05, post_face + 0.5, 90, name='w4-upturned-crate', start=0.5)
     crate.rotation_euler = (math.pi, 0, math.radians(90))
@@ -916,7 +1015,8 @@ def yard_things(pieces):
     return found
 
 
-HANDCART = (KERB_X - 0.95, 7.5)       # behind W1's and W2's cameras, in W3's bottom third
+CAP_TURN = -30.0              # degrees the cap is turned on its nail (W4): its round crown and its peak to one side
+HANDCART = (3.88, 7.75)       # on the right pavement, coming up it toward the works: just behind W2's camera, in W3's bottom third
 
 
 # ------------------------------------------------------------------------------------------ light, state, cameras
@@ -934,10 +1034,41 @@ def lights():
     found['no-2-yard-spill'] = point_light('no-2-yard-spill', (n2 + 0.6, WALL_Y + 6.2, 2.2), 260.0, (1.0, 0.62, 0.32), soft=0.8)
     found['no-1-doorway-spill'] = point_light('no-1-doorway-spill', (-3.4, WALL_Y + 6.6, 2.6), 0.0, (1.0, 0.62, 0.32), soft=0.6)
     found['no-1-gateway-spill'] = point_light('no-1-gateway-spill', (gate_centre('no-1'), WALL_Y + 1.8, 2.7), 0.0, (1.0, 0.62, 0.32), soft=0.5)
+    # No. 1's empty yard in the cool dusk light, so its shut gate's bars (own surfaces, drawn over the plate) show as a
+    # dark silhouette against the yard and the shut cart doors behind (round 3's check: dark bars on a dark doorway). It
+    # reaches only No. 1's mill front, its shut doors and its yard's setts (light linking), never the lane or the
+    # doorway's room, which stays dark until "go"; the same in every state, so no time cut changes it
+    yard = point_light('no-1-yard-dusk', (gate_centre('no-1'), WALL_Y + 3.6, 5.2), NO_1_YARD_ENERGY, (0.55, 0.68, 1.0), soft=2.0, shadow=False)
+    dressing.light_reaches(yard, [o for o in bpy.data.objects if o.type == 'MESH' and o.name in (
+        'no-1-mill-walls', 'no-1-mill-stonework', 'no-1-mill-ironwork', 'no-1-loading-door-left', 'no-1-loading-door-right', 'no-1-yard-setts')])
+    found['no-1-yard-dusk'] = yard
+    # the light streaming out of each lit yard through its open gateway onto the lane (spill 1 when flat out): a wide
+    # soft beam from the yard, its edges cut by the gate's piers, so the gateway's warm light lies along the empty
+    # pavement toward W2's camera (round 3's check: the bottom half of W2 was bare grey paving)
+    for prefix, side in (('no-1', -1), ('no-2', 1)):
+        beam = bpy.data.objects.new(f'{prefix}-gateway-beam', bpy.data.lights.new(f'{prefix}-gateway-beam', 'SPOT'))
+        beam.data.color, beam.data.shadow_soft_size = (1.0, 0.64, 0.34), 1.2
+        beam.data.spot_size, beam.data.spot_blend = math.radians(64), 0.7
+        beam.data.use_shadow = True
+        beam.location = (side * 3.3, WALL_Y + 6.8, 3.4)
+        aim = Vector((side * 4.0, WALL_Y - 10.0, 0.0)) - beam.location
+        beam.rotation_mode = 'QUATERNION'
+        beam.rotation_quaternion = aim.to_track_quat('-Z', 'Y')
+        kit.collection('works-lights').objects.link(beam)
+        found[f'{prefix}-gateway-beam'] = beam
+    # a warm light in each doorway's room, on when its doorway is lit: it gives the machines their form against the
+    # lit far wall (reaching only the room and its machines)
+    for prefix, (x, _) in (('no-1', (-3.4, 0)), ('no-2', (2.9, 0))):
+        room = point_light(f'{prefix}-room-light', (x, WALL_Y + 8.0 + 2.2, 3.9), 0.0, (1.0, 0.66, 0.36), soft=0.8, shadow=False)
+        dressing.light_reaches(room, [o for o in bpy.data.objects if o.type == 'MESH' and o.name in (f'{prefix}-doorway-room', f'{prefix}-doorway-machines')])
+        found[f'{prefix}-room-light'] = room
     return found
 
 
-SPILL_ENERGY = {'no-2-doorway-spill': 900.0, 'no-2-gateway-spill': 420.0, 'no-2-yard-spill': 260.0, 'no-1-doorway-spill': 700.0, 'no-1-gateway-spill': 300.0}
+SPILL_ENERGY = {'no-2-doorway-spill': 900.0, 'no-2-gateway-spill': 420.0, 'no-2-yard-spill': 260.0, 'no-1-doorway-spill': 700.0, 'no-1-gateway-spill': 300.0,
+                'no-2-gateway-beam': 4000.0, 'no-1-gateway-beam': 4000.0}
+ROOM_ENERGY = 160.0          # each doorway room's light when its doorway is lit
+NO_1_YARD_ENERGY = 260.0     # No. 1's yard in the cool dusk
 
 
 def show(collection_name, shown):
@@ -975,6 +1106,11 @@ def set_state(name, plate=False, men_2_in_plate=False):
         if light is not None:
             light.data.energy = energy * (state['spill_1'] if name_.startswith('no-1') else state['spill_2'])
             light.hide_render = light.data.energy <= 0.0
+    for prefix in ('no-1', 'no-2'):
+        room = bpy.data.objects.get(f'{prefix}-room-light')
+        if room is not None:
+            room.data.energy = ROOM_ENERGY if state[f'doorway_{prefix[-1]}'] else 0.0
+            room.hide_render = room.data.energy <= 0.0
     bpy.context.view_layer.update()
 
 
@@ -995,7 +1131,8 @@ def cameras():
 def camera_spot(name, spot):
     view = views()[name]
     x, y = view[spot] if view[spot] else view['plate']
-    return Vector((x, y, dressing.ground_height(x, y, 1.0) + view['eye']))    # eye height above the street or the yard
+    base = view['base'] if view.get('base') is not None else dressing.ground_height(x, y, 1.0)
+    return Vector((x, y, base + view['eye']))    # eye height above the street or the yard
 
 
 def put_camera(name, spot, fov):
@@ -1154,6 +1291,16 @@ def build():
                 for slot in o.material_slots:
                     if slot.material and slot.material.name.startswith('window_lit_glow_'):
                         slot.material = bpy.data.materials[slot.material.name.replace('window_lit_glow_', 'window_dark_')]
+    # ... but each of the two nearest houses keeps one upstairs window faintly lit behind its curtains, the far one of
+    # the house beside W1 (left) and of the house beside W2 (right): the quiet side of each gate view is big and dim, and
+    # a small light of its own keeps it from reading as a blank wall (composing rule 10)
+    for name in DIM_WINDOWS:
+        glass = bpy.data.objects.get(name)
+        if glass is not None:
+            glass.data = glass.data.copy()
+            for slot in glass.material_slots:
+                if slot.material and slot.material.name.startswith('window_dark_'):
+                    slot.material = dim_window_material(slot.material.name.replace('window_dark_', 'window_lit_glow_'))
     move_lane_lamps()
     made_terrace = end_terrace()
     cross_street()
@@ -1171,7 +1318,7 @@ def build():
     # sky's light. Each shadow-casting light costs about two seconds a sample on this machine (EEVEE without a
     # graphics card), and the lamps, the lantern and the low afterglow read as well without.
     for o in bpy.data.objects:
-        if o.type == 'LIGHT' and not (o.name == 'brazier_light' or o.name.endswith('-spill') or o.name == 'dusk_skylight'):
+        if o.type == 'LIGHT' and not (o.name == 'brazier_light' or o.name.endswith('-spill') or o.name.endswith('-beam') or o.name == 'dusk_skylight'):
             o.data.use_shadow = False
     made_cameras = cameras()
     merged = merge_duplicate_materials()
@@ -1194,7 +1341,15 @@ def build():
             'lane_head_corners': 'the drums stand in a flagged corner in front of each outer pier: along the house fronts\' line they hid '
                                  'the brazier from W1',
             'men_shadows': 'the men cast no long shadows (each has a small soft patch at his feet), so a state picture swaps only the men '
-                           'and their feet (round 2: long shadows made the swap area 42% of the frame)'},
+                           'and their feet (round 2: long shadows made the swap area 42% of the frame)',
+            'round_4': 'W1 and W2 stand 0.4 m toward the kerb from the pavement\'s middle (x -3.7 and 3.7): the nearest house front fills '
+                       'less of the frame\'s side and the lane head\'s corner shows. W3\'s eye is 5.6 m above the lane (the end terrace on a '
+                       'raised footway 1 m up), so the queue\'s tail, 6 m in front of W1\'s composed spot, reaches about 0.70 down in W3. '
+                       'No. 1\'s brazier stands against the outer pier with the stooped man at its front-left, the PETROL and DIESEL drums to '
+                       'its right with both words whole from W1; the queue stands along the kerb to the right of them, 1.1 m apart. No. 2\'s '
+                       'drums stand by its outer pier with a clear gap, both words whole from W2. The handcart is on the right pavement in '
+                       'W3\'s bottom third. No. 1\'s yard is in a faint cool light (its gate\'s bars show against it); a warm beam from No. 2\'s '
+                       'yard lies along the pavement in W2; one curtained window glows on each gate view\'s quiet side.'},
         'views': {},
         'gates': gate_facts,
         'chimney_tops': {name: marker_spot(name) for name in ('no-1-chimney-top', 'no-2-chimney-a-top', 'no-2-chimney-b-top')},

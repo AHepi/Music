@@ -6,9 +6,11 @@
 #   mill-window-wide-lit.jpg / -dark.jpg     No. 2's wider windows: 6 x 6 panes
 #   north-light-lit.jpg / -dark.jpg          No. 1's sawtooth roof glazing, one panel 6 x 3 panes
 #   lantern-light-lit.jpg / -dark.jpg        No. 2's roof lantern glazing, one panel 6 x 2 panes
-#   doorway-inside-lit.jpg / -dark.jpg       the inside of a works seen through an open loading door:
-#                                            warm haze, dark machines, belts and a line shaft (lit), or
-#                                            the same nearly black (dark)
+#   doorway-inside-lit.jpg / -dark.jpg       the far wall of the works seen through an open loading door:
+#                                            a plain wall in warm lamplit haze with the glow of hanging lamps
+#                                            and faint piers (lit), or nearly black (dark). The machines stand
+#                                            in front of it as real models (build_factories.py); round 3's dark
+#                                            slabs painted here read as a bar chart on a phone.
 # Each glass picture holds four different windows side by side (an atlas): build_factories.py gives
 # each window one of the four, so neighbouring windows differ (a dim pane here, a dirty one there).
 #
@@ -102,26 +104,22 @@ def atlas(name, columns, rows, width, height, folder, seed, **settings):
 
 
 def doorway_inside(folder, width=512, height=512, seed=41):
-    """The inside of a works seen through an open loading door: a warm haze lit from lamps hanging
-    from the ceiling, dark machines along the floor, belts rising to a line shaft, a far wall with
-    lit windows. The dark copy is the same picture with the lamps out."""
+    """The far wall of a works seen through an open loading door: a plain wall in a warm haze lit from lamps
+    hanging from the ceiling, brighter toward the top, with the soft glow of a few lamps under the ceiling, faint
+    piers and a darker floor line. Nothing dark stands in it: the machines are models in front of it. The dark
+    copy is the same wall with the lamps out."""
     random_numbers = np.random.default_rng(seed)
     ys, xs = np.mgrid[0:height, 0:width].astype(float) / np.array([height, width])[:, None, None]
-    haze = LAMPLIGHT[None, None, :] * (0.38 + 0.3 * (1 - ys) + 0.12 * smooth_noise(height, width, random_numbers, 5))[..., None]
-    shapes = np.zeros((height, width))
-    for _ in range(10):                                      # machines: dark blocks on the floor
-        x0, width_fraction = random_numbers.random(), 0.06 + 0.14 * random_numbers.random()
-        top = 0.5 + 0.3 * random_numbers.random()
-        shapes = np.maximum(shapes, ((xs > x0) & (xs < x0 + width_fraction) & (ys > top)).astype(float))
-    shapes = np.maximum(shapes, (np.abs(ys - 0.2) < 0.012).astype(float))          # the line shaft
-    for _ in range(7):                                       # belts from the shaft down to the machines
-        x0 = random_numbers.random()
-        shapes = np.maximum(shapes, ((np.abs(xs - x0 - 0.05 * (ys - 0.2)) < 0.005) & (ys > 0.2) & (ys < 0.75)).astype(float))
-    lit = haze * (1 - 0.85 * shapes)[..., None]
-    for _ in range(5):                                       # lamps under the ceiling
-        cx, cy = random_numbers.random(), 0.06 + 0.1 * random_numbers.random()
-        lit += np.array([1.0, 0.8, 0.5]) * 0.7 * np.exp(-(((xs - cx) * 26) ** 2 + ((ys - cy) * 26) ** 2))[..., None]
-    dark = np.array([0.03, 0.028, 0.026]) * (1 - 0.6 * shapes)[..., None] + 0.01 * (1 - ys)[..., None]
+    haze = LAMPLIGHT[None, None, :] * (0.42 + 0.26 * (1 - ys) + 0.08 * smooth_noise(height, width, random_numbers, 5))[..., None]
+    piers = np.zeros((height, width))
+    for x0 in (0.18, 0.52, 0.86):                            # faint brick piers in the far wall
+        piers = np.maximum(piers, np.exp(-((xs - x0) / 0.025) ** 2))
+    floor = np.clip((ys - 0.86) / 0.04, 0, 1)                # the floor meeting the wall, a little darker
+    lit = haze * (1 - 0.12 * piers - 0.3 * floor)[..., None]
+    for cx in (0.12, 0.38, 0.64, 0.9):                       # lamps under the ceiling, in a row
+        cy = 0.07 + 0.03 * random_numbers.random()
+        lit += np.array([1.0, 0.8, 0.5]) * 0.5 * np.exp(-(((xs - cx) * 14) ** 2 + ((ys - cy) * 18) ** 2))[..., None]
+    dark = np.array([0.03, 0.028, 0.026]) * (1 - 0.3 * piers)[..., None] + 0.01 * (1 - ys)[..., None]
     for state, picture in (('lit', lit), ('dark', dark)):
         path = os.path.join(folder, f'doorway-inside-{state}.jpg')
         Image.fromarray((np.clip(picture, 0, 1) * 255).round().astype(np.uint8)).save(path, quality=92)

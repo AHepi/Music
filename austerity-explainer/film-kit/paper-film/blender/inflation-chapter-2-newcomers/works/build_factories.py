@@ -11,14 +11,17 @@
 #   No. 1, the quiet factory: dark red-brown brick (castle_brick_02_red, darkened); ONE tall ROUND
 #     chimney (26 m) at the back of its yard; a four-bay sawtooth roof whose teeth show along the mill
 #     front's top; no water tank; a two-storey mill front with upper windows; a cart doorway behind the
-#     gate, its doors shut.
+#     gate, its doors shut, and behind it a weaving shed's room with two power looms belted to a line shaft.
 #   No. 2, the flat-out factory: pale buff-grey brick (white_sandstone_bricks, toned); TWO SQUARE chimneys
 #     (25 m and 23 m) of a paler buff still, sooted only in a narrow band under the cap, their faces toward
 #     the lane and their sides lit warm by No. 2's own blazing yard (so that from the lane, where only their
 #     tops show, they stay pale against the dusk and never read as No. 1's: round 2's check); a water tank on a steel trestle standing over its roof; long pitched shed roofs
 #     (three spans, gables to the lane) with glazed roof lanterns along their ridges; a two-storey mill
-#     front with upper windows; a cart doorway behind the gate with its doors open on a lit works, and a
-#     taking-in door with a hoist beam above it.
+#     front with upper windows; a cart doorway behind the gate with its doors open on a lit works (a lathe,
+#     a power press with a big spoked flywheel and a pillar drill, belted to a line shaft), and over it, in
+#     the gable above the gate, a row of three tall mill windows in the window groups.
+# The machines are modelled (round 3's check: painted on the doorway's back wall as dark slabs in rising
+# steps, they read as a bar chart on a phone); the doorway's far wall is a plain lit wall.
 # No sign boards, no lettering, no figures anywhere (the gate boards "No. 1" and "No. 2" are props from
 # chapter 2's prop library). No shading bake: Blender draws the plates itself.
 #
@@ -96,6 +99,10 @@ NO_2_CHIMNEY_SOOT = (0.88, 0.96)                # where the soot starts, and whe
 NO_2_YARD_GLOW = (1.0, 0.72, 0.46)              # the colour of the yard's light on the brick
 NO_2_GLOW_STRENGTH = {'lane-side': 0.45, 'sides': 0.22}   # how strongly each face gives off that light
 YARD_DEPTH = 42.0
+DOORWAY_ROOM_DEPTH = 7.0         # the room seen through each cart doorway, from the front wall's face to its lit far wall
+GABLE_WINDOWS = (4.6, 7.2)       # No. 2's row of windows in the gable over its gate: sill and head heights
+GABLE_WINDOW_WIDTH = 0.95
+GABLE_WINDOW_CENTRES = (1.75, 2.9, 4.05)
 FRONT = WALL_TO_MILL
 BACK = WALL_TO_MILL + MILL_DEPTH
 
@@ -261,9 +268,10 @@ def window_openings(wall, centres, width, floors, skip=()):
     return found
 
 
-def dress_wall(factory, wall, walls, dressings, iron, pilasters, openings, glass_type, eaves=True, doorways=()):
+def dress_wall(factory, wall, walls, dressings, iron, pilasters, openings, glass_type, eaves=True, doorways=(), other_glass=None):
     """Everything on one wall's face: pilasters, the plinth (broken at doorways), a string course at the
-    first floor, a band under the eaves, stone sills and lintels at every window, and the glass."""
+    first floor, a band under the eaves, stone sills and lintels at every window, and the glass. other_glass:
+    {opening: glass type} for openings that wear another window picture (No. 2's narrow gable windows)."""
     for centre in pilasters:
         start_along, end_along = max(wall.start_along, centre - PILASTER / 2), min(wall.end_along, centre + PILASTER / 2)
         if centre <= wall.start_along + 0.01:
@@ -286,25 +294,31 @@ def dress_wall(factory, wall, walls, dressings, iron, pilasters, openings, glass
         row = 'ground' if sill < FIRST_FLOOR else 'upper'
         number = len(factory.glass_rows.get((wall.name, row), [])) + 1
         factory.glass(f'window-{wall.name}-{row}-{number:02d}', wall.face_corners(start_along, end_along, GLASS_SET_BACK, sill + 0.02, head),
-                      glass_type, (wall.name, row))
+                      (other_glass or {}).get((start_along, end_along, sill, head), glass_type), (wall.name, row))
 
 
-def doorway(factory, wall, walls, dressings, centre, width, height, open_doors):
-    """A cart doorway: an opening with a stone lintel and kerbs, a dark room behind it with the lit (or
-    dark) inside of the works on its back wall, and two plank door leaves, each turning about its hinge."""
+def doorway(factory, wall, walls, dressings, centre, width, height, open_doors, room_reach=(1.6, 1.6)):
+    """A cart doorway: an opening with a stone lintel and kerbs, a room behind it with real machines in it
+    (doorway_machines) and the lit (or dark) far wall of the works at its back, and two plank door leaves,
+    each turning about its hinge. room_reach: how far the room runs past each jamb (it stays inside the mill's
+    end walls). Round 3's check: the machines were painted on the back wall as flat dark slabs in rising steps,
+    and through the doorway they read as a bar chart on a phone; now they are modelled, each its own outline."""
     start_along, end_along = centre - width / 2, centre + width / 2
     wall.box(dressings, start_along - 0.25, end_along + 0.25, -0.05, 0.05, height, height + 0.4, factory.stone)
     for along in (start_along - 0.12, end_along + 0.12):        # guard stones at the jambs' feet, against cart wheels
         wall.box(dressings, along - 0.12, along + 0.12, -0.25, 0.0, 0.0, 0.7, factory.stone)
     room = kit.MeshBuilder()
-    depth = 3.0
-    wall.box(room, start_along - 0.3, end_along + 0.3, WALL, depth, -0.02, 0.0, factory.inside_dark)                  # floor
-    wall.box(room, start_along - 0.3, end_along + 0.3, WALL, depth, height + 0.6, height + 0.7, factory.inside_dark)  # ceiling
-    for along in (start_along - 0.4, end_along + 0.3):
-        wall.box(room, along, along + 0.1, WALL, depth, 0.0, height + 0.6, factory.inside_dark)               # sides
+    depth = DOORWAY_ROOM_DEPTH
+    room_start, room_end = start_along - room_reach[0], end_along + room_reach[1]
+    ceiling = height + 0.9
+    wall.box(room, room_start, room_end, WALL, depth, -0.02, 0.0, factory.inside_dark)                  # floor
+    wall.box(room, room_start, room_end, WALL, depth, ceiling, ceiling + 0.1, factory.inside_dark)      # ceiling
+    for along in (room_start - 0.1, room_end):
+        wall.box(room, along, along + 0.1, WALL, depth, 0.0, ceiling, factory.inside_dark)              # sides
     doorway_group = factory.group('doorway')
     room.finish(f'{factory.prefix}-doorway-room', parent=doorway_group)
-    inside = kit.glass_piece(f'{factory.prefix}-doorway-inside', wall.face_corners(start_along - 0.3, end_along + 0.3, depth - 0.05, 0.0, height + 0.6),
+    doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth, doorway_group)
+    inside = kit.glass_piece(f'{factory.prefix}-doorway-inside', wall.face_corners(room_start, room_end, depth - 0.05, 0.0, ceiling),
                              factory.prefix, 'doorway-inside', 'lit' if open_doors else 'dark', variant=0, step=0, parent=doorway_group)
     inside['window_step'] = 0
     # the two leaves: vertical planks with ledges and braces behind and strap hinges in front
@@ -330,6 +344,143 @@ def doorway(factory, wall, walls, dressings, centre, width, height, open_doors):
             # gates; doorways are only on the fronts, which face minus y
             part.rotation_euler.z = math.radians(-100 * toward)
     kit.empty(f'{factory.prefix}-doorway-foot', wall.point(centre, -1.0, 0.0), parent=factory.root)
+
+
+def doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth, parent):
+    """The machines seen through a cart doorway, each with its own outline so it reads as a machine and not as a
+    block: a line shaft along the ceiling on hangers, with a pulley over each machine and a flat leather belt down to
+    it, and hanging lamp shades. No. 1 (a weaving shed under its sawtooth roof): two power looms, one behind the
+    other, each a cast-iron side frame with its rollers and warp. No. 2 (an engineering works): a lathe on cabinet
+    legs with its stepped cone pulley, a power press with a big spoked flywheel facing the lane (driven from a short
+    countershaft), and a pillar drill. Points are (along the wall, depth behind its face, height)."""
+    iron = kit.surface_material(f'{factory.prefix}-machine-iron', 'rusty_metal_02', tint=(0.1, 0.1, 0.105), roughness=0.5, metallic=0.5)
+    belt = kit.plain_material(f'{factory.prefix}-machine-belt', (0.05, 0.035, 0.025), roughness=0.75)
+    warp = kit.plain_material(f'{factory.prefix}-loom-warp', (0.32, 0.29, 0.24), roughness=0.9)
+    machines = kit.MeshBuilder()
+    at = lambda along, behind, z: wall.point(along, behind, z)
+
+    def box(a0, a1, d0, d1, z0, z1, material=iron):
+        wall.box(machines, a0, a1, d0, d1, z0, z1, material)
+
+    def rod_along(a0, a1, behind, z, radius, material=iron, sides=12):
+        """A round bar or a pulley with its axis along the wall."""
+        machines.rod(at(a0, behind, z), at(a1, behind, z), radius, material, sides=sides)
+
+    def rod_back(along, d0, d1, z, radius, material=iron, sides=12):
+        """A round bar or a hub with its axis running away from the lane."""
+        machines.rod(at(along, d0, z), at(along, d1, z), radius, material, sides=sides)
+
+    def strap(first, second, width=0.07):
+        """A flat belt's straight run: wide across, thin toward the lane (the belts run up and down, across or back)."""
+        machines.beam(first, second, width, 0.01, belt, up=(0, 1, 0))
+
+    def belt_between(along, small, small_radius, big, big_radius):
+        """A flat belt round a pulley with its axis along the wall (small: (depth, z)) and one on the shaft (big), as
+        its two straight runs."""
+        u = Vector((big[0] - small[0], big[1] - small[1])).normalized()
+        n = Vector((-u.y, u.x))
+        for sign in (1, -1):
+            strap(at(along, small[0] + sign * n.x * small_radius, small[1] + sign * n.y * small_radius),
+                  at(along, big[0] + sign * n.x * big_radius, big[1] + sign * n.y * big_radius))
+
+    def wheel(along, behind, z, radius, spokes=6, rim=0.05):
+        """A spoked wheel facing the lane (its axis running away from it): rim, spokes and hub."""
+        segments = 28
+        ring = [at(along + radius * math.cos(2 * math.pi * k / segments), behind, z + radius * math.sin(2 * math.pi * k / segments)) for k in range(segments)]
+        for first, second in zip(ring, ring[1:] + ring[:1]):
+            machines.rod(first, second, rim, iron, sides=6)
+        for k in range(spokes):
+            angle = 2 * math.pi * k / spokes + 0.3
+            machines.rod(at(along, behind, z), at(along + (radius - rim) * math.cos(angle), behind, z + (radius - rim) * math.sin(angle)), 0.028, iron, sides=6)
+        rod_back(along, behind - 0.12, behind + 0.12, z, 0.1)
+
+    # the line shaft under the ceiling, on hangers, the full width of the room
+    shaft_depth, shaft_z = depth - 2.6, ceiling - 0.38
+    rod_along(room_start + 0.15, room_end - 0.15, shaft_depth, shaft_z, 0.045, sides=10)
+    along = room_start + 0.5
+    while along < room_end - 0.3:
+        machines.rod(at(along, shaft_depth, shaft_z), at(along, shaft_depth, ceiling), 0.03, iron, sides=6)
+        box(along - 0.09, along + 0.09, shaft_depth - 0.09, shaft_depth + 0.09, shaft_z - 0.08, shaft_z + 0.1)   # bearing
+        along += 1.7
+    shaft_pulleys = []
+    if factory.number == 1:
+        # two power looms, the second further back and to the left, so their side frames show one beside the other
+        for loom_centre, front, width in ((centre + 0.35, 2.0, 1.7), (centre - 1.0, 3.9, 1.6)):
+            left, right = loom_centre - width / 2, loom_centre + width / 2
+            back = front + 1.1
+            for side in (left, right):
+                # each side frame: two posts and an arched top rail, with a cross foot
+                box(side - 0.05, side + 0.05, front, front + 0.1, 0.0, 1.05)
+                box(side - 0.05, side + 0.05, back - 0.1, back, 0.0, 1.25)
+                machines.beam(at(side, front + 0.05, 1.05), at(side, back - 0.05, 1.25), 0.1, 0.1, iron)
+                box(side - 0.07, side + 0.07, front - 0.05, back + 0.05, 0.0, 0.1)
+            rod_along(left, right, front + 0.02, 0.95, 0.05)                            # the breast beam
+            rod_along(left + 0.05, right - 0.05, front + 0.15, 0.45, 0.11)             # the cloth roller
+            rod_along(left + 0.05, right - 0.05, back - 0.15, 0.62, 0.17)              # the warp beam
+            box(left + 0.05, right - 0.05, front + 0.3, front + 0.42, 0.82, 0.98)      # the sley
+            rod_along(left - 0.05, right + 0.05, front + 0.55, 0.32, 0.04)             # the crank shaft
+            # the warp: a sheet of threads from the warp beam over the back rest to the cloth at the breast beam
+            machines.quad([at(left + 0.1, back - 0.15, 0.79), at(right - 0.1, back - 0.15, 0.79), at(right - 0.1, front + 0.1, 0.96),
+                           at(left + 0.1, front + 0.1, 0.96)], warp)
+            # its fast and loose pulleys on the right, belted up to the shaft
+            pulley_along = right + 0.12
+            rod_along(pulley_along - 0.06, pulley_along + 0.06, front + 0.55, 0.32, 0.24)
+            shaft_pulleys.append((pulley_along, 0.34))
+            belt_between(pulley_along, (front + 0.55, 0.32), 0.24, (shaft_depth, shaft_z), 0.34)
+    else:
+        # a lathe on cabinet legs, its bed across the room, the headstock with its stepped cone pulley on the left
+        lathe = centre - 0.75
+        front = 2.2
+        for a0, a1 in ((lathe - 0.95, lathe - 0.62), (lathe + 0.55, lathe + 0.88)):
+            box(a0, a1, front - 0.05, front + 0.33, 0.0, 0.86)
+        box(lathe - 1.0, lathe + 0.92, front, front + 0.26, 0.86, 1.0)                  # the bed
+        box(lathe - 0.97, lathe - 0.52, front - 0.04, front + 0.3, 1.0, 1.36)          # the headstock
+        for k, radius in enumerate((0.21, 0.165, 0.12)):                               # the cone pulley
+            rod_along(lathe - 0.98 + k * 0.08, lathe - 0.9 + k * 0.08, front + 0.13, 1.56, radius, sides=16)
+        rod_along(lathe - 0.52, lathe - 0.38, front + 0.13, 1.18, 0.09, sides=12)      # the chuck
+        box(lathe + 0.55, lathe + 0.82, front, front + 0.26, 1.0, 1.3)                 # the tailstock
+        rod_along(lathe + 0.38, lathe + 0.55, front + 0.13, 1.18, 0.035)               # its quill
+        box(lathe - 0.08, lathe + 0.22, front - 0.06, front + 0.32, 1.0, 1.14)         # the saddle
+        box(lathe + 0.02, lathe + 0.12, front + 0.04, front + 0.16, 1.14, 1.26)        # the tool post
+        shaft_pulleys.append((lathe - 0.86, 0.3))
+        belt_between(lathe - 0.86, (front + 0.13, 1.56), 0.165, (shaft_depth, shaft_z), 0.3)
+        # a power press: a C-frame column, crown, ram and bolster, with a big spoked flywheel facing the lane on its
+        # right, belted up to a short countershaft hung from the ceiling
+        press = centre + 0.15
+        back = depth - 1.9
+        box(press - 0.28, press + 0.12, back, back + 0.5, 0.0, 2.15)                   # the column
+        box(press - 0.34, press + 0.18, back - 0.45, back + 0.5, 0.0, 0.14)            # its foot
+        box(press - 0.32, press + 0.16, back - 0.42, back + 0.1, 0.78, 0.94)           # the bolster
+        box(press - 0.34, press + 0.2, back - 0.42, back + 0.5, 2.15, 2.5)             # the crown
+        box(press - 0.16, press, back - 0.34, back - 0.18, 1.2, 2.15)                  # the ram
+        flywheel_along, flywheel_z, flywheel_radius = press + 0.62, 2.0, 0.72
+        wheel(flywheel_along, back - 0.2, flywheel_z, flywheel_radius)
+        rod_back(flywheel_along, back - 0.2, back + 0.4, flywheel_z, 0.05)            # its shaft into the crown
+        jack_z = ceiling - 0.35
+        rod_back(flywheel_along, back - 0.32, back - 0.08, jack_z, 0.18, sides=14)    # the countershaft's pulley
+        machines.rod(at(flywheel_along, back - 0.2, jack_z), at(flywheel_along, back - 0.2, ceiling), 0.03, iron, sides=6)
+        for sign in (1, -1):        # the belt's two runs, flat toward the lane
+            strap(at(flywheel_along + sign * flywheel_radius * 0.98, back - 0.24, flywheel_z), at(flywheel_along + sign * 0.18, back - 0.24, jack_z))
+        # a pillar drill on the right, in front
+        drill, front = centre + 1.05, 1.9
+        box(drill - 0.28, drill + 0.28, front - 0.2, front + 0.38, 0.0, 0.12)          # the base
+        machines.rod(at(drill, front + 0.22, 0.12), at(drill, front + 0.22, 2.0), 0.06, iron, sides=10)   # the column
+        box(drill - 0.22, drill + 0.22, front - 0.12, front + 0.18, 0.86, 0.92)        # the table
+        box(drill - 0.14, drill + 0.14, front - 0.08, front + 0.34, 1.55, 1.95)        # the head
+        machines.rod(at(drill, front + 0.02, 1.55), at(drill, front + 0.02, 1.08), 0.025, iron, sides=6)   # the spindle
+        for k, radius in enumerate((0.15, 0.11)):
+            rod_along(drill - 0.1 + k * 0.08, drill - 0.02 + k * 0.08, front + 0.14, 2.12, radius, sides=14)
+        shaft_pulleys.append((drill - 0.02, 0.26))
+        belt_between(drill - 0.02, (front + 0.14, 2.12), 0.13, (shaft_depth, shaft_z), 0.26)
+    for pulley_along, radius in shaft_pulleys:
+        rod_along(pulley_along - 0.08, pulley_along + 0.08, shaft_depth, shaft_z, radius, sides=16)
+    # lamp shades hanging on cords (their light is the lit far wall's and the room's light)
+    for lamp_along, lamp_depth in ((centre - 0.9, 2.9), (centre + 0.7, 3.5), (centre - 0.1, 5.2)):
+        low = ceiling - 1.0
+        x, y, _ = at(lamp_along, lamp_depth, 0.0)
+        machines.lathe([(0.03, low + 0.22), (0.22, low)], iron, centre=(x, y, 0), sides=14, smooth=False)
+        machines.rod(at(lamp_along, lamp_depth, low + 0.22), at(lamp_along, lamp_depth, ceiling), 0.01, iron, sides=4)
+    return machines.finish(f'{factory.prefix}-doorway-machines', parent=parent)
 
 
 def gable_coping(builder, factory, x_low, z_low, x_high, z_high, y0, y1):
@@ -370,7 +521,7 @@ def build_sawtooth_mill(factory):
         dress_wall(factory, wall, walls, dressings, ironwork, bay_lines, openings, factory.window_type,
                    doorways=[(door[0], door[1]) for door in doors])
         if wall is front:
-            doorway(factory, wall, walls, dressings, door_centre, door_width, door_height, open_doors=False)
+            doorway(factory, wall, walls, dressings, door_centre, door_width, door_height, open_doors=False, room_reach=(1.6, 0.8))
     side_lines = [FRONT + bay * k for k in range(5)]
     side_centres = []
     for bay_start, bay_end in zip(side_lines, side_lines[1:]):
@@ -416,8 +567,8 @@ def build_sawtooth_mill(factory):
 
 def build_pitched_mill(factory):
     """No. 2's mill: a two-storey mill front with upper windows under three long pitched spans (gables
-    to the lane) with glazed lanterns along their ridges; a taking-in door with a hoist beam in the
-    narrow first span; the steel trestle and water tank standing over the second span."""
+    to the lane) with glazed lanterns along their ridges; the cart doorway and a row of three windows over it in
+    the narrow first span; the steel trestle and water tank standing over the second span."""
     mill = factory.group('mill')
     walls, dressings, roof, ironwork, timber = (kit.MeshBuilder() for _ in range(5))
     inner, outer = INNER_EDGE, INNER_EDGE + MILL_WIDTH
@@ -430,38 +581,33 @@ def build_pitched_mill(factory):
     inner_end = Wall('inner-end', 'y', inner, -1, FRONT + WALL, BACK - WALL)
     width = 1.7
     door_centre, door_width, door_height = 2.9, 2.8, 3.8
-    loft_door = (2.2, 3.6, FIRST_FLOOR + 0.25, EAVES - 0.8)
     for wall in (front, back):
         openings, centres = [], []
         for index, (span_start, span_end) in enumerate(spans):
             count = 1 if index == 0 else 3
             these = spread(span_start + PILASTER / 2 + 0.05, span_end - PILASTER / 2 - 0.05, count, width)
             if wall is front and index == 0:
-                continue                     # the doorway and the taking-in door instead
+                continue                     # the doorway and the gable's window group instead
             centres += these
         openings = window_openings(wall, centres, width, floors)
-        extra = [(door_centre - door_width / 2, door_centre + door_width / 2, 0.0, door_height), loft_door] if wall is front else []
+        gable = []
+        if wall is front:
+            # the gable over the gate: a row of three tall mill windows over the cart doorway, sills just above its
+            # lintel (in place of round 3's blank timber loft door), lit with the rest in the window groups. From W2
+            # the gate board hides their upper half, so they start low: their lower part shows between the board and
+            # the doorway, and "flat out" and the flicker show there (round 3's check: No. 2's windows were not in
+            # the W2 frame at all). They are narrower than the mill's other windows, so they wear the narrow picture
+            # (4 x 6 panes) and their panes stay about square.
+            gable = [(centre - GABLE_WINDOW_WIDTH / 2, centre + GABLE_WINDOW_WIDTH / 2, GABLE_WINDOWS[0], GABLE_WINDOWS[1])
+                     for centre in GABLE_WINDOW_CENTRES]
+            openings += gable
+        extra = [(door_centre - door_width / 2, door_centre + door_width / 2, 0.0, door_height)] if wall is front else []
         wall_with_openings(walls, wall, 0.0, EAVES, openings + extra, factory.brick)
         dress_wall(factory, wall, walls, dressings, ironwork, span_lines, openings, factory.window_type,
-                   doorways=[(door_centre - door_width / 2, door_centre + door_width / 2)] if wall is front else [])
+                   doorways=[(door_centre - door_width / 2, door_centre + door_width / 2)] if wall is front else [],
+                   other_glass={opening: 'mill-window-narrow' for opening in gable})
         if wall is front:
-            doorway(factory, wall, walls, dressings, door_centre, door_width, door_height, open_doors=True)
-            # the taking-in door: two plank leaves, shut, a stone sill, a hoist beam from the gable's apex
-            door_start, door_end, z0, z1 = loft_door
-            wall.box(dressings, door_start - 0.1, door_end + 0.1, -0.1, 0.3, z0 - 0.12, z0 + 0.02, factory.stone)
-            wall.box(dressings, door_start - 0.15, door_end + 0.15, -0.03, 0.03, z1, z1 + 0.3, factory.stone)
-            for k in range(6):
-                plank_start = door_start + k * (door_end - door_start) / 6
-                wall.box(timber, plank_start + 0.005, plank_start + (door_end - door_start) / 6 - 0.005, 0.12, 0.2, z0 + 0.02, z1, factory.door_paint)
-            for z in (z0 + 0.4, z1 - 0.4):
-                wall.box(ironwork, door_start + 0.1, door_start + 0.6, 0.1, 0.12, z - 0.04, z + 0.04, factory.iron)
-                wall.box(ironwork, door_end - 0.6, door_end - 0.1, 0.1, 0.12, z - 0.04, z + 0.04, factory.iron)
-            apex = EAVES + (5.0 - inner) / 2 * math.tan(PITCH)
-            beam_u = (inner + 5.0) / 2
-            wall.box(timber, beam_u - 0.14, beam_u + 0.14, -1.4, 0.4, apex - 0.75, apex - 0.47, factory.door_paint)
-            ironwork.centred_box(tuple(wall.point(beam_u, -1.25, apex - 0.9)), (0.12, 0.2, 0.3), factory.iron)          # pulley block
-            ironwork.rod(wall.point(beam_u, -1.25, apex - 1.05), wall.point(beam_u, -1.25, apex - 2.6), 0.025, factory.iron)  # chain
-            ironwork.centred_box(tuple(wall.point(beam_u, -1.25, apex - 2.7)), (0.08, 0.06, 0.18), factory.iron)         # hook
+            doorway(factory, wall, walls, dressings, door_centre, door_width, door_height, open_doors=True, room_reach=(0.4, 1.6))
     side_lines = [FRONT + MILL_DEPTH / 4 * k for k in range(5)]
     side_centres = []
     for bay_start, bay_end in zip(side_lines, side_lines[1:]):
@@ -747,7 +893,7 @@ def build(number):
     factory.spread_steps()
     # both the lit and the dark material of every glass type are kept in the .blend (marked so Blender
     # keeps the unused ones), so a plate script can switch windows without the picture files
-    for glass_type in (factory.window_type, factory.roof_glass_type, 'doorway-inside'):
+    for glass_type in sorted({factory.window_type, factory.roof_glass_type, 'doorway-inside', 'mill-window-narrow'}):
         for state in ('lit', 'dark'):
             kit.glass_material(factory.prefix, glass_type, state).use_fake_user = True
     bpy.context.view_layer.update()
@@ -767,12 +913,13 @@ def build(number):
 
 DESCRIPTIONS = {
     1: ('No. 1, the quiet factory (always on the left): dark red-brown brick, one tall round chimney, a four-bay '
-        'sawtooth roof, no water tank, a two-storey mill front with upper windows, cart doors shut. Saved with every '
-        'window dark.'),
+        'sawtooth roof, no water tank, a two-storey mill front with upper windows, cart doors shut on a room of power '
+        'looms. Saved with every window dark.'),
     2: ('No. 2, the flat-out factory (always on the right): pale buff-grey brick, two square chimneys of a paler buff '
         '(sooted only just under the cap, their faces toward the lane and their sides lit warm by the yard), a water tank '
         'on a steel trestle, long pitched shed roofs with glazed lanterns, a two-storey mill front with upper windows, '
-        'cart doors open on a lit works, a taking-in door with a hoist beam. Saved with every window lit.'),
+        'cart doors open on a lit works with a lathe, a power press with a spoked flywheel and a pillar drill, a row of three '
+        'tall windows in the gable over the gate. Saved with every window lit.'),
 }
 
 
@@ -786,14 +933,18 @@ def facts(factory):
         x, y, height = CHIMNEY_1
         mill['roof'] = f'four-bay sawtooth, bays of {MILL_WIDTH / 4:g} m rising towards the centre line, peaks {EAVES + TOOTH:g} m'
         return {'mill': mill, 'round_chimney': {'x': x, 'y': y, 'height': height, 'shaft_diameter': [2.9, 1.84]},
-                'cart_doorway': {'centre_x': -3.4, 'width': 3.0, 'height': 3.8}}
+                'cart_doorway': {'centre_x': -3.4, 'width': 3.0, 'height': 3.8, 'room_depth': DOORWAY_ROOM_DEPTH,
+                                 'machines': 'two power looms belted to a line shaft (no-1-doorway-machines)'}}
     spans = [(INNER_EDGE, 5.0), (5.0, 13.75), (13.75, INNER_EDGE + MILL_WIDTH)]
     mill['roof'] = ('three pitched spans, gables to the lane, ridges ' +
                     ', '.join(f'{EAVES + (b - a) / 2 * math.tan(PITCH):.2f} m' for a, b in spans) + ', lanterns on each ridge')
     return {'mill': mill,
             'square_chimneys': [{'x': x, 'y': y, 'height': height, 'shaft_side': [2.0, 1.36]} for x, y, height in CHIMNEYS_2],
             'water_tank': {'x': [6.9, 9.9], 'y': [FRONT + 1.6, FRONT + 4.6], 'bottom': 12.0, 'top': 14.8},
-            'cart_doorway': {'centre_x': 2.9, 'width': 2.8, 'height': 3.8}, 'taking_in_door': {'x': [2.2, 3.6], 'z': [4.45, 7.0]}}
+            'cart_doorway': {'centre_x': 2.9, 'width': 2.8, 'height': 3.8, 'room_depth': DOORWAY_ROOM_DEPTH,
+                             'machines': 'a lathe, a power press with a spoked flywheel, a pillar drill, belted to a line shaft (no-2-doorway-machines)'},
+            'gable_windows': {'x': [round(c - GABLE_WINDOW_WIDTH / 2, 3) for c in GABLE_WINDOW_CENTRES][:1] + [round(GABLE_WINDOW_CENTRES[-1] + GABLE_WINDOW_WIDTH / 2, 3)],
+                              'z': list(GABLE_WINDOWS), 'count': len(GABLE_WINDOW_CENTRES)}}
 
 
 def main():

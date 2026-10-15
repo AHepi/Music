@@ -99,12 +99,13 @@ export async function build(kit) {
   const LINE_1 = 172, LINE_2 = 250;
   function draw2D(ctx, t) {
     const inW1 = t >= T.cut;
-    const shade = inW1 ? presence(t, T.quiet - 0.2, Infinity, 0.5) : presence(t, T.picture - 0.2, T.cut, 0.5, 0.05);
+    // everything over W3 ends exactly on the cut to W1 (fadeOut 0): a fade a frame early made the cut two steps
+    const shade = inW1 ? presence(t, T.quiet - 0.2, Infinity, 0.5) : presence(t, T.picture - 0.2, T.cut, 0.5, 0);
     topShade(ctx, shade);
     if (!inW1) {
-      buildWords(ctx, t, { parts: [{ text: 'PICTURE TWO FACTORIES', at: T.picture }], until: T.cut, y: LINE_1, size: 66, fadeOut: 0.05 });
-      buildWords(ctx, t, { parts: [{ text: 'EACH ONE = A WHOLE COUNTRY', at: T.country }], until: T.cut, y: LINE_2, size: 46, colour: INK.amber, fadeOut: 0.05 });
-      const label = { plate: true, size: 42, until: T.cut };
+      buildWords(ctx, t, { parts: [{ text: 'PICTURE TWO FACTORIES', at: T.picture }], until: T.cut, y: LINE_1, size: 66, fadeOut: 0 });
+      buildWords(ctx, t, { parts: [{ text: 'EACH ONE = A WHOLE COUNTRY', at: T.country }], until: T.cut, y: LINE_2, size: 46, colour: INK.amber, fadeOut: 0 });
+      const label = { plate: true, size: 42, until: T.cut, fadeOut: 0 };
       // the labels over the lane's empty cobbles (the lower middle), each line from its thing
       callout(ctx, t, { ...label, at: T.workers, point: works.screen('no-1-queue'), text: 'WORKERS', dx: 20, dy: 300 });
       callout(ctx, t, { ...label, at: T.materials, point: works.screen('no-2-crates'), text: 'MATERIALS', dx: -30, dy: 160 });

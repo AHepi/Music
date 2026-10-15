@@ -5,8 +5,10 @@
 // made. When nothing is spare... it mostly pushes prices up."
 //   5a  W2, the flat-out gate, held on the composed frame where page 4 stopped (page 4 runs on into it with no join
 //       you can see: the same view, the same question and full guess ring until "spare"). On "spare" the question and
-//       ring clear: NO SPARE; MORE MONEY, + SAME THINGS TO BUY (the crates in the gateway stay as they are), → PRICES
-//       UP with a price arrow over No. 2 that climbs (from "prices", reaching its top on "up"). Live: as page 4.
+//       ring clear (gone before NO SPARE comes, so the two never overlap); NO SPARE; MORE MONEY, + SAME THINGS TO BUY
+//       (the crates in the gateway stay as they are), → PRICES UP on "prices" with a price arrow over No. 2 that climbs
+//       (reaching its top on "up"), so the page's conclusion is up about 1.2 s before the cut. Every word here ends
+//       exactly on the cut to W3 (no fade a frame early, so the cut is one clean step). Live: as page 4.
 //   5b  W3, both factories, held, with the rule over them. Cut on "Most"; the small name tags QUIET and FLAT OUT over
 //       the two columns; MOST ECONOMISTS AGREE (small, above the rule cards); the upper rule card NEW MONEY SPENT +
 //       SPARE → MOSTLY MORE THINGS MADE with a thin line to No. 1's chimney; the lower rule card NOTHING SPARE →
@@ -29,9 +31,12 @@ export const PICTURES = {
   w3: 'works-w3-plate.jpg',   // W3, both gates: No. 1 quiet, No. 2 flat out
 };
 
-// The rule cards' places (pixels; plan 34: 0.06 to 0.90 across, the upper about 0.07 to 0.15 down, the lower about
-// 0.16 to 0.24 down). Page 16 shows the same cards and should use these.
-export const RULE_CARDS = { heading: 116, upper: [TEXT_LEFT, 138, TEXT_RIGHT - TEXT_LEFT, 150], lower: [TEXT_LEFT, 307, TEXT_RIGHT - TEXT_LEFT, 150], size: 46 };
+// The rule cards' places (pixels; plan 34: 0.06 to 0.90 across, the upper about 0.08 to 0.16 down, the lower about
+// 0.16 to 0.24 down). Page 16 shows the same cards and should use these. heading is the baseline of MOST ECONOMISTS
+// AGREE: the tops of its letters about 0.061 down, below a phone app's top bar and inside the checker's title area
+// (at 116 they were 0.047 down; round 4 of log 34). The cards are a little shorter (140 pixels: two lines of words
+// and even margins) so the lower one still ends about 0.24 down, clear of the chimney lines.
+export const RULE_CARDS = { heading: 142, upper: [TEXT_LEFT, 158, TEXT_RIGHT - TEXT_LEFT, 140], lower: [TEXT_LEFT, 314, TEXT_RIGHT - TEXT_LEFT, 140], size: 46 };
 
 export async function build(kit) {
   const works = await buildWorks(kit, { folder: WORKS_IN_USE, views: ['w2', 'w3'], pictures: PICTURES });
@@ -53,20 +58,21 @@ export async function build(kit) {
   function draw2D(ctx, t) {
     topShade(ctx, 1);
     if (t < T.most) {
-      // carried over from page 4, exactly as it was there, until "spare"
-      drawQuestion(ctx, t, { questionAt: T.first - 30, guessAt: T.first - 30, until: T.spare + 0.3 });
-      buildWords(ctx, t, { parts: [{ text: 'NO SPARE', at: T.spare + 0.15 }], until: T.most, y: 172, size: 72, fadeOut: 0.05 });
+      // carried over from page 4, exactly as it was there, until "spare"; it has faded out (0.3 s) before NO SPARE
+      // comes in, so the two are never on screen together in the same place (round 3 saw "NO SPAREPENS TO PRICES?")
+      drawQuestion(ctx, t, { questionAt: T.first - 30, guessAt: T.first - 30, until: T.spare + 0.12 });
+      buildWords(ctx, t, { parts: [{ text: 'NO SPARE', at: T.spare + 0.15 }], until: T.most, y: 172, size: 72, fadeOut: 0 });
+      // → PRICES UP comes on "prices" with the climbing arrow (on "up" it was up only about 0.65 s before the cut)
+      const pricesAt = Math.min(T.prices, T.up - 0.35);
       buildWords(ctx, t, {
-        parts: [{ text: 'MORE MONEY', at: T.more }, { text: '+ SAME THINGS TO BUY', at: T.same }, { text: '→ PRICES UP', at: T.up, colour: INK.amber }],
-        until: T.most, y: 250, size: 50, fadeOut: 0.05,
+        parts: [{ text: 'MORE MONEY', at: T.more }, { text: '+ SAME THINGS TO BUY', at: T.same }, { text: '→ PRICES UP', at: pricesAt, colour: INK.amber }],
+        until: T.most, y: 250, size: 50, fadeOut: 0,
       });
       // the price arrow over No. 2's column climbs (prices go up), over the gable above the gate, clear of the No. 2
-      // board, toward the words. It starts climbing on "prices" ("and prices go up") and reaches its top on "up", when
-      // → PRICES UP comes: the cut to both factories comes on "Most", only about 0.7 s after "up" (estimated timing),
-      // and drawn on "up" alone the arrow was on screen for barely half a second
+      // board, toward the words. It starts climbing on "prices" ("and prices go up") and reaches its top on "up": the
+      // cut to both factories comes on "Most", only about 0.7 s after "up" (estimated timing)
       const column = works.screen('no-2-gate');
-      const climbFrom = Math.min(T.prices, T.up - 0.35);
-      if (column) priceArrow(ctx, t, { at: climbFrom, until: T.most, drawFor: T.up - climbFrom, from: { x: Math.max(100, column.x - 330), y: 620 }, length: 430, angle: 28, word: 'PRICES' });
+      if (column) priceArrow(ctx, t, { at: pricesAt, until: T.most, fadeOut: 0, drawFor: T.up - pricesAt, from: { x: Math.max(100, column.x - 330), y: 620 }, length: 430, angle: 28, word: 'PRICES' });
       return true;
     }
     // 5b: the tags over the two columns, then the rule

@@ -19,9 +19,12 @@ export const INK = {
 const easeOut = (x) => 1 - (1 - clamp01(x)) ** 3;
 const easeInOut = (x) => { x = clamp01(x); return x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2; };
 
-// how visible something is at t: fades in over `fadeIn` from `at`, out over `fadeOut` before `until`
+// how visible something is at t: fades in over `fadeIn` from `at`, out over `fadeOut` before `until`.
+// fadeOut 0: no fade-out, whole until `until` and gone from `until` on (for words that end on a cut, so the cut is
+// one clean step: log 34, round 4).
 export function presence(t, at, until = Infinity, fadeIn = 0.3, fadeOut = 0.35) {
   if (t < at || t > until) return 0;
+  if (fadeOut <= 0) return t < until ? clamp01((t - at) / fadeIn) : 0;
   return Math.min(clamp01((t - at) / fadeIn), clamp01((until - t) / fadeOut));
 }
 
@@ -104,8 +107,9 @@ export function counter(ctx, t, { at, until = at + 4, duration = 1.2, from = 0, 
 // A label with a thin line pointing at a spot in the picture (`point` in pixels, e.g. from
 // kit.toScreen). The line draws out from the spot, then the words appear at its end.
 // plate: true draws a dark rounded plate behind the words, so they read over pale walls or sky.
-export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, plate = false }) {
-  const a = presence(t, at, until, 0.01, 0.3);
+// fadeOut: seconds it fades before `until` (0: it ends exactly at `until`, as on a cut).
+export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, plate = false, fadeOut = 0.3 }) {
+  const a = presence(t, at, until, 0.01, fadeOut);
   if (a <= 0 || !point || point.behind) return false;
   const age = t - at;
   const k = easeOut(age / 0.45);
@@ -478,9 +482,9 @@ export function nameTag(ctx, t, { at, until = Infinity, text, x, y, size = 34, a
 
 // A price arrow drawn over the picture: it draws itself from `from` ({ x, y } in pixels) for `length` pixels at
 // `angle` degrees (0 = level, 30 = climbing) over `drawFor` seconds, with a head, and an optional small word at its
-// tail (PRICES).
-export function priceArrow(ctx, t, { at, until = Infinity, from, length = 300, angle = 0, drawFor = 0.9, colour = INK.amber, width = 10, word = null, size = 30 }) {
-  const a = presence(t, at, until, 0.01, 0.3);
+// tail (PRICES). fadeOut: seconds it fades before `until` (0: it ends exactly at `until`, as on a cut).
+export function priceArrow(ctx, t, { at, until = Infinity, from, length = 300, angle = 0, drawFor = 0.9, colour = INK.amber, width = 10, word = null, size = 30, fadeOut = 0.3 }) {
+  const a = presence(t, at, until, 0.01, fadeOut);
   if (a <= 0 || !from) return false;
   const k = easeInOut((t - at) / drawFor);
   const radians = -angle * Math.PI / 180;

@@ -13,7 +13,7 @@
 #   - eight mill chimneys, 36 to 55 m, round and tapering, sooted at the top, with corbelled caps
 #     (markers far-town-chimney-top-1 to -8 at their tops, for smoke)
 #   - a gasholder: an iron bell 34 m across inside a guide frame of sixteen columns with girders and
-#     cross bracing, 36 m high, standing on a hill on the left
+#     cross bracing, 36 m high, standing on a hill far out to the left, outside every Works view
 #   - a church with a stone tower and a broach spire, 58 m to its tip, on a hill on the right
 #   - a dark cinder ground under it all, and the two hills (each a broad mound 38 m high with a flat top,
 #     bare of houses)
@@ -21,10 +21,12 @@
 # roofs and the lane's own houses hide everything in the town lower than about 4.6 m + 0.175 x its distance
 # from the camera (the roofs' line is about 0.35 of the way down the frame), so on flat ground W3 showed only
 # the top of the gasholder's frame, cut by the frame's left edge and sitting on the left terrace's roof line
-# like a fence on the roof, and the spire's tip at the right edge (round 2's check). So the gasholder and the
-# church stand on the two hills, which are low enough to stay hidden behind the roofs themselves: in W3 the
-# gasholder's frame and the dome of its bell show whole above the roofs at the upper left, sky round them,
-# well inside the frame and clear of No. 1's chimney, and the church's tower top and spire at the upper right.
+# like a fence on the roof, and the spire's tip at the right edge (round 2's check). So the church stands on a
+# hill, low enough to stay hidden behind the roofs itself: in W3 the church's tower top and spire show at the
+# upper right. Round 3 raised the gasholder on a hill at W3's upper left too, but there it stood whole, big and
+# dark beside No. 1's chimney, larger than it, and read as a second "tank" on No. 1's side (the one-glance
+# difference is that only No. 2 has a tank). So it now stands on its hill far out to the left, outside W3's
+# plate (and every other view): No. 1's round chimney is the biggest thing on the left.
 # No far chimney stands where W3 would show it over a factory's roof (it could be counted as one of the
 # factories' own: No. 1 has one, No. 2 has two).
 # No lettering, no clock faces, no figures, no flags.
@@ -268,9 +270,9 @@ def main():
         town_mill(stuff, groups['mills'], name, x, y, width, depth, storeys, turn)
     for number, (x, y, height) in enumerate(CHIMNEYS, start=1):
         town_chimney(stuff, groups['chimneys'], number, x, y, height)
-    # the gasholder on its hill at the upper left of W3 (about 0.03 to 0.26 across), clear of No. 1's chimney
-    # (0.36 to 0.40 across); the church on its hill at the upper right (about 0.93 to 0.97 across), clear of
-    # No. 2's water tank (to 0.87 across)
+    # the gasholder on its hill far out to the left, outside W3's plate (its frame's right edge about 0.4 of the
+    # frame's width beyond the plate's left edge); the church on its hill at the upper right (about 0.93 to 0.97
+    # across), clear of No. 2's water tank (to 0.87 across)
     for name, builder in (('gasholder', gasholder), ('church', church)):
         x, y, height, _ = HILLS[name]
         part = builder(stuff, groups[name], x, y)
@@ -302,14 +304,15 @@ ROOT = None
 # the two hills: (x, y, height, radius of the flat top), and how far out each one's foot reaches. Each is
 # placed for W3 (camera on the lane's centre line 30 m in front of the wall, eye 4.6 m, the film's lens: the
 # frame's sides at x = +-0.327 x the distance from the camera; a thing h metres high d metres away stands
-# 0.5 - (h - 4.6) / (1.164 d) of the way down): the gasholder's frame top 0.29 down and its bell's dome
-# 0.32 down, above the roofs' line at about 0.35; the church's tower top 0.33 down and its spire's tip 0.25
-# down. The hills' own tops (38 m) stay 0.39 to 0.40 down, hidden behind the roofs.
-HILLS = {'gasholder': (-65.0, 250.0, 38.0, 26.0), 'church': (91.5, 280.0, 38.0, 30.0)}
+# 0.5 - (h - 4.6) / (1.164 d) of the way down): the church's tower top 0.33 down and its spire's tip 0.25
+# down; its hill's own top (38 m) stays about 0.4 down, hidden behind the roofs. The gasholder's hill stands
+# 160 m out to the left (W3's plate sees out to about 0.35 x the distance, 90 m there).
+HILLS = {'gasholder': (-160.0, 250.0, 38.0, 26.0), 'church': (91.5, 280.0, 38.0, 30.0)}
 HILL_FOOT_RADIUS = {'gasholder': 92.0, 'church': 96.0}
 # the town's chimneys stand outside the middle of W3's frame, so W3 never shows a far chimney rising over
 # a factory's roof where it could be counted as a third chimney of No. 2 or a second of No. 1, and off the
 # hills (the front views show them all)
-CHIMNEYS = ((-118.0, 160.0, 50.0), (-58.0, 128.0, 42.0), (-165.0, 250.0, 48.0), (165.0, 350.0, 52.0),
-            (52.0, 112.0, 40.0), (180.0, 225.0, 52.0), (160.0, 196.0, 44.0), (-170.0, 330.0, 36.0))
+# (the third and the eighth moved off the gasholder's new hill in round 4)
+CHIMNEYS = ((-118.0, 160.0, 50.0), (-58.0, 128.0, 42.0), (-120.0, 380.0, 48.0), (165.0, 350.0, 52.0),
+            (52.0, 112.0, 40.0), (180.0, 225.0, 52.0), (160.0, 196.0, 44.0), (-215.0, 390.0, 36.0))
 main()

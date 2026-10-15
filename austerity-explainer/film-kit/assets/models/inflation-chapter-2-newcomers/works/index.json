@@ -34,8 +34,8 @@
       "height": 42.0
      },
      {
-      "x": -165.0,
-      "y": 250.0,
+      "x": -120.0,
+      "y": 380.0,
       "height": 48.0
      },
      {
@@ -59,13 +59,13 @@
       "height": 44.0
      },
      {
-      "x": -170.0,
-      "y": 330.0,
+      "x": -215.0,
+      "y": 390.0,
       "height": 36.0
      }
     ],
     "gasholder": {
-     "x": -65.0,
+     "x": -160.0,
      "y": 250.0,
      "diameter": 34.0,
      "frame_height": 36.0,
@@ -79,7 +79,7 @@
     },
     "hills": {
      "gasholder": {
-      "x": -65.0,
+      "x": -160.0,
       "y": 250.0,
       "height": 38.0,
       "flat_top_radius": 26.0,
@@ -93,10 +93,10 @@
       "foot_radius": 96.0
      }
     },
-    "terrace_rows": 81
+    "terrace_rows": 80
    },
-   "objects": 111,
-   "triangles": 81412,
+   "objects": 110,
+   "triangles": 78860,
    "glb_megabytes": 6.7,
    "markers": [
     "far-town-chimney-top-1",
@@ -125,7 +125,7 @@
    "file": "no-1-quiet-factory.glb",
    "blend": "no-1-quiet-factory.blend",
    "root": "no-1-quiet-factory",
-   "description": "No. 1, the quiet factory (always on the left): dark red-brown brick, one tall round chimney, a four-bay sawtooth roof, no water tank, a two-storey mill front with upper windows, cart doors shut. Saved with every window dark.",
+   "description": "No. 1, the quiet factory (always on the left): dark red-brown brick, one tall round chimney, a four-bay sawtooth roof, no water tank, a two-storey mill front with upper windows, cart doors shut on a room of power looms. Saved with every window dark.",
    "size_metres": {
     "from": [
      -25.0,
@@ -175,12 +175,14 @@
     "cart_doorway": {
      "centre_x": -3.4,
      "width": 3.0,
-     "height": 3.8
+     "height": 3.8,
+     "room_depth": 7.0,
+     "machines": "two power looms belted to a line shaft (no-1-doorway-machines)"
     }
    },
-   "objects": 97,
-   "triangles": 6306,
-   "glb_megabytes": 6.1,
+   "objects": 98,
+   "triangles": 7458,
+   "glb_megabytes": 6.2,
    "markers": [
     "no-1-chimney-top",
     "no-1-doorway-foot"
@@ -212,7 +214,7 @@
    "file": "no-2-flat-out-factory.glb",
    "blend": "no-2-flat-out-factory.blend",
    "root": "no-2-flat-out-factory",
-   "description": "No. 2, the flat-out factory (always on the right): pale buff-grey brick, two square chimneys of a paler buff (sooted only just under the cap, their faces toward the lane and their sides lit warm by the yard), a water tank on a steel trestle, long pitched shed roofs with glazed lanterns, a two-storey mill front with upper windows, cart doors open on a lit works, a taking-in door with a hoist beam. Saved with every window lit.",
+   "description": "No. 2, the flat-out factory (always on the right): pale buff-grey brick, two square chimneys of a paler buff (sooted only just under the cap, their faces toward the lane and their sides lit warm by the yard), a water tank on a steel trestle, long pitched shed roofs with glazed lanterns, a two-storey mill front with upper windows, cart doors open on a lit works with a lathe, a power press with a spoked flywheel and a pillar drill, a row of three tall windows in the gable over the gate. Saved with every window lit.",
    "size_metres": {
     "from": [
      -0.05,
@@ -285,22 +287,25 @@
     "cart_doorway": {
      "centre_x": 2.9,
      "width": 2.8,
-     "height": 3.8
+     "height": 3.8,
+     "room_depth": 7.0,
+     "machines": "a lathe, a power press with a spoked flywheel, a pillar drill, belted to a line shaft (no-2-doorway-machines)"
     },
-    "taking_in_door": {
+    "gable_windows": {
      "x": [
-      2.2,
-      3.6
+      1.275,
+      4.525
      ],
      "z": [
-      4.45,
-      7.0
-     ]
+      4.6,
+      7.2
+     ],
+     "count": 3
     }
    },
-   "objects": 110,
-   "triangles": 6582,
-   "glb_megabytes": 7.0,
+   "objects": 114,
+   "triangles": 8380,
+   "glb_megabytes": 7.2,
    "markers": [
     "no-2-chimney-a-top",
     "no-2-chimney-b-top",
@@ -309,13 +314,14 @@
    ],
    "glass_pieces": {
     "doorway": 1,
-    "step 1": 26,
+    "step 1": 27,
     "step 2": 27,
-    "step 3": 27
+    "step 3": 29
    },
    "glass_materials": [
     "no-2-doorway-inside-lit",
     "no-2-lantern-light-lit",
+    "no-2-mill-window-narrow-lit",
     "no-2-mill-window-wide-lit"
    ],
    "lettering": "none (no signs, no lettering, no figures)",
