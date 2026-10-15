@@ -31,6 +31,7 @@ import { glow, Flames, Sparks, paintedSkyColour, contactShadow, groundUnder, fac
 
 const SET = '/assets/models/pit-village';
 const VIEW = new URLSearchParams(location.search).get('view') ?? 'move';
+const HELD = new URLSearchParams(location.search).get('held') !== '0';
 // the near props, painted out of the behind painting (names as exported, before Blender's .001)
 const NEAR_PROPS = ['brazier', 'kitchen-chair', 'hurricane-lantern', 'lantern_flame', 'wooden-pail', 'notice-on-board', 'notice-board-post', 'gas-lamp-post'];
 const NEAR = 12;   // metres from the projector: further copies of the same props stay in the behind painting
@@ -134,13 +135,18 @@ const page = {
       return shadow;
     });
 
-    // the fire: flames on the coals, a flickering glow, sparks, smoke; the lantern's small glow
+    // the fire: flames on the coals, a flickering glow, sparks, smoke; the lantern's small glow (all redrawn every
+    // frame; the set is drawn once while the camera holds, log 34)
+    const effectsDone = kit.movingFromHere();
     const fireGlow = glow(0xff9a40, 1.3, 0.38); fireGlow.position.copy(brazierTop); kit.scene.add(fireGlow);
     const flames = new Flames(kit.scene, coals);
     const sparks = new Sparks(kit.scene, coals.clone().add(new THREE.Vector3(0, 0.08, 0)));
     const lanternGlow = glow(0xffb060, 0.32, 0.5); lanternGlow.position.copy(lanternFlame); kit.scene.add(lanternGlow);
     const brazierSmoke = new Smoke(kit.scene, { count: 14, life: 3.6, seed: 21, colour: [150, 146, 140] });
     for (const puff of brazierSmoke.puffs) puff.sprite.material.color.setRGB(0.5, 0.48, 0.46);
+    effectsDone();
+    // the notice and its board wear their own surfaces, lit by the flickering fire: redrawn every frame too
+    kit.moving(signs.children.filter((root) => root.name.startsWith('notice-on-board') || root.name.startsWith('notice-board-post')));
 
     // the slide: from the plate's own place (the frame is the middle of the painting, which is drawn a
     // little wider than the film's lens) toward the notice, facing the same way throughout
@@ -169,7 +175,9 @@ const page = {
       for (const shadow of shadows) shadow.material.opacity = 0.55 * smooth((t - T.move) / 0.8);
       brazierSmoke.set({ t, origin: brazierTop.clone().add(new THREE.Vector3(0, 0.35, 0)).toArray(), scale: 0.75, wind: 0.9 });
       const fade = Math.max(1 - clamp01(t / 1.0), smooth((t - T.end) / 1.0));
-      return { camera: camera(t), look: { exposure: 1.0, aperture: 4.0, maxBlur: 2, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.3, fade } };
+      // the camera holds before the slide and after it: the set is drawn once for each (?held=0 turns this off, for comparing)
+      const held = HELD && (t < T.move || t >= T.arrive || VIEW !== 'move');
+      return { camera: camera(t), still: held, look: { exposure: 1.0, aperture: 4.0, maxBlur: 2, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.3, fade } };
     }
     function draw2D(ctx, t) {
       // titles in the dim sky, top left, clear of the gas lamp (rule 12); a soft dark band behind the first as

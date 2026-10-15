@@ -17,7 +17,7 @@
 // for every frame. A page returns { pose(t) -> { camera, look }, draw2D(context, t) }. The full
 // reference is "08 Cinema pages - how a page file works.md" in the kit folder.
 
-import { THREE, loadTexture, loadPixels, canvasTexture, renderer, FRAME_WIDTH, FRAME_HEIGHT } from '../stage/cinema-stage.js';
+import { THREE, loadTexture, loadPixels, canvasTexture, renderer, FRAME_WIDTH, FRAME_HEIGHT, MOVING_LAYER } from '../stage/cinema-stage.js';
 import { RoomEnvironment } from '/paper-film/node_modules/three/examples/jsm/environments/RoomEnvironment.js';
 import { spring, clamp01, easeInOut } from './paper-kit.js';
 
@@ -113,6 +113,21 @@ export class CinemaKit {
   }
 
   // a small warm light (a lamp, a glowing window), not casting shadows
+  // Marks things that change from frame to frame while the camera holds (flames, smoke, sparks, glows, anything
+  // lit by a flickering light that matters), so a held shot redraws only them (cinema-stage.js, MOVING_LAYER).
+  // Everything not marked is the set, drawn once per held view. Returns its first argument.
+  moving(...objects) {
+    for (const object of objects.flat()) object?.traverse?.((o) => o.layers.set(MOVING_LAYER));
+    return objects[0];
+  }
+
+  // Everything added to the scene by build(), from now until the returned function is called, is marked moving:
+  //   const done = kit.movingFromHere(); new Flames(kit.scene, at); ...; done();
+  movingFromHere() {
+    const before = new Set(this.scene.children);
+    return () => this.moving(this.scene.children.filter((o) => !before.has(o)));
+  }
+
   glow(position, { colour = 0xffb25e, strength = 4, reach = 6 } = {}) {
     const light = new THREE.PointLight(colour, strength, reach, 2);
     light.position.copy(vector(position));

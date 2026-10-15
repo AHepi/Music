@@ -46,12 +46,72 @@ function makeTarget(width, height, { depth = false, samples = 0, type = THREE.Ha
   return target;
 }
 const W = FRAME_WIDTH, H = FRAME_HEIGHT;
-const sceneTarget = makeTarget(W, H, { depth: true, samples: 4 });
+// edge smoothing (multisampling): 4 samples a pixel by default; ?samples=0 turns it off (about how much faster: see
+// tools/profile_frame.mjs); a filming run can set it with PAPER_FILM_QUERY=samples=N
+const SCENE_SAMPLES = Number(new URLSearchParams(location.search).get('samples') ?? 4);
+const sceneTarget = makeTarget(W, H, { depth: true, samples: SCENE_SAMPLES });
 const blurTarget = makeTarget(W / 2, H / 2);
 const focusTarget = makeTarget(W, H);
 const brightTarget = makeTarget(W / 4, H / 4);
 const glowTargets = [makeTarget(W / 4, H / 4), makeTarget(W / 4, H / 4), makeTarget(W / 8, H / 8), makeTarget(W / 8, H / 8)];
 export const pageTargets = [makeTarget(W, H, { type: THREE.UnsignedByteType }), makeTarget(W, H, { type: THREE.UnsignedByteType })];
+
+// ------------------------------------------------------------------- held shots: the set drawn once
+// Drawing a painted set is the slow part of a frame in the software renderer (log 34: 3.1 of 3.6 seconds a frame
+// on the notice corner; plain grey surfaces take 0.2). While a page's camera holds still, its set looks the same
+// every frame, so it is drawn once into a held picture (with its distances), and each frame only the moving
+// things are drawn over a copy of it. A page marks its moving things with kit.moving(...) (they live on
+// MOVING_LAYER; everything else is the set) and asks for this by returning `still: true` (or any value that
+// changes when the set itself changes) from pose(t); the chapter adds the camera's place to the key, so a
+// moving camera always draws everything. Two held pictures are kept, for the two pages of a page turn.
+export const MOVING_LAYER = 1;
+const heldPictures = [0, 1].map(() => ({ key: null, target: makeTarget(W, H, { depth: true, samples: SCENE_SAMPLES }), used: 0 }));
+let heldClock = 0;
+const heldCopyMaterial = new THREE.ShaderMaterial({
+  vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }`,
+  fragmentShader: `varying vec2 vUv; uniform sampler2D colourMap; uniform sampler2D depthMap;
+    void main() { gl_FragColor = texture2D(colourMap, vUv); gl_FragDepth = texture2D(depthMap, vUv).r; }`,
+  uniforms: { colourMap: { value: null }, depthMap: { value: null } },
+  depthTest: true, depthWrite: true, depthFunc: THREE.AlwaysDepth,
+});
+function drawSet(scene, camera, still) {
+  camera.layers.enable(0);
+  camera.layers.enable(MOVING_LAYER);
+  if (still === null || still === undefined) {
+    renderer.setRenderTarget(sceneTarget);
+    renderer.render(scene, camera);
+    return;
+  }
+  heldClock++;
+  let held = heldPictures.find((h) => h.key === still);
+  if (!held) {
+    held = heldPictures.reduce((a, b) => (a.used <= b.used ? a : b));
+    // the lights must reach the moving things too
+    scene.traverse((o) => { if (o.isLight) o.layers.enable(MOVING_LAYER); });
+    camera.layers.set(0);
+    renderer.setRenderTarget(held.target);
+    renderer.render(scene, camera);
+    held.key = still;
+  }
+  held.used = heldClock;
+  // the held set (colour and distances), then the moving things over it
+  heldCopyMaterial.uniforms.colourMap.value = held.target.texture;
+  heldCopyMaterial.uniforms.depthMap.value = held.target.depthTexture;
+  passQuad.material = heldCopyMaterial;
+  renderer.setRenderTarget(sceneTarget);
+  renderer.render(passScene, passCamera);
+  camera.layers.set(MOVING_LAYER);
+  const shadowsUpdate = renderer.shadowMap.autoUpdate;
+  renderer.shadowMap.autoUpdate = false;
+  const background = scene.background;
+  scene.background = null;
+  renderer.autoClear = false;
+  renderer.render(scene, camera);
+  renderer.autoClear = true;
+  scene.background = background;
+  renderer.shadowMap.autoUpdate = shadowsUpdate;
+  camera.layers.enable(0);
+}
 
 // ----------------------------------------------------------------------------- full-frame passes
 const passCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -226,8 +286,7 @@ overlayTexture.minFilter = THREE.LinearFilter;
 export function drawPage(shot, target) {
   const look = { ...DEFAULT_LOOK, ...(shot.look ?? {}) };
   const { scene, camera } = shot;
-  renderer.setRenderTarget(sceneTarget);
-  renderer.render(scene, camera);
+  drawSet(scene, camera, shot.still);
 
   const depthUniforms = (material) => {
     material.uniforms.depthMap.value = sceneTarget.depthTexture;

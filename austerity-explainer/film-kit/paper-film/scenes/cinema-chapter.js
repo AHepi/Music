@@ -38,8 +38,16 @@ export async function buildCinemaChapter({ timelineUrl, piecesFolder, reliefFold
     kit.t = t;
     const state = pages[i].pose(t) ?? {};
     const focusDistance = state.camera ? kit.aim(state.camera, t) : 10;
+    // a held shot (the page returns still: true, or a value that changes when its set changes): its set is drawn
+    // once and only its moving things each frame (cinema-stage.js); the camera's place is part of the key, so the
+    // set is drawn again whenever the camera moves
+    let still = null;
+    if (state.still) {
+      const c = kit.camera, r = (x) => x.toFixed(5);
+      still = [i, state.still === true ? '' : state.still, ...c.position.toArray().map(r), ...c.quaternion.toArray().map(r), r(c.fov)].join('|');
+    }
     drawPage({
-      scene: kit.scene, camera: kit.camera, focusDistance, look: state.look, time: t,
+      scene: kit.scene, camera: kit.camera, focusDistance, look: state.look, time: t, still,
       drawOverlay: pages[i].draw2D ? (context) => pages[i].draw2D(context, t, kit) : null,
     }, target);
   };
