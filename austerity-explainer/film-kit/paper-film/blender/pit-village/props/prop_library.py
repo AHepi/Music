@@ -3,7 +3,8 @@
 # ground (lowest point at height 0, centred over the origin), writing the .glb (glTF, Y-up for
 # three.js) and adding the prop's line to index.json.
 #
-# Every prop .glb has one root empty named after the prop; all its parts hang under it.
+# Every prop .glb has one root empty named after the prop; all its parts hang under it (stand_on_ground
+# stops if a part already holds the prop's name, which would make Blender call the root "<prop>.001").
 #
 # The finished props go to the pit village's library unless a script chooses another with
 # use_library (chapter 2's props go to assets/models/inflation-chapter-2-newcomers/props, with their
@@ -111,6 +112,10 @@ def stand_on_ground(prop_name, keep_names=()):
     low, high = bounds()
     shift = Vector((-(low.x + high.x) / 2, -(low.y + high.y) / 2, -low.z))
     root = bpy.data.objects.new(prop_name, None)
+    if root.name != prop_name:
+        # Blender gave it "<prop>.001": a part already holds the prop's own name (round 1 found eight such props)
+        raise SystemExit(f'stand_on_ground: a part is already called "{prop_name}", so the root would be "{root.name}". Every prop '
+                         f'.glb has one root named after the prop: give that part its own name (for example "{prop_name}-body").')
     bpy.context.scene.collection.objects.link(root)
     for o in mesh_objects():
         o.location += shift

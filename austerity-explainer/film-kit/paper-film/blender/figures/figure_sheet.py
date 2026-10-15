@@ -2,10 +2,13 @@
 # before they go into a shot. It loads every figure's .glb (so it checks what was saved, not what was
 # built), stands them in a row a little apart and draws the row from behind, from the side and from the
 # front, lit like the pit village at dusk (a cool sky, a warm fire low in front of them, a pale lamp-lit
-# wall beyond them), and once more from behind as black shapes on the lit wall (their silhouettes).
+# wall beyond them), once more from behind with a street lamp shining on their backs from high on the
+# camera's side (the light that showed round 1's heads as bald in the plate: a dark, shiny hair mirrored
+# the lamps), and once more from behind as black shapes on the lit wall (their silhouettes).
 # The camera is 7 m from the row (the distance of the waiting men in the plan) with a narrow lens, so each
 # figure is drawn about as many pixels tall as it is in a plate at 7 m.
-# Writes sheet-back.png, sheet-side.png, sheet-front.png and sheet-silhouettes.png into OUT_FOLDER.
+# Writes sheet-back.png, sheet-back-lamplit.png, sheet-side.png, sheet-front.png and sheet-silhouettes.png
+# into OUT_FOLDER.
 # Run (EEVEE needs a virtual screen):
 #   DISPLAY=:96 blender -b --python figure_sheet.py -- OUT_FOLDER [NAME ...]
 
@@ -15,6 +18,7 @@ import os
 import sys
 
 import bpy
+from mathutils import Vector
 
 FIGURES_FOLDER = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..',
                                               'assets', 'models', 'inflation-chapter-2-newcomers', 'figures'))
@@ -111,6 +115,16 @@ def shoot(file_name, location, rotation):
 eye = 1.0   # the middle of the frame (square-on drawing: the height only frames the row)
 look_down = 0.0   # square on
 shoot('sheet-back.png', (0, -CAMERA_DISTANCE, eye), (math.radians(90 - look_down), 0, 0))
+# from behind again, a gas lamp's light on their backs: high on the camera's side and a little to the right, as the
+# street lamps and the kerb lamp at the people test shine on the waiting men (a light the size of a lamp's glass)
+# (drawn as a low sun, so every figure in the row gets the same light)
+bpy.ops.object.light_add(type='SUN', location=(0, -3.0, 3.4))
+street_lamp = bpy.context.active_object
+street_lamp.data.energy, street_lamp.data.color, street_lamp.data.angle = 1.6, (1.0, 0.85, 0.65), math.radians(3)
+street_lamp.rotation_mode = 'QUATERNION'
+street_lamp.rotation_quaternion = Vector((-0.35, 1.0, -0.7)).to_track_quat('-Z', 'Y')   # the way its light travels
+shoot('sheet-back-lamplit.png', (0, -CAMERA_DISTANCE, eye), (math.radians(90 - look_down), 0, 0))
+bpy.data.objects.remove(street_lamp)
 # from the side, each figure turned a quarter round on its own spot
 for root in figures:
     root.rotation_euler.z = math.radians(90)

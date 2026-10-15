@@ -25,7 +25,7 @@ import bpy
 from mathutils import Euler, Vector
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from set_dressing import ground_height, place_prop, wooden_post, brazier_fire, render, export_for_film   # noqa: E402
+from set_dressing import SET_FOLDER, ground_height, place_prop, wooden_post, brazier_fire, render, export_for_film   # noqa: E402
 
 arguments = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 def option(name, default=None):
@@ -105,7 +105,7 @@ if option('--preview'):
 if option('--plate'):
     render(option('--plate'), 1536, 2730, int(option('--samples', '48')))
 if '--export' in arguments:
-    export_for_film(camera, 'lockout', PLATE_FOV_DEGREES, 'assemble_lockout.py')
+    export_for_film(camera, 'lockout', PLATE_FOV_DEGREES, 'assemble_lockout.py', folder=SET_FOLDER)
 if option('--save'):
     bpy.ops.wm.save_as_mainfile(filepath=option('--save'), relative_remap=True)
 print('assemble_lockout: done')

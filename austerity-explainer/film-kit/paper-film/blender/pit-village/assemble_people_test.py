@@ -3,11 +3,14 @@
 # corner, at dusk, with the figures built by paper-film/blender/figures/build_figures.py:
 #   - four men from behind, 6 to 9 m from the camera, round a brazier burning on the right-hand pavement:
 #     one stooped to warm his hands over it, one with his arms folded, one with a hand raised on a lamp post
-#     (standing in for a gate bar), one leaning his shoulder on a house wall
+#     (standing in for a gate bar), one leaning his shoulder on a house wall. The lamp post and its man stand
+#     back from the kerb, right of the brazier as the camera sees it: on the kerb line, straight behind the
+#     brazier, the film's live smoke drifted over him and he came out a washed-out grey ghost (round 1)
 #   - one man facing the camera at about 7 m, standing in the road with his hands in his pockets, against
 #     the lamp-lit road behind him
 #   - six small walkers 40 to 60 m up the street, backs to us, men and women, some with a bundle or a bag,
-#     walking toward the colliery's shut gates
+#     walking toward the colliery's shut gates, each turned 25 to 35 degrees across the street (straight up
+#     it, their legs hid each other and they didn't seem to be walking)
 # The kept notice corner is not touched: this script writes only under the name people-test, into
 # assets/models/inflation-chapter-2-newcomers/people-test/ (its own export step, not set_dressing's).
 # The camera holds still (no slide): it stands on the right-hand pavement at a standing person's eye height,
@@ -26,6 +29,14 @@
 # Run (EEVEE needs a virtual screen):
 #   Xvfb :96 -screen 0 1920x1080x24 &
 #   DISPLAY=:96 blender -b assets/models/pit-village/street.blend --python paper-film/blender/pit-village/assemble_people_test.py -- --preview out.png
+# The plates, the export and the men's outlines for the plate's camera in one run (about 30 minutes), then the state
+# picture the page cuts to (the plate, with the helper plate where the men and their light and shadows were):
+#   DISPLAY=:96 blender -b assets/models/pit-village/street.blend --python paper-film/blender/pit-village/assemble_people_test.py \
+#       --python paper-film/blender/shot_facts.py -- --plate PLATE.png --helper-plate HELPER.png --export \
+#       --check examples/people-test/shot-check.json --facts PLATE_FACTS --fov 64.4
+#   (save the two plates as people-test-plate.jpg and people-test-helper-plate.jpg in the people-test folder)
+#   python3 -I paper-film/tools/make_state_picture.py PLATE.jpg HELPER.jpg PLATE.jpg HELPER.jpg people-test-state.jpg \
+#       people-test-state-mask.png --outlines PLATE_FACTS "man stooped" "man arms folded" ... "walker 6"
 # Units are metres; Blender is z-up, the street runs along +y and rises 4 degrees.
 
 import json
@@ -70,7 +81,8 @@ COAL_TOP = 0.78                # a little higher than at the notice corner: from
 FIRE_LIGHT_ABOVE_COALS = 0.55
 FIRE_WATTS = 90
 ROAD_GLOW_WATTS = 600          # the fire's warm patch on the road behind the man who faces us
-LAMP_POST = Vector((2.95, 24.2))   # a gas lamp at the kerb: the bar the fourth man's raised hand holds
+LAMP_POST = Vector((3.40, 24.3))   # a gas lamp on the pavement, 0.7 m in from the kerb: the bar the fourth man's raised
+                                   # hand holds. At the kerb (2.95, 24.2) its man stood in the brazier's smoke
 SKY_STRENGTH = 1.96
 
 # the people: (figure file, holder name, (x, y) of its feet, turn in degrees; 0 faces up the street, its back to us)
@@ -88,13 +100,14 @@ WAITING = [
     ('worker-hands-in-pockets', 'figure-facing', (1.15, 21.7), 180),   # further out in the road, facing us
 ]
 WALKERS = [
-    # spread so that, from the camera, none stands behind a near man's head or the lamp post
-    ('walker-man-coat', 'figure-walker-1', (-2.33, 57.0), -4),
-    ('walker-woman-shawl', 'figure-walker-2', (-1.48, 59.5), 6),
-    ('walker-man-bundle', 'figure-walker-3', (-0.54, 62.5), 3),
-    ('walker-woman-bundle', 'figure-walker-4', (2.85, 65.0), -5),
-    ('walker-man-bag', 'figure-walker-5', (-3.6, 68.0), 2),
-    ('walker-woman-hand-bundle', 'figure-walker-6', (3.78, 70.0), -8),
+    # spread so that, from the camera, none stands behind a near man's head or the lamp post; each turned 25 to 35
+    # degrees across the street toward the gates (+ turns to its left), so its stride shows from behind
+    ('walker-man-coat', 'figure-walker-1', (-2.33, 57.0), -30),
+    ('walker-woman-shawl', 'figure-walker-2', (-1.48, 59.5), -25),
+    ('walker-man-bundle', 'figure-walker-3', (-0.54, 62.5), 35),
+    ('walker-woman-bundle', 'figure-walker-4', (2.85, 65.0), 30),
+    ('walker-man-bag', 'figure-walker-5', (-3.6, 68.0), -35),
+    ('walker-woman-hand-bundle', 'figure-walker-6', (3.78, 70.0), 25),
 ]
 
 

@@ -8,8 +8,9 @@
 #   - set_ground_fallback(slope_degrees, level_from_y): the ground assumed where a ray down finds
 #     nothing (the pit village street's 4 degree rise, level from y = 76, unless changed; 0 for level)
 #   - place_prop(..., folder=...): stand a prop from another prop library (chapter 2's own)
-#   - export_for_film(..., folder=...): write the film's files somewhere other than the pit village
-#     folder (which holds the notice corner, the shot the user kept)
+#   - export_for_film(..., folder=...): the folder the film's files go into must always be given (there is
+#     no default), so a new set can never write beside the notice corner, the shot the user kept, by
+#     mistake; the pit village's own scripts pass folder=SET_FOLDER
 
 import json
 import math
@@ -221,11 +222,15 @@ def render(path, width, height, samples):
     bpy.ops.render.render(write_still=True)
 
 
-def export_for_film(camera, name, fov_degrees, script_name, folder=SET_FOLDER):
+def export_for_film(camera, name, fov_degrees, script_name, folder=None):
     """Writes the dressed set for the film engine: NAME-set.glb (everything the painting is shone onto),
     NAME-signs.glb (the 'signs' collection: boards and notices, which keep their own lettering) and
-    NAME-camera.json (the plate camera, as the projector for projected-set.js), into folder (the pit
-    village's by default)."""
+    NAME-camera.json (the plate camera, as the projector for projected-set.js), into folder. The folder
+    must be given: the pit village's scripts pass folder=SET_FOLDER, every other set its own folder."""
+    if not folder:
+        raise SystemExit(f'export_for_film: no folder given for "{name}". Pass folder=... (the folder to write {name}-set.glb, '
+                         f'{name}-signs.glb and {name}-camera.json into). There is no default, so that a new set never writes '
+                         'beside the kept notice corner by mistake.')
     os.makedirs(folder, exist_ok=True)
     def select_collection(names):
         bpy.ops.object.select_all(action='DESELECT')

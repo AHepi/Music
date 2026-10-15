@@ -7,15 +7,22 @@
 // in the film stage before any money is spent.
 // Two versions (PAPER_FILM_QUERY=view=NAME):
 //   painted (default)  the figures are part of the plate ("painted people"). At 2.0 s a time cut swaps to the
-//                      helper plate (the same view drawn without them) and the figures leave the set: the men
-//                      are simply gone (plan: "the film makes a time cut to the state picture"). The held
-//                      shot is drawn once before the cut and once after (pose returns still: 'men there' or
-//                      'men gone', a value that changes at the cut).
+//                      STATE PICTURE and the figures leave the set: the men are simply gone (plan: "the film
+//                      makes a time cut to the state picture"). The state picture (people-test-state.jpg, made by
+//                      paper-film/tools/make_state_picture.py) is the plate everywhere except where the men were
+//                      and where the light and shadows they changed fall (found by comparing the plate with the
+//                      helper plate, joined with the men's outlines): there it is the helper plate (the same view
+//                      drawn without them). So at the cut only that area changes, as it will with two real
+//                      paintings; round 1 swapped the whole picture, which with two paintings would change every
+//                      brushstroke in the frame. The held shot is drawn once before the cut and once after (pose
+//                      returns still: 'men there' or 'men gone', a value that changes at the cut).
 //   silhouettes        the helper plate throughout, with the figures standing on it as their own dark surfaces
 //                      (never painted): near-black wool with a rim of light from the lit street behind them,
 //                      and a soft contact shadow under each.
 //   weights            the painted version's colours (orange wears the painting, blue its own surface).
-// Live on top in every version: the brazier's flames, sparks, smoke and glow (kit.moving: redrawn every frame).
+// Live on top in every version: the brazier's flames, sparks, smoke and glow (kit.moving: redrawn every frame). The
+// smoke drifts right; the man at the lamp post now stands clear of it, back from the kerb (in round 1 he stood
+// straight behind the brazier and came out a washed-out grey ghost).
 // Use: cd film-kit && node paper-film/tools/render-paper-film.mjs people-test OUT --stills 1 3
 //      PAPER_FILM_QUERY=view=silhouettes node paper-film/tools/render-paper-film.mjs people-test OUT.mp4
 import { buildCinemaChapter } from './cinema-chapter.js';
@@ -75,7 +82,8 @@ const page = {
 
     const [set, signs, figures, projector, shot] = await Promise.all([loadModel(`${FOLDER}/people-test-set.glb`), loadModel(`${FOLDER}/people-test-signs.glb`),
       loadModel(`${FOLDER}/people-test-figures.glb`), loadProjector(`${FOLDER}/people-test-camera.json`), fetch(`${FOLDER}/people-test-shot.json`).then((r) => r.json())]);
-    const [plate, helperPlate] = await Promise.all([loadTexture(`${FOLDER}/people-test-plate.jpg`), loadTexture(`${FOLDER}/people-test-helper-plate.jpg`)]);
+    const [plate, helperPlate, statePicture] = await Promise.all([loadTexture(`${FOLDER}/people-test-plate.jpg`),
+      loadTexture(`${FOLDER}/people-test-helper-plate.jpg`), loadTexture(`${FOLDER}/people-test-state.jpg`)]);
 
     // the painted version shines the plate onto the people too; the silhouettes stand outside the projection, so
     // the ground behind them still wears the plate where they hide it
@@ -121,15 +129,16 @@ const page = {
       }
     }
 
-    // the time cut (painted version): at the cut the men leave the set and the projection swaps to the helper plate,
-    // which has neither them nor their shadows; the distance map is drawn again without them, so the ground they
-    // stood on wears the helper plate. Depends only on t, so frames can be drawn in any order.
+    // the time cut (painted version): at the cut the men leave the set and the projection swaps to the state picture,
+    // which shows neither them nor their shadows and is the plate everywhere else; the distance map is drawn again
+    // without them, so the ground they stood on wears the state picture. Depends only on t, so frames can be drawn in
+    // any order.
     let menGone = false;
     const setMenGone = (gone) => {
       if (gone === menGone) return;
       menGone = gone;
       figures.visible = !gone;
-      projection.uniforms.projectionPainting.value = gone ? helperPlate : plate;
+      projection.setPainting(gone ? statePicture : plate);
       projection.refresh();
     };
 

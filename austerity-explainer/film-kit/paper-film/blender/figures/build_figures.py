@@ -3,9 +3,16 @@
 # in dull browns and greys, in five waiting poses (hands in pockets, arms folded, one hand raised on a
 # gate bar, stooped toward a brazier, leaning on a wall), and walking men and women, some with a bundle
 # or a bag, for far-off crowds. They are made to read as people from behind and in silhouette at 6 to
-# 9 m, not as mannequins or capsules: heads with ears and hair below the cap, necks, sloping shoulders,
-# arms that bend at the elbow, hands as simple mitts, coat skirts with folds, trouser legs, boots, and
-# each man his own height, build, stance and colours. No faces: they are seen from behind or dark.
+# 9 m, not as mannequins or capsules: heads with ears, necks, sloping shoulders, arms that bend at the
+# elbow, hands as simple mitts, coat skirts with folds, trouser legs, boots, and each man his own height,
+# build, stance and colours. No faces: they are seen from behind or dark.
+# Seen from behind, a head must never read as a bald scalp or a blank face (round 1's check, log 34):
+#   - dark, matt hair covers the back and sides of every head from under the cap down into the collar
+#     (a shiny dark hair caught the street lamps and came out paler than the coats, like a bald head)
+#   - every man seen from behind has his collar turned up or a muffler worn high at the back, so almost
+#     no neck shows; the caps sit a little low, their band just over the tops of the ears
+#   - the women are bare-headed, their hair pinned up, their shawls round their shoulders (a shawl over
+#     the head read as a nun's hood)
 #
 # How a figure is made:
 #   - its pose is a few numbers: how far the hips sit and the body leans, where each wrist and foot
@@ -15,7 +22,10 @@
 #     coat (its skirt hangs straight down round the legs, wide enough to hold them), tubes along the
 #     arms and legs, rings round the head for the cap, a D-shaped loft along each foot for the boots
 #   - the cloth wears a free Poly Haven surface (CC0: wool, tweed, corduroy, leather, knitted wool,
-#     linen), tinted dull and mottled a little so it reads as worn cloth, not plastic
+#     linen), tinted dull and mottled a little so it reads as worn cloth, not plastic. The mottling is
+#     seeded from the cloth's name (zlib.crc32, the same on every run), and each tinted picture's file
+#     name carries a fingerprint of its surface and colour, so a rebuild gives the same pictures and a
+#     changed colour makes a new one
 #   - all the pieces are joined into one mesh hung under one root empty named after the figure
 # Real sizes: men 1.68 to 1.78 m, women 1.55 to 1.60 m. Each figure stands on height 0 with its feet
 # about its origin and faces +y in Blender (so, turned 0, it shows its back to a camera looking up the
@@ -34,6 +44,7 @@ import math
 import os
 import sys
 import tempfile
+import zlib
 
 import bmesh
 import bpy
@@ -126,15 +137,18 @@ FIGURES = {
     },
     'worker-stooped-to-brazier': {
         'what': 'working man in a long charcoal wool coat with a muffler, flat cap, stooping forward with his '
-                'knees bent and both hands held out flat, palms down, to warm them over a brazier in front of him',
+                'knees bent and both hands held out flat, palms down, a hand\'s breadth above the rim of a brazier in '
+                'front of him, to warm them',
         'kind': 'man', 'height': 1.68, 'build': 1.0, 'coat': ('coat charcoal', 0.40), 'collar': 'down', 'muffler': 'muffler grey brown',
         'cap': 'cap grey tweed', 'trousers': 'trousers brown corduroy', 'seed': 4,
         'brazier_ahead': 0.62,   # the brazier's middle this far in front of his feet
+        # his hands hover over the fire, about 12 cm higher than in round 1 (they seemed to rest on the hot rim of the
+        # 0.86 m brazier drum); index.json gives the hands' lowest point, so a shot can check the gap to its rim
         'pose': {
             'pelvis': (0.0, -0.08, -0.07), 'lean': (26, 0, 0), 'chest': (14, 0, 0), 'head': (-22, 0, 0),
-            'right_arm': {'wrist': (0.11, 0.42, 1.00), 'elbow': (0.7, 0, -1), 'hand': 'warming', 'hand_direction': (0.05, 1, -0.1),
+            'right_arm': {'wrist': (0.11, 0.40, 1.13), 'elbow': (0.7, 0, -1), 'hand': 'warming', 'hand_direction': (0.05, 1, -0.1),
                           'hand_back': (0, 0, 1)},
-            'left_arm': {'wrist': (-0.12, 0.40, 1.02), 'elbow': (-0.7, 0, -1), 'hand': 'warming', 'hand_direction': (-0.05, 1, -0.1),
+            'left_arm': {'wrist': (-0.12, 0.38, 1.15), 'elbow': (-0.7, 0, -1), 'hand': 'warming', 'hand_direction': (-0.05, 1, -0.1),
                          'hand_back': (0, 0, 1)},
             'right_foot': {'at': (0.13, 0.08), 'turn': 10},
             'left_foot': {'at': (-0.12, 0.0), 'turn': 13},
@@ -195,9 +209,13 @@ FIGURES = {
             'left_foot': {'at': (-0.09, -0.28), 'turn': 8, 'pitch': 28},
         },
     },
+    # the women are bare-headed, their hair pinned up, their shawls round their shoulders: a shawl drawn over the head
+    # read as a nun's hood in round 1's plate. 'shawl_over_head': True still builds the hooded shawl, for a shot that
+    # needs one
     'walker-woman-shawl': {
-        'what': 'woman walking away in a long dark skirt with a grey knitted shawl over her head and shoulders, '
-                'holding it closed in front',
+        'what': 'woman walking away in a long dark skirt, bare-headed with her dark hair pinned up in a bun, a grey '
+                'knitted shawl round her shoulders, holding it closed in front',
+        'shawl_over_head': False, 'hair_style': 'bun',
         'kind': 'woman', 'height': 1.58, 'build': 1.0, 'skirt': 'skirt charcoal', 'bodice': 'coat charcoal', 'shawl': 'shawl grey',
         'seed': 9, 'walker': True,
         'pose': {
@@ -209,8 +227,9 @@ FIGURES = {
         },
     },
     'walker-woman-bundle': {
-        'what': 'woman walking away in a long brown skirt with a brown knitted shawl over her head and shoulders, '
-                'a tied cloth bundle on her left hip held in her left arm',
+        'what': 'woman walking away in a long brown skirt, bare-headed with her dark hair pinned in a low knot at the '
+                'nape, a brown knitted shawl round her shoulders, a tied cloth bundle on her left hip held in her left arm',
+        'shawl_over_head': False, 'hair_style': 'low knot',
         'kind': 'woman', 'height': 1.60, 'build': 1.02, 'skirt': 'skirt brown', 'bodice': 'coat brown', 'shawl': 'shawl brown',
         'seed': 10, 'walker': True,
         'bundle': {'at': (-0.24, 0.05, 0.98), 'size': (0.40, 0.30, 0.30), 'turn': -10, 'cloth': 'bundle linen'},
@@ -225,7 +244,7 @@ FIGURES = {
     'walker-woman-hand-bundle': {
         'what': 'small woman walking away in a long charcoal skirt with a brown-grey knitted shawl round her shoulders, '
                 'her hair pinned up in a bun, a tied cloth bundle hanging from her right hand by its knot',
-        'shawl_over_head': False,
+        'shawl_over_head': False, 'hair_style': 'bun',
         'kind': 'woman', 'height': 1.55, 'build': 0.97, 'skirt': 'skirt dark brown', 'bodice': 'coat charcoal', 'shawl': 'shawl grey brown',
         'seed': 11, 'walker': True,
         'bundle': {'hang_from': 'right', 'size': (0.32, 0.25, 0.27), 'turn': 5, 'cloth': 'bundle grey linen'},
@@ -269,7 +288,11 @@ CLOTHS = {
 }
 CLOTH_TILE_METRES = 1.1   # each cloth picture holds 4 x 4 copies of the surface (0.27 m each)
 SKIN = (0.17, 0.105, 0.075)   # weathered skin at dusk: 0.30 came out pale grey-white against the dark coats, like masks
-HAIR = (0.040, 0.032, 0.027)
+SKIN_ROUGHNESS, SKIN_SHINE = 0.8, 0.3   # a little shine only: at 0.6 and the usual 0.5 the lamps made faces and necks glow
+HAIR = (0.040, 0.032, 0.027)   # dark brown, darker than every coat (the darkest, charcoal, is 0.068)
+# hair is matt: with the usual shine (roughness 0.75, specular 0.5) the dark hair mirrored the dusk sky and the street
+# lamps and came out paler than the coats, so from behind the heads read as bald (round 1's plate)
+HAIR_ROUGHNESS, HAIR_SHINE = 1.0, 0.05
 
 
 # ------------------------------------------------------------------------------------ materials
@@ -280,7 +303,10 @@ def cloth_picture(cloth_name):
     the scale of a hand (wear and dust), so it doesn't read as plastic. Saved as a JPEG in the scratch folder,
     so glTF carries it inside the figure."""
     surface, colour = CLOTHS[cloth_name]
-    path = os.path.join(CLOTH_PICTURES, cloth_name.replace(' ', '-') + '.jpg')
+    # the file name carries a fingerprint of the surface and the colour, so a changed colour paints a new picture
+    # instead of reusing the old one from the scratch folder
+    fingerprint = zlib.crc32(repr((surface, tuple(round(v, 4) for v in colour))).encode())
+    path = os.path.join(CLOTH_PICTURES, f"{cloth_name.replace(' ', '-')}-{fingerprint:08x}.jpg")
     if not os.path.exists(path):
         source = bpy.data.images.load(os.path.join(SURFACES, surface, 'Diffuse.jpg'), check_existing=True)
         width, height = source.size
@@ -294,27 +320,56 @@ def cloth_picture(cloth_name):
         weave = weave / weave.mean(axis=(0, 1))       # average 1
         tiled = numpy.tile(weave, (4, 4, 1))
         size = tiled.shape[0]
-        # mottling: a few slow waves that repeat exactly across the picture, so its copies join without a seam
-        random = numpy.random.default_rng(abs(hash(cloth_name)) % (2 ** 32))
+        # mottling: a few slow waves that repeat exactly across the picture, so its copies join without a seam; seeded
+        # from the cloth's name with zlib.crc32 (Python's hash() of a text changes on every run)
+        random = numpy.random.default_rng(zlib.crc32(cloth_name.encode()))
         y, x = numpy.mgrid[0:size, 0:size] / size
         mottle = numpy.zeros((size, size), numpy.float32)
         for _ in range(7):
-            fx, fy = random.integers(1, 5), random.integers(-4, 5)
-            mottle += random.uniform(0.3, 1.0) * numpy.sin(2 * math.pi * (fx * x + fy * y) + random.uniform(0, 2 * math.pi))
+            waves_across, waves_down = random.integers(1, 5), random.integers(-4, 5)
+            mottle += random.uniform(0.3, 1.0) * numpy.sin(2 * math.pi * (waves_across * x + waves_down * y) + random.uniform(0, 2 * math.pi))
         mottle = 1 + 0.10 * mottle / numpy.abs(mottle).max()
         result = numpy.clip(tiled * mottle[:, :, None] * numpy.array(colour, numpy.float32), 0, 1)
-        image = bpy.data.images.new(cloth_name, size, size)
-        flat = numpy.ones((size, size, 4), numpy.float32)
-        flat[:, :, :3] = result
-        image.pixels.foreach_set(flat.ravel())
-        os.makedirs(CLOTH_PICTURES, exist_ok=True)
-        image.filepath_raw = path
-        image.file_format = 'JPEG'
-        image.save()
-        bpy.data.images.remove(image)
+        save_picture(cloth_name, result, path)
+    return load_picture(path)
+
+
+def save_picture(name, colours, path):
+    """Saves a square picture (rows of linear-light colours) as a JPEG in the scratch folder."""
+    size = colours.shape[0]
+    image = bpy.data.images.new(name, size, size)
+    flat = numpy.ones((size, size, 4), numpy.float32)
+    flat[:, :, :3] = colours
+    image.pixels.foreach_set(flat.ravel())
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    image.filepath_raw = path
+    image.file_format = 'JPEG'
+    image.save()
+    bpy.data.images.remove(image)
+
+
+def load_picture(path):
     image = bpy.data.images.load(path, check_existing=True)
-    image.colorspace_settings.name = 'Non-Color'   # the numbers above are already linear light
+    image.colorspace_settings.name = 'Non-Color'   # the numbers in it are already linear light
     return image
+
+
+def hair_picture():
+    """Close-cut hair combed down: fine streaks running down the head (the hair shell's pictures run from its
+    bottom to its top), each a little lighter or darker, so the head reads as hair, not as a smooth dark scalp.
+    Seeded with zlib.crc32, so every run paints the same picture."""
+    fingerprint = zlib.crc32(repr(tuple(round(v, 4) for v in HAIR)).encode())
+    path = os.path.join(CLOTH_PICTURES, f'hair-{fingerprint:08x}.jpg')
+    if not os.path.exists(path):
+        size = 256
+        random = numpy.random.default_rng(zlib.crc32(b'hair'))
+        strands = random.uniform(0.6, 1.4, size)                     # one brightness for each strand across the picture
+        strands = numpy.convolve(numpy.concatenate([strands[-2:], strands, strands[:2]]), numpy.ones(3) / 3, 'valid')[:size]
+        along = 1 + 0.15 * random.standard_normal((size, size))      # a little unevenness down each strand
+        along = (along + numpy.roll(along, 1, axis=0) + numpy.roll(along, 2, axis=0)) / 3
+        brightness = strands[None, :] * along
+        save_picture('hair', numpy.clip(brightness[:, :, None] * numpy.array(HAIR, numpy.float32), 0, 1), path)
+    return load_picture(path)
 
 
 def cloth_material(cloth_name):
@@ -335,7 +390,8 @@ def cloth_material(cloth_name):
     return material
 
 
-def plain_material(name, colour, roughness):
+def plain_material(name, colour, roughness, shine=0.5):
+    """One even colour. shine: how much it mirrors the sky and lamps (Blender's specular level; 0.5 is usual)."""
     if name in bpy.data.materials:
         return bpy.data.materials[name]
     material = bpy.data.materials.new(name)
@@ -343,6 +399,24 @@ def plain_material(name, colour, roughness):
     shader = material.node_tree.nodes['Principled BSDF']
     shader.inputs['Base Color'].default_value = (*colour, 1)
     shader.inputs['Roughness'].default_value = roughness
+    shader.inputs['Specular IOR Level'].default_value = shine
+    material['tile_metres'] = 1.0
+    return material
+
+
+def hair_material():
+    """Dark matt hair wearing the streaked hair picture."""
+    if 'dark hair' in bpy.data.materials:
+        return bpy.data.materials['dark hair']
+    material = bpy.data.materials.new('dark hair')
+    material.use_nodes = True
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    shader = nodes['Principled BSDF']
+    picture = nodes.new('ShaderNodeTexImage')
+    picture.image = hair_picture()
+    links.new(picture.outputs['Color'], shader.inputs['Base Color'])
+    shader.inputs['Roughness'].default_value = HAIR_ROUGHNESS
+    shader.inputs['Specular IOR Level'].default_value = HAIR_SHINE
     material['tile_metres'] = 1.0
     return material
 
@@ -379,10 +453,11 @@ def smooth_path(points, samples_per_span=5):
     extended = [points[0] * 2 - points[1]] + list(points) + [points[-1] * 2 - points[-2]]
     path, positions = [], []
     for i in range(len(points) - 1):
-        p0, p1, p2, p3 = extended[i:i + 4]
+        before, start, end, after = extended[i:i + 4]
         for k in range(samples_per_span):
             t = k / samples_per_span
-            path.append(0.5 * (2 * p1 + (p2 - p0) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (3 * p1 - p0 - 3 * p2 + p3) * t * t * t))
+            path.append(0.5 * (2 * start + (end - before) * t + (2 * before - 5 * start + 4 * end - after) * t * t
+                               + (3 * start - before - 3 * end + after) * t * t * t))
             positions.append(i + t)
     path.append(points[-1].copy())
     positions.append(len(points) - 1)
@@ -393,9 +468,9 @@ def along_profile(profile, position):
     """A value at a place along the control points, from (position, value) pairs, straight lines between."""
     if position <= profile[0][0]:
         return profile[0][1]
-    for (p0, v0), (p1, v1) in zip(profile, profile[1:]):
-        if position <= p1:
-            return v0 + (v1 - v0) * (position - p0) / max(1e-9, p1 - p0)
+    for (start, start_value), (end, end_value) in zip(profile, profile[1:]):
+        if position <= end:
+            return start_value + (end_value - start_value) * (position - start) / max(1e-9, end - start)
     return profile[-1][1]
 
 
@@ -406,12 +481,12 @@ def ring(centre, x_axis, y_axis, half_width, half_depth, exponent=2.0, count=24,
     points = []
     for k in range(count):
         angle = 2 * math.pi * k / count
-        c, s = math.cos(angle), math.sin(angle)
-        x = half_width * math.copysign(abs(c) ** (2 / exponent), c)
-        y = half_depth * math.copysign(abs(s) ** (2 / exponent), s)
+        cosine, sine = math.cos(angle), math.sin(angle)
+        x = half_width * math.copysign(abs(cosine) ** (2 / exponent), cosine)
+        y = half_depth * math.copysign(abs(sine) ** (2 / exponent), sine)
         point = centre + x_axis * x + y_axis * y
         if offset:
-            outward = (x_axis * c + y_axis * s).normalized()
+            outward = (x_axis * cosine + y_axis * sine).normalized()
             point = point + outward * offset(angle)
         points.append(point)
     return points
@@ -430,8 +505,8 @@ def tube_rings(path, radii, count=16, squash=None):
     for point, tangent, radius in zip(path, tangents, radii):
         normal = (normal - tangent * normal.dot(tangent)).normalized()
         binormal = tangent.cross(normal)
-        sx, sy = squash if squash else (1.0, 1.0)
-        rings.append(ring(point, normal, binormal, radius * sx, radius * sy, count=count))
+        squash_one, squash_other = squash if squash else (1.0, 1.0)
+        rings.append(ring(point, normal, binormal, radius * squash_one, radius * squash_other, count=count))
     return rings
 
 
@@ -484,8 +559,10 @@ def lofted_object(name, rings, material, close_start=False, close_end=False, sub
 
 def ellipsoid_object(name, centre, half_sizes, rotation, material, segments=16, rings=10, subdivide=1, keep=None, thickness=0.0):
     """An egg shape (a head, an ear, a bundle). keep(x, y, z), given a point on the unit sphere, says
-    whether it stays (a shell of hair with the face cut away)."""
+    whether it stays (a shell of hair with the face cut away). Its picture wraps once round it, from the
+    bottom to the top."""
     bm = bmesh.new()
+    bm.loops.layers.uv.new('UVMap')
     bmesh.ops.create_uvsphere(bm, u_segments=segments, v_segments=rings, radius=1.0, calc_uvs=True)
     if keep:
         bmesh.ops.delete(bm, geom=[v for v in bm.verts if not keep(v.co.x, v.co.y, v.co.z)], context='VERTS')
@@ -666,9 +743,9 @@ def build_coat(figure, joints, cloth):
         spine_ring(joints, 'upper', chest, width(0.180, 0.104), up=SHOULDER_UP + 0.030 + shrug, exponent=2.6),
         spine_ring(joints, 'upper', neck, width(0.112, 0.082), up=-0.016 + 0.4 * shrug, exponent=2.4),
     ]
-    if figure['collar'] == 'up':   # stood up round the back of the neck, a little flared
+    if figure['collar'] == 'up':   # stood up round the back of the neck, a little flared, up to the hair at the nape
         rings += [spine_ring(joints, 'upper', neck, (0.080, 0.080), up=0.010, forward=0.006),
-                  spine_ring(joints, 'upper', neck, (0.087, 0.088), up=0.062, forward=0.002)]
+                  spine_ring(joints, 'upper', neck, (0.087, 0.089), up=0.074, forward=0.002)]
     else:                          # folded down: a wide, low collar for a muffler to sit in
         rings += [spine_ring(joints, 'upper', neck, (0.086, 0.084), up=0.004, forward=0.008),
                   spine_ring(joints, 'upper', neck, (0.100, 0.097), up=0.024, forward=0.010)]
@@ -681,10 +758,10 @@ def build_coat(figure, joints, cloth):
     path = []
     for k in range(9):
         angle = math.radians(-90 - 46 + 92 * k / 8)
-        c, s = math.cos(angle), math.sin(angle)
-        x = half_width * math.copysign(abs(c) ** (2 / 2.4), c)
-        y = half_depth * math.copysign(abs(s) ** (2 / 2.4), s)
-        outward = (frame @ Vector((c, s, 0))).normalized()
+        cosine, sine = math.cos(angle), math.sin(angle)
+        x = half_width * math.copysign(abs(cosine) ** (2 / 2.4), cosine)
+        y = half_depth * math.copysign(abs(sine) ** (2 / 2.4), sine)
+        outward = (frame @ Vector((cosine, sine, 0))).normalized()
         path.append(centre + frame @ Vector((x, y, 0)) + outward * 0.011 * scale)
     up = frame @ Vector((0, 0, 1))
     belt_rings = []
@@ -753,8 +830,8 @@ def build_shawl(figure, joints, cloth):
         front = lambda k: abs(2 * math.pi * k / count - math.pi / 2) < math.radians(52)
         skip = lambda i, k: 4 <= i <= 6 and front(k) or (i == 3 and abs(2 * math.pi * k / count - math.pi / 2) < math.radians(34))
         close_top = True
-    else:   # round the shoulders, closed at the throat
-        rings += [body_ring(NECK_UP + 0.035, 0.078, 0.076)]
+    else:   # round the shoulders, closed at the throat and drawn up round the nape, under her pinned-up hair
+        rings += [body_ring(NECK_UP + 0.052, 0.078, 0.076)]
         skip, close_top = None, False
     return [lofted_object(f"{figure['name']}-shawl", rings, cloth, close_end=close_top, subdivide=2, thickness=0.012 * scale, skip_face=skip)]
 
@@ -812,9 +889,9 @@ def build_legs_and_boots(figure, joints, trouser_cloth, boot_cloth, woman=False)
             points = []
             for k in range(16):
                 angle = 2 * math.pi * k / 16
-                c, s = math.cos(angle), math.sin(angle)
-                height = top_height * abs(s) ** 0.8 if s > 0 else 0.004 * abs(s)
-                points.append(foot @ (Vector((-half_width * c, along, height)) * scale * boot_size))
+                cosine, sine = math.cos(angle), math.sin(angle)
+                height = top_height * abs(sine) ** 0.8 if sine > 0 else 0.004 * abs(sine)
+                points.append(foot @ (Vector((-half_width * cosine, along, height)) * scale * boot_size))
             rings.append(points)
         parts.append(lofted_object(f"{figure['name']}-boot-{side}", rings, boot_cloth, close_start=True, close_end=True, subdivide=1))
         shaft_path = [foot @ (Vector((0, -0.012, 0.03)) * scale * boot_size), foot @ (Vector((0, -0.012, 0.14)) * scale * boot_size)]
@@ -857,59 +934,79 @@ def build_hands(figure, joints, skin):
     return parts
 
 
+def hair_bottom(forward, back=-0.95, sides=-0.35):
+    """How low the hair comes on the head's egg (-1 its bottom, 1 its top) at a place round it (forward: -1 the
+    middle of the back, 0 the sides, 1 the face): down to the nape at the back (`back`, inside the collar), to
+    below the ears at the sides (`sides`), rising toward the temples."""
+    if forward < 0:
+        return sides + (back - sides) * min(1.0, -forward / 0.6)
+    return sides + 1.25 * forward
+
+
 def build_head(figure, joints, skin, hair, cap_cloth):
-    """The head (an egg with a jaw, a nose and ears that stand out a little), short hair below the cap,
-    the neck, a flat cap (a band, a full flat crown that overhangs it, pulled forward to a short peak) and,
-    for some, a knitted muffler round the neck."""
+    """The head (an egg with a jaw, a nose and ears that stand out a little), dark hair over its back and
+    sides from under the cap down into the collar, the neck, a flat cap (a band seated low, just over the
+    ears, a full flat crown that overhangs it, pulled forward to a short peak) and, for some, a knitted
+    muffler worn high round the neck. A woman's head is bare, her hair pinned up."""
     scale = joints['scale'] * (0.95 if figure['kind'] == 'woman' else 1.0)
     head, turn, neck = joints['head'], joints['head_turn'], joints['neck']
     name = figure['name']
-    hx, hy, hz = (v * scale for v in HEAD_HALF_SIZE)
-    parts = [ellipsoid_object(f'{name}-head', head, (hx, hy, hz), turn, skin, segments=20, rings=14)]
+    head_half_width, head_half_depth, head_half_height = (v * scale for v in HEAD_HALF_SIZE)
+    head_half_sizes = (head_half_width, head_half_depth, head_half_height)
+    # the hair's cut edge is stepped until smoothed: a walker (drawn with one level of smoothing less) keeps one level
+    hair_smoothing = 2 if figure.get('walker') else 1
+    parts = [ellipsoid_object(f'{name}-head', head, head_half_sizes, turn, skin, segments=20, rings=14)]
     parts.append(ellipsoid_object(f'{name}-jaw', head + turn @ (Vector((0, 0.030, -0.070)) * scale), (0.060 * scale, 0.062 * scale, 0.048 * scale), turn, skin))
     parts.append(ellipsoid_object(f'{name}-nose', head + turn @ (Vector((0, 0.097, -0.012)) * scale), (0.011 * scale, 0.020 * scale, 0.026 * scale), turn, skin,
                                   segments=8, rings=6))
     for sign in (1, -1):
         ear_turn = turn @ Matrix.Rotation(math.radians(-sign * 18), 3, 'Z')
-        # about 6 cm tall and 3.5 cm across: bigger, lit by a fire they read as pale headphones in the plate
-        parts.append(ellipsoid_object(f'{name}-ear', head + turn @ (Vector((sign * 0.076, -0.010, -0.006)) * scale),
-                                      (0.010 * scale, 0.018 * scale, 0.030 * scale), ear_turn, skin, segments=10, rings=8))
+        # about 5.5 cm tall and 3 cm across, close to the head: bigger, or standing out against the dark hair, lit by
+        # a fire they read as pale headphones in the plate
+        parts.append(ellipsoid_object(f'{name}-ear', head + turn @ (Vector((sign * 0.073, -0.010, -0.010)) * scale),
+                                      (0.009 * scale, 0.016 * scale, 0.027 * scale), ear_turn, skin, segments=10, rings=8))
     # the neck, from inside the collar up into the head
     neck_path, _ = smooth_path([neck - joints['upper'] @ (Vector((0, 0, 0.05)) * scale), neck + (head - neck) * 0.75], samples_per_span=4)
     parts.append(lofted_object(f'{name}-neck', tube_rings(neck_path, [0.052 * scale] * len(neck_path), count=12), skin,
                                close_start=True, close_end=True, subdivide=1))
     if figure['kind'] == 'woman':
-        if not figure.get('shawl_over_head', True):   # her hair pinned up in a bun
-            parts.append(ellipsoid_object(f'{name}-hair', head, (hx * 1.05, hy * 1.05, hz * 1.04), turn, hair, segments=20, rings=14,
-                                          keep=lambda x, y, z: z > -0.45 + 0.3 * max(0.0, y) and not (y > 0.55 and z < 0.6)))
-            parts.append(ellipsoid_object(f'{name}-hair-bun', head + turn @ (Vector((0, -0.090, 0.045)) * scale),
-                                          (0.046 * scale, 0.036 * scale, 0.042 * scale), turn, hair, segments=12, rings=8))
+        if not figure.get('shawl_over_head', True):   # bare-headed, her hair pinned up: a bun high at the back or a low knot
+            parts.append(ellipsoid_object(f'{name}-hair', head, tuple(v * 1.05 for v in head_half_sizes), turn, hair, segments=28, rings=18,
+                                          subdivide=hair_smoothing, keep=lambda x, y, z: hair_bottom(y, -0.88, -0.30) < z and not (y > 0.45 and z < 0.62)))
+            knot_low = figure.get('hair_style') == 'low knot'
+            parts.append(ellipsoid_object(f'{name}-hair-bun', head + turn @ (Vector((0, -0.092, -0.040 if knot_low else 0.045)) * scale),
+                                          tuple(v * scale for v in ((0.050, 0.034, 0.036) if knot_low else (0.046, 0.036, 0.042))),
+                                          turn, hair, segments=12, rings=8))
         return parts   # otherwise the shawl covers her head
-    # short hair: a shell over the back and sides of the head, cut away over the face and above the nape
-    parts.append(ellipsoid_object(f'{name}-hair', head, (hx * 1.045, hy * 1.04, hz * 1.03), turn, hair, segments=20, rings=14,
-                                  keep=lambda x, y, z: z > -0.66 + 0.40 * max(0.0, y) and not (y > 0.25 and z < 0.55)))   # down to the nape at the back
-    # the flat cap, in the head's own frame, sitting low: its crown is pulled forward and down onto the peak, high at
-    # the back and low at the front, with no band showing in front (a level crown above a band read as a railway or
-    # police cap in the plate)
+    # short hair: a shell over the back and sides of the head, cut away over the face, down into the collar at the
+    # back. Above the cap's band it is left out (the cap hides it there, and it could poke through the crown)
+    parts.append(ellipsoid_object(f'{name}-hair', head, (head_half_width * 1.05, head_half_depth * 1.045, head_half_height * 1.03), turn, hair,
+                                  segments=28, rings=18, subdivide=hair_smoothing,
+                                  keep=lambda x, y, z: hair_bottom(y) < z < 0.72 and not (y > 0.25 and z < 0.55)))
+    # the flat cap, in the head's own frame, seated low (its band about 1.5 cm lower than in round 1, just over the
+    # tops of the ears): its crown is pulled forward and down onto the peak, high at the back and low at the front,
+    # with no band showing in front (a level crown above a band read as a railway or police cap in the plate)
     cap_turn = turn @ Matrix.Rotation(math.radians(-5), 3, 'X')
-    cap_centre = head + turn @ (Vector((0, 0.008, 0.0)) * scale)
+    cap_centre = head + turn @ (Vector((0, 0.008, -0.014)) * scale)
 
     def cap_ring(height, half_width, half_depth, forward=0.0, exponent=2.0, slope=0.0):
         sloped = cap_turn @ Matrix.Rotation(math.radians(-slope), 3, 'X')   # its front tipped down by `slope` degrees
         return ring(cap_centre + cap_turn @ (Vector((0, forward, height)) * scale), sloped @ Vector((1, 0, 0)), sloped @ Vector((0, 1, 0)),
                     half_width * scale, half_depth * scale, exponent, 28)
-    crown = [cap_ring(0.028, 0.082, 0.102), cap_ring(0.050, 0.090, 0.112, 0.006, slope=6),
-             cap_ring(0.086, 0.100, 0.131, 0.026, 2.2, slope=15), cap_ring(0.114, 0.090, 0.121, 0.030, 2.2, slope=15),
-             cap_ring(0.130, 0.052, 0.070, 0.022, slope=12)]
+    # the band a little wider than before, as it sits lower round the hair; the crown's top as high as before, so the
+    # head never shows through it
+    crown = [cap_ring(0.028, 0.086, 0.108, -0.002), cap_ring(0.050, 0.093, 0.116, 0.004, slope=6),
+             cap_ring(0.090, 0.101, 0.132, 0.026, 2.2, slope=15), cap_ring(0.124, 0.091, 0.122, 0.030, 2.2, slope=15),
+             cap_ring(0.142, 0.054, 0.072, 0.022, slope=12)]
     parts.append(lofted_object(f'{name}-cap', crown, cap_cloth, close_start=True, close_end=True, subdivide=2))
     # its peak: a short stiff brim round the front half of the band, sloping down
     inner, outer = [], []
     for k in range(11):
         angle = math.radians(25 + 130 * k / 10)
-        c, s = math.cos(angle), math.sin(angle)
-        reach = 0.012 + 0.048 * s ** 1.5
-        inner.append(cap_centre + cap_turn @ (Vector((0.082 * c, 0.103 * s, 0.030)) * scale))
-        outer.append(cap_centre + cap_turn @ (Vector(((0.082 + reach * 0.6) * c, (0.103 + reach) * s, 0.030 - 0.45 * reach)) * scale))
+        across, ahead = math.cos(angle), math.sin(angle)
+        reach = 0.012 + 0.048 * ahead ** 1.5
+        inner.append(cap_centre + cap_turn @ (Vector((0.084 * across, 0.106 * ahead, 0.030)) * scale))
+        outer.append(cap_centre + cap_turn @ (Vector(((0.084 + reach * 0.6) * across, (0.106 + reach) * ahead, 0.030 - 0.45 * reach)) * scale))
     bm = bmesh.new()
     uv_layer = bm.loops.layers.uv.new('UVMap')
     inner_verts = [bm.verts.new(p) for p in inner]
@@ -920,11 +1017,12 @@ def build_head(figure, joints, skin, hair, cap_cloth):
             loop[uv_layer].uv = (loop.vert.co.x, loop.vert.co.y)
     parts.append(finish_object(f'{name}-cap-peak', bm, cap_cloth, 1, 0.007 * scale))
     if figure.get('muffler'):
+        # worn high at the back, up to the hair at the nape, so no neck shows from behind; lower in front, under the chin
         material = cloth_material(figure['muffler'])
         upper = joints['upper']
-        path = [neck + upper @ (Vector((0.074 * math.cos(a), 0.072 * math.sin(a) + 0.01, 0.026 + 0.012 * math.sin(a))) * scale)
-                for a in (2 * math.pi * k / 24 for k in range(24))]
-        rings = tube_rings(path + path[:1], [0.030 * scale] * 25, count=12, squash=(1.0, 0.8))[:-1]
+        path = [neck + upper @ (Vector((0.076 * math.cos(angle), 0.072 * math.sin(angle) + 0.008, 0.040 - 0.014 * math.sin(angle))) * scale)
+                for angle in (2 * math.pi * k / 24 for k in range(24))]
+        rings = tube_rings(path + path[:1], [0.033 * scale] * 25, count=12, squash=(1.0, 0.8))[:-1]
         parts.append(lofted_object(f'{name}-muffler', rings, material, closed_path=True, subdivide=1))
     return parts
 
@@ -973,8 +1071,8 @@ def build_figure(name):
     smoothing_dropped = 1 if figure.get('walker') else 0
     bpy.ops.wm.read_factory_settings(use_empty=True)
     joints = solve_pose(figure)
-    skin = plain_material('weathered skin', SKIN, 0.6)
-    hair = plain_material('dark hair', HAIR, 0.75)
+    skin = plain_material('weathered skin', SKIN, SKIN_ROUGHNESS, SKIN_SHINE)
+    hair = hair_material()
     boots = cloth_material('boot leather')
     parts = []
     if figure['kind'] == 'man':
@@ -1001,6 +1099,10 @@ def build_figure(name):
         part.select_set(True)
     bpy.context.view_layer.objects.active = parts[0]
     bpy.ops.object.convert(target='MESH')
+    # the lowest point of the bare hands (for a shot to check the gap between warming hands and a brazier's rim)
+    hand_heights = [(part.matrix_world @ v.co).z for part in parts if '-hand-' in part.name or '-thumb-' in part.name
+                    for v in part.data.vertices]
+    joints['hands_lowest'] = min(hand_heights) if hand_heights else None
     bpy.ops.object.join()
     body = bpy.context.view_layer.objects.active
     body.name = f'{name}-body'
@@ -1045,6 +1147,9 @@ def save_figure(figure, joints, root, body):
     if 'brazier_ahead' in figure:
         entry['brazier_ahead'] = round(figure['brazier_ahead'] * joints['scale'], 3)
         entry['brazier_note'] = 'the brazier\'s middle this far in front of its origin (Blender +y)'
+        entry['hands_lowest_metres'] = round(joints['hands_lowest'], 3)
+        entry['hands_note'] = ('the lowest point of his warming hands above the ground he stands on: keep a brazier\'s rim at '
+                               'least 0.10 m lower (the pit village brazier drum is 0.856 m tall), so they hover over the fire')
     if figure.get('wall_side'):
         entry['wall_at_x'] = round(high.x, 3)
         entry['wall_note'] = 'its right shoulder touches a wall standing at this x (Blender) from its origin'

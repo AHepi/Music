@@ -20,8 +20,23 @@ TRIANGLE_LIMIT = 30000
 CHOICES = [
     # (Poly Haven id, file name in the film, what it is, texture size)
     # --- the Works
-    ('hand_truck', 'hand-truck', "steel sack truck (hand truck) with chipped paint, a worn toe plate and two rubber-tyred wheels, for No. 2's yard", '1k'),
+    ('hand_truck', 'hand-truck', "steel sack truck (hand truck) with a chipped red-painted frame (darken it with set_dressing.tint if it "
+                                 "draws the eye), a worn toe plate and two rubber-tyred wheels, for No. 2's yard; a maker's label on the "
+                                 "toe plate painted out (see painted_out)", '1k'),
 ]
+
+# what convert_poly_haven.py paints out of a model's pictures before converting it: {Poly Haven id:
+# [{'what': what it was, 'box': (left, top, right, bottom), 'from': (across, down)}, ...]}, the box and
+# the offset to the patch that covers it as fractions of the picture's width and height from its top left
+# (the same in the colour, roughness and relief pictures, at any size)
+PAINT_OUT = {
+    # Poly Haven's hand truck has a modern maker's sticker (lines of print and a small mark) on the bare
+    # steel of its toe plate, at pixels 817-848 across and 985-1016 down of the 1k colour picture; the box
+    # reaches 6 pixels past it so the soft edge blends over plain steel, not the sticker's pale rim. It is
+    # covered with the bare steel just above it
+    'hand_truck': [{'what': "a maker's printed label on the bare steel of the toe plate, covered with the steel just above it",
+                    'box': (810 / 1024, 978 / 1024, 856 / 1024, 1024 / 1024), 'from': (0.0, -46 / 1024)}],
+}
 
 # Poly Haven surfaces the scripted props wear (build_chapter_2_props.py), at 1k, in DOWNLOADS/surfaces
 SURFACES = [

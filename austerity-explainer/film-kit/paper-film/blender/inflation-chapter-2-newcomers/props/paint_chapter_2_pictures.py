@@ -10,10 +10,21 @@
 #                                               round the letters), laid round a steel drum
 #   crate-stencil.png                           black stencilled "THIS WAY UP" under two arrows
 #   wages-envelope-front.jpg, wages-envelope-back.jpg
-#                                               a brown pay envelope printed "WAGES", and its flap side
+#                                               a thin brown paper pay envelope printed "WAGES" with a
+#                                               faint fold below the word, and its flap side
+#   tinplate-dull.jpg                           dull, darkened tinplate, mottled and scratched, for the
+#                                               lunch tin
+#   enamel-mug.jpg                              dark blue-black enamel with chips showing the black iron
+#                                               (most at the rim and the foot), wrapped once round the mug
 # The lettering rules (plan, part 1): real lettering on every sign, no figure (digit) except "No. 1" and
 # "No. 2", no logos, brands, flags, or party, chain or bank colours (the bank's sign is plain gilt on
 # near-black).
+#
+# It also writes lettering-sizes.json beside the pictures: for each lettered picture, where its capitals'
+# ink starts and ends (fractions of the picture's height from its top) and the font it uses, and for the
+# gate boards where the plank joints fall. build_chapter_2_props.py reads it, so the planks are cut where
+# the picture puts the joints (above and below the letters, never through them) and index.json gives
+# letter heights measured from the pictures and the models rather than typed in.
 #
 # It uses the pit village painter's helpers (paint_prop_pictures.py: noise, fonts, centred lines,
 # Poly Haven surfaces) and the same free fonts, which are not kept in the repository (see
@@ -22,6 +33,7 @@
 # Run: python3 -I paint_chapter_2_pictures.py PICTURE_FOLDER --downloads DOWNLOAD_FOLDER --fonts FONT_FOLDER
 #      (DOWNLOAD_FOLDER holds surfaces/weathered_planks from download_poly_haven.py --choices chapter_2_choices.py)
 
+import json
 import math
 import os
 import sys
@@ -37,6 +49,16 @@ from paint_prop_pictures import as_array, as_picture, centred_text, fitted_font,
 CREAM = (228, 216, 180)
 NEAR_BLACK = (24, 23, 21)
 
+# the gate boards' plank joints, as fractions of the board's height from its top: a narrow plank above
+# and below a wide middle plank that carries the whole of the lettering
+GATE_BOARD_JOINTS = (0.22, 0.78)
+# the least room left between a joint and the lettering (with its shade), as a fraction of the board's
+# height (0.033 of the 0.6 m board is 2 cm)
+GATE_BOARD_JOINT_CLEARANCE = 0.033
+
+# what lettering-sizes.json will hold: {picture file: {letters_top, letters_bottom, font, ...}}
+LETTERING_SIZES = {}
+
 
 def blurred(mask_array, radius):
     """A 0..1 array softened by a Gaussian blur of `radius` pixels."""
@@ -44,22 +66,43 @@ def blurred(mask_array, radius):
     return np.asarray(picture.filter(ImageFilter.GaussianBlur(radius)), np.float32) / 255
 
 
-def weather_paint(paint, wood, planks, seed, chip_threshold=0.70, dirt_strength=0.35):
+def ink_rows(mask):
+    """The first row (from the top) where a mask has ink, and the row just past the last one. The mask
+    is a 0..1 array or a 0..255 'L' picture; ink is anything more than half covered."""
+    coverage = np.asarray(mask, np.float32)
+    if coverage.max() > 1:
+        coverage = coverage / 255
+    rows = np.nonzero(coverage.max(axis=1) > 0.5)[0]
+    return int(rows[0]), int(rows[-1]) + 1
+
+
+def record_lettering(file_name, words, mask, font_name, **more):
+    """Notes in LETTERING_SIZES where the capitals' ink starts and ends in a picture, as fractions of the
+    picture's height from its top (and of its width from its left), with the words and the font."""
+    height, width = np.asarray(mask).shape[:2]
+    top, bottom = ink_rows(mask)
+    left, right = ink_rows(np.asarray(mask).T)
+    LETTERING_SIZES[file_name] = {'words': words, 'font': font_name, 'letters_top': round(top / height, 4),
+                                  'letters_bottom': round(bottom / height, 4), 'letters_left': round(left / width, 4),
+                                  'letters_right': round(right / width, 4), **more}
+    return top, bottom
+
+
+def weather_paint(paint, wood, joints, seed, chip_threshold=0.70, dirt_strength=0.35):
     """The weather on a painted board: paint chipped off to the timber (more along the plank joints),
     dark joints between planks, a little fading, dirt and rain runs from the bottom, and soot speckle.
-    paint and wood are float arrays (height, width, 3)."""
+    paint and wood are float arrays (height, width, 3); joints are the pixel rows (from the top) where
+    one plank meets the next."""
     height, width = paint.shape[:2]
     seam = np.zeros((height, width), np.float32)
-    for index in range(1, planks):
-        y = int(height * index / planks)
+    for y in joints:
         seam[max(0, y - 4):y + 4, :] = 1
     seam = blurred(seam, 2.5)
     coarse = noise(height, width, seed, 2.0, 3)
     fine = noise(height, width, seed + 1, 1.0, 1)
     chipped = ((coarse * 0.65 + fine * 0.35) > chip_threshold).astype(np.float32)
     edge_wear = np.zeros((height, width), np.float32)
-    for index in range(0, planks + 1):
-        y = int(height * index / planks)
+    for y in [0] + list(joints) + [height]:
         edge_wear += np.exp(-((np.arange(height) - y) ** 2) / (2 * 10 ** 2))[:, None]
     chipped = np.clip(chipped + ((fine > 0.62) * edge_wear * 0.8), 0, 1)
     chipped = blurred(chipped, 1.0)[..., None]
@@ -77,9 +120,11 @@ def weather_paint(paint, wood, planks, seed, chip_threshold=0.70, dirt_strength=
 
 # ------------------------------------------------------------------------------ the gate boards
 
-def gate_board(folder, words, file_name, seed, width=2048, height=878, planks=4):
+def gate_board(folder, words, file_name, seed, width=2048, height=878):
     """A works' gate board (1.4 x 0.6 m): cream sign-writer's lettering with a dark drop shade, inside a
-    cream lined border, on near-black paint over four planks."""
+    cream lined border, on near-black paint over three planks: a narrow plank above and below a wide one
+    that carries the whole of the lettering, so no joint runs through a letter (a joint through "No. 1"
+    read like a strike-through)."""
     wood = as_array(surface('weathered_planks', (width, height)))
     wood = wood * 0.5 + np.array([0.30, 0.28, 0.25]) * 0.5
     paint = Image.new('RGB', (width, height), NEAR_BLACK)
@@ -91,9 +136,22 @@ def gate_board(folder, words, file_name, seed, width=2048, height=878, planks=4)
     top, bottom = typeface.getbbox('No')[1], typeface.getbbox('No')[3]
     y = (height - (bottom - top)) / 2 - top - 6
     centred_text(draw, y, words, typeface, CREAM, width, shadow=(74, 62, 44), shadow_offset=(12, 14), spacing=14)
-    out = weather_paint(as_array(paint), wood, planks, seed, chip_threshold=0.72)
+    # where the letters' ink falls, without and with their drop shade
+    letters, shaded = Image.new('L', (width, height), 0), Image.new('L', (width, height), 0)
+    centred_text(ImageDraw.Draw(letters), y, words, typeface, 255, width, spacing=14)
+    centred_text(ImageDraw.Draw(shaded), y, words, typeface, 255, width, shadow=255, shadow_offset=(12, 14), spacing=14)
+    joints = [int(round(height * fraction)) for fraction in GATE_BOARD_JOINTS]
+    shade_top, shade_bottom = ink_rows(shaded)
+    clearance = int(GATE_BOARD_JOINT_CLEARANCE * height)
+    if not (joints[0] + clearance <= shade_top and shade_bottom + clearance <= joints[1]):
+        raise SystemExit(f'{file_name}: the plank joints (rows {joints}) come within {clearance} pixels of the lettering '
+                         f'(rows {shade_top} to {shade_bottom}); move GATE_BOARD_JOINTS or make the letters smaller')
+    letters_top, letters_bottom = record_lettering(file_name, words, letters, 'Ultra', joints_from_top=list(GATE_BOARD_JOINTS),
+                                                   shade_top=round(shade_top / height, 4), shade_bottom=round(shade_bottom / height, 4))
+    out = weather_paint(as_array(paint), wood, joints, seed, chip_threshold=0.72)
     as_picture(out).save(os.path.join(folder, file_name), quality=92)
-    print('painted', file_name, f'(letters {bottom - top} of {height} pixels high)')
+    print('painted', file_name, f'(letters {letters_bottom - letters_top} of {height} pixels high, rows {letters_top} to {letters_bottom}; '
+          f'joints at rows {joints}, {shade_top - joints[0]} and {joints[1] - shade_bottom} pixels clear of the shaded letters)')
 
 
 # -------------------------------------------------------------------------------------- the bank
@@ -116,6 +174,9 @@ def bank_sign(folder, width=2048, height=1024):
     y = (height - (bottom - top)) / 2 - top
     centred_text(draw_shade, y + 12, 'BANK', typeface, 255, width, spacing=30)
     centred_text(draw_gilt, y, 'BANK', typeface, 255, width, spacing=30)
+    letters = Image.new('L', (width, height), 0)
+    centred_text(ImageDraw.Draw(letters), y, 'BANK', typeface, 255, width, spacing=30)
+    record_lettering('bank-sign.jpg', 'BANK', letters, 'Abril Fatface')
     gilt_array = np.asarray(gilt, np.float32)[..., None] / 255
     shade_array = blurred(np.asarray(shade, np.float32) / 255, 2)[..., None] * (1 - gilt_array)
     # gold leaf: brighter towards the top of each letter, with a fine burnished sparkle
@@ -147,6 +208,9 @@ def brass_plate(folder, width=1024, height=455):
     typeface = fitted_font('OldStandard-Bold.ttf', 300, 'BANK', width * 0.66, spacing=24)
     top, bottom = typeface.getbbox('BANK')[1], typeface.getbbox('BANK')[3]
     centred_text(draw, (height - (bottom - top)) / 2 - top, 'BANK', typeface, 255, width, spacing=24)
+    letters = Image.new('L', (width, height), 0)
+    centred_text(ImageDraw.Draw(letters), (height - (bottom - top)) / 2 - top, 'BANK', typeface, 255, width, spacing=24)
+    record_lettering('brass-plate.jpg', 'BANK', letters, 'Old Standard TT')
     cut = np.asarray(engraving, np.float32)[..., None] / 255
     # the engraving's lower edge catches the light: a thin bright line just below each cut
     lit_edge = np.clip(np.roll(cut, 2, axis=0) - cut, 0, 1)
@@ -219,6 +283,7 @@ def drum_stencil(folder, words, file_name, seed, size=(2048, 668)):
     120 degrees of the drum and 0.20 m of its height (see build_chapter_2_props.py); the word takes
     up the middle 90 degrees or less, so its ends don't turn too far away from a camera in front."""
     mask = stencil_mask(words, size, height_fraction=0.66, squeeze=0.74, spacing=0.12, widest=0.75)
+    record_lettering(file_name, words, mask, 'DejaVu Sans Bold')
     sprayed(mask, seed, (226, 220, 202)).save(os.path.join(folder, file_name))
     print('painted', file_name)
 
@@ -238,6 +303,7 @@ def crate_stencil(folder, size=(1600, 645)):
     words = stencil_mask('THIS WAY UP', (width, words_band), height_fraction=0.72, squeeze=0.82, spacing=0.10)
     mask = np.zeros((height, width), np.float32)
     mask[height - words_band - int(height * 0.04):height - int(height * 0.04)] = words
+    record_lettering('crate-stencil.png', 'THIS WAY UP', mask, 'DejaVu Sans Bold')
     arrows = Image.new('L', (width, height), 0)
     draw = ImageDraw.Draw(arrows)
     for centre_x in (width * 0.30, width * 0.70):
@@ -265,20 +331,45 @@ def manila_paper(size, seed):
     return paper * (1 - 0.22 * handled)
 
 
+# where the envelope was once folded across and flattened again, as a fraction of its height from the
+# top of the printed face: below the word, so the crease never runs through a letter
+# (build_chapter_2_props.py reads it from lettering-sizes.json and puts the same crease in the paper)
+ENVELOPE_FOLD_FROM_TOP = 0.8
+
+
+def fold_line(picture, row, seed, strength=1.0):
+    """A faint fold across a paper picture at `row`: a soft shadow line with a thin lit line just below
+    it, broken here and there, and the paper beyond the fold a touch lighter (it lies at another angle)."""
+    height, width = picture.shape[:2]
+    rows = np.arange(height, dtype=np.float32)[:, None]
+    shadow = np.exp(-((rows - row) ** 2) / (2 * 1.6 ** 2))
+    lit = np.exp(-((rows - row - 3) ** 2) / (2 * 1.2 ** 2))
+    broken = 0.55 + 0.45 * noise(1, width, seed, 1.2, 2)[0][None, :]
+    beyond = (rows > row) * 0.025
+    shade = 1 - strength * (0.10 * shadow * broken) + strength * (0.045 * lit * broken + beyond)
+    return picture * shade[..., None]
+
+
 def wages_envelope(folder, size=(1024, 683)):
-    """The pay envelope (0.114 x 0.076 m): "WAGES" printed large in heavy black letters inside a printed
-    rule on the front; the back shows the gummed flap."""
+    """The pay envelope (0.114 x 0.076 m) of thin brown paper: "WAGES" printed large in heavy black
+    letters on the front (no printed border: a ruled border made it read as a plaque or a tray), a faint
+    fold across below the word; the back shows the gummed flap and the same fold."""
     width, height = size
     front = manila_paper(size, 91)
     ink = Image.new('L', size, 0)
     draw = ImageDraw.Draw(ink)
-    draw.rectangle((30, 30, width - 30, height - 30), outline=255, width=5)
     # as big and heavy as the envelope allows: even so, at real size it can only be read from close by
     typeface = fitted_font('AlfaSlabOne-Regular.ttf', 360, 'WAGES', width * 0.86, spacing=6)
     top, bottom = typeface.getbbox('WAGES')[1], typeface.getbbox('WAGES')[3]
     centred_text(draw, (height - (bottom - top)) / 2 - top, 'WAGES', typeface, 255, width, spacing=6)
+    fold_row = int(round(height * ENVELOPE_FOLD_FROM_TOP))
+    letters_top, letters_bottom = record_lettering('wages-envelope-front.jpg', 'WAGES', ink, 'Alfa Slab One',
+                                                   fold_from_top=ENVELOPE_FOLD_FROM_TOP)
+    if letters_bottom + 12 > fold_row:
+        raise SystemExit(f'wages-envelope-front.jpg: the fold (row {fold_row}) runs through the letters (rows {letters_top} to {letters_bottom})')
     printed = np.asarray(ink, np.float32)[..., None] / 255 * (0.85 + 0.15 * noise(height, width, 92, 1.0, 1)[..., None])
     front = front * (1 - printed) + np.array([0.09, 0.07, 0.06]) * printed
+    front = fold_line(front, fold_row, 94)
     as_picture(front).save(os.path.join(folder, 'wages-envelope-front.jpg'), quality=92)
     back = manila_paper(size, 93)
     flap = Image.new('L', size, 0)
@@ -286,8 +377,73 @@ def wages_envelope(folder, size=(1024, 683)):
     flap_array = np.asarray(flap, np.float32)[..., None] / 255
     edge = np.clip(blurred(flap_array[..., 0], 3) - blurred(flap_array[..., 0], 0.5), 0, 1)[..., None]
     back = back * (1 - 0.08 * flap_array) * (1 - 0.6 * edge)
+    back = fold_line(back, fold_row, 95)
     as_picture(back).save(os.path.join(folder, 'wages-envelope-back.jpg'), quality=92)
-    print('painted wages-envelope-front.jpg and wages-envelope-back.jpg', f'(letters {bottom - top} of {height} pixels high)')
+    print('painted wages-envelope-front.jpg and wages-envelope-back.jpg',
+          f'(letters {letters_bottom - letters_top} of {height} pixels high, rows {letters_top} to {letters_bottom}; fold at row {fold_row})')
+
+
+# ------------------------------------------------------------------------------- lunch tin, mug
+
+def tinplate_dull(folder, size=1024):
+    """Dull, darkened tinplate for the lunch tin (the picture covers 0.25 x 0.25 m): an even grey gone
+    dull and a little warm with handling, cloudy darker patches, fine scratches mostly one way, and a few
+    rust freckles. (A clean light grey with a sheen read as a modern plastic box.)"""
+    rng = np.random.default_rng(111)
+    cloudy = noise(size, size, 112, 2.4, 2)[..., None]
+    grain = noise(size, size, 113, 0.6, 1)[..., None]
+    tin = np.array([0.40, 0.395, 0.375]) * (0.86 + 0.14 * grain)
+    tarnish = np.clip((cloudy - 0.45) * 2.2, 0, 1)
+    tin = tin * (1 - 0.40 * tarnish) + np.array([0.24, 0.22, 0.19]) * 0.40 * tarnish
+    scratches = Image.new('L', (size, size), 0)
+    draw = ImageDraw.Draw(scratches)
+    for _ in range(260):
+        x, y = rng.uniform(0, size), rng.uniform(0, size)
+        angle = math.radians(rng.normal(12, 18))
+        length = rng.uniform(15, 120)
+        draw.line((x, y, x + length * math.cos(angle), y + length * math.sin(angle)), fill=int(rng.uniform(60, 160)), width=1)
+    lines = np.asarray(scratches, np.float32)[..., None] / 255
+    tin = tin * (1 - 0.35 * lines) + np.array([0.56, 0.56, 0.54]) * 0.35 * lines
+    freckles = ((noise(size, size, 114, 0.5, 1) > 0.86) & (cloudy[..., 0] > 0.55)).astype(np.float32)
+    freckles = blurred(freckles, 1.2)[..., None]
+    tin = tin * (1 - 0.7 * freckles) + np.array([0.33, 0.19, 0.11]) * 0.7 * freckles
+    as_picture(tin).save(os.path.join(folder, 'tinplate-dull.jpg'), quality=92)
+    print('painted tinplate-dull.jpg')
+
+
+def enamel_mug(folder, width=1024, height=512):
+    """Dark blue-black enamel for the mug, wrapped once round it (left to right is once round, top to
+    bottom is the rim down to the foot): a darker rolled rim, and chips knocked out of the enamel showing
+    the black iron, each with a thin pale edge of the grey ground coat; most chips at the rim and the
+    foot, where a mug gets knocked. (A plain light metal read as a modern stainless camping mug.)"""
+    rng = np.random.default_rng(121)
+    enamel = np.array([0.135, 0.15, 0.20]) * (0.9 + 0.1 * noise(height, width, 122, 2.0, 2)[..., None])
+    rows = np.arange(height, dtype=np.float32)[:, None, None] / height
+    rim = np.clip(1 - (rows - 0.035) / 0.012, 0, 1)            # the dark rolled rim at the top
+    enamel = enamel * (1 - 0.6 * rim)
+    halo, core = Image.new('L', (width, height), 0), Image.new('L', (width, height), 0)
+    draw_halo, draw_core = ImageDraw.Draw(halo), ImageDraw.Draw(core)
+    for index in range(55):
+        place = rng.random()
+        if place < 0.5:
+            y, radius = rng.uniform(0.0, 0.08) * height, rng.uniform(3, 10)       # the rim
+        elif place < 0.75:
+            y, radius = rng.uniform(0.93, 1.0) * height, rng.uniform(3, 9)        # the foot
+        else:
+            y, radius = rng.uniform(0.1, 0.9) * height, rng.uniform(2, 6)         # the body, a few small ones
+        x = rng.uniform(0, width)
+        corners = 9
+        outline = [(radius * (0.6 + 0.4 * rng.random()) * math.cos(2 * math.pi * k / corners),
+                    radius * (0.6 + 0.4 * rng.random()) * 0.8 * math.sin(2 * math.pi * k / corners)) for k in range(corners)]
+        for shift in (-width, 0, width):     # drawn again across the seam, so the wrap is unbroken
+            draw_halo.polygon([(x + shift + dx * 1.35, y + dy * 1.35) for dx, dy in outline], fill=255)
+            draw_core.polygon([(x + shift + dx, y + dy) for dx, dy in outline], fill=255)
+    halo_array = blurred(np.asarray(halo, np.float32) / 255, 0.6)[..., None]
+    core_array = blurred(np.asarray(core, np.float32) / 255, 0.5)[..., None]
+    out = enamel * (1 - halo_array) + np.array([0.26, 0.28, 0.31]) * halo_array
+    out = out * (1 - core_array) + np.array([0.055, 0.05, 0.047]) * core_array
+    as_picture(out).save(os.path.join(folder, 'enamel-mug.jpg'), quality=92)
+    print('painted enamel-mug.jpg')
 
 
 if __name__ == '__main__':
@@ -307,4 +463,8 @@ if __name__ == '__main__':
     drum_stencil(folder, 'DIESEL', 'drum-stencil-diesel.png', seed=105)
     crate_stencil(folder)
     wages_envelope(folder)
-    print('pictures written to', folder)
+    tinplate_dull(folder)
+    enamel_mug(folder)
+    with open(os.path.join(folder, 'lettering-sizes.json'), 'w') as handle:
+        json.dump(LETTERING_SIZES, handle, indent=1)
+    print('pictures and lettering-sizes.json written to', folder)

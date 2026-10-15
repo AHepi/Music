@@ -413,7 +413,7 @@ camera = set_camera('start', PLATE_FOV_DEGREES)
 if option('--plate'):
     render(option('--plate'), 1536, 2730, int(option('--samples', '48')))
 if '--export' in arguments:
-    export_for_film(camera, 'notice-corner', PLATE_FOV_DEGREES, 'assemble_notice_corner.py')
+    export_for_film(camera, 'notice-corner', PLATE_FOV_DEGREES, 'assemble_notice_corner.py', folder=SET_FOLDER)
     write_shot_settings()
 if option('--save'):
     bpy.ops.wm.save_as_mainfile(filepath=option('--save'), relative_remap=True)
