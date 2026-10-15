@@ -237,6 +237,29 @@ turning.
   confirmed fixes, then a re-check of every changed sentence.
 - Then read it to one or two real newcomers with the script's listener questions, before paying to record.
 
+## Making a long chapter in the built-and-painted look (log 34)
+
+- **Timing before recording:** `film-kit/narration-tools/estimate_timeline.py` makes an estimated timeline from the
+  narration script, with Malina's word lengths and pauses measured from a real recording (tested: it predicts the
+  old chapter 2's 251.7 seconds of speech as 252). Pages ask for words, not seconds, so they retime themselves when
+  the real timeline replaces it.
+- **Held shots are fast:** a page whose camera holds returns `still: true` (or a key that changes when its set
+  changes) from `pose(t)` and marks its moving things with `kit.moving(...)`; the stage draws the painted set once
+  and only the moving things each frame (1.2 s a frame against 5.7 on the notice corner).
+- **Lazy chapters:** `buildCinemaChapter({..., lazy: true})` builds only the pages a moment shows; each page file
+  then exports its `join`. Film them with `PIECE_FRAMES=240` so each piece loads its pages once.
+- **State changes on a held shot:** `projection.setPainting(picture)` (a time cut), `projection.blendTo(picture,
+  amount)` (a short blend), `projection.setView(projector, picture)` (another view of the same set). A state
+  picture changes only where something changed: `film-kit/paper-film/tools/make_state_picture.py` builds it from
+  the two plates' difference and the changed things' outlines.
+- **Scripts that now need settings:** `build_street.py` writes to `--out`/`--name` and refuses to overwrite
+  without `--replace`; `set_dressing.export_for_film` needs a folder; chapter 2's props are built with
+  `--choices`, `--library` and `--scratch` (`paper-film/blender/inflation-chapter-2-newcomers/props/`), and the
+  painter writes `lettering-sizes.json` before the builder runs. The converter can paint out a maker's label
+  (`PAINT_OUT` in the choices file). The frozen test scene's `--export` stops on purpose.
+- **People:** `paper-film/blender/figures/build_figures.py` builds the waiting men and walkers; check them lit by a
+  lamp from the camera's side (`figure_sheet.py`), the light that showed bald-looking heads.
+
 ## Saving to the repository (your rule, decision 30)
 
 - After each piece of work, save everything made to the repository except videos and audio: pictures,

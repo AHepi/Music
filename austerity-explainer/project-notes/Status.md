@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-15, morning.**
+**As of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -259,6 +259,19 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - The writing rules have a newcomer section (section 4). The film plugin (1.2.0) has a new workflow,
   `test-script-with-newcomers`, tried only in a practice run with pretend helpers that do no real work.
 - Not heard by a real newcomer, not recorded, not filmed. Spent nothing.
+
+## Chapter 2's full redesign (log 34, in progress since 2026-10-15)
+
+- Your words (decision 40): "The full redesign. New budget starting from now is $20. Go!" The whole newcomer script made in
+  the look you kept in log 32. The plan: `chapter-2-inflation/34 Plan - chapter 2 full redesign - places, shots and order of
+  work.md` (6 places, 30 shots, 9 slides; about US$7 planned; 5 to 7 days of work).
+- Done (free): the estimated timeline; held shots about 5 times faster; lazy chapters (2.8 GB a piece instead of running out
+  of memory); state changes on a held shot; the 100-dot panel; the chapter scene with stand-in pages; reusable street and
+  prop scripts with chosen output folders (the kept notice corner proven unchanged, pixel for pixel); chapter 2's prop
+  library (13 props); 11 figure shapes; the people test (free part); the two factories and the far town at true scale.
+- Building now (free): the Works assembled with its four views and plates; pages 3 to 5 filmed with the plates standing in.
+- Spent so far from the US$20: nothing. The recording and the paintings wait for your yes (the safety check refused the
+  first paid call).
 
 ## Waiting on you
 
