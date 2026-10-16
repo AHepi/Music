@@ -16,7 +16,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, project_folder, PROJECT_WORDS  # noqa: E402
 from settings import load_settings  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
@@ -33,7 +33,7 @@ CH1_BEFORE_09 = os.path.join(SCRIPTS, 'chapter-1-narration-script-before-log-09.
 CH1 = os.path.join(KIT, 'examples', 'austerity-chapter-1')
 CH2 = os.path.join(KIT, 'examples', 'inflation-chapter-2')
 NEW_TIMELINE = os.path.join(KIT, 'examples', 'inflation-chapter-2-newcomers', 'timeline-estimated.json')
-RECORDINGS = '/home/user/Music/austerity-explainer/chapter-2-inflation/narration/recordings'
+RECORDINGS = os.path.join(project_folder() or '(project not found)', 'chapter-2-inflation', 'narration', 'recordings')   # audio: not in the plugin
 WORK = tempfile.mkdtemp()
 
 
@@ -233,7 +233,7 @@ if os.path.isdir(RECORDINGS):
     check.true(f'the real silence in each "..." measured from the recordings: {min(silences):.2f} to {max(silences):.2f} s, all under 1 s',
                max(silences) < 1.0, recorded='log 33 (each "..." gave under a second)', proves='measured on the audio, not inferred from the transcript')
 else:
-    check.note(f'chapter 2 recordings not found at {RECORDINGS}: the audio checks were not run')
+    check.note(f'chapter 2\'s recordings were not found ({PROJECT_WORDS}): the audio checks were not run')
 
 # 7. the command line
 run = subprocess.run([sys.executable, '-I', '-B', os.path.join(NARRATION_TOOLS, 'lint_script.py'), 'before', OLD, '--timeline', os.path.join(CH2, 'timeline.json'),

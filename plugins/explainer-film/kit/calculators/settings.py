@@ -283,4 +283,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if HERE not in sys.path:
+        sys.path.insert(0, HERE)
+    from calculator_output import run_main
+    sys.exit(run_main(main, 'settings'))

@@ -1,6 +1,6 @@
 ---
 name: check-and-critique
-description: Check a finished set of cinema-look pages before filming - stills of every beat, the page turns from the whole chapter, and an independent critique by helper agents (pictures, on-screen content, code) whose findings a skeptic verifies and ranks. Use when all pages are built, and again after big fixes.
+description: Check a finished set of cinema-look pages before filming - first the automatic page checks (timing, words on screen, layout, camera, by calculation), then stills of every beat, the page turns from the whole chapter, and an independent critique by helper agents (pictures, on-screen content, code) aimed at what the tools cannot judge, whose findings a skeptic verifies and ranks. Use when all pages are built, and again after big fixes.
 ---
 
 # Check and critique before filming
@@ -9,6 +9,34 @@ description: Check a finished set of cinema-look pages before filming - stills o
 price tags showing as white slivers before they flipped up, a label running into a dial, a stray
 mark beside every comma on a flip counter, banknotes looking like white bricks, and one page's words
 showing on the next during page turns (only visible when frames are drawn one after another).
+
+## 0. First let the tools find what they can (preflight `pages`)
+
+Run `explainer-film-preflight pages` (or the three tools in skill `build-cinema-page`, "Check the pages by
+calculation": `paper-film/tools/page_events.mjs`, then `calculators/plan_page_timing.py check` and
+`paper-film/tools/check_page_layout.mjs` on its events, plus `paper-film/tools/camera_audit.py` per page). Fix
+every failure it lists before spending critics' time: a label readable for under a second, an ambiguous word
+lookup, a typed word or number the narrator doesn't say, words fading before a cut, a pop, a held shot with no
+still key, a turn during a slide. Use the still times it prints for the sheets below, so every event and page
+turn is covered.
+
+## What the critics must still judge
+
+The tools measure; they cannot judge these. Put this list in the critics' brief (the `notes` argument
+below), so they spend their effort where no tool can (the full list with examples: the kit's
+`docs/LLM tips and tricks.md`, section 19):
+- what a detail reads as on a phone (a contour map, a bar chart, a tank), at about 300 px wide;
+- history and story accuracy of every painted object, not only the words (a history critic);
+- whether a motion matches the meaning of its words (a needle falling on "raising");
+- whether machines read as machines and props as what they are, and whether a hero prop has enough detail;
+- whether a picture contradicts a card, or a colour or symbol carries political or commercial meaning;
+- whether a newcomer would understand, and the 3 or 4 things a newcomer must see in each shot;
+- whether a time cut where people vanish reads as time passing or as a glitch;
+- the overall feel of the light, and which rule wins when two conflict;
+- whether a flagged near-touch, thin part or small sign is worth fixing; if not, it goes in the `accepted`
+  list with the reason, who and the date.
+
+Have each critic compare the work with the best frame made so far, and a skeptic check their findings.
 
 ## 1. Every page, every beat
 
@@ -59,6 +87,10 @@ Then run `check-facts` again with `onScreen` set to the page files, so every num
     groups: [ { label: "pages 1-3", pages: [1,2,3], findings: "/abs/fixes/page-1.md ... page-3.md", stills: "new sheets ..." }, ... ],
     joins: "/abs/joins/sheet.jpg", changes: "what shared things changed", effort: "medium" } })
   ```
-- Fix what it finds, look again, and record each fault and its fix in Lessons.md. Only then film.
+- Fix what it finds, run `explainer-film-preflight pages` again (fixes make new faults), look again, and
+  record each fault and its fix in Lessons.md. Only then run `explainer-film-preflight film` and film.
+- Save the critique's findings as JSON and mark each `"status": "fixed"` or `"accepted"` (with `"who"` and
+  `"date"`) once dealt with: the `film` stage (`--critique FILE`) refuses a critique, or a `pages` report,
+  older than any page file, or with a finding still open.
 - If filming has already started: a stretch only needs re-filming if its page changed after the
   stretch started (compare the stretch file's time with the page file's).

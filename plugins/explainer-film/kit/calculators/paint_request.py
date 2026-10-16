@@ -59,7 +59,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings, resolve_profile  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 import frame_geometry as geometry  # noqa: E402
 import painting_measures as measures  # noqa: E402
 from painting_measures import check_shot  # noqa: E402
@@ -411,19 +411,36 @@ def preflight(view, args):
     if args.render_log:
         text = open(args.render_log, errors='replace').read()
         hits = [f for f in faults if f in text]
-        item(found, 'render log', 'fail' if hits else 'pass',
-             f'The render log names {join_words(hits)}: the plate has shadow faults.' if hits else 'The render log has no render faults.',
-             {'faults_found': hits}, 'Render the plate again with fewer shadow-casting lights or a larger shadow pool (lesson 110).' if hits else '')
+        saved = [os.path.basename(m) for m in re.findall(r'^\s*[\d:.]+\s+render\s+\|\s+Saved:\s+\'([^\']+)\'', text, re.M)]
+        plate_name = os.path.basename(args.plate)
+        if not saved:
+            item(found, 'render log', 'fail', f'{os.path.basename(args.render_log)} is not a Blender render log (no "render | Saved:" line'
+                 + ('; the file is empty' if not text.strip() else '') + '): it proves nothing about the plate.', {'saved': []},
+                 'Give the log Blender wrote while drawing this plate (blender -b ... > plate.log 2>&1).')
+        elif plate_name not in saved:
+            item(found, 'render log', 'fail', f'The render log saves {join_words(saved)}, not {plate_name}: it is the log of another render.',
+                 {'saved': saved}, 'Give the log of this plate\'s own render.')
+        else:
+            item(found, 'render log', 'fail' if hits else 'pass',
+                 f'The render log names {join_words(hits)}: the plate has shadow faults.' if hits else f'The render log of {plate_name} has no render faults.',
+                 {'faults_found': hits}, 'Render the plate again with fewer shadow-casting lights or a larger shadow pool (lesson 110).' if hits else '')
     else:
         item(found, 'render log', 'not checked', 'No render log given (--render-log).')
     # 2. the shot checker's light rules
     if args.shot_report:
-        text = open(args.shot_report).read()
+        text = open(args.shot_report, errors='replace').read()
+        known = os.path.join(os.path.dirname(os.path.abspath(args.shot_report)), 'known.json')
+        by_checker = (text.startswith('# Shot check: ') and re.search(r'^Made by check_shot\.py version \S+', text, re.M)) or os.path.exists(known)
         problems = text.split('## Problems', 1)[1].split('\n## ', 1)[0] if '## Problems' in text else ''
         light = [line.strip() for line in problems.splitlines() if re.match(r'\s*\d+\. \*\*rule [56]', line)]
-        item(found, 'light rules', 'fail' if light else 'pass',
-             (f'{len(light)} light problem(s) in the shot check: fix light in 3D before paying for paint (decision 37).') if light else
-             'The shot check lists no light problem (rules 5 and 6).', {'problems': light})
+        if not by_checker:
+            item(found, 'light rules', 'fail', f'{os.path.basename(args.shot_report)} is not the shot checker\'s report (no "# Shot check:" title and '
+                 '"Made by check_shot.py version" line, and no known.json beside it): the light rules were not judged.', {'problems': []},
+                 'Run the shot checker on the plate (paper-film/tools/check-shot.sh) and give its report.md.')
+        else:
+            item(found, 'light rules', 'fail' if light else 'pass',
+                 (f'{len(light)} light problem(s) in the shot check: fix light in 3D before paying for paint (decision 37).') if light else
+                 'The shot check lists no light problem (rules 5 and 6).', {'problems': light})
     else:
         item(found, 'light rules', 'not checked', 'No shot-check report given (--shot-report): run check_shot.py on the plate first.')
     # 3. thin parts
@@ -1070,4 +1087,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'paint_request'))

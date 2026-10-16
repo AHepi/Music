@@ -16,14 +16,14 @@ import statistics
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, film_kit_folder  # noqa: E402
 from settings import load_settings, problems_in, resolve_profile, walk_entries, MissingSetting, KINDS  # noqa: E402
 
 check = Checker('film settings: the table, its reader and drift in the tools')
 settings = load_settings()
 data = settings.data
 KIT = os.path.dirname(CALCULATORS)
-FILM_KIT = os.environ.get('FILM_KIT') or os.path.normpath(os.path.join(KIT, '..', '..', '..', 'austerity-explainer', 'film-kit'))
+FILM_KIT = film_kit_folder() or '(film kit not found)'   # FILM_KIT, or austerity-explainer/film-kit next to the plugins folder
 
 # 1. the table
 entries = dict(walk_entries(data))
@@ -81,7 +81,7 @@ stretches = re.findall(r'^frames .*?:\s+([\d.]+) s a frame\s+(.+)$', times, re.M
 held = [float(s) for s, kind in stretches if kind.startswith('held') and 'partly' not in kind]
 sliding = [float(s) for s, kind in stretches if kind.startswith('sliding')]
 check.close('held frame cost: the table against the round 4 stretches (s a frame, median)', settings.value('filming.seconds_per_frame_held_live_effects'),
-            statistics.median(held), 0.05, recorded=f'scratchpad redesign/round4-film/film/frame-times.txt ({len(held)} full held stretches, one worker; copied to fixtures/filming)',
+            statistics.median(held), 0.05, recorded=f'working files redesign/round4-film/film/frame-times.txt ({len(held)} full held stretches, one worker; copied to fixtures/filming)',
             proves='the table carries round 4\'s measured cost, not the plan\'s older 1.2 to 1.5 s')
 check.close('sliding frame cost (s a frame)', settings.value('filming.seconds_per_frame_sliding'), statistics.mean(sliding), 0.05, recorded='same file: "sliding (W1): 4.31"')
 steady = {m.group(1): float(m.group(2)) for m in re.finditer(r'^\s+(held, live effects \(W\d\)): ([\d.]+) s a frame on average', times, re.M)}

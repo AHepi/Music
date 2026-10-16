@@ -148,7 +148,9 @@
   "landmark": {
    "type": "object",
    "required": ["name", "top"],
-   "properties": {"name": {"type": "string"}, "top": {"$ref": "#/$defs/vector"}, "identifies": {"type": "string"}}
+   "properties": {"name": {"type": "string"}, "top": {"$ref": "#/$defs/vector"}, "identifies": {"type": "string"},
+    "seen_through": {"type": "object", "required": ["low", "high"], "description": "An opening (window, door) the landmark is seen through from inside: view_audit.py skips the top when the line from the camera misses this box.",
+     "properties": {"name": {"type": "string"}, "low": {"$ref": "#/$defs/vector"}, "high": {"$ref": "#/$defs/vector"}}}}
   },
   "surface": {
    "type": "object",
@@ -168,7 +170,8 @@
   "prop": {
    "type": "object",
    "required": ["name", "at"],
-   "properties": {"name": {"type": "string"}, "at": {"$ref": "#/$defs/vector"}, "size": {"$ref": "#/$defs/vector"},
+   "properties": {"name": {"type": "string"}, "at": {"$ref": "#/$defs/vector", "description": "The prop's MIDDLE: the centre of its box when size is given (a 0.438 m tall basket standing on a 0.885 m counter has z 0.885 + 0.219 = 1.104). Without a size it is one point on the thing. An older file that wrote the bottom middle is read that way only when the middle would sink into the surface under it, and plan_shot.py says so under Assumed."},
+                  "size": {"$ref": "#/$defs/vector", "description": "The box's width, depth and height in metres (x, y, z before the turn)."},
                   "turn_degrees": {"type": "number"}, "role": {"enum": ["subject", "support", "story", "work", "fill", "other"]}}
   },
   "accepted": {

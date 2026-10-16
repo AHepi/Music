@@ -120,5 +120,22 @@
   0.22
  ],
  "story_reaches_down": 0.7,
- "story_reaches_down_note": "rule 7 (round 5): some story prop or the subject must reach at least this far down the frame, so the story fills the frame into its lower part (the notice corner's drum, chair and pail fill 0.45 to 0.8 down); checked only where a check file gives it"
+ "story_reaches_down_note": "rule 7 (round 5): some story prop or the subject must reach at least this far down the frame, so the story fills the frame into its lower part (the notice corner's drum, chair and pail fill 0.45 to 0.8 down); checked only where a check file gives it",
+ "kind_of_shot": [
+  "crowd",
+  "dark_subject"
+ ],
+ "kind_of_shot_note": "A crowd of eight men before No. 2's dark gateway (the place facts view \"w2\"); see works-w1-shot-check.json.",
+ "figures": [
+  "man 1",
+  "man 2",
+  "man 3",
+  "man 4",
+  "man 5",
+  "man 6",
+  "man 7",
+  "man 8"
+ ],
+ "accepted": [],
+ "accepted_note": "Nobody has accepted a problem in this view yet. Round 5's final checks list 13 to 29 problems a view; the kinds of shot cover the systematic ones (calculators/tests/test_shot_kind_profiles.py prints the rest). Add an entry only when a person decides to keep a problem: {\"rule\": a shot_kind_profiles rule name or the report's rule words, \"things\": [groups] (optional), \"reason\", \"who\", \"date\", \"measured\" (optional: the number it was accepted at; a problem grown more than 5% past it counts again)}."
 }

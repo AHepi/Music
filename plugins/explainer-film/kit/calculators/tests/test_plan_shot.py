@@ -61,7 +61,7 @@ works, works_full = run('works-shots.json')
 w1 = works['w1']
 reach = item(w1, 'rule7_story_reaches_down')
 check.close('W1 as built: the DIESEL drum\'s reach (down)', reach['measured'], 0.72, 0.006,
-            recorded='scratchpad redesign/round5-set/checks/final-w1-quiet/report.md rule 7: "diesel drum, reaching 0.72 down" (rendered)',
+            recorded='working files redesign/round5-set/checks/final-w1-quiet/report.md rule 7: "diesel drum, reaching 0.72 down" (rendered)',
             proves='the planner predicts the rendered reach from the place facts before anything is drawn (the core checks the drum\'s front middle, '
                    '0.723; the planner uses its box corner)')
 check.equal('W1 as built: rule 7 passes and nothing fails outright', (reach['verdict'], w1['counts'].get('fail', 0)), ('pass', 0),
@@ -238,7 +238,7 @@ check.note(f'people test: the five men round the brazier lie {axis["measured"]} 
 # ------------------------------------------------------------------------------------------------ hold-out: checkout C1, judged as built
 checkout, _ = run('checkout-c1-shots.json')
 c1 = checkout['c1']
-recorded = 'scratchpad redesign/round5-checkout/check10/report.md (the shot checker on the render, 2026-10-16)'
+recorded = 'working files redesign/round5-checkout/check10/report.md (the shot checker on the render, 2026-10-16)'
 check.close('checkout C1 (hold-out): where the lines meet, across', c1['meeting_point']['across'], 0.500, 0.001, recorded=recorded)
 gap = item(c1, 'rule1_meeting_point_gap')
 check.close('checkout C1 (hold-out): the rule 1 gap to the bill stand', gap['measured'], 0.005, 0.006, recorded=recorded + ' ("0.005 of the frame width")',

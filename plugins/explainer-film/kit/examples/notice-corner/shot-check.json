@@ -342,5 +342,41 @@
  ],
  "box_excludes": [
   "board"
- ]
+ ],
+ "kind_of_shot": [
+  "still_life"
+ ],
+ "kind_of_shot_note": "A still life: the base profile, from the picture the user liked (log 30). film-settings.json shot_kind_profiles.still_life.",
+ "figures": [],
+ "accepted": [
+  {
+   "rule": "rule6_lit_from_below",
+   "measured": 0.08,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the finished still measured 0.08 (needs 0.10); the film page lights the notice's own surface with a copy of the warm light and reached 0.23 (log 32)"
+  },
+  {
+   "rule": "rule10_quiet_side_weight",
+   "measured": 0.38,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the still's quiet side held 38% (aim 40-48%); the film page measured 46% (log 32)"
+  },
+  {
+   "rule": "rule8_bottom_left_share",
+   "measured": 0.021,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32); the gutter kept as a narrow lead-in line (log 32)",
+   "date": "2026-10-14",
+   "reason": "the painted end frame's gutter covered 2.1% of the bottom-left quarter (limit 1%): a thin lead-in line, not a dark lump"
+  },
+  {
+   "rule": "slide_magnification",
+   "measured": 1.45,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the pail comes 1.45 times nearer during the 1.5 m slide (the painting allows about 1.29); the slide was made before plan 34's limit (F13) and the user kept the film"
+  }
+ ],
+ "accepted_note": "The problems the user kept with the shot (decision 38, log 32), copied from the notice corner's place facts. The shot checker lists them under \"Known and allowed\" instead of as problems; the slide entry is for plan_shot.py and the slide checks (the shot checker notes that it does not measure it)."
 }

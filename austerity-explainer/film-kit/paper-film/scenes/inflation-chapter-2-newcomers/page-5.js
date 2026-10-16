@@ -41,7 +41,8 @@ export const PICTURES = {
 // failing that its helper plate), added to the pictures as 'w3 working'
 const W3_WORKING = /^works-w3-[a-z0-9-]*working[a-z0-9-]*(-state\.png|-plate(\.jpg)?)$/;
 // the climbing price arrow (5a): from about 0.06 across, 0.52 down, about 230 pixels at 45 degrees up the left pier's
-// dark stone (at 260 its head reached the pale door leaf in the gateway), shortened if need be so that it, its head and the word PRICES keep `clear` pixels from No. 2's gate board
+// dark stone (at 260 its head reached the pale door leaf in the gateway), shortened if need be so that it, its head and
+// the word PRICES keep `clear` pixels from No. 2's gate board
 const PRICE_ARROW = { from: { x: TEXT_LEFT, y: 0.52 * 1920 }, length: 230, angle: 45, clear: 24, width: 10, size: 30 };
 
 // The rule cards' places (pixels; plan 34: 0.06 to 0.90 across, the upper about 0.08 to 0.16 down, the lower about

@@ -1,5 +1,5 @@
 {
- "about": "The film's house numbers, in one table that every calculator (kit/calculators) and tool reads, so the tools cannot drift apart. Read it with kit/calculators/settings.py (python3 settings.py show SECTION). Built from the inventory of 423 hand-found values (log 35, scratchpad plugin-calculators/inventory-and-design.json) and checked against the project's files. Sources name the austerity-explainer project's files: film-kit/... is the film kit, notes/... the project notes, \"scratchpad redesign/...\" the redesign rounds' working folder of log 34.",
+ "about": "The film's house numbers, in one table that every calculator (kit/calculators) and tool reads, so the tools cannot drift apart. Read it with kit/calculators/settings.py (python3 settings.py show SECTION). Built from the inventory of 423 hand-found values (log 35, working files plugin-calculators/inventory-and-design.json) and checked against the project's files. Sources name the austerity-explainer project's files: film-kit/... is the film kit, notes/... the project notes, \"working files redesign/...\" the redesign rounds' working folder of log 34.",
  "entry_format": "Every number is {\"value\", \"unit\", \"kind\", \"source\"} (some add \"note\"). A section may hold groups of entries. Keys read with dots: frame.width_pixels. Builders add their own section (with an \"about\" line); they never change another section's numbers without saying so.",
  "kinds": {
   "measured": "the project measured it (a recording, a render, a bill, a fit to a picture): change it only by measuring again",
@@ -838,7 +838,7 @@
    "value": 2.2,
    "unit": "(surround + 0.05)/(figure + 0.05)",
    "kind": "measured",
-   "source": "People test (scratchpad redesign/people-paint/check-figures/film-figure-contrast.json: painted 2.20, silhouettes 2.98)"
+   "source": "People test (working files redesign/people-paint/check-figures/film-figure-contrast.json: painted 2.20, silhouettes 2.98)"
   },
   "tone_piece": {
    "value": {
@@ -1134,7 +1134,9 @@
    "value": 0.1,
    "unit": "share of the frame",
    "kind": "judged",
-   "source": "Rounds 3-4: a time cut where the swap is small (men going: 6.5 to 9.3%)"
+   "source": "Rounds 3-4: a time cut where the swap is small (men going: 6.5 to 9.3%)",
+   "note": "SUPERSEDED: no tool reads this. plan_states.py uses painting_tools.plan_states.cut_when_change_share_max (0.12), which keeps round 5's men-gone swap (10.3%) a cut; at 0.10 it would be a blend. Kept for its history until a person picks one and removes the other.",
+   "superseded_by": "painting_tools.plan_states.cut_when_change_share_max"
   },
   "blend_when_mask_share_evidence": {
    "value": [
@@ -1736,19 +1738,19 @@
    "value": 0.9,
    "unit": "seconds a frame, one worker",
    "kind": "measured",
-   "source": "scratchpad redesign/round4-film/film/frame-times.txt (round 4: 0.88 to 0.99 by view; W3 0.89, W2 0.91, W1 0.99)"
+   "source": "working files redesign/round4-film/film/frame-times.txt (round 4: 0.88 to 0.99 by view; W3 0.89, W2 0.91, W1 0.99)"
   },
   "seconds_per_frame_sliding": {
    "value": 4.3,
    "unit": "seconds a frame, one worker",
    "kind": "measured",
-   "source": "scratchpad redesign/round4-film/film/frame-times.txt (W1 slide 4.31)"
+   "source": "working files redesign/round4-film/film/frame-times.txt (W1 slide 4.31)"
   },
   "seconds_loading_a_piece": {
    "value": 34,
    "unit": "seconds a piece",
    "kind": "measured",
-   "source": "scratchpad redesign/round4-film/film/frame-times.txt (first stretch of each piece minus the steady rate: 22 to 58 s, mean 34)"
+   "source": "working files redesign/round4-film/film/frame-times.txt (first stretch of each piece minus the steady rate: 22 to 58 s, mean 34)"
   },
   "seconds_per_frame_held_nothing_live": {
    "value": {
@@ -1881,10 +1883,10 @@
   "fal_flux_3_edit_cents_per_megapixel": {
    "value": 4.8,
    "unit": "US cents a megapixel (returned + every picture sent)",
-   "kind": "measured",
+   "kind": "judged",
    "source": "people-test-paintings.json note",
    "date_read": "2026-10-16",
-   "note": "The plan had 2.4 c/MP from the price list (log 34 plan); the bill on the day was twice that. The people test came to about 85 c for two paintings, itself an estimate (fal shows no exact charge)."
+   "note": "The price shown on the day (2026-10-16), not a bill: fal shows no exact charge for a request. The plan had 2.4 c/MP from the price list (log 34 plan); the price shown that day was twice that. The people test came to about 85 c for two paintings, itself an estimate. Fit it to real charges with paint_request.py fit-price before trusting it."
   },
   "fal_price_list_cents_per_megapixel": {
    "value": 2.4,
@@ -1892,7 +1894,7 @@
    "kind": "measured",
    "source": "Plan 34 lines 1131-1133 (fal's price list)",
    "date_read": "2026-10-15",
-   "note": "Superseded by the 4.8 c/MP charged on 2026-10-16."
+   "note": "Superseded by the 4.8 c/MP shown on 2026-10-16 (the price shown that day, not a bill)."
   },
   "nano_banana_pro_cents": {
    "value": 15,
@@ -1970,7 +1972,8 @@
    "unit": "US dollars",
    "kind": "judged",
    "source": "Decision 40 (a new US$20 from log 34); plan 34 money table",
-   "date_read": "2026-10-15"
+   "date_read": "2026-10-15",
+   "note": "The spending line is where paid steps stop and the user is asked again before more is spent. Both money gates use it: paint_request.py price and plan_budget.py ledger (for the allowance of this size, or any allowance in the ledger that gives its own \"spending_line\")."
   },
   "old_painting_prices_cents": {
    "value": {
@@ -2649,7 +2652,7 @@
      ],
      "unit": "share of width x height",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet 0.64 x 0.33, W2 slowed 0.76 x 0.32, W1 working 0.50; a loose crowd two deep across a gate (round 4 finding 2) cannot fit 0.40 wide (skeptic: \"a crowd's box limit is set by the crowd\")",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet 0.64 x 0.33, W2 slowed 0.76 x 0.32, W1 working 0.50; a loose crowd two deep across a gate (round 4 finding 2) cannot fit 0.40 wide (skeptic: \"a crowd's box limit is set by the crowd\")",
      "limit_type": "box_max"
     },
     "rule4_between_figures": {
@@ -2657,7 +2660,7 @@
      "value": null,
      "unit": "replaced",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): near-touches between men accepted (W1 5, W2 slowed 8, W3 14)",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): near-touches between men accepted (W1 5, W2 slowed 8, W3 14)",
      "limit_type": "rule",
      "replaced_by": "people.crowd_head_spacing_head_widths and people.crowd_figure_visible_share_min (skeptic, log 35)"
     },
@@ -2666,7 +2669,7 @@
      "value": 0.02,
      "unit": "share of the frame per story thing (the subject or a story prop)",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet diesel drum 1.6%, man 6 1.5%, man 5 1.2%; W2 quiet the gateway 1.4%; W2 slowed men 1.6, 1.6, 1.3% (rule order: the reach wins). W1's petrol drum (1.4%) is not a story thing there and stays a problem",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet diesel drum 1.6%, man 6 1.5%, man 5 1.2%; W2 quiet the gateway 1.4%; W2 slowed men 1.6, 1.6, 1.3% (rule order: the reach wins). W1's petrol drum (1.4%) is not a story thing there and stays a problem",
      "limit_type": "max",
      "applies_to": "story things (the subject and story props); other things keep 0.01"
     },
@@ -2678,7 +2681,7 @@
      ],
      "unit": "share of the weight",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet 49%, W1 working 49%, W2 48%",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet 49%, W1 working 49%, W2 48%",
      "limit_type": "range"
     },
     "rule12_title_zone_sky_share": {
@@ -2686,7 +2689,7 @@
      "value": null,
      "unit": "replaced",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): only 27% (W1) and 32% (W2) of the title band is sky; rounds 3-4 measured 28 to 49%",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): only 27% (W1) and 32% (W2) of the title band is sky; rounds 3-4 measured 28 to 49%",
      "limit_type": "rule",
      "replaced_by": "a soft dark band behind the words (safe_area.top_shade) wherever the band holds roofs, chimneys or smoke (plan T13)"
     }
@@ -2718,7 +2721,7 @@
      ],
      "unit": "share of width x height",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 0.51 x 0.17",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 0.51 x 0.17",
      "limit_type": "box_max"
     },
     "rule3_story_together_metres": {
@@ -2726,7 +2729,7 @@
      "value": 2.0,
      "unit": "metres between footprints",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 no-2 crates 1.92 m from the gate boards (the subject is two gates: two clusters)",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 no-2 crates 1.92 m from the gate boards (the subject is two gates: two clusters)",
      "limit_type": "max"
     },
     "rule7_story_reaches_down": {
@@ -2746,7 +2749,7 @@
      ],
      "unit": "share of the weight",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 57%",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 57%",
      "limit_type": "range"
     }
    }
@@ -2773,7 +2776,7 @@
      "value": 0.03,
      "unit": "metres of air above a declared support surface (floor, counter, shelf, table)",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-checkout/check1/report.md: four props on the 0.9 m counter falsely \"landed on something high\"; the check file needed on_ground [] (skeptic, log 35)",
+     "source": "working files redesign/round5-checkout/check1/report.md: four props on the 0.9 m counter falsely \"landed on something high\"; the check file needed on_ground [] (skeptic, log 35)",
      "limit_type": "max",
      "note": "\"Landed high\" (0.5 m above the street) does not apply indoors."
     },
@@ -2810,7 +2813,7 @@
      "value": 0.03,
      "unit": "share of the width, across only",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W2's gateway 0 px across but 117 px below the meeting point (0.108); W1 working: the meeting point lies inside the opened gateway",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W2's gateway 0 px across but 117 px below the meeting point (0.108); W1 working: the meeting point lies inside the opened gateway",
      "limit_type": "max",
      "measure": "to the opening's whole outline; a meeting point inside the opening passes"
     },
@@ -2819,7 +2822,7 @@
      "value": null,
      "unit": "replaced",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 gate 0.85 x the mean, W2 gateway 0.68, W1 working 0.64; round 5 raised the yard light 260 to 900 W and the gate still could not be brightest (inventory: a dark subject)",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 gate 0.85 x the mean, W2 gateway 0.68, W1 working 0.64; round 5 raised the yard light 260 to 900 W and the gate still could not be brightest (inventory: a dark subject)",
      "limit_type": "rule",
      "replaced_by": "shot_kind_profiles.dark_subject.rules.silhouette_contrast"
     },
@@ -2828,7 +2831,7 @@
      "value": null,
      "unit": "replaced",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 8%, W2 0%, W2 slowed 13%",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 8%, W2 0%, W2 slowed 13%",
      "limit_type": "rule",
      "replaced_by": "silhouette_contrast"
     },
@@ -2837,7 +2840,7 @@
      "value": null,
      "unit": "replaced",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 43%, W2 33%, W1 working 62%",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 43%, W2 33%, W1 working 62%",
      "limit_type": "rule",
      "replaced_by": "silhouette_contrast"
     },
@@ -2846,7 +2849,7 @@
      "value": null,
      "unit": "replaced",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): every story thing is brighter than a dark gate",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): every story thing is brighter than a dark gate",
      "limit_type": "rule",
      "replaced_by": "silhouette_contrast"
     },
@@ -2855,7 +2858,7 @@
      "value": null,
      "unit": "off",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 0.06, W2 0.01, W2 slowed -0.10, W1 working -0.05 (a dark subject has no colour to warm)",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 0.06, W2 0.01, W2 slowed -0.10, W1 working -0.05 (a dark subject has no colour to warm)",
      "limit_type": "rule"
     },
     "rule10_nothing_on_quiet_side_outshines": {
@@ -2863,7 +2866,7 @@
      "value": null,
      "unit": "off",
      "kind": "judged",
-     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): a lit window or lamp always outshines a dark gate",
+     "source": "working files redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): a lit window or lamp always outshines a dark gate",
      "limit_type": "rule"
     },
     "silhouette_contrast": {
@@ -2884,7 +2887,7 @@
    "value": 0.02,
    "unit": "down the frame, past rule 7's reach",
    "kind": "judged",
-   "source": "The camera sums land within 0.006 to 0.015 of the rendered reach (core tests: W1 DIESEL drum 0.723 against the rendered 0.72; checkout C1 divider 0.776 against 0.78; man 6's feet 0.696 against his box bottom 0.704), so the planner aims 0.02 past the limit; round 5's W1 passed at 0.72 (scratchpad redesign/round5-set/checks/final-w1-quiet/report.md)"
+   "source": "The camera sums land within 0.006 to 0.015 of the rendered reach (core tests: W1 DIESEL drum 0.723 against the rendered 0.72; checkout C1 divider 0.776 against 0.78; man 6's feet 0.696 against his box bottom 0.704), so the planner aims 0.02 past the limit; round 5's W1 passed at 0.72 (working files redesign/round5-set/checks/final-w1-quiet/report.md)"
   },
   "figure_shoes_below_feet_down": {
    "value": 0.012,
@@ -2994,7 +2997,7 @@
     "value": 0.02,
     "unit": "share of the part's median texture area per square metre",
     "kind": "judged",
-    "source": "scratchpad redesign/check-round-3/tools/find_stripes.py (its threshold found round 3's 15, 27 and 33 striped parts and round 4's 0; skeptic, log 35: not the design's 1e-3)"
+    "source": "working files redesign/check-round-3/tools/find_stripes.py (its threshold found round 3's 15, 27 and 33 striped parts and round 4's 0; skeptic, log 35: not the design's 1e-3)"
    },
    "stripe_report_area_square_metres": {
     "value": 0.5,
@@ -3338,7 +3341,7 @@
     "value": 0.03,
     "unit": "share of a group's showing pixels that are thin",
     "kind": "judged",
-    "source": "Set on the notice corner plate (scratchpad plan3/corner/final/plate-facts-3): the chair's rungs are 4.7% of the chair and the ledger named them; nothing the ledger left out lies between 3% and 4.7% except the handcart (7.3%)"
+    "source": "Set on the notice corner plate (working files plan3/corner/final/plate-facts-3): the chair's rungs are 4.7% of the chair and the ledger named them; nothing the ledger left out lies between 3% and 4.7% except the handcart (7.3%)"
    },
    "thin_share_remove_or_thicken": {
     "value": 0.05,
@@ -3396,7 +3399,7 @@
     "value": 0.5,
     "unit": "a figure's brightness over its surround's, in the plate",
     "kind": "judged",
-    "source": "People test (scratchpad redesign/people-paint/check-looks): the painter lifted the dark men from about 0.15 to 0.50; the two men already at 0.64 in the plate came out pale khaki (0.77 to 0.85) and were the weakest read"
+    "source": "People test (working files redesign/people-paint/check-looks): the painter lifted the dark men from about 0.15 to 0.50; the two men already at 0.64 in the plate came out pale khaki (0.77 to 0.85) and were the weakest read"
    },
    "head_band_over_coat_max": {
     "value": 1.0,
@@ -3466,7 +3469,7 @@
     "value": 0.001,
     "unit": "share of the frame (one connected near-black patch, anywhere)",
     "kind": "judged",
-    "source": "Log 32: the doorway behind the colliery's gates was 0.21% of the plate under 5 levels in plates 1 and 2 (scratchpad plan3/corner/final) and read as an open gate; plate 3 (painted, kept) has 1 such pixel there. The design's 0.3% would have missed it"
+    "source": "Log 32: the doorway behind the colliery's gates was 0.21% of the plate under 5 levels in plates 1 and 2 (working files plan3/corner/final) and read as an open gate; plate 3 (painted, kept) has 1 such pixel there. The design's 0.3% would have missed it"
    }
   },
   "after_painting": {
@@ -3498,7 +3501,7 @@
     },
     "unit": "Canny thresholds, blur pixels, pixels",
     "kind": "judged",
-    "source": "scratchpad redesign/people-paint/check-figures/scripts/chamfer.py (the figures helper's outline measure, log 34)"
+    "source": "working files redesign/people-paint/check-figures/scripts/chamfer.py (the figures helper's outline measure, log 34)"
    },
    "figure_outline_drop_max": {
     "value": 0.05,
@@ -3514,7 +3517,7 @@
     },
     "unit": "pixels on a plate 1536 wide",
     "kind": "judged",
-    "source": "scratchpad redesign/people-paint/check-looks/scripts/measure1.py (the looks helper's figure-to-surround measure)"
+    "source": "working files redesign/people-paint/check-looks/scripts/measure1.py (the looks helper's figure-to-surround measure)"
    },
    "figure_surround_ratio_max": {
     "value": 0.35,
@@ -3574,7 +3577,7 @@
     },
     "unit": "pixels and levels",
     "kind": "judged",
-    "source": "scratchpad redesign/people-paint/check-looks/scripts/lines.py"
+    "source": "working files redesign/people-paint/check-looks/scripts/lines.py"
    },
    "warm_ground": {
     "value": {
@@ -3584,7 +3587,7 @@
     },
     "unit": "levels and share of the height",
     "kind": "judged",
-    "source": "scratchpad redesign/people-paint/check-looks/scripts/warm.py"
+    "source": "working files redesign/people-paint/check-looks/scripts/warm.py"
    },
    "added_figure_blob": {
     "value": {
@@ -3712,7 +3715,7 @@
    "value": 0.25,
    "unit": "seconds between traced puff ages",
    "kind": "judged",
-   "source": "scratchpad plugin-calculators/verify_test_cases.py (the trace that gave round 4's 0.044 and round 5's 0.188); a finer step moves the travel by under 0.005"
+   "source": "working files plugin-calculators/verify_test_cases.py (the trace that gave round 4's 0.044 and round 5's 0.188); a finer step moves the travel by under 0.005"
   },
   "visible_strength_min": {
    "value": 0.1,
@@ -3790,7 +3793,7 @@
    },
    "unit": "levels (0 to 255): a lit window pixel is brighter than this and this much redder than blue",
    "kind": "judged",
-   "source": "scratchpad redesign/round5-pages/tools/window_change.py (round 5 of log 34)"
+   "source": "working files redesign/round5-pages/tools/window_change.py (round 5 of log 34)"
   },
   "smoke_preroll_note": {
    "value": 0,
@@ -3878,11 +3881,13 @@
     "key",
     "fire",
     "doorway",
-    "sky"
+    "sky",
+    "room"
    ],
    "unit": "kinds of light that cast shadows (every other light casts none)",
    "kind": "judged",
-   "source": "Round 3 (round3-result.json works.summary 'Speed'): a Works plate took about 25 min with every light casting and about 6 min with only the fire, the lit doorways and the sky; state-picture masks fell from 42% to 5-9%"
+   "source": "Round 3 (round3-result.json works.summary 'Speed'): a Works plate took about 25 min with every light casting and about 6 min with only the fire, the lit doorways and the sky; state-picture masks fell from 42% to 5-9%",
+   "note": "\"room\": an interior's ceiling light (only the one nearest above the subject; the others become fills), added after the corner-shop dry run (log 35): indoors nothing else cast the room's shadows."
   },
   "foot_patch_metres": {
    "value": [
@@ -3909,7 +3914,7 @@
    "value": 3.0,
    "unit": "times the light the subject's own key gives it (all lights reaching it together)",
    "kind": "judged",
-   "source": "Judged between two recorded cases, worked out by plan_lights.py: the notice corner's notice gets 1.4 times its key in all and was kept with no burnt colour; checkout C1's bill gets about 62 times (mostly an area light 0.6 m below it, counted face-on) and its check 10 found 23% of the bill burnt white (scratchpad redesign/round5-checkout/check10/report.md)"
+   "source": "Judged between two recorded cases, worked out by plan_lights.py: the notice corner's notice gets 1.4 times its key in all and was kept with no burnt colour; checkout C1's bill gets about 62 times (mostly an area light 0.6 m below it, counted face-on) and its check 10 found 23% of the bill burnt white (working files redesign/round5-checkout/check10/report.md)"
   },
   "exposure_range": {
    "value": [
@@ -3919,6 +3924,15 @@
    "unit": "stage exposure",
    "kind": "judged",
    "source": "page-3.js LOOK_W1 1.6 (the darkest view; others 1.0); the inventory's clamp 1.0 to 1.8"
+  },
+  "key_on_subject_watts_per_square_metre": {
+   "value": {
+    "interior": 1.3,
+    "street": 14.2
+   },
+   "unit": "W/m2 the key light gives its subject face-on (P / (4 pi r^2) for a point or spot light)",
+   "kind": "judged",
+   "source": "plan_lights.py on the project's kept keys: checkout C1 (indoors) bill-cool 90 W at 2.33 m gives the bill 1.3; the notice corner (a dusk street) notice glow 200 W at 1.06 m gives the notice 14.2. Two places only, and each scene's exposure differs: a STARTING value for a key whose watts the place facts leave empty, to tune on the plate."
   }
  },
  "script_gate": {
@@ -4209,6 +4223,15 @@
    "unit": "times a piece's filming time with no new file",
    "kind": "judged",
    "source": "Design log 35; lesson 56 (filming stopped silently for 90 minutes after a restart)"
+  }
+ },
+ "preflight": {
+  "about": "The preflight runner (calculators/preflight.py): how far an accepted entry may reach.",
+  "accepted_entry_most_findings": {
+   "value": 3,
+   "unit": "findings one accepted entry may match in one run",
+   "kind": "judged",
+   "source": "The adversarial test of the preflight (log 35): one entry {\"check\": \"e\"} matched every one of the script's 12 findings and opened the paid recording. A real acceptance names one problem (a page, a view), sometimes the same problem seen by two tools; a broader entry stops the stage (exit 2)."
   }
  }
 }

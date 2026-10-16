@@ -1,6 +1,6 @@
 ---
 name: record-narration
-description: Record a chapter's narration page by page with ElevenLabs, get every word's time from the free transcripts, assemble the chapter timeline and narration track, mix it over music, and check the voice is steady. Use after the script is fact-checked.
+description: Record a chapter's narration page by page with ElevenLabs after checking the script by calculation (cue, capitals, names, sentence length, spoken figures, the main rule, the estimated timeline and cost), get every word's time from the free transcripts, assemble the chapter timeline and narration track, mix it over music with measured sound gates, and check the recordings and the voice's steadiness by numbers. Use after the script is fact-checked.
 ---
 
 # Record and time the narration
@@ -12,6 +12,11 @@ steps 2-5 (the same for both looks).
 **Example.** Chapter 2: ten pages, one take each, about 4,300 credits; pitch spread across pages
 2.2 semitones (steady); mixed at -15 LUFS; 270.33 s long.
 
+Two preflight stages bracket this skill: `explainer-film-preflight script` before you pay for the voice
+(step 1) and `explainer-film-preflight record` once the recordings are in (step 7). Run each, read the whole
+report, and fix what it lists. The rules behind them: the kit's `docs/LLM tips and tricks.md`, sections 2
+and 3.
+
 ## Steps
 
 1. **Check the script, then confirm the cost** with the user. First
@@ -21,7 +26,10 @@ steps 2-5 (the same for both looks).
    more than 6 spoken figures a minute, the main rule not said twice word for word, no page marked
    `"key": true`, a key page faster than the median page. It fills the 4 s guess holds and prints the
    credits and dollars to quote (about 1 credit per letter, the cue included). Its LOOK lists are for a
-   person: unfamiliar words, names, repeated words with their sentences, the first 30 seconds.
+   person: unfamiliar words, names, repeated words with their sentences, the first 30 seconds. Then check
+   the money: `python3 calculators/plan_budget.py ledger LEDGER.json --next-cost DOLLARS` (what is left of
+   the user's allowance; it refuses a step bigger than that), and ask once with the exact cost. A vague
+   reply is not a yes.
 2. **Record each page on its own** with the ElevenLabs connector, all on one flow
    (`creative_create_flow` first, then `creative_generate_speech` per page with the page's full text,
    the voice id, model `eleven_v4`, and `generations_count: 1` unless the user wants takes to choose
@@ -54,6 +62,12 @@ steps 2-5 (the same for both looks).
 
 ## Traps
 
-- Re-recording one page moves every time after it: redo steps 4-6, and film again.
+- Re-recording one page moves every time after it: redo steps 4-6, and film again. Record every page before
+  filming. After a re-record,
+  `python3 calculators/plan_page_timing.py refilm OLD_TIMELINE.json NEW_TIMELINE.json --chunks paper-film/out/<chapter>-chunks`
+  lists the pages that moved and the filmed pieces to film again.
+- Never trust an audio filter's output length: a loudness step once switched the audio to 192,000 samples a
+  second and the padding miscounted (3 s short). Resample to 48 kHz after it and measure:
+  `python3 -I narration-tools/sound_gates.py length FILE --expected SECONDS` (the mix scripts call it).
 - Words with trailing "..." or punctuation are matched without it (`kit.at('arrives')`).
 - A word said twice on a page: ask for the second with `kit.at('war', 2)`.

@@ -1,6 +1,6 @@
 ---
 name: film-and-finish
-description: Film a cinema-look (or paper-look) chapter in parallel stretches, join it with the mixed sound, make a sendable copy under 28 MB, captions and a cover picture, and measure that sound lines up and loudness is right. Use when the pages are checked and critiqued.
+description: Plan the filming time, workers, pieces and stretches from a short measured profile, film a cinema-look (or paper-look) chapter in parallel stretches, join it with the mixed sound, make a sendable copy under 28 MB, captions and a cover picture, and measure (sound gates, jump finder) that the sound lines up, loudness is right and nothing jumps. Use when the pages are checked and critiqued.
 ---
 
 # Film and finish
@@ -12,7 +12,17 @@ newcomers, the Works, round 4, one worker): about 0.9 s a frame while the camera
 once, only flames, smoke and flicker each frame), about 4.3 s while it slides, and more in the first
 stretch of each piece while its pages load. Pages 3 to 5 (2,283 frames) took 53 minutes.
 
+Two preflight stages bracket this skill: `explainer-film-preflight film` before filming (it needs the page
+events, the page files and a critique saved as JSON that is newer than every page file, with each finding
+fixed or accepted, and a passed `pages` report; it also plans the filming) and `explainer-film-preflight
+finish` after finishing (`--film`, `--mix`, `--timeline`; the sound gates, the jump finder with the planned
+cuts, the push check). Run each and read the whole report. The rules behind them:
+the kit's `docs/LLM tips and tricks.md`, sections 14 and 15.
+
 ## 1. Film (in the background)
+
+Tell the user the estimated filming time before starting, and never film while Blender is drawing a plate
+(about 1.8 times slower).
 
 **Plan it first, from measured costs** (`kit/calculators/plan_budget.py`; the round 4 table alone missed
 round 5's filming of the same frames by half, a short profile got all three rounds within about 5%):
@@ -87,6 +97,12 @@ script then checks the clip's length, loudness and true peak, and stops on a FAI
   `python3 -I paper-film/tools/find_jumps.py FILM.mp4 SHEET.jpg 4 CUT_SECONDS ...` lists every frame
   whose change is far bigger than its neighbours', and reports the times you name as planned cuts
   (page turns, time cuts) as planned; it also makes a sheet of two frames a second to look at the motion.
+  Don't type the cut times by hand: `python3 calculators/plan_page_timing.py check EVENTS.json` prints the
+  planned cuts and the whole `find_jumps.py` command (`--film-start S` for a filmed piece that starts later
+  in the chapter). Any jump that is not a planned cut is a must-fix.
+- Before pushing or sending files: `python3 calculators/plan_budget.py push PATHS` refuses audio and video
+  (none goes in the repository), a file over 90 MB (GitHub refuses 100 MB) and anything that looks like a
+  key, and packs the rest into pushes and chat-sized parts.
 - Contact sheet of the finished film at one frame every 2 seconds:
   `mkdir -p sheet && ffmpeg -i FILM.mp4 -vf fps=0.5 sheet/frame-%03d.jpg` then
   `python3 -I paper-film/tools/contact_sheet.py film-sheet.jpg 10 sheet/frame-*.jpg` and look at it

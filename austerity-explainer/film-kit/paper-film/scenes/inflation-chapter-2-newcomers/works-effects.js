@@ -106,8 +106,9 @@ export const STATES = {
 // last faint part had seemed to hang round No. 1's quiet chimney (round 5's critique, finding 13).
 export const SMOKE = {
   heavy: { count: 30, life: 4.6, rise: 0.45, drift: 9.5, mouth: { seconds: 1.6, size: 1.9 }, size: [3.4, 7.5], opacity: 0.95, fade: 2.2, colour: [100, 92, 84] },
-  // No. 1 working: seen from W1 (page 3, from "start") and W3 (page 5, from "made")
-  working: { count: 36, life: 7.0, rise: 0.6, drift: 15, mouth: { seconds: 2, size: 1.7 }, size: [3.0, 8], opacity: 0.93, fade: 1.8, colour: [104, 96, 88] },
+  // No. 1 working: seen from W1 (page 3, from "start") and W3 (page 5, from "made"). It thins more slowly than the
+  // others (fade 1.3), so in W3 its trail still shows under the lower rule card, which hides the chimney's mouth
+  working: { count: 36, life: 7.0, rise: 0.6, drift: 15, mouth: { seconds: 2, size: 1.7 }, size: [3.0, 8], opacity: 0.95, fade: 1.3, colour: [104, 96, 88] },
   thin: { count: 14, life: 7.0, rise: 0.5, drift: 14, mouth: { seconds: 2, size: 1.3 }, size: [1.8, 6], opacity: 0.5, fade: 1.9, colour: [100, 94, 88] },
 };
 // the wind: the same on every page and in every view, so the smoke always leans the same way: across the views toward
@@ -150,7 +151,7 @@ export const DRUM_LETTERS = { materials: ['steel-drum-petrol-stencil', 'steel-dr
 // blink out; the fire burning lower says time has passed). fire: 1 burning as when the men stood round it; lower
 // shares give shorter, narrower flames, a smaller and dimmer glow, fewer sparks and a dimmer fire light.
 // FIRE_AFTER_A_WHILE is the share the pages use after "go" (page 3) and "made" (page 5).
-export const FIRE_AFTER_A_WHILE = 0.4;
+export const FIRE_AFTER_A_WHILE = 0.3;
 // the pool of light the lit bank window throws on the pavement in front of it (page 9), in metres
 const BANK_POOL = { width: 3.4, depth: 2.4, out: 1.3, strength: 0.55 };
 // the windows' lit pictures, by glass type (for the flicker; the glass pieces are named in works_kit.py)

@@ -14,7 +14,9 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 ## Where things stand
 
-- **Chapter 2's full redesign is being built** (log 34): the Works (pages 3 to 5) built in 3D over four
+- **The plugin can now work out the settings we used to search for by hand** (log 35): calculators, one
+  command per stage, 344 house numbers and 163 tips for AIs, version 1.3.0, about 780 checks passing.
+- **Chapter 2's full redesign is being built** (log 34; rounds 5 and 6 below it): the Works (pages 3 to 5) built in 3D over four
   rounds, filmed with the plain 3D pictures standing in for paintings; round 5 is fixing the last critic's
   findings and starting the supermarket checkout (page 1). The people test is painted: painted men work,
   dark figures don't (log 34). About 85 US cents spent from the US$20; nothing recorded yet.
@@ -1415,11 +1417,58 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       - **Cost:** the price had doubled since the plan (4.8 US cents a megapixel), so about 85 US cents for
         the two paintings, worked out from fal's price list (fal doesn't show the exact charge).
 
+    - **Round 5** (the Works, W4 and the checkout): people now work inside both lit doorways; the waiting men
+      stand as a crowd you can count across No. 1's gate; the cameras moved 1.2 metres nearer, and the shot
+      checker now also tests that the story reaches 0.70 down the frame; PETROL, DIESEL and THIS WAY UP read
+      whole; the smoke blows as trails; MACHINES is readable for 0.83 seconds; W4 was relit, with a modelled
+      jacket, cap and WAGES envelope. The supermarket checkout (C1, page 1) was built, composed and tested in
+      the stage, and its newspaper name, THE EVENING LAMP, was checked against 1,617 New Zealand titles.
+      Pages 3 to 5 were filmed again: only planned jumps, no camera turn. Two fresh critics still found:
+      page 5's closing picture contradicts its rule ("more things made" points at No. 1's cold chimney, with
+      the men still waiting); both price arrows run through the "No." boards; the bottom of the frame is still
+      plain paving; the checkout's top 40% is nearly black and its brightest area is the empty belt.
+    - **Round 6 was stopped partway** when you asked to wrap up (16 October). Its helpers had changed
+      assemble_works.py and the page files (the price arrows, the "made" picture, the busy burst, the fire
+      after "go", the people test's lessons), but no plates were redrawn and nothing was filmed or checked.
+      Those changes are saved and their code loads, but they are untested. The last fully checked state is
+      round 5 (commit cdca253).
+
+35. **The plugin learns the numbers** (16 October). You asked: "All the runs and adjustments you've made, can
+    you make them into automatic calculations the plugin makes automatically so they don't have to be
+    exhaustively searched for every time a new video is made. Along with tips and tricks for LLMs to follow."
+    - **What was found:** five helpers read everything (lessons, logs 1 to 34, every round's findings, the
+      tools) and listed 423 settings or fixes found by trial. For example: people never nearer than 6 metres;
+      a crowd across the camera's line of sight, never along it; music 18 dB under the voice; a word said twice
+      on a page needs "which time".
+    - **What was built** (the plugin's version 1.3.0, `plugins/explainer-film`):
+      - **Calculators** that work these out from a new film's own files before anything is drawn or paid
+        for: where to put the camera and the people, letter and head sizes in each view, which way smoke
+        should blow, the lights to start from, the painter's instructions and price, the checks when a
+        painting arrives, which "before and after" pictures a change needs, how long every word on screen
+        stays readable, the script's checks before recording, loudness and timing checks, and money,
+        filming hours and disk.
+      - **One command per stage of making a film** (explainer-film-preflight: script, record, shots,
+        plates, paint, pages, film, finish) that runs the right calculators and writes one report.
+      - **One table of 344 house numbers**, each marked measured, judged or invented, with its source.
+      - **"LLM tips and tricks"**: 163 short tips for a model making the next film, each naming the tool
+        that checks it, or "ask a critic" where nothing can.
+      - The plugin's copy of the film kit was brought up to date (92 files), with a new skill,
+        build-and-paint-a-place.
+    - **Tested:** 23 test files, about 780 checks, each against a number recorded in the project (for example:
+      the W1 camera numbers, the head size at 6 metres, both smoke winds). A skeptic first corrected several
+      pass marks that would have rejected work you had accepted.
+    - **Not done:** the planned adversarial tester and the "fresh model" trial (a model that has never seen the
+      project planning the Japanese corner shop with only the plugin) were stopped before they ran, so nobody
+      outside the build has used it yet. A few tools are still to come (a light-tuning loop, a camera solver
+      inside Blender). The Works and checkout files were not copied into the plugin because round 6 was
+      changing them.
+    - **Cost:** nothing.
+
 ## Next step
 
-Nothing is needed from you right now. When round 5 is done and the people test's lessons are in the Works'
-3D pictures (no long shadows from the men, the men kept dark), I'll ask your yes for the Works' first three
-paintings (about US$1.30 at today's price).
+When you have usage again, say "carry on from the project story". The first job is to finish round 6:
+redraw the Works plates, film pages 3 to 5 and have fresh critics check them. Then I'll ask your yes for the
+Works' first three paintings (about US$1.30).
 
 ## Traps
 

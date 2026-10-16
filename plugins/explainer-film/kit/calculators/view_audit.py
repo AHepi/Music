@@ -22,7 +22,9 @@ Use:
   python3 view_audit.py title-contrast --still FRAME.png --box 0.06,0.05,0.90,0.22 --text-colour ffffff
 --named     the signs the page says aloud (their words are needed); with --timeline and --page, signs whose words the
             page's narration says are added. Without either, every must-read sign counts as needed and the loud-sign
-            check is skipped (it needs to know what the page names).
+            check is skipped (it needs to know what the page names). With them, a must-read sign the page does not
+            name is still measured (too small is a look, not a failure); when no named sign is readable in a view,
+            every legible unnamed sign there fails as louder than the page's own words (a look when the page names none).
 --levels    letter brightness (0-255) per view and sign as measured on a still: {"w3": {"bank sign": 118}}; a number
             is the lit level (the sign's dim_until_named is then applied), {"filmed": 52} is the level as filmed
 --figure-states  which state flag shows a figure group ("men at No. 1=men_1"); without it every figure counts in
@@ -42,9 +44,35 @@ if HERE not in sys.path:
     sys.path.insert(0, HERE)
 import frame_geometry as geometry  # noqa: E402
 from settings import load_settings  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 
 SECTION = 'views_and_models.view_audit'
+
+
+# ------------------------------------------------------------------------------------------------ small helpers
+def sight_passes(eye, point, opening):
+    """True when the straight line from the camera to a point passes through an opening's box (a window or a door:
+    {"name", "low": [x, y, z], "high": [x, y, z]}, Blender metres). A landmark seen only through a window is hidden when
+    the line misses it (an outside street lamp above an indoor view's window)."""
+    low, high = opening['low'], opening['high']
+    start, end = 0.0, 1.0
+    for axis in range(3):
+        d = point[axis] - eye[axis]
+        lo, hi = min(low[axis], high[axis]), max(low[axis], high[axis])
+        if abs(d) < 1e-12:
+            if not lo <= eye[axis] <= hi:
+                return False
+            continue
+        t1, t2 = (lo - eye[axis]) / d, (hi - eye[axis]) / d
+        start, end = max(start, min(t1, t2)), min(end, max(t1, t2))
+        if start > end:
+            return False
+    return True
+
+
+def not_latin(words):
+    """True when the words hold letters outside the Latin alphabets (the 20 px rule was judged on Latin letters only)."""
+    return any(ch.isalpha() and ord(ch) > 0x024F for ch in str(words or ''))
 
 
 # ------------------------------------------------------------------------------------------------ cameras of a view
@@ -185,6 +213,8 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                 continue
             needed = sign.get('must_read', False) and (sign['name'] in named if page_known else True)
             measure['needed_by_page'] = needed
+            # a must-read sign the page does not name is still measured: too small is a look (is it meant to be read here?)
+            unnamed_must_read = sign.get('must_read', False) and not needed
             where = f'{view["name"]} ({spot} spot)'
             px = measure['letter_pixels']
             if measure['back_shows'] and sign.get('wraps_degrees') is not None:
@@ -201,6 +231,11 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                 measure['verdict'] = 'letter height not known'
                 result['notes'].append(f'{sign["name"]} in {where}: its letter height is not in the place facts; not judged.')
                 continue
+            if not_latin(sign.get('words')) and (needed or px > quiet_pixels):
+                result['warnings'].append(
+                    f'{sign["name"]} ("{sign["words"]}") in {where}: its letters are not Latin; the {floor_pixels} and {comfortable} px limits (and '
+                    f'"legible" over {quiet_pixels} px) were judged on Latin letters only, so judge it on a still at phone size (letters with '
+                    f'many strokes may need more).')
             if needed:
                 if px < floor_pixels:
                     measure['verdict'] = 'too small'
@@ -223,6 +258,13 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                         f'from the camera; its letters are {100 * measure["width_factor"]:.0f}% of their width. Turn it to face the camera.')
             else:
                 measure['verdict'] = 'legible' if px > quiet_pixels else 'too small to read'
+                if unnamed_must_read and px < floor_pixels:
+                    measure['verdict'] = 'too small (must read, not named by the page)'
+                    result['warnings'].append(
+                        f'{sign["name"]} ("{sign["words"]}") in {where}: marked must_read, but this view\'s page does not name it; its letters '
+                        f'are {px:.1f} px, under {floor_pixels} px. If a viewer must read it here, make the letters '
+                        f'{needed_height(sign, measure, floor_pixels):.3f} m tall (or bring it nearer, or let a typed label carry it); '
+                        f'if not, nothing to do.')
 
     # 2. curved stencils (drums): the turn facing every camera that reads them
     for sign in facts['signs']:
@@ -283,8 +325,26 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                      and entry['signs'][s['name']][spot].get('letter_pixels') and not entry['signs'][s['name']][spot]['back_shows']]
             spoken = [s for s in shown if s['name'] in named and entry['signs'][s['name']][spot]['letter_pixels'] > quiet_pixels]
             if not spoken:
-                if any(s['name'] not in named for s in shown):
-                    result['notes'].append(f'{view["name"]}: no sign the page names is readable in the frame; loud signs not compared.')
+                # the worst case, not a reason to skip: the page's own words are unreadable (or it names none) while
+                # another sign reads; viewers read the clearest word first (BANK, rounds 3-4)
+                legible = [s for s in shown if s['name'] not in named and entry['signs'][s['name']][spot]['letter_pixels'] > quiet_pixels]
+                for sign in legible:
+                    measure = entry['signs'][sign['name']][spot]
+                    record = {'view': view['name'], 'sign': sign['name'], 'words': sign['words'], 'letter_pixels': measure['letter_pixels'],
+                              'least_named': None, 'limit': limit}
+                    if named:
+                        record['verdict'] = 'too loud (no named sign reads here)'
+                        result['problems'].append(
+                            f'{sign["name"]} ("{sign["words"]}") in {view["name"]}: the page never says it, yet it is legible ({measure["letter_pixels"]:.1f} px) '
+                            f'while no sign the page names ({", ".join(sorted(named))}) is readable in this frame. Viewers read the clearest '
+                            f'word first (BANK, rounds 3-4): dim it until the page names it, take it out of the frame, or make the named '
+                            f'words readable here.')
+                    else:
+                        record['verdict'] = 'legible, and the page names no sign'
+                        result['warnings'].append(
+                            f'{sign["name"]} ("{sign["words"]}") in {view["name"]}: legible ({measure["letter_pixels"]:.1f} px) and the page names no '
+                            f'sign: viewers will read it. Is that wanted here? If not, dim it or take it out of the frame.')
+                    result['loud_signs'].append(record)
                 continue
             reference_sign = min(spoken, key=lambda s: loudness(s, False)[0])
             reference, reference_level, _ = loudness(reference_sign, False)
@@ -331,6 +391,11 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                 landed = geometry.project_point(camera, landmark['top'])
                 if not landed['in_front'] or not 0 <= landed['across'] <= 1:
                     continue
+                opening = landmark.get('seen_through')
+                if opening and not sight_passes(camera['position'], landmark['top'], opening):
+                    result['landmarks'].append({'view': view['name'], 'spot': spot, 'landmark': landmark['name'], 'across': landed['across'],
+                                                'down': landed['down'], 'verdict': f'hidden: not seen through {opening.get("name", "its opening")}'})
+                    continue
                 beside = not text_left / width <= landed['across'] <= text_right / width
                 down = landed['down']
                 height_clear = clearing_height(camera, landmark['top'], clear)
@@ -344,8 +409,8 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                     where_top = 'above the frame' if down < 0 else f'{down:.3f} down'
                     record['verdict'] = 'in the words band' + (' (dark band)' if dark_band else '')
                     text = (f'{landmark["name"]} in {view["name"]} ({spot}): its top lands {where_top}, so it rises through the band kept '
-                            f'for typed words ({band[0]}-{band[1]} down; round 2). Lower it to {height_clear:.1f} m (now '
-                            f'{landmark["top"][2]:.1f}), move it back, or put the words beside it')
+                            f'for typed words ({band[0]}-{band[1]} down; round 2). Lower it to {height_clear:.2f} m (now '
+                            f'{landmark["top"][2]:.2f}), move it back, or put the words beside it')
                     if dark_band:
                         record['dark_band'] = True
                         settings.value('safe_area.top_shade')
@@ -356,7 +421,7 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                     record['verdict'] = 'just under the band'
                     result['warnings'].append(
                         f'{landmark["name"]} in {view["name"]} ({spot}): its top lands {down:.3f} down, within {clear - band[1]:.2f} of the '
-                        f'words band; {height_clear:.1f} m tall (now {landmark["top"][2]:.1f}) clears {clear}. Look at the plate.')
+                        f'words band; {height_clear:.2f} m tall (now {landmark["top"][2]:.2f}) clears {clear}. Look at the plate.')
                 result['landmarks'].append(record)
 
     for view in chosen:
@@ -367,7 +432,7 @@ def audit(facts, settings, views=None, named=None, narration_words=None, levels=
                     f'{", ".join(l["landmark"] for l in banded)} rise through the words band in {view["name"]} ({spot}) (tops '
                     f'{", ".join(("above the frame" if l["down"] < 0 else format(l["down"], ".3f")) for l in banded)} down). This kind of '
                     f'shot ({", ".join(view.get("kind_of_shot") or [])}) puts the words over a soft dark band (safe_area.top_shade); '
-                    f'otherwise lower them to about {min(l["height_for_clear"] for l in banded):.1f} m or put the words beside them.')
+                    f'otherwise lower them to about {min(l["height_for_clear"] for l in banded):.2f} m or put the words beside them.')
 
     # 5. figures: head size, face, distance, in frame
     head = settings.value('people.head_height_metres')
@@ -587,6 +652,9 @@ def report_lines(result, settings):
     if result['loud_signs']:
         lines.append('Signs the page does not name:')
         for s in result['loud_signs']:
+            if s.get('share_of_least_named') is None:
+                lines.append(f'    {s["view"]} {s["sign"]}: {s["letter_pixels"]:.1f} px; {s["verdict"]}')
+                continue
             lines.append(f'    {s["view"]} {s["sign"]}: {s["share_of_least_named"]:.2f} of {s["least_named"]} ({s["how"]}); limit {s["limit"]}; '
                          f'{s["verdict"]}' + (f'; dim needed {s["dim_needed"]:.2f}' if s.get('dim_needed') else ''))
         lines.append('')
@@ -687,4 +755,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'view_audit'))

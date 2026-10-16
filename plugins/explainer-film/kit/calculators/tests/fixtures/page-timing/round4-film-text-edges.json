@@ -1,0 +1,79 @@
+{
+ "about": "Where the typed lines of chapter 2 for newcomers, pages 3 to 5, actually reach on round 4 film stills: the leftmost, rightmost and topmost pixel brighter than the threshold (all three colour channels) in a band of rows round each line. Measured by the page timing helper (log 35) on working files redesign/round4-film/stills (frames drawn by render-paper-film.mjs in round 4, 1080 x 1920), with the code below; the stills themselves are not copied (too big).",
+ "method": "band = still[rows]; bright = band.min(axis=2) > threshold; left/right = first/last column with a bright pixel; top = first row with one",
+ "source_folder": "<working files>/redesign/round4-film/stills",
+ "lines": [
+  {
+   "text": "PICTURE TWO FACTORIES",
+   "still": "still-52.70.jpg",
+   "rows": [
+    100,
+    180
+   ],
+   "threshold": 170,
+   "left": 69,
+   "right": 910,
+   "top": 124
+  },
+  {
+   "text": "THE QUIET FACTORY",
+   "still": "still-62.40.jpg",
+   "rows": [
+    100,
+    180
+   ],
+   "threshold": 170,
+   "left": 68,
+   "right": 804,
+   "top": 119
+  },
+  {
+   "text": "THE FLAT-OUT FACTORY",
+   "still": "still-88.50.jpg",
+   "rows": [
+    100,
+    180
+   ],
+   "threshold": 170,
+   "left": 68,
+   "right": 900,
+   "top": 122
+  },
+  {
+   "text": "FLAT OUT = WORKING AS HARD AS THEY CAN",
+   "still": "still-88.50.jpg",
+   "rows": [
+    190,
+    240
+   ],
+   "threshold": 150,
+   "left": 67,
+   "right": 931,
+   "top": 206
+  },
+  {
+   "text": "WHAT HAPPENS TO PRICES?",
+   "still": "still-93.00.jpg",
+   "rows": [
+    100,
+    180
+   ],
+   "threshold": 170,
+   "left": 68,
+   "right": 967,
+   "top": 126
+  },
+  {
+   "text": "MOST ECONOMISTS AGREE",
+   "still": "still-110.43.jpg",
+   "rows": [
+    100,
+    150
+   ],
+   "threshold": 150,
+   "left": 67,
+   "right": 528,
+   "top": 117
+  }
+ ]
+}

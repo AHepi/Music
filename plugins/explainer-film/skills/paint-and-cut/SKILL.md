@@ -1,6 +1,6 @@
 ---
 name: paint-and-cut
-description: Make the pictures for an explainer chapter with fal - painted backgrounds turned into rooms with depth (via a depth map), painted figures and objects cut out as paper pieces, and plates of places built in Blender painted over and lined up - with the style words, sizes, costs and checks that keep them consistent. Use after the script is final and before building pages.
+description: Make the pictures for an explainer chapter with fal - painted backgrounds turned into rooms with depth (via a depth map), painted figures and objects cut out as paper pieces, and plates of places built in Blender painted over and lined up - with the style words, sizes, costs priced at the day's rate, and the checks before paying (plate preflight, prompt builder) and on arrival (line-up, figures, style) that keep them consistent. Use after the script is final and before building pages.
 ---
 
 # Paintings, rooms with depth, and cut-outs
@@ -17,10 +17,16 @@ It reused four rooms from chapter 1.
 ## 1. Plan and confirm the cost
 
 List every room (one per setting) and every cut-out (people, objects) the pages need. Reuse what
-the project already has. Cost (chapter 2, October 2026): about 10 US cents per 2k picture, 2.5 cents
-per 1k, about half a cent per depth map, a fifth of a cent per mask. Prices change between plan and
-purchase (Flux 3 edit went from 2.4 to 4.8 US cents a megapixel in a day, lesson 139 of the austerity
-project): check fal's estimate before each paid batch. Tell the user the total and confirm.
+the project already has: count the things to paint, not the pages. Cost (chapter 2, October 2026): about
+10 US cents per 2k picture, 2.5 cents per 1k, about half a cent per depth map, a fifth of a cent per mask.
+Prices change between plan and purchase (Flux 3 edit went from 2.4 to 4.8 US cents a megapixel in a day,
+lesson 139 of the austerity project): read fal's live price before each paid batch, then work the total out
+instead of adding it up by hand: `python3 calculators/plan_budget.py cost PLAN.json --rate CENTS --rate-date DATE`
+(it counts every picture sent as well as the one returned, and adds a repaint for every two paintings) and
+`python3 calculators/plan_budget.py ledger LEDGER.json --next-cost DOLLARS` (what is left of the user's
+allowance, from the day it began). Do the free steps first, then tell the user the total and confirm once. A
+vague reply is not a yes. Before plates are painted, run `explainer-film-preflight plates`; when paintings
+arrive, `explainer-film-preflight paint`.
 
 ## 2. Paint (fal connector)
 
@@ -70,32 +76,45 @@ project): check fal's estimate before each paid batch. Tell the user the total a
 
 For the built-and-painted look the painting is not made from words: Blender draws the place (the
 "plate"), an image-edit model paints over it, and the page shines the painting back onto the 3D set. The
-whole way is the `build-and-paint-a-place` skill. Three tools do the steps below with the project's
-pass marks (see `kit/calculators/README.md`, "Painting tools"): `kit/calculators/paint_request.py request`
-(the preflight, both prompts from the plate and a short brief, the price; it never sends),
-`kit/calculators/after_painting.py check` (resize, line-up, figures, style, the behind painting) and
-`kit/calculators/plan_states.py plan` (the helper plates and state pictures of a held shot). The painting
-steps, in order:
-1. Before paying: the plate renders cleanly (no "Shadow buffer full" in its log), passes the shot
-   checker's light rules, has no faint glow inside a hollow (darken it first: the painter lifts it into a
-   band), and its people cast no long shadows.
-2. Flux 3 edit (`fal`), image 1 the plate, image 2 a style painting sent at about 1 million pixels; keep
-   every element where it is, add no people, no flames, smoke, glows or new shadows round the near props;
-   far walkers "flat dark shapes with no pale spots".
-3. Resize to the plate's exact size and line it up: `paper-film/tools/align_painting.py` (the notice
-   corner's painter had stretched it 0.65% and shifted it 3 pixels; lined up, 96% of the props' outlines
-   sat on painted edges, against 70% before).
-4. A "behind" painting (the near props painted out), lined up `--against` the first, with the first
-   painting's shadows kept round the props (`paper-film/tools/keep_painted_shadows.py`); or, free,
-   `paper-film/tools/make_behind_picture.py`.
-5. State pictures (the same view with people gone or a factory slowed) change only what changed:
-   `paper-film/tools/make_state_picture.py`.
-6. Look at the painting against the plate before using it: the people test's men went from about 15% to
-   about 50% of their surroundings' brightness when painted, and turned mid-grey on a phone.
+whole way is the `build-and-paint-a-place` skill. Three tools do the painting steps with the project's
+pass marks (the kit's `calculators/README.md`, "Painting tools"; the tips in `docs/LLM tips and tricks.md`,
+sections 9 to 11). Run them at these moments, from the kit folder:
+1. **Before paying** (preflight `plates`): the request builder checks the plate, writes both prompts and
+   prices them; it never sends anything:
+   `python3 calculators/paint_request.py request --check CHECK.json --facts PLATE_FACTS --plate PLATE.png --brief BRIEF.json --render-log RENDER.log --shot-report REPORT.md --helper-plate PLATE_WITHOUT_PEOPLE.png --style STYLE.png --out-folder REQUEST_FOLDER`.
+   It refuses a plate with a render fault ("Shadow buffer full"), a light-rule failure, a faint glow inside a
+   hollow (the painter lifts it into a band: darken it first), a pure-black opening (read as open), people's
+   long shadows (left behind when the people are painted out), heads paler than coats, or cloth the film's
+   finish turns red. Fix each in 3D, not in the prompt. You write only each story prop's `paint_as` words in
+   the check file and the short brief; the prompt counts and places every person (far walkers "flat dark
+   shapes with no pale spots"; a facing man's face "lost in deep shadow under the cap, no lit cheek"), names
+   thin parts and near pairs, says where the warm light already is, and forbids flames, smoke, glows and new
+   shadows round the near props.
+2. **The painting:** Flux 3 edit (`fal`), image 1 the plate, image 2 the place's master painting sent at
+   about 1 million pixels (paint the master view first).
+3. **When it arrives** (preflight `paint`):
+   `python3 calculators/after_painting.py check --painting RETURNED.png --plate PLATE.png --check CHECK.json --facts PLATE_FACTS --out-folder D`
+   resizes it to the plate, lines it up (the notice corner's painter had stretched it 0.65% and shifted it 3
+   pixels; lined up, 96% of the props' outlines sat on painted edges, against 70% before), counts the figures
+   and checks their outlines, darkness and skin (the people test's men went from about 15% to about 50% of
+   their surroundings' brightness when painted, and turned mid-grey on a phone), compares the style, and
+   writes PNG only. Look at it against the plate too.
+4. **A "behind" painting** (the near props painted out): the same check with `--behind RETURNED_BEHIND.png
+   --near-list REQUEST_FOLDER/near-list.json` lines it up against the first and keeps the first painting's
+   shadows round the props; or, free, `paper-film/tools/make_behind_picture.py`. (The single steps also run
+   on their own: `paper-film/tools/align_painting.py`, `paper-film/tools/keep_painted_shadows.py`.)
+5. **State pictures** (the same view with people gone or a factory slowed) change only what changed:
+   `python3 calculators/plan_states.py plan --plan STATE_PLAN.json --measure` lists every plate, chooses a cut
+   or a stepped blend from how much of the frame changes, and prints the
+   `paper-film/tools/make_state_picture.py` commands.
+6. Whether a returned painting looks painted enough is a judgement: if it looks like a photograph, re-ask
+   once, and ask the user before paying again.
 
 Cost: about 4.8 US cents a megapixel of the returned picture plus every picture sent (October 2026),
-so about 44 cents for a 2k repaint with a style picture. That rate was worked out from fal's price on the
-day, not read from a bill: confirm it in fal's request history before relying on it.
+so about 44 cents for a 2k repaint with a style picture:
+`python3 calculators/paint_request.py price --rate-cents CENTS` with the day's rate. That rate was worked out from fal's price on the day, not read from
+a bill: read the real charges once from fal's request history (free) and fit it with
+`python3 calculators/paint_request.py fit-price --charges CHARGES.json` before relying on it.
 
 ## Traps
 

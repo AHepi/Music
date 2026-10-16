@@ -1,6 +1,6 @@
 ---
 name: make-3d-models
-description: Make detailed 3D models for a film's model sets (buildings, a town, a desk, props) by scripting Blender with its Python module (bpy) - no screen needed - and load them into cinema pages as .glb files with baked corner shading. Use when a page's card models look plain or sparse, or a set needs to fill a tall frame (top and bottom thirds).
+description: Make detailed 3D models for a film's model sets (buildings, a town, a desk, props) by scripting Blender with its Python module (bpy) - no screen needed - check each one with the model lint (stripes, two surfaces on one plane, copy-numbered names, glass, measured size and front) and load them into cinema pages as .glb files with baked corner shading. Use when a page's card models look plain or sparse, a set needs to fill a tall frame (top and bottom thirds), or a downloaded or scripted model must be checked before use.
 ---
 
 # Make 3D models in Blender (by script)
@@ -111,7 +111,16 @@ picture. `explainer-film-setup` looks for Blender and Xvfb and writes them into 
      `node paper-film/tools/profile_frame.mjs PAGE TIME` (it times the frame, then without each kind of
      thing, so the slow part shows).
 4. Run: `/path/blender-env/bin/python build_X.py /kit/assets/models/<chapter>/X.glb`.
-5. Look at it in the stage before using it:
+5. **Lint it and measure it** before using it (from the kit folder):
+   `python3 paper-film/blender/model_lint.py assets/models/<chapter>/X.glb` (add `--prop` for a prop file,
+   `--as-set` for several files that make one set, `--index index.json` to compare with the sizes an index
+   claims, `--write-index NEW.json` to record each model's measured size, front direction and triangles). It
+   stops on stripes (a squashed texture the painter copies), two surfaces on one plane (they flicker), a floor
+   laid just over another ground, glass reading its see-through from a picture, a prop file whose root is a
+   ".001" copy; it warns on glowing materials with light base colours. Inside Blender it checks the open
+   scene instead. Measure a model before fitting anything to it: a size worked out from a picture or a
+   helper's note was wrong more than once. (Tips and traps: the kit's `docs/LLM tips and tricks.md`, section 8.)
+6. Look at it in the stage before using it:
    `PAPER_FILM_QUERY="model=/assets/models/<chapter>/X.glb&cam=3.6,2.4,7.5&look=0,1,0&fov=42" node paper-film/tools/render-paper-film.mjs model-preview OUT --stills 1`
 
 ## Chapter 2's models
@@ -144,7 +153,10 @@ Copy a prop group: `props.getObjectByName('barrels').clone(true)`. Chapter 2's
 - Top third: chimneys, smoke, a painted sky. Bottom third: soft out-of-focus props (barrels, crates,
   a cart, a lamp post) in the near corners, never bare dark ground.
 - Frame with numbers first: `python3 -I paper-film/tools/frame_check.py CAM TARGET FOV name=x,y,z ...`
-  says where each thing lands in the 1080 x 1920 frame, in a second, before any still is made.
+  says where each thing lands in the 1080 x 1920 frame, in a second, before any still is made. For whole
+  boxes against the phone-button margins (words left of 0.90 across), use
+  `python3 calculators/frame_geometry.py boxes --at x,y,z --turn D NAME=cx,cy,cz,width,depth,height ...`
+  (Blender metres; `frame_check.py` still warns at the older 0.87).
 
 ## Or: lift things out of a painting with SAM 3D (tested once, log 22 of the austerity project)
 

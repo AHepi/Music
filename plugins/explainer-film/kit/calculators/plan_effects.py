@@ -8,7 +8,10 @@ film-settings.json, using the core's camera sums (frame_geometry.py) for every p
                    sums as ChimneySmoke (works-effects.js): how far the plume travels while it can be seen, where its puffs'
                    TOP EDGES reach (not only their middles), whether it runs under a word card, whether it fades before
                    another factory's chimney, whether its puffs cross a figure, and which emitters never enter the frame
-                   (drop them). Give --wind to judge one wind instead of choosing.
+                   (drop them). Give --wind to judge one wind instead of choosing. A place with no chimney or fire has
+                   nothing to plan (exit 0). The JSON's top-level "problems" decide the wind (exit 1 when the chosen wind
+                   has any); "warnings" are looks: smoke over a man, smoke to drop from a view, a plume under an assumed
+                   card (--default-cards: the house's rule cards for views whose own cards were not given).
   colour           the plume's colour against the sky behind it (measured on the plate or painting) and the mouth's
                    size against the chimney top's width
   contact-shadows  a soft contact shadow for every near prop the behind painting removes: its size from the prop's base
@@ -20,7 +23,7 @@ film-settings.json, using the core's camera sums (frame_geometry.py) for every p
 Use:
   python3 plan_effects.py wind --place-facts works-place-facts.json [--smoke works-effects.js | smoke.json]
         [--smoking no-1-chimney=working --smoking no-2-chimney-a=heavy ...] [--view w3 --view w1]
-        [--card w3:lower=0.06,0.1635,0.90,0.2365 ...] [--wind=-0.85,-0.12,-0.5] [--main-view w1]
+        [--card w3:lower=0.06,0.1635,0.90,0.2365 ...] [--default-cards] [--wind=-0.85,-0.12,-0.5] [--main-view w1]
         (write --wind=x,y,z with "=": a value starting with a minus sign would read as an option)
   python3 plan_effects.py colour --place-facts F --view w3 --picture works-w3-plate.jpg [--smoke ...] [--smoking ...]
   python3 plan_effects.py contact-shadows --place-facts F [--props drum,chair,pail] [--footprints footprints.json]
@@ -45,7 +48,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings, MissingSetting  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 import frame_geometry as geometry  # noqa: E402
 
 # The plume model: the same sums as ChimneySmoke.place() in works-effects.js (a puff's middle along the plume's line;
@@ -273,16 +276,21 @@ def judge_plume(samples, settings, cards=(), others=(), figures=(), emitter_acro
     if result['travel'] < travel_min:
         result['problems'].append(f'travels only {result["travel"]:.3f} of the width while seen (needs {travel_min}): the puffs pile up '
                                   f'(round 4: rings and a hook); blow it more across the view')
-    for name, box in cards:
+    for card in cards:
+        name, box = card[0], card[1]
+        assumed = len(card) > 2 and card[2]
+        # a card the page really draws decides the wind; an assumed card (the house's rule cards, --default-cards) is only a look
+        into = result.setdefault('looks', []) if assumed else result['problems']
+        label = f'assumed {name} card (the house\'s rule-card band; give the page\'s own with --card)' if assumed else f'{name} card'
         over_edges = [s for s in edged if overlaps([s['left'], s['top'], s['right'], s['bottom']], box)]
         over_centres = [s for s in visible if box[0] <= s['across'] <= box[2] and box[1] <= s['down'] <= box[3]]
         if over_centres:
-            result['problems'].append(f'puffs\' middles are inside the {name} card ({len(over_centres)} of the traced ages): the words hide the plume')
+            into.append(f'puffs\' middles are inside the {label} ({len(over_centres)} of the traced ages): the words hide the plume')
         elif over_edges:
             deepest = max(box[3] - s['top'] for s in over_edges)
-            result['problems'].append(f'puffs\' top edges reach {min(s["top"] for s in over_edges):.3f} down, {deepest:.3f} into the {name} card '
-                                      f'(it ends {box[3]:.4f} down; strength {edge_min} or more): the card covers the plume\'s top. '
-                                      f'Sink the plume about {deepest:.3f} of the height, or move the card, or judge it by eye')
+            into.append(f'puffs\' top edges reach {min(s["top"] for s in over_edges):.3f} down, {deepest:.3f} into the {label} '
+                        f'(it ends {box[3]:.4f} down; strength {edge_min} or more): the card covers the plume\'s top. '
+                        f'Sink the plume about {deepest:.3f} of the height, or move the card, or judge it by eye')
     if emitter_across is not None and len(visible) > 1:
         direction = 1 if visible[-1]['across'] >= visible[0]['across'] else -1
         last = visible[-1]['across']
@@ -352,6 +360,16 @@ def parse_cards(items):
     return cards
 
 
+def house_cards(settings):
+    """The house's two rule cards (safe_area.rule_cards_down, between the words' left and right margins), marked assumed:
+    for a view whose page's own word cards were not given (--default-cards)."""
+    left = settings.value('safe_area.text_left_pixels') / settings.value('frame.width_pixels')
+    right = settings.value('safe_area.must_read_right_edge_share')
+    names = ('upper', 'lower')
+    return [(names[i] if i < 2 else f'card {i + 1}', [round(left, 4), band[0], right, band[1]], True)
+            for i, band in enumerate(settings.value('safe_area.rule_cards_down'))]
+
+
 def identifying_name(facts, emitter):
     """What an emitter identifies (a landmark top at the same place, e.g. 'No. 1'), else its own name."""
     for top in facts.get('landmark_tops', []):
@@ -393,7 +411,7 @@ def smoking_plan(facts, smoke, items):
     return [(by_name[name], smoke['kinds'][kind]) for name, kind in plan.items()]
 
 
-def trace_wind(facts, settings, smoke, wind, smoking, views, cards, step):
+def trace_wind(facts, settings, smoke, wind, smoking, views, cards, step, default_cards=None):
     """Every smoking chimney traced in every view for one wind; returns per view and spot the plumes and verdicts."""
     out = []
     for view in views:
@@ -401,6 +419,8 @@ def trace_wind(facts, settings, smoke, wind, smoking, views, cards, step):
             tops = {e['name']: geometry.project_point(camera, e['at']) for e, _ in smoking}
             figures = figure_boxes(facts, camera, settings)
             view_cards = cards.get(view['name'], []) + cards.get('*', [])
+            if not view_cards and default_cards:
+                view_cards = list(default_cards)
             for emitter, kind in smoking:
                 samples = trace_plume(camera, emitter['at'], kind, wind, step)
                 mine = identifying_name(facts, emitter)
@@ -466,14 +486,14 @@ def drop_list(traced):
     return sorted(key for key in entered if should_drop(entered[key], held[key]))
 
 
-def summarise(traced):
-    """Problems for the plumes that enter the frame (a plume outside the frame is dropped, not judged)."""
+def summarise(traced, key='problems'):
+    """Problems (or looks) for the plumes that enter the frame (a plume outside the frame is dropped, not judged)."""
     dropped = set(drop_list(traced))
     problems = []
     for row in traced:
         if (row['view'], row['chimney']) in dropped:
             continue
-        for problem in row['problems']:
+        for problem in row.get(key, []):
             problems.append(f'{row["view"]} ({row["spot"]}) {row["chimney"]} ({row["kind"]}): {problem}')
     return problems
 
@@ -489,8 +509,10 @@ def command_wind(args, settings):
     smoking = smoking_plan(facts, smoke, args.smoking)
     fires = [e for e in facts.get('emitters', []) if e.get('kind') == 'fire']
     if not smoking and not fires:
-        raise SystemExit('plan_effects: the place facts list no chimney mouths or fires (emitters of kind "chimney mouth" or "fire")')
+        return ({'smoke_source': smoke['source'], 'passes': True, 'nothing_to_plan': True, 'problems': [], 'warnings': []},
+                ['No smoke or fire: nothing to plan (the place facts list no emitters of kind "chimney mouth" or "fire").'])
     cards = parse_cards(args.card)
+    default_cards = house_cards(settings) if args.default_cards else None
     lines, result = [], {'smoke_source': smoke['source'], 'smoking': {e['name']: k['name'] for e, k in smoking}}
     # the views that see a chimney (only they choose the wind)
     seeing = []
@@ -523,14 +545,18 @@ def command_wind(args, settings):
         for row in fire_rows:
             lines.append(f'  {row["view"]} {row["spot"]} {row["fire"]}: ' + ('never in the frame: drop it from this view' if not row['enters_frame']
                          else ('clear of the figures' if not row['problems'] else '; '.join(row['problems']))))
+    # thick smoke over a man, and fires never in the frame: looks a person judges (they do not decide the wind)
+    fire_looks = [f'{r["view"]} ({r["spot"]}) {r["fire"]}: {p}' for r in fire_rows for p in r['problems']]
+    fire_looks += [f'{r["view"]} ({r["spot"]}) {r["fire"]}: never in the frame: drop its smoke from this view' for r in fire_rows if not r['enters_frame']]
     if not winds:
-        result.update({'passes': not any(r['problems'] for r in fire_rows), 'tried': []})
+        result.update({'passes': True, 'tried': [], 'problems': [], 'warnings': fire_looks})
         return result, lines
     tried = []
     for label, wind in winds:
-        traced = trace_wind(facts, settings, smoke, wind, smoking, views, cards, step)
+        traced = trace_wind(facts, settings, smoke, wind, smoking, views, cards, step, default_cards)
         problems = summarise(traced)
-        tried.append({'label': label, 'wind_three_axes': wind, 'problems': problems, 'dropped': drop_list(traced), 'plumes': traced})
+        tried.append({'label': label, 'wind_three_axes': wind, 'problems': problems, 'looks': summarise(traced, 'looks'),
+                      'dropped': drop_list(traced), 'plumes': traced})
     for t in tried:
         seen = [row['travel'] for row in t['plumes'] if 'travel' in row and (row['view'], row['chimney']) not in set(t['dropped'])]
         t['smallest_travel'] = min(seen) if seen else 0.0
@@ -559,15 +585,18 @@ def command_wind(args, settings):
         under_words = sorted({(row['view'], row['chimney']) for row in t['plumes'] if 'centre_down_range' in row
                               and (row['view'], row['chimney']) not in set(t['dropped'])
                               and row['centre_down_range'][0] < band[1] and row['centre_down_range'][1] > band[0]
-                              and not cards.get(row['view']) and not cards.get('*')})
+                              and not cards.get(row['view']) and not cards.get('*') and not default_cards})
         for name, chimney in under_words:
             lines.append(f'  note: in {name} {chimney}\'s plume runs in the title band ({band[0]}-{band[1]} down) and no word boxes were given '
                          f'for {name}: give them with --card {name}:NAME=l,t,r,b, or draw a soft band behind the words')
         for name, chimney in t['dropped']:
             lines.append(f'  {name}: drop {chimney}\'s smoke from this view (its plume never enters the frame, or its chimney top is out of '
                          f'the frame where the shot holds: smoke from nowhere)')
+        for look in t['looks']:
+            lines.append(f'  LOOK {look}')
         for problem in t['problems']:
             lines.append(f'  PROBLEM {problem}')
+        t['under_words_unchecked'] = under_words
     lines.append('')
     if args.wind:
         lines.append('The given wind passes.' if result['passes'] else 'The given wind does not pass (see the problems above).')
@@ -582,6 +611,15 @@ def command_wind(args, settings):
     lines.append(f'Plumes that start on a word take their life ({longest:g} s) to reach full length; ChimneySmoke depends only on time, so '
                  f'filming needs no pre-roll for it ({settings.value("effects_planner.smoke_preroll_note")} s).')
     result['plumes'] = [strip_samples(row, args.full_trace) for row in chosen['plumes']]
+    # the chosen wind's findings at the top of the JSON, where the preflight (and a person) reads them: problems decide the
+    # wind (exit 1); warnings are looks (smoke over a man, smoke to drop from a view, a plume under an assumed card, a
+    # plume in the words band of a view whose word cards were not given)
+    result['problems'] = list(chosen['problems'])
+    result['warnings'] = fire_looks + list(chosen['looks']) + [
+        f'{view}: drop {chimney}\'s smoke from this view (its plume never enters the frame, or its chimney top is out of the frame where the shot holds)'
+        for view, chimney in chosen['dropped']] + [
+        f'{view}: {chimney}\'s plume runs in the words band and no word cards were given for {view}: not checked against the cards '
+        f'(give them with --card {view}:NAME=l,t,r,b, or --default-cards)' for view, chimney in chosen.get('under_words_unchecked', [])]
     return result, lines
 
 
@@ -978,6 +1016,8 @@ def main(argv=None):
     p.add_argument('--main-view', help='the view the wind blows a little away from (default the first that sees a chimney)')
     p.add_argument('--card', action='append', help='VIEW:NAME=left,top,right,bottom (shares): a word card the plume must stay under; '
                                                    'VIEW * for every view (repeat)')
+    p.add_argument('--default-cards', action='store_true', help='views without a --card get the house\'s two rule cards '
+                   '(safe_area.rule_cards_down); a plume under one of those is a look, not a problem')
     p.add_argument('--wind', help='judge this wind (--wind=x,y,z, three.js axes) instead of choosing one')
     p.add_argument('--full-trace', action='store_true', help='keep every traced number in the JSON')
     p = add_output_options(commands.add_parser('colour', help='the plume colour against the sky behind it, and the mouth size'))
@@ -1017,4 +1057,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'plan_effects'))

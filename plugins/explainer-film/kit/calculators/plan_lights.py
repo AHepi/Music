@@ -35,7 +35,9 @@ Use:
   python3 plan_lights.py exposure --picture w1=works-w1-painting.jpg --picture w2=...
   python3 plan_lights.py contrast --place-facts F --view V --picture works-w1-plate.jpg [--spot plate]
         [--subject-box-3d cx,cy,cz,width,depth,height]
-  python3 plan_lights.py render-log RENDER.log [...]          exit 1 if a log shows "Shadow buffer full" or the like
+  python3 plan_lights.py render-log RENDER.log [...] [--plate PLATE.png]
+                                                    exit 1 if a log shows "Shadow buffer full" or the like, is not a
+                                                    Blender render log (no "render | Saved:" line), or saves no PLATE
 Every command takes --json, --out FILE, --report FILE and --settings FILE and names the film-settings.json values used.
 Places are Blender metres (x across, y forward, z up); on the frame across 0-1 left to right, down 0-1 top to bottom.
 """
@@ -50,10 +52,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings, MissingSetting, resolve_profile  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 import frame_geometry as geometry  # noqa: E402
 
-ROLES = ('key', 'accent', 'fire', 'lamp', 'doorway', 'rim', 'window', 'fill', 'sky')
+ROLES = ('key', 'accent', 'fire', 'lamp', 'doorway', 'rim', 'window', 'fill', 'sky', 'room')
 RAY_RINGS, RAY_PER_RING = 6, 24     # rays spread over a cone for the box ray cast (as set_measurements.py beam)
 FAR_METRES = 30.0                   # how far the box ray cast looks
 
@@ -135,6 +137,17 @@ class Place:
         self.subject_point = self.subject_prop['at'] if self.subject_prop else subject['point']
         self.support_prop = next((p for p in self.props.values() if p.get('role') == 'support'), None)
         self.dark = bool(subject.get('dark'))
+        self.interior = bool(facts.get('interior')) or 'interior' in (self.view.get('kind_of_shot') or [])
+        self.floors = [f for f in facts.get('support_surfaces', []) if f.get('kind') == 'floor' and isinstance(f.get('height'), (int, float))]
+        self.floor_height = min(f['height'] for f in self.floors) if self.floors else 0.0
+
+    def over_floor(self, point):
+        """True when a point stands over the interior's floor (its x and y ranges, when the place facts give them)."""
+        for floor in self.floors:
+            xs, ys = floor.get('x_range'), floor.get('y_range')
+            if (not xs or xs[0] <= point[0] <= xs[1]) and (not ys or ys[0] <= point[1] <= ys[1]):
+                return True
+        return not self.floors
 
     @staticmethod
     def in_state(light, view_name, state):
@@ -188,11 +201,44 @@ def light_role(place, light, overrides):
         gap = geometry.length(geometry.subtract(light['at'], emitter['at']))
         if emitter.get('kind') == 'fire' and gap < 1.0:
             return 'fire', f'{gap:.2f} m from {emitter["name"]}'
+    high = light['at'][2] - place.floor_height >= ROOM_LIGHT_ABOVE_FLOOR
+    if place.interior and high and 'bounce' not in name:
+        # indoors, the ceiling's light is the room's own light (one of them casts the room's shadows: see room_lights)
+        for word in ('ceiling', 'tube', 'overhead', 'room light'):
+            if word in name:
+                return 'room', f'its name says "{word}" (an interior, {light["at"][2] - place.floor_height:.1f} m above the floor)'
     for word, role in (('doorway', 'doorway'), ('gateway', 'doorway'), ('spill', 'doorway'), ('room', 'doorway'), ('window', 'window'),
                        ('rim', 'rim'), ('fire', 'fire'), ('brazier', 'fire'), ('lamp', 'lamp'), ('lantern', 'lamp')):
         if word in name:
             return role, f'its name says "{word}"'
+    if place.interior and high and light.get('kind') != 'SUN' and not light.get('reaches_only') \
+            and not any(w in name for w in ('sign', 'outside', 'street', 'bounce', 'canopy')) and place.over_floor(light['at']):
+        return 'room', f'{light["at"][2] - place.floor_height:.1f} m above the floor of an interior (a ceiling light)'
     return 'fill', 'none of the above'
+
+
+def room_lights(place, described):
+    """Indoors only the room light that lights the subject most casts the room's shadows (few shadow casters: shadow memory,
+    lesson 110); the other ceiling lights become fills that cast none."""
+    rooms = [l for l in place.lights if described[l['name']][0] == 'room']
+    if len(rooms) < 2:
+        return
+
+    def on_subject(light):
+        r = geometry.length(geometry.subtract(light['at'], place.subject_point))
+        return (light.get('watts') or 0.0) / (watts_spread(light) * max(r, 0.1) ** 2)
+    main = max(rooms, key=on_subject)
+    for light in rooms:
+        if light is not main:
+            described[light['name']] = ('fill', f'a room light; only {main["name"]}, the one lighting the subject most, casts the room\'s shadows')
+
+
+def watts_spread(light):
+    """4 pi for a point or spot light (P / (4 pi r^2) face-on), pi for an area light (at most P / (pi r^2) face-on)."""
+    return math.pi if light.get('kind') == 'AREA' else 4 * math.pi
+
+
+ROOM_LIGHT_ABOVE_FLOOR = 2.0   # metres: a light this high above an interior's floor is a ceiling light (not a house number: a test of height)
 
 
 def housing_of(place, light, role, settings):
@@ -590,16 +636,33 @@ def command_plan(args, settings):
     for light in place.lights:
         role, why = light_role(place, light, roles)
         described[light['name']] = (role, why)
+    room_lights(place, described)
     reference = None
     if args.reference:
         reference = next((l for l in place.lights if l['name'] == args.reference), None)
         if reference is None:
             raise SystemExit(f'plan_lights: no light "{args.reference}" (lights: {", ".join(l["name"] for l in place.lights)})')
     elif not place.dark:
-        reference = next((l for l in place.lights if described[l['name']][0] == 'accent' and l.get('watts')), None)
+        # the subject's own key (its accent light), with or without watts: the same light the report calls "the subject's own light"
+        accents = [l for l in place.lights if described[l['name']][0] == 'accent']
+        reference = next((l for l in accents if l.get('watts')), accents[0] if accents else None)
     reference_distance = geometry.length(geometry.subtract(reference['at'], place.subject_point)) if reference else None
+    result['suggested_watts'] = {}
+    if reference and not reference.get('watts'):
+        # the place facts leave the key's watts empty (the schema allows it): start it where the project's kept keys lit their
+        # subjects, by the inverse square from its distance; a person tunes it on the plate
+        levels = settings.value('light_planner.key_on_subject_watts_per_square_metre')
+        level = levels['interior'] if place.interior else levels['street']
+        start = level * watts_spread(reference) * reference_distance ** 2
+        reference['watts'] = round(start, 1)
+        reference['watts_suggested'] = True
+        result['suggested_watts'][reference['name']] = reference['watts']
+        lines.append(f'Reference: {reference["name"]} has no watts in the place facts. Planned with a STARTING value of {reference["watts"]} W: at '
+                     f'{reference_distance:.2f} m it gives the subject {level} W/m2, as the project\'s kept {"indoor" if place.interior else "street"} key did '
+                     f'(film-settings.json light_planner.key_on_subject_watts_per_square_metre). Write it into the place facts, render, and tune it there.')
     if reference:
-        lines.append(f'Reference: {reference["name"]} ({reference["watts"]} W, {reference_distance:.2f} m from the subject\'s middle): it '
+        lines.append(f'Reference: {reference["name"]} ({reference["watts"]} W{", suggested" if reference.get("watts_suggested") else ""}, '
+                     f'{reference_distance:.2f} m from the subject\'s middle): it '
                      f'gives the subject {irradiance(reference["watts"], reference["at"], place.subject_point, geometry.normalise(geometry.subtract(reference["at"], place.subject_point))):.1f} W/m2.')
     elif place.dark:
         lines.append('A dark subject: no starting watts from a light on the subject (see the dark-subject plan below; give --reference to '
@@ -614,6 +677,7 @@ def command_plan(args, settings):
         with open(args.surfaces) as handle:
             surfaces += json.load(handle)['surfaces']
     problems = []
+    subject_total = sum(subject_light_balance(place, reference)['by_light'].values()) if reference else None
     for light in place.lights:
         role, why = described[light['name']]
         row = {'light': light['name'], 'kind': light.get('kind'), 'watts': light.get('watts'), 'role': role, 'role_because': why,
@@ -646,20 +710,23 @@ def command_plan(args, settings):
                 lines.append(f'  link: let it reach only {", ".join(sorted(wanted))}')
         if role == 'rim' and not set(light.get('reaches_only') or []) <= place.figure_names():
             row['notes'].append('a rim light should reach only the figures')
-        # starting watts by the inverse square
-        if light.get('kind') == 'AREA' and reference and light is not reference:
-            lines.append('  start: an area light (it shines from one face, not like a point): not planned by the inverse square')
-        elif reference and light is not reference and role in ('lamp', 'fire', 'fill', 'window', 'key'):
+        # starting watts by the inverse square (an area light by its face-on light: at most P / (pi r^2), against P / (4 pi r^2)
+        # for a point or spot light), so it lights its nearest lit surface no more than the key lights the subject
+        if reference and light is not reference and role in ('lamp', 'fire', 'fill', 'window', 'key', 'room'):
             nearest, notes = nearest_lit_surface(place, light, housing)
+            area = ' (an area light, counted face-on)' if light.get('kind') == 'AREA' else ''
             if nearest and nearest[1] > reference_distance:
                 lines.append(f'  start: not by the inverse square (its nearest lit surface, {nearest[0]}, is {nearest[1]:.2f} m away, farther '
                              f'than the reference\'s {reference_distance:.2f} m): set it by the light rules')
             elif nearest:
-                start = reference['watts'] * (nearest[1] / reference_distance) ** 2
+                start = reference['watts'] / watts_spread(reference) * watts_spread(light) * (nearest[1] / reference_distance) ** 2
                 row.update({'nearest_lit': nearest[0], 'nearest_lit_metres': nearest[1], 'start_watts': start})
+                if not light.get('watts'):
+                    result['suggested_watts'][light['name']] = round(start, 1)
                 ratio = (light['watts'] / start) if light.get('watts') and start > 0 else None
-                lines.append(f'  start: {start:.1f} W (its nearest lit surface, {nearest[0]}, is {nearest[1]:.2f} m away; so it lights that no '
-                             f'more than the key lights the subject)' + (f'; it has {light["watts"]} W ({ratio:.1f} times that)' if ratio else ''))
+                lines.append(f'  start: {start:.1f} W{area} (its nearest lit surface, {nearest[0]}, is {nearest[1]:.2f} m away; so it lights that no '
+                             f'more than the key lights the subject)' + (f'; it has {light["watts"]} W ({ratio:.1f} times that)' if ratio else
+                                                                          ('; the place facts give it no watts: start here' if not light.get('watts') else '')))
                 for note in notes:
                     lines.append(f'  ({note})')
         # reach and cone for a light aimed at its target
@@ -713,15 +780,19 @@ def command_plan(args, settings):
                                  f'{cones["from_below_cone_degrees"]:.0f} degrees aimed at its bottom edge (lit from below'
                                  + ('; its top stays outside the cone, warm bottom and cool top' if cones['from_below_leaves_top_unlit'] else '')
                                  + f'); blend {settings.value("light_planner.cone_blend")}' + (f'; it has {light["cone_degrees"]:.0f}' if light.get('cone_degrees') else ''))
-        # camera-facing surfaces it lights more than the subject
+        # camera-facing surfaces it lights more than the subject is lit (by all its lights together, the same figure as "Light on
+        # the subject" below; without a key, against what this light itself gives the subject)
         if surfaces and light.get('watts') and role not in ('rim',):
             found = surfaces_check(place, light, surfaces, settings)
-            if found['brighter_than_subject']:
-                worst = found['brighter_than_subject'][0]
-                row['brighter_than_subject'] = [{'surface': r['surface'], 'brightest': r['brightest']} for r in found['brighter_than_subject'][:3]]
-                scale = found['on_subject'] / worst['brightest'] if worst['brightest'] > 0 else 0
-                row['problems'].append(f'it lights {worst["surface"]} (facing the camera) {worst["brightest"]:.2f} W/m2 against the subject\'s '
-                                       f'{found["on_subject"]:.2f}: move it behind that face (to an inner face), or link it to skip it; at the '
+            level = max(found['on_subject'], subject_total or 0.0)
+            brighter = sorted((r for r in found['all'] if r['role'] not in ('subject', 'story') and r['brightest'] > level), key=lambda r: -r['brightest'])
+            if brighter:
+                worst = brighter[0]
+                row['brighter_than_subject'] = [{'surface': r['surface'], 'brightest': r['brightest']} for r in brighter[:3]]
+                scale = level / worst['brightest'] if worst['brightest'] > 0 else 0
+                against = 'the subject\'s (all its lights)' if subject_total else 'what it gives the subject,'
+                row['problems'].append(f'it lights {worst["surface"]} (facing the camera) {worst["brightest"]:.2f} W/m2 against {against} '
+                                       f'{level:.2f}: move it behind that face (to an inner face), or link it to skip it; at the '
                                        f'same place it would need {scale * 100:.0f}% of its watts')
         for problem in row['problems']:
             lines.append(f'  PROBLEM {problem}')
@@ -771,7 +842,7 @@ def command_plan(args, settings):
     result['shadow_casters'] = casters
     result['eevee'] = {'shadow_pool_size': str(pool), 'shadow_resolution_scale': min(1.0, reference_width / plate_width)}
     lines.append('')
-    lines.append(f'Shadows: only {", ".join(casters) if casters else "(none: name a key, fire, doorway or sky light)"} cast shadows; every other '
+    lines.append(f'Shadows: only {", ".join(casters) if casters else "(none: name a key, fire, doorway, sky or room light)"} cast shadows; every other '
                  f'light none. Figures: visible_shadow off, each with a soft foot patch {foot[0]} x {foot[1]} m.')
     lines.append(f'EEVEE for a {plate_width}-wide plate: shadow_pool_size \'{pool}\', shadow_resolution_scale {result["eevee"]["shadow_resolution_scale"]:.3f}. '
                  f'After every render run plan_lights.py render-log on its log; a shadow fault draws false black wedges (lesson 110).')
@@ -826,7 +897,7 @@ def command_exposure(args, settings):
     return {'views': rows}, lines
 
 
-# The silhouette contrast is measured the way the people test measured the 2.2 it is judged against (scratchpad
+# The silhouette contrast is measured the way the people test measured the 2.2 it is judged against (working files
 # redesign/people-paint/check-figures/scripts/films.py lines 7-24): relative luminance (sRGB made linear), the subject's
 # mask shrunk by 2 pixels, against a ring from 2 to 12 pixels outside it, on the 1920-row film frame.
 INNER_SHRINK, RING_FROM, RING_TO = 2, 2, 12
@@ -921,24 +992,46 @@ def saved_pictures(text):
     return rows
 
 
+SAVED_LINE = re.compile(r'^\s*[\d:.]+\s+render\s+\|\s+Saved:\s+\'([^\']+)\'', re.M)
+
+
 def command_render_log(args, settings):
     """Refuses a picture whose render log shows a shadow fault (lesson 110), and reads how long each picture took to draw
-    (the skeptic of log 35: measure and record plate times rather than predict them)."""
+    (the skeptic of log 35: measure and record plate times rather than predict them). A file that is not a Blender render
+    log (no "render | Saved: '...'" line: an empty file, another program's log) is refused too, and with --plate the logs
+    must save that very picture: a clean log of some other render proves nothing about this plate (decision 37)."""
     faults = settings.value('light.render_faults')
-    rows, lines = [], []
+    rows, lines, refused, problems = [], [], [], []
+    saved_names = set()
     for path in args.logs:
         with open(path, errors='replace') as handle:
             text = handle.read()
         found = [f for f in faults if f in text]
         count = sum(text.count(f) for f in found)
         times = saved_pictures(text)
-        rows.append({'log': path, 'faults': found, 'fault_lines': count, 'drawing_minutes': times})
+        saved = [os.path.basename(m) for m in SAVED_LINE.findall(text)]
+        saved_names.update(saved)
+        rows.append({'log': path, 'faults': found, 'fault_lines': count, 'drawing_minutes': times, 'saved': saved})
+        if not saved:
+            refused.append(path)
+            problems.append(f'{os.path.basename(path)} is not a Blender render log: it has no "render | Saved: \'...\'" line '
+                            f'({"it is empty" if not text.strip() else "it saves no picture"}). Keep the log of the plate\'s render: blender -b ... > plate.log 2>&1')
+            lines.append(f'{os.path.basename(path)}: REFUSE: not a Blender render log (no "Saved:" line{", the file is empty" if not text.strip() else ""})')
+            continue
+        if found:
+            refused.append(path)
+            problems.append(f'{os.path.basename(path)}: shadow fault "{found[0]}" ({count} times)')
         lines.append(f'{os.path.basename(path)}: ' + ('REFUSE the picture: ' + '; '.join(f'"{f}"' for f in found) + f' ({count} times; shadow memory '
                                                        'ran out: false black wedges or no shadows. Lower the shadow resolution scale or cast '
-                                                       'fewer shadows, then draw it again)' if found else 'no shadow fault'))
+                                                       'fewer shadows, then draw it again)' if found else f'no shadow fault; saves {", ".join(saved)}'))
         for row in times:
             lines.append(f'  {row["picture"]}: drawn in {row["minutes"]:.1f} min')
-    return {'logs': rows, 'refused': [r['log'] for r in rows if r['faults']]}, lines
+    for plate in args.plate or []:
+        if os.path.basename(plate) not in saved_names:
+            refused.append(plate)
+            problems.append(f'no log given saves {os.path.basename(plate)} (they save: {", ".join(sorted(saved_names)) or "nothing"}): give the log of this plate\'s render')
+            lines.append(f'REFUSE {os.path.basename(plate)}: no log given saves it (they save: {", ".join(sorted(saved_names)) or "nothing"})')
+    return {'logs': rows, 'refused': refused, 'problems': problems}, lines
 
 
 def main(argv=None):
@@ -949,7 +1042,7 @@ def main(argv=None):
     p.add_argument('--view', required=True)
     p.add_argument('--state', help='only lights of this state (a light\'s in_states)')
     p.add_argument('--reference', help='the light the inverse square starts from (default: the subject\'s key light)')
-    p.add_argument('--role', action='append', help='LIGHT=ROLE: say a light\'s role (key, fire, lamp, doorway, rim, window, fill, sky)')
+    p.add_argument('--role', action='append', help='LIGHT=ROLE: say a light\'s role (key, accent, fire, lamp, doorway, rim, window, fill, sky, room)')
     p.add_argument('--beam-hits', action='append', help='LIGHT=FILE: Blender ray hits for that light (set_measurements.py beam)')
     p.add_argument('--surfaces', help='a JSON {"surfaces": [{name, centre, normal, along, width, height, role}]} of faces the boxes miss (walls, piers)')
     p.add_argument('--lamps', help='a set_measurements.py objects file of the set\'s lamps (their boxes and lights)')
@@ -967,6 +1060,7 @@ def main(argv=None):
     p.add_argument('--frame-height', type=int, help='when the picture is cut from a frame: that frame\'s height in pixels (the band scales with it)')
     p = add_output_options(commands.add_parser('render-log', help='refuse a picture whose render log shows a shadow fault'))
     p.add_argument('logs', nargs='+')
+    p.add_argument('--plate', action='append', help='a picture the logs must save (its file name), e.g. the plate about to be painted')
     args = parser.parse_args(argv)
     settings = load_settings(args.settings)
     runner = {'plan': command_plan, 'exposure': command_exposure, 'contrast': command_contrast, 'render-log': command_render_log}[args.command]
@@ -980,4 +1074,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'plan_lights'))

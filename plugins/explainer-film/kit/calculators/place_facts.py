@@ -29,7 +29,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings, MissingSetting  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 import frame_geometry as geometry  # noqa: E402
 
 SCHEMA_PATH = os.path.join(HERE, 'place_facts_schema.json')
@@ -240,7 +240,7 @@ def base_facts(place, about, made_from):
 
 # ------------------------------------------------------------------------------------------------ the Works
 WORKS_KINDS = {
-    # which shot-kind profiles each Works view uses, and why (the round 5 final checks, scratchpad redesign/round5-set/checks)
+    # which shot-kind profiles each Works view uses, and why (the round 5 final checks, working files redesign/round5-set/checks)
     'w1': (['crowd', 'dark_subject'], 'No. 1\'s shut iron gate with its seven men gathered in front'),
     'w2': (['crowd', 'dark_subject'], 'No. 2\'s open gateway (a dark opening); its slowed state holds eight waiting men'),
     'w3': (['overview', 'crowd', 'dark_subject'], 'both gates from an upstairs window, the crowd 29-30 m away'),
@@ -644,4 +644,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(run_main(main, 'place_facts'))

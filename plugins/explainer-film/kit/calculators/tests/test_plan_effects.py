@@ -15,15 +15,16 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, film_kit_folder, blender_program  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
 OURS = os.path.join(FIXTURES, 'effects-camera-light')
 WORKS_FACTS = os.path.join(FIXTURES, 'works', 'works-place-facts.json')
 NOTICE_FACTS = os.path.join(FIXTURES, 'notice-corner', 'notice-corner-place-facts.json')
 WORKS_EFFECTS = os.path.join(KIT, 'paper-film', 'scenes', 'inflation-chapter-2-newcomers', 'works-effects.js')
-W3_PLATE = '/home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/works-w3-plate.jpg'
-NOTICE_BLEND = '/home/user/Music/austerity-explainer/film-kit/assets/models/pit-village/notice-corner.blend'
+FILM_MODELS = os.path.join(film_kit_folder() or '(film kit not found: FILM_KIT)', 'assets', 'models')   # the project's plates and scenes
+W3_PLATE = os.path.join(FILM_MODELS, 'inflation-chapter-2-newcomers', 'works', 'works-w3-plate.jpg')
+NOTICE_BLEND = os.path.join(FILM_MODELS, 'pit-village', 'notice-corner.blend')
 LOWER_CARD = [65 / 1080, 314 / 1920, 972 / 1080, 454 / 1920]   # page-5.js RULE_CARDS.lower [TEXT_LEFT, 314, TEXT_RIGHT - TEXT_LEFT, 140]
 UPPER_CARD = [65 / 1080, 158 / 1920, 972 / 1080, 298 / 1920]
 
@@ -69,7 +70,7 @@ from_table = effects.read_smoke(settings)
 FIELDS = ('life', 'rise', 'drift', 'opacity', 'fade', 'mouth_seconds', 'mouth_size')
 check.true('film-settings.json effects.smoke_kinds hold round 5\'s heavy smoke', all(abs(from_table['kinds']['heavy'][f] - from_record['kinds']['heavy'][f]) < 1e-9
                                                                                     for f in FIELDS),
-           recorded='kit/film-settings.json effects.smoke_kinds; scratchpad redesign/round5-pages/tools/smoke-final.json',
+           recorded='kit/film-settings.json effects.smoke_kinds; working files redesign/round5-pages/tools/smoke-final.json',
            proves='the shared table holds the round 5 numbers (working and thin lack mouth seconds there; the planner fills in '
                   'effects_planner.mouth_seconds_default 2)')
 changed = sorted({f'{k} {f} {from_record["kinds"][k][f]:g} -> {from_page["kinds"][k][f]:g}' for k in from_record['kinds'] if k in from_page['kinds']
@@ -92,7 +93,7 @@ first_across = geometry.project_point(w3, top_a)['across']
 judged4 = effects.judge_plume(trace4, settings, others=others, emitter_across=first_across)
 judged5 = effects.judge_plume(trace5, settings, others=others, emitter_across=first_across)
 check.close('round 4 wind: travel while seen in W3 (No. 2 chimney a, heavy)', judged4['travel'], 0.044, 0.0015,
-            recorded='scratchpad plugin-calculators/verify_test_cases-output.txt ("travel ... 0.044"); skeptic (log 35)',
+            recorded='working files plugin-calculators/verify_test_cases-output.txt ("travel ... 0.044"); skeptic (log 35)',
             proves='the trace repeats the design\'s own sum (same model); the verdict below is the real check')
 check.true('round 4 wind is refused (travels under 0.15 of the width)', any('travels only' in p for p in judged4['problems']),
            recorded='round4-result.json critique finding 4: the puffs piled up as rings and a hook',
@@ -112,7 +113,7 @@ check.within('round 5 middles to', judged5['centre_down_range'][1], 0.264, 0.266
 # the skeptic's top-edge finding: centres pass under the lower card, top edges do not
 judged5_cards = effects.judge_plume(trace5, settings, cards=[('lower', LOWER_CARD)], others=others, emitter_across=first_across)
 check.close('round 5: puff top edges (strength 0.2 or more) reach', judged5_cards['top_edge_min'], 0.221, 0.0015,
-            recorded='scratchpad redesign/round5-pages/tools/smoke-final-trace.txt (heavy no-2-chimney-a-top: top0.221 at 3 s)',
+            recorded='working files redesign/round5-pages/tools/smoke-final-trace.txt (heavy no-2-chimney-a-top: top0.221 at 3 s)',
             proves='the edge test reads the same tops the round 5 trace printed')
 check.true('the lower card (ends 0.2365 down) covers the plume\'s top: flagged by edges, not by middles',
            any('top edges reach' in p for p in judged5_cards['problems']) and not any('middles are inside' in p for p in judged5_cards['problems']),
@@ -185,12 +186,12 @@ if os.path.exists(W3_PLATE):
                proves='only that the measure orders the two the way the critic did: the 30-level limit was placed between these two cases')
     check.true('round 5 smoke passes lightness and colour difference', not [p for p in by5['no-2-chimney-a']['problems'] if 'mouth' not in p],
                details=f'colour difference {by5["no-2-chimney-a"]["colour_difference"]:.0f}', recorded='round 5 still at 117.1 s shows the plume clearly '
-               '(scratchpad redesign/round5-pages/smoke-4)', proves='repeats where the limits came from (both invented)')
+               '(working files redesign/round5-pages/smoke-4)', proves='repeats where the limits came from (both invented)')
     check.true('No. 1\'s working mouth (1.7 m) is narrower than its 1.84 m top: flagged', any('narrower' in p for p in by5['no-1-chimney']['problems']),
                recorded='place facts: no-1 chimney radius 0.92 (round 2 factories); works-effects.js SMOKE.working mouth 1.7',
                proves='a finding for a person: the design\'s mouth rule (invented) fails round 5\'s working smoke by 8%')
 else:
-    check.note(f'colour checks skipped: the W3 plate is not here ({W3_PLATE})')
+    check.note('colour checks skipped: the film kit\'s W3 plate is not on this machine (FILM_KIT, or austerity-explainer/film-kit next to the plugins folder)')
 
 # ------------------------------------------------------------------------------------------------ contact shadows
 code_run, shadows = run('contact-shadows', '--place-facts', NOTICE_FACTS, '--props', 'drum,chair,pail', '--footprints',
@@ -213,8 +214,8 @@ check.true('without a list, the lantern (on the chair\'s seat) and the notice (o
            details=f'chosen: {names}', recorded='notice-corner.js shadows: drum, chair and pail only', proves='the shot checker\'s resting tolerances '
            '(composing.resting_*) leave out props resting on a raised surface or hanging above the ground (the board is still offered: the hand '
            'chose none for it)')
-blender = os.environ.get('BLENDER') or '/home/user/work/blender-app/blender-5.2.2-linux-x64/blender'
-if os.path.exists(blender) and os.path.exists(NOTICE_BLEND):
+blender = blender_program()
+if blender and os.path.exists(NOTICE_BLEND):
     out = tempfile.mkdtemp(prefix='plan-effects-')
     try:
         subprocess.run([blender, '-b', NOTICE_BLEND, '--python', os.path.join(KIT, 'paper-film', 'blender', 'set_measurements.py'), '--', 'footprints',
@@ -228,7 +229,8 @@ if os.path.exists(blender) and os.path.exists(NOTICE_BLEND):
     finally:
         shutil.rmtree(out, ignore_errors=True)
 else:
-    check.note('Blender or notice-corner.blend is not here: the live footprint measurement was skipped')
+    check.note('Blender (BLENDER, or explainer-film-setup\'s machine-settings.env) or the film kit\'s notice-corner.blend (FILM_KIT) '
+               'is not on this machine: the live footprint measurement was skipped')
 
 # ------------------------------------------------------------------------------------------------ window change ("busy")
 passes, boost = effects.judge_window_change(3.0, settings)
@@ -236,12 +238,12 @@ check.true('round 4 "busy": 130 -> 133 levels is too small, about 5 times more n
            recorded='round4-result.json finding 8 ("No. 2\'s windows go from 130 to 133 levels"; "aim for at least 15")', proves='only repeats 15 / 3')
 found = effects.window_change([0, 0, 300, 220], os.path.join(OURS, 'busy-new-windows-79.00.png'), [os.path.join(OURS, 'busy-new-windows-79.80.png')], settings)
 check.close('round 5 final burst: size of change at 79.8 s', found['others'][0]['size_of_change'], 28.1, 0.15,
-            recorded='measured here on scratchpad redesign/round5-pages/busy-new/still-79.00.jpg and still-79.80.jpg (crop 320,480,620,700); the same '
+            recorded='measured here on working files redesign/round5-pages/busy-new/still-79.00.jpg and still-79.80.jpg (crop 320,480,620,700); the same '
             'numbers as round 5\'s window_change.py', proves='the planner\'s measure equals the round 5 tool\'s')
 check.true('round 5 final burst passes (15 levels or more)', effects.judge_window_change(found['others'][0]['size_of_change'], settings)[0])
 earlier = effects.window_change([0, 0, 300, 220], os.path.join(OURS, 'busy-2-windows-79.00.png'), [os.path.join(OURS, 'busy-2-windows-79.80.png')], settings)
 check.close('an earlier round 5 try (busy-2): size of change at 79.8 s', earlier['others'][0]['size_of_change'], 11.3, 0.15,
-            recorded='measured here on scratchpad redesign/round5-pages/busy-2 stills', proves='the measure separates a weaker try from the final one '
+            recorded='measured here on working files redesign/round5-pages/busy-2 stills', proves='the measure separates a weaker try from the final one '
             '(nobody recorded a verdict on busy-2; the final burst replaced it)')
 check.true('the earlier try is under 15 levels', not effects.judge_window_change(earlier['others'][0]['size_of_change'], settings)[0])
 

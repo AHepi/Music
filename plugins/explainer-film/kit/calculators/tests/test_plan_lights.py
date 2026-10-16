@@ -14,15 +14,16 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, film_kit_folder, blender_program  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
 OURS = os.path.join(FIXTURES, 'effects-camera-light')
 NOTICE = os.path.join(FIXTURES, 'notice-corner', 'notice-corner-place-facts.json')
 WORKS = os.path.join(FIXTURES, 'works', 'works-place-facts.json')
 CHECKOUT = os.path.join(FIXTURES, 'checkout-c1', 'checkout-c1-place-facts.json')
-WORKS_ASSETS = '/home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works'
-NOTICE_BLEND = '/home/user/Music/austerity-explainer/film-kit/assets/models/pit-village/notice-corner.blend'
+FILM_MODELS = os.path.join(film_kit_folder() or '(film kit not found: FILM_KIT)', 'assets', 'models')   # the project's plates and scenes
+WORKS_ASSETS = os.path.join(FILM_MODELS, 'inflation-chapter-2-newcomers', 'works')
+NOTICE_BLEND = os.path.join(FILM_MODELS, 'pit-village', 'notice-corner.blend')
 
 import plan_lights as lights  # noqa: E402
 from settings import load_settings  # noqa: E402
@@ -154,7 +155,7 @@ for view, expected in (('w1', 1.24), ('w2', 2.19)):
     code, measured = run('contrast', '--place-facts', WORKS, '--view', view, '--picture', os.path.join(OURS, f'{view}-quiet-subject-picture-crop.jpg'),
                          '--subject-mask', os.path.join(OURS, f'{view}-quiet-subject-mask-crop.png'), '--frame-height', '1920')
     check.close(f'{view} (round 5 final): the gate\'s silhouette contrast', measured['contrast'], expected, 0.02,
-                recorded=f'measured here on scratchpad redesign/round5-set/checks/final-{view}-quiet/picture.png with its shot_facts solo mask (cropped to the '
+                recorded=f'measured here on working files redesign/round5-set/checks/final-{view}-quiet/picture.png with its shot_facts solo mask (cropped to the '
                 'fixtures; the full frame gives the same to 0.002), by the people test\'s own method (people-paint/check-figures/scripts/films.py)',
                 proves='a hold-out for the dark-subject number: 2.2 was measured on painted figures (people test), never on a gate')
 check.note('round 5\'s W1 gate measures 1.24 against the dark-subject 2.2 (well short: light behind it, or judge 2.2 unsuited to an iron gate); W2\'s '
@@ -176,8 +177,8 @@ check.true('C1\'s key spot (20 degrees) covers only part of the bill: the planne
 # ------------------------------------------------------------------------------------------------ render logs and exposure
 code, logs = run('render-log', os.path.join(OURS, 'render-log-notice-corner-plate-log31.log'), os.path.join(OURS, 'render-log-works-plates-round5-excerpt.log'))
 check.true('log 31\'s notice corner plate is refused for "Shadow buffer full"; round 5\'s Works plates pass', code == 1 and logs['refused'] ==
-           [os.path.join(OURS, 'render-log-notice-corner-plate-log31.log')], recorded='scratchpad plan3/corner/plate.log (43 fault lines; lesson 110: the black '
-           'wedge three critics blamed on the lighting); scratchpad redesign/round5-set/plates/plates.log', proves='the log check refuses the picture that misled log 31')
+           [os.path.join(OURS, 'render-log-notice-corner-plate-log31.log')], recorded='working files plan3/corner/plate.log (43 fault lines; lesson 110: the black '
+           'wedge three critics blamed on the lighting); working files redesign/round5-set/plates/plates.log', proves='the log check refuses the picture that misled log 31')
 times = {r['picture']: r['minutes'] for r in logs['logs'][1]['drawing_minutes']}
 check.close('round 5 W1 plate drawing time (minutes, read from the log)', times['works-w1-plate.png'], 5.76, 0.05,
             recorded='plates.log "Saved" times 06:05.827 and 11:51.229; round 3: "about 6 minutes" with three shadow lights', proves='plate times are read, not predicted (skeptic)')
@@ -195,8 +196,8 @@ else:
     check.note('the round 5 plates are not here; the picture exposure check was skipped')
 
 # ------------------------------------------------------------------------------------------------ the Blender ray cast still runs
-blender = os.environ.get('BLENDER') or '/home/user/work/blender-app/blender-5.2.2-linux-x64/blender'
-if os.path.exists(blender) and os.path.exists(NOTICE_BLEND):
+blender = blender_program()
+if blender and os.path.exists(NOTICE_BLEND):
     out = os.path.join(temporary, 'beam.json')
     subprocess.run([blender, '-b', NOTICE_BLEND, '--python', os.path.join(KIT, 'paper-film', 'blender', 'set_measurements.py'), '--', 'beam', '--check',
                     os.path.join(FIXTURES, 'notice-corner', 'notice-corner-shot-check.json'), '--at', '2.78,22.0,2.6301', '--aim', '3.45,22.75,2.3251',
@@ -205,7 +206,8 @@ if os.path.exists(blender) and os.path.exists(NOTICE_BLEND):
     check.close('set_measurements.py beam in notice-corner.blend gives the same reach again', again['reach_metres'], reach['reach_metres'], 1e-3,
                 recorded='tests/fixtures/effects-camera-light/beam-notice-glow.json', proves='the Blender companion still runs and agrees with its fixture')
 else:
-    check.note('Blender or notice-corner.blend is not here: the live ray cast was skipped')
+    check.note('Blender (BLENDER, or explainer-film-setup\'s machine-settings.env) or the film kit\'s notice-corner.blend (FILM_KIT) '
+               'is not on this machine: the live ray cast was skipped')
 
 shutil.rmtree(temporary, ignore_errors=True)
 check.finish()

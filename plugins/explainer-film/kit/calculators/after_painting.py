@@ -44,7 +44,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 import frame_geometry as geometry  # noqa: E402
 import painting_measures as measures  # noqa: E402
 
@@ -490,4 +490,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'after_painting'))

@@ -5,9 +5,9 @@ sizes (round 1: the jacket), and fronts. Each check says what it proves or only 
 Parts:
   A. always: small made-up models (written here as .glb), the real chimney part of round 3 and round 4 (fixtures, 17 KB
      each) and round 1's node names (fixture)
-  B. when the project is on this machine (fixtures/views-and-models/project.json, or FILM_PROJECT): the whole round 3
+  B. when the project is on this machine (FILM_PROJECT, or austerity-explainer next to the plugins folder): the whole round 3
      and round 4 model files and round 1's props from the project's git history, the pit-village lamps
-  C. when Blender is there too (BLENDER, or project.json): the notice corner scene, the Works lane with the factories laid
+  C. when Blender is there too (BLENDER, or explainer-film-setup's machine-settings.env, or the PATH): the notice corner scene, the Works lane with the factories laid
      on its unlowered ground (round 2's state), and the assembled Works (round 5); about a minute; VIEWS_AND_MODELS_NO_BLENDER=1 skips it
 Run: python3 kit/calculators/tests/test_model_lint.py
 """
@@ -21,7 +21,7 @@ import tempfile
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, project_folder, blender_program, PROJECT_WORDS  # noqa: E402
 from settings import load_settings  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
@@ -218,11 +218,11 @@ try:
 
     # ---------------------------------------------------------------------------------------------------- B. the project's files
     project_note = json.load(open(os.path.join(HERE_FIXTURES, 'project.json')))
-    project = os.environ.get('FILM_PROJECT', project_note['project'])
+    project = project_folder() or ''
     in_git = subprocess.run(['git', '-C', project, 'rev-parse', '--is-inside-work-tree'], capture_output=True, text=True).stdout.strip() == 'true' \
-        if os.path.isdir(project) else False
+        if project else False
     if not in_git:
-        check.note(f'part B skipped: the project is not at {project} (set FILM_PROJECT)')
+        check.note(f'part B skipped: {PROJECT_WORDS}, or it is not a git repository')
     else:
         works = './film-kit/assets/models/inflation-chapter-2-newcomers/works'
         def from_git(commit, path, out):
@@ -264,10 +264,10 @@ try:
                     recorded='story log 32 (the gas lamps and the lantern looked like flat amber cards)', proves='finds the recorded fault in the real files')
 
     # ---------------------------------------------------------------------------------------------------- C. Blender
-    blender = os.environ.get('BLENDER', project_note['blender'])
+    blender = blender_program()
     kit_folder = os.path.join(project, 'film-kit')
-    if os.environ.get('VIEWS_AND_MODELS_NO_BLENDER') or not os.path.exists(blender) or not os.path.isdir(kit_folder):
-        check.note('part C skipped: no Blender or no project (set BLENDER and FILM_PROJECT; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)')
+    if os.environ.get('VIEWS_AND_MODELS_NO_BLENDER') or not blender or not os.path.isdir(kit_folder):
+        check.note('part C skipped: no Blender or no project (set BLENDER, or run explainer-film-setup; FILM_PROJECT; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)')
     else:
         environment = dict(os.environ, DISPLAY=os.environ.get('BLENDER_DISPLAY', project_note['display']))
         lint_script = os.path.join(BLENDER_FOLDER, 'model_lint.py')

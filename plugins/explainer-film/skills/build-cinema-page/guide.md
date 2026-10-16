@@ -151,6 +151,13 @@ voice). Do not commit with git.
 
 ## 7. Finish
 
+First check your page's word lookups by calculation (no browser, about a second):
+`python3 calculators/plan_page_timing.py lookups examples/<chapter>/timeline.json paper-film/scenes/<chapter>/page-N.js:N`
+(a word said more than once on the page must say which time, even the first: `kit.at('war', 2)`), and your
+camera with `camera_audit.py --timeline` (section 1 of `camera-and-framing.md`). The lead runs the heavier
+page events, timing and layout checks on the whole chapter afterwards (`explainer-film-preflight pages`);
+the rules they apply are in the kit's `docs/LLM tips and tricks.md`, section 13.
+
 Render a final round of 8–12 stills that covers every beat of your page (including the very first
 and last moments of your page window), make the sheet, look at it, and fix anything weak. Then
 report: the page file path, the final sheet path, a list of beats (time, word, what is seen), every

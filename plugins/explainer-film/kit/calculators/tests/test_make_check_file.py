@@ -6,8 +6,8 @@ each group holds) and role by role.
 Parts:
   A. always: the helpers (names, patterns, the shot_facts grouping rule) and the check files the generator wrote on
      2026-10-16 (fixtures/views-and-models/generated: only repeats that run)
-  B. when Blender and the project are on this machine (fixtures/views-and-models/project.json, or BLENDER and
-     FILM_PROJECT): the four scenes are built and the check files generated again and compared with the hand-made ones
+  B. when Blender and the project are on this machine (BLENDER, or explainer-film-setup's machine-settings.env, or the
+     PATH; FILM_PROJECT, or austerity-explainer next to the plugins folder): the four scenes are built and the check files generated again and compared with the hand-made ones
      (about a minute and a half, one Blender at a time; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)
 Run: python3 kit/calculators/tests/test_make_check_file.py
 """
@@ -18,7 +18,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, project_folder, blender_program  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
 BLENDER_FOLDER = os.path.join(KIT, 'paper-film', 'blender')
@@ -69,11 +69,12 @@ check.true('checkout: the ceiling is the sky and no counter prop is on the stree
 
 # ---------------------------------------------------------------------------------------------------- B. Blender
 note = json.load(open(os.path.join(HERE, 'project.json')))
-project = os.environ.get('FILM_PROJECT', note['project'])
-blender = os.environ.get('BLENDER', note['blender'])
+project = project_folder() or ''
+blender = blender_program()
 kit_folder = os.path.join(project, 'film-kit')
-if os.environ.get('VIEWS_AND_MODELS_NO_BLENDER') or not os.path.exists(blender) or not os.path.isdir(kit_folder):
-    check.note('part B skipped: no Blender or no project (set BLENDER and FILM_PROJECT; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)')
+if os.environ.get('VIEWS_AND_MODELS_NO_BLENDER') or not blender or not os.path.isdir(kit_folder):
+    check.note('part B skipped: no Blender or no project (set BLENDER, or run explainer-film-setup; FILM_PROJECT, or austerity-explainer next to '
+               'the plugins folder; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)')
     check.finish()
 
 environment = dict(os.environ, DISPLAY=os.environ.get('BLENDER_DISPLAY', note['display']))

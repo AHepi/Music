@@ -1,7 +1,5 @@
 {
- "about": "Where the views-and-models cases came from on the machine they were made (2026-10-16). test_model_lint.py and test_make_check_file.py use these to re-run the full cases (the project's git history, its Blender scenes); each part skips cleanly when a path is missing. Override with FILM_PROJECT, BLENDER and BLENDER_DISPLAY.",
- "project": "/home/user/Music/austerity-explainer",
- "blender": "/home/user/work/blender-app/blender-5.2.2-linux-x64/blender",
+ "about": "Which project commits the views-and-models cases came from (2026-10-16). test_model_lint.py and test_make_check_file.py use these to re-run the full cases from the project's git history and Blender scenes; each part skips cleanly when the project or Blender is not on the machine. The project is found through FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; Blender through BLENDER, explainer-film-setup's machine-settings.env, or the PATH; the virtual screen through BLENDER_DISPLAY.",
  "display": ":96",
  "commits": {
   "round 1 props (eight with 'name.001' roots)": "6054643",

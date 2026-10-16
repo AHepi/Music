@@ -50,6 +50,8 @@ never changed) and 81 new files.
 | `narration-tools/mix_voice_over_music.sh` | A length gate at the end. |
 | `narration-tools/find_loud_words.py` | Its measure is a function, `word_peak_levels` (sound_gates.py uses it); its printout is the film kit's, byte for byte (checked on chapter 2). |
 | `paper-film/tools/add_music_bed.sh` | loudnorm aims at -1.5 dBTP (at -1 the AAC copy came out -0.9, as log 32's clip did), then gates for length, loudness and true peak. |
+| `examples/notice-corner/shot-check.json`, `examples/people-test/shot-check.json`, `examples/inflation-chapter-2-newcomers/works-w1-shot-check.json`, `works-w2-shot-check.json`, `works-w3-shot-check.json` | The shot checker's newer keys added (log 35): `kind_of_shot` (as the place facts say), `figures` (the people's groups), `accepted` (the notice corner: the four problems the user kept, decision 38; the others empty until a person accepts one), and W3's `fill` (the handcart). Everything else is the film kit's file. A copy from the film kit must keep these keys. |
+| `calculators/preflight.py`, `bin/explainer-film-preflight` (new) | The preflight (log 35): one command per stage (script, record, shots, plates, paint, pages, film, finish) that runs the calculators that apply and blocks the paid or long step on a new failure. |
 
 Worth copying back to the film kit: `find-browser.mjs` with the `--stills` fix and `profile_frame.mjs`'s lazy-page fix, the page-events notes in `graphics.js` and `cinema-kit.js` with `page_events.mjs` and `check_page_layout.mjs`, `setFading` and `skyCard` in the
 shared code, and the machine settings in `check-shot.sh`; the mix script's length fix and the sound gates

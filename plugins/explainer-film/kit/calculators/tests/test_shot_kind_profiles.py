@@ -204,10 +204,10 @@ for line in results['check1']['landed_high']:
     air = bottom - counter
     cleared += judge(inside['resting_on'], air) == 'pass'
 check.equal('checkout C1: check 1\'s four "landed on something high" alarms rest on the counter under the interior profile', cleared, 4,
-            recorded='scratchpad redesign/round5-checkout/check1/report.md (bottoms 0.89-0.90 m; the counter top 0.885 m from check 10\'s facts)',
+            recorded='working files redesign/round5-checkout/check1/report.md (bottoms 0.89-0.90 m; the counter top 0.885 m from check 10\'s facts)',
             proves='a declared support surface ends the street rule\'s false alarm indoors (repeats where the profile came from)')
 open_checkout = [p['rule'] for p in results['check10']['problems'] if verdict(reading(p, set())[0], reading(p, set())[1], inside) == 'open']
 check.equal('checkout C1 (hold-out half): the interior profile leaves check 10\'s light problems open', len(open_checkout), len(results['check10']['problems']),
-            recorded='scratchpad redesign/round5-checkout/check10/report.md (lit from below -0.29, burnt-out 23%, a dark shape 1.5%)',
+            recorded='working files redesign/round5-checkout/check10/report.md (lit from below -0.29, burnt-out 23%, a dark shape 1.5%)',
             proves='the profile excuses only what it was written for; real faults at a new place still show')
 check.finish()

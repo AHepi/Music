@@ -50,7 +50,7 @@ for folder in (CALCULATORS, HERE):
     if folder not in sys.path:
         sys.path.insert(0, folder)
 from settings import load_settings  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 
 MIX_SCRIPT = os.path.join(HERE, 'mix_narration_over_music.sh')
 RATE = 48000
@@ -481,4 +481,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'sound_gates'))

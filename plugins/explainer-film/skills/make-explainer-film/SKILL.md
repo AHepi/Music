@@ -1,6 +1,6 @@
 ---
 name: make-explainer-film
-description: Make a narrated, fact-checked explainer film for a phone screen (1080x1920) chapter by chapter, from research to a finished video with captions, in a cinematic look (painted rooms with depth, card models, paper cut-outs, film grain, documentary graphics) or the simpler paper pop-up look. Use when someone asks for an explainer video, a documentary-style chapter, or "the next chapter" of such a film.
+description: Make a narrated, fact-checked explainer film for a phone screen (1080x1920) chapter by chapter, from research to a finished video with captions, in a cinematic look (places built in 3D and painted over, painted rooms with depth, card models, paper cut-outs, film grain, documentary graphics) or the simpler paper pop-up look, with automatic checks (calculators and a preflight) at every stage. Use when someone asks for an explainer video, a documentary-style chapter, or "the next chapter" of such a film.
 when_to_use: The user wants a short documentary or explainer video made end to end (research, script, voice, pictures, animation, filming), or wants to continue a series made this way.
 ---
 
@@ -27,19 +27,61 @@ at the counter. The whole film is built like that.
    every paid step's estimated cost before spending; keep a project story, decisions (the user's
    exact words), status, lessons; name delivered files with a two-digit log number and plain words.
 3. **Ask the user only about wants, risk or cost.** Make routine technical choices yourself.
+4. **Read the tips guide** once before the first step, and the section for each stage as you reach it:
+   `${CLAUDE_PLUGIN_ROOT}/kit/docs/LLM tips and tricks.md` (in the kit folder: `docs/LLM tips and tricks.md`).
+   It holds the short rules this project learned over 35 logs, each with the tool that checks it, the numbers
+   to know (with their units and whether they were measured, judged or invented), the traps that cost the
+   most rounds, and the list of things only a critic can judge.
+
+## Compute, don't search: the preflight and the calculators
+
+Nearly every number this project once found by trial (where a prop lands on the frame, how far back the
+camera may stand, how long a slide may be, how loud the music sits, how long filming takes, what a painting
+costs) is now worked out by a tool in the kit (`calculators/`, `narration-tools/`, `paper-film/tools/`,
+`paper-film/blender/`), from the new film's own files. House numbers live in one table,
+`film-settings.json`; change them only there. The calculators' guide is the kit's `calculators/README.md`.
+
+**Run the preflight at each stage, read its whole report, and fix what it lists before you move on:**
+```
+explainer-film-preflight STAGE --project FILM_FOLDER [inputs]
+```
+(on the PATH once the plugin is installed, or `python3 calculators/preflight.py` in the kit). Name the film's
+files once in `FILM_FOLDER/preflight-plan.json` (`explainer-film-preflight --example-plan` prints one);
+`explainer-film-preflight --list` lists every stage's inputs and which tool makes each. Reports go to
+`FILM_FOLDER/preflight-reports/`. Exit 0 passes (read the "look" items), 1 fails, 2 means an input is
+missing (the report names the file and the tool that makes it). Only new failures block: a problem accepted
+on purpose, with who and the date, is reported as known. Right before a paid or long step,
+`explainer-film-preflight STAGE --gate` says whether the newest report passed and its inputs are unchanged.
+It spends nothing and changes no project file.
+
+| Stage | When | Step below |
+|---|---|---|
+| `script` | before recording (before paying for the voice) | 1-2 |
+| `record` | after recording | 3 |
+| `shots` | before building or drawing a place's views | 4a |
+| `plates` | before paying for paintings | 4, 4a |
+| `paint` | after each painting arrives | 4, 4a |
+| `pages` | while building pages | 5 |
+| `film` | before filming (it needs a critique, saved as JSON, newer than every page file, each finding fixed or accepted) | 6-7 |
+| `finish` | after finishing | 7 |
+
+Work like this: compute before you render; make one change, then measure again (camera first, then props,
+then light); quote measured numbers in every report; never trust a single still. What no tool can judge
+(history, what a detail reads as on a phone, newcomer understanding, story choices, the user's yes to
+spend) goes to critics: section 19 of the tips guide lists it.
 
 ## The steps (each has its own skill; do them in order)
 
-| Step | Skill | Hands on |
-|---|---|---|
-| 1. Research, outlines, script | `research-and-script` | a research ledger (every fact with a source), 2-3 outlines for the user to choose, the script (`narration-script.json`) |
-| 2. Fact check the script, and test it on newcomers | `check-facts` (workflows `verify-facts`, then `test-script-with-newcomers`) | fixes before recording; then read it to one or two real newcomers with the script's listener questions |
-| 3. Record and time the voice | `record-narration` | recordings, word times, `timeline.json`, the mix |
-| 4. Paintings, rooms with depth, cut-outs | `paint-and-cut` | `assets/reliefs/<chapter>/`, `paper-film/pieces/<chapter>/` |
-| 4a. Or: places built in 3D and painted over (the look of chapter 2 for newcomers) | `build-and-paint-a-place` (and `make-3d-models`) | a Blender set per place, checked views, plates, lined-up paintings, `assets/models/<place>/` |
-| 5. Pages | `build-cinema-page` (workflow `build-pages` for many at once) | `paper-film/scenes/<chapter>/page-N.js` and `<chapter>.js` |
-| 6. Check and critique | `check-and-critique` (workflows `critique-film`, `verify-facts` again for on-screen words) | fixes before filming |
-| 7. Film and finish | `film-and-finish` | the master film, a sendable copy under 28 MB, captions, cover, measurements |
+| Step | Skill | Hands on | Preflight |
+|---|---|---|---|
+| 1. Research, outlines, script | `research-and-script` | a research ledger (every fact with a source), 2-3 outlines for the user to choose, the script (`narration-script.json`) | `script` |
+| 2. Fact check the script, and test it on newcomers | `check-facts` (workflows `verify-facts`, then `test-script-with-newcomers`) | fixes before recording; then read it to one or two real newcomers with the script's listener questions | `script` |
+| 3. Record and time the voice | `record-narration` | recordings, word times, `timeline.json`, the mix | `record` |
+| 4. Paintings, rooms with depth, cut-outs | `paint-and-cut` | `assets/reliefs/<chapter>/`, `paper-film/pieces/<chapter>/` | `plates`, `paint` |
+| 4a. Or: places built in 3D and painted over (the look of chapter 2 for newcomers) | `build-and-paint-a-place` (and `make-3d-models`) | a Blender set per place, its place facts, planned and checked views, plates, lined-up paintings, `assets/models/<place>/` | `shots`, `plates`, `paint` |
+| 5. Pages | `build-cinema-page` (workflow `build-pages` for many at once) | `paper-film/scenes/<chapter>/page-N.js` and `<chapter>.js` | `pages` |
+| 6. Check and critique | `check-and-critique` (workflows `critique-film`, `verify-facts` again for on-screen words) | fixes before filming | `pages`, then `film` |
+| 7. Film and finish | `film-and-finish` | the master film, a sendable copy under 28 MB, captions, cover, measurements | `film`, `finish` |
 
 ## Timings and costs to expect (chapter 2: 4 min 30 s, ten pages, 4 CPUs)
 
@@ -49,15 +91,18 @@ at the counter. The whole film is built like that.
 - Building ten pages: two pattern pages by hand, then eight in parallel (10-16 minutes each).
 - Filming: about 1.4-2.4 s per frame; 8,110 frames took about 3.5 hours with two stretches at once.
 - Built-and-painted places (chapter 2 for newcomers, October 2026): a plate repaint about 44 US cents
-  (Flux 3 edit, 4.8 cents a megapixel counting the pictures sent; prices changed between plan and
-  purchase, so check fal's estimate first); about 0.9 s a frame while the camera holds and 4.3 s while
-  it slides (one worker). Before recording, `narration-tools/estimate_timeline.py` gives the chapter's
-  length from the script (about 407 s for the 16-page newcomer chapter).
-- Work these out instead of guessing: `python3 kit/calculators/plan_budget.py cost PLAN.json` prices the
-  paid steps (paintings by the megapixels returned AND sent, the narration's credits, a repaint and
-  re-record reserve); `plan_budget.py ledger LEDGER.json --next-cost DOLLARS` says what is left of the
-  user's allowance, counted from the day it began, and refuses a step larger than that; `plan_budget.py
-  filming` plans the filming time and stretches (skill `film-and-finish`). A vague reply is not a yes.
+  (Flux 3 edit, 4.8 cents a megapixel counting the pictures sent; it was 2.4 the day before, so prices
+  change between plan and purchase: read fal's live price before each paid batch); about 0.9 s a frame
+  while the camera holds and 4.3 s while it slides (one worker). Before recording,
+  `narration-tools/estimate_timeline.py` gives the chapter's length from the script (about 407 s for the
+  16-page newcomer chapter).
+- Work these out instead of guessing (from the kit folder):
+  `python3 calculators/plan_budget.py cost PLAN.json --rate CENTS --rate-date DATE` prices the paid steps at today's rate (paintings by the
+  megapixels returned AND sent, the narration's credits, a repaint and re-record reserve);
+  `plan_budget.py ledger LEDGER.json --next-cost DOLLARS` says what is left of the user's allowance,
+  counted from the day it began, and refuses a step larger than that; `plan_budget.py filming` plans the
+  filming time and stretches from a short measured profile (skill `film-and-finish`). Do the free steps
+  first, then ask once with the exact cost. A vague reply is not a yes.
 
 ## The rules that matter most
 
@@ -71,4 +116,8 @@ at the counter. The whole film is built like that.
 - Leave room for phone buttons (rule 12): anything to read ends left of 0.90 across (972 px of 1080)
   and sits above 0.80 down; typed words go in the top band, 0.05 to 0.22 down.
 - Check pictures with your own eyes (contact sheets with the Read tool) before filming, and get an
-  independent critique (subagents) before you call it done.
+  independent critique (subagents) before you call it done. The tools measure; the critics judge what they
+  can't (section 19 of the tips guide).
+- A view's kinds of shot (still life, crowd, overview, interior, dark subject) relax some composing rules
+  on purpose, and a problem the project chose to keep goes in the check file's `accepted` list (rule,
+  reason, who, date), so it is reported as known instead of failing every run.

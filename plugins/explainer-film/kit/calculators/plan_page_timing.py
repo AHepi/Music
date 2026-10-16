@@ -52,7 +52,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 
 KIT = os.path.dirname(HERE)
 GRAPHICS_JS = os.path.join(KIT, 'paper-film', 'scenes', 'graphics.js')
@@ -1183,4 +1183,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'plan_page_timing'))

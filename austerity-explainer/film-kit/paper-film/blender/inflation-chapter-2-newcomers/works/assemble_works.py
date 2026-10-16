@@ -442,11 +442,17 @@ def level_ground_under_the_yards():
 
 
 # The gutter's dished channel along each kerb, smoothed for the Works' lane only (round 6; round 5's check, finding 12:
-# rainbow fringes on its stepped ridges in the bottom corners of W1 and W2): the lane's stone blocks picture gave the
-# shallow dish deep block joints at W1's and W2's low angle, rows of hard steps. Its own copy of the stone with the joints'
-# relief turned well down (the normal map's strength, 1 in the pit village), and the dish shaded smooth. The pit village
-# (build_street.py, the notice corner) is untouched.
+# rainbow fringes on its stepped ridges in the bottom corners of W1 and W2): seen along the lane at W1's and W2's low
+# angle, the large stone blocks picture on the narrow dish drew rows of hard light and dark steps. Tried in round 6: with
+# the joints' relief turned down (the normal map at 0.12 instead of 1) the steps stayed, as they are in the picture's own
+# colours; with its colours mixed 75 to 90% toward one plain stone colour they went, and the dish reads as smooth worn
+# stone (the people test's prompt asks the painter for "the smooth stone gutter with no steps or ridges"). So: its own
+# copy of the stone, the relief down, the colours mostly flattened to a dark worn stone, matt (a smooth dish otherwise
+# shone with the sky), and the dish shaded smooth. The pit village (build_street.py, the notice corner) is untouched.
 GUTTER_RELIEF = 0.12
+GUTTER_FLATTEN = 0.8                       # how far the stone picture's colours are mixed toward GUTTER_STONE
+GUTTER_STONE = (0.075, 0.07, 0.064)        # a dark worn stone, near the gutter's own average
+GUTTER_ROUGHNESS = 0.9
 
 
 def smooth_gutter():
@@ -455,9 +461,23 @@ def smooth_gutter():
         return None
     smooth = channel.data.materials[0].copy()
     smooth.name = 'works-channel-stones'
-    for node in smooth.node_tree.nodes:
+    nodes, links = smooth.node_tree.nodes, smooth.node_tree.links
+    for node in nodes:
         if node.type == 'NORMAL_MAP':
             node.inputs['Strength'].default_value = GUTTER_RELIEF
+    shader = nodes['Principled BSDF']
+    colour = shader.inputs['Base Color']
+    if colour.links:
+        mix = nodes.new('ShaderNodeMix')
+        mix.data_type = 'RGBA'
+        mix.inputs[0].default_value = GUTTER_FLATTEN
+        mix.inputs[7].default_value = (*GUTTER_STONE, 1.0)
+        links.new(colour.links[0].from_socket, mix.inputs[6])
+        links.new(mix.outputs[2], colour)
+    roughness = shader.inputs['Roughness']
+    for link in list(roughness.links):
+        links.remove(link)
+    roughness.default_value = GUTTER_ROUGHNESS
     channel.data.materials[0] = smooth
     for polygon in channel.data.polygons:
         polygon.use_smooth = True
@@ -940,16 +960,16 @@ FIRE_ENERGY = 80.0                       # the brazier's light (round 4: 110 W, 
 # rim at 0.84 m and glowing at 3.5, showed as a bright pink-white band at the drum's top in W1): only the tips of the
 # coals show over the rim from the lane, a dull red. The flames are drawn live in the film (works-effects.js), from
 # works-shot.json's coals_z.
-COAL_TOP = 0.78
-COAL_GLOW = 0.8
+COAL_TOP = 0.76
+COAL_GLOW = 0.35             # at 0.8 the coals' tips still reached 235 levels in W1 at film size (round 5: 255, burnt out)
 LAMP_Y = WALL_Y - PIER_PROUD + 0.1       # the gate lamp's bracket on the outer pier's inner face, 0.1 m in from its front edge
 LAMP_FOOT = 2.2                          # the bracket's foot: the lamp's glass at about 3.3 m, its top under the board
 GATE_LAMP_ENERGY = 7.0                   # half round 4's 14 W (which lit the pier's face); it reaches only the gate, its board, the men and the yard
 
 
 def brazier_and_lantern(coping_top):
-    """No. 1's brazier against its gate's right leaf, burning; a lit hurricane lantern on the DIESEL drum's lid and a
-    lunch tin on the PETROL drum's."""
+    """No. 1's brazier against its gate's right leaf, burning; a lit hurricane lantern and a lunch tin on the PETROL drum's
+    lid (round 6; round 5: the lantern on DIESEL's)."""
     x, y = BRAZIER
     drum = prop('brazier-drum.glb', x, y, 25, name='brazier-drum', folder=PIT_PROPS)
     fire = dressing.brazier_fire(x, y, light_above_coals=0.55, coal_top=COAL_TOP, dark_every=1.33, glow=COAL_GLOW, energy=FIRE_ENERGY, shadow_soft=0.35)
@@ -999,17 +1019,19 @@ _N1_OUTER = _N1 - GATE_WIDTH / 2         # its outer pier's inner face
 # so the drums do not hide them from W2.
 # Round 6 (round 5's check, finding 4: the story ended at 0.72 down in W1 and W2, the bottom 28 to 32% bare paving,
 # everything in one flat layer 7 to 9 m away): the drums are THE NEAR LAYER, as the notice corner's drum, chair and
-# pail are. DIESEL with its lantern stands about 5.3 m from W1's composed spot (its front foot about 0.79 down the film's
-# frame), PETROL with the lunch tin a step behind it and to the left; in the picture they overlap the front men's legs, so
-# the drums and the crowd still read as one group. Only props come this near: every man stands at least 6 m from every
-# camera place. No. 2's are the mirror (W2).
+# pail are. DIESEL stands about 4.6 m from W1's composed spot (its front foot about 0.83 down the film's frame, its lid
+# just below the pop-up crates' THIS WAY UP on "things"), PETROL a step behind it and to the left, with the lantern and
+# the lunch tin on its lid (on DIESEL's lid, nearer, the lantern hid "THIS" on the left crate); in the picture they
+# overlap the front men's legs, so the drums and the crowd still read as one group. Only props come this near: every
+# man stands at least 6 m from every camera place. No. 2's are the mirror (W2).
 DRUM_SPOTS = {    # x, y, turn (degrees; the stencil faces -y at 0, + turns it toward +x): words turned to the gate view
-    'no-1': {'petrol': (-4.95, 19.25, 12.0), 'diesel': (-4.1, 18.5, 6.0)},
-    'no-2': {'petrol': (4.95, 19.25, -12.0), 'diesel': (4.1, 18.5, -6.0)},
+    'no-1': {'petrol': (-4.95, 19.25, 12.0), 'diesel': (-4.01, 17.8, 5.0)},
+    'no-2': {'petrol': (4.95, 19.25, -12.0), 'diesel': (4.01, 18.1, -5.0)},   # 0.3 m further than No. 1's: in W2 its lid then clearly overlaps the gateway's foot (at 17.8 they just met)
 }
 BRAZIER = (-2.35, 21.82)                                            # against No. 1's right gate leaf, in the road
-LANTERN = (DRUM_SPOTS['no-1']['diesel'][0] - 0.01, DRUM_SPOTS['no-1']['diesel'][1] - 0.2)   # on DIESEL's lid, at its front
-LUNCH_TIN = (DRUM_SPOTS['no-1']['petrol'][0] - 0.01, DRUM_SPOTS['no-1']['petrol'][1] - 0.16)   # on PETROL's lid, at its front
+LANTERN_DRUM = 'no-1-drum-petrol'                                  # the drum the lantern stands on (round 6: PETROL)
+LANTERN = (DRUM_SPOTS['no-1']['petrol'][0] + 0.13, DRUM_SPOTS['no-1']['petrol'][1] + 0.08)   # on PETROL's lid, at its back right
+LUNCH_TIN = (DRUM_SPOTS['no-1']['petrol'][0] - 0.1, DRUM_SPOTS['no-1']['petrol'][1] - 0.1)    # on PETROL's lid, at its front left, a clear gap from the lantern
 STOOP_GAP = 0.1          # the stooped man stands this far further from the brazier than his pose's own reach (round 3's
                          # check: his coat met the drum)
 STOOP_TURN = -40.0       # he faces the brazier from its front-left, turned up and to the right
@@ -1022,11 +1044,11 @@ MEN_1 = [
     ('worker-stooped-to-brazier', 'man-2', (BRAZIER[0] + (STOOP_AHEAD + STOOP_GAP) * math.sin(math.radians(STOOP_TURN)),
                                             BRAZIER[1] - (STOOP_AHEAD + STOOP_GAP) * math.cos(math.radians(STOOP_TURN))), STOOP_TURN, 1.0),
     # the front row, at the gate (between man 1 and the stooped man, and by the outer pier)
-    ('worker-arms-folded', 'man-3', (-3.49, 21.55), 6, 1.03),
+    ('worker-arms-folded', 'man-3', (-3.67, 21.55), 6, 1.03),        # round 6: 0.18 m left (his edge ran along man 6's and a gate leaf's)
     ('worker-hands-in-pockets', 'man-4', (-5.3, 21.45), -10, 0.97),
     # the back row, behind the drums, each between two of the front row
     ('worker-arms-folded', 'man-5', (-4.77, 20.72), 12, 0.98),
-    ('worker-hands-in-pockets', 'man-6', (-3.93, 20.62), -4, 1.04),
+    ('worker-hands-in-pockets', 'man-6', (-4.02, 20.62), -4, 1.04),  # round 6: 0.09 m left (man 1's edge ran along his)
     ('worker-hands-in-pockets', 'man-7', (-3.14, 20.82), -14, 0.96),
 ]
 # No. 2's eight (its slowed state, page 12): the same arrangement, mirrored and without a fire: a loose crowd two deep
@@ -1092,6 +1114,7 @@ def foot_shadow(holder, collection_name):
         shader.inputs['Base Color'].default_value = (0.0, 0.0, 0.0, 1)
         shader.inputs['Roughness'].default_value = 1.0
         shader.inputs['Alpha'].default_value = 0.4
+        shader.inputs['Specular IOR Level'].default_value = 0.0     # no sheen from a light: it only darkens
         if hasattr(material, 'surface_render_method'):
             material.surface_render_method = 'BLENDED'
         material['tile_metres'] = 1.0
@@ -1199,9 +1222,10 @@ def yard_things(pieces):
 NO_2_CRATES = ((-0.42, 0.0, 0.0, 94), (0.2, 0.1, 0.0, 85), (-0.11, 0.05, 0.51, 91))
 # No. 1's pop-up crates: (x from the gateway's middle, y from the works wall's face, lift, turn); the third on the first two.
 # Round 6 (round 5's check, finding 12: a thin bright gap between the two bottom crates, the lit doorway showing through):
-# the two bottom crates are turned alike, so their facing sides run parallel 1.5 cm apart (round 5: turned -4 and 5
-# degrees, 5 cm apart at the front, crossing at the back), and each has a soft contact shadow under it (contact_shadow)
-POP_UP_CRATES = ((-0.36, 1.45, 0.0, -3), (0.5, 1.48, 0.0, -3), (0.07, 1.47, 0.5, 2))
+# the two bottom crates are turned alike, so their facing sides run parallel (round 5: turned -4 and 5
+# degrees, 5 cm apart at the front, crossing at the back) with their corner battens about 4 mm apart, and each has a soft
+# contact shadow under it (contact_shadow)
+POP_UP_CRATES = ((-0.36, 1.45, 0.0, -3), (0.488, 1.48, 0.0, -3), (0.07, 1.47, 0.5, 2))
 
 # The handcart (round 6; round 5's check, finding 4: at the right pavement's kerb it sat at W3's right edge, at 0.86
 # across, with W3's bottom third empty lane): in the lane's right half, coming up it toward the works, loaded with three
@@ -1247,6 +1271,15 @@ def handcart():
         crates.append(crate)
     tilt.rotation_euler = (0, math.radians(-HANDCART_TILT), 0)
     bpy.context.view_layer.update()
+    # the tip baked into each part's own shape (each keeps its place in the holder), so every part's outline box is
+    # level again: the shot checker reads a part's bottom from its box, and a tipped wheel's box reached 13 cm below the
+    # road ("handcart is sunk 0.17 m", round 6's first check) though the wheels stand on it
+    for part in [o for o in holder.children_recursive if o.type == 'MESH']:
+        placed = part.matrix_world.copy()
+        part.data = part.data.copy()
+        part.data.transform(placed)
+        part.matrix_world = Matrix.Identity(4)
+    bpy.context.view_layer.update()
     # the shafts' ends after tipping, and the man behind them, his hands (STOOP_AHEAD in front of him) on their ends
     handle = holder.matrix_world @ (Matrix.Translation((HANDCART_AXLE[0], 0, HANDCART_AXLE[1])) @ Matrix.Rotation(math.radians(-HANDCART_TILT), 4, 'Y')
                                     @ Vector((HANDCART_HANDLES - HANDCART_AXLE[0], 0.0, 0.64 - HANDCART_AXLE[1])))
@@ -1276,6 +1309,7 @@ def contact_shadow(holder, collection_name):
         shader.inputs['Base Color'].default_value = (0.0, 0.0, 0.0, 1)
         shader.inputs['Roughness'].default_value = 1.0
         shader.inputs['Alpha'].default_value = 0.25
+        shader.inputs['Specular IOR Level'].default_value = 0.0
         if hasattr(material, 'surface_render_method'):
             material.surface_render_method = 'BLENDED'
         material['tile_metres'] = 1.0
@@ -1721,16 +1755,18 @@ def people_lights(lamp_lights):
     """Which of the people's own lights reach the waiting men, and the thin edge of light on them (round 5; round 4's
     check: the men were pure black with no edge light, one black mass the painter could not separate). Each gate lamp
     reaches only its gate's leaves, the chain, its board, its waiting men and its yard's setts (on the lane's paving it
-    made a bright pool in front of the men, brighter than the gate). A cool light from each yard,
-    behind the bars, and a warm one from the gate lamp's side reach only the waiting men, from behind and above, so each
-    man keeps a thin rim along his shoulders and cap. The lantern on the DIESEL drum does not reach the men standing
-    behind the drums (it would light their backs: they stay dark shapes). None of these lights reaches anything else,
-    and the men cast no shadows, so a state picture still swaps only the men."""
+    made a bright pool in front of the men, brighter than the gate). The rim lights (MEN_RIMS, round 6) stand behind
+    each crowd and reach only its men, so each man keeps a thin edge of light along his outline. The lantern on the
+    PETROL drum does not reach the men standing behind the drums (it would light their backs: they stay dark shapes).
+    None of these lights reaches anything else, and the men cast no shadows, so a state picture still swaps only the
+    men."""
     found = {}
     def meshes(objects):
         return [o for o in objects if o.type == 'MESH']
     for prefix, side in (('no-1', -1), ('no-2', 1)):
-        men = meshes(bpy.data.collections[f'men-{prefix}'].all_objects)
+        # the men's figures, without the soft patches at their feet (round 6: lit by the strong rim lights, the patches
+        # showed as pale discs on the paving)
+        men = [o for o in meshes(bpy.data.collections[f'men-{prefix}'].all_objects) if 'foot-shadow' not in o.name]
         gate = bpy.data.objects.get(f'{prefix}-gate')
         chain = bpy.data.objects.get('no-1-chain') if prefix == 'no-1' else None
         board = bpy.data.objects.get(f'gate-board-{prefix}')
@@ -1743,12 +1779,12 @@ def people_lights(lamp_lights):
             rim = point_light(name, (centre + side * across, GATE_PLANE_Y + out, height), energy, colour, soft=0.3, shadow=False)
             dressing.light_reaches(rim, men)
             found[name] = rim
-    # the lantern on No. 1's DIESEL drum: it does not reach the men (they stay dark shapes) nor the drum it stands on
+    # the lantern on No. 1's PETROL drum: it does not reach the men (they stay dark shapes) nor the drum it stands on
     # (round 6, the people test's lesson 138: its light pooled inside the drum's dished lid, a glowing hollow the painter
     # would lift into a bright band); it lights the paving and PETROL beside it
     lantern = bpy.data.objects.get('lantern_light')
     if lantern is not None:
-        drum = bpy.data.objects.get('no-1-drum-diesel')
+        drum = bpy.data.objects.get(LANTERN_DRUM)
         dressing.light_reaches(lantern, meshes(list(bpy.data.collections['men-no-1'].all_objects) + (parts_of(drum) if drum else [])), only=False)
     # the people at work inside the doorways stand against the lit far wall: the yards' strong spill lights (in front of
     # the mill fronts) would light their backs a warm brown; they skip them, so they show as dark shapes
@@ -1761,16 +1797,16 @@ def people_lights(lamp_lights):
 
 
 # The waiting men's edge lights (round 6; round 5's check, finding 6: the claimed rim could not be seen, the men averaged
-# 9 to 11 levels in the film, flat black mannequins). Three lights stand BEHIND each crowd (beyond it from the gate views
-# and W3), at shoulder height, and shine back toward the cameras past the men, so the light grazes their outlines: one
-# behind the crowd's middle, just past the gate, one beyond its outer end and one beyond its inner end (the brazier's
-# side, warm). They reach only the men and cast no shadows, so the men's backs (toward the cameras) stay dark and only a
-# thin edge on caps, shoulders and arms lights up (the people test: the painter paints the men paler, so they stay dark,
-# with a little rim light). name: (across from the gate's middle, outward +, metres out past the gate's line into the
-# yard (+) or toward the lane (-), height, watts, colour)
-MEN_RIMS = {'yard': (0.0, 0.7, 1.65, 700.0, (0.6, 0.72, 1.0)),
-            'outer': (2.6, 0.1, 1.6, 500.0, (0.6, 0.72, 1.0)),
-            'lamp': (-1.7, 0.2, 1.7, 500.0, (1.0, 0.72, 0.45))}
+# 9 to 11 levels in the film, flat black mannequins). Two strong lights stand far BEHIND each crowd (beyond it from the
+# gate views and W3), deep in the yard, a little above the men's caps, one either side of the line from the gate view
+# through the crowd's middle, and shine back toward the cameras past the men: from so far behind, only the outlines of
+# caps, shoulders and sleeves face them, so each man gets a thin edge of light (1 to 3 pixels at film size, 60 to 100
+# levels, measured in a test of five arrangements in round 6) while his back toward the cameras stays dark. Nearer
+# lights (2 m behind) lit the coats' whole sides grey: the men read as pale mannequins. They reach only the men and cast
+# no shadows (the people test: the painter paints the men paler, so they stay dark, with a little rim light).
+# name: (across from the gate's middle, outward +, metres out past the gate's line into the yard, height, watts, colour)
+MEN_RIMS = {'yard': (1.6, 4.6, 2.1, 8500.0, (0.6, 0.72, 1.0)),
+            'lamp': (-1.0, 4.6, 2.1, 7500.0, (1.0, 0.72, 0.45))}
 
 
 # how far each of No. 1's yard lights reaches, in metres (round 6): the beam from 6.8 m inside the yard reaches the
@@ -2129,7 +2165,18 @@ def build():
                        'sleeves on a peg, a crate table under it with a flat cap, a tin mug and a WAGES envelope 2.6 times life size, all '
                        'touching, on No. 2\'s inner pier where only W4 sees them; the No. 2 board lettered on its back; one warm pool of '
                        'lamplight on that corner and the rest of the yard in the dusk; the gateway crates left out of W4\'s plate; W4 0.2 m '
-                       'beside the hinge post, sliding from 6.7 to 5.5 m from the gate.'},
+                       'beside the hinge post, sliding from 6.7 to 5.5 m from the gate.',
+            'round_6': 'The PETROL and DIESEL drums are the near layer: DIESEL about 4.6 m from W1\'s and W2\'s composed spots (its foot about '
+                       '0.83 down), PETROL a step behind it with the lantern and the lunch tin on its lid; every man still stands at least 6 m '
+                       'from every camera place in front of it. The waiting men get a thin rim of light from two strong lights far behind '
+                       'each crowd, reaching only the men. No. 2\'s two people at work stand right of its inner pier\'s line, so W3 sees '
+                       'them (the lathe and the pillar drill moved to suit). No. 1\'s yard lights end a short way out of its gateway (custom '
+                       'distance), so "start" lights No. 1, its yard and a small gateway pool, not the lane. W3 has a working helper plate '
+                       'for page 5\'s "made" (states.working.pictures.w3). No. 2\'s gateway crates are turned so their stencils face across '
+                       'the gateway; the handcart, with plain crates and a man pushing it, stands in the lane\'s right half in W3\'s bottom '
+                       'third. The brazier\'s coals sit lower and glow dimly; the lantern\'s light is kept off the drum it stands on. No. 1\'s '
+                       'cart doors are mid-brown timber. The gutter is smoothed for the Works only. The pop-up crates stand 1.5 cm apart, '
+                       'each bottom one with a soft contact shadow.'},
         'views': {},
         'gates': gate_facts,
         'chimney_tops': {name: marker_spot(name) for name in ('no-1-chimney-top', 'no-2-chimney-a-top', 'no-2-chimney-b-top')},

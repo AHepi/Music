@@ -2,7 +2,9 @@
 film's own files instead of being guessed or searched for again each time (logs 10-34). It answers:
   - what each paid step will cost (paintings by the megapixels returned AND sent, sketches, the narration's credits and
     dollars, a repaint and re-record reserve), and how much of the user's allowance is left, counted from the date the
-    allowance began, from a spend ledger; a next paid step larger than what is left is refused (exit 2);
+    allowance began, from a spend ledger; a next paid step larger than what is left, or one that would pass the
+    allowance's spending line (its "spending_line", else film-settings.json money.user_allowance_dollars for an allowance
+    of that size; paint_request.py uses the same line), is refused (exit 2);
   - how long filming will take, from each frame's kind (held, held with live effects, moving, a page join), read from
     the page events (paper-film/tools/page_events.mjs), priced by MEASURED seconds a frame: best from a few short
     profile pieces filmed first (profile-commands, then measure), else from an earlier filming of the same pages, and
@@ -34,7 +36,7 @@ PLAN.json (cost):  {"paintings": [{"name": "W1 plate", "returned": [1504, 2672],
                    A paintings ledger (people-test-paintings.json: "paintings" with returned_size and images_sent) also
                    works as a plan: it prices what those requests cost.
 LEDGER.json:       {"allowances": [{"name": "chapter 2 pictures", "dollars": 10, "start": "2026-10-12T12:00",
-                   "covers": ["fal"]}], "entries": [{"when": "2026-10-12T14:00", "service": "fal", "what": "...",
+                   "covers": ["fal"], "spending_line": 6}], "entries": [{"when": "2026-10-12T14:00", "service": "fal", "what": "...",
                    "dollars": 1.03}]}  (an entry without "dollars" but with "cents" is read too)
 LOGS (measure):    filming logs: a chunk folder of film-chapter-parallel.sh (*.mp4.log and the SCENE-filming.log next
                    to it), single render-paper-film.mjs logs, or one text file holding their lines (== headers).
@@ -61,7 +63,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 
 KIT = os.path.dirname(HERE)
 CLASSES = ('held_still', 'held_live', 'moving', 'join')
@@ -177,7 +179,7 @@ def cost_plan(plan, settings, rate_cents=None, rate_date=None):
             'narration_dollars': round(narration_dollars, 4), 'total_dollars': total}
 
 
-def ledger_state(ledger, allowance_name=None, today=None):
+def ledger_state(ledger, allowance_name=None, today=None, settings=None):
     """What has been spent from an allowance, counted from the date it began, and what is left."""
     allowances = ledger.get('allowances', [])
     if not allowances:
@@ -203,7 +205,13 @@ def ledger_state(ledger, allowance_name=None, today=None):
         else:
             skipped.append(dict(entry, dollars=dollars))
     spent = round(sum(e['dollars'] for e in counted), 4)
+    line, line_from = allowance.get('spending_line'), 'the ledger\'s allowance'
+    if line is None and settings is not None:
+        house = settings.value('money.user_allowance_dollars')
+        if isinstance(house, dict) and float(house.get('allowance', -1)) == float(allowance['dollars']):
+            line, line_from = house.get('spending_line'), 'film-settings.json money.user_allowance_dollars'
     return {'allowance': allowance['name'], 'allowance_dollars': float(allowance['dollars']), 'start': allowance['start'],
+            'spending_line_dollars': float(line) if line is not None else None, 'spending_line_from': line_from if line is not None else None,
             'spent_dollars': spent, 'left_dollars': round(float(allowance['dollars']) - spent, 4),
             'entries_counted': len(counted), 'entries_before_or_outside': len(skipped), 'counted': counted,
             'spent_all_entries_dollars': round(sum(e['dollars'] for e in counted + skipped), 4)}
@@ -762,7 +770,7 @@ def main():
         lines.append(f'Total: about US${result["total_dollars"]:.2f}. Prices are estimates: fal shows no exact charge, and ElevenLabs\' '
                      'dollars a credit was counted by text length, not billed.')
         if args.ledger:
-            state = ledger_state(load_json(args.ledger), args.allowance)
+            state = ledger_state(load_json(args.ledger), args.allowance, settings=settings)
             result['ledger'] = {k: v for k, v in state.items() if k != 'counted'}
             lines.append(f'Allowance "{state["allowance"]}": US${state["spent_dollars"]:.2f} spent since {state["start"]}, US${state["left_dollars"]:.2f} left.')
             if result['total_dollars'] > state['left_dollars']:
@@ -770,15 +778,24 @@ def main():
                 code = 2
         lines.append('Ask the user with these numbers before any paid call; a vague reply ("that\'s ok") is not a yes to spending.')
     elif args.command == 'ledger':
-        state = ledger_state(load_json(args.ledger), args.allowance, args.today)
+        state = ledger_state(load_json(args.ledger), args.allowance, args.today, settings)
         result = state
         lines.append(f'Allowance "{state["allowance"]}": US${state["allowance_dollars"]:.2f} from {state["start"]}.')
         lines.append(f'  spent since then: US${state["spent_dollars"]:.2f} ({state["entries_counted"]} entries); left: US${state["left_dollars"]:.2f}')
         lines.append(f'  (all entries in the ledger, any date: US${state["spent_all_entries_dollars"]:.2f}; only those since the start count)')
+        line = state.get('spending_line_dollars')
+        if line is not None:
+            lines.append(f'  spending line: US${line:.2f} of it ({state["spending_line_from"]}): paid steps stop there and the user is asked again; '
+                         f'US${line - state["spent_dollars"]:.2f} before it')
         if args.next_cost is not None:
             result['next_cost_dollars'] = args.next_cost
             if args.next_cost > state['left_dollars']:
                 lines.append(f'REFUSED: the next step (US${args.next_cost:.2f}) is more than the US${state["left_dollars"]:.2f} left.')
+                code = 2
+            elif line is not None and state['spent_dollars'] + args.next_cost > line:
+                lines.append(f'REFUSED: the next step (US${args.next_cost:.2f}) would pass the spending line (US${line:.2f}; US${state["spent_dollars"]:.2f} '
+                             'spent). Ask the user before going past it (paint_request.py refuses it too).')
+                result['past_spending_line'] = True
                 code = 2
             else:
                 lines.append(f'The next step (US${args.next_cost:.2f}) fits; US${state["left_dollars"] - args.next_cost:.2f} would be left. '
@@ -868,4 +885,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'plan_budget'))

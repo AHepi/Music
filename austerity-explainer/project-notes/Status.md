@@ -273,7 +273,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   standing in (only planned jumps, no camera turn, every word matches the narration). Round 4's fresh critic still found 15
   problems, 4 must-fix (nobody seen working; the men in single file stack into one column; the story small and high over bare
   paving; the smoke reads as a fault).
-- Building now (free, round 5): those fixes, W4, and the next place, the supermarket checkout (C1, page 1).
+- Round 5 done (W4 relit, the crowd, workers inside, the checkout C1 built). Round 6 stopped partway on 16 October when
+  the user wrapped up: its code changes are saved but untested; round 5 (commit cdca253) is the last checked state.
+- The plugin (log 35): calculators, explainer-film-preflight, film-settings.json and "LLM tips and tricks", version
+  1.3.0; about 780 checks pass; the outside tester and fresh-model trial did not run.
 - The FOUNDRY painterly library (the user's upload, 15 October) was tested and not used: richer brick, but nothing looked
   painted, the wet-stone road came out icy, and drawing was about 7 times slower.
 - Spent so far from the US$20: about 85 US cents (the people test's two paintings, 16 October, with your yes; the price had

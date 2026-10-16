@@ -82,7 +82,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings, resolve_profile, judge, MissingSetting  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 import frame_geometry as g  # noqa: E402
 
 SECTION = 'shot_planner'
@@ -1609,4 +1609,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(run_main(main, 'plan_shot'))

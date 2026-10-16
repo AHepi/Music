@@ -21,7 +21,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES, skip  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, skip, film_kit_folder  # noqa: E402
 import plan_page_timing as timing  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
@@ -29,7 +29,7 @@ HERE = os.path.join(FIXTURES, 'page-timing')
 NODE = shutil.which('node')
 if not NODE:
     skip('page events in the stage', 'node is not installed')
-film_kit = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(KIT))), 'austerity-explainer', 'film-kit')
+film_kit = film_kit_folder() or '(film kit not found)'   # FILM_KIT, or austerity-explainer/film-kit next to the plugins folder
 candidates = [os.environ.get('PAPER_FILM_NODE_MODULES'), os.path.join(KIT, 'paper-film', 'node_modules'), os.path.join(film_kit, 'paper-film', 'node_modules')]
 NODE_MODULES = next((c for c in candidates if c and os.path.isdir(os.path.join(c, 'playwright-core')) and os.path.isdir(os.path.join(c, 'three'))), None)
 if not NODE_MODULES:

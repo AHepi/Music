@@ -52,6 +52,7 @@ Positions are fractions of the frame: 0 across is the left edge, 1 the right; 0 
 Pixel limits are the rules file's, which are set on a frame 1,536 pixels wide, scaled to this frame's width.
 """
 import argparse
+import datetime
 import hashlib
 import json
 import math
@@ -1982,6 +1983,18 @@ def silhouette_contrast(report, shot, entry, settings):
                things=[subject])
 
 
+def signed(entry):
+    """An accepted entry says who accepted it and when (a real day, YYYY-MM-DD, not after today)."""
+    text = str(entry.get('date', '')).strip()
+    if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', text):
+        return False
+    try:
+        day = datetime.date.fromisoformat(text)
+    except ValueError:
+        return False
+    return bool(str(entry.get('who') or '').strip()) and day <= datetime.date.today()
+
+
 def matches(entry, item):
     rule = str(entry.get('rule', '')).strip().lower()
     if not rule or not (rule == str(item.get('rule_id') or '').lower() or item['rule'].lower().startswith(rule)):
@@ -2062,6 +2075,12 @@ def apply_kinds_and_accepted(report, shot, settings_path=None):
     share = settings.value('shot_planner.check_shot_accepted_worse_share')
     unmatched = []
     for entry in accepted or []:
+        if not signed(entry):
+            # an acceptance nobody signed is not one: its problem stays new (and blocks a paid painting)
+            report.note('accepted', f'The check file accepts "{entry.get("rule")}"' + (f' for {", ".join(entry["things"])}' if entry.get('things') else '')
+                        + ' without "who" accepted it and the "date" (YYYY-MM-DD, not after today), so the entry is NOT used and its problem '
+                        'counts as new. Add who and when to use it.')
+            continue
         hits = [i for i in report.items if i['passed'] is False and matches(entry, i)]
         if not hits:
             unmatched.append(entry)

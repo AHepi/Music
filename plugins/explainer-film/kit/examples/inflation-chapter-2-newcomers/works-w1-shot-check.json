@@ -128,5 +128,21 @@
  ],
  "story_reaches_down": 0.7,
  "story_reaches_down_note": "rule 7 (round 5): some story prop or the subject must reach at least this far down the frame, so the story fills the frame into its lower part (the notice corner's drum, chair and pail fill 0.45 to 0.8 down); checked only where a check file gives it",
- "man_2_note": "Round 5, man 2 (the stooped man): round 4's first problem in W1 and W3, 'man 2 rests on brazier, not on the ground (Blender x -5.42, y 21.14)', was a false alarm caused by his reach, not his feet. The checker casts five rays down from 5 cm above his lowest point, at the middle and the four quarter points of his outline box; stooping over the brazier with his arms held out, his box reached over its rim, and the quarter-point ray at Blender x -5.16, y 21.40 started 0.22 m from the brazier's middle, inside its rim, and met the drum's floor (worked out from round 4's measurements). His feet stood on the pavement. In round 5 he warms his hands at the brazier against the right gate leaf, turned 40 degrees, and the checker finds him standing on the ground; he overlaps the brazier by 41 pixels across on the film's frame from W1's composed spot."
+ "man_2_note": "Round 5, man 2 (the stooped man): round 4's first problem in W1 and W3, 'man 2 rests on brazier, not on the ground (Blender x -5.42, y 21.14)', was a false alarm caused by his reach, not his feet. The checker casts five rays down from 5 cm above his lowest point, at the middle and the four quarter points of his outline box; stooping over the brazier with his arms held out, his box reached over its rim, and the quarter-point ray at Blender x -5.16, y 21.40 started 0.22 m from the brazier's middle, inside its rim, and met the drum's floor (worked out from round 4's measurements). His feet stood on the pavement. In round 5 he warms his hands at the brazier against the right gate leaf, turned 40 degrees, and the checker finds him standing on the ground; he overlaps the brazier by 41 pixels across on the film's frame from W1's composed spot.",
+ "kind_of_shot": [
+  "crowd",
+  "dark_subject"
+ ],
+ "kind_of_shot_note": "A crowd of seven waiting men before a dark iron gate (the place facts view \"w1\"): the crowd profile loosens the story box, rule 4 between the men and the bottom-left share for story things; the dark subject swaps \"brightest\" and \"lit from below\" for the gate's outline against the light round it (silhouette contrast).",
+ "figures": [
+  "man 1",
+  "man 2",
+  "man 3",
+  "man 4",
+  "man 5",
+  "man 6",
+  "man 7"
+ ],
+ "accepted": [],
+ "accepted_note": "Nobody has accepted a problem in this view yet. Round 5's final checks list 13 to 29 problems a view; the kinds of shot cover the systematic ones (calculators/tests/test_shot_kind_profiles.py prints the rest). Add an entry only when a person decides to keep a problem: {\"rule\": a shot_kind_profiles rule name or the report's rule words, \"things\": [groups] (optional), \"reason\", \"who\", \"date\", \"measured\" (optional: the number it was accepted at; a problem grown more than 5% past it counts again)}."
 }

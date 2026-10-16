@@ -627,6 +627,12 @@ overturn any of them in one line. Changes to the project must follow this file.
   on 15 October, despite the budget. They wait for your approval; everything free is done first.
   Overturn any of these in one line.
 
+41. **The plugin works out the numbers itself** (your words, log 35): "All the runs and adjustments you've made, can
+    you make them into automatic calculations the plugin makes automatically so they don't have to be exhaustively
+    searched for every time a new video is made. Along with tips and tricks for LLMs to follow."
+42. **Wrap up for now** (your words, 16 October): "It might be time to wrap up. Can you show me everything so far. I'm
+    just running out of usage unfortunately." Round 6 and the plugin's last checks were stopped; everything is saved.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

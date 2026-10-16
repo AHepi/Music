@@ -29,7 +29,7 @@ downloads, and the pages to re-record with their credits and dollars.
 Use:
   python3 -I lint_script.py before SCRIPT.json [--word-times EARLIER_WORD_TIMES.json] [--timeline TIMELINE.json]
         [--timeline-out OUT.json] [--default-pause S] [--ledger LEDGER.json] [--today YYYY-MM-DD] [--common-words FILE]
-  python3 -I lint_script.py after SCRIPT.json --transcripts DIR [--recordings DIR] [--heard DIR] [--word-times WORD_TIMES.json]
+  python3 -I lint_script.py after SCRIPT.json --transcripts DIR [--recordings DIR] [--heard DIR]
 --word-times  an earlier word-times file of the SAME voice: the estimated timeline is made from it (estimate_timeline.py)
 --timeline    a timeline to judge speeds on instead (a real recording's, or an estimate made earlier)
 --ledger      {"claims": [{"id": "C2-N05", "claim": "...", "said_by": "Stats NZ", "valid_until": "2026-10-22"}]}; a page
@@ -60,7 +60,7 @@ if CALCULATORS not in sys.path:
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 from settings import load_settings  # noqa: E402
-from calculator_output import add_output_options, finish  # noqa: E402
+from calculator_output import add_output_options, finish, run_main  # noqa: E402
 
 ESTIMATE_TIMELINE = os.path.join(HERE, 'estimate_timeline.py')
 STOP_WORDS = set('''a about above after again against all almost already also always am an and any are aren't as at be because
@@ -743,4 +743,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_main(main, 'lint_script'))

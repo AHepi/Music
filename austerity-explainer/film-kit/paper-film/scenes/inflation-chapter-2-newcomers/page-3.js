@@ -25,7 +25,7 @@
 // fade in 1.2 s inside the swing (a blend in six steps), instead of the time cut.
 import { THREE } from '../cinema-kit.js';
 import { buildWorks, steppedBlend, WORKS_IN_USE, FIRE_AFTER_A_WHILE } from './works-effects.js';
-import { callout, buildWords, topShade, pointer, priceArrow, presence, gapToBox, reportGap, INK, TEXT_RIGHT } from '../graphics.js';
+import { callout, buildWords, topShade, pointer, priceArrow, presence, gapToBox, pointsRound, reportGap, INK, TEXT_RIGHT } from '../graphics.js';
 
 // How this page leaves: the series' page peel, 0.3 s after the last word.
 export const join = { kind: 'peel', after: 0.3, length: 0.85 };
@@ -60,9 +60,10 @@ const LOOK = { exposure: 1.0, aperture: 4.0, maxBlur: 2, glowThreshold: 0.9, glo
 // gate (round 5's critique, finding 5: the lamp glass was the brightest thing in W1).
 const LOOK_W1 = { ...LOOK, exposure: 1.6, glowStrength: 0.4 };
 const LAMP_GLOW_W1 = { 'no-1': 0.2 };
-// the labels over W3: their size, the rows (pixels down the frame) their words stand on, and how far apart (pixels) the
-// labels must keep (checked)
-const LABELS = { size: 42, machinesRow: 0.40 * 1920, workersRow: 0.69 * 1920, materialsBelow: 125, apart: 12 };
+// the labels over W3: their size, the rows (pixels down the frame) their words stand on, how far apart (pixels) the
+// labels must keep, and the things in the picture their words must not cover (all checked)
+const LABELS = { size: 42, machinesRow: 0.40 * 1920, workersRow: 0.69 * 1920, materialsBelow: 125, apart: 12,
+  keepClearOf: ['gate-board-no-1', 'gate-board-no-2', 'handcart'] };
 // the level price arrow: its row at least this far down (0.31 of the frame) and this far clear of No. 1's gate board
 const PRICE_ARROW = { row: 0.31 * 1920, clear: 24, width: 10, size: 30 };
 
@@ -202,6 +203,12 @@ export async function build(kit) {
     for (const a of names) {
       for (const b of names) {
         if (a !== b) reportGap(checked, `page 3: the words of ${a.toUpperCase()} and the label ${b.toUpperCase()}`, gapToBox(drawn[a].words, drawn[b].outline), LABELS.apart);
+      }
+    }
+    for (const name of names) {
+      for (const thing of LABELS.keepClearOf) {
+        const box = works.screenBox(thing);
+        if (box) reportGap(checked, `page 3: the words of ${name.toUpperCase()} and the ${thing}`, gapToBox(box, pointsRound(drawn[name].words)), LABELS.apart);
       }
     }
     const one = works.screen('no-1-gate'), two = works.screen('no-2-gate');

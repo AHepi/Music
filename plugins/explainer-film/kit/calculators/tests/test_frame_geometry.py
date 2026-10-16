@@ -146,7 +146,7 @@ front = [drum[0], drum[1] - 0.607 / 2, drum[2]]   # props/index.json steel-drum-
 check.close('W1: DIESEL drum\'s front edge lands (down)', g.project_point(w1, front)['down'], 0.723, 0.002,
             recorded='skeptic (log 35): 0.723', proves='repeats the skeptic\'s sum')
 check.close('W1: DIESEL drum against the round 5 rendered check (down)', g.project_point(w1, front)['down'], 0.72, 0.006,
-            recorded='scratchpad redesign/round5-set/checks/final-w1-quiet/report.md rule 7: "diesel drum, reaching 0.72 down" (rendered)',
+            recorded='working files redesign/round5-set/checks/final-w1-quiet/report.md rule 7: "diesel drum, reaching 0.72 down" (rendered)',
             proves='the sum predicts the rendered reach (to the report\'s two decimals) before anything is drawn')
 round4 = g.camera_from_turn([-3.7, 10.2, 1.835], 0, 0, 0, FILM, W, H)
 check.close('W1 from round 4\'s spot (y 10.2): the same drum lands (down)', g.project_point(round4, front)['down'], 0.653, 0.002,
@@ -216,7 +216,7 @@ for light in checkout['lights']:
         landed = g.project_point(cam, light['at'])
         errors.append(max(abs(landed['across'] - light['on_screen'][0]), abs(landed['down'] - light['on_screen'][1])))
 check.within(f'checkout C1 (hold-out): {len(errors)} lights, largest difference from Blender (share of frame)', max(errors), 0, 0.00002,
-             recorded='scratchpad redesign/round5-checkout/check10/facts/facts.json lights[].on_screen (copied 2026-10-16)',
+             recorded='working files redesign/round5-checkout/check10/facts/facts.json lights[].on_screen (copied 2026-10-16)',
              proves='project_point equals Blender\'s projection at a place nobody used to write these sums (points off the frame too)')
 depth_errors = [abs(g.project_point(cam, info['centre'])['depth'] - info['distance']) for info in checkout['groups'].values()]
 check.within('checkout C1 (hold-out): depth of every group against Blender (m)', max(depth_errors), 0, 0.001,
@@ -231,7 +231,7 @@ check.close('checkout C1 (hold-out): the divider\'s front edge on the counter, r
 results = fixture('checkout-c1', 'checkout-c1-check-results.json')
 rendered = float(results['check10']['rule7_line'].split('reaching ')[1].split(' down')[0])
 check.close('checkout C1 (hold-out): the same, against the rendered rule 7 reach (down)', reach, rendered, 0.006,
-            recorded='scratchpad redesign/round5-checkout/check10/report.md: "divider, reaching 0.78 down the frame"',
+            recorded='working files redesign/round5-checkout/check10/report.md: "divider, reaching 0.78 down the frame"',
             proves='a planned reach on a counter predicts the rendered one')
 shot = fixture('checkout-c1', 'checkout-shot.json')
 c1 = shot['views']['c1']

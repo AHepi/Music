@@ -544,4 +544,7 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    if CALCULATORS not in sys.path:
+        sys.path.insert(0, CALCULATORS)
+    from calculator_output import run_main   # a missing or broken input file is answered in one plain sentence (exit 2)
+    sys.exit(run_main(main, 'camera_audit'))

@@ -346,8 +346,16 @@ function main() {
   try { options = readArguments(process.argv.slice(2)); } catch (problemText) { console.error(problemText.message); process.exit(2); }
   if (options.help) { console.log(`Usage: node check_page_layout.mjs EVENTS.json [options]\n\n${HELP}`); return 0; }
   if (!options.events) { console.error('Usage: node check_page_layout.mjs EVENTS.json [--pages 3,4,5] [--json] [--out FILE] [--report FILE] [--settings FILE] (--help for more)'); return 2; }
-  const raw = fs.readFileSync(options.events);
-  const events = JSON.parse((options.events.endsWith('.gz') ? zlib.gunzipSync(raw) : raw).toString('utf8'));
+  let events;
+  try {
+    const raw = fs.readFileSync(options.events);
+    events = JSON.parse((options.events.endsWith('.gz') ? zlib.gunzipSync(raw) : raw).toString('utf8'));
+  } catch (problem) {
+    // a missing or broken events file: one plain sentence and exit 2 (an input is missing or unusable), never a Node error dump
+    const why = problem.code === 'ENOENT' ? 'is not there' : problem instanceof SyntaxError ? `is not valid JSON (${problem.message})` : `cannot be read (${problem.message})`;
+    console.error(`check_page_layout: the events file ${options.events} ${why}. Make it with: node paper-film/tools/page_events.mjs SCENE OUT.json --pages 3,4,5`);
+    return 2;
+  }
   const settings = settingsReader(options.settings);
   const result = checkPageLayout(events, settings, options.pages);
   const full = { calculator: 'check_page_layout', events: options.events, scene: events.scene, ...result, settings_file: settings.file, settings_used: settings.usedJson() };

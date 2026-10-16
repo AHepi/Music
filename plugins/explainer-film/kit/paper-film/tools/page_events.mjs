@@ -41,7 +41,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { findBrowser } from './find-browser.mjs';
+// find-browser.mjs needs playwright-core, so it is loaded only when the pages run (--help works without node_modules)
 
 const HELP = fs.readFileSync(new URL(import.meta.url), 'utf8').split('\n').filter((line) => line.startsWith('//')).map((line) => line.slice(3)).join('\n');
 const FRAMES_PER_SECOND = 30;
@@ -306,6 +306,7 @@ async function main() {
   }
   const { chromium } = await loadPlaywright(options);
   const server = await serve(options.kit, options.serve);
+  const { findBrowser } = await import('./find-browser.mjs');
   const browser = await chromium.launch({ executablePath: findBrowser(), args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const started = Date.now();
   try {

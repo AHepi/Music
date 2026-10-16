@@ -36,7 +36,7 @@ def find(problems, check_name, text=None, page=None, verdict=None):
 
 
 works = events('events-pages-3-5.json.gz')
-R4 = 'scratchpad redesign/round4-result.json'
+R4 = 'working files redesign/round4-result.json'
 
 # ---------------------------------------------------------------------------------------- the appear delays
 delays = timing.read_appear_delays()

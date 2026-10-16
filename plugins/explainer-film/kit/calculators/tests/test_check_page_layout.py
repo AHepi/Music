@@ -57,7 +57,7 @@ check.equal('and nothing else fails on the faults chapter (exit 1)', (code, faul
 code, works = run('events-pages-3-5.json.gz')
 check.true('chapter 2 for newcomers, pages 3-5: nothing to fix', code == 0 and works['verdicts'].get('fail') == 0,
            details='; '.join(p['detail'] for p in works['problems'] if p['verdict'] == 'fail'),
-           recorded='scratchpad redesign/round4-result.json film.summary: "the only jumps are the planned ones", "NO SPARE never overlaps the question", '
+           recorded='working files redesign/round4-result.json film.summary: "the only jumps are the planned ones", "NO SPARE never overlaps the question", '
                     '"held shots never move"', proves='agrees with what round 4 found on the filmed pixels (find_jumps.py), from the page code alone')
 held = where(works, 'held shots', 'pass')
 check.equal('pages 3-5 return a held-shot key on every hold and none while sliding', len(held), 3, recorded='page-3.js and page-4.js: still: sliding ? false : still')

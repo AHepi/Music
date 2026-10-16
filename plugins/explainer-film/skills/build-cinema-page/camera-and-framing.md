@@ -88,11 +88,16 @@ never does (rule 11 of `07 Composing a shot`, logs 31 to 34):
 ```
 cd <kit>
 PAPER_FILM_PAGES=N timeout 300 node paper-film/tools/render-paper-film.mjs cinema-test-pages --camera <stills>/r20-pN-camera.json 3
-python3 -I paper-film/tools/camera_audit.py <stills>/r20-pN-camera.json --window FROM TO
+python3 -I paper-film/tools/camera_audit.py <stills>/r20-pN-camera.json --timeline examples/<chapter>/timeline.json --page N --page-files paper-film/scenes/<chapter>
 ```
 
-(FROM and TO are your page's window, given in your brief.) It lists each shot, each move it measured
-and how long the camera is still. It must end with `0 problem(s)`. It takes about 10 seconds.
+(`--timeline ... --page N` works the page's window out from the timeline and the page files, the same edges
+the stage uses; `--window FROM TO` with the window from your brief still works.) It lists each shot, each
+move it measured and how long the camera is still. It must end with `0 problem(s)`. It takes about 10
+seconds. On a place built in 3D and painted over, add `--built-set --place-facts place-facts.json --view VIEW`:
+it also checks that the camera never turns during a slide, that where the lines meet holds still, the
+magnification at the nearest painted thing (about 1.29 times at most) and that the frame stays inside the
+painted plate.
 
 ## 2. Fill the frame (tall 9:16 phone frame)
 
@@ -121,7 +126,8 @@ From research on miniature and vertical filming (No Film School on shooting mini
   - nothing to read below 0.80 down (the bottom 380 px).
   These replace the older "140 px from the sides and top": 140 px from the right is 0.87, stricter than
   needed. `paper-film/tools/frame_check.py` still warns at 140 px; for words between 0.87 and 0.90 across
-  the warning can be ignored. The shot checker (`check-shot.sh`) uses the 0.90 and 0.95 limits.
+  the warning can be ignored. The shot checker (`check-shot.sh`), `calculators/frame_geometry.py boxes` and
+  `calculators/plan_page_timing.py check` (for typed words, from the page events) use the 0.90 and 0.95 limits.
 
 ## 3. Nothing passes through anything (strict)
 

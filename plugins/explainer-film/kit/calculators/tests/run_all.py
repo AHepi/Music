@@ -1,9 +1,13 @@
 """What this does: runs every calculator test in this folder (each file named test_*.py), one Python process each, and
-prints a plain summary: which passed, which failed (with the end of their output), which were skipped. It exits 1 if any
-test failed, so it can guard a change. Every builder's test is picked up just by being named test_SOMETHING.py here.
+prints a plain summary: which passed, which failed (with the end of their output), which were skipped and why, how many
+single checks passed, failed and were skipped, and how long it all took. It exits 1 if any test failed, so it can guard
+a change. Every builder's test is picked up just by being named test_SOMETHING.py here.
 
 A test passes by exiting 0, fails by exiting with anything else, and is skipped by exiting 77 (for example when a tool
-it needs, such as node, is missing). Pytest is not needed: each test is a plain Python file.
+it needs, such as node, is missing). Pytest is not needed: each test is a plain Python file. A test that needs files the
+plugin does not ship (the project's large pictures, recordings, Blender scenes, or its working files) skips those parts
+with the reason; see tests/checks.py for the settings that point to them (FILM_PROJECT, FILM_KIT, FILM_WORKING_FILES,
+BLENDER).
 
 Use:
     python3 kit/calculators/tests/run_all.py                 run them all
@@ -15,6 +19,7 @@ Use:
 import argparse
 import glob
 import os
+import re
 import subprocess
 import sys
 import time
@@ -37,6 +42,7 @@ def main():
         print('\n'.join(os.path.basename(t) for t in tests) or 'no tests found')
         return 0 if tests or args.list else 1
     results = []
+    began = time.time()
     for test in tests:
         name = os.path.basename(test)
         started = time.time()
@@ -62,7 +68,33 @@ def main():
             print('    ' + (reason[-1] if reason else 'skipped'))
     failed = [r for r in results if r[1] == 'FAILED']
     skipped = [r for r in results if r[1] == 'skipped']
+    checks_passed = checks_failed = parts_skipped = 0
+    skip_reasons = []
+    for name, verdict, seconds, output in results:
+        tally = [l for l in output.splitlines() if l.startswith('-- ')]
+        found = re.search(r'(\d+) of (\d+) checks passed', tally[-1]) if tally else None
+        if found:
+            checks_passed += int(found.group(1))
+            checks_failed += int(found.group(2)) - int(found.group(1))
+        elif verdict == 'FAILED':
+            checks_failed += 1   # a test that stopped before its tally counts as one failed check
+        parts = re.search(r'(\d+) part\(s\) skipped', tally[-1]) if tally else None
+        if parts:
+            parts_skipped += int(parts.group(1))
+            skip_reasons += [f'{name}: {l[6:]}' for l in output.splitlines() if l.startswith('NOTE') and
+                             ('skipped' in l.lower() or 'not run' in l.lower() or 'not checked' in l.lower())]
+        if verdict == 'skipped':
+            reason = [l for l in output.splitlines() if l.startswith('SKIP')]
+            skip_reasons.append(f'{name}: the whole test ({reason[-1][6:] if reason else "skipped"})')
+    took = time.time() - began
     print(f'\n{len(results)} test files: {len(results) - len(failed) - len(skipped)} passed, {len(failed)} failed, {len(skipped)} skipped.')
+    print(f'Checks: {checks_passed} passed, {checks_failed} failed, {parts_skipped + len(skipped)} skipped '
+          f'({parts_skipped} part(s) of tests and {len(skipped)} whole test file(s), each with its reason below).')
+    print(f'Time: {int(took // 60)} min {took % 60:.0f} s.')
+    if skip_reasons:
+        print('Skipped, and why:')
+        for reason in skip_reasons:
+            print(f'  - {reason}')
     if failed:
         print('Failed: ' + ', '.join(r[0] for r in failed))
     return 1 if failed else 0

@@ -58,7 +58,10 @@ was written from it and checked before recording.
   ```
   (the film kit's `examples/new-chapter-template/narration-script.json` is a blank copy).
 - Also write a readable script file (`NN Script - <chapter>.md`) with each page's research ids.
-- Then run the `check-facts` skill before recording.
+- Then run the `check-facts` skill before recording, and `explainer-film-preflight script` once the script
+  is final (the script checks, the estimated timeline and the voice's cost in one report; the rules behind
+  them are in the kit's `docs/LLM tips and tricks.md`, section 2). Write the next release date beside every
+  "latest" figure in the ledger, so the check flags it once it has passed.
 
 ## 4. Writing for newcomers (from rewriting chapter 2, log 33)
 
