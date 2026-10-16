@@ -1,0 +1,108 @@
+{
+ "about": "What this file is: the shot check for the checkout's view C1 (paper-film/blender/inflation-chapter-2-newcomers/checkout/assemble_checkout.py, plan 34 part 1 'B. The checkout'): which objects make up each prop, their parts in the story, the belt's direction, where the typed words go. The subject is the newspaper bill (its poster); the story group is the full basket on the belt (with everything in it), the divider bar against its front, the bill's wire stand and the card terminal beyond. The story props stand on the counter, 0.9 m up, which the checker's resting test (made for props on the street) cannot judge: the build's facts say what each stands on. The ceiling counts as the top band's dim 'sky'. Each lettered face is its own group, listed before the basket so it is not taken into it, so the checker can say whether any word is hidden (must_read). Used by paper-film/blender/shot_facts.py and paper-film/tools/check_shot.py; run from the kit's top folder with BLEND=AN_EMPTY_BLEND (build_checkout.sh makes one) paper-film/tools/check-shot.sh paper-film/blender/inflation-chapter-2-newcomers/checkout/assemble_checkout.py THIS_FILE OUT [PICTURE].",
+ "size": [
+  1080,
+  1920
+ ],
+ "groups": {
+  "bread label": [
+   "basket-bread-lettering"
+  ],
+  "milk label": [
+   "basket-milk-lettering"
+  ],
+  "butter label": [
+   "basket-butter-lettering"
+  ],
+  "cheese label": [
+   "basket-cheese-lettering"
+  ],
+  "bill": [
+   "bill-stand-bill-lettering"
+  ],
+  "bill stand": [
+   "bill-stand",
+   "bill-stand-papers"
+  ],
+  "basket": [
+   "basket",
+   "basket-*"
+  ],
+  "divider": [
+   "divider-bar"
+  ],
+  "card terminal": [
+   "card-terminal",
+   "card-terminal-head"
+  ],
+  "checkout sign": [
+   "checkout-sign",
+   "checkout-sign-*"
+  ],
+  "petrol fascia": [
+   "petrol-station-fascia-lettering"
+  ],
+  "till": [
+   "till"
+  ],
+  "bag rack": [
+   "bag-rack",
+   "bag-rack-*"
+  ],
+  "crates": [
+   "crate-*"
+  ]
+ },
+ "subject": "bill",
+ "support": "bill stand",
+ "story": [
+  "basket",
+  "divider",
+  "card terminal"
+ ],
+ "pairs_also": [
+  "checkout sign",
+  "till"
+ ],
+ "work": [
+  "bag rack",
+  "crates",
+  "till"
+ ],
+ "on_ground": [],
+ "must_read": [
+  "bill",
+  "bread label",
+  "milk label",
+  "butter label",
+  "cheese label",
+  "checkout sign",
+  "petrol fascia"
+ ],
+ "lines": {
+  "belt": [
+   0,
+   1,
+   0
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "belt",
+ "eye_height": [
+  1.5,
+  1.7
+ ],
+ "title_zone": [
+  0.06,
+  0.05,
+  0.9,
+  0.22
+ ],
+ "sky": "ceiling*",
+ "story_reaches_down": 0.7,
+ "story_reaches_down_note": "rule 7 (round 5 of log 34): some story prop or the subject must reach at least this far down the frame, so the story fills the frame into its lower part (the notice corner's drum, chair and pail fill 0.45 to 0.8 down); the plan puts the basket about 0.75 down"
+}

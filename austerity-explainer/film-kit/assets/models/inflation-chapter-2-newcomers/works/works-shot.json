@@ -322,7 +322,7 @@
  "no-2-crates": [
   3.4,
   24.25,
-  0.75
+  0.55
  ],
  "handcart": [
   3.85,
@@ -828,25 +828,25 @@
    "view": "w3",
    "state": "quiet",
    "no_2_men": false,
-   "what": "W3, the master: No. 1 quiet with its queue of 7, No. 2 flat out"
+   "what": "W3, the master: No. 1 quiet with its 7 men gathered at the gate, No. 2 flat out with two at work in its doorway"
   },
   "works-w1-plate": {
    "view": "w1",
    "state": "quiet",
    "no_2_men": false,
-   "what": "W1 main: the 7 men waiting, No. 1's windows dark"
+   "what": "W1 main: the 7 men waiting at the gate, No. 1's windows dark"
   },
   "works-w1-working-plate": {
    "view": "w1",
    "state": "working",
    "no_2_men": false,
-   "what": "W1 helper: the men gone, No. 1's windows lit, its cart doors open"
+   "what": "W1 helper: the men gone in (two at the looms), No. 1's windows lit, its cart doors open"
   },
   "works-w1-men-gone-plate": {
    "view": "w1",
    "state": "men gone",
    "no_2_men": false,
-   "what": "W1 helper (for page 3's \"go\"): the men gone, No. 1's cart doors open, its windows still dark"
+   "what": "W1 helper (for page 3's \"go\"): the men gone in (two at the looms), No. 1's cart doors open, its windows still dark"
   },
   "works-w1-behind-plate": {
    "view": "w1",
@@ -858,13 +858,13 @@
    "view": "w2",
    "state": "quiet",
    "no_2_men": false,
-   "what": "W2 main: No. 2 flat out, nobody at the gate"
+   "what": "W2 main: No. 2 flat out, two at work in its doorway, nobody at the gate"
   },
   "works-w2-slowed-plate": {
    "view": "w2",
    "state": "slowed",
    "no_2_men": true,
-   "what": "W2 helper: No. 2 slowed, 8 men waiting, two thirds of its windows dark"
+   "what": "W2 helper: No. 2 slowed, 8 men waiting at the gate, one left at work inside, two thirds of its windows dark"
   },
   "works-w4-plate": {
    "view": "w4",
@@ -875,10 +875,10 @@
  },
  "state_pictures": {
   "about": "made from the plates standing in for the paintings, with paper-film/tools/make_state_picture.py (outlines from the shot checker at each plate camera, --fov 64.4); make them again from the paintings once they are approved",
-  "works-w1-men-gone-state.png": "W1 main plate, with the men-gone helper plate where the men stood and the cart doorway opened (mask works-w1-men-gone-mask.png, about 7% of the frame): the time cut on \"go\"",
-  "works-w1-working-state.png": "W1 main plate, with the working helper plate wherever they differ (about 41% of the frame: the windows and the yard's light): the blend on \"start\"",
-  "works-w2-slowed-state.png": "W2 main plate, with the slowed helper plate where the eight men stand and the windows go dark (about 5% of the frame): page 12",
-  "works-w1-behind.png": "W1 main plate, with the behind helper plate (the men left out, all else quiet) where the men stood (about 7% of the frame): the behind picture for page 3's slide, so what the men hid is the quiet works (the \"men gone\" and working pictures have No. 1's doorway or windows lit there)"
+  "works-w1-men-gone-state.png": "W1 main plate, with the men-gone helper plate where the men stood, where the cart doorway opened and where two of the men now stand at the looms inside (mask works-w1-men-gone-mask.png, about 12% of the frame, round 5): the time cut on \"go\"",
+  "works-w1-working-state.png": "W1 main plate, with the working helper plate wherever they differ (about 74% of the frame: the windows, the doorway and the yard's light on the lane): the blend on \"start\"",
+  "works-w2-slowed-state.png": "W2 main plate, with the slowed helper plate where the eight men stand, the windows go dark and one of the two people at work inside goes (about 14% of the frame): page 12",
+  "works-w1-behind.png": "W1 main plate, with the behind helper plate (the men left out, all else quiet) where the men stood (about 8% of the frame): the behind picture for page 3's slide, so what the men hid is the quiet works (the \"men gone\" and working pictures have No. 1's doorway or windows lit there)"
  },
  "letter_pixels": {
   "about": "letter heights on the film's 1080 x 1920 frame at each view's composed spot (letters: gate boards 0.266 and 0.25 m, the bank's sign 0.305 m, PETROL 0.097 m, DIESEL 0.106 m)",
@@ -1290,8 +1290,8 @@
   },
   "works-set-props.glb": {
    "holds": "the props and No. 1's seven waiting men (in the paintings; the men are hidden when they go in)",
-   "objects": 124,
-   "megabytes": 39.1
+   "objects": 119,
+   "megabytes": 38.9
   },
   "works-signs.glb": {
    "holds": "own surfaces: the lettered things (gate boards, drums, the bank's sign and plate)",

@@ -32,8 +32,13 @@
 #     gathered the same way (works-no-2-men.glb: painted in W2's slowed helper plate, dark own-surface silhouettes in W4)
 #   - people at work inside each lit doorway, in dark clothes (round 5): No. 2's two in every No. 2 plate, No. 1's two
 #     only once its men have gone in (painted into the plates; works-doorway-workers.glb for the record)
-#   - inside No. 2's yard, for W4: a jacket and cap on nails on the gate's inside post, an upturned crate at
-#     the post's foot with a tin mug and the pay envelope "WAGES" stood up on it
+#   - inside No. 2's yard, for W4 (round 5): a work jacket with sleeves and drape folds hanging from a wooden peg on
+#     the gate's inside post (the inner pier), a crate stood on end under it as a table with a flat cap (a real
+#     peak), a tin mug and a pay envelope "WAGES" (2.6 times life size, so the word reads) propped against the
+#     jacket's hem, all touching; the upturned crate at the post's foot by the hinge (seen from the lane too, so it
+#     stays where it was); the back of No. 2's gate board lettered "No. 2" as well (a second board, back to back);
+#     W4's own light: one warm pool on that corner from a lamp out of the frame, the rest of the yard in dusk, and
+#     No. 2's gateway crates left out of W4's plate (the film hides them on page 14: works-shot.json w4.left_out)
 #   - the people's own lights: the brazier's fire, the lantern, the gate lamps, the lane's gas lamps, No. 2's
 #     lit doorway and gateway and the warm beam from its yard out through the gateway onto the pavement, a light
 #     in each doorway's room of machines; No. 1's empty yard in a faint cool dusk light (so its shut gate's bars
@@ -45,7 +50,8 @@
 #       the gate's outer pier's edge, --gate-views), sliding 1.2 m toward the gate, from 10.0 m to 8.8 m from the
 #       works wall (round 5: 3 m nearer than round 4)
 #   W2  No. 2's gate, the mirror of W1 on the right pavement
-#   W4  No. 2's gate from inside its yard, in line with the gate's hinge post, looking out down the lane
+#   W4  No. 2's gate from inside its yard, a little beside the gate's hinge post, looking out down the lane, sliding
+#       1.2 m toward the gate, from 6.7 m to 5.5 m from it (round 5)
 # Each has a plate spot and a composed spot (the end of its slide; W3 holds still, so the two are the same).
 #
 # Layout (metres, Blender space, z up): x across the lane (0 on its centre line, No. 1 at minus x); y up the
@@ -203,7 +209,7 @@ def gate_view_x(prefix):
 # faces (+1 up the lane, -1 down it), and what it is about
 def views():
     w1_x, w2_x = gate_view_x('no-1'), gate_view_x('no-2')
-    hinge_x = inner_pier_gate_edge('no-2') + 0.03       # in line with No. 2's inner leaf's hinge post
+    w4_x = inner_pier_gate_edge('no-2') + W4_FROM_HINGE   # a little beside No. 2's inner leaf's hinge post (round 5)
     return {
         'w3': {'plate': (0.0, END_TERRACE_FRONT_Y + 0.05), 'composed': None, 'eye': W3_EYE, 'base': STREET_TOP, 'faces': 1,
                'stands_on': f'the end house\'s upstairs floor (the end terrace stands on a raised footway {RAISED_FOOTWAY:g} m above the '
@@ -214,10 +220,25 @@ def views():
                'about': 'No. 1\'s shut gate with the waiting men gathered in front of it'},
         'w2': {'plate': (w2_x, WALL_Y - GATE_VIEW_PLATE), 'composed': (w2_x, WALL_Y - GATE_VIEW_COMPOSED), 'eye': 1.7, 'faces': 1,
                'stands_on': 'the pavement', 'subject': (gate_centre('no-2'), GATE_PLANE_Y, 1.5), 'about': 'No. 2\'s open gate with nobody waiting'},
-        'w4': {'plate': (hinge_x, GATE_PLANE_Y + 7.2), 'composed': (hinge_x, GATE_PLANE_Y + 6.0), 'eye': 1.7, 'faces': -1,
-               'stands_on': 'No. 2\'s yard', 'subject': (inner_pier_gate_edge('no-2'), GATE_PLANE_Y, 1.5),
-               'about': 'No. 2\'s gate from inside its yard, looking out down the lane'},
+        'w4': {'plate': (w4_x, GATE_PLANE_Y + W4_PLATE_FROM_GATE), 'composed': (w4_x, GATE_PLANE_Y + W4_COMPOSED_FROM_GATE), 'eye': 1.7,
+               'faces': -1, 'stands_on': 'No. 2\'s yard',
+               # focused on the jacket and the WAGES envelope (the film's focus distance), the gate 1 m beyond
+               'subject': (W4_GROUP_X, WALL_Y + WALL_THICKNESS + PIER_PROUD + 0.25, 1.1),
+               'about': 'No. 2\'s gate from inside its yard, looking out down the lane: the jacket, cap, mug and WAGES of someone '
+                        'with a job, and the men waiting outside the half-shut gate'},
     }
+
+
+# W4 (round 5; round 4's check: the yard's bottom 30% bare, a flat cut-out jacket and a disc of a cap, the blank back of
+# No. 2's board, "AY UP" on a crate cut by the frame, WAGES a white speck, the yard lit warm like daytime). The camera
+# stands 0.16 m beside the hinge post's line, toward the gateway's middle, so the back of No. 2's board shows its whole
+# "No. 2" in the composed frame (in line with the post its "No." was cut by the frame's left edge), and slides from 6.7
+# m to 5.5 m from the gate (round 4: 7.2 to 6.0), so the WAGES letters come out about 20 pixels tall and the crate
+# table's foot about 0.84 down. The group stands on No. 2's inner pier's yard face: hidden from W1, W2 and W3 by the
+# pier itself (everything left of x 1.84 there), so it changes none of their plates.
+W4_FROM_HINGE = 0.16
+W4_PLATE_FROM_GATE, W4_COMPOSED_FROM_GATE = 6.7, 5.5
+W4_GROUP_X = 1.45            # the peg and the crate table's middle, on the inner pier's yard face (x 1.1 to 2.0)
 
 
 # The states (plan 34's states table). men_1 / men_2: the waiting men at No. 1 / No. 2; workers_1 / workers_2: how many
@@ -250,9 +271,17 @@ STATES = {
                         'doorway); No. 1 quiet',
                'men_1': True, 'men_2': True, 'workers_1': 0, 'workers_2': 1, 'windows_1': set(), 'doorway_1': False, 'doors_open_1': False,
                'windows_2': {1}, 'doorway_2': True, 'gate_2': 42, 'gate_1': 0, 'chained': True, 'spill_1': 0.0, 'spill_2': 1.0},
-    'w4': {'about': 'page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate',
+    # W4's own light (round 5; round 4's check: warm light over 23.6% of the frame, the yard lit like daytime, the top
+    # third too bright): No. 2's yard spill lights stay off in this view (spill_shares), one warm pool from a lamp out of
+    # the frame falls on the jacket's corner (corner_lamp), and the rest of the yard is in the dusk. No. 2's three
+    # gateway crates are left out (left_out): from inside the yard they stood big in the frame's bottom-left corner,
+    # where the eye comes in, cut by the frame's edge ("AY UP"); the film hides them on page 14 by these names.
+    'w4': {'about': 'page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate; one warm pool of lamplight '
+                    'on the jacket\'s corner, the rest of the yard in the dusk, the gateway crates taken in',
            'men_1': False, 'men_2': True, 'workers_1': 0, 'workers_2': 1, 'windows_1': set(), 'doorway_1': False, 'doors_open_1': False,
-           'windows_2': {1}, 'doorway_2': True, 'gate_2': 42, 'gate_1': 0, 'chained': True, 'spill_1': 0.0, 'spill_2': 1.0},
+           'windows_2': {1}, 'doorway_2': True, 'gate_2': 42, 'gate_1': 0, 'chained': True, 'spill_1': 0.0, 'spill_2': 1.0,
+           'spill_shares': {'no-2-doorway-spill': 0.0, 'no-2-gateway-spill': 0.0, 'no-2-yard-spill': 0.0, 'no-2-gateway-beam': 0.0},
+           'corner_lamp': True, 'left_out': ['no-2-crate-1', 'no-2-crate-2', 'no-2-crate-3']},
 }
 MAIN_STATE = {'w3': 'quiet', 'w1': 'quiet', 'w2': 'quiet', 'w4': 'w4'}
 
@@ -269,7 +298,8 @@ PLATES = {
     'works-w2-plate': ('w2', 'quiet', False, 'W2 main: No. 2 flat out, two at work in its doorway, nobody at the gate'),
     'works-w2-slowed-plate': ('w2', 'slowed', True, 'W2 helper: No. 2 slowed, 8 men waiting at the gate, one left at work inside, two thirds '
                                                     'of its windows dark'),
-    'works-w4-plate': ('w4', 'w4', False, 'W4: inside No. 2\'s yard, no men (they are own-surface silhouettes), no gate leaves'),
+    'works-w4-plate': ('w4', 'w4', False, 'W4: inside No. 2\'s yard, no men (they are own-surface silhouettes), no gate leaves, no gateway '
+                                          'crates; one warm pool of lamplight on the jacket\'s corner, the rest in the dusk'),
 }
 
 # ------------------------------------------------------------------------------------------ small helpers
@@ -1089,39 +1119,20 @@ def yard_things(pieces):
         popups.append([round(v, 3) for v in holder.location])
     found['no-1-pop-up-crates'] = popups
     found['no-1-gateway'] = [n1, WALL_Y + 1.4, 0.0]
-    # W4: the jacket and cap on nails on the inner pier's inside face, the upturned crate at its foot, the mug and
-    # the WAGES envelope on it facing into the yard
+    # W4: the upturned crate at the inner pier's foot, its end in front of the hinge, so from W4 it overlaps the gate's
+    # leaf. It shows from the lane too (W2 and W3 see it through the gateway), so it stays exactly where it was; the
+    # rest of W4's corner (w4_corner) stands where only W4 sees it
     post = pieces['no-2']['inner_pier']
     post_face = WALL_Y + WALL_THICKNESS + PIER_PROUD
-    post_middle = (post[0] + post[1]) / 2
-    jacket = import_glb(os.path.join(PROPS_2, 'jacket-and-cap-on-nail.glb'), (post_middle, post_face + 0.111, 0.0), 180, 'props', 'jacket-and-cap')
-    jacket.location.z = 0.02 + 0.98
-    # the cap turned on its nail so W4 sees its round crown with the peak standing out to one side, the outline of a
-    # flat cap (round 3's check: hung square on, from 6 m it read as a flat dark disc; turned the other way it showed
-    # edge on, a thin blade)
-    bpy.context.view_layer.update()
-    cap = next((o for o in jacket.children_recursive if re.sub(r'\.\d{3}$', '', o.name) == 'cap'), None)
-    nail = next((o for o in jacket.children_recursive if re.sub(r'\.\d{3}$', '', o.name) == 'cap-nail'), None)
-    if cap is not None and nail is not None:
-        low, high = bounds_of([nail])
-        pivot = Vector(((low.x + high.x) / 2, (low.y + high.y) / 2, high.z))
-        cap.matrix_world = (Matrix.Translation(pivot) @ Matrix.Rotation(math.radians(CAP_TURN), 4, 'Z') @ Matrix.Translation(-pivot)) @ cap.matrix_world
-    # the crate stands at the post's foot, its end in front of the hinge, so from W4 it overlaps the gate's leaf
     crate = prop('crate-this-way-up.glb', post[1] + 0.05, post_face + 0.5, 90, name='w4-upturned-crate', start=0.5)
     crate.rotation_euler = (math.pi, 0, math.radians(90))
     crate.location.z += 0.5
     bpy.context.view_layer.update()
-    crate_top = bounds_of(parts_of(crate))[1].z
-    mug = prop('tin-mug-and-wages-envelope.glb', post[1] - 0.18, crate.location.y - 0.05, 186, name='tin-mug-and-wages', start=0.3)
-    mug.location.z = crate_top              # standing on the crate's upturned bottom (a ray down would fall between its boards)
-    bpy.context.view_layer.update()
-    found['w4'] = {'jacket_and_cap': [round(v, 3) for v in jacket.location], 'upturned_crate': [round(v, 3) for v in crate.location],
-                   'mug_and_wages': [round(v, 3) for v in mug.location]}
+    found['w4'] = {'upturned_crate': [round(v, 3) for v in crate.location], **w4_corner(pieces)}
     return found
 
 
-CAP_TURN = -30.0              # degrees the cap is turned on its nail (W4): its round crown and its peak to one side
-HANDCART = (3.85, 8.6)        # on the right pavement, coming up it toward the works, at its kerb: behind W2's camera, in W3's bottom third
+HANDCART = (3.85, 8.6)      # on the right pavement, coming up it toward the works, at its kerb: behind W2's camera, in W3's bottom third
 # No. 1's pop-up crates: (x from the gateway's middle, y from the works wall's face, lift, turn); the third on the first two
 POP_UP_CRATES = ((-0.35, 1.45, 0.0, -4), (0.5, 1.5, 0.0, 5), (0.08, 1.47, 0.5, 2))
 
@@ -1546,14 +1557,15 @@ def build():
         'state_pictures': {
             'about': 'made from the plates standing in for the paintings, with paper-film/tools/make_state_picture.py (outlines from the shot '
                      'checker at each plate camera, --fov 64.4); make them again from the paintings once they are approved',
-            'works-w1-men-gone-state.png': 'W1 main plate, with the men-gone helper plate where the men stood and the cart doorway opened '
-                                           '(mask works-w1-men-gone-mask.png, about 7% of the frame): the time cut on "go"',
-            'works-w1-working-state.png': 'W1 main plate, with the working helper plate wherever they differ (about 41% of the frame: the '
-                                          'windows and the yard\'s light): the blend on "start"',
-            'works-w2-slowed-state.png': 'W2 main plate, with the slowed helper plate where the eight men stand and the windows go dark '
-                                         '(about 5% of the frame): page 12',
+            'works-w1-men-gone-state.png': 'W1 main plate, with the men-gone helper plate where the men stood, where the cart doorway opened '
+                                           'and where two of the men now stand at the looms inside (mask works-w1-men-gone-mask.png, about '
+                                           '12% of the frame, round 5): the time cut on "go"',
+            'works-w1-working-state.png': 'W1 main plate, with the working helper plate wherever they differ (about 74% of the frame: the '
+                                          'windows, the doorway and the yard\'s light on the lane): the blend on "start"',
+            'works-w2-slowed-state.png': 'W2 main plate, with the slowed helper plate where the eight men stand, the windows go dark and one of '
+                                         'the two people at work inside goes (about 14% of the frame): page 12',
             'works-w1-behind.png': 'W1 main plate, with the behind helper plate (the men left out, all else quiet) where the men stood '
-                                   '(about 7% of the frame): the behind picture for page 3\'s slide, so what the men hid is the quiet '
+                                   '(about 8% of the frame): the behind picture for page 3\'s slide, so what the men hid is the quiet '
                                    'works (the "men gone" and working pictures have No. 1\'s doorway or windows lit there)'},
     }
     for name, view in views().items():
