@@ -32,6 +32,11 @@ was written from it and checked before recording.
 
 - Pages of 15-35 seconds, one idea each. Plan the length at the voice's measured speed, not a
   guess: Malina read chapter 2 at 164 words a minute against the 140 planned, so plan at about 160.
+  Better, once the narration script exists: `python3 -I narration-tools/estimate_timeline.py
+  NARRATION_SCRIPT.json MEASURED_WORD_TIMES.json timeline-estimated.json` works out every word's time
+  from the same narrator's measured word lengths and pauses (it predicted the old chapter 2's 251.7 s
+  of speech as 252 s; chapter 2 for newcomers: 406.9 s). Build and check the pages on it before paying
+  for the recording.
 - Spoken style: short sentences, "..." for a pause; numbers written as said ("twenty twenty-one",
   "four point one percent"); explain each term the first time, in a plain sentence of its own
   ("Interest is the extra you pay back when you borrow."), never as an aside (see step 4).

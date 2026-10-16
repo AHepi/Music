@@ -7,8 +7,11 @@ finished picture of the same frame (for the light rules). It writes:
     report.md     the problems, worst first, each with its numbers and the fix; then what passed, notes,
                   and what this tool does not check
     marked.jpg    the frame with each problem's place drawn on it, numbered as in the report
+    known.json    only when the check file has "kind_of_shot" or "accepted": the problems, and the known and allowed ones,
+                  for other tools (a preflight)
 Use:
-    python3 check_shot.py --check shot-check.json --facts FACTS_FOLDER [--picture FRAME.png] --out OUT_FOLDER
+    python3 check_shot.py --check shot-check.json --facts FACTS_FOLDER [--picture FRAME.png] --out OUT_FOLDER [--settings FILE]
+    (--settings: film-settings.json for "kind_of_shot" and "accepted"; default kit/film-settings.json or FILM_SETTINGS)
 (paper-film/tools/check-shot.sh runs Blender and this in one go.)
 
 The check file (see examples/notice-corner/shot-check.json):
@@ -24,6 +27,22 @@ The check file (see examples/notice-corner/shot-check.json):
     "lines"         street directions as Blender x, y, z steps (this street rises 0.07 m per metre);
                     "lines_key" says which one the rules use
     "title_zone"    [left, top, right, bottom] fractions of the frame where titles go
+    "story_reaches_down"  optional (off unless given): rule 7's use of the frame's height, checked as "some story prop
+                    or the subject reaches at least this far down the frame" (a fraction, for example 0.70), so the
+                    story group fills the frame into its lower part instead of standing small and high over bare
+                    ground (the notice corner's drum, chair and pail fill 0.45 to 0.8 down)
+    "kind_of_shot"  optional: the view's kinds of shot (still_life, crowd, overview, interior, dark_subject; film-settings.json
+                    shot_kind_profiles, read through kit/calculators/settings.py). A problem a kind switches off or loosens is
+                    listed under "Known and allowed" instead of as a problem; a kind's replacement test is added (a crowd: heads
+                    apart and every figure half seen, for the groups listed in "figures"; a dark subject: its outline against
+                    the light round it). Without it nothing changes.
+    "accepted"      optional: problems the project chose to keep, each {"rule": a shot_kind_profiles rule name or the
+                    report's rule words, "things": [groups] (optional), "reason", "who", "date", "measured" (optional)}.
+                    A matching problem is listed under "Known and allowed", not as a new problem, unless it has grown more
+                    than 5% past the number it was accepted at. An entry that matches nothing is noted (the problem has gone).
+    "figures"       optional: the groups that are people (a crowd's rule 4 between figures is replaced by head spacing)
+    "fill"          optional: props an overview may use to reach down the frame (rule 7)
+    "support_surfaces"  optional: indoors, [{"name": "counter", "height": 0.885}]: a prop "landed high" on one of them rests
     "reference"     optional: the picture to match: where its lines meet; boxes of groups in it
                     ("compare": "top" judges a box's top instead of its middle, for things cut by the
                     frame; "landmark": true marks a building used only to match the camera); and
@@ -209,16 +228,20 @@ class Report:
     def __init__(self):
         self.items = []
 
-    def add(self, rule, passed, what, numbers='', fix='', mark=None, area=False, kind='story', how_bad=1.0, arrow=None, name=None, pair=None):
+    def add(self, rule, passed, what, numbers='', fix='', mark=None, area=False, kind='story', how_bad=1.0, arrow=None, name=None, pair=None,
+            rule_id=None, measured=None, things=None):
         """One check. `kind` (see KINDS) and `how_bad` (how far past its limit) set the order of the problems;
-        `name` lets other problems point at this one ("<<name>>" in their text becomes "problem N")."""
+        `name` lets other problems point at this one ("<<name>>" in their text becomes "problem N"). `rule_id` (a rule of
+        film-settings.json's shot_kind_profiles), `measured` (the number judged) and `things` (the groups it is about) are kept
+        for the kinds of shot and the accepted list (apply_kinds_and_accepted); they change nothing printed."""
         passed = bool(passed)   # numpy's yes/no would slip past the report's checks
         if mark is not None and not area:
             l, t, r, b = mark
             area = (r - l) > 130 or (b - t) > 160   # bigger than a small place on a 1080-wide frame: draw it as an area
         item = dict(rule=rule, passed=passed, what=what, numbers=numbers, fix='' if passed else fix,
                     mark=None if passed else mark, area=area, kind=kind, how_bad=float(how_bad),
-                    arrow=None if passed else arrow, name=name, number=None, pair=pair)
+                    arrow=None if passed else arrow, name=name, number=None, pair=pair, rule_id=rule_id, measured=measured,
+                    things=list(things) if things else (list(pair) if pair else []))
         self.items.append(item)
         return item
 
@@ -481,7 +504,7 @@ def check_camera(report, shot):
     report.add('rule 2: stand at eye height', ok,
                f'The camera\'s eye is {eye:.2f} m above the pavement under it (a standing person: {low:.2f} to {high:.2f} m).',
                fix=f'{"Lower" if eye > target else "Raise"} the camera about {abs(eye - target):.2f} m.',
-               kind='camera', how_bad=abs(eye - target) / 0.1 + 1, name='camera-height')
+               kind='camera', how_bad=abs(eye - target) / 0.1 + 1, name='camera-height', rule_id='rule2_eye_height', measured=eye)
 
 
 def camera_axes(turn, tilt=0.0, roll=0.0):
@@ -724,7 +747,8 @@ def check_resting(report, shot):
         elif high is not None and high > 0.5:
             report.add('props rest where they should', False,
                        f'{g} has landed on something high: its bottom is {high:.2f} m above the street under it ({spot}): a roof edge, a wall top or a sill.',
-                       fix=f'Place {g} again from just above the pavement.', kind='resting', how_bad=high / 0.3, name=f'resting:{g}')
+                       fix=f'Place {g} again from just above the pavement.', kind='resting', how_bad=high / 0.3, name=f'resting:{g}',
+                       rule_id='resting_on', measured={'bottom': info['bottom'], 'above_street': high}, things=[g])
         else:
             good.append(g)
     if good:
@@ -950,7 +974,9 @@ def check_lines(report, shot):
                                               f'{"below" if dy > 0 else "above"}.' if not ok else '.'),
                f'{target} spans {l / shot.width:.2f} to {r / shot.width:.2f} across, {t / shot.height:.2f} to {b / shot.height:.2f} down',
                'Turning the camera won\'t help: it moves where the lines meet and the props together. ' + capital('; and '.join(fixes)) + '.',
-               mark=(mx - 22, my - 22, mx + 22, my + 22), kind='lines', how_bad=past(gap, 0.03, 0.03))
+               mark=(mx - 22, my - 22, mx + 22, my + 22), kind='lines', how_bad=past(gap, 0.03, 0.03), rule_id='rule1_meeting_point_gap',
+               measured={'gap': gap, 'across_pixels': dx, 'down_pixels': dy, 'span': [l / shot.width, r / shot.width], 'meet_across': shot.meet[0]},
+               things=[target])
 
 
 # ---------------------------------------------------------------------------------------- rules 3 and 4: the story props as one group
@@ -992,7 +1018,8 @@ def check_pairs(report, shot):
                            f'Edges that just meet make near and far things look stuck together.',
                            f'from {t / shot.height:.2f} to {b_ / shot.height:.2f} down, around {sx / shot.width:.2f} across; {front} is nearer the camera',
                            capital(', or '.join(ways)) + '.' if ways else f'Move {back} or {front} sideways.',
-                           mark=(l - 10, t - 10, r + 10, b_ + 10), kind=kind, pair=(a, b), how_bad=past(length, 40 * scale, 40 * scale))
+                           mark=(l - 10, t - 10, r + 10, b_ + 10), kind=kind, pair=(a, b), how_bad=past(length, 40 * scale, 40 * scale),
+                           rule_id='rule4_near_touch', measured=length)
                 continue
             both = solid[a] & solid[b]
             if both.any():
@@ -1017,7 +1044,8 @@ def check_pairs(report, shot):
                            f'things look stuck together (a clear overlap is at least {need_overlap:.0f} pixels deep; a clear gap at least {need_gap:.0f}).',
                            f'at {cx / shot.width:.2f} across, {cy / shot.height:.2f} down; {front} is nearer the camera',
                            two_ways(shot, front, back, (ux * more, uy * more), (-ux * less, -uy * less), cy),
-                           mark=box_of(showing), kind=kind, pair=(a, b), how_bad=past(depth, need_overlap, need_overlap / 2))
+                           mark=box_of(showing), kind=kind, pair=(a, b), how_bad=past(depth, need_overlap, need_overlap / 2),
+                           rule_id='rule4_near_touch', measured=depth)
                 continue
             # no clear overlap: how far apart are the parts that show? Where only thin parts (a wire) overlap,
             # leave the thin parts out
@@ -1051,7 +1079,8 @@ def check_pairs(report, shot):
                        f'(a clear overlap is at least {need_overlap:.0f} pixels deep; a clear gap at least {need_gap:.0f}).',
                        f'at {x / shot.width:.2f} across, {y / shot.height:.2f} down; {front} is nearer the camera',
                        two_ways(shot, front, back, (ux * more, uy * more), (-ux * less, -uy * less), front_point[1]),
-                       mark=(min(x, ax) - 14, min(y, ay) - 14, max(x, ax) + 14, max(y, ay) + 14), kind=kind, pair=(a, b), how_bad=past(gap, need_gap, need_gap / 2))
+                       mark=(min(x, ax) - 14, min(y, ay) - 14, max(x, ax) + 14, max(y, ay) + 14), kind=kind, pair=(a, b), how_bad=past(gap, need_gap, need_gap / 2),
+                       rule_id='rule4_near_touch', measured=gap)
     if not found:
         report.add('rule 4: overlap clearly or leave a clear gap', True,
                    f'No two of {", ".join(names)} just touch (overlaps at least {need_overlap:.0f} pixels deep, gaps at least {need_gap:.0f}).')
@@ -1090,7 +1119,8 @@ def check_story_in_3d(report, shot):
                        f'{g} stands {gap:.2f} m from the nearest other story prop ({o}) in the street: the group should stand together.',
                        fix=f'Move {g} about {abs(dx * scale):.2f} m {"right" if dx > 0 else "left"} (across the street) and {abs(dy * scale):.2f} m '
                            f'{"up" if dy > 0 else "down"} the street, toward {o}.',
-                       mark=box_of(shot.alone[g]) if shot.alone[g].any() else None, kind='story', how_bad=past(gap, 0.3, 0.3), name=f'depth:{g}')
+                       mark=box_of(shot.alone[g]) if shot.alone[g].any() else None, kind='story', how_bad=past(gap, 0.3, 0.3), name=f'depth:{g}',
+                       rule_id='rule3_story_together_metres', measured=gap, things=[g, o])
     if support and standing:
         gaps = []
         for g in standing:
@@ -1106,7 +1136,8 @@ def check_story_in_3d(report, shot):
                        f'{shot.support} stands {gap:.2f} m from the nearest story prop ({nearest}): the group should stand together.',
                        fix=f'Move {shot.support} about {gap - 0.1:.2f} m {"up" if dy > 0 else "down"} the street, toward {nearest}.',
                        mark=box_of(shot.alone[shot.support]) if shot.alone[shot.support].any() else None, kind='story',
-                       how_bad=past(gap, 0.3, 0.3), name=f'depth:{shot.support}')
+                       how_bad=past(gap, 0.3, 0.3), name=f'depth:{shot.support}', rule_id='rule3_story_together_metres', measured=gap,
+                       things=[shot.support, nearest])
     if standing and not any(i.get('name', '') and i['name'].startswith('depth:') for i in report.items):
         report.add('rule 3: story props together in the street', True, f'{", ".join(standing)} stand in front of {shot.support} and within 0.3 m of each other.', kind='story')
 
@@ -1190,8 +1221,37 @@ def check_story_props(report, shot, touching):
                f'{edge["right"]}\'s right side ({right_text}), {edge["top"]}\'s top ({t / shot.height:.2f} down) and {edge["bottom"]}\'s '
                f'bottom ({b / shot.height:.2f}).{reference_words}',
                fix=capital('; '.join(fixes)) + '.' if fixes else '', mark=(l, t, r, b), area=True, kind='story',
-               how_bad=max(past(w, limit_w, 0.04) if w > limit_w else 1, past(h, limit_h, 0.04) if h > limit_h else 1))
+               how_bad=max(past(w, limit_w, 0.04) if w > limit_w else 1, past(h, limit_h, 0.04) if h > limit_h else 1),
+               rule_id='rule3_story_box', measured={'size': [w, h], 'limit_used': [limit_w, limit_h]}, things=list(boxes))
     return np.any([shot.visible[g] for g in dict.fromkeys([shot.subject] + shown) if shot.shows(g)], axis=0)
+
+
+# ---------------------------------------------------------------------------------------- rule 7: the story uses the frame's height
+def check_story_reaches_down(report, shot):
+    """Rule 7, the frame filled top to bottom, in one measurable part: when the check file gives "story_reaches_down"
+    (a fraction of the frame's height), some story prop or the subject must reach at least that far down the frame (what
+    shows of it, not what is hidden). Off unless the check file asks for it, so shots checked before it are unchanged."""
+    limit = shot.check.get('story_reaches_down')
+    if limit is None:
+        return
+    shown = [g for g in shot.core if shot.shows(g)]
+    if not shown:
+        report.note('rule 7: the story reaches the frame\'s lower part', 'Not checked: no story prop or subject shows.')
+        return
+    bottoms = {g: box_of(shot.visible[g])[3] for g in shown}
+    lowest = max(bottoms, key=bottoms.get)
+    reach = (bottoms[lowest] + 1) / shot.height
+    ok = reach >= limit
+    fix = ''
+    if not ok:
+        words = move_words(shot, lowest, 0, limit * shot.height - bottoms[lowest], bottoms[lowest])
+        fix = (capital(words) + ' so its bottom reaches ' + f'{limit:.2f} down' if words else
+               f'Bring a story prop nearer the camera, or the camera nearer the story, until one reaches {limit:.2f} down')
+        fix += '; or bring the camera nearer the whole group (that moves everything on screen, so check the other rules again).'
+    report.add('rule 7: the story reaches the frame\'s lower part', ok,
+               f'The lowest story thing that shows is {lowest}, reaching {reach:.2f} down the frame (the check file asks for at least {limit:.2f}).',
+               fix=fix, mark=box_of(shot.visible[lowest]), kind='story', how_bad=past(reach, limit, 0.03), name='reach',
+               rule_id='rule7_story_reaches_down', measured=reach, things=[lowest])
 
 
 # ---------------------------------------------------------------------------------------- rule 12: room for phone buttons and titles
@@ -1266,7 +1326,8 @@ def check_right_edge(report, shot):
     report.add('rule 12: room for phone buttons', False,
                '; '.join(reads) + '. Video apps put their buttons down the right edge, from a little above the middle to near the bottom.',
                fix=fix, mark=(min(m[0] for m in marks), min(m[1] for m in marks), shot.width - 1, max(m[3] for m in marks)), area=True,
-               kind='edges', how_bad=past(worst[1], worst[2], 0.02), name='rule12')
+               kind='edges', how_bad=past(worst[1], worst[2], 0.02), name='rule12', rule_id='rule12_right_edges',
+               measured=max(right for _, right, _ in over), things=[g for g, _, _ in over])
 
 
 def check_titles(report, shot, blurred):
@@ -1297,7 +1358,8 @@ def check_titles(report, shot, blurred):
             problems.append(f'the brightest light in the frame ({x / shot.width:.2f} across, {y / shot.height:.2f} down) is next to it')
     report.add('rule 12: titles in dim sky', not problems,
                (capital('; '.join(problems)) + '.') if problems else f'The title area ({zone[0]:.2f} to {zone[2]:.2f} across, {zone[1]:.2f} to {zone[3]:.2f} down) is dim, empty sky.',
-               '; '.join(numbers), fix='Move the title area into darker, emptier sky, or move what is in it.', mark=(l, t, r, b), area=True, kind='edges')
+               '; '.join(numbers), fix='Move the title area into darker, emptier sky, or move what is in it.', mark=(l, t, r, b), area=True, kind='edges',
+               rule_id='rule12_title_zone_sky_share', measured={'sky': sky, 'others': [p for p in problems if not p.startswith('only ')]})
 
 
 # ---------------------------------------------------------------------------------------- rule 8: props by meaning
@@ -1329,7 +1391,8 @@ def check_work_props(report, shot):
         fix = (capital(words) + f' (its middle then sits about {target:.2f} down)' + (', and keep it in shadow.' if average is not None else '.')) if words \
             else f'Keep {g} where it is but in shadow.'
         report.add('rule 8: work props small, far and dim', not problems, (what + '. ' + capital('; '.join(problems)) + '.') if problems else what + '.',
-                   fix=fix, mark=box_of(shot.visible[g]), kind='background', how_bad=1 + len(problems))
+                   fix=fix, mark=box_of(shot.visible[g]), kind='background', how_bad=1 + len(problems), rule_id='rule8_work_prop_share',
+                   measured=share, things=[g])
     corner = np.zeros((shot.height, shot.width), bool)
     corner[shot.height // 2:, :shot.width // 2] = True
     big = []
@@ -1343,7 +1406,8 @@ def check_work_props(report, shot):
                 words = move_words(shot, g, 0, (0.60 * shot.height - cy), cy)
                 fix = capital(words) + ' (its middle then about 0.60 down, out of the corner and just inside the middle band, rule 8).' if words else fix
             report.add('rule 8: nothing big where the eye enters', False, f'{g} fills {share:.1%} of the frame in the bottom-left quarter, where the eye enters (limit 1%).',
-                       fix=fix, mark=box_of(mask & corner), kind='story', how_bad=past(share, 0.01, 0.01))
+                       fix=fix, mark=box_of(mask & corner), kind='story', how_bad=past(share, 0.01, 0.01), rule_id='rule8_bottom_left_share',
+                       measured=share, things=[g])
     if not big:
         report.add('rule 8: nothing big where the eye enters', True, 'No prop fills more than 1% of the frame in the bottom-left quarter.', kind='story')
 
@@ -1387,7 +1451,8 @@ def check_dark_entry(report, shot):
                'a render that ran out of shadow memory draws false hard shadows. If the log is clean, find what casts it: switch off each '
                'light\'s shadow one at a time (the warm lights first), see which one makes it vanish, and move that light or the thing in its way.')
     report.add('rule 8: nothing big and dark where the eye enters', ok, what, f'from {l / shot.width:.2f} to {r / shot.width:.2f} across, '
-               f'{t / shot.height:.2f} to {b / shot.height:.2f} down', fix=fix, mark=(l, t, r, b), area=True, kind='light', how_bad=past(share, 0.01, 0.01))
+               f'{t / shot.height:.2f} to {b / shot.height:.2f} down', fix=fix, mark=(l, t, r, b), area=True, kind='light', how_bad=past(share, 0.01, 0.01),
+               rule_id='rule8_dark_entry', measured=share, things=[owner] if owner else [])
 
 
 # ---------------------------------------------------------------------------------------- the light rules (5, 6, 10) and the main rule
@@ -1478,15 +1543,18 @@ def check_light(report, shot, story_union, blurred):
                f'Of the brightest parts (the brightest 3% of the frame), {share_subject:.0%} lie on {subject} (need 40%) and {share_group:.0%} in the '
                f'story props\' box (need 75%). The largest bright patch belongs to {owner}.',
                fix=f'Dim {owner} (the marked bright patch), or light {subject} more.' if owner != subject else f'Light {subject} more, or dim what is around it.',
-               mark=box_of(biggest) if owner != subject else box_of(on_subject), area=True, kind='light', how_bad=max(past(share_subject, 0.40, 0.1) if share_subject < 0.40 else 1, past(share_group, 0.75, 0.1) if share_group < 0.75 else 1))
+               mark=box_of(biggest) if owner != subject else box_of(on_subject), area=True, kind='light', how_bad=max(past(share_subject, 0.40, 0.1) if share_subject < 0.40 else 1, past(share_group, 0.75, 0.1) if share_group < 0.75 else 1),
+               rule_id='rule5_brightest_share_on_subject', measured={'on_subject': share_subject, 'in_story_box': share_group}, things=[subject])
     if has_subject:
         ratio = float(grey[shot.visible[subject]].mean() / grey.mean())
         report.add(f'rule 5: {subject} is bright', ratio >= 1.8, f'{subject} is {ratio:.2f} times as bright as the frame\'s average (need 1.8).',
-                   fix=f'Light {subject} more, or darken what is around it.', mark=box_of(shot.visible[subject]), kind='light', how_bad=past(ratio, 1.8, 0.3))
+                   fix=f'Light {subject} more, or darken what is around it.', mark=box_of(shot.visible[subject]), kind='light', how_bad=past(ratio, 1.8, 0.3),
+                   rule_id='rule5_subject_brightness_ratio', measured=ratio, things=[subject])
     top_row = [float(grey[:height // 3, a:b].mean()) for a, b in ((0, width // 3), (width // 3, 2 * width // 3), (2 * width // 3, width))]
     report.add('rule 5: keep the sky dim', max(top_row) <= 0.36,
                f'The top third\'s brightness, left to right: {", ".join(f"{v:.2f}" for v in top_row)} (limit 0.36).',
-               fix='Darken the sky (or ask the painter for a darker sky).', mark=(0, 0, width - 1, height // 3), area=True, kind='light', how_bad=past(max(top_row), 0.36, 0.05))
+               fix='Darken the sky (or ask the painter for a darker sky).', mark=(0, 0, width - 1, height // 3), area=True, kind='light', how_bad=past(max(top_row), 0.36, 0.05),
+               rule_id='rule5_top_third_brightness', measured=max(top_row))
     # rule 6: warm light, mostly round the story props
     blue, _, red = [c.astype(np.float32) for c in cv2.split(picture)]
     warmth = np.clip((red - blue) / 255, 0, 1)
@@ -1525,7 +1593,8 @@ def check_light(report, shot, story_union, blurred):
                (capital('; '.join(problems)) + '.') if problems else f'Warm light covers {share_warm:.1%} of the frame, {inside:.0%} of it round the story props.',
                f'warm: red clearly stronger than blue in a lit part (the same measure as measure_composition.py)', fix=' '.join(fixes),
                mark=mark, area=True, kind='light', how_bad=max(past(share_warm, 0.03, 0.01) if share_warm > 0.03 else 1, past(share_warm, 0.015, 0.005) if share_warm < 0.015 else 1,
-                                                                past(inside, 0.5, 0.1) if inside < 0.5 else 1))
+                                                                past(inside, 0.5, 0.1) if inside < 0.5 else 1),
+               rule_id='rule6_warm_share', measured={'share': share_warm, 'round_story': inside})
     if has_subject:
         ys, xs = np.nonzero(shot.visible[subject])
         rows = np.arange(height)[:, None]
@@ -1539,7 +1608,8 @@ def check_light(report, shot, story_union, blurred):
                    f'The bottom of {subject} is {plain(lift, 3 if abs(lift - 0.10) < 0.005 else 2)} warmer than its top, on a scale where 0 is the same colour and 1 is pure red against '
                    f'pure blue; it needs 0.10 (the reference measures about 0.17).',
                    fix=lit_from_below_fix(shot, subject, share_warm > 0.03), name='lit-below',
-                   mark=box_of(shot.visible[subject]), kind='light', how_bad=past(lift, 0.10, 0.05))
+                   mark=box_of(shot.visible[subject]), kind='light', how_bad=past(lift, 0.10, 0.05), rule_id='rule6_lit_from_below', measured=lift,
+                   things=[subject])
     # rule 5: no story prop as bright as the subject ("dirty the chair a little so it stays darker than the notice")
     if has_subject:
         paper = float(np.median(grey[shot.visible[subject]]))
@@ -1569,7 +1639,8 @@ def check_light(report, shot, story_union, blurred):
                                  f'Make {g} darker (its own colour) or move it further from the light on it'
                                  + (f' ({lights_on(g)[0][1]})' if lights_on(g) else '')) + '.' for g, _, share in glaring),
                    mark=box_of(np.any([shot.visible[g] for g, _, _ in glaring], axis=0)) if glaring else None, kind='light',
-                   how_bad=max([past(v, paper - 0.05, 0.05) for _, v, _ in glaring] or [1]))
+                   how_bad=max([past(v, paper - 0.05, 0.05) for _, v, _ in glaring] or [1]), rule_id='rule5_nothing_in_story_as_bright',
+                   things=[g for g, _, _ in glaring])
     # burnt-out colour: pure white or one colour at its limit loses all detail, and the painter can't recover it
     clipped = picture.max(axis=2) >= 254
     burnt = []
@@ -1616,7 +1687,8 @@ def check_light(report, shot, story_union, blurred):
                f'The {quiet_name} half (away from {subject}) holds {quiet:.0%} of the weight (aim for 40 to 48%).',
                fix=(f'Add a few small dim lights or details in the {quiet_name} half (a lit window, a distant lamp) until it holds about 42%.'
                     if quiet < 0.40 else f'The {quiet_name} half is too busy: dim or remove some of its detail.'), kind='light',
-               how_bad=0.8 * past(quiet, 0.40 if quiet < 0.40 else 0.48, 0.04))   # the weakest rule: it doesn't make a shot work on its own
+               how_bad=0.8 * past(quiet, 0.40 if quiet < 0.40 else 0.48, 0.04),   # the weakest rule: it doesn't make a shot work on its own
+               rule_id='rule10_quiet_side_weight', measured=quiet)
     if has_subject:
         notice_bright = float(grey[shot.visible[subject]].mean())
         side = blurred[:, quiet_cols]
@@ -1632,7 +1704,8 @@ def check_light(report, shot, story_union, blurred):
         report.add('rule 10: nothing on the quiet side outshines the subject', not problems,
                    (capital('; '.join(problems)) + '.') if problems else f'Nothing in the {quiet_name} half is as bright as {subject}, and no prop there covers more than 2%.',
                    fix='Dim that light (or move it further away), and move or shrink big props on that side.',
-                   mark=(x - 25, y - 25, x + 25, y + 25) if brightest_there >= notice_bright else None, kind='light', how_bad=2)
+                   mark=(x - 25, y - 25, x + 25, y + 25) if brightest_there >= notice_bright else None, kind='light', how_bad=2,
+                   rule_id='rule10_nothing_on_quiet_side_outshines', things=big)
     # the main rule: every strong thing points at the same place
     spots = {}
     if shot.meet:
@@ -1657,7 +1730,8 @@ def check_light(report, shot, story_union, blurred):
                '; '.join(f'{k} {v[0]:.2f} across, {v[1]:.2f} down' for k, v in spots.items()) +
                f'. Together they span {r - l:.2f} of the frame wide and {b - t:.2f} tall (limit 0.40 x 0.50, holding {subject}).',
                fix=f'The odd one out is the {odd}: fix that first.', mark=(l * width, t * height, r * width, b * height), area=True,
-               kind='main', how_bad=max(past(r - l, 0.40, 0.05) if r - l > 0.40 else 1, past(b - t, 0.50, 0.05) if b - t > 0.50 else 1))
+               kind='main', how_bad=max(past(r - l, 0.40, 0.05) if r - l > 0.40 else 1, past(b - t, 0.50, 0.05) if b - t > 0.50 else 1),
+               rule_id='main_rule_spot_box', measured=[r - l, b - t])
     return spots
 
 
@@ -1756,6 +1830,258 @@ def check_reference_places(report, shot):
                     + '; '.join(landmarks) + '.')
 
 
+# ---------------------------------------------------------------------------------------- kinds of shot and the accepted list
+CALCULATORS = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'calculators')
+
+
+def calculators():
+    """kit/calculators/settings.py (read only when a check file names kinds of shot or accepted problems)."""
+    import sys
+    if CALCULATORS not in sys.path:
+        sys.path.insert(0, CALCULATORS)
+    try:
+        import settings as kit_settings
+    except ImportError:
+        raise SystemExit(f'check_shot: the check file names "kind_of_shot" or "accepted", which need kit/calculators/settings.py and '
+                         f'kit/film-settings.json; not found at {CALCULATORS}.')
+    return kit_settings
+
+
+def known_item(item, how, words, entry=None):
+    item['passed'] = 'known'
+    item['known'] = {'how': how, 'words': words, 'entry': entry}
+
+
+def rejudge(item, rule_id, rules, shot, kit):
+    """How a problem (or a pass) stands under the view's kinds of shot: ('pass' | 'fail' | 'off', words) or None (unchanged)."""
+    entry = rules[rule_id]
+    kinds = ' + '.join(entry.get('from_kinds', []))
+    measured = item.get('measured')
+    if not entry.get('applies', True):
+        if rule_id == 'rule12_title_zone_sky_share' and isinstance(measured, dict) and measured.get('others'):
+            return None   # only the sky share is replaced; story props in the band or a bright band still count
+        instead = f'; instead: {entry["replaced_by"]}' if entry.get('replaced_by') else ''
+        return 'off', f'off for a {kinds} shot ({entry.get("source", "")}){instead}'
+    limit = entry.get('value')
+    if rule_id == 'rule1_meeting_point_gap' and isinstance(measured, dict):
+        left, right = measured['span']
+        if 'opening' in entry.get('measure', '') and left <= measured['meet_across'] <= right:
+            return 'pass', f'where the lines meet lies inside the outline across, which a {kinds} shot allows ({entry.get("measure")})'
+        if 'across only' in entry.get('unit', ''):
+            across = 0.0 if left <= measured['meet_across'] <= right else min(abs(measured['meet_across'] - left), abs(measured['meet_across'] - right))
+            return ('pass' if across <= limit else 'fail'), f'judged across only for a {kinds} shot: {across:.3f} of the width (limit {limit})'
+        return None
+    if rule_id == 'rule2_eye_height':
+        if 'eye_height' in shot.check:
+            return None   # the check file's own range is the view's
+        return kit.judge(entry, measured), f'the eye range for a {kinds} shot is {limit[0]} to {limit[1]} m'
+    if rule_id == 'rule3_story_box' and isinstance(measured, dict):
+        used = measured['limit_used']
+        box = [max(limit[0], used[0]), max(limit[1], used[1])]
+        w, h = measured['size']
+        return ('pass' if w <= box[0] and h <= box[1] else 'fail'), f'a {kinds} shot\'s story box may be {box[0]:.2f} x {box[1]:.2f}'
+    if rule_id == 'rule5_brightest_share_on_subject' and isinstance(measured, dict):
+        other = rules.get('rule5_brightest_share_in_story_box', {})
+        on_ok = kit.judge(entry, measured['on_subject']) in ('pass', 'off')
+        box_ok = kit.judge(other, measured['in_story_box']) in ('pass', 'off') if other else True
+        return ('pass' if on_ok and box_ok else 'fail'), f'the {kinds} limits: {entry.get("value")} on the subject, {other.get("value")} in the story box'
+    if rule_id == 'rule6_warm_share' and isinstance(measured, dict):
+        return ('pass' if kit.judge(entry, measured['share']) == 'pass' and measured['round_story'] >= 0.5 else 'fail'), \
+            f'a {kinds} shot\'s warm share is {limit[0]:.1%} to {limit[1]:.1%}'
+    if rule_id == 'rule7_story_reaches_down':
+        verdict = kit.judge(entry, measured)
+        if verdict == 'fail' and 'fill' in entry.get('who_may_reach', ''):
+            fills = {g: (box_of(shot.visible[g])[3] + 1) / shot.height for g in shot.check.get('fill', []) if shot.shows(g)}
+            reached = {g: v for g, v in fills.items() if v >= limit}
+            if reached:
+                g = max(reached, key=reached.get)
+                return 'pass', f'the fill prop {g} reaches {reached[g]:.2f} down, which a {kinds} shot allows ({entry.get("who_may_reach")})'
+        return verdict, f'a {kinds} shot asks for {limit} down'
+    if rule_id == 'rule8_bottom_left_share':
+        things = item.get('things') or []
+        if 'story' in entry.get('applies_to', '') and not (set(things) & set(shot.core)):
+            return None   # the crowd's allowance is for story things only
+        return kit.judge(entry, measured), f'a story thing in a {kinds} shot may cover {limit:.0%}'
+    if rule_id == 'resting_on' and isinstance(measured, dict):
+        surfaces = shot.check.get('support_surfaces') or []
+        for surface in surfaces:
+            air = measured['bottom'] - surface['height']
+            if -0.05 <= air <= limit:
+                return 'pass', f'it rests on the {surface["name"]} (declared at {surface["height"]:.3f} m; {air:+.3f} m), which an {kinds} shot allows'
+        return None
+    if isinstance(measured, (int, float)) and entry.get('limit_type') in ('max', 'min', 'range'):
+        return kit.judge(entry, measured), f'the {kinds} limit is {limit}'
+    return None
+
+
+def crowd_heads(report, shot, kit, settings):
+    """A crowd's replacement for rule 4 between figures: head centres at least a head width apart on screen, and every
+    figure at least half seen (people.crowd_head_spacing_head_widths, people.crowd_figure_visible_share_min)."""
+    figures = [g for g in shot.check.get('figures', []) if shot.shows(g) and shot.alone[g].any()]
+    if len(figures) < 2:
+        report.note('crowd: heads apart', 'Not checked: list the people\'s groups under "figures" in the check file (a crowd\'s rule 4 between '
+                    'figures is replaced by this test).')
+        return
+    need = settings.value('people.crowd_head_spacing_head_widths')
+    seen_min = settings.value('people.crowd_figure_visible_share_min')
+    head_share = settings.value('people.head_height_metres') / settings.value('people.figure_height_metres')
+    heads = {}
+    for g in figures:
+        ys, xs = np.nonzero(shot.alone[g])
+        top, height = ys.min(), ys.max() - ys.min() + 1
+        rows = ys < top + max(2, head_share * height)
+        heads[g] = (float(xs[rows].mean()), float(ys[rows].mean()), float(xs[rows].max() - xs[rows].min() + 1))
+    worst = None
+    for i, a in enumerate(figures):
+        for b in figures[i + 1:]:
+            apart = math.hypot(heads[a][0] - heads[b][0], heads[a][1] - heads[b][1]) / min(heads[a][2], heads[b][2])
+            if worst is None or apart < worst[0]:
+                worst = (apart, a, b)
+    apart, a, b = worst
+    report.add('crowd: heads apart', apart >= need,
+               f'The closest two heads, {a}\'s and {b}\'s, are {apart:.2f} head widths apart on screen (at least {need}, so every head can be '
+               f'counted; this replaces rule 4 between figures in a crowd).',
+               fix=f'Move {a} or {b} sideways (or change one\'s height) until their heads are a head width apart.',
+               mark=box_of(shot.alone[a] | shot.alone[b]), kind='story', how_bad=past(apart, need, 0.25), rule_id='crowd_head_spacing',
+               measured=apart, things=[a, b])
+    shares = {g: float(shot.visible[g].sum()) / float(shot.alone[g].sum()) for g in figures}
+    hidden = {g: v for g, v in shares.items() if v < seen_min}
+    report.add('crowd: every figure half seen', not hidden,
+               (f'{", ".join(f"{g} shows {v:.0%}" for g, v in sorted(hidden.items(), key=lambda x: x[1]))} of itself (at least {seen_min:.0%}).'
+                if hidden else f'Every figure shows at least {seen_min:.0%} of itself (the least: {min(shares, key=shares.get)}, '
+                               f'{min(shares.values()):.0%}).'),
+               fix='Move the hidden figures sideways into the gaps between the ones in front.',
+               mark=box_of(np.any([shot.alone[g] for g in hidden], axis=0)) if hidden else None, kind='story',
+               how_bad=1 + 2 * len(hidden), rule_id='crowd_figure_visible_share', measured=min(shares.values()), things=list(hidden))
+
+
+def silhouette_contrast(report, shot, entry, settings):
+    """A dark subject's replacement for "the subject is the brightest": its outline must stand out against the light round it,
+    (surround + 0.05) / (subject + 0.05) in linear light over a band round its outline (the people test's figure measure)."""
+    subject = shot.subject
+    if shot.picture is None or not shot.shows(subject):
+        report.note('dark subject: its outline against the light', 'Not checked: needs the finished picture and the subject showing.')
+        return
+    linear = shot.picture.astype(np.float32) / 255
+    linear = np.where(linear <= 0.04045, linear / 12.92, ((linear + 0.055) / 1.055) ** 2.4)
+    luminance = 0.0722 * linear[:, :, 0] + 0.7152 * linear[:, :, 1] + 0.2126 * linear[:, :, 2]
+    size = max(3, int(settings.value('shot_planner.check_shot_silhouette_band_share_of_width') * shot.width) | 1)
+    grown = cv2.dilate(shot.alone[subject].astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (size, size))) > 0
+    others = np.any([v for g, v in shot.visible.items() if g != subject] or [np.zeros_like(grown)], axis=0)
+    band = grown & ~shot.alone[subject] & ~others
+    if band.sum() < 100:
+        report.note('dark subject: its outline against the light', f'Not checked: too little of the light round {subject} shows.')
+        return
+    inside, around = float(luminance[shot.visible[subject]].mean()), float(luminance[band].mean())
+    ratio = (around + 0.05) / (inside + 0.05)
+    report.add('dark subject: its outline against the light', ratio >= entry['value'],
+               f'{subject} (a dark subject) against the light round its outline: (surround + 0.05) / (subject + 0.05) = {ratio:.2f} '
+               f'(at least {entry["value"]}; it replaces "the subject is the brightest" for a dark subject; {entry.get("note", "")}).',
+               fix=f'Light what is behind or round {subject} more (a lit yard, a doorway, a lamp beyond it), not {subject} itself.',
+               mark=box_of(band), area=True, kind='light', how_bad=past(ratio, entry['value'], 0.3), rule_id='silhouette_contrast', measured=ratio,
+               things=[subject])
+
+
+def matches(entry, item):
+    rule = str(entry.get('rule', '')).strip().lower()
+    if not rule or not (rule == str(item.get('rule_id') or '').lower() or item['rule'].lower().startswith(rule)):
+        return False
+    things = entry.get('things') or []
+    named = set(item.get('things') or []) | set(item.get('pair') or ())
+    return all(t in named or t in item['what'] for t in things)
+
+
+def worse_than_accepted(entry, item, share, rules):
+    """True when a problem has moved more than `share` (of the accepted number) further past its limit than when it was accepted."""
+    accepted, measured = entry.get('measured'), item.get('measured')
+    if not isinstance(accepted, (int, float)) or not isinstance(measured, (int, float)):
+        return False
+    rule = rules.get(item.get('rule_id') or '', {})
+    step = share * abs(accepted)
+    if rule.get('limit_type') == 'min':
+        return measured < accepted - step
+    if rule.get('limit_type') == 'range' and isinstance(rule.get('value'), list):
+        low, high = rule['value']
+        past = lambda v: max(low - v, v - high, 0.0)
+        return past(measured) > past(accepted) + step
+    return measured > accepted + step
+
+
+# the rules this tool measures (a check file's accepted entry for any other rule, the slide for example, is for other tools)
+CHECKED_RULES = {'rule1_meeting_point_gap', 'rule2_eye_height', 'resting_on', 'rule3_story_box', 'rule3_story_together_metres', 'rule4_near_touch',
+                 'rule4_between_figures', 'rule5_brightest_share_on_subject', 'rule5_brightest_share_in_story_box', 'rule5_subject_brightness_ratio',
+                 'rule5_top_third_brightness', 'rule5_nothing_in_story_as_bright', 'rule6_warm_share', 'rule6_lit_from_below',
+                 'rule7_story_reaches_down', 'rule8_work_prop_share', 'rule8_bottom_left_share', 'rule8_dark_entry', 'rule10_quiet_side_weight',
+                 'rule10_nothing_on_quiet_side_outshines', 'rule12_right_edges', 'rule12_title_zone_sky_share', 'main_rule_spot_box',
+                 'crowd_head_spacing', 'crowd_figure_visible_share', 'silhouette_contrast'}
+
+
+def apply_kinds_and_accepted(report, shot, settings_path=None):
+    """The view's kinds of shot and its accepted problems (check file "kind_of_shot" and "accepted"). Does nothing, and changes
+    nothing in the report, when the check file has neither."""
+    kinds, accepted = shot.check.get('kind_of_shot'), shot.check.get('accepted')
+    if kinds is None and accepted is None:
+        return None
+    kit = calculators()
+    settings = kit.load_settings(settings_path)
+    kinds = list(kinds or ['still_life'])
+    rules = kit.resolve_profile(settings, kinds)
+    changed = {r for r, e in rules.items() if e.get('from_kinds') != ['still_life']}
+    figures = set(shot.check.get('figures', []))
+    for item in list(report.items):
+        rule_id = item.get('rule_id')
+        if not rule_id or item['passed'] is None:
+            continue
+        if rule_id == 'rule4_near_touch' and item.get('pair') and set(item['pair']) <= figures:
+            rule_id = 'rule4_between_figures'
+        if rule_id not in changed and not (rule_id == 'rule5_brightest_share_on_subject' and 'rule5_brightest_share_in_story_box' in changed):
+            continue
+        found = rejudge(item, rule_id, rules, shot, kit)
+        if found is None:
+            continue
+        verdict, words = found
+        if item['passed'] is False and verdict in ('pass', 'off'):
+            known_item(item, 'allowed', words, {'rule': rule_id, 'kinds': rules[rule_id].get('from_kinds'), 'value': rules[rule_id].get('value'),
+                                                'source': rules[rule_id].get('source')})
+        elif item['passed'] is True and verdict == 'fail':
+            item['passed'] = False
+            item['fix'] = f'This kind of shot is stricter: {words}.'
+            item['what'] += f' ({words}.)'
+    if not rules.get('rule4_between_figures', {}).get('applies', True):
+        crowd_heads(report, shot, kit, settings)
+    contrast = rules.get('silhouette_contrast')
+    if contrast and contrast.get('applies', True) and 'dark_subject' in kinds:
+        if getattr(shot, 'light_judged', False):
+            silhouette_contrast(report, shot, contrast, settings)
+        else:
+            report.note('dark subject: its outline against the light', 'Not checked: the light rules were not judged (no finished picture, '
+                        'or one made before the scene changed).')
+    if not rules.get('rule12_title_zone_sky_share', {}).get('applies', True):
+        report.note('rule 12: titles in dim sky', f'For a {" + ".join(kinds)} shot the title band need not be sky: '
+                    f'{rules["rule12_title_zone_sky_share"].get("replaced_by")}. Check that the page draws it.')
+    share = settings.value('shot_planner.check_shot_accepted_worse_share')
+    unmatched = []
+    for entry in accepted or []:
+        hits = [i for i in report.items if i['passed'] is False and matches(entry, i)]
+        if not hits:
+            unmatched.append(entry)
+            continue
+        for item in hits:
+            if worse_than_accepted(entry, item, share, rules):
+                item['what'] += (f' (The check file accepts this at {entry["measured"]}, {entry.get("who")}, {entry.get("date")}: it is now '
+                                 f'worse than that, so it counts again.)')
+                continue
+            known_item(item, 'accepted', f'{entry.get("reason")} ({entry.get("who")}, {entry.get("date")})', entry)
+    for entry in unmatched:
+        rule = str(entry.get('rule', ''))
+        measured_here = rule in CHECKED_RULES or rule.lower().startswith(('rule ', 'main rule', 'set-up', 'reference', 'props rest', 'crowd', 'dark subject'))
+        report.note('accepted', f'The check file accepts "{rule}"' + (f' for {", ".join(entry["things"])}' if entry.get('things') else '')
+                    + f' ({entry.get("reason")}), ' + ('but no such problem was found: it may have been fixed; take the entry out.' if measured_here else
+                                                         'which this tool does not measure (it is for other tools: plan_shot.py, the slide '
+                                                         'and painting checks); kept as it is.'))
+    return {'kinds': kinds, 'settings_file': settings.path, 'settings_used': settings.used_json()}
+
+
 # ---------------------------------------------------------------------------------------- drawing and writing
 LEGEND = ('On marked.jpg each problem\'s place is boxed, with its number on a dark tag (red: a small place; orange: a large area). '
           'Dashed lines: the 0.90 and 0.95 limits of rule 12. Cyan arrows: from where a prop is to where the reference has it. Circles '
@@ -1769,7 +2095,8 @@ WORDS = ('Words used: "where the lines meet" is the spot where the street\'s str
          'in one plain colour, as measured in Blender.')
 
 NOT_CHECKED = [
-    'rule 7 (story props stacked in upright columns, something in the top third): judge by eye.',
+    'rule 7 (story props stacked in upright columns, something in the top third): judge by eye; only how far down the frame '
+    'the story reaches is measured, and only when the check file gives "story_reaches_down".',
     'rule 9 beyond the lantern resting on the chair: that the chair stands right under the notice, its seat shows and the lantern is lit.',
     'rule 11 (the camera slides without turning): check where the lines meet in the first, middle and last frames of the film.',
     'whether a prop pokes into a wall or another prop in 3D: only what shows on screen is measured.',
@@ -1838,8 +2165,12 @@ def draw_marked(path, shot, ranked, spots):
 
 def write_report(path, report, ranked, title, shot):
     checks = sum(1 for i in report.items if i['passed'] is not None)
+    known = [i for i in report.items if i['passed'] == 'known']
+    extra = getattr(shot, 'kinds_and_accepted', None)
+    counted = (f' ({len(known)} more known: accepted in the check file or allowed for a {" + ".join(extra["kinds"])} shot, listed under '
+               f'"Known and allowed")') if extra is not None else ''
     lines = [f'# Shot check: {title}', '',
-             f'{len(ranked)} problem{"s" if len(ranked) != 1 else ""} found in {checks} checks, numbered worst first (the camera first, '
+             f'{len(ranked)} problem{"s" if len(ranked) != 1 else ""} found in {checks} checks{counted}, numbered worst first (the camera first, '
              'because it moves everything on screen).', '',
              f'How to read this: places are fractions of the frame (0 across is the left edge, 1 the right; 0 down is the top, 1 the bottom). '
              f'Pixels are this frame\'s ({shot.width} wide). Metres are metres in the street; "Blender x, y" is a spot on the street\'s map '
@@ -1858,6 +2189,16 @@ def write_report(path, report, ranked, title, shot):
             lines.append(f'{item["number"]}. **{item["rule"]}.** {item["what"]}' + (f' ({item["numbers"]})' if item['numbers'] else ''))
             if item['fix']:
                 lines.append(f'   - Fix: {item["fix"]}')
+        lines.append('')
+    if extra is not None:
+        lines += ['## Known and allowed', '', f'Kinds of shot: {" + ".join(extra["kinds"])} (film-settings.json shot_kind_profiles, '
+                  f'{extra["settings_file"]}). Accepted problems are the check file\'s "accepted" list.', '']
+        for item in known:
+            how = item['known']
+            lines.append(f'- **{item["rule"]}.** {item["what"]}' + (f' ({item["numbers"]})' if item['numbers'] else ''))
+            lines.append(f'   - {"Accepted" if how["how"] == "accepted" else "Allowed"}: {how["words"]}')
+        if not known:
+            lines.append('- none')
         lines.append('')
     lines += ['## Passed', '']
     lines += [f'- {i["rule"]}: {i["what"]}' for i in report.items if i['passed'] is True]
@@ -1878,6 +2219,7 @@ def main():
     parser.add_argument('--out', required=True)
     parser.add_argument('--title', default='')
     parser.add_argument('--render-log', help='the log Blender wrote while rendering the finished picture, to catch render faults')
+    parser.add_argument('--settings', help='film-settings.json, for the check file\'s "kind_of_shot" and "accepted" (default: kit/film-settings.json)')
     args = parser.parse_args()
     os.makedirs(args.out, exist_ok=True)
     shot = Shot(args)
@@ -1909,6 +2251,7 @@ def main():
     touching = check_pairs(report, shot)
     check_story_in_3d(report, shot)
     story_union = check_story_props(report, shot, touching)
+    check_story_reaches_down(report, shot)
     for item in report.problems():   # a prop standing apart: its rule 3 move fixes its near-touches too; don't undo it
         loner = next((g for g in (item.get('pair') or ()) if g in shot.apart), None)
         if loner and item['rule'].startswith('rule 4'):
@@ -1929,12 +2272,23 @@ def main():
     elif shot.grey is not None:
         check_dark_entry(report, shot)
         spots = check_light(report, shot, story_union, blurred)
+        shot.light_judged = True
     check_reference_places(report, shot)
+    shot.kinds_and_accepted = apply_kinds_and_accepted(report, shot, args.settings)
+    if shot.kinds_and_accepted is not None:
+        shot.camera_fault = any(i['kind'] == 'camera' and i['passed'] is False for i in report.items)
     if shot.camera_fault:
         report.camera_first()
     ranked = report.rank()
     draw_marked(os.path.join(args.out, 'marked.jpg'), shot, ranked, spots)
     print(write_report(os.path.join(args.out, 'report.md'), report, ranked, args.title or os.path.basename(os.path.normpath(args.facts)), shot))
+    if shot.kinds_and_accepted is not None:
+        plain_item = lambda i: {k: i.get(k) for k in ('number', 'rule', 'rule_id', 'what', 'numbers', 'fix', 'things', 'known')}
+        with open(os.path.join(args.out, 'known.json'), 'w') as handle:
+            json.dump({'about': 'check_shot.py: the problems, and the problems known (accepted in the check file) or allowed for the view\'s '
+                                'kinds of shot', 'version': VERSION, **shot.kinds_and_accepted,
+                       'problems': [plain_item(i) for i in ranked], 'known': [plain_item(i) for i in report.items if i['passed'] == 'known']},
+                      handle, indent=1, default=str)
 
 
 if __name__ == '__main__':

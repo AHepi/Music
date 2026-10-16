@@ -1,0 +1,102 @@
+{
+ "about": "What this file is: a shot list for plan_shot.py, written by the shot planner helper (log 35) from the notice corner's check file (examples/notice-corner/shot-check.json: subject notice on the board, story board, drum, chair, lantern, pail, work handcart, sacks, barrel, dustbins, box_excludes board) and assemble_notice_corner.py's camera choices (eye 1.81 m to match the liked picture, the lines meeting 0.684 across, a 1.5 m slide toward the notice). 'end' judges the built camera; 'planned with the reference' plans it from the support's near edge with the reference's eye and meeting point, standing where the build stood along the street (y 17.85), to follow the design's chain: board edge 2.96 m, then rule 12's sideways slide.",
+ "place_facts": "../notice-corner/notice-corner-place-facts.json",
+ "shots": [
+  {
+   "name": "end",
+   "view": "end",
+   "subject": "notice",
+   "support": "board",
+   "story": [
+    "board",
+    "drum",
+    "chair",
+    "lantern",
+    "pail"
+   ],
+   "work": [
+    "handcart",
+    "sacks",
+    "barrel",
+    "dustbins"
+   ],
+   "must_read": [
+    "notice"
+   ],
+   "box_excludes": [
+    "board"
+   ],
+   "turn_toward": {
+    "notice": {
+     "target": "camera",
+     "front_axis_degrees": 180
+    }
+   }
+  },
+  {
+   "name": "planned with the reference",
+   "view": "end",
+   "subject": "notice",
+   "support": "board",
+   "story": [
+    "board",
+    "drum",
+    "chair",
+    "lantern",
+    "pail"
+   ],
+   "work": [
+    "handcart",
+    "sacks",
+    "barrel",
+    "dustbins"
+   ],
+   "must_read": [
+    "notice"
+   ],
+   "box_excludes": [
+    "board"
+   ],
+   "camera": {
+    "plan": true,
+    "stands_on": "pavement",
+    "eye_height_metres": 1.81,
+    "line_up": "near edge",
+    "meeting_point_across": 0.684,
+    "along": 17.85,
+    "slide_metres": 1.5
+   }
+  },
+  {
+   "name": "planned",
+   "view": "end",
+   "subject": "notice",
+   "support": "board",
+   "story": [
+    "board",
+    "drum",
+    "chair",
+    "lantern",
+    "pail"
+   ],
+   "work": [
+    "handcart",
+    "sacks",
+    "barrel",
+    "dustbins"
+   ],
+   "must_read": [
+    "notice"
+   ],
+   "box_excludes": [
+    "board"
+   ],
+   "camera": {
+    "plan": true,
+    "stands_on": "pavement",
+    "line_up": "near edge",
+    "slide_metres": 1.5
+   }
+  }
+ ]
+}

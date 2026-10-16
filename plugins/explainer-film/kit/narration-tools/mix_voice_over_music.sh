@@ -10,6 +10,8 @@
 # Measured on the first sound check (2026-10-11): with these settings the music sits about 18 dB
 # under the voice while she speaks and about 12 dB under in the pauses.
 #
+# Gate: the mix must come out as long as LENGTH_SECONDS, within 0.05 s, or the script stops (sound_gates.py length).
+#
 # Use: mix_voice_over_music.sh MUSIC_FILE VOICE_FILE OUTPUT_FILE VOICE_START_SECONDS LENGTH_SECONDS [MUSIC_START_SECONDS]
 set -euo pipefail
 music_file="$1"; voice_file="$2"; output_file="$3"; voice_start_seconds="$4"; length_seconds="$5"; music_start_seconds="${6:-0}"
@@ -39,3 +41,5 @@ measured_loudness=$(ffmpeg -hide_banner -nostats -i "$unlevelled_mix" -af ebur12
 gain_db=$(python3 -c "print(round(float('$target_loudness') - float('$measured_loudness'), 2))")
 ffmpeg -hide_banner -loglevel error -y -i "$unlevelled_mix" -af "volume=${gain_db}dB,alimiter=limit=0.84:attack=5:release=60:level=disabled:latency=1" -ar 48000 -c:a libmp3lame -b:a 192k "$output_file"
 echo "mix measured ${measured_loudness} LUFS, turned by ${gain_db} dB toward ${target_loudness} LUFS -> $output_file"
+# gate (narration-tools/sound_gates.py): the mix must be as long as asked, within 0.05 s (lesson 5)
+python3 -I "$(dirname "$0")/sound_gates.py" length "$output_file" --expected "$length_seconds" --step "the sound check mix"

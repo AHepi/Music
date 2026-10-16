@@ -17,7 +17,7 @@
 // for every frame. A page returns { pose(t) -> { camera, look }, draw2D(context, t) }. The full
 // reference is "08 Cinema pages - how a page file works.md" in the kit folder.
 
-import { THREE, loadTexture, loadPixels, canvasTexture, renderer, FRAME_WIDTH, FRAME_HEIGHT } from '../stage/cinema-stage.js';
+import { THREE, loadTexture, loadPixels, canvasTexture, renderer, FRAME_WIDTH, FRAME_HEIGHT, MOVING_LAYER } from '../stage/cinema-stage.js';
 import { RoomEnvironment } from '/paper-film/node_modules/three/examples/jsm/environments/RoomEnvironment.js';
 import { spring, clamp01, easeInOut } from './paper-kit.js';
 
@@ -59,7 +59,21 @@ export function wordClock(timeline, pageNumber) {
     for (const w of page.words) if (key(w.text) === key(word) && ++seen === n) return w;
     throw new Error(`page ${pageNumber}: no word "${word}" (occurrence ${n})`);
   };
-  return { at: (word, n) => find(word, n).start, end: (word, n) => find(word, n).end, page };
+  // Page events (plugin kit; paper-film/tools/page_events.mjs): when switched on, every lookup is also noted with
+  // every time its word is said on the page and the line of the page file that asked, so a lookup that leaves out
+  // which time (n) for a word said more than once can be caught before filming (lessons 12, 28 and 46). Off, nothing
+  // is noted and every lookup gives exactly what it always did.
+  const look = (which, word, n) => {
+    const found = find(word, n);
+    if (globalThis.pageEvents?.on === true) {
+      const said = page.words.filter((w) => key(w.text) === key(word));
+      const caller = (new Error().stack ?? '').split('\n').slice(1).find((line) => !line.includes('cinema-kit.js')) ?? '';
+      globalThis.pageEvents.lookup({ page: pageNumber, which, word, n: n ?? null, start: found.start, end: found.end, text: found.text,
+        said: said.map((w) => ({ text: w.text, start: w.start, end: w.end })), asked_from: caller.trim().replace(/^at\s+/, '') });
+    }
+    return found;
+  };
+  return { at: (word, n) => look('at', word, n).start, end: (word, n) => look('end', word, n).end, page };
 }
 
 // ----------------------------------------------------------------------------------- the kit
@@ -113,6 +127,21 @@ export class CinemaKit {
   }
 
   // a small warm light (a lamp, a glowing window), not casting shadows
+  // Marks things that change from frame to frame while the camera holds (flames, smoke, sparks, glows, anything
+  // lit by a flickering light that matters), so a held shot redraws only them (cinema-stage.js, MOVING_LAYER).
+  // Everything not marked is the set, drawn once per held view. Returns its first argument.
+  moving(...objects) {
+    for (const object of objects.flat()) object?.traverse?.((o) => o.layers.set(MOVING_LAYER));
+    return objects[0];
+  }
+
+  // Everything added to the scene by build(), from now until the returned function is called, is marked moving:
+  //   const done = kit.movingFromHere(); new Flames(kit.scene, at); ...; done();
+  movingFromHere() {
+    const before = new Set(this.scene.children);
+    return () => this.moving(this.scene.children.filter((o) => !before.has(o)));
+  }
+
   glow(position, { colour = 0xffb25e, strength = 4, reach = 6 } = {}) {
     const light = new THREE.PointLight(colour, strength, reach, 2);
     light.position.copy(vector(position));
@@ -492,6 +521,24 @@ export class CutOut {
       });
     }
   }
+}
+
+// Fades a cut-out smoothly: use setFading(piece, pose) instead of piece.set(pose) for a piece that fades (pose with
+// opacity). Two things stop a plain cut-out from fading: it is drawn only where it is at least half solid (so a fade
+// snaps off half way), and a piece first drawn solid keeps a drawing recipe that ignores see-through until the recipe
+// is rebuilt. So a fading piece is drawn see-through-capable from its first call (its recipe rebuilt once), and while
+// it fades it is drawn down to nearly see-through. soft: true keeps the low cut-off even when solid (feathered edges).
+// Call it on every frame the piece shows, so each frame is drawn the same whatever came before (lesson 87 of the
+// austerity project; the film kit keeps this inside house-sample/page-1.js). piece.set({ opacity }) is unchanged, so
+// pages that already fade their own way (chapter 2's pages 1, 4, 6 and 9) draw as before.
+export function setFading(piece, pose, { soft = false } = {}) {
+  piece.set(pose);
+  for (const mesh of [piece.front, piece.back]) {
+    mesh.material.transparent = true;
+    if (!mesh.material.userData.fadeReady) { mesh.material.needsUpdate = true; mesh.material.userData.fadeReady = true; }
+  }
+  const fading = pose.opacity !== undefined && pose.opacity < 0.999;
+  piece.front.material.alphaTest = fading || soft ? 0.02 : 0.5;
 }
 
 // ---------------------------------------------------------------------------- printed textures

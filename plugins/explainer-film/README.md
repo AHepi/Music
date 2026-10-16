@@ -26,18 +26,19 @@ and opencv, ffmpeg, and a Chromium browser). Paid steps use the ElevenLabs (voic
 | `skills/record-narration` | ElevenLabs recording page by page, word times, timeline, mix, voice checks. |
 | `skills/paint-and-cut` | fal paintings, depth maps to make rooms with depth, cut-out pieces. |
 | `skills/build-cinema-page` | Building a page file; `guide.md` is the full guide; `camera-and-framing.md` the strict camera rule (still, at most 3 named moves per shot), filling a tall frame and no clipping; parallel helpers via workflow `build-pages`. |
-| `skills/make-3d-models` | Detailed models (buildings, a town, a desk, props) built in Blender by script, with the official Blender MCP server (set-up, client, and the modelling notes learned through it). |
+| `skills/make-3d-models` | Detailed models (buildings, a town, a desk, props) built in Blender by script, with the official Blender MCP server (set-up, client, and the modelling notes learned through it); EEVEE under a virtual screen. |
+| `skills/build-and-paint-a-place` | A whole place built in Blender by script (Poly Haven models and surfaces, lettered props, people), each view composed with the shot checker, the plate painted over and lined up, and shone back onto the set in a page that holds or slides. |
 | `skills/check-and-critique` | Stills, page turns, and an independent critique (workflow `critique-film`). |
 | `skills/film-and-finish` | Filming in parallel stretches, sound, sendable copy, captions, cover, measurements. |
 | `agents/` | `page-builder`, `fact-checker`, `film-critic` (all at medium effort). |
 | `workflows/` | `verify-facts`, `test-script-with-newcomers`, `critique-film`, `check-fixes`, `build-pages` (run as `/explainer-film:NAME`, or with the Workflow tool). |
-| `bin/explainer-film-setup` | Sets up the kit in a working folder (on the PATH once installed); checks for Blender's Python module too. |
-| Checking tools | `paper-film/tools/camera_audit.py` (measures every camera move per shot), `frame_check.py` (where things land in the frame for a camera, before rendering), `tone_piece.py` (calms an over-coloured cut-out), `room.clearance()` and `boxesOverlap()` in the engine (nothing passing through anything). |
-| `kit/` | The film kit: `paper-film/` (stage, scenes, tools, templates), `narration-tools/`, `examples/` (word timelines of chapters 1 and 2), `docs/` (the paper look's full how-to). |
+| `bin/explainer-film-setup` | Sets up the kit in a working folder (on the PATH once installed); checks the browser, Blender and its virtual screen, the soundtrack and every kit file the skills name, and writes `machine-settings.env`. |
+| Checking tools | `paper-film/tools/camera_audit.py` (measures every camera move per shot), `frame_check.py` (where things land in the frame for a camera, before rendering), `check-shot.sh` (the shot checker: measures a Blender shot against the composing rules and says what to change, in metres), `find_jumps.py` (sudden jumps in a finished film), `tone_piece.py` (calms an over-coloured cut-out), `room.clearance()` and `boxesOverlap()` in the engine (nothing passing through anything). |
+| `kit/` | The film kit: `paper-film/` (stage, scenes, tools, templates, Blender scripts), `narration-tools/`, `examples/` (word timelines of chapters 1 and 2, the estimated timeline of chapter 2 for newcomers, check files of the built places), `docs/` (the full how-to; start with `paper-look - 00 START HERE.md`). `kit-sync-notes.md` says when it was last brought up to date with the austerity project's film kit and what waits. |
 
-The kit holds code and timelines, not pictures or sound: a chapter's paintings, cut-outs and
-recordings stay in its own project (the austerity explainer keeps chapter 2's in
-`austerity-explainer/chapter-2-inflation/`).
+The kit holds code and timelines, not pictures, sound or models: a chapter's paintings, cut-outs,
+recordings and Blender models stay in its own project (the austerity explainer keeps them in
+`austerity-explainer/film-kit/` and `austerity-explainer/chapter-2-inflation/`).
 
 ## A concrete example
 

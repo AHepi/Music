@@ -1,0 +1,798 @@
+{
+ "about": "What this file is: a shot list for plan_shot.py, written by the shot planner helper (log 35) from the Works' check files (examples/inflation-chapter-2-newcomers/works-w1-shot-check.json, works-w3-shot-check.json: their subject, story and must-read groups, named as in works-place-facts.json) and works-shot.json (round 5). The gate's and the brazier's boxes are not in the place facts and are added under \"things\": the gate from works-shot.json gates.no-1 (width 2.95 m, leaf height 2.929 m), the brazier from round 4's layout_search3.py (radius 0.297 m, height 0.856 m), the lantern at scale 1 of the notice corner's (0.377 m tall at scale 1.28; assumed). The round 3 and round 4 men are works-shot.json men_at_no_1 as committed in austerity-explainer 7b3fe7d (round 3) and 34756a4 (round 4).",
+ "place_facts": "../works/works-place-facts.json",
+ "shots": [
+  {
+   "name": "w1",
+   "view": "w1",
+   "subject": "no-1 gate",
+   "story": [
+    "brazier",
+    "lantern",
+    "no-1-drum-diesel",
+    "group:men at No. 1"
+   ],
+   "must_read": [
+    "no-1 board",
+    "no-1-drum-petrol",
+    "no-1-drum-diesel"
+   ],
+   "box_excludes": [
+    "no-1 board"
+   ],
+   "things": {
+    "no-1 gate": {
+     "base": [
+      -3.5,
+      22.3,
+      0.0
+     ],
+     "size": [
+      2.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "brazier": {
+     "base": [
+      -2.35,
+      21.82,
+      0.019
+     ],
+     "size": [
+      0.594,
+      0.594,
+      0.856
+     ]
+    },
+    "lantern": {
+     "base": [
+      -4.31,
+      19.8,
+      1.01
+     ],
+     "size": [
+      0.15,
+      0.13,
+      0.29
+     ]
+    }
+   }
+  },
+  {
+   "name": "w1 from round 4's spot",
+   "view": "w1",
+   "subject": "no-1 gate",
+   "story": [
+    "brazier",
+    "lantern",
+    "no-1-drum-diesel",
+    "group:men at No. 1"
+   ],
+   "must_read": [
+    "no-1 board",
+    "no-1-drum-petrol",
+    "no-1-drum-diesel"
+   ],
+   "box_excludes": [
+    "no-1 board"
+   ],
+   "things": {
+    "no-1 gate": {
+     "base": [
+      -3.5,
+      22.3,
+      0.0
+     ],
+     "size": [
+      2.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "brazier": {
+     "base": [
+      -2.35,
+      21.82,
+      0.019
+     ],
+     "size": [
+      0.594,
+      0.594,
+      0.856
+     ]
+    },
+    "lantern": {
+     "base": [
+      -4.31,
+      19.8,
+      1.01
+     ],
+     "size": [
+      0.15,
+      0.13,
+      0.29
+     ]
+    }
+   },
+   "camera": {
+    "at": [
+     -3.7,
+     10.2,
+     1.835
+    ],
+    "turn_degrees": 0.0,
+    "plate_at": [
+     -3.7,
+     9.0,
+     1.835
+    ]
+   }
+  },
+  {
+   "name": "w1 planned",
+   "view": "w1",
+   "subject": "no-1 gate",
+   "story": [
+    "brazier",
+    "lantern",
+    "no-1-drum-diesel",
+    "group:men at No. 1"
+   ],
+   "must_read": [
+    "no-1 board",
+    "no-1-drum-petrol",
+    "no-1-drum-diesel"
+   ],
+   "box_excludes": [
+    "no-1 board"
+   ],
+   "things": {
+    "no-1 gate": {
+     "base": [
+      -3.5,
+      22.3,
+      0.0
+     ],
+     "size": [
+      2.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "brazier": {
+     "base": [
+      -2.35,
+      21.82,
+      0.019
+     ],
+     "size": [
+      0.594,
+      0.594,
+      0.856
+     ]
+    },
+    "lantern": {
+     "base": [
+      -4.31,
+      19.8,
+      1.01
+     ],
+     "size": [
+      0.15,
+      0.13,
+      0.29
+     ]
+    }
+   },
+   "camera": {
+    "plan": true,
+    "stands_on": "left pavement",
+    "eye_height_metres": 1.7,
+    "line_up": "centre",
+    "meeting_point_across": "straight",
+    "slide_metres": 1.2
+   }
+  },
+  {
+   "name": "w1 round 4 (single file)",
+   "view": "w1",
+   "subject": "no-1 gate",
+   "story": [
+    "brazier",
+    "no-1-drum-diesel",
+    "group:men at No. 1"
+   ],
+   "must_read": [
+    "no-1-drum-petrol",
+    "no-1-drum-diesel"
+   ],
+   "things": {
+    "no-1 gate": {
+     "base": [
+      -3.5,
+      22.3,
+      0.0
+     ],
+     "size": [
+      2.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "brazier": {
+     "base": [
+      -5.0,
+      21.55,
+      0.154
+     ],
+     "size": [
+      0.594,
+      0.594,
+      0.856
+     ]
+    },
+    "no-1-drum-petrol": {
+     "base": [
+      -4.5,
+      21.05,
+      0.147
+     ],
+     "size": [
+      0.607,
+      0.607,
+      0.88
+     ]
+    },
+    "no-1-drum-diesel": {
+     "base": [
+      -3.75,
+      21.35,
+      0.136
+     ],
+     "size": [
+      0.607,
+      0.607,
+      0.88
+     ]
+    }
+   },
+   "figures": [
+    {
+     "name": "man-1",
+     "feet": [
+      -2.903,
+      21.863,
+      -0.024
+     ],
+     "turn_degrees": 0,
+     "height_metres": 1.786,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-2",
+     "feet": [
+      -5.491,
+      21.059,
+      0.155
+     ],
+     "turn_degrees": -45,
+     "height_metres": 1.509,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-3",
+     "feet": [
+      -3.02,
+      20.6,
+      0.13
+     ],
+     "turn_degrees": 8,
+     "height_metres": 1.725,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-4",
+     "feet": [
+      -2.96,
+      19.5,
+      -0.01
+     ],
+     "turn_degrees": -6,
+     "height_metres": 1.757,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-5",
+     "feet": [
+      -2.9,
+      18.4,
+      -0.025
+     ],
+     "turn_degrees": 12,
+     "height_metres": 1.725,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-6",
+     "feet": [
+      -2.84,
+      17.3,
+      -0.025
+     ],
+     "turn_degrees": 3,
+     "height_metres": 1.757,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-7",
+     "feet": [
+      -2.78,
+      16.2,
+      -0.02
+     ],
+     "turn_degrees": -12,
+     "height_metres": 1.757,
+     "group": "men at No. 1"
+    }
+   ],
+   "camera": {
+    "at": [
+     -3.7,
+     10.2,
+     1.835
+    ],
+    "turn_degrees": 0.0,
+    "plate_at": [
+     -3.7,
+     9.0,
+     1.835
+    ]
+   }
+  },
+  {
+   "name": "w1 round 3 (single file)",
+   "view": "w1",
+   "subject": "no-1 gate",
+   "story": [
+    "no-1-drum-diesel",
+    "group:men at No. 1"
+   ],
+   "must_read": [
+    "no-1-drum-petrol",
+    "no-1-drum-diesel"
+   ],
+   "things": {
+    "no-1 gate": {
+     "base": [
+      -3.5,
+      22.3,
+      0.0
+     ],
+     "size": [
+      2.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "no-1-drum-petrol": {
+     "base": [
+      -5.58,
+      21.5,
+      0.155
+     ],
+     "size": [
+      0.607,
+      0.607,
+      0.88
+     ]
+    },
+    "no-1-drum-diesel": {
+     "base": [
+      -5.6,
+      20.88,
+      0.155
+     ],
+     "size": [
+      0.607,
+      0.607,
+      0.88
+     ]
+    }
+   },
+   "figures": [
+    {
+     "name": "man-1",
+     "feet": [
+      -3.703,
+      21.863,
+      0.135
+     ],
+     "turn_degrees": 0,
+     "height_metres": 1.786,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-2",
+     "feet": [
+      -4.562,
+      21.202,
+      0.148
+     ],
+     "turn_degrees": 45,
+     "height_metres": 1.544,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-3",
+     "feet": [
+      -4.07,
+      20.25,
+      0.141
+     ],
+     "turn_degrees": 6,
+     "height_metres": 1.725,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-4",
+     "feet": [
+      -3.74,
+      19.47,
+      0.136
+     ],
+     "turn_degrees": -8,
+     "height_metres": 1.757,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-5",
+     "feet": [
+      -3.43,
+      18.69,
+      0.132
+     ],
+     "turn_degrees": 14,
+     "height_metres": 1.725,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-6",
+     "feet": [
+      -3.48,
+      17.91,
+      0.132
+     ],
+     "turn_degrees": 4,
+     "height_metres": 1.757,
+     "group": "men at No. 1"
+    },
+    {
+     "name": "man-7",
+     "feet": [
+      -3.19,
+      17.13,
+      0.128
+     ],
+     "turn_degrees": -14,
+     "height_metres": 1.757,
+     "group": "men at No. 1"
+    }
+   ],
+   "camera": {
+    "at": [
+     -4.1,
+     10.2,
+     1.841
+    ],
+    "turn_degrees": 0.0,
+    "plate_at": [
+     -4.1,
+     9.0,
+     1.841
+    ]
+   }
+  },
+  {
+   "name": "w3",
+   "view": "w3",
+   "subject": "two gates and the wall between",
+   "story": [
+    "brazier",
+    "no-2-crates",
+    "group:men at No. 1"
+   ],
+   "fill": [
+    "handcart"
+   ],
+   "must_read": [
+    "no-1 board",
+    "no-2 board",
+    "bank sign"
+   ],
+   "things": {
+    "two gates and the wall between": {
+     "base": [
+      0.0,
+      22.3,
+      0.0
+     ],
+     "size": [
+      9.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "brazier": {
+     "base": [
+      -2.35,
+      21.82,
+      0.019
+     ],
+     "size": [
+      0.594,
+      0.594,
+      0.856
+     ]
+    },
+    "handcart": {
+     "base": [
+      3.85,
+      8.6,
+      0.138
+     ],
+     "size": [
+      1.869,
+      2.546,
+      1.103
+     ]
+    },
+    "no-2-crates": {
+     "centre": [
+      3.4,
+      24.25,
+      0.55
+     ],
+     "size": [
+      1.0,
+      0.8,
+      1.1
+     ]
+    }
+   }
+  },
+  {
+   "name": "w3 planned",
+   "view": "w3",
+   "subject": "two gates and the wall between",
+   "story": [
+    "brazier",
+    "group:men at No. 1"
+   ],
+   "fill": [
+    "handcart"
+   ],
+   "must_read": [],
+   "things": {
+    "two gates and the wall between": {
+     "base": [
+      0.0,
+      22.3,
+      0.0
+     ],
+     "size": [
+      9.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "brazier": {
+     "base": [
+      -2.35,
+      21.82,
+      0.019
+     ],
+     "size": [
+      0.594,
+      0.594,
+      0.856
+     ]
+    },
+    "handcart": {
+     "base": [
+      3.85,
+      8.6,
+      0.138
+     ],
+     "size": [
+      1.869,
+      2.546,
+      1.103
+     ]
+    }
+   },
+   "camera": {
+    "plan": true,
+    "spot": [
+     0.0,
+     -7.95
+    ],
+    "meeting_point_across": "straight"
+   }
+  },
+  {
+   "name": "w1 with a planned crowd",
+   "view": "w1",
+   "subject": "no-1 gate",
+   "story": [
+    "brazier",
+    "lantern",
+    "no-1-drum-diesel",
+    "group:men at No. 1"
+   ],
+   "must_read": [
+    "no-1 board",
+    "no-1-drum-petrol",
+    "no-1-drum-diesel"
+   ],
+   "box_excludes": [
+    "no-1 board"
+   ],
+   "things": {
+    "no-1 gate": {
+     "base": [
+      -3.5,
+      22.3,
+      0.0
+     ],
+     "size": [
+      2.95,
+      0.12,
+      2.929
+     ],
+     "dark": true
+    },
+    "brazier": {
+     "base": [
+      -2.35,
+      21.82,
+      0.019
+     ],
+     "size": [
+      0.594,
+      0.594,
+      0.856
+     ]
+    },
+    "lantern": {
+     "base": [
+      -4.31,
+      19.8,
+      1.01
+     ],
+     "size": [
+      0.15,
+      0.13,
+      0.29
+     ]
+    }
+   },
+   "crowd_layout": {
+    "group": "men at No. 1",
+    "count": 7,
+    "front_middle": [
+     -3.9,
+     21.6
+    ]
+   },
+   "turn_toward": {
+    "no-1-drum-petrol": {
+     "target": "camera",
+     "front_axis_degrees": 180
+    },
+    "no-1-drum-diesel": {
+     "target": "camera",
+     "front_axis_degrees": 180
+    }
+   }
+  }
+ ],
+ "recorded": {
+  "about": "Blender's own boxes of the men, from works-shot.json men_seen as committed in austerity-explainer 7b3fe7d (round 3) and 34756a4 (round 4) (film_frame_box [left, top, right, bottom] from the W1 composed camera); used only by the tests, to judge where the planner says the feet land",
+  "round3 w1 composed": {
+   "man-7": [
+    0.616,
+    0.494,
+    0.793,
+    0.721
+   ],
+   "man-6": [
+    0.55,
+    0.494,
+    0.702,
+    0.697
+   ],
+   "man-5": [
+    0.554,
+    0.498,
+    0.692,
+    0.679
+   ],
+   "man-4": [
+    0.5,
+    0.495,
+    0.623,
+    0.663
+   ],
+   "man-3": [
+    0.448,
+    0.498,
+    0.561,
+    0.649
+   ],
+   "man-2": [
+    0.354,
+    0.511,
+    0.499,
+    0.638
+   ],
+   "man-1": [
+    0.505,
+    0.494,
+    0.602,
+    0.628
+   ]
+  },
+  "round4 w1 composed": {
+   "man-7": [
+    0.636,
+    0.513,
+    0.843,
+    0.779
+   ],
+   "man-6": [
+    0.603,
+    0.512,
+    0.774,
+    0.734
+   ],
+   "man-5": [
+    0.579,
+    0.514,
+    0.724,
+    0.702
+   ],
+   "man-4": [
+    0.56,
+    0.508,
+    0.687,
+    0.676
+   ],
+   "man-3": [
+    0.546,
+    0.498,
+    0.657,
+    0.645
+   ],
+   "man-2": [
+    0.184,
+    0.513,
+    0.335,
+    0.639
+   ],
+   "man-1": [
+    0.556,
+    0.505,
+    0.656,
+    0.64
+   ]
+  }
+ }
+}

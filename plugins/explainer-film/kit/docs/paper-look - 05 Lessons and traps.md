@@ -84,6 +84,30 @@ new series doesn't walk into the same holes.
 - Measure, don't assume, that sound and picture line up; filters can add delay.
 - A word spoken twice on a page must be asked for by which time it is spoken.
 
+- Fading a cut-out with `.set({ opacity })` snaps instead of fading: the piece stays solid, then
+  vanishes at half opacity (a piece first drawn solid keeps a recipe that ignores see-through, and
+  cut-outs are only drawn where at least half solid). Use `setFading(piece, pose)` from
+  `paper-film/scenes/cinema-kit.js` (in this plugin kit; the same function as in
+  `paper-film/scenes/house-sample/page-1.js`, log 27, lesson 87 of the austerity project's notes) on every
+  frame the piece shows.
+
+- Built places, painted over (`paper-film/scenes/projected-set.js`, the pit village test, log 29):
+  - The plate's frame is only a little wider than the film's. Never turn the camera during a move:
+    slide it in a straight line toward the subject, from one spoken word to another, starting and stopping
+    gently (chapter 2's newcomer pages plan 0.4 to 1.5 m in 2.6 to 4.1 s; the notice corner's test clip slid
+    1.5 m over 8.5 s), and stop on the composed frame (rule 11 of `07 Composing a shot`, logs 31 to 34; this replaces log
+    29's "turn a degree or two and push in with the lens"). Check the `weights` view at the end of every
+    move (blue at an edge = no painting there).
+  - Moving past near props uncovers what they hid, and the painter's outlines round them lie on the
+    road: give the projection a `behind` painting (the same painting with the near props painted out
+    by Flux) and soft contact shadows under those props.
+  - Signs keep their own sharp surfaces (`ownSurface`); the painter garbles small print.
+  - Leave flames out of the plate (painted, they read as paper cut-outs); draw them live.
+  - Put the painted sky on a far card with `skyCard(kit, projection, painting, projector)` from
+    `projected-set.js` (this plugin kit; the film kit's scenes write it out by hand).
+  - A full-frame helper pass must not test depth (`runPass` turns it off): a working picture that held
+    the set's depths silently hid most of a pass.
+
 - Composing a shot (log 30; full rules in `07 Composing a shot.md`):
   - A shot looks arranged when its strong things agree: where the street's lines meet, the
     brightest parts, the biggest near props and the warm light all fall on the subject. Even weight left

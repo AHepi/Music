@@ -5,6 +5,7 @@
 // files are not changed.
 //
 // Use (from the kit folder): node paper-film/tools/profile_frame.mjs PAGE TIME [MODEL_NAME_PART ...]
+//   PROFILE_SCENE=notice-corner node paper-film/tools/profile_frame.mjs - 9   (a whole scene, e.g. a projected set)
 //   e.g. node paper-film/tools/profile_frame.mjs 3 60 scene scene   (each name removes the next top-level
 //   object whose name contains it; loaded models are called 'Scene', in the order the page added them)
 // PROFILE_TESTS=lambert,no-normal-maps,... chooses the tests (default: sprites, points, point lights,
@@ -15,6 +16,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
+import { findBrowser } from './find-browser.mjs';
 
 const KIT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary',
@@ -29,12 +31,18 @@ const server = http.createServer((request, response) => {
   fs.createReadStream(file).pipe(response);
 });
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-const shell = fs.readdirSync('/opt/pw-browsers').filter((n) => n.startsWith('chromium_headless_shell')).sort().reverse()[0];
-const browser = await chromium.launch({ executablePath: `/opt/pw-browsers/${shell}/chrome-linux/headless_shell`, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+// the same browser render-paper-film.mjs uses (find-browser.mjs; plugin kit: the film kit's copy looks only in /opt/pw-browsers)
+const browser = await chromium.launch({ executablePath: findBrowser(), args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
 tab.on('pageerror', (e) => console.log('[page error]', e.message));
-await tab.goto(`http://127.0.0.1:${server.address().port}/paper-film/stage/cinema-stage.html?scene=cinema-test-pages&pages=${page}`);
+// PROFILE_SCENE=notice-corner opens a whole scene instead of one chapter page (PAGE is then ignored)
+const where = process.env.PROFILE_SCENE ? `scene=${process.env.PROFILE_SCENE}` : `scene=cinema-test-pages&pages=${page}`;
+await tab.goto(`http://127.0.0.1:${server.address().port}/paper-film/stage/cinema-stage.html?${where}`);
 await tab.waitForFunction('window.stageReady === true || window.stageFailed', null, { timeout: 300000 });
+// a lazy chapter builds a page only when a moment that shows it is prepared (cinema-chapter.js); prepare the frames
+// to be timed first, so loading isn't timed (plugin kit: the film kit's copy stops on a lazy chapter, "page 1 is not
+// built yet")
+await tab.evaluate(async (t) => { for (let k = 0; k < 6; k++) await window.prepareFrame?.(t + k * 0.033); }, Number(time));
 
 const measure = (label) => tab.evaluate(async ({ t, label }) => {
   const { renderer } = await import('/paper-film/stage/cinema-stage.js');

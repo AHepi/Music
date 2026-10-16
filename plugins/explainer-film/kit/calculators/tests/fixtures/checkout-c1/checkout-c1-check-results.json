@@ -1,0 +1,30 @@
+{
+ "about": "Shot check results of checkout C1 (scratchpad redesign/round5-checkout/check1 and check10 report.md, 2026-10-16), copied for the hold-out tests: check1 shows the street \"landed high\" rule misfiring indoors; check10 the rendered rule 7 reach.",
+ "check1": {
+  "source": "scratchpad redesign/round5-checkout/check1/report.md",
+  "landed_high": [
+   "bill stand has landed on something high: its bottom is 0.90 m above the street under it (at Blender x -0.16, y 2.58): a roof edge, a wall top or a sill.",
+   "card terminal has landed on something high: its bottom is 0.90 m above the street under it (at Blender x 0.33, y 3.05): a roof edge, a wall top or a sill.",
+   "basket has landed on something high: its bottom is 0.89 m above the street under it (at Blender x 0.04, y 2.00): a roof edge, a wall top or a sill.",
+   "divider has landed on something high: its bottom is 0.89 m above the street under it (at Blender x 0.00, y 1.81): a roof edge, a wall top or a sill."
+  ]
+ },
+ "check10": {
+  "source": "scratchpad redesign/round5-checkout/check10/report.md",
+  "problems": [
+   {
+    "rule": "rule 6: lit from below",
+    "text": "The bottom of bill is -0.29 warmer than its top, on a scale where 0 is the same colour and 1 is pure red against pure blue; it needs 0.10 (the reference measures about 0.17)."
+   },
+   {
+    "rule": "rule 5: no burnt-out colour",
+    "text": "Colour at its limit (pure white, or one colour at full strength), where all detail is lost: bill (23% of it)."
+   },
+   {
+    "rule": "rule 8: nothing big and dark where the eye enters",
+    "text": "The biggest dark shape where the eye enters (the bottom-left quarter) covers 1.5% of the frame (limit 1%): brightness 0.16 against 0.34 for the lit ground around it. It is not a prop: probably a shadow cast across the ground. (from 0.00 to 0.29 across, 0.68 to 0.88 down)"
+   }
+  ],
+  "rule7_line": "- rule 7: the story reaches the frame's lower part: The lowest story thing that shows is divider, reaching 0.78 down the frame (the check file asks for at least 0.70)."
+ }
+}

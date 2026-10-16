@@ -1,34 +1,109 @@
 #!/bin/bash
 # What this does: sets up the explainer-film kit in a working folder: copies the kit (engine, tools,
-# templates, examples, docs) there, installs the drawing engine's packages with npm, and checks that
-# Python's packages, ffmpeg and a Chromium browser are available. Safe to run again: it never
-# overwrites a file that already exists in the folder, so your own pages and pictures are kept.
+# templates, examples, docs) there, installs the drawing engine's packages with npm, and checks what the
+# tools need: Python's packages, ffmpeg, a Chromium browser, the Blender program and a virtual screen (for
+# places built in 3D), and a soundtrack. It writes what it found about this machine into the kit's
+# machine-settings.env (BLENDER, BLENDER_DISPLAY), which check-shot.sh and the checker's tests read, and
+# checks that every kit file the plugin's skills name is in the kit.
+# Safe to run again: it never overwrites a kit file that already exists in the folder, so your own pages
+# and pictures are kept; files that differ from the plugin's copy are listed in kit-differences.txt.
+# machine-settings.env is rewritten each time (run it again after installing something).
 #
 # Use: explainer-film-setup /path/to/work/film-kit
+#   BLENDER=/path/to/blender explainer-film-setup ...   to name the Blender program if it isn't found
 set -u
 TARGET="${1:?Use: explainer-film-setup /path/to/work/film-kit}"
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p "$TARGET"
-# copy the kit without overwriting anything already there
-(cd "$HERE/kit" && find . -type f | while read -r f; do
-  if [ ! -e "$TARGET/$f" ]; then mkdir -p "$TARGET/$(dirname "$f")"; cp "$f" "$TARGET/$f"; fi
+TARGET="$(cd "$TARGET" && pwd)"
+# copy the kit without overwriting anything already there; list the files that differ from the plugin's
+: > "$TARGET/kit-differences.txt"
+(cd "$HERE/kit" && find . -type f ! -name '*.pyc' ! -path '*/__pycache__/*' | while read -r f; do
+  if [ ! -e "$TARGET/$f" ]; then mkdir -p "$TARGET/$(dirname "$f")"; cp "$f" "$TARGET/$f"
+  elif ! cmp -s "$f" "$TARGET/$f"; then echo "${f#./}" >> "$TARGET/kit-differences.txt"; fi
 done)
-mkdir -p "$TARGET/assets/reliefs" "$TARGET/assets/paintings" "$TARGET/paper-film/pieces" "$TARGET/paper-film/out"
+mkdir -p "$TARGET/assets/reliefs" "$TARGET/assets/paintings" "$TARGET/assets/models" "$TARGET/assets/soundtrack" "$TARGET/paper-film/pieces" "$TARGET/paper-film/out"
 echo "kit copied to $TARGET"
+differ=$(wc -l < "$TARGET/kit-differences.txt")
+[ "$differ" -gt 0 ] && echo "  $differ kit files there differ from the plugin's copy and were kept: see $TARGET/kit-differences.txt"
 if [ ! -d "$TARGET/paper-film/node_modules/three" ]; then
   (cd "$TARGET/paper-film" && npm install --no-audit --no-fund) || echo "npm install failed: install Node.js 18+ and run 'npm install' in $TARGET/paper-film"
 fi
+
 echo "--- checks ---"
 command -v ffmpeg >/dev/null && echo "ffmpeg: ok" || echo "ffmpeg: MISSING (install ffmpeg with libx264)"
 python3 -c "import numpy, PIL, cv2" 2>/dev/null && echo "python packages: ok" || echo "python packages: MISSING (pip install numpy pillow opencv-python-headless)"
-if [ -n "${PAPER_FILM_BROWSER:-}" ] || ls /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell >/dev/null 2>&1 || ls ~/.cache/ms-playwright/chromium* >/dev/null 2>&1 || command -v chromium >/dev/null; then
-  echo "browser: found"
-else
-  echo "browser: MISSING (cd $TARGET/paper-film && npx playwright-core install chromium, or set PAPER_FILM_BROWSER)"
+browser=$(cd "$TARGET" && node -e "import('./paper-film/tools/find-browser.mjs').then((m) => console.log(m.findBrowser())).catch(() => {})" 2>/dev/null)
+if [ -n "$browser" ]; then echo "browser: ok ($browser)"
+else echo "browser: MISSING (cd $TARGET/paper-film && npx playwright-core install chromium, or set PAPER_FILM_BROWSER)"; fi
+
+# Blender: the full program (plates with EEVEE, the shot checker); BLENDER wins, then the PATH, then usual places
+blender="${BLENDER:-}"
+if [ -z "$blender" ]; then blender=$(command -v blender || true); fi
+if [ -z "$blender" ]; then
+  for candidate in "$HOME"/blender*/blender "$HOME"/*/blender-*-linux-x64/blender "$HOME"/*/*/blender-*-linux-x64/blender \
+                   /opt/blender*/blender /usr/local/blender*/blender /Applications/Blender.app/Contents/MacOS/Blender; do
+    [ -x "$candidate" ] && { blender="$candidate"; break; }
+  done
 fi
+if [ -n "$blender" ] && [ -x "$blender" ]; then
+  version=$("$blender" --version 2>/dev/null | head -1)
+  echo "blender (for places built in 3D and the shot checker): ok (${version:-unknown version}, $blender)"
+else
+  blender=""
+  echo "blender (optional, for places built in 3D and the shot checker): not found. Download Blender 5.2 or newer"
+  echo "  from https://www.blender.org/download/, then run again with BLENDER=/path/to/blender"
+fi
+# a virtual screen: EEVEE needs one on a machine without a graphics card
+display="${BLENDER_DISPLAY:-:96}"
+if [ -e "/tmp/.X11-unix/X${display#:}" ]; then echo "virtual screen: $display is running"
+elif command -v Xvfb >/dev/null; then echo "virtual screen: Xvfb found but $display is not running; start it with: Xvfb $display -screen 0 1920x1080x24 &"
+else echo "virtual screen (for EEVEE plates without a graphics card): Xvfb MISSING (install xvfb)"; fi
 if [ -n "${BLENDER_PYTHON:-}" ] && "$BLENDER_PYTHON" -c "import bpy, PIL" 2>/dev/null; then
-  echo "blender (for detailed models): ok ($BLENDER_PYTHON)"
-else
-  echo "blender (optional, for detailed models): python3 -m venv ~/blender-env && ~/blender-env/bin/pip install bpy pillow, then BLENDER_PYTHON=~/blender-env/bin/python (needs Python 3.13 for bpy 5.x)"
+  echo "blender python module (for the model scripts in paper-film/blender/build_*.py): ok ($BLENDER_PYTHON)"
 fi
-echo "next: read the make-explainer-film skill; docs are in $TARGET/docs"
+# a soundtrack
+soundtrack=$(find "$TARGET/assets/soundtrack" -maxdepth 1 -type f \( -iname '*.mp3' -o -iname '*.wav' -o -iname '*.flac' -o -iname '*.m4a' \) 2>/dev/null | head -1)
+if [ -n "$soundtrack" ]; then echo "soundtrack: $soundtrack"
+else echo "soundtrack: none yet (copy music you may use into $TARGET/assets/soundtrack/ before mixing)"; fi
+
+# this machine's settings, for the kit's shell tools
+{
+  echo "# What this is: this machine's settings for the film kit, written by explainer-film-setup on $(date +%Y-%m-%d)."
+  echo "# check-shot.sh and paper-film/blender/tests/run-checker-tests.sh read the KEY=value lines; a setting given"
+  echo "# in the environment wins. Run explainer-film-setup again to refresh it (it rewrites this file)."
+  [ -n "$blender" ] && echo "BLENDER=$blender" || echo "# BLENDER not found"
+  echo "BLENDER_DISPLAY=$display"
+  [ -n "$browser" ] && echo "# browser found: $browser (the drawing tools find it themselves)"
+  [ -n "$soundtrack" ] && echo "# soundtrack found: $soundtrack"
+} > "$TARGET/machine-settings.env"
+echo "machine settings: $TARGET/machine-settings.env"
+
+# every kit file the skills name must be in the kit (a skill pointing at a missing file was lesson 1)
+python3 -I - "$HERE/skills" "$TARGET" <<'EOF'
+import os, re, sys
+skills, kit = sys.argv[1], sys.argv[2]
+named, missing = set(), []
+for folder, _, files in os.walk(skills):
+    for name in files:
+        if name.endswith('.md'):
+            for text in re.findall(r'`([^`\n]+)`', open(os.path.join(folder, name), encoding='utf-8').read()):
+                whole = re.sub(r'^(\$\{CLAUDE_PLUGIN_ROOT\}/)?(film-)?kit/', '', text.strip())
+                # a whole name with spaces in it ("docs/paper-look - 07 Composing a shot.md"), else each word of a command
+                words = [whole] if ' ' in whole and os.path.exists(os.path.join(kit, whole)) else text.split()
+                for word in words:
+                    word = word.strip('"\'(),;:')
+                    word = re.sub(r'^(\$\{CLAUDE_PLUGIN_ROOT\}/)?(film-)?kit/', '', word)
+                    if not re.match(r'(paper-film|narration-tools|examples|docs)/', word):
+                        continue
+                    if re.search(r'[<>*{}$]|\bN\b|NAME|CHAPTER|\.\.\.', word) or word.endswith('/') or word.startswith('paper-film/out/'):
+                        continue   # a pattern, a folder or something a tool writes, not a kit file
+                    named.add(word)
+for path in sorted(named):
+    if not os.path.exists(os.path.join(kit, path)):
+        missing.append(path)
+print(f'files the skills name: {len(named)} checked, {len(missing)} missing from the kit' + ('' if not missing else ':'))
+for path in missing:
+    print(f'  {path}')
+EOF
+echo "next: read the make-explainer-film skill; docs are in $TARGET/docs (start with 'paper-look - 00 START HERE.md')"

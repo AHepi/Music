@@ -1,0 +1,14 @@
+# What this is: the "behind" painting prompt that paint_request.py fills: the main painting, once lined up, sent back
+# with the near things (or the people who leave at a cut) painted out, so the film has what lies behind them. Lines
+# that start with # are notes. One part per line, in order; an empty part is dropped; lines are joined with spaces.
+# The fixed words are what the notice corner (log 32) and the people test (log 34) sent. Asked to remove people, the
+# painter left their long shadows (lesson 135): plates should not have them, and this prompt still asks.
+Remove {what} from the picture completely: {items}.
+{shadows}
+Where each {one} was, continue exactly what lies behind {it}: {behind}, in the same painted style, with the same ink outlines, colours and light{warm}.
+Keep everything else in the picture exactly as it is, in the same place and size: {keep}.
+Add nothing new: no people, no new objects, no flames, smoke, glows or shadows.
+[sentences]
+what_things = these objects
+what_people = all the people
+shadows_people = Remove their shadows with them.

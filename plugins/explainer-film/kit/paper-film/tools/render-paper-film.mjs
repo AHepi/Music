@@ -16,8 +16,11 @@
 //                                                                  drawing, for tools/camera_audit.py
 // Times are seconds on the chapter timeline; frame 0 is the scene's start.
 //
-// The hidden browser is Chromium. It is found in this order: the PAPER_FILM_BROWSER setting (a path
+// The hidden browser is Chromium, found by find-browser.mjs: the PAPER_FILM_BROWSER setting (a path
 // to the browser program), Playwright's own downloaded Chromium, then the usual install places.
+// --stills takes times separated by spaces or commas (57.5 66 or 57.5,66); anything that is not a
+// number stops the run before the browser opens (plugin kit; the film kit's copy reads "57.5,66" as one
+// time that is not a number, NaN, and still goes on to draw it).
 // Filming speed on a 2-processor machine with software graphics: about 0.6 to 0.9 seconds a frame
 // for the paper stage. A cinema chapter (a scene that calls buildCinemaChapter) opens the cinema
 // stage instead (cinema-stage.html); PAPER_FILM_STAGE can force one or the other. PAPER_FILM_QUERY adds
@@ -30,36 +33,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { chromium } from 'playwright-core';
+import { findBrowser } from './find-browser.mjs';
 
 const KIT_FOLDER = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const FRAMES_PER_SECOND = 30;
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json',
   '.glb': 'model/gltf-binary', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2' };
-
-function findBrowser() {
-  const candidates = [process.env.PAPER_FILM_BROWSER];
-  // Playwright's separate "headless shell" build first: newer full Chromium builds no longer run
-  // in the old headless mode Playwright uses here
-  for (const root of ['/opt/pw-browsers', path.join(process.env.HOME ?? '', '.cache/ms-playwright')]) {
-    if (!fs.existsSync(root)) continue;
-    for (const folder of fs.readdirSync(root).filter((name) => name.startsWith('chromium_headless_shell')).sort().reverse()) {
-      candidates.push(path.join(root, folder, 'chrome-linux/headless_shell'), path.join(root, folder, 'chrome-headless-shell-linux64/chrome-headless-shell'));
-    }
-  }
-  try { candidates.push(chromium.executablePath()); } catch { /* Playwright has no browser of its own here */ }
-  const roots = ['/opt/pw-browsers', path.join(process.env.HOME ?? '', '.cache/ms-playwright')];
-  for (const root of roots) {
-    if (!fs.existsSync(root)) continue;
-    for (const folder of fs.readdirSync(root).filter((name) => name.startsWith('chromium')).sort().reverse()) {
-      candidates.push(path.join(root, folder, 'chrome-linux64/chrome'), path.join(root, folder, 'chrome-linux/chrome'));
-    }
-  }
-  candidates.push('/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome',
-    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', 'C:/Program Files/Google/Chrome/Application/chrome.exe');
-  const found = candidates.find((candidate) => candidate && fs.existsSync(candidate));
-  if (!found) throw new Error('No Chromium found. Set PAPER_FILM_BROWSER to the path of a Chromium or Chrome program.');
-  return found;
-}
 
 function serveKit() {
   const server = http.createServer((request, response) => {
@@ -95,6 +74,13 @@ const frameBytes = (dataUrl) => Buffer.from(dataUrl.slice(dataUrl.indexOf(',') +
 async function main() {
   const [sceneName, output, ...rest] = process.argv.slice(2);
   if (!sceneName) { console.log('Use: node render-paper-film.mjs SCENE OUTPUT.mp4 | SCENE FOLDER --stills t1 t2 | SCENE --info'); process.exit(1); }
+  // still times: spaces or commas between them; refuse anything that isn't a number before opening the browser
+  const stillTimes = rest[0] === '--stills' ? rest.slice(1).flatMap((text) => text.split(',')).filter((text) => text.trim() !== '').map((text) => ({ text, time: Number(text) })) : [];
+  const badTimes = stillTimes.filter(({ time }) => !Number.isFinite(time)).map(({ text }) => `"${text}"`);
+  if (rest[0] === '--stills' && (badTimes.length || !stillTimes.length)) {
+    console.error(badTimes.length ? `--stills: not a time in seconds: ${badTimes.join(', ')}` : '--stills: give at least one time in seconds');
+    process.exit(2);
+  }
   const { server, browser, page, info } = await openStage(sceneName);
   try {
     const frameCount = Math.round((info.end - info.start) * FRAMES_PER_SECOND);
@@ -106,7 +92,10 @@ async function main() {
     if (output === '--camera') {
       const file = rest[0] ?? `${sceneName}-camera.json`, step = Number(rest[1] ?? 3);
       const samples = [];
-      for (let frame = 0; frame < frameCount; frame += step) samples.push(await page.evaluate((t) => window.built.cameraAt?.(t), info.start + frame / FRAMES_PER_SECOND));
+      for (let frame = 0; frame < frameCount; frame += step) {
+        await page.evaluate((t) => window.prepareFrame?.(t), info.start + frame / FRAMES_PER_SECOND);
+        samples.push(await page.evaluate((t) => window.built.cameraAt?.(t), info.start + frame / FRAMES_PER_SECOND));
+      }
       const plans = await page.evaluate(() => window.built.cameraPlans?.() ?? []);
       fs.writeFileSync(file, JSON.stringify({ scene: sceneName, fps: FRAMES_PER_SECOND, step, page_edges: info.pageEdges ?? [], samples, plans }));
       console.log(`wrote ${file}: ${samples.length} camera samples`);
@@ -114,8 +103,9 @@ async function main() {
     }
     if (rest[0] === '--stills') {
       fs.mkdirSync(output, { recursive: true });
-      for (const time of rest.slice(1).map(Number)) {
+      for (const { time } of stillTimes) {
         const started = Date.now();
+        await page.evaluate((t) => window.prepareFrame?.(t), time);
         const dataUrl = await page.evaluate((t) => window.renderFrame(t), time);
         const file = path.join(output, `still-${time.toFixed(2)}.jpg`);
         fs.writeFileSync(file, frameBytes(dataUrl));
@@ -131,9 +121,13 @@ async function main() {
       { stdio: ['pipe', 'inherit', 'inherit'] });
     const started = Date.now();
     // a chunk starts a few frames early, without keeping them, so dust and smoke are already in place
-    for (let frame = Math.max(0, firstFrame - 3); frame < firstFrame; frame++) await page.evaluate((t) => window.renderFrame(t), info.start + frame / FRAMES_PER_SECOND);
+    for (let frame = Math.max(0, firstFrame - 3); frame < firstFrame; frame++) {
+      await page.evaluate((t) => window.prepareFrame?.(t), info.start + frame / FRAMES_PER_SECOND);
+      await page.evaluate((t) => window.renderFrame(t), info.start + frame / FRAMES_PER_SECOND);
+    }
     for (let frame = firstFrame; frame < lastFrame; frame++) {
       const time = info.start + frame / FRAMES_PER_SECOND;
+      await page.evaluate((t) => window.prepareFrame?.(t), time);   // a lazy chapter builds a page the first time it shows
       const dataUrl = await page.evaluate((t) => window.renderFrame(t), time);
       if (!encoder.stdin.write(frameBytes(dataUrl))) await new Promise((resolve) => encoder.stdin.once('drain', resolve));
       const done = frame - firstFrame + 1;

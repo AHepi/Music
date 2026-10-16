@@ -1,6 +1,6 @@
 ---
 name: paint-and-cut
-description: Make the pictures for an explainer chapter with fal - painted backgrounds turned into rooms with depth (via a depth map), and painted figures and objects cut out as paper pieces - with the style words, sizes, costs and checks that keep them consistent. Use after the script is final and before building pages.
+description: Make the pictures for an explainer chapter with fal - painted backgrounds turned into rooms with depth (via a depth map), painted figures and objects cut out as paper pieces, and plates of places built in Blender painted over and lined up - with the style words, sizes, costs and checks that keep them consistent. Use after the script is final and before building pages.
 ---
 
 # Paintings, rooms with depth, and cut-outs
@@ -17,8 +17,10 @@ It reused four rooms from chapter 1.
 ## 1. Plan and confirm the cost
 
 List every room (one per setting) and every cut-out (people, objects) the pages need. Reuse what
-the project already has. Cost: about 10 US cents per 2k picture, 2.5 cents per 1k, about half a
-cent per depth map, a fifth of a cent per mask. Tell the user the total and confirm.
+the project already has. Cost (chapter 2, October 2026): about 10 US cents per 2k picture, 2.5 cents
+per 1k, about half a cent per depth map, a fifth of a cent per mask. Prices change between plan and
+purchase (Flux 3 edit went from 2.4 to 4.8 US cents a megapixel in a day, lesson 139 of the austerity
+project): check fal's estimate before each paid batch. Tell the user the total and confirm.
 
 ## 2. Paint (fal connector)
 
@@ -63,6 +65,37 @@ cent per depth map, a fifth of a cent per mask. Tell the user the total and conf
    split_shapes, jaw for a speaking figure) and run
    `python3 -I paper-film/tools/prepare_paper_pieces.py examples/<chapter>/cut-list.json .`
 3. Check: `python3 -I paper-film/tools/contact_sheet_pieces.py paper-film/pieces/<chapter> pieces-check.jpg`.
+
+## 5. A place built in 3D, painted over (plate repaints)
+
+For the built-and-painted look the painting is not made from words: Blender draws the place (the
+"plate"), an image-edit model paints over it, and the page shines the painting back onto the 3D set. The
+whole way is the `build-and-paint-a-place` skill. Three tools do the steps below with the project's
+pass marks (see `kit/calculators/README.md`, "Painting tools"): `kit/calculators/paint_request.py request`
+(the preflight, both prompts from the plate and a short brief, the price; it never sends),
+`kit/calculators/after_painting.py check` (resize, line-up, figures, style, the behind painting) and
+`kit/calculators/plan_states.py plan` (the helper plates and state pictures of a held shot). The painting
+steps, in order:
+1. Before paying: the plate renders cleanly (no "Shadow buffer full" in its log), passes the shot
+   checker's light rules, has no faint glow inside a hollow (darken it first: the painter lifts it into a
+   band), and its people cast no long shadows.
+2. Flux 3 edit (`fal`), image 1 the plate, image 2 a style painting sent at about 1 million pixels; keep
+   every element where it is, add no people, no flames, smoke, glows or new shadows round the near props;
+   far walkers "flat dark shapes with no pale spots".
+3. Resize to the plate's exact size and line it up: `paper-film/tools/align_painting.py` (the notice
+   corner's painter had stretched it 0.65% and shifted it 3 pixels; lined up, 96% of the props' outlines
+   sat on painted edges, against 70% before).
+4. A "behind" painting (the near props painted out), lined up `--against` the first, with the first
+   painting's shadows kept round the props (`paper-film/tools/keep_painted_shadows.py`); or, free,
+   `paper-film/tools/make_behind_picture.py`.
+5. State pictures (the same view with people gone or a factory slowed) change only what changed:
+   `paper-film/tools/make_state_picture.py`.
+6. Look at the painting against the plate before using it: the people test's men went from about 15% to
+   about 50% of their surroundings' brightness when painted, and turned mid-grey on a phone.
+
+Cost: about 4.8 US cents a megapixel of the returned picture plus every picture sent (October 2026),
+so about 44 cents for a 2k repaint with a style picture. That rate was worked out from fal's price on the
+day, not read from a bill: confirm it in fal's request history before relying on it.
 
 ## Traps
 

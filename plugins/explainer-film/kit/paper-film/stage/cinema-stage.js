@@ -46,12 +46,72 @@ function makeTarget(width, height, { depth = false, samples = 0, type = THREE.Ha
   return target;
 }
 const W = FRAME_WIDTH, H = FRAME_HEIGHT;
-const sceneTarget = makeTarget(W, H, { depth: true, samples: 4 });
+// edge smoothing (multisampling): 4 samples a pixel by default; ?samples=0 turns it off (about how much faster: see
+// tools/profile_frame.mjs); a filming run can set it with PAPER_FILM_QUERY=samples=N
+const SCENE_SAMPLES = Number(new URLSearchParams(location.search).get('samples') ?? 4);
+const sceneTarget = makeTarget(W, H, { depth: true, samples: SCENE_SAMPLES });
 const blurTarget = makeTarget(W / 2, H / 2);
 const focusTarget = makeTarget(W, H);
 const brightTarget = makeTarget(W / 4, H / 4);
 const glowTargets = [makeTarget(W / 4, H / 4), makeTarget(W / 4, H / 4), makeTarget(W / 8, H / 8), makeTarget(W / 8, H / 8)];
 export const pageTargets = [makeTarget(W, H, { type: THREE.UnsignedByteType }), makeTarget(W, H, { type: THREE.UnsignedByteType })];
+
+// ------------------------------------------------------------------- held shots: the set drawn once
+// Drawing a painted set is the slow part of a frame in the software renderer (log 34: 3.1 of 3.6 seconds a frame
+// on the notice corner; plain grey surfaces take 0.2). While a page's camera holds still, its set looks the same
+// every frame, so it is drawn once into a held picture (with its distances), and each frame only the moving
+// things are drawn over a copy of it. A page marks its moving things with kit.moving(...) (they live on
+// MOVING_LAYER; everything else is the set) and asks for this by returning `still: true` (or any value that
+// changes when the set itself changes) from pose(t); the chapter adds the camera's place to the key, so a
+// moving camera always draws everything. Two held pictures are kept, for the two pages of a page turn.
+export const MOVING_LAYER = 1;
+const heldPictures = [0, 1].map(() => ({ key: null, target: makeTarget(W, H, { depth: true, samples: SCENE_SAMPLES }), used: 0 }));
+let heldClock = 0;
+const heldCopyMaterial = new THREE.ShaderMaterial({
+  vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }`,
+  fragmentShader: `varying vec2 vUv; uniform sampler2D colourMap; uniform sampler2D depthMap;
+    void main() { gl_FragColor = texture2D(colourMap, vUv); gl_FragDepth = texture2D(depthMap, vUv).r; }`,
+  uniforms: { colourMap: { value: null }, depthMap: { value: null } },
+  depthTest: true, depthWrite: true, depthFunc: THREE.AlwaysDepth,
+});
+function drawSet(scene, camera, still) {
+  camera.layers.enable(0);
+  camera.layers.enable(MOVING_LAYER);
+  if (still === null || still === undefined) {
+    renderer.setRenderTarget(sceneTarget);
+    renderer.render(scene, camera);
+    return;
+  }
+  heldClock++;
+  let held = heldPictures.find((h) => h.key === still);
+  if (!held) {
+    held = heldPictures.reduce((a, b) => (a.used <= b.used ? a : b));
+    // the lights must reach the moving things too
+    scene.traverse((o) => { if (o.isLight) o.layers.enable(MOVING_LAYER); });
+    camera.layers.set(0);
+    renderer.setRenderTarget(held.target);
+    renderer.render(scene, camera);
+    held.key = still;
+  }
+  held.used = heldClock;
+  // the held set (colour and distances), then the moving things over it
+  heldCopyMaterial.uniforms.colourMap.value = held.target.texture;
+  heldCopyMaterial.uniforms.depthMap.value = held.target.depthTexture;
+  passQuad.material = heldCopyMaterial;
+  renderer.setRenderTarget(sceneTarget);
+  renderer.render(passScene, passCamera);
+  camera.layers.set(MOVING_LAYER);
+  const shadowsUpdate = renderer.shadowMap.autoUpdate;
+  renderer.shadowMap.autoUpdate = false;
+  const background = scene.background;
+  scene.background = null;
+  renderer.autoClear = false;
+  renderer.render(scene, camera);
+  renderer.autoClear = true;
+  scene.background = background;
+  renderer.shadowMap.autoUpdate = shadowsUpdate;
+  camera.layers.enable(0);
+}
 
 // ----------------------------------------------------------------------------- full-frame passes
 const passCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -226,8 +286,7 @@ overlayTexture.minFilter = THREE.LinearFilter;
 export function drawPage(shot, target) {
   const look = { ...DEFAULT_LOOK, ...(shot.look ?? {}) };
   const { scene, camera } = shot;
-  renderer.setRenderTarget(sceneTarget);
-  renderer.render(scene, camera);
+  drawSet(scene, camera, shot.still);
 
   const depthUniforms = (material) => {
     material.uniforms.depthMap.value = sceneTarget.depthTexture;
@@ -295,26 +354,31 @@ export function drawPage(shot, target) {
 // The old page's finished picture, printed on a sheet of paper that peels from its bottom-right
 // corner, rolls over (showing its plain back) and leaves, uncovering the new page. The new page
 // darkens a little where the curl hangs over it.
+// The sheet's own shading (lit as paper) comes in over the first part of the peel (PEEL_SHADING_IN of
+// its length, about 8 frames of a 0.85 s peel), not at once: lit as a flat sheet the whole old page is
+// about 11% darker, and at once that showed as a small dimming jump on each page turn's first frame
+// (log 34, round 3).
 const PEEL_WIDTH = 2, PEEL_HEIGHT = 2 * H / W;   // the frame, in the join's own units
 const CURL_DIRECTION = new THREE.Vector2(0.93, -0.36).normalize();
 const CURL_RADIUS = 0.16;
+const PEEL_SHADING_IN = 0.3;
 const peelGeometry = new THREE.PlaneGeometry(PEEL_WIDTH, PEEL_HEIGHT, 48, 86);
 const peelRest = peelGeometry.attributes.position.array.slice();
 const peelMaterial = new THREE.ShaderMaterial({
-  uniforms: { picture: { value: null }, lightDirection: { value: new THREE.Vector3(-0.45, 0.55, 0.7).normalize() } },
+  uniforms: { picture: { value: null }, lightDirection: { value: new THREE.Vector3(-0.45, 0.55, 0.7).normalize() }, shading: { value: 1 } },
   side: THREE.DoubleSide,
   vertexShader: /* glsl */`
     varying vec2 vUv; varying vec3 vNormal;
     void main() { vUv = uv; vNormal = normal; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
   fragmentShader: /* glsl */`
-    varying vec2 vUv; varying vec3 vNormal; uniform sampler2D picture; uniform vec3 lightDirection;
+    varying vec2 vUv; varying vec3 vNormal; uniform sampler2D picture; uniform vec3 lightDirection; uniform float shading;
     void main() {
       vec3 n = normalize(vNormal);
       float light;
       vec3 colour;
       if (gl_FrontFacing) { light = 0.55 + 0.45 * max(0.0, dot(n, lightDirection)); colour = texture2D(picture, vUv).rgb; }
       else { light = 0.5 + 0.5 * max(0.0, dot(-n, lightDirection)); colour = vec3(0.85, 0.82, 0.76); }
-      gl_FragColor = vec4(colour * mix(1.0, light, 0.85) * (gl_FrontFacing ? 1.0 : 1.0), 1.0);
+      gl_FragColor = vec4(colour * mix(1.0, light, 0.85 * shading) * (gl_FrontFacing ? 1.0 : 1.0), 1.0);
     }`,
 });
 const peelMesh = new THREE.Mesh(peelGeometry, peelMaterial);
@@ -366,8 +430,18 @@ const blendMaterial = pass(/* glsl */`
   }`, { fromPicture: { value: null }, toPicture: { value: null }, mixAmount: { value: 0 }, dip: { value: 0.25 } });
 
 // Joins two finished pictures: kind 'peel' or 'dissolve'; progress 0 (old page) to 1 (new page).
+// 'run-on' (log 34): a plain blend with no darkening in the middle, for a page that runs on into the next in the same
+// frame (chapter 2 for newcomers, page 4 into page 5): the two pictures are the same, so nothing shows.
 export function drawJoin(kind, progress, fromTarget, toTarget) {
   renderer.setRenderTarget(null);
+  if (kind === 'run-on') {
+    blendMaterial.uniforms.fromPicture.value = fromTarget.texture;
+    blendMaterial.uniforms.toPicture.value = toTarget.texture;
+    blendMaterial.uniforms.mixAmount.value = progress;
+    blendMaterial.uniforms.dip.value = 0;
+    runPass(blendMaterial, null);
+    return;
+  }
   if (kind === 'dissolve' || kind === 'dip') {
     blendMaterial.uniforms.fromPicture.value = fromTarget.texture;
     blendMaterial.uniforms.toPicture.value = toTarget.texture;
@@ -381,6 +455,7 @@ export function drawJoin(kind, progress, fromTarget, toTarget) {
   underMaterial.uniforms.fold.value = fold;
   runPass(underMaterial, null);
   peelMaterial.uniforms.picture.value = fromTarget.texture;
+  peelMaterial.uniforms.shading.value = THREE.MathUtils.smoothstep(progress, 0, PEEL_SHADING_IN);
   renderer.autoClear = false;
   renderer.setRenderTarget(null);
   renderer.clearDepth();

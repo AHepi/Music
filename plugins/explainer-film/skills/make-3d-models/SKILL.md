@@ -13,6 +13,12 @@ the same result by scripting Blender's `bpy` module directly, headless. Renderin
 Blender's Cycles on 4 CPU cores takes 35 to 90 s a frame (80 to 200 hours a film), so Blender only
 BUILDS the models; the three.js stage still films them.
 
+**Places built in 3D and painted over** (logs 29 to 34: Blender builds a whole place, draws one picture of
+it, an image model paints that over, and the page shines the painting back onto the set) have their own
+skill: `build-and-paint-a-place`. Its Blender scripts are in `kit/paper-film/blender/pit-village/` (the
+street, the props library, set dressing, three shots), `kit/paper-film/blender/figures/` (people) and
+`kit/paper-film/blender/inflation-chapter-2-newcomers/props/`.
+
 **Example.** `build_factory.py` makes a 1915 munitions works: brick walls with real arched window
 openings (Boolean cuts), stone sills and cornice, a sawtooth roof of corrugated iron with lit glazed
 north lights, a tapered chimney, an office with a slate roof, a water tank on a trestle, a cobbled
@@ -48,7 +54,8 @@ Python API (`search_manual_docs`, `search_api_docs`, `get_python_api_docs`), sce
 (`execute_blender_code`) and quick Cycles thumbnails (`render_thumbnail_to_path`).
 Traps found here: its sandbox refuses `bpy.ops.wm.read_factory_settings` (use
 `bpy.ops.wm.read_homefile(use_empty=True, use_factory_startup=True)`); set the render engine to
-Cycles before any render (EEVEE needs a GPU and crashes Blender without one); thumbnails are written
+Cycles before any render in a Blender with no screen (EEVEE crashed there without a GPU; with a virtual
+screen it works, see "Set up"); thumbnails are written
 into Blender's temp folder (the reply gives the path). One headless Blender per helper (own port).
 
 Modelling guidance learned through the server (its rules, tested bpy settings with manual
@@ -62,8 +69,19 @@ material (232 parts to 19) to draw faster.
 ```
 python3 -m venv /path/blender-env && /path/blender-env/bin/pip install bpy pillow
 ```
-(`bpy` 5.x needs Python 3.13; 5.2.2 worked.) EEVEE does not start without a GPU (no libEGL); Cycles
-on the CPU does, and bakes.
+(`bpy` 5.x needs Python 3.13; 5.2.2 worked.) With only this module EEVEE did not start without a GPU
+(no libEGL); Cycles on the CPU does, and bakes.
+
+EEVEE without a GPU (logs 29 to 34): use the full Blender program (5.2.2) under a virtual screen:
+```
+Xvfb :96 -screen 0 1920x1080x24 &
+DISPLAY=:96 /path/blender-5.2.2-linux-x64/blender -b SCENE.blend --python SCRIPT.py -- ...
+```
+A plate of 1536 x 2730 took about 10 minutes, a 540 x 960 preview about a minute. Give EEVEE enough shadow
+memory: `set_dressing.render()` in `kit/paper-film/blender/pit-village/` sets it, and a render log with
+"Shadow buffer full" (false hard shadows) or "Could not allocate shadow atlas" (no shadows) is a failed
+picture. `explainer-film-setup` looks for Blender and Xvfb and writes them into the kit's
+`machine-settings.env`.
 
 ## Make a model
 
@@ -85,8 +103,13 @@ on the CPU does, and bakes.
    - Baked shading (`finish(path, bake=True)`): 1024 px, 32 samples, reach 0.6 units, about 2
      minutes. (2048 px, 48 samples and Blender's default reach of 10 took 12 minutes and darkened
      everything.) A part left out of the bake gets its own material copies automatically.
-   - Keep each model under about 25,000 triangles; a whole set (town + 2 works) about 70,000 films at
-     a normal speed in the software renderer.
+   - Budget by filming time, not by triangles. On card-model pages (chapter 2, log 20) a model of about
+     25,000 triangles and a whole set (town + 2 works) of about 70,000 filmed at a normal speed in the
+     software renderer. In a painted set whose camera holds, the stage draws the set once and only the
+     moving things each frame (the Works: about 0.9 s a frame held, 4.3 s sliding, round 4, one worker),
+     so the size of the set matters mostly while the camera moves. Measure a page before filming with
+     `node paper-film/tools/profile_frame.mjs PAGE TIME` (it times the frame, then without each kind of
+     thing, so the slow part shows).
 4. Run: `/path/blender-env/bin/python build_X.py /kit/assets/models/<chapter>/X.glb`.
 5. Look at it in the stage before using it:
    `PAPER_FILM_QUERY="model=/assets/models/<chapter>/X.glb&cam=3.6,2.4,7.5&look=0,1,0&fov=42" node paper-film/tools/render-paper-film.mjs model-preview OUT --stills 1`

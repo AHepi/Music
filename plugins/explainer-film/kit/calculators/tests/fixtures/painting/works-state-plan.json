@@ -1,0 +1,137 @@
+{
+ "about": "What this file is: the Works' state changes on pages 3, 4 and 12 of chapter 2 for newcomers, as plan_states.py reads them. Written by the painting-tools helper (log 35) from the plan's shots (chapter-2-inflation/34 Full redesign - working files/design/shots.json: page 3 'go' 67.2 s and 'start' 68.7 s, the slide 57.9-61.0 s; page 4's slide 82.0-84.9 s; page 12 'slows' 297.0 s and 'workers' 298.4 s) and the page files (paper-film/scenes/inflation-chapter-2-newcomers/page-3.js). Which state fields each word changes is a person's reading of those shots. Plate names are the Works plates (film-kit/assets/models/inflation-chapter-2-newcomers/works); give their folder with --plate-folder.",
+ "place_facts": "../works/works-place-facts.json",
+ "plate_folder": "",
+ "plates": {
+  "w1/quiet": "works-w1-plate.jpg",
+  "w1/men gone": "works-w1-men-gone-plate.jpg",
+  "w1/working": "works-w1-working-plate.jpg",
+  "w1/quiet, no men": "works-w1-behind-plate.jpg",
+  "w2/quiet": "works-w2-plate.jpg",
+  "w2/slowed": "works-w2-slowed-plate.jpg",
+  "w3/quiet": "works-w3-plate.jpg"
+ },
+ "field_groups": {
+  "men_1": [
+   "man 1",
+   "man 2",
+   "man 3",
+   "man 4",
+   "man 5",
+   "man 6",
+   "man 7"
+  ],
+  "men_2": [
+   "man 1",
+   "man 2",
+   "man 3",
+   "man 4",
+   "man 5",
+   "man 6",
+   "man 7",
+   "man 8"
+  ]
+ },
+ "pages": [
+  {
+   "page": 3,
+   "view": "w3",
+   "start_state": "quiet",
+   "changes": [],
+   "slides": []
+  },
+  {
+   "page": 3,
+   "view": "w1",
+   "start_state": "quiet",
+   "slides": [
+    {
+     "from": 57.9,
+     "to": 61.0,
+     "word_from": "Workers",
+     "word_to": "Call"
+    }
+   ],
+   "changes": [
+    {
+     "word": "go",
+     "time": 67.2,
+     "to_state": "men gone",
+     "changes": [
+      "men_1",
+      "workers_1",
+      "doorway_1",
+      "doors_open_1",
+      "gate_1",
+      "chained"
+     ]
+    },
+    {
+     "word": "start",
+     "time": 68.7,
+     "to_state": "working",
+     "changes": [
+      "windows_1",
+      "spill_1",
+      "pop_up_1"
+     ],
+     "cue_points": [
+      [
+       -5.3,
+       57.0,
+       26.3
+      ]
+     ],
+     "cue_radius_metres": 0.92,
+     "cue_note": "No. 1's chimney mouth (it starts to smoke on 'start'), place facts emitter no-1-chimney"
+    }
+   ]
+  },
+  {
+   "page": 4,
+   "view": "w2",
+   "start_state": "quiet",
+   "slides": [
+    {
+     "from": 82.0,
+     "to": 84.9,
+     "word_from": "No",
+     "word_to": "factory"
+    }
+   ],
+   "changes": []
+  },
+  {
+   "page": 12,
+   "view": "w2",
+   "start_state": "quiet",
+   "slides": [],
+   "changes": [
+    {
+     "word": "slows",
+     "time": 297.0,
+     "to_state": "slowed",
+     "changes": [
+      "windows_2",
+      "gate_2",
+      "workers_2"
+     ]
+    },
+    {
+     "word": "workers",
+     "time": 298.4,
+     "to_state": "slowed",
+     "changes": [
+      "men_2"
+     ]
+    }
+   ]
+  }
+ ],
+ "people_fields": {
+  "men at No. 1": "men_1",
+  "men at No. 2": "men_2",
+  "workers inside no-1": "workers_1",
+  "workers inside no-2": "workers_2"
+ }
+}

@@ -151,8 +151,15 @@ Run it from the kit's top folder:
 
 For example, for the notice corner:
 
-    paper-film/tools/check-shot.sh paper-film/blender/pit-village/assemble_notice_corner.py \
-        examples/notice-corner/shot-check.json /tmp/check-corner composed.png -- --view end
+    BLEND=assets/models/pit-village/street.blend paper-film/tools/check-shot.sh \
+        paper-film/blender/pit-village/assemble_notice_corner.py \
+        examples/notice-corner/shot-check.json paper-film/out/check-corner composed.png -- --view end
+
+`BLEND` names the scene file the shot script dresses (`BLEND=none` if the script builds its own scene).
+Blender and its virtual screen come from `machine-settings.env`, which `explainer-film-setup` writes (or set
+`BLENDER=/path/to/blender`; start the screen with `Xvfb :96 -screen 0 1920x1080x24 &`). The pit village's
+street and props are not in the plugin (about 170 MB of models): build them with the scripts in
+`paper-film/blender/pit-village/`, or copy them from the austerity project's film kit.
 
 It takes about a minute and writes two files. `report.md` lists the problems worst first, each with a
 fix in metres, then what passed, notes, and what it does not check. `marked.jpg` is the frame with each
@@ -211,8 +218,12 @@ on the pavement; a drum moved behind the board or so its edge just meets the cha
 bottom-left corner; a lamp post along the board's edge or across the notice. Each time the report's first
 fix named the planted fault. Five independent helpers then followed its advice, planted new faults, read
 the code and read the reports as a non-programmer would; their findings are fixed (log 31). It does not
-check rule 7 (columns), most of rule 9, rule 11 (check the film's first, middle and last frames), or
-whether props poke into each other in 3D beyond their outline boxes.
+check rule 7's columns, most of rule 9, rule 11 (check the film's first, middle and last frames), or
+whether props poke into each other in 3D beyond their outline boxes. It checks one part of rule 7 when a
+check file asks for it: `"story_reaches_down": 0.70` means some story prop or the subject must reach at
+least 0.70 down the frame, so the story fills the frame into its lower part (the notice corner's drum,
+chair and pail fill 0.45 to 0.8 down). It is off unless a check file gives it, so older checks are
+unchanged; the Works' gate views (chapter 2) use it.
 
 ## What a picture-making program can and can't do for you
 

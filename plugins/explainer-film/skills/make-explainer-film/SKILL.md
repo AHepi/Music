@@ -19,8 +19,10 @@ at the counter. The whole film is built like that.
 
 1. **Set up the kit** in the project's working folder (once):
    `explainer-film-setup /path/to/work/film-kit` (installs three.js, Playwright and the Inter font
-   with npm, and checks for Python packages, ffmpeg and a Chromium browser). The kit's own docs are
-   in `film-kit/docs/`.
+   with npm, checks for Python packages, ffmpeg, a Chromium browser, the Blender program and a virtual
+   screen for 3D places, and a soundtrack, and writes what it found into the kit's
+   `machine-settings.env`). Read its checks. The kit's own docs are in `film-kit/docs/` (start with
+   `paper-look - 00 START HERE.md`).
 2. **House rules** (read `${CLAUDE_PLUGIN_ROOT}/skills/make-explainer-film/house-rules.md`): confirm
    every paid step's estimated cost before spending; keep a project story, decisions (the user's
    exact words), status, lessons; name delivered files with a two-digit log number and plain words.
@@ -34,6 +36,7 @@ at the counter. The whole film is built like that.
 | 2. Fact check the script, and test it on newcomers | `check-facts` (workflows `verify-facts`, then `test-script-with-newcomers`) | fixes before recording; then read it to one or two real newcomers with the script's listener questions |
 | 3. Record and time the voice | `record-narration` | recordings, word times, `timeline.json`, the mix |
 | 4. Paintings, rooms with depth, cut-outs | `paint-and-cut` | `assets/reliefs/<chapter>/`, `paper-film/pieces/<chapter>/` |
+| 4a. Or: places built in 3D and painted over (the look of chapter 2 for newcomers) | `build-and-paint-a-place` (and `make-3d-models`) | a Blender set per place, checked views, plates, lined-up paintings, `assets/models/<place>/` |
 | 5. Pages | `build-cinema-page` (workflow `build-pages` for many at once) | `paper-film/scenes/<chapter>/page-N.js` and `<chapter>.js` |
 | 6. Check and critique | `check-and-critique` (workflows `critique-film`, `verify-facts` again for on-screen words) | fixes before filming |
 | 7. Film and finish | `film-and-finish` | the master film, a sendable copy under 28 MB, captions, cover, measurements |
@@ -45,6 +48,11 @@ at the counter. The whole film is built like that.
   map or mask; chapter 2 spent about US$1.06.
 - Building ten pages: two pattern pages by hand, then eight in parallel (10-16 minutes each).
 - Filming: about 1.4-2.4 s per frame; 8,110 frames took about 3.5 hours with two stretches at once.
+- Built-and-painted places (chapter 2 for newcomers, October 2026): a plate repaint about 44 US cents
+  (Flux 3 edit, 4.8 cents a megapixel counting the pictures sent; prices changed between plan and
+  purchase, so check fal's estimate first); about 0.9 s a frame while the camera holds and 4.3 s while
+  it slides (one worker). Before recording, `narration-tools/estimate_timeline.py` gives the chapter's
+  length from the script (about 407 s for the 16-page newcomer chapter).
 
 ## The rules that matter most
 
@@ -55,6 +63,7 @@ at the counter. The whole film is built like that.
   or logos when the film must be neutral. No real banknote designs.
 - Every event is timed to a word; pages must draw the same picture for a moment whatever was drawn
   before (they are filmed in separate stretches).
-- Keep important words out of the bottom 380 px and right 140 px of the frame (phone buttons).
+- Leave room for phone buttons (rule 12): anything to read ends left of 0.90 across (972 px of 1080)
+  and sits above 0.80 down; typed words go in the top band, 0.05 to 0.22 down.
 - Check pictures with your own eyes (contact sheets with the Read tool) before filming, and get an
   independent critique (subagents) before you call it done.

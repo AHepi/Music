@@ -1,0 +1,8 @@
+{
+ "about": "Camera-facing faces near No. 1's gate that the place facts' boxes do not hold (the works wall's piers and the gate leaves), for plan_lights.py --surfaces. Worked out from film-kit paper-film/blender/inflation-chapter-2-newcomers/works/assemble_works.py constants: WALL_Y 22.0, PIER_PROUD 0.12 (piers' lane faces at y 21.88), GATE_CENTRE_X 3.5, GATE_WIDTH 3.0, OUTER_PIER_WIDTH 0.9 (No. 1's outer pier x -5.9 to -5.0), PIER_HEIGHT 4.75, GATE_PLANE_Y 22.3, gate leaves 2.929 m high (works-shot.json gates.no-1.leaf_height). Blender metres.",
+ "surfaces": [
+  {"name": "no-1 outer pier", "face": "lane face", "centre": [-5.45, 21.88, 2.375], "normal": [0, -1, 0], "along": [1, 0, 0], "width": 0.9, "height": 4.75, "role": "other"},
+  {"name": "no-1 outer pier", "face": "inner face", "centre": [-5.0, 22.3, 2.375], "normal": [1, 0, 0], "along": [0, 1, 0], "width": 0.84, "height": 4.75, "role": "other"},
+  {"name": "no-1 gate", "face": "lane side", "centre": [-3.5, 22.3, 1.4645], "normal": [0, -1, 0], "along": [1, 0, 0], "width": 3.0, "height": 2.929, "role": "subject"}
+ ]
+}

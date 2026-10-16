@@ -25,7 +25,15 @@ export const meta = {
 //   viewer: '/path/to/viewer copy.md'               (optional: narration and on-screen words only)
 //   older: '/path/to/the version people got lost in.md' (optional: for the skeptic's comparison)
 //   audience: 'a general New Zealand audience'      (optional)
-//   wordsPerMinute: 160                             (optional: the narrator's measured speed)
+//   kit: '/path/to/work/film-kit'                   (optional, with the next two: the kit made by explainer-film-setup)
+//   narration: '/path/to/narration-script.json'      (optional: the script as the recorder reads it)
+//   measuredWordTimes: '/path/to/word-times.json'    (optional: a real recording by the same narrator, for
+//                                                    example the kit's examples/inflation-chapter-2/word-times.json)
+//     With all three, the length is worked out by narration-tools/estimate_timeline.py from the narrator's
+//     measured word lengths and pauses (it predicted the old chapter 2's 251.7 s of speech as 252 s) instead
+//     of a helper's guess at a speed.
+//   wordsPerMinute: 160                             (optional: the narrator's measured speed, used only
+//                                                    without the three above)
 //   voice: 'urgent and direct, in the spirit of ...' (optional: the voice the script aims for)
 // }
 const A = args ?? {}
@@ -34,6 +42,13 @@ for (const key of ['script', 'ledger', 'work', 'today']) {
 }
 const W = A.work
 const SPEED = A.wordsPerMinute ?? 160
+const ESTIMATE = A.kit && A.narration && A.measuredWordTimes
+  ? `Work out the length with the kit's estimator, not by counting: run
+  python3 -I ${A.kit}/narration-tools/estimate_timeline.py "${A.narration}" "${A.measuredWordTimes}" "${W}/test-rules-and-voice/timeline-estimated.json"
+and report its chapter_seconds and each page's length (pages[].first_word_at to last_word_end_at in that file). If the narration file and the script
+disagree in words, say so: the estimate is only as good as the narration file.`
+  : `Count spoken words and estimate the length at ${SPEED} words a minute plus about 0.6 seconds for each "..." (a rough guess:
+the kit's narration-tools/estimate_timeline.py, given a narration file and a recording by the same narrator, is better).`
 const AUDIENCE = A.audience ?? 'a general audience'
 
 const CONTEXT = `
@@ -79,8 +94,8 @@ any figure that goes out of date soon after ${A.today}. Every factual error is a
   { key: 'rules-and-voice', ask: `Check the rules and the voice: numbers written as said; "..." for pauses; no capitals for
 emphasis; no bracketed cues; one name for each thing (list every synonym swap, and every word used in two senses); every term
 explained at first use; never two new numbers in one sentence except a "from... to" pair or a date with one figure; no aside between a subject and its
-verb; no stock phrases; nothing that trips the tongue. Does the voice still have life and stakes, or has it gone flat? Count
-spoken words and estimate the length at ${SPEED} words a minute plus about 0.6 seconds for each "...".` },
+verb; no stock phrases; nothing that trips the tongue. Does the voice still have life and stakes, or has it gone flat?
+${ESTIMATE}` },
   { key: 'skeptic', ask: `${A.older ? `Viewers got lost in an older version (${A.older}). Read it, then this one.` : 'Read the script.'}
 Be a skeptic: is it actually easy for a newcomer to follow, page by page? Where is it still fast or dense (count new names,
 numbers, places and terms per page)? Where is a term still unexplained or explained too late? Where has it gone too far the

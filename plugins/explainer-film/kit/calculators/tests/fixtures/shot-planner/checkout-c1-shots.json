@@ -1,0 +1,26 @@
+{
+ "about": "What this file is: a shot list for plan_shot.py, written by the shot planner helper (log 35) from checkout C1's check file (checkout-c1-shot-check.json as copied at 06:35: subject the bill on the bill stand, story the basket and the divider, work the till, bag rack and crates, must-read the bill, the four labels, the checkout sign and the petrol fascia) and checkout-shot.json (06:50: the composed spot (-0.16, -0.4, 1.6), the plate's spot (-0.16, -1.1, 1.6), turned 0, eye 1.6 m above the shop's floor, a 0.7 m slide). A hold-out: nothing in the planner was written from the checkout.",
+ "place_facts": "../checkout-c1/checkout-c1-place-facts.json",
+ "shots": [
+  {
+   "name": "c1",
+   "view": "c1",
+   "subject": "bill",
+   "support": "bill stand",
+   "story": ["basket", "divider"],
+   "work": ["till", "bag rack", "crates"],
+   "must_read": ["bill", "bread label", "milk label", "butter label", "cheese label", "checkout sign", "petrol fascia"],
+   "camera": {"at": [-0.16, -0.4, 1.6], "turn_degrees": 0.0, "plate_at": [-0.16, -1.1, 1.6]}
+  },
+  {
+   "name": "c1 planned",
+   "view": "c1",
+   "subject": "bill",
+   "support": "bill stand",
+   "story": ["basket", "divider"],
+   "work": ["till", "bag rack", "crates"],
+   "must_read": ["bill", "bread label", "milk label", "butter label", "cheese label", "checkout sign", "petrol fascia"],
+   "camera": {"plan": true, "stands_on": "floor", "eye_height_metres": 1.6, "line_up": "near edge", "meeting_point_across": "straight", "slide_metres": 0.7}
+  }
+ ]
+}

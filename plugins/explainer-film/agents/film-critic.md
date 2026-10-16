@@ -12,7 +12,8 @@ some pages, or the code.
   and the script and word times you are given.
 - Pictures: look at every still with the Read tool (single stills at full size for details). Does each
   moment clearly show what is being said? Cinematic yet informative? Words readable, not clipped,
-  not overlapping, out of the bottom 380 px and right 140 px? Anything confusing, cluttered, empty,
+  not overlapping, left of 0.90 across (972 px) and above 0.80 down (out of the phone buttons; rule 12
+  in `camera-and-framing.md` section 2), typed words in the top band with every letter at least 0.06 down? Anything confusing, cluttered, empty,
   anachronistic, inconsistent, or broken (tearing, streaks, white blocks, stray marks)?
 - Content: list every word and number on screen with its timing word; check it is a short form of
   what is said then (or plainly illustrative), matches the research, adds no claim, follows the rules,

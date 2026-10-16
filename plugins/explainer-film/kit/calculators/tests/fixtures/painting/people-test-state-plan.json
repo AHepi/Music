@@ -1,0 +1,51 @@
+{
+ "about": "What this file is: the people test's one change (log 34): the five men and the far walkers gone at a time cut at 2.0 s, as plan_states.py reads it. Written by the painting-tools helper (log 35) from people-test-paintings.json and the first-viewer check (scratchpad redesign/people-paint/check-result.json). The place facts have no states, so they are given here. Plates: film-kit/assets/models/inflation-chapter-2-newcomers/people-test (give the folder with --plate-folder).",
+ "place_facts": "../people-test/people-test-place-facts.json",
+ "states": {
+  "men": {
+   "about": "five men round the brazier and six walkers far up the street",
+   "men": true
+  },
+  "men gone": {
+   "about": "the street with nobody in it",
+   "men": false
+  }
+ },
+ "plates": {
+  "still/men": "people-test-plate.jpg",
+  "still/men gone": "people-test-helper-plate.jpg"
+ },
+ "field_groups": {
+  "men": [
+   "man stooped",
+   "man arms folded",
+   "man hand on bar",
+   "man leaning",
+   "man facing",
+   "walker 1",
+   "walker 2",
+   "walker 3",
+   "walker 4",
+   "walker 5",
+   "walker 6"
+  ]
+ },
+ "pages": [
+  {
+   "page": "people test",
+   "view": "still",
+   "start_state": "men",
+   "slides": [],
+   "changes": [
+    {
+     "word": "(cut at 2.0 s)",
+     "time": 2.0,
+     "to_state": "men gone",
+     "changes": [
+      "men"
+     ]
+    }
+   ]
+  }
+ ]
+}

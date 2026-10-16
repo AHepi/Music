@@ -1,0 +1,676 @@
+{
+ "place_facts_version": 1,
+ "place": "checkout",
+ "about": "checkout, view c1: converted from a shot_facts.py measurement and its check file (a place without its own place facts yet). Sign letter heights and normals are not measured there: normals are assumed to face the camera and letter heights are left empty.",
+ "made_by": "kit/calculators/place_facts.py (checkout converter)",
+ "made_from": [
+  "tests/fixtures/checkout-c1/checkout-c1-check10-facts.json",
+  "tests/fixtures/checkout-c1/checkout-c1-shot-check.json"
+ ],
+ "interior": true,
+ "views": [
+  {
+   "name": "c1",
+   "kind_of_shot": [
+    "interior"
+   ],
+   "camera": {
+    "composed": [
+     -0.16,
+     -0.4,
+     1.6
+    ],
+    "plate": null,
+    "turn_degrees": -0.0,
+    "tilt_degrees": 0.0,
+    "roll_degrees": -0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "eye_height_metres": 1.6,
+    "floor_height": 0.0,
+    "stands_on": "the floor"
+   },
+   "slide": null,
+   "subject": {
+    "name": "bill",
+    "point": [
+     0.15,
+     2.6,
+     1.5
+    ]
+   },
+   "check_file": "checkout-c1-shot-check.json"
+  }
+ ],
+ "signs": [
+  {
+   "name": "bill",
+   "centre": [
+    0.15,
+    2.6,
+    1.5
+   ],
+   "normal": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": null,
+   "words": "bill",
+   "must_read": true,
+   "note": "normal assumed to face the camera; letter height not measured"
+  },
+  {
+   "name": "bread label",
+   "centre": [
+    -0.099,
+    2.011,
+    1.201
+   ],
+   "normal": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": null,
+   "words": "bread label",
+   "must_read": true,
+   "note": "normal assumed to face the camera; letter height not measured"
+  },
+  {
+   "name": "milk label",
+   "centre": [
+    0.074,
+    2.031,
+    1.189
+   ],
+   "normal": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": null,
+   "words": "milk label",
+   "must_read": true,
+   "note": "normal assumed to face the camera; letter height not measured"
+  },
+  {
+   "name": "butter label",
+   "centre": [
+    -0.06,
+    1.895,
+    1.116
+   ],
+   "normal": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": null,
+   "words": "butter label",
+   "must_read": true,
+   "note": "normal assumed to face the camera; letter height not measured"
+  },
+  {
+   "name": "cheese label",
+   "centre": [
+    0.087,
+    1.879,
+    1.114
+   ],
+   "normal": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": null,
+   "words": "cheese label",
+   "must_read": true,
+   "note": "normal assumed to face the camera; letter height not measured"
+  },
+  {
+   "name": "checkout sign",
+   "centre": [
+    0.25,
+    4.4,
+    2.72
+   ],
+   "normal": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": null,
+   "words": "checkout sign",
+   "must_read": true,
+   "note": "normal assumed to face the camera; letter height not measured"
+  },
+  {
+   "name": "petrol fascia",
+   "centre": [
+    -4.5,
+    30.988,
+    4.9
+   ],
+   "normal": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": null,
+   "words": "petrol fascia",
+   "must_read": true,
+   "note": "normal assumed to face the camera; letter height not measured"
+  }
+ ],
+ "emitters": [],
+ "figures": [],
+ "lights": [
+  {
+   "name": "ceiling-light-17",
+   "kind": "AREA",
+   "at": [
+    -4.2,
+    6.4,
+    3.09
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "ceiling-light-18",
+   "kind": "AREA",
+   "at": [
+    -1.8,
+    6.4,
+    3.09
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "ceiling-light-19",
+   "kind": "AREA",
+   "at": [
+    0.6,
+    6.4,
+    3.09
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "ceiling-light-20",
+   "kind": "AREA",
+   "at": [
+    3.0,
+    6.4,
+    3.09
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "street-light-1--4.5",
+   "kind": "POINT",
+   "at": [
+    -4.5,
+    14.8,
+    6.65
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 900.0,
+   "colour": [
+    1.0,
+    0.86,
+    0.68
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "street-light-1--12",
+   "kind": "POINT",
+   "at": [
+    -12.0,
+    20.2,
+    7.15
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 900.0,
+   "colour": [
+    1.0,
+    0.86,
+    0.68
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "street-light-1-13",
+   "kind": "POINT",
+   "at": [
+    13.0,
+    20.2,
+    7.15
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 900.0,
+   "colour": [
+    1.0,
+    0.86,
+    0.68
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "warm-lamp",
+   "kind": "SPOT",
+   "at": [
+    0.3,
+    1.45,
+    3.35
+   ],
+   "target": null,
+   "aim": [
+    0.0199,
+    0.219,
+    -0.9755
+   ],
+   "watts": 290.0,
+   "colour": [
+    1.0,
+    0.5,
+    0.22
+   ],
+   "in_states": [
+    "c1"
+   ],
+   "cone_degrees": 110.0,
+   "skips": [
+    "bill"
+   ]
+  },
+  {
+   "name": "bill-cool",
+   "kind": "SPOT",
+   "at": [
+    0.15,
+    0.9,
+    3.1
+   ],
+   "target": null,
+   "aim": [
+    0.0,
+    0.8729,
+    -0.4878
+   ],
+   "watts": 90.0,
+   "colour": [
+    0.8,
+    0.87,
+    1.0
+   ],
+   "in_states": [
+    "c1"
+   ],
+   "cone_degrees": 20.0,
+   "reaches_only": [
+    "bill"
+   ]
+  },
+  {
+   "name": "bill-warm-bounce",
+   "kind": "AREA",
+   "at": [
+    0.15,
+    2.3,
+    0.98
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 30.0,
+   "colour": [
+    1.0,
+    0.45,
+    0.18
+   ],
+   "in_states": [
+    "c1"
+   ],
+   "reaches_only": [
+    "bill"
+   ]
+  },
+  {
+   "name": "ceiling-fill",
+   "kind": "AREA",
+   "at": [
+    -1.0,
+    2.0,
+    3.3
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 50.0,
+   "colour": [
+    0.8,
+    0.86,
+    0.95
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "bounce-to-ceiling",
+   "kind": "AREA",
+   "at": [
+    0.0,
+    1.5,
+    1.0
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 18.0,
+   "colour": [
+    0.95,
+    0.9,
+    0.85
+   ],
+   "in_states": [
+    "c1"
+   ]
+  },
+  {
+   "name": "canopy-light",
+   "kind": "AREA",
+   "at": [
+    -4.5,
+    35.0,
+    4.35
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 300.0,
+   "colour": [
+    0.92,
+    0.95,
+    1.0
+   ],
+   "in_states": [
+    "c1"
+   ]
+  }
+ ],
+ "landmark_tops": [],
+ "support_surfaces": [
+  {
+   "name": "floor",
+   "kind": "floor",
+   "height": 0.0,
+   "height_from": "shot_facts eye height under the camera (derived)"
+  },
+  {
+   "name": "story surface",
+   "kind": "counter",
+   "height": 0.885,
+   "interior": true,
+   "height_from": "the lowest bottom of the 3 story things standing above the floor (divider; derived from shot_facts, the others: basket 0.886, bill stand 0.901)"
+  }
+ ],
+ "props": [
+  {
+   "name": "bread label",
+   "at": [
+    -0.099,
+    2.011,
+    1.201
+   ],
+   "size": [
+    0.115,
+    0.031,
+    0.058
+   ],
+   "role": "other"
+  },
+  {
+   "name": "milk label",
+   "at": [
+    0.074,
+    2.031,
+    1.189
+   ],
+   "size": [
+    0.104,
+    0.021,
+    0.047
+   ],
+   "role": "other"
+  },
+  {
+   "name": "butter label",
+   "at": [
+    -0.06,
+    1.895,
+    1.116
+   ],
+   "size": [
+    0.099,
+    0.01,
+    0.03
+   ],
+   "role": "other"
+  },
+  {
+   "name": "cheese label",
+   "at": [
+    0.087,
+    1.879,
+    1.114
+   ],
+   "size": [
+    0.103,
+    0.009,
+    0.033
+   ],
+   "role": "other"
+  },
+  {
+   "name": "bill",
+   "at": [
+    0.15,
+    2.6,
+    1.5
+   ],
+   "size": [
+    0.62,
+    0.0,
+    0.72
+   ],
+   "role": "subject"
+  },
+  {
+   "name": "bill stand",
+   "at": [
+    0.15,
+    2.581,
+    1.388
+   ],
+   "size": [
+    0.653,
+    0.248,
+    0.975
+   ],
+   "role": "support"
+  },
+  {
+   "name": "basket",
+   "at": [
+    0.071,
+    2.0,
+    1.105
+   ],
+   "size": [
+    0.573,
+    0.378,
+    0.438
+   ],
+   "role": "story"
+  },
+  {
+   "name": "divider",
+   "at": [
+    0.03,
+    1.845,
+    0.903
+   ],
+   "size": [
+    0.46,
+    0.04,
+    0.036
+   ],
+   "role": "story"
+  },
+  {
+   "name": "card terminal",
+   "at": [
+    0.458,
+    3.08,
+    1.073
+   ],
+   "size": [
+    0.13,
+    0.084,
+    0.354
+   ],
+   "role": "other"
+  },
+  {
+   "name": "checkout sign",
+   "at": [
+    0.25,
+    4.4,
+    2.72
+   ],
+   "size": [
+    1.1,
+    0.032,
+    0.26
+   ],
+   "role": "other"
+  },
+  {
+   "name": "petrol fascia",
+   "at": [
+    -4.5,
+    30.988,
+    4.9
+   ],
+   "size": [
+    9.0,
+    0.0,
+    0.9
+   ],
+   "role": "other"
+  },
+  {
+   "name": "till",
+   "at": [
+    -0.4,
+    3.1,
+    1.16
+   ],
+   "size": [
+    0.12,
+    0.38,
+    0.52
+   ],
+   "role": "work"
+  },
+  {
+   "name": "bag rack",
+   "at": [
+    1.35,
+    3.5,
+    0.72
+   ],
+   "size": [
+    0.32,
+    1.907,
+    1.44
+   ],
+   "role": "work"
+  },
+  {
+   "name": "crates",
+   "at": [
+    2.05,
+    4.7,
+    0.254
+   ],
+   "size": [
+    0.526,
+    0.431,
+    0.508
+   ],
+   "role": "work"
+  }
+ ],
+ "accepted": [],
+ "lines": {
+  "belt": [
+   0,
+   1,
+   0
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "belt"
+}

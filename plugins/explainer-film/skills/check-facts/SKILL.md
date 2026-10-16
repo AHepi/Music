@@ -32,9 +32,13 @@ Workflow({ name: "explainer-film:test-script-with-newcomers", args: {
   script: "/abs/path/NN Script - chapter.md", ledger: "/abs/path/NN Research - chapter.md",
   work: "/abs/path/scratch/newcomer-test", today: "15 October 2026",
   rules: "/abs/path/01 Rules - voice, tone and writing style.md",      // optional
-  older: "/abs/path/the version people got lost in.md"                  // optional
+  older: "/abs/path/the version people got lost in.md",                 // optional
+  kit: "/abs/path/film-kit", narration: "/abs/path/narration-script.json",  // optional, together: the length
+  measuredWordTimes: "/abs/path/film-kit/examples/inflation-chapter-2/word-times.json"  // from estimate_timeline.py
 } })
 ```
+With `kit`, `narration` and `measuredWordTimes` (a real recording by the same narrator), the length comes
+from the kit's `narration-tools/estimate_timeline.py` instead of a helper's guess at a speed.
 
 It returns every finding, what the fixer did with each, and the path of the final script
 (`final_script`). Without workflows, run the same prompts by hand with the Agent tool: the viewer copy (if there

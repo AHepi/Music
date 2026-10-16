@@ -7,6 +7,10 @@ description: Film a cinema-look (or paper-look) chapter in parallel stretches, j
 
 **Example.** Chapter 2: 8,110 frames, 35 stretches of up to 240 frames, two at a time on 4
 processors (about 1.4-2.4 s a frame), about 3.5 hours; then about 10 minutes of finishing.
+Built-and-painted pages film at very different speeds by what the camera does (chapter 2 for
+newcomers, the Works, round 4, one worker): about 0.9 s a frame while the camera holds (the set is drawn
+once, only flames, smoke and flicker each frame), about 4.3 s while it slides, and more in the first
+stretch of each piece while its pages load. Pages 3 to 5 (2,283 frames) took 53 minutes.
 
 ## 1. Film (in the background)
 
@@ -34,7 +38,13 @@ The cloud machine can also restart without warning. Each chunk is filmed in piec
 (`PIECE_FRAMES`), each kept when finished, so a restart or a stopped job loses at most one piece per
 worker: run the same command again and it carries on. Because of that, a stretch may simply be
 everything left (`FILM_FROM=<frame>` with no `FILM_TO`), run again after each stop.
-Find what makes a page slow with `node paper-film/tools/profile_frame.mjs PAGE TIME`.
+Find what makes a page slow with `node paper-film/tools/profile_frame.mjs PAGE TIME` (or
+`PROFILE_SCENE=SCENE node paper-film/tools/profile_frame.mjs - TIME` for a whole scene).
+
+**Lazy chapters** (long chapters of heavy painted sets, `buildCinemaChapter({ ..., lazy: true })`): a
+piece of film builds only the pages it shows, and loading one painted set takes 20 to 30 seconds and over
+2 GB. Film them with bigger pieces so each loads its pages once:
+`PIECE_FRAMES=240 bash paper-film/tools/film-chapter-parallel.sh <chapter> 2 240`.
 
 ## 2. Finish
 
@@ -47,12 +57,21 @@ python3 -I paper-film/tools/make_cover.py FRAME.jpg "NN Cover - chapter title.jp
 (the cover frame: pull one from the film with a calm empty lower part; `make_cover.py` puts the
 title there).
 
+**A clip without narration** (a test of a place, a sample for the user): lay music under it with
+`bash paper-film/tools/add_music_bed.sh SILENT.mp4 MUSIC OUT.mp4 [START] [LOUDNESS=-14]` (fades in and
+out, -14 LUFS, peaks under -1 dB; -17.7 was found faint on a phone speaker, log 32). The music file is
+only read; never put it into a repository.
+
 ## 3. Measure and look (report the numbers)
 
 - Frames and length: `ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames,duration -of csv=p=0 FILM.mp4`
 - Loudness and true peak: `ffmpeg -i FILM.mp4 -af ebur128=peak=true -f null - 2>&1 | tail -12`
   (aim about -15 LUFS, true peak under -1 dB).
 - Sound alignment: the check above should say 0.00 ms (or a few ms) at every page.
+- Sudden jumps between frames (a painting switching over, a prop popping, a flash):
+  `python3 -I paper-film/tools/find_jumps.py FILM.mp4 SHEET.jpg 4 CUT_SECONDS ...` lists every frame
+  whose change is far bigger than its neighbours', and reports the times you name as planned cuts
+  (page turns, time cuts) as planned; it also makes a sheet of two frames a second to look at the motion.
 - Contact sheet of the finished film at one frame every 2 seconds:
   `mkdir -p sheet && ffmpeg -i FILM.mp4 -vf fps=0.5 sheet/frame-%03d.jpg` then
   `python3 -I paper-film/tools/contact_sheet.py film-sheet.jpg 10 sheet/frame-*.jpg` and look at it

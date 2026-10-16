@@ -1,0 +1,355 @@
+{
+ "place_facts_version": 1,
+ "place": "people-test",
+ "about": "The people test (log 34): five working men round a brazier on the pit-village street, six small walkers far up it, painted by fal to see how the painter treats figures. The camera holds still at the plate's spot.",
+ "made_by": "kit/calculators/place_facts.py (people-test converter)",
+ "made_from": [
+  "tests/fixtures/people-test/people-test-shot.json",
+  "tests/fixtures/people-test/people-test-camera.json",
+  "tests/fixtures/people-test/people-test-shot-check.json",
+  "tests/fixtures/people-test/people-test-paintings.json"
+ ],
+ "interior": false,
+ "views": [
+  {
+   "name": "still",
+   "about": "the plate camera's spot, filmed with the film lens (no slide)",
+   "kind_of_shot": [
+    "crowd"
+   ],
+   "camera": {
+    "composed": [
+     3.2,
+     15.0,
+     2.9889
+    ],
+    "plate": [
+     3.2,
+     15.0,
+     2.9889
+    ],
+    "turn_degrees": 5.0,
+    "tilt_degrees": 0.0,
+    "roll_degrees": 0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_height_metres": 1.81,
+    "floor_height": 1.1789,
+    "stands_on": "the pavement",
+    "camera_file": "people-test-camera.json"
+   },
+   "slide": null,
+   "subject": {
+    "name": "brazier",
+    "point": [
+     2.549999952316284,
+     22.399999618530273,
+     2.4884
+    ]
+   },
+   "check_file": "examples/people-test/shot-check.json"
+  }
+ ],
+ "signs": [],
+ "emitters": [
+  {
+   "name": "brazier fire",
+   "kind": "fire",
+   "at": [
+    2.549999952316284,
+    22.399999618530273,
+    2.4884
+   ],
+   "radius_metres": 0.26
+  },
+  {
+   "name": "kerb lamp",
+   "kind": "lamp",
+   "at": [
+    3.4,
+    24.3,
+    5.1107
+   ]
+  }
+ ],
+ "figures": [
+  {
+   "name": "figure-stooped",
+   "feet": [
+    2.932,
+    21.944,
+    1.667
+   ],
+   "turn_degrees": 40,
+   "facing": [
+    -0.642788,
+    0.766044,
+    0.0
+   ],
+   "height_metres": 1.545,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "worker-stooped-to-brazier",
+   "group": "men at the brazier"
+  },
+  {
+   "name": "figure-arms-folded",
+   "feet": [
+    1.95,
+    21.5,
+    1.52
+   ],
+   "turn_degrees": -34,
+   "facing": [
+    0.559193,
+    0.829038,
+    0.0
+   ],
+   "height_metres": 1.726,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "worker-arms-folded",
+   "group": "men at the brazier"
+  },
+  {
+   "name": "figure-hand-on-bar",
+   "feet": [
+    3.247,
+    23.893,
+    1.809
+   ],
+   "turn_degrees": 0,
+   "facing": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "height_metres": 1.787,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "worker-hand-on-bar",
+   "group": "men at the brazier"
+  },
+  {
+   "name": "figure-leaning",
+   "feet": [
+    3.726,
+    23.4,
+    1.784
+   ],
+   "turn_degrees": 0,
+   "facing": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "height_metres": 1.724,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "worker-leaning-on-wall",
+   "group": "men at the brazier"
+  },
+  {
+   "name": "figure-facing",
+   "feet": [
+    1.15,
+    21.7,
+    1.575
+   ],
+   "turn_degrees": 180,
+   "facing": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "height_metres": 1.759,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at the brazier"
+  },
+  {
+   "name": "figure-walker-1",
+   "feet": [
+    -2.33,
+    57.0,
+    3.961
+   ],
+   "turn_degrees": -30,
+   "facing": [
+    0.5,
+    0.866025,
+    0.0
+   ],
+   "height_metres": 1.713,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "walker-man-coat",
+   "group": "walkers"
+  },
+  {
+   "name": "figure-walker-2",
+   "feet": [
+    -1.48,
+    59.5,
+    4.204
+   ],
+   "turn_degrees": -25,
+   "facing": [
+    0.422618,
+    0.906308,
+    0.0
+   ],
+   "height_metres": 1.546,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "walker-woman-shawl",
+   "group": "walkers"
+  },
+  {
+   "name": "figure-walker-3",
+   "feet": [
+    -0.54,
+    62.5,
+    4.446
+   ],
+   "turn_degrees": 35,
+   "facing": [
+    -0.573576,
+    0.819152,
+    0.0
+   ],
+   "height_metres": 1.68,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "walker-man-bundle",
+   "group": "walkers"
+  },
+  {
+   "name": "figure-walker-4",
+   "feet": [
+    2.85,
+    65.0,
+    4.677
+   ],
+   "turn_degrees": 30,
+   "facing": [
+    -0.5,
+    0.866025,
+    0.0
+   ],
+   "height_metres": 1.57,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "walker-woman-bundle",
+   "group": "walkers"
+  },
+  {
+   "name": "figure-walker-5",
+   "feet": [
+    -3.6,
+    68.0,
+    4.9
+   ],
+   "turn_degrees": -35,
+   "facing": [
+    0.573576,
+    0.819152,
+    0.0
+   ],
+   "height_metres": 1.75,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "walker-man-bag",
+   "group": "walkers"
+  },
+  {
+   "name": "figure-walker-6",
+   "feet": [
+    3.78,
+    70.0,
+    5.043
+   ],
+   "turn_degrees": 25,
+   "facing": [
+    -0.422618,
+    0.906308,
+    0.0
+   ],
+   "height_metres": 1.518,
+   "height_from": "measured (people-test-shot.json)",
+   "figure": "walker-woman-hand-bundle",
+   "group": "walkers"
+  }
+ ],
+ "lights": [
+  {
+   "name": "fire light",
+   "kind": "POINT",
+   "at": [
+    2.55,
+    22.4,
+    3.0384
+   ],
+   "target": null,
+   "watts": null,
+   "note": "watts not in people-test-shot.json"
+  },
+  {
+   "name": "kerb lamp light",
+   "kind": "POINT",
+   "at": [
+    3.4,
+    24.3,
+    5.1107
+   ],
+   "target": null,
+   "watts": null,
+   "note": "watts not in people-test-shot.json"
+  }
+ ],
+ "landmark_tops": [],
+ "support_surfaces": [
+  {
+   "name": "pavement",
+   "kind": "pavement",
+   "height": 1.1789,
+   "at": [
+    3.2,
+    15.0,
+    1.1789
+   ],
+   "slope": [
+    0.0,
+    0.069927
+   ],
+   "height_from": "camera z minus assemble_people_test.py EYE_HEIGHT 1.81 (derived)"
+  }
+ ],
+ "props": [
+  {
+   "name": "brazier",
+   "at": [
+    2.549999952316284,
+    22.399999618530273,
+    1.7084
+   ],
+   "role": "subject"
+  }
+ ],
+ "accepted": [],
+ "lines": {
+  "street": [
+   0,
+   1,
+   0.069927
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "street",
+ "painting": {
+  "plate_size": [
+   1536,
+   2730
+  ],
+  "returned_size": [
+   1504,
+   2672
+  ],
+  "source": "people-test-paintings.json"
+ }
+}

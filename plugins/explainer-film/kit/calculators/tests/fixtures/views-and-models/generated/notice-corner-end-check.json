@@ -1,0 +1,188 @@
+{
+ "about": "What this file is: the shot check for view end (still_life), written by make_check_file.py from the Blender scene and the shot list (subject, support, story and work are the author's; groups, must_read, pairs_also, on_ground, stands_on, lights_in_story, the title zone and the rest are measured). Used by shot_facts.py and check_shot.py.",
+ "size": [
+  1080,
+  1920
+ ],
+ "groups": {
+  "notice": [
+   "notice",
+   "notice.0*"
+  ],
+  "board": [
+   "notice-board*",
+   "tacks*"
+  ],
+  "winding wheels": [
+   "winding_wheel_*"
+  ],
+  "chimney": [
+   "colliery_chimney*"
+  ],
+  "drum": [
+   "brazier-drum*",
+   "brazier_coal_*",
+   "brazier_soot"
+  ],
+  "chair": [
+   "kitchen-chair*"
+  ],
+  "lantern": [
+   "hurricane-lantern*",
+   "lantern_flame"
+  ],
+  "pail": [
+   "wooden-pail*"
+  ],
+  "handcart": [
+   "handcart*"
+  ],
+  "sacks": [
+   "coal-sacks*"
+  ],
+  "barrel": [
+   "wooden-barrel*"
+  ],
+  "dustbins": [
+   "dustbins*"
+  ],
+  "lamp post": [
+   "gas-lamp-post*"
+  ],
+  "left lamp": [
+   "left-gas-lamp-post*"
+  ],
+  "gates": [
+   "iron-gates-pair*"
+  ],
+  "coal-tub-on-track": [
+   "coal-tub-on-track*"
+  ],
+  "colliery-name-board": [
+   "colliery-name-board*"
+  ]
+ },
+ "subject": "notice",
+ "support": "board",
+ "story": [
+  "board",
+  "drum",
+  "chair",
+  "lantern",
+  "pail"
+ ],
+ "lights_in_story": [
+  "lantern"
+ ],
+ "pairs_also": [
+  "winding wheels",
+  "chimney",
+  "handcart",
+  "sacks",
+  "barrel",
+  "dustbins",
+  "lamp post",
+  "left lamp",
+  "gates",
+  "coal-tub-on-track",
+  "colliery-name-board"
+ ],
+ "work": [
+  "handcart",
+  "sacks",
+  "barrel",
+  "dustbins"
+ ],
+ "on_ground": [
+  "board",
+  "drum",
+  "chair",
+  "pail",
+  "handcart",
+  "sacks",
+  "barrel",
+  "dustbins",
+  "lamp post",
+  "left lamp",
+  "coal-tub-on-track",
+  "colliery-name-board"
+ ],
+ "stands_on": {
+  "lantern": "chair"
+ },
+ "must_read": [
+  "notice"
+ ],
+ "box_excludes": [
+  "board"
+ ],
+ "lines": {
+  "street": [
+   0,
+   1,
+   0.069927
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "street",
+ "eye_height": [
+  1.5,
+  1.9
+ ],
+ "title_zone": [
+  0.06,
+  0.02,
+  0.69,
+  0.22
+ ],
+ "story_reaches_down": 0.7,
+ "kind_of_shot": [
+  "still_life"
+ ],
+ "figures": [],
+ "match_excludes": [
+  "notice",
+  "board",
+  "sacks",
+  "lamp post",
+  "left lamp",
+  "gates"
+ ],
+ "own_surface_materials": [
+  "notice-paper"
+ ],
+ "accepted": [
+  {
+   "rule": "rule6_lit_from_below",
+   "measured": 0.08,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the finished still measured 0.08 (needs 0.10); the film page lights the notice's own surface with a copy of the warm light and reached 0.23 (log 32)"
+  },
+  {
+   "rule": "rule10_quiet_side_weight",
+   "measured": 0.38,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the still's quiet side held 38% (aim 40-48%); the film page measured 46% (log 32)"
+  },
+  {
+   "rule": "rule8_bottom_left_share",
+   "measured": 0.021,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32); the gutter kept as a narrow lead-in line (log 32)",
+   "date": "2026-10-14",
+   "reason": "the painted end frame's gutter covered 2.1% of the bottom-left quarter (limit 1%): a thin lead-in line, not a dark lump"
+  },
+  {
+   "rule": "slide_magnification",
+   "measured": 1.45,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the pail comes 1.45 times nearer during the 1.5 m slide (the painting allows about 1.29); the slide was made before plan 34's limit (F13) and the user kept the film"
+  }
+ ]
+}

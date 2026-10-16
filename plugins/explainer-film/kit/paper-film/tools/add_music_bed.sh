@@ -5,6 +5,9 @@
 # sites use; -14 is usual for phone video, and log 32's helper found -17.7 faint on a phone speaker), and
 # writes the film with that sound (peaks kept under -1 dB). The music file is only read: it
 # never goes into the repository.
+# Gates (narration-tools/sound_gates.py): the clip's sound must be as long as the film (within 0.05 s) and, as encoded,
+# within 0.5 of LOUDNESS with a true peak of at most -1 dBTP; the script stops with a FAIL line otherwise.
+# To choose START by measurement (nobody can listen here): python3 -I narration-tools/sound_gates.py music-start MUSIC --seconds N
 #
 # Use: bash add_music_bed.sh SILENT_FILM.mp4 MUSIC_FILE OUT.mp4 [START=0] [LOUDNESS=-14] [FADE_IN=0.8] [FADE_OUT=1.5]
 set -eu
@@ -16,4 +19,6 @@ ffmpeg -y -hide_banner -loglevel error -i "$film" -ss "$start" -t "$length" -i "
   -filter_complex "[1:a]afade=t=in:st=0:d=$fade_in,afade=t=out:st=$fade_at:d=$fade_out,loudnorm=I=$loudness:TP=-1:LRA=11,aresample=48000[a]" \
   -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -shortest "$out"
 echo "wrote $out ($length s, music from $start s)"
-ffmpeg -hide_banner -nostats -i "$out" -af ebur128=peak=true -f null - 2>&1 | grep -E "^ +I:|^ +Peak:" | tail -2
+gates="$(dirname "$0")/../../narration-tools/sound_gates.py"
+python3 -I "$gates" length "$out" --expected "$length" --stream audio --step "the music bed"
+python3 -I "$gates" loudness "$out" --music-only --target "$loudness"

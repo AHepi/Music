@@ -9,6 +9,9 @@ Read the full guide first: `${CLAUDE_PLUGIN_ROOT}/skills/build-cinema-page/guide
 the kit, what a page file is, how to test, lessons, and the strict on-screen rules), then
 `${CLAUDE_PLUGIN_ROOT}/skills/build-cinema-page/camera-and-framing.md` (strict, from a viewer's
 feedback on chapter 2):
+- **In a place built in 3D and painted over** (`projected-set.js`; skill `build-and-paint-a-place`)
+  the only move is one slide per shot: the position changes, the way the camera faces never does
+  (`camera-and-framing.md` section 1a). The rest of this list is for painted rooms and card models.
 - **The camera holds still** and moves only to land a point, each move meaning one thing: zoom in
   (narrow onto what matters now), zoom out (make room), pan left/right (shift perspective), pan up
   (ideals), pan down (pressure), move up (the bigger picture), move down (the small details). **At
@@ -18,12 +21,19 @@ feedback on chapter 2):
   `python3 -I paper-film/tools/camera_audit.py FILE.json [--window FROM TO]` (must say 0 problems).
 - **Fill the tall frame**: the subject 60-80% of the width; something in the top third (sky, smoke,
   chimneys) and the bottom third (soft near props), never big empty dark floor. Frame with numbers
-  first: `python3 -I paper-film/tools/frame_check.py CAM TARGET FOV name=x,y,z ...`.
+  first: `python3 -I paper-film/tools/frame_check.py CAM TARGET FOV name=x,y,z ...`. (A built place is
+  composed by the kit's `07 Composing a shot` and measured with `paper-film/tools/check-shot.sh`.)
+- **Room for phone buttons** (rule 12): words end left of 0.90 across (972 px), typed words sit in the
+  top band 0.05-0.22 down with letters at least 0.06 down, nothing to read below 0.80 down, story props
+  left of 0.95 across between 0.45 and 0.95 down.
 - **Nothing passes through anything**: `room.clearance(object)` (distance in front of the painting;
   negative = poking through), `boxesOverlap(a, b)`; standing things sit ON the floor point; falling
   things stop on the surface they land on.
 - Plain card models look poor next to paintings: make detailed ones in Blender (skill `make-3d-models`).
-- Words at the top over a busy set need a soft dark band behind them (see chapter 2 page 8).
+- Words at the top over a busy set need a soft dark band behind them (see chapter 2 page 8, or
+  `topShade` in `graphics.js`).
+- A cut-out that fades: `setFading(piece, pose)` from `cinema-kit.js`, not `piece.set({ opacity })`
+  (which snaps off half way).
 
 **Example.** Page 2 of chapter 2 ("Britain, 1915"): the camera holds on a painted munitions hall
 with sunlight and dust, moves down to the floor once as new money lands, and pans right once to the

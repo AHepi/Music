@@ -7,26 +7,44 @@
 # Use (from the kit's top folder):
 #   paper-film/tools/check-shot.sh SHOT_SCRIPT CHECK_FILE OUT_FOLDER [FINISHED_PICTURE] [-- extra Blender options]
 # For example:
-#   paper-film/tools/check-shot.sh paper-film/blender/pit-village/assemble_notice_corner.py \
-#       examples/notice-corner/shot-check.json /tmp/check-corner composed.png -- --view end
+#   BLEND=assets/models/pit-village/street.blend paper-film/tools/check-shot.sh paper-film/blender/pit-village/assemble_notice_corner.py \
+#       examples/notice-corner/shot-check.json paper-film/out/check-corner composed.png -- --view end
 # A finished picture (an EEVEE still or a filmed frame of the same view) adds the light rules; give the log
 # Blender wrote while rendering it as RENDER_LOG=... to catch render faults (false shadows when it ran out
 # of shadow memory).
 # Extra Blender options after "--" go to the shot script and shot_facts.py, for example
 #   --view end, or a trial camera: --camera-at 3.0,17.8,3.2 --yaw 6.9 --fov 60.4
-# Needs Blender (BLENDER, default the kit's usual place) and a virtual screen (DISPLAY, default :96).
-# The scene file the shot script dresses is BLEND (default the pit village street).
+# Needs Blender and a virtual screen: BLENDER (the Blender program) and BLENDER_DISPLAY (default :96, the virtual
+# screen started with "Xvfb :96 -screen 0 1920x1080x24 &") come from the environment, or else from the kit's
+# machine-settings.env, which explainer-film-setup writes; if neither names Blender, the blender on the PATH is used.
+# BLEND is the scene file the shot script dresses, and must be given: for the notice corner
+#   BLEND=assets/models/pit-village/street.blend paper-film/tools/check-shot.sh ...
+# or BLEND=none when the shot script builds its own scene from an empty one.
+# (Plugin kit: the film kit's copy defaults BLENDER to one machine's folder and BLEND to the pit village street.)
 set -euo pipefail
 shot_script=$1; check_file=$2; out=$3; shift 3
 picture=""
 if [[ $# -gt 0 && $1 != "--" ]]; then picture=$1; shift; fi
 [[ $# -gt 0 && $1 == "--" ]] && shift
-BLENDER=${BLENDER:-/home/user/work/blender-app/blender-5.2.2-linux-x64/blender}
 here=$(cd "$(dirname "$0")" && pwd)
 kit=$(cd "$here/../.." && pwd)
+# this machine's settings (written by explainer-film-setup); a setting already in the environment wins
+if [[ -f "$kit/machine-settings.env" ]]; then
+  while IFS='=' read -r key value; do
+    [[ $key =~ ^[A-Z_][A-Z0-9_]*$ ]] || continue
+    [[ -n ${!key:-} ]] || export "$key=$value"
+  done < "$kit/machine-settings.env"
+fi
+BLENDER=${BLENDER:-$(command -v blender || true)}
+[[ -n $BLENDER && -x $BLENDER ]] || { echo "check-shot: Blender not found: set BLENDER=/path/to/blender (or run explainer-film-setup)"; exit 2; }
+[[ -n ${BLEND:-} ]] || { echo "check-shot: say which scene file the shot script dresses: BLEND=path/to/place.blend (BLEND=none if it builds its own scene)"; exit 2; }
+blend_file=()
+if [[ $BLEND != none ]]; then
+  [[ -f $BLEND ]] || { echo "check-shot: no scene file at BLEND=$BLEND"; exit 2; }
+  blend_file=("$BLEND")
+fi
 mkdir -p "$out"
-BLEND=${BLEND:-$kit/assets/models/pit-village/street.blend}
-DISPLAY=${DISPLAY:-:96} "$BLENDER" -b "$BLEND" \
+DISPLAY=${BLENDER_DISPLAY:-${DISPLAY:-:96}} "$BLENDER" -b ${blend_file[@]+"${blend_file[@]}"} \
   --python "$shot_script" --python "$kit/paper-film/blender/shot_facts.py" -- \
   --check "$check_file" --facts "$out/facts" "$@" > "$out/blender.log" 2>&1 \
   || { echo "check-shot: Blender failed; see $out/blender.log"; exit 1; }

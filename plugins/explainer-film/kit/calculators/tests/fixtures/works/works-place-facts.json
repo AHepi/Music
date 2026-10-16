@@ -1,0 +1,2554 @@
+{
+ "place_facts_version": 1,
+ "place": "works",
+ "about": "The Works (chapter 2, plan 34 part 1 \"A\"): a lane leading to two factories' gates, No. 1 (left, quiet, its men waiting) and No. 2 (right, flat out). Converted from works-shot.json and the camera files of round 5. The round 5 final checks list 13 to 29 problems per view that nobody has accepted or fixed yet (skeptic, log 35); the shot-kind profiles cover the systematic ones, the rest stay open, so \"accepted\" is empty.",
+ "made_by": "kit/calculators/place_facts.py (works converter)",
+ "made_from": [
+  "tests/fixtures/works/works-shot.json",
+  "tests/fixtures/works/works-w3-shot-check.json",
+  "tests/fixtures/works/works-w1-shot-check.json",
+  "tests/fixtures/works/works-w1-working-shot-check.json",
+  "tests/fixtures/works/works-w2-shot-check.json",
+  "tests/fixtures/works/works-w2-slowed-shot-check.json",
+  "tests/fixtures/works/works-w4-shot-check.json",
+  "tests/fixtures/works/works-camera-w3.json",
+  "tests/fixtures/works/works-camera-w1.json",
+  "tests/fixtures/works/works-camera-w2.json",
+  "tests/fixtures/works/works-camera-w4.json",
+  "tests/fixtures/works/round5-final-w1-quiet-facts.json",
+  "tests/fixtures/works/round5-final-w1-working-facts.json"
+ ],
+ "interior": false,
+ "views": [
+  {
+   "name": "w3",
+   "about": "both gates, from the end house's upstairs window across the cross street",
+   "kind_of_shot": [
+    "overview",
+    "crowd",
+    "dark_subject"
+   ],
+   "kind_of_shot_note": "both gates from an upstairs window, the crowd 29-30 m away",
+   "camera": {
+    "composed": null,
+    "plate": [
+     0.0,
+     -7.95,
+     5.74
+    ],
+    "turn_degrees": -0.0,
+    "tilt_degrees": -0.0,
+    "roll_degrees": -0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_height_metres": 5.6,
+    "floor_height": 0.14,
+    "stands_on": "the end house's upstairs floor (the end terrace stands on a raised footway 1 m above the street; the eye 5.6 m above the lane's pavements)",
+    "camera_file": "works-camera-w3.json"
+   },
+   "slide": null,
+   "subject": {
+    "name": "two gates and the wall between",
+    "point": [
+     0.0,
+     22.0,
+     2.0
+    ],
+    "dark": true,
+    "opening": false
+   },
+   "check_file": "works-w3-shot-check.json",
+   "states": [
+    "quiet"
+   ],
+   "painted_points": [
+    {
+     "name": "brazier",
+     "point": [
+      -2.35,
+      21.82,
+      0.859
+     ]
+    },
+    {
+     "name": "man-1",
+     "point": [
+      -4.213,
+      21.863,
+      0.143
+     ]
+    },
+    {
+     "name": "man-2",
+     "point": [
+      -2.797,
+      21.288,
+      -0.024
+     ]
+    },
+    {
+     "name": "man-3",
+     "point": [
+      -3.49,
+      21.55,
+      0.132
+     ]
+    },
+    {
+     "name": "man-4",
+     "point": [
+      -5.3,
+      21.45,
+      0.158
+     ]
+    },
+    {
+     "name": "man-5",
+     "point": [
+      -4.77,
+      20.72,
+      0.15
+     ]
+    },
+    {
+     "name": "man-6",
+     "point": [
+      -3.93,
+      20.62,
+      0.139
+     ]
+    },
+    {
+     "name": "man-7",
+     "point": [
+      -3.14,
+      20.82,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-1",
+     "point": [
+      2.35,
+      21.5,
+      0.019
+     ]
+    },
+    {
+     "name": "no-2-man-2",
+     "point": [
+      3.15,
+      21.62,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-3",
+     "point": [
+      3.95,
+      21.48,
+      0.139
+     ]
+    },
+    {
+     "name": "no-2-man-4",
+     "point": [
+      4.75,
+      21.58,
+      0.15
+     ]
+    },
+    {
+     "name": "no-2-man-5",
+     "point": [
+      2.15,
+      20.78,
+      0.029
+     ]
+    },
+    {
+     "name": "no-2-man-6",
+     "point": [
+      2.75,
+      20.68,
+      -0.013
+     ]
+    },
+    {
+     "name": "no-2-man-7",
+     "point": [
+      3.55,
+      20.8,
+      0.133
+     ]
+    },
+    {
+     "name": "no-2-man-8",
+     "point": [
+      5.05,
+      20.95,
+      0.154
+     ]
+    },
+    {
+     "name": "ground at the frame's bottom edge (derived)",
+     "point": [
+      0.0,
+      1.672,
+      0.14
+     ]
+    }
+   ]
+  },
+  {
+   "name": "w1",
+   "about": "No. 1's shut gate with the waiting men gathered in front of it",
+   "kind_of_shot": [
+    "crowd",
+    "dark_subject"
+   ],
+   "kind_of_shot_note": "No. 1's shut iron gate with its seven men gathered in front",
+   "camera": {
+    "composed": [
+     -3.7,
+     13.2,
+     1.835
+    ],
+    "plate": [
+     -3.7,
+     12.0,
+     1.835
+    ],
+    "turn_degrees": -0.0,
+    "tilt_degrees": -0.0,
+    "roll_degrees": -0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_height_metres": 1.7,
+    "floor_height": 0.135,
+    "stands_on": "the pavement",
+    "camera_file": "works-camera-w1.json"
+   },
+   "slide": {
+    "start": [
+     -3.7,
+     12.0,
+     1.835
+    ],
+    "end": [
+     -3.7,
+     13.2,
+     1.835
+    ],
+    "length_metres": 1.2
+   },
+   "subject": {
+    "name": "no-1 gate",
+    "point": [
+     -3.5,
+     22.3,
+     1.5
+    ],
+    "dark": true,
+    "opening": false
+   },
+   "check_file": "works-w1-shot-check.json",
+   "states": [
+    "men gone",
+    "quiet",
+    "quiet, no men",
+    "working"
+   ],
+   "painted_points": [
+    {
+     "name": "brazier",
+     "point": [
+      -2.35,
+      21.82,
+      0.859
+     ]
+    },
+    {
+     "name": "man-1",
+     "point": [
+      -4.213,
+      21.863,
+      0.143
+     ]
+    },
+    {
+     "name": "man-2",
+     "point": [
+      -2.797,
+      21.288,
+      -0.024
+     ]
+    },
+    {
+     "name": "man-3",
+     "point": [
+      -3.49,
+      21.55,
+      0.132
+     ]
+    },
+    {
+     "name": "man-4",
+     "point": [
+      -5.3,
+      21.45,
+      0.158
+     ]
+    },
+    {
+     "name": "man-5",
+     "point": [
+      -4.77,
+      20.72,
+      0.15
+     ]
+    },
+    {
+     "name": "man-6",
+     "point": [
+      -3.93,
+      20.62,
+      0.139
+     ]
+    },
+    {
+     "name": "man-7",
+     "point": [
+      -3.14,
+      20.82,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-1",
+     "point": [
+      2.35,
+      21.5,
+      0.019
+     ]
+    },
+    {
+     "name": "no-2-man-2",
+     "point": [
+      3.15,
+      21.62,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-3",
+     "point": [
+      3.95,
+      21.48,
+      0.139
+     ]
+    },
+    {
+     "name": "no-2-man-4",
+     "point": [
+      4.75,
+      21.58,
+      0.15
+     ]
+    },
+    {
+     "name": "no-2-man-5",
+     "point": [
+      2.15,
+      20.78,
+      0.029
+     ]
+    },
+    {
+     "name": "no-2-man-6",
+     "point": [
+      2.75,
+      20.68,
+      -0.013
+     ]
+    },
+    {
+     "name": "no-2-man-7",
+     "point": [
+      3.55,
+      20.8,
+      0.133
+     ]
+    },
+    {
+     "name": "no-2-man-8",
+     "point": [
+      5.05,
+      20.95,
+      0.154
+     ]
+    },
+    {
+     "name": "ground at the frame's bottom edge (derived)",
+     "point": [
+      -3.7,
+      16.121,
+      0.135
+     ]
+    }
+   ]
+  },
+  {
+   "name": "w2",
+   "about": "No. 2's open gate with nobody waiting",
+   "kind_of_shot": [
+    "crowd",
+    "dark_subject"
+   ],
+   "kind_of_shot_note": "No. 2's open gateway (a dark opening); its slowed state holds eight waiting men",
+   "camera": {
+    "composed": [
+     3.7,
+     13.2,
+     1.835
+    ],
+    "plate": [
+     3.7,
+     12.0,
+     1.835
+    ],
+    "turn_degrees": -0.0,
+    "tilt_degrees": -0.0,
+    "roll_degrees": -0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_height_metres": 1.7,
+    "floor_height": 0.135,
+    "stands_on": "the pavement",
+    "camera_file": "works-camera-w2.json"
+   },
+   "slide": {
+    "start": [
+     3.7,
+     12.0,
+     1.835
+    ],
+    "end": [
+     3.7,
+     13.2,
+     1.835
+    ],
+    "length_metres": 1.2
+   },
+   "subject": {
+    "name": "no-2 gateway",
+    "point": [
+     3.5,
+     22.3,
+     1.5
+    ],
+    "dark": true,
+    "opening": true
+   },
+   "check_file": "works-w2-shot-check.json",
+   "states": [
+    "quiet",
+    "slowed"
+   ],
+   "painted_points": [
+    {
+     "name": "brazier",
+     "point": [
+      -2.35,
+      21.82,
+      0.859
+     ]
+    },
+    {
+     "name": "man-1",
+     "point": [
+      -4.213,
+      21.863,
+      0.143
+     ]
+    },
+    {
+     "name": "man-2",
+     "point": [
+      -2.797,
+      21.288,
+      -0.024
+     ]
+    },
+    {
+     "name": "man-3",
+     "point": [
+      -3.49,
+      21.55,
+      0.132
+     ]
+    },
+    {
+     "name": "man-4",
+     "point": [
+      -5.3,
+      21.45,
+      0.158
+     ]
+    },
+    {
+     "name": "man-5",
+     "point": [
+      -4.77,
+      20.72,
+      0.15
+     ]
+    },
+    {
+     "name": "man-6",
+     "point": [
+      -3.93,
+      20.62,
+      0.139
+     ]
+    },
+    {
+     "name": "man-7",
+     "point": [
+      -3.14,
+      20.82,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-1",
+     "point": [
+      2.35,
+      21.5,
+      0.019
+     ]
+    },
+    {
+     "name": "no-2-man-2",
+     "point": [
+      3.15,
+      21.62,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-3",
+     "point": [
+      3.95,
+      21.48,
+      0.139
+     ]
+    },
+    {
+     "name": "no-2-man-4",
+     "point": [
+      4.75,
+      21.58,
+      0.15
+     ]
+    },
+    {
+     "name": "no-2-man-5",
+     "point": [
+      2.15,
+      20.78,
+      0.029
+     ]
+    },
+    {
+     "name": "no-2-man-6",
+     "point": [
+      2.75,
+      20.68,
+      -0.013
+     ]
+    },
+    {
+     "name": "no-2-man-7",
+     "point": [
+      3.55,
+      20.8,
+      0.133
+     ]
+    },
+    {
+     "name": "no-2-man-8",
+     "point": [
+      5.05,
+      20.95,
+      0.154
+     ]
+    },
+    {
+     "name": "ground at the frame's bottom edge (derived)",
+     "point": [
+      3.7,
+      16.121,
+      0.135
+     ]
+    }
+   ]
+  },
+  {
+   "name": "w4",
+   "about": "No. 2's gate from inside its yard, looking out down the lane",
+   "kind_of_shot": [
+    "crowd"
+   ],
+   "kind_of_shot_note": "No. 2's gate from inside its yard, the eight men outside (being reworked in round 5)",
+   "camera": {
+    "composed": [
+     2.03,
+     28.3,
+     1.72
+    ],
+    "plate": [
+     2.03,
+     29.5,
+     1.72
+    ],
+    "turn_degrees": -180.0,
+    "tilt_degrees": -0.0,
+    "roll_degrees": -0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_height_metres": 1.7,
+    "floor_height": 0.02,
+    "stands_on": "No. 2's yard",
+    "camera_file": "works-camera-w4.json"
+   },
+   "slide": {
+    "start": [
+     2.03,
+     29.5,
+     1.72
+    ],
+    "end": [
+     2.03,
+     28.3,
+     1.72
+    ],
+    "length_metres": 1.2
+   },
+   "subject": {
+    "name": "no-2 gate",
+    "point": [
+     2.0,
+     22.3,
+     1.5
+    ],
+    "dark": false,
+    "opening": false
+   },
+   "check_file": "works-w4-shot-check.json",
+   "states": [
+    "w4"
+   ],
+   "painted_points": [
+    {
+     "name": "brazier",
+     "point": [
+      -2.35,
+      21.82,
+      0.859
+     ]
+    },
+    {
+     "name": "man-1",
+     "point": [
+      -4.213,
+      21.863,
+      0.143
+     ]
+    },
+    {
+     "name": "man-2",
+     "point": [
+      -2.797,
+      21.288,
+      -0.024
+     ]
+    },
+    {
+     "name": "man-3",
+     "point": [
+      -3.49,
+      21.55,
+      0.132
+     ]
+    },
+    {
+     "name": "man-4",
+     "point": [
+      -5.3,
+      21.45,
+      0.158
+     ]
+    },
+    {
+     "name": "man-5",
+     "point": [
+      -4.77,
+      20.72,
+      0.15
+     ]
+    },
+    {
+     "name": "man-6",
+     "point": [
+      -3.93,
+      20.62,
+      0.139
+     ]
+    },
+    {
+     "name": "man-7",
+     "point": [
+      -3.14,
+      20.82,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-1",
+     "point": [
+      2.35,
+      21.5,
+      0.019
+     ]
+    },
+    {
+     "name": "no-2-man-2",
+     "point": [
+      3.15,
+      21.62,
+      0.13
+     ]
+    },
+    {
+     "name": "no-2-man-3",
+     "point": [
+      3.95,
+      21.48,
+      0.139
+     ]
+    },
+    {
+     "name": "no-2-man-4",
+     "point": [
+      4.75,
+      21.58,
+      0.15
+     ]
+    },
+    {
+     "name": "no-2-man-5",
+     "point": [
+      2.15,
+      20.78,
+      0.029
+     ]
+    },
+    {
+     "name": "no-2-man-6",
+     "point": [
+      2.75,
+      20.68,
+      -0.013
+     ]
+    },
+    {
+     "name": "no-2-man-7",
+     "point": [
+      3.55,
+      20.8,
+      0.133
+     ]
+    },
+    {
+     "name": "no-2-man-8",
+     "point": [
+      5.05,
+      20.95,
+      0.154
+     ]
+    },
+    {
+     "name": "ground at the frame's bottom edge (derived)",
+     "point": [
+      2.03,
+      25.379,
+      0.02
+     ]
+    }
+   ]
+  }
+ ],
+ "signs": [
+  {
+   "name": "no-1 board",
+   "centre": [
+    -3.5,
+    21.98,
+    4.08
+   ],
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": 0.266,
+   "words": "No. 1",
+   "must_read": true,
+   "both_faces": false
+  },
+  {
+   "name": "no-2 board",
+   "centre": [
+    3.5,
+    21.98,
+    4.08
+   ],
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": 0.25,
+   "words": "No. 2",
+   "must_read": true,
+   "both_faces": false,
+   "note": "round 4 critic: its back is blank from inside the yard (W4)"
+  },
+  {
+   "name": "bank sign",
+   "centre": [
+    -4.241,
+    9.42,
+    3.75
+   ],
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": 0.305,
+   "words": "BANK",
+   "must_read": true,
+   "both_faces": true,
+   "dim_until_named": 0.15,
+   "note": "a hanging sign square to the house front, lettered on both faces; dimmed until page 9 says \"bank\" (works-effects.js)"
+  },
+  {
+   "name": "bank brass plate",
+   "centre": [
+    -5.195,
+    11.785,
+    1.505
+   ],
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "letter_height_metres": 0.065,
+   "words": "BANK",
+   "must_read": false
+  },
+  {
+   "name": "no-1-drum-petrol",
+   "centre": [
+    -5.3,
+    20.45,
+    0.598
+   ],
+   "normal": [
+    0.207912,
+    -0.978148,
+    0.0
+   ],
+   "letter_height_metres": 0.097,
+   "words": "PETROL",
+   "must_read": true,
+   "wraps_degrees": 44,
+   "note": "stencil turned +12 degrees toward the gate view (assemble_works.py DRUM_SPOTS)"
+  },
+  {
+   "name": "no-1-drum-diesel",
+   "centre": [
+    -4.3,
+    20.0,
+    0.584
+   ],
+   "normal": [
+    0.139173,
+    -0.990268,
+    0.0
+   ],
+   "letter_height_metres": 0.106,
+   "words": "DIESEL",
+   "must_read": true,
+   "wraps_degrees": 44,
+   "note": "stencil turned +8 degrees toward the gate view (assemble_works.py DRUM_SPOTS)"
+  },
+  {
+   "name": "no-2-drum-petrol",
+   "centre": [
+    5.2,
+    20.45,
+    0.596
+   ],
+   "normal": [
+    -0.207912,
+    -0.978148,
+    0.0
+   ],
+   "letter_height_metres": 0.097,
+   "words": "PETROL",
+   "must_read": true,
+   "wraps_degrees": 44,
+   "note": "stencil turned -12 degrees toward the gate view (assemble_works.py DRUM_SPOTS)"
+  },
+  {
+   "name": "no-2-drum-diesel",
+   "centre": [
+    4.3,
+    20.0,
+    0.584
+   ],
+   "normal": [
+    -0.139173,
+    -0.990268,
+    0.0
+   ],
+   "letter_height_metres": 0.106,
+   "words": "DIESEL",
+   "must_read": true,
+   "wraps_degrees": 44,
+   "note": "stencil turned -8 degrees toward the gate view (assemble_works.py DRUM_SPOTS)"
+  },
+  {
+   "name": "no-2 crates",
+   "centre": [
+    3.4,
+    24.25,
+    0.55
+   ],
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": 0.063,
+   "words": "THIS WAY UP",
+   "must_read": true,
+   "both_faces": true,
+   "note": "normal assumed (facing down the lane)"
+  },
+  {
+   "name": "wages envelope",
+   "centre": [
+    1.82,
+    23.17,
+    0.52
+   ],
+   "normal": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "letter_height_metres": 0.018,
+   "words": "WAGES",
+   "must_read": false,
+   "note": "turned to face W4's camera (assumed); about 5 px at 6 m: the typed words do the reading"
+  }
+ ],
+ "emitters": [
+  {
+   "name": "no-1-chimney",
+   "kind": "chimney mouth",
+   "at": [
+    -5.3,
+    57.0,
+    26.3
+   ],
+   "radius_metres": 0.92
+  },
+  {
+   "name": "no-2-chimney-a",
+   "kind": "chimney mouth",
+   "at": [
+    5.3,
+    57.0,
+    25.3
+   ],
+   "radius_metres": 0.68
+  },
+  {
+   "name": "no-2-chimney-b",
+   "kind": "chimney mouth",
+   "at": [
+    8.6,
+    60.5,
+    23.3
+   ],
+   "radius_metres": 0.68
+  },
+  {
+   "name": "brazier fire",
+   "kind": "fire",
+   "at": [
+    -2.35,
+    21.82,
+    0.859
+   ],
+   "radius_metres": 0.3
+  },
+  {
+   "name": "no-1 gate lamp",
+   "kind": "lamp",
+   "at": [
+    -4.41,
+    21.78,
+    3.269
+   ]
+  },
+  {
+   "name": "no-2 gate lamp",
+   "kind": "lamp",
+   "at": [
+    4.41,
+    21.78,
+    3.269
+   ]
+  },
+  {
+   "name": "lantern",
+   "kind": "lamp",
+   "at": [
+    -4.31,
+    19.8,
+    1.01
+   ]
+  }
+ ],
+ "figures": [
+  {
+   "name": "man-1",
+   "feet": [
+    -4.213,
+    21.863,
+    0.143
+   ],
+   "turn_degrees": 0,
+   "facing": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "height_metres": 1.786,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hand-on-bar",
+   "group": "men at No. 1"
+  },
+  {
+   "name": "man-2",
+   "feet": [
+    -2.797,
+    21.288,
+    -0.024
+   ],
+   "turn_degrees": -40.0,
+   "facing": [
+    0.642788,
+    0.766044,
+    0.0
+   ],
+   "height_metres": 1.509,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-stooped-to-brazier",
+   "group": "men at No. 1"
+  },
+  {
+   "name": "man-3",
+   "feet": [
+    -3.49,
+    21.55,
+    0.132
+   ],
+   "turn_degrees": 6,
+   "facing": [
+    -0.104528,
+    0.994522,
+    0.0
+   ],
+   "height_metres": 1.777,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-arms-folded",
+   "group": "men at No. 1"
+  },
+  {
+   "name": "man-4",
+   "feet": [
+    -5.3,
+    21.45,
+    0.158
+   ],
+   "turn_degrees": -10,
+   "facing": [
+    0.173648,
+    0.984808,
+    0.0
+   ],
+   "height_metres": 1.704,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at No. 1"
+  },
+  {
+   "name": "man-5",
+   "feet": [
+    -4.77,
+    20.72,
+    0.15
+   ],
+   "turn_degrees": 12,
+   "facing": [
+    -0.207912,
+    0.978148,
+    0.0
+   ],
+   "height_metres": 1.691,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-arms-folded",
+   "group": "men at No. 1"
+  },
+  {
+   "name": "man-6",
+   "feet": [
+    -3.93,
+    20.62,
+    0.139
+   ],
+   "turn_degrees": -4,
+   "facing": [
+    0.069756,
+    0.997564,
+    0.0
+   ],
+   "height_metres": 1.827,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at No. 1"
+  },
+  {
+   "name": "man-7",
+   "feet": [
+    -3.14,
+    20.82,
+    0.13
+   ],
+   "turn_degrees": -14,
+   "facing": [
+    0.241922,
+    0.970296,
+    0.0
+   ],
+   "height_metres": 1.687,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at No. 1"
+  },
+  {
+   "name": "no-2-man-1",
+   "feet": [
+    2.35,
+    21.5,
+    0.019
+   ],
+   "turn_degrees": 6,
+   "facing": [
+    -0.104528,
+    0.994522,
+    0.0
+   ],
+   "height_metres": 1.757,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-2-man-2",
+   "feet": [
+    3.15,
+    21.62,
+    0.13
+   ],
+   "turn_degrees": -8,
+   "facing": [
+    0.139173,
+    0.990268,
+    0.0
+   ],
+   "height_metres": 1.777,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-arms-folded",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-2-man-3",
+   "feet": [
+    3.95,
+    21.48,
+    0.139
+   ],
+   "turn_degrees": 10,
+   "facing": [
+    -0.173648,
+    0.984808,
+    0.0
+   ],
+   "height_metres": 1.704,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-2-man-4",
+   "feet": [
+    4.75,
+    21.58,
+    0.15
+   ],
+   "turn_degrees": -4,
+   "facing": [
+    0.069756,
+    0.997564,
+    0.0
+   ],
+   "height_metres": 1.725,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-arms-folded",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-2-man-5",
+   "feet": [
+    2.15,
+    20.78,
+    0.029
+   ],
+   "turn_degrees": 12,
+   "facing": [
+    -0.207912,
+    0.978148,
+    0.0
+   ],
+   "height_metres": 1.722,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-2-man-6",
+   "feet": [
+    2.75,
+    20.68,
+    -0.013
+   ],
+   "turn_degrees": -12,
+   "facing": [
+    0.207912,
+    0.978148,
+    0.0
+   ],
+   "height_metres": 1.794,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-arms-folded",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-2-man-7",
+   "feet": [
+    3.55,
+    20.8,
+    0.133
+   ],
+   "turn_degrees": 4,
+   "facing": [
+    -0.069756,
+    0.997564,
+    0.0
+   ],
+   "height_metres": 1.687,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-hands-in-pockets",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-2-man-8",
+   "feet": [
+    5.05,
+    20.95,
+    0.154
+   ],
+   "turn_degrees": -16,
+   "facing": [
+    0.275637,
+    0.961262,
+    0.0
+   ],
+   "height_metres": 1.742,
+   "height_from": "measured (works-shot.json)",
+   "figure": "worker-arms-folded",
+   "group": "men at No. 2"
+  },
+  {
+   "name": "no-1-worker-1",
+   "feet": [
+    -3.0,
+    31.185,
+    0.02
+   ],
+   "turn_degrees": 10,
+   "facing": [
+    -0.173648,
+    0.984808,
+    0.0
+   ],
+   "height_metres": 1.75,
+   "height_from": "default (film-settings.json people.figure_height_metres)",
+   "figure": "worker-stooped-to-brazier",
+   "group": "workers inside no-1"
+  },
+  {
+   "name": "no-1-worker-2",
+   "feet": [
+    -4.457,
+    33.203,
+    0.02
+   ],
+   "turn_degrees": -90,
+   "facing": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "height_metres": 1.75,
+   "height_from": "default (film-settings.json people.figure_height_metres)",
+   "figure": "worker-hand-on-bar",
+   "group": "workers inside no-1"
+  },
+  {
+   "name": "no-2-worker-1",
+   "feet": [
+    1.9,
+    31.485,
+    0.02
+   ],
+   "turn_degrees": 18,
+   "facing": [
+    -0.309017,
+    0.951057,
+    0.0
+   ],
+   "height_metres": 1.75,
+   "height_from": "default (film-settings.json people.figure_height_metres)",
+   "figure": "worker-stooped-to-brazier",
+   "group": "workers inside no-2"
+  },
+  {
+   "name": "no-2-worker-2",
+   "feet": [
+    2.363,
+    35.053,
+    0.02
+   ],
+   "turn_degrees": -90,
+   "facing": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "height_metres": 1.75,
+   "height_from": "default (film-settings.json people.figure_height_metres)",
+   "figure": "worker-hand-on-bar",
+   "group": "workers inside no-2"
+  }
+ ],
+ "lights": [
+  {
+   "name": "right_row_a_cottage_01_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    4.75,
+    3.2,
+    1.905
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    4.75,
+    1.1,
+    4.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    4.75,
+    5.8,
+    1.905
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    3.4,
+    4.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    1.3,
+    4.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    7.7,
+    1.905
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_02_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    5.6,
+    4.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "dusk_skylight",
+   "kind": "SUN",
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 0.3,
+   "colour": [
+    0.62,
+    0.72,
+    0.9
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "afterglow",
+   "kind": "SUN",
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 0.2,
+   "colour": [
+    1.0,
+    0.62,
+    0.36
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "gas_lamp_0_light",
+   "kind": "POINT",
+   "at": [
+    -3.53,
+    1.0,
+    3.213
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 200.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "gas_lamp_1_light",
+   "kind": "POINT",
+   "at": [
+    3.53,
+    0.6,
+    3.213
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 200.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "end_row_cottage_01_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -11.6,
+    -7.55,
+    2.905
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "end_row_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -13.7,
+    -7.55,
+    5.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "end_row_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -9.0,
+    -7.55,
+    2.905
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "end_row_cottage_02_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -6.9,
+    -7.55,
+    5.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "end_row_cottage_03_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -4.5,
+    -7.55,
+    2.905
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "end_row_cottage_06_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    8.8,
+    -7.55,
+    5.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "end_row_cottage_06_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    10.9,
+    -7.55,
+    5.505
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ]
+  },
+  {
+   "name": "no-1-gate-lamp-light",
+   "kind": "POINT",
+   "at": [
+    -4.41,
+    21.78,
+    3.269
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 7.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.45
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": [
+    "man 1",
+    "man 2",
+    "man 3",
+    "man 4",
+    "man 5",
+    "man 6",
+    "man 7",
+    "no-1 board",
+    "no-1 gate"
+   ]
+  },
+  {
+   "name": "no-2-gate-lamp-light",
+   "kind": "POINT",
+   "at": [
+    4.41,
+    21.78,
+    3.269
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 7.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.45
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": []
+  },
+  {
+   "name": "brazier_light",
+   "kind": "POINT",
+   "at": [
+    -2.35,
+    21.82,
+    1.409
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 80.0,
+   "colour": [
+    1.0,
+    0.55,
+    0.25
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "skips": []
+  },
+  {
+   "name": "lantern_light",
+   "kind": "POINT",
+   "at": [
+    -4.31,
+    19.8,
+    1.17
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 15.0,
+   "colour": [
+    1.0,
+    0.6,
+    0.3
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "skips": [
+    "man 1",
+    "man 2",
+    "man 3",
+    "man 4",
+    "man 5",
+    "man 6",
+    "man 7"
+   ]
+  },
+  {
+   "name": "no-2-doorway-spill",
+   "kind": "POINT",
+   "at": [
+    2.9,
+    28.6,
+    2.6
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 900.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "skips": [
+    "people at work"
+   ]
+  },
+  {
+   "name": "no-2-gateway-spill",
+   "kind": "POINT",
+   "at": [
+    3.5,
+    23.8,
+    2.7
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 420.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "skips": [
+    "people at work"
+   ]
+  },
+  {
+   "name": "no-2-yard-spill",
+   "kind": "POINT",
+   "at": [
+    4.1,
+    28.2,
+    2.2
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 260.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "skips": [
+    "people at work"
+   ]
+  },
+  {
+   "name": "no-1-yard-dusk",
+   "kind": "POINT",
+   "at": [
+    -3.5,
+    25.6,
+    5.2
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 900.0,
+   "colour": [
+    0.55,
+    0.68,
+    1.0
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": []
+  },
+  {
+   "name": "no-2-gateway-beam",
+   "kind": "SPOT",
+   "at": [
+    3.3,
+    28.8,
+    3.4
+   ],
+   "target": null,
+   "aim": [
+    0.0408,
+    -0.9793,
+    -0.1982
+   ],
+   "watts": 4000.0,
+   "colour": [
+    1.0,
+    0.64,
+    0.34
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "cone_degrees": 64.0,
+   "skips": [
+    "people at work"
+   ]
+  },
+  {
+   "name": "no-2-room-light",
+   "kind": "POINT",
+   "at": [
+    2.9,
+    32.2,
+    3.9
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 160.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.36
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": []
+  },
+  {
+   "name": "no-1-men-rim-yard",
+   "kind": "POINT",
+   "at": [
+    -4.7,
+    23.9,
+    2.4
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 220.0,
+   "colour": [
+    0.55,
+    0.68,
+    1.0
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": [
+    "man 1",
+    "man 2",
+    "man 3",
+    "man 4",
+    "man 5",
+    "man 6",
+    "man 7"
+   ]
+  },
+  {
+   "name": "no-1-men-rim-lamp",
+   "kind": "POINT",
+   "at": [
+    -1.6,
+    22.6,
+    2.9
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 90.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.45
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": [
+    "man 1",
+    "man 2",
+    "man 3",
+    "man 4",
+    "man 5",
+    "man 6",
+    "man 7"
+   ]
+  },
+  {
+   "name": "no-2-men-rim-yard",
+   "kind": "POINT",
+   "at": [
+    4.7,
+    23.9,
+    2.4
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 220.0,
+   "colour": [
+    0.55,
+    0.68,
+    1.0
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": []
+  },
+  {
+   "name": "no-2-men-rim-lamp",
+   "kind": "POINT",
+   "at": [
+    1.6,
+    22.6,
+    2.9
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 90.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.45
+   ],
+   "in_states": [
+    "w1-quiet",
+    "w1-working"
+   ],
+   "reaches_only": []
+  },
+  {
+   "name": "no-1-doorway-spill",
+   "kind": "POINT",
+   "at": [
+    -3.4,
+    28.6,
+    2.6
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 490.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ],
+   "in_states": [
+    "w1-working"
+   ],
+   "skips": [
+    "people at work"
+   ]
+  },
+  {
+   "name": "no-1-gateway-spill",
+   "kind": "POINT",
+   "at": [
+    -3.5,
+    23.8,
+    2.7
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 210.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ],
+   "in_states": [
+    "w1-working"
+   ],
+   "skips": [
+    "people at work"
+   ]
+  },
+  {
+   "name": "no-1-gateway-beam",
+   "kind": "SPOT",
+   "at": [
+    -3.3,
+    28.8,
+    3.4
+   ],
+   "target": null,
+   "aim": [
+    -0.0408,
+    -0.9793,
+    -0.1982
+   ],
+   "watts": 2800.0,
+   "colour": [
+    1.0,
+    0.64,
+    0.34
+   ],
+   "in_states": [
+    "w1-working"
+   ],
+   "cone_degrees": 64.0,
+   "skips": [
+    "people at work"
+   ]
+  },
+  {
+   "name": "no-1-room-light",
+   "kind": "POINT",
+   "at": [
+    -3.4,
+    32.2,
+    3.9
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 160.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.36
+   ],
+   "in_states": [
+    "w1-working"
+   ],
+   "reaches_only": []
+  }
+ ],
+ "landmark_tops": [
+  {
+   "name": "no-1-chimney-top",
+   "top": [
+    -5.3,
+    57.0,
+    26.3
+   ],
+   "identifies": "No. 1"
+  },
+  {
+   "name": "no-2-chimney-a-top",
+   "top": [
+    5.3,
+    57.0,
+    25.3
+   ],
+   "identifies": "No. 2"
+  },
+  {
+   "name": "no-2-chimney-b-top",
+   "top": [
+    8.6,
+    60.5,
+    23.3
+   ],
+   "identifies": "No. 2"
+  },
+  {
+   "name": "no-2-tank-top",
+   "top": [
+    8.4,
+    33.1,
+    14.8
+   ],
+   "identifies": "No. 2"
+  }
+ ],
+ "support_surfaces": [
+  {
+   "name": "carriageway",
+   "kind": "road",
+   "height": 0.0,
+   "x_range": [
+    -3.0,
+    3.0
+   ],
+   "y_range": [
+    -1.5,
+    22.0
+   ],
+   "height_from": "Blender ground 0 (build_street.py)"
+  },
+  {
+   "name": "left pavement",
+   "kind": "pavement",
+   "height": 0.135,
+   "x_range": [
+    -5.2,
+    -3.0
+   ],
+   "y_range": [
+    0.0,
+    22.0
+   ],
+   "height_from": "W1 composed camera z minus its eye height (derived)"
+  },
+  {
+   "name": "right pavement",
+   "kind": "pavement",
+   "height": 0.135,
+   "x_range": [
+    3.0,
+    5.2
+   ],
+   "y_range": [
+    0.0,
+    22.0
+   ],
+   "height_from": "as left pavement (derived)"
+  },
+  {
+   "name": "No. 2's yard",
+   "kind": "ground",
+   "height": 0.02,
+   "height_from": "W4 camera z minus its eye height (derived)"
+  }
+ ],
+ "props": [
+  {
+   "name": "brazier",
+   "at": [
+    -2.35,
+    21.82,
+    0.019
+   ]
+  },
+  {
+   "name": "lantern",
+   "at": [
+    -4.31,
+    19.8,
+    1.01
+   ]
+  },
+  {
+   "name": "lunch tin",
+   "at": [
+    -5.31,
+    20.29,
+    1.024
+   ]
+  },
+  {
+   "name": "handcart",
+   "at": [
+    3.85,
+    8.6,
+    0.138
+   ]
+  },
+  {
+   "name": "no-2-crates",
+   "at": [
+    3.4,
+    24.25,
+    0.55
+   ]
+  },
+  {
+   "name": "no-1-drum-petrol",
+   "at": [
+    -5.3,
+    20.45,
+    0.158
+   ],
+   "size": [
+    0.607,
+    0.607,
+    0.88
+   ],
+   "turn_degrees": 12.0
+  },
+  {
+   "name": "no-1-drum-diesel",
+   "at": [
+    -4.3,
+    20.0,
+    0.144
+   ],
+   "size": [
+    0.607,
+    0.607,
+    0.88
+   ],
+   "turn_degrees": 8.0
+  },
+  {
+   "name": "no-2-drum-petrol",
+   "at": [
+    5.2,
+    20.45,
+    0.156
+   ],
+   "size": [
+    0.607,
+    0.607,
+    0.88
+   ],
+   "turn_degrees": -12.0
+  },
+  {
+   "name": "no-2-drum-diesel",
+   "at": [
+    4.3,
+    20.0,
+    0.144
+   ],
+   "size": [
+    0.607,
+    0.607,
+    0.88
+   ],
+   "turn_degrees": -8.0
+  }
+ ],
+ "accepted": [],
+ "lines": {
+  "lane": [
+   0,
+   1,
+   0
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "lane",
+ "painting": {
+  "plate_size": [
+   1536,
+   2730
+  ],
+  "returned_size": null,
+  "source": "no painting yet (the plates stand in); film-settings.json frame.painting_returned_size_pixels applies"
+ },
+ "states": {
+  "quiet": {
+   "about": "No. 1 quiet (7 men waiting, windows dark, gate shut and chained), No. 2 flat out (all lit, gate wide open, two people at work in its doorway)",
+   "men_1": true,
+   "men_2": false,
+   "workers_1": 0,
+   "workers_2": 2,
+   "windows_1": [],
+   "doorway_1": false,
+   "doors_open_1": false,
+   "windows_2": [
+    1,
+    2,
+    3
+   ],
+   "doorway_2": true,
+   "gate_1": 0,
+   "gate_2": 96,
+   "chained": true,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  },
+  "working": {
+   "about": "No. 1 working (the men gone in, two of them at its looms, every window lit, cart doors open, gate open, the crates popped up in its gateway), No. 2 flat out",
+   "men_1": false,
+   "men_2": false,
+   "workers_1": 2,
+   "workers_2": 2,
+   "pop_up_1": true,
+   "windows_1": [
+    1,
+    2,
+    3
+   ],
+   "doorway_1": true,
+   "doors_open_1": true,
+   "windows_2": [
+    1,
+    2,
+    3
+   ],
+   "doorway_2": true,
+   "gate_1": 84,
+   "gate_2": 96,
+   "chained": false,
+   "spill_1": 0.7,
+   "spill_2": 1.0
+  },
+  "men gone": {
+   "about": "No. 1 the moment after \"go\" (the men gone in, two of them at its looms, the gate open, its cart doors open and doorway lit, its windows still dark), No. 2 flat out",
+   "men_1": false,
+   "men_2": false,
+   "workers_1": 2,
+   "workers_2": 2,
+   "windows_1": [],
+   "doorway_1": true,
+   "doors_open_1": true,
+   "windows_2": [
+    1,
+    2,
+    3
+   ],
+   "doorway_2": true,
+   "gate_1": 84,
+   "gate_2": 96,
+   "chained": false,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  },
+  "quiet, no men": {
+   "about": "as quiet, with No. 1's seven men left out: what they hide (its cart doors shut, its doorway and windows dark), for the behind picture of page 3's slide",
+   "men_1": false,
+   "men_2": false,
+   "workers_1": 0,
+   "workers_2": 2,
+   "windows_1": [],
+   "doorway_1": false,
+   "doors_open_1": false,
+   "windows_2": [
+    1,
+    2,
+    3
+   ],
+   "doorway_2": true,
+   "gate_1": 0,
+   "gate_2": 96,
+   "chained": true,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  },
+  "slowed": {
+   "about": "No. 2 slowed (8 men waiting, a third of its windows lit, gate half shut, one person left at work in its doorway); No. 1 quiet",
+   "men_1": true,
+   "men_2": true,
+   "workers_1": 0,
+   "workers_2": 1,
+   "windows_1": [],
+   "doorway_1": false,
+   "doors_open_1": false,
+   "windows_2": [
+    1
+   ],
+   "doorway_2": true,
+   "gate_2": 42,
+   "gate_1": 0,
+   "chained": true,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  },
+  "w4": {
+   "about": "page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate",
+   "men_1": false,
+   "men_2": true,
+   "workers_1": 0,
+   "workers_2": 1,
+   "windows_1": [],
+   "doorway_1": false,
+   "doors_open_1": false,
+   "windows_2": [
+    1
+   ],
+   "doorway_2": true,
+   "gate_2": 42,
+   "gate_1": 0,
+   "chained": true,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  }
+ },
+ "assumptions": [
+  "crate and envelope normals are assumed; every other sign's normal comes from the build"
+ ]
+}
