@@ -1,0 +1,106 @@
+{
+ "about": "What this file is: the shot check for the Works' view W1 in No. 1's working state (round 5): the waiting men gone in (two of them now at its looms, inside the lit doorway), every window lit, the gate open and the three THIS WAY UP crates popped up in its gateway, as the film shows it from \"things\" on page 3 (paper-film/blender/inflation-chapter-2-newcomers/works/assemble_works.py, plan 34 part 1 'A. The Works'). The crates' lettering is in must_read, so the checker says if any of THIS WAY UP is hidden. Run from the kit's top folder with BLEND=assets/models/inflation-chapter-2-newcomers/works/works-lane.blend paper-film/tools/check-shot.sh paper-film/blender/inflation-chapter-2-newcomers/works/assemble_works.py THIS_FILE OUT [PICTURE] -- --view w1 --state working.",
+ "size": [
+  1080,
+  1920
+ ],
+ "groups": {
+  "no-1 gate": [
+   "no-1-gate",
+   "no-1-chain"
+  ],
+  "no-1 board": [
+   "gate-board-no-1"
+  ],
+  "brazier": [
+   "brazier-drum",
+   "brazier_coal_*"
+  ],
+  "lantern": [
+   "hurricane-lantern"
+  ],
+  "lunch tin": [
+   "lunch-tin"
+  ],
+  "petrol drum": [
+   "no-1-drum-petrol"
+  ],
+  "diesel drum": [
+   "no-1-drum-diesel"
+  ],
+  "gate lamp": [
+   "no-1-gate-lamp"
+  ],
+  "no-1 chimney": [
+   "no-1-chimney"
+  ],
+  "no-2 chimneys": [
+   "no-2-chimney-a",
+   "no-2-chimney-b"
+  ],
+  "pop-up crates": [
+   "no-1-crate-*"
+  ],
+  "people at work": [
+   "no-1-worker-*"
+  ]
+ },
+ "subject": "no-1 gate",
+ "story": [
+  "brazier",
+  "lantern",
+  "diesel drum",
+  "pop-up crates"
+ ],
+ "lights_in_story": [
+  "lantern"
+ ],
+ "pairs_also": [
+  "no-1 board",
+  "petrol drum",
+  "lunch tin",
+  "gate lamp",
+  "people at work"
+ ],
+ "work": [],
+ "on_ground": [
+  "brazier",
+  "petrol drum",
+  "diesel drum",
+  "pop-up crates"
+ ],
+ "must_read": [
+  "no-1 board",
+  "petrol drum",
+  "diesel drum",
+  "pop-up crates"
+ ],
+ "box_excludes": [
+  "no-1 board"
+ ],
+ "lines": {
+  "lane": [
+   0,
+   1,
+   0
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "lane",
+ "eye_height": [
+  1.5,
+  1.9
+ ],
+ "title_zone": [
+  0.06,
+  0.05,
+  0.9,
+  0.22
+ ],
+ "story_reaches_down": 0.7,
+ "story_reaches_down_note": "rule 7 (round 5): some story prop or the subject must reach at least this far down the frame, so the story fills the frame into its lower part (the notice corner's drum, chair and pail fill 0.45 to 0.8 down); checked only where a check file gives it"
+}

@@ -211,8 +211,12 @@ on the pavement; a drum moved behind the board or so its edge just meets the cha
 bottom-left corner; a lamp post along the board's edge or across the notice. Each time the report's first
 fix named the planted fault. Five independent helpers then followed its advice, planted new faults, read
 the code and read the reports as a non-programmer would; their findings are fixed (log 31). It does not
-check rule 7 (columns), most of rule 9, rule 11 (check the film's first, middle and last frames), or
-whether props poke into each other in 3D beyond their outline boxes.
+check rule 7's columns, most of rule 9, rule 11 (check the film's first, middle and last frames), or
+whether props poke into each other in 3D beyond their outline boxes. It checks one part of rule 7 when a
+check file asks for it: `"story_reaches_down": 0.70` means some story prop or the subject must reach at
+least 0.70 down the frame, so the story fills the frame into its lower part (the notice corner's drum,
+chair and pail fill 0.45 to 0.8 down). It is off unless a check file gives it, so older checks are
+unchanged; the Works' gate views (chapter 2) use it.
 
 ## What a picture-making program can and can't do for you
 

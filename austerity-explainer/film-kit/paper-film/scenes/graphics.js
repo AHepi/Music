@@ -108,7 +108,10 @@ export function counter(ctx, t, { at, until = at + 4, duration = 1.2, from = 0, 
 // kit.toScreen). The line draws out from the spot, then the words appear at its end.
 // plate: true draws a dark rounded plate behind the words, so they read over pale walls or sky.
 // fadeOut: seconds it fades before `until` (0: it ends exactly at `until`, as on a cut).
-export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, plate = false, fadeOut = 0.3 }) {
+// wordsWithLine: true brings the words (and plate) in at once, in their place at the line's end, while the line draws
+// out to them, instead of 0.3 s later (for labels held only briefly before a cut; log 34, round 5).
+export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, plate = false, fadeOut = 0.3,
+  wordsWithLine = false }) {
   const a = presence(t, at, until, 0.01, fadeOut);
   if (a <= 0 || !point || point.behind) return false;
   const age = t - at;
@@ -129,18 +132,20 @@ export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy 
   ctx.strokeStyle = accent; ctx.lineWidth = 3;
   ctx.beginPath(); ctx.moveTo(point.x, point.y); ctx.lineTo(end.x, end.y); ctx.lineTo(end.x + side * 40 * k, end.y); ctx.stroke();
   ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(point.x, point.y, 7, 0, Math.PI * 2); ctx.fill();
-  ctx.globalAlpha = a * clamp01((age - 0.3) / 0.25);
+  // where the words stand: at the line's end as it draws, or (wordsWithLine) where it will end
+  const words = wordsWithLine ? { x: point.x + reach, y: endY } : end;
+  ctx.globalAlpha = a * (wordsWithLine ? clamp01(age / 0.12) : clamp01((age - 0.3) / 0.25));
   if (plate) {
     const textWidth = labelWidth - 52, padX = size * 0.45, padY = size * 0.32;
-    const left = side > 0 ? end.x + side * 52 - padX : end.x + side * 52 - textWidth - padX;
+    const left = side > 0 ? words.x + side * 52 - padX : words.x + side * 52 - textWidth - padX;
     noShadow(ctx);
     ctx.fillStyle = 'rgba(12,16,18,0.72)';
-    ctx.beginPath(); ctx.roundRect(left, end.y - size / 2 - padY, textWidth + 2 * padX, size + 2 * padY, size * 0.3); ctx.fill();
+    ctx.beginPath(); ctx.roundRect(left, words.y - size / 2 - padY, textWidth + 2 * padX, size + 2 * padY, size * 0.3); ctx.fill();
     withShadow(ctx, 12);
   }
   ctx.fillStyle = colour; ctx.textBaseline = 'middle';
   ctx.textAlign = side > 0 ? 'left' : 'right';
-  ctx.fillText(text, end.x + side * 52, end.y);
+  ctx.fillText(text, words.x + side * 52, words.y);
   ctx.restore();
   return true;
 }

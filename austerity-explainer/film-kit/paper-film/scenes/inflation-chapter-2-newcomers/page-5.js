@@ -11,7 +11,8 @@
 //       exactly on the cut to W3 (no fade a frame early, so the cut is one clean step). Live: as page 4.
 //   5b  W3, both factories, held, with the rule over them. Cut on "Most"; the small name tags QUIET and FLAT OUT over
 //       the two columns; MOST ECONOMISTS AGREE (small, above the rule cards); the upper rule card NEW MONEY SPENT +
-//       SPARE → MOSTLY MORE THINGS MADE with a thin line to No. 1's chimney; the lower rule card NOTHING SPARE →
+//       SPARE → MOSTLY MORE THINGS MADE with a thin line to No. 1's chimney, which starts to smoke on "made" (the
+//       working smoke, so the line lands on a factory at work, not a cold chimney); the lower rule card NOTHING SPARE →
 //       MOSTLY PRICES UP with a thin line to No. 2's chimneys; both over a soft dark band (the smoke crosses the top
 //       band). Then the 2-second hold on the rule cards and the page peel. Live: No. 2's smoke and window flicker,
 //       No. 1's brazier and lantern.
@@ -50,8 +51,11 @@ export async function build(kit) {
 
   function pose(t) {
     const inW3 = t >= T.most;
-    // in W2 the windows keep the brighter flicker page 4 gave them on "busy"; W3 always shows the factories as first described
-    const still = works.set(t, { view: inW3 ? 'w3' : 'w2', painting: inW3 ? 'w3' : 'w2', no1: { state: 'quiet' }, no2: { state: 'flat out', busy: inW3 ? 0 : 1 } });
+    // in W2 the windows keep the brighter flicker page 4 gave them on "busy"; W3 shows the factories as first described,
+    // except that No. 1's chimney starts to smoke on "made" (round 4 of log 34: the rule card's line landed on a cold
+    // chimney just after page 3 showed it start work); the tags QUIET and FLAT OUT still name the two starting states
+    const no1 = inW3 && t >= T.made2 ? { state: 'quiet', smoke: 'working', smokeFrom: T.made2 } : { state: 'quiet' };
+    const still = works.set(t, { view: inW3 ? 'w3' : 'w2', painting: inW3 ? 'w3' : 'w2', no1, no2: { state: 'flat out', busy: inW3 ? 0 : 1 } });
     return { camera: inW3 ? both(t) : flatOutGate(t), still, look: LOOK };
   }
 

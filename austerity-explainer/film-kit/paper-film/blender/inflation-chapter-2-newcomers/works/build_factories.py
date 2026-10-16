@@ -11,7 +11,8 @@
 #   No. 1, the quiet factory: dark red-brown brick (castle_brick_02_red, darkened); ONE tall ROUND
 #     chimney (26 m) at the back of its yard; a four-bay sawtooth roof whose teeth show along the mill
 #     front's top; no water tank; a two-storey mill front with upper windows; a cart doorway behind the
-#     gate, its doors shut, and behind it a weaving shed's room with two power looms belted to a line shaft.
+#     gate, its doors shut, and behind it a weaving shed's room with two chest-high power looms facing the lane (side
+#     frames, a pale roll of cloth across the front, a big spoked driving wheel belted up to a countershaft).
 #   No. 2, the flat-out factory: pale buff-grey brick (white_sandstone_bricks, toned); TWO SQUARE chimneys
 #     (25 m and 23 m) of a paler buff still, sooted only in a narrow band under the cap, their faces toward
 #     the lane and their sides lit warm by No. 2's own blazing yard (so that from the lane, where only their
@@ -21,7 +22,8 @@
 #     a power press with a big spoked flywheel and a pillar drill, belted to a line shaft), and over it, in
 #     the gable above the gate, a row of three tall mill windows in the window groups.
 # The machines are modelled (round 3's check: painted on the doorway's back wall as dark slabs in rising
-# steps, they read as a bar chart on a phone); the doorway's far wall is a plain lit wall.
+# steps, they read as a bar chart on a phone); the doorway's far wall is lit, broken up by a darker lower part,
+# shelves of boxes and tins, and a bobbin rack (No. 1) or a workbench and a rack of bar stock (No. 2) (round 5).
 # No sign boards, no lettering, no figures anywhere (the gate boards "No. 1" and "No. 2" are props from
 # chapter 2's prop library). No shading bake: Blender draws the plates itself.
 #
@@ -49,7 +51,8 @@
 #
 # Named parts the film can find: <prefix>-loading-door-left / -right (each turns about its hinge, its own
 # centre), the markers no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top (where smoke starts),
-# <prefix>-doorway-foot (on the ground 1 m in front of the doorway's middle), no-2-tank-top. One root each: no-1-quiet-factory,
+# <prefix>-doorway-foot (on the ground 1 m in front of the doorway's middle), no-2-tank-top, no-1-looms-middle and
+# no-2-flywheel-middle (the middle of the two looms and of the press's flywheel, round 5). One root each: no-1-quiet-factory,
 # no-2-flat-out-factory.
 #
 # Run (paint_works_pictures.py first):
@@ -100,6 +103,11 @@ NO_2_YARD_GLOW = (1.0, 0.72, 0.46)              # the colour of the yard's light
 NO_2_GLOW_STRENGTH = {'lane-side': 0.45, 'sides': 0.22}   # how strongly each face gives off that light
 YARD_DEPTH = 42.0
 DOORWAY_ROOM_DEPTH = 7.0         # the room seen through each cart doorway, from the front wall's face to its lit far wall
+# No. 1's two looms: (centre along the wall from the doorway's middle, front's depth behind the wall's face, width), and
+# the radius of each loom's big driving wheel (round 5)
+LOOMS = ((0.25, 1.9, 1.8), (-1.2, 3.7, 1.7))
+LOOM_WHEEL_RADIUS = 0.45
+DADO_HEIGHT = 1.0                # the darker lower part of each doorway room's far wall (round 5)
 GABLE_WINDOWS = (4.6, 7.2)       # No. 2's row of windows in the gable over its gate: sill and head heights
 GABLE_WINDOW_WIDTH = 0.95
 GABLE_WINDOW_CENTRES = (1.75, 2.9, 4.05)
@@ -191,7 +199,9 @@ class Factory:
                                    kit.surface_material('no-1-brick-black', 'castle_brick_02_red', tint=(0.13, 0.1, 0.09))]
             self.window_type = 'mill-window-narrow'
             self.roof_glass_type = 'north-light'
-            self.door_paint = kit.surface_material('no-1-door-timber', 'distressed_painted_planks', tint=(0.3, 0.21, 0.15), roughness=0.7)
+            # weathered, paler timber (round 5; round 4: dark brown): No. 1's shut cart doors stand behind its shut gate in
+            # W1, and in the yard's faint cool light the gate's bars and the waiting men's heads now show dark against them
+            self.door_paint = kit.surface_material('no-1-door-timber', 'distressed_painted_planks', tint=(0.52, 0.45, 0.37), roughness=0.7)
         else:
             self.brick = kit.surface_material('no-2-brick', 'white_sandstone_bricks', tint=(0.92, 0.86, 0.74))
             self.stone = kit.surface_material('no-2-stone', 'large_sandstone_blocks', tint=(0.6, 0.58, 0.54), tile_metres=1.5)
@@ -394,8 +404,9 @@ def doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth
             machines.rod(at(along, behind, z), at(along + (radius - rim) * math.cos(angle), behind, z + (radius - rim) * math.sin(angle)), 0.028, iron, sides=6)
         rod_back(along, behind - 0.12, behind + 0.12, z, 0.1)
 
-    # the line shaft under the ceiling, on hangers, the full width of the room
-    shaft_depth, shaft_z = depth - 2.6, ceiling - 0.38
+    # the line shaft under the ceiling, on hangers, the full width of the room (in No. 1 it runs near the back wall,
+    # where the looms' countershafts end at it)
+    shaft_depth, shaft_z = (depth - 0.9 if factory.number == 1 else depth - 2.6), ceiling - 0.38
     rod_along(room_start + 0.15, room_end - 0.15, shaft_depth, shaft_z, 0.045, sides=10)
     along = room_start + 0.5
     while along < room_end - 0.3:
@@ -404,29 +415,51 @@ def doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth
         along += 1.7
     shaft_pulleys = []
     if factory.number == 1:
-        # two power looms, the second further back and to the left, so their side frames show one beside the other
-        for loom_centre, front, width in ((centre + 0.35, 2.0, 1.7), (centre - 1.0, 3.9, 1.6)):
+        # two power looms facing the lane, chest-high (round 5; round 4's check: low dark bars, "two church benches",
+        # with no wheel, belt or cloth). The second stands further back and to the left, so both show through the
+        # doorway. Each: two upright cast-iron side frames (a short front post, a tall back post, an arched top rail and
+        # a cross rail), the breast beam with a pale roll of woven cloth across the front under it, the warp's pale sheet
+        # rising to the back rest, the sley, and on its right end a big spoked driving wheel facing the lane, belted
+        # straight up to a pulley on a short countershaft hung from the ceiling (its axis away from the lane, like No.
+        # 2's press). The loom's own colour is a little lighter than No. 2's machines so its outline shows in the room's
+        # light.
+        cloth = kit.plain_material(f'{factory.prefix}-loom-cloth', (0.78, 0.74, 0.64), roughness=0.95)
+        for loom_centre, front, width in LOOMS:
+            loom_centre += centre
             left, right = loom_centre - width / 2, loom_centre + width / 2
-            back = front + 1.1
+            back = front + 1.2
             for side in (left, right):
-                # each side frame: two posts and an arched top rail, with a cross foot
-                box(side - 0.05, side + 0.05, front, front + 0.1, 0.0, 1.05)
-                box(side - 0.05, side + 0.05, back - 0.1, back, 0.0, 1.25)
-                machines.beam(at(side, front + 0.05, 1.05), at(side, back - 0.05, 1.25), 0.1, 0.1, iron)
-                box(side - 0.07, side + 0.07, front - 0.05, back + 0.05, 0.0, 0.1)
-            rod_along(left, right, front + 0.02, 0.95, 0.05)                            # the breast beam
-            rod_along(left + 0.05, right - 0.05, front + 0.15, 0.45, 0.11)             # the cloth roller
-            rod_along(left + 0.05, right - 0.05, back - 0.15, 0.62, 0.17)              # the warp beam
-            box(left + 0.05, right - 0.05, front + 0.3, front + 0.42, 0.82, 0.98)      # the sley
-            rod_along(left - 0.05, right + 0.05, front + 0.55, 0.32, 0.04)             # the crank shaft
+                box(side - 0.05, side + 0.05, front, front + 0.1, 0.0, 1.22)               # the front post
+                box(side - 0.05, side + 0.05, back - 0.1, back, 0.0, 1.42)                 # the back post
+                machines.beam(at(side, front + 0.05, 1.22), at(side, (front + back) / 2, 1.5), 0.1, 0.1, iron)   # the arched top rail
+                machines.beam(at(side, (front + back) / 2, 1.5), at(side, back - 0.05, 1.42), 0.1, 0.1, iron)
+                machines.beam(at(side, front + 0.05, 0.55), at(side, back - 0.05, 0.55), 0.07, 0.08, iron)       # the cross rail
+                box(side - 0.07, side + 0.07, front - 0.05, back + 0.05, 0.0, 0.1)         # the cross foot
+            rod_along(left, right, front + 0.02, 1.12, 0.055)                              # the breast beam
+            rod_along(left + 0.08, right - 0.08, front + 0.12, 0.72, 0.15, material=cloth, sides=16)   # the roll of cloth
+            machines.quad([at(left + 0.1, front + 0.03, 1.1), at(right - 0.1, front + 0.03, 1.1), at(right - 0.1, front + 0.1, 0.86),
+                           at(left + 0.1, front + 0.1, 0.86)], cloth)                       # the cloth running down to it
+            rod_along(left + 0.05, right - 0.05, back - 0.15, 0.62, 0.17)                  # the warp beam
+            rod_along(left + 0.05, right - 0.05, back - 0.08, 1.3, 0.04)                   # the back rest
+            box(left + 0.05, right - 0.05, front + 0.3, front + 0.42, 1.0, 1.2)            # the sley
+            rod_along(left - 0.05, right + 0.2, front + 0.55, 0.62, 0.045)                 # the crank shaft
             # the warp: a sheet of threads from the warp beam over the back rest to the cloth at the breast beam
-            machines.quad([at(left + 0.1, back - 0.15, 0.79), at(right - 0.1, back - 0.15, 0.79), at(right - 0.1, front + 0.1, 0.96),
-                           at(left + 0.1, front + 0.1, 0.96)], warp)
-            # its fast and loose pulleys on the right, belted up to the shaft
-            pulley_along = right + 0.12
-            rod_along(pulley_along - 0.06, pulley_along + 0.06, front + 0.55, 0.32, 0.24)
-            shaft_pulleys.append((pulley_along, 0.34))
-            belt_between(pulley_along, (front + 0.55, 0.32), 0.24, (shaft_depth, shaft_z), 0.34)
+            machines.quad([at(left + 0.1, back - 0.1, 1.3), at(right - 0.1, back - 0.1, 1.3), at(right - 0.1, front + 0.12, 1.14),
+                           at(left + 0.1, front + 0.12, 1.14)], warp)
+            # the big driving wheel on the crank shaft's right end, facing the lane, belted up to its countershaft
+            wheel_along, wheel_z, wheel_radius = right + 0.16, 0.62, LOOM_WHEEL_RADIUS
+            wheel(wheel_along, front + 0.55, wheel_z, wheel_radius, spokes=6, rim=0.04)
+            jack_z = ceiling - 0.4
+            rod_back(wheel_along, front + 0.35, front + 0.75, jack_z, 0.15, sides=14)       # the countershaft's pulley
+            rod_back(wheel_along, front - 0.2, shaft_depth, jack_z, 0.04, sides=8)          # the countershaft
+            for hanger in (front - 0.1, shaft_depth - 0.3):
+                machines.rod(at(wheel_along, hanger, jack_z), at(wheel_along, hanger, ceiling), 0.03, iron, sides=6)
+            for sign in (1, -1):        # the belt's two runs, flat toward the lane
+                strap(at(wheel_along + sign * wheel_radius * 0.97, front + 0.51, wheel_z), at(wheel_along + sign * 0.15, front + 0.51, jack_z))
+        # a marker in the middle of the two looms (round 5: the pages' label points at it)
+        middle_along = centre + sum(loom[0] for loom in LOOMS) / len(LOOMS)
+        middle_depth = sum(loom[1] for loom in LOOMS) / len(LOOMS) + 0.6
+        kit.empty(f'{factory.prefix}-looms-middle', at(middle_along, middle_depth, 0.9), parent=factory.root)
     else:
         # a lathe on cabinet legs, its bed across the room, the headstock with its stepped cone pulley on the left
         lathe = centre - 0.75
@@ -455,6 +488,7 @@ def doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth
         box(press - 0.16, press, back - 0.34, back - 0.18, 1.2, 2.15)                  # the ram
         flywheel_along, flywheel_z, flywheel_radius = press + 0.62, 2.0, 0.72
         wheel(flywheel_along, back - 0.2, flywheel_z, flywheel_radius)
+        kit.empty(f'{factory.prefix}-flywheel-middle', at(flywheel_along, back - 0.2, flywheel_z), parent=factory.root)   # for the pages' label
         rod_back(flywheel_along, back - 0.2, back + 0.4, flywheel_z, 0.05)            # its shaft into the crown
         jack_z = ceiling - 0.35
         rod_back(flywheel_along, back - 0.32, back - 0.08, jack_z, 0.18, sides=14)    # the countershaft's pulley
@@ -474,6 +508,59 @@ def doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth
         belt_between(drill - 0.02, (front + 0.14, 2.12), 0.13, (shaft_depth, shaft_z), 0.26)
     for pulley_along, radius in shaft_pulleys:
         rod_along(pulley_along - 0.08, pulley_along + 0.08, shaft_depth, shaft_z, radius, sides=16)
+    # the far wall broken up (round 5; round 4's check: a flat glowing panel, an empty hall lit like a lightbox): a
+    # darker lower part (a painted dado up to DADO_HEIGHT), two long shelves of boxes and tins high up, and in No. 1 a
+    # bobbin rack (rows of upright bobbins on pegs) against the wall's left part, in No. 2 a workbench with a vice and
+    # a rack of bar stock. They stand in front of the lit wall, so they show as dark shapes against it, and the room's
+    # own light gives them a little form. The middle band, where the machines and the people at them stand, stays lit,
+    # so they show against it; No. 2's shelves are higher, above its flywheel.
+    chooser = random.Random(factory.number * 37)
+    far = depth - 0.05
+    dado = kit.plain_material(f'{factory.prefix}-room-dado', (0.1, 0.075, 0.055) if factory.number == 1 else (0.085, 0.09, 0.08), roughness=0.9)
+    timber = kit.plain_material(f'{factory.prefix}-room-shelf', (0.15, 0.1, 0.065), roughness=0.85)
+    tins = kit.plain_material(f'{factory.prefix}-room-tins', (0.12, 0.12, 0.13), roughness=0.6)
+    box(room_start + 0.12, room_end - 0.12, far - 0.07, far - 0.01, 0.0, DADO_HEIGHT, dado)
+    box(room_start + 0.12, room_end - 0.12, far - 0.1, far - 0.01, DADO_HEIGHT, DADO_HEIGHT + 0.06, timber)       # its rail
+    for shelf_z in ((2.3, 2.9) if factory.number == 1 else (3.0, 3.5)):
+        box(room_start + 0.15, room_end - 0.15, far - 0.36, far - 0.01, shelf_z - 0.04, shelf_z, timber)
+        along = room_start + 0.4
+        while along < room_end - 0.3:
+            box(along - 0.025, along + 0.025, far - 0.3, far - 0.01, shelf_z - 0.3, shelf_z - 0.04, iron)          # a bracket
+            along += 1.2
+        along = room_start + 0.25 + 0.2 * chooser.random()
+        while along < room_end - 0.5:
+            wide, high = 0.18 + 0.3 * chooser.random(), 0.1 + 0.2 * chooser.random()
+            if chooser.random() < 0.35:
+                rod_back(along + 0.1, far - 0.3, far - 0.06, shelf_z + 0.1, 0.09, material=tins, sides=10)          # a tin
+                along += 0.22
+            else:
+                box(along, along + wide, far - 0.32, far - 0.05, shelf_z, shelf_z + high, timber if chooser.random() < 0.5 else tins)
+                along += wide
+            along += 0.04 + 0.25 * chooser.random()
+    if factory.number == 1:
+        # the bobbin rack: an upright frame with five rows of pale bobbins standing on pegs, on the wall's left part
+        bobbins = kit.plain_material(f'{factory.prefix}-bobbins', (0.6, 0.52, 0.4), roughness=0.9)
+        a0, a1 = centre - 2.15, centre - 0.85
+        for a in (a0, a1):
+            box(a - 0.03, a + 0.03, far - 0.4, far - 0.34, 0.0, 2.15)
+        for row in range(5):
+            z = 1.12 + row * 0.2
+            box(a0, a1, far - 0.42, far - 0.32, z - 0.03, z)
+            for k in range(9):
+                spot = a0 + (k + 0.5) * (a1 - a0) / 9
+                machines.rod(at(spot, far - 0.37, z), at(spot, far - 0.37, z + 0.15), 0.035, bobbins, sides=8)
+    else:
+        # the workbench along the far wall, a vice on it, and a rack of bar stock leaning on the wall on the right
+        bench = (centre - 1.6, centre - 0.1)
+        box(bench[0], bench[1], far - 0.7, far - 0.08, 0.86, 0.94, timber)
+        for a in (bench[0] + 0.08, bench[1] - 0.08):
+            box(a - 0.04, a + 0.04, far - 0.66, far - 0.12, 0.0, 0.86)
+        box(bench[0] + 0.3, bench[0] + 0.48, far - 0.68, far - 0.5, 0.94, 1.12)                                    # the vice
+        rack = centre + 1.1
+        for k in range(7):
+            lean = rack + 0.06 * k
+            machines.rod(at(lean, far - 0.5, 0.0), at(lean + 0.12, far - 0.12, 2.5), 0.025, iron, sides=6)
+        box(rack - 0.05, rack + 0.55, far - 0.2, far - 0.05, 2.1, 2.16)
     # lamp shades hanging on cords (their light is the lit far wall's and the room's light)
     for lamp_along, lamp_depth in ((centre - 0.9, 2.9), (centre + 0.7, 3.5), (centre - 0.1, 5.2)):
         low = ceiling - 1.0
@@ -934,7 +1021,7 @@ def facts(factory):
         mill['roof'] = f'four-bay sawtooth, bays of {MILL_WIDTH / 4:g} m rising towards the centre line, peaks {EAVES + TOOTH:g} m'
         return {'mill': mill, 'round_chimney': {'x': x, 'y': y, 'height': height, 'shaft_diameter': [2.9, 1.84]},
                 'cart_doorway': {'centre_x': -3.4, 'width': 3.0, 'height': 3.8, 'room_depth': DOORWAY_ROOM_DEPTH,
-                                 'machines': 'two power looms belted to a line shaft (no-1-doorway-machines)'}}
+                                 'machines': 'two chest-high power looms, each with a big driving wheel belted up to a countershaft, a roll of cloth across its front (no-1-doorway-machines)'}}
     spans = [(INNER_EDGE, 5.0), (5.0, 13.75), (13.75, INNER_EDGE + MILL_WIDTH)]
     mill['roof'] = ('three pitched spans, gables to the lane, ridges ' +
                     ', '.join(f'{EAVES + (b - a) / 2 * math.tan(PITCH):.2f} m' for a, b in spans) + ', lanterns on each ridge')

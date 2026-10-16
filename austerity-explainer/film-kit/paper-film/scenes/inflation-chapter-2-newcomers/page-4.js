@@ -4,7 +4,8 @@
 // spent on what this factory makes. What happens to prices? Have a guess."
 //   4a  W2, the open No. 2 gate with nobody waiting, from where a waiting man would stand (W1's spot, mirrored): flat
 //       out, the gate wide open, windows blazing, both chimneys smoking hard, the empty pavement lit by the gateway. On
-//       "busy" the windows flicker brighter. One slide of 1.2 m toward the gate from "No" to "factory" (we walk up to
+//       "busy" a burst for 2 seconds: the windows flicker three times as strongly, a slow dark band (the machines'
+//       shadows) passes across No. 2's panes and the doorway's light pulses with it; then the brighter flicker stays. One slide of 1.2 m toward the gate from "No" to "factory" (we walk up to
 //       the gate with nobody in the way), never turning, stopping on the composed frame. THE FLAT-OUT FACTORY with a
 //       small line under it, FLAT OUT = WORKING AS HARD AS THEY CAN; NEW MONEY SPENT (the same words as page 3); WHAT
 //       HAPPENS TO PRICES?; HAVE A GUESS with a ring that fills over 4 seconds. Then the 4-second guess hold on the
@@ -47,7 +48,7 @@ export async function build(kit) {
     [{ kind: 'zoom in', from: T.no, to: T.factory, ...works.cameraAt('w2', 'composed') }], { name: '4a the flat-out gate' });
 
   function pose(t) {
-    const still = works.set(t, { view: 'w2', painting: 'w2', no1: { state: 'quiet' }, no2: { state: 'flat out', busy: smooth((t - T.busy) / 0.6) } });
+    const still = works.set(t, { view: 'w2', painting: 'w2', no1: { state: 'quiet' }, no2: { state: 'flat out', busy: smooth((t - T.busy) / 0.6), busyAt: T.busy } });
     const sliding = t > T.no && t < T.factory;
     return { camera: camera(t), still: sliding ? false : still, look: LOOK };
   }

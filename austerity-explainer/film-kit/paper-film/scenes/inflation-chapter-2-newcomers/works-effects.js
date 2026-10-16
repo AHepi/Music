@@ -1,8 +1,9 @@
 // What this does: the Works on a page of chapter 2 for newcomers (plan 34, part 1 "A. The Works", and "How the two
 // factories stay the same", point 8): it loads the Works set (the two factories at the head of one lane, built in
 // Blender), shines the view's painting onto it (projected-set.js), and draws the Works' moving things on top: chimney
-// smoke from the chimney tops, the brazier's flames, sparks, smoke and glow and the lantern's flicker at No. 1, No. 2's
-// window flicker, the gate lamps' glow, the gate leaves (their own sharp surfaces, never in a plate) that can swing,
+// smoke from the chimney tops (blown across the view), the brazier's flames, sparks, smoke and glow and the lantern's
+// flicker at No. 1, the windows' flicker (with page 4's burst on "busy": a dark band across No. 2's panes and its
+// doorway pulsing), the gate lamps' glow, the gate leaves (their own sharp surfaces, never in a plate) that can swing,
 // the crates that pop up in No. 1's open gateway, the bank's window lighting (with its sign kept dim until then), No.
 // 2's eight waiting men (painted in W2's slowed picture, dark silhouettes in W4), and the factories' windows changing
 // in steps. Every page that shows the Works uses this one file, so the four states and their settings, the smoke and
@@ -40,11 +41,14 @@
 // What this file looks for in them (so the real export can match, or this list be changed in one place):
 //   works-shot.json   film_fov_degrees; views.{w1,w2,w3,w4}.plate and .composed (the camera's two spots) and
 //                     .subject (what it is focused on); brazier [x, y], coals_z, fire_light, lantern_light;
-//                     gate_lamps.{no-1,no-2}; men (the waiting men's object names); no-1-gateway (where the
-//                     pop-up crates stand and the NEW MONEY arrow points); no-2-crates (the crates in No. 2's gateway)
+//                     gate_lamps.{no-1,no-2}; men (the waiting men's object names) and men_at_no_1 (each with its
+//                     figure); no-1-gateway (where the pop-up crates stand); gates.no-1.chain (where the NEW MONEY
+//                     arrow points); no-2-crates (the crates in No. 2's gateway); machines.no-2-flywheel and
+//                     machines.no-1-looms (the machines in the lit doorways; MACHINES points at No. 2's flywheel)
 //   works-set.glb     the markers no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top (smoke) and the window
 //                     groups no-1-windows-step-1 to 3 and no-2-windows-step-1 to 3 (flicker), as build_factories.py
-//                     names them; the bank's glass in a material named bank-window... (page 9)
+//                     names them, and each factory's lit doorway room (no-2-doorway-inside, no-2-doorway-room; the
+//                     burst's pulse); the bank's glass in a material named bank-window... (page 9)
 //   works-gates.glb   no-1-gate and no-2-gate, each holding a left and a right leaf (names containing left_door /
 //                     right_door, or left-leaf / right-leaf) and a bolt; no-1-chain (the chain and padlock)
 //   works-pop-up.glb  no-1-crate-1, no-1-crate-2 ... (popping up in that order)
@@ -81,25 +85,30 @@ export const STATES = {
 };
 
 // Chimney smoke, in metres (the chimneys are about 25 m tall). count: puffs alive at once; life: seconds a puff lives;
-// rise and drift: how far it climbs and is blown; size: its width when born and at the end; opacity: its strongest;
-// fade: how soon a puff thins as it ages (the power of what is left of its life: lower keeps it thick for longer).
-// colour: as seen against the dusk (0 to 255, as on screen).
-// The smoke lies low: it climbs only a few metres, then the wind lays it over and carries it away up the works (away
-// from W1, W2 and W3, which all look up the lane), sinking a little. Seen from the lane a plume carried away comes down
-// the frame toward the horizon, so it crosses the sky under the words: in W2 No. 2's plumes cross about 0.08 to 0.22
-// down between the chimneys and the right-hand houses, in W1 No. 1's runs from its chimney's mouth (0.05 down) to about
-// 0.2 down and No. 2's show at the upper right, and in W3 they trail right at about 0.22 to 0.30 down, between the
-// rule cards and the name tags. (Blown up and toward the lane, as first set, every plume left the top of the frame
-// within a second and showed only as a faint wisp under the words: round 3 of log 34.)
+// rise and drift: how far it climbs and is blown; mouth: for its first `seconds` a puff is small (from `size` metres,
+// about the chimney's mouth, to size[0]) and stays close to the mouth, so the plume leaves the chimney as one body;
+// size: its width after that and at the end; opacity: its strongest; fade: how soon a puff thins as it ages (the power
+// of what is left of its life: lower keeps it thick for longer). colour: a brownish coal smoke, as seen against the
+// dusk (0 to 255, about as on screen).
+// The wind blows across the views (round 5 of log 34): toward No. 1's side and a little away up the works, sinking a
+// little, so each plume lies on its side as a long trail. Measured with round5-pages/tools/smoke_trace.py: in W3 No.
+// 2's plumes run left from their chimneys at about 0.24 to 0.29 down, under the lower rule card (it ends 0.236 down),
+// fading out by about 0.45 across, before they reach No. 1's chimney (0.375 across; longer plumes ran on behind it and
+// read as its smoke); No. 1's (from "made" on page 5) runs left toward the bank; in W1 and W2 the plumes run left
+// along the top of the frame, under the words, for about a quarter of the frame's width. The smoke hardly climbs and
+// sinks a little as it goes, so in W3 No. 1's plume comes out under the lower rule card, which hides the chimney's
+// mouth from "nothing" on (the card's line lands on the smoking chimney just before the lower card comes). (Blown away from the cameras, as in round 4, the puffs
+// piled up one behind another in a small patch, and their slightly different shades showed as rings: a pale doughnut
+// and a hook over No. 2's chimneys. Drawn with and without the focus blur, the rings were the same.)
 export const SMOKE = {
-  heavy: { count: 56, life: 10.0, rise: 4, drift: 36, size: [3.2, 13], opacity: 0.92, fade: 1.0, colour: [124, 120, 125] },
-  // No. 1 working is seen only from W1 (page 3): paler than the others, a fresh fire's smoke
-  working: { count: 40, life: 9.0, rise: 5, drift: 32, size: [3.0, 12], opacity: 0.9, fade: 1.0, colour: [150, 146, 148] },
-  thin: { count: 16, life: 9.0, rise: 4, drift: 30, size: [1.8, 8], opacity: 0.36, fade: 1.3, colour: [128, 126, 128] },
+  heavy: { count: 44, life: 7.0, rise: 0.6, drift: 16, mouth: { seconds: 2, size: 1.9 }, size: [3.4, 9], opacity: 0.95, fade: 1.8, colour: [100, 92, 84] },
+  // No. 1 working: seen from W1 (page 3, from "start") and W3 (page 5, from "made")
+  working: { count: 36, life: 7.0, rise: 0.6, drift: 15, mouth: { seconds: 2, size: 1.7 }, size: [3.0, 8], opacity: 0.93, fade: 1.8, colour: [104, 96, 88] },
+  thin: { count: 14, life: 7.0, rise: 0.5, drift: 14, mouth: { seconds: 2, size: 1.3 }, size: [1.8, 6], opacity: 0.5, fade: 1.9, colour: [100, 94, 88] },
 };
-// the wind: the same on every page and in every view, so the smoke always leans the same way: away up the works,
-// leaning a little to No. 2's side (+x) and sinking a little (three.js axes: -z is away from the lane's cameras)
-export const WIND = new THREE.Vector3(0.3, -0.05, -0.95).normalize();
+// the wind: the same on every page and in every view, so the smoke always leans the same way: across the views toward
+// No. 1's side (-x), a little away up the works (three.js axes: -z is away from the lane's cameras) and sinking a little
+export const WIND = new THREE.Vector3(-0.85, -0.12, -0.5).normalize();
 // across the wind, level: puffs spread to either side of the plume's line (so it reads as a broad plume, not a string)
 const ACROSS_WIND = new THREE.Vector3(-WIND.z, 0, WIND.x).normalize();
 // fixed seeds: the same smoke and flicker on every page
@@ -124,7 +133,9 @@ const BANK_WINDOW = 'bank-window';
 // boards), read before the factories' names on pages that never mention a bank (round 3 of log 34). Its board and
 // lettering are own surfaces, dimmed to this share of their lit brightness until the bank's window lights (page 9),
 // then brightened with the window. The board gets its own copy of the board paint (shared with the gate boards).
-export const BANK_SIGN = { board: 'bank-sign-board', lettering: 'bank-sign-lettering', boardPaint: 'board-black-paint', ownBoardPaint: 'bank-sign-board-paint', dim: 0.3 };
+// Dimmed to 0.3 (round 4) its letters were still twice the size of the factories' and easy to read on a phone; 0.15
+// from round 5 of log 34.
+export const BANK_SIGN = { board: 'bank-sign-board', lettering: 'bank-sign-lettering', boardPaint: 'board-black-paint', ownBoardPaint: 'bank-sign-board-paint', dim: 0.15 };
 // the pool of light the lit bank window throws on the pavement in front of it (page 9), in metres
 const BANK_POOL = { width: 3.4, depth: 2.4, out: 1.3, strength: 0.55 };
 // the windows' lit pictures, by glass type (for the flicker; the glass pieces are named in works_kit.py)
@@ -149,6 +160,8 @@ export function steppedBlend(t, at, { length = 0.8, steps = 3 } = {}) {
 // ------------------------------------------------------------------------------------------ chimney smoke
 
 // A soft, lumpy puff of smoke (a few overlapping soft blobs), drawn once; `seed` makes each of a few shapes its own.
+// The picture is white all over and the blobs are only in how see-through it is: a canvas keeps no colour where it is
+// fully see-through, so its own picture would fade toward black at the puff's soft edge when shrunk.
 function puffPicture(seed) {
   const random = seededRandom(seed);
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
@@ -160,7 +173,14 @@ function puffPicture(seed) {
     g.addColorStop(0, 'rgba(255,255,255,0.55)'); g.addColorStop(0.6, 'rgba(255,255,255,0.22)'); g.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = g; ctx.fillRect(0, 0, 128, 128);
   }
-  return canvasTexture(canvas);
+  const drawn = ctx.getImageData(0, 0, 128, 128).data;
+  const pixels = new Uint8Array(128 * 128 * 4).fill(255);
+  for (let i = 0; i < 128 * 128; i++) pixels[i * 4 + 3] = drawn[i * 4 + 3];
+  const texture = new THREE.DataTexture(pixels, 128, 128, THREE.RGBAFormat);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.magFilter = THREE.LinearFilter; texture.minFilter = THREE.LinearMipmapLinearFilter; texture.generateMipmaps = true;
+  texture.needsUpdate = true;
+  return texture;
 }
 const PUFF_PICTURES = [];
 const puffPictures = () => {
@@ -184,8 +204,10 @@ export class ChimneySmoke {
       const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: pictures[i % pictures.length], transparent: true, depthWrite: false, opacity: 0 }));
       sprite.visible = false;
       scene.add(sprite);
+      // shade: each puff a little lighter or darker than the kind's colour (kept close: puffs seen one over another
+      // showed their outlines as rings when the shades were 0.72 to 1.14 apart)
       return { sprite, order: i, jitter: random() * 0.6, sway: random() * Math.PI * 2, spin: (random() - 0.5) * 0.25, turn: random() * Math.PI * 2,
-        size: 0.8 + random() * 0.45, shade: 0.72 + random() * 0.42, side: (random() - 0.5) * 0.5, lift: random() - 0.5 };
+        size: 0.8 + random() * 0.45, shade: 0.93 + random() * 0.14, side: (random() - 0.5) * 0.5, lift: random() - 0.5 };
     });
     this.puffs = pool();
     this.earlierPuffs = pool();
@@ -211,12 +233,17 @@ export class ChimneySmoke {
       puff.sprite.visible = true;
       puff.sprite.position.set(this.top.x + WIND.x * blown + ACROSS_WIND.x * across, this.top.y + 0.3 + climb + WIND.y * blown + puff.lift * 3 * k,
         this.top.z + WIND.z * blown + ACROSS_WIND.z * across);
-      const size = (settings.size[0] + (settings.size[1] - settings.size[0]) * Math.pow(k, 0.8)) * puff.size;
+      // small and close at the mouth for its first seconds (the plume attached to the chimney), then widening
+      const { seconds: mouthFor, size: mouthSize } = settings.mouth;
+      const opened = Math.min(1, age / mouthFor);
+      const width = age < mouthFor ? mouthSize + (settings.size[0] - mouthSize) * opened
+        : settings.size[0] + (settings.size[1] - settings.size[0]) * Math.pow((age - mouthFor) / (life - mouthFor), 0.8);
+      const size = width * (1 + (puff.size - 1) * opened);
       puff.sprite.scale.set(size, size, 1);
       puff.sprite.material.rotation = puff.turn + puff.spin * age;
       const [r, g, b] = settings.colour.map((c) => Math.min(255, c * puff.shade) / 255);
       puff.sprite.material.color.setRGB(r, g, b, THREE.SRGBColorSpace);
-      puff.sprite.material.opacity = settings.opacity * Math.min(1, age / 0.25) * Math.pow(1 - k, settings.fade ?? 1.3);
+      puff.sprite.material.opacity = settings.opacity * Math.min(1, age / 0.2) * Math.pow(1 - k, settings.fade ?? 1.3);
     }
   }
 }
@@ -227,12 +254,31 @@ export class ChimneySmoke {
 // glass piece wearing its lit picture, drawn additively just in front of it. set(t, { amount, steps }) shows the panes
 // of the lit steps (1, 2, 3) with a flicker of strength `amount` (0 none, 1 blazing); fading: { steps, amount } shows
 // other steps going dark (a state change: No. 2's windows dimming as it slows).
+// burst: { at, across } (page 4's "busy", plan 34 F8; round 5 of log 34): for BUSY.length seconds from `at` the
+// flicker swings about three times as far (brighter peaks, and dips that darken the painted window), a slow dark band
+// (the machines' shadows) passes across the panes from left to right, along the factory's front from BUSY.reach metres
+// left of `across` (the gate's middle, x) to as far right of it, and the lit doorway room pulses with it, going dark as
+// the band passes it. Each pane has a dark copy too (a see-through, very dark brown), which lays the dips and the band's
+// shadow over the painted window. (Without the burst "busy" could not be seen: No. 2's windows went from 130 to 133
+// levels; round 4 of log 34.)
+export const BUSY = { length: 2.0, rise: 0.25, fall: 0.6, boost: 3.0, dips: 0.55, reach: 2.75, band: 1.1, shadow: 0.75, doorway: 0.35, doorwayDips: 0.3 };
 class WindowFlicker {
   constructor(scene, set, prefix, seed, litPictures) {
     const random = seededRandom(seed);
     this.group = new THREE.Group();
     this.panes = [];
     set.updateMatrixWorld(true);
+    const addPane = (o, step, picture, colour) => {
+      const material = new THREE.MeshBasicMaterial({ map: picture ?? null, color: colour, transparent: true, opacity: 0,
+        blending: THREE.AdditiveBlending, depthWrite: false, fog: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
+      const pane = new THREE.Mesh(o.geometry, material);
+      const shade = new THREE.Mesh(o.geometry, new THREE.MeshBasicMaterial({ color: 0x150d06, transparent: true, opacity: 0, depthWrite: false, fog: false,
+        polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
+      shade.renderOrder = 1; pane.renderOrder = 2;   // the shadow first, the light over it
+      for (const mesh of [pane, shade]) { mesh.matrixAutoUpdate = false; mesh.matrix.copy(o.matrixWorld); this.group.add(mesh); }
+      const centre = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3());
+      this.panes.push({ pane, shade, step, centre, speeds: [2.1 + random() * 3.5, 5.3 + random() * 6], phases: [random() * 6.28, random() * 6.28], dip: random() });
+    };
     for (const step of [1, 2, 3]) {
       const holder = set.getObjectByName(`${prefix}-windows-step-${step}`);
       if (!holder) continue;
@@ -240,27 +286,44 @@ class WindowFlicker {
         if (!o.isMesh) return;
         const name = [o.material].flat()[0]?.name ?? '';
         const glassType = GLASS_TYPES.find((type) => name.includes(type));
-        const material = new THREE.MeshBasicMaterial({ map: litPictures[glassType] ?? null, color: 0xffb468, transparent: true, opacity: 0,
-          blending: THREE.AdditiveBlending, depthWrite: false, fog: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
-        const pane = new THREE.Mesh(o.geometry, material);
-        pane.matrixAutoUpdate = false;
-        pane.matrix.copy(o.matrixWorld);
-        this.group.add(pane);
-        this.panes.push({ pane, step, speeds: [2.1 + random() * 3.5, 5.3 + random() * 6], phases: [random() * 6.28, random() * 6.28], dip: random() });
+        addPane(o, step, litPictures[glassType], 0xffb468);
       });
+    }
+    // the lit doorway room (its back wall and its walls and floor), for the burst's pulse only
+    for (const part of ['doorway-inside', 'doorway-room']) {
+      set.getObjectByName(`${prefix}-${part}`)?.traverse((o) => { if (o.isMesh) addPane(o, 'doorway', part === 'doorway-inside' ? litPictures['doorway-inside'] : null, 0xffb468); });
     }
     scene.add(this.group);
   }
-  set(t, { amount = 0, steps = [], fading = null } = {}) {
+  set(t, { amount = 0, steps = [], fading = null, burst = null } = {}) {
+    // the burst: how strong it is now (rising, holding, falling) and where the dark band is along the front (x, metres)
+    let surge = 0, band = 0;
+    if (burst && t >= burst.at && t < burst.at + BUSY.length) {
+      const age = t - burst.at;
+      surge = Math.min(1, age / BUSY.rise, (BUSY.length - age) / BUSY.fall);
+      band = burst.across - BUSY.reach + 2 * BUSY.reach * (age / BUSY.length);
+    }
+    const lit = steps.length > 0;
     for (const p of this.panes) {
-      const strength = steps.includes(p.step) ? amount : fading && fading.steps.includes(p.step) ? fading.amount : 0;
-      const on = strength > 0;
+      const isDoorway = p.step === 'doorway';
+      const strength = isDoorway ? (lit ? amount : 0) : steps.includes(p.step) ? amount : fading && fading.steps.includes(p.step) ? fading.amount : 0;
+      const on = strength > 0 && (!isDoorway || surge > 0);
       p.pane.visible = on;
+      p.shade.visible = on && surge > 0;
       if (!on) continue;
       const wave = 0.5 + 0.3 * Math.sin(t * p.speeds[0] + p.phases[0]) + 0.2 * Math.sin(t * p.speeds[1] + p.phases[1]);
+      const shadow = surge * Math.exp(-(((p.centre.x - band) / BUSY.band) ** 2));
+      if (isDoorway) {
+        // the doorway only during a burst: its light swells and dips with the machines, and goes dark as the band passes
+        p.pane.material.opacity = BUSY.doorway * surge * wave * (1 - shadow);
+        p.shade.material.opacity = Math.max(BUSY.doorwayDips * surge * (1 - wave), BUSY.shadow * shadow);
+        continue;
+      }
       // now and then a machine's shadow passes the window: a short dip
       const passing = Math.max(0, Math.sin(t * 0.7 + p.dip * 20)) ** 12;
-      p.pane.material.opacity = strength * (0.12 + 0.3 * wave) * (1 - 0.7 * passing);
+      const boost = 1 + (BUSY.boost - 1) * surge;
+      p.pane.material.opacity = Math.min(1, strength * boost * (0.12 + 0.3 * wave) * (1 - 0.7 * passing) * (1 - shadow));
+      p.shade.material.opacity = Math.max(BUSY.dips * surge * (1 - wave) ** 2, BUSY.shadow * shadow);
     }
   }
 }
@@ -695,10 +758,13 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
   //   blendTo, blend: a second picture and how far toward it (0 to 1; use steppedBlend so it changes in steps)
   //   men: the waiting men shown (they are in the painting; hiding them redraws the distance map)
   //   no1, no2: { state (a STATES name), gate (degrees, or leave out for the state's own), gateMoving, busy (0 to 1:
-  //              the windows flicker brighter), litSteps ([1, 2, 3]: which windows flicker), smokeFrom (seconds: smoke
-  //              starts here and builds up), crates (no1 only: the moment the crates pop up), was: { state, until,
-  //              fade } (a change of state on a word, at `until`: the earlier state's smoke drifts away and its extra
-  //              lit windows fade out over `fade` seconds, 1.5 by default, instead of jumping) }
+  //              the windows flicker brighter), busyAt (seconds: the word "busy"; for BUSY.length seconds the flicker
+  //              bursts, a dark band passes across the panes and the doorway pulses), litSteps ([1, 2, 3]: which
+  //              windows flicker), smoke (a SMOKE kind in place of the state's own: No. 1's working smoke on page 5's
+  //              "made" while it still shows quiet), smokeFrom (seconds: smoke starts here and builds up from the
+  //              chimney's mouth), crates (no1 only: the moment the crates pop up), was: { state, until, fade } (a
+  //              change of state on a word, at `until`: the earlier state's smoke drifts away and its extra lit
+  //              windows fade out over `fade` seconds, 1.5 by default, instead of jumping) }
   //   bank: the bank's window lit (true, or how far lit 0 to 1, in steps), its sign brightening with it; until then the
   //         sign is dim
   //   men2: No. 2's eight men shown (needs no2Men; painted ones only where the painting shows them)
@@ -721,21 +787,23 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
       }
       keys.push(`${prefix}:${moving ? 'swinging' : angle.toFixed(1)}${chained ? ' chained' : ''}`);
       // smoke (each chimney's kind in a state; on a change, the earlier state's puffs drift away)
-      const kindAt = (stateSettings, name) => {
-        const kind = stateSettings.smoke;
+      const kindAt = (kind, name) => {
         const smoking = kind === 'thin' ? THIN_CHIMNEYS[prefix] : kind === 'none' ? [] : CHIMNEYS[prefix];
         return smoking.includes(name) ? kind : 'none';
       };
       const was = given.was && t >= given.was.until ? { settings: STATES[prefix][given.was.state], until: given.was.until, fade: given.was.fade ?? 1.5 } : null;
       for (const name of CHIMNEYS[prefix]) {
-        smokes[name]?.set(t, { kind: kindAt(settings, name), from: given.smokeFrom ?? -Infinity, earlier: was ? { kind: kindAt(was.settings, name), until: was.until } : null });
+        smokes[name]?.set(t, { kind: kindAt(given.smoke ?? settings.smoke, name), from: given.smokeFrom ?? -Infinity,
+          earlier: was ? { kind: kindAt(was.settings.smoke, name), until: was.until } : null });
       }
       // window flicker: the lit steps (a third lit = step 1), brighter when busy
       const stepsOf = (stateSettings) => (stateSettings.windows >= 1 ? [1, 2, 3] : stateSettings.windows > 0 ? [1] : []);
       const litSteps = given.litSteps ?? stepsOf(settings);
       const amount = settings.flicker + (settings.busy ? (settings.busy - settings.flicker) * clamp01(given.busy ?? 0) : 0);
       const fading = was ? { steps: stepsOf(was.settings).filter((step) => !litSteps.includes(step)), amount: was.settings.flicker * (1 - clamp01((t - was.until) / was.fade)) } : null;
-      flicker[prefix].set(t, { amount, steps: litSteps, fading });
+      const across = facts.gates?.[prefix]?.centre?.[0] ?? (prefix === 'no-1' ? -3.5 : 3.5);
+      const burst = given.busyAt !== undefined ? { at: given.busyAt, across } : null;
+      flicker[prefix].set(t, { amount, steps: litSteps, fading, burst });
     }
     keys.push(`crates:${showCrates(t, state.no1?.crates)}`);
     // the fire, the lantern and the gate lamps (always lit at No. 1; the gate lamps on both piers)
@@ -789,8 +857,26 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
     }
     return best;
   };
+  // a point given in works-shot.json (Blender), raised by `lift` metres, or null when the export has none
+  const fact = (point, lift = 0) => (point ? fromBlender(point).add(new THREE.Vector3(0, lift, 0)) : null);
+  // No. 1's waiting men standing at the gate (the stooped man at the brazier left out)
+  const waitingMen = () => (facts.men_at_no_1 ?? []).filter((m) => !m.figure?.includes('stooped')).map((m) => named(m.name)).filter(Boolean);
   const spots = {
     'no-1-queue': () => boxCentre(men.slice(2, 5), 0.85),
+    // the right-hand man of No. 1's waiting men, at his chest: a label's line leaves the crowd sideways from here onto
+    // the empty lane beside it (round 5 of log 34: drawn from the middle of the queue, WORKERS' line ran down over the men)
+    'no-1-crowd-side': () => {
+      const crowd = waitingMen();
+      if (!crowd.length) return spots['no-1-queue']();
+      const right = (man) => new THREE.Box3().setFromObject(man).max.x;
+      return boxCentre([crowd.reduce((a, b) => (right(a) >= right(b) ? a : b))], 0.7);
+    },
+    // the chain between No. 1's gate leaves (the NEW MONEY SPENT arrow ends here; round 4 of log 34 ended it on a drum's lantern)
+    'no-1-chain': () => fact(facts.gates?.['no-1']?.chain) ?? spots['no-1-gateway'](),
+    // the machines in each factory's lit doorway (works-shot.json "machines", from round 5): No. 2's flywheel is the
+    // machine W3 shows (MACHINES points at it); without them, the lit sheds as before
+    'no-2-flywheel': () => fact(facts.machines?.['no-2-flywheel']) ?? spots['no-2-sheds'](),
+    'no-1-looms': () => fact(facts.machines?.['no-1-looms']) ?? spots['no-1-sheds'](),
     'no-1-gate': () => (gate['no-1'] ? boxCentre([gate['no-1'].root], 0.45) : null),
     'no-2-gate': () => (gate['no-2'] ? boxCentre([gate['no-2'].root], 0.45) : null),
     'no-1-gateway': () => (facts['no-1-gateway'] ? fromBlender(facts['no-1-gateway']).add(new THREE.Vector3(0, 1.2, 0)) : null),

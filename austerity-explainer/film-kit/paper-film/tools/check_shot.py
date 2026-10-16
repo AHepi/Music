@@ -24,6 +24,10 @@ The check file (see examples/notice-corner/shot-check.json):
     "lines"         street directions as Blender x, y, z steps (this street rises 0.07 m per metre);
                     "lines_key" says which one the rules use
     "title_zone"    [left, top, right, bottom] fractions of the frame where titles go
+    "story_reaches_down"  optional (off unless given): rule 7's use of the frame's height, checked as "some story prop
+                    or the subject reaches at least this far down the frame" (a fraction, for example 0.70), so the
+                    story group fills the frame into its lower part instead of standing small and high over bare
+                    ground (the notice corner's drum, chair and pail fill 0.45 to 0.8 down)
     "reference"     optional: the picture to match: where its lines meet; boxes of groups in it
                     ("compare": "top" judges a box's top instead of its middle, for things cut by the
                     frame; "landmark": true marks a building used only to match the camera); and
@@ -1194,6 +1198,33 @@ def check_story_props(report, shot, touching):
     return np.any([shot.visible[g] for g in dict.fromkeys([shot.subject] + shown) if shot.shows(g)], axis=0)
 
 
+# ---------------------------------------------------------------------------------------- rule 7: the story uses the frame's height
+def check_story_reaches_down(report, shot):
+    """Rule 7, the frame filled top to bottom, in one measurable part: when the check file gives "story_reaches_down"
+    (a fraction of the frame's height), some story prop or the subject must reach at least that far down the frame (what
+    shows of it, not what is hidden). Off unless the check file asks for it, so shots checked before it are unchanged."""
+    limit = shot.check.get('story_reaches_down')
+    if limit is None:
+        return
+    shown = [g for g in shot.core if shot.shows(g)]
+    if not shown:
+        report.note('rule 7: the story reaches the frame\'s lower part', 'Not checked: no story prop or subject shows.')
+        return
+    bottoms = {g: box_of(shot.visible[g])[3] for g in shown}
+    lowest = max(bottoms, key=bottoms.get)
+    reach = (bottoms[lowest] + 1) / shot.height
+    ok = reach >= limit
+    fix = ''
+    if not ok:
+        words = move_words(shot, lowest, 0, limit * shot.height - bottoms[lowest], bottoms[lowest])
+        fix = (capital(words) + ' so its bottom reaches ' + f'{limit:.2f} down' if words else
+               f'Bring a story prop nearer the camera, or the camera nearer the story, until one reaches {limit:.2f} down')
+        fix += '; or bring the camera nearer the whole group (that moves everything on screen, so check the other rules again).'
+    report.add('rule 7: the story reaches the frame\'s lower part', ok,
+               f'The lowest story thing that shows is {lowest}, reaching {reach:.2f} down the frame (the check file asks for at least {limit:.2f}).',
+               fix=fix, mark=box_of(shot.visible[lowest]), kind='story', how_bad=past(reach, limit, 0.03), name='reach')
+
+
 # ---------------------------------------------------------------------------------------- rule 12: room for phone buttons and titles
 def check_right_edge(report, shot):
     must_read = set(shot.check.get('must_read', []))
@@ -1769,7 +1800,8 @@ WORDS = ('Words used: "where the lines meet" is the spot where the street\'s str
          'in one plain colour, as measured in Blender.')
 
 NOT_CHECKED = [
-    'rule 7 (story props stacked in upright columns, something in the top third): judge by eye.',
+    'rule 7 (story props stacked in upright columns, something in the top third): judge by eye; only how far down the frame '
+    'the story reaches is measured, and only when the check file gives "story_reaches_down".',
     'rule 9 beyond the lantern resting on the chair: that the chair stands right under the notice, its seat shows and the lantern is lit.',
     'rule 11 (the camera slides without turning): check where the lines meet in the first, middle and last frames of the film.',
     'whether a prop pokes into a wall or another prop in 3D: only what shows on screen is measured.',
@@ -1909,6 +1941,7 @@ def main():
     touching = check_pairs(report, shot)
     check_story_in_3d(report, shot)
     story_union = check_story_props(report, shot, touching)
+    check_story_reaches_down(report, shot)
     for item in report.problems():   # a prop standing apart: its rule 3 move fixes its near-touches too; don't undo it
         loner = next((g for g in (item.get('pair') or ()) if g in shot.apart), None)
         if loner and item['rule'].startswith('rule 4'):

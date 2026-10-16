@@ -4,11 +4,13 @@
 // job. Call it the quiet factory. Now the government spends new money on what the factory makes. The workers go in.
 // The machines start. More money... and more things to buy. So prices barely move."
 //   3a  W3, both gates from the upstairs window across the cross street, held: PICTURE TWO FACTORIES, EACH ONE = A
-//       WHOLE COUNTRY (to the cut), and labels WORKERS (No. 1's queue), MATERIALS (the crates at No. 2's gate) and
-//       MACHINES (No. 2's lit sheds). Live: No. 2's smoke and window flicker, No. 1's brazier and lantern.
+//       WHOLE COUNTRY (to the cut), and labels WORKERS (No. 1's waiting men, its line leaving them sideways onto the
+//       empty lane), MATERIALS (the crates at No. 2's gate) and MACHINES (the flywheel in No. 2's lit doorway), each
+//       label's words coming in with its line (MACHINES is up only about 0.9 s before the cut). Live: No. 2's smoke and
+//       window flicker, No. 1's brazier and lantern.
 //   3b  W1, the shut No. 1 gate at the head of the queue. Cut in on "In"; one slide of 1.2 m along the queue toward
 //       the gate, from "Workers" to "Call" (we join the line), never turning, stopping on the composed frame. THE
-//       QUIET FACTORY; NEW MONEY SPENT with a small arrow into the gate; on "go" a time cut: the gate open, the men
+//       QUIET FACTORY; NEW MONEY SPENT with a small arrow to the chain between the gate leaves; on "go" a time cut: the gate open, the men
 //       gone, the brazier still burning by the empty pier, the lantern and lunch tin still there; on "start" No. 1's
 //       windows light in three steps and its chimney starts to smoke; MORE MONEY, + MORE THINGS TO BUY as crates
 //       stencilled THIS WAY UP pop up in the open gateway; → PRICES BARELY MOVE with a level price arrow over No. 1.
@@ -105,20 +107,22 @@ export async function build(kit) {
     if (!inW1) {
       buildWords(ctx, t, { parts: [{ text: 'PICTURE TWO FACTORIES', at: T.picture }], until: T.cut, y: LINE_1, size: 66, fadeOut: 0 });
       buildWords(ctx, t, { parts: [{ text: 'EACH ONE = A WHOLE COUNTRY', at: T.country }], until: T.cut, y: LINE_2, size: 46, colour: INK.amber, fadeOut: 0 });
-      const label = { plate: true, size: 42, until: T.cut, fadeOut: 0 };
-      // the labels over the lane's empty cobbles (the lower middle), each line from its thing
-      callout(ctx, t, { ...label, at: T.workers, point: works.screen('no-1-queue'), text: 'WORKERS', dx: 20, dy: 300 });
+      // the words come in with their lines (wordsWithLine): MACHINES comes on "machines", under a second before the cut
+      const label = { plate: true, size: 42, until: T.cut, fadeOut: 0, wordsWithLine: true };
+      // the labels over the lane's empty cobbles (the lower middle), each line from its thing; WORKERS' line leaves the
+      // men sideways (it ran straight down over them in round 4 of log 34)
+      callout(ctx, t, { ...label, at: T.workers, point: works.screen('no-1-crowd-side'), text: 'WORKERS', dx: 120, dy: 90 });
       callout(ctx, t, { ...label, at: T.materials, point: works.screen('no-2-crates'), text: 'MATERIALS', dx: -30, dy: 160 });
-      callout(ctx, t, { ...label, at: T.machines, point: works.screen('no-2-sheds'), text: 'MACHINES', dx: -70, dy: -190 });
+      callout(ctx, t, { ...label, at: T.machines, point: works.screen('no-2-flywheel'), text: 'MACHINES', dx: -70, dy: -190 });
       return true;
     }
     buildWords(ctx, t, { parts: [{ text: 'THE QUIET FACTORY', at: T.quiet }], until: pageEnd, y: LINE_1, size: 72 });
     const spent = buildWords(ctx, t, { parts: [{ text: 'NEW MONEY SPENT', at: T.spends }], until: T.more, y: LINE_2, size: 50, colour: INK.amber });
-    const gateway = works.screen('no-1-gateway');
-    if (spent && gateway) {
-      // a small arrow into the gate: the last stretch of the way from the words to the gateway
-      const from = { x: gateway.x + ((spent.left + spent.right) / 2 - gateway.x) * 0.3, y: gateway.y + (spent.bottom + 18 - gateway.y) * 0.3 };
-      pointer(ctx, t, { at: T.spends + 0.25, until: T.more, from, to: gateway, width: 6 });
+    const chain = works.screen('no-1-chain');
+    if (spent && chain) {
+      // a small arrow into the gate: the last stretch of the way from the words to the chain between the gate leaves
+      const from = { x: chain.x + ((spent.left + spent.right) / 2 - chain.x) * 0.3, y: chain.y + (spent.bottom + 18 - chain.y) * 0.3 };
+      pointer(ctx, t, { at: T.spends + 0.25, until: T.more, from, to: chain, width: 6 });
     }
     buildWords(ctx, t, {
       parts: [{ text: 'MORE MONEY', at: T.more }, { text: '+ MORE THINGS TO BUY', at: T.things }, { text: '→ PRICES BARELY MOVE', at: T.barely, colour: INK.amber }],
