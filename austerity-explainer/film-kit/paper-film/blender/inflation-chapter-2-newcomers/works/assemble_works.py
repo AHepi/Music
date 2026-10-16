@@ -864,11 +864,11 @@ _N1_OUTER = _N1 - GATE_WIDTH / 2         # its outer pier's inner face
 # W1's camera; the lantern on DIESEL's lid, the lunch tin on PETROL's. The queue stands to the right of them all
 # along the kerb, so from W1 nothing stands in front of the drums' words, and from W3 the tail of the queue is clear
 # of the brazier. (Round 3 stood the drums in the corner one behind the other: the house front hid all but "SEL" in W1
-# and "DIE" in W2, and PETROL never showed.) No. 2's drums stand against its outer pier, DIESEL in front of PETROL's
-# left side, PETROL's word turned a little away from it.
+# and "DIE" in W2, and PETROL never showed.) No. 2's drums stand by its outer pier, PETROL against it and DIESEL in
+# front of the gateway's right edge, a clear gap between them, both words turned to W2's camera.
 DRUM_SPOTS = {    # x, y, turn (degrees; the stencil faces -y at 0, + turns it toward +x)
     'no-1': {'petrol': (-4.5, 21.05, 4.0), 'diesel': (-3.75, 21.35, 0.0)},
-    'no-2': {'petrol': (5.15, 21.5, 7.0), 'diesel': (4.62, 20.9, -4.6)},
+    'no-2': {'petrol': (5.15, 21.5, -7.0), 'diesel': (4.28, 21.22, -2.9)},
 }
 BRAZIER = (-5.0, 21.55)                                            # against No. 1's outer pier, in the corner
 LANTERN = (DRUM_SPOTS['no-1']['diesel'][0] - 0.08, DRUM_SPOTS['no-1']['diesel'][1] - 0.2)   # on DIESEL's lid, at its front
@@ -883,29 +883,31 @@ MEN_1 = [
     # stooped over the brazier from its front-left (the corner side), turned toward it, his back to W1 and W3
     ('worker-stooped-to-brazier', 'man-2', (BRAZIER[0] - (STOOP_AHEAD + STOOP_GAP) * math.sin(math.radians(45)),
                                             BRAZIER[1] - (STOOP_AHEAD + STOOP_GAP) * math.cos(math.radians(45))), -45),
-    # the queue: single file along the kerb toward the camera, 1.1 m apart, drifting a little out toward the gutter as
-    # it lengthens (the last man stands with his heels on the kerb's edge): from W1 each man stands half a body to the
-    # right of the one in front, a line leading up to the gate; from W3, which looks down on them, each head shows above
-    # the shoulders of the man in front, and the whole line stays clear of the brazier and the drums (round 3: a dark
-    # smudge on a phone, the brazier among them); the tail 6 m from W1's composed spot
+    # the queue: single file along the kerb toward the camera, 1.1 m apart, drifting a little out as it lengthens (the
+    # last four stand in the gutter just off the kerb's edge, as the front man does at the gate): from W1 each man
+    # stands half a body to the right of the one in front, a line leading up to the gate; from W3, which looks down on
+    # them, each head shows above the shoulders of the man in front, and the whole line stays clear of the brazier and
+    # the drums (round 3: a dark smudge on a phone, the brazier among them); the tail 6 m from W1's composed spot
     ('worker-arms-folded', 'man-3', (-3.02, QUEUE_TAIL_Y + 4 * QUEUE_SPACING), 8),
     ('worker-hands-in-pockets', 'man-4', (-2.96, QUEUE_TAIL_Y + 3 * QUEUE_SPACING), -6),
     ('worker-arms-folded', 'man-5', (-2.9, QUEUE_TAIL_Y + 2 * QUEUE_SPACING), 12),
     ('worker-hands-in-pockets', 'man-6', (-2.84, QUEUE_TAIL_Y + QUEUE_SPACING), 3),
     ('worker-hands-in-pockets', 'man-7', (-2.78, QUEUE_TAIL_Y), -12),
 ]
-# No. 2's eight (its slowed state): in single file along its pavement's kerb edge, just left of W2's camera line (the
-# mirror of No. 1's queue), the last one at least 6 m from W2's composed spot
+# No. 2's eight (its slowed state): the mirror of No. 1's queue, in single file along the kerb just left of W2's camera
+# line (W2 stands 0.4 m toward the kerb from the pavement's middle, round 4), so from W2 they lead up to the gate on the
+# left and leave the gateway's right side and both drums' words clear; the last one at least 6 m from W2's composed
+# spot; from W4, inside the yard, they stand outside the gate's left half
 _N2 = GATE_CENTRE_X
 MEN_2 = [
-    ('worker-hands-in-pockets', 'no-2-man-1', (_N2 + 0.25, WALL_Y - 0.45), -6),
-    ('worker-arms-folded', 'no-2-man-2', (_N2 + 0.3, WALL_Y - 1.15), 8),
-    ('worker-hands-in-pockets', 'no-2-man-3', (_N2 + 0.36, WALL_Y - 1.75), -12),
-    ('worker-arms-folded', 'no-2-man-4', (_N2 + 0.24, WALL_Y - 2.53), 4),
-    ('worker-hands-in-pockets', 'no-2-man-5', (_N2 - 0.07, WALL_Y - 3.31), 10),
-    ('worker-arms-folded', 'no-2-man-6', (_N2 - 0.02, WALL_Y - 4.09), -16),
-    ('worker-hands-in-pockets', 'no-2-man-7', (_N2 - 0.31, WALL_Y - 4.87), 2),
-    ('worker-arms-folded', 'no-2-man-8', (_N2 - 0.55, WALL_Y - 5.68), -20),
+    ('worker-hands-in-pockets', 'no-2-man-1', (3.38, WALL_Y - 0.45), -6),
+    ('worker-arms-folded', 'no-2-man-2', (3.2, WALL_Y - 1.15), 8),
+    ('worker-hands-in-pockets', 'no-2-man-3', (3.1, WALL_Y - 1.85), -12),
+    ('worker-arms-folded', 'no-2-man-4', (3.04, WALL_Y - 2.55), 4),
+    ('worker-hands-in-pockets', 'no-2-man-5', (2.98, WALL_Y - 3.3), 10),
+    ('worker-arms-folded', 'no-2-man-6', (2.92, WALL_Y - 4.05), -16),
+    ('worker-hands-in-pockets', 'no-2-man-7', (2.86, WALL_Y - 4.85), 2),
+    ('worker-arms-folded', 'no-2-man-8', (2.8, WALL_Y - 5.65), -20),
 ]
 
 
