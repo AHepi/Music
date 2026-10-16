@@ -14,6 +14,10 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 ## Where things stand
 
+- **Chapter 2's full redesign is being built** (log 34): the Works (pages 3 to 5) built in 3D over four
+  rounds, filmed with the plain 3D pictures standing in for paintings; round 5 is fixing the last critic's
+  findings and starting the supermarket checkout (page 1). Nothing painted or recorded yet; nothing spent
+  from the US$20.
 - **Chapter 2 rewritten for newcomers** (log 33): "33 Script - chapter 2 - what really causes inflation -
   for newcomers" and its narration file, ready to record. One idea, one picture (two factories), four
   real cases in time order, three guesses, every unfamiliar word explained; about 7 and a quarter
@@ -1335,12 +1339,69 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
         up in 2026, and any New Zealand Reserve Bank statement on job losses.
     - **Cost:** nothing on fal or ElevenLabs. About 3 hours 20 minutes from start to finish.
 
+34. **The full redesign of chapter 2, in the look you kept** (decision 40; in progress). You said: "Better.
+    Now's the real test. The full redesign. New budget starting from now is $20. Go!"
+    - **My reading** (Decisions, item 40): the whole newcomer script (log 33) made in the notice corner's look:
+      real places built in 3D in Blender, painted over, composed by the rules in "07 Composing a shot", the
+      camera sliding without ever turning. The US$20 covers the narration (about US$1.10) and the paintings.
+    - **The paid steps were refused by this session's automatic safety check** on 15 October, at the first
+      call to ElevenLabs, despite the budget. I didn't try to get round it. The recording and the paintings
+      wait for your yes; everything free is done first.
+    - **The plan** ("34 Plan - chapter 2 full redesign - places, shots and order of work"): six places (the
+      Works, a supermarket checkout, a Japanese corner shop, a building site, a kitchen, Glasgow in 1915), 11
+      views, 13 plates (the plain 3D pictures), 20 paintings (about US$7), 16 pages. For example, "workers
+      wait at the gate" is the chapter's central picture: dark figures seen from behind, never nearer than
+      about 6 metres, so the painter has no faces to paint.
+    - **Groundwork, all free:**
+      - **An estimated timeline** made from the script alone, with word lengths and pauses measured on
+        Malina's real recording. Tested on the old recording, it gives 252 seconds against the real 251.7.
+        On it, the new chapter runs about 6 minutes 47 seconds.
+      - **Held shots filmed about 5 times faster:** the still set is drawn once and reused, so a held frame
+        takes 1.1 to 1.3 seconds.
+      - **Chapters that load only the pages a piece of film needs**, so 16 heavy pages no longer run the
+        computer out of memory.
+      - **Changes on a held shot** (the men gone, the windows lit) by swapping only the area that changes.
+    - **The Works, built in four rounds.** Each round, helpers build; then a fresh critic who hasn't seen the
+      work judges it against the notice corner, and the next round fixes what they found.
+      - **Round 1:** the street and prop scripts reused, each writing to its own folder (the notice corner
+        proven unchanged, pixel for pixel); chapter 2's 13 props; 11 figure shapes. Found: names that broke
+        loading, a jacket that read as a headless man, heads that looked bald.
+      - **Round 2:** the two factories at true size. No. 1 is dark red brick with one round chimney; No. 2 is
+        pale stone with two square chimneys and a tank, so they're told apart at a glance. Figures fixed
+        (coats too red, a toy-like look).
+      - **Round 3:** the Works put together with four views (W3 from an upstairs window, W1 at No. 1's gate,
+        W2 at No. 2's gate, W4 inside No. 2's yard), the plates drawn, and pages 3 to 5 written and filmed
+        (76 seconds), with the plates standing in for the paintings. Found: striped brick (a one-line bug),
+        doorways that looked like bar charts, a gasholder that read as a tank on No. 1's side, drums whose
+        words couldn't be read.
+      - **Round 4:** all of those fixed (no striped parts left; machines in the doorways; lit mill windows;
+        the gasholder gone; PETROL and DIESEL readable; words end exactly on each cut; the slight dimming on
+        each page turn's first frame gone). Filmed again: the only jumps are the planned ones, the camera
+        never turns, every word on screen matches the narration, 1.4 seconds a frame. The fresh critic
+        still found 15 problems, 4 of them must-fix: nobody is ever seen working; the men stand in single
+        file, so from the camera they stack into one dark column; the story sits small and high, with bare
+        paving filling the bottom third; and the smoke looks like a fault (pale rings).
+    - **The computer restarted overnight** during round 4's filming. The finished work was already on disk
+      and saved; only the filming was lost, and it was done again.
+    - **The FOUNDRY painterly library you sent** (a set of ready-made Blender surfaces) was tried on its own
+      sample scenes and on two views of the Works. Brick came out sootier and wood got grain, but nothing
+      looked painted, the wet-stone road came out white and icy, and drawing was about 7 times slower (223
+      seconds against 33 for two views). Not used: the paintings stay the way to the painted look.
+    - **Round 5 (running):** the round 4 critic's fixes (people seen working inside the lit doorways; the
+      waiting men as a loose crowd across the gate; the cameras about 3 metres nearer; the gate lit as the
+      brightest thing; smoke blown across the view); W4 fixed; and the next place started, the supermarket
+      checkout for page 1.
+    - **Not checked, or unsure:**
+      - Nothing is painted yet, so every picture so far is the plain 3D plate.
+      - Whether painted figures work at all is untested (the people test needs your yes).
+      - The narration isn't recorded, so all timing is estimated.
+    - **Cost:** nothing spent from the US$20.
+
 ## Next step
 
-Read "33 Script - chapter 2 - what really causes inflation - for newcomers" aloud to one or two of the
-people who got lost, then ask them the listener questions under "Before recording" in that file
-(question 3 is the key one), and tell me what they say. After that, recording it costs about 6,300 ElevenLabs credits
-(about US$1.10); I'll ask you before spending.
+Say yes to the people test: two paintings of the figure shapes in the pit village street (about 50 US
+cents from the US$20). It is the first time the redesign is painted, and it shows whether painted figures
+work before the Works' paintings are paid for.
 
 ## Traps
 

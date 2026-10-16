@@ -269,7 +269,13 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   of memory); state changes on a held shot; the 100-dot panel; the chapter scene with stand-in pages; reusable street and
   prop scripts with chosen output folders (the kept notice corner proven unchanged, pixel for pixel); chapter 2's prop
   library (13 props); 11 figure shapes; the people test (free part); the two factories and the far town at true scale.
-- Building now (free): the Works assembled with its four views and plates; pages 3 to 5 filmed with the plates standing in.
+- Done (free, rounds 3 and 4): the Works assembled with its four views and plates; pages 3 to 5 filmed twice with the plates
+  standing in (only planned jumps, no camera turn, every word matches the narration). Round 4's fresh critic still found 15
+  problems, 4 must-fix (nobody seen working; the men in single file stack into one column; the story small and high over bare
+  paving; the smoke reads as a fault).
+- Building now (free, round 5): those fixes, W4, and the next place, the supermarket checkout (C1, page 1).
+- The FOUNDRY painterly library (the user's upload, 15 October) was tested and not used: richer brick, but nothing looked
+  painted, the wet-stone road came out icy, and drawing was about 7 times slower.
 - Spent so far from the US$20: nothing. The recording and the paintings wait for your yes (the safety check refused the
   first paid call).
 
