@@ -27,7 +27,10 @@ for path in files:
         continue
     if not note.strip().startswith('What this does'):
         no_note.append(name)
-    runnable = "__name__ == '__main__'" in source or '__name__ == "__main__"' in source
+    # runnable only if the module itself has an `if __name__ == '__main__':` block (an example of one written in its note
+    # doesn't count: calculator_output.py shows one in its usage text)
+    runnable = any(isinstance(node, ast.If) and isinstance(node.test, ast.Compare)
+                   and isinstance(node.test.left, ast.Name) and node.test.left.id == '__name__' for node in tree.body)
     if runnable and os.path.dirname(path) == CALCULATORS:
         run = subprocess.run([sys.executable, '-I', '-B', path, '--help'], capture_output=True, text=True, timeout=60, cwd=CALCULATORS)
         if run.returncode != 0 or 'usage' not in (run.stdout + run.stderr).lower():
