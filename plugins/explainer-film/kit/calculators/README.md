@@ -43,13 +43,13 @@ There is also a written order for when rules conflict (camera first; the quiet s
 | 0 | Frame geometry core and shared film settings (plus place facts and shot-kind profiles) | `frame_geometry.py`, `frame-geometry.js`, `film-settings.json`, `settings.py`, `place_facts.py` | **built** |
 | 1 | Check file generator: writes a view's shot-check file from the Blender scene | `paper-film/blender/make_check_file.py` | **built** |
 | 2 | Shot planner: the camera, slide, plate and people before anything is drawn | `calculators/plan_shot.py` (`paper-film/blender/solve_shot.py` not built) | **built** (plus the shot checker's `kind_of_shot` and `accepted`) |
-| 3 | Camera path audit for moving shots (no turn during a slide, plate coverage) | `paper-film/tools/camera_audit.py` (extended) | being built |
+| 3 | Camera path audit for moving shots (no turn during a slide, plate coverage) | `paper-film/tools/camera_audit.py` (extended: `--built-set`, `--timeline`) | **built** (relief mode not built) |
 | 4 | Lettering, figure and landmark audit per view | `calculators/view_audit.py` | **built** |
-| 5 | Light planner and tuner | `calculators/plan_lights.py` (+ `paper-film/blender/tune_lights.py`) | being built |
+| 5 | Light planner and tuner | `calculators/plan_lights.py` (+ `paper-film/blender/set_measurements.py`; `tune_lights.py` not built) | **built** (the planner; the tuner left for later) |
 | 6 | Painter's request builder and plate preflight (prompt, pictures, price) | `calculators/paint_request.py` (+ `templates/`) | **built** |
 | 7 | Painting arrival checks (line-up, kept shadows, figure outlines, colour) | `calculators/after_painting.py` | **built** |
 | 8 | State picture planner (every helper plate, cut or blend) | `calculators/plan_states.py` | **built** |
-| 9 | Effects planner (wind, smoke traces, fire, dust, contact shadows) | `calculators/plan_effects.py` | being built |
+| 9 | Effects planner (wind, smoke traces, fire, dust, contact shadows) | `calculators/plan_effects.py` (+ `paper-film/blender/set_measurements.py`) | **built** (dust placement left for later) |
 | 10 | Script and narration gate (lint, estimated timeline, cost) | `narration-tools/lint_script.py` | being built |
 | 11 | Page timing and words-on-screen planner | `calculators/plan_page_timing.py` (+ `paper-film/tools/page_events.mjs`) | **built** |
 | 12 | Page pose sampler (slim: pops, effects, held shots, overlaps) | `paper-film/tools/check_page_layout.mjs` | **built** |
@@ -207,6 +207,27 @@ round 4 film all among the planned cuts, the round 4 helpers' hand-picked stills
 chapter 2's page 10 before its critique (5.6% held 0.01 s, lesson 53) and after (1.35 s), and old chapter 2's numbers
 against the fact recheck.
 
+## Script, sound and budget (built)
+
+- **`narration-tools/lint_script.py before SCRIPT.json --word-times EARLIER.json`** stops a script before any credits
+  are spent: the one cue on every page, no capitals, names in their sound spelling, sentences (mean at most 12 words,
+  none over 20), spoken figures a minute of speech (at most 6: the recorded chapter 2 had 8.1 by its count, the
+  newcomer script 3.6), the main rule said twice word for word, a page marked `"key": true` no faster than the
+  median page, out-of-date ledger facts. It fills the 4 s guess holds from the text, makes the estimated timeline
+  with `estimate_timeline.py` (each chapter's speech predicted from the OTHER chapter's recording within 1.2%) and
+  prices the credits. `after` checks the recordings: a cue read aloud (each cue word over 0.2 s), words that differ,
+  names heard wrongly, each "..." (chapter 2's left 0.08-0.45 s of silence), words placed late after a pause.
+- **`narration-tools/sound_gates.py`** measures the sound and stops the step that got it wrong: `length` (0.05 s),
+  `loudness` (the encoded file: -15 LUFS +/- 0.5, -14 for music only, true peak at most -1 dBTP), `alignment`
+  (2 ms), `gaps` and `duck` (the music 18 dB under the voice while she speaks, found for any soundtrack in two
+  passes), `voice` (page pitch and spread), `mouth`, `music-start`. The mix scripts, `finish_film.sh` and
+  `add_music_bed.sh` call it as gates.
+- **`plan_budget.py`** prices paid steps (megapixels returned and sent; credits), keeps the spend ledger against the
+  allowance from its start date (refusing a larger step), and plans filming from frame kinds read in the page events,
+  priced by a short profile filmed first (rounds 3, 4 and 5 of pages 3-5 predicted within about 5% from 8 stretches;
+  the round 4 table alone missed round 5 by 52%): workers, piece size, lazy loading, memory, disk, stretches under
+  2 hours with their FILM_FROM/FILM_TO commands, a push check and a filming status.
+
 ## For a builder adding a calculator
 
 - Start the file with a plain note: "What this does: ...". Use full plain-word names. Give it `--help` through argparse, and end with `calculator_output.finish(...)` so the report names its settings. `tests/test_house_rules.py` checks the note and the `--help`.
@@ -272,3 +293,31 @@ against the fact recheck.
 - The Works' place facts have an empty accepted list. The round 5 final checks list 13 to 29 problems per view that nobody has marked accepted or fixed. The profiles cover the systematic ones. `test_shot_kind_profiles.py` prints the rest, view by view.
 - A judgement for a person: the painted ground at the frame's bottom edge comes nearer than any prop during a slide (W1 1.41 times, the notice corner about 1.53, against the painting's 1.29). If the ground counts as "the nearest painted surface", every slide made so far is too long, yet the user kept the notice corner. `frame_geometry.py slide` shows the ground but counts it only with `--count-ground`.
 - The crowd, overview and interior profiles come from views the user has not yet seen. Their limits are marked judged and should be checked again once the user has judged those views.
+
+## The effects planner, the light planner and the camera audit's built-set mode (built)
+
+- **`plan_effects.py`** (effects; settings section `effects_planner`). `wind` picks the wind most across every view that
+  sees a chimney, traces both signs with ChimneySmoke's own sums, and keeps the sign that passes everywhere. For each
+  plume and view it gives the travel while seen (at least 0.15 of the width), the puffs' **top edges** against word cards
+  (the skeptic's test), the fade before another factory's chimney, thick smoke over a figure, and which emitters to drop
+  (a plume that never enters, or whose chimney is out of the held frame). `colour` measures the plume against the sky on
+  the plate (not much lighter, but a different colour) and the mouth against the chimney top. `contact-shadows` sizes a
+  shadow from a prop's measured base. `window-change` checks a teaching event changes the windows by 15 levels. `fire`
+  checks the glow's pulse and the flames' variety. `lint` checks paper pages make every effect through `kit.effect`.
+- **`plan_lights.py`** (lights; settings section `light_planner`). `plan` works light by light: role, which few cast
+  shadows, starting watts by the inverse square from the subject's own light, reach from Blender ray hits (or the place
+  facts' boxes), cones, links (its housing; the props round a fire), lamps that land on the subject or where the lines
+  meet, lights behind the camera that flood the near ground, a lamp lighting the face it hangs on, how much light the
+  subject gets against its key (a burnt-out risk), and a plan for a **dark subject** (light behind it; judge it by
+  silhouette contrast). `contrast` measures that contrast the people test's way. `exposure` sets each view from the
+  others' brightness. `render-log` refuses a picture drawn with a shadow fault and reads each plate's drawing time.
+  The tuner (`tune_lights.py`: one named light changed per small render) is not built yet.
+- **`../paper-film/blender/set_measurements.py`** (Blender, read only): `footprints` (a prop's base), `beam` (every surface
+  a light's cone meets) and `objects` (where the set's lamps are), for the two planners.
+- **`../paper-film/tools/camera_audit.py`**: the old audit, unchanged (its old reports reproduce word for word), plus
+  `--timeline` (the page's window from the timeline and page files, equal to the stage's own page edges) and
+  `--built-set` (no turn during a move, where the lines meet, magnification at the nearest painted thing with the place's
+  accepted list, and the frame staying 0.03 inside the painted plate, held frames included; settings section
+  `camera_audit_built_set`).
+- Tests: `tests/test_plan_effects.py`, `tests/test_plan_lights.py`, `tests/test_camera_audit.py`; fixtures in
+  `tests/fixtures/effects-camera-light/` (sources in its `sources.json`).

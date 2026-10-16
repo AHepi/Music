@@ -14,7 +14,14 @@ steps 2-5 (the same for both looks).
 
 ## Steps
 
-1. **Confirm the cost** (about 1 credit per letter of the script file's text) with the user.
+1. **Check the script, then confirm the cost** with the user. First
+   `python3 -I narration-tools/lint_script.py before narration-script.json --word-times EARLIER_WORD_TIMES.json --timeline-out timeline-estimated.json`
+   (EARLIER_WORD_TIMES: any earlier recording of the same voice). Its errors stop the recording: a cue
+   that is not the one accent line, capitals, a name not in its sound spelling, sentences over 20 words,
+   more than 6 spoken figures a minute, the main rule not said twice word for word, no page marked
+   `"key": true`, a key page faster than the median page. It fills the 4 s guess holds and prints the
+   credits and dollars to quote (about 1 credit per letter, the cue included). Its LOOK lists are for a
+   person: unfamiliar words, names, repeated words with their sentences, the first 30 seconds.
 2. **Record each page on its own** with the ElevenLabs connector, all on one flow
    (`creative_create_flow` first, then `creative_generate_speech` per page with the page's full text,
    the voice id, model `eleven_v4`, and `generations_count: 1` unless the user wants takes to choose
@@ -27,14 +34,20 @@ steps 2-5 (the same for both looks).
 5. **Timeline and narration track:** `python3 -I narration-tools/assemble_chapter_narration.py word-times.json narration.wav timeline.json --pauses 1.6,1.5,...`
    (one pause per gap between pages, 1.4-1.7 s; the first word lands at 1.08 s; run it from the
    folder the recording paths in word-times.json start from).
-6. **Mix:** `bash narration-tools/mix_narration_over_music.sh MUSIC.mp3 narration.wav mix.wav mix.mp3`
-   (music 11 dB down, dipping under the voice; whole mix -15 LUFS).
-7. **Check the voice** (by measurement; tell the user nobody listened unless they did):
-   `python3 -I narration-tools/compare_voice_steadiness.py page1=recordings/page1.mp3 page2=recordings/page2.mp3 ...`
-   (pitch spread across pages; under about 3 semitones is steady),
-   `python3 -I narration-tools/find_raised_voice.py word-times.json` and
-   `python3 -I narration-tools/find_loud_words.py word-times.json` (words that jump up; run from the
-   folder the recording paths start from). Re-record a page only if it clearly drifts or shouts.
+6. **Mix:** `bash narration-tools/mix_narration_over_music.sh MUSIC.mp3 narration.wav mix.wav mix.mp3 timeline.json`
+   (music 11 dB down, dipping under the voice; whole mix -15 LUFS). With the timeline it stops on a FAIL
+   line unless the mix is as long as the narration, the music sits 18 dB (+/- 1) under her voice while
+   she speaks, and the mix lines up with the narration within 2 ms. A new soundtrack: find its level first
+   with `python3 -I narration-tools/sound_gates.py duck MUSIC.mp3 narration.wav timeline.json` (then
+   `MUSIC_LEVEL_DB=...`); "slightly louder" is `--louder 3`.
+7. **Check the recordings** (by measurement; tell the user nobody listened unless they did):
+   `python3 -I narration-tools/lint_script.py after narration-script.json --transcripts transcripts --recordings recordings`
+   (a cue read aloud, words that differ, missing downloads; lists each "..." that left under 1 s of
+   silence and words placed late after a pause) and
+   `python3 -I narration-tools/sound_gates.py voice word-times.json --recordings-from recordings`
+   (re-record a page whose typical pitch is more than 1.5 semitones from the chapter's median; the spread
+   across pages passes up to 2.6 semitones: chapter 2's 2.2 was accepted, chapter 1's 3.0 was not;
+   raised or loud words are listed for a person). Re-record only the pages named, with their cost.
 8. Copy `timeline.json` and `word-times.json` to `film-kit/examples/<chapter>/` (the pages read them),
    and print the words with times for planning:
    `python3 -I narration-tools/print_word_times.py word-times.json`.

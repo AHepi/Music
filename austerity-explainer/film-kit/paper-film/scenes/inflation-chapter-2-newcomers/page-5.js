@@ -6,21 +6,27 @@
 //   5a  W2, the flat-out gate, held on the composed frame where page 4 stopped (page 4 runs on into it with no join
 //       you can see: the same view, the same question and full guess ring until "spare"). On "spare" the question and
 //       ring clear (gone before NO SPARE comes, so the two never overlap); NO SPARE; MORE MONEY, + SAME THINGS TO BUY
-//       (the crates in the gateway stay as they are), → PRICES UP on "prices" with a price arrow over No. 2 that climbs
-//       (reaching its top on "up"), so the page's conclusion is up about 1.2 s before the cut. Every word here ends
+//       (the crates in the gateway stay as they are), → PRICES UP on "prices" with a price arrow that climbs at 45
+//       degrees on the left pier's dark stone (reaching its top on "up"), placed from No. 2's gate board on the frame and
+//       kept at least 24 pixels clear of it (checked; round 5's critique, finding 2: it struck through "No. 2"), so the
+//       page's conclusion is up about 1.2 s before the cut. Every word here ends
 //       exactly on the cut to W3 (no fade a frame early, so the cut is one clean step). Live: as page 4.
 //   5b  W3, both factories, held, with the rule over them. Cut on "Most"; the small name tags QUIET and FLAT OUT over
 //       the two columns; MOST ECONOMISTS AGREE (small, above the rule cards); the upper rule card NEW MONEY SPENT +
-//       SPARE → MOSTLY MORE THINGS MADE with a thin line to No. 1's chimney, which starts to smoke on "made" (the
-//       working smoke, so the line lands on a factory at work, not a cold chimney); the lower rule card NOTHING SPARE →
+//       SPARE → MOSTLY MORE THINGS MADE; on "made" a time cut in the held shot: No. 1 at work (W3's "No. 1 working"
+//       picture: its men gone in, its windows lit, its gate open, crates in its gateway, its chimney smoking, the brazier
+//       lower), the QUIET tag fading, and the card's thin line going to No. 1's lit upper windows, well below the cards
+//       (round 5's critique, finding 1: the line had landed on a cold chimney over a shut gate with the men still
+//       waiting). Until the set has that picture (works-shot.json names it), No. 1 only starts to smoke and the line
+//       goes to its chimney, as before; the lower rule card NOTHING SPARE →
 //       MOSTLY PRICES UP with a thin line to No. 2's chimneys; both over a soft dark band (the smoke crosses the top
 //       band). Then the 2-second hold on the rule cards and the page peel. Live: No. 2's smoke and window flicker,
 //       No. 1's brazier and lantern.
 // The one Works set serves both views: at the cut the projector moves from W2's plate camera to W3's (setView).
 // Page 16 shows the same rule cards: it imports RULE_CARDS and drawRule from here, and the tags come from works-effects.js.
 import { clamp01 } from '../cinema-kit.js';
-import { buildWorks, WORKS_IN_USE } from './works-effects.js';
-import { buildWords, ruleCard, topShade, priceArrow, INK, TEXT_LEFT, TEXT_RIGHT } from '../graphics.js';
+import { buildWorks, findPicture, WORKS_IN_USE, FIRE_AFTER_A_WHILE } from './works-effects.js';
+import { buildWords, ruleCard, topShade, priceArrow, gapToBox, reportGap, INK, TEXT_LEFT, TEXT_RIGHT } from '../graphics.js';
 import { drawQuestion, LOOK } from './page-4.js';
 
 // How this page leaves: the page peel after the 2-second hold on the rule cards.
@@ -31,6 +37,12 @@ export const PICTURES = {
   w2: 'works-w2-plate.jpg',   // W2, No. 2 flat out (the same picture page 4 ends on)
   w3: 'works-w3-plate.jpg',   // W3, both gates: No. 1 quiet, No. 2 flat out
 };
+// W3 with No. 1 at work, for "made": found in the set's export when it is there (findPicture: its state picture, or
+// failing that its helper plate), added to the pictures as 'w3 working'
+const W3_WORKING = /^works-w3-[a-z0-9-]*working[a-z0-9-]*(-state\.png|-plate(\.jpg)?)$/;
+// the climbing price arrow (5a): from about 0.06 across, 0.52 down, about 230 pixels at 45 degrees up the left pier's
+// dark stone (at 260 its head reached the pale door leaf in the gateway), shortened if need be so that it, its head and the word PRICES keep `clear` pixels from No. 2's gate board
+const PRICE_ARROW = { from: { x: TEXT_LEFT, y: 0.52 * 1920 }, length: 230, angle: 45, clear: 24, width: 10, size: 30 };
 
 // The rule cards' places (pixels; plan 34: 0.06 to 0.90 across, the upper about 0.08 to 0.16 down, the lower about
 // 0.16 to 0.24 down). Page 16 shows the same cards and should use these. heading is the baseline of MOST ECONOMISTS
@@ -40,7 +52,10 @@ export const PICTURES = {
 export const RULE_CARDS = { heading: 142, upper: [TEXT_LEFT, 158, TEXT_RIGHT - TEXT_LEFT, 140], lower: [TEXT_LEFT, 314, TEXT_RIGHT - TEXT_LEFT, 140], size: 46 };
 
 export async function build(kit) {
-  const works = await buildWorks(kit, { folder: WORKS_IN_USE, views: ['w2', 'w3'], pictures: PICTURES });
+  const working = await findPicture(WORKS_IN_USE, W3_WORKING);
+  console.warn(`page 5: W3 with No. 1 at work on "made": ${working ?? 'not in the set yet (No. 1 only starts to smoke)'}`);
+  const works = await buildWorks(kit, { folder: WORKS_IN_USE, views: ['w2', 'w3'], pictures: { ...PICTURES, ...(working ? { 'w3 working': working } : {}) } });
+  const checked = new Set();   // the checks already reported (reportGap)
   const T = {
     first: kit.firstWordAt, spare: kit.at('spare'), more: kit.at('More'), same: kit.at('same'), prices: kit.at('prices'), up: kit.at('up'),
     most: kit.at('Most'), agree: kit.at('agree'), spent: kit.at('spent'), spare2: kit.at('spare', 2), made2: kit.at('made', 2),
@@ -51,11 +66,16 @@ export async function build(kit) {
 
   function pose(t) {
     const inW3 = t >= T.most;
-    // in W2 the windows keep the brighter flicker page 4 gave them on "busy"; W3 shows the factories as first described,
-    // except that No. 1's chimney starts to smoke on "made" (round 4 of log 34: the rule card's line landed on a cold
-    // chimney just after page 3 showed it start work); the tags QUIET and FLAT OUT still name the two starting states
-    const no1 = inW3 && t >= T.made2 ? { state: 'quiet', smoke: 'working', smokeFrom: T.made2 } : { state: 'quiet' };
-    const still = works.set(t, { view: inW3 ? 'w3' : 'w2', painting: inW3 ? 'w3' : 'w2', no1, no2: { state: 'flat out', busy: inW3 ? 0 : 1 } });
+    // in W2 the windows keep the brighter flicker page 4 gave them on "busy"; W3 shows the factories as first described
+    // until "made", then (a time cut in the held shot) No. 1 at work: its men gone in, its windows lit and flickering,
+    // its gate open, crates in its gateway, its chimney smoking, the brazier lower. Without the working picture, No. 1's
+    // chimney only starts to smoke on "made" (round 4 of log 34).
+    const atWork = inW3 && t >= T.made2;
+    let no1 = { state: 'quiet' };
+    if (atWork) no1 = working ? { state: 'working', smokeFrom: T.made2, crates: T.made2 - 10 } : { state: 'quiet', smoke: 'working', smokeFrom: T.made2 };
+    const painting = inW3 ? (atWork && working ? 'w3 working' : 'w3') : 'w2';
+    const still = works.set(t, { view: inW3 ? 'w3' : 'w2', painting, men: !(atWork && working), fire: atWork && working ? FIRE_AFTER_A_WHILE : 1,
+      no1, no2: { state: 'flat out', busy: inW3 ? 0 : 1 } });
     return { camera: inW3 ? both(t) : flatOutGate(t), still, look: LOOK };
   }
 
@@ -72,16 +92,23 @@ export async function build(kit) {
         parts: [{ text: 'MORE MONEY', at: T.more }, { text: '+ SAME THINGS TO BUY', at: T.same }, { text: '→ PRICES UP', at: pricesAt, colour: INK.amber }],
         until: T.most, y: 250, size: 50, fadeOut: 0,
       });
-      // the price arrow over No. 2's column climbs (prices go up), over the gable above the gate, clear of the No. 2
-      // board, toward the words. It starts climbing on "prices" ("and prices go up") and reaches its top on "up": the
-      // cut to both factories comes on "Most", only about 0.7 s after "up" (estimated timing)
-      const column = works.screen('no-2-gate');
-      if (column) priceArrow(ctx, t, { at: pricesAt, until: T.most, fadeOut: 0, drawFor: T.up - pricesAt, from: { x: Math.max(100, column.x - 330), y: 620 }, length: 430, angle: 28, word: 'PRICES' });
+      // the price arrow climbs (prices go up) on the left pier's dark stone, clear of No. 2's gate board. It starts
+      // climbing on "prices" ("and prices go up") and reaches its top on "up": the cut to both factories comes on
+      // "Most", only about 0.7 s after "up" (estimated timing)
+      const board = works.screenBox('gate-board-no-2');
+      if (board) {
+        const { from, angle, width, size, clear } = PRICE_ARROW;
+        // the longest it may be: its head (reaching 0.6 of 2.6 widths past the tip, with the shaft's round cap) stays `clear` left of the board
+        const room = (board.left - clear - width * 2.6 * 0.6 - width - from.x) / Math.cos(angle * Math.PI / 180);
+        const arrow = priceArrow(ctx, t, { at: pricesAt, until: T.most, fadeOut: 0, drawFor: T.up - pricesAt, from, length: Math.min(PRICE_ARROW.length, room), angle, word: 'PRICES', width, size });
+        if (arrow) reportGap(checked, 'page 5: the climbing PRICES arrow and No. 2\'s gate board', gapToBox(board, arrow.outline), clear);
+      }
       return true;
     }
-    // 5b: the tags over the two columns, then the rule
-    works.drawTags(ctx, t, { at: T.most });
-    drawRule(ctx, t, works, { agree: T.agree, spent: T.spent, spare: T.spare2, made: T.made2, nothing: T.nothing, up: T.up2 });
+    // 5b: the tags over the two columns (QUIET fading as No. 1 goes to work on "made"), then the rule, its upper card's
+    // line going to No. 1's lit windows once it works
+    works.drawTags(ctx, t, { at: T.most, quietUntil: working ? T.made2 + 0.3 : Infinity });
+    drawRule(ctx, t, works, { agree: T.agree, spent: T.spent, spare: T.spare2, made: T.made2, nothing: T.nothing, up: T.up2 }, { madeTo: working ? 'no-1-sheds' : 'no-1-chimney' });
     return true;
   }
 
@@ -90,17 +117,21 @@ export async function build(kit) {
 
 // The rule over W3, drawn the same way here and on page 16 (plan 34, T13: identical on both): MOST ECONOMISTS AGREE
 // (small, above the cards), then the upper rule card NEW MONEY SPENT + SPARE → MOSTLY MORE THINGS MADE with a thin line
-// to No. 1's chimney, and the lower rule card NOTHING SPARE → MOSTLY PRICES UP with a thin line to a short bar across
+// to No. 1, and the lower rule card NOTHING SPARE → MOSTLY PRICES UP with a thin line to a short bar across
 // No. 2's two chimneys, each part on its spoken word. times: { agree, spent, spare, made, nothing, up } (leave agree out to skip the heading).
-export function drawRule(ctx, t, works, times) {
-  const no1 = works.screen('no-1-chimney', { down: 4 }), no2 = works.screen('no-2-chimneys', { down: 4 });
+// madeTo: where the upper card's line ends: 'no-1-chimney' (its chimney, 4 m below the top) or 'no-1-sheds' (its lit
+// upper windows, when W3 shows it at work: round 6 of log 34); the line runs round the lower card by the left margin,
+// down to the windows' row and across to them.
+export function drawRule(ctx, t, works, times, { madeTo = 'no-1-chimney' } = {}) {
+  const no1 = madeTo === 'no-1-chimney' ? works.screen('no-1-chimney', { down: 4 }) : works.screen(madeTo), no2 = works.screen('no-2-chimneys', { down: 4 });
   if (times.agree !== undefined) buildWords(ctx, t, { parts: [{ text: 'MOST ECONOMISTS AGREE', at: times.agree }], y: RULE_CARDS.heading, size: 34 });
   const [ux, uy, , uh] = RULE_CARDS.upper, [lx, ly, lw, lh] = RULE_CARDS.lower;
   ruleCard(ctx, t, {
     at: times.spent, box: RULE_CARDS.upper, size: RULE_CARDS.size,
     parts: [{ text: 'NEW MONEY SPENT', at: times.spent }, { text: '+ SPARE', at: times.spare }, { text: '→ MOSTLY MORE THINGS MADE', at: times.made, colour: INK.amber }],
-    // round the lower card by the left margin, then across to No. 1's chimney below it
-    line: no1 && { at: times.made + 0.2, from: [ux, uy + uh / 2], via: [[ux - 30, uy + uh / 2], [ux - 30, ly + lh + 40]], to: no1 },
+    // round the lower card by the left margin, then across to No. 1's chimney below it (or down to its windows' row and
+    // across to them)
+    line: no1 && { at: times.made + 0.2, from: [ux, uy + uh / 2], via: [[ux - 30, uy + uh / 2], [ux - 30, madeTo === 'no-1-chimney' ? ly + lh + 40 : no1.y]], to: no1 },
   });
   ruleCard(ctx, t, {
     at: times.nothing, box: RULE_CARDS.lower, size: RULE_CARDS.size,

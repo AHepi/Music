@@ -36,7 +36,11 @@ was written from it and checked before recording.
   NARRATION_SCRIPT.json MEASURED_WORD_TIMES.json timeline-estimated.json` works out every word's time
   from the same narrator's measured word lengths and pauses (it predicted the old chapter 2's 251.7 s
   of speech as 252 s; chapter 2 for newcomers: 406.9 s). Build and check the pages on it before paying
-  for the recording.
+  for the recording. `python3 -I narration-tools/lint_script.py before NARRATION_SCRIPT.json --word-times
+  MEASURED_WORD_TIMES.json --timeline-out timeline-estimated.json` makes the same timeline with the guess
+  holds filled in and checks the script first (cue, capitals, names, sentence length, spoken figures a
+  minute, the main rule said twice word for word, the "key" page's speed). Mark the page carrying the main
+  idea `"key": true`, a page with a card to read `"held_card": true`, and name the rule in `"main_rule"`.
 - Spoken style: short sentences, "..." for a pause; numbers written as said ("twenty twenty-one",
   "four point one percent"); explain each term the first time, in a plain sentence of its own
   ("Interest is the extra you pay back when you borrow."), never as an aside (see step 4).

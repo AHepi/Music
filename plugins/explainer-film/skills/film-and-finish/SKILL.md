@@ -14,6 +14,16 @@ stretch of each piece while its pages load. Pages 3 to 5 (2,283 frames) took 53 
 
 ## 1. Film (in the background)
 
+**Plan it first, from measured costs** (`kit/calculators/plan_budget.py`; the round 4 table alone missed
+round 5's filming of the same frames by half, a short profile got all three rounds within about 5%):
+`plan_budget.py profile-commands EVENTS.json --scene <chapter>` prints a few short pieces to film (one
+held stretch per view, each slide); film them, then `plan_budget.py measure paper-film/out/profile-*.log
+--events EVENTS.json --out rates.json` and `plan_budget.py filming EVENTS.json --scene <chapter> --rates
+rates.json` print the minutes, workers, piece size, lazy loading, memory and disk, and the
+FILM_FROM/FILM_TO command of every stretch under 2 hours. EVENTS.json comes from
+`node paper-film/tools/page_events.mjs <chapter> EVENTS.json`. Watch a run with
+`plan_budget.py status paper-film/out/<chapter>-chunks` (running, stalled or stopped).
+
 ```
 cd KIT && nohup setsid bash paper-film/tools/film-chapter-parallel.sh <chapter> 2 240 > paper-film/out/<chapter>-filming.stdout 2>&1 < /dev/null &
 ```
@@ -49,25 +59,30 @@ piece of film builds only the pages it shows, and loading one painted set takes 
 ## 2. Finish
 
 ```
-bash narration-tools/finish_film.sh paper-film/out/<chapter>-silent.mp4 mix.wav master.mp4 "NN Chapter title.mp4"
+bash narration-tools/finish_film.sh paper-film/out/<chapter>-silent.mp4 mix.wav master.mp4 "NN Chapter title.mp4" 28 examples/<chapter>/timeline.json
 python3 -I narration-tools/make_captions.py examples/<chapter>/timeline.json "NN Captions - chapter title"
-python3 -I narration-tools/check_sound_alignment.py "NN Chapter title.mp4" mix.wav examples/<chapter>/timeline.json
 python3 -I paper-film/tools/make_cover.py FRAME.jpg "NN Cover - chapter title.jpg" --kicker "CHAPTER N" --title "LINE ONE|LINE TWO" --source "Source: ..."
 ```
 (the cover frame: pull one from the film with a calm empty lower part; `make_cover.py` puts the
-title there).
+title there). `finish_film.sh` checks what it made with `narration-tools/sound_gates.py` and stops on a
+FAIL line: each file's sound as long as the mix (within 0.05 s), the sendable copy as encoded at -15 LUFS
++/- 0.5 with a true peak of at most -1 dBTP, its size under the limit, and its sound within 2 ms of the
+mix at every page's first word. Without the timeline (6th argument) it makes the files but ends with
+exit 3: the alignment was not checked. Report the PASS lines' numbers to the user.
 
 **A clip without narration** (a test of a place, a sample for the user): lay music under it with
 `bash paper-film/tools/add_music_bed.sh SILENT.mp4 MUSIC OUT.mp4 [START] [LOUDNESS=-14]` (fades in and
 out, -14 LUFS, peaks under -1 dB; -17.7 was found faint on a phone speaker, log 32). The music file is
-only read; never put it into a repository.
+only read; never put it into a repository. Choose START by measurement, since nobody can listen here:
+`python3 -I narration-tools/sound_gates.py music-start MUSIC --seconds CLIP_SECONDS --mood quiet`. The
+script then checks the clip's length, loudness and true peak, and stops on a FAIL line.
 
 ## 3. Measure and look (report the numbers)
 
 - Frames and length: `ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames,duration -of csv=p=0 FILM.mp4`
-- Loudness and true peak: `ffmpeg -i FILM.mp4 -af ebur128=peak=true -f null - 2>&1 | tail -12`
-  (aim about -15 LUFS, true peak under -1 dB).
-- Sound alignment: the check above should say 0.00 ms (or a few ms) at every page.
+- Loudness and true peak: `python3 -I narration-tools/sound_gates.py loudness FILM.mp4` (finish_film.sh
+  runs it; -15 LUFS +/- 0.5, true peak at most -1 dBTP; `--music-only` for -14).
+- Sound alignment: finish_film.sh's alignment line should say 0.00 ms (at most 2) at every page.
 - Sudden jumps between frames (a painting switching over, a prop popping, a flash):
   `python3 -I paper-film/tools/find_jumps.py FILM.mp4 SHEET.jpg 4 CUT_SECONDS ...` lists every frame
   whose change is far bigger than its neighbours', and reports the times you name as planned cuts

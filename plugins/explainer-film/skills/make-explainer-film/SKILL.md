@@ -53,6 +53,11 @@ at the counter. The whole film is built like that.
   purchase, so check fal's estimate first); about 0.9 s a frame while the camera holds and 4.3 s while
   it slides (one worker). Before recording, `narration-tools/estimate_timeline.py` gives the chapter's
   length from the script (about 407 s for the 16-page newcomer chapter).
+- Work these out instead of guessing: `python3 kit/calculators/plan_budget.py cost PLAN.json` prices the
+  paid steps (paintings by the megapixels returned AND sent, the narration's credits, a repaint and
+  re-record reserve); `plan_budget.py ledger LEDGER.json --next-cost DOLLARS` says what is left of the
+  user's allowance, counted from the day it began, and refuses a step larger than that; `plan_budget.py
+  filming` plans the filming time and stretches (skill `film-and-finish`). A vague reply is not a yes.
 
 ## The rules that matter most
 

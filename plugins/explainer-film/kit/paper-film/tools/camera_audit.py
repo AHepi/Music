@@ -17,7 +17,7 @@
 #
 # Built-and-painted sets (--built-set): for every move it also checks the rules of a projected set
 # (07 Composing a shot, rule 11; logs 29 to 34), with the core's camera sums (kit/calculators/frame_geometry.py):
-#   - the camera never turns during a move (heading and pitch stay within 0.1 degree);
+#   - the camera never turns during a move (heading and pitch stay put, to within a camera log's rounding);
 #   - where the street's lines meet moves no more than 0.02 of the frame's width (it would slide off the subject);
 #   - the slide brings the nearest painted surface no more times nearer than the painting's detail allows
 #     (painting rows over film rows, through the lenses: 1.29 for Flux's 2672-row paintings);
@@ -25,8 +25,9 @@
 #     painted depth, the ground and far away, must land inside the projector's frame (0.03 from its edge, where the
 #     painting fades).
 #   Give the place: --place-facts F --view V (the street's direction, the projector spot, the painted points, the
-#   painting's height), or each part: --street x,y,z (Blender), --projector camera.json, --painted NAME=x,y,z,
-#   --nearest METRES, --painting-height ROWS. --json prints the result as JSON, --out FILE writes it.
+#   painting's height, and its accepted list: an accepted slide_magnification is reported, not counted), or each part:
+#   --street x,y,z (Blender), --projector camera.json, --painted NAME=x,y,z, --nearest METRES, --floor Z,
+#   --painting-height ROWS. --json prints the result as JSON, --out FILE writes it.
 #
 # How a move is found: between two samples the camera counts as moving when its aim turns faster than
 # 0.6 degrees a second, or it travels more than 1.2% of its distance to what it looks at per second, or
@@ -49,6 +50,8 @@ LENS_LIMIT = 0.012      # share of the lens angle, a second
 JOIN_GAP = 0.35         # seconds
 CUT_JUMP = 0.25         # share of the distance to the target
 CUT_TURN = 8.0          # degrees
+
+TURN_ROUNDING = 0.001  # degrees: a camera log's rounding, not a rule (a slide never turns: film-settings.json camera.turn_during_a_slide_degrees)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CALCULATORS = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'calculators')
@@ -215,7 +218,7 @@ def page_window(timeline, number, settings, page_files=None):
         joins[n] = read_join(page_files, n) or default
     previous = pages.get(number - 1)
     start = previous['last_word_end_at'] + sum(joins[number - 1]) if previous else 0.0
-    end = pages[number]['last_word_end_at'] + sum(joins[number])
+    end = min(pages[number]['last_word_end_at'] + sum(joins[number]), timeline.get('chapter_seconds', math.inf))
     plan = settings.value('timing.camera_plan_window_seconds')
     return {'from': start, 'to': end, 'join': joins[number], 'joins_from': 'page files' if read_join(page_files, number) else 'the default join',
             'plan_from': pages[number]['first_word_at'] - plan['before_first_word'], 'plan_to': pages[number]['last_word_end_at'] + plan['after_last_word_end']}
@@ -238,12 +241,16 @@ def sample_camera(geometry, sample, width, height):
 
 
 def read_projector(geometry, settings, path):
-    """The projector (the plate camera) from a camera file, with the lens the file gives (fov), else the plate lens."""
+    """The projector (the plate camera) from a camera file (a projector JSON with its Blender place, or only the three.js
+    position and quaternion), with the lens the file gives (fov), else the plate lens."""
     with open(path) as handle:
         data = json.load(handle)
     lens = data.get('fov') or settings.value('frame.plate_vertical_fov_degrees')
+    width, height = settings.value('frame.plate_width_pixels'), settings.value('frame.plate_height_pixels')
+    if 'blender' not in data and 'position' in data and 'quaternion' in data:
+        return geometry.camera_from_three(data['position'], data['quaternion'], lens, width, height, os.path.basename(path))
     camera = geometry.load_camera(path, settings, str(lens))
-    return geometry.with_lens(camera, lens, settings.value('frame.plate_width_pixels'), settings.value('frame.plate_height_pixels'))
+    return geometry.with_lens(camera, lens, width, height)
 
 
 class BuiltSet:
@@ -252,6 +259,7 @@ class BuiltSet:
     def __init__(self, args, geometry, settings):
         self.geometry, self.settings = geometry, settings
         self.street, self.projector, self.painted, self.nearest, self.painting_rows, self.floor = None, None, [], args.nearest, None, None
+        self.accepted = {}
         if args.place_facts:
             with open(args.place_facts) as handle:
                 facts = json.load(handle)
@@ -269,6 +277,8 @@ class BuiltSet:
             returned = (facts.get('painting') or {}).get('returned_size')
             self.painting_rows = returned[1] if returned else None
             self.floor = view['camera'].get('floor_height')
+            # the place's accepted exceptions for this view (rule, reason, who, date): reported, not counted
+            self.accepted = {a['rule']: a for a in facts.get('accepted', []) if a.get('view') == view['name']}
         if args.street:
             self.street = [float(v) for v in args.street.split(',')]
         if args.projector:
@@ -322,10 +332,12 @@ def plate_margin(geometry, place, camera):
 
 
 def check_built_set(found, place, settings):
-    """The built-set rules for every move of every shot."""
+    """The built-set rules, shot by shot. Each move is judged over its span: from its start (the shot's start, for the
+    first move) to the next move's start (or the shot's end), so the slow end of an eased move and the held frame after it
+    count too. A shot with no move is checked against the plate only."""
     geometry = place.geometry
     width, height = settings.value('frame.width_pixels'), settings.value('frame.height_pixels')
-    turn_tolerance = settings.value('camera_audit_built_set.turn_tolerance_degrees')
+    turn_tolerance = settings.value('camera.turn_during_a_slide_degrees') + TURN_ROUNDING
     drift_limit = settings.value('camera.meeting_point_drift_during_slide_share_of_width')
     every = settings.value('camera_audit_built_set.plate_check_every_seconds')
     edge = settings.value('frame.plate_frame_edge_fade_share')
@@ -334,59 +346,76 @@ def check_built_set(found, place, settings):
     results = []
     for page in found:
         for number, shot in enumerate(page['shots'], 1):
-            for move in shot['moves']:
-                samples = move['samples']
-                cameras = [sample_camera(geometry, s, width, height) for s in samples]
-                first = heading_and_pitch(subtract(samples[0]['target'], samples[0]['position']))
-                turn = max(max(abs((heading_and_pitch(subtract(s['target'], s['position']))[0] - first[0] + 180) % 360 - 180),
-                               abs(heading_and_pitch(subtract(s['target'], s['position']))[1] - first[1])) for s in samples)
-                row = {'page': page['page'], 'shot': number, 'shot_name': shot['name'], 'from': move['from'], 'to': move['to'],
-                       'words': move['words'], 'turn_degrees': turn, 'problems': []}
-                if turn > turn_tolerance:
-                    row['problems'].append(f'the camera turns {turn:.2f} degrees during the move (a slide never turns; at most {turn_tolerance})')
-                if place.street:
-                    across = [geometry.project_direction(c, place.street) for c in cameras]
-                    across = [a['across'] for a in across if a]
-                    if across:
-                        drift = max(across) - min(across)
-                        row['meeting_point_drift'] = drift
-                        if drift > drift_limit:
-                            row['problems'].append(f'where the lines meet moves {drift:.3f} of the width (at most {drift_limit}): it slides off the subject')
-                if place.painted:
-                    start_camera = place.projector or cameras[0]
-                    end_camera = cameras[-1]
-                    seen = []
-                    for name, point in place.painted:
-                        landed = geometry.project_point(end_camera, point)
-                        if landed['in_front'] and 0 <= landed['across'] <= 1 and 0 <= landed['down'] <= 1:
-                            seen.append((name, point))
-                    if seen:
-                        limit = geometry.slide_limit(place.painting_rows, height, samples[-1]['fov'], plate_fov)
-                        found_points = geometry.slide_magnifications(start_camera, end_camera, seen)
-                        nearest = min(found_points, key=lambda f: f['depth_end'])
-                        worst = max((f for f in found_points if f['magnification']), key=lambda f: f['magnification'])
-                        over = worst['magnification'] / limit - 1
-                        row.update({'nearest_painted': nearest['name'], 'nearest_depth_end': nearest['depth_end'], 'magnification': worst['magnification'],
-                                    'magnified_most': worst['name'], 'limit': limit})
-                        if over > borderline:
-                            row['problems'].append(f'{worst["name"]} comes {worst["magnification"]:.3f} times nearer than in the plate (the painting allows '
-                                                   f'{limit:.3f}): it will look soft; the longest slide is {geometry.longest_slide(nearest["depth_end"], limit):.2f} m')
-                        elif over > 0:
-                            row['notes'] = [f'{worst["name"]} {worst["magnification"]:.3f} times nearer: on the limit ({limit:.3f}); judge it']
+            samples_all = shot['samples']
+            starts = [samples_all.index(m['samples'][0]) for m in shot['moves']]
+            spans = []
+            for k, move in enumerate(shot['moves']):
+                first = 0 if k == 0 else starts[k]
+                last = starts[k + 1] if k + 1 < len(starts) else len(samples_all)
+                spans.append((move, starts[k], first, last))
+            if not spans:
+                spans.append((None, 0, 0, len(samples_all)))
+            for move, move_start, first, last in spans:
+                moving = samples_all[move_start:last]
+                row = {'page': page['page'], 'shot': number, 'shot_name': shot['name'],
+                       'from': move['from'] if move else shot['from'], 'to': move['to'] if move else shot['to'],
+                       'words': move['words'] if move else 'held', 'turn_degrees': 0.0, 'problems': [], 'notes': []}
+                cameras = [sample_camera(geometry, s, width, height) for s in moving]
+                if move:
+                    base = heading_and_pitch(subtract(moving[0]['target'], moving[0]['position']))
+                    row['turn_degrees'] = max(max(abs((heading_and_pitch(subtract(s['target'], s['position']))[0] - base[0] + 180) % 360 - 180),
+                                                  abs(heading_and_pitch(subtract(s['target'], s['position']))[1] - base[1])) for s in moving)
+                    if row['turn_degrees'] > turn_tolerance:
+                        row['problems'].append(f'the camera turns {row["turn_degrees"]:.2f} degrees during the move (a slide never turns)')
+                    if place.street:
+                        across = [geometry.project_direction(c, place.street) for c in cameras]
+                        across = [a['across'] for a in across if a]
+                        if across:
+                            drift = max(across) - min(across)
+                            row['meeting_point_drift'] = drift
+                            if drift > drift_limit:
+                                row['problems'].append(f'where the lines meet moves {drift:.3f} of the width (at most {drift_limit}): it slides off the subject')
+                    if place.painted:
+                        start_camera = place.projector or cameras[0]
+                        end_camera = cameras[-1]
+                        seen = []
+                        for name, point in place.painted:
+                            landed = geometry.project_point(end_camera, point)
+                            if landed['in_front'] and 0 <= landed['across'] <= 1 and 0 <= landed['down'] <= 1:
+                                seen.append((name, point))
+                        if seen:
+                            limit = geometry.slide_limit(place.painting_rows, height, moving[-1]['fov'], plate_fov)
+                            found_points = geometry.slide_magnifications(start_camera, end_camera, seen)
+                            nearest = min(found_points, key=lambda f: f['depth_end'])
+                            worst = max((f for f in found_points if f['magnification']), key=lambda f: f['magnification'])
+                            over = worst['magnification'] / limit - 1
+                            row.update({'nearest_painted': nearest['name'], 'nearest_depth_end': nearest['depth_end'], 'magnification': worst['magnification'],
+                                        'magnified_most': worst['name'], 'limit': limit})
+                            if over > borderline and 'slide_magnification' in place.accepted:
+                                entry = place.accepted['slide_magnification']
+                                row['notes'].append(f'{worst["name"]} {worst["magnification"]:.3f} times nearer (limit {limit:.3f}): accepted by {entry["who"]} '
+                                                    f'on {entry["date"]} ({entry["reason"]})')
+                            elif over > borderline:
+                                row['problems'].append(f'{worst["name"]} comes {worst["magnification"]:.3f} times nearer than in the plate (the painting allows '
+                                                       f'{limit:.3f}): it will look soft; the longest slide is {geometry.longest_slide(nearest["depth_end"], limit):.2f} m')
+                            elif over > 0:
+                                row['notes'].append(f'{worst["name"]} {worst["magnification"]:.3f} times nearer: on the limit ({limit:.3f}); judge it')
                 if place.projector:
-                    worst_margin, where, when = math.inf, None, None
-                    last_t = None
-                    for s, c in zip(samples, cameras):
-                        if last_t is not None and s['t'] - last_t < every - 1e-9 and s is not samples[-1]:
+                    checked = samples_all[first:last]
+                    worst_margin, where, when, last_t = math.inf, None, None, None
+                    for s in checked:
+                        if last_t is not None and s['t'] - last_t < every - 1e-9 and s is not checked[-1]:
                             continue
                         last_t = s['t']
-                        margin, spot = plate_margin(geometry, place, c)
+                        margin, spot = plate_margin(geometry, place, sample_camera(geometry, s, width, height))
                         if margin < worst_margin:
                             worst_margin, where, when = margin, spot, s['t']
                     row.update({'plate_margin': worst_margin, 'plate_margin_where': where, 'plate_margin_at': when})
                     if worst_margin < edge:
                         row['problems'].append(f'the frame leaves the painted plate at {when:.2f} s ({where} lands {worst_margin:.3f} from the plate\'s '
                                                f'edge; it must stay {edge} inside, where the painting fades)')
+                if shot.get('skip'):
+                    row['skip'] = True
                 results.append(row)
     return results
 
@@ -405,7 +434,8 @@ def print_built_set(results):
         if 'plate_margin' in row:
             parts.append(f'frame {row["plate_margin"]:.3f} inside the plate at its closest')
         label = f' ({row["shot_name"]})' if row['shot_name'] else ''
-        print(f'  page {row["page"]} shot {row["shot"]}{label} move {row["from"]:.2f}-{row["to"]:.2f} s ({row["words"]}): ' + ', '.join(parts)
+        what = 'held' if row['words'] == 'held' else f'move {row["from"]:.2f}-{row["to"]:.2f} s ({row["words"]})'
+        print(f'  page {row["page"]} shot {row["shot"]}{label} {what}: ' + ', '.join(parts)
               + ('' if row['problems'] else ': fine'))
         for note in row.get('notes', []):
             print(f'    note: {note}')
@@ -440,6 +470,7 @@ def main(argv=None):
     parser.add_argument('--built-set', action='store_true', help='also check the built-and-painted set rules for every move')
     parser.add_argument('--place-facts', help='the place facts file (street direction, projector spot, painted points, painting size)')
     parser.add_argument('--view', help='the view in the place facts')
+    parser.add_argument('--shot', help='with --built-set: only shots whose name contains this (one projector per shot)')
     parser.add_argument('--street', help='the street\'s direction x,y,z (Blender), where its lines meet')
     parser.add_argument('--projector', help='the projector\'s camera file (e.g. works-camera-w1.json)')
     parser.add_argument('--painted', action='append', help='NAME=x,y,z (Blender): a painted thing for the magnification check (repeat)')
@@ -488,7 +519,10 @@ def main(argv=None):
             print('moves outside the plan\'s camera window: ' + ', '.join(f'{a:.2f}-{b:.2f} s' for a, b in outside))
     if args.built_set:
         place = BuiltSet(args, geometry, settings)
-        rows = check_built_set(found, place, settings)
+        chosen = found
+        if args.shot:
+            chosen = [dict(page, shots=[s if args.shot in (s['name'] or '') else dict(s, skip=True) for s in page['shots']]) for page in found]
+        rows = [r for r in check_built_set(chosen, place, settings) if not r.pop('skip', False)]
         if args.json:
             built = sum(len(r['problems']) for r in rows)
         else:

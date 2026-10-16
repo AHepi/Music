@@ -112,6 +112,19 @@ for r in (3, 4, 5):
                    recorded=f'round {r} filming.log {measured[r]:.0f} s',
                    proves='the table alone misleads on another set or a busy machine, which is why the planner profiles first')
 
+pieces_to_profile = budget.profile_stretches(classified)
+views = {c['view'] for c in classified if FIRST <= c['frame'] < LAST and c['kind'] != 'join'}
+clean = []
+for piece in pieces_to_profile:
+    a, b = piece['measured']
+    kinds = {(c['kind'], c['view']) for c in classified if a <= c['frame'] < b}
+    clean.append(len(kinds) == 1 and next(iter(kinds))[0] == ('moving' if piece['why'].startswith('moving') else 'held_live'))
+check.true(f'profile-commands: {len(pieces_to_profile)} pieces of 120 frames, one held per view and one per slide, each timed stretch all of one kind',
+           len([p for p in pieces_to_profile if p['why'].startswith('held')]) == len(views) and len([p for p in pieces_to_profile if p['why'].startswith('moving')]) == 2
+           and all(p['last'] - p['first'] == 120 for p in pieces_to_profile) and all(clean),
+           details='; '.join(f'{p["why"]} {p["first"]}-{p["last"]}' for p in pieces_to_profile),
+           proves='the profile measures each view\'s held cost and each slide clean of loading (as the fair check above does with round logs)')
+
 # 5. the filming plan: pieces, stretches, commands, workers, memory, lazy loading
 rates4 = budget.measure_rates(logs[4], classified, settings)['rates']
 plan = budget.plan_filming(events, settings, 'inflation-chapter-2-newcomers', rates4, FIRST, LAST, processors=1, free_memory=15.0,
@@ -156,11 +169,11 @@ check.true('6 GB free allows one worker; 4 GB free stops the plan', tight['worke
            details=f'{tight["workers"]} worker; {none_["problems"][:1]}', recorded='Plan 34 F1 (about 2.6-2.8 GB a piece, 16 GB machine, no swap)',
            proves='made-up memory figures: the memory rule is applied')
 lazy = budget.plan_filming(events, settings, 's', rates4, FIRST, LAST, processors=4, free_memory=15.0, heavy_pages=16, blender=[], free_disk=50.0)
-small = budget.plan_filming(events, settings, 's', rates4, FIRST, LAST, processors=4, free_memory=15.0, heavy_pages=1, model_megabytes=62,
-                            blender=[], free_disk=50.0)
-check.true('16 heavy pages turn lazy loading on; one 62 MB set does not', lazy['lazy'] and not small['lazy'],
-           recorded='log 34 (16 heavy pages ran the machine out of memory; the notice corner\'s export is 62 MB)',
-           proves='the log 34 case is caught (the limit of 8 pages is invented)')
+small = budget.plan_filming(events, settings, 's', rates4, FIRST, LAST, processors=4, free_memory=15.0, heavy_pages=1, blender=[], free_disk=50.0)
+check.true('16 heavy pages turn lazy loading on (about 45 GB at once); one does not', lazy['lazy'] and not small['lazy'],
+           details=lazy['lazy_reasons'][0][:100] if lazy['lazy_reasons'] else 'not lazy',
+           recorded='log 34 (16 heavy pages ran the 16 GB machine out of memory; a loaded set about 2.6-2.8 GB, measured)',
+           proves='the log 34 case follows from the measured memory a set takes')
 busy = budget.plan_filming(events, settings, 's', rates4, FIRST, LAST, processors=4, free_memory=15.0, blender=[4242], free_disk=50.0)
 check.true('a running Blender stops the plan', any('Blender is running' in p for p in busy['problems']),
            recorded='round 5 filmed the same frames in 110 min against 53 while other helpers ran Blender', proves='the check fires')

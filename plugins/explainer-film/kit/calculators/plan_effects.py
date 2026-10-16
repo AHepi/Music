@@ -20,7 +20,8 @@ film-settings.json, using the core's camera sums (frame_geometry.py) for every p
 Use:
   python3 plan_effects.py wind --place-facts works-place-facts.json [--smoke works-effects.js | smoke.json]
         [--smoking no-1-chimney=working --smoking no-2-chimney-a=heavy ...] [--view w3 --view w1]
-        [--card w3:lower=0.06,0.1635,0.90,0.2365 ...] [--wind -0.85,-0.12,-0.5] [--main-view w1]
+        [--card w3:lower=0.06,0.1635,0.90,0.2365 ...] [--wind=-0.85,-0.12,-0.5] [--main-view w1]
+        (write --wind=x,y,z with "=": a value starting with a minus sign would read as an option)
   python3 plan_effects.py colour --place-facts F --view w3 --picture works-w3-plate.jpg [--smoke ...] [--smoking ...]
   python3 plan_effects.py contact-shadows --place-facts F [--props drum,chair,pail] [--footprints footprints.json]
         [--slide-start 2.0]
@@ -65,6 +66,7 @@ FIRE_SMOKE_SIZE = (0.35, 1.1)   # size = scale * puff.size * (0.35 + 1.1 k), puf
 FIRE_SMOKE_PUFF_SIZE_MAX = 1.3
 FIRE_SMOKE_OPACITY = 0.5   # opacity = 0.5 * min(1, age / 0.25) * (1 - k)
 FIRE_SMOKE_FADE_IN = 0.25
+FIRE_SMOKE_CORE = 0.55     # its puff picture is at least half as thick as its middle out to 0.55 of its radius
 
 
 # ------------------------------------------------------------------------------------------------ reading settings
@@ -197,23 +199,27 @@ def trace_plume(camera, top_blender, kind, wind_three, step):
     return samples
 
 
-def trace_fire_smoke(camera, coals_blender, fire, step):
-    """The brazier's live smoke (effects.js Smoke) on one camera's frame: it rises 1.7 x scale over its life and leans
-    `wind` x scale along +x (Blender and three.js), puffs up to 1.3 x scale x (0.35 + 1.1 k) wide."""
+def trace_fire_smoke(camera, coals_blender, fire, step, direction=(1.0, 0.0)):
+    """A fire's (or a cottage chimney's) live smoke made with effects.js Smoke, on one camera's frame: it rises 1.7 x
+    scale over its life and leans `wind` x scale along +x (Blender and three.js), puffs up to 1.3 x scale x (0.35 + 1.1 k)
+    wide (the box kept here is the puff's thick middle, 0.55 of its radius). fire: {life, scale, wind, above_coals_metres}
+    (the origin's height above the given point). direction: the level way it leans (Blender x, y): +x for effects.js Smoke;
+    round 6's BrazierSmoke (works-effects.js, not yet in the kit) leans along the chimneys' wind instead."""
     width, height = camera['frame']
     origin = [coals_blender[0], coals_blender[1], coals_blender[2] + fire['above_coals_metres']]
     samples = []
     for age in ages_for(fire['life'], step):
         k = age / fire['life']
-        centre = [origin[0] + fire['scale'] * fire['wind'] * k, origin[1], origin[2] + fire['scale'] * FIRE_SMOKE_RISE * k]
+        blown = fire['scale'] * fire['wind'] * k
+        centre = [origin[0] + direction[0] * blown, origin[1] + direction[1] * blown, origin[2] + fire['scale'] * FIRE_SMOKE_RISE * k]
         size = fire['scale'] * FIRE_SMOKE_PUFF_SIZE_MAX * (FIRE_SMOKE_SIZE[0] + FIRE_SMOKE_SIZE[1] * k)
         strength = FIRE_SMOKE_OPACITY * min(1.0, age / FIRE_SMOKE_FADE_IN) * (1 - k)
         landed = geometry.project_point(camera, centre)
         if not landed['in_front']:
             continue
         sway = geometry.size_in_pixels(camera, fire['scale'] * FIRE_SMOKE_SWAY, landed['depth']) / width
-        half = geometry.size_in_pixels(camera, size, landed['depth']) / 2
-        samples.append({'age': age, 'across': landed['across'], 'down': landed['down'], 'strength': strength,
+        half = geometry.size_in_pixels(camera, size, landed['depth']) / 2 * FIRE_SMOKE_CORE
+        samples.append({'age': age, 'in_front': True, 'across': landed['across'], 'down': landed['down'], 'strength': strength,
                         'left': landed['across'] - half / width - sway, 'right': landed['across'] + half / width + sway,
                         'top': landed['down'] - half / height, 'bottom': landed['down'] + half / height})
     return samples
@@ -247,7 +253,7 @@ def judge_plume(samples, settings, cards=(), others=(), figures=(), emitter_acro
     edge_min = settings.value('effects_planner.edge_strength_min')
     travel_min = settings.value('effects_planner.travel_min_share_of_width')
     clearance = settings.value('effects_planner.other_chimney_clearance_share')
-    figure_max = settings.value('effects_planner.figure_smoke_strength_max')
+    figure_max = settings.value('effects_planner.edge_strength_min')
     front = [s for s in samples if s.get('in_front')]
     visible = [s for s in front if s['strength'] >= visible_min]
     edged = [s for s in front if s['strength'] >= edge_min]
@@ -413,13 +419,51 @@ def trace_wind(facts, settings, smoke, wind, smoking, views, cards, step):
     return out
 
 
+def fire_smoke_rows(facts, settings, views, fires, step, wind_three=None):
+    """Each fire's live smoke in each view: whether it enters the frame and whether thick smoke crosses a figure. With
+    fire_smoke's follows_wind (round 6's BrazierSmoke) it leans along the wind's level direction, else along +x."""
+    fire = settings.value('effects_planner.fire_smoke')
+    direction = (1.0, 0.0)
+    if fire.get('follows_wind') and wind_three:
+        level = horizontal(geometry.from_three(wind_three))
+        direction = tuple(level) if level else direction
+    figure_max = settings.value('effects_planner.edge_strength_min')
+    rows = []
+    for view in views:
+        for spot, camera in view_cameras(facts, settings, view):
+            figures = figure_boxes(facts, camera, settings)
+            for emitter in fires:
+                samples = trace_fire_smoke(camera, emitter['at'], fire, step, direction)
+                inside = [s for s in samples if s['right'] > 0 and s['left'] < 1 and s['bottom'] > 0 and s['top'] < 1]
+                problems = []
+                for figure in figures:
+                    thick = [s for s in samples if s['strength'] > figure_max and overlaps([s['left'], s['top'], s['right'], s['bottom']], figure['box'])]
+                    if thick:
+                        problems.append(f'smoke stronger than {figure_max} crosses {figure["name"]} (a man in smoke reads as a grey ghost; round 1)')
+                rows.append({'view': view['name'], 'spot': spot, 'fire': emitter['name'], 'enters_frame': bool(inside), 'problems': problems})
+    return rows
+
+
+def mouth_in_frame(point_on_frame):
+    return bool(point_on_frame) and 0 <= point_on_frame[0] <= 1 and 0 <= point_on_frame[1] <= 1
+
+
+def should_drop(entered_at_any_spot, mouth_at_held_spot):
+    """Drop an emitter from a view when its plume never enters the frame, or when its mouth (the chimney top) is outside the
+    frame where the shot holds: smoke drifting in without its chimney reads as smoke from nowhere (log 32 dropped the
+    notice corner's two cottage chimney smokes because both chimneys were out of the frame)."""
+    return (not entered_at_any_spot) or (not mouth_in_frame(mouth_at_held_spot))
+
+
 def drop_list(traced):
-    """Emitters whose plume never enters the frame at any spot of a view: drop them from that view."""
-    seen = {}
+    """(view, chimney) pairs to drop (should_drop): their plume never enters the frame, or their chimney top is out of the
+    frame where the shot holds (the last spot: the composed or held one)."""
+    entered, held = {}, {}
     for row in traced:
         key = (row['view'], row['chimney'])
-        seen[key] = seen.get(key, False) or row['enters_frame']
-    return sorted(key for key, entered in seen.items() if not entered)
+        entered[key] = entered.get(key, False) or row['enters_frame']
+        held[key] = row['chimney_top_on_frame']      # rows come in spot order, so the last is where the shot holds
+    return sorted(key for key in entered if should_drop(entered[key], held[key]))
 
 
 def summarise(traced):
@@ -443,8 +487,9 @@ def command_wind(args, settings):
     if args.view and len(views) != len(args.view):
         raise SystemExit(f'plan_effects: unknown view in {args.view} (views: {", ".join(v["name"] for v in facts["views"])})')
     smoking = smoking_plan(facts, smoke, args.smoking)
-    if not smoking:
-        raise SystemExit('plan_effects: the place facts list no chimney mouths (emitters of kind "chimney mouth")')
+    fires = [e for e in facts.get('emitters', []) if e.get('kind') == 'fire']
+    if not smoking and not fires:
+        raise SystemExit('plan_effects: the place facts list no chimney mouths or fires (emitters of kind "chimney mouth" or "fire")')
     cards = parse_cards(args.card)
     lines, result = [], {'smoke_source': smoke['source'], 'smoking': {e['name']: k['name'] for e, k in smoking}}
     # the views that see a chimney (only they choose the wind)
@@ -453,7 +498,11 @@ def command_wind(args, settings):
         cameras = view_cameras(facts, settings, view)
         if any(geometry.project_point(c, e['at'])['in_front'] for _, c in cameras for e, _ in smoking):
             seeing.append((view, cameras[-1][1]))
-    if args.wind:
+    given_wind = geometry.normalise([float(v) for v in args.wind.split(',')]) if args.wind else smoke['wind']
+    fire_rows = fire_smoke_rows(facts, settings, views, fires, step, given_wind) if fires else []
+    if not smoking:
+        winds = []
+    elif args.wind:
         winds = [('given', geometry.normalise([float(v) for v in args.wind.split(',')]))]
         lines.append(f'Judging the given wind {fmt_vector(winds[0][1])} (three.js axes, normalised).')
     else:
@@ -468,6 +517,15 @@ def command_wind(args, settings):
                      f'is at least {math.degrees(math.asin(min(1, score))):.1f} degrees off every view. Tracing both signs '
                      f'(the across part {mix["across"]}, away from {args.main_view or seeing[0][0]["name"]} {mix["away"]}, down {mix["down"]}):')
     lines.append(f'Smoke kinds from {smoke["source"]}; traced every {step} s of a puff\'s life.')
+    if fire_rows:
+        result['fire_smoke'] = fire_rows
+        lines.append('Fire smoke (effects.js Smoke, film-settings.json effects_planner.fire_smoke):')
+        for row in fire_rows:
+            lines.append(f'  {row["view"]} {row["spot"]} {row["fire"]}: ' + ('never in the frame: drop it from this view' if not row['enters_frame']
+                         else ('clear of the figures' if not row['problems'] else '; '.join(row['problems']))))
+    if not winds:
+        result.update({'passes': not any(r['problems'] for r in fire_rows), 'tried': []})
+        return result, lines
     tried = []
     for label, wind in winds:
         traced = trace_wind(facts, settings, smoke, wind, smoking, views, cards, step)
@@ -506,7 +564,8 @@ def command_wind(args, settings):
             lines.append(f'  note: in {name} {chimney}\'s plume runs in the title band ({band[0]}-{band[1]} down) and no word boxes were given '
                          f'for {name}: give them with --card {name}:NAME=l,t,r,b, or draw a soft band behind the words')
         for name, chimney in t['dropped']:
-            lines.append(f'  {name}: {chimney}\'s plume never enters the frame: drop it from this view')
+            lines.append(f'  {name}: drop {chimney}\'s smoke from this view (its plume never enters the frame, or its chimney top is out of '
+                         f'the frame where the shot holds: smoke from nowhere)')
         for problem in t['problems']:
             lines.append(f'  PROBLEM {problem}')
     lines.append('')
@@ -588,8 +647,6 @@ def command_colour(args, settings):
     smoke = read_smoke(settings, args.smoke)
     step = settings.value('effects_planner.trace_step_seconds')
     lighter_max = settings.value('effects_planner.plume_lighter_than_sky_max_levels')
-    difference_min = settings.value('effects_planner.plume_colour_difference_min')
-    ratio_min = settings.value('effects_planner.mouth_to_chimney_top_ratio_min')
     view = next((v for v in facts['views'] if v['name'] == args.view), None)
     if view is None:
         raise SystemExit(f'plan_effects: no view "{args.view}" (views: {", ".join(v["name"] for v in facts["views"])})')
@@ -618,25 +675,23 @@ def command_colour(args, settings):
                 row['suggested_colour'] = [round(c * scale) for c in kind['colour']]
                 row['problems'].append(f'{lighter:+.0f} levels lighter than the sky (at most {lighter_max}): pale smoke on a dusk sky reads as a glow '
                                        f'(round 4). Try {row["suggested_colour"]} (the same hue, {lighter_max / 2:.0f} levels over the sky)')
-            if difference < difference_min:
-                row['problems'].append(f'only {difference:.0f} colour-difference units from the sky (at least {difference_min}): the plume will hardly '
-                                       f'show; make it browner or darker than the sky')
             lines.append(f'{emitter["name"]} ({kind["name"]}): smoke {kind["colour"]} against the sky\'s {[round(v) for v in sky]} ({count} places '
-                         f'along the plume): {lighter:+.0f} levels lighter, colour difference {difference:.0f}')
+                         f'along the plume): {lighter:+.0f} levels lighter, colour difference {difference:.0f} (round 5\'s plume, about 21, shows '
+                         f'clearly; under about 10 it may not: judge it on a still)')
         elif sky is None:
             row['problems'].append('the plume is not in this picture')
             lines.append(f'{emitter["name"]}: the plume is not in this picture')
         else:
             row['notes'].append('the kind has no colour')
             lines.append(f'{emitter["name"]} ({kind["name"]}): the kind has no colour; the sky behind it is {[round(v) for v in sky]}: choose a '
-                         f'colour at most {lighter_max} levels lighter and at least {difference_min} colour-difference units away')
+                         f'colour at most {lighter_max} levels lighter, of another hue (round 5: brownish grey against a blue dusk)')
         if emitter.get('radius_metres'):
             width = 2 * emitter['radius_metres']
             ratio = kind['mouth_size'] / width
             row.update({'chimney_top_width': width, 'mouth_size': kind['mouth_size'], 'mouth_ratio': ratio})
-            if ratio < ratio_min:
+            if ratio < 1.0:   # narrower than the top: the plume starts inside the rim (a fact of geometry, not a tuned number)
                 row['problems'].append(f'the mouth ({kind["mouth_size"]} m) is narrower than the chimney top ({width:.2f} m): use at least '
-                                       f'{width * ratio_min:.2f} m so the plume leaves the whole top')
+                                       f'{width:.2f} m so the plume leaves the whole top')
             lines.append(f'  mouth {kind["mouth_size"]} m for a top {width:.2f} m wide: ratio {ratio:.2f}'
                          + (' (a square top\'s diagonal is 1.41 times its side)' if ratio > 1.3 else ''))
         for problem in row['problems']:
@@ -667,6 +722,23 @@ def ground_height_under(facts, point):
     return best
 
 
+def resting_surface(facts, base, floating, sunk):
+    """The name of a raised support surface (a seat, counter, table, shelf or sill) a prop's base rests on, within the
+    shot checker's resting tolerances (composing.resting_floating_metres above, resting_sunk_metres below), or None."""
+    for surface in facts.get('support_surfaces', []):
+        if surface.get('kind') in ('ground', 'road', 'pavement', 'floor'):
+            continue
+        where = surface.get('at')
+        xr, yr = surface.get('x_range'), surface.get('y_range')
+        if xr and not xr[0] <= base[0] <= xr[1] or yr and not yr[0] <= base[1] <= yr[1]:
+            continue
+        if where and not (xr or yr) and math.hypot(where[0] - base[0], where[1] - base[1]) > 0.5:
+            continue
+        if -sunk <= base[2] - surface['height'] <= floating:
+            return surface['name']
+    return None
+
+
 def command_contact_shadows(args, settings):
     with open(args.place_facts) as handle:
         facts = json.load(handle)
@@ -675,7 +747,9 @@ def command_contact_shadows(args, settings):
         with open(args.footprints) as handle:
             footprints = json.load(handle).get('footprints', {})
     per = settings.value('effects_planner.contact_shadow_size_per_footprint_diagonal')
-    on_ground = settings.value('effects_planner.contact_shadow_on_ground_within_metres')
+    floating = settings.value('composing.resting_floating_metres')
+    sunk = settings.value('composing.resting_sunk_metres')
+    high = settings.value('composing.resting_landed_high_metres')
     shadow = settings.value('effects.contact_shadow')
     props = {p['name']: p for p in facts.get('props', [])}
     names = [n.strip() for n in args.props.split(',')] if args.props else None
@@ -710,8 +784,12 @@ def command_contact_shadows(args, settings):
         else:
             lines.append(f'{name}: no size or footprint: skipped')
             continue
-        if ground is not None and bottom - ground > on_ground and not args.props:
-            lines.append(f'{name}: stands {bottom - ground:.2f} m above the ground (on another prop): no ground shadow')
+        resting_on = resting_surface(facts, [row['centre'][0], row['centre'][1], bottom], floating, sunk)
+        if resting_on and not args.props:
+            lines.append(f'{name}: rests on {resting_on} (not the ground): no ground shadow')
+            continue
+        if ground is not None and bottom - ground > high and not args.props:
+            lines.append(f'{name}: its bottom is {bottom - ground:.2f} m above the ground (it hangs or stands on something): no ground shadow')
             continue
         diagonal = math.hypot(width, depth)
         side = per * diagonal
@@ -748,6 +826,14 @@ def window_change(box, first_path, other_paths, settings):
     return {'window_pixels': int(mask.sum()), 'first_level': float(luma[mask].mean()) if mask.any() else None, 'others': rows}
 
 
+def judge_window_change(largest, settings):
+    """Whether a teaching event's largest change (levels) is seen, and how many times stronger it must be if not."""
+    needed = settings.value('effects.busy_window_change_min_levels')
+    if largest >= needed:
+        return True, None
+    return False, (needed / largest if largest > 0 else None)
+
+
 def command_window_change(args, settings):
     if len(args.stills) < 2:
         raise SystemExit('plan_effects window-change: give the still at the word and at least one later still')
@@ -765,8 +851,7 @@ def command_window_change(args, settings):
         best = max(best, row['size_of_change'])
         lines.append(f'  {os.path.basename(row["still"])}: {row["mean_level"]:.1f} levels, change {row["mean_change"]:+.1f}, '
                      f'size of change {row["size_of_change"]:.1f}')
-    passes = best >= needed
-    boost = needed / best if best > 0 else None
+    passes, boost = judge_window_change(best, settings)
     lines.append(f'Largest change {best:.1f} levels against the {needed} needed: ' + ('seen.' if passes else
                  f'too small to see. Raise the event\'s strength about {boost:.1f} times (or add a moving dark band, as round 5 did) and measure again.'))
     return {**found, 'largest_change': best, 'needed': needed, 'passes': passes, 'boost_factor': None if passes else boost}, lines
@@ -893,7 +978,7 @@ def main(argv=None):
     p.add_argument('--main-view', help='the view the wind blows a little away from (default the first that sees a chimney)')
     p.add_argument('--card', action='append', help='VIEW:NAME=left,top,right,bottom (shares): a word card the plume must stay under; '
                                                    'VIEW * for every view (repeat)')
-    p.add_argument('--wind', help='judge this wind (x,y,z three.js axes) instead of choosing one')
+    p.add_argument('--wind', help='judge this wind (--wind=x,y,z, three.js axes) instead of choosing one')
     p.add_argument('--full-trace', action='store_true', help='keep every traced number in the JSON')
     p = add_output_options(commands.add_parser('colour', help='the plume colour against the sky behind it, and the mouth size'))
     p.add_argument('--place-facts', required=True)
@@ -905,7 +990,7 @@ def main(argv=None):
     p.add_argument('--wind', help='x,y,z three.js axes (default: the smoke settings\' wind)')
     p = add_output_options(commands.add_parser('contact-shadows', help='soft shadows for the near props the behind painting removes'))
     p.add_argument('--place-facts', required=True)
-    p.add_argument('--props', help='the props, separated by commas (default: subject, support and story props standing on the ground)')
+    p.add_argument('--props', help='the props, separated by commas (default: subject, support and story props not resting on a raised surface)')
     p.add_argument('--footprints', help='a JSON of measured base footprints (paper-film/blender/set_measurements.py footprints)')
     p.add_argument('--slide-start', type=float, help='the slide\'s start (seconds), when the shadows begin to fade in')
     p = add_output_options(commands.add_parser('window-change', help='how much a teaching event changes the lit windows'))

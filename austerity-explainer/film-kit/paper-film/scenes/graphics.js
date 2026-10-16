@@ -114,6 +114,9 @@ export function counter(ctx, t, { at, until = at + 4, duration = 1.2, from = 0, 
 // thing it names sideways and then drop to an empty place for the words; side: 'left' or 'right' puts the words on
 // that side of the line's end whatever way the line runs (and they are not flipped). Leave all three out for the plain
 // label, which draws exactly as before.
+// Returns false when nothing shows, or the label's whole shape once fully drawn: { words: { left, top, right, bottom }
+// (the plate, or the words without one), outline: points along its line and round its words }, for checks
+// (gapToBox) that labels and arrows keep clear of each other and of things in the picture (log 34, round 6).
 export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, plate = false, fadeOut = 0.3,
   wordsWithLine = false, corner = null, side: wordsSide = null }) {
   const a = presence(t, at, until, 0.01, fadeOut);
@@ -168,7 +171,51 @@ export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy 
   ctx.textAlign = side > 0 ? 'left' : 'right';
   ctx.fillText(text, words.x + side * 52, words.y);
   ctx.restore();
-  return true;
+  // the whole label as it is once drawn (for checks)
+  const finalEnd = { x: point.x + reach, y: endY };
+  const textWidth = labelWidth - 52, pad = plate ? { x: size * 0.45, y: size * 0.32 } : { x: 0, y: 0 };
+  const textLeft = side > 0 ? finalEnd.x + 52 : finalEnd.x - 52 - textWidth;
+  const wordsBox = { left: textLeft - pad.x, top: endY - size / 2 - pad.y, right: textLeft + textWidth + pad.x, bottom: endY + size / 2 + pad.y };
+  const path = [point, ...(corner ? [{ x: point.x + corner.dx, y: point.y + corner.dy }] : []), finalEnd, { x: finalEnd.x + side * 40, y: finalEnd.y }];
+  const outline = [...pointsAlong(path), ...pointsRound(wordsBox)];
+  return { words: wordsBox, outline };
+}
+
+// ------------------------------------------------------------------------ checks: how far apart drawn things are
+// (log 34, round 6: a price arrow was drawn through a gate board's name). Shapes are given as points along their edges.
+
+// points every `step` pixels along a path of points
+export function pointsAlong(path, step = 4) {
+  const points = [];
+  for (let i = 0; i < path.length - 1; i++) {
+    const a = path[i], b = path[i + 1], n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / step));
+    for (let k = 0; k <= n; k++) points.push({ x: a.x + (b.x - a.x) * k / n, y: a.y + (b.y - a.y) * k / n });
+  }
+  return points;
+}
+// points every `step` pixels round a box's edge
+export function pointsRound(box, step = 4) {
+  const { left, top, right, bottom } = box;
+  return pointsAlong([{ x: left, y: top }, { x: right, y: top }, { x: right, y: bottom }, { x: left, y: bottom }, { x: left, y: top }], step);
+}
+// How far (pixels) a shape (points along its edges) keeps clear of a box { left, top, right, bottom }: the smallest
+// distance from any of its points to the box, or, when a point lies inside the box, minus how deep it lies.
+export function gapToBox(box, outline) {
+  let gap = Infinity;
+  for (const p of outline) {
+    const dx = Math.max(box.left - p.x, 0, p.x - box.right), dy = Math.max(box.top - p.y, 0, p.y - box.bottom);
+    const d = dx > 0 || dy > 0 ? Math.hypot(dx, dy) : -Math.min(p.x - box.left, box.right - p.x, p.y - box.top, box.bottom - p.y);
+    gap = Math.min(gap, d);
+  }
+  return gap;
+}
+// Prints a check's result to the stage's log once per page build (`seen` is the page's own Set), so a filming or a
+// still shows it: "check NAME: 31 px clear (needs 24)", with TOO CLOSE when it fails.
+export function reportGap(seen, name, gap, need) {
+  if (seen.has(name)) return gap >= need;
+  seen.add(name);
+  console.warn(`check ${name}: ${Number.isFinite(gap) ? gap.toFixed(0) : 'no'} px clear (needs ${need})${gap < need ? ' -- TOO CLOSE' : ''}`);
+  return gap >= need;
 }
 
 // A line chart drawn over time. box: [x, y, width, height] in pixels; points: [[xValue, yValue]];
@@ -509,31 +556,59 @@ export function nameTag(ctx, t, { at, until = Infinity, text, x, y, size = 34, a
 // A price arrow drawn over the picture: it draws itself from `from` ({ x, y } in pixels) for `length` pixels at
 // `angle` degrees (0 = level, 30 = climbing) over `drawFor` seconds, with a head, and an optional small word at its
 // tail (PRICES). fadeOut: seconds it fades before `until` (0: it ends exactly at `until`, as on a cut).
-export function priceArrow(ctx, t, { at, until = Infinity, from, length = 300, angle = 0, drawFor = 0.9, colour = INK.amber, width = 10, word = null, size = 30, fadeOut = 0.3 }) {
+// edge: true draws a dark edge round the arrow and the word first, like the words' own dark edge, so it shows over lit
+// windows (round 6 of log 34). Returns false when nothing shows, or the arrow's whole shape once fully drawn:
+// { box, outline } (see callout), for checks that it keeps clear of a gate board.
+export function priceArrow(ctx, t, { at, until = Infinity, from, length = 300, angle = 0, drawFor = 0.9, colour = INK.amber, width = 10, word = null, size = 30, fadeOut = 0.3,
+  edge = false }) {
   const a = presence(t, at, until, 0.01, fadeOut);
   if (a <= 0 || !from) return false;
   const k = easeInOut((t - at) / drawFor);
   const radians = -angle * Math.PI / 180;
   const end = { x: from.x + Math.cos(radians) * length * k, y: from.y + Math.sin(radians) * length * k };
+  const head = width * 2.6;
+  const drawArrow = (lineWidth, grow) => {
+    ctx.lineWidth = lineWidth; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(from.x, from.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+    if (k > 0.05) {
+      ctx.save();
+      ctx.translate(end.x, end.y); ctx.rotate(radians);
+      ctx.beginPath(); ctx.moveTo(head * 0.6 + grow, 0); ctx.lineTo(-head * 0.9 - grow, -head - grow); ctx.lineTo(-head * 0.9 - grow, head + grow); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+  };
   ctx.save();
   ctx.globalAlpha = a;
-  withShadow(ctx, 14);
-  ctx.strokeStyle = colour; ctx.fillStyle = colour; ctx.lineWidth = width; ctx.lineCap = 'round';
-  ctx.beginPath(); ctx.moveTo(from.x, from.y); ctx.lineTo(end.x, end.y); ctx.stroke();
-  if (k > 0.05) {
-    const head = width * 2.6;
-    ctx.save();
-    ctx.translate(end.x, end.y); ctx.rotate(radians);
-    ctx.beginPath(); ctx.moveTo(head * 0.6, 0); ctx.lineTo(-head * 0.9, -head); ctx.lineTo(-head * 0.9, head); ctx.closePath(); ctx.fill();
-    ctx.restore();
+  if (edge) {
+    // the dark edge: the same arrow a little wider, in a soft near-black, under the amber one
+    withShadow(ctx, 10, 'rgba(0,0,0,0.6)');
+    ctx.strokeStyle = 'rgba(6,8,10,0.72)'; ctx.fillStyle = 'rgba(6,8,10,0.72)';
+    drawArrow(width + 8, 4);
   }
+  withShadow(ctx, 14);
+  ctx.strokeStyle = colour; ctx.fillStyle = colour;
+  drawArrow(width, 0);
+  let wordBox = null;
   if (word) {
     ctx.globalAlpha = a * clamp01((t - at) / 0.3);
     ctx.fillStyle = INK.paper; ctx.font = `800 ${size}px Inter`; ctx.textAlign = 'left'; ctx.textBaseline = 'bottom';
+    if (edge) { withShadow(ctx, 18, 'rgba(0,0,0,0.85)'); ctx.lineWidth = 5; ctx.lineJoin = 'round'; ctx.strokeStyle = 'rgba(6,8,10,0.6)'; ctx.strokeText(word, from.x, from.y - width - 6); withShadow(ctx, 14); }
     ctx.fillText(word, from.x, from.y - width - 6);
+    wordBox = { left: from.x, top: from.y - width - 6 - size * 0.76, right: from.x + ctx.measureText(word).width, bottom: from.y - width - 6 };
   }
   ctx.restore();
-  return true;
+  // the whole arrow as it is once drawn (for checks): its shaft's two sides and round ends, its head and its word
+  const outer = edge ? 4 : 0, half = width / 2 + outer, along = { x: Math.cos(radians), y: Math.sin(radians) }, across = { x: -along.y, y: along.x };
+  const tip = { x: from.x + along.x * length, y: from.y + along.y * length };
+  const offset = (p, u, v) => ({ x: p.x + along.x * u + across.x * v, y: p.y + along.y * u + across.y * v });
+  const outline = [
+    ...pointsAlong([offset(from, -half, -half), offset(tip, 0, -half)]), ...pointsAlong([offset(from, -half, half), offset(tip, 0, half)]),
+    ...pointsAlong([offset(from, -half, -half), offset(from, -half, half)]),
+    ...pointsAlong([offset(tip, head * 0.6 + outer, 0), offset(tip, -head * 0.9 - outer, -head - outer), offset(tip, -head * 0.9 - outer, head + outer), offset(tip, head * 0.6 + outer, 0)]),
+    ...(wordBox ? pointsRound(wordBox) : []),
+  ];
+  const xs = outline.map((p) => p.x), ys = outline.map((p) => p.y);
+  return { box: { left: Math.min(...xs), top: Math.min(...ys), right: Math.max(...xs), bottom: Math.max(...ys) }, outline };
 }
 
 // A small arrow pointing at a spot in the picture (NEW MONEY SPENT going into a gate): a thin line from `from` to

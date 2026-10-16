@@ -52,6 +52,7 @@ import sys
 import tempfile
 from datetime import date
 
+sys.dont_write_bytecode = True   # the gates import their sibling tools; leave no __pycache__ in the kit
 HERE = os.path.dirname(os.path.abspath(__file__))
 CALCULATORS = os.path.join(os.path.dirname(HERE), 'calculators')
 if CALCULATORS not in sys.path:
@@ -452,8 +453,8 @@ def lint_before(script_path, settings, word_times=None, timeline_path=None, time
             key = stem(word_key(word))
             if key and key not in STOP_WORDS and len(key) >= 4 and not re.match(r'^\d', key) and key not in NUMBER_WORDS:
                 counts.setdefault(key, []).append((number, sentence))
-    terms = sorted(((k, v) for k, v in counts.items() if len(v) >= settings.value('script_gate.term_repeats_min')
-                    and len({n for n, _ in v}) > 1), key=lambda kv: -len(kv[1]))
+    # every word said on two or more pages, most said first (the report shows the first 15; the JSON holds them all)
+    terms = sorted(((k, v) for k, v in counts.items() if len({n for n, _ in v}) > 1), key=lambda kv: -len(kv[1]))
     term_table = [{'word': k, 'times': len(v), 'pages': sorted({n for n, _ in v}),
                    'sentences': list(dict.fromkeys(s for _, s in v))} for k, v in terms]
     if term_table:

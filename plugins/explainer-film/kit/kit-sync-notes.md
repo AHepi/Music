@@ -44,9 +44,16 @@ never changed) and 81 new files.
 | `paper-film/scenes/graphics.js` | Page events (log 35): each drawing function notes what it drew (kind, words, times, strength, box) when `paper-film/tools/page_events.mjs` switches the notes on (`globalThis.pageEvents`); off, nothing is noted. The fade-in numbers are named constants and exported as `APPEAR_DELAYS` (same values). Stills drawn with the film kit's file, and with this one with the notes on and off, are the same byte for byte (`calculators/tests/test_page_events.py`). A copy from the film kit must keep these. |
 | `paper-film/scenes/cinema-kit.js` | Besides `setFading`: `wordClock` notes every lookup (with every time its word is said and the line that asked) when the page-events notes are on. |
 | `paper-film/tools/page_events.mjs`, `check_page_layout.mjs`, `paper-film/scenes/page-events-test.js` (new) | The page timing tools and their small test chapter (log 35). |
+| `narration-tools/lint_script.py`, `sound_gates.py` (new) | The script gate and the sound gates (log 35); tested by `calculators/tests/test_lint_script.py` and `test_sound_gates.py`. |
+| `narration-tools/mix_narration_over_music.sh` | Pads the ducked music to the narration's length (ffmpeg 6.1's sidechaincompress ends 0.36-0.44 s early, so the film kit's copy makes chapter 2's mix 0.36 s short on this machine); `MUSIC_LEVEL_DB`, `STEMS_DIR`, `STEMS_ONLY`; gates: lengths, and with a 5th argument (the timeline) the music 18 dB under the voice and alignment with the narration. Apart from the padded last 0.4 s, its mix is the film kit's sample for sample. |
+| `narration-tools/finish_film.sh` | Gates after finishing (lengths, -15 LUFS and true peak on the encoded copy, size, alignment); 6th argument the timeline, else exit 3. |
+| `narration-tools/mix_voice_over_music.sh` | A length gate at the end. |
+| `narration-tools/find_loud_words.py` | Its measure is a function, `word_peak_levels` (sound_gates.py uses it); its printout is the film kit's, byte for byte (checked on chapter 2). |
+| `paper-film/tools/add_music_bed.sh` | loudnorm aims at -1.5 dBTP (at -1 the AAC copy came out -0.9, as log 32's clip did), then gates for length, loudness and true peak. |
 
 Worth copying back to the film kit: `find-browser.mjs` with the `--stills` fix and `profile_frame.mjs`'s lazy-page fix, the page-events notes in `graphics.js` and `cinema-kit.js` with `page_events.mjs` and `check_page_layout.mjs`, `setFading` and `skyCard` in the
-shared code, and the machine settings in `check-shot.sh`.
+shared code, and the machine settings in `check-shot.sh`; the mix script's length fix and the sound gates
+(the film kit's mix of chapter 2 comes out 0.36 s short today).
 
 ## Waiting for a later copy (round 5 is still changing them)
 

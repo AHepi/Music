@@ -4,8 +4,10 @@
 // spent on what this factory makes. What happens to prices? Have a guess."
 //   4a  W2, the open No. 2 gate with nobody waiting, from where a waiting man would stand (W1's spot, mirrored): flat
 //       out, the gate wide open, windows blazing, both chimneys smoking hard, the empty pavement lit by the gateway. On
-//       "busy" a burst for 2 seconds: the windows flicker three times as strongly, a slow dark band (the machines'
-//       shadows) passes across No. 2's panes and the doorway's light pulses with it; then the brighter flicker stays. One slide of 1.2 m toward the gate from "No" to "factory" (we walk up to
+//       "busy" a burst for 2 seconds (works-effects.js BUSY): No. 2's doorway and the stone round its windows brighten
+//       in three warm pulses, its panes flicker brighter with each, and a few sparks fly at the lathe; the people at
+//       work stay dark; then the brighter windows and flicker stay ("flat out" is carried by this and the people at
+//       work, not by the smoke, which runs under the words). One slide of 1.2 m toward the gate from "No" to "factory" (we walk up to
 //       the gate with nobody in the way), never turning, stopping on the composed frame. THE FLAT-OUT FACTORY with a
 //       small line under it, FLAT OUT = WORKING AS HARD AS THEY CAN; NEW MONEY SPENT (the same words as page 3); WHAT
 //       HAPPENS TO PRICES?; HAVE A GUESS with a ring that fills over 4 seconds. Then the 4-second guess hold on the
@@ -27,7 +29,8 @@ export const join = { kind: 'run-on', after: 3.5, length: 0.2 };
 export const PICTURES = {
   w2: 'works-w2-plate.jpg',   // W2, No. 2 flat out: the gate's warm light on the empty pavement
 };
-export const LOOK = { exposure: 1.0, aperture: 4.0, maxBlur: 2, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.3 };
+// fringe: the lens's colour fringe kept small (0.006 showed rainbow edges on the lane's gutter; round 5's critique, finding 12)
+export const LOOK = { exposure: 1.0, aperture: 4.0, maxBlur: 2, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.3, fringe: 0.002 };
 
 // The question and the guess ring, drawn the same way here and at the start of page 5 (so the run-on can't be seen).
 // guessAt: when the ring starts to fill; until: when they go.

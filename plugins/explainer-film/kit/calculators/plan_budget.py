@@ -23,7 +23,7 @@ Use:
   python3 plan_budget.py profile-commands EVENTS.json[.gz] --scene SCENE
   python3 plan_budget.py measure LOGS --events EVENTS.json[.gz] [--leave-out-chunks]
   python3 plan_budget.py filming EVENTS.json[.gz] --scene SCENE [--rates RATES.json] [--from-frame A] [--to-frame B]
-        [--processors N] [--free-memory-gb G] [--model-megabytes M] [--heavy-pages N] [--views-per-page N]
+        [--processors N] [--free-memory-gb G] [--heavy-pages N] [--views-per-page N]
         [--blender-running yes|no|auto] [--free-disk-gb G]
   python3 plan_budget.py disk --seconds S [--copies N] [--exports-megabytes M] [--stills N] [--free-disk-gb G]
   python3 plan_budget.py push [FILE_OR_FOLDER ...] [--git REPO]
@@ -425,23 +425,28 @@ def steady_held_by_view(logs, classified):
     return {k: {'seconds_a_frame': round(statistics.mean(v), 3), 'stretches': len(v)} for k, v in sorted(found.items())}
 
 
-def profile_stretches(classified, length=60, settle=60):
-    """The short pieces to film before planning: for each view one held stretch (settle frames after its run starts, so
-    the page has loaded) and each kind of move once (the first frames of each slide)."""
+def profile_stretches(classified, length=60):
+    """The short pieces to film before planning, each 2 x length frames: the first stretch takes the page loading, the
+    second is measured clean (render-paper-film.mjs prints the time of every 60 frames). For each view one held piece,
+    and for each slide one piece whose second stretch is the slide."""
     runs = []
     for item in classified:
         if runs and runs[-1]['kind'] == item['kind'] and runs[-1]['view'] == item['view'] and runs[-1]['last'] == item['frame']:
             runs[-1]['last'] = item['frame'] + 1
         else:
             runs.append({'kind': item['kind'], 'view': item['view'], 'first': item['frame'], 'last': item['frame'] + 1})
+    first_frame = classified[0]['frame'] if classified else 0
     chosen, seen = [], set()
     for run in runs:
-        if run['kind'] in ('held_live', 'held_still') and ('held', run['view']) not in seen and run['last'] - run['first'] >= settle + length:
+        if run['kind'] in ('held_live', 'held_still') and ('held', run['view']) not in seen and run['last'] - run['first'] >= 2 * length:
             seen.add(('held', run['view']))
-            chosen.append({'why': f'held ({run["view"]})', 'first': run['first'] + settle, 'last': run['first'] + settle + length})
-        if run['kind'] == 'moving' and ('moving', run['view']) not in seen:
+            chosen.append({'why': f'held ({run["view"]})', 'first': run['first'], 'last': run['first'] + 2 * length,
+                           'measured': [run['first'] + length, run['first'] + 2 * length]})
+        if run['kind'] == 'moving' and ('moving', run['view']) not in seen and run['last'] - run['first'] >= length:
             seen.add(('moving', run['view']))
-            chosen.append({'why': f'moving ({run["view"]})', 'first': run['first'], 'last': min(run['last'], run['first'] + length)})
+            start = max(first_frame, run['first'] - length)
+            chosen.append({'why': f'moving ({run["view"]})', 'first': start, 'last': start + 2 * length,
+                           'measured': [start + length, start + 2 * length]})
     return chosen
 
 
@@ -481,7 +486,7 @@ def piece_frames_for(load_seconds, seconds_a_frame, settings):
 
 
 def plan_filming(events, settings, scene, rates=None, first=None, last=None, processors=None, free_memory=None,
-                 model_megabytes=None, heavy_pages=None, views_per_page=1, blender=None, free_disk=None):
+                 heavy_pages=None, views_per_page=1, blender=None, free_disk=None):
     classified = classify_frames(events)
     info = scene_info(events)
     first = first if first is not None else min(c['frame'] for c in classified)
@@ -510,13 +515,12 @@ def plan_filming(events, settings, scene, rates=None, first=None, last=None, pro
             workers = fits
     moving_share = mix['moving'] / frames if frames else 0
     speed_up = 1 + settings.value('filming.workers')['two_workers_speed_gain'] * (1 - moving_share) if workers >= 2 else 1.0
-    # lazy loading
+    # lazy loading: a chapter that is not lazy loads every page's set at once; each loaded set takes memory_per_piece_gb
+    # (measured, log 34), so with more heavy pages than the free memory holds, only lazy loading works
     lazy_reasons = []
-    if model_megabytes is not None and free_memory is not None and model_megabytes * settings.value('budget_planner.lazy_model_memory_factor') / 1024 > free_memory / 2:
-        lazy_reasons.append(f'the models ({model_megabytes:.0f} MB, about {settings.value("budget_planner.lazy_model_memory_factor")} times that in '
-                            f'memory) would take more than half the {free_memory:.1f} GB free')
-    if heavy_pages is not None and heavy_pages > settings.value('budget_planner.lazy_heavy_pages_max'):
-        lazy_reasons.append(f'{heavy_pages} pages carry painted sets (more than {settings.value("budget_planner.lazy_heavy_pages_max")})')
+    if heavy_pages is not None and free_memory is not None and heavy_pages * memory_per_piece > free_memory - reserve:
+        lazy_reasons.append(f'{heavy_pages} pages carrying painted sets need about {heavy_pages * memory_per_piece:.0f} GB loaded at once, '
+                            f'more than the {free_memory:.1f} GB free (less {reserve} GB kept free)')
     lazy = bool(lazy_reasons)
     # piece and chunk size
     piece_frames, piece_why = piece_frames_for(load, steady, settings)
@@ -727,7 +731,6 @@ def main():
     p.add_argument('--to-frame', type=int)
     p.add_argument('--processors', type=int)
     p.add_argument('--free-memory-gb', type=float)
-    p.add_argument('--model-megabytes', type=float, help='the summed size of the models the pages load (.glb)')
     p.add_argument('--heavy-pages', type=int, help='how many pages carry painted sets')
     p.add_argument('--views-per-page', type=int, default=1)
     p.add_argument('--blender-running', choices=['yes', 'no', 'auto'], default='auto')
@@ -794,7 +797,8 @@ def main():
         events = load_json(args.events)
         chosen = profile_stretches(classify_frames(events))
         result = {'stretches': chosen}
-        lines.append(f'Film these short pieces first (each loads its page once; a few minutes in all), then run measure on their logs:')
+        lines.append(f'Film these {len(chosen)} short pieces first (each loads its page in its first 60 frames, then 60 frames are timed clean; '
+                     f'a few minutes each), then run measure on their logs:')
         for c in chosen:
             c['command'] = (f'node paper-film/tools/render-paper-film.mjs {args.scene} paper-film/out/profile-{c["first"]}.mp4 '
                             f'--frames {c["first"]} {c["last"]} > paper-film/out/profile-{c["first"]}.log 2>&1')
@@ -824,7 +828,7 @@ def main():
         rates = load_json(args.rates)['rates'] if args.rates and 'rates' in load_json(args.rates) else (load_json(args.rates) if args.rates else None)
         blender = None if args.blender_running == 'auto' else ([0] if args.blender_running == 'yes' else [])
         result = plan_filming(events, settings, args.scene, rates, args.from_frame, args.to_frame, args.processors, args.free_memory_gb,
-                              args.model_megabytes, args.heavy_pages, args.views_per_page, blender, args.free_disk_gb)
+                              args.heavy_pages, args.views_per_page, blender, args.free_disk_gb)
         lines = report_filming(result)
         code = 1 if result['problems'] else 0
     elif args.command == 'disk':

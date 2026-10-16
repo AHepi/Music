@@ -199,9 +199,11 @@ class Factory:
                                    kit.surface_material('no-1-brick-black', 'castle_brick_02_red', tint=(0.13, 0.1, 0.09))]
             self.window_type = 'mill-window-narrow'
             self.roof_glass_type = 'north-light'
-            # weathered, paler timber (round 5; round 4: dark brown): No. 1's shut cart doors stand behind its shut gate in
-            # W1, and in the yard's faint cool light the gate's bars and the waiting men's heads now show dark against them
-            self.door_paint = kit.surface_material('no-1-door-timber', 'distressed_painted_planks', tint=(0.52, 0.45, 0.37), roughness=0.7)
+            # mid-brown weathered timber (round 6; round 5's pale grey timber read as a cold lit doorway in W3 at phone size
+            # and was the biggest pale area at W1's gate, about 98 levels; round 4's was dark brown): about 60 to 70 levels
+            # in W1, so the dark-against-lit difference between the two factories holds; the waiting men are told apart from
+            # the doors by their rim light instead
+            self.door_paint = kit.surface_material('no-1-door-timber', 'distressed_painted_planks', tint=(0.3, 0.2, 0.12), roughness=0.7)
         else:
             self.brick = kit.surface_material('no-2-brick', 'white_sandstone_bricks', tint=(0.92, 0.86, 0.74))
             self.stone = kit.surface_material('no-2-stone', 'large_sandstone_blocks', tint=(0.6, 0.58, 0.54), tile_metres=1.5)
@@ -461,8 +463,11 @@ def doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth
         middle_depth = sum(loom[1] for loom in LOOMS) / len(LOOMS) + 0.6
         kit.empty(f'{factory.prefix}-looms-middle', at(middle_along, middle_depth, 0.9), parent=factory.root)
     else:
-        # a lathe on cabinet legs, its bed across the room, the headstock with its stepped cone pulley on the left
-        lathe = centre - 0.75
+        # a lathe on cabinet legs, its bed across the room, the headstock with its stepped cone pulley on the left. Round 6:
+        # moved 0.73 m right (from centre - 0.75), with the pillar drill to its right, so the people at work at the lathe's
+        # saddle and at the drill stand right of x 2.6, where W3 sees past No. 2's inner pier (round 5's check: at x 1.9
+        # to 2.4 both stood behind the pier in W3, and the master view showed an empty lit room)
+        lathe = centre - 0.02
         front = 2.2
         for a0, a1 in ((lathe - 0.95, lathe - 0.62), (lathe + 0.55, lathe + 0.88)):
             box(a0, a1, front - 0.05, front + 0.33, 0.0, 0.86)
@@ -495,8 +500,9 @@ def doorway_machines(factory, wall, centre, room_start, room_end, ceiling, depth
         machines.rod(at(flywheel_along, back - 0.2, jack_z), at(flywheel_along, back - 0.2, ceiling), 0.03, iron, sides=6)
         for sign in (1, -1):        # the belt's two runs, flat toward the lane
             strap(at(flywheel_along + sign * flywheel_radius * 0.98, back - 0.24, flywheel_z), at(flywheel_along + sign * 0.18, back - 0.24, jack_z))
-        # a pillar drill on the right, in front
-        drill, front = centre + 1.05, 1.9
+        # a pillar drill on the right, a little further back than the lathe (round 6: from centre + 1.05 and 1.9 m behind
+        # the wall, so the lathe could move right), its column the upright the second person at work holds
+        drill, front = centre + 1.25, 2.6
         box(drill - 0.28, drill + 0.28, front - 0.2, front + 0.38, 0.0, 0.12)          # the base
         machines.rod(at(drill, front + 0.22, 0.12), at(drill, front + 0.22, 2.0), 0.06, iron, sides=10)   # the column
         box(drill - 0.22, drill + 0.22, front - 0.12, front + 0.18, 0.86, 0.92)        # the table

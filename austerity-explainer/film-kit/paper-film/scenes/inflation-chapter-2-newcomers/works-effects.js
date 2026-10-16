@@ -1,9 +1,10 @@
 // What this does: the Works on a page of chapter 2 for newcomers (plan 34, part 1 "A. The Works", and "How the two
 // factories stay the same", point 8): it loads the Works set (the two factories at the head of one lane, built in
 // Blender), shines the view's painting onto it (projected-set.js), and draws the Works' moving things on top: chimney
-// smoke from the chimney tops (blown across the view), the brazier's flames, sparks, smoke and glow and the lantern's
-// flicker at No. 1, the windows' flicker (with page 4's burst on "busy": a dark band across No. 2's panes and its
-// doorway pulsing), the gate lamps' glow, the gate leaves (their own sharp surfaces, never in a plate) that can swing,
+// smoke from the chimney tops (blown across the view), the brazier's flames, sparks, smoke and glow (burning lower
+// after a time cut) and the lantern's flicker at No. 1, the windows' flicker (with page 4's burst on "busy": No. 2's
+// doorway and the stone round its windows brightening in three warm pulses, with sparks at the lathe), the gate lamps'
+// glow, the gate leaves (their own sharp surfaces, never in a plate) that can swing,
 // the crates that pop up in No. 1's open gateway, the bank's window lighting (with its sign kept dim until then), No.
 // 2's eight waiting men (painted in W2's slowed picture, dark silhouettes in W4), and the factories' windows changing
 // in steps. Every page that shows the Works uses this one file, so the four states and their settings, the smoke and
@@ -97,11 +98,14 @@ export const STATES = {
 // read as its smoke); No. 1's (from "made" on page 5) runs left toward the bank; in W1 and W2 the plumes run left
 // along the top of the frame, under the words, for about a quarter of the frame's width. The smoke hardly climbs and
 // sinks a little as it goes, so in W3 No. 1's plume comes out under the lower rule card, which hides the chimney's
-// mouth from "nothing" on (the card's line lands on the smoking chimney just before the lower card comes). (Blown away from the cameras, as in round 4, the puffs
+// mouth from "nothing" on (the card's line lands on No. 1's lit windows). (Blown away from the cameras, as in round 4, the puffs
 // piled up one behind another in a small patch, and their slightly different shades showed as rings: a pale doughnut
 // and a hook over No. 2's chimneys. Drawn with and without the focus blur, the rings were the same.)
+// No. 2's heavy smoke is a shorter plume from round 6 (its puffs live 4.6 s and are blown 9.5 m, so they move as fast as
+// before but fade out sooner): in W3 it fades out by about 0.50 across, well before No. 1's chimney (0.375), where its
+// last faint part had seemed to hang round No. 1's quiet chimney (round 5's critique, finding 13).
 export const SMOKE = {
-  heavy: { count: 44, life: 7.0, rise: 0.6, drift: 16, mouth: { seconds: 2, size: 1.9 }, size: [3.4, 9], opacity: 0.95, fade: 1.8, colour: [100, 92, 84] },
+  heavy: { count: 30, life: 4.6, rise: 0.45, drift: 9.5, mouth: { seconds: 1.6, size: 1.9 }, size: [3.4, 7.5], opacity: 0.95, fade: 2.2, colour: [100, 92, 84] },
   // No. 1 working: seen from W1 (page 3, from "start") and W3 (page 5, from "made")
   working: { count: 36, life: 7.0, rise: 0.6, drift: 15, mouth: { seconds: 2, size: 1.7 }, size: [3.0, 8], opacity: 0.93, fade: 1.8, colour: [104, 96, 88] },
   thin: { count: 14, life: 7.0, rise: 0.5, drift: 14, mouth: { seconds: 2, size: 1.3 }, size: [1.8, 6], opacity: 0.5, fade: 1.9, colour: [100, 94, 88] },
@@ -113,7 +117,7 @@ export const WIND = new THREE.Vector3(-0.85, -0.12, -0.5).normalize();
 const ACROSS_WIND = new THREE.Vector3(-WIND.z, 0, WIND.x).normalize();
 // fixed seeds: the same smoke and flicker on every page
 export const SEEDS = { 'no-1-chimney-top': 41, 'no-2-chimney-a-top': 52, 'no-2-chimney-b-top': 63, brazierSmoke: 21, flames: 17, sparks: 11,
-  'no-1-windows': 71, 'no-2-windows': 72 };
+  'no-1-windows': 71, 'no-2-windows': 72, latheSparks: 31 };
 // which chimneys smoke for each kind of smoke
 const CHIMNEYS = { 'no-1': ['no-1-chimney-top'], 'no-2': ['no-2-chimney-a-top', 'no-2-chimney-b-top'] };
 const THIN_CHIMNEYS = { 'no-1': ['no-1-chimney-top'], 'no-2': ['no-2-chimney-a-top'] };
@@ -133,9 +137,20 @@ const BANK_WINDOW = 'bank-window';
 // boards), read before the factories' names on pages that never mention a bank (round 3 of log 34). Its board and
 // lettering are own surfaces, dimmed to this share of their lit brightness until the bank's window lights (page 9),
 // then brightened with the window. The board gets its own copy of the board paint (shared with the gate boards).
-// Dimmed to 0.3 (round 4) its letters were still twice the size of the factories' and easy to read on a phone; 0.15
-// from round 5 of log 34.
-export const BANK_SIGN = { board: 'bank-sign-board', lettering: 'bank-sign-lettering', boardPaint: 'board-black-paint', ownBoardPaint: 'bank-sign-board-paint', dim: 0.15 };
+// Dimmed to 0.3 (round 4) its letters were still twice the size of the factories' and easy to read on a phone; at
+// 0.15 (round 5) BANK was still a whole word you could read in W3, on pages that never mention a bank; 0.07 from round 6.
+export const BANK_SIGN = { board: 'bank-sign-board', lettering: 'bank-sign-lettering', boardPaint: 'board-black-paint', ownBoardPaint: 'bank-sign-board-paint', dim: 0.07 };
+// The drums' stencilled PETROL and DIESEL (own surfaces, lit by the fire and the gate lamps) kept below the gate
+// board's letters, so the subject stays the brightest thing (round 5's critique, finding 5: the white letters reached
+// 219 to 224 levels on screen in W1 and 202 in W2, against 153 and 110 for the boards' letters, and pulled the eye into
+// the bottom-left corner). Their paint is darkened to this share of its own brightness, by view (own surfaces are
+// matched to the painting once, in the page's first view, and W1 is drawn brighter: page 3's LOOK_W1).
+export const DRUM_LETTERS = { materials: ['steel-drum-petrol-stencil', 'steel-drum-diesel-stencil'], dim: { w1: 0.12, w2: 0.18, w3: 0.5, w4: 0.5 } };
+// The brazier after a time cut (the people test, lesson 136 of log 34: when only the people change at a cut, they seem to
+// blink out; the fire burning lower says time has passed). fire: 1 burning as when the men stood round it; lower
+// shares give shorter, narrower flames, a smaller and dimmer glow, fewer sparks and a dimmer fire light.
+// FIRE_AFTER_A_WHILE is the share the pages use after "go" (page 3) and "made" (page 5).
+export const FIRE_AFTER_A_WHILE = 0.4;
 // the pool of light the lit bank window throws on the pavement in front of it (page 9), in metres
 const BANK_POOL = { width: 3.4, depth: 2.4, out: 1.3, strength: 0.55 };
 // the windows' lit pictures, by glass type (for the flicker; the glass pieces are named in works_kit.py)
@@ -248,22 +263,87 @@ export class ChimneySmoke {
   }
 }
 
+// The brazier's smoke, on the same WIND as the chimneys (round 5's critique, finding 13: it drifted right while the
+// chimneys' trails blew left): the shared Smoke's puffs (effects.js), each rising from the coals and blown along the
+// wind's level direction, swaying a little across it. set({ t, origin, scale, drift }): origin [x, y, z] above the
+// coals; scale: the puffs' size and climb (as Smoke's); drift: how far (in `scale`s) a puff is blown in its life.
+class BrazierSmoke extends Smoke {
+  set({ t, origin, scale = 1, drift = 0.9 }) {
+    const along = new THREE.Vector3(WIND.x, 0, WIND.z).normalize();
+    for (const puff of this.puffs) {
+      const born = puff.offset + Math.floor((t - puff.offset) / this.life) * this.life;
+      const age = t - born;
+      if (age < 0 || age > this.life) { puff.sprite.visible = false; continue; }
+      const k = age / this.life;
+      const blown = scale * drift * k, sway = scale * 0.12 * Math.sin(puff.sway + age * 2.2);
+      puff.sprite.visible = true;
+      puff.sprite.position.set(origin[0] + along.x * blown + ACROSS_WIND.x * sway, origin[1] + scale * 1.7 * k, origin[2] + along.z * blown + ACROSS_WIND.z * sway);
+      const size = scale * puff.size * (0.35 + 1.1 * k);
+      puff.sprite.scale.set(size, size, 1);
+      puff.sprite.material.opacity = 0.5 * Math.min(1, age / 0.25) * (1 - k);
+    }
+  }
+}
+
 // ------------------------------------------------------------------------------------------ window flicker
 
 // A warm light over a factory's lit windows that flickers (machines moving in front of the gas light): a copy of each
 // glass piece wearing its lit picture, drawn additively just in front of it. set(t, { amount, steps }) shows the panes
 // of the lit steps (1, 2, 3) with a flicker of strength `amount` (0 none, 1 blazing); fading: { steps, amount } shows
 // other steps going dark (a state change: No. 2's windows dimming as it slows).
-// burst: { at, across } (page 4's "busy", plan 34 F8; round 5 of log 34): for BUSY.length seconds from `at` the
-// flicker swings about three times as far (brighter peaks, and dips that darken the painted window), a slow dark band
-// (the machines' shadows) passes across the panes from left to right, along the factory's front from BUSY.reach metres
-// left of `across` (the gate's middle, x) to as far right of it, and the lit doorway room pulses with it, going dark as
-// the band passes it. Each pane has a dark copy too (a see-through, very dark brown), which lays the dips and the band's
-// shadow over the painted window. (Without the burst "busy" could not be seen: No. 2's windows went from 130 to 133
-// levels; round 4 of log 34.)
-export const BUSY = { length: 2.0, rise: 0.25, fall: 0.6, boost: 3.0, dips: 0.55, reach: 2.75, band: 1.1, shadow: 0.75, doorway: 0.35, doorwayDips: 0.3 };
+// burst: { at } (page 4's "busy", plan 34 F8: "the windows flicker brighter"; round 6 of log 34): for BUSY.length
+// seconds from `at` the factory works harder: its doorway and the stone round its windows brighten in BUSY.pulses warm
+// pulses (each a soft patch that multiplies what is under it, so lit stone and the lit room brighten while the dark
+// people at work stay dark), its panes flicker brighter with each pulse, and a few sparks fly at the lathe. Before the
+// burst the panes carry a light shade (BUSY.headroom: the painted panes are near white, so this leaves them room to
+// brighten); it lifts on the first pulse and stays off, so the brighter windows stay. (Round 5's burst passed a dark
+// band across the panes and dimmed the doorway, and "busy" read as the lights dipping; round 4's could not be seen.)
+//   pulses, floor: the pulses' number in BUSY.length seconds, and how bright the burst stays between them (share)
+//   rise, fall: seconds the burst takes to come and to go; boost: how much brighter the panes flicker at a pulse's top
+//   doorway, front: the warm brightening's colour at a pulse's top, over the doorway and over the windows' stone
+//   (each colour's share added to what is there: 0.5 makes it half as bright again)
+//   sparks: how many sparks at the lathe; sparkSize: their size, metres; sparkRise: how high they fly (share of the
+//   shared Sparks' rise: kept low, so they show against the lathe's dark bed beside the man, not over his head)
+export const BUSY = { length: 2.0, rise: 0.15, fall: 0.45, pulses: 3, floor: 0.45, boost: 3.0, headroom: 0.12,
+  doorway: [1.3, 0.9, 0.48], front: [1.1, 0.76, 0.4], sparks: 16, sparkSize: 0.07, sparkRise: 0.3 };
+// how strong the burst is at moment t (0 outside it): rising, three pulses over a floor, falling
+export function burstStrength(t, at) {
+  if (at === undefined || t < at || t >= at + BUSY.length) return 0;
+  const age = t - at;
+  const surge = Math.min(1, age / BUSY.rise, (BUSY.length - age) / BUSY.fall);
+  const beat = Math.sin(Math.PI * BUSY.pulses * age / BUSY.length) ** 2;
+  return surge * (BUSY.floor + (1 - BUSY.floor) * beat);
+}
+// a soft round picture for the warm brightening: white in the middle fading to black at the edge, solid (its colour
+// is what it multiplies by, so it must carry the fall-off itself). holes: [{ u, v, width, height }] (shares of the
+// picture, v up) left dark with soft edges: where the people at work stand, so they stay dark
+function softBrightPicture(holes = []) {
+  const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+  const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+  g.addColorStop(0, '#ffffff'); g.addColorStop(0.45, '#9a9a9a'); g.addColorStop(1, '#000000');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 128, 128);
+  ctx.filter = 'blur(3px)';
+  ctx.fillStyle = '#000000';
+  for (const { u, v, width, height } of holes) {
+    ctx.beginPath(); ctx.ellipse(u * 128, (1 - v) * 128, width * 64, height * 64, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  return canvasTexture(canvas);
+}
+// a flat soft patch facing the lane's cameras that brightens what lies behind it (the result is what is there times
+// one plus the patch's colour): see-through where its picture is black
+function brighteningPatch(width, height, holes = []) {
+  const material = new THREE.MeshBasicMaterial({ map: softBrightPicture(holes), color: 0x000000, transparent: true, depthWrite: false, fog: false,
+    blending: THREE.CustomBlending, blendEquation: THREE.AddEquation, blendSrc: THREE.DstColorFactor, blendDst: THREE.OneFactor });
+  material.name = 'busy brightening';
+  const patch = new THREE.Mesh(new THREE.PlaneGeometry(width, height), material);
+  patch.visible = false;
+  return patch;
+}
 class WindowFlicker {
-  constructor(scene, set, prefix, seed, litPictures) {
+  // keepDark: { camera (where the burst is seen from, three.js), people: [{ feet (three.js), height }] }: the people at
+  // work in the doorway, left out of the doorway's brightening as that camera sees them
+  constructor(scene, set, prefix, seed, litPictures, keepDark = null) {
     const random = seededRandom(seed);
     this.group = new THREE.Group();
     this.panes = [];
@@ -274,11 +354,11 @@ class WindowFlicker {
       const pane = new THREE.Mesh(o.geometry, material);
       const shade = new THREE.Mesh(o.geometry, new THREE.MeshBasicMaterial({ color: 0x150d06, transparent: true, opacity: 0, depthWrite: false, fog: false,
         polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
-      shade.renderOrder = 1; pane.renderOrder = 2;   // the shadow first, the light over it
+      shade.renderOrder = 1; pane.renderOrder = 2;   // the shade first, the light over it
       for (const mesh of [pane, shade]) { mesh.matrixAutoUpdate = false; mesh.matrix.copy(o.matrixWorld); this.group.add(mesh); }
-      const centre = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3());
-      this.panes.push({ pane, shade, step, centre, speeds: [2.1 + random() * 3.5, 5.3 + random() * 6], phases: [random() * 6.28, random() * 6.28], dip: random() });
+      this.panes.push({ pane, shade, step, speeds: [2.1 + random() * 3.5, 5.3 + random() * 6], phases: [random() * 6.28, random() * 6.28], dip: random() });
     };
+    const front = new THREE.Box3();
     for (const step of [1, 2, 3]) {
       const holder = set.getObjectByName(`${prefix}-windows-step-${step}`);
       if (!holder) continue;
@@ -287,44 +367,64 @@ class WindowFlicker {
         const name = [o.material].flat()[0]?.name ?? '';
         const glassType = GLASS_TYPES.find((type) => name.includes(type));
         addPane(o, step, litPictures[glassType], 0xffb468);
+        if (o.name.includes('window-front')) front.expandByObject(o);
       });
     }
-    // the lit doorway room (its back wall and its walls and floor), for the burst's pulse only
-    for (const part of ['doorway-inside', 'doorway-room']) {
-      set.getObjectByName(`${prefix}-${part}`)?.traverse((o) => { if (o.isMesh) addPane(o, 'doorway', part === 'doorway-inside' ? litPictures['doorway-inside'] : null, 0xffb468); });
+    // the burst's warm brightening: one patch over the mill front's windows and the stone round them, one over the lit
+    // doorway (its mouth and the stone round it), each just in front of the wall, toward the lane
+    this.patches = [];
+    if (!front.isEmpty()) {
+      const size = front.getSize(new THREE.Vector3()), centre = front.getCenter(new THREE.Vector3());
+      const patch = brighteningPatch(size.x * 1.5 + 2, size.y * 1.5 + 1);
+      patch.position.set(centre.x, centre.y, front.max.z + 0.3);
+      this.patches.push({ patch, colour: BUSY.front });
     }
+    const doorway = new THREE.Box3();
+    set.getObjectByName(`${prefix}-doorway-inside`)?.traverse((o) => { if (o.isMesh) doorway.expandByObject(o); });
+    set.getObjectByName(`${prefix}-doorway-room`)?.traverse((o) => { if (o.isMesh) doorway.expandByObject(o); });
+    if (!doorway.isEmpty()) {
+      const size = doorway.getSize(new THREE.Vector3()), centre = doorway.getCenter(new THREE.Vector3());
+      const width = size.x * 1.6 + 1.5, height = size.y * 1.5 + 1.2, planeZ = doorway.max.z + 0.4;
+      // each person at work as the camera sees him on the patch's plane (a figure about 0.6 m wide), as a hole
+      const holes = [];
+      for (const { feet, height: tall } of keepDark?.people ?? []) {
+        const along = (planeZ - keepDark.camera.z) / (feet.z - keepDark.camera.z);
+        if (!(along > 0 && along < 1)) continue;
+        const onPlane = (point) => keepDark.camera.clone().lerp(point, along);
+        const low = onPlane(feet), high = onPlane(feet.clone().add(new THREE.Vector3(0, tall, 0)));
+        holes.push({ u: (low.x - (centre.x - width / 2)) / width, v: ((low.y + high.y) / 2 - (centre.y - height / 2)) / height,
+          width: (0.6 * along + 0.25) / width, height: ((high.y - low.y) / 2 + 0.2) / height });
+      }
+      const patch = brighteningPatch(width, height, holes);
+      // at the room's open front (its largest z, nearest the lane), a little out from the wall
+      patch.position.set(centre.x, centre.y, planeZ);
+      this.patches.push({ patch, colour: BUSY.doorway });
+    }
+    for (const { patch } of this.patches) this.group.add(patch);
     scene.add(this.group);
   }
   set(t, { amount = 0, steps = [], fading = null, burst = null } = {}) {
-    // the burst: how strong it is now (rising, holding, falling) and where the dark band is along the front (x, metres)
-    let surge = 0, band = 0;
-    if (burst && t >= burst.at && t < burst.at + BUSY.length) {
-      const age = t - burst.at;
-      surge = Math.min(1, age / BUSY.rise, (BUSY.length - age) / BUSY.fall);
-      band = burst.across - BUSY.reach + 2 * BUSY.reach * (age / BUSY.length);
-    }
-    const lit = steps.length > 0;
+    const pulse = burst ? burstStrength(t, burst.at) : 0;
+    // the light shade before the burst (only on a page with a burst), lifting as the first pulse rises
+    const headroom = burst && t < burst.at + BUSY.rise ? BUSY.headroom * (1 - clamp01((t - burst.at) / BUSY.rise)) : 0;
     for (const p of this.panes) {
-      const isDoorway = p.step === 'doorway';
-      const strength = isDoorway ? (lit ? amount : 0) : steps.includes(p.step) ? amount : fading && fading.steps.includes(p.step) ? fading.amount : 0;
-      const on = strength > 0 && (!isDoorway || surge > 0);
+      const strength = steps.includes(p.step) ? amount : fading && fading.steps.includes(p.step) ? fading.amount : 0;
+      const on = strength > 0;
       p.pane.visible = on;
-      p.shade.visible = on && surge > 0;
+      p.shade.visible = on && headroom > 0;
       if (!on) continue;
       const wave = 0.5 + 0.3 * Math.sin(t * p.speeds[0] + p.phases[0]) + 0.2 * Math.sin(t * p.speeds[1] + p.phases[1]);
-      const shadow = surge * Math.exp(-(((p.centre.x - band) / BUSY.band) ** 2));
-      if (isDoorway) {
-        // the doorway only during a burst: its light swells and dips with the machines, and goes dark as the band passes
-        p.pane.material.opacity = BUSY.doorway * surge * wave * (1 - shadow);
-        p.shade.material.opacity = Math.max(BUSY.doorwayDips * surge * (1 - wave), BUSY.shadow * shadow);
-        continue;
-      }
       // now and then a machine's shadow passes the window: a short dip
       const passing = Math.max(0, Math.sin(t * 0.7 + p.dip * 20)) ** 12;
-      const boost = 1 + (BUSY.boost - 1) * surge;
-      p.pane.material.opacity = Math.min(1, strength * boost * (0.12 + 0.3 * wave) * (1 - 0.7 * passing) * (1 - shadow));
-      p.shade.material.opacity = Math.max(BUSY.dips * surge * (1 - wave) ** 2, BUSY.shadow * shadow);
+      const boost = 1 + (BUSY.boost - 1) * pulse;
+      p.pane.material.opacity = Math.min(1, strength * boost * (0.12 + 0.3 * wave) * (1 - 0.7 * passing));
+      p.shade.material.opacity = headroom;
     }
+    for (const { patch, colour } of this.patches) {
+      patch.visible = pulse > 0 && steps.length > 0;
+      if (patch.visible) patch.material.color.setRGB(colour[0] * pulse, colour[1] * pulse, colour[2] * pulse);
+    }
+    return pulse;
   }
 }
 
@@ -455,6 +555,33 @@ function groundPatch(width, depth, colour) {
   return patch;
 }
 
+// ------------------------------------------------------------------------------------------ a picture the set may have
+
+// Looks in the Works' export for a picture of a view in a state that the set helper may not have made yet (round 6: W3
+// with No. 1 at work, for page 5's "made"): a file named in works-shot.json (anywhere in it, by name, such as
+// "works-w3-working-state.png") that matches `pattern` and is really in the folder. A state picture (…-state.png) comes
+// first; failing that, the helper plate it is made from (…-plate.jpg; until the paintings come, a plate and its state
+// picture differ only where the state differs). Returns the file's name, or null (the page then keeps its main
+// picture). Use before buildWorks, to put the picture in the page's PICTURES.
+export async function findPicture(folder, pattern) {
+  const facts = await fetch(`${folder}/works-shot.json`).then((r) => r.json()).catch(() => null);
+  if (!facts) return null;
+  const names = new Set();
+  const gather = (value) => {
+    if (typeof value === 'string') { if (pattern.test(value)) names.add(value); return; }
+    if (Array.isArray(value)) { value.forEach(gather); return; }
+    if (value && typeof value === 'object') for (const [key, inner] of Object.entries(value)) { if (pattern.test(key)) names.add(key); gather(inner); }
+  };
+  gather(facts);
+  const files = [...names].map((name) => (/\.(png|jpg)$/.test(name) ? name : `${name}.jpg`));
+  const order = (file) => (file.endsWith('-state.png') ? 0 : file.endsWith('-plate.jpg') ? 1 : 2);
+  for (const file of [...new Set(files)].sort((a, b) => order(a) - order(b))) {
+    const found = await fetch(`${folder}/${file}`, { method: 'HEAD' }).then((r) => r.ok).catch(() => false);
+    if (found) return file;
+  }
+  return null;
+}
+
 // ------------------------------------------------------------------------------------------ the Works on a page
 
 // Loads the Works and gives the page its controls. Options:
@@ -553,6 +680,22 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
     behind: behind ? { painting: picture(behind), hide: hidden } : null,
     stretch: [2.0, 4.0],
   });
+  // the drums' stencils as projected (their colours, kept to scale from; DRUM_LETTERS): darkened by view in showView
+  const drumLetters = new Map();
+  everything.traverse((o) => {
+    if (!o.isMesh) return;
+    for (const m of [o.material].flat()) {
+      if (DRUM_LETTERS.materials.includes(m.name) && !drumLetters.has(m)) drumLetters.set(m, { colour: m.color?.clone() ?? null, emissive: m.emissive?.clone() ?? null });
+    }
+  });
+  const dimDrumLetters = (view) => {
+    const share = DRUM_LETTERS.dim[view] ?? 1;
+    for (const [m, base] of drumLetters) {
+      if (base.colour) m.color.copy(base.colour).multiplyScalar(share);
+      if (base.emissive) m.emissive.copy(base.emissive).multiplyScalar(share);
+    }
+  };
+  dimDrumLetters(firstView);
 
   // the sky: a card far beyond the far town, square to the projector and wider than its frame, wearing the painting's
   // sky alone (so sky uncovered when the camera moves is painted sky); made again for each view
@@ -640,7 +783,7 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
   const fireGlow = glow(0xff9a40, 1.4, 0.38); fireGlow.position.copy(brazierTop); kit.scene.add(fireGlow);
   const flames = new Flames(kit.scene, coals, { seed: SEEDS.flames });
   const sparks = new Sparks(kit.scene, coals.clone().add(new THREE.Vector3(0, 0.08, 0)), { seed: SEEDS.sparks });
-  const brazierSmoke = new Smoke(kit.scene, { count: 14, life: 3.6, seed: SEEDS.brazierSmoke, colour: [150, 146, 140] });
+  const brazierSmoke = new BrazierSmoke(kit.scene, { count: 14, life: 3.6, seed: SEEDS.brazierSmoke, colour: [150, 146, 140] });
   for (const puff of brazierSmoke.puffs) puff.sprite.material.color.setRGB(0.5, 0.48, 0.46);
   const lanternGlow = lanternAt ? glow(0xffb060, 0.34, 0.5) : null;
   if (lanternGlow) { lanternGlow.position.copy(lanternAt); kit.scene.add(lanternGlow); }
@@ -650,8 +793,25 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
     kit.scene.add(lamp);
     return [prefix, lamp];
   }));
-  const flicker = { 'no-1': new WindowFlicker(kit.scene, set, 'no-1', SEEDS['no-1-windows'], litPictures),
-    'no-2': new WindowFlicker(kit.scene, set, 'no-2', SEEDS['no-2-windows'], litPictures) };
+  // the people at work in each doorway (painted in the plates), kept dark in the burst's brightening as the first view
+  // showing their factory's gate sees them (W2 for No. 2: page 4's burst)
+  const keepDark = (prefix) => {
+    const view = views.find((v) => v === (prefix === 'no-1' ? 'w1' : 'w2')) ?? firstView;
+    return { camera: projectorOf[view].position.clone(), people: (facts.workers?.[prefix] ?? []).map((w) => ({ feet: fromBlender(w.feet), height: w.figure?.includes('stooped') ? 1.55 : 1.8 })) };
+  };
+  const flicker = { 'no-1': new WindowFlicker(kit.scene, set, 'no-1', SEEDS['no-1-windows'], litPictures, keepDark('no-1')),
+    'no-2': new WindowFlicker(kit.scene, set, 'no-2', SEEDS['no-2-windows'], litPictures, keepDark('no-2')) };
+  // sparks at No. 2's lathe during the burst on "busy": where works-shot.json's machines name the lathe ("no-2-lathe"),
+  // or on the lathe's bed by the hands of No. 2's man bent over it (the stooped figure among its people at work): 0.7 m
+  // up the room from his feet, 0.25 m to his right as the lane sees him, at the bed's height, kept low (drawn round his
+  // head, the sparks read as a face)
+  const latheAt = (() => {
+    if (facts.machines?.['no-2-lathe']) return fromBlender(facts.machines['no-2-lathe']);
+    const man = (facts.workers?.['no-2'] ?? []).find((w) => w.figure?.includes('stooped'));
+    return man ? fromBlender([man.feet[0] + 0.25, man.feet[1] + 0.7, (man.feet[2] ?? 0) + 0.95]) : null;
+  })();
+  const latheSparks = latheAt ? new Sparks(kit.scene, latheAt, { count: BUSY.sparks, seed: SEEDS.latheSparks }) : null;
+  if (latheSparks) { latheSparks.material.size = BUSY.sparkSize; latheSparks.points.visible = false; }
   effectsDone();
 
   // the bank's window (page 9): its glass glows when lit, its sign brightens, and a soft pool of light lies on the
@@ -700,6 +860,7 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
       const sky = skyFor(view, pictureOf[view] ? view : paintingName);
       skyProjection.setView(projectorOf[view], sky.texture);
       showSky(sky);
+      dimDrumLetters(view);
     } else {
       projection.setPainting(picture(paintingName), behindName ? picture(behindName) : undefined);
     }
@@ -758,8 +919,9 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
   //   blendTo, blend: a second picture and how far toward it (0 to 1; use steppedBlend so it changes in steps)
   //   men: the waiting men shown (they are in the painting; hiding them redraws the distance map)
   //   no1, no2: { state (a STATES name), gate (degrees, or leave out for the state's own), gateMoving, busy (0 to 1:
-  //              the windows flicker brighter), busyAt (seconds: the word "busy"; for BUSY.length seconds the flicker
-  //              bursts, a dark band passes across the panes and the doorway pulses), litSteps ([1, 2, 3]: which
+  //              the windows flicker brighter), busyAt (seconds: the word "busy"; for BUSY.length seconds the doorway
+  //              and the stone round the windows brighten in warm pulses, the panes flicker brighter and sparks fly at
+  //              the lathe), litSteps ([1, 2, 3]: which
   //              windows flicker), smoke (a SMOKE kind in place of the state's own: No. 1's working smoke on page 5's
   //              "made" while it still shows quiet), smokeFrom (seconds: smoke starts here and builds up from the
   //              chimney's mouth), crates (no1 only: the moment the crates pop up), was: { state, until, fade } (a
@@ -768,6 +930,10 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
   //   bank: the bank's window lit (true, or how far lit 0 to 1, in steps), its sign brightening with it; until then the
   //         sign is dim
   //   men2: No. 2's eight men shown (needs no2Men; painted ones only where the painting shows them)
+  //   fire: how high the brazier burns (1, the default, as when the men stood round it; FIRE_AFTER_A_WHILE after a time
+  //         cut, so the cut reads as time passing); a set change (its light reaches the own surfaces)
+  //   lampGlow: { 'no-1': share, 'no-2': share } of each gate lamp's glow (1 by default; W1 keeps No. 1's lamp low so the
+  //         gate, not the lamp, is the brightest thing)
   function setWorks(t, state) {
     showView(state.view, state.painting ?? state.view, state.behind ?? null);
     showBlend(state.blendTo ?? null, state.blend ?? 0);
@@ -801,22 +967,47 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
       const litSteps = given.litSteps ?? stepsOf(settings);
       const amount = settings.flicker + (settings.busy ? (settings.busy - settings.flicker) * clamp01(given.busy ?? 0) : 0);
       const fading = was ? { steps: stepsOf(was.settings).filter((step) => !litSteps.includes(step)), amount: was.settings.flicker * (1 - clamp01((t - was.until) / was.fade)) } : null;
-      const across = facts.gates?.[prefix]?.centre?.[0] ?? (prefix === 'no-1' ? -3.5 : 3.5);
-      const burst = given.busyAt !== undefined ? { at: given.busyAt, across } : null;
-      flicker[prefix].set(t, { amount, steps: litSteps, fading, burst });
+      const burst = given.busyAt !== undefined ? { at: given.busyAt } : null;
+      const pulse = flicker[prefix].set(t, { amount, steps: litSteps, fading, burst });
+      if (prefix === 'no-2' && latheSparks) {
+        latheSparks.points.visible = pulse > 0;
+        if (pulse > 0) {
+          latheSparks.set(t);
+          // kept low over the bed (the shared sparks fly up to 0.75 m)
+          const places = latheSparks.geometry.attributes.position.array;
+          for (let i = 1; i < places.length; i += 3) places[i] = latheAt.y + (places[i] - latheAt.y) * BUSY.sparkRise;
+        }
+      }
     }
     keys.push(`crates:${showCrates(t, state.no1?.crates)}`);
-    // the fire, the lantern and the gate lamps (always lit at No. 1; the gate lamps on both piers)
+    // the fire (lower after a time cut), the lantern and the gate lamps (always lit at No. 1; the gate lamps on both piers)
+    const fire = clamp01(state.fire ?? 1);
+    fireLight.intensity = 3.2 * (0.45 + 0.55 * fire);
+    keys.push(`fire:${fire.toFixed(2)}`);
     const fireFlicker = 0.75 + 0.15 * Math.sin(t * 17.3) + 0.1 * Math.sin(t * 29.1 + 1.3);
-    fireGlow.material.opacity = 0.38 * fireFlicker;
-    fireGlow.scale.setScalar(1.35 + 0.02 * Math.sin(t * 11.7));
+    fireGlow.material.opacity = 0.38 * fireFlicker * (0.2 + 0.8 * fire);
+    fireGlow.scale.setScalar((1.35 + 0.02 * Math.sin(t * 11.7)) * (0.55 + 0.45 * fire));
     flames.set(t);
+    // lower flames: shorter and a little narrower tongues on the same coals
+    const tall = 0.3 + 0.7 * fire, wide = 0.75 + 0.25 * fire;
+    if (fire < 1) {
+      for (const f of flames.tongues) {
+        f.body.scale.set(f.body.scale.x * wide, f.body.scale.y * tall, 1);
+        f.core.scale.set(f.core.scale.x * wide, f.core.scale.y * tall, 1);
+      }
+    }
     sparks.set(t);
-    brazierSmoke.set({ t, origin: brazierTop.clone().add(new THREE.Vector3(0, 0.35, 0)).toArray(), scale: 0.75, wind: 0.9 });
+    if (fire < 1) {
+      // fewer sparks: the later ones put out
+      const colours = sparks.geometry.attributes.color.array, alive = Math.round(sparks.sparks.length * fire);
+      colours.fill(0, alive * 3);
+      sparks.geometry.attributes.color.needsUpdate = true;
+    }
+    brazierSmoke.set({ t, origin: brazierTop.clone().add(new THREE.Vector3(0, 0.35 * tall, 0)).toArray(), scale: 0.75, drift: 0.9 });
     if (lanternGlow) lanternGlow.material.opacity = 0.5 * (0.9 + 0.06 * Math.sin(t * 9.1) + 0.04 * Math.sin(t * 23.7 + 0.6));
     for (const [prefix, lamp] of Object.entries(gateLampGlows)) {
       const seed = prefix === 'no-1' ? 0 : 2.1;
-      lamp.material.opacity = 0.42 * (0.95 + 0.03 * Math.sin(t * 4.3 + seed) + 0.02 * Math.sin(t * 13.1 + seed));
+      lamp.material.opacity = 0.42 * (state.lampGlow?.[prefix] ?? 1) * (0.95 + 0.03 * Math.sin(t * 4.3 + seed) + 0.02 * Math.sin(t * 13.1 + seed));
     }
     return [now.view, now.painting, now.behind ?? '-', now.blendTo ? `${now.blendTo}@${now.blend.toFixed(3)}` : '-', now.men ? 'men' : 'no men',
       now.men2 ? 'no. 2 men' : 'no no. 2 men', now.bank > 0 ? `bank lit ${now.bank.toFixed(3)}` : 'bank dark', ...keys].join('|');
@@ -887,6 +1078,8 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
     'no-2-chimneys': () => { const a = marker('no-2-chimney-a-top'), b = marker('no-2-chimney-b-top'); return a && b ? a.clone().lerp(b, 0.5) : a ?? b; },
     'no-2-chimney-a': () => marker('no-2-chimney-a-top'),
     'no-2-chimney-b': () => marker('no-2-chimney-b-top'),
+    // the brazier's fire, at the top of its flames (labels keep their lines clear of it)
+    brazier: () => coals.clone().add(new THREE.Vector3(0, 0.45, 0)),
     // over each gate, on the gable above it (about 5.6 m up the works' front): where a gate view's tag stands
     'no-1-gate-top': () => (facts.gates?.['no-1'] ? fromBlender([facts.gates['no-1'].centre[0], facts.gates['no-1'].centre[1], TAG_HEIGHT]) : null),
     'no-2-gate-top': () => (facts.gates?.['no-2'] ? fromBlender([facts.gates['no-2'].centre[0], facts.gates['no-2'].centre[1], TAG_HEIGHT]) : null),
@@ -902,6 +1095,22 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
     const point = spotAt(name, options);
     return point ? kit.toScreen(point) : null;
   };
+  // where a thing (an object by name, such as the gate boards 'gate-board-no-1' and 'gate-board-no-2') is on the frame
+  // now: the box round its outline's corners { left, top, right, bottom } in pixels, or null (for checks that words and
+  // arrows keep clear of it; round 6 of log 34)
+  const screenBox = (name) => {
+    const thing = named(name) ?? gates?.getObjectByName(name);
+    if (!thing) return null;
+    const box = new THREE.Box3().setFromObject(thing);
+    if (box.isEmpty()) return null;
+    const xs = [], ys = [];
+    for (let k = 0; k < 8; k++) {
+      const p = kit.toScreen(new THREE.Vector3(k & 1 ? box.max.x : box.min.x, k & 2 ? box.max.y : box.min.y, k & 4 ? box.max.z : box.min.z));
+      if (p.behind) return null;
+      xs.push(p.x); ys.push(p.y);
+    }
+    return { left: Math.min(...xs), top: Math.min(...ys), right: Math.max(...xs), bottom: Math.max(...ys) };
+  };
 
   // the name tags (TAGS), drawn the same way on every page (call from draw2D). In W3: each on its own factory's
   // chimneys, QUIET on No. 1's round one and FLAT OUT between No. 2's two square ones, low on the shafts (y, the tags'
@@ -912,7 +1121,8 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
   // middle, it sat on the No. 2 board and the gate's arch, and THE FLAT-OUT FACTORY SLOWS covered the top of the lit
   // gateway (round 4 of log 34). The longest tag keeps its right edge left of 0.90 across (nameTag).
   // slowsAt: from this moment No. 2's tag reads THE FLAT-OUT FACTORY SLOWS (the old words fade out as the new come in).
-  const drawTags = (ctx, t, { at, until = Infinity, view = 'w3', slowsAt = Infinity, y = 700 }) => {
+  // quietUntil: QUIET fades out here (page 5: on "made", when No. 1 goes to work; round 6 of log 34).
+  const drawTags = (ctx, t, { at, until = Infinity, view = 'w3', slowsAt = Infinity, quietUntil = Infinity, y = 700 }) => {
     let no1Place = null, no2Place = null;
     if (view === 'w3') {
       const no1 = screen('no-1-chimney'), a = screen('no-2-chimney-a'), b = screen('no-2-chimney-b');
@@ -923,12 +1133,12 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
       const place = top && !top.behind ? { x: top.x, y: Math.max(330, top.y) } : null;
       if (view === 'w1') no1Place = place; else no2Place = place;
     }
-    if (no1Place) nameTag(ctx, t, { at, until, text: TAGS.quiet, ...no1Place });
+    if (no1Place) nameTag(ctx, t, { at, until: Math.min(until, quietUntil), text: TAGS.quiet, ...no1Place });
     if (no2Place) {
       nameTag(ctx, t, { at: at + (view === 'w3' ? 0.15 : 0), until: Math.min(until, slowsAt), text: TAGS.flatOut, ...no2Place });
       if (slowsAt < until) nameTag(ctx, t, { at: slowsAt, until, text: TAGS.slows, ...no2Place });
     }
   };
 
-  return { set: setWorks, cameraAt, screen, spotAt, drawTags, facts, projection, men, menAtNo2, gate, crates, smokes, views: projectorOf };
+  return { set: setWorks, cameraAt, screen, screenBox, spotAt, drawTags, facts, projection, men, menAtNo2, gate, crates, smokes, views: projectorOf };
 }

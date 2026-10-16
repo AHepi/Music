@@ -196,10 +196,9 @@ def light_role(place, light, overrides):
 
 
 def housing_of(place, light, role, settings):
-    """What a light should skip (lesson 120; log 32): its housing (the smallest prop box it stands in, or the nearest
-    within the housing distance), and, for a fire, every prop within the container distance (the drum it burns in and
-    the chair beside it). Returns (must_skip, near): lists of (name, metres, inside)."""
-    near_limit = settings.value('light_planner.own_housing_within_metres')
+    """What a light should skip (lesson 120; log 32): its housing (the smallest prop box it stands in, else the nearest
+    prop within the container distance), and, for a fire, every prop within the container distance (the drum it burns in
+    and the chair beside it). Returns (must_skip, near): lists of (name, metres, inside)."""
     container = settings.value('light_planner.container_skip_within_metres')
     found = []
     for prop in place.props.values():
@@ -212,7 +211,7 @@ def housing_of(place, light, role, settings):
         must = [(n, g, i) for n, g, i, _ in found if g <= container]
         return sorted(must, key=lambda x: x[1]), []
     containing = sorted((f for f in found if f[2]), key=lambda f: f[3])
-    close = sorted((f for f in found if f[1] <= near_limit and not f[2]), key=lambda f: f[1])
+    close = sorted((f for f in found if f[1] <= container and not f[2]), key=lambda f: f[1])
     if containing:
         must = [containing[0][:3]]
     elif close:
@@ -266,20 +265,19 @@ def subject_corners(place):
 
 
 def cones_for(place, light, settings):
-    """Cones that cover the subject from this light: aimed at its middle (even light) and at its bottom edge's middle
-    (lit from below, rule 6): 2 x the largest angle from the aim to the corners it must cover + the margin."""
-    margin = settings.value('light_planner.cone_margin_degrees')
+    """Cones that just cover the subject from this light: aimed at its middle (even light) and at its bottom edge's middle
+    (lit from below, rule 6): 2 x the largest angle from the aim to the corners it must cover (add a soft edge: the blend)."""
     corners = subject_corners(place)
     centre = place.subject_point
     if len(corners) == 1:
         return None
     even_axis = geometry.subtract(centre, light['at'])
-    even = 2 * max(angle_between(even_axis, geometry.subtract(c, light['at'])) for c in corners) + margin
+    even = 2 * max(angle_between(even_axis, geometry.subtract(c, light['at'])) for c in corners)
     bottom_z = min(c[2] for c in corners)
     bottom_centre = [centre[0], centre[1], bottom_z]
     bottom_corners = [c for c in corners if abs(c[2] - bottom_z) < 1e-9]
     low_axis = geometry.subtract(bottom_centre, light['at'])
-    below = 2 * max(angle_between(low_axis, geometry.subtract(c, light['at'])) for c in bottom_corners) + margin
+    below = 2 * max(angle_between(low_axis, geometry.subtract(c, light['at'])) for c in bottom_corners)
     top_outside = max(angle_between(low_axis, geometry.subtract(c, light['at'])) for c in corners) > below / 2
     return {'even_cone_degrees': even, 'even_aim': centre, 'from_below_cone_degrees': below, 'from_below_aim': bottom_centre,
             'from_below_leaves_top_unlit': top_outside}
@@ -318,10 +316,9 @@ def beam_from_boxes(place, light, axis, cone):
 
 
 def reach_from_beam(beam, targets, excluded, casts_shadow, settings):
-    """Reach = the farthest light-facing hit on a target + the margin; it must stop short of the nearest surface that is
+    """Reach = the farthest light-facing hit on a target + the margin; it must stop before the nearest surface that is
     not a target and not linked out (every hit along a ray for a light without shadow, the first hit for one with)."""
     margin = settings.value('light_planner.reach_margin_metres')
-    short = settings.value('light_planner.reach_short_of_other_surface_metres')
     farthest, nearest_other, other_name = None, None, None
     for ray in beam['rays']:
         for order, hit in enumerate(ray['hits']):
@@ -339,7 +336,7 @@ def reach_from_beam(beam, targets, excluded, casts_shadow, settings):
     result = {'farthest_target_metres': farthest, 'nearest_other_metres': nearest_other, 'nearest_other': other_name}
     if farthest is not None:
         result['reach_metres'] = farthest + margin
-        result['clear'] = nearest_other is None or result['reach_metres'] <= nearest_other - short
+        result['clear'] = nearest_other is None or result['reach_metres'] < nearest_other
     return result
 
 
@@ -496,6 +493,43 @@ def lamps_check(place, lamps, settings, roles=None):
     return found, meeting
 
 
+def subject_light_balance(place, reference):
+    """The most light each light gives any of 27 points over the subject's box (W/m2), respecting links, a spot's cone and
+    the subject's facing when it is a sign: a point or spot light P cos / (4 pi r^2); an area light at most P cos / (pi r^2)
+    (face-on)."""
+    target = place.subject_point
+    points = [target]
+    if place.subject_prop and place.subject_prop.get('size'):
+        low, high = prop_box(place.subject_prop)
+        points += [[low[0] + (high[0] - low[0]) * i / 2, low[1] + (high[1] - low[1]) * j / 2, low[2] + (high[2] - low[2]) * k / 2]
+                   for i in range(3) for j in range(3) for k in range(3)]
+    sign = next((s for s in place.facts.get('signs', []) if s['name'] in place.subject_names()), None)
+    by_light = {}
+    for light in place.lights:
+        if light.get('kind') == 'SUN' or not light.get('watts'):
+            continue
+        if not (lit_by(light, place.subject_name) or (place.subject_prop and lit_by(light, place.subject_prop['name']))):
+            continue
+        best = 0.0
+        for point in points:
+            d = geometry.subtract(light['at'], point)
+            r = geometry.length(d)
+            if r < 1e-6:
+                continue
+            cos = geometry.dot(geometry.normalise(sign['normal']), d) / r if sign else 1.0
+            if cos <= 0:
+                continue
+            if light.get('kind') == 'SPOT' and light.get('cone_degrees'):
+                axis = geometry.subtract(light['target'], light['at']) if light.get('target') else light.get('aim')
+                if axis and angle_between(axis, geometry.scale(d, -1)) > light['cone_degrees'] / 2:
+                    continue
+            spread = math.pi if light.get('kind') == 'AREA' else 4 * math.pi
+            best = max(best, light['watts'] * cos / (spread * r * r))
+        if best > 0:
+            by_light[light['name']] = best
+    return {'points': len(points), 'by_light': by_light}
+
+
 def bottom_edge_ground(place):
     """Where the frame's bottom edge (its middle) meets the ground the camera stands on, or None."""
     camera = place.camera
@@ -613,7 +647,9 @@ def command_plan(args, settings):
         if role == 'rim' and not set(light.get('reaches_only') or []) <= place.figure_names():
             row['notes'].append('a rim light should reach only the figures')
         # starting watts by the inverse square
-        if reference and light is not reference and role in ('lamp', 'fire', 'fill', 'window', 'key', 'accent'):
+        if light.get('kind') == 'AREA' and reference and light is not reference:
+            lines.append('  start: an area light (it shines from one face, not like a point): not planned by the inverse square')
+        elif reference and light is not reference and role in ('lamp', 'fire', 'fill', 'window', 'key'):
             nearest, notes = nearest_lit_surface(place, light, housing)
             if nearest and nearest[1] > reference_distance:
                 lines.append(f'  start: not by the inverse square (its nearest lit surface, {nearest[0]}, is {nearest[1]:.2f} m away, farther '
@@ -646,6 +682,8 @@ def command_plan(args, settings):
                 targets = set(light.get('reaches_only') or []) & place.subject_names() if role in ('key', 'accent') else set(light.get('reaches_only') or [])
                 targets = targets or (place.subject_names() if role in ('key', 'accent') else set())
                 excluded = set(row.get('housing', [])) | set(light.get('skips') or []) | set(light.get('reaches_only') or [])
+                if role in ('key', 'accent') and place.support_prop:
+                    excluded.add(place.support_prop['name'])     # a subject's own light may light its support (the board round a notice)
                 linked = bool(light.get('reaches_only'))
                 if targets:
                     found = reach_from_beam(beam, targets, excluded, row['casts_shadow'], settings)
@@ -671,7 +709,7 @@ def command_plan(args, settings):
                 cones = cones_for(place, light, settings)
                 if cones:
                     row['cones'] = cones
-                    lines.append(f'  cone: {cones["even_cone_degrees"]:.0f} degrees aimed at the subject\'s middle (even light), or '
+                    lines.append(f'  cone that just covers it: {cones["even_cone_degrees"]:.0f} degrees aimed at the subject\'s middle (even light), or '
                                  f'{cones["from_below_cone_degrees"]:.0f} degrees aimed at its bottom edge (lit from below'
                                  + ('; its top stays outside the cone, warm bottom and cool top' if cones['from_below_leaves_top_unlit'] else '')
                                  + f'); blend {settings.value("light_planner.cone_blend")}' + (f'; it has {light["cone_degrees"]:.0f}' if light.get('cone_degrees') else ''))
@@ -689,6 +727,30 @@ def command_plan(args, settings):
             lines.append(f'  PROBLEM {problem}')
             problems.append(f'{light["name"]}: {problem}')
         result['lights'].append(row)
+    # how much light reaches the subject from each light, against its own key (a burnt-out risk, rule 5)
+    if reference:
+        balance = subject_light_balance(place, reference)
+        result['subject_light'] = balance
+        over = settings.value('light_planner.subject_light_over_key_max')
+        key = balance['by_light'].get(reference['name'], 0.0)
+        total = sum(balance['by_light'].values())
+        if key <= 0:
+            problem = f'the key ({reference["name"]}) does not reach the subject: its cone misses it, or a link keeps it off'
+            lines.append('')
+            lines.append(f'Light on the subject: PROBLEM {problem}')
+            problems.append(problem)
+        else:
+            ratio = total / key
+            result['subject_light_over_key'] = ratio
+            top = sorted(balance['by_light'].items(), key=lambda kv: -kv[1])[:3]
+            lines.append('')
+            lines.append(f'Light on the subject (its brightest point for each light): {total:.1f} W/m2 in all, {ratio:.1f} times what its key ({reference["name"]}) gives it; most from '
+                         + ', '.join(f'{n} {v:.1f}' for n, v in top) + ' (area lights counted at their face-on most).')
+            if ratio > over:
+                problem = (f'the subject gets {ratio:.0f} times its key light (at most {over}), mostly from {top[0][0]}: its colour will burn out (rule 5); '
+                           'turn that light down or move it away')
+                lines.append(f'  PROBLEM {problem}')
+                problems.append(problem)
     # lamps on the frame
     lamps = lamps_from(place, args.lamps)
     lamp_rows, meeting = lamps_check(place, lamps, settings, {name: role for name, (role, _) in described.items()})
@@ -764,32 +826,45 @@ def command_exposure(args, settings):
     return {'views': rows}, lines
 
 
-def band_round(mask, pixels):
-    """The pixels within `pixels` of a mask but outside it (a band round the subject)."""
+# The silhouette contrast is measured the way the people test measured the 2.2 it is judged against (scratchpad
+# redesign/people-paint/check-figures/scripts/films.py lines 7-24): relative luminance (sRGB made linear), the subject's
+# mask shrunk by 2 pixels, against a ring from 2 to 12 pixels outside it, on the 1920-row film frame.
+INNER_SHRINK, RING_FROM, RING_TO = 2, 2, 12
+
+
+def linear_luminance(picture):
+    """Relative luminance (0 to 1) of an sRGB picture (levels 0 to 255)."""
     import numpy as np
-    try:
-        import cv2
-        grown = cv2.dilate(mask.astype(np.uint8), np.ones((2 * pixels + 1, 2 * pixels + 1), np.uint8)) > 0
-    except ImportError:
-        grown = mask.copy()
-        for dy in range(-pixels, pixels + 1, max(1, pixels // 4)):
-            for dx in range(-pixels, pixels + 1, max(1, pixels // 4)):
-                grown |= np.roll(np.roll(mask, dy, axis=0), dx, axis=1)
-    return grown & ~mask
+    c = picture / 255.0
+    c = np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+    return 0.2126 * c[..., 0] + 0.7152 * c[..., 1] + 0.0722 * c[..., 2]
+
+
+def grow(mask, pixels):
+    """The mask grown (pixels > 0) or shrunk (pixels < 0) by a square of that many pixels each way."""
+    import numpy as np
+    import cv2
+    if pixels == 0:
+        return mask.copy()
+    kernel = np.ones((2 * abs(pixels) + 1, 2 * abs(pixels) + 1), np.uint8)
+    action = cv2.dilate if pixels > 0 else cv2.erode
+    return action(mask.astype(np.uint8), kernel) > 0
 
 
 def command_contrast(args, settings):
-    """A dark subject's silhouette contrast: (surround + 0.05) / (subject + 0.05), brightness 0 to 1, the surround a band
-    round the subject (its shot_facts solo mask when given, else its box on the frame)."""
+    """A dark subject's silhouette contrast: (surround + 0.05) / (subject + 0.05) in relative luminance, the surround a ring
+    round the subject (its shot_facts solo mask when given, else its box on the frame), as the people test measured it."""
     import numpy as np
     from PIL import Image
     with open(args.place_facts) as handle:
         facts = json.load(handle)
     place = Place(facts, args.view, settings)
-    picture = np.asarray(Image.open(args.picture).convert('RGB')).astype(float) / 255.0
+    picture = np.asarray(Image.open(args.picture).convert('RGB')).astype(float)
     rows, cols = picture.shape[:2]
-    luma = picture @ [0.2126, 0.7152, 0.0722]
-    band_pixels = int(round(settings.value('light_planner.dark_subject_surround_band_pixels') * rows / settings.value('frame.height_pixels')))
+    luma = linear_luminance(picture)
+    full_rows = args.frame_height or rows     # a crop of a frame: the ring is measured in the full frame's pixels
+    scale = full_rows / settings.value('frame.height_pixels')
+    inner_shrink, ring_from, ring_to = (max(1, int(round(v * scale))) for v in (INNER_SHRINK, RING_FROM, RING_TO))
     needed = resolve_profile(settings, ['dark_subject'])['silhouette_contrast']['value']
     if args.subject_mask:
         drawn = np.asarray(Image.open(args.subject_mask).convert('RGB')).astype(int)
@@ -812,29 +887,57 @@ def command_contrast(args, settings):
         mask = np.zeros((rows, cols), bool)
         mask[max(0, int(box[1] * rows)):int(box[3] * rows), max(0, int(box[0] * cols)):int(box[2] * cols)] = True
         how = f'its box on the frame ({box[0]:.3f}-{box[2]:.3f} across, {box[1]:.3f}-{box[3]:.3f} down; a box mixes in what shows between its parts)'
-    band = band_round(mask, band_pixels)
-    subject, surround = float(luma[mask].mean()), float(luma[band].mean())
+    inner = grow(mask, -inner_shrink)
+    band = grow(mask, ring_to) & ~grow(mask, ring_from)
+    subject, surround = float(luma[inner].mean()), float(luma[band].mean())
     contrast = (surround + 0.05) / (subject + 0.05)
     frame_mean = float(luma.mean())
-    lines = [f'{place.subject_name} on {os.path.basename(args.picture)}, by {how}: subject {subject * 255:.0f} levels '
-             f'({subject / frame_mean:.2f} times the frame\'s mean), a {band_pixels} px band round it {surround * 255:.0f} levels: silhouette contrast '
-             f'{contrast:.2f} (a dark subject needs {needed})' + ('.' if contrast >= needed else
+    lines = [f'{place.subject_name} on {os.path.basename(args.picture)}, by {how}: relative luminance {subject:.4f} '
+             f'({subject / frame_mean:.2f} times the frame\'s mean), a ring {ring_from}-{ring_to} px round it {surround:.4f}: silhouette contrast '
+             f'(surround + 0.05) / (subject + 0.05) = {contrast:.2f} (a dark subject needs {needed}, measured the same way on the people test\'s '
+             f'painted figures)' + ('.' if contrast >= needed else
              ': light what is behind it (a cool yard or room light, no shadow) or darken the subject; brightening the subject itself will not get there.')]
-    return {'box': box, 'subject_level': subject * 255, 'surround_level': surround * 255, 'subject_over_frame_mean': subject / frame_mean,
+    return {'box': box, 'subject_luminance': subject, 'surround_luminance': surround, 'subject_over_frame_mean': subject / frame_mean,
             'contrast': contrast, 'needed': needed, 'passes': contrast >= needed}, lines
 
 
+def clock_seconds(text):
+    """Blender's log time stamp (MM:SS.mmm or H:MM:SS.mmm) in seconds."""
+    parts = [float(p) for p in text.split(':')]
+    seconds = 0.0
+    for part in parts:
+        seconds = seconds * 60 + part
+    return seconds
+
+
+def saved_pictures(text):
+    """Each picture a Blender log says it saved, with the minutes since the one before (the plate's drawing time)."""
+    saved = []
+    for match in re.finditer(r'^\s*([\d:.]+)\s+render\s+\|\s+Saved:\s+\'([^\']+)\'', text, re.M):
+        saved.append((clock_seconds(match.group(1)), os.path.basename(match.group(2))))
+    rows = []
+    for (before, _), (at, name) in zip(saved, saved[1:]):
+        rows.append({'picture': name, 'minutes': (at - before) / 60})
+    return rows
+
+
 def command_render_log(args, settings):
+    """Refuses a picture whose render log shows a shadow fault (lesson 110), and reads how long each picture took to draw
+    (the skeptic of log 35: measure and record plate times rather than predict them)."""
     faults = settings.value('light.render_faults')
     rows, lines = [], []
     for path in args.logs:
         with open(path, errors='replace') as handle:
             text = handle.read()
         found = [f for f in faults if f in text]
-        rows.append({'log': path, 'faults': found})
-        lines.append(f'{os.path.basename(path)}: ' + ('REFUSE the picture: ' + '; '.join(f'"{f}"' for f in found) +
-                                                       ' (shadow memory ran out: false black wedges or no shadows; lower the shadow resolution '
-                                                       'scale or cast fewer shadows, then draw it again)' if found else 'no shadow fault'))
+        count = sum(text.count(f) for f in found)
+        times = saved_pictures(text)
+        rows.append({'log': path, 'faults': found, 'fault_lines': count, 'drawing_minutes': times})
+        lines.append(f'{os.path.basename(path)}: ' + ('REFUSE the picture: ' + '; '.join(f'"{f}"' for f in found) + f' ({count} times; shadow memory '
+                                                       'ran out: false black wedges or no shadows. Lower the shadow resolution scale or cast '
+                                                       'fewer shadows, then draw it again)' if found else 'no shadow fault'))
+        for row in times:
+            lines.append(f'  {row["picture"]}: drawn in {row["minutes"]:.1f} min')
     return {'logs': rows, 'refused': [r['log'] for r in rows if r['faults']]}, lines
 
 
@@ -861,6 +964,7 @@ def main(argv=None):
     p.add_argument('--spot', default='plate', choices=['plate', 'composed'])
     p.add_argument('--subject-mask', help='the subject\'s solo picture from shot_facts.py (facts/solo/NAME.png), the same size as the picture')
     p.add_argument('--subject-box-3d', help='cx,cy,cz,width,depth,height (Blender metres), when there is no mask and the subject has no box')
+    p.add_argument('--frame-height', type=int, help='when the picture is cut from a frame: that frame\'s height in pixels (the band scales with it)')
     p = add_output_options(commands.add_parser('render-log', help='refuse a picture whose render log shows a shadow fault'))
     p.add_argument('logs', nargs='+')
     args = parser.parse_args(argv)

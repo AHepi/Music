@@ -12,9 +12,10 @@
 # Gates (narration-tools/sound_gates.py; the script stops with a FAIL line naming the step):
 #   - the WAV and the MP3 must be as long as the narration, within 0.05 s (lesson 5);
 #   - with a TIMELINE (5th argument), the music must sit 18 dB (+/- 1) under her voice while she speaks,
-#     measured over every word span on the voice-only and music-only stems of this very mix. A new
-#     soundtrack fails until its level is found: sound_gates.py duck MUSIC NARRATION TIMELINE prints the
-#     MUSIC_LEVEL_DB to use.
+#     measured page by page over the word spans of the voice-only and music-only stems of this very mix
+#     (a new soundtrack fails until its level is found: sound_gates.py duck MUSIC NARRATION TIMELINE prints
+#     the MUSIC_LEVEL_DB to use), and the mix must line up with the narration at every page's first word
+#     within 2 ms (a limiter without latency=1 makes it 5 ms late: lesson 15).
 # Use: mix_narration_over_music.sh MUSIC_FILE NARRATION_WAV OUTPUT_WAV OUTPUT_MP3 [TIMELINE.json]
 #   MUSIC_LEVEL_DB=-12.5  another music level (the house level is below)
 #   STEMS_DIR=folder      also write the voice-only and ducked-music-only stems there (voice.wav, music.wav)
@@ -69,4 +70,5 @@ python3 -I "$gates" length "$output_wav" --expected "$length_seconds" --step "th
 python3 -I "$gates" length "$output_mp3" --expected "$length_seconds" --step "the mix (MP3)"
 if [ -n "$timeline_file" ]; then
   python3 -I "$gates" gaps "$stems_dir/voice.wav" "$stems_dir/music.wav" "$timeline_file"
+  python3 -I "$gates" alignment "$output_wav" "$narration_file" "$timeline_file"
 fi

@@ -21,17 +21,25 @@
 #     ground levelled under the yards' setts (round 2: the lane's rutted ground showed through them)
 #   - the two iron gates: OWN SURFACES, never in a plate; their leaves are separate objects the film swings
 #     (works-gates.glb), No. 1's chained and padlocked
-#   - the gate boards "No. 1" and "No. 2"; at each gate the PETROL and DIESEL drums standing in front of the waiting
-#     men's outer end (No. 1's left, No. 2's right), both words turned to the gate view's camera; a gas lamp on each
-#     outer pier's inner face, hanging over the gateway; the brazier against No. 1's right gate leaf, a lit hurricane
-#     lantern and a lunch tin on No. 1's drums' lids
-#   - crates in No. 2's gateway with the hand truck, a handcart loaded with crates at the right pavement's kerb, and
-#     the crates that pop up in No. 1's gateway on "things" (own surfaces, never in a plate: works-pop-up.glb)
+#   - the gate boards "No. 1" and "No. 2"; at each gate the PETROL and DIESEL drums as the near layer (round 6): about
+#     5 to 6 m from the gate view's composed spot, in front of the waiting men's outer end (No. 1's left, No. 2's right),
+#     both words turned to the gate view's camera; a gas lamp on each outer pier's inner face, hanging over the gateway;
+#     the brazier against No. 1's right gate leaf (its coals low and dim, round 6), a lit hurricane lantern and a lunch tin
+#     on No. 1's drums' lids
+#   - crates in No. 2's gateway (turned so their stencils face across the gateway, round 6) with the hand truck; a
+#     handcart loaded with plain crates in the lane's right half with a man pushing it (round 6, W3's bottom third); and
+#     the crates that pop up in No. 1's gateway on "things" (own surfaces, never in a plate: works-pop-up.glb; each bottom
+#     crate with a soft contact shadow, round 6)
 #   - the seven men waiting at No. 1, gathered in front of its shut gate (round 5: a loose crowd two deep, backs to the
-#     camera, the stooped man at the brazier, a thin rim of light on them), and the eight men for No. 2's slowed state
-#     gathered the same way (works-no-2-men.glb: painted in W2's slowed helper plate, dark own-surface silhouettes in W4)
-#   - people at work inside each lit doorway, in dark clothes (round 5): No. 2's two in every No. 2 plate, No. 1's two
-#     only once its men have gone in (painted into the plates; works-doorway-workers.glb for the record)
+#     camera, the stooped man at the brazier; round 6: a rim of light grazing their outlines from three lights behind
+#     them), and the eight men for No. 2's slowed state gathered the same way (works-no-2-men.glb: painted in W2's slowed
+#     helper plate, dark own-surface silhouettes in W4)
+#   - people at work inside each lit doorway, in dark clothes (round 5): No. 2's two in every No. 2 plate (round 6: right
+#     of No. 2's inner pier's line, so W3 sees them too), No. 1's two only once its men have gone in (painted into the
+#     plates; works-doorway-workers.glb for the record)
+#   - the people test's lessons in every plate (round 6, lessons 135 to 138): no figure casts a long shadow, only a
+#     small soft patch under its feet; the men stay dark with a little rim light; no glow inside a hollow (the brazier's
+#     coals low and dim, the lantern's light kept off the drum it stands on)
 #   - inside No. 2's yard, for W4 (round 5): a work jacket with sleeves and drape folds hanging from a wooden peg on
 #     the gate's inside post (the inner pier), a crate stood on end under it as a table with a flat cap (a real
 #     peak), a tin mug and a pay envelope "WAGES" (2.6 times life size, so the word reads) propped against the
@@ -43,7 +51,9 @@
 #   - the people's own lights: the brazier's fire, the lantern, the gate lamps, the lane's gas lamps, No. 2's
 #     lit doorway and gateway and the warm beam from its yard out through the gateway onto the pavement, a light
 #     in each doorway's room of machines; No. 1's empty yard in a faint cool dusk light (so its shut gate's bars
-#     show as a silhouette); one curtained window dimly lit on each gate view's quiet side; and four named cameras
+#     show as a silhouette); No. 1's working light cut short a little way out of its gateway (round 6); one curtained
+#     window dimly lit on each gate view's quiet side; and four named cameras
+#   - the gutter's channel along the kerbs smoothed (the Works' lane only, round 6)
 #
 # The four views (each camera level, at a person's spot, facing straight along the lane, never turning):
 #   W3  both gates, from the end house's upstairs window across the cross street, on the lane's centre line
@@ -286,11 +296,26 @@ STATES = {
            'corner_lamp': True, 'left_out': ['no-2-crate-1', 'no-2-crate-2', 'no-2-crate-3'], 'board_back': True},
 }
 MAIN_STATE = {'w3': 'quiet', 'w1': 'quiet', 'w2': 'quiet', 'w4': 'w4'}
+# The pictures that show a state in a view other than its main plate (made from the plates with make_state_picture.py,
+# outside this script): written into works-shot.json under states.NAME.pictures, so the pages find them by state and view.
+# plate: the helper plate drawn in that state; state_picture: the main plate with the helper plate inside the mask; mask:
+# where it differs (white). Round 6 adds W3 working (page 5's "made").
+STATE_PICTURE_FILES = {
+    'working': {'w1': {'plate': 'works-w1-working-plate.jpg', 'state_picture': 'works-w1-working-state.png', 'mask': 'works-w1-working-mask.png'},
+                'w3': {'plate': 'works-w3-working-plate.jpg', 'state_picture': 'works-w3-working-state.png', 'mask': 'works-w3-working-mask.png'}},
+    'men gone': {'w1': {'plate': 'works-w1-men-gone-plate.jpg', 'state_picture': 'works-w1-men-gone-state.png', 'mask': 'works-w1-men-gone-mask.png'}},
+    'quiet, no men': {'w1': {'plate': 'works-w1-behind-plate.jpg', 'state_picture': 'works-w1-behind.png', 'mask': 'works-w1-behind-mask.png',
+                             'note': 'the behind picture for page 3\'s slide (what the men hide), not a state the film shows'}},
+    'slowed': {'w2': {'plate': 'works-w2-slowed-plate.jpg', 'state_picture': 'works-w2-slowed-state.png', 'mask': 'works-w2-slowed-mask.png',
+                      'windows_only': {'state_picture': 'works-w2-slowed-windows-state.png', 'mask': 'works-w2-slowed-windows-mask.png'}}},
+}
 
 # The plates: name: (view, state, men_2 shown in the plate, what it is). The gates' leaves, the chain and the pop-up
 # crates are never in a plate (own surfaces).
 PLATES = {
     'works-w3-plate': ('w3', 'quiet', False, 'W3, the master: No. 1 quiet with its 7 men gathered at the gate, No. 2 flat out with two at work in its doorway'),
+    'works-w3-working-plate': ('w3', 'working', False, 'W3 helper (round 6, for page 5\'s "made"): No. 1 working (its men gone in, two of them at '
+                                                       'its looms, every window and its doorway lit, its cart doors open), No. 2 flat out'),
     'works-w1-plate': ('w1', 'quiet', False, 'W1 main: the 7 men waiting at the gate, No. 1\'s windows dark'),
     'works-w1-working-plate': ('w1', 'working', False, 'W1 helper: the men gone in (two at the looms), No. 1\'s windows lit, its cart doors open'),
     'works-w1-men-gone-plate': ('w1', 'men gone', False, 'W1 helper (for page 3\'s "go"): the men gone in (two at the looms), No. 1\'s '
@@ -414,6 +439,30 @@ def level_ground_under_the_yards():
             lowered += 1
     ground.data.update()
     return lowered
+
+
+# The gutter's dished channel along each kerb, smoothed for the Works' lane only (round 6; round 5's check, finding 12:
+# rainbow fringes on its stepped ridges in the bottom corners of W1 and W2): the lane's stone blocks picture gave the
+# shallow dish deep block joints at W1's and W2's low angle, rows of hard steps. Its own copy of the stone with the joints'
+# relief turned well down (the normal map's strength, 1 in the pit village), and the dish shaded smooth. The pit village
+# (build_street.py, the notice corner) is untouched.
+GUTTER_RELIEF = 0.12
+
+
+def smooth_gutter():
+    channel = bpy.data.objects.get('street_channels')
+    if channel is None or not channel.data.materials:
+        return None
+    smooth = channel.data.materials[0].copy()
+    smooth.name = 'works-channel-stones'
+    for node in smooth.node_tree.nodes:
+        if node.type == 'NORMAL_MAP':
+            node.inputs['Strength'].default_value = GUTTER_RELIEF
+    channel.data.materials[0] = smooth
+    for polygon in channel.data.polygons:
+        polygon.use_smooth = True
+    channel.data.update()
+    return smooth.name
 
 
 def move_lane_lamps():
@@ -886,6 +935,13 @@ def gate_furniture(pieces):
 
 
 FIRE_ENERGY = 80.0                       # the brazier's light (round 4: 110 W, against the outer pier)
+# The coals' bed a little lower in the drum and glowing dimly (round 6, the people test's lesson 138: the painter lifted
+# a faint glow inside the drum's hollow into a bright orange band standing over the rim; round 5's coals, level with the
+# rim at 0.84 m and glowing at 3.5, showed as a bright pink-white band at the drum's top in W1): only the tips of the
+# coals show over the rim from the lane, a dull red. The flames are drawn live in the film (works-effects.js), from
+# works-shot.json's coals_z.
+COAL_TOP = 0.78
+COAL_GLOW = 0.8
 LAMP_Y = WALL_Y - PIER_PROUD + 0.1       # the gate lamp's bracket on the outer pier's inner face, 0.1 m in from its front edge
 LAMP_FOOT = 2.2                          # the bracket's foot: the lamp's glass at about 3.3 m, its top under the board
 GATE_LAMP_ENERGY = 7.0                   # half round 4's 14 W (which lit the pier's face); it reaches only the gate, its board, the men and the yard
@@ -896,11 +952,11 @@ def brazier_and_lantern(coping_top):
     lunch tin on the PETROL drum's."""
     x, y = BRAZIER
     drum = prop('brazier-drum.glb', x, y, 25, name='brazier-drum', folder=PIT_PROPS)
-    fire = dressing.brazier_fire(x, y, light_above_coals=0.55, coal_top=0.84, dark_every=1.33, glow=3.5, energy=FIRE_ENERGY, shadow_soft=0.35)
+    fire = dressing.brazier_fire(x, y, light_above_coals=0.55, coal_top=COAL_TOP, dark_every=1.33, glow=COAL_GLOW, energy=FIRE_ENERGY, shadow_soft=0.35)
     coals = [o for o in bpy.data.objects if o.name.startswith('brazier_coal_')]
     # brazier_fire finds the ground with a ray from high above, which can meet the gate arch or board over the brazier
     # (it now stands against the gate leaf): the coals and the fire's light go into the drum whatever the ray met
-    drop = (fire.location.z - 0.55) - (drum.location.z + 0.84)
+    drop = (fire.location.z - 0.55) - (drum.location.z + COAL_TOP)
     for o in coals + [fire]:
         o.location.z -= drop
     move_to_collection(coals + [fire], 'props')
@@ -941,9 +997,15 @@ _N1_OUTER = _N1 - GATE_WIDTH / 2         # its outer pier's inner face
 # phone buttons, so they stand here instead, where the same aim, no man in front of them from W1 or W3, holds.) No. 2's
 # side is the mirror: its drums in front of the right end of its eight men (page 12), its crates in the yard moved left
 # so the drums do not hide them from W2.
+# Round 6 (round 5's check, finding 4: the story ended at 0.72 down in W1 and W2, the bottom 28 to 32% bare paving,
+# everything in one flat layer 7 to 9 m away): the drums are THE NEAR LAYER, as the notice corner's drum, chair and
+# pail are. DIESEL with its lantern stands about 5.3 m from W1's composed spot (its front foot about 0.79 down the film's
+# frame), PETROL with the lunch tin a step behind it and to the left; in the picture they overlap the front men's legs, so
+# the drums and the crowd still read as one group. Only props come this near: every man stands at least 6 m from every
+# camera place. No. 2's are the mirror (W2).
 DRUM_SPOTS = {    # x, y, turn (degrees; the stencil faces -y at 0, + turns it toward +x): words turned to the gate view
-    'no-1': {'petrol': (-5.3, 20.45, 12.0), 'diesel': (-4.3, 20.0, 8.0)},
-    'no-2': {'petrol': (5.2, 20.45, -12.0), 'diesel': (4.3, 20.0, -8.0)},
+    'no-1': {'petrol': (-4.95, 19.25, 12.0), 'diesel': (-4.1, 18.5, 6.0)},
+    'no-2': {'petrol': (4.95, 19.25, -12.0), 'diesel': (4.1, 18.5, -6.0)},
 }
 BRAZIER = (-2.35, 21.82)                                            # against No. 1's right gate leaf, in the road
 LANTERN = (DRUM_SPOTS['no-1']['diesel'][0] - 0.01, DRUM_SPOTS['no-1']['diesel'][1] - 0.2)   # on DIESEL's lid, at its front
@@ -988,6 +1050,7 @@ MEN_2 = [
 # "go" the men leave the gate and appear inside. They are painted into the plates and are not in the film's set: they
 # stand 17 m and more from every camera, in front of the far wall.
 _ROOM_1, _ROOM_2 = WALL_Y + 8.0, WALL_Y + 8.0                       # each mill front's face (the doorway rooms start here)
+NO_2_DRILL_COLUMN = (4.15, 2.82)         # x, and depth behind the mill front, of No. 2's pillar drill's column (build_factories.py, round 6)
 WORKERS = {
     'no-1': [
         # bent over the front of the nearer loom, from behind, his hands over its cloth
@@ -995,11 +1058,15 @@ WORKERS = {
         # side-on, facing the second loom's way, his raised hand on the nearer loom's back post
         ('worker-hand-on-bar', 'no-1-worker-2', (-4.05 - GRIP[1], _ROOM_1 + 3.05 + GRIP[0]), -90),
     ],
+    # Round 6 (round 5's check, finding 3: at x 1.9 and 2.4 both stood behind No. 2's inner pier in W3, so the master
+    # view showed an empty lit room): both now stand right of x 2.6, where W3 sees past the pier (W3's line past the pier's
+    # inner edge reaches x 2.6 at y 31.5 and 2.8 at y 35) and inside W2's view through the doorway (x 1.2 to 4.4 there),
+    # a little apart across W2's frame so they read as two people (build_factories.py moved the lathe and drill to suit)
     'no-2': [
-        # at the lathe's headstock, from behind, bent over its bed
-        ('worker-stooped-to-brazier', 'no-2-worker-1', (1.9, _ROOM_2 + 2.2 - STOOP_AHEAD - 0.12), 18),
-        # side-on at the press, his raised hand on its column, the flywheel to his right
-        ('worker-hand-on-bar', 'no-2-worker-2', (2.77 - GRIP[1], _ROOM_2 + 4.9 + GRIP[0]), -90),
+        # at the lathe's saddle, from behind, bent over its bed
+        ('worker-stooped-to-brazier', 'no-2-worker-1', (2.95, _ROOM_2 + 2.2 - STOOP_AHEAD - 0.12), 12),
+        # side-on at the pillar drill, his raised hand on its column (the drill to his right as W2 sees him)
+        ('worker-hand-on-bar', 'no-2-worker-2', (NO_2_DRILL_COLUMN[0] - GRIP[1], _ROOM_2 + NO_2_DRILL_COLUMN[1] + GRIP[0]), -90),
     ],
 }
 WORKER_CLOTH = (0.025, 0.024, 0.026)     # their dark work clothes (every surface of the figure)
@@ -1091,25 +1158,16 @@ def yard_things(pieces):
     # the meeting point, left of the DIESEL drum's line (round 5: the drums now stand in front of the gateway's right
     # end, and in round 4's place the drum hid the lower right crate's words from W2)
     crate_y = GATE_PLANE_Y + 1.95
-    # three crates, two side by side and one on top (round 5: a fourth on top hid the man at the press from W2)
-    for k, (x, y, lift, turn) in enumerate(((n2 - 0.55, crate_y, 0.0, 4), (n2 + 0.35, crate_y + 0.15, 0.0, -6), (n2 - 0.1, crate_y + 0.07, 0.51, 2))):
-        prop('crate-this-way-up.glb', x, y, turn, name=f'no-2-crate-{k + 1}', lift=lift, start=0.3)
+    # three crates, two side by side and one on top (round 5: a fourth on top hid the man at the press from W2). Round 6
+    # (round 5's check, finding 11: the lower two showed dark stencils on dark wood in W2, dark smudges in W3): each is
+    # turned a quarter, its stencilled sides facing across the gateway, so W2 and W3 see its plain ends and no lettering
+    # (seen from W2 at about 1.5 degrees, the stencilled side is a sliver under a pixel wide)
+    for k, (x, y, lift, turn) in enumerate(NO_2_CRATES):
+        prop('crate-this-way-up.glb', n2 + x, crate_y + y, turn, name=f'no-2-crate-{k + 1}', lift=lift, start=0.3)
     truck = prop('hand-truck.glb', n2 + 0.95, crate_y + 1.05, 200, name='hand-truck', start=0.5)
     dressing.tint([o for o in truck.children_recursive], (0.45, 0.4, 0.38))
-    found['no-2-crates'] = [round(n2 - 0.1, 3), crate_y, 0.55]
-    # the handcart on the right pavement, its shafts toward the works, loaded with three THIS WAY UP crates, their words
-    # toward the lane's mouth (W3): two on its bed, one on top (round 5; round 4's check: a small empty cart at W3's
-    # right edge; now its middle is at about 0.85 across and its wheels about 0.8 down in W3)
-    cart = prop('handcart.glb', HANDCART[0], HANDCART[1], 90, name='handcart', folder=PIT_PROPS)
-    bpy.context.view_layer.update()
-    bed_top = None
-    for k, (dy, turn) in enumerate(((-0.33, 3), (0.3, -4))):
-        crate = prop('crate-this-way-up.glb', HANDCART[0], HANDCART[1] + dy, turn, name=f'handcart-crate-{k + 1}', start=1.5)
-        bed_top = crate.location.z
-    bpy.context.view_layer.update()
-    prop('crate-this-way-up.glb', HANDCART[0] + 0.03, HANDCART[1] - 0.05, -2, name='handcart-crate-3', start=2.5)
-    found['handcart'] = [round(v, 3) for v in cart.location]
-    found['handcart_bed_top'] = round(bed_top, 3) if bed_top is not None else None
+    found['no-2-crates'] = [round(n2 + NO_2_CRATES[2][0], 3), crate_y, 0.55]
+    found.update(handcart())
     # No. 1's pop-up crates (own surfaces: they pop up in its open gateway on "things"): two side by side and one on top,
     # in the gateway's middle, clear of the open right leaf (x -2.07), of the brazier's line from W1 and of the DIESEL
     # drum's, so from W1's composed spot every crate's THIS WAY UP shows whole (round 4's check: behind the DIESEL drum
@@ -1119,6 +1177,8 @@ def yard_things(pieces):
     for k, (x, y, lift, turn) in enumerate(POP_UP_CRATES):
         holder = import_glb(os.path.join(PROPS_2, 'crate-this-way-up.glb'), (n1 + x, WALL_Y + y, 0.02 + lift), turn, 'pop-up', f'no-1-crate-{k + 1}')
         popups.append([round(v, 3) for v in holder.location])
+        if lift == 0.0:
+            contact_shadow(holder, 'pop-up')
     found['no-1-pop-up-crates'] = popups
     found['no-1-gateway'] = [n1, WALL_Y + 1.4, 0.0]
     # W4: the upturned crate at the inner pier's foot, its end in front of the hinge, so from W4 it overlaps the gate's
@@ -1134,9 +1194,110 @@ def yard_things(pieces):
     return found
 
 
-HANDCART = (3.85, 8.6)      # on the right pavement, coming up it toward the works, at its kerb: behind W2's camera, in W3's bottom third
-# No. 1's pop-up crates: (x from the gateway's middle, y from the works wall's face, lift, turn); the third on the first two
-POP_UP_CRATES = ((-0.35, 1.45, 0.0, -4), (0.5, 1.5, 0.0, 5), (0.08, 1.47, 0.5, 2))
+# No. 2's gateway crates: (x from the gateway's middle, y from crate_y, lift, turn), each turned a quarter (round 6), so
+# 0.55 m wide across the lane: two side by side 7 cm apart, the third on top bridging them
+NO_2_CRATES = ((-0.42, 0.0, 0.0, 94), (0.2, 0.1, 0.0, 85), (-0.11, 0.05, 0.51, 91))
+# No. 1's pop-up crates: (x from the gateway's middle, y from the works wall's face, lift, turn); the third on the first two.
+# Round 6 (round 5's check, finding 12: a thin bright gap between the two bottom crates, the lit doorway showing through):
+# the two bottom crates are turned alike, so their facing sides run parallel 1.5 cm apart (round 5: turned -4 and 5
+# degrees, 5 cm apart at the front, crossing at the back), and each has a soft contact shadow under it (contact_shadow)
+POP_UP_CRATES = ((-0.36, 1.45, 0.0, -3), (0.5, 1.48, 0.0, -3), (0.07, 1.47, 0.5, 2))
+
+# The handcart (round 6; round 5's check, finding 4: at the right pavement's kerb it sat at W3's right edge, at 0.86
+# across, with W3's bottom third empty lane): in the lane's right half, coming up it toward the works, loaded with three
+# crates, a man pushing it. From W3 it stands at about 0.68 across, its wheels about 0.80 down and the man's feet about
+# 0.85 down, under No. 2's gate, clear of the gates and the drums; W1 and W2 never see it (it is behind them). Its
+# shafts point down the lane and are lifted (the cart tipped forward on its wheels, its leg off the ground) to the man's
+# hands; he stoops to push, his back to W3. He stands over 6 m from every camera place (6.1 m from W2's plate spot).
+# The crates on it carry no lettering (their stencils are taken off): at 15 m from W3 their words would be about 6
+# pixels tall, unreadable marks.
+HANDCART = (1.8, 7.9)           # the cart's own middle (between its wheels' axle and its shafts), Blender x and y
+HANDCART_TURN = -90.0           # its shafts toward the lane's mouth (-y)
+HANDCART_AXLE = (-0.36, 0.55)   # the wheels' axle in the cart's own frame (along it, height), from handcart.glb
+HANDCART_HANDLES = 1.2          # the shafts' ends along the cart, from its middle (their tops 0.64 m up when it rests)
+HANDCART_TILT = 14.0            # degrees the cart is tipped forward about its axle: the shafts' ends rise to about 1.0 m,
+                                # under the pushing man's hands (his figure's hands are 1.02 m up)
+HANDCART_LOAD = 0.75            # the crates' bottom on the cart's load (its coal and sack reach 0.74 m), before tipping
+# the crates: along the cart, across it, lift, turn (each a quarter turned, so its long side lies across the cart's 1 m width)
+HANDCART_CRATES = ((-0.75, 0.0, 0.0, 92), (-0.16, 0.0, 0.0, 87), (-0.45, 0.02, 0.5, 91))
+
+
+def handcart():
+    """The handcart with its three crates and the man pushing it (HANDCART above): returns where they are."""
+    x, y = HANDCART
+    ground = dressing.ground_height(x, y, 1.0)
+    holder = bpy.data.objects.new('handcart', None)
+    kit.collection('props').objects.link(holder)
+    holder.location = (x, y, ground)
+    holder.rotation_euler = (0, 0, math.radians(HANDCART_TURN))
+    tilt = bpy.data.objects.new('handcart-tipped', None)
+    kit.collection('props').objects.link(tilt)
+    tilt.parent = holder
+    tilt.location = (HANDCART_AXLE[0], 0.0, HANDCART_AXLE[1])
+    body = import_glb(os.path.join(PIT_PROPS, 'handcart.glb'), (0, 0, 0), 0, 'props', 'handcart-body')
+    body.parent = tilt
+    body.location = (-HANDCART_AXLE[0], 0.0, -HANDCART_AXLE[1])
+    crates = []
+    for k, (along, across, lift, turn) in enumerate(HANDCART_CRATES):
+        crate = import_glb(os.path.join(PROPS_2, 'crate-this-way-up.glb'), (0, 0, 0), 0, 'props', f'handcart-crate-{k + 1}')
+        delete_objects([o for o in crate.children_recursive if 'stencil' in o.name])
+        crate.parent = tilt
+        crate.location = (along - HANDCART_AXLE[0], across, HANDCART_LOAD + lift - HANDCART_AXLE[1])
+        crate.rotation_euler = (0, 0, math.radians(turn))
+        crates.append(crate)
+    tilt.rotation_euler = (0, math.radians(-HANDCART_TILT), 0)
+    bpy.context.view_layer.update()
+    # the shafts' ends after tipping, and the man behind them, his hands (STOOP_AHEAD in front of him) on their ends
+    handle = holder.matrix_world @ (Matrix.Translation((HANDCART_AXLE[0], 0, HANDCART_AXLE[1])) @ Matrix.Rotation(math.radians(-HANDCART_TILT), 4, 'Y')
+                                    @ Vector((HANDCART_HANDLES - HANDCART_AXLE[0], 0.0, 0.64 - HANDCART_AXLE[1])))
+    toward = Vector((math.cos(math.radians(HANDCART_TURN)), math.sin(math.radians(HANDCART_TURN)), 0.0))    # the cart's own +x (its shafts' way)
+    feet = handle.to_2d() + toward.to_2d() * (STOOP_AHEAD - 0.05)
+    man = place_figure('worker-stooped-to-brazier', 'handcart-man', feet.x, feet.y, math.degrees(math.atan2(-toward.x, toward.y)) + 180.0, 'props')
+    for part in man.children_recursive:
+        if part.type == 'MESH':
+            part.visible_shadow = False        # no long shadow (the people test's lesson 135): only the patch at his feet
+    foot_shadow(man, 'props')
+    bpy.context.view_layer.update()
+    return {'handcart': [round(v, 3) for v in holder.location], 'handcart_bed_top': round(min(c.matrix_world.translation.z for c in crates[:2]), 3),
+            'handcart_crates': [[round(v, 3) for v in c.matrix_world.translation] for c in crates],
+            'handcart_handles': [round(v, 3) for v in handle], 'handcart_man': {'name': 'handcart-man', 'figure': 'worker-stooped-to-brazier',
+                                                                               'feet': [round(v, 3) for v in man.location]}}
+
+
+def contact_shadow(holder, collection_name):
+    """A soft dark patch on the ground under a crate (three nested see-through rounded rectangles, the darkest in the
+    middle), part of the crate: it hides and grows with it (round 6; round 5's check: the pop-up crates had no contact
+    shadow). Its material, crate-contact-shadow, is see-through black."""
+    material = bpy.data.materials.get('crate-contact-shadow')
+    if material is None:
+        material = bpy.data.materials.new('crate-contact-shadow')
+        material.use_nodes = True
+        shader = material.node_tree.nodes['Principled BSDF']
+        shader.inputs['Base Color'].default_value = (0.0, 0.0, 0.0, 1)
+        shader.inputs['Roughness'].default_value = 1.0
+        shader.inputs['Alpha'].default_value = 0.25
+        if hasattr(material, 'surface_render_method'):
+            material.surface_render_method = 'BLENDED'
+        material['tile_metres'] = 1.0
+    low, high = bounds_of(parts_of(holder))
+    middle = Vector(((low.x + high.x) / 2, (low.y + high.y) / 2, holder.matrix_world.translation.z))   # its foot is on the yard's setts
+    half_x, half_y = (high.x - low.x) / 2, (high.y - low.y) / 2
+    builder = kit.MeshBuilder()
+    for k, (grow, lift) in enumerate(((0.1, 0.004), (0.04, 0.006), (-0.04, 0.008))):
+        corner = 0.08
+        outline = []
+        for quarter, (cx, cy) in enumerate(((1, 1), (-1, 1), (-1, -1), (1, -1))):
+            for step in range(5):
+                angle = math.pi / 2 * (quarter + step / 4)
+                outline.append((middle.x + cx * (half_x + grow - corner) + corner * math.cos(angle),
+                                middle.y + cy * (half_y + grow - corner) + corner * math.sin(angle)))
+        face = builder.bm.faces.new([builder.bm.verts.new((px, py, middle.z + lift)) for px, py in outline])
+        builder._tag([face], material)
+    patch = builder.finish(f'{holder.name}-contact-shadow', collection_name=collection_name)
+    patch.visible_shadow = False
+    patch.parent = holder
+    patch.matrix_parent_inverse = holder.matrix_world.inverted()
+    return patch
 
 
 # ------------------------------------------------------------------------------------------ W4's corner (round 5)
@@ -1528,6 +1689,14 @@ def lights():
         beam.rotation_quaternion = aim.to_track_quat('-Z', 'Y')
         kit.collection('works-lights').objects.link(beam)
         found[f'{prefix}-gateway-beam'] = beam
+    # No. 1's working light ends a short way out of its gateway (round 6; round 5's check, finding 7: on "start" the
+    # empty lane's paving lit up like floodlights, the bottom 30% of W1 from 36 to 81 levels, and the working state
+    # picture's mask covered 70% of the frame): each of No. 1's yard lights has a custom distance (Blender's light
+    # cutoff, which fades the light smoothly to nothing at that distance), so its light lies on the yard, the doorway and
+    # a small pool in the gateway, about 2 m out onto the lane at most. No. 2's flat-out light on W2's pavement is kept.
+    for name, metres in NO_1_LIGHT_REACH.items():
+        found[name].data.use_custom_distance = True
+        found[name].data.cutoff_distance = metres
     # a warm light in each doorway's room, on when its doorway is lit: it gives the machines their form against the
     # lit far wall (reaching only the room and its machines)
     for prefix, (x, _) in (('no-1', (-3.4, 0)), ('no-2', (2.9, 0))):
@@ -1569,14 +1738,18 @@ def people_lights(lamp_lights):
         reach += [o for o in (bpy.data.objects.get(f'{prefix}-yard-setts'),) if o is not None]
         dressing.light_reaches(lamp_lights[prefix], reach)
         centre = gate_centre(prefix)
-        for name, at, energy, colour in ((f'{prefix}-men-rim-yard', (centre + side * 1.2, GATE_PLANE_Y + 1.6, 2.4), MEN_RIM_ENERGY['yard'], (0.55, 0.68, 1.0)),
-                                         (f'{prefix}-men-rim-lamp', (centre - side * 1.9, GATE_PLANE_Y + 0.3, 2.9), MEN_RIM_ENERGY['lamp'], (1.0, 0.72, 0.45))):
-            rim = point_light(name, at, energy, colour, soft=0.6, shadow=False)
+        for key, (across, out, height, energy, colour) in MEN_RIMS.items():
+            name = f'{prefix}-men-rim-{key}'
+            rim = point_light(name, (centre + side * across, GATE_PLANE_Y + out, height), energy, colour, soft=0.3, shadow=False)
             dressing.light_reaches(rim, men)
             found[name] = rim
+    # the lantern on No. 1's DIESEL drum: it does not reach the men (they stay dark shapes) nor the drum it stands on
+    # (round 6, the people test's lesson 138: its light pooled inside the drum's dished lid, a glowing hollow the painter
+    # would lift into a bright band); it lights the paving and PETROL beside it
     lantern = bpy.data.objects.get('lantern_light')
     if lantern is not None:
-        dressing.light_reaches(lantern, meshes(bpy.data.collections['men-no-1'].all_objects), only=False)
+        drum = bpy.data.objects.get('no-1-drum-diesel')
+        dressing.light_reaches(lantern, meshes(list(bpy.data.collections['men-no-1'].all_objects) + (parts_of(drum) if drum else [])), only=False)
     # the people at work inside the doorways stand against the lit far wall: the yards' strong spill lights (in front of
     # the mill fronts) would light their backs a warm brown; they skip them, so they show as dark shapes
     at_work = meshes(list(bpy.data.collections['workers-no-1'].all_objects) + list(bpy.data.collections['workers-no-2'].all_objects))
@@ -1587,9 +1760,22 @@ def people_lights(lamp_lights):
     return found
 
 
-MEN_RIM_ENERGY = {'yard': 220.0, 'lamp': 90.0}    # the waiting men's edge lights (they reach only the men)
+# The waiting men's edge lights (round 6; round 5's check, finding 6: the claimed rim could not be seen, the men averaged
+# 9 to 11 levels in the film, flat black mannequins). Three lights stand BEHIND each crowd (beyond it from the gate views
+# and W3), at shoulder height, and shine back toward the cameras past the men, so the light grazes their outlines: one
+# behind the crowd's middle, just past the gate, one beyond its outer end and one beyond its inner end (the brazier's
+# side, warm). They reach only the men and cast no shadows, so the men's backs (toward the cameras) stay dark and only a
+# thin edge on caps, shoulders and arms lights up (the people test: the painter paints the men paler, so they stay dark,
+# with a little rim light). name: (across from the gate's middle, outward +, metres out past the gate's line into the
+# yard (+) or toward the lane (-), height, watts, colour)
+MEN_RIMS = {'yard': (0.0, 0.7, 1.65, 700.0, (0.6, 0.72, 1.0)),
+            'outer': (2.6, 0.1, 1.6, 500.0, (0.6, 0.72, 1.0)),
+            'lamp': (-1.7, 0.2, 1.7, 500.0, (1.0, 0.72, 0.45))}
 
 
+# how far each of No. 1's yard lights reaches, in metres (round 6): the beam from 6.8 m inside the yard reaches the
+# gateway at about 7.6 m (there still about 60% of its strength) and nothing beyond about 2 m out onto the lane
+NO_1_LIGHT_REACH = {'no-1-gateway-beam': 11.0, 'no-1-gateway-spill': 4.5, 'no-1-doorway-spill': 9.0}
 SPILL_ENERGY = {'no-2-doorway-spill': 900.0, 'no-2-gateway-spill': 420.0, 'no-2-yard-spill': 260.0, 'no-1-doorway-spill': 700.0, 'no-1-gateway-spill': 300.0,
                 'no-2-gateway-beam': 4000.0, 'no-1-gateway-beam': 4000.0}
 ROOM_ENERGY = 160.0          # each doorway room's light when its doorway is lit
@@ -1703,7 +1889,7 @@ def render(path, width, height, samples):
 
 # the small check pictures: name: (view, state), each with the film's lens at the view's composed spot (W3 holds
 # still, so its composed spot is its plate spot)
-PREVIEWS = {'w3-quiet': ('w3', 'quiet'), 'w1-quiet': ('w1', 'quiet'), 'w1-working': ('w1', 'working'), 'w2-quiet': ('w2', 'quiet'),
+PREVIEWS = {'w3-quiet': ('w3', 'quiet'), 'w3-working': ('w3', 'working'), 'w1-quiet': ('w1', 'quiet'), 'w1-working': ('w1', 'working'), 'w2-quiet': ('w2', 'quiet'),
             'w2-slowed': ('w2', 'slowed'), 'w4-w4': ('w4', 'w4')}
 
 
@@ -1805,6 +1991,27 @@ def marker_spot(name):
     return [round(v, 3) for v in o.matrix_world.translation] if o else None
 
 
+def figure_distances():
+    """Each figure's nearest camera place (every view's plate and composed spots), level distance in metres: the rule is
+    6 m at least, so the painter has no faces to paint. No. 2's people at work inside the mill stand behind W4's camera,
+    inside the mill's front wall, never in its frame (as in round 5); they are listed as they are."""
+    places = {}
+    for name, view in views().items():
+        for spot in ('plate', 'composed'):
+            if spot == 'plate' or view['composed']:
+                places[f'{name} {spot}'] = camera_spot(name, spot).to_2d()
+    figures = [o for o in bpy.data.objects if o.parent is None and o.type == 'EMPTY' and (
+        o.name.startswith(('man-', 'no-2-man-', 'no-1-worker-', 'no-2-worker-')) or o.name == 'handcart-man')]
+    found = {}
+    for figure in sorted(figures, key=lambda o: o.name):
+        feet = figure.matrix_world.translation.to_2d()
+        place, metres = min(((key, (feet - at).length) for key, at in places.items()), key=lambda item: item[1])
+        found[figure.name] = {'nearest': place, 'metres': round(metres, 2)}
+        if metres < 6.0:
+            print(f'assemble_works: {figure.name} stands {metres:.2f} m from the {place} spot (under 6 m)', flush=True)
+    return found
+
+
 def men_frame_facts(camera_name, spot, collection_name):
     """Each man's distance from a view's camera and his box on the film's frame."""
     from bpy_extras.object_utils import world_to_camera_view
@@ -1856,6 +2063,7 @@ def build():
                 if slot.material and slot.material.name.startswith('window_dark_'):
                     slot.material = dim_window_material(slot.material.name.replace('window_dark_', 'window_lit_glow_'))
     move_lane_lamps()
+    smooth_gutter()
     made_terrace = end_terrace()
     cross_street()
     coping_top = low_walls()
@@ -1943,7 +2151,8 @@ def build():
         'no_2_men': [entry['name'] for entry in placed['men-no-2']],
         'queue_front': placed['men-no-1'][0]['feet'],
         'lights': {name: [round(v, 3) for v in light.location] for name, light in spills.items()},
-        'states': {name: {key: (sorted(value) if isinstance(value, set) else value) for key, value in state.items()} for name, state in STATES.items()},
+        'states': {name: {**{key: (sorted(value) if isinstance(value, set) else value) for key, value in state.items()},
+                          **({'pictures': STATE_PICTURE_FILES[name]} if name in STATE_PICTURE_FILES else {})} for name, state in STATES.items()},
         'plates': {name: {'view': view, 'state': state, 'no_2_men': men_2, 'what': what} for name, (view, state, men_2, what) in PLATES.items()},
         'state_pictures': {
             'about': 'made from the plates standing in for the paintings, with paper-film/tools/make_state_picture.py (outlines from the shot '
@@ -1951,8 +2160,13 @@ def build():
             'works-w1-men-gone-state.png': 'W1 main plate, with the men-gone helper plate where the men stood, where the cart doorway opened '
                                            'and where two of the men now stand at the looms inside (mask works-w1-men-gone-mask.png, about '
                                            '12% of the frame, round 5): the time cut on "go"',
-            'works-w1-working-state.png': 'W1 main plate, with the working helper plate wherever they differ (about 74% of the frame: the '
-                                          'windows, the doorway and the yard\'s light on the lane): the blend on "start"',
+            'works-w1-working-state.png': 'W1 main plate, with the working helper plate wherever they differ (round 6: No. 1\'s light now '
+                                          'ends a short way out of its gateway, so the mask is the men, the windows, the doorway, the yard '
+                                          'and a small pool in the gateway; its share of the frame is in the round 6 report): the blend on '
+                                          '"start"',
+            'works-w3-working-state.png': 'W3 main plate, with the W3 working helper plate wherever they differ (round 6: No. 1\'s column: '
+                                          'its men at the gate, its windows, doorway, cart doors and yard, mask works-w3-working-mask.png): '
+                                          'the blend on page 5\'s "made"',
             'works-w2-slowed-state.png': 'W2 main plate, with the slowed helper plate where the eight men stand, the windows go dark and one of '
                                          'the two people at work inside goes (about 14% of the frame): page 12',
             'works-w2-slowed-windows-state.png': ('W2 main plate, with the slowed helper plate only where two thirds of No. 2\'s windows go '
@@ -1984,6 +2198,7 @@ def build():
         'w2 PETROL': letter_pixels('w2', furniture['no-2-drum-petrol'], 0.097),
         'w4 WAGES': letter_pixels('w4', yard['w4']['wages'], round(0.018 * W4_ENVELOPE_SCALE, 3)),
         'w4 No. 2 board back': letter_pixels('w4', yard['w4']['board_back'], 0.25)}
+    facts['figures_nearest_camera'] = figure_distances()
     facts['men_seen'] = {'w1 composed': men_frame_facts('w1', 'composed', 'men-no-1'), 'w1 plate': men_frame_facts('w1', 'plate', 'men-no-1'),
                          'w3': men_frame_facts('w3', 'plate', 'men-no-1'), 'w2 composed (slowed)': men_frame_facts('w2', 'composed', 'men-no-2'),
                          'w4 composed (silhouettes)': men_frame_facts('w4', 'composed', 'men-no-2')}

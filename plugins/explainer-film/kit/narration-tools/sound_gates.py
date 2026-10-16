@@ -43,6 +43,7 @@ import subprocess
 import sys
 import tempfile
 
+sys.dont_write_bytecode = True   # the gates import their sibling tools; leave no __pycache__ in the kit
 HERE = os.path.dirname(os.path.abspath(__file__))
 CALCULATORS = os.path.join(os.path.dirname(HERE), 'calculators')
 for folder in (CALCULATORS, HERE):
