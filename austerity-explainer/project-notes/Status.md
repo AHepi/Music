@@ -276,8 +276,9 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Building now (free, round 5): those fixes, W4, and the next place, the supermarket checkout (C1, page 1).
 - The FOUNDRY painterly library (the user's upload, 15 October) was tested and not used: richer brick, but nothing looked
   painted, the wet-stone road came out icy, and drawing was about 7 times slower.
-- Spent so far from the US$20: nothing. The recording and the paintings wait for your yes (the safety check refused the
-  first paid call).
+- Spent so far from the US$20: about 85 US cents (the people test's two paintings, 16 October, with your yes; the price had
+  doubled to 4.8 US cents a megapixel). Painted men work, dark figures don't; lessons 135 to 139. The other paintings and
+  the recording wait for your yes.
 
 ## Waiting on you
 

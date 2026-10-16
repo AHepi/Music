@@ -16,8 +16,8 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 - **Chapter 2's full redesign is being built** (log 34): the Works (pages 3 to 5) built in 3D over four
   rounds, filmed with the plain 3D pictures standing in for paintings; round 5 is fixing the last critic's
-  findings and starting the supermarket checkout (page 1). Nothing painted or recorded yet; nothing spent
-  from the US$20.
+  findings and starting the supermarket checkout (page 1). The people test is painted: painted men work,
+  dark figures don't (log 34). About 85 US cents spent from the US$20; nothing recorded yet.
 - **Chapter 2 rewritten for newcomers** (log 33): "33 Script - chapter 2 - what really causes inflation -
   for newcomers" and its narration file, ready to record. One idea, one picture (two factories), four
   real cases in time order, three guesses, every unfamiliar word explained; about 7 and a quarter
@@ -1396,12 +1396,30 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       - Whether painted figures work at all is untested (the people test needs your yes).
       - The narration isn't recorded, so all timing is estimated.
     - **Cost:** nothing spent from the US$20.
+    - **The people test, painted** (you said "Yeah do it", 16 October). The pit village street with five men
+      round a brazier and six small walkers was painted by Flux in the series' style, then painted again with
+      the people taken out. Both paintings were lined up with the 3D set (the second within one pixel) and
+      filmed two ways: the painted men leaving on a cut, and dark figures standing over the painting
+      ("34 People test - plate and paintings", "34 People test - painted men leaving, and dark figures").
+      Four fresh helpers checked it:
+      - **Painted men work.** All four agreed. Same number, places and poses as the 3D picture (within 1 to 3
+        pixels), no faces, and they look part of the painting, not like dummies or toys.
+      - **Dark figures don't.** They came out flat black and read as shadow puppets. Dropped.
+      - **The cut reads as the men blinking out**, not as time passing: nothing else changes, and the fire
+        even looks bigger once they've gone. For the Works, something else will change with them (the men are
+        seen inside the factory, the fire burns lower).
+      - **The painter left the men's long shadows** when asked to remove them, so dark streaks stay on the road
+        after the cut. For the Works, the plates will be drawn with the figures casting no long shadows.
+      - Smaller things: the drum's top painted as a bright orange band; the men painted paler than in the 3D
+        picture; the fire's warm pool on the road half the notice corner's; the steps look like wooden blocks.
+      - **Cost:** the price had doubled since the plan (4.8 US cents a megapixel), so about 85 US cents for
+        the two paintings, worked out from fal's price list (fal doesn't show the exact charge).
 
 ## Next step
 
-Say yes to the people test: two paintings of the figure shapes in the pit village street (about 50 US
-cents from the US$20). It is the first time the redesign is painted, and it shows whether painted figures
-work before the Works' paintings are paid for.
+Nothing is needed from you right now. When round 5 is done and the people test's lessons are in the Works'
+3D pictures (no long shadows from the men, the men kept dark), I'll ask your yes for the Works' first three
+paintings (about US$1.30 at today's price).
 
 ## Traps
 

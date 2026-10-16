@@ -863,13 +863,13 @@ export async function buildWorks(kit, { folder = WORKS_FOLDER, views, pictures, 
   const waitingMen = () => (facts.men_at_no_1 ?? []).filter((m) => !m.figure?.includes('stooped')).map((m) => named(m.name)).filter(Boolean);
   const spots = {
     'no-1-queue': () => boxCentre(men.slice(2, 5), 0.85),
-    // the right-hand man of No. 1's waiting men, at his chest: a label's line leaves the crowd sideways from here onto
-    // the empty lane beside it (round 5 of log 34: drawn from the middle of the queue, WORKERS' line ran down over the men)
+    // the right-hand man of No. 1's waiting men, at his head: a label's line leaves the crowd sideways from here
+    // (round 5 of log 34: drawn from the middle of the queue, WORKERS' line ran down over the men)
     'no-1-crowd-side': () => {
       const crowd = waitingMen();
       if (!crowd.length) return spots['no-1-queue']();
       const right = (man) => new THREE.Box3().setFromObject(man).max.x;
-      return boxCentre([crowd.reduce((a, b) => (right(a) >= right(b) ? a : b))], 0.7);
+      return boxCentre([crowd.reduce((a, b) => (right(a) >= right(b) ? a : b))], 0.93);
     },
     // the chain between No. 1's gate leaves (the NEW MONEY SPENT arrow ends here; round 4 of log 34 ended it on a drum's lantern)
     'no-1-chain': () => fact(facts.gates?.['no-1']?.chain) ?? spots['no-1-gateway'](),

@@ -490,6 +490,33 @@ Only failures in doing the work belong here. Newest at the bottom.
 131. **A line about our own Reserve Bank had only America's central bank behind it.** The ledger's support
     was Powell's speech, so the line now names America's. Check whose words stand behind a "they say"
     (log 33).
+132. **A queue in single file, seen from behind it, is one dark column.** Round 3's fix lined seven men up
+    the lane; both cameras look up the lane, so the men stacked behind each other and no one could count
+    them. Stand a waiting crowd across the line of sight, two deep, with gaps between shoulders (log 34,
+    round 4).
+133. **The main rule can pass while the bottom of the frame is empty.** Every Works view passed the shot
+    checker, yet the story sat 0.53 to 0.65 down over bare paving. A story object must reach below about 0.70
+    down, as the notice corner's drum and chair do; the checker now tests it per view (log 34, rounds 4 and 5).
+134. **Smoke blown away from the camera piles up into rings.** With the wind straight up the lane, each puff
+    moved only a little on screen, so puffs stacked into pale doughnuts and hooks. Blow it across the view
+    (log 34, round 4).
+135. **Asked to remove the people, the painter left their long shadows.** The people-out painting kept dark
+    streaks where the men's shadows fell, so they stayed on the road after the cut, and the area to swap grew
+    to 46% of the frame for people covering 6%. Draw plates in which the figures cast no long shadows (only a
+    small soft shadow under their feet), so there is nothing for the painter to leave (log 34, people test).
+136. **When only the people change at a time cut, they seem to blink out.** A first-time viewer read the
+    cut as a glitch: nothing else changed, and the fire even looked bigger once the men stopped hiding it.
+    Something else has to change with them: the fire lower, the light later, or the men seen arriving
+    somewhere else (log 34, people test).
+137. **Painted figures belong to the painting; dark figures laid over it don't.** The silhouettes came out
+    flat black, with no brushwork and no firelight, and read as shadow puppets or holes. The painted men
+    matched the street's brushwork and ink lines (log 34, people test).
+138. **The painter lifts a glowing hollow into a band.** The drum's faint inner glow came back as a bright
+    orange band standing above the rim, as in lighting round 18. Darken the glow inside a hollow in the plate
+    before painting (log 34, people test).
+139. **Prices change between plan and purchase.** Flux 3 edit cost 2.4 US cents a megapixel when the plan was
+    written and 4.8 a day later, so each painting costs about twice the planned amount. Check the price with
+    fal's estimate before each paid batch (log 34, people test).
 
 ## Traps
 

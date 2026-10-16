@@ -109,10 +109,12 @@ export async function build(kit) {
       buildWords(ctx, t, { parts: [{ text: 'EACH ONE = A WHOLE COUNTRY', at: T.country }], until: T.cut, y: LINE_2, size: 46, colour: INK.amber, fadeOut: 0 });
       // the words come in with their lines (wordsWithLine): MACHINES comes on "machines", under a second before the cut
       const label = { plate: true, size: 42, until: T.cut, fadeOut: 0, wordsWithLine: true };
-      // the labels over the lane's empty cobbles (the lower middle), each line from its thing; WORKERS' line leaves the
-      // men sideways (it ran straight down over them in round 4 of log 34)
-      callout(ctx, t, { ...label, at: T.workers, point: works.screen('no-1-crowd-side'), text: 'WORKERS', dx: 120, dy: 90 });
-      callout(ctx, t, { ...label, at: T.materials, point: works.screen('no-2-crates'), text: 'MATERIALS', dx: -30, dy: 160 });
+      // the labels over the lane's empty cobbles (the lower middle), each line from its thing. WORKERS' line leaves the
+      // men sideways at head height, over the stooped man and the brazier, then drops to the lane, its words on the empty road
+      // just below the men (round 4 of log 34: it ran straight down over them); MATERIALS' words lie lower on the lane, so its line
+      // drops clear of WORKERS
+      callout(ctx, t, { ...label, at: T.workers, point: works.screen('no-1-crowd-side'), text: 'WORKERS', corner: { dx: 120, dy: -8 }, dx: 120, dy: 150, side: 'left' });
+      callout(ctx, t, { ...label, at: T.materials, point: works.screen('no-2-crates'), text: 'MATERIALS', dx: -30, dy: 250 });
       callout(ctx, t, { ...label, at: T.machines, point: works.screen('no-2-flywheel'), text: 'MACHINES', dx: -70, dy: -190 });
       return true;
     }
