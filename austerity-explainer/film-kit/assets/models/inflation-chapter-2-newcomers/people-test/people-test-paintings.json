@@ -1,0 +1,53 @@
+{
+ "note": "What this file is: how the people test paintings were made (log 34, 16 October 2026, with the user's yes), so they can be matched or made again. Both by Flux 3 edit on fal (blackforestlabs/flux-3/edit-image), 2k, then resized to the plate (1536 x 2730) and lined up with paper-film/tools/align_painting.py against the props' outlines measured by shot_facts.py for the plate's own camera and lens (64.4 degrees). The state picture was made with paper-film/tools/make_state_picture.py. Price on the day: 4.8 US cents a megapixel (twice the plan's figure), about 85 US cents for the two if the pictures sent are charged as well as the one returned (log 32 suggests they are).",
+ "paintings": [
+  {
+   "file": "people-test-painting.png",
+   "made_from": "people-test-plate.jpg (assemble_people_test.py --plate)",
+   "images_sent": [
+    "people-test-plate.jpg (1536 x 2730)",
+    "the series' style picture (style-glasgow.jpg, a chapter 2 painting), sent at 768 x 1368"
+   ],
+   "settings": {
+    "resolution": "2k",
+    "aspect_ratio": "auto",
+    "output_format": "png",
+    "safety_tolerance": 2
+   },
+   "returned_size": [
+    1504,
+    2672
+   ],
+   "request_id": "01a142ef-6f18-7cb1-bb45-634f51a5eb5f",
+   "prompt": "Repaint image 1 completely as a hand-painted illustration in the exact painting style of image 2: the same visible brush strokes, dark ink outlines, simplified painterly textures on brick, stone, slate and wood, and matte painted finish. Nothing should look like a 3D render or a photograph any more. It is a pit-village street at dusk in 1926. Keep image 1's camera, framing, perspective and every shape, outline, size and position exactly as they are, and keep its pattern of light and dark; change only the brushwork and the colour handling. The people: keep every figure exactly where and as it is, with the same number, size, pose and outline, painted in the same simple way as everything else: dark painted workers in long dark wool work coats and flat caps, in dull browns, greys and near-black, with the same ink outlines. Near the drum there are five men: four seen from behind (one of them bending over the drum to warm his hands, two standing by the lamp post on the right) and one on the left facing us, whose face is lost in deep shadow under the peak of his cap. Far up the street there are six very small dark figures walking away toward the colliery. No faces anywhere: where a face would be there is only dark shadow under the cap, with no eyes, nose, mouth, beard or skin detail; hands are simple dark shapes. Add no people and remove none; add no details to them; they must not look like photographs, statues, shop dummies or toys. Keep: the rusty brazier drum with its open top, dull dark rust-brown, with only a faint orange glow low inside; the red-brick terraces on the left with their chimney stacks; the stone houses, steps and downpipes on the right; every gas lamp with warm amber glass and a small bright mantle inside; the colliery's tall chimney, the two winding wheels and their headgear; the colliery building with its board and its shut iron gates; the flagstone pavement, the kerb, the smooth stone gutter with no steps or ridges, and the sett road. The road, pavement and walls are cool blue-grey dusk, and the brick is weathered and greyed by coal smoke without getting any darker. Warm light stays only where it already is: round the drum, on the nearby pavement, at the lamps and in the few lit windows. Thin parts (the lamp posts and arms, the gate bars, the spokes of the winding wheels, the downpipes) stay thin and exactly in place, or are left out; never thicken them. Where two things meet or nearly meet, keep each edge exactly where it is and never join them: each man and the drum, each man and the next, the men and the lamp post, the far walkers and the colliery gate. Never add: flames, sparks, smoke or steam anywhere (not from the drum, not from any chimney); glows, halos or light rays round any light; puddles, wet shine or reflections; animals or birds; extra props; a moon, stars or bright clouds; new signs or lettering; new or longer shadows.",
+   "lined_up": "stretched 1.0010 times and shifted +1.0, +0.5 pixels (of 1080 wide): outlines on the painting's edges 0.874 before, 0.903 after",
+   "kept_lossless": "PNG, so the state picture equals it exactly outside the mask"
+  },
+  {
+   "file": "people-test-painting-behind.jpg",
+   "made_from": "people-test-painting.png once lined up",
+   "images_sent": [
+    "people-test-painting.png (lined up)"
+   ],
+   "settings": {
+    "resolution": "2k",
+    "aspect_ratio": "auto",
+    "output_format": "png",
+    "safety_tolerance": 2
+   },
+   "returned_size": [
+    1504,
+    2672
+   ],
+   "request_id": "01a142f2-bfc0-7403-a607-ea390f136c94",
+   "prompt": "Remove all the people from the picture completely: the five men in long dark coats and caps standing round the rusty drum on the pavement edge (the man bending over the drum, the two men by the lamp post on the right, the man in the middle of the road and the man on the left), and the six small dark figures walking far up the street toward the colliery gates. Remove their shadows with them. Where each person was, continue exactly what lies behind them: the sett road, the kerb, the smooth stone gutter, the flagstone pavement, the foot of the lamp post, the stone house fronts with their windows, doorways and downpipes, the brick terraces, and the colliery's shut iron gates, in the same painted style, with the same ink outlines, colours and light, and the same soft warm glow on the setts and flagstones round the drum. Keep everything else in the picture exactly as it is, in the same place and size: the rusty drum with its faint orange glow inside, the houses, windows and lit windows, every gas lamp, the colliery's tall chimney, winding wheels and headgear, the colliery building with its board and shut gates, the stone steps at the bottom right, and the sky. Add nothing new: no people, no new objects, no flames, smoke, glows or shadows.",
+   "lined_up": "against the lined-up painting (align_painting.py --against, all eleven figures named): 0.999 before and after (shift +1.0, 0 pixels)"
+  }
+ ],
+ "state_picture": {
+  "file": "people-test-painting-state.png",
+  "mask": "people-test-painting-state-mask.png",
+  "made_by": "make_state_picture.py people-test-painting.png people-test-painting-behind.png people-test-plate.jpg people-test-helper-plate.jpg ... --outlines (the plate camera facts) and all eleven figures; threshold 6, faint 3",
+  "measured": "the second painting fully over 38.3% of the frame, partly over 8.2%; 0 levels different from the main painting outside the mask; the two paintings differ by 8.5 levels on average outside the mask (the painter redid the brushwork everywhere a little), which is why the cut swaps only inside the mask"
+ }
+}

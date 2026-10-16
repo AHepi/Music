@@ -20,6 +20,9 @@
 //                      (never painted): near-black wool with a rim of light from the lit street behind them,
 //                      and a soft contact shadow under each.
 //   weights            the painted version's colours (orange wears the painting, blue its own surface).
+// Add paintings=1 (PAPER_FILM_QUERY=paintings=1 or view=silhouettes&paintings=1) to use the two real paintings
+// (log 34, the people test painted: people-test-painting.png, -painting-behind.jpg, -painting-state.png) in place of
+// the plates.
 // Live on top in every version: the brazier's flames, sparks, smoke and glow (kit.moving: redrawn every frame). The
 // smoke drifts right; the man at the lamp post now stands clear of it, back from the kerb (in round 1 he stood
 // straight behind the brazier and came out a washed-out grey ghost).
@@ -36,6 +39,7 @@ import { glow, Flames, Sparks, paintedSkyColour, contactShadow, groundUnder } fr
 const FOLDER = '/assets/models/inflation-chapter-2-newcomers/people-test';
 const VIEW = new URLSearchParams(location.search).get('view') ?? 'painted';
 const SILHOUETTES = VIEW === 'silhouettes';
+const PAINTINGS = new URLSearchParams(location.search).get('paintings') === '1';
 // Blender (x, y, z) -> three.js (x, z, -y)
 const fromBlender = ([x, y, z]) => new THREE.Vector3(x, z, -y);
 
@@ -82,8 +86,13 @@ const page = {
 
     const [set, signs, figures, projector, shot] = await Promise.all([loadModel(`${FOLDER}/people-test-set.glb`), loadModel(`${FOLDER}/people-test-signs.glb`),
       loadModel(`${FOLDER}/people-test-figures.glb`), loadProjector(`${FOLDER}/people-test-camera.json`), fetch(`${FOLDER}/people-test-shot.json`).then((r) => r.json())]);
-    const [plate, helperPlate, statePicture] = await Promise.all([loadTexture(`${FOLDER}/people-test-plate.jpg`),
-      loadTexture(`${FOLDER}/people-test-helper-plate.jpg`), loadTexture(`${FOLDER}/people-test-state.png`)]);
+    // with paintings=1, the two real paintings stand where the plates did (log 34): the plate painted by Flux (the
+    // men in it), the same painting with the people painted out (in place of the helper plate) and the state picture
+    // made from the two, all lined up with align_painting.py. The main painting is lossless, as the state picture is,
+    // so at the cut nothing changes outside the mask.
+    const [plate, helperPlate, statePicture] = await Promise.all(PAINTINGS
+      ? [loadTexture(`${FOLDER}/people-test-painting.png`), loadTexture(`${FOLDER}/people-test-painting-behind.jpg`), loadTexture(`${FOLDER}/people-test-painting-state.png`)]
+      : [loadTexture(`${FOLDER}/people-test-plate.jpg`), loadTexture(`${FOLDER}/people-test-helper-plate.jpg`), loadTexture(`${FOLDER}/people-test-state.png`)]);
 
     // the painted version shines the plate onto the people too; the silhouettes stand outside the projection, so
     // the ground behind them still wears the plate where they hide it
