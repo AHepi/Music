@@ -36,7 +36,8 @@
 #     the gate's inside post (the inner pier), a crate stood on end under it as a table with a flat cap (a real
 #     peak), a tin mug and a pay envelope "WAGES" (2.6 times life size, so the word reads) propped against the
 #     jacket's hem, all touching; the upturned crate at the post's foot by the hinge (seen from the lane too, so it
-#     stays where it was); the back of No. 2's gate board lettered "No. 2" as well (a second board, back to back);
+#     stays where it was); the back of No. 2's gate board lettered "No. 2" as well (a second board, back to back,
+#     drawn only in W4's plate);
 #     W4's own light: one warm pool on that corner from a lamp out of the frame, the rest of the yard in dusk, and
 #     No. 2's gateway crates left out of W4's plate (the film hides them on page 14: works-shot.json w4.left_out)
 #   - the people's own lights: the brazier's fire, the lantern, the gate lamps, the lane's gas lamps, No. 2's
@@ -231,14 +232,15 @@ def views():
 
 # W4 (round 5; round 4's check: the yard's bottom 30% bare, a flat cut-out jacket and a disc of a cap, the blank back of
 # No. 2's board, "AY UP" on a crate cut by the frame, WAGES a white speck, the yard lit warm like daytime). The camera
-# stands 0.16 m beside the hinge post's line, toward the gateway's middle, so the back of No. 2's board shows its whole
+# stands 0.2 m beside the hinge post's line, toward the gateway's middle, so the back of No. 2's board shows its whole
 # "No. 2" in the composed frame (in line with the post its "No." was cut by the frame's left edge), and slides from 6.7
-# m to 5.5 m from the gate (round 4: 7.2 to 6.0), so the WAGES letters come out about 20 pixels tall and the crate
+# m to 5.5 m from the gate (round 4: 7.2 to 6.0), so the WAGES letters come out about 16 pixels tall (round 4: about 5) and the crate
 # table's foot about 0.84 down. The group stands on No. 2's inner pier's yard face: hidden from W1, W2 and W3 by the
 # pier itself (everything left of x 1.84 there), so it changes none of their plates.
-W4_FROM_HINGE = 0.16
+W4_FROM_HINGE = 0.2
 W4_PLATE_FROM_GATE, W4_COMPOSED_FROM_GATE = 6.7, 5.5
-W4_GROUP_X = 1.45            # the peg and the crate table's middle, on the inner pier's yard face (x 1.1 to 2.0)
+W4_GROUP_X = 1.375           # the peg and the crate table's middle, on the inner pier's yard face (x 1.1 to 2.0); the table
+                             # then stands a clear 6 cm right of the upturned crate (at 1.45 their edges ran along each other)
 
 
 # The states (plan 34's states table). men_1 / men_2: the waiting men at No. 1 / No. 2; workers_1 / workers_2: how many
@@ -281,7 +283,7 @@ STATES = {
            'men_1': False, 'men_2': True, 'workers_1': 0, 'workers_2': 1, 'windows_1': set(), 'doorway_1': False, 'doors_open_1': False,
            'windows_2': {1}, 'doorway_2': True, 'gate_2': 42, 'gate_1': 0, 'chained': True, 'spill_1': 0.0, 'spill_2': 1.0,
            'spill_shares': {'no-2-doorway-spill': 0.0, 'no-2-gateway-spill': 0.0, 'no-2-yard-spill': 0.0, 'no-2-gateway-beam': 0.0},
-           'corner_lamp': True, 'left_out': ['no-2-crate-1', 'no-2-crate-2', 'no-2-crate-3']},
+           'corner_lamp': True, 'left_out': ['no-2-crate-1', 'no-2-crate-2', 'no-2-crate-3'], 'board_back': True},
 }
 MAIN_STATE = {'w3': 'quiet', 'w1': 'quiet', 'w2': 'quiet', 'w4': 'w4'}
 
@@ -1137,6 +1139,358 @@ HANDCART = (3.85, 8.6)      # on the right pavement, coming up it toward the wor
 POP_UP_CRATES = ((-0.35, 1.45, 0.0, -4), (0.5, 1.5, 0.0, 5), (0.08, 1.47, 0.5, 2))
 
 
+# ------------------------------------------------------------------------------------------ W4's corner (round 5)
+
+# Someone with a job, in one touching group on No. 2's inner pier's yard face (plan 34, W4; round 4's check, finding
+# 10). A crate stood on end against the pier is his table; his jacket hangs from a wooden peg above it, its hem just
+# behind the table's top; on the table his flat cap, his tin mug and his pay envelope, propped against the jacket's
+# hem with "WAGES" toward W4. Everything stands left of x 1.70 (Blender), where No. 2's inner pier hides it from W1, W2
+# and W3 (from W2 the pier's corner hides everything left of about x 1.84 there), so their plates do not change.
+W4_PEG_Z = 1.61              # the peg's height: the jacket's hem then hangs 5 cm below the table's top, just behind it, so
+                             # the table clearly overlaps it (level with the top, their edges only just met)
+W4_TABLE_GAP = 0.16          # the table's back from the pier's face (the jacket hangs between)
+W4_ENVELOPE_TOP_OUT = 0.195  # the envelope's top edge from the pier's face: against the jacket's front (its folds reach 0.19)
+W4_ENVELOPE_SCALE = 2.6      # the pay envelope drawn bigger than life (rule 8): "WAGES" (4.7 cm) about 16 pixels tall in W4
+W4_ENVELOPE_LEAN = 16.0      # degrees the envelope leans back from upright, its top against the jacket
+W4_CAP_TURN = 8.0            # degrees the cap's peak is turned from +x (toward the gate) toward +y (toward W4): W4 sees the
+                             # cap nearly side on, the peak standing out of its outline (turned 32 degrees it read as a beret)
+# W4's one pool of light: a lamp out of the frame to the right, on the dividing wall's side a little above the table,
+# its warm light raking across the corner from the right (so the jacket's folds, sleeves and the cap's peak have light
+# and shadow, and the jacket throws its shadow on the pier toward the gate), fading softly round the group (a spot with
+# a wide soft edge); none of the yard's spill lights. (Linked away from the dividing wall, it left a hard lit edge down
+# the pier's side.)
+W4_LAMP = {'at': (0.55, 24.55, 2.05), 'aim': (1.65, 23.1, 0.55), 'energy': 340.0, 'cone_degrees': 58.0, 'blend': 0.85,
+           'colour': (1.0, 0.56, 0.27)}
+W4_LAMP_NAME = 'w4-corner-lamp'
+
+
+def _ring_frame(tangent):
+    """Two directions square to a tube's path (for its rings), the first kept as near +x as it can be."""
+    tangent = tangent.normalized()
+    across = Vector((1, 0, 0)) - tangent * tangent.x
+    if across.length < 1e-4:
+        across = Vector((0, 1, 0)) - tangent * tangent.y
+    across.normalize()
+    return across, tangent.cross(across).normalized()
+
+
+def _tube(builder, points, radii, material, sides=18, squash=1.0, close_start=True, close_end=True, end_material=None):
+    """A smooth tube through points (a sleeve), radius radii[k] at points[k]; squash < 1 flattens it front to back."""
+    rings = []
+    for k, point in enumerate(points):
+        tangent = (points[min(k + 1, len(points) - 1)] - points[max(k - 1, 0)])
+        across, other = _ring_frame(tangent)
+        rings.append([builder.bm.verts.new(point + (across * math.cos(2 * math.pi * i / sides) + other * math.sin(2 * math.pi * i / sides) * squash) * radii[k])
+                      for i in range(sides)])
+    faces = []
+    for a, b in zip(rings, rings[1:]):
+        for i in range(sides):
+            j = (i + 1) % sides
+            faces.append(builder.bm.faces.new([a[i], a[j], b[j], b[i]]))
+    builder._tag(faces, material, smooth=True)
+    if close_start:
+        builder._tag([builder.bm.faces.new(list(reversed(rings[0])))], material)
+    if close_end:
+        builder._tag([builder.bm.faces.new(rings[-1])], end_material or material)
+    return faces
+
+
+def hanging_jacket(centre_x, wall_y, peg_z, wool, lining, horn, wood):
+    """A wool work jacket hung by its collar on a wooden peg, its back toward the wall at wall_y (the jacket hangs on
+    the +y side): empty shoulders slumped from the collar, drape folds fanning down the front from the peg, the sleeves
+    hanging at the sides, standing a little clear of the body so they read as sleeves, the dark cuff openings, a rolled
+    collar running into the lapels with the dark lining in the V, the buttoned front edge, three horn buttons, two
+    pocket flaps, a hem hanging a little unevenly. Returns the jacket and the peg (two objects).
+    (Round 4's check: the jacket from the props library read as a flat brown cut-out with buttons: its sleeves lay
+    inside its outline and the yard's flat light showed no folds.)"""
+    def table(rows, drop):
+        for (d0, v0), (d1, v1) in zip(rows, rows[1:]):
+            if drop <= d1:
+                return v0 + (v1 - v0) * (drop - d0) / (d1 - d0)
+        return rows[-1][1]
+    widths = [(0.0, 0.07), (0.05, 0.1), (0.1, 0.15), (0.15, 0.19), (0.2, 0.205), (0.3, 0.212), (0.5, 0.222), (0.8, 0.238)]
+    thicknesses = [(0.0, 0.05), (0.1, 0.075), (0.22, 0.1), (0.5, 0.095), (0.8, 0.085)]
+    # how far the jacket's back stands out from the wall: off the peg at the top, settling toward the wall lower down
+    backs = [(0.0, 0.085), (0.25, 0.06), (0.8, 0.028)]
+    length = 0.8
+
+    def surface(x, sine, drop):
+        """(y out from the wall) of the body's surface at x across its middle, sine being the ring angle's sine (1: the
+        front, -1: the back): a flattened tube, with the drape folds on its front fanning out from the peg."""
+        half, thick, back = table(widths, drop), table(thicknesses, drop), table(backs, drop)
+        shape = 0.5 + 0.5 * math.copysign(abs(sine) ** 0.65, sine)
+        y = back + thick * shape
+        if sine > 0:
+            depth = 0.005 + 0.026 * min(1.0, max(0.0, (drop - 0.1) / 0.55))
+            fan = math.atan2(x, drop + 0.12)
+            y += sine * depth * math.sin(fan * 8.5 + 0.9)
+            if abs(x) < 0.014 and drop > 0.27:
+                y += 0.006 * sine          # the buttoned front edge stands proud
+        return y
+
+    def hem_drop(x):
+        return length + 0.012 * math.sin(x * 21.0 + 0.7) + 0.008 * math.sin(x * 47.0) - 0.012 * x / 0.24
+
+    builder = kit.MeshBuilder()
+    around = 56
+    drops = [0.03, 0.06, 0.1, 0.14, 0.18, 0.23, 0.29, 0.36, 0.44, 0.52, 0.6, 0.67, 0.73, 0.78, None]
+    rings = []
+    for drop in drops:
+        ring = []
+        for k in range(around):
+            angle = 2 * math.pi * k / around
+            x = table(widths, drop if drop is not None else length) * math.cos(angle)
+            d = drop if drop is not None else hem_drop(x)
+            ring.append(builder.bm.verts.new((centre_x + x, wall_y + surface(x, math.sin(angle), d), peg_z - d)))
+        rings.append(ring)
+    faces = []
+    for upper, lower in zip(rings, rings[1:]):
+        for k in range(around):
+            j = (k + 1) % around
+            faces.append(builder.bm.faces.new([upper[k], upper[j], lower[j], lower[k]]))
+    builder._tag(faces, wool, smooth=True)
+    builder._tag([builder.bm.faces.new(list(reversed(rings[0])))], wool)
+    builder._tag([builder.bm.faces.new(rings[-1])], lining)          # the hem's opening, dark inside
+
+    def front_point(x, drop, out=0.0):
+        return Vector((centre_x + x, wall_y + surface(x, 1.0, drop) + out, peg_z - drop))
+
+    # the collar: a soft roll round the back of the neck over the peg, running on down the front as the two lapels to the
+    # top button (a V), the dark lining showing in the V
+    path = []
+    for k in range(29):
+        share = k / 28
+        side = -1 if share < 0.5 else 1
+        reach = abs(share - 0.5) * 2
+        if reach < 0.35:
+            around_neck = reach / 0.35
+            x = side * 0.075 * math.sin(around_neck * math.pi / 2)
+            drop = 0.012 + 0.022 * (1 - math.cos(around_neck * math.pi / 2))
+            path.append(Vector((centre_x + x, wall_y + table(backs, 0.0) + 0.035 + 0.02 * around_neck, peg_z - drop)))
+        else:
+            down = (reach - 0.35) / 0.65
+            x = side * (0.07 - 0.058 * down)
+            drop = 0.02 + 0.25 * down
+            path.append(front_point(x, max(drop, 0.03), 0.008))
+    _tube(builder, path, [0.032 if abs(k / 28 - 0.5) < 0.18 else 0.012 for k in range(29)], wool, sides=12, squash=0.6)
+    v_top, v_bottom = 0.05, 0.25
+    corners = [front_point(-0.05, v_top, -0.004), front_point(0.05, v_top, -0.004), front_point(0.0, v_bottom, -0.002)]
+    v_face = builder.bm.faces.new([builder.bm.verts.new(point) for point in corners])
+    builder._tag([v_face], lining)
+    # the sleeves: from the slumped shoulders down the body's sides, a little in front of it and standing out past its
+    # edge, bent forward at the elbow, the cuff openings dark
+    for side in (-1, 1):
+        points, radii = [], []
+        for k in range(14):
+            share = k / 13
+            drop = 0.13 + 0.58 * share
+            # from inside the slumped shoulder (its top end hidden in the body, so the shoulder's line runs on into the
+            # sleeve: round 5's first try started at the shoulder's edge and stood up like a box's corner) out past the
+            # body's edge, then hanging, bent a little forward at the elbow
+            x = side * (0.12 + 0.11 * math.sin(math.pi / 2 * min(1.0, share * 2.2)) - 0.012 * share)
+            out = table(backs, drop) + 0.045 + 0.035 * math.sin(math.pi * share) + 0.015 * share
+            points.append(Vector((centre_x + x, wall_y + out, peg_z - drop)))
+            radii.append(0.03 + 0.032 * math.sin(math.pi / 2 * min(1.0, share * 4.0)) - 0.012 * share)
+        _tube(builder, points, radii, wool, sides=18, squash=0.9, close_start=True, close_end=True, end_material=lining)
+    # three horn buttons on the front edge and two pocket flaps
+    for drop in (0.3, 0.42, 0.54):
+        centre = front_point(0.012, drop, 0.003)
+        builder.rod(centre - Vector((0, 0.004, 0)), centre + Vector((0, 0.006, 0)), 0.012, horn, sides=12)
+    for side in (-1, 1):
+        x = side * 0.11
+        top = front_point(x, 0.585, 0.002)
+        builder.box((top.x - 0.075, top.y - 0.012, top.z - 0.05), (top.x + 0.075, top.y + 0.012, top.z), wool)
+    # every face out (the rings and tubes are drawn by hand), the lining's V toward the yard
+    import bmesh
+    bmesh.ops.recalc_face_normals(builder.bm, faces=list(builder.bm.faces))
+    v_face.normal_update()
+    if v_face.normal.y < 0:
+        v_face.normal_flip()
+    jacket = builder.finish('w4-jacket', collection_name='props')
+    # the peg: a turned wooden peg in a small block screwed to the pier, tipped up a little so the collar stays on it
+    peg = kit.MeshBuilder()
+    peg.box((centre_x - 0.05, wall_y - 0.01, peg_z - 0.05), (centre_x + 0.05, wall_y + 0.025, peg_z + 0.06), wood)
+    peg.rod((centre_x, wall_y + 0.02, peg_z), (centre_x, wall_y + 0.13, peg_z + 0.02), 0.016, wood, sides=12, end_radius=0.013)
+    peg.rod((centre_x, wall_y + 0.12, peg_z + 0.018), (centre_x, wall_y + 0.15, peg_z + 0.024), 0.022, wood, sides=12, end_radius=0.02)
+    peg_object = peg.finish('w4-peg', collection_name='props')
+    return jacket, peg_object
+
+
+def flat_cap(tweed, lining):
+    """A tweed flat cap as it lies on a table, crown up, its peak toward +x (one object at the origin, the band's middle
+    on the table): a band, a crown pulled forward over the peak and fuller at the back, and a stiff curved peak standing
+    clear in front of the band. (Round 4's check: the cap on its nail read as a flat disc.)"""
+    builder = kit.MeshBuilder()
+    side_half, length_half, band = 0.092, 0.108, 0.028    # the band's half widths (across, front to back) and height
+    sides = 40
+
+    def band_point(angle, z):
+        return Vector((length_half * math.cos(angle), side_half * math.sin(angle), z))
+    # the band (open at the bottom: the dark lining shows only from below)
+    low = [builder.bm.verts.new(band_point(2 * math.pi * k / sides, 0.0)) for k in range(sides)]
+    high = [builder.bm.verts.new(band_point(2 * math.pi * k / sides, band)) for k in range(sides)]
+    builder._tag([builder.bm.faces.new([low[k], low[(k + 1) % sides], high[(k + 1) % sides], high[k]]) for k in range(sides)], tweed, smooth=True)
+    builder._tag([builder.bm.faces.new(list(reversed(low)))], lining)
+    # the crown: rings drawn in from a rim a little outside the band (over it at the back and sides, pulled forward over
+    # the peak at the front) up to the top; fuller and higher at the back, low at the front where it is snapped to the peak
+    rows = 9
+    crown = []
+    for r in range(rows + 1):
+        share = r / rows                       # 0: the rim, 1: the middle of the top
+        ring = []
+        for k in range(sides):
+            angle = 2 * math.pi * k / sides
+            front = max(0.0, math.cos(angle))   # 1 at the front (+x), toward the peak
+            reach = 1.0 - share ** 1.4
+            x = (length_half + 0.012 + 0.03 * front) * math.cos(angle) * reach + 0.012 * (1 - reach)
+            y = (side_half + 0.01) * math.sin(angle) * reach
+            rise = 0.052 - 0.026 * front * (1 - share) + 0.008 * (1 - front)
+            z = band + rise * math.sin(math.pi / 2 * min(1.0, share * 1.5)) - 0.012 * front * (1 - share)
+            ring.append(builder.bm.verts.new((x, y, z)))
+        crown.append(ring)
+    faces = []
+    for a, b in zip(crown, crown[1:]):
+        for k in range(sides):
+            faces.append(builder.bm.faces.new([a[k], a[(k + 1) % sides], b[(k + 1) % sides], b[k]]))
+    builder._tag(faces, tweed, smooth=True)
+    builder._tag([builder.bm.faces.new(crown[-1])], tweed)
+    # the rim of the crown down onto the band (a short skirt, so no gap shows under the overhang)
+    skirt = []
+    for k in range(sides):
+        angle = 2 * math.pi * k / sides
+        skirt.append(builder.bm.faces.new([high[k], crown[0][k], crown[0][(k + 1) % sides], high[(k + 1) % sides]]))
+    builder._tag(skirt, tweed, smooth=True)
+    # the peak: a stiff, curved half-oval of cloth over board, standing out 7 cm in front of the band, its tip a little down
+    steps, depth, half_width, thick = 12, 0.085, 0.088, 0.006
+    top_rows, bottom_rows = [], []
+    for i in range(steps + 1):
+        across = -1 + 2 * i / steps
+        reach = depth * math.sqrt(max(0.0, 1 - across ** 2)) + 0.004
+        top_row, bottom_row = [], []
+        for j in range(5):
+            out = j / 4
+            x = length_half * math.sqrt(max(0.0, 1 - across ** 2)) * 0.96 + reach * out
+            y = half_width * across
+            z = 0.006 - 0.007 * out ** 1.5 - 0.006 * across ** 2
+            top_row.append(builder.bm.verts.new((x, y, z + thick)))
+            bottom_row.append(builder.bm.verts.new((x, y, z)))
+        top_rows.append(top_row)
+        bottom_rows.append(bottom_row)
+    faces = []
+    for i in range(steps):
+        for j in range(4):
+            faces.append(builder.bm.faces.new([top_rows[i][j], top_rows[i][j + 1], top_rows[i + 1][j + 1], top_rows[i + 1][j]]))
+            faces.append(builder.bm.faces.new([bottom_rows[i][j], bottom_rows[i + 1][j], bottom_rows[i + 1][j + 1], bottom_rows[i][j + 1]]))
+        faces.append(builder.bm.faces.new([top_rows[i][4], bottom_rows[i][4], bottom_rows[i + 1][4], top_rows[i + 1][4]]))
+    for rows_ in (0, steps):
+        for j in range(4):
+            faces.append(builder.bm.faces.new([top_rows[rows_][j], bottom_rows[rows_][j], bottom_rows[rows_][j + 1], top_rows[rows_][j + 1]]))
+    builder._tag(faces, tweed, smooth=True)
+    import bmesh
+    bmesh.ops.recalc_face_normals(builder.bm, faces=list(builder.bm.faces))     # every face out (drawn by hand)
+    return builder.finish('w4-cap-cloth', collection_name='props')
+
+
+def lightened(material, name, share):
+    """A copy of an imported glTF material with its colour factor (the multiply over its picture) raised by share: the
+    library jacket's near-black wool showed no folds in the lamplight; a little lighter, its folds and sleeves show."""
+    copy = material.copy()
+    copy.name = name
+    for node in copy.node_tree.nodes:
+        if node.bl_idname == 'ShaderNodeMix' and node.data_type == 'RGBA' and node.blend_type == 'MULTIPLY':
+            for socket in (node.inputs[6], node.inputs[7]):
+                if not socket.is_linked:
+                    socket.default_value = (*(min(1.0, v * share) for v in socket.default_value[:3]), 1.0)
+        elif node.bl_idname == 'ShaderNodeBsdfPrincipled' and not node.inputs['Base Color'].is_linked:
+            node.inputs['Base Color'].default_value = (*(min(1.0, v * share) for v in node.inputs['Base Color'].default_value[:3]), 1.0)
+    return copy
+
+
+def w4_corner(pieces):
+    """W4's corner on No. 2's inner pier's yard face (see W4_PEG_Z above): returns where its things are."""
+    post = pieces['no-2']['inner_pier']
+    wall_y = WALL_Y + WALL_THICKNESS + PIER_PROUD                # the pier's yard face
+    x = W4_GROUP_X
+    # the cloth: the props library's jacket and cap bring the wool and the tweed (their own models are not used)
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=os.path.join(PROPS_2, 'jacket-and-cap-on-nail.glb'))
+    old = [o for o in bpy.data.objects if o not in before]
+    cloth = {}
+    for o in old:
+        for slot in (o.material_slots if o.type == 'MESH' else []):
+            if slot.material:
+                cloth[re.sub(r'\.\d{3}$', '', slot.material.name)] = slot.material
+    delete_objects(old)
+    wool, tweed = lightened(cloth['jacket-wool'], 'w4-jacket-wool', 1.7), lightened(cloth['cap-tweed'], 'w4-cap-tweed', 1.8)
+    wool['tile_metres'], tweed['tile_metres'] = 0.27, 0.27
+    lining = kit.plain_material('w4-jacket-lining', (0.025, 0.022, 0.02), roughness=0.9)
+    horn = kit.plain_material('w4-button-horn', (0.04, 0.032, 0.026), roughness=0.4)
+    wood = kit.surface_material('w4-peg-wood', 'distressed_painted_planks', tint=(0.34, 0.25, 0.17), roughness=0.7)
+    jacket, peg = hanging_jacket(x, wall_y, W4_PEG_Z, wool, lining, horn, wood)
+    holder = bpy.data.objects.new('w4-jacket-on-peg', None)
+    kit.collection('props').objects.link(holder)
+    for part in (jacket, peg):
+        part.parent = holder
+    # the table: a packing crate stood on its end against the pier, its stencilled sides turned to face across the yard
+    # (seen edge on from W4 they would show a sliver of words), and their stencils taken off: a plain box
+    table = import_glb(os.path.join(PROPS_2, 'crate-this-way-up.glb'), (0, 0, 0), 0, 'props', 'w4-crate-table')
+    table.rotation_mode = 'ZYX'          # a quarter turn about z (the stencilled sides to face across), then up onto its end
+    table.rotation_euler = (math.radians(90), 0, math.radians(90))
+    bpy.context.view_layer.update()
+    delete_objects([o for o in table.children_recursive if 'stencil' in o.name])
+    low, high = bounds_of(parts_of(table))
+    ground = dressing.ground_height(x, wall_y + 0.5, 1.0)
+    table.location += Vector((x - (low.x + high.x) / 2, wall_y + W4_TABLE_GAP - low.y, ground - low.z))
+    bpy.context.view_layer.update()
+    low, high = bounds_of(parts_of(table))
+    top = high.z
+    # the cap on the table's front left, its peak toward the gate and turned a little toward W4
+    cap = flat_cap(tweed, lining)
+    cap_holder = bpy.data.objects.new('w4-cap', None)
+    kit.collection('props').objects.link(cap_holder)
+    cap.parent = cap_holder
+    cap_holder.location = (high.x - 0.15, low.y + 0.36, top)
+    cap_holder.rotation_euler = (0, 0, math.radians(W4_CAP_TURN))
+    # the mug on the table's front right, its handle turned away from W4
+    mug = import_glb(os.path.join(PROPS_2, 'tin-mug.glb'), (low.x + 0.07, low.y + 0.15, top), 200, 'props', 'w4-mug')
+    # the pay envelope, stood up on its long edge at the table's back, "WAGES" toward W4, leaning back against the jacket
+    envelope = import_glb(os.path.join(PROPS_2, 'wages-envelope.glb'), (0, 0, 0), 0, 'props', 'w4-wages')
+    envelope.scale = (W4_ENVELOPE_SCALE,) * 3
+    envelope.rotation_mode = 'ZXY'       # a half turn about z (the word's foot toward W4), then stood up and leaned back
+    envelope.rotation_euler = (math.radians(W4_ENVELOPE_LEAN - 90.0), 0, math.radians(180))
+    bpy.context.view_layer.update()
+    e_low, e_high = bounds_of(parts_of(envelope))
+    # its top edge against the jacket's front (about 0.135 m out from the pier there), its foot on the table's top
+    envelope.location += Vector((x + 0.03 - (e_low.x + e_high.x) / 2, wall_y + W4_ENVELOPE_TOP_OUT - e_low.y, top - e_low.z))
+    bpy.context.view_layer.update()
+    e_low, e_high = bounds_of(parts_of(envelope))
+    j_low, j_high = bounds_of([jacket])
+    return {'jacket_on_peg': [round(x, 3), round(wall_y, 3), W4_PEG_Z], 'jacket_box': [[round(v, 3) for v in j_low], [round(v, 3) for v in j_high]],
+            'crate_table': [round(v, 3) for v in table.location], 'table_top': round(top, 3), 'cap': [round(v, 3) for v in cap_holder.location],
+            'mug': [round(v, 3) for v in mug.location], 'wages': [round(v, 3) for v in envelope.location],
+            'wages_box': [[round(v, 3) for v in e_low], [round(v, 3) for v in e_high]], 'lamp': {k: v for k, v in W4_LAMP.items()},
+            'board_back': gate_board_back(),
+            'left_out': list(STATES['w4']['left_out']),
+            'about': 'W4\'s corner on No. 2\'s inner pier (round 5): the jacket on its peg, the crate table under it with the cap, the mug and the '
+                     'WAGES envelope (2.6 times life size), the upturned crate by the hinge; one warm pool from a lamp out of the frame '
+                     '(light only); left_out: No. 2\'s gateway crates, not in the W4 plate, so the film hides them on page 14 '
+                     '(then projection.refresh())'}
+
+
+def gate_board_back():
+    """The back of No. 2's gate board, lettered "No. 2" as well: a second board back to back with the first (its battens
+    inside the first's, 1 mm apart, so no two faces lie in one plane), so from inside the yard (W4) the board reads
+    "No. 2" rather than as a big blank plank sign (round 4's check). From the lane it is hidden behind the first board, but
+    for its edges and the gaps between the first board's planks, so it is drawn only in W4's plate (set_state)."""
+    front = bpy.data.objects['gate-board-no-2']           # the first board (its holder is gate-board-no-2.001)
+    back = import_glb(os.path.join(PROPS_2, 'gate-board-no-2.glb'), tuple(front.matrix_world.translation), 180, 'signs', 'gate-board-no-2-back')
+    front_low, front_high = bounds_of(parts_of(front))
+    back_low, _ = bounds_of(parts_of(back))
+    back.location.y += (front_high.y - 0.029) - back_low.y      # the battens (3 cm deep) one inside the other
+    bpy.context.view_layer.update()
+    return [round(v, 3) for v in back.location]
+
+
 # ------------------------------------------------------------------------------------------ light, state, cameras
 
 def lights():
@@ -1180,6 +1534,17 @@ def lights():
         room = point_light(f'{prefix}-room-light', (x, WALL_Y + 8.0 + 2.2, 3.9), 0.0, (1.0, 0.66, 0.36), soft=0.8, shadow=False)
         dressing.light_reaches(room, [o for o in bpy.data.objects if o.type == 'MESH' and o.name in (f'{prefix}-doorway-room', f'{prefix}-doorway-machines')])
         found[f'{prefix}-room-light'] = room
+    # W4's one pool of light on the jacket's corner (W4_LAMP; on only in the W4 state): a spot from a lamp out of the frame
+    lamp = bpy.data.objects.new(W4_LAMP_NAME, bpy.data.lights.new(W4_LAMP_NAME, 'SPOT'))
+    lamp.data.color, lamp.data.shadow_soft_size = W4_LAMP['colour'], 0.12
+    lamp.data.spot_size, lamp.data.spot_blend = math.radians(W4_LAMP['cone_degrees']), W4_LAMP['blend']
+    lamp.data.energy, lamp.data.use_shadow = 0.0, True
+    lamp.location = W4_LAMP['at']
+    lamp.rotation_mode = 'QUATERNION'
+    lamp.rotation_quaternion = (Vector(W4_LAMP['aim']) - Vector(W4_LAMP['at'])).to_track_quat('-Z', 'Y')
+    lamp.hide_render = True
+    kit.collection('works-lights').objects.link(lamp)
+    found[W4_LAMP_NAME] = lamp
     return found
 
 
@@ -1269,11 +1634,29 @@ def set_state(name, plate=False, men_2_in_plate=False):
     if chain is not None:
         for o in parts_of(chain):
             o.hide_render = plate or not state['chained']
+    shares = state.get('spill_shares', {})
     for name_, energy in SPILL_ENERGY.items():
         light = bpy.data.objects.get(name_)
         if light is not None:
-            light.data.energy = energy * (state['spill_1'] if name_.startswith('no-1') else state['spill_2'])
+            light.data.energy = energy * shares.get(name_, state['spill_1'] if name_.startswith('no-1') else state['spill_2'])
             light.hide_render = light.data.energy <= 0.0
+    lamp = bpy.data.objects.get(W4_LAMP_NAME)
+    if lamp is not None:
+        lamp.data.energy = W4_LAMP['energy'] if state.get('corner_lamp') else 0.0
+        lamp.hide_render = lamp.data.energy <= 0.0
+    # the back of No. 2's board shows only in W4's state: from the lane it is hidden behind the first board except at
+    # its edges and through the 5 mm gaps between the first board's planks, where it changed W2's and W3's plates
+    # (round 5's check); in the film those slivers wear the plate's own colours there, and its lettering faces the yard
+    back = bpy.data.objects.get('gate-board-no-2-back')
+    if back is not None:
+        for o in parts_of(back):
+            o.hide_render = not state.get('board_back', False)
+    # things a view leaves out of its plate (W4: No. 2's gateway crates), shown in every other state
+    for name_ in STATES['w4']['left_out']:
+        holder = bpy.data.objects.get(name_)
+        if holder is not None:
+            for o in parts_of(holder):
+                o.hide_render = name_ in state.get('left_out', ())
     for prefix in ('no-1', 'no-2'):
         room = bpy.data.objects.get(f'{prefix}-room-light')
         if room is not None:
@@ -1374,7 +1757,8 @@ PARTS = {
     'works-set-factories.glb': (('factories',), 'the two factories (their window groups, chimney-top markers and cart doors by name)'),
     'works-set-town.glb': (('town',), 'the far town'),
     'works-set-props.glb': (('props', 'men-no-1'), 'the props and No. 1\'s seven waiting men (in the paintings; the men are hidden when they go in)'),
-    'works-signs.glb': (('signs',), 'own surfaces: the lettered things (gate boards, drums, the bank\'s sign and plate)'),
+    'works-signs.glb': (('signs',), 'own surfaces: the lettered things (gate boards, No. 2\'s with its lettered back for W4, drums, the bank\'s '
+                                    'sign and plate)'),
     'works-gates.glb': (('gates',), 'own surfaces, never in a plate: the gate leaves (no-1-gate, no-2-gate) and No. 1\'s chain (no-1-chain)'),
     'works-pop-up.glb': (('pop-up',), 'own surfaces, never in a plate: the crates that pop up in No. 1\'s gateway (no-1-crate-1 to 3)'),
     'works-no-2-men.glb': (('men-no-2',), 'No. 2\'s eight waiting men: painted in W2\'s slowed helper plate, dark own-surface silhouettes in W4'),
@@ -1490,7 +1874,7 @@ def build():
     # sky's light. Each shadow-casting light costs about two seconds a sample on this machine (EEVEE without a
     # graphics card), and the lamps, the lantern and the low afterglow read as well without.
     for o in bpy.data.objects:
-        if o.type == 'LIGHT' and not (o.name == 'brazier_light' or o.name.endswith('-spill') or o.name.endswith('-beam') or o.name == 'dusk_skylight'):
+        if o.type == 'LIGHT' and not (o.name in ('brazier_light', 'dusk_skylight', W4_LAMP_NAME) or o.name.endswith('-spill') or o.name.endswith('-beam')):
             o.data.use_shadow = False
     made_cameras = cameras()
     merged = merge_duplicate_materials()
@@ -1509,7 +1893,10 @@ def build():
                                    '15 and 5, the queue\'s nearest man past 0.95 across; (C) gates moved 0.5 m: 15 and 5, the same, the lantern '
                                    'hidden; (D) the first plan\'s spot in line with the outer pier, 0.2 m from the house fronts: inside the '
                                    'bank\'s bay window, everything hidden. Kept: (A).',
-            'w4_camera': 'in line with No. 2\'s inner hinge post: from the outer one the eight men stood one behind another and read as one',
+            'w4_camera': 'round 5: 0.2 m beside No. 2\'s inner hinge post\'s line, toward the gateway\'s middle (in line with the post, the '
+                         'back of the No. 2 board\'s "No." was cut by the frame\'s edge), sliding from 6.7 to 5.5 m from the gate (round 4: 7.2 to '
+                         '6.0); its corner\'s things stand where the inner pier hides them from W1, W2 and W3; the gateway crates are left out of '
+                         'its plate (works-shot.json w4.left_out: the film hides them on page 14)',
             'lane_head_corners': 'the drums stand in a flagged corner in front of each outer pier: along the house fronts\' line they hid '
                                  'the brazier from W1',
             'men_shadows': 'the men cast no long shadows (each has a small soft patch at his feet), so a state picture swaps only the men '
@@ -1530,7 +1917,11 @@ def build():
                        'would lie past 0.93 across in W1). The gate lamps hang on the outer piers\' inner faces and light only the gates, '
                        'chains, boards, men and ground. People at work show in both lit doorways (No. 1\'s from "go"). No. 1\'s looms are '
                        'chest-high with big driving wheels and cloth; both far walls are broken up. The pop-up crates stand in the gateway\'s '
-                       'middle; the handcart, loaded with crates, at the right pavement\'s kerb.'},
+                       'middle; the handcart, loaded with crates, at the right pavement\'s kerb. W4 (round 5, a second pass): a jacket with '
+                       'sleeves on a peg, a crate table under it with a flat cap, a tin mug and a WAGES envelope 2.6 times life size, all '
+                       'touching, on No. 2\'s inner pier where only W4 sees them; the No. 2 board lettered on its back; one warm pool of '
+                       'lamplight on that corner and the rest of the yard in the dusk; the gateway crates left out of W4\'s plate; W4 0.2 m '
+                       'beside the hinge post, sliding from 6.7 to 5.5 m from the gate.'},
         'views': {},
         'gates': gate_facts,
         'chimney_tops': {name: marker_spot(name) for name in ('no-1-chimney-top', 'no-2-chimney-a-top', 'no-2-chimney-b-top')},
@@ -1564,6 +1955,10 @@ def build():
                                           'windows, the doorway and the yard\'s light on the lane): the blend on "start"',
             'works-w2-slowed-state.png': 'W2 main plate, with the slowed helper plate where the eight men stand, the windows go dark and one of '
                                          'the two people at work inside goes (about 14% of the frame): page 12',
+            'works-w2-slowed-windows-state.png': ('W2 main plate, with the slowed helper plate only where two thirds of No. 2\'s windows go '
+                                                  'dark (mask works-w2-slowed-windows-mask.png, about 4.6% of the frame, kept 48 pixels clear '
+                                                  'of the men and the people at work; round 5): the 1.5 s blend on "slows" (page 12), before '
+                                                  'the time cut on "workers" to works-w2-slowed-state.png, whose windows are the same'),
             'works-w1-behind.png': 'W1 main plate, with the behind helper plate (the men left out, all else quiet) where the men stood '
                                    '(about 8% of the frame): the behind picture for page 3\'s slide, so what the men hid is the quiet '
                                    'works (the "men gone" and working pictures have No. 1\'s doorway or windows lit there)'},
@@ -1582,11 +1977,13 @@ def build():
     board_1, board_2 = furniture['no-1-board'], furniture['no-2-board']
     facts['letter_pixels'] = {
         'about': 'letter heights on the film\'s 1080 x 1920 frame at each view\'s composed spot (letters: gate boards 0.266 and 0.25 m, '
-                 'the bank\'s sign 0.305 m, PETROL 0.097 m, DIESEL 0.106 m)',
+                 'the bank\'s sign 0.305 m, PETROL 0.097 m, DIESEL 0.106 m, W4\'s WAGES 0.047 m)',
         'w3 bank sign': letter_pixels('w3', bank_facts['sign'], 0.305), 'w3 No. 1 board': letter_pixels('w3', board_1, 0.266),
         'w3 No. 2 board': letter_pixels('w3', board_2, 0.25), 'w1 No. 1 board': letter_pixels('w1', board_1, 0.266),
         'w2 No. 2 board': letter_pixels('w2', board_2, 0.25), 'w1 PETROL': letter_pixels('w1', furniture['no-1-drum-petrol'], 0.097),
-        'w2 PETROL': letter_pixels('w2', furniture['no-2-drum-petrol'], 0.097)}
+        'w2 PETROL': letter_pixels('w2', furniture['no-2-drum-petrol'], 0.097),
+        'w4 WAGES': letter_pixels('w4', yard['w4']['wages'], round(0.018 * W4_ENVELOPE_SCALE, 3)),
+        'w4 No. 2 board back': letter_pixels('w4', yard['w4']['board_back'], 0.25)}
     facts['men_seen'] = {'w1 composed': men_frame_facts('w1', 'composed', 'men-no-1'), 'w1 plate': men_frame_facts('w1', 'plate', 'men-no-1'),
                          'w3': men_frame_facts('w3', 'plate', 'men-no-1'), 'w2 composed (slowed)': men_frame_facts('w2', 'composed', 'men-no-2'),
                          'w4 composed (silhouettes)': men_frame_facts('w4', 'composed', 'men-no-2')}

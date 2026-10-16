@@ -18,11 +18,11 @@
  "plate_fov_degrees": 64.4,
  "decisions": {
   "w1_w2_camera_places": "Settled with the shot checker (round 3), four ways: (A) the pavement's middle, 1.1 m from the house fronts, gates 7 m apart: 12 problems in W1 and 4 in W2, the lines meeting on the gate (0.004 away), nothing past the phone buttons; (B) gates moved 0.9 m toward the lane's middle, camera in line with the outer pier: 15 and 5, the queue's nearest man past 0.95 across; (C) gates moved 0.5 m: 15 and 5, the same, the lantern hidden; (D) the first plan's spot in line with the outer pier, 0.2 m from the house fronts: inside the bank's bay window, everything hidden. Kept: (A).",
-  "w4_camera": "in line with No. 2's inner hinge post: from the outer one the eight men stood one behind another and read as one",
+  "w4_camera": "round 5: 0.2 m beside No. 2's inner hinge post's line, toward the gateway's middle (in line with the post, the back of the No. 2 board's \"No.\" was cut by the frame's edge), sliding from 6.7 to 5.5 m from the gate (round 4: 7.2 to 6.0); its corner's things stand where the inner pier hides them from W1, W2 and W3; the gateway crates are left out of its plate (works-shot.json w4.left_out: the film hides them on page 14)",
   "lane_head_corners": "the drums stand in a flagged corner in front of each outer pier: along the house fronts' line they hid the brazier from W1",
   "men_shadows": "the men cast no long shadows (each has a small soft patch at his feet), so a state picture swaps only the men and their feet (round 2: long shadows made the swap area 42% of the frame)",
   "round_4": "W1 and W2 stand 0.4 m toward the kerb from the pavement's middle (x -3.7 and 3.7): the nearest house front fills less of the frame's side and the lane head's corner shows. W3's eye is 5.6 m above the lane (the end terrace on a raised footway 1 m up), so the queue's tail, 6 m in front of W1's composed spot, reaches about 0.70 down in W3. No. 1's brazier stands against the outer pier with the stooped man at its front-left, the PETROL and DIESEL drums to its right with both words whole from W1; the queue stands along the kerb to the right of them, 1.1 m apart. No. 2's drums stand by its outer pier with a clear gap, both words whole from W2. The handcart is on the right pavement in W3's bottom third. No. 1's yard is in a faint cool light (its gate's bars show against it); a warm beam from No. 2's yard lies along the pavement in W2; one curtained window glows on each gate view's quiet side.",
-  "round_5": "W1 and W2 stand 3 m nearer the gates (plate spot 10.0 m and composed spot 8.8 m from the works wall, the slide still 1.2 m). The waiting men stand gathered in front of each shut gate, a loose crowd two deep, backs to the lane, with a thin rim of light from the yard and the gate lamp; at No. 1 the brazier stands against the right gate leaf with the stooped man at it, and the PETROL and DIESEL drums stand in front of the crowd's left end (at No. 2 its right end), so no man stands between them and the gate views or W3 (against the dividing wall, as round 4's check asked, they would lie past 0.93 across in W1). The gate lamps hang on the outer piers' inner faces and light only the gates, chains, boards, men and ground. People at work show in both lit doorways (No. 1's from \"go\"). No. 1's looms are chest-high with big driving wheels and cloth; both far walls are broken up. The pop-up crates stand in the gateway's middle; the handcart, loaded with crates, at the right pavement's kerb."
+  "round_5": "W1 and W2 stand 3 m nearer the gates (plate spot 10.0 m and composed spot 8.8 m from the works wall, the slide still 1.2 m). The waiting men stand gathered in front of each shut gate, a loose crowd two deep, backs to the lane, with a thin rim of light from the yard and the gate lamp; at No. 1 the brazier stands against the right gate leaf with the stooped man at it, and the PETROL and DIESEL drums stand in front of the crowd's left end (at No. 2 its right end), so no man stands between them and the gate views or W3 (against the dividing wall, as round 4's check asked, they would lie past 0.93 across in W1). The gate lamps hang on the outer piers' inner faces and light only the gates, chains, boards, men and ground. People at work show in both lit doorways (No. 1's from \"go\"). No. 1's looms are chest-high with big driving wheels and cloth; both far walls are broken up. The pop-up crates stand in the gateway's middle; the handcart, loaded with crates, at the right pavement's kerb. W4 (round 5, a second pass): a jacket with sleeves on a peg, a crate table under it with a flat cap, a tin mug and a WAGES envelope 2.6 times life size, all touching, on No. 2's inner pier where only W4 sees them; the No. 2 board lettered on its back; one warm pool of lamplight on that corner and the rest of the yard in the dusk; the gateway crates left out of W4's plate; W4 0.2 m beside the hinge post, sliding from 6.7 to 5.5 m from the gate."
  },
  "views": {
   "w3": {
@@ -89,24 +89,24 @@
   },
   "w4": {
    "plate": [
-    2.03,
-    29.5,
+    2.2,
+    29.0,
     1.72
    ],
    "composed": [
-    2.03,
-    28.3,
+    2.2,
+    27.8,
     1.72
    ],
    "subject": [
-    2.0,
-    22.3,
-    1.5
+    1.375,
+    22.970000000000002,
+    1.1
    ],
    "faces": "-y (down the lane)",
    "eye_height_metres": 1.7,
    "stands_on": "No. 2's yard",
-   "about": "No. 2's gate from inside its yard, looking out down the lane",
+   "about": "No. 2's gate from inside its yard, looking out down the lane: the jacket, cap, mug and WAGES of someone with a job, and the men waiting outside the half-shut gate",
    "camera_file": "works-camera-w4.json"
   }
  },
@@ -353,21 +353,92 @@
   0.0
  ],
  "w4": {
-  "jacket_and_cap": [
-   1.55,
-   22.831,
-   1.0
-  ],
   "upturned_crate": [
    2.05,
    23.22,
    0.52
   ],
-  "mug_and_wages": [
-   1.82,
-   23.17,
-   0.52
-  ]
+  "jacket_on_peg": [
+   1.375,
+   22.72,
+   1.61
+  ],
+  "jacket_box": [
+   [
+    1.094,
+    22.748,
+    0.779
+   ],
+   [
+    1.656,
+    22.908,
+    1.619
+   ]
+  ],
+  "crate_table": [
+   1.375,
+   23.38,
+   0.442
+  ],
+  "table_top": 0.864,
+  "cap": [
+   1.499,
+   23.24,
+   0.864
+  ],
+  "mug": [
+   1.171,
+   23.03,
+   0.864
+  ],
+  "wages": [
+   1.405,
+   22.941,
+   0.958
+  ],
+  "wages_box": [
+   [
+    1.257,
+    22.915,
+    0.864
+   ],
+   [
+    1.553,
+    22.973,
+    1.054
+   ]
+  ],
+  "lamp": {
+   "at": [
+    0.55,
+    24.55,
+    2.05
+   ],
+   "aim": [
+    1.65,
+    23.1,
+    0.55
+   ],
+   "energy": 340.0,
+   "cone_degrees": 58.0,
+   "blend": 0.85,
+   "colour": [
+    1.0,
+    0.56,
+    0.27
+   ]
+  },
+  "board_back": [
+   3.5,
+   22.037,
+   4.08
+  ],
+  "left_out": [
+   "no-2-crate-1",
+   "no-2-crate-2",
+   "no-2-crate-3"
+  ],
+  "about": "W4's corner on No. 2's inner pier (round 5): the jacket on its peg, the crate table under it with the cap, the mug and the WAGES envelope (2.6 times life size), the upturned crate by the hinge; one warm pool from a lamp out of the frame (light only); left_out: No. 2's gateway crates, not in the W4 plate, so the film hides them on page 14 (then projection.refresh())"
  },
  "men": [
   "man-1",
@@ -673,6 +744,11 @@
    32.2,
    3.9
   ],
+  "w4-corner-lamp": [
+   0.55,
+   24.55,
+   2.05
+  ],
   "no-1-men-rim-yard": [
    -4.7,
    23.9,
@@ -804,7 +880,7 @@
    "spill_2": 1.0
   },
   "w4": {
-   "about": "page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate",
+   "about": "page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate; one warm pool of lamplight on the jacket's corner, the rest of the yard in the dusk, the gateway crates taken in",
    "men_1": false,
    "men_2": true,
    "workers_1": 0,
@@ -820,7 +896,20 @@
    "gate_1": 0,
    "chained": true,
    "spill_1": 0.0,
-   "spill_2": 1.0
+   "spill_2": 1.0,
+   "spill_shares": {
+    "no-2-doorway-spill": 0.0,
+    "no-2-gateway-spill": 0.0,
+    "no-2-yard-spill": 0.0,
+    "no-2-gateway-beam": 0.0
+   },
+   "corner_lamp": true,
+   "left_out": [
+    "no-2-crate-1",
+    "no-2-crate-2",
+    "no-2-crate-3"
+   ],
+   "board_back": true
   }
  },
  "plates": {
@@ -870,7 +959,7 @@
    "view": "w4",
    "state": "w4",
    "no_2_men": false,
-   "what": "W4: inside No. 2's yard, no men (they are own-surface silhouettes), no gate leaves"
+   "what": "W4: inside No. 2's yard, no men (they are own-surface silhouettes), no gate leaves, no gateway crates; one warm pool of lamplight on the jacket's corner, the rest in the dusk"
   }
  },
  "state_pictures": {
@@ -878,17 +967,20 @@
   "works-w1-men-gone-state.png": "W1 main plate, with the men-gone helper plate where the men stood, where the cart doorway opened and where two of the men now stand at the looms inside (mask works-w1-men-gone-mask.png, about 12% of the frame, round 5): the time cut on \"go\"",
   "works-w1-working-state.png": "W1 main plate, with the working helper plate wherever they differ (about 74% of the frame: the windows, the doorway and the yard's light on the lane): the blend on \"start\"",
   "works-w2-slowed-state.png": "W2 main plate, with the slowed helper plate where the eight men stand, the windows go dark and one of the two people at work inside goes (about 14% of the frame): page 12",
+  "works-w2-slowed-windows-state.png": "W2 main plate, with the slowed helper plate only where two thirds of No. 2's windows go dark (mask works-w2-slowed-windows-mask.png, about 4.6% of the frame, kept 48 pixels clear of the men and the people at work; round 5): the 1.5 s blend on \"slows\" (page 12), before the time cut on \"workers\" to works-w2-slowed-state.png, whose windows are the same",
   "works-w1-behind.png": "W1 main plate, with the behind helper plate (the men left out, all else quiet) where the men stood (about 8% of the frame): the behind picture for page 3's slide, so what the men hid is the quiet works (the \"men gone\" and working pictures have No. 1's doorway or windows lit there)"
  },
  "letter_pixels": {
-  "about": "letter heights on the film's 1080 x 1920 frame at each view's composed spot (letters: gate boards 0.266 and 0.25 m, the bank's sign 0.305 m, PETROL 0.097 m, DIESEL 0.106 m)",
+  "about": "letter heights on the film's 1080 x 1920 frame at each view's composed spot (letters: gate boards 0.266 and 0.25 m, the bank's sign 0.305 m, PETROL 0.097 m, DIESEL 0.106 m, W4's WAGES 0.047 m)",
   "w3 bank sign": 29.0,
   "w3 No. 1 board": 14.7,
   "w3 No. 2 board": 13.8,
   "w1 No. 1 board": 50.0,
   "w2 No. 2 board": 47.0,
   "w1 PETROL": 22.1,
-  "w2 PETROL": 22.1
+  "w2 PETROL": 22.1,
+  "w4 WAGES": 16.0,
+  "w4 No. 2 board back": 71.6
  },
  "men_seen": {
   "w1 composed": [
@@ -1192,82 +1284,82 @@
   "w4 composed (silhouettes)": [
    {
     "name": "no-2-man-2",
-    "distance_metres": 6.77,
+    "distance_metres": 6.25,
     "film_frame_box": [
-     0.146,
-     0.475,
-     0.334,
-     0.715
+     0.16,
+     0.473,
+     0.361,
+     0.733
     ]
    },
    {
     "name": "no-2-man-1",
-    "distance_metres": 6.81,
+    "distance_metres": 6.3,
     "film_frame_box": [
-     0.34,
+     0.37,
      0.492,
-     0.51,
-     0.725
+     0.554,
+     0.744
     ]
    },
    {
     "name": "no-2-man-3",
-    "distance_metres": 7.09,
+    "distance_metres": 6.56,
     "film_frame_box": [
-     -0.034,
-     0.483,
-     0.165,
-     0.709
+     -0.035,
+     0.482,
+     0.179,
+     0.726
     ]
    },
    {
     "name": "no-2-man-4",
-    "distance_metres": 7.25,
+    "distance_metres": 6.72,
     "film_frame_box": [
-     -0.233,
-     0.479,
+     -0.251,
+     0.477,
      -0.013,
-     0.71
+     0.727
     ]
    },
    {
     "name": "no-2-man-5",
-    "distance_metres": 7.52,
+    "distance_metres": 7.02,
     "film_frame_box": [
-     0.398,
+     0.43,
      0.496,
-     0.554,
-     0.702
-    ]
-   },
-   {
-    "name": "no-2-man-6",
-    "distance_metres": 7.65,
-    "film_frame_box": [
-     0.275,
-     0.493,
-     0.431,
-     0.704
+     0.596,
+     0.717
     ]
    },
    {
     "name": "no-2-man-7",
-    "distance_metres": 7.65,
+    "distance_metres": 7.13,
     "film_frame_box": [
-     0.101,
-     0.488,
-     0.273,
-     0.689
+     0.11,
+     0.487,
+     0.293,
+     0.703
+    ]
+   },
+   {
+    "name": "no-2-man-6",
+    "distance_metres": 7.14,
+    "film_frame_box": [
+     0.296,
+     0.492,
+     0.461,
+     0.719
     ]
    },
    {
     "name": "no-2-man-8",
-    "distance_metres": 7.95,
+    "distance_metres": 7.42,
     "film_frame_box": [
-     -0.232,
-     0.478,
-     -0.031,
-     0.692
+     -0.248,
+     0.477,
+     -0.032,
+     0.706
     ]
    }
   ]
@@ -1290,13 +1382,13 @@
   },
   "works-set-props.glb": {
    "holds": "the props and No. 1's seven waiting men (in the paintings; the men are hidden when they go in)",
-   "objects": 119,
-   "megabytes": 38.9
+   "objects": 123,
+   "megabytes": 39.3
   },
   "works-signs.glb": {
-   "holds": "own surfaces: the lettered things (gate boards, drums, the bank's sign and plate)",
-   "objects": 29,
-   "megabytes": 7.2
+   "holds": "own surfaces: the lettered things (gate boards, No. 2's with its lettered back for W4, drums, the bank's sign and plate)",
+   "objects": 32,
+   "megabytes": 7.3
   },
   "works-gates.glb": {
    "holds": "own surfaces, never in a plate: the gate leaves (no-1-gate, no-2-gate) and No. 1's chain (no-1-chain)",

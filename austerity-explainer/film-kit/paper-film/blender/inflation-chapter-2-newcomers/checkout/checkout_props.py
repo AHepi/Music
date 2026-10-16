@@ -127,7 +127,7 @@ def surface(name, poly_haven_id, tile, tint=None, roughness=0.7, metallic=0.0, n
 def steel():
     """Brushed stainless steel (plain: Poly Haven's metal_plate is a diamond tread plate, which read as a floor plate on
     the belt's rails)."""
-    return plain('brushed-steel', (0.52, 0.53, 0.54), roughness=0.36, metallic=0.9)
+    return plain('brushed-steel', (0.42, 0.43, 0.44), roughness=0.55, metallic=0.85)
 
 
 def dark_steel():
@@ -268,11 +268,12 @@ def face_grid(name, rows, material, u_range, v_range, collection_name, offset=0.
     return part
 
 
-def printed_face(name, rows, picture_file, parent, roughness=0.7, margin=0.03, collection_name='checkout'):
+def printed_face(name, rows, picture_file, parent, roughness=0.7, margin=0.03, collection_name='checkout', offset=0.0006):
     """A printed face (a label, a wrapper, a bag's front) through rows of points: the whole picture as an ordinary
     surface ('NAME-print', painted like the rest of the set), and over it, a hair in front, just the words with a small
     margin round them as their own lettered surface ('NAME-lettering' in the signs collection, material
-    'PICTURE-lettering'), so the shot checker and the film treat exactly the words as the lettering."""
+    'PICTURE-lettering'), so the shot checker and the film treat exactly the words as the lettering. offset: how far in
+    front the words stand (0.6 mm on a grocery; more on a far fascia, where so small a step can't be told apart)."""
     stem = picture_file.rsplit('.', 1)[0]
     whole = face_grid(f'{name}-print', rows, picture(f'{stem}-print', picture_file, roughness=roughness), (0.0, 1.0), (0.0, 1.0), collection_name,
                       offset=0.0)
@@ -280,7 +281,7 @@ def printed_face(name, rows, picture_file, parent, roughness=0.7, margin=0.03, c
     left, top, right, bottom = ink_box(picture_file)
     words = face_grid(f'{name}-lettering', rows, picture(f'{stem}-lettering', picture_file, roughness=roughness),
                       (max(0.0, left - margin), min(1.0, right + margin)), (max(0.0, 1 - bottom - margin * 2), min(1.0, 1 - top + margin * 2)),
-                      'signs', offset=0.0006)
+                      'signs', offset=offset)
     words.parent = parent
     return whole, words
 
@@ -368,12 +369,12 @@ def counter(name, x_left, x_right, y_start, y_end, with_belt=True, ledge=None, c
     glass. ledge (y from, y to, x): the counter is wider on the shoppers' side there, out to x (the packing ledge past the
     belt's end, where the newspaper stand and the card terminal stand). Returns the counter object (and the belt's)."""
     b = kit.MeshBuilder()
-    top_material = picture('counter-top', 'counter-laminate.jpg', tile=0.8, tint=(0.30, 0.30, 0.30), roughness=0.7)
+    top_material = picture('counter-top', 'counter-laminate.jpg', tile=0.8, tint=(0.34, 0.34, 0.34), roughness=0.7)
     if ledge:
         ledge_from, ledge_to, ledge_x = ledge
         b.box((x_right - 0.02, ledge_from + 0.02, 0.0), (ledge_x - 0.02, ledge_to - 0.02, 0.10), kick_plate())
         b.box((x_right, ledge_from, 0.10), (ledge_x, ledge_to, COUNTER_TOP - 0.03), laminate())
-        b.box((x_right, ledge_from, COUNTER_TOP - 0.03), (ledge_x, ledge_to, COUNTER_TOP), top_material)
+        b.box((x_right, ledge_from, COUNTER_TOP - 0.03), (ledge_x, ledge_to, COUNTER_TOP), wood())      # the packing ledge's top: ash
         b.box((ledge_x - 0.005, ledge_from, COUNTER_TOP - 0.05), (ledge_x + 0.02, ledge_to, COUNTER_TOP + 0.004), wood())
         for y in (ledge_from, ledge_to):
             b.box((x_right, y - 0.012, COUNTER_TOP - 0.05), (ledge_x + 0.02, y + 0.012, COUNTER_TOP + 0.004), wood())
@@ -408,9 +409,11 @@ def counter(name, x_left, x_right, y_start, y_end, with_belt=True, ledge=None, c
     for y, sign_ in ((BELT_START, -1), (BELT_END, 1)):
         belt.rod((BELT_LEFT, y + sign_ * 0.012, BELT_TOP - 0.012), (BELT_RIGHT, y + sign_ * 0.012, BELT_TOP - 0.012), 0.013, rubber, sides=10)
         belt.rod((BELT_LEFT - 0.03, y + sign_ * 0.035, COUNTER_TOP - 0.004), (BELT_RIGHT + 0.03, y + sign_ * 0.035, COUNTER_TOP - 0.004), 0.008, steel(), sides=10)
+    # the rails: satin steel, scuffed (a polished rail mirrored the ceiling's light as a bright stripe up the frame)
+    rail = plain('rail-steel', (0.22, 0.22, 0.23), roughness=0.7, metallic=0.5)
     for x0, x1 in ((BELT_LEFT - 0.04, BELT_LEFT), (BELT_RIGHT, BELT_RIGHT + 0.04)):
-        belt.box((x0, BELT_START - 0.03, COUNTER_TOP - 0.06), (x1, BELT_END + 0.05, RAIL_TOP), steel())
-        belt.box((x0 - 0.002, BELT_START - 0.03, RAIL_TOP), (x1 + 0.002, BELT_END + 0.05, RAIL_TOP + 0.004), steel())
+        belt.box((x0, BELT_START - 0.03, COUNTER_TOP - 0.06), (x1, BELT_END + 0.05, RAIL_TOP), rail)
+        belt.box((x0 - 0.002, BELT_START - 0.03, RAIL_TOP), (x1 + 0.002, BELT_END + 0.05, RAIL_TOP + 0.004), rail)
     belt_part = finish(belt, f'{name}-belt', collection_name)
     # the scanner's glass, dark, flush in the top
     glass = kit.MeshBuilder()
@@ -518,7 +521,7 @@ def milk_bottle(name, collection_name='checkout'):
     """A two-litre plastic milk bottle: a rounded square body, shoulders, a neck and a dark cap, a moulded handle at
     one back corner, and its printed sleeve (MILK, its own lettered surface) high on the body, centred on its front
     (-y)."""
-    body_material = plain('milk-bottle-plastic', (0.56, 0.57, 0.56), roughness=0.4, tile=0.3)
+    body_material = plain('milk-bottle-plastic', (0.40, 0.41, 0.40), roughness=0.45, tile=0.3)
     half = 0.056
     profile = [(0.0, 0.70, 4.0), (0.004, 0.97, 4.0), (0.012, 1.0, 4.5), (0.245, 1.0, 4.5), (0.272, 0.86, 3.6), (0.292, 0.52, 2.6),
                (0.302, 0.30, 2.0), (0.315, 0.29, 2.0)]
@@ -561,7 +564,7 @@ def cheese_block(name, collection_name='checkout'):
     """A block of mild cheese (pale, waxy) lying flat, its cream label CHEESE on its long front face (-y, its own lettered
     face)."""
     b = kit.MeshBuilder()
-    cheese = plain('cheese', (0.78, 0.58, 0.30), roughness=0.4, tile=0.2)
+    cheese = plain('cheese', (0.52, 0.37, 0.17), roughness=0.5, tile=0.2)
     length, width, height = 0.20, 0.095, 0.05
     b.box((-length / 2, -width / 2, 0), (length / 2, width / 2, height), cheese)
     part = finish(b, name, collection_name)
@@ -572,12 +575,29 @@ def cheese_block(name, collection_name='checkout'):
 
 
 def divider_bar(name, length=0.46, collection_name='checkout'):
-    """The grey plastic divider bar that lies across the belt between one shopper's things and the next: a long
-    three-sided bar."""
+    """The grey plastic divider bar that lies across the belt between one shopper's things and the next: a long bar,
+    flat underneath, its ridge toward its back (+y), so its back stands nearly upright against what it divides off."""
     b = kit.MeshBuilder()
-    outline = [(-0.02, 0.0), (0.02, 0.0), (0.003, 0.036), (-0.003, 0.036)]
+    outline = [(-0.024, 0.0), (0.020, 0.0), (0.016, 0.05), (0.010, 0.05)]
     b.prism(outline, -length / 2, length / 2, plain('divider-plastic', (0.13, 0.135, 0.14), roughness=0.45), axis='x')
     return finish(b, name, collection_name)
+
+
+def divider_tray(name, collection_name='checkout'):
+    """A shallow steel tray on the counter by the belt's loading end with two spare divider bars in it (the way shoppers
+    find them). Origin: the tray's middle on the counter top; the bars lie along y."""
+    b = kit.MeshBuilder()
+    rail = plain('rail-steel', (0.22, 0.22, 0.23), roughness=0.7, metallic=0.5)
+    b.box((-0.05, -0.26, 0.0), (0.05, 0.26, 0.006), rail)
+    for x in (-0.05, 0.05):
+        b.box((x - 0.003, -0.26, 0.0), (x + 0.003, 0.26, 0.03), rail)
+    tray = finish(b, name, collection_name)
+    for i, x in enumerate((-0.022, 0.022)):
+        bar = divider_bar(f'{name}-bar-{i + 1}', length=0.46, collection_name=collection_name)
+        bar.parent = tray
+        bar.location = (x, 0.0, 0.006)
+        bar.rotation_euler = Euler((0, 0, math.radians(90)))
+    return tray
 
 
 # ---------------------------------------------------------------------------------------------- the newspaper bill
@@ -654,7 +674,7 @@ def card_terminal(name, collection_name='checkout'):
             head.box((0.0, y - 0.009, z - 0.007), (0.004, y + 0.009, z + 0.007), plain('terminal-key', (0.16, 0.165, 0.17), roughness=0.6))
     terminal = finish(head, f'{name}-head', collection_name)
     terminal.parent = post
-    terminal.location = (0.035, 0, 0.27)
+    terminal.location = (0.035, 0, 0.245)
     terminal.rotation_euler = Euler((0, math.radians(-35), 0))     # its face tipped up toward +x
     return post
 
@@ -736,7 +756,7 @@ def bag_rack(name, length=1.8, bags=6, collection_name='checkout'):
         b.rod((0, y, 0.025), (0, y, rail + 0.02), 0.014, dark_steel(), sides=8)
     b.rod((0, 0, rail), (0, length, rail), 0.011, steel(), sides=8)
     rack = finish(b, name, collection_name)
-    shades = [(0.42, 0.40, 0.36), (0.30, 0.30, 0.30), (0.40, 0.37, 0.32), (0.24, 0.25, 0.26), (0.44, 0.42, 0.39), (0.34, 0.31, 0.28)]
+    shades = [(0.32, 0.30, 0.27), (0.24, 0.24, 0.24), (0.30, 0.28, 0.24), (0.20, 0.21, 0.22), (0.33, 0.32, 0.29), (0.26, 0.24, 0.22)]
     step = length / bags
     for i in range(bags):
         y = step * (i + 0.5)
@@ -826,10 +846,17 @@ def petrol_station(name, collection_name='outside'):
     lit = finish(under_side, f'{name}-underside', collection_name)
     lit.parent = station
     # the fascia's lettering on the front face (-y)
-    fascia_material = picture('petrol-fascia-lettering', 'petrol-fascia.png', roughness=0.6, glow=0.12)
-    front = label_quad(f'{name}-fascia-lettering', [(-4.5, -0.012, under + 0.0), (4.5, -0.012, under + 0.0), (4.5, -0.012, under + fascia), (-4.5, -0.012, under + fascia)],
-                       fascia_material, 'signs')
-    front.parent = station
+    # the fascia's front face: the whole picture as the fascia (painted with the set), its words a hair in front as their
+    # own lettered surface (PETROL · DIESEL, with a small margin)
+    y = -0.012
+    whole, words = printed_face(f'{name}-fascia', [[(-4.5, y, under), (4.5, y, under)], [(-4.5, y, under + fascia), (4.5, y, under + fascia)]],
+                                'petrol-fascia.png', station, roughness=0.6, margin=0.01, collection_name=collection_name, offset=0.03)
+    for part in (whole, words):
+        material = part.data.materials[0]
+        shader = material.node_tree.nodes['Principled BSDF']
+        texture = next(n for n in material.node_tree.nodes if n.type == 'TEX_IMAGE')
+        material.node_tree.links.new(texture.outputs['Color'], shader.inputs['Emission Color'])
+        shader.inputs['Emission Strength'].default_value = 0.12      # lit a little from inside, dim
     # the price board on its pylon, turned edge-on to the shop: its faces look along x
     pylon = kit.MeshBuilder()
     pylon.box((-0.12, -0.9, 0.0), (0.12, 0.9, 6.0), grey)

@@ -1,0 +1,177 @@
+{
+ "about": "The checkout (assemble_checkout.py; plan 34 part 1 \"B. The checkout\"): where things are, Blender space (x, y, z), metres; three.js is (x, z, -y). x across the lane (the shoppers' side at plus x), y along the belt away from the queue, z up from the shop's floor.",
+ "film_fov_degrees": 60.4,
+ "plate_fov_degrees": 64.4,
+ "views": {
+  "c1": {
+   "plate": [
+    -0.16,
+    -1.1,
+    1.6
+   ],
+   "composed": [
+    -0.16,
+    -0.4,
+    1.6
+   ],
+   "subject": [
+    0.15,
+    2.6,
+    1.5
+   ],
+   "faces": "+y (along the belt)",
+   "eye_height_metres": 1.6,
+   "stands_on": "the shop's floor, the next place in the queue",
+   "about": "the basket on the belt and the newspaper bill beyond it, from the next place in the queue",
+   "camera_file": "checkout-camera-c1.json",
+   "slide": {
+    "from": "plate",
+    "to": "composed",
+    "metres": 0.7,
+    "nearer_times": 1.292
+   }
+  }
+ },
+ "spots": {
+  "bill": [
+   0.15,
+   2.6,
+   1.5
+  ],
+  "bill-left-edge": [
+   -0.16,
+   2.6,
+   1.6
+  ],
+  "bill-words": [
+   0.15,
+   2.6,
+   1.51
+  ],
+  "basket": [
+   0.086,
+   2.0,
+   1.324
+  ],
+  "bread": [
+   -0.106,
+   2.061,
+   1.315
+  ],
+  "milk": [
+   0.084,
+   2.083,
+   1.324
+  ],
+  "butter": [
+   -0.064,
+   1.928,
+   1.144
+  ],
+  "cheese": [
+   0.091,
+   1.928,
+   1.142
+  ],
+  "bananas": [
+   0.266,
+   2.008,
+   1.203
+  ],
+  "apples": [
+   0.08,
+   1.918,
+   0.984
+  ],
+  "kiwifruit": [
+   0.006,
+   2.02,
+   1.16
+  ],
+  "card-terminal": [
+   0.716,
+   3.08,
+   1.223
+  ],
+  "checkout-sign": [
+   0.25,
+   4.4,
+   2.72
+  ],
+  "petrol-fascia": [
+   -4.5,
+   31.0,
+   4.9
+  ],
+  "divider": [
+   0.03,
+   1.845,
+   0.935
+  ]
+ },
+ "lettering": {
+  "materials": [
+   "bill-lettering",
+   "bread-bag-lettering",
+   "butter-wrapper-lettering",
+   "checkout-sign-lettering",
+   "cheese-label-lettering",
+   "milk-label-lettering",
+   "petrol-fascia-lettering"
+  ],
+  "about": "own surfaces: every lettered face keeps its own picture in the film (the painter garbles small print)"
+ },
+ "letter_pixels": {
+  "about": "capital letters' height on the film's 1080 x 1920 frame at the composed spot (and at the plate spot)",
+  "bill big words": 55.0,
+  "bill big words, plate spot": 44.6,
+  "bill paper name": 17.1,
+  "CHECKOUT": 37.8,
+  "PETROL \u00b7 DIESEL": 22.1
+ },
+ "warm_lamp": {
+  "at": [
+   0.4,
+   1.45,
+   3.35
+  ],
+  "aim": [
+   0.5,
+   2.15,
+   0.9
+  ]
+ },
+ "states": {
+  "main": "everything",
+  "behind": "the basket, its groceries and the divider bar left out: what they hide, for the behind picture"
+ },
+ "plates": {
+  "checkout-c1-plate": {
+   "state": "main",
+   "what": "C1: the basket on the belt, the bill beyond, from the plate's spot (3.1 m from the basket)"
+  },
+  "checkout-c1-behind-plate": {
+   "state": "behind",
+   "what": "C1 helper: the same with the basket, its groceries and the divider left out (for the behind picture)"
+  }
+ },
+ "decisions": {
+  "camera": "in line with the bill's left edge (x -0.16), facing straight along the belt, so the belt's lines meet on that edge at eye height, just under the bill's first line; the next shopper waits at the counter's loading end. The story group then stands right of the frame's middle and the quiet side (the operator's side, the aisles' ends, the petrol station through the window) is on the left, as at the notice corner; with the bill on the left (round 5's first try) the bill and the basket filled the bottom-left quarter where the eye enters, the black belt lay across it and the right half was bare floor",
+  "bill": "on a wire stand on the counter at the end of the belt, 0.44 m beyond the basket's far rim: its letters 0.1 m tall come out about 55 pixels tall at the composed spot; its lowest line stays above everything in the basket",
+  "groceries": "heaped above the rim, every lettered face turned to the queue and above the rim, so each word shows whole",
+  "top band": "the ceiling rows nearer the queue than y 6.0 are off for closing time: the top band is dark ceiling",
+  "warm lamp": "a spot in the dark ceiling over the belt, just above the frame, aimed between the basket and the bill"
+ },
+ "files": {
+  "checkout-set.glb": {
+   "holds": "the shop, the three lanes, the story group, the aisles' ends and the outside (the painting is shone onto it)",
+   "objects": 229,
+   "megabytes": 23.2
+  },
+  "checkout-signs.glb": {
+   "holds": "own surfaces: every lettered face (the bill, BREAD, MILK, BUTTER, CHEESE, CHECKOUT, PETROL \u00b7 DIESEL)",
+   "objects": 8,
+   "megabytes": 1.9
+  }
+ }
+}

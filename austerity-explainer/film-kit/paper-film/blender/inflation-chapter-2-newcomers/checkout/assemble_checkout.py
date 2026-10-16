@@ -14,18 +14,23 @@
 #     with its MILK sleeve, BUTTER, CHEESE, kiwifruit, apples, a lemon, avocados and a bunch of bananas over the rim), the
 #     divider bar against the basket's front, the newspaper bill in its wire stand at the end of the belt, its bottom edge
 #     behind the basket's far side (THE EVENING LAMP, an invented paper; NEW MONEY: PRICES WILL GO UP in letters 0.1 m
-#     tall), and the card terminal beyond, just behind the bill's right edge
-#   - the warm lamp over the belt (out of the frame, above it) that makes the basket and the bill the brightest things
+#     tall), and the card terminal beyond, on the packing ledge just right of the bill (checked as a background prop)
+#   - the warm lamp over the belt (out of the frame, above it), its pool on the basket, the counter and the ledge; the bill
+#     lit by its own two lights (light linking): cool from the shop's lights above on its top, warm from the pool below on
+#     its bottom (composing rule 6), so the bill is the brightest thing and the basket the next
 #   - the ends of two aisles beyond the left lane (Poly Haven's steel frame shelves with boxes)
 #   - outside, through the window: the car park, the road and, across it, small and dim, a petrol station's canopy with
 #     its fascia PETROL · DIESEL (no brand; its price board edge-on), and a few houses' lit windows beyond
 # No people, no digits anywhere, no prices, no brands or chain colours: neutral greys and wood.
 #
 # The view C1 (the camera level, never turning, facing straight along the belt): where the next shopper in the queue
-# stands, in line with the bill's right edge (x = CAMERA_X), eye 1.6 m above the floor; 3.1 m from the basket at the
-# plate's spot and 2.4 m at the composed spot (page 1 slides in 0.7 m, 1.29 times nearer; page 16 slides back out).
-# The belt's lines meet at the bill's right edge at eye height (on its first line, NEW MONEY:), just above the basket;
-# the basket sits about 0.72 down the frame at the composed spot.
+# stands at the counter's loading end, in line with the bill's left edge (x = CAMERA_X), eye 1.6 m above the floor; 3.1 m
+# from the basket at the plate's spot and 2.4 m at the composed spot (page 1 slides in 0.7 m, 1.29 times nearer; page 16
+# slides back out). The belt's lines meet at the bill's left edge at eye height (just under NEW MONEY:), just above the
+# basket; at the composed spot the story group (bill, basket, divider) fills 0.43 to 0.77 down and 0.47 to 0.84 across,
+# right of the frame's middle, and the quiet side (the operator's side, the aisles' ends, the petrol station through the
+# window) is on the left, as at the notice corner. The shot checker finds no problem there (check file
+# examples/inflation-chapter-2-newcomers/checkout-c1-shot-check.json).
 #
 # Layout (metres, Blender, z up): x across the lane (the shoppers' side at plus x); y along the belt, away from the
 # queue (0 at the counter's loading end); z up from the shop's floor. In three.js a point (x, y, z) is (x, z, -y).
@@ -84,21 +89,25 @@ BILL_FACE_Y = 2.60                        # the bill's face, 0.44 m beyond the b
 CAMERA_X = -0.16                          # in line with the bill's left edge
 BILL_LEFT = CAMERA_X                      # the bill's left edge (the bill reaches 0.62 m to the right of it)
 LEDGE = (2.45, 3.40, 0.78)                # the counter's packing ledge on the shoppers' side: y from, y to, x
-TERMINAL_AT = (0.43, 3.08)                # the card terminal's post, on the ledge, just past the bill's right edge
+TERMINAL_AT = (0.69, 3.08)                # the card terminal's post, on the ledge, just right of the bill (a clear gap)
+DIVIDER_TRAY = (-0.38, 0.30)              # the spare divider bars' tray, on the counter's operator side by the loading end
 TILL_AT = (-0.40, 3.10)                   # the till's post, on the counter's operator edge
 STOOL_AT = (-0.95, 4.00)
-BAG_RACK = (1.35, 2.60, 1.80)             # x, the near end's y, its length (along the shoppers' side of the lane)
+BAG_RACK = (1.80, 2.60, 1.80)             # x, the near end's y, its length (along the shoppers' side of the lane)
 SIGN_AT = (0.25, 4.40)                    # the hanging CHECKOUT sign, over the end of the counter, above the bill
 FLOOR_EDGES = (-8.0, 6.0, -4.0)           # the room: left wall, right wall, back wall (behind the queue)
 FRONT_WALL_Y = 7.80                       # the shop front with its window
 CEILING = 3.40
 WINDOW = (-5.6, 4.6, 0.45, 2.75)          # the window: left, right, bottom, top
-# the window's mullions: none between x -2.3 and -0.4, where PETROL · DIESEL shows through it from the plate spot to the
+# the window's mullions: none between x -2.6 and -0.4, where PETROL · DIESEL shows through it from the plate spot to the
 # composed spot (the ones at 0.0 and 1.4 stand behind the bill)
-MULLIONS = (-5.6, -4.0, -2.5, 0.0, 1.4, 3.0, 4.6)
+MULLIONS = (-5.6, -4.2, -2.9, 0.0, 1.4, 3.0, 4.6)
 LIGHT_ROWS_Y = (-2.8, -0.4, 2.0, 4.4, 6.4)
 LIGHT_ROWS_X = (-4.2, -1.8, 0.6, 3.0)
 LIT_FROM_Y = 6.0                          # the ceiling rows nearer than this are switched off (closing time)
+# no fitting where the warm lamp hangs over the belt (lit from beside by the lamp, it glowed warm in the top band of the
+# plate, where the typed words go)
+NO_FITTING = {(0.6, 2.0), (0.6, -0.4)}
 NEIGHBOUR_LANES = (-1.55, 1.90)           # how far the lanes on each side are moved across (their counters, no belts)
 AISLE_ENDS = ((-2.0, 6.6), (-3.3, 6.6))    # the two aisles' ends beyond the left lane (x middle, y of their faces)
 PETROL_AT = (-4.5, 31.0)                  # the petrol station's canopy: the middle of its front edge (on the quiet side)
@@ -259,6 +268,8 @@ def ceiling_lights():
     for y in LIGHT_ROWS_Y:
         lit = y >= LIT_FROM_Y
         for x in LIGHT_ROWS_X:
+            if (x, y) in NO_FITTING:
+                continue
             b = kit.MeshBuilder()
             b.box((x - 0.50, y - 0.11, FITTING_HEIGHT), (x + 0.50, y + 0.11, FITTING_HEIGHT + 0.05), batten)
             for dx in (-0.4, 0.4):
@@ -409,10 +420,11 @@ def basket_and_groceries():
     bananas = place('bananas', (0, 0, 0), name='basket-bananas', collection_name='checkout', keep={'bananas_bunch'})
     for o in bananas.children:
         o.location.x -= 0.233        # the bunch's own middle onto the holder (Poly Haven lays it 0.23 m from the model's middle)
-    put(bananas, (0.205, 0.035, 0.150), tilt=(0, -24, 0), turn=90)
+    put(bananas, (0.225, 0.035, 0.150), tilt=(0, -24, 0), turn=90)
     made['bananas'] = bananas
     divider = props.divider_bar('divider-bar')
-    divider.location = (x0, y0 - props.BASKET['base'][1] / 2 - 0.025, base_z)
+    # against the basket's front: its back edge just clear of the basket's base frame, its ridge touching the front wires
+    divider.location = (x0, y0 - props.BASKET['base'][1] / 2 - 0.023, base_z)
     made['divider'] = divider
     return made
 
@@ -428,6 +440,8 @@ def story():
     till_ = props.till('till')
     till_.location = (TILL_AT[0], TILL_AT[1], props.COUNTER_TOP)
     made['till'] = till_
+    tray = props.divider_tray('divider-tray')
+    tray.location = (DIVIDER_TRAY[0], DIVIDER_TRAY[1], props.COUNTER_TOP)
     stool = props.operator_stool('operator-stool')
     stool.location = (STOOL_AT[0], STOOL_AT[1], 0.0)
     rack = props.bag_rack('bag-rack', length=BAG_RACK[2])
@@ -448,8 +462,9 @@ def story():
 # The bill's own light, reaching only it (light linking, as the notice corner's warm light reaches only the notice): a cool
 # white from the shop's lights above on its top, and warm from the lamp's pool on the counter below it (rule 6: lit from
 # below, cool at the top and warm at the bottom)
-BILL_LIGHTS = {'cool': 90.0, 'warm': 30.0}
-WARM_LAMP = {'at': (0.30, 1.45, CEILING - 0.05), 'aim': (0.35, 2.00, 0.90), 'energy': 290.0, 'colour': (1.0, 0.50, 0.22), 'cone': (110, 0.9)}
+BILL_LIGHTS = {'cool': 140.0, 'warm': 10.0}
+COUNTER_WARM = 200.0                      # the warm lamp's pool on the counter (counter-warm)
+WARM_LAMP = {'at': (0.40, 1.45, CEILING - 0.05), 'aim': (0.50, 2.15, 0.90), 'energy': 300.0, 'colour': (1.0, 0.46, 0.19), 'cone': (110, 0.9)}
 
 
 def lights():
@@ -469,13 +484,22 @@ def lights():
     dressing.light_reaches(made['warm-lamp'], [bpy.data.objects['bill-stand-bill-lettering']], only=False)
     bill = bpy.data.objects['bill-stand-bill-lettering']
     made['bill-cool'] = light('bill-cool', 'SPOT', (BILL_LEFT + 0.31, 0.9, CEILING - 0.3), BILL_LIGHTS['cool'], (0.80, 0.87, 1.0),
-                              target=(BILL_LEFT + 0.31, BILL_FACE_Y, 2.15), spot=(20, 1.0), soft=0.3)
+                              target=(BILL_LEFT + 0.31, BILL_FACE_Y, 1.95), spot=(30, 0.5), soft=0.3)
     dressing.light_reaches(made['bill-cool'], [bill])
     made['bill-warm'] = light('bill-warm-bounce', 'AREA', (BILL_LEFT + 0.31, BILL_FACE_Y - 0.30, props.COUNTER_TOP + 0.08), BILL_LIGHTS['warm'],
-                              (1.0, 0.45, 0.18), target=(BILL_LEFT + 0.31, BILL_FACE_Y, 1.20), size=(0.7, 0.15))
+                              (1.0, 0.40, 0.14), target=(BILL_LEFT + 0.31, BILL_FACE_Y, 1.22), size=(0.7, 0.15))
+    made['bill-warm'].data.spread = math.radians(50)       # a narrow spread: it warms the bill's lower part, not its top
     dressing.light_reaches(made['bill-warm'], [bill])
     made['fill'] = light('ceiling-fill', 'AREA', (-1.0, 2.0, CEILING - 0.1), 50.0, (0.80, 0.86, 0.95), target=(-1.0, 2.0, 0.0), size=(11.0, 11.0))
-    made['bounce'] = light('bounce-to-ceiling', 'AREA', (0.0, 1.5, 1.0), 18.0, (0.95, 0.90, 0.85), target=(0.0, 1.5, 5.0), size=(6.0, 8.0))
+    # the lamp's warm pool on the counter: the same lamp's light on the counter's top, the belt and the ledge (it reaches
+    # only them, so the basket and the bill keep their balance: the bill the brightest thing, lit cool above and warm below)
+    made['counter-warm'] = light('counter-warm', 'SPOT', (0.55, 1.20, CEILING - 0.05), COUNTER_WARM, WARM_LAMP['colour'], target=(0.65, 1.90, 0.90),
+                                 spot=(85, 0.9), soft=0.06)
+    dressing.light_reaches(made['counter-warm'], [bpy.data.objects[name] for name in ('counter', 'counter-belt')])
+    # a soft cool light over the operator's side (the far rows' light reaching it), so its floor and stool are not a dark
+    # hole at the left where the eye enters
+    made['operator-side'] = light('operator-side-light', 'AREA', (-1.1, 3.2, CEILING - 0.1), 45.0, (0.85, 0.90, 1.0), target=(-1.1, 3.2, 0.0), size=(1.6, 3.0))
+    made['bounce'] = light('bounce-to-ceiling', 'AREA', (0.0, 1.5, 1.0), 8.0, (0.95, 0.90, 0.85), target=(0.0, 1.5, 5.0), size=(6.0, 8.0))
     made['canopy'] = light('canopy-light', 'AREA', (PETROL_AT[0], PETROL_AT[1] + 4.0, -SHOP_FLOOR_STEP + 4.5), 300.0, (0.92, 0.95, 1.0),
                            target=(PETROL_AT[0], PETROL_AT[1] + 4.0, 0.0), size=(11.5, 7.5))
     return made
@@ -652,7 +676,7 @@ def build():
         'views': {'c1': {'plate': [round(v, 3) for v in camera_spot('plate')], 'composed': [round(v, 3) for v in camera_spot('composed')],
                          'subject': [round(v, 3) for v in view_spots()['c1']['subject']], 'faces': '+y (along the belt)', 'eye_height_metres': EYE,
                          'stands_on': 'the shop\'s floor, the next place in the queue', 'about': view_spots()['c1']['about'],
-                         'camera_file': 'checkout-camera-c1.json', 'slide': {'from': 'plate', 'to': 'composed', 'metres': PLATE_DISTANCE - COMPOSED_DISTANCE,
+                         'camera_file': 'checkout-camera-c1.json', 'slide': {'from': 'plate', 'to': 'composed', 'metres': round(PLATE_DISTANCE - COMPOSED_DISTANCE, 3),
                                                                              'nearer_times': round(PLATE_DISTANCE / COMPOSED_DISTANCE, 3)}}},
         'spots': spots,
         'lettering': {'materials': sorted({m.name for o in bpy.data.collections['signs'].objects if o.type == 'MESH' for m in o.data.materials}),

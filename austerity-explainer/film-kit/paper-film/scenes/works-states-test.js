@@ -7,16 +7,19 @@
 //                 on the pavement. Until then the bank's sign is dim, as on every page before 9.
 //   state=slows   page 12's shot 12b (W2, the composed frame, from "In", 294.8 s): the tag FLAT OUT, which becomes THE
 //                 FLAT-OUT FACTORY SLOWS on "slows" as the gate swings half shut, the smoke thins to one chimney (the
-//                 heavy puffs drift away) and two thirds of the lit windows fade; on "workers" a time cut to the slowed
-//                 state picture with No. 2's eight men waiting (their figures join the set, as No. 1's are on page 3);
-//                 MORE WORKERS AT THE GATE on "gate".
+//                 heavy puffs drift away) and two thirds of the lit windows dim (a 1.5 s blend in five steps to the
+//                 windows-only slowed picture, round 5); on "workers" a time cut to the slowed state picture with No. 2's
+//                 eight men waiting (their figures join the set, as No. 1's are on page 3); MORE WORKERS AT THE GATE on
+//                 "gate".
 //   state=w4      page 14's shot 14a (W4): No. 2's gate half shut from inside its yard, the eight men outside as dark
 //                 silhouettes (own surfaces, never painted); one slide of 1.2 m toward the gate from "With" to "says".
+//                 Round 5: the jacket's corner in one pool of lamplight, the rest in the dusk; No. 2's gateway crates
+//                 are hidden (works-shot.json w4.left_out: they are not in the W4 plate).
 // For page 12: the plan dims two thirds of No. 2's windows on "slows" (a 1.5 s blend to the slowed picture) and brings
-// the men on "workers". The one slowed state picture (works-w2-slowed-state.png) holds both the dark windows and the
-// men, so a blend to it on "slows" would fade the men in as ghosts. Here the painting changes only at the "workers" cut
-// and the windows' flicker fades on "slows"; for the plan's blend, make a second state picture with only the windows
-// (make_state_picture.py with a mask of the windows alone) once the W2 plate shows No. 2's mill windows.
+// the men on "workers". The slowed state picture (works-w2-slowed-state.png) holds both the dark windows and the men,
+// so a blend to it on "slows" would fade the men in as ghosts. So "slows" blends to a second state picture with only the
+// windows (works-w2-slowed-windows-state.png: make_state_picture.py with a mask of the windows' change alone, round 5),
+// and "workers" cuts to the slowed state picture, whose windows are the same.
 // Use (from film-kit): PAPER_FILM_QUERY=state=slows node paper-film/tools/render-paper-film.mjs works-states-test OUT --stills 296 298
 import { buildCinemaChapter } from './cinema-chapter.js';
 import { THREE } from './cinema-kit.js';
@@ -50,7 +53,7 @@ async function bankPage(kit) {
 // page 12, shot 12b: W2 slows and the queue returns
 async function slowsPage(kit) {
   const works = await buildWorks(kit, { folder: WORKS_IN_USE, views: ['w2'], no2Men: 'painted',
-    pictures: { w2: 'works-w2-plate.jpg', 'w2 slowed': 'works-w2-slowed-state.png' } });
+    pictures: { w2: 'works-w2-plate.jpg', 'w2 slowed': 'works-w2-slowed-state.png', 'w2 windows dim': 'works-w2-slowed-windows-state.png' } });
   const T = { cut: kit.at('In'), picture: kit.at('picture'), slows: kit.at('slows'), workers: kit.at('workers'), gate: kit.at('gate') };
   const flatOutGate = kit.stillShot(works.cameraAt('w2', 'composed'), [], { name: '12b the flat-out factory slows' });
   const swingFor = 1.2;
@@ -60,8 +63,10 @@ async function slowsPage(kit) {
       const swing = THREE.MathUtils.clamp((t - T.slows) / swingFor, 0, 1);
       const gate = slowing ? 96 - 54 * (1 - (1 - swing) ** 3) : 96;
       const queue = t >= T.workers;
+      // two thirds of the windows dim on "slows" (1.5 s, in five steps: each step one drawing of the held set)
+      const dim = queue ? 0 : steppedBlend(t, T.slows, { length: 1.5, steps: 5 });
       const still = works.set(t, {
-        view: 'w2', painting: queue ? 'w2 slowed' : 'w2', men2: queue,
+        view: 'w2', painting: queue ? 'w2 slowed' : 'w2', men2: queue, blendTo: dim > 0 ? 'w2 windows dim' : null, blend: dim,
         no1: { state: 'quiet' },
         no2: slowing ? { state: 'slowed', gate, gateMoving: swing > 0 && swing < 1, was: { state: 'flat out', until: T.slows } } : { state: 'flat out' },
       });
@@ -80,6 +85,13 @@ async function slowsPage(kit) {
 // page 14, shot 14a: W4 from inside No. 2's yard, the men outside as silhouettes
 async function w4Page(kit) {
   const works = await buildWorks(kit, { folder: WORKS_IN_USE, views: ['w4'], no2Men: 'silhouettes', pictures: { w4: 'works-w4-plate.jpg' } });
+  // No. 2's gateway crates are left out of the W4 plate (round 5: from inside the yard they stood big in the frame's
+  // bottom-left corner, cut by its edge); works-shot.json's w4.left_out names them, so page 14 hides them too
+  for (const name of works.facts.w4?.left_out ?? []) {
+    const thing = kit.scene.getObjectByName(name);
+    if (thing) thing.visible = false;
+  }
+  works.projection.refresh();
   const T = { with: kit.at('With'), says: kit.at('says') };
   const yard = kit.stillShot(works.cameraAt('w4', 'plate'), [{ kind: 'zoom in', from: T.with, to: T.says, ...works.cameraAt('w4', 'composed') }], { name: '14a from inside the yard' });
   return {
