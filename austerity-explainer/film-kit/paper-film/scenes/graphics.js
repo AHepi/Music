@@ -110,8 +110,12 @@ export function counter(ctx, t, { at, until = at + 4, duration = 1.2, from = 0, 
 // fadeOut: seconds it fades before `until` (0: it ends exactly at `until`, as on a cut).
 // wordsWithLine: true brings the words (and plate) in at once, in their place at the line's end, while the line draws
 // out to them, instead of 0.3 s later (for labels held only briefly before a cut; log 34, round 5).
+// corner: { dx, dy } (pixels from the spot): the line turns a corner there on its way to its end, so it can leave the
+// thing it names sideways and then drop to an empty place for the words; side: 'left' or 'right' puts the words on
+// that side of the line's end whatever way the line runs (and they are not flipped). Leave all three out for the plain
+// label, which draws exactly as before.
 export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy = -120, size = 40, colour = INK.paper, accent = INK.amber, margin = 70, plate = false, fadeOut = 0.3,
-  wordsWithLine = false }) {
+  wordsWithLine = false, corner = null, side: wordsSide = null }) {
   const a = presence(t, at, until, 0.01, fadeOut);
   if (a <= 0 || !point || point.behind) return false;
   const age = t - at;
@@ -120,17 +124,34 @@ export function callout(ctx, t, { at, until = at + 3, point, text, dx = 160, dy 
   ctx.font = `800 ${size}px Inter`;
   const labelWidth = ctx.measureText(text).width + 52;
   // keep the words inside the frame: flip to the other side if they would run off it
-  let side = Math.sign(dx || 1);
+  let side = wordsSide ? (wordsSide === 'left' ? -1 : 1) : Math.sign(dx || 1);
   const endX = point.x + dx;
-  if (side > 0 && endX + 40 + labelWidth > 1080 - margin) side = -1;
-  if (side < 0 && endX - 40 - labelWidth < margin) side = 1;
-  const reach = Math.abs(dx) * side;
+  if (!wordsSide && side > 0 && endX + 40 + labelWidth > 1080 - margin) side = -1;
+  if (!wordsSide && side < 0 && endX - 40 - labelWidth < margin) side = 1;
+  const reach = wordsSide ? dx : Math.abs(dx) * side;
   const endY = Math.min(1500, Math.max(150, point.y + dy));
-  const end = { x: point.x + reach * k, y: point.y + (endY - point.y) * k };
+  let end;
   ctx.globalAlpha = a;
   withShadow(ctx, 12);
   ctx.strokeStyle = accent; ctx.lineWidth = 3;
-  ctx.beginPath(); ctx.moveTo(point.x, point.y); ctx.lineTo(end.x, end.y); ctx.lineTo(end.x + side * 40 * k, end.y); ctx.stroke();
+  if (!corner) {
+    end = { x: point.x + reach * k, y: point.y + (endY - point.y) * k };
+    ctx.beginPath(); ctx.moveTo(point.x, point.y); ctx.lineTo(end.x, end.y); ctx.lineTo(end.x + side * 40 * k, end.y); ctx.stroke();
+  } else {
+    // spot -> corner -> end, drawn out along its length
+    const path = [point, { x: point.x + corner.dx, y: point.y + corner.dy }, { x: point.x + reach, y: endY }];
+    const lengths = [Math.hypot(path[1].x - path[0].x, path[1].y - path[0].y), Math.hypot(path[2].x - path[1].x, path[2].y - path[1].y)];
+    let left = k * (lengths[0] + lengths[1]);
+    ctx.beginPath(); ctx.moveTo(point.x, point.y);
+    end = { ...point };
+    for (let i = 0; i < 2 && left > 0; i++) {
+      const step = Math.min(1, left / Math.max(1e-6, lengths[i]));
+      end = { x: path[i].x + (path[i + 1].x - path[i].x) * step, y: path[i].y + (path[i + 1].y - path[i].y) * step };
+      ctx.lineTo(end.x, end.y);
+      left -= lengths[i];
+    }
+    ctx.lineTo(end.x + side * 40 * k, end.y); ctx.stroke();
+  }
   ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(point.x, point.y, 7, 0, Math.PI * 2); ctx.fill();
   // where the words stand: at the line's end as it draws, or (wordsWithLine) where it will end
   const words = wordsWithLine ? { x: point.x + reach, y: endY } : end;

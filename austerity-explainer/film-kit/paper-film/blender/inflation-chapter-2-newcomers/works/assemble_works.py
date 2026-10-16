@@ -1059,12 +1059,12 @@ def yard_things(pieces):
     # the meeting point, left of the DIESEL drum's line (round 5: the drums now stand in front of the gateway's right
     # end, and in round 4's place the drum hid the lower right crate's words from W2)
     crate_y = GATE_PLANE_Y + 1.95
-    for k, (x, y, lift, turn) in enumerate(((n2 - 0.55, crate_y, 0.0, 4), (n2 + 0.35, crate_y + 0.15, 0.0, -6), (n2 - 0.1, crate_y + 0.07, 0.51, 2),
-                                            (n2 - 0.15, crate_y + 0.1, 1.02, -9))):
+    # three crates, two side by side and one on top (round 5: a fourth on top hid the man at the press from W2)
+    for k, (x, y, lift, turn) in enumerate(((n2 - 0.55, crate_y, 0.0, 4), (n2 + 0.35, crate_y + 0.15, 0.0, -6), (n2 - 0.1, crate_y + 0.07, 0.51, 2))):
         prop('crate-this-way-up.glb', x, y, turn, name=f'no-2-crate-{k + 1}', lift=lift, start=0.3)
     truck = prop('hand-truck.glb', n2 + 0.95, crate_y + 1.05, 200, name='hand-truck', start=0.5)
     dressing.tint([o for o in truck.children_recursive], (0.45, 0.4, 0.38))
-    found['no-2-crates'] = [round(n2 - 0.1, 3), crate_y, 0.75]
+    found['no-2-crates'] = [round(n2 - 0.1, 3), crate_y, 0.55]
     # the handcart on the right pavement, its shafts toward the works, loaded with three THIS WAY UP crates, their words
     # toward the lane's mouth (W3): two on its bed, one on top (round 5; round 4's check: a small empty cart at W3's
     # right edge; now its middle is at about 0.85 across and its wheels about 0.8 down in W3)
