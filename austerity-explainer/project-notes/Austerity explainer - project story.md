@@ -1464,6 +1464,14 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       changing them.
     - **Cost:** nothing.
 
+36. **The films so far, joined** (16 October). You asked: "Can you stich together videos that are rendered thus
+    far?" One silent film, 1 minute 48 seconds, 10.7 MB ("34 Redesign so far - films joined"): a title card, then
+    the notice corner (the standard you kept), the painted people test (the men leave at the cut), and pages 3 to 5
+    of the Works from round 5 (plain 3D pictures, words on an estimated timing), each after a plain title card.
+    Left out: the dark-figure version of the people test (dropped), the checkout (only stills exist so far), round 6
+    (nothing filmed) and the older finished chapter 2 film (round 20), which is a different version. Checked by
+    looking at seven frames across the join. Like every film, it stays out of the repository. Cost: nothing.
+
 ## Next step
 
 When you have usage again, say "carry on from the project story". The first job is to finish round 6:
