@@ -723,6 +723,23 @@ scene.view_settings.view_transform = 'AgX'; scene.view_settings.exposure = optio
 try: scene.view_settings.look = 'AgX - Punchy'
 except Exception: pass
 
+# a fingerprint of everything that was built (evaluated geometry included), so two runs can be compared exactly
+import hashlib, json as _json
+def scene_fingerprint():
+    dg = bpy.context.evaluated_depsgraph_get(); parts = []; total_v = total_f = 0
+    for ob in sorted(bpy.data.objects, key=lambda o: o.name):
+        if ob.type != 'MESH': continue
+        ev = ob.evaluated_get(dg); me = ev.to_mesh()
+        co = np.array([tuple(v.co) for v in me.vertices], dtype=np.float64)
+        m = np.array(ob.matrix_world, dtype=np.float64); world = (co @ m[:3, :3].T + m[:3, 3]) if len(co) else co
+        digest = hashlib.sha256(np.round(world, 5).tobytes()).hexdigest()[:16]
+        parts.append((ob.name, len(me.vertices), len(me.polygons), digest, [mt.name if mt else None for mt in ob.data.materials]))
+        total_v += len(me.vertices); total_f += len(me.polygons); ev.to_mesh_clear()
+    return {'objects': len(parts), 'vertices': total_v, 'faces': total_f, 'whole': hashlib.sha256(_json.dumps(parts, sort_keys=True).encode()).hexdigest()[:24], 'parts': parts}
+FP = scene_fingerprint()
+with open(OUT_PREFIX + '.fingerprint.json', 'w') as f: _json.dump(FP, f, indent=1)
+say(f"fingerprint: {FP['objects']} meshes, {FP['vertices']} vertices, {FP['faces']} faces, whole={FP['whole']}")
+
 bpy.ops.wm.save_as_mainfile(filepath=OUT_PREFIX + '.blend', compress=True)
 say('scene saved; rendering')
 scene.render.filepath = OUT_PREFIX + '.png'
