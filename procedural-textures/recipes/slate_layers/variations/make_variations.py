@@ -2,6 +2,8 @@
 # settings changed, listed in variations.json) at 1254 dots, then makes a contact sheet (contact_sheet.png) with every tile's name, its one-line
 # description and the settings it changed written under it, and scores each tile with the project's "same kind of surface" tool (colour group).
 # Use (plain python): python3 -I make_variations.py [bake|sheet|score|all]
+# Changed after the look fixes (round 15): variations.json now also holds an entry called "before the look fixes" (the old settings and scores); this script skips it.
+# The contact sheet says "same-kind colour" for the score of each tile and now also the score it had before the look fixes.
 import json
 import os
 import subprocess
@@ -13,7 +15,7 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROC = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 BLENDER = ['/home/user/work/blender-app/blender-5.2.2-linux-x64/blender', '-b', '--disable-autoexec', '-t', '2', '--python']
-SPEC = json.load(open(os.path.join(HERE, 'variations.json')))
+SPEC = {k: v for k, v in json.load(open(os.path.join(HERE, 'variations.json'))).items() if k != 'before the look fixes'}
 step = sys.argv[1] if len(sys.argv) > 1 else 'all'
 
 
@@ -40,7 +42,8 @@ if step in ('sheet', 'all'):
         picture = cv2.resize(cv2.imread(os.path.join(HERE, name + '_colour.png')), (cell, cell), interpolation=cv2.INTER_AREA)
         card = np.full((cell + text_h, cell, 3), 245, np.uint8)
         card[:cell] = picture
-        cv2.putText(card, name + (f'   same-kind colour {scores[name]:.2f}' if name in scores else ''), (8, cell + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+        old_scores = json.load(open(os.path.join(HERE, 'same_kind_colour_scores_before_look_fixes.json'))) if os.path.exists(os.path.join(HERE, 'same_kind_colour_scores_before_look_fixes.json')) else {}
+        cv2.putText(card, name + (f'   same-kind colour {scores[name]:.2f}' if name in scores else '') + (f' (before the look fixes {old_scores[name]:.2f})' if name in old_scores else ''), (8, cell + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
         words = SPEC[name]['_words']
         line, y = '', cell + 40
         for word in words.split():

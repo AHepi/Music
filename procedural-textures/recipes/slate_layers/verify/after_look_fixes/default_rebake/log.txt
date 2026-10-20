@@ -1,0 +1,9 @@
+proc-work/lib/bake_harness.py:51: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world.use_nodes = True
+proc-work/lib/bake_harness.py:86: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  material.use_nodes = True
+02:10.558  render           | Saved: 'recipes/slate_layers/verify/after_look_fixes/default_rebake/colour.png'
+04:24.648  render           | Saved: 'recipes/slate_layers/verify/after_look_fixes/default_rebake/height.png'
+06:39.976  render           | Saved: 'recipes/slate_layers/verify/after_look_fixes/default_rebake/roughness.png'
+06:42.309  render           | Saved: 'recipes/slate_layers/verify/after_look_fixes/default_rebake/metallic.png'
+stopped by the honesty checker (kill by PID) after colour, height, roughness, metallic and the harness normal.png were written; the bump-node normal was not needed

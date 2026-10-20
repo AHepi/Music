@@ -1,0 +1,6 @@
+[
+ {"note": "What this is: check run after capping the tilt: default tile (colour, height), the exact source positions of the tile, and one full-size crop of the 4 x 4 area."},
+ {"out": "tests/r2/g_tile1254", "size": 1254, "params": {}, "channels": ["Colour", "Height"]},
+ {"out": "tests/r2/g_source_y", "size": 1254, "params": {"debug_view": "source_y"}, "channels": ["Height"]},
+ {"out": "tests/r2/g_crop_a", "size": 1254, "params": {"recipe.tiles_across": 4, "window": [1.5, 1.5, 1]}, "channels": ["Colour"]}
+]

@@ -6,7 +6,7 @@
 # Every number in the recipe is an object of class S that remembers which node output it comes from. Plain Python numbers that
 # are mixed in are folded away (they become settings of the nodes, or disappear when two plain numbers meet).
 #
-# Two things this helper adds on top of the research version (research/tests/nodekit.py):
+# Round 2 added cells_rand / cells4_rand (cell pattern with a random number per cell). Two things this helper adds on top of the research version (research/tests/nodekit.py):
 #   * FRAMES: kit.begin('1 ROWS') starts a labelled frame; every node made until the next begin() sits inside it, so a person who opens the
 #     recipe in the Shader editor sees titled boxes (rows, boards, window, joints, stains, masks, colour, height) instead of one big heap.
 #   * TABLES: kit.table(index, [[...], [...]]) is a small look-up table made from ONE Color Ramp node (constant steps), up to 4 columns
@@ -262,6 +262,34 @@ class Kit:
         node.inputs['Scale'].default_value = scale
         node.inputs['Randomness'].default_value = 1.0
         return S(self, node.outputs['Distance'])
+
+    def cells_rand(self, x, y, scale):
+        """Like cells(), but also gives a random number 0..1 that is the same for every dot of one cell (round 2: used to make pebbles of different sizes).
+        Returns (distance, random)."""
+        vec = self._node('ShaderNodeCombineXYZ')
+        self._feed(vec.inputs['X'], x)
+        self._feed(vec.inputs['Y'], y)
+        node = self._node('ShaderNodeTexVoronoi', voronoi_dimensions='2D', feature='F1')
+        self.tree.links.new(vec.outputs[0], node.inputs['Vector'])
+        node.inputs['Scale'].default_value = scale
+        node.inputs['Randomness'].default_value = 1.0
+        sep = self._node('ShaderNodeSeparateColor')
+        self.tree.links.new(node.outputs['Color'], sep.inputs[0])
+        return S(self, node.outputs['Distance']), S(self, sep.outputs[0])
+
+    def cells4_rand(self, x, y, z, w, scale=1.0):
+        """cells4() with the random number of the cell (see cells_rand). Returns (distance, random)."""
+        vec = self._node('ShaderNodeCombineXYZ')
+        for name, value in zip(('X', 'Y', 'Z'), (x, y, z)):
+            self._feed(vec.inputs[name], value)
+        node = self._node('ShaderNodeTexVoronoi', voronoi_dimensions='4D', feature='F1')
+        self.tree.links.new(vec.outputs[0], node.inputs['Vector'])
+        self._feed(node.inputs['W'], w)
+        node.inputs['Scale'].default_value = scale
+        node.inputs['Randomness'].default_value = 1.0
+        sep = self._node('ShaderNodeSeparateColor')
+        self.tree.links.new(node.outputs['Color'], sep.inputs[0])
+        return S(self, node.outputs['Distance']), S(self, sep.outputs[0])
 
     # ---------------------------------------------------------------- pictures
     def load(self, path, colour=False):

@@ -1,0 +1,548 @@
+[
+ {
+  "note": "What this is: the whole final bake list of the wood-from-maps recipe in one Blender run, in this order: the three seeds of the default tile with every map (MAIN), the COMPARISON colours, the area bakes, the crops / shift test / source-unchanged check, then the sweeps for the guide and the 4 x 4 near-copy pictures."
+ },
+ {
+  "out": "outputs/main_seed1",
+  "size": 1254,
+  "full": true,
+  "params": {
+   "recipe.seed": 1
+  }
+ },
+ {
+  "out": "outputs/main_seed2",
+  "size": 1254,
+  "full": true,
+  "params": {
+   "recipe.seed": 2
+  }
+ },
+ {
+  "out": "outputs/main_seed3",
+  "size": 1254,
+  "full": true,
+  "params": {
+   "recipe.seed": 3
+  }
+ },
+ {
+  "out": "outputs/comparison_seed1",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 1,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "outputs/comparison_seed2",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 2,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "outputs/comparison_seed3",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 3,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/area_2x2",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 2
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "area/tile_repeated_2x2",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 2,
+   "recipe.tile_repeats": 1
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_source_x",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "source_x",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_source_y",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "source_y",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_boards",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "boards",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/debug_boards_height",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "boards",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_flips",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "flips",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/area_4x4",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "bake.shrink_filter": 1.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "area/crop_a",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    1.5,
+    1.5,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/crop_b",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    2.5,
+    0.5,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/crop_c",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    0.6,
+    2.6,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "tests/renders/shift_0",
+  "size": 1254,
+  "params": {},
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/shift_half",
+  "size": 1254,
+  "params": {
+   "shift": [
+    0.5,
+    0.5
+   ]
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/source_unchanged",
+  "size": 1254,
+  "params": {
+   "debug.source_unchanged": 1,
+   "stains.amount": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/area8_small",
+  "size": 512,
+  "params": {
+   "recipe.tiles_across": 8
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_rows_per_tile_4",
+  "size": 640,
+  "params": {
+   "layout.rows_per_tile": 4
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_rows_per_tile_6",
+  "size": 640,
+  "params": {
+   "layout.rows_per_tile": 6
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_zoom_0.0",
+  "size": 640,
+  "params": {
+   "windows.zoom": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_zoom_0.2",
+  "size": 640,
+  "params": {
+   "windows.zoom": 0.2
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joint_width_2.0",
+  "size": 640,
+  "params": {
+   "joints.width": 2.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joint_width_9.0",
+  "size": 640,
+  "params": {
+   "joints.width": 9.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_boards_per_row_2",
+  "size": 640,
+  "params": {
+   "layout.boards_per_row": 2
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_boards_per_row_3",
+  "size": 640,
+  "params": {
+   "layout.boards_per_row": 3
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_boards_per_row_4",
+  "size": 640,
+  "params": {
+   "layout.boards_per_row": 4
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_stains_amount_0.0",
+  "size": 640,
+  "params": {
+   "stains.amount": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_stains_amount_0.18",
+  "size": 640,
+  "params": {
+   "stains.amount": 0.18
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_stains_amount_0.5",
+  "size": 640,
+  "params": {
+   "stains.amount": 0.5
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joined_share_0.0",
+  "size": 640,
+  "params": {
+   "layout.joined_share": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joined_share_0.5",
+  "size": 640,
+  "params": {
+   "layout.joined_share": 0.5
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joined_share_1.0",
+  "size": 640,
+  "params": {
+   "layout.joined_share": 1.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_knot_share_0.0",
+  "size": 640,
+  "params": {
+   "windows.knot_share": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_knot_share_0.12",
+  "size": 640,
+  "params": {
+   "windows.knot_share": 0.12
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_knot_share_0.5",
+  "size": 640,
+  "params": {
+   "windows.knot_share": 0.5
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_patches_none",
+  "size": 640,
+  "params": {
+   "masks.blotch_amount": 0.0,
+   "masks.drift_amount": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_patches_default",
+  "size": 640,
+  "params": {
+   "masks.blotch_amount": 0.15,
+   "masks.drift_amount": 0.1
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_patches_strong",
+  "size": 640,
+  "params": {
+   "masks.blotch_amount": 0.4,
+   "masks.drift_amount": 0.25
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/near_copy_plain_windows_only",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "windows.zoom": 0.0,
+   "layout.row_height_variation": 0.0,
+   "boards.tone_variation": 0.0,
+   "boards.warmth_variation": 0.0,
+   "stains.amount": 0.0,
+   "masks.drift_amount": 0.0,
+   "masks.blotch_amount": 0.0,
+   "windows.flip_left_right": 0.0,
+   "windows.flip_upside_down": 0.0,
+   "layout.joined_share": 0.0
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_no_stains_no_patches",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "stains.amount": 0.0,
+   "masks.drift_amount": 0.0,
+   "masks.blotch_amount": 0.0
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_two_boards_per_row",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "layout.boards_per_row": 2
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_four_boards_per_row",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "layout.boards_per_row": 4
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_knots_free_and_many",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "windows.knot_share": 0.5
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_default",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4
+  },
+  "channels": [
+   "Height"
+  ]
+ }
+]

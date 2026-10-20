@@ -1,0 +1,94 @@
+[
+ {
+  "note": "What this is: round 2 area bakes of the wood-from-maps recipe: 2 x 2 and 4 x 4 areas of NEW boards (colour and height), the default tile repeated 2 x 2 (seam check picture) and exact debug pictures of the 4 x 4 area (which source dot every dot was taken from, board numbers, landmarks shown or painted out), seed 1, default settings."
+ },
+ {
+  "out": "area/debug_source_x",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "source_x",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_source_y",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "source_y",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_boards_height",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "boards",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_landmarks",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "landmarks",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/tile_repeated_2x2",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 2,
+   "recipe.tile_repeats": 1,
+   "bake.shrink_samples": 4
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "area/area_2x2",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 2,
+   "bake.shrink_samples": 4
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "area/area_4x4",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ }
+]

@@ -1,0 +1,79 @@
+[
+ {
+  "note": "What this is: round 2 'what does each part buy' test: 4 x 4 areas of HEIGHT at 1024 dots (2 samples) with parts of the round 2 fixes switched off, for the repeat tests (tools/measure_repeats_round2.py near-copy part)."
+ },
+ {
+  "out": "area/switch_default",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 2
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/switch_no_landmark_painting",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 2,
+   "landmarks.knot_chance": 1.0,
+   "landmarks.mark_chance": 1.0
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/switch_no_bending_no_stretch",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 2,
+   "windows.warp_along": 0.0,
+   "windows.warp_across": 0.0,
+   "windows.tilt": 0.0,
+   "windows.zoom": 0.0
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/switch_windows_only",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 2,
+   "landmarks.knot_chance": 1.0,
+   "landmarks.mark_chance": 1.0,
+   "windows.warp_along": 0.0,
+   "windows.warp_across": 0.0,
+   "windows.tilt": 0.0,
+   "windows.zoom": 0.0,
+   "windows.flip_left_right": 0.0,
+   "windows.flip_upside_down": 0.0,
+   "stains.amount": 0.0,
+   "masks.drift_amount": 0.0,
+   "masks.blotch_amount": 0.0
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/switch_three_boards_per_row",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 2,
+   "layout.boards_per_row": 3,
+   "layout.board_length_variation": 0.6
+  },
+  "channels": [
+   "Height"
+  ]
+ }
+]

@@ -1,0 +1,6 @@
+[
+ {"note": "What this is: round 2 fourth look: half joints reshaped, warm and cool palettes for the comparison colour, and an error check of the 'source unchanged' mode at 256 dots."},
+ {"out": "tests/r2/d_tile1254", "size": 1254, "params": {}, "channels": ["Colour"]},
+ {"out": "tests/r2/d_comparison1254", "size": 1254, "params": {"colour.source": "height_palette"}, "channels": ["Colour"]},
+ {"out": "tests/r2/d_identity256", "size": 256, "params": {"debug.source_unchanged": 1}, "channels": ["Colour", "Height"]}
+]

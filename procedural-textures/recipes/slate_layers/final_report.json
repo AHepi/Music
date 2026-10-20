@@ -1,4 +1,5 @@
 {
+ "_note about round 15": "READ THIS FIRST: every number outside the section \"look fixes (round 15)\" at the end of this file is for the OLD default tile (before the look fixes) and was kept as it was. The new numbers, with the old ones beside them, are in that last section.",
  "_words": "Every number of the slate-in-layers work (layers inside one Blender recipe, pure procedural, not fitted). Same-kind = lib/texture_compare.py against the slate reference (a guide only); dot-for-dot = lib/pixel_compare.py, for transparency only. Written by integration/takeover/make_final_report.py from the result files.",
  "who": "five layer builders; first integrator (tuning rounds 1-13, most bakes; cut off by a machine restart at about 03:15 on 20 October); second integrator (checked everything, re-ran what was cut off, wrote the guides and this report)",
  "recipe": {
@@ -166,7 +167,7 @@
     "sobel strength": 6.6
    }
   },
-  "note on score_set.py": "its normal_height_agreement comes out 0.0 for all three (the harness's own normal gives 0.534 for the 0.7 bake), so its normal group is lower than the harness's; the height group does not depend on it."
+  "note on score_set.py": "its normal_height_agreement comes out 0.0 for all three (as first written; only the 0.7 bake was checked again). The harness's own normal, which score_set.py also makes, gives 0.0 for the 0.7 bake; the strength-7 normal of integration/make_normal.py gives 0.534 for it. So the normal group by score_set.py is lower than the strength-7 group (0.604 against 0.671 for the 0.7 bake); the height group does not depend on it. (Corrected after the second honesty check: this note first had the two normal maps the wrong way round: it said the harness's own normal gives 0.534.)"
  },
  "tuning round 14 (second integrator; result: settings kept)": {
   "_words": "Tuning round 14, by the second integrator after the restart. Prompted by the whole-recipe strips (768 dots), where a lighter shadow (shadow_darkness 0 or 0.3) and stronger streaks (streak_contrast 2.1) raised the colour group most. All pictures 1254 dots, colour group of lib/texture_compare.py against the slate reference. 'default seeds' = the seeds of the default tile; seeds_b = layout 101, colour 111, damage 121, moss 131, outline 141; seeds_c = 202, 212, 222, 232, 242.",
@@ -1070,5 +1071,2212 @@
   "resolution at 512 and 1254",
   "reuse brick_all colour and height",
   "layer builders' strips"
- ]
+ ],
+ "look fixes (round 15)": {
+  "_words": "Look fixes (round 15, 20 October): a look checker listed 11 faults of the default tile, a tuner fixed them by hand in two rounds (settings 49 to 73, six new controls in two layer files), the look checker looked again, and a re-baker made again everything that depends on the default settings. Every number below is for the NEW default unless it says \"before\". The old numbers above in this file are the OLD default and are kept.",
+  "settings file": {
+   "entries now": 73,
+   "entries before": 49,
+   "bytes now": 2464,
+   "bytes before": 1704,
+   "controls in recipe/controls.md now": 182,
+   "controls before": 176,
+   "note": "the other 182 - 73 = 109 controls keep the layer files starting values; the whole description is about 6 KB (checked for the first 176 only)"
+  },
+  "new controls (the only code changes)": [
+   "layers/moss.py (round 2): four new controls, all defaulting to the old picture: rim_opacity and core_opacity (see-through moss paint: opacity runs from the rim value at the edge of a clump to the core value inside it; only the mask is see-through, height and roughness unchanged), side_clearance (moss growth fades out near side joints, 0 = off) and fleck_amount (scales the small light and dark flecks, 1 = as before).",
+   "layers/outline_and_shadow.py (round 2): two new controls: joint_texture (faint fine mottling of the joint black, 0 = flat as before) and joint_texture_size (mottles per tile, default 600).",
+   "Old copies of both files: look_fixes/round2/layer_files_before_round2/. All six new controls are listed in integration/CHANGES_TO_LAYER_FILES.md (rows 3 to 6). recipe/controls.md was rebuilt with recipe/make_controls_table.py.",
+   "Tests of the code changes: (1) the settings of the end of round 1 baked at 384 dots with the old and the new files give identical colour, height and roughness (largest difference 0); (2) independence re-run for moss and outline_and_shadow (Amount 0 and Seed + 1 each, new default settings, 384 dots): 0.0 % of dots changed outside the changed layer's own region, no other layer's mask changed (look_fixes/round2/independence/independence_two_layers_table.md, also in the changes file). Not re-run: half-tile shift test; independence of unchanged layers.",
+   "recipe/settings.json: 65 -> 73 entries; net 46 entries differ from the start of round 1 (settings_before_look_fixes.json, 49 entries). Settings of round 2 alone: look_fixes/round2/set_F_round2_all_changes.json; the end of round 1: look_fixes/round2/settings_after_round1.json.",
+   "outputs/default/ re-baked at 1254 dots (colour, 16-bit height, roughness, metallic, harness normal renamed normal_harness_sobel.png, normal_bumpnode.png, and normal.png = strength-7 normal from integration/make_normal.py); score_same_kind.json, score_pixel_for_transparency.json, sheet_same_kind.jpg and log.txt rewritten. outputs/default_before_look_fixes and recipe/settings_before_look_fixes.json untouched.",
+   "New tools in look_fixes/: independence_two_layers_bake.py and independence_two_layers_analysis.py; round2/independent_measures.py (copy of the checker's own measuring script, with command-line pictures and its own json output), round2/moss_character.py, round2/run_facets_and_independence.py, round2/run_lit_and_variations.py; bake_variants.py now accepts a per-variant size.",
+   "Round 1 pictures and scores kept in look_fixes/round_1_pictures/."
+  ],
+  "settings changes of the tuner (round 1 and 2, with old value, new value, kept or not, why)": [
+   {
+    "name": "colour_and_fade.streak_width",
+    "before": "0.014",
+    "after": "0.03",
+    "kept": true,
+    "why": "Round 1 (problem 1): broader, flatter paint bands. Unchanged in round 2 (smaller 0.024 was tried against the straight-edged facets and made the paint more stripy)."
+   },
+   {
+    "name": "colour_and_fade.mottle_tallness",
+    "before": "1.1",
+    "after": "1.5",
+    "kept": true,
+    "why": "Round 1 raised it to 2.2 (patches that run the whole slate height). Round 2 lowered it to 1.5 together with fade_amount 0.9: a little less upright-stripy (side-to-side over up-down paint slope at 900 dots 2.08 -> 1.91, colour score up)."
+   },
+   {
+    "name": "colour_and_fade.edge_ragged",
+    "before": "0.0035 (layer file)",
+    "after": "0.0015",
+    "kept": true,
+    "why": "Round 1 (problem 1): the ripple on the band edges is mostly gone. 0.002 to 0.003 was tried in round 2 for the facets: no visible gain."
+   },
+   {
+    "name": "colour_and_fade.grain_amount",
+    "before": "0.05",
+    "after": "0.04",
+    "kept": true,
+    "why": "Round 1 lowered it to 0.02, which removed the fine grain (flat-paint noise level 1 -> 0, reference 1). Round 2 put it back to 0.04 (checker's tested fix): level 1 again."
+   },
+   {
+    "name": "colour_and_fade.streak_contrast",
+    "before": "1.4",
+    "after": "1.3",
+    "kept": true,
+    "why": "Round 1 lowered it to 1.2; round 2 raised it a little to 1.3 for more contrast inside slates (inner spread)."
+   },
+   {
+    "name": "colour_and_fade.fade_amount",
+    "before": "0.85",
+    "after": "0.9",
+    "kept": true,
+    "why": "Round 2: a little more fade for inner contrast and relief. 1.0 and 1.15 gave inner spread 11.55 / 12.22 (reference 12.27) and relief +4 / +9 %, but more upright stripes (2.08 / 2.19 against 1.61), more dark (13.6 / 14.6 % against 11.3 %) and a lower colour score, so 0.9 was kept."
+   },
+   {
+    "name": "colour_and_fade.outlier_size",
+    "before": "1.2",
+    "after": "0.7",
+    "kept": true,
+    "why": "Problem 7: pale and dark outlier slates. Round 1: 0.8; round 2: 0.7."
+   },
+   {
+    "name": "colour_and_fade.outlier_share",
+    "before": "0.15",
+    "after": "0.08",
+    "kept": true,
+    "why": "Round 2 (problem 7): fewer outlier slates. Round 1 had tested 0.08 and found no change; with tone_spread lowered it helps."
+   },
+   {
+    "name": "colour_and_fade.tone_spread",
+    "before": "1.0",
+    "after": "0.45",
+    "kept": true,
+    "why": "Round 2 (problem 7): slate-to-slate spread of mean grey 8.89 -> 5.57 (reference 5.51). The checker's 0.6 gave 3.06 on the tuner's measure (reference 2.51); 0.45 with the two settings above gave 2.78 in a test and 2.65 in the finished tile."
+   },
+   {
+    "name": "colour_and_fade.tint_amount",
+    "before": "0.7",
+    "after": "0.9",
+    "kept": true,
+    "why": "Round 2: more teal-green and warm slates, less blue (slate b* spread 1.65 -> 1.80, reference 1.64; mean slate b* -1.87 -> -1.56 in a test, reference -1.04)."
+   },
+   {
+    "name": "colour_and_fade.patch_tint",
+    "before": "0.4 (layer file)",
+    "after": "0.55",
+    "kept": true,
+    "why": "Round 2: same as tint_amount."
+   },
+   {
+    "name": "moss.coverage",
+    "before": "0.22",
+    "after": "0.3",
+    "kept": true,
+    "why": "Round 1 lowered it to 0.17 (too much flat moss). Round 2 raised it to 0.30 because the moss is now a see-through wash and more of it is needed to read as much."
+   },
+   {
+    "name": "moss.fringe_amount",
+    "before": "0.3 (layer file)",
+    "after": "0.08",
+    "kept": true,
+    "why": "Round 1 (problem 2): no more rows of teeth."
+   },
+   {
+    "name": "moss.drip_stretch",
+    "before": "1.8 (layer file)",
+    "after": "1.4",
+    "kept": true,
+    "why": "Round 1 (problem 2)."
+   },
+   {
+    "name": "moss.cluster_size",
+    "before": "0.06",
+    "after": "0.055",
+    "kept": true,
+    "why": "Round 1: 0.04 (smaller clumps). Round 2: 0.055 (broader, softer clumps, the checker's tested value)."
+   },
+   {
+    "name": "moss.tone_patch_size",
+    "before": "0.02 (layer file)",
+    "after": "0.02",
+    "kept": true,
+    "why": "Round 1 set 0.008 (finer mottling); round 2 went back to 0.02 (broader tone patches, calmer inside the moss). Net: unchanged from the start of round 1."
+   },
+   {
+    "name": "moss.edge_raggedness",
+    "before": "0.7",
+    "after": "0.6",
+    "kept": true,
+    "why": "Round 1: 1.0. Round 2: 0.6 (softer, less flaky edges; the checker's tested value)."
+   },
+   {
+    "name": "moss.lichen_amount",
+    "before": "0.15",
+    "after": "0.07",
+    "kept": true,
+    "why": "Round 1 (problem 9): 0.05. Round 2: 0.07 because the chunkier chips swallowed some lichen discs (24 round dots, reference 28)."
+   },
+   {
+    "name": "moss.tone_1",
+    "before": "#2b2c23 (layer file)",
+    "after": "#23241c",
+    "kept": true,
+    "why": "Round 1: wider moss palette (darker end)."
+   },
+   {
+    "name": "moss.tone_5",
+    "before": "#545342 (layer file)",
+    "after": "#63614a",
+    "kept": true,
+    "why": "Round 1: wider moss palette (lighter end)."
+   },
+   {
+    "name": "moss.tone_centre",
+    "before": "0.7 (layer file)",
+    "after": "0.55",
+    "kept": true,
+    "why": "Round 1: keeps the moss from getting too light with the wider palette."
+   },
+   {
+    "name": "moss.patchiness",
+    "before": "0.75",
+    "after": "0.9",
+    "kept": true,
+    "why": "Round 2: moss gathers in a few areas (checker: slates with over 1 % moss 78 % against 64 % in the reference)."
+   },
+   {
+    "name": "moss.rim_lightening",
+    "before": "0.5 (layer file)",
+    "after": "0.2",
+    "kept": true,
+    "why": "Round 2: no light yellow rim, which made the flakes."
+   },
+   {
+    "name": "moss.raise",
+    "before": "1 (layer file)",
+    "after": "2.5",
+    "kept": true,
+    "why": "Round 1 (problem 5): moss stands up a little."
+   },
+   {
+    "name": "moss.rim_opacity",
+    "before": "(did not exist; 1 = solid)",
+    "after": "0.5",
+    "kept": true,
+    "why": "Round 2, NEW control (code change in moss.py): the rim of a moss clump is half see-through, so the edge fades softly."
+   },
+   {
+    "name": "moss.core_opacity",
+    "before": "(did not exist; 1 = solid)",
+    "after": "1.0",
+    "kept": true,
+    "why": "Round 2, NEW control (code change): the moss core stays solid. 0.7 to 0.85 was tried and the moss became too faint."
+   },
+   {
+    "name": "moss.side_clearance",
+    "before": "(did not exist; 0 = off)",
+    "after": "0.012",
+    "kept": true,
+    "why": "Round 2, NEW control (code change), problem 11: moss within 14 dots of a side joint 14.5 % -> 7.2 % (reference 6.5 %)."
+   },
+   {
+    "name": "moss.fleck_amount",
+    "before": "(did not exist; 1 = as before)",
+    "after": "0.5",
+    "kept": true,
+    "why": "Round 2, NEW control (code change): fewer small light and dark flecks inside the moss (inside steepness 16.6 -> 10.6, reference 7.1)."
+   },
+   {
+    "name": "damage.corner_gain",
+    "before": "1 (layer file)",
+    "after": "0.3",
+    "kept": true,
+    "why": "Round 1 (problem 3): no more tan L-shapes at the lower corners."
+   },
+   {
+    "name": "damage.chip_frequency",
+    "before": "110",
+    "after": "115",
+    "kept": true,
+    "why": "Round 1 raised it to 160 (small flecks, which came out thin); round 2 lowered it to 115 for chunkier chips (checker's untested suggestion was 130)."
+   },
+   {
+    "name": "damage.chip_clustering",
+    "before": "1.0",
+    "after": "0.55",
+    "kept": true,
+    "why": "Round 1: 0.5. Round 2: 0.55."
+   },
+   {
+    "name": "damage.chip_amount",
+    "before": "0.65",
+    "after": "0.68",
+    "kept": true,
+    "why": "Round 1: 0.72. Round 2: 0.68 (keeps the tan share near the reference with the bigger flakes: 1.47 % by the checker's rule, reference 1.56 %)."
+   },
+   {
+    "name": "damage.chip_breakup",
+    "before": "1.1",
+    "after": "0.8",
+    "kept": true,
+    "why": "Round 2: fewer holes and loose flecks, chunkier chips."
+   },
+   {
+    "name": "damage.chip_depth",
+    "before": "0.02",
+    "after": "0.024",
+    "kept": true,
+    "why": "Round 2: flakes reach a little further in."
+   },
+   {
+    "name": "damage.crack_amount",
+    "before": "0.02",
+    "after": "0.0",
+    "kept": true,
+    "why": "Round 1 (problem 8): the lone crack is gone."
+   },
+   {
+    "name": "damage.sink_depth",
+    "before": "1 (layer file)",
+    "after": "1.6",
+    "kept": true,
+    "why": "Round 1 (problem 5). The checker's 2.2 was tried in round 2 with lip_height 0.14 and shadow_height 0.2: no measurable change, because the real relief is scaled to 30 % by tone_blend 0.7."
+   },
+   {
+    "name": "outline_and_shadow.lip_brightness",
+    "before": "0.12",
+    "after": "0.3",
+    "kept": true,
+    "why": "Round 1 (problem 3): the pale lower lip shows."
+   },
+   {
+    "name": "outline_and_shadow.black_drips",
+    "before": "0.005",
+    "after": "0.0",
+    "kept": true,
+    "why": "Round 1 (problem 6)."
+   },
+   {
+    "name": "outline_and_shadow.shadow_drip",
+    "before": "0.5 (layer file)",
+    "after": "0.2",
+    "kept": true,
+    "why": "Round 1 (problem 6)."
+   },
+   {
+    "name": "outline_and_shadow.shadow_tiers",
+    "before": "4 (layer file)",
+    "after": "2",
+    "kept": true,
+    "why": "Round 1 (problem 6)."
+   },
+   {
+    "name": "outline_and_shadow.lip_height",
+    "before": "0.04 (layer file)",
+    "after": "0.1",
+    "kept": true,
+    "why": "Round 1 (problem 5)."
+   },
+   {
+    "name": "outline_and_shadow.joint_texture",
+    "before": "(did not exist; 0 = flat black)",
+    "after": "0.35",
+    "kept": true,
+    "why": "Round 2, NEW control (code change in outline_and_shadow.py), problem 5: the reference joints are faintly mottled (spread 2.8), ours were flat (0.5). 0.5 at 600 mottles looked like grit at 1:1 and was rejected; 0.35 at 150 kept. Its effect on the relief numbers is only about 1 %."
+   },
+   {
+    "name": "outline_and_shadow.joint_texture_size",
+    "before": "(did not exist; 600)",
+    "after": "150",
+    "kept": true,
+    "why": "Round 2: coarser mottles (about 8 dots), see joint_texture."
+   },
+   {
+    "name": "layout.corner_bottom_factor",
+    "before": "1.5 (layer file)",
+    "after": "3.0",
+    "kept": true,
+    "why": "Problem 4: rounder lower corners. Round 1: 2.5; round 2: 3.0 (top of its range). Corner rise 12.3 -> 14.8 dots (reference 17.7)."
+   },
+   {
+    "name": "layout.ragged_bottom",
+    "before": "0.0055 (layer file)",
+    "after": "0.01",
+    "kept": true,
+    "why": "Problem 4: more uneven lower edges. Round 1: 0.008; round 2: 0.01 (top of its range). Lower-edge wobble 1.78 -> 2.21 dots (reference 2.98)."
+   },
+   {
+    "name": "layout.bottom_tilt",
+    "before": "0.02 (layer file)",
+    "after": "0.08",
+    "kept": true,
+    "why": "Problem 4. Round 1: 0.06; round 2: 0.08."
+   },
+   {
+    "name": "combine.tone_blend",
+    "before": "0.7",
+    "after": "0.45, 0.55 (round 1) and 0.8 (round 2) tested; stays 0.7",
+    "kept": false,
+    "why": "0.45 and 0.55 were worse by eye, by slopes and by score (round 1). 0.8 raised the slopes about 4 % but could not be told apart by eye under the raking light and brings more paint-edge relief (contour lines)."
+   },
+   {
+    "name": "combine.height_gain + colour_and_fade.tone_height",
+    "before": "1 and 2.0",
+    "after": "1.7 with 0.4, and 2.4 with 0.0 (tested)",
+    "kept": false,
+    "why": "Round 2 relief test: both LOWERED the slopes (up-down 9.61 -> 9.32 / 9.29, mean tilt 17.7 -> 16.8 / 16.4 at 900 dots)."
+   },
+   {
+    "name": "colour_and_fade.tone_centre",
+    "before": "3.7",
+    "after": "3.85 and 4.0 tested (round 1); stays 3.7",
+    "kept": false,
+    "why": "Round 1: raised the brightest slate and dropped the colour score (feature-size measure is a cliff)."
+   },
+   {
+    "name": "damage.side_share",
+    "before": "0.12 (layer file)",
+    "after": "0.05 tested (round 1); stays",
+    "kept": false,
+    "why": "Round 1: invisible."
+   },
+   {
+    "name": "moss.joint_preference",
+    "before": "0.15",
+    "after": "0 tested (round 1); stays 0.15",
+    "kept": false,
+    "why": "Round 1: lowered the moss but left the straight cut at the joint; round 2 fixed it with moss.side_clearance instead."
+   },
+   {
+    "name": "outline_and_shadow.lip_breakup",
+    "before": "0.4 (layer file)",
+    "after": "0.6 tested (round 1); stays",
+    "kept": false,
+    "why": "Round 1: moved the stripe measure away from the reference."
+   },
+   {
+    "name": "facet tests: colour_and_fade.streak_width 0.024, edge_ragged 0.002 to 0.003, streak_bend 0.012 to 0.02, mottle_tallness 1.2",
+    "before": "0.03 / 0.0015 / 0.006 / 2.2",
+    "after": "tested only",
+    "kept": false,
+    "why": "Round 2: none removed the large straight-edged paint facets (they come from tall Voronoi cells in colour_and_fade.py); the smaller streak_width made the paint more upright-stripy (2.24)."
+   }
+  ],
+  "round 1 settings changes (as reported by the tuner)": [
+   {
+    "name": "colour_and_fade.streak_width",
+    "before": "0.014",
+    "after": "0.03",
+    "kept": true,
+    "why": "Problem 1 (checker set t4_all): broader, flatter paint bands."
+   },
+   {
+    "name": "colour_and_fade.mottle_tallness",
+    "before": "1.1",
+    "after": "2.2",
+    "kept": true,
+    "why": "Problem 1, t4_all."
+   },
+   {
+    "name": "colour_and_fade.edge_ragged",
+    "before": "0.0035 (layer file)",
+    "after": "0.0015",
+    "kept": true,
+    "why": "Problem 1: the ripple on the band edges is mostly gone."
+   },
+   {
+    "name": "colour_and_fade.grain_amount",
+    "before": "0.05",
+    "after": "0.02",
+    "kept": true,
+    "why": "Problem 1: less fine busy texture."
+   },
+   {
+    "name": "colour_and_fade.streak_contrast",
+    "before": "1.4",
+    "after": "1.2",
+    "kept": true,
+    "why": "Problem 1, t4_all."
+   },
+   {
+    "name": "moss.coverage",
+    "before": "0.22",
+    "after": "0.17",
+    "kept": true,
+    "why": "Problem 2: less moss. t4 used 0.15; I raised it to 0.17 because the darker moss palette moved some moss out of the olive count (5.1% against 6.4%). The final tile has 6.0% at 900 dots."
+   },
+   {
+    "name": "moss.fringe_amount",
+    "before": "0.3 (layer file)",
+    "after": "0.08",
+    "kept": true,
+    "why": "Problem 2: no more rows of teeth."
+   },
+   {
+    "name": "moss.drip_stretch",
+    "before": "1.8 (layer file)",
+    "after": "1.4",
+    "kept": true,
+    "why": "Problem 2, t4_all."
+   },
+   {
+    "name": "moss.cluster_size",
+    "before": "0.06",
+    "after": "0.04",
+    "kept": true,
+    "why": "Problem 2: smaller clumps (largest clump 16,056 to 9,294 dots; reference 7,013)."
+   },
+   {
+    "name": "moss.tone_patch_size",
+    "before": "0.02 (layer file)",
+    "after": "0.008",
+    "kept": true,
+    "why": "Problem 2: finer mottling inside the moss."
+   },
+   {
+    "name": "moss.edge_raggedness",
+    "before": "0.7",
+    "after": "1.0",
+    "kept": true,
+    "why": "Problem 2, t4_all."
+   },
+   {
+    "name": "moss.lichen_amount",
+    "before": "0.15",
+    "after": "0.05",
+    "kept": true,
+    "why": "Problem 9: fewer polka-dot lichen discs."
+   },
+   {
+    "name": "damage.corner_gain",
+    "before": "1 (layer file)",
+    "after": "0.3",
+    "kept": true,
+    "why": "Problem 3: no more tan L-shapes at the lower corners."
+   },
+   {
+    "name": "damage.chip_frequency",
+    "before": "110",
+    "after": "160",
+    "kept": true,
+    "why": "Problem 3: smaller flecks."
+   },
+   {
+    "name": "damage.chip_clustering",
+    "before": "1.0",
+    "after": "0.5",
+    "kept": true,
+    "why": "Problem 3: flecks spread along the whole lower edge."
+   },
+   {
+    "name": "outline_and_shadow.lip_brightness",
+    "before": "0.12",
+    "after": "0.3",
+    "kept": true,
+    "why": "Problem 3: the pale lip along the lower edge shows, as in the reference."
+   },
+   {
+    "name": "layout.corner_bottom_factor",
+    "before": "1.5 (layer file)",
+    "after": "2.5",
+    "kept": true,
+    "why": "Problem 4: rounder lower corners."
+   },
+   {
+    "name": "layout.ragged_bottom",
+    "before": "0.0055 (layer file)",
+    "after": "0.008",
+    "kept": true,
+    "why": "Problem 4: more uneven lower edges."
+   },
+   {
+    "name": "outline_and_shadow.black_drips",
+    "before": "0.005",
+    "after": "0",
+    "kept": true,
+    "why": "Problem 6: no black teeth under the rows."
+   },
+   {
+    "name": "outline_and_shadow.shadow_drip",
+    "before": "0.5 (layer file)",
+    "after": "0.2",
+    "kept": true,
+    "why": "Problem 6: cleaner lower border of the shadow."
+   },
+   {
+    "name": "damage.crack_amount",
+    "before": "0.02",
+    "after": "0",
+    "kept": true,
+    "why": "Problem 8: the lone hair-like crack is gone."
+   },
+   {
+    "name": "outline_and_shadow.lip_height",
+    "before": "0.04 (layer file)",
+    "after": "0.1",
+    "kept": true,
+    "why": "Problem 5: the lip and chipped lower edge catch more light. Raises the up-down slope a little and gave the best height and normal scores of the relief options tried."
+   },
+   {
+    "name": "damage.sink_depth",
+    "before": "1 (layer file)",
+    "after": "1.6",
+    "kept": true,
+    "why": "Problem 5: chips sit deeper."
+   },
+   {
+    "name": "moss.raise",
+    "before": "1 (layer file)",
+    "after": "2.5",
+    "kept": true,
+    "why": "Problem 5: moss stands up a little."
+   },
+   {
+    "name": "combine.tone_blend",
+    "before": "0.7",
+    "after": "0.45 (tested), stays 0.7",
+    "kept": false,
+    "why": "Problem 5 suggestion. At 0.45 the slates looked flatter under the raking light. Up-down and side slopes moved away from the reference (9.44 to 9.06 and 12.04 to 11.52 at 900 dots; reference 11.57 and 12.90). At 1254 dots the overall score was 0.693 (height 0.602, normal 0.567) against 0.724 when 0.7 is kept with the other three relief changes. 0.55 was also tried and was in between."
+   },
+   {
+    "name": "outline_and_shadow.shadow_tiers",
+    "before": "4 (layer file)",
+    "after": "2",
+    "kept": true,
+    "why": "Problem 6: the shadow reads as a cleaner dark band with fewer stepped tiers. Olive share drops 0.4 points where the band covers moss tops."
+   },
+   {
+    "name": "colour_and_fade.outlier_size",
+    "before": "1.2",
+    "after": "0.8",
+    "kept": true,
+    "why": "Problem 7: brightest slate 38.0 to 36.8 (reference 34.6); the pale slate is less loud."
+   },
+   {
+    "name": "colour_and_fade.outlier_share",
+    "before": "0.15",
+    "after": "0.08 (tested)",
+    "kept": false,
+    "why": "Problem 7: the brightest slate did not change (38.0), so the brightest slates are not outliers."
+   },
+   {
+    "name": "damage.side_share",
+    "before": "0.12 (layer file)",
+    "after": "0.05 (tested)",
+    "kept": false,
+    "why": "Only 0.036% of dots changed; invisible once corner_gain is 0.3."
+   },
+   {
+    "name": "layout.bottom_tilt",
+    "before": "0.02 (layer file)",
+    "after": "0.06",
+    "kept": true,
+    "why": "Problem 4: 0.035 made no visible change (row wander 3.96 to 4.00). 0.06 gives small steps between neighbouring lower edges; my rough row-wander measure goes 3.83 to 4.09 dots (reference 5.0)."
+   },
+   {
+    "name": "moss.tone_1",
+    "before": "#2b2c23 (layer file)",
+    "after": "#23241c",
+    "kept": true,
+    "why": "Wider moss palette (darker end): lightness spread inside the moss 4.3 to 5.8-6.0 (reference 6.0)."
+   },
+   {
+    "name": "moss.tone_5",
+    "before": "#545342 (layer file)",
+    "after": "#63614a",
+    "kept": true,
+    "why": "Wider moss palette (lighter end)."
+   },
+   {
+    "name": "moss.tone_centre",
+    "before": "0.7 (layer file)",
+    "after": "0.55",
+    "kept": true,
+    "why": "With the wider palette alone the moss was too light (mean L 31.6 against 29.4). At 0.55: mean L 28.9, spread 5.9. 0.45 was also tried and dropped (too dark, olive 4.4%)."
+   },
+   {
+    "name": "moss.joint_preference",
+    "before": "0.15",
+    "after": "0 (tested)",
+    "kept": false,
+    "why": "Try at problem 11. Olive fell 5.8 to 5.2% and the straight cut at the joint remained."
+   },
+   {
+    "name": "damage.chip_amount",
+    "before": "0.65",
+    "after": "0.72",
+    "kept": true,
+    "why": "After step (a) the tan share was too low (0.79% against 1.0%). 0.8 overshot (1.34%), so I chose a value in between. The final tile has 1.03% at 900 dots."
+   },
+   {
+    "name": "outline_and_shadow.lip_breakup",
+    "before": "0.4 (layer file)",
+    "after": "0.6 (tested)",
+    "kept": false,
+    "why": "Lip slightly more broken by eye, but the stripe measure moved 1.00 to 1.04, away from the reference's 0.83."
+   },
+   {
+    "name": "colour_and_fade.tone_centre",
+    "before": "3.7",
+    "after": "3.85 and 4.0 (tested), stays 3.7",
+    "kept": false,
+    "why": "Tried to undo the darker overall colour. Mean L went 24.2 to 24.7 / 25.3 (reference 25.2), but the brightest slate rose to 37.2 / 37.5. Baked at 1254, 3.85 dropped the colour group to 0.692 and overall to 0.703 (feature-size measure 0.722 to 0.419). Reverted and re-baked."
+   }
+  ],
+  "default tile now (outputs/default)": {
+   "same-kind": {
+    "reference": "slate",
+    "candidate": "recipes/slate_layers/outputs/default",
+    "overall": 0.778,
+    "groups": {
+     "colour": 0.822,
+     "height": 0.735,
+     "normal": 0.616,
+     "tiling": 1.0
+    },
+    "scores": {
+     "colour_distribution": 0.867,
+     "colour_spectrum": 0.707,
+     "colour_orientation": 0.709,
+     "colour_scale": 0.899,
+     "colour_gradient": 0.858,
+     "seam": 1.0,
+     "height_distribution": 0.697,
+     "height_spectrum": 0.507,
+     "height_gradient": 0.876,
+     "height_colour_link": 0.92,
+     "height_contrast": 0.738,
+     "normal_tilt": 0.525,
+     "normal_components": 0.781,
+     "normal_height_agreement": 0.56
+    },
+    "raw_distances": {
+     "colour_distribution": 0.0083,
+     "colour_spectrum": 0.1057,
+     "colour_orientation": 0.1302,
+     "colour_scale": 0.1285,
+     "colour_gradient": 0.0021,
+     "seam": 0.0,
+     "height_distribution": 0.0303,
+     "height_spectrum": 0.1799,
+     "height_gradient": 0.003,
+     "height_colour_link": 0.004,
+     "height_contrast": 0.1308,
+     "normal_tilt": 0.0584,
+     "normal_components": 0.057,
+     "normal_height_agreement": 0.0051
+    },
+    "facts": {
+     "seam_ratio_candidate": 0.81,
+     "seam_ratio_reference": 1.69,
+     "correlation_length_px_reference": [
+      64.0,
+      11.0
+     ],
+     "correlation_length_px_candidate": [
+      54.0,
+      12.0
+     ],
+     "mean_lab_reference": [
+      25.2,
+      -1.6,
+      -1.0
+     ],
+     "mean_lab_candidate": [
+      23.7,
+      -1.8,
+      -1.3
+     ],
+     "height_colour_corr_reference": 0.993,
+     "height_colour_corr_candidate": 0.989,
+     "normal_height_corr_reference": [
+      -0.9555107544504099,
+      0.9412310219353763
+     ],
+     "normal_height_corr_candidate": [
+      -0.9490136597128157,
+      0.9375762293598675
+     ]
+    }
+   },
+   "dot-for-dot (transparency only)": {
+    "reference": "slate",
+    "candidate": "recipes/slate_layers/outputs/default",
+    "colour_mae_levels": 17.94,
+    "colour_psnr_db": 20.19,
+    "colour_ssim": 0.555,
+    "colour_mean_delta_e": 9.89,
+    "colour_p95_delta_e": 25.08,
+    "edge_precision_2px": 0.362,
+    "edge_recall_2px": 0.262,
+    "edge_f1_2px": 0.304,
+    "edge_f1_by_luck": 0.165,
+    "edge_skill_2px": 0.166,
+    "height_mae_levels": 41.1,
+    "height_mae_best_fit_levels": 37.26,
+    "height_best_fit_gain_offset": [
+     0.43,
+     76.4
+    ],
+    "height_ssim": 0.3019,
+    "height_correlation": 0.3741,
+    "normal_mean_angle_degrees": 16.29,
+    "normal_median_angle_degrees": 11.6,
+    "normal_p95_angle_degrees": 48.77,
+    "tier_reached": "none",
+    "tier_rules": {
+     "layout": {
+      "edge_skill_2px": "min 0.3",
+      "colour_mean_delta_e": "max 20.0",
+      "height_mae_best_fit_levels": "max 40.0"
+     },
+     "close": {
+      "edge_skill_2px": "min 0.55",
+      "colour_ssim": "min 0.6",
+      "colour_mean_delta_e": "max 10.0",
+      "height_mae_best_fit_levels": "max 20.0",
+      "normal_mean_angle_degrees": "max 12.0"
+     },
+     "exact": {
+      "edge_skill_2px": "min 0.85",
+      "colour_ssim": "min 0.92",
+      "colour_mean_delta_e": "max 3.0",
+      "height_mae_best_fit_levels": "max 6.0",
+      "normal_mean_angle_degrees": "max 4.0"
+     }
+    }
+   },
+   "bake": {
+    "size": 1254,
+    "parameters": {},
+    "sobel_strength": 8.021738648895361,
+    "bump_node_distance": 0.006396920772643829,
+    "seconds": 586.9
+   }
+  },
+  "default tile before the look fixes (outputs/default_before_look_fixes)": {
+   "same-kind": {
+    "_note": "The candidate path was written when the tile was scored, while it still lived in outputs/default; corrected after the second honesty check to the folder it is in now.",
+    "reference": "slate",
+    "candidate": "recipes/slate_layers/outputs/default_before_look_fixes",
+    "overall": 0.705,
+    "groups": {
+     "colour": 0.701,
+     "height": 0.654,
+     "normal": 0.671,
+     "tiling": 1.0
+    },
+    "scores": {
+     "colour_distribution": 0.926,
+     "colour_spectrum": 0.609,
+     "colour_orientation": 0.63,
+     "colour_scale": 0.452,
+     "colour_gradient": 0.753,
+     "seam": 1.0,
+     "height_distribution": 0.699,
+     "height_spectrum": 0.346,
+     "height_gradient": 0.717,
+     "height_colour_link": 0.892,
+     "height_contrast": 0.771,
+     "normal_tilt": 0.611,
+     "normal_components": 0.83,
+     "normal_height_agreement": 0.534
+    },
+    "raw_distances": {
+     "colour_distribution": 0.0046,
+     "colour_spectrum": 0.1408,
+     "colour_orientation": 0.1656,
+     "colour_scale": 0.697,
+     "colour_gradient": 0.0036,
+     "seam": 0.0,
+     "height_distribution": 0.0301,
+     "height_spectrum": 0.2385,
+     "height_gradient": 0.0069,
+     "height_colour_link": 0.0054,
+     "height_contrast": 0.1145,
+     "normal_tilt": 0.0479,
+     "normal_components": 0.0443,
+     "normal_height_agreement": 0.0054
+    },
+    "facts": {
+     "seam_ratio_candidate": 0.8,
+     "seam_ratio_reference": 1.69,
+     "correlation_length_px_reference": [
+      64.0,
+      11.0
+     ],
+     "correlation_length_px_candidate": [
+      258.0,
+      11.0
+     ],
+     "mean_lab_reference": [
+      25.2,
+      -1.6,
+      -1.0
+     ],
+     "mean_lab_candidate": [
+      25.1,
+      -1.8,
+      -1.0
+     ],
+     "height_colour_corr_reference": 0.993,
+     "height_colour_corr_candidate": 0.987,
+     "normal_height_corr_reference": [
+      -0.9555107544504099,
+      0.9412310219353763
+     ],
+     "normal_height_corr_candidate": [
+      -0.9636521923095837,
+      0.9438355705929946
+     ]
+    }
+   },
+   "dot-for-dot (transparency only)": {
+    "_note": "The candidate path was written when the tile was scored, while it still lived in outputs/default; corrected after the second honesty check to the folder it is in now.",
+    "reference": "slate",
+    "candidate": "recipes/slate_layers/outputs/default_before_look_fixes",
+    "colour_mae_levels": 18.71,
+    "colour_psnr_db": 20.05,
+    "colour_ssim": 0.5299,
+    "colour_mean_delta_e": 10.45,
+    "colour_p95_delta_e": 25.06,
+    "edge_precision_2px": 0.35,
+    "edge_recall_2px": 0.307,
+    "edge_f1_2px": 0.327,
+    "edge_f1_by_luck": 0.192,
+    "edge_skill_2px": 0.167,
+    "height_mae_levels": 42.36,
+    "height_mae_best_fit_levels": 37.73,
+    "height_best_fit_gain_offset": [
+     0.411,
+     76.3
+    ],
+    "height_ssim": 0.276,
+    "height_correlation": 0.3642,
+    "normal_mean_angle_degrees": 16.89,
+    "normal_median_angle_degrees": 12.6,
+    "normal_p95_angle_degrees": 48.35,
+    "tier_reached": "none",
+    "tier_rules": {
+     "layout": {
+      "edge_skill_2px": "min 0.3",
+      "colour_mean_delta_e": "max 20.0",
+      "height_mae_best_fit_levels": "max 40.0"
+     },
+     "close": {
+      "edge_skill_2px": "min 0.55",
+      "colour_ssim": "min 0.6",
+      "colour_mean_delta_e": "max 10.0",
+      "height_mae_best_fit_levels": "max 20.0",
+      "normal_mean_angle_degrees": "max 12.0"
+     },
+     "exact": {
+      "edge_skill_2px": "min 0.85",
+      "colour_ssim": "min 0.92",
+      "colour_mean_delta_e": "max 3.0",
+      "height_mae_best_fit_levels": "max 6.0",
+      "normal_mean_angle_degrees": "max 4.0"
+     }
+    }
+   }
+  },
+  "look measures (tuner script and copy of the look checker script): before / after round 1 / now / reference": "Finished 1254-dot tiles. Tuner's measures (measure_look.py; colour measures after shrinking to 900 dots; relief from the strength-7 normal):\n\n| measure | before round 1 | after round 1 | now | reference |\n|---|---|---|---|---|\n| median colour gradient (900-dot artefact) | 9.44 | 7.54 | 7.54 | 5.55 |\n| side-to-side over up-down gradient energy | 1.15 | 0.98 | 0.98 | 0.83 |\n| olive share (hue rule; under-counts see-through moss) | 10.4 % | 5.7 % | 4.0 % | 6.4 % |\n| tan share | 1.91 % | 0.88 % | 1.19 % | 1.00 % |\n| lightness spread inside the moss | 4.4 | 5.8 | 5.6 | 6.0 |\n| largest moss clump (dots) | 16,056 | 9,294 | 8,439 | 7,013 |\n| brightest slate mean lightness | 38.9 | 36.8 | 34.1 | 34.6 |\n| slate-to-slate lightness spread | 3.84 | 3.84 | 2.65 | 2.51 |\n| normal 99th-percentile tilt | 98.7 | 103.0 | 103.5 | 112.6 |\n| average up-down slope | 11.2 | 10.3 | 10.6 | 13.5 |\n| average side-to-side slope | 16.4 | 13.7 | 14.2 | 15.6 |\n\nThe look checker's own measures (copied script, native 1254 dots):\n\n| measure | before round 1 | after round 1 | now | reference |\n|---|---|---|---|---|\n| paint median slope | 3.06 | 1.25 | 1.91 | 1.86 |\n| flat-paint share | 7.4 % | 18.9 % | 9.9 % | 10.9 % |\n| hard-edge share | 28.4 % | 24.7 % | 23.8 % | 15.1 % |\n| side-to-side over up-down paint slope | 2.44 | 1.89 | 2.08 | 1.61 |\n| fine grain level | 1 | 0 | 1 | 1 |\n| inner spread of a slate (mean / smallest) | 11.7 / 6.7 | 10.8 / 6.2 | 11.2 / 6.6 | 12.3 / 7.8 |\n| spread of slate mean greys | 8.48 | 8.89 | 5.57 | 5.51 |\n| plain slates (inner spread under 8) | 1 of 59 | 4 of 59 | 3 of 59 | 1 of 45 |\n| slates more than 12 grey levels off the middle | 11 of 59 | 9 of 59 | 2 of 59 | 3 of 45 |\n| moss near side joints | 12.8 % | 14.5 % | 7.2 % | 6.5 % |\n| tan share (checker's rule) | 2.23 % | 1.18 % | 1.47 % | 1.56 % |\n| tan in pieces of 300+ dots | 52.9 % | 13.7 % | 25.2 % | 35.6 % |\n| lower-edge wobble / corner rise (dots) | 1.33 / 6.8 | 1.78 / 12.3 | 2.21 / 14.8 | 2.98 / 17.7 |\n| relief: steepest 1 % tilt / mean tilt | 98.7 / 22.5 | 103.0 / 19.7 | 103.5 / 20.2 | 112.6 / 23.7 |\n| mean colour (Lab) | 25.1, -1.8, -1.0 | 24.2, -1.7, -1.7 | 23.7, -1.8, -1.3 | 25.2, -1.6, -1.0 |\n| share of dark dots (grey under 30) | 10.9 % | 12.5 % | 12.9 % | 11.3 % |\n| moss steepness at the edge / inside (my moss_character.py) | 18.5 / 10.2 | 24.0 / 16.6 | 17.0 / 10.6 | 15.9 / 7.1 |\n",
+  "look checker second look (round 2)": {
+   "problems status": [
+    {
+     "problem": "1 Paint handling (liquified flame tongues, wavy rippled edges)",
+     "status": "better",
+     "evidence": "Ripple is gone and the paint is now broad flat bands with crisp edges and the fine grain is back (crop_paint_1to1.jpg, crop_paint_2x.jpg, crop_lower_edge_3x.jpg). Tuner-rule numbers re-run at 1254 dots: median grey slope inside slates 3.06 -> 1.91 (reference 1.86); hard-edge share 28.4 % -> 23.8 % (reference 15.1 %); side-to-side over up-down slope 2.44 -> 2.08 (reference 1.61); grain noise 1.0 (reference 1.0); inner spread of a slate 11.7 -> 11.2 (reference 12.3). Not fixed: tongues are still pointed flames, the paint is still more upright-stripy than the reference, and the broader cells brought a NEW fault, straight-edged flat facets (see new problems)."
+    },
+    {
+     "problem": "2 Moss (too much, flat khaki stain, rows of teeth)",
+     "status": "better",
+     "evidence": "Teeth and flakes are gone; the moss is now a soft see-through olive wash with the slate streaks showing through, hanging from the top edges (crop_moss_2x.jpg, crop_moss_b_2x.jpg, crop_side_joint_moss.jpg). Mine (Lab rule): moss share of slate dots 13.6 % -> 6.5 % (reference 9.0 %); largest moss slate 81 % -> 52 % (reference 26 %); moss in the top third of the slate 49 % -> 42 % (reference 32 %). Tuner rule: moss pieces over 1500 dots 31 -> 13 (reference 13), share of moss in big pieces 71.6 % -> 51.0 % (reference 52.8 %). It has overshot a little to the pale side: dots with b* above 8 (strong olive) 9.1 % -> 2.3 % (reference 5.0 %); slates with over 5 % moss 60 % -> 32 % (reference 67 %, my rule). Reads as dull brownish-olive with a combed vertical texture rather than the reference's yellower mottled patches."
+    },
+    {
+     "problem": "3 Chips and damage (big tan L-shapes at the lower corners)",
+     "status": "fixed",
+     "evidence": "L-shapes at the corners are gone (full_after.jpg, compare_full_reference_before_after.jpg, crop_lower_edge2_3x.jpg). Tuner rule: tan share 2.23 % -> 1.47 % (reference 1.56 %); tan in pieces of 300+ dots 52.9 % -> 25.2 % (reference 35.6 %); round tan dots 39 -> 24 (reference 28). Mine (Lab, cream/tan/pink dots): chip share of tile 0.82 % -> 0.37 % (reference 0.17 %); chip area in chunky pieces (width 7+ dots) 73 % -> 41 % (reference 45 %); chip-coloured share of the lower rim 4.1 % -> 1.4 % (reference 0.9 %). Left over: along most slates the chips are still a thin ragged fringe, not chunky cream flakes; a few places (x 560-760, y 200-230) look right."
+    },
+    {
+     "problem": "4 Slate shape (square corners, ruler-straight rows)",
+     "status": "better",
+     "evidence": "Lower corners are clearly rounded now and the lower edges are more uneven (tiled3x3_after_corner_1to1.jpg, crop_lower_edge_3x.jpg). Mine: corner rise 7.4 -> 15.8 dots (reference 21.3); lower-edge mid-scale wobble 1.04 -> 1.63 (reference 2.78); row band wander 2.54 -> 3.32 dots (reference 4.13). Tuner rule: corner rise 6.8 -> 14.8 (reference 17.7); wobble 1.33 -> 2.21 (reference 2.98). About three quarters of the way to the reference; rows are still straighter than the reference. The new rounded corners leave a black wedge where an upright joint meets the row band (crop_side_joint_moss_b.jpg)."
+    },
+    {
+     "problem": "5 Relief under a raking light (rippled plastic, rims/chips/moss carry little relief)",
+     "status": "better",
+     "evidence": "My own Cycles renders with verify_look/lit_preview.py unchanged (lit_full_side_by_side.jpg, lit_zoom_side_by_side.jpg: reference | before | after). The wood-plank ripple of the before tile is gone, the lower lips now catch light with a dark groove under them and the moss stands up a little. But faces are smoother and flatter than the reference, which has chunky pitted chip edges; what relief remains is thin scratch-like paint-edge lines, and the straight facet edges show up as straight scratches (zoom picture, upper right slate and left slate of row 2). Normal-map numbers: steepest 1 % tilt 98.7 -> 103.6 (reference 112.6, better); mean tilt 22.5 -> 20.2 (reference 23.7, worse); up-down slope 11.2 -> 10.6 (reference 13.5, worse); side slope 16.4 -> 14.2 (reference 15.6, closer). No contour lines were visible to me in the lit pictures."
+    },
+    {
+     "problem": "6 Shadow under each row (black drips, 4 grey tiers)",
+     "status": "fixed",
+     "evidence": "crop_shadow_band_3x.jpg: a clean dark band with one soft step below, no drips, no stepped tiers. Dark dots (grey under 30) 10.9 % -> 12.9 % (reference 11.3 %), slightly heavy. The top edge of the band has small dark spikes poking up into the lip, a minor crumbly look."
+    },
+    {
+     "problem": "7 Pale flat outlier slates",
+     "status": "better",
+     "evidence": "Mine (median Rec.709 grey per slate, 60 slates): slate-to-slate spread 9.17 -> 6.93 (reference 5.10); slates more than 12 off the middle 10 -> 6 (reference 1 of 33); more than 8 off 29 -> 12 (reference 4); range 53.7-90.7 -> 45.6-81.5 (reference 55.5-78.8). Tuner rule (copied script): spread 8.48 -> 5.57 (reference 5.51), far-off slates 11 -> 2 of 59 (reference 3 of 45). The two rules agree it is much better but disagree on whether it is fully fixed. Still visible: the grey-brown flat slates at x22,y938 and x1204,y937 (+17.5 and +14.4 grey levels) and x643,y780, x1215,y149 (all about +13), and one very dark slate in the bottom row (x263,y1219, -18.5). In the 3x3 tiling the grey-brown pair repeats as a visible landmark (tiled3x3_after.jpg)."
+    },
+    {
+     "problem": "8 Lone crack",
+     "status": "fixed",
+     "evidence": "crop_crack_before_after_hairline.jpg: the crack across the row 7 slate is gone. A short pale hairline remains at about x1175-1210, y660 (right of the same picture), a minor leftover."
+    },
+    {
+     "problem": "9 Lichen discs (polka dots)",
+     "status": "fixed",
+     "evidence": "Tuner rule: round tan dots inside slates 39 -> 24 (reference 28). A few small dots are still visible at 1:1 (crop_paint_2x.jpg) but at the reference's rate."
+    },
+    {
+     "problem": "10 Variations (v6 burnt patches, v5 flat, v4 only lighter, v2 like v1)",
+     "status": "same",
+     "evidence": "Not changed: variations/variations.json and the 1254-dot variation pictures were not touched, so they still show the old default look. The tuner only looked at 512-dot versions on the new default (look_fixes/round2/variations_on_new_default_small.jpg): v6 is very dark overall, v2 is still hard to tell from v1, v4 is only a lighter tile, v5 is flat-looking. The tuner reported this honestly as untested."
+    },
+    {
+     "problem": "11 Moss cut straight at the side joints",
+     "status": "fixed",
+     "evidence": "Moss now fades out before a side joint instead of ending in a straight cut (crop_side_joint_moss.jpg and crop_side_joint_moss_b.jpg, before | after). Tuner rule: moss within 14 dots of a side joint 12.8 % -> 7.2 % (reference 6.5 %). Mine (Lab moss rule, joints found as dark upright runs): 13.8 % -> 5.0 % (reference 5.8 %), so the two rules agree. Careful: moss near joints compared with all slate dots near joints is now 0.41 against the reference's 0.76, so it shies away from joints a little more than the reference does."
+    }
+   ],
+   "new problems": [
+    "MAJOR, NEW: straight-edged flat paint facets (a low-poly, cut-glass look). About 14 slates carry a flat dark or pale polygon with straight slanting edges that is visible at normal contrast at 1:1 (marked 1-10 in facets_marked_on_contrast_boosted_after.jpg; for example x480-775,y75-225; the dark rectangle x985-1065,y80-195; the dark triangles x375-455,y560-655 and x810-895,y575-695). The BEFORE tile has none and the reference has none. They show as straight scratches under the raking light (lit_zoom_side_by_side.jpg) and as repeated arrowhead shapes in the 3x3 tiling. They came in with the broader, taller paint cells (streak_width 0.014 -> 0.03, mottle_tallness 1.1 -> 1.5) once the edge wobble was turned down. The tuner admitted this and could not remove it with settings. My automatic facet finders (line segments, edge directions, flat-patch outlines) all failed, so the count is by eye (my_straight_edges.py records the failure). This is the most noticeable difference from the reference now.",
+    "The lower rim reads as frayed or chewed: a thin pale-grey lip with a pink-orange fringe and dark speckles, instead of the reference's smooth pale line with a few chunky cream chips (crop_lower_edge_3x.jpg, crop_lower_edge2_3x.jpg). By number the rim is as busy as the reference (column-to-column lightness step 2.54 against 2.36 reference, 1.75 before; mid-scale wobble still lower, 1.63 against 2.78), so it is a difference of character, not amount. Visible at 1:1 on every slate.",
+    "Moss has gone slightly too pale and too widespread-thin: strong olive dots 2.3 % against 5.0 % in the reference (9.1 % before), moss on over 1 % of slates in 67 % against 94 % (my rule); at the 3x3 scale the tile looks bluer and less olive than the reference (tiled3x3_after.jpg against tiled3x3_reference.jpg). Less serious than the old over-mossing. The tuner's own olive-share rule under-counts see-through moss, as the tuner said.",
+    "Relief is still weaker than the reference (mean tilt 20.2 against 23.7) and different in character: thin scratches and straight facet lines instead of chunky pitted chips.",
+    "Repeat landmarks in 3x3: the pair of grey-brown flat slates in the row near y 940 (and a third at x643,y780), the dark mossy brown slate at x560-720,y1030-1160, the dark rectangle slate at x985-1065,y80-195, and the facet triangles. No seams: wrap-round difference at the tile edge is 1.01 (colour), 1.03 (normal) and 1.03 (height) times the difference between inside neighbours, left-right; up-down the wrap is smaller than inside because both edges are dark joint rows. 3x3 looked at in tiled3x3_after.jpg and tiled3x3_after_corner_1to1.jpg.",
+    "Small: whole tile a little darker (slate-face lightness L 26.4 against 27.8 in the reference; mean L 23.7 against 25.2 by the tuner; dark dots 12.9 % against 11.3 %); slightly bluer slate faces (b* -1.36 against -1.12). Not visible side by side.",
+    "Small: a pale hairline at x1175-1210,y660 is left over; black wedge flares where an upright joint meets the row band at the rounded corners.",
+    "Checked and NOT a problem: slates are not too plain (inner spread 11.2 against 12.3, plain slates 3 of 59 against 1 of 45), the paint is not blurry (grain noise 1.0 as in the reference, hard-edge share 23.8 % against 15.1 %), chips are visible, the relief is not exaggerated (weaker, not stronger), and there are no tiling seams."
+   ],
+   "reads as same hand": "nearly",
+   "overall": "Better than before on 10 of the 11 problems, but not yet the same hand. FIXED: chips at the corners (3), shadow band (6), lone crack (8), lichen dots (9), moss cut at side joints (11). BETTER: paint ripple (1), moss amount and softness (2), slate shape (4), relief character (5), outlier slates (7). SAME: variations (10, not attempted). Nothing got worse than before on the 11 problems, but the round introduced one new major fault: about 14 slates carry flat straight-edged polygon facets that neither the BEFORE tile nor the reference has; this is now the first thing an art director would point at, and it also shows as straight scratches in the raking-light render. Next come the frayed, pink-fringed lower rim (a difference of character), relief that is still weaker and thinner than the reference, and a few remaining pale or dark outlier slates that repeat as landmarks when tiled. The tuner's claims hold in direction: I re-ran its numbers and they match (paint slope 1.91, side joints 7.2 %, tan 1.47 %, corner rise 14.8). My own cross-checks agree on direction but show less perfect values: slate-to-slate spread 6.9 against 5.1 reference (tuner's rule says 5.57 against 5.51), moss near side joints 5.0 % against 5.8 % (agrees), far-off slates 6 of 60 (tuner's rule says 2 of 59). Tiling is clean. Would an art director accept it as the same hand? Nearly: same material, same palette, same row layout and same kind of hand-painted dry-brush, but the cut-glass facets and the frayed rim give it away within a few seconds at 1:1.",
+   "should iterate": true
+  },
+  "ladder (1254 dots), now": [
+   {
+    "rung": "0",
+    "what": "layout and joints, flat slates",
+    "colour group": 0.41,
+    "colour_scale measure": 0.065,
+    "height group": 0.441,
+    "overall (normal made like the harness)": 0.459,
+    "overall (strength-7 normal, as the default tile score)": 0.442,
+    "normal group (strength-7 normal)": 0.266,
+    "height group (strength-7 run)": 0.441
+   },
+   {
+    "rung": "1",
+    "what": "+ colour and fade",
+    "colour group": 0.728,
+    "colour_scale measure": 0.798,
+    "height group": 0.691,
+    "overall (normal made like the harness)": 0.735,
+    "overall (strength-7 normal, as the default tile score)": 0.718,
+    "normal group (strength-7 normal)": 0.604,
+    "height group (strength-7 run)": 0.691
+   },
+   {
+    "rung": "2",
+    "what": "+ moss",
+    "colour group": 0.792,
+    "colour_scale measure": 0.902,
+    "height group": 0.737,
+    "overall (normal made like the harness)": 0.774,
+    "overall (strength-7 normal, as the default tile score)": 0.77,
+    "normal group (strength-7 normal)": 0.647,
+    "height group (strength-7 run)": 0.737
+   },
+   {
+    "rung": "3",
+    "what": "+ damage (= the default tile)",
+    "colour group": 0.822,
+    "colour_scale measure": 0.899,
+    "height group": 0.735,
+    "overall (normal made like the harness)": 0.789,
+    "overall (strength-7 normal, as the default tile score)": 0.778,
+    "normal group (strength-7 normal)": 0.616,
+    "height group (strength-7 run)": 0.735
+   },
+   {
+    "rung": "-",
+    "what": "the default WITHOUT the outline and shadow",
+    "colour group": 0.676,
+    "colour_scale measure": 0.649,
+    "height group": 0.403,
+    "overall (normal made like the harness)": 0.601,
+    "overall (strength-7 normal, as the default tile score)": 0.588,
+    "normal group (strength-7 normal)": 0.475,
+    "height group (strength-7 run)": 0.403
+   }
+  ],
+  "ladder before the look fixes": [
+   {
+    "rung": "0",
+    "what": "layout and joints, flat slates",
+    "colour group": 0.322,
+    "colour_scale measure": 0.065,
+    "height group": 0.371,
+    "overall (normal made like the harness)": 0.402
+   },
+   {
+    "rung": "1",
+    "what": "+ colour and fade",
+    "colour group": 0.48,
+    "colour_scale measure": 0.0,
+    "height group": 0.598,
+    "overall (normal made like the harness)": 0.57
+   },
+   {
+    "rung": "2",
+    "what": "+ moss",
+    "colour group": 0.636,
+    "colour_scale measure": 0.369,
+    "height group": 0.632,
+    "overall (normal made like the harness)": 0.656
+   },
+   {
+    "rung": "3",
+    "what": "+ damage (= the default tile)",
+    "colour group": 0.701,
+    "colour_scale measure": 0.452,
+    "height group": 0.654,
+    "overall (normal made like the harness)": 0.695
+   },
+   {
+    "rung": "-",
+    "what": "the default WITHOUT the outline and shadow",
+    "colour group": 0.567,
+    "colour_scale measure": 0.489,
+    "height group": 0.367,
+    "overall (normal made like the harness)": 0.539
+   }
+  ],
+  "variations (1254 dots, colour group), now": {
+   "settings": {
+    "v1_new_seeds": {
+     "_words": "the same settings, five new random seeds: a different roof of the same kind",
+     "layout.seed": 7,
+     "colour_and_fade.seed": 17,
+     "damage.seed": 27,
+     "moss.seed": 37,
+     "outline_and_shadow.seed": 47
+    },
+    "v2_more_moss": {
+     "_words": "a damp roof: a lot more moss than the default, on nearly every slate, more lichen, a softer see-through moss edge",
+     "moss.coverage": 0.62,
+     "moss.patchiness": 0.5,
+     "moss.slate_variation": 0.8,
+     "moss.lichen_amount": 0.3,
+     "moss.rim_opacity": 0.7,
+     "moss.seed": 61,
+     "layout.seed": 2
+    },
+    "v3_heavily_damaged": {
+     "_words": "a neglected roof: deep flaking along every lower edge, cracks, scratches, pits, bites and broken corners",
+     "damage.chip_amount": 1.0,
+     "damage.chip_depth": 0.05,
+     "damage.chip_clustering": 0.5,
+     "damage.crack_amount": 0.6,
+     "damage.scratch_amount": 0.5,
+     "damage.pit_amount": 0.2,
+     "damage.notch_amount": 0.8,
+     "damage.corner_break_amount": 0.4,
+     "layout.ragged_bottom": 0.008,
+     "damage.seed": 71,
+     "layout.seed": 3,
+     "damage.chip_frequency": 90
+    },
+    "v4_faded_sun_bleached": {
+     "_words": "a south-facing roof: long fade, big sun-bleached areas that cross several slates, lighter and greyer slates, little moss",
+     "colour_and_fade.fade_amount": 1.5,
+     "colour_and_fade.bleach_amount": 1.0,
+     "colour_and_fade.bleach_cover": 0.55,
+     "colour_and_fade.patch_size": 0.6,
+     "colour_and_fade.stain_amount": 0.0,
+     "colour_and_fade.tone_centre": 4.6,
+     "colour_and_fade.tint_amount": 0.5,
+     "colour_and_fade.patch_tint": 0.3,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    },
+    "v5_fresh_and_clean": {
+     "_words": "a new roof: even tone, no odd-coloured slates, slight paint streaks, almost no damage, no moss",
+     "colour_and_fade.fade_amount": 0.6,
+     "colour_and_fade.streak_contrast": 0.9,
+     "colour_and_fade.tone_spread": 0.3,
+     "colour_and_fade.tone_centre": 3.2,
+     "colour_and_fade.outlier_share": 0.0,
+     "colour_and_fade.speck_amount": 0.5,
+     "colour_and_fade.tint_amount": 0.35,
+     "colour_and_fade.patch_tint": 0.2,
+     "colour_and_fade.bleach_amount": 0.0,
+     "colour_and_fade.stain_amount": 0.0,
+     "damage.amount": 0.2,
+     "moss.amount": 0.0,
+     "layout.seed": 5
+    },
+    "v6_dark_and_wet": {
+     "_words": "a roof after rain: darker slates, big damp patches that stay lighter than the joints so every slate outline still reads, a rougher surface, some moss",
+     "colour_and_fade.tone_centre": 3.0,
+     "colour_and_fade.stain_amount": 0.6,
+     "colour_and_fade.stain_cover": 0.4,
+     "colour_and_fade.patch_size": 0.3,
+     "colour_and_fade.bleach_amount": 0.1,
+     "combine.base_roughness": 0.45,
+     "layout.seed": 6,
+     "colour_and_fade.seed": 66
+    },
+    "v7_pale_old": {
+     "_words": "an old roof: pale warm-grey slates, flaked edges, lots of lichen, little moss",
+     "colour_and_fade.tone_centre": 5.0,
+     "colour_and_fade.tint_amount": 1.0,
+     "colour_and_fade.tint_green_share": 0.3,
+     "damage.chip_amount": 0.9,
+     "moss.lichen_amount": 0.6,
+     "moss.coverage": 0.12,
+     "layout.seed": 8,
+     "colour_and_fade.seed": 88
+    },
+    "v8_big_slates": {
+     "_words": "a different roof: 6 rows of 4 big slates instead of 8 rows of 6 (all sizes are tile units, so every layer adapts)",
+     "layout.rows_per_tile": 6,
+     "layout.slates_per_row": 4,
+     "layout.width_spread": 0.35,
+     "layout.seed": 9
+    }
+   },
+   "colour group": {
+    "v1_new_seeds": 0.811,
+    "v2_more_moss": 0.7,
+    "v3_heavily_damaged": 0.761,
+    "v4_faded_sun_bleached": 0.694,
+    "v5_fresh_and_clean": 0.534,
+    "v6_dark_and_wet": 0.693,
+    "v7_pale_old": 0.591,
+    "v8_big_slates": 0.732
+   }
+  },
+  "variations before the look fixes": {
+   "settings": {
+    "v1_new_seeds": {
+     "_words": "the same settings, five new random seeds: a different roof of the same kind",
+     "layout.seed": 7,
+     "colour_and_fade.seed": 17,
+     "damage.seed": 27,
+     "moss.seed": 37,
+     "outline_and_shadow.seed": 47
+    },
+    "v2_more_moss": {
+     "_words": "a damp roof: more moss, more lichen, moss on more slates",
+     "moss.coverage": 0.34,
+     "moss.patchiness": 0.5,
+     "moss.slate_variation": 0.8,
+     "moss.lichen_amount": 0.35,
+     "moss.seed": 61,
+     "layout.seed": 2
+    },
+    "v3_heavily_damaged": {
+     "_words": "a neglected roof: deep flaking along every lower edge, cracks, scratches, pits, bites and broken corners",
+     "damage.chip_amount": 1.0,
+     "damage.chip_depth": 0.05,
+     "damage.chip_clustering": 0.5,
+     "damage.crack_amount": 0.6,
+     "damage.scratch_amount": 0.5,
+     "damage.pit_amount": 0.2,
+     "damage.notch_amount": 0.8,
+     "damage.corner_break_amount": 0.4,
+     "layout.ragged_bottom": 0.008,
+     "damage.seed": 71,
+     "layout.seed": 3,
+     "damage.chip_frequency": 90
+    },
+    "v4_faded_sun_bleached": {
+     "_words": "a south-facing roof: long fade, big sun-bleached areas, lighter slates, little moss",
+     "colour_and_fade.fade_amount": 1.5,
+     "colour_and_fade.bleach_amount": 0.8,
+     "colour_and_fade.bleach_cover": 0.45,
+     "colour_and_fade.stain_amount": 0.1,
+     "colour_and_fade.tone_centre": 4.8,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    },
+    "v5_fresh_and_clean": {
+     "_words": "a new roof: even tone, hardly any weathering, almost no damage, no moss",
+     "colour_and_fade.fade_amount": 0.3,
+     "colour_and_fade.tone_spread": 0.5,
+     "colour_and_fade.tone_centre": 3.2,
+     "colour_and_fade.outlier_share": 0.04,
+     "colour_and_fade.speck_amount": 0.3,
+     "colour_and_fade.bleach_amount": 0.0,
+     "colour_and_fade.stain_amount": 0.0,
+     "damage.amount": 0.2,
+     "moss.amount": 0.0,
+     "layout.seed": 5
+    },
+    "v6_dark_and_wet": {
+     "_words": "a roof after rain: dark slates, big damp patches, rougher surface, a little moss",
+     "colour_and_fade.tone_centre": 2.3,
+     "colour_and_fade.stain_amount": 0.9,
+     "colour_and_fade.stain_cover": 0.5,
+     "colour_and_fade.bleach_amount": 0.1,
+     "combine.base_roughness": 0.45,
+     "moss.coverage": 0.25,
+     "layout.seed": 6,
+     "colour_and_fade.seed": 66
+    },
+    "v7_pale_old": {
+     "_words": "an old roof: pale warm-grey slates, flaked edges, lots of lichen, little moss",
+     "colour_and_fade.tone_centre": 5.0,
+     "colour_and_fade.tint_amount": 1.0,
+     "colour_and_fade.tint_green_share": 0.3,
+     "damage.chip_amount": 0.9,
+     "moss.lichen_amount": 0.6,
+     "moss.coverage": 0.12,
+     "layout.seed": 8,
+     "colour_and_fade.seed": 88
+    },
+    "v8_big_slates": {
+     "_words": "a different roof: 6 rows of 4 big slates instead of 8 rows of 6 (all sizes are tile units, so every layer adapts)",
+     "layout.rows_per_tile": 6,
+     "layout.slates_per_row": 4,
+     "layout.width_spread": 0.35,
+     "layout.seed": 9
+    }
+   },
+   "colour group": {
+    "v1_new_seeds": 0.765,
+    "v2_more_moss": 0.76,
+    "v3_heavily_damaged": 0.733,
+    "v4_faded_sun_bleached": 0.554,
+    "v5_fresh_and_clean": 0.463,
+    "v6_dark_and_wet": 0.55,
+    "v7_pale_old": 0.544,
+    "v8_big_slates": 0.746
+   }
+  },
+  "variation test bakes at 512 dots (17 candidates, rounds 1 and 2)": {
+   "round 1": {
+    "v6_a_checker_advice": {
+     "colour_and_fade.tone_centre": 2.8,
+     "colour_and_fade.stain_amount": 0.5,
+     "colour_and_fade.stain_cover": 0.3,
+     "colour_and_fade.bleach_amount": 0.1,
+     "combine.base_roughness": 0.45,
+     "moss.coverage": 0.25,
+     "layout.seed": 6,
+     "colour_and_fade.seed": 66
+    },
+    "v6_b_less_dark_bigger_damp": {
+     "colour_and_fade.tone_centre": 3.0,
+     "colour_and_fade.stain_amount": 0.6,
+     "colour_and_fade.stain_cover": 0.4,
+     "colour_and_fade.patch_size": 0.3,
+     "colour_and_fade.bleach_amount": 0.1,
+     "combine.base_roughness": 0.45,
+     "moss.coverage": 0.3,
+     "layout.seed": 6,
+     "colour_and_fade.seed": 66
+    },
+    "v6_c_darker_slates_light_damp": {
+     "colour_and_fade.tone_centre": 2.5,
+     "colour_and_fade.stain_amount": 0.4,
+     "colour_and_fade.stain_cover": 0.35,
+     "colour_and_fade.patch_size": 0.3,
+     "colour_and_fade.bleach_amount": 0.1,
+     "combine.base_roughness": 0.45,
+     "moss.coverage": 0.3,
+     "layout.seed": 6,
+     "colour_and_fade.seed": 66
+    },
+    "v5_a_checker_advice": {
+     "colour_and_fade.fade_amount": 0.5,
+     "colour_and_fade.streak_contrast": 0.8,
+     "colour_and_fade.tone_spread": 0.3,
+     "colour_and_fade.tone_centre": 3.2,
+     "colour_and_fade.outlier_share": 0.04,
+     "colour_and_fade.speck_amount": 0.3,
+     "colour_and_fade.bleach_amount": 0.0,
+     "colour_and_fade.stain_amount": 0.0,
+     "damage.amount": 0.2,
+     "moss.amount": 0.0,
+     "layout.seed": 5
+    },
+    "v5_b_more_paint": {
+     "colour_and_fade.fade_amount": 0.6,
+     "colour_and_fade.streak_contrast": 0.9,
+     "colour_and_fade.tone_spread": 0.3,
+     "colour_and_fade.tone_centre": 3.2,
+     "colour_and_fade.outlier_share": 0.04,
+     "colour_and_fade.speck_amount": 0.5,
+     "colour_and_fade.bleach_amount": 0.0,
+     "colour_and_fade.stain_amount": 0.0,
+     "damage.amount": 0.2,
+     "moss.amount": 0.0,
+     "layout.seed": 5
+    },
+    "v5_c_even_and_brighter": {
+     "colour_and_fade.fade_amount": 0.5,
+     "colour_and_fade.streak_contrast": 0.8,
+     "colour_and_fade.tone_spread": 0.2,
+     "colour_and_fade.tone_centre": 3.6,
+     "colour_and_fade.outlier_share": 0.0,
+     "colour_and_fade.speck_amount": 0.4,
+     "colour_and_fade.bleach_amount": 0.0,
+     "colour_and_fade.stain_amount": 0.0,
+     "damage.amount": 0.2,
+     "moss.amount": 0.0,
+     "layout.seed": 5
+    },
+    "v4_a_checker_advice": {
+     "colour_and_fade.fade_amount": 1.5,
+     "colour_and_fade.bleach_amount": 1.0,
+     "colour_and_fade.bleach_cover": 0.45,
+     "colour_and_fade.patch_size": 0.35,
+     "colour_and_fade.stain_amount": 0.1,
+     "colour_and_fade.tone_centre": 4.8,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    },
+    "v4_b_bigger_patches_more_cover": {
+     "colour_and_fade.fade_amount": 1.3,
+     "colour_and_fade.bleach_amount": 1.0,
+     "colour_and_fade.bleach_cover": 0.55,
+     "colour_and_fade.patch_size": 0.45,
+     "colour_and_fade.stain_amount": 0.1,
+     "colour_and_fade.tone_centre": 4.4,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    },
+    "v4_c_dark_roof_bleached_areas": {
+     "colour_and_fade.fade_amount": 1.3,
+     "colour_and_fade.bleach_amount": 1.0,
+     "colour_and_fade.bleach_cover": 0.4,
+     "colour_and_fade.patch_size": 0.35,
+     "colour_and_fade.stain_amount": 0.1,
+     "colour_and_fade.tone_centre": 3.7,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    },
+    "v2_a_more_coverage": {
+     "moss.coverage": 0.5,
+     "moss.patchiness": 0.5,
+     "moss.slate_variation": 0.8,
+     "moss.lichen_amount": 0.35,
+     "moss.seed": 61,
+     "layout.seed": 2
+    },
+    "v2_b_much_more_softer": {
+     "moss.coverage": 0.62,
+     "moss.patchiness": 0.5,
+     "moss.slate_variation": 0.8,
+     "moss.lichen_amount": 0.3,
+     "moss.rim_opacity": 0.7,
+     "moss.seed": 61,
+     "layout.seed": 2
+    },
+    "v2_c_everywhere_see_through": {
+     "moss.coverage": 0.62,
+     "moss.patchiness": 0.3,
+     "moss.slate_variation": 0.6,
+     "moss.lichen_amount": 0.3,
+     "moss.rim_opacity": 0.7,
+     "moss.core_opacity": 0.9,
+     "moss.seed": 61,
+     "layout.seed": 2
+    }
+   },
+   "round 2": {
+    "v5_d_less_tint": {
+     "colour_and_fade.fade_amount": 0.6,
+     "colour_and_fade.streak_contrast": 0.9,
+     "colour_and_fade.tone_spread": 0.3,
+     "colour_and_fade.tone_centre": 3.2,
+     "colour_and_fade.outlier_share": 0.0,
+     "colour_and_fade.speck_amount": 0.5,
+     "colour_and_fade.tint_amount": 0.35,
+     "colour_and_fade.patch_tint": 0.2,
+     "colour_and_fade.bleach_amount": 0.0,
+     "colour_and_fade.stain_amount": 0.0,
+     "damage.amount": 0.2,
+     "moss.amount": 0.0,
+     "layout.seed": 5
+    },
+    "v5_e_even_less_tint": {
+     "colour_and_fade.fade_amount": 0.5,
+     "colour_and_fade.streak_contrast": 0.8,
+     "colour_and_fade.tone_spread": 0.25,
+     "colour_and_fade.tone_centre": 3.4,
+     "colour_and_fade.outlier_share": 0.0,
+     "colour_and_fade.speck_amount": 0.4,
+     "colour_and_fade.tint_amount": 0.3,
+     "colour_and_fade.patch_tint": 0.15,
+     "colour_and_fade.bleach_amount": 0.0,
+     "colour_and_fade.stain_amount": 0.0,
+     "damage.amount": 0.2,
+     "moss.amount": 0.0,
+     "layout.seed": 5
+    },
+    "v4_d_big_pale_areas": {
+     "colour_and_fade.fade_amount": 1.5,
+     "colour_and_fade.bleach_amount": 1.0,
+     "colour_and_fade.bleach_cover": 0.55,
+     "colour_and_fade.patch_size": 0.6,
+     "colour_and_fade.stain_amount": 0.0,
+     "colour_and_fade.tone_centre": 4.6,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    },
+    "v4_e_huge_pale_areas": {
+     "colour_and_fade.fade_amount": 1.3,
+     "colour_and_fade.bleach_amount": 1.0,
+     "colour_and_fade.bleach_cover": 0.5,
+     "colour_and_fade.patch_size": 0.8,
+     "colour_and_fade.stain_amount": 0.0,
+     "colour_and_fade.tone_centre": 4.2,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    },
+    "v4_f_big_pale_areas_less_blue": {
+     "colour_and_fade.fade_amount": 1.5,
+     "colour_and_fade.bleach_amount": 1.0,
+     "colour_and_fade.bleach_cover": 0.55,
+     "colour_and_fade.patch_size": 0.6,
+     "colour_and_fade.stain_amount": 0.0,
+     "colour_and_fade.tone_centre": 4.6,
+     "colour_and_fade.tint_amount": 0.5,
+     "colour_and_fade.patch_tint": 0.3,
+     "moss.coverage": 0.1,
+     "colour_and_fade.seed": 41,
+     "layout.seed": 4
+    }
+   }
+  },
+  "seed spread now (1254 dots, colour group)": {
+   "tiles": {
+    "default seeds (outputs/default)": {
+     "colour group": 0.822,
+     "colour_scale": 0.899
+    },
+    "v1 new seeds (layout 7, colour 17, damage 27, moss 37, outline 47)": {
+     "colour group": 0.811,
+     "colour_scale": 0.961
+    },
+    "seeds_b (layout 101, colour_and_fade 111, damage 121, moss 131, outline_and_shadow 141)": {
+     "colour group": 0.824,
+     "colour_scale": 0.94
+    },
+    "seeds_c (layout 202, colour_and_fade 212, damage 222, moss 232, outline_and_shadow 242)": {
+     "colour group": 0.802,
+     "colour_scale": 0.913
+    },
+    "seeds_d (layout 303, colour_and_fade 313, damage 323, moss 333, outline_and_shadow 343)": {
+     "colour group": 0.792,
+     "colour_scale": 0.927
+    }
+   },
+   "mean colour group": 0.81,
+   "lowest": 0.792,
+   "highest": 0.824,
+   "spread (highest - lowest)": 0.032
+  },
+  "seed spread before the look fixes": {
+   "tiles": {
+    "default seeds (outputs/default)": {
+     "colour group": 0.701,
+     "colour_scale": 0.452
+    },
+    "v1 new seeds (layout 7, colour 17, damage 27, moss 37, outline 47)": {
+     "colour group": 0.765,
+     "colour_scale": 0.878
+    },
+    "seeds_b (layout 101, colour_and_fade 111, damage 121, moss 131, outline_and_shadow 141)": {
+     "colour group": 0.769,
+     "colour_scale": 0.845
+    },
+    "seeds_c (layout 202, colour_and_fade 212, damage 222, moss 232, outline_and_shadow 242)": {
+     "colour group": 0.753,
+     "colour_scale": 0.85
+    },
+    "seeds_d (layout 303, colour_and_fade 313, damage 323, moss 333, outline_and_shadow 343)": {
+     "colour group": 0.71,
+     "colour_scale": 0.854
+    }
+   },
+   "mean colour group": 0.74,
+   "lowest": 0.701,
+   "highest": 0.769,
+   "spread (highest - lowest)": 0.068
+  },
+  "area 2 x 2 (2508 dots) now": {
+   "measures": {
+    "tiles_across": 2,
+    "size": 2508,
+    "seam ratio at each base tile line (x)": [
+     0.8
+    ],
+    "seam ratio at each base tile line (y)": [
+     0.51
+    ],
+    "seam ratio at the wrap-round edge (x, y)": [
+     0.9,
+     0.61
+    ],
+    "seam ratio of ALL ordinary columns: median, 90th percentile, 99th percentile": [
+     0.98,
+     1.2,
+     1.45
+    ],
+    "seam ratio of ALL ordinary rows: median, 90th percentile, 99th percentile": [
+     0.65,
+     1.97,
+     4.65
+    ],
+    "share of ordinary columns with a seam ratio BELOW the base-tile line (x), and rows (y) %": [
+     [
+      6.3
+     ],
+     [
+      2.1
+     ]
+    ],
+    "correlation with itself shifted by one base tile (x, y, diagonal): the NEW area": [
+     0.473,
+     0.35,
+     0.337
+    ],
+    "correlation with itself shifted by one base tile: a REAL COPY of the default tile": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "share of dots nearly equal to the dot one base tile away (x, y, diagonal %): the NEW area": [
+     27.0,
+     22.9,
+     23.1
+    ],
+    "share of dots nearly equal to the dot one base tile away (x, y, diagonal %): a REAL COPY": [
+     100.0,
+     100.0,
+     100.0
+    ],
+    "correlation at four shifts that are NOT a base tile (the background level)": [
+     0.456,
+     0.204,
+     -0.134,
+     0.352
+    ],
+    "mean brightness difference between base tile (0,0) and each other base tile": {
+     "(0, 1)": 7.96,
+     "(1, 0)": 6.99,
+     "(1, 1)": 7.77
+    },
+    "same-kind colour group of each 1254 x 1254 quarter (the default tile scores 0.822)": {
+     "quarter (0,0)": 0.831,
+     "quarter (1,0)": 0.795,
+     "quarter (0,1)": 0.804,
+     "quarter (1,1)": 0.805
+    }
+   },
+   "time": {
+    "seconds": 1344.4,
+    "size": 2508,
+    "channels": "Colour,Height",
+    "load_average_after": 7.14
+   }
+  },
+  "area 2 x 2 before the look fixes": {
+   "measures": {
+    "tiles_across": 2,
+    "size": 2508,
+    "seam ratio at each base tile line (x)": [
+     0.78
+    ],
+    "seam ratio at each base tile line (y)": [
+     0.58
+    ],
+    "seam ratio at the wrap-round edge (x, y)": [
+     0.99,
+     0.78
+    ],
+    "seam ratio of ALL ordinary columns: median, 90th percentile, 99th percentile": [
+     0.96,
+     1.22,
+     1.46
+    ],
+    "seam ratio of ALL ordinary rows: median, 90th percentile, 99th percentile": [
+     0.74,
+     1.45,
+     6.16
+    ],
+    "share of ordinary columns with a seam ratio BELOW the base-tile line (x), and rows (y) %": [
+     [
+      3.0
+     ],
+     [
+      4.9
+     ]
+    ],
+    "correlation with itself shifted by one base tile (x, y, diagonal): the NEW area": [
+     0.442,
+     0.292,
+     0.273
+    ],
+    "correlation with itself shifted by one base tile: a REAL COPY of the default tile": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "share of dots nearly equal to the dot one base tile away (x, y, diagonal %): the NEW area": [
+     20.9,
+     18.2,
+     17.6
+    ],
+    "share of dots nearly equal to the dot one base tile away (x, y, diagonal %): a REAL COPY": [
+     100.0,
+     100.0,
+     100.0
+    ],
+    "correlation at four shifts that are NOT a base tile (the background level)": [
+     0.454,
+     0.122,
+     -0.074,
+     0.289
+    ],
+    "mean brightness difference between base tile (0,0) and each other base tile": {
+     "(0, 1)": 9.48,
+     "(1, 0)": 8.24,
+     "(1, 1)": 9.13
+    },
+    "same-kind colour group of each 1254 x 1254 quarter (the default tile scores 0.70)": {
+     "quarter (0,0)": 0.701,
+     "quarter (1,0)": 0.751,
+     "quarter (0,1)": 0.705,
+     "quarter (1,1)": 0.752
+    }
+   },
+   "time": {
+    "seconds": 522.2,
+    "size": 2508,
+    "channels": "Colour,Height",
+    "load_average_after": 3.99
+   }
+  },
+  "area 4 x 4": "not baked again: the numbers in \"area 4 x 4 (5016 dots, colour only)\" above are of the OLD default",
+  "half-tile test (512 dots) now": [
+   {
+    "tiles_across": 1,
+    "what": "finished colour",
+    "mean difference (of 255)": 1.645,
+    "share of dots over 10 steps %": 1.429,
+    "blurred 2 dots: mean difference": 0.31,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 15.01,
+    "control: share %": 54.32
+   },
+   {
+    "tiles_across": 1,
+    "what": "finished height",
+    "mean difference (of 255)": 2.191,
+    "share of dots over 10 steps %": 5.081,
+    "blurred 2 dots: mean difference": 0.454,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 29.61,
+    "control: share %": 71.35
+   },
+   {
+    "tiles_across": 1,
+    "what": "finished roughness",
+    "mean difference (of 255)": 1.341,
+    "share of dots over 10 steps %": 0.892,
+    "blurred 2 dots: mean difference": 0.257,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 10.33,
+    "control: share %": 40.16
+   },
+   {
+    "tiles_across": 1,
+    "what": "colour and fade mask",
+    "mean difference (of 255)": 4.041,
+    "share of dots over 10 steps %": 19.572,
+    "blurred 2 dots: mean difference": 0.982,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 37.64,
+    "control: share %": 79.41
+   },
+   {
+    "tiles_across": 1,
+    "what": "damage mask",
+    "mean difference (of 255)": 1.054,
+    "share of dots over 10 steps %": 2.179,
+    "blurred 2 dots: mean difference": 0.343,
+    "blurred 2 dots: share over 10 steps %": 0.095,
+    "control (rolled 7 dots wrong, blurred): mean": 9.94,
+    "control: share %": 17.77
+   },
+   {
+    "tiles_across": 1,
+    "what": "moss mask",
+    "mean difference (of 255)": 1.433,
+    "share of dots over 10 steps %": 3.998,
+    "blurred 2 dots: mean difference": 0.399,
+    "blurred 2 dots: share over 10 steps %": 0.002,
+    "control (rolled 7 dots wrong, blurred): mean": 29.67,
+    "control: share %": 37.86
+   },
+   {
+    "tiles_across": 1,
+    "what": "outline and shadow mask",
+    "mean difference (of 255)": 1.616,
+    "share of dots over 10 steps %": 6.388,
+    "blurred 2 dots: mean difference": 0.408,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 52.36,
+    "control: share %": 58.97
+   },
+   {
+    "tiles_across": 1,
+    "what": "piece id",
+    "mean difference (of 255)": 0.199,
+    "share of dots over 10 steps %": 0.718,
+    "blurred 2 dots: mean difference": 0.089,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 12.75,
+    "control: share %": 24.51
+   },
+   {
+    "tiles_across": 2,
+    "what": "finished colour",
+    "mean difference (of 255)": 2.532,
+    "share of dots over 10 steps %": 3.532,
+    "blurred 2 dots: mean difference": 0.472,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 17.61,
+    "control: share %": 67.88
+   },
+   {
+    "tiles_across": 2,
+    "what": "finished height",
+    "mean difference (of 255)": 3.82,
+    "share of dots over 10 steps %": 10.276,
+    "blurred 2 dots: mean difference": 0.71,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 33.99,
+    "control: share %": 80.84
+   },
+   {
+    "tiles_across": 2,
+    "what": "finished roughness",
+    "mean difference (of 255)": 2.106,
+    "share of dots over 10 steps %": 2.483,
+    "blurred 2 dots: mean difference": 0.383,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 11.96,
+    "control: share %": 49.63
+   },
+   {
+    "tiles_across": 2,
+    "what": "colour and fade mask",
+    "mean difference (of 255)": 7.038,
+    "share of dots over 10 steps %": 32.076,
+    "blurred 2 dots: mean difference": 1.404,
+    "blurred 2 dots: share over 10 steps %": 0.01,
+    "control (rolled 7 dots wrong, blurred): mean": 35.58,
+    "control: share %": 80.16
+   },
+   {
+    "tiles_across": 2,
+    "what": "damage mask",
+    "mean difference (of 255)": 2.091,
+    "share of dots over 10 steps %": 3.81,
+    "blurred 2 dots: mean difference": 0.688,
+    "blurred 2 dots: share over 10 steps %": 0.275,
+    "control (rolled 7 dots wrong, blurred): mean": 12.65,
+    "control: share %": 28.38
+   },
+   {
+    "tiles_across": 2,
+    "what": "moss mask",
+    "mean difference (of 255)": 2.746,
+    "share of dots over 10 steps %": 7.524,
+    "blurred 2 dots: mean difference": 0.755,
+    "blurred 2 dots: share over 10 steps %": 0.026,
+    "control (rolled 7 dots wrong, blurred): mean": 37.5,
+    "control: share %": 52.56
+   },
+   {
+    "tiles_across": 2,
+    "what": "outline and shadow mask",
+    "mean difference (of 255)": 3.05,
+    "share of dots over 10 steps %": 11.61,
+    "blurred 2 dots: mean difference": 0.74,
+    "blurred 2 dots: share over 10 steps %": 0.001,
+    "control (rolled 7 dots wrong, blurred): mean": 69.83,
+    "control: share %": 78.11
+   },
+   {
+    "tiles_across": 2,
+    "what": "piece id",
+    "mean difference (of 255)": 0.498,
+    "share of dots over 10 steps %": 1.566,
+    "blurred 2 dots: mean difference": 0.209,
+    "blurred 2 dots: share over 10 steps %": 0.001,
+    "control (rolled 7 dots wrong, blurred): mean": 27.66,
+    "control: share %": 46.4
+   },
+   {
+    "tiles_across": 2,
+    "what": "colour against ITSELF rolled by one base tile (must differ a lot: new content)",
+    "mean difference (of 255)": 20.299,
+    "share of dots over 10 steps %": 69.76,
+    "blurred 2 dots: mean difference": 13.331,
+    "blurred 2 dots: share over 10 steps %": 57.73
+   }
+  ],
+  "half-tile test (512 dots) now: how to read it (corrected after the second honesty check)": "Half-tile test, how to read it (corrected after the second honesty check). The blurred differences are 18 to 143 times smaller than the controls over all sixteen rows (not 18 to 95: the piece-number rows are 143 and 132 and the one-tile outline-and-shadow mask 128). Against the old table (final_report 'half-tile test (512 dots)' above, which is the OLD default) nearly everything got smaller, but a few numbers went UP slightly, so 'nothing got worse' was not quite true: outline-and-shadow mask one tile raw 1.54 to 1.62, blurred 0.37 to 0.41; outline-and-shadow mask 2 x 2 raw 2.99 to 3.05, blurred 0.68 to 0.74; damage mask 2 x 2 blurred 0.673 to 0.688 (one tile raw 1.048 to 1.054); share of outline-and-shadow dots over 10 steps 4.9 % to 6.4 % (one tile) and 9.5 % to 11.6 % (2 x 2). All still tiny next to their controls.",
+  "half-tile test before the look fixes": [
+   {
+    "tiles_across": 1,
+    "what": "finished colour",
+    "mean difference (of 255)": 1.829,
+    "share of dots over 10 steps %": 1.455,
+    "blurred 2 dots: mean difference": 0.342,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 16.25,
+    "control: share %": 58.32
+   },
+   {
+    "tiles_across": 1,
+    "what": "finished height",
+    "mean difference (of 255)": 2.549,
+    "share of dots over 10 steps %": 5.928,
+    "blurred 2 dots: mean difference": 0.492,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 30.9,
+    "control: share %": 73.84
+   },
+   {
+    "tiles_across": 1,
+    "what": "finished roughness",
+    "mean difference (of 255)": 1.529,
+    "share of dots over 10 steps %": 0.956,
+    "blurred 2 dots: mean difference": 0.276,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 11.07,
+    "control: share %": 43.08
+   },
+   {
+    "tiles_across": 1,
+    "what": "colour and fade mask",
+    "mean difference (of 255)": 5.335,
+    "share of dots over 10 steps %": 27.04,
+    "blurred 2 dots: mean difference": 1.122,
+    "blurred 2 dots: share over 10 steps %": 0.007,
+    "control (rolled 7 dots wrong, blurred): mean": 37.03,
+    "control: share %": 79.93
+   },
+   {
+    "tiles_across": 1,
+    "what": "damage mask",
+    "mean difference (of 255)": 1.048,
+    "share of dots over 10 steps %": 2.214,
+    "blurred 2 dots: mean difference": 0.343,
+    "blurred 2 dots: share over 10 steps %": 0.071,
+    "control (rolled 7 dots wrong, blurred): mean": 12.54,
+    "control: share %": 18.66
+   },
+   {
+    "tiles_across": 1,
+    "what": "moss mask",
+    "mean difference (of 255)": 2.421,
+    "share of dots over 10 steps %": 5.47,
+    "blurred 2 dots: mean difference": 0.736,
+    "blurred 2 dots: share over 10 steps %": 0.169,
+    "control (rolled 7 dots wrong, blurred): mean": 37.19,
+    "control: share %": 41.98
+   },
+   {
+    "tiles_across": 1,
+    "what": "outline and shadow mask",
+    "mean difference (of 255)": 1.542,
+    "share of dots over 10 steps %": 4.853,
+    "blurred 2 dots: mean difference": 0.366,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 50.5,
+    "control: share %": 56.29
+   },
+   {
+    "tiles_across": 1,
+    "what": "piece id",
+    "mean difference (of 255)": 0.199,
+    "share of dots over 10 steps %": 0.718,
+    "blurred 2 dots: mean difference": 0.089,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 12.75,
+    "control: share %": 24.51
+   },
+   {
+    "tiles_across": 2,
+    "what": "finished colour",
+    "mean difference (of 255)": 2.814,
+    "share of dots over 10 steps %": 4.016,
+    "blurred 2 dots: mean difference": 0.516,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 17.93,
+    "control: share %": 67.34
+   },
+   {
+    "tiles_across": 2,
+    "what": "finished height",
+    "mean difference (of 255)": 4.244,
+    "share of dots over 10 steps %": 12.08,
+    "blurred 2 dots: mean difference": 0.757,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 33.21,
+    "control: share %": 79.36
+   },
+   {
+    "tiles_across": 2,
+    "what": "finished roughness",
+    "mean difference (of 255)": 2.31,
+    "share of dots over 10 steps %": 2.592,
+    "blurred 2 dots: mean difference": 0.401,
+    "blurred 2 dots: share over 10 steps %": 0.0,
+    "control (rolled 7 dots wrong, blurred): mean": 12.66,
+    "control: share %": 50.91
+   },
+   {
+    "tiles_across": 2,
+    "what": "colour and fade mask",
+    "mean difference (of 255)": 8.619,
+    "share of dots over 10 steps %": 39.796,
+    "blurred 2 dots: mean difference": 1.544,
+    "blurred 2 dots: share over 10 steps %": 0.006,
+    "control (rolled 7 dots wrong, blurred): mean": 31.43,
+    "control: share %": 78.33
+   },
+   {
+    "tiles_across": 2,
+    "what": "damage mask",
+    "mean difference (of 255)": 2.078,
+    "share of dots over 10 steps %": 3.812,
+    "blurred 2 dots: mean difference": 0.673,
+    "blurred 2 dots: share over 10 steps %": 0.221,
+    "control (rolled 7 dots wrong, blurred): mean": 17.95,
+    "control: share %": 30.85
+   },
+   {
+    "tiles_across": 2,
+    "what": "moss mask",
+    "mean difference (of 255)": 4.301,
+    "share of dots over 10 steps %": 8.574,
+    "blurred 2 dots: mean difference": 1.255,
+    "blurred 2 dots: share over 10 steps %": 0.431,
+    "control (rolled 7 dots wrong, blurred): mean": 45.17,
+    "control: share %": 56.88
+   },
+   {
+    "tiles_across": 2,
+    "what": "outline and shadow mask",
+    "mean difference (of 255)": 2.986,
+    "share of dots over 10 steps %": 9.455,
+    "blurred 2 dots: mean difference": 0.678,
+    "blurred 2 dots: share over 10 steps %": 0.001,
+    "control (rolled 7 dots wrong, blurred): mean": 62.33,
+    "control: share %": 75.97
+   },
+   {
+    "tiles_across": 2,
+    "what": "piece id",
+    "mean difference (of 255)": 0.498,
+    "share of dots over 10 steps %": 1.566,
+    "blurred 2 dots: mean difference": 0.209,
+    "blurred 2 dots: share over 10 steps %": 0.001,
+    "control (rolled 7 dots wrong, blurred): mean": 27.66,
+    "control: share %": 46.4
+   },
+   {
+    "tiles_across": 2,
+    "what": "colour against ITSELF rolled by one base tile (must differ a lot: new content)",
+    "mean difference (of 255)": 24.346,
+    "share of dots over 10 steps %": 77.976,
+    "blurred 2 dots: mean difference": 16.839,
+    "blurred 2 dots: share over 10 steps %": 68.111
+   }
+  ],
+  "independence of the two changed layers (512 dots, new default settings)": [
+   {
+    "layer changed": "moss",
+    "variant": "Amount 0",
+    "own region share %": 17.66,
+    "colour changed %": 16.536,
+    "colour changed outside own region %": 0.0,
+    "height changed %": 17.271,
+    "height changed outside own region %": 0.0,
+    "roughness changed %": 17.174,
+    "roughness changed outside own region %": 0.0,
+    "colour_and_fade mask changed %": 0.0,
+    "colour_and_fade mask changed outside moss region %": 0.0,
+    "damage mask changed %": 0.0,
+    "damage mask changed outside moss region %": 0.0,
+    "moss mask changed %": 17.659,
+    "moss mask changed outside moss region %": 0.0,
+    "outline_and_shadow mask changed %": 0.0,
+    "outline_and_shadow mask changed outside moss region %": 0.0,
+    "slates changed (piece_id) %": 0.0
+   },
+   {
+    "layer changed": "moss",
+    "variant": "Seed + 1",
+    "own region share %": 36.26,
+    "colour changed %": 33.79,
+    "colour changed outside own region %": 0.0,
+    "height changed %": 35.514,
+    "height changed outside own region %": 0.0,
+    "roughness changed %": 31.758,
+    "roughness changed outside own region %": 0.0,
+    "colour_and_fade mask changed %": 0.0,
+    "colour_and_fade mask changed outside moss region %": 0.0,
+    "damage mask changed %": 0.0,
+    "damage mask changed outside moss region %": 0.0,
+    "moss mask changed %": 35.797,
+    "moss mask changed outside moss region %": 0.0,
+    "outline_and_shadow mask changed %": 0.0,
+    "outline_and_shadow mask changed outside moss region %": 0.0,
+    "slates changed (piece_id) %": 0.0
+   },
+   {
+    "layer changed": "outline_and_shadow",
+    "variant": "Amount 0",
+    "own region share %": 38.43,
+    "colour changed %": 37.428,
+    "colour changed outside own region %": 0.0,
+    "height changed %": 38.023,
+    "height changed outside own region %": 0.0,
+    "roughness changed %": 34.786,
+    "roughness changed outside own region %": 0.0,
+    "colour_and_fade mask changed %": 0.0,
+    "colour_and_fade mask changed outside outline_and_shadow region %": 0.0,
+    "damage mask changed %": 0.0,
+    "damage mask changed outside outline_and_shadow region %": 0.0,
+    "moss mask changed %": 0.0,
+    "moss mask changed outside outline_and_shadow region %": 0.0,
+    "outline_and_shadow mask changed %": 38.408,
+    "outline_and_shadow mask changed outside outline_and_shadow region %": 0.0,
+    "slates changed (piece_id) %": 0.0
+   },
+   {
+    "layer changed": "outline_and_shadow",
+    "variant": "Seed + 1",
+    "own region share %": 40.76,
+    "colour changed %": 30.731,
+    "colour changed outside own region %": 0.0,
+    "height changed %": 39.346,
+    "height changed outside own region %": 0.0,
+    "roughness changed %": 11.509,
+    "roughness changed outside own region %": 0.0,
+    "colour_and_fade mask changed %": 0.0,
+    "colour_and_fade mask changed outside outline_and_shadow region %": 0.0,
+    "damage mask changed %": 0.0,
+    "damage mask changed outside outline_and_shadow region %": 0.0,
+    "moss mask changed %": 0.0,
+    "moss mask changed outside outline_and_shadow region %": 0.0,
+    "outline_and_shadow mask changed %": 33.531,
+    "outline_and_shadow mask changed outside outline_and_shadow region %": 0.0,
+    "slates changed (piece_id) %": 0.0
+   }
+  ],
+  "one 512-dot bake against the 1254-dot default shrunk": {
+   "what": "1254-dot default (outputs/default) shrunk to 512 compared with a 512-dot bake of the same settings",
+   "results": [
+    {
+     "picture": "colour",
+     "mean difference (of 255)": 1.52,
+     "share of dots over 40 steps %": 0.0
+    },
+    {
+     "picture": "height",
+     "mean difference (of 255)": 2.08,
+     "share of dots over 40 steps %": 0.022
+    },
+    {
+     "picture": "roughness",
+     "mean difference (of 255)": 1.27,
+     "share of dots over 40 steps %": 0.0
+    }
+   ]
+  },
+  "node counts after the look fixes (nodes per box)": {
+   "SLATE (top)": 8,
+   "LAYOUT": 307,
+   "seamless noise": 15,
+   "COLOUR AND FADE": 419,
+   "MOSS": 431,
+   "DAMAGE": 439,
+   "OUTLINE AND SHADOW": 234,
+   "COMBINE": 19
+  },
+  "folder size at the end": {
+   "bytes": 453953447,
+   "megabytes (decimal)": 454.0,
+   "mebibytes (what du -h prints)": 432.9,
+   "limit": "460 MB for this round",
+   "after the second honesty check and the corrections": {
+    "bytes": 454194491,
+    "megabytes (decimal)": 454.2,
+    "mebibytes": 433.2,
+    "margin to the limit": "only about 6 MB (limit 460 MB for this round): anything newly baked here must delete its big pictures after measuring",
+    "how counted": "sum of file sizes (symbolic links counted as links), before the last few small text edits; they add well under 0.1 MB"
+   }
+  },
+  "not made again (still the old default)": [
+   "area/area_4x4",
+   "resolution/whole_recipe (links now point at outputs/default_before_look_fixes)",
+   "controls_sweeps (builders strips and whole-recipe strips)",
+   "reuse (brick)",
+   "links_and_order",
+   "tests/independence_full (the full table, old default)",
+   "the tiling and look of the variations beyond the contact sheet"
+  ],
+  "corrections of earlier reporting (from verify/HONESTY_VERDICT.md), all made in the two guides": [
+   "normal score attribution: the 0.671 / 0.705 numbers are for the strength-7 normal (integration/make_normal.py); the harness own fitted normal gave 0.604 / 0.695 for the old default",
+   "mixed-method progress figure: 0.615 (harness normal) to 0.705 (strength-7 normal); like for like 0.615 to 0.695, normal group 0.608 to 0.604",
+   "ladder: colour and fade adds the most to the colour group; the outline layer is the largest only in the height group, and adding a layer and removing a layer are different questions",
+   "round 14 reasoning: the milder pair won on all three seed sets (+0.095, +0.011, +0.005); 0.068 is the spread between different seed sets, not the noise of a same-seed comparison; round 11 had the same feature-size cliff",
+   "\"identical\" for damage_avoid colour pictures: they differ on 0.12 to 0.14 % of dots by up to 8 steps",
+   "no sweep strips for the LAYOUT layer: now listed as a gap",
+   "description size: the look depends on all controls (182 now), not only the settings file; the audit of all 176 was 6.0 KB",
+   "height is 70 % paint brightness: now stated next to the height scores",
+   "folder size: stated with units at the end",
+   "half-tile explanation: the colour difference of 1 to 2 steps is Blender default dither, found by the point-sampled run of the honesty check",
+   "resolution 1254 files are links: now stated, and re-pointed at the old default pictures",
+   "minor: 49 entries included 2 build settings; the strips were made at the builders starting values; terms (SSIM, Delta E, Lab, log-normal, 4D noise, Smooth F1) are now explained in section 0"
+  ],
+  "corrections after the second honesty check (from verify/after_look_fixes/HONESTY_VERDICT_AFTER_LOOK_FIXES.md), all made in the guides, notes and reports": [
+   "half-tile: 'nothing got worse' was not quite true (outline-and-shadow mask one tile raw 1.54 to 1.62, blurred 0.37 to 0.41; 2 x 2 raw 2.99 to 3.05, blurred 0.68 to 0.74; 2 x 2 damage mask blurred 0.673 to 0.688): nearly everything got smaller and these moved up slightly, still tiny",
+   "half-tile: the blurred differences are 18 to 143 times smaller than the controls, not 18 to 95 (the piece-number rows are 143 and 132, the one-tile outline-and-shadow mask 128)",
+   "normal group: 'fell 0.671 to 0.616' is true only for the strength-7 normal; with the harness's own normal it rose 0.604 to 0.690 (re-scored again, look_fixes/corrections_after_honesty_check/). It moves by about 0.07 either way, so it is a weak signal, not a loss",
+   "slate-to-slate grey spread: 8.9 is the value after round 1; the old default's is 8.48 (rounded 8.5). 5.57 / 5.51 come from the copy of the look checker's script (look_fixes/round2/independent_measures.py); the tuner's own measure_look.py gives 3.84 to 2.65 (reference 2.51). The tuner's round-2 summary measures from the end of round 1 (spread 8.9 to 5.6, side-joint moss 14.5 to 7.2 %, tan in big pieces 13.7 to 25.2 %); from the old default the numbers are 8.5 to 5.6, 12.8 to 7.2 % and 52.9 to 25.2 % (the last one from above the reference's 35.6 % to below it)",
+   "colour gain: about three quarters (78 %: 0.094 of 0.121, by the tool's weights) is the feature-size measure, not 'almost all'; the other four add 0.027; without feature size the group goes 0.767 to 0.801. The tuner's note 'real, not only the cliff measure' is changed to say the same",
+   "integration/takeover/measured_before_clean_up.json: its note had the two normal maps the wrong way round (the harness's own normal gives 0.0 for normal-to-height agreement, the strength-7 normal 0.534); the note is corrected in that file and in this report, and the guide and folder map now name the file. The re-baker had written 'not edited, mentioned in the guide': it was neither",
+   "area 2 x 2 (new) measures: the key text said 'the default tile scores 0.70'; it now says 0.822 (the old file keeps 0.70, which was right for the old default)",
+   "the score files in outputs/default_before_look_fixes and the 'before' part of this report named the candidate 'outputs/default' (a leftover path written when scored); they now name outputs/default_before_look_fixes",
+   "Lessons guide: the shadow has 2 flat steps now (shadow_tiers 2), not 4; the 0.632 at 768 dots and the moss example (15 % olive-or-tan, moss.coverage 0.18) are labelled as the OLD default; the two slate-grey rules in section 11 are named correctly",
+   "plain words: 'Sobel' is now explained where the file name first appears (Recipe section 0 and 1, README); the Recipe guide has a short reading route at the top (it is about 17,000 words)",
+   "folder size: 454.0 MB decimal was right for the folder as the re-baker left it; it is about 454.2 MB now against a limit of 460 MB, so the margin is only about 6 MB (stated in the README)",
+   "raking-light picture look_fixes/before_after_lit.jpg: the light, size and window are the same for all three panels, but the reference is lit without a roughness map (the reference set has none) while the before and after tiles use theirs; now stated in the Recipe guide, the notes and the README",
+   "not changed: any number, setting or layer file; nothing was baked (two scores were re-run without Blender; look_fixes/corrections_after_honesty_check/)"
+  ]
+ }
 }

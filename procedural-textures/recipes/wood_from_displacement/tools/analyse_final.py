@@ -30,7 +30,9 @@ def rgb(path):
 
 
 def height16(path):
-    return cv2.imread(path, cv2.IMREAD_UNCHANGED).astype(np.float64) / 65535.0
+    a = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    a = a[..., 0] if a.ndim == 3 else a
+    return a.astype(np.float64) / (255.0 if a.dtype == np.uint8 else 65535.0)
 
 
 def luma(c):
@@ -55,7 +57,7 @@ def main():
         h = height16(os.path.join(d, 'height.png'))
         up_c = rgb(os.path.join(REF, 'colour.png'))
         c = rgb(os.path.join(d, 'colour.png'))
-        n = mn.normal_from_height(cv2.imread(os.path.join(d, 'height.png'), cv2.IMREAD_UNCHANGED), 8.0)
+        n = mn.normal_from_height(cv2.imread(os.path.join(d, 'height.png'), cv2.IMREAD_UNCHANGED)[..., 0], 8.0)
         up_n = cv2.imread(os.path.join(REF, 'normal.png'), cv2.IMREAD_UNCHANGED)[..., ::-1].astype(np.float64) / 255.0 * 2 - 1
         out['source_unchanged_check'] = {
             'height_mean_absolute_difference_to_uploaded_0_to_1': round(float(np.abs(h - up_h).mean()), 5),

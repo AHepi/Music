@@ -1,0 +1,79 @@
+{
+ "_note": "What this file is (plain words): the numbers I measured myself when correcting the guides after the second honesty check. Both slate tiles (the old default and the new default) were scored with lib/texture_compare.py in two ways: with the strength-7 normal map (integration/make_normal.py, the file normal.png in each outputs folder) and with the harness's own two-neighbour normal map. For the new default the harness normal is the stored outputs/default/normal_harness_sobel.png (unchanged, only linked). For the old default that file was not kept, so make_harness_normal_from_height.py (the same formula as lib/bake_harness.py, sobel_normal, strength 7.370340178505459 taken from outputs/default_before_look_fixes/bake.json) made it again from the stored 16-bit height; no Blender run was needed. The temporary folders (links and one 8-bit PNG) were in the scratchpad and were deleted, so the 'candidate' paths inside the raw score files are not kept.",
+ "colour gain split (the tool's own weights from lib/texture_compare.py: colour_distribution 3, colour_spectrum 2, colour_orientation 1, colour_scale 2, colour_gradient 1.5, total 9.5)": {
+  "colour group before / now": [
+   0.701,
+   0.822
+  ],
+  "gain": 0.121,
+  "feature size (colour_scale) 0.452 to 0.899, times weight 2 over 9.5": 0.094,
+  "share of the gain": "78 %",
+  "the other four measures together": 0.027,
+  "share": "22 %",
+  "colour group WITHOUT feature size, before / now (weights renormalised over 7.5)": [
+   0.767,
+   0.801
+  ]
+ },
+ "strength-7 normal (from the stored score files)": {
+  "before": {
+   "overall": 0.705,
+   "groups": {
+    "colour": 0.701,
+    "height": 0.654,
+    "normal": 0.671,
+    "tiling": 1.0
+   },
+   "normal measures": {
+    "normal_tilt": 0.611,
+    "normal_components": 0.83,
+    "normal_height_agreement": 0.534
+   }
+  },
+  "now": {
+   "overall": 0.778,
+   "groups": {
+    "colour": 0.822,
+    "height": 0.735,
+    "normal": 0.616,
+    "tiling": 1.0
+   },
+   "normal measures": {
+    "normal_tilt": 0.525,
+    "normal_components": 0.781,
+    "normal_height_agreement": 0.56
+   }
+  }
+ },
+ "harness's own normal (re-scored by me)": {
+  "before (old default, harness normal rebuilt from the stored height)": {
+   "overall": 0.695,
+   "groups": {
+    "colour": 0.701,
+    "height": 0.654,
+    "normal": 0.604,
+    "tiling": 1.0
+   },
+   "normal measures": {
+    "normal_tilt": 0.634,
+    "normal_components": 0.862,
+    "normal_height_agreement": 0.0
+   }
+  },
+  "now (outputs/default/normal_harness_sobel.png)": {
+   "overall": 0.789,
+   "groups": {
+    "colour": 0.822,
+    "height": 0.735,
+    "normal": 0.69,
+    "tiling": 1.0
+   },
+   "normal measures": {
+    "normal_tilt": 0.613,
+    "normal_components": 0.909,
+    "normal_height_agreement": 0.485
+   }
+  }
+ },
+ "reading": "Normal group: strength-7 normal 0.671 to 0.616 (down 0.055); harness normal 0.604 to 0.690 (up 0.086). So the normal group moves by about 0.07 either way depending on the method: a weak signal, not a loss. Overall: 0.705 to 0.778 with the strength-7 normal, 0.695 to 0.789 with the harness normal. These equal the numbers of verify/after_look_fixes/rescore_before_both_normals.json and rescore_now_both_normals.json."
+}

@@ -1,0 +1,86 @@
+{
+ "overall": "Independent re-check of the five reuse trials (Blender 5.2.2, one process at a time, -t 2). Everything numeric the helpers claimed reproduced: all 16 final seed-set scores and all five earlier-recipe scores match to three decimals when lib/texture_compare.py is re-run (also with each normal map remade from the stored height at the claimed strength: identical), the side variants (COMBINE height rule, shared slate layout, mud rule, wood height filters) reproduce, the finished colour of every seed set 1 re-bakes from the recipe bit for bit (0 differing dots), node counts re-counted by walking the built recipes match all five reports, and the half-tile test passes on all five surfaces (one tile and two tiles across: mean difference 1.9 to 5.8 of 255, big differences spread evenly, control 17 to 30). The snapshot checksums still match (7 of 7, no cache folder); every recipe imports the shared layers from the snapshot behind a guard that raises if a module comes from elsewhere; no shared layer is copied, shadowed or monkeypatched in any trial folder; new layers and borrowed code are declared. Same-kind score is meaningful: scoring each seed-set-1 tile against all six references, its own reference is highest every time (brick 0.654 vs next 0.317; wood 0.665 vs 0.352; metal 0.661 vs 0.425 slate; gravel 0.658 vs 0.485 mud; mud 0.497 vs 0.354 gravel, the thinnest margin). Reading by eye: brick, wood, metal yes; gravel yes at a glance (ragged up close); mud partly (no braided wheel ruts, mosaic earth, sparse stones). Versus each surface's earlier recipe: layered is ahead for wood (0.667 mean vs 0.606), metal (0.648 vs 0.579), mud (0.507 vs 0.391) and gravel (0.622 vs 0.380), but BEHIND for brick (0.615 mean, 0.654 best vs 0.725); the brick report says so honestly. Fitting verdict, plainly: no tracing, no per-element lists, no optimiser code in any trial (grep clean; hand tuning with the score in view only, tuned most on seed set 1). The one place reference MAP data enters a final tile is the height-from-colour rule: brick 2-number straight line fitted once to the reference height curve, metal a 12-point curve (24 numbers, hard-coded in metal_height_rule.py), gravel a 4-number colour-mix regression (defaults in gravel_height_rule.py); wood and mud final tiles do not use one (mud's optional box, wood's box were tried and not built in). I judge these as global few-number transfer curves measured once, which the project's own description_audit explicitly allows ('curves (control points) ... are fine'), so they stay within 'measure general character once' by the letter; but they are fitted to the very height quantity the score reads and are the biggest single score mover for brick (+0.116, 0.538 to 0.654) and metal (+0.083, 0.578 to 0.661), so those two headline scores are partly calibration and should be quoted together with the COMBINE-rule score. Also these constants sit in code, outside the settings.json that description_audit checks (all five settings files pass at 8 KB: 78 to 98 JSON numbers, no lists). What carried over: interface, COLOUR AND FADE, DAMAGE, MOSS, OUTLINE AND SHADOW, COMBINE ran unchanged by settings on all five; the LAYOUT had to be new for four of five (only wood used the shared LAYOUT, plus a 5-node turn); COMBINE's slate-only height rule is the one shared limit no setting can change (replaced after COMBINE for brick, metal, gravel; wood used tone_blend 0.8). Shared node share 83.5 / 86.9 / 77.5 / 54.8 / 56.2 percent (brick, wood, metal, mud, gravel); working-only share 78.6 / 86.9 / 77.5 / 43.2 / 56.2. Not re-run: the 'earlier layered brick 0.194', the metal-baseline stored scores for tiles other than seed_1, the Amount-0 independence tests, the GRAIN-mask half-tile (12.5 percent) claim, gravel's ladder, tiles_across 2 scoring, and anything about roughness/metallic/3D render.",
+ "per_surface": [
+  {
+   "surface": "brick",
+   "scores_reproduced": true,
+   "snapshot_untouched": true,
+   "no_fitting": true,
+   "reads_as_surface": "yes",
+   "corrected_numbers": "No correction needed. Re-scored: seed sets 1/2/3 overall 0.654/0.615/0.577 (colour 0.642/0.595/0.516, height 0.597/0.556/0.551), mean 0.615; earlier recipe tile 11 (recipes/brick/variations/tile_11) 0.725 (colour 0.750, height 0.704), identical with its normal remade at strength 6; COMBINE height rule 0.538 (height group 0.299); shared slate LAYOUT 0.646; stored colour of set 1 re-bakes with 0 differing dots. Node count re-run: shared 1530 of 1832 = 83.5 percent (helper said 84), new 292 (BRICK LAYOUT 118, GRIME 161, height rule 13), wiring 10; 78.6 percent if the built-but-off MOSS is not counted (helper said 79). Code lines match exactly (new 211, wiring 134). Half-tile: colour mean 2.0 of 255, 0.026 percent over 40 (control 21.2 mean, 31.1 percent); 2 tiles across 3.2 / 0.14 percent. settings.json 4616 bytes, 98 numbers, audit passes.",
+   "problems": [
+    "The layered brick is clearly behind the surface's own earlier recipe: 0.615 mean (0.654 best) against 0.725 for tile 11, and colour 0.584 mean against 0.750. The report says this; it should not be read as a win for reuse on this surface.",
+    "The BRICK HEIGHT RULE (height = 2.533 x (grey - 38.7)/255) is a straight line fitted once to the reference height tone curve stored in the earlier brick sampler model (12 points). It is global, two numbers, not per element, so it stays inside 'measure general character once', but it is the only place reference height-map data enters the tile and it is worth +0.116 overall (0.538 to 0.654, height group 0.299 to 0.597). Quote the 0.538 figure beside the 0.654.",
+    "The fitted constants live in height_rule.py (code defaults), not in settings.json, so the description_audit does not see them.",
+    "The final tiles use the new 118-node BRICK LAYOUT although the shared slate LAYOUT by settings scores 0.646: the layout was not strictly needed. The 84 percent shared figure includes MOSS, which is built but switched off.",
+    "Seed set 1 was the one tuned on; seed sets 2 and 3 score 0.04 to 0.08 lower, so the 0.654 is flattering.",
+    "Reads as brick wall at full size but with flat cut-paper patches inside bricks, ink-blob soot, pale spall bands along lower edges and no right-hand shadow; sheet labels have ghost letters (cosmetic).",
+    "Not re-run: the 'first layered brick 0.194' (no picture of it kept)."
+   ]
+  },
+  {
+   "surface": "wood",
+   "scores_reproduced": true,
+   "snapshot_untouched": true,
+   "no_fitting": true,
+   "reads_as_surface": "yes",
+   "corrected_numbers": "No correction needed. Re-scored: seed sets 1/2/3 overall 0.665/0.657/0.678 (colour 0.705/0.667/0.722, height 0.602/0.629/0.593, normal 0.498/0.513/0.546), mean 0.667; earlier recipe sample_101 0.606 (colour 0.622, height 0.575, normal 0.448); height-filter variants on set 1: sharp 0.634, Gaussian 1.5 0.661, Gaussian 2 0.665 (all as claimed); stored colour of set 1 re-bakes with 0 differing dots. Node count re-run matches exactly: shared 1718 of 1978 = 86.9 percent, new 209 (TURN 5, GRAIN 31, CRACKS 95, KNOTS 78), borrowed Wood Grain Gain 39, wiring 12. Code lines match exactly (new 224, wiring 140). Half-tile: finished colour mean 3.9 of 255, 0.16 percent over 40 (control 28.1, 37.5 percent), big differences spread evenly (5.5 percent of them in the seam strips that cover 7.3 percent of the picture); height 7.0 mean; 2 tiles 5.8 / 0.45 percent and not a copy (halves differ by 19.6). settings.json 5651 bytes, 120 JSON numbers (helper says 150 values, counting colours), audit passes.",
+   "problems": [
+    "The final height is a bake-time Gaussian pixel filter (width 2, 8 samples) added in final_bake.py, not a property of the recipe or of lib/bake_harness.py; it was chosen among three values by the score on set 1 (a one-setting sweep, allowed) and raises overall 0.634 to 0.665 while lowering the normal group 0.569 to 0.498. The plain bake_harness route was never run.",
+    "The gain over the earlier recipe is modest (0.667 mean against 0.606 for tile 101, and 0.626 mean over the earlier recipe's eight stored tiles); both were tuned on the same score.",
+    "GRAIN borrows the earlier wood build's Wood Grain Gain box from recipes/wood/generator/wood_shaders.py (outside the snapshot; declared, file unchanged since 19 October) with numbers from that build's description that its note calls invented, not taken from the reference. GRAIN alone lifts the colour group from 0.330 to 0.636, so a lot of the look rides on one borrowed streak maker.",
+    "Only the shared LAYOUT plus a 5-node turn was used for layout: wood is the one surface where the shared LAYOUT worked by settings.",
+    "Looks tidy and drawn next to the reference: straight even boards with one butt joint each, uniform black gaps, rings drawn on top of knots, flat saturated rust blotches (16 to 19 percent of dots against 12.4), no splintered edges.",
+    "Not re-run: the claimed 12.5 percent half-tile difference of the GRAIN mask itself; I only confirmed the finished colour and height repeat."
+   ]
+  },
+  {
+   "surface": "metal",
+   "scores_reproduced": true,
+   "snapshot_untouched": true,
+   "no_fitting": true,
+   "reads_as_surface": "yes",
+   "corrected_numbers": "Scores correct as claimed. Re-scored: seed sets 1/2/3/4 overall 0.661/0.629/0.654/0.632 (colour 0.642/0.626/0.650/0.569), mean of three 0.648, of four 0.644; earlier recipe seed_1 0.579 (colour 0.540, height 0.608, normal 0.432); COMBINE's own height rule on set 1 re-baked by me at 1254 dots: 0.578 (height group 0.455), as claimed; stored colour of set 1 re-bakes with 0 differing dots. Node count re-run matches exactly: shared 1533 of 1977 = 77.5 percent, new 433 (LAYOUT 191, EDGE LIGHT 98, RIVETS 125, height rule 19), wiring 11. Corrections: my line count (comments and blanks excluded) gives reused unchanged 987 (helper 938) and new boxes 390 (helper 382); the reused-share is 71 to 72 percent either way. Half-tile: colour mean 1.9 of 255, 0.023 percent over 40 (helper 2.6 and 0.02; my control 17.3 mean, 17.5 percent against the helper's 21.0); height 4.8 mean; 2 tiles 3.1 / 0.125 percent. settings.json 4996 bytes, 88 JSON numbers (helper 119 values), audit passes.",
+   "problems": [
+    "METAL HEIGHT RULE is a 12-point curve (24 numbers: CURVE_GREY, CURVE_HEIGHT) hard-coded in metal_height_rule.py, taken from the earlier metal analysis of the reference height map. It is a global curve (allowed type) but it is the closest of the five to a fit and is worth +0.083 (0.578 to 0.661, height group 0.455 to 0.614). The constants are outside settings.json and so outside description_audit.",
+    "Set 1 is the one tuned most (0.661); the never-looked-at set 4 scores 0.632, so the mean of four (0.644) is the fairer figure.",
+    "Used 13 Blender starts, one over the helper's own limit of 12 (self-reported).",
+    "Cleaner and more regular than the reference: ruler-straight bar edges, identical rivets, short vertical rust stripes instead of blooms with drips, blotchy camouflage plate paint, short braces, no scratches or dark stains; metallic is one flat 0.5.",
+    "Four new parts are needed (layout 191 nodes, EDGE LIGHT, RIVETS, height rule), so 'every shared layer worked unchanged' is true only for the paint layers and COMBINE; the shared LAYOUT was not usable (not baked, reasoning only).",
+    "Not re-run: earlier-recipe tiles other than seed_1 (their pictures were not kept), the Amount-0 independence rows, recipe.tiles_across 2 scoring."
+   ]
+  },
+  {
+   "surface": "mud",
+   "scores_reproduced": true,
+   "snapshot_untouched": true,
+   "no_fitting": true,
+   "reads_as_surface": "partly",
+   "corrected_numbers": "No correction needed. Re-scored: seed sets 1/2/3 overall 0.497/0.470/0.555 (colour 0.473/0.419/0.570, height 0.492/0.504/0.543, normal 0.334/0.300/0.305), mean 0.507; with the optional MUD HEIGHT RULE 0.514/0.482/0.569, mean 0.522; earlier recipe tile 101 0.391 (colour 0.313, height 0.488, normal 0.139); stored colour of set 1 re-bakes with 0 differing dots. Node count re-run matches exactly: shared 1401 of 2555 = 54.8 percent (switched-off DAMAGE and OUTLINE AND SHADOW included; 43.2 percent counting only boxes that work), new 1144 (MUD LAYOUT 295, RUTS 212, STONES 637), wiring 10. Code lines match exactly (new 297, wiring 135). Half-tile: colour mean 2.7 of 255 but 0.86 percent of dots over 40 (control 26.3, 45.7 percent), differences spread evenly (4.0 percent of the big ones in the seam strips); height 5.6; 2 tiles 3.3 / 0.78 percent. settings.json 3665 bytes, 89 JSON numbers (helper 115 values), audit passes.",
+    "problems": [
+    "Reads as earthy ground with blue-grey puddles, stones and dark trenches, but not as the reference's mud: no broad braided wheel ruts, the earth is a flat polygon mosaic (granite or cracked-earth look), stones are small, sparse (8 percent of dots against 18) and cartoon-like, puddles are flat.",
+    "Lowest and least certain result: 0.497 overall; the seed alone moves it 0.470 to 0.555; scored against the other references the tile reaches 0.354 (gravel), a margin of only 0.14 below its own mud score, the thinnest of the five. The gain over the earlier recipe (0.507 against 0.391) is real but both are far from the reference.",
+    "Only about half carried over: 55 percent of nodes are shared (43 percent of those that work) because DAMAGE and OUTLINE AND SHADOW had no job on mud and are off; three big new parts were needed (layout 295, RUTS 212, STONES 637 of which about 498 are the borrowed stone_tools helper). MOSS as puddle water counts as 'settings only' but only works because the new layout hands over basins.",
+    "The MUD HEIGHT RULE (a straight line fitted once to the reference height against grey, per measure_reference_once.py) is optional, adds +0.015 and is not in the final tiles, so the mud scores are not calibrated to the reference height.",
+    "Seed sets 2 and 3 were only seen at reduced size; tuning was by eye with the score in view, no optimiser. 12 of 12 Blender starts used.",
+    "Not re-run: the MOSS-reads-DAMAGE independence rows, tiles_across 2 scoring, the 498-node borrowed count (derived from the surveyor's count, not mine)."
+   ]
+  },
+  {
+   "surface": "gravel",
+   "scores_reproduced": true,
+   "snapshot_untouched": true,
+   "no_fitting": true,
+   "reads_as_surface": "yes",
+   "corrected_numbers": "Scores correct as claimed. Re-scored: seed sets 1/2/3 overall 0.658/0.618/0.589 (colour 0.721/0.655/0.630, height 0.567/0.543/0.495, normal 0.469/0.462/0.441), mean 0.622; COMBINE height rule on set 1 0.643; earlier recipe sample_01 0.380 with its normal remade at strength 10 (colour 0.242, height 0.407, normal 0.470) but 0.372 with its own stored normal (normal group 0.415): the helper used the higher, remade figure; stored colour of set 1 re-bakes with 0 differing dots. Node count re-run matches exactly: shared 1111 of 1976 = 56.2 percent, new 855 (LAYOUT 564, SOIL 170, FACETS 109, height rule 12), wiring 10. My line count gives new boxes 306 (helper 295) and reused 792 (helper 749). Half-tile: colour mean 2.7 of 255 (helper 3.9), 0.131 percent over 40 (helper 0.13; control 29.8 mean, 48.3 percent against helper 36 and 41), height 4.7; 2 tiles 4.2 / 0.23 percent and not a copy (halves differ by 26.6). settings.json 4335 bytes, 78 JSON numbers (helper 103 values), audit passes.",
+   "problems": [
+    "GRAVEL HEIGHT RULE uses a 4-number colour-mix regression (267.15 R + 91.48 G + 210.5 B, offset -17.7) found once from the reference maps by the earlier gravel build (derivation_ceiling.py) and hard-coded as defaults in gravel_height_rule.py. It is global and measured once, so within the rule, but it reproduces how the reference maps were made and sits outside settings.json. Effect is small: +0.015 (0.643 to 0.658).",
+    "Only 56 percent of nodes are shared: the 564-node GRAVEL LAYOUT (mostly a declared copy of stone_tools.polygon_stones) and two new paint layers (SOIL adds about 0.33, FACETS about 0.12 to the score on the helper's ladder, which I did not re-run) are what make it gravel; the shared layers alone on a gravel layout reach about 0.21. MOSS was tried four times as rust and dropped.",
+    "Up close it is clearly weaker than the reference: soft smeared stone faces with stair-step edges, stones fused into masses, mottled granite-like soil, dusty-pink rust stones; reads as gravel at a glance on all three seed sets.",
+    "Seed set 1 was tuned on; sets 2 and 3 are 0.04 to 0.07 lower, so the mean of three (0.622) is the fairer figure; the 0.9 height blend was swept on an earlier picture, not the final tile.",
+    "Cross-control: scored against the mud reference the gravel tile gets 0.485, only 0.17 below its own score: the score separates gravel from mud less sharply than the other pairs.",
+    "Not re-run: the ladder (0.199 to 0.658), the SOIL half-tile mask figure (9.7 percent), tiles_across 2 scoring, other sizes."
+   ]
+  }
+ ]
+}

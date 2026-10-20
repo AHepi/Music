@@ -42,7 +42,9 @@ def load_grey(path, size=None):
 
 def load_height16(path):
     """A 16-bit height picture exactly (0..1)."""
-    return cv2.imread(path, cv2.IMREAD_UNCHANGED).astype(np.float64) / 65535.0
+    a = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    a = a[..., 0] if a.ndim == 3 else a
+    return a.astype(np.float64) / (255.0 if a.dtype == np.uint8 else 65535.0)
 
 
 def shift_correlation(g, dx, dy):
@@ -100,9 +102,8 @@ def source_reuse(folder, tiles=4):
         block = counts[a * T:b * T].reshape(-1)
         by_row[name] = {'share_used': round(float((block > 0).mean()), 3), 'mean_times_per_used_dot': round(float(block[block > 0].mean()), 1) if (block > 0).any() else 0.0}
     out['by_source_row'] = by_row
-    # ---- boards (windows)
-    colours = np.asarray(Image.open(os.path.join(folder, 'debug_boards', 'colour.png')).convert('RGB')).astype(np.int64)
-    ids = colours[..., 0] * 65536 + colours[..., 1] * 256 + colours[..., 2]
+    # ---- boards (windows). A board is found by the exact 16-bit random number its debug picture carries (the colour version is dithered, so not used)
+    ids = np.round(load_height16(os.path.join(folder, 'debug_boards_height', 'height.png')) * 65535.0).astype(np.int64)
     flips = np.asarray(Image.open(os.path.join(folder, 'debug_flips', 'colour.png')).convert('RGB')).astype(np.int64)
     order = np.argsort(ids.ravel(), kind='stable')
     sorted_ids = ids.ravel()[order]
@@ -112,7 +113,7 @@ def source_reuse(folder, tiles=4):
     ys_grid, xs_grid = np.divmod(np.arange(size * size), size)
     sxf, syf = sx.ravel(), sy.ravel()
     for grp in groups:
-        if len(grp) < 400:                                  # tiny leftovers at picture edges and anti-alias dots
+        if len(grp) < 3000:                                 # leftovers at the picture edge (a board cut by the edge of the area)
             continue
         x_out, y_out = xs_grid[grp] * dots_per_pixel, ys_grid[grp] * dots_per_pixel
         xs_src = sxf[grp]
@@ -151,7 +152,7 @@ def source_reuse(folder, tiles=4):
                      'closest_pair_sharing_80_percent_in_tiles': round(float(np.min(pairs_80)), 2) if pairs_80 else None,
                      'share_of_the_close_pairs_(sharing_half)_that_are_less_than_one_tile_apart': round(float((np.array(pairs_50) < 1.0).mean()), 3) if pairs_50 else None}
     knots = [b for b in boards if b['knot']]
-    knot_summary = {'knot_boards_in_the_area': len(knots), 'rows_in_the_area': 20 * 4 // 4 * 1}
+    knot_summary = {'knot_boards_in_the_area': len(knots), 'rows_in_the_area_(each_4_tiles_wide)': 20}
     for band, name in ((0, 'K2_from_row_R2'), (2, 'K3_from_row_R4')):
         pts = [(b['x_out'], b['y_out']) for b in knots if b['band'] == band]
         d = [math.hypot(p[0] - q[0], p[1] - q[1]) / T for i, p in enumerate(pts) for q in pts[i + 1:]]
@@ -247,7 +248,19 @@ def main():
     result['source_reuse_4x4'] = source_reuse(area, 4)
     # 3. near copies
     h4_full = load_height16(os.path.join(area, 'area_4x4', 'height.png')).astype(np.float32)
-    result['near_copies_research_test_4x4'] = [near_copies(plain, 'plain source repeated 4 x 4'), near_copies(h4_full, 'new 4 x 4 area (default settings, seed 1)')]
+    col_full = load_grey(os.path.join(area, 'area_4x4', 'colour.png'))
+    plain_col = np.tile(0.2126 * np.asarray(Image.open(os.path.join(PROC, 'reference', 'wood', 'colour.png')).convert('RGB'))[..., 0] / 255.0 + 0.7152 * np.asarray(Image.open(os.path.join(PROC, 'reference', 'wood', 'colour.png')).convert('RGB'))[..., 1] / 255.0 + 0.0722 * np.asarray(Image.open(os.path.join(PROC, 'reference', 'wood', 'colour.png')).convert('RGB'))[..., 2] / 255.0, (4, 4)).astype(np.float32)
+    result['near_copies_research_test_4x4'] = [near_copies(plain, 'plain source repeated 4 x 4, height'), near_copies(h4_full, 'new 4 x 4 area (default settings, seed 1), height'),
+                                               near_copies(plain_col, 'plain source repeated 4 x 4, colour brightness'), near_copies(col_full, 'new 4 x 4 area, colour brightness')]
+    # 3b. the same near-copy test on 4 x 4 areas of height with parts of the recipe switched off (jobs in tests/jobs_final_h.json, folders area/near_copy_*)
+    switched = {}
+    for key in ('plain_windows_only', 'no_stains_no_patches', 'default', 'two_boards_per_row', 'four_boards_per_row', 'knots_free_and_many'):
+        path = os.path.join(area, f'near_copy_{key}', 'height.png')
+        if os.path.exists(path):
+            g = cv2.resize(load_height16(path).astype(np.float32), (1024, 1024), interpolation=cv2.INTER_AREA)
+            switched[key] = {'board_size_36x80': repeat_score(g, 36, 80, 40, 3), 'feature_size_24x40': repeat_score(g, 24, 40, 40, 3)}
+    if switched:
+        result['near_copies_research_test_4x4_switching_parts_off'] = {'note': '4 x 4 areas of HEIGHT baked at 1024 dots (4 samples) with parts of the recipe switched off (jobs in tests/jobs_final_h.json). Same test as above.', 'results': switched}
     # 4. seam test
     result['seam_test_default_tile_2x2'] = seam_test(area)
     os.makedirs(os.path.join(BASE, 'scores'), exist_ok=True)

@@ -24,9 +24,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Honest gaps the checker found:** nobody has yet followed the checklist on a brand-new surface from scratch (every transfer reused an existing generator); there is no
   starting template for writing a new generator; the tool guides mostly teach shader nodes while most generators here are "painters" of flat shapes written in Python;
   the same-kind tool needs a reference picture to score a new surface.
-- **Running now (log 13):** the slate's second round of look fixes, then the re-bake of its variations, bigger area and guides and an honesty check; and the reuse test
-  of the shared slate layers on wood, rusted metal, mud and gravel (brick is done), then an independent check of all five and a guide answering "how much of the tools can
-  be used on the other textures". Helpers now run on Sonnet 5.5 at extra-high effort, as you asked.
+- **Reuse answered (log 14):** `cookbook/07 Reuse - which tools work on which surfaces.md`. The paint machinery carries over (55-87% of each recipe's nodes are shared,
+  unchanged); the shapes do not (four of five surfaces needed their own layout, and one to three new layers each). Brick, wood, metal and gravel read as the surface; mud only partly.
+- **Slate fixes done (log 15):** colour score 0.81 over five seed sets (aim 0.8), checker says "nearly" the same hand; one new fault (straight-edged flat facets on about
+  14 slates) needs a small code fix in the colour and fade layer - not started, as you asked to move on.
+- **Running now:** wood from your displacement and colour maps (being checked); the generated-mask test on the slate (fal, under US$1); the wetness layer and
+  specular map for the pit village street set. Helpers run on Sonnet 5.5 at extra-high effort.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -132,6 +135,31 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     new helpers continue from their folders. Also found: Blender is not on the helpers' search path (each lost one try); the full path is now in their instructions.
     All of this was put in one download: `13 Finished results so far.zip`.
 
+14. **Reuse of the shared slate layers on five surfaces - results, independently checked.** Brick (log 13), then wood, rusted metal, mud and gravel, each built by one
+    helper from the frozen shared layers plus its own layout and new layers, then one checker re-ran every score, re-baked each tile (bit for bit the same), recounted the
+    nodes and re-ran the seam test. Same-kind score, layered (mean of three random patterns) against each surface's own earlier recipe, measured the same way:
+    brick 0.615 vs 0.725 (behind), wood 0.667 vs 0.606, metal 0.648 vs 0.579, mud 0.507 vs 0.391, gravel 0.622 vs 0.380. Share of the recipe from shared parts:
+    wood 87%, brick 84%, metal 78%, gravel 56%, mud 55%. Reads as the surface by eye: brick, wood, metal yes; gravel at a glance (ragged up close); mud partly.
+    What carried over: the colour and fade layer, the stacking, the layer interface, baking and scoring; damage, outline and moss on three or four surfaces, sometimes with
+    a new meaning (moss as rust on metal, as puddle water on mud). What did not: the layout (only wood could use slate's own, with a 5-node quarter turn) and COMBINE's
+    colour-to-height rule, which only suits slate. New layers made: grime (brick), cracks, knots and grain (wood), rivets and edge light (metal), ruts and stones (mud),
+    soil and facets (gravel). Every tile is cleaner and flatter than yours up close. **Caveats from the checker:** the first random pattern was the one tuned on (others score
+    0.04-0.08 lower); brick, metal and gravel use a height curve measured once from your height maps (2, 24 and 4 numbers), which lifts brick by 0.116 and metal by 0.083 -
+    within the "measure once" rule by the letter, but quote those scores beside the plain ones (brick 0.538, metal 0.578, gravel 0.643); the score separates mud and gravel
+    from other surfaces least sharply. Missing to make the toolkit general, ranked: recipe wiring and tests not tied to slate, a layout per kind of piece, a settable height
+    rule, a light direction in the outline and shadow layer. Pictures: `14 Reuse trials - pictures/` (`14 Reuse - all five surfaces, checked.jpg`).
+15. **Slate fixes, round 2, re-bake and checks.** A second tuner used the fresh checker's tested settings plus six new controls in the moss and outline-and-shadow
+    layers (code changed in two layer files; independence re-tested: 0.0% change outside each layer's own part). Settings 49 to 73 entries. Colour group 0.822 on the default
+    tile and 0.810 over five seed sets (0.740 before), so the 0.8 aim is met on paper - but about three quarters of the gain is the jumpy feature-size measure, and the
+    normal group moves about 0.07 up or down depending on how the normal map is made. What each layer adds now: joints 0.41, + colour and fade 0.73, + moss 0.79,
+    + damage 0.82; without outline and shadow 0.68. Look checker, round 2: 5 problems fixed (corner L-chips, row shadow, lone crack, lichen dots, moss cut at side joints),
+    5 better (paint ripple, moss, slate shape, relief, odd slates), the variations then re-made by the re-baker (v4 "faded" still only reads as a lighter tile).
+    **New fault it found:** about 14 slates carry flat straight-edged polygons (a cut-glass look), caused by the broader paint cells - "now the first thing an art director
+    would point at"; it needs a code fix in the colour and fade layer (the job allowed only two rounds, so it is not fixed). Also: the lower rim looks frayed with a pink
+    fringe, moss is a little pale, relief still weaker than yours. Seamless and non-repeating (half-tile and 2 x 2 tests). Honesty check: claims hold; 11 wording and number
+    errors corrected in the guides. Pictures: `15 Slate fixes round 2 - pictures/`.
+
 ## Next step
 
-Finish the slate's second round and the reuse test of all five surfaces (running), then send both with the independent checks.
+Let the three running jobs finish (wood from your maps, the generated-mask test, the wet street) and send them with their checks. Open, waiting for your go: the slate's
+straight-edged facets (a small code fix in the colour and fade layer).

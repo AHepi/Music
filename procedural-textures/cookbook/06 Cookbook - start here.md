@@ -147,6 +147,7 @@ corrections). Each **Lessons** file is the short "what carries over" list for th
 * [06 Guide - geometry nodes, curves, modifiers and physics](06%20Guide%20-%20geometry%20nodes,%20curves,%20modifiers%20and%20physics.md): real geometry photographed from above (Set Material, wrap copies, Instance on Points, Distribute Points, curves, modifiers, Rigid Body) and the honest verdict of all six builds.
 * [06 How to start a new surface - checklist](06%20How%20to%20start%20a%20new%20surface%20-%20checklist.md): the six Lessons files merged into one ordered checklist for a surface nobody has done yet.
 * [06 Check - what was checked and fixed](06%20Check%20-%20what%20was%20checked%20and%20fixed.md): an independent check of all these guides afterwards (links, numbers against the files, plain words, what was really tested, whether a newcomer can follow the checklist), with every correction it made and what is still open.
+* [07 Reuse - which tools work on which surfaces](07%20Reuse%20-%20which%20tools%20work%20on%20which%20surfaces.md): how much of the layered slate tools worked on brick, wood, metal, mud and gravel (every tool against every surface, what is missing to make the toolkit general, one picture sheet per surface).
 * This page, and the overview picture [06 Overview - all six surfaces](pictures/06%20Overview%20-%20all%20six%20surfaces.png).
 
 Other files: the project notes every helper read first, [PROCEDURAL_NOTES.md](../PROCEDURAL_NOTES.md) (the job in the person's words, the tools in `lib/`,

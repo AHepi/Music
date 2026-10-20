@@ -1,0 +1,60 @@
+[
+ {
+  "note": "What this is: round 2 exact board numbers of the default tiles of seeds 1, 2 and 3 (debug view 'boards', Height = the random number of the board, 16 bit), used to find every board joint exactly (tools/joint_contact_sheet_round2.py), and the exact 'which source dot' pictures of the seed 1 tile (to measure how much the windows are squeezed or stretched)."
+ },
+ {
+  "out": "tests/renders/boards_seed1",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 1,
+   "debug_view": "boards"
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/boards_seed2",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 2,
+   "debug_view": "boards"
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/boards_seed3",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 3,
+   "debug_view": "boards"
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/source_x_seed1",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 1,
+   "debug_view": "source_x"
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/source_y_seed1",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 1,
+   "debug_view": "source_y"
+  },
+  "channels": [
+   "Height"
+  ]
+ }
+]

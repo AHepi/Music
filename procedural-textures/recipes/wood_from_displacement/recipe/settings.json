@@ -1,29 +1,50 @@
 {
- "what_this_is": "Settings of the wood-from-maps recipe (wood_from_maps_recipe.py). Every setting is named group.control. Source facts (the 'source.' lines) are measured on the uploaded wood maps (research/measurements_wood_source_map.json). Nothing here is picture data: only counts, sizes, positions in dots, chances and one 32-stop palette.",
+ "what_this_is": "Settings of the wood-from-maps recipe, round 2 (wood_from_maps_recipe.py). Every setting is named group.control. Source facts (the 'source.' lines and 'landmarks.list') are measured on the uploaded wood maps. Nothing here is picture data: only counts, sizes, positions in dots, chances, one 32-stop palette and a list of recognisable places of the source map with the place the clean replacement grain is taken from.",
  "recipe.tiles_across": 1,
  "recipe.tile_repeats": -1,
  "recipe.seed": 1,
  "layout.rows_per_tile": 5,
- "layout.row_height_variation": 0.05,
- "layout.boards_per_row": 3,
- "layout.board_length_variation": 0.6,
- "windows.zoom": 0.1,
+ "layout.row_height_variation": 0.2,
+ "layout.boards_per_row": 2,
+ "layout.board_length_variation": 0.8,
+ "windows.zoom": 0.25,
  "windows.flip_left_right": 0.5,
  "windows.flip_upside_down": 0.4,
- "windows.knot_share": 0.12,
- "boards.tone_variation": 0.24,
+ "windows.warp_along": 12.0,
+ "windows.warp_across": 5.0,
+ "windows.warp_size": 200.0,
+ "windows.tilt": 3.5,
+ "windows.edge_margin": 28.0,
+ "landmarks.knot_chance": 0.15,
+ "landmarks.mark_chance": 0.12,
+ "landmarks.edge_ragged": 0.3,
+ "boards.tone_variation": 0.12,
  "boards.warmth_variation": 0.12,
  "boards.height_shift": 0.1,
- "joints.width": 4.0,
- "joints.raggedness": 0.8,
- "joints.notches": 0.8,
- "joints.edge_shade": 0.35,
+ "joints.width": 3.6,
+ "joints.width_variation": 0.6,
+ "joints.wobble": 2.0,
  "joints.wobble_length": 22.0,
- "stains.amount": 0.18,
+ "joints.raggedness": 0.8,
+ "joints.notches": 0.6,
+ "joints.edge_lip": 0.4,
+ "joints.pebbles": 0.45,
+ "joints.edge_shade": 0.2,
+ "joints.half_share": 0.35,
+ "joints.half_depth": 0.32,
+ "joints.half_run": 70.0,
+ "joints.half_width": 5.0,
+ "gaps.band_width": 3.2,
+ "gaps.band_variation": 0.9,
+ "gaps.wobble": 4.0,
+ "gaps.wobble_length": 140.0,
+ "stains.amount": 0.16,
  "stains.size": 85.0,
  "stains.zoom": 0.25,
- "stains.dark_limit": 135.0,
- "stains.dark_softness": 55.0,
+ "stains.dark_limit": 100.0,
+ "stains.dark_softness": 30.0,
+ "stains.keep_away": 15.0,
+ "stains.edge_hardness": 0.8,
  "masks.drift_amount": 0.1,
  "masks.drift_size": 2.0,
  "masks.blotch_amount": 0.15,
@@ -34,6 +55,8 @@
  "roughness.from_height": 0.2,
  "roughness.board_variation": 0.04,
  "bake.exact_dots": 1,
+ "bake.shrink_samples": 8,
+ "bake.shrink_filter": 1.0,
  "debug.source_unchanged": 0,
  "source.height_file": "reference/wood/height_as_uploaded.png",
  "source.colour_file": "reference/wood/colour.png",
@@ -44,29 +67,11 @@
   709,
   980
  ],
- "source.slice_length": [
-  281,
-  239,
-  271,
-  274
- ],
- "source.free_low": [
-  440,
-  0,
-  260,
-  0
- ],
- "source.free_high": [
-  1254,
-  1254,
-  760,
+ "source.slice_end": [
+  470,
+  709,
+  980,
   1254
- ],
- "source.knot_x": [
-  350,
-  0,
-  170,
-  0
  ],
  "source.stain_centres": [
   [
@@ -102,6 +107,105 @@
    1013
   ]
  ],
+ "landmarks.list": [
+  [
+   350,
+   378,
+   88,
+   -251,
+   756,
+   0
+  ],
+  [
+   170,
+   806,
+   85,
+   662,
+   -204,
+   0
+  ],
+  [
+   832,
+   893,
+   72,
+   256,
+   -510,
+   0
+  ],
+  [
+   742,
+   325,
+   55,
+   -458,
+   764,
+   1
+  ],
+  [
+   925,
+   410,
+   65,
+   127,
+   478,
+   1
+  ],
+  [
+   600,
+   540,
+   100,
+   -242,
+   50,
+   1
+  ],
+  [
+   1100,
+   578,
+   65,
+   -492,
+   -292,
+   1
+  ],
+  [
+   130,
+   592,
+   50,
+   585,
+   580,
+   1
+  ],
+  [
+   620,
+   790,
+   70,
+   -191,
+   14,
+   1
+  ],
+  [
+   880,
+   1050,
+   75,
+   273,
+   17,
+   1
+  ],
+  [
+   460,
+   1100,
+   85,
+   -303,
+   -737,
+   1
+  ],
+  [
+   600,
+   1195,
+   50,
+   595,
+   -332,
+   1
+  ]
+ ],
+ "landmarks.list_note": "Each entry: x, y of the place in the source map (dots, y down), radius, shift (dx, dy) to the clean replacement grain, kind (0 = knot, 1 = other recognisable place). Names in order: knot K2, knot K3, knot K4, zigzag crack R2, hook splinter R2, rust cloud R3, hole R3, notch R3, splinter R4, splinter R5, stain cluster R5, rubble R5.",
  "colour.palette": [
   [
    9.0,
@@ -232,11 +336,161 @@
    "#9e7658"
   ]
  ],
- "joints.edge_lip": 0.5,
- "joints.pebbles": 0.8,
- "joints.gap_band_width": 4.0,
- "bake.shrink_samples": 8,
- "bake.shrink_filter": 1.0,
- "layout.joined_share": 0.5,
- "layout.joined_max_length": 0.72
+ "joints.step_share": 0.7,
+ "joints.step_size": 90.0,
+ "joints.darkness": 0.9,
+ "boards.row_tone_variation": 0.16,
+ "joints.darkness_variation": 0.5,
+ "colour.warm_cool_amount": 1.0,
+ "colour.palette_cool": [
+  [
+   10.0,
+   "#131010"
+  ],
+  [
+   30.0,
+   "#1d1818"
+  ],
+  [
+   50.0,
+   "#282120"
+  ],
+  [
+   70.0,
+   "#322a29"
+  ],
+  [
+   90.0,
+   "#3b3331"
+  ],
+  [
+   110.0,
+   "#463b38"
+  ],
+  [
+   130.0,
+   "#50443f"
+  ],
+  [
+   150.0,
+   "#5a4d48"
+  ],
+  [
+   170.0,
+   "#65564e"
+  ],
+  [
+   190.0,
+   "#715f54"
+  ],
+  [
+   210.0,
+   "#7d6759"
+  ],
+  [
+   240.0,
+   "#8f7460"
+  ]
+ ],
+ "colour.palette_mid": [
+  [
+   10.0,
+   "#140f0e"
+  ],
+  [
+   30.0,
+   "#211713"
+  ],
+  [
+   50.0,
+   "#2d2019"
+  ],
+  [
+   70.0,
+   "#372820"
+  ],
+  [
+   90.0,
+   "#413129"
+  ],
+  [
+   110.0,
+   "#4c3a30"
+  ],
+  [
+   130.0,
+   "#564237"
+  ],
+  [
+   150.0,
+   "#614b3f"
+  ],
+  [
+   170.0,
+   "#6d5444"
+  ],
+  [
+   190.0,
+   "#795d4a"
+  ],
+  [
+   210.0,
+   "#86664f"
+  ],
+  [
+   240.0,
+   "#a07758"
+  ]
+ ],
+ "colour.palette_warm": [
+  [
+   10.0,
+   "#160e0b"
+  ],
+  [
+   30.0,
+   "#23150e"
+  ],
+  [
+   50.0,
+   "#331e13"
+  ],
+  [
+   70.0,
+   "#3e2618"
+  ],
+  [
+   90.0,
+   "#472e1f"
+  ],
+  [
+   110.0,
+   "#523727"
+  ],
+  [
+   130.0,
+   "#5c3f2d"
+  ],
+  [
+   150.0,
+   "#684834"
+  ],
+  [
+   170.0,
+   "#755139"
+  ],
+  [
+   190.0,
+   "#80593e"
+  ],
+  [
+   210.0,
+   "#8d6244"
+  ],
+  [
+   240.0,
+   "#a0704c"
+  ]
+ ],
+ "windows.tilt_max": 8.0
 }

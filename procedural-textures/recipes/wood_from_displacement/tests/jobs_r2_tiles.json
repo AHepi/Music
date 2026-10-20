@@ -1,0 +1,54 @@
+[
+ {
+  "note": "What this is: round 2 final tiles: seeds 2 and 3 of the default tile with all maps (standard bake), and the COMPARISON colour (colour made from the height with the warm and cool palettes) for seeds 1, 2 and 3. Seed 1 of MAIN is baked with the plain harness command line (see tools/run_round2_chain.sh)."
+ },
+ {
+  "out": "outputs/main_seed2",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 2
+  },
+  "full": true
+ },
+ {
+  "out": "outputs/main_seed3",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 3
+  },
+  "full": true
+ },
+ {
+  "out": "outputs/comparison_seed1",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 1,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "outputs/comparison_seed2",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 2,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "outputs/comparison_seed3",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 3,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ }
+]

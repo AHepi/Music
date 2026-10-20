@@ -1,0 +1,6 @@
+[
+ {"note": "What this is: round 2 check run after the tile-edge fix and the lower landmark chances: the default tile at full size (colour, height), and two full-size crops of the 4 x 4 area (to look for faults in area mode before the long final bakes)."},
+ {"out": "tests/r2/e_tile1254", "size": 1254, "params": {}, "channels": ["Colour", "Height"]},
+ {"out": "tests/r2/e_crop_a", "size": 1254, "params": {"recipe.tiles_across": 4, "window": [1.5, 1.5, 1]}, "channels": ["Colour"]},
+ {"out": "tests/r2/e_crop_b", "size": 1254, "params": {"recipe.tiles_across": 4, "window": [0.6, 2.4, 1]}, "channels": ["Colour"]}
+]

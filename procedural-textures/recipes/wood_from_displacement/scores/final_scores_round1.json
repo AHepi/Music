@@ -1,143 +1,39 @@
 {
+ "what_this_is": "What this is: the \"same kind of surface\" scores (lib/texture_compare.py) and the dot-for-dot numbers (lib/pixel_compare.py) of the final default tiles: MAIN and COMPARISON, seeds 1 to 3, and the earlier wood recipe best new tile (seed 105) baked again and scored the same way. Written by tools/score_set.py.",
  "main_seed1": {
   "folder": "outputs/main_seed1",
-  "overall": 0.793,
+  "overall": 0.816,
   "groups": {
-   "colour": 0.741,
-   "height": 0.849,
-   "normal": 0.742,
+   "colour": 0.763,
+   "height": 0.868,
+   "normal": 0.787,
    "tiling": 1.0
   },
   "scores": {
-   "colour_distribution": 0.863,
-   "colour_spectrum": 0.495,
-   "colour_orientation": 0.909,
-   "colour_scale": 0.835,
-   "colour_gradient": 0.588,
+   "colour_distribution": 0.899,
+   "colour_spectrum": 0.463,
+   "colour_orientation": 0.928,
+   "colour_scale": 0.813,
+   "colour_gradient": 0.711,
    "seam": 1.0,
-   "height_distribution": 0.852,
-   "height_spectrum": 0.709,
-   "height_gradient": 0.893,
-   "height_colour_link": 0.92,
-   "height_contrast": 0.989,
-   "normal_tilt": 0.674,
-   "normal_components": 0.853,
-   "normal_height_agreement": 0.724
+   "height_distribution": 0.893,
+   "height_spectrum": 0.683,
+   "height_gradient": 0.96,
+   "height_colour_link": 0.93,
+   "height_contrast": 0.954,
+   "normal_tilt": 0.754,
+   "normal_components": 0.895,
+   "normal_height_agreement": 0.67
   },
   "facts": {
-   "seam_ratio_candidate": 0.57,
+   "seam_ratio_candidate": 0.52,
    "seam_ratio_reference": 2.24,
    "correlation_length_px_reference": [
     24.0,
     3.0
    ],
    "correlation_length_px_candidate": [
-    23.0,
-    4.0
-   ],
-   "mean_lab_reference": [
-    29.3,
-    7.1,
-    10.8
-   ],
-   "mean_lab_candidate": [
-    28.2,
-    7.1,
-    10.7
-   ],
-   "height_colour_corr_reference": 0.983,
-   "height_colour_corr_candidate": 0.979,
-   "normal_height_corr_reference": [
-    -0.9628252125810907,
-    0.9569696997901748
-   ],
-   "normal_height_corr_candidate": [
-    -0.9572153815241351,
-    0.9562105385852689
-   ]
-  },
-  "pixel": {
-   "reference": "wood",
-   "candidate": "outputs/main_seed1",
-   "colour_mae_levels": 27.18,
-   "colour_psnr_db": 17.36,
-   "colour_ssim": 0.2066,
-   "colour_mean_delta_e": 15.44,
-   "colour_p95_delta_e": 33.13,
-   "edge_precision_2px": 0.712,
-   "edge_recall_2px": 0.655,
-   "edge_f1_2px": 0.682,
-   "edge_f1_by_luck": 0.684,
-   "edge_skill_2px": 0.0,
-   "height_mae_levels": 59.03,
-   "height_mae_best_fit_levels": 41.59,
-   "height_best_fit_gain_offset": [
-    0.001,
-    126.9
-   ],
-   "height_ssim": 0.0752,
-   "height_correlation": 0.0014,
-   "normal_mean_angle_degrees": 34.52,
-   "normal_median_angle_degrees": 30.69,
-   "normal_p95_angle_degrees": 75.81,
-   "tier_reached": "none",
-   "tier_rules": {
-    "layout": {
-     "edge_skill_2px": "min 0.3",
-     "colour_mean_delta_e": "max 20.0",
-     "height_mae_best_fit_levels": "max 40.0"
-    },
-    "close": {
-     "edge_skill_2px": "min 0.55",
-     "colour_ssim": "min 0.6",
-     "colour_mean_delta_e": "max 10.0",
-     "height_mae_best_fit_levels": "max 20.0",
-     "normal_mean_angle_degrees": "max 12.0"
-    },
-    "exact": {
-     "edge_skill_2px": "min 0.85",
-     "colour_ssim": "min 0.92",
-     "colour_mean_delta_e": "max 3.0",
-     "height_mae_best_fit_levels": "max 6.0",
-     "normal_mean_angle_degrees": "max 4.0"
-    }
-   }
-  }
- },
- "main_seed2": {
-  "folder": "outputs/main_seed2",
-  "overall": 0.78,
-  "groups": {
-   "colour": 0.746,
-   "height": 0.828,
-   "normal": 0.684,
-   "tiling": 1.0
-  },
-  "scores": {
-   "colour_distribution": 0.886,
-   "colour_spectrum": 0.584,
-   "colour_orientation": 0.884,
-   "colour_scale": 0.765,
-   "colour_gradient": 0.565,
-   "seam": 1.0,
-   "height_distribution": 0.793,
-   "height_spectrum": 0.728,
-   "height_gradient": 0.835,
-   "height_colour_link": 0.946,
-   "height_contrast": 0.979,
-   "normal_tilt": 0.613,
-   "normal_components": 0.826,
-   "normal_height_agreement": 0.614
-  },
-  "facts": {
-   "seam_ratio_candidate": 0.53,
-   "seam_ratio_reference": 2.24,
-   "correlation_length_px_reference": [
-    24.0,
-    3.0
-   ],
-   "correlation_length_px_candidate": [
-    20.0,
+    22.0,
     4.0
    ],
    "mean_lab_reference": [
@@ -147,113 +43,8 @@
    ],
    "mean_lab_candidate": [
     28.5,
-    6.8,
-    10.5
-   ],
-   "height_colour_corr_reference": 0.983,
-   "height_colour_corr_candidate": 0.98,
-   "normal_height_corr_reference": [
-    -0.9628252125810907,
-    0.9569696997901748
-   ],
-   "normal_height_corr_candidate": [
-    -0.9554177444673948,
-    0.955470905566062
-   ]
-  },
-  "pixel": {
-   "reference": "wood",
-   "candidate": "outputs/main_seed2",
-   "colour_mae_levels": 27.16,
-   "colour_psnr_db": 17.35,
-   "colour_ssim": 0.2076,
-   "colour_mean_delta_e": 15.57,
-   "colour_p95_delta_e": 33.57,
-   "edge_precision_2px": 0.714,
-   "edge_recall_2px": 0.65,
-   "edge_f1_2px": 0.681,
-   "edge_f1_by_luck": 0.684,
-   "edge_skill_2px": 0.0,
-   "height_mae_levels": 59.07,
-   "height_mae_best_fit_levels": 41.59,
-   "height_best_fit_gain_offset": [
-    -0.001,
-    127.1
-   ],
-   "height_ssim": 0.0766,
-   "height_correlation": -0.0006,
-   "normal_mean_angle_degrees": 34.29,
-   "normal_median_angle_degrees": 30.5,
-   "normal_p95_angle_degrees": 75.3,
-   "tier_reached": "none",
-   "tier_rules": {
-    "layout": {
-     "edge_skill_2px": "min 0.3",
-     "colour_mean_delta_e": "max 20.0",
-     "height_mae_best_fit_levels": "max 40.0"
-    },
-    "close": {
-     "edge_skill_2px": "min 0.55",
-     "colour_ssim": "min 0.6",
-     "colour_mean_delta_e": "max 10.0",
-     "height_mae_best_fit_levels": "max 20.0",
-     "normal_mean_angle_degrees": "max 12.0"
-    },
-    "exact": {
-     "edge_skill_2px": "min 0.85",
-     "colour_ssim": "min 0.92",
-     "colour_mean_delta_e": "max 3.0",
-     "height_mae_best_fit_levels": "max 6.0",
-     "normal_mean_angle_degrees": "max 4.0"
-    }
-   }
-  }
- },
- "main_seed3": {
-  "folder": "outputs/main_seed3",
-  "overall": 0.793,
-  "groups": {
-   "colour": 0.755,
-   "height": 0.849,
-   "normal": 0.699,
-   "tiling": 1.0
-  },
-  "scores": {
-   "colour_distribution": 0.921,
-   "colour_spectrum": 0.505,
-   "colour_orientation": 0.872,
-   "colour_scale": 0.79,
-   "colour_gradient": 0.635,
-   "seam": 1.0,
-   "height_distribution": 0.827,
-   "height_spectrum": 0.737,
-   "height_gradient": 0.887,
-   "height_colour_link": 0.928,
-   "height_contrast": 0.971,
-   "normal_tilt": 0.665,
-   "normal_components": 0.826,
-   "normal_height_agreement": 0.548
-  },
-  "facts": {
-   "seam_ratio_candidate": 0.55,
-   "seam_ratio_reference": 2.24,
-   "correlation_length_px_reference": [
-    24.0,
-    3.0
-   ],
-   "correlation_length_px_candidate": [
-    21.0,
-    4.0
-   ],
-   "mean_lab_reference": [
-    29.3,
-    7.1,
-    10.8
-   ],
-   "mean_lab_candidate": [
-    28.7,
-    6.9,
-    10.6
+    7.2,
+    11.1
    ],
    "height_colour_corr_reference": 0.983,
    "height_colour_corr_candidate": 0.979,
@@ -262,34 +53,34 @@
     0.9569696997901748
    ],
    "normal_height_corr_candidate": [
-    -0.9531727618375447,
-    0.9562048368222608
+    -0.9566403632832304,
+    0.955537650414812
    ]
   },
   "pixel": {
    "reference": "wood",
-   "candidate": "outputs/main_seed3",
-   "colour_mae_levels": 27.41,
-   "colour_psnr_db": 17.25,
-   "colour_ssim": 0.2057,
-   "colour_mean_delta_e": 15.69,
-   "colour_p95_delta_e": 33.67,
-   "edge_precision_2px": 0.718,
-   "edge_recall_2px": 0.662,
-   "edge_f1_2px": 0.689,
-   "edge_f1_by_luck": 0.686,
-   "edge_skill_2px": 0.01,
-   "height_mae_levels": 59.34,
-   "height_mae_best_fit_levels": 41.58,
+   "candidate": "outputs/main_seed1",
+   "colour_mae_levels": 27.75,
+   "colour_psnr_db": 17.21,
+   "colour_ssim": 0.1987,
+   "colour_mean_delta_e": 15.61,
+   "colour_p95_delta_e": 33.36,
+   "edge_precision_2px": 0.714,
+   "edge_recall_2px": 0.673,
+   "edge_f1_2px": 0.692,
+   "edge_f1_by_luck": 0.692,
+   "edge_skill_2px": 0.001,
+   "height_mae_levels": 60.4,
+   "height_mae_best_fit_levels": 41.59,
    "height_best_fit_gain_offset": [
-    0.011,
-    125.7
+    -0.01,
+    128.3
    ],
-   "height_ssim": 0.0749,
-   "height_correlation": 0.011,
-   "normal_mean_angle_degrees": 34.5,
-   "normal_median_angle_degrees": 30.69,
-   "normal_p95_angle_degrees": 75.78,
+   "height_ssim": 0.0699,
+   "height_correlation": -0.0101,
+   "normal_mean_angle_degrees": 34.96,
+   "normal_median_angle_degrees": 31.17,
+   "normal_p95_angle_degrees": 76.72,
    "tier_reached": "none",
    "tier_rules": {
     "layout": {
@@ -316,31 +107,31 @@
  },
  "comparison_seed1": {
   "folder": "outputs/comparison_seed1",
-  "overall": 0.717,
+  "overall": 0.742,
   "groups": {
-   "colour": 0.581,
-   "height": 0.849,
-   "normal": 0.742,
+   "colour": 0.613,
+   "height": 0.859,
+   "normal": 0.787,
    "tiling": 1.0
   },
   "scores": {
-   "colour_distribution": 0.711,
-   "colour_spectrum": 0.172,
-   "colour_orientation": 0.837,
+   "colour_distribution": 0.761,
+   "colour_spectrum": 0.15,
+   "colour_orientation": 0.862,
    "colour_scale": 0.856,
-   "colour_gradient": 0.33,
+   "colour_gradient": 0.443,
    "seam": 1.0,
-   "height_distribution": 0.852,
-   "height_spectrum": 0.709,
-   "height_gradient": 0.893,
-   "height_colour_link": 0.917,
-   "height_contrast": 0.989,
-   "normal_tilt": 0.674,
-   "normal_components": 0.853,
-   "normal_height_agreement": 0.724
+   "height_distribution": 0.893,
+   "height_spectrum": 0.683,
+   "height_gradient": 0.96,
+   "height_colour_link": 0.874,
+   "height_contrast": 0.954,
+   "normal_tilt": 0.754,
+   "normal_components": 0.895,
+   "normal_height_agreement": 0.67
   },
   "facts": {
-   "seam_ratio_candidate": 0.63,
+   "seam_ratio_candidate": 0.57,
    "seam_ratio_reference": 2.24,
    "correlation_length_px_reference": [
     24.0,
@@ -356,45 +147,150 @@
     10.8
    ],
    "mean_lab_candidate": [
-    28.0,
-    6.8,
-    10.5
+    28.4,
+    6.9,
+    10.7
    ],
    "height_colour_corr_reference": 0.983,
-   "height_colour_corr_candidate": 0.987,
+   "height_colour_corr_candidate": 0.989,
    "normal_height_corr_reference": [
     -0.9628252125810907,
     0.9569696997901748
    ],
    "normal_height_corr_candidate": [
-    -0.9572153815241351,
-    0.9562105385852689
+    -0.9566403632832304,
+    0.955537650414812
    ]
   },
   "pixel": {
    "reference": "wood",
    "candidate": "outputs/comparison_seed1",
-   "colour_mae_levels": 26.77,
-   "colour_psnr_db": 17.48,
-   "colour_ssim": 0.2166,
-   "colour_mean_delta_e": 14.57,
-   "colour_p95_delta_e": 32.48,
-   "edge_precision_2px": 0.71,
-   "edge_recall_2px": 0.58,
-   "edge_f1_2px": 0.638,
-   "edge_f1_by_luck": 0.641,
-   "edge_skill_2px": 0.0,
-   "height_mae_levels": 59.03,
+   "colour_mae_levels": 27.31,
+   "colour_psnr_db": 17.34,
+   "colour_ssim": 0.2088,
+   "colour_mean_delta_e": 14.77,
+   "colour_p95_delta_e": 32.71,
+   "edge_precision_2px": 0.714,
+   "edge_recall_2px": 0.602,
+   "edge_f1_2px": 0.654,
+   "edge_f1_by_luck": 0.651,
+   "edge_skill_2px": 0.008,
+   "height_mae_levels": 60.4,
    "height_mae_best_fit_levels": 41.59,
    "height_best_fit_gain_offset": [
-    0.001,
-    126.9
+    -0.01,
+    128.3
    ],
-   "height_ssim": 0.0752,
-   "height_correlation": 0.0014,
-   "normal_mean_angle_degrees": 34.52,
-   "normal_median_angle_degrees": 30.69,
-   "normal_p95_angle_degrees": 75.81,
+   "height_ssim": 0.0699,
+   "height_correlation": -0.0101,
+   "normal_mean_angle_degrees": 34.96,
+   "normal_median_angle_degrees": 31.17,
+   "normal_p95_angle_degrees": 76.72,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "main_seed2": {
+  "folder": "outputs/main_seed2",
+  "overall": 0.809,
+  "groups": {
+   "colour": 0.779,
+   "height": 0.851,
+   "normal": 0.726,
+   "tiling": 1.0
+  },
+  "scores": {
+   "colour_distribution": 0.909,
+   "colour_spectrum": 0.538,
+   "colour_orientation": 0.877,
+   "colour_scale": 0.883,
+   "colour_gradient": 0.64,
+   "seam": 1.0,
+   "height_distribution": 0.848,
+   "height_spectrum": 0.676,
+   "height_gradient": 0.929,
+   "height_colour_link": 0.942,
+   "height_contrast": 0.977,
+   "normal_tilt": 0.699,
+   "normal_components": 0.826,
+   "normal_height_agreement": 0.605
+  },
+  "facts": {
+   "seam_ratio_candidate": 0.52,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    19.0,
+    3.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    28.8,
+    7.0,
+    10.8
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.98,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.9549628345053857,
+    0.9557328984332598
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "outputs/main_seed2",
+   "colour_mae_levels": 27.02,
+   "colour_psnr_db": 17.37,
+   "colour_ssim": 0.2044,
+   "colour_mean_delta_e": 15.56,
+   "colour_p95_delta_e": 33.55,
+   "edge_precision_2px": 0.716,
+   "edge_recall_2px": 0.669,
+   "edge_f1_2px": 0.691,
+   "edge_f1_by_luck": 0.689,
+   "edge_skill_2px": 0.009,
+   "height_mae_levels": 58.71,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    0.002,
+    126.8
+   ],
+   "height_ssim": 0.0751,
+   "height_correlation": 0.0023,
+   "normal_mean_angle_degrees": 34.6,
+   "normal_median_angle_degrees": 30.84,
+   "normal_p95_angle_degrees": 75.86,
    "tier_reached": "none",
    "tier_rules": {
     "layout": {
@@ -421,38 +317,38 @@
  },
  "comparison_seed2": {
   "folder": "outputs/comparison_seed2",
-  "overall": 0.694,
+  "overall": 0.709,
   "groups": {
-   "colour": 0.575,
-   "height": 0.813,
-   "normal": 0.684,
+   "colour": 0.577,
+   "height": 0.837,
+   "normal": 0.726,
    "tiling": 1.0
   },
   "scores": {
-   "colour_distribution": 0.729,
-   "colour_spectrum": 0.201,
-   "colour_orientation": 0.815,
-   "colour_scale": 0.79,
-   "colour_gradient": 0.316,
+   "colour_distribution": 0.742,
+   "colour_spectrum": 0.168,
+   "colour_orientation": 0.806,
+   "colour_scale": 0.765,
+   "colour_gradient": 0.387,
    "seam": 1.0,
-   "height_distribution": 0.793,
-   "height_spectrum": 0.728,
-   "height_gradient": 0.835,
-   "height_colour_link": 0.856,
-   "height_contrast": 0.979,
-   "normal_tilt": 0.613,
+   "height_distribution": 0.848,
+   "height_spectrum": 0.676,
+   "height_gradient": 0.929,
+   "height_colour_link": 0.854,
+   "height_contrast": 0.977,
+   "normal_tilt": 0.699,
    "normal_components": 0.826,
-   "normal_height_agreement": 0.614
+   "normal_height_agreement": 0.605
   },
   "facts": {
-   "seam_ratio_candidate": 0.59,
+   "seam_ratio_candidate": 0.58,
    "seam_ratio_reference": 2.24,
    "correlation_length_px_reference": [
     24.0,
     3.0
    ],
    "correlation_length_px_candidate": [
-    21.0,
+    20.0,
     4.0
    ],
    "mean_lab_reference": [
@@ -461,9 +357,9 @@
     10.8
    ],
    "mean_lab_candidate": [
-    28.3,
+    28.6,
     6.7,
-    10.2
+    10.4
    ],
    "height_colour_corr_reference": 0.983,
    "height_colour_corr_candidate": 0.99,
@@ -472,34 +368,139 @@
     0.9569696997901748
    ],
    "normal_height_corr_candidate": [
-    -0.9554177444673948,
-    0.955470905566062
+    -0.9549628345053857,
+    0.9557328984332598
    ]
   },
   "pixel": {
    "reference": "wood",
    "candidate": "outputs/comparison_seed2",
-   "colour_mae_levels": 26.68,
-   "colour_psnr_db": 17.49,
-   "colour_ssim": 0.2178,
-   "colour_mean_delta_e": 14.58,
-   "colour_p95_delta_e": 32.64,
-   "edge_precision_2px": 0.714,
-   "edge_recall_2px": 0.571,
-   "edge_f1_2px": 0.634,
-   "edge_f1_by_luck": 0.639,
-   "edge_skill_2px": 0.0,
-   "height_mae_levels": 59.07,
+   "colour_mae_levels": 26.56,
+   "colour_psnr_db": 17.52,
+   "colour_ssim": 0.2149,
+   "colour_mean_delta_e": 14.5,
+   "colour_p95_delta_e": 32.67,
+   "edge_precision_2px": 0.716,
+   "edge_recall_2px": 0.596,
+   "edge_f1_2px": 0.65,
+   "edge_f1_by_luck": 0.649,
+   "edge_skill_2px": 0.005,
+   "height_mae_levels": 58.71,
    "height_mae_best_fit_levels": 41.59,
    "height_best_fit_gain_offset": [
-    -0.001,
-    127.1
+    0.002,
+    126.8
    ],
-   "height_ssim": 0.0766,
-   "height_correlation": -0.0006,
-   "normal_mean_angle_degrees": 34.29,
-   "normal_median_angle_degrees": 30.5,
-   "normal_p95_angle_degrees": 75.3,
+   "height_ssim": 0.0751,
+   "height_correlation": 0.0023,
+   "normal_mean_angle_degrees": 34.6,
+   "normal_median_angle_degrees": 30.84,
+   "normal_p95_angle_degrees": 75.86,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "main_seed3": {
+  "folder": "outputs/main_seed3",
+  "overall": 0.778,
+  "groups": {
+   "colour": 0.736,
+   "height": 0.826,
+   "normal": 0.704,
+   "tiling": 1.0
+  },
+  "scores": {
+   "colour_distribution": 0.928,
+   "colour_spectrum": 0.355,
+   "colour_orientation": 0.894,
+   "colour_scale": 0.835,
+   "colour_gradient": 0.627,
+   "seam": 1.0,
+   "height_distribution": 0.838,
+   "height_spectrum": 0.643,
+   "height_gradient": 0.865,
+   "height_colour_link": 0.951,
+   "height_contrast": 0.966,
+   "normal_tilt": 0.648,
+   "normal_components": 0.844,
+   "normal_height_agreement": 0.591
+  },
+  "facts": {
+   "seam_ratio_candidate": 0.56,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    23.0,
+    4.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    28.7,
+    7.0,
+    10.9
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.981,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.9539778292693414,
+    0.9563874358561771
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "outputs/main_seed3",
+   "colour_mae_levels": 27.76,
+   "colour_psnr_db": 17.16,
+   "colour_ssim": 0.2003,
+   "colour_mean_delta_e": 15.73,
+   "colour_p95_delta_e": 34.0,
+   "edge_precision_2px": 0.711,
+   "edge_recall_2px": 0.649,
+   "edge_f1_2px": 0.679,
+   "edge_f1_by_luck": 0.684,
+   "edge_skill_2px": 0.0,
+   "height_mae_levels": 60.17,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    -0.01,
+    128.3
+   ],
+   "height_ssim": 0.0693,
+   "height_correlation": -0.0102,
+   "normal_mean_angle_degrees": 34.59,
+   "normal_median_angle_degrees": 30.86,
+   "normal_p95_angle_degrees": 75.71,
    "tier_reached": "none",
    "tier_rules": {
     "layout": {
@@ -526,38 +527,38 @@
  },
  "comparison_seed3": {
   "folder": "outputs/comparison_seed3",
-  "overall": 0.71,
+  "overall": 0.695,
   "groups": {
-   "colour": 0.585,
-   "height": 0.841,
-   "normal": 0.699,
+   "colour": 0.571,
+   "height": 0.81,
+   "normal": 0.704,
    "tiling": 1.0
   },
   "scores": {
-   "colour_distribution": 0.766,
-   "colour_spectrum": 0.124,
-   "colour_orientation": 0.807,
-   "colour_scale": 0.813,
-   "colour_gradient": 0.385,
+   "colour_distribution": 0.773,
+   "colour_spectrum": 0.01,
+   "colour_orientation": 0.83,
+   "colour_scale": 0.856,
+   "colour_gradient": 0.362,
    "seam": 1.0,
-   "height_distribution": 0.827,
-   "height_spectrum": 0.737,
-   "height_gradient": 0.887,
-   "height_colour_link": 0.88,
-   "height_contrast": 0.971,
-   "normal_tilt": 0.665,
-   "normal_components": 0.826,
-   "normal_height_agreement": 0.548
+   "height_distribution": 0.838,
+   "height_spectrum": 0.643,
+   "height_gradient": 0.865,
+   "height_colour_link": 0.858,
+   "height_contrast": 0.966,
+   "normal_tilt": 0.648,
+   "normal_components": 0.844,
+   "normal_height_agreement": 0.591
   },
   "facts": {
-   "seam_ratio_candidate": 0.59,
+   "seam_ratio_candidate": 0.6,
    "seam_ratio_reference": 2.24,
    "correlation_length_px_reference": [
     24.0,
     3.0
    ],
    "correlation_length_px_candidate": [
-    22.0,
+    24.0,
     4.0
    ],
    "mean_lab_reference": [
@@ -568,43 +569,43 @@
    "mean_lab_candidate": [
     28.6,
     6.8,
-    10.5
+    10.6
    ],
    "height_colour_corr_reference": 0.983,
-   "height_colour_corr_candidate": 0.989,
+   "height_colour_corr_candidate": 0.99,
    "normal_height_corr_reference": [
     -0.9628252125810907,
     0.9569696997901748
    ],
    "normal_height_corr_candidate": [
-    -0.9531727618375447,
-    0.9562048368222608
+    -0.9539778292693414,
+    0.9563874358561771
    ]
   },
   "pixel": {
    "reference": "wood",
    "candidate": "outputs/comparison_seed3",
-   "colour_mae_levels": 26.98,
-   "colour_psnr_db": 17.4,
-   "colour_ssim": 0.2148,
-   "colour_mean_delta_e": 14.59,
-   "colour_p95_delta_e": 32.69,
-   "edge_precision_2px": 0.716,
-   "edge_recall_2px": 0.583,
-   "edge_f1_2px": 0.643,
-   "edge_f1_by_luck": 0.639,
-   "edge_skill_2px": 0.01,
-   "height_mae_levels": 59.34,
-   "height_mae_best_fit_levels": 41.58,
+   "colour_mae_levels": 27.35,
+   "colour_psnr_db": 17.3,
+   "colour_ssim": 0.2098,
+   "colour_mean_delta_e": 14.74,
+   "colour_p95_delta_e": 33.03,
+   "edge_precision_2px": 0.712,
+   "edge_recall_2px": 0.574,
+   "edge_f1_2px": 0.636,
+   "edge_f1_by_luck": 0.642,
+   "edge_skill_2px": 0.0,
+   "height_mae_levels": 60.17,
+   "height_mae_best_fit_levels": 41.59,
    "height_best_fit_gain_offset": [
-    0.011,
-    125.7
+    -0.01,
+    128.3
    ],
-   "height_ssim": 0.0749,
-   "height_correlation": 0.011,
-   "normal_mean_angle_degrees": 34.5,
-   "normal_median_angle_degrees": 30.69,
-   "normal_p95_angle_degrees": 75.78,
+   "height_ssim": 0.0693,
+   "height_correlation": -0.0102,
+   "normal_mean_angle_degrees": 34.59,
+   "normal_median_angle_degrees": 30.86,
+   "normal_p95_angle_degrees": 75.71,
    "tier_reached": "none",
    "tier_rules": {
     "layout": {

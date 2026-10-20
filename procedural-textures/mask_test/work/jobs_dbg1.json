@@ -1,0 +1,68 @@
+[
+ {
+  "name": "moss_mask_nodes",
+  "out": "proc-work/mask_test/work/dbg1/moss_mask_nodes",
+  "size": 640,
+  "params": {
+   "debug_view": "moss.mask"
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "name": "moss_mask_stamps",
+  "out": "proc-work/mask_test/work/dbg1/moss_mask_stamps",
+  "size": 640,
+  "params": {
+   "moss.mask_mode": "stamps",
+   "moss.stamp_atlas": "proc-work/mask_test/stamps/atlas/moss_AB_atlas.json",
+   "debug_view": "moss.mask"
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "name": "chip_mask_nodes",
+  "out": "proc-work/mask_test/work/dbg1/chip_mask_nodes",
+  "size": 640,
+  "params": {
+   "debug_view": "damage.mask"
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "name": "chip_mask_stamps",
+  "out": "proc-work/mask_test/work/dbg1/chip_mask_stamps",
+  "size": 640,
+  "params": {
+   "damage.mask_mode": "stamps",
+   "damage.stamp_atlas": "proc-work/mask_test/stamps/atlas/chips_C_atlas.json",
+   "debug_view": "damage.mask"
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "name": "finished_both",
+  "out": "proc-work/mask_test/work/dbg1/finished_both",
+  "size": 640,
+  "params": {
+   "moss.mask_mode": "stamps",
+   "moss.stamp_atlas": "proc-work/mask_test/stamps/atlas/moss_AB_atlas.json",
+   "damage.mask_mode": "stamps",
+   "damage.stamp_atlas": "proc-work/mask_test/stamps/atlas/chips_C_atlas.json"
+  },
+  "channels": [
+   "Colour"
+  ]
+ }
+]

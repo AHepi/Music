@@ -1,0 +1,142 @@
+{
+ "default_tile_main": {
+  "nodes": 888,
+  "node_types": {
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "NodeFrame": 11,
+   "ShaderNodeSeparateXYZ": 1,
+   "ShaderNodeMath": 754,
+   "ShaderNodeTexWhiteNoise": 23,
+   "ShaderNodeCombineXYZ": 40,
+   "ShaderNodeSeparateColor": 34,
+   "ShaderNodeValToRGB": 5,
+   "ShaderNodeTexImage": 6,
+   "ShaderNodeTexNoise": 10,
+   "ShaderNodeTexVoronoi": 1,
+   "ShaderNodeCombineColor": 1
+  },
+  "image_texture_nodes": 6,
+  "picture_files_read": [
+   {
+    "file": "reference/wood/height_as_uploaded.png",
+    "colour_space": "Non-Color",
+    "interpolation": "Linear",
+    "extension": "EXTEND",
+    "nodes": 3
+   },
+   {
+    "file": "reference/wood/colour.png",
+    "colour_space": "sRGB",
+    "interpolation": "Linear",
+    "extension": "EXTEND",
+    "nodes": 3
+   }
+  ],
+  "places_read": 3,
+  "places_where_height_and_colour_are_both_read": 3,
+  "places_read_by_only_one_map": [],
+  "script_nodes": 0,
+  "all_images_in_blend_data": [
+   "reference/wood/colour.png",
+   "reference/wood/height_as_uploaded.png"
+  ]
+ },
+ "area_4x4_main": {
+  "nodes": 843,
+  "node_types": {
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "NodeFrame": 11,
+   "ShaderNodeSeparateXYZ": 1,
+   "ShaderNodeMath": 709,
+   "ShaderNodeTexWhiteNoise": 23,
+   "ShaderNodeCombineXYZ": 40,
+   "ShaderNodeSeparateColor": 34,
+   "ShaderNodeValToRGB": 5,
+   "ShaderNodeTexImage": 6,
+   "ShaderNodeTexNoise": 10,
+   "ShaderNodeTexVoronoi": 1,
+   "ShaderNodeCombineColor": 1
+  },
+  "image_texture_nodes": 6,
+  "picture_files_read": [
+   {
+    "file": "reference/wood/height_as_uploaded.png",
+    "colour_space": "Non-Color",
+    "interpolation": "Linear",
+    "extension": "EXTEND",
+    "nodes": 3
+   },
+   {
+    "file": "reference/wood/colour.png",
+    "colour_space": "sRGB",
+    "interpolation": "Linear",
+    "extension": "EXTEND",
+    "nodes": 3
+   }
+  ],
+  "places_read": 3,
+  "places_where_height_and_colour_are_both_read": 3,
+  "places_read_by_only_one_map": [],
+  "script_nodes": 0,
+  "all_images_in_blend_data": [
+   "reference/wood/colour.png",
+   "reference/wood/height_as_uploaded.png"
+  ]
+ },
+ "default_tile_comparison": {
+  "nodes": 876,
+  "node_types": {
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "NodeFrame": 11,
+   "ShaderNodeSeparateXYZ": 1,
+   "ShaderNodeMath": 745,
+   "ShaderNodeTexWhiteNoise": 23,
+   "ShaderNodeCombineXYZ": 37,
+   "ShaderNodeSeparateColor": 34,
+   "ShaderNodeValToRGB": 8,
+   "ShaderNodeTexImage": 3,
+   "ShaderNodeTexNoise": 10,
+   "ShaderNodeTexVoronoi": 1,
+   "ShaderNodeCombineColor": 1
+  },
+  "image_texture_nodes": 3,
+  "picture_files_read": [
+   {
+    "file": "reference/wood/height_as_uploaded.png",
+    "colour_space": "Non-Color",
+    "interpolation": "Linear",
+    "extension": "EXTEND",
+    "nodes": 3
+   }
+  ],
+  "places_read": 3,
+  "places_where_height_and_colour_are_both_read": 0,
+  "places_read_by_only_one_map": [
+   [
+    [
+     "height_as_uploaded.png",
+     "Non-Color"
+    ]
+   ],
+   [
+    [
+     "height_as_uploaded.png",
+     "Non-Color"
+    ]
+   ],
+   [
+    [
+     "height_as_uploaded.png",
+     "Non-Color"
+    ]
+   ]
+  ],
+  "script_nodes": 0,
+  "all_images_in_blend_data": [
+   "reference/wood/height_as_uploaded.png"
+  ]
+ }
+}

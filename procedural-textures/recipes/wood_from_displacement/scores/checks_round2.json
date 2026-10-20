@@ -1,0 +1,109 @@
+{
+ "what_this_is": "Small checks on the finished wood-from-maps pictures, round 2 (tools/analyse_final_round2.py). Seed 1 unless it says otherwise. A section is only replaced when its pictures exist.",
+ "tile_wrap_edge_jumps": {
+  "seed1_colour": {
+   "left_right_wrap_jump_over_a_typical_jump": 1.12,
+   "top_bottom_wrap_jump_over_a_typical_jump": 1.08
+  },
+  "seed1_height": {
+   "left_right_wrap_jump_over_a_typical_jump": 1.11,
+   "top_bottom_wrap_jump_over_a_typical_jump": 1.27
+  },
+  "seed2_colour": {
+   "left_right_wrap_jump_over_a_typical_jump": 1.0,
+   "top_bottom_wrap_jump_over_a_typical_jump": 1.4
+  },
+  "seed2_height": {
+   "left_right_wrap_jump_over_a_typical_jump": 0.97,
+   "top_bottom_wrap_jump_over_a_typical_jump": 1.51
+  },
+  "seed3_colour": {
+   "left_right_wrap_jump_over_a_typical_jump": 0.95,
+   "top_bottom_wrap_jump_over_a_typical_jump": 1.61
+  },
+  "seed3_height": {
+   "left_right_wrap_jump_over_a_typical_jump": 0.95,
+   "top_bottom_wrap_jump_over_a_typical_jump": 1.8
+  },
+  "uploaded_height_for_comparison": {
+   "left_right_wrap_jump_over_a_typical_jump": 3.97,
+   "top_bottom_wrap_jump_over_a_typical_jump": 2.76
+  }
+ },
+ "colour_brightness_versus_height_correlation": {
+  "main_seed1": 0.978,
+  "main_seed2": 0.98,
+  "main_seed3": 0.979,
+  "comparison_seed1_(colour_from_height)": 0.988,
+  "uploaded_maps": 0.982
+ },
+ "main_versus_comparison_colour": {
+  "seed1": {
+   "mean_delta_e": 5.88,
+   "ninety_fifth_percent_delta_e": 13.79,
+   "mean_colour_main_0_255": [
+    83.6,
+    63.8,
+    52.1
+   ],
+   "mean_colour_comparison_0_255": [
+    84.5,
+    63.1,
+    50.5
+   ],
+   "share_of_dots_more_blue_than_red_main_versus_comparison": [
+    0.007,
+    0.0
+   ]
+  },
+  "seed2": {
+   "mean_delta_e": 5.88,
+   "ninety_fifth_percent_delta_e": 13.95,
+   "mean_colour_main_0_255": [
+    85.8,
+    65.9,
+    54.1
+   ],
+   "mean_colour_comparison_0_255": [
+    86.9,
+    65.2,
+    52.5
+   ],
+   "share_of_dots_more_blue_than_red_main_versus_comparison": [
+    0.007,
+    0.0
+   ]
+  },
+  "seed3": {
+   "mean_delta_e": 5.87,
+   "ninety_fifth_percent_delta_e": 13.57,
+   "mean_colour_main_0_255": [
+    85.0,
+    64.6,
+    52.5
+   ],
+   "mean_colour_comparison_0_255": [
+    85.5,
+    64.0,
+    51.5
+   ],
+   "share_of_dots_more_blue_than_red_main_versus_comparison": [
+    0.006,
+    0.0
+   ]
+  },
+  "uploaded_colour_map_for_comparison_mean_colour_0_255_and_share_more_blue_than_red": [
+   [
+    86.1,
+    65.3,
+    53.1
+   ],
+   0.006
+  ]
+ },
+ "seed_difference_height": {
+  "correlation_seed1_seed2": 0.028,
+  "correlation_seed1_seed3": -0.01,
+  "correlation_seed2_seed3": 0.034
+ }
+}

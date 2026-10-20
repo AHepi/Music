@@ -1,0 +1,805 @@
+{
+ "what_this_is": "Same-kind scores (0 = as different as another real surface, 1 = indistinguishable by those measures) of the round 2 default tiles against the uploaded wood, by lib/texture_compare.py, and the dot-for-dot numbers of lib/pixel_compare.py (for transparency only: the new boards are not where the reference boards are, so those numbers are low on purpose and say nothing about quality).",
+ "caution_1": "The new tile is made from the reference picture itself (its own dots, rearranged), the earlier recipe used nodes only: a higher score is partly expected and the comparison is not like for like.",
+ "caution_2": "height_mae_best_fit_levels is the error after the best brightness and contrast fit; for any picture whose boards are not in the reference places the fit collapses to a flat grey (gain about 0), so that number is the same for every picture and says nothing. Read height_mae_levels.",
+ "main_seed1": {
+  "folder": "outputs/main_seed1",
+  "overall": 0.828,
+  "groups": {
+   "colour": 0.778,
+   "height": 0.876,
+   "normal": 0.835,
+   "tiling": 0.934
+  },
+  "scores": {
+   "colour_distribution": 0.892,
+   "colour_spectrum": 0.424,
+   "colour_orientation": 0.929,
+   "colour_scale": 0.979,
+   "colour_gradient": 0.655,
+   "seam": 0.934,
+   "height_distribution": 0.926,
+   "height_spectrum": 0.677,
+   "height_gradient": 0.966,
+   "height_colour_link": 0.918,
+   "height_contrast": 0.972,
+   "normal_tilt": 0.743,
+   "normal_components": 0.915,
+   "normal_height_agreement": 0.949
+  },
+  "facts": {
+   "seam_ratio_candidate": 1.13,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    23.0,
+    3.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    28.6,
+    6.8,
+    10.3
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.979,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.9619394946386632,
+    0.9566860918137682
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "proc-work/recipes/wood_from_displacement/outputs/main_seed1",
+   "colour_mae_levels": 27.04,
+   "colour_psnr_db": 17.38,
+   "colour_ssim": 0.2023,
+   "colour_mean_delta_e": 15.28,
+   "colour_p95_delta_e": 32.89,
+   "edge_precision_2px": 0.716,
+   "edge_recall_2px": 0.671,
+   "edge_f1_2px": 0.693,
+   "edge_f1_by_luck": 0.689,
+   "edge_skill_2px": 0.013,
+   "height_mae_levels": 58.41,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    0.014,
+    125.4
+   ],
+   "height_ssim": 0.0706,
+   "height_correlation": 0.0134,
+   "normal_mean_angle_degrees": 34.83,
+   "normal_median_angle_degrees": 30.93,
+   "normal_p95_angle_degrees": 76.8,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "main_seed2": {
+  "folder": "outputs/main_seed2",
+  "overall": 0.858,
+  "groups": {
+   "colour": 0.837,
+   "height": 0.888,
+   "normal": 0.875,
+   "tiling": 0.829
+  },
+  "scores": {
+   "colour_distribution": 0.896,
+   "colour_spectrum": 0.683,
+   "colour_orientation": 0.931,
+   "colour_scale": 0.909,
+   "colour_gradient": 0.765,
+   "seam": 0.829,
+   "height_distribution": 0.967,
+   "height_spectrum": 0.753,
+   "height_gradient": 0.875,
+   "height_colour_link": 0.963,
+   "height_contrast": 0.948,
+   "normal_tilt": 0.834,
+   "normal_components": 0.914,
+   "normal_height_agreement": 0.922
+  },
+  "facts": {
+   "seam_ratio_candidate": 1.34,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    20.0,
+    3.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    29.5,
+    6.8,
+    10.3
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.981,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.963328627719505,
+    0.9582607063318682
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "proc-work/recipes/wood_from_displacement/outputs/main_seed2",
+   "colour_mae_levels": 27.11,
+   "colour_psnr_db": 17.36,
+   "colour_ssim": 0.1943,
+   "colour_mean_delta_e": 15.33,
+   "colour_p95_delta_e": 33.21,
+   "edge_precision_2px": 0.711,
+   "edge_recall_2px": 0.7,
+   "edge_f1_2px": 0.706,
+   "edge_f1_by_luck": 0.704,
+   "edge_skill_2px": 0.005,
+   "height_mae_levels": 58.48,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    -0.005,
+    127.7
+   ],
+   "height_ssim": 0.0679,
+   "height_correlation": -0.0045,
+   "normal_mean_angle_degrees": 35.24,
+   "normal_median_angle_degrees": 31.53,
+   "normal_p95_angle_degrees": 77.09,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "main_seed3": {
+  "folder": "outputs/main_seed3",
+  "overall": 0.83,
+  "groups": {
+   "colour": 0.794,
+   "height": 0.899,
+   "normal": 0.842,
+   "tiling": 0.751
+  },
+  "scores": {
+   "colour_distribution": 0.91,
+   "colour_spectrum": 0.508,
+   "colour_orientation": 0.916,
+   "colour_scale": 0.933,
+   "colour_gradient": 0.679,
+   "seam": 0.751,
+   "height_distribution": 0.975,
+   "height_spectrum": 0.716,
+   "height_gradient": 0.961,
+   "height_colour_link": 0.946,
+   "height_contrast": 0.942,
+   "normal_tilt": 0.759,
+   "normal_components": 0.919,
+   "normal_height_agreement": 0.937
+  },
+  "facts": {
+   "seam_ratio_candidate": 1.5,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    21.0,
+    3.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    29.0,
+    7.0,
+    10.7
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.98,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.9626439615359753,
+    0.9556915698869489
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "proc-work/recipes/wood_from_displacement/outputs/main_seed3",
+   "colour_mae_levels": 26.66,
+   "colour_psnr_db": 17.47,
+   "colour_ssim": 0.2093,
+   "colour_mean_delta_e": 15.05,
+   "colour_p95_delta_e": 32.94,
+   "edge_precision_2px": 0.72,
+   "edge_recall_2px": 0.675,
+   "edge_f1_2px": 0.696,
+   "edge_f1_by_luck": 0.688,
+   "edge_skill_2px": 0.027,
+   "height_mae_levels": 57.8,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    0.01,
+    125.8
+   ],
+   "height_ssim": 0.0818,
+   "height_correlation": 0.0097,
+   "normal_mean_angle_degrees": 34.6,
+   "normal_median_angle_degrees": 30.7,
+   "normal_p95_angle_degrees": 76.6,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "comparison_seed1": {
+  "folder": "outputs/comparison_seed1",
+  "overall": 0.745,
+  "groups": {
+   "colour": 0.614,
+   "height": 0.87,
+   "normal": 0.835,
+   "tiling": 0.895
+  },
+  "scores": {
+   "colour_distribution": 0.817,
+   "colour_spectrum": 0.112,
+   "colour_orientation": 0.885,
+   "colour_scale": 0.856,
+   "colour_gradient": 0.371,
+   "seam": 0.895,
+   "height_distribution": 0.926,
+   "height_spectrum": 0.677,
+   "height_gradient": 0.966,
+   "height_colour_link": 0.878,
+   "height_contrast": 0.972,
+   "normal_tilt": 0.743,
+   "normal_components": 0.915,
+   "normal_height_agreement": 0.949
+  },
+  "facts": {
+   "seam_ratio_candidate": 1.21,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    24.0,
+    4.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    28.4,
+    7.4,
+    11.2
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.989,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.9619394946386632,
+    0.9566860918137682
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "/tmp/wood_comparison_ldnmhupc/comparison_seed1",
+   "colour_mae_levels": 26.83,
+   "colour_psnr_db": 17.46,
+   "colour_ssim": 0.2134,
+   "colour_mean_delta_e": 15.24,
+   "colour_p95_delta_e": 32.6,
+   "edge_precision_2px": 0.718,
+   "edge_recall_2px": 0.593,
+   "edge_f1_2px": 0.65,
+   "edge_f1_by_luck": 0.645,
+   "edge_skill_2px": 0.014,
+   "height_mae_levels": 58.41,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    0.014,
+    125.4
+   ],
+   "height_ssim": 0.0706,
+   "height_correlation": 0.0134,
+   "normal_mean_angle_degrees": 34.83,
+   "normal_median_angle_degrees": 30.93,
+   "normal_p95_angle_degrees": 76.8,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "comparison_seed2": {
+  "folder": "outputs/comparison_seed2",
+  "overall": 0.778,
+  "groups": {
+   "colour": 0.689,
+   "height": 0.865,
+   "normal": 0.875,
+   "tiling": 0.807
+  },
+  "scores": {
+   "colour_distribution": 0.861,
+   "colour_spectrum": 0.258,
+   "colour_orientation": 0.861,
+   "colour_scale": 0.933,
+   "colour_gradient": 0.478,
+   "seam": 0.807,
+   "height_distribution": 0.967,
+   "height_spectrum": 0.753,
+   "height_gradient": 0.875,
+   "height_colour_link": 0.823,
+   "height_contrast": 0.948,
+   "normal_tilt": 0.834,
+   "normal_components": 0.914,
+   "normal_height_agreement": 0.922
+  },
+  "facts": {
+   "seam_ratio_candidate": 1.39,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    21.0,
+    3.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    29.4,
+    7.4,
+    11.3
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.992,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.963328627719505,
+    0.9582607063318682
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "/tmp/wood_comparison_ldnmhupc/comparison_seed2",
+   "colour_mae_levels": 26.83,
+   "colour_psnr_db": 17.46,
+   "colour_ssim": 0.2057,
+   "colour_mean_delta_e": 15.01,
+   "colour_p95_delta_e": 32.69,
+   "edge_precision_2px": 0.714,
+   "edge_recall_2px": 0.626,
+   "edge_f1_2px": 0.667,
+   "edge_f1_by_luck": 0.662,
+   "edge_skill_2px": 0.014,
+   "height_mae_levels": 58.48,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    -0.005,
+    127.7
+   ],
+   "height_ssim": 0.0679,
+   "height_correlation": -0.0045,
+   "normal_mean_angle_degrees": 35.24,
+   "normal_median_angle_degrees": 31.53,
+   "normal_p95_angle_degrees": 77.09,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "comparison_seed3": {
+  "folder": "outputs/comparison_seed3",
+  "overall": 0.756,
+  "groups": {
+   "colour": 0.656,
+   "height": 0.882,
+   "normal": 0.842,
+   "tiling": 0.713
+  },
+  "scores": {
+   "colour_distribution": 0.851,
+   "colour_spectrum": 0.149,
+   "colour_orientation": 0.878,
+   "colour_scale": 0.957,
+   "colour_gradient": 0.393,
+   "seam": 0.713,
+   "height_distribution": 0.975,
+   "height_spectrum": 0.716,
+   "height_gradient": 0.961,
+   "height_colour_link": 0.841,
+   "height_contrast": 0.942,
+   "normal_tilt": 0.759,
+   "normal_components": 0.919,
+   "normal_height_agreement": 0.937
+  },
+  "facts": {
+   "seam_ratio_candidate": 1.57,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    22.0,
+    3.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    28.8,
+    7.4,
+    11.1
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.991,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.9626439615359753,
+    0.9556915698869489
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "/tmp/wood_comparison_ldnmhupc/comparison_seed3",
+   "colour_mae_levels": 26.49,
+   "colour_psnr_db": 17.53,
+   "colour_ssim": 0.2214,
+   "colour_mean_delta_e": 15.12,
+   "colour_p95_delta_e": 32.65,
+   "edge_precision_2px": 0.723,
+   "edge_recall_2px": 0.601,
+   "edge_f1_2px": 0.657,
+   "edge_f1_by_luck": 0.646,
+   "edge_skill_2px": 0.029,
+   "height_mae_levels": 57.8,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    0.01,
+    125.8
+   ],
+   "height_ssim": 0.0818,
+   "height_correlation": 0.0097,
+   "normal_mean_angle_degrees": 34.6,
+   "normal_median_angle_degrees": 30.7,
+   "normal_p95_angle_degrees": 76.6,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "earlier_wood_best_new_tile_seed105": {
+  "folder": "tests/earlier_wood_seed105",
+  "overall": 0.665,
+  "groups": {
+   "colour": 0.655,
+   "height": 0.634,
+   "normal": 0.588,
+   "tiling": 1.0
+  },
+  "scores": {
+   "colour_distribution": 0.71,
+   "colour_spectrum": 0.587,
+   "colour_orientation": 0.789,
+   "colour_scale": 0.765,
+   "colour_gradient": 0.402,
+   "seam": 1.0,
+   "height_distribution": 0.649,
+   "height_spectrum": 0.473,
+   "height_gradient": 0.664,
+   "height_colour_link": 0.793,
+   "height_contrast": 0.66,
+   "normal_tilt": 0.569,
+   "normal_components": 0.792,
+   "normal_height_agreement": 0.233
+  },
+  "facts": {
+   "seam_ratio_candidate": 0.96,
+   "seam_ratio_reference": 2.24,
+   "correlation_length_px_reference": [
+    24.0,
+    3.0
+   ],
+   "correlation_length_px_candidate": [
+    15.0,
+    3.0
+   ],
+   "mean_lab_reference": [
+    29.3,
+    7.1,
+    10.8
+   ],
+   "mean_lab_candidate": [
+    29.2,
+    7.6,
+    10.8
+   ],
+   "height_colour_corr_reference": 0.983,
+   "height_colour_corr_candidate": 0.993,
+   "normal_height_corr_reference": [
+    -0.9628252125810907,
+    0.9569696997901748
+   ],
+   "normal_height_corr_candidate": [
+    -0.9673350252540318,
+    0.9701366929713435
+   ]
+  },
+  "pixel": {
+   "reference": "wood",
+   "candidate": "proc-work/recipes/wood_from_displacement/tests/earlier_wood_seed105",
+   "colour_mae_levels": 25.49,
+   "colour_psnr_db": 17.87,
+   "colour_ssim": 0.201,
+   "colour_mean_delta_e": 14.19,
+   "colour_p95_delta_e": 31.2,
+   "edge_precision_2px": 0.712,
+   "edge_recall_2px": 0.742,
+   "edge_f1_2px": 0.727,
+   "edge_f1_by_luck": 0.731,
+   "edge_skill_2px": 0.0,
+   "height_mae_levels": 54.17,
+   "height_mae_best_fit_levels": 41.59,
+   "height_best_fit_gain_offset": [
+    0.004,
+    126.6
+   ],
+   "height_ssim": 0.0743,
+   "height_correlation": 0.003,
+   "normal_mean_angle_degrees": 33.73,
+   "normal_median_angle_degrees": 30.07,
+   "normal_p95_angle_degrees": 74.4,
+   "tier_reached": "none",
+   "tier_rules": {
+    "layout": {
+     "edge_skill_2px": "min 0.3",
+     "colour_mean_delta_e": "max 20.0",
+     "height_mae_best_fit_levels": "max 40.0"
+    },
+    "close": {
+     "edge_skill_2px": "min 0.55",
+     "colour_ssim": "min 0.6",
+     "colour_mean_delta_e": "max 10.0",
+     "height_mae_best_fit_levels": "max 20.0",
+     "normal_mean_angle_degrees": "max 12.0"
+    },
+    "exact": {
+     "edge_skill_2px": "min 0.85",
+     "colour_ssim": "min 0.92",
+     "colour_mean_delta_e": "max 3.0",
+     "height_mae_best_fit_levels": "max 6.0",
+     "normal_mean_angle_degrees": "max 4.0"
+    }
+   }
+  }
+ },
+ "round1_for_before_and_after": {
+  "main_seed1": {
+   "overall": 0.816,
+   "groups": {
+    "colour": 0.763,
+    "height": 0.868,
+    "normal": 0.787,
+    "tiling": 1.0
+   }
+  },
+  "comparison_seed1": {
+   "overall": 0.742,
+   "groups": {
+    "colour": 0.613,
+    "height": 0.859,
+    "normal": 0.787,
+    "tiling": 1.0
+   }
+  },
+  "main_seed2": {
+   "overall": 0.809,
+   "groups": {
+    "colour": 0.779,
+    "height": 0.851,
+    "normal": 0.726,
+    "tiling": 1.0
+   }
+  },
+  "comparison_seed2": {
+   "overall": 0.709,
+   "groups": {
+    "colour": 0.577,
+    "height": 0.837,
+    "normal": 0.726,
+    "tiling": 1.0
+   }
+  },
+  "main_seed3": {
+   "overall": 0.778,
+   "groups": {
+    "colour": 0.736,
+    "height": 0.826,
+    "normal": 0.704,
+    "tiling": 1.0
+   }
+  },
+  "comparison_seed3": {
+   "overall": 0.695,
+   "groups": {
+    "colour": 0.571,
+    "height": 0.81,
+    "normal": 0.704,
+    "tiling": 1.0
+   }
+  },
+  "earlier_wood_best_new_tile_seed105": {
+   "overall": 0.665,
+   "groups": {
+    "colour": 0.655,
+    "height": 0.634,
+    "normal": 0.588,
+    "tiling": 1.0
+   }
+  }
+ }
+}

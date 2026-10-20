@@ -10,5 +10,5 @@
   "combine.tone_blend 0.7 (chosen)": {"overall": 0.695, "height group": 0.654, "sobel strength": 7.4},
   "combine.tone_blend 1.0": {"overall": 0.687, "height group": 0.629, "sobel strength": 6.6}
  },
- "note on score_set.py": "its normal_height_agreement comes out 0.0 for all three (the harness's own normal gives 0.534 for the 0.7 bake), so its normal group is lower than the harness's; the height group does not depend on it."
+ "note on score_set.py": "its normal_height_agreement comes out 0.0 for all three (as first written; only the 0.7 bake was checked again). The harness's own normal, which score_set.py also makes, gives 0.0 for the 0.7 bake; the strength-7 normal of integration/make_normal.py gives 0.534 for it. So the normal group by score_set.py is lower than the strength-7 group (0.604 against 0.671 for the 0.7 bake); the height group does not depend on it. (Corrected after the second honesty check: this note first had the two normal maps the wrong way round: it said the harness's own normal gives 0.534.)"
 }

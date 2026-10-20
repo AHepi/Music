@@ -1,0 +1,75 @@
+[
+ {
+  "note": "What this is: round 2 tests of the default tile and the big area: full-size crops of the 4 x 4 area across tile lines, the half-tile slide test (the pattern slid by half a tile), and the 'source unchanged' check (the arrangement switched off must give back the uploaded height map)."
+ },
+ {
+  "out": "area/crop_a",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    1.5,
+    1.5,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/crop_b",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    0.5,
+    2.5,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/crop_c",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    2.5,
+    0.5,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "tests/renders/shift_half",
+  "size": 1254,
+  "params": {
+   "shift": [
+    0.5,
+    0.5
+   ]
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/source_unchanged",
+  "size": 1254,
+  "params": {
+   "debug.source_unchanged": 1
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ }
+]

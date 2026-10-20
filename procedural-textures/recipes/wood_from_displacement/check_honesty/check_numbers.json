@@ -1,0 +1,103 @@
+{
+ "half_tile_slide_test": {
+  "colour": {
+   "mean_abs_diff_slid_bake_vs_slid_picture": 0.00179,
+   "share_over_0.1": 0.0007,
+   "roll_used": [
+    -627,
+    -627
+   ],
+   "wrong_slide_control_mean": 0.1064,
+   "wrong_slide_control_share_over_0.1": 0.4433
+  },
+  "height": {
+   "mean_abs_diff_slid_bake_vs_slid_picture": 0.00069,
+   "share_over_0.1": 0.00208,
+   "roll_used": [
+    -627,
+    -627
+   ],
+   "wrong_slide_control_mean": 0.2366,
+   "wrong_slide_control_share_over_0.1": 0.7378
+  }
+ },
+ "tile_wrap_edges": {
+  "new_tile_height": {
+   "left_right_wrap_jump_over_typical": 0.979,
+   "top_bottom_wrap_jump_over_typical": 0.091,
+   "top_bottom_wrap_jump_over_the_median_dot_line_jump": 0.096,
+   "largest_ordinary_dot_line_jump_over_median": 4.845
+  },
+  "new_tile_colour": {
+   "left_right_wrap_jump_over_typical": 1.017,
+   "top_bottom_wrap_jump_over_typical": 0.316,
+   "top_bottom_wrap_jump_over_the_median_dot_line_jump": 0.33,
+   "largest_ordinary_dot_line_jump_over_median": 3.445
+  },
+  "uploaded_height_for_comparison": {
+   "left_right_wrap_jump_over_typical": 3.975,
+   "top_bottom_wrap_jump_over_typical": 2.765,
+   "top_bottom_wrap_jump_over_the_median_dot_line_jump": 2.869,
+   "largest_ordinary_dot_line_jump_over_median": 2.536
+  }
+ },
+ "area_4x4_matches_a_fresh_bake": {
+  "area_shape": [
+   2508,
+   2508
+  ],
+  "piece_shape": [
+   627,
+   627
+  ],
+  "mean_abs_difference_area_piece_vs_fresh_bake_shrunk": 0.05547,
+  "correlation": 0.9071,
+  "control_correlation_with_a_different_place_of_the_area": 0.0034
+ },
+ "tiles_of_the_4x4_area": {
+  "correlation_between_two_different_tiles_max": 0.101,
+  "mean": 0.04,
+  "correlation_with_the_default_tile_max": 0.764,
+  "first_tile_of_area_vs_default_tile": 0.764
+ },
+ "shift_test": {
+  "new_4x4_area_height": {
+   "special": {
+    "one_tile_across": 0.076,
+    "one_tile_down": 0.032,
+    "one_tile_diagonal": 0.03,
+    "two_tiles_across": 0.065,
+    "half_tile_across": 0.069
+   },
+   "background_highest_of_300_random_shifts": 0.068,
+   "background_mean": -0.0
+  },
+  "plain_uploaded_map_repeated_4x4": {
+   "special": {
+    "one_tile_across": 1.0,
+    "one_tile_down": 1.0,
+    "one_tile_diagonal": 1.0,
+    "two_tiles_across": 1.0,
+    "half_tile_across": 0.093
+   },
+   "background_highest_of_300_random_shifts": 0.056,
+   "background_mean": -0.003
+  },
+  "default_tile_repeated_4x4_on_purpose": {
+   "one_tile_across": 1.0
+  }
+ },
+ "source_reuse_4x4": {
+  "share_of_source_dots_used": 0.72,
+  "times_a_used_dot_appears_mean_median_p90": [
+   22.2,
+   20.0,
+   44.0
+  ],
+  "debug_picture_shape": [
+   2508,
+   2508
+  ],
+  "debug_dtype_16bit": true
+ }
+}

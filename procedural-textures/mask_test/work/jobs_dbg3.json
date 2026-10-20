@@ -1,0 +1,45 @@
+[
+ {
+  "name": "moss_C_a10",
+  "out": "proc-work/mask_test/work/dbg3/moss_C_a10",
+  "size": 640,
+  "params": {
+   "moss.mask_mode": "stamps",
+   "moss.stamp_atlas": "proc-work/mask_test/stamps/atlas/moss_C_atlas.json",
+   "moss.stamp_width": 0.12,
+   "moss.stamp_amount": 1.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "name": "moss_C_a16",
+  "out": "proc-work/mask_test/work/dbg3/moss_C_a16",
+  "size": 640,
+  "params": {
+   "moss.mask_mode": "stamps",
+   "moss.stamp_atlas": "proc-work/mask_test/stamps/atlas/moss_C_atlas.json",
+   "moss.stamp_width": 0.12,
+   "moss.stamp_amount": 1.6
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "name": "moss_C_multiplied",
+  "out": "proc-work/mask_test/work/dbg3/moss_C_multiplied",
+  "size": 640,
+  "params": {
+   "moss.mask_mode": "both",
+   "moss.stamp_atlas": "proc-work/mask_test/stamps/atlas/moss_C_atlas.json",
+   "moss.stamp_width": 0.12,
+   "moss.stamp_amount": 1.6,
+   "moss.coverage": 0.6
+  },
+  "channels": [
+   "Colour"
+  ]
+ }
+]

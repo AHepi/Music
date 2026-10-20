@@ -1,0 +1,6 @@
+[
+ {"note": "What this is: round 2 smoke test and first look: the default tile at 512 dots (colour, height), the board colours, and a 4 x 4 area at 1024 dots (colour)."},
+ {"out": "tests/r2/a_tile512", "size": 512, "params": {}, "channels": ["Colour", "Height"]},
+ {"out": "tests/r2/a_boards512", "size": 512, "params": {"debug_view": "boards"}, "channels": ["Colour"]},
+ {"out": "tests/r2/a_area4_1024", "size": 1024, "params": {"recipe.tiles_across": 4}, "channels": ["Colour"]}
+]

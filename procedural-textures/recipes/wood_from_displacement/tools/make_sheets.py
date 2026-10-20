@@ -30,6 +30,8 @@ def font(size):
 
 
 def open_rgb(path):
+    if not os.path.exists(path) and path.endswith('.png') and os.path.exists(path[:-4] + '.jpg'):
+        path = path[:-4] + '.jpg'          # big area colour pictures are kept as JPEG after tools/shrink_area_files.py
     im = Image.open(path)
     if im.mode in ('I;16', 'I'):
         a = np.asarray(im).astype(np.float32) / 65535.0
@@ -111,7 +113,7 @@ def maps_sheet():
 def area_sheets():
     for name, out, size in (('area_4x4', 'area_4x4.jpg', 1600), ('area_2x2', 'area_2x2.jpg', 1600)):
         p = os.path.join(BASE, 'area', name, 'colour.png')
-        if os.path.exists(p):
+        if os.path.exists(p) or os.path.exists(p[:-4] + '.jpg'):
             im = open_rgb(p).resize((size, size), Image.LANCZOS)
             save(im, out, 1700)
 
@@ -121,7 +123,7 @@ def crops_sheet():
     tiles = []
     for f in names:
         p = os.path.join(BASE, 'area', f, 'colour.png')
-        if os.path.exists(p):
+        if os.path.exists(p) or os.path.exists(p[:-4] + '.jpg'):
             im = open_rgb(p).crop((177, 177, 1077, 1077))            # the middle 900 x 900 dots, one dot = one picture dot
             info = json.load(open(os.path.join(BASE, 'area', f, 'job.json')))['params']['window']
             tiles.append(labelled(im, f'{f}: window {info} tiles, 1 dot = 1 dot', 900))
@@ -131,7 +133,7 @@ def crops_sheet():
 
 def seam_sheet():
     p = os.path.join(BASE, 'area', 'tile_repeated_2x2', 'colour.png')
-    if not os.path.exists(p):
+    if not os.path.exists(p) and not os.path.exists(p[:-4] + '.jpg'):
         return
     im = open_rgb(p)
     n = im.size[0] // 2
@@ -167,7 +169,34 @@ def lit_sheet():
     save(grid([labelled(open_rgb(os.path.join(d, f)), t, 900) for f, t in files], 2), 'lit.jpg', 1900)
 
 
+def sweep_sheets():
+    """One row of three pictures per control (values left to right), from variations/sweep_*."""
+    sets = [('sweep_boards_per_row.jpg', 'layout.boards_per_row', 'boards_per_row', [2, 3, 4]),
+            ('sweep_stains_amount.jpg', 'stains.amount (chance per cell for a stain stamp)', 'stains_amount', [0.0, 0.18, 0.5]),
+            ('sweep_joined_share.jpg', 'layout.joined_share (pairs of boards joined into one)', 'joined_share', [0.0, 0.5, 1.0]),
+            ('sweep_knot_share.jpg', 'windows.knot_share', 'knot_share', [0.0, 0.12, 0.5]),
+            ('sweep_patches.jpg', 'large soft patches (masks.blotch_amount / drift_amount)', 'patches', ['none', 'default', 'strong']),
+            ('sweep_rows_zoom_joints.jpg', 'rows_per_tile 4 / 6, windows.zoom 0 / 0.2, joints.width 2 / 9', None, None)]
+    for out, title, key, values in sets:
+        tiles = []
+        if key is None:
+            for name, label in (('rows_per_tile_4', 'layout.rows_per_tile = 4'), ('rows_per_tile_6', 'layout.rows_per_tile = 6'), ('zoom_0.0', 'windows.zoom = 0'),
+                                ('zoom_0.2', 'windows.zoom = 0.2'), ('joint_width_2.0', 'joints.width = 2'), ('joint_width_9.0', 'joints.width = 9')):
+                p = os.path.join(BASE, 'variations', 'sweep_' + name, 'colour.png')
+                if os.path.exists(p):
+                    tiles.append(labelled(open_rgb(p), label, 640))
+            if tiles:
+                save(grid(tiles, 3), out, 1950)
+            continue
+        for v in values:
+            p = os.path.join(BASE, 'variations', f'sweep_{key}_{v}', 'colour.png')
+            if os.path.exists(p):
+                tiles.append(labelled(open_rgb(p), f'{title.split(" (")[0]} = {v}', 640))
+        if tiles:
+            save(grid(tiles, 3), out, 1950)
+
+
 if __name__ == '__main__':
-    todo = sys.argv[1:] or ['wood', 'seeds', 'maps', 'area', 'crops', 'seam', 'lit']
+    todo = sys.argv[1:] or ['wood', 'seeds', 'maps', 'area', 'crops', 'seam', 'lit', 'sweeps']
     for name in todo:
-        {'wood': wood_sheet, 'seeds': seeds_sheet, 'maps': maps_sheet, 'area': area_sheets, 'crops': crops_sheet, 'seam': seam_sheet, 'lit': lit_sheet}[name]()
+        {'wood': wood_sheet, 'seeds': seeds_sheet, 'maps': maps_sheet, 'area': area_sheets, 'crops': crops_sheet, 'seam': seam_sheet, 'lit': lit_sheet, 'sweeps': sweep_sheets}[name]()

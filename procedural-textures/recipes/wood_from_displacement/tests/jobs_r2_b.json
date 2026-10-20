@@ -1,0 +1,8 @@
+[
+ {"note": "What this is: round 2 second look (after adding stepped joints): the default tile at full size (colour), two other board layouts at 512 dots, the landmark debug picture of a 2 x 2 area, and the 4 x 4 area at 1024 dots."},
+ {"out": "tests/r2/b_tile1254", "size": 1254, "params": {}, "channels": ["Colour"]},
+ {"out": "tests/r2/b_tile512_jit08", "size": 512, "params": {"layout.board_length_variation": 0.8, "joints.step_size": 90.0}, "channels": ["Colour"]},
+ {"out": "tests/r2/b_tile512_b3", "size": 512, "params": {"layout.boards_per_row": 3, "joints.step_size": 90.0}, "channels": ["Colour"]},
+ {"out": "tests/r2/b_area2_landmarks", "size": 1024, "params": {"recipe.tiles_across": 2, "debug_view": "landmarks", "bake.shrink_samples": 1, "bake.shrink_filter": 0.01}, "channels": ["Colour"]},
+ {"out": "tests/r2/b_area4_1024", "size": 1024, "params": {"recipe.tiles_across": 4}, "channels": ["Colour"]}
+]

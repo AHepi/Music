@@ -1,0 +1,27 @@
+[
+ {
+  "name": "1_node_made",
+  "out": "proc-work/mask_test/compare/1_node_made",
+  "size": 1254,
+  "params": {},
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "name": "2_moss_stamps",
+  "out": "proc-work/mask_test/compare/2_moss_stamps",
+  "size": 1254,
+  "params": {
+   "moss.mask_mode": "stamps",
+   "moss.stamp_atlas": "proc-work/mask_test/stamps/atlas/moss_C_atlas.json",
+   "moss.stamp_width": 0.12,
+   "moss.stamp_amount": 0.85
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ }
+]
