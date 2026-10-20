@@ -1,0 +1,20 @@
+{
+ "what_this_is": "A plain list of the files the round 2 honesty checker wrote into this folder (check_honesty/round2), and what each one shows. Nothing outside check_honesty was edited. The big picture files of my own bakes were deleted after use to keep the recipe folder under 150 MB (the numbers they gave are kept in the JSON files).",
+ "files": {
+  "scoring/score_*.json": "re-score of the default tiles with lib/texture_compare.py called directly (main seeds 1-3, comparison seeds 1-3, earlier wood seed 105): every number equals the builder's claim",
+  "pixel_main_seed1.json": "re-run of the dot-for-dot numbers (lib/pixel_compare.py) for main seed 1: equal to the claim",
+  "rebake_vs_outputs.json": "my own standard-harness re-bake of the default tile (seed 1, 1254 dots, recipe/settings.json) against outputs/main_seed1: identical in every dot of colour, height, roughness, metallic and normal",
+  "half_tile_test.json": "half-tile slide test redone with my own bake: height 1e-05, colour 0.00154, wrong-slide controls 0.23 and 0.105",
+  "crop_vs_area.json, crop_a_vs_builder.json": "a full-size piece of the 4 x 4 area baked again by me matches the builder's area files (height correlation 0.996, colour 0.987 once aligned; control place -0.003)",
+  "repeat_tests_rerun.json, measure_repeats_rerun.py": "the builder's repeat measures re-run on the 4 x 4 area from a copy of the builder's script (only the paths changed): all numbers equal, except the mean colour difference of the repeated tile (0.0131 now, because the colour pictures were turned into JPEG)",
+  "twin_test_new_seeds.json, twin_test_new_seeds.py": "the look checker's twin test with three NEW random draws: round 2 area 0 percent of pieces with a twin over 0.7, round 1 area 18 to 22 percent",
+  "own_repeat_check.json, own_shift_scan.json, own_repeat_check.py": "my own code: the 16 tiles of the 4 x 4 area against the default tile (about 0.05 at most), slides by whole tiles, and the plain-repeat control (1.0). Tiles two apart in the same tile row correlate a little more (up to 0.13) than other pairs, because they share row heights; this is far from a repeat",
+  "own_colour_height_wrap.json": "colour/height link, share of dots bluer than red, and wrap-around jumps, recomputed: equal to the claims",
+  "normal_rule_check.json": "the normal made from the uploaded height at strength 8 equals the uploaded normal (0.0039 / 0.0039 / 0.0041); strengths 6 and 10 do not",
+  "description_audit_8kb.json": "lib/description_audit.py on recipe/settings.json with a limit of 8 KB: passes (6065 bytes, 229 numbers, no problems)",
+  "check_links.py, check_links_result.json": "every picture and file path named in the two 08 guides exists (the few 'missing' entries are short names inside sheets/ or a path split by a space; all exist)",
+  "landmarks_rerun.json, landmarks_rerun.jpg, find_landmark_replacements_rerun.py": "the landmark finder re-run from a copy (only the output paths changed): all 12 landmark numbers equal recipe/settings.json",
+  "smear_*.png/json, stamps_*.jpg/json, zoom_smudge*.jpg, zoom_smudges.jpg, smear_stamps_test.json": "evidence for a look problem the guides do not mention: soft dark horizontal bars inside boards (for example area/crop_a/colour.jpg near x 800-850, y 835-840) come from the stain stamps; with stains.amount 0 they are gone. 5 of the 8 stamp discs contain a real source gap line and all contain long dark cracks",
+  "run_chain.sh, jobs_*.json, *.log, *.time": "the Blender runs I made (one at a time, -t 2): the standard re-bake, the half-tile slide test, a window of the 4 x 4 area, the exact source-position pictures of that window, and the same window without stamps"
+ }
+}

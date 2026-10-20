@@ -1,3 +1,4 @@
+# ROUND 1 TOOL (kept for the record). CORRECTION: the note below that says the measurement scripts can read the shrunk files again is wrong for tools/measure_repeats.py (it needs colour.png, which this script deleted). Round 2 has its own script, tools/shrink_area_files_round2.py, with an honest note.
 # What this does (plain words): makes the big area pictures smaller once all measurements are done, to keep this folder under 150 MB:
 # colour pictures become JPEG (quality 92), 16-bit height pictures become 8-bit PNG (the exact "which source dot" pictures and the debug pictures
 # stay as they are because they are small), the bulky board-colour debug picture and the plain test renders are deleted.

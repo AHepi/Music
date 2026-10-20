@@ -1,0 +1,38 @@
+{
+ "what_this_is": "Node counts and bake times of the round 2 jobs (tools/collect_job_numbers_round2.py). Times are seconds on a machine shared with two other helpers (load 4 to 9 on 4 cores), 2 threads.",
+ "blender_runs": 18,
+ "nodes_main": 1699,
+ "nodes_area": 1669,
+ "nodes_identity": 1182,
+ "nodes_comparison": 1773,
+ "speed_rows": [
+  [
+   "default tile, 1254 dots, standard harness bake of ALL maps (colour, height, roughness, metallic, normal, normal cross-check)",
+   236.3
+  ],
+  [
+   "default tile, 1254 dots, colour only / height only (1 sample)",
+   "40.6 / 31.0"
+  ],
+  [
+   "building the nodes (once per job)",
+   75.7
+  ],
+  [
+   "2 x 2 area, 1254 dots across (2 dots per picture dot, 4 samples), colour / height",
+   "77.8 / 73.4"
+  ],
+  [
+   "4 x 4 area, 2508 dots across (2 dots per picture dot, 4 samples), colour / height",
+   "354.3 / 371.3"
+  ],
+  [
+   "4 x 4 area, exact \"which source dot\" picture, 1254 dots across (1 sample)",
+   8.3
+  ],
+  [
+   "full-size piece of the 4 x 4 area (window), 1254 dots, colour",
+   26.7
+  ]
+ ]
+}

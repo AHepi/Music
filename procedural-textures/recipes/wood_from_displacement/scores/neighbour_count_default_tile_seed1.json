@@ -1,0 +1,8 @@
+{
+ "what_this_is": "Round 2: how many touching board pairs of the seed 1 default tile (including the pairs across the wrap-around tile edge) take the same source row; counted from the exact board numbers and source position pictures of the tile (tests/renders/boards_seed1, source_x_seed1, source_y_seed1). Cause: the source row of a board is (2 x row number + board number + constant) mod 4 and the tile has 5 rows, so the last and the first row of the tile (which touch across the tile edge) follow the same rule value.",
+ "boards": 10,
+ "touching_pairs": 25,
+ "same_source_row": 2,
+ "pairs_across_the_tile_edge_top_bottom": 3,
+ "of_which_same_source_row": 2
+}

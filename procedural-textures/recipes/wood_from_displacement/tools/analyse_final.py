@@ -1,3 +1,4 @@
+# ROUND 1 TOOL (kept for the record). Run without the pictures it needs, it writes scores/checks_round1.json WITHOUT the missing sections (the source-unchanged and half-tile blocks) and so overwrites them. Use tools/analyse_final_round2.py, which keeps the sections it cannot re-measure.
 # What this does (plain words): the small checks on the finished pictures of the wood-from-maps recipe, written to scores/checks_round1.json:
 #   * SOURCE UNCHANGED: with the arrangement switched off (setting debug.source_unchanged) the recipe must give back the uploaded height map, and the
 #     normal map made from it (strength 8) must give back the uploaded normal map. This proves the picture-reading pipeline (nodes, the photograph

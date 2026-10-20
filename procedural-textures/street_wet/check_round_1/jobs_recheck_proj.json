@@ -1,0 +1,32 @@
+[
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street-wet.glb",
+   "painting": "plate-wet.png",
+   "matte": true,
+   "view": "moved"
+  },
+  "out": "proj_c_wet_glb_matte_moved.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street-wet.glb",
+   "painting": "plate-wet.png",
+   "matte": false,
+   "view": "moved"
+  },
+  "out": "proj_d_wet_glb_matteoff_moved.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street-wet.glb",
+   "painting": "plate-wet.png",
+   "matte": true,
+   "view": "weights"
+  },
+  "out": "proj_e_wet_glb_matte_weights.png"
+ }
+]

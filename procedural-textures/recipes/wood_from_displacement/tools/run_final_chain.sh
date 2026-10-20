@@ -1,4 +1,5 @@
 #!/bin/bash
+# ROUND 1 TOOL (kept for the record; round 2: tools/run_round2_chain.sh).
 # What this does (plain words): runs the final bakes of the wood-from-maps recipe one after the other (only ONE Blender at a time, 2 threads):
 #   1. seed 1 with the plain harness command line (proof that the standard command works),
 #   2. seeds 2 and 3 (all maps) and the COMPARISON colours for the three seeds,

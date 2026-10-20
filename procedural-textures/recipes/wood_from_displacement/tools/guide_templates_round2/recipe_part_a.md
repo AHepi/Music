@@ -25,13 +25,13 @@
 1. **The source map is cut along its own structure.** It has five rows separated by dark gaps with small pebbles. Row 1 is only 155 dots high and is not used. The other four are cut from the middle of one gap to the middle of the next (starts at y = 189, 470, 709, 980 dots; ends at 470, 709, 980, 1254): four "row strips", each with half a gap at the top and half a gap at the bottom. Every row strip is always shown from its top gap middle to its bottom gap middle, so every row edge of the new surface lies on a real gap of the source and keeps its small dark pebbles.
 2. **The new surface is laid out as rows of boards.** Five rows per tile whose heights differ by up to 20 percent (they add up to exactly one tile), the edge between two rows waves by up to 4 dots. Each row is cut into two boards per tile (the cut positions jitter by up to 40 percent of a board, so boards are 0.1 to 0.9 of a tile long), every row shifted sideways by chance.
 3. **The cut between two boards is a stepped joint.** About 7 joints in 10 have one step: above the step the cut lies up to 45 dots to the left, below it up to 45 dots to the right, and a crack along the grain joins the two parts. So a joint is two half-height cracks, as in the source, not one straight line from the top of the row to the bottom.
-4. **Every board shows its own window.** It takes one of the four row strips (the next board always takes a different strip, and so does the next row, see section 11), a random start along it, a random flip left-right (chance 0.5) and upside down (0.4), is stretched along the board by up to 25 percent, bent by a slow wobble (up to 12 dots along, 5 dots across) and tilted by up to 3.5 degrees, so that no two windows have the same shape. The bending dies away at the row edges so they stay on the gaps.
+4. **Every board shows its own window.** It takes one of the four row strips (the next board takes a different strip, and so does the next row; the exceptions are counted in section 11.2, including a known hole at the edge of the default tile), a random start along it, a random flip left-right (chance 0.5) and upside down (0.4), is stretched along the board by up to 25 percent, bent by a slow wobble (up to 12 dots along, 5 dots across) and tilted by up to 3.5 degrees, so that no two windows have the same shape. The bending dies away at the row edges so they stay on the gaps.
 5. **Landmarks are painted out unless a board draws a lucky number.** Twelve landmarks of the source (3 knots, 9 other recognisable places) have a ragged round disc; inside it the recipe reads the map a second time, at another place with clean grain (found once by `tools/find_landmark_replacements.py` and stored as numbers in `recipe/settings.json`). Each board draws one random number per landmark: with 30 percent (knots) or 20 percent (the others) the board shows the landmark, otherwise it is painted out.
 6. **The height map and the colour map are read at exactly the same place** (one position, built once, fed to both Image Texture nodes), also for the clean grain behind a painted-out landmark.
 7. **Dark stain stamps** from the source map are laid on top at random places (two layers of stamps, each with only the dark part of the stamp painted, with a hard edge, kept 15 dots away from joints and row edges). Two **very large soft patches** (light/dark drift and dark blotches) change the look from place to place; they change the colour only, not the relief.
 8. **Every cut is hidden**: a dark ragged crack of random width (1.4 to 5.8 dots across, some joints faint, some strong) with dirt and a few pebbles of different sizes where two boards meet; a dark band along every row edge that is only added where the source is not already dark (so the real gap rubble of the source stays); half joints inside many boards.
 9. **Tone** changes a little per board and more per row (so neighbours in one row look alike, rows differ, and the joints show less). **Height** is the height read from the source (plus a small change linked to the tone, and the cracks). **Roughness** is made from the height and a small change per board. **Metallic** is 0.
-10. **COMPARISON version:** the colour is not read from the colour map but made from the height with three palettes measured from the colour map (dull blue-grey wood, plain brown wood, orange bare wood); two slow cloud patterns choose where the orange and blue-grey patches lie. Everything else is identical to MAIN.
+10. **COMPARISON version:** the colour is not read from the colour map but made from the height with three palettes measured from the colour map (dull grey-brown wood, plain brown wood, orange bare wood); two slow cloud patterns choose where the orange and blue-grey patches lie. Everything else is identical to MAIN.
 11. **Default tile or area from the same nodes:** with `recipe.tiles_across = 1` every random number repeats after exactly one tile; with 2, 4, 8 the random numbers keep counting up and are salted differently from the tile, so nothing repeats on purpose and the first tile of an area is not the default tile (round 1 had this wrong, see section 11). A number of things are counted per tile-wide stretch so that the amount per dot stays the same.
 
 ---
@@ -69,7 +69,7 @@ Settings live in `recipe/settings.json` as `group.control`. Order of strength: t
 | `recipe.seed` | a new arrangement | any whole number (1) | different boards, windows, joints, stains; seeds 1, 2, 3 are in `outputs/`. An area with seed 1 is not the tile of seed 1 (changed in round 2) |
 | `layout.rows_per_tile` | rows in one tile | 4 to 6 (5) | built into the nodes. 5 gives rows of 251 dots like the source |
 | `layout.row_height_variation` | how different the row heights are (changed: 0.05 before) | 0 to 0.35 (0.2) | **swept.** 0 = all rows the same height (looks like a brick wall); 0.2 = rows between 200 and 300 dots high; more = more zoom of the windows (blur or sharper) |
-| `layout.boards_per_row` | boards in a row per tile (changed: 3 before) | 2, 3, 4 (2) | **swept.** 2 = long boards and few joints; 4 = many short boards (brick-like). Needs `joints.step_size` smaller than a board length times (1 - `layout.board_length_variation`). With 5, 9, ... boards two touching boards could take the same source row (the rule needs a number that is not 1 more than a multiple of 4) |
+| `layout.boards_per_row` | boards in a row per tile (changed: 3 before) | 2, 3, 4 (2) | **swept.** 2 = long boards and few joints; 4 = many short boards (brick-like). Needs `joints.step_size` smaller than the shortest board (a board is at least (1 - `layout.board_length_variation`) of its average length). The source-row rule gives touching boards in a row different rows for 2, 3, 4 boards per tile, but not for 5, 9, ... (in the default tile the last and first board of a row would take the same row), and not across the tile edge (section 11.2) |
 | `layout.board_length_variation` | how different the board lengths are (changed: 0.6 before) | 0 to 0.8 (0.8) | 0 = all boards equally long (brick wall); 0.8 = every cut moves by up to 40 percent of a board: boards from 0.1 to 0.9 of a tile |
 | `windows.zoom` | random stretch of every window along the board (changed: 0.10 before; now along the board only, because the row strip always fills the row) | 0 to 0.3 (0.25) | more = fewer near copies, a little softer or sharper grain, knots a little oval (0.75 to 1.25 times as wide) |
 | `windows.flip_left_right` | chance a board is flipped left-right | 0 to 1 (0.5) | 0 = no flips (more near copies) |
@@ -103,7 +103,7 @@ Settings live in `recipe/settings.json` as `group.control`. Order of strength: t
 | `masks.blotch_amount`, `masks.blotch_size` | very large dark blotches | 0 to 0.5 (0.15), 3 to 8 (5) | colour only |
 | `masks.darken_height` | how much of the patches also lowers the height | 0 to 1 (0) | 0 = patches are colour only (a stain film has no relief) |
 | `colour.source` | where the colour comes from | `map` or `height_palette` (`map`) | `height_palette` = the COMPARISON version |
-| `colour.warm_cool_amount` (new) | how much the orange and blue-grey patches of the COMPARISON colour are used | 0 to 1 (1) | 0 = the single brown palette of round 1 (flat and sepia) |
+| `colour.warm_cool_amount` (new) | how much the orange and grey-brown patches of the COMPARISON colour are used | 0 to 1 (1) | 0 = the single brown palette of round 1 (flat and sepia) |
 | `colour.palette`, `colour.palette_cool`, `colour.palette_mid`, `colour.palette_warm` | the palettes (height to colour) measured from the colour map | lists | used only for the COMPARISON version |
 | `roughness.base`, `roughness.from_height`, `roughness.board_variation` | roughness | 0.78, 0.20, 0.04 | roughness = base + from_height x (height - 0.5) + a little per board |
 | `bake.exact_dots` | ask the photograph for exact dots | 1 | when one picture dot = one source dot, uses 1 sample and a pixel filter of 0.01 so every dot is read at its own centre (the harness default would blur by about a dot) |
@@ -119,7 +119,7 @@ Special parameters (not settings): `shift` [u, v] slides the pattern by that muc
 
 All sweeps change one setting of the default tile (seed 1) and nothing else, at 512 dots, so the layout stays put and only that setting shows. Only the three that matter most are shown here; the other two are in `sheets/` (`sweep_warp.jpg`, `sweep_row_height.jpg`).
 
-**Stepped joints (`joints.step_share` 0, 0.7, 1):** this is the change that moves the picture furthest from a brick wall.
+**Stepped joints (`joints.step_share` 0, 0.7, 1):** at this small size (512 dots) the step is a modest change: the joints of the left picture are straight lines, in the middle and right picture most of them jump sideways part way. The bigger changes against round 1 came from two boards per row, the different row heights and the faint and strong joints (`sheets/steps_round2.jpg` shows the steps in order); the step matters most at full size, where the sideways crack along the grain is clearly seen.
 
 ![stepped joints](sheets/sweep_step_share.jpg)
 
@@ -127,25 +127,29 @@ All sweeps change one setting of the default tile (seed 1) and nothing else, at 
 
 ![boards per row](sheets/sweep_boards_per_row.jpg)
 
-**Landmarks (all painted out, default, all shown):** with everything painted out the area has no knots and no recognisable cracks, with everything shown the checker's repeats come back (section 7.3).
+**Landmarks (all painted out, default, all shown):** with everything painted out the tile has no knots (other recognisable places that are not on the list of twelve remain); with everything shown it has knots, and the zigzags and splinters of the source, in three places at once (section 7.3 d counts them in the area).
 
 ![landmarks](sheets/sweep_landmarks.jpg)
 
-What the landmarks are and what a painted-out source map looks like (left: the twelve landmarks circled; right: the map with all of them painted out; the right picture is drawn by `tools/find_landmark_replacements.py` with numpy to show what the nodes do, it is not a Blender bake):
+What the landmarks are and what a painted-out source map looks like (left: the twelve landmarks circled; right: the map with all of them painted out; the right picture is drawn by `tools/find_landmark_replacements.py` with numpy to show what the nodes do, it is not a Blender bake; the patches can be found by eye in it, for example near the middle of rows 2 and 3):
 
 ![landmarks](sheets/landmarks.jpg)
+
+**Bending of the windows** (`windows.warp_*` and `windows.tilt` none, default, strong; `sheets/sweep_warp.jpg`): with none the grain keeps the straight lines of the source; with the default the grain lines wave a little (hard to see at 512 dots, it is what the near-copy tests reward, section 7.3 e); with strong (30 dots along, 14 across, 5 degrees) the grain waves like a log's, which looks natural in some boards and too wavy in others; I kept the gentle default.
+
+**Row heights** (`layout.row_height_variation` 0, 0.2, 0.35; `sheets/sweep_row_height.jpg`): with 0 all five rows have the same height and the layout reads as a regular brick course; 0.2 (default) gives rows of 200 to 300 dots; 0.35 gives clearly thinner and thicker rows, but the windows are then magnified or squeezed more (the thin rows show the source reduced, the thick ones enlarged by up to a third).
 
 ---
 
 ## 6. How to bake
 
-* **With the project's standard command** (this works: it was run on the final recipe, seed 1, 1254 dots, about 3.5 minutes under load; the result equals the job-driver bake):
+* **With the project's standard command** (this works: it was run on the final recipe for seed 1 at 1254 dots, about 3.5 minutes under load; seeds 2 and 3 were made by the job driver with the same standard bake, `"full": true`):
   `blender -b --disable-autoexec -t 2 --python lib/bake_harness.py -- recipes/wood_from_displacement/recipe/wood_from_maps_recipe.py OUT_FOLDER --size 1254 --params '{"recipe.seed": 1}'`
   It writes colour.png, height.png (16-bit), roughness.png, metallic.png and normal.png (made from the height, two-neighbour slope, strength 8) and normal_bumpnode.png (a cross-check, not needed).
 * **Several pictures in one Blender run:** `tools/run_jobs.py` with a jobs file (examples: `tests/jobs_r2_tiles.json`, `tests/jobs_r2_areas.json`). A job with `"full": true` is the standard bake; otherwise it lists channels. Every job builds the nodes again (about 50 seconds under load), so many small jobs in one list cost mostly build time.
 * **The COMPARISON version:** add `"colour.source": "height_palette"` to the parameters; the height and normal are the same as MAIN.
-* **A bigger area:** `{"recipe.tiles_across": 4}` with `--size 2508` (about 10 minutes per channel under load) or smaller. **A full-size piece of an area:** add `"window": [1.5, 1.5, 1]` and bake 1254 dots.
-* **Speed:** see the table below. The round 2 recipe has about twice the nodes of round 1 and bakes about twice as slowly.
+* **A bigger area:** `{"recipe.tiles_across": 4}` with `--size 2508` (about 6 minutes per channel under load) or smaller. **A full-size piece of an area:** add `"window": [1.5, 1.5, 1]` and bake 1254 dots.
+* **Speed:** see the table below. The round 2 recipe has about twice the nodes of round 1 (1699 against 888) and bakes about three times as slowly (the full standard bake took 79 seconds in round 1 and about 236 now).
 
 @@SPEED_TABLE@@
 
@@ -168,7 +172,7 @@ What the landmarks are and what a painted-out source map looks like (left: the t
 | `round1/` | the few round 1 results needed for before and after (the 4 x 4 area, the tile pictures, the round 1 score files) |
 | `variations/` | the sweep pictures |
 | `sheets/` | all the sheets shown in this guide (and `development/`, small pictures of the steps of round 2) |
-| `scores/` | `final_scores_round2.json`, `checks_round2.json`, `repeat_tests_round2.json`, `joints_found_round2.json`, `landmarks_replacements.json`, `job_numbers_round2.json` |
+| `scores/` | `final_scores_round2.json`, `checks_round2.json`, `repeat_tests_round2.json`, `joints_found_round2.json`, `landmarks_replacements.json`, `job_numbers_round2.json`, `neighbour_count_default_tile_seed1.json`, `discarded_first_chain_numbers.json`; the round 1 files keep their names |
 | `tools/` | the job driver, the scoring, repeat and check scripts, the sheet makers, the guide filler (each starts with a plain note); `tools/measure_repeats.py`, `analyse_final.py`, `make_sheets.py` and `joint_contact_sheet.py` are the round 1 versions |
 | `tests/` | job lists, logs, the earlier recipe's tile baked again for scoring |
 | `research/` | the research that came first |

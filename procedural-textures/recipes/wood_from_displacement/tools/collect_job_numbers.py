@@ -1,3 +1,4 @@
+# ROUND 1 TOOL (round 2: tools/collect_job_numbers_round2.py).
 # What this does (plain words): collects the node counts and the bake times of the final jobs from their job.json / bake.json files into
 # scores/job_numbers.json (used by tools/fill_guides.py for the speed table). Also stores how many Blender runs were used (counted by hand, see the argument).
 # Use: python3 -I tools/collect_job_numbers.py NUMBER_OF_BLENDER_RUNS

@@ -1,3 +1,4 @@
+# ROUND 1 TOOL (round 2: tools/fill_guides_round2.py, templates in tools/guide_templates_round2/).
 # What this does (plain words): writes the two guide files of the wood-from-maps job from their templates (tools/guide_templates/*.md) by putting the
 # measured numbers into the places marked @@name@@ and @@TABLE_NAME@@. The numbers come from scores/*.json and from the job logs, so no number in the
 # guides is typed by hand. It stops with an error if a mark is left unfilled.

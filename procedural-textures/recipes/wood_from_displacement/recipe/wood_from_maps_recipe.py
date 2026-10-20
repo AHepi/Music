@@ -12,12 +12,12 @@
 #                  dark gap to the middle of the next, as the source rows do, and the row edges wave a little.
 #     2. BOARDS    Every row is cut into boards of random length (2 per tile-wide stretch, so most boards are 0.3 to 0.8 of a tile long),
 #                  shifted sideways by chance from row to row. The cut between two boards is not straight: it steps and wobbles.
-#     3. WINDOW    Every board chooses its OWN window of the source: which source row (the next board always takes a different one, and so
-#                  does the next row), where along it, flipped left-right or upside-down or not, stretched along the board by up to 25 percent,
-#                  bent by a slow wobble and tilted by up to 3.5 degrees, so that no two windows have the same shape.
+#     3. WINDOW    Every board chooses its OWN window of the source: which source row (the next board takes a different one, and so
+#                  does the next row; a few exceptions are counted in the guide, section 11.2), where along it, flipped left-right or upside-down or not, stretched along the board by up to 25 percent,
+#                  bent by a slow wobble and tilted by up to 3.5 degrees (the sideways shift of the tilt is capped at 8 dots), so that no two windows have the same shape.
 #     4. LANDMARKS The most recognisable places of the source (3 knots, zigzag cracks, splinters, big rust clouds, 12 in all) are painted
 #                  out of every window by default (replaced by clean grain taken from another place of the source) and only shown in a
-#                  board that draws a lucky number (knots 25 percent, others 20 percent). So a knot or a zigzag comes back rarely.
+#                  board that draws a lucky number (knots 15 percent, others 12 percent). So a knot or a zigzag comes back rarely.
 #     5. READ      The height map and the colour map are read at exactly the same position, so colour and relief always match.
 #     6. STAINS    Dark stain splotches from the source are stamped on top at random places (two shifted layers of stamps), away from joints.
 #     7. JOINTS    Where one window meets the next there is a dark ragged crack of random width (the board joint) that hides the cut;
@@ -301,7 +301,7 @@ def build_node_group(parameters):
     zoom = float(s['windows.zoom'])
     margin = float(s['windows.edge_margin'])
     tops, bots = s['source.slice_start'], s['source.slice_end']
-    # which source row: the next board takes the next source row (and the next row of boards steps by two), so two touching boards never take the same one
+    # which source row: the next board takes the next source row (and the next row of boards steps by two), so touching boards take different ones (counted on the 4 x 4 area: 1 percent of touching pairs are exceptions, because a long board can touch a board two places away)
     off_band = kit.floor(kit.rand1(0.0, 2.5, 6.5, seed_h) * 3.999)
     band = kit.label((rh * 2.0 + jb + off_band) % 4.0, 'source row of this board (0=R2 1=R3 2=R4 3=R5)')
     ytop_b, ybot_b = kit.table(band, [tops, bots], scale=T)

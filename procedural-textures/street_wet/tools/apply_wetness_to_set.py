@@ -16,6 +16,11 @@
 #   colliery_yard                                         porosity 0.7
 # Nothing is replaced by a texture recipe (the plan says: only the road setts could be, as a second step, after a painter test).
 #
+# ROUND 2 (what the checker found): the settings below were changed as follows (the reasons are in the recipe note, section "Round 2"):
+#   road and pavements: a SMOOTHED copy of the relief picture for the wet state (cure for EEVEE speckle), flatter relief, pavement flags back to a lower wet roughness;
+#   walls: no extra shine (Specular Boost 0, no coat), wet roughness 0.75 (a wet wall is darker, not glossy), strong darkening (porosity 1.0, darkest 0.2), and the wet band measured from the
+#   cottage FLOOR in the cottage's own coordinates and made 0.9 m tall (round 1 measured from the pavement, so the dressed-stone plinth hid it).
+#
 # Use (inside Blender, with the street copy open):
 #     import apply_wetness_to_set as aw
 #     aw.apply(wetness=0.85, puddles=0.5)         # puts the layer on and sets the state
@@ -45,19 +50,24 @@ WALL_FOOT_OFFSET = -(HALF_WIDTH * SLOPE + 0.15)          # the cottage floor sta
 
 # name: rough picture, height picture, porosity, wet roughness, extras
 MATERIALS = {
-    'street_setts': dict(rough='square_cobblestone_rough.jpg', height='square_cobblestone_displacement.jpg', porosity=0.6, wet_roughness=0.3, lowness='road'),
-    'pavement_flags': dict(rough='large_grey_tiles_rough.jpg', height='large_grey_tiles_displacement.jpg', porosity=0.55, wet_roughness=0.45, lowness='pavement',
-                           relief_flatten=0.6, puddle_bias=0.21),
+    'street_setts': dict(rough='square_cobblestone_rough.jpg', height='square_cobblestone_displacement.jpg', smooth_normal='square_cobblestone_normal_smooth_4.png',
+                         porosity=0.6, wet_roughness=0.3, lowness='road', relief_flatten=0.7),
+    'pavement_flags': dict(rough='large_grey_tiles_rough.jpg', height='large_grey_tiles_displacement.jpg', smooth_normal='large_grey_tiles_normal_smooth_2.png',
+                           porosity=0.55, wet_roughness=0.35, lowness='pavement', relief_flatten=1.0, puddle_bias=0.22),
     'channel_stones': dict(porosity=0.5, wet_roughness=0.3, lowness=1.0, wetness_scale=1.15),
     'kerb_stone': dict(porosity=0.5, wet_roughness=0.35, lowness=0.3, wetness_scale=1.05),
-    'cottage_brick': dict(rough='red_brick_rough.jpg', height='red_brick_displacement.jpg', porosity=0.7, wet_roughness=0.45, wall='left_row'),
-    'cottage_stone': dict(rough='stone_brick_wall_001_rough.jpg', height='stone_brick_wall_001_displacement.jpg', porosity=0.6, wet_roughness=0.45, wall='right_row'),
-    'colliery_brick': dict(porosity=0.7, wet_roughness=0.45),
-    'dressed_stone': dict(porosity=0.5, wet_roughness=0.4, ground_offset=0.13),
-    'dark_dressed_stone': dict(porosity=0.5, wet_roughness=0.4, ground_offset=0.13),
-    'roof_slate': dict(porosity=0.3, wet_roughness=0.25),
+    'cottage_brick': dict(rough='red_brick_rough.jpg', height='red_brick_displacement.jpg', porosity=1.0, darkest=0.2, wet_roughness=0.75, specular_boost=0.0, film_coat=0.0,
+                          wall_band=0.9, wall='left_row'),
+    'cottage_stone': dict(rough='stone_brick_wall_001_rough.jpg', height='stone_brick_wall_001_displacement.jpg', porosity=1.0, darkest=0.2, wet_roughness=0.75, specular_boost=0.0,
+                          film_coat=0.0, wall_band=0.9, wall='right_row'),
+    'colliery_brick': dict(porosity=0.7, wet_roughness=0.5, specular_boost=0.0, film_coat=0.05),
+    'dressed_stone': dict(porosity=0.5, wet_roughness=0.45, ground_offset=0.13, specular_boost=0.0, film_coat=0.05),
+    'dark_dressed_stone': dict(porosity=0.5, wet_roughness=0.45, ground_offset=0.13, specular_boost=0.0, film_coat=0.05),
+    'roof_slate': dict(porosity=0.3, wet_roughness=0.4, specular_boost=0.05, film_coat=0.05),
     'colliery_yard': dict(porosity=0.7, wet_roughness=0.4),
 }
+# Round 1 had a separate "cure" for EEVEE flagstones; round 2 builds it into MATERIALS (relief flatten 1.0, smoothed relief picture). Kept for old scripts.
+PAVEMENT_FOR_EEVEE = dict(relief_flatten=1.0, wet_roughness=0.35)
 APPLIED = {}      # material name (or variant name) -> (group node, settings)
 
 
@@ -187,7 +197,9 @@ def apply(wetness=0.85, puddles=0.5, only=None, seed=3.0, **overrides):
         for material, layout_name in variants:
             tree = material.node_tree
             kwargs = dict(porosity=spec['porosity'], wet_roughness=spec['wet_roughness'], seed=seed, ground_offset=spec.get('ground_offset', 0.0),
-                          relief_flatten=spec.get('relief_flatten', 0.35), puddle_bias=spec.get('puddle_bias', 0.0))
+                          relief_flatten=spec.get('relief_flatten', 0.35), puddle_bias=spec.get('puddle_bias', 0.0), darkest=spec.get('darkest', 0.45),
+                          specular_boost=spec.get('specular_boost', 0.25), film_coat=spec.get('film_coat', 0.3), wall_band=spec.get('wall_band', 0.45),
+                          smooth_normal_image=_image(spec['smooth_normal']) if spec.get('smooth_normal') else None)
             lowness = None
             if spec.get('lowness') == 'road':
                 lowness = _lowness_from_x(tree, 0.6, 2.1)
@@ -198,7 +210,8 @@ def apply(wetness=0.85, puddles=0.5, only=None, seed=3.0, **overrides):
                 coords = tree.nodes.new('ShaderNodeTexCoord')
                 position = coords.outputs['Object']
                 drip = wl.drip_chain(tree, position, drip_sources(layout_name), seed=seed)
-                kwargs.update(ground_slope=SLOPE if spec['wall'] == 'right_row' else -SLOPE, ground_offset=WALL_FOOT_OFFSET)
+                # round 2: measured from the cottage FLOOR (local z = 0), which is flat across one house: no slope, no offset
+                kwargs.update(ground_slope=0.0, ground_offset=0.0)
             kwargs.update(overrides)
             node = wl.add_wetness_to_material(material, wetness=0.0, puddles=0.0, rough_image=_image(spec['rough']) if spec.get('rough') else None,
                                               height_image=_image(spec['height']) if spec.get('height') else None, lowness=lowness, position=position, drip=drip,

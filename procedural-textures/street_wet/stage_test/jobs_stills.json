@@ -1,0 +1,47 @@
+[
+ {
+  "call": "still",
+  "args": {
+   "glb": "street.glb",
+   "variant": "full",
+   "envIntensity": 0.25
+  },
+  "out": "still_0_today.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "no_maps",
+   "envIntensity": 0.25
+  },
+  "out": "still_1_wet_glb_no_maps.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "roughness",
+   "envIntensity": 0.25
+  },
+  "out": "still_2_roughness_map.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "coat",
+   "envIntensity": 0.25
+  },
+  "out": "still_3_plus_clearcoat_maps.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "full",
+   "envIntensity": 0.25
+  },
+  "out": "still_4_plus_specularity_map.png"
+ }
+]

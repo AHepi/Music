@@ -1,0 +1,7 @@
+### 7.7 How it looks, in plain words (my reading; no other person has looked)
+
+* **Default tile (full size).** A weathered, painted-looking log wall: five rows of different heights, two boards per row of very different lengths, stepped butt joints, the dark ragged gaps with the source's own pebbles, orange splinters, dark stain splotches, blue-grey and rust areas. It reads as the same wood as the reference. Compared with the reference it has fewer long unbroken rows (the reference's rows run the whole tile width) and more cuts: it reads as stacked logs rather than as one log wall.
+* **Areas at full size** (`sheets/area_crops.jpg`): the same impression, over many boards, with no visible repeat of a big feature in the crops I looked at; small dark slits and orange splinters that are not on the landmark list do come back.
+* **Areas seen small** (`sheets/before_after.jpg`, the whole 4 x 4 area): a masonry-like wall of boards with staggered joints, clearly less regular than round 1, but not as calm as the plain repeat of the uploaded map (which reads as horizontal logs). Whether that is acceptable depends on the distance a person will look from.
+* **The big dark stain splotches** now end with a harder edge; a few still end softly.
+* **Knots** are rare (about 0.8 per tile) and a little oval; the default tile of seed 1 has none; seeds 2 and 3 each show one or two knots or knot-like dark rings (I looked at the pictures, I did not count them by script).

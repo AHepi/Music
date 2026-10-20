@@ -1,4 +1,5 @@
 #!/bin/bash
+# ROUND 1 TOOL (kept for the record; round 2: tools/run_round2_chain.sh).
 # What this does (plain words): the one-go version of the final bakes (tests/jobs_final_all.json: three seeds of the default tile with all maps, the comparison
 # colours, the area bakes, crops, shift test, source-unchanged check, sweeps), then the lit pictures. ONE Blender at a time, 2 threads.
 # Use: bash tools/run_everything.sh      Log: tests/everything.log (one line per finished part)

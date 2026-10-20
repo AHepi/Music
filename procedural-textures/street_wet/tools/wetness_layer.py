@@ -4,6 +4,15 @@
 # its Principled BSDF (Blender's all-purpose surface shader) and turns the dry look into the wet look after rain. It is used for the pit village
 # street (see "09 Recipe - wetness layer and specular map for the street - how it is made.md" in the folder above for the full story).
 #
+# ROUND 2 CHANGES (what the checker found in round 1, and what was done; the story is in the recipe note, section "Round 2"):
+#   * NEW input Wet Normal + Grain Fill: water fills the finest grain of a stone. The caller gives a SMOOTHED copy of the relief picture (tools/20_make_smoothed_pictures.py)
+#     and the layer slides from the sharp relief to the smoothed one as the surface gets wet. This is the cure for the white speckle ("grit") EEVEE draws on a glossy
+#     road that keeps its fine photo grain.
+#   * NEW input Film Coat: how strong the thin water film is outside puddles (round 1: fixed 0.3, which made walls and the road too bright).
+#   * Puddle depth now leans more on Lowness (40 % instead of 25 %) and less on the relief's grain (20 % instead of 25 %), and the puddle edge is softer: rounder puddles.
+#   * Streaks hanging from window sills and eaves are stronger (they must read at dusk).
+#   * The wall band is measured from the cottage floor in the cottage's own coordinates (round 1 measured from the pavement, so the plinth hid it).
+#
 # Example first: a dry cobbled road has colour 0.19 (grey-brown), roughness 0.9 (chalky), and nothing else. Put the layer on it, set Wetness 0.85
 # and Puddles 0.5, and the road comes out darker and a little richer in colour, smooth (roughness 0.3, so lamp light streaks across it), shiny
 # (a thin clear water film), with flat dark mirror puddles in the low spots near the gutters, while the raised tops of the stones stay a little drier.
@@ -88,10 +97,14 @@ import bpy
 
 TREE_NAME = 'WETNESS'
 DRIP_TREE_NAME = 'WETNESS DRIP'
-# the puddle dial: threshold = PUDDLE_THRESHOLD_TOP - PUDDLE_THRESHOLD_RANGE * (Puddles ** PUDDLE_CURVE); calibrated by tools/02_puddle_sweep.py
+# the puddle dial: threshold = PUDDLE_THRESHOLD_TOP - PUDDLE_THRESHOLD_RANGE * (Puddles ** PUDDLE_CURVE); calibrated by tools/02_puddle_sweep.py (round 1: 0.39 and 0.80;
+# round 2, after the depth and edge changes, refitted with tools/23b_puddle_fit.py to 0.52 and 1.25: the main camera's road is 3 / 8 / 15 / 30 % puddle at dial 0.3 / 0.5 / 0.65 / 0.8)
 PUDDLE_THRESHOLD_TOP = 0.79
-PUDDLE_THRESHOLD_RANGE = 0.39
-PUDDLE_CURVE = 0.80
+PUDDLE_THRESHOLD_RANGE = 0.52
+PUDDLE_CURVE = 1.25
+# round 2: how the puddle depth is made (shares add to 1) and how soft the puddle edge is (a bigger softness number = rounder, gentler edge)
+DEPTH_SHARE_WOBBLE, DEPTH_SHARE_LOWNESS, DEPTH_SHARE_RELIEF = 0.40, 0.40, 0.20
+PUDDLE_SOFTNESS = 0.10
 
 
 class Net:
@@ -244,11 +257,12 @@ def build_wetness_group():
     tree = bpy.data.node_groups.new(TREE_NAME, 'ShaderNodeTree')
     inputs = [
         ('Colour', 'NodeSocketColor', (0.5, 0.5, 0.5, 1.0)), ('Roughness', 'NodeSocketFloat', 0.85), ('Height', 'NodeSocketFloat', 0.5),
-        ('Normal', 'NodeSocketVector', (0.0, 0.0, 1.0)),
+        ('Normal', 'NodeSocketVector', (0.0, 0.0, 1.0)), ('Wet Normal', 'NodeSocketVector', (0.0, 0.0, 1.0)),
         ('Use World Geometry', 'NodeSocketFloat', 1.0), ('Position', 'NodeSocketVector', (0.0, 0.0, 0.0)), ('Surface Up', 'NodeSocketVector', (0.0, 0.0, 1.0)),
         ('Wetness', 'NodeSocketFloat', 0.8), ('Puddles', 'NodeSocketFloat', 0.5), ('Seed', 'NodeSocketFloat', 0.0),
         ('Porosity', 'NodeSocketFloat', 0.6), ('Darkest', 'NodeSocketFloat', 0.45), ('Wet Roughness', 'NodeSocketFloat', 0.3),
         ('Puddle Roughness', 'NodeSocketFloat', 0.08), ('Specular Boost', 'NodeSocketFloat', 0.25), ('Relief Flatten', 'NodeSocketFloat', 0.35),
+        ('Grain Fill', 'NodeSocketFloat', 1.0), ('Film Coat', 'NodeSocketFloat', 0.3),
         ('Puddle Darkness', 'NodeSocketFloat', 0.9), ('Puddle Bias', 'NodeSocketFloat', 0.0),
         ('Lowness', 'NodeSocketFloat', 0.5), ('Dry Tops', 'NodeSocketFloat', 0.5), ('Water Level', 'NodeSocketFloat', 0.65),
         ('Ground Slope', 'NodeSocketFloat', 0.0699), ('Ground Offset', 'NodeSocketFloat', 0.0), ('Wall Band', 'NodeSocketFloat', 0.45),
@@ -279,12 +293,13 @@ def build_wetness_group():
 
     # ---- the low spots: a slow wobble over the ground (long along the street), the caller's Lowness, and the dry relief's own low parts
     dip_vector = n.combine(n.math('MULTIPLY', px, 0.55), n.math('ADD', n.math('MULTIPLY', py, 0.32), seed_shift), 0.0)
-    dips = n.map_range(n.noise(dip_vector, scale=1.0, detail=3.0, roughness=0.55), 0.33, 0.67, 0.0, 1.0)
+    dips = n.map_range(n.noise(dip_vector, scale=1.0, detail=2.0, roughness=0.5), 0.33, 0.67, 0.0, 1.0)
     low_relief = n.map_range(n.math('SUBTRACT', 1.0, g('Height')), 0.2, 0.8, 0.0, 1.0)
-    depth = n.math('ADD', n.math('ADD', n.math('MULTIPLY', dips, 0.5), n.math('MULTIPLY', g('Lowness'), 0.25)), n.math('MULTIPLY', low_relief, 0.25))
+    depth = n.math('ADD', n.math('ADD', n.math('MULTIPLY', dips, DEPTH_SHARE_WOBBLE), n.math('MULTIPLY', g('Lowness'), DEPTH_SHARE_LOWNESS)),
+                   n.math('MULTIPLY', low_relief, DEPTH_SHARE_RELIEF))
     dial = n.math('POWER', n.math('MAXIMUM', g('Puddles'), 0.0001), PUDDLE_CURVE)
     threshold = n.math('ADD', n.math('SUBTRACT', PUDDLE_THRESHOLD_TOP, n.math('MULTIPLY', dial, PUDDLE_THRESHOLD_RANGE)), g('Puddle Bias'))
-    puddle_raw = n.map_range(depth, threshold, n.math('ADD', threshold, 0.06), 0.0, 1.0, smooth=True)
+    puddle_raw = n.map_range(depth, threshold, n.math('ADD', threshold, PUDDLE_SOFTNESS), 0.0, 1.0, smooth=True)
     puddle = n.math('MULTIPLY', n.math('MULTIPLY', puddle_raw, ground_like), n.map_range(g('Puddles'), 0.0, 0.05, 0.0, 1.0))
 
     # ---- the film of wet over the ground: patchy, and the high parts of the relief stay drier
@@ -306,7 +321,7 @@ def build_wetness_group():
     general_streak = n.math('MULTIPLY', n.map_range(streak_noise, 0.52, 0.72, 0.0, 1.0, smooth=True), g('Streaks'))
     streak = n.math('MULTIPLY', n.math('MAXIMUM', general_streak, g('Drip Mask')), wall_like)
     wall_general = n.math('MULTIPLY', g('Wall Wetness'), n.map_range(patchy, 0.3, 0.7, 0.6, 1.0))
-    wet_wall = n.math('MAXIMUM', n.math('MAXIMUM', n.math('MULTIPLY', band, 0.95), n.math('MULTIPLY', streak, 0.7)), wall_general)
+    wet_wall = n.math('MAXIMUM', n.math('MAXIMUM', n.math('MULTIPLY', band, 0.95), n.math('MULTIPLY', streak, 0.9)), wall_general)
 
     # ---- all together: ground, wall and roof each wet in their own way; standing water counts as soaked
     wet_roof = n.math('MULTIPLY', g('Wetness'), 0.9)
@@ -338,10 +353,11 @@ def build_wetness_group():
     rough_film = n.mix(smoothness, g('Roughness'), n.math('MINIMUM', g('Roughness'), g('Wet Roughness')))
     rough_out = n.mix(g('Roughness Effect'), g('Roughness'), n.mix(puddle, rough_film, g('Puddle Roughness')))
     specular_out = n.mix(g('Specular Effect'), 0.5, n.math('ADD', 0.5, n.math('MULTIPLY', wet, g('Specular Boost'))))
-    coat_weight = n.math('MULTIPLY', n.math('MINIMUM', n.math('ADD', n.math('MULTIPLY', wet, 0.3), puddle), 1.0), g('Coat Effect'))
+    coat_weight = n.math('MULTIPLY', n.math('MINIMUM', n.math('ADD', n.math('MULTIPLY', wet, g('Film Coat')), puddle), 1.0), g('Coat Effect'))
     coat_roughness = n.mix(puddle, 0.2, g('Puddle Roughness'))
     flatten = n.math('MAXIMUM', puddle, n.math('MULTIPLY', wet, g('Relief Flatten')))
-    normal_out = n.vector_math('NORMALIZE', n.mix_vector(n.math('MULTIPLY', flatten, g('Normal Effect')), g('Normal'), geometry.outputs['Normal']))
+    filled = n.mix_vector(n.math('MULTIPLY', n.math('MULTIPLY', wet, g('Grain Fill')), g('Normal Effect')), g('Normal'), g('Wet Normal'))     # water fills the finest grain first
+    normal_out = n.vector_math('NORMALIZE', n.mix_vector(n.math('MULTIPLY', flatten, g('Normal Effect')), filled, geometry.outputs['Normal']))
     height_out = n.mix(puddle, g('Height'), n.math('MAXIMUM', g('Height'), g('Water Level')))
     colour_out = n.mix_colour(g('Colour Effect'), g('Colour'), final.outputs[2])
     for name, socket in (('Roughness', rough_out), ('Specular IOR Level', specular_out), ('Coat Weight', coat_weight), ('Coat Roughness', coat_roughness),
@@ -353,7 +369,8 @@ def build_wetness_group():
 
 def add_wetness_to_material(material, wetness=0.85, puddles=0.5, rough_image=None, height_image=None, lowness=None, ground_offset=0.0, ground_slope=0.0699,
                             porosity=0.6, seed=0.0, wet_roughness=0.3, wall_band=0.45, wall_wetness=0.35, streaks=0.5, dry_tops=0.5, relief_flatten=0.35,
-                            puddle_darkness=0.9, puddle_roughness=0.08, darkest=0.45, specular_boost=0.25, puddle_bias=0.0, position=None, drip=None, debug_output=None):
+                            puddle_darkness=0.9, puddle_roughness=0.08, darkest=0.45, specular_boost=0.25, puddle_bias=0.0, position=None, drip=None, debug_output=None,
+                            smooth_normal_image=None, grain_fill=1.0, film_coat=0.3, coat_effect=1.0):
     """Puts the WETNESS group between a photo-textured material's (colour, normal) and its Principled BSDF and returns the group node.
     rough_image / height_image: optional images (Non-Color), laid with the same coordinates as the colour picture (a roughness picture and a height
     picture from the same Poly Haven set). lowness: optional output socket in this material's tree that says how low the spot is. position: optional
@@ -383,9 +400,26 @@ def add_wetness_to_material(material, wetness=0.85, puddles=0.5, rough_image=Non
         tree.links.new(height_node.outputs['Color'], group_node.inputs['Height'])
     if normal_link is not None:
         tree.links.new(normal_link.from_socket, group_node.inputs['Normal'])
+        wet_normal_source = normal_link.from_socket
+        if smooth_normal_image is not None:
+            # the same normal map node setup but with the smoothed picture (same strength, same coordinates)
+            old_map = normal_link.from_node
+            old_image_node = old_map.inputs['Color'].links[0].from_node
+            new_image_node = tree.nodes.new('ShaderNodeTexImage')
+            new_image_node.image = smooth_normal_image
+            smooth_normal_image.colorspace_settings.name = 'Non-Color'
+            new_image_node.interpolation = old_image_node.interpolation
+            if old_image_node.inputs['Vector'].links:
+                tree.links.new(old_image_node.inputs['Vector'].links[0].from_socket, new_image_node.inputs['Vector'])
+            new_map = tree.nodes.new('ShaderNodeNormalMap')
+            new_map.inputs['Strength'].default_value = old_map.inputs['Strength'].default_value
+            tree.links.new(new_image_node.outputs['Color'], new_map.inputs['Color'])
+            wet_normal_source = new_map.outputs['Normal']
+        tree.links.new(wet_normal_source, group_node.inputs['Wet Normal'])
     else:
         geometry = tree.nodes.new('ShaderNodeNewGeometry')
         tree.links.new(geometry.outputs['Normal'], group_node.inputs['Normal'])
+        tree.links.new(geometry.outputs['Normal'], group_node.inputs['Wet Normal'])
     if lowness is not None:
         tree.links.new(lowness, group_node.inputs['Lowness'])
     if position is not None:
@@ -398,7 +432,7 @@ def add_wetness_to_material(material, wetness=0.85, puddles=0.5, rough_image=Non
     values = {'Wetness': wetness, 'Puddles': puddles, 'Porosity': porosity, 'Seed': seed, 'Ground Offset': ground_offset, 'Ground Slope': ground_slope,
               'Wet Roughness': wet_roughness, 'Wall Band': wall_band, 'Wall Wetness': wall_wetness, 'Streaks': streaks, 'Dry Tops': dry_tops,
               'Relief Flatten': relief_flatten, 'Puddle Darkness': puddle_darkness, 'Puddle Roughness': puddle_roughness, 'Darkest': darkest,
-              'Specular Boost': specular_boost, 'Puddle Bias': puddle_bias}
+              'Specular Boost': specular_boost, 'Puddle Bias': puddle_bias, 'Grain Fill': grain_fill, 'Film Coat': film_coat, 'Coat Effect': coat_effect}
     for name, value in values.items():
         group_node.inputs[name].default_value = value
     for name, socket in (('Colour', 'Base Color'), ('Roughness', 'Roughness'), ('Specular IOR Level', 'Specular IOR Level'), ('Coat Weight', 'Coat Weight'),

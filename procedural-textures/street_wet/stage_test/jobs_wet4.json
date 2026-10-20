@@ -1,0 +1,112 @@
+[
+ {
+  "call": "describe",
+  "args": "street-wet.glb",
+  "out": "describe_street_wet.json"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street.glb",
+   "variant": "full",
+   "envIntensity": 0.2
+  },
+  "out": "still_0_today.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "no_maps",
+   "envIntensity": 0.2
+  },
+  "out": "still_1_wet_glb_no_maps.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "roughness",
+   "envIntensity": 0.2
+  },
+  "out": "still_2_roughness_map.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "coat",
+   "envIntensity": 0.2
+  },
+  "out": "still_3_plus_clearcoat_maps.png"
+ },
+ {
+  "call": "still",
+  "args": {
+   "glb": "street-wet.glb",
+   "variant": "full",
+   "envIntensity": 0.2
+  },
+  "out": "still_4_plus_specularity_map.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street.glb",
+   "painting": "plate-wet.png",
+   "matte": true,
+   "view": "projector"
+  },
+  "out": "proj_a_today_glb_matte_projector.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street.glb",
+   "painting": "plate-wet.png",
+   "matte": true,
+   "view": "moved"
+  },
+  "out": "proj_b_today_glb_matte_moved.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street-wet.glb",
+   "painting": "plate-wet.png",
+   "matte": true,
+   "view": "moved"
+  },
+  "out": "proj_c_wet_glb_matte_moved.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street-wet.glb",
+   "painting": "plate-wet.png",
+   "matte": false,
+   "view": "moved"
+  },
+  "out": "proj_d_wet_glb_matteoff_moved.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street-wet.glb",
+   "painting": "plate-wet.png",
+   "matte": true,
+   "view": "weights"
+  },
+  "out": "proj_e_wet_glb_matte_weights.png"
+ },
+ {
+  "call": "projected",
+  "args": {
+   "glb": "street-wet.glb",
+   "painting": "plate-wet.png",
+   "matte": false,
+   "view": "weights"
+  },
+  "out": "proj_f_wet_glb_matteoff_weights.png"
+ }
+]

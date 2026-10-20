@@ -28,8 +28,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   unchanged); the shapes do not (four of five surfaces needed their own layout, and one to three new layers each). Brick, wood, metal and gravel read as the surface; mud only partly.
 - **Slate fixes done (log 15):** colour score 0.81 over five seed sets (aim 0.8), checker says "nearly" the same hand; one new fault (straight-edged flat facets on about
   14 slates) needs a small code fix in the colour and fade layer - not started, as you asked to move on.
-- **Running now:** wood from your displacement and colour maps (being checked); the generated-mask test on the slate (fal, under US$1); the wetness layer and
-  specular map for the pit village street set. Helpers run on Sonnet 5.5 at extra-high effort.
+- **Wood from your maps done (log 16):** the material reads as your wood (score 0.84, the highest of any surface so far) and big areas no longer repeat, but the
+  arrangement reads as stacked stone or ledgestone, not long planks - boards are too short and regular. Not fixed (the job allowed two rounds).
+- **Running now:** the generated-mask test on the slate (fal, under US$1); the wetness layer and specular map for the pit village street set. Helpers run on
+  Sonnet 5.5 at extra-high effort.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -159,7 +161,21 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     fringe, moss is a little pale, relief still weaker than yours. Seamless and non-repeating (half-tile and 2 x 2 tests). Honesty check: claims hold; 11 wording and number
     errors corrected in the guides. Pictures: `15 Slate fixes round 2 - pictures/`.
 
+16. **Wood from your displacement and colour maps.** You said the wood was not good and asked to use the displacement map, then "and the material map", and to make
+    bigger surfaces that do not repeat. For wood only, your two maps became the source: a researcher measured them once (five rows of boards, the map does not repeat at its
+    own edges, colour brightness predicts height at 0.98, your normal map is the slope of your height at strength 8) and tested methods; the builder made one Blender recipe
+    that lays out new rows of boards and gives each board its own random strip of BOTH maps (same place, so colour and relief always match), with flips, small zoom and
+    tone changes, painted-out landmarks (knots and other recognisable places shown only now and then), stain stamps and soft masks. One switch gives an exactly repeating tile
+    or a big area of new boards. Two rounds, each with a fresh look checker and an honesty checker. Results: same-kind 0.839 with your colour map (0.760 with colour made from
+    height; the earlier pure-node wood 0.665 - not like for like, because the new one is made of your own dots). The tile repeats without a seam. In a 4 x 4 area the look
+    checker found no repeated knot, crack, stain or board (twin test: 0-2% of pieces have a twin, against 14-18% in round 1 and 100% for a plain repeat). Your colour map is
+    worth keeping: colour made from height is flatter and loses the blue-grey and orange. **Still wrong (look checker, round 2, "nearly"):** the layout reads as stacked stone
+    or brick, not long boards (boards about 2.5 times longer than high, straight full-height joints, even rows; a source row is only one tile long, so boards cannot be longer);
+    a soft blurry dark dash keeps coming back inside boards; a few hard-edged round tone patches where landmarks were painted out; joints too regular. Round 1 also had a false
+    claim ("never the same strip as its neighbour": really 19%), fixed in round 2 (1.1%). Six guide errors from the last honesty check corrected by me. Pictures:
+    `16 Wood from your maps - pictures/`. Guides: `recipes/wood_from_displacement/08 Recipe ...md` and `08 Lessons ...md`.
+
 ## Next step
 
-Let the three running jobs finish (wood from your maps, the generated-mask test, the wet street) and send them with their checks. Open, waiting for your go: the slate's
-straight-edged facets (a small code fix in the colour and fade layer).
+Let the two running jobs finish (the generated-mask test, the wet street) and send them with their checks. Open, waiting for your go: the wood's stone-wall look (longer
+boards by joining two strips inside a crack, fewer and more ragged joints) and the slate's straight-edged facets.

@@ -1,0 +1,47 @@
+{
+ "what_this_is": "Honesty checker: half-tile slide test. The default tile (my own re-bake, standard command) slid by half a tile (np.roll 627 dots across and down) is compared with a bake made with the recipe's own 'shift' [0.5, 0.5]; controls: wrong slides of 313 and 100 dots. Differences in 0..1 units.",
+ "height": {
+  "half_slide_627_627": {
+   "mean_abs_diff": 1e-05,
+   "share_over_0.1": 0.0,
+   "max": 0.1093
+  },
+  "half_slide_other_sign": {
+   "mean_abs_diff": 1e-05,
+   "share_over_0.1": 0.0,
+   "max": 0.1093
+  },
+  "wrong_slide_313_313": {
+   "mean_abs_diff": 0.22955,
+   "share_over_0.1": 0.7277,
+   "max": 0.9958
+  },
+  "wrong_slide_100_0": {
+   "mean_abs_diff": 0.23017,
+   "share_over_0.1": 0.7301,
+   "max": 1.0
+  }
+ },
+ "colour": {
+  "half_slide_627_627": {
+   "mean_abs_diff": 0.00154,
+   "share_over_0.1": 0.0,
+   "max": 0.0784
+  },
+  "half_slide_other_sign": {
+   "mean_abs_diff": 0.00154,
+   "share_over_0.1": 0.0,
+   "max": 0.0784
+  },
+  "wrong_slide_313_313": {
+   "mean_abs_diff": 0.10492,
+   "share_over_0.1": 0.4387,
+   "max": 0.7255
+  },
+  "wrong_slide_100_0": {
+   "mean_abs_diff": 0.10492,
+   "share_over_0.1": 0.4396,
+   "max": 0.7137
+  }
+ }
+}

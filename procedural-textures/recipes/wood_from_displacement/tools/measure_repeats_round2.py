@@ -14,7 +14,7 @@
 #      share of pieces whose best match is over 0.6 / 0.7 / 0.8). Both are also run on the round 1 area and on the plain repeat of the map, so the numbers compare.
 #   5. LANDMARKS: how often each recognisable place of the source shows up in the 4 x 4 area (from the landmark picture).
 #   6. SEAM TEST of the default tile repeated 2 x 2, and "is the first tile of an area the default tile?".
-# Run with:  python3 -I tools/measure_repeats_round2.py [--quick]      (numpy, PIL and cv2 only; no Blender)
+# Run with:  python3 -I tools/measure_repeats_round2.py [--quick] [--only-switch]    (--only-switch redoes just the switched-off areas and keeps the rest of the JSON)      (numpy, PIL and cv2 only; no Blender)
 import json
 import math
 import os
@@ -304,9 +304,31 @@ def plain_repeat(tiles=4, tile_px=313):
     return np.tile(h, (tiles, tiles))
 
 
+def switched_part(area, quick=False):
+    """The same two near-copy tests on 4 x 4 areas of height at 1024 dots with parts of the round 2 fixes switched off (tests/jobs_r2_switch.json)."""
+    switched = {}
+    for key in ('default', 'no_landmark_painting', 'no_bending_no_stretch', 'windows_only', 'three_boards_per_row'):
+        folder = os.path.join(area, f'switch_{key}')
+        if find(folder, 'height'):
+            g = load_grey(folder, 'height')
+            switched[key] = {'research_test_36x80': research_score(g, 36, 80, 40, 3), 'look_checker_test': checker_score(g, 4, 40, 3) if not quick else None}
+    if not switched:
+        return {}
+    return {'near_copies_switching_parts_off': {'note': '4 x 4 areas of HEIGHT baked at 1024 dots (2 samples), seed 1, with parts of the round 2 fixes switched off (jobs in tests/jobs_r2_switch.json).', 'results': switched}}
+
+
 def main():
     quick = '--quick' in sys.argv
     area = os.path.join(BASE, 'area')
+    out_path = os.path.join(BASE, 'scores', 'repeat_tests_round2.json')
+    if '--only-switch' in sys.argv:                     # redo only the switched-off part and keep everything else measured before
+        with open(out_path) as handle:
+            result = json.load(handle)
+        result.update(switched_part(area, quick))
+        with open(out_path, 'w') as handle:
+            json.dump(result, handle, indent=1)
+        print(json.dumps(result.get('near_copies_switching_parts_off'), indent=1))
+        return
     rng = np.random.default_rng(11)
     result = {'what_this_is': 'Repeat tests of the wood-from-maps recipe, round 2, written by tools/measure_repeats_round2.py (see the note at the top of that file). Seed 1, default settings.'}
     # 1. shift tests on pictures of 1252 dots across (one tile = 313 dots exactly)
@@ -349,15 +371,7 @@ def main():
             near['look_checker_test_200x380_dots_ROUND_1_area_height_other_draw'] = checker_score(load_grey(old, 'height'), 4, 50, 4)
         near['look_checker_test_200x380_dots_plain_source_repeated_height'] = checker_score(cv2.resize(np.tile(np.asarray(Image.open(os.path.join(PROC, 'reference', 'wood', 'height_as_uploaded.png'))).astype(np.float32) / 255.0, (4, 4)), (1254, 1254), interpolation=cv2.INTER_AREA), 4, 30, 3)
     result['near_copies'] = near
-    # 4b. the same two near-copy tests on 4 x 4 areas of height at 1024 dots with parts of the round 2 fixes switched off (tests/jobs_r2_switch.json)
-    switched = {}
-    for key in ('default', 'no_landmark_painting', 'no_bending_no_stretch', 'windows_only', 'three_boards_per_row'):
-        folder = os.path.join(area, f'switch_{key}')
-        if find(folder, 'height'):
-            g = load_grey(folder, 'height')
-            switched[key] = {'research_test_36x80': research_score(g, 36, 80, 40, 3), 'look_checker_test': checker_score(g, 4, 40, 3) if not quick else None}
-    if switched:
-        result['near_copies_switching_parts_off'] = {'note': '4 x 4 areas of HEIGHT baked at 1024 dots (2 samples), seed 1, with parts of the round 2 fixes switched off (jobs in tests/jobs_r2_switch.json).', 'results': switched}
+    result.update(switched_part(area, quick))
     # 6. seam test and first tile
     result['seam_test_default_tile_2x2'] = seam_test(area)
     tile_folder = os.path.join(BASE, 'outputs', 'main_seed1')

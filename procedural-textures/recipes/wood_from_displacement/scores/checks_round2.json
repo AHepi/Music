@@ -105,5 +105,119 @@
   "correlation_seed1_seed2": 0.028,
   "correlation_seed1_seed3": -0.01,
   "correlation_seed2_seed3": 0.034
+ },
+ "source_unchanged_check": {
+  "height_mean_absolute_difference_to_uploaded_0_to_1": 3e-05,
+  "height_share_of_dots_differing_by_more_than_2_of_255": 0.0,
+  "colour_mean_absolute_difference_to_uploaded_0_to_1": 0.00837,
+  "normal_from_baked_height_strength_8_mean_absolute_difference_x_y_z": [
+   0.0039,
+   0.0039,
+   0.0041
+  ],
+  "for_comparison_the_normal_rule_on_the_uploaded_height_itself_x_y_z": [
+   0.0039,
+   0.0039,
+   0.0041
+  ]
+ },
+ "half_tile_shift_test_1254": {
+  "colour": {
+   "slid_bake_versus_slid_picture_mean_absolute_difference_0_to_1": 0.00154,
+   "share_of_dots_differing_by_more_than_0.1": 0.0,
+   "wrong_slide_control_mean": 0.1056,
+   "wrong_slide_control_share_over_0.1": 0.442
+  },
+  "height": {
+   "slid_bake_versus_slid_picture_mean_absolute_difference_0_to_1": 1e-05,
+   "share_of_dots_differing_by_more_than_0.1": 0.0,
+   "wrong_slide_control_mean": 0.2307,
+   "wrong_slide_control_share_over_0.1": 0.7335
+  }
+ },
+ "window_squeeze_check_seed1_tile": {
+  "source_dots_per_picture_dot_across_the_grain_percentiles_1_5_25_50_75_95": [
+   0.72,
+   0.83,
+   0.97,
+   1.03,
+   1.22,
+   1.36
+  ],
+  "source_dots_per_picture_dot_along_the_grain_percentiles_1_5_25_50_75_95": [
+   0.55,
+   0.64,
+   0.92,
+   1.02,
+   1.13,
+   1.27
+  ],
+  "share_of_blocks_across_under_0.6_(magnified_and_blurred)": 0.0009,
+  "share_of_blocks_along_under_0.6": 0.0293
+ },
+ "tile_edge_versus_ordinary_row_boundaries_colour": {
+  "seed1": {
+   "jump_across_the_tile_edge_over_a_typical_jump": 1.08,
+   "jumps_across_the_four_strongest_ordinary_row_boundaries_inside_the_tile_(y_position, jump)": [
+    [
+     277,
+     1.96
+    ],
+    [
+     554,
+     2.52
+    ],
+    [
+     771,
+     2.09
+    ],
+    [
+     982,
+     1.92
+    ]
+   ]
+  },
+  "seed2": {
+   "jump_across_the_tile_edge_over_a_typical_jump": 1.4,
+   "jumps_across_the_four_strongest_ordinary_row_boundaries_inside_the_tile_(y_position, jump)": [
+    [
+     69,
+     1.78
+    ],
+    [
+     502,
+     2.07
+    ],
+    [
+     1000,
+     2.49
+    ],
+    [
+     1159,
+     1.65
+    ]
+   ]
+  },
+  "seed3": {
+   "jump_across_the_tile_edge_over_a_typical_jump": 1.61,
+   "jumps_across_the_four_strongest_ordinary_row_boundaries_inside_the_tile_(y_position, jump)": [
+    [
+     93,
+     1.65
+    ],
+    [
+     216,
+     1.92
+    ],
+    [
+     494,
+     2.6
+    ],
+    [
+     725,
+     1.85
+    ]
+   ]
+  }
  }
 }

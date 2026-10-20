@@ -1,3 +1,4 @@
+# ROUND 1 TOOL (kept for the record). It finds joints by dark runs at least 60 dots tall, which can miss faint or short joints; round 2 finds them exactly from the board numbers (tools/joint_contact_sheet_round2.py).
 # What this does (plain words): finds every board joint (a dark crack that runs up and down) in the finished default tiles and puts a full-size
 # (one dot = one dot) crop of each on a sheet, so that every joint can be looked at for visible cuts. A joint is found as a thin dark vertical run (brightness under 0.2) at
 # least 60 dots tall in the colour picture. Output: sheets/joints_seed1.jpg, seed2, seed3 (and the number of joints found per tile).

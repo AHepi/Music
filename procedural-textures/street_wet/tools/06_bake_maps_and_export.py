@@ -35,11 +35,19 @@ sys.dont_write_bytecode = True
 import apply_wetness_to_set as aw  # noqa: E402
 
 args = sys.argv[sys.argv.index('--') + 1:]
+REUSE = '--reuse' in args          # skip the photographing and use the picture files already in MAPS_FOLDER (to rebuild only the materials and the .glb)
+args = [a for a in args if a != '--reuse']
 maps_folder, glb_path, blend_path = args[0], args[1], args[2]
 wetness = float(args[3]) if len(args) > 3 else 0.85
 puddles = float(args[4]) if len(args) > 4 else 0.5
 os.makedirs(maps_folder, exist_ok=True)
 scene = bpy.context.scene
+# the picture settings of the file as it is: the photographing changes them, and they are put back before the baked .blend is saved (a first run forgot, and the baked street was drawn with no sky light and no film look)
+view = scene.view_settings
+background_node = scene.world.node_tree.nodes['Background']
+SAVED = dict(view=(view.view_transform, view.look, view.exposure, view.gamma), world=(tuple(background_node.inputs['Color'].default_value), background_node.inputs['Strength'].default_value),
+             render=(scene.render.dither_intensity, scene.cycles.pixel_filter_type, scene.cycles.filter_width, scene.cycles.samples, scene.cycles.use_adaptive_sampling,
+                     scene.cycles.use_denoising, scene.cycles.max_bounces, scene.render.engine))
 report = {'wetness': wetness, 'puddles': puddles, 'seconds': {}, 'files': {}}
 started_all = time.time()
 
@@ -63,8 +71,9 @@ WALL_SOURCES = {   # baked wall name: (object to photograph, its wall material v
     'wall_brick_door_right': ('left_row_a_cottage_02_walls', 'cottage_brick_door_right'),
 }
 # how much darker (as a share of dry) each material is when wet, measured by tools/04_colour_ratios.py (main camera, state wet 0.85 / puddles 0.5)
-COLOUR_RATIO = {'channel_stones': 0.66, 'kerb_stone': 0.75, 'colliery_brick': 0.86, 'cottage_brick': 0.86, 'cottage_stone': 0.90, 'dark_dressed_stone': 0.82,
-                'dressed_stone': 0.88, 'roof_slate': 0.90, 'colliery_yard': 0.5}
+# round 2: measured again with the round 2 settings (tools/04b_colour_ratios.py on work/r30/colour, main camera); the walls' own numbers matter only for the chimneys, which wear the plain wall materials
+COLOUR_RATIO = {'channel_stones': 0.69, 'kerb_stone': 0.76, 'colliery_brick': 0.86, 'cottage_brick': 0.70, 'cottage_stone': 0.72, 'dark_dressed_stone': 0.82,
+                'dressed_stone': 0.88, 'roof_slate': 0.90, 'colliery_yard': 0.56}
 
 # ------------------------------------------------------------------------------------------------------------------------------ before the layer goes on
 for name in aw.MATERIALS:                         # keep a clean copy of every material that will be changed (the .glb materials are made from these)
@@ -76,6 +85,8 @@ groups = {name: pair[0] for name, pair in aw.APPLIED.items()}
 # ------------------------------------------------------------------------------------------------------------------------------ the photographer
 def emission_rig(material_names):
     rig = {}
+    if REUSE:
+        return rig
     for name in material_names:
         tree = bpy.data.materials[name].node_tree
         output = next(n for n in tree.nodes if n.type == 'OUTPUT_MATERIAL')
@@ -164,6 +175,9 @@ def set_up_photography(width, height, samples=8):
 
 
 def shoot(path, channel):
+    if REUSE:
+        extension = 'jpg' if channel == 'colour' else 'png'
+        return f'{path}.{extension}'
     scene.view_settings.view_transform = 'Standard' if channel == 'colour' else 'Raw'
     settings = scene.render.image_settings
     if channel == 'colour':
@@ -239,6 +253,9 @@ for key, (object_name, variant) in WALL_SOURCES.items():
         show(rig, channel)
         wall_maps.setdefault(key, {})[channel] = shoot(os.path.join(maps_folder, f'{key}_{channel}'), channel)
     print('PHOTOGRAPHED', key)
+    # the interior material was wired to a black emission for the photographs: put its own shader back (a mistake of the first run: it went into the .glb as an empty white metal)
+    interior = bpy.data.materials['interior_dark'].node_tree
+    interior.links.new(next(n for n in interior.nodes if n.type == 'BSDF_PRINCIPLED').outputs['BSDF'], next(n for n in interior.nodes if n.type == 'OUTPUT_MATERIAL').inputs['Surface'])
     mesh = obj.data
     loops = np.empty(len(mesh.loops), dtype=np.int32)
     mesh.loops.foreach_get('vertex_index', loops)
@@ -266,7 +283,7 @@ def clean_copy_normal(name):
     return picture, normal_map.inputs['Strength'].default_value
 
 
-def baked_material(material_name, maps, normal_from):
+def baked_material(material_name, maps, normal_from, smooth_picture=None):
     """A material that wears only pictures: colour, roughness, coat, coat roughness, specularity on UV2; the photo's own normal map on the first coordinates."""
     material = bpy.data.materials.new(material_name)
     material.use_nodes = True
@@ -297,6 +314,8 @@ def baked_material(material_name, maps, normal_from):
     principled.inputs['Coat IOR'].default_value = 1.33
     principled.inputs['Metallic'].default_value = 0.0
     normal_picture, strength = clean_copy_normal(normal_from)
+    if smooth_picture is not None:
+        normal_picture = smooth_picture       # round 2: a wet road wears the smoothed relief picture (water has filled the finest grain)
     normal_node = tree.nodes.new('ShaderNodeTexImage')
     normal_node.image = normal_picture
     normal_map = tree.nodes.new('ShaderNodeNormalMap')
@@ -315,7 +334,8 @@ def swap_material(old_name, new_material):
 
 baked_names = {}
 for old_name, normal_from in (('street_setts', 'street_setts'), ('channel_stones', 'channel_stones'), ('pavement_flags', 'pavement_flags')):
-    new = baked_material(old_name + '_wet', ground_maps, normal_from)
+    smooth_name = aw.MATERIALS[old_name].get('smooth_normal')
+    new = baked_material(old_name + '_wet', ground_maps, normal_from, smooth_picture=load_image(aw.TEX + smooth_name, False) if smooth_name else None)
     swap_material(old_name, new)
     baked_names[old_name] = new.name
 for key, (object_name, variant) in WALL_SOURCES.items():
@@ -331,11 +351,13 @@ for name, spec in aw.MATERIALS.items():
     tree = flat.node_tree
     principled = next(n for n in tree.nodes if n.type == 'BSDF_PRINCIPLED')
     effective = min(1.0, wetness * spec.get('wetness_scale', 1.0))
-    principled.inputs['Roughness'].default_value = min(principled.inputs['Roughness'].default_value, spec['wet_roughness'])
-    principled.inputs['Coat Weight'].default_value = 0.3 * effective
+    principled.inputs['Roughness'].default_value = min(principled.inputs['Roughness'].default_value, spec['wet_roughness'])   # (wet roughness is the soaked value; the flat stand-in is soaked)
+    # round 2: the flat numbers follow the material's own settings (the walls, roofs and stones got little coat and no extra shine), not round 1's fixed 0.3 and +0.25,
+    # which made these stand-ins 1.2 to 1.7 times too bright against the live layer
+    principled.inputs['Coat Weight'].default_value = spec.get('film_coat', 0.3) * effective
     principled.inputs['Coat Roughness'].default_value = 0.2
     principled.inputs['Coat IOR'].default_value = 1.33
-    principled.inputs['Specular IOR Level'].default_value = 0.5 + 0.25 * effective
+    principled.inputs['Specular IOR Level'].default_value = 0.5 + spec.get('specular_boost', 0.25) * effective
     multiply = next((n for n in tree.nodes if n.type == 'MIX' and n.blend_type == 'MULTIPLY'), None)
     ratio = COLOUR_RATIO.get(name, 0.85)
     if multiply is not None:
@@ -356,11 +378,15 @@ bpy.ops.export_scene.gltf(filepath=glb_path, export_format='GLB', export_yup=Tru
                           export_image_format='AUTO', export_materials='EXPORT')
 report['seconds']['glb_export'] = round(time.time() - started, 1)
 report['glb_bytes'] = os.path.getsize(glb_path)
+view.view_transform, view.look, view.exposure, view.gamma = SAVED['view']
+background_node.inputs['Color'].default_value, background_node.inputs['Strength'].default_value = SAVED['world']
+(scene.render.dither_intensity, scene.cycles.pixel_filter_type, scene.cycles.filter_width, scene.cycles.samples, scene.cycles.use_adaptive_sampling, scene.cycles.use_denoising,
+ scene.cycles.max_bounces, scene.render.engine) = SAVED['render']
 bpy.ops.wm.save_as_mainfile(filepath=blend_path, copy=True)
 report['seconds']['total'] = round(time.time() - started_all, 1)
 report['ground_atlas'] = {'width': GROUND_WIDTH, 'height': GROUND_HEIGHT, 'dots_per_metre': PPM_GROUND, 'x_range': [-X_HALF, X_HALF], 'y_range': [Y0, Y1]}
 report['wall_maps'] = {'width': WALL_WIDTH, 'height': WALL_HEIGHT, 'dots_per_metre': PPM_WALL}
 report['materials_in_glb'] = baked_names
-with open(os.path.join(maps_folder, 'bake_report.json'), 'w') as handle:
+with open(os.path.join(maps_folder, 'bake_report_rebuild.json' if REUSE else 'bake_report.json'), 'w') as handle:
     json.dump(report, handle, indent=1)
 print('REPORT', json.dumps(report['seconds']), report['glb_bytes'])

@@ -135,6 +135,12 @@ def build():
     for k, v in wj.items():
         erows.append([k.replace('_', ' '), v['left_right_wrap_jump_over_a_typical_jump'], v['top_bottom_wrap_jump_over_a_typical_jump']])
     T['EDGE_TABLE'] = md_table(['Default tile (the jump from its last dot line to its first, over a typical jump between neighbouring dot lines)', 'left-right', 'top-bottom'], erows)
+    ev = ck.get('tile_edge_versus_ordinary_row_boundaries_colour', {})
+    erows2 = []
+    for k, v in ev.items():
+        ords = v['jumps_across_the_four_strongest_ordinary_row_boundaries_inside_the_tile_(y_position, jump)']
+        erows2.append([k.replace('seed', 'seed '), v['jump_across_the_tile_edge_over_a_typical_jump'], ' / '.join(str(j) for _, j in ords)])
+    T['EDGE_VS_ROW_TABLE'] = md_table(['Colour of the default tile', 'jump across the tile edge (wrap-around)', 'jumps across the four strongest ordinary row boundaries inside the same tile'], erows2)
     st = rp.get('seam_test_default_tile_2x2', {})
     srows = [[ch, v.get('jump_across_the_vertical_tile_line_over_a_typical_jump'), v.get('jump_across_the_horizontal_tile_line_over_a_typical_jump'),
               v.get('largest_ordinary_row_boundary_jump_over_a_typical_jump_(for_comparison)'), v.get('mean_difference_between_the_four_tiles_0_to_1')] for ch, v in st.items()]
@@ -241,6 +247,20 @@ def build():
     V['wrap_tb_up'] = get(wj, 'uploaded_height_for_comparison', 'top_bottom_wrap_jump_over_a_typical_jump')
     V['wrap_lr_up'] = get(wj, 'uploaded_height_for_comparison', 'left_right_wrap_jump_over_a_typical_jump')
     V['squeeze_share'] = get(sq, 'share_of_blocks_across_under_0.6_(magnified_and_blurred)')
+    for k, name in (('default', 'def'), ('no_landmark_painting', 'nolm'), ('no_bending_no_stretch', 'nobend'), ('windows_only', 'wo'), ('three_boards_per_row', 'three')):
+        v = (sw.get(k) or {}).get('look_checker_test') or {}
+        V[f'sw_{name}_06'], V[f'sw_{name}_07'] = pct(v.get('share_over_0.6')), pct(v.get('share_over_0.7'))
+        V[f'sw_{name}_med'] = v.get('median', 'n/a')
+    nb = load('scores/neighbour_count_default_tile_seed1.json')
+    V['tile_same_pairs'], V['tile_pairs'] = nb.get('same_source_row', '?'), nb.get('touching_pairs', '?')
+    V['tile_edge_same'], V['tile_edge_pairs'] = nb.get('of_which_same_source_row', '?'), nb.get('pairs_across_the_tile_edge_top_bottom', '?')
+    V['board_length'] = get(sr, 'board_length_in_tiles_median_and_90th_percent', default=['?'])[0]
+    V['cmp_colour_now'] = f3(mean(cmps, 'colour'))
+    V['cmp_colour_before'] = f3(r1mean('comparison', 'colour'))
+    V['touching_all'] = tp.get('all_touching_pairs', '?')
+    V['twin_pairs'] = tp.get('touching_pairs_with_the_same_source_row_AND_half_or_more_of_the_same_source_stretch', '?')
+    tl = [it['groups']['tiling'] for it in mains if it]
+    V['tiling_range'] = f"{min(tl):.2f} to {max(tl):.2f}" if tl else '?'
     V['seeds_corr'] = f"{sd.get('correlation_seed1_seed2')} / {sd.get('correlation_seed1_seed3')} / {sd.get('correlation_seed2_seed3')}"
     V['cmp_de'] = get(mc, 'seed1', 'mean_delta_e')
     V['cmp_de95'] = get(mc, 'seed1', 'ninety_fifth_percent_delta_e')
@@ -258,6 +278,8 @@ def fill(text, V, T, extra):
         for src in (extra, T, V):
             if name in src:
                 return str(src[name])
+            if name.lower() in src:                      # the templates may write a number's name in capitals
+                return str(src[name.lower()])
         raise KeyError(f'unfilled mark @@{name}@@')
     out = re.sub(r'@@([A-Za-z0-9_]+)@@', repl, text)
     return out
@@ -266,11 +288,19 @@ def fill(text, V, T, extra):
 def main():
     V, T = build()
     extra = {}
-    for name in ('RESULT_PAGE', 'RESULTS', 'ROUND2_DEAD_ENDS', 'NOT_TESTED', 'ROUND2'):
-        p = os.path.join(TEMPLATES, f'{name.lower()}.md')
+
+    def read(name):
+        p = os.path.join(TEMPLATES, name)
         if os.path.exists(p):
             with open(p) as handle:
-                extra[name] = fill(handle.read(), V, T, {})
+                return handle.read()
+        return ''
+    extra['SWITCH_READING'] = fill(read('switch_reading.md'), V, T, {})
+    extra['LIT_READING'] = fill(read('lit_reading.md'), V, T, {})
+    parts = [read(f'results_part{i}.md') for i in (1, 2, 3)]
+    extra['RESULTS'] = fill('\n\n'.join(p for p in parts if p), V, T, extra)
+    for name in ('RESULT_PAGE', 'ROUND2_DEAD_ENDS', 'NOT_TESTED', 'ROUND2'):
+        extra[name] = fill(read(f'{name.lower()}.md'), V, T, {})
     with open(os.path.join(TEMPLATES, 'recipe_part_a.md')) as handle:
         recipe = fill(handle.read(), V, T, extra)
     with open(os.path.join(BASE, RECIPE_GUIDE), 'w') as handle:

@@ -1,3 +1,4 @@
+# ROUND 1 TOOL (kept for the record). It cannot be re-run as shipped: it opens area/area_4x4/colour.png, which tools/shrink_area_files.py turned into JPEG and deleted, and it reads round 1 file names. The honesty checker re-ran a patched copy and got the same numbers (the colour near-copy share 28 instead of 30 percent because of the JPEG). Use tools/measure_repeats_round2.py, which reads PNG or JPEG.
 # What this does (plain words): checks whether a BIG AREA made by the wood recipe repeats. It needs the pictures made by
 # tools/run_jobs.py with tests/jobs_final_b.json (area/area_4x4 colour and height, the exact "which source dot was used" pictures, the
 # board colours and the flips/knots picture, and area/tile_repeated_2x2). Four checks, each written to scores/repeat_tests_round1.json:

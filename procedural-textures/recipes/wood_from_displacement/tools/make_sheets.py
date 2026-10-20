@@ -1,3 +1,4 @@
+# ROUND 1 TOOL (its helper functions are used by tools/make_sheets_round2.py, which makes the round 2 sheets).
 # What this does (plain words): puts the finished pictures of the wood-from-maps recipe side by side on labelled sheets (JPEG, for looking at), in sheets/.
 #   wood_sheet.jpg  reference | earlier wood recipe (best new tile) | new MAIN | new COMPARISON, with a row of 400 x 400 close-ups below
 #   seeds.jpg       three seeds, MAIN (top) and COMPARISON (bottom)

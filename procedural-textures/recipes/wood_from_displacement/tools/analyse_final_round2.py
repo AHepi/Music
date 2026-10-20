@@ -58,27 +58,29 @@ def main():
         with open(OUT) as handle:
             out = json.load(handle)
     out['what_this_is'] = 'Small checks on the finished wood-from-maps pictures, round 2 (tools/analyse_final_round2.py). Seed 1 unless it says otherwise. A section is only replaced when its pictures exist.'
-    # ---- source unchanged
+    # ---- source unchanged (the colour part needs tests/renders/source_unchanged/colour.png, which tools/shrink_area_files_round2.py deletes: then the earlier colour numbers are kept)
     d = os.path.join(BASE, 'tests', 'renders', 'source_unchanged')
     if os.path.exists(os.path.join(d, 'height.png')):
         up_h = np.asarray(Image.open(os.path.join(REF, 'height_as_uploaded.png'))).astype(np.float64) / 255.0
         h = height16(os.path.join(d, 'height.png'))
-        up_c = rgb(os.path.join(REF, 'colour.png'))
-        c = rgb(os.path.join(d, 'colour.png'))
         n = mn.normal_from_height(cv2.imread(os.path.join(d, 'height.png'), cv2.IMREAD_UNCHANGED)[..., 0], 8.0)
         up_n = cv2.imread(os.path.join(REF, 'normal.png'), cv2.IMREAD_UNCHANGED)[..., ::-1].astype(np.float64) / 255.0 * 2 - 1
-        out['source_unchanged_check'] = {
+        section = out.get('source_unchanged_check', {})
+        section.update({
             'height_mean_absolute_difference_to_uploaded_0_to_1': round(float(np.abs(h - up_h).mean()), 5),
             'height_share_of_dots_differing_by_more_than_2_of_255': round(float((np.abs(h - up_h) > 2 / 255).mean()), 4),
-            'colour_mean_absolute_difference_to_uploaded_0_to_1': round(float(np.abs(c - up_c).mean()), 5),
             'normal_from_baked_height_strength_8_mean_absolute_difference_x_y_z': [round(float(np.abs(n[..., i] - up_n[..., i]).mean()), 4) for i in range(3)],
-            'for_comparison_the_normal_rule_on_the_uploaded_height_itself_x_y_z': [round(float(np.abs(mn.normal_from_height(np.round(up_h * 255).astype(np.uint8), 8.0)[..., i] - up_n[..., i]).mean()), 4) for i in range(3)]}
-    # ---- half tile shift
+            'for_comparison_the_normal_rule_on_the_uploaded_height_itself_x_y_z': [round(float(np.abs(mn.normal_from_height(np.round(up_h * 255).astype(np.uint8), 8.0)[..., i] - up_n[..., i]).mean()), 4) for i in range(3)]})
+        if os.path.exists(os.path.join(d, 'colour.png')):
+            section['colour_mean_absolute_difference_to_uploaded_0_to_1'] = round(float(np.abs(rgb(os.path.join(d, 'colour.png')) - rgb(os.path.join(REF, 'colour.png'))).mean()), 5)
+        out['source_unchanged_check'] = section
+    # ---- half tile shift (colour part kept from the earlier measurement when its colour pictures were deleted)
     d0, d1 = os.path.join(BASE, 'outputs', 'main_seed1'), os.path.join(BASE, 'tests', 'renders', 'shift_half')
-    if os.path.exists(os.path.join(d1, 'height.png')) and os.path.exists(os.path.join(d0, 'height.png')):
-        res = {}
-        for channel, loader in (('colour', rgb), ('height', lambda p: height16(p)[..., None] * np.ones(3))):
-            a, b = loader(os.path.join(d0, channel + '.png')), loader(os.path.join(d1, channel + '.png'))
+    res = out.get('half_tile_shift_test_1254', {})
+    for channel, loader in (('colour', rgb), ('height', lambda p: height16(p)[..., None] * np.ones(3))):
+        pa, pb = os.path.join(d0, channel + '.png'), os.path.join(d1, channel + '.png')
+        if os.path.exists(pa) and os.path.exists(pb):
+            a, b = loader(pa), loader(pb)
             half = 627
             rolled = np.roll(a, (-half, -half), axis=(0, 1))
             wrong = np.roll(a, (-half // 2 + 7, -half // 3), axis=(0, 1))
@@ -86,6 +88,7 @@ def main():
             wdiff = np.abs(wrong - b).mean(axis=2)
             res[channel] = {'slid_bake_versus_slid_picture_mean_absolute_difference_0_to_1': round(float(diff.mean()), 5), 'share_of_dots_differing_by_more_than_0.1': round(float((diff > 0.1).mean()), 5),
                             'wrong_slide_control_mean': round(float(wdiff.mean()), 4), 'wrong_slide_control_share_over_0.1': round(float((wdiff > 0.1).mean()), 4)}
+    if res:
         out['half_tile_shift_test_1254'] = res
     # ---- tile edge jumps of the default tile repeated (wrap-around) for the three seeds
     jumps = {}
@@ -102,6 +105,30 @@ def main():
     jumps['uploaded_height_for_comparison'] = {'left_right_wrap_jump_over_a_typical_jump': round(float(np.abs(up_h[:, 0] - up_h[:, -1]).mean() / np.abs(np.diff(up_h, axis=1)).mean()), 2),
                                                'top_bottom_wrap_jump_over_a_typical_jump': round(float(np.abs(up_h[0] - up_h[-1]).mean() / np.abs(np.diff(up_h, axis=0)).mean()), 2)}
     out['tile_wrap_edge_jumps'] = jumps
+    # ---- is the tile edge just another row boundary? Compare the jump across the tile edge with the jumps across the ordinary row boundaries INSIDE the same tile
+    # (every row boundary is a dark band with pebbles, so its jump is bigger than the average jump between neighbouring dot lines)
+    peaks = {}
+    for sd in (1, 2, 3):
+        pth = os.path.join(BASE, 'outputs', f'main_seed{sd}', 'colour.png')
+        if not os.path.exists(pth):
+            continue
+        g = luma(rgb(pth))
+        typical = float(np.abs(np.diff(g, axis=0)).mean())
+        prof = np.abs(np.diff(g, axis=0)).mean(axis=1) / typical            # jump between dot line y and y + 1, over a typical jump
+        wrap = float(np.abs(g[0] - g[-1]).mean() / typical)
+        found = []
+        order = np.argsort(-prof)
+        for y in order:
+            if y < 12 or y > len(prof) - 12:
+                continue
+            if all(abs(int(y) - f[0]) > 80 for f in found):
+                found.append((int(y), float(prof[y])))
+            if len(found) == 4:
+                break
+        peaks[f'seed{sd}'] = {'jump_across_the_tile_edge_over_a_typical_jump': round(wrap, 2),
+                              'jumps_across_the_four_strongest_ordinary_row_boundaries_inside_the_tile_(y_position, jump)': [[y, round(v, 2)] for y, v in sorted(found)]}
+    if peaks:
+        out['tile_edge_versus_ordinary_row_boundaries_colour'] = peaks
     # ---- colour and relief match
     corr = {}
     for name, cfolder, hfolder in (('main_seed1', 'main_seed1', 'main_seed1'), ('main_seed2', 'main_seed2', 'main_seed2'), ('main_seed3', 'main_seed3', 'main_seed3'),
