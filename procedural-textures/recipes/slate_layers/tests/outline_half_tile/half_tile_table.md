@@ -1,0 +1,16 @@
+| tiles across | view | picture | mean difference (of 255) | share of dots over 40 % | wrong-roll control mean | wrong-roll control share % |
+|---|---|---|---|---|---|---|
+| 1 | none | colour | 2.072 | 0.031 | 24.357 | 19.407 |
+| 1 | outline_and_shadow.mask | height | 2.123 | 0.431 | 71.378 | 48.827 |
+| 1 | outline_and_shadow.colour | colour | 1.121 | 0.589 | 9.802 | 8.259 |
+| 1 | outline_and_shadow.colour | height | 0.375 | 0.001 | 3.53 | 4.414 |
+| 1 | outline_and_shadow.height | height | 1.424 | 0.291 | 33.198 | 32.245 |
+| 1 | outline_and_shadow.roughness | height | 0.991 | 0.007 | 18.337 | 19.22 |
+| 2 | none | colour | 3.189 | 0.087 | 29.345 | 27.133 |
+| 2 | outline_and_shadow.mask | height | 4.01 | 1.626 | 96.265 | 61.605 |
+| 2 | outline_and_shadow.colour | colour | 1.916 | 1.534 | 12.023 | 11.148 |
+| 2 | outline_and_shadow.colour | height | 0.67 | 0.003 | 3.64 | 3.048 |
+| 2 | outline_and_shadow.height | height | 2.619 | 0.831 | 39.591 | 36.436 |
+| 2 | outline_and_shadow.roughness | height | 1.767 | 0.103 | 21.396 | 19.873 |
+| 2 | none | colour (picture against itself rolled by ONE base tile; must differ a lot) | 19.855 | 9.79 |  |  |
+| 2 | outline_and_shadow.mask | height (the layer mask against itself rolled by ONE base tile; the layer follows the layout, so slates differ) | 37.603 | 31.911 |  |  |

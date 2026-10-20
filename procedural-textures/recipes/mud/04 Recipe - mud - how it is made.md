@@ -8,44 +8,56 @@ Words used (one word for each thing):
 * **layer** = one kind of thing in a description: **ruts**, **clods**, **puddles**, **stones**, **patches**.
 * **rut** = a wheel groove: a broad dark **band**, a darker thin **groove** inside it, a lighter **bank** beside it and grey **wet streaks** along it. **clod** = one small flat piece of the crumbly ground. **patch** = one flat-coloured area cut out of the reference picture ("traced").
 * **palette** = the list of flat colours (16 for the first layers). **ladder** = a table that adds one layer at a time and shows what each layer bought.
-* **pixel scores** = `pixel_compare.py` (is it the same picture, dot for dot). **kind score** = `texture_compare.py` overall (is it the same KIND of surface). Tiers: none, layout, close, exact.
+* **pixel scores** = `pixel_compare.py` (is it the same picture, dot for dot). **kind score** = `texture_compare.py` overall (is it the same KIND of surface, wherever things are; 0 to 1, a re-shuffled copy of the reference about 0.99; against mud the other five references score 0.179 to 0.498, not "about 0.1" as the project notes said: `cookbook/06 Guide - baking and checking maps.md`, section 7.4). Tiers: none, layout, close, exact.
+* **KB** = 1000 bytes in this guide (503.0 KB = 503,014 bytes). The project's size check (`lib/description_audit.py`) counts its limits in units of 1024 bytes: S = 8 x 1024 = 8,192 bytes, M = 65,536 bytes, L = 524,288 bytes.
+
+**The pixel scores in plain words** (all from `lib/pixel_compare.py`):
+* **SSIM** ("structural similarity"): a number from 0 to 1 that says how alike the light-and-dark structure of two pictures is, dot for dot. 1 = the same picture.
+* **colour difference**: the average difference in colour between two dots in the same place, in the standard colour-difference unit (often written "Delta E"). 0 = the same colour; about 2.3 is the smallest difference most people can see side by side; 10 is clearly a different shade.
+* **edge skill**: how many of the reference's edges the generated picture puts within 2 dots of the same place, with the share a wrongly placed copy would get by luck taken off. 0 = no better than luck, 1 = every edge in place.
+* **height error**: the average difference between the generated and the reference height picture, in levels of 255, after the best brightness-and-contrast fix.
+* **normal angle**: the average angle, in degrees, between the generated and the reference normal map. Yardstick: a completely flat normal map is 23.5 degrees off on this mud.
+* **tiers**: a tier is reached when ALL its limits pass. "layout": edge skill at least 0.30, colour difference at most 20, height error at most 40. "close": edge skill 0.55, SSIM 0.60, colour difference 10, height error 20, normal angle 12 degrees. "exact": edge skill 0.85, SSIM 0.92, colour difference 3, height error 6, normal angle 4 degrees. A measure that cannot be made (no reference map) is left out of the test.
+* **seam ratio**: the jump in brightness across the tile's wrap-around edge divided by an ordinary jump between two neighbouring dots. About 1.0 = no seam.
+
+An independent checker re-ran this work afterwards; what it confirmed and what was corrected is in the last section, "Checked independently".
 
 ## 1. The result on one page
 
 * The reference maps were made from the colour picture, and I proved how (section 2). So the real problem is the colour picture.
-* **A description of 503.0 KB (the L class, limit 512 KB) reproduces the reference colour with SSIM 0.698, colour difference 5, edge skill 0.685; height error 17.6 levels, normal angle 18.6 degrees: tier "layout".** It does not reach "close" because the normal map error is above 12 degrees (section 6 says why and what the best possible is).
+* **A description of 503.0 KB (the L class, limit 512 KB) reproduces the reference colour with SSIM 0.698, colour difference 5, edge skill 0.685; height error 17.6 levels, normal angle 18.6 degrees: tier "layout".** It does not reach "close" because the normal map error is above 12 degrees (section 6 says why and what the best possible is). **This L class is a traced copy of the reference, not a description of mud:** it holds 76,058 polygon corners cut out of the reference picture (45,388 + 15,298 in the two traced ground layers, 13,282 for the stones, 2,090 for the puddles; counted by the independent checker).
 * The same generator, driven by the smaller descriptions, gives the S class (7.4 KB: SSIM 0.367, kind 0.267) and the M class (63.9 KB: SSIM 0.403, kind 0.362).
-* A sampler invents NEW mud tiles from numbers measured on the reference: 8 tiles, kind score 0.383 on average (range 0.353 to 0.416), SSIM against the reference only 0.283 (they are not copies), SSIM between the tiles 0.343 (they differ from each other). One 2508-dot picture of new unique mud was baked as the area test.
-* The SAME generator and sampler, with only numbers changed, made a snowy track (not given) and re-fitted the golden-puddle mud (colour only).
+* A sampler invents NEW mud tiles from numbers measured on the reference: 8 tiles, kind score 0.383 on average (range 0.353 to 0.416), SSIM against the reference only 0.283 (they are not copies), SSIM between the tiles 0.343 (they differ from each other). One 2508-dot picture of new unique mud was baked as the area test. **The kind score does not prove the new tiles are mud-like:** the same tiles score nearly as high against other surfaces (section 7.2), so "same kind of surface" for them rests on looking; by eye they are mud-like but clearly poorer than the reference.
+* The SAME generator made a snowy track (not given): numbers changed, plus one small new sampler option (`maps`, to move the height stretch; section 9.1). The same analysis re-fitted the golden-puddle mud (colour only; its "close" tier is only because its height and normal cannot be measured, section 6).
 
 ![the ladder](guide_pictures/ladder.png)
 
 (Top left: the reference. Then, in reading order: flat ground; + puddle outlines; + 40 big stones; + wheel ruts; the S class; the M class; traced ground with 2000 and 5000 patches; the final L class.)
 
-## 2. Step 1: how the reference maps were made (the "derivation ceiling")
+## 2. How the reference maps were made (the "derivation ceiling")
 
 Before drawing anything I fitted the smallest rule that turns the reference COLOUR into the reference HEIGHT and NORMAL map (`analysis/derivation_ceiling.py`, plain Python):
-* **Height = a straight stretch of the brightness of the colour, then a light blur.** Brightness = 0.299 R + 0.587 G + 0.114 B (of the sRGB numbers). height = (brightness - 20) / (128 - 20), cut to 0..1, blurred with a Gaussian of 0.5 dot. Mean error 3.32 height levels (out of 255); correlation 0.9971.
-* **Normal = the slope of the 8-bit height times 9** (OpenGL: green up). Made from the uploaded height this matches the uploaded normal map to 0.345 degrees. Made from the height that the colour gives, it is 3.701 degrees off with a smoother slope filter (strength 10) and 4.759 degrees with the plain two-neighbour slope (strength 8). A flat normal map would be 23.495 degrees off.
+* **Height = a straight stretch of the brightness of the colour, then a light blur.** Brightness = 0.299 R + 0.587 G + 0.114 B (of the sRGB numbers). height = (brightness - 20) / (128 - 20), cut to 0..1, blurred with a Gaussian of 0.5 dot (a soft round blur, strongest in the middle). Mean error 3.32 height levels (out of 255); correlation 0.9971. (The independent checker's own fit of the same straight line gave 3.19 levels, correlation 0.9973: the same result.)
+* **Normal = the slope of the 8-bit height times 9** (OpenGL: green up). Made from the uploaded height this matches the uploaded normal map to 0.345 degrees. Made from the height that the colour gives, it is 3.701 degrees off with a smoother slope filter (strength 10) and 4.759 degrees with the plain two-neighbour slope (strength 8). (The checker, with the generator's own settings, plain slope and strength 9, got 4.42 degrees.) A flat normal map would be 23.495 degrees off.
 * So height and normal are NOT drawn: the generator draws the colour and makes the maps from it, the way the reference was made. The ceiling for derived maps is about 3.3 height levels and 3.7 to 4.8 degrees.
 
 ![derivation check](guide_pictures/derivation_check.png)
 
-A second ceiling, for any description that only says "which palette colour is where": snapping every dot of the reference to its nearest of 16 colours keeps SSIM 0.916, colour difference 3.29, edge skill 0.854, height error 8.9, normal angle 9.8 (tier close). Cleaning single-dot specks with a 3 x 3 median filter already drops it to SSIM 0.82 and normal angle 13.4; a 5 x 5 filter to 0.705 and 18.2 degrees. **The normal map lives in the 1 to 3 dot detail**: that is why none of my descriptions of 512 KB or less reaches the "close" tier.
+A second ceiling, for any description that only says "which palette colour is where": snapping every dot of the reference to its nearest of 16 colours keeps SSIM 0.916, colour difference 3.29, edge skill 0.854, height error 8.9, normal angle 9.8 (tier close). (The checker's own snap to the same 16 colours gave SSIM 0.937, colour difference 3.47, edge skill 0.879, height error 7.5, normal angle 8.8, also tier close; `verify/ceiling_k16/pixel.json`.) Cleaning single-dot specks with a 3 x 3 median filter (each dot takes the middle value of its 3 x 3 neighbourhood, which wipes out lone dots) already drops it to SSIM 0.82 and normal angle 13.4; a 5 x 5 filter to 0.705 and 18.2 degrees. **The normal map lives in the 1 to 3 dot detail**: that is why none of my descriptions of 512 KB or less reaches the "close" tier.
 
-## 3. Step 2: looking at the colour picture (analysis)
+## 3. Looking at the colour picture (analysis)
 
 All analysis scripts are plain Python (OpenCV and numpy) in `analysis/`; they read the reference, the generator never does.
 
 **3.1 It is a painted picture.** 16 palette colours reproduce it to a mean colour difference of 3.25 (8 colours: 4.5; 12: 3.68; 24: 2.74; 32: 2.47; `palette_and_labels.py`). It has about 197,000 tiny same-colour areas (157,000 of them 4 dots or less), and the areas of 64 to 4096 dots hold 45 per cent of the picture. The mud palette: earth browns from (46,29,24) to (156,112,82), blue-grey water (86,94,104) and (107,119,126), stone greys and blacks (39,38,43), (64,66,73), (26,19,18), a grey-brown shine (98,87,83).
 
-**3.2 Find what is NOT earth (the key trick).** Earth is orange-brown; stones and water are grey, blue-grey or black. In the Lab colour space the "b" number (blue-yellow balance) separates them: earth is mostly above 10 (its darkest brown grooves come down to about 7), stones and water below 7. A plain test `b < 7` (`element_tools.non_earth_mask`) marks stones and water cleanly (about 31 per cent of the picture); holes inside it are filled (a stone's tan highlight). I first tried to sort stones and water by their palette colours and failed (section 10): a stone's lit face is blue-grey like water and a pale stone is tan like earth. For another picture the one number to calibrate is that threshold (the golden mud needed 3 instead of 7); a quick rule: pick it so that the non-earth part is about a third of the picture.
+**3.2 Find what is NOT earth (the key trick).** Earth is orange-brown; stones and water are grey, blue-grey or black. "Lab" is a way of writing a colour as three numbers (lightness, green-red, blue-yellow); its "b" number (the blue-yellow balance) separates them: earth is mostly above 10 (its darkest brown grooves come down to about 7), stones and water below 7. A plain test `b < 7` (`element_tools.non_earth_mask`) marks stones and water cleanly (about 31 per cent of the picture); holes inside it are filled (a stone's tan highlight). I first tried to sort stones and water by their palette colours and failed (section 10): a stone's lit face is blue-grey like water and a pale stone is tan like earth. For another picture the one number to calibrate is that threshold (the golden mud needed 3 instead of 7); a quick rule: pick it so that the non-earth part is about a third of the picture.
 
-**3.3 Puddles and stones are told apart by shape and colour.** Among the non-earth areas, a **puddle** is one that survives a big opening (13 dots), is big (1500 dots or more), is ragged (solidity under 0.82: area divided by the area of its convex hull) or very big, and is at least 40 per cent clearly blue (b under -3.5, not dark). Found: 8 big puddles (areas 3000 to 31,600 dots), their outlines (about 100 corners each at 1.5 dots accuracy) and their flat water tones (two: lighter and darker blue-grey). Everything else non-earth is cut into **stones** by a "watershed" on the distance-to-edge picture: 830 stones, median area 83 dots, 90th percentile 709, the biggest 10,500. A stone is stored as its outline and the flat faces inside it.
+**3.3 Puddles and stones are told apart by shape and colour.** Among the non-earth areas, a **puddle** is one that survives a big opening (13 dots), is big (1500 dots or more), is ragged (solidity under 0.82: its area divided by the area of the tightest shape without dents that fits round it, like a rubber band) or very big, and is at least 40 per cent clearly blue (b under -3.5, not dark). Found: 8 big puddles (areas 3000 to 31,600 dots), their outlines (about 100 corners each at 1.5 dots accuracy) and their flat water tones (two: lighter and darker blue-grey). Everything else non-earth is cut into **stones** by a "watershed" on the distance-to-edge picture (imagine the distance picture as a landscape in which the middle of each stone is the bottom of a pit; water fills every pit from its bottom, and where two pools meet a border is drawn, so stones that touch come apart along their narrow waists): 830 stones, median area 83 dots, 90th percentile 709, the biggest 10,500. A stone is stored as its outline and the flat faces inside it.
 
-**3.4 Wheel ruts are found as long dark valleys.** The ground (puddles and stones painted over with the nearest ground colour) is smoothed, and the second-derivative "ridge" test (Hessian) finds thin dark valleys; each valley is followed as a curve (`rut_tools.py`). Seen at a scale of 3 dots, only fragments are found; at a scale of 10 dots the broad rut paths come out (93 curves, 34 of them long and straight enough: total length 10,493 dots). Measured across the curves (`fit_ground_model.py`): the dark band is about 20 dots wide (brightness 21 against 30 to 33 for the ground), with slightly lighter banks on both sides.
+**3.4 Wheel ruts are found as long dark valleys.** The ground (puddles and stones painted over with the nearest ground colour) is smoothed, and a "valley detector" (the "Hessian" test: it measures how sharply the brightness curves down and up across a line) finds thin dark valleys; each valley is followed as a curve (`rut_tools.py`). Seen at a scale of 3 dots, only fragments are found; at a scale of 10 dots the broad rut paths come out (93 curves, 34 of them long and straight enough: total length 10,493 dots). Measured across the curves (`fit_ground_model.py`): the dark band is about 20 dots wide (brightness 21 against 30 to 33 for the ground), with slightly lighter banks on both sides.
 
-**3.5 The ground model.** From the ground (not the stones and puddles) I measured: which earth colour is found how far from the nearest rut and on which side (a table of chances, 2 sides x 10 distances x 9 earth colours); the size of the flat patches (median 39 dots area, log-normal spread 1.05), their shape (long side about 1.9 times the short side) and their direction (they lie along the nearest rut: average cosine 0.75, a random direction would give 0.64).
+**3.5 The ground model.** From the ground (not the stones and puddles) I measured: which earth colour is found how far from the nearest rut and on which side (a table of chances, 2 sides x 10 distances x 9 earth colours); the size of the flat patches (median 39 dots area, "log-normal" spread 1.05: most patches near the median, a few much bigger), their shape (long side about 1.9 times the short side) and their direction (they lie along the nearest rut: average cosine 0.75, a random direction would give 0.64).
 
 **3.6 What matters for the score: the fine detail.** `ground_scale_test.py` keeps the real puddles and stones and replaces the ground by the real ground blurred by 24, 12, 6, 3 and 0 dots and snapped to 16 colours:
 
@@ -59,7 +71,7 @@ All analysis scripts are plain Python (OpenCV and numpy) in `analysis/`; they re
 
 A smooth tone field for the ground buys colour difference but nothing in SSIM, edge skill or normal angle; those only move when the 1 to 3 dot structure is right. That is the main reason the pixel-accurate classes are "tracing" and not "procedural".
 
-## 4. Step 3: the description
+## 4. The description
 
 One json file. Corners are whole numbers in picture dots, stored as steps (first corner, then the step to each next one). The file has: `tile`, `seed`, `palette` (list of [r,g,b]), `ground` (the base colour number), `layers` (drawn back to front) and `maps` (height stretch and blur, normal strength). Layer kinds (`generator/mud_layers.py` explains each):
 
@@ -70,18 +82,18 @@ One json file. Corners are whole numbers in picture dots, stored as steps (first
 * `patches`: traced flat colour areas (outline + colour). This is the biggest layer; it is **tracing the picture, not describing mud**, and I say so plainly.
 `python3 -I lib/description_audit.py FILE --limit-kilobytes N` passes for every description of the ladder (no picture data, no list over 4000 numbers).
 
-Size classes: **S** 8 KB, **M** 64 KB, **L** 512 KB. The S description (7.4 KB) has 6 puddles, 16 stones, 22 ruts and the clod numbers; the M description (63.9 KB) has 8 puddles with water tones, 590 stones with faces, 34 ruts and the clod numbers; the L description (503.0 KB) has 8 fine puddles and 830 stones, 5157 traced ground patches and a last layer of 3988 traced correction patches.
+Size classes: **S** 8 KB, **M** 64 KB, **L** 512 KB (limits in units of 1024 bytes). The S description (7.4 KB) has 6 puddles, 16 stones, 22 ruts and the clod numbers; the M description (63.9 KB) has 8 puddles with water tones, 590 stones with faces, 34 ruts and the clod numbers; the L description (503.0 KB) has 8 fine puddles and 830 stones, 5157 traced ground patches and a last layer of 3988 traced correction patches.
 
-**How the traced ground is made** (`trace_ground.py`, `merge_trace.py`, copied from the wood work): paint the puddles and stones over with the nearest ground colour; cut the picture into about 330,000 tiny same-colour areas (32 colours); join the two neighbouring areas whose joining changes the picture least (their sizes times how different their colours are: "Ward's rule") until 5000 patches are left; give each patch the average colour, squeeze the colours into 32; write each outline with a looseness of 2.6 dots. **The correction layer** is painted last: wherever the finished picture is still more than 8 colour steps away from the reference, the reference's flat colour there is traced (areas of 14 dots or more). It is the cheapest accuracy per byte (next table).
+**How the traced ground is made** (`trace_ground.py`, `merge_trace.py`, copied from the wood work): paint the puddles and stones over with the nearest ground colour; cut the picture into about 330,000 tiny same-colour areas (32 colours); join the two neighbouring areas whose joining changes the picture least (their sizes times how different their colours are; this rule is called "Ward's rule") until 5000 patches are left; give each patch the average colour, squeeze the colours into 32; write each outline with a looseness of 2.6 dots. **The correction layer** is painted last: wherever the finished picture is still more than 8 colour steps away from the reference, the reference's flat colour there is traced (areas of 14 dots or more). It is the cheapest accuracy per byte (next table).
 
-## 5. Step 4: the generator, tool by tool
+## 5. The generator, tool by tool
 
 The generator is `generator/mud_generator.py` (Blender, plus `mud_layers.py` for the shape list). It does NOT use shader noise for the picture: the picture is flat shapes. This is the same idea as the wood work: **draw flat coloured shapes back to front and photograph them from above**. Every tool below was used in a run; "what it does if you change it" comes from the sweep pictures or a test I name.
 
 1. **Mesh made from corner lists** (`bpy.data.meshes.new` + `from_pydata`). A mesh is a set of corner points and flat faces. One mesh holds every shape; each shape is a flat face a tiny step higher than the one before (`Z_STEP` = 0.00002 of the tile), so the last shape drawn is on top. With 50,000 shapes the stack is 1 tile unit high; the camera must sit above it (the wood work found that a step that is too small makes shapes flicker through each other; I did not test the failure cases again here).
 2. **Face attributes** (`mesh.attributes.new(name, 'FLOAT_COLOR', 'FACE')`). A face attribute is a number or colour stored on each face. Each face carries its palette colour, its brightness and its roughness. Changing the palette changes the whole picture without touching the shapes.
-3. **Emission material with an Attribute node** (Shader editor). An emission shader makes a surface glow with exactly the colour it is given, so no light or shading changes it; the Attribute node reads the face colour. This is how every dot of the baked picture is the exact palette colour. (The shader needs sRGB-to-linear conversion for the colour; the generator does it with one function.)
-4. **Orthographic camera over a 1 x 1 square, Cycles renderer, 8 samples, box filter width 1.0** (`lib/bake_harness.py`). An orthographic camera has no perspective, so one dot of the picture is one dot of the tile. The box filter of width 1.0 averages exactly the area of one dot (an anti-aliased edge dot is the right mix of the two colours). I used 8 samples and did not sweep this setting; the half-tile test (section 7.4) shows that edge dots differ by less than a level on average. View transform "Standard" keeps colours as numbers.
+3. **Emission material with an Attribute node** (Shader editor). An emission shader makes a surface glow with exactly the colour it is given, so no light or shading changes it; the Attribute node reads the face colour. This is how every dot of the baked picture is the exact palette colour. (Blender works inside with "linear" colour numbers, while pictures store "sRGB" numbers, which are bent to suit the eye; the generator converts each palette colour from one to the other with one function.)
+4. **Orthographic camera over a 1 x 1 square, Cycles renderer, 8 samples, box filter width 1.0** (`lib/bake_harness.py`). Cycles is Blender's renderer (the part that turns the scene into a picture); samples = how many rays it averages per dot. An orthographic camera has no perspective, so one dot of the picture is one dot of the tile. The pixel filter decides how much of its surroundings each dot averages in; the box filter of width 1.0 averages exactly the area of one dot (an anti-aliased edge dot is the right mix of the two colours). I used 8 samples and did not sweep this setting; the half-tile test (section 7.4) shows that edge dots differ by less than a level on average. View transform "Standard" keeps colours as numbers.
 5. **Wrap copies for seamless tiles.** A shape that touches the tile edge is drawn again moved by one tile to the left, right, up or down (the picture repeats exactly). The half-tile test (section 7.4) proves it.
 6. **Curve objects with bevel** (`geometry_route.py`, section 8). A curve is a smooth line through points; "bevel depth" gives it a round cross-section; seen from above it is a ribbon whose width is twice the bevel depth. Used as the real-geometry route for the ruts.
 7. **Geometry Nodes** (`geometry_route.py`, section 8): Mesh to Points (one point per stone), Instance on Points (put a low-poly ball on every point, scaled by a stone-size attribute and turned a random way), Random Value, Noise Texture and Set Position (push every corner in or out so each ball becomes a lump), Set Shade Smooth (switched off: flat facets), Realize Instances, Set Material. Used as the real-geometry route for the stones.
@@ -93,13 +105,13 @@ Not used, and why: Blender's Noise, Voronoi, Gabor and Wave textures do not repe
 ### What the settings do (sweep pictures; same sampled description, one setting changed, 384 dots)
 
 ![clods](guide_pictures/strip_clod_count.png)
-**Number of clods** (0, 4000, 9000, 14,000, 28,000): at 0 the ground is one flat brown; more clods make the crumbly texture and raise the density of fine edges (the measure the kind score is most sensitive to). On the quick painter the mean edge strength of the picture went from 3.6 (14,000 clods) to 4.5 (30,000) to 5.1 (60,000), against 6.8 for the reference, so more (and smaller) clods move toward the reference; each 10,000 clods add about 10,000 shapes and a few seconds of bake time. The sampler's default is 36,000 clods, 0.35 smaller in log-area.
+**Number of clods** (0, 4000, 9000, 14,000, 28,000): at 0 the ground is one flat brown; more clods make the crumbly texture (in the strip the 4000, 9000 and 14,000 pictures are very hard to tell apart by eye) and raise the density of fine edges (the measure the kind score is most sensitive to). On the quick painter the mean edge strength of the picture went from 3.6 (14,000 clods) to 4.5 (30,000) to 5.1 (60,000), against 6.8 for the reference, so more (and smaller) clods move toward the reference; each 10,000 clods add about 10,000 shapes and a few seconds of bake time. The sampler's default is 36,000 clods, 0.35 smaller in log-area.
 
 ![zones](guide_pictures/strip_zone_weight.png)
 **Zone weight** (0 to 0.97): at 0 every clod picks its colour alone and the ground looks like confetti; near 1 whole neighbourhoods take the same tone, giving bigger light and dark areas. I used 0.6 (chosen by eye on the first tile; I did not tune it against a score).
 
 ![ruts](guide_pictures/strip_rut_scale.png)
-**Number of ruts** (0 to 2.4 times): with none, the picture has no direction; with many, the ruts criss-cross like the reference but start to crowd.
+**Number of ruts** (0, 0.5, 1.0, 1.6, 2.4 times): the sampler always draws at least 3 ruts (it has a lower limit in `random_ruts`), so the "0" picture still has 3; the counts in the strip are 3, 10, 19, 35 and 54 (counted by the independent checker). With few ruts the picture has little direction; with many, the ruts criss-cross like the reference but start to crowd. Note: at the default 1.0 the sampled tiles carry about 19 ruts, against 34 found in the reference.
 
 ![rut width](guide_pictures/strip_rut_width.png)
 **Rut band width** (0.4 to 2.2 times): the effect is mild at this size. Narrow ruts almost vanish into the ground; wide ones make broad dark bands and a darker picture overall.
@@ -113,7 +125,7 @@ Not used, and why: Blender's Noise, Voronoi, Gabor and Wave textures do not repe
 ![normal strength](guide_pictures/strip_normal_strength.png)
 **Normal-map strength** (2, 5, 9, 14, from one baked height): the reference uses 9; weaker looks flat, stronger makes the slopes harsh. (Not a generator setting you tune for accuracy: lower values did not reduce the angle error; section 6.)
 
-## 6. Step 5: comparing and the rate-distortion ladder
+## 6. Comparing, and the ladder (accuracy against description size)
 
 Every row was baked in Blender at 1254 dots, 8 samples, and scored with both tools (`analysis/score_folder.py`). "Tier" is the pixel tier. Heights and normals are made from each row's own colour.
 
@@ -165,12 +177,12 @@ At a fixed size the best mix is the 5000-patch ground with loose outlines plus c
 
 | layer or class | description size | tier | SSIM | colour difference | edge skill | height error | normal angle | same-kind score | bake seconds |
 |---|---|---|---|---|---|---|---|---|---|
-| S class (6 puddles, 16 stones, 22 ruts, clods) | 7.1 KB | none | 0.272 | 16.57 | 0.041 | no map | no map | 0.366 | 28.6 |
+| S class (7 puddles, 24 stones, 19 ruts, clods) | 7.1 KB | none | 0.272 | 16.57 | 0.041 | no map | no map | 0.366 | 28.6 |
 | M class (trimmed harder: the golden has 1,085 stones) | 59.9 KB | none | 0.312 | 13.07 | 0.147 | no map | no map | 0.425 | 31.2 |
-| traced ground, 5000 patches + fine puddles and stones | 506.6 KB | close | 0.601 | 7.02 | 0.569 | no map | no map | 0.444 | 30.8 |
-| L class (final): traced ground + corrections last | 513.7 KB | close | 0.604 | 6.84 | 0.6 | no map | no map | 0.503 | 33.5 |
+| traced ground, 5000 patches + fine puddles and stones | 506.6 KB | close (colour only, see below) | 0.601 | 7.02 | 0.569 | no map | no map | 0.444 | 30.8 |
+| L class (final): traced ground + corrections last | 513.7 KB | close (colour only, see below) | 0.604 | 6.84 | 0.6 | no map | no map | 0.503 | 33.5 |
 
-For the golden picture there are no height or normal maps ("no map"), so the tier uses colour measures only (it reaches "close" for the 5000-patch rows). Sizes here are in KB of 1000 bytes: the golden L description is 513.7 KB, inside the audit tool's limit of 512 x 1024 bytes but not under 512,000 bytes (the golden has more stones and ragged outlines; the mud's L description is 503.0 KB).
+For the golden picture there are no height or normal maps ("no map"), so the tier uses colour measures only. **The "close" in the golden rows is NOT an achievement and cannot be compared with the mud rows:** it appears only because the two measures that stop the mud at "layout" (height and normal) cannot be made for the golden. The independent checker made stand-in maps from the golden reference colour with the same rule and scored the golden L against them: normal angle 23.5 degrees and height error 22.5 levels, worse than the mud's L (18.6 and 17.6), so the golden L would be "layout" if its maps could be measured (numbers quoted from `verifier_answer.json`; the stand-in maps were not saved). Its SSIM 0.604 is also only just over the 0.60 limit. Sizes: the golden L description is 513,735 bytes (513.7 KB in this guide's 1000-byte KB); it passes the size check because the check's L limit is 512 x 1024 = 524,288 bytes, but it is over 512,000 bytes (the golden has more stones and ragged outlines; the mud's L description is 503,014 bytes).
 
 **The pixel picture of the final class (reference, generated, difference, edges):**
 
@@ -178,7 +190,7 @@ For the golden picture there are no height or normal maps ("no map"), so the tie
 
 What it shows: the structure of the ruts, puddles and the stone clusters is right. The brightest differences are on the biggest stones (the stone finder cuts a big stone into several pieces and gives each its own base colour, so a stone looks chopped) and on thin dark lines in the ruts. Tan and orange stones are not "non-earth", so they are only traced.
 
-## 7. Step 6: making new tiles and bigger pictures
+## 7. Making new tiles and bigger pictures
 
 ### 7.1 The sampler (`generator/sampler.py`)
 `sample_description(seed)` writes a NEW description from numbers measured on the reference (`fitted_distributions_mud.json`): wheel ruts as smooth wandering curves along two or three main directions of travel (heading bends slowly; some ruts get a twin 45 to 95 dots away, like two wheels); puddles as chains of overlapping round lobes with a scalloped edge, cut into lighter and darker water tones by a smooth noise; stones with sizes drawn from the reference's measured size list (positions: half of the small stones are put within 1 to 2.6 stone radii of one of the big stones, the others are scattered, more often where a slow density field is high), 6 to 9 sided lumps with up to three flat faces made by chords turned toward the light (upper left) and colours from the reference's measured base-to-face transitions; clods from the fitted chance table. Same seed = same tile. Options change the KIND of surface by changing numbers (used in the snow test).
@@ -197,7 +209,18 @@ Seeds 101 to 108, baked with the same generator (`variations/`, `run_variations.
 | 107 | 0.416 | 0.277 | 18.8 | 1.18 | 54.3 | 28937 |
 | 108 | 0.374 | 0.284 | 18.4 | 0.99 | 45.3 | 28559 |
 
-Summary: kind score mean 0.383 (min 0.353, max 0.416); SSIM against the reference mean 0.283, max 0.288 (the reference-reproducing L class gets 0.698); SSIM between the eight tiles over all 28 pairs: mean 0.343, max 0.352; mean colour difference between tiles 28.1 levels. So the tiles are not copies of the reference, they differ from each other, and the kind score is on a level with the S/M classes and below the traced L class (0.483). An honest limit: SSIM between two unrelated mud tiles is not near 0 (about 0.4) because both are mostly flat brown with fine detail; use it for "same" versus "different", not as a distance.
+Summary: kind score mean 0.383 (min 0.353, max 0.416); SSIM against the reference mean 0.283, max 0.288 (the reference-reproducing L class gets 0.698); SSIM between the eight tiles over all 28 pairs: mean 0.343, max 0.352; mean colour difference between tiles 28.1 levels. So the tiles are not copies of the reference, they differ from each other, and the kind score is on a level with the S/M classes and below the traced L class (0.483). An honest limit: SSIM between two unrelated mud tiles is not near 0 (0.343 on average here, at most 0.352) because both are mostly flat brown with fine detail; use it for "same" versus "different", not as a distance.
+
+**The kind score does not separate these tiles from other surfaces well.** The independent checker scored the same tiles against the OTHER references (files in `verify/`):
+
+| tile | against mud | against slate | against gravel | against brick | against metal | against wood |
+|---|---|---|---|---|---|---|
+| seed 103 | 0.353 | not measured | 0.283 | 0.306 | not measured | 0.247 |
+| seed 101 | 0.407 | 0.375 | 0.344 | 0.316 | 0.326 | not measured |
+| M class (fitted, invented ground) | 0.362 | 0.426 | 0.223 | 0.311 | 0.265 | not measured |
+| L class (traced) | 0.483 | 0.293 | 0.284 | 0.272 | 0.233 | not measured |
+
+(Sources: `verify/var_103/texture_vs_*.json`, `verify/var_101/tx_*.json`, `verify/bake_M_puddle_tones_stone_faces/tx_*.json`, `verify/bake_L_final_traced_ground_plus_corrections/tx_*.json`.) Only the traced L class is clearly more like mud than like anything else. The sampled tiles score only a little higher against mud than against other surfaces, and the M class even scores higher against SLATE than against mud. So "same kind of surface" for the eight new tiles is a judgement by eye (the builder's and the checker's), not something this tool proves.
 
 ![contact sheet](variations/contact_sheet.png)
 
@@ -207,7 +230,7 @@ Summary: kind score mean 0.383 (min 0.353, max 0.416); SSIM against the referenc
 `sample_description(201, tile=2508)` makes one description for a 2508 x 2508 dot picture (four tiles' worth: four times the ruts, puddles, stones and clods, wrapped at 2508), baked at 2508 (`area/`):
 * bake 227.7 s, 114875 shapes;
 * seam ratio across the wrap edges (left/right, top/bottom): [0.876, 1.044] (1.0 = an ordinary jump between neighbouring dots = invisible seam);
-* strongest repeat: the picture's own correlation at any shift of 40 dots or more peaks at 0.176 (at shift [24, 32], which is just outside the excluded 40 dots, so it is the ordinary correlation length and not a repeat); 1 would be an exact repeat, near 0 never repeats;
+* strongest repeat: the picture's own correlation (how alike it is to itself slid by some distance) at any shift of 40 dots or more peaks at 0.176 (at shift [24, 32], which is exactly 40 dots away, so it is the ordinary short-range likeness of neighbouring dots and not a repeat; the checker measured 0.171); 1 would be an exact repeat, near 0 never repeats; as a control, the reference tiled 2 x 2 gives exactly 1.0 at a shift of 1254;
 * the four 1254-dot quarters scored as separate tiles: kind score overall top left 0.292, top right 0.307, bottom left 0.301, bottom right 0.303. Those overall scores are lower than the 1254 tiles' (0.35 to 0.42) only because a quarter cut out of a bigger picture is not a wrapping tile, so the tool's tiling group is 0 for it (seam ratio about 7); the colour, height and normal groups are on a level with the 1254 tiles: top left colour 0.26 / height 0.49 / normal 0.14, top right colour 0.27 / height 0.5 / normal 0.19, bottom left colour 0.28 / height 0.49 / normal 0.15, bottom right colour 0.28 / height 0.44 / normal 0.24. Their pairwise SSIM 0.344, 0.351, 0.348, 0.351, 0.346, 0.352 (unique, not the same quarter four times).
 
 ![area](guide_pictures/area_2508_small.png)
@@ -233,7 +256,7 @@ The content is the same at every size (the SSIM column), so the drawing really i
 
 `generator/geometry_route.py` draws the SAME description's stones and ruts with Blender geometry instead of flat polygons (the M description: 590 stones, 34 ruts), 1254 dots:
 
-* **Stones by Geometry Nodes**: 7080 corners, 8.4 s against 3.4 s for the 1090 flat polygons. Each stone needs only THREE numbers (position, size, colour); the lit face and the shaded face come from the sun. But with my settings the stones came out as smooth, low-contrast, round lumps (the painted stones are sharp-faced, with strong light and dark faces and a dark rim) and the pebbles lose their dark outline. Two bugs cost time: an attribute named `radius` is overwritten by Mesh to Points (its own radius input), and the Vector Math "Scale" operation takes its number on the fourth socket. Verdict: a good route for a stone SCATTER you want to look three-dimensional; the flat polygon route is better for copying a painted look and for exact outlines; I did not try stronger light or sharper shapes.
+* **Stones by Geometry Nodes**: 7080 corners, 8.4 s against 3.4 s for the 1090 flat polygons (the checker's re-run took 13.4 s on a busier machine). Each stone needs only THREE numbers (position, size, colour); the lit face and the shaded face come from the sun. But with my settings the stones do not match the painted look: the big ones come out as low-poly rocks with visible flat facets but without the painted stones' strong light and dark faces and dark rim, the small ones as dark round dots, and the pebbles lose their dark outline. (An earlier version of this guide called them "smooth round lumps"; the checker's render shows flat facets.) Two bugs cost time: an attribute named `radius` is overwritten by Mesh to Points (its own radius input), and the Vector Math "Scale" operation takes its number on the fourth socket. Verdict: a good route for a stone SCATTER you want to look three-dimensional; the flat polygon route is better for copying a painted look and for exact outlines; I did not try stronger light or sharper shapes.
 * **Ruts as curve objects**: 3.2 s against 4.6 s for polygon ribbons; the ribbons are equally good, but one curve gives one width and one colour, so band, groove and bank would be three curves each; the wobble and the fading ends are one line of numpy in the polygon route. Verdict: equal picture, curves are fine when ruts should be real 3-D grooves (not needed here: the height is derived from the colour).
 * **Height from geometry** (hybrid with the colour height) was **not tested**: the reference height is derived from the colour, so a real-geometry height would move away from it.
 
@@ -265,7 +288,7 @@ The same analysis chain, run with the name changed and one number (the non-earth
 7. **Geometry Nodes stones: two bugs** (section 8) and a result that does not match the painted look.
 8. **Smooth ground tone fields buy nothing in SSIM** (section 3.6) and invented clods lower SSIM (section 6).
 9. **Lower normal strengths did not help** (19.3 against 19.9 degrees).
-10. **Naming mistakes in my own scripts**: a score file of the golden mud overwrote the mud's (same name, different folder); a `pkill -f` with a word that appeared in my own command killed my own shell. Lessons in the other file.
+10. **Naming mistakes in my own scripts**: a score file of the golden mud overwrote the mud's (same name, different folder); a command that stopped jobs by searching for a word also found that word in my own command and stopped my own command window. Lessons in the other file.
 11. **The kind score is noisy**: the same sampler gives 0.35 to 0.42 for different seeds; I did not tune to differences under 0.05. It also cannot see some things I can: pebble clusters around big stones changed it by nothing.
 12. **A false alarm in my own seam test**: the first extra half-tile test compared a ladder bake made BEFORE I made the rut ends fade with a shifted bake made AFTER, and reported 4.5 per cent of dots different. The ladder rows with ruts were re-baked with the final code and the test repeated (0.7 per cent: ordinary anti-aliasing). Lesson: after any generator change, re-bake every row that the change touches.
 13. **A misleading first reading of the area test**: the four quarters of the 2508 picture scored 0.29 to 0.31 overall against 0.35 to 0.42 for the 1254 tiles. I first blamed a distance grid that did not grow with the tile (it did not: I fixed it anyway, the grid now has about 8 dots per cell at every tile size, and the score did not move); the real reason is the tool's tiling group, which is 0 for a crop that is not meant to wrap. Compare the colour, height and normal groups instead.
@@ -279,3 +302,31 @@ Not tested: EEVEE or the GPU; Dynamic Paint, particles or other physics for the 
 * Analysis: `python3 -I analysis/palette_and_labels.py`, `extract_elements.py mud`, `trace_ground.py mud 2000 5000`, `find_ruts.py mud 10`, `fit_ground_model.py mud ruts_s10_mud.pkl 150 0.6`, `fit_sampler_stats.py mud`, `make_descriptions.py mud` (golden: the same with `mud_golden`, threshold 3).
 * Bake: `generator/bake_one.sh description/L_final_traced_ground_plus_corrections.json outputs/L 1254 8` (about 40 s).
 * New tiles: `python3 -I generator/run_variations.py`; area, resolution and seam: `generator/run_scale_tests.sh`; compare: `python3 -I analysis/score_folder.py FOLDER`.
+
+## 13. Checked independently
+
+A second helper (the "checker") re-ran this work from the files, without the builder. Its findings are in `verifier_answer.json`; its own bakes and scores are in `verify/`.
+
+**Confirmed:**
+* S, M, L 2000, L 5000, L final, golden S, golden M, golden L final, variation 103 and the 2508 area, re-baked in fresh Blender runs: every picture identical dot for dot to the builder's, and both tools give the same numbers to the last digit (for example L final: SSIM 0.6976, colour difference 5.0, edge skill 0.685, height 17.57, normal 18.59, kind 0.483, tier layout).
+* The generator never reads the reference (a trace of two full bakes; a hand-written 6-shape description also bakes and wraps correctly).
+* All 27 description files pass the size check at their class limit.
+* The eight variations are re-made byte for byte by the sampler; they differ from each other (mean colour difference 28.05 levels) and from the reference (no copied area).
+* The area has no seam (0.872 / 1.036 across the wrap edges, 0.946 across the middle line) and no repeat (0.171).
+* The half-tile test on variation 101 (0.757 levels, 0.977 % of dots over 8, spread evenly) and the resolution results (1.22 and 0.62).
+* The byte share of each layer and the element counts (8 puddles, 830 stones, 5157 + 3988 patches; golden 16 puddles, 1085 stones).
+
+**Corrected in this guide:**
+* The golden "close" tier exists only because height and normal cannot be measured for the golden; with stand-in maps it would be "layout" (section 6).
+* The kind score does not separate the sampled tiles from other surfaces; their "same kind" is a judgement by eye (sections 1 and 7.2, with the cross-surface table).
+* The L class is a vector trace of 76,058 corners (golden L: 78,821); now said on the first page (section 1).
+* The golden S row: 7 puddles, 24 stones, 19 ruts (not 6, 16, 22, which were the mud S numbers) (section 6).
+* Zero ruts is not possible in the sampler: the "0" picture has 3 ruts; the strip shows 3, 10, 19, 35, 54 ruts; sampled tiles have about 19 against 34 in the reference (section 5).
+* SSIM between two unrelated mud tiles is 0.343 on average, not "about 0.4" (section 7.2).
+* The snow transfer was not "only numbers": the sampler got one new option, `maps` (section 1).
+* The Geometry Nodes stones are faceted low-poly rocks and dark dots, not "smooth round lumps" (section 8).
+* The checker's own derivation and palette numbers differ slightly (3.19 levels, 4.42 degrees; palette snap SSIM 0.937), same conclusion (section 2); its area repeat number is 0.171 (section 7.3).
+* Units: KB is 1000 bytes in this guide, the size check counts 1024; stated once at the top and in the golden note.
+* The measures, the tier limits and the jargon (Lab, solidity, watershed, Hessian, Ward's rule, Gaussian, log-normal, median filter, sRGB and linear, box filter, Cycles) are now explained in plain words; step numbers removed from headings.
+
+**Not checked independently:** the analysis chain itself (palette statistics, element finder, stone and puddle counts, rut finder, the ground blur table of section 3.6, the trace ladder tables of section 6 other than the re-baked rows, the edge-strength numbers for the clod count); the snow transfer; the bake times (they vary with the load: the area took 289 s in the checker's run against 227.7 s).

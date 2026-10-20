@@ -7,12 +7,16 @@ mistake in the builder's report, this guide uses the corrected number and says s
 
 Words used in this guide (one word for each thing): the **tile** is the 1254 x 1254 picture; a **dot** is one dot of a picture (a pixel); the
 **description** is the small file the generator reads; the **soil** is the orange-brown earth; a **lump** is one small piece of soil the generator
-makes up; a **speck** is a tiny lump of 1 to 3 dots; a **stone** is one piece of gravel the generator makes up (it is drawn as several flat shapes:
+makes up; a **speck** is a tiny lump, 2 to 5 dots across; a **stone** is one piece of gravel the generator makes up (it is drawn as several flat shapes:
 shadow, rim, body, faces, flakes); a **size class** is a group of stones of one size range (tiny, small, medium, large, biggest); a **patch** is an area
 of one flat colour copied (traced) from the reference; a **stamp** is a tiny round patch copied from the reference and written as just three numbers
 (x, y, radius). (Careful: in the slate guide "stamp" meant a made-up patch. Here a stamp is always copied from the reference.)
-The **"same kind" score** is the project's tool `lib/texture_compare.py` (is it the same kind of surface?); the **dot-for-dot tools** are
-`lib/pixel_compare.py` (is it the same picture?), which also gives the **tier** (none, layout, close, exact).
+The **"same kind" score** is the project's tool `lib/texture_compare.py` (is it the same kind of surface? 0 = as different as another surface, 1 = the
+same); the **dot-for-dot tool** is `lib/pixel_compare.py` (is it the same picture?), which also gives the **tier** (none, layout, close, exact).
+Its measures: **colour SSIM** is a picture-structure score (1.0 = the same picture); **colour difference (Delta E)** is how different the colours look
+(about 2.3 is "just visible"); **edge skill** says how many edges sit where the reference has them (0 = no better than luck, 1 = all of them); **height
+error** is the average height difference in steps of 255 after the best brightness and contrast fix; **normal error** is the average angle between the
+two normal maps. **Ambient occlusion** is a grey picture of how hemmed-in each dot is.
 
 ## 0. The result in one table
 
@@ -40,10 +44,10 @@ bytes because it is indented; written compactly it is 2,364 bytes, `scores/descr
 The tier rules (from `lib/pixel_compare.py`): "layout" needs edge skill at least 0.30, colour difference at most 20 and height error at most 40;
 "close" needs edge skill 0.55, colour SSIM 0.60, colour difference 10, height error 20 and normal error 12 degrees; "exact" needs 0.85, 0.92, 3, 6 and 4.
 
-**Honest reading, in three sentences.**
+**Honest reading, in three points.**
 1. The made-up gravel S_v4 is the only description that makes NEW gravel. Dot for dot it is tier "none" and it is no better than a plain brown square
    (SSIM 0.213 against 0.444, colour difference 20.93 against 21.04): its stones are in different places from the reference's, so the dot-for-dot
-   tools cannot reward it. Its "same kind" score is 0.362 as baked and 0.435 in the smoothed-height view (section 5 explains the two numbers).
+   tool cannot reward it. Its "same kind" score is 0.362 as baked and 0.435 in the smoothed-height view (section 5 explains the two numbers).
 2. Every description that reaches tier "layout" is **tracing**: the reference picture cut into flat polygons and tiny discs. The checker counted
    138,857 numbers in L_a100_s8, 9.3 % of the reference picture's raw size (`verifier_answer.json`). They show how much a description of flat
    shapes CAN say; they are not a recipe for new gravel.
@@ -54,7 +58,7 @@ The tier rules (from `lib/pixel_compare.py`): "layout" needs edge skill at least
 ![the ladder: reference, made-up, traced coarse, traced with stamps (two sizes)](guide_pictures/ladder_crops.png)
 
 The same 300 x 300 dot patch of the reference and of four descriptions, zoomed 2 times (`analysis/make_ladder_picture.py`). Top row: the reference;
-S_v4 (made-up, 2.4 KB); M (traced big patches + stamps, 49 KB). Bottom row: L (patches over 250 + stamps over 12, 270 KB); L (patches over 100 + stamps
+S_v4 (made-up; the picture says 2.4 KB, the file is 2,364 bytes); M (traced big patches + stamps, 49 KB). Bottom row: L (patches over 250 + stamps over 12, 270 KB); L (patches over 100 + stamps
 over 8, 426 KB). The made-up tile has the right ingredients in the wrong places; the traced ones have the right places but look like stained glass
 sprinkled with round dots.
 
@@ -88,7 +92,7 @@ the pictures are the same.
 ## 2. How the reference was analysed
 
 All analysis scripts are plain Python in `analysis/`. They read the reference picture; the Blender generator never does (the checker confirmed this:
-`verifier_answer.json`). The full findings are in `analysis/analysis_findings.md`; the short version follows.
+`verifier_answer.json`). The full numbers are in Appendix A at the end of this guide; the short version follows.
 
 **A. The maps come from the colour (the "derivation ceiling")** (`analysis/derivation_ceiling.py`, numbers in `scores/derivation_ceiling_log.txt` and
 `scores/derivation_ceiling.json`)
@@ -175,13 +179,16 @@ back-to-front list of shapes). Run:
 `blender -b --disable-autoexec -t 2 --python generator/gravel_generator.py -- DESCRIPTION.json OUT_FOLDER --size 1254`
 (or `-- --batch JOBS.json` for several; `--shift 0.5 0.5` slides the whole picture by half a tile, for the seamless test).
 The Blender part is the same as the slate generator's (both are "painters"); the shape-making part is new.
+**Honest note (from the checker):** here Blender's job is to draw and photograph the flat shapes. The shapes themselves (where every stone goes, its
+outline, its colours) are made in plain Python. No shader-node noise or Voronoi, no physics and no curves are used in the final recipe; the one
+Geometry Nodes route that was tried is in section 7.
 
 **The Blender part**
 
 1. **Mesh from points** (`mesh.from_pydata`). *What it is:* a list of corner points and faces turned into a real Blender surface. *How used:* every
    shape becomes one flat face, and each later shape lies a hair higher (step = 0.0001 of the tile, or less when there are more than 15,000 shapes:
    `min(0.0001, 3 / (2 x number of shapes))`). *Wrap copies:* every shape that crosses the tile edge is drawn again one tile to the left, right, up or
-   down; each shape's middle is first folded into the tile. S_v4: 32,386 shapes became 33,004 faces (`outputs/S_v4/bake.json`).
+   down (nine places at most, corners included); each shape's middle is first folded into the tile. S_v4: 32,386 shapes became 33,004 faces (`outputs/S_v4/bake.json`).
 2. **Face attributes** (`mesh.attributes.new(..., 'FACE')`). *What it is:* a number or colour stored on each face. *How used:* `piece_colour` (the
    colour, converted once from ordinary sRGB numbers to Blender's linear numbers), `piece_height`, `piece_rough`, `piece_metal`.
 3. **Attribute node + Emission shader.** *What it is:* the Attribute node reads what is stored on the face; Emission makes the surface glow with exactly
@@ -200,7 +207,7 @@ The Blender part is the same as the slate generator's (both are "painters"); the
    (Slate, 4 times zoomed: 1 sample gives hard stair-steps, 16 a clean one-dot soft edge.)
 8. **Pixel filter: Box width 1 for the colour picture, Gaussian for the height picture.** *What it is:* how each picture dot averages its
    surroundings. *How used:* the Gaussian filter IS the 0.5-dot blur of the height. The width asked for is 4 x the blur in picture dots
-   (`gravel_generator.py`, from the slate measurement `recipes/slate/scores/filter_width_test.json`: width 2 blurs like 0.5 dots, 4 like 0.9, 6 like 1.4).
+   (`gravel_generator.py`, from the slate measurement `../slate/scores/filter_width_test.json`: width 2 blurs like 0.5 dots, 4 like 0.9, 6 like 1.4).
    So the generator asks for width 2 at 1254 dots, about 1 at 640 dots and 4 at 2508 dots.
 9. **Normal map, in numpy after the photo:** the slope of the height rounded to 8 bits, times strength 10 (neighbour differences), divided by "tile
    dots per picture dot" so the slope looks the same at other sizes. **Ambient occlusion:** a cheap one (how much lower a dot is than its surroundings
@@ -233,7 +240,7 @@ The Blender part is the same as the slate generator's (both are "painters"); the
 
 **What changing each setting does** (strips; each square is the top-left 320 x 320 dots of the whole tile photographed at 640 dots, so the stones are
 drawn at about half their size in the 1254 tile; colour with 8 samples. Made by `generator/sweeps_for_guide.py`. Where the builder's label was wrong,
-the copy in `cookbook/pictures/` has the corrected label, made by `cookbook/pictures/gravel-strips-maker.py` from the same tile pictures.)
+the copy in `../../cookbook/pictures/` has the corrected label, made by `../../cookbook/pictures/gravel-strips-maker.py` from the same tile pictures.)
 
 **Corners per stone** (every size class set to one number)
 
@@ -253,7 +260,7 @@ builder's strip labels 0.12 as "used", but S_v4 uses 0.10 and no square shows 0.
 
 ![packing, corrected label](../../cookbook/pictures/gravel-strip-stone-packing.jpg)
 
-0.35 lets stones overlap a lot (heaps); 1.0 keeps a clear ring of soil round every stone (scattered gravel). **Correction:** the builder's strip
+0.35 lets stones overlap a lot (a heap); at 1.0 stones no longer overlap and more soil shows between them (scattered gravel). **Correction:** the builder's strip
 says 0.65 is "used"; S_v4 uses 0.65 for three classes and 0.585 for the biggest and the small class, and the sweep set all five classes to one value.
 
 **Shadow on the soil** (dots, for a stone of radius 20)
@@ -294,7 +301,7 @@ Width 2 is what the generator asks for at 1254 dots; these squares were photogra
 
 The S_v4 height picture turned into a normal map at strengths 0, 5, 10, 20, 40 with the generator's own rule, top-left 320 x 320 dots of the 1254 tile
 (so this strip is drawn twice as big as the others). The label is the normal error against the reference (`lib/pixel_compare.py`; numbers in
-`cookbook/pictures/gravel-strips-numbers.json`): flat 24.5 degrees, 5: 31.6, 10 (used): 37.8, 20: 45.2, 40: 52.7. **What it says:** for made-up
+`../../cookbook/pictures/gravel-strips-numbers.json`): flat 24.5 degrees, 5: 31.6, 10 (used): 37.8, 20: 45.2, 40: 52.7. **What it says:** for made-up
 stones, a stronger normal map is always further from the reference dot for dot, because the bumps are in different places. A flat map wins this measure,
 which is why the dot-for-dot normal error must not be used to choose the strength of a made-up tile. Strength 10 was chosen because it rebuilds the
 reference normal from the reference height (section 2A). Not tested: the "same kind" score at other strengths.
@@ -343,17 +350,23 @@ miss the 12-degree normal limit. The normal map is the slope of the finest detai
 **Two more honest notes.**
 * The traced tiles do not repeat smoothly: their seam numbers are 2.8 to 11.4 (`final_report.json`, "seam_ratio"; 1.0 = seamless, the reference
   itself 2.49), because the patches were cut out of a picture that stops at its edge. The half-tile test (section 6.4) was not run on them.
-* The "same kind" score of the traced tiles is LOW (0.21 to 0.28 without stamps): they look like stained glass and lose the soil grain.
+* The "same kind" score of the coarser traced tiles is LOW (0.208 to 0.279 for M, TS, patches over 250 and over 100 dots): they look like stained
+  glass and lose the soil grain. Patches over 50 dots reach 0.404, and the two with fine stamps 0.533 and 0.603.
 
-**Two "same kind" numbers.** The "same kind" tool compares with a copy of the reference height that was smoothed by 0.8 dots and stretched to full range.
-`analysis/score_folder.py` therefore also scores a "smoothed-height view": a copy of the tile whose height got the same smoothing. For S_v4 this lifts the
+**Two "same kind" numbers.** `analysis/score_folder.py` also scores a "smoothed-height view": a copy of the tile whose height got a 0.8-dot smoothing. Its
+note says this matches the reference height the "same kind" tool reads; that was true before the tool was changed at 15:45 on 19 October. Today the tool
+reads the reference's 8-bit upload and stretches both heights to full range (`lib/texture_compare.py`; `cookbook/06 Guide - baking and checking maps.md`,
+section 5), so the as-baked number is the main one. For S_v4 this lifts the
 height part from 0.402 to 0.645 and the overall score from 0.362 to 0.435; colour (0.236) and normal (0.399) do not change (`scores/S_v4_summary.json`).
 
 **What the S_v4 sheet shows** (`scores/S_v4_texture_sheet.jpg`, `scores/S_v4_texture_compare.json`, and the checker):
 * The stones are smaller and flatter than the reference's chunky faceted blocks; the reference's biggest stones are rarer and bigger.
 * Measured: the stone share is 61.1 % against 67.8 %, and stone left after opening with a disc of radius 16 is 31.2 % against 51.6 %; at radius 32,
   7.0 % against 32.2 % (measured for this guide with `generator/preview_tools.measure` on `outputs/S_v4/colour.png`; the numbers are in
-  `analysis/analysis_findings.md` section 6; the reference numbers are in `scores/measurements.json`). The checker found the same gap.
+  Appendix A8; the reference numbers are in `scores/measurements.json`). The checker found the same gap.
+* Part of the gap comes from the calibration itself: it was done on the quick OpenCV drawing, which measures a stone share of 67.4 %, the same as the
+  reference; the Blender photograph of the same description measures 61.1 % (the two pictures differ by 6.2 steps per dot on average, mostly at
+  shape edges; measured for this guide, Appendix A8). Not tested: calibrating on the Blender picture.
 * The soil is one flat brown with a sharp spike in the brightness curve; the reference's brightness is spread smoothly.
 * The colour is a little too orange-red: average Lab 23.8, 4.1, 6.4 against the reference's 24.5, 2.5, 3.8. Three colour parts of the "same kind" score
   are 0.0 (spectrum, scale, gradient), and the features are finer (correlation length 5 dots against 8).
@@ -423,11 +436,11 @@ keep their size in dots (the checker notes they look half as big in the 1254 pre
 `analysis/half_tile_test.py` bakes a description, bakes it again with the whole picture slid by half a tile in both directions, and compares the second
 picture with the first one rolled by half its size. A tile that really repeats gives the same picture.
 
-| what | size | mean colour difference (steps of 255) | share of dots differing by more than 40 | for a WRONG roll (control) | height difference |
+| what | size | mean colour difference (steps of 255) | share of dots differing by more than 40 | the same two numbers for a WRONG roll (control) | height difference |
 |---|---|---|---|---|---|
-| S_v4, builder (`final_report.json` "half_tile_test") | **512 dots** | 1.29 | 0.0 % | 31.1 and 27.9 % | 2.04 |
-| S_v4, checker (`verifier_answer.json`) | 1254 dots | 0.78 | 0.0 % | 27.9 and 25.0 % | 2.05 (normal 3.9) |
-| pebbles transfer, builder (`scores/half_tile_test.json`) | **512 dots** | 1.54 | 0.0 % | 28.6 and 26.6 % | 1.99 |
+| S_v4, builder (`final_report.json` "half_tile_test") | **512 dots** | 1.29 | 0.0 % | 31.1; 27.9 % | 2.04 |
+| S_v4, checker (`verifier_answer.json`) | 1254 dots | 0.78 | 0.0 % | 27.9; 25.0 % | 2.05 (normal 3.9) |
+| pebbles transfer, builder (`scores/half_tile_test.json`) | **512 dots** | 1.54 | 0.0 % | 28.6; 26.6 % | 1.99 |
 
 **Correction:** the builder's report says its half-tile numbers were for the 1254 tile; `analysis/half_tile_test.py` bakes at 512 dots (`size = 512`).
 The checker ran the test at 1254 (`verify/half_tile_1254.py`) and got 0.78 and 0 %. All pass: the tile repeats exactly.
@@ -469,6 +482,7 @@ code was touched (the checker confirmed the generator files are older than the p
 ![pebbles on sand: colour, height, normal](transfer/pebbles_sheet.png)
 
 **What was changed** (`analysis/make_transfer_description.py`, `transfer/pebbles_changes.json`)
+
 | setting | gravel (S_v4) | pebbles |
 |---|---|---|
 | stone colours (8) | near black to pale blue-grey | greys, beiges and ochres, (70, 68, 66) to (200, 194, 180) |
@@ -486,8 +500,8 @@ code was touched (the checker confirmed the generator files are older than the p
 | soil lumps / lighter tops / specks | 3,300 + 1,540 + 500; 80 %; 2 kinds | 2,500 + 900 + 200; 20 %; 1 kind (1,500, dark and pale) |
 | **height stretch** | mix 267.15 / 91.48 / 210.5, shift -17.7 | mix 187.9 / 64.34 / 148.05, shift -73.1 |
 
-The change list in `transfer/pebbles_changes.json` names 21 settings; it leaves out two that the script also changed (the soil lumps' lighter-top share and
-their colour weights). The checker counted 60 single values that differ.
+The change list in `transfer/pebbles_changes.json` names 21 settings; it leaves out some that the script also changed (the soil lumps' lighter-top share, their
+colour weights and the two seeds). The checker counted 60 single values that differ.
 
 **The one number that must be found again: the height stretch.** The gravel rule turns the bright sand white. With no reference height for pebbles, the
 builder drew the tile, took the 1st and 99th percentile of the gravel mix over the picture (118.1 and 452.3) and stretched those to 10 and 245.
@@ -495,7 +509,7 @@ builder drew the tile, took the 1st and 99th percentile of the gravel mix over t
 ![height stretch on the pebble tile](../../cookbook/pictures/gravel-strip-height-stretch.jpg)
 
 (New strip for this guide. Left: the pebble colour. Middle: the height the GRAVEL rule would give, worked out in plain Python from the baked colour.
-Right: the height the generator really baked with the pebbles' own stretch.) Measured (`cookbook/pictures/gravel-strips-numbers.json`): with the gravel
+Right: the height the generator really baked with the pebbles' own stretch.) Measured (`../../cookbook/pictures/gravel-strips-numbers.json`): with the gravel
 rule 62 % of the dots are full white and the average height is 230.7 of 255; with the pebbles' own rule 0.1 % are full white and the average is 118.3.
 
 **Time and checks:** description 1,992 bytes; bake 48.2 s (`transfer/out/pebbles_1254/bake.json`; checker 47.9 s); half-tile test passed at 512 dots
@@ -530,14 +544,15 @@ of a different kind (for example stones set in mortar, or stones that overlap in
    `builder_answer.json`); the 12-degree limit stays out of reach.
 10. **The sweep strips:** the first sweep run crashed (TypeError at the soil-lumps sweep, `scores/flags/sweeps.txt`); the strips came from later partial runs
     (`scores/sweeps_big.log`, `scores/sweeps_part2.log`) and the script was edited after the failed run (checker). Five strips had labels that did not match what
-    was run (section 4; corrected copies in `cookbook/pictures/`).
+    was run (section 4; corrected copies in `../../cookbook/pictures/`).
 11. **Two numbers in the builder's report were mis-stated** (found by the checker): the area bake time (173 s; really 252.6 s) and the size of the half-tile
     test (512 dots, not 1254). Both are corrected here.
 12. **A mistake that may have hurt other jobs:** the builder once stopped processes by name (`pkill -f run_everything.sh`), which may have stopped another
     builder's script of the same name (metal and slate both have one). Nobody checked whether those runs were cut short.
 13. **Disk:** to get from 1.1 GB to 334 MB the builder deleted scratch pictures, 7 of 8 early texture sheets and extra map files of non-final bakes; their
     numbers stay in `scores/*.json`.
-14. **The guides were not written by the builder** (its tool refused .md files); this guide was written afterwards from its files.
+14. **The guides were not written by the builder** (its tool refused .md files); this guide was written afterwards from its files. The separate file
+    `analysis/analysis_findings.md` could not be written either: the writing tool refuses files of that name. Its content is Appendix A below.
 15. **Not tried:** shader-node noise and Voronoi recipes (the research route), rigid-body physics (dropping stones), curves, the compositor; a finer second
     wobble for big pictures; describing the soil grain.
 
@@ -546,7 +561,222 @@ of a different kind (for example stones set in mortar, or stones that overlap in
 * `generator/`: `gravel_generator.py` (the Blender recipe), `gravel_layers.py` (description to shapes), `sampler.py` (new descriptions),
   `geometry_route.py` (real-geometry route), `preview_tools.py` (quick OpenCV drawing and measuring), `sweeps_for_guide.py` (the strips).
   Leftovers: `_gg_body.txt` (an old copy that still imports the slate code) and `gravel_layers_v1_backup.py` (a stale copy).
-* `analysis/`: the measuring and tracing scripts (see `analysis/analysis_findings.md`), `run_everything.sh` (the chain of bakes), `run_bake_and_score.sh`.
+* `analysis/`: the measuring and tracing scripts (Appendix A11). `run_everything.sh` (the chain of bakes) and `run_bake_and_score.sh` are in the gravel folder itself.
 * `description/`: every description (S_v4 is the final made-up one; L_a100_s8 the best traced one; `transfer_pebbles.json`).
 * `outputs/` baked pictures, `scores/` every score and sheet, `variations/`, `area/`, `resolution/`, `transfer/`, `guide_pictures/`, `verify/` (the checker's runs).
 * Corrected and new strips: `../../cookbook/pictures/gravel-strip-*.jpg`, made by `../../cookbook/pictures/gravel-strips-maker.py`.
+
+
+## Appendix A. The analysis in full
+
+(This would have been `analysis/analysis_findings.md`; the writing tool refuses files of that name, so it lives here. The analysis scripts read the reference
+picture; the Blender generator never does. Section A8 holds three measurements made while writing this guide; the command is given so they can be repeated.
+Every other number names the file it comes from. Paths are from the gravel folder.)
+
+Words used here: **stone** dots are the blue-grey and black ones, **soil** dots the orange-brown ones; **steps** are brightness steps from 0 to 255.
+Measures: **colour SSIM** is a picture-structure score (1.0 = the same picture); **colour difference (Delta E)** is how different two colours look (about 2.3
+is "just visible"); **edge skill** says how many edges sit where the reference has them (0 = no better than luck, 1 = all of them); **height error** is the
+average height difference in steps after the best brightness and contrast fix; **normal error** is the average angle between the two normal maps.
+
+### A1. The height and the normal map come from the colour
+
+*What was done* (`analysis/derivation_ceiling.py`, `analysis/derivation_parametric.py`; numbers in `scores/derivation_ceiling_log.txt`): try several ways of
+turning the reference colour into its height, and see how close each gets to the uploaded 8-bit height.
+
+Example first: with the rule the generator uses, a soil dot of colour (88, 58, 38) gets height 267.15 x 88/255 + 91.48 x 58/255 + 210.5 x 38/255 - 17.7 =
+about 127 of 255; a black stone (22, 22, 22) about 31; a pale stone (124, 130, 129) about 271, cut off at 255.
+
+| brightness recipe | blur 0 | blur 0.5 dots | blur 0.8 | blur 1.0 | blur 1.3 |
+|---|---|---|---|---|---|
+| fitted mix of red, green, blue | 6.20 | **5.01** | 5.87 | 7.30 | 9.59 |
+| ordinary grey (0.299 R + 0.587 G + 0.114 B) | 6.33 | 5.08 | 5.93 | 7.37 | 9.68 |
+| HD grey (Rec. 709) | 6.53 | 5.26 | 6.02 | 7.44 | 9.73 |
+| plain average of R, G, B | 6.84 | 5.65 | 6.34 | 7.68 | 9.88 |
+
+(Mean height error in steps. Best: fitted mix, blur 0.5: 5.01 steps, correlation 0.994. The ordinary grey is nearly as good.)
+
+* The fitted mix weighs red 293.9, green 0.5, blue 252.8 (`scores/derivation_ceiling.json`, "linear_weights"): green hardly counts. The generator uses
+  267.15 / 91.48 / 210.5 with shift -17.7, from `analysis/derivation_parametric.py` (printed, not saved; the builder reports 5.02 steps for it).
+* **Normal map:** from the UPLOADED height, neighbour differences x strength 10 rebuild the uploaded normal map to 0.34 degrees (Sobel differences: 4.83
+  degrees at their best strength, 8). From the height made from the reference COLOUR: 5.88 degrees (neighbour differences, strength 12) or 4.58 degrees
+  (Sobel, strength 12). A flat normal map is 24.46 degrees off.
+* **The ceiling:** a recipe that makes its height and normal from its own colour can at best be 5 steps off in height and 4.6 degrees off in the normal,
+  even with a perfect colour picture. "Exact" asks for 4 degrees, so it is out of reach for gravel.
+
+### A2. How few colours the picture needs
+
+*What was done* (`analysis/palette_ceiling.py`, `scores/palette_ceiling.json`): k-means (a method that finds the k colours that best stand for all the dots)
+in a colour space that follows the eye; every dot snapped to its nearest colour.
+
+| colours | colour difference | colour SSIM | separate same-colour areas |
+|---|---|---|---|
+| 8 | 4.43 | 0.855 | 82,431 |
+| 12 | 3.74 | 0.883 | 125,605 |
+| 16 | 3.32 | 0.902 | 162,168 |
+| 24 | 2.81 | 0.923 | 226,197 |
+| 32 | 2.50 | 0.937 | 265,006 |
+| 48 | 2.15 | 0.954 | 351,258 |
+
+Scored with the full dot-for-dot tool, the 24-colour picture gives edge skill 0.857, height error 8.1 and normal error 10.6 degrees, tier "close"; after a
+3 x 3 majority filter, SSIM 0.857 and normal error 13.4, tier "layout" (`builder_answer.json`; printed by `analysis/numpy_bake.py`, not saved to a file).
+So even a perfect 24-colour copy only just makes "close", and only by keeping all its 226,197 areas.
+
+### A3. Stone or soil, and how big they are
+
+*What was done* (`analysis/measure_gravel.py`, `scores/measurements.json`, `scores/measure_gravel_log.txt`).
+* **Soil or stone, by colour:** soil = orange-brown (Lab colour space: yellow-blue above 5, red-green above 2, colourfulness above 6.5; then a 5-dot median
+  filter). Result: **32.2 % soil, 67.8 % stone.**
+* **Sizes, by "opening with a disc":** erase every part of the stone (or soil) area that a disc of radius r cannot fit inside, and see how much is left.
+  A big stone survives a big disc; a crumb does not.
+
+| disc radius (dots) | 0 | 1 | 2 | 3 | 4 | 6 | 8 | 12 | 16 | 24 | 32 | 48 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| stone left (share of all dots) | 0.678 | 0.677 | 0.669 | 0.660 | 0.644 | 0.621 | 0.598 | 0.557 | 0.516 | 0.407 | 0.322 | 0.109 |
+| soil left | 0.322 | 0.322 | 0.314 | 0.300 | 0.272 | 0.230 | 0.198 | 0.146 | 0.096 | 0.015 | 0.002 | 0.0 |
+
+Reading: half of the picture is stone at least 16 dots in radius, a third is stone at least 32 dots in radius; the soil is crumbly (almost none of it is 24
+dots across). Of all stone dots, 31.6 % sit in stones of radius 32 to 48 and 16.0 % in stones of radius 48 or more.
+
+### A4. The colours, and how they change with stone size
+
+*Stone colours* (8, dark to light, share of stone dots; `scores/measure_gravel_log.txt`): (19, 19, 19) 16.6 %; (33, 33, 35) 20.7 %; (42, 46, 51) 17.0 %;
+(57, 57, 56) 10.5 %; (60, 69, 76) 12.1 %; (87, 84, 80) 5.0 %; (83, 93, 98) 10.6 %; (111, 117, 116) 7.6 %.
+*Soil colours* (share of soil dots): (40, 30, 24) 5.5 %; (63, 44, 33) 14.9 %; (79, 52, 34) 25.6 %; (96, 63, 42) 20.1 %; (87, 69, 56) 8.4 %;
+(118, 81, 54) 15.5 %; (114, 96, 80) 6.4 %; (149, 115, 87) 3.5 %.
+
+*Colour mix by stone size* (share of each colour among the stone dots of that size; "size" = the largest disc radius that still fits):
+
+| size (disc radius) | share of stone dots | near black (19,19,19) | blue-grey (60,69,76) | brownish grey (87,84,80) | pale blue-grey (83,93,98) |
+|---|---|---|---|---|---|
+| 0 to 3 | 4.9 % | 0.21 to 0.26 | 0.00 to 0.04 | 0.22 to 0.24 | 0.01 to 0.03 |
+| 4 to 8 | 12.9 % | 0.18 to 0.20 | 0.05 to 0.08 | 0.09 to 0.21 | 0.04 to 0.06 |
+| 12 to 24 | 34.7 % | 0.18 to 0.20 | 0.06 to 0.13 | 0.04 to 0.08 | 0.09 to 0.12 |
+| 32 | 31.6 % | 0.13 | 0.14 | 0.02 | 0.14 |
+| 48 and more | 16.0 % | 0.15 | 0.20 | 0.00 | 0.08 |
+
+Small stones are more often brownish grey, big stones more often blue-grey. The generator carries this as one colour-weight list per size class
+(`description/S_v4.json`, "weights").
+
+### A5. Shadow, rim and light
+
+*Shadow, not outline* (`scores/measurements.json`, "border_lightness_profile"): lightness (0 to 100) at 1 to 8 dots from a stone/soil border.
+
+| dots from the border | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|
+| inside the stone | 20.0 | 19.7 | 20.2 | 20.4 | 20.5 | 20.7 | 20.9 | 21.2 |
+| inside the soil | 24.6 | 27.0 | 27.7 | 28.5 | 29.5 | 30.2 | 30.8 | 31.4 |
+
+The soil gets darker toward the stone (31.4 down to 24.6 over 8 dots); the stone does not get darker at its edge. So the dark band round each stone belongs
+to the soil: a shadow. *Light:* inside the big stones the lightness falls by 0.061 per dot going DOWN the picture and by 0.005 per dot going sideways:
+the light comes from the top. *Edges:* the big stones' edges point in no particular direction (coherence 0.033 of 1).
+
+### A6. How much the reference changes from place to place
+
+*What was done* (`analysis/window_spread.py`, `scores/window_spread.json`): cut the tile into 3 x 3 windows of 418 dots and measure each.
+
+| measure | average | spread between windows | spread as a share of the average |
+|---|---|---|---|
+| stone share | 67.8 % | 3.0 | 4.5 % |
+| big-stone share (survives a radius-16 disc) | 51.6 % | 3.8 | 7.4 % |
+| soil-lump share (soil surviving a radius-6 disc) | 23.0 % | 3.2 | 13.8 % |
+| edge density | 16.3 % | 0.4 | 2.3 % |
+| average lightness | 24.5 | 0.5 | 2.0 % |
+
+These spreads set how far the sampler moves the counts of new tiles (`scores/sampler_spread.json`: counts 7 %, radius 5 %, soil counts 12 %).
+
+### A7. Finding single stones did not work
+
+*What was done* (`analysis/segment_stones.py`): stone or soil by colour, fill holes, remove crumbs, cut touching stones apart at their narrowest neck
+("watershed" on the distance to the soil), measure each piece. *Result:* 237 pieces (`analysis/stones_found.json`) where the builder estimates about 1,500
+stones (`builder_answer.json`). Dark stones touch dark stones, shadows are stone-coloured and rusty stones are soil-coloured, so neighbours merge. A second
+try (one stone per peak of the biggest fitting disc) gave the same merged pieces and was deleted (`analysis/placed_stones.json` is empty). *Consequence:* no
+"place the big stones one by one" description was made; the generator works from the statistics in A3 to A6.
+
+### A8. Measured while writing this guide: the made-up tile against the reference
+
+Command (plain Python, from the `generator/` folder):
+`python3 -I -c "import sys; sys.path.insert(0,'.'); import cv2, preview_tools as pt; print(pt.measure(cv2.imread('../outputs/S_v4/colour.png')))"`
+(`preview_tools.measure` is the same stone/soil test and disc opening as `analysis/measure_gravel.py`; the OpenCV drawing is
+`preview_tools.make_preview(description, scale=1)`, the same drawing the calibration uses.)
+
+**Stone left after opening with a disc** (share of all dots):
+
+| disc radius (dots) | 0 | 4 | 8 | 12 | 16 | 24 | 32 | 48 |
+|---|---|---|---|---|---|---|---|---|
+| reference (`scores/measurements.json`) | 0.678 | 0.644 | 0.598 | 0.557 | 0.516 | 0.407 | 0.322 | 0.109 |
+| S_v4 as baked by Blender (`outputs/S_v4/colour.png`) | 0.611 | 0.585 | 0.528 | 0.428 | 0.312 | 0.134 | 0.070 | 0.013 |
+| new tile sample_03, baked (`variations/out/sample_03/colour.png`) | 0.607 | 0.580 | 0.518 | 0.434 | 0.327 | 0.139 | 0.043 | 0.005 |
+| S_v4 drawn with OpenCV (the calibration's quick drawing) | 0.674 | 0.647 | 0.597 | 0.507 | 0.390 | 0.187 | 0.085 | 0.014 |
+
+* **The made-up gravel has far too few big stones.** At radius 32 the reference keeps 32 % stone, the baked S_v4 7 %. The checker found the same gap
+  (`verifier_answer.json`; its numbers match the radius-16 and radius-32 rows here, though it names them radius 12 and 24).
+* **The calibration matched the curve on average, not at the big end.** Its score is the average gap over all radii (`analysis/calibrate_sampler.py`), so
+  the many small radii, where it matches well, hide the miss at 24 to 48.
+* **The quick drawing is not the Blender picture.** The same description drawn with OpenCV measures 67.4 % stone, the Blender photograph 61.1 %. The two
+  colour pictures differ by 6.2 steps per dot on average; their soil shares are 32.6 % (drawing) and 38.9 % (Blender) and they agree on soil-or-stone for
+  93.3 % of the dots. Average colour (blue, green, red): drawing 48.2, 54.7, 64.8; Blender 48.0, 55.2, 66.4. The files do not say which detail causes the
+  shift; Blender's soft (anti-aliased) shape edges are one candidate, not tested.
+
+### A9. Tracing: how big a copy of the picture has to be
+
+*What was done* (`analysis/trace_experiment.py`, `scores/trace_experiment.json`; drawn and scored in numpy): snap to k colours, drop areas smaller than a
+minimum size, write each remaining area as an outline that may stray from the true edge by "tolerance" dots.
+
+| colours | smallest area kept (dots) | tolerance | patches | size of the outline list | colour SSIM | colour difference |
+|---|---|---|---|---|---|---|
+| 24 | 12 | 1.0 | 18,881 | 1,182 KB | 0.675 | 5.49 |
+| 24 | 12 | 1.6 | 18,254 | 898 KB | 0.643 | 5.86 |
+| 24 | 30 | 1.0 | 9,236 | 810 KB | 0.614 | 6.06 |
+| 24 | 30 | 1.6 | 9,233 | 600 KB | 0.598 | 6.25 |
+| 24 | 80 | 1.0 | 3,177 | 440 KB | 0.517 | 7.99 |
+| 24 | 80 | 1.6 | 3,177 | 317 KB | 0.512 | 8.04 |
+| 24 | 250 | 1.0 | 764 | 160 KB | 0.445 | 11.72 |
+| 24 | 250 | 1.6 | 764 | 115 KB | 0.444 | 11.73 |
+| 16 | 12 | 1.0 | 15,828 | 1,073 KB | 0.561 | 6.50 |
+
+The patches over 12 dots do not fit in 512 KB (1,182 KB). For comparison the slate reference had 9,383 patches over 12 dots and its finest traced
+description was 442 KB (`../slate/04 Recipe - slate - how it is made.md`). A busy picture cannot be traced into a class-L description.
+
+**Stamps** (`analysis/stamp_experiment.py`, `final_report.json` "stamp_experiment"; numpy scoring; the sizes here are larger than the real description
+files made later, for example 356 KB here against 270 KB for `description/L_a250_s12.json`): the specks too small to outline are added back as discs,
+found as the dots where the drawn patches still disagree with the 24-colour picture.
+
+| patches over (dots) | stamps over (dots) | number of stamps | size | colour SSIM | colour difference | edge skill | height error | normal error | tier |
+|---|---|---|---|---|---|---|---|---|---|
+| 250 | none | 0 | 125.6 KB | 0.452 | 11.41 | 0.096 | 40.5 | 26.4 | none |
+| 250 | 12 | 18,153 | 356.0 KB | 0.616 | 6.08 | 0.604 | 21.6 | 23.6 | layout |
+| 250 | 6 | 27,662 | 476.7 KB | 0.652 | 5.63 | 0.662 | 19.7 | 22.4 | layout |
+| 100 | none | 0 | 282.8 KB | 0.509 | 8.50 | 0.229 | 30.9 | 25.8 | none |
+| 100 | 12 | 16,847 | 496.7 KB | 0.670 | 5.33 | 0.627 | 17.8 | 21.4 | layout |
+| 100 | 6 | 27,783 | 635.5 KB | 0.709 | 4.89 | 0.694 | 16.1 | 20.1 | layout |
+| 50 | none | 0 | 461.8 KB | 0.576 | 6.93 | 0.384 | 23.5 | 24.1 | layout |
+| 50 | 12 | 14,237 | 642.6 KB | 0.699 | 5.10 | 0.631 | 16.1 | 20.2 | layout |
+| 50 | 6 | 27,217 | 807.3 KB | 0.741 | 4.64 | 0.693 | 14.5 | 18.7 | layout |
+
+Stamps lift the edge skill far more per kilobyte than finer outlines do (0.096 to 0.604 with stamps; 0.096 to 0.229 with outlines 2.5 times finer). No row
+gets the normal error under the 12-degree limit of "close", even at 807 KB.
+
+### A10. Calibration of the made-up stones
+
+*What was done* (`analysis/calibrate_sampler.py`): draw the tile with OpenCV, measure it like the reference (A3 and A8), and change one number at a time (the
+count of one size class times 1.5 or 0.7, or its spacing times 0.9 or 1.08), keeping a change only if the match gets better. The match ("cost") is the average
+gap of the stone and soil curves plus half the gap in edge density (reference 0.229).
+
+| run (in `scores/`) | from | to | cost before, after | stone share after |
+|---|---|---|---|---|
+| `calibrate2_log.txt` | the first guess | `S_calibrated2` | 0.217, 0.121 | 0.673 |
+| `calibrate3_log.txt` | an `S_calibrated2`-like start | `S_v2` (stones too small by eye) | 0.187, 0.117 | 0.676 |
+| `calibrate4_log.txt` | `S_v4_start` (sizes from the biggest stones) | `S_v4` | 0.210, 0.114 | 0.674 |
+
+For S_v4 the counts of the two biggest classes were multiplied by 0.7 (40 to 28 and 150 to 105) and the spacings ended at 0.585, 0.65, 0.65, 0.585, 0.65
+(`scores/calibration_S_v4.json`). The builder reports about 4 s per try. A8 shows what the calibration missed.
+
+### A11. The scripts in `analysis/`
+
+Analysis (read the reference): `derivation_ceiling.py`, `derivation_parametric.py`, `palette_ceiling.py`, `measure_gravel.py`, `window_spread.py`,
+`segment_stones.py`, `trace_tools.py`, `trace_experiment.py`, `stamp_experiment.py`, `make_trace_descriptions.py`, `make_trace_stamp_descriptions.py`.
+Making descriptions: `make_first_description.py`, `calibrate_sampler.py`, `make_transfer_description.py` (its first lines say it starts from S_v1; the code
+reads S_v4). Scoring and reports (read the bakes): `score_folder.py`, `numpy_bake.py`, `tune_texture.py`, `ladder_procedural.py`, `half_tile_test.py`
+(bakes at 512 dots), `variation_report.py`, `area_report.py`, `resolution_report.py`, `score_geometry_route.py`, `make_ladder_picture.py`,
+`make_final_report.py`. Each starts with a plain note saying what it does. Large files: `seg2.npy` and `seg3.npy` (segmentation pictures, 18 MB together),
+`stones_found.json`.

@@ -1,0 +1,140 @@
+{
+ "relax_steps": {
+  "radius": 0.032,
+  "asked_points": 220,
+  "tightness": 1.0,
+  "seed": 3,
+  "cases": {
+   "Poisson Disk": {
+    "points": 161,
+    "smallest_wrap_distance": 0.0048,
+    "share_with_a_neighbour_closer_than_0.9_x_2r": 0.174,
+    "evaluate_seconds": 0.003
+   },
+   "random, relax 0": {
+    "points": 220,
+    "smallest_wrap_distance": 0.0067,
+    "share_with_a_neighbour_closer_than_0.9_x_2r": 0.923,
+    "evaluate_seconds": 0.002
+   },
+   "relax 5 steps": {
+    "points": 220,
+    "smallest_wrap_distance": 0.0315,
+    "share_with_a_neighbour_closer_than_0.9_x_2r": 0.736,
+    "evaluate_seconds": 0.036
+   },
+   "relax 15 steps": {
+    "points": 220,
+    "smallest_wrap_distance": 0.0482,
+    "share_with_a_neighbour_closer_than_0.9_x_2r": 0.35,
+    "evaluate_seconds": 0.075
+   },
+   "relax 40 steps": {
+    "points": 220,
+    "smallest_wrap_distance": 0.0604,
+    "share_with_a_neighbour_closer_than_0.9_x_2r": 0.0,
+    "evaluate_seconds": 0.149
+   }
+  }
+ },
+ "seconds": {
+  "strip_relax": 1.7,
+  "strip_groove": 3.8,
+  "strip_ridge": 3.3,
+  "strip_set_material": 1.3,
+  "total": 10.1
+ },
+ "groove_width": {
+  "depth_tile_units": 0.01,
+  "grid_vertices": "257 x 257",
+  "cases": {
+   "0.005": {
+    "groove_half_width_tile_units": 0.005,
+    "in_dots_of_a_1254_tile": 6.3,
+    "lowest_z": -0.00999,
+    "vertices": 66049,
+    "seconds_build_and_render": 0.95
+   },
+   "0.01": {
+    "groove_half_width_tile_units": 0.01,
+    "in_dots_of_a_1254_tile": 12.5,
+    "lowest_z": -0.01,
+    "vertices": 66049,
+    "seconds_build_and_render": 0.87
+   },
+   "0.02": {
+    "groove_half_width_tile_units": 0.02,
+    "in_dots_of_a_1254_tile": 25.1,
+    "lowest_z": -0.01,
+    "vertices": 66049,
+    "seconds_build_and_render": 0.9
+   },
+   "0.04": {
+    "groove_half_width_tile_units": 0.04,
+    "in_dots_of_a_1254_tile": 50.2,
+    "lowest_z": -0.01,
+    "vertices": 66049,
+    "seconds_build_and_render": 1.1
+   }
+  }
+ },
+ "ridge_radius": {
+  "profile": "Curve Circle, Resolution 8",
+  "height_picture_range": [
+   0.0,
+   0.024
+  ],
+  "cases": {
+   "0.0": {
+    "profile_radius_tile_units": 0.0,
+    "highest_z": 0.0,
+    "vertices": 6484,
+    "seconds_build_and_render": 0.19
+   },
+   "0.003": {
+    "profile_radius_tile_units": 0.003,
+    "highest_z": 0.003,
+    "vertices": 51844,
+    "seconds_build_and_render": 0.86
+   },
+   "0.006": {
+    "profile_radius_tile_units": 0.006,
+    "highest_z": 0.006,
+    "vertices": 51844,
+    "seconds_build_and_render": 0.71
+   },
+   "0.012": {
+    "profile_radius_tile_units": 0.012,
+    "highest_z": 0.012,
+    "vertices": 51844,
+    "seconds_build_and_render": 0.77
+   },
+   "0.024": {
+    "profile_radius_tile_units": 0.024,
+    "highest_z": 0.024,
+    "vertices": 51844,
+    "seconds_build_and_render": 0.8
+   }
+  }
+ },
+ "set_material": {
+  "material on the object slot": {
+   "mean_brightness_0_to_1": 0.0003,
+   "materials_on_the_evaluated_mesh": [
+    null
+   ],
+   "materials_on_the_object_own_mesh": [
+    "show colour"
+   ]
+  },
+  "Set Material node at the end": {
+   "mean_brightness_0_to_1": 0.3253,
+   "materials_on_the_evaluated_mesh": [
+    null,
+    "show colour"
+   ],
+   "materials_on_the_object_own_mesh": []
+  }
+ },
+ "blender": "5.2.2 LTS"
+}

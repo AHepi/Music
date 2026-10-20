@@ -6,12 +6,22 @@ Folder: `recipes/metal/`. Pictures are in `guide_pictures/`, scores in `scores/`
 
 Words used in this guide (one word for each thing, always):
 * **dot** = one pixel of the 1254 x 1254 tile.
-* **bar** = a strap or a brace: a long flat strip of steel laid on the plate (the reference has 4 straps and 2 braces).
-* **patch** = one flat-coloured piece of rust, dust, chip or stain.
+* **bar** = a strap or a brace: a long flat strip of steel laid on the plate (the reference has 4 straps and 2 braces). In the description file the bars are stored under the key `bands`.
+* **patch** = one flat-coloured piece of rust, dust, chip or stain. A **traced patch** is one copied from the reference as an outline; the description file stores traced patches under the key `regions`.
 * **description** = the small file of numbers that the generator reads (`description/*.json`). No picture is ever stored in it.
 * **generator** = `generator/metal_generator.py`, the Blender script that turns a description into pictures.
-* **layer** = one kind of detail added on top of the others (bars, then rivets, then wear, ...).
+* **layer** = one kind of detail added on top of the others (bars, then rivets, then wear, ...). The five kinds of procedural wear are called **wear layers**; the first two rungs of the ladder are called **step A** and **step B** (files `layerA.json`, `layerB.json`).
 * **tier** = the verdict of the dot-for-dot comparison: none, layout, close, exact.
+* **KB** = 1024 bytes (the unit of the project's size check).
+
+The measures, in plain words (all from `lib/pixel_compare.py`; section 6 has the tier limits):
+* **SSIM** ("structural similarity"): a number from 0 to 1 that says how alike the light-and-dark structure of two pictures is, dot for dot. 1 = the same picture.
+* **Delta E** (colour difference): the average difference in colour between two dots in the same place, in the standard colour-difference unit. 0 = the same colour; about 2.3 is the smallest difference most people can see side by side; 10 is clearly a different shade.
+* **edge skill**: how many of the reference's strong edges the generated picture puts within 2 dots of the same place, with the share a wrongly placed copy would get by luck taken off. 0 = no better than luck, 1 = every edge in place.
+* **height error**: the average difference between the two height pictures, in levels of 255, after the best brightness-and-contrast fix. **normal angle**: the average angle in degrees between the two normal maps.
+* **"same kind" score**: texture_compare's overall score (0 to 1): does it look like the same KIND of surface, wherever things are?
+
+An independent checker re-ran this work afterwards; what it confirmed and what was corrected is in the last section, "Checked independently".
 
 ---
 
@@ -21,11 +31,11 @@ Reference (left) and the generated tile from the largest description L (right, 4
 
 ![difference sheet of class L](scores/L_diff.png)
 
-Everything in the right-hand picture is made by Blender from a list of numbers: the bars, the rivets, the thin seams, every rust patch. Nothing was copied from the reference picture.
+Everything in the right-hand picture is made by Blender from a list of numbers: the bars, the rivets, the thin seams, every rust patch. The generator never reads the reference picture, **but the description L is a traced copy of it**: 408 KB of its 413 KB are the outlines of 9155 patches cut out of the reference's own rust, chips and stains (about 150,000 numbers; section 4). The bars, rivets and edge shading are described; the wear in M and L is traced.
 Heights and the normal map are worked out from the colour picture with the same rule that was found in the reference (section 3).
 
 What each size class of description buys (measured, section 9): a 5 KB description (layout only) gets the structure right;
-a 32 KB description gets the first pixel tier ("layout"); 256 KB gets the tier "close" (413 KB gets further). A different 6 KB description (the same layout plus random wear) makes a surface that looks like the same kind of steel but is not the same picture.
+a 32 KB description gets the first pixel tier ("layout"); 256 KB gets the tier "close" (413 KB gets further). The M and L steps buy their accuracy by tracing. A different 6 KB description (the same layout plus random wear) makes a surface that looks like the same kind of steel but is not the same picture.
 
 ---
 
@@ -39,28 +49,29 @@ Different descriptions give different tiles. A random description generator (`sa
 
 ---
 
-## 3. Step 0 - measure the reference (the analysis method)
+## 3. Measure the reference (the analysis method)
 
 All analysis scripts are in `analysis/`. They are allowed to read the reference; the generator is not.
 
 **3.1 The derivation ceiling** (`derivation_ceiling.py`, result `derivation_ceiling.json`). Before copying anything, find out how the reference height and normal pictures were made from its colour picture,
 because then only the colour picture needs to be reproduced.
-* Height: take the grey brightness of the colour, blur it 0.7 dots, push it through a 12-point tone curve. Mean error against the real height: **5.0 levels** of 255 (correlation 0.989).
+* Height: take the grey brightness of the colour, blur it 0.7 dots, push it through a 12-point tone curve (a table that says which grey becomes which height, with straight lines between its 12 points). Mean error against the real height: **5.0 levels** of 255 (correlation 0.989; 4.93 after the best brightness-and-contrast fix).
   The curve is steep: grey 50 to 72 becomes height 100 to 170 (the brightness range is stretched hard).
-* Normal: the Sobel slope of the height, whole-number strength **5** (5.7 degrees mean angle error from the uploaded height, 6.7 degrees from the predicted height).
-* So: even a perfect colour picture only reaches height error 5.0 and normal error 6.7 degrees through this rule. The tier "exact" asks for under 6 and under 4: it cannot be reached by derived maps. Tier "close" can.
+* Normal: the "Sobel" slope of the height (the difference between the right and left neighbours, with the rows above and below counted in at half weight), whole-number strength **5**: **2.06 degrees** mean angle error from the uploaded height, **3.71 degrees** from the height predicted from the colour.
+* So: a perfect colour picture reaches height error 4.93 and normal error 3.71 degrees through this rule. The tier "exact" asks for under 6 and under 4, so **"exact" CAN be reached through derived maps**: the independent checker fed the reference colour through the generator's own rule (`generator/derive_maps.py` with `description/maps_rule.json`) and `lib/pixel_compare.py` gave tier "exact" (`verify/ceiling/pixel.json`: height 4.93, normal 3.71 degrees). For the L class, "exact" is out of reach only because of the COLOUR (SSIM 0.76 against 0.92, edge skill 0.58 against 0.85, Delta E 4.9 against 3).
+* **Correction:** an earlier version of this guide said 5.7 and 6.7 degrees and "exact cannot be reached by derived maps". That was a measuring mistake in `analysis/derivation_ceiling.py`: it compared with the reference normal arrows as stored in the 8-bit picture, whose length is 0.9957 on average instead of 1, without making them length 1 first; that alone adds about 5 degrees. Re-measured while correcting this guide (normalised as `pixel_compare.py` does): uploaded height 2.06 degrees at strength 5 (5.66 without normalising), predicted height 3.71 degrees at strength 5 (6.71 without), 2.73 at strength 6.
 
 **3.2 The layout by numbers.** The bars are rectangles. To find them:
 * `measure_profiles.py` + a rotate-and-count scan found the dark crease lines: vertical straps at x = 41/176 and 662.5/799.5, horizontal straps at y = 526/626 and 1181/1344 (this one wraps round the tile edge),
   two braces at 48.3 and 50.5 degrees about 100 dots wide. The bar order (which lies on top of which) was read from where the crease lines stop.
-* `find_rivets.py`: slide a picture of one rivet over the whole tile (wrapping round the edges), keep the places where it matches best: 33 rivets (34 matches, 2 false hits removed, 1 weak one added by eye), radius 19.5 dots, **not** evenly spaced (gaps 172 to 287 dots along a strap, 88 next to a crossing).
+* `find_rivets.py`: slide a picture of one rivet over the whole tile (wrapping round the edges) and keep the places where it matches best ("template matching"): 33 rivets (34 matches, 2 false hits removed, 1 weak one added by eye), radius 19.5 dots, **not** evenly spaced (gaps 172 to 287 dots along a strap, 88 next to a crossing).
 * `measure_rivet.py` / `make_layout.py`: the typical rivet = the middle colour over all rivets in 4 rings x 8 slices (the middle value ignores rust drips on a few of them).
 * The edge profile of every bar: walk along the bar and record the colours across the edge at one-dot steps, then take the middle over the whole length (and, at each step, only the less rusty half of the samples). This gives the shadow, the dark crease and the bright edge line of each edge. Upper and left edges: short shadow, dark crease, bright line. Lower and right edges: a long soft shadow (about 20 dots), a very dark crease, a dark wall.
 
 **3.3 The palette and the wear statistics** (`palette_fit.py`, `wear_stats.py`).
-* k-means in the Lab colour space: 8 colours give a mean colour error of 3.7 (Delta E), 16 colours 2.8, 24 colours 2.45.
+* The picture was snapped to a palette of N colours chosen automatically ("k-means": it picks the N colours that sit in the middle of the picture's own colour groups, measured in a colour space built so that equal distances look equally different): 8 colours give a mean colour error of 3.7 (Delta E), 16 colours 2.8, 24 colours 2.45.
 * Share of the picture: steel (5 blue-grey tones) 63 per cent, rust 18 per cent, dusty rust and light bare metal 9 per cent, very dark stains 10 per cent.
-* Patch size: rust patches reach 9 dots across and 13 dots up (autocorrelation length); steel 14 across and 21 up. Everything reaches about 1.45 times further up than across (drips, vertical brush strokes).
+* Patch size: rust patches reach 9 dots across and 13 dots up (the "autocorrelation length": how far you can slide the picture before it stops looking like itself); steel 14 across and 21 up. Everything reaches about 1.45 times further up than across (drips, vertical brush strokes).
   Rust is uneven: its share varies by 0.12 between 96-dot windows around a mean of 0.18, and it gathers along bar edges and under rivets.
 
 **3.4 A trap found here.** The reference has a mild seam: the picture jumps across the wrap-around edge 2.06 times as hard as between neighbouring dots, and two rivets sit on top of each other at the join.
@@ -77,10 +88,10 @@ A generator that traces the reference exactly copies that seam. See sections 7 a
 | `tile`, `maps` | tile size (1254) and the height/normal rule from section 3.1 (blur 0.7, 12 curve points, strength 5) | 0.2 KB |
 | `plate`, `plate_panels` | the bare plate colour (and optional panels of another tone) | tiny |
 | `profiles` | named edge-shading tables: rows of [distance outward from the crease in dots, red, green, blue] | 2.3 KB |
-| `bands` | the bars: centre, angle, length, half width (crease to centre), face colour, which profile on each side, drawing order, optional clip box | 1.3 KB |
+| `bands` | the bars (key name `bands`): centre, angle, length, half width (crease to centre), face colour, which profile on each side, drawing order, optional clip box | 1.3 KB |
 | `rivet`, `rivets` | the typical rivet (rings x 8 slices of colour) and the list of 33 rivet positions | 0.75 KB |
 | `procedural` | the wear layers: noise sizes, seeds, thresholds with colours, grain (section 5.3) | 1.45 KB |
-| `regions` (M and L only) | the traced patches: [colour number, start x, start y, step, step, ...] in whole dots; `patch_colours` = the 8-colour palette | 60 KB (M) or 408 KB (L) |
+| `regions` (M and L only) | the traced patches (key name `regions`): [colour number, start x, start y, step, step, ...] in whole dots; `patch_colours` = the 8-colour palette | 60 KB (M) or 408 KB (L) |
 
 The audit tool (`lib/description_audit.py`) accepts all of them: no list over 4000 numbers, no grid, no embedded picture (M and L needed two changes to pass it: section 10, item 7). **Where "describing" ends and "tracing" begins:** everything above the `regions` line describes
 the surface (bars, rivets, shading, the statistics of wear). The `regions` are a traced copy of this particular tile's rust, chips and stains: honest tracing, useful for matching this tile, useless for a new one.
@@ -103,7 +114,7 @@ Run it:  `blender -b --disable-autoexec -t 2 --python generator/metal_generator.
 * **Mesh** (a pile of triangles): all shapes go into ONE mesh; shape number i sits at height i x 0.00002, so later shapes cover earlier ones like layers of paint. 10 000 layers fit (0.2 high). Too small a step lets shapes flicker through each other.
 * **Colour Attribute** (a colour stored on every corner of the mesh): holds each shape's colour; other point attributes hold roughness, metallic, a "bare steel" flag and an "edge attraction" number.
 * **Orthographic camera** (a camera with no perspective) of size 1 over the 1 x 1 square, looking straight down: one dot of the picture = one dot of the tile, nothing is distorted.
-* **Cycles, samples, pixel filter**: samples = how many times each dot is looked at. 8 samples gives smooth shape edges; 1 sample gives hard stair-stepped edges. The reference has hard 1 to 2 dot stair-stepped edges; in one early test (made BEFORE the half-dot fix of section 10, so treat it as a rough guide) 16 samples against 1 sample moved the scores by only 0.01 to 0.02 (SSIM 0.717 vs 0.701, edge skill 0.528 vs 0.535), and a very narrow pixel filter (0.01) at 1 sample gave the same numbers as the normal one. 8 samples is the default; 1 sample is 4 times faster (a 10 000-shape bake took 8 seconds).
+* **Cycles, samples, pixel filter**: Cycles is Blender's renderer (the part that turns the scene into a picture); samples = how many times each dot is looked at; the pixel filter = how much of its surroundings each dot averages in. 8 samples gives smooth shape edges; 1 sample gives hard stair-stepped edges. The reference has hard 1 to 2 dot stair-stepped edges; in one early test (made BEFORE the half-dot fix of section 10, so treat it as a rough guide) 16 samples against 1 sample moved the scores by only 0.01 to 0.02 (SSIM 0.717 vs 0.701, edge skill 0.528 vs 0.535), and a very narrow pixel filter (0.01) at 1 sample gave the same numbers as the normal one. 8 samples is the default; 1 sample is 4 times faster (a 10 000-shape bake took 8 seconds).
 * **Emission shader** (a surface that simply glows with the colour you give it, no light needed) + **Attribute node** (reads the colour stored on the mesh) + view transform "Standard": the picture comes out exactly as the colours say. Roughness and metallic pictures use the Raw view.
 
 ### 5.3 What the procedural wear is made of (shader nodes)
@@ -111,7 +122,7 @@ The wear layers are written in the description (`procedural.layers`) and built b
 1. **Noise Texture, 4D** (Blender's cloud pattern): it is NOT seamless by itself. I feed it a "donut": u and v turned into (cos u, sin u, cos v, sin v) with **Math** nodes (sine, cosine, multiply), so the left edge continues into the right edge and the top into the bottom. Two separate scales (across and up) make streaks. Settings: `scale_u`, `scale_v` (features across the whole tile), `detail` (how many finer octaves are added), `roughness` (how strong the fine octaves are), `distortion` (how much the pattern is bent), `seed` (which pattern).
 2. **Map Range** (rescale): Blender's noise sits between about 0.27 and 0.71; this stretches it to 0..1.
 3. **Math Multiply Add**: value = stretched noise x gain + offset + edge-attraction x (the stored "edge attraction" number, which is high just beside bar edges and around rivets). `offset` shifts how much of the layer shows (more rust or less).
-4. **Color Ramp with Constant interpolation** (a ladder of thresholds): each step of the ladder gives one flat colour and a "cover or not" amount. This is what makes the hard painted edges instead of soft clouds.
+4. **Color Ramp with Constant interpolation** (a staircase of thresholds): each step of the ladder gives one flat colour and a "cover or not" amount. This is what makes the hard painted edges instead of soft clouds.
 5. **Mix** node (blend two colours by an amount): lays the ramp colour over the colour underneath, only where the shape is marked "bare steel". Layers can instead use **Multiply** (a brightness change: 128 = no change).
 6. **White Noise** at whole-dot positions (grain): a different random brightness for every dot, repeating exactly across the tile edge.
 
@@ -142,16 +153,16 @@ Result: the whole scene builds and is photographed (height and true normal) in *
 
 
 ### 5.6 What changing each setting does (sweep pictures, `generator/make_sweeps.py`)
-Each strip changes ONE number of the description S through five values and bakes the real generator each time (384 dots, except the two "zoom" strips, which are 300 x 300 dots of a full-size bake). Strips are in `guide_pictures/`.
+Each strip changes one setting of the description S through five values and bakes the real generator each time, with 4 samples (384 dots, except the two "zoom" strips, which are 300 x 300 dots of a full-size bake). Strips are in `guide_pictures/`. Two things to know: (1) the "rust noise size" strip changes TWO numbers together, the size across and the size up (up = 0.68 x across), so the patch shape stays the same; (2) the strips were baked at 21:00 to 21:02, before the final `description/S.json` (21:13) and the grain fix in the generator (21:08). The independent checker re-baked them with today's files: they differ by 1.46 to 1.55 brightness levels on average (0.3 % of dots by more than 40), so they show the right direction of change but are not bakes of the final description. Full-tile strips also exist for edge attraction and grain (`strip_edge_attraction.png`, `strip_grain.png`); the table shows the zoomed versions.
 
 | Strip | Setting | What you see |
 |---|---|---|
 | `strip_wear_size.png` | rust noise size (features across the tile, 15 to 140) | the fine mottle changes from coarse to fine; the big clumps stay where they are because the coarse "clustering" noise (5 x 4) sets them |
-| `strip_rust_amount.png` | rust `offset` (-0.10 to +0.10) | -0.10: almost no rust; 0: the fitted amount; +0.10: rust and pale chips cover a large part of the plate. The easiest "more or less rust" knob |
-| `strip_streak_length.png` | rust "up-scale" (number of noise features UP the tile, 8 to 110) | 8: long vertical drips and streaks; 30: the fitted look; 110: round speckle (no streaks) |
+| `strip_rust_amount.png` | rust `offset` (-0.10 to +0.10) | -0.10: much less rust (a rough count of rust-coloured dots: 3.3 per cent, against 11.5 per cent at the fitted setting; the checker's count); 0: the fitted amount; +0.10: rust and pale chips cover a large part of the plate. The easiest "more or less rust" knob |
+| `strip_streak_length.png` | rust noise size UP the tile (how many noise features fit from the bottom to the top of the tile, 8 to 110; key `scale_v`) | 8: long vertical drips and streaks; 30: the fitted look; 110: round speckle (no streaks) |
 | `strip_edge_attraction_zoom.png` | `edge_gain` (0 to 1.0), seen at full size | more rust right beside the bar edges and around the rivets as it grows (small effect: it only acts within 14 dots of an edge) |
 | `strip_grain_zoom.png` | grain amount (0 to 0.3), seen at full size | 0.04 to 0.08 is a faint fine texture; 0.3 is visibly noisy (I did not measure the reference's own grain on its own; its fine contrast, 9.3 grey levels after a 3-dot blur, is higher than all my settings give) |
-| `strip_layers.png` | which layers exist | flat plate and bar faces; + edge shading (the bars appear); + rivets and seam lines; + procedural wear |
+| `strip_layers.png` | which parts are drawn | flat plate and bar faces; + edge shading (the bars appear); + rivets and seam lines; + procedural wear |
 
 ![rust amount](guide_pictures/strip_rust_amount.png)
 ![streak length](guide_pictures/strip_streak_length.png)
@@ -161,7 +172,7 @@ Each strip changes ONE number of the description S through five values and bakes
 
 ## 6. Compare (the two tools)
 * `lib/pixel_compare.py`: dot-for-dot: colour SSIM (1 = same structure), Delta E, edge skill (how many strong edges are within 2 dots of a reference edge, luck subtracted), height error, normal angle, tier. Tier rules: layout = edge skill 0.30+, Delta E under 20, height error under 40; close = edge skill 0.55+, SSIM 0.60+, Delta E under 10, height error under 20, normal angle under 12; exact = 0.85, 0.92, 3, 6, 4.
-* `lib/texture_compare.py`: "same kind of surface": 14 statistics (colour spread, feature sizes, direction of structure, height and normal statistics, seam). A re-shuffled copy of the reference itself scores about 0.99, another surface about 0.1.
+* `lib/texture_compare.py`: "same kind of surface": 14 statistics (colour spread, feature sizes, direction of structure, height and normal statistics, seam). A re-shuffled copy of the reference itself scores about 0.99; other real reference surfaces score 0.16 to 0.50 on today's tool, not "about 0.1" as the project notes said (`cookbook/06 Guide - baking and checking maps.md`, section 7.4).
 * `generator/bake_and_score.py NAME` bakes a description and runs both. `generator/preview_tools.py` is a fast stand-in used while fitting (paints the shapes with OpenCV): it matched Blender to a mean difference of 0.9 to 2.6 colour levels, and I always re-measured with the real Blender picture.
 * Always LOOK at the difference sheet (`scores/*_diff.png`): bright = differs; red edges = only in the reference.
 
@@ -189,9 +200,9 @@ Pictures: `guide_pictures/variations_contact_sheet.png` (all 8), `variations/see
 Honest reading: the new tiles are clearly not copies (SSIM 0.4 means "different pictures") and score as well as the fitted S on "same kind"; but 0.57 is far from the 0.99 of a re-shuffled copy of the reference. What is still missing (looking at the sheet): the reference's long vertical drips from every rivet and edge are only partly there (one thin drip layer), the rust is more evenly peppered than in the reference (which is clumped by panel), and the layouts are a little busier than the reference.
 
 ### 7.2 Area: one 2 x 2 picture of new unique content (2508 dots), `final_tests.py area 21`
-`sample_description(21, tile_multiple=2)` (9.2 KB) baked at 2508 dots: `guide_pictures/area_2508_seed21.png`. 298 seconds with all maps on a loaded machine (the noise scales grow with the tile, so the features keep their size).
-* Seams: the jump across the wrap-around edge is 1.016 times a normal jump between neighbours; across the middle lines x = 1254 and y = 1254 it is 0.985 and 0.863 times (1.0 = no seam at all).
-* Repeats: the four 1254-dot quarters differ from each other (pairwise SSIM 0.45 to 0.51); the strongest repeat found by autocorrelation (any shift over 60 dots) has correlation 0.236 (at a 60-dot vertical shift: bars and rivet rows, not a copied area).
+`sample_description(21, tile_multiple=2)` (9.2 KB) baked at 2508 dots: `guide_pictures/area_2508_seed21.png`. 298 seconds with all maps on a loaded machine (the noise scales grow with the tile, so the features keep their size). Only `colour.png` and `bake.json` were kept in `area/seed21/`; the other maps were deleted to save disk, so the "all maps" bake can no longer be checked from the files, and the seam numbers below are for the colour picture only.
+* Seams: the jump across the wrap-around edge is 1.016 times a normal jump between neighbours; across the middle lines x = 1254 and y = 1254 it is 0.985 and 0.863 times (1.0 = no seam at all). The independent checker's own measure gave wrap 1.10 / 0.97 and middle lines 0.95 / 0.91: also no seam.
+* Repeats: the four 1254-dot quarters differ from each other (pairwise SSIM 0.45 to 0.51); the strongest repeat found by sliding the picture over itself (any shift over 60 dots) has correlation 0.236 (at a 60-dot vertical shift: bars and rivet rows, not a copied area; the checker found 0.231, and 0.177 for the reference tile itself).
 Not tested: bigger than 2 x 2.
 
 ### 7.3 Resolution: the same description at 512, 1254 and 2508 dots (`final_tests.py resolution S L`)
@@ -203,7 +214,7 @@ Not tested: bigger than 2 x 2.
 | L | 512 | 12.6 | 0.731 | 0.429 | 13.3 | 0.354 |
 | L | 1254 | 26.8 | 0.756 | 0.581 | 10.6 | 0.498 |
 | L | 2508 | 90.0 | 0.757 | 0.582 | 11.3 | 0.485 |
-What changes: time (S: 4 x the dots = 5.4 x the time, because noise costs per dot; L: 3.4 x), and nothing else of substance: the scores at 2508 equal the scores at 1254 (they are measured after shrinking to 1254 dots), so a bigger bake does not make the picture closer to the reference, it only makes the stair-steps of the traced outlines smoother. No new detail appears: the description holds detail down to about 1254 dots (grain too: one random value per 1254-grid dot). At 512 dots the scores fall because the comparison tool has to blow the small picture up. The painted route is resolution-independent (shapes, not dots); the shader noise is too (noise sizes are features per tile).
+What changes: time (S: 4 x the dots = 5.4 x the time, because noise costs per dot; L: 3.4 x), and nothing else of substance: the scores at 2508 equal the scores at 1254 (they are measured after shrinking to 1254 dots), so a bigger bake does not make the picture closer to the reference, it only makes the stair-steps of the traced outlines smoother. No new detail appears: the description holds detail down to about 1254 dots (grain too: one random value per 1254-grid dot). At 512 dots the scores do NOT all fall: for S the dot-for-dot scores are even a little better at 512 (SSIM 0.549 against 0.479, Delta E 11.82 against 12.18; probably because blowing the small picture up smooths S's fine grain, not tested) and only S's same-kind score falls; for L the SSIM and edge skill fall (0.731 and 0.429 against 0.756 and 0.581). (An earlier version of this guide said "at 512 dots the scores fall"; that is true only for those columns.) The painted route is resolution-independent (shapes, not dots); the shader noise is too (noise sizes are features per tile).
 (An edge "sharpness" number I tried to add was scaled wrongly and is not reported.)
 
 ### 7.4 Seamless proof (`final_tests.py seam`, half-tile shift)
@@ -214,10 +225,10 @@ Bake the description shifted by half a tile (627 dots right and down, the noise 
 | S (layout + procedural wear) | 0.0 per cent | 3.24 | 7.3 per cent / 19.5 |
 | M | 0.0 per cent | 0.43 | 3.6 per cent / 14.1 |
 | L | 0.0 per cent | 0.56 | 5.4 per cent / 16.2 |
-The three shape-only descriptions agree to within the smoothing of shape edges. S shows 3.2 levels of mean difference because float rounding in the noise flips dots that sit right at a threshold of the colour ladder (small colour steps, none over 40 levels); it is far below the control. Looks: `guide_pictures/tiled_2x2_S.png`, `tiled_2x2_L.png` (2 x 2 tilings: no seam visible; the same tile repeated, of course). The texture_compare seam ratio (jump across the wrap-around edge divided by a normal jump; 1.0 = seamless): reference 2.02, S 0.89, M 1.34, L 1.37 (tiling scores 1.00, 0.84, 0.81). Healing the reference before tracing took the tiling score from 0.30 to 0.84 (M) and from 0.002 to 0.81 (L); what is left comes from patches and rivets that cross the edge being traced from a picture that was only faded over 14 dots, so a slight step survives at the border (I did not find out more; the half-tile test and the 2 x 2 look show no visible seam).
+The three shape-only descriptions agree to within the smoothing of shape edges. S shows 3.2 levels of mean difference because of the **grain**: a random brightness for every dot, picked at slightly different sub-dot places when the painting is shifted (8 samples per dot), so it does not repeat exactly dot for dot. The independent checker proved it: a sampled tile (seed 3) gives the same 3.2 with grain, and 0.71 with the grain set to 0 (0 per cent of dots over 40 levels either way). (An earlier version of this guide blamed rounding in the noise at the colour-ramp thresholds; that was wrong.) It is far below the control. The checker also repeated the test: L 0.56 (control 16.2, 17.4 per cent over 40), seed 3 3.2 (control 17.0, 14.4 per cent), and the hull plates, which the builder never tested: 2.52, 0 per cent over 40. Looks: `guide_pictures/tiled_2x2_S.png`, `tiled_2x2_L.png` (2 x 2 tilings: no seam visible; the same tile repeated, of course). The texture_compare seam ratio (jump across the wrap-around edge divided by a normal jump; 1.0 = seamless): reference 2.02, S 0.89, M 1.34, L 1.37 (tiling scores 1.00, 0.84, 0.81). Healing the reference before tracing took the tiling score from 0.30 to 0.84 (M) and from 0.002 to 0.81 (L); what is left comes from patches and rivets that cross the edge being traced from a picture that was only faded over 14 dots, so a slight step survives at the border (I did not find out more; the half-tile test and the 2 x 2 look show no visible seam).
 
 ### 7.5 Transfer to a surface that was not given: ship's hull plates (description only)
-`transfer/make_hull_plates.py` writes `description/hull_plates.json` (17.9 KB: 24 bars, 576 small rivets). The generator code is unchanged. The recipe of the change is in the lessons guide (section 6). Result: `guide_pictures/transfer_hull_plates.png`.
+`transfer/make_hull_plates.py` writes `description/hull_plates.json` (17.9 KB: 24 bars, 576 small rivets). The generator code was not changed for the transfer. Note: the stored hull picture was baked at 20:57, before the generator's last fixes (21:08, the grain fix); baked again with today's generator it differs by 2.94 levels on average (the grain), 0 per cent of dots by more than 40 (checked independently). The recipe of the change is in the lessons guide (section 6). Result: `guide_pictures/transfer_hull_plates.png`.
 
 ![hull plates](guide_pictures/transfer_hull_plates.png)
 
@@ -239,8 +250,8 @@ Dot-for-dot against the reference (`scores/NAME_pixel.json`), real Blender bakes
 
 | Class / layer | Bytes | Tier | SSIM | Delta E | Edge skill | Height error (best fit) | Normal angle | Same kind | Bake s |
 |---|---|---|---|---|---|---|---|---|---|
-| layer A: plate + bar faces | 3567 | none | 0.613 | 9.75 | 0.00 | 32.3 | 13.3 | 0.163 | ~14 |
-| layer B: + edge shading | 4080 | none | 0.649 | 8.88 | 0.15 | 28.1 | 12.8 | 0.173 | ~14 |
+| step A: plate + bar faces (`layerA.json`) | 3567 | none | 0.613 | 9.75 | 0.00 | 32.3 | 13.3 | 0.163 | ~14 |
+| step B: + edge shading (`layerB.json`) | 4080 | none | 0.649 | 8.88 | 0.15 | 28.1 | 12.8 | 0.173 | ~14 |
 | **S0**: + rivets, seam lines (layout only) | 4840 | none | 0.655 | 8.60 | 0.23 | 26.8 | 12.7 | 0.197 | 14 |
 | **S**: layout + procedural wear (5 layers + grain) | 6303 | none | 0.479 | 12.18 | 0.15 | 31.5 | 16.1 | 0.523 | 55 to 82 |
 | layout + 88 patches | 16 091 | none | 0.666 | 7.75 | 0.30 | 25.1 | 12.6 | 0.229 | 23 |
@@ -250,7 +261,7 @@ Dot-for-dot against the reference (`scores/NAME_pixel.json`), real Blender bakes
 | layout + 5392 patches | 261 188 | **close** | 0.740 | 5.14 | 0.55 | 17.9 | 11.0 | 0.440 | 36 |
 | **L**: layout + 9155 patches | 413 452 | **close** | 0.756 | 4.90 | 0.58 | 16.6 | 10.6 | 0.498 | 27 to 45 |
 Texture groups for L: colour 0.523, height 0.471, normal 0.320, tiling 0.811. For S: 0.499, 0.477, 0.455, 1.000. For M: 0.258, 0.287, 0.169, 0.837.
-The derivation ceiling (section 3.1) is the limit for the height-error and normal-angle columns: height 5.0, normal 6.7 degrees.
+The derivation ceiling (section 3.1) is the limit for the height-error and normal-angle columns: height 4.93 (best fit), normal 3.71 degrees (corrected; an earlier version said 6.7).
 The audit (`lib/description_audit.py`) passes all of S0, S, M (limit 64 KB), L (limit 512 KB), R-descriptions, the hull plates and the eight sampled descriptions (details in section 10, item 7).
 
 
@@ -258,8 +269,8 @@ The audit (`lib/description_audit.py`) passes all of S0, S, M (limit 64 KB), L (
 
 ## 10. Dead ends, failures and traps (all of them happened)
 
-1. **Hough circles found no rivets** (nothing at any threshold). Template matching with a picture of one rivet found all of them (34 clear ones, a few false hits on strap edges that I removed by hand).
-2. **Keeping every patch above an area limit was wasteful**: 6280 patches (468 KB) gave edge skill 0.51. Ranking by gain per byte got 0.58 with 300 KB.
+1. **Hough circles** (a standard circle finder that looks for round edges) **found no rivets** (nothing at any threshold). Template matching (sliding a picture of one rivet over the tile) found all of them (34 clear ones, a few false hits on strap edges that I removed by hand).
+2. **Keeping every patch above an area limit was wasteful**: 6280 patches (468 KB) gave edge skill 0.51. Ranking the patches by "gain per byte" (how much each one improves the picture for the bytes it costs) got 0.58 with 300 KB.
 3. **More palette colours made it worse at the same size** (8 colours best; 16 and 24 worse).
 4. **Six shared edge profiles instead of twelve** lowered edge skill from 0.221 to 0.164 (kept per-bar profiles for the fit; shared ones for the sampler).
 5. **The half-dot error** (a measured outline runs through dot centres; dot i spans i to i+1): until fixed, L scored SSIM 0.716 / edge skill 0.526; fixed: 0.759 / 0.581. The OpenCV preview did not show it because it draws "boundary dots included".
@@ -270,8 +281,8 @@ The audit (`lib/description_audit.py`) passes all of S0, S, M (limit 64 KB), L (
 10. **The first procedural wear was far too fine** (90 x 64 features; patches 4 to 5 dots wide instead of 9 to 13). Rule: match the measured patch size first.
 11. **Random layouts**: the first sampler made too many straps and braces in small panels and braces at 40 degrees that poked out of their panels (visible rectangles where the clip box ends). Fixed by sampling brace angles near the panel diagonal, only in roomy near-square panels, 2 straps each way in most tiles.
 12. **The real-geometry height does not match the reference height** (section 5.5): not a failure of the geometry route, a property of the reference (its height is the brightness of the colour).
-13. **Grain bug found late**: the grain used the 3D position of each shape (its height in the stack changed the grain), not just its place in the picture. Fixed (the grain now follows the dot number and also moves with the painting in the seam test). Variation tiles baked before the fix and after it are mixed in `variations/` (statistically the same grain).
-14. **Not reproduced from the reference:** the two long thin scratches, the two overlapping rivets at the seam, the exact steel streak shapes (the procedural classes only match their statistics), and the reference's mild seam in M and L (healed by design).
+13. **Grain bug found late**: the grain used the 3D position of each shape (its height in the stack changed the grain), not just its place in the picture. Fixed (the grain now follows the dot number and also moves with the painting in the seam test). (An earlier version said that variation tiles from before and after the fix are mixed in `variations/`. They are not: the bakes are from 21:20 to 21:25, after the fix at 21:08, and the checker's re-bakes of seeds 1, 3 and 8 are identical to the stored pictures. The six sweep strips and the hull picture ARE from before the fix; see sections 5.6 and 7.5.)
+14. **Not reproduced from the reference:** the two long thin scratches in S0, S and M (in L the upper-right scratch IS there, as broken thin traced pieces: see `scores/L_diff.png` and the checker's `verify/scratch_crop.png`; an earlier version said "not reproduced" for all classes), the two overlapping rivets at the seam, the exact steel streak shapes (the procedural classes only match their statistics), and the reference's mild seam in M and L (healed by design).
 
 ---
 
@@ -283,3 +294,35 @@ The audit (`lib/description_audit.py`) passes all of S0, S, M (limit 64 KB), L (
 * A bigger area than 2 x 2 tiles, and sampled tiles at 2508 dots for the transfer surface.
 * The procedural wear against pixel_compare after tuning for texture_compare: they pull in different directions (section 9), I chose the texture score for S and the dot-for-dot score for M and L.
 
+
+---
+
+## 12. Checked independently
+
+A second helper (the "checker") re-ran this work from the files, without the builder. Its findings are in `verifier_answer.json`; its own bakes and scores are in `verify/`.
+
+**Confirmed:**
+* Fresh Blender bakes of S0, S, M and L, scored with both tools: every measure in the section 9 table identical (tier, SSIM, Delta E, edge skill, height error, normal angle, texture groups).
+* The generator never reads the reference (a search of the code and a trace of a full L bake: no file under `reference/` and no picture other than its own outputs was opened).
+* Every claimed description passes the size check at its class limit (only `description/S_v3_uncal.json`, an unused in-between file, fails 8 KB). M and L pass the "grid" rule only because outlines are capped at 120 corners and stored in chunks of 60 (section 10, item 7).
+* The eight variations are exactly what `sample_description(seed)` makes; re-baked seeds 1, 3 and 8 are identical to the stored pictures; scores reproduce (same kind 0.525 to 0.603).
+* The area is new content (re-made identically by `sample_description(21, tile_multiple=2)`), no seam, no copied area.
+* The geometry route (height correlation 0.072 with the reference) and the height-route table reproduce.
+* The half-tile tests pass (L 0.56, seed 3 3.2, hull plates 2.52; 0 per cent of dots over 40 levels).
+* The height ceiling of about 5 levels is right; the edge-profile, bar and rivet numbers match the S0 description; the tier rules in section 6 match `lib/pixel_compare.py`.
+
+**Corrected in this guide:**
+* REFUTED: "the derivation ceiling for the normal is 6.7 degrees, so tier exact cannot be reached through derived maps". With the reference normals made length 1 (as `pixel_compare.py` does) the ceiling is 3.71 degrees, and the reference colour through the generator's own rule reaches tier "exact" (`verify/ceiling/pixel.json`). "Exact" is out of reach for L only because of the colour (sections 3.1 and 9). Re-measured while correcting: 2.06 / 3.71 degrees normalised against 5.66 / 6.71 not normalised.
+* Section 1 said "nothing was copied from the reference picture"; the L description is a traced copy of the reference's rust (9155 outlines, 408 of its 413 KB).
+* The 3.2-level half-tile difference of S comes from the per-dot grain, not from rounding at colour thresholds (with grain 0: 0.71) (section 7.4).
+* The variation tiles were all baked after the grain fix, not "mixed" (section 10, item 13).
+* The upper-right scratch IS present in L as broken traced pieces; "not reproduced" holds only for S0, S and M (section 10, item 14).
+* The sweep strips: the rust-size strip changes two numbers, not one; 4 samples; baked before the final S description and the grain fix (1.46 to 1.55 levels off); rust offset -0.10 is "much less rust" (3.3 against 11.5 per cent), not "almost no rust"; the full-tile edge-attraction and grain strips are now mentioned (section 5.6).
+* "At 512 dots the scores fall" is true only for some columns (section 7.3).
+* The area folder keeps only the colour picture, so "all maps" and the seams can be checked only for colour (section 7.2).
+* The stored hull picture predates the grain fix (2.94 levels off when re-baked) (section 7.5).
+* Plain words: the measures, Sobel, k-means, autocorrelation length, tone curve, template matching, Hough circles, gain per byte, Cycles and pixel filter are now explained; `regions` = traced patches and `bands` = bars are named; "step A / B" instead of a third meaning of "layer".
+
+**Not fixed here:** the checker also found that some scripts (`generator/bake_and_score.py`, `run_variations.py`, `final_tests.py`, `analysis/height_routes.py`) use short names such as r, d, t0; this correction only touched the guides, not the code.
+
+**Not checked independently:** the bake times (they vary by a factor of two with the load); the analysis measurements of section 3.2 and 3.3 beyond the S0 description; areas bigger than 2 x 2 tiles and the area's height and normal maps (not tested by anyone).

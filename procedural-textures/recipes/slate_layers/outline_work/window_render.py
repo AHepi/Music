@@ -1,7 +1,5 @@
 # What this does (plain words): takes quick, zoomed-in pictures of ONE WINDOW of the slate recipe (a share of the tile) for many sets of settings
 # in one Blender run (copied from damage_work/window_render.py; used for the OUTLINE AND SHADOW preview, sweeps and before/after pictures).
-# the before/after pictures of the DAMAGE layer: because only a small window is drawn, a picture costs a sixth of a full 1254 dot bake,
-# and the window shows the lower edges of several slates at about 1000 dots per tile.
 # Use (inside Blender):
 #   blender -b --disable-autoexec -t 2 --python window_render.py -- RECIPE OUT_FOLDER PIXELS 'cx,cy,width' 'JSON {job: {"params": {...}, "channel": "Colour"}}'
 #   cx, cy = window centre in tile units (cy counts from the BOTTOM of the tile, like the Vector); width = window size in tile units.

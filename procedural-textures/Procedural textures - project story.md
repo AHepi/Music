@@ -13,8 +13,13 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   picture, each re-checked by an independent checker (every number reproduced exactly; no recipe reads your pictures).
 - **Closest results:** slate and metal reach "close"; wood, mud, brick and gravel reach "layout". The closest versions are big descriptions (400-500 KB) that store your picture's
   paint patches one by one, which is closer to tracing than to procedural making. The small settings-only versions (2-8 KB) get the structure right and make new tiles.
-- **Running now:** slate in separate layers (layout, colour and fade, damage, moss, outline and shadow) with your picture as a guide only; and the cookbook (missing brick and gravel
-  guides, the checkers' corrections, eight tool guides, a start-here page, a new-surface checklist, an overview picture).
+- **Cookbook done and checked:** start at `cookbook/06 Cookbook - start here.md`. Eight tool guides (pattern makers, shapers, seamless tiles, relief, geometry, painted look,
+  baking and checking, descriptions), a new-surface checklist, all twelve surface guides (brick and gravel now written, the checkers' corrections applied), an overview picture.
+  An independent checker followed every link (320, none broken) and re-read 55 numbers against the files (all match after 9 fixes).
+- **Running now:** slate in separate layers (layout, colour and fade, damage, moss, outline and shadow) with your picture as a guide only.
+- **Honest gaps the checker found:** nobody has yet followed the checklist on a brand-new surface from scratch (every transfer reused an existing generator); there is no
+  starting template for writing a new generator; the tool guides mostly teach shader nodes while most generators here are "painters" of flat shapes written in Python;
+  the same-kind tool needs a reference picture to score a new surface.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -67,6 +72,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 9. **Cookbook started**, and this snapshot saved to the repository (guides, code, reports, scores, descriptions; only the pictures the guides use, shrunk; your pictures and the big
    baked maps left out).
 
+10. **Cookbook written and checked.** Nine helpers: the missing brick and gravel guides (with the checkers' corrections), corrections to slate, wood, mud and metal guides, eight tool
+    guides with setting-sweep pictures, the start-here page, one merged new-surface checklist and the overview picture (each surface: yours, best traced copy, small settings-only
+    version, a new tile, the surface it was moved to). The independent checker found and fixed 9 wrong numbers (for example mud's "+0.03 SSIM for +50 KB" is really +0.009),
+    made words consistent ("seam number" everywhere), and listed the gaps above. Space on the machine stayed above 3 GB.
+
 ## Next step
 
-Finish the cookbook and the slate layers, then send them and save the final version here.
+Finish the slate in layers (being combined and checked now), then send it and save it here. After that, the most useful test of the method is to follow the checklist on a brand-new surface from scratch.

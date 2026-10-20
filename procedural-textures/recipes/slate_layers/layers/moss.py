@@ -1,41 +1,51 @@
 # What this file does (plain words)
 # ------------------------------------------------------------------------------------------------------------------------------
 # MOSS is the living growth on the slates: moss and lichen. It decides WHERE growth gathers, paints it as flat clumps with hard,
-# ragged edges in a family of olive tones, scatters small pale-tan lichen discs and rings, raises the surface a little (fuzzy) and
+# ragged edges in a family of five olive tones, scatters small pale-tan lichen discs and rings, raises the surface a little (fuzzy) and
 # makes it rougher. It uses no picture of any kind: everything is made of Blender nodes.
 #
-# THE IDEA IN ONE PICTURE. At every dot of a slate we work out a number called the GROWTH STRENGTH. Moss is painted where the strength
-# is above a line (the "threshold"); a bigger Coverage lowers the line. The strength is a sum of small pieces, each one a plain rule:
-#     strength = patch gate x ( drips below the upper edge          water runs down from the top edge in thin strands of different length
-#                             + joints                              the damp strip along the side joints of a slate
-#                             + lower part                          the lower part of a slate stays wet
-#                             + damp spots                          slates that sit low, and the sloping rim, hold water
-#                             + damage                              (optional) moss may grow on broken places, or keep away from them )
-#              + clump noise                                        tall, wobbly seamless-free noise made on the slate's own coordinates: this
-#                                                                   is what breaks the rules into clumps and gives every slate its own pattern
-#              + fringe and ragged edge                             thin vertical strokes and fine wobble added just where the line is crossed,
-#                                                                   so the edge of a clump grows thin teeth pointing down
-# The PATCH GATE is a very slow seamless noise (a few big areas of the roof, with large clean areas between), multiplied by each
-# slate's own "how mossy am I" random number (some slates are nearly clean, a few are covered).
+# THE IDEA IN ONE PICTURE. At every dot of a slate we work out a number called the GROWTH STRENGTH. Moss is painted where the strength is
+# above a line (the "threshold"). The strength is a sum of small pieces:
+#     strength = the RULES                                       where water and shade gather (each rule is a number 0..1 times its preference):
+#                  drips        below the upper edge of the slate: thin strands of different length run down from it
+#                  upper part   the whole upper part of the slate is a little wetter than the lower part
+#                  joints       the damp strip along the side joints of a slate
+#                  lower part   the lower part of a slate stays wet
+#                  damp spots   slates that lie low, and the sloping rim of every slate, hold water (read from base_height)
+#                  damage       (optional) moss may grow on damaged dots (Damage Attract); Damage Avoid cuts it back there instead
+#              + the CLUMP NOISE (Clump Strength)               a tall, wobbly noise that breaks the rules into separate clumps and gives every slate
+#                                                                its own pattern (it is read on the slate's own coordinates, new for every slate)
+#              + EDGE RAGGEDNESS                                 a tall fine noise and a round fine noise that make the edge of a clump ragged, with islands
+#                                                                and holes
+# The THRESHOLD comes from Coverage (0 = a line nothing can reach = no moss; 1 = a line at zero = nearly everything). The GATE moves the line up or
+# down: the gate is a very slow seamless noise (a few big mossy areas, large clean areas between; Patchiness) times each slate's own "how mossy am I"
+# random number (Slate Variation). A clean area pushes the line far up; a mossy slate lowers it a little.
 #
-# WHY IT LOOKS PAINTED, NOT LIKE CAMOUFLAGE. (1) The clump noise is stretched TALL (default 1.8 times taller than wide) and its
-# coordinates are pushed sideways by a slow wobble that grows as you go down the slate, so a clump runs down like a drip, not like a
-# round blob. (2) The drips start at the slate's own upper edge (top_edge_distance follows the chips of that edge) and have different
-# lengths from strand to strand (a noise that depends on the sideways position only). (3) The colour of a clump is cut into FLAT tone steps
-# (five olive tones) by stretched cells, so there is no smooth shading: every cell of the paint is one tone with a hard edge. The rim of a clump
-# is lighter, the part under the upper edge darker (shadow). (4) Edges have a fine, tall raggedness and thin down-pointing fringe teeth.
+# WHY IT LOOKS PAINTED, NOT LIKE CAMOUFLAGE.
+#   (1) Clumps are TALL (Drip Stretch 1.8 times taller than wide) and every sideways position is pushed about by a slow wobble that changes as you
+#       go down the slate (Flow Wobble), so a clump runs down like a drip, not like a round blob.
+#   (2) The drips start at the slate's OWN upper edge (top_edge_distance follows the chips of that edge). Their length comes from a noise that depends
+#       on the sideways position only, so neighbouring strands have very different lengths and some places have no drip at all.
+#   (3) The FRINGE: a second noise that depends on the sideways position only (thin upright strokes, Fringe Width wide) shifts the downward position
+#       every other noise is read at. So every edge of a clump grows teeth that point down, each one stroke wide: that is how a brush leaves paint.
+#   (4) The colour is cut into FLAT steps of five olive tones: tall patches (stretched cells with ragged borders), thin vertical stripes, a few light and
+#       dark flecks; the rim of a clump is lighter and the part under the upper edge is darker (shadow). There is no smooth shading anywhere.
 #
-# LICHEN: small round discs (and rings with a darker middle) in pale tan, on a jittered grid (one possible disc per grid place; a disc never
-# crosses the edge of its place, so the tile repeats exactly). They like the same wet places as moss and the lower part of a slate.
+# LICHEN: small round discs (and rings with a darker middle) in pale tan, on two jittered grids (one possible disc per grid place; a disc never crosses
+# the edge of its place, and place numbers are wrapped, so the tile repeats exactly). They gather in colonies (Lichen Clustering) and are smaller in drier
+# places (the radius shrinks smoothly: a disc is never cut in half).
 #
 # What it reads: the layout bundle, its own controls and seed, and ONE declared link: DAMAGE's Mask (see ../interface/interface.md, section 5).
-#   * 'Damage Avoid' (0..1): moss is cut back on dots where the damage mask is 1 (fresh damage is clean), so moss height does not fill a chip.
+#   * 'Damage Avoid' (0..1): moss and lichen are cut back on dots where the damage mask is 1 (fresh damage is clean), so moss height does not fill a chip.
 #   * 'Damage Attract' (0..1): moss grows MORE on damaged dots (old flakes and cracks are good places for moss). It only shows when the stack
-#     order puts moss over damage (setting recipe.stack_order); with the default order damage is painted over moss.
+#     order puts moss over damage (setting recipe.stack_order); with the default order damage is painted over the moss. (Limit: the link is read
+#     dot by dot, so "moss next to damage" is not possible, only "on damage" or "not on damage".)
 # Sizes are TILE UNITS (1.0 = the base tile; at 1254 dots per tile 0.0064 = 8 dots), so the look is the same at any picture size.
-# Seamless: the patch gate and the lichen grid read the tile coordinate (Vector) in the exact-repeat way; everything else is made on the slate's own
-# coordinates (local_x, local_y times the slate size), which are the same wherever the slate is wrapped round the picture edge.
-# Outputs (fixed by the interface): Mask (growth), Colour (the painted colour), Height (slightly raised, fuzzy), Roughness (rougher).
+# Seamless: the gate and the lichen colonies read the tile coordinate (Vector) in the exact-repeat way (the project's 4D noise on a donut) and the lichen grids
+# wrap their place numbers; everything else is made on the slate's own coordinates (local_x, local_y, top_edge_distance, in tile units), which are the same
+# wherever a slate is wrapped round the picture edge. Every slate has its own random offsets (made from piece_id and this layer's Seed).
+# Outputs (fixed by the interface): Mask (growth), Colour (the painted colour, on every dot; the Mask says where it counts), Height (moss about +0.02..+0.065
+# with a fine fuzz, lichen +0.016..+0.028), Roughness (moss +0.14, lichen +0.08).
 # Amount (0..1) is used smartly: it scales Coverage and Lichen Amount, so the paint stays crisp at every Amount; 0 switches the layer off exactly.
 import os
 import sys
@@ -54,26 +64,26 @@ DEFAULT_SEED = 31.0
 # 87 to 107). Nothing is copied from any one spot.
 CONTROLS = [
     # ---- how much, and where in the big picture
-    Control('coverage', 'Coverage', 0.2, 0.0, 1.0, 'how much of the slate surface is moss: 0 = none, 0.2 = about a tenth of the slate dots (like the reference), 0.4 = about a fifth, 1 = nearly everything'),
-    Control('patchiness', 'Patchiness', 0.9, 0.0, 1.0, 'how much the moss gathers into a few big mossy areas with large clean areas between: 0 = spread evenly over all slates, 1 = only in the big areas'),
+    Control('coverage', 'Coverage', 0.22, 0.0, 1.0, 'how much of the slate surface is moss: 0 = none, 0.22 = about 8 percent of the slate dots look olive in the finished picture (the reference has about 7.5 percent), 0.4 = about twice that, 1 = nearly everything'),
+    Control('patchiness', 'Patchiness', 0.5, 0.0, 1.0, 'how much the moss gathers into a few big mossy areas with large clean areas between: 0 = spread evenly over all slates, 1 = only in the big areas'),
     Control('patch_size', 'Patch Size', 0.35, 0.1, 1.0, 'size of the big mossy and clean areas, in tile units (0.35 = about three areas across the tile)'),
-    Control('slate_variation', 'Slate Variation', 0.85, 0.0, 1.0, 'how different the slates are from each other: 0 = every slate equally mossy, 1 = some nearly clean, some thick with moss'),
+    Control('slate_variation', 'Slate Variation', 0.5, 0.0, 1.0, 'how different the slates are from each other: 0 = every slate equally mossy, 1 = some nearly clean, some thick with moss'),
     # ---- where it likes to grow (each is a preference; 0 = does not care)
-    Control('drip_preference', 'Drip Preference', 0.8, 0.0, 1.5, 'how strongly moss gathers just below the upper edge of a slate and runs down in drips'),
-    Control('drip_length', 'Drip Length', 0.1, 0.005, 0.25, 'how far an average drip can run down a slate, in tile units (0.06 = 75 dots); single strands are shorter and longer than this'),
-    Control('drip_width', 'Drip Width', 0.05, 0.008, 0.12, 'width of one drip strand, in tile units (0.04 = 50 dots); positions between strands stay clean'),
+    Control('drip_preference', 'Drip Preference', 0.4, 0.0, 1.5, 'how strongly moss gathers just below the upper edge of a slate and runs down in drips'),
+    Control('drip_length', 'Drip Length', 0.12, 0.005, 0.25, 'how far an average drip can run down a slate, in tile units (0.12 = 150 dots); single strands are shorter (down to nothing) and longer (up to twice as long)'),
+    Control('drip_width', 'Drip Width', 0.05, 0.008, 0.12, 'width of one drip strand, in tile units (0.05 = 63 dots); positions between strands stay clean'),
     Control('joint_preference', 'Joint Preference', 0.35, 0.0, 1.5, 'how strongly moss gathers along the side joints of a slate'),
-    Control('lower_preference', 'Lower Part Preference', 0.2, 0.0, 1.5, 'how strongly moss gathers in the lower part of a slate'),
-    Control('damp_preference', 'Damp Spot Preference', 0.3, 0.0, 1.5, 'how strongly moss gathers where the surface sits low (slates that lie lower and the sloping rim of every slate)'),
+    Control('lower_preference', 'Lower Part Preference', 0.55, 0.0, 1.5, 'how strongly moss gathers in the lower part of a slate'),
+    Control('damp_preference', 'Damp Spot Preference', 0.5, 0.0, 1.5, 'how strongly moss gathers where the surface sits low (slates that lie lower and the sloping rim of every slate)'),
     Control('damage_avoid', 'Damage Avoid', 0.8, 0.0, 1.0, 'how much moss keeps off fresh damage: 1 = no moss at all on a damaged dot, 0 = does not care'),
     Control('damage_attract', 'Damage Attract', 0.0, 0.0, 1.0, 'how much moss prefers damaged dots (old flakes): only visible when moss is stacked over damage'),
     # ---- the shape of the clumps
     Control('cluster_size', 'Cluster Size', 0.05, 0.01, 0.2, 'width of a moss clump, in tile units (0.05 = 63 dots)'),
-    Control('clump_strength', 'Clump Strength', 1.5, 0.0, 3.0, 'how much the clump noise (instead of the rules) decides where moss is: 0 = only the rules (a band under the upper edge), 3 = free blobs everywhere'),
+    Control('clump_strength', 'Clump Strength', 1.8, 0.0, 3.0, 'how much the clump noise (instead of the rules) decides where moss is: 0 = only the rules (a band under the upper edge), 3 = free blobs everywhere'),
     Control('drip_stretch', 'Drip Stretch', 1.8, 1.0, 5.0, 'how much taller than wide the clumps are: 1 = round blobs, 1.8 = drips, 4 = long thin streaks'),
     Control('flow_wobble', 'Flow Wobble', 0.012, 0.0, 0.05, 'how far a drip wanders sideways as it runs down, in tile units (0.012 = 15 dots)'),
-    Control('edge_raggedness', 'Edge Raggedness', 0.6, 0.0, 1.5, 'how ragged and broken the edge of a clump is (0 = smooth outline, 1 = very ragged with loose flecks)'),
-    Control('fringe_amount', 'Fringe Amount', 0.25, 0.0, 1.5, 'how long the thin fringe teeth that hang down from the edges of a clump are (0 = none; 0.25 = teeth up to about 20 dots long; 1.5 = long hairs)'),
+    Control('edge_raggedness', 'Edge Raggedness', 0.9, 0.0, 1.5, 'how ragged and broken the edge of a clump is (0 = smooth outline, 1 = very ragged with loose flecks)'),
+    Control('fringe_amount', 'Fringe Amount', 0.3, 0.0, 1.5, 'how long the thin fringe teeth that hang down from the edges of a clump are (0 = none; 0.25 = teeth up to about 20 dots long; 1.5 = long hairs)'),
     Control('fringe_width', 'Fringe Width', 0.009, 0.002, 0.02, 'width of one fringe tooth, in tile units (0.009 = 11 dots)'),
     # ---- the olive colours (darkest to lightest) and how they are used
     Control('tone_1', 'Moss Tone 1 (darkest)', '#2b2c23', kind='colour', text='the darkest olive: deep shadow under the upper edge and the heart of thick moss'),
@@ -81,10 +91,10 @@ CONTROLS = [
     Control('tone_3', 'Moss Tone 3', '#3f4032', kind='colour', text='middle olive'),
     Control('tone_4', 'Moss Tone 4', '#49493a', kind='colour', text='light olive'),
     Control('tone_5', 'Moss Tone 5 (lightest)', '#545342', kind='colour', text='yellow-green: the youngest growth at the rim of a clump'),
-    Control('tone_centre', 'Moss Tone Centre', 0.6, 0.0, 1.0, 'which tone is typical: 0 = mostly the darkest olive, 1 = mostly the lightest'),
+    Control('tone_centre', 'Moss Tone Centre', 0.7, 0.0, 1.0, 'which tone is typical: 0 = mostly the darkest olive, 1 = mostly the lightest'),
     Control('tone_spread', 'Moss Tone Spread', 0.8, 0.0, 1.0, 'how many different tones one clump uses: 0 = every clump one flat tone, 1 = the whole range'),
     Control('rim_lightening', 'Rim Lightening', 0.5, 0.0, 1.0, 'how much lighter (yellow-green) the rim of a clump is than its middle'),
-    Control('top_shading', 'Top Shading', 0.3, 0.0, 1.0, 'how much darker moss is right under the upper edge of a slate (the shadow of the row above)'),
+    Control('top_shading', 'Top Shading', 0.2, 0.0, 1.0, 'how much darker moss is right under the upper edge of a slate (the shadow of the row above)'),
     Control('tone_patch_size', 'Tone Patch Size', 0.02, 0.006, 0.08, 'width of one flat patch of one tone inside a clump, in tile units (0.02 = 25 dots); patches are 2.7 times taller than wide at the default Drip Stretch'),
     # ---- lichen
     Control('lichen_amount', 'Lichen Amount', 0.35, 0.0, 1.0, 'how many lichen discs there are (0 = none): the share of grid places that hold a disc'),
@@ -129,7 +139,7 @@ def build_group(parameters):
         return node.outputs['Value'], red, green, blue
 
     slate_a, off_x, off_y, off_z = slate_hash(1, 0.0)           # slate_a = how mossy this slate is; the others shift the noise so every slate differs
-    slate_b, tone_off_x, tone_off_y, tone_off_z = slate_hash(2, 0.5)
+    _spare, tone_off_x, tone_off_y, tone_off_z = slate_hash(2, 0.5)          # a second set of offsets for the tone cells
 
     # ------------------------------------------------------------------------------------------------ where am I on the slate (tile units)
     x_across = b.mul(g['local_x'], width)                          # distance from the left edge of the slate
@@ -191,7 +201,7 @@ def build_group(parameters):
     patch_gate = b.mixf(1.0, b.smoothstep(patch_noise, 0.32, 0.58), S('Patchiness'))
     slate_value = b.math('MULTIPLY_ADD', b.power(slate_a, 1.5), 1.5, 0.25)
     slate_gate = b.mixf(1.0, slate_value, S('Slate Variation'))
-    gate = b.mn(b.mul(patch_gate, slate_gate), 1.15)
+    gate = b.mn(b.mul(patch_gate, slate_gate), 1.0)
 
     # ------------------------------------------------------------------------------------------------ the strength, the threshold, and the ragged edge
     ragged = slate_noise(x_flow, y_flow, 1.0 / 0.012, 1.0 / 0.045, 2.0, 0.5, 51.0)                        # fine, a little taller than wide
@@ -201,7 +211,7 @@ def build_group(parameters):
     strength = b.add(strength, b.mul(b.sub(dabs, 0.5), b.mul(S('Edge Raggedness'), 0.55)))
     coverage = b.mul(S('Coverage'), amt)
     # The line: Coverage 0 puts it above anything the strength can reach (no moss), Coverage 1 puts it at 0 (nearly everything). The gate then moves it: a clean slate or area
-    # needs a much stronger push, a mossy one a little less. (Measured on the default settings: Coverage 0.25 covers about a tenth of the slate dots.)
+    # needs a much stronger push, a mossy one a little less. (Measured with the default settings in the finished picture: Coverage 0.22 gives about 8 percent olive dots.)
     threshold = b.add(b.sub(1.9, b.mul(b.power(coverage, 0.5), 1.9)), b.mul(b.sub(1.0, gate), 0.9))
     excess = b.sub(strength, threshold)
     moss_raw = hard(excess)
@@ -283,7 +293,7 @@ def build_group(parameters):
     # ------------------------------------------------------------------------------------------------ the outputs
     mask = b.mx(moss, lichen)
     colour = b.mix(moss_colour, lichen_colour, lichen)
-    fuzz = slate_noise(x_across, g['local_y'], 1.0 / 0.004, 1.0 / 0.004, 1.0, 0.5, 71.0)
+    fuzz = slate_noise(x_across, b.mul(g['local_y'], height), 1.0 / 0.004, 1.0 / 0.004, 1.0, 0.5, 71.0)          # fine fuzz, 0.004 tile (5 dots) across, in tile units both ways
     moss_height = b.mul(moss, b.math('MULTIPLY_ADD', fuzz, 0.045, 0.02))
     lichen_height = b.mul(lichen, b.math('MULTIPLY_ADD', b.sub(1.0, lichen_inner), 0.012, 0.016))
     height = b.mul(b.add(moss_height, lichen_height), S('Raise'))

@@ -2,8 +2,12 @@
 
 Words used in this guide (one word for each thing): the **tile** is the 1254 x 1254 picture; a **dot** is one dot of a picture (a pixel); the
 **description** is the small file (a few KB to a few hundred KB) that the generator reads; a **patch** is an area of one flat colour; a **stamp** is
-a patch the generator makes up instead of copying; the **joint** is the black line between two slates; a **row** is a line of slates side by side.
-Everything below was run; where something was not run, it says so.
+a patch the generator makes up instead of copying; the **joint** is the black line between two slates; a **row** is a line of slates side by side;
+a **piece** is one slate, shingle or clay scale of a roof (section 8 uses it for the roofs that are not slate, so that "tile" only ever means the picture);
+a **drip** is a thin upright pointed patch, like paint run down a wall; the **grain** is a very fine random speckle in the height picture.
+**KB** means 1024 bytes everywhere in this guide, the same unit the project's size check (`lib/description_audit.py`) uses for its 8 / 64 / 512 KB limits.
+Everything below was run; where something was not run, it says so. An independent checker re-ran the work afterwards: what was confirmed and what was
+corrected is listed in the last section, "Checked independently".
 
 ## 0. The result in one table
 
@@ -12,9 +16,9 @@ metallic, ambient occlusion). One generator, different descriptions (size classe
 
 | description | size | what is in it | pixel tier | colour SSIM | colour difference (Delta E) | edge skill | height error (steps of 255, after best fit) | normal error (degrees) | "same kind" score | bake time |
 |---|---|---|---|---|---|---|---|---|---|---|
-| S0 layout only | 2.7 KB | rows, joints, ragged outlines, one flat colour per slate | none | 0.711 | 8.07 | 0.29 | 35.1 | 11.9 | 0.40 | 20 s |
+| S0 layout only (see the note under the table) | 2.7 KB | rows, joints, ragged outlines, one flat colour per slate | none | 0.711 | 8.07 | 0.29 | 35.1 | 11.9 | 0.40 | 20 s |
 | S1 layout + stamps (class S) | 6.4 KB | S0 + paint statistics + a seed | none | 0.569 | 9.06 | 0.19 | 35.0 | 16.8 | 0.71 | 28 s |
-| S2 layout + stamps + grain (class S, best "same kind") | 6.6 KB | S1 + a faint seamless grain in the height (so in the normal map) | none | 0.569 | 9.06 | 0.19 | 35.1 | 17.9 | 0.73 | 31 s |
+| S2 layout + stamps + grain (class S, best "same kind") | 6.5 KB | S1 + a faint seamless grain in the height (so in the normal map) | none | 0.569 | 9.06 | 0.19 | 35.1 | 17.9 | 0.73 | 31 s |
 | M tiny | 16.9 KB | traced outlines + the biggest patches, 8 colours | layout | 0.721 | 7.31 | 0.37 | 31.4 | 11.7 | 0.51 | 17 s |
 | M small | 39 KB | the same, 12 colours | layout | 0.720 | 6.35 | 0.41 | 26.9 | 12.0 | 0.53 | 18 s |
 | M coarse (class M) | 60 KB | the same, 16 colours, patches over 520 dots | layout | 0.731 | 5.67 | 0.44 | 23.2 | 11.8 | 0.61 | 20 s |
@@ -22,12 +26,38 @@ metallic, ambient occlusion). One generator, different descriptions (size classe
 | L medium | 264 KB | traced outlines + patches over 30 dots, 24 colours | **close** | 0.792 | 3.28 | 0.67 | 12.4 | 11.0 | 0.82 | 25 s |
 | L fine (class L) | 442 KB | the same, patches over 12 dots | **close** | 0.836 | 2.85 | 0.74 | 10.3 | 9.7 | 0.83 | 31 s |
 
+**How to read the columns** (all measured by the project's two comparison tools, `lib/pixel_compare.py` and `lib/texture_compare.py`):
+* **colour SSIM** ("structural similarity"): a number from 0 to 1 that says how alike the light-and-dark structure of two pictures is, dot for dot. 1 = the same picture.
+* **colour difference (Delta E)**: the average difference in colour between two dots in the same place, in the standard colour-difference unit. 0 = the same colour;
+  about 2.3 is the smallest difference most people can see side by side; 10 is clearly a different shade.
+* **edge skill**: how many of the reference's edges (joints, patch borders) the generated picture puts within 2 dots of the same place, with the share a wrongly placed
+  copy would get by luck taken off. 0 = no better than luck, 1 = every edge in place.
+* **height error**: the average difference between the generated height picture and the reference's, in steps of 255, after the best brightness-and-contrast fix
+  (so it measures the shape of the relief, not its overall level).
+* **normal error**: the average angle, in degrees, between the generated and the reference normal map, dot for dot. Yardstick: a completely flat normal map is off by
+  11.3 degrees on this slate (`scores/derivation_ceiling.json`, flat_normal_angle 11.267).
+* **pixel tier**: a label made from the numbers above. A tier is reached when ALL its limits pass. "layout": edge skill at least 0.30, colour difference at most 20,
+  height error at most 40. "close": edge skill at least 0.55, SSIM at least 0.60, colour difference at most 10, height error at most 20, normal error at most 12 degrees.
+  "exact": edge skill 0.85, SSIM 0.92, colour difference 3, height error 6, normal error 4 degrees (limits from the top of `lib/pixel_compare.py`).
+* **"same kind" score**: texture_compare's overall score: does it look like the same KIND of surface, wherever things are? 0 = as different as a different surface
+  (other real reference surfaces score 0.16 to 0.50 on today's tool, not "about 0.1" as the project notes said: `cookbook/06 Guide - baking and checking
+  maps.md`, section 7.4), 1 = the same (a re-shuffled copy of the reference scores about 0.99).
+
 The ceiling for maps made from the colour picture is a height error of about 3 and a normal error of about 2.8 degrees. The tier "exact" asks for colour
 SSIM 0.92, edge skill 0.85, height error 6, normal error 4: not reached (best: 0.84, 0.74, 10.3, 9.7). Honest note: the "same kind" score of the traced
 descriptions is a copy of the reference (the score is high because it IS the reference, rebuilt from flat polygons); the one that matters for new tiles is S1
 (and the sampler tiles of section 6).
 
-(All bakes: 2 processor threads, shared with other jobs, 1254 x 1254 dots. Bake time = all six pictures.)
+**The normal error is weak support for the "close" tier.** A flat normal map (no relief at all) is off by 11.3 degrees. S0, M tiny, M small, M coarse and L small
+(11.7 to 12.0 degrees in the table) are slightly WORSE than flat; L medium (11.0) is only 0.3 better; only L fine (9.7) is clearly better. L medium and L fine pass the "close"
+limit for normals because that limit is 12 degrees, not because their normal maps are good.
+
+**Note on S0:** the S0 pictures stored in `outputs/S0_layout_only/` and its scores were made at 18:58, before `description/S0_layout_only.json` was rewritten at 19:13.
+The independent checker baked the current file again (`verify/out/S0_layout_only/`, scores in `verify/scores/S0_layout_only_pixel.json`): edge skill 0.294, height error 35.09,
+normal 11.90, "same kind" 0.397, so the row above is right to rounding, but the stored pictures are not a bake of the current file (the two colour pictures differ by 1.3 steps of 255 on average).
+
+(All bakes: 2 processor threads, shared with other jobs, 1254 x 1254 dots. Bake time = all six pictures. The times were not checked independently: the checker's
+runs on a busier machine took 35 to 65 s per tile.)
 
 ## 1. The idea in one picture
 
@@ -45,37 +75,44 @@ The recipe has three kinds of layer, drawn back to front like a painter:
 
 Then the maps are made from the colour picture the way the reference maps were made (sections 2A and 4).
 
-## 2. How the reference was analysed (A and B)
+## 2. How the reference was analysed
 
 Scripts, all plain Python in `analysis/`: `derivation_ceiling.py`, `vector_trace.py`, `trace_reference.py`, `fit_layout.py`, `fit_paint_model.py`,
 `calibrate_rates.py`. They read the reference; the Blender generator never does.
 
-**A. The derivation ceiling** (`derivation_ceiling.py`, numbers in `scores/derivation_ceiling.json`)
-* Height = the brightness of the colour picture. Brightness = 0.299 red + 0.587 green + 0.114 blue on the ordinary (sRGB) colour numbers. The best straight
-  stretch is height = 2.5 x (brightness - 9.5), cut off at 0 and 255, then blurred by a Gaussian of 0.5 dots. It matches the uploaded height to 2.95 steps
-  (of 255) on average, correlation 0.9967. A 0.8 dot blur is worse (3.5), no blur is worse (4.1). A tone curve with 4 control points is off by 18 steps, so
-  the straight line with two numbers is used.
+**2A. The derivation ceiling** (how well the height and normal can be made from the colour picture; `derivation_ceiling.py`, numbers in `scores/derivation_ceiling.json`)
+* Height = the brightness of the colour picture. Brightness = 0.299 red + 0.587 green + 0.114 blue on the ordinary (sRGB) colour numbers. The rule the generator uses
+  is a straight stretch: height = 2.5 x (brightness - 9.5), cut off at 0 and 255, then blurred by 0.5 dots (a "Gaussian" blur: a soft round blur, strongest in the middle).
+  Measured by the independent checker with `lib/pixel_compare.py` (reference colour through exactly this rule, `verify/scores/ceiling_pixel.json`): height error 3.77 steps
+  (of 255) on average, 3.03 after the best brightness-and-contrast fix, correlation 0.9967. (The figure 2.95 in `scores/derivation_ceiling.json` is for a finer rule, a lookup
+  curve of 64 slots, not for the straight line.) For that 64-slot curve a 0.8-dot blur is worse (3.5) and no blur is worse (4.1).
+* Why a straight line and not a small curve: the small curves tried in `derivation_ceiling.py` (2 to 8 control points placed at brightness quantiles) cannot bend sharply
+  enough to make the cut-off at 0 and 255, so they are off by 41 (2 points) down to 7.9 steps (8 points); the 4-point curve is off by 17.9. The straight line with its
+  cut-offs does it with two numbers.
 * Normal = the slope of the 8-bit height: (right neighbour - left neighbour) / 2 sideways and (lower - upper) / 2 downwards, times strength 7, then made into a
   unit arrow. Fed with the UPLOADED height it reproduces the uploaded normal to 0.34 degrees (correlation 0.9999). Fed with the height made from the reference
-  colour it is off by 2.76 degrees. A flat normal map would be off by 11.3 degrees.
+  colour it is off by 2.76 degrees (the checker, with `lib/pixel_compare.py`: 2.71 degrees). A flat normal map would be off by 11.3 degrees.
 * So even a perfect colour picture could not get a better height than about 3 steps or a better normal than 2.8 degrees.
 
-**B. What the colour picture is made of** (numbers measured on the reference)
+**2B. What the colour picture is made of** (numbers measured on the reference)
 * *Layout:* 8 rows of 6 slates (48). Row body height 146 dots on average (spread 6.4; 135 to 161), black band between rows 10.6 dots (spread 0.5), 8 x 156.75 = 1254.
-  Slate widths: median 200 dots, 134 to 402, log-normal (log-mean 5.30, spread 0.217). Joints between slates: 3.9 dots wide (spread 1.6), lean 0.016 (about 2 dots over
-  a slate's height). Edge raggedness (standard deviation): top 2.5, bottom 2.0, sides 1.6 dots. 7 % of all dots are joint-black. The tile edge cuts through the middle
+  Slate widths: median 200 dots, 134 to 402, "log-normal" (most slates near the median, a few much wider; log-mean 5.30, spread 0.217). Joints between slates: 3.9 dots wide
+  (spread 1.6), lean 0.016 (about 2 dots over a slate's height). Edge raggedness (how far an edge wanders from a straight line, as a standard deviation): top 2.5, bottom 2.0,
+  sides 2.06 dots (the value in `generator/fitted_distributions.json` and in every description; an earlier version of this guide said 1.6, which was wrong). 7 % of all dots are joint-black. The tile edge cuts through the middle
   of a row (not along a joint). The reference itself has a mild seam (jump across the wrap-around edge 1.7 times a normal jump).
-* *Colours:* snapped to a palette found by k-means in the Lab colour space the mean colour difference is 3.1 (8 colours), 2.6 (12), 2.3 (16), 2.0 (24), 1.5 (48).
+* *Colours:* the picture was snapped to a palette of N colours chosen automatically ("k-means": a method that picks the N colours that sit in the middle of the
+  picture's own colour groups, measured in a colour space built so that equal distances look equally different). The mean colour difference is then 3.1 (8 colours), 2.6 (12), 2.3 (16), 2.0 (24), 1.5 (48).
   The 24 colours are four families: 13 blue-greys (brightness 23 to 102), 5 olive mosses (42 to 74), 3 tan lichens (87 to 107) and the joint black (11, 12, 14), plus a
   grey-green and a neutral grey.
 * *Patches:* cutting the picture into same-colour areas gives 9383 patches over 12 dots. By size class (12-30, 30-100, 100-300, 300-1000, 1000-3000, over 3000 dots) they cover
   5, 13, 16, 21, 21, 21 % of the slates: the paint is "the same at every scale". Biggest patches are about 100 x 100 dots, smallest 5 x 6. Patches are taller than wide
-  (median height / width 1.2 to 1.3) and their edges are spiky: thin pointed teeth ("drips") up and down.
+  (median height / width 1.2 to 1.3) and their edges are spiky: thin pointed drips up and down.
 * *Tone inside a slate:* the average slate brightness is 63 (spread 4.3 between slates). Compared with that, blue patches are 20.5 steps darker in the top sixth of the slate,
   then 7 darker, 0, 2 lighter, 6 lighter, and 13 lighter in the bottom sixth.
 * *Moss and lichen:* moss (olive) covers 7.7 % of an average slate with a very uneven spread (spread 9.7 %: most slates almost none, a few 30 to 40 %); tan lichen 5.6 % (spread 3.7 %).
-* *Anisotropy:* neighbouring dots differ by more than 3 steps in 22.6 % of the sideways pairs and 15.1 % of the up-and-down pairs (streaks standing upright). Along a row the
-  picture stays alike for 64 dots, up and down only for 11 (the "same kind" tool's correlation length: the long joints dominate).
+* *Direction ("anisotropy": the picture changes faster in one direction than the other):* neighbouring dots differ by more than 3 steps in 22.6 % of the sideways pairs and 15.1 % of the up-and-down pairs (drips standing upright). Along a row the
+  picture stays alike for 64 dots, up and down only for 11 (the "same kind" tool's "correlation length": how far you can move before the picture no longer
+  looks like itself; the long joints dominate it).
 * *Not described:* a faint grain (75 % of neighbouring dots differ by more than half a step) and soft shading in the joints. They are one reason for the missing tier "exact".
 * No roughness or metallic map exists in the reference. The roughness numbers (0.9 to 0.95 for black joint, moss and lichen; 0.45 to 0.85 for slate, darker = smoother) are a documented
   choice, metallic is 0 everywhere.
@@ -85,7 +122,7 @@ Scripts, all plain Python in `analysis/`: `derivation_ceiling.py`, `vector_trace
 near each one, accept it only if it is dark along 80 % of its length with no light stretch of 20 dots, draw those lines into the network, close the network a little, open the rest to get
 "cores", name the cores, grow them back out. Result: 48 slates, 6 per row, as counted by eye.
 
-## 3. The description format (C)
+## 3. The description format
 
 A description is one JSON file. The audit (`lib/description_audit.py`) accepts it: no picture data, no list longer than 4000 numbers.
 
@@ -97,9 +134,9 @@ A description is one JSON file. The audit (`lib/description_audit.py`) accepts i
   "layout": {"rows": [ {"top": 89.0, "bottom": 235.0,
                          "joints": [[x, lean, gap], ... 6 per row],          # the joint between slate k and slate k+1
                          "top_shift": [...], "bottom_shift": [...], "colour": [...]}, ... 8 rows],
-             "corner": 8.0, "rough": {"top": 2.5, "bottom": 2.0, "side": 1.6, "scale": 14.0}, "seed": 1, "bottom_round": 0.0},
+             "corner": 8.0, "rough": {"top": 2.5, "bottom": 2.01, "side": 2.06, "scale": 14.0}, "seed": 1, "bottom_round": 0.0},
   "paint":  {"model": { size classes, colour families, tone by height, drift field... }, "slates": [[tone, moss, lichen], ...],
-             "seed": 1, "shape": "streak", "noise_scale": 0.4, "contrast": 1.4, "rate_scale": [0.6, 0.7, 0.7, 0.8, 1.1, 4.1]},
+             "seed": 1, "shape": "streak" (= drip outlines), "noise_scale": 0.4, "contrast": 1.4, "rate_scale": [0.6, 0.7, 0.7, 0.8, 1.1, 4.1]},
   "slates":  [ {"o": [x0,y0,dx1,dy1,...], "c": colour}, ...],                 # traced outlines (optional)
   "patches": [ [colour, [x0,y0,dx1,dy1,...]], ... ] }                           # traced patches, back to front (optional)
 ```
@@ -110,15 +147,16 @@ A description is one JSON file. The audit (`lib/description_audit.py`) accepts i
 * **Where the description stops being a procedure and starts being tracing:** the layout block and the paint block are procedural (numbers that mean something and give new pictures
   when changed or re-seeded). The `slates` and `patches` lists are tracing: they are the reference's own areas, cut into polygons. Classes S0, S1 and S2 are procedural; M and L are tracing
   (with the palette and layout as a frame).
-* Sizes: S0 2.7 KB, S1 6.4 KB, S2 6.5 KB (class S); M tiny 16.9, small 39, coarse 60 KB (class M); L small 147, medium 264, fine 442 KB (class L); the 2508-dot area description 14.5 KB and the transfer descriptions 13 to 15 KB (class M by size). All pass the audit
-  (`python3 -I lib/description_audit.py file.json --limit-kilobytes 512`).
+* Sizes (KB = 1024 bytes): S0 2.7 KB, S1 6.4 KB, S2 6.5 KB (class S); M tiny 16.9, small 39, coarse 60 KB (class M); L small 147, medium 264, fine 442 KB (class L); the 2508-dot area description 14.2 KB and the transfer descriptions 12.6 to 14.3 KB (class M by size). All pass the audit
+  (`python3 -I lib/description_audit.py file.json --limit-kilobytes 512`); the independent checker also ran it at each class's own limit (8, 64, 512 KB: `verify/audit_S.txt`, `audit_M.txt`, `audit_L.txt`) and every claimed file passed.
+  The L fine description holds 9,383 patches and 154,230 numbers (9.6 % of the size of a raw colour picture): it is a compressed copy of the reference, not a description in the procedural sense.
 
-## 4. The Blender recipe, tool by tool (D)
+## 4. The Blender recipe, tool by tool
 
 The generator is `generator/slate_generator.py` (Blender) plus `generator/slate_layers.py` (plain numpy: turns the description's layers into a back-to-front list of shapes).
 Run: `blender -b --disable-autoexec -t 2 --python generator/slate_generator.py -- DESCRIPTION.json OUT_FOLDER --size 1254`.
 
-1. **Mesh from points** (`bpy` `mesh.from_pydata`). *What it is:* a list of corner points and faces turned into a real Blender surface. *How used:* every shape of the shape list becomes one
+1. **Mesh from points** (the Python command `mesh.from_pydata`). *What it is:* a list of corner points and faces turned into a real Blender surface. *How used:* every shape of the shape list becomes one
    flat polygon face at height z = (its number in the painting order) x 0.0001, so a later shape lies a hair above an earlier one; Blender's own triangle-maker handles the
    spiky outlines. *What matters:* the z step. 0.0001 of a tile with a camera 5 above worked for 26 000 shapes (not tested with smaller steps; if two shapes ever flicker into each other, this is the number to raise).
    Shapes touching the tile edge are drawn again shifted by minus and plus one tile (nine copies at most) so the tile wraps. Each shape's middle is first folded into the tile
@@ -133,14 +171,15 @@ Run: `blender -b --disable-autoexec -t 2 --python generator/slate_generator.py -
    dot is one tile dot.
 6. **Map Range node (the height stretch).** *What it is:* turns one range of numbers into another. *How used:* from brightness 9.5/255 ... 111.5/255 onto 0 ... 1, clamped. *Effect of
    changing it:* the two numbers are the height's contrast and level; the fit found 9.5 and 111.5 for the slate (brighter than 111.5 is all white in the height).
-7. **Cycles samples** (colour pass: 16). *What it is:* how many rays are averaged per dot; at a polygon edge this decides how smooth the edge is. 1 sample gives a hard staircase, 16 a clean 1-dot soft edge.
+7. **Cycles samples** (colour pass: 16). *What it is:* Cycles is Blender's render engine (the part that turns the scene into a picture); "samples" is how many rays it averages per dot; at a polygon edge this decides how smooth the edge is. 1 sample gives a hard staircase, 16 a clean 1-dot soft edge.
    See the strip below.
-8. **Pixel filter: Box 1.0 for the colour picture, Gaussian for the height picture.** *What it is:* how each dot averages its surroundings. *How used here:* the Gaussian filter IS the
+8. **Pixel filter: Box 1.0 for the colour picture, Gaussian for the height picture.** *What it is:* a Cycles setting for how much of its surroundings each dot averages
+   in (Box = only its own square; Gaussian = a soft round blur that also takes in a little of the neighbours). *How used here:* the Gaussian filter IS the
    0.5-dot blur of the height. *Measured* (`generator/test_filter_width.py`, `scores/filter_width_test.json`): filter width 1 blurs like a 0.3-dot Gaussian, width 2 like 0.5, 3 like 0.7, 4 like 0.9,
    6 like 1.4, 8 like 1.8. So the width to ask for is about 4 x the blur wanted (the first guess, width / 12, gave a blur about 3 times too strong and cost about 0.06 "same kind" score: 0.67 against 0.74).
 9. **Tileable 4D noise for the optional grain** (`lib/recipe_tools.tileable_noise_group`, node "Noise Texture" 4D on a donut). *What it is:* Blender's own Noise node does NOT repeat at the tile edge; this group samples a 4-dimensional noise on a donut so the left
-   edge continues into the right edge. *How used:* a very fine noise (800 specks across the tile, Detail 0) is added to the brightness the height is made from, so it shows up in the height and in the normal map but not in the colour. *What matters:*
-   the amplitude (2 brightness steps gave a measured grain of 3.4 height steps) and the number of specks (800 is about 1.5 dots per speck). *Effect:* the "same kind" normal score goes from 0.51 to 0.57 and the overall from 0.707 to 0.725, but the dot-for-dot normal error
+   edge continues into the right edge. *How used:* a very fine noise (800 grain bumps across the tile, Detail 0) is added to the brightness the height is made from, so it shows up in the height and in the normal map but not in the colour. *What matters:*
+   the amplitude (2 brightness steps gave a measured grain of 3.4 height steps) and the number of grain bumps (800 is about 1.5 dots per bump). *Effect:* the "same kind" normal score goes from 0.51 to 0.57 and the overall from 0.707 to 0.725, but the dot-for-dot normal error
    gets 1 degree WORSE (random grain is not the reference's grain). So grain is on for invented tiles and off for the traced, dot-for-dot descriptions.
 10. **Plain numpy after the photo:** the normal (slope of the height rounded to 8 bits, strength 7), and a cheap ambient occlusion (how much lower a dot is than its blurred surroundings). Blender's
    Python has numpy but no OpenCV; the blur used there is written in numpy with wrap-around edges.
@@ -153,8 +192,10 @@ Each strip is the same small picture baked again and again with ONE setting chan
 
 ![height filter width](guide_pictures/strip_height_filter_width.png)
 
-Box (no filter) leaves hard one-dot stair-steps; width 2 is the 0.5-dot blur that matches the reference's softness (and made the normal map agree with the reference); width 4 and 8 smear
-the small patches into mush, which also kills their little ridges in the normal map.
+Box (no filter) leaves hard one-dot stair-steps; width 4 and 8 smear the small patches into mush, which also kills their little ridges in the normal map. The order of the
+strip (box, 1, 2, 4, 8) is right, but **the strip was baked at 384 dots, not 1254**: the filter width is counted in picture dots, so at 384 dots the same width blurs about
+3.3 times more of the tile. The statement "width 2 is the 0.5-dot blur that matches the reference's softness" was measured at 1254 dots (`scores/filter_width_test.json`);
+the width 2 picture in this strip is softer than the real 1254-dot bake.
 
 **Colour anti-aliasing: Cycles samples** (a 4x zoom of a patch of the colour picture)
 
@@ -180,7 +221,8 @@ chipped look, x4 a crumbling roof.
 
 Tone noise 0 gives clean layered blue-greys, 1.5 gives speckled camouflage; 0.4 matches the reference. The drift (a slow wave of lighter and darker over each slate) makes the neighbouring
 patches belong together: 0 looks flat, 12 like the reference, 40 like a patchwork. Upright drips look like paint run down a wall; plain spiky blobs look like spots. Without tiny and small
-patches the roof looks too clean; double the number and it looks sandy.
+patches the roof looks too clean; double the number and it looks sandy. (The independent checker compared these strips with the settings that were run: the labelled values and the
+values S1 uses, tone noise 0.4, drift 12, drip outlines, are correct.)
 
 **Numbers for three settings that are hard to see** (plain Python preview painter, same shapes as the Blender picture; the preview and the Blender bake agree to about 0.01 in SSIM):
 * Polygon "grow" (every outline is pushed out by this many dots so neighbouring patches leave no hairline): grow 0 gives colour SSIM 0.773 and edge skill 0.60; 0.3 gives 0.793 and 0.66; 0.5 gives 0.800 and 0.68
@@ -188,7 +230,7 @@ patches the roof looks too clean; double the number and it looks sandy.
 * Paint contrast factor (how strongly the tone offsets are applied) against the spread of brightness of the picture (reference 22.2): 1.0 gives 18.5, 1.3 gives 20.1, 1.6 gives 21.5, 2.0 gives 23.6. 1.4 is used.
 * Tone noise 0.25 / 0.4 / 0.55 and drift 9 / 14 / 20 (nine runs, "same kind" 0.70 to 0.73 for the fitted layout): flat plateau; the picture, not the score, picked the values.
 
-## 5. How accurate, layer by layer (E)
+## 5. How accurate, layer by layer
 
 Tables as in section 0. Difference sheets (reference | generated | where they differ | edges: red = only reference, green = only generated, yellow = both):
 `scores/S0_layout_only_diff.png`, `scores/S1_layout_stamps_diff.png`, `scores/M_trace_coarse_diff.png`, `scores/L_trace_medium_diff.png`, `scores/L_trace_fine_diff.png`.
@@ -197,15 +239,15 @@ Tables as in section 0. Difference sheets (reference | generated | where they di
 What I read off the sheets:
 * Layout only: the joints are in the right places (colour SSIM 0.71) but the edge measure is only 0.29: the generator's ragged edges are random, the reference's are specific. The slates are flat so
   the height error is 35 steps (reference height tracks the paint).
-* Layout + stamps: the picture now has the reference's character (upright drips, moss, lichen, shadow band, pale lip) but is invented paint: dot for dot it is no better than flat slates
+* Layout + stamps: the picture now has some of the reference's character (upright drips, moss, lichen, shadow band, pale lip) but is invented paint: dot for dot it is no better than flat slates
   (SSIM 0.57, the stamps put edges where the reference has none).
-* Traced coarse: the big streaks and slate tones are right; the small stuff is missing. Height error 23.
+* Traced coarse: the big drips and slate tones are right; the small stuff is missing. Height error 23.
 * Traced fine: the difference sheet shows only thin lines at patch borders (1 dot off) and a few small rectangles where a slate outline was cut a little wrongly.
 
 Where the ladder stops: colour SSIM only goes from 0.79 to 0.84 when the description grows from 264 to 442 KB, and "exact" would need 0.92. The remaining error is in the 1-dot placement of every
 border and in the faint grain, neither of which a compact description of polygons captures.
 
-## 6. Making new tiles (F)
+## 6. Making new tiles
 
 ### 6.1 Variation: eight new tiles from one generator
 
@@ -213,10 +255,14 @@ border and in the faint grain, neither of which a compact description of polygon
 row heights (146 +- 6.4) and row gaps (10.6 +- 0.5) stretched so the rows exactly fill the tile; slate widths log-normal (median 200, spread 0.217) stretched so each row exactly fills the tile width; random row
 phase; joint lean and width; top and bottom shifts; per slate a tone (63 +- 4.3), a moss share and a lichen share (drawn from the 48 measured slates, with a little random change); the tile edge always
 cuts through the middle of a row. The sampled description is 6.6 KB and has the same form as the fitted one. `analysis/run_variations.py` bakes eight of them (seeds 101 to 108) in one Blender run.
+This is the sampler as it is now. **Not every sampled file in the folders comes from it:** `description/sample_1.json` to `sample_4.json` (used for the "sampled tile (seed 1)" row of the
+half-tile test in 6.4) and `area/area_2508.json` (section 6.2) were made by an earlier version of the sampler, before it added the grain, the paint contrast 1.4 (missing in sample_1 to 4) and
+the `bottom_round` setting. The eight variations and `resolution/sample_1.json` are current (checked by the independent checker: each `var_NNN.json` is exactly what `sample_description(NNN)` gives today).
 
 ![eight new tiles](variations/contact_sheet.png)
 
-(First picture: the reference. Then the eight new tiles.)
+(First picture: the reference. Then the eight new tiles. Each picture is the whole 1254-dot tile shrunk to 400 x 400 dots, so fine detail is lost; the script that draws the
+sheet is `analysis/run_variations.py`.)
 
 | measure | result |
 |---|---|
@@ -224,15 +270,19 @@ cuts through the middle of a row. The sampled description is 6.6 KB and has the 
 | tiling part of that score | 1.0 for seven tiles, 0.90 for one (seam ratio 1.21: the tool's false alarm on a layout with long joints) |
 | dot for dot against the reference (pixel_compare) | tier "none" for all eight; colour SSIM 0.49 to 0.52 (mean 0.517), colour difference 10.2 to 11.3 (mean 10.7), edge skill 0.01 to 0.13, normal error about 19 degrees |
 | how different the new tiles are from each other | colour SSIM between two new tiles 0.47 to 0.51 (mean 0.49), average difference 18.2 to 21.8 brightness steps (mean 20.1): as different from each other as from the reference |
-| description size | 6.7 KB each |
+| description size | 6.6 KB each |
 | bake time | 246 s for all eight (30.7 s each, all six pictures) |
 
-Honest reading: the new tiles have the right layout, patch sizes, drips, moss and lichen spread and brightness spread, and none is a copy of anything. Side by side with the reference they are a little darker and more even:
-the reference has bolder pale and dark streaks and each slate looks more individually painted; the sampler does not know about the long-range tone differences between neighbouring slates.
+Honest reading: the new tiles have the right layout and patch sizes, and none is a copy of anything (the largest match the checker found between any two of them, or with the
+reference, is 0.36 to 0.40 on a scale where a copy scores 1.0). But **side by side with the reference they are clearly weaker, not just "a little darker"**: they read as small blocky
+"camouflage" patches, all eight with the same dark, even look. The bold pale chipped lips on the lower slate edges, the strong green moss and the long upright drips of the reference
+are mostly missing, and each reference slate looks more individually painted. Their "same kind" score (0.735) is below the reference rebuilt from traced polygons (0.83). The sampler
+does not know about the long-range tone differences between neighbouring slates.
 
 ### 6.2 Area: one roof of 2 x 2 tiles of new content, 2508 x 2508 dots
 
-`sample_description(201, tile=2508)`: 16 rows of 12 slates (the number of rows and slates doubles, the spreads stay the same). The description is 14.5 KB (the size grows with the number of slates, not with the area covered by paint).
+`sample_description(201, tile=2508)`: 16 rows of 12 slates (the number of rows and slates doubles, the spreads stay the same). The description is 14.2 KB (the size grows with the number of slates, not with the area covered by paint).
+It was made by the earlier sampler, so it has **no grain**: today's `sample_description(201, tile=2508)` gives the same file plus the grain setting.
 Baked in one go: 26 327 flat faces, 131 s (colour 40 s, height 43 s).
 
 ![area, shown at half size](area/area_preview_1254.png)
@@ -241,9 +291,11 @@ Baked in one go: 26 327 flat faces, 131 s (colour 40 s, height 43 s).
 |---|---|---|
 | jump across the wrap-around edge, sideways / up and down (1.0 = as smooth as the rest of the picture) | 0.75 / 0.58 | 1.70 / 1.87 |
 | jump across the middle lines where four 1254-dot quarters would meet | 0.86 / 0.59 | 1.70 / 1.87 (a seam at every tile edge) |
-| strongest match between two of the four quarters (normalised cross-correlation; 1.0 = a copy) | 0.37 | 1.0 |
+| strongest match between two of the four quarters (the quarters are slid over each other in every position and the best match is kept; 1.0 = a copy) | 0.37 | 1.0 |
 
-So there is no seam and no repeat at the scale of one tile. (A 4 x 4 area was not baked; the same sampler takes `tile=5016`.)
+So there is no seam and no repeat at the scale of one tile. (A 4 x 4 area was not baked; the same sampler takes `tile=5016`, and the checker confirmed that such a description is
+44.7 KB and passes the 64 KB check, but did not bake it either.) The checker's own re-measure on a bit-identical re-bake: wrap-around 0.75 / 0.57, middle lines 0.87 / 0.58,
+best match between quarters 0.28 to 0.37, the reference repeated 2 x 2 1.69 / 1.79 (small measuring differences, the same conclusion).
 
 ### 6.3 Resolution: the same description at 512, 1254 and 2508 dots
 
@@ -257,6 +309,9 @@ So there is no seam and no repeat at the scale of one tile. (A 4 x 4 area was no
 
 ![crop at three sizes](resolution/crop_sheet.png)
 
+(Each of the three panels is the same 120 x 120 dot patch of the tile (two neighbouring slates and the joint between them), baked at 512, 1254 and 2508 dots and blown up
+to the same size; the size is written in the top left corner of each panel. It is a crop, not the whole tile; `analysis/run_area_resolution.py` makes it.)
+
 Time grows a little slower than the number of dots (6 times the dots and 2.3 times the time from 512 to 1254, because building the shapes and starting Blender cost the same at any size; 4 times the dots and 3.2 times the time from 1254 to 2508). The description is the same file: shapes are stored in tile dots and scaled
 by the picture size, so nothing is stored per output dot. What does NOT improve with resolution is the detail: the stamps and ragged outlines are made at the 1254 scale, so at 2508 you see the same shapes drawn sharper,
 not finer. (A fix not built: subdivide the outlines and add a second, finer wobble when the picture size is larger than the description's tile.)
@@ -268,10 +323,15 @@ not finer. (A fix not built: subdivide the outlines and add a second, finer wobb
 | description | mean difference (steps of 255) | share of dots differing by more than 40 | the same two numbers for a WRONG roll (control) |
 |---|---|---|---|
 | S1 layout + stamps | 0.67 | 0.0 % | 19.4 and 13.2 % |
-| a sampled tile (seed 1) | 0.61 | 0.0 % | 16.1 and 11.2 % |
+| a sampled tile (seed 1; `description/sample_1.json`, earlier sampler, no grain) | 0.61 | 0.0 % | 16.1 and 11.2 % |
 | L medium (traced) | 0.67 | 0.0 % | 19.2 and 15.1 % |
 | cedar shingles (transfer) | 0.93 | 0.0 % | 28.2 and 26.1 % |
 | fish-scale tiles (transfer) | 0.99 | 0.02 % | 38.4 and 40.4 % |
+
+The numbers in the table are for the colour picture. The independent checker repeated the test on a sampled tile WITH the grain (seed 103): colour 0.66 and 0.00 %, but the
+height picture differed by 3.28 steps (against about 1.7 to 2.0 without grain). That is not a seam: the grain stays fixed in place while the shapes slide, so with the grain on,
+the height part of this test means nothing; use the colour part. The checker also repeated cedar (0.93, 0.00 %) and fish-scale (0.99, 0.02 %), and the wrong-roll controls failed as a control should (the checker's numbers: 18.7, 23.7 and 41.8).
+The checker's half-tile pictures are in `verify/half/`; it wrote no score file for them, so these numbers are quoted from its report (`verifier_answer.json`).
 
 All pass: a tile slid by half a tile is the same picture, so the tile repeats exactly. The "same kind" tool's tiling score is 1.0 for these (it reads 0.98 for L fine and 0.90 for one sampled tile: its seam number gives false alarms on joint layouts; the half-tile test is the one to trust).
 The 2 x 2 sheets in `scores/*_texture_sheet.png` show no seam either.
@@ -305,14 +365,17 @@ Verdict, honestly:
 * **Cost:** about 3 times the time of the painter route (colour with ambient occlusion alone is 10 times slower), and it needs Geometry Nodes, bevel and noise nodes to make ragged outlines that the painter route makes with a few numbers.
 * **Use for it:** when the texture will sit on a 3D roof and the overlap and shadow must be real (true normal, ambient occlusion, displacement), or as the layout for baking.
 
-## 8. Transfer to a roof covering nobody gave us (G)
+## 8. Transfer to a roof covering nobody gave us
 
-Chosen surfaces: **weathered wooden roof shingles** (the suggested "roof shingles") and **clay fish-scale tiles** (the suggested "fish-scale tiles"). There is no reference picture for either, so they are checked by eye, by the
-half-tile test and by the seam measure, not by the "same kind" tool. Script: `transfer/make_transfer_descriptions.py` (about 90 lines, all numbers).
+Chosen surfaces: **weathered wooden roof shingles** (the suggested "roof shingles") and **clay fish-scale roof pieces** (what the project brief calls "fish-scale tiles"; here "tile" stays the word for the picture). There is no reference picture for either, so they are checked by eye, by the
+half-tile test and by the seam measure, not by the "same kind" tool. Script: `transfer/make_transfer_descriptions.py` (89 lines, all numbers).
 
-![transfer: cedar shingles (two seeds) and fish-scale clay tiles: colour, height, normal](transfer/transfer_sheet.png)
+![transfer: cedar shingles (two seeds) and fish-scale clay pieces: colour, height, normal](transfer/transfer_sheet.png)
 
-**What I changed for the cedar shingles (and nothing else): the generator code was not touched.**
+**What I changed for the cedar shingles (and nothing else): the Blender generator code (`slate_generator.py`, `slate_layers.py`) was not touched.** Two other parts of the
+pipeline were used that are not just numbers: the sampler's `fitted=` option (so it reads the cedar numbers instead of the slate's; this option was added for the transfer and
+is listed under fish-scale below), and the height stretch, which was worked out by the plain-Python preview painter (`analysis/preview_tools.py`). So "numbers only" is true of the
+Blender generator, not of the whole pipeline.
 | setting | slate | cedar shingles |
 |---|---|---|
 | palette (24 colours) | blue-greys, olive, tan, black | 14 weathered browns, greys, 2 mossy greens, 2 bleached tans, dark knot, black joint |
@@ -320,11 +383,11 @@ half-tile test and by the seam measure, not by the "same kind" tool. Script: `tr
 | rows x pieces per tile | 8 x 6 | 14 x 12 |
 | piece width (median, log spread) and row height (+- spread) | 200 (0.217), 146 (6.4) | 104 (0.28), 83 (3.0) |
 | gap between rows / between pieces | 10.6 / 3.9 | 6.0 / 3.0 |
-| corner radius, edge raggedness top / bottom / side | 8; 2.5 / 2.0 / 1.6 | 3; 1.5 / 2.2 / 1.2 |
+| corner radius, edge raggedness top / bottom / side | 8; 2.5 / 2.0 / 2.06 | 3; 1.5 / 2.2 / 1.2 |
 | average tone of a piece | 64 | 100 |
 | top-to-bottom tone gradient (6 steps) | -20 ... +13 | -9 ... +8 |
 | patch tone spread | measured | x0.55 |
-| patch width / height | measured | width x 0.64, height x 1.16 (long thin grain streaks) |
+| patch width / height | measured | width x 0.64, height x 1.16 (long thin wood-grain lines) |
 | moss and lichen shares | 7.7 % / 5.6 % | 4 % / 5 % |
 | height stretch (grey_low, grey_high) | 9.5, 111.5 (fitted on the reference) | 12, 177 (first and 99th percentile of the picture's own brightness) |
 
@@ -334,10 +397,10 @@ half-tile test and by the seam measure, not by the "same kind" tool. Script: `tr
 **Time:** writing the cedar numbers: one short script, one try; a quick numpy preview 10 s; Blender bake 25 s (all six pictures); the first look was already a convincing shingle roof (see the sheet). Total from "decide the surface" to "pictures on the screen":
 a few minutes of work and under a minute of computing. Half-tile test: passed (mean difference 0.93 steps, 0.0 % of dots over 40).
 
-**Fish-scale tiles needed one new generator setting.** `layout.bottom_round` (0 to 1) makes the two lower corners of every piece rounder (1 = a half circle); the change is about 12 lines in `slate_outline`. Plus two small sampler options: alternate rows shifted
-by half a piece (`phase_mode`) and a `fitted=` argument so the sampler can read another set of numbers. The numbers: 17 rows of 12 tiles, width 104.5 (spread 0.02), row height 66, terracotta palette of 14 colours, `bottom_round` 1. Half-tile test: passed
-(0.99 steps, 0.02 %). Bake 25 s. Known flaw: real fish-scale tiles overlap, so the gap between two scales shows the next row's tile; mine shows black (the painter draws every row with a gap). That would need an "overlap" option (draw rows
-bottom-up, extend each tile's top under the row above); not built. The "wrap seam" number of the fish-scale tile reads 1.83 sideways: that is the seam measure's false alarm on a scalloped edge; the half-tile test says it repeats exactly.
+**Fish-scale pieces needed one new generator setting.** `layout.bottom_round` (0 to 1) makes the two lower corners of every piece rounder (1 = a half circle); the change is about 12 lines in `slate_outline`. Plus two small sampler options: alternate rows shifted
+by half a piece (`phase_mode`) and a `fitted=` argument so the sampler can read another set of numbers. The numbers: 17 rows of 12 pieces, width 104.5 (spread 0.02), row height 66, terracotta palette of 14 colours, `bottom_round` 1. Half-tile test: passed
+(0.99 steps, 0.02 %). Bake 25 s. Known flaw: real fish-scale pieces overlap, so the gap between two scales shows the next row's piece; mine shows black (the painter draws every row with a gap). That would need an "overlap" option (draw rows
+bottom-up, extend each piece's top under the row above); not built. The checker also saw that the scales vary in width and several look squared off at the bottom. The "wrap seam" number of the fish-scale picture reads 1.83 sideways: that is the seam measure's false alarm on a scalloped edge; the half-tile test says it repeats exactly.
 
 **What this says about the method:** a new surface of the same family (pieces in rows with joints, painted) is "new numbers"; a new piece SHAPE is "one new setting"; a new kind of arrangement (overlapping, non-row) would be new code.
 
@@ -365,3 +428,40 @@ bottom-up, extend each tile's top under the row above); not built. The "wrap sea
   `geometry_route_slabs.py` (real-geometry route), `test_filter_width.py`, `sweeps_for_guide.py`.
 * `analysis/`: the measuring scripts, `layout_fit.json`, `paint_model.json`, `trace_full.json` (the trace: analysis only, large), `describe_tools.py`, `make_descriptions.py`, `score_folder.py`, `half_tile_test.py`, ...
 * `description/`: the description files. `outputs/`: baked pictures. `scores/`: every score and difference sheet. `variations/`, `area/`, `resolution/`, `transfer/`, `guide_pictures/`.
+
+## 11. Checked independently
+
+A second helper (the "checker") re-ran this work from the files, without the builder: fresh Blender bakes of all nine descriptions, both comparison tools, the size check,
+a trace of which files each bake opened, the variations, the area and the half-tile test. Its full findings are in `verifier_answer.json`; its own pictures and scores are in `verify/`.
+
+**Confirmed:**
+* Every re-baked picture is identical dot for dot to the builder's (largest difference 0), except the old S0 pictures (see the note under the table in section 0).
+* All nine rows of the section 0 table: the checker's tiers, colour SSIM, colour difference and "same kind" scores match to rounding (`verify/scores/`).
+* The generator never opens the reference: a trace of the S1, L fine and var_103 bakes shows only the description, the generator, `lib/` and the output folder were opened.
+* Every claimed description passes the size check at its own class limit (`verify/audit_S.txt`, `audit_M.txt`, `audit_L.txt`).
+* The derivation ceiling of about 3 steps and 2.8 degrees (straight-line rule: 3.03 steps after best fit, 2.71 degrees; `verify/scores/ceiling_pixel.json`).
+* The eight variations are exactly what the sampler makes; score range 0.722 to 0.753 (mean 0.735); the no-grain claim (var_101 without grain 0.709).
+* The area is new content with no seam and no repeat (re-bake identical; re-measured numbers in section 6.2).
+* The half-tile test passes on var_103, cedar and fish-scale (colour picture).
+* The resolution timings (6 x the dots = 2.3 x the time, 4 x = 3.2 x) agree with `resolution/resolution_table.json`; the layout numbers agree with `generator/fitted_distributions.json` except side raggedness (below).
+
+**Corrected in this guide:**
+* Side edge raggedness is 2.06 dots, not 1.6 (sections 2B, 3 and 8).
+* The 2.95-step height figure belongs to a 64-slot lookup curve; the straight line the generator uses gives 3.77 steps, 3.03 after best fit (section 2A).
+* "A 4-point curve is off by 18, so the straight line is used" was a misleading reason; the real reason is that small curves cannot make the cut-off at 0 and 255 (section 2A).
+* The stored S0 pictures are older than the S0 description; the numbers still hold (section 0).
+* `description/sample_1` to `sample_4` and the area description come from an earlier sampler (no grain; sample_1 to 4 also no contrast setting) (sections 6.1, 6.2, 6.4).
+* With the grain on, the height row of the half-tile test is not meaningful (3.28 steps; the grain stays in place while the shapes slide) (section 6.4).
+* Sizes now all in KB of 1024 bytes: S2 6.5 KB (not 6.6), variations 6.6 KB (not 6.7), area 14.2 KB (not 14.5), transfers 12.6 to 14.3 KB.
+* The normal error of S0, M and L small is slightly worse than a flat normal map (11.3 degrees); "close" passes on normals only because the limit is 12 (section 0).
+* The height-filter strip was baked at 384 dots, so it blurs about 3.3 times more than the 1254-dot bake the text describes (section 4).
+* The variations are clearly weaker than the reference (blocky "camouflage", missing pale lips, moss and long drips), not just "a little darker" (section 6.1).
+* Cedar needed no change in the Blender generator, but did use the sampler's new `fitted=` option and the preview painter's height stretch (section 8).
+* Measures and jargon now explained in plain words (section 0 "How to read the columns", sections 2 and 4); brief letter codes removed from the headings; "piece", "drip" and "grain" used for one thing each.
+
+**Where the checker was wrong (looked at again):** it read the variation contact sheet as crops of an 800-dot corner and the resolution sheet as two unlabelled crops per size.
+`analysis/run_variations.py` shrinks each WHOLE tile to 400 dots (tested while writing this section: the reference panel of the sheet equals the whole reference shrunk to
+400 dots, mean difference 0.0, against 23.5 for an 800-dot corner), and the resolution sheet is one labelled 120-dot crop per size (`analysis/run_area_resolution.py`). The captions now say so.
+
+**Not checked independently:** the bake times (the checker's machine was busier: 35 to 65 s per tile, 177 s for the area); the paint-setting numbers from the preview painter
+(grow, contrast, drift); the geometry-route table and the dead-end list were checked only against the stored score files, not re-run.

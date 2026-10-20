@@ -5,8 +5,10 @@
 #                         hand-drawn ragged edge (a 6-dot gap plus a black core, the way a painter draws it).
 #   2. THE SIDE OUTLINES  a thin dark line just inside every slate edge (about 2 dots wide), a little different width everywhere.
 #   3. THE SHADOW BAND    the shadow the slate above throws on the TOP of the slate below: darkest right under the black joint, fading
-#                         over about 25 dots, painted in a few flat steps (not a smooth blur) whose lower edge is ragged like drips.
-#   4. THE LIP            a pale, broken line along the LOWER edge of a slate, just above its black joint (the edge catching the light).
+#                         over about 38 dots, painted in four flat steps (not a smooth blur) whose lower edges are ragged like drips,
+#                         with a few teeth of solid black hanging down from the black band.
+#   4. THE LIP            a pale, broken line along the LOWER edge of a slate, just above its black joint (the edge catching the light); it
+#                         starts about 3 dots inside the edge, after a thin dark rim, as in the reference.
 #   5. THE EDGE DARKENING a faint darkening of the slate close to every edge (about 6 dots), so slates do not look flat-cut.
 # It also gives the relief: the shadow band is a slope (the slate rises out of the joint), the lip is a small raised rim, the side
 # outline is a small groove. (The joints themselves are already low in the layout's base_height; this layer only adds to that.)
@@ -18,7 +20,7 @@
 # (top_edge_distance, in tile units). The shadow reaches down `Shadow Width` from the edge, but the reach is made longer or shorter by a
 # seamless noise that is stretched UP-DOWN (it changes quickly left to right and slowly up and down), so the lower border of the shadow has
 # teeth pointing down, like painted drips. How far into the reach this dot is (1 right at the edge, 0 at the end) is cut into `Shadow Tiers`
-# flat steps (3 = three flat tones, like the reference) and multiplied by `Shadow Darkness`. That number is the strength with which the shadow
+# flat steps (4 by default; 0 = a smooth blur) and multiplied by `Shadow Darkness`. That number is the strength with which the shadow
 # colour is laid over the picture underneath, so the slate's own paint still shows through the shadow.
 #
 # How the five pieces share one Colour output: each piece has its own colour and its own strength (0..1) at every dot. They are laid over
@@ -53,21 +55,23 @@ DEFAULT_SEED = 41.0
 CONTROLS = [
     # ---- the black joints
     Control('joint_width', 'Joint Width', 0.0008, 0.0, 0.006, 'how far the painted black spills out of the gap BETWEEN SLATES OF A ROW into each slate, in tile units (0.0008 = 1 dot); the gap itself is the layout\'s Joint Width'),
-    Control('band_width', 'Band Width', 0.0018, 0.0, 0.008, 'how far the painted black spills out of the band BETWEEN ROWS into the slates above and below, in tile units (0.0018 = 2.3 dots); the band itself is the layout\'s Row Gap'),
+    Control('band_width', 'Band Width', 0.0004, 0.0, 0.008, 'how far the painted black spills out of the band BETWEEN ROWS into the slates above and below, in tile units (0.0004 = 0.5 dot); the band itself is the layout\'s Row Gap'),
     Control('joint_colour', 'Joint Colour', '#0e0f11', kind='colour', text='the near-black of the joints'),
     # ---- the thin dark outline along the slate edges
-    Control('side_outline_width', 'Side Outline Width', 0.0016, 0.0, 0.008, 'width of the thin dark line just inside every slate edge, in tile units (0.0016 = 2 dots)'),
-    Control('side_outline_darkness', 'Side Outline Darkness', 0.8, 0.0, 1.0, 'how strongly the outline colour covers the slate paint (0 = invisible, 1 = solid)'),
+    Control('side_outline_width', 'Side Outline Width', 0.0020, 0.0, 0.008, 'width of the thin dark line just inside every slate edge, in tile units (0.0020 = 2.5 dots)'),
+    Control('side_outline_darkness', 'Side Outline Darkness', 0.6, 0.0, 1.0, 'how strongly the outline colour covers the slate paint (0 = invisible, 1 = solid)'),
     Control('outline_colour', 'Outline Colour', '#14161a', kind='colour', text='the dark blue-black of the thin outline (a little lighter than the joint black)'),
     # ---- the shadow band on the top of each slate
     Control('shadow_width', 'Shadow Width', 0.030, 0.0, 0.06, 'how far the shadow of the slate above reaches down the slate below, in tile units (0.030 = 38 dots; the reference band is about 21 dots of dark plus a soft tail to 40 dots)'),
     Control('shadow_darkness', 'Shadow Darkness', 0.7, 0.0, 1.0, 'how strongly the shadow colour covers the slate paint right under the joint (0 = no shadow, 1 = solid black); it is weaker lower down'),
     Control('shadow_tiers', 'Shadow Tiers', 4.0, 0.0, 8.0, 'how many flat painted steps the shadow is cut into (0 = a smooth blur; 4 = four flat tones; 1 = one flat band)'),
     Control('shadow_drip', 'Shadow Drip', 0.5, 0.0, 1.0, 'how ragged the lower border of the shadow is, as a share of Shadow Width (0 = a straight line; 0.5 = teeth pointing down like drips; 1 = very ragged)'),
+    Control('black_drips', 'Black Drips', 0.009, 0.0, 0.03, 'how far black drips hang down from the black band into the shadow, in tile units (0.009 = 11 dots at most; they are teeth of different length, most places have none; 0 = no drips)'),
     Control('shadow_colour', 'Shadow Colour', '#0f1114', kind='colour', text='the colour of the shadow: very dark blue-grey that is laid over the slate paint'),
     # ---- the pale lip along the lower edge
-    Control('lip_width', 'Lip Width', 0.0025, 0.0, 0.02, 'width of the pale lip along the lower edge of a slate, in tile units (0.0025 = 3 dots), starting just above the thin outline'),
-    Control('lip_brightness', 'Lip Brightness', 0.3, 0.0, 1.0, 'how strongly the pale colour covers the slate paint on the lip (0 = no lip, 1 = solid pale)'),
+    Control('lip_offset', 'Lip Offset', 0.0026, 0.0, 0.02, 'how far inside the slate edge the pale lip starts, in tile units (0.0026 = 3.3 dots: between the black joint and the lip is a thin dark rim, as in the reference)'),
+    Control('lip_width', 'Lip Width', 0.0030, 0.0, 0.02, 'width of the pale lip along the lower edge of a slate, in tile units (0.0030 = 3.8 dots), measured from the slate edge, after Lip Offset'),
+    Control('lip_brightness', 'Lip Brightness', 0.25, 0.0, 1.0, 'how strongly the pale colour covers the slate paint on the lip (0 = no lip, 1 = solid pale)'),
     Control('lip_breakup', 'Lip Breakup', 0.4, 0.0, 1.0, 'how broken the lip is (0 = one unbroken line, 1 = only short pale pieces)'),
     Control('lip_colour', 'Lip Colour', '#8c8e8b', kind='colour', text='the pale grey of the lip (the reference lip and chips measure about #6d6c67 to #7a7975 on top of the paint)'),
     # ---- the slight darkening toward every edge
@@ -159,7 +163,10 @@ def build_group(parameters):
     # ------------------------------------------------------------------------------------------------ 3. SHADOW BAND (top of the slate, below the joint)
     reach = b.mul(b.mul(S('Shadow Width'), reach_factor), b.math('MULTIPLY_ADD', b.sub(drip_noise, 0.5), b.mul(S('Shadow Drip'), 2.0), 1.0))
     reach = b.mx(reach, 1e-5)
+    tier_wander = seamless(b.mul(tiles, 30.0), b.mul(tiles, 30.0), 2.0, 0.5, 41.0)          # slow noise: every step border wanders a little on its own, so the steps are not exact copies of each other
     depth = b.maprange(b.div(top_edge_distance, reach), 0.0, 1.0, 1.0, 0.0, True)           # 1 right at the top edge, 0 at the end of the reach
+    depth = b.math('MULTIPLY_ADD', b.sub(tier_wander, 0.5), b.mul(S('Shadow Drip'), 0.5), depth, clamp=True)
+    depth = b.mul(depth, b.smoothstep(b.sub(1.0, b.div(top_edge_distance, reach)), 0.0, 0.02))   # still exactly 0 beyond the reach
     tiers = S('Shadow Tiers')
     stepped = b.div(b.floor(b.add(b.mul(depth, tiers), 0.9999)), b.mx(tiers, 1e-5))          # depth cut into flat steps: 1, 2/3, 1/3 for three tiers (0 stays 0)
     flat_or_smooth = b.gt(tiers, 0.5)
@@ -167,11 +174,16 @@ def build_group(parameters):
     shadow_strength = b.mul(b.mul(b.mn(b.mul(S('Shadow Darkness'), shadow_factor), 1.0), shadow_shape), piece_mask)
     smooth_depth = b.smoothstep(depth, 0.0, 1.0)                                              # the same reach but smooth: used for the relief (a slope, not steps)
 
+    # black drips: teeth of black that hang down from the black band into the shadow (the reference has them under most rows)
+    teeth = seamless(b.mul(tiles, 50.0), b.mul(tiles, 28.0), 1.0, 0.5, 53.0)
+    teeth_length = b.mul(S('Black Drips'), b.power(b.maprange(teeth, 0.58, 0.9, 0.0, 1.0, True), 1.2))
+    drip_black = b.mul(hard(b.sub(teeth_length, top_edge_distance)), piece_mask)
+
     # ------------------------------------------------------------------------------------------------ 4. THE LIP (lower edge of the slate)
-    outline_here = b.mul(S('Side Outline Width'), width_factor)                               # the outline is drawn inside the lip
-    lip_from = outline_here
-    lip_to = b.add(outline_here, b.mul(S('Lip Width'), lip_factor))
-    inside_lip = b.mul(hard(b.sub(edge_distance, b.sub(lip_from, SOFT))), hard(b.sub(lip_to, edge_distance)))   # 1 between outline and lip end
+    outline_here = b.mul(S('Side Outline Width'), width_factor)                               # width of the thin outline here (wobbled)
+    lip_from = b.mul(S('Lip Offset'), width_factor)
+    lip_to = b.add(lip_from, b.mul(S('Lip Width'), lip_factor))
+    inside_lip = b.mul(hard(b.sub(edge_distance, b.sub(lip_from, SOFT))), hard(b.sub(lip_to, edge_distance)))   # 1 between lip start and lip end
     break_from = b.sub(b.mul(S('Lip Breakup'), 0.7), 0.12)                                     # at Breakup 0 the threshold is below 0: nothing is broken
     unbroken = b.smoothstep(wobble_b, break_from, b.add(break_from, 0.12))                     # 1 where the lip is drawn, 0 in the gaps of the lip
     lip_here = b.mul(b.mul(inside_lip, bottom_weight), unbroken)
@@ -184,7 +196,7 @@ def build_group(parameters):
     # ------------------------------------------------------------------------------------------------ 1. BLACK JOINT (gap plus a ragged spill)
     spill = b.mul(b.mixf(S('Joint Width'), S('Band Width'), row_edge_weight), width_factor)
     spill_shape = hard(b.sub(spill, edge_distance))
-    joint_strength = b.mx(gap_mask, spill_shape)
+    joint_strength = b.mx(b.mx(gap_mask, spill_shape), drip_black)
 
     # ------------------------------------------------------------------------------------------------ stack the paint: later ones lie on top
     colour, strength = S('Outline Colour'), edge_dark_strength                  # the faint edge darkening is first (it uses the outline colour)

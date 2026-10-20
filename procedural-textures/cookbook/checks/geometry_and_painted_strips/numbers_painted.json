@@ -1,0 +1,212 @@
+{
+ "outline_band": {
+  "how": "512-dot renders, 1 sample. Patch edge = dots where the soft mask crosses 0.5 (compared with the right and the lower neighbour, wrapping round). Line dot = a dot painted the dark colour #2b201b (within 6 steps). Local line width at an edge dot = 2 x (distance from that dot to the nearest non-line dot) - 1, measured on a wrap-padded copy (exact for odd widths, about 1 dot short for even ones). Island dots = line dots more than 8 dots (of 512) from any patch edge.",
+  "size": 512,
+  "samples": 1,
+  "softness": 0.05,
+  "shares": {
+   "0.0": {
+    "share_of_picture_dark": 0.0,
+    "edge_dots": 2331,
+    "share_of_edge_dots_with_a_line": 0.0,
+    "island_share_of_line_dots": 0.0
+   },
+   "0.1": {
+    "share_of_picture_dark": 0.0353,
+    "edge_dots": 2331,
+    "share_of_edge_dots_with_a_line": 1.0,
+    "island_share_of_line_dots": 0.015,
+    "width_at_edge_dots_512": {
+     "p10": 1.0,
+     "median": 3.0,
+     "p90": 6.2,
+     "max": 11.8
+    },
+    "width_in_dots_of_a_1254_tile": {
+     "p10": 2.4,
+     "median": 7.3,
+     "p90": 15.2
+    },
+    "mean_width_estimate_512_line_dots_per_edge_dot": 3.97
+   },
+   "0.25": {
+    "share_of_picture_dark": 0.0881,
+    "edge_dots": 2331,
+    "share_of_edge_dots_with_a_line": 1.0,
+    "island_share_of_line_dots": 0.085,
+    "width_at_edge_dots_512": {
+     "p10": 4.6,
+     "median": 7.4,
+     "p90": 14.2,
+     "max": 24.6
+    },
+    "width_in_dots_of_a_1254_tile": {
+     "p10": 11.3,
+     "median": 18.1,
+     "p90": 34.7
+    },
+    "mean_width_estimate_512_line_dots_per_edge_dot": 9.91
+   },
+   "0.5": {
+    "share_of_picture_dark": 0.1883,
+    "edge_dots": 2331,
+    "share_of_edge_dots_with_a_line": 1.0,
+    "island_share_of_line_dots": 0.321,
+    "width_at_edge_dots_512": {
+     "p10": 9.8,
+     "median": 15.4,
+     "p90": 26.2,
+     "max": 55.0
+    },
+    "width_in_dots_of_a_1254_tile": {
+     "p10": 24.0,
+     "median": 37.7,
+     "p90": 64.1
+    },
+    "mean_width_estimate_512_line_dots_per_edge_dot": 21.18
+   },
+   "1.0": {
+    "share_of_picture_dark": 0.4141,
+    "edge_dots": 2331,
+    "share_of_edge_dots_with_a_line": 1.0,
+    "island_share_of_line_dots": 0.658,
+    "width_at_edge_dots_512": {
+     "p10": 21.4,
+     "median": 32.2,
+     "p90": 49.4,
+     "max": 71.8
+    },
+    "width_in_dots_of_a_1254_tile": {
+     "p10": 52.4,
+     "median": 78.8,
+     "p90": 121.0
+    },
+    "mean_width_estimate_512_line_dots_per_edge_dot": 46.57
+   }
+  }
+ },
+ "pictures_written": [
+  {
+   "file": "cookbook/pictures/geometry-strip-relax-steps.jpg",
+   "bytes": 198120,
+   "jpeg_quality": 90,
+   "width": 1312,
+   "height": 330
+  },
+  {
+   "file": "cookbook/pictures/geometry-strip-groove-width.jpg",
+   "bytes": 53960,
+   "jpeg_quality": 90,
+   "width": 1048,
+   "height": 330
+  },
+  {
+   "file": "cookbook/pictures/geometry-strip-curve-ridge-radius.jpg",
+   "bytes": 49481,
+   "jpeg_quality": 90,
+   "width": 1312,
+   "height": 330
+  },
+  {
+   "file": "cookbook/pictures/geometry-trap-set-material.jpg",
+   "bytes": 18813,
+   "jpeg_quality": 90,
+   "width": 520,
+   "height": 330
+  },
+  {
+   "file": "cookbook/pictures/painted-strip-outline-band-share.jpg",
+   "bytes": 65974,
+   "jpeg_quality": 90,
+   "width": 1312,
+   "height": 330
+  },
+  {
+   "file": "cookbook/pictures/painted-strip-outline-band-softness.jpg",
+   "bytes": 44826,
+   "jpeg_quality": 90,
+   "width": 784,
+   "height": 330
+  },
+  {
+   "file": "cookbook/pictures/geometry-overview-all-recipes.jpg",
+   "bytes": 267920,
+   "jpeg_quality": 62,
+   "width": 1100,
+   "height": 1412,
+   "copied_from": "research/experiments_geometry_nodes_curves_modifiers_physics/out/overview_all_recipes.png"
+  },
+  {
+   "file": "cookbook/pictures/geometry-modifiers-from-above.jpg",
+   "bytes": 87424,
+   "jpeg_quality": 90,
+   "width": 1024,
+   "height": 910,
+   "copied_from": "research/experiments_geometry_nodes_curves_modifiers_physics/out/t05_modifiers_sheet.png"
+  },
+  {
+   "file": "cookbook/pictures/geometry-wrap-test-sheet.jpg",
+   "bytes": 137607,
+   "jpeg_quality": 90,
+   "width": 1024,
+   "height": 600,
+   "copied_from": "research/experiments_geometry_nodes_curves_modifiers_physics/out/t07_wrap_sheet.png"
+  },
+  {
+   "file": "cookbook/pictures/painted-outline-methods-sheet.jpg",
+   "bytes": 316765,
+   "jpeg_quality": 55,
+   "width": 1200,
+   "height": 2100,
+   "copied_from": "research/experiments_hand_painted_look/pictures/c05_outline_methods_sheet.png"
+  },
+  {
+   "file": "cookbook/pictures/painted-kuwahara-anisotropic-size.jpg",
+   "bytes": 98573,
+   "jpeg_quality": 90,
+   "width": 1300,
+   "height": 446,
+   "copied_from": "research/experiments_hand_painted_look/pictures/c06_kuwahara_aniso_size.png"
+  },
+  {
+   "file": "cookbook/pictures/painted-kuwahara-classic-size.jpg",
+   "bytes": 129582,
+   "jpeg_quality": 90,
+   "width": 1300,
+   "height": 669,
+   "copied_from": "research/experiments_hand_painted_look/pictures/c06_kuwahara_classic.png"
+  },
+  {
+   "file": "cookbook/pictures/painted-filter-seam-and-wrap-padding.jpg",
+   "bytes": 89854,
+   "jpeg_quality": 90,
+   "width": 1300,
+   "height": 433,
+   "copied_from": "research/experiments_hand_painted_look/pictures/c08_seam_fix_sheet.png"
+  },
+  {
+   "file": "cookbook/pictures/painted-slate-demo-stages.jpg",
+   "bytes": 139962,
+   "jpeg_quality": 90,
+   "width": 1300,
+   "height": 696,
+   "copied_from": "research/experiments_hand_painted_look/pictures/c12_slate_demo_stages.png"
+  },
+  {
+   "file": "cookbook/pictures/painted-gravel-demo-stages.jpg",
+   "bytes": 247359,
+   "jpeg_quality": 90,
+   "width": 1260,
+   "height": 900,
+   "copied_from": "research/experiments_hand_painted_look/pictures/c17_gravel_demo_stages.png"
+  },
+  {
+   "file": "cookbook/pictures/painted-references-in-4-8-16-32-colours.jpg",
+   "bytes": 261682,
+   "jpeg_quality": 75,
+   "width": 1125,
+   "height": 1350,
+   "copied_from": "research/experiments_hand_painted_look/pictures/a02_posterise_reference_all.png"
+  }
+ ]
+}

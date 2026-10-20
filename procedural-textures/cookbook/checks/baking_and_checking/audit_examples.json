@@ -1,0 +1,76 @@
+{
+ "slate S1 layout + stamps, limit 8 KB": {
+  "file": "recipes/slate/description/S1_layout_stamps.json",
+  "bytes": 6597,
+  "numbers": 888,
+  "biggest_list": 24,
+  "biggest_list_at": "/palette",
+  "share_of_a_1254x1254_rgb_picture": 0.0014,
+  "problems": [],
+  "exit_code": 0,
+  "verdict": "passed"
+ },
+ "slate L traced fine, limit 64 KB": {
+  "file": "recipes/slate/description/L_trace_fine.json",
+  "bytes": 453054,
+  "numbers": 154230,
+  "biggest_list": 9383,
+  "biggest_list_at": "/patches",
+  "share_of_a_1254x1254_rgb_picture": 0.096,
+  "problems": [
+   "file is 453054 bytes, over the limit of 65536.0"
+  ],
+  "exit_code": 1,
+  "verdict": "refused"
+ },
+ "slate L traced fine, limit 512 KB": {
+  "file": "recipes/slate/description/L_trace_fine.json",
+  "bytes": 453054,
+  "numbers": 154230,
+  "biggest_list": 9383,
+  "biggest_list_at": "/patches",
+  "share_of_a_1254x1254_rgb_picture": 0.096,
+  "problems": [],
+  "exit_code": 0,
+  "verdict": "passed"
+ },
+ "made up: a 100 x 100 grid of grey values": {
+  "file": "cookbook/checks/baking_and_checking/audit_made_up/grid_100x100.json",
+  "bytes": 45937,
+  "numbers": 10000,
+  "biggest_list": 100,
+  "biggest_list_at": "/grey",
+  "share_of_a_1254x1254_rgb_picture": 0.0097,
+  "problems": [
+   "/grey: a grid of 100 x 100 numbers (looks like an image)"
+  ],
+  "exit_code": 1,
+  "verdict": "refused"
+ },
+ "made up: a flat list of 5000 numbers": {
+  "file": "cookbook/checks/baking_and_checking/audit_made_up/flat_list_5000.json",
+  "bytes": 22889,
+  "numbers": 5000,
+  "biggest_list": 5000,
+  "biggest_list_at": "/values",
+  "share_of_a_1254x1254_rgb_picture": 0.0049,
+  "problems": [
+   "/values: a flat list of 5000 numbers (more than 4000: looks like picture data)"
+  ],
+  "exit_code": 1,
+  "verdict": "refused"
+ },
+ "made up: 100 polygon outlines of 6 to 78 numbers, first five long": {
+  "file": "cookbook/checks/baking_and_checking/audit_made_up/hundred_outlines.json",
+  "bytes": 11574,
+  "numbers": 3780,
+  "biggest_list": 100,
+  "biggest_list_at": "/patches",
+  "share_of_a_1254x1254_rgb_picture": 0.0025,
+  "problems": [
+   "/patches: a grid of 100 x 70 numbers (looks like an image)"
+  ],
+  "exit_code": 1,
+  "verdict": "refused"
+ }
+}

@@ -1,4 +1,4 @@
-# NEXT PHASE - not started (the person said: "don't start that yet")
+# NEXT PHASE - STARTED (first note said "don't start that yet"; then the person answered: slate first, layers inside the recipe, the picture only as a guide; the brief is "SLATE LAYERS BRIEF - pure procedural, layers inside the recipe.md")
 
 Helpers working on the six surface builds: ignore this file. It is a note for later.
 

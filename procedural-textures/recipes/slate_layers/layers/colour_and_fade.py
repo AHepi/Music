@@ -76,6 +76,7 @@ CONTROLS += [
     Control('fade_length', 'Fade Length', 0.07, 0.01, 0.4, 'how far the longest paint tongue runs down (or up) the slate, in tile units (0.07 = 88 dots, over half a slate; small = short stubby drips, large = streaks all the way down)'),
     Control('streak_width', 'Streak Width', 0.034, 0.004, 0.1, 'how wide one paint tongue / streak is, in tile units (0.034 = 43 dots)'),
     Control('streak_contrast', 'Streak Contrast', 1.15, 0.0, 3.0, 'how strongly the patches inside a slate differ from their neighbours, as a multiple of the usual (about one tone step); 0 = no mottling, only the fade'),
+    Control('mottle_tallness', 'Mottle Tallness', 2.2, 0.5, 6.0, 'how much taller than wide the flat mottling patches inside a slate are (2.2 = patches that run the whole height of a slate; 1 = patches about as tall as 2 streak widths, so the stripes break up into shorter strokes) - added in the integration round'),
     Control('top_darkening', 'Top Darkening', 0.6, 0.0, 3.0, 'extra darkening of the first fifth of the slate, under the slate above, in tone steps (the fade keeps going darker upwards; OUTLINE AND SHADOW adds the thin shadow line)'),
     Control('speck_amount', 'Speck Amount', 0.9, 0.0, 2.0, 'strength of the many small paint specks (a speck is a flat patch of one tone step lighter or darker, a few dots across); 0 = none'),
     Control('speck_cover', 'Speck Cover', 0.10, 0.0, 0.6, 'roughly the share of each slate covered by specks'),
@@ -210,7 +211,7 @@ def build_group(parameters):
         return b.mul(change, b.gt(random_cover, b.sub(1.0, coverage))), random_tint
 
     contrast = S('Streak Contrast')
-    mottling_medium, patch_tint_roll = mottle(1.5, 2.2, b.mul(start_u, 41.0), b.mul(start_v, 41.0), b.mul(contrast, 1.1), 1.0)
+    mottling_medium, patch_tint_roll = mottle(1.5, S('Mottle Tallness'), b.mul(start_u, 41.0), b.mul(start_v, 41.0), b.mul(contrast, 1.1), 1.0)
     mottling = mottling_medium
     # (c) SPECKS. Many small flat patches, a few dots across: thresholded noise (the top part of the noise only), each one a step lighter or darker.
     speck_scale = b.div(1.0, b.mx(S('Speck Size'), 1e-4))

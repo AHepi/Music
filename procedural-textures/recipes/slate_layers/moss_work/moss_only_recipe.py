@@ -5,6 +5,7 @@
 # top), and the dark joints. The other layers (outline) are replaced by a plain dark joint colour.
 # Parameters (not settings; settings 'moss.*', 'layout.*', 'damage.*' work as in the real recipe; recipe/settings.json is NOT read here):
 #   base     'flat' (default): every slate one flat blue-grey so the moss is easy to see; 'paint': the real COLOUR AND FADE layer.
+#   order    'moss_on_top': paint the moss OVER the damage (default: damage over the moss, the real stack order); only with damage = true.
 #   damage   true: also build DAMAGE, wire the declared link and paint damage over the moss (the real stack order). Default false.
 #   view     'colour' (default) the picture; 'mask' moss strength as grey; 'height' moss height (0.5 = no change, 5 x); 'roughness' (0.5 = no change, 2 x);
 #            'joints' LAYOUT's piece_mask; 'moss_only' the moss colour where the mask is 1 and black elsewhere; 'bundle_<name>' one bundle number.
@@ -62,11 +63,16 @@ def build_node_group(parameters):
     else:
         base_colour = li.rt.srgb_hex_to_linear(parameters.get('flat_colour', '#444c53'))
     joint = parameters.get('joint_colour', '#0c0e11')
-    colour = b.mix(base_colour, moss_node.outputs['Colour'], moss_node.outputs['Mask'])
     height = b.add(layout_node.outputs['base_height'], moss_node.outputs['Height'])
     roughness = b.add(0.8, moss_node.outputs['Roughness'])
+    if use_damage and parameters.get('order') == 'moss_on_top':          # moss painted OVER the damage (the other stack order)
+        colour = b.mix(base_colour, damage_node.outputs['Colour'], damage_node.outputs['Mask'])
+        colour = b.mix(colour, moss_node.outputs['Colour'], moss_node.outputs['Mask'])
+    else:                                                                # the real stack order: moss, then damage over it
+        colour = b.mix(base_colour, moss_node.outputs['Colour'], moss_node.outputs['Mask'])
+        if use_damage:
+            colour = b.mix(colour, damage_node.outputs['Colour'], damage_node.outputs['Mask'])
     if use_damage:
-        colour = b.mix(colour, damage_node.outputs['Colour'], damage_node.outputs['Mask'])
         height = b.add(height, damage_node.outputs['Height'])
         roughness = b.add(roughness, damage_node.outputs['Roughness'])
     colour = b.mix(joint, colour, layout_node.outputs['piece_mask'])

@@ -1,0 +1,353 @@
+{
+ "wave_phase_offset": {
+  "setup": "Wave Bands, direction X, Sine, Scale 5 x pi/10 = 1.5708 (5 whole bands across the tile), Distortion 0, 256 dots",
+  "mean_difference_phase_0_vs_full_turn": 0.0,
+  "mean_difference_half_turn_vs_inverted_phase_0": 0.0,
+  "shift_in_dots_for_quarter_turn (positive = bands moved right)": -64,
+  "band_period_in_dots": 51.2,
+  "with_distortion_3_mean_difference_quarter_turn": 0.4497
+ },
+ "noise_normalize": {
+  "setup": "Noise 3D, Scale 5, Detail 2, Roughness 0.5, Lacunarity 2, Offset 0 (default); numbers are the true values",
+  "FBM normalize on": {
+   "min": 0.2437,
+   "max": 0.7169,
+   "mean": 0.4951,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0
+  },
+  "FBM normalize off": {
+   "min": -0.8969,
+   "max": 0.7593,
+   "mean": -0.0171,
+   "share_below_0": 0.5187,
+   "share_above_1": 0.0
+  },
+  "RIDGED_MULTIFRACTAL normalize on": {
+   "min": 0.0,
+   "max": 0.583,
+   "mean": 0.0541,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0
+  },
+  "RIDGED_MULTIFRACTAL normalize off": {
+   "min": 0.0,
+   "max": 0.583,
+   "mean": 0.0541,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0
+  },
+  "MULTIFRACTAL normalize on": {
+   "min": 0.2244,
+   "max": 1.8926,
+   "mean": 0.9825,
+   "share_below_0": 0.0,
+   "share_above_1": 0.4586
+  },
+  "MULTIFRACTAL normalize off": {
+   "min": 0.2244,
+   "max": 1.8926,
+   "mean": 0.9825,
+   "share_below_0": 0.0,
+   "share_above_1": 0.4586
+  }
+ },
+ "radial_tiling_facets": {
+  "setup": "centred tile coordinate -> Radial Tiling -> Segment Rotation - 0.785 -> Cosine -> Map Range -1..1 to 0.25..0.9; inside a disc of radius 0.38 (Vector Math Length, Less Than); 256 dots",
+  "sides 4 roundness 0.0": {
+   "flat shade levels inside the disc (each covering over 0.5 per cent)": 4,
+   "segment rotation distinct values (rounded to 0.01)": 4,
+   "segment rotation min / max": [
+    0.785,
+    5.498
+   ]
+  },
+  "sides 6 roundness 0.0": {
+   "flat shade levels inside the disc (each covering over 0.5 per cent)": 6,
+   "segment rotation distinct values (rounded to 0.01)": 6,
+   "segment rotation min / max": [
+    0.524,
+    5.76
+   ]
+  },
+  "sides 8 roundness 0.0": {
+   "flat shade levels inside the disc (each covering over 0.5 per cent)": 4,
+   "segment rotation distinct values (rounded to 0.01)": 8,
+   "segment rotation min / max": [
+    0.393,
+    5.89
+   ]
+  },
+  "sides 12 roundness 0.0": {
+   "flat shade levels inside the disc (each covering over 0.5 per cent)": 8,
+   "segment rotation distinct values (rounded to 0.01)": 12,
+   "segment rotation min / max": [
+    0.262,
+    6.021
+   ]
+  },
+  "sides 8 roundness 1.0": {
+   "flat shade levels inside the disc (each covering over 0.5 per cent)": 4,
+   "segment rotation distinct values (rounded to 0.01)": 8,
+   "segment rotation min / max": [
+    0.393,
+    5.89
+   ]
+  },
+  "sides 8, light angle 0.6 instead of 0.785": {
+   "flat shade levels inside the disc (each covering over 0.5 per cent)": 8
+  }
+ },
+ "math_compare_width": {
+  "setup": "Noise 3D Scale 5 Detail 4 -> Map Range 0.3..0.7 to 0..1 -> Math Compare (B = 0.5, Epsilon varied); share of the tile that is white",
+  "epsilon 0.005": 0.0243,
+  "epsilon 0.01": 0.0477,
+  "epsilon 0.03": 0.1402,
+  "epsilon 0.06": 0.272,
+  "epsilon 0.12": 0.5056
+ },
+ "clamp": {
+  "setup": "Noise 3D Scale 5 Detail 4 -> Map Range 0.3..0.7 to 0..1 (clamped) -> Clamp node",
+  "source (noise 0..1)": {
+   "min": 0.0,
+   "max": 1.0,
+   "mean": 0.4891,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0,
+   "share_at_its_lowest": 0.0023,
+   "share_at_its_highest": 0.0002
+  },
+  "Min Max 0.3..0.7": {
+   "min": 0.3,
+   "max": 0.7,
+   "mean": 0.492,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0,
+   "share_at_its_lowest": 0.1426,
+   "share_at_its_highest": 0.1103
+  },
+  "Min Max 0.45..0.55": {
+   "min": 0.45,
+   "max": 0.55,
+   "mean": 0.4981,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0,
+   "share_at_its_lowest": 0.4071,
+   "share_at_its_highest": 0.3649
+  },
+  "Min Max, Min 0.7 > Max 0.3": {
+   "min": 0.3,
+   "max": 0.3,
+   "mean": 0.3,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0,
+   "share_at_its_lowest": 1.0,
+   "share_at_its_highest": 1.0
+  },
+  "Range, Min 0.7 > Max 0.3": {
+   "min": 0.3,
+   "max": 0.7,
+   "mean": 0.492,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0,
+   "share_at_its_lowest": 0.1426,
+   "share_at_its_highest": 0.1103
+  },
+  "Map Range 0.45..0.55 (to compare)": {
+   "min": 0.0,
+   "max": 1.0,
+   "mean": 0.4812,
+   "share_below_0": 0.0,
+   "share_above_1": 0.0,
+   "share_at_its_lowest": 0.407,
+   "share_at_its_highest": 0.3647
+  }
+ },
+ "mix": {
+  "setup": "A = brick reds (Color Ramp Constant on noise), B = soot #3a2d27, Factor = stain mask (noise Map Range 0.5..0.56) x amount; numbers = mean screen colour (0..255) inside the stain and outside it",
+  "share_of_tile_in_stain": 0.1604,
+  "MULTIPLY factor x 0.0": {
+   "inside": [
+    145.9,
+    68.2,
+    49.2
+   ],
+   "outside": [
+    147.6,
+    69.5,
+    50.1
+   ]
+  },
+  "MULTIPLY factor x 0.25": {
+   "inside": [
+    128.7,
+    59.2,
+    42.2
+   ],
+   "outside": [
+    147.6,
+    69.5,
+    50.1
+   ]
+  },
+  "MULTIPLY factor x 0.5": {
+   "inside": [
+    107.9,
+    48.3,
+    33.8
+   ],
+   "outside": [
+    147.6,
+    69.5,
+    50.1
+   ]
+  },
+  "MULTIPLY factor x 0.75": {
+   "inside": [
+    80.3,
+    33.6,
+    22.4
+   ],
+   "outside": [
+    147.6,
+    69.5,
+    50.1
+   ]
+  },
+  "MULTIPLY factor x 1.0": {
+   "inside": [
+    28.8,
+    5.3,
+    2.2
+   ],
+   "outside": [
+    147.6,
+    69.5,
+    50.1
+   ]
+  },
+  "MIX factor 1": {
+   "inside": [
+    58.0,
+    45.0,
+    39.0
+   ]
+  },
+  "MULTIPLY factor 1": {
+   "inside": [
+    28.8,
+    5.3,
+    2.2
+   ]
+  },
+  "DARKEN factor 1": {
+   "inside": [
+    58.0,
+    45.0,
+    38.6
+   ]
+  },
+  "OVERLAY factor 1": {
+   "inside": [
+    43.1,
+    10.3,
+    4.3
+   ]
+  },
+  "SOFT_LIGHT factor 1": {
+   "inside": [
+    90.3,
+    19.2,
+    7.9
+   ]
+  },
+  "VALUE factor 1": {
+   "inside": [
+    58.0,
+    22.8,
+    14.3
+   ]
+  }
+ },
+ "separate_combine": {
+  "setup": "Noise 3D Scale 5 Detail 4, Color output split with Separate Color (RGB), true values, 256 x 256 dots",
+  "correlation factor-red": 1.0,
+  "correlation factor-green": -0.092,
+  "correlation factor-blue": 0.028,
+  "correlation green-blue": 0.047,
+  "ranges": {
+   "factor": [
+    0.26,
+    0.708
+   ],
+   "Red": [
+    0.26,
+    0.708
+   ],
+   "Green": [
+    0.276,
+    0.804
+   ],
+   "Blue": [
+    0.264,
+    0.751
+   ]
+  }
+ },
+ "ramp_threshold_share": {
+  "setup": "raw Noise 3D Scale 5 Detail 4 (not stretched) -> Color Ramp Constant: steel #4b5052 from 0, rust #8a4a26 from the stop",
+  "noise_range": [
+   0.26,
+   0.708
+  ],
+  "noise_middle_90_percent": [
+   0.381,
+   0.611
+  ],
+  "rust share, stop at 0.45": 0.7404,
+  "rust share, stop at 0.5": 0.483,
+  "rust share, stop at 0.55": 0.2182,
+  "rust share, stop at 0.6": 0.0666,
+  "rust share, stop at 0.65": 0.0108,
+  "steel colour baked, hex converted to linear": [
+   75.0,
+   80.0,
+   82.0
+  ],
+  "steel colour baked, hex typed as /255": [
+   147.5,
+   152.0,
+   153.7
+  ],
+  "steel colour wanted": [
+   75,
+   80,
+   82
+  ]
+ },
+ "float_curve_extend": {
+  "setup": "S-curve through (0,0) (0.35,0.1) (0.65,0.9) (1,1); input runs -0.5..1.5 across the tile; value read at the dot nearest each input",
+  "EXTRAPOLATED": {
+   "input -0.496": -0.007,
+   "input -0.246": -0.004,
+   "input 0.004": 0.0,
+   "input 0.254": 0.036,
+   "input 0.504": 0.517,
+   "input 0.754": 0.968,
+   "input 1.004": 1.0,
+   "input 1.254": 1.004,
+   "input 1.496": 1.007
+  },
+  "HORIZONTAL": {
+   "input -0.496": 0.0,
+   "input -0.246": 0.0,
+   "input 0.004": 0.0,
+   "input 0.254": 0.036,
+   "input 0.504": 0.517,
+   "input 0.754": 0.968,
+   "input 1.004": 1.0,
+   "input 1.254": 1.0,
+   "input 1.496": 1.0
+  }
+ }
+}

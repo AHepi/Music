@@ -1,0 +1,450 @@
+{
+ "voronoi_cells_across": {
+  "picture": "cookbook/pictures/seamless-strip-voronoi-cells-across.jpg",
+  "picture_bytes": 137452,
+  "seam_left_right_and_top_bottom": {
+   "2 cells across": [
+    0.55,
+    1.93
+   ],
+   "3 cells across": [
+    0.37,
+    1.86
+   ],
+   "4 cells across": [
+    0.77,
+    1.4
+   ],
+   "8 cells across": [
+    0.88,
+    0.47
+   ],
+   "16 cells across": [
+    0.71,
+    1.05
+   ]
+  },
+  "wrap_line_against_ordinary_lines": {
+   "2 cells across": {
+    "columns (left-right edge)": {
+     "wrap_jump": 0.64,
+     "ordinary_mean": 1.16,
+     "ordinary_biggest": 6.56,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.24
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 2.44,
+     "ordinary_mean": 1.26,
+     "ordinary_biggest": 7.64,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.88
+    }
+   },
+   "3 cells across": {
+    "columns (left-right edge)": {
+     "wrap_jump": 0.48,
+     "ordinary_mean": 1.28,
+     "ordinary_biggest": 6.1,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.02
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 2.64,
+     "ordinary_mean": 1.42,
+     "ordinary_biggest": 6.39,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.89
+    }
+   },
+   "4 cells across": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.09,
+     "ordinary_mean": 1.42,
+     "ordinary_biggest": 5.61,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.41
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 2.23,
+     "ordinary_mean": 1.59,
+     "ordinary_biggest": 7.57,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.83
+    }
+   },
+   "8 cells across": {
+    "columns (left-right edge)": {
+     "wrap_jump": 2.27,
+     "ordinary_mean": 2.57,
+     "ordinary_biggest": 11.0,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.53
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 1.14,
+     "ordinary_mean": 2.43,
+     "ordinary_biggest": 8.1,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.06
+    }
+   },
+   "16 cells across": {
+    "columns (left-right edge)": {
+     "wrap_jump": 2.9,
+     "ordinary_mean": 4.08,
+     "ordinary_biggest": 8.17,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.18
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 4.44,
+     "ordinary_mean": 4.23,
+     "ordinary_biggest": 10.69,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.63
+    }
+   }
+  }
+ },
+ "warp_keeps_tiling": {
+  "picture": "cookbook/pictures/seamless-strip-warp-keeps-tiling.jpg",
+  "picture_bytes": 109419,
+  "seam_left_right_and_top_bottom": {
+   "warp 0": [
+    0.15,
+    1.0
+   ],
+   "warp 0.05": [
+    1.38,
+    0.94
+   ],
+   "warp 0.15": [
+    1.65,
+    0.92
+   ],
+   "warp 0.3": [
+    1.59,
+    0.99
+   ],
+   "warp 0.15 PLAIN noise": [
+    1.24,
+    10.38
+   ]
+  },
+  "wrap_line_against_ordinary_lines": {
+   "warp 0": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.8,
+     "ordinary_mean": 11.87,
+     "ordinary_biggest": 23.98,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.07
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 1.15,
+     "ordinary_mean": 1.16,
+     "ordinary_biggest": 1.38,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.44
+    }
+   },
+   "warp 0.05": {
+    "columns (left-right edge)": {
+     "wrap_jump": 16.31,
+     "ordinary_mean": 11.82,
+     "ordinary_biggest": 22.48,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.69
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 1.16,
+     "ordinary_mean": 1.24,
+     "ordinary_biggest": 1.49,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.15
+    }
+   },
+   "warp 0.15": {
+    "columns (left-right edge)": {
+     "wrap_jump": 19.5,
+     "ordinary_mean": 11.79,
+     "ordinary_biggest": 21.77,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.94
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 1.61,
+     "ordinary_mean": 1.75,
+     "ordinary_biggest": 2.41,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.29
+    }
+   },
+   "warp 0.3": {
+    "columns (left-right edge)": {
+     "wrap_jump": 18.7,
+     "ordinary_mean": 11.78,
+     "ordinary_biggest": 21.07,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.92
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 2.8,
+     "ordinary_mean": 2.84,
+     "ordinary_biggest": 4.42,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.51
+    }
+   },
+   "warp 0.15 PLAIN noise": {
+    "columns (left-right edge)": {
+     "wrap_jump": 14.62,
+     "ordinary_mean": 11.77,
+     "ordinary_biggest": 21.96,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.62
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 19.66,
+     "ordinary_mean": 1.89,
+     "ordinary_biggest": 2.52,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    }
+   }
+  }
+ },
+ "stretch_trap": {
+  "picture": "cookbook/pictures/seamless-strip-stretch-trap.jpg",
+  "picture_bytes": 92175,
+  "seam_left_right_and_top_bottom": {
+   "4 x 4 features": [
+    1.05,
+    0.76
+   ],
+   "Mapping y x 4 first": [
+    0.99,
+    0.71
+   ],
+   "Mapping y x 2.5 first": [
+    1.05,
+    8.46
+   ],
+   "4 across, 16 up": [
+    0.84,
+    0.9
+   ]
+  },
+  "wrap_line_against_ordinary_lines": {
+   "4 x 4 features": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.92,
+     "ordinary_mean": 1.83,
+     "ordinary_biggest": 3.3,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.64
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 1.51,
+     "ordinary_mean": 1.99,
+     "ordinary_biggest": 3.12,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.08
+    }
+   },
+   "Mapping y x 4 first": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.96,
+     "ordinary_mean": 1.97,
+     "ordinary_biggest": 3.52,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.58
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 5.14,
+     "ordinary_mean": 7.28,
+     "ordinary_biggest": 11.39,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.05
+    }
+   },
+   "Mapping y x 2.5 first": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.98,
+     "ordinary_mean": 1.88,
+     "ordinary_biggest": 3.4,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.66
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 39.77,
+     "ordinary_mean": 4.7,
+     "ordinary_biggest": 7.34,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    }
+   },
+   "4 across, 16 up": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.72,
+     "ordinary_mean": 2.06,
+     "ordinary_biggest": 2.93,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.1
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 6.24,
+     "ordinary_mean": 6.97,
+     "ordinary_biggest": 13.61,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.39
+    }
+   }
+  },
+  "mapping_y_x4_first_rows_0_to_quarter_vs_next_quarter_mean_difference": 0.85,
+  "plain_4x4_same_comparison_for_contrast": 45.63
+ },
+ "area_or_repeat": {
+  "picture": "cookbook/pictures/seamless-area-or-repeat.jpg",
+  "picture_bytes": 81197,
+  "seam_left_right_and_top_bottom": {
+   "tile repeated 2 x 2": [
+    0.88,
+    0.92
+   ],
+   "tile count 2: new area": [
+    0.77,
+    0.81
+   ]
+  },
+  "wrap_line_against_ordinary_lines": {
+   "tile repeated 2 x 2": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.7,
+     "ordinary_mean": 1.93,
+     "ordinary_biggest": 3.29,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.32
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 1.78,
+     "ordinary_mean": 1.92,
+     "ordinary_biggest": 3.1,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.36
+    }
+   },
+   "tile count 2: new area": {
+    "columns (left-right edge)": {
+     "wrap_jump": 1.51,
+     "ordinary_mean": 1.97,
+     "ordinary_biggest": 2.81,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.04
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 1.58,
+     "ordinary_mean": 1.96,
+     "ordinary_biggest": 3.07,
+     "share_of_ordinary_lines_below_the_wrap_jump": 0.07
+    }
+   }
+  },
+  "tile repeated 2 x 2 : top-left quarter against the other three, mean difference": [
+   0.48,
+   0.49,
+   0.49
+  ],
+  "tile count 2: new area : top-left quarter against the other three, mean difference": [
+   32.51,
+   41.39,
+   36.3
+  ]
+ },
+ "texture_coordinate": {
+  "picture": "cookbook/pictures/coordinates-strip-texture-coordinate.jpg",
+  "picture_bytes": 92694,
+  "seam_left_right_and_top_bottom": {
+   "UV": [
+    12.48,
+    11.66
+   ],
+   "Object": [
+    12.48,
+    11.66
+   ],
+   "Generated": [
+    20.73,
+    11.68
+   ],
+   "nothing connected": [
+    20.73,
+    11.68
+   ],
+   "UV with z = 0.5": [
+    20.73,
+    11.68
+   ]
+  },
+  "wrap_line_against_ordinary_lines": {
+   "UV": {
+    "columns (left-right edge)": {
+     "wrap_jump": 32.53,
+     "ordinary_mean": 2.61,
+     "ordinary_biggest": 6.0,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 30.42,
+     "ordinary_mean": 2.61,
+     "ordinary_biggest": 3.86,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    }
+   },
+   "Object": {
+    "columns (left-right edge)": {
+     "wrap_jump": 32.53,
+     "ordinary_mean": 2.61,
+     "ordinary_biggest": 6.0,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 30.42,
+     "ordinary_mean": 2.61,
+     "ordinary_biggest": 3.86,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    }
+   },
+   "Generated": {
+    "columns (left-right edge)": {
+     "wrap_jump": 55.18,
+     "ordinary_mean": 2.66,
+     "ordinary_biggest": 4.28,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 32.89,
+     "ordinary_mean": 2.82,
+     "ordinary_biggest": 5.54,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    }
+   },
+   "nothing connected": {
+    "columns (left-right edge)": {
+     "wrap_jump": 55.18,
+     "ordinary_mean": 2.66,
+     "ordinary_biggest": 4.28,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 32.89,
+     "ordinary_mean": 2.82,
+     "ordinary_biggest": 5.54,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    }
+   },
+   "UV with z = 0.5": {
+    "columns (left-right edge)": {
+     "wrap_jump": 55.18,
+     "ordinary_mean": 2.66,
+     "ordinary_biggest": 4.28,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    },
+    "rows (top-bottom edge)": {
+     "wrap_jump": 32.89,
+     "ordinary_mean": 2.82,
+     "ordinary_biggest": 5.54,
+     "share_of_ordinary_lines_below_the_wrap_jump": 1.0
+    }
+   }
+  },
+  "mean_difference_between_outputs_0_to_255": {
+   "UV vs Object": 0.0,
+   "UV vs Generated": 40.27,
+   "UV vs nothing connected": 40.27,
+   "UV vs UV with z = 0.5": 40.27,
+   "Object vs Generated": 40.27,
+   "Object vs nothing connected": 40.27,
+   "Object vs UV with z = 0.5": 40.27,
+   "Generated vs nothing connected": 0.0,
+   "Generated vs UV with z = 0.5": 0.0,
+   "nothing connected vs UV with z = 0.5": 0.0
+  }
+ },
+ "relief_opengl_directx": {
+  "normal.png (OpenGL): correlation of green with the height slope DOWN the picture": 0.972,
+  "normal_as_uploaded_directx.png (DirectX): correlation of green with the height slope DOWN the picture": -0.972,
+  "picture": "cookbook/pictures/relief-opengl-or-directx-brick.jpg",
+  "picture_bytes": 105115
+ }
+}
