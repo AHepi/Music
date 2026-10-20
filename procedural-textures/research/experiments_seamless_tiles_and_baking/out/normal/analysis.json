@@ -1,0 +1,369 @@
+{
+ "A_bump_distance_vs_sobel_strength": {
+  "size 128, Distance 0.01": {
+   "sobel_strength_fit": 1.386,
+   "distance_times_size": 1.28,
+   "ratio_fit_to_distance_times_size": 1.083,
+   "agreement_with_height_slope_(1=perfect)": 0.951,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.78
+  },
+  "size 128, Distance 0.02": {
+   "sobel_strength_fit": 2.771,
+   "distance_times_size": 2.56,
+   "ratio_fit_to_distance_times_size": 1.082,
+   "agreement_with_height_slope_(1=perfect)": 0.951,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.78
+  },
+  "size 128, Distance 0.04": {
+   "sobel_strength_fit": 5.533,
+   "distance_times_size": 5.12,
+   "ratio_fit_to_distance_times_size": 1.081,
+   "agreement_with_height_slope_(1=perfect)": 0.951,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.78
+  },
+  "size 256, Distance 0.01": {
+   "sobel_strength_fit": 2.729,
+   "distance_times_size": 2.56,
+   "ratio_fit_to_distance_times_size": 1.066,
+   "agreement_with_height_slope_(1=perfect)": 0.967,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.83
+  },
+  "size 256, Distance 0.02": {
+   "sobel_strength_fit": 5.456,
+   "distance_times_size": 5.12,
+   "ratio_fit_to_distance_times_size": 1.066,
+   "agreement_with_height_slope_(1=perfect)": 0.967,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.83
+  },
+  "size 256, Distance 0.04": {
+   "sobel_strength_fit": 10.904,
+   "distance_times_size": 10.24,
+   "ratio_fit_to_distance_times_size": 1.065,
+   "agreement_with_height_slope_(1=perfect)": 0.967,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.82
+  },
+  "size 512, Distance 0.01": {
+   "sobel_strength_fit": 5.342,
+   "distance_times_size": 5.12,
+   "ratio_fit_to_distance_times_size": 1.043,
+   "agreement_with_height_slope_(1=perfect)": 0.991,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.96
+  },
+  "size 512, Distance 0.02": {
+   "sobel_strength_fit": 10.683,
+   "distance_times_size": 10.24,
+   "ratio_fit_to_distance_times_size": 1.043,
+   "agreement_with_height_slope_(1=perfect)": 0.991,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.96
+  },
+  "size 512, Distance 0.04": {
+   "sobel_strength_fit": 21.36,
+   "distance_times_size": 20.48,
+   "ratio_fit_to_distance_times_size": 1.043,
+   "agreement_with_height_slope_(1=perfect)": 0.991,
+   "convention_from_map_alone": "OpenGL (green points up the picture; Blender)",
+   "score": -0.96
+  }
+ },
+ "A_normal_map_made_at_512_then_shrunk_vs_made_at_128": {
+  "mean_abs_difference": 0.0007,
+  "tilt_spread_512": 0.022,
+  "tilt_spread_128": 0.0191
+ },
+ "B_filter_width_on_hard_edges": {
+  "filter width 0.1": {
+   "steepest_tilt_degrees": 41.0,
+   "pixels_per_row_with_tilt_above_1_degree": 13,
+   "mean_tilt_degrees": 4.13
+  },
+  "filter width 1.0": {
+   "steepest_tilt_degrees": 78.4,
+   "pixels_per_row_with_tilt_above_1_degree": 24,
+   "mean_tilt_degrees": 17.83
+  },
+  "filter width 2.0": {
+   "steepest_tilt_degrees": 74.6,
+   "pixels_per_row_with_tilt_above_1_degree": 40,
+   "mean_tilt_degrees": 29.5
+  }
+ },
+ "C_strength_distance_invert": {
+  "Distance 0.04 Strength 1 versus Distance 0.02 Strength 2: mean abs difference": 0.0001,
+  "Distance 0.04 Strength 0.5 versus Distance 0.02 Strength 1: mean abs difference": 0.0001,
+  "Distance 0.1 Strength 1 versus Distance 0.02 Strength 5: mean abs difference": 0.0007,
+  "Invert on: mean of (picture + inverted picture) in red and green (1.0 = exact mirror about 0.5)": [
+   1.0,
+   1.0
+  ],
+  "fitted_sobel_strength_for_each_setting (size 256)": {
+   "d0.02_s1": 5.46,
+   "d0.02_s2": 10.95,
+   "d0.02_s5": 27.58,
+   "d0.04_s1": 10.9,
+   "d0.1_s1": 27.13,
+   "d0.04_s0.5": 5.41
+  }
+ },
+ "D_compositor_normal": {
+  "compositor_vs_numpy_sobel_5.33 with red kept and green kept: mean abs error": 0.0,
+  "compositor_vs_numpy_sobel_5.33 with red kept and green flipped: mean abs error": 0.01019,
+  "compositor_vs_numpy_sobel_5.33 with red flipped and green kept: mean abs error": 0.01097,
+  "compositor_vs_numpy_sobel_5.33 with red flipped and green flipped: mean abs error": 0.02115,
+  "convention_of_the_compositor_map": [
+   "OpenGL (green points up the picture; Blender)",
+   -0.999999723348035
+  ]
+ },
+ "R_reference_maps": {
+  "brick": {
+   "normal.png verdict from the map alone": [
+    "OpenGL (green points up the picture; Blender)",
+    -1.0
+   ],
+   "normal_as_uploaded_directx.png verdict from the map alone": [
+    "DirectX (green points down the picture)",
+    1.0
+   ],
+   "normal.png verdict from the height": [
+    "OpenGL",
+    0.94
+   ],
+   "normal_as_uploaded_directx.png verdict from the height": [
+    "DirectX",
+    -0.94
+   ],
+   "sobel_strength_that_reproduces_normal_png_from_height_png (16-bit smoothed)": [
+    7.28,
+    7.14,
+    0.957
+   ],
+   "same_from_the_8-bit_uploaded_height": [
+    6.03,
+    6.04,
+    1.0
+   ],
+   "file_bit_depths (height.png, height_as_uploaded.png)": [
+    16,
+    8
+   ],
+   "different_grey_levels (height.png, height_as_uploaded.png)": [
+    65392,
+    256
+   ]
+  },
+  "slate": {
+   "normal.png verdict from the map alone": [
+    "OpenGL (green points up the picture; Blender)",
+    -1.0
+   ],
+   "normal_as_uploaded_directx.png verdict from the map alone": [
+    "DirectX (green points down the picture)",
+    1.0
+   ],
+   "normal.png verdict from the height": [
+    "OpenGL",
+    0.93
+   ],
+   "normal_as_uploaded_directx.png verdict from the height": [
+    "DirectX",
+    -0.93
+   ],
+   "sobel_strength_that_reproduces_normal_png_from_height_png (16-bit smoothed)": [
+    8.2,
+    8.08,
+    0.975
+   ],
+   "same_from_the_8-bit_uploaded_height": [
+    7.05,
+    7.04,
+    1.0
+   ],
+   "file_bit_depths (height.png, height_as_uploaded.png)": [
+    16,
+    8
+   ],
+   "different_grey_levels (height.png, height_as_uploaded.png)": [
+    65427,
+    256
+   ]
+  },
+  "wood": {
+   "normal.png verdict from the map alone": [
+    "OpenGL (green points up the picture; Blender)",
+    -1.0
+   ],
+   "normal_as_uploaded_directx.png verdict from the map alone": [
+    "DirectX (green points down the picture)",
+    1.0
+   ],
+   "normal.png verdict from the height": [
+    "OpenGL",
+    0.93
+   ],
+   "normal_as_uploaded_directx.png verdict from the height": [
+    "DirectX",
+    -0.93
+   ],
+   "sobel_strength_that_reproduces_normal_png_from_height_png (16-bit smoothed)": [
+    9.66,
+    9.61,
+    0.966
+   ],
+   "same_from_the_8-bit_uploaded_height": [
+    8.05,
+    8.06,
+    1.0
+   ],
+   "file_bit_depths (height.png, height_as_uploaded.png)": [
+    16,
+    8
+   ],
+   "different_grey_levels (height.png, height_as_uploaded.png)": [
+    65441,
+    256
+   ]
+  },
+  "metal": {
+   "normal.png verdict from the map alone": [
+    "OpenGL (green points up the picture; Blender)",
+    -1.0
+   ],
+   "normal_as_uploaded_directx.png verdict from the map alone": [
+    "DirectX (green points down the picture)",
+    1.0
+   ],
+   "normal.png verdict from the height": [
+    "OpenGL",
+    0.94
+   ],
+   "normal_as_uploaded_directx.png verdict from the height": [
+    "DirectX",
+    -0.94
+   ],
+   "sobel_strength_that_reproduces_normal_png_from_height_png (16-bit smoothed)": [
+    5.94,
+    5.97,
+    0.965
+   ],
+   "same_from_the_8-bit_uploaded_height": [
+    5.03,
+    5.03,
+    1.0
+   ],
+   "file_bit_depths (height.png, height_as_uploaded.png)": [
+    16,
+    8
+   ],
+   "different_grey_levels (height.png, height_as_uploaded.png)": [
+    65298,
+    256
+   ]
+  },
+  "mud": {
+   "normal.png verdict from the map alone": [
+    "OpenGL (green points up the picture; Blender)",
+    -1.0
+   ],
+   "normal_as_uploaded_directx.png verdict from the map alone": [
+    "DirectX (green points down the picture)",
+    1.0
+   ],
+   "normal.png verdict from the height": [
+    "OpenGL",
+    0.95
+   ],
+   "normal_as_uploaded_directx.png verdict from the height": [
+    "DirectX",
+    -0.95
+   ],
+   "sobel_strength_that_reproduces_normal_png_from_height_png (16-bit smoothed)": [
+    10.57,
+    10.53,
+    0.97
+   ],
+   "same_from_the_8-bit_uploaded_height": [
+    9.07,
+    9.07,
+    1.0
+   ],
+   "file_bit_depths (height.png, height_as_uploaded.png)": [
+    16,
+    8
+   ],
+   "different_grey_levels (height.png, height_as_uploaded.png)": [
+    65527,
+    256
+   ]
+  },
+  "gravel": {
+   "normal.png verdict from the map alone": [
+    "OpenGL (green points up the picture; Blender)",
+    -1.0
+   ],
+   "normal_as_uploaded_directx.png verdict from the map alone": [
+    "DirectX (green points down the picture)",
+    1.0
+   ],
+   "normal.png verdict from the height": [
+    "OpenGL",
+    0.94
+   ],
+   "normal_as_uploaded_directx.png verdict from the height": [
+    "DirectX",
+    -0.94
+   ],
+   "sobel_strength_that_reproduces_normal_png_from_height_png (16-bit smoothed)": [
+    11.59,
+    11.57,
+    0.976
+   ],
+   "same_from_the_8-bit_uploaded_height": [
+    10.08,
+    10.09,
+    1.0
+   ],
+   "file_bit_depths (height.png, height_as_uploaded.png)": [
+    16,
+    8
+   ],
+   "different_grey_levels (height.png, height_as_uploaded.png)": [
+    65517,
+    256
+   ]
+  }
+ },
+ "Q_height_bit_depth_and_the_normal_map": {
+  "8-bit height, strength 5": {
+   "normal_mean_abs_error_vs_float_height": 0.0011,
+   "pixels_with_zero_horizontal_slope_percent": 18.1
+  },
+  "8-bit height, strength 30": {
+   "normal_mean_abs_error_vs_float_height": 0.00682,
+   "pixels_with_zero_horizontal_slope_percent": 18.1
+  },
+  "16-bit height, strength 5": {
+   "normal_mean_abs_error_vs_float_height": 0.0,
+   "pixels_with_zero_horizontal_slope_percent": 0.1
+  },
+  "16-bit height, strength 30": {
+   "normal_mean_abs_error_vs_float_height": 0.0,
+   "pixels_with_zero_horizontal_slope_percent": 0.1
+  },
+  "float-bit height, strength 5": {
+   "normal_mean_abs_error_vs_float_height": 0.0,
+   "pixels_with_zero_horizontal_slope_percent": 0.1
+  },
+  "float-bit height, strength 30": {
+   "normal_mean_abs_error_vs_float_height": 0.0,
+   "pixels_with_zero_horizontal_slope_percent": 0.1
+  }
+ }
+}

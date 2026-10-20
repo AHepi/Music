@@ -1,0 +1,91 @@
+{
+ "picture_size": 256,
+ "route1_photograph_geometry": {
+  "64 vertices across, mesh margin 0.0": {
+   "normal_mean_abs_error_all": 0.00882,
+   "normal_mean_abs_error_two_pixel_border": 0.01151,
+   "normal_mean_abs_error_inside": 0.00873,
+   "seconds_to_photograph": 0.4
+  },
+  "128 vertices across, mesh margin 0.0": {
+   "normal_mean_abs_error_all": 0.00248,
+   "normal_mean_abs_error_two_pixel_border": 0.00395,
+   "normal_mean_abs_error_inside": 0.00243,
+   "seconds_to_photograph": 0.3
+  },
+  "256 vertices across, mesh margin 0.0": {
+   "normal_mean_abs_error_all": 0.00078,
+   "normal_mean_abs_error_two_pixel_border": 0.00129,
+   "normal_mean_abs_error_inside": 0.00077,
+   "seconds_to_photograph": 0.7
+  },
+  "256 vertices across, mesh margin 0.0625": {
+   "normal_mean_abs_error_all": 0.00077,
+   "normal_mean_abs_error_two_pixel_border": 0.00078,
+   "normal_mean_abs_error_inside": 0.00077,
+   "seconds_to_photograph": 0.8
+  },
+  "height from Position Z (256 vertices, margin)": {
+   "mean_abs_error_in_units_of_the_total_height_range": 0.00074
+  },
+  "512 vertices across, mesh margin 0.0625": {
+   "normal_mean_abs_error_all": 0.00042,
+   "normal_mean_abs_error_two_pixel_border": 0.00042,
+   "normal_mean_abs_error_inside": 0.00042,
+   "seconds_to_photograph": 2.9
+  }
+ },
+ "route2_variants_of_extrusion_and_ray_distance": {
+  "extrusion 0.0, max ray distance 0.0": {
+   "normal_mean_abs_error": 0.03215,
+   "pixels_left_empty_or_flat_percent": 50.0
+  },
+  "extrusion 0.01, max ray distance 0.0": {
+   "normal_mean_abs_error": 0.0129,
+   "pixels_left_empty_or_flat_percent": 19.0
+  },
+  "extrusion 0.1, max ray distance 0.0": {
+   "normal_mean_abs_error": 0.0017,
+   "pixels_left_empty_or_flat_percent": 0.0
+  },
+  "extrusion 0.1, max ray distance 0.01": {
+   "normal_mean_abs_error": 0.06259,
+   "pixels_left_empty_or_flat_percent": 100.0
+  },
+  "extrusion 0.1, max ray distance 0.05": {
+   "normal_mean_abs_error": 0.06259,
+   "pixels_left_empty_or_flat_percent": 100.0
+  }
+ },
+ "route2_cycles_bake_selected_to_active": {
+  "normal_mean_abs_error_all": 0.0017,
+  "normal_mean_abs_error_inside": 0.0017,
+  "seconds": 0.2,
+  "green_mean": 0.5
+ },
+ "ao_bake_on_bumpy_geometry": {
+  "min": 0.844,
+  "max": 1.0,
+  "mean": 0.988,
+  "correlation_with_height": 0.494,
+  "seconds": 1.5,
+  "world_ao_distance_used": 0.05
+ },
+ "route3_geometry_nodes_photograph": {
+  "material in the data slot (the usual way)": {
+   "normal_mean_abs_error_all": 0.65938,
+   "normal_mean_abs_error_two_pixel_border": 0.65871,
+   "seconds_including_modifier": 0.4
+  },
+  "material slot linked to the object": {
+   "normal_mean_abs_error_all": 0.00077,
+   "normal_mean_abs_error_two_pixel_border": 0.00078,
+   "seconds_including_modifier": 1.0
+  },
+  "Set Material node inside the node group": {
+   "normal_mean_abs_error_all": 0.00077,
+   "normal_mean_abs_error_two_pixel_border": 0.00078,
+   "seconds_including_modifier": 0.9
+  }
+ }
+}

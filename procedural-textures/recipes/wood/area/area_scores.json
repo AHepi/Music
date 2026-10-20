@@ -1,0 +1,56 @@
+{
+ "bake_seconds": 232.6,
+ "half_tile": {
+  "mean_difference_levels": 0.745,
+  "share_over_40": 0.0,
+  "wrong_roll_mean_difference": 22.513,
+  "wrong_roll_share_over_40": 0.149
+ },
+ "quarters_pairs": [
+  {
+   "a": "top_left",
+   "b": "top_right",
+   "mean_abs_difference_levels": 22.96,
+   "ssim": 0.218
+  },
+  {
+   "a": "top_left",
+   "b": "bottom_left",
+   "mean_abs_difference_levels": 22.38,
+   "ssim": 0.215
+  },
+  {
+   "a": "top_left",
+   "b": "bottom_right",
+   "mean_abs_difference_levels": 22.72,
+   "ssim": 0.218
+  },
+  {
+   "a": "top_right",
+   "b": "bottom_left",
+   "mean_abs_difference_levels": 23.09,
+   "ssim": 0.214
+  },
+  {
+   "a": "top_right",
+   "b": "bottom_right",
+   "mean_abs_difference_levels": 22.74,
+   "ssim": 0.214
+  },
+  {
+   "a": "bottom_left",
+   "b": "bottom_right",
+   "mean_abs_difference_levels": 22.38,
+   "ssim": 0.222
+  }
+ ],
+ "seam_across_middle_over_normal_jump": {
+  "vertical_line": 1.06,
+  "horizontal_line": 0.91
+ },
+ "wrap_edge_over_normal_jump": {
+  "left_right": 0.84,
+  "top_bottom": 0.89
+ },
+ "note": "jumps are compared with a normal one-dot jump in the same direction (along rows for vertical lines, down columns for horizontal lines)"
+}

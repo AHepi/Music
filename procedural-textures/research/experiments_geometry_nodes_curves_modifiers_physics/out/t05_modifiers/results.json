@@ -1,0 +1,106 @@
+[
+ {
+  "cell": "cell_displace",
+  "label": "Displace: Clouds texture, strength 0.10",
+  "vertices_after_modifiers": 16641,
+  "evaluate_seconds": 0.02,
+  "render_seconds": 0.31
+ },
+ {
+  "cell": "cell_subsurf",
+  "label": "Subdivision Surface: level 0, 2, 3",
+  "vertices_after_modifiers": 492,
+  "evaluate_seconds": 0.005,
+  "render_seconds": 0.05
+ },
+ {
+  "cell": "cell_bevel",
+  "label": "Bevel: width 0 / 0.02 (1 seg) / 0.04 (4 seg)",
+  "vertices_after_modifiers": 200,
+  "evaluate_seconds": 0.002,
+  "render_seconds": 0.05
+ },
+ {
+  "cell": "cell_boolean_cut",
+  "label": "Boolean: Difference (cut 4 holes with cylinders)",
+  "vertices_after_modifiers": 203,
+  "evaluate_seconds": 0.194,
+  "render_seconds": 0.21
+ },
+ {
+  "cell": "cell_boolean_union",
+  "label": "Boolean: Union (add 4 domed bolts)",
+  "vertices_after_modifiers": 976,
+  "evaluate_seconds": 0.257,
+  "render_seconds": 0.26
+ },
+ {
+  "cell": "cell_remesh",
+  "label": "Remesh: Voxel 0.02 (rebuilds the surface evenly) / Blocks",
+  "vertices_after_modifiers": 3736,
+  "evaluate_seconds": 0.045,
+  "render_seconds": 0.12
+ },
+ {
+  "cell": "cell_weld_array",
+  "label": "Array (5, touching) + Weld: height picture is the same as Array alone; vertices are merged (see table)",
+  "vertices_after_modifiers": 24,
+  "evaluate_seconds": 0.001,
+  "render_seconds": 0.05
+ },
+ {
+  "cell": "cell_solidify",
+  "label": "Wave + Solidify: a rippled sheet given thickness (top picture hardly changes; the underside moves down)",
+  "vertices_after_modifiers": 3362,
+  "evaluate_seconds": 0.008,
+  "render_seconds": 0.1
+ },
+ {
+  "cell": "cell_array",
+  "label": "Array: relative offset 1.12 (gaps) / + constant offset in z",
+  "vertices_after_modifiers": 64,
+  "evaluate_seconds": 0.004,
+  "render_seconds": 0.05
+ },
+ {
+  "cell": "cell_wave",
+  "label": "Wave: height 0.12 at frame 8 (a ring spreading from the middle; other settings default)",
+  "vertices_after_modifiers": 16641,
+  "evaluate_seconds": 0.016,
+  "render_seconds": 0.2
+ },
+ {
+  "cell": "cell_cast",
+  "label": "Cast (sphere): factor 0 / 0.5 / 1.0 - a block becomes a pebble",
+  "vertices_after_modifiers": 888,
+  "evaluate_seconds": 0.003,
+  "render_seconds": 0.05
+ },
+ {
+  "cell": "cell_simple_deform",
+  "label": "Simple Deform: Bend 70 / Twist 80 / Taper (a plank)",
+  "vertices_after_modifiers": 2184,
+  "evaluate_seconds": 0.004,
+  "render_seconds": 0.06
+ },
+ {
+  "weld_check": {
+   "vertices_array_only": 40,
+   "vertices_array_then_weld": 24
+  }
+ },
+ {
+  "solidify_check": {
+   "vertices_before": 441,
+   "vertices_after": 882,
+   "z_range_before": [
+    0.07999999821186066,
+    0.07999999821186066
+   ],
+   "z_range_after": [
+    0.03999999910593033,
+    0.07999999821186066
+   ]
+  }
+ }
+]

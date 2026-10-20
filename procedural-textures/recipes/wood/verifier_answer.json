@@ -1,0 +1,89 @@
+{
+ "surface": "wood",
+ "claims_hold": true,
+ "audit_ok": true,
+ "generator_reads_reference": false,
+ "rescored": [
+  {
+   "class_name": "S0_layout_only",
+   "tier": "none",
+   "colour_ssim": 0.377,
+   "colour_mean_delta_e": 10.84,
+   "texture_compare_overall": 0.209
+  },
+  {
+   "class_name": "S1_layout_paint_grain",
+   "tier": "none",
+   "colour_ssim": 0.22,
+   "colour_mean_delta_e": 13.44,
+   "texture_compare_overall": 0.635
+  },
+  {
+   "class_name": "M1_trace_20k",
+   "tier": "none",
+   "colour_ssim": 0.423,
+   "colour_mean_delta_e": 9.56,
+   "texture_compare_overall": 0.201
+  },
+  {
+   "class_name": "M2_trace_40k",
+   "tier": "none",
+   "colour_ssim": 0.455,
+   "colour_mean_delta_e": 8.32,
+   "texture_compare_overall": 0.25
+  },
+  {
+   "class_name": "M3_trace_62k",
+   "tier": "none",
+   "colour_ssim": 0.488,
+   "colour_mean_delta_e": 7.48,
+   "texture_compare_overall": 0.326
+  },
+  {
+   "class_name": "L1_trace_150k",
+   "tier": "layout",
+   "colour_ssim": 0.591,
+   "colour_mean_delta_e": 6.06,
+   "texture_compare_overall": 0.426
+  },
+  {
+   "class_name": "L2_trace_300k",
+   "tier": "layout",
+   "colour_ssim": 0.674,
+   "colour_mean_delta_e": 5.21,
+   "texture_compare_overall": 0.459
+  },
+  {
+   "class_name": "L3_trace_480k",
+   "tier": "layout",
+   "colour_ssim": 0.725,
+   "colour_mean_delta_e": 4.61,
+   "texture_compare_overall": 0.506
+  }
+ ],
+ "area_really_unique": "Yes. In the 2508-dot area bake the four 1254-dot quarters are different pictures: mean absolute grey difference 22.4 to 23.1 steps, SSIM 0.214 to 0.222 (a repeat would give 1.0), and the best circular cross-correlation between any two quarters is only 0.05 to 0.06, so no quarter is a shifted copy of another. Shifting the whole area by 1254 dots in x, y or both leaves a mean difference of 22.6 to 22.9 steps, so it is not a tile repeat. The jump across the middle lines and across the wrap-around edge, compared with a normal one-dot jump in the same direction, is 1.04 and 0.92 for the middle lines and 0.83 and 0.90 for the wrap edges (about 1 means no seam). A crop of the area tiled 2 x 2, centred on the wrap seam, shows no visible seam. One caveat is that the area has 10 planks, but the plank gaps are thin dotted lines and the whole area reads as camouflage-like brown paint, not as the reference's distinct planks with long cracks.",
+ "variation_really_different": "Yes, by every pixel measure. The saved descriptions for seeds 101 to 108 are identical to what sampler.sample_description(seed) produces now, and a fresh bake of seed 101 is bit-identical to theirs (max difference 0), so they come from one deterministic generator with different sampled descriptions. Variant against reference: mean absolute grey difference 25.4 to 25.8 steps, SSIM 0.197 to 0.205. Between the 28 variant pairs: mean difference 23.1 steps (minimum 22.4), SSIM mean 0.214 (maximum 0.219), and maximum circular cross-correlation 0.067 (a shifted copy would give 1.0). The darkest gap row is at a different place in every tile (rows 178, 494, 700, 808, 1000, 1024, 1037, 1227), and the number of planks (4 to 6) and knots (3 to 5) varies. They are NOT equally good tiles: next to the reference they are visibly weaker. The planks are barely readable, the cracks are thin dashed lines, the knots are small faint smudges with no readable rings, and the paint is blocky 'pixelated camouflage'. All eight share nearly the same tone (mean grey 69.0 to 72.7 against the reference's 70.2), so they look like one family. The builder admits the family look and the camouflage, but the success definition asks for 'equally good', which is not met.",
+ "discrepancies": [
+  "Every number the builder reported reproduced exactly in a fresh Blender process: colour SSIM, mean Delta E, edge skill, best-fit height error, normal angle, same-kind score and tier for all 8 classes, so there is no numeric discrepancy. The 'wrap-aware' (w) M and L descriptions are the headline classes; the cut-at-edge versions are reported separately in the guide.",
+  "Audit: all 8 ladder descriptions (the w versions) pass lib/description_audit.py at their claimed limits (S 8 KB, M 64 KB, L 512 KB, exit code 0). The cut-at-edge versions, X1 to X4, the 8 samples, the resolution sample and the deck description also pass. The audit passes but 'tracing' is a lossy vector copy of the reference. The L3 file holds 3723 patches and 85,093 corners (174,204 numbers, 473,489 bytes). It is not per-dot data, since the median corner step is 2 to 11 dots and no patch exceeds 361 corners, but it is a compressed copy of the picture. The guide says so openly. The area description (9,223 bytes) is over the 8 KB S limit if audited at 8 KB, but nobody claims it is an S class.",
+  "Early area seam numbers (area/run.log) read 3.71 for the horizontal line and 3.65 for the top-bottom wrap edge. The final area_scores.json shows 0.91 and 0.89 because the normaliser was changed to the one-dot jump in the same direction. I reproduced the same-direction values (0.92 and 0.90) and the half-tile test confirms there is no seam, so the change is legitimate and is footnoted in the json, but the guide paragraph does not mention that the first measure alarmed.",
+  "Normal-map figure: the guide says '4.3 degrees' for the normal made from the colour through its height and describes the central-difference kernel (left minus right, over 2), which is what the generator uses. derivation_ceiling.json shows 4.64 for central and 4.28 for Sobel, and I reproduced about 4.6 with the central kernel. So 4.3 is the Sobel figure, and 4.6 is correct for the kernel actually used.",
+  "Transfer claim 'no generator code changed' cannot be proven from the files. Timestamps show wood_layers.py (20:38), sampler.py (20:50) and wood_generator.py (21:01:38) were edited after make_deck_boards.py was written (20:29:56), and wood_generator.py was edited after the deck bake log (21:01:20). What I did verify: the deck description regenerates byte-identically from the script, and a fresh bake with the current generator is bit-identical to their picture. The half-tile test on their shifted deck bake gives 0.71 mean difference and 0.00 % over 40, as claimed. The transfer relies on sampler option hooks (boards, knots, cloud_scale, crack_scale, palette_jitter, grain, distributions) plus edits to the fitted paint-model dictionary, hand-written butt-joint and nail lists, and removal of the pebbles layer, so 'only the description changed' is true for the final code but not independent of the sampler API. The '10 minutes of work' claim is not checkable.",
+  "Resolution table: bake.json totals are 12.5, 31.6 and 104.8 s against the 13.5, 32.6 and 105.8 s reported (the extra 1 s is Blender start-up, so this is consistent), and colour render times and the shape count (14278) match exactly. The PNG set sizes (2.2, 12.0, 42.5 MB) cannot be re-checked because the resolution folders now keep only colour.png and normal.png (2, 6 and 18 MB), and the guide does not say the other maps were deleted.",
+  "The sampler's 'tuned' numbers (strip rate 1.8, zone spread 0.55, grain cut levels 0.58 and 0.38) were tuned by maximising the same-kind score against the reference (tune_s1.py). The guide lists the tuning, but the headline variation score 0.626 is measured on the same metric the sampler was tuned on. It is therefore optimistic as evidence that the new tiles are the same kind of surface.",
+  "The generated (invented) path never reaches the reference dot for dot: tier none for S0 and S1 and for all 8 samples, with colour SSIM 0.20 to 0.38. Tier 'layout' is reached only by tracing (L1 to L3), and the traced classes cannot make new tiles. The 'close' tier was not reached, with L3 normal angle 15.46 degrees against the 12 required. The builder states all of this plainly."
+ ],
+ "guide_problems": [
+  "Contradiction in 'Dead ends': the bullet 'Merging across the tile edge (wrap-around) made patches whose bounding box is the whole tile... the merge is done without wrap-around' is wrong for the headline results. make_ladder.py builds the w classes with load_merge_state(bgr, wrap=True), and section 7 presents the joined-across-the-edge classes as the main table, with the cut-at-edge versions as the alternative.",
+  "Strip-count sweep caption says '1.8 fitted', but the sweep was run at 0.0, 0.5, 1.0, 1.6 and 2.6, so no picture shows the fitted value 1.8.",
+  "Overstated sweep captions: 'light cut 0.50 smothers the picture in streaks, 0.70 has almost none' and 'crack scale 3.5 = a cracked, splintered look'. In the pictures the five light-cut tiles look similar at a glance (the mean brightness falls from 76.4 to 65.1 and the mean difference rises to 11 steps, so the effect is real but subtle), and crack scale 3.5 only adds a few short dark dashes.",
+  "The height-stretch and normal-strength strips are cropped from the L3 traced colour picture, not from the sampled wood used for the other six sweeps. The guide says so only for the normal strip. The height strip also shows a 'black 40, white 128' tile that the text never describes.",
+  "Normal angle '4.3 degrees' is the Sobel number, while the guide describes the central-difference kernel the generator uses (4.6 degrees).",
+  "Not plain language for a non-programmer. Unexplained terms: Ward clustering, Zhang-Suen thinning, Douglas-Peucker, OpenCV approxPolyDP, TopoJSON-style arcs, 4-D donut, FBM, Lab colour space, Delta E, SSIM, Cycles, Gaussian filter, wrap copies. Section 11 includes a 'pkill' anecdote, section 14 is code-level advice for lib/, and section 4 opens with a note about a file that could not be written. At 38 KB, the Recipe guide is too long for the stated reader. The Lessons guide is plainer but still uses Ward clustering, SSIM, 4-D donut and 'wrap copies'.",
+  "'KB' in the guide means 1024 bytes (462.4 KB is 473,489 bytes), while the class names say 480k, 300k, 150k, 62k, 40k and 20k, which do not match the stated sizes (462, 301, 151, 60, 37 and 24 KB). The mismatch is confusing.",
+  "Stale comments in code the guide points to: wood_shaders.py's header says the hair lines come from seamless Voronoi 'Distance to Edge', but the code (and the guide's dead-end section) use contour lines of a stretched noise. The header of sweeps_for_guide.py cites make_normal_strength_strip.py, which does not exist (the real script is analysis/make_map_strips.py).",
+  "The Lessons checklist says derivation_ceiling.py 'works unchanged for another surface if you change the folder name'. It hard-codes REF = reference/wood, so the script must be edited, which is minor but not 'unchanged'.",
+  "Good: all ten guide pictures exist and match the files named. The sweep values for light cut, hair thickness, zone spread, crack scale, plank count, normal strength (2, 5, 8, 12, 16) and height stretch match what sweeps_for_guide.py and make_map_strips.py ran, apart from the 1.8 item above. The results tables match the final_report.json and my re-scores. The guide is honest about failures: tier close not reached, the camouflage look, and the short cracks."
+ ],
+ "overall": "The wood builder's claims hold up. I re-ran everything myself and found no inflated numbers. All 8 descriptions in the ladder pass the audit at the claimed limits. The generator is honest: it never reads the reference, and every input comes from the description. I baked in an isolated copy of generator and lib with no reference folder anywhere and got a colour picture bit-identical to the normal bake (max difference 0), and a grep for image or reference reads finds only comments. All eight ladder bakes, scored again with lib/pixel_compare.py and lib/texture_compare.py in my own Blender process (output in verify/), match the reported numbers to every digit, tiers included: none for S0, S1, M1, M2 and M3, and layout for L1, L2 and L3. The sampled variations, the area, the half-tile shift test and the deck boards also reproduce. Seed 101 baked fresh scores 0.619 on the same-kind tool and its half-tile roll gives 0.742 mean difference with 0.00 % over 40 (a wrong roll gives 23.1 and 15.7 %). The area quarters are different pictures, not repeats, and the deck boards read as silver deck boards. The result is real but thinner than the headline suggests, and the builder says most of this itself. Matching the reference dot for dot works only by tracing: the L classes are a 150 to 470 KB lossy vector copy of the picture, and they cannot make new tiles. The procedural, sampled path scores tier none against the reference. The new tiles are different pictures but visibly not equally good: weak planks and cracks, faint knots, blocky camouflage paint, and nearly the same tone in all eight. The 'close' tier was not reached. The transfer claim 'no generator code changed' cannot be proven from the file timestamps, though the final code reproduces the deck boards exactly. The two guides are accurate on numbers but have the problems listed under guide_problems: one contradictory dead-end bullet, a sweep caption naming a setting (1.8) that was not run, overstated sweep captions, the 4.3 versus 4.6 normal-angle slip, and heavy jargon that does not meet the plain-language rule. Nothing in the builder's folders was changed. My files are in recipes/wood/verify/.\""
+}

@@ -1,0 +1,75 @@
+{
+ "reference": "brick",
+ "candidate": "recipes/brick/outputs/sample_mosaic_21c",
+ "overall": 0.63,
+ "groups": {
+  "colour": 0.543,
+  "height": 0.687,
+  "normal": 0.628,
+  "tiling": 0.961
+ },
+ "scores": {
+  "colour_distribution": 0.813,
+  "colour_spectrum": 0.239,
+  "colour_orientation": 0.677,
+  "colour_scale": 0.318,
+  "colour_gradient": 0.62,
+  "seam": 0.961,
+  "height_distribution": 0.595,
+  "height_spectrum": 0.426,
+  "height_gradient": 0.815,
+  "height_colour_link": 0.883,
+  "height_contrast": 0.967,
+  "normal_tilt": 0.52,
+  "normal_components": 0.775,
+  "normal_height_agreement": 0.66
+ },
+ "raw_distances": {
+  "colour_distribution": 0.0177,
+  "colour_spectrum": 0.2406,
+  "colour_orientation": 0.1062,
+  "colour_scale": 0.3543,
+  "colour_gradient": 0.0031,
+  "seam": 0.0787,
+  "height_distribution": 0.0405,
+  "height_spectrum": 0.1866,
+  "height_gradient": 0.0028,
+  "height_colour_link": 0.0058,
+  "height_contrast": 0.0165,
+  "normal_tilt": 0.0348,
+  "normal_components": 0.0352,
+  "normal_height_agreement": 0.0045
+ },
+ "facts": {
+  "seam_ratio_candidate": 1.08,
+  "seam_ratio_reference": 2.22,
+  "correlation_length_px_reference": [
+   13.0,
+   5.0
+  ],
+  "correlation_length_px_candidate": [
+   8.0,
+   4.0
+  ],
+  "mean_lab_reference": [
+   35.7,
+   18.1,
+   20.5
+  ],
+  "mean_lab_candidate": [
+   34.3,
+   20.7,
+   21.0
+  ],
+  "height_colour_corr_reference": 0.974,
+  "height_colour_corr_candidate": 0.968,
+  "normal_height_corr_reference": [
+   -0.9687710206791958,
+   0.9672154973853729
+  ],
+  "normal_height_corr_candidate": [
+   -0.9713191276365385,
+   0.9736840270847762
+  ]
+ }
+}

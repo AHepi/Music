@@ -1,0 +1,103 @@
+{
+ "surface": "slate",
+ "claims_hold": true,
+ "audit_ok": true,
+ "generator_reads_reference": false,
+ "discrepancies": [
+  "S0 stored output is stale: outputs/S0_layout_only and scores/S0_layout_only_summary.json were made at 18:58, but description/S0_layout_only.json was rewritten at 19:13:40. My fresh bake of the current file gives edge skill 0.294 (reported 0.29), height error 35.09 (35.1), normal 11.90 (11.89) and same-kind score 0.397 (0.398). All agree to rounding, but the stored pictures are not a bake of the current file (mean colour difference 1.3 steps).",
+  "Older sampler versions are still in use. description/sample_1..4.json lack paint.contrast 1.4, the grain and layout.bottom_round that the current sampler adds. The 'sampled tile (seed 1)' half-tile test used description/sample_1.json. area/area_2508.json lacks the grain, so sampler.sample_description(201, tile=2508) no longer reproduces the stored file (it differs only by the grain key). The eight variations and resolution/sample_1.json are current. The guide does not say the area and sample_1 pictures came from the earlier sampler.",
+  "Guide numbers for edge raggedness at the sides disagree with the files. The guide says sides 1.6 (section 2B, the format example in section 3, and the slate column of the transfer table in section 8). description/S0, S1, the variations and fitted_distributions.json all use side 2.06. Top 2.5 and bottom 2.0 are right.",
+  "The Lessons table says the dot-for-dot SSIM of the stamp paint (S1) is 0.60. Every measurement, mine and theirs, is 0.569.",
+  "Derivation ceiling wording. The recipe guide says the straight stretch 2.5 x (brightness - 9.5), clipped and blurred 0.5, matches the uploaded height to 2.95 steps. In analysis/derivation_ceiling.py the 2.95 comes from a 64-bin tone-curve lookup. I rebuilt the maps from the REFERENCE colour with the generator's actual straight-line formula and scored them with pixel_compare. Height error is 3.77 raw and 3.03 after best fit, normal error is 2.71 degrees, correlation 0.9967. So 'ceiling about 3 steps and 2.8 degrees' holds. The sentence 'a 4-point curve is off by 18, so the straight line is used' is misleading: the 4-point curve cannot express the clipping.",
+  "Transfer wording. 'Cedar needed NO generator code change' is true of slate_generator.py and slate_layers.py. But the cedar descriptions are also made with the sampler's new fitted= argument, which the report lists only under fish-scale. The height stretch comes from the numpy preview painter in analysis/preview_tools.py. So 'numbers only' covers the Blender generator, not the whole pipeline.",
+  "Normal error is weak support for the 'close' tier. The flat-normal baseline measured 11.27 degrees (guide: 11.3, mentioned only in 2A). S0, M tiny, M small, M coarse and L small are 11.66-11.95 degrees, WORSE than a flat normal map. L medium is 11.03 (0.2 better), L fine 9.68. 'Close' passes on normals only because the tool's limit is 12. The table does not put the flat baseline next to these numbers.",
+  "The half-tile test on a sampled tile with grain (var_103, my run) gives colour difference 0.66 and 0.00 % of dots over 40, but a height difference of 3.28 steps against about 1.7-2.0 in the report. Cause: the grain noise stays fixed in space while the shapes slide. It is not a seam, but the height row of the test is not meaningful when grain is on. Colour results replicate: cedar 0.93 / 0.00 %, fish-scale 0.99 / 0.02 %, wrong-roll controls 18.7 / 23.7 / 41.8.",
+  "Units are mixed: KB for 1000 bytes in some places and KiB in others. Variations '6.7 KB' are 6.6 KiB. S2 is '6.6 KB' in the table and '6.5 KB' in section 3. M coarse is '61 KB' in the Lessons and '60 KB' in the recipe. Trivial, but the S class limit is 8192 bytes.",
+  "The strip pictures are rendered at 384 dots, but the guide's filter-width statement (width 2 = 0.5-dot blur matching the reference) was measured at 1254. At 384 the same filter width blurs about 3.3 times more tile dots, so the strip does not show the softness the text describes. Other strips (corner radius, raggedness, tone noise, drift, shape, small-patch count) match their settings (S1 used values: noise 0.4, drift 12, contrast 1.4).",
+  "Variation pictures look less like the reference than the guide's 'a little darker and more even' suggests. In the contact sheet and the area picture the sampled tiles read as small blocky 'camouflage' patches. Bold pale chipped lips on the lower slate edges, strong green moss and long upright drips are mostly missing. Same-kind score is 0.735, against 0.83 for the reference rebuilt from polygons. The numbers are reported honestly (variants differ from the reference dot for dot at SSIM 0.49-0.52); the visual caveat is understated.",
+  "Contact sheet and crop sheet are crops, which the guide does not say. The contact sheet shows roughly an 800-dot corner of each tile at half size; this is my inference from slate widths in the picture. The resolution crop sheet shows two unlabelled crops per size.",
+  "Known fish-scale flaw (black gaps between scales instead of the next row) is disclosed and visible. The scales also vary in width and several look squared off at the bottom. Cedar looks like plausible weathered shingles in the flat painted style. Cedar and fish-scale are judged by eye only, as the report says.",
+  "Not independently timed: bake times in the report (20-31 s per tile, 131 s for the area) were measured on a lightly loaded machine. My runs were 35-65 s per tile and 177 s for the area, with load average 8-9 on 4 cores. Outputs are identical bit for bit, so only the time claims were not tested."
+ ],
+ "overall": "The slate claims hold. I found no fabrication and no reference leakage. Every number I re-ran matches the report, and every picture I re-baked matches the builder's file dot for dot (maximum difference 0, except the stale S0 file).\n\n- **Audit:** every claimed-class description passes lib/description_audit.py. S0, S1, S2, sample_1-4, the eight variations and resolution/sample_1 are under 8 KB. M tiny, small and coarse (17.3, 39.9, 61.7 KB) are under 64 KB, as are the area and transfer files (12.9-14.6 KB). L small, medium and fine (150, 270, 453 KB) pass at 512 KB and fail at 64 KB, so they are correctly class L. Side note: M2b_hybrid.json (73.7 KB) fails the 64 KB limit, but it is an unclaimed experiment.\n- **Where tracing begins:** the M and L classes are vector traces of the reference (L fine is 9,383 polygons and 154,230 numbers, 9.6 % of a raw RGB picture). The guide says so plainly. Patches are written as [colour, [numbers]], which the guide says was a workaround for an audit false alarm. The audit passes as written, but treat L as a compressed copy, not a description.\n- **Generator honesty:**\n  - slate_generator.py, slate_layers.py, sampler.py, geometry_route_slabs.py and the lib modules they import never open the reference or any picture as input. The only picture the generator loads is its own height.png, to derive the normal.\n  - Under strace, bakes of S1, L fine and var_103 opened only the description json, the generator, lib and the output folder. Nothing under reference/ was touched. There are no embedded images and no per-dot arrays.\n  - The sampler reads only fitted_distributions.json (4.8 KB of spreads, plus the 48 measured slate tones).\n- **Re-score:** I regenerated all nine classes in fresh Blender processes and scored them with pixel_compare and texture_compare. Tiers and numbers match the report (table below). The only gap is S0, explained above.\n- **Variations:** the eight descriptions equal sampler.sample_description(seed) exactly in layout and paint seed. Re-baking var_101 and var_105 reproduced the builder's pictures exactly. The no-grain claim holds (var_101 without grain scores 0.709, normal 17.91, as reported). Score range, tiers and the other claims replicate (details below).\n- **Area:** a fresh 2508-dot bake of area_2508.json is identical to theirs. The area claims replicate (details below). A 4 x 4 description (tile=5016) is made by the same sampler at 44.7 KB and passes the 64 KB audit; I did not bake it.\n- **Resolution and half-tile:** resolution timings (6x dots = 2.3x time, 4x = 3.2x) are consistent with the stored table. The half-tile slide test passes on three descriptions (var_103, cedar, fish-scale).\n- **Transfer:** cedar and fish-scale are cheap number changes in an 89-line script and look like roof coverings. The fish-scale black-gap flaw is real and disclosed.\n- **Guides:** both are mostly accurate and honest, with real dead ends listed. The problems are listed in guide_problems. The main ones are measures that are not explained in plain language, a few wrong numbers, and a misleading derivation sentence.\n- **My verification files:** all in proc-work/recipes/slate/verify/ (out/, scores/, half/, ceiling/, strace_*.txt, audit_*.txt, transfer_crops.png). I accidentally created generator/__pycache__ in the builder's folder (python -I ignores the no-bytecode setting) and removed it. No builder file was changed.",
+ "area_really_unique": "Yes. The area is 2508 x 2508 dots, 16 rows of 12 slates (192 distinct slates), described in 14.5 KB. My own measurements on their colour.png, and on my fresh bit-identical re-bake:\n- Quadrant correlation (colour, grey): 0.17-0.36. The highest values are horizontally adjacent quarters, because the rows share the same height bands. The maximum circular cross-correlation over all shifts is 0.28-0.37, against 1.0 for a repeated tile (control: reference tiled 2 x 2 gives 1.000).\n- Seam ratios (1.0 = as smooth as the rest): wrap-around 0.75 sideways / 0.57 up-down; middle lines 0.87 / 0.58. The reference tile repeated 2 x 2 gives 1.69 / 1.79 (they report 1.70 / 1.87).\n- Quarter-to-quarter mean difference is 18-21 brightness steps.\n- Looked at by eye: no repeated slate patterns and no seam at the tile scale.\nCaveat: the area description predates the grain setting, so there is no grain in this bake. The picture reads somewhat darker and more even than the reference, as the variations do.",
+ "variation_really_different": "Yes, they are different, but they share one visual flavour. Every claim replicates:\n- Same-kind score on the eight tiles: 0.725, 0.753, 0.746, 0.736, 0.722, 0.727, 0.724, 0.744, mean 0.735 (report: mean 0.735, range 0.722-0.753).\n- Against the reference dot for dot: all tier none; colour SSIM 0.494-0.525 (mean 0.517), Delta E 10.2-11.3, edge skill 0.014-0.130, normal error about 19 degrees. All as reported.\n- Between two variants: SSIM (grey) 0.467-0.511, mean 0.490; mean absolute difference 18.2-21.8 steps, mean 20.1. This is as different from each other as from the reference. A copy test finds no shared content: maximum circular cross-correlation between variants is 0.36, and 0.40 against the reference.\n- They come from the same generator: each var_NNN.json is exactly sampler.sample_description(NNN) (layout and paint seed identical). Re-baking var_101 and var_105 gives bit-identical pictures.\nThey are statistically alike: the same dark, even, small-patch 'camouflage' look. They are visibly less bold than the reference, with less pale chipping and green moss.",
+ "guide_problems": [
+  "Plain language: the 10-column table in section 0 of the recipe guide uses colour SSIM, Delta E, edge skill, pixel tier names and 'same kind score' without a plain one-sentence meaning beside it. SSIM is only half explained in the Lessons trap and the others only in the tool headers. The person is not a programmer.",
+  "Jargon left unexplained in the recipe guide: 'k-means in the Lab colour space' (2B), 'normalised cross-correlation' (6.2 table), 'Gaussian', 'Cycles pixel filter', 'bpy mesh.from_pydata' (section 4, step 1), 'Delta E'. The step-by-step tool descriptions in section 4 are mostly in plain words (What it is / How used / What matters / Effect), which is good.",
+  "One word per thing is broken in places. 'tile' means both the 1254-dot picture and a roof tile (fish-scale 'tiles', '17 rows of 12 tiles'). Pieces, slates and shingles alternate. Streaks, drips, teeth and spikes name the same thing. Specks and grain are used for the same thing. 'Picture', 'map' and 'texture' alternate.",
+  "Leftover brief letter codes in headings and text ((A), (B), (C), (D), (E), (F), (G) in section titles). They mean nothing to the person.",
+  "Wrong or loose numbers: side raggedness 1.6 (files use 2.06); Lessons table S1 SSIM 0.60 (measured 0.569); 'straight line matches to 2.95 steps' (that figure is for a 64-point curve; the straight line gives 3.77 raw / 3.03 best fit); mixed KB/KiB sizes (S2 6.6 vs 6.5 KB; M coarse 61 vs 60 KB); '4-point curve is off by 18 so the straight line is used' is a misleading argument.",
+  "The sweep strips (384 dots) do not show what the text says about the Gaussian filter width at 1254 dots (width 2 = 0.5-dot blur 'matches the reference'). At 384 dots the same width blurs about 3.3 times more of the tile. The strips for corner radius, raggedness, tone noise, drift, shape and small-patch count do match the settings that were run (labelled values and the S1 used values 0.4, 12, streak are correct), and the filter-width strip's order (box, 1, 2, 4, 8) matches the claim.",
+  "The guide says 'Everything below was run; where something was not run, it says so'. That mostly holds: z step, 4 x 4 area, shape library, overlap option and Geometry Nodes outline maker are honestly marked as not tried. But the area picture and sample_1 come from an older sampler (no grain, and no contrast for sample_1), which the guide does not mention. The guide describes the sampler as it is now.",
+  "The guide's contact sheet and resolution crop sheet are described as 'first picture the reference, then the eight new tiles' and 'crop at three sizes'. The sheets show crops, not whole tiles, and the resolution sheet shows two unlabelled crops per size.",
+  "The guide's section 6.1 honest reading ('a little darker and more even') understates the visual difference from the reference (bold pale lips, green moss and drips mostly missing).",
+  "The transfer text (section 8) lists 'cedar: the generator code was not touched' but does not say cedar also relies on the sampler's fitted= option, which the fish-scale paragraph lists as new. The table of cedar changes matches transfer/make_transfer_descriptions.py otherwise (palette, rows 14 x 12, width 104 / log spread 0.28, row height 83 +- 3, gaps 6 / 3, corner 3, raggedness 1.5 / 2.2 / 1.2, tone 100, gradient -9..+8, tone spread x0.55, width x0.64, height x1.16, moss 4 % / tan 5 %, stretch 12 / 177).",
+  "Guide statements I could not reproduce without long runs but found consistent in stored data: geometry-route table (all rows match the stored scores), resolution table (matches stored resolution_table.json), layout statistics (matches fitted_distributions.json except side raggedness), dead-end list (no contradiction found). The paint-sweep numbers (grow, contrast, drift) come from the plain-Python preview painter and were not re-run by me; the nine-run noise/drift plateau (0.70-0.73) matches analysis/sweep_stamps.json."
+ ],
+ "rescored": [
+  {
+   "class_name": "S0 layout only",
+   "tier": "none",
+   "colour_ssim": 0.711,
+   "colour_mean_delta_e": 8.07,
+   "texture_compare_overall": 0.397
+  },
+  {
+   "class_name": "S1 layout + stamps",
+   "tier": "none",
+   "colour_ssim": 0.569,
+   "colour_mean_delta_e": 9.06,
+   "texture_compare_overall": 0.707
+  },
+  {
+   "class_name": "S2 layout + stamps + grain",
+   "tier": "none",
+   "colour_ssim": 0.569,
+   "colour_mean_delta_e": 9.06,
+   "texture_compare_overall": 0.725
+  },
+  {
+   "class_name": "M tiny",
+   "tier": "layout",
+   "colour_ssim": 0.7212,
+   "colour_mean_delta_e": 7.31,
+   "texture_compare_overall": 0.51
+  },
+  {
+   "class_name": "M small",
+   "tier": "layout",
+   "colour_ssim": 0.7201,
+   "colour_mean_delta_e": 6.35,
+   "texture_compare_overall": 0.527
+  },
+  {
+   "class_name": "M coarse",
+   "tier": "layout",
+   "colour_ssim": 0.7313,
+   "colour_mean_delta_e": 5.67,
+   "texture_compare_overall": 0.605
+  },
+  {
+   "class_name": "L small",
+   "tier": "layout",
+   "colour_ssim": 0.7508,
+   "colour_mean_delta_e": 4.02,
+   "texture_compare_overall": 0.769
+  },
+  {
+   "class_name": "L medium",
+   "tier": "close",
+   "colour_ssim": 0.7924,
+   "colour_mean_delta_e": 3.28,
+   "texture_compare_overall": 0.815
+  },
+  {
+   "class_name": "L fine",
+   "tier": "close",
+   "colour_ssim": 0.8355,
+   "colour_mean_delta_e": 2.85,
+   "texture_compare_overall": 0.828
+  }
+ ]
+}

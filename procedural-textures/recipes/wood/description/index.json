@@ -1,0 +1,20 @@
+{
+ "note": "which description file is which size class of the wood ladder (all audited; all fit their size limit)",
+ "S": {
+  "S0_layout_only": "description/S0_layout_only.json",
+  "S1_layout_paint_grain": "description/S1_layout_paint_grain.json"
+ },
+ "M": {
+  "M1_trace_20k": "description/M1_trace_20kw.json",
+  "M2_trace_40k": "description/M2_trace_40kw.json",
+  "M3_trace_62k": "description/M3_trace_62kw.json"
+ },
+ "L": {
+  "L1_trace_150k": "description/L1_trace_150kw.json",
+  "L2_trace_300k": "description/L2_trace_300kw.json",
+  "L3_trace_480k": "description/L3_trace_480kw.json"
+ },
+ "sampled_examples": "variations/sample_101.json ... sample_108.json, area/area_2508.json, resolution/sample_7.json",
+ "transfer": "transfer/deck_boards_seed1.json",
+ "cut_at_tile_edge_versions_of_M_and_L": "description/M1_trace_20k.json ... L3_trace_480k.json (without the \"w\"; patches cut at the tile edge)"
+}

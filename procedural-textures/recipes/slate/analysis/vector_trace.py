@@ -1,0 +1,162 @@
+# What this does (plain words): this is an ANALYSIS tool (it reads the reference picture; the Blender generator never does). It turns the
+# painted colour picture into a short list of flat colour shapes ("patches"): first it snaps every dot to the nearest of a few palette
+# colours, then it cuts the picture into connected same-colour areas, drops the tiny specks, and writes each area as a simplified outline
+# (a polygon with a handful of corners). A quick numpy preview of the shapes drawn back-to-front tells how much accuracy a list of that
+# size can ever give. It is the "tracing the picture" end of the rate-distortion table, so it is reported honestly as tracing.
+# Run with plain Python:  python3 -I vector_trace.py   (the experiment at the bottom prints a table).
+import json
+import os
+import sys
+import time
+
+import cv2
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+PROC = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+sys.path.insert(0, os.path.join(PROC, 'lib'))
+REFERENCE = os.path.join(PROC, 'reference', 'slate')
+
+
+def load_reference_colour():
+    return cv2.imread(os.path.join(REFERENCE, 'colour.png'))   # BGR uint8
+
+
+def srgb_to_lab_float(bgr_uint8):
+    return cv2.cvtColor(bgr_uint8.astype(np.float32) / 255.0, cv2.COLOR_BGR2Lab)
+
+
+def make_palette(bgr, count, seed=1):
+    """k-means palette in Lab (a perceptual colour space) from a random sample of dots. Returns centres in Lab (count x 3)."""
+    lab = srgb_to_lab_float(bgr).reshape(-1, 3)
+    rng = np.random.default_rng(seed)
+    sample = lab[rng.choice(len(lab), 250000, replace=False)]
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 60, 0.01)
+    _, _, centres = cv2.kmeans(sample, count, None, criteria, 4, cv2.KMEANS_PP_CENTERS)
+    return centres
+
+
+def assign_labels(bgr, centres):
+    lab = srgb_to_lab_float(bgr).reshape(-1, 3)
+    labels = np.empty(len(lab), np.int32)
+    for start in range(0, len(lab), 150000):
+        chunk = lab[start:start + 150000]
+        labels[start:start + 150000] = ((chunk[:, None, :] - centres[None]) ** 2).sum(-1).argmin(1)
+    return labels.reshape(bgr.shape[:2])
+
+
+def mode_filter(labels, count, radius=1):
+    """Each dot takes the most common label in its (2 radius + 1)^2 neighbourhood (removes single-dot noise, keeps wrap-around correct)."""
+    size = 2 * radius + 1
+    padded = np.pad(labels, radius, mode='wrap')
+    best = np.zeros(labels.shape, np.float32)
+    best_label = labels.copy()
+    for k in range(count):
+        votes = cv2.boxFilter((padded == k).astype(np.float32), -1, (size, size), normalize=False, borderType=cv2.BORDER_CONSTANT)
+        votes = votes[radius:-radius, radius:-radius] if radius else votes
+        better = votes > best
+        best[better] = votes[better]
+        best_label[better] = k
+    return best_label
+
+
+def remove_small_areas(labels, count, min_area):
+    """Re-paint connected areas smaller than min_area with the label of the nearest bigger area."""
+    keep = np.zeros(labels.shape, bool)
+    for k in range(count):
+        n, comp, stats, _ = cv2.connectedComponentsWithStats((labels == k).astype(np.uint8), connectivity=4)
+        big = np.zeros(n, bool)
+        big[1:] = stats[1:, cv2.CC_STAT_AREA] >= min_area
+        keep |= big[comp] & (labels == k)
+    if keep.all():
+        return labels
+    # nearest kept dot for every dropped dot: in the distance transform the kept dots are the "sites" (zero), every dot gets the id of its
+    # nearest site; a table id -> flat dot position then gives the label of that nearest kept dot
+    drop_mask = (~keep).astype(np.uint8)
+    _, nearest = cv2.distanceTransformWithLabels(drop_mask, cv2.DIST_L2, 3, labelType=cv2.DIST_LABEL_PIXEL)
+    flat_positions = np.flatnonzero(keep.ravel())
+    table = np.zeros(int(nearest.max()) + 1, np.int64)
+    table[nearest.ravel()[flat_positions]] = flat_positions
+    out = labels.copy().ravel()
+    dropped = np.flatnonzero(~keep.ravel())
+    out[dropped] = labels.ravel()[table[nearest.ravel()[dropped]]]
+    return out.reshape(labels.shape)
+
+
+def trace_regions(labels, count, epsilon, min_area):
+    """Outlines of every connected area. Returns a list of dicts: {'c': label, 'p': [[x, y], ...], 'a': filled area} sorted big to small."""
+    regions = []
+    for k in range(count):
+        mask = (labels == k).astype(np.uint8)
+        n, comp, stats, _ = cv2.connectedComponentsWithStats(mask, connectivity=4)
+        for i in range(1, n):
+            x, y, w, h, area = stats[i]
+            if area < min_area:
+                continue
+            sub = (comp[y:y + h, x:x + w] == i).astype(np.uint8)
+            sub = np.pad(sub, 1)
+            contours, hierarchy = cv2.findContours(sub, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+            for contour in contours:
+                simple = cv2.approxPolyDP(contour, epsilon, True)[:, 0, :] + np.array([x - 1, y - 1])
+                if len(simple) < 3:
+                    continue
+                filled = abs(cv2.contourArea(simple.astype(np.int32)))
+                regions.append({'c': k, 'p': simple.astype(int).tolist(), 'a': float(max(filled, area))})
+    regions.sort(key=lambda r: -r['a'])
+    return regions
+
+
+def draw_regions(regions, palette_bgr, size=1254, scale=4):
+    """Painter's algorithm: big shapes first, small on top. Drawn at 4 x resolution with sub-dot coordinates and shrunk back (anti-aliased)."""
+    big = np.zeros((size * scale, size * scale, 3), np.uint8)
+    big[:] = palette_bgr[0]
+    for region in regions:
+        points = (np.array(region['p'], np.float64) + 0.5) * scale
+        cv2.fillPoly(big, [points.round().astype(np.int32)], tuple(int(v) for v in palette_bgr[region['c']]), lineType=cv2.LINE_8)
+    return cv2.resize(big, (size, size), interpolation=cv2.INTER_AREA)
+
+
+def palette_to_bgr(centres):
+    return (np.clip(cv2.cvtColor(centres.reshape(1, -1, 3).astype(np.float32), cv2.COLOR_Lab2BGR)[0], 0, 1) * 255).round().astype(np.uint8)
+
+
+def json_size(regions, palette):
+    text = json.dumps({'palette': palette, 'patches': [[r['c']] + [v for pt in r['p'] for v in pt] for r in regions]}, separators=(',', ':'))
+    return len(text.encode())
+
+
+if __name__ == '__main__':
+    import pixel_compare as pc
+    bgr = load_reference_colour()
+    out = os.path.join(HERE, 'trace_experiment')
+    os.makedirs(out, exist_ok=True)
+    rows = []
+    for count in (16, 24):
+        centres = make_palette(bgr, count)
+        palette_bgr = palette_to_bgr(centres)
+        raw = assign_labels(bgr, centres)
+        for radius in (1,):
+            filtered = mode_filter(raw, count, radius)
+            for min_area in (8, 20, 50):
+                cleaned = remove_small_areas(filtered, count, min_area)
+                for epsilon in (0.8, 1.5, 2.5):
+                    started = time.time()
+                    regions = trace_regions(cleaned, count, epsilon, min_area)
+                    picture = draw_regions(regions, palette_bgr)
+                    folder = os.path.join(out, f'k{count}_m{min_area}_e{epsilon}')
+                    os.makedirs(folder, exist_ok=True)
+                    cv2.imwrite(os.path.join(folder, 'colour.png'), picture)
+                    report = pc.pixel_report('slate', folder) if False else None
+                    ref = bgr.astype(np.float64)
+                    cand = picture.astype(np.float64)
+                    grey = lambda x: cv2.cvtColor(np.clip(x, 0, 255).astype(np.uint8), cv2.COLOR_BGR2GRAY)
+                    ssim = pc.ssim(grey(ref), grey(cand))
+                    lab_ref = pc.tc.srgb_to_lab(ref[..., ::-1] / 255.0)
+                    lab_cand = pc.tc.srgb_to_lab(cand[..., ::-1] / 255.0)
+                    de = float(np.sqrt(((lab_ref - lab_cand) ** 2).sum(-1)).mean())
+                    size_bytes = json_size(regions, palette_bgr.tolist())
+                    row = dict(colours=count, min_area=min_area, epsilon=epsilon, patches=len(regions), vertices=sum(len(r['p']) for r in regions),
+                               kilobytes=round(size_bytes / 1024, 1), ssim=round(ssim, 3), delta_e=round(de, 2), seconds=round(time.time() - started, 1))
+                    print(row, flush=True)
+                    rows.append(row)
+    json.dump(rows, open(os.path.join(out, 'experiment.json'), 'w'), indent=1)

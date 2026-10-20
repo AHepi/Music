@@ -1,0 +1,166 @@
+00:00.585  bpy.rna          | WARNING current value '0' matches no enum in 'CompositorNodeImage', 'Image', 'layer'
+00:00.585  bpy.rna          | WARNING current value '0' matches no enum in 'CompositorNodeImage', 'Image', 'view'
+made a compositing node group: probe CompositorNodeTree
+== CompositorNodeKuwahara | label: Kuwahara
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Size' [VALUE] default=6.0
+   input  'Type' [MENU] default=('A', 'n', 'i', 's', 'o', 't', 'r', 'o', 'p', 'i', 'c')
+   input  'Uniformity' [INT] default=4
+   input  'Sharpness' [VALUE] default=1.0
+   input  'Eccentricity' [VALUE] default=1.0
+   input  'High Precision' [BOOLEAN] default=False
+   output 'Image' [RGBA]
+== CompositorNodePosterize | label: Posterize
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Steps' [VALUE] default=8.0
+   output 'Image' [RGBA]
+== CompositorNodePixelate | label: Pixelate
+   input  'Color' [RGBA] default=(0.800000011920929, 0.800000011920929, 0.800000011920929, 1.0)
+   input  'Size' [INT] default=1
+   output 'Color' [RGBA]
+== CompositorNodeFilter | label: Filter
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Factor' [VALUE] default=1.0
+   input  'Type' [MENU] default=('S', 'o', 'f', 't', 'e', 'n')
+   output 'Image' [RGBA]
+== CompositorNodeDilateErode | label: Dilate/Erode
+   input  'Mask' [VALUE] default=0.0
+   input  'Size' [INT] default=0
+   input  'Type' [MENU] default=('S', 't', 'e', 'p', 's')
+   input  'Falloff Size' [VALUE] default=0.0
+   input  'Falloff' [MENU] default=('S', 'm', 'o', 'o', 't', 'h')
+   output 'Mask' [VALUE]
+== CompositorNodeBlur | label: Blur
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Size' [VECTOR] default=(0.0, 0.0)
+   input  'Type' [MENU] default=('G', 'a', 'u', 's', 's', 'i', 'a', 'n')
+   input  'Extend Bounds' [BOOLEAN] default=False
+   input  'Separable' [BOOLEAN] default=True
+   output 'Image' [RGBA]
+== CompositorNodeBilateralblur | label: Bilateral Blur
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Determinator' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Size' [INT] default=0
+   input  'Threshold' [VALUE] default=0.10000000149011612
+   output 'Image' [RGBA]
+== CompositorNodeDespeckle | label: Despeckle
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Factor' [VALUE] default=1.0
+   input  'Color Threshold' [VALUE] default=0.5
+   input  'Neighbor Threshold' [VALUE] default=0.5
+   output 'Image' [RGBA]
+== CompositorNodeMaskToSDF | label: Mask To SDF
+   input  'Mask' [BOOLEAN] default=False
+   output 'SDF' [VALUE]
+   output 'Nearest Pixel' [INT_VECTOR]
+== CompositorNodeConvolve | label: Convolve
+   input  'Image' [RGBA] default=(0.800000011920929, 0.800000011920929, 0.800000011920929, 1.0)
+   input  'Kernel Data Type' [MENU] default=('F', 'l', 'o', 'a', 't')
+   input  'Kernel' [VALUE] default=0.0
+   input  'Kernel' [RGBA] default=(0.800000011920929, 0.800000011920929, 0.800000011920929, 1.0)
+   input  'Normalize Kernel' [BOOLEAN] default=True
+   output 'Image' [RGBA]
+== CompositorNodeImage | label: Image
+   setting image (POINTER) = None
+   setting frame_duration (INT) = 1
+   setting frame_start (INT) = 1
+   setting frame_offset (INT) = 0
+   setting use_cyclic (BOOLEAN) = False
+   setting use_auto_refresh (BOOLEAN) = True
+   setting layer (ENUM) = '' options=['PLACEHOLDER']
+   setting has_layers (BOOLEAN) = False
+   setting view (ENUM) = '' options=['ALL']
+   setting has_views (BOOLEAN) = False
+   output 'Image' [RGBA]
+   output 'Alpha' [VALUE]
+== CompositorNodeRLayers | label: Render Layers
+   setting scene (POINTER) = bpy.data.scenes['Scene']
+   setting layer (ENUM) = 'ViewLayer' options=['PLACEHOLDER']
+   output 'Image' [RGBA]
+   output 'Alpha' [VALUE]
+== CompositorNodeCrop | label: Crop
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'X' [INT] default=0
+   input  'Y' [INT] default=0
+   input  'Width' [INT] default=1920
+   input  'Height' [INT] default=1080
+   input  'Alpha Crop' [BOOLEAN] default=False
+   output 'Image' [RGBA]
+== CompositorNodeTransform | label: Transform
+   input  'Image' [RGBA] default=(0.800000011920929, 0.800000011920929, 0.800000011920929, 1.0)
+   input  'X' [VALUE] default=0.0
+   input  'Y' [VALUE] default=0.0
+   input  'Angle' [VALUE] default=0.0
+   input  'Scale' [VALUE] default=1.0
+   input  'Interpolation' [MENU] default=('B', 'i', 'l', 'i', 'n', 'e', 'a', 'r')
+   input  'Extension X' [MENU] default=('C', 'l', 'i', 'p')
+   input  'Extension Y' [MENU] default=('C', 'l', 'i', 'p')
+   output 'Image' [RGBA]
+== CompositorNodeScale | label: Scale
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Type' [MENU] default=('R', 'e', 'l', 'a', 't', 'i', 'v', 'e')
+   input  'X' [VALUE] default=1.0
+   input  'Y' [VALUE] default=1.0
+   input  'Frame Type' [MENU] default=('S', 't', 'r', 'e', 't', 'c', 'h')
+   input  'Interpolation' [MENU] default=('B', 'i', 'l', 'i', 'n', 'e', 'a', 'r')
+   input  'Extension X' [MENU] default=('C', 'l', 'i', 'p')
+   input  'Extension Y' [MENU] default=('C', 'l', 'i', 'p')
+   output 'Image' [RGBA]
+== CompositorNodeRGBToBW | label: RGB to BW
+   input  'Image' [RGBA] default=(0.800000011920929, 0.800000011920929, 0.800000011920929, 1.0)
+   output 'Val' [VALUE]
+== CompositorNodeAntiAliasing | label: Anti-Aliasing
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Threshold' [VALUE] default=0.20000000298023224
+   input  'Contrast Limit' [VALUE] default=2.0
+   input  'Corner Rounding' [VALUE] default=0.25
+   output 'Image' [RGBA]
+== CompositorNodeInpaint | label: Inpaint
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'Size' [INT] default=0
+   output 'Image' [RGBA]
+== CompositorNodeImageCoordinates | label: Image Coordinates
+   input  'Image' [RGBA] default=(0.800000011920929, 0.800000011920929, 0.800000011920929, 1.0)
+   output 'Uniform' [VECTOR]
+   output 'Normalized' [VECTOR]
+   output 'Pixel' [INT_VECTOR]
+== CompositorNodeOutputFile | label: File Output
+   setting file_output_items (COLLECTION) = bpy.data.node_groups['probe'].nodes["File Output"].file_output_items
+   setting active_item_index (INT) = 0
+   setting directory (STRING) = '/tmp/'
+   setting file_name (STRING) = '{blend_name}'
+   setting format (POINTER) = bpy.data.node_groups['probe'].nodes["File Output"].format
+   setting save_as_render (BOOLEAN) = True
+   setting use_file_extension (BOOLEAN) = True
+   input  '' [CUSTOM] default=None
+== CompositorNodeViewer | label: Viewer
+   setting ui_shortcut (INT) = 0
+   input  'Image' [RGBA] default=(0.0, 0.0, 0.0, 1.0)
+== CompositorNodeTranslate | label: Translate
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   input  'X' [VALUE] default=0.0
+   input  'Y' [VALUE] default=0.0
+   input  'Interpolation' [MENU] default=('B', 'i', 'l', 'i', 'n', 'e', 'a', 'r')
+   input  'Extension X' [MENU] default=('C', 'l', 'i', 'p')
+   input  'Extension Y' [MENU] default=('C', 'l', 'i', 'p')
+   output 'Image' [RGBA]
+== CompositorNodeSeparateColor | label: Separate Color
+   setting mode (ENUM) = 'RGB' options=['RGB', 'HSV', 'HSL', 'YCC', 'YUV']
+   setting ycc_mode (ENUM) = 'ITUBT709' options=['ITUBT601', 'ITUBT709', 'JFIF']
+   input  'Image' [RGBA] default=(1.0, 1.0, 1.0, 1.0)
+   output 'Red' [VALUE]
+   output 'Green' [VALUE]
+   output 'Blue' [VALUE]
+   output 'Alpha' [VALUE]
+== CompositorNodeCombineColor | label: Combine Color
+   setting mode (ENUM) = 'RGB' options=['RGB', 'HSV', 'HSL', 'YCC', 'YUV']
+   setting ycc_mode (ENUM) = 'ITUBT709' options=['ITUBT601', 'ITUBT709', 'JFIF']
+   input  'Red' [VALUE] default=0.0
+   input  'Green' [VALUE] default=0.0
+   input  'Blue' [VALUE] default=0.0
+   input  'Alpha' [VALUE] default=1.0
+   output 'Image' [RGBA]
+== CompositorNodeNormal | label: Normal
+   output 'Normal' [VECTOR]
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+Blender quit

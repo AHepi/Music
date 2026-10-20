@@ -1,0 +1,6496 @@
+{
+ "ShaderNode": {
+  "error": "Error: Node type ShaderNode undefined\n"
+ },
+ "ShaderNodeAddShader": {
+  "bl_idname": "ShaderNodeAddShader",
+  "label": "Add Shader",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Shader",
+    "identifier": "Shader",
+    "type": "Shader",
+    "enabled": true
+   },
+   {
+    "name": "Shader",
+    "identifier": "Shader_001",
+    "type": "Shader",
+    "enabled": true
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Shader",
+    "identifier": "Shader",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeAmbientOcclusion": {
+  "bl_idname": "ShaderNodeAmbientOcclusion",
+  "label": "Ambient Occlusion",
+  "settings": {
+   "samples": {
+    "type": "INT",
+    "value": 16
+   },
+   "inside": {
+    "type": "BOOLEAN",
+    "value": false
+   },
+   "only_local": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Distance",
+    "identifier": "Distance",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "AO",
+    "identifier": "AO",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeAttribute": {
+  "bl_idname": "ShaderNodeAttribute",
+  "label": "Attribute",
+  "settings": {
+   "attribute_type": {
+    "type": "ENUM",
+    "options": [
+     "GEOMETRY",
+     "OBJECT",
+     "INSTANCER",
+     "VIEW_LAYER"
+    ],
+    "value": "GEOMETRY"
+   },
+   "attribute_name": {
+    "type": "STRING",
+    "value": ""
+   }
+  },
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeBackground": {
+  "bl_idname": "ShaderNodeBackground",
+  "label": "Background",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Strength",
+    "identifier": "Strength",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Background",
+    "identifier": "Background",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBevel": {
+  "bl_idname": "ShaderNodeBevel",
+  "label": "Bevel",
+  "settings": {
+   "samples": {
+    "type": "INT",
+    "value": 4
+   }
+  },
+  "inputs": [
+   {
+    "name": "Radius",
+    "identifier": "Radius",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.05
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeBlackbody": {
+  "bl_idname": "ShaderNodeBlackbody",
+  "label": "Blackbody",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Temperature",
+    "identifier": "Temperature",
+    "type": "FloatColorTemperature",
+    "enabled": true,
+    "default": 6500.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeBrightContrast": {
+  "bl_idname": "ShaderNodeBrightContrast",
+  "label": "Brightness/Contrast",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Brightness",
+    "identifier": "Bright",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Contrast",
+    "identifier": "Contrast",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeBsdfAnisotropic": {
+  "bl_idname": "ShaderNodeBsdfAnisotropic",
+  "label": "Glossy BSDF",
+  "settings": {
+   "distribution": {
+    "type": "ENUM",
+    "options": [
+     "BECKMANN",
+     "GGX",
+     "ASHIKHMIN_SHIRLEY",
+     "MULTI_GGX"
+    ],
+    "value": "MULTI_GGX"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Anisotropy",
+    "identifier": "Anisotropy",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Rotation",
+    "identifier": "Rotation",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Tangent",
+    "identifier": "Tangent",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfDiffuse": {
+  "bl_idname": "ShaderNodeBsdfDiffuse",
+  "label": "Diffuse BSDF",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfGlass": {
+  "bl_idname": "ShaderNodeBsdfGlass",
+  "label": "Glass BSDF",
+  "settings": {
+   "distribution": {
+    "type": "ENUM",
+    "options": [
+     "BECKMANN",
+     "GGX",
+     "MULTI_GGX"
+    ],
+    "value": "MULTI_GGX"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.5
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Thin Film Thickness",
+    "identifier": "Thin Film Thickness",
+    "type": "FloatWavelength",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Thin Film IOR",
+    "identifier": "Thin Film IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.33
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfHair": {
+  "bl_idname": "ShaderNodeBsdfHair",
+  "label": "Hair BSDF",
+  "settings": {
+   "component": {
+    "type": "ENUM",
+    "options": [
+     "Reflection",
+     "Transmission"
+    ],
+    "value": "Reflection"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Offset",
+    "identifier": "Offset",
+    "type": "FloatAngle",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "RoughnessU",
+    "identifier": "RoughnessU",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.1
+   },
+   {
+    "name": "RoughnessV",
+    "identifier": "RoughnessV",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Tangent",
+    "identifier": "Tangent",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfHairPrincipled": {
+  "bl_idname": "ShaderNodeBsdfHairPrincipled",
+  "label": "Principled Hair BSDF",
+  "settings": {
+   "model": {
+    "type": "ENUM",
+    "options": [
+     "CHIANG",
+     "HUANG"
+    ],
+    "value": "CHIANG"
+   },
+   "parametrization": {
+    "type": "ENUM",
+    "options": [
+     "ABSORPTION",
+     "MELANIN",
+     "COLOR"
+    ],
+    "value": "COLOR"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.0175,
+     0.0058,
+     0.0021,
+     1.0
+    ]
+   },
+   {
+    "name": "Melanin",
+    "identifier": "Melanin",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 0.8
+   },
+   {
+    "name": "Melanin Redness",
+    "identifier": "Melanin Redness",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.0
+   },
+   {
+    "name": "Tint",
+    "identifier": "Tint",
+    "type": "Color",
+    "enabled": false,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Absorption Coefficient",
+    "identifier": "Absorption Coefficient",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.2455,
+     0.52,
+     1.365
+    ]
+   },
+   {
+    "name": "Aspect Ratio",
+    "identifier": "Aspect Ratio",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 0.85
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.3
+   },
+   {
+    "name": "Radial Roughness",
+    "identifier": "Radial Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.3
+   },
+   {
+    "name": "Coat",
+    "identifier": "Coat",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.55
+   },
+   {
+    "name": "Offset",
+    "identifier": "Offset",
+    "type": "FloatAngle",
+    "enabled": true,
+    "default": 0.0349
+   },
+   {
+    "name": "Random Color",
+    "identifier": "Random Color",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Random Roughness",
+    "identifier": "Random Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Random",
+    "identifier": "Random",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Reflection",
+    "identifier": "R lobe",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.0
+   },
+   {
+    "name": "Transmission",
+    "identifier": "TT lobe",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.0
+   },
+   {
+    "name": "Secondary Reflection",
+    "identifier": "TRT lobe",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfMetallic": {
+  "bl_idname": "ShaderNodeBsdfMetallic",
+  "label": "Metallic BSDF",
+  "settings": {
+   "distribution": {
+    "type": "ENUM",
+    "options": [
+     "BECKMANN",
+     "GGX",
+     "MULTI_GGX"
+    ],
+    "value": "MULTI_GGX"
+   },
+   "fresnel_type": {
+    "type": "ENUM",
+    "options": [
+     "PHYSICAL_CONDUCTOR",
+     "F82"
+    ],
+    "value": "F82"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Base Color",
+    "identifier": "Base Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.617,
+     0.577,
+     0.54,
+     1.0
+    ]
+   },
+   {
+    "name": "Edge Tint",
+    "identifier": "Edge Tint",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.695,
+     0.726,
+     0.77,
+     1.0
+    ]
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     2.757,
+     2.513,
+     2.231
+    ]
+   },
+   {
+    "name": "Extinction",
+    "identifier": "Extinction",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     3.867,
+     3.404,
+     3.009
+    ]
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Anisotropy",
+    "identifier": "Anisotropy",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Rotation",
+    "identifier": "Rotation",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Tangent",
+    "identifier": "Tangent",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Thin Film Thickness",
+    "identifier": "Thin Film Thickness",
+    "type": "FloatWavelength",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Thin Film IOR",
+    "identifier": "Thin Film IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.33
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfPrincipled": {
+  "bl_idname": "ShaderNodeBsdfPrincipled",
+  "label": "Principled BSDF",
+  "settings": {
+   "distribution": {
+    "type": "ENUM",
+    "options": [
+     "GGX",
+     "MULTI_GGX"
+    ],
+    "value": "MULTI_GGX"
+   },
+   "subsurface_method": {
+    "type": "ENUM",
+    "options": [
+     "BURLEY",
+     "RANDOM_WALK",
+     "RANDOM_WALK_SKIN",
+     "RANDOM_WALK_LEGACY"
+    ],
+    "value": "RANDOM_WALK"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Base Color",
+    "identifier": "Base Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Metallic",
+    "identifier": "Metallic",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.5
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Thin Wall",
+    "identifier": "Thin Wall",
+    "type": "Bool",
+    "enabled": true,
+    "default": false
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Diffuse Roughness",
+    "identifier": "Diffuse Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Subsurface Weight",
+    "identifier": "Subsurface Weight",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Subsurface Radius",
+    "identifier": "Subsurface Radius",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     1.0,
+     0.2,
+     0.1
+    ]
+   },
+   {
+    "name": "Subsurface Scale",
+    "identifier": "Subsurface Scale",
+    "type": "FloatDistance",
+    "enabled": true,
+    "default": 0.005
+   },
+   {
+    "name": "Subsurface IOR",
+    "identifier": "Subsurface IOR",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.4
+   },
+   {
+    "name": "Subsurface Anisotropy",
+    "identifier": "Subsurface Anisotropy",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Specular IOR Level",
+    "identifier": "Specular IOR Level",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Specular Tint",
+    "identifier": "Specular Tint",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Anisotropic",
+    "identifier": "Anisotropic",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Anisotropic Rotation",
+    "identifier": "Anisotropic Rotation",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Tangent",
+    "identifier": "Tangent",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Transmission Weight",
+    "identifier": "Transmission Weight",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Coat Weight",
+    "identifier": "Coat Weight",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Coat Roughness",
+    "identifier": "Coat Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.03
+   },
+   {
+    "name": "Coat IOR",
+    "identifier": "Coat IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.5
+   },
+   {
+    "name": "Coat Tint",
+    "identifier": "Coat Tint",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Coat Normal",
+    "identifier": "Coat Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Sheen Weight",
+    "identifier": "Sheen Weight",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Sheen Roughness",
+    "identifier": "Sheen Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Sheen Tint",
+    "identifier": "Sheen Tint",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Emission Color",
+    "identifier": "Emission Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Emission Strength",
+    "identifier": "Emission Strength",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Thin Film Thickness",
+    "identifier": "Thin Film Thickness",
+    "type": "FloatWavelength",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Thin Film IOR",
+    "identifier": "Thin Film IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.33
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfRayPortal": {
+  "bl_idname": "ShaderNodeBsdfRayPortal",
+  "label": "Ray Portal BSDF",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Position",
+    "identifier": "Position",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Direction",
+    "identifier": "Direction",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfRefraction": {
+  "bl_idname": "ShaderNodeBsdfRefraction",
+  "label": "Refraction BSDF",
+  "settings": {
+   "distribution": {
+    "type": "ENUM",
+    "options": [
+     "BECKMANN",
+     "GGX"
+    ],
+    "value": "BECKMANN"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.45
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfSheen": {
+  "bl_idname": "ShaderNodeBsdfSheen",
+  "label": "Sheen BSDF",
+  "settings": {
+   "distribution": {
+    "type": "ENUM",
+    "options": [
+     "ASHIKHMIN",
+     "MICROFIBER"
+    ],
+    "value": "MICROFIBER"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfToon": {
+  "bl_idname": "ShaderNodeBsdfToon",
+  "label": "Toon BSDF",
+  "settings": {
+   "component": {
+    "type": "ENUM",
+    "options": [
+     "DIFFUSE",
+     "GLOSSY"
+    ],
+    "value": "DIFFUSE"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Size",
+    "identifier": "Size",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Smooth",
+    "identifier": "Smooth",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfTranslucent": {
+  "bl_idname": "ShaderNodeBsdfTranslucent",
+  "label": "Translucent BSDF",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBsdfTransparent": {
+  "bl_idname": "ShaderNodeBsdfTransparent",
+  "label": "Transparent BSDF",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeBump": {
+  "bl_idname": "ShaderNodeBump",
+  "label": "Bump",
+  "settings": {
+   "invert": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Strength",
+    "identifier": "Strength",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Distance",
+    "identifier": "Distance",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.001
+   },
+   {
+    "name": "Filter Width",
+    "identifier": "Filter Width",
+    "type": "FloatPixel",
+    "enabled": true,
+    "default": 0.1
+   },
+   {
+    "name": "Height",
+    "identifier": "Height",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeCameraData": {
+  "bl_idname": "ShaderNodeCameraData",
+  "label": "Camera Data",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "View Vector",
+    "identifier": "View Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "View Z Depth",
+    "identifier": "View Z Depth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "View Distance",
+    "identifier": "View Distance",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeClamp": {
+  "bl_idname": "ShaderNodeClamp",
+  "label": "Clamp",
+  "settings": {
+   "clamp_type": {
+    "type": "ENUM",
+    "options": [
+     "MINMAX",
+     "RANGE"
+    ],
+    "value": "MINMAX"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Min",
+    "identifier": "Min",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Max",
+    "identifier": "Max",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Result",
+    "identifier": "Result",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeCombineColor": {
+  "bl_idname": "ShaderNodeCombineColor",
+  "label": "Combine Color",
+  "settings": {
+   "mode": {
+    "type": "ENUM",
+    "options": [
+     "RGB",
+     "HSV",
+     "HSL"
+    ],
+    "value": "RGB"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Red",
+    "identifier": "Red",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Green",
+    "identifier": "Green",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Blue",
+    "identifier": "Blue",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeCombineXYZ": {
+  "bl_idname": "ShaderNodeCombineXYZ",
+  "label": "Combine XYZ",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "X",
+    "identifier": "X",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Y",
+    "identifier": "Y",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Z",
+    "identifier": "Z",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeCustomGroup": {
+  "error": "Error: Node type ShaderNodeCustomGroup undefined\n"
+ },
+ "ShaderNodeDisplacement": {
+  "bl_idname": "ShaderNodeDisplacement",
+  "label": "Displacement",
+  "settings": {
+   "space": {
+    "type": "ENUM",
+    "options": [
+     "OBJECT",
+     "WORLD"
+    ],
+    "value": "OBJECT"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Height",
+    "identifier": "Height",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Midlevel",
+    "identifier": "Midlevel",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.01
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Displacement",
+    "identifier": "Displacement",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeEeveeSpecular": {
+  "bl_idname": "ShaderNodeEeveeSpecular",
+  "label": "Specular BSDF",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Base Color",
+    "identifier": "Base Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Specular",
+    "identifier": "Specular",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.03,
+     0.03,
+     0.03,
+     1.0
+    ]
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.2
+   },
+   {
+    "name": "Emissive Color",
+    "identifier": "Emissive Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Transparency",
+    "identifier": "Transparency",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Clear Coat",
+    "identifier": "Clear Coat",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Clear Coat Roughness",
+    "identifier": "Clear Coat Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Clear Coat Normal",
+    "identifier": "Clear Coat Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSDF",
+    "identifier": "BSDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeEmission": {
+  "bl_idname": "ShaderNodeEmission",
+  "label": "Emission",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Strength",
+    "identifier": "Strength",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Emission",
+    "identifier": "Emission",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeFloatCurve": {
+  "bl_idname": "ShaderNodeFloatCurve",
+  "label": "Float Curve",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Factor",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeFresnel": {
+  "bl_idname": "ShaderNodeFresnel",
+  "label": "Fresnel",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.5
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeGamma": {
+  "bl_idname": "ShaderNodeGamma",
+  "label": "Gamma",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Gamma",
+    "identifier": "Gamma",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeGroup": {
+  "bl_idname": "ShaderNodeGroup",
+  "label": "Group",
+  "settings": {},
+  "inputs": [],
+  "outputs": []
+ },
+ "ShaderNodeHairInfo": {
+  "bl_idname": "ShaderNodeHairInfo",
+  "label": "Curves Info",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Is Strand",
+    "identifier": "Is Strand",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Intercept",
+    "identifier": "Intercept",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Length",
+    "identifier": "Length",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Thickness",
+    "identifier": "Thickness",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Tangent Normal",
+    "identifier": "Tangent Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Random",
+    "identifier": "Random",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeHoldout": {
+  "bl_idname": "ShaderNodeHoldout",
+  "label": "Holdout",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Holdout",
+    "identifier": "Holdout",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeHueSaturation": {
+  "bl_idname": "ShaderNodeHueSaturation",
+  "label": "Hue/Saturation/Value",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Hue",
+    "identifier": "Hue",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Saturation",
+    "identifier": "Saturation",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeInvert": {
+  "bl_idname": "ShaderNodeInvert",
+  "label": "Invert Color",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeLayerWeight": {
+  "bl_idname": "ShaderNodeLayerWeight",
+  "label": "Layer Weight",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Blend",
+    "identifier": "Blend",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Fresnel",
+    "identifier": "Fresnel",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Facing",
+    "identifier": "Facing",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeLightFalloff": {
+  "bl_idname": "ShaderNodeLightFalloff",
+  "label": "Light Falloff",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Strength",
+    "identifier": "Strength",
+    "type": "Float",
+    "enabled": true,
+    "default": 100.0
+   },
+   {
+    "name": "Smooth",
+    "identifier": "Smooth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Quadratic",
+    "identifier": "Quadratic",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Linear",
+    "identifier": "Linear",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Constant",
+    "identifier": "Constant",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeLightPath": {
+  "bl_idname": "ShaderNodeLightPath",
+  "label": "Light Path",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Is Camera Ray",
+    "identifier": "Is Camera Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Is Shadow Ray",
+    "identifier": "Is Shadow Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Is Diffuse Ray",
+    "identifier": "Is Diffuse Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Is Glossy Ray",
+    "identifier": "Is Glossy Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Is Singular Ray",
+    "identifier": "Is Singular Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Is Reflection Ray",
+    "identifier": "Is Reflection Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Is Transmission Ray",
+    "identifier": "Is Transmission Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Is Volume Scatter Ray",
+    "identifier": "Is Volume Scatter Ray",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Ray Length",
+    "identifier": "Ray Length",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Ray Depth",
+    "identifier": "Ray Depth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Diffuse Depth",
+    "identifier": "Diffuse Depth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Glossy Depth",
+    "identifier": "Glossy Depth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Transparent Depth",
+    "identifier": "Transparent Depth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Transmission Depth",
+    "identifier": "Transmission Depth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Portal Depth",
+    "identifier": "Portal Depth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeMapRange": {
+  "bl_idname": "ShaderNodeMapRange",
+  "label": "Map Range",
+  "settings": {
+   "clamp": {
+    "type": "BOOLEAN",
+    "value": true
+   },
+   "interpolation_type": {
+    "type": "ENUM",
+    "options": [
+     "LINEAR",
+     "STEPPED",
+     "SMOOTHSTEP",
+     "SMOOTHERSTEP"
+    ],
+    "value": "LINEAR"
+   },
+   "data_type": {
+    "type": "ENUM",
+    "options": [
+     "FLOAT",
+     "FLOAT_VECTOR"
+    ],
+    "value": "FLOAT"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "From Min",
+    "identifier": "From Min",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "From Max",
+    "identifier": "From Max",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "To Min",
+    "identifier": "To Min",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "To Max",
+    "identifier": "To Max",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Steps",
+    "identifier": "Steps",
+    "type": "Float",
+    "enabled": false,
+    "default": 4.0
+   },
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "From Min",
+    "identifier": "From_Min_FLOAT3",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "From Max",
+    "identifier": "From_Max_FLOAT3",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "To Min",
+    "identifier": "To_Min_FLOAT3",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "To Max",
+    "identifier": "To_Max_FLOAT3",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Steps",
+    "identifier": "Steps_FLOAT3",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     4.0,
+     4.0,
+     4.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Result",
+    "identifier": "Result",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeMapping": {
+  "bl_idname": "ShaderNodeMapping",
+  "label": "Mapping",
+  "settings": {
+   "vector_type": {
+    "type": "ENUM",
+    "options": [
+     "POINT",
+     "TEXTURE",
+     "VECTOR",
+     "NORMAL"
+    ],
+    "value": "POINT"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Location",
+    "identifier": "Location",
+    "type": "VectorTranslation",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Rotation",
+    "identifier": "Rotation",
+    "type": "VectorEuler",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "VectorXYZ",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeMath": {
+  "bl_idname": "ShaderNodeMath",
+  "label": "Math",
+  "settings": {
+   "operation": {
+    "type": "ENUM",
+    "options": [
+     "ADD",
+     "SUBTRACT",
+     "MULTIPLY",
+     "DIVIDE",
+     "MULTIPLY_ADD",
+     "POWER",
+     "LOGARITHM",
+     "SQRT",
+     "INVERSE_SQRT",
+     "ABSOLUTE",
+     "EXPONENT",
+     "MINIMUM",
+     "MAXIMUM",
+     "LESS_THAN",
+     "GREATER_THAN",
+     "SIGN",
+     "COMPARE",
+     "SMOOTH_MIN",
+     "SMOOTH_MAX",
+     "ROUND",
+     "FLOOR",
+     "CEIL",
+     "TRUNC",
+     "FRACT",
+     "MODULO",
+     "FLOORED_MODULO",
+     "WRAP",
+     "SNAP",
+     "PINGPONG",
+     "SINE",
+     "COSINE",
+     "TANGENT",
+     "ARCSINE",
+     "ARCCOSINE",
+     "ARCTANGENT",
+     "ARCTAN2",
+     "SINH",
+     "COSH",
+     "TANH",
+     "RADIANS",
+     "DEGREES"
+    ],
+    "value": "ADD"
+   },
+   "use_clamp": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Value",
+    "identifier": "Value_001",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Value",
+    "identifier": "Value_002",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.5
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeMix": {
+  "bl_idname": "ShaderNodeMix",
+  "label": "Mix",
+  "settings": {
+   "data_type": {
+    "type": "ENUM",
+    "options": [
+     "FLOAT",
+     "VECTOR",
+     "RGBA",
+     "ROTATION"
+    ],
+    "value": "FLOAT"
+   },
+   "factor_mode": {
+    "type": "ENUM",
+    "options": [
+     "UNIFORM",
+     "NON_UNIFORM"
+    ],
+    "value": "UNIFORM"
+   },
+   "blend_type": {
+    "type": "ENUM",
+    "options": [
+     "MIX",
+     "DARKEN",
+     "MULTIPLY",
+     "BURN",
+     "LIGHTEN",
+     "SCREEN",
+     "DODGE",
+     "ADD",
+     "OVERLAY",
+     "SOFT_LIGHT",
+     "LINEAR_LIGHT",
+     "DIFFERENCE",
+     "EXCLUSION",
+     "SUBTRACT",
+     "DIVIDE",
+     "HUE",
+     "SATURATION",
+     "COLOR",
+     "VALUE"
+    ],
+    "value": "MIX"
+   },
+   "clamp_factor": {
+    "type": "BOOLEAN",
+    "value": true
+   },
+   "clamp_result": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Factor_Float",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Factor",
+    "identifier": "Factor_Vector",
+    "type": "VectorFactor",
+    "enabled": false,
+    "default": [
+     0.5,
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "name": "A",
+    "identifier": "A_Float",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "B",
+    "identifier": "B_Float",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "A",
+    "identifier": "A_Vector",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "B",
+    "identifier": "B_Vector",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "A",
+    "identifier": "A_Color",
+    "type": "Color",
+    "enabled": false,
+    "default": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ]
+   },
+   {
+    "name": "B",
+    "identifier": "B_Color",
+    "type": "Color",
+    "enabled": false,
+    "default": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ]
+   },
+   {
+    "name": "A",
+    "identifier": "A_Rotation",
+    "type": "Rotation",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "B",
+    "identifier": "B_Rotation",
+    "type": "Rotation",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Result",
+    "identifier": "Result_Float",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Result",
+    "identifier": "Result_Vector",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Result",
+    "identifier": "Result_Color",
+    "type": "Color",
+    "enabled": false,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Result",
+    "identifier": "Result_Rotation",
+    "type": "Rotation",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeMixRGB": {
+  "bl_idname": "ShaderNodeMixRGB",
+  "label": "Mix (Legacy)",
+  "settings": {
+   "blend_type": {
+    "type": "ENUM",
+    "options": [
+     "MIX",
+     "DARKEN",
+     "MULTIPLY",
+     "BURN",
+     "LIGHTEN",
+     "SCREEN",
+     "DODGE",
+     "ADD",
+     "OVERLAY",
+     "SOFT_LIGHT",
+     "LINEAR_LIGHT",
+     "DIFFERENCE",
+     "EXCLUSION",
+     "SUBTRACT",
+     "DIVIDE",
+     "HUE",
+     "SATURATION",
+     "COLOR",
+     "VALUE"
+    ],
+    "value": "MIX"
+   },
+   "use_alpha": {
+    "type": "BOOLEAN",
+    "value": false
+   },
+   "use_clamp": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Color1",
+    "identifier": "Color1",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ]
+   },
+   {
+    "name": "Color2",
+    "identifier": "Color2",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeMixShader": {
+  "bl_idname": "ShaderNodeMixShader",
+  "label": "Mix Shader",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Shader",
+    "identifier": "Shader",
+    "type": "Shader",
+    "enabled": true
+   },
+   {
+    "name": "Shader",
+    "identifier": "Shader_001",
+    "type": "Shader",
+    "enabled": true
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Shader",
+    "identifier": "Shader",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeNewGeometry": {
+  "bl_idname": "ShaderNodeNewGeometry",
+  "label": "Geometry",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Position",
+    "identifier": "Position",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Tangent",
+    "identifier": "Tangent",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "True Normal",
+    "identifier": "True Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Incoming",
+    "identifier": "Incoming",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Parametric",
+    "identifier": "Parametric",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Backfacing",
+    "identifier": "Backfacing",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Pointiness",
+    "identifier": "Pointiness",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Random Per Island",
+    "identifier": "Random Per Island",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeNormal": {
+  "bl_idname": "ShaderNodeNormal",
+  "label": "Normal",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "VectorDirection",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "VectorDirection",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Dot",
+    "identifier": "Dot",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeNormalMap": {
+  "bl_idname": "ShaderNodeNormalMap",
+  "label": "Normal Map",
+  "settings": {
+   "space": {
+    "type": "ENUM",
+    "options": [
+     "TANGENT",
+     "OBJECT",
+     "WORLD",
+     "BLENDER_OBJECT",
+     "BLENDER_WORLD"
+    ],
+    "value": "TANGENT"
+   },
+   "uv_map": {
+    "type": "STRING",
+    "value": ""
+   },
+   "convention": {
+    "type": "ENUM",
+    "options": [
+     "OPENGL",
+     "DIRECTX"
+    ],
+    "value": "OPENGL"
+   },
+   "base": {
+    "type": "ENUM",
+    "options": [
+     "ORIGINAL",
+     "DISPLACED"
+    ],
+    "value": "DISPLACED"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Strength",
+    "identifier": "Strength",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.5,
+     0.5,
+     1.0,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeObjectInfo": {
+  "bl_idname": "ShaderNodeObjectInfo",
+  "label": "Object Info",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Location",
+    "identifier": "Location",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Object Index",
+    "identifier": "Object Index",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Material Index",
+    "identifier": "Material Index",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Random",
+    "identifier": "Random",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeOutputAOV": {
+  "bl_idname": "ShaderNodeOutputAOV",
+  "label": "AOV Output",
+  "settings": {
+   "aov_name": {
+    "type": "STRING",
+    "value": ""
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": []
+ },
+ "ShaderNodeOutputLight": {
+  "bl_idname": "ShaderNodeOutputLight",
+  "label": "Light Output",
+  "settings": {
+   "is_active_output": {
+    "type": "BOOLEAN",
+    "value": true
+   },
+   "target": {
+    "type": "ENUM",
+    "options": [
+     "ALL",
+     "EEVEE",
+     "CYCLES"
+    ],
+    "value": "ALL"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Surface",
+    "identifier": "Surface",
+    "type": "Shader",
+    "enabled": true
+   }
+  ],
+  "outputs": []
+ },
+ "ShaderNodeOutputLineStyle": {
+  "bl_idname": "ShaderNodeOutputLineStyle",
+  "label": "Line Style Output",
+  "settings": {
+   "is_active_output": {
+    "type": "BOOLEAN",
+    "value": true
+   },
+   "target": {
+    "type": "ENUM",
+    "options": [
+     "ALL",
+     "EEVEE",
+     "CYCLES"
+    ],
+    "value": "ALL"
+   },
+   "blend_type": {
+    "type": "ENUM",
+    "options": [
+     "MIX",
+     "DARKEN",
+     "MULTIPLY",
+     "BURN",
+     "LIGHTEN",
+     "SCREEN",
+     "DODGE",
+     "ADD",
+     "OVERLAY",
+     "SOFT_LIGHT",
+     "LINEAR_LIGHT",
+     "DIFFERENCE",
+     "EXCLUSION",
+     "SUBTRACT",
+     "DIVIDE",
+     "HUE",
+     "SATURATION",
+     "COLOR",
+     "VALUE"
+    ],
+    "value": "MIX"
+   },
+   "use_alpha": {
+    "type": "BOOLEAN",
+    "value": false
+   },
+   "use_clamp": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     0.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Color Fac",
+    "identifier": "Color Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Alpha Fac",
+    "identifier": "Alpha Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   }
+  ],
+  "outputs": []
+ },
+ "ShaderNodeOutputMaterial": {
+  "bl_idname": "ShaderNodeOutputMaterial",
+  "label": "Material Output",
+  "settings": {
+   "is_active_output": {
+    "type": "BOOLEAN",
+    "value": true
+   },
+   "target": {
+    "type": "ENUM",
+    "options": [
+     "ALL",
+     "EEVEE",
+     "CYCLES"
+    ],
+    "value": "ALL"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Surface",
+    "identifier": "Surface",
+    "type": "Shader",
+    "enabled": true
+   },
+   {
+    "name": "Volume",
+    "identifier": "Volume",
+    "type": "Shader",
+    "enabled": true
+   },
+   {
+    "name": "Displacement",
+    "identifier": "Displacement",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Thickness",
+    "identifier": "Thickness",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": []
+ },
+ "ShaderNodeOutputWorld": {
+  "bl_idname": "ShaderNodeOutputWorld",
+  "label": "World Output",
+  "settings": {
+   "is_active_output": {
+    "type": "BOOLEAN",
+    "value": true
+   },
+   "target": {
+    "type": "ENUM",
+    "options": [
+     "ALL",
+     "EEVEE",
+     "CYCLES"
+    ],
+    "value": "ALL"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Surface",
+    "identifier": "Surface",
+    "type": "Shader",
+    "enabled": true
+   },
+   {
+    "name": "Volume",
+    "identifier": "Volume",
+    "type": "Shader",
+    "enabled": true
+   }
+  ],
+  "outputs": []
+ },
+ "ShaderNodeParticleInfo": {
+  "bl_idname": "ShaderNodeParticleInfo",
+  "label": "Particle Info",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Index",
+    "identifier": "Index",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Random",
+    "identifier": "Random",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Age",
+    "identifier": "Age",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Lifetime",
+    "identifier": "Lifetime",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Location",
+    "identifier": "Location",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Size",
+    "identifier": "Size",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Velocity",
+    "identifier": "Velocity",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Angular Velocity",
+    "identifier": "Angular Velocity",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodePointInfo": {
+  "bl_idname": "ShaderNodePointInfo",
+  "label": "Point Info",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Position",
+    "identifier": "Position",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Radius",
+    "identifier": "Radius",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Random",
+    "identifier": "Random",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeRGB": {
+  "bl_idname": "ShaderNodeRGB",
+  "label": "Color",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeRGBCurve": {
+  "bl_idname": "ShaderNodeRGBCurve",
+  "label": "RGB Curves",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeRGBToBW": {
+  "bl_idname": "ShaderNodeRGBToBW",
+  "label": "RGB to BW",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Val",
+    "identifier": "Val",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeRadialTiling": {
+  "bl_idname": "ShaderNodeRadialTiling",
+  "label": "Radial Tiling",
+  "settings": {
+   "normalize": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector2D",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Sides",
+    "identifier": "Sides",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   },
+   {
+    "name": "Roundness",
+    "identifier": "Roundness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Segment Coordinates",
+    "identifier": "Segment Coordinates",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Segment ID",
+    "identifier": "Segment ID",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Segment Width",
+    "identifier": "Segment Width",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Segment Rotation",
+    "identifier": "Segment Rotation",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeRaycast": {
+  "bl_idname": "ShaderNodeRaycast",
+  "label": "Raycast",
+  "settings": {
+   "only_local": {
+    "type": "BOOLEAN",
+    "value": false
+   },
+   "sample_attribute_items": {
+    "type": "COLLECTION"
+   },
+   "active_index": {
+    "type": "INT",
+    "value": 0
+   }
+  },
+  "inputs": [
+   {
+    "name": "Position",
+    "identifier": "Position",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Direction",
+    "identifier": "Direction",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Length",
+    "identifier": "Length",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "",
+    "identifier": "__extend__",
+    "type": "Virtual",
+    "enabled": true
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Is Hit",
+    "identifier": "Is Hit",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Self Hit",
+    "identifier": "Self Hit",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Hit Distance",
+    "identifier": "Hit Distance",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Hit Position",
+    "identifier": "Hit Position",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Hit Normal",
+    "identifier": "Hit Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "",
+    "identifier": "__extend__",
+    "type": "Virtual",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeScript": {
+  "bl_idname": "ShaderNodeScript",
+  "label": "Script",
+  "settings": {
+   "filepath": {
+    "type": "STRING",
+    "value": ""
+   },
+   "mode": {
+    "type": "ENUM",
+    "options": [
+     "INTERNAL",
+     "EXTERNAL"
+    ],
+    "value": "INTERNAL"
+   },
+   "use_auto_update": {
+    "type": "BOOLEAN",
+    "value": false
+   },
+   "bytecode": {
+    "type": "STRING",
+    "value": ""
+   },
+   "bytecode_hash": {
+    "type": "STRING",
+    "value": ""
+   }
+  },
+  "inputs": [],
+  "outputs": []
+ },
+ "ShaderNodeSeparateColor": {
+  "bl_idname": "ShaderNodeSeparateColor",
+  "label": "Separate Color",
+  "settings": {
+   "mode": {
+    "type": "ENUM",
+    "options": [
+     "RGB",
+     "HSV",
+     "HSL"
+    ],
+    "value": "RGB"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Red",
+    "identifier": "Red",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Green",
+    "identifier": "Green",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Blue",
+    "identifier": "Blue",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeSeparateXYZ": {
+  "bl_idname": "ShaderNodeSeparateXYZ",
+  "label": "Separate XYZ",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "X",
+    "identifier": "X",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Y",
+    "identifier": "Y",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Z",
+    "identifier": "Z",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeShaderToRGB": {
+  "bl_idname": "ShaderNodeShaderToRGB",
+  "label": "Shader to RGB",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Shader",
+    "identifier": "Shader",
+    "type": "Shader",
+    "enabled": true
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeSqueeze": {
+  "bl_idname": "ShaderNodeSqueeze",
+  "label": "Squeeze Value (Legacy)",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Width",
+    "identifier": "Width",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Center",
+    "identifier": "Center",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeSubsurfaceScattering": {
+  "bl_idname": "ShaderNodeSubsurfaceScattering",
+  "label": "Subsurface Scattering",
+  "settings": {
+   "falloff": {
+    "type": "ENUM",
+    "options": [
+     "BURLEY",
+     "RANDOM_WALK",
+     "RANDOM_WALK_SKIN",
+     "RANDOM_WALK_LEGACY"
+    ],
+    "value": "RANDOM_WALK"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.005
+   },
+   {
+    "name": "Radius",
+    "identifier": "Radius",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     1.0,
+     0.2,
+     0.1
+    ]
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.4
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Anisotropy",
+    "identifier": "Anisotropy",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "BSSRDF",
+    "identifier": "BSSRDF",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeTangent": {
+  "bl_idname": "ShaderNodeTangent",
+  "label": "Tangent",
+  "settings": {
+   "direction_type": {
+    "type": "ENUM",
+    "options": [
+     "RADIAL",
+     "UV_MAP"
+    ],
+    "value": "RADIAL"
+   },
+   "axis": {
+    "type": "ENUM",
+    "options": [
+     "X",
+     "Y",
+     "Z"
+    ],
+    "value": "Z"
+   },
+   "uv_map": {
+    "type": "STRING",
+    "value": ""
+   }
+  },
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Tangent",
+    "identifier": "Tangent",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeTexBrick": {
+  "bl_idname": "ShaderNodeTexBrick",
+  "label": "Brick Texture",
+  "settings": {
+   "offset_frequency": {
+    "type": "INT",
+    "value": 2
+   },
+   "squash_frequency": {
+    "type": "INT",
+    "value": 2
+   },
+   "offset": {
+    "type": "FLOAT",
+    "value": 0.5
+   },
+   "squash": {
+    "type": "FLOAT",
+    "value": 1.0
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Color1",
+    "identifier": "Color1",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Color2",
+    "identifier": "Color2",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.2,
+     0.2,
+     0.2,
+     1.0
+    ]
+   },
+   {
+    "name": "Mortar",
+    "identifier": "Mortar",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   },
+   {
+    "name": "Mortar Size",
+    "identifier": "Mortar Size",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.02
+   },
+   {
+    "name": "Mortar Smooth",
+    "identifier": "Mortar Smooth",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.1
+   },
+   {
+    "name": "Bias",
+    "identifier": "Bias",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Brick Width",
+    "identifier": "Brick Width",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Row Height",
+    "identifier": "Row Height",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.25
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexChecker": {
+  "bl_idname": "ShaderNodeTexChecker",
+  "label": "Checker Texture",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Color1",
+    "identifier": "Color1",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Color2",
+    "identifier": "Color2",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.2,
+     0.2,
+     0.2,
+     1.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexCoord": {
+  "bl_idname": "ShaderNodeTexCoord",
+  "label": "Texture Coordinate",
+  "settings": {
+   "from_instancer": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Generated",
+    "identifier": "Generated",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Normal",
+    "identifier": "Normal",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "UV",
+    "identifier": "UV",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Object",
+    "identifier": "Object",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Camera",
+    "identifier": "Camera",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Window",
+    "identifier": "Window",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Reflection",
+    "identifier": "Reflection",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeTexEnvironment": {
+  "bl_idname": "ShaderNodeTexEnvironment",
+  "label": "Environment Texture",
+  "settings": {
+   "projection": {
+    "type": "ENUM",
+    "options": [
+     "EQUIRECTANGULAR",
+     "MIRROR_BALL"
+    ],
+    "value": "EQUIRECTANGULAR"
+   },
+   "interpolation": {
+    "type": "ENUM",
+    "options": [
+     "Linear",
+     "Closest",
+     "Cubic",
+     "Smart"
+    ],
+    "value": "Linear"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeTexGabor": {
+  "bl_idname": "ShaderNodeTexGabor",
+  "label": "Gabor Texture",
+  "settings": {
+   "gabor_type": {
+    "type": "ENUM",
+    "options": [
+     "2D",
+     "3D"
+    ],
+    "value": "2D"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   },
+   {
+    "name": "Frequency",
+    "identifier": "Frequency",
+    "type": "Float",
+    "enabled": true,
+    "default": 2.0
+   },
+   {
+    "name": "Anisotropy",
+    "identifier": "Anisotropy",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Orientation",
+    "identifier": "Orientation 2D",
+    "type": "FloatAngle",
+    "enabled": true,
+    "default": 0.7854
+   },
+   {
+    "name": "Orientation",
+    "identifier": "Orientation 3D",
+    "type": "VectorDirection",
+    "enabled": false,
+    "default": [
+     1.4142,
+     1.4142,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Phase",
+    "identifier": "Phase",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Intensity",
+    "identifier": "Intensity",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexGradient": {
+  "bl_idname": "ShaderNodeTexGradient",
+  "label": "Gradient Texture",
+  "settings": {
+   "gradient_type": {
+    "type": "ENUM",
+    "options": [
+     "LINEAR",
+     "QUADRATIC",
+     "EASING",
+     "DIAGONAL",
+     "SPHERICAL",
+     "QUADRATIC_SPHERE",
+     "RADIAL"
+    ],
+    "value": "LINEAR"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexIES": {
+  "bl_idname": "ShaderNodeTexIES",
+  "label": "IES Texture",
+  "settings": {
+   "filepath": {
+    "type": "STRING",
+    "value": ""
+   },
+   "mode": {
+    "type": "ENUM",
+    "options": [
+     "INTERNAL",
+     "EXTERNAL"
+    ],
+    "value": "INTERNAL"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Strength",
+    "identifier": "Strength",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexImage": {
+  "bl_idname": "ShaderNodeTexImage",
+  "label": "Image Texture",
+  "settings": {
+   "projection": {
+    "type": "ENUM",
+    "options": [
+     "FLAT",
+     "BOX",
+     "SPHERE",
+     "TUBE"
+    ],
+    "value": "FLAT"
+   },
+   "interpolation": {
+    "type": "ENUM",
+    "options": [
+     "Linear",
+     "Closest",
+     "Cubic",
+     "Smart"
+    ],
+    "value": "Linear"
+   },
+   "projection_blend": {
+    "type": "FLOAT",
+    "value": 0.0
+   },
+   "extension": {
+    "type": "ENUM",
+    "options": [
+     "REPEAT",
+     "EXTEND",
+     "CLIP",
+     "MIRROR"
+    ],
+    "value": "REPEAT"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexMagic": {
+  "bl_idname": "ShaderNodeTexMagic",
+  "label": "Magic Texture",
+  "settings": {
+   "turbulence_depth": {
+    "type": "INT",
+    "value": 2
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   },
+   {
+    "name": "Distortion",
+    "identifier": "Distortion",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexNoise": {
+  "bl_idname": "ShaderNodeTexNoise",
+  "label": "Noise Texture",
+  "settings": {
+   "noise_dimensions": {
+    "type": "ENUM",
+    "options": [
+     "1D",
+     "2D",
+     "3D",
+     "4D"
+    ],
+    "value": "3D"
+   },
+   "noise_type": {
+    "type": "ENUM",
+    "options": [
+     "MULTIFRACTAL",
+     "RIDGED_MULTIFRACTAL",
+     "HYBRID_MULTIFRACTAL",
+     "FBM",
+     "HETERO_TERRAIN"
+    ],
+    "value": "FBM"
+   },
+   "normalize": {
+    "type": "BOOLEAN",
+    "value": true
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "W",
+    "identifier": "W",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   },
+   {
+    "name": "Detail",
+    "identifier": "Detail",
+    "type": "Float",
+    "enabled": true,
+    "default": 2.0
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Lacunarity",
+    "identifier": "Lacunarity",
+    "type": "Float",
+    "enabled": true,
+    "default": 2.0
+   },
+   {
+    "name": "Offset",
+    "identifier": "Offset",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Gain",
+    "identifier": "Gain",
+    "type": "Float",
+    "enabled": false,
+    "default": 1.0
+   },
+   {
+    "name": "Distortion",
+    "identifier": "Distortion",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeTexSky": {
+  "bl_idname": "ShaderNodeTexSky",
+  "label": "Sky Texture",
+  "settings": {
+   "sky_type": {
+    "type": "ENUM",
+    "options": [
+     "SINGLE_SCATTERING",
+     "MULTIPLE_SCATTERING",
+     "PREETHAM",
+     "HOSEK_WILKIE"
+    ],
+    "value": "MULTIPLE_SCATTERING"
+   },
+   "sun_disc": {
+    "type": "BOOLEAN",
+    "value": true
+   },
+   "sun_size": {
+    "type": "FLOAT",
+    "value": 0.009512044489383698
+   },
+   "sun_intensity": {
+    "type": "FLOAT",
+    "value": 1.0
+   },
+   "sun_elevation": {
+    "type": "FLOAT",
+    "value": 0.2617993950843811
+   },
+   "sun_rotation": {
+    "type": "FLOAT",
+    "value": 0.0
+   },
+   "altitude": {
+    "type": "FLOAT",
+    "value": 100.0
+   },
+   "air_density": {
+    "type": "FLOAT",
+    "value": 1.0
+   },
+   "aerosol_density": {
+    "type": "FLOAT",
+    "value": 1.0
+   },
+   "ozone_density": {
+    "type": "FLOAT",
+    "value": 1.0
+   },
+   "sun_direction": {
+    "type": "FLOAT",
+    "value": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "turbidity": {
+    "type": "FLOAT",
+    "value": 2.200000047683716
+   },
+   "ground_albedo": {
+    "type": "FLOAT",
+    "value": 0.30000001192092896
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeTexVoronoi": {
+  "bl_idname": "ShaderNodeTexVoronoi",
+  "label": "Voronoi Texture",
+  "settings": {
+   "voronoi_dimensions": {
+    "type": "ENUM",
+    "options": [
+     "1D",
+     "2D",
+     "3D",
+     "4D"
+    ],
+    "value": "3D"
+   },
+   "distance": {
+    "type": "ENUM",
+    "options": [
+     "EUCLIDEAN",
+     "MANHATTAN",
+     "CHEBYCHEV",
+     "MINKOWSKI"
+    ],
+    "value": "EUCLIDEAN"
+   },
+   "feature": {
+    "type": "ENUM",
+    "options": [
+     "F1",
+     "F2",
+     "SMOOTH_F1",
+     "DISTANCE_TO_EDGE",
+     "N_SPHERE_RADIUS"
+    ],
+    "value": "F1"
+   },
+   "normalize": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "W",
+    "identifier": "W",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   },
+   {
+    "name": "Detail",
+    "identifier": "Detail",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Roughness",
+    "identifier": "Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Lacunarity",
+    "identifier": "Lacunarity",
+    "type": "Float",
+    "enabled": true,
+    "default": 2.0
+   },
+   {
+    "name": "Smoothness",
+    "identifier": "Smoothness",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.0
+   },
+   {
+    "name": "Exponent",
+    "identifier": "Exponent",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.5
+   },
+   {
+    "name": "Randomness",
+    "identifier": "Randomness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Distance",
+    "identifier": "Distance",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Position",
+    "identifier": "Position",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "W",
+    "identifier": "W",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Radius",
+    "identifier": "Radius",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexWave": {
+  "bl_idname": "ShaderNodeTexWave",
+  "label": "Wave Texture",
+  "settings": {
+   "wave_type": {
+    "type": "ENUM",
+    "options": [
+     "BANDS",
+     "RINGS"
+    ],
+    "value": "BANDS"
+   },
+   "bands_direction": {
+    "type": "ENUM",
+    "options": [
+     "X",
+     "Y",
+     "Z",
+     "DIAGONAL"
+    ],
+    "value": "X"
+   },
+   "rings_direction": {
+    "type": "ENUM",
+    "options": [
+     "X",
+     "Y",
+     "Z",
+     "SPHERICAL"
+    ],
+    "value": "X"
+   },
+   "wave_profile": {
+    "type": "ENUM",
+    "options": [
+     "SIN",
+     "SAW",
+     "TRI"
+    ],
+    "value": "SIN"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 5.0
+   },
+   {
+    "name": "Distortion",
+    "identifier": "Distortion",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Detail",
+    "identifier": "Detail",
+    "type": "Float",
+    "enabled": true,
+    "default": 2.0
+   },
+   {
+    "name": "Detail Scale",
+    "identifier": "Detail Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Detail Roughness",
+    "identifier": "Detail Roughness",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   },
+   {
+    "name": "Phase Offset",
+    "identifier": "Phase Offset",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeTexWhiteNoise": {
+  "bl_idname": "ShaderNodeTexWhiteNoise",
+  "label": "White Noise Texture",
+  "settings": {
+   "noise_dimensions": {
+    "type": "ENUM",
+    "options": [
+     "1D",
+     "2D",
+     "3D",
+     "4D"
+    ],
+    "value": "3D"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "W",
+    "identifier": "W",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeTree": {
+  "error": "Error: Node type ShaderNodeTree undefined\n"
+ },
+ "ShaderNodeUVAlongStroke": {
+  "bl_idname": "ShaderNodeUVAlongStroke",
+  "label": "UV Along Stroke",
+  "settings": {
+   "use_tips": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "UV",
+    "identifier": "UV",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeUVMap": {
+  "bl_idname": "ShaderNodeUVMap",
+  "label": "UV Map",
+  "settings": {
+   "from_instancer": {
+    "type": "BOOLEAN",
+    "value": false
+   },
+   "uv_map": {
+    "type": "STRING",
+    "value": ""
+   }
+  },
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "UV",
+    "identifier": "UV",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeValToRGB": {
+  "bl_idname": "ShaderNodeValToRGB",
+  "label": "Color Ramp",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.5
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeValue": {
+  "bl_idname": "ShaderNodeValue",
+  "label": "Value",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeVectorCurve": {
+  "bl_idname": "ShaderNodeVectorCurve",
+  "label": "Vector Curves",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeVectorDisplacement": {
+  "bl_idname": "ShaderNodeVectorDisplacement",
+  "label": "Vector Displacement",
+  "settings": {
+   "space": {
+    "type": "ENUM",
+    "options": [
+     "TANGENT",
+     "OBJECT",
+     "WORLD"
+    ],
+    "value": "TANGENT"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Midlevel",
+    "identifier": "Midlevel",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.01
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Displacement",
+    "identifier": "Displacement",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeVectorMath": {
+  "bl_idname": "ShaderNodeVectorMath",
+  "label": "Vector Math",
+  "settings": {
+   "operation": {
+    "type": "ENUM",
+    "options": [
+     "ADD",
+     "SUBTRACT",
+     "MULTIPLY",
+     "DIVIDE",
+     "MULTIPLY_ADD",
+     "CROSS_PRODUCT",
+     "PROJECT",
+     "REFLECT",
+     "REFRACT",
+     "FACEFORWARD",
+     "DOT_PRODUCT",
+     "DISTANCE",
+     "LENGTH",
+     "SCALE",
+     "NORMALIZE",
+     "ABSOLUTE",
+     "POWER",
+     "SIGN",
+     "MINIMUM",
+     "MAXIMUM",
+     "ROUND",
+     "FLOOR",
+     "CEIL",
+     "FRACTION",
+     "MODULO",
+     "WRAP",
+     "SNAP",
+     "SINE",
+     "COSINE",
+     "TANGENT"
+    ],
+    "value": "ADD"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Vector",
+    "identifier": "Vector_001",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Vector",
+    "identifier": "Vector_002",
+    "type": "Vector",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Scale",
+    "identifier": "Scale",
+    "type": "Float",
+    "enabled": false,
+    "default": 1.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Value",
+    "identifier": "Value",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeVectorRotate": {
+  "bl_idname": "ShaderNodeVectorRotate",
+  "label": "Vector Rotate",
+  "settings": {
+   "rotation_type": {
+    "type": "ENUM",
+    "options": [
+     "AXIS_ANGLE",
+     "X_AXIS",
+     "Y_AXIS",
+     "Z_AXIS",
+     "EULER_XYZ"
+    ],
+    "value": "AXIS_ANGLE"
+   },
+   "invert": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Center",
+    "identifier": "Center",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "Axis",
+    "identifier": "Axis",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Angle",
+    "identifier": "Angle",
+    "type": "FloatAngle",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Rotation",
+    "identifier": "Rotation",
+    "type": "VectorEuler",
+    "enabled": false,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeVectorTransform": {
+  "bl_idname": "ShaderNodeVectorTransform",
+  "label": "Vector Transform",
+  "settings": {
+   "vector_type": {
+    "type": "ENUM",
+    "options": [
+     "POINT",
+     "VECTOR",
+     "NORMAL"
+    ],
+    "value": "VECTOR"
+   },
+   "convert_from": {
+    "type": "ENUM",
+    "options": [
+     "WORLD",
+     "OBJECT",
+     "CAMERA"
+    ],
+    "value": "WORLD"
+   },
+   "convert_to": {
+    "type": "ENUM",
+    "options": [
+     "WORLD",
+     "OBJECT",
+     "CAMERA"
+    ],
+    "value": "OBJECT"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.5,
+     0.5,
+     0.5
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Vector",
+    "identifier": "Vector",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeVertexColor": {
+  "bl_idname": "ShaderNodeVertexColor",
+  "label": "Color Attribute",
+  "settings": {
+   "layer_name": {
+    "type": "STRING",
+    "value": ""
+   }
+  },
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeVolumeAbsorption": {
+  "bl_idname": "ShaderNodeVolumeAbsorption",
+  "label": "Volume Absorption",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Density",
+    "identifier": "Density",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Volume",
+    "identifier": "Volume",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeVolumeCoefficients": {
+  "bl_idname": "ShaderNodeVolumeCoefficients",
+  "label": "Volume Coefficients",
+  "settings": {
+   "phase": {
+    "type": "ENUM",
+    "options": [
+     "HENYEY_GREENSTEIN",
+     "FOURNIER_FORAND",
+     "DRAINE",
+     "RAYLEIGH",
+     "MIE"
+    ],
+    "value": "HENYEY_GREENSTEIN"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   },
+   {
+    "name": "Absorption Coefficients",
+    "identifier": "Absorption Coefficients",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Scatter Coefficients",
+    "identifier": "Scatter Coefficients",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Anisotropy",
+    "identifier": "Anisotropy",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.33
+   },
+   {
+    "name": "Backscatter",
+    "identifier": "Backscatter",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 0.1
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.5
+   },
+   {
+    "name": "Diameter",
+    "identifier": "Diameter",
+    "type": "Float",
+    "enabled": false,
+    "default": 20.0
+   },
+   {
+    "name": "Emission Coefficients",
+    "identifier": "Emission Coefficients",
+    "type": "Vector",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Volume",
+    "identifier": "Volume",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeVolumeInfo": {
+  "bl_idname": "ShaderNodeVolumeInfo",
+  "label": "Volume Info",
+  "settings": {},
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Density",
+    "identifier": "Density",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Flame",
+    "identifier": "Flame",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Temperature",
+    "identifier": "Temperature",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ },
+ "ShaderNodeVolumePrincipled": {
+  "bl_idname": "ShaderNodeVolumePrincipled",
+  "label": "Principled Volume",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ]
+   },
+   {
+    "name": "Color Attribute",
+    "identifier": "Color Attribute",
+    "type": "String",
+    "enabled": true,
+    "default": ""
+   },
+   {
+    "name": "Density",
+    "identifier": "Density",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Density Attribute",
+    "identifier": "Density Attribute",
+    "type": "String",
+    "enabled": true,
+    "default": "density"
+   },
+   {
+    "name": "Anisotropy",
+    "identifier": "Anisotropy",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Absorption Color",
+    "identifier": "Absorption Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Emission Strength",
+    "identifier": "Emission Strength",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Emission Color",
+    "identifier": "Emission Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Blackbody Intensity",
+    "identifier": "Blackbody Intensity",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "Blackbody Tint",
+    "identifier": "Blackbody Tint",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "name": "Temperature",
+    "identifier": "Temperature",
+    "type": "FloatColorTemperature",
+    "enabled": true,
+    "default": 1000.0
+   },
+   {
+    "name": "Temperature Attribute",
+    "identifier": "Temperature Attribute",
+    "type": "String",
+    "enabled": true,
+    "default": "temperature"
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Volume",
+    "identifier": "Volume",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeVolumeScatter": {
+  "bl_idname": "ShaderNodeVolumeScatter",
+  "label": "Volume Scatter",
+  "settings": {
+   "phase": {
+    "type": "ENUM",
+    "options": [
+     "HENYEY_GREENSTEIN",
+     "FOURNIER_FORAND",
+     "DRAINE",
+     "RAYLEIGH",
+     "MIE"
+    ],
+    "value": "HENYEY_GREENSTEIN"
+   }
+  },
+  "inputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   },
+   {
+    "name": "Density",
+    "identifier": "Density",
+    "type": "Float",
+    "enabled": true,
+    "default": 1.0
+   },
+   {
+    "name": "Anisotropy",
+    "identifier": "Anisotropy",
+    "type": "FloatFactor",
+    "enabled": true,
+    "default": 0.0
+   },
+   {
+    "name": "IOR",
+    "identifier": "IOR",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 1.33
+   },
+   {
+    "name": "Backscatter",
+    "identifier": "Backscatter",
+    "type": "FloatFactor",
+    "enabled": false,
+    "default": 0.1
+   },
+   {
+    "name": "Alpha",
+    "identifier": "Alpha",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.5
+   },
+   {
+    "name": "Diameter",
+    "identifier": "Diameter",
+    "type": "Float",
+    "enabled": false,
+    "default": 20.0
+   },
+   {
+    "name": "Weight",
+    "identifier": "Weight",
+    "type": "Float",
+    "enabled": false,
+    "default": 0.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Volume",
+    "identifier": "Volume",
+    "type": "Shader",
+    "enabled": true
+   }
+  ]
+ },
+ "ShaderNodeWavelength": {
+  "bl_idname": "ShaderNodeWavelength",
+  "label": "Wavelength",
+  "settings": {},
+  "inputs": [
+   {
+    "name": "Wavelength",
+    "identifier": "Wavelength",
+    "type": "FloatWavelength",
+    "enabled": true,
+    "default": 500.0
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Color",
+    "identifier": "Color",
+    "type": "Color",
+    "enabled": true,
+    "default": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ]
+   }
+  ]
+ },
+ "ShaderNodeWireframe": {
+  "bl_idname": "ShaderNodeWireframe",
+  "label": "Wireframe",
+  "settings": {
+   "use_pixel_size": {
+    "type": "BOOLEAN",
+    "value": false
+   }
+  },
+  "inputs": [
+   {
+    "name": "Size",
+    "identifier": "Size",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.01
+   }
+  ],
+  "outputs": [
+   {
+    "name": "Factor",
+    "identifier": "Fac",
+    "type": "Float",
+    "enabled": true,
+    "default": 0.0
+   }
+  ]
+ }
+}

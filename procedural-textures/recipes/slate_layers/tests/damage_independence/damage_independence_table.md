@@ -1,0 +1,11 @@
+| changed | colour changed % | colour outside damage masks % | height changed % | height outside damage masks % | roughness changed % | roughness outside damage masks % | damage mask share of dots % (normal / changed) |
+|---|---|---|---|---|---|---|---|
+| damage Amount 0 | 4.804 | 0.001 | 4.751 | 0.0 | 4.427 | 0.0 | 5.07 / 0.00 |
+| damage Seed + 1 | 8.903 | 0.001 | 8.794 | 0.0 | 7.959 | 0.0 | 5.07 / 5.76 |
+
+| changed | damage Mask differs % | damage Colour differs % | damage Height differs % | damage Roughness differs % |
+|---|---|---|---|---|
+| colour_and_fade Seed + 1 | 0.0 | 0.0 | 0.0 | 0.0 |
+| moss Seed + 1 | 0.0 | 0.0 | 0.0 | 0.0 |
+| outline_and_shadow Seed + 1 | 0.0 | 0.0 | 0.0 | 0.0 |
+| layout Seed + 1 | 9.1098 | 17.9599 | 9.0162 | 8.7592 |

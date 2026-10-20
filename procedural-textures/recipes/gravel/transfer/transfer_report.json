@@ -1,0 +1,53 @@
+{
+ "surface": "rounded pebbles on sand (never given as a reference)",
+ "description": "description/transfer_pebbles.json",
+ "description_bytes": 1992,
+ "what_was_changed_numbers_only": [
+  "stones/tones",
+  "soil/tones",
+  "ground",
+  "stones/rim",
+  "stones/rim_rgb",
+  "stones/shadow",
+  "stones/shadow_rgb",
+  "stones/chip",
+  "stones/facets",
+  "stones/mottle_per_radius",
+  "stones/mottle_shift",
+  "stones/lit_shift",
+  "stones/shade_shift",
+  "light",
+  "stones/classes",
+  "soil/layers/0/count",
+  "soil/layers/1/count",
+  "soil/layers/2/count",
+  "soil/specks",
+  "soil/weights_note",
+  "maps/height/mix and offset (new height stretch from the tile itself, percentiles 1 and 99)"
+ ],
+ "number_of_description_keys_changed": 21,
+ "generator_code_changed": false,
+ "one_number_that_had_to_be_found_again": {
+  "name": "height stretch (mix and offset of the colour->height rule)",
+  "how": "1st and 99th percentile of the tile's own mix stretched to 10 and 245",
+  "values": {
+   "percentile_1": 118.14901960784313,
+   "percentile_99": 452.2649019607843,
+   "gain": 0.70334878529288
+  }
+ },
+ "time_taken_minutes_by_me": "about 12 (one script of 70 lines written in one go, one import slip fixed, one preview look, one bake)",
+ "bake_seconds_1254": 48.2,
+ "bake_shapes": 24656,
+ "half_tile_test": {
+  "colour_mean_difference_levels": 1.54,
+  "colour_share_over_40": 0.0,
+  "wrong_roll_mean_difference": 28.643,
+  "wrong_roll_share_over_40": 0.2664,
+  "height_mean_difference_levels": 1.99
+ },
+ "pictures": [
+  "transfer/pebbles_sheet.png",
+  "transfer/pebbles_2x2_tiling.png"
+ ]
+}

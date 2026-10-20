@@ -1,0 +1,47 @@
+{
+ "reference": "metal",
+ "candidate": "proc-work/recipes/metal/outputs/trial_t3",
+ "colour_mae_levels": 16.06,
+ "colour_psnr_db": 21.41,
+ "colour_ssim": 0.4774,
+ "colour_mean_delta_e": 12.04,
+ "colour_p95_delta_e": 29.25,
+ "edge_precision_2px": 0.49,
+ "edge_recall_2px": 0.393,
+ "edge_f1_2px": 0.436,
+ "edge_f1_by_luck": 0.334,
+ "edge_skill_2px": 0.154,
+ "height_mae_levels": 37.4,
+ "height_mae_best_fit_levels": 31.57,
+ "height_best_fit_gain_offset": [
+  0.385,
+  75.4
+ ],
+ "height_ssim": 0.2454,
+ "height_correlation": 0.3693,
+ "normal_mean_angle_degrees": 15.98,
+ "normal_median_angle_degrees": 12.71,
+ "normal_p95_angle_degrees": 40.82,
+ "tier_reached": "none",
+ "tier_rules": {
+  "layout": {
+   "edge_skill_2px": "min 0.3",
+   "colour_mean_delta_e": "max 20.0",
+   "height_mae_best_fit_levels": "max 40.0"
+  },
+  "close": {
+   "edge_skill_2px": "min 0.55",
+   "colour_ssim": "min 0.6",
+   "colour_mean_delta_e": "max 10.0",
+   "height_mae_best_fit_levels": "max 20.0",
+   "normal_mean_angle_degrees": "max 12.0"
+  },
+  "exact": {
+   "edge_skill_2px": "min 0.85",
+   "colour_ssim": "min 0.92",
+   "colour_mean_delta_e": "max 3.0",
+   "height_mae_best_fit_levels": "max 6.0",
+   "normal_mean_angle_degrees": "max 4.0"
+  }
+ }
+}

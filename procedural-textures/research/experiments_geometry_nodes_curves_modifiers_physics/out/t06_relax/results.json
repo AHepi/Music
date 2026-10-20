@@ -1,0 +1,47 @@
+{
+ "radius": 0.032,
+ "A_random": {
+  "min_distance": 0.0067,
+  "median_nearest": 0.0318,
+  "share_touching_(closer_than_0.9x_2r)": 0.923,
+  "points": 220
+ },
+ "B_poisson": {
+  "min_distance": 0.0048,
+  "median_nearest": 0.0669,
+  "share_touching_(closer_than_0.9x_2r)": 0.174,
+  "points": 161,
+  "note": "Distance Min 2r; Poisson keeps spacing inside the tile but is unaware of the wrap-around neighbours"
+ },
+ "C_repeat_zone_5_iterations": {
+  "min_distance": 0.0315,
+  "median_nearest": 0.0528,
+  "share_touching_(closer_than_0.9x_2r)": 0.736,
+  "points": 220,
+  "seconds": 0.03
+ },
+ "C_repeat_zone_15_iterations": {
+  "min_distance": 0.0482,
+  "median_nearest": 0.0594,
+  "share_touching_(closer_than_0.9x_2r)": 0.35,
+  "points": 220,
+  "seconds": 0.05
+ },
+ "C_repeat_zone_40_iterations": {
+  "min_distance": 0.0604,
+  "median_nearest": 0.0629,
+  "share_touching_(closer_than_0.9x_2r)": 0.0,
+  "points": 220,
+  "seconds": 0.13
+ },
+ "D_simulation_zone_40_steps": {
+  "min_distance": 0.0596,
+  "median_nearest": 0.0628,
+  "share_touching_(closer_than_0.9x_2r)": 0.0,
+  "points": 220,
+  "seconds": 0.13
+ },
+ "D_equals_C_40?": {
+  "max_abs_difference_of_sorted_points": 0.001590445637702942
+ }
+}

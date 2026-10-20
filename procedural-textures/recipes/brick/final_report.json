@@ -1,0 +1,777 @@
+{
+ "surface": "brick",
+ "classes": {
+  "S": {
+   "size_limit_kilobytes": 8,
+   "description_bytes": 7986,
+   "tier": "layout",
+   "colour_ssim": 0.5316,
+   "colour_mean_delta_e": 10.0,
+   "edge_skill": 0.306,
+   "height_mae_best_fit_levels": 31.3,
+   "normal_mean_angle_degrees": 17.66,
+   "texture_compare_overall": 0.365,
+   "texture_groups": {
+    "colour": 0.363,
+    "height": 0.393,
+    "normal": 0.0,
+    "tiling": 1.0
+   },
+   "seam_ratio_from_texture_compare": 0.39,
+   "reference_seam_ratio": 2.22,
+   "bake_seconds_1254px_16_samples": 16.18,
+   "shapes": 376
+  },
+  "M": {
+   "size_limit_kilobytes": 64,
+   "description_bytes": 63973,
+   "tier": "layout",
+   "colour_ssim": 0.552,
+   "colour_mean_delta_e": 7.93,
+   "edge_skill": 0.421,
+   "height_mae_best_fit_levels": 25.03,
+   "normal_mean_angle_degrees": 17.33,
+   "texture_compare_overall": 0.406,
+   "texture_groups": {
+    "colour": 0.393,
+    "height": 0.446,
+    "normal": 0.07,
+    "tiling": 1.0
+   },
+   "seam_ratio_from_texture_compare": 0.7,
+   "reference_seam_ratio": 2.22,
+   "bake_seconds_1254px_16_samples": 18.65,
+   "shapes": 2132
+  },
+  "L": {
+   "size_limit_kilobytes": 512,
+   "description_bytes": 508878,
+   "tier": "layout",
+   "colour_ssim": 0.673,
+   "colour_mean_delta_e": 5.71,
+   "edge_skill": 0.656,
+   "height_mae_best_fit_levels": 15.35,
+   "normal_mean_angle_degrees": 13.93,
+   "texture_compare_overall": 0.432,
+   "texture_groups": {
+    "colour": 0.509,
+    "height": 0.453,
+    "normal": 0.138,
+    "tiling": 0.444
+   },
+   "seam_ratio_from_texture_compare": 2.11,
+   "reference_seam_ratio": 2.22,
+   "bake_seconds_1254px_16_samples": 19.52,
+   "shapes": 12555
+  }
+ },
+ "half_tile_shift_test": {
+  "S_class_description": {
+   "seamless_test": {
+    "share_over_40_levels": 0.0,
+    "mean_abs_difference": 0.357
+   },
+   "wrongly_rolled_control": {
+    "share_over_40_levels": 0.35921,
+    "mean_abs_difference": 22.221
+   }
+  },
+  "M_class_description": {
+   "seamless_test": {
+    "share_over_40_levels": 1e-05,
+    "mean_abs_difference": 0.444
+   },
+   "wrongly_rolled_control": {
+    "share_over_40_levels": 0.42023,
+    "mean_abs_difference": 23.787
+   }
+  },
+  "sampled_blob_tile": {
+   "seamless_test": {
+    "share_over_40_levels": 2e-05,
+    "mean_abs_difference": 0.685
+   },
+   "wrongly_rolled_control": {
+    "share_over_40_levels": 0.4444,
+    "mean_abs_difference": 24.333
+   }
+  },
+  "sampled_mosaic_tile": {
+   "seamless_test": {
+    "share_over_40_levels": 5e-05,
+    "mean_abs_difference": 0.725
+   },
+   "wrongly_rolled_control": {
+    "share_over_40_levels": 0.47447,
+    "mean_abs_difference": 25.21
+   }
+  },
+  "cobblestone_tile": {
+   "seamless_test": {
+    "share_over_40_levels": 0.00023,
+    "mean_abs_difference": 0.826
+   },
+   "wrongly_rolled_control": {
+    "share_over_40_levels": 0.35955,
+    "mean_abs_difference": 30.873
+   }
+  }
+ },
+ "derivation_ceiling": {
+  "grey_weights_red_green_blue_offset": [
+   0.6831,
+   1.5919,
+   -0.055,
+   -78.1925
+  ],
+  "plain_grey_fit_mae_levels": 7.526477140786174,
+  "corr_with_height_luma_601": 0.974033590656195,
+  "corr_with_height_luma_709": 0.9670956330340474,
+  "corr_with_height_mean": 0.9720655079638877,
+  "tone_curve_and_blur": {
+   "sigma": 0.7,
+   "mae": 3.039554448252483,
+   "curve_x": [
+    41.6,
+    59.2,
+    66.8,
+    72.6,
+    77.2,
+    81.4,
+    84.6,
+    88.8,
+    94.1,
+    100.7,
+    108.0,
+    137.4
+   ],
+   "curve_y": [
+    7.5,
+    48.1,
+    69.4,
+    85.1,
+    97.3,
+    108.7,
+    117.3,
+    128.4,
+    142.3,
+    160.4,
+    180.5,
+    243.8
+   ]
+  },
+  "curve_then_blur": "not used (blur first fits better: 3.0 against 5.0 levels)",
+  "height_pred_mae_levels": 3.039554448252483,
+  "height_pred_correlation": 0.9968835467407346,
+  "height_pred_mae_after_linear_fix": 3.009701096012006,
+  "height16_vs_height8_mae_levels": 5.415743045819368,
+  "height16_equals_blurred_height8": {
+   "0.5": 3.9327836851142712,
+   "0.8": 3.4253666778100857,
+   "1.0": 4.540511525886413,
+   "1.3": 6.558069132299239
+  },
+  "normal_from_uploaded_height_by_strength": {
+   "2": 12.87620892729487,
+   "3": 10.472679174290455,
+   "4": 8.417667054538468,
+   "5": 6.814139118322129,
+   "6": 5.924907508471592,
+   "7": 6.054672985182869,
+   "8": 6.921757347221508,
+   "10": 9.315735418954526,
+   "12": 11.774588456944452,
+   "16": 16.244277492727385,
+   "24": 23.3310225243195,
+   "32": 28.661722681798302
+  },
+  "best_whole_strength": 6,
+  "normal_from_predicted_height_angle": 6.504167982636489,
+  "normal_reference_mean_angle_from_flat": 18.399446414256513,
+  "normal_flat_guess_angle": 18.399446414256513,
+  "normal_gl_is_dx_with_green_flipped": 1.1102230246251565e-16
+ },
+ "rate_distortion": [
+  {
+   "tag": "R0",
+   "what": "layout only: brick rectangles, one colour",
+   "class": "layout",
+   "description_bytes": 1731,
+   "description_kilobytes": 1.7,
+   "colour_ssim": 0.5182,
+   "colour_mean_delta_e": 14.31,
+   "edge_skill_2px": 0.174,
+   "height_mae_best_fit_levels": 38.08,
+   "normal_mean_angle_degrees": 17.63,
+   "tier": "none",
+   "texture_overall": 0.127,
+   "texture_groups": {
+    "colour": 0.143,
+    "height": 0.196,
+    "normal": 0.0,
+    "tiling": 0.0
+   }
+  },
+  {
+   "tag": "R1",
+   "what": "layout + one base colour per brick",
+   "class": "layout",
+   "description_bytes": 1735,
+   "description_kilobytes": 1.7,
+   "colour_ssim": 0.5178,
+   "colour_mean_delta_e": 12.68,
+   "edge_skill_2px": 0.213,
+   "height_mae_best_fit_levels": 36.06,
+   "normal_mean_angle_degrees": 17.82,
+   "tier": "none",
+   "texture_overall": 0.235,
+   "texture_groups": {
+    "colour": 0.335,
+    "height": 0.254,
+    "normal": 0.0,
+    "tiling": 0.0
+   }
+  },
+  {
+   "tag": "S",
+   "what": "S class: layout + 146 patches + outline (ellipses)",
+   "class": "S",
+   "description_bytes": 7986,
+   "description_kilobytes": 7.8,
+   "colour_ssim": 0.5307,
+   "colour_mean_delta_e": 10.02,
+   "edge_skill_2px": 0.307,
+   "height_mae_best_fit_levels": 31.32,
+   "normal_mean_angle_degrees": 17.69,
+   "tier": "layout",
+   "texture_overall": 0.362,
+   "texture_groups": {
+    "colour": 0.361,
+    "height": 0.387,
+    "normal": 0.0,
+    "tiling": 1.0
+   }
+  },
+  {
+   "tag": "M",
+   "what": "M class: layout + 1818 patches + outline (ellipses)",
+   "class": "M",
+   "description_bytes": 63973,
+   "description_kilobytes": 62.5,
+   "colour_ssim": 0.5505,
+   "colour_mean_delta_e": 7.95,
+   "edge_skill_2px": 0.423,
+   "height_mae_best_fit_levels": 25.08,
+   "normal_mean_angle_degrees": 17.37,
+   "tier": "layout",
+   "texture_overall": 0.406,
+   "texture_groups": {
+    "colour": 0.392,
+    "height": 0.445,
+    "normal": 0.072,
+    "tiling": 1.0
+   }
+  },
+  {
+   "tag": "M+ (200 KB ellipses)",
+   "what": "ellipse patches, 5990 patches, 200 KB",
+   "class": "in between",
+   "description_bytes": 199978,
+   "description_kilobytes": 195.3,
+   "colour_ssim": 0.5923,
+   "colour_mean_delta_e": 7.1,
+   "edge_skill_2px": 0.555,
+   "height_mae_best_fit_levels": 21.29,
+   "normal_mean_angle_degrees": 16.31,
+   "tier": "layout",
+   "texture_overall": 0.451,
+   "texture_groups": {
+    "colour": 0.443,
+    "height": 0.485,
+    "normal": 0.132,
+    "tiling": 1.0
+   }
+  },
+  {
+   "tag": "L-ellipses (376 KB)",
+   "what": "ellipse patches, 11406 patches, 376 KB",
+   "class": "in between",
+   "description_bytes": 375773,
+   "description_kilobytes": 367.0,
+   "colour_ssim": 0.6263,
+   "colour_mean_delta_e": 6.7,
+   "edge_skill_2px": 0.624,
+   "height_mae_best_fit_levels": 19.28,
+   "normal_mean_angle_degrees": 15.39,
+   "tier": "layout",
+   "texture_overall": 0.491,
+   "texture_groups": {
+    "colour": 0.499,
+    "height": 0.509,
+    "normal": 0.176,
+    "tiling": 0.992
+   }
+  },
+  {
+   "tag": "L-300",
+   "what": "traced patches >= 300 dots (640 regions)",
+   "class": "L steps",
+   "description_bytes": 89783,
+   "description_kilobytes": 87.7,
+   "colour_ssim": 0.5211,
+   "colour_mean_delta_e": 9.9,
+   "edge_skill_2px": 0.146,
+   "height_mae_best_fit_levels": 30.34,
+   "normal_mean_angle_degrees": 17.19,
+   "tier": "none",
+   "texture_overall": 0.242,
+   "texture_groups": {
+    "colour": 0.277,
+    "height": 0.336,
+    "normal": 0.066,
+    "tiling": 0.0
+   }
+  },
+  {
+   "tag": "L-80",
+   "what": "traced patches >= 80 dots (2449 regions)",
+   "class": "L steps",
+   "description_bytes": 200320,
+   "description_kilobytes": 195.6,
+   "colour_ssim": 0.566,
+   "colour_mean_delta_e": 7.06,
+   "edge_skill_2px": 0.38,
+   "height_mae_best_fit_levels": 22.8,
+   "normal_mean_angle_degrees": 16.6,
+   "tier": "layout",
+   "texture_overall": 0.274,
+   "texture_groups": {
+    "colour": 0.311,
+    "height": 0.364,
+    "normal": 0.109,
+    "tiling": 0.0
+   }
+  },
+  {
+   "tag": "L-20",
+   "what": "traced patches >= 20 dots (8509 regions)",
+   "class": "L steps",
+   "description_bytes": 408137,
+   "description_kilobytes": 398.6,
+   "colour_ssim": 0.6413,
+   "colour_mean_delta_e": 5.98,
+   "edge_skill_2px": 0.609,
+   "height_mae_best_fit_levels": 16.95,
+   "normal_mean_angle_degrees": 14.79,
+   "tier": "layout",
+   "texture_overall": 0.389,
+   "texture_groups": {
+    "colour": 0.46,
+    "height": 0.433,
+    "normal": 0.115,
+    "tiling": 0.309
+   }
+  },
+  {
+   "tag": "L",
+   "what": "L class: traced patches >= 12 dots (12553 regions)",
+   "class": "L",
+   "description_bytes": 508878,
+   "description_kilobytes": 497.0,
+   "colour_ssim": 0.6718,
+   "colour_mean_delta_e": 5.73,
+   "edge_skill_2px": 0.66,
+   "height_mae_best_fit_levels": 15.37,
+   "normal_mean_angle_degrees": 13.95,
+   "tier": "layout",
+   "texture_overall": 0.434,
+   "texture_groups": {
+    "colour": 0.511,
+    "height": 0.459,
+    "normal": 0.141,
+    "tiling": 0.425
+   }
+  },
+  {
+   "tag": "L + grain 0.10",
+   "what": "L + per-dot grain 0.10",
+   "class": "L",
+   "description_bytes": 508910,
+   "description_kilobytes": 497.0,
+   "colour_ssim": 0.593,
+   "colour_mean_delta_e": 6.07,
+   "edge_skill_2px": 0.658,
+   "height_mae_best_fit_levels": 15.82,
+   "normal_mean_angle_degrees": 14.71,
+   "tier": "layout",
+   "texture_overall": 0.555,
+   "texture_groups": {
+    "colour": 0.63,
+    "height": 0.535,
+    "normal": 0.166,
+    "tiling": 0.939
+   }
+  },
+  {
+   "tag": "L + grain 0.14",
+   "what": "L + per-dot grain 0.14",
+   "class": "L",
+   "description_bytes": 508911,
+   "description_kilobytes": 497.0,
+   "colour_ssim": 0.537,
+   "colour_mean_delta_e": 6.37,
+   "edge_skill_2px": 0.667,
+   "height_mae_best_fit_levels": 16.24,
+   "normal_mean_angle_degrees": 15.32,
+   "tier": "layout",
+   "texture_overall": 0.598,
+   "texture_groups": {
+    "colour": 0.664,
+    "height": 0.598,
+    "normal": 0.19,
+    "tiling": 0.996
+   }
+  }
+ ],
+ "variation": {
+  "tiles": [
+   {
+    "seed": 11,
+    "description_bytes": 9538,
+    "bake_seconds": 34.14,
+    "shapes": 16807,
+    "texture_overall": 0.725,
+    "texture_groups": {
+     "colour": 0.75,
+     "height": 0.704,
+     "normal": 0.566,
+     "tiling": 0.962
+    },
+    "seam_ratio": 1.08,
+    "pixel_ssim": 0.252,
+    "pixel_delta_e": 21.56,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   },
+   {
+    "seed": 12,
+    "description_bytes": 9582,
+    "bake_seconds": 33.16,
+    "shapes": 16655,
+    "texture_overall": 0.698,
+    "texture_groups": {
+     "colour": 0.72,
+     "height": 0.69,
+     "normal": 0.519,
+     "tiling": 0.954
+    },
+    "seam_ratio": 1.09,
+    "pixel_ssim": 0.2582,
+    "pixel_delta_e": 21.63,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   },
+   {
+    "seed": 13,
+    "description_bytes": 9541,
+    "bake_seconds": 35.06,
+    "shapes": 16662,
+    "texture_overall": 0.684,
+    "texture_groups": {
+     "colour": 0.706,
+     "height": 0.588,
+     "normal": 0.678,
+     "tiling": 0.939
+    },
+    "seam_ratio": 1.12,
+    "pixel_ssim": 0.2373,
+    "pixel_delta_e": 21.63,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   },
+   {
+    "seed": 14,
+    "description_bytes": 9523,
+    "bake_seconds": 33.25,
+    "shapes": 16775,
+    "texture_overall": 0.73,
+    "texture_groups": {
+     "colour": 0.727,
+     "height": 0.736,
+     "normal": 0.6,
+     "tiling": 0.983
+    },
+    "seam_ratio": 1.03,
+    "pixel_ssim": 0.2548,
+    "pixel_delta_e": 20.93,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   },
+   {
+    "seed": 15,
+    "description_bytes": 9531,
+    "bake_seconds": 36.14,
+    "shapes": 16726,
+    "texture_overall": 0.688,
+    "texture_groups": {
+     "colour": 0.686,
+     "height": 0.699,
+     "normal": 0.528,
+     "tiling": 0.982
+    },
+    "seam_ratio": 1.04,
+    "pixel_ssim": 0.2528,
+    "pixel_delta_e": 21.49,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   },
+   {
+    "seed": 16,
+    "description_bytes": 9544,
+    "bake_seconds": 35.39,
+    "shapes": 16806,
+    "texture_overall": 0.686,
+    "texture_groups": {
+     "colour": 0.684,
+     "height": 0.673,
+     "normal": 0.565,
+     "tiling": 0.99
+    },
+    "seam_ratio": 1.02,
+    "pixel_ssim": 0.2524,
+    "pixel_delta_e": 21.67,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   },
+   {
+    "seed": 17,
+    "description_bytes": 9551,
+    "bake_seconds": 32.97,
+    "shapes": 16667,
+    "texture_overall": 0.723,
+    "texture_groups": {
+     "colour": 0.728,
+     "height": 0.732,
+     "normal": 0.552,
+     "tiling": 0.994
+    },
+    "seam_ratio": 1.01,
+    "pixel_ssim": 0.2581,
+    "pixel_delta_e": 21.52,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   },
+   {
+    "seed": 18,
+    "description_bytes": 9537,
+    "bake_seconds": 35.77,
+    "shapes": 16674,
+    "texture_overall": 0.726,
+    "texture_groups": {
+     "colour": 0.739,
+     "height": 0.748,
+     "normal": 0.532,
+     "tiling": 0.949
+    },
+    "seam_ratio": 1.1,
+    "pixel_ssim": 0.2565,
+    "pixel_delta_e": 20.87,
+    "pixel_edge_skill": 0.0,
+    "pixel_tier": "none"
+   }
+  ],
+  "pairs_mean_abs_diff": 25.86461820692808,
+  "pairs_mean_ssim": 0.25137822013548156,
+  "versus_reference_mean_abs_diff": 26.92864394278553,
+  "versus_reference_mean_ssim": 0.2527584693832604,
+  "texture_overall_mean": 0.7075,
+  "texture_overall_min": 0.684,
+  "texture_overall_max": 0.73
+ },
+ "area": {
+  "seed": 101,
+  "description_bytes": 21674,
+  "bake_seconds": 143.92,
+  "shapes": 65998,
+  "new_picture": {
+   "best_match_when_moved": 0.145,
+   "at_shift": [
+    105,
+    1712
+   ],
+   "wrap_edge_jump_ratio": 1.037,
+   "middle_lines_jump_ratio": 0.989
+  },
+  "reference_tile_copied_2x2": {
+   "best_match_when_moved": 1.0,
+   "at_shift": [
+    0,
+    1254
+   ],
+   "wrap_edge_jump_ratio": 2.199,
+   "middle_lines_jump_ratio": 2.199
+  },
+  "texture_overall_of_middle_piece": 0.652
+ },
+ "resolution": {
+  "rows": [
+   {
+    "size": 512,
+    "seconds_total": 25.26,
+    "seconds_colour_render": 1.91,
+    "seconds_mesh": 1.25,
+    "seconds_derive": 0.23,
+    "shapes": 16807,
+    "triangles": 233880,
+    "colour_png_kilobytes": 484,
+    "share_of_dots_on_a_strong_edge": 0.1031,
+    "edge_steepness_p999_per_tile_dot": 17.9
+   },
+   {
+    "size": 1254,
+    "seconds_total": 33.73,
+    "seconds_colour_render": 5.63,
+    "seconds_mesh": 1.14,
+    "seconds_derive": 2.68,
+    "shapes": 16807,
+    "triangles": 233880,
+    "colour_png_kilobytes": 2779,
+    "share_of_dots_on_a_strong_edge": 0.0677,
+    "edge_steepness_p999_per_tile_dot": 43.1
+   },
+   {
+    "size": 2508,
+    "seconds_total": 76.29,
+    "seconds_colour_render": 21.42,
+    "seconds_mesh": 1.5,
+    "seconds_derive": 15.38,
+    "shapes": 16807,
+    "triangles": 233880,
+    "colour_png_kilobytes": 8746,
+    "share_of_dots_on_a_strong_edge": 0.0391,
+    "edge_steepness_p999_per_tile_dot": 82.0
+   }
+  ],
+  "ssim_1254_vs_2508_shrunk": 0.994,
+  "ssim_512_enlarged_vs_2508_shrunk": 0.7541,
+  "mean_abs_diff_1254_vs_2508_shrunk": 0.735
+ },
+ "transfer": {
+  "tiles": [
+   {
+    "seed": 1,
+    "description_bytes": 13429,
+    "seconds_total_including_sampling": 35.8,
+    "bake_seconds": 33.8,
+    "shapes": 15482
+   },
+   {
+    "seed": 2,
+    "description_bytes": 13453,
+    "seconds_total_including_sampling": 34.6,
+    "bake_seconds": 32.85,
+    "shapes": 15502
+   },
+   {
+    "seed": 3,
+    "description_bytes": 13563,
+    "seconds_total_including_sampling": 35.7,
+    "bake_seconds": 33.62,
+    "shapes": 15217
+   }
+  ],
+  "seam": {
+   "seamless_test": {
+    "share_over_40_levels": 0.00023,
+    "mean_abs_difference": 0.826
+   },
+   "wrongly_rolled_control": {
+    "share_over_40_levels": 0.35955,
+    "mean_abs_difference": 30.873
+   }
+  }
+ },
+ "route_comparison": {
+  "M_height_derived": {
+   "pixel": {
+    "colour_ssim": 0.5515,
+    "colour_mean_delta_e": 7.94,
+    "edge_skill_2px": 0.421,
+    "height_mae_best_fit_levels": 25.04,
+    "normal_mean_angle_degrees": 17.34,
+    "tier_reached": "layout"
+   },
+   "texture_overall": 0.407,
+   "texture_groups": {
+    "colour": 0.393,
+    "height": 0.448,
+    "normal": 0.072,
+    "tiling": 1.0
+   }
+  },
+  "M_height_hybrid": {
+   "pixel": {
+    "colour_ssim": 0.5515,
+    "colour_mean_delta_e": 7.94,
+    "edge_skill_2px": 0.421,
+    "height_mae_best_fit_levels": 39.44,
+    "normal_mean_angle_degrees": 17.86,
+    "tier_reached": "layout"
+   },
+   "texture_overall": 0.296,
+   "texture_groups": {
+    "colour": 0.393,
+    "height": 0.063,
+    "normal": 0.103,
+    "tiling": 1.0
+   }
+  },
+  "M_height_geometry": {
+   "pixel": {
+    "colour_ssim": 0.5515,
+    "colour_mean_delta_e": 7.94,
+    "edge_skill_2px": 0.421,
+    "height_mae_best_fit_levels": 39.12,
+    "normal_mean_angle_degrees": 18.77,
+    "tier_reached": "layout"
+   },
+   "texture_overall": 0.262,
+   "texture_groups": {
+    "colour": 0.393,
+    "height": 0.0,
+    "normal": 0.0,
+    "tiling": 1.0
+   }
+  },
+  "shader_route": {
+   "pixel": {
+    "colour_ssim": 0.3109,
+    "colour_mean_delta_e": 25.73,
+    "edge_skill_2px": 0.004,
+    "height_mae_best_fit_levels": 39.95,
+    "normal_mean_angle_degrees": 25.53,
+    "tier_reached": "none"
+   },
+   "texture_overall": 0.408,
+   "texture_groups": {
+    "colour": 0.445,
+    "height": 0.244,
+    "normal": 0.318,
+    "tiling": 1.0
+   }
+  },
+  "gn_route": {
+   "pixel": {
+    "colour_ssim": 0.5538,
+    "colour_mean_delta_e": 7.84,
+    "edge_skill_2px": 0.434,
+    "height_mae_best_fit_levels": null,
+    "normal_mean_angle_degrees": null,
+    "tier_reached": "layout"
+   },
+   "texture_overall": null,
+   "texture_groups": null
+  }
+ },
+ "gn_route": null
+}

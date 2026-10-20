@@ -1,0 +1,126 @@
+{
+ "folder": "out/reference_check_metal",
+ "counts": {
+  "PASS": 12,
+  "WARN": 3,
+  "FAIL": 0,
+  "INFO": 7
+ },
+ "checks": {
+  "sizes": {
+   "level": "PASS",
+   "text": "all pictures are 1254 x 1254; not a power of two (1024, 2048, 4096...): fine for Blender, some game engines resize it.",
+   "value": [
+    1254,
+    1254
+   ]
+  },
+  "seam_colour": {
+   "level": "WARN",
+   "text": "colour: tiling seam ratio 2.06 (1.0 means no seam), peak 1.64. A faint seam, OR a hard-edged pattern (checker squares, outlines) that has a real edge right at the tile border. Look at tile_check_shifted.png: a cross in the middle means a real seam.",
+   "value": 2.058709236293363
+  },
+  "seam_normal": {
+   "level": "PASS",
+   "text": "normal: tiling seam ratio 1.44 (1.0 means no seam), peak 2.19. The left edge continues into the right edge and the top into the bottom.",
+   "value": 1.441338105219784
+  },
+  "seam_height": {
+   "level": "WARN",
+   "text": "height: tiling seam ratio 2.06 (1.0 means no seam), peak 1.69. A faint seam, OR a hard-edged pattern (checker squares, outlines) that has a real edge right at the tile border. Look at tile_check_shifted.png: a cross in the middle means a real seam.",
+   "value": 2.061125295195053
+  },
+  "colour_clipped": {
+   "level": "PASS",
+   "text": "colour: only 0.0% pure black and 0.0% pure white pixels (no clipping).",
+   "value": [
+    2.034955447194178e-05,
+    0.0
+   ]
+  },
+  "colour_brightness": {
+   "level": "INFO",
+   "text": "colour: average brightness 0.22 (0 = black, 1 = white). Surfaces in the real world sit roughly between 0.1 and 0.7; check by eye that it is not lit by a lamp or shadowed.",
+   "value": 0.21630593008129165
+  },
+  "bits_normal": {
+   "level": "WARN",
+   "text": "normal: only 8 bits per channel (256 levels). Smooth slopes get stair steps in the normal map and in real displacement. Save height maps with 16 bits.",
+   "value": 8
+  },
+  "normal_length": {
+   "level": "PASS",
+   "text": "normal: the arrows have length 0.996 (should be 1.0).",
+   "value": 0.9956568941675126
+  },
+  "normal_mean": {
+   "level": "PASS",
+   "text": "normal: the average colour is (0.498, 0.502, 0.973), the flat-surface blue-violet (0.5, 0.5, 1.0) as it should be.",
+   "value": [
+    0.49801062905111376,
+    0.5023536878255648,
+    0.9734931341949874
+   ]
+  },
+  "normal_tilt": {
+   "level": "PASS",
+   "text": "normal: tilt of the surface arrows is 8.7 degrees in the middle and 54.9 degrees at the 99th percentile.",
+   "value": [
+    8.74284712426292,
+    54.914074453953404
+   ]
+  },
+  "normal_convention": {
+   "level": "PASS",
+   "text": "normal: green points UP the picture = OpenGL, the Blender convention (map-alone score -1.00; -1 is perfect OpenGL).",
+   "value": "OpenGL (green points up the picture; Blender)"
+  },
+  "normal_vs_height": {
+   "level": "PASS",
+   "text": "normal: agrees with the height map (OpenGL); green follows the height slope with correlation +0.94, red with -0.95.",
+   "value": [
+    0.9429455816976489,
+    -0.9509396352716863
+   ]
+  },
+  "normal_strength": {
+   "level": "INFO",
+   "text": "normal: the Sobel strength that would rebuild this normal map from the height is about 6.0 per pixel step (height 0..1).",
+   "value": 5.955895478109232
+  },
+  "bits_height": {
+   "level": "PASS",
+   "text": "height: saved with 16 bits per channel.",
+   "value": 16
+  },
+  "height_range": {
+   "level": "PASS",
+   "text": "height: uses 0.00 to 1.00 of the 0 to 1 range.",
+   "value": [
+    0.0,
+    1.0
+   ]
+  },
+  "height_clipped": {
+   "level": "PASS",
+   "text": "height: little clipping (0.5% black, 0.5% white).",
+   "value": [
+    0.005211393715548841,
+    0.0051045585545711454
+   ]
+  },
+  "height_levels": {
+   "level": "PASS",
+   "text": "height: 65298 different grey levels; 1% of neighbouring pixels exactly equal (flat areas).",
+   "value": [
+    65298,
+    0.0077016704440527155
+   ]
+  },
+  "colour_height_link": {
+   "level": "INFO",
+   "text": "colour and height agree with correlation +0.94 (stone, brick and rust usually sit between +0.3 and +0.99: darker is lower).",
+   "value": 0.9356803530291855
+  }
+ }
+}

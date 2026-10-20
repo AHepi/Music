@@ -1,0 +1,162 @@
+{
+ "1_seam_ratio_(1.0 = seamless)": {
+  "Scale 5 on UV (default)": 5.2,
+  "Scale 1": 19.93,
+  "Scale 2": 8.4,
+  "Scale 8 (whole number)": 3.39,
+  "Scale 8, Detail 0, Roughness 0": 4.82,
+  "Scale 7.5": 4.21,
+  "UV x 8 into Vector, Scale 1": 3.39,
+  "Scale 8 4D": 2.84
+ },
+ "2_range_min_mean_max": {
+  "FBM normalize=True detail=2.0": [
+   0.249,
+   0.502,
+   0.731
+  ],
+  "FBM normalize=True detail=8.0": [
+   0.271,
+   0.502,
+   0.695
+  ],
+  "FBM normalize=False detail=2.0": [
+   -0.879,
+   0.007,
+   0.807
+  ],
+  "FBM normalize=False detail=8.0": [
+   -0.915,
+   0.007,
+   0.777
+  ],
+  "MULTIFRACTAL normalize=True detail=2.0": [
+   0.231,
+   1.007,
+   2.019
+  ],
+  "MULTIFRACTAL normalize=True detail=8.0": [
+   0.213,
+   1.007,
+   1.982
+  ],
+  "MULTIFRACTAL normalize=False detail=2.0": [
+   0.231,
+   1.007,
+   2.019
+  ],
+  "MULTIFRACTAL normalize=False detail=8.0": [
+   0.213,
+   1.007,
+   1.982
+  ],
+  "RIDGED_MULTIFRACTAL normalize=True detail=2.0": [
+   0.0,
+   0.059,
+   0.581
+  ],
+  "RIDGED_MULTIFRACTAL normalize=True detail=8.0": [
+   0.0,
+   0.059,
+   0.581
+  ],
+  "RIDGED_MULTIFRACTAL normalize=False detail=2.0": [
+   0.0,
+   0.059,
+   0.581
+  ],
+  "RIDGED_MULTIFRACTAL normalize=False detail=8.0": [
+   0.0,
+   0.059,
+   0.581
+  ],
+  "HYBRID_MULTIFRACTAL normalize=True detail=2.0": [
+   -0.755,
+   0.006,
+   0.671
+  ],
+  "HYBRID_MULTIFRACTAL normalize=True detail=8.0": [
+   -0.755,
+   0.006,
+   0.671
+  ],
+  "HYBRID_MULTIFRACTAL normalize=False detail=2.0": [
+   -0.755,
+   0.006,
+   0.671
+  ],
+  "HYBRID_MULTIFRACTAL normalize=False detail=8.0": [
+   -0.755,
+   0.006,
+   0.671
+  ],
+  "HETERO_TERRAIN normalize=True detail=2.0": [
+   -0.737,
+   0.006,
+   0.682
+  ],
+  "HETERO_TERRAIN normalize=True detail=8.0": [
+   -0.782,
+   0.006,
+   0.698
+  ],
+  "HETERO_TERRAIN normalize=False detail=2.0": [
+   -0.737,
+   0.006,
+   0.682
+  ],
+  "HETERO_TERRAIN normalize=False detail=8.0": [
+   -0.782,
+   0.006,
+   0.698
+  ]
+ },
+ "3_fractional_detail": {
+  "max |Detail2.5 - mean(Detail2, Detail3)|": 0.0,
+  "max |Detail2.5 - Detail2|": 0.11268,
+  "max |Detail2.5 - Detail3|": 0.11268,
+  "std Detail 0 / Detail 1 (normalized)": [
+   0.1198,
+   0.0898
+  ]
+ },
+ "4_dimensions_value_at_one_point": {
+  "2D: Z=0.1 vs Z=7.3 (same X,Y)": [
+   0.5006,
+   0.5006
+  ],
+  "3D: Z=0.1 vs Z=7.3": [
+   0.575,
+   0.575
+  ],
+  "3D: W=0 vs W=5 (W ignored?)": [
+   0.575,
+   0.575
+  ],
+  "4D: W=0 vs W=0.4": [
+   0.5856,
+   0.5722
+  ],
+  "1D: W=0.31 vs W=0.37 (Vector ignored)": [
+   0.6762,
+   0.6762,
+   0.6824
+  ]
+ },
+ "5_value_at_exact_points_(Scale 1, Detail 0)": {
+  "(1.0, 2.0, 3.0)": 0.575,
+  "(0.0, 0.0, 0.0)": 0.575,
+  "(2.0, 5.0, 1.0)": 0.575,
+  "(1.5, 2.5, 3.5)": 0.575,
+  "(0.31, 0.77, 0.1)": 0.575
+ },
+ "5b_same_points_with_Detail_2": {
+  "(1.0, 2.0, 3.0)": 0.5333,
+  "(2.0, 5.0, 1.0)": 0.5333
+ },
+ "6_unconnected_Vector_input": {
+  "std across the picture (0 would mean a constant)": 0.0886,
+  "min": 0.241,
+  "max": 0.762
+ }
+}

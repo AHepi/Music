@@ -1,0 +1,1013 @@
+{
+ "surface": "slate",
+ "transfer": {
+  "surfaces": [
+   "weathered cedar roof shingles",
+   "clay fish-scale roof tiles"
+  ],
+  "generator_code_changed": {
+   "cedar_shingles": "none",
+   "fish_scale_clay": "one new setting (layout.bottom_round, about 12 lines) plus two sampler options (alternate row phase, a fitted= argument)"
+  },
+  "numbers_changed": "palette, family lists, rows x pieces, piece width and row height, gaps, corner radius and raggedness, tone and tone gradient, patch size factors, moss and lichen shares, height stretch (1st and 99th percentile of the picture)",
+  "time": "one short script (about 90 lines), numpy preview 10 s, Blender bake 25 s per picture set",
+  "half_tile_test": {
+   "fish_scale_clay_1": {
+    "colour_mean_difference_levels": 0.99,
+    "colour_share_over_40": 0.0002,
+    "wrong_roll_mean_difference": 38.403,
+    "wrong_roll_share_over_40": 0.4036,
+    "height_mean_difference_levels": 1.881
+   },
+   "cedar_shingles_1": {
+    "colour_mean_difference_levels": 0.929,
+    "colour_share_over_40": 0.0,
+    "wrong_roll_mean_difference": 28.196,
+    "wrong_roll_share_over_40": 0.2605,
+    "height_mean_difference_levels": 2.029
+   }
+  },
+  "known_flaw": "fish-scale rows do not overlap: the gap between two scales is black instead of the next row's tile"
+ },
+ "classes": {
+  "S0_layout_only": {
+   "class": "S0",
+   "bytes": 2762,
+   "tier": "none",
+   "colour_ssim": 0.7113,
+   "colour_mean_delta_e": 8.07,
+   "edge_skill_2px": 0.29,
+   "height_mae_best_fit_levels": 35.1,
+   "normal_mean_angle_degrees": 11.89,
+   "texture_compare_overall_as_baked": 0.398,
+   "texture_compare_overall_smoothed_height_view": 0.406,
+   "seam_ratio_texture_compare": 0.45,
+   "bake_seconds": 20.5
+  },
+  "S1_layout_stamps": {
+   "class": "S (S1)",
+   "bytes": 6597,
+   "tier": "none",
+   "colour_ssim": 0.569,
+   "colour_mean_delta_e": 9.06,
+   "edge_skill_2px": 0.188,
+   "height_mae_best_fit_levels": 35.02,
+   "normal_mean_angle_degrees": 16.79,
+   "texture_compare_overall_as_baked": 0.707,
+   "texture_compare_overall_smoothed_height_view": 0.72,
+   "seam_ratio_texture_compare": 0.6,
+   "bake_seconds": 28.2
+  },
+  "S2_stamps_grain": {
+   "class": "S (S2, with grain)",
+   "bytes": 6667,
+   "tier": "none",
+   "colour_ssim": 0.569,
+   "colour_mean_delta_e": 9.06,
+   "edge_skill_2px": 0.188,
+   "height_mae_best_fit_levels": 35.06,
+   "normal_mean_angle_degrees": 17.87,
+   "texture_compare_overall_as_baked": 0.725,
+   "texture_compare_overall_smoothed_height_view": 0.724,
+   "seam_ratio_texture_compare": 0.6,
+   "bake_seconds": 30.5
+  },
+  "M_trace_tiny": {
+   "class": "M (tiny)",
+   "bytes": 17294,
+   "tier": "layout",
+   "colour_ssim": 0.7212,
+   "colour_mean_delta_e": 7.31,
+   "edge_skill_2px": 0.374,
+   "height_mae_best_fit_levels": 31.43,
+   "normal_mean_angle_degrees": 11.66,
+   "texture_compare_overall_as_baked": 0.51,
+   "texture_compare_overall_smoothed_height_view": 0.483,
+   "seam_ratio_texture_compare": 1.03,
+   "bake_seconds": 16.9
+  },
+  "M_trace_small": {
+   "class": "M (small)",
+   "bytes": 39916,
+   "tier": "layout",
+   "colour_ssim": 0.7201,
+   "colour_mean_delta_e": 6.35,
+   "edge_skill_2px": 0.413,
+   "height_mae_best_fit_levels": 26.86,
+   "normal_mean_angle_degrees": 11.95,
+   "texture_compare_overall_as_baked": 0.527,
+   "texture_compare_overall_smoothed_height_view": 0.504,
+   "seam_ratio_texture_compare": 1.42,
+   "bake_seconds": 18.3
+  },
+  "M_trace_coarse": {
+   "class": "M (coarse)",
+   "bytes": 61707,
+   "tier": "layout",
+   "colour_ssim": 0.7313,
+   "colour_mean_delta_e": 5.67,
+   "edge_skill_2px": 0.44,
+   "height_mae_best_fit_levels": 23.24,
+   "normal_mean_angle_degrees": 11.79,
+   "texture_compare_overall_as_baked": 0.605,
+   "texture_compare_overall_smoothed_height_view": 0.58,
+   "seam_ratio_texture_compare": 1.31,
+   "bake_seconds": 19.6
+  },
+  "L_trace_small": {
+   "class": "L (small)",
+   "bytes": 150279,
+   "tier": "layout",
+   "colour_ssim": 0.7508,
+   "colour_mean_delta_e": 4.02,
+   "edge_skill_2px": 0.54,
+   "height_mae_best_fit_levels": 16.07,
+   "normal_mean_angle_degrees": 11.91,
+   "texture_compare_overall_as_baked": 0.769,
+   "texture_compare_overall_smoothed_height_view": 0.742,
+   "seam_ratio_texture_compare": 0.98,
+   "bake_seconds": 22.0
+  },
+  "L_trace_medium": {
+   "class": "L (medium)",
+   "bytes": 269986,
+   "tier": "close",
+   "colour_ssim": 0.7924,
+   "colour_mean_delta_e": 3.28,
+   "edge_skill_2px": 0.666,
+   "height_mae_best_fit_levels": 12.44,
+   "normal_mean_angle_degrees": 11.03,
+   "texture_compare_overall_as_baked": 0.815,
+   "texture_compare_overall_smoothed_height_view": 0.785,
+   "seam_ratio_texture_compare": 0.92,
+   "bake_seconds": 25.2
+  },
+  "L_trace_fine": {
+   "class": "L (fine)",
+   "bytes": 453054,
+   "tier": "close",
+   "colour_ssim": 0.8355,
+   "colour_mean_delta_e": 2.85,
+   "edge_skill_2px": 0.741,
+   "height_mae_best_fit_levels": 10.34,
+   "normal_mean_angle_degrees": 9.68,
+   "texture_compare_overall_as_baked": 0.828,
+   "texture_compare_overall_smoothed_height_view": 0.791,
+   "seam_ratio_texture_compare": 1.05,
+   "bake_seconds": 30.7
+  }
+ },
+ "derivation_ceiling": {
+  "linear_weights": [
+   130.09,
+   425.013,
+   51.452,
+   -15.044
+  ],
+  "height_from_colour": {
+   "grey": "rec601_srgb_numbers",
+   "blur_sigma": 0.5,
+   "mae_levels": 2.95,
+   "correlation": 0.9967,
+   "curve_points": [
+    [
+     0.015,
+     3.55
+    ],
+    [
+     0.0546,
+     11.44
+    ],
+    [
+     0.0943,
+     39.36
+    ],
+    [
+     0.1339,
+     66.36
+    ],
+    [
+     0.1735,
+     91.22
+    ],
+    [
+     0.2132,
+     115.59
+    ],
+    [
+     0.2528,
+     139.52
+    ],
+    [
+     0.2924,
+     164.35
+    ],
+    [
+     0.3321,
+     189.35
+    ],
+    [
+     0.3717,
+     216.0
+    ],
+    [
+     0.4113,
+     239.83
+    ],
+    [
+     0.4509,
+     249.38
+    ],
+    [
+     0.4906,
+     250.76
+    ],
+    [
+     0.5302,
+     250.76
+    ],
+    [
+     0.5698,
+     250.76
+    ],
+    [
+     0.6095,
+     252.0
+    ]
+   ]
+  },
+  "curve_2_points_mae": 41.08,
+  "curve_3_points_mae": 31.94,
+  "curve_4_points_mae": 17.91,
+  "curve_6_points_mae": 10.73,
+  "curve_8_points_mae": 7.89,
+  "normal_from_uploaded_height": {
+   "kernel": "central",
+   "strength": 7,
+   "mean_angle_degrees": 0.341
+  },
+  "chain_normal_central": {
+   "strength": 7,
+   "mean_angle_degrees": 2.76
+  },
+  "chain_normal_sobel": {
+   "strength": 7,
+   "mean_angle_degrees": 2.741
+  },
+  "flat_normal_angle": 11.267
+ },
+ "half_tile_test": {
+  "fish_scale_clay_1": {
+   "colour_mean_difference_levels": 0.99,
+   "colour_share_over_40": 0.0002,
+   "wrong_roll_mean_difference": 38.403,
+   "wrong_roll_share_over_40": 0.4036,
+   "height_mean_difference_levels": 1.881
+  },
+  "cedar_shingles_1": {
+   "colour_mean_difference_levels": 0.929,
+   "colour_share_over_40": 0.0,
+   "wrong_roll_mean_difference": 28.196,
+   "wrong_roll_share_over_40": 0.2605,
+   "height_mean_difference_levels": 2.029
+  },
+  "S1_layout_stamps": {
+   "colour_mean_difference_levels": 0.671,
+   "colour_share_over_40": 0.0,
+   "wrong_roll_mean_difference": 19.368,
+   "wrong_roll_share_over_40": 0.1315,
+   "height_mean_difference_levels": 2.008
+  },
+  "sample_1": {
+   "colour_mean_difference_levels": 0.611,
+   "colour_share_over_40": 0.0,
+   "wrong_roll_mean_difference": 16.122,
+   "wrong_roll_share_over_40": 0.1117,
+   "height_mean_difference_levels": 1.677
+  },
+  "L_trace_medium": {
+   "colour_mean_difference_levels": 0.668,
+   "colour_share_over_40": 0.0,
+   "wrong_roll_mean_difference": 19.171,
+   "wrong_roll_share_over_40": 0.1506,
+   "height_mean_difference_levels": 1.853
+  }
+ },
+ "variations": {
+  "seeds": [
+   101,
+   102,
+   103,
+   104,
+   105,
+   106,
+   107,
+   108
+  ],
+  "bake_total_seconds": 245.8,
+  "tiles": {
+   "101": {
+    "texture_overall": 0.725,
+    "texture_view_overall": 0.725,
+    "groups": {
+     "overall": 0.725,
+     "colour": 0.723,
+     "height": 0.729,
+     "normal": 0.59,
+     "tiling": 1.0
+    },
+    "seam_ratio": 0.76,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.511,
+     "colour_mean_delta_e": 10.95,
+     "colour_p95_delta_e": 27.08,
+     "colour_psnr_db": 19.31,
+     "edge_skill_2px": 0.097,
+     "edge_f1_2px": 0.314,
+     "height_mae_levels": 49.34,
+     "height_mae_best_fit_levels": 40.1,
+     "height_ssim": 0.2486,
+     "height_correlation": 0.1683,
+     "normal_mean_angle_degrees": 18.97,
+     "normal_median_angle_degrees": 12.55,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6746,
+    "bake_seconds": 30.5
+   },
+   "102": {
+    "texture_overall": 0.753,
+    "texture_view_overall": 0.745,
+    "groups": {
+     "overall": 0.753,
+     "colour": 0.753,
+     "height": 0.775,
+     "normal": 0.584,
+     "tiling": 1.0
+    },
+    "seam_ratio": 0.62,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.4944,
+     "colour_mean_delta_e": 11.32,
+     "colour_p95_delta_e": 26.1,
+     "colour_psnr_db": 19.35,
+     "edge_skill_2px": 0.014,
+     "edge_f1_2px": 0.285,
+     "height_mae_levels": 51.81,
+     "height_mae_best_fit_levels": 39.89,
+     "height_ssim": 0.2354,
+     "height_correlation": 0.1776,
+     "normal_mean_angle_degrees": 19.22,
+     "normal_median_angle_degrees": 12.71,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6734,
+    "bake_seconds": 32.0
+   },
+   "103": {
+    "texture_overall": 0.746,
+    "texture_view_overall": 0.727,
+    "groups": {
+     "overall": 0.746,
+     "colour": 0.754,
+     "height": 0.753,
+     "normal": 0.582,
+     "tiling": 1.0
+    },
+    "seam_ratio": 0.74,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.5234,
+     "colour_mean_delta_e": 10.47,
+     "colour_p95_delta_e": 24.73,
+     "colour_psnr_db": 19.87,
+     "edge_skill_2px": 0.1,
+     "edge_f1_2px": 0.324,
+     "height_mae_levels": 46.63,
+     "height_mae_best_fit_levels": 39.0,
+     "height_ssim": 0.2594,
+     "height_correlation": 0.292,
+     "normal_mean_angle_degrees": 18.92,
+     "normal_median_angle_degrees": 12.59,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6726,
+    "bake_seconds": 30.9
+   },
+   "104": {
+    "texture_overall": 0.736,
+    "texture_view_overall": 0.727,
+    "groups": {
+     "overall": 0.736,
+     "colour": 0.74,
+     "height": 0.735,
+     "normal": 0.594,
+     "tiling": 1.0
+    },
+    "seam_ratio": 0.73,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.5208,
+     "colour_mean_delta_e": 10.74,
+     "colour_p95_delta_e": 25.24,
+     "colour_psnr_db": 19.73,
+     "edge_skill_2px": 0.103,
+     "edge_f1_2px": 0.319,
+     "height_mae_levels": 47.34,
+     "height_mae_best_fit_levels": 39.51,
+     "height_ssim": 0.2546,
+     "height_correlation": 0.2491,
+     "normal_mean_angle_degrees": 18.89,
+     "normal_median_angle_degrees": 12.44,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6727,
+    "bake_seconds": 29.6
+   },
+   "105": {
+    "texture_overall": 0.722,
+    "texture_view_overall": 0.713,
+    "groups": {
+     "overall": 0.722,
+     "colour": 0.73,
+     "height": 0.703,
+     "normal": 0.593,
+     "tiling": 1.0
+    },
+    "seam_ratio": 0.64,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.5204,
+     "colour_mean_delta_e": 10.58,
+     "colour_p95_delta_e": 24.92,
+     "colour_psnr_db": 20.01,
+     "edge_skill_2px": 0.088,
+     "edge_f1_2px": 0.318,
+     "height_mae_levels": 46.5,
+     "height_mae_best_fit_levels": 38.49,
+     "height_ssim": 0.2566,
+     "height_correlation": 0.3014,
+     "normal_mean_angle_degrees": 18.91,
+     "normal_median_angle_degrees": 12.47,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6735,
+    "bake_seconds": 31.0
+   },
+   "106": {
+    "texture_overall": 0.727,
+    "texture_view_overall": 0.719,
+    "groups": {
+     "overall": 0.727,
+     "colour": 0.742,
+     "height": 0.732,
+     "normal": 0.584,
+     "tiling": 0.896
+    },
+    "seam_ratio": 1.21,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.5247,
+     "colour_mean_delta_e": 10.2,
+     "colour_p95_delta_e": 23.95,
+     "colour_psnr_db": 20.3,
+     "edge_skill_2px": 0.079,
+     "edge_f1_2px": 0.308,
+     "height_mae_levels": 44.89,
+     "height_mae_best_fit_levels": 37.97,
+     "height_ssim": 0.2605,
+     "height_correlation": 0.3535,
+     "normal_mean_angle_degrees": 18.9,
+     "normal_median_angle_degrees": 12.59,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6740,
+    "bake_seconds": 30.7
+   },
+   "107": {
+    "texture_overall": 0.724,
+    "texture_view_overall": 0.718,
+    "groups": {
+     "overall": 0.724,
+     "colour": 0.727,
+     "height": 0.717,
+     "normal": 0.593,
+     "tiling": 1.0
+    },
+    "seam_ratio": 0.89,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.5199,
+     "colour_mean_delta_e": 10.77,
+     "colour_p95_delta_e": 26.09,
+     "colour_psnr_db": 19.52,
+     "edge_skill_2px": 0.13,
+     "edge_f1_2px": 0.33,
+     "height_mae_levels": 48.58,
+     "height_mae_best_fit_levels": 39.91,
+     "height_ssim": 0.2565,
+     "height_correlation": 0.2035,
+     "normal_mean_angle_degrees": 18.91,
+     "normal_median_angle_degrees": 12.45,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6731,
+    "bake_seconds": 30.3
+   },
+   "108": {
+    "texture_overall": 0.744,
+    "texture_view_overall": 0.731,
+    "groups": {
+     "overall": 0.744,
+     "colour": 0.748,
+     "height": 0.756,
+     "normal": 0.583,
+     "tiling": 1.0
+    },
+    "seam_ratio": 0.67,
+    "pixel_vs_reference": {
+     "colour_ssim": 0.5217,
+     "colour_mean_delta_e": 10.56,
+     "colour_p95_delta_e": 25.01,
+     "colour_psnr_db": 19.85,
+     "edge_skill_2px": 0.105,
+     "edge_f1_2px": 0.327,
+     "height_mae_levels": 47.38,
+     "height_mae_best_fit_levels": 39.16,
+     "height_ssim": 0.2588,
+     "height_correlation": 0.2842,
+     "normal_mean_angle_degrees": 18.95,
+     "normal_median_angle_degrees": 12.48,
+     "tier_reached": "none"
+    },
+    "description_bytes": 6743,
+    "bake_seconds": 29.8
+   }
+  },
+  "pairs": {
+   "101-102": {
+    "mean_abs_difference_levels": 21.71,
+    "ssim": 0.467
+   },
+   "101-103": {
+    "mean_abs_difference_levels": 20.3,
+    "ssim": 0.487
+   },
+   "101-104": {
+    "mean_abs_difference_levels": 18.62,
+    "ssim": 0.51
+   },
+   "101-105": {
+    "mean_abs_difference_levels": 19.92,
+    "ssim": 0.493
+   },
+   "101-106": {
+    "mean_abs_difference_levels": 20.17,
+    "ssim": 0.487
+   },
+   "101-107": {
+    "mean_abs_difference_levels": 18.16,
+    "ssim": 0.511
+   },
+   "101-108": {
+    "mean_abs_difference_levels": 21.13,
+    "ssim": 0.479
+   },
+   "102-103": {
+    "mean_abs_difference_levels": 21.8,
+    "ssim": 0.468
+   },
+   "102-104": {
+    "mean_abs_difference_levels": 21.32,
+    "ssim": 0.473
+   },
+   "102-105": {
+    "mean_abs_difference_levels": 20.24,
+    "ssim": 0.49
+   },
+   "102-106": {
+    "mean_abs_difference_levels": 20.48,
+    "ssim": 0.483
+   },
+   "102-107": {
+    "mean_abs_difference_levels": 21.66,
+    "ssim": 0.473
+   },
+   "102-108": {
+    "mean_abs_difference_levels": 21.04,
+    "ssim": 0.476
+   },
+   "103-104": {
+    "mean_abs_difference_levels": 19.86,
+    "ssim": 0.493
+   },
+   "103-105": {
+    "mean_abs_difference_levels": 20.62,
+    "ssim": 0.487
+   },
+   "103-106": {
+    "mean_abs_difference_levels": 20.23,
+    "ssim": 0.487
+   },
+   "103-107": {
+    "mean_abs_difference_levels": 19.18,
+    "ssim": 0.498
+   },
+   "103-108": {
+    "mean_abs_difference_levels": 19.57,
+    "ssim": 0.493
+   },
+   "104-105": {
+    "mean_abs_difference_levels": 19.87,
+    "ssim": 0.499
+   },
+   "104-106": {
+    "mean_abs_difference_levels": 19.65,
+    "ssim": 0.497
+   },
+   "104-107": {
+    "mean_abs_difference_levels": 18.91,
+    "ssim": 0.507
+   },
+   "104-108": {
+    "mean_abs_difference_levels": 20.52,
+    "ssim": 0.491
+   },
+   "105-106": {
+    "mean_abs_difference_levels": 18.61,
+    "ssim": 0.507
+   },
+   "105-107": {
+    "mean_abs_difference_levels": 20.46,
+    "ssim": 0.491
+   },
+   "105-108": {
+    "mean_abs_difference_levels": 19.38,
+    "ssim": 0.504
+   },
+   "106-107": {
+    "mean_abs_difference_levels": 20.26,
+    "ssim": 0.487
+   },
+   "106-108": {
+    "mean_abs_difference_levels": 19.78,
+    "ssim": 0.491
+   },
+   "107-108": {
+    "mean_abs_difference_levels": 20.11,
+    "ssim": 0.491
+   }
+  },
+  "pairs_mean": {
+   "mean_abs_difference_levels": 20.127,
+   "ssim": 0.49
+  },
+  "vs_reference_mean": {
+   "ssim": 0.517,
+   "delta_e": 10.7
+  },
+  "texture_overall_mean": 0.735,
+  "texture_overall_range": [
+   0.722,
+   0.753
+  ]
+ },
+ "area": {
+  "description_bytes": 14548,
+  "bake_seconds_total_process": 132.7,
+  "bake_json": {
+   "shapes_s": 9.21,
+   "mesh_s": 1.71,
+   "shapes": 25858,
+   "mesh_faces": 26327,
+   "colour_render_s": 40.05,
+   "height_render_s": 42.51,
+   "roughness_render_s": 12.13,
+   "metallic_render_s": 18.08,
+   "derive_s": 7.82,
+   "size": 2508,
+   "shift": [
+    0.0,
+    0.0
+   ],
+   "total_s": 131.5
+  },
+  "seam": {
+   "wrap_seam_ratio_x": 0.75,
+   "wrap_seam_ratio_y": 0.58,
+   "middle_line_ratio_x": 0.86,
+   "middle_line_ratio_y": 0.59
+  },
+  "max_quarter_cross_correlation": 0.371,
+  "reference_repeated_2x2_max_quarter_cross_correlation": 1.0,
+  "reference_repeated_2x2_seam": {
+   "wrap_seam_ratio_x": 1.7,
+   "wrap_seam_ratio_y": 1.87,
+   "middle_line_ratio_x": 1.7,
+   "middle_line_ratio_y": 1.87
+  }
+ },
+ "resolution": {
+  "512": {
+   "process_seconds": 13.6,
+   "bake": {
+    "shapes_s": 2.31,
+    "mesh_s": 0.4,
+    "shapes": 6590,
+    "mesh_faces": 6838,
+    "colour_render_s": 3.5,
+    "height_render_s": 3.28,
+    "roughness_render_s": 1.52,
+    "metallic_render_s": 1.39,
+    "derive_s": 0.17,
+    "size": 512,
+    "shift": [
+     0.0,
+     0.0
+    ],
+    "total_s": 12.6
+   },
+   "mean_edge_step_per_dot": 4.553,
+   "share_of_steps_over_20_levels": 0.0507,
+   "colour_png_bytes": 352895
+  },
+  "1254": {
+   "process_seconds": 31.6,
+   "bake": {
+    "shapes_s": 2.38,
+    "mesh_s": 0.43,
+    "shapes": 6590,
+    "mesh_faces": 6838,
+    "colour_render_s": 10.65,
+    "height_render_s": 10.37,
+    "roughness_render_s": 2.73,
+    "metallic_render_s": 2.67,
+    "derive_s": 1.32,
+    "size": 1254,
+    "shift": [
+     0.0,
+     0.0
+    ],
+    "total_s": 30.6
+   },
+   "mean_edge_step_per_dot": 2.485,
+   "share_of_steps_over_20_levels": 0.0269,
+   "colour_png_bytes": 1473319
+  },
+  "2508": {
+   "process_seconds": 100.7,
+   "bake": {
+    "shapes_s": 2.62,
+    "mesh_s": 0.49,
+    "shapes": 6590,
+    "mesh_faces": 6838,
+    "colour_render_s": 33.66,
+    "height_render_s": 33.8,
+    "roughness_render_s": 9.49,
+    "metallic_render_s": 9.5,
+    "derive_s": 9.98,
+    "size": 2508,
+    "shift": [
+     0.0,
+     0.0
+    ],
+    "total_s": 99.5
+   },
+   "mean_edge_step_per_dot": 1.488,
+   "share_of_steps_over_20_levels": 0.0147,
+   "colour_png_bytes": 4537282
+  }
+ },
+ "geometry_route": {
+  "geometry_route_plain": {
+   "name": "geometry_route_plain",
+   "pixel": {
+    "colour_ssim": 0.6787,
+    "colour_mean_delta_e": 10.17,
+    "colour_p95_delta_e": 24.66,
+    "colour_psnr_db": 20.85,
+    "edge_skill_2px": 0.244,
+    "edge_f1_2px": 0.308,
+    "height_mae_levels": 68.46,
+    "height_mae_best_fit_levels": 33.76,
+    "height_ssim": 0.4456,
+    "height_correlation": 0.5207,
+    "normal_mean_angle_degrees": 12.19,
+    "normal_median_angle_degrees": 5.88,
+    "tier_reached": "none"
+   },
+   "texture_as_baked": {
+    "overall": 0.319,
+    "colour": 0.387,
+    "height": 0.126,
+    "normal": 0.147,
+    "tiling": 1.0
+   },
+   "texture_view": {
+    "overall": 0.326,
+    "colour": 0.387,
+    "height": 0.14,
+    "normal": 0.166,
+    "tiling": 1.0
+   },
+   "seam_ratio": 0.49,
+   "bake": {}
+  },
+  "geometry_route_true_normal": {
+   "name": "geometry_route_true_normal",
+   "pixel": {
+    "colour_ssim": 0.6787,
+    "colour_mean_delta_e": 10.17,
+    "colour_p95_delta_e": 24.66,
+    "colour_psnr_db": 20.85,
+    "edge_skill_2px": 0.244,
+    "edge_f1_2px": 0.308,
+    "height_mae_levels": 68.46,
+    "height_mae_best_fit_levels": 33.76,
+    "height_ssim": 0.4456,
+    "height_correlation": 0.5207,
+    "normal_mean_angle_degrees": 15.78,
+    "normal_median_angle_degrees": 10.89,
+    "tier_reached": "none"
+   },
+   "texture_as_baked": {
+    "overall": 0.371,
+    "colour": 0.387,
+    "height": 0.126,
+    "normal": 0.495,
+    "tiling": 1.0
+   },
+   "texture_view": {
+    "overall": 0.375,
+    "colour": 0.387,
+    "height": 0.14,
+    "normal": 0.495,
+    "tiling": 1.0
+   },
+   "seam_ratio": 0.49,
+   "bake": {}
+  },
+  "geometry_route_hybrid": {
+   "name": "geometry_route_hybrid",
+   "pixel": {
+    "colour_ssim": 0.6787,
+    "colour_mean_delta_e": 10.17,
+    "colour_p95_delta_e": 24.66,
+    "colour_psnr_db": 20.85,
+    "edge_skill_2px": 0.244,
+    "edge_f1_2px": 0.308,
+    "height_mae_levels": 46.86,
+    "height_mae_best_fit_levels": 34.94,
+    "height_ssim": 0.4604,
+    "height_correlation": 0.4653,
+    "normal_mean_angle_degrees": 12.19,
+    "normal_median_angle_degrees": 6.13,
+    "tier_reached": "none"
+   },
+   "texture_as_baked": {
+    "overall": 0.317,
+    "colour": 0.387,
+    "height": 0.149,
+    "normal": 0.088,
+    "tiling": 1.0
+   },
+   "texture_view": {
+    "overall": 0.306,
+    "colour": 0.387,
+    "height": 0.094,
+    "normal": 0.129,
+    "tiling": 1.0
+   },
+   "seam_ratio": 0.49,
+   "bake": {}
+  },
+  "geometry_route_colour_derived": {
+   "name": "geometry_route_colour_derived",
+   "pixel": {
+    "colour_ssim": 0.6787,
+    "colour_mean_delta_e": 10.17,
+    "colour_p95_delta_e": 24.66,
+    "colour_psnr_db": 20.85,
+    "edge_skill_2px": 0.244,
+    "edge_f1_2px": 0.308,
+    "height_mae_levels": 42.53,
+    "height_mae_best_fit_levels": 38.51,
+    "height_ssim": 0.445,
+    "height_correlation": 0.3064,
+    "normal_mean_angle_degrees": 12.53,
+    "normal_median_angle_degrees": 6.82,
+    "tier_reached": "none"
+   },
+   "texture_as_baked": {
+    "overall": 0.362,
+    "colour": 0.387,
+    "height": 0.295,
+    "normal": 0.099,
+    "tiling": 1.0
+   },
+   "texture_view": {
+    "overall": 0.376,
+    "colour": 0.387,
+    "height": 0.294,
+    "normal": 0.191,
+    "tiling": 1.0
+   },
+   "seam_ratio": 0.49,
+   "bake": {}
+  },
+  "photo": {
+   "size": 1254,
+   "z_low": 0.0,
+   "z_high": 0.0476943776011467,
+   "sobel_strength": 8.0,
+   "vertices": 100990,
+   "evaluate_geometry_s": 0.58,
+   "height_render_s": 4.27,
+   "colour_render_s": 75.66,
+   "normal_render_s": 5.92,
+   "total_seconds": 87.7,
+   "slates_and_copies": 63
+  }
+ },
+ "filter_width_test": {
+  "1.0": {
+   "best_equivalent_sigma_dots": 0.3,
+   "errors_levels": {
+    "0.3": 1.12,
+    "0.5": 3.41,
+    "0.7": 6.01,
+    "0.9": 7.91,
+    "1.1": 9.54,
+    "1.4": 11.65,
+    "1.8": 13.99
+   }
+  },
+  "1.5": {
+   "best_equivalent_sigma_dots": 0.3,
+   "errors_levels": {
+    "0.3": 1.05,
+    "0.5": 2.01,
+    "0.7": 4.53,
+    "0.9": 6.46,
+    "1.1": 8.12,
+    "1.4": 10.28,
+    "1.8": 12.68
+   }
+  },
+  "2.0": {
+   "best_equivalent_sigma_dots": 0.5,
+   "errors_levels": {
+    "0.3": 2.47,
+    "0.5": 1.53,
+    "0.7": 3.24,
+    "0.9": 5.11,
+    "1.1": 6.78,
+    "1.4": 8.98,
+    "1.8": 11.43
+   }
+  },
+  "3.0": {
+   "best_equivalent_sigma_dots": 0.7,
+   "errors_levels": {
+    "0.3": 5.07,
+    "0.5": 2.85,
+    "0.7": 1.87,
+    "0.9": 2.91,
+    "1.1": 4.41,
+    "1.4": 6.6,
+    "1.8": 9.12
+   }
+  },
+  "4.0": {
+   "best_equivalent_sigma_dots": 0.9,
+   "errors_levels": {
+    "0.3": 7.29,
+    "0.5": 4.94,
+    "0.7": 2.87,
+    "0.9": 2.21,
+    "1.1": 2.75,
+    "1.4": 4.57,
+    "1.8": 7.05
+   }
+  },
+  "6.0": {
+   "best_equivalent_sigma_dots": 1.4,
+   "errors_levels": {
+    "0.3": 10.86,
+    "0.5": 8.57,
+    "0.7": 6.33,
+    "0.9": 4.74,
+    "1.1": 3.53,
+    "1.4": 2.81,
+    "1.8": 3.95
+   }
+  },
+  "8.0": {
+   "best_equivalent_sigma_dots": 1.8,
+   "errors_levels": {
+    "0.3": 13.57,
+    "0.5": 11.39,
+    "0.7": 9.24,
+    "0.9": 7.63,
+    "1.1": 6.2,
+    "1.4": 4.46,
+    "1.8": 3.3
+   }
+  }
+ }
+}

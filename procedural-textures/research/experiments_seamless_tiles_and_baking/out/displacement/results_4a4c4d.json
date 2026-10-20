@@ -1,0 +1,118 @@
+{
+ "4a_midlevel_scale_space": {
+  "Midlevel 0.5, Scale 0.1, Space OBJECT, object stretched x1.0 in z": {
+   "measured_displacement_where_height_0": -0.0498,
+   "expected_(0-mid)*scale": -0.05,
+   "measured_displacement_where_height_1": 0.0502,
+   "expected_(1-mid)*scale": 0.05
+  },
+  "Midlevel 0.0, Scale 0.1, Space OBJECT, object stretched x1.0 in z": {
+   "measured_displacement_where_height_0": 0.0002,
+   "expected_(0-mid)*scale": 0.0,
+   "measured_displacement_where_height_1": 0.1003,
+   "expected_(1-mid)*scale": 0.1
+  },
+  "Midlevel 1.0, Scale 0.1, Space OBJECT, object stretched x1.0 in z": {
+   "measured_displacement_where_height_0": -0.0998,
+   "expected_(0-mid)*scale": -0.1,
+   "measured_displacement_where_height_1": 0.0002,
+   "expected_(1-mid)*scale": 0.0
+  },
+  "Midlevel 0.5, Scale 0.2, Space OBJECT, object stretched x1.0 in z": {
+   "measured_displacement_where_height_0": -0.0998,
+   "expected_(0-mid)*scale": -0.1,
+   "measured_displacement_where_height_1": 0.1003,
+   "expected_(1-mid)*scale": 0.1
+  },
+  "Midlevel 0.5, Scale 0.1, Space OBJECT, object stretched x2.0 in z": {
+   "measured_displacement_where_height_0": -0.0998,
+   "expected_(0-mid)*scale": -0.1,
+   "measured_displacement_where_height_1": 0.1003,
+   "expected_(1-mid)*scale": 0.1
+  },
+  "Midlevel 0.5, Scale 0.1, Space WORLD, object stretched x2.0 in z": {
+   "measured_displacement_where_height_0": -0.0498,
+   "expected_(0-mid)*scale": -0.05,
+   "measured_displacement_where_height_1": 0.0502,
+   "expected_(1-mid)*scale": 0.05
+  }
+ },
+ "4c_mesh_fineness": {
+  "static grid 16 x 16": {
+   "far_edge_wobble_px": 1.73,
+   "brightness_spread_inside": 0.038,
+   "seconds_to_render": 1.8,
+   "faces": 256
+  },
+  "static grid 64 x 64": {
+   "far_edge_wobble_px": 1.59,
+   "brightness_spread_inside": 0.1092,
+   "seconds_to_render": 1.9,
+   "faces": 4096
+  },
+  "static grid 256 x 256": {
+   "far_edge_wobble_px": 1.74,
+   "brightness_spread_inside": 0.1601,
+   "seconds_to_render": 2.1,
+   "faces": 65536
+  },
+  "static grid 1024 x 1024": {
+   "far_edge_wobble_px": 1.77,
+   "brightness_spread_inside": 0.1643,
+   "seconds_to_render": 3.9,
+   "faces": 1048576
+  },
+  "adaptive subdivision, Dicing Rate 8.0 (Pixel Size 1.0)": {
+   "far_edge_wobble_px": 1.69,
+   "brightness_spread_inside": 0.1307,
+   "seconds_to_render": 1.8
+  },
+  "adaptive subdivision, Dicing Rate 2.0 (Pixel Size 1.0)": {
+   "far_edge_wobble_px": 1.76,
+   "brightness_spread_inside": 0.1615,
+   "seconds_to_render": 2.2
+  },
+  "adaptive subdivision, Dicing Rate 1.0 (Pixel Size 1.0)": {
+   "far_edge_wobble_px": 1.78,
+   "brightness_spread_inside": 0.1635,
+   "seconds_to_render": 2.9
+  },
+  "adaptive subdivision, Dicing Rate 0.5 (Pixel Size 1.0)": {
+   "far_edge_wobble_px": 1.77,
+   "brightness_spread_inside": 0.1627,
+   "seconds_to_render": 5.2
+  }
+ },
+ "4d_8bit_heights": {
+  "8-bit ramp 0.40..0.60, Scale 2.0: true displacement": {
+   "top_edge_jumps_bigger_than_half_a_pixel": 0,
+   "columns_where_the_edge_does_not_move": 399,
+   "of_columns": 399
+  },
+  "16-bit ramp 0.40..0.60, Scale 2.0: true displacement": {
+   "top_edge_jumps_bigger_than_half_a_pixel": 0,
+   "columns_where_the_edge_does_not_move": 399,
+   "of_columns": 399
+  },
+  "Bump normal map from: float image, Linear": {
+   "mean_abs_error_vs_float_image": 0.0,
+   "pixels_with_exactly_flat_x_tilt_percent": 1.4
+  },
+  "Bump normal map from: 8-bit image, Linear": {
+   "mean_abs_error_vs_float_image": 0.00402,
+   "pixels_with_exactly_flat_x_tilt_percent": 53.7
+  },
+  "Bump normal map from: 8-bit image, Cubic": {
+   "mean_abs_error_vs_float_image": 0.00387,
+   "pixels_with_exactly_flat_x_tilt_percent": 44.0
+  },
+  "Bump normal map from: 8-bit image, Closest": {
+   "mean_abs_error_vs_float_image": 0.00553,
+   "pixels_with_exactly_flat_x_tilt_percent": 73.1
+  },
+  "Bump normal map from: 16-bit image, Linear": {
+   "mean_abs_error_vs_float_image": 0.00276,
+   "pixels_with_exactly_flat_x_tilt_percent": 0.9
+  }
+ }
+}

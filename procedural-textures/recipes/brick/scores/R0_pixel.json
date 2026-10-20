@@ -1,0 +1,47 @@
+{
+ "reference": "brick",
+ "candidate": "recipes/brick/outputs/R0",
+ "colour_mae_levels": 18.01,
+ "colour_psnr_db": 19.8,
+ "colour_ssim": 0.5182,
+ "colour_mean_delta_e": 14.31,
+ "colour_p95_delta_e": 29.43,
+ "edge_precision_2px": 0.903,
+ "edge_recall_2px": 0.225,
+ "edge_f1_2px": 0.361,
+ "edge_f1_by_luck": 0.226,
+ "edge_skill_2px": 0.174,
+ "height_mae_levels": 43.37,
+ "height_mae_best_fit_levels": 38.08,
+ "height_best_fit_gain_offset": [
+  0.371,
+  78.8
+ ],
+ "height_ssim": 0.3303,
+ "height_correlation": 0.2561,
+ "normal_mean_angle_degrees": 17.63,
+ "normal_median_angle_degrees": 11.39,
+ "normal_p95_angle_degrees": 52.93,
+ "tier_reached": "none",
+ "tier_rules": {
+  "layout": {
+   "edge_skill_2px": "min 0.3",
+   "colour_mean_delta_e": "max 20.0",
+   "height_mae_best_fit_levels": "max 40.0"
+  },
+  "close": {
+   "edge_skill_2px": "min 0.55",
+   "colour_ssim": "min 0.6",
+   "colour_mean_delta_e": "max 10.0",
+   "height_mae_best_fit_levels": "max 20.0",
+   "normal_mean_angle_degrees": "max 12.0"
+  },
+  "exact": {
+   "edge_skill_2px": "min 0.85",
+   "colour_ssim": "min 0.92",
+   "colour_mean_delta_e": "max 3.0",
+   "height_mae_best_fit_levels": "max 6.0",
+   "normal_mean_angle_degrees": "max 4.0"
+  }
+ }
+}

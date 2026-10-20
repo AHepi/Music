@@ -1,0 +1,774 @@
+Blender 5.2.2 LTS
+
+SHADER NODES (shader editor)
+  ShaderNode: not creatable here (Error: Node type ShaderNode undefined
+)
+  ShaderNodeAddShader  "Add Shader"
+      in : Shader(Shader), Shader(Shader)
+      out: Shader(Shader)
+  ShaderNodeAmbientOcclusion  "Ambient Occlusion"
+      setting samples [INT] = 16
+      setting inside [BOOLEAN] = False
+      setting only_local [BOOLEAN] = False
+      in : Color(Color), Distance(Float), Normal(Vector)
+      out: Color(Color), AO(Float)
+  ShaderNodeAttribute  "Attribute"
+      setting attribute_type [ENUM] = GEOMETRY  options: ['GEOMETRY', 'OBJECT', 'INSTANCER', 'VIEW_LAYER']
+      setting attribute_name [STRING] = 
+      in : 
+      out: Color(Color), Vector(Vector), Factor(Float), Alpha(Float)
+  ShaderNodeBackground  "Background"
+      in : Color(Color), Strength(Float), Weight(Float,hidden)
+      out: Background(Shader)
+  ShaderNodeBevel  "Bevel"
+      setting samples [INT] = 4
+      in : Radius(Float), Normal(Vector)
+      out: Normal(Vector)
+  ShaderNodeBlackbody  "Blackbody"
+      in : Temperature(FloatColorTemperature)
+      out: Color(Color)
+  ShaderNodeBrightContrast  "Brightness/Contrast"
+      in : Color(Color), Brightness(Float), Contrast(Float)
+      out: Color(Color)
+  ShaderNodeBsdfAnisotropic  "Glossy BSDF"
+      setting distribution [ENUM] = MULTI_GGX  options: ['BECKMANN', 'GGX', 'ASHIKHMIN_SHIRLEY', 'MULTI_GGX']
+      in : Color(Color), Roughness(FloatFactor), Anisotropy(Float), Rotation(FloatFactor), Normal(Vector), Tangent(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfDiffuse  "Diffuse BSDF"
+      in : Color(Color), Roughness(FloatFactor), Normal(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfGlass  "Glass BSDF"
+      setting distribution [ENUM] = MULTI_GGX  options: ['BECKMANN', 'GGX', 'MULTI_GGX']
+      in : Color(Color), Roughness(FloatFactor), IOR(Float), Normal(Vector), Weight(Float,hidden), Thin Film Thickness(FloatWavelength), Thin Film IOR(Float)
+      out: BSDF(Shader)
+  ShaderNodeBsdfHair  "Hair BSDF"
+      setting component [ENUM] = Reflection  options: ['Reflection', 'Transmission']
+      in : Color(Color), Offset(FloatAngle), RoughnessU(FloatFactor), RoughnessV(FloatFactor), Tangent(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfHairPrincipled  "Principled Hair BSDF"
+      setting model [ENUM] = CHIANG  options: ['CHIANG', 'HUANG']
+      setting parametrization [ENUM] = COLOR  options: ['ABSORPTION', 'MELANIN', 'COLOR']
+      in : Color(Color), Melanin(FloatFactor,hidden), Melanin Redness(FloatFactor,hidden), Tint(Color,hidden), Absorption Coefficient(Vector,hidden), Aspect Ratio(FloatFactor,hidden), Roughness(FloatFactor), Radial Roughness(FloatFactor), Coat(FloatFactor), IOR(Float), Offset(FloatAngle), Random Color(FloatFactor,hidden), Random Roughness(FloatFactor), Random(Float), Weight(Float,hidden), Reflection(FloatFactor,hidden), Transmission(FloatFactor,hidden), Secondary Reflection(FloatFactor,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfMetallic  "Metallic BSDF"
+      setting distribution [ENUM] = MULTI_GGX  options: ['BECKMANN', 'GGX', 'MULTI_GGX']
+      setting fresnel_type [ENUM] = F82  options: ['PHYSICAL_CONDUCTOR', 'F82']
+      in : Base Color(Color), Edge Tint(Color), IOR(Vector,hidden), Extinction(Vector,hidden), Roughness(FloatFactor), Anisotropy(FloatFactor), Rotation(FloatFactor), Normal(Vector), Tangent(Vector), Weight(Float,hidden), Thin Film Thickness(FloatWavelength), Thin Film IOR(Float)
+      out: BSDF(Shader)
+  ShaderNodeBsdfPrincipled  "Principled BSDF"
+      setting distribution [ENUM] = MULTI_GGX  options: ['GGX', 'MULTI_GGX']
+      setting subsurface_method [ENUM] = RANDOM_WALK  options: ['BURLEY', 'RANDOM_WALK', 'RANDOM_WALK_SKIN', 'RANDOM_WALK_LEGACY']
+      in : Base Color(Color), Metallic(FloatFactor), Roughness(FloatFactor), IOR(Float), Alpha(FloatFactor), Thin Wall(Bool), Normal(Vector), Weight(Float,hidden), Diffuse Roughness(FloatFactor), Subsurface Weight(FloatFactor), Subsurface Radius(Vector), Subsurface Scale(FloatDistance), Subsurface IOR(FloatFactor,hidden), Subsurface Anisotropy(FloatFactor), Specular IOR Level(FloatFactor), Specular Tint(Color), Anisotropic(FloatFactor), Anisotropic Rotation(FloatFactor), Tangent(Vector), Transmission Weight(FloatFactor), Coat Weight(FloatFactor), Coat Roughness(FloatFactor), Coat IOR(Float), Coat Tint(Color), Coat Normal(Vector), Sheen Weight(FloatFactor), Sheen Roughness(FloatFactor), Sheen Tint(Color), Emission Color(Color), Emission Strength(Float), Thin Film Thickness(FloatWavelength), Thin Film IOR(Float)
+      out: BSDF(Shader)
+  ShaderNodeBsdfRayPortal  "Ray Portal BSDF"
+      in : Color(Color), Position(Vector), Direction(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfRefraction  "Refraction BSDF"
+      setting distribution [ENUM] = BECKMANN  options: ['BECKMANN', 'GGX']
+      in : Color(Color), Roughness(FloatFactor), IOR(Float), Normal(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfSheen  "Sheen BSDF"
+      setting distribution [ENUM] = MICROFIBER  options: ['ASHIKHMIN', 'MICROFIBER']
+      in : Color(Color), Roughness(FloatFactor), Normal(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfToon  "Toon BSDF"
+      setting component [ENUM] = DIFFUSE  options: ['DIFFUSE', 'GLOSSY']
+      in : Color(Color), Size(FloatFactor), Smooth(FloatFactor), Normal(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfTranslucent  "Translucent BSDF"
+      in : Color(Color), Normal(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBsdfTransparent  "Transparent BSDF"
+      in : Color(Color), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeBump  "Bump"
+      setting invert [BOOLEAN] = False
+      in : Strength(FloatFactor), Distance(Float), Filter Width(FloatPixel), Height(Float), Normal(Vector)
+      out: Normal(Vector)
+  ShaderNodeCameraData  "Camera Data"
+      in : 
+      out: View Vector(Vector), View Z Depth(Float), View Distance(Float)
+  ShaderNodeClamp  "Clamp"
+      setting clamp_type [ENUM] = MINMAX  options: ['MINMAX', 'RANGE']
+      in : Value(Float), Min(Float), Max(Float)
+      out: Result(Float)
+  ShaderNodeCombineColor  "Combine Color"
+      setting mode [ENUM] = RGB  options: ['RGB', 'HSV', 'HSL']
+      in : Red(FloatFactor), Green(FloatFactor), Blue(FloatFactor)
+      out: Color(Color)
+  ShaderNodeCombineXYZ  "Combine XYZ"
+      in : X(Float), Y(Float), Z(Float)
+      out: Vector(Vector)
+  ShaderNodeCustomGroup: not creatable here (Error: Node type ShaderNodeCustomGroup undefined
+)
+  ShaderNodeDisplacement  "Displacement"
+      setting space [ENUM] = OBJECT  options: ['OBJECT', 'WORLD']
+      in : Height(Float), Midlevel(Float), Scale(Float), Normal(Vector)
+      out: Displacement(Vector)
+  ShaderNodeEeveeSpecular  "Specular BSDF"
+      in : Base Color(Color), Specular(Color), Roughness(FloatFactor), Emissive Color(Color), Transparency(FloatFactor), Normal(Vector), Clear Coat(FloatFactor), Clear Coat Roughness(FloatFactor), Clear Coat Normal(Vector), Weight(Float,hidden)
+      out: BSDF(Shader)
+  ShaderNodeEmission  "Emission"
+      in : Color(Color), Strength(Float), Weight(Float,hidden)
+      out: Emission(Shader)
+  ShaderNodeFloatCurve  "Float Curve"
+      in : Factor(FloatFactor), Value(Float)
+      out: Value(Float)
+  ShaderNodeFresnel  "Fresnel"
+      in : IOR(Float), Normal(Vector)
+      out: Factor(Float)
+  ShaderNodeGamma  "Gamma"
+      in : Color(Color), Gamma(Float)
+      out: Color(Color)
+  ShaderNodeGroup  "Group"
+      in : 
+      out: 
+  ShaderNodeHairInfo  "Curves Info"
+      in : 
+      out: Is Strand(Float), Intercept(Float), Length(Float), Thickness(Float), Tangent Normal(Vector), Random(Float)
+  ShaderNodeHoldout  "Holdout"
+      in : Weight(Float,hidden)
+      out: Holdout(Shader)
+  ShaderNodeHueSaturation  "Hue/Saturation/Value"
+      in : Hue(Float), Saturation(Float), Value(Float), Factor(FloatFactor), Color(Color)
+      out: Color(Color)
+  ShaderNodeInvert  "Invert Color"
+      in : Factor(FloatFactor), Color(Color)
+      out: Color(Color)
+  ShaderNodeLayerWeight  "Layer Weight"
+      in : Blend(Float), Normal(Vector)
+      out: Fresnel(Float), Facing(Float)
+  ShaderNodeLightFalloff  "Light Falloff"
+      in : Strength(Float), Smooth(Float)
+      out: Quadratic(Float), Linear(Float), Constant(Float)
+  ShaderNodeLightPath  "Light Path"
+      in : 
+      out: Is Camera Ray(Float), Is Shadow Ray(Float), Is Diffuse Ray(Float), Is Glossy Ray(Float), Is Singular Ray(Float), Is Reflection Ray(Float), Is Transmission Ray(Float), Is Volume Scatter Ray(Float), Ray Length(Float), Ray Depth(Float), Diffuse Depth(Float), Glossy Depth(Float), Transparent Depth(Float), Transmission Depth(Float), Portal Depth(Float)
+  ShaderNodeMapRange  "Map Range"
+      setting clamp [BOOLEAN] = True
+      setting interpolation_type [ENUM] = LINEAR  options: ['LINEAR', 'STEPPED', 'SMOOTHSTEP', 'SMOOTHERSTEP']
+      setting data_type [ENUM] = FLOAT  options: ['FLOAT', 'FLOAT_VECTOR']
+      in : Value(Float), From Min(Float), From Max(Float), To Min(Float), To Max(Float), Steps(Float,hidden), Vector(Vector,hidden), From Min(Vector,hidden), From Max(Vector,hidden), To Min(Vector,hidden), To Max(Vector,hidden), Steps(Vector,hidden)
+      out: Result(Float), Vector(Vector)
+  ShaderNodeMapping  "Mapping"
+      setting vector_type [ENUM] = POINT  options: ['POINT', 'TEXTURE', 'VECTOR', 'NORMAL']
+      in : Vector(Vector), Location(VectorTranslation), Rotation(VectorEuler), Scale(VectorXYZ)
+      out: Vector(Vector)
+  ShaderNodeMath  "Math"
+      setting operation [ENUM] = ADD  options: ['ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'MULTIPLY_ADD', 'POWER', 'LOGARITHM', 'SQRT', 'INVERSE_SQRT', 'ABSOLUTE', 'EXPONENT', 'MINIMUM', 'MAXIMUM', 'LESS_THAN', 'GREATER_THAN', 'SIGN', 'COMPARE', 'SMOOTH_MIN', 'SMOOTH_MAX', 'ROUND', 'FLOOR', 'CEIL', 'TRUNC', 'FRACT', 'MODULO', 'FLOORED_MODULO', 'WRAP', 'SNAP', 'PINGPONG', 'SINE', 'COSINE', 'TANGENT', 'ARCSINE', 'ARCCOSINE', 'ARCTANGENT', 'ARCTAN2', 'SINH', 'COSH', 'TANH', 'RADIANS', 'DEGREES']
+      setting use_clamp [BOOLEAN] = False
+      in : Value(Float), Value(Float), Value(Float,hidden)
+      out: Value(Float)
+  ShaderNodeMix  "Mix"
+      setting data_type [ENUM] = FLOAT  options: ['FLOAT', 'VECTOR', 'RGBA', 'ROTATION']
+      setting factor_mode [ENUM] = UNIFORM  options: ['UNIFORM', 'NON_UNIFORM']
+      setting blend_type [ENUM] = MIX  options: ['MIX', 'DARKEN', 'MULTIPLY', 'BURN', 'LIGHTEN', 'SCREEN', 'DODGE', 'ADD', 'OVERLAY', 'SOFT_LIGHT', 'LINEAR_LIGHT', 'DIFFERENCE', 'EXCLUSION', 'SUBTRACT', 'DIVIDE', 'HUE', 'SATURATION', 'COLOR', 'VALUE']
+      setting clamp_factor [BOOLEAN] = True
+      setting clamp_result [BOOLEAN] = False
+      in : Factor(FloatFactor), Factor(VectorFactor,hidden), A(Float), B(Float), A(Vector,hidden), B(Vector,hidden), A(Color,hidden), B(Color,hidden), A(Rotation,hidden), B(Rotation,hidden)
+      out: Result(Float), Result(Vector), Result(Color), Result(Rotation)
+  ShaderNodeMixRGB  "Mix (Legacy)"
+      setting blend_type [ENUM] = MIX  options: ['MIX', 'DARKEN', 'MULTIPLY', 'BURN', 'LIGHTEN', 'SCREEN', 'DODGE', 'ADD', 'OVERLAY', 'SOFT_LIGHT', 'LINEAR_LIGHT', 'DIFFERENCE', 'EXCLUSION', 'SUBTRACT', 'DIVIDE', 'HUE', 'SATURATION', 'COLOR', 'VALUE']
+      setting use_alpha [BOOLEAN] = False
+      setting use_clamp [BOOLEAN] = False
+      in : Factor(FloatFactor), Color1(Color), Color2(Color)
+      out: Color(Color)
+  ShaderNodeMixShader  "Mix Shader"
+      in : Factor(FloatFactor), Shader(Shader), Shader(Shader)
+      out: Shader(Shader)
+  ShaderNodeNewGeometry  "Geometry"
+      in : 
+      out: Position(Vector), Normal(Vector), Tangent(Vector), True Normal(Vector), Incoming(Vector), Parametric(Vector), Backfacing(Float), Pointiness(Float), Random Per Island(Float)
+  ShaderNodeNormal  "Normal"
+      in : Normal(VectorDirection)
+      out: Normal(VectorDirection), Dot(Float)
+  ShaderNodeNormalMap  "Normal Map"
+      setting space [ENUM] = TANGENT  options: ['TANGENT', 'OBJECT', 'WORLD', 'BLENDER_OBJECT', 'BLENDER_WORLD']
+      setting uv_map [STRING] = 
+      setting convention [ENUM] = OPENGL  options: ['OPENGL', 'DIRECTX']
+      setting base [ENUM] = DISPLACED  options: ['ORIGINAL', 'DISPLACED']
+      in : Strength(Float), Color(Color)
+      out: Normal(Vector)
+  ShaderNodeObjectInfo  "Object Info"
+      in : 
+      out: Location(Vector), Color(Color), Alpha(Float), Object Index(Float), Material Index(Float), Random(Float)
+  ShaderNodeOutputAOV  "AOV Output"
+      setting aov_name [STRING] = 
+      in : Color(Color), Value(Float)
+      out: 
+  ShaderNodeOutputLight  "Light Output"
+      setting is_active_output [BOOLEAN] = True
+      setting target [ENUM] = ALL  options: ['ALL', 'EEVEE', 'CYCLES']
+      in : Surface(Shader)
+      out: 
+  ShaderNodeOutputLineStyle  "Line Style Output"
+      setting is_active_output [BOOLEAN] = True
+      setting target [ENUM] = ALL  options: ['ALL', 'EEVEE', 'CYCLES']
+      setting blend_type [ENUM] = MIX  options: ['MIX', 'DARKEN', 'MULTIPLY', 'BURN', 'LIGHTEN', 'SCREEN', 'DODGE', 'ADD', 'OVERLAY', 'SOFT_LIGHT', 'LINEAR_LIGHT', 'DIFFERENCE', 'EXCLUSION', 'SUBTRACT', 'DIVIDE', 'HUE', 'SATURATION', 'COLOR', 'VALUE']
+      setting use_alpha [BOOLEAN] = False
+      setting use_clamp [BOOLEAN] = False
+      in : Color(Color), Color Fac(FloatFactor), Alpha(FloatFactor), Alpha Fac(FloatFactor)
+      out: 
+  ShaderNodeOutputMaterial  "Material Output"
+      setting is_active_output [BOOLEAN] = True
+      setting target [ENUM] = ALL  options: ['ALL', 'EEVEE', 'CYCLES']
+      in : Surface(Shader), Volume(Shader), Displacement(Vector), Thickness(Float)
+      out: 
+  ShaderNodeOutputWorld  "World Output"
+      setting is_active_output [BOOLEAN] = True
+      setting target [ENUM] = ALL  options: ['ALL', 'EEVEE', 'CYCLES']
+      in : Surface(Shader), Volume(Shader)
+      out: 
+  ShaderNodeParticleInfo  "Particle Info"
+      in : 
+      out: Index(Float), Random(Float), Age(Float), Lifetime(Float), Location(Vector), Size(Float), Velocity(Vector), Angular Velocity(Vector)
+  ShaderNodePointInfo  "Point Info"
+      in : 
+      out: Position(Vector), Radius(Float), Random(Float)
+  ShaderNodeRGB  "Color"
+      in : 
+      out: Color(Color)
+  ShaderNodeRGBCurve  "RGB Curves"
+      in : Factor(FloatFactor), Color(Color)
+      out: Color(Color)
+  ShaderNodeRGBToBW  "RGB to BW"
+      in : Color(Color)
+      out: Val(Float)
+  ShaderNodeRadialTiling  "Radial Tiling"
+      setting normalize [BOOLEAN] = False
+      in : Vector(Vector2D), Sides(Float), Roundness(FloatFactor)
+      out: Segment Coordinates(Vector), Segment ID(Float), Segment Width(Float), Segment Rotation(Float)
+  ShaderNodeRaycast  "Raycast"
+      setting only_local [BOOLEAN] = False
+      setting sample_attribute_items [COLLECTION] = None
+      setting active_index [INT] = 0
+      in : Position(Vector), Direction(Vector), Length(Float), (Virtual)
+      out: Is Hit(Float), Self Hit(Float), Hit Distance(Float), Hit Position(Vector), Hit Normal(Vector), (Virtual)
+  ShaderNodeScript  "Script"
+      setting filepath [STRING] = 
+      setting mode [ENUM] = INTERNAL  options: ['INTERNAL', 'EXTERNAL']
+      setting use_auto_update [BOOLEAN] = False
+      setting bytecode [STRING] = 
+      setting bytecode_hash [STRING] = 
+      in : 
+      out: 
+  ShaderNodeSeparateColor  "Separate Color"
+      setting mode [ENUM] = RGB  options: ['RGB', 'HSV', 'HSL']
+      in : Color(Color)
+      out: Red(Float), Green(Float), Blue(Float)
+  ShaderNodeSeparateXYZ  "Separate XYZ"
+      in : Vector(Vector)
+      out: X(Float), Y(Float), Z(Float)
+  ShaderNodeShaderToRGB  "Shader to RGB"
+      in : Shader(Shader)
+      out: Color(Color), Alpha(Float)
+  ShaderNodeSqueeze  "Squeeze Value (Legacy)"
+      in : Value(Float), Width(Float), Center(Float)
+      out: Value(Float)
+  ShaderNodeSubsurfaceScattering  "Subsurface Scattering"
+      setting falloff [ENUM] = RANDOM_WALK  options: ['BURLEY', 'RANDOM_WALK', 'RANDOM_WALK_SKIN', 'RANDOM_WALK_LEGACY']
+      in : Color(Color), Scale(Float), Radius(Vector), IOR(FloatFactor), Roughness(FloatFactor), Anisotropy(FloatFactor), Normal(Vector), Weight(Float,hidden)
+      out: BSSRDF(Shader)
+  ShaderNodeTangent  "Tangent"
+      setting direction_type [ENUM] = RADIAL  options: ['RADIAL', 'UV_MAP']
+      setting axis [ENUM] = Z  options: ['X', 'Y', 'Z']
+      setting uv_map [STRING] = 
+      in : 
+      out: Tangent(Vector)
+  ShaderNodeTexBrick  "Brick Texture"
+      setting offset_frequency [INT] = 2
+      setting squash_frequency [INT] = 2
+      setting offset [FLOAT] = 0.5
+      setting squash [FLOAT] = 1.0
+      in : Vector(Vector), Color1(Color), Color2(Color), Mortar(Color), Scale(Float), Mortar Size(Float), Mortar Smooth(Float), Bias(Float), Brick Width(Float), Row Height(Float)
+      out: Color(Color), Factor(Float)
+  ShaderNodeTexChecker  "Checker Texture"
+      in : Vector(Vector), Color1(Color), Color2(Color), Scale(Float)
+      out: Color(Color), Factor(Float)
+  ShaderNodeTexCoord  "Texture Coordinate"
+      setting from_instancer [BOOLEAN] = False
+      in : 
+      out: Generated(Vector), Normal(Vector), UV(Vector), Object(Vector), Camera(Vector), Window(Vector), Reflection(Vector)
+  ShaderNodeTexEnvironment  "Environment Texture"
+      setting projection [ENUM] = EQUIRECTANGULAR  options: ['EQUIRECTANGULAR', 'MIRROR_BALL']
+      setting interpolation [ENUM] = Linear  options: ['Linear', 'Closest', 'Cubic', 'Smart']
+      in : Vector(Vector)
+      out: Color(Color)
+  ShaderNodeTexGabor  "Gabor Texture"
+      setting gabor_type [ENUM] = 2D  options: ['2D', '3D']
+      in : Vector(Vector), Scale(Float), Frequency(Float), Anisotropy(FloatFactor), Orientation(FloatAngle), Orientation(VectorDirection,hidden)
+      out: Value(Float), Phase(Float), Intensity(Float)
+  ShaderNodeTexGradient  "Gradient Texture"
+      setting gradient_type [ENUM] = LINEAR  options: ['LINEAR', 'QUADRATIC', 'EASING', 'DIAGONAL', 'SPHERICAL', 'QUADRATIC_SPHERE', 'RADIAL']
+      in : Vector(Vector)
+      out: Color(Color), Factor(Float)
+  ShaderNodeTexIES  "IES Texture"
+      setting filepath [STRING] = 
+      setting mode [ENUM] = INTERNAL  options: ['INTERNAL', 'EXTERNAL']
+      in : Vector(Vector), Strength(Float)
+      out: Factor(Float)
+  ShaderNodeTexImage  "Image Texture"
+      setting projection [ENUM] = FLAT  options: ['FLAT', 'BOX', 'SPHERE', 'TUBE']
+      setting interpolation [ENUM] = Linear  options: ['Linear', 'Closest', 'Cubic', 'Smart']
+      setting projection_blend [FLOAT] = 0.0
+      setting extension [ENUM] = REPEAT  options: ['REPEAT', 'EXTEND', 'CLIP', 'MIRROR']
+      in : Vector(Vector)
+      out: Color(Color), Alpha(Float)
+  ShaderNodeTexMagic  "Magic Texture"
+      setting turbulence_depth [INT] = 2
+      in : Vector(Vector), Scale(Float), Distortion(Float)
+      out: Color(Color), Factor(Float)
+  ShaderNodeTexNoise  "Noise Texture"
+      setting noise_dimensions [ENUM] = 3D  options: ['1D', '2D', '3D', '4D']
+      setting noise_type [ENUM] = FBM  options: ['MULTIFRACTAL', 'RIDGED_MULTIFRACTAL', 'HYBRID_MULTIFRACTAL', 'FBM', 'HETERO_TERRAIN']
+      setting normalize [BOOLEAN] = True
+      in : Vector(Vector), W(Float,hidden), Scale(Float), Detail(Float), Roughness(FloatFactor), Lacunarity(Float), Offset(Float,hidden), Gain(Float,hidden), Distortion(Float)
+      out: Factor(Float), Color(Color)
+  ShaderNodeTexSky  "Sky Texture"
+      setting sky_type [ENUM] = MULTIPLE_SCATTERING  options: ['SINGLE_SCATTERING', 'MULTIPLE_SCATTERING', 'PREETHAM', 'HOSEK_WILKIE']
+      setting sun_disc [BOOLEAN] = True
+      setting sun_size [FLOAT] = 0.009512044489383698
+      setting sun_intensity [FLOAT] = 1.0
+      setting sun_elevation [FLOAT] = 0.2617993950843811
+      setting sun_rotation [FLOAT] = 0.0
+      setting altitude [FLOAT] = 100.0
+      setting air_density [FLOAT] = 1.0
+      setting aerosol_density [FLOAT] = 1.0
+      setting ozone_density [FLOAT] = 1.0
+      setting sun_direction [FLOAT] = [0.0, 0.0, 1.0]
+      setting turbidity [FLOAT] = 2.200000047683716
+      setting ground_albedo [FLOAT] = 0.30000001192092896
+      in : Vector(Vector,hidden)
+      out: Color(Color)
+  ShaderNodeTexVoronoi  "Voronoi Texture"
+      setting voronoi_dimensions [ENUM] = 3D  options: ['1D', '2D', '3D', '4D']
+      setting distance [ENUM] = EUCLIDEAN  options: ['EUCLIDEAN', 'MANHATTAN', 'CHEBYCHEV', 'MINKOWSKI']
+      setting feature [ENUM] = F1  options: ['F1', 'F2', 'SMOOTH_F1', 'DISTANCE_TO_EDGE', 'N_SPHERE_RADIUS']
+      setting normalize [BOOLEAN] = False
+      in : Vector(Vector), W(Float,hidden), Scale(Float), Detail(Float), Roughness(FloatFactor), Lacunarity(Float), Smoothness(FloatFactor,hidden), Exponent(Float,hidden), Randomness(FloatFactor)
+      out: Distance(Float), Color(Color), Position(Vector), W(Float), Radius(Float)
+  ShaderNodeTexWave  "Wave Texture"
+      setting wave_type [ENUM] = BANDS  options: ['BANDS', 'RINGS']
+      setting bands_direction [ENUM] = X  options: ['X', 'Y', 'Z', 'DIAGONAL']
+      setting rings_direction [ENUM] = X  options: ['X', 'Y', 'Z', 'SPHERICAL']
+      setting wave_profile [ENUM] = SIN  options: ['SIN', 'SAW', 'TRI']
+      in : Vector(Vector), Scale(Float), Distortion(Float), Detail(Float), Detail Scale(Float), Detail Roughness(FloatFactor), Phase Offset(Float)
+      out: Color(Color), Factor(Float)
+  ShaderNodeTexWhiteNoise  "White Noise Texture"
+      setting noise_dimensions [ENUM] = 3D  options: ['1D', '2D', '3D', '4D']
+      in : Vector(Vector), W(Float,hidden)
+      out: Value(Float), Color(Color)
+  ShaderNodeTree: not creatable here (Error: Node type ShaderNodeTree undefined
+)
+  ShaderNodeUVAlongStroke  "UV Along Stroke"
+      setting use_tips [BOOLEAN] = False
+      in : 
+      out: UV(Vector)
+  ShaderNodeUVMap  "UV Map"
+      setting from_instancer [BOOLEAN] = False
+      setting uv_map [STRING] = 
+      in : 
+      out: UV(Vector)
+  ShaderNodeValToRGB  "Color Ramp"
+      in : Factor(FloatFactor)
+      out: Color(Color), Alpha(Float)
+  ShaderNodeValue  "Value"
+      in : 
+      out: Value(Float)
+  ShaderNodeVectorCurve  "Vector Curves"
+      in : Factor(FloatFactor), Vector(Vector)
+      out: Vector(Vector)
+  ShaderNodeVectorDisplacement  "Vector Displacement"
+      setting space [ENUM] = TANGENT  options: ['TANGENT', 'OBJECT', 'WORLD']
+      in : Vector(Color), Midlevel(Float), Scale(Float)
+      out: Displacement(Vector)
+  ShaderNodeVectorMath  "Vector Math"
+      setting operation [ENUM] = ADD  options: ['ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'MULTIPLY_ADD', 'CROSS_PRODUCT', 'PROJECT', 'REFLECT', 'REFRACT', 'FACEFORWARD', 'DOT_PRODUCT', 'DISTANCE', 'LENGTH', 'SCALE', 'NORMALIZE', 'ABSOLUTE', 'POWER', 'SIGN', 'MINIMUM', 'MAXIMUM', 'ROUND', 'FLOOR', 'CEIL', 'FRACTION', 'MODULO', 'WRAP', 'SNAP', 'SINE', 'COSINE', 'TANGENT']
+      in : Vector(Vector), Vector(Vector), Vector(Vector,hidden), Scale(Float,hidden)
+      out: Vector(Vector), Value(Float)
+  ShaderNodeVectorRotate  "Vector Rotate"
+      setting rotation_type [ENUM] = AXIS_ANGLE  options: ['AXIS_ANGLE', 'X_AXIS', 'Y_AXIS', 'Z_AXIS', 'EULER_XYZ']
+      setting invert [BOOLEAN] = False
+      in : Vector(Vector), Center(Vector), Axis(Vector), Angle(FloatAngle), Rotation(VectorEuler,hidden)
+      out: Vector(Vector)
+  ShaderNodeVectorTransform  "Vector Transform"
+      setting vector_type [ENUM] = VECTOR  options: ['POINT', 'VECTOR', 'NORMAL']
+      setting convert_from [ENUM] = WORLD  options: ['WORLD', 'OBJECT', 'CAMERA']
+      setting convert_to [ENUM] = OBJECT  options: ['WORLD', 'OBJECT', 'CAMERA']
+      in : Vector(Vector)
+      out: Vector(Vector)
+  ShaderNodeVertexColor  "Color Attribute"
+      setting layer_name [STRING] = 
+      in : 
+      out: Color(Color), Alpha(Float)
+  ShaderNodeVolumeAbsorption  "Volume Absorption"
+      in : Color(Color), Density(Float), Weight(Float,hidden)
+      out: Volume(Shader)
+  ShaderNodeVolumeCoefficients  "Volume Coefficients"
+      setting phase [ENUM] = HENYEY_GREENSTEIN  options: ['HENYEY_GREENSTEIN', 'FOURNIER_FORAND', 'DRAINE', 'RAYLEIGH', 'MIE']
+      in : Weight(Float,hidden), Absorption Coefficients(Vector), Scatter Coefficients(Vector), Anisotropy(FloatFactor), IOR(FloatFactor,hidden), Backscatter(FloatFactor,hidden), Alpha(Float,hidden), Diameter(Float,hidden), Emission Coefficients(Vector)
+      out: Volume(Shader)
+  ShaderNodeVolumeInfo  "Volume Info"
+      in : 
+      out: Color(Color), Density(Float), Flame(Float), Temperature(Float)
+  ShaderNodeVolumePrincipled  "Principled Volume"
+      in : Color(Color), Color Attribute(String), Density(Float), Density Attribute(String), Anisotropy(FloatFactor), Absorption Color(Color), Emission Strength(Float), Emission Color(Color), Blackbody Intensity(FloatFactor), Blackbody Tint(Color), Temperature(FloatColorTemperature), Temperature Attribute(String), Weight(Float,hidden)
+      out: Volume(Shader)
+  ShaderNodeVolumeScatter  "Volume Scatter"
+      setting phase [ENUM] = HENYEY_GREENSTEIN  options: ['HENYEY_GREENSTEIN', 'FOURNIER_FORAND', 'DRAINE', 'RAYLEIGH', 'MIE']
+      in : Color(Color), Density(Float), Anisotropy(FloatFactor), IOR(FloatFactor,hidden), Backscatter(FloatFactor,hidden), Alpha(Float,hidden), Diameter(Float,hidden), Weight(Float,hidden)
+      out: Volume(Shader)
+  ShaderNodeWavelength  "Wavelength"
+      in : Wavelength(FloatWavelength)
+      out: Color(Color)
+  ShaderNodeWireframe  "Wireframe"
+      setting use_pixel_size [BOOLEAN] = False
+      in : Size(Float)
+      out: Factor(Float)
+
+GEOMETRY NODES: nodes that exist there
+  FunctionNodeAlignEulerToVector  "Align Euler to Vector"
+  FunctionNodeAlignRotationToVector  "Align Rotation to Vector"
+  FunctionNodeAxesToRotation  "Axes to Rotation"
+  FunctionNodeAxisAngleToRotation  "Axis Angle to Rotation"
+  FunctionNodeBitMath  "Bit Math"
+  FunctionNodeBooleanMath  "Boolean Math"
+  FunctionNodeCombineColor  "Combine Color"
+  FunctionNodeCombineMatrix  "Combine Matrix"
+  FunctionNodeCombineTransform  "Combine Transform"
+  FunctionNodeCompare  "Compare"
+  FunctionNodeEulerToRotation  "Euler to Rotation"
+  FunctionNodeFindInString  "Find in String"
+  FunctionNodeFloatToInt  "Float to Integer"
+  FunctionNodeFormatString  "Format String"
+  FunctionNodeHashValue  "Hash Value"
+  FunctionNodeInputBool  "Boolean"
+  FunctionNodeInputColor  "Color"
+  FunctionNodeInputInt  "Integer"
+  FunctionNodeInputIntVector  "Integer Vector"
+  FunctionNodeInputMenu  "Menu"
+  FunctionNodeInputRotation  "Rotation"
+  FunctionNodeInputSpecialCharacters  "Special Characters"
+  FunctionNodeInputString  "String"
+  FunctionNodeInputVector  "Vector"
+  FunctionNodeIntegerMath  "Integer Math"
+  FunctionNodeInvertMatrix  "Invert Matrix"
+  FunctionNodeInvertRotation  "Invert Rotation"
+  FunctionNodeMatchString  "Match String"
+  FunctionNodeMatrixDeterminant  "Matrix Determinant"
+  FunctionNodeMatrixMultiply  "Multiply Matrices"
+  FunctionNodeMatrixSVD  "Matrix SVD"
+  FunctionNodeProjectPoint  "Project Point"
+  FunctionNodeQuaternionToRotation  "Quaternion to Rotation"
+  FunctionNodeRandomValue  "Random Value"
+  FunctionNodeReplaceString  "Replace String"
+  FunctionNodeReverseString  "Reverse String"
+  FunctionNodeRotateEuler  "Rotate Euler"
+  FunctionNodeRotateRotation  "Rotate Rotation"
+  FunctionNodeRotateVector  "Rotate Vector"
+  FunctionNodeRotationToAxisAngle  "Rotation to Axis Angle"
+  FunctionNodeRotationToEuler  "Rotation to Euler"
+  FunctionNodeRotationToQuaternion  "Rotation to Quaternion"
+  FunctionNodeSeparateColor  "Separate Color"
+  FunctionNodeSeparateMatrix  "Separate Matrix"
+  FunctionNodeSeparateTransform  "Separate Transform"
+  FunctionNodeSetStringCase  "Set String Case"
+  FunctionNodeSliceString  "Slice String"
+  FunctionNodeSplitString  "Split String"
+  FunctionNodeStringLength  "String Length"
+  FunctionNodeStringToValue  "String to Value"
+  FunctionNodeTransformDirection  "Transform Direction"
+  FunctionNodeTransformPoint  "Transform Point"
+  FunctionNodeTransposeMatrix  "Transpose Matrix"
+  FunctionNodeTrimString  "Trim String"
+  FunctionNodeValueToString  "Value to String"
+  GeometryNodeAccumulateField  "Accumulate Field"
+  GeometryNodeAttributeDomainSize  "Domain Size"
+  GeometryNodeAttributeStatistic  "Attribute Statistic"
+  GeometryNodeBake  "Bake"
+  GeometryNodeBlurAttribute  "Blur Attribute"
+  GeometryNodeBoneInfo  "Bone Info"
+  GeometryNodeBoundBox  "Bounding Box"
+  GeometryNodeCameraInfo  "Camera Info"
+  GeometryNodeCaptureAttribute  "Capture Attribute"
+  GeometryNodeClosureToList  "Closure to List"
+  GeometryNodeClusterByConnected  "Cluster by Connected"
+  GeometryNodeClusterByDistance  "Cluster by Distance"
+  GeometryNodeCollectionChildren  "Collection Children"
+  GeometryNodeCollectionInfo  "Collection Info"
+  GeometryNodeConvexHull  "Convex Hull"
+  GeometryNodeCornersOfEdge  "Corners of Edge"
+  GeometryNodeCornersOfFace  "Corners of Face"
+  GeometryNodeCornersOfVertex  "Corners of Vertex"
+  GeometryNodeCubeGridTopology  "Cube Grid Topology"
+  GeometryNodeCurveArc  "Arc"
+  GeometryNodeCurveEndpointSelection  "Endpoint Selection"
+  GeometryNodeCurveHandleTypeSelection  "Handle Type Selection"
+  GeometryNodeCurveLength  "Curve Length"
+  GeometryNodeCurveOfPoint  "Curve of Point"
+  GeometryNodeCurvePrimitiveBezierSegment  "Bézier Segment"
+  GeometryNodeCurvePrimitiveCircle  "Curve Circle"
+  GeometryNodeCurvePrimitiveLine  "Curve Line"
+  GeometryNodeCurvePrimitiveQuadrilateral  "Quadrilateral"
+  GeometryNodeCurveQuadraticBezier  "Quadratic Bézier"
+  GeometryNodeCurveSetHandles  "Set Handle Type"
+  GeometryNodeCurveSpiral  "Spiral"
+  GeometryNodeCurveSplineType  "Set Spline Type"
+  GeometryNodeCurveStar  "Star"
+  GeometryNodeCurveToMesh  "Curve to Mesh"
+  GeometryNodeCurveToPoints  "Curve to Points"
+  GeometryNodeCurvesToGreasePencil  "Curves to Grease Pencil"
+  GeometryNodeDeformCurvesOnSurface  "Deform Curves on Surface"
+  GeometryNodeDeleteGeometry  "Delete Geometry"
+  GeometryNodeDistributePointsInGrid  "Distribute Points in Grid"
+  GeometryNodeDistributePointsInVolume  "Distribute Points in Volume"
+  GeometryNodeDistributePointsOnFaces  "Distribute Points on Faces"
+  GeometryNodeDualMesh  "Dual Mesh"
+  GeometryNodeDuplicateElements  "Duplicate Elements"
+  GeometryNodeEdgePathsToCurves  "Edge Paths to Curves"
+  GeometryNodeEdgePathsToSelection  "Edge Paths to Selection"
+  GeometryNodeEdgesOfCorner  "Edges of Corner"
+  GeometryNodeEdgesOfVertex  "Edges of Vertex"
+  GeometryNodeEdgesToFaceGroups  "Edges to Face Groups"
+  GeometryNodeExtrudeMesh  "Extrude Mesh"
+  GeometryNodeFaceOfCorner  "Face of Corner"
+  GeometryNodeFieldAtIndex  "Evaluate at Index"
+  GeometryNodeFieldAverage  "Field Average"
+  GeometryNodeFieldMinAndMax  "Field Min & Max"
+  GeometryNodeFieldOnDomain  "Evaluate on Domain"
+  GeometryNodeFieldToGrid  "Field to Grid"
+  GeometryNodeFieldToList  "Field to List"
+  GeometryNodeFieldVariance  "Field Variance"
+  GeometryNodeFillCurve  "Fill Curve"
+  GeometryNodeFilletCurve  "Fillet Curve"
+  GeometryNodeFilterList  "Filter List"
+  GeometryNodeFlipFaces  "Flip Faces"
+  GeometryNodeForeachGeometryElementInput  "For Each Geometry Element Input"
+  GeometryNodeForeachGeometryElementOutput  "For Each Geometry Element Output"
+  GeometryNodeGeometryToInstance  "Geometry to Instance"
+  GeometryNodeGetAttributeNames  "Get Attribute Names"
+  GeometryNodeGetGeometryBundle  "Get Geometry Bundle"
+  GeometryNodeGetGeometryComponent  "Get Geometry Component"
+  GeometryNodeGetNamedGrid  "Get Named Grid"
+  GeometryNodeGizmoDial  "Dial Gizmo"
+  GeometryNodeGizmoLinear  "Linear Gizmo"
+  GeometryNodeGizmoTransform  "Transform Gizmo"
+  GeometryNodeGreasePencilToCurves  "Grease Pencil to Curves"
+  GeometryNodeGridAdvect  "Advect Grid"
+  GeometryNodeGridClip  "Clip Grid"
+  GeometryNodeGridCurl  "Grid Curl"
+  GeometryNodeGridDilateAndErode  "Grid Dilate & Erode"
+  GeometryNodeGridDivergence  "Grid Divergence"
+  GeometryNodeGridGradient  "Grid Gradient"
+  GeometryNodeGridInfo  "Grid Info"
+  GeometryNodeGridLaplacian  "Grid Laplacian"
+  GeometryNodeGridMean  "Grid Mean"
+  GeometryNodeGridMedian  "Grid Median"
+  GeometryNodeGridPrune  "Prune Grid"
+  GeometryNodeGridToMesh  "Grid to Mesh"
+  GeometryNodeGridToPoints  "Grid to Points"
+  GeometryNodeGridVoxelize  "Voxelize Grid"
+  GeometryNodeGroup  "Group"
+  GeometryNodeImageInfo  "Image Info"
+  GeometryNodeImageTexture  "Image Texture"
+  GeometryNodeImportCSV  "Import CSV"
+  GeometryNodeImportOBJ  "Import OBJ"
+  GeometryNodeImportPLY  "Import PLY"
+  GeometryNodeImportSTL  "Import STL"
+  GeometryNodeImportText  "Import Text"
+  GeometryNodeImportVDB  "Import VDB"
+  GeometryNodeIndexOfNearest  "Index of Nearest"
+  GeometryNodeIndexSwitch  "Index Switch"
+  GeometryNodeInputActiveCamera  "Active Camera"
+  GeometryNodeInputCollection  "Collection"
+  GeometryNodeInputCurveHandlePositions  "Curve Handle Positions"
+  GeometryNodeInputCurveTilt  "Curve Tilt"
+  GeometryNodeInputEdgeSmooth  "Is Edge Smooth"
+  GeometryNodeInputFont  "Font"
+  GeometryNodeInputID  "ID"
+  GeometryNodeInputImage  "Image"
+  GeometryNodeInputIndex  "Index"
+  GeometryNodeInputInstanceBounds  "Instance Bounds"
+  GeometryNodeInputInstanceReference  "Instance Reference"
+  GeometryNodeInputInstanceRotation  "Instance Rotation"
+  GeometryNodeInputInstanceScale  "Instance Scale"
+  GeometryNodeInputMaterial  "Material"
+  GeometryNodeInputMaterialIndex  "Material Index"
+  GeometryNodeInputMeshEdgeAngle  "Edge Angle"
+  GeometryNodeInputMeshEdgeNeighbors  "Edge Neighbors"
+  GeometryNodeInputMeshEdgeVertices  "Edge Vertices"
+  GeometryNodeInputMeshFaceArea  "Face Area"
+  GeometryNodeInputMeshFaceIsPlanar  "Is Face Planar"
+  GeometryNodeInputMeshFaceNeighbors  "Face Neighbors"
+  GeometryNodeInputMeshIsland  "Mesh Island"
+  GeometryNodeInputMeshVertexNeighbors  "Vertex Neighbors"
+  GeometryNodeInputNamedAttribute  "Named Attribute"
+  GeometryNodeInputNamedLayerSelection  "Named Layer Selection"
+  GeometryNodeInputNormal  "Normal"
+  GeometryNodeInputObject  "Object"
+  GeometryNodeInputPosition  "Position"
+  GeometryNodeInputRadius  "Radius"
+  GeometryNodeInputSceneTime  "Scene Time"
+  GeometryNodeInputShadeSmooth  "Is Face Smooth"
+  GeometryNodeInputShortestEdgePaths  "Shortest Edge Paths"
+  GeometryNodeInputSplineCyclic  "Is Spline Cyclic"
+  GeometryNodeInputSplineResolution  "Spline Resolution"
+  GeometryNodeInputTangent  "Curve Tangent"
+  GeometryNodeInputVoxelIndex  "Voxel Index"
+  GeometryNodeInstanceOnPoints  "Instance on Points"
+  GeometryNodeInstanceTransform  "Instance Transform"
+  GeometryNodeInstancesToPoints  "Instances to Points"
+  GeometryNodeInterpolateCurves  "Interpolate Curves"
+  GeometryNodeIsViewport  "Is Viewport"
+  GeometryNodeJoinGeometry  "Join Geometry"
+  GeometryNodeListGetItem  "Get List Item"
+  GeometryNodeListLength  "List Length"
+  GeometryNodeMaterialSelection  "Material Selection"
+  GeometryNodeMenuSwitch  "Menu Switch"
+  GeometryNodeMergeByDistance  "Merge by Distance"
+  GeometryNodeMergeLayers  "Merge Layers"
+  GeometryNodeMergePoints  "Merge Points"
+  GeometryNodeMeshBevel  "Mesh Bevel"
+  GeometryNodeMeshBoolean  "Mesh Boolean"
+  GeometryNodeMeshCircle  "Mesh Circle"
+  GeometryNodeMeshCone  "Cone"
+  GeometryNodeMeshCube  "Cube"
+  GeometryNodeMeshCylinder  "Cylinder"
+  GeometryNodeMeshFaceSetBoundaries  "Face Group Boundaries"
+  GeometryNodeMeshGrid  "Grid"
+  GeometryNodeMeshIcoSphere  "Ico Sphere"
+  GeometryNodeMeshLine  "Mesh Line"
+  GeometryNodeMeshToCurve  "Mesh to Curve"
+  GeometryNodeMeshToDensityGrid  "Mesh to Density Grid"
+  GeometryNodeMeshToPoints  "Mesh to Points"
+  GeometryNodeMeshToSDFGrid  "Mesh to SDF Grid"
+  GeometryNodeMeshToVolume  "Mesh to Volume"
+  GeometryNodeMeshUVSphere  "UV Sphere"
+  GeometryNodeObjectInfo  "Object Info"
+  GeometryNodeOffsetCornerInFace  "Offset Corner in Face"
+  GeometryNodeOffsetPointInCurve  "Offset Point in Curve"
+  GeometryNodePoints  "Points"
+  GeometryNodePointsOfCurve  "Points of Curve"
+  GeometryNodePointsToCurves  "Points to Curves"
+  GeometryNodePointsToSDFGrid  "Points to SDF Grid"
+  GeometryNodePointsToVertices  "Points to Vertices"
+  GeometryNodePointsToVolume  "Points to Volume"
+  GeometryNodeProximity  "Geometry Proximity"
+  GeometryNodeRaycast  "Raycast"
+  GeometryNodeRealizeInstances  "Realize Instances"
+  GeometryNodeRemoveAttribute  "Remove Named Attribute"
+  GeometryNodeRenameAttribute  "Rename Attribute"
+  GeometryNodeRepeatInput  "Repeat Input"
+  GeometryNodeRepeatOutput  "Repeat Output"
+  GeometryNodeReplaceMaterial  "Replace Material"
+  GeometryNodeResampleCurve  "Resample Curve"
+  GeometryNodeReverseCurve  "Reverse Curve"
+  GeometryNodeRotateInstances  "Rotate Instances"
+  GeometryNodeSDFGridBoolean  "SDF Grid Boolean"
+  GeometryNodeSDFGridFillet  "SDF Grid Fillet"
+  GeometryNodeSDFGridLaplacian  "SDF Grid Laplacian"
+  GeometryNodeSDFGridMean  "SDF Grid Mean"
+  GeometryNodeSDFGridMeanCurvature  "SDF Grid Mean Curvature"
+  GeometryNodeSDFGridMedian  "SDF Grid Median"
+  GeometryNodeSDFGridOffset  "SDF Grid Offset"
+  GeometryNodeSampleCurve  "Sample Curve"
+  GeometryNodeSampleGrid  "Sample Grid"
+  GeometryNodeSampleGridIndex  "Sample Grid Index"
+  GeometryNodeSampleIndex  "Sample Index"
+  GeometryNodeSampleNearest  "Sample Nearest"
+  GeometryNodeSampleNearestSurface  "Sample Nearest Surface"
+  GeometryNodeSampleSoundFrequencies  "Sample Sound Frequencies"
+  GeometryNodeSampleUVSurface  "Sample UV Surface"
+  GeometryNodeScaleElements  "Scale Elements"
+  GeometryNodeScaleInstances  "Scale Instances"
+  GeometryNodeSelfObject  "Self Object"
+  GeometryNodeSeparateComponents  "Separate Components"
+  GeometryNodeSeparateGeometry  "Separate Geometry"
+  GeometryNodeSetCurveHandlePositions  "Set Handle Positions"
+  GeometryNodeSetCurveNormal  "Set Curve Normal"
+  GeometryNodeSetCurveRadius  "Set Curve Radius"
+  GeometryNodeSetCurveTilt  "Set Curve Tilt"
+  GeometryNodeSetGeometryBundle  "Set Geometry Bundle"
+  GeometryNodeSetGeometryName  "Set Geometry Name"
+  GeometryNodeSetGreasePencilColor  "Set Grease Pencil Color"
+  GeometryNodeSetGreasePencilDepth  "Set Grease Pencil Depth"
+  GeometryNodeSetGreasePencilSoftness  "Set Grease Pencil Softness"
+  GeometryNodeSetGridBackground  "Set Grid Background"
+  GeometryNodeSetGridTransform  "Set Grid Transform"
+  GeometryNodeSetID  "Set ID"
+  GeometryNodeSetInstanceTransform  "Set Instance Transform"
+  GeometryNodeSetMaterial  "Set Material"
+  GeometryNodeSetMaterialIndex  "Set Material Index"
+  GeometryNodeSetMeshNormal  "Set Mesh Normal"
+  GeometryNodeSetNURBSOrder  "Set NURBS Order"
+  GeometryNodeSetNURBSWeight  "Set NURBS Weight"
+  GeometryNodeSetPointRadius  "Set Point Radius"
+  GeometryNodeSetPosition  "Set Position"
+  GeometryNodeSetShadeSmooth  "Set Shade Smooth"
+  GeometryNodeSetSplineCyclic  "Set Spline Cyclic"
+  GeometryNodeSetSplineResolution  "Set Spline Resolution"
+  GeometryNodeSimulationInput  "Simulation Input"
+  GeometryNodeSimulationOutput  "Simulation Output"
+  GeometryNodeSortElements  "Sort Elements"
+  GeometryNodeSortList  "Sort List"
+  GeometryNodeSplineLength  "Spline Length"
+  GeometryNodeSplineParameter  "Spline Parameter"
+  GeometryNodeSplitEdges  "Split Edges"
+  GeometryNodeSplitToInstances  "Split to Instances"
+  GeometryNodeStoreNamedAttribute  "Store Named Attribute"
+  GeometryNodeStoreNamedGrid  "Store Named Grid"
+  GeometryNodeStringJoin  "Join Strings"
+  GeometryNodeStringToCurves  "String to Curves"
+  GeometryNodeSubdivideCurve  "Subdivide Curve"
+  GeometryNodeSubdivideMesh  "Subdivide Mesh"
+  GeometryNodeSubdivisionSurface  "Subdivision Surface"
+  GeometryNodeSwitch  "Switch"
+  GeometryNodeTagFilter  "Tag Filter"
+  GeometryNodeTool3DCursor  "3D Cursor"
+  GeometryNodeToolActiveElement  "Active Element"
+  GeometryNodeToolFaceSet  "Face Set"
+  GeometryNodeToolMousePosition  "Mouse Position"
+  GeometryNodeToolSelection  "Selection"
+  GeometryNodeToolSetFaceSet  "Set Face Set"
+  GeometryNodeToolSetSelection  "Set Selection"
+  GeometryNodeTransferAttributes  "Transfer Attributes"
+  GeometryNodeTransform  "Transform Geometry"
+  GeometryNodeTranslateInstances  "Translate Instances"
+  GeometryNodeTriangulate  "Triangulate"
+  GeometryNodeTrimCurve  "Trim Curve"
+  GeometryNodeUVPackIslands  "Pack UV Islands"
+  GeometryNodeUVTangent  "UV Tangent"
+  GeometryNodeUVUnwrap  "UV Unwrap"
+  GeometryNodeVertexOfCorner  "Vertex of Corner"
+  GeometryNodeViewer  "Viewer"
+  GeometryNodeViewportTransform  "Viewport Transform"
+  GeometryNodeVolumeCube  "Volume Cube"
+  GeometryNodeVolumeToMesh  "Volume to Mesh"
+  GeometryNodeWarning  "Warning"
+  GeometryNodeXPBDSolver  "XPBD Solver"
+  ShaderNodeBlackbody  "Blackbody"
+  ShaderNodeClamp  "Clamp"
+  ShaderNodeCombineXYZ  "Combine XYZ"
+  ShaderNodeFloatCurve  "Float Curve"
+  ShaderNodeGamma  "Gamma"
+  ShaderNodeMapRange  "Map Range"
+  ShaderNodeMath  "Math"
+  ShaderNodeMix  "Mix"
+  ShaderNodeMixRGB  "Mix (Legacy)"
+  ShaderNodeRGBCurve  "RGB Curves"
+  ShaderNodeRadialTiling  "Radial Tiling"
+  ShaderNodeSeparateXYZ  "Separate XYZ"
+  ShaderNodeTexBrick  "Brick Texture"
+  ShaderNodeTexChecker  "Checker Texture"
+  ShaderNodeTexGabor  "Gabor Texture"
+  ShaderNodeTexGradient  "Gradient Texture"
+  ShaderNodeTexMagic  "Magic Texture"
+  ShaderNodeTexNoise  "Noise Texture"
+  ShaderNodeTexVoronoi  "Voronoi Texture"
+  ShaderNodeTexWave  "Wave Texture"
+  ShaderNodeTexWhiteNoise  "White Noise Texture"
+  ShaderNodeValToRGB  "Color Ramp"
+  ShaderNodeValue  "Value"
+  ShaderNodeVectorCurve  "Vector Curves"
+  ShaderNodeVectorMath  "Vector Math"
+  ShaderNodeVectorRotate  "Vector Rotate"

@@ -1,0 +1,114 @@
+{
+ "size": 256,
+ "metal_fraction_of_the_surface": 0.406,
+ "Q1_diffuse_bake": {
+  "mean_error_vs_photograph_where_NOT_metal": 0.011,
+  "mean_brightness_of_the_bake_where_metal": 0.0069,
+  "mean_brightness_of_the_photograph_where_metal": 0.5917
+ },
+ "Q2_emit_trick_colour": {
+  "mean_error_vs_photograph": 0.0011,
+  "max_error_vs_photograph": 0.0078
+ },
+ "Q3_roughness_bake": {
+  "mean_error_vs_photograph": 1e-05
+ },
+ "Q4_normal": {
+  "cycles_bake_vs_bump_node_photograph_mean_abs_error": 8e-05,
+  "cycles_bake_vs_numpy_sobel_mean_abs_error": 0.00302,
+  "bump_node_photograph_vs_numpy_sobel_mean_abs_error": 0.00304,
+  "bake_green_mean": 0.5,
+  "bake_blue_mean": 0.9991,
+  "sobel_strength_that_matches_the_cycles_bake": 5.33,
+  "predicted_by_distance_times_size": 5.12
+ },
+ "Q5_ao_of_flat_square_with_bump": {
+  "min": 1.0,
+  "max": 1.0,
+  "mean": 1.0
+ },
+ "Q6_colour_space_of_the_target_picture": {
+  "byte buffer, sRGB": {
+   "roughness_in_memory_error": 0.2309,
+   "saved_png_error": 0.2309,
+   "mean_in_memory": 0.7422,
+   "mean_truth": 0.5113
+  },
+  "byte buffer, Non-Color": {
+   "roughness_in_memory_error": 0.001,
+   "saved_png_error": 0.001,
+   "mean_in_memory": 0.5113,
+   "mean_truth": 0.5113
+  },
+  "COLOUR byte buffer, sRGB": {
+   "in_memory_error": 0.0011,
+   "saved_png_error": 0.0011
+  },
+  "COLOUR byte buffer, Non-Color": {
+   "saved_png_error": 0.2686
+  },
+  "float buffer, sRGB": {
+   "roughness_in_memory_error": 0.2309,
+   "saved_png_error": 0.2309,
+   "mean_in_memory": 0.7422,
+   "mean_truth": 0.5113
+  },
+  "float buffer, Non-Color": {
+   "roughness_in_memory_error": 0.0,
+   "saved_png_error": 0.0,
+   "mean_in_memory": 0.5113,
+   "mean_truth": 0.5113
+  },
+  "COLOUR float buffer, sRGB": {
+   "in_memory_error": 0.0014,
+   "saved_png_error": 0.0014
+  },
+  "COLOUR float buffer, Non-Color": {
+   "saved_png_error": 0.2687
+  }
+ },
+ "Q7_bake_hard_edge_vs_exact_coverage": {
+  "box1_s1": {
+   "mean_error_on_edge_pixels": 0.5156,
+   "pixels_changed_away_from_edge": 0
+  },
+  "box1_s4": {
+   "mean_error_on_edge_pixels": 0.1714,
+   "pixels_changed_away_from_edge": 0
+  },
+  "box1_s16": {
+   "mean_error_on_edge_pixels": 0.061,
+   "pixels_changed_away_from_edge": 0
+  },
+  "box1_s64": {
+   "mean_error_on_edge_pixels": 0.0288,
+   "pixels_changed_away_from_edge": 0
+  },
+  "blackmanharris1p5_s16": {
+   "mean_error_on_edge_pixels": 0.061,
+   "pixels_changed_away_from_edge": 0
+  }
+ },
+ "Q8_margin_with_island_covering_the_middle_half": {
+  "margin 0 EXTEND": {
+   "filled_pixels_percent": 25.0,
+   "island_only_percent": 25.0,
+   "first_filled_column_from_left": 64
+  },
+  "margin 8 EXTEND": {
+   "filled_pixels_percent": 31.4,
+   "island_only_percent": 25.0,
+   "first_filled_column_from_left": 56
+  },
+  "margin 32 EXTEND": {
+   "filled_pixels_percent": 53.0,
+   "island_only_percent": 25.0,
+   "first_filled_column_from_left": 32
+  },
+  "margin 8 ADJACENT_FACES": {
+   "filled_pixels_percent": 29.0,
+   "island_only_percent": 25.0,
+   "first_filled_column_from_left": 59
+  }
+ }
+}

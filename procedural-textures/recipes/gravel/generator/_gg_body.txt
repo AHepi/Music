@@ -1,0 +1,238 @@
+# What this does (plain words): the GRAVEL GENERATOR. It reads a gravel description (a small JSON file: soil recipe, stone recipe, optional placed stones, optional
+# traced patches, a colour palette), asks gravel_layers.py for the back-to-front list of flat coloured shapes, builds that as real flat Blender geometry (each
+# shape one flat piece of mesh a hair above the one before), photographs it from straight above with Blender's Cycles renderer (one emission picture per
+# channel), and writes the pictures of one seamless tile: colour.png, height.png (16-bit), normal.png (green points up), roughness.png, metallic.png, ao.png.
+# It NEVER reads the reference pictures; everything it knows is in the description file.
+# How the maps are made (the derivation the reference maps were made with, proved in analysis/derivation_ceiling.py and derivation_parametric.py):
+#   height = a straight-line mix of the colour's red, green, blue (sRGB numbers) with cut-offs, blurred ~0.5 dots (numbers come from the description);
+#   normal = the slope of the 8-bit height times a strength (central difference), made into a unit arrow.
+# Use (inside Blender, command line):
+#   blender -b --disable-autoexec -t 2 --python gravel_generator.py -- DESCRIPTION.json OUT_FOLDER [--size 1254] [--shift 0.5 0.5] [--samples 16]
+# The same file can be imported (import gravel_generator as gg) to call bake_description(description, out_folder, size).
+import json
+import math
+import os
+import sys
+import time
+
+import bpy
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+PROC = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+sys.path.insert(0, os.path.join(PROC, 'lib'))
+sys.path.insert(0, os.path.join(PROC, 'lib', 'contrib'))
+sys.path.insert(0, HERE)
+
+import bake_harness as bh  # noqa: E402
+import recipe_tools as rt  # noqa: E402
+import slate_layers as layers  # noqa: E402  (turns the description's layers into one back-to-front list of flat shapes)
+
+Z_STEP = 1.0e-4          # how far each next shape floats above the one before (tile is 1 wide; camera is 5 above)
+
+
+# ----------------------------------------------------------------------------------------------------- shapes -> mesh
+def srgb_to_linear(value):
+    value = np.asarray(value, np.float64)
+    return np.where(value <= 0.04045, value / 12.92, ((value + 0.055) / 1.055) ** 2.4)
+
+
+def build_tile_mesh(shape_list, description, shift=(0.0, 0.0)):
+    """One Blender mesh holding every flat shape. shape_list: [(points (n x 2, tile dots, y down), palette index), ...] back to front.
+    Each shape is drawn again shifted by -1 / +1 tile wherever it touches the tile edge, so the tile repeats exactly."""
+    tile = float(description['tile'])
+    palette = np.array(description['palette'], np.float64) / 255.0
+    roughness = description.get('roughness') or [0.8] * len(palette)
+    metallic = description.get('metallic') or [0.0] * len(palette)
+    linear = srgb_to_linear(palette)
+    grey = palette @ np.array([0.299, 0.587, 0.114])           # brightness of the colour as an sRGB-number (0..1), the height is made from this
+    vertices, faces, face_colour, face_grey, face_rough, face_metal = [], [], [], [], [], []
+    count = 0
+    sx, sy = shift
+    for points, index in shape_list:
+        pts = np.asarray(points, np.float64)
+        pts = pts - tile * np.floor(pts.mean(axis=0) / tile)          # bring the shape's middle into the tile first (layouts may run past it), then slide
+        pts = pts + [sx * tile, sy * tile]
+        pts = pts - tile * np.floor(pts.mean(axis=0) / tile)
+        low, high = pts.min(axis=0), pts.max(axis=0)
+        for ox in (-1, 0, 1):
+            if high[0] + ox * tile < 0 or low[0] + ox * tile >= tile:
+                continue
+            for oy in (-1, 0, 1):
+                if high[1] + oy * tile < 0 or low[1] + oy * tile >= tile:
+                    continue
+                u = (pts[:, 0] + ox * tile) / tile
+                v = 1.0 - (pts[:, 1] + oy * tile) / tile
+                z = (count + 1) * Z_STEP
+                start = len(vertices)
+                vertices.extend((float(a), float(b), z) for a, b in zip(u, v))
+                faces.append(tuple(range(start, start + len(pts))))
+                face_colour.append(linear[index])
+                face_grey.append(grey[index])
+                face_rough.append(roughness[index])
+                face_metal.append(metallic[index])
+                count += 1
+    mesh = bpy.data.meshes.new('slate shapes')
+    mesh.from_pydata(vertices, [], faces)
+    colour = np.ones((len(faces), 4), np.float32)
+    colour[:, :3] = np.array(face_colour, np.float32).reshape(-1, 3)
+    for name, kind, values in (('piece_colour', 'FLOAT_COLOR', colour.ravel()), ('piece_grey', 'FLOAT', np.array(face_grey, np.float32)),
+                               ('piece_rough', 'FLOAT', np.array(face_rough, np.float32)), ('piece_metal', 'FLOAT', np.array(face_metal, np.float32))):
+        attribute = mesh.attributes.new(name, kind, 'FACE')
+        attribute.data.foreach_set('color' if kind == 'FLOAT_COLOR' else 'value', values)
+    return mesh, count
+
+
+# ----------------------------------------------------------------------------------------------------- materials (one per picture)
+def channel_material(channel, description):
+    """An emission material that shows ONE map: 'Colour', 'Height', 'Roughness' or 'Metallic' (read from the attributes on the faces)."""
+    material = bpy.data.materials.new('show ' + channel)
+    material.use_nodes = True
+    tree = material.node_tree
+    tree.nodes.clear()
+    w = rt.NodeWriter(tree)
+    w.add('ShaderNodeEmission', 'emit', x=5, Strength=1.0)
+    w.add('ShaderNodeOutputMaterial', 'output', x=6)
+    w.link('emit', 'Emission', 'output', 'Surface')
+    if channel == 'Colour':
+        w.add('ShaderNodeAttribute', 'attr', x=0, attribute_name='piece_colour', attribute_type='GEOMETRY')
+        w.link('attr', 'Color', 'emit', 'Color')
+    elif channel == 'Height':
+        h = description['maps']['height']
+        w.add('ShaderNodeAttribute', 'attr', x=0, attribute_name='piece_grey', attribute_type='GEOMETRY')
+        w.add('ShaderNodeMapRange', 'stretch', x=2, clamp=True, From__Min=h['grey_low'] / 255.0, From__Max=h['grey_high'] / 255.0, To__Min=0.0, To__Max=1.0)
+        grain = h.get('grain')
+        if grain and grain.get('amplitude', 0) > 0:
+            # optional faint grain: seamless fine noise (the project's 4D "donut" noise, because Blender's own noise does not repeat) added to the brightness
+            # that the height is made from. amplitude = spread of the grain in brightness steps (0-255); features = grain specks per tile along one side.
+            w.add('ShaderNodeNewGeometry', 'where', x=0, y=2)
+            noise_tree = rt.tileable_noise_group('slate grain')
+            w.add('ShaderNodeGroup', 'grain noise', x=1, y=2)
+            w.nodes['grain noise'].node_tree = noise_tree
+            w.nodes['grain noise'].inputs['Scale'].default_value = float(grain.get('features', 800))
+            w.nodes['grain noise'].inputs['Detail'].default_value = 0.0
+            w.nodes['grain noise'].inputs['Seed'].default_value = float(grain.get('seed', 3))
+            w.link('where', 'Position', 'grain noise', 'Vector')
+            gain = grain['amplitude'] / 255.0 / float(grain.get('noise_spread', 0.12))
+            w.math('grain centred', 'SUBTRACT', None, 0.5, x=2, y=2); w.link('grain noise', 'Fac', 'grain centred', 0)
+            w.math('grain scaled', 'MULTIPLY', None, gain, x=3, y=2); w.link('grain centred', 0, 'grain scaled', 0)
+            w.math('grey plus grain', 'ADD', x=3, y=0); w.link('attr', 'Fac', 'grey plus grain', 0); w.link('grain scaled', 0, 'grey plus grain', 1)
+            w.link('grey plus grain', 0, 'stretch', 'Value')
+        else:
+            w.link('attr', 'Fac', 'stretch', 'Value')
+        w.add('ShaderNodeCombineColor', 'grey', x=3)
+        for socket in ('Red', 'Green', 'Blue'):
+            w.link('stretch', 'Result', 'grey', socket)
+        w.link('grey', 'Color', 'emit', 'Color')
+    else:
+        name = {'Roughness': 'piece_rough', 'Metallic': 'piece_metal'}[channel]
+        w.add('ShaderNodeAttribute', 'attr', x=0, attribute_name=name, attribute_type='GEOMETRY')
+        w.add('ShaderNodeCombineColor', 'grey', x=3)
+        for socket in ('Red', 'Green', 'Blue'):
+            w.link('attr', 'Fac', 'grey', socket)
+        w.link('grey', 'Color', 'emit', 'Color')
+    return material
+
+
+# ----------------------------------------------------------------------------------------------------- the whole bake
+def photograph(scene, tile_object, material, path, linear_data, sixteen_bit, samples, gaussian_width=None):
+    tile_object.data.materials.clear()
+    tile_object.data.materials.append(material)
+    scene.cycles.samples = samples
+    if gaussian_width:
+        scene.cycles.pixel_filter_type = 'GAUSSIAN'
+        scene.cycles.filter_width = gaussian_width
+    else:
+        scene.cycles.pixel_filter_type = 'BOX'
+        scene.cycles.filter_width = 1.0
+    bh.render_to(scene, path, linear_data, sixteen_bit)
+
+
+def derive_normal_from_height(height16, strength):
+    """Normal map (OpenGL, green up) from the height rounded to 8 bits, the way the reference maps were made (slope across 2 dots x strength)."""
+    h = np.round(height16 * 255.0)
+    hx = (np.roll(h, -1, axis=1) - np.roll(h, 1, axis=1)) / 2.0
+    hy = (np.roll(h, -1, axis=0) - np.roll(h, 1, axis=0)) / 2.0           # change per step DOWN the picture
+    nx, ny, nz = -strength * hx / 255.0, strength * hy / 255.0, np.ones_like(h)
+    length = np.sqrt(nx * nx + ny * ny + nz * nz)
+    return np.stack([nx / length, ny / length, nz / length], axis=-1)
+
+
+def gaussian_blur_wrap(image, sigma):
+    """Gaussian blur of a grey picture with wrap-around edges (numpy only: Blender's Python has no OpenCV)."""
+    radius = int(math.ceil(3 * sigma))
+    kernel = np.exp(-0.5 * (np.arange(-radius, radius + 1) / sigma) ** 2)
+    kernel /= kernel.sum()
+    out = image
+    for axis in (0, 1):
+        padded = np.concatenate([np.take(out, range(-radius, 0), axis=axis, mode='wrap'), out, np.take(out, range(0, radius), axis=axis, mode='wrap')], axis=axis)
+        result = np.zeros_like(out)
+        for offset, weight in enumerate(kernel):
+            result += weight * np.take(padded, range(offset, offset + out.shape[axis]), axis=axis)
+        out = result
+    return out
+
+
+def derive_ambient_occlusion(height16, strength=2.5, radius=6.0):
+    """A cheap cavity map: how much lower than its surroundings (blurred over `radius` dots) each dot is, as white = open, dark = hemmed in."""
+    blurred = gaussian_blur_wrap(height16, radius)
+    return np.clip(1.0 - strength * np.clip(blurred - height16, 0, None), 0, 1)
+
+
+def bake_description(description, out_folder, size=1254, shift=(0.0, 0.0), samples=16, quiet=False, with_ao=True):
+    os.makedirs(out_folder, exist_ok=True)
+    timings = {}
+    started = time.time()
+    shape_list = layers.make_shape_list(description)
+    timings['shapes_s'] = round(time.time() - started, 2)
+    started = time.time()
+    scene, tile = bh.new_bake_scene(size)
+    bpy.data.objects.remove(tile)
+    mesh, shape_count = build_tile_mesh(shape_list, description, shift)
+    obj = bpy.data.objects.new('slate shapes', mesh)
+    scene.collection.objects.link(obj)
+    timings['mesh_s'] = round(time.time() - started, 2)
+    timings['shapes'] = len(shape_list)
+    timings['mesh_faces'] = shape_count
+    h = description['maps']['height']
+    for channel, name, linear, sixteen in (('Colour', 'colour', False, False), ('Height', 'height', True, True),
+                                           ('Roughness', 'roughness', True, False), ('Metallic', 'metallic', True, False)):
+        started = time.time()
+        # the height is blurred by the renderer's own pixel filter. Measured here (generator/test_filter_width.py): Cycles' Gaussian filter of
+        # width 2 blurs like a 0.5 dot Gaussian, width 4 like 0.9, width 6 like 1.4, so the width to ask for is about 4 x the wanted blur
+        gaussian = (h.get('blur', 0.5) * 4.0) if channel == 'Height' and h.get('blur', 0) > 0 else None
+        photograph(scene, obj, channel_material(channel, description), os.path.join(out_folder, name + '.png'), linear, sixteen,
+                   samples if channel != 'Roughness' and channel != 'Metallic' else 4, gaussian)
+        timings[name + '_render_s'] = round(time.time() - started, 2)
+    started = time.time()
+    height = bh.load_png_as_array(os.path.join(out_folder, 'height.png'))[..., 0]
+    strength = description['maps']['normal']['strength']
+    bh.save_array_png(derive_normal_from_height(height, strength) * 0.5 + 0.5, os.path.join(out_folder, 'normal.png'))
+    if with_ao:
+        bh.save_array_png(derive_ambient_occlusion(height), os.path.join(out_folder, 'ao.png'))
+    timings['derive_s'] = round(time.time() - started, 2)
+    timings['size'] = size
+    timings['shift'] = list(shift)
+    timings['total_s'] = round(sum(v for k, v in timings.items() if k.endswith('_s')), 1)
+    with open(os.path.join(out_folder, 'bake.json'), 'w') as handle:
+        json.dump(timings, handle, indent=1)
+    if not quiet:
+        print('[bake]', json.dumps(timings))
+    return timings
+
+
+def main():
+    arguments = sys.argv[sys.argv.index('--') + 1:]
+    option = lambda name, default=None: arguments[arguments.index(name) + 1] if name in arguments else default
+    shift = (float(arguments[arguments.index('--shift') + 1]), float(arguments[arguments.index('--shift') + 2])) if '--shift' in arguments else (0.0, 0.0)
+    if arguments[0] == '--batch':
+        # --batch JOBS.json : a list of [description path, output folder, size] to bake one after the other in the same Blender run
+        for description_path, out_folder, size in json.load(open(arguments[1])):
+            bake_description(json.load(open(description_path)), out_folder, size=int(size), shift=shift, samples=int(option('--samples', 16)))
+        return
+    description = json.load(open(arguments[0]))
+    bake_description(description, arguments[1], size=int(option('--size', 1254)), shift=shift, samples=int(option('--samples', 16)))
+
+
+if __name__ == '__main__':
+    main()

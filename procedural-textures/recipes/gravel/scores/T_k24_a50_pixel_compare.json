@@ -1,0 +1,47 @@
+{
+ "reference": "gravel",
+ "candidate": "outputs/T_k24_a50",
+ "colour_mae_levels": 10.87,
+ "colour_psnr_db": 23.04,
+ "colour_ssim": 0.584,
+ "colour_mean_delta_e": 6.83,
+ "colour_p95_delta_e": 23.24,
+ "edge_precision_2px": 0.82,
+ "edge_recall_2px": 0.652,
+ "edge_f1_2px": 0.726,
+ "edge_f1_by_luck": 0.535,
+ "edge_skill_2px": 0.411,
+ "height_mae_levels": 22.84,
+ "height_mae_best_fit_levels": 23.51,
+ "height_best_fit_gain_offset": [
+  0.847,
+  18.5
+ ],
+ "height_ssim": 0.4696,
+ "height_correlation": 0.7979,
+ "normal_mean_angle_degrees": 23.94,
+ "normal_median_angle_degrees": 18.18,
+ "normal_p95_angle_degrees": 61.82,
+ "tier_reached": "layout",
+ "tier_rules": {
+  "layout": {
+   "edge_skill_2px": "min 0.3",
+   "colour_mean_delta_e": "max 20.0",
+   "height_mae_best_fit_levels": "max 40.0"
+  },
+  "close": {
+   "edge_skill_2px": "min 0.55",
+   "colour_ssim": "min 0.6",
+   "colour_mean_delta_e": "max 10.0",
+   "height_mae_best_fit_levels": "max 20.0",
+   "normal_mean_angle_degrees": "max 12.0"
+  },
+  "exact": {
+   "edge_skill_2px": "min 0.85",
+   "colour_ssim": "min 0.92",
+   "colour_mean_delta_e": "max 3.0",
+   "height_mae_best_fit_levels": "max 6.0",
+   "normal_mean_angle_degrees": "max 4.0"
+  }
+ }
+}

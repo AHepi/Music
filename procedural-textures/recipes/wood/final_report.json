@@ -1,0 +1,647 @@
+{
+ "surface": "wood",
+ "folder": "proc-work/recipes/wood",
+ "classes": {
+  "S0_layout_only": {
+   "bytes": 5376,
+   "tier": "none",
+   "colour_ssim": 0.3771,
+   "colour_mean_delta_e": 10.84,
+   "edge_skill_2px": 0.007,
+   "height_mae_best_fit_levels": 40.16,
+   "normal_mean_angle_degrees": 24.65,
+   "texture_compare_overall": 0.209,
+   "seam_ratio": 0.41,
+   "bake_seconds": 20.1
+  },
+  "S1_layout_paint_grain": {
+   "bytes": 6330,
+   "tier": "none",
+   "colour_ssim": 0.2199,
+   "colour_mean_delta_e": 13.44,
+   "edge_skill_2px": 0.014,
+   "height_mae_best_fit_levels": 41.42,
+   "normal_mean_angle_degrees": 33.05,
+   "texture_compare_overall": 0.635,
+   "seam_ratio": 1.12,
+   "bake_seconds": 39.5
+  },
+  "M1_trace_20k": {
+   "bytes": 24345,
+   "tier": "none",
+   "colour_ssim": 0.4229,
+   "colour_mean_delta_e": 9.56,
+   "edge_skill_2px": 0.111,
+   "height_mae_best_fit_levels": 34.2,
+   "normal_mean_angle_degrees": 23.7,
+   "texture_compare_overall": 0.201,
+   "seam_ratio": 4.32,
+   "bake_seconds": 27.6
+  },
+  "M2_trace_40k": {
+   "bytes": 38119,
+   "tier": "none",
+   "colour_ssim": 0.4552,
+   "colour_mean_delta_e": 8.32,
+   "edge_skill_2px": 0.158,
+   "height_mae_best_fit_levels": 29.78,
+   "normal_mean_angle_degrees": 23.1,
+   "texture_compare_overall": 0.25,
+   "seam_ratio": 3.72,
+   "bake_seconds": 17.8
+  },
+  "M3_trace_62k": {
+   "bytes": 61526,
+   "tier": "none",
+   "colour_ssim": 0.4884,
+   "colour_mean_delta_e": 7.48,
+   "edge_skill_2px": 0.229,
+   "height_mae_best_fit_levels": 27.04,
+   "normal_mean_angle_degrees": 22.41,
+   "texture_compare_overall": 0.326,
+   "seam_ratio": 2.48,
+   "bake_seconds": 19.2
+  },
+  "L1_trace_150k": {
+   "bytes": 154799,
+   "tier": "layout",
+   "colour_ssim": 0.5913,
+   "colour_mean_delta_e": 6.06,
+   "edge_skill_2px": 0.361,
+   "height_mae_best_fit_levels": 21.16,
+   "normal_mean_angle_degrees": 19.38,
+   "texture_compare_overall": 0.426,
+   "seam_ratio": 2.36,
+   "bake_seconds": 16.3
+  },
+  "L2_trace_300k": {
+   "bytes": 308261,
+   "tier": "layout",
+   "colour_ssim": 0.6741,
+   "colour_mean_delta_e": 5.21,
+   "edge_skill_2px": 0.431,
+   "height_mae_best_fit_levels": 17.59,
+   "normal_mean_angle_degrees": 16.84,
+   "texture_compare_overall": 0.459,
+   "seam_ratio": 2.42,
+   "bake_seconds": 14.5
+  },
+  "L3_trace_480k": {
+   "bytes": 473489,
+   "tier": "layout",
+   "colour_ssim": 0.7246,
+   "colour_mean_delta_e": 4.61,
+   "edge_skill_2px": 0.523,
+   "height_mae_best_fit_levels": 15.2,
+   "normal_mean_angle_degrees": 15.46,
+   "texture_compare_overall": 0.506,
+   "seam_ratio": 2.47,
+   "bake_seconds": 16.9
+  }
+ },
+ "classes_cut_at_tile_edge": {
+  "M1_trace_20k": {
+   "bytes": 18949,
+   "tier": "none",
+   "colour_ssim": 0.4127,
+   "edge_skill_2px": 0.105,
+   "texture_compare_overall": 0.19,
+   "seam_ratio": 12.21
+  },
+  "M2_trace_40k": {
+   "bytes": 32343,
+   "tier": "none",
+   "colour_ssim": 0.44,
+   "edge_skill_2px": 0.176,
+   "texture_compare_overall": 0.276,
+   "seam_ratio": 11.64
+  },
+  "M3_trace_62k": {
+   "bytes": 62039,
+   "tier": "none",
+   "colour_ssim": 0.4711,
+   "edge_skill_2px": 0.291,
+   "texture_compare_overall": 0.39,
+   "seam_ratio": 5.61
+  },
+  "L1_trace_150k": {
+   "bytes": 150978,
+   "tier": "layout",
+   "colour_ssim": 0.562,
+   "edge_skill_2px": 0.421,
+   "texture_compare_overall": 0.447,
+   "seam_ratio": 3.74
+  },
+  "L2_trace_300k": {
+   "bytes": 307332,
+   "tier": "layout",
+   "colour_ssim": 0.6517,
+   "edge_skill_2px": 0.485,
+   "texture_compare_overall": 0.48,
+   "seam_ratio": 3.8
+  },
+  "L3_trace_480k": {
+   "bytes": 468964,
+   "tier": "layout",
+   "colour_ssim": 0.7065,
+   "edge_skill_2px": 0.573,
+   "texture_compare_overall": 0.516,
+   "seam_ratio": 4.04
+  }
+ },
+ "derivation_ceiling": {
+  "linear_weights": [
+   437.345,
+   -303.28,
+   395.343,
+   -25.247
+  ],
+  "height_from_colour": {
+   "grey": "rec601_srgb_numbers",
+   "blur_sigma": 0.5,
+   "mae_levels": 4.06,
+   "correlation": 0.9946,
+   "curve_points": [
+    [
+     0.0252,
+     5.9
+    ],
+    [
+     0.0663,
+     7.15
+    ],
+    [
+     0.1075,
+     31.0
+    ],
+    [
+     0.1486,
+     55.16
+    ],
+    [
+     0.1897,
+     79.03
+    ],
+    [
+     0.2309,
+     102.54
+    ],
+    [
+     0.272,
+     125.84
+    ],
+    [
+     0.3132,
+     149.29
+    ],
+    [
+     0.3543,
+     172.34
+    ],
+    [
+     0.3954,
+     195.52
+    ],
+    [
+     0.4366,
+     218.68
+    ],
+    [
+     0.4777,
+     237.88
+    ],
+    [
+     0.5188,
+     245.23
+    ],
+    [
+     0.56,
+     247.68
+    ],
+    [
+     0.6011,
+     248.84
+    ],
+    [
+     0.6423,
+     248.84
+    ]
+   ]
+  },
+  "straight_line": {
+   "grey_low": 12.0,
+   "grey_high": 128.0,
+   "mae_levels": 4.15
+  },
+  "curve_2_points_mae": 41.59,
+  "curve_3_points_mae": 31.91,
+  "curve_4_points_mae": 17.21,
+  "curve_6_points_mae": 10.7,
+  "curve_8_points_mae": 8.27,
+  "normal_from_uploaded_height": {
+   "kernel": "central",
+   "strength": 8,
+   "mean_angle_degrees": 0.335
+  },
+  "chain_normal_tone_curve_central": {
+   "strength": 8,
+   "mean_angle_degrees": 4.619
+  },
+  "chain_normal_tone_curve_sobel": {
+   "strength": 8,
+   "mean_angle_degrees": 4.223
+  },
+  "chain_normal_straight_line_central": {
+   "strength": 8,
+   "mean_angle_degrees": 4.644
+  },
+  "chain_normal_straight_line_sobel": {
+   "strength": 8,
+   "mean_angle_degrees": 4.284
+  },
+  "flat_normal_angle": 24.115
+ },
+ "variation": {
+  "bake_seconds_for_all_8": 248,
+  "rows": [
+   {
+    "seed": 101,
+    "description_bytes": 4377,
+    "texture_compare_overall": 0.619,
+    "texture_groups": {
+     "colour": 0.622,
+     "height": 0.575,
+     "normal": 0.533,
+     "tiling": 0.945
+    },
+    "pixel_ssim_vs_reference": 0.2021,
+    "pixel_edge_skill_vs_reference": 0.014,
+    "pixel_delta_e_vs_reference": 14.33,
+    "pixel_tier": "none",
+    "seam_ratio": 1.11
+   },
+   {
+    "seed": 102,
+    "description_bytes": 4132,
+    "texture_compare_overall": 0.622,
+    "texture_groups": {
+     "colour": 0.6,
+     "height": 0.599,
+     "normal": 0.561,
+     "tiling": 0.979
+    },
+    "pixel_ssim_vs_reference": 0.2016,
+    "pixel_edge_skill_vs_reference": 0.029,
+    "pixel_delta_e_vs_reference": 14.14,
+    "pixel_tier": "none",
+    "seam_ratio": 1.04
+   },
+   {
+    "seed": 103,
+    "description_bytes": 4132,
+    "texture_compare_overall": 0.62,
+    "texture_groups": {
+     "colour": 0.608,
+     "height": 0.574,
+     "normal": 0.592,
+     "tiling": 0.942
+    },
+    "pixel_ssim_vs_reference": 0.2014,
+    "pixel_edge_skill_vs_reference": 0.01,
+    "pixel_delta_e_vs_reference": 14.19,
+    "pixel_tier": "none",
+    "seam_ratio": 1.12
+   },
+   {
+    "seed": 104,
+    "description_bytes": 4359,
+    "texture_compare_overall": 0.614,
+    "texture_groups": {
+     "colour": 0.582,
+     "height": 0.588,
+     "normal": 0.577,
+     "tiling": 1.0
+    },
+    "pixel_ssim_vs_reference": 0.1997,
+    "pixel_edge_skill_vs_reference": 0.007,
+    "pixel_delta_e_vs_reference": 14.29,
+    "pixel_tier": "none",
+    "seam_ratio": 0.94
+   },
+   {
+    "seed": 105,
+    "description_bytes": 4134,
+    "texture_compare_overall": 0.665,
+    "texture_groups": {
+     "colour": 0.655,
+     "height": 0.634,
+     "normal": 0.588,
+     "tiling": 1.0
+    },
+    "pixel_ssim_vs_reference": 0.201,
+    "pixel_edge_skill_vs_reference": 0.0,
+    "pixel_delta_e_vs_reference": 14.19,
+    "pixel_tier": "none",
+    "seam_ratio": 0.96
+   },
+   {
+    "seed": 106,
+    "description_bytes": 4139,
+    "texture_compare_overall": 0.629,
+    "texture_groups": {
+     "colour": 0.613,
+     "height": 0.605,
+     "normal": 0.543,
+     "tiling": 1.0
+    },
+    "pixel_ssim_vs_reference": 0.2046,
+    "pixel_edge_skill_vs_reference": 0.012,
+    "pixel_delta_e_vs_reference": 14.01,
+    "pixel_tier": "none",
+    "seam_ratio": 0.8
+   },
+   {
+    "seed": 107,
+    "description_bytes": 4584,
+    "texture_compare_overall": 0.629,
+    "texture_groups": {
+     "colour": 0.612,
+     "height": 0.597,
+     "normal": 0.566,
+     "tiling": 1.0
+    },
+    "pixel_ssim_vs_reference": 0.2012,
+    "pixel_edge_skill_vs_reference": 0.002,
+    "pixel_delta_e_vs_reference": 14.17,
+    "pixel_tier": "none",
+    "seam_ratio": 0.88
+   },
+   {
+    "seed": 108,
+    "description_bytes": 4150,
+    "texture_compare_overall": 0.607,
+    "texture_groups": {
+     "colour": 0.606,
+     "height": 0.532,
+     "normal": 0.561,
+     "tiling": 1.0
+    },
+    "pixel_ssim_vs_reference": 0.1972,
+    "pixel_edge_skill_vs_reference": 0.002,
+    "pixel_delta_e_vs_reference": 14.24,
+    "pixel_tier": "none",
+    "seam_ratio": 0.84
+   }
+  ],
+  "texture_compare_mean": 0.626,
+  "texture_compare_min": 0.607,
+  "texture_compare_max": 0.665,
+  "pixel_ssim_vs_reference_mean": 0.201,
+  "pair_ssim_mean": 0.214,
+  "pair_mean_abs_difference_mean": 23.11
+ },
+ "area": {
+  "bake_seconds": 232.6,
+  "half_tile": {
+   "mean_difference_levels": 0.745,
+   "share_over_40": 0.0,
+   "wrong_roll_mean_difference": 22.513,
+   "wrong_roll_share_over_40": 0.149
+  },
+  "quarters_pairs": [
+   {
+    "a": "top_left",
+    "b": "top_right",
+    "mean_abs_difference_levels": 22.96,
+    "ssim": 0.218
+   },
+   {
+    "a": "top_left",
+    "b": "bottom_left",
+    "mean_abs_difference_levels": 22.38,
+    "ssim": 0.215
+   },
+   {
+    "a": "top_left",
+    "b": "bottom_right",
+    "mean_abs_difference_levels": 22.72,
+    "ssim": 0.218
+   },
+   {
+    "a": "top_right",
+    "b": "bottom_left",
+    "mean_abs_difference_levels": 23.09,
+    "ssim": 0.214
+   },
+   {
+    "a": "top_right",
+    "b": "bottom_right",
+    "mean_abs_difference_levels": 22.74,
+    "ssim": 0.214
+   },
+   {
+    "a": "bottom_left",
+    "b": "bottom_right",
+    "mean_abs_difference_levels": 22.38,
+    "ssim": 0.222
+   }
+  ],
+  "seam_across_middle_over_normal_jump": {
+   "vertical_line": 1.06,
+   "horizontal_line": 0.91
+  },
+  "wrap_edge_over_normal_jump": {
+   "left_right": 0.84,
+   "top_bottom": 0.89
+  },
+  "note": "jumps are compared with a normal one-dot jump in the same direction (along rows for vertical lines, down columns for horizontal lines)"
+ },
+ "resolution": {
+  "rows": [
+   {
+    "size": 512,
+    "wall_seconds": 13.5,
+    "colour_render_s": 3.65,
+    "shapes": 14278,
+    "mesh_faces": 15811,
+    "png_megabytes": 2.2
+   },
+   {
+    "size": 1254,
+    "wall_seconds": 32.6,
+    "colour_render_s": 16.32,
+    "shapes": 14278,
+    "mesh_faces": 15811,
+    "png_megabytes": 12.0
+   },
+   {
+    "size": 2508,
+    "wall_seconds": 105.8,
+    "colour_render_s": 64.22,
+    "shapes": 14278,
+    "mesh_faces": 15811,
+    "png_megabytes": 42.5
+   }
+  ],
+  "sharpness_seen_at_1254": {
+   "512": {
+    "mean_gradient": 3.178,
+    "texture_compare_overall": 0.381
+   },
+   "1254": {
+    "mean_gradient": 5.856,
+    "texture_compare_overall": 0.601
+   },
+   "2508": {
+    "mean_gradient": 5.682,
+    "texture_compare_overall": 0.529
+   }
+  }
+ },
+ "geometry_route": {
+  "seed": 5,
+  "polygon_route_seconds_total": 15.3,
+  "geometry_route_seconds_total": 11.6,
+  "curves": 200,
+  "blobs": 458,
+  "mean_difference_levels": 0.134,
+  "share_of_dots_differing_over_40": 0.001
+ },
+ "half_tile": {
+  "S1_layout_paint_grain": {
+   "half_tile_roll": {
+    "mean_difference_levels": 0.742,
+    "share_over_40_levels": 0.0
+   },
+   "wrong_roll_control": {
+    "mean_difference_levels": 22.54,
+    "share_over_40_levels": 0.14705
+   },
+   "edge_jump_over_normal_jump_left_right_and_top_bottom": [
+    0.76,
+    1.22
+   ]
+  },
+  "L2": null,
+  "L2w": {
+   "half_tile_roll": {
+    "mean_difference_levels": 0.472,
+    "share_over_40_levels": 0.0
+   },
+   "wrong_roll_control": {
+    "mean_difference_levels": 23.814,
+    "share_over_40_levels": 0.16867
+   },
+   "edge_jump_over_normal_jump_left_right_and_top_bottom": [
+    3.72,
+    2.05
+   ]
+  },
+  "sample_101": {
+   "half_tile_roll": {
+    "mean_difference_levels": 0.742,
+    "share_over_40_levels": 0.0
+   },
+   "wrong_roll_control": {
+    "mean_difference_levels": 23.083,
+    "share_over_40_levels": 0.15725
+   },
+   "edge_jump_over_normal_jump_left_right_and_top_bottom": [
+    0.93,
+    1.18
+   ]
+  }
+ },
+ "extras": {
+  "X1_S1_without_grain": {
+   "colour_ssim": 0.2926,
+   "edge_skill_2px": 0.0,
+   "normal_mean_angle_degrees": 28.68,
+   "texture_compare_overall": 0.425
+  },
+  "X2_S0_with_grain": {
+   "colour_ssim": 0.2618,
+   "edge_skill_2px": 0.01,
+   "normal_mean_angle_degrees": 30.31,
+   "texture_compare_overall": 0.303
+  },
+  "X3_L2_with_grain": {
+   "colour_ssim": 0.5091,
+   "edge_skill_2px": 0.377,
+   "normal_mean_angle_degrees": 23.8,
+   "texture_compare_overall": 0.763
+  },
+  "X4_M3_with_grain": {
+   "colour_ssim": 0.3544,
+   "edge_skill_2px": 0.26,
+   "normal_mean_angle_degrees": 28.69,
+   "texture_compare_overall": 0.644
+  }
+ },
+ "transfer": {
+  "summary": "sun-bleached silver deck boards made by changing only the description (palette, paint numbers, straight equal gaps, two short hand-written lists for butt joints and nails); no generator code changed; about 10 minutes of work; bake 50.3 s at 1254 dots.",
+  "detail": "Surface: sun-bleached silver deck boards (6 equal boards, narrow straight dark gaps, butt joints where two boards meet end to end at staggered places, rows of nail heads, a few long straight cracks, a little rust, no knots). Made by `transfer/make_deck_boards.py` (about 70 lines; written in one sitting, about 10 minutes of work including looking at the first picture) which calls the SAME sampler and generator and changes only the description: the palette (16 silver-grey and warm-brown colours instead of the wood's), the board tone, the paint model numbers (zone colour mean and spread, strip colour spreads, strips 1.4 times longer for their thickness), the sampler options (6 planks, no knots, 8 % of the rust splatter, 35 % of the cracks, strip count x1.1, zone spread 0.9, strip spread 0.8, finer and weaker grain: 30 x 520 features, light gain 1.35), the gap lines (6 EQUAL planks with STRAIGHT 4.2-dot gaps instead of wavy ones), two short hand-written lists (6 butt joints as thin dark ribbons: 3 points each, and 176 small round blobs as nail heads and their highlights), and the pebbles layer was removed. No line of generator code was changed. The description is 6144 bytes. One bake at 1254 dots took 50.3 seconds (colour render 31.37 s; 8270 shapes). The first picture was used as it came out (no second iteration). There is no deck-boards reference, so the only checks are by eye and by the seamless test. (Scored against the WOOD reference it gets the same-kind score 0.205 and a colour difference of 29.42, which only confirms that it is a different surface.) What I had to change was numbers and two lists; what I did NOT have to change was code. What did not transfer by numbers alone: butt joints and nails (straight vertical ribbons and round blobs) had to be written by hand as lists; a generator option for \"joints and nails along rows\" would make them numbers too.",
+  "bake_seconds": 50.3,
+  "description_bytes": 6144,
+  "texture_compare_vs_wood": 0.205,
+  "half_tile": null
+ },
+ "description_audits": {
+  "S0_layout_only": {
+   "bytes": 5376,
+   "numbers": 913,
+   "biggest_list": 30,
+   "problems": [],
+   "limit_kb": 8
+  },
+  "S1_layout_paint_grain": {
+   "bytes": 6330,
+   "numbers": 947,
+   "biggest_list": 25,
+   "problems": [],
+   "limit_kb": 8
+  },
+  "M1_trace_20k": {
+   "bytes": 24345,
+   "numbers": 7568,
+   "biggest_list": 722,
+   "problems": [],
+   "limit_kb": 64
+  },
+  "M2_trace_40k": {
+   "bytes": 38119,
+   "numbers": 12055,
+   "biggest_list": 444,
+   "problems": [],
+   "limit_kb": 64
+  },
+  "M3_trace_62k": {
+   "bytes": 61526,
+   "numbers": 19889,
+   "biggest_list": 456,
+   "problems": [],
+   "limit_kb": 64
+  },
+  "L1_trace_150k": {
+   "bytes": 154799,
+   "numbers": 54189,
+   "biggest_list": 1056,
+   "problems": [],
+   "limit_kb": 512
+  },
+  "L2_trace_300k": {
+   "bytes": 308261,
+   "numbers": 114385,
+   "biggest_list": 1672,
+   "problems": [],
+   "limit_kb": 512
+  },
+  "L3_trace_480k": {
+   "bytes": 473489,
+   "numbers": 174204,
+   "biggest_list": 3723,
+   "problems": [],
+   "limit_kb": 512
+  }
+ }
+}

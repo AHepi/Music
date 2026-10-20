@@ -1,0 +1,33 @@
+Raw numbers copied from the console during the tests (19 Oct 2026, Linux, 4 cores shared with other helpers, Blender 5.2.2 headless, no graphics card).
+The full call-by-call transcript of the texture job is in ../out/t1/t1_transcript.json (written by tests/t1_material_job.mjs).
+
+1. Tool count (tests/t0_list_tools.mjs): 216 tools from the real MCP server; /server/handlers lists 218 routes.
+   By name prefix: 65 rigging and animation, 26 materials/nodes/baking/UV, 59 modelling, 28 scene/files/import/export, 28 camera/light/world/render/compositor/vision, 10 server/helpers.
+   Tool list as JSON = 151,465 characters (about 38,000 tokens at roughly 4 characters per token; rough estimate).
+
+2. Texture job through typed tools (tests/t1_material_job.mjs): 41 calls in total (27 for the job itself, 14 deliberate probes), 1,160 ms of Blender time in total,
+   each ordinary call about 16-24 ms (the add-on's work queue is polled every 16 ms), the 512 x 512 emission bake 176 ms, saving the PNG 155 ms.
+   Result picture identical (largest difference 0 out of 255) to the picture made by the same job as one plain script and to the picture made by the official MCP in one call.
+   Plain script on the command line, fresh Blender process each time: 1.76 s, 1.36 s, 1.27 s wall clock.
+   Characters sent: typed route 2,492 characters of arguments in 27 calls and 4,520 characters of answers; plain script 16 lines, 1,193 characters.
+
+3. Undo (exec_python enabled on a second throw-away instance, port 19878):
+   Four typed calls (create u1, create u2, add node N1, add node B1) -> undo #1 removed B1, #2 removed N1, #3 removed u2, #4 refused (nothing left). One undo step per call.
+   /batch with 3 successful ops then 1 failing op: the 3 successful ops stayed (not rolled back); undo #1 removed op 3, #2 removed op 2, #3 refused. One undo step per op inside a batch.
+   Undo can only be reached through exec_python (no undo tool exists in the 216).
+
+4. Call time with big scenes (30 calls each): small scene median 17.7 ms; one 164k-vertex mesh 17.8 ms; six such meshes (983k vertices) 17.9 ms.
+
+5. One busy Blender, two callers (tests/t3b_blocking_and_ghost.py): a 2048 x 2048, 64-sample emission bake took 35.3 s (machine shared with other helpers).
+   A second caller asking for "create material ghost_probe" 0.5 s after the bake started waited 30.0 s and got HTTP 504 BLENDER_TIMEOUT ("main-thread job exceeded 30.0s").
+   After the bake finished the material ghost_probe existed anyway (the request that was reported as failed was carried out later).
+
+6. Security probes on the localhost add-on (port 19877): a text/plain POST with "Origin: http://evil.example" and "Host: evil.example" was accepted and carried out (material created).
+   OPTIONS requests are answered 501. No credentials were sent or asked for. /server/handlers lists the routes to anyone.
+   /server/blender_quit with saveAs: answered {"quitting": true} but, in the headless mode, Blender stayed alive for 12+ s and no file was saved (the delayed action never ran).
+   /server/shutdown worked.
+
+7. Project's own test-suite (vitest, 213 tests incl. 2 skipped), run with BLENDER_PORT=19879, TMPDIR inside the sandbox: 197 passed, 14 failed, 2 skipped, 69.8 s.
+   All 14 failures say "Cannot reach Blender ... fetch failed": Blender died during an EEVEE render ("Couldn't open libEGL.so.1"), taking the rest of that test file with it.
+   Reproduced by hand on a throw-away instance: render_set_engine BLENDER_EEVEE + render_render_still -> empty reply, process gone.
+   The same render with CYCLES worked (256 x 256, 0.8 s).

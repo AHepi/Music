@@ -1,0 +1,16 @@
+proc-work/recipes/gravel/analysis/tune_texture.py:21: RuntimeWarning: invalid value encountered in divide
+  h = (h - h.min()) / (h.max() - h.min())
+proc-work/recipes/gravel/analysis/tune_texture.py:23: RuntimeWarning: invalid value encountered in cast
+  cv2.imwrite(os.path.join(folder, 'height.png'), (h * 65535).astype(np.uint16))
+/usr/local/lib/python3.13/dist-packages/numpy/lib/_function_base_impl.py:3036: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.13/dist-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+{'stage': '0 ground colour only', 'bytes': 178, 'colour_ssim': 0.444, 'delta_e': 21.04, 'edge_skill': 0.0, 'texture_overall': nan, 'texture_colour': 0.0, 'texture_height': nan, 'texture_normal': nan, 'shapes': 1}
+{'stage': '1 + soil lumps', 'bytes': 910, 'colour_ssim': 0.367, 'delta_e': 22.06, 'edge_skill': 0.0, 'texture_overall': 0.197, 'texture_colour': 0.094, 'texture_height': 0.203, 'texture_normal': 0.148, 'shapes': 5353}
+{'stage': '2 + tiny soil specks', 'bytes': 1105, 'colour_ssim': 0.335, 'delta_e': 22.05, 'edge_skill': 0.0, 'texture_overall': 0.17, 'texture_colour': 0.065, 'texture_height': 0.164, 'texture_normal': 0.128, 'shapes': 9953}
+{'stage': '3 + tiny and small stones', 'bytes': 1857, 'colour_ssim': 0.246, 'delta_e': 21.6, 'edge_skill': 0.001, 'texture_overall': 0.247, 'texture_colour': 0.063, 'texture_height': 0.326, 'texture_normal': 0.295, 'shapes': 22482}
+{'stage': '4 + medium stones', 'bytes': 2022, 'colour_ssim': 0.212, 'delta_e': 21.32, 'edge_skill': 0.0, 'texture_overall': 0.345, 'texture_colour': 0.113, 'texture_height': 0.545, 'texture_normal': 0.368, 'shapes': 28618}
+{'stage': '5 + large stones', 'bytes': 2186, 'colour_ssim': 0.202, 'delta_e': 21.25, 'edge_skill': 0.009, 'texture_overall': 0.408, 'texture_colour': 0.181, 'texture_height': 0.632, 'texture_normal': 0.38, 'shapes': 31321}
+{'stage': '5b all stones but no shadow, rim, facets, flaky patches', 'bytes': 2364, 'colour_ssim': 0.291, 'delta_e': 21.46, 'edge_skill': 0.006, 'texture_overall': 0.352, 'texture_colour': 0.333, 'texture_height': 0.318, 'texture_normal': 0.175, 'shapes': 17738}
+{'stage': '6 + biggest stones (all classes)', 'bytes': 2364, 'colour_ssim': 0.206, 'delta_e': 20.94, 'edge_skill': 0.008, 'texture_overall': 0.437, 'texture_colour': 0.237, 'texture_height': 0.645, 'texture_normal': 0.394, 'shapes': 32386}

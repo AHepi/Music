@@ -1,0 +1,111 @@
+{
+ "surface": "brick",
+ "claims_hold": true,
+ "audit_ok": true,
+ "generator_reads_reference": false,
+ "discrepancies": [
+  "MAJOR: the two brick guides do not exist. No '04 Recipe - brick ...' or '04 Lessons - brick ...' file (or any .md) is in recipes/brick/, proc-work/guides/ is empty, and a filesystem-wide name search found none. The brick folder has not been touched since final_report.json at 20:03. Slate, wood, mud and metal each have both guides. So point (5) could only be checked against guide_pictures/ and generator/make_sweeps.py.",
+  "The transfer script is stale. Re-running transfer/make_cobble_model.py does not reproduce generator/sampler_model_cobble.json. The stored model also has the 'accents' list (dirt, moss, pale chips), 'smudges_per_tile', 'smudge_luma_limit' and an extra 'area' colour table, all added by hand afterwards. The three cobble descriptions came from the stored model: sample_description with that model reproduces them byte for byte. So 'only new numbers' is true of the stored model, but the documented script does not make it. The sampler code also carries per-surface option keys ('outline', 'accents', 'smudge_*') that the cobble model uses.",
+  "The cobble descriptions are 13.4 KB (13,429 / 13,453 / 13,563 bytes). They fail a 12 KB audit and pass the default 64 KB audit. The brick variation and area descriptions pass the limits I set (10 KB and 32 KB), but I could not read what limit the report claims for them.",
+  "Variation folders tile_12 to tile_18 hold only colour.png and bake.json. Their height and normal maps were deleted, and only tile_11 has all maps. The published per-tile texture_compare scores cannot be re-scored from those folders and need a re-bake. I re-baked seeds 12, 13, 14 and 16 and got identical colour pictures (max difference 0) and identical scores (0.698, 0.684, 0.730, 0.686).",
+  "The half-tile shift test cannot detect content that is not periodic. build_shape_stack adds the shift after the shapes are generated, so the test only proves the wrap-round drawing works. ToneDial and Wobble use sine waves with wavelengths (110/170/260 and 5-17 dots) that do not divide the 1254 tile, so seamlessness of the content rests on the seam-jump measure. That measure does pass (ratio 1.0 to 1.12), and my 2.5x crop of the seam crossing shows nothing. The test also leaves out grain, and it cannot be applied to the L class because its 'regions' layer has wrap=False.",
+  "L + grain 0.14 scores texture_compare 0.597 (reported 0.598) against 0.432 for L, and part of that gain is a measure artefact. The tiling group goes 0.444 to 1.0 and the seam ratio 2.11 to 1.0. The picture's seam has not changed. L traces the reference, so it keeps the reference's mild seam (wrap jump about 2.1 times a normal jump, the reference is 2.2), and the grain only lifts the per-dot baseline. Dot-for-dot SSIM falls 0.673 to 0.538. The report says it trades accuracy for 'same kind of surface', but not that 'tiling 1.0' is not a real seam fix.",
+  "The cobble transfer is thinner than the claim 'grey granite cobblestones / paving setts'. The result is the brick layout re-coloured: rounded rectangles in 13 courses in running bond, fixed corner radius, with brick-wall tilt and size statistics. There are no round or irregular cobbles. No reference exists, so the model is 'chosen by eye', which the script says. The height curve is a hand-picked straight ramp (30 to 0, 180 to 255), and the derived height has the sandy joints higher than the stones (mean 162 against 111 of 255). This is the same inversion as in the brick reference (mortar 180, brick 131), but it is physically backwards for setts. A fresh cobble tile from seed 5 scores texture_compare 0.398 against the brick reference, which is meaningless as a quality number.",
+  "The variations are a narrower family than 'different tiles' suggests. All 8 have 12 courses of 4 bricks, the same reference palette shifted a few percent, and the same patch statistics. Only joint positions, brick colours, soot and spall placement and patches differ. The report's 'honest look' is fair but understates the gap: the mortar lines are thinner and darker with a heavier outline ring, and the brick faces carry a fine confetti of small cells that the reference does not have. The reference's big flat hand-painted patches are missing.",
+  "The L class (12,553 polygons, mean about 12 numbers each, shape coded as step lists) is a vector trace of the reference's 16-colour label picture. The audit passes it because its limits are 4000 numbers per list and 64 x 64 grids. It is honestly labelled 'tracing the picture', but it should not count as procedural. The M and S ellipse classes are greedy fits of the same label picture, with deterministic seeds (i*7919 % 997) and no seed search.",
+  "Bake times depend on the shared machine. Load average was 7 on 4 cores, so S baked in 28 s against the reported 16 s, and the variants took 35 to 43 s against 33 to 36 s. This is not a contradiction, but the quoted times are load-dependent.",
+  "The task text I received stops mid-sentence in 'transfer_result' ('the only new'), so I could not compare the end of the transfer claim or any later text.",
+  "Nothing in my re-runs contradicted the numbers: S, M, L and L + grain rescore within rounding (S SSIM 0.5316, dE 10.0, edge skill 0.306, height 31.3, normal 17.66, texture 0.365; M 0.552, 7.93, 0.421, 25.03, 17.33, 0.406; L 0.673, 5.71, 0.656, 15.35, 13.93, 0.432). The derivation ceiling reproduces: the reference colour through the stored rule gives height error 3.05 levels, correlation 0.9968, normal 3.63 degrees, tier 'exact'. No class reaches 'close' because the normal angle fails (L 13.9 against 12), as the report says."
+ ],
+ "overall": "The brick builder's numbers hold up, and the generator is honest. The one big gap is that the two guides were never written; the caveats follow. I re-ran everything that costs little CPU (-t 2 Blender plus numpy), writing only into recipes/brick/verify/.\n\n1. Audit. lib/description_audit.py passes S (7,986 B at 8 KB), M (63,973 B at 64 KB), L and L + grain (508,878 / 508,911 B at 512 KB), all 8 variations (about 9.5 KB), the area description (21.7 KB) and the cobbles (13.4 KB, over 12 KB but under 64 KB).\n\n2. Generator honesty. brick_generator.py, shape_stack.py, mosaic_tools.py, derive_maps.py and sample_description.py contain no imread, Image.open, images.load, np.load or base64 path to the reference. The only picture read is the generator's own colour render, which it reads back to derive height. bake_harness never touches the reference in this path. The sampler model is 6 KB of statistics. The only picture-sized content is the L class, which is openly a trace. The analysis scripts do read the reference, which is allowed.\n\n3. Re-bake and rescore in fresh Blender processes. S, M, L and L + grain match the report: L is 0.673 / 5.71 / 0.656 / 15.35 / 13.93 / 0.432, tier layout. Variation seeds 12, 13, 14 and 16 gave bit-identical colour pictures and identical texture scores. A seed nobody used (777) scored 0.685, inside the claimed 0.684 to 0.730, with SSIM 0.259 and dE 20.8, tier none.\n\n4. Variation, area and seam.\n   - Same generator, new descriptions: seeds 11, 14 and 18 regenerate byte for byte. Best-shift correlation of the 8 tiles with the reference is below 0.1 and between tiles below 0.17. Mean pair difference is 25.9 levels against 26.9 for the reference.\n   - The area description re-rendered at half size matches the stored 2508 picture (mean difference 1.4). The four quadrants correlate at most 0.185 even at the best shift (that is brick pitch, not a repeat). The middle piece scores 0.652 and a piece centred on the wrap corner scores 0.650, so there is no hidden seam. The area description has 24 courses of 8 bricks.\n   - My half-tile shift on variation 14 gives 0.007 % of dots over 40 levels and mean 0.73 (control 49 %).\n   - A seam crop of the same tile looks clean.\n\n5. Guides. They do not exist (first discrepancy). The sweeps run on a seed-7 base with coarser cells and no grain. The '(reference)' labels mean 'sampler default'. In the sweep that varies the big cell area, the middle strip is not the default tile: the fourth cell size becomes 89.6 instead of 45. The layers picture mixes units (S 7.8, M 62 and L 497 are KiB, 'ellipses 375 KB' is decimal and would be 367 KiB). The sweep strips have no separators, so tile joins look like defects.\n\nThe remaining discrepancies cover the stale cobble model script, the pruned tile folders, the seam test's blind spot, the grain 'tiling' artefact, how little a re-coloured brick wall transfers to cobbles, and the narrow variation family.",
+ "rescored": [
+  {
+   "class_name": "S 8 KB re-bake (16 samples, 1254)",
+   "tier": "layout",
+   "colour_ssim": 0.5316,
+   "colour_mean_delta_e": 10,
+   "texture_compare_overall": 0.365
+  },
+  {
+   "class_name": "M 64 KB re-bake",
+   "tier": "layout",
+   "colour_ssim": 0.552,
+   "colour_mean_delta_e": 7.93,
+   "texture_compare_overall": 0.406
+  },
+  {
+   "class_name": "L 512 KB re-bake (traced)",
+   "tier": "layout",
+   "colour_ssim": 0.673,
+   "colour_mean_delta_e": 5.71,
+   "texture_compare_overall": 0.432
+  },
+  {
+   "class_name": "L + grain 0.14 re-bake",
+   "tier": "layout",
+   "colour_ssim": 0.5381,
+   "colour_mean_delta_e": 6.35,
+   "texture_compare_overall": 0.597
+  },
+  {
+   "class_name": "variation seed 12 re-bake",
+   "tier": "none",
+   "colour_ssim": 0.2582,
+   "colour_mean_delta_e": 21.63,
+   "texture_compare_overall": 0.698
+  },
+  {
+   "class_name": "variation seed 13 re-bake",
+   "tier": "none",
+   "colour_ssim": 0.2373,
+   "colour_mean_delta_e": 21.63,
+   "texture_compare_overall": 0.684
+  },
+  {
+   "class_name": "variation seed 14 re-bake",
+   "tier": "none",
+   "colour_ssim": 0.2548,
+   "colour_mean_delta_e": 20.93,
+   "texture_compare_overall": 0.73
+  },
+  {
+   "class_name": "variation seed 16 re-bake",
+   "tier": "none",
+   "colour_ssim": 0.2524,
+   "colour_mean_delta_e": 21.67,
+   "texture_compare_overall": 0.686
+  },
+  {
+   "class_name": "new seed 777 (verifier's own draw)",
+   "tier": "none",
+   "colour_ssim": 0.2592,
+   "colour_mean_delta_e": 20.84,
+   "texture_compare_overall": 0.685
+  },
+  {
+   "class_name": "area middle 1254 piece of the 2508 picture",
+   "tier": "none",
+   "texture_compare_overall": 0.652
+  },
+  {
+   "class_name": "new cobble seed 5 scored against the brick reference (not a meaningful quality number)",
+   "tier": "none",
+   "colour_ssim": 0.2466,
+   "colour_mean_delta_e": 32.34,
+   "texture_compare_overall": 0.398
+  }
+ ],
+ "area_really_unique": "Yes. The 2508 x 2508 picture is one description (24 courses of 8 bricks, tile = 2508) and the generator reads the tile size from it. The four 1254 quadrants have a cross-correlation of 0.007 to 0.131 at zero shift and at most 0.185 at the best shift of any distance. A reference tile copied 2 x 2 scores 1.0. No quadrant matches the reference tile (at most 0.079). A piece cut from the middle and one centred on the wrap corner score 0.652 and 0.650. Re-rendering the area description at 1254 reproduces the stored picture (mean difference 1.4 levels), so the stored picture really comes from the description. By eye it is a believable wall of unique bricks and soot clouds with no visible repeats or seams.",
+ "variation_really_different": "Yes at dot level, no in family. The eight tiles (seeds 11 to 18) and my seed 777 come from the same generator and sample_description with different seeds. Seeds 11, 14 and 18 regenerate byte for byte, and four re-bakes reproduce the stored colour pictures exactly. Differences: best-shift correlation with the reference is below 0.1 and between tiles below 0.17, and the mean per-dot difference between tiles is 25.9 levels against 26.9 for the reference. Brick joints, brick colours, soot and spall placement and patches all differ. They all share the same layout family (12 courses of 4 bricks), the same shifted reference palette and the same patch statistics. By eye they read as the same painted brick wall but are visibly not the reference's style: speckled soot, a confetti of small cells on the brick faces, thin dark mortar and a tidier outline, with no big flat hand-painted patches.",
+ "guide_problems": [
+  "Both brick guides are missing. Nothing like '04 Recipe - brick - how it is made.md' or '04 Lessons - brick - what carries over to other surfaces.md' exists anywhere, so none of the plain-language, accuracy or settings-match checks could be done.",
+  "Guide pictures exist but have no guide text to sit in: guide_pictures/ holds 9 sweep strips, the layers picture, three difference sheets, three texture sheets, resolution crops, area and cobble previews and a contact sheet. Their settings can only be inferred from generator/make_sweeps.py.",
+  "The sweep strips are made from a base that differs from the results table: seed 7, cell_scale 2.0, grain 0, 384 px, 4 samples. The guide must say so. The results use cell_scale 1.0 and grain 0.14 at 1254 px.",
+  "'(reference)' in strip labels (radius 9, wobble 1.3, area 1100, blur 0.7) means 'the sampler's default value'. Only some of those numbers were measured on the reference. The default tile would be mislabelled in the guide.",
+  "In the big_cell_area sweep, the strip labelled '1100 (reference)' is not exactly the default tile: set_cell_area makes the fourth cell size 89.6 instead of 45.",
+  "layers_what_each_class_adds.png mixes units. 'S 7.8 KB', 'M 62 KB' and 'L 497 KB' are KiB (file bytes / 1024), while 'ellipses 375 KB' is decimal (375,773 bytes, which is 367 KiB; the rate-distortion table says 367.0). A reader would see the L bar as larger than the 512 KB class limit it is under.",
+  "The strips join their crops with no gap or border, so the crop joins look like seams or defects inside bricks (visible in strip_corner_radius.png).",
+  "make_cobble_model.py, the script a guide would point to for the transfer step, does not make the model that was used; see the discrepancies.",
+  "No guide yet says that the 'close' tier was not reached for any class, that the L class is a trace and not procedural, that the L + grain tiling score is an artefact, or that the transfer to cobbles is a recolour of the brick layout with an inverted-looking height."
+ ]
+}

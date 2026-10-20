@@ -1,0 +1,77 @@
+{
+ "surface": "metal (rusted riveted steel)",
+ "claims_hold": false,
+ "audit_ok": true,
+ "generator_reads_reference": false,
+ "rescored": [
+  {
+   "class_name": "S0 (fresh Blender bake, verify/S0)",
+   "tier": "none",
+   "colour_ssim": 0.6555,
+   "colour_mean_delta_e": 8.6,
+   "texture_compare_overall": 0.197
+  },
+  {
+   "class_name": "S (fresh bake, verify/S)",
+   "tier": "none",
+   "colour_ssim": 0.4788,
+   "colour_mean_delta_e": 12.18,
+   "texture_compare_overall": 0.523
+  },
+  {
+   "class_name": "M (fresh bake, verify/M)",
+   "tier": "layout",
+   "colour_ssim": 0.6917,
+   "colour_mean_delta_e": 6.44,
+   "texture_compare_overall": 0.296
+  },
+  {
+   "class_name": "L (fresh bake, verify/L; edge skill 0.581, height 16.62, normal 10.62)",
+   "tier": "close",
+   "colour_ssim": 0.7556,
+   "colour_mean_delta_e": 4.9,
+   "texture_compare_overall": 0.498
+  },
+  {
+   "class_name": "variation seed 3 (re-sampled and re-baked, verify/var3)",
+   "tier": "none",
+   "colour_ssim": 0.4174,
+   "colour_mean_delta_e": 12.95,
+   "texture_compare_overall": 0.581
+  },
+  {
+   "class_name": "CEILING TEST: reference colour pushed through the generator's own derive_maps rule (verify/ceiling)",
+   "tier": "exact",
+   "colour_ssim": 1,
+   "colour_mean_delta_e": 0
+  }
+ ],
+ "discrepancies": [
+  "REFUTED - derivation ceiling and 'tier exact is unreachable through derived maps'. I fed the REFERENCE colour through the generator's own generator/derive_maps.py (maps_rule.json) and ran lib/pixel_compare.py: height best-fit error 4.93 (needs <6), normal angle 3.71 degrees (needs <4), colour perfect -> tier 'exact'. The builder's 5.7 / 6.7 degree normal 'ceiling' (analysis/derivation_ceiling.py, final report, both guides) is an artefact: the script takes arccos of a dot product with the 8-bit reference normal vectors without re-normalising them (their mean length is 0.9957, which alone gives about 5 degrees). With normalised vectors, as pixel_compare does: 2.06 degrees from the uploaded 8-bit height, 3.71 degrees from the predicted height (strength 6 gives 2.72). So 'exact' is out of reach for L only because of the COLOUR (SSIM 0.76 vs 0.92, edge skill 0.58 vs 0.85, Delta E 4.9 vs 3), not because of the derived maps. The height ceiling 5.0 levels is correct.",
+  "Every other headline number reproduces exactly. Fresh bakes of S0, S, M, L into verify/ (fresh Blender processes, 8 samples, colour only; height and normal derived) re-scored with lib/pixel_compare.py and lib/texture_compare.py give identical values to the builder's for every measure (tier, SSIM, Delta E, edge skill, height error, normal angle, texture groups). Variation seeds 1, 3, 8 re-sampled and re-baked are byte-identical to the stored colour pictures (mean difference 0.0). The 8 stored variation descriptions are identical to sample_description(seed) output. The area description is identical to sample_description(21, 2). A fresh bake of it at 1254 dots matches the stored 2508 picture shrunk (mean difference 0.91, nothing over 40). Geometry route reproduced: correlation of real-geometry height with reference height 0.072 (derived S0 height 0.576). Their summary tables match scores/*.json.",
+  "The guide's explanation of the half-tile test result for S (3.2 mean difference 'because float rounding in the noise flips dots at a colour threshold') is wrong. My seed 3 variation gives the same 3.2; with grain set to 0 it drops to 0.71 (0% over 40 levels either way). The 3.2 is the per-dot grain white noise (sampled at pixel-filter jitter positions, 8 samples), not the colour-ladder thresholds. The test still passes. I also ran it myself: L 0.56 mean difference, 0.0% over 40 levels (control 16.2, 17.4% over 40); seed 3 3.2, 0.0% (control 17.0, 14.4%); hull plates 2.52, 0.0% (the builder never ran it on the hull plates).",
+  "Guide dead-end item 13 says variation tiles baked before and after the grain fix are 'mixed in variations/'. Timestamps (bakes 21:20-21:25, generator fixed 21:08) and my re-bakes of seeds 1, 3 and 8 (all identical to stored) show they were all baked with the final generator.",
+  "Guide dead-end item 14 says the two long thin scratches are 'not reproduced'. In class L the upper-right scratch is clearly there as broken thin traced segments (visible in my verify/L/colour.png, verify/scratch_crop.png and scores/L_diff.png). True only for S0, S and M.",
+  "Recipe section 1 says 'Nothing was copied from the reference picture' about class L. Section 4 and lessons say the M/L regions are a traced copy of the reference's own rust (9155 outlines, 150k numbers, 408 KB of the 413 KB). The generator itself is honest (see generator_reads_reference); the description L is a vector trace, and the opening sentence overstates.",
+  "Audit: all claimed class files pass (S0, S, layout_v0, layerA, layerB, hull_plates and all 8 variation descriptions under 8 KB or the class limit; M under 64 KB; R16k, R32k under 64 KB; R128k, R256k, L under 512 KB; area_seed21.json 9.2 KB passes at 16 KB). Only description/S_v3_uncal.json (8312 B) fails the 8 KB limit; it is an unclaimed intermediate. Caveat the builder discloses: M and L pass the grid rule only because outlines are stored in chunks of 60 and capped at 120 corners (max 118 corners, longest list 237 numbers); the rule is met by its letter, the content is a vector trace of the colour regions.",
+  "Sweep strips (the six full-tile ones) were baked at 21:00-21:02, before the final S.json (21:13) and the grain fix (generator 21:08). Re-baking the same sweeps with the current files differs by 1.46-1.55 mean levels (0.3% of dots over 40): cosmetic, but they are not from the final description. The 'ONE number' claim is false for the wear_size sweep (it changes both the across and the up scale, up = 0.68 x across), sweeps use 4 samples (not stated), and rust offset -0.10 is 'much less rust' (crude rust-colour share 3.3% vs 11.5% at the fitted setting), not 'almost no rust'.",
+  "Resolution section says 'at 512 dots the scores fall'. For S the dot-for-dot scores do not fall (SSIM 0.549 at 512 vs 0.479 at 1254, Delta E 11.82 vs 12.18); only S's same-kind score and L's SSIM / edge skill fall.",
+  "Area: only colour.png and bake.json were kept in area/seed21; the height, normal, roughness and metallic pictures and the 'all maps' claim cannot be re-checked from files, and the seam numbers are for colour only. My seam numbers by my own measure (wrap 1.10 and 0.97, middle lines 0.95 and 0.91) differ slightly from theirs (1.016; 0.985 and 0.863) but also show no seam.",
+  "Hull plates: the stored bake (20:57) predates the final generator fixes (21:08). 'Generator unchanged' holds for the transfer itself; re-baking the same description with the current generator differs by mean 2.94 levels (grain), 0% over 40 levels.",
+  "Honest-gap list is fair: variation tiles lack the reference's clumping and long drips (checked in the contact sheet); hull picture has wavy tone, sparse rust (checked by eye, matches their own note)."
+ ],
+ "guide_problems": [
+  "Wrong statement in both guides (recipe section 3.1 and lessons step 1, repeated in the builder's report): ceiling 'normal 6.7 degrees, tier exact unreachable through derived maps, metal: close, never exact'. Refuted by my run (see discrepancies). Lessons step 1 teaches readers to read the wrong ceiling off their own surface.",
+  "Recipe section 1: 'Nothing was copied from the reference picture' contradicts section 4 / lessons section 2 ('a coded copy of this tile's rust'). Say plainly in section 1 that L is a traced copy.",
+  "Recipe section 7.4: wrong cause given for the 3.2 half-tile difference (it is grain, see discrepancies). Dead-end items 13 and 14 are inaccurate (see discrepancies).",
+  "Section 5.6 sweeps: 'changes ONE number' is false for wear_size; sample count (4) not stated; six strips are from before the final description; -0.10 'almost no rust' overstated. Strips edge_attraction.png and grain.png exist but are not mentioned (only the zoom ones are). Otherwise the sweep settings listed (15-140, -0.10 to +0.10, 8-110, 0-1.0, 0-0.3) match make_sweeps.py and sweep.json, and the pictures do show the described direction of change.",
+  "Section 7.3 resolution sentence about scores falling at 512 is only true for some columns.",
+  "Not plain language for a non-programmer: 'Delta E' is never explained in words (used in the tier rules and every table); 'SSIM' appears from section 1 on but is only glossed in section 6; 'Sobel', 'k-means in the Lab colour space', 'autocorrelation length', 'tone curve', 'template matching', 'Hough circles', 'quantiles', 'gain per byte' and 'rate-distortion' (lessons section 2 title) are used without a one-sentence plain explanation first. Lessons section 1 is a list of abstract rules without a concrete example before each rule.",
+  "One word per thing is not kept: the same thing is called patch, region, outline, traced region and traced patch (JSON key is 'regions', guide says 'patches'); bar / strap / brace / band (JSON key 'bands'); 'layer' means three different things (description layers layer A/B, the five wear layers, rows of the strips_layers picture); tile / picture / area; a setting is named 'rust up-scale', which is not self-explanatory (it is the number of noise features up the tile).",
+  "Code style rule ('full plain-word names') is broken in several scripts that do have the plain note at the top: generator/bake_and_score.py, run_variations.py, final_tests.py and analysis/height_routes.py are one-line-style code with names like r, d, t0, ch, ss, pt, pc.",
+  "What is accurate and checked: the Section 9 and lessons rate-distortion tables match scores/*.json to the digit; description part sizes in section 4 match (profiles 2.3 KB, bands 1.5 KB, rivet 0.4 KB, procedural 1.45 KB, regions 408 KB in L); the 'Run it' command works as written; tier rules match lib/pixel_compare.py; the strap/brace/rivet measurements match the S0 description; every script has a 'What this does' note at the top; the guides say what was not tested."
+ ],
+ "area_really_unique": "Yes. The 2 x 2 area (area/seed21/colour.png, 2508 dots) is new unique content, not a repeated tile. Quadrant pairs differ by mean 13.8-16.2 levels (21-25% of dots differ by more than 30); max circular cross-correlation between quadrants 0.15-0.27; autocorrelation at exactly 1254 dots is 0.10 (x), 0.155 (y), -0.004 (diagonal); strongest repeat anywhere beyond 60 dots is 0.231 (a vertical shift of 61 dots, i.e. the full-height straps and rivet rows), and the 1254 reference tile itself has 0.177; random 300 x 300 crops matched against the whole picture best-match at only 0.26-0.43 and only along the straps, no copied area (a copy would be above 0.9). Seams: my adjacent-column/row jump ratios are wrap 1.10 / 0.97 and middle lines 0.95 / 0.91 (1.0 = none), no seam. The description regenerates identically from sample_description(21, tile_multiple=2) and a fresh 1254-dot bake matches the stored picture. Looking at it: new layout with long full-height straps, some braces that look alike because their panels are of similar size, rust sparse and evenly peppered. Not tested by me or them: bigger than 2 x 2, and the area's height/normal.",
+ "variation_really_different": "Yes, different pictures, same visual family. All 8 stored descriptions are exactly what sample_description(seed 1..8) returns; re-baked seeds 1, 3, 8 are byte-identical to stored pictures. Against the reference: mean difference 18.4-19.9 levels, 35-41% of dots differ by more than 30 levels, max circular cross-correlation with the reference only 0.09-0.19 (no rolled copy), 0-1 of 27-40 rivets within 8 dots of a reference rivet, bars in new places and counts (6-8 bars, 27-40 rivets), tier none for all. Between each other: pair mean difference 17.4-19.7 (mean 18.7), max circular cross-correlation about 0.10-0.16. Scores reproduce: SSIM 0.387-0.417, edge skill 0.000-0.021, Delta E 12.95-14.14, same-kind 0.525-0.603 (mean 0.569). Caveat visible in the contact sheet: all share the same six edge profiles, the same rivet picture and the same wear colour ramps, rust is evenly peppered with few long drips, layouts a little busier than the reference; the builder states these gaps honestly.",
+ "overall": "The builder's work is real and honest where it counts: the generator (generator/metal_generator.py, metal_shapes.py, derive_maps.py) reads only the description (source grep plus a strace of a full L bake: no file under reference/ and no picture other than its own outputs is opened), every claimed description passes lib/description_audit.py at its class limit, and every measured number I re-ran (fresh Blender bakes of S0, S, M, L, a re-sampled variation, half-tile shift tests, area, hull plates, geometry route) reproduces the builder's value exactly or within a grain-level 1 to 3 colour levels. Variations are genuinely different pictures, the area is genuinely unique, the transfer picture is a believable riveted hull. Problems: (1) the 'derivation ceiling' claim is wrong: the 6.7 degree normal ceiling and 'exact is unreachable through derived maps' come from un-normalised 8-bit normals, and the reference colour through the generator's own rule reaches tier exact on pixel_compare (normal 3.71 degrees, height 4.93); (2) the guides overstate or misstate several things (section 1 'nothing was copied' for a traced L, wrong cause of the S seam difference, the 'mixed grain versions' and 'scratches not reproduced' dead-end notes, 'ONE number' in sweeps, resolution sentence, strips older than the final description); (3) the guides use undefined jargon (Delta E, SSIM early, Sobel, k-means, autocorrelation, rate-distortion) and swap words (patch/region/outline, layer used three ways) against the plain-language rules; some scripts use short names. Also worth knowing: M and L are a vector trace of the reference's colour regions (the builder labels this), and they pass the audit only through chunking and corner caps. Fix the ceiling statement, the section 1 sentence and the three wrong explanations; then the result stands as reported. I wrote only into recipes/metal/verify/ (and removed the __pycache__ my own runs made in generator/).\""
+}

@@ -1,0 +1,60 @@
+{
+ "A_position_8bit": {
+  "max_error": 0.003921589255332897,
+  "mean_error_ignoring_step_edges": 0.0011224525046303285,
+  "distinct_levels": 9
+ },
+ "B_position_16bit": {
+  "max_error": 7.636845111735902e-06,
+  "mean_error_ignoring_step_edges": 3.6971657225535215e-06,
+  "distinct_levels": 4
+ },
+ "C_camera_depth_16bit": {
+  "max_error": 7.636845111735902e-06,
+  "mean_error": 3.688291646444363e-06
+ },
+ "D_parts": 4,
+ "D_channels": [
+  "ViewLayer.Combined.R",
+  "ViewLayer.Combined.G",
+  "ViewLayer.Combined.B",
+  "ViewLayer.Combined.A",
+  "ViewLayer.Depth.Z",
+  "ViewLayer.Position.X",
+  "ViewLayer.Position.Y",
+  "ViewLayer.Position.Z",
+  "ViewLayer.Normal.X",
+  "ViewLayer.Normal.Y",
+  "ViewLayer.Normal.Z"
+ ],
+ "D_zpass": {
+  "channel": "ViewLayer.Depth.Z",
+  "max_error": 1.9147992132984015e-06,
+  "mean_error": 1.0998435318872006e-06,
+  "raw_min": 4.900000095367432,
+  "raw_max": 4.999899864196777
+ },
+ "E_position_pass": {
+  "channel": "ViewLayer.Position.Z",
+  "max_error": 1.4901160971803051e-08,
+  "mean_error": 7.836613733370329e-09
+ },
+ "F_normal_pass_z_min_max": [
+  1.0,
+  1.0
+ ],
+ "G_emission_float_exr": {
+  "max_error": 1.4901160971803051e-08,
+  "mean_error": 7.836613733370329e-09
+ },
+ "edge_values_around_first_jump": [
+  0.001,
+  0.001,
+  0.001,
+  0.001,
+  0.2,
+  0.2,
+  0.2,
+  0.2
+ ]
+}

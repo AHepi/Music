@@ -1,0 +1,376 @@
+# What this does: measures how close a generated texture set (colour picture, normal map, height map) is to a reference set,
+# and draws a side-by-side sheet so a person can also judge it by eye. Two textures can never match dot for dot (they are
+# different random pieces of the same kind of surface), so this compares what makes a surface look like itself: the spread of
+# colours, how big and how sharp the features are, which way the lines run, how bumpy it is, how the colour and the bumps go
+# together, and whether the tile wraps without a seam. Every measure is turned into a score from 0 (as different as one
+# reference surface is from the others) to 1 (indistinguishable by that measure).
+# Use:  python3 -I texture_compare.py REFERENCE_NAME CANDIDATE_FOLDER [--json report.json] [--sheet sheet.png]
+#   REFERENCE_NAME is brick, slate, wood, metal, mud, gravel or mud_golden (colour only); the reference folders sit in ../reference
+#   CANDIDATE_FOLDER holds colour.png, normal.png (OpenGL: green points up), height.png (any bit depth); roughness.png,
+#   metallic.png and ao.png are shown on the sheet if present but are not scored (the references have none).
+import json
+import os
+import sys
+
+import cv2
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+REFERENCE_FOLDER = os.path.join(os.path.dirname(HERE), 'reference')
+ALL_REFERENCES = ['brick', 'slate', 'wood', 'metal', 'mud', 'gravel', 'mud_golden']
+TILE = 1254
+CROP = 512
+ANCHOR_FILE = os.path.join(HERE, 'texture_compare_anchors.json')
+
+# weight of each measure inside the overall score
+WEIGHTS = {
+    'colour_distribution': 3.0, 'colour_spectrum': 2.0, 'colour_orientation': 1.0, 'colour_scale': 2.0, 'colour_gradient': 1.5,
+    'height_distribution': 1.5, 'height_spectrum': 1.5, 'height_gradient': 1.5, 'height_colour_link': 1.0, 'height_contrast': 0.5,
+    'normal_tilt': 1.5, 'normal_components': 1.0, 'normal_height_agreement': 0.5,
+    'seam': 1.5,
+}
+# the smallest 'a different surface' distance allowed per measure (the references are all stretched to the same brightness range, so
+# some measures would otherwise be absurdly strict)
+ANCHOR_FLOORS = {'height_distribution': 0.10, 'height_spectrum': 0.30, 'height_gradient': 0.015, 'height_colour_link': 0.05, 'colour_spectrum': 0.15}
+GROUPS = {
+    'colour': ['colour_distribution', 'colour_spectrum', 'colour_orientation', 'colour_scale', 'colour_gradient'],
+    'height': ['height_distribution', 'height_spectrum', 'height_gradient', 'height_colour_link', 'height_contrast'],
+    'normal': ['normal_tilt', 'normal_components', 'normal_height_agreement'],
+    'tiling': ['seam'],
+}
+
+
+# ------------------------------------------------------------------------------------------------ loading and colour maths
+def load_rgb(path):
+    """Colour picture as float 0..1, RGB order, resized to the standard tile size."""
+    image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    if image is None:
+        raise FileNotFoundError(path)
+    if image.ndim == 2:
+        image = np.stack([image] * 3, axis=-1)
+    image = image[..., :3][..., ::-1].astype(np.float64)
+    image /= 65535.0 if image.max() > 255 else 255.0
+    if image.shape[:2] != (TILE, TILE):
+        image = cv2.resize(image, (TILE, TILE), interpolation=cv2.INTER_AREA)
+    return image
+
+
+def load_grey(path):
+    """One-channel picture (height) as float 0..1, resized to the standard tile size."""
+    image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    if image is None:
+        raise FileNotFoundError(path)
+    if image.ndim == 3:
+        image = image[..., :3].mean(axis=-1)
+    image = image.astype(np.float64)
+    image /= 65535.0 if image.max() > 255 else 255.0
+    if image.shape != (TILE, TILE):
+        image = cv2.resize(image, (TILE, TILE), interpolation=cv2.INTER_AREA)
+    return image
+
+
+def srgb_to_lab(rgb):
+    linear = np.where(rgb <= 0.04045, rgb / 12.92, ((rgb + 0.055) / 1.055) ** 2.4)
+    matrix = np.array([[0.4124564, 0.3575761, 0.1804375], [0.2126729, 0.7151522, 0.0721750], [0.0193339, 0.1191920, 0.9503041]])
+    xyz = linear @ matrix.T / np.array([0.95047, 1.0, 1.08883])
+    f = np.where(xyz > 0.008856, np.cbrt(xyz), 7.787 * xyz + 16.0 / 116.0)
+    return np.stack([116.0 * f[..., 1] - 16.0, 500.0 * (f[..., 0] - f[..., 1]), 200.0 * (f[..., 1] - f[..., 2])], axis=-1)
+
+
+def four_crops(image):
+    """Nine overlapping 512 x 512 crops (3 x 3 grid) so the measures do not depend on one lucky corner."""
+    h, w = image.shape[:2]
+    rows, columns = np.linspace(0, h - CROP, 3).astype(int), np.linspace(0, w - CROP, 3).astype(int)
+    return [image[r:r + CROP, c:c + CROP] for r in rows for c in columns]
+
+
+# ------------------------------------------------------------------------------------------------ building-block measures
+def wasserstein_1d(a, b):
+    a, b = np.sort(np.ravel(a)), np.sort(np.ravel(b))
+    n = 4096
+    qa = np.interp(np.linspace(0, 1, n), np.linspace(0, 1, len(a)), a)
+    qb = np.interp(np.linspace(0, 1, n), np.linspace(0, 1, len(b)), b)
+    return float(np.mean(np.abs(qa - qb)))
+
+
+def sliced_wasserstein(points_a, points_b, projections=64):
+    generator = np.random.default_rng(7)
+    directions = generator.normal(size=(projections, points_a.shape[1]))
+    directions /= np.linalg.norm(directions, axis=1, keepdims=True)
+    rows = generator.integers(0, len(points_a), 20000), generator.integers(0, len(points_b), 20000)
+    total = 0.0
+    for direction in directions:
+        total += wasserstein_1d(points_a[rows[0]] @ direction, points_b[rows[1]] @ direction)
+    return total / projections
+
+
+def radial_log_spectrum(grey, bins=30):
+    """How much picture 'energy' sits at each feature size, as a log curve. Uses the whole tile at once (the tiles are
+    seamless, so no window is needed and sliding the picture around changes nothing)."""
+    centred = grey - grey.mean()
+    power = np.abs(np.fft.fftshift(np.fft.fft2(centred))) ** 2
+    size = power.shape[0]
+    y, x = np.indices(power.shape)
+    radius = np.hypot(x - size // 2, y - size // 2)
+    edges = np.geomspace(3.0, size / 2.0 - 1, bins + 1)
+    curve = []
+    for i in range(bins):
+        ring = power[(radius >= edges[i]) & (radius < edges[i + 1])]
+        curve.append(ring.mean() if ring.size else (curve[-1] if curve else 1.0))
+    curve = np.array(curve)
+    curve = curve / curve.sum()
+    return np.log10(curve + 1e-9)
+
+
+def orientation_histogram(grey, bins=18):
+    gx = cv2.Sobel(grey.astype(np.float32), cv2.CV_32F, 1, 0, ksize=3)
+    gy = cv2.Sobel(grey.astype(np.float32), cv2.CV_32F, 0, 1, ksize=3)
+    magnitude = np.hypot(gx, gy)
+    angle = (np.degrees(np.arctan2(gy, gx)) % 180.0)
+    histogram, _ = np.histogram(angle, bins=bins, range=(0, 180), weights=magnitude)
+    return histogram / max(histogram.sum(), 1e-12)
+
+
+def correlation_lengths(grey):
+    """Distance (in pixels) over which the picture stays similar to itself, along x and along y (where the
+    autocorrelation falls to one half). Big = large smooth features, small = fine speckle."""
+    centred = grey - grey.mean()
+    power = np.abs(np.fft.fft2(centred)) ** 2
+    autocorrelation = np.fft.ifft2(power).real
+    autocorrelation /= autocorrelation[0, 0]
+    result = []
+    for line in (autocorrelation[0, :TILE // 2], autocorrelation[:TILE // 2, 0]):
+        below = np.where(line < 0.5)[0]
+        result.append(float(below[0]) if len(below) else float(TILE // 2))
+    return result
+
+
+def gradient_magnitude(grey):
+    gx = cv2.Sobel(grey.astype(np.float32), cv2.CV_32F, 1, 0, ksize=3) / 8.0
+    gy = cv2.Sobel(grey.astype(np.float32), cv2.CV_32F, 0, 1, ksize=3) / 8.0
+    return np.hypot(gx, gy)
+
+
+def seam_ratio(grey):
+    """How big the jump is across the wrap-around edge compared with a normal jump between neighbouring dots (1.0 = seamless)."""
+    inner = (np.abs(np.diff(grey, axis=1)).mean() + np.abs(np.diff(grey, axis=0)).mean()) / 2.0
+    wrap = (np.abs(grey[:, 0] - grey[:, -1]).mean() + np.abs(grey[0, :] - grey[-1, :]).mean()) / 2.0
+    return float(wrap / max(inner, 1e-9))
+
+
+# ------------------------------------------------------------------------------------------------ the measures themselves
+def summarise(folder, with_maps=True):
+    """Everything we need to know about one texture set, worked out once."""
+    colour = load_rgb(os.path.join(folder, 'colour.png'))
+    lab = srgb_to_lab(colour)
+    lightness = lab[..., 0]
+    facts = {
+        'lab_points': lab.reshape(-1, 3),
+        'spectrum': radial_log_spectrum(lightness),
+        'orientation': orientation_histogram(lightness),
+        'lengths': correlation_lengths(lightness),
+        'gradient': gradient_magnitude(lightness / 100.0).ravel(),
+        'seam': seam_ratio(lightness / 100.0),
+        'lightness': lightness,
+    }
+    height_path, normal_path = os.path.join(folder, 'height.png'), os.path.join(folder, 'normal.png')
+    if os.path.exists(os.path.join(folder, 'height_as_uploaded.png')):
+        height_path = os.path.join(folder, 'height_as_uploaded.png')     # the reference: the untouched upload, not the smoothed copy
+    if with_maps and os.path.exists(height_path):
+        height = load_grey(height_path)
+        facts['height_contrast'] = float(height.std())
+        low, high = np.percentile(height, 0.5), np.percentile(height, 99.5)
+        height = np.clip((height - low) / max(high - low, 1e-6), 0.0, 1.0)       # compare the SHAPE of the relief, not its overall level or contrast
+        facts['height'] = height
+        facts['height_values'] = height.ravel()
+        facts['height_spectrum'] = radial_log_spectrum(height)
+        facts['height_gradient'] = gradient_magnitude(height).ravel()
+        facts['height_colour_corr'] = float(np.corrcoef(height.ravel(), lightness.ravel())[0, 1])
+        if os.path.exists(normal_path):
+            normal = load_rgb(normal_path) * 2.0 - 1.0
+            facts['normal'] = normal
+            facts['tilt'] = np.degrees(np.arccos(np.clip(normal[..., 2], -1, 1))).ravel()
+            facts['normal_std'] = [float(normal[..., 0].std()), float(normal[..., 1].std())]
+            facts['normal_mean'] = [float(normal[..., 0].mean()), float(normal[..., 1].mean())]
+            hx = np.gradient(height, axis=1)
+            hy = np.gradient(height, axis=0)
+            facts['normal_height_corr'] = [float(np.corrcoef(normal[..., 0].ravel(), hx.ravel())[0, 1]),
+                                           float(np.corrcoef(normal[..., 1].ravel(), hy.ravel())[0, 1])]
+    return facts
+
+
+def distances(reference, candidate):
+    """Raw distances (0 = identical) for every measure both sets support."""
+    d = {}
+    d['colour_distribution'] = sliced_wasserstein(reference['lab_points'], candidate['lab_points']) / 100.0
+    d['colour_spectrum'] = float(np.mean(np.abs(reference['spectrum'] - candidate['spectrum'])))
+    d['colour_orientation'] = float(np.abs(reference['orientation'] - candidate['orientation']).sum())
+    d['colour_scale'] = float(sum(abs(np.log(max(a, 1.0) / max(b, 1.0))) for a, b in zip(reference['lengths'], candidate['lengths'])) / 2.0)
+    d['colour_gradient'] = wasserstein_1d(reference['gradient'], candidate['gradient'])
+    d['seam'] = max(candidate['seam'] - 1.0, 0.0)
+    if 'height' in reference and 'height' in candidate:
+        d['height_distribution'] = wasserstein_1d(reference['height_values'], candidate['height_values'])
+        d['height_spectrum'] = float(np.mean(np.abs(reference['height_spectrum'] - candidate['height_spectrum'])))
+        d['height_gradient'] = wasserstein_1d(reference['height_gradient'], candidate['height_gradient'])
+        d['height_colour_link'] = abs(reference['height_colour_corr'] - candidate['height_colour_corr'])
+    if 'height_contrast' in reference and 'height_contrast' in candidate:
+        d['height_contrast'] = abs(reference['height_contrast'] - candidate['height_contrast']) / max(reference['height_contrast'], 1e-6)
+    if 'normal' in reference and 'normal' in candidate:
+        d['normal_tilt'] = wasserstein_1d(reference['tilt'], candidate['tilt']) / 90.0
+        d['normal_components'] = float(sum(abs(a - b) for a, b in zip(reference['normal_std'], candidate['normal_std'])) +
+                                       sum(abs(a - b) for a, b in zip(reference['normal_mean'], candidate['normal_mean'])))
+        d['normal_height_agreement'] = float(sum(abs(a - b) for a, b in zip(reference['normal_height_corr'], candidate['normal_height_corr'])) / 2.0)
+    return d
+
+
+def reference_summaries():
+    summaries = {}
+    for name in ALL_REFERENCES:
+        summaries[name] = summarise(os.path.join(REFERENCE_FOLDER, name), with_maps=(name != 'mud_golden'))
+    return summaries
+
+
+def make_anchors():
+    """How different one reference surface is from the others, per measure: the size that means 'a different surface' (score 0)."""
+    summaries = reference_summaries()
+    anchors = {}
+    for name in ALL_REFERENCES:
+        per_measure = {}
+        for other in ALL_REFERENCES:
+            if other == name:
+                continue
+            if {name, other} == {'mud', 'mud_golden'}:
+                continue          # the two muds are the same kind of surface, so they say nothing about 'a different surface'
+            for measure, value in distances(summaries[name], summaries[other]).items():
+                if measure == 'seam':
+                    continue
+                per_measure.setdefault(measure, []).append(value)
+        anchors[name] = {measure: float(np.median(values)) for measure, values in per_measure.items()}
+        anchors[name]['seam'] = 2.0
+        for measure, floor in ANCHOR_FLOORS.items():
+            if measure in anchors[name]:
+                anchors[name][measure] = max(anchors[name][measure], floor)
+        anchors[name]['height_contrast'] = 0.5     # a relief twice as strong or half as strong as the reference scores 0
+    with open(ANCHOR_FILE, 'w') as handle:
+        json.dump(anchors, handle, indent=1)
+    return anchors
+
+
+def load_anchors():
+    if not os.path.exists(ANCHOR_FILE):
+        return make_anchors()
+    with open(ANCHOR_FILE) as handle:
+        return json.load(handle)
+
+
+def score_set(reference_name, candidate_folder):
+    summaries = {reference_name: summarise(os.path.join(REFERENCE_FOLDER, reference_name), with_maps=(reference_name != 'mud_golden'))}
+    candidate = summarise(candidate_folder)
+    raw = distances(summaries[reference_name], candidate)
+    anchors = load_anchors()[reference_name]
+    scores = {}
+    for measure, value in raw.items():
+        anchor = anchors.get(measure, 1.0)
+        scores[measure] = float(np.clip(1.0 - value / max(anchor, 1e-9), 0.0, 1.0))
+    groups = {}
+    for group, measures in GROUPS.items():
+        present = [m for m in measures if m in scores]
+        if present:
+            groups[group] = float(sum(scores[m] * WEIGHTS[m] for m in present) / sum(WEIGHTS[m] for m in present))
+    present_all = [m for m in scores]
+    overall = float(sum(scores[m] * WEIGHTS[m] for m in present_all) / sum(WEIGHTS[m] for m in present_all))
+    return {
+        'reference': reference_name, 'candidate': candidate_folder, 'overall': round(overall, 3),
+        'groups': {k: round(v, 3) for k, v in groups.items()},
+        'scores': {k: round(v, 3) for k, v in scores.items()}, 'raw_distances': {k: round(v, 4) for k, v in raw.items()},
+        'facts': {
+            'seam_ratio_candidate': round(candidate['seam'], 2), 'seam_ratio_reference': round(summaries[reference_name]['seam'], 2),
+            'correlation_length_px_reference': summaries[reference_name]['lengths'], 'correlation_length_px_candidate': candidate['lengths'],
+            'mean_lab_reference': [round(float(v), 1) for v in summaries[reference_name]['lab_points'].mean(axis=0)],
+            'mean_lab_candidate': [round(float(v), 1) for v in candidate['lab_points'].mean(axis=0)],
+            'height_colour_corr_reference': round(summaries[reference_name].get('height_colour_corr', float('nan')), 3),
+            'height_colour_corr_candidate': round(candidate.get('height_colour_corr', float('nan')), 3),
+            'normal_height_corr_reference': summaries[reference_name].get('normal_height_corr'),
+            'normal_height_corr_candidate': candidate.get('normal_height_corr'),
+        },
+    }
+
+
+# ------------------------------------------------------------------------------------------------ the side-by-side sheet
+def label(image, text, position=(12, 30), scale=0.9):
+    cv2.putText(image, text, position, cv2.FONT_HERSHEY_SIMPLEX, scale, (0, 0, 0), 4, cv2.LINE_AA)
+    cv2.putText(image, text, position, cv2.FONT_HERSHEY_SIMPLEX, scale, (255, 255, 255), 2, cv2.LINE_AA)
+    return image
+
+
+def to_bgr8(path_or_array, is_height=False):
+    if isinstance(path_or_array, str):
+        image = cv2.imread(path_or_array, cv2.IMREAD_UNCHANGED)
+        if image.ndim == 2:
+            image = np.stack([image] * 3, axis=-1)
+        image = image[..., :3].astype(np.float64)
+        image = image / (65535.0 if image.max() > 255 else 255.0)
+        image = (np.clip(image, 0, 1) * 255).astype(np.uint8)
+    else:
+        image = path_or_array
+    return cv2.resize(image, (TILE // 2, TILE // 2), interpolation=cv2.INTER_AREA)
+
+
+def curve_picture(curves, width, height, title):
+    canvas = np.full((height, width, 3), 245, np.uint8)
+    low = min(float(np.min(c[0])) for c in curves)
+    high = max(float(np.max(c[0])) for c in curves)
+    for values, colour, name in curves:
+        points = np.array([[10 + i * (width - 20) / (len(values) - 1), height - 30 - (v - low) / max(high - low, 1e-9) * (height - 70)] for i, v in enumerate(values)], np.int32)
+        cv2.polylines(canvas, [points], False, colour, 2, cv2.LINE_AA)
+    return label(canvas, title, (10, 24), 0.6)
+
+
+def make_sheet(reference_name, candidate_folder, out_path):
+    half = TILE // 2
+    reference_folder = os.path.join(REFERENCE_FOLDER, reference_name)
+    rows = []
+    for stem in ('colour', 'normal', 'height'):
+        reference_path, candidate_path = os.path.join(reference_folder, stem + '.png'), os.path.join(candidate_folder, stem + '.png')
+        if not os.path.exists(reference_path) or not os.path.exists(candidate_path):
+            continue
+        left, right = to_bgr8(reference_path), to_bgr8(candidate_path)
+        rows.append(np.hstack([label(left, f'reference {stem}'), label(right, f'generated {stem}')]))
+    sheet = np.vstack(rows) if rows else np.zeros((half, 2 * half, 3), np.uint8)
+    # a 2 x 2 tiling preview of the generated colour, to see seams and repetition
+    colour_path = os.path.join(candidate_folder, 'colour.png')
+    tile = cv2.imread(colour_path)
+    tile = cv2.resize(tile, (half, half), interpolation=cv2.INTER_AREA)
+    tiled = np.vstack([np.hstack([tile, tile]), np.hstack([tile, tile])])
+    tiled = cv2.resize(tiled, (2 * half, 2 * half), interpolation=cv2.INTER_AREA)
+    extra = [label(tiled, 'generated colour tiled 2x2 (look for seams / repeats)')]
+    reference_facts, candidate_facts = summarise(reference_folder, with_maps=False), summarise(candidate_folder, with_maps=False)
+    spectrum = curve_picture([(reference_facts['spectrum'], (60, 60, 220), 'reference'), (candidate_facts['spectrum'], (200, 120, 20), 'generated')], 2 * half, half // 2,
+                             'feature-size curve: red = reference, blue = generated (should overlap)')
+    histogram_a = np.histogram(reference_facts['lightness'], bins=48, range=(0, 100))[0] / TILE ** 2
+    histogram_b = np.histogram(candidate_facts['lightness'], bins=48, range=(0, 100))[0] / TILE ** 2
+    lightness_curve = curve_picture([(histogram_a, (60, 60, 220), 'reference'), (histogram_b, (200, 120, 20), 'generated')], 2 * half, half // 2,
+                                    'brightness spread: red = reference, blue = generated')
+    column = np.vstack(extra + [spectrum, lightness_curve])
+    column = cv2.resize(column, (2 * half, sheet.shape[0]), interpolation=cv2.INTER_AREA) if column.shape[0] != sheet.shape[0] else column
+    full = np.hstack([sheet, column])
+    cv2.imwrite(out_path, full)
+    return out_path
+
+
+def main(arguments):
+    if arguments and arguments[0] == '--anchors':
+        print(json.dumps(make_anchors(), indent=1))
+        return
+    reference_name, candidate_folder = arguments[0], arguments[1]
+    report = score_set(reference_name, candidate_folder)
+    if '--json' in arguments:
+        with open(arguments[arguments.index('--json') + 1], 'w') as handle:
+            json.dump(report, handle, indent=1)
+    if '--sheet' in arguments:
+        make_sheet(reference_name, candidate_folder, arguments[arguments.index('--sheet') + 1])
+    print(json.dumps(report, indent=1))
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])

@@ -1,0 +1,94 @@
+{
+ "area": {
+  "size": 2508,
+  "seam_ratio_left_right_top_bottom": [
+   0.876,
+   1.044
+  ],
+  "strongest_repeat_peak_at_40_dots_or_more": 0.176,
+  "at_shift": [
+   24,
+   32
+  ],
+  "quadrant_scores": {
+   "top_left": {
+    "kind_score": 0.292,
+    "groups": {
+     "colour": 0.26,
+     "height": 0.491,
+     "normal": 0.144,
+     "tiling": 0.0
+    },
+    "ssim_vs_reference": 0.2834
+   },
+   "top_right": {
+    "kind_score": 0.307,
+    "groups": {
+     "colour": 0.274,
+     "height": 0.496,
+     "normal": 0.188,
+     "tiling": 0.0
+    },
+    "ssim_vs_reference": 0.2825
+   },
+   "bottom_left": {
+    "kind_score": 0.301,
+    "groups": {
+     "colour": 0.276,
+     "height": 0.491,
+     "normal": 0.15,
+     "tiling": 0.0
+    },
+    "ssim_vs_reference": 0.2874
+   },
+   "bottom_right": {
+    "kind_score": 0.303,
+    "groups": {
+     "colour": 0.284,
+     "height": 0.442,
+     "normal": 0.237,
+     "tiling": 0.0
+    },
+    "ssim_vs_reference": 0.2886
+   }
+  },
+  "quadrant_pair_ssim": {
+   "top_left-top_right": 0.344,
+   "top_left-bottom_left": 0.351,
+   "top_left-bottom_right": 0.348,
+   "top_right-bottom_left": 0.351,
+   "top_right-bottom_right": 0.346,
+   "bottom_left-bottom_right": 0.352
+  },
+  "bake_seconds": 227.7,
+  "shapes": 114875
+ },
+ "resolution": {
+  "512": {
+   "bake_seconds": 15.4,
+   "colour_render_seconds": 3.83,
+   "shapes": 28757,
+   "ssim_to_the_2508_bake_shrunk_to_this_size": 0.9868,
+   "mean_abs_difference_to_it": 1.22
+  },
+  "1254": {
+   "bake_seconds": 33.3,
+   "colour_render_seconds": 10.66,
+   "shapes": 28757,
+   "ssim_to_the_2508_bake_shrunk_to_this_size": 0.9929,
+   "mean_abs_difference_to_it": 0.62
+  },
+  "2508": {
+   "bake_seconds": 77.8,
+   "colour_render_seconds": 27.16,
+   "shapes": 28757,
+   "ssim_to_the_2508_bake_shrunk_to_this_size": 1.0,
+   "mean_abs_difference_to_it": 0.0
+  }
+ },
+ "half_tile_seam_test": {
+  "mean_abs_difference": 0.757,
+  "share_of_dots_differing_by_more_than_8_levels": 0.00977,
+  "note": "the shifted bake draws every shape slid by half a tile (wrapped); a perfectly periodic recipe gives 0 apart from anti-aliasing at shape edges"
+ }
+}

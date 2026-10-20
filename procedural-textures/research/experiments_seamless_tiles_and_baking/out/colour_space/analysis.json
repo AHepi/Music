@@ -1,0 +1,50 @@
+{
+ "ramp_8bit": {
+  "file_dtype": "uint8",
+  "different_grey_levels": 54,
+  "ideal_for_0.2_of_the_range": 51
+ },
+ "ramp_16bit": {
+  "file_dtype": "uint16",
+  "different_grey_levels": 3957,
+  "ideal_for_0.2_of_the_range": 13107
+ },
+ "edge": {
+  "blackmanharris1p5_s4": {
+   "mean_error_on_edge_pixels": 0.1714,
+   "worst_error": 0.516,
+   "pixels_touched_by_blur_away_from_the_edge": 63,
+   "edge_pixels": 64
+  },
+  "box1p0_s1": {
+   "mean_error_on_edge_pixels": 0.5156,
+   "worst_error": 0.516,
+   "pixels_touched_by_blur_away_from_the_edge": 0,
+   "edge_pixels": 64
+  },
+  "box1p0_s16": {
+   "mean_error_on_edge_pixels": 0.0615,
+   "worst_error": 0.203,
+   "pixels_touched_by_blur_away_from_the_edge": 0,
+   "edge_pixels": 64
+  },
+  "box1p0_s4": {
+   "mean_error_on_edge_pixels": 0.1714,
+   "worst_error": 0.516,
+   "pixels_touched_by_blur_away_from_the_edge": 0,
+   "edge_pixels": 64
+  },
+  "box1p0_s64": {
+   "mean_error_on_edge_pixels": 0.0273,
+   "worst_error": 0.062,
+   "pixels_touched_by_blur_away_from_the_edge": 0,
+   "edge_pixels": 64
+  },
+  "gaussian1p5_s64": {
+   "mean_error_on_edge_pixels": 0.0288,
+   "worst_error": 0.172,
+   "pixels_touched_by_blur_away_from_the_edge": 259,
+   "edge_pixels": 64
+  }
+ }
+}

@@ -1,0 +1,57 @@
+{
+ "4a_midlevel_scale_space": {
+  "Midlevel 0.5, Scale 0.1, Space OBJECT, object stretched x1.0 in z": {
+   "measured_top_left_(u<0.5)": -0.0352,
+   "expected_left": -0.05,
+   "measured_top_right_(u>0.5)": 0.0501,
+   "expected_right": 0.05
+  },
+  "Midlevel 0.0, Scale 0.1, Space OBJECT, object stretched x1.0 in z": {
+   "measured_top_left_(u<0.5)": 0.0001,
+   "expected_left": 0.0,
+   "measured_top_right_(u>0.5)": 0.1001,
+   "expected_right": 0.1
+  },
+  "Midlevel 1.0, Scale 0.1, Space OBJECT, object stretched x1.0 in z": {
+   "measured_top_left_(u<0.5)": -0.0705,
+   "expected_left": -0.1,
+   "measured_top_right_(u>0.5)": 0.0001,
+   "expected_right": 0.0
+  },
+  "Midlevel 0.5, Scale 0.2, Space OBJECT, object stretched x1.0 in z": {
+   "measured_top_left_(u<0.5)": -0.0705,
+   "expected_left": -0.1,
+   "measured_top_right_(u>0.5)": 0.1001,
+   "expected_right": 0.1
+  },
+  "Midlevel 0.5, Scale 0.1, Space OBJECT, object stretched x2.0 in z": {
+   "measured_top_left_(u<0.5)": -0.0705,
+   "expected_left": -0.1,
+   "measured_top_right_(u>0.5)": 0.1001,
+   "expected_right": 0.1
+  },
+  "Midlevel 0.5, Scale 0.1, Space WORLD, object stretched x2.0 in z": {
+   "measured_top_left_(u<0.5)": -0.0224,
+   "expected_left": -0.05,
+   "measured_top_right_(u>0.5)": 0.0501,
+   "expected_right": 0.05
+  }
+ },
+ "4b_displacement_method": {
+  "BUMP": {
+   "far_edge_wobble_in_pixels (std of the top edge)": 0.16,
+   "brightness_spread_inside": 0.0979,
+   "seconds_to_render": 3.6
+  },
+  "DISPLACEMENT": {
+   "far_edge_wobble_in_pixels (std of the top edge)": 3.1,
+   "brightness_spread_inside": 0.0984,
+   "seconds_to_render": 2.1
+  },
+  "BOTH": {
+   "far_edge_wobble_in_pixels (std of the top edge)": 3.1,
+   "brightness_spread_inside": 0.1004,
+   "seconds_to_render": 3.6
+  }
+ }
+}

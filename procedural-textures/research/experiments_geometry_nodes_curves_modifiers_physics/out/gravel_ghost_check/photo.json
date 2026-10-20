@@ -1,0 +1,82 @@
+{
+ "parameters": {
+  "seed": 3,
+  "big": 34,
+  "medium": 140,
+  "small": 360,
+  "tiny": 300,
+  "frames": 190,
+  "ghosts": true,
+  "ghost_tiny": false,
+  "rounds": 1,
+  "later_frames": 90,
+  "variants": 10,
+  "time_scale": 1.0,
+  "linear_damping": 0.7,
+  "angular_damping": 0.4,
+  "substeps": 10,
+  "ghost_scale": 1.0,
+  "solver_iterations": 30,
+  "max_drop_height": 14.0
+ },
+ "shapes_and_placement_s": 0.08,
+ "stones": 834,
+ "rounds": [
+  {
+   "objects_created_s": 0.2,
+   "rigid_body_setup_s": 2.34,
+   "physics_s": 79.04,
+   "frames": 190,
+   "overlaps": {
+    "overlapping_pairs": 4,
+    "deep_overlaps_two_or_more_corners": 1
+   }
+  }
+ ],
+ "five_highest_stone_centres_(z, kind, size)": [
+  [
+   5.48,
+   "big",
+   1.29
+  ],
+  [
+   5.13,
+   "big",
+   1.25
+  ],
+  [
+   4.85,
+   "small",
+   0.38
+  ],
+  [
+   4.02,
+   "small",
+   0.38
+  ],
+  [
+   3.85,
+   "small",
+   0.38
+  ]
+ ],
+ "overlaps_after_settling": {
+  "overlapping_pairs": 4,
+  "deep_overlaps_two_or_more_corners": 1
+ },
+ "stones_left": 829,
+ "pile_mesh_s": 1.56,
+ "stone_copies_in_tile": 855,
+ "photo": {
+  "size": 64,
+  "z_low": -0.003000000026077032,
+  "z_high": 0.5931247472763062,
+  "sobel_strength": 11.807209892659914,
+  "vertices": 99742,
+  "evaluate_geometry_s": 0.76,
+  "height_render_s": 1.69,
+  "colour_render_s": 1.61,
+  "normal_render_s": 1.55
+ },
+ "total_seconds": 121.1
+}

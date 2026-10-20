@@ -1,0 +1,74 @@
+{
+ "grey_weights_red_green_blue_offset": [
+  0.6831,
+  1.5919,
+  -0.055,
+  -78.1925
+ ],
+ "plain_grey_fit_mae_levels": 7.526477140786174,
+ "corr_with_height_luma_601": 0.974033590656195,
+ "corr_with_height_luma_709": 0.9670956330340474,
+ "corr_with_height_mean": 0.9720655079638877,
+ "tone_curve_and_blur": {
+  "sigma": 0.7,
+  "mae": 3.039554448252483,
+  "curve_x": [
+   41.6,
+   59.2,
+   66.8,
+   72.6,
+   77.2,
+   81.4,
+   84.6,
+   88.8,
+   94.1,
+   100.7,
+   108.0,
+   137.4
+  ],
+  "curve_y": [
+   7.5,
+   48.1,
+   69.4,
+   85.1,
+   97.3,
+   108.7,
+   117.3,
+   128.4,
+   142.3,
+   160.4,
+   180.5,
+   243.8
+  ]
+ },
+ "curve_then_blur": "not used (blur first fits better: 3.0 against 5.0 levels)",
+ "height_pred_mae_levels": 3.039554448252483,
+ "height_pred_correlation": 0.9968835467407346,
+ "height_pred_mae_after_linear_fix": 3.009701096012006,
+ "height16_vs_height8_mae_levels": 5.415743045819368,
+ "height16_equals_blurred_height8": {
+  "0.5": 3.9327836851142712,
+  "0.8": 3.4253666778100857,
+  "1.0": 4.540511525886413,
+  "1.3": 6.558069132299239
+ },
+ "normal_from_uploaded_height_by_strength": {
+  "2": 12.87620892729487,
+  "3": 10.472679174290455,
+  "4": 8.417667054538468,
+  "5": 6.814139118322129,
+  "6": 5.924907508471592,
+  "7": 6.054672985182869,
+  "8": 6.921757347221508,
+  "10": 9.315735418954526,
+  "12": 11.774588456944452,
+  "16": 16.244277492727385,
+  "24": 23.3310225243195,
+  "32": 28.661722681798302
+ },
+ "best_whole_strength": 6,
+ "normal_from_predicted_height_angle": 6.504167982636489,
+ "normal_reference_mean_angle_from_flat": 18.399446414256513,
+ "normal_flat_guess_angle": 18.399446414256513,
+ "normal_gl_is_dx_with_green_flipped": 1.1102230246251565e-16
+}

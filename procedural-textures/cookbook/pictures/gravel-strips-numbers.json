@@ -1,0 +1,36 @@
+{
+ "normal_strength_on_S_v4": {
+  "what": "normal map made from outputs/S_v4/height.png at each strength (central differences on the 8-bit height), scored against reference/gravel/normal.png with lib/pixel_compare.py",
+  "by_strength": {
+   "0": {
+    "normal_mean_angle_degrees": 24.46,
+    "normal_median_angle_degrees": 18.68
+   },
+   "5": {
+    "normal_mean_angle_degrees": 31.63,
+    "normal_median_angle_degrees": 28.21
+   },
+   "10": {
+    "normal_mean_angle_degrees": 37.77,
+    "normal_median_angle_degrees": 34.79
+   },
+   "20": {
+    "normal_mean_angle_degrees": 45.18,
+    "normal_median_angle_degrees": 43.23
+   },
+   "40": {
+    "normal_mean_angle_degrees": 52.66,
+    "normal_median_angle_degrees": 53.26
+   }
+  }
+ },
+ "height_stretch_on_pebbles": {
+  "what": "height made from transfer/out/pebbles_1254/colour.png with the gravel rule (S_v4 maps.height) and with the pebble rule (transfer_pebbles maps.height), no blur; plus the height the generator baked",
+  "gravel_rule_share_of_dots_at_full_white": 0.62,
+  "gravel_rule_mean_height_0_to_255": 230.7,
+  "pebble_rule_share_of_dots_at_full_white": 0.001,
+  "pebble_rule_mean_height_0_to_255": 119.5,
+  "baked_pebble_height_share_at_full_white": 0.001,
+  "baked_pebble_height_mean_0_to_255": 118.3
+ }
+}

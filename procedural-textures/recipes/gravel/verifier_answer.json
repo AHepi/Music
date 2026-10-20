@@ -1,0 +1,90 @@
+{
+ "surface": "gravel",
+ "claims_hold": true,
+ "audit_ok": true,
+ "generator_reads_reference": false,
+ "rescored": [
+  {
+   "class_name": "S_v4",
+   "tier": "none",
+   "colour_ssim": 0.2128,
+   "colour_mean_delta_e": 20.93,
+   "texture_compare_overall": 0.362
+  },
+  {
+   "class_name": "M_a600_s120",
+   "tier": "none",
+   "colour_ssim": 0.4308,
+   "colour_mean_delta_e": 11.93,
+   "texture_compare_overall": 0.208
+  },
+  {
+   "class_name": "TS_k24_a300",
+   "tier": "none",
+   "colour_ssim": 0.3791,
+   "colour_mean_delta_e": 13.78,
+   "texture_compare_overall": 0.215
+  },
+  {
+   "class_name": "T_k24_a250",
+   "tier": "none",
+   "colour_ssim": 0.4528,
+   "colour_mean_delta_e": 11.37,
+   "texture_compare_overall": 0.245
+  },
+  {
+   "class_name": "T_k24_a100",
+   "tier": "none",
+   "colour_ssim": 0.5126,
+   "colour_mean_delta_e": 8.51,
+   "texture_compare_overall": 0.279
+  },
+  {
+   "class_name": "T_k24_a50",
+   "tier": "layout",
+   "colour_ssim": 0.584,
+   "colour_mean_delta_e": 6.83,
+   "texture_compare_overall": 0.404
+  },
+  {
+   "class_name": "L_a250_s12",
+   "tier": "layout",
+   "colour_ssim": 0.588,
+   "colour_mean_delta_e": 6.49,
+   "texture_compare_overall": 0.533
+  },
+  {
+   "class_name": "L_a100_s8",
+   "tier": "layout",
+   "colour_ssim": 0.6662,
+   "colour_mean_delta_e": 5.29,
+   "texture_compare_overall": 0.603
+  }
+ ],
+ "area_really_unique": "Yes. I checked the 2508 x 2508 area picture myself: seam jump ratios 1.06/1.10 at the middle lines and 0.95/1.05 at the wrap edge. The four quadrants have a cross-correlation peak of 0.034-0.039, where a repeat would give 1.0. The whole picture's autocorrelation outside +-60 dots of zero shift peaks at 0.02. Rolled by half a picture it correlates 0.00 with itself. A bake of the same 2.5 KB description (area/descriptions/sample_101.json) in a fresh Blender process is byte-identical to the builder's colour, height and normal pictures. So the picture is 2508 dots of new content with no seam and no repeat. Its stones are the same size in dots as in the 1254 tile, so they look half as big at the 1254 preview.",
+ "variation_really_different": "Different as pictures, not as looks. The 8 descriptions are exactly what sampler.py gives from S_v4 with seeds 1-8 (byte-identical when I re-ran it). They have different random seeds and counts (about 7%), radii (5%), packing and tones (+-2). A fresh bake of sample_03 is byte-identical to the builder's. Mean dot difference between variants is 33.3-35.6 (mean 34.6). A variant differs from the reference by 33-34.6, so a variant is no closer to the reference than to another variant. Best shifted correlation between any two variants is 0.044 (against the reference 0.046), so none are copies. Stone share varies 4.7% relative across variants, close to the reference's window spread of 4.5%. The recipe numbers are the same in all of them, so they are the same kind of gravel with a different arrangement, not different looks. They also all share one systematic gap from the reference: stone share about 0.61 against 0.68, and far fewer big stones (stone surviving an opening of radius 12: 0.28-0.38 against 0.516; radius 24: about 0.04 against 0.32). By eye the stones are small flat kite-shaped polygons on flat darker soil, not the chunky faceted blocks of the reference. The soil shows as a spike in the brightness curve. This agrees with the builder's own caveat, but 'as good as the fitted tile' only holds because the fitted tile has the same gap.",
+ "discrepancies": [
+  "Every number I could re-run reproduces exactly. I baked 8 classes at 1254 in fresh Blender processes and scored them with lib/pixel_compare.py and lib/texture_compare.py, with a smoothed-height view written independently of the builder's score_folder.py. S_v4, M_a600_s120, TS_k24_a300, T_k24_a250, T_k24_a100, T_k24_a50, L_a250_s12 and L_a100_s8 all match to the third decimal (SSIM, Delta E, edge skill, height error, normal angle, texture score, tier). My S_v4 colour PNG is byte-identical to the builder's.",
+  "Description bytes in the claim differ from the audit's file sizes by 1-5 bytes for the traced files (for example 49766 against 49771, 436388 against 436391). Immaterial. S_v4 is 2364 bytes compact, but the file on disk is 4637 bytes because it is indented. It is under 8 KB either way.",
+  "NOT DONE: the two plain-language gravel guides (04 Recipe and 04 Lessons) do not exist on disk. recipes/gravel/final_report.json honest_notes says the harness refused to write .md files and that the content is in the structured answer. analysis/analysis_findings.md is also missing. No gravel guide text could be verified from disk. Only the guide pictures, sweep strips and script headers exist.",
+  "WRONG ATTRIBUTION: 'baked in 173 s' for the area picture. The area folder's own bake.json says total_s 252.6. The 173 s figure is the resolution test (S_v4 baked at 2508 pixels from a 1254-dot description), which has about a quarter of the shapes of the area picture. My re-bake of the area description took 204.9 s under load about 8-11 on 4 cores.",
+  "WRONG SIZE: the half-tile test numbers (1.29 / 0 % over 40 / wrong roll 31 / 28 %) were measured on a 512-dot bake. analysis/half_tile_test.py hard-codes size = 512, but the claim says 'on the 1254 tile'. At 1254 I get 0.78 mean difference and 0 % over 40, with a wrong roll giving 27.9 and 25.0 %. Height 2.05 and normal 3.9 also pass. The tile is truly seamless, but the quoted numbers belong to 512. The pebbles half-tile numbers (1.54) are also from the 512 test.",
+  "Bake times in the resolution table (19 / 100 / 173 s) are inflated by machine load. My own bakes took 20.8 s at 512 and 61 s at 1254. The python shape list + mesh column (9 / 23 / 9 s) should be about equal at all sizes, so it is load noise. The builder did call these upper bounds. All other resolution numbers reproduce (SSIM 0.99, 1.65 and 1.68 levels, mean slope 0.374 / 0.367 / 0.352).",
+  "The dot-for-dot goal is NOT met by any procedural description. S_v4 is tier none (SSIM 0.21, Delta E 20.9, height correlation about 0) and scores worse than a flat ground colour (stage 0 of their own ladder: SSIM 0.444, Delta E 21.0). In the procedural ladder, every layer added lowers SSIM and raises Delta E. Only the same-kind score rises (0.17 to 0.44). The ladder is therefore not a rate-distortion curve for pixel accuracy. The only classes reaching tier layout are traced vector copies.",
+  "The M, T and L classes are tracing. Their descriptions are posterised, k=24 colour label maps vectorised into 2479-5431 outlines (about 121,000 outline numbers in T_k24_a50), plus about 22,900 disc stamps (x, y, r) at the reference's own speck positions in L_a100_s8. L_a100_s8 is 138,857 numbers, 9.3 % of the picture's raw byte count, and its diff sheet shows a near copy of the reference. The audit passes only because each list stays under 4000 numbers (the biggest stamp list is 3450; L_a150_s7 has 3963). The builder labels them 'traced'. Treat their scores as vector-trace quality, not procedural accuracy.",
+  "'Close' tier missed only on the normal angle (22.3 against a 12 degree limit) at L_a100_s8; the other four measures pass. The builder says this plainly.",
+  "Where Blender is used: the generator builds the flat polygon list in numpy (gravel_layers.py), meshes it with from_pydata and photographs it with an emission material. Blender is the rasteriser; the only shader-node procedural bit is the optional 'grain' noise. The tried Geometry Nodes route is a separate dead end: its texture score is 0.173 against 0.362 for the painter, and hybrids give 0.203-0.257.",
+  "The main generator never reads a picture. The only reference access is generator/geometry_route.py, via gn_tools.photograph_geometry(normal_reference='gravel'), which reads reference/gravel/normal.png to fit one normal strength number. It is a dead-end script. The scripts under analysis/ read the reference on purpose, which is allowed. Leftover files: generator/_gg_body.txt still imports slate_layers, and gravel_layers_v1_backup.py is a stale copy.",
+  "TRANSFER: 'numbers only' is true. Keys added in the pebbles description (rim_rgb, lit_shift, shade_shift, notes) are all read through .get() by existing code, and the generator files were last edited at 22:31, before the transfer description (23:12). But the '21 description keys' count understates the change: 60 leaf values differ, one stone class and one speck layer were dropped, and the light and height stretch were changed. The pebbles look like a pebble beach and the 2 x 2 tiling is seamless, and a fresh bake of the pebbles description is byte-identical to theirs. The 12-minute work time is not checkable. The light direction for the pebbles ([-0.5, -0.85]) only affects stones; soil lump tops are hard-coded to light from the top in gravel_layers.soil_shapes.",
+  "SWEEP LABELS vs what was run (sweeps_for_guide.py and the strips): (a) strip_stone_chip labels '0.12 (used)' but S_v4's chip is 0.10 and there is no 0.10 tile; (b) strip_stone_packing labels '0.65 (used)' but S_v4's spacings are 0.585 and 0.65 by class, and the sweep sets all classes to one value; (c) strip_layers_stage labels tile 3 '+ tiny + small stones' but it holds only the tiny class (radius 3-6.5), and tile 4 '+ medium stones' actually holds three classes; (d) strip_height_filter_width labels 'width 2 (used)', but the sweep renders the 1254-dot tile at 640 pixels, so the real used width at that size is about 1, not 2; (e) the light-direction strip moves stone light only, not the soil lumps; (f) the comment says the tile is photographed at 640 dots, but it is the whole 1254-dot tile shrunk to 640 pixels with the top-left 320 pixels kept. The first sweeps run (scores/flags/sweeps.txt) crashed with a TypeError at soil_lumps; the strips came from later partial runs (sweeps_big.log and sweeps_part2.log, which ends with a Blender argument error). The script as saved was edited after the failed run.",
+  "The builder admits one broad pkill by script name that may have stopped another builder's run_everything.sh. metal/ and slate/ both have a run_everything.sh, so their jobs may have been cut short. I did not check.",
+  "Reference vs S_v4 by eye (texture sheet and contact sheet): stones are smaller and flatter, the soil is a flat dark orange-brown with a sharp spike in the brightness curve (the reference is smoothly spread), and the generated mean colour is redder and less blue (RGB 66, 55, 48 against 64, 58, 53). The builder notes this.",
+  "No lib/ or reference/ files were changed. I wrote only into recipes/gravel/verify/."
+ ],
+ "guide_problems": [
+  "The two guide files do not exist (recipes/gravel has no '04 Recipe - gravel - how it is made.md' or '04 Lessons - gravel - what carries over to other surfaces.md'), so plain-language, accuracy and settings-match could not be checked against any text.",
+  "Guide pictures exist but several labels do not match what was run: stone_chip '0.12 (used)' (real 0.10, not in the sweep); stone_packing '0.65 (used)' (real mixed 0.585 and 0.65); layers_stage tile 3 '+ tiny + small stones' (really only the tiny class) and tile 4 '+ medium stones' (really three classes); height_filter_width 'width 2 (used)' (the used blur is about width 1 at the sweep's 640-pixel size); the light-direction strip moves only stone light.",
+  "Whoever writes the guides should not describe the height blur width, normal strength or any other setting as 'used' without re-checking against S_v4.json. They should state plainly that M, T and L are tracing and that the procedural S class reaches tier none dot for dot, and they must quote the half-tile numbers as 512-dot results (my 1254 result: 0.78, 0 % over 40) and the area bake time as 205-253 s, not 173 s."
+ ],
+ "overall": "The gravel numbers hold up under my own runs. All 8 claimed classes re-baked in fresh Blender processes and re-scored with lib/pixel_compare.py and lib/texture_compare.py reproduce the builder's figures exactly (SSIM, Delta E, edge skill, height error, normal angle, texture score, tier). The audit passes on every claimed description at its claimed class limit. The main generator (gravel_generator.py with gravel_layers.py and the lib helpers) reads no pictures, and a fresh S_v4, sample_03, pebbles and area bake are byte-identical to the builder's. Variations, area, resolution and transfer all check out in substance: the variants are not copies, the 2508 picture has no seam and no repeat, the same picture appears at three sizes, and the pebbles are made from numbers alone. Four caveats matter. (1) Dot-for-dot accuracy is not achieved procedurally. S_v4 is tier none and is worse than a flat colour on SSIM and Delta E. The only classes reaching tier layout (SSIM up to 0.67) are vector traces of the reference, about 359-436 KB, with the stamp lists kept just under the audit's 4000-number list limit. These are honestly labelled traced but should not be sold as procedural, and 'close' is missed only by the normal angle (22.3 against 12). (2) The two gravel guides were never written, so nothing could be checked on that side. The strips and sweep scripts have several mislabelled '(used)' values. (3) Two quoted measurements are mis-stated: the half-tile test was run at 512 dots, not 1254 (1254 gives 0.78 mean difference, 0 % over 40), and the area bake time of 173 s belongs to the resolution test (the area's own bake.json says 252.6 s). (4) The generated tiles systematically lack large stones: stone surviving an opening of radius 12 is about 0.31 against the reference's 0.52, and the stones are flat kite shapes, so 'as good as the fitted tile' means 'as far from the reference as the fitted tile'. All my files are in proc-work/recipes/gravel/verify/ (bakes, scores, and the checking scripts score_my_way.py, variation_check.py, area_check.py, half_tile_1254.py)."
+}
