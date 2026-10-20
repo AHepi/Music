@@ -1,0 +1,7 @@
+[
+ {"note": "What this is: seventh test: boards sometimes joined in pairs with a partial crack. Default tile (seed 1, 2) colour+height, the boards debug picture, and a 2 x 2 area at 1254 dots."},
+ {"out": "tests/renders/t7_s1", "size": 1254, "params": {}, "channels": ["Colour", "Height"]},
+ {"out": "tests/renders/t7_s2", "size": 1254, "params": {"recipe.seed": 2}, "channels": ["Colour"]},
+ {"out": "tests/renders/t7_boards", "size": 512, "params": {"debug_view": "boards"}, "channels": ["Colour"]},
+ {"out": "tests/renders/t7_area2", "size": 1254, "params": {"recipe.tiles_across": 2}, "channels": ["Colour"]}
+]

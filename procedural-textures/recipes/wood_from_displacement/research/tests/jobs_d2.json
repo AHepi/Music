@@ -1,0 +1,114 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: repeat-zone bombing, picture edge options, plain full size, seam tests. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_d2.json"
+ },
+ {
+  "name": "bomb_zone",
+  "builder": "build_bombing_zone",
+  "params": {
+   "tile_mode": true
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "bomb_zone",
+  "label": "bomb_zone_area",
+  "builder": "build_bombing_zone",
+  "params": {
+   "tile_mode": false
+  },
+  "channels": [
+   "colour"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "edge_repeat",
+  "builder": "build_edge_demo",
+  "params": {
+   "extension": "REPEAT"
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ },
+ {
+  "name": "edge_extend",
+  "builder": "build_edge_demo",
+  "params": {
+   "extension": "EXTEND"
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ },
+ {
+  "name": "edge_mirror",
+  "builder": "build_edge_demo",
+  "params": {
+   "extension": "MIRROR"
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ },
+ {
+  "name": "plain_repeat",
+  "label": "plain_full",
+  "builder": "build_plain_repeat",
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 4
+ },
+ {
+  "name": "pieces_curated",
+  "label": "seam_pieces",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated",
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "masks_full",
+  "label": "seam_masks",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": true
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ }
+]

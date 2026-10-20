@@ -1,0 +1,68 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: picture reading modes at full size, sharp sampling. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_n2.json"
+ },
+ {
+  "name": "pieces_sharp_linear",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated",
+   "boards_per_row": 2,
+   "interpolation": "Linear",
+   "joints": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 1,
+  "filter_width": 0.01
+ },
+ {
+  "name": "pieces_sharp_closest",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated",
+   "boards_per_row": 2,
+   "interpolation": "Closest",
+   "joints": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 1,
+  "filter_width": 0.01
+ },
+ {
+  "name": "pieces_sharp_cubic",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated",
+   "boards_per_row": 2,
+   "interpolation": "Cubic",
+   "joints": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 1,
+  "filter_width": 0.01
+ },
+ {
+  "name": "plain_repeat",
+  "label": "plain_full_sharp",
+  "builder": "build_plain_repeat",
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 1,
+  "filter_width": 0.01
+ }
+]

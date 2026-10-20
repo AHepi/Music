@@ -1,0 +1,114 @@
+[
+ {
+  "note": "What this is: sweep 1: switch one part of the recipe off at a time and score the default tile (seed 1) with the same-kind tool."
+ },
+ {
+  "out": "tests/renders/sw1_default",
+  "size": 1254,
+  "params": {},
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_zoom0",
+  "size": 1254,
+  "params": {
+   "windows.zoom": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_tone0",
+  "size": 1254,
+  "params": {
+   "boards.tone_variation": 0.0,
+   "boards.warmth_variation": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_stains0",
+  "size": 1254,
+  "params": {
+   "stains.amount": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_masks0",
+  "size": 1254,
+  "params": {
+   "masks.drift_amount": 0.0,
+   "masks.blotch_amount": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_scale_fixed",
+  "size": 1254,
+  "params": {
+   "windows.zoom": 0.0,
+   "layout.row_height_variation": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_b2",
+  "size": 1254,
+  "params": {
+   "layout.boards_per_row": 2
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_noflips",
+  "size": 1254,
+  "params": {
+   "windows.flip_left_right": 0.0,
+   "windows.flip_upside_down": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/sw1_all_plain",
+  "size": 1254,
+  "params": {
+   "windows.zoom": 0.0,
+   "layout.row_height_variation": 0.0,
+   "boards.tone_variation": 0.0,
+   "boards.warmth_variation": 0.0,
+   "stains.amount": 0.0,
+   "masks.drift_amount": 0.0,
+   "masks.blotch_amount": 0.0,
+   "windows.flip_left_right": 0.0,
+   "windows.flip_upside_down": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ }
+]

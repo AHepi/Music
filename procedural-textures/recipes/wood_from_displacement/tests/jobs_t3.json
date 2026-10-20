@@ -1,0 +1,10 @@
+[
+ {"note": "What this is: third test: joints with dirt and pebbles, the one-knot-per-row rule, a 4 x 4 area shrunk to 1254 dots, the flips debug picture and the half-tile shift test at 512."},
+ {"out": "tests/renders/t3_tile_b3", "size": 1254, "params": {}, "channels": ["Colour", "Height"]},
+ {"out": "tests/renders/t3_tile_b2", "size": 1254, "params": {"layout.boards_per_row": 2}, "channels": ["Colour"]},
+ {"out": "tests/renders/t3_flips", "size": 512, "params": {"debug_view": "flips"}, "channels": ["Colour"]},
+ {"out": "tests/renders/t3_area4_b3", "size": 1254, "params": {"recipe.tiles_across": 4}, "channels": ["Colour"]},
+ {"out": "tests/renders/t3_area4_b2", "size": 1254, "params": {"recipe.tiles_across": 4, "layout.boards_per_row": 2}, "channels": ["Colour"]},
+ {"out": "tests/renders/t3_shift0", "size": 512, "params": {}, "channels": ["Colour", "Height"]},
+ {"out": "tests/renders/t3_shift5", "size": 512, "params": {"shift": [0.5, 0.5]}, "channels": ["Colour", "Height"]}
+]

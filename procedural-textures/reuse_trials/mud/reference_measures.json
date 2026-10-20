@@ -1,0 +1,50 @@
+{
+ "share_of_dots_by_kind (nearest of the 16 stored palette colours)": {
+  "earth": 0.7101,
+  "stone": 0.1799,
+  "water": 0.11
+ },
+ "average_colour_by_kind (r, g, b of 255)": {
+  "earth": [
+   99.2,
+   67.0,
+   49.5
+  ],
+  "stone": [
+   60.5,
+   54.5,
+   55.2
+  ],
+  "water": [
+   96.2,
+   106.7,
+   114.5
+  ]
+ },
+ "earth_brightness_percentiles (of 255)": {
+  "5": 36.2,
+  "25": 59.2,
+  "50": 76.4,
+  "75": 84.6,
+  "95": 116.5
+ },
+ "dark_earth_share (earth dots with brightness under 40)": 0.0718,
+ "overall_brightness_mean (of 255)": 74.6,
+ "reference_height_rule_fit (height = clip(slope x (grey - grey_at_zero) / 255, 0, 1))": {
+  "grey_at_zero": 22.0,
+  "slope": 2.45,
+  "mean_error_of_1": 0.0363,
+  "note": "the earlier mud recipe found (grey - 20) / 108 = slope 2.36, grey_at_zero 20 (04 Recipe - mud, section 2)"
+ },
+ "dark_patch_share (brightness under 30, 5-dot opening)": 0.0141,
+ "dark_patch_half_length_dots [across, up-down]": [
+  4,
+  3
+ ],
+ "from the stored mud numbers (read, not measured here)": [
+  "clod area median 39 dots, long side 1.9 x short side (04 Recipe - mud, 3.5)",
+  "puddles: 8 per tile, area 3000 to 31600 dots (fitted_distributions_mud.json)",
+  "stones: 830 per tile, area median 83 dots, 90th percentile 709, biggest 10548 (fitted_distributions_mud.json)",
+  "ruts: 34 long bands about 20 dots wide (04 Recipe - mud, 3.4)"
+ ]
+}

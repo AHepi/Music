@@ -1,0 +1,54 @@
+[
+ {
+  "note": "What this is: the final default-tile bakes (1254 dots): MAIN version with all maps for seeds 2 and 3 (seed 1 was baked with the plain harness command), and the COMPARISON version (colour made from the height with a palette) for seeds 1, 2, 3. Same arrangement per seed."
+ },
+ {
+  "out": "outputs/main_seed2",
+  "size": 1254,
+  "full": true,
+  "params": {
+   "recipe.seed": 2
+  }
+ },
+ {
+  "out": "outputs/main_seed3",
+  "size": 1254,
+  "full": true,
+  "params": {
+   "recipe.seed": 3
+  }
+ },
+ {
+  "out": "outputs/comparison_seed1",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 1,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "outputs/comparison_seed2",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 2,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "outputs/comparison_seed3",
+  "size": 1254,
+  "params": {
+   "recipe.seed": 3,
+   "colour.source": "height_palette"
+  },
+  "channels": [
+   "Colour"
+  ]
+ }
+]

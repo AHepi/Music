@@ -1,0 +1,25 @@
+{
+ "_what_this_is": "The seed sets of the final bake (final_bake.py reads it): seeds_1 = the settings as they are; seeds_2 and seeds_3 = every layer's seed + 100 and + 200; seeds_1_combine_rule = only the height, made by COMBINE's own rule. A set name starting with an underscore is a note and is skipped.",
+ "seeds_1": {},
+ "seeds_2": {
+  "gravel_layout.seed": 101.0,
+  "colour_and_fade.seed": 111.0,
+  "damage.seed": 121.0,
+  "outline_and_shadow.seed": 141.0,
+  "soil.seed": 151.0,
+  "facets.seed": 161.0
+ },
+ "seeds_3": {
+  "gravel_layout.seed": 201.0,
+  "colour_and_fade.seed": 211.0,
+  "damage.seed": 221.0,
+  "outline_and_shadow.seed": 241.0,
+  "soil.seed": 251.0,
+  "facets.seed": 261.0
+ },
+ "seeds_1_combine_rule": {
+  "_maps": "height",
+  "recipe.height_rule": "combine",
+  "combine.tone_blend": 1.0
+ }
+}

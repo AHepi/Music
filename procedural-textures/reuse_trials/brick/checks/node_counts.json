@@ -1,0 +1,155 @@
+{
+ "BRICK (top: the recipe wiring)": {
+  "nodes": 10,
+  "kinds": {
+   "Group": 8,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {
+   "BRICK LAYOUT": 1,
+   "COLOUR AND FADE": 1,
+   "MOSS": 1,
+   "DAMAGE": 1,
+   "OUTLINE AND SHADOW": 1,
+   "GRIME": 1,
+   "COMBINE": 1,
+   "BRICK HEIGHT RULE": 1
+  }
+ },
+ "BRICK LAYOUT": {
+  "nodes": 118,
+  "kinds": {
+   "Math": 100,
+   "CombineXYZ": 5,
+   "TexWhiteNoise": 5,
+   "MapRange": 4,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "Group": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "Tileable Noise": {
+  "nodes": 15,
+  "kinds": {
+   "Math": 9,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "CombineXYZ": 1,
+   "VectorMath": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {}
+ },
+ "COLOUR AND FADE": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 327,
+   "Mix": 28,
+   "MapRange": 15,
+   "CombineXYZ": 12,
+   "TexNoise": 11,
+   "RGBToBW": 6,
+   "SeparateColor": 5,
+   "VectorMath": 5,
+   "TexWhiteNoise": 4,
+   "Gamma": 2
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "MOSS": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 342,
+   "MapRange": 24,
+   "CombineXYZ": 15,
+   "Mix": 13,
+   "TexNoise": 8,
+   "SeparateColor": 6,
+   "TexWhiteNoise": 4,
+   "Group": 2,
+   "TexVoronoi": 2,
+   "NodeGroupInput": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 2
+  }
+ },
+ "DAMAGE": {
+  "nodes": 439,
+  "kinds": {
+   "Math": 354,
+   "MapRange": 25,
+   "Mix": 20,
+   "CombineXYZ": 14,
+   "TexWhiteNoise": 9,
+   "SeparateColor": 9,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {}
+ },
+ "OUTLINE AND SHADOW": {
+  "nodes": 216,
+  "kinds": {
+   "Math": 173,
+   "MapRange": 18,
+   "Mix": 9,
+   "CombineXYZ": 6,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "TexWhiteNoise": 1,
+   "SeparateColor": 1
+  },
+  "boxes_inside": {}
+ },
+ "GRIME": {
+  "nodes": 161,
+  "kinds": {
+   "Math": 139,
+   "MapRange": 7,
+   "CombineXYZ": 4,
+   "TexNoise": 4,
+   "Mix": 4,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {}
+ },
+ "COMBINE": {
+  "nodes": 22,
+  "kinds": {
+   "Math": 13,
+   "Mix": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "RGBToBW": 1
+  },
+  "boxes_inside": {}
+ },
+ "BRICK HEIGHT RULE": {
+  "nodes": 13,
+  "kinds": {
+   "Math": 8,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "SeparateColor": 1,
+   "Mix": 1
+  },
+  "boxes_inside": {}
+ }
+}

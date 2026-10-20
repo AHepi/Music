@@ -1,0 +1,79 @@
+{
+ "surface": "brick",
+ "layers_used": [
+  {
+   "layer": "layout bundle interface (layer_interface.py)",
+   "how": "unchanged",
+   "why": "Every box, old and new, is built with it. GRIME has exactly the shared layer sockets, and the eleven bundle numbers fed every layer without change."
+  },
+  {
+   "layer": "COLOUR AND FADE",
+   "how": "settings only",
+   "why": "Nine brick reds and oranges from the measured palette. Round flat patches from the three no-tongue settings (fade_direction 0, fade_length = streak_width = 0.03, mottle_tallness 1). Outlier bricks, orange bleach areas, grain 0.2, tone_centre 4.6."
+  },
+  {
+   "layer": "DAMAGE",
+   "how": "settings only",
+   "why": "Pale tan spalls at edges and corners, few cracks, broken corners show mortar colour instead of black. It works by settings, but its slate-made lower-edge bias puts brick spalls in the wrong places (pale bands along the lower edges)."
+  },
+  {
+   "layer": "MOSS",
+   "how": "settings only (switched off, amount 0)",
+   "why": "Tried twice as soot: as drips it made a comb on every brick top; as clumps it made almost no difference. The brick reference has no moss, so it stays in the stack but off."
+  },
+  {
+   "layer": "OUTLINE AND SHADOW",
+   "how": "settings only",
+   "why": "Flat mortar base colour (#77604c), thin dark outline round every brick, short top shadow, and the lip used as a dark lower rim. It has no right-hand shadow."
+  },
+  {
+   "layer": "COMBINE",
+   "how": "settings only",
+   "why": "Stacks five layers through recipe.stack_order, so GRIME needed no change in COMBINE; tone_blend 1. Its built-in height-from-brightness rule is slate's and cannot be changed by a setting, so a new 13-node height box follows it."
+  },
+  {
+   "layer": "LAYOUT (shared slate layout)",
+   "how": "settings only (alternative, baked with seed set 1)",
+   "why": "12 courses of 4 bricks, 20-dot head joints, 18.6-dot bed joints, rounded corners. Scores 0.646 against 0.654 with the new brick layout. It slides each course by a random amount instead of half a brick."
+  }
+ ],
+ "new_parts": [
+  "GRIME (grime.py, 161 nodes): a new paint layer with the shared layer sockets, stacked last. It paints soot clouds over bricks AND mortar (each cloud has a solid middle that breaks into flat specks at its rim, two tones) and mottled mortar patches (gaps only). It is needed because MOSS and DAMAGE stop at the brick edge and COLOUR AND FADE lies under the mortar paint. It is about 3 times the inventory's 40-60 node estimate. The inventory's part 3 (low-spot darkening, for gravel) was not written.",
+  "BRICK HEIGHT RULE (height_rule.py, 13 nodes), a box after COMBINE: height = 2.533 x (grey - 38.7)/255. This is a straight line fitted once to the brick reference's stored 12-point height curve. It is needed because COMBINE's fixed slate rule cuts off 6.9% of dots at the top of the height range. In the same bakes it lifts the height group from 0.299 to 0.597 and overall from 0.538 to 0.654.",
+  "BRICK LAYOUT (brick_layout.py, 118 nodes): the small layout the task asked for. Half-brick running bond, each head joint moved by its own random amount (varied brick lengths), measured joint widths, rounded and dented edges; it hands over the eleven bundle numbers. It is optional: the shared slate LAYOUT by settings scores almost the same.",
+  "brick_recipe.py: copy of the slate recipe's wiring (shift, debug_view, tiles_across, stack_order kept) plus recipe.layout and recipe.height_rule. It refuses to run if any shared module was not imported from the snapshot.",
+  "settings.json (4.6 KB, passes description_audit at the 8 KB limit).",
+  "Tools: run_views.py, final_bake.py, checks_run.py + checks_analyse.py (half-tile, masks, independence and node count in one Blender run), final_scores.py, sheet makers, measure_reference_once.py, count_nodes_with_shared_layout.py."
+ ],
+ "node_counts": "Counted by building the final recipe in Blender and counting the nodes inside every box (checks/node_counts.json and checks/node_counts_with_shared_slate_layout.json).\nShared, unchanged: 1530 nodes in total.\n- COLOUR AND FADE 419\n- DAMAGE 439\n- OUTLINE AND SHADOW 216\n- COMBINE 22 (it grows with the number of stacked layers; its code is unchanged)\n- MOSS 419 (built but off)\n- seamless-noise helper group 15\nNew: 292 nodes in total (BRICK LAYOUT 118, GRIME 161, BRICK HEIGHT RULE 13), plus 10 nodes of recipe wiring copied from the slate recipe.\nShared share: 84% (79% if the switched-off MOSS is not counted).\nWith the shared slate LAYOUT (257 nodes at 12x4) instead of BRICK LAYOUT, new = 174 nodes, shared share 91% (89% without MOSS).\nLines of code (non-comment):\n- reused unchanged: 987 (paint layers, COMBINE and interface; 792 without MOSS), plus 171 for the shared LAYOUT if used\n- new boxes: 211 (brick layout 92, GRIME 93, height rule 26)\n- recipe wiring: 134 (mostly copied from the slate recipe)\n- settings: 37\n- tools and tests: 388",
+ "scores": "All rows: lib/texture_compare.py brick, 1254 dots, normal from height by make_normal.py at strength 6.\nLayered trial:\n- seed set 1 (the one tuned on): overall 0.654, colour 0.642, height 0.597 (normal 0.634, tiling 1.000)\n- seed set 2: overall 0.615, colour 0.595, height 0.556\n- seed set 3: overall 0.577, colour 0.516, height 0.551\n- mean of the three: overall 0.615, colour 0.584, height 0.568\n- shared slate LAYOUT, seed set 1: overall 0.646, colour 0.634, height 0.583\n- without the new height box (COMBINE's own slate height rule): seed set 1 overall 0.538, colour 0.642, height 0.299; mean of three 0.503 / 0.584 / 0.282\nSurface's own earlier recipe, new tile 11, scored the same way (same tool and size; also with its normal remade at strength 6, identical): overall 0.725, colour 0.750, height 0.704 (normal 0.566, tiling 0.962).\nEarlier layered brick (stored, same tool and size): overall 0.194, colour 0.152, height 0.154.",
+ "reads_as_surface": "yes",
+ "judgement": "Brick needed no change to any shared layer. COLOUR AND FADE, DAMAGE, OUTLINE AND SHADOW and COMBINE ran unchanged from the snapshot (checksums OK, no cache folder written), with only their settings changed. MOSS ran unchanged but had no useful brick meaning, so it is off.\n\nThree small new parts were needed:\n- GRIME (161 nodes), for soot and mortar mottle that cross the gaps.\n- A 13-node height box, because COMBINE's height-from-colour rule is fixed to slate. That is the one shared limit this trial found that no setting can fix.\n- A 118-node brick layout, which was asked for but is optional: the shared slate LAYOUT by settings does almost as well.\n\n84% of nodes are shared.\n\nAt a glance the tile reads clearly as an old red brick wall: running bond, mottled mortar, dark outlines, spalls and soot. The 2x2 repeat shows no seams.\n\nIt still trails the brick's own earlier recipe: 0.654 overall (0.615 mean over three seeds) against 0.725, and colour 0.642 (mean 0.584) against 0.750. The weak points:\n- soot is small flecks, not smudges running down several courses;\n- DAMAGE's slate lower-edge bias puts spalls as pale bands along the lower edges;\n- patches inside the bricks have cut-paper edges;\n- the right-hand shadow is missing;\n- height follows colour too exactly because a shader cannot blur.\n\nThe seed alone moves the colour group from 0.516 to 0.642. It is a large step up from the first layered brick (0.194).\n\nTests:\n- Half-tile shift test at 512: the tile repeats (colour 0.03% of dots differ by more than 40, against 31% for the control). GRIME mask differences are scattered speck-edge sampling, not a seam.\n- Independence with Amount 0: no colour change outside each layer's own mask.\n\nThe work used 11 Blender starts, one of which failed at once.",
+ "sheet": "proc-work/reuse_trials/brick/sheet_brick.jpg (2x2 repeat: proc-work/reuse_trials/brick/repeat_2x2_brick.jpg; four final tiles side by side: proc-work/reuse_trials/brick/final_seed_sets.jpg; notes: proc-work/reuse_trials/brick/notes - brick reuse trial.md)",
+ "folder": "proc-work/reuse_trials/brick",
+ "failures": [
+  "MOSS as soot drips made a comb of dark drips under every brick top (read as slate moss). MOSS as dark clumps only made almost no visible difference. MOSS was switched off.",
+  "GRIME first version (two hard cut-offs) made hard-edged black blobs. I rewrote it so a cloud fades into specks at its rim.",
+  "Round 3 overshot: soot cover 0.26 gave 37% dark dots (reference 24%) and an ink-splash look, and corner_gain 3 made beige wedges. Both were pulled back.",
+  "Round 6 went backwards: bigger soot specks gave isolated black blobs and the colour group fell from 0.642 to 0.598. I reverted to round 5's settings.",
+  "More grain (0.35) lowered the colour gradient score from about 0.48 to 0.14.",
+  "COMBINE's tone_blend height rule is slate-only. With it the height group was 0.299 (overall 0.538), so the new 13-node height box was needed.",
+  "Seed sensitivity is large: colour group 0.642 / 0.595 / 0.516 across three seed sets, wider than the 0.03-0.07 the inventory expected. Tuning looked mainly at seed set 1.",
+  "640- and 768-dot views scored with texture_compare are not like for like (enlarging zeroes the scale and gradient scores). They were used only for looking; every reported number comes from 1254-dot bakes.",
+  "Blender run 7 failed at once: my command chain stopped before writing final_sets.json, so Blender got an empty list. Nothing was baked; run 8 repeated it.",
+  "A scratch helper I wrote to edit settings.json once left a stray comma in the file. Fixed before any bake used it.",
+  "GRIME came out at 161 nodes, about 3 times the inventory's 40-60 estimate."
+ ],
+ "untested": [
+  "Final colour, roughness and metallic were baked in run 8, before the height box was switched on; height was baked in run 9 with it on. By its code the box only changes Height, but I did not re-bake colour to prove it.",
+  "Independence 'Seed + 1' rows were measured against the old seed's mask only, so they over-count and prove nothing. The small height changes outside the mask with Amount 0 (up to 0.37%) are explained by reasoning only: colour changes below the colour threshold become height changes above the height threshold through the height rule.",
+  "The 2x2 area of new content (recipe.tiles_across 2) passed the half-tile test but was not looked at or scored.",
+  "The shared slate LAYOUT variant was baked with seed set 1 only.",
+  "Not made: the 'what each layer adds' ladder, GRIME's part 3 (low-spot darkening, for gravel), and any right-hand shadow.",
+  "Roughness and metallic maps were not compared with anything (the reference has none); metallic is 0.",
+  "The plain bake_harness.py command on brick_recipe.py was not run; all bakes went through my own drivers, which use the harness's scene and materials.",
+  "Not tried: more edge_ragged or streak_bend for ragged patch edges, a height_rule.blend below 1, and taking MOSS out of the stack to save time.",
+  "Timings (about 2.8 min per full 1254 set, about 17 s per 512 view) were taken while another helper was baking at the same time.",
+  "Unsure whether 'settings only' is a fair verdict for DAMAGE on brick: it runs by settings, but its slate lower-edge bias puts spalls in the wrong places."
+ ]
+}

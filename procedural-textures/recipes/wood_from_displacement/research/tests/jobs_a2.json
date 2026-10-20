@@ -1,0 +1,33 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: pieces full and curated tile after fixing the board finder. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_a2.json"
+ },
+ {
+  "name": "pieces_full",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "full"
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ },
+ {
+  "name": "pieces_curated",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated"
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ }
+]

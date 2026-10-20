@@ -1,0 +1,51 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: whole idea with 3 and 4 boards per row. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_m3.json"
+ },
+ {
+  "name": "masks_b3",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": false,
+   "boards_per_row": 3
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "masks_b4",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": false,
+   "boards_per_row": 4
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "masks_b3",
+  "label": "masks_b3_tile",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": true,
+   "boards_per_row": 3
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ }
+]

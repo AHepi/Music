@@ -1,0 +1,201 @@
+{
+ "WOOD (top: the recipe wiring)": {
+  "nodes": 12,
+  "kinds": {
+   "Group": 10,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {
+   "LAYOUT": 1,
+   "WOOD TURN": 1,
+   "COLOUR AND FADE": 1,
+   "GRAIN": 1,
+   "MOSS": 1,
+   "DAMAGE": 1,
+   "CRACKS": 1,
+   "KNOTS": 1,
+   "OUTLINE AND SHADOW": 1,
+   "COMBINE": 1
+  }
+ },
+ "LAYOUT": {
+  "nodes": 182,
+  "kinds": {
+   "Math": 158,
+   "TexWhiteNoise": 7,
+   "CombineXYZ": 5,
+   "MapRange": 5,
+   "SeparateColor": 2,
+   "Group": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 2
+  }
+ },
+ "Tileable Noise": {
+  "nodes": 15,
+  "kinds": {
+   "Math": 9,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "CombineXYZ": 1,
+   "VectorMath": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {}
+ },
+ "WOOD TURN": {
+  "nodes": 5,
+  "kinds": {
+   "Math": 3,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {}
+ },
+ "COLOUR AND FADE": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 327,
+   "Mix": 28,
+   "MapRange": 15,
+   "CombineXYZ": 12,
+   "TexNoise": 11,
+   "RGBToBW": 6,
+   "SeparateColor": 5,
+   "VectorMath": 5,
+   "TexWhiteNoise": 4,
+   "Gamma": 2
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "GRAIN": {
+  "nodes": 31,
+  "kinds": {
+   "Math": 21,
+   "CombineXYZ": 2,
+   "VectorMath": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "TexWhiteNoise": 1,
+   "SeparateColor": 1,
+   "Group": 1,
+   "Mix": 1
+  },
+  "boxes_inside": {
+   "Wood Grain Gain": 1
+  }
+ },
+ "Wood Grain Gain": {
+  "nodes": 39,
+  "kinds": {
+   "Math": 28,
+   "MapRange": 3,
+   "SeparateXYZ": 2,
+   "CombineXYZ": 2,
+   "TexNoise": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {}
+ },
+ "MOSS": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 342,
+   "MapRange": 24,
+   "CombineXYZ": 15,
+   "Mix": 13,
+   "TexNoise": 8,
+   "SeparateColor": 6,
+   "TexWhiteNoise": 4,
+   "Group": 2,
+   "TexVoronoi": 2,
+   "NodeGroupInput": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 2
+  }
+ },
+ "DAMAGE": {
+  "nodes": 439,
+  "kinds": {
+   "Math": 354,
+   "MapRange": 25,
+   "Mix": 20,
+   "CombineXYZ": 14,
+   "TexWhiteNoise": 9,
+   "SeparateColor": 9,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {}
+ },
+ "CRACKS": {
+  "nodes": 95,
+  "kinds": {
+   "Math": 81,
+   "CombineXYZ": 3,
+   "TexWhiteNoise": 3,
+   "SeparateColor": 2,
+   "MapRange": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "TexNoise": 1,
+   "Mix": 1
+  },
+  "boxes_inside": {}
+ },
+ "KNOTS": {
+  "nodes": 78,
+  "kinds": {
+   "Math": 64,
+   "CombineXYZ": 3,
+   "MapRange": 3,
+   "TexWhiteNoise": 2,
+   "Mix": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateColor": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {}
+ },
+ "OUTLINE AND SHADOW": {
+  "nodes": 216,
+  "kinds": {
+   "Math": 173,
+   "MapRange": 18,
+   "Mix": 9,
+   "CombineXYZ": 6,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "TexWhiteNoise": 1,
+   "SeparateColor": 1
+  },
+  "boxes_inside": {}
+ },
+ "COMBINE": {
+  "nodes": 28,
+  "kinds": {
+   "Math": 17,
+   "Mix": 7,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "RGBToBW": 1
+  },
+  "boxes_inside": {}
+ }
+}

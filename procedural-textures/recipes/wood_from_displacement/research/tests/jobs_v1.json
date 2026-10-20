@@ -1,0 +1,46 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: Voronoi patches and the 256-tile bag (the bag rendered black). Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_v1.json"
+ },
+ {
+  "name": "voronoi_patches",
+  "builder": "build_voronoi_patches",
+  "params": {},
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "voronoi_patches",
+  "label": "voronoi_patches_area",
+  "builder": "build_voronoi_patches",
+  "params": {
+   "scale": 16.0
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "bag256",
+  "label": "bag256_b2",
+  "builder": "build_bag",
+  "params": {
+   "tiles": 256,
+   "tile_mode": false,
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ }
+]

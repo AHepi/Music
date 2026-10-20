@@ -1,0 +1,120 @@
+{
+ "t1_base": {
+  "params": {},
+  "maps": [
+   "Colour",
+   "Height"
+  ]
+ },
+ "t1_A_colour": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04
+  },
+  "maps": [
+   "Colour",
+   "Height"
+  ]
+ },
+ "t1_B_contrast": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04,
+   "colour_and_fade.streak_contrast": 1.35
+  },
+  "maps": [
+   "Colour",
+   "Height"
+  ]
+ },
+ "t1_C_chips": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04,
+   "damage.chip_frequency": 120,
+   "damage.chip_amount": 0.6,
+   "damage.chip_breakup": 0.8,
+   "damage.chip_depth": 0.025
+  },
+  "maps": [
+   "Colour",
+   "Height"
+  ]
+ },
+ "t1_D_chips_big": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04,
+   "damage.chip_frequency": 85,
+   "damage.chip_amount": 0.5,
+   "damage.chip_breakup": 0.6,
+   "damage.chip_depth": 0.03,
+   "damage.chip_clustering": 0.8
+  },
+  "maps": [
+   "Colour",
+   "Height"
+  ]
+ },
+ "t1_E_moss_soft": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04,
+   "moss.edge_raggedness": 0.6,
+   "moss.cluster_size": 0.055,
+   "moss.tone_patch_size": 0.02,
+   "moss.rim_lightening": 0.2
+  },
+  "maps": [
+   "Colour"
+  ]
+ },
+ "t1_F_moss_softer": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04,
+   "moss.edge_raggedness": 0.4,
+   "moss.cluster_size": 0.07,
+   "moss.tone_patch_size": 0.03,
+   "moss.rim_lightening": 0.1,
+   "moss.drip_stretch": 1.2,
+   "moss.patchiness": 0.9,
+   "moss.coverage": 0.2
+  },
+  "maps": [
+   "Colour"
+  ]
+ },
+ "t1_G_relief": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04,
+   "outline_and_shadow.lip_height": 0.14,
+   "damage.sink_depth": 2.2,
+   "outline_and_shadow.shadow_height": 0.2
+  },
+  "maps": [
+   "Colour",
+   "Height"
+  ]
+ },
+ "t1_H_shape": {
+  "params": {
+   "colour_and_fade.tone_spread": 0.6,
+   "colour_and_fade.outlier_share": 0.1,
+   "colour_and_fade.grain_amount": 0.04,
+   "layout.corner_bottom_factor": 3.0,
+   "layout.ragged_bottom": 0.011
+  },
+  "maps": [
+   "Colour"
+  ]
+ }
+}

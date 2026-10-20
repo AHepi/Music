@@ -1,0 +1,76 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: hex tiling variants (hard, linear, variance, gauss). Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_b1.json"
+ },
+ {
+  "name": "hex_hard",
+  "builder": "build_hex",
+  "params": {
+   "variant": "hard",
+   "tile_mode": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "hex_linear",
+  "builder": "build_hex",
+  "params": {
+   "variant": "linear",
+   "tile_mode": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "hex_variance",
+  "builder": "build_hex",
+  "params": {
+   "variant": "variance",
+   "tile_mode": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "hex_gauss",
+  "builder": "build_hex",
+  "params": {
+   "variant": "gauss",
+   "tile_mode": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "hex_gauss",
+  "label": "hex_gauss_tilemode",
+  "builder": "build_hex",
+  "params": {
+   "variant": "gauss",
+   "tile_mode": true
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ }
+]

@@ -1,0 +1,133 @@
+{
+ "snapshot_folder": "proc-work/reuse_trials/shared_layers_snapshot/layers",
+ "layers": {
+  "layout": {
+   "built": true,
+   "file_imported_from": "proc-work/reuse_trials/shared_layers_snapshot/layers",
+   "nodes": 307,
+   "inputs": 27,
+   "outputs": [
+    "piece_id",
+    "row",
+    "local_x",
+    "local_y",
+    "piece_width",
+    "piece_height",
+    "edge_distance",
+    "top_edge_distance",
+    "gap_mask",
+    "piece_mask",
+    "base_height"
+   ],
+   "declared_links": []
+  },
+  "colour_and_fade": {
+   "built": true,
+   "file_imported_from": "proc-work/reuse_trials/shared_layers_snapshot/layers",
+   "nodes": 419,
+   "inputs": 55,
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ],
+   "declared_links": []
+  },
+  "damage": {
+   "built": true,
+   "file_imported_from": "proc-work/reuse_trials/shared_layers_snapshot/layers",
+   "nodes": 439,
+   "inputs": 42,
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ],
+   "declared_links": []
+  },
+  "moss": {
+   "built": true,
+   "file_imported_from": "proc-work/reuse_trials/shared_layers_snapshot/layers",
+   "nodes": 419,
+   "inputs": 53,
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ],
+   "declared_links": [
+    "Damage Mask"
+   ]
+  },
+  "outline_and_shadow": {
+   "built": true,
+   "file_imported_from": "proc-work/reuse_trials/shared_layers_snapshot/layers",
+   "nodes": 216,
+   "inputs": 43,
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ],
+   "declared_links": []
+  },
+  "combine": {
+   "built": true,
+   "file_imported_from": "proc-work/reuse_trials/shared_layers_snapshot/layers",
+   "nodes": 19,
+   "inputs": 21,
+   "outputs": [
+    "Colour",
+    "Roughness",
+    "Metallic",
+    "Height"
+   ],
+   "declared_links": []
+  }
+ },
+ "stone_tools": {
+  "built": true,
+  "nodes_added": 166,
+  "outputs_given": [
+   "bch",
+   "face",
+   "g",
+   "inside_distance",
+   "mask",
+   "outline",
+   "present",
+   "r",
+   "random_tone"
+  ]
+ },
+ "wood_grain_group": {
+  "built": true,
+  "nodes": 39,
+  "inputs": [
+   "Vector"
+  ],
+  "outputs": [
+   "Gain"
+  ]
+ },
+ "layer_interface_finds_proc_work_at": "proc-work",
+ "layer_interface_proc_is_this_proc": true,
+ "bundle_names": [
+  "piece_id",
+  "row",
+  "local_x",
+  "local_y",
+  "piece_width",
+  "piece_height",
+  "edge_distance",
+  "top_edge_distance",
+  "gap_mask",
+  "piece_mask",
+  "base_height"
+ ],
+ "seconds": 7.4
+}

@@ -1,0 +1,117 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: plain repeat, pieces full and curated at 2 x 2 and 4 x 4, 3 boards per row. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_a3.json"
+ },
+ {
+  "name": "plain_repeat",
+  "builder": "build_plain_repeat",
+  "params": {},
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "plain_repeat",
+  "builder": "build_plain_repeat",
+  "params": {},
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "pieces_full",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "full",
+   "tile_mode": false
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "pieces_full",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "full",
+   "tile_mode": false
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "pieces_curated",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated",
+   "tile_mode": false
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "pieces_curated",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated",
+   "tile_mode": false
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "pieces_full",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "full"
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "pieces_curated",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated"
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ }
+]

@@ -35,6 +35,9 @@
 # the edge of its place, and place numbers are wrapped, so the tile repeats exactly). They gather in colonies (Lichen Clustering) and are smaller in drier
 # places (the radius shrinks smoothly: a disc is never cut in half).
 #
+# Round 2 of the look fixes added four controls (all default to the old behaviour): Rim Opacity and Core Opacity (see-through moss: a soft wash that lets the slate's
+# streaks show through, instead of an opaque khaki stain), Side Clearance (moss fades out near the side joints instead of being cut off in a straight line there) and
+# Fleck Amount (strength of the small light and dark flecks). See integration/CHANGES_TO_LAYER_FILES.md.
 # What it reads: the layout bundle, its own controls and seed, and ONE declared link: DAMAGE's Mask (see ../interface/interface.md, section 5).
 #   * 'Damage Avoid' (0..1): moss and lichen are cut back on dots where the damage mask is 1 (fresh damage is clean), so moss height does not fill a chip.
 #   * 'Damage Attract' (0..1): moss grows MORE on damaged dots (old flakes and cracks are good places for moss). It only shows when the stack
@@ -85,6 +88,11 @@ CONTROLS = [
     Control('edge_raggedness', 'Edge Raggedness', 0.9, 0.0, 1.5, 'how ragged and broken the edge of a clump is (0 = smooth outline, 1 = very ragged with loose flecks)'),
     Control('fringe_amount', 'Fringe Amount', 0.3, 0.0, 1.5, 'how long the thin fringe teeth that hang down from the edges of a clump are (0 = none; 0.25 = teeth up to about 20 dots long; 1.5 = long hairs)'),
     Control('fringe_width', 'Fringe Width', 0.009, 0.002, 0.02, 'width of one fringe tooth, in tile units (0.009 = 11 dots)'),
+    # ---- added in look-fixes round 2 (every default below keeps the old picture exactly; the default tile's settings.json turns them on)
+    Control('rim_opacity', 'Rim Opacity', 1.0, 0.0, 1.0, 'how solid the paint is at the very rim of a clump: 1 = solid (the old look, a hard edge); lower = the slate paint shows through at the rim, so the edge fades out softly like a thin wash of moss'),
+    Control('core_opacity', 'Core Opacity', 1.0, 0.0, 1.0, 'how solid the paint is deep inside a clump: 1 = solid; lower = the slate paint and its streaks show through the moss (a tinted wash instead of an opaque stain). The opacity runs from Rim Opacity at the rim to Core Opacity once the dot is about 0.45 growth-strength units inside the clump'),
+    Control('side_clearance', 'Side Clearance', 0.0, 0.0, 0.05, 'moss growth fades out over this distance from the side joints of a slate, in tile units (0.012 = 15 dots; 0 = off, as before). Without it a clump that reaches a side joint is cut off in a straight line along the joint'),
+    Control('fleck_amount', 'Fleck Amount', 1.0, 0.0, 1.5, 'how strong the small light and dark flecks inside the moss are (1 = as before, 0 = none: a calmer moss)'),
     # ---- the olive colours (darkest to lightest) and how they are used
     Control('tone_1', 'Moss Tone 1 (darkest)', '#2b2c23', kind='colour', text='the darkest olive: deep shadow under the upper edge and the heart of thick moss'),
     Control('tone_2', 'Moss Tone 2', '#35372a', kind='colour', text='dark olive'),
@@ -207,6 +215,10 @@ def build_group(parameters):
     ragged = slate_noise(x_flow, y_flow, 1.0 / 0.012, 1.0 / 0.045, 2.0, 0.5, 51.0)                        # fine, a little taller than wide
     dabs = slate_noise(x_flow, y_flow, 1.0 / 0.010, 1.0 / 0.012, 2.0, 0.5, 91.0)                         # fine, round: islands, holes and loose flecks along the rim of a clump
     strength = b.add(supply, b.mul(b.sub(clump, 0.5), S('Clump Strength')))
+    # Side Clearance (round 2): near a side joint the growth is pushed down by up to 1.5 strength units (nothing survives that), fading out over Side Clearance.
+    # The gt(...) switch makes it exactly nothing when Side Clearance is 0, so the old picture is unchanged.
+    clear_zone = b.sub(1.0, b.smoothstep(side_near, 0.0, b.mx(S('Side Clearance'), 1e-6)))
+    strength = b.sub(strength, b.mul(b.mul(b.gt(S('Side Clearance'), 0.0), clear_zone), 1.5))
     strength = b.add(strength, b.mul(b.sub(ragged, 0.5), b.mul(S('Edge Raggedness'), 0.40)))
     strength = b.add(strength, b.mul(b.sub(dabs, 0.5), b.mul(S('Edge Raggedness'), 0.55)))
     coverage = b.mul(S('Coverage'), amt)
@@ -241,8 +253,8 @@ def build_group(parameters):
     tone = b.add(tone, b.mul(b.sub(1.0, depth), b.mul(S('Rim Lightening'), 0.30)))
     tone = b.sub(tone, b.mul(shade_zone, b.mul(S('Top Shading'), 0.35)))
     tone = b.sub(tone, b.mul(depth, 0.08))
-    tone = b.add(tone, b.mul(b.gt(fleck_random, 0.90), 0.30))                                          # a few small light flecks (young growth)
-    tone = b.sub(tone, b.mul(b.lt(fleck_random, 0.06), 0.25))                                          # and a few dark ones
+    tone = b.add(tone, b.mul(b.mul(b.gt(fleck_random, 0.90), 0.30), S('Fleck Amount')))                 # a few small light flecks (young growth)
+    tone = b.sub(tone, b.mul(b.mul(b.lt(fleck_random, 0.06), 0.25), S('Fleck Amount')))                 # and a few dark ones
     moss_colour = S('Moss Tone 1 (darkest)')
     for step, name in enumerate(['Moss Tone 2', 'Moss Tone 3', 'Moss Tone 4', 'Moss Tone 5 (lightest)']):
         moss_colour = b.mix(moss_colour, S(name), b.gt(tone, (step + 1) / 5.0))
@@ -291,7 +303,11 @@ def build_group(parameters):
     lichen_inner = b.mx(b.mul(small_inner, small_ring), b.mul(big_inner, big_ring))
 
     # ------------------------------------------------------------------------------------------------ the outputs
-    mask = b.mx(moss, lichen)
+    # Rim Opacity / Core Opacity (round 2): the moss paint can be see-through. The opacity grows from Rim Opacity at the rim to Core Opacity deeper inside (the same
+    # 'depth' number the colour uses). Only the MASK is made see-through: the raised height and the roughness still follow the full moss. With both at 1 the mask is
+    # exactly the old one.
+    moss_opacity = b.math('MULTIPLY_ADD', depth, b.sub(S('Core Opacity'), S('Rim Opacity')), S('Rim Opacity'))
+    mask = b.mx(b.mul(moss, moss_opacity), lichen)
     colour = b.mix(moss_colour, lichen_colour, lichen)
     fuzz = slate_noise(x_across, b.mul(g['local_y'], height), 1.0 / 0.004, 1.0 / 0.004, 1.0, 0.5, 71.0)          # fine fuzz, 0.004 tile (5 dots) across, in tile units both ways
     moss_height = b.mul(moss, b.math('MULTIPLY_ADD', fuzz, 0.045, 0.02))

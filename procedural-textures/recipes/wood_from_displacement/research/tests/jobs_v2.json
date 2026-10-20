@@ -1,0 +1,21 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: tile bag of 64. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_v2.json"
+ },
+ {
+  "name": "bag64",
+  "label": "bag64_b2",
+  "builder": "build_bag",
+  "params": {
+   "tiles": 64,
+   "tile_mode": false,
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ }
+]

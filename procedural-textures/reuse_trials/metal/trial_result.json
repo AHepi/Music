@@ -1,0 +1,164 @@
+{
+ "surface": "metal (riveted, rusty painted steel wall)",
+ "question": "How much of the tools can be used on the other textures now?",
+ "answer_in_one_line": "Every shared layer ran unchanged (settings only; MOSS paints rust, DAMAGE paints chipped paint); 77 percent of the nodes and 71 percent of the picture-making code are shared; what had to be new is one layout (bars, panels, creases, seams, diagonal braces) and three small boxes (EDGE LIGHT, RIVETS, METAL HEIGHT RULE).",
+ "layers_used": [
+  {
+   "layer": "layer_interface (shared helper)",
+   "how": "unchanged",
+   "why": "builds every box, old and new; the three new paint layers have exactly the same sockets"
+  },
+  {
+   "layer": "COLOUR AND FADE",
+   "how": "settings only",
+   "why": "the steel paint: nine tones from the stored palettes, flat patches, fine speckle and grain, bleached and damp areas"
+  },
+  {
+   "layer": "DAMAGE",
+   "how": "settings only, new meaning (chipped paint, pale bare steel)",
+   "why": "chips along piece edges, pits, a few scratches; grey break colours"
+  },
+  {
+   "layer": "MOSS",
+   "how": "settings only, new meaning (rust)",
+   "why": "rust gathers along bar edges and in chipped paint (declared link from DAMAGE's mask), short drips, lichen discs as rust spots"
+  },
+  {
+   "layer": "OUTLINE AND SHADOW",
+   "how": "settings only",
+   "why": "the dark crease round every piece edge and plate seam, short soft shadow under upper edges"
+  },
+  {
+   "layer": "COMBINE",
+   "how": "settings only",
+   "why": "stacks six layers; tone_blend 1, one metallic number 0.5; its own height-from-colour rule is slate's and had to be replaced after it"
+  },
+  {
+   "layer": "layout bundle (eleven numbers)",
+   "how": "interface unchanged, filled by a new METAL LAYOUT",
+   "why": "carried even diagonal braces: the shared layers ran on them unchanged"
+  }
+ ],
+ "new_parts": [
+  "METAL LAYOUT (metal_layout.py): 191 nodes, 185 lines; crossing upright and lying bars, panels, creases, seams, diagonal braces (braces added in this second round); one recorded change of meaning: top_edge_distance starts at bar_top_offset on lying bars and braces",
+  "EDGE LIGHT (edge_light.py): 98 nodes, 74 lines; new paint layer with the shared sockets: lit line, dark wall, cast shadow right of upright bars",
+  "RIVETS (rivets.py): 125 nodes, 86 lines; new paint layer: faceted domes along bars with rim and rust halo",
+  "METAL HEIGHT RULE (metal_height_rule.py): 19 nodes, 37 lines; height from finished colour by the reference's 12-point curve (worth about +0.07 to +0.08 overall against COMBINE's slate rule)"
+ ],
+ "no_shared_layer_changed": true,
+ "snapshot_checksums": "sha256sum -c OK for all seven files after all runs",
+ "node_counts": "shared unchanged 1533 (COLOUR AND FADE 419, DAMAGE 439, MOSS 419, OUTLINE AND SHADOW 216, COMBINE 25, noise helper 15); new 433 (METAL LAYOUT 191, EDGE LIGHT 98, RIVETS 125, METAL HEIGHT RULE 19); recipe wiring 11; total 1977; 77 percent shared",
+ "line_counts": {
+  "shared_reused_unchanged": 938,
+  "new_boxes": 382,
+  "recipe_wiring": 133,
+  "settings_values": 119,
+  "tools_and_tests": 489
+ },
+ "scores_like_for_like": {
+  "method": "1254 dots, lib/texture_compare.py metal (same-kind), normal made from the 16-bit height by make_normal.py at strength 5",
+  "layered": {
+   "seeds_1_tuned_on": {
+    "overall": 0.661,
+    "colour": 0.642,
+    "height": 0.614,
+    "normal": 0.647,
+    "tiling": 1.0
+   },
+   "seeds_2": {
+    "overall": 0.629,
+    "colour": 0.626,
+    "height": 0.516,
+    "normal": 0.679,
+    "tiling": 1.0
+   },
+   "seeds_3": {
+    "overall": 0.654,
+    "colour": 0.65,
+    "height": 0.567,
+    "normal": 0.669,
+    "tiling": 1.0
+   },
+   "mean_of_three": {
+    "overall": 0.648,
+    "colour": 0.639,
+    "height": 0.566,
+    "normal": 0.665,
+    "tiling": 1.0
+   },
+   "seeds_4_extra_never_looked_at": {
+    "overall": 0.632,
+    "colour": 0.569,
+    "height": 0.617,
+    "normal": 0.68,
+    "tiling": 1.0
+   },
+   "mean_of_four_overall": 0.644
+  },
+  "first_bake_before_round_7": {
+   "seeds_1": 0.682,
+   "seeds_2": 0.573,
+   "seeds_3": 0.63,
+   "mean": 0.628,
+   "note": "sets 2 and 3 had 31 and 34 percent rust against 22 on set 1; fixed by making the rust less patchy and less in all"
+  },
+  "earlier_metal_recipe": {
+   "seed_1_rescored_normal_remade": {
+    "overall": 0.579,
+    "colour": 0.54,
+    "height": 0.608,
+    "normal": 0.432,
+    "tiling": 1.0
+   },
+   "first_three_stored_tiles_mean": 0.579,
+   "all_eight_stored_tiles_mean": 0.569,
+   "note": "only seed_1 still has height and normal pictures; the other seven use the stored scores of the same tool at the same size"
+  },
+  "first_layered_probe_before_braces_and_tuning": 0.549,
+  "combine_own_height_rule_side_check": {
+   "seeds_1": 0.578,
+   "seeds_2": 0.558
+  },
+  "blur_after_baking_side_check_0_7_dot": {
+   "seeds_1": 0.64,
+   "seeds_2": 0.609,
+   "seeds_3": 0.66,
+   "seeds_4": 0.636
+  }
+ },
+ "ahead_of_earlier_recipe_on": "colour feature size, colour edge sharpness, colour orientation, normal tilt and components (the biggest gap), height spectrum, gradient and contrast",
+ "behind_the_earlier_recipe_on": "how closely height follows colour (0.41 against 0.86, mine follows too exactly: 0.997 against 0.968), normal-to-height agreement (0.00 against 0.58), height distribution (0.79 against 0.84)",
+ "tests": {
+  "half_tile_shift_512": "passes: finished colour mean difference 2.6 of 255, 0.02 percent of dots over 40 (wrongly rolled control 21.0 and 15.3 percent); 2 base tiles across also repeats and is not a copy (26.4 and 20.4 percent)",
+  "seam_score": "1.00 on all four sets",
+  "two_by_two_repeat": "looked at, no seam visible",
+  "independence_320": "Amount 0: colour changes only inside each layer's own mask (0.0 percent outside, all six layers); height outside mask 0.001 to 0.097 percent (explained by reasoning only); Seed + 1 rows prove nothing (measured against old masks)"
+ },
+ "blender_runs": "12 numbered runs but 13 Blender starts (the first helper's run 4 was two starts), one over the limit of 12; the 13th is a side check (height with COMBINE's own rule at the final settings)",
+ "reads_as_surface": "yes",
+ "failures": [
+  "first attempt did not start Blender (not on the path)",
+  "first layered probe scored 0.549 against the earlier recipe's 0.579 (colour orientation 0.0, normal agreement 0.0)",
+  "COMBINE's own height rule: 0.473 against 0.549 on the probe",
+  "first final bake had 31 and 34 percent rust on seed sets 2 and 3 (0.573 overall on set 2); fixed in round 7, both bakes kept",
+  "round 5 variant A gave 28 percent rust; round 6 finer speckle alone made feature size worse; round 7 less coverage hardly changed set 3",
+  "blurring the height after baking did not win points back overall",
+  "one Blender start over the 12 allowed",
+  "label drawing ghost letters on the first pictures (fixed)"
+ ],
+ "untested": [
+  "the shared slate LAYOUT on metal (reasoning only)",
+  "other bar counts, widths and brace settings; unlucky seeds may stop with a 'two bars overlap' error",
+  "recipe.tiles_across 2 looked at or scored (only the half-tile test passed); other sizes and resolutions",
+  "roughness and metallic compared with anything (reference has none)",
+  "a render under lights",
+  "whether people find it closer to the reference than the earlier recipe",
+  "the plain bake_harness.py run (final_bake.py uses the harness functions instead)"
+ ],
+ "files": {
+  "notes": "notes - metal reuse trial.md",
+  "sheet": "sheet_metal.jpg",
+  "seed_sets": "final_seed_sets.jpg",
+  "repeat": "repeat_2x2_metal.jpg"
+ }
+}

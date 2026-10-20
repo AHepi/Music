@@ -1,0 +1,42 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: first pieces tests (had a bug in the board finder: wide black bars). Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_a_first.json"
+ },
+ {
+  "name": "plain_repeat",
+  "builder": "build_plain_repeat",
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ },
+ {
+  "name": "pieces_rows_only",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "rows_only"
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ },
+ {
+  "name": "pieces_full",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "full"
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 4
+ }
+]

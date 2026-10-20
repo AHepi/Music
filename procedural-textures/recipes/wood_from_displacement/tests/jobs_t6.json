@@ -1,0 +1,6 @@
+[
+ {"note": "What this is: sixth test: a 2 x 2 area at 2508 dots, an 8 x 8 area at 512 dots (does it run?), the knot-and-flip debug picture of a 4 x 4 area."},
+ {"out": "tests/renders/t6_area2", "size": 2508, "params": {"recipe.tiles_across": 2}, "channels": ["Colour"]},
+ {"out": "tests/renders/t6_area8", "size": 512, "params": {"recipe.tiles_across": 8}, "channels": ["Colour"]},
+ {"out": "tests/renders/t6_flips4", "size": 1254, "params": {"recipe.tiles_across": 4, "debug_view": "flips", "bake.shrink_samples": 1, "bake.shrink_filter": 0.01}, "channels": ["Colour"]}
+]

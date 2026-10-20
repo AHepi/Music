@@ -1,0 +1,17 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: normal check, sharp sampling. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_n1.json"
+ },
+ {
+  "name": "plain_repeat",
+  "label": "plain_full_sharp",
+  "builder": "build_plain_repeat",
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 1,
+  "filter_width": 0.01
+ }
+]

@@ -1,0 +1,157 @@
+{
+ "_what_this_is": "How many nodes are in every box of the gravel recipe (made by checks_run.py part 4). One node = one small step Blender works out for every dot. A name starting with an underscore is a note.",
+ "GRAVEL (top: the recipe wiring)": {
+  "nodes": 10,
+  "kinds": {
+   "Group": 8,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {
+   "GRAVEL LAYOUT": 1,
+   "COLOUR AND FADE": 1,
+   "FACETS": 1,
+   "DAMAGE": 1,
+   "OUTLINE AND SHADOW": 1,
+   "SOIL": 1,
+   "COMBINE": 1,
+   "GRAVEL HEIGHT RULE": 1
+  }
+ },
+ "GRAVEL LAYOUT": {
+  "nodes": 564,
+  "kinds": {
+   "Math": 480,
+   "CombineXYZ": 21,
+   "SeparateColor": 21,
+   "TexWhiteNoise": 20,
+   "Mix": 13,
+   "MapRange": 3,
+   "SeparateXYZ": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "Tileable Noise": {
+  "nodes": 15,
+  "kinds": {
+   "Math": 9,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "CombineXYZ": 1,
+   "VectorMath": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {}
+ },
+ "COLOUR AND FADE": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 327,
+   "Mix": 28,
+   "MapRange": 15,
+   "CombineXYZ": 12,
+   "TexNoise": 11,
+   "RGBToBW": 6,
+   "SeparateColor": 5,
+   "VectorMath": 5,
+   "TexWhiteNoise": 4,
+   "Gamma": 2
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "FACETS": {
+  "nodes": 109,
+  "kinds": {
+   "Math": 90,
+   "MapRange": 6,
+   "CombineXYZ": 3,
+   "TexWhiteNoise": 3,
+   "SeparateColor": 3,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Group": 1,
+   "Mix": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "DAMAGE": {
+  "nodes": 439,
+  "kinds": {
+   "Math": 354,
+   "MapRange": 25,
+   "Mix": 20,
+   "CombineXYZ": 14,
+   "TexWhiteNoise": 9,
+   "SeparateColor": 9,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {}
+ },
+ "OUTLINE AND SHADOW": {
+  "nodes": 216,
+  "kinds": {
+   "Math": 173,
+   "MapRange": 18,
+   "Mix": 9,
+   "CombineXYZ": 6,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "TexWhiteNoise": 1,
+   "SeparateColor": 1
+  },
+  "boxes_inside": {}
+ },
+ "SOIL": {
+  "nodes": 170,
+  "kinds": {
+   "Math": 147,
+   "MapRange": 10,
+   "Mix": 8,
+   "Group": 3,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 3
+  }
+ },
+ "COMBINE": {
+  "nodes": 22,
+  "kinds": {
+   "Math": 13,
+   "Mix": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "RGBToBW": 1
+  },
+  "boxes_inside": {}
+ },
+ "GRAVEL HEIGHT RULE": {
+  "nodes": 12,
+  "kinds": {
+   "Math": 7,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "SeparateColor": 1,
+   "Mix": 1
+  },
+  "boxes_inside": {}
+ }
+}

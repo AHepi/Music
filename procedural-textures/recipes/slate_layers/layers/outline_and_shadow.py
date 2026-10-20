@@ -10,6 +10,7 @@
 #   4. THE LIP            a pale, broken line along the LOWER edge of a slate, just above its black joint (the edge catching the light); it
 #                         starts about 3 dots inside the edge, after a thin dark rim, as in the reference.
 #   5. THE EDGE DARKENING a faint darkening of the slate close to every edge (about 6 dots), so slates do not look flat-cut.
+# (Round 2 of the look fixes added a faint fine texture to the black of the joints, setting Joint Texture, default 0 = off.)
 # It also gives the relief: the shadow band is a slope (the slate rises out of the joint), the lip is a small raised rim, the side
 # outline is a small groove. (The joints themselves are already low in the layout's base_height; this layer only adds to that.)
 #
@@ -57,6 +58,8 @@ CONTROLS = [
     Control('joint_width', 'Joint Width', 0.0008, 0.0, 0.006, 'how far the painted black spills out of the gap BETWEEN SLATES OF A ROW into each slate, in tile units (0.0008 = 1 dot); the gap itself is the layout\'s Joint Width'),
     Control('band_width', 'Band Width', 0.0004, 0.0, 0.008, 'how far the painted black spills out of the band BETWEEN ROWS into the slates above and below, in tile units (0.0004 = 0.5 dot); the band itself is the layout\'s Row Gap'),
     Control('joint_colour', 'Joint Colour', '#0e0f11', kind='colour', text='the near-black of the joints'),
+    Control('joint_texture', 'Joint Texture', 0.0, 0.0, 1.5, 'how much the near-black of the joints varies from dot to dot, as a share of its brightness (0 = perfectly flat black, as before; about 0.5 = the faintly mottled black of the reference joints). Added in look-fixes round 2: the relief follows the colour, so mottled joints also give the relief a fine texture there'),
+    Control('joint_texture_size', 'Joint Texture Size', 600.0, 100.0, 1200.0, 'how many mottles fit across one base tile: 600 = a mottle about 2 dots wide; fewer = coarser'),
     # ---- the thin dark outline along the slate edges
     Control('side_outline_width', 'Side Outline Width', 0.0020, 0.0, 0.008, 'width of the thin dark line just inside every slate edge, in tile units (0.0020 = 2.5 dots)'),
     Control('side_outline_darkness', 'Side Outline Darkness', 0.6, 0.0, 1.0, 'how strongly the outline colour covers the slate paint (0 = invisible, 1 = solid)'),
@@ -203,7 +206,11 @@ def build_group(parameters):
     colour, strength = lay_over(colour, strength, S('Shadow Colour'), shadow_strength)
     colour, strength = lay_over(colour, strength, S('Lip Colour'), lip_strength)
     colour, strength = lay_over(colour, strength, S('Outline Colour'), outline_strength)
-    colour, strength = lay_over(colour, strength, S('Joint Colour'), joint_strength)
+    # Joint Texture (round 2): the joint black is scaled by a fine noise, so it is not perfectly flat. With Joint Texture 0 the factor is exactly 1: the old picture.
+    joint_noise = seamless(b.mul(tiles, S('Joint Texture Size')), b.mul(tiles, S('Joint Texture Size')), 1.0, 0.5, 91.0)
+    joint_factor = b.add(1.0, b.mul(b.sub(joint_noise, 0.5), b.mul(S('Joint Texture'), 2.0)))
+    joint_colour_here = b.vmath('SCALE', S('Joint Colour'), None, joint_factor)
+    colour, strength = lay_over(colour, strength, joint_colour_here, joint_strength)
 
     # ------------------------------------------------------------------------------------------------ relief and roughness
     # the shadow is a slope pushed DOWN under the joint; the lip a small rim UP; the outline a small groove DOWN; the joint is already low in base_height

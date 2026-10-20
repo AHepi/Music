@@ -1,0 +1,111 @@
+{
+ "dark_share_all (brightness under 70)": 0.2407,
+ "soot_cloud_share (dark, thin ring removed by a 7-dot opening)": 0.1146,
+ "thin_dark_lines_share (ring and specks)": 0.1261,
+ "soot_cloud_half_length_dots [across, up-down]": [
+  15,
+  7
+ ],
+ "dark_mask_half_length_dots [across, up-down]": [
+  9,
+  4
+ ],
+ "soot_cloud_fifth_length_dots [across, up-down] (where it matches itself only 0.2 as well: the size of the whole cloud)": [
+  62,
+  43
+ ],
+ "soot_envelope_half_length_dots [across, up-down] (the soot mask blurred over about 31 dots first, so mortar bands do not cut it)": [
+  43,
+  38
+ ],
+ "mortar_share (element_stats)": 0.221,
+ "patch_area_percentiles_dots (element_stats)": {
+  "10": 16.0,
+  "25": 21.0,
+  "50": 36.0,
+  "75": 81.0,
+  "90": 208.0,
+  "99": 1885.8999999999978
+ },
+ "sampler_layout": {
+  "face_height": [
+   83.33333333333333,
+   1.1055415967851332
+  ],
+  "row_pitch_mean": 101.9,
+  "brick_pitch": [
+   313.5,
+   59.16889667159033
+  ],
+  "joint_gap": [
+   20.4375,
+   1.9885741332254459
+  ],
+  "vertical_gap": 18.566666666666677,
+  "corner_radius": 9.0
+ },
+ "sampler_accents (soot and spall, some chosen by eye)": [
+  {
+   "name": "soot",
+   "colours": [
+    0,
+    1,
+    2
+   ],
+   "count_per_tile": 14,
+   "sigma": [
+    42.0,
+    85.0
+   ],
+   "strength": 0.92,
+   "also_in_mortar": true
+  },
+  {
+   "name": "spall",
+   "colours": [
+    4,
+    8,
+    11,
+    13,
+    15
+   ],
+   "count_per_tile": 14,
+   "sigma": [
+    34.0,
+    30.0
+   ],
+   "strength": 0.9
+  }
+ ],
+ "height_rule (sampler curve: colour brightness -> height)": {
+  "x": [
+   41.6,
+   59.2,
+   66.8,
+   72.6,
+   77.2,
+   81.4,
+   84.6,
+   88.8,
+   94.1,
+   100.7,
+   108.0,
+   137.4
+  ],
+  "y": [
+   7.5,
+   48.1,
+   69.4,
+   85.1,
+   97.3,
+   108.7,
+   117.3,
+   128.4,
+   142.3,
+   160.4,
+   180.5,
+   243.8
+  ],
+  "normal_strength": 6.0
+ }
+}

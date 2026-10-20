@@ -1,0 +1,169 @@
+{
+ "METAL (top: the recipe wiring)": {
+  "nodes": 11,
+  "kinds": {
+   "Group": 9,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {
+   "METAL LAYOUT": 1,
+   "COLOUR AND FADE": 1,
+   "DAMAGE": 1,
+   "MOSS": 1,
+   "OUTLINE AND SHADOW": 1,
+   "EDGE LIGHT": 1,
+   "RIVETS": 1,
+   "COMBINE": 1,
+   "METAL HEIGHT RULE": 1
+  }
+ },
+ "METAL LAYOUT": {
+  "nodes": 191,
+  "kinds": {
+   "Math": 163,
+   "Mix": 15,
+   "CombineXYZ": 3,
+   "TexWhiteNoise": 3,
+   "SeparateColor": 2,
+   "MapRange": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {}
+ },
+ "COLOUR AND FADE": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 327,
+   "Mix": 28,
+   "MapRange": 15,
+   "CombineXYZ": 12,
+   "TexNoise": 11,
+   "RGBToBW": 6,
+   "SeparateColor": 5,
+   "VectorMath": 5,
+   "TexWhiteNoise": 4,
+   "Gamma": 2
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "Tileable Noise": {
+  "nodes": 15,
+  "kinds": {
+   "Math": 9,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "CombineXYZ": 1,
+   "VectorMath": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {}
+ },
+ "DAMAGE": {
+  "nodes": 439,
+  "kinds": {
+   "Math": 354,
+   "MapRange": 25,
+   "Mix": 20,
+   "CombineXYZ": 14,
+   "TexWhiteNoise": 9,
+   "SeparateColor": 9,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {}
+ },
+ "MOSS": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 342,
+   "MapRange": 24,
+   "CombineXYZ": 15,
+   "Mix": 13,
+   "TexNoise": 8,
+   "SeparateColor": 6,
+   "TexWhiteNoise": 4,
+   "Group": 2,
+   "TexVoronoi": 2,
+   "NodeGroupInput": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 2
+  }
+ },
+ "OUTLINE AND SHADOW": {
+  "nodes": 216,
+  "kinds": {
+   "Math": 173,
+   "MapRange": 18,
+   "Mix": 9,
+   "CombineXYZ": 6,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "TexWhiteNoise": 1,
+   "SeparateColor": 1
+  },
+  "boxes_inside": {}
+ },
+ "EDGE LIGHT": {
+  "nodes": 98,
+  "kinds": {
+   "Math": 82,
+   "MapRange": 7,
+   "Mix": 5,
+   "Group": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 2
+  }
+ },
+ "RIVETS": {
+  "nodes": 125,
+  "kinds": {
+   "Math": 100,
+   "Mix": 11,
+   "MapRange": 6,
+   "CombineXYZ": 3,
+   "TexWhiteNoise": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {}
+ },
+ "COMBINE": {
+  "nodes": 25,
+  "kinds": {
+   "Math": 15,
+   "Mix": 6,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "RGBToBW": 1
+  },
+  "boxes_inside": {}
+ },
+ "METAL HEIGHT RULE": {
+  "nodes": 19,
+  "kinds": {
+   "Math": 14,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateColor": 1,
+   "FloatCurve": 1,
+   "Mix": 1
+  },
+  "boxes_inside": {}
+ }
+}

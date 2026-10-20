@@ -1,0 +1,141 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: 4 x 4 area tests with 2 boards per row, plus hex and masks area pictures. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_a4.json"
+ },
+ {
+  "name": "pieces_rows_only",
+  "label": "pieces_rows_only_b2",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "rows_only",
+   "tile_mode": false,
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "pieces_full",
+  "label": "pieces_full_b2",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "full",
+   "tile_mode": false,
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "pieces_curated",
+  "label": "pieces_curated_b2",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "curated",
+   "tile_mode": false,
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "bag16",
+  "label": "bag16_b2",
+  "builder": "build_bag",
+  "params": {
+   "tiles": 16,
+   "tile_mode": false,
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "plain_repeat",
+  "builder": "build_plain_repeat",
+  "channels": [
+   "height"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "hex_gauss",
+  "label": "hex_gauss_tilemode",
+  "builder": "build_hex",
+  "params": {
+   "variant": "gauss",
+   "tile_mode": true
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 2,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "hex_gauss",
+  "label": "hex_gauss_area",
+  "builder": "build_hex",
+  "params": {
+   "variant": "gauss",
+   "tile_mode": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "bomb",
+  "label": "bomb_area",
+  "builder": "build_bombing",
+  "params": {
+   "tile_mode": false
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "masks_full",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ }
+]

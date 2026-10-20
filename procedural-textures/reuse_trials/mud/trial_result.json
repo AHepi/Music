@@ -1,0 +1,80 @@
+{
+ "surface": "mud",
+ "layers_used": [
+  {
+   "layer": "layout bundle interface (layer_interface.py)",
+   "how": "unchanged",
+   "why": "Every box, old and new, is built with it. MUD LAYOUT, RUTS, STONES and the height box have exactly the shared sockets, and the eleven bundle numbers fed every layer without change."
+  },
+  {
+   "layer": "COLOUR AND FADE",
+   "how": "settings only",
+   "why": "All of the earth ground. Nine earth browns from the stored 16-colour mud palette; flat clods made by its mottling cells (the three no-tongues settings: fade_direction 0, fade_length = streak_width = 0.0065, mottle_tallness 1.3); specks, grain, big pale dry and dark wet areas. Per-patch tone spread, tint and top darkening are off because anything that changes per patch shows as a cut-paper polygon."
+  },
+  {
+   "layer": "MOSS",
+   "how": "settings only, with a new meaning (puddle water)",
+   "why": "Its damp-spot rule (moss gathers where the bare relief is low) is turned up and every other moss rule is 0; the five moss tones are water blue-greys. It only works because the new layout hands over a base_height with basins; with the shared slate layout it would make no puddles. Lichen discs (tried as stones) are off."
+  },
+  {
+   "layer": "COMBINE",
+   "how": "settings only",
+   "why": "Stacks colour_and_fade, ruts, moss, damage, stones, outline_and_shadow through recipe.stack_order, so RUTS and STONES needed no change in COMBINE; tone_blend 1. Its built-in slate height rule turned out close enough for mud (the new height box adds only 0.015)."
+  },
+  {
+   "layer": "DAMAGE",
+   "how": "settings only (tried, then switched off, amount 0)",
+   "why": "Tried twice as small dark pebbles (pits): polka dots / barely visible. Its flakes, cracks and notches belong to piece edges and mud has no real piece edges. No job on mud."
+  },
+  {
+   "layer": "OUTLINE AND SHADOW",
+   "how": "settings only (tried once, then switched off, amount 0)",
+   "why": "Switched on it draws a net of dark lines round every ground patch, like cracked paving, which the reference does not have. Mud has no joints. A second small-clod layout might give it something to draw; not tried."
+  },
+  {
+   "layer": "LAYOUT (shared slate layout)",
+   "how": "settings only (alternative, one 512-dot look, not scored)",
+   "why": "14 x 14 pieces with no joints or chips makes a usable ground, but its bare relief has no basins, so MOSS has nothing to turn into puddles. The layout had to be new."
+  }
+ ],
+ "new_parts": [
+  "MUD LAYOUT (mud_layout.py, 295 nodes, 81 lines): ground patches (jittered-grid cells, 9-place search, wrapped so the tile repeats, wobble-bent borders) as the pieces, a turned local frame, no gaps, and a base_height of level ground with puddle basins. Needed because mud has no pieces and MOSS needs low spots. Mistake found at true dot size: with the local numbers running over one patch width they froze beyond the box and COLOUR AND FADE drew straight blocks; the box is now two patch widths.",
+  "RUTS (ruts.py, 212 nodes, 98 lines): a new paint layer with the shared sockets. Two families of whole-number-slope stripes bent into S-curves by a seamless noise, thinning and ending along their length; dark three-tone band, groove, paler bank on the lit side, blue-grey wet streaks. Needed because no shared layer draws long winding bands.",
+  "STONES (stones.py, 637 nodes, 92 lines): a new paint layer with the shared sockets that calls lib/contrib/stone_tools.polygon_stones unchanged three times (small, medium, big) and adds the paint (six stone greys, lit face, dark ring, a few warm stones) and a gathering gate that switches whole stones off in some regions. About 498 of its nodes come from the borrowed helper (worked out from the surveyor's count, not counted here). Needed because lichen discs and pits are round and flat.",
+  "MUD HEIGHT RULE (mud_height_rule.py, 13 nodes, optional): a copy of the brick trial's height box with the mud numbers (2.45 x (grey - 22) / 255, fitted once to the reference height). Adds only +0.015 overall on mud, so the final tiles do not use it.",
+  "mud_recipe.py: copy of the slate/brick recipe wiring (shift, debug_view, tiles_across, stack_order kept) plus recipe.layout and recipe.height_rule; refuses to run if any shared module was not imported from the snapshot.",
+  "settings.json (3.7 KB, passes description_audit at the 8 KB limit).",
+  "Tools: run_views.py, window_render.py (copy of the slate tool, folder level fixed, per-job window added), final_bake.py, checks_run.py + checks_analyse.py, final_scores.py, make_mud_sheet.py, seed_sets_sheet.py, look_sheet.py, look_numbers.py, measure_reference_once.py, set_values.py, count_lines.py, blender_run.sh."
+ ],
+ "node_counts": "Counted by building the final recipe in Blender and counting the nodes inside every box (checks/node_counts_default.json, node_counts_with_mud_height_rule.json, node_counts_with_shared_slate_layout.json).\nShared, unchanged: 1401 nodes in total (55%).\n- COLOUR AND FADE 419\n- MOSS 419\n- DAMAGE 307 (crack and scratch slots set to 0; switched off)\n- OUTLINE AND SHADOW 216 (switched off)\n- COMBINE 25\n- seamless-noise helper 15\nNew: 1144 nodes in total (45%): MUD LAYOUT 295, RUTS 212, STONES 637 (about 498 of them from the borrowed stone maker, estimated, plus about 139 paint nodes). Recipe wiring 10 nodes (copied). Optional MUD HEIGHT RULE 13 (not in the final tiles).\nTotal 2555. Counting only boxes that do something in the final tile (DAMAGE and OUTLINE are off): shared 878 (43%), new 1144 (57%). If the borrowed stone maker counts as reuse: 74% of all nodes, 68% of the working nodes.\nWith the shared slate LAYOUT (507 nodes) instead of MUD LAYOUT: 1908 of 2767 shared (69%), but that layout has no basins and so no puddles.\nLines of code (non-comment): reused unchanged 987 (+171 for the slate layout, imported but not used); borrowed stone_tools.py 82; new boxes 297 (layout 81, ruts 98, stones 92, height rule 26); recipe wiring 135; settings 115; tools and tests 547. 77% of the picture-making code is reused (987 against 297).",
+ "scores": "All rows: lib/texture_compare.py mud, 1254 dots, normal from height by make_normal.py at strength 9.\nLayered trial (COMBINE's own height rule):\n- seed set 1: overall 0.497, colour 0.473, height 0.492, normal 0.334, tiling 0.989\n- seed set 2 (all seeds +100): overall 0.470, colour 0.419, height 0.504, normal 0.300, tiling 1.000\n- seed set 3 (all seeds +200): overall 0.555, colour 0.570, height 0.543, normal 0.305, tiling 1.000\n- mean of the three: overall 0.507, colour 0.487, height 0.513, normal 0.313, tiling 0.996\n- mean of the three with the optional MUD HEIGHT RULE box: overall 0.522, colour 0.487, height 0.553, normal 0.329\nSurface's own earlier recipe, new tile 101, scored the same way (same tool and size): overall 0.391, colour 0.313, height 0.488, normal 0.139 with its normal remade at strength 9 (as stored, with its own normal: 0.407 / 0.313 / 0.488 / 0.247). The surveyor's figure for all eight earlier new tiles: 0.383 mean (0.353 to 0.416).\nControl (the score is weak at telling mud from other surfaces): the trial scored against the other references reaches at most 0.391 (gravel; brick 0.344 to 0.365, slate 0.237 to 0.254, wood 0.267 to 0.281, metal 0.274 to 0.283), 0.08 to 0.19 below its mud score; the earlier tile's best other score is 0.369 (slate), only 0.022 below its mud score.\nSeed matters: overall 0.470 to 0.555, colour 0.419 to 0.570. All three seed sets were looked at together while tuning, so none is a blind test; one 1254-dot score (0.413, round 6) was looked at during tuning.",
+ "reads_as_surface": "partly",
+ "judgement": "About half of the work carried over. No shared layer was changed (checksums OK, no cache folder written). COLOUR AND FADE made the whole earth ground by settings alone (flat painted clods, dry and wet areas), MOSS made the puddles by settings alone with a new meaning (water gathers in low spots) and COMBINE, the interface, the baking and scoring tools carried over. DAMAGE and OUTLINE AND SHADOW were tried and found no job on mud (no real piece edges) and are switched off.\n\nThree new parts were needed, and they are big: a MUD LAYOUT (ground patches and puddle basins, 295 nodes), RUTS (212) and STONES (637, of which about 498 come from the borrowed stone maker). 55% of the nodes are shared unchanged (43% of the nodes that actually work); 77% of the picture-making code is reused. The brick-style height box is not needed: COMBINE's own rule is close enough for mud (+0.015 with the box).\n\nScores at 1254 dots: layered tile mean 0.507 overall (0.497, 0.470, 0.555), colour 0.487; the mud's earlier recipe tile 0.391, colour 0.313, scored the same way. The layered tile is also better told apart from other surfaces (control margin 0.08 to 0.19 against 0.02). The seed alone moves the score by 0.085.\n\nAt a glance it reads as earthy mud with puddles, stones and ruts, but it is clearly weaker than the reference: no lit and shadowed clods (a flat mosaic), narrow winding ruts instead of broad parallel bands, stones only 8% of the dots against 18% and a little cartoon-like, flat puddles, a sparser tile. Tests: the tile repeats (half-tile test, 2 x 2 look), and no layer changes colour outside its own mask.",
+ "sheet": "proc-work/reuse_trials/mud/sheet_mud.jpg (2x2 repeat: proc-work/reuse_trials/mud/repeat_2x2_mud.jpg; reference and three seed sets side by side: proc-work/reuse_trials/mud/final_seed_sets.jpg; notes: proc-work/reuse_trials/mud/notes - mud reuse trial.md)",
+ "folder": "proc-work/reuse_trials/mud",
+ "failures": [
+  "Round 1: ruts came out as hairline cracks (a strong bend squeezes a band); MOSS painted hundreds of small blue-grey bits because its edge-raggedness noise alone was above its threshold. Fixed with coverage 0.71, damp_preference 1.5 and raggedness 0.2.",
+  "Round 2: OUTLINE AND SHADOW switched on drew a net of dark lines round every ground patch (cracked-paving look); switched off. The shared slate layout by settings has no basins, so no puddles.",
+  "Round 4, first start stopped at once: KeyError 'seed' in stones.py (asked the interface helper for settings without the shared Seed and Amount controls). No picture. Second start worked.",
+  "Round 5 pictures: the three seed sets showed identical big stones because stones.seed was missing from the seed sets. Fixed.",
+  "MOSS lichen discs and DAMAGE pits as stones looked like polka dots; lichen also silently needs edge_distance over 3.8 dots, so it vanishes on small pieces. Both switched off.",
+  "Round 7, first start stopped at once: my copy of window_render.py looked one folder level too high (No module named bake_harness). No picture. Second start worked.",
+  "Layout mistake found only at true dot size (round 7): local_x and local_y ran over one patch width, froze beyond it, and COLOUR AND FADE drew straight blocks and target squares inside the patches. Fixed by making the box two patch widths. At 512 dots it had looked fine.",
+  "Warm tan stones with a dark rim looked cartoon-like and medium-grey stones looked plastic; warm share cut to 0.05 and the stone tone bias lowered.",
+  "Tuning at 512 dots hid fine-scale flaws; from round 7 close-up windows at true dot size were used.",
+  "The 12 Blender starts were all used (two stopped at once), so a few late ideas (clod-size outline layout, rut width correction, more small stones) could not be tried."
+ ],
+ "untested": [
+  "The plain bake_harness.py command on mud_recipe.py was not run; all bakes went through my own drivers, which use the harness's scene and photograph functions. The harness's own normal maps were not used.",
+  "Roughness and metallic maps were not compared with anything (the reference has none); metallic is 0.",
+  "Seed sets 2 and 3 were only seen at 1254 reduced and at 512 dots, not as close-ups at true dot size.",
+  "The 2 x 2 area of NEW content (recipe.tiles_across 2) passed the half-tile test but was not looked at or scored; STONES' grid bend does not scale with the number of tiles.",
+  "Independence rows for DAMAGE and OUTLINE AND SHADOW are trivial (both off); whether they still respect their masks on mud, and MOSS reading DAMAGE through the declared link, were not tested. Height changes outside the masks (0.001 to 0.013%) were not explained.",
+  "The mud height rule variant was baked as height only; its colour was copied from the main set (the box changes only Height by its code).",
+  "The 498 borrowed-helper nodes inside STONES are worked out from the surveyor's count of one call, not counted in this run.",
+  "The shared slate LAYOUT alternative was looked at once at 512 dots, not baked at 1254 and not scored.",
+  "A second small-clod layout through OUTLINE AND SHADOW (lit and shadowed clods), rut width correction, gathering stones round the big ones: ideas only, not tried.",
+  "Timings (512-dot view 20 to 28 s; 1254-dot colour 92 to 107 s, height 89 to 131 s, roughness 73 to 94 s) were taken while another helper was baking.",
+  "Unsure whether 'settings only' is a fair verdict for MOSS (it needs the new layout's basins) and how much of the score gain over the earlier tile is real mud-likeness; the control margin says the tile is at least better told apart from other surfaces."
+ ]
+}

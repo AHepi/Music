@@ -24,6 +24,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Honest gaps the checker found:** nobody has yet followed the checklist on a brand-new surface from scratch (every transfer reused an existing generator); there is no
   starting template for writing a new generator; the tool guides mostly teach shader nodes while most generators here are "painters" of flat shapes written in Python;
   the same-kind tool needs a reference picture to score a new surface.
+- **Running now (log 13):** the slate's second round of look fixes, then the re-bake of its variations, bigger area and guides and an honesty check; and the reuse test
+  of the shared slate layers on wood, rusted metal, mud and gravel (brick is done), then an independent check of all five and a guide answering "how much of the tools can
+  be used on the other textures". Helpers now run on Sonnet 5.5 at extra-high effort, as you asked.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -108,6 +111,27 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     ![](<12 Slate in layers - pictures/12 Slate in layers - eight variations.jpg>) ![](<12 Slate in layers - pictures/12 Slate in layers - same layers on a brick wall.jpg>)
     ![](<12 Slate in layers - pictures/12 Slate in layers - bigger area of new slates.jpg>)
 
+13. **Slate fixes round 1, the tool list, brick from the shared layers; helpers switched to Sonnet 5.5.** You said: apply the checker's fixes and re-bake; and asked how much of
+    the tools can be used on the other textures.
+    *Slate, round 1* (only settings changed, 49 to 65 entries, no code): same-kind overall 0.705 to 0.730, colour group 0.701 to 0.755 - but almost all of that gain is one
+    jumpy measure (feature size); without it the colour group is flat (0.767 to 0.764). Moss 10.4% to 5.7% of the tile (yours 6.4%), tan chips 1.9% to 0.9% (yours 1.0%).
+    A fresh checker judged the 11 problems: 4 fixed (L-shaped chips, drippy shadows, hair-like crack, lichen dots), 4 better (paint now flat crisp patches, moss amount
+    right with no teeth, rounder corners, relief), 3 unchanged (pale outlier slates, the variations, moss cut straight at side joints), none worse. New problems it found: the
+    moss now looks like small crisp khaki flakes (like peeling paint), chips and lip are thin, the relief is flatter than before with faint contour lines, the fine paint grain
+    is gone, plain slates stand out. Verdict: "nearly" the same hand; it tested settings for the outlier slates and the grain; a second round is running with them.
+    *Tool list* (one helper, reading plus small checks): every measuring and baking tool and the four paint layers, COMBINE and the layer interface run on all five other
+    surfaces with no code change; what changes per surface is the layout plus one or two small new layers (brick: grime; wood: cracks and a quarter turn so the paint runs
+    along the grain; metal: rivets, moss reused as rust, damage as chipped paint; mud: clods, ruts, stones; gravel: a stone layout). Its own count: 33-34 of 52 tools usable
+    as they are or by settings on each surface. It also found that three settings remove the slate "tongues" on brick, correcting a claim in the 05 Lessons guide.
+    *Brick from the shared layers*: no shared layer's code changed; new: a grime layer (161 nodes), a brick layout (118 nodes, optional - slate's own layout with brick settings
+    scored almost the same) and a small height step (13 nodes) because COMBINE's colour-to-height rule only suits slate. 84% of the nodes are shared. Same-kind 0.654 on
+    the best of three random patterns (mean 0.615) against 0.725 for the earlier brick-only recipe, scored the same way; the first quick layered brick was 0.194. Weak points:
+    soot as flecks instead of long smudges, pale chip bands along lower edges (a slate habit), cut-paper patch edges, no right-hand shadow. To be ruled on by the checker:
+    its height step uses two numbers taken once from your brick's height map.
+    *Switch:* you asked for Sonnet 5.5 helpers at extra-high effort from then on. The wood and metal helpers (earlier model) were stopped part-way; nothing was lost, and the
+    new helpers continue from their folders. Also found: Blender is not on the helpers' search path (each lost one try); the full path is now in their instructions.
+    All of this was put in one download: `13 Finished results so far.zip`.
+
 ## Next step
 
-Apply the look checker's tested settings changes to the slate default, add its untested relief changes, re-bake all five maps and check them by eye and by score.
+Finish the slate's second round and the reuse test of all five surfaces (running), then send both with the independent checks.

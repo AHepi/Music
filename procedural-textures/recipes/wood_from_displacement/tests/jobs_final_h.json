@@ -1,0 +1,300 @@
+[
+ {
+  "note": "What this is: sweeps for the guide (default tile at 640 dots, colour: boards per row, stains, large patches, joined boards, knots) and 4 x 4 areas of height at 1024 dots for the near-copy test with parts of the recipe switched off."
+ },
+ {
+  "out": "variations/sweep_rows_per_tile_4",
+  "size": 640,
+  "params": {
+   "layout.rows_per_tile": 4
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_rows_per_tile_6",
+  "size": 640,
+  "params": {
+   "layout.rows_per_tile": 6
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_zoom_0.0",
+  "size": 640,
+  "params": {
+   "windows.zoom": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_zoom_0.2",
+  "size": 640,
+  "params": {
+   "windows.zoom": 0.2
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joint_width_2.0",
+  "size": 640,
+  "params": {
+   "joints.width": 2.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joint_width_9.0",
+  "size": 640,
+  "params": {
+   "joints.width": 9.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_boards_per_row_2",
+  "size": 640,
+  "params": {
+   "layout.boards_per_row": 2
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_boards_per_row_3",
+  "size": 640,
+  "params": {
+   "layout.boards_per_row": 3
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_boards_per_row_4",
+  "size": 640,
+  "params": {
+   "layout.boards_per_row": 4
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_stains_amount_0.0",
+  "size": 640,
+  "params": {
+   "stains.amount": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_stains_amount_0.18",
+  "size": 640,
+  "params": {
+   "stains.amount": 0.18
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_stains_amount_0.5",
+  "size": 640,
+  "params": {
+   "stains.amount": 0.5
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joined_share_0.0",
+  "size": 640,
+  "params": {
+   "layout.joined_share": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joined_share_0.5",
+  "size": 640,
+  "params": {
+   "layout.joined_share": 0.5
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_joined_share_1.0",
+  "size": 640,
+  "params": {
+   "layout.joined_share": 1.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_knot_share_0.0",
+  "size": 640,
+  "params": {
+   "windows.knot_share": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_knot_share_0.12",
+  "size": 640,
+  "params": {
+   "windows.knot_share": 0.12
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_knot_share_0.5",
+  "size": 640,
+  "params": {
+   "windows.knot_share": 0.5
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_patches_none",
+  "size": 640,
+  "params": {
+   "masks.blotch_amount": 0.0,
+   "masks.drift_amount": 0.0
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_patches_default",
+  "size": 640,
+  "params": {
+   "masks.blotch_amount": 0.15,
+   "masks.drift_amount": 0.1
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "variations/sweep_patches_strong",
+  "size": 640,
+  "params": {
+   "masks.blotch_amount": 0.4,
+   "masks.drift_amount": 0.25
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/near_copy_plain_windows_only",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "windows.zoom": 0.0,
+   "layout.row_height_variation": 0.0,
+   "boards.tone_variation": 0.0,
+   "boards.warmth_variation": 0.0,
+   "stains.amount": 0.0,
+   "masks.drift_amount": 0.0,
+   "masks.blotch_amount": 0.0,
+   "windows.flip_left_right": 0.0,
+   "windows.flip_upside_down": 0.0,
+   "layout.joined_share": 0.0
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_no_stains_no_patches",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "stains.amount": 0.0,
+   "masks.drift_amount": 0.0,
+   "masks.blotch_amount": 0.0
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_two_boards_per_row",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "layout.boards_per_row": 2
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_four_boards_per_row",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "layout.boards_per_row": 4
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_knots_free_and_many",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "windows.knot_share": 0.5
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/near_copy_default",
+  "size": 1024,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4
+  },
+  "channels": [
+   "Height"
+  ]
+ }
+]

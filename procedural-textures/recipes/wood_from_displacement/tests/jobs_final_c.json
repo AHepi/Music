@@ -1,0 +1,95 @@
+[
+ {
+  "note": "What this is: full-size crops of the 4 x 4 area (window = x, y, size in tiles; every crop crosses tile lines), the half-tile shift test of the default tile (exact, 1254 dots), the source-unchanged check (the pipeline must give back the uploaded height and, through the normal rule, the uploaded normal), and an 8 x 8 area at 512 dots."
+ },
+ {
+  "out": "area/crop_a",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    1.5,
+    1.5,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/crop_b",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    2.5,
+    0.5,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/crop_c",
+  "size": 1254,
+  "params": {
+   "recipe.tiles_across": 4,
+   "window": [
+    0.6,
+    2.6,
+    1
+   ]
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "tests/renders/shift_0",
+  "size": 1254,
+  "params": {},
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/shift_half",
+  "size": 1254,
+  "params": {
+   "shift": [
+    0.5,
+    0.5
+   ]
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/source_unchanged",
+  "size": 1254,
+  "params": {
+   "debug.source_unchanged": 1,
+   "stains.amount": 0.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "tests/renders/area8_small",
+  "size": 512,
+  "params": {
+   "recipe.tiles_across": 8
+  },
+  "channels": [
+   "Colour"
+  ]
+ }
+]

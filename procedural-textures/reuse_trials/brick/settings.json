@@ -1,0 +1,46 @@
+{
+ "_what_this_is": "Settings of the brick reuse trial (brick_recipe.py reads this). Every shared layer is unchanged; only these numbers differ from slate. Colours were chosen from the brick reference's measured 16-colour palette (recipes/brick/analysis/palette_k16.npy), sizes from its measured layout numbers; then tuned by hand by eye.",
+
+ "recipe.layout": "brick", "recipe.stack_order": "colour_and_fade,moss,damage,outline_and_shadow,grime", "recipe.height_rule": "brick",
+
+ "layout.rows_per_tile": 12, "layout.slates_per_row": 4, "layout.width_spread": 0.2, "layout.row_slide": 1.0, "layout.row_height_jitter": 0.03,
+ "layout.joint_width": 0.0163, "layout.row_gap": 0.0148, "layout.row_gap_top_share": 0.5, "layout.corner_radius": 0.007,
+ "layout.corner_top_factor": 1.0, "layout.corner_bottom_factor": 1.0, "layout.joint_lean": 0.0, "layout.ragged_side": 0.0015,
+ "layout.ragged_top": 0.0015, "layout.ragged_bottom": 0.002, "layout.bottom_tilt": 0.005, "layout.slate_ramp": 0.0, "layout.bevel_width": 0.003,
+
+ "colour_and_fade.tone_1": "#45332b", "colour_and_fade.tone_2": "#553b30", "colour_and_fade.tone_3": "#6a3c2e", "colour_and_fade.tone_4": "#7a3f2e",
+ "colour_and_fade.tone_5": "#8a422b", "colour_and_fade.tone_6": "#9a462a", "colour_and_fade.tone_7": "#955134", "colour_and_fade.tone_8": "#a9542e",
+ "colour_and_fade.tone_9": "#ab6945", "colour_and_fade.green_tint": "#7a5a48", "colour_and_fade.warm_tint": "#a0522d",
+ "colour_and_fade.tone_centre": 4.6, "colour_and_fade.tone_spread": 1.2, "colour_and_fade.outlier_share": 0.12, "colour_and_fade.outlier_size": 2.0,
+ "colour_and_fade.tint_amount": 0.3, "colour_and_fade.tint_green_share": 0.3, "colour_and_fade.patch_tint": 0.2, "colour_and_fade.fade_direction": 0.0,
+ "colour_and_fade.fade_length": 0.03, "colour_and_fade.streak_width": 0.03, "colour_and_fade.mottle_tallness": 1.0,
+ "colour_and_fade.streak_contrast": 1.6, "colour_and_fade.top_darkening": 0.0, "colour_and_fade.speck_amount": 0.7, "colour_and_fade.speck_cover": 0.12,
+ "colour_and_fade.speck_size": 0.008, "colour_and_fade.streak_bend": 0.01, "colour_and_fade.edge_ragged": 0.004, "colour_and_fade.bleach_amount": 1.0,
+ "colour_and_fade.bleach_cover": 0.3, "colour_and_fade.stain_amount": 0.6, "colour_and_fade.stain_cover": 0.2, "colour_and_fade.patch_size": 0.25,
+ "colour_and_fade.drift_amount": 0.3, "colour_and_fade.grain_amount": 0.2,
+
+ "damage.chip_amount": 0.2, "damage.chip_depth": 0.016, "damage.chip_frequency": 120, "damage.chip_clustering": 2.5, "damage.chip_breakup": 0.8,
+ "damage.side_share": 0.6, "damage.corner_gain": 1.5, "damage.slate_variation": 0.8, "damage.notch_amount": 0.2, "damage.notch_depth": 0.006,
+ "damage.corner_break_amount": 0.15, "damage.corner_break_size": 0.014, "damage.crack_amount": 0.08, "damage.crack_length": 0.03,
+ "damage.crack_width": 0.0018, "damage.scratch_amount": 0.0, "damage.pit_amount": 0.03, "damage.pit_size": 0.002, "damage.break_colour": "#8f6e57",
+ "damage.break_colour_light": "#a8876c", "damage.break_colour_dark": "#75594a", "damage.hole_colour": "#6d5743",
+
+ "moss.amount": 0.0,
+
+ "outline_and_shadow.joint_colour": "#77604c", "outline_and_shadow.joint_width": 0.0005, "outline_and_shadow.band_width": 0.0003,
+ "outline_and_shadow.side_outline_width": 0.003, "outline_and_shadow.side_outline_darkness": 0.9, "outline_and_shadow.outline_colour": "#2a1f1a",
+ "outline_and_shadow.shadow_width": 0.006, "outline_and_shadow.shadow_darkness": 0.4, "outline_and_shadow.shadow_tiers": 2.0,
+ "outline_and_shadow.shadow_drip": 0.4, "outline_and_shadow.black_drips": 0.0, "outline_and_shadow.shadow_colour": "#2a1e18",
+ "outline_and_shadow.lip_offset": 0.0, "outline_and_shadow.lip_width": 0.004, "outline_and_shadow.lip_brightness": 0.6,
+ "outline_and_shadow.lip_breakup": 0.3, "outline_and_shadow.lip_colour": "#3a2a22", "outline_and_shadow.lip_height": 0.0,
+ "outline_and_shadow.edge_darkening": 0.45, "outline_and_shadow.edge_darkening_width": 0.006, "outline_and_shadow.shadow_height": 0.04,
+ "outline_and_shadow.outline_height": 0.03,
+
+ "combine.tone_blend": 1.0, "combine.base_roughness": 0.85,
+
+ "grime.soot_cover": 0.15, "grime.soot_size": 0.07, "grime.soot_tallness": 1.6, "grime.soot_softness": 0.06, "grime.soot_grain": 0.009,
+ "grime.soot_strength": 0.6, "grime.soot_heart_strength": 0.92, "grime.soot_dark_share": 0.5, "grime.pale_cover": 0.12, "grime.palest_cover": 0.04,
+ "grime.dark_cover": 0.35, "grime.mottle_size": 0.007, "grime.soot_colour": "#4a362d", "grime.soot_colour_dark": "#221a17", "grime.soot_streaks": 0.6,
+
+ "height_rule.blend": 1.0, "height_rule.grey_at_zero": 38.7, "height_rule.slope": 2.533
+}

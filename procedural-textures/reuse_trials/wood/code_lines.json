@@ -1,0 +1,87 @@
+{
+ "reused unchanged: shared layers (layer interface, COLOUR AND FADE, DAMAGE, MOSS, OUTLINE AND SHADOW, COMBINE)": {
+  "lines": 987,
+  "files": [
+   "reuse_trials/shared_layers_snapshot/layers/layer_interface.py",
+   "reuse_trials/shared_layers_snapshot/layers/colour_and_fade.py",
+   "reuse_trials/shared_layers_snapshot/layers/damage.py",
+   "reuse_trials/shared_layers_snapshot/layers/moss.py",
+   "reuse_trials/shared_layers_snapshot/layers/outline_and_shadow.py",
+   "reuse_trials/shared_layers_snapshot/layers/combine.py"
+  ]
+ },
+ "reused unchanged: shared slate LAYOUT": {
+  "lines": 171,
+  "files": [
+   "reuse_trials/shared_layers_snapshot/layers/layout.py"
+  ]
+ },
+ "new: WOOD TURN (the layout box that turns the bundle a quarter)": {
+  "lines": 27,
+  "files": [
+   "reuse_trials/wood/wood_layout.py"
+  ]
+ },
+ "new: CRACKS": {
+  "lines": 74,
+  "files": [
+   "reuse_trials/wood/cracks.py"
+  ]
+ },
+ "new: KNOTS": {
+  "lines": 64,
+  "files": [
+   "reuse_trials/wood/knots.py"
+  ]
+ },
+ "new: GRAIN (its own wrapper)": {
+  "lines": 59,
+  "files": [
+   "reuse_trials/wood/grain.py"
+  ]
+ },
+ "borrowed unchanged from the earlier wood build: Wood Grain Gain box": {
+  "lines": 77,
+  "files": [
+   "recipes/wood/generator/wood_shaders.py"
+  ]
+ },
+ "copied from the brick trial with one name changed: HEIGHT RULE box (built only if recipe.height_rule is wood; not in the final settings)": {
+  "lines": 26,
+  "files": [
+   "reuse_trials/wood/height_rule.py"
+  ]
+ },
+ "recipe wiring (a copy of the brick/slate recipe plus the wood layers)": {
+  "lines": 140,
+  "files": [
+   "reuse_trials/wood/wood_recipe.py"
+  ]
+ },
+ "tools and tests": {
+  "lines": 511,
+  "files": [
+   "reuse_trials/wood/run_views.py",
+   "reuse_trials/wood/final_bake.py",
+   "reuse_trials/wood/checks_run.py",
+   "reuse_trials/wood/checks_analyse.py",
+   "reuse_trials/wood/final_scores.py",
+   "reuse_trials/wood/score_pair.py",
+   "reuse_trials/wood/score_views.py",
+   "reuse_trials/wood/set_settings.py",
+   "reuse_trials/wood/make_look_sheet.py",
+   "reuse_trials/wood/measure_reference_once.py",
+   "reuse_trials/wood/make_pictures.py",
+   "reuse_trials/wood/count_code.py"
+  ]
+ },
+ "settings (lines of settings.json that hold a setting)": {
+  "lines": 32
+ },
+ "_summary": {
+  "reused_unchanged": 1158,
+  "new_boxes": 224,
+  "borrowed_unchanged": 77,
+  "share_reused_of_reused_plus_new": 0.838
+ }
+}

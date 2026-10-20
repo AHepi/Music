@@ -1,0 +1,35 @@
+[
+ {
+  "note": "What this is: timing test of the whole idea at the real bake size 1254 dots (harness default 4 samples). Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_t1.json"
+ },
+ {
+  "name": "masks_full",
+  "label": "time_masks_1254",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": true,
+   "boards_per_row": 2
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 4
+ },
+ {
+  "name": "bomb_zone",
+  "label": "time_zone_1254",
+  "builder": "build_bombing_zone",
+  "params": {
+   "tile_mode": true
+  },
+  "channels": [
+   "colour"
+  ],
+  "area": 1,
+  "size": 1254,
+  "samples": 4
+ }
+]

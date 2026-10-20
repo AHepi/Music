@@ -1,0 +1,176 @@
+{
+ "MUD (top: the recipe wiring)": {
+  "nodes": 11,
+  "kinds": {
+   "Group": 9,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {
+   "MUD LAYOUT": 1,
+   "COLOUR AND FADE": 1,
+   "RUTS": 1,
+   "MOSS": 1,
+   "DAMAGE": 1,
+   "STONES": 1,
+   "OUTLINE AND SHADOW": 1,
+   "COMBINE": 1,
+   "MUD HEIGHT RULE": 1
+  }
+ },
+ "MUD LAYOUT": {
+  "nodes": 295,
+  "kinds": {
+   "Math": 224,
+   "Mix": 32,
+   "CombineXYZ": 11,
+   "SeparateColor": 10,
+   "TexWhiteNoise": 9,
+   "MapRange": 3,
+   "SeparateXYZ": 2,
+   "TexNoise": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1
+  },
+  "boxes_inside": {}
+ },
+ "COLOUR AND FADE": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 327,
+   "Mix": 28,
+   "MapRange": 15,
+   "CombineXYZ": 12,
+   "TexNoise": 11,
+   "RGBToBW": 6,
+   "SeparateColor": 5,
+   "VectorMath": 5,
+   "TexWhiteNoise": 4,
+   "Gamma": 2
+  },
+  "boxes_inside": {
+   "Tileable Noise": 1
+  }
+ },
+ "Tileable Noise": {
+  "nodes": 15,
+  "kinds": {
+   "Math": 9,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "CombineXYZ": 1,
+   "VectorMath": 1,
+   "TexNoise": 1
+  },
+  "boxes_inside": {}
+ },
+ "RUTS": {
+  "nodes": 212,
+  "kinds": {
+   "Math": 172,
+   "Mix": 12,
+   "MapRange": 12,
+   "Group": 11,
+   "CombineXYZ": 2,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 11
+  }
+ },
+ "MOSS": {
+  "nodes": 419,
+  "kinds": {
+   "Math": 342,
+   "MapRange": 24,
+   "CombineXYZ": 15,
+   "Mix": 13,
+   "TexNoise": 8,
+   "SeparateColor": 6,
+   "TexWhiteNoise": 4,
+   "Group": 2,
+   "TexVoronoi": 2,
+   "NodeGroupInput": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 2
+  }
+ },
+ "DAMAGE": {
+  "nodes": 307,
+  "kinds": {
+   "Math": 253,
+   "MapRange": 18,
+   "Mix": 14,
+   "CombineXYZ": 8,
+   "TexNoise": 5,
+   "TexWhiteNoise": 3,
+   "SeparateColor": 3,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1
+  },
+  "boxes_inside": {}
+ },
+ "STONES": {
+  "nodes": 637,
+  "kinds": {
+   "Math": 494,
+   "Mix": 35,
+   "CombineXYZ": 31,
+   "SeparateColor": 29,
+   "TexWhiteNoise": 24,
+   "MapRange": 11,
+   "TexNoise": 5,
+   "VectorMath": 3,
+   "Group": 2,
+   "NodeGroupInput": 1
+  },
+  "boxes_inside": {
+   "Tileable Noise": 2
+  }
+ },
+ "OUTLINE AND SHADOW": {
+  "nodes": 216,
+  "kinds": {
+   "Math": 173,
+   "MapRange": 18,
+   "Mix": 9,
+   "CombineXYZ": 6,
+   "TexNoise": 5,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "SeparateXYZ": 1,
+   "TexWhiteNoise": 1,
+   "SeparateColor": 1
+  },
+  "boxes_inside": {}
+ },
+ "COMBINE": {
+  "nodes": 25,
+  "kinds": {
+   "Math": 15,
+   "Mix": 6,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "RGBToBW": 1
+  },
+  "boxes_inside": {}
+ },
+ "MUD HEIGHT RULE": {
+  "nodes": 13,
+  "kinds": {
+   "Math": 8,
+   "NodeGroupInput": 1,
+   "NodeGroupOutput": 1,
+   "Gamma": 1,
+   "SeparateColor": 1,
+   "Mix": 1
+  },
+  "boxes_inside": {}
+ }
+}

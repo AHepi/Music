@@ -1,0 +1,19 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: rows-only tile re-render. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_r1.json"
+ },
+ {
+  "name": "pieces_rows_only",
+  "builder": "build_pieces",
+  "params": {
+   "mode": "rows_only"
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ }
+]

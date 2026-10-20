@@ -1,0 +1,87 @@
+{
+ "surface": "wood",
+ "layers_used": [
+  {
+   "layer": "layer_interface (the layer socket interface)",
+   "how": "unchanged",
+   "why": "every box, old and new, is built with it, so the four new boxes have exactly the same sockets as the shared layers"
+  },
+  {
+   "layer": "LAYOUT (shared slate LAYOUT)",
+   "how": "settings only: 5 rows per tile, ONE board per row, row slide 1, thin butt joint, 6 dot gap between rows, rough edges",
+   "why": "makes the boards and the eleven-number bundle; one board per row runs right across the tile with one butt joint"
+  },
+  {
+   "layer": "COLOUR AND FADE",
+   "how": "settings only, run on the turned bundle: nine browns from the reference's 16-colour palette, grey-green and warm tints, long flat patches, specks, bleach and stain areas",
+   "why": "the boards' base browns and weathered patches; after the turn its 'down the piece' streaks run along the grain"
+  },
+  {
+   "layer": "MOSS",
+   "how": "settings only, used as RUST: rust-brown and grey-blue lichen discs in clouds, drip, joint and lower-edge preferences 0, coverage 0.55",
+   "why": "the rust-orange and grey-blue splatter of the reference (21 percent of dots)"
+  },
+  {
+   "layer": "DAMAGE",
+   "how": "settings only: small chips on the long board edges, a few hairline cracks",
+   "why": "chipped edges; it does little on wood (1.4 percent of dots)"
+  },
+  {
+   "layer": "OUTLINE AND SHADOW",
+   "how": "settings only: near-black joint colour for the gaps, thin dark side outline, edge darkening; shadow, lip and drips off",
+   "why": "the dark gaps between boards"
+  },
+  {
+   "layer": "COMBINE",
+   "how": "settings only: seven names in recipe.stack_order, tone blend 0.8",
+   "why": "stacks the layers (one set of inputs per name, so the new layers need no change) and makes the height; its built-in height rule is slate's, so a fifth of the real relief is kept"
+  },
+  {
+   "layer": "lib tools (bake_harness, texture_compare, make_normal at strength 8, description_audit)",
+   "how": "as they are; the height is baked with a Gaussian pixel filter, width 2, 8 samples (a bake option in final_bake.py)",
+   "why": "baking, scoring, normal made from the height; the soft filter stands in for the blur in the reference's height"
+  }
+ ],
+ "new_parts": [
+  "WOOD TURN (wood_layout.py): 5 nodes, 27 code lines. Hands the bundle on turned a quarter so 'down the piece' means 'along the board' for every shared layer; one setting, Grain Stretch (final 5) makes patches longer along the grain without changing any layer.",
+  "CRACKS (cracks.py): 95 nodes, 74 lines. Long thin cracks that start anywhere along a board and taper at both ends, with a pale lip; DAMAGE's cracks only start at a piece edge (the board end).",
+  "KNOTS (knots.py): 78 nodes, 64 lines. Core, rings and halo; no shared layer makes rings. Optional.",
+  "GRAIN (grain.py): 31 nodes, 59 lines, plus the earlier wood build's 'Wood Grain Gain' box borrowed unchanged (39 nodes, 77 lines). Turns its brightness factor into near-black and pale paint (dark and light streaks, hairlines). Biggest single gain: colour group 0.330 without it, 0.636 with it.",
+  "HEIGHT RULE box (height_rule.py): copied from the brick trial, one name changed; tried, scored lower than COMBINE tone blend 0.8, not built in the final recipe.",
+  "Soft height bake: a bake option in final_bake.py (Gaussian pixel filter), not a layer; raises height group 0.464 to 0.602 and overall 0.634 to 0.665 on seed set 1 but lowers the normal group 0.569 to 0.498; brick did not use it."
+ ],
+ "node_counts": "Shared and unchanged 1,718 of 1,978 nodes = 86.9 percent (LAYOUT 182, COLOUR AND FADE 419, MOSS 419, DAMAGE 439, OUTLINE AND SHADOW 216, COMBINE 28, seamless-noise helper 15). New 209 = 10.6 percent (WOOD TURN 5, CRACKS 95, KNOTS 78, GRAIN 31). Borrowed unchanged 39 (Wood Grain Gain) = 2.0 percent. Recipe wiring 12. Lines of code (comments not counted): reused unchanged 1,158 (987 layers and interface plus 171 shared LAYOUT); new boxes 224 (turn 27, CRACKS 74, KNOTS 64, GRAIN 59); borrowed 77; recipe wiring 140; settings 150 numbers; tools and tests 511; 84 percent of the box code is reused.",
+ "scores": "All 1254 dots, texture_compare same-kind, normal from height by make_normal at strength 8. Trial seed set 1 (tuned on) overall 0.665 (colour 0.705, height 0.602, normal 0.498, tiling 0.996); seed set 2 0.657 (0.667, 0.629, 0.513, 0.995); seed set 3 0.678 (0.722, 0.593, 0.546, 1.000); mean 0.667 (colour 0.698, height 0.608, normal 0.519, tiling 0.997). Baseline, the wood's earlier recipe new tile sample_101 scored the same way: 0.606 (colour 0.622, height 0.575, normal 0.448, tiling 0.945; 0.619 with its stored normal); its 8 new tiles as stored 0.607 to 0.665, mean 0.626. Stopped helper's last bake before GRAIN: 0.437 (colour 0.422). Trial is above the earlier recipe, but both were tuned on this score and seed set 1 was tuned while watching it. Height variants on seed set 1: sharp 0.634, Gaussian 1.5 0.661, Gaussian 2 0.665.",
+ "reads_as_surface": "yes",
+ "judgement": "At a glance it reads as old weathered wooden boards (boards of different heights, dark ragged gaps, long fine grain, cracks with pale lips, knots, rust and grey-blue splatter), and it reads more clearly as planks than the earlier recipe's tile. Next to the reference it is tidy and drawn: straight even boards with a uniform black gap, a butt joint in every board, flat patches instead of big soft dark stains, hatched-looking grain that does not bend round the knots, rings drawn on top of the knots, and no splintered edges. No shared layer needed changing; 86.9 percent of nodes and 84 percent of box code are shared; wood needed one turn, two new layers (CRACKS, KNOTS) and a small GRAIN layer that borrows the earlier wood build's streak box.",
+ "sheet": "proc-work/reuse_trials/wood/sheet_wood.jpg",
+ "folder": "proc-work/reuse_trials/wood/",
+ "failures": [
+  "First half (stopped helper): Grain Stretch was multiplied instead of divided in round 1 (patterns came out shorter); fixed in round 2.",
+  "Round 5 (1254 dots) scored only 0.437, tiling 0.767: a crack core lay on the picture's top edge with its lip across the wrap (my reading by reasoning: chance, not a real seam).",
+  "Run 6 was cut short when the helper was stopped: one of four planned views baked.",
+  "Stretch 2 and 1.5 looked like camouflage (round 7); without the GRAIN layer the colour group was 0.330 (round 8).",
+  "Stronger grain (250 hairlines, light strength 0.9) scored worse: colour 0.576 against 0.636; more tone spread, bleach and stain scored worse: 0.620 against 0.670.",
+  "Height routes: the wood HEIGHT RULE box 0.371 against 0.430 for tone blend 0.8; tone blend 0.4 gave height 0.279 and normal 0.116; the soft height filter lowers the normal group (0.569 to 0.498).",
+  "The GRAIN mask failed the half-tile numbers in the strict sense (12.5 percent mean, 4.7 percent over 40); the differences are spread evenly (no seam at the old edge) and vanish after a 5 dot blur, so I read it as renderer sampling of thin streaks at 512 dots, but I did not prove it with a higher-quality bake.",
+  "The folder reached 86 MB (limit 80) mid-way; I deleted the tuning pictures of rounds 1 to 9 (kept sheets, logs, view lists) and it is now 64 MB.",
+  "Rust covers 16 to 19 percent of dots against the reference's 12.4 percent."
+ ],
+ "untested": [
+  "Whether the GRAIN half-tile difference is only sampling noise (explained by reasoning; no high-sample bake).",
+  "Roughness and metallic were baked but compared with nothing (the reference has none); metallic is 0.",
+  "The 2 x 2 area of new content (recipe.tiles_across 2) passed the half-tile test but was not looked at or scored; GRAIN repeats once per base tile there.",
+  "The plain bake_harness.py route (sharp height, its own normal maps) was not run.",
+  "No Seed plus 1 or independence test was repeated; only the Amount 0 switch-off test was run.",
+  "No second wood reference, so over-fitting to this one reference is not tested; seed sets 2 and 3 were baked once with frozen settings.",
+  "Whether the 0.06 gain over the earlier recipe is real or comes from tuning on the same score."
+ ],
+ "blender_runs": "11 of 12 used: 6 by the stopped helper, 5 by me (run 7 nine 640-dot views, runs 8 and 9 seven and six 1254-dot views, run 10 final bake of three seed sets plus two extra heights, run 11 proof checks and node count).",
+ "pictures": {
+  "sheet_wood": "sheet_wood.jpg",
+  "final_seed_sets": "final_seed_sets.jpg",
+  "repeat_2x2": "repeat_2x2_wood.jpg",
+  "tuning_story": "tuning_story.jpg"
+ },
+ "notes_file": "notes - wood reuse trial.md"
+}

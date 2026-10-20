@@ -1,0 +1,89 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: tile bag, naive Wang, stamp bombing. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_cd1.json"
+ },
+ {
+  "name": "bag16",
+  "builder": "build_bag",
+  "params": {
+   "tiles": 16,
+   "tile_mode": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "bag16",
+  "builder": "build_bag",
+  "params": {
+   "tiles": 16
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "wang_naive",
+  "builder": "build_wang_naive",
+  "params": {},
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "bomb",
+  "builder": "build_bombing",
+  "params": {
+   "tile_mode": true
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "bomb_nostamps",
+  "builder": "build_bombing",
+  "params": {
+   "tile_mode": true,
+   "knots": false,
+   "stains": false
+  },
+  "channels": [
+   "height"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "bomb",
+  "label": "bomb_area",
+  "builder": "build_bombing",
+  "params": {
+   "tile_mode": false
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ }
+]

@@ -1,0 +1,884 @@
+{
+ "what_this_is": "Measurements of the uploaded wood height map (height_as_uploaded.png) and colour map (colour.png), 1254 x 1254. Coordinates are in dots: x to the right (0..1253), y DOWN the picture (0 = top row of the picture).",
+ "height_levels": {
+  "min": 0,
+  "max": 255,
+  "mean": 127.06,
+  "percentiles_1_5_25_50_75_95_99": [
+   3.0,
+   34.0,
+   93.0,
+   128.0,
+   162.0,
+   213.0,
+   245.0
+  ],
+  "note": "The percentiles are almost evenly spaced, so the grey levels are spread nearly evenly from 3 to 250 (the map was probably contrast-equalised). This is why blending two copies of it flattens contrast and why re-stretching the result back to an even spread helps."
+ },
+ "wraps_seamlessly": {
+  "left_to_right": {
+   "jump_across_the_wrap_edge": 0.0904,
+   "normal_jump_between_neighbouring_lines": 0.0227,
+   "ratio_wrap_over_normal": 3.97
+  },
+  "top_to_bottom": {
+   "jump_across_the_wrap_edge": 0.1822,
+   "normal_jump_between_neighbouring_lines": 0.0659,
+   "ratio_wrap_over_normal": 2.76
+  },
+  "verdict": "NO. A seamless picture would give a ratio near 1.0. Left-right gives about 4.0 and top-bottom about 2.8. A straight vertical seam line and a horizontal seam line are visible in a plain 2 x 2 repeat (research/pictures/source_seam_crop.jpg). So windows read from this map must not cross its edges (use only 0..1253 inside the picture), or the seam has to be hidden."
+ },
+ "gaps_between_rows": {
+  "list": [
+   {
+    "between_rows": "R1 and R2",
+    "dark_lines_from_y": 183,
+    "to_y": 192,
+    "darkest_line_y": 189,
+    "width_where_over_half_dark": 7,
+    "share_of_darkest_line_that_is_dark": 0.86,
+    "mean_grey_inside_gap_0_to_255": 35.5,
+    "centre_line_y_every_100_dots_across": [
+     188,
+     188,
+     189,
+     183,
+     186,
+     188,
+     186,
+     188,
+     188,
+     188,
+     188,
+     188,
+     188
+    ],
+    "how_much_the_centre_line_wanders_dots": 6
+   },
+   {
+    "between_rows": "R2 and R3",
+    "dark_lines_from_y": 460,
+    "to_y": 474,
+    "darkest_line_y": 470,
+    "width_where_over_half_dark": 6,
+    "share_of_darkest_line_that_is_dark": 0.76,
+    "mean_grey_inside_gap_0_to_255": 45.9,
+    "centre_line_y_every_100_dots_across": [
+     465,
+     469,
+     470,
+     470,
+     472,
+     471,
+     471,
+     471,
+     465,
+     468,
+     467,
+     462,
+     465
+    ],
+    "how_much_the_centre_line_wanders_dots": 10
+   },
+   {
+    "between_rows": "R3 and R4",
+    "dark_lines_from_y": 700,
+    "to_y": 712,
+    "darkest_line_y": 709,
+    "width_where_over_half_dark": 6,
+    "share_of_darkest_line_that_is_dark": 0.81,
+    "mean_grey_inside_gap_0_to_255": 37.5,
+    "centre_line_y_every_100_dots_across": [
+     707,
+     707,
+     707,
+     706,
+     701,
+     702,
+     707,
+     707,
+     708,
+     709,
+     710,
+     708,
+     708
+    ],
+    "how_much_the_centre_line_wanders_dots": 9
+   },
+   {
+    "between_rows": "R4 and R5",
+    "dark_lines_from_y": 971,
+    "to_y": 983,
+    "darkest_line_y": 980,
+    "width_where_over_half_dark": 6,
+    "share_of_darkest_line_that_is_dark": 0.76,
+    "mean_grey_inside_gap_0_to_255": 43.2,
+    "centre_line_y_every_100_dots_across": [
+     980,
+     981,
+     965,
+     967,
+     977,
+     977,
+     979,
+     975,
+     975,
+     978,
+     980,
+     978,
+     980
+    ],
+    "how_much_the_centre_line_wanders_dots": 16
+   }
+  ],
+  "note": "Four clear dark gaps. Each is 10 to 15 dots wide where more than 30 per cent of the line is dark, and 6 to 7 dots wide where more than half of the line is dark. Their centre lines wander by 6 to 16 dots across the picture (gap 4 dips by about 15 dots near x = 200 to 300), so they are not ruler-straight. In the picture the gap is filled with small dark pebble shapes (dirt in the gap); that was seen by eye, not measured.",
+  "wrap_gap": "The fifth gap (between the bottom row R5 and the top row R1) is not a clean straight gap: it is a ragged, partly open crack at about y = 18 to 30 across the left 400 and right 250 dots, with a thin 18-dot sliver of R5 above it at the very top of the picture. Only 8 to 14 per cent of those lines are dark."
+ },
+ "rows": {
+  "list": [
+   {
+    "row": "R1",
+    "top_y": 28,
+    "bottom_y": 182,
+    "height_in_dots": 155,
+    "mean_grey": 127.1,
+    "share_darker_than_20_percent": 0.07
+   },
+   {
+    "row": "R2",
+    "top_y": 193,
+    "bottom_y": 459,
+    "height_in_dots": 267,
+    "mean_grey": 134.3,
+    "share_darker_than_20_percent": 0.054
+   },
+   {
+    "row": "R3",
+    "top_y": 475,
+    "bottom_y": 699,
+    "height_in_dots": 225,
+    "mean_grey": 125.7,
+    "share_darker_than_20_percent": 0.053
+   },
+   {
+    "row": "R4",
+    "top_y": 713,
+    "bottom_y": 970,
+    "height_in_dots": 258,
+    "mean_grey": 129.1,
+    "share_darker_than_20_percent": 0.06
+   },
+   {
+    "row": "R5",
+    "top_y": 984,
+    "bottom_y": 1253,
+    "height_in_dots": 270,
+    "mean_grey": 132.0,
+    "share_darker_than_20_percent": 0.054
+   }
+  ],
+  "note": "Row tops and bottoms are the first and last lines after the gap. R1 is the shortest (155 dots) because the picture ends in the middle of the wood: the top 28 dots hold the end of row R5 (a 18-dot sliver) plus the ragged crack. R5 therefore runs from y = 984 to the bottom edge. Typical row height is 226 to 270 dots (about 18 to 22 per cent of the picture)."
+ },
+ "butt_joints": {
+  "what_they_are": "Places where a board ends and the next begins inside a row: a crack that runs across the row, usually only part of the row height, often stepped and with a notch. They are NOT clean full-height lines. Each row has two of them (R1 two small ones).",
+  "list_x_range_and_y_range": [
+   {
+    "row": "R1",
+    "x": [
+     690,
+     700
+    ],
+    "y": [
+     85,
+     105
+    ],
+    "kind": "short plank end (a loose board tip), not full height"
+   },
+   {
+    "row": "R1",
+    "x": [
+     1185,
+     1200
+    ],
+    "y": [
+     140,
+     183
+    ],
+    "kind": "notched step near the row edge"
+   },
+   {
+    "row": "R2",
+    "x": [
+     734,
+     750
+    ],
+    "y": [
+     300,
+     350
+    ],
+    "kind": "vertical crack in the upper half, joins a long horizontal crack"
+   },
+   {
+    "row": "R2",
+    "x": [
+     920,
+     950
+    ],
+    "y": [
+     360,
+     462
+    ],
+    "kind": "full lower-half step, board end with notch (clearest joint in R2)"
+   },
+   {
+    "row": "R3",
+    "x": [
+     508,
+     520
+    ],
+    "y": [
+     476,
+     505
+    ],
+    "kind": "short vertical crack at the top of the row"
+   },
+   {
+    "row": "R3",
+    "x": [
+     1075,
+     1095
+    ],
+    "y": [
+     545,
+     645
+    ],
+    "kind": "stacked broken board end (clearest joint in R3)"
+   },
+   {
+    "row": "R4",
+    "x": [
+     585,
+     605
+    ],
+    "y": [
+     748,
+     840
+    ],
+    "kind": "board end with raised notch (clearest joint in R4)"
+   },
+   {
+    "row": "R4",
+    "x": [
+     818,
+     840
+    ],
+    "y": [
+     840,
+     965
+    ],
+    "kind": "vertical crack through the lower half, runs through the knot K4"
+   },
+   {
+    "row": "R5",
+    "x": [
+     905,
+     925
+    ],
+    "y": [
+     992,
+     1060
+    ],
+    "kind": "board end with a white splinter, upper half"
+   },
+   {
+    "row": "R5",
+    "x": [
+     585,
+     615
+    ],
+    "y": [
+     1190,
+     1250
+    ],
+    "kind": "stepped crack in the lower half"
+   }
+  ],
+  "how_checked": "A program looked for dark vertical runs at least 30 dots tall inside the row interiors; every joint above had a match within about 15 dots (see the detector output in tests/measure_wood_source_map.py). The detector also fires on knot centres, so the list was cleaned by eye. Positions are good to about plus or minus 10 dots."
+ },
+ "knots": {
+  "list": [
+   {
+    "name": "K1",
+    "row": "R1",
+    "centre_xy": [
+     988,
+     104
+    ],
+    "ring_radius_dots_about": 42,
+    "note": "full knot with growth rings and a black centre dot, near the right end of R1"
+   },
+   {
+    "name": "K2",
+    "row": "R2",
+    "centre_xy": [
+     350,
+     378
+    ],
+    "ring_radius_dots_about": 58,
+    "note": "biggest knot, wavy grain flows around it, dot area about 125 dots"
+   },
+   {
+    "name": "K3",
+    "row": "R4",
+    "centre_xy": [
+     170,
+     806
+    ],
+    "ring_radius_dots_about": 50,
+    "note": "full knot with rings, left end of R4"
+   },
+   {
+    "name": "K4",
+    "row": "R4",
+    "centre_xy": [
+     832,
+     893
+    ],
+    "ring_radius_dots_about": 50,
+    "note": "partial knot (rings visible, split by a vertical crack, no clean black dot), sits on the R4 joint at x about 830"
+   }
+  ],
+  "how_checked": "Black centre dots (grey below 14 per cent, area 125 to 240 dots) were found by a program within 6 to 22 dots of the centres read by eye (K1, K2, K3). K4 has no clean dot.",
+  "note": "Four knots in the whole map. Windows that contain a knot will show the same knot every time; windows that avoid all four knots are the \"plain wood\" windows. Knots are about 100 dots wide and sit between 8 and 14 per cent of the picture from the left or right edge, which is why a texture that repeats them is easy to spot."
+ },
+ "stains": {
+  "what_they_are": "dark round splotches, flat grey 30 to 110 (wood is 120 to 250), built from many small round dots 4 to 20 dots across, grouped in clusters 80 to 250 dots wide",
+  "share_of_picture_covered_by_stain_dots": 0.115,
+  "number_of_stain_clusters_over_1500_dots_after_joining_dots_closer_than_15": 54,
+  "clusters_largest_first": [
+   {
+    "centre_xy": [
+     460,
+     1131
+    ],
+    "box_x_y_w_h": [
+     319,
+     1032,
+     351,
+     222
+    ],
+    "area_dots": 28281
+   },
+   {
+    "centre_xy": [
+     438,
+     85
+    ],
+    "box_x_y_w_h": [
+     295,
+     0,
+     234,
+     186
+    ],
+    "area_dots": 21792
+   },
+   {
+    "centre_xy": [
+     837,
+     917
+    ],
+    "box_x_y_w_h": [
+     672,
+     839,
+     348,
+     135
+    ],
+    "area_dots": 21788
+   },
+   {
+    "centre_xy": [
+     321,
+     392
+    ],
+    "box_x_y_w_h": [
+     198,
+     325,
+     277,
+     138
+    ],
+    "area_dots": 19926
+   },
+   {
+    "centre_xy": [
+     1082,
+     815
+    ],
+    "box_x_y_w_h": [
+     969,
+     716,
+     245,
+     216
+    ],
+    "area_dots": 19115
+   },
+   {
+    "centre_xy": [
+     1087,
+     407
+    ],
+    "box_x_y_w_h": [
+     962,
+     343,
+     266,
+     120
+    ],
+    "area_dots": 17238
+   },
+   {
+    "centre_xy": [
+     812,
+     288
+    ],
+    "box_x_y_w_h": [
+     735,
+     190,
+     136,
+     222
+    ],
+    "area_dots": 17205
+   },
+   {
+    "centre_xy": [
+     938,
+     128
+    ],
+    "box_x_y_w_h": [
+     810,
+     67,
+     266,
+     119
+    ],
+    "area_dots": 16496
+   },
+   {
+    "centre_xy": [
+     678,
+     507
+    ],
+    "box_x_y_w_h": [
+     550,
+     472,
+     255,
+     90
+    ],
+    "area_dots": 12684
+   },
+   {
+    "centre_xy": [
+     469,
+     545
+    ],
+    "box_x_y_w_h": [
+     379,
+     493,
+     174,
+     108
+    ],
+    "area_dots": 12038
+   },
+   {
+    "centre_xy": [
+     885,
+     751
+    ],
+    "box_x_y_w_h": [
+     773,
+     710,
+     205,
+     109
+    ],
+    "area_dots": 11504
+   },
+   {
+    "centre_xy": [
+     681,
+     614
+    ],
+    "box_x_y_w_h": [
+     605,
+     547,
+     137,
+     156
+    ],
+    "area_dots": 11442
+   },
+   {
+    "centre_xy": [
+     102,
+     1013
+    ],
+    "box_x_y_w_h": [
+     0,
+     981,
+     236,
+     71
+    ],
+    "area_dots": 10129
+   },
+   {
+    "centre_xy": [
+     1181,
+     1025
+    ],
+    "box_x_y_w_h": [
+     1096,
+     981,
+     158,
+     99
+    ],
+    "area_dots": 9978
+   }
+  ],
+  "number_of_separate_round_dots_over_30_dots_area": 438,
+  "biggest_single_dot_areas": [
+   7124,
+   7093,
+   5629,
+   4899,
+   4541,
+   4372,
+   4104,
+   3820
+  ],
+  "note": "The program is rough: it also catches some dark grain and crack shade, so read the numbers as an upper limit and the overlay picture as the check. The clusters are spread over all five rows. They are the second thing (after the knots) that a viewer remembers, so a texture that repeats whole windows repeats them visibly. Stains are separate from the grain: they are a flat dark cut-out on top of it."
+ },
+ "colour_versus_height": {
+  "correlation_with_height": {
+   "sRGB_luma": 0.981,
+   "linear_luma": 0.9279,
+   "red": 0.966,
+   "green": 0.9766,
+   "blue": 0.9001,
+   "mean_of_rgb": 0.9812,
+   "maximum_of_rgb": 0.9662
+  },
+  "correlation_of_srgb_luma_after_blur_sigma_dots": {
+   "0.0": 0.981,
+   "0.5": 0.9925,
+   "0.8": 0.9929,
+   "1.0": 0.9847,
+   "1.5": 0.9527
+  },
+  "correlation_of_srgb_luma_with_height_per_row": {
+   "R1": 0.9802,
+   "R2": 0.9787,
+   "R3": 0.9798,
+   "R4": 0.9799,
+   "R5": 0.9795
+  },
+  "share_of_height_explained_by_a_fitted_tone_curve_of_colour_brightness_R2": 0.9669,
+  "palette_from_height_32_bins_srgb_0_to_255": [
+   [
+    20,
+    15,
+    13
+   ],
+   [
+    33,
+    23,
+    19
+   ],
+   [
+    45,
+    32,
+    26
+   ],
+   [
+    52,
+    37,
+    29
+   ],
+   [
+    56,
+    40,
+    33
+   ],
+   [
+    59,
+    43,
+    36
+   ],
+   [
+    62,
+    46,
+    38
+   ],
+   [
+    65,
+    49,
+    41
+   ],
+   [
+    68,
+    51,
+    42
+   ],
+   [
+    70,
+    53,
+    44
+   ],
+   [
+    73,
+    55,
+    46
+   ],
+   [
+    75,
+    57,
+    47
+   ],
+   [
+    78,
+    59,
+    49
+   ],
+   [
+    80,
+    61,
+    50
+   ],
+   [
+    82,
+    63,
+    52
+   ],
+   [
+    84,
+    64,
+    53
+   ],
+   [
+    86,
+    66,
+    55
+   ],
+   [
+    88,
+    68,
+    56
+   ],
+   [
+    90,
+    70,
+    58
+   ],
+   [
+    93,
+    72,
+    59
+   ],
+   [
+    95,
+    73,
+    61
+   ],
+   [
+    97,
+    75,
+    63
+   ],
+   [
+    100,
+    78,
+    64
+   ],
+   [
+    103,
+    80,
+    65
+   ],
+   [
+    106,
+    82,
+    67
+   ],
+   [
+    110,
+    84,
+    68
+   ],
+   [
+    113,
+    87,
+    70
+   ],
+   [
+    117,
+    90,
+    72
+   ],
+   [
+    122,
+    93,
+    74
+   ],
+   [
+    128,
+    98,
+    77
+   ],
+   [
+    138,
+    104,
+    80
+   ],
+   [
+    158,
+    118,
+    88
+   ]
+  ],
+  "palette_bin_height_edges_0_to_255": [
+   0.0,
+   18.0,
+   43.0,
+   58.0,
+   68.0,
+   75.0,
+   82.0,
+   88.0,
+   93.0,
+   98.0,
+   103.0,
+   107.0,
+   112.0,
+   116.0,
+   120.0,
+   124.0,
+   128.0,
+   132.0,
+   136.0,
+   140.0,
+   144.0,
+   148.0,
+   153.0,
+   158.0,
+   162.0,
+   168.0,
+   173.0,
+   180.0,
+   187.0,
+   196.0,
+   207.0,
+   225.0,
+   255.0
+  ],
+  "colour_error_if_colour_is_made_from_height_by_one_palette_DeltaE_mean_and_95th_percent": [
+   5.27,
+   11.33
+  ],
+  "colour_error_if_each_row_gets_its_own_palette_DeltaE_mean_and_95th_percent": [
+   5.24,
+   11.41
+  ],
+  "note": "Correlation (Pearson) of the colour picture brightness with the height map. A value of 1.0 would mean the height is nothing but the colour brightness. DeltaE is a standard colour-difference number: about 1 is just noticeable, 2 to 5 is a small difference to the eye, over 10 is clearly another colour. The palette error says how wrong the \"colour from height\" comparison version will be, on average, if it uses the best possible single palette for the whole map."
+ },
+ "colour_map_facts": {
+  "mean_srgb_0_to_255": [
+   86.2,
+   65.5,
+   53.3
+  ],
+  "darkest_gap_colour_0_to_255": [
+   41.2,
+   30.1,
+   24.7
+  ],
+  "note": "Colour hues are brown/orange in bright (weathered bare wood) areas and blue-grey in dull areas and stains; a palette from height alone cannot reproduce the orange-versus-blue-grey split where brightness is the same."
+ },
+ "normal_check": {
+  "sobel_strength_scan_against_reference_normal_png": {
+   "6": {
+    "mean_abs_difference_in_x_y_z": [
+     0.0251,
+     0.0585,
+     0.0429
+    ]
+   },
+   "8": {
+    "mean_abs_difference_in_x_y_z": [
+     0.0039,
+     0.0039,
+     0.0041
+    ]
+   },
+   "10": {
+    "mean_abs_difference_in_x_y_z": [
+     0.0209,
+     0.0475,
+     0.0342
+    ]
+   }
+  },
+  "note": "Strength 8 gives the smallest difference if the first number of its pair is lowest here; the notes say wood uses strength 8. The reference normal.png here is the OpenGL one (green up)."
+ },
+ "numbers_for_the_builder": {
+  "what_this_is": "Source slices that each start 3 dots above a dark gap and run to just above the next gap (so every slice is one gap on top plus one board row). They follow each other without overlap from y = 180 to the bottom of the map, so they can be laid one after another or in any order.",
+  "slices_y_start_and_length_in_dots": [
+   {
+    "row": "R2",
+    "start_y": 180,
+    "length": 277,
+    "scale_to_fit_a_row_of_250.8_dots": 1.104
+   },
+   {
+    "row": "R3",
+    "start_y": 457,
+    "length": 240,
+    "scale_to_fit_a_row_of_250.8_dots": 0.957
+   },
+   {
+    "row": "R4",
+    "start_y": 697,
+    "length": 270,
+    "scale_to_fit_a_row_of_250.8_dots": 1.077
+   },
+   {
+    "row": "R5",
+    "start_y": 967,
+    "length": 287,
+    "scale_to_fit_a_row_of_250.8_dots": 1.144
+   }
+  ],
+  "row_R1_not_used_because": "it is only 155 dots tall (165 with its lower gap) and would need a 1.5 times zoom to fill a row of 250.8 dots",
+  "knot_free_stretches_in_x_for_each_slice": {
+   "R2": [
+    470,
+    1253
+   ],
+   "R3": [
+    0,
+    1253
+   ],
+   "R4": [
+    290,
+    710
+   ],
+   "R5": [
+    0,
+    1253
+   ]
+  },
+  "knots_x_in_each_slice": {
+   "R2": [
+    350
+   ],
+   "R4": [
+    170,
+    832
+   ]
+  },
+  "note": "Knot-free stretch = x range where a window does not touch a knot disc (radius about 58 plus 60 dots of margin). Row R4 has two knots, so only 420 dots of it are knot-free; R2 has 784. R3 and R5 have none."
+ }
+}

@@ -1,0 +1,79 @@
+[
+ {
+  "note": "What this is: a list of test pictures for run_tests.py, one entry per picture (the first line is this note). Purpose: large-scale masks and the palette-from-height comparison. Use: blender -b --disable-autoexec -t 2 --python run_tests.py -- jobs_e1.json"
+ },
+ {
+  "name": "masks_full",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": true
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "masks_full",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": false
+  },
+  "channels": [
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "masks_off",
+  "builder": "build_masks",
+  "params": {
+   "tone_big": 0.0,
+   "stain_big": 0.0,
+   "board_tone": 0.0,
+   "tile_mode": true
+  },
+  "channels": [
+   "height",
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ },
+ {
+  "name": "masks_off",
+  "builder": "build_masks",
+  "params": {
+   "tone_big": 0.0,
+   "stain_big": 0.0,
+   "board_tone": 0.0,
+   "tile_mode": false
+  },
+  "channels": [
+   "colour"
+  ],
+  "area": 4,
+  "size": 1024,
+  "samples": 8
+ },
+ {
+  "name": "palette",
+  "builder": "build_masks",
+  "params": {
+   "tile_mode": true,
+   "colour_source": "height_palette"
+  },
+  "channels": [
+   "colour"
+  ],
+  "area": 1,
+  "size": 512,
+  "samples": 8
+ }
+]

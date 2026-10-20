@@ -1,0 +1,43 @@
+{
+ "_what_this_is": "Settings of the gravel reuse trial (gravel_recipe.py reads this). Every shared layer is unchanged; only these numbers differ from slate. Stone colours are the 8 measured stone colours of the gravel reference (recipes/gravel/scores/measurements.json, stone_palette_rgb) sorted dark to light, the 9th (a rust orange) was chosen by eye; soil colours come from the measured soil palette; sizes were chosen by eye from the 04 gravel guides; then everything was tuned by hand over nine Blender runs. MOSS is not in the stack (it was tried as rust: settings kept in rounds/settings_moss_as_rust_tried.json).",
+
+ "recipe.stack_order": "colour_and_fade,facets,damage,outline_and_shadow,soil", "recipe.height_rule": "gravel",
+
+ "gravel_layout.big_presence": 0.6, "gravel_layout.middle_presence": 0.7, "gravel_layout.small_presence": 0.5, "gravel_layout.big_radius_low": 0.3,
+ "gravel_layout.big_radius_high": 0.46, "gravel_layout.middle_radius_low": 0.28, "gravel_layout.middle_radius_high": 0.4,
+ "gravel_layout.small_radius_low": 0.26, "gravel_layout.small_radius_high": 0.4, "gravel_layout.jitter": 0.06, "gravel_layout.shadow_reach": 0.005,
+ "gravel_layout.ragged_edges": 0.18,
+
+ "colour_and_fade.tone_1": "#131313", "colour_and_fade.tone_2": "#212123", "colour_and_fade.tone_3": "#2a2e33", "colour_and_fade.tone_4": "#393938",
+ "colour_and_fade.tone_5": "#3c454c", "colour_and_fade.tone_6": "#575450", "colour_and_fade.tone_7": "#535d62", "colour_and_fade.tone_8": "#6f7574",
+ "colour_and_fade.tone_9": "#a8683a", "colour_and_fade.green_tint": "#3c4c58", "colour_and_fade.warm_tint": "#b0662f",
+ "colour_and_fade.tone_centre": 1.2, "colour_and_fade.tone_spread": 1.6, "colour_and_fade.outlier_share": 0.06, "colour_and_fade.tint_amount": 0.7,
+ "colour_and_fade.tint_green_share": 0.7, "colour_and_fade.patch_tint": 0.3, "colour_and_fade.fade_direction": -1.0,
+ "colour_and_fade.fade_length": 0.02, "colour_and_fade.streak_width": 0.012, "colour_and_fade.mottle_tallness": 1.0,
+ "colour_and_fade.streak_contrast": 2.0, "colour_and_fade.top_darkening": 0.0, "colour_and_fade.speck_amount": 1.2, "colour_and_fade.speck_cover": 0.2,
+ "colour_and_fade.speck_size": 0.007, "colour_and_fade.streak_bend": 0.012, "colour_and_fade.edge_ragged": 0.004, "colour_and_fade.bleach_amount": 0.3,
+ "colour_and_fade.stain_amount": 0.3, "colour_and_fade.patch_size": 0.2, "colour_and_fade.drift_amount": 0.2, "colour_and_fade.grain_amount": 0.03,
+ "colour_and_fade.fade_amount": 0.8, "colour_and_fade.outlier_size": 7.0,
+
+ "facets.light_colour": "#80898c", "facets.cuts": 3, "facets.facet_strength": 0.3, "facets.cut_spread": 0.5,
+
+ "damage.chip_amount": 0.4, "damage.chip_depth": 0.01, "damage.chip_frequency": 150, "damage.chip_clustering": 0.6, "damage.chip_breakup": 0.8,
+ "damage.side_share": 0.7, "damage.corner_gain": 0.5, "damage.notch_amount": 0.2, "damage.notch_depth": 0.004, "damage.corner_break_amount": 0.05,
+ "damage.corner_break_size": 0.008, "damage.crack_amount": 0.15, "damage.crack_length": 0.02, "damage.crack_width": 0.0015,
+ "damage.scratch_amount": 0.1, "damage.scratch_length": 0.012, "damage.pit_amount": 0.08, "damage.pit_size": 0.0015, "damage.break_colour": "#3a434a",
+ "damage.break_colour_light": "#5a666e", "damage.break_colour_dark": "#1f2427", "damage.hole_colour": "#12100f",
+
+ "outline_and_shadow.joint_colour": "#613f2d", "outline_and_shadow.joint_width": 0.0, "outline_and_shadow.band_width": 0.0,
+ "outline_and_shadow.side_outline_darkness": 0.0, "outline_and_shadow.shadow_darkness": 0.0, "outline_and_shadow.shadow_height": 0.0,
+ "outline_and_shadow.lip_brightness": 0.0, "outline_and_shadow.lip_height": 0.0, "outline_and_shadow.outline_height": 0.0,
+ "outline_and_shadow.edge_darkening": 0.15, "outline_and_shadow.edge_darkening_width": 0.003, "outline_and_shadow.black_drips": 0.0,
+ "outline_and_shadow.outline_colour": "#101010",
+
+ "soil.shadow_near_strength": 0.35, "soil.shadow_far_strength": 0.15, "soil.lighter_colour": "#6c5b4b", "soil.light_colour": "#765035",
+ "soil.pale_colour": "#967557", "soil.crumb_dark_cover": 0.12, "soil.crumb_size": 0.004, "soil.lump_size": 0.01, "soil.crumb_pale_cover": 0.03,
+ "soil.darkest_colour": "#251c16", "soil.dark_colour": "#3b2a1f", "soil.pale_cover": 0.08,
+
+ "height_rule.blend": 0.9,
+
+ "combine.tone_blend": 0.0, "combine.base_roughness": 0.85
+}

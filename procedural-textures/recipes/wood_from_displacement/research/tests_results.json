@@ -1,0 +1,434 @@
+{
+ "what_this_is": "Numbers measured on the research test pictures (made by run_tests.py from the job files in this folder). Written by analyse_tests.py. Every block has a note that says what the number means.",
+ "seam_check_2x2_tile_mode": {
+  "note": "ratio about 1.0 = no seam. The source picture repeated by itself is the comparison.",
+  "results": {
+   "plain source repeated": {
+    "tile_edge_vertical_line_jump_over_typical_jump": 1.68,
+    "outer_wrap_left_right_jump_over_typical_jump": 1.68,
+    "tile_edge_horizontal_line_jump": 0.167,
+    "ordinary_row_boundary_jumps_min_mean_max": [
+     0.094,
+     0.113,
+     0.142
+    ],
+    "outer_wrap_top_bottom_jump": 0.166,
+    "four_tiles_compared": {
+     "mean_difference_between_tiles_0_to_1": 0.0076,
+     "share_of_dots_differing_by_over_0.05": 0.0067
+    }
+   },
+   "pieces (curated), tile mode, height": {
+    "tile_edge_vertical_line_jump_over_typical_jump": 1.13,
+    "outer_wrap_left_right_jump_over_typical_jump": 1.14,
+    "tile_edge_horizontal_line_jump": 0.23,
+    "ordinary_row_boundary_jumps_min_mean_max": [
+     0.154,
+     0.194,
+     0.212
+    ],
+    "outer_wrap_top_bottom_jump": 0.23,
+    "four_tiles_compared": {
+     "mean_difference_between_tiles_0_to_1": 0.008,
+     "share_of_dots_differing_by_over_0.05": 0.009
+    }
+   },
+   "whole idea (masks), tile mode, height": {
+    "tile_edge_vertical_line_jump_over_typical_jump": 1.07,
+    "outer_wrap_left_right_jump_over_typical_jump": 1.07,
+    "tile_edge_horizontal_line_jump": 0.228,
+    "ordinary_row_boundary_jumps_min_mean_max": [
+     0.127,
+     0.174,
+     0.199
+    ],
+    "outer_wrap_top_bottom_jump": 0.228,
+    "four_tiles_compared": {
+     "mean_difference_between_tiles_0_to_1": 0.0074,
+     "share_of_dots_differing_by_over_0.05": 0.007
+    }
+   },
+   "hex Gaussian, tile mode, height": {
+    "tile_edge_vertical_line_jump_over_typical_jump": 4.72,
+    "outer_wrap_left_right_jump_over_typical_jump": 4.7,
+    "tile_edge_horizontal_line_jump": 0.232,
+    "ordinary_row_boundary_jumps_min_mean_max": [
+     0.077,
+     0.106,
+     0.122
+    ],
+    "outer_wrap_top_bottom_jump": 0.232,
+    "four_tiles_compared": {
+     "mean_difference_between_tiles_0_to_1": 0.0076,
+     "share_of_dots_differing_by_over_0.05": 0.0058
+    }
+   },
+   "pieces (curated), tile mode, colour brightness": {
+    "tile_edge_vertical_line_jump_over_typical_jump": 1.15,
+    "outer_wrap_left_right_jump_over_typical_jump": 1.16,
+    "tile_edge_horizontal_line_jump": 0.101,
+    "ordinary_row_boundary_jumps_min_mean_max": [
+     0.07,
+     0.086,
+     0.099
+    ],
+    "outer_wrap_top_bottom_jump": 0.101,
+    "four_tiles_compared": {
+     "mean_difference_between_tiles_0_to_1": 0.0049,
+     "share_of_dots_differing_by_over_0.05": 0.0007
+    }
+   },
+   "whole idea (masks), tile mode, colour brightness": {
+    "tile_edge_vertical_line_jump_over_typical_jump": 1.02,
+    "outer_wrap_left_right_jump_over_typical_jump": 1.02,
+    "tile_edge_horizontal_line_jump": 0.102,
+    "ordinary_row_boundary_jumps_min_mean_max": [
+     0.056,
+     0.081,
+     0.092
+    ],
+    "outer_wrap_top_bottom_jump": 0.102,
+    "four_tiles_compared": {
+     "mean_difference_between_tiles_0_to_1": 0.0046,
+     "share_of_dots_differing_by_over_0.05": 0.0005
+    }
+   }
+  }
+ },
+ "repeat_check_4x4": {
+  "note": "Height pictures, 4 x 4 tiles in 1024 dots, 20 rows. 40 random templates cut from inside a board row, searched in all other rows (left-right flipped too). 1.0 = identical copy exists. A 36 x 80 template is about 175 x 390 source dots (most of a board); 24 x 40 is about 120 x 195 source dots (a knot or a crack pattern). Vertical zoom differences of up to 12 per cent between boards lower the score of a copy a little, so a score near 0.8 still means very alike.",
+  "results": {
+   "plain source repeated (4 x 4)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.99,
+     "ninetieth_percent": 0.99,
+     "worst": 0.99,
+     "share_with_a_near_copy_over_0.8": 1.0,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.99,
+     "ninetieth_percent": 0.99,
+     "worst": 1.0,
+     "share_with_a_near_copy_over_0.8": 1.0,
+     "templates": 40
+    }
+   },
+   "pieces, rows only (sideways shift + flip)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.96,
+     "ninetieth_percent": 0.99,
+     "worst": 1.0,
+     "share_with_a_near_copy_over_0.8": 0.72,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.99,
+     "ninetieth_percent": 0.99,
+     "worst": 0.99,
+     "share_with_a_near_copy_over_0.8": 0.8,
+     "templates": 40
+    }
+   },
+   "pieces, free random start (full)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.78,
+     "ninetieth_percent": 0.95,
+     "worst": 0.98,
+     "share_with_a_near_copy_over_0.8": 0.47,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.92,
+     "ninetieth_percent": 0.97,
+     "worst": 0.98,
+     "share_with_a_near_copy_over_0.8": 0.72,
+     "templates": 40
+    }
+   },
+   "pieces, knots rationed (curated)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.81,
+     "ninetieth_percent": 0.96,
+     "worst": 0.98,
+     "share_with_a_near_copy_over_0.8": 0.53,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.92,
+     "ninetieth_percent": 0.97,
+     "worst": 0.99,
+     "share_with_a_near_copy_over_0.8": 0.78,
+     "templates": 40
+    }
+   },
+   "pieces + stamps (curated + bombing)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.71,
+     "ninetieth_percent": 0.82,
+     "worst": 0.88,
+     "share_with_a_near_copy_over_0.8": 0.15,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.79,
+     "ninetieth_percent": 0.94,
+     "worst": 0.96,
+     "share_with_a_near_copy_over_0.8": 0.47,
+     "templates": 40
+    }
+   },
+   "whole idea: pieces + stamps + large masks": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.69,
+     "ninetieth_percent": 0.78,
+     "worst": 0.88,
+     "share_with_a_near_copy_over_0.8": 0.1,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.77,
+     "ninetieth_percent": 0.93,
+     "worst": 0.96,
+     "share_with_a_near_copy_over_0.8": 0.45,
+     "templates": 40
+    }
+   },
+   "pieces, free random start, shorter boards (3 per row)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.69,
+     "ninetieth_percent": 0.82,
+     "worst": 0.98,
+     "share_with_a_near_copy_over_0.8": 0.15,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.81,
+     "ninetieth_percent": 0.97,
+     "worst": 0.98,
+     "share_with_a_near_copy_over_0.8": 0.57,
+     "templates": 40
+    }
+   },
+   "pieces, knots rationed, shorter boards (3 per row)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.68,
+     "ninetieth_percent": 0.86,
+     "worst": 0.97,
+     "share_with_a_near_copy_over_0.8": 0.2,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.82,
+     "ninetieth_percent": 0.97,
+     "worst": 0.98,
+     "share_with_a_near_copy_over_0.8": 0.55,
+     "templates": 40
+    }
+   },
+   "random tile bag of 16": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.98,
+     "ninetieth_percent": 0.99,
+     "worst": 0.99,
+     "share_with_a_near_copy_over_0.8": 0.97,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.99,
+     "ninetieth_percent": 0.99,
+     "worst": 0.99,
+     "share_with_a_near_copy_over_0.8": 0.97,
+     "templates": 40
+    }
+   },
+   "random tile bag of 64": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.95,
+     "ninetieth_percent": 0.99,
+     "worst": 0.99,
+     "share_with_a_near_copy_over_0.8": 0.75,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.98,
+     "ninetieth_percent": 0.99,
+     "worst": 0.99,
+     "share_with_a_near_copy_over_0.8": 0.82,
+     "templates": 40
+    }
+   },
+   "Voronoi patches with random shift (rows destroyed: score not comparable)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.14,
+     "ninetieth_percent": 0.15,
+     "worst": 0.15,
+     "share_with_a_near_copy_over_0.8": 0.0,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.24,
+     "ninetieth_percent": 0.26,
+     "worst": 0.28,
+     "share_with_a_near_copy_over_0.8": 0.0,
+     "templates": 40
+    }
+   },
+   "whole idea, shorter boards (3 per row)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.57,
+     "ninetieth_percent": 0.72,
+     "worst": 0.82,
+     "share_with_a_near_copy_over_0.8": 0.03,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.69,
+     "ninetieth_percent": 0.85,
+     "worst": 0.92,
+     "share_with_a_near_copy_over_0.8": 0.2,
+     "templates": 40
+    }
+   },
+   "whole idea, short boards (4 per row)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.5,
+     "ninetieth_percent": 0.6,
+     "worst": 0.69,
+     "share_with_a_near_copy_over_0.8": 0.0,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.72,
+     "ninetieth_percent": 0.89,
+     "worst": 0.92,
+     "share_with_a_near_copy_over_0.8": 0.3,
+     "templates": 40
+    }
+   },
+   "hex Gaussian blend of the whole map (rows destroyed: score not comparable)": {
+    "board_size_template_36x80": {
+     "median_best_match": 0.3,
+     "ninetieth_percent": 0.36,
+     "worst": 0.41,
+     "share_with_a_near_copy_over_0.8": 0.0,
+     "templates": 40
+    },
+    "feature_size_template_24x40": {
+     "median_best_match": 0.49,
+     "ninetieth_percent": 0.62,
+     "worst": 0.75,
+     "share_with_a_near_copy_over_0.8": 0.0,
+     "templates": 40
+    }
+   }
+  }
+ },
+ "grey_spread_and_gap_lines": {
+  "note": "The source has 4 clear dark gap lines between its 5 rows. A 512-dot view of the whole source shows them too (the \"plain repeat 512 view\" line).",
+  "results": {
+   "the source map itself": {
+    "standard_deviation": 0.205,
+    "mean": 0.498,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.281,
+    "gap_lines_found": 4
+   },
+   "hex hard patches": {
+    "standard_deviation": 0.186,
+    "mean": 0.492,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.329,
+    "gap_lines_found": 0
+   },
+   "hex linear blend": {
+    "standard_deviation": 0.132,
+    "mean": 0.492,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.47,
+    "gap_lines_found": 0
+   },
+   "hex variance-kept blend": {
+    "standard_deviation": 0.186,
+    "mean": 0.491,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.324,
+    "gap_lines_found": 0
+   },
+   "hex Gaussian (Heitz-Neyret style) blend": {
+    "standard_deviation": 0.19,
+    "mean": 0.489,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.316,
+    "gap_lines_found": 0
+   },
+   "Voronoi patches (hard edges)": {
+    "standard_deviation": 0.192,
+    "mean": 0.503,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.316,
+    "gap_lines_found": 0
+   },
+   "pieces (curated)": {
+    "standard_deviation": 0.197,
+    "mean": 0.495,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.3,
+    "gap_lines_found": 6
+   },
+   "plain repeat 512 view": {
+    "standard_deviation": 0.194,
+    "mean": 0.498,
+    "unevenness_of_spread_(0 = perfectly even, bigger = bell shaped or lumpy)": 0.31,
+    "gap_lines_found": 4
+   }
+  }
+ },
+ "colour_brightness_versus_height_correlation": {
+  "note": "Same arrangement, colour map sampled with exactly the same windows as the height map: how well the brightness of the colour predicts the height in the new picture (the untouched source gives 0.981). Per-board tone and large masks lower it a little by design.",
+  "results": {
+   "pieces (curated)": 0.984,
+   "pieces + stamps": 0.984,
+   "whole idea (masks on)": 0.976,
+   "whole idea (masks off)": 0.964,
+   "pieces + stamps made with a repeat zone": 0.984
+  }
+ },
+ "colour_from_height_comparison": {
+  "mean_DeltaE_between_colour_map_version_and_palette_version": 4.32,
+  "95th_percent": 10.3,
+  "mean_colour_map_version_rgb_0_255": [
+   79.1,
+   59.8,
+   48.6
+  ],
+  "mean_palette_version_rgb_0_255": [
+   78.7,
+   59.6,
+   48.6
+  ],
+  "note": "Same arrangement, same tone shifts, same masks. Only the colour source differs: the colour map versus a palette mapped from the height."
+ },
+ "normal_check": {
+  "note": "The plain source rendered at full size (1254) through the Blender nodes, then turned into a normal map at strength 8, compared with the uploaded OpenGL normal map. With the numpy filter straight on the uploaded height the difference is 0.004.",
+  "results": {
+   "harness default sampling (4 samples, pixel filter width 1.0)": {
+    "height_render_versus_uploaded_height_mean_abs_diff_0_to_1": 0.0088,
+    "sobel_strength_8_normal_versus_uploaded_normal_mean_abs_diff_xyz": [
+     0.0266,
+     0.0352,
+     0.019
+    ]
+   },
+   "sharp sampling (1 sample, pixel filter width 0.01)": {
+    "height_render_versus_uploaded_height_mean_abs_diff_0_to_1": 0.0006,
+    "sobel_strength_8_normal_versus_uploaded_normal_mean_abs_diff_xyz": [
+     0.0068,
+     0.0064,
+     0.0044
+    ]
+   }
+  }
+ },
+ "reading_mode_edge_energy_ratio_to_source": {
+  "note": "Mean dot-to-dot jump of an arranged tile (rows squeezed 4 to 14 per cent to fit, so the number is above 1 for every mode) divided by the source value. Compare the three modes with each other: Closest keeps the most edge energy (and shows staircase edges), Linear a little less, Cubic (a smoothing B-spline in Blender) the least.",
+  "results": {
+   "closest": 1.049,
+   "linear": 0.964,
+   "cubic": 0.891
+  }
+ }
+}

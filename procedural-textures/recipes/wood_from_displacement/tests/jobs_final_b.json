@@ -1,0 +1,93 @@
+[
+ {
+  "note": "What this is: the area bakes of the wood-from-maps recipe: a 2 x 2 area and a 4 x 4 area of NEW boards (colour and height), the tile repeated 2 x 2 (seam check picture), and exact debug pictures of the 4 x 4 area (which source dot every dot was taken from, board colours, flips and knots), all at 2508 dots."
+ },
+ {
+  "out": "area/area_2x2",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 2
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "area/tile_repeated_2x2",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 2,
+   "recipe.tile_repeats": 1
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_source_x",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "source_x",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_source_y",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "source_y",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Height"
+  ]
+ },
+ {
+  "out": "area/debug_boards",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "boards",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/debug_flips",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "debug_view": "flips",
+   "bake.shrink_samples": 1,
+   "bake.shrink_filter": 0.01
+  },
+  "channels": [
+   "Colour"
+  ]
+ },
+ {
+  "out": "area/area_4x4",
+  "size": 2508,
+  "params": {
+   "recipe.tiles_across": 4,
+   "bake.shrink_samples": 4,
+   "bake.shrink_filter": 1.0
+  },
+  "channels": [
+   "Colour",
+   "Height"
+  ]
+ }
+]

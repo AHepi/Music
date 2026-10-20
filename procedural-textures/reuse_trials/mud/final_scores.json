@@ -1,0 +1,453 @@
+{
+ "table": {
+  "seeds_1": {
+   "overall": 0.497,
+   "colour": 0.473,
+   "height": 0.492,
+   "normal": 0.334,
+   "tiling": 0.989
+  },
+  "seeds_2": {
+   "overall": 0.47,
+   "colour": 0.419,
+   "height": 0.504,
+   "normal": 0.3,
+   "tiling": 1.0
+  },
+  "seeds_3": {
+   "overall": 0.555,
+   "colour": 0.57,
+   "height": 0.543,
+   "normal": 0.305,
+   "tiling": 1.0
+  },
+  "baseline tile_101, normal remade at strength 9": {
+   "overall": 0.391,
+   "colour": 0.313,
+   "height": 0.488,
+   "normal": 0.139,
+   "tiling": 1.0
+  },
+  "baseline tile_101, as stored": {
+   "overall": 0.407,
+   "colour": 0.313,
+   "height": 0.488,
+   "normal": 0.247,
+   "tiling": 1.0
+  },
+  "trial mean of the sets": {
+   "overall": 0.507,
+   "colour": 0.487,
+   "height": 0.513,
+   "normal": 0.313,
+   "tiling": 0.996
+  }
+ },
+ "control_overall_against_other_references": {
+  "seeds_1": {
+   "brick": 0.344,
+   "slate": 0.239,
+   "wood": 0.267,
+   "metal": 0.283,
+   "gravel": 0.354
+  },
+  "seeds_2": {
+   "brick": 0.365,
+   "slate": 0.254,
+   "wood": 0.27,
+   "metal": 0.274,
+   "gravel": 0.391
+  },
+  "seeds_3": {
+   "brick": 0.365,
+   "slate": 0.237,
+   "wood": 0.281,
+   "metal": 0.281,
+   "gravel": 0.363
+  },
+  "baseline tile_101, normal remade at strength 9": {
+   "brick": 0.325,
+   "slate": 0.369,
+   "wood": 0.25,
+   "metal": 0.334,
+   "gravel": 0.337
+  }
+ },
+ "full_reports": {
+  "seeds_1": {
+   "reference": "mud",
+   "candidate": "proc-work/reuse_trials/mud/final/seeds_1",
+   "overall": 0.497,
+   "groups": {
+    "colour": 0.473,
+    "height": 0.492,
+    "normal": 0.334,
+    "tiling": 0.989
+   },
+   "scores": {
+    "colour_distribution": 0.801,
+    "colour_spectrum": 0.082,
+    "colour_orientation": 0.23,
+    "colour_scale": 0.641,
+    "colour_gradient": 0.278,
+    "seam": 0.989,
+    "height_distribution": 0.586,
+    "height_spectrum": 0.231,
+    "height_gradient": 0.368,
+    "height_colour_link": 0.801,
+    "height_contrast": 0.754,
+    "normal_tilt": 0.222,
+    "normal_components": 0.67,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0114,
+    "colour_spectrum": 0.1749,
+    "colour_orientation": 0.2294,
+    "colour_scale": 0.1438,
+    "colour_gradient": 0.0054,
+    "seam": 0.0225,
+    "height_distribution": 0.0414,
+    "height_spectrum": 0.2306,
+    "height_gradient": 0.0095,
+    "height_colour_link": 0.01,
+    "height_contrast": 0.123,
+    "normal_tilt": 0.0564,
+    "normal_components": 0.0701,
+    "normal_height_agreement": 0.0505
+   },
+   "facts": {
+    "seam_ratio_candidate": 1.02,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     7.0,
+     8.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     31.1,
+     9.0,
+     11.6
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.997,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.9082819029187126,
+     0.9000760956702694
+    ]
+   }
+  },
+  "seeds_2": {
+   "reference": "mud",
+   "candidate": "proc-work/reuse_trials/mud/final/seeds_2",
+   "overall": 0.47,
+   "groups": {
+    "colour": 0.419,
+    "height": 0.504,
+    "normal": 0.3,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.755,
+    "colour_spectrum": 0.082,
+    "colour_orientation": 0.264,
+    "colour_scale": 0.474,
+    "colour_gradient": 0.227,
+    "seam": 1.0,
+    "height_distribution": 0.564,
+    "height_spectrum": 0.263,
+    "height_gradient": 0.411,
+    "height_colour_link": 0.79,
+    "height_contrast": 0.752,
+    "normal_tilt": 0.171,
+    "normal_components": 0.642,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.014,
+    "colour_spectrum": 0.175,
+    "colour_orientation": 0.2192,
+    "colour_scale": 0.2106,
+    "colour_gradient": 0.0058,
+    "seam": 0.0,
+    "height_distribution": 0.0436,
+    "height_spectrum": 0.221,
+    "height_gradient": 0.0088,
+    "height_colour_link": 0.0105,
+    "height_contrast": 0.1238,
+    "normal_tilt": 0.06,
+    "normal_components": 0.076,
+    "normal_height_agreement": 0.0474
+   },
+   "facts": {
+    "seam_ratio_candidate": 1.0,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     8.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     30.0,
+     8.9,
+     11.4
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.997,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.9104468630546366,
+     0.9041164706906719
+    ]
+   }
+  },
+  "seeds_3": {
+   "reference": "mud",
+   "candidate": "proc-work/reuse_trials/mud/final/seeds_3",
+   "overall": 0.555,
+   "groups": {
+    "colour": 0.57,
+    "height": 0.543,
+    "normal": 0.305,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.78,
+    "colour_spectrum": 0.43,
+    "colour_orientation": 0.235,
+    "colour_scale": 0.808,
+    "colour_gradient": 0.245,
+    "seam": 1.0,
+    "height_distribution": 0.631,
+    "height_spectrum": 0.338,
+    "height_gradient": 0.429,
+    "height_colour_link": 0.802,
+    "height_contrast": 0.721,
+    "normal_tilt": 0.178,
+    "normal_components": 0.648,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0126,
+    "colour_spectrum": 0.1087,
+    "colour_orientation": 0.2278,
+    "colour_scale": 0.0771,
+    "colour_gradient": 0.0057,
+    "seam": 0.0,
+    "height_distribution": 0.0369,
+    "height_spectrum": 0.1986,
+    "height_gradient": 0.0086,
+    "height_colour_link": 0.0099,
+    "height_contrast": 0.1397,
+    "normal_tilt": 0.0595,
+    "normal_components": 0.0746,
+    "normal_height_agreement": 0.0499
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.98,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     7.0,
+     7.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     30.6,
+     8.6,
+     10.9
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.997,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.9091689098928682,
+     0.900441584375124
+    ]
+   }
+  },
+  "baseline tile_101, normal remade at strength 9": {
+   "reference": "mud",
+   "candidate": "proc-work/reuse_trials/mud/baseline_tile_101",
+   "overall": 0.391,
+   "groups": {
+    "colour": 0.313,
+    "height": 0.488,
+    "normal": 0.139,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.751,
+    "colour_spectrum": 0.0,
+    "colour_orientation": 0.063,
+    "colour_scale": 0.327,
+    "colour_gradient": 0.0,
+    "seam": 1.0,
+    "height_distribution": 0.783,
+    "height_spectrum": 0.255,
+    "height_gradient": 0.1,
+    "height_colour_link": 0.82,
+    "height_contrast": 0.802,
+    "normal_tilt": 0.0,
+    "normal_components": 0.417,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0142,
+    "colour_spectrum": 0.2302,
+    "colour_orientation": 0.279,
+    "colour_scale": 0.2695,
+    "colour_gradient": 0.009,
+    "seam": 0.0,
+    "height_distribution": 0.0217,
+    "height_spectrum": 0.2234,
+    "height_gradient": 0.0135,
+    "height_colour_link": 0.009,
+    "height_contrast": 0.0992,
+    "normal_tilt": 0.0979,
+    "normal_components": 0.1237,
+    "normal_height_agreement": 0.0231
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.86,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     9.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     29.4,
+     8.8,
+     10.2
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.996,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.9348720730248065,
+     0.9284059659487962
+    ]
+   }
+  },
+  "baseline tile_101, as stored": {
+   "reference": "mud",
+   "candidate": "proc-work/recipes/mud/variations/tile_101",
+   "overall": 0.407,
+   "groups": {
+    "colour": 0.313,
+    "height": 0.488,
+    "normal": 0.247,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.751,
+    "colour_spectrum": 0.0,
+    "colour_orientation": 0.063,
+    "colour_scale": 0.327,
+    "colour_gradient": 0.0,
+    "seam": 1.0,
+    "height_distribution": 0.783,
+    "height_spectrum": 0.255,
+    "height_gradient": 0.1,
+    "height_colour_link": 0.82,
+    "height_contrast": 0.802,
+    "normal_tilt": 0.0,
+    "normal_components": 0.47,
+    "normal_height_agreement": 0.544
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0142,
+    "colour_spectrum": 0.2302,
+    "colour_orientation": 0.279,
+    "colour_scale": 0.2695,
+    "colour_gradient": 0.009,
+    "seam": 0.0,
+    "height_distribution": 0.0217,
+    "height_spectrum": 0.2234,
+    "height_gradient": 0.0135,
+    "height_colour_link": 0.009,
+    "height_contrast": 0.0992,
+    "normal_tilt": 0.0966,
+    "normal_components": 0.1125,
+    "normal_height_agreement": 0.0058
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.86,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     9.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     29.4,
+     8.8,
+     10.2
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.996,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.9498664408307326,
+     0.9480727633034485
+    ]
+   }
+  }
+ }
+}

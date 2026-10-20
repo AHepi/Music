@@ -1,0 +1,334 @@
+{
+ "table": {
+  "probe_1": {
+   "overall": 0.549,
+   "colour": 0.527,
+   "height": 0.531,
+   "normal": 0.43,
+   "tiling": 1.0
+  },
+  "probe_1, height by combine_rule": {
+   "overall": 0.473,
+   "colour": 0.527,
+   "height": 0.375,
+   "normal": 0.239,
+   "tiling": 1.0
+  },
+  "baseline seed_1, normal remade at strength 5": {
+   "overall": 0.579,
+   "colour": 0.54,
+   "height": 0.608,
+   "normal": 0.432,
+   "tiling": 1.0
+  },
+  "baseline seed_1, as stored": {
+   "overall": 0.578,
+   "colour": 0.54,
+   "height": 0.608,
+   "normal": 0.431,
+   "tiling": 1.0
+  }
+ },
+ "full_reports": {
+  "probe_1": {
+   "reference": "metal",
+   "candidate": "probe/probe_1",
+   "overall": 0.549,
+   "groups": {
+    "colour": 0.527,
+    "height": 0.531,
+    "normal": 0.43,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.842,
+    "colour_spectrum": 0.394,
+    "colour_orientation": 0.0,
+    "colour_scale": 0.554,
+    "colour_gradient": 0.387,
+    "seam": 1.0,
+    "height_distribution": 0.83,
+    "height_spectrum": 0.403,
+    "height_gradient": 0.322,
+    "height_colour_link": 0.418,
+    "height_contrast": 0.872,
+    "normal_tilt": 0.395,
+    "normal_components": 0.696,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0071,
+    "colour_spectrum": 0.1403,
+    "colour_orientation": 0.3081,
+    "colour_scale": 0.2027,
+    "colour_gradient": 0.005,
+    "seam": 0.0,
+    "height_distribution": 0.017,
+    "height_spectrum": 0.1792,
+    "height_gradient": 0.0102,
+    "height_colour_link": 0.0291,
+    "height_contrast": 0.0638,
+    "normal_tilt": 0.0657,
+    "normal_components": 0.0744,
+    "normal_height_agreement": 0.038
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.83,
+    "seam_ratio_reference": 2.02,
+    "correlation_length_px_reference": [
+     6.0,
+     8.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     9.0
+    ],
+    "mean_lab_reference": [
+     23.4,
+     2.8,
+     4.2
+    ],
+    "mean_lab_candidate": [
+     23.7,
+     3.3,
+     4.4
+    ],
+    "height_colour_corr_reference": 0.968,
+    "height_colour_corr_candidate": 0.997,
+    "normal_height_corr_reference": [
+     -0.9772229385537109,
+     0.9736377676181264
+    ],
+    "normal_height_corr_candidate": [
+     -0.9498944843332441,
+     0.9248894699804177
+    ]
+   }
+  },
+  "probe_1, height by combine_rule": {
+   "reference": "metal",
+   "candidate": "probe/probe_1/with_combine_rule",
+   "overall": 0.473,
+   "groups": {
+    "colour": 0.527,
+    "height": 0.375,
+    "normal": 0.239,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.842,
+    "colour_spectrum": 0.394,
+    "colour_orientation": 0.0,
+    "colour_scale": 0.554,
+    "colour_gradient": 0.387,
+    "seam": 1.0,
+    "height_distribution": 0.539,
+    "height_spectrum": 0.432,
+    "height_gradient": 0.071,
+    "height_colour_link": 0.442,
+    "height_contrast": 0.487,
+    "normal_tilt": 0.167,
+    "normal_components": 0.465,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0071,
+    "colour_spectrum": 0.1403,
+    "colour_orientation": 0.3081,
+    "colour_scale": 0.2027,
+    "colour_gradient": 0.005,
+    "seam": 0.0,
+    "height_distribution": 0.0461,
+    "height_spectrum": 0.1705,
+    "height_gradient": 0.0139,
+    "height_colour_link": 0.0279,
+    "height_contrast": 0.2563,
+    "normal_tilt": 0.0905,
+    "normal_components": 0.1308,
+    "normal_height_agreement": 0.0295
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.83,
+    "seam_ratio_reference": 2.02,
+    "correlation_length_px_reference": [
+     6.0,
+     8.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     9.0
+    ],
+    "mean_lab_reference": [
+     23.4,
+     2.8,
+     4.2
+    ],
+    "mean_lab_candidate": [
+     23.7,
+     3.3,
+     4.4
+    ],
+    "height_colour_corr_reference": 0.968,
+    "height_colour_corr_candidate": 0.996,
+    "normal_height_corr_reference": [
+     -0.9772229385537109,
+     0.9736377676181264
+    ],
+    "normal_height_corr_candidate": [
+     -0.9553354762450352,
+     0.9364960867358809
+    ]
+   }
+  },
+  "baseline seed_1, normal remade at strength 5": {
+   "reference": "metal",
+   "candidate": "proc-work/reuse_trials/metal/baseline_seed_1",
+   "overall": 0.579,
+   "groups": {
+    "colour": 0.54,
+    "height": 0.608,
+    "normal": 0.432,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.784,
+    "colour_spectrum": 0.255,
+    "colour_orientation": 0.491,
+    "colour_scale": 0.585,
+    "colour_gradient": 0.403,
+    "seam": 1.0,
+    "height_distribution": 0.844,
+    "height_spectrum": 0.306,
+    "height_gradient": 0.448,
+    "height_colour_link": 0.858,
+    "height_contrast": 0.782,
+    "normal_tilt": 0.335,
+    "normal_components": 0.504,
+    "normal_height_agreement": 0.58
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0097,
+    "colour_spectrum": 0.1723,
+    "colour_orientation": 0.1478,
+    "colour_scale": 0.1886,
+    "colour_gradient": 0.0048,
+    "seam": 0.0,
+    "height_distribution": 0.0156,
+    "height_spectrum": 0.2081,
+    "height_gradient": 0.0083,
+    "height_colour_link": 0.0071,
+    "height_contrast": 0.1089,
+    "normal_tilt": 0.0723,
+    "normal_components": 0.1213,
+    "normal_height_agreement": 0.0087
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.96,
+    "seam_ratio_reference": 2.02,
+    "correlation_length_px_reference": [
+     6.0,
+     8.0
+    ],
+    "correlation_length_px_candidate": [
+     7.0,
+     10.0
+    ],
+    "mean_lab_reference": [
+     23.4,
+     2.8,
+     4.2
+    ],
+    "mean_lab_candidate": [
+     22.0,
+     2.5,
+     3.4
+    ],
+    "height_colour_corr_reference": 0.968,
+    "height_colour_corr_candidate": 0.975,
+    "normal_height_corr_reference": [
+     -0.9772229385537109,
+     0.9736377676181264
+    ],
+    "normal_height_corr_candidate": [
+     -0.9880576520823287,
+     0.9801986492822313
+    ]
+   }
+  },
+  "baseline seed_1, as stored": {
+   "reference": "metal",
+   "candidate": "proc-work/recipes/metal/variations/seed_1",
+   "overall": 0.578,
+   "groups": {
+    "colour": 0.54,
+    "height": 0.608,
+    "normal": 0.431,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.784,
+    "colour_spectrum": 0.255,
+    "colour_orientation": 0.491,
+    "colour_scale": 0.585,
+    "colour_gradient": 0.403,
+    "seam": 1.0,
+    "height_distribution": 0.844,
+    "height_spectrum": 0.306,
+    "height_gradient": 0.448,
+    "height_colour_link": 0.858,
+    "height_contrast": 0.782,
+    "normal_tilt": 0.335,
+    "normal_components": 0.504,
+    "normal_height_agreement": 0.575
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0097,
+    "colour_spectrum": 0.1723,
+    "colour_orientation": 0.1478,
+    "colour_scale": 0.1886,
+    "colour_gradient": 0.0048,
+    "seam": 0.0,
+    "height_distribution": 0.0156,
+    "height_spectrum": 0.2081,
+    "height_gradient": 0.0083,
+    "height_colour_link": 0.0071,
+    "height_contrast": 0.1089,
+    "normal_tilt": 0.0723,
+    "normal_components": 0.1213,
+    "normal_height_agreement": 0.0088
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.96,
+    "seam_ratio_reference": 2.02,
+    "correlation_length_px_reference": [
+     6.0,
+     8.0
+    ],
+    "correlation_length_px_candidate": [
+     7.0,
+     10.0
+    ],
+    "mean_lab_reference": [
+     23.4,
+     2.8,
+     4.2
+    ],
+    "mean_lab_candidate": [
+     22.0,
+     2.5,
+     3.4
+    ],
+    "height_colour_corr_reference": 0.968,
+    "height_colour_corr_candidate": 0.975,
+    "normal_height_corr_reference": [
+     -0.9772229385537109,
+     0.9736377676181264
+    ],
+    "normal_height_corr_candidate": [
+     -0.9881334992683737,
+     0.9803209608744357
+    ]
+   }
+  }
+ }
+}
