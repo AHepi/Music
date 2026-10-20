@@ -35,6 +35,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Wet street done (log 18):** a wetness layer that sits on any material; the street reads wet at dusk in the plate (road sheen, lamp reflections, mirror puddles in the
   gutter, darker wet wall feet). The specularity map is made and travels in the .glb, but it changes the picture very little and does not reach the film as the stage works
   today: what the audience will see as wet is what the painter paints from the wet plate. The painter has not been tried (about 10 US cents; needs your go and a changed brief).
+- **Painter test done (log 19):** with a changed brief the painter keeps the wet look (road sheen, reflections in the same places, gutter puddles with mirrored
+  windows); the checker says it reads as wet. Not yet usable as the lockout picture: the painter added heavy white clouds, the film's old DRY behind painting shows
+  next to the wet road once the camera moves, and the stage's finishing curve darkens the wet road. Cost about 20-28 US cents (more than the 10 I estimated).
 - **Nothing running now.**
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -207,7 +210,22 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     road puddle. **Not tried:** the painter (about 10 US cents) - its brief must first drop "matte painted finish" and "no puddles or reflections" (a wet ground was once
     repainted dry). Pictures: `18 Wet street - pictures/`; guide: `street_wet/09 Recipe - wetness layer and specular map for the street - how it is made.md`.
 
+19. **Painter test of the wet street.** You said: do it (with Sonnet 5.5 helpers). The painter brief (the notice-corner one; the lockout painting's own brief was not
+    saved) was changed as little as possible: "matte painted finish" and the ban on puddles and reflections removed; one paragraph added asking to keep the wet sheen, lamp
+    and window reflections, gutter puddles with mirrored houses, wet joint lines and darker wall feet exactly where the wet plate has them, painted in the series' hand.
+    ONE repaint with Flux 3 edit on fal (same settings as before), finished first time. **Cost:** between US$0.197 and US$0.277 by the price list (fal does not show the
+    exact charge) - more than the "about 10 US cents" I told you, because the painter's price per megapixel has doubled since the plan; under the US$0.30 limit. The checker
+    confirmed exactly one call. **Result:** the wet look survived. Road 0.72 times as bright as the dry painting and glossy; bright reflections in the same places as the
+    plate (overlap 0.60-0.63, the dry painting 0.04-0.10, chance 0.05); gutter puddles with mirrored lamps and windows; the blown-out glare pool of the plate tamed into a
+    warm painted pool. Nothing was moved, removed or added to the street (line-up needed no correction). Checker: reads as wet "yes", fits the series' style "nearly".
+    **Problems:** the painter added heavy pale-white brush-stroke clouds that look like another painter's hand (it ignored the ban on bright clouds); lamp glass pale
+    instead of amber; walls do not read wet and the sacks and cart look as if they hover (from the plate). **In the film stage** (a copy; the film project was not changed):
+    the wet look holds in the plate view and when the camera moves, but once it moves the film's old DRY behind painting shows on 56-71% of the near road and pavement (dry
+    ghosts beside the drum), and the stage's finishing curve darkens the wet road to about 0.7 of its painted brightness (dry 0.89). Pictures: `19 Wet street painting -
+    pictures/`; notes: `street_wet/painter_test/notes - wet street painter test.md`; briefs old and new: `street_wet/painter_test/briefs/`.
+
 ## Next step
 
-One painter test of the wet plate (about 10 US cents, needs your go): change the painter's brief to keep the wet sheen, lamp reflections and puddles, repaint the wet
-lockout plate once, and see whether the wet look survives. Also open, waiting for your go: the wood's stone-wall look and the slate's straight-edged facets.
+The checker's free first step: swap the old dry painting's sky into the wet painting (a copy, cut with Blender's exact sky mask), redraw the stage stills and look
+again (no cost, about an hour). After that, still waiting for your go: a wet behind painting (one more repaint, about 20-28 US cents), the wood's stone-wall look, and
+the slate's straight-edged facets.

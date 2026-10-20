@@ -1,0 +1,71 @@
+{
+ "note": "What this file is (plain words): numbers measured on the stage pictures (stage/stills). plate view = the plate's own camera; moved view = the end of the film's street move (1.4 m forward, 0.3 m right). dry = the film's dry painting, wet = the new wet painting with the film's dry behind painting, wetwet = the wet painting also used as its own behind painting. Brightness is the picture's pixel brightness 0 to 1. Made by tools/measure_stage_views.py.",
+ "plate_view_stage_against_painting": {
+  "dry": {
+   "road_mean_painting": 0.38576921820640564,
+   "road_mean_stage": 0.3563023507595062,
+   "road_stage_over_painting": 0.9236152768135071,
+   "road_mean_absolute_difference_blurred": 0.040224432945251465,
+   "road_correlation_blurred": 0.9464115337596424,
+   "walls_stage_over_painting": 0.901768684387207,
+   "whole_picture_mean_painting": 0.33070844411849976,
+   "whole_picture_mean_stage": 0.31752273440361023
+  },
+  "wet": {
+   "road_mean_painting": 0.25681594014167786,
+   "road_mean_stage": 0.19217222929000854,
+   "road_stage_over_painting": 0.7482877969741821,
+   "road_mean_absolute_difference_blurred": 0.06754545122385025,
+   "road_correlation_blurred": 0.9811352443581853,
+   "walls_stage_over_painting": 0.7555341720581055,
+   "whole_picture_mean_painting": 0.24556498229503632,
+   "whole_picture_mean_stage": 0.20992274582386017
+  }
+ },
+ "moved_view": {
+  "dry_moved": {
+   "road_share_of_frame": 0.10806809413580247,
+   "road_mean": 0.37719079852104187,
+   "road_p95": 0.6233114004135132,
+   "road_glint_share": 0.00485965460306127,
+   "road_blue_minus_red": -0.07543465991867764,
+   "gutter_mean": 0.32715657353401184,
+   "pavement_glint_share": 0.08407208314985751,
+   "walls_mean": 0.18649569153785706
+  },
+  "wet_moved": {
+   "road_share_of_frame": 0.10806809413580247,
+   "road_mean": 0.32557111978530884,
+   "road_p95": 0.6214010119438171,
+   "road_glint_share": 0.019460930875987326,
+   "road_blue_minus_red": -0.10213161903611906,
+   "gutter_mean": 0.28266021609306335,
+   "pavement_glint_share": 0.07395252615049726,
+   "walls_mean": 0.1203235387802124,
+   "road_mean_over_dry_moved": 0.8631470360938474
+  },
+  "wetwet_moved": {
+   "road_share_of_frame": 0.10806809413580247,
+   "road_mean": 0.17689719796180725,
+   "road_p95": 0.49109333753585815,
+   "road_glint_share": 0.044883752063902896,
+   "road_blue_minus_red": -0.08904925279496421,
+   "gutter_mean": 0.12082792073488235,
+   "pavement_glint_share": 0.10101278653384402,
+   "walls_mean": 0.11609098315238953,
+   "road_mean_over_dry_moved": 0.4689859844286178
+  }
+ },
+ "dry_behind_patches": {
+  "share_of_frame_that_differs_more_than_0.04": 0.17582465277777778,
+  "mean_difference_where_it_differs": 0.16741405427455902,
+  "share_of_road_pixels_that_differ": 0.7083984113525815,
+  "share_of_pavement_pixels_that_differ": 0.7048047124899262,
+  "share_of_walls_pixels_that_differ": 0.04336600252474702
+ },
+ "moved_view_what_each_surface_wears_(rough, by colour of the map)": {
+  "painting_share_of_frame": 0.751246624228395,
+  "behind_painting_share_of_frame": 0.1764501350308642,
+  "own_3D_surface_share_of_frame": 0.07230324074074074
+ }
+}

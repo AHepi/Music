@@ -1,0 +1,25 @@
+NOTE (plain words): printout of tools/remeasure_numbers.py, made by the independent checker on 20 October 2026: my own re-measure of four of the helper's numbers (glare against the notice, cloud share of the sky, overlap of bright reflection patches on the road, road darkness). Brightness is 0 (black) to 1 (white). 'plate_wet' = the 3D wet picture, 'paint_wet' = the new wet painting, 'paint_dry' = the film's existing dry painting. Methods differ from the helper's on purpose, so a match means the number is real, not an accident of one method.
+
+road px 636281 notice px 31658
+
+(1) brightness of notice paper vs brightest road (1080x1920)
+plate_wet {'notice_p50': 0.4432, 'notice_p80': 0.7798, 'notice_p95': 0.8132, 'notice_max': 0.8291, 'road_p99': 1.0, 'road_p99.9': 1.0, 'road_max': 1.0, 'road_share_over_notice_p80': 0.1104, 'road_share_over_notice_p95': 0.1021, 'road_share_over_notice_max': 0.0982}
+paint_wet {'notice_p50': 0.4877, 'notice_p80': 0.7365, 'notice_p95': 0.7791, 'notice_max': 0.8679, 'road_p99': 0.8402, 'road_p99.9': 0.9008, 'road_max': 0.9759, 'road_share_over_notice_p80': 0.0208, 'road_share_over_notice_p95': 0.0167, 'road_share_over_notice_max': 0.0058}
+paint_dry {'notice_p50': 0.4462, 'notice_p80': 0.7294, 'notice_p95': 0.754, 'notice_max': 0.836, 'road_p99': 0.7326, 'road_p99.9': 0.7781, 'road_max': 0.9521, 'road_share_over_notice_p80': 0.0104, 'road_share_over_notice_p95': 0.0058, 'road_share_over_notice_max': 0.0001}
+ratio road_p99.9 / notice_p80 : {'plate_wet': 1.282, 'paint_wet': 1.223, 'paint_dry': 1.067}
+ratio road_p99.9 / notice_p95 : {'plate_wet': 1.23, 'paint_wet': 1.156, 'paint_dry': 1.032}
+ratio road_p99.9 / notice_max : {'plate_wet': 1.206, 'paint_wet': 1.038, 'paint_dry': 0.931}
+
+(2) sky = pixels no Blender mask covers (grown by 9 px), above 45 percent of the height:  688059 px = 0.737 of that band
+plate_wet mean 0.293 share>0.45 0.0 share>0.6 0.0 share brighter than plate sky by 0.12 0.016 share brighter than 0.12 over own blurred sky 0.016
+paint_wet mean 0.329 share>0.45 0.127 share>0.6 0.003 share brighter than plate sky by 0.12 0.179 share brighter than 0.12 over own blurred sky 0.093
+paint_dry mean 0.427 share>0.45 0.34 share>0.6 0.0 share brighter than plate sky by 0.12 0.499 share brighter than 0.12 over own blurred sky 0.058
+
+(3) 24 px blocks fully in the road: 1107
+top 10 % blocks: plate vs wet painting IoU 0.597  plate vs dry painting IoU 0.099  (chance about 0.053 )
+top 20 % blocks: plate vs wet painting IoU 0.688  plate vs dry painting IoU 0.261  (chance about 0.111 )
+Spearman rank correlation of block brightness inside road: plate~wet 0.961  plate~dry 0.537
+same, after taking out each row average: plate~wet 0.946  plate~dry 0.532
+
+(4) road mean brightness (not eroded mask): {'plate_wet': 0.31, 'paint_wet': 0.235, 'paint_dry': 0.328} wet painting / dry painting = 0.715
+   with simple average of R,G,B instead of Rec.709: {'plate_wet': 0.305, 'paint_wet': 0.231, 'paint_dry': 0.326}

@@ -1,0 +1,13 @@
+{
+ "note": "What this file is (plain words): the exact record of the ONE paid repaint of the wet lockout plate (20 October 2026): the painter, the settings, the pictures sent, the request id, and what came back. The prompt sent is in briefs/brief_new_wet.txt (same words, after the line of equals signs).",
+ "model": "blackforestlabs/flux-3/edit-image (Flux 3 edit on fal)",
+ "request_id": "01a15ab1-7875-7200-b5e1-fb73c814521c",
+ "sent_at_utc": "2026-10-20T19:02:20Z",
+ "settings": {"resolution": "2k", "aspect_ratio": "auto", "output_format": "png", "safety_tolerance": 2, "enable_prompt_expansion": false},
+ "images_sent": [
+  "image 1: the wet plate (work/r35/main_wet_plate.png of the earlier helper, 1536 x 2730) shrunk to 810 x 1440 (sent/image_1_wet_plate_810x1440.png)",
+  "image 2: the series' style picture, the chapter 2 Glasgow tenements painting (film-kit/assets/paintings/inflation-chapter-2/403-bg-glasgow-tenements.png, a street wet after rain painted in the series' hand), shrunk to 504 x 896 (sent/image_2_style_504x896.jpg). The earlier paintings used 'style-glasgow.jpg', which was not found in the repository; this is my best match for it (a chapter 2 painting of Glasgow tenements) and may not be the very same file."
+ ],
+ "returned": {"width": 1520, "height": 2704, "file": "pictures/wet_painting_as_returned.png", "seconds_waited": "about 2 minutes"},
+ "price": "US$0.048 per megapixel; best case US$0.193 (output only), worst case US$0.279 (if the pictures sent are charged too); see spending.md"
+}

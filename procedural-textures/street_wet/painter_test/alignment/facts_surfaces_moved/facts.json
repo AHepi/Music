@@ -1,0 +1,988 @@
+{
+ "about": "Written by shot_facts.py. Screen positions are fractions: across 0 = left edge, down 0 = top edge. Blender metres.",
+ "size": [
+  1080,
+  1920
+ ],
+ "camera": {
+  "at": [
+   -0.5553,
+   2.561,
+   1.7471
+  ],
+  "eye_height": 1.493,
+  "turn_degrees": -11.0,
+  "tilt_degrees": 6.5,
+  "roll_degrees": -0.0,
+  "vertical_fov_degrees": 26.0
+ },
+ "lines_meet": {
+  "street": [
+   -0.24718,
+   0.59173
+  ],
+  "level": [
+   -0.25325,
+   0.74675
+  ]
+ },
+ "lights": [
+  {
+   "name": "brazier_light",
+   "kind": "POINT",
+   "at": [
+    0.95,
+    10.4,
+    2.204
+   ],
+   "on_screen": [
+    0.49127,
+    0.62207
+   ],
+   "energy": 900.0,
+   "colour": [
+    1.0,
+    0.55,
+    0.25
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    0.6,
+    4.785
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    5.3,
+    2.499
+   ],
+   "on_screen": [
+    4.44875,
+    0.28657
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_03_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    11.7,
+    2.814
+   ],
+   "on_screen": [
+    1.45202,
+    0.51043
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_03_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    9.6,
+    5.414
+   ],
+   "on_screen": [
+    1.84925,
+    -0.24161
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_04_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    14.3,
+    3.129
+   ],
+   "on_screen": [
+    1.1009,
+    0.50413
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_05_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    20.7,
+    6.043
+   ],
+   "on_screen": [
+    0.64522,
+    0.25346
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_06_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    25.4,
+    6.358
+   ],
+   "on_screen": [
+    0.47051,
+    0.32095
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_07_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    29.7,
+    4.073
+   ],
+   "on_screen": [
+    0.36002,
+    0.56268
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_08_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    32.3,
+    4.387
+   ],
+   "on_screen": [
+    0.30854,
+    0.55562
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_b_cottage_01_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    42.7,
+    7.582
+   ],
+   "on_screen": [
+    0.16994,
+    0.43362
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_b_cottage_03_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    51.7,
+    5.611
+   ],
+   "on_screen": [
+    0.0929,
+    0.57546
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_b_cottage_03_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    49.6,
+    8.211
+   ],
+   "on_screen": [
+    0.11038,
+    0.4496
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_b_cottage_05_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    3.7,
+    58.6,
+    8.84
+   ],
+   "on_screen": [
+    0.05414,
+    0.47195
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    0.8,
+    2.185
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    2.9,
+    4.785
+   ],
+   "on_screen": [
+    -154.43382,
+    -83.79457
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    7.2,
+    2.499
+   ],
+   "on_screen": [
+    -3.31049,
+    0.33819
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_03_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    11.9,
+    5.414
+   ],
+   "on_screen": [
+    -1.59985,
+    -0.14858
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_05_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    18.8,
+    3.443
+   ],
+   "on_screen": [
+    -1.04304,
+    0.50719
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_06_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    23.1,
+    6.358
+   ],
+   "on_screen": [
+    -0.85157,
+    0.24316
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_b_cottage_01_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    40.8,
+    7.582
+   ],
+   "on_screen": [
+    -0.57008,
+    0.40633
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_b_cottage_02_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    45.1,
+    7.896
+   ],
+   "on_screen": [
+    -0.53721,
+    0.42446
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_b_cottage_03_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    49.8,
+    8.211
+   ],
+   "on_screen": [
+    -0.50824,
+    0.44183
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_b_cottage_04_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    54.1,
+    8.526
+   ],
+   "on_screen": [
+    -0.48633,
+    0.4538
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_b_cottage_05_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    -3.7,
+    58.8,
+    8.84
+   ],
+   "on_screen": [
+    -0.46629,
+    0.46593
+   ],
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "gas_lamp_0_light",
+   "kind": "POINT",
+   "at": [
+    3.03,
+    11.0,
+    3.979
+   ],
+   "on_screen": [
+    1.30221,
+    0.21578
+   ],
+   "energy": 260.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ]
+  },
+  {
+   "name": "gas_lamp_1_light",
+   "kind": "POINT",
+   "at": [
+    -3.03,
+    25.0,
+    4.958
+   ],
+   "on_screen": [
+    -0.68634,
+    0.42538
+   ],
+   "energy": 260.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ]
+  },
+  {
+   "name": "gas_lamp_2_light",
+   "kind": "POINT",
+   "at": [
+    3.03,
+    39.0,
+    5.937
+   ],
+   "on_screen": [
+    0.13973,
+    0.49785
+   ],
+   "energy": 260.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ]
+  },
+  {
+   "name": "gas_lamp_3_light",
+   "kind": "POINT",
+   "at": [
+    -3.03,
+    53.0,
+    6.916
+   ],
+   "on_screen": [
+    -0.44115,
+    0.51826
+   ],
+   "energy": 260.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ]
+  },
+  {
+   "name": "gas_lamp_4_light",
+   "kind": "POINT",
+   "at": [
+    3.03,
+    64.5,
+    7.72
+   ],
+   "on_screen": [
+    -0.01733,
+    0.53596
+   ],
+   "energy": 260.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ]
+  },
+  {
+   "name": "dusk_skylight",
+   "kind": "SUN",
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "on_screen": null,
+   "energy": 0.3,
+   "colour": [
+    0.62,
+    0.72,
+    0.9
+   ]
+  },
+  {
+   "name": "afterglow",
+   "kind": "SUN",
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "on_screen": null,
+   "energy": 0.2,
+   "colour": [
+    1.0,
+    0.62,
+    0.36
+   ]
+  },
+  {
+   "name": "engine_house_light_front",
+   "kind": "POINT",
+   "at": [
+    -19.5,
+    89.8,
+    9.314
+   ],
+   "on_screen": [
+    -1.14772,
+    0.54645
+   ],
+   "energy": 400.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "engine_house_light_side",
+   "kind": "POINT",
+   "at": [
+    -9.8,
+    96.0,
+    9.314
+   ],
+   "on_screen": [
+    -0.64793,
+    0.56396
+   ],
+   "energy": 400.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  }
+ ],
+ "groups": {
+  "props near": {
+   "objects": 74,
+   "centre": [
+    -0.071,
+    36.127,
+    4.52
+   ],
+   "bottom": 0.63,
+   "top": 8.41,
+   "width": 7.799,
+   "depth": 57.22,
+   "height": 7.78,
+   "distance": 33.143,
+   "metres_per_pixel": 0.00797,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -1.505,
+    0.0342,
+    1.5332,
+    1.2393
+   ],
+   "colour": [
+    230,
+    25,
+    75
+   ]
+  },
+  "props far": {
+   "objects": 23,
+   "centre": [
+    4.708,
+    91.026,
+    25.714
+   ],
+   "bottom": 4.314,
+   "top": 47.114,
+   "width": 34.616,
+   "depth": 39.149,
+   "height": 42.8,
+   "distance": 89.992,
+   "metres_per_pixel": 0.021642,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -0.8778,
+    -0.211,
+    0.7783,
+    0.6828
+   ],
+   "colour": [
+    60,
+    180,
+    75
+   ]
+  },
+  "road": {
+   "objects": 1,
+   "centre": [
+    0.0,
+    30.0,
+    2.138
+   ],
+   "bottom": -0.839,
+   "top": 5.115,
+   "width": 4.4,
+   "depth": 84.0,
+   "height": 5.954,
+   "distance": 26.911,
+   "metres_per_pixel": 0.006472,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -0.3526,
+    0.6385,
+    -0.0916,
+    0.8307
+   ],
+   "colour": [
+    255,
+    225,
+    25
+   ]
+  },
+  "pavement": {
+   "objects": 1,
+   "centre": [
+    0.0,
+    30.0,
+    2.242
+   ],
+   "bottom": -0.711,
+   "top": 5.195,
+   "width": 8.8,
+   "depth": 84.0,
+   "height": 5.906,
+   "distance": 26.923,
+   "metres_per_pixel": 0.006475,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -0.4824,
+    0.6352,
+    0.0325,
+    0.8271
+   ],
+   "colour": [
+    0,
+    130,
+    200
+   ]
+  },
+  "gutter": {
+   "objects": 1,
+   "centre": [
+    0.0,
+    30.0,
+    2.085
+   ],
+   "bottom": -0.864,
+   "top": 5.035,
+   "width": 5.0,
+   "depth": 84.0,
+   "height": 5.899,
+   "distance": 26.905,
+   "metres_per_pixel": 0.00647,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -0.3703,
+    0.641,
+    -0.0747,
+    0.8316
+   ],
+   "colour": [
+    245,
+    130,
+    48
+   ]
+  },
+  "kerb": {
+   "objects": 1,
+   "centre": [
+    0.0,
+    30.008,
+    1.988
+   ],
+   "bottom": -1.186,
+   "top": 5.163,
+   "width": 5.36,
+   "depth": 84.018,
+   "height": 6.349,
+   "distance": 26.902,
+   "metres_per_pixel": 0.00647,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -0.3814,
+    0.6368,
+    -0.0644,
+    0.8422
+   ],
+   "colour": [
+    145,
+    30,
+    180
+   ]
+  },
+  "walls": {
+   "objects": 31,
+   "centre": [
+    2.0,
+    50.25,
+    9.837
+   ],
+   "bottom": -0.34,
+   "top": 20.014,
+   "width": 48.02,
+   "depth": 101.5,
+   "height": 20.355,
+   "distance": 47.912,
+   "metres_per_pixel": 0.011522,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -193.8387,
+    -312.1774,
+    925.7134,
+    10.1149
+   ],
+   "colour": [
+    70,
+    240,
+    240
+   ]
+  },
+  "roofs": {
+   "objects": 28,
+   "centre": [
+    0.0,
+    33.0,
+    10.003
+   ],
+   "bottom": 6.356,
+   "top": 13.65,
+   "width": 22.94,
+   "depth": 67.0,
+   "height": 7.294,
+   "distance": 30.728,
+   "metres_per_pixel": 0.00739,
+   "stands_above_surface_below": 2.917,
+   "stands_above_ground": 5.259,
+   "stands_on": "ground far",
+   "screen_box_unclipped": [
+    -225.8239,
+    -110.9192,
+    324.8984,
+    0.4487
+   ],
+   "colour": [
+    240,
+    50,
+    230
+   ]
+  },
+  "windows": {
+   "objects": 84,
+   "centre": [
+    0.0,
+    33.0,
+    5.615
+   ],
+   "bottom": 1.46,
+   "top": 9.77,
+   "width": 8.64,
+   "depth": 65.75,
+   "height": 8.31,
+   "distance": 30.231,
+   "metres_per_pixel": 0.00727,
+   "stands_above_surface_below": 0.299,
+   "stands_above_ground": 0.468,
+   "stands_on": "road",
+   "screen_box_unclipped": [
+    -41.4657,
+    -15.3808,
+    36.8106,
+    1.9625
+   ],
+   "colour": [
+    210,
+    245,
+    60
+   ]
+  },
+  "ground far": {
+   "objects": 1,
+   "centre": [
+    0.0,
+    110.0,
+    1.428
+   ],
+   "bottom": -2.538,
+   "top": 5.394,
+   "width": 320.0,
+   "depth": 300.0,
+   "height": 7.932,
+   "distance": 104.856,
+   "metres_per_pixel": 0.025217,
+   "stands_above_surface_below": null,
+   "stands_above_ground": null,
+   "stands_on": null,
+   "screen_box_unclipped": [
+    -3.0928,
+    0.7108,
+    1.9862,
+    0.7891
+   ],
+   "colour": [
+    250,
+    190,
+    212
+   ]
+  },
+  "colliery": {
+   "objects": 3,
+   "centre": [
+    -1.0,
+    91.3,
+    12.551
+   ],
+   "bottom": 4.814,
+   "top": 20.287,
+   "width": 54.6,
+   "depth": 20.0,
+   "height": 15.473,
+   "distance": 87.687,
+   "metres_per_pixel": 0.021088,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.0,
+   "stands_on": "walls",
+   "screen_box_unclipped": [
+    -1.5918,
+    0.259,
+    1.0075,
+    0.6762
+   ],
+   "colour": [
+    0,
+    128,
+    128
+   ]
+  }
+ },
+ "missing_groups": [],
+ "support_tops": {}
+}

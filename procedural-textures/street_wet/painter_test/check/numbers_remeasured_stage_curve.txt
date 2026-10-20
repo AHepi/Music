@@ -1,0 +1,15 @@
+NOTE (plain words): printout of tools/remeasure_stage_curve.py: my re-measure of how much darker the film's stage shows the road than the painting itself (helper: 0.75 for wet, 0.92 for dry). Bins group road pixels by their painted brightness.
+
+stage still size (1920, 1080, 3)
+dry road mean painted 0.332 in stage 0.294 ratio 0.885
+   0.00-0.10: n=2565 painted 0.088 stage 0.014
+   0.10-0.20: n=105496 painted 0.166 stage 0.089
+   0.20-0.30: n=143719 painted 0.257 stage 0.224
+   0.30-0.45: n=272221 painted 0.363 stage 0.333
+   0.45-1.01: n=88327 painted 0.564 stage 0.538
+wet road mean painted 0.223 in stage 0.159 ratio 0.715
+   0.00-0.10: n=115060 painted 0.078 stage 0.011
+   0.10-0.20: n=248582 painted 0.149 stage 0.073
+   0.20-0.30: n=113139 painted 0.249 stage 0.189
+   0.30-0.45: n=79713 painted 0.359 stage 0.326
+   0.45-1.01: n=55834 painted 0.601 stage 0.550
