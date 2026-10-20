@@ -1,0 +1,488 @@
+{
+ "top_group": "SLATE",
+ "sub_groups": [
+  {
+   "label": "LAYOUT",
+   "group_name": "LAYOUT",
+   "nodes_inside": 307,
+   "nested_groups": [
+    "Tileable Noise"
+   ],
+   "inputs": {
+    "Vector": "LINKED from Group Input.Vector",
+    "Seed": 1.0,
+    "Row Height Jitter": 0.05,
+    "Row Phase": 0.5,
+    "Width Spread": 0.26,
+    "Row Slide": 1.0,
+    "Joint Width": 0.0014,
+    "Row Gap": 0.005,
+    "Row Gap Top Share": 0.1,
+    "Corner Radius": 0.0064,
+    "Corner Top Factor": 0.6,
+    "Corner Bottom Factor": 1.5,
+    "Corner Radius Variation": 0.3,
+    "Joint Lean": 0.01,
+    "Ragged Side": 0.0024,
+    "Ragged Top": 0.0022,
+    "Ragged Bottom": 0.0055,
+    "Ragged Scale": 100.0,
+    "Ragged Detail": 4.0,
+    "Ragged Chip": 2.0,
+    "Bottom Tilt": 0.02,
+    "Edge Softness": 0.0004,
+    "Joint Level": 0.08,
+    "Slate Level": 0.5,
+    "Bevel Width": 0.0035,
+    "Slate Level Jitter": 0.03,
+    "Slate Ramp": 0.04
+   },
+   "outputs": [
+    "piece_id",
+    "row",
+    "local_x",
+    "local_y",
+    "piece_width",
+    "piece_height",
+    "edge_distance",
+    "top_edge_distance",
+    "gap_mask",
+    "piece_mask",
+    "base_height"
+   ]
+  },
+  {
+   "label": "COLOUR AND FADE",
+   "group_name": "COLOUR AND FADE",
+   "nodes_inside": 419,
+   "nested_groups": [
+    "Tileable Noise"
+   ],
+   "inputs": {
+    "Vector": "LINKED from Group Input.Vector",
+    "Tile Count": 1.0,
+    "piece_id": "LINKED from LAYOUT.piece_id",
+    "row": "LINKED from LAYOUT.row",
+    "local_x": "LINKED from LAYOUT.local_x",
+    "local_y": "LINKED from LAYOUT.local_y",
+    "piece_width": "LINKED from LAYOUT.piece_width",
+    "piece_height": "LINKED from LAYOUT.piece_height",
+    "edge_distance": "LINKED from LAYOUT.edge_distance",
+    "top_edge_distance": "LINKED from LAYOUT.top_edge_distance",
+    "gap_mask": "LINKED from LAYOUT.gap_mask",
+    "piece_mask": "LINKED from LAYOUT.piece_mask",
+    "base_height": "LINKED from LAYOUT.base_height",
+    "Seed": 11.0,
+    "Amount": 1.0,
+    "Tone 1 (darkest)": [
+     0.007,
+     0.00857,
+     0.00972,
+     1.0
+    ],
+    "Tone 2": [
+     0.01298,
+     0.016,
+     0.0185,
+     1.0
+    ],
+    "Tone 3": [
+     0.02122,
+     0.02624,
+     0.0319,
+     1.0
+    ],
+    "Tone 4": [
+     0.0331,
+     0.04092,
+     0.04817,
+     1.0
+    ],
+    "Tone 5": [
+     0.04667,
+     0.05781,
+     0.06848,
+     1.0
+    ],
+    "Tone 6": [
+     0.06301,
+     0.08022,
+     0.09531,
+     1.0
+    ],
+    "Tone 7": [
+     0.07819,
+     0.0999,
+     0.11697,
+     1.0
+    ],
+    "Tone 8": [
+     0.09759,
+     0.12214,
+     0.13843,
+     1.0
+    ],
+    "Tone 9 (lightest)": [
+     0.11954,
+     0.14703,
+     0.16203,
+     1.0
+    ],
+    "Green Tint": [
+     0.07227,
+     0.0999,
+     0.0999,
+     1.0
+    ],
+    "Warm Tint": [
+     0.10946,
+     0.10224,
+     0.08866,
+     1.0
+    ],
+    "Tone Centre": 3.7,
+    "Tone Spread": 1.0,
+    "Outlier Share": 0.15,
+    "Outlier Size": 1.2,
+    "Tint Amount": 0.7,
+    "Tint Green Share": 0.8,
+    "Patch Tint": 0.4,
+    "Fade Amount": 0.85,
+    "Fade Direction": 1.0,
+    "Fade Length": 0.07,
+    "Streak Width": 0.014,
+    "Streak Contrast": 1.4,
+    "Mottle Tallness": 1.1,
+    "Top Darkening": 0.6,
+    "Speck Amount": 0.9,
+    "Speck Cover": 0.16,
+    "Speck Size": 0.011,
+    "Patch Hardness": 1.0,
+    "Streak Bend": 0.006,
+    "Edge Ragged": 0.0035,
+    "Sun Bleach Amount": 0.25,
+    "Sun Bleach Cover": 0.22,
+    "Damp Stain Amount": 0.4,
+    "Damp Stain Cover": 0.18,
+    "Big Patch Size": 0.2,
+    "Slow Drift": 0.1,
+    "Grain": 0.05,
+    "Tone Height": 2.0,
+    "Tone Roughness": 1.0
+   },
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ]
+  },
+  {
+   "label": "MOSS",
+   "group_name": "MOSS",
+   "nodes_inside": 419,
+   "nested_groups": [
+    "Tileable Noise"
+   ],
+   "inputs": {
+    "Vector": "LINKED from Group Input.Vector",
+    "Tile Count": 1.0,
+    "piece_id": "LINKED from LAYOUT.piece_id",
+    "row": "LINKED from LAYOUT.row",
+    "local_x": "LINKED from LAYOUT.local_x",
+    "local_y": "LINKED from LAYOUT.local_y",
+    "piece_width": "LINKED from LAYOUT.piece_width",
+    "piece_height": "LINKED from LAYOUT.piece_height",
+    "edge_distance": "LINKED from LAYOUT.edge_distance",
+    "top_edge_distance": "LINKED from LAYOUT.top_edge_distance",
+    "gap_mask": "LINKED from LAYOUT.gap_mask",
+    "piece_mask": "LINKED from LAYOUT.piece_mask",
+    "base_height": "LINKED from LAYOUT.base_height",
+    "Seed": 31.0,
+    "Amount": 1.0,
+    "Coverage": 0.22,
+    "Patchiness": 0.75,
+    "Patch Size": 0.35,
+    "Slate Variation": 0.95,
+    "Drip Preference": 0.9,
+    "Drip Length": 0.14,
+    "Drip Width": 0.07,
+    "Joint Preference": 0.15,
+    "Lower Part Preference": 0.25,
+    "Damp Spot Preference": 0.3,
+    "Damage Avoid": 0.8,
+    "Damage Attract": 0.0,
+    "Cluster Size": 0.06,
+    "Clump Strength": 1.8,
+    "Drip Stretch": 1.8,
+    "Flow Wobble": 0.012,
+    "Edge Raggedness": 0.7,
+    "Fringe Amount": 0.3,
+    "Fringe Width": 0.009,
+    "Moss Tone 1 (darkest)": [
+     0.02416,
+     0.02519,
+     0.01681,
+     1.0
+    ],
+    "Moss Tone 2": [
+     0.0356,
+     0.0382,
+     0.02315,
+     1.0
+    ],
+    "Moss Tone 3": [
+     0.04971,
+     0.05127,
+     0.0319,
+     1.0
+    ],
+    "Moss Tone 4": [
+     0.06663,
+     0.06663,
+     0.04231,
+     1.0
+    ],
+    "Moss Tone 5 (lightest)": [
+     0.08866,
+     0.0865,
+     0.05448,
+     1.0
+    ],
+    "Moss Tone Centre": 0.7,
+    "Moss Tone Spread": 1.0,
+    "Rim Lightening": 0.5,
+    "Top Shading": 0.2,
+    "Tone Patch Size": 0.02,
+    "Lichen Amount": 0.15,
+    "Lichen Clustering": 0.7,
+    "Lichen Size": 0.0042,
+    "Lichen Colour": [
+     0.12744,
+     0.10702,
+     0.07819,
+     1.0
+    ],
+    "Lichen Light": [
+     0.17465,
+     0.14413,
+     0.10702,
+     1.0
+    ],
+    "Lichen Dark": [
+     0.08438,
+     0.07227,
+     0.05127,
+     1.0
+    ],
+    "Raise": 1.0,
+    "Roughness Gain": 1.0,
+    "Damage Mask": "LINKED from DAMAGE.Mask"
+   },
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ]
+  },
+  {
+   "label": "DAMAGE",
+   "group_name": "DAMAGE",
+   "nodes_inside": 439,
+   "nested_groups": [],
+   "inputs": {
+    "Vector": "LINKED from Group Input.Vector",
+    "Tile Count": 1.0,
+    "piece_id": "LINKED from LAYOUT.piece_id",
+    "row": "LINKED from LAYOUT.row",
+    "local_x": "LINKED from LAYOUT.local_x",
+    "local_y": "LINKED from LAYOUT.local_y",
+    "piece_width": "LINKED from LAYOUT.piece_width",
+    "piece_height": "LINKED from LAYOUT.piece_height",
+    "edge_distance": "LINKED from LAYOUT.edge_distance",
+    "top_edge_distance": "LINKED from LAYOUT.top_edge_distance",
+    "gap_mask": "LINKED from LAYOUT.gap_mask",
+    "piece_mask": "LINKED from LAYOUT.piece_mask",
+    "base_height": "LINKED from LAYOUT.base_height",
+    "Seed": 21.0,
+    "Amount": 1.0,
+    "Chip Amount": 0.65,
+    "Chip Depth": 0.02,
+    "Chip Frequency": 110.0,
+    "Chip Clustering": 1.0,
+    "Chip Breakup": 1.1,
+    "Side Share": 0.12,
+    "Corner Gain": 1.0,
+    "Slate Variation": 0.7,
+    "Notch Amount": 0.1,
+    "Notch Depth": 0.01,
+    "Corner Break Amount": 0.0,
+    "Corner Break Size": 0.022,
+    "Crack Amount": 0.02,
+    "Crack Length": 0.07,
+    "Crack Width": 0.0028,
+    "Crack Across Share": 0.25,
+    "Scratch Amount": 0.03,
+    "Scratch Length": 0.03,
+    "Pit Amount": 0.0,
+    "Pit Size": 0.0034,
+    "Pit Low Bias": 0.6,
+    "Break Colour": [
+     0.20156,
+     0.15896,
+     0.10946,
+     1.0
+    ],
+    "Break Colour Light": [
+     0.27468,
+     0.26636,
+     0.23455,
+     1.0
+    ],
+    "Break Colour Dark": [
+     0.10224,
+     0.07819,
+     0.05613,
+     1.0
+    ],
+    "Hole Colour": [
+     0.00335,
+     0.00368,
+     0.00439,
+     1.0
+    ],
+    "Sink Depth": 1.0,
+    "Roughness Gain": 1.0
+   },
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ]
+  },
+  {
+   "label": "OUTLINE AND SHADOW",
+   "group_name": "OUTLINE AND SHADOW",
+   "nodes_inside": 216,
+   "nested_groups": [],
+   "inputs": {
+    "Vector": "LINKED from Group Input.Vector",
+    "Tile Count": 1.0,
+    "piece_id": "LINKED from LAYOUT.piece_id",
+    "row": "LINKED from LAYOUT.row",
+    "local_x": "LINKED from LAYOUT.local_x",
+    "local_y": "LINKED from LAYOUT.local_y",
+    "piece_width": "LINKED from LAYOUT.piece_width",
+    "piece_height": "LINKED from LAYOUT.piece_height",
+    "edge_distance": "LINKED from LAYOUT.edge_distance",
+    "top_edge_distance": "LINKED from LAYOUT.top_edge_distance",
+    "gap_mask": "LINKED from LAYOUT.gap_mask",
+    "piece_mask": "LINKED from LAYOUT.piece_mask",
+    "base_height": "LINKED from LAYOUT.base_height",
+    "Seed": 41.0,
+    "Amount": 1.0,
+    "Joint Width": 0.0008,
+    "Band Width": 0.0004,
+    "Joint Colour": [
+     0.00439,
+     0.00478,
+     0.00561,
+     1.0
+    ],
+    "Side Outline Width": 0.002,
+    "Side Outline Darkness": 0.6,
+    "Outline Colour": [
+     0.007,
+     0.00802,
+     0.01033,
+     1.0
+    ],
+    "Shadow Width": 0.026,
+    "Shadow Darkness": 0.55,
+    "Shadow Tiers": 4.0,
+    "Shadow Drip": 0.5,
+    "Black Drips": 0.005,
+    "Shadow Colour": [
+     0.00478,
+     0.00561,
+     0.007,
+     1.0
+    ],
+    "Lip Offset": 0.0026,
+    "Lip Width": 0.003,
+    "Lip Brightness": 0.12,
+    "Lip Breakup": 0.4,
+    "Lip Colour": [
+     0.26225,
+     0.2705,
+     0.25818,
+     1.0
+    ],
+    "Edge Darkening": 0.3,
+    "Edge Darkening Width": 0.0045,
+    "Wobble": 0.5,
+    "Wobble Scale": 90.0,
+    "Slate Variation": 0.5,
+    "Shadow Height": 0.12,
+    "Lip Height": 0.04,
+    "Outline Height": 0.05,
+    "Joint Roughness": 0.12,
+    "Shadow Roughness": 0.06,
+    "Lip Roughness": -0.15
+   },
+   "outputs": [
+    "Mask",
+    "Colour",
+    "Height",
+    "Roughness"
+   ]
+  },
+  {
+   "label": "COMBINE",
+   "group_name": "COMBINE",
+   "nodes_inside": 19,
+   "nested_groups": [],
+   "inputs": {
+    "base_height": "LINKED from LAYOUT.base_height",
+    "colour_and_fade Mask": "LINKED from COLOUR AND FADE.Mask",
+    "colour_and_fade Colour": "LINKED from COLOUR AND FADE.Colour",
+    "colour_and_fade Height": "LINKED from COLOUR AND FADE.Height",
+    "colour_and_fade Roughness": "LINKED from COLOUR AND FADE.Roughness",
+    "moss Mask": "LINKED from MOSS.Mask",
+    "moss Colour": "LINKED from MOSS.Colour",
+    "moss Height": "LINKED from MOSS.Height",
+    "moss Roughness": "LINKED from MOSS.Roughness",
+    "damage Mask": "LINKED from DAMAGE.Mask",
+    "damage Colour": "LINKED from DAMAGE.Colour",
+    "damage Height": "LINKED from DAMAGE.Height",
+    "damage Roughness": "LINKED from DAMAGE.Roughness",
+    "outline_and_shadow Mask": "LINKED from OUTLINE AND SHADOW.Mask",
+    "outline_and_shadow Colour": "LINKED from OUTLINE AND SHADOW.Colour",
+    "outline_and_shadow Height": "LINKED from OUTLINE AND SHADOW.Height",
+    "outline_and_shadow Roughness": "LINKED from OUTLINE AND SHADOW.Roughness",
+    "Base Roughness": 0.8,
+    "Metallic": 0.0,
+    "Tone Blend": 0.7,
+    "Height Gain": 1.0
+   },
+   "outputs": [
+    "Colour",
+    "Roughness",
+    "Metallic",
+    "Height"
+   ]
+  }
+ ],
+ "cross_layer_links": [
+  [
+   "DAMAGE",
+   "Mask",
+   "->",
+   "MOSS",
+   "Damage Mask"
+  ]
+ ],
+ "image_nodes_anywhere": []
+}

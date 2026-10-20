@@ -1,0 +1,75 @@
+{
+ "reference": "slate",
+ "candidate": "recipes/slate_layers/verify/score_harness_normal",
+ "overall": 0.695,
+ "groups": {
+  "colour": 0.701,
+  "height": 0.654,
+  "normal": 0.604,
+  "tiling": 1.0
+ },
+ "scores": {
+  "colour_distribution": 0.926,
+  "colour_spectrum": 0.609,
+  "colour_orientation": 0.63,
+  "colour_scale": 0.452,
+  "colour_gradient": 0.753,
+  "seam": 1.0,
+  "height_distribution": 0.699,
+  "height_spectrum": 0.346,
+  "height_gradient": 0.717,
+  "height_colour_link": 0.892,
+  "height_contrast": 0.771,
+  "normal_tilt": 0.634,
+  "normal_components": 0.862,
+  "normal_height_agreement": 0.0
+ },
+ "raw_distances": {
+  "colour_distribution": 0.0046,
+  "colour_spectrum": 0.1408,
+  "colour_orientation": 0.1656,
+  "colour_scale": 0.697,
+  "colour_gradient": 0.0036,
+  "seam": 0.0,
+  "height_distribution": 0.0301,
+  "height_spectrum": 0.2385,
+  "height_gradient": 0.0069,
+  "height_colour_link": 0.0054,
+  "height_contrast": 0.1145,
+  "normal_tilt": 0.0451,
+  "normal_components": 0.036,
+  "normal_height_agreement": 0.0252
+ },
+ "facts": {
+  "seam_ratio_candidate": 0.8,
+  "seam_ratio_reference": 1.69,
+  "correlation_length_px_reference": [
+   64.0,
+   11.0
+  ],
+  "correlation_length_px_candidate": [
+   258.0,
+   11.0
+  ],
+  "mean_lab_reference": [
+   25.2,
+   -1.6,
+   -1.0
+  ],
+  "mean_lab_candidate": [
+   25.1,
+   -1.8,
+   -1.0
+  ],
+  "height_colour_corr_reference": 0.993,
+  "height_colour_corr_candidate": 0.987,
+  "normal_height_corr_reference": [
+   -0.9555107544504099,
+   0.9412310219353763
+  ],
+  "normal_height_corr_candidate": [
+   -0.9776922345376358,
+   0.9695476593132779
+  ]
+ }
+}

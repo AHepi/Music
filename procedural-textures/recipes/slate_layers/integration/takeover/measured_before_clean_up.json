@@ -1,0 +1,14 @@
+{
+ "_words": "Numbers measured by the second integrator on the previous integrator's look pictures just before those pictures were deleted to stay under the 400 MB limit (colour group = lib/texture_compare.py 'same kind' colour group against the slate reference; difference = against outputs/default/colour.png, same seeds, 1254 dots).",
+ "round 11 (colour, 1254 dots)": {
+  "r11a (moss.coverage 0.18, moss.drip_width 0.06, damage.crack_amount 0.03)": {"colour group": 0.664, "colour_scale": 0.286, "mean difference from final (of 255)": 2.76, "share of dots more than 10 steps different %": 10.24},
+  "r11b (only damage.crack_amount 0.03 instead of 0.02)": {"colour group": 0.701, "colour_scale": 0.452, "mean difference from final (of 255)": 0.0, "share of dots more than 10 steps different %": 0.0},
+  "r11c (r11a plus tints: tint_amount 0.9, tint_green_share 0.9, patch_tint 0.7)": {"colour group": 0.658, "colour_scale": 0.286, "mean difference from final (of 255)": 3.53, "share of dots more than 10 steps different %": 10.32}
+ },
+ "round 13 (height, 1254 dots, scored with integration/score_set.py: normal made from the height with the harness's fitted strength)": {
+  "combine.tone_blend 0.4": {"overall": 0.65, "height group": 0.505, "sobel strength": 8.1},
+  "combine.tone_blend 0.7 (chosen)": {"overall": 0.695, "height group": 0.654, "sobel strength": 7.4},
+  "combine.tone_blend 1.0": {"overall": 0.687, "height group": 0.629, "sobel strength": 6.6}
+ },
+ "note on score_set.py": "its normal_height_agreement comes out 0.0 for all three (the harness's own normal gives 0.534 for the 0.7 bake), so its normal group is lower than the harness's; the height group does not depend on it."
+}

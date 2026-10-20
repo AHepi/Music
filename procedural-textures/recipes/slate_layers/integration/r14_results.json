@@ -1,0 +1,23 @@
+{
+ "_words": "Tuning round 14, by the second integrator after the restart. Prompted by the whole-recipe strips (768 dots), where a lighter shadow (shadow_darkness 0 or 0.3) and stronger streaks (streak_contrast 2.1) raised the colour group most. All pictures 1254 dots, colour group of lib/texture_compare.py against the slate reference. 'default seeds' = the seeds of the default tile; seeds_b = layout 101, colour 111, damage 121, moss 131, outline 141; seeds_c = 202, 212, 222, 232, 242.",
+ "default seeds": {
+  "default settings (outputs/default)": 0.701,
+  "r14a outline_and_shadow.shadow_darkness 0.3": 0.766,
+  "r14b colour_and_fade.streak_contrast 2.1": 0.793,
+  "r14c both (0.3 and 2.1)": 0.75,
+  "r14d milder both (shadow_darkness 0.4, streak_contrast 1.8)": 0.796
+ },
+ "seeds_b": {
+  "default settings": 0.769,
+  "r14d": 0.78
+ },
+ "seeds_c": {
+  "default settings": 0.753,
+  "r14d": 0.758
+ },
+ "seeds of variation v1 (7, 17, 27, 37, 47)": {
+  "default settings": 0.765
+ },
+ "what most of the gain was": "the colour_scale measure (the 'feature size' cliff): default seeds 0.452 -> 0.922 for r14d; on seeds_b 0.845 -> 0.918 and seeds_c 0.85 -> 0.853. Colour distribution, orientation and gradient went slightly DOWN with r14d.",
+ "decision": "kept the first integrator's settings: the default seeds are the unlucky ones (0.701, the lowest of five seed sets of the default settings: 0.701, 0.765, 0.769, 0.753, 0.710), and r14d gains only 0.005 to 0.011 on the other seeds, less than the seed spread. The look of r14d (a lighter shadow band, more contrasted streaks) is at least as close to the reference by eye, so it is offered as a setting choice, not adopted (adopting it would have meant re-baking every result in the folder for a gain smaller than the seed noise)."
+}

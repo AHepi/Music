@@ -16,7 +16,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Cookbook done and checked:** start at `cookbook/06 Cookbook - start here.md`. Eight tool guides (pattern makers, shapers, seamless tiles, relief, geometry, painted look,
   baking and checking, descriptions), a new-surface checklist, all twelve surface guides (brick and gravel now written, the checkers' corrections applied), an overview picture.
   An independent checker followed every link (320, none broken) and re-read 55 numbers against the files (all match after 9 fixes).
-- **Running now:** slate in separate layers (layout, colour and fade, damage, moss, outline and shadow) with your picture as a guide only.
+- **Slate in layers done and checked:** one Blender recipe made of six named parts (layout, colour and fade, damage, moss, outline and shadow, combine), driven by
+  49 hand-set settings (1.7 KB), never fitted to your picture. It reads as the same material (same-kind colour score 0.70 on the default tile, 0.70-0.77 over five
+  sets of random seeds; the aim was 0.8 and was not reached). Each layer can be switched off or re-seeded and only that layer changes (proven). It tiles, makes bigger
+  areas of new slates, gives the same picture at three sizes, and its colour, damage, moss and outline parts ran unchanged on a brick layout. Two independent checks:
+  the claims hold; an art director would still see a different hand (see log 12). Pictures: `12 Slate in layers - pictures/`.
 - **Honest gaps the checker found:** nobody has yet followed the checklist on a brand-new surface from scratch (every transfer reused an existing generator); there is no
   starting template for writing a new generator; the tool guides mostly teach shader nodes while most generators here are "painters" of flat shapes written in Python;
   the same-kind tool needs a reference picture to score a new surface.
@@ -34,7 +38,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | `lib/bake_harness.py`, `lib/recipe_tools.py`, `lib/sweep_tools.py`, `lib/contrib/` | Turn a recipe into flat pictures; seamless noise; "what this setting does" strips; the researchers' helpers | Baked maps and strips |
 | `research/` | Five research guides (02) and three tool checks (03) | Facts the builders used |
 | `recipes/<surface>/` | Each surface: analysis, description, generator, scores, new tiles, bigger area, three resolutions, one surface you did not give, guides (04), builder and checker reports | The recipes and lessons |
-| `recipes/slate_layers/` | Slate made of separate layers inside one recipe (in progress) | Guides (05) when done |
+| `recipes/slate_layers/` | Slate made of separate layers inside one recipe: `recipe/` (the recipe, settings, controls table), `layers/` (one file per layer), tests, variations, areas, brick reuse | Baked maps; guides (05) |
 | `cookbook/` | Tool guides (06), start-here page, new-surface checklist (in progress) | The finished cookbook |
 
 ## Word list
@@ -45,6 +49,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Height map:** brighter is higher. **Normal map:** a picture telling Blender which way each dot of the surface faces. **Derivation ceiling:** how well the height and normal
   can be made from the colour picture alone, the best any recipe can do that way.
 - **Layer:** one part of a recipe with its own settings, seed and mask (for example the moss).
+- **Layout bundle:** the eleven numbers the layout layer hands to every other layer for each dot (which slate it is on, how far from its edge, whether it is in a joint...).
+- **Seed:** the number that picks one random pattern; a new seed gives a new pattern with the same character.
+- **Debug view:** a picture of one layer alone (its mask or its colour), baked from the same recipe.
+- **Declared link:** an allowed connection between two layers, written in the settings (here: moss avoids fresh damage).
 - **Seamless / half-tile test:** a tile is seamless if moving the recipe half a tile gives the same picture moved half a tile.
 
 ## Log (added to, never rewritten)
@@ -77,6 +85,29 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     version, a new tile, the surface it was moved to). The independent checker found and fixed 9 wrong numbers (for example mud's "+0.03 SSIM for +50 KB" is really +0.009),
     made words consistent ("seam number" everywhere), and listed the gaps above. Space on the machine stayed above 3 GB.
 
+11. **The machine restarted** while the slate layers were being combined (the four layers were built; the combining was half done, the guides not written). A second helper
+    took over: checked every item on disk, re-made only what was missing or cut short (the largest size, the brick reuse views, two steps of the "what each layer adds"
+    picture, the 4 x 4 area), tried one more tuning round, wrote the guides and the final report, and trimmed the folder from 436 MB to under the 400 MB limit. Nothing done
+    before the restart was lost.
+12. **Slate in layers - results.** Six layers inside one recipe, 176 controls in total (49 set for the default tile, the rest at their starting values), every size a share
+    of the tile. What each layer adds to the same-kind colour score: joints and flat slates 0.32, + colour and fade 0.48, + moss 0.64, + damage 0.70; without the outline
+    and shadow it drops to 0.57. Proven: switching a layer off or changing its seed changes nothing outside that layer (0.0%), except the one declared link (moss avoids
+    damage: 0.9-1.6% of the tile, all inside the damage). Same picture at 512, 1254 and 2508 dots; 2 x 2 and 4 x 4 areas of new slates with no visible seam or repeat. On a
+    brick layout the colour, damage, moss and outline layers ran with no code change (a 40-node brick layout and 53 settings); it looks like painted brick but is not a match
+    to your brick. Eight variations: new seeds 0.77, more moss 0.76, heavily damaged 0.73, big slates 0.75; faded 0.55, dark and wet 0.55, pale old 0.54, fresh and clean 0.46.
+    **Failures and limits:** the 0.8 aim was not reached; a 14th tuning round reached 0.80 on the default seeds but only +0.005 to +0.011 on other seeds, so it was not kept.
+    About 70% of the height still follows the paint brightness, as in your maps. **The look checker** (judging by eye, measuring, testing fixes) found: paint inside each slate
+    is narrow wavy "flame" tongues instead of broad flat bands; too much flat khaki moss (10.8% of the tile against 6.6%) with rows of sharp teeth; chips collect into big
+    tan L-shapes at lower corners; near-square corners and ruler-straight rows; under a low light the relief looks like rippled plastic; drippy shadow under each row; a few
+    pale outlier slates; one hair-like crack; round lichen dots; "dark and wet" reads as noise and "fresh and clean" loses the painted look. It tested one combined set of
+    settings changes on colour-only tiles that moves every measure toward your picture (moss 6.0%, chips 0.8%, less stripy); the relief changes are untested.
+    **The honesty checker** reproduced the numbers and found reporting errors, now noted: the like-for-like default score is 0.695 (0.705 in another file), "outline worth the
+    most" is wrong for the colour score, the normal-map credit was reversed, "identical" was overstated (1-2 step differences from dither), 176 controls not 49.
+    Pictures: `12 Slate in layers - pictures/`: ![](<12 Slate in layers - pictures/12 Slate in layers - your picture, the default tile, the checker suggested fix.jpg>)
+    ![](<12 Slate in layers - pictures/12 Slate in layers - what each layer adds.jpg>) ![](<12 Slate in layers - pictures/12 Slate in layers - each layer on its own.jpg>)
+    ![](<12 Slate in layers - pictures/12 Slate in layers - eight variations.jpg>) ![](<12 Slate in layers - pictures/12 Slate in layers - same layers on a brick wall.jpg>)
+    ![](<12 Slate in layers - pictures/12 Slate in layers - bigger area of new slates.jpg>)
+
 ## Next step
 
-Finish the slate in layers (being combined and checked now), then send it and save it here. After that, the most useful test of the method is to follow the checklist on a brand-new surface from scratch.
+Apply the look checker's tested settings changes to the slate default, add its untested relief changes, re-bake all five maps and check them by eye and by score.
