@@ -1,0 +1,37 @@
+{
+ "ablation": {
+  "still_0_today": {
+   "road_mean_brightness": 0.22,
+   "road_brightest_1_percent": 0.358
+  },
+  "still_1_wet_glb_no_maps": {
+   "road_mean_brightness": 0.178,
+   "road_brightest_1_percent": 0.291,
+   "road_mean_abs_difference_from_previous_step": 0.0421
+  },
+  "still_2_roughness_map": {
+   "road_mean_brightness": 0.461,
+   "road_brightest_1_percent": 0.93,
+   "road_mean_abs_difference_from_previous_step": 0.2835
+  },
+  "still_3_plus_clearcoat_maps": {
+   "road_mean_brightness": 0.491,
+   "road_brightest_1_percent": 0.949,
+   "road_mean_abs_difference_from_previous_step": 0.0305
+  },
+  "still_4_plus_specularity_map": {
+   "road_mean_brightness": 0.485,
+   "road_brightest_1_percent": 0.945,
+   "road_mean_abs_difference_from_previous_step": 0.0061
+  }
+ },
+ "projection": {
+  "plate_view_vs_painting_mean_abs_difference_on_road": 0.0036,
+  "plate_view_vs_painting_mean_abs_difference_whole_picture_sky_differs": 0.0757,
+  "moved_today_glb_vs_wet_glb_matte_on": 0.0004,
+  "moved_wet_glb_matte_on_vs_off": 0.0024,
+  "moved_wet_glb_matte_on_vs_off_on_road": 0.0011,
+  "share_of_moved_picture_wearing_glb_own_surface_matte_on": 0.0197,
+  "share_of_moved_picture_wearing_glb_own_surface_matte_off": 0.0197
+ }
+}

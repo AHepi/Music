@@ -10,8 +10,11 @@ procedurally, with tools that measure how close each result is to the reference.
 - `12 Slate in layers - pictures/` - six pictures of the slate-in-layers results.
 - `reuse_trials/` - the shared slate layers tried on brick, wood, metal, mud and gravel (`00 Inventory ...md` = which tools fit which surface; one folder per
   surface with its notes, recipe, scores and sheets; `verify/` = the independent check, in progress on 20 October). `14 Reuse trials - pictures/` = the sheets shown so far.
-- `recipes/wood_from_displacement/` - wood made from the uploaded wood displacement and colour maps, cut into new boards so big areas never repeat (in progress).
-- `recipes/slate_layers/look_fixes/` - the look checker's fixes to the layered slate (round 1 done and checked; round 2 in progress).
+- `recipes/wood_from_displacement/` - wood made from the uploaded wood displacement and colour maps, cut into new boards so big areas never repeat (done and checked).
+- `recipes/slate_layers/look_fixes/` - the look checker's fixes to the layered slate (two rounds, checked).
+- `mask_test/` - the test of generated mask stamps (fal) inside a copy of the slate's moss and damage layers.
+- `street_wet/` - the wetness layer and specularity map for the pit village street set, tested on a copy of the street (the film project itself was not changed).
+- `15 ...`, `16 ...`, `17 ...`, `18 ... - pictures/` - the pictures sent with log entries 15 to 18.
 - `cookbook/` - the start-here page, eight tool guides (06), the new-surface checklist, the overview picture and the checker's change log.
 - `lib/` - the shared tools: comparison (same kind, dot for dot), baking, seamless noise, setting sweeps, description checker; `lib/contrib/` the researchers' helpers.
 - `PROCEDURAL_NOTES.md`, `SLATE LAYERS BRIEF ...md` - the briefs the helpers worked from; the `NEXT PHASE` note (started) and the `LATER` note (not started) record the person's requests.

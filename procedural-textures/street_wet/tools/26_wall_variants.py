@@ -7,6 +7,8 @@
 #   wet_r1       the round 1 wall settings (band 0.45 m from the pavement, wet roughness 0.45, shine and coat as the layer's defaults)
 #   wet_new      the round 2 settings in apply_wetness_to_set.py (band 0.9 m from the floor, rougher 0.55, no extra shine, trace of coat, porosity 0.9, darkest 0.3)
 #   wet_dull     as wet_new but wet roughness 0.8 and no coat at all (a wall that is only darker, not shiny)
+#   wet_rough9   (run 8) as wet_new but wet roughness 0.9, the same as the dry wall's (a wall whose gloss does not change at all)
+#   wet_darker   (run 8) as wet_rough9 but darkest 0.1 (the soaked foot at a tenth of its dry colour)
 # EEVEE settings are the plate's, with the round 2 shadow cure (shadow_ray_count / shadow_step_count 4 / 16: see the recipe note on the speckle).
 # Run: xvfb-run -a blender -b --disable-autoexec -t 2 set_copy/street.blend --python tools/26_wall_variants.py -- OUT_FOLDER [CAMERA] [variant ...]
 import os
@@ -53,6 +55,10 @@ for variant in wanted:
                           offset=aw.WALL_FOOT_OFFSET)
         elif variant == 'wet_dull':
             values.update(wet_roughness=0.8, coat=0.0, boost=0.0)
+        elif variant == 'wet_rough9':
+            values.update(wet_roughness=0.9, coat=0.0, boost=0.0)
+        elif variant == 'wet_darker':
+            values.update(wet_roughness=0.9, coat=0.0, boost=0.0, darkest=0.1)
         node.inputs['Wet Roughness'].default_value = values['wet_roughness']
         node.inputs['Specular Boost'].default_value = values['boost']
         node.inputs['Film Coat'].default_value = values['coat']

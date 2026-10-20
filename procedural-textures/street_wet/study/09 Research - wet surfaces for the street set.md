@@ -430,3 +430,10 @@ maps at all).
 * To save disk I deleted the large baked maps and the 6.5 MB test glb after reading them; `work/baked_road/road_wet_test_glb_json.json` keeps the glb's description (its extensions, materials and pictures), and picture 08 shows the maps.
 * `work/` - the renders, masks and numbers behind every claim (`work/ids/*_shares.json`, `work/group_shares.json`, `work/cycles_main_final/main_numbers_final.json`,
   `work/puddle_masks_sheet.json`, `work/baked_road/live_vs_baked.json` and `bake_report.json`), logs (`work/0*.log`), and 8 small Poly Haven maps (`work/polyhaven_maps/`, CC0).
+
+## 10. Round 2 (added after the build and the check; the full story is in "../09 Recipe - wetness layer and specular map for the street - how it is made.md", section 2)
+Three things in this study were overtaken by what was measured later:
+* **The EEVEE plate needs more than ray tracing on.** Section 7, decision (2) says ray tracing must be on. It must also have `shadow_ray_count 4` and `shadow_step_count 16`: with EEVEE's defaults (1 and 6) the soft shadows of the lamps are a little random, and on a wet road that shows as white speckle (grain 0.026 against 0.0025 dry). With the two settings and 48 samples the grain is 0.008. It is NOT the stones' fine relief picture, which section 6 and the plan blamed for the "gritty pavement glints".
+* **The 40-minute plate time** (sections 1 and 8) was an estimate. Measured: the lockout shot (the film's own file with its props), 1536 x 2730, EEVEE, ray tracing on, shadow rays 4 / steps 16, 32 samples: 20 minutes 27 seconds.
+* **The walls**: the plan's wall foot band (measured from the pavement, 0.45 m) was hidden by the dressed-stone plinth, and its shine made the walls lighter wet. The walls now get no shine, a band 0.9 m tall measured from the cottage floor, and stronger darkening.
+Still true: the specularity map alone changes the picture very little; the roughness map makes the road wet; today's stage does not let the glb's maps reach the film; the painter has not been tried.

@@ -20,3 +20,6 @@ DAMAGE layers, compared with the current masks by the look checker's measures an
 The person said: "Yeah do it as a test. But then move on to another set. Say, the street view test. Because it's going to need a specularity map to
 mimick wetness." Approved spend for this test: up to US$1.00 in total (fal). Folder: mask_test/. The street work (wetness layer and specular map for the
 pit village street set) runs alongside in street_wet/; it has no paid image generation.
+
+## Tested (20 October, log 17 of the project story)
+The stamp machinery works and is seamless; the generated shapes did not look better than the node-made ones (US$0.354 spent). Next idea, not started: generate shapes from a crop of the reference picture.

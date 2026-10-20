@@ -30,8 +30,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   14 slates) needs a small code fix in the colour and fade layer - not started, as you asked to move on.
 - **Wood from your maps done (log 16):** the material reads as your wood (score 0.84, the highest of any surface so far) and big areas no longer repeat, but the
   arrangement reads as stacked stone or ledgestone, not long planks - boards are too short and regular. Not fixed (the job allowed two rounds).
-- **Running now:** the generated-mask test on the slate (fal, under US$1); the wetness layer and specular map for the pit village street set. Helpers run on
-  Sonnet 5.5 at extra-high effort.
+- **Generated-mask test done (log 17):** fal shapes plug into the slate's moss and damage layers and the tile stays seamless, but they did not look better than the
+  node-made shapes (US$0.35 spent of US$1.00).
+- **Wet street done (log 18):** a wetness layer that sits on any material; the street reads wet at dusk in the plate (road sheen, lamp reflections, mirror puddles in the
+  gutter, darker wet wall feet). The specularity map is made and travels in the .glb, but it changes the picture very little and does not reach the film as the stage works
+  today: what the audience will see as wet is what the painter paints from the wet plate. The painter has not been tried (about 10 US cents; needs your go and a changed brief).
+- **Nothing running now.**
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -61,6 +65,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Seed:** the number that picks one random pattern; a new seed gives a new pattern with the same character.
 - **Debug view:** a picture of one layer alone (its mask or its colour), baked from the same recipe.
 - **Declared link:** an allowed connection between two layers, written in the settings (here: moss avoids fresh damage).
+- **Roughness / specularity map:** pictures saying how shiny each dot is. Roughness: low = glossy (wet), high = matt (dry). Specularity: how strong the reflection is.
+- **Plate:** the picture drawn once from the 3D street that the image model repaints in the series' style; the film shows that painting shone back onto the 3D set.
+- **Stamp sheet:** one generated picture of many separate shapes (moss clumps, chips) that a recipe places one by one.
 - **Seamless / half-tile test:** a tile is seamless if moving the recipe half a tile gives the same picture moved half a tile.
 
 ## Log (added to, never rewritten)
@@ -175,7 +182,32 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     claim ("never the same strip as its neighbour": really 19%), fixed in round 2 (1.1%). Six guide errors from the last honesty check corrected by me. Pictures:
     `16 Wood from your maps - pictures/`. Guides: `recipes/wood_from_displacement/08 Recipe ...md` and `08 Lessons ...md`.
 
+17. **Generated masks as layers (your idea), tested on the slate.** fal (flux/dev) made six stamp sheets for US$0.354 by the price list (limit US$1.00; the checker
+    confirmed exactly six calls). Asked for white shapes on black, it gave black backgrounds four times out of six, a cream background once, round fluffy balls and square
+    paper pieces when asked for drips and thin strips, and once a brown rod and a red scribble; two sheets were usable after cleaning (16 hanging-moss "curtains", and long
+    ragged chip strips cut into 20 pieces). A copy of the slate recipe got a stamp mode in its moss and damage layers: per slate, from the layer's seed, a few stamps are placed
+    by the layer's own rules (moss from the upper edge and along joints, chips along the lower edge), with random choice, turn, size and mirror. The layer still makes its
+    own colour and relief. It is seamless (half-tile test re-run by the checker) and the original slate was never touched. **Result: not better.** Scores within noise
+    (0.778 node-made, 0.783 moss stamps, 0.770 chip stamps, 0.775 both). By eye the stamp moss is a hazy see-through wash with a hard flat top, rubber-stamped on every
+    second slate; the stamp chips are a tidy continuous "frosting" band; the reference has opaque ragged blotches and lumpy cream islands. Why: the generator gave generic
+    silhouettes without the reference's torn brush edge, and the node shapes had many tuning rounds against one hour for the stamps. Worth trying next (not started):
+    generate the shapes FROM a crop of your picture; the multiplied mode (node mask times stamp) looked best for moss by eye but was not calibrated. Pictures:
+    `17 Generated masks test - pictures/`; notes: `mask_test/notes - generated mask stamps test.md`; spending: `mask_test/spending.md`.
+18. **The street view set: wetness layer and specularity map.** You asked to move on to the street test, which needs a specularity map for wetness. A study of the pit
+    village street (473 objects, 41 materials, all Poly Haven photo surfaces with one fixed shininess each): the road is a third of the main view, walls a sixth, roofs 1%.
+    Built: one WETNESS node group (35 controls) that sits between any material's dry look and its shader - photo surfaces or our recipes (tested on five). Rules: water
+    in low spots (from the road's camber to the gutter) becomes puddles that flatten the stones and mirror the sky and lamps; wet stone gets darker and glossier with drier
+    tops; walls get a darker wet foot and streaks under sills; dials for wetness and puddles. Put on 11 materials of a COPY of the street (your film project was not changed).
+    Baked the maps for the .glb (colour, roughness, specularity, clear coat), checked them in a copy of the film's three.js stage. Round 2 fixed the checker's findings:
+    white grit on the road in EEVEE (the film's renderer; cause found: its soft-shadow noise; cured by plate settings), walls had got LIGHTER when wet (now 0.84 of dry, foot
+    0.66), road too bright (now 1.5 times today). A full-size wet plate of the lockout shot was drawn (1536 x 2730, 20 minutes). **Key finding:** the specularity map changes
+    the road by only 0.006; the roughness map is what makes it wet (0.28). And none of the .glb maps reach the film as the stage works today (the projected painting covers
+    98% of a moved view): the wet look the audience sees is whatever the painter paints from the wet plate. **Open (checker, "nearly"):** walls barely read wet at plate
+    size; the brazier-lit foreground reads as polished tile with a blown-out glare pool; props stand dry and the sacks look as if they hover; a stepped hard edge on one close
+    road puddle. **Not tried:** the painter (about 10 US cents) - its brief must first drop "matte painted finish" and "no puddles or reflections" (a wet ground was once
+    repainted dry). Pictures: `18 Wet street - pictures/`; guide: `street_wet/09 Recipe - wetness layer and specular map for the street - how it is made.md`.
+
 ## Next step
 
-Let the two running jobs finish (the generated-mask test, the wet street) and send them with their checks. Open, waiting for your go: the wood's stone-wall look (longer
-boards by joining two strips inside a crack, fewer and more ragged joints) and the slate's straight-edged facets.
+One painter test of the wet plate (about 10 US cents, needs your go): change the painter's brief to keep the wet sheen, lamp reflections and puddles, repaint the wet
+lockout plate once, and see whether the wet look survives. Also open, waiting for your go: the wood's stone-wall look and the slate's straight-edged facets.

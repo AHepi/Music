@@ -18,7 +18,7 @@
 #
 # ROUND 2 (what the checker found): the settings below were changed as follows (the reasons are in the recipe note, section "Round 2"):
 #   road and pavements: a SMOOTHED copy of the relief picture for the wet state (cure for EEVEE speckle), flatter relief, pavement flags back to a lower wet roughness;
-#   walls: no extra shine (Specular Boost 0, no coat), wet roughness 0.75 (a wet wall is darker, not glossy), strong darkening (porosity 1.0, darkest 0.2), and the wet band measured from the
+#   walls: no extra shine (Specular Boost 0, no coat), wet roughness 0.9, the same as dry (a wet wall is darker, not glossier: tested, 0.75 made the lamp-lit base brighter), strong darkening (porosity 1.0, darkest 0.2), and the wet band measured from the
 #   cottage FLOOR in the cottage's own coordinates and made 0.9 m tall (round 1 measured from the pavement, so the dressed-stone plinth hid it).
 #
 # Use (inside Blender, with the street copy open):
@@ -56,13 +56,13 @@ MATERIALS = {
                            porosity=0.55, wet_roughness=0.35, lowness='pavement', relief_flatten=1.0, puddle_bias=0.22),
     'channel_stones': dict(porosity=0.5, wet_roughness=0.3, lowness=1.0, wetness_scale=1.15),
     'kerb_stone': dict(porosity=0.5, wet_roughness=0.35, lowness=0.3, wetness_scale=1.05),
-    'cottage_brick': dict(rough='red_brick_rough.jpg', height='red_brick_displacement.jpg', porosity=1.0, darkest=0.2, wet_roughness=0.75, specular_boost=0.0, film_coat=0.0,
+    'cottage_brick': dict(rough='red_brick_rough.jpg', height='red_brick_displacement.jpg', porosity=1.0, darkest=0.2, wet_roughness=0.9, specular_boost=0.0, film_coat=0.0,
                           wall_band=0.9, wall='left_row'),
-    'cottage_stone': dict(rough='stone_brick_wall_001_rough.jpg', height='stone_brick_wall_001_displacement.jpg', porosity=1.0, darkest=0.2, wet_roughness=0.75, specular_boost=0.0,
+    'cottage_stone': dict(rough='stone_brick_wall_001_rough.jpg', height='stone_brick_wall_001_displacement.jpg', porosity=1.0, darkest=0.2, wet_roughness=0.9, specular_boost=0.0,
                           film_coat=0.0, wall_band=0.9, wall='right_row'),
     'colliery_brick': dict(porosity=0.7, wet_roughness=0.5, specular_boost=0.0, film_coat=0.05),
-    'dressed_stone': dict(porosity=0.5, wet_roughness=0.45, ground_offset=0.13, specular_boost=0.0, film_coat=0.05),
-    'dark_dressed_stone': dict(porosity=0.5, wet_roughness=0.45, ground_offset=0.13, specular_boost=0.0, film_coat=0.05),
+    'dressed_stone': dict(porosity=0.8, darkest=0.3, wet_roughness=0.6, ground_offset=0.13, specular_boost=0.0, film_coat=0.0, wall_band=0.6),
+    'dark_dressed_stone': dict(porosity=0.8, darkest=0.3, wet_roughness=0.6, ground_offset=0.13, specular_boost=0.0, film_coat=0.0, wall_band=0.6),
     'roof_slate': dict(porosity=0.3, wet_roughness=0.4, specular_boost=0.05, film_coat=0.05),
     'colliery_yard': dict(porosity=0.7, wet_roughness=0.4),
 }

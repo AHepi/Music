@@ -72,8 +72,11 @@ WALL_SOURCES = {   # baked wall name: (object to photograph, its wall material v
 }
 # how much darker (as a share of dry) each material is when wet, measured by tools/04_colour_ratios.py (main camera, state wet 0.85 / puddles 0.5)
 # round 2: measured again with the round 2 settings (tools/04b_colour_ratios.py on work/r30/colour, main camera); the walls' own numbers matter only for the chimneys, which wear the plain wall materials
-COLOUR_RATIO = {'channel_stones': 0.69, 'kerb_stone': 0.76, 'colliery_brick': 0.86, 'cottage_brick': 0.70, 'cottage_stone': 0.72, 'dark_dressed_stone': 0.82,
-                'dressed_stone': 0.88, 'roof_slate': 0.90, 'colliery_yard': 0.56}
+# The first bake of round 2 used the measured colour ratios (colliery brick 0.86, dressed stone 0.88, dark dressed stone 0.82, slate 0.90) and the baked street then came out brighter than the live
+# one for the flat stand-ins (colliery brick x1.24, dressed stone x1.21, slate x1.04; tools/31_compare_baked_live.py): a flat "wet all over" surface shines more than a surface that is wet in
+# places. So these four were multiplied by live / baked from that comparison (0.69, 0.73, 0.68, 0.87): they are fitted to the main camera, not measured colour ratios.
+COLOUR_RATIO = {'channel_stones': 0.69, 'kerb_stone': 0.76, 'colliery_brick': 0.69, 'cottage_brick': 0.70, 'cottage_stone': 0.72, 'dark_dressed_stone': 0.68,
+                'dressed_stone': 0.73, 'roof_slate': 0.87, 'colliery_yard': 0.56}
 
 # ------------------------------------------------------------------------------------------------------------------------------ before the layer goes on
 for name in aw.MATERIALS:                         # keep a clean copy of every material that will be changed (the .glb materials are made from these)
