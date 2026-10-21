@@ -38,8 +38,11 @@ services) and the other eight Blender skills.
 | 23c lighting and shot planning | Light-and-dark study with the subject outlined; blown and crushed shares; a colour-setting audit (it found data pictures set to colour inside our wetness layer); a lens comparison; a "is the view blocked" test. | Its one-lamp-at-a-time shares mislead on a street full of glowing windows; its subject verdicts are built for faces. Neither adds composition checks like our own shot checker. |
 | 23d scatter and export | The scatter builder made a correct litter scatter first time and its counting checks prove it. The export check found three real faults the exporter hides (litter missing unless "realised", cameras dropped, a crash in the comparison). | Scattered litter is too small to read in the film's main camera. The "web" export squeezes shapes lossily (up to 52 mm off on our street) and our stage cannot read squeezed files without one added line. Use it with squeezing off and cameras on (10.2 MB instead of 16.9 MB, lossless). |
 
+## Your view (21 October)
+"The third door looks photorealistic. Lol. ... Still keep it, the textures looking realistic is fine." So: keep the wear-then-bake route as a tool for props, and realistic-looking textures in the 3D plate are fine (the painter turns the plate into the series' style anyway).
+
 ## Not tested
-* That a fresh Claude session started in `/home/user/Music` lists and loads these skills (this session began before they were installed).
+* Later checked: this session itself picked the seven skills up a little after they were installed (they appeared in its list of skills, with the new "headless only" description). Not checked: a session started inside a sub-folder such as austerity-explainer.
 * Many tools: the window-only ones, most light-rig tools, most export presets, moving mannequins and the animatic.
 * The "local rules" written into the skills are instructions, not locks.
 

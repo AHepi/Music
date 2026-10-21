@@ -1,0 +1,48 @@
+{
+ "note": "What this file is (plain words): the exact record of the ONE paid repaint of the new wet lockout plate in round 2 (21 October 2026): the painter, the settings, the pictures sent, the request id. The prompt sent is in briefs/brief_round2.txt (same words, after the line of equals signs).",
+ "model": "blackforestlabs/flux-3/edit-image (Flux 3 edit on fal)",
+ "request_id": "01a15d2e-ad95-7d40-8c3c-421e2f20da8b",
+ "submitted_at_utc": "2026-10-21T06:39Z",
+ "how_sent": "same way as the first test: the two small pictures were uploaded to fal's storage with the fal tool (upload_file, then a plain PUT), checked byte for byte, and the job was queued with submit_job and polled with check_job",
+ "settings": {
+  "resolution": "2k",
+  "aspect_ratio": "auto",
+  "output_format": "png",
+  "safety_tolerance": 2,
+  "enable_prompt_expansion": false
+ },
+ "images_sent": [
+  "image 1: the new wet plate (painter_round_2/plate/lockout_plate_wet_round2.png, 1536 x 2730) shrunk to 810 x 1440 (sent/image_1_round2_wet_plate_810x1440.png)",
+  "image 2: the series' style picture, the same file as in the first test (sent/image_2_style_504x896.jpg, byte for byte the same)"
+ ],
+ "price": "US$0.048 per megapixel (looked up 21 Oct 06:37); output about 4.1 MP = US$0.197; with both pictures sent 1.62 MP = US$0.078 more if they are charged, worst case US$0.277",
+ "finished_at_utc": "2026-10-21T06:41Z (about 2 minutes after sending; first time, no error)",
+ "returned": {
+  "width": 1520,
+  "height": 2702,
+  "megapixels": 4.107,
+  "file": "pictures/front_painting_as_returned.png",
+  "url_note": "fal keeps the picture only for a limited time; the file here is the copy"
+ },
+ "calls_made": 1,
+ "price_note": "output 4.107 MP x US$0.048 = US$0.197; both pictures sent (1.618 MP) = US$0.078 more if they are charged; fal shows no exact charge. Ledger: SPENDING - paid image generation ledger.md",
+ "lined_up": {
+  "tool": "copy of the film kit align_painting.py (alignment/align_painting_copy.py)",
+  "stretch": 1.0,
+  "shift_dots_of_1080_wide": [
+   1.5,
+   2.0
+  ],
+  "agreement_of_prop_outlines_before_after": [
+   0.845,
+   0.888
+  ],
+  "log": "alignment/align_front_painting.log",
+  "saved": "front_painting_lined_up.png (1536 x 2730; the returned picture was first resized to the plate size)"
+ },
+ "final": {
+  "file": "front_painting_final.png",
+  "which": "the lined-up painting with a free dark plain sky (the plate's own sky colours, smoothed, faint paint grain from the painting) cut with Blender's exact sky mask (tools/make_sky_mask_blender.py, tools/make_front_painting_final.py)",
+  "why": "the painter again put pale clouds in the sky: share of sky brighter than the plate's by 0.12 was 29 percent by the first test's method (first test 19 percent), 18 percent by the cleaner sky-only method (first test 14 percent)"
+ }
+}

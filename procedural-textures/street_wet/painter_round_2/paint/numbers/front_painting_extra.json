@@ -1,0 +1,324 @@
+{
+ "note": "all at 1536 x 2730; brightness = picture brightness 0 (black) to 1 (white), Rec.709 weights",
+ "sky": {
+  "note": "sky dots = Blender sky mask (fully sky, 4 dots away from any edge), top half; each painting is compared with the plate it was painted from (the first test with its own older plate)",
+  "plate": {
+   "mean_brightness": 0.33144161105155945,
+   "p95": 0.4187137484550476,
+   "max": 0.4223521649837494,
+   "share_over_0.5": 0.0,
+   "share_brighter_than_its_plate_sky_by_0.12": 0.0,
+   "share_brighter_than_its_plate_sky_by_0.05": 0.014159219814746807,
+   "share_darker_than_its_plate_sky_by_0.12": 0.0
+  },
+  "paint_new": {
+   "mean_brightness": 0.3945302367210388,
+   "p95": 0.5148941278457642,
+   "max": 0.9560086727142334,
+   "share_over_0.5": 0.09760476598522871,
+   "share_brighter_than_its_plate_sky_by_0.12": 0.17717832010891138,
+   "share_brighter_than_its_plate_sky_by_0.05": 0.5503221714018629,
+   "share_darker_than_its_plate_sky_by_0.12": 2.1515188610304292e-05
+  },
+  "paint_final": {
+   "mean_brightness": 0.3338716924190521,
+   "p95": 0.4187137484550476,
+   "max": 0.4344000220298767,
+   "share_over_0.5": 0.0,
+   "share_brighter_than_its_plate_sky_by_0.12": 0.0,
+   "share_brighter_than_its_plate_sky_by_0.05": 0.002581822633236515,
+   "share_darker_than_its_plate_sky_by_0.12": 0.0
+  },
+  "paint_test1": {
+   "mean_brightness": 0.33541813492774963,
+   "p95": 0.539628267288208,
+   "max": 0.8884863257408142,
+   "share_over_0.5": 0.08607930201760536,
+   "share_brighter_than_its_plate_sky_by_0.12": 0.14207146752133898,
+   "share_brighter_than_its_plate_sky_by_0.05": 0.26686698049165913,
+   "share_darker_than_its_plate_sky_by_0.12": 1.2612351943971481e-05
+  },
+  "plate_test1": {
+   "mean_brightness": 0.29963675141334534,
+   "p95": 0.35629257559776306,
+   "max": 0.410365492105484,
+   "share_over_0.5": 0.0,
+   "share_brighter_than_its_plate_sky_by_0.12": 0.0,
+   "share_brighter_than_its_plate_sky_by_0.05": 0.0,
+   "share_darker_than_its_plate_sky_by_0.12": 0.0
+  },
+  "paint_dry": {
+   "mean_brightness": 0.4356449246406555,
+   "p95": 0.560836911201477,
+   "max": 0.8364431858062744,
+   "share_over_0.5": 0.275662983117996,
+   "share_brighter_than_its_plate_sky_by_0.12": 0.3599275902617805,
+   "share_brighter_than_its_plate_sky_by_0.05": 0.854650062876284,
+   "share_darker_than_its_plate_sky_by_0.12": 4.3030377220608584e-05
+  }
+ },
+ "joints_on_road": {
+  "note": "line = how much dots next to a joint differ from the stone beside them (0 = no grid, 0.3 = 30 percent); texture = the stone's own mottling; a grid is visible when line >= 0.12 and >= 2 x texture. Positions of the PLATE's joints are used for every picture.",
+  "plate": {
+   "far": {
+    "line": 0.12,
+    "texture": 0.027,
+    "dark_share": 0.323,
+    "bright_share": 0.0,
+    "nzone": 24007
+   },
+   "middle": {
+    "line": 0.168,
+    "texture": 0.12,
+    "dark_share": 0.245,
+    "bright_share": 0.114,
+    "nzone": 51304
+   },
+   "near": {
+    "line": 0.327,
+    "texture": 0.082,
+    "dark_share": 0.597,
+    "bright_share": 0.081,
+    "nzone": 94550
+   }
+  },
+  "paint_new": {
+   "far": {
+    "line": 0.142,
+    "texture": 0.099,
+    "dark_share": 0.256,
+    "bright_share": 0.105,
+    "nzone": 24007
+   },
+   "middle": {
+    "line": 0.177,
+    "texture": 0.141,
+    "dark_share": 0.228,
+    "bright_share": 0.159,
+    "nzone": 51304
+   },
+   "near": {
+    "line": 0.304,
+    "texture": 0.124,
+    "dark_share": 0.473,
+    "bright_share": 0.167,
+    "nzone": 94550
+   }
+  },
+  "paint_test1": {
+   "far": {
+    "line": 0.148,
+    "texture": 0.114,
+    "dark_share": 0.266,
+    "bright_share": 0.114,
+    "nzone": 24007
+   },
+   "middle": {
+    "line": 0.235,
+    "texture": 0.102,
+    "dark_share": 0.465,
+    "bright_share": 0.108,
+    "nzone": 51304
+   },
+   "near": {
+    "line": 0.287,
+    "texture": 0.098,
+    "dark_share": 0.459,
+    "bright_share": 0.143,
+    "nzone": 94550
+   }
+  },
+  "plate_test1": {
+   "far": {
+    "line": 0.037,
+    "texture": 0.017,
+    "dark_share": 0.011,
+    "bright_share": 0.0,
+    "nzone": 24007
+   },
+   "middle": {
+    "line": 0.092,
+    "texture": 0.03,
+    "dark_share": 0.193,
+    "bright_share": 0.01,
+    "nzone": 51304
+   },
+   "near": {
+    "line": 0.096,
+    "texture": 0.029,
+    "dark_share": 0.177,
+    "bright_share": 0.038,
+    "nzone": 94550
+   }
+  },
+  "paint_dry": {
+   "far": {
+    "line": 0.076,
+    "texture": 0.059,
+    "dark_share": 0.092,
+    "bright_share": 0.031,
+    "nzone": 24007
+   },
+   "middle": {
+    "line": 0.154,
+    "texture": 0.075,
+    "dark_share": 0.325,
+    "bright_share": 0.067,
+    "nzone": 51304
+   },
+   "near": {
+    "line": 0.201,
+    "texture": 0.048,
+    "dark_share": 0.341,
+    "bright_share": 0.161,
+    "nzone": 94550
+   }
+  }
+ },
+ "rubbish_blobs": {
+  "note": "small dark compact blobs (6 to 400 dots, darker than the surroundings by 0.07 and under 0.22 bright) on road, pavement, gutter, kerb away from props; the first test used its own older plate with far fewer pieces",
+  "ground_area_dots": 1079523,
+  "paint_new": {
+   "against": "plate",
+   "plate_blobs": 649,
+   "painting_blobs": 1047,
+   "plate_blobs_per_100k_dots_of_ground": 60.11914521506258,
+   "painting_blobs_per_100k_dots_of_ground": 96.987280493329,
+   "kept_share_of_plate_blobs_with_a_painting_blob_within_7_dots": 0.7164869029275809,
+   "chance_level_for_kept_share_(painting_shifted_60_dots)": 0.20030816640986132,
+   "added_share_of_painting_blobs_with_no_plate_blob_within_7_dots": 0.5501432664756447,
+   "chance_level_for_added_share_(painting_shifted_60_dots)": 0.8677196446199408
+  },
+  "paint_test1": {
+   "against": "plate_test1",
+   "plate_blobs": 52,
+   "painting_blobs": 421,
+   "plate_blobs_per_100k_dots_of_ground": 4.8169422976629495,
+   "painting_blobs_per_100k_dots_of_ground": 38.99870590992503,
+   "kept_share_of_plate_blobs_with_a_painting_blob_within_7_dots": 0.19230769230769232,
+   "chance_level_for_kept_share_(painting_shifted_60_dots)": 0.057692307692307696,
+   "added_share_of_painting_blobs_with_no_plate_blob_within_7_dots": 0.9738717339667459,
+   "chance_level_for_added_share_(painting_shifted_60_dots)": 0.9924050632911392
+  },
+  "per_100k_dots_by_zone": {
+   "gutter and kerb": {
+    "plate": 251.57485861492944,
+    "paint_new": 271.7008473041238,
+    "paint_test1": 56.3527683297442,
+    "plate_test1": 20.125988689194354
+   },
+   "pavement": {
+    "plate": 161.42854295792893,
+    "paint_new": 261.0757916973912,
+    "paint_test1": 19.92944974789246,
+    "plate_test1": 0.0
+   },
+   "road": {
+    "plate": 43.08997268568796,
+    "paint_new": 76.71866258597426,
+    "paint_test1": 38.25649126271103,
+    "plate_test1": 4.319281271596406
+   }
+  }
+ },
+ "puddles": {
+  "puddle_share_of_ground": 0.06130687215181724,
+  "puddle_dots": 69512,
+  "plate": {
+   "mean_brightness_in_puddles": 0.2448812574148178,
+   "mean_brightness_of_ground_just_round_puddles": 0.2685999274253845,
+   "puddle_minus_round": -0.02371867001056671,
+   "roughness_in_puddles_(std_of_fine_detail)": 0.04379044473171234
+  },
+  "paint_new": {
+   "mean_brightness_in_puddles": 0.3005053400993347,
+   "mean_brightness_of_ground_just_round_puddles": 0.32607996463775635,
+   "puddle_minus_round": -0.02557462453842163,
+   "roughness_in_puddles_(std_of_fine_detail)": 0.061554864048957825,
+   "pattern_likeness_with_plate_inside_puddles_(correlation_of_blurred_brightness)": 0.9230379411679867
+  },
+  "paint_test1": {
+   "mean_brightness_in_puddles": 0.19606229662895203,
+   "mean_brightness_of_ground_just_round_puddles": 0.24554236233234406,
+   "puddle_minus_round": -0.04948006570339203,
+   "roughness_in_puddles_(std_of_fine_detail)": 0.04853149875998497,
+   "pattern_likeness_with_plate_inside_puddles_(correlation_of_blurred_brightness)": 0.8346075690537602
+  },
+  "paint_dry": {
+   "mean_brightness_in_puddles": 0.3924115300178528,
+   "mean_brightness_of_ground_just_round_puddles": 0.3537946045398712,
+   "puddle_minus_round": 0.03861692547798157,
+   "roughness_in_puddles_(std_of_fine_detail)": 0.047286562621593475,
+   "pattern_likeness_with_plate_inside_puddles_(correlation_of_blurred_brightness)": 0.8517037796567196
+  }
+ },
+ "lamp_glass": {
+  "note": "the brightest tenth of the dots in the top 30 percent of each lamp (the lamp head: glass and mantle); lamp left and lamp near right",
+  "plate": {
+   "lamp left": {
+    "red_green_blue_(0-255)": [
+     252,
+     238,
+     220
+    ],
+    "hue_degrees_(30 = orange-amber, 50 = yellow, 60 = pale yellow)": 34,
+    "colour_strength_(0 grey - 1 full)": 0.13,
+    "blue_over_red": 0.87
+   },
+   "lamp near right": null
+  },
+  "paint_new": {
+   "lamp left": {
+    "red_green_blue_(0-255)": [
+     238,
+     226,
+     205
+    ],
+    "hue_degrees_(30 = orange-amber, 50 = yellow, 60 = pale yellow)": 38,
+    "colour_strength_(0 grey - 1 full)": 0.14,
+    "blue_over_red": 0.86
+   },
+   "lamp near right": null
+  },
+  "paint_test1": {
+   "lamp left": {
+    "red_green_blue_(0-255)": [
+     240,
+     227,
+     189
+    ],
+    "hue_degrees_(30 = orange-amber, 50 = yellow, 60 = pale yellow)": 44,
+    "colour_strength_(0 grey - 1 full)": 0.21,
+    "blue_over_red": 0.79
+   },
+   "lamp near right": null
+  },
+  "paint_dry": {
+   "lamp left": {
+    "red_green_blue_(0-255)": [
+     229,
+     200,
+     155
+    ],
+    "hue_degrees_(30 = orange-amber, 50 = yellow, 60 = pale yellow)": 36,
+    "colour_strength_(0 grey - 1 full)": 0.32,
+    "blue_over_red": 0.68
+   },
+   "lamp near right": null
+  }
+ },
+ "broad_brightness_difference_painting_minus_plate_(blurred,_not_sky)": {
+  "paint_new": {
+   "mean": 0.05617173761129379,
+   "mean_absolute": 0.09149271249771118,
+   "share_of_dots_brighter_than_plate_by_0.10": 0.3099227698434901,
+   "share_darker_by_0.10": 0.06400667664375675
+  },
+  "paint_test1_vs_its_plate": {
+   "mean": -0.012190786190330982,
+   "mean_absolute": 0.06425721198320389,
+   "share_of_dots_brighter_than_plate_by_0.10": 0.006979408407939769,
+   "share_darker_by_0.10": 0.10590146556789228
+  }
+ }
+}

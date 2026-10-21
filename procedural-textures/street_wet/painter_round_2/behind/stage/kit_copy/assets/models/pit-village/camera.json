@@ -1,0 +1,59 @@
+{
+  "about": "Main camera of the pit village street set (street.glb). Blender space is z-up; three.js space is y-up: positions convert as (x, y, z) -> (x, z, -y); the camera quaternion converts as q_three = rotation(-90 degrees about x) * q_blender, because a camera looks down its own -z with +y up in both. (For ordinary objects the glTF exporter instead writes (w, x, z, -y), since their vertices are converted too.) The camera is also inside street.glb as the node \"main_camera\" (and \"side_camera\", 2 m to the right).",
+  "frame": {
+    "width": 1080,
+    "height": 1920,
+    "aspect": 0.5625
+  },
+  "vertical_fov_degrees": 40.0,
+  "horizontal_fov_degrees": 23.140917140577795,
+  "near": 0.1,
+  "far": 1500.0,
+  "blender": {
+    "location": [
+      0.0,
+      3.0,
+      1.88978
+    ],
+    "rotation_quaternion_wxyz": [
+      0.665882,
+      0.746057,
+      0.0,
+      0.0
+    ],
+    "rotation_euler_xyz_degrees": [
+      96.5,
+      -0.0,
+      0.0
+    ]
+  },
+  "threejs": {
+    "position": [
+      0.0,
+      1.88978,
+      -3.0
+    ],
+    "quaternion_xyzw": [
+      0.056693,
+      0.0,
+      0.0,
+      0.998392
+    ],
+    "rotation_euler_xyz_degrees": [
+      6.5,
+      -0.0,
+      0.0
+    ],
+    "fov": 40.0
+  },
+  "set_notes": {
+    "street_slope_degrees": 4.0,
+    "street_runs_along": "Blender +y (three.js -z), uphill",
+    "street_half_width": 2.5,
+    "house_front_x": 4.15,
+    "ground_height_formula": "z = min(y, 76) * tan(4 deg) (channel line); pavement top = that + 0.13; road crown + 0.08",
+    "winding_wheels": "nodes winding_wheel_left and winding_wheel_right, each with its origin on its own axle and no rotation; the axles run along Blender y, which is three.js -z, so turn them with wheel.rotation.z in three.js (rotation_euler y in Blender). The wheels face the camera; ropes are a separate static object (winding_ropes).",
+    "markers": "empties: lamp_0..lamp_4 (lamp heads), <row>_cottage_NN_doorway, <row>_cottage_NN_chimney_top, chimney_smoke_top (colliery chimney), wheel_left_axle, wheel_right_axle, engine_house_door",
+    "glowing_material_names": "window_lit_glow_0..2 (lit cottage windows), engine_window_glow, lamp_glass_glow, sky_dome_glow"
+  }
+}

@@ -1,0 +1,829 @@
+{
+ "note": "the key numbers of the wet behind painting in one place (details in behind_painting_measurements.json, step1_raw_returned_measurements.json = before the free colour match, stage_measurements.json). Brightness is the picture's own pixel brightness from 0 (black) to 1 (white). 'visible in both' = not sky, not within 12 dots of a removed prop, and where the two plates agree.",
+ "colour_match_on_the_parts_visible_in_both_(all_ground_and_walls)": {
+  "front_painting_mean_brightness": 0.311,
+  "behind_as_the_painter_made_it": 0.377,
+  "behind_final": 0.312,
+  "mean_absolute_difference_of_blurred_brightness_before_after": [
+   0.068,
+   0.018
+  ],
+  "film_old_dry_behind_against_its_painting": 0.004,
+  "ring_round_the_props_mean_absolute_difference_before_after": [
+   0.053,
+   0.017
+  ],
+  "ratio_behind_over_front_before_by_surface": {
+   "road far third": 1.27,
+   "road middle third": 1.08,
+   "road near third": 1.17,
+   "pavement and kerb": 1.24,
+   "gutter": 1.18,
+   "walls": 1.33,
+   "all ground and walls (not sky)": 1.21
+  },
+  "ratio_behind_over_front_after_by_surface": {
+   "road far third": 1.0,
+   "road middle third": 1.0,
+   "road near third": 1.0,
+   "pavement and kerb": 1.01,
+   "gutter": 0.99,
+   "walls": 1.02,
+   "all ground and walls (not sky)": 1.0
+  }
+ },
+ "gains_used": {
+  "road": {
+   "quarter_size_dots_used_for_the_average": 35758,
+   "mean_gain_red_green_blue": [
+    0.914,
+    0.858,
+    0.79
+   ],
+   "least_and_most_gain": [
+    0.617,
+    1.132
+   ]
+  },
+  "gutter_kerb": {
+   "quarter_size_dots_used_for_the_average": 2209,
+   "mean_gain_red_green_blue": [
+    0.871,
+    0.833,
+    0.788
+   ],
+   "least_and_most_gain": [
+    0.709,
+    0.997
+   ]
+  },
+  "pavement": {
+   "quarter_size_dots_used_for_the_average": 2200,
+   "mean_gain_red_green_blue": [
+    0.797,
+    0.784,
+    0.763
+   ],
+   "least_and_most_gain": [
+    0.673,
+    0.952
+   ]
+  },
+  "walls": {
+   "quarter_size_dots_used_for_the_average": 20425,
+   "mean_gain_red_green_blue": [
+    0.757,
+    0.751,
+    0.715
+   ],
+   "least_and_most_gain": [
+    0.576,
+    0.985
+   ]
+  },
+  "windows": {
+   "quarter_size_dots_used_for_the_average": 52,
+   "mean_gain_red_green_blue": [
+    1.072,
+    0.971,
+    0.841
+   ],
+   "least_and_most_gain": [
+    0.83,
+    1.278
+   ]
+  },
+  "roofs": {
+   "quarter_size_dots_used_for_the_average": 994,
+   "mean_gain_red_green_blue": [
+    0.764,
+    0.776,
+    0.77
+   ],
+   "least_and_most_gain": [
+    0.691,
+    0.849
+   ]
+  },
+  "colliery": {
+   "quarter_size_dots_used_for_the_average": 875,
+   "mean_gain_red_green_blue": [
+    0.586,
+    0.623,
+    0.64
+   ],
+   "least_and_most_gain": [
+    0.482,
+    0.762
+   ]
+  }
+ },
+ "where_the_props_stood": {
+  "B": {
+   "road": {
+    "mean_brightness_where_props_stood": 0.409,
+    "mean_brightness_of_the_common_ground_round_it": 0.383,
+    "ratio_brightness_where_stood_over_round_it": 1.07,
+    "blue_minus_red_where_stood": -0.134,
+    "blue_minus_red_round_it": -0.099,
+    "glint_share_where_stood": 0.031,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.041
+   },
+   "pavement and kerb": {
+    "mean_brightness_where_props_stood": 0.267,
+    "mean_brightness_of_the_common_ground_round_it": 0.256,
+    "ratio_brightness_where_stood_over_round_it": 1.043,
+    "blue_minus_red_where_stood": -0.002,
+    "blue_minus_red_round_it": 0.01,
+    "glint_share_where_stood": 0.033,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.048
+   },
+   "all ground": {
+    "mean_brightness_where_props_stood": 0.371,
+    "mean_brightness_of_the_common_ground_round_it": 0.35,
+    "ratio_brightness_where_stood_over_round_it": 1.06,
+    "blue_minus_red_where_stood": -0.098,
+    "blue_minus_red_round_it": -0.07,
+    "glint_share_where_stood": 0.045,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.048
+   }
+  },
+  "Pn": {
+   "road": {
+    "mean_brightness_where_props_stood": 0.406,
+    "mean_brightness_of_the_common_ground_round_it": 0.354,
+    "ratio_brightness_where_stood_over_round_it": 1.147,
+    "blue_minus_red_where_stood": -0.178,
+    "blue_minus_red_round_it": -0.141,
+    "glint_share_where_stood": 0.018,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.027
+   },
+   "pavement and kerb": {
+    "mean_brightness_where_props_stood": 0.163,
+    "mean_brightness_of_the_common_ground_round_it": 0.162,
+    "ratio_brightness_where_stood_over_round_it": 1.011,
+    "blue_minus_red_where_stood": -0.017,
+    "blue_minus_red_round_it": -0.019,
+    "glint_share_where_stood": 0.02,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.031
+   },
+   "all ground": {
+    "mean_brightness_where_props_stood": 0.342,
+    "mean_brightness_of_the_common_ground_round_it": 0.303,
+    "ratio_brightness_where_stood_over_round_it": 1.127,
+    "blue_minus_red_where_stood": -0.136,
+    "blue_minus_red_round_it": -0.108,
+    "glint_share_where_stood": 0.022,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.031
+   }
+  },
+  "OB": {
+   "road": {
+    "mean_brightness_where_props_stood": 0.491,
+    "mean_brightness_of_the_common_ground_round_it": 0.446,
+    "ratio_brightness_where_stood_over_round_it": 1.101,
+    "blue_minus_red_where_stood": -0.167,
+    "blue_minus_red_round_it": -0.132,
+    "glint_share_where_stood": 0.036,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.021
+   },
+   "pavement and kerb": {
+    "mean_brightness_where_props_stood": 0.294,
+    "mean_brightness_of_the_common_ground_round_it": 0.374,
+    "ratio_brightness_where_stood_over_round_it": 0.787,
+    "blue_minus_red_where_stood": 0.116,
+    "blue_minus_red_round_it": 0.057,
+    "glint_share_where_stood": 0.054,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.037
+   },
+   "all ground": {
+    "mean_brightness_where_props_stood": 0.444,
+    "mean_brightness_of_the_common_ground_round_it": 0.424,
+    "ratio_brightness_where_stood_over_round_it": 1.045,
+    "blue_minus_red_where_stood": -0.097,
+    "blue_minus_red_round_it": -0.086,
+    "glint_share_where_stood": 0.042,
+    "glint_share_on_the_common_ground_within_60_dots_of_it": 0.037
+   }
+  }
+ },
+ "ghost_props_excess_(1_means_no_outline_left)": {
+  "notice": {
+   "new_behind": 0.82,
+   "old_dry_behind": 1.46,
+   "front_painting_with_the_prop": 2.19
+  },
+  "board posts": {
+   "new_behind": 0.9,
+   "old_dry_behind": 1.92,
+   "front_painting_with_the_prop": 2.93
+  },
+  "drum": {
+   "new_behind": 1.07,
+   "old_dry_behind": 1.48,
+   "front_painting_with_the_prop": 4.34
+  },
+  "pail": {
+   "new_behind": 0.91,
+   "old_dry_behind": 1.07,
+   "front_painting_with_the_prop": 1.59
+  },
+  "handcart": {
+   "new_behind": 0.91,
+   "old_dry_behind": 0.93,
+   "front_painting_with_the_prop": 2.74
+  },
+  "sacks": {
+   "new_behind": 0.97,
+   "old_dry_behind": 0.98,
+   "front_painting_with_the_prop": 2.19
+  },
+  "coal pile": {
+   "new_behind": 0.9,
+   "old_dry_behind": 1.64,
+   "front_painting_with_the_prop": 1.94
+  },
+  "spade": {
+   "new_behind": 1.0,
+   "old_dry_behind": 1.13,
+   "front_painting_with_the_prop": 3.28
+  },
+  "dustbins": {
+   "new_behind": 1.03,
+   "old_dry_behind": 0.98,
+   "front_painting_with_the_prop": 1.4
+  }
+ },
+ "rubbish": {
+  "where the props stood": {
+   "ground_dots": 322162,
+   "plate_blobs_per_100k": 84.11916985864254,
+   "behind_painting_blobs_per_100k": 88.46480962993773,
+   "kept_share_of_plate_blobs_found_in_the_painting_within_7_dots": 0.6863468634686347,
+   "chance_level_(painting_shifted_60_dots)": 0.16605166051660517,
+   "added_share_of_painting_blobs_with_no_plate_blob_within_7_dots": 0.38596491228070173,
+   "chance_level_for_added_share": 0.8333333333333334
+  },
+  "visible in both (C)": {
+   "ground_dots": 685023,
+   "plate_blobs_per_100k": 66.12916646594348,
+   "behind_painting_blobs_per_100k": 61.01984896857478,
+   "kept_share_of_plate_blobs_found_in_the_painting_within_7_dots": 0.5077262693156733,
+   "chance_level_(painting_shifted_60_dots)": 0.12582781456953643,
+   "added_share_of_painting_blobs_with_no_plate_blob_within_7_dots": 0.43540669856459335,
+   "chance_level_for_added_share": 0.8421052631578947
+  },
+  "all ground": {
+   "ground_dots": 1462072,
+   "plate_blobs_per_100k": 68.46448054541773,
+   "behind_painting_blobs_per_100k": 61.76166426824397,
+   "kept_share_of_plate_blobs_found_in_the_painting_within_7_dots": 0.5754245754245755,
+   "chance_level_(painting_shifted_60_dots)": 0.14985014985014986,
+   "added_share_of_painting_blobs_with_no_plate_blob_within_7_dots": 0.3754152823920266,
+   "chance_level_for_added_share": 0.82212086659065
+  }
+ },
+ "front_painting_blobs_per_100k_on_common_ground": 109.5,
+ "joints_line_and_texture_(visible_when_line_is_at_least_0.12_and_twice_the_texture)": {
+  "Pn": {
+   "whole_road": {
+    "far": {
+     "line": 0.126,
+     "texture": 0.041,
+     "dark_share": 0.32,
+     "bright_share": 0.008,
+     "nzone": 32396
+    },
+    "middle": {
+     "line": 0.152,
+     "texture": 0.112,
+     "dark_share": 0.181,
+     "bright_share": 0.115,
+     "nzone": 99330
+    },
+    "near": {
+     "line": 0.287,
+     "texture": 0.078,
+     "dark_share": 0.535,
+     "bright_share": 0.101,
+     "nzone": 95871
+    }
+   },
+   "only_where_the_props_stood": {
+    "far": {
+     "line": 0.145,
+     "texture": 0.076,
+     "dark_share": 0.327,
+     "bright_share": 0.027,
+     "nzone": 6640
+    },
+    "middle": {
+     "line": 0.093,
+     "texture": 0.063,
+     "dark_share": 0.126,
+     "bright_share": 0.048,
+     "nzone": 29559
+    },
+    "near": {
+     "line": 0.214,
+     "texture": 0.174,
+     "dark_share": 0.192,
+     "bright_share": 0.206,
+     "nzone": 25025
+    }
+   },
+   "only_the_common_road_(C)": {
+    "far": {
+     "line": 0.119,
+     "texture": 0.027,
+     "dark_share": 0.321,
+     "bright_share": 0.0,
+     "nzone": 23295
+    },
+    "middle": {
+     "line": 0.164,
+     "texture": 0.11,
+     "dark_share": 0.253,
+     "bright_share": 0.104,
+     "nzone": 26838
+    },
+    "near": {
+     "line": 0.294,
+     "texture": 0.065,
+     "dark_share": 0.543,
+     "bright_share": 0.08,
+     "nzone": 43268
+    }
+   }
+  },
+  "F": {
+   "whole_road": {
+    "far": {
+     "line": 0.151,
+     "texture": 0.112,
+     "dark_share": 0.248,
+     "bright_share": 0.119,
+     "nzone": 32396
+    },
+    "middle": {
+     "line": 0.179,
+     "texture": 0.155,
+     "dark_share": 0.241,
+     "bright_share": 0.17,
+     "nzone": 99330
+    },
+    "near": {
+     "line": 0.306,
+     "texture": 0.125,
+     "dark_share": 0.473,
+     "bright_share": 0.17,
+     "nzone": 95871
+    }
+   },
+   "only_where_the_props_stood": {
+    "far": {
+     "line": 0.176,
+     "texture": 0.148,
+     "dark_share": 0.21,
+     "bright_share": 0.172,
+     "nzone": 6640
+    },
+    "middle": {
+     "line": 0.185,
+     "texture": 0.168,
+     "dark_share": 0.262,
+     "bright_share": 0.18,
+     "nzone": 29559
+    },
+    "near": {
+     "line": 0.213,
+     "texture": 0.175,
+     "dark_share": 0.262,
+     "bright_share": 0.202,
+     "nzone": 25025
+    }
+   },
+   "only_the_common_road_(C)": {
+    "far": {
+     "line": 0.141,
+     "texture": 0.098,
+     "dark_share": 0.256,
+     "bright_share": 0.103,
+     "nzone": 23295
+    },
+    "middle": {
+     "line": 0.169,
+     "texture": 0.137,
+     "dark_share": 0.228,
+     "bright_share": 0.137,
+     "nzone": 26838
+    },
+    "near": {
+     "line": 0.319,
+     "texture": 0.127,
+     "dark_share": 0.486,
+     "bright_share": 0.187,
+     "nzone": 43268
+    }
+   }
+  },
+  "B": {
+   "whole_road": {
+    "far": {
+     "line": 0.096,
+     "texture": 0.074,
+     "dark_share": 0.137,
+     "bright_share": 0.068,
+     "nzone": 32396
+    },
+    "middle": {
+     "line": 0.119,
+     "texture": 0.098,
+     "dark_share": 0.113,
+     "bright_share": 0.109,
+     "nzone": 99330
+    },
+    "near": {
+     "line": 0.204,
+     "texture": 0.087,
+     "dark_share": 0.24,
+     "bright_share": 0.211,
+     "nzone": 95871
+    }
+   },
+   "only_where_the_props_stood": {
+    "far": {
+     "line": 0.14,
+     "texture": 0.106,
+     "dark_share": 0.239,
+     "bright_share": 0.116,
+     "nzone": 6640
+    },
+    "middle": {
+     "line": 0.088,
+     "texture": 0.076,
+     "dark_share": 0.071,
+     "bright_share": 0.079,
+     "nzone": 29559
+    },
+    "near": {
+     "line": 0.154,
+     "texture": 0.13,
+     "dark_share": 0.15,
+     "bright_share": 0.143,
+     "nzone": 25025
+    }
+   },
+   "only_the_common_road_(C)": {
+    "far": {
+     "line": 0.081,
+     "texture": 0.062,
+     "dark_share": 0.106,
+     "bright_share": 0.053,
+     "nzone": 23295
+    },
+    "middle": {
+     "line": 0.122,
+     "texture": 0.101,
+     "dark_share": 0.129,
+     "bright_share": 0.108,
+     "nzone": 26838
+    },
+    "near": {
+     "line": 0.206,
+     "texture": 0.088,
+     "dark_share": 0.285,
+     "bright_share": 0.191,
+     "nzone": 43268
+    }
+   }
+  },
+  "OB": {
+   "whole_road": {
+    "far": {
+     "line": 0.075,
+     "texture": 0.057,
+     "dark_share": 0.093,
+     "bright_share": 0.028,
+     "nzone": 32396
+    },
+    "middle": {
+     "line": 0.139,
+     "texture": 0.049,
+     "dark_share": 0.352,
+     "bright_share": 0.056,
+     "nzone": 99330
+    },
+    "near": {
+     "line": 0.195,
+     "texture": 0.048,
+     "dark_share": 0.351,
+     "bright_share": 0.14,
+     "nzone": 95871
+    }
+   },
+   "only_where_the_props_stood": {
+    "far": {
+     "line": 0.081,
+     "texture": 0.065,
+     "dark_share": 0.071,
+     "bright_share": 0.053,
+     "nzone": 6640
+    },
+    "middle": {
+     "line": 0.123,
+     "texture": 0.057,
+     "dark_share": 0.313,
+     "bright_share": 0.043,
+     "nzone": 29559
+    },
+    "near": {
+     "line": 0.137,
+     "texture": 0.051,
+     "dark_share": 0.315,
+     "bright_share": 0.084,
+     "nzone": 25025
+    }
+   },
+   "only_the_common_road_(C)": {
+    "far": {
+     "line": 0.073,
+     "texture": 0.053,
+     "dark_share": 0.098,
+     "bright_share": 0.02,
+     "nzone": 23295
+    },
+    "middle": {
+     "line": 0.149,
+     "texture": 0.044,
+     "dark_share": 0.379,
+     "bright_share": 0.052,
+     "nzone": 26838
+    },
+    "near": {
+     "line": 0.214,
+     "texture": 0.051,
+     "dark_share": 0.367,
+     "bright_share": 0.163,
+     "nzone": 43268
+    }
+   }
+  }
+ },
+ "sky": {
+  "mean_brightness_F": 0.3338716924190521,
+  "mean_brightness_B": 0.3338857591152191,
+  "mean_absolute_difference_each_colour_0_255": 0.718798957873508,
+  "max_absolute_difference_0_255": 8.0,
+  "share_of_sky_over_0.5_brightness_B": 0.0
+ },
+ "whole_picture": {
+  "not_sky_mean_brightness": {
+   "F": 0.2664563059806824,
+   "B": 0.30450430512428284,
+   "Pn": 0.2474767118692398,
+   "Pf": 0.20924171805381775,
+   "OP": 0.27635684609413147,
+   "OB": 0.30708226561546326
+  },
+  "glare_pool_and_road_brightness": {
+   "F": {
+    "share_of_lower_third_over_0.95": 0.00042639652014652015,
+    "share_of_lower_third_over_0.85": 0.012096497252747253,
+    "brightest_1_in_1000_of_road": 0.9338505864143372,
+    "mean_of_road": 0.34580472111701965
+   },
+   "B": {
+    "share_of_lower_third_over_0.95": 2.146291208791209e-06,
+    "share_of_lower_third_over_0.85": 0.0002239297161172161,
+    "brightest_1_in_1000_of_road": 0.8301548957824707,
+    "mean_of_road": 0.37686580419540405
+   },
+   "Pn": {
+    "share_of_lower_third_over_0.95": 0.03401656936813187,
+    "share_of_lower_third_over_0.85": 0.06161787431318681,
+    "brightest_1_in_1000_of_road": 1.0,
+    "mean_of_road": 0.4032764136791229
+   },
+   "OB": {
+    "share_of_lower_third_over_0.95": 2.8617216117216117e-06,
+    "share_of_lower_third_over_0.85": 0.003738839285714286,
+    "brightest_1_in_1000_of_road": 0.8612502217292786,
+    "mean_of_road": 0.3771952688694
+   }
+  },
+  "lamp_left_glass_RGB_(brightest_tenth_of_the_head)": {
+   "F": [
+    238,
+    226,
+    205
+   ],
+   "B": [
+    228,
+    220,
+    208
+   ],
+   "Pn": [
+    252,
+    238,
+    220
+   ]
+  }
+ },
+ "stage_moved_view": {
+  "A_what_wears_what_(moved_view,_rough,_by_colour_of_the_weights_picture)": {
+   "whole_frame": {
+    "painting": 0.7512659143518519,
+    "behind_painting": 0.17372636959876545,
+    "own_3D_surface": 0.0722950424382716
+   },
+   "road": {
+    "painting": 0.41587308670623413,
+    "behind_painting": 0.5777500111562319,
+    "own_3D_surface": 0.0
+   },
+   "pavement_kerb_gutter": {
+    "painting": 0.32966729409043893,
+    "behind_painting": 0.665476060463951,
+    "own_3D_surface": 0.00037902391705157935
+   }
+  },
+  "B_C_ground_that_wears_the_behind_painting_against_the_ground_that_wears_the_front_painting_and_the_seam": {
+   "old_dry_behind": {
+    "road": {
+     "dots_on_the_behind_painting": 122069,
+     "dots_on_the_front_painting": 86687,
+     "mean_brightness_on_the_behind_painting": 0.44860535860061646,
+     "mean_brightness_on_the_front_painting_in_the_same_rows": 0.3681338885894013,
+     "ratio_behind_over_front_same_rows": 1.2185929426914812,
+     "blue_minus_red_on_the_behind_painting": -0.1473172903060913,
+     "blue_minus_red_on_the_front_painting_in_the_same_rows": -0.14207637836371392
+    },
+    "pavement_kerb_gutter": {
+     "dots_on_the_behind_painting": 96502,
+     "dots_on_the_front_painting": 46480,
+     "mean_brightness_on_the_behind_painting": 0.3302205204963684,
+     "mean_brightness_on_the_front_painting_in_the_same_rows": 0.4791461635800437,
+     "ratio_behind_over_front_same_rows": 0.689185358448985,
+     "blue_minus_red_on_the_behind_painting": -0.011822493746876717,
+     "blue_minus_red_on_the_front_painting_in_the_same_rows": -0.5059711622247391
+    },
+    "seam_between_front_and_behind_painting_(brightness_step_across_the_border)": {
+     "road": {
+      "blocks_of_64_rows": 5,
+      "mean_step_behind_minus_front": 0.06859296560287476,
+      "mean_absolute_step": 0.06859296560287476,
+      "share_of_blocks_with_a_step_over_0.04": 0.6
+     },
+     "pavement_kerb_gutter": {
+      "blocks_of_64_rows": 5,
+      "mean_step_behind_minus_front": 0.0030705571174621583,
+      "mean_absolute_step": 0.032209146022796634,
+      "share_of_blocks_with_a_step_over_0.04": 0.4
+     },
+     "road_and_pavement": {
+      "blocks_of_64_rows": 7,
+      "mean_step_behind_minus_front": 0.04927550894873483,
+      "mean_absolute_step": 0.06885683536529541,
+      "share_of_blocks_with_a_step_over_0.04": 0.7142857142857143
+     }
+    }
+   },
+   "new_wet_behind_not_colour_matched": {
+    "road": {
+     "dots_on_the_behind_painting": 122069,
+     "dots_on_the_front_painting": 86687,
+     "mean_brightness_on_the_behind_painting": 0.3414679169654846,
+     "mean_brightness_on_the_front_painting_in_the_same_rows": 0.2816107571744261,
+     "ratio_behind_over_front_same_rows": 1.2125528171993223,
+     "blue_minus_red_on_the_behind_painting": -0.06821667402982712,
+     "blue_minus_red_on_the_front_painting_in_the_same_rows": -0.07552876078805973
+    },
+    "pavement_kerb_gutter": {
+     "dots_on_the_behind_painting": 96502,
+     "dots_on_the_front_painting": 46480,
+     "mean_brightness_on_the_behind_painting": 0.34883126616477966,
+     "mean_brightness_on_the_front_painting_in_the_same_rows": 0.4865332180900506,
+     "ratio_behind_over_front_same_rows": 0.7169731750982228,
+     "blue_minus_red_on_the_behind_painting": -0.07060225307941437,
+     "blue_minus_red_on_the_front_painting_in_the_same_rows": -0.5154914708184581
+    },
+    "seam_between_front_and_behind_painting_(brightness_step_across_the_border)": {
+     "road": {
+      "blocks_of_64_rows": 5,
+      "mean_step_behind_minus_front": 0.06374807953834534,
+      "mean_absolute_step": 0.07294242978096008,
+      "share_of_blocks_with_a_step_over_0.04": 0.8
+     },
+     "pavement_kerb_gutter": {
+      "blocks_of_64_rows": 5,
+      "mean_step_behind_minus_front": 0.04621142745018005,
+      "mean_absolute_step": 0.08269464373588561,
+      "share_of_blocks_with_a_step_over_0.04": 0.8
+     },
+     "road_and_pavement": {
+      "blocks_of_64_rows": 7,
+      "mean_step_behind_minus_front": 0.04863050154277256,
+      "mean_absolute_step": 0.07468994174684797,
+      "share_of_blocks_with_a_step_over_0.04": 0.8571428571428571
+     }
+    }
+   },
+   "new_wet_behind_colour_matched": {
+    "road": {
+     "dots_on_the_behind_painting": 122069,
+     "dots_on_the_front_painting": 86687,
+     "mean_brightness_on_the_behind_painting": 0.2939836382865906,
+     "mean_brightness_on_the_front_painting_in_the_same_rows": 0.2728086260822297,
+     "ratio_behind_over_front_same_rows": 1.0776185581389142,
+     "blue_minus_red_on_the_behind_painting": -0.14360691606998444,
+     "blue_minus_red_on_the_front_painting_in_the_same_rows": -0.0868798901649425
+    },
+    "pavement_kerb_gutter": {
+     "dots_on_the_behind_painting": 96502,
+     "dots_on_the_front_painting": 46480,
+     "mean_brightness_on_the_behind_painting": 0.2670678198337555,
+     "mean_brightness_on_the_front_painting_in_the_same_rows": 0.4770465393648218,
+     "ratio_behind_over_front_same_rows": 0.5598359862108027,
+     "blue_minus_red_on_the_behind_painting": -0.11344854533672333,
+     "blue_minus_red_on_the_front_painting_in_the_same_rows": -0.5267826034711198
+    },
+    "seam_between_front_and_behind_painting_(brightness_step_across_the_border)": {
+     "road": {
+      "blocks_of_64_rows": 5,
+      "mean_step_behind_minus_front": 0.045385035872459414,
+      "mean_absolute_step": 0.0538792222738266,
+      "share_of_blocks_with_a_step_over_0.04": 0.6
+     },
+     "pavement_kerb_gutter": {
+      "blocks_of_64_rows": 5,
+      "mean_step_behind_minus_front": 0.013521531224250793,
+      "mean_absolute_step": 0.07691166698932647,
+      "share_of_blocks_with_a_step_over_0.04": 0.8
+     },
+     "road_and_pavement": {
+      "blocks_of_64_rows": 7,
+      "mean_step_behind_minus_front": 0.018677647624697005,
+      "mean_absolute_step": 0.0639563160283225,
+      "share_of_blocks_with_a_step_over_0.04": 0.8571428571428571
+     }
+    }
+   }
+  },
+  "D_the_first_tests_dry_patch_number_(picture_against_the_front_painting_used_as_its_own_behind_painting)": {
+   "old_dry_behind": {
+    "share_of_frame_that_differs_more_than_0.04": 0.13546875,
+    "road": {
+     "share_of_these_dots_that_differ_more_than_0.04": 0.5900486411709581,
+     "mean_signed_brightness_change_where_it_differs_(picture_minus_front_painting_as_own_behind)": 0.1526198387145996,
+     "share_of_them_lighter": 0.980094385285576,
+     "mean_blue_minus_red_change_where_it_differs": -0.020251261070370674
+    },
+    "pavement_kerb_gutter": {
+     "share_of_these_dots_that_differ_more_than_0.04": 0.5697371886703969,
+     "mean_signed_brightness_change_where_it_differs_(picture_minus_front_painting_as_own_behind)": 0.0794159471988678,
+     "share_of_them_lighter": 0.7780621737120434,
+     "mean_blue_minus_red_change_where_it_differs": 0.10694585740566254
+    }
+   },
+   "new_wet_behind_not_colour_matched": {
+    "share_of_frame_that_differs_more_than_0.04": 0.16157069830246915,
+    "road": {
+     "share_of_these_dots_that_differ_more_than_0.04": 0.49071355259047705,
+     "mean_signed_brightness_change_where_it_differs_(picture_minus_front_painting_as_own_behind)": 0.04811827093362808,
+     "share_of_them_lighter": 0.7339401986104543,
+     "mean_blue_minus_red_change_where_it_differs": 0.04478081315755844
+    },
+    "pavement_kerb_gutter": {
+     "share_of_these_dots_that_differ_more_than_0.04": 0.5932302473934076,
+     "mean_signed_brightness_change_where_it_differs_(picture_minus_front_painting_as_own_behind)": 0.09289126843214035,
+     "share_of_them_lighter": 0.9770207051892922,
+     "mean_blue_minus_red_change_where_it_differs": 0.04354920610785484
+    }
+   },
+   "new_wet_behind_colour_matched": {
+    "share_of_frame_that_differs_more_than_0.04": 0.0905222800925926,
+    "road": {
+     "share_of_these_dots_that_differ_more_than_0.04": 0.29546164487482707,
+     "mean_signed_brightness_change_where_it_differs_(picture_minus_front_painting_as_own_behind)": -0.017604514956474304,
+     "share_of_them_lighter": 0.3824195740824649,
+     "mean_blue_minus_red_change_where_it_differs": -0.01935618929564953
+    },
+    "pavement_kerb_gutter": {
+     "share_of_these_dots_that_differ_more_than_0.04": 0.19743291597874896,
+     "mean_signed_brightness_change_where_it_differs_(picture_minus_front_painting_as_own_behind)": 0.006347972899675369,
+     "share_of_them_lighter": 0.5638889792730941,
+     "mean_blue_minus_red_change_where_it_differs": 0.010469892993569374
+    }
+   }
+  },
+  "E_where_the_new_wet_behind_painting_changes_the_picture_against_the_old_dry_one": {
+   "share_of_frame": 0.16723234953703703,
+   "share_of_road": 0.585032799321701,
+   "share_of_pavement_kerb_gutter": 0.6426189910254846,
+   "mean_brightness_change_on_the_road_where_it_changes_(new_minus_old)": -0.16314665973186493
+  }
+ },
+ "stage_notice_close_shot_(the_film_second_shot)": "drawn with the old dry and the new wet behind painting: 0.3 percent of the frame differs by more than 0.04, so the close shot of the notice does not use the behind painting in any visible way (no ground in that frame)",
+ "pictures_checked_by_eye": "crops at 100 percent of every place a near prop stood (drum and board, sacks, coal heap, handcart and spade, dustbins), the whole picture side by side with the front painting and the plate, the colliery gates, the right-hand houses, the left lamp; and 5 stage stills (moved view with the old dry behind, the new behind before and after the colour match, the street move at 6.0 s with the old and the new behind, the weights map, the notice close shot)"
+}

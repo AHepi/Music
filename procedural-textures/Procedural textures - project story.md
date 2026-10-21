@@ -41,13 +41,16 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Rented graphics machine works (log 21):** Blender renders on a rented RunPod card instead of this shared computer: a street picture in 0.4-6 s instead of
   1.5-4 minutes, the full-size plate in 2.4 s instead of 20 minutes. Started on demand, ends itself after 30 idle minutes, so you pay per second of use plus about
   14 US cents a day for two permanent stores. Three routes when cards are short (Romania store, Iceland store, any community card), each proven end to end.
-- **Skills scout done (log 20); Scenario's Blender skills installed (log 23):** seven Blender skills in the project, every file read twice first, the self-install lines removed. Tried on the street: they found 73 inside-out headframe parts nobody had noticed and give useful light-and-dark and export checks; for textures our own layers stay better (their wear shows only in Cycles unless baked).
+- **Skills scout done (log 20); Scenario's Blender skills installed (log 23):** seven Blender skills in the project, every file read twice first, the self-install lines removed. Tried on the street: they found 73 inside-out headframe parts nobody had noticed and give useful light-and-dark and export checks; for textures our own layers stay better (their wear shows only in Cycles unless baked). Your view: the baked door looks photorealistic, and realistic-looking textures in the plate are fine; the wear-then-bake route is kept for props.
 - **Sett joints and rubbish done (log 22):** the joints between the road stones now read as grooves between raised stones in 21 of 22 lightings (before: 6 of 22,
   only the dry ones), wet or dry, at no extra drawing time; a rubbish mask built from the street's real shape puts coal dust, cinders, ash, mud, straw, paper and leaves
   along gutters, wall feet, doorsteps and round the props, never on the middle of the road. A fresh checker: joints "yes", rubbish "nearly".
-- **Running now:** the second painter round (log 24: small rubbish and joint fixes, a new wet plate, a repaint with a dark plain sky, a wet behind painting,
-  the stage brightness fix in a copy, a fresh check), and a reusable weathering kit (log 25: grime, cracks, stains, weeds and moss, tuned on the street and
-  proven on the Japanese courtyard with only a settings file).
+- **Wet street painting round 2 done (log 24):** usable as the lockout picture by the checker's verdict: reads wet, joints and rubbish survive the painter,
+  dark plain sky, no dry patches when the camera moves (new wet behind painting), and the stage no longer crushes the wet road dark (fix found and made in a
+  copy of the stage; not yet in the real film). Open question for you: it looks more like a detailed 3D picture with a paint finish than the flat, outlined
+  look of the earlier dry painting.
+- **Running now:** a reusable weathering kit (log 25: grime, cracks, stains, weeds and moss, tuned on the street and proven on the Japanese courtyard with only
+  a settings file), and EEVEE and Cycles side by side (log 26).
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -299,8 +302,28 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     the tools. **Unsure:** whether Claude will always follow the written "local rules" (they are instructions, not locks). Note:
     `23 Scenario Blender skills - what was installed, changed and learned.md`; pictures: `23 Scenario Blender skills test - pictures/`.
 
+24. **Wet street painting, round 2.** Cleared under "Just do it. $20 budget, ask free". Five helpers. **Plate:** the checker's small fixes: coal chips now flat
+    irregular lumps, straw shorter, thinner and curved, more dust and some wet paper in the gutters, pieces near the camera capped in size, rubbish gathers
+    about 8 to 1 at the kerb against the pavement (was 5 to 1); the bright hooked ticks on middle-distance joints are gone (the checker's own numbers did not
+    remove them; the joint slope now fades from 3 m to 10 m). Joint test unchanged (21 of 22; 18 of 22 counting every dot). A props-free twin plate was
+    drawn, hiding exactly the props the film's page hides (found by reading the film's page). **Front painting:** one repaint (US$0.197 to 0.277). The painter
+    again added pale clouds despite three sentences against them, so a dark plain sky was put in for free with Blender's exact sky outline (four tries to keep
+    the thin headframe rails clean). Below the sky it is far more faithful than the first test: joints kept at about 93 % of the plate's strength near the
+    camera, about 70 % of the plate's rubbish chips found in place (first test 19-22 %), no blown-out glare pool. It ignored "no stronger lamp streaks" (5-9
+    times the plate's) and painted the lamp glass cream-gold, not amber. **Behind painting:** one repaint of the props-free plate (US$0.197 to 0.277); it came
+    back a fifth lighter and warmer, matched to the front painting for free. In the stage with the camera moved, the ground behind the props is now wet; the
+    old dry behind painting showed pale dry pavement. Joints there are weaker. **Stage:** the darkening was found: mostly the dark frame edge and a film-style
+    brightness curve squashing dark values (the suspected "contrast 1.04" was only a small part). Fix in a copy: a new switch ("toe") plus the frame edge eased
+    from 0.30 to 0.25 for this scene; the wet road now arrives at 0.935 of its painted brightness (0.75 in the first test), crushed dots 4 % to 0.14 %; eight
+    pictures of other scenes come out identical when the switch is off. **Fresh checker:** usable as the lockout picture "yes"; sky "yes"; joints and rubbish
+    "nearly" (faint far away and in the behind painting); wet holds when the camera moves "yes"; the stage fix does no harm "yes". It checked the money
+    against fal's history (two calls, US$0.39 to 0.55). **Its main point for you:** next to the earlier dry painting (flat colour, thick dark outlines) the new
+    one reads like a detailed 3D picture with a paint finish. **Not done:** the paintings and the stage fix are not in the real film (that changes your film
+    project, so it waits for your go); only stills, not the whole clip. **RunPod:** the machine has served this and three other jobs since 05:39 (about
+    US$2.65 so far). Pictures: `24 Wet street painting round 2 - pictures/`; work: `street_wet/painter_round_2/`.
+
 ## Next step
 
-The second painter round is running (log 24, about US$1-3 of painter calls within your US$20): it fixes the small rubbish faults, paints the new wet street with
-a dark plain sky, adds a wet behind painting so no dry patches show when the camera moves, and fixes the stage's darkening in a copy. I will show you the
-painting and the moving-camera stills when it is checked.
+Your call on the painting's look: keep round 2's detailed look, or one paid repaint of both paintings asking for flatter colour and thicker dark outlines
+(about US$0.40-0.55, some joints and rubbish may be lost). Then, with your go, put the two paintings and the stage fix into the real film and film the clip.
+The weathering kit and the EEVEE-and-Cycles comparison are still running.

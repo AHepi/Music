@@ -1,0 +1,248 @@
+{
+ "A_does_the_copy_explain_the_stage": {
+  "film_dry_painting": {
+   "painted_road_mean": 0.3857685467515684,
+   "stage_road_mean": 0.3563023345330012,
+   "copy_road_mean": 0.35551861214740454,
+   "arrives_real_stage": 0.9236168618030355,
+   "arrives_in_the_copy": 0.9215852747485799,
+   "copy_vs_stage_mean_abs_difference_blurred_road": 0.007835098843288323,
+   "copy_vs_stage_correlation_blurred_road": 0.9896569272389834,
+   "copy_vs_stage_whole_picture_mean_abs_difference_blurred": 0.02004874257890023
+  },
+  "first_test_wet_painting": {
+   "painted_road_mean": 0.256816452822278,
+   "stage_road_mean": 0.192172216922549,
+   "copy_road_mean": 0.1874671533541916,
+   "arrives_real_stage": 0.7482862363788504,
+   "arrives_in_the_copy": 0.7299655115317807,
+   "copy_vs_stage_mean_abs_difference_blurred_road": 0.009476944947393026,
+   "copy_vs_stage_correlation_blurred_road": 0.9943318567042326,
+   "copy_vs_stage_whole_picture_mean_abs_difference_blurred": 0.018343490333852047
+  },
+  "new_wet_front_painting": {
+   "painted_road_mean": 0.33713526491654094,
+   "stage_road_mean": 0.2912732407042624,
+   "copy_road_mean": 0.28522045416451836,
+   "arrives_real_stage": 0.8639655088481122,
+   "arrives_in_the_copy": 0.8460119241311813,
+   "copy_vs_stage_mean_abs_difference_blurred_road": 0.010877195967146366,
+   "copy_vs_stage_correlation_blurred_road": 0.993432644802669,
+   "copy_vs_stage_whole_picture_mean_abs_difference_blurred": 0.016750293348543183
+  }
+ },
+ "B_which_step_costs_how_much": {
+  "painted_road_mean": 0.33713526491654094,
+  "steps": [
+   {
+    "what": "everything as the film has it (lockout look)",
+    "look_changes": {},
+    "road_arrives_over_painted": 0.8460119241311813
+   },
+   {
+    "what": "only the filmic curve (ACES) off",
+    "look_changes": {
+     "filmic": 0.0
+    },
+    "road_arrives_over_painted": 0.8102246095361222
+   },
+   {
+    "what": "only contrast 1.04 -> 1.0",
+    "look_changes": {
+     "contrast": 1.0
+    },
+    "road_arrives_over_painted": 0.9535077319151415
+   },
+   {
+    "what": "only lift 0.015 -> 0",
+    "look_changes": {
+     "lift": 0.0
+    },
+    "road_arrives_over_painted": 0.7576340582733351
+   },
+   {
+    "what": "only the cool/warm tint off",
+    "look_changes": {
+     "tintAmount": 0.0
+    },
+    "road_arrives_over_painted": 0.8447439466938401
+   },
+   {
+    "what": "only the dark frame edge (vignette 0.3) off",
+    "look_changes": {
+     "vignette": 0.0
+    },
+    "road_arrives_over_painted": 1.0234614978988765
+   },
+   {
+    "what": "only grain off",
+    "look_changes": {
+     "grain": 0.0
+    },
+    "road_arrives_over_painted": 0.8454922828884812
+   },
+   {
+    "what": "ACES off and contrast 1.0 and lift 0",
+    "look_changes": {
+     "filmic": 0.0,
+     "contrast": 1.0,
+     "lift": 0.0
+    },
+    "road_arrives_over_painted": 0.8304827812484202
+   },
+   {
+    "what": "ACES off, contrast 1.0, lift 0, tint off",
+    "look_changes": {
+     "filmic": 0.0,
+     "contrast": 1.0,
+     "lift": 0.0,
+     "tintAmount": 0.0
+    },
+    "road_arrives_over_painted": 0.8289478586876081
+   },
+   {
+    "what": "all of those and no frame edge (the painting passed through untouched)",
+    "look_changes": {
+     "filmic": 0.0,
+     "contrast": 1.0,
+     "lift": 0.0,
+     "tintAmount": 0.0,
+     "vignette": 0.0,
+     "grain": 0.0
+    },
+    "road_arrives_over_painted": 1.0000000000000002
+   }
+  ],
+  "one_after_the_other": [
+   {
+    "what": "ACES off",
+    "road_arrives_over_painted": 0.8102246095361222
+   },
+   {
+    "what": "+ contrast 1.0",
+    "road_arrives_over_painted": 0.9051141359731372
+   },
+   {
+    "what": "+ lift 0",
+    "road_arrives_over_painted": 0.8304827812484202
+   },
+   {
+    "what": "+ tint off",
+    "road_arrives_over_painted": 0.8289478586876081
+   },
+   {
+    "what": "+ frame edge off",
+    "road_arrives_over_painted": 0.9999824174953356
+   }
+  ],
+  "road_painted_value_shares": {
+   "under_0.10": 0.022928920346924533,
+   "0.10_to_0.20": 0.20080251221214235,
+   "0.20_to_0.30": 0.29189285940856075,
+   "0.30_to_0.50": 0.3073472236068189,
+   "over_0.50": 0.17702848442555352
+  }
+ },
+ "C_painted_to_arriving_grey_table": {
+  "painted_levels": [
+   0.03,
+   0.05,
+   0.08,
+   0.1,
+   0.13,
+   0.17,
+   0.2,
+   0.24,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9
+  ],
+  "road_mean_frame_edge_factor": 0.8389744994669516,
+  "rows": [
+   {
+    "what": "film look, at the middle",
+    "arrives": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0389,
+     0.1015,
+     0.1464,
+     0.2076,
+     0.3025,
+     0.46,
+     0.6016,
+     0.7161,
+     0.8014,
+     0.8615,
+     0.9029
+    ]
+   },
+   {
+    "what": "film look, on the road",
+    "arrives": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0326,
+     0.0851,
+     0.1228,
+     0.1741,
+     0.2538,
+     0.386,
+     0.5047,
+     0.6008,
+     0.6724,
+     0.7228,
+     0.7575
+    ]
+   },
+   {
+    "what": "ACES off (contrast 1.04, lift 0.015 stay), on the road",
+    "arrives": [
+     0.0,
+     0.0,
+     0.0345,
+     0.0586,
+     0.0899,
+     0.1279,
+     0.1552,
+     0.1906,
+     0.2427,
+     0.3283,
+     0.4144,
+     0.5024,
+     0.5931,
+     0.6856,
+     0.7749
+    ]
+   },
+   {
+    "what": "ACES off, contrast 1.0, lift 0, on the road",
+    "arrives": [
+     0.0241,
+     0.0404,
+     0.0651,
+     0.0816,
+     0.1063,
+     0.1393,
+     0.164,
+     0.197,
+     0.2464,
+     0.3294,
+     0.4136,
+     0.5001,
+     0.5895,
+     0.6808,
+     0.7689
+    ]
+   }
+  ]
+ }
+}

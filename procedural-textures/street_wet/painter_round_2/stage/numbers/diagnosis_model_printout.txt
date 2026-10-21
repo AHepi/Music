@@ -1,0 +1,30 @@
+A. does the Python copy of the finishing step explain the stage picture?  (road, plate view; "arrives" = stage brightness / painted brightness)
+  film_dry_painting          painted 0.386  real stage 0.356  copy 0.356   arrives: real 0.924, copy 0.922   copy vs stage: blurred difference 0.0078, likeness 0.990
+  first_test_wet_painting    painted 0.257  real stage 0.192  copy 0.187   arrives: real 0.748, copy 0.730   copy vs stage: blurred difference 0.0095, likeness 0.994
+  new_wet_front_painting     painted 0.337  real stage 0.291  copy 0.285   arrives: real 0.864, copy 0.846   copy vs stage: blurred difference 0.0109, likeness 0.993
+
+B. which step of the finish costs how much?  (new wet front painting, road, plate view; the copy; painted road mean 0.337)
+  0.846   everything as the film has it (lockout look)
+  0.810   only the filmic curve (ACES) off
+  0.954   only contrast 1.04 -> 1.0
+  0.758   only lift 0.015 -> 0
+  0.845   only the cool/warm tint off
+  1.023   only the dark frame edge (vignette 0.3) off
+  0.845   only grain off
+  0.830   ACES off and contrast 1.0 and lift 0
+  0.829   ACES off, contrast 1.0, lift 0, tint off
+  1.000   all of those and no frame edge (the painting passed through untouched)
+  -- switching the steps off one after the other (running ratio):
+     0.810   ACES off
+     0.905   + contrast 1.0
+     0.830   + lift 0
+     0.829   + tint off
+     1.000   + frame edge off
+  shares of the wet road by painted brightness: {"under_0.10": 0.023, "0.10_to_0.20": 0.201, "0.20_to_0.30": 0.292, "0.30_to_0.50": 0.307, "over_0.50": 0.177}
+
+C. painted grey -> arriving grey (the copy of the finish; grey ramp; "at the middle" = no frame-edge darkening; "on the road" = with the road's average frame-edge factor 0.839)
+     painted    0.03  0.05  0.08  0.10  0.13  0.17  0.20  0.24  0.30  0.40  0.50  0.60  0.70  0.80  0.90
+     film look, at the middle                         0.00  0.00  0.00  0.00  0.04  0.10  0.15  0.21  0.30  0.46  0.60  0.72  0.80  0.86  0.90
+     film look, on the road                           0.00  0.00  0.00  0.00  0.03  0.09  0.12  0.17  0.25  0.39  0.50  0.60  0.67  0.72  0.76
+     ACES off (contrast 1.04, lift 0.015 stay), on th 0.00  0.00  0.03  0.06  0.09  0.13  0.16  0.19  0.24  0.33  0.41  0.50  0.59  0.69  0.77
+     ACES off, contrast 1.0, lift 0, on the road      0.02  0.04  0.07  0.08  0.11  0.14  0.16  0.20  0.25  0.33  0.41  0.50  0.59  0.68  0.77

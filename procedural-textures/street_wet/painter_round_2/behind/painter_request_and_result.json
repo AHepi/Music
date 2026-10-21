@@ -1,0 +1,55 @@
+{
+ "note": "What this file is (plain words): the exact record of the ONE paid repaint of the props-free wet lockout plate for the WET BEHIND PAINTING (round 2, 21 October 2026): the painter, the settings, the pictures sent, the request id, and what came back. The prompt sent is in briefs/brief_behind.txt (same words, after the line of equals signs).",
+ "model": "blackforestlabs/flux-3/edit-image (Flux 3 edit on fal)",
+ "request_id": "01a15d46-0135-7ec1-a086-d80f9d964f6e",
+ "submitted_at_utc": "2026-10-21T07:03Z (about)",
+ "finished_at_utc": "2026-10-21T07:05Z (about two minutes after sending; first time, no error)",
+ "how_sent": "same way as the front painting: the two small pictures were uploaded to fal's storage with the fal tool (upload_file, then a plain PUT), checked byte for byte against the local files, and the job was queued with submit_job and polled with check_job",
+ "settings": {
+  "resolution": "2k",
+  "aspect_ratio": "auto",
+  "output_format": "png",
+  "safety_tolerance": 2,
+  "enable_prompt_expansion": false
+ },
+ "images_sent": [
+  "image 1: the props-free wet plate (painter_round_2/plate/lockout_plate_wet_round2_no_props.png, 1536 x 2730) shrunk to 810 x 1440 (sent/image_1_behind_plate_810x1440.png)",
+  "image 2: the finished front painting (painter_round_2/paint/front_painting_final.png, 1536 x 2730) shrunk to 504 x 896 (sent/image_2_front_painting_504x896.jpg)"
+ ],
+ "price": "US$0.048 per megapixel (looked up with fal's price tool just before the call); output 1520 x 2702 = 4.107 MP = US$0.197; both pictures sent (1.618 MP) = US$0.078 more if they are charged; fal shows no exact charge; worst case US$0.277",
+ "returned": {
+  "width": 1520,
+  "height": 2702,
+  "megapixels": 4.107,
+  "file": "pictures/behind_painting_as_returned.png",
+  "url_note": "fal keeps the picture only for a limited time; the file here is the copy"
+ },
+ "calls_made": 1,
+ "lined_up": {
+  "tool": "copy of the film kit's align_painting.py (alignment/align_painting_copy.py), the same tool as for the front painting, with --against the front painting (the film's own way for a behind painting: line it up against the first painting's edges away from the props the picture no longer has)",
+  "stretch": 1.004,
+  "shift_dots_of_1080_wide": [
+   1.5,
+   1.0
+  ],
+  "agreement_with_the_front_painting_edges_before_after": [
+   0.876,
+   0.958
+  ],
+  "second_try_for_comparison": "lined up on the outlines of the props the picture still has (ladder, winding wheels, chimney, gates, name board, lamps): stretch 0.9970, shift +0.5, -0.5; agreement 0.852 to 0.865. The two ways agree to under 2 dots but not on the stretch (0.7 percent apart, the second way has few and central outlines). The first way was kept because it uses thousands of edge points over the whole picture and puts the behind painting where the front painting (itself lined up on 15 prop outlines) is. Cross-check: the kept picture scores 0.847 on the second way's outlines (best possible 0.865); the second way's picture would score 0.826 against the front painting's edges (best possible 0.957).",
+  "logs": [
+   "alignment/align_behind_painting_against_front.log",
+   "alignment/align_behind_painting_by_plate.log"
+  ],
+  "saved": "paint/behind_painting_lined_up.png (1536 x 2730; the returned picture was first resized to the plate size)"
+ },
+ "final": {
+  "file": "paint/behind_painting_final.png (and behind_painting_final.jpg, quality 92, the kind of file the film's stage loads as lockout-behind.jpg)",
+  "steps_after_the_painter": [
+   "resize to 1536 x 2730 and line up (above)",
+   "the free dark plain sky of the front painting, same script, same Blender sky mask (tools/make_behind_sky_final.py; work/behind_with_free_sky.png)",
+   "a free smooth colour and brightness match to the front painting (tools/match_behind_to_front.py): the painter made the behind picture 21 percent lighter and warmer than the front painting on the parts both show; the match is a smooth gain per surface worked out only on the parts both paintings show, so no stroke, joint, piece of rubbish or puddle shape changes"
+  ],
+  "why_the_match": "the painter was told to match image 2 in colour and brightness and did not (ground and walls 0.377 against 0.311 brightness on the common parts); without the match the stage showed lighter patches round the props (49 percent of road dots more than 0.04 lighter than the front painting, 59 percent of pavement dots)"
+ }
+}

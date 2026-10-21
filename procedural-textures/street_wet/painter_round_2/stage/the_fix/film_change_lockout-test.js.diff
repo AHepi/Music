@@ -1,0 +1,11 @@
+--- a/film-kit/paper-film/scenes/lockout-test.js
++++ b/film-kit/paper-film/scenes/lockout-test.js
+@@ -177,7 +177,7 @@
+       const fade = Math.max(1 - clamp01(t / 1.0), smooth((t - T.end) / 1.0));
+       const close = onBoard(t);
+       return { camera: close ? board(t) : street(t),
+-        look: { exposure: 1.0, aperture: close ? 1.6 : 2.5, maxBlur: close ? 10 : 7, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.3, fade } };
++        look: { exposure: 1.0, aperture: close ? 1.6 : 2.5, maxBlur: close ? 10 : 7, glowThreshold: 0.9, glowStrength: 0.6, contrast: 1.04, vignette: 0.25, toe: 1, fade } };
+     }
+     function draw2D(ctx, t) {
+       placeTitle(ctx, t, { at: T.title, until: T.move + 3.5, place: 'Britain', year: 1926, y: 300, size: 64 });

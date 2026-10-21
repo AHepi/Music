@@ -1,0 +1,99 @@
+{
+ "kind": "lockout",
+ "masks": [
+  [
+   "lockout",
+   1536,
+   2730
+  ]
+ ],
+ "ground_masks": [
+  [
+   "lockout",
+   1536,
+   2730
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "plate_lockout_B_dry_rubbish",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "rubbish",
+   "view": "beauty",
+   "dirt": true
+  },
+  {
+   "name": "plate_lockout_B_wet_rubbish",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "rubbish",
+   "view": "beauty",
+   "dirt": true
+  },
+  {
+   "name": "closeup_drum_B_wet_rubbish",
+   "camera": "drum_close",
+   "light": "B",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 64,
+   "look": "rubbish",
+   "view": "beauty"
+  },
+  {
+   "name": "final_lockout_plate_wet_round2",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "rubbish",
+   "view": "beauty"
+  },
+  {
+   "name": "final_lockout_plate_wet_round2_no_props",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "rubbish",
+   "view": "beauty",
+   "hide_props": true
+  },
+  {
+   "name": "lockout_A_wet_1536x2730_puddlemask",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "drum_A_wet_1600x1200_puddlemask",
+   "camera": "drum_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  }
+ ]
+}

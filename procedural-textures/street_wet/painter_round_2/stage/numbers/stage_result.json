@@ -1,0 +1,631 @@
+{
+ "note": "key numbers of the stage step, all from the files in this folder; \"before\" = the film's stage as it is, \"after\" = with the brightness fix (look.toe = 1 and frame edge 0.25 in the lockout look)",
+ "road_arrives_over_painted_plate_view": {
+  "first_test_wet_painting_before": 0.748,
+  "first_test_film_dry_painting_before": 0.924,
+  "new_wet_painting_before": 0.8639654517173767,
+  "new_wet_painting_after": 0.9351575970649719,
+  "film_dry_painting_before": 0.9236169457435608,
+  "film_dry_painting_with_the_fix_switched_on": 0.9617471694946289
+ },
+ "new_wet_painting_by_part_before_and_after": {
+  "road_far_third_over_painting": [
+   0.9514075517654419,
+   1.013451099395752
+  ],
+  "road_middle_third_over_painting": [
+   0.9421579241752625,
+   0.9816256761550903
+  ],
+  "road_near_third_over_painting": [
+   0.7860352396965027,
+   0.8804048299789429
+  ],
+  "road_dark_parts_over_painting_(painted_0.08_to_0.22)": [
+   0.5894396305084229,
+   0.8635636568069458
+  ],
+  "road_dots_painted_over_0.08_but_arriving_under_0.03_(crushed_to_black)": [
+   0.039871851804859484,
+   0.00140020481960468
+  ],
+  "walls_stage_over_painting": [
+   0.8832623362541199,
+   1.0306708812713623
+  ],
+  "whole_picture_mean_stage": [
+   0.25759607553482056,
+   0.2814720869064331
+  ],
+  "share_of_dots_brighter_than_0.97_in_the_stage": [
+   0.0,
+   0.0
+  ]
+ },
+ "why_(real_stage,_road_arrives_over_painted,_new_wet_painting)": {
+  "diagnosis/film_no_edge": 1.0447357892990112,
+  "diagnosis/off_all": 1.0116236209869385,
+  "diagnosis/only_cl": 0.9896767139434814,
+  "diagnosis/only_curve": 1.0697567462921143,
+  "diagnosis/only_edge": 0.8387066721916199,
+  "diagnosis/only_tint": 1.0134692192077637,
+  "diagnosis/toe1": 0.9036876559257507,
+  "diagnosis/toe1_cl": 0.9206566214561462,
+  "diagnosis/toe1_v20": 0.9665961861610413,
+  "diagnosis/toe1_v25": 0.9351575970649719
+ },
+ "colour_and_sky": {
+  "colour_on_the_road": {
+   "painting": {
+    "red": 0.35812698693063016,
+    "green": 0.33391287218536886,
+    "blue": 0.3072435084226203,
+    "blue_minus_red": -0.050883478508009866
+   },
+   "stage, nothing of the finish left": {
+    "red": 0.3629514192278447,
+    "green": 0.3374661988122027,
+    "blue": 0.3121154456834437,
+    "blue_minus_red": -0.05083597354440095
+   },
+   "stage before the fix": {
+    "red": 0.30784861936908237,
+    "green": 0.28908563488835237,
+    "blue": 0.26413543149925073,
+    "blue_minus_red": -0.04371318786983169
+   },
+   "stage after the fix": {
+    "red": 0.33294904334886277,
+    "green": 0.31287899667892277,
+    "blue": 0.28696123123486533,
+    "blue_minus_red": -0.045987812113997405
+   }
+  },
+  "sky": {
+   "painting": {
+    "mean_brightness": 0.34357252109573294,
+    "sky_dots": 604854
+   },
+   "stage, nothing of the finish left": {
+    "mean_brightness": 0.3434220780863209,
+    "sky_dots": 604854
+   },
+   "stage before the fix": {
+    "mean_brightness": 0.3290536002238621,
+    "sky_dots": 604854
+   },
+   "stage after the fix": {
+    "mean_brightness": 0.34078747805936244,
+    "sky_dots": 604854
+   }
+  }
+ },
+ "joints_in_stage": {
+  "the painting itself (the same middle part, full sharpness)": {
+   "far": {
+    "line": 0.145,
+    "texture": 0.099,
+    "dark_share": 0.258,
+    "bright_share": 0.103,
+    "nzone": 18795,
+    "visible": false
+   },
+   "middle": {
+    "line": 0.159,
+    "texture": 0.115,
+    "dark_share": 0.22,
+    "bright_share": 0.132,
+    "nzone": 41280,
+    "visible": false
+   },
+   "near": {
+    "line": 0.271,
+    "texture": 0.136,
+    "dark_share": 0.428,
+    "bright_share": 0.169,
+    "nzone": 76417,
+    "visible": false
+   }
+  },
+  "stage with nothing of its finish left (painting passed through)": {
+   "far": {
+    "line": 0.079,
+    "texture": 0.051,
+    "dark_share": 0.11,
+    "bright_share": 0.04,
+    "nzone": 18795,
+    "visible": false
+   },
+   "middle": {
+    "line": 0.107,
+    "texture": 0.072,
+    "dark_share": 0.137,
+    "bright_share": 0.083,
+    "nzone": 41280,
+    "visible": false
+   },
+   "near": {
+    "line": 0.172,
+    "texture": 0.076,
+    "dark_share": 0.344,
+    "bright_share": 0.088,
+    "nzone": 76417,
+    "visible": true
+   }
+  },
+  "stage before the fix": {
+   "far": {
+    "line": 0.13,
+    "texture": 0.086,
+    "dark_share": 0.223,
+    "bright_share": 0.096,
+    "nzone": 18795,
+    "visible": false
+   },
+   "middle": {
+    "line": 0.147,
+    "texture": 0.103,
+    "dark_share": 0.177,
+    "bright_share": 0.114,
+    "nzone": 41280,
+    "visible": false
+   },
+   "near": {
+    "line": 0.297,
+    "texture": 0.142,
+    "dark_share": 0.419,
+    "bright_share": 0.158,
+    "nzone": 76417,
+    "visible": true
+   }
+  },
+  "stage after the fix": {
+   "far": {
+    "line": 0.104,
+    "texture": 0.072,
+    "dark_share": 0.169,
+    "bright_share": 0.072,
+    "nzone": 18795,
+    "visible": false
+   },
+   "middle": {
+    "line": 0.128,
+    "texture": 0.09,
+    "dark_share": 0.169,
+    "bright_share": 0.103,
+    "nzone": 41280,
+    "visible": false
+   },
+   "near": {
+    "line": 0.211,
+    "texture": 0.102,
+    "dark_share": 0.369,
+    "bright_share": 0.118,
+    "nzone": 76417,
+    "visible": true
+   }
+  }
+ },
+ "existing_scenes_not_asked_for": {
+  "chapter1_a": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.3160969316959381
+  },
+  "chapter2_a": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.006822170224040747
+  },
+  "chapter2_b": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.22574499249458313
+  },
+  "dry_move": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.2939777970314026
+  },
+  "dry_moved": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.2885133922100067
+  },
+  "dry_projector": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.31752273440361023
+  },
+  "notice_end": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.28130844235420227
+  },
+  "notice_move": {
+   "mean_abs_difference_0_to_255": 0.0,
+   "largest_difference": 0,
+   "share_of_dots_that_differ_at_all": 0.0,
+   "picture_mean_brightness_before": 0.27833887934684753
+  }
+ },
+ "where_asked_for": {
+  "dry_projector": {
+   "whole_picture_mean_abs_change": 0.021718639880418777,
+   "whole_picture_mean_signed_change": 0.021388355642557144,
+   "road": {
+    "mean_abs_change": 0.01507625076919794,
+    "mean_signed_change": 0.014709435403347015,
+    "brightness_before": 0.3563023507595062,
+    "brightness_after": 0.37101179361343384
+   },
+   "pavement/kerb/gutter": {
+    "mean_abs_change": 0.014380689710378647,
+    "mean_signed_change": 0.013677217066287994,
+    "brightness_before": 0.3380280137062073,
+    "brightness_after": 0.3517051935195923
+   },
+   "walls": {
+    "mean_abs_change": 0.02944525144994259,
+    "mean_signed_change": 0.02902957983314991,
+    "brightness_before": 0.19467279314994812,
+    "brightness_after": 0.2237023562192917
+   },
+   "roofs": {
+    "mean_abs_change": 0.017018908634781837,
+    "mean_signed_change": 0.01680678129196167,
+    "brightness_before": 0.24721850454807281,
+    "brightness_after": 0.2640253007411957
+   }
+  },
+  "dry_moved": {
+   "whole_picture_mean_abs_change": 0.023868124932050705,
+   "whole_picture_mean_signed_change": 0.023511718958616257,
+   "road": {
+    "mean_abs_change": 0.019440479576587677,
+    "mean_signed_change": 0.019363190978765488,
+    "brightness_before": 0.37719079852104187,
+    "brightness_after": 0.39655399322509766
+   },
+   "pavement/kerb/gutter": {
+    "mean_abs_change": 0.015781819820404053,
+    "mean_signed_change": 0.015476414002478123,
+    "brightness_before": 0.35535746812820435,
+    "brightness_after": 0.3708339035511017
+   },
+   "walls": {
+    "mean_abs_change": 0.02959059737622738,
+    "mean_signed_change": 0.02915532886981964,
+    "brightness_before": 0.18649569153785706,
+    "brightness_after": 0.2156510204076767
+   },
+   "roofs": {
+    "mean_abs_change": 0.01669902168214321,
+    "mean_signed_change": 0.01655585691332817,
+    "brightness_before": 0.24013899266719818,
+    "brightness_after": 0.25669485330581665
+   }
+  },
+  "dry_move": {
+   "whole_picture_mean_abs_change": 0.02371854893863201,
+   "whole_picture_mean_signed_change": 0.023365508764982224
+  },
+  "wet_projector": {
+   "whole_picture_mean_abs_change": 0.02424333617091179,
+   "whole_picture_mean_signed_change": 0.023876026272773743,
+   "road": {
+    "mean_abs_change": 0.024380914866924286,
+    "mean_signed_change": 0.024001386016607285,
+    "brightness_before": 0.29127323627471924,
+    "brightness_after": 0.3152746260166168
+   },
+   "pavement/kerb/gutter": {
+    "mean_abs_change": 0.015211196616292,
+    "mean_signed_change": 0.014433734118938446,
+    "brightness_before": 0.28405752778053284,
+    "brightness_after": 0.2984912693500519
+   },
+   "walls": {
+    "mean_abs_change": 0.03136001154780388,
+    "mean_signed_change": 0.030972620472311974,
+    "brightness_before": 0.18095983564853668,
+    "brightness_after": 0.2119324654340744
+   },
+   "roofs": {
+    "mean_abs_change": 0.019287019968032837,
+    "mean_signed_change": 0.018974147737026215,
+    "brightness_before": 0.21106553077697754,
+    "brightness_after": 0.23003967106342316
+   }
+  },
+  "wet_moved": {
+   "whole_picture_mean_abs_change": 0.023815099149942398,
+   "whole_picture_mean_signed_change": 0.023446328938007355,
+   "road": {
+    "mean_abs_change": 0.02234593592584133,
+    "mean_signed_change": 0.02230086736381054,
+    "brightness_before": 0.2567088305950165,
+    "brightness_after": 0.2790096700191498
+   },
+   "pavement/kerb/gutter": {
+    "mean_abs_change": 0.015497148036956787,
+    "mean_signed_change": 0.015104874037206173,
+    "brightness_before": 0.30263057351112366,
+    "brightness_after": 0.3177354037761688
+   },
+   "walls": {
+    "mean_abs_change": 0.030351636931300163,
+    "mean_signed_change": 0.02988489344716072,
+    "brightness_before": 0.18534183502197266,
+    "brightness_after": 0.21522673964500427
+   },
+   "roofs": {
+    "mean_abs_change": 0.01929302141070366,
+    "mean_signed_change": 0.019077351316809654,
+    "brightness_before": 0.20558343827724457,
+    "brightness_after": 0.22466078400611877
+   }
+  },
+  "wet_move": {
+   "whole_picture_mean_abs_change": 0.023932384327054024,
+   "whole_picture_mean_signed_change": 0.023569488897919655
+  },
+  "wetolddry_moved": {
+   "whole_picture_mean_abs_change": 0.024148650467395782,
+   "whole_picture_mean_signed_change": 0.02378445491194725,
+   "road": {
+    "mean_abs_change": 0.022473033517599106,
+    "mean_signed_change": 0.022421374917030334,
+    "brightness_before": 0.35443130135536194,
+    "brightness_after": 0.37685269117355347
+   },
+   "pavement/kerb/gutter": {
+    "mean_abs_change": 0.015393382869660854,
+    "mean_signed_change": 0.015055757947266102,
+    "brightness_before": 0.34728896617889404,
+    "brightness_after": 0.3623447120189667
+   },
+   "walls": {
+    "mean_abs_change": 0.030424395576119423,
+    "mean_signed_change": 0.029961396008729935,
+    "brightness_before": 0.18408383429050446,
+    "brightness_after": 0.21404524147510529
+   },
+   "roofs": {
+    "mean_abs_change": 0.019290445372462273,
+    "mean_signed_change": 0.019072892144322395,
+    "brightness_before": 0.2055877298116684,
+    "brightness_after": 0.22466062009334564
+   }
+  },
+  "wetown_moved": {
+   "whole_picture_mean_abs_change": 0.024195093661546707,
+   "whole_picture_mean_signed_change": 0.02383025363087654,
+   "road": {
+    "mean_abs_change": 0.02182110585272312,
+    "mean_signed_change": 0.021778376772999763,
+    "brightness_before": 0.2624874711036682,
+    "brightness_after": 0.28426581621170044
+   },
+   "pavement/kerb/gutter": {
+    "mean_abs_change": 0.015941720455884933,
+    "mean_signed_change": 0.015556915663182735,
+    "brightness_before": 0.3013819754123688,
+    "brightness_after": 0.3169388771057129
+   },
+   "walls": {
+    "mean_abs_change": 0.030575677752494812,
+    "mean_signed_change": 0.030100053176283836,
+    "brightness_before": 0.18436455726623535,
+    "brightness_after": 0.21446458995342255
+   },
+   "roofs": {
+    "mean_abs_change": 0.019298432394862175,
+    "mean_signed_change": 0.019079552963376045,
+    "brightness_before": 0.20557579398155212,
+    "brightness_after": 0.22465533018112183
+   }
+  }
+ },
+ "dry_looking_patches_first_test_method": {
+  "old_dry_behind_before": {
+   "share_of_frame_that_differs_more_than_0.04": 0.15458429783950617,
+   "mean_difference_where_it_differs": 0.1300930678844452,
+   "share_of_road_dots_that_differ": 0.6143736891427551,
+   "share_of_road_dots_lighter_(dry_looking)": 0.5938328350216431,
+   "share_of_road_dots_darker": 0.02054085412111205,
+   "road_mean_signed_difference_(lighter_minus_darker)": 0.09178180247545242,
+   "share_of_pavement_dots_that_differ": 0.6314171533968644,
+   "share_of_pavement_dots_lighter_(dry_looking)": 0.4662141391314462,
+   "share_of_pavement_dots_darker": 0.1652030142654182,
+   "pavement_mean_signed_difference_(lighter_minus_darker)": 0.040648769587278366,
+   "share_of_walls_dots_that_differ": 0.027721150271471585,
+   "share_of_walls_dots_lighter_(dry_looking)": 0.011563586448073144,
+   "share_of_walls_dots_darker": 0.01615756382339844,
+   "walls_mean_signed_difference_(lighter_minus_darker)": -6.994977593421936e-05
+  },
+  "new_wet_behind_before": {
+   "share_of_frame_that_differs_more_than_0.04": 0.11097511574074075,
+   "mean_difference_where_it_differs": 0.1111672893166542,
+   "share_of_road_dots_that_differ": 0.3280423044312553,
+   "share_of_road_dots_lighter_(dry_looking)": 0.12577982060779153,
+   "share_of_road_dots_darker": 0.2022624838234638,
+   "road_mean_signed_difference_(lighter_minus_darker)": -0.005845037288963795,
+   "share_of_pavement_dots_that_differ": 0.30493266091175714,
+   "share_of_pavement_dots_lighter_(dry_looking)": 0.16988060916742134,
+   "share_of_pavement_dots_darker": 0.1350520517443358,
+   "pavement_mean_signed_difference_(lighter_minus_darker)": 0.0017960912082344294,
+   "share_of_walls_dots_that_differ": 0.02770072351568979,
+   "share_of_walls_dots_lighter_(dry_looking)": 0.021919951629442307,
+   "share_of_walls_dots_darker": 0.005780771886247482,
+   "walls_mean_signed_difference_(lighter_minus_darker)": 0.0012915229890495539
+  },
+  "old_dry_behind_after": {
+   "share_of_frame_that_differs_more_than_0.04": 0.14584394290123456,
+   "mean_difference_where_it_differs": 0.13269634544849396,
+   "share_of_road_dots_that_differ": 0.599303851131242,
+   "share_of_road_dots_lighter_(dry_looking)": 0.5779017359096792,
+   "share_of_road_dots_darker": 0.021402115221562764,
+   "road_mean_signed_difference_(lighter_minus_darker)": 0.09242670238018036,
+   "share_of_pavement_dots_that_differ": 0.6166864682081405,
+   "share_of_pavement_dots_lighter_(dry_looking)": 0.46097157717200754,
+   "share_of_pavement_dots_darker": 0.15571489103613298,
+   "pavement_mean_signed_difference_(lighter_minus_darker)": 0.03989999741315842,
+   "share_of_walls_dots_that_differ": 0.01832688528742488,
+   "share_of_walls_dots_lighter_(dry_looking)": 0.006187264326305167,
+   "share_of_walls_dots_darker": 0.012139620961119714,
+   "walls_mean_signed_difference_(lighter_minus_darker)": -0.00022424431517720222
+  },
+  "new_wet_behind_after": {
+   "share_of_frame_that_differs_more_than_0.04": 0.10245225694444444,
+   "mean_difference_where_it_differs": 0.10892603546380997,
+   "share_of_road_dots_that_differ": 0.32962202686420633,
+   "share_of_road_dots_lighter_(dry_looking)": 0.12291936275603552,
+   "share_of_road_dots_darker": 0.2067026641081708,
+   "road_mean_signed_difference_(lighter_minus_darker)": -0.0053215064108371735,
+   "share_of_pavement_dots_that_differ": 0.2659000839142247,
+   "share_of_pavement_dots_lighter_(dry_looking)": 0.14596920929536977,
+   "share_of_pavement_dots_darker": 0.11993087461885495,
+   "pavement_mean_signed_difference_(lighter_minus_darker)": 0.0010916349710896611,
+   "share_of_walls_dots_that_differ": 0.02179330574359519,
+   "share_of_walls_dots_lighter_(dry_looking)": 0.017468961544589566,
+   "share_of_walls_dots_darker": 0.004324344199005625,
+   "walls_mean_signed_difference_(lighter_minus_darker)": 0.0010380332823842764
+  }
+ },
+ "where_the_behind_painting_is_worn": {
+  "before": {
+   "where_the_behind_painting_is_worn_old_dry_behind": {
+    "road": {
+     "dots_where_the_behind_painting_is_worn": 124965,
+     "share_that_differ_more_than_0.04": 0.9369183371343976,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.8796142920017604,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.019045332693154084,
+     "mean_signed_difference_(lighter_minus_darker)": 0.14637455344200134,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.9239226983555395,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.9086944344416437,
+     "patch_scale_share_darker_by_more_than_0.04": 0.01522826391389589,
+     "mean_brightness_here": 0.4471918046474457,
+     "reference_mean_brightness_here": 0.3006075322628021
+    },
+    "pavement": {
+     "dots_where_the_behind_painting_is_worn": 75584,
+     "share_that_differ_more_than_0.04": 0.8750132303132938,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.5910642464013548,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.1540669983065199,
+     "mean_signed_difference_(lighter_minus_darker)": 0.06006239727139473,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.6283340389500424,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.5574460203217613,
+     "patch_scale_share_darker_by_more_than_0.04": 0.07088801862828112,
+     "mean_brightness_here": 0.3340180218219757,
+     "reference_mean_brightness_here": 0.2743614614009857
+    }
+   },
+   "where_the_behind_painting_is_worn_new_wet_behind": {
+    "road": {
+     "dots_where_the_behind_painting_is_worn": 124965,
+     "share_that_differ_more_than_0.04": 0.5148961709278598,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.19180570559756732,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.2724522866402593,
+     "mean_signed_difference_(lighter_minus_darker)": -0.007291815243661404,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.4257432080982675,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.171456007682151,
+     "patch_scale_share_darker_by_more_than_0.04": 0.2542872004161165,
+     "mean_brightness_here": 0.2932632863521576,
+     "reference_mean_brightness_here": 0.3006075322628021
+    },
+    "pavement": {
+     "dots_where_the_behind_painting_is_worn": 75584,
+     "share_that_differ_more_than_0.04": 0.4296411939034716,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.14979360711261644,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.10192633361558001,
+     "mean_signed_difference_(lighter_minus_darker)": 0.002844745758920908,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.08302021591871296,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.06460361981371719,
+     "patch_scale_share_darker_by_more_than_0.04": 0.018416596104995766,
+     "mean_brightness_here": 0.27724766731262207,
+     "reference_mean_brightness_here": 0.2743614614009857
+    }
+   }
+  },
+  "after": {
+   "where_the_behind_painting_is_worn_old_dry_behind": {
+    "road": {
+     "dots_where_the_behind_painting_is_worn": 126520,
+     "share_that_differ_more_than_0.04": 0.9307777426493835,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.8721308883970914,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.01991779955738223,
+     "mean_signed_difference_(lighter_minus_darker)": 0.14789357781410217,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.9133970913689535,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.8975102750553272,
+     "patch_scale_share_darker_by_more_than_0.04": 0.015886816313626304,
+     "mean_brightness_here": 0.4681728780269623,
+     "reference_mean_brightness_here": 0.32006075978279114
+    },
+    "pavement": {
+     "dots_where_the_behind_painting_is_worn": 75727,
+     "share_that_differ_more_than_0.04": 0.8551771494975372,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.5859865041530762,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.14191767797483065,
+     "mean_signed_difference_(lighter_minus_darker)": 0.059401363134384155,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.6153155413524899,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.5545446142062936,
+     "patch_scale_share_darker_by_more_than_0.04": 0.0607709271461962,
+     "mean_brightness_here": 0.3489210307598114,
+     "reference_mean_brightness_here": 0.2898697853088379
+    }
+   },
+   "where_the_behind_painting_is_worn_new_wet_behind": {
+    "road": {
+     "dots_where_the_behind_painting_is_worn": 126520,
+     "share_that_differ_more_than_0.04": 0.518052481821056,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.18567024976288335,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.2810859943092001,
+     "mean_signed_difference_(lighter_minus_darker)": -0.006406185682862997,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.4298687954473601,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.16874012013910844,
+     "patch_scale_share_darker_by_more_than_0.04": 0.2611286753082517,
+     "mean_brightness_here": 0.3136281669139862,
+     "reference_mean_brightness_here": 0.32006075978279114
+    },
+    "pavement": {
+     "dots_where_the_behind_painting_is_worn": 75727,
+     "share_that_differ_more_than_0.04": 0.3695247401851387,
+     "share_lighter_than_the_reference_by_more_than_0.04": 0.12589961308384065,
+     "share_darker_than_the_reference_by_more_than_0.04": 0.0880003169279121,
+     "mean_signed_difference_(lighter_minus_darker)": 0.0019545676186680794,
+     "patch_scale_(blur_8_dots)_share_that_differ_more_than_0.04": 0.0601238659923145,
+     "patch_scale_share_lighter_by_more_than_0.04": 0.042613598848495256,
+     "patch_scale_share_darker_by_more_than_0.04": 0.017510267143819244,
+     "mean_brightness_here": 0.29187989234924316,
+     "reference_mean_brightness_here": 0.2898697853088379
+    }
+   }
+  }
+ },
+ "moved_view_road_mean": {
+  "dry_moved": [
+   0.37719079852104187,
+   0.39655399322509766
+  ],
+  "wet_moved": [
+   0.2567088305950165,
+   0.2790096700191498
+  ],
+  "wetolddry_moved": [
+   0.35443130135536194,
+   0.37685269117355347
+  ],
+  "wetown_moved": [
+   0.2624874711036682,
+   0.28426581621170044
+  ]
+ }
+}
