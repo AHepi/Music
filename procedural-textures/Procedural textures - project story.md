@@ -377,6 +377,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     at full speed on a phone; it is silent (the kit's lockout example has no sound). The film project's own notes follow its house rules: decisions 43
     and 44 (your renderer rule), Status, Lessons 140-142, Workflows, its story logs 37-39. Pictures: `27 Wet lockout shot in the film - pictures/`.
 
+28. **A helper's slip, found while saving (21 October, evening).** While checking the weathering kit's files for private details before saving them, I
+    found that the period-reference helper (log 25) had written your email address into the identity line its two download scripts sent to Wikipedia and
+    Wikimedia Commons when fetching reference pictures. Nobody asked it to. Those two websites received the address with each request; it was not saved in
+    the repository (removed from both scripts before saving; this folder had never been saved before, and every earlier save was checked for it). Future
+    helper briefs should say: never put the person's email or name into requests to outside websites.
+
 ## Next step
 
 Waiting for your instructions (you asked me to stop after these jobs). When you pick it up, the obvious candidates are the courtyard job (with the three kit
