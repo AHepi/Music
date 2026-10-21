@@ -1,0 +1,1333 @@
+====================================================================================================
+MATERIAL CT / Stone painterly surface  users=2  props={'ink_kind': 'wet_stone', 'foundry_kind': 'wet_stone', 'ct_material_role': 'stone', 'ct_coordinates': 'Named point attribute CT_rest, inherited through modifiers', 'ct_surface_seed': '4753'}
+TREE Shader Nodetree  (ShaderNodeTree, users=0)
+  node TexCoord:Rest-space coordinates
+  node Group:FOUNDRY surface controls [group FOUNDRY / Wet Stone.001]
+      in "Vector" <- CT / Immutable prototype rest coordinates.Vector
+      in "Generated" <- Rest-space coordinates.Generated
+      in "Base" = [0.078, 0.113, 0.113, 1.0]
+      in "Shadow" = [0.01, 0.036, 0.051, 1.0]
+      in "Highlight" = [0.223, 0.196, 0.107, 1.0]
+      in "Seed" <- CT / Explicit surface seed.Value
+      in "Scale" = 2.1
+      in "Variation" = 0.55
+      in "Roughness" = 0.76
+      in "Bump" = 0.1
+      in "Wear" = 0.12
+      in "Wetness" = 0.25
+      in "Stroke Length" = 0.6
+      in "Stroke Width" = 0.12
+  node ObjectInfo:Object-to-object variation
+  node Math:Unique brush distribution
+      in "Value" <- Object-to-object variation.Random
+      in "Value" = 41.0
+  node Math:Seed plus object variation
+      in "Value" <- Unique brush distribution.Value
+      in "Value" = 17.0
+  node OutputMaterial:Material Output
+      in "Surface" <- FOUNDRY surface controls.Shader
+  node Value:CT / Explicit surface seed
+  node Attribute:CT / Immutable prototype rest coordinates [attr CT_rest GEOMETRY]
+  TREE FOUNDRY / Wet Stone.001  (ShaderNodeTree, users=2)
+    iface OUTPUT NodeSocketShader       "Shader" default=None
+    iface OUTPUT NodeSocketColor        "Albedo" default=[0.0, 0.0, 0.0, 1.0]
+    iface OUTPUT NodeSocketFloat        "Roughness" default=0.0
+    iface OUTPUT NodeSocketFloat        "Height" default=0.0
+    iface OUTPUT NodeSocketVector       "Normal" default=[0.0, 0.0, 0.0]
+    iface OUTPUT NodeSocketFloat        "Wear Mask" default=0.0
+    iface INPUT  NodeSocketVector       "Vector" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketVector       "Generated" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketColor        "Base" default=[0.059, 0.1, 0.119, 1.0]
+    iface INPUT  NodeSocketColor        "Shadow" default=[0.013, 0.033, 0.051, 1.0]
+    iface INPUT  NodeSocketColor        "Highlight" default=[0.171, 0.187, 0.133, 1.0]
+    iface INPUT  NodeSocketFloat        "Seed" default=17.0
+    iface INPUT  NodeSocketFloat        "Scale" default=4.0
+    iface INPUT  NodeSocketFloat        "Variation" default=0.48
+    iface INPUT  NodeSocketFloat        "Roughness" default=0.33
+    iface INPUT  NodeSocketFloat        "Bump" default=0.18
+    iface INPUT  NodeSocketFloat        "Wear" default=0.5
+    iface INPUT  NodeSocketFloat        "Wetness" default=0.72
+    iface INPUT  NodeSocketFloat        "Stroke Length" default=0.38
+    iface INPUT  NodeSocketFloat        "Stroke Width" default=0.055
+    node NodeGroupInput:Bounded art direction
+    node NodeGroupOutput:Exportable material channels
+        in "Shader" <- Light-responsive layered pigment.BSDF
+        in "Albedo" <- 07 / Angular dry brush over local color.Color
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "Height" <- Macro relief + tooth.Color
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Wear Mask" <- Wear amount.Value
+    node VectorMath:Material-directed brush coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:01 / Broad pigment shapes
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" <- Bounded art direction.Scale
+        in "Detail" = 0.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node CombineXYZ:Per-object angular domain offset
+        in "X" <- Bounded art direction.Seed
+        in "Y" <- Seed Y decorrelation.Value
+    node Math:Seed Y decorrelation
+        in "Value" <- Bounded art direction.Seed
+        in "Value" = 0.371
+    node VectorMath:Seeded angular domain
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Angular pigment planes
+        in "Vector" <- Seeded angular domain.Vector
+        in "Scale" <- Bounded art direction.Scale
+    node MixRGB:Soft and angular pigment interlock
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- Angular pigment planes.Distance
+    node ValToRGB:02 / Uneven hard and soft paint boundaries
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node MixRGB:03 / Cool dark to warm light pigment
+        in "Factor" <- 02 / Uneven hard and soft paint boundaries.Color
+        in "Color1" <- Bounded art direction.Shadow
+        in "Color2" <- Bounded art direction.Highlight
+    node ValToRGB:Sparse cool pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node ValToRGB:Sparse warm pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node Math:Secondary pigment opacity
+        in "Value" <- Sparse cool pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node Math:Light pigment opacity
+        in "Value" <- Sparse warm pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node MixRGB:Dominant base / sparse cool planes
+        in "Factor" <- Secondary pigment opacity.Value
+        in "Color1" <- Bounded art direction.Base
+        in "Color2" <- Bounded art direction.Shadow
+    node Math:Broad highlight restraint
+        in "Value" <- Light pigment opacity.Value
+        in "Value" = 0.3
+    node MixRGB:04 / Dominant base / sparse warm planes
+        in "Factor" <- Broad highlight restraint.Value
+        in "Color1" <- Dominant base / sparse cool planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node VectorMath:Brush length / width / direction
+        in "Vector" <- Bounded art direction.Vector
+        in "Vector" <- Controllable brush aspect.Vector
+    node Math:Reciprocal stroke length
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Length
+    node Math:Reciprocal stroke width
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Width
+    node CombineXYZ:Controllable brush aspect
+        in "X" <- Reciprocal stroke length.Value
+        in "Y" <- Reciprocal stroke width.Value
+        in "Z" <- Reciprocal stroke width.Value
+    node VectorMath:Seeded stroke domain
+        in "Vector" <- Brush length / width / direction.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Finite rectangular brush dabs
+        in "Vector" <- Seeded stroke domain.Vector
+    node Math:Individual dab size variation
+        in "Value" <- Finite rectangular brush dabs.Color
+        in "Value" = 0.8
+    node Math:Minimum dab size
+        in "Value" <- Individual dab size variation.Value
+        in "Value" = 0.6
+    node Math:Variable-size dab distance
+        in "Value" <- Finite rectangular brush dabs.Distance
+        in "Value" <- Minimum dab size.Value
+    node ValToRGB:Clipped angular stroke footprint
+        in "Factor" <- Variable-size dab distance.Value
+    node ValToRGB:Sparse individual brush dabs
+        in "Factor" <- Finite rectangular brush dabs.Color
+    node Math:Short separate brush marks
+        in "Value" <- Clipped angular stroke footprint.Color
+        in "Value" <- Sparse individual brush dabs.Color
+    node TexNoise:Broken dab edges
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 38.0
+        in "Detail" = 1.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Eroded brush tips
+        in "Factor" <- Broken dab edges.Factor
+    node Math:Broken brush footprint
+        in "Value" <- Short separate brush marks.Value
+        in "Value" <- Eroded brush tips.Color
+    node VectorMath:Parallel bristle coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:Fine parallel bristle streaks
+        in "Vector" <- Parallel bristle coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 7.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Bristle density inside each dab
+        in "Factor" <- Fine parallel bristle streaks.Factor
+    node Math:Visible directional bristle marks
+        in "Value" <- Broken brush footprint.Value
+        in "Value" <- Bristle density inside each dab.Color
+    node ValToRGB:Loose stroke grouping
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Grouped brush deposits
+        in "Value" <- Visible directional bristle marks.Value
+        in "Value" <- Loose stroke grouping.Color
+    node Math:Stroke opacity
+        in "Value" <- Grouped brush deposits.Value
+        in "Value" = 0.75
+    node MixRGB:07 / Angular dry brush over local color
+        in "Factor" <- Stroke opacity.Value
+        in "Color1" <- 04 / Dominant base / sparse warm planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node SeparateXYZ:Object edge coordinates
+        in "Vector" <- Bounded art direction.Generated
+    node Math:Distance from X upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.X
+    node Math:Distance to X boundary
+        in "Value" <- Object edge coordinates.X
+        in "Value" <- Distance from X upper boundary.Value
+    node Math:Distance from Y upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Y
+    node Math:Distance to Y boundary
+        in "Value" <- Object edge coordinates.Y
+        in "Value" <- Distance from Y upper boundary.Value
+    node Math:Distance from Z upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Z
+    node Math:Distance to Z boundary
+        in "Value" <- Object edge coordinates.Z
+        in "Value" <- Distance from Z upper boundary.Value
+    node Math:XY boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Y boundary.Value
+    node Math:XZ boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:YZ boundary intersection
+        in "Value" <- Distance to Y boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:Nearest edge pair
+        in "Value" <- XY boundary intersection.Value
+        in "Value" <- XZ boundary intersection.Value
+    node Math:Edge proximity
+        in "Value" <- Nearest edge pair.Value
+        in "Value" <- YZ boundary intersection.Value
+    node ValToRGB:08 / Structural edge wear
+        in "Factor" <- Edge proximity.Value
+    node TexNoise:09 / Chipped boundary breakup
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 19.0
+        in "Detail" = 2.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:10 / Irregular chip threshold
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Edge-limited chips
+        in "Value" <- 08 / Structural edge wear.Color
+        in "Value" <- 10 / Irregular chip threshold.Color
+    node Math:Wear amount
+        in "Value" <- Edge-limited chips.Value
+        in "Value" <- Bounded art direction.Wear
+    node TexNoise:12 / Fine tooth independent of broad pigment
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 85.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node MixRGB:Macro relief + tooth
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- 12 / Fine tooth independent of broad pigment.Factor
+    node ValToRGB:Separate specular breakup
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Local dry roughness
+        in "Value" <- Separate specular breakup.Color
+        in "Value" <- Bounded art direction.Roughness
+    node ValToRGB:Patchy water film
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Wet film coverage
+        in "Value" <- Patchy water film.Color
+        in "Value" <- Bounded art direction.Wetness
+    node MixRGB:Dry stone / reflective wet film
+        in "Factor" <- Wet film coverage.Value
+        in "Color1" <- Local dry roughness.Value
+    node Bump:Fine bump only / true relief is modifier
+        in "Strength" <- Bounded art direction.Bump
+        in "Distance" = 0.018
+        in "Filter Width" = 0.1
+        in "Height" <- 12 / Fine tooth independent of broad pigment.Factor
+        in "Normal" = [0.0, 0.0, 0.0]
+    node BsdfPrincipled:Light-responsive layered pigment
+        in "Base Color" <- 07 / Angular dry brush over local color.Color
+        in "Metallic" = 0.0
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "IOR" = 1.5
+        in "Alpha" = 1.0
+        in "Thin Wall" = 0.0
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Diffuse Roughness" = 0.0
+        in "Subsurface Weight" = 0.0
+        in "Subsurface Radius" = [1.0, 0.2, 0.1]
+        in "Subsurface Scale" = 0.05
+        in "Subsurface Anisotropy" = 0.0
+        in "Specular IOR Level" = 0.4
+        in "Specular Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Anisotropic" = 0.0
+        in "Anisotropic Rotation" = 0.0
+        in "Tangent" = [0.0, 0.0, 0.0]
+        in "Transmission Weight" = 0.0
+        in "Coat Weight" = 0.0
+        in "Coat Roughness" = 0.03
+        in "Coat IOR" = 1.5
+        in "Coat Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Coat Normal" = [0.0, 0.0, 0.0]
+        in "Sheen Weight" = 0.0
+        in "Sheen Roughness" = 0.5
+        in "Sheen Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Color" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Strength" = 0.0
+        in "Thin Film Thickness" = 0.0
+        in "Thin Film IOR" = 1.33
+====================================================================================================
+MATERIAL CT / Stone painterly surface.001  users=2  props={'ink_kind': 'wet_stone', 'foundry_kind': 'wet_stone', 'ct_material_role': 'stone', 'ct_coordinates': 'Named point attribute CT_rest, inherited through modifiers', 'ct_surface_seed': '6976'}
+TREE Shader Nodetree  (ShaderNodeTree, users=0)
+  node TexCoord:Rest-space coordinates
+  node Group:FOUNDRY surface controls [group FOUNDRY / Wet Stone.002]
+      in "Vector" <- CT / Immutable prototype rest coordinates.Vector
+      in "Generated" <- Rest-space coordinates.Generated
+      in "Base" = [0.078, 0.113, 0.113, 1.0]
+      in "Shadow" = [0.01, 0.036, 0.051, 1.0]
+      in "Highlight" = [0.223, 0.196, 0.107, 1.0]
+      in "Seed" <- CT / Explicit surface seed.Value
+      in "Scale" = 2.1
+      in "Variation" = 0.55
+      in "Roughness" = 0.76
+      in "Bump" = 0.1
+      in "Wear" = 0.12
+      in "Wetness" = 0.25
+      in "Stroke Length" = 0.6
+      in "Stroke Width" = 0.12
+  node ObjectInfo:Object-to-object variation
+  node Math:Unique brush distribution
+      in "Value" <- Object-to-object variation.Random
+      in "Value" = 41.0
+  node Math:Seed plus object variation
+      in "Value" <- Unique brush distribution.Value
+      in "Value" = 17.0
+  node OutputMaterial:Material Output
+      in "Surface" <- FOUNDRY surface controls.Shader
+  node Value:CT / Explicit surface seed
+  node Attribute:CT / Immutable prototype rest coordinates [attr CT_rest GEOMETRY]
+  TREE FOUNDRY / Wet Stone.002  (ShaderNodeTree, users=2)
+    iface OUTPUT NodeSocketShader       "Shader" default=None
+    iface OUTPUT NodeSocketColor        "Albedo" default=[0.0, 0.0, 0.0, 1.0]
+    iface OUTPUT NodeSocketFloat        "Roughness" default=0.0
+    iface OUTPUT NodeSocketFloat        "Height" default=0.0
+    iface OUTPUT NodeSocketVector       "Normal" default=[0.0, 0.0, 0.0]
+    iface OUTPUT NodeSocketFloat        "Wear Mask" default=0.0
+    iface INPUT  NodeSocketVector       "Vector" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketVector       "Generated" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketColor        "Base" default=[0.059, 0.1, 0.119, 1.0]
+    iface INPUT  NodeSocketColor        "Shadow" default=[0.013, 0.033, 0.051, 1.0]
+    iface INPUT  NodeSocketColor        "Highlight" default=[0.171, 0.187, 0.133, 1.0]
+    iface INPUT  NodeSocketFloat        "Seed" default=17.0
+    iface INPUT  NodeSocketFloat        "Scale" default=4.0
+    iface INPUT  NodeSocketFloat        "Variation" default=0.48
+    iface INPUT  NodeSocketFloat        "Roughness" default=0.33
+    iface INPUT  NodeSocketFloat        "Bump" default=0.18
+    iface INPUT  NodeSocketFloat        "Wear" default=0.5
+    iface INPUT  NodeSocketFloat        "Wetness" default=0.72
+    iface INPUT  NodeSocketFloat        "Stroke Length" default=0.38
+    iface INPUT  NodeSocketFloat        "Stroke Width" default=0.055
+    node NodeGroupInput:Bounded art direction
+    node NodeGroupOutput:Exportable material channels
+        in "Shader" <- Light-responsive layered pigment.BSDF
+        in "Albedo" <- 07 / Angular dry brush over local color.Color
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "Height" <- Macro relief + tooth.Color
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Wear Mask" <- Wear amount.Value
+    node VectorMath:Material-directed brush coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:01 / Broad pigment shapes
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" <- Bounded art direction.Scale
+        in "Detail" = 0.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node CombineXYZ:Per-object angular domain offset
+        in "X" <- Bounded art direction.Seed
+        in "Y" <- Seed Y decorrelation.Value
+    node Math:Seed Y decorrelation
+        in "Value" <- Bounded art direction.Seed
+        in "Value" = 0.371
+    node VectorMath:Seeded angular domain
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Angular pigment planes
+        in "Vector" <- Seeded angular domain.Vector
+        in "Scale" <- Bounded art direction.Scale
+    node MixRGB:Soft and angular pigment interlock
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- Angular pigment planes.Distance
+    node ValToRGB:02 / Uneven hard and soft paint boundaries
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node MixRGB:03 / Cool dark to warm light pigment
+        in "Factor" <- 02 / Uneven hard and soft paint boundaries.Color
+        in "Color1" <- Bounded art direction.Shadow
+        in "Color2" <- Bounded art direction.Highlight
+    node ValToRGB:Sparse cool pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node ValToRGB:Sparse warm pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node Math:Secondary pigment opacity
+        in "Value" <- Sparse cool pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node Math:Light pigment opacity
+        in "Value" <- Sparse warm pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node MixRGB:Dominant base / sparse cool planes
+        in "Factor" <- Secondary pigment opacity.Value
+        in "Color1" <- Bounded art direction.Base
+        in "Color2" <- Bounded art direction.Shadow
+    node Math:Broad highlight restraint
+        in "Value" <- Light pigment opacity.Value
+        in "Value" = 0.3
+    node MixRGB:04 / Dominant base / sparse warm planes
+        in "Factor" <- Broad highlight restraint.Value
+        in "Color1" <- Dominant base / sparse cool planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node VectorMath:Brush length / width / direction
+        in "Vector" <- Bounded art direction.Vector
+        in "Vector" <- Controllable brush aspect.Vector
+    node Math:Reciprocal stroke length
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Length
+    node Math:Reciprocal stroke width
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Width
+    node CombineXYZ:Controllable brush aspect
+        in "X" <- Reciprocal stroke length.Value
+        in "Y" <- Reciprocal stroke width.Value
+        in "Z" <- Reciprocal stroke width.Value
+    node VectorMath:Seeded stroke domain
+        in "Vector" <- Brush length / width / direction.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Finite rectangular brush dabs
+        in "Vector" <- Seeded stroke domain.Vector
+    node Math:Individual dab size variation
+        in "Value" <- Finite rectangular brush dabs.Color
+        in "Value" = 0.8
+    node Math:Minimum dab size
+        in "Value" <- Individual dab size variation.Value
+        in "Value" = 0.6
+    node Math:Variable-size dab distance
+        in "Value" <- Finite rectangular brush dabs.Distance
+        in "Value" <- Minimum dab size.Value
+    node ValToRGB:Clipped angular stroke footprint
+        in "Factor" <- Variable-size dab distance.Value
+    node ValToRGB:Sparse individual brush dabs
+        in "Factor" <- Finite rectangular brush dabs.Color
+    node Math:Short separate brush marks
+        in "Value" <- Clipped angular stroke footprint.Color
+        in "Value" <- Sparse individual brush dabs.Color
+    node TexNoise:Broken dab edges
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 38.0
+        in "Detail" = 1.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Eroded brush tips
+        in "Factor" <- Broken dab edges.Factor
+    node Math:Broken brush footprint
+        in "Value" <- Short separate brush marks.Value
+        in "Value" <- Eroded brush tips.Color
+    node VectorMath:Parallel bristle coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:Fine parallel bristle streaks
+        in "Vector" <- Parallel bristle coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 7.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Bristle density inside each dab
+        in "Factor" <- Fine parallel bristle streaks.Factor
+    node Math:Visible directional bristle marks
+        in "Value" <- Broken brush footprint.Value
+        in "Value" <- Bristle density inside each dab.Color
+    node ValToRGB:Loose stroke grouping
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Grouped brush deposits
+        in "Value" <- Visible directional bristle marks.Value
+        in "Value" <- Loose stroke grouping.Color
+    node Math:Stroke opacity
+        in "Value" <- Grouped brush deposits.Value
+        in "Value" = 0.75
+    node MixRGB:07 / Angular dry brush over local color
+        in "Factor" <- Stroke opacity.Value
+        in "Color1" <- 04 / Dominant base / sparse warm planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node SeparateXYZ:Object edge coordinates
+        in "Vector" <- Bounded art direction.Generated
+    node Math:Distance from X upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.X
+    node Math:Distance to X boundary
+        in "Value" <- Object edge coordinates.X
+        in "Value" <- Distance from X upper boundary.Value
+    node Math:Distance from Y upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Y
+    node Math:Distance to Y boundary
+        in "Value" <- Object edge coordinates.Y
+        in "Value" <- Distance from Y upper boundary.Value
+    node Math:Distance from Z upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Z
+    node Math:Distance to Z boundary
+        in "Value" <- Object edge coordinates.Z
+        in "Value" <- Distance from Z upper boundary.Value
+    node Math:XY boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Y boundary.Value
+    node Math:XZ boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:YZ boundary intersection
+        in "Value" <- Distance to Y boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:Nearest edge pair
+        in "Value" <- XY boundary intersection.Value
+        in "Value" <- XZ boundary intersection.Value
+    node Math:Edge proximity
+        in "Value" <- Nearest edge pair.Value
+        in "Value" <- YZ boundary intersection.Value
+    node ValToRGB:08 / Structural edge wear
+        in "Factor" <- Edge proximity.Value
+    node TexNoise:09 / Chipped boundary breakup
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 19.0
+        in "Detail" = 2.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:10 / Irregular chip threshold
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Edge-limited chips
+        in "Value" <- 08 / Structural edge wear.Color
+        in "Value" <- 10 / Irregular chip threshold.Color
+    node Math:Wear amount
+        in "Value" <- Edge-limited chips.Value
+        in "Value" <- Bounded art direction.Wear
+    node TexNoise:12 / Fine tooth independent of broad pigment
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 85.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node MixRGB:Macro relief + tooth
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- 12 / Fine tooth independent of broad pigment.Factor
+    node ValToRGB:Separate specular breakup
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Local dry roughness
+        in "Value" <- Separate specular breakup.Color
+        in "Value" <- Bounded art direction.Roughness
+    node ValToRGB:Patchy water film
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Wet film coverage
+        in "Value" <- Patchy water film.Color
+        in "Value" <- Bounded art direction.Wetness
+    node MixRGB:Dry stone / reflective wet film
+        in "Factor" <- Wet film coverage.Value
+        in "Color1" <- Local dry roughness.Value
+    node Bump:Fine bump only / true relief is modifier
+        in "Strength" <- Bounded art direction.Bump
+        in "Distance" = 0.018
+        in "Filter Width" = 0.1
+        in "Height" <- 12 / Fine tooth independent of broad pigment.Factor
+        in "Normal" = [0.0, 0.0, 0.0]
+    node BsdfPrincipled:Light-responsive layered pigment
+        in "Base Color" <- 07 / Angular dry brush over local color.Color
+        in "Metallic" = 0.0
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "IOR" = 1.5
+        in "Alpha" = 1.0
+        in "Thin Wall" = 0.0
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Diffuse Roughness" = 0.0
+        in "Subsurface Weight" = 0.0
+        in "Subsurface Radius" = [1.0, 0.2, 0.1]
+        in "Subsurface Scale" = 0.05
+        in "Subsurface Anisotropy" = 0.0
+        in "Specular IOR Level" = 0.4
+        in "Specular Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Anisotropic" = 0.0
+        in "Anisotropic Rotation" = 0.0
+        in "Tangent" = [0.0, 0.0, 0.0]
+        in "Transmission Weight" = 0.0
+        in "Coat Weight" = 0.0
+        in "Coat Roughness" = 0.03
+        in "Coat IOR" = 1.5
+        in "Coat Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Coat Normal" = [0.0, 0.0, 0.0]
+        in "Sheen Weight" = 0.0
+        in "Sheen Roughness" = 0.5
+        in "Sheen Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Color" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Strength" = 0.0
+        in "Thin Film Thickness" = 0.0
+        in "Thin Film IOR" = 1.33
+====================================================================================================
+MATERIAL CT / Ceramic painterly surface  users=2  props={'ink_kind': 'wet_stone', 'foundry_kind': 'wet_stone', 'ct_material_role': 'ceramic', 'ct_coordinates': 'Named point attribute CT_rest, inherited through modifiers', 'ct_surface_seed': '33'}
+TREE Shader Nodetree  (ShaderNodeTree, users=0)
+  node TexCoord:Rest-space coordinates
+  node Group:FOUNDRY surface controls [group FOUNDRY / Wet Stone]
+      in "Vector" <- CT / Immutable prototype rest coordinates.Vector
+      in "Generated" <- Rest-space coordinates.Generated
+      in "Base" = [0.013, 0.02, 0.027, 1.0]
+      in "Shadow" = [0.004, 0.007, 0.009, 1.0]
+      in "Highlight" = [0.051, 0.078, 0.089, 1.0]
+      in "Seed" <- CT / Explicit surface seed.Value
+      in "Scale" = 3.0
+      in "Variation" = 0.68
+      in "Roughness" = 0.84
+      in "Bump" = 0.1
+      in "Wear" = 0.12
+      in "Wetness" = 0.0
+      in "Stroke Length" = 0.35
+      in "Stroke Width" = 0.08
+  node ObjectInfo:Object-to-object variation
+  node Math:Unique brush distribution
+      in "Value" <- Object-to-object variation.Random
+      in "Value" = 41.0
+  node Math:Seed plus object variation
+      in "Value" <- Unique brush distribution.Value
+      in "Value" = 17.0
+  node OutputMaterial:Material Output
+      in "Surface" <- FOUNDRY surface controls.Shader
+  node Value:CT / Explicit surface seed
+  node Attribute:CT / Immutable prototype rest coordinates [attr CT_rest GEOMETRY]
+  TREE FOUNDRY / Wet Stone  (ShaderNodeTree, users=3)
+    iface OUTPUT NodeSocketShader       "Shader" default=None
+    iface OUTPUT NodeSocketColor        "Albedo" default=[0.0, 0.0, 0.0, 1.0]
+    iface OUTPUT NodeSocketFloat        "Roughness" default=0.0
+    iface OUTPUT NodeSocketFloat        "Height" default=0.0
+    iface OUTPUT NodeSocketVector       "Normal" default=[0.0, 0.0, 0.0]
+    iface OUTPUT NodeSocketFloat        "Wear Mask" default=0.0
+    iface INPUT  NodeSocketVector       "Vector" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketVector       "Generated" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketColor        "Base" default=[0.059, 0.1, 0.119, 1.0]
+    iface INPUT  NodeSocketColor        "Shadow" default=[0.013, 0.033, 0.051, 1.0]
+    iface INPUT  NodeSocketColor        "Highlight" default=[0.171, 0.187, 0.133, 1.0]
+    iface INPUT  NodeSocketFloat        "Seed" default=17.0
+    iface INPUT  NodeSocketFloat        "Scale" default=4.0
+    iface INPUT  NodeSocketFloat        "Variation" default=0.48
+    iface INPUT  NodeSocketFloat        "Roughness" default=0.33
+    iface INPUT  NodeSocketFloat        "Bump" default=0.18
+    iface INPUT  NodeSocketFloat        "Wear" default=0.5
+    iface INPUT  NodeSocketFloat        "Wetness" default=0.72
+    iface INPUT  NodeSocketFloat        "Stroke Length" default=0.38
+    iface INPUT  NodeSocketFloat        "Stroke Width" default=0.055
+    node NodeGroupInput:Bounded art direction
+    node NodeGroupOutput:Exportable material channels
+        in "Shader" <- Light-responsive layered pigment.BSDF
+        in "Albedo" <- 07 / Angular dry brush over local color.Color
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "Height" <- Macro relief + tooth.Color
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Wear Mask" <- Wear amount.Value
+    node VectorMath:Material-directed brush coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:01 / Broad pigment shapes
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" <- Bounded art direction.Scale
+        in "Detail" = 0.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node CombineXYZ:Per-object angular domain offset
+        in "X" <- Bounded art direction.Seed
+        in "Y" <- Seed Y decorrelation.Value
+    node Math:Seed Y decorrelation
+        in "Value" <- Bounded art direction.Seed
+        in "Value" = 0.371
+    node VectorMath:Seeded angular domain
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Angular pigment planes
+        in "Vector" <- Seeded angular domain.Vector
+        in "Scale" <- Bounded art direction.Scale
+    node MixRGB:Soft and angular pigment interlock
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- Angular pigment planes.Distance
+    node ValToRGB:02 / Uneven hard and soft paint boundaries
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node MixRGB:03 / Cool dark to warm light pigment
+        in "Factor" <- 02 / Uneven hard and soft paint boundaries.Color
+        in "Color1" <- Bounded art direction.Shadow
+        in "Color2" <- Bounded art direction.Highlight
+    node ValToRGB:Sparse cool pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node ValToRGB:Sparse warm pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node Math:Secondary pigment opacity
+        in "Value" <- Sparse cool pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node Math:Light pigment opacity
+        in "Value" <- Sparse warm pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node MixRGB:Dominant base / sparse cool planes
+        in "Factor" <- Secondary pigment opacity.Value
+        in "Color1" <- Bounded art direction.Base
+        in "Color2" <- Bounded art direction.Shadow
+    node Math:Broad highlight restraint
+        in "Value" <- Light pigment opacity.Value
+        in "Value" = 0.3
+    node MixRGB:04 / Dominant base / sparse warm planes
+        in "Factor" <- Broad highlight restraint.Value
+        in "Color1" <- Dominant base / sparse cool planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node VectorMath:Brush length / width / direction
+        in "Vector" <- Bounded art direction.Vector
+        in "Vector" <- Controllable brush aspect.Vector
+    node Math:Reciprocal stroke length
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Length
+    node Math:Reciprocal stroke width
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Width
+    node CombineXYZ:Controllable brush aspect
+        in "X" <- Reciprocal stroke length.Value
+        in "Y" <- Reciprocal stroke width.Value
+        in "Z" <- Reciprocal stroke width.Value
+    node VectorMath:Seeded stroke domain
+        in "Vector" <- Brush length / width / direction.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Finite rectangular brush dabs
+        in "Vector" <- Seeded stroke domain.Vector
+    node Math:Individual dab size variation
+        in "Value" <- Finite rectangular brush dabs.Color
+        in "Value" = 0.8
+    node Math:Minimum dab size
+        in "Value" <- Individual dab size variation.Value
+        in "Value" = 0.6
+    node Math:Variable-size dab distance
+        in "Value" <- Finite rectangular brush dabs.Distance
+        in "Value" <- Minimum dab size.Value
+    node ValToRGB:Clipped angular stroke footprint
+        in "Factor" <- Variable-size dab distance.Value
+    node ValToRGB:Sparse individual brush dabs
+        in "Factor" <- Finite rectangular brush dabs.Color
+    node Math:Short separate brush marks
+        in "Value" <- Clipped angular stroke footprint.Color
+        in "Value" <- Sparse individual brush dabs.Color
+    node TexNoise:Broken dab edges
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 38.0
+        in "Detail" = 1.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Eroded brush tips
+        in "Factor" <- Broken dab edges.Factor
+    node Math:Broken brush footprint
+        in "Value" <- Short separate brush marks.Value
+        in "Value" <- Eroded brush tips.Color
+    node VectorMath:Parallel bristle coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:Fine parallel bristle streaks
+        in "Vector" <- Parallel bristle coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 7.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Bristle density inside each dab
+        in "Factor" <- Fine parallel bristle streaks.Factor
+    node Math:Visible directional bristle marks
+        in "Value" <- Broken brush footprint.Value
+        in "Value" <- Bristle density inside each dab.Color
+    node ValToRGB:Loose stroke grouping
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Grouped brush deposits
+        in "Value" <- Visible directional bristle marks.Value
+        in "Value" <- Loose stroke grouping.Color
+    node Math:Stroke opacity
+        in "Value" <- Grouped brush deposits.Value
+        in "Value" = 0.75
+    node MixRGB:07 / Angular dry brush over local color
+        in "Factor" <- Stroke opacity.Value
+        in "Color1" <- 04 / Dominant base / sparse warm planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node SeparateXYZ:Object edge coordinates
+        in "Vector" <- Bounded art direction.Generated
+    node Math:Distance from X upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.X
+    node Math:Distance to X boundary
+        in "Value" <- Object edge coordinates.X
+        in "Value" <- Distance from X upper boundary.Value
+    node Math:Distance from Y upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Y
+    node Math:Distance to Y boundary
+        in "Value" <- Object edge coordinates.Y
+        in "Value" <- Distance from Y upper boundary.Value
+    node Math:Distance from Z upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Z
+    node Math:Distance to Z boundary
+        in "Value" <- Object edge coordinates.Z
+        in "Value" <- Distance from Z upper boundary.Value
+    node Math:XY boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Y boundary.Value
+    node Math:XZ boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:YZ boundary intersection
+        in "Value" <- Distance to Y boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:Nearest edge pair
+        in "Value" <- XY boundary intersection.Value
+        in "Value" <- XZ boundary intersection.Value
+    node Math:Edge proximity
+        in "Value" <- Nearest edge pair.Value
+        in "Value" <- YZ boundary intersection.Value
+    node ValToRGB:08 / Structural edge wear
+        in "Factor" <- Edge proximity.Value
+    node TexNoise:09 / Chipped boundary breakup
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 19.0
+        in "Detail" = 2.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:10 / Irregular chip threshold
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Edge-limited chips
+        in "Value" <- 08 / Structural edge wear.Color
+        in "Value" <- 10 / Irregular chip threshold.Color
+    node Math:Wear amount
+        in "Value" <- Edge-limited chips.Value
+        in "Value" <- Bounded art direction.Wear
+    node TexNoise:12 / Fine tooth independent of broad pigment
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 85.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node MixRGB:Macro relief + tooth
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- 12 / Fine tooth independent of broad pigment.Factor
+    node ValToRGB:Separate specular breakup
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Local dry roughness
+        in "Value" <- Separate specular breakup.Color
+        in "Value" <- Bounded art direction.Roughness
+    node ValToRGB:Patchy water film
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Wet film coverage
+        in "Value" <- Patchy water film.Color
+        in "Value" <- Bounded art direction.Wetness
+    node MixRGB:Dry stone / reflective wet film
+        in "Factor" <- Wet film coverage.Value
+        in "Color1" <- Local dry roughness.Value
+    node Bump:Fine bump only / true relief is modifier
+        in "Strength" <- Bounded art direction.Bump
+        in "Distance" = 0.018
+        in "Filter Width" = 0.1
+        in "Height" <- 12 / Fine tooth independent of broad pigment.Factor
+        in "Normal" = [0.0, 0.0, 0.0]
+    node BsdfPrincipled:Light-responsive layered pigment
+        in "Base Color" <- 07 / Angular dry brush over local color.Color
+        in "Metallic" = 0.0
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "IOR" = 1.5
+        in "Alpha" = 1.0
+        in "Thin Wall" = 0.0
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Diffuse Roughness" = 0.0
+        in "Subsurface Weight" = 0.0
+        in "Subsurface Radius" = [1.0, 0.2, 0.1]
+        in "Subsurface Scale" = 0.05
+        in "Subsurface Anisotropy" = 0.0
+        in "Specular IOR Level" = 0.4
+        in "Specular Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Anisotropic" = 0.0
+        in "Anisotropic Rotation" = 0.0
+        in "Tangent" = [0.0, 0.0, 0.0]
+        in "Transmission Weight" = 0.0
+        in "Coat Weight" = 0.0
+        in "Coat Roughness" = 0.03
+        in "Coat IOR" = 1.5
+        in "Coat Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Coat Normal" = [0.0, 0.0, 0.0]
+        in "Sheen Weight" = 0.0
+        in "Sheen Roughness" = 0.5
+        in "Sheen Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Color" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Strength" = 0.0
+        in "Thin Film Thickness" = 0.0
+        in "Thin Film IOR" = 1.33
+====================================================================================================
+MATERIAL CT / Ceramic ridge host-local surface  users=1  props={'ink_kind': 'wet_stone', 'foundry_kind': 'wet_stone', 'ct_material_role': 'ceramic', 'ct_coordinates': 'Host-local Object coordinates for generated ridge; explicit ', 'ct_surface_seed': '33'}
+TREE Shader Nodetree  (ShaderNodeTree, users=0)
+  node TexCoord:Rest-space coordinates
+  node Group:FOUNDRY surface controls [group FOUNDRY / Wet Stone]
+      in "Vector" <- Texture Coordinate.Object
+      in "Generated" <- Rest-space coordinates.Generated
+      in "Base" = [0.013, 0.02, 0.027, 1.0]
+      in "Shadow" = [0.004, 0.007, 0.009, 1.0]
+      in "Highlight" = [0.051, 0.078, 0.089, 1.0]
+      in "Seed" <- CT / Explicit surface seed.Value
+      in "Scale" = 3.0
+      in "Variation" = 0.68
+      in "Roughness" = 0.84
+      in "Bump" = 0.1
+      in "Wear" = 0.12
+      in "Wetness" = 0.0
+      in "Stroke Length" = 0.35
+      in "Stroke Width" = 0.08
+  node ObjectInfo:Object-to-object variation
+  node Math:Unique brush distribution
+      in "Value" <- Object-to-object variation.Random
+      in "Value" = 41.0
+  node Math:Seed plus object variation
+      in "Value" <- Unique brush distribution.Value
+      in "Value" = 17.0
+  node OutputMaterial:Material Output
+      in "Surface" <- FOUNDRY surface controls.Shader
+  node Value:CT / Explicit surface seed
+  node Attribute:CT / Immutable prototype rest coordinates [attr CT_rest GEOMETRY]
+  node TexCoord:Texture Coordinate
+  TREE FOUNDRY / Wet Stone  (ShaderNodeTree, users=3)
+    iface OUTPUT NodeSocketShader       "Shader" default=None
+    iface OUTPUT NodeSocketColor        "Albedo" default=[0.0, 0.0, 0.0, 1.0]
+    iface OUTPUT NodeSocketFloat        "Roughness" default=0.0
+    iface OUTPUT NodeSocketFloat        "Height" default=0.0
+    iface OUTPUT NodeSocketVector       "Normal" default=[0.0, 0.0, 0.0]
+    iface OUTPUT NodeSocketFloat        "Wear Mask" default=0.0
+    iface INPUT  NodeSocketVector       "Vector" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketVector       "Generated" default=[0.0, 0.0, 0.0]
+    iface INPUT  NodeSocketColor        "Base" default=[0.059, 0.1, 0.119, 1.0]
+    iface INPUT  NodeSocketColor        "Shadow" default=[0.013, 0.033, 0.051, 1.0]
+    iface INPUT  NodeSocketColor        "Highlight" default=[0.171, 0.187, 0.133, 1.0]
+    iface INPUT  NodeSocketFloat        "Seed" default=17.0
+    iface INPUT  NodeSocketFloat        "Scale" default=4.0
+    iface INPUT  NodeSocketFloat        "Variation" default=0.48
+    iface INPUT  NodeSocketFloat        "Roughness" default=0.33
+    iface INPUT  NodeSocketFloat        "Bump" default=0.18
+    iface INPUT  NodeSocketFloat        "Wear" default=0.5
+    iface INPUT  NodeSocketFloat        "Wetness" default=0.72
+    iface INPUT  NodeSocketFloat        "Stroke Length" default=0.38
+    iface INPUT  NodeSocketFloat        "Stroke Width" default=0.055
+    node NodeGroupInput:Bounded art direction
+    node NodeGroupOutput:Exportable material channels
+        in "Shader" <- Light-responsive layered pigment.BSDF
+        in "Albedo" <- 07 / Angular dry brush over local color.Color
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "Height" <- Macro relief + tooth.Color
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Wear Mask" <- Wear amount.Value
+    node VectorMath:Material-directed brush coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:01 / Broad pigment shapes
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" <- Bounded art direction.Scale
+        in "Detail" = 0.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node CombineXYZ:Per-object angular domain offset
+        in "X" <- Bounded art direction.Seed
+        in "Y" <- Seed Y decorrelation.Value
+    node Math:Seed Y decorrelation
+        in "Value" <- Bounded art direction.Seed
+        in "Value" = 0.371
+    node VectorMath:Seeded angular domain
+        in "Vector" <- Material-directed brush coordinates.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Angular pigment planes
+        in "Vector" <- Seeded angular domain.Vector
+        in "Scale" <- Bounded art direction.Scale
+    node MixRGB:Soft and angular pigment interlock
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- Angular pigment planes.Distance
+    node ValToRGB:02 / Uneven hard and soft paint boundaries
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node MixRGB:03 / Cool dark to warm light pigment
+        in "Factor" <- 02 / Uneven hard and soft paint boundaries.Color
+        in "Color1" <- Bounded art direction.Shadow
+        in "Color2" <- Bounded art direction.Highlight
+    node ValToRGB:Sparse cool pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node ValToRGB:Sparse warm pigment planes
+        in "Factor" <- Soft and angular pigment interlock.Color
+    node Math:Secondary pigment opacity
+        in "Value" <- Sparse cool pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node Math:Light pigment opacity
+        in "Value" <- Sparse warm pigment planes.Color
+        in "Value" <- Bounded art direction.Variation
+    node MixRGB:Dominant base / sparse cool planes
+        in "Factor" <- Secondary pigment opacity.Value
+        in "Color1" <- Bounded art direction.Base
+        in "Color2" <- Bounded art direction.Shadow
+    node Math:Broad highlight restraint
+        in "Value" <- Light pigment opacity.Value
+        in "Value" = 0.3
+    node MixRGB:04 / Dominant base / sparse warm planes
+        in "Factor" <- Broad highlight restraint.Value
+        in "Color1" <- Dominant base / sparse cool planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node VectorMath:Brush length / width / direction
+        in "Vector" <- Bounded art direction.Vector
+        in "Vector" <- Controllable brush aspect.Vector
+    node Math:Reciprocal stroke length
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Length
+    node Math:Reciprocal stroke width
+        in "Value" = 1.0
+        in "Value" <- Bounded art direction.Stroke Width
+    node CombineXYZ:Controllable brush aspect
+        in "X" <- Reciprocal stroke length.Value
+        in "Y" <- Reciprocal stroke width.Value
+        in "Z" <- Reciprocal stroke width.Value
+    node VectorMath:Seeded stroke domain
+        in "Vector" <- Brush length / width / direction.Vector
+        in "Vector" <- Per-object angular domain offset.Vector
+    node TexVoronoi:Finite rectangular brush dabs
+        in "Vector" <- Seeded stroke domain.Vector
+    node Math:Individual dab size variation
+        in "Value" <- Finite rectangular brush dabs.Color
+        in "Value" = 0.8
+    node Math:Minimum dab size
+        in "Value" <- Individual dab size variation.Value
+        in "Value" = 0.6
+    node Math:Variable-size dab distance
+        in "Value" <- Finite rectangular brush dabs.Distance
+        in "Value" <- Minimum dab size.Value
+    node ValToRGB:Clipped angular stroke footprint
+        in "Factor" <- Variable-size dab distance.Value
+    node ValToRGB:Sparse individual brush dabs
+        in "Factor" <- Finite rectangular brush dabs.Color
+    node Math:Short separate brush marks
+        in "Value" <- Clipped angular stroke footprint.Color
+        in "Value" <- Sparse individual brush dabs.Color
+    node TexNoise:Broken dab edges
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 38.0
+        in "Detail" = 1.5
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Eroded brush tips
+        in "Factor" <- Broken dab edges.Factor
+    node Math:Broken brush footprint
+        in "Value" <- Short separate brush marks.Value
+        in "Value" <- Eroded brush tips.Color
+    node VectorMath:Parallel bristle coordinates
+        in "Vector" <- Bounded art direction.Vector
+    node TexNoise:Fine parallel bristle streaks
+        in "Vector" <- Parallel bristle coordinates.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 7.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:Bristle density inside each dab
+        in "Factor" <- Fine parallel bristle streaks.Factor
+    node Math:Visible directional bristle marks
+        in "Value" <- Broken brush footprint.Value
+        in "Value" <- Bristle density inside each dab.Color
+    node ValToRGB:Loose stroke grouping
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Grouped brush deposits
+        in "Value" <- Visible directional bristle marks.Value
+        in "Value" <- Loose stroke grouping.Color
+    node Math:Stroke opacity
+        in "Value" <- Grouped brush deposits.Value
+        in "Value" = 0.75
+    node MixRGB:07 / Angular dry brush over local color
+        in "Factor" <- Stroke opacity.Value
+        in "Color1" <- 04 / Dominant base / sparse warm planes.Color
+        in "Color2" <- Bounded art direction.Highlight
+    node SeparateXYZ:Object edge coordinates
+        in "Vector" <- Bounded art direction.Generated
+    node Math:Distance from X upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.X
+    node Math:Distance to X boundary
+        in "Value" <- Object edge coordinates.X
+        in "Value" <- Distance from X upper boundary.Value
+    node Math:Distance from Y upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Y
+    node Math:Distance to Y boundary
+        in "Value" <- Object edge coordinates.Y
+        in "Value" <- Distance from Y upper boundary.Value
+    node Math:Distance from Z upper boundary
+        in "Value" = 1.0
+        in "Value" <- Object edge coordinates.Z
+    node Math:Distance to Z boundary
+        in "Value" <- Object edge coordinates.Z
+        in "Value" <- Distance from Z upper boundary.Value
+    node Math:XY boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Y boundary.Value
+    node Math:XZ boundary intersection
+        in "Value" <- Distance to X boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:YZ boundary intersection
+        in "Value" <- Distance to Y boundary.Value
+        in "Value" <- Distance to Z boundary.Value
+    node Math:Nearest edge pair
+        in "Value" <- XY boundary intersection.Value
+        in "Value" <- XZ boundary intersection.Value
+    node Math:Edge proximity
+        in "Value" <- Nearest edge pair.Value
+        in "Value" <- YZ boundary intersection.Value
+    node ValToRGB:08 / Structural edge wear
+        in "Factor" <- Edge proximity.Value
+    node TexNoise:09 / Chipped boundary breakup
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 19.0
+        in "Detail" = 2.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node ValToRGB:10 / Irregular chip threshold
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Edge-limited chips
+        in "Value" <- 08 / Structural edge wear.Color
+        in "Value" <- 10 / Irregular chip threshold.Color
+    node Math:Wear amount
+        in "Value" <- Edge-limited chips.Value
+        in "Value" <- Bounded art direction.Wear
+    node TexNoise:12 / Fine tooth independent of broad pigment
+        in "Vector" <- Bounded art direction.Vector
+        in "W" <- Bounded art direction.Seed
+        in "Scale" = 85.0
+        in "Detail" = 1.0
+        in "Roughness" = 0.6
+        in "Lacunarity" = 2.0
+        in "Distortion" = 0.0
+    node MixRGB:Macro relief + tooth
+        in "Color1" <- 01 / Broad pigment shapes.Factor
+        in "Color2" <- 12 / Fine tooth independent of broad pigment.Factor
+    node ValToRGB:Separate specular breakup
+        in "Factor" <- 09 / Chipped boundary breakup.Factor
+    node Math:Local dry roughness
+        in "Value" <- Separate specular breakup.Color
+        in "Value" <- Bounded art direction.Roughness
+    node ValToRGB:Patchy water film
+        in "Factor" <- 01 / Broad pigment shapes.Factor
+    node Math:Wet film coverage
+        in "Value" <- Patchy water film.Color
+        in "Value" <- Bounded art direction.Wetness
+    node MixRGB:Dry stone / reflective wet film
+        in "Factor" <- Wet film coverage.Value
+        in "Color1" <- Local dry roughness.Value
+    node Bump:Fine bump only / true relief is modifier
+        in "Strength" <- Bounded art direction.Bump
+        in "Distance" = 0.018
+        in "Filter Width" = 0.1
+        in "Height" <- 12 / Fine tooth independent of broad pigment.Factor
+        in "Normal" = [0.0, 0.0, 0.0]
+    node BsdfPrincipled:Light-responsive layered pigment
+        in "Base Color" <- 07 / Angular dry brush over local color.Color
+        in "Metallic" = 0.0
+        in "Roughness" <- Dry stone / reflective wet film.Color
+        in "IOR" = 1.5
+        in "Alpha" = 1.0
+        in "Thin Wall" = 0.0
+        in "Normal" <- Fine bump only / true relief is modifier.Normal
+        in "Diffuse Roughness" = 0.0
+        in "Subsurface Weight" = 0.0
+        in "Subsurface Radius" = [1.0, 0.2, 0.1]
+        in "Subsurface Scale" = 0.05
+        in "Subsurface Anisotropy" = 0.0
+        in "Specular IOR Level" = 0.4
+        in "Specular Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Anisotropic" = 0.0
+        in "Anisotropic Rotation" = 0.0
+        in "Tangent" = [0.0, 0.0, 0.0]
+        in "Transmission Weight" = 0.0
+        in "Coat Weight" = 0.0
+        in "Coat Roughness" = 0.03
+        in "Coat IOR" = 1.5
+        in "Coat Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Coat Normal" = [0.0, 0.0, 0.0]
+        in "Sheen Weight" = 0.0
+        in "Sheen Roughness" = 0.5
+        in "Sheen Tint" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Color" = [1.0, 1.0, 1.0, 1.0]
+        in "Emission Strength" = 0.0
+        in "Thin Film Thickness" = 0.0
+        in "Thin Film IOR" = 1.33
+====================================================================================================
+ALL NODE GROUPS (name, kind, users)
+CT / Anchored chiseled variation                        GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.001                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.002                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.003                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.004                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.005                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.006                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.007                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.008                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.009                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.010                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.011                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.012                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.013                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.014                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.015                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.016                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.017                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.018                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.019                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.020                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.021                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.022                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.023                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.024                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.025                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.026                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.027                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.028                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.029                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.030                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.031                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.032                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.033                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.034                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.035                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.036                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.037                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.038                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.039                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.040                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.041                    GeometryNodeTree users=2 nodes=17
+CT / Anchored chiseled variation.042                    GeometryNodeTree users=2 nodes=17
+CT / Complete two-bank ceramic roof                     GeometryNodeTree users=2 nodes=6
+CT / Final evaluated base seating                       GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.001                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.002                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.003                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.004                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.005                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.006                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.007                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.008                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.009                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.010                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.011                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.012                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.013                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.014                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.015                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.016                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.017                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.018                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.019                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.020                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.021                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.022                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.023                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.024                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.025                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.026                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.027                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.028                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.029                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.030                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.031                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.032                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.033                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.034                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.035                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.036                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.037                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.038                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.039                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.040                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.041                   GeometryNodeTree users=1 nodes=7
+CT / Final evaluated base seating.042                   GeometryNodeTree users=1 nodes=7
+CT / Roof bank 1 local mechanism                        GeometryNodeTree users=2 nodes=75
+CT / Roof bank 2 local mechanism                        GeometryNodeTree users=2 nodes=66
+FOUNDRY / Wet Stone                                     ShaderNodeTree users=3 nodes=67
+FOUNDRY / Wet Stone.001                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.002                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.003                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.004                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.005                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.006                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.007                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.008                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.009                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.010                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.011                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.012                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.013                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.014                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.015                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.016                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.017                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.018                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.019                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.020                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.021                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.022                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.023                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.024                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.025                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.026                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.027                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.028                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.029                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.030                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.031                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.032                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.033                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.034                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.035                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.036                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.037                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.038                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.039                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.040                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.041                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.042                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wet Stone.043                                 ShaderNodeTree users=2 nodes=67
+FOUNDRY / Wood                                          ShaderNodeTree users=2 nodes=65

@@ -1,0 +1,935 @@
+{
+ "note": "all at 1536 x 2730; K = kit plate, B = same plate without the kit, P = painting lined up; levels are 0-255; brightness 0-1",
+ "where_the_kit_changed_the_plate": {
+  "walls": {
+   "zone_dots": 339346,
+   "share_changed_over_10_levels": 0.0994,
+   "share_over_24_levels": 0.0235
+  },
+  "road": {
+   "zone_dots": 988549,
+   "share_changed_over_10_levels": 0.0394,
+   "share_over_24_levels": 0.0203
+  },
+  "pavement": {
+   "zone_dots": 49129,
+   "share_changed_over_10_levels": 0.0007,
+   "share_over_24_levels": 0.0
+  },
+  "gutter": {
+   "zone_dots": 17654,
+   "share_changed_over_10_levels": 0.0018,
+   "share_over_24_levels": 0.0
+  },
+  "kerb": {
+   "zone_dots": 22293,
+   "share_changed_over_10_levels": 0.0653,
+   "share_over_24_levels": 0.0297
+  },
+  "drum": {
+   "zone_dots": 67129,
+   "share_changed_over_10_levels": 0.5275,
+   "share_over_24_levels": 0.1914
+  },
+  "other near props": {
+   "zone_dots": 352421,
+   "share_changed_over_10_levels": 0.0025,
+   "share_over_24_levels": 0.0001
+  },
+  "colliery": {
+   "zone_dots": 11550,
+   "share_changed_over_10_levels": 0.0,
+   "share_over_24_levels": 0.0
+  },
+  "whole picture without sky": {
+   "zone_dots": 2711006,
+   "share_changed_over_10_levels": 0.0572,
+   "share_over_24_levels": 0.0189
+  }
+ },
+ "plants": {
+  "note": "a plant patch = 12 or more dots that are green (green minus the larger of red and blue over 8) in the kit plate and not in the no-kit plate; \"big\" = 40 or more dots. painting_has_green = the painting has 8+ greenness anywhere in the patch box widened by 8 dots.",
+  "plate_patches_12_dots_or_more": 22,
+  "of_which_the_painting_has_green_there": 9,
+  "big_patches_40_dots_or_more": 6,
+  "big_with_green_in_painting": 6,
+  "total_plate_green_dots": 1846,
+  "total_painting_green_dots_in_those_boxes": 1316,
+  "median_peak_greenness_plate": 13.5,
+  "median_peak_greenness_painting": 4.5,
+  "rows": [
+   {
+    "x": 849,
+    "y": 1721,
+    "w": 5,
+    "h": 5,
+    "plate_green_dots": 1,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 9,
+    "painting_peak_greenness": 5,
+    "painting_has_green": false
+   },
+   {
+    "x": 1061,
+    "y": 1791,
+    "w": 7,
+    "h": 10,
+    "plate_green_dots": 15,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 12,
+    "painting_peak_greenness": 4,
+    "painting_has_green": false
+   },
+   {
+    "x": 200,
+    "y": 1800,
+    "w": 5,
+    "h": 6,
+    "plate_green_dots": 2,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 10,
+    "painting_peak_greenness": 2,
+    "painting_has_green": false
+   },
+   {
+    "x": 185,
+    "y": 1826,
+    "w": 5,
+    "h": 9,
+    "plate_green_dots": 4,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 9,
+    "painting_peak_greenness": 4,
+    "painting_has_green": false
+   },
+   {
+    "x": 1348,
+    "y": 1856,
+    "w": 10,
+    "h": 11,
+    "plate_green_dots": 31,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 13,
+    "painting_peak_greenness": 4,
+    "painting_has_green": false
+   },
+   {
+    "x": 1279,
+    "y": 1955,
+    "w": 7,
+    "h": 6,
+    "plate_green_dots": 3,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 9,
+    "painting_peak_greenness": 1,
+    "painting_has_green": false
+   },
+   {
+    "x": 178,
+    "y": 2049,
+    "w": 12,
+    "h": 11,
+    "plate_green_dots": 33,
+    "painting_green_dots_in_box": 13,
+    "plate_peak_greenness": 13,
+    "painting_peak_greenness": 13,
+    "painting_has_green": true
+   },
+   {
+    "x": 237,
+    "y": 2049,
+    "w": 9,
+    "h": 8,
+    "plate_green_dots": 12,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 14,
+    "painting_peak_greenness": 4,
+    "painting_has_green": false
+   },
+   {
+    "x": 260,
+    "y": 2053,
+    "w": 6,
+    "h": 6,
+    "plate_green_dots": 3,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 10,
+    "painting_peak_greenness": 3,
+    "painting_has_green": false
+   },
+   {
+    "x": 120,
+    "y": 2055,
+    "w": 9,
+    "h": 8,
+    "plate_green_dots": 7,
+    "painting_green_dots_in_box": 19,
+    "plate_peak_greenness": 10,
+    "painting_peak_greenness": 13,
+    "painting_has_green": true
+   },
+   {
+    "x": 205,
+    "y": 2060,
+    "w": 5,
+    "h": 5,
+    "plate_green_dots": 1,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 10,
+    "painting_peak_greenness": 3,
+    "painting_has_green": false
+   },
+   {
+    "x": 141,
+    "y": 2075,
+    "w": 8,
+    "h": 6,
+    "plate_green_dots": 4,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 11,
+    "painting_peak_greenness": 2,
+    "painting_has_green": false
+   },
+   {
+    "x": 173,
+    "y": 2085,
+    "w": 7,
+    "h": 8,
+    "plate_green_dots": 6,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 19,
+    "painting_peak_greenness": 5,
+    "painting_has_green": false
+   },
+   {
+    "x": 167,
+    "y": 2128,
+    "w": 8,
+    "h": 12,
+    "plate_green_dots": 8,
+    "painting_green_dots_in_box": 2,
+    "plate_peak_greenness": 15,
+    "painting_peak_greenness": 11,
+    "painting_has_green": true
+   },
+   {
+    "x": 105,
+    "y": 2132,
+    "w": 11,
+    "h": 13,
+    "plate_green_dots": 10,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 17,
+    "painting_peak_greenness": 4,
+    "painting_has_green": false
+   },
+   {
+    "x": 146,
+    "y": 2132,
+    "w": 6,
+    "h": 6,
+    "plate_green_dots": 3,
+    "painting_green_dots_in_box": 0,
+    "plate_peak_greenness": 14,
+    "painting_peak_greenness": 1,
+    "painting_has_green": false
+   },
+   {
+    "x": 24,
+    "y": 2442,
+    "w": 19,
+    "h": 15,
+    "plate_green_dots": 90,
+    "painting_green_dots_in_box": 58,
+    "plate_peak_greenness": 16,
+    "painting_peak_greenness": 18,
+    "painting_has_green": true
+   },
+   {
+    "x": 28,
+    "y": 2479,
+    "w": 25,
+    "h": 15,
+    "plate_green_dots": 165,
+    "painting_green_dots_in_box": 108,
+    "plate_peak_greenness": 16,
+    "painting_peak_greenness": 14,
+    "painting_has_green": true
+   },
+   {
+    "x": 11,
+    "y": 2498,
+    "w": 32,
+    "h": 28,
+    "plate_green_dots": 404,
+    "painting_green_dots_in_box": 374,
+    "plate_peak_greenness": 18,
+    "painting_peak_greenness": 20,
+    "painting_has_green": true
+   },
+   {
+    "x": 0,
+    "y": 2533,
+    "w": 11,
+    "h": 15,
+    "plate_green_dots": 60,
+    "painting_green_dots_in_box": 100,
+    "plate_peak_greenness": 19,
+    "painting_peak_greenness": 17,
+    "painting_has_green": true
+   },
+   {
+    "x": 0,
+    "y": 2613,
+    "w": 46,
+    "h": 30,
+    "plate_green_dots": 445,
+    "painting_green_dots_in_box": 220,
+    "plate_peak_greenness": 16,
+    "painting_peak_greenness": 14,
+    "painting_has_green": true
+   },
+   {
+    "x": 0,
+    "y": 2648,
+    "w": 26,
+    "h": 34,
+    "plate_green_dots": 539,
+    "painting_green_dots_in_box": 422,
+    "plate_peak_greenness": 19,
+    "painting_peak_greenness": 19,
+    "painting_has_green": true
+   }
+  ],
+  "painting_green_patches_12_dots_or_more": 32,
+  "painting_green_patches_with_no_plate_plant_within_25_dots_(invented)": 13,
+  "invented_boxes_x_y_w_h_area": [
+   [
+    1441,
+    731,
+    5,
+    5,
+    25
+   ],
+   [
+    1138,
+    942,
+    5,
+    5,
+    25
+   ],
+   [
+    1191,
+    986,
+    5,
+    5,
+    25
+   ],
+   [
+    158,
+    1210,
+    5,
+    5,
+    25
+   ],
+   [
+    1142,
+    1231,
+    5,
+    5,
+    25
+   ],
+   [
+    628,
+    1441,
+    5,
+    5,
+    25
+   ],
+   [
+    726,
+    1525,
+    5,
+    5,
+    25
+   ],
+   [
+    1529,
+    1724,
+    7,
+    18,
+    70
+   ],
+   [
+    823,
+    1765,
+    5,
+    5,
+    25
+   ],
+   [
+    264,
+    1834,
+    5,
+    5,
+    25
+   ],
+   [
+    532,
+    2029,
+    5,
+    5,
+    25
+   ],
+   [
+    1310,
+    2042,
+    5,
+    5,
+    25
+   ],
+   [
+    149,
+    2194,
+    5,
+    5,
+    25
+   ]
+  ]
+ },
+ "follows_the_kit": {
+  "walls": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 339346,
+    "kit_change_std": 0.0128,
+    "correlation_of_painting_leftover_with_kit_marks": 0.616,
+    "slope_(1_same_strength)": 1.095,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.024,
+     0.201,
+     -0.017,
+     0.129
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 26270
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 339346,
+    "kit_change_std": 0.0105,
+    "correlation_of_painting_leftover_with_kit_marks": 0.635,
+    "slope_(1_same_strength)": 1.079,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.02,
+     0.183,
+     -0.057,
+     0.117
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 17532
+   }
+  },
+  "road": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 988549,
+    "kit_change_std": 0.0128,
+    "correlation_of_painting_leftover_with_kit_marks": 0.308,
+    "slope_(1_same_strength)": 0.801,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.003,
+     -0.015,
+     0.037,
+     0.017
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 41744
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 988549,
+    "kit_change_std": 0.0103,
+    "correlation_of_painting_leftover_with_kit_marks": 0.377,
+    "slope_(1_same_strength)": 0.8,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.018,
+     -0.034,
+     0.011,
+     0.026
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 37802
+   }
+  },
+  "pavement": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 49129,
+    "kit_change_std": 0.0051,
+    "correlation_of_painting_leftover_with_kit_marks": 0.426,
+    "slope_(1_same_strength)": 1.516,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.103,
+     0.044,
+     0.101,
+     -0.168
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 423
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 49129,
+    "kit_change_std": 0.0046,
+    "correlation_of_painting_leftover_with_kit_marks": 0.389,
+    "slope_(1_same_strength)": 1.186,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.127,
+     -0.062,
+     0.071,
+     -0.186
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 0
+   }
+  },
+  "gutter": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 17654,
+    "kit_change_std": 0.0023,
+    "correlation_of_painting_leftover_with_kit_marks": 0.233,
+    "slope_(1_same_strength)": 1.89,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.012,
+     -0.023,
+     -0.053,
+     -0.053
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 7
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 17654,
+    "kit_change_std": 0.0019,
+    "correlation_of_painting_leftover_with_kit_marks": 0.312,
+    "slope_(1_same_strength)": 1.853,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.185,
+     -0.037,
+     -0.168,
+     0.077
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 0
+   }
+  },
+  "kerb": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 22293,
+    "kit_change_std": 0.0126,
+    "correlation_of_painting_leftover_with_kit_marks": 0.66,
+    "slope_(1_same_strength)": 1.317,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.053,
+     0.034,
+     -0.004,
+     0.031
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 1138
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 22293,
+    "kit_change_std": 0.0084,
+    "correlation_of_painting_leftover_with_kit_marks": 0.761,
+    "slope_(1_same_strength)": 1.479,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.118,
+     0.051,
+     0.005,
+     0.052
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 711
+   }
+  },
+  "drum": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 67129,
+    "kit_change_std": 0.0106,
+    "correlation_of_painting_leftover_with_kit_marks": 0.594,
+    "slope_(1_same_strength)": 0.926,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.06,
+     -0.177,
+     0.063,
+     -0.126
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 4560
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 67129,
+    "kit_change_std": 0.0132,
+    "correlation_of_painting_leftover_with_kit_marks": 0.848,
+    "slope_(1_same_strength)": 1.068,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.333,
+     -0.345,
+     0.304,
+     -0.36
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 10654
+   }
+  },
+  "other near props": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 352421,
+    "kit_change_std": 0.0025,
+    "correlation_of_painting_leftover_with_kit_marks": 0.022,
+    "slope_(1_same_strength)": 0.215,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.024,
+     -0.018,
+     -0.025,
+     -0.011
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 1066
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 352421,
+    "kit_change_std": 0.0025,
+    "correlation_of_painting_leftover_with_kit_marks": -0.021,
+    "slope_(1_same_strength)": -0.15,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.033,
+     -0.033,
+     -0.034,
+     -0.062
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 1085
+   }
+  },
+  "colliery": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 11550,
+    "kit_change_std": 0.001,
+    "correlation_of_painting_leftover_with_kit_marks": -0.215,
+    "slope_(1_same_strength)": -1.816,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.294,
+     -0.162,
+     -0.214,
+     0.104
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 0
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 11550,
+    "kit_change_std": 0.0009,
+    "correlation_of_painting_leftover_with_kit_marks": -0.18,
+    "slope_(1_same_strength)": -1.383,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.337,
+     -0.129,
+     -0.151,
+     0.098
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 0
+   }
+  },
+  "whole picture without sky": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 2693776,
+    "kit_change_std": 0.0108,
+    "correlation_of_painting_leftover_with_kit_marks": 0.345,
+    "slope_(1_same_strength)": 0.93,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.004,
+     0.024,
+     0.006,
+     0.025
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 113249
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 2693776,
+    "kit_change_std": 0.0089,
+    "correlation_of_painting_leftover_with_kit_marks": 0.414,
+    "slope_(1_same_strength)": 0.941,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.014,
+     0.011,
+     -0.004,
+     0.018
+    ],
+    "dots_where_the_kit_changed_local_contrast_by_over_0.02": 93139
+   }
+  }
+ },
+ "follows_the_kit_clean_test_(against_round_2_painting_of_the_no_kit_plate)": {
+  "walls": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 339346,
+    "kit_change_std": 0.0128,
+    "painting_vs_painting_difference_std": 0.0212,
+    "correlation": 0.683,
+    "slope_(1_same_strength)": 1.129,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.002,
+     0.23,
+     -0.014,
+     0.104
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 339346,
+    "kit_change_std": 0.0105,
+    "painting_vs_painting_difference_std": 0.017,
+    "correlation": 0.758,
+    "slope_(1_same_strength)": 1.232,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.07,
+     0.253,
+     -0.07,
+     0.071
+    ]
+   }
+  },
+  "road": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 988549,
+    "kit_change_std": 0.0128,
+    "painting_vs_painting_difference_std": 0.0306,
+    "correlation": 0.394,
+    "slope_(1_same_strength)": 0.94,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.032,
+     0.006,
+     0.009,
+     0.008
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 988549,
+    "kit_change_std": 0.0103,
+    "painting_vs_painting_difference_std": 0.022,
+    "correlation": 0.463,
+    "slope_(1_same_strength)": 0.985,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.011,
+     -0.01,
+     -0.016,
+     -0.007
+    ]
+   }
+  },
+  "pavement": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 49129,
+    "kit_change_std": 0.0051,
+    "painting_vs_painting_difference_std": 0.0241,
+    "correlation": 0.238,
+    "slope_(1_same_strength)": 1.132,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.022,
+     0.021,
+     0.046,
+     -0.062
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 49129,
+    "kit_change_std": 0.0046,
+    "painting_vs_painting_difference_std": 0.0166,
+    "correlation": 0.223,
+    "slope_(1_same_strength)": 0.812,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.08,
+     -0.008,
+     -0.089,
+     0.007
+    ]
+   }
+  },
+  "gutter": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 17654,
+    "kit_change_std": 0.0023,
+    "painting_vs_painting_difference_std": 0.0236,
+    "correlation": 0.131,
+    "slope_(1_same_strength)": 1.325,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.009,
+     0.046,
+     -0.044,
+     0.018
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 17654,
+    "kit_change_std": 0.0019,
+    "painting_vs_painting_difference_std": 0.0118,
+    "correlation": 0.288,
+    "slope_(1_same_strength)": 1.82,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.133,
+     0.042,
+     -0.116,
+     0.059
+    ]
+   }
+  },
+  "kerb": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 22293,
+    "kit_change_std": 0.0126,
+    "painting_vs_painting_difference_std": 0.0328,
+    "correlation": 0.563,
+    "slope_(1_same_strength)": 1.474,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.045,
+     0.01,
+     0.027,
+     0.007
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 22293,
+    "kit_change_std": 0.0084,
+    "painting_vs_painting_difference_std": 0.019,
+    "correlation": 0.704,
+    "slope_(1_same_strength)": 1.591,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.091,
+     0.067,
+     0.007,
+     0.009
+    ]
+   }
+  },
+  "drum": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 67129,
+    "kit_change_std": 0.0106,
+    "painting_vs_painting_difference_std": 0.0244,
+    "correlation": 0.38,
+    "slope_(1_same_strength)": 0.875,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.027,
+     -0.045,
+     -0.045,
+     0.02
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 67129,
+    "kit_change_std": 0.0132,
+    "painting_vs_painting_difference_std": 0.0194,
+    "correlation": 0.573,
+    "slope_(1_same_strength)": 0.843,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.231,
+     -0.183,
+     0.072,
+     -0.101
+    ]
+   }
+  },
+  "other near props": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 352421,
+    "kit_change_std": 0.0025,
+    "painting_vs_painting_difference_std": 0.0219,
+    "correlation": 0.097,
+    "slope_(1_same_strength)": 0.846,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.019,
+     0.003,
+     -0.042,
+     0.008
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 352421,
+    "kit_change_std": 0.0025,
+    "painting_vs_painting_difference_std": 0.0145,
+    "correlation": 0.118,
+    "slope_(1_same_strength)": 0.672,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.046,
+     0.005,
+     -0.06,
+     -0.01
+    ]
+   }
+  },
+  "colliery": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 11550,
+    "kit_change_std": 0.001,
+    "painting_vs_painting_difference_std": 0.0071,
+    "correlation": 0.064,
+    "slope_(1_same_strength)": 0.465,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.126,
+     -0.101,
+     -0.0,
+     -0.009
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 11550,
+    "kit_change_std": 0.0009,
+    "painting_vs_painting_difference_std": 0.0054,
+    "correlation": 0.268,
+    "slope_(1_same_strength)": 1.632,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     0.093,
+     -0.092,
+     0.105,
+     -0.114
+    ]
+   }
+  },
+  "whole picture without sky": {
+   "fine_(blur 3 minus 20)": {
+    "zone_dots": 2693776,
+    "kit_change_std": 0.0108,
+    "painting_vs_painting_difference_std": 0.0265,
+    "correlation": 0.438,
+    "slope_(1_same_strength)": 1.078,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.002,
+     0.042,
+     -0.012,
+     0.029
+    ]
+   },
+   "coarse_(blur 6 minus 30)": {
+    "zone_dots": 2693776,
+    "kit_change_std": 0.0089,
+    "painting_vs_painting_difference_std": 0.0189,
+    "correlation": 0.526,
+    "slope_(1_same_strength)": 1.117,
+    "control_correlations_(kit_marks_moved_60_dots)": [
+     -0.031,
+     0.031,
+     -0.037,
+     0.018
+    ]
+   }
+  }
+ },
+ "drum_soot_and_rust": {
+  "note": "drum = Blender mask of the brazier drum; bands inside it from the rim down; red_minus_blue larger = more rust-red",
+  "no_kit_plate": {
+   "top_fifth_brightness": 0.158,
+   "middle_brightness": 0.162,
+   "top_over_middle": 0.976,
+   "red_minus_blue_(0-1)": 0.138
+  },
+  "kit_plate": {
+   "top_fifth_brightness": 0.094,
+   "middle_brightness": 0.171,
+   "top_over_middle": 0.548,
+   "red_minus_blue_(0-1)": 0.136
+  },
+  "painting_of_kit_plate": {
+   "top_fifth_brightness": 0.159,
+   "middle_brightness": 0.245,
+   "top_over_middle": 0.648,
+   "red_minus_blue_(0-1)": 0.115
+  },
+  "round_2_painting_of_no_kit_plate": {
+   "top_fifth_brightness": 0.182,
+   "middle_brightness": 0.208,
+   "top_over_middle": 0.874,
+   "red_minus_blue_(0-1)": 0.116
+  }
+ }
+}

@@ -1,0 +1,965 @@
+{
+ "p2": {
+  "ok": false,
+  "failures": [
+   "main_C_wet road wet/dry 2.367 vs base 2.435 (more than 0.05)",
+   "main_E_wet road wet/dry 3.397 vs base 3.665 (more than 0.05)",
+   "main_E_heavy road wet/dry 3.294 vs base 3.533 (more than 0.05)",
+   "close_A_wet road wet/dry 2.486 vs base 2.581 (more than 0.05)",
+   "close_A_heavy road wet/dry 2.501 vs base 2.582 (more than 0.05)",
+   "main_C_wet highlight share 0.0346 outside 85 to 115 % of base (0.05)",
+   "element dirt:main_A_wet wet/dry 1.293 above 1.0",
+   "element dirt:main_A_heavy wet/dry 1.250 above 1.0",
+   "element dirt:main_C_wet wet/dry 1.371 above 1.0",
+   "element dirt:main_D_wet wet/dry 1.153 above 1.0",
+   "element dirt:main_E_wet wet/dry 1.713 above 1.0",
+   "element dirt:main_E_heavy wet/dry 1.481 above 1.0",
+   "element dirt:close_A_wet wet/dry 1.155 above 1.0",
+   "element dirt:close_A_heavy wet/dry 1.028 above 1.0",
+   "element groundcracks:main_A_wet wet/dry 1.891 above 1.0",
+   "element groundcracks:main_A_heavy wet/dry 2.094 above 1.0",
+   "element groundcracks:main_C_wet wet/dry 2.545 above 1.0",
+   "element groundcracks:main_D_wet wet/dry 1.513 above 1.0",
+   "element groundcracks:main_E_wet wet/dry 3.428 above 1.0",
+   "element groundcracks:main_E_heavy wet/dry 3.511 above 1.0",
+   "element groundcracks:close_A_wet wet/dry 2.255 above 1.0",
+   "element groundcracks:close_A_heavy wet/dry 2.292 above 1.0",
+   "element groundmoss:main_A_wet wet/dry 1.716 above 1.0",
+   "element groundmoss:main_A_heavy wet/dry 1.432 above 1.0",
+   "element groundmoss:main_C_wet wet/dry 2.015 above 1.0",
+   "element groundmoss:main_D_wet wet/dry 1.345 above 1.0",
+   "element groundmoss:main_E_wet wet/dry 2.412 above 1.0",
+   "element groundmoss:main_E_heavy wet/dry 2.081 above 1.0",
+   "element groundmoss:close_A_wet wet/dry 2.013 above 1.0",
+   "element groundmoss:close_A_heavy wet/dry 1.976 above 1.0",
+   "element iron:main_A_wet wet/dry 1.041 above 1.0",
+   "element iron:main_A_heavy wet/dry 1.040 above 1.0",
+   "element iron:main_C_wet wet/dry 1.083 above 1.0",
+   "element iron:main_D_wet wet/dry 1.040 above 1.0",
+   "element iron:main_E_wet wet/dry 1.019 above 1.0",
+   "element iron:main_E_heavy wet/dry 1.013 above 1.0",
+   "element iron:close_A_wet wet/dry 1.030 above 1.0",
+   "element iron:close_A_heavy wet/dry 1.031 above 1.0"
+  ],
+  "ground_failures": [
+   "main_C_wet road wet/dry 2.367 vs base 2.435 (more than 0.05)",
+   "main_E_wet road wet/dry 3.397 vs base 3.665 (more than 0.05)",
+   "main_E_heavy road wet/dry 3.294 vs base 3.533 (more than 0.05)",
+   "close_A_wet road wet/dry 2.486 vs base 2.581 (more than 0.05)",
+   "close_A_heavy road wet/dry 2.501 vs base 2.582 (more than 0.05)"
+  ],
+  "wet_to_dry": {
+   "main_A_wet": {
+    "road": 1.7992,
+    "pavement": 1.2108,
+    "kerb_gutter": 1.9528
+   },
+   "main_A_heavy": {
+    "road": 1.8116,
+    "pavement": 0.9968,
+    "kerb_gutter": 1.826
+   },
+   "main_C_wet": {
+    "road": 2.3671,
+    "pavement": 1.8726,
+    "kerb_gutter": 2.1712
+   },
+   "main_D_wet": {
+    "road": 1.4151,
+    "pavement": 1.0344,
+    "kerb_gutter": 1.5009
+   },
+   "main_E_wet": {
+    "road": 3.3975,
+    "pavement": 1.3942,
+    "kerb_gutter": 3.0603
+   },
+   "main_E_heavy": {
+    "road": 3.2939,
+    "pavement": 1.1341,
+    "kerb_gutter": 2.8787
+   },
+   "close_A_wet": {
+    "road": 2.4858,
+    "pavement": 1.1287,
+    "kerb_gutter": 1.771
+   },
+   "close_A_heavy": {
+    "road": 2.5009,
+    "pavement": 0.9863,
+    "kerb_gutter": 1.7322
+   }
+  },
+  "puddle_cover": {
+   "main_A_wet": 0.0771,
+   "main_A_heavy": 0.2967,
+   "main_C_wet": 0.0771,
+   "main_D_wet": 0.0771,
+   "main_E_wet": 0.0771,
+   "main_E_heavy": 0.2967,
+   "close_A_wet": 0.0283,
+   "close_A_heavy": 0.1244,
+   "close_C_wet": 0.0283,
+   "close_D_wet": 0.0283,
+   "close_E_wet": 0.0283
+  },
+  "speckle": {
+   "main_E_wet": 0.0,
+   "close_E_wet": 0.00026
+  },
+  "element_wet_dry": {
+   "dirt:main_A_wet": 1.2933,
+   "dirt:main_A_heavy": 1.2503,
+   "dirt:main_C_wet": 1.3715,
+   "dirt:main_D_wet": 1.1535,
+   "dirt:main_E_wet": 1.7126,
+   "dirt:main_E_heavy": 1.4811,
+   "dirt:close_A_wet": 1.1552,
+   "dirt:close_A_heavy": 1.0279,
+   "groundcracks:main_A_wet": 1.8909,
+   "groundcracks:main_A_heavy": 2.094,
+   "groundcracks:main_C_wet": 2.545,
+   "groundcracks:main_D_wet": 1.5126,
+   "groundcracks:main_E_wet": 3.4281,
+   "groundcracks:main_E_heavy": 3.5112,
+   "groundcracks:close_A_wet": 2.2548,
+   "groundcracks:close_A_heavy": 2.2917,
+   "groundmoss:main_A_wet": 1.7161,
+   "groundmoss:main_A_heavy": 1.4316,
+   "groundmoss:main_C_wet": 2.0147,
+   "groundmoss:main_D_wet": 1.3445,
+   "groundmoss:main_E_wet": 2.4121,
+   "groundmoss:main_E_heavy": 2.0811,
+   "groundmoss:close_A_wet": 2.0133,
+   "groundmoss:close_A_heavy": 1.9765,
+   "iron:main_A_wet": 1.0407,
+   "iron:main_A_heavy": 1.0405,
+   "iron:main_C_wet": 1.0827,
+   "iron:main_D_wet": 1.0395,
+   "iron:main_E_wet": 1.0189,
+   "iron:main_E_heavy": 1.0131,
+   "iron:close_A_wet": 1.0304,
+   "iron:close_A_heavy": 1.0308
+  }
+ },
+ "p3": {
+  "cracks in flags (fine and broken)@main": {
+   "scale_0.45": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 3"
+    ],
+    "need": 3
+   },
+   "scale_0.4": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 3"
+    ],
+    "need": 3
+   },
+   "mask_dots": 0
+  },
+  "cracks in flags (fine and broken)@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "cracks in flags (fine and broken)@notice": {
+   "scale_0.45": {
+    "marks": 19,
+    "good": 2,
+    "risky": 13,
+    "lost": 4,
+    "crushed": 0,
+    "share_good": 0.105,
+    "share_lost": 0.211,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "GOOD share 10% below 60 %",
+     "LOST share 21% above 15 %"
+    ],
+    "need": 1.5
+   },
+   "scale_0.4": {
+    "marks": 19,
+    "good": 1,
+    "risky": 14,
+    "lost": 4,
+    "crushed": 0,
+    "share_good": 0.053,
+    "share_lost": 0.211,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "1 GOOD marks, need 1.5",
+     "GOOD share 5% below 60 %",
+     "LOST share 21% above 15 %"
+    ],
+    "need": 1.5
+   },
+   "mask_dots": 713
+  },
+  "tilted flags and chipped corners@main": {
+   "scale_0.45": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 2"
+    ],
+    "need": 2
+   },
+   "scale_0.4": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 2"
+    ],
+    "need": 2
+   },
+   "mask_dots": 0
+  },
+  "tilted flags and chipped corners@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "tilted flags and chipped corners@notice": {
+   "scale_0.45": {
+    "marks": 14,
+    "good": 0,
+    "risky": 0,
+    "lost": 14,
+    "crushed": 0,
+    "share_good": 0.0,
+    "share_lost": 1.0,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 1",
+     "GOOD share 0% below 60 %",
+     "LOST share 100% above 15 %"
+    ],
+    "need": 1.0
+   },
+   "scale_0.4": {
+    "marks": 14,
+    "good": 0,
+    "risky": 0,
+    "lost": 14,
+    "crushed": 0,
+    "share_good": 0.0,
+    "share_lost": 1.0,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 1",
+     "GOOD share 0% below 60 %",
+     "LOST share 100% above 15 %"
+    ],
+    "need": 1.0
+   },
+   "mask_dots": 303
+  },
+  "kerb chips, open kerb joints and cracked kerbs@main": {
+   "scale_0.45": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 3"
+    ],
+    "need": 3
+   },
+   "scale_0.4": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 3"
+    ],
+    "need": 3
+   },
+   "mask_dots": 0
+  },
+  "kerb chips, open kerb joints and cracked kerbs@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "kerb chips, open kerb joints and cracked kerbs@notice": {
+   "scale_0.45": {
+    "marks": 194,
+    "good": 120,
+    "risky": 52,
+    "lost": 22,
+    "crushed": 0,
+    "share_good": 0.619,
+    "share_lost": 0.113,
+    "share_crushed": 0.0,
+    "passed": true,
+    "failures": [],
+    "need": 1.5
+   },
+   "scale_0.4": {
+    "marks": 194,
+    "good": 115,
+    "risky": 55,
+    "lost": 24,
+    "crushed": 0,
+    "share_good": 0.593,
+    "share_lost": 0.124,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "GOOD share 59% below 60 %"
+    ],
+    "need": 1.5
+   },
+   "mask_dots": 19255
+  },
+  "disturbed setts and open sett joints@main": {
+   "scale_0.45": {
+    "marks": 110,
+    "good": 26,
+    "risky": 27,
+    "lost": 57,
+    "crushed": 4,
+    "share_good": 0.236,
+    "share_lost": 0.518,
+    "share_crushed": 0.036,
+    "passed": false,
+    "failures": [
+     "GOOD share 24% below 60 %",
+     "LOST share 52% above 15 %"
+    ],
+    "need": 3
+   },
+   "scale_0.4": {
+    "marks": 110,
+    "good": 26,
+    "risky": 25,
+    "lost": 59,
+    "crushed": 4,
+    "share_good": 0.236,
+    "share_lost": 0.536,
+    "share_crushed": 0.036,
+    "passed": false,
+    "failures": [
+     "GOOD share 24% below 60 %",
+     "LOST share 54% above 15 %"
+    ],
+    "need": 3
+   },
+   "mask_dots": 50603
+  },
+  "disturbed setts and open sett joints@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "disturbed setts and open sett joints@notice": {
+   "scale_0.45": {
+    "marks": 111,
+    "good": 62,
+    "risky": 18,
+    "lost": 31,
+    "crushed": 8,
+    "share_good": 0.559,
+    "share_lost": 0.279,
+    "share_crushed": 0.072,
+    "passed": false,
+    "failures": [
+     "GOOD share 56% below 60 %",
+     "LOST share 28% above 15 %"
+    ],
+    "need": 1.5
+   },
+   "scale_0.4": {
+    "marks": 111,
+    "good": 60,
+    "risky": 17,
+    "lost": 34,
+    "crushed": 8,
+    "share_good": 0.541,
+    "share_lost": 0.306,
+    "share_crushed": 0.072,
+    "passed": false,
+    "failures": [
+     "GOOD share 54% below 60 %",
+     "LOST share 31% above 15 %"
+    ],
+    "need": 1.5
+   },
+   "mask_dots": 58813
+  },
+  "tar patches@main": {
+   "scale_0.45": {
+    "marks": 2,
+    "good": 1,
+    "risky": 0,
+    "lost": 1,
+    "crushed": 1,
+    "share_good": 0.5,
+    "share_lost": 0.5,
+    "share_crushed": 0.5,
+    "passed": false,
+    "failures": [
+     "GOOD share 50% below 60 %",
+     "LOST share 50% above 15 %",
+     "crushed share 50% above 15 %"
+    ],
+    "need": 1
+   },
+   "scale_0.4": {
+    "marks": 2,
+    "good": 1,
+    "risky": 0,
+    "lost": 1,
+    "crushed": 1,
+    "share_good": 0.5,
+    "share_lost": 0.5,
+    "share_crushed": 0.5,
+    "passed": false,
+    "failures": [
+     "GOOD share 50% below 60 %",
+     "LOST share 50% above 15 %",
+     "crushed share 50% above 15 %"
+    ],
+    "need": 1
+   },
+   "mask_dots": 12322
+  },
+  "tar patches@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "tar patches@notice": {
+   "scale_0.45": {
+    "marks": 1,
+    "good": 1,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": 1.0,
+    "share_lost": 0.0,
+    "share_crushed": 0.0,
+    "passed": true,
+    "failures": [],
+    "need": 0.5
+   },
+   "scale_0.4": {
+    "marks": 1,
+    "good": 1,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": 1.0,
+    "share_lost": 0.0,
+    "share_crushed": 0.0,
+    "passed": true,
+    "failures": [],
+    "need": 0.5
+   },
+   "mask_dots": 143638
+  },
+  "ground film, polish, water marks@main": {
+   "scale_0.45": {
+    "marks": 680,
+    "good": 60,
+    "risky": 53,
+    "lost": 567,
+    "crushed": 5,
+    "share_good": 0.088,
+    "share_lost": 0.834,
+    "share_crushed": 0.007,
+    "passed": false,
+    "failures": [
+     "GOOD share 9% below 60 %",
+     "LOST share 83% above 15 %"
+    ],
+    "need": 8
+   },
+   "scale_0.4": {
+    "marks": 680,
+    "good": 60,
+    "risky": 50,
+    "lost": 570,
+    "crushed": 5,
+    "share_good": 0.088,
+    "share_lost": 0.838,
+    "share_crushed": 0.007,
+    "passed": false,
+    "failures": [
+     "GOOD share 9% below 60 %",
+     "LOST share 84% above 15 %"
+    ],
+    "need": 8
+   },
+   "mask_dots": 261777
+  },
+  "ground film, polish, water marks@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "ground film, polish, water marks@notice": {
+   "scale_0.45": {
+    "marks": 495,
+    "good": 75,
+    "risky": 88,
+    "lost": 332,
+    "crushed": 6,
+    "share_good": 0.152,
+    "share_lost": 0.671,
+    "share_crushed": 0.012,
+    "passed": false,
+    "failures": [
+     "GOOD share 15% below 60 %",
+     "LOST share 67% above 15 %"
+    ],
+    "need": 4.0
+   },
+   "scale_0.4": {
+    "marks": 495,
+    "good": 73,
+    "risky": 84,
+    "lost": 338,
+    "crushed": 6,
+    "share_good": 0.147,
+    "share_lost": 0.683,
+    "share_crushed": 0.012,
+    "passed": false,
+    "failures": [
+     "GOOD share 15% below 60 %",
+     "LOST share 68% above 15 %"
+    ],
+    "need": 4.0
+   },
+   "mask_dots": 281870
+  },
+  "rust halos, drum ring, scrubbed strips@main": {
+   "scale_0.45": {
+    "marks": 3,
+    "good": 0,
+    "risky": 0,
+    "lost": 3,
+    "crushed": 1,
+    "share_good": 0.0,
+    "share_lost": 1.0,
+    "share_crushed": 0.333,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 4",
+     "GOOD share 0% below 60 %",
+     "LOST share 100% above 15 %",
+     "crushed share 33% above 15 %"
+    ],
+    "need": 4
+   },
+   "scale_0.4": {
+    "marks": 3,
+    "good": 0,
+    "risky": 0,
+    "lost": 3,
+    "crushed": 1,
+    "share_good": 0.0,
+    "share_lost": 1.0,
+    "share_crushed": 0.333,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 4",
+     "GOOD share 0% below 60 %",
+     "LOST share 100% above 15 %",
+     "crushed share 33% above 15 %"
+    ],
+    "need": 4
+   },
+   "mask_dots": 150
+  },
+  "rust halos, drum ring, scrubbed strips@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "rust halos, drum ring, scrubbed strips@notice": {
+   "scale_0.45": {
+    "marks": 10,
+    "good": 2,
+    "risky": 2,
+    "lost": 6,
+    "crushed": 2,
+    "share_good": 0.2,
+    "share_lost": 0.6,
+    "share_crushed": 0.2,
+    "passed": false,
+    "failures": [
+     "GOOD share 20% below 60 %",
+     "LOST share 60% above 15 %",
+     "crushed share 20% above 15 %"
+    ],
+    "need": 2.0
+   },
+   "scale_0.4": {
+    "marks": 10,
+    "good": 2,
+    "risky": 2,
+    "lost": 6,
+    "crushed": 2,
+    "share_good": 0.2,
+    "share_lost": 0.6,
+    "share_crushed": 0.2,
+    "passed": false,
+    "failures": [
+     "GOOD share 20% below 60 %",
+     "LOST share 60% above 15 %",
+     "crushed share 20% above 15 %"
+    ],
+    "need": 2.0
+   },
+   "mask_dots": 11763
+  },
+  "moss ribbons, algae fans, liverwort@main": {
+   "scale_0.45": {
+    "marks": 59,
+    "good": 4,
+    "risky": 14,
+    "lost": 41,
+    "crushed": 3,
+    "share_good": 0.068,
+    "share_lost": 0.695,
+    "share_crushed": 0.051,
+    "passed": false,
+    "failures": [
+     "4 GOOD marks, need 8",
+     "GOOD share 7% below 60 %",
+     "LOST share 70% above 15 %"
+    ],
+    "need": 8
+   },
+   "scale_0.4": {
+    "marks": 59,
+    "good": 4,
+    "risky": 13,
+    "lost": 42,
+    "crushed": 3,
+    "share_good": 0.068,
+    "share_lost": 0.712,
+    "share_crushed": 0.051,
+    "passed": false,
+    "failures": [
+     "4 GOOD marks, need 8",
+     "GOOD share 7% below 60 %",
+     "LOST share 71% above 15 %"
+    ],
+    "need": 8
+   },
+   "mask_dots": 2523
+  },
+  "moss ribbons, algae fans, liverwort@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "moss ribbons, algae fans, liverwort@notice": {
+   "scale_0.45": {
+    "marks": 46,
+    "good": 7,
+    "risky": 5,
+    "lost": 34,
+    "crushed": 6,
+    "share_good": 0.152,
+    "share_lost": 0.739,
+    "share_crushed": 0.13,
+    "passed": false,
+    "failures": [
+     "GOOD share 15% below 60 %",
+     "LOST share 74% above 15 %"
+    ],
+    "need": 4.0
+   },
+   "scale_0.4": {
+    "marks": 46,
+    "good": 7,
+    "risky": 4,
+    "lost": 35,
+    "crushed": 6,
+    "share_good": 0.152,
+    "share_lost": 0.761,
+    "share_crushed": 0.13,
+    "passed": false,
+    "failures": [
+     "GOOD share 15% below 60 %",
+     "LOST share 76% above 15 %"
+    ],
+    "need": 4.0
+   },
+   "mask_dots": 1432
+  },
+  "rust on iron@main": {
+   "scale_0.45": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 4"
+    ],
+    "need": 4
+   },
+   "scale_0.4": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 4"
+    ],
+    "need": 4
+   },
+   "mask_dots": 0
+  },
+  "rust on iron@lockout": {
+   "skipped": "plate or part picture missing"
+  },
+  "rust on iron@notice": {
+   "scale_0.45": {
+    "marks": 2,
+    "good": 0,
+    "risky": 0,
+    "lost": 2,
+    "crushed": 0,
+    "share_good": 0.0,
+    "share_lost": 1.0,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 2",
+     "GOOD share 0% below 60 %",
+     "LOST share 100% above 15 %"
+    ],
+    "need": 2.0
+   },
+   "scale_0.4": {
+    "marks": 2,
+    "good": 0,
+    "risky": 0,
+    "lost": 2,
+    "crushed": 0,
+    "share_good": 0.0,
+    "share_lost": 1.0,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 2",
+     "GOOD share 0% below 60 %",
+     "LOST share 100% above 15 %"
+    ],
+    "need": 2.0
+   },
+   "mask_dots": 530
+  }
+ },
+ "p5": {
+  "plate_main_A_wet": {
+   "plate_mean_ratio": 0.9888,
+   "classes": {
+    "road": {
+     "m1_darkened_third": 0.0286,
+     "m2_under_010_rise": 0.0087,
+     "m3_mean_ratio": 0.9711,
+     "m4_spread_ratio": 0.9322,
+     "m5_band_ratios": {
+      "5-10": 0.9617,
+      "10-20": 0.9909,
+      "20-40": 0.9979
+     },
+     "failures": []
+    },
+    "pavement": {
+     "m1_darkened_third": 0.0001,
+     "m2_under_010_rise": 0.0019,
+     "m3_mean_ratio": 0.9865,
+     "m4_spread_ratio": 1.0023,
+     "m5_band_ratios": {
+      "5-10": null,
+      "10-20": 0.9853,
+      "20-40": 0.9873
+     },
+     "failures": []
+    },
+    "kerb_gutter": {
+     "m1_darkened_third": 0.0008,
+     "m2_under_010_rise": 0.0023,
+     "m3_mean_ratio": 0.994,
+     "m4_spread_ratio": 0.9961,
+     "m5_band_ratios": {
+      "5-10": null,
+      "10-20": 0.9953,
+      "20-40": 0.9913
+     },
+     "failures": []
+    },
+    "iron": {
+     "m1_darkened_third": 0.0,
+     "m2_under_010_rise": 0.0118,
+     "m3_mean_ratio": 0.9683,
+     "m4_spread_ratio": 1.0313,
+     "m5_band_ratios": {
+      "5-10": null,
+      "10-20": 0.9785,
+      "20-40": 0.972
+     },
+     "failures": []
+    }
+   },
+   "failures": []
+  },
+  "plate_notice_A_wet": {
+   "plate_mean_ratio": 0.9853,
+   "classes": {
+    "road": {
+     "m1_darkened_third": 0.023,
+     "m2_under_010_rise": 0.0084,
+     "m3_mean_ratio": 0.9787,
+     "m4_spread_ratio": 1.0323,
+     "m5_band_ratios": {
+      "5-10": 0.9771,
+      "10-20": 0.9816,
+      "20-40": 0.999
+     },
+     "failures": []
+    },
+    "pavement": {
+     "m1_darkened_third": 0.0017,
+     "m2_under_010_rise": 0.002,
+     "m3_mean_ratio": 0.9858,
+     "m4_spread_ratio": 1.0069,
+     "m5_band_ratios": {
+      "5-10": 0.9848,
+      "10-20": 0.989,
+      "20-40": 0.9836
+     },
+     "failures": []
+    },
+    "kerb_gutter": {
+     "m1_darkened_third": 0.0625,
+     "m2_under_010_rise": 0.012,
+     "m3_mean_ratio": 0.9557,
+     "m4_spread_ratio": 1.0255,
+     "m5_band_ratios": {
+      "5-10": 0.9563,
+      "10-20": 0.9742,
+      "20-40": 0.9938
+     },
+     "failures": []
+    },
+    "iron": {
+     "m1_darkened_third": 0.0,
+     "m2_under_010_rise": 0.0102,
+     "m3_mean_ratio": 0.9652,
+     "m4_spread_ratio": 1.0314,
+     "m5_band_ratios": {
+      "5-10": 0.9584,
+      "10-20": 0.9686,
+      "20-40": 0.9744
+     },
+     "failures": []
+    }
+   },
+   "failures": []
+  },
+  "plate_close_road_A_wet": {
+   "plate_mean_ratio": 0.9742,
+   "classes": {
+    "road": {
+     "m1_darkened_third": 0.0188,
+     "m2_under_010_rise": 0.003,
+     "m3_mean_ratio": 0.9712,
+     "m4_spread_ratio": 0.9467,
+     "m5_band_ratios": {
+      "5-10": 0.9553,
+      "10-20": 0.9789,
+      "20-40": 0.9992
+     },
+     "failures": []
+    },
+    "pavement": {
+     "m1_darkened_third": 0.0034,
+     "m2_under_010_rise": 0.003,
+     "m3_mean_ratio": 0.979,
+     "m4_spread_ratio": 0.982,
+     "m5_band_ratios": {
+      "5-10": 0.9673,
+      "10-20": 0.9853,
+      "20-40": 0.9902
+     },
+     "failures": []
+    },
+    "kerb_gutter": {
+     "m1_darkened_third": 0.0407,
+     "m2_under_010_rise": 0.0032,
+     "m3_mean_ratio": 0.9621,
+     "m4_spread_ratio": 0.9593,
+     "m5_band_ratios": {
+      "5-10": 0.9599,
+      "10-20": 0.9575,
+      "20-40": 0.9935
+     },
+     "failures": []
+    },
+    "iron": {
+     "m1_darkened_third": 0.0,
+     "m2_under_010_rise": 0.0063,
+     "m3_mean_ratio": 0.9669,
+     "m4_spread_ratio": 1.0362,
+     "m5_band_ratios": {
+      "5-10": null,
+      "10-20": 0.9665,
+      "20-40": 0.9671
+     },
+     "failures": []
+    }
+   },
+   "failures": []
+  }
+ }
+}

@@ -1,0 +1,530 @@
+{
+ "main_today_eevee": {
+  "name": "main_today_eevee",
+  "w": 1080,
+  "h": 1920,
+  "mean_L": 0.1752,
+  "median_L": 0.1366,
+  "blown": 5e-05,
+  "crushed": 0.01326,
+  "blown_dots": 105,
+  "crushed_dots": 27492,
+  "dots": 2073600,
+  "mean_rgb": [
+   0.1511,
+   0.1806,
+   0.1907
+  ],
+  "road_L": 0.1297,
+  "puddle_share_of_road": 0.095,
+  "puddle_L": 0.1386,
+  "road_dry_part_L": 0.1289,
+  "dirt_share_of_road": 0.044,
+  "joint": {
+   "near": {
+    "rows": [
+     1659,
+     1920
+    ],
+    "njoint": 17633,
+    "nstone": 208228,
+    "stone": 0.1275,
+    "contrast": 0.233,
+    "delta": 0.029,
+    "seen": 0.784
+   },
+   "middle": {
+    "rows": [
+     1398,
+     1659
+    ],
+    "njoint": 12886,
+    "nstone": 160292,
+    "stone": 0.1371,
+    "contrast": 0.185,
+    "delta": 0.0246,
+    "seen": 0.669
+   },
+   "far": {
+    "rows": [
+     1137,
+     1398
+    ],
+    "njoint": 1923,
+    "nstone": 47392,
+    "stone": 0.1358,
+    "contrast": 0.111,
+    "delta": 0.015,
+    "seen": 0.252
+   }
+  },
+  "joint_pass_line": "pass",
+  "grid": {
+   "far": {
+    "line": 0.063,
+    "texture": 0.026,
+    "dark_share": 0.062,
+    "bright_share": 0.0,
+    "nzone": 14500
+   },
+   "middle": {
+    "line": 0.11,
+    "texture": 0.032,
+    "dark_share": 0.285,
+    "bright_share": 0.002,
+    "nzone": 52361
+   },
+   "near": {
+    "line": 0.141,
+    "texture": 0.044,
+    "dark_share": 0.393,
+    "bright_share": 0.014,
+    "nzone": 59415
+   }
+  },
+  "grid_visible": {
+   "near": true,
+   "middle": false
+  }
+ },
+ "main_today_cycles": {
+  "name": "main_today_cycles",
+  "w": 1080,
+  "h": 1920,
+  "mean_L": 0.1911,
+  "median_L": 0.1901,
+  "blown": 5e-05,
+  "crushed": 0.05851,
+  "blown_dots": 108,
+  "crushed_dots": 121316,
+  "dots": 2073600,
+  "mean_rgb": [
+   0.1918,
+   0.1916,
+   0.1828
+  ],
+  "road_L": 0.1877,
+  "puddle_share_of_road": 0.095,
+  "puddle_L": 0.1872,
+  "road_dry_part_L": 0.1878,
+  "dirt_share_of_road": 0.044,
+  "joint": {
+   "near": {
+    "rows": [
+     1659,
+     1920
+    ],
+    "njoint": 17633,
+    "nstone": 208228,
+    "stone": 0.1837,
+    "contrast": 0.172,
+    "delta": 0.0315,
+    "seen": 0.532
+   },
+   "middle": {
+    "rows": [
+     1398,
+     1659
+    ],
+    "njoint": 12886,
+    "nstone": 160292,
+    "stone": 0.1995,
+    "contrast": 0.15,
+    "delta": 0.0297,
+    "seen": 0.463
+   },
+   "far": {
+    "rows": [
+     1137,
+     1398
+    ],
+    "njoint": 1923,
+    "nstone": 47392,
+    "stone": 0.1996,
+    "contrast": 0.114,
+    "delta": 0.0227,
+    "seen": 0.236
+   }
+  },
+  "joint_pass_line": "FAIL: near contrast 0.172 < 0.18; near seen 0.532 < 0.65",
+  "grid": {
+   "far": {
+    "line": 0.054,
+    "texture": 0.019,
+    "dark_share": 0.049,
+    "bright_share": 0.0,
+    "nzone": 14500
+   },
+   "middle": {
+    "line": 0.086,
+    "texture": 0.025,
+    "dark_share": 0.186,
+    "bright_share": 0.001,
+    "nzone": 52361
+   },
+   "near": {
+    "line": 0.108,
+    "texture": 0.036,
+    "dark_share": 0.262,
+    "bright_share": 0.007,
+    "nzone": 59415
+   }
+  },
+  "grid_visible": {
+   "near": false,
+   "middle": false
+  }
+ },
+ "main_dry_eevee": {
+  "name": "main_dry_eevee",
+  "w": 1080,
+  "h": 1920,
+  "mean_L": 0.1661,
+  "median_L": 0.1158,
+  "blown": 5e-05,
+  "crushed": 0.01391,
+  "blown_dots": 105,
+  "crushed_dots": 28842,
+  "dots": 2073600,
+  "mean_rgb": [
+   0.1434,
+   0.1715,
+   0.1803
+  ],
+  "road_L": 0.1055,
+  "puddle_share_of_road": 0.095,
+  "puddle_L": 0.1085,
+  "road_dry_part_L": 0.1052,
+  "dirt_share_of_road": 0.044,
+  "joint": {
+   "near": {
+    "rows": [
+     1659,
+     1920
+    ],
+    "njoint": 17633,
+    "nstone": 208228,
+    "stone": 0.11,
+    "contrast": 0.495,
+    "delta": 0.0535,
+    "seen": 0.995
+   },
+   "middle": {
+    "rows": [
+     1398,
+     1659
+    ],
+    "njoint": 12886,
+    "nstone": 160292,
+    "stone": 0.1186,
+    "contrast": 0.417,
+    "delta": 0.049,
+    "seen": 0.998
+   },
+   "far": {
+    "rows": [
+     1137,
+     1398
+    ],
+    "njoint": 1923,
+    "nstone": 47392,
+    "stone": 0.1123,
+    "contrast": 0.263,
+    "delta": 0.0302,
+    "seen": 0.856
+   }
+  },
+  "joint_pass_line": "pass",
+  "grid": {
+   "far": {
+    "line": 0.154,
+    "texture": 0.046,
+    "dark_share": 0.479,
+    "bright_share": 0.0,
+    "nzone": 14500
+   },
+   "middle": {
+    "line": 0.269,
+    "texture": 0.052,
+    "dark_share": 0.745,
+    "bright_share": 0.001,
+    "nzone": 52361
+   },
+   "near": {
+    "line": 0.317,
+    "texture": 0.061,
+    "dark_share": 0.756,
+    "bright_share": 0.005,
+    "nzone": 59415
+   }
+  },
+  "grid_visible": {
+   "near": true,
+   "middle": true
+  }
+ },
+ "main_dry_cycles": {
+  "name": "main_dry_cycles",
+  "w": 1080,
+  "h": 1920,
+  "mean_L": 0.1753,
+  "median_L": 0.1511,
+  "blown": 5e-05,
+  "crushed": 0.06037,
+  "blown_dots": 108,
+  "crushed_dots": 125174,
+  "dots": 2073600,
+  "mean_rgb": [
+   0.1759,
+   0.1758,
+   0.1662
+  ],
+  "road_L": 0.1449,
+  "puddle_share_of_road": 0.095,
+  "puddle_L": 0.1383,
+  "road_dry_part_L": 0.1456,
+  "dirt_share_of_road": 0.044,
+  "joint": {
+   "near": {
+    "rows": [
+     1659,
+     1920
+    ],
+    "njoint": 17633,
+    "nstone": 208228,
+    "stone": 0.1487,
+    "contrast": 0.382,
+    "delta": 0.0564,
+    "seen": 0.985
+   },
+   "middle": {
+    "rows": [
+     1398,
+     1659
+    ],
+    "njoint": 12886,
+    "nstone": 160292,
+    "stone": 0.1618,
+    "contrast": 0.342,
+    "delta": 0.0552,
+    "seen": 0.993
+   },
+   "far": {
+    "rows": [
+     1137,
+     1398
+    ],
+    "njoint": 1923,
+    "nstone": 47392,
+    "stone": 0.1589,
+    "contrast": 0.259,
+    "delta": 0.0411,
+    "seen": 0.939
+   }
+  },
+  "joint_pass_line": "pass",
+  "grid": {
+   "far": {
+    "line": 0.127,
+    "texture": 0.036,
+    "dark_share": 0.37,
+    "bright_share": 0.0,
+    "nzone": 14500
+   },
+   "middle": {
+    "line": 0.223,
+    "texture": 0.046,
+    "dark_share": 0.671,
+    "bright_share": 0.001,
+    "nzone": 52361
+   },
+   "near": {
+    "line": 0.268,
+    "texture": 0.054,
+    "dark_share": 0.715,
+    "bright_share": 0.003,
+    "nzone": 59415
+   }
+  },
+  "grid_visible": {
+   "near": true,
+   "middle": true
+  }
+ },
+ "main_wet_eevee": {
+  "name": "main_wet_eevee",
+  "w": 1080,
+  "h": 1920,
+  "mean_L": 0.1921,
+  "median_L": 0.1791,
+  "blown": 5e-05,
+  "crushed": 0.01825,
+  "blown_dots": 105,
+  "crushed_dots": 37839,
+  "dots": 2073600,
+  "mean_rgb": [
+   0.161,
+   0.1988,
+   0.2166
+  ],
+  "road_L": 0.1831,
+  "puddle_share_of_road": 0.095,
+  "puddle_L": 0.1246,
+  "road_dry_part_L": 0.1886,
+  "dirt_share_of_road": 0.044,
+  "joint": {
+   "near": {
+    "rows": [
+     1659,
+     1920
+    ],
+    "njoint": 17633,
+    "nstone": 208228,
+    "stone": 0.2124,
+    "contrast": 0.585,
+    "delta": 0.129,
+    "seen": 0.988
+   },
+   "middle": {
+    "rows": [
+     1398,
+     1659
+    ],
+    "njoint": 12886,
+    "nstone": 160292,
+    "stone": 0.1947,
+    "contrast": 0.46,
+    "delta": 0.0942,
+    "seen": 0.94
+   },
+   "far": {
+    "rows": [
+     1137,
+     1398
+    ],
+    "njoint": 1923,
+    "nstone": 47392,
+    "stone": 0.1951,
+    "contrast": 0.234,
+    "delta": 0.0488,
+    "seen": 0.627
+   }
+  },
+  "joint_pass_line": "pass",
+  "grid": {
+   "far": {
+    "line": 0.125,
+    "texture": 0.037,
+    "dark_share": 0.263,
+    "bright_share": 0.036,
+    "nzone": 14500
+   },
+   "middle": {
+    "line": 0.342,
+    "texture": 0.072,
+    "dark_share": 0.63,
+    "bright_share": 0.08,
+    "nzone": 52361
+   },
+   "near": {
+    "line": 0.44,
+    "texture": 0.083,
+    "dark_share": 0.768,
+    "bright_share": 0.053,
+    "nzone": 59415
+   }
+  },
+  "grid_visible": {
+   "near": true,
+   "middle": true
+  }
+ },
+ "main_wet_cycles": {
+  "name": "main_wet_cycles",
+  "w": 1080,
+  "h": 1920,
+  "mean_L": 0.2421,
+  "median_L": 0.2792,
+  "blown": 0.00031,
+  "crushed": 0.06936,
+  "blown_dots": 643,
+  "crushed_dots": 143829,
+  "dots": 2073600,
+  "mean_rgb": [
+   0.2428,
+   0.2428,
+   0.2308
+  ],
+  "road_L": 0.3356,
+  "puddle_share_of_road": 0.095,
+  "puddle_L": 0.248,
+  "road_dry_part_L": 0.3425,
+  "dirt_share_of_road": 0.044,
+  "joint": {
+   "near": {
+    "rows": [
+     1659,
+     1920
+    ],
+    "njoint": 17633,
+    "nstone": 208228,
+    "stone": 0.3635,
+    "contrast": 0.551,
+    "delta": 0.2063,
+    "seen": 0.994
+   },
+   "middle": {
+    "rows": [
+     1398,
+     1659
+    ],
+    "njoint": 12886,
+    "nstone": 160292,
+    "stone": 0.397,
+    "contrast": 0.47,
+    "delta": 0.1897,
+    "seen": 0.98
+   },
+   "far": {
+    "rows": [
+     1137,
+     1398
+    ],
+    "njoint": 1923,
+    "nstone": 47392,
+    "stone": 0.3643,
+    "contrast": 0.321,
+    "delta": 0.1402,
+    "seen": 0.799
+   }
+  },
+  "joint_pass_line": "pass",
+  "grid": {
+   "far": {
+    "line": 0.17,
+    "texture": 0.043,
+    "dark_share": 0.352,
+    "bright_share": 0.055,
+    "nzone": 14500
+   },
+   "middle": {
+    "line": 0.315,
+    "texture": 0.06,
+    "dark_share": 0.671,
+    "bright_share": 0.041,
+    "nzone": 52361
+   },
+   "near": {
+    "line": 0.397,
+    "texture": 0.064,
+    "dark_share": 0.788,
+    "bright_share": 0.027,
+    "nzone": 59415
+   }
+  },
+  "grid_visible": {
+   "near": true,
+   "middle": true
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "kind": "street",
+ "masks": [],
+ "ground_masks": [],
+ "jobs": [
+  {
+   "name": "ee_plate",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish"
+  },
+  {
+   "name": "ee_pool1024",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "shadow_pool_size": "1024"
+   }
+  },
+  {
+   "name": "ee_pool1024_threshold0001",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "shadow_pool_size": "1024",
+    "light_threshold": 0.0001
+   }
+  },
+  {
+   "name": "ee_pool1024_fastgi_off",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "shadow_pool_size": "1024",
+    "use_fast_gi": false
+   }
+  },
+  {
+   "name": "cy_512",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish"
+  },
+  {
+   "name": "cy_512_domedark",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "dome_dark"
+  },
+  {
+   "name": "cy_512_glowdark",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "glow_dark"
+  }
+ ]
+}

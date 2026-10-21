@@ -1,0 +1,425 @@
+{
+ "round": "proc-work/street_wet/grime_and_growth/check/measure/r5redo",
+ "kit": "kit",
+ "base": "proc-work/street_wet/grime_and_growth/integrated/work/r1/base",
+ "p3": {
+  "elements": {
+   "soot and dust patches@main": {
+    "marks": 152,
+    "good": 51,
+    "risky": 35,
+    "lost": 66,
+    "crushed": 15,
+    "share_good": 0.336,
+    "share_lost": 0.434,
+    "share_crushed": 0.099,
+    "passed": false,
+    "failures": [
+     "GOOD share 34% below 60 %",
+     "LOST share 43% above 15 %"
+    ]
+   },
+   "soot and dust patches@notice": {
+    "marks": 134,
+    "good": 44,
+    "risky": 26,
+    "lost": 64,
+    "crushed": 7,
+    "share_good": 0.328,
+    "share_lost": 0.478,
+    "share_crushed": 0.052,
+    "passed": false,
+    "failures": [
+     "GOOD share 33% below 60 %",
+     "LOST share 48% above 15 %"
+    ]
+   },
+   "run-off streaks@main": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 10"
+    ]
+   },
+   "run-off streaks@notice": {
+    "marks": 81,
+    "good": 8,
+    "risky": 22,
+    "lost": 51,
+    "crushed": 15,
+    "share_good": 0.099,
+    "share_lost": 0.63,
+    "share_crushed": 0.185,
+    "passed": false,
+    "failures": [
+     "GOOD share 10% below 60 %",
+     "LOST share 63% above 15 %",
+     "crushed share 18% above 15 %"
+    ]
+   },
+   "whitened or scrubbed steps@main": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 4"
+    ]
+   },
+   "whitened or scrubbed steps@notice": {
+    "marks": 6,
+    "good": 4,
+    "risky": 0,
+    "lost": 2,
+    "crushed": 0,
+    "share_good": 0.667,
+    "share_lost": 0.333,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "LOST share 33% above 15 %"
+    ]
+   },
+   "rust@main": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 4"
+    ]
+   },
+   "rust@notice": {
+    "marks": 3,
+    "good": 0,
+    "risky": 0,
+    "lost": 3,
+    "crushed": 0,
+    "share_good": 0.0,
+    "share_lost": 1.0,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 2",
+     "GOOD share 0% below 60 %",
+     "LOST share 100% above 15 %"
+    ]
+   },
+   "cracks in flags, kerbs, setts@main": {
+    "marks": 257,
+    "good": 36,
+    "risky": 55,
+    "lost": 166,
+    "crushed": 9,
+    "share_good": 0.14,
+    "share_lost": 0.646,
+    "share_crushed": 0.035,
+    "passed": false,
+    "failures": [
+     "GOOD share 14% below 60 %",
+     "LOST share 65% above 15 %"
+    ]
+   },
+   "cracks in flags, kerbs, setts@notice": {
+    "marks": 240,
+    "good": 110,
+    "risky": 49,
+    "lost": 81,
+    "crushed": 15,
+    "share_good": 0.458,
+    "share_lost": 0.338,
+    "share_crushed": 0.062,
+    "passed": false,
+    "failures": [
+     "GOOD share 46% below 60 %",
+     "LOST share 34% above 15 %"
+    ]
+   },
+   "tar patches@main": {
+    "marks": 2,
+    "good": 1,
+    "risky": 0,
+    "lost": 1,
+    "crushed": 1,
+    "share_good": 0.5,
+    "share_lost": 0.5,
+    "share_crushed": 0.5,
+    "passed": false,
+    "failures": [
+     "GOOD share 50% below 60 %",
+     "LOST share 50% above 15 %",
+     "crushed share 50% above 15 %"
+    ]
+   },
+   "tar patches@notice": {
+    "marks": 1,
+    "good": 1,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": 1.0,
+    "share_lost": 0.0,
+    "share_crushed": 0.0,
+    "passed": true,
+    "failures": []
+   },
+   "ground film, polish, water marks@main": {
+    "marks": 5,
+    "good": 1,
+    "risky": 0,
+    "lost": 4,
+    "crushed": 1,
+    "share_good": 0.2,
+    "share_lost": 0.8,
+    "share_crushed": 0.2,
+    "passed": false,
+    "failures": [
+     "1 GOOD marks, need 8",
+     "GOOD share 20% below 60 %",
+     "LOST share 80% above 15 %",
+     "crushed share 20% above 15 %"
+    ]
+   },
+   "ground film, polish, water marks@notice": {
+    "marks": 3,
+    "good": 1,
+    "risky": 0,
+    "lost": 2,
+    "crushed": 2,
+    "share_good": 0.333,
+    "share_lost": 0.667,
+    "share_crushed": 0.667,
+    "passed": false,
+    "failures": [
+     "1 GOOD marks, need 4",
+     "GOOD share 33% below 60 %",
+     "LOST share 67% above 15 %",
+     "crushed share 67% above 15 %"
+    ]
+   },
+   "weed tufts and moss cushions@main": {
+    "marks": 62,
+    "good": 43,
+    "risky": 12,
+    "lost": 7,
+    "crushed": 0,
+    "share_good": 0.694,
+    "share_lost": 0.113,
+    "share_crushed": 0.0,
+    "passed": true,
+    "failures": []
+   },
+   "weed tufts and moss cushions@notice": {
+    "marks": 187,
+    "good": 85,
+    "risky": 58,
+    "lost": 44,
+    "crushed": 0,
+    "share_good": 0.455,
+    "share_lost": 0.235,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "GOOD share 46% below 60 %",
+     "LOST share 24% above 15 %"
+    ]
+   },
+   "moss ribbons and algae fans@main": {
+    "marks": 68,
+    "good": 6,
+    "risky": 13,
+    "lost": 49,
+    "crushed": 6,
+    "share_good": 0.088,
+    "share_lost": 0.721,
+    "share_crushed": 0.088,
+    "passed": false,
+    "failures": [
+     "6 GOOD marks, need 8",
+     "GOOD share 9% below 60 %",
+     "LOST share 72% above 15 %"
+    ]
+   },
+   "moss ribbons and algae fans@notice": {
+    "marks": 57,
+    "good": 13,
+    "risky": 10,
+    "lost": 34,
+    "crushed": 4,
+    "share_good": 0.228,
+    "share_lost": 0.596,
+    "share_crushed": 0.07,
+    "passed": false,
+    "failures": [
+     "GOOD share 23% below 60 %",
+     "LOST share 60% above 15 %"
+    ]
+   },
+   "wall-foot band and tide-mark@main": {
+    "marks": 10,
+    "good": 0,
+    "risky": 3,
+    "lost": 7,
+    "crushed": 7,
+    "share_good": 0.0,
+    "share_lost": 0.7,
+    "share_crushed": 0.7,
+    "passed": false,
+    "failures": [
+     "GOOD share 0% below 60 %",
+     "LOST share 70% above 15 %",
+     "crushed share 70% above 15 %"
+    ]
+   },
+   "soot and dust patches@lockout": {
+    "marks": 162,
+    "good": 65,
+    "risky": 31,
+    "lost": 66,
+    "crushed": 20,
+    "share_good": 0.401,
+    "share_lost": 0.407,
+    "share_crushed": 0.123,
+    "passed": false,
+    "failures": [
+     "GOOD share 40% below 60 %",
+     "LOST share 41% above 15 %"
+    ]
+   },
+   "run-off streaks@lockout": {
+    "marks": 20,
+    "good": 9,
+    "risky": 5,
+    "lost": 6,
+    "crushed": 2,
+    "share_good": 0.45,
+    "share_lost": 0.3,
+    "share_crushed": 0.1,
+    "passed": false,
+    "failures": [
+     "GOOD share 45% below 60 %",
+     "LOST share 30% above 15 %"
+    ]
+   },
+   "whitened or scrubbed steps@lockout": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 2"
+    ]
+   },
+   "rust@lockout": {
+    "marks": 0,
+    "good": 0,
+    "risky": 0,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": null,
+    "share_lost": null,
+    "share_crushed": null,
+    "passed": false,
+    "failures": [
+     "0 GOOD marks, need 2"
+    ]
+   },
+   "cracks in flags, kerbs, setts@lockout": {
+    "marks": 220,
+    "good": 26,
+    "risky": 36,
+    "lost": 158,
+    "crushed": 4,
+    "share_good": 0.118,
+    "share_lost": 0.718,
+    "share_crushed": 0.018,
+    "passed": false,
+    "failures": [
+     "GOOD share 12% below 60 %",
+     "LOST share 72% above 15 %"
+    ]
+   },
+   "tar patches@lockout": {
+    "marks": 4,
+    "good": 1,
+    "risky": 1,
+    "lost": 2,
+    "crushed": 0,
+    "share_good": 0.25,
+    "share_lost": 0.5,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "GOOD share 25% below 60 %",
+     "LOST share 50% above 15 %"
+    ]
+   },
+   "ground film, polish, water marks@lockout": {
+    "marks": 7,
+    "good": 1,
+    "risky": 1,
+    "lost": 5,
+    "crushed": 0,
+    "share_good": 0.143,
+    "share_lost": 0.714,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "1 GOOD marks, need 4",
+     "GOOD share 14% below 60 %",
+     "LOST share 71% above 15 %"
+    ]
+   },
+   "weed tufts and moss cushions@lockout": {
+    "marks": 29,
+    "good": 28,
+    "risky": 1,
+    "lost": 0,
+    "crushed": 0,
+    "share_good": 0.966,
+    "share_lost": 0.0,
+    "share_crushed": 0.0,
+    "passed": true,
+    "failures": []
+   },
+   "moss ribbons and algae fans@lockout": {
+    "marks": 11,
+    "good": 1,
+    "risky": 3,
+    "lost": 7,
+    "crushed": 0,
+    "share_good": 0.091,
+    "share_lost": 0.636,
+    "share_crushed": 0.0,
+    "passed": false,
+    "failures": [
+     "1 GOOD marks, need 4",
+     "GOOD share 9% below 60 %",
+     "LOST share 64% above 15 %"
+    ]
+   }
+  }
+ }
+}

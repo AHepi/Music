@@ -1,0 +1,640 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "dial_00_0",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "film": 0
+    }
+   }
+  },
+  {
+   "name": "dial_00_1",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "film": 0.5
+    }
+   }
+  },
+  {
+   "name": "dial_00_2",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "film": 2.0
+    }
+   }
+  },
+  {
+   "name": "dial_01_0",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "polish": 0
+    }
+   }
+  },
+  {
+   "name": "dial_01_1",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "polish": 0.4
+    }
+   }
+  },
+  {
+   "name": "dial_01_2",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "polish": 1.0
+    }
+   }
+  },
+  {
+   "name": "dial_02_0",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "tar_patches": 0
+    }
+   }
+  },
+  {
+   "name": "dial_02_1",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "tar_patches": 0.3
+    }
+   }
+  },
+  {
+   "name": "dial_02_2",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "tar_patches": 1.0
+    }
+   }
+  },
+  {
+   "name": "dial_03_0",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "rust_halo": 0
+    }
+   }
+  },
+  {
+   "name": "dial_03_1",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "rust_halo": 0.5
+    }
+   }
+  },
+  {
+   "name": "dial_03_2",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "dirt": {
+     "rust_halo": 1.0
+    }
+   }
+  },
+  {
+   "name": "dial_04_0",
+   "camera": "flag_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "flag_cracks": 0
+    }
+   }
+  },
+  {
+   "name": "dial_04_1",
+   "camera": "flag_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "flag_cracks": 1.0
+    }
+   }
+  },
+  {
+   "name": "dial_04_2",
+   "camera": "flag_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "flag_cracks": 2.0
+    }
+   }
+  },
+  {
+   "name": "dial_05_0",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "kerb_chips": 0
+    }
+   }
+  },
+  {
+   "name": "dial_05_1",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "kerb_chips": 1.0
+    }
+   }
+  },
+  {
+   "name": "dial_05_2",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "kerb_chips": 2.0
+    }
+   }
+  },
+  {
+   "name": "dial_06_0",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "sett_disturb": 0
+    }
+   }
+  },
+  {
+   "name": "dial_06_1",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "sett_disturb": 0.7
+    }
+   }
+  },
+  {
+   "name": "dial_06_2",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundcracks",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundcracks": {
+     "sett_disturb": 2.0
+    }
+   }
+  },
+  {
+   "name": "dial_07_0",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundmoss",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundmoss": {
+     "joint_share": 0
+    }
+   }
+  },
+  {
+   "name": "dial_07_1",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundmoss",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundmoss": {
+     "joint_share": 0.08
+    }
+   }
+  },
+  {
+   "name": "dial_07_2",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundmoss",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundmoss": {
+     "joint_share": 0.3
+    }
+   }
+  },
+  {
+   "name": "dial_08_0",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundmoss",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundmoss": {
+     "algae_fan": 0
+    }
+   }
+  },
+  {
+   "name": "dial_08_1",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundmoss",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundmoss": {
+     "algae_fan": 0.6
+    }
+   }
+  },
+  {
+   "name": "dial_08_2",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:groundmoss",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "groundmoss": {
+     "algae_fan": 1.0
+    }
+   }
+  },
+  {
+   "name": "dial_09_0",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:iron",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "iron": {
+     "rust_cover": 0
+    }
+   }
+  },
+  {
+   "name": "dial_09_1",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:iron",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "iron": {
+     "rust_cover": 0.3
+    }
+   }
+  },
+  {
+   "name": "dial_09_2",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:iron",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "iron": {
+     "rust_cover": 1.0
+    }
+   }
+  },
+  {
+   "name": "dial_10_0",
+   "camera": "wall_lamp",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:iron",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "iron": {
+     "base_ring": 0
+    }
+   }
+  },
+  {
+   "name": "dial_10_1",
+   "camera": "wall_lamp",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:iron",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "iron": {
+     "base_ring": 0.7
+    }
+   }
+  },
+  {
+   "name": "dial_10_2",
+   "camera": "wall_lamp",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:iron",
+   "view": "beauty",
+   "size": [
+    480,
+    360,
+    16
+   ],
+   "group": "dial",
+   "dials": {
+    "iron": {
+     "base_ring": 1.0
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "set": "proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "s_D_main",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "film_mult": 0.62,
+     "washed_share": 0.17,
+     "washed_pale": 0.8
+    }
+   }
+  },
+  {
+   "name": "s_E_main",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "film_mult": 0.58,
+     "washed_share": 0.17,
+     "washed_pale": 0.8
+    }
+   }
+  },
+  {
+   "name": "s_D_notice",
+   "camera": "notice",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "film_mult": 0.62,
+     "washed_share": 0.17,
+     "washed_pale": 0.8
+    }
+   }
+  },
+  {
+   "name": "s_E_notice",
+   "camera": "notice",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "film_mult": 0.58,
+     "washed_share": 0.17,
+     "washed_pale": 0.8
+    }
+   }
+  }
+ ],
+ "extra_cameras": []
+}

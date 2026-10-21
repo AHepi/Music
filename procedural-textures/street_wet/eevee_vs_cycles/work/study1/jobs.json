@@ -1,0 +1,176 @@
+{
+ "kind": "street",
+ "masks": [],
+ "ground_masks": [],
+ "jobs": [
+  {
+   "name": "cy_s128_seed0",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 128,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 0
+   }
+  },
+  {
+   "name": "cy_s128_seed1",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 128,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 1
+   }
+  },
+  {
+   "name": "cy_s256_seed0",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 256,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 0
+   }
+  },
+  {
+   "name": "cy_s256_seed1",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 256,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 1
+   }
+  },
+  {
+   "name": "cy_s512_seed0",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 0
+   }
+  },
+  {
+   "name": "cy_s512_seed1",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 1
+   }
+  },
+  {
+   "name": "cy_s1024_seed0",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 1024,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 0
+   }
+  },
+  {
+   "name": "cy_s1024_seed1",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 1024,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 1
+   }
+  },
+  {
+   "name": "cy_s256_nocaustics_seed0",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 256,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 0,
+    "caustics": false
+   }
+  },
+  {
+   "name": "cy_s256_nodenoise_seed0",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 256,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 0,
+    "denoise": false
+   }
+  },
+  {
+   "name": "cy_ref4096_nodenoise",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 4096,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 5,
+    "denoise": false,
+    "adaptive_threshold": 0.002
+   }
+  },
+  {
+   "name": "ee_main_wet",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish"
+  }
+ ]
+}

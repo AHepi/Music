@@ -1,0 +1,145 @@
+{
+ "set": "proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "t_all",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730
+  },
+  {
+   "name": "t_soot",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730
+  },
+  {
+   "name": "tm_soot",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "t_runoff",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730
+  },
+  {
+   "name": "tm_runoff",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "layer:runoff",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "t_foot",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730
+  },
+  {
+   "name": "tm_foot",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "layer:foot",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "t_steps",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730
+  },
+  {
+   "name": "tm_steps",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "layer:steps",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  }
+ ],
+ "extra_cameras": []
+}

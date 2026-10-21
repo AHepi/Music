@@ -1,0 +1,94 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "pack": true,
+ "feature_dirs": [],
+ "jobs": [
+  {
+   "name": "today_courtyard",
+   "camera": "photo",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "today",
+   "scene": "courtyard"
+  },
+  {
+   "name": "view_base",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1200,
+    800,
+    48
+   ],
+   "group": "view",
+   "plate_height": 2730,
+   "pieces_json": false
+  },
+  {
+   "name": "view_growth",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    1200,
+    800,
+    48
+   ],
+   "group": "view",
+   "plate_height": 2730,
+   "pieces_json": true
+  },
+  {
+   "name": "view_layer",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:growth",
+   "view": "layer:growth",
+   "size": [
+    1200,
+    800,
+    1
+   ],
+   "group": "view",
+   "plate_height": 2730
+  },
+  {
+   "name": "view_growth_neglected",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    1200,
+    800,
+    48
+   ],
+   "group": "view",
+   "plate_height": 2730,
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "weed_cover": 0.012,
+     "gutter_tuft_share": 0.05,
+     "cushions_amount": 1.5,
+     "cushion_cover": 0.02
+    }
+   }
+  }
+ ]
+}

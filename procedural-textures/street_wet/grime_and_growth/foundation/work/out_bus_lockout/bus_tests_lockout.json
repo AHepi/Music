@@ -1,0 +1,495 @@
+{
+ "set": "pit_village_street",
+ "scene": "lockout",
+ "results": {
+  "ground": {
+   "passed": true,
+   "worst": 0.00112,
+   "tolerance": 0.00784313725490196,
+   "points": 200,
+   "per_mask": {
+    "wall_dist": 0.00049,
+    "prop_dist": 0.00038,
+    "inside_corner": 0.0002,
+    "step_foot": 0.00027,
+    "vertical_foot": 0.00041,
+    "seam_dist": 0.00038,
+    "cover_dist": 0.0,
+    "water_dist": 0.0,
+    "slope": 0.00018,
+    "lowness": 0.00044,
+    "crown": 0.00047,
+    "above_water": 0.0,
+    "shade": 0.00049,
+    "dampness": 0.00044,
+    "openness": 0.00049,
+    "sheltered": 0.00044,
+    "footfall": 0.00043,
+    "keepclear": 0.00038,
+    "entry_rand": 0.0004,
+    "existing_growth": 0.0,
+    "moss_site": 0.00023,
+    "weed_site": 0.0004,
+    "algae_site": 0.00014,
+    "lichen_site": 0.0,
+    "rubbish_heap": 0.00049,
+    "drip": 0.00021,
+    "drip_dist": 0.00049,
+    "drip_kind": 0.0,
+    "step_top": 0.00097,
+    "step_edge": 0.00106,
+    "edge_dist": 0.00112,
+    "piece_gap": 0.00105
+   },
+   "seconds": 23.1
+  },
+  "walls": {
+   "passed": true,
+   "worst": 0.00266,
+   "tolerance": 0.00784313725490196,
+   "per_sheet": {
+    "cottage_shell_cottage_brick_door_left_walls": {
+     "diffs": {
+      "sheltered": 0.00049,
+      "drip": 0.00046,
+      "drip_dist": 0.00044,
+      "drip_kind": 0.0002,
+      "corner": 0.00049,
+      "reveal": 0.0002,
+      "height": 0.00046,
+      "shade": 0.00104,
+      "dampness": 0.00051,
+      "openness": 0.00201,
+      "moss_site": 0.00061,
+      "algae_site": 0.00069,
+      "lichen_site": 0.0
+     },
+     "mean_stored_and_drawn": {
+      "sheltered": [
+       0.2934,
+       0.2933
+      ],
+      "drip": [
+       0.7321,
+       0.7321
+      ],
+      "drip_dist": [
+       0.4664,
+       0.4663
+      ],
+      "drip_kind": [
+       0.227,
+       0.2269
+      ],
+      "corner": [
+       0.5962,
+       0.596
+      ],
+      "reveal": [
+       0.184,
+       0.184
+      ],
+      "height_worst_dots": [
+       {
+        "px": 48,
+        "py": 306,
+        "got": 5.363,
+        "want": 5.369,
+        "valid": 1.0
+       },
+       {
+        "px": 17,
+        "py": 281,
+        "got": 4.82,
+        "want": 4.826,
+        "valid": 1.0
+       },
+       {
+        "px": 223,
+        "py": 265,
+        "got": 4.789,
+        "want": 4.794,
+        "valid": 1.0
+       },
+       {
+        "px": 120,
+        "py": 289,
+        "got": 5.125,
+        "want": 5.13,
+        "valid": 1.0
+       },
+       {
+        "px": 200,
+        "py": 292,
+        "got": 5.297,
+        "want": 5.302,
+        "valid": 1.0
+       }
+      ],
+      "height": [
+       2.8184,
+       2.8175
+      ],
+      "shade": [
+       0.6977,
+       0.6975
+      ],
+      "dampness": [
+       0.3093,
+       0.3092
+      ],
+      "openness": [
+       0.6051,
+       0.6048
+      ],
+      "moss_site": [
+       0.4464,
+       0.4463
+      ],
+      "algae_site": [
+       0.3305,
+       0.3304
+      ],
+      "lichen_site": [
+       0.0,
+       0.0
+      ]
+     },
+     "dots_compared": 200,
+     "flipped": true
+    },
+    "cottage_shell_cottage_brick_door_right_walls": {
+     "diffs": {
+      "sheltered": 0.00049,
+      "drip": 0.00049,
+      "drip_dist": 0.00049,
+      "drip_kind": 0.0002,
+      "corner": 0.00049,
+      "reveal": 0.00049,
+      "height": 0.00044,
+      "shade": 0.00106,
+      "dampness": 0.0005,
+      "openness": 0.00183,
+      "moss_site": 0.00083,
+      "algae_site": 0.00055,
+      "lichen_site": 0.0
+     },
+     "mean_stored_and_drawn": {
+      "sheltered": [
+       0.3184,
+       0.3183
+      ],
+      "drip": [
+       0.6901,
+       0.6899
+      ],
+      "drip_dist": [
+       0.5021,
+       0.5019
+      ],
+      "drip_kind": [
+       0.246,
+       0.2459
+      ],
+      "corner": [
+       0.5887,
+       0.5886
+      ],
+      "reveal": [
+       0.173,
+       0.173
+      ],
+      "height_worst_dots": [
+       {
+        "px": 140,
+        "py": 331,
+        "got": 5.992,
+        "want": 5.998,
+        "valid": 0.9995
+       },
+       {
+        "px": 52,
+        "py": 277,
+        "got": 4.789,
+        "want": 4.795,
+        "valid": 0.9995
+       },
+       {
+        "px": 141,
+        "py": 319,
+        "got": 5.754,
+        "want": 5.759,
+        "valid": 0.9995
+       },
+       {
+        "px": 191,
+        "py": 303,
+        "got": 5.504,
+        "want": 5.509,
+        "valid": 0.9995
+       },
+       {
+        "px": 118,
+        "py": 287,
+        "got": 5.082,
+        "want": 5.087,
+        "valid": 0.9995
+       }
+      ],
+      "height": [
+       3.0794,
+       3.0784
+      ],
+      "shade": [
+       0.6949,
+       0.6947
+      ],
+      "dampness": [
+       0.2978,
+       0.2978
+      ],
+      "openness": [
+       0.6078,
+       0.6076
+      ],
+      "moss_site": [
+       0.4357,
+       0.4356
+      ],
+      "algae_site": [
+       0.3363,
+       0.3361
+      ],
+      "lichen_site": [
+       0.0,
+       0.0
+      ]
+     },
+     "dots_compared": 200,
+     "flipped": true
+    },
+    "cottage_shell_cottage_stone_door_left_walls": {
+     "diffs": {
+      "sheltered": 0.00049,
+      "drip": 0.00047,
+      "drip_dist": 0.00047,
+      "drip_kind": 0.0002,
+      "corner": 0.00049,
+      "reveal": 0.0002,
+      "height": 0.00053,
+      "shade": 0.00266,
+      "dampness": 0.00054,
+      "openness": 0.00195,
+      "moss_site": 0.00131,
+      "algae_site": 0.00083,
+      "lichen_site": 0.0
+     },
+     "mean_stored_and_drawn": {
+      "sheltered": [
+       0.2629,
+       0.2628
+      ],
+      "drip": [
+       0.6282,
+       0.6282
+      ],
+      "drip_dist": [
+       0.5298,
+       0.5298
+      ],
+      "drip_kind": [
+       0.199,
+       0.199
+      ],
+      "corner": [
+       0.6273,
+       0.6271
+      ],
+      "reveal": [
+       0.148,
+       0.148
+      ],
+      "height_worst_dots": [
+       {
+        "px": 182,
+        "py": 336,
+        "got": 5.961,
+        "want": 5.968,
+        "valid": 1.0
+       },
+       {
+        "px": 203,
+        "py": 281,
+        "got": 4.832,
+        "want": 4.838,
+        "valid": 1.0
+       },
+       {
+        "px": 47,
+        "py": 282,
+        "got": 5.07,
+        "want": 5.076,
+        "valid": 1.0
+       },
+       {
+        "px": 216,
+        "py": 335,
+        "got": 5.894,
+        "want": 5.9,
+        "valid": 1.0
+       },
+       {
+        "px": 108,
+        "py": 254,
+        "got": 4.426,
+        "want": 4.431,
+        "valid": 1.0
+       }
+      ],
+      "height": [
+       2.5662,
+       2.5653
+      ],
+      "shade": [
+       0.433,
+       0.4329
+      ],
+      "dampness": [
+       0.3151,
+       0.315
+      ],
+      "openness": [
+       0.5398,
+       0.5396
+      ],
+      "moss_site": [
+       0.3645,
+       0.3644
+      ],
+      "algae_site": [
+       0.273,
+       0.2729
+      ],
+      "lichen_site": [
+       0.0,
+       0.0
+      ]
+     },
+     "dots_compared": 200,
+     "flipped": true
+    },
+    "cottage_shell_cottage_stone_door_right_walls": {
+     "diffs": {
+      "sheltered": 0.00049,
+      "drip": 0.00049,
+      "drip_dist": 0.00049,
+      "drip_kind": 0.0002,
+      "corner": 0.00049,
+      "reveal": 0.0002,
+      "height": 0.00052,
+      "shade": 0.00184,
+      "dampness": 0.00049,
+      "openness": 0.00189,
+      "moss_site": 0.00074,
+      "algae_site": 0.00048,
+      "lichen_site": 0.0
+     },
+     "mean_stored_and_drawn": {
+      "sheltered": [
+       0.2875,
+       0.2874
+      ],
+      "drip": [
+       0.6778,
+       0.6775
+      ],
+      "drip_dist": [
+       0.5182,
+       0.518
+      ],
+      "drip_kind": [
+       0.225,
+       0.2249
+      ],
+      "corner": [
+       0.5875,
+       0.5874
+      ],
+      "reveal": [
+       0.136,
+       0.136
+      ],
+      "height_worst_dots": [
+       {
+        "px": 178,
+        "py": 282,
+        "got": 4.887,
+        "want": 4.893,
+        "valid": 0.9995
+       },
+       {
+        "px": 215,
+        "py": 291,
+        "got": 5.016,
+        "want": 5.021,
+        "valid": 0.9995
+       },
+       {
+        "px": 183,
+        "py": 336,
+        "got": 5.961,
+        "want": 5.966,
+        "valid": 0.9995
+       },
+       {
+        "px": 99,
+        "py": 285,
+        "got": 5.059,
+        "want": 5.064,
+        "valid": 0.9995
+       },
+       {
+        "px": 226,
+        "py": 289,
+        "got": 4.961,
+        "want": 4.966,
+        "valid": 0.9995
+       }
+      ],
+      "height": [
+       2.6061,
+       2.6053
+      ],
+      "shade": [
+       0.4592,
+       0.459
+      ],
+      "dampness": [
+       0.32,
+       0.3198
+      ],
+      "openness": [
+       0.5168,
+       0.5167
+      ],
+      "moss_site": [
+       0.381,
+       0.3809
+      ],
+      "algae_site": [
+       0.2887,
+       0.2886
+      ],
+      "lichen_site": [
+       0.0,
+       0.0
+      ]
+     },
+     "dots_compared": 200,
+     "flipped": true
+    }
+   },
+   "seconds": 11.6
+  }
+ }
+}

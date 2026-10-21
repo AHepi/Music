@@ -1,0 +1,57 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [],
+ "jobs": [
+  {
+   "name": "today_street",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    270,
+    480,
+    4
+   ],
+   "group": "today",
+   "scene": "street"
+  },
+  {
+   "name": "final_main_A_wet_kit",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    64
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "keep_png": true,
+   "pieces_json": true
+  },
+  {
+   "name": "final_main_A_dry_kit",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    64
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "keep_png": true,
+   "pieces_json": false
+  }
+ ]
+}

@@ -1,0 +1,3186 @@
+{
+ "soot": {
+  "meta": {
+   "owner": "walls",
+   "group": "WK SOOT",
+   "priority": "MUST",
+   "roles": "wall.masonry, wall.trim, wall.industrial, chimney, roof.*",
+   "masks": "sheltered, drip, reveal, shade, tx_cavity, height"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 8.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "film_mult",
+    "lo": 0.3,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.8,
+    "doc": "Colour multiplier of the general film on the clean surface (brick 0.50 to 0.65 in 1926).",
+    "street": 0.6,
+    "courtyard": 0.97
+   },
+   {
+    "name": "sheltered_mult",
+    "lo": 0.2,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Multiplier where rain cannot reach (under sills, eaves, in reveals).",
+    "street": 0.5,
+    "courtyard": 0.85
+   },
+   {
+    "name": "washed_mult",
+    "lo": 0.5,
+    "hi": 1.2,
+    "unit": "",
+    "default": 0.95,
+    "doc": "Multiplier where rain washes (sill tops, the windward upper wall).",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "washed_share",
+    "lo": 0.0,
+    "hi": 0.6,
+    "unit": "",
+    "default": 0.2,
+    "doc": "Share of wall area that is rain-washed (15 to 25 % in 1926).",
+    "street": 0.17,
+    "courtyard": 0.3
+   },
+   {
+    "name": "floor_mult",
+    "lo": 0.2,
+    "hi": 0.8,
+    "unit": "",
+    "default": 0.4,
+    "doc": "No dot may go below this multiple of its clean colour (keeps the film curve from crushing it).",
+    "street": 0.3,
+    "courtyard": 0.6
+   },
+   {
+    "name": "grey_pull",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.2,
+    "doc": "How far colour is pulled toward grey (25 to 35 % in 1926).",
+    "street": 0.25,
+    "courtyard": 0.15
+   },
+   {
+    "name": "mortar_soot",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Extra darkening in mortar hollows (soot sits in hollows first).",
+    "street": 0.4,
+    "courtyard": 0.1
+   },
+   {
+    "name": "mottle_size",
+    "lo": 0.2,
+    "hi": 3.0,
+    "unit": "m",
+    "default": 1.0,
+    "doc": "Size of the slow mottling.",
+    "street": 0.9,
+    "courtyard": 1.2
+   },
+   {
+    "name": "mottle_contrast",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "How strong the mottling is.",
+    "street": 0.5,
+    "courtyard": 0.3
+   },
+   {
+    "name": "edge_sharp",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "How crisp the line is between washed and sheltered (a clean line under a sill).",
+    "street": 0.85,
+    "courtyard": 0.4
+   },
+   {
+    "name": "stack_mult",
+    "lo": 0.2,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Multiplier on chimney stacks (blackest in a coal town).",
+    "street": 1.15,
+    "courtyard": 1.0
+   },
+   {
+    "name": "roof_mult",
+    "lo": 0.5,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.9,
+    "doc": "Multiplier on roof surfaces.",
+    "street": 1.0,
+    "courtyard": 0.95
+   },
+   {
+    "name": "base_lift",
+    "lo": 0.0,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.0,
+    "doc": "LAST-RESORT dial: lifts the whole wall colour so that a pattern has room above the film-black zone. Off unless the integrator proves it is needed and says so.",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "mottle_stretch",
+    "lo": 1.0,
+    "hi": 4.0,
+    "unit": "",
+    "default": 2.0,
+    "doc": "How much taller than wide the soot mottling is (soot clouds run in columns: 1.8 to 2.5).",
+    "street": 3.0,
+    "courtyard": null
+   },
+   {
+    "name": "patch_min_dots",
+    "lo": 8.0,
+    "hi": 40.0,
+    "unit": "dots",
+    "default": 15.0,
+    "doc": "Smallest soot or washed patch, in plate dots (patches of 15 dots or more survive the painter).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "rough_gain",
+    "lo": 0.0,
+    "hi": 0.3,
+    "unit": "",
+    "default": 0.1,
+    "doc": "How much duller (rougher) the sooted surface becomes; soot is a dry crust.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "shade_wash",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "How much shade keeps the rain-washed patches away (0 = shade makes no difference, 1 = none in full shade).",
+    "street": 0.2,
+    "courtyard": null
+   },
+   {
+    "name": "washed_pale",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Pale-first: how much the washed patches are lifted above the surrounding film, so that they read on a dark wall (0 = only the washed_mult value).",
+    "street": 0.8,
+    "courtyard": null
+   }
+  ],
+  "slot": "A"
+ },
+ "runoff": {
+  "meta": {
+   "owner": "walls",
+   "group": "WK RUNOFF",
+   "priority": "MUST",
+   "roles": "wall.masonry, wall.trim (iron-sourced streaks use iron objects as sources)",
+   "masks": "drip, drip_dist, drip_kind, sheltered, height"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 12.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "strength",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "Contrast of the streaks.",
+    "street": 1.0,
+    "courtyard": 0.5
+   },
+   {
+    "name": "tone",
+    "lo": -1.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "-1 = pale washed stripe, +1 = dark stain. 1926 sooty walls: pale stripes with dark tide-lines. Courtyard plaster: dark grey-green streaks.",
+    "street": -0.5,
+    "courtyard": 0.7
+   },
+   {
+    "name": "edge_dark",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Dark tide-line along the streak edges.",
+    "street": 0.5,
+    "courtyard": 0.2
+   },
+   {
+    "name": "width_dots",
+    "lo": 4.0,
+    "hi": 24.0,
+    "unit": "",
+    "default": 8.0,
+    "doc": "Smallest streak width in plate dots (the layer widens a streak with distance up to Inflate Limit).",
+    "street": 10.0,
+    "courtyard": 10.0
+   },
+   {
+    "name": "length_mult",
+    "lo": 0.3,
+    "hi": 3.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Length of every streak.",
+    "street": 1.0,
+    "courtyard": 1.2
+   },
+   {
+    "name": "ragged",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Ragged sides and a stretched-down shape.",
+    "street": 0.6,
+    "courtyard": 0.5
+   },
+   {
+    "name": "source_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Share of sills, ledges and cap edges that carry a streak pair (60 to 80 % in 1926).",
+    "street": 0.8,
+    "courtyard": 0.8
+   },
+   {
+    "name": "leak_share",
+    "lo": 0.0,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.1,
+    "doc": "Share of downpipes that leak heavily and carry a long streak.",
+    "street": 0.15,
+    "courtyard": 0.0
+   },
+   {
+    "name": "leak_length",
+    "lo": 0.3,
+    "hi": 1.5,
+    "unit": "m",
+    "default": 0.8,
+    "doc": "Length of a heavy leak streak.",
+    "street": 0.9,
+    "courtyard": 0.8
+   },
+   {
+    "name": "iron_rust",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "How orange (rust) a streak is when its source is an iron joint or bracket.",
+    "street": 0.5,
+    "courtyard": 0.0
+   },
+   {
+    "name": "eave_streaks",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Streaks hanging from eave lines, gutter ends and cap overhangs.",
+    "street": 0.5,
+    "courtyard": 0.7
+   },
+   {
+    "name": "pitch_mult",
+    "lo": 0.5,
+    "hi": 3.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Spacing of the streaks inside a run-off zone (1 = a streak about every 0.25 m).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "pair_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "How strongly the two edges of every ledge (the sill ends) carry a streak of their own.",
+    "street": 0.8,
+    "courtyard": null
+   },
+   {
+    "name": "stain_value",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "How much brighter than its surround a pale stripe is made, 1 = the strongest allowed (pale-first on dark walls).",
+    "street": 0.9,
+    "courtyard": null
+   }
+  ],
+  "slot": "A"
+ },
+ "foot": {
+  "meta": {
+   "owner": "walls",
+   "group": "WK FOOT",
+   "priority": "MUST",
+   "roles": "wall.masonry, wall.trim, wall.industrial",
+   "masks": "height, dampness, drip (pipe feet), tx_cavity, shade"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 8.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "splash_height",
+    "lo": 0.1,
+    "hi": 0.6,
+    "unit": "m",
+    "default": 0.25,
+    "doc": "Height of the dirt splash band at the wall foot (15 to 35 cm in 1926).",
+    "street": 0.28,
+    "courtyard": 0.3
+   },
+   {
+    "name": "splash_strength",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "How dark the band is at the ground line.",
+    "street": 0.9,
+    "courtyard": 0.35
+   },
+   {
+    "name": "splash_ragged",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Ragged top edge of splash dots and short upward fingers.",
+    "street": 0.7,
+    "courtyard": 0.6
+   },
+   {
+    "name": "finger_height",
+    "lo": 0.0,
+    "hi": 0.2,
+    "unit": "m",
+    "default": 0.08,
+    "doc": "Height of the splash fingers above the band.",
+    "street": 0.1,
+    "courtyard": 0.1
+   },
+   {
+    "name": "pipe_foot_boost",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Extra heavy splash and damp where a downpipe ends.",
+    "street": 1.4,
+    "courtyard": 0.0
+   },
+   {
+    "name": "tide_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Share of house lengths that carry a damp tide-mark (older rows only).",
+    "street": 0.45,
+    "courtyard": 0.15
+   },
+   {
+    "name": "tide_height",
+    "lo": 0.3,
+    "hi": 1.3,
+    "unit": "m",
+    "default": 0.7,
+    "doc": "Ragged top of the damp tide-mark.",
+    "street": 0.8,
+    "courtyard": 0.5
+   },
+   {
+    "name": "tide_strength",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Darkening inside the tide-mark.",
+    "street": 0.4,
+    "courtyard": 0.25
+   },
+   {
+    "name": "tide_green",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.2,
+    "doc": "How green the damp zone is.",
+    "street": 0.3,
+    "courtyard": 0.4
+   },
+   {
+    "name": "salt_bloom",
+    "lo": 0.0,
+    "hi": 0.1,
+    "unit": "",
+    "default": 0.02,
+    "doc": "Share of the band covered by white salts along its top.",
+    "street": 0.02,
+    "courtyard": 0.04
+   },
+   {
+    "name": "mortar_wear",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "Recessed, eroded mortar in the lowest 0.6 m.",
+    "street": 0.5,
+    "courtyard": 0.2
+   },
+   {
+    "name": "spall_share",
+    "lo": 0.0,
+    "hi": 0.2,
+    "unit": "",
+    "default": 0.05,
+    "doc": "Share of bricks or blocks with a flaked face near the foot.",
+    "street": 0.07,
+    "courtyard": 0.04
+   },
+   {
+    "name": "wear_height",
+    "lo": 0.2,
+    "hi": 0.9,
+    "unit": "m",
+    "default": 0.5,
+    "doc": "How high mortar wear and spalls reach.",
+    "street": 0.6,
+    "courtyard": 0.4
+   },
+   {
+    "name": "splash_pale",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Pale-first: 0 = dark mud splash, 1 = pale dust splash (a dusty brown lighter than a sooted wall, so the band reads on a dark wall).",
+    "street": 0.9,
+    "courtyard": null
+   },
+   {
+    "name": "band_min_dots",
+    "lo": 8.0,
+    "hi": 40.0,
+    "unit": "dots",
+    "default": 15.0,
+    "doc": "Smallest band height in plate dots (the band is drawn taller than real when the wall is far).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "salt_dots",
+    "lo": 3.0,
+    "hi": 16.0,
+    "unit": "dots",
+    "default": 6.0,
+    "doc": "Smallest salt fleck in plate dots.",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "A"
+ },
+ "steps": {
+  "meta": {
+   "owner": "walls",
+   "group": "WK STEPS",
+   "priority": "MUST",
+   "roles": "wall.trim (the steps are found by the step masks, not by object)",
+   "masks": "step_top, step_edge, entry_rand, edge_dist, footfall"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 6.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "whitened_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Share of doorsteps that are whitened or donkey-stoned (40 to 70 %; medium confidence for Durham).",
+    "street": 0.55,
+    "courtyard": 0.0
+   },
+   {
+    "name": "scrubbed_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Share that are only scrubbed pale.",
+    "street": 0.35,
+    "courtyard": 0.0
+   },
+   {
+    "name": "frame_m",
+    "lo": 0.03,
+    "hi": 0.12,
+    "unit": "m",
+    "default": 0.06,
+    "doc": "Real width of the white frame along nosing and riser (4 to 10 cm).",
+    "street": 0.07,
+    "courtyard": 0.07
+   },
+   {
+    "name": "frame_dots",
+    "lo": 4.0,
+    "hi": 20.0,
+    "unit": "",
+    "default": 8.0,
+    "doc": "Smallest frame width in plate dots (widened with distance up to Inflate Limit).",
+    "street": 8.0,
+    "courtyard": 8.0
+   },
+   {
+    "name": "boot_grey",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Boots grey the centre of the tread (30 %).",
+    "street": 0.3,
+    "courtyard": 0.3
+   },
+   {
+    "name": "dish_depth",
+    "lo": 0.0,
+    "hi": 0.012,
+    "unit": "m",
+    "default": 0.004,
+    "doc": "Depth of the worn dish in the tread (relief, faded with distance).",
+    "street": 0.005,
+    "courtyard": 0.003
+   },
+   {
+    "name": "nosing_chips",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Share of steps with a chipped nosing or corner.",
+    "street": 0.3,
+    "courtyard": 0.2
+   },
+   {
+    "name": "wear_polish",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "Polish of the worn centre.",
+    "street": 0.5,
+    "courtyard": 0.2
+   },
+   {
+    "name": "tread_pale",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "How pale a scrubbed (not whitened) step is.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "chip_m",
+    "lo": 0.02,
+    "hi": 0.12,
+    "unit": "m",
+    "default": 0.05,
+    "doc": "Size of a chipped nosing.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "riser_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.8,
+    "doc": "How much of the whitening or scrubbing also goes on the riser and the foot of the doorway round the step.",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "A"
+ },
+ "wallgrowth": {
+  "meta": {
+   "owner": "walls",
+   "group": "WK WALL GROWTH",
+   "priority": "SHOULD",
+   "roles": "wall.masonry, wall.trim, wall.plaster, roof.tile (painted moss, algae, lichen)",
+   "masks": "moss_site, algae_site, dampness, drip, lichen_site, height"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 8.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "moss_amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Painted moss at wall feet, drips, copings.",
+    "street": 0.05,
+    "courtyard": 1.2
+   },
+   {
+    "name": "algae_amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 0.8,
+    "doc": "Green-black algae film at pipe outlets and shaded feet.",
+    "street": 0.6,
+    "courtyard": 1.0
+   },
+   {
+    "name": "lichen_amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Lichen. 1926 coal town: NONE (the smoke killed it). Courtyard: sparse colonies.",
+    "street": 0.0,
+    "courtyard": 0.6
+   },
+   {
+    "name": "moss_height",
+    "lo": 0.1,
+    "hi": 1.0,
+    "unit": "m",
+    "default": 0.3,
+    "doc": "How high up a wall moss may reach from the foot.",
+    "street": 0.35,
+    "courtyard": 0.5
+   },
+   {
+    "name": "patch_dots",
+    "lo": 8.0,
+    "hi": 40.0,
+    "unit": "",
+    "default": 15.0,
+    "doc": "Smallest moss patch width in plate dots (patches of 15 dots or more survive the painter).",
+    "street": 15.0,
+    "courtyard": 15.0
+   },
+   {
+    "name": "drip_moss",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Moss below run-off lines.",
+    "street": 0.4,
+    "courtyard": 0.5
+   },
+   {
+    "name": "cap_moss",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Moss along copings and wall caps.",
+    "street": 0.3,
+    "courtyard": 0.6
+   },
+   {
+    "name": "roof_moss",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moss on roof surfaces (probably very little in 1926).",
+    "street": 0.0,
+    "courtyard": 0.4
+   },
+   {
+    "name": "tone_steps",
+    "lo": 3.0,
+    "hi": 6.0,
+    "unit": "",
+    "default": 5.0,
+    "doc": "Number of flat painted tones in a moss patch.",
+    "street": 5.0,
+    "courtyard": 4.0
+   },
+   {
+    "name": "clump_stretch",
+    "lo": 1.0,
+    "hi": 3.0,
+    "unit": "",
+    "default": 1.8,
+    "doc": "How much taller than wide a clump is (drip shape).",
+    "street": 1.8,
+    "courtyard": 1.5
+   },
+   {
+    "name": "relief",
+    "lo": 0.0,
+    "hi": 0.02,
+    "unit": "m",
+    "default": 0.005,
+    "doc": "Height of moss relief (a bump on the incoming normal, faded with distance).",
+    "street": 0.006,
+    "courtyard": 0.008
+   },
+   {
+    "name": "lichen_dots",
+    "lo": 4.0,
+    "hi": 16.0,
+    "unit": "",
+    "default": 8.0,
+    "doc": "Lichen disc size in plate dots.",
+    "street": 8.0,
+    "courtyard": 8.0
+   },
+   {
+    "name": "brightness_floor",
+    "lo": 0.12,
+    "hi": 0.4,
+    "unit": "",
+    "default": 0.25,
+    "doc": "Lowest plate brightness of a moss patch (it must stay lighter than the stone and above the film-black zone).",
+    "street": 0.25,
+    "courtyard": 0.25
+   },
+   {
+    "name": "moss_value",
+    "lo": 0.1,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.35,
+    "doc": "Albedo of the lightest moss tone (a number; the moss is lighter than the stone, never below brightness_floor).",
+    "street": 0.2,
+    "courtyard": null
+   },
+   {
+    "name": "algae_strength",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "How dark the green-black algae film is on its damp, shaded places.",
+    "street": 0.4,
+    "courtyard": null
+   },
+   {
+    "name": "hue",
+    "lo": 70.0,
+    "hi": 140.0,
+    "unit": "deg",
+    "default": 100.0,
+    "doc": "Hue of moss in degrees (85 to 120 survives the painter as green).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "saturation",
+    "lo": 0.3,
+    "hi": 0.9,
+    "unit": "",
+    "default": 0.55,
+    "doc": "Saturation of moss (0.45 or more so that the painter keeps it green).",
+    "street": 0.5,
+    "courtyard": null
+   }
+  ],
+  "slot": "C"
+ },
+ "wallcracks": {
+  "meta": {
+   "owner": "walls",
+   "group": "WK WALL CRACKS",
+   "priority": "SHOULD",
+   "roles": "wall.masonry, wall.trim, wall.plaster",
+   "masks": "corner, reveal, height, tx_cavity, house flag"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 8.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "crack_amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "How many cracks (the master Amount scales it too).",
+    "street": 0.5,
+    "courtyard": 0.5
+   },
+   {
+    "name": "crack_dots",
+    "lo": 2.0,
+    "hi": 8.0,
+    "unit": "",
+    "default": 3.5,
+    "doc": "Smallest crack width in plate dots (3 dots needs contrast 0.11).",
+    "street": 3.5,
+    "courtyard": 3.5
+   },
+   {
+    "name": "crack_contrast",
+    "lo": 0.04,
+    "hi": 0.2,
+    "unit": "",
+    "default": 0.11,
+    "doc": "Smallest crack contrast against the surround.",
+    "street": 0.11,
+    "courtyard": 0.11
+   },
+   {
+    "name": "stepped_cracks",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Stepped mining cracks on the houses the set file flags (1 or 2 of 28).",
+    "street": 1.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "corner_chips",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Chips at wall corners and opening corners.",
+    "street": 0.5,
+    "courtyard": 0.5
+   },
+   {
+    "name": "chip_cm",
+    "lo": 2.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 5.0,
+    "doc": "Chip size in centimetres (chips of about 5 cm and bigger read).",
+    "street": 5.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "plaster_cracks",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Map cracks and corner cracks in plaster.",
+    "street": 0.0,
+    "courtyard": 0.5
+   },
+   {
+    "name": "spall_patches",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.15,
+    "doc": "Spalled patches near the foot.",
+    "street": 0.2,
+    "courtyard": 0.3
+   },
+   {
+    "name": "near_only",
+    "lo": 6.0,
+    "hi": 30.0,
+    "unit": "m",
+    "default": 15.0,
+    "doc": "Cracks fade out beyond this distance (the painter invents its own texture there).",
+    "street": 15.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "slope_mm",
+    "lo": 0.0,
+    "hi": 5.0,
+    "unit": "",
+    "default": 1.5,
+    "doc": "Real slope of a crack edge so a lamp lights one side.",
+    "street": 1.5,
+    "courtyard": 1.5
+   },
+   {
+    "name": "dull",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Cracks are dull: roughness back to 0.9, shine cut 35 %, water film cut 45 %.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "chip_pale",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Chips show fresh, paler stone (pale-first on dark walls).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "step_cm",
+    "lo": 6.0,
+    "hi": 40.0,
+    "unit": "cm",
+    "default": 15.0,
+    "doc": "Height of one step of a stepped mining crack (about two brick courses).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "crack_pale",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Pale dust lip along a crack so that it reads on a dark wall.",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "B"
+ },
+ "paint": {
+  "meta": {
+   "owner": "walls",
+   "group": "WK PAINT",
+   "priority": "COULD",
+   "roles": "timber.paint (doors, window frames, fascia)",
+   "masks": "height, footfall (door line), shade"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 6.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "paint_dark",
+    "lo": 0.5,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.85,
+    "doc": "General darkening of paint (0.70 to 0.85 in 1926).",
+    "street": 0.93,
+    "courtyard": 0.9
+   },
+   {
+    "name": "flake_share",
+    "lo": 0.0,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.15,
+    "doc": "Share of painted area that has lost flakes.",
+    "street": 0.2,
+    "courtyard": 0.0
+   },
+   {
+    "name": "door_scuff",
+    "lo": 0.1,
+    "hi": 0.5,
+    "unit": "m",
+    "default": 0.25,
+    "doc": "Height of kicked scuffs at the foot of doors (bare grey wood).",
+    "street": 0.3,
+    "courtyard": 0.25
+   },
+   {
+    "name": "latch_grease",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "Dark hand-grease patch at the latch.",
+    "street": 0.4,
+    "courtyard": 0.2
+   },
+   {
+    "name": "gloss_loss",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "How much the paint has lost its gloss.",
+    "street": 0.5,
+    "courtyard": 0.3
+   },
+   {
+    "name": "grain_dots",
+    "lo": 3.0,
+    "hi": 16.0,
+    "unit": "dots",
+    "default": 6.0,
+    "doc": "Smallest flake width in plate dots.",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "A"
+ },
+ "dirt": {
+  "meta": {
+   "owner": "ground",
+   "group": "WK GROUND DIRT",
+   "priority": "MUST",
+   "roles": "ground.sett, ground.flag, ground.channel, ground.kerb (gravel and earth in other sets)",
+   "masks": "footfall, keepclear, lowness, crown, wall_dist, shade, vertical_foot, prop_dist, seam_dist, entry_rand, step_foot"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 6.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "film",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Broad soft film of soot and dust, 0.5 to 3 m patches. NOT ash or coal dust (the rubbish layer has those).",
+    "street": 0.4,
+    "courtyard": 0.4
+   },
+   {
+    "name": "film_scale",
+    "lo": 0.5,
+    "hi": 4.0,
+    "unit": "m",
+    "default": 1.6,
+    "doc": "Patch size of the film.",
+    "street": 1.6,
+    "courtyard": 1.6
+   },
+   {
+    "name": "film_darkness",
+    "lo": 0.0,
+    "hi": 0.6,
+    "unit": "",
+    "default": 0.25,
+    "doc": "Darkening of the film (at most about one third).",
+    "street": 0.3,
+    "courtyard": 0.2
+   },
+   {
+    "name": "film_max_share",
+    "lo": 0.0,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.25,
+    "doc": "Ceiling on the share of a surface the film may darken by a third or more.",
+    "street": 0.25,
+    "courtyard": 0.25
+   },
+   {
+    "name": "film_near_walls",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Keeps the film off the places the rubbish layer already dirties (wall foot, gutter strip). 1 = film everywhere; 0.5 = half strength there.",
+    "street": 0.5,
+    "courtyard": 1.0
+   },
+   {
+    "name": "polish",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.4,
+    "doc": "Traffic polish: worn lanes are lighter and smoother.",
+    "street": 0.5,
+    "courtyard": 0.0
+   },
+   {
+    "name": "polish_lift",
+    "lo": 0.0,
+    "hi": 0.2,
+    "unit": "",
+    "default": 0.05,
+    "doc": "Brightness added to polished lanes.",
+    "street": 0.0,
+    "courtyard": 0.05
+   },
+   {
+    "name": "polish_rough",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Roughness taken off polished lanes when dry.",
+    "street": 0.2,
+    "courtyard": 0.3
+   },
+   {
+    "name": "water_marks",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Dried puddle rings and tide lines in low spots.",
+    "street": 0.4,
+    "courtyard": 0.3
+   },
+   {
+    "name": "rust_halo",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Rust stain on the ground round the foot of iron posts and pipes (10 to 25 cm).",
+    "street": 0.7,
+    "courtyard": 0.0
+   },
+   {
+    "name": "rust_halo_m",
+    "lo": 0.05,
+    "hi": 0.4,
+    "unit": "m",
+    "default": 0.18,
+    "doc": "Reach of the rust halo.",
+    "street": 0.18,
+    "courtyard": 0.18
+   },
+   {
+    "name": "drum_ring",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Rust bleed ring on the ground at the foot of the fire drum (the ash ring is already in the rubbish layer).",
+    "street": 0.5,
+    "courtyard": 0.0
+   },
+   {
+    "name": "tar_patches",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Tar patches over lost setts: scalloped edges, speckle of chippings.",
+    "street": 0.5,
+    "courtyard": 0.0
+   },
+   {
+    "name": "tar_max_share",
+    "lo": 0.0,
+    "hi": 0.06,
+    "unit": "",
+    "default": 0.03,
+    "doc": "Ceiling on tar patches as a share of road area (2 to 4 %).",
+    "street": 0.03,
+    "courtyard": 0.0
+   },
+   {
+    "name": "tar_splash",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Splashes of tar at the kerb foot.",
+    "street": 0.3,
+    "courtyard": 0.0
+   },
+   {
+    "name": "tar_gloss",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "How glossy new tar is (near black when wet).",
+    "street": 0.6,
+    "courtyard": 0.6
+   },
+   {
+    "name": "scrub_strip",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Pale scrubbed strip on the flags in front of a whitened or scrubbed doorstep (reads the same door random as the steps layer).",
+    "street": 0.6,
+    "courtyard": 0.0
+   },
+   {
+    "name": "scrub_strip_m",
+    "lo": 0.2,
+    "hi": 0.8,
+    "unit": "m",
+    "default": 0.4,
+    "doc": "Reach of the scrubbed strip.",
+    "street": 0.4,
+    "courtyard": 0.4
+   },
+   {
+    "name": "show_part",
+    "lo": 0,
+    "hi": 9,
+    "unit": "",
+    "default": 0,
+    "doc": "Checking view only: 0 = the whole Mask output; 1 film, 2 polish, 3 water marks, 4 rust halo, 5 drum ring, 6 tar patches, 7 tar splash, 8 scrub strip.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "film_octaves",
+    "lo": 1,
+    "hi": 6,
+    "unit": "",
+    "default": 3,
+    "doc": "How broken-up the film patches are (noise detail).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "dust",
+    "lo": 0.0,
+    "hi": 0.15,
+    "unit": "",
+    "default": 0.04,
+    "doc": "A thin even dust on all ground that dulls its tone a little at every distance (the film is patchy and gives way to its average far away; this is the part that stays).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "ring_m",
+    "lo": 0.03,
+    "hi": 0.4,
+    "unit": "m",
+    "default": 0.1,
+    "doc": "Width of the dried puddle ring.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "pool_scale_m",
+    "lo": 0.5,
+    "hi": 3.0,
+    "unit": "m",
+    "default": 1.3,
+    "doc": "Size of the shallow dips the dried puddle rings sit in.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "drum_ring_m",
+    "lo": 0.03,
+    "hi": 0.4,
+    "unit": "m",
+    "default": 0.12,
+    "doc": "Width of the rust bleed ring round the fire drum.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "tar_spacing_m",
+    "lo": 2.0,
+    "hi": 15.0,
+    "unit": "m",
+    "default": 6.0,
+    "doc": "Tar patch sites lie on a loose grid of this size.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "tar_patch_m",
+    "lo": 0.3,
+    "hi": 1.6,
+    "unit": "m",
+    "default": 0.75,
+    "doc": "Longest half-size of a tar patch (shrunk so that tar_max_share is never passed).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "tar_weathered",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Share of tar patches that are old, grey and matt (the rest are new, black and glossy).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "tar_chippings",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Strength of the pale chippings speckle on a tar patch.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "splash_m",
+    "lo": 0.1,
+    "hi": 0.6,
+    "unit": "m",
+    "default": 0.25,
+    "doc": "Size of a tar splash at the kerb foot.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "scrub_whitened_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.55,
+    "doc": "Same number as the doorstep layer's whitened_share (copied from the look when the layer is registered).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "scrub_scrubbed_share",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.35,
+    "doc": "Same number as the doorstep layer's scrubbed_share (copied from the look when the layer is registered).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "scrub_lift",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.45,
+    "doc": "How much paler the scrubbed strip on the flags is than the dirty flags round it.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "mark_dots",
+    "lo": 4,
+    "hi": 40,
+    "unit": "",
+    "default": 14,
+    "doc": "Smallest width in plate dots of a stain edge or a ring (they are widened with distance up to Inflate Limit).",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "A"
+ },
+ "groundcracks": {
+  "meta": {
+   "owner": "ground",
+   "group": "WK GROUND CRACKS",
+   "priority": "MUST",
+   "roles": "ground.flag, ground.kerb, ground.sett (hard ground only)",
+   "masks": "edge_dist, seam_dist, cover_dist, footfall, tx_cell (flags, setts), tx_cavity, crown"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 6.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "flag_cracks",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Amount of flag cracking.",
+    "street": 1.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "flag_fine_share",
+    "lo": 0.05,
+    "hi": 0.2,
+    "unit": "",
+    "default": 0.11,
+    "doc": "Share of flags with a fine crack (8 to 15 %).",
+    "street": 0.11,
+    "courtyard": 0.0
+   },
+   {
+    "name": "flag_broken_share",
+    "lo": 0.01,
+    "hi": 0.06,
+    "unit": "",
+    "default": 0.03,
+    "doc": "Share broken in two or three with a gap (2 to 4 %).",
+    "street": 0.03,
+    "courtyard": 0.0
+   },
+   {
+    "name": "flag_tilt_share",
+    "lo": 0.02,
+    "hi": 0.08,
+    "unit": "",
+    "default": 0.04,
+    "doc": "Share tilted or sunk (3 to 6 %).",
+    "street": 0.04,
+    "courtyard": 0.0
+   },
+   {
+    "name": "tilt_lip",
+    "lo": 3.0,
+    "hi": 20.0,
+    "unit": "mm",
+    "default": 8.0,
+    "doc": "Height of the raised edge of a tilted flag (throws a dark shadow line).",
+    "street": 8.0,
+    "courtyard": 8.0
+   },
+   {
+    "name": "corner_chip_share",
+    "lo": 0.03,
+    "hi": 0.15,
+    "unit": "",
+    "default": 0.07,
+    "doc": "Share of flags with a chipped corner.",
+    "street": 0.07,
+    "courtyard": 0.0
+   },
+   {
+    "name": "kerb_chips",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Amount of kerb damage.",
+    "street": 1.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "kerb_chip_share",
+    "lo": 0.1,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.28,
+    "doc": "Share of kerb length with edge chips (20 to 35 %).",
+    "street": 0.28,
+    "courtyard": 0.0
+   },
+   {
+    "name": "kerb_break_share",
+    "lo": 0.0,
+    "hi": 0.15,
+    "unit": "",
+    "default": 0.067,
+    "doc": "Share of kerb stones cracked or broken (1 in 15).",
+    "street": 0.067,
+    "courtyard": 0.0
+   },
+   {
+    "name": "kerb_scuffs",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Pale wheel scuffs on kerb faces.",
+    "street": 0.3,
+    "courtyard": 0.0
+   },
+   {
+    "name": "kerb_joint_open",
+    "lo": 3.0,
+    "hi": 20.0,
+    "unit": "mm",
+    "default": 8.0,
+    "doc": "Width of open, dark kerb joints.",
+    "street": 8.0,
+    "courtyard": 8.0
+   },
+   {
+    "name": "sett_disturb",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 0.7,
+    "doc": "Amount of disturbed setts (tilted, sunk, missing, ash or tar filled).",
+    "street": 0.7,
+    "courtyard": 0.0
+   },
+   {
+    "name": "sett_disturbed_share",
+    "lo": 0.02,
+    "hi": 0.08,
+    "unit": "",
+    "default": 0.04,
+    "doc": "Share of the sett field disturbed (3 to 6 %), gathered round seams, covers and wheel bands.",
+    "street": 0.04,
+    "courtyard": 0.0
+   },
+   {
+    "name": "open_joint_share",
+    "lo": 0.05,
+    "hi": 0.25,
+    "unit": "",
+    "default": 0.14,
+    "doc": "Share of sett joints open and dark (10 to 20 %).",
+    "street": 0.14,
+    "courtyard": 0.0
+   },
+   {
+    "name": "missing_share",
+    "lo": 0.0,
+    "hi": 0.01,
+    "unit": "",
+    "default": 0.003,
+    "doc": "Share of setts missing (dark rectangle).",
+    "street": 0.003,
+    "courtyard": 0.0
+   },
+   {
+    "name": "sunken_patch",
+    "lo": 0.3,
+    "hi": 1.5,
+    "unit": "m",
+    "default": 0.8,
+    "doc": "Length of a sunken patch.",
+    "street": 0.8,
+    "courtyard": 0.8
+   },
+   {
+    "name": "crack_dots",
+    "lo": 2.0,
+    "hi": 8.0,
+    "unit": "",
+    "default": 3.5,
+    "doc": "Smallest crack width in plate dots.",
+    "street": 4.5,
+    "courtyard": 3.5
+   },
+   {
+    "name": "crack_contrast",
+    "lo": 0.04,
+    "hi": 0.2,
+    "unit": "",
+    "default": 0.11,
+    "doc": "Smallest crack contrast.",
+    "street": 0.16,
+    "courtyard": 0.11
+   },
+   {
+    "name": "near_only",
+    "lo": 8.0,
+    "hi": 30.0,
+    "unit": "m",
+    "default": 15.0,
+    "doc": "Cracks fade out beyond this distance.",
+    "street": 20.0,
+    "courtyard": 15.0
+   },
+   {
+    "name": "max_contrast",
+    "lo": 0.4,
+    "hi": 0.9,
+    "unit": "",
+    "default": 0.75,
+    "doc": "Guard: no harsh black grid. Sett joints may not exceed this contrast.",
+    "street": 0.75,
+    "courtyard": 0.75
+   },
+   {
+    "name": "dull",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Cracks are dull so the wet look cannot wash them out.",
+    "street": 0.6,
+    "courtyard": 1.0
+   },
+   {
+    "name": "show_part",
+    "lo": 0,
+    "hi": 12,
+    "unit": "",
+    "default": 0,
+    "doc": "Checking view only: 0 = whole Mask; 1 flag fine cracks, 2 flag broken, 3 flag tilted, 4 flag chipped corners, 5 kerb chips, 6 kerb open joints and cracks, 7 kerb scuffs, 8 setts disturbed, 9 sett open joints; 10 and 11 the flags that were chosen for fine and for broken cracks (whole flag), 12 all sett joints (the length the open-joint share is counted against).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "crack_scale_m",
+    "lo": 0.4,
+    "hi": 2.0,
+    "unit": "m",
+    "default": 0.85,
+    "doc": "Size of the pieces the crack lines run between (about one flag).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "crack_real_mm",
+    "lo": 1,
+    "hi": 8,
+    "unit": "mm",
+    "default": 3,
+    "doc": "Real width of a fine crack, before it is drawn wider for the picture.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "broken_gap_mm",
+    "lo": 2,
+    "hi": 12,
+    "unit": "mm",
+    "default": 5,
+    "doc": "Real width of the gap of a broken flag.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "site_bias",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "How much cracks gather near the kerb, seams and covers rather than anywhere.",
+    "street": 0.9,
+    "courtyard": null
+   },
+   {
+    "name": "chip_m",
+    "lo": 0.02,
+    "hi": 0.15,
+    "unit": "m",
+    "default": 0.05,
+    "doc": "Size of one kerb or flag edge chip.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "chip_depth_mm",
+    "lo": 5,
+    "hi": 40,
+    "unit": "mm",
+    "default": 15,
+    "doc": "Depth of a kerb chip.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "sunk_depth_mm",
+    "lo": 2,
+    "hi": 25,
+    "unit": "mm",
+    "default": 8,
+    "doc": "How far a sunken sett patch lies below its neighbours.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "missing_depth_mm",
+    "lo": 10,
+    "hi": 60,
+    "unit": "mm",
+    "default": 30,
+    "doc": "Depth of a missing sett.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "lip_dark",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.35,
+    "doc": "Darkness of the shadow line along the raised edge of a tilted flag.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "relief",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Strength of the slopes (the Bump): lips of tilted stones, chip notches, crack grooves. 0 = colour and dullness only.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "ref_brightness",
+    "lo": 0.1,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.2,
+    "doc": "Plate brightness of the surface the cracks sit on (a crack_contrast of 0.11 on 0.2 takes the plate down to 0.09).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "open_dark",
+    "lo": 0.0,
+    "hi": 0.6,
+    "unit": "",
+    "default": 0.22,
+    "doc": "How much darker an open joint is than the joint round it (the joint layer already makes joints dark).",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "B"
+ },
+ "groundmoss": {
+  "meta": {
+   "owner": "ground",
+   "group": "WK GROUND MOSS",
+   "priority": "MUST",
+   "roles": "ground.sett, ground.flag, ground.channel, ground.kerb (ground.earth, stone.natural in other sets)",
+   "masks": "moss_site, algae_site, tx_cavity, tx_joint, shade, dampness, footfall, keepclear, existing_growth"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 6.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "joint_share",
+    "lo": 0.03,
+    "hi": 0.3,
+    "unit": "",
+    "default": 0.08,
+    "doc": "Share of joint length carrying painted moss in the best (gutter-side) strip.",
+    "street": 0.1,
+    "courtyard": 0.3
+   },
+   {
+    "name": "shade_bias",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "How much shade favours moss over sun.",
+    "street": 0.6,
+    "courtyard": 0.6
+   },
+   {
+    "name": "ribbon_dots",
+    "lo": 3.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 4.0,
+    "doc": "Smallest moss ribbon width in plate dots (a 1 to 3 cm joint ribbon is drawn wider near the camera).",
+    "street": 6.0,
+    "courtyard": 4.0
+   },
+   {
+    "name": "ribbon_m",
+    "lo": 0.01,
+    "hi": 0.06,
+    "unit": "m",
+    "default": 0.02,
+    "doc": "Real ribbon width.",
+    "street": 0.02,
+    "courtyard": 0.02
+   },
+   {
+    "name": "broken_len",
+    "lo": 0.1,
+    "hi": 0.8,
+    "unit": "m",
+    "default": 0.3,
+    "doc": "Length of a broken ribbon piece.",
+    "street": 0.3,
+    "courtyard": 0.4
+   },
+   {
+    "name": "algae_fan",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Dark green-black algae fan under every downpipe outlet and gully.",
+    "street": 0.6,
+    "courtyard": 0.3
+   },
+   {
+    "name": "algae_radius",
+    "lo": 0.3,
+    "hi": 1.0,
+    "unit": "m",
+    "default": 0.55,
+    "doc": "Reach of an algae fan.",
+    "street": 0.55,
+    "courtyard": 0.55
+   },
+   {
+    "name": "liverwort",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "The one bright green: 0 to 2 patches of 10 to 40 cm in damp shade.",
+    "street": 0.1,
+    "courtyard": 0.0
+   },
+   {
+    "name": "far_band",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Beyond the pieces distance: a slightly greener, darker strip along gutter and wall foot instead of single plants.",
+    "street": 0.5,
+    "courtyard": 0.3
+   },
+   {
+    "name": "far_band_m",
+    "lo": 0.2,
+    "hi": 0.8,
+    "unit": "m",
+    "default": 0.45,
+    "doc": "Width of the far band.",
+    "street": 0.45,
+    "courtyard": 0.45
+   },
+   {
+    "name": "moss_value",
+    "lo": 0.25,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.36,
+    "doc": "Plate brightness of dry moss (lighter than the stone; painted values under 0.12 are black on the film).",
+    "street": 0.36,
+    "courtyard": 0.36
+   },
+   {
+    "name": "show_part",
+    "lo": 0,
+    "hi": 9,
+    "unit": "",
+    "default": 0,
+    "doc": "Checking view only: 0 = whole Mask; 1 joint moss, 2 patch moss, 3 algae fans, 4 liverwort, 5 far band, 6 all joints where moss could grow (the length the moss share is counted against).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "patch_moss",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Moss as soft patches on open ground (for sets with no joints, e.g. earth, gravel, stones). A set that wants moss only in joints gives the role a multiplier of 0.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "patch_scale_m",
+    "lo": 0.2,
+    "hi": 2.0,
+    "unit": "m",
+    "default": 0.7,
+    "doc": "Size of a moss patch on open ground.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "moss_lift",
+    "lo": 1.0,
+    "hi": 6.0,
+    "unit": "",
+    "default": 2.2,
+    "doc": "How much lighter than the stone beneath the dry moss is (in scene light; the painter weakens colour, so moss is made stronger than wanted).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "moss_rim",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "A paler rim on the moss edge (a painted look).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "liverwort_m",
+    "lo": 0.1,
+    "hi": 0.6,
+    "unit": "m",
+    "default": 0.25,
+    "doc": "Size of a liverwort patch.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "algae_dark",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.55,
+    "doc": "How dark the algae film is (1 = near black-green).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "outlet_reach",
+    "lo": 0.05,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.7,
+    "doc": "How close to a wall (0 touching, 1 = the set's wall reach) a standing foot must be to count as a downpipe outlet; posts stand farther out.",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "C"
+ },
+ "iron": {
+  "meta": {
+   "owner": "ground",
+   "group": "WK IRON",
+   "priority": "MUST",
+   "roles": "iron, iron.post, iron.pipe, fire (cast iron, steel, drum, rails)",
+   "masks": "height, object zmin and zmax, drip_kind, vertical_foot"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 6.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "rust_cover",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Share of the lower part of an iron object with paint chipped back to rust.",
+    "street": 0.5,
+    "courtyard": 0.0
+   },
+   {
+    "name": "rust_height",
+    "lo": 0.2,
+    "hi": 1.2,
+    "unit": "m",
+    "default": 0.55,
+    "doc": "How high rust reaches from the foot of a post.",
+    "street": 0.55,
+    "courtyard": 0.55
+   },
+   {
+    "name": "chip_share",
+    "lo": 0.1,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Share of paint chipped in the rust zone.",
+    "street": 0.3,
+    "courtyard": 0.3
+   },
+   {
+    "name": "collar_spacing",
+    "lo": 1.2,
+    "hi": 2.5,
+    "unit": "m",
+    "default": 1.9,
+    "doc": "Spacing of pipe collars and joints where rust rings sit.",
+    "street": 1.9,
+    "courtyard": 1.9
+   },
+   {
+    "name": "collar_rust",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Share of collars with rust.",
+    "street": 0.5,
+    "courtyard": 0.0
+   },
+   {
+    "name": "metallic_drop",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Rust lowers Metallic by up to this fraction (cast iron 0.6, steel 0.5, brass 0.9).",
+    "street": 0.6,
+    "courtyard": 0.6
+   },
+   {
+    "name": "heat_scale",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Heat-blued scale on the fire drum only.",
+    "street": 0.3,
+    "courtyard": 0.0
+   },
+   {
+    "name": "soot_halo",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "Sooty halo above the drum vent holes and black rim.",
+    "street": 0.5,
+    "courtyard": 0.0
+   },
+   {
+    "name": "paint_keep",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Share of the original paint kept (black or dark green).",
+    "street": 0.6,
+    "courtyard": 0.6
+   },
+   {
+    "name": "rust_run",
+    "lo": 0.05,
+    "hi": 0.3,
+    "unit": "m",
+    "default": 0.12,
+    "doc": "Length of rust runs below fixings.",
+    "street": 0.12,
+    "courtyard": 0.12
+   },
+   {
+    "name": "show_part",
+    "lo": 0,
+    "hi": 9,
+    "unit": "",
+    "default": 0,
+    "doc": "Checking view only: 0 = whole Mask; 1 foot rust, 2 collar rings, 3 shoe streak, 4 base ring, 5 drum rust, 6 heat scale, 7 soot.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "streak_m",
+    "lo": 0.01,
+    "hi": 0.08,
+    "unit": "m",
+    "default": 0.025,
+    "doc": "Width of a vertical rust or wet streak.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "rust_bright",
+    "lo": 1.0,
+    "hi": 3.5,
+    "unit": "",
+    "default": 1.7,
+    "doc": "Brightness of rust against the iron paint it lies on (1 = as dark as the paint).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "grime_dark",
+    "lo": 0.0,
+    "hi": 0.2,
+    "unit": "",
+    "default": 0.06,
+    "doc": "A thin even coat of soot on all iron: it darkens the paint a little at every distance.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "shoe_streak",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Dark wet streak at the foot (shoe) of a downpipe.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "shoe_height",
+    "lo": 0.1,
+    "hi": 1.0,
+    "unit": "m",
+    "default": 0.45,
+    "doc": "How high the dark wet streak at the pipe shoe reaches.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "base_ring",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.7,
+    "doc": "Rust ring at the base flange of a post.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "base_ring_m",
+    "lo": 0.05,
+    "hi": 0.3,
+    "unit": "m",
+    "default": 0.12,
+    "doc": "Height of the base-flange ring.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "collar_m",
+    "lo": 0.02,
+    "hi": 0.15,
+    "unit": "m",
+    "default": 0.06,
+    "doc": "Height of a rust ring at a collar.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "drum_rust",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.7,
+    "doc": "Share of a drum covered by rust and old paint (60 to 80 percent).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "rim_soot_m",
+    "lo": 0.03,
+    "hi": 0.3,
+    "unit": "m",
+    "default": 0.12,
+    "doc": "Height of the black soot rim at the top of a drum.",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "A"
+ },
+ "growth": {
+  "meta": {
+   "owner": "growth",
+   "group": "WK GROWTH (3D pieces)",
+   "priority": "MUST",
+   "roles": "ground.sett, ground.flag, ground.channel, ground.kerb (scatter targets; others by settings)",
+   "masks": "weed_site, moss_site, keepclear, footfall, rubbish_heap, wall_dist, seam_dist, shade, dampness, existing_growth"
+  },
+  "rows": [
+   {
+    "name": "amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "seed",
+    "lo": 0.0,
+    "hi": 100.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)",
+    "street": 0.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "inflate_limit",
+    "lo": 1.0,
+    "hi": 12.0,
+    "unit": "",
+    "default": 6.0,
+    "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone.",
+    "street": 6.0,
+    "courtyard": 6.0
+   },
+   {
+    "name": "fade_start",
+    "lo": 5.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 12.0,
+    "doc": "Metres from the camera where fine detail starts to give way to the average tone.",
+    "street": 12.0,
+    "courtyard": 12.0
+   },
+   {
+    "name": "fade_end",
+    "lo": 15.0,
+    "hi": 80.0,
+    "unit": "m",
+    "default": 40.0,
+    "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\").",
+    "street": 40.0,
+    "courtyard": 40.0
+   },
+   {
+    "name": "wet_follow",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness.",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "weeds_amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Amount of weed pieces (grass tufts, rosettes). 0 = none.",
+    "street": 1.0,
+    "courtyard": 0.1
+   },
+   {
+    "name": "cushions_amount",
+    "lo": 0.0,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Amount of moss cushion pieces. 0 = none.",
+    "street": 0.6,
+    "courtyard": 1.5
+   },
+   {
+    "name": "distance",
+    "lo": 8.0,
+    "hi": 40.0,
+    "unit": "m",
+    "default": 18.0,
+    "doc": "Pieces are laid only up to this far from the camera (the camera of the picture being drawn).",
+    "street": 18.0,
+    "courtyard": 25.0
+   },
+   {
+    "name": "distance_fade",
+    "lo": 2.0,
+    "hi": 10.0,
+    "unit": "m",
+    "default": 5.0,
+    "doc": "Length of the fade-out at the pieces distance.",
+    "street": 5.0,
+    "courtyard": 5.0
+   },
+   {
+    "name": "piece_size",
+    "lo": 0.5,
+    "hi": 2.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Size of every piece (1 = as built to the period sizes).",
+    "street": 1.0,
+    "courtyard": 1.0
+   },
+   {
+    "name": "weed_cover",
+    "lo": 0.0,
+    "hi": 0.03,
+    "unit": "",
+    "default": 0.01,
+    "doc": "Green cover of weeds as a share of ground area inside the pieces distance (0.5 to 2 % in 1926).",
+    "street": 0.01,
+    "courtyard": 0.001
+   },
+   {
+    "name": "gutter_tuft_share",
+    "lo": 0.02,
+    "hi": 0.1,
+    "unit": "",
+    "default": 0.05,
+    "doc": "Share of gutter-side joint length with a visible tuft (3 to 8 %).",
+    "street": 0.05,
+    "courtyard": 0.0
+   },
+   {
+    "name": "wall_foot_share",
+    "lo": 0.01,
+    "hi": 0.08,
+    "unit": "",
+    "default": 0.035,
+    "doc": "Share of wall-foot length with a plant (2 to 5 %).",
+    "street": 0.035,
+    "courtyard": 0.0
+   },
+   {
+    "name": "cushion_cover",
+    "lo": 0.0,
+    "hi": 0.03,
+    "unit": "",
+    "default": 0.008,
+    "doc": "Moss cushion cover as a share of ground area inside the pieces distance.",
+    "street": 0.008,
+    "courtyard": 0.02
+   },
+   {
+    "name": "min_spacing",
+    "lo": 0.05,
+    "hi": 0.4,
+    "unit": "m",
+    "default": 0.15,
+    "doc": "Nearest two pieces of one kind may be.",
+    "street": 0.15,
+    "courtyard": 0.15
+   },
+   {
+    "name": "toadflax_clumps",
+    "lo": 0.0,
+    "hi": 3.0,
+    "unit": "",
+    "default": 0.0,
+    "doc": "Ivy-leaved toadflax trails on damp mortar: 0 to 2 clumps in the whole street.",
+    "street": 1.0,
+    "courtyard": 0.0
+   },
+   {
+    "name": "rubbish_thin_max",
+    "lo": 0.2,
+    "hi": 0.7,
+    "unit": "",
+    "default": 0.45,
+    "doc": "Weeds grow at full density through rubbish thinner than this mask value.",
+    "street": 0.45,
+    "courtyard": 0.45
+   },
+   {
+    "name": "rubbish_heap_min",
+    "lo": 0.5,
+    "hi": 0.95,
+    "unit": "",
+    "default": 0.75,
+    "doc": "No weeds (and no moss above 0.6) on rubbish heavier than this mask value; between the two it thins out linearly.",
+    "street": 0.75,
+    "courtyard": 0.75
+   },
+   {
+    "name": "dead_grass_share",
+    "lo": 0.0,
+    "hi": 0.5,
+    "unit": "",
+    "default": 0.15,
+    "doc": "Share of grass tufts that are dead and straw-coloured.",
+    "street": 0.15,
+    "courtyard": 0.15
+   },
+   {
+    "name": "flower_share",
+    "lo": 0.0,
+    "hi": 0.3,
+    "unit": "",
+    "default": 0.08,
+    "doc": "Share of dandelions in flower or seed-clock (a few only).",
+    "street": 0.08,
+    "courtyard": 0.0
+   },
+   {
+    "name": "max_pieces",
+    "lo": 500.0,
+    "hi": 6000.0,
+    "unit": "",
+    "default": 2500.0,
+    "doc": "Hard ceiling on pieces in one picture (drawing time).",
+    "street": 2500.0,
+    "courtyard": 2500.0
+   },
+   {
+    "name": "wet_dark",
+    "lo": 0.4,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.7,
+    "doc": "Colour multiple of wet pieces (richer green, darker).",
+    "street": 0.7,
+    "courtyard": 0.7
+   },
+   {
+    "name": "tilt_random",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.5,
+    "doc": "How much each piece leans.",
+    "street": 0.5,
+    "courtyard": 0.5
+   },
+   {
+    "name": "piece_inflate_limit",
+    "lo": 1.0,
+    "hi": 6.0,
+    "unit": "",
+    "default": 3.0,
+    "doc": "How many times bigger than real a plant may be drawn so that it stays at least min_dots plate dots wide at a distance (the growth layer's own, lower limit).",
+    "street": 3.0,
+    "courtyard": 3.0
+   },
+   {
+    "name": "moss_smother_from",
+    "lo": 0.1,
+    "hi": 0.6,
+    "unit": "",
+    "default": 0.3,
+    "doc": "Rubbish value above which moss cushions start to thin out.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "moss_smother_to",
+    "lo": 0.3,
+    "hi": 0.95,
+    "unit": "",
+    "default": 0.6,
+    "doc": "Rubbish value at which moss cushions have stopped.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "existing_avoid",
+    "lo": 0.0,
+    "hi": 1.0,
+    "unit": "",
+    "default": 0.8,
+    "doc": "How much the places that already have growth (the set's existing_growth) are left alone: 0 grow on it, 1 none on it.",
+    "street": null,
+    "courtyard": 0.7
+   },
+   {
+    "name": "avoid_m",
+    "lo": 0.0,
+    "hi": 0.3,
+    "unit": "m",
+    "default": 0.05,
+    "doc": "Nearest a plant may stand to a 3D piece of the objects named in growth.avoid_pieces_of (litter).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "colour_gain",
+    "lo": 0.4,
+    "hi": 2.5,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Multiplies the colour of every piece (tuning the plate brightness).",
+    "street": 1.0,
+    "courtyard": 0.15
+   },
+   {
+    "name": "min_dots_scale",
+    "lo": 0.5,
+    "hi": 3.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Multiplies every kind's smallest width in plate dots (species.json min_dots: 6 for weeds, 5 for moss) that a plant is widened to at a distance (never past piece_inflate_limit).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "colour_sat",
+    "lo": 0.2,
+    "hi": 1.5,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Multiplies the colour saturation of every piece (1 = species.json as written).",
+    "street": null,
+    "courtyard": 1.2
+   },
+   {
+    "name": "show_kind",
+    "lo": -1,
+    "hi": 20,
+    "unit": "",
+    "default": -1,
+    "doc": "Checking view only: -1 all kinds, otherwise only the kind with that number.",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "realise",
+    "lo": 0,
+    "hi": 1,
+    "unit": "",
+    "default": 0,
+    "doc": "Turn the instances into plain meshes (1) or keep instances (0).",
+    "street": null,
+    "courtyard": null
+   },
+   {
+    "name": "cand_density_scale",
+    "lo": 0.3,
+    "hi": 3.0,
+    "unit": "",
+    "default": 1.0,
+    "doc": "Multiplier of the candidate points of every kind (finer choice of places, slower).",
+    "street": null,
+    "courtyard": null
+   }
+  ],
+  "slot": "C"
+ }
+}

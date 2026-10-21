@@ -1,0 +1,79 @@
+{
+ "set": "pit_village_street",
+ "scene": "lockout",
+ "pack": true,
+ "feature_dirs": [],
+ "jobs": [
+  {
+   "name": "today_lockout",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    270,
+    480,
+    4
+   ],
+   "group": "today",
+   "scene": "lockout"
+  },
+  {
+   "name": "final_lockout_B_wet_kit",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    64
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "keep_png": true,
+   "pieces_json": true
+  },
+  {
+   "name": "final_lockout_B_dry_kit",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    64
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "keep_png": true,
+   "pieces_json": false
+  },
+  {
+   "name": "final_lockout_B_wet_kit_behind",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    64
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "keep_png": true,
+   "pieces_json": false,
+   "hide_roles": [
+    "prop",
+    "fire",
+    "sign"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,120 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "today_street",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "today",
+   "scene": "street"
+  },
+  {
+   "name": "zero_base",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    16
+   ],
+   "group": "zero",
+   "plate_height": 2730,
+   "keep_png": true
+  },
+  {
+   "name": "zero_base_again",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    16
+   ],
+   "group": "zero",
+   "plate_height": 2730,
+   "keep_png": true
+  },
+  {
+   "name": "zero_after_layer_off",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:none",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    16
+   ],
+   "group": "zero",
+   "plate_height": 2730,
+   "keep_png": true
+  },
+  {
+   "name": "zero_growth_amount0",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    16
+   ],
+   "group": "zero",
+   "plate_height": 2730,
+   "keep_png": true,
+   "dials": {
+    "growth": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "name": "zero_growth_weeds0_cushions0",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    16
+   ],
+   "group": "zero",
+   "plate_height": 2730,
+   "keep_png": true,
+   "dials": {
+    "growth": {
+     "amount": 1.0,
+     "weeds_amount": 0.0,
+     "cushions_amount": 0.0
+    }
+   }
+  }
+ ]
+}

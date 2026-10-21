@@ -1,0 +1,138 @@
+{
+ "kind": "street",
+ "masks": [],
+ "ground_masks": [],
+ "cameras": {
+  "cot_A": {
+   "loc": [
+    1.6,
+    2.4,
+    1.3
+   ],
+   "look": [
+    4.15,
+    6.5,
+    1.7
+   ],
+   "fov": 46
+  },
+  "cot_B": {
+   "loc": [
+    1.0,
+    1.0,
+    1.5
+   ],
+   "look": [
+    4.15,
+    6.8,
+    1.6
+   ],
+   "fov": 48
+  },
+  "cot_C": {
+   "loc": [
+    2.1,
+    3.4,
+    1.15
+   ],
+   "look": [
+    4.15,
+    6.6,
+    1.55
+   ],
+   "fov": 46
+  },
+  "cot_D": {
+   "loc": [
+    0.8,
+    6.2,
+    1.5
+   ],
+   "look": [
+    4.15,
+    6.3,
+    1.2
+   ],
+   "fov": 52
+  }
+ },
+ "jobs": [
+  {
+   "name": "prev_cot_A_eevee",
+   "engine": "eevee",
+   "camera": "cot_A",
+   "light": "A",
+   "state": "wet",
+   "w": 800,
+   "h": 600,
+   "samples": 16,
+   "look": "rubbish"
+  },
+  {
+   "name": "prev_cot_B_eevee",
+   "engine": "eevee",
+   "camera": "cot_B",
+   "light": "A",
+   "state": "wet",
+   "w": 800,
+   "h": 600,
+   "samples": 16,
+   "look": "rubbish"
+  },
+  {
+   "name": "prev_cot_C_eevee",
+   "engine": "eevee",
+   "camera": "cot_C",
+   "light": "A",
+   "state": "wet",
+   "w": 800,
+   "h": 600,
+   "samples": 16,
+   "look": "rubbish"
+  },
+  {
+   "name": "prev_cot_D_eevee",
+   "engine": "eevee",
+   "camera": "cot_D",
+   "light": "A",
+   "state": "wet",
+   "w": 800,
+   "h": 600,
+   "samples": 16,
+   "look": "rubbish"
+  },
+  {
+   "name": "smoke_main_wet_cycles",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 128,
+   "look": "rubbish"
+  },
+  {
+   "name": "smoke_main_wet_eevee",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 64,
+   "look": "rubbish"
+  },
+  {
+   "name": "smoke_cotA_cycles",
+   "engine": "cycles",
+   "camera": "cot_A",
+   "light": "A",
+   "state": "wet",
+   "w": 800,
+   "h": 600,
+   "samples": 128,
+   "look": "rubbish"
+  }
+ ]
+}

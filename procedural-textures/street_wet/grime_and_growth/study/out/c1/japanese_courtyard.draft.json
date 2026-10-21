@@ -1,0 +1,105 @@
+{
+  "_what_this_is": "DRAFT starter values for kits/weathering/sets/japanese_courtyard.json, written from the study '12b Second set - the Japanese courtyard.md'. The key names are a PROPOSAL (the kit's schema is not built yet); every number comes from the saved scene or the build script, or is marked GUESS. Nothing in the kit code should repeat any of this.",
+
+  "set": "japanese_courtyard",
+  "scene_file": "scratchpad/astra-work/out/courtyard_final.blend",
+  "built_by": "/home/user/Music/japanese-courtyard/build_courtyard.py with the Astra add-on 0.2.0 (read only)",
+  "units": "metres, z up",
+  "preset": "mossy_courtyard",
+
+  "roles": {
+    "_how_to_read": "A role is a kind of surface. Each role lists how to find its objects or materials. Lists are tried in order; first rule that matches wins. 'material_props' reads a custom property the add-on writes on its own materials.",
+    "ground.earth": {"objects": ["^Astra / Courtyard receiving ground$"], "note": "material 'Moss and earth' (noise colour + bump). The add-on's moss clumps and pebbles sit on it."},
+    "ground.gravel": {"objects": ["^Raked gravel court$"], "note": "31,486 faces, rake lines are real 1.6 cm relief; weathering must not flatten them. Bounds x 0.9..9.1, y -5.9..1.9."},
+    "growth.existing": {"objects": ["^Astra / moss grouped bodies$", "^Astra / pebbles grouped bodies$"], "note": "real geometry already grown by the add-on: 32,365 moss faces, 5,654 pebble faces. Treated as a density picture the kit moss must not double."},
+    "stone.natural": {"objects": ["^Stepping stone \\d+$", "^Veranda step", "^Pond edge stone \\d+$", "^Rock \\d+$", "^Gravel rock \\d+$", "^Lantern (base|post|gallery|firebox|cap)$", "^Water basin$", "^Bridge pier \\d+$"],
+                       "material_props": {"ct_material_role": "stone"}, "note": "42 separate add-on materials, one per stone, each a 'FOUNDRY / Wet Stone' group with no Principled box on the surface: needs the adapter. Stones are 61-72 faces after the add-on's modifiers."},
+    "stone.dressed": {"objects": ["^Stone plinth$", "^Lantern finial$"], "note": "plain noise material 'Plinth stone'. The plinth is a 10.9 x 5.6 m slab, top at z 0.55."},
+    "timber.deck": {"objects": ["^Astra / varied planks"], "note": "8 plank runs: .000-.002 = veranda (planks run along y, 1.8 m), .003-.007 = bridge (planks run across, 1.05 m). One plain Principled material per tone, no grain in the material; grain direction must come from the mesh."},
+    "timber.frame": {"objects": ["^Hall posts$", "^Hall beams$", "^Eave soffit$", "^Shoji bars$"], "note": "'Dark timber' and 'Beam timber' noise materials; posts stand on the deck at z 0.55; lattice bars are 2.8 cm."},
+    "roof.tile": {"objects": ["^Hall roof$", "^CT / Ceramic pan prototype$"], "material_props": {"ct_material_role": "ceramic"},
+                  "note": "geometry nodes: the base mesh has 42 faces (timber deck + ridge); the tiles are 688 INSTANCES of one hidden 12-face tile (0.30 x 0.66 x 0.22 m). Layers must read the surface in the shader or work on a realised copy."},
+    "roof.deck": {"materials": ["^CT / Timber painterly surface$"], "material_props": {"ct_material_role": "timber"}},
+    "wall.plaster": {"objects": ["^Hall plaster$", "^Back wall, (left|right)$", "^Right wall behind hall$"], "note": "'Plaster wall' noise material; boxes of 6 faces; garden walls 0.3 m thick, 2.1-2.2 m tall."},
+    "wall.cap": {"objects": ["^(Back wall, (left|right)|Right wall behind hall) cap$"], "note": "0.5 m wide dark tiled cap, 0.1 m overhang each side of the 0.3 m wall: the run-off source for the wall faces."},
+    "bamboo": {"objects": ["^Bamboo fence$", "^Bamboo stalks$"], "note": "leave alone in round one (not enough pixels: 0.5 % of the photo)."},
+    "bark": {"objects": ["^(Maple|Pine) (trunk|branch|limb)"], "note": "leave alone in round one (0.4 %)."}
+  },
+
+  "never_weather": {
+    "objects": ["^Shoji paper$", "^Open room back$", "^Lantern window glow$", "^Hills, ", "^Dark plain$", "^Maple leaves$", "^Maple inner mass$", "^Pine pads$", "^Bamboo leaves$", "^Fallen leaves$", "^Lily pads$", "^Lotus blossoms$", "^Courtyard ground source$", "^CT / "],
+    "materials": ["^Shoji paper", "^Open room", "^Lantern flame", "haze$", "^Far hill$", "^Maple", "^Pine needles$", "^Fallen leaves$", "^Lily pad$", "^Lotus blossom$"],
+    "own_layer_later": ["^Pond water$", "^Basin water$"],
+    "note": "6 glow-only materials, 6 leaf-type materials (vertex colour, some with a see-through mix). 'CT / ' objects include a hidden tile prototype that carries the roof tile material: hook the MATERIAL, skip the OBJECT for any measuring."
+  },
+
+  "geometry": {
+    "ground_objects": ["^Astra / Courtyard receiving ground$", "^Raked gravel court$"],
+    "ground_picture": {"x": [-11.0, 11.0], "y": [-8.5, 12.5], "step_m": 0.1, "note": "ground height from a downward ray at each dot; the ground source object is hidden and must be skipped."},
+    "walls": {"objects": ["wall.plaster"], "frame": "each wall is an axis-aligned box in world space (no turned copies, no shared meshes), so wall pictures can be made in world coordinates"},
+    "ledges_and_drips": {
+      "sources": [
+        {"what": "roof eave line", "from": "roof.tile lowest edge", "found_by": "lowest up-facing edge of the evaluated roof, 0.3 m wide tile rows", "drops_to": "ground and plinth in front of the hall", "note": "front eave at about y 4.4, z 3.2; the drip line lands on the bank between pond and plinth (the Japanese 'amaochi')"},
+        {"what": "wall cap overhang", "from": "wall.cap", "drops_to": "both faces of each garden wall", "overhang_m": 0.1},
+        {"what": "lantern roof (kasa)", "from": "Lantern cap", "drops_to": "Lantern gallery, firebox and post below", "note": "0.96 m wide cap over a 0.46 m firebox"},
+        {"what": "veranda edge", "from": "timber.deck front edge", "drops_to": "plinth face and step stones"}]
+    },
+    "water": {
+      "objects": ["^Pond water$", "^Basin water$"],
+      "level_z": -0.12,
+      "note": "the pond water is one big plane (8.2 x 6.2 m) lying just under the shore; the visible shore is where the GROUND crosses z -0.12. The water edge picture must come from the ground height picture and the level, not from the water object's outline. Pond centre (-3.0, 1.0), radii 3.3 x 2.5, turned 10 degrees; bank stones sit on the shore. Basin water is a 0.22 m disc on the water basin stone."
+    },
+    "footfall": [
+      {"id": "stepping_stone_path", "kind": "polyline", "points": [[4.3, -5.6], [3.2, -3.1], [2.4, -1.0], [2.0, 0.9], [2.2, 2.8]], "width_m": 1.15, "feather_m": 0.5, "source": "the add-on landscape spec 'paths'"},
+      {"id": "zigzag_bridge", "kind": "polyline", "points": [[-0.55, -0.6], [-2.0, 1.0], [-3.9, 0.15], [-5.95, 1.55]], "width_m": 1.05},
+      {"id": "veranda_front", "kind": "rect", "min": [-5.25, 4.6], "max": [5.65, 6.4], "note": "the walking strip along the front of the hall"},
+      {"id": "gravel_court", "kind": "rect", "min": [0.9, -5.9], "max": [9.1, 1.9], "traffic": 0.0, "note": "raked, nobody walks on it: no footfall, only the stepping stones across it"}
+    ],
+    "existing_growth": {"objects": ["growth.existing"], "avoid_doubling": true, "note": "the add-on grew moss from 7 hand-placed patches: front-left (-7.4,-3.0), hill (-8.2,6.0), maple root (-6.9,2.0), rocks (-3.4,4.0), lantern (1.0,1.4), gravel islands (5.9,-2.2), path edge (3.9,-3.3). In the study the add-on's moss matched year-round shade only weakly (rank match +0.15 over land)."}
+  },
+
+  "light": {
+    "sun_lamps": [{"name": "Golden hour sun", "toward_sun": [-0.944, -0.244, 0.223]}],
+    "other_lamps": ["Lantern light (point, 120 W)", "Hall glow 0-3 (area)", "Cool sky fill (disc area, 3500)"],
+    "shade_model": {"mode": "year_sun_and_openness", "latitude_deg": 35.0, "north": "+y", "note": "ASSUMPTION: the hall faces south (-y), the usual way for a hall looking over a garden, and the golden-hour sun low in the west (-x) fits that. The user should confirm. If the set has no real north, set 'mode' to 'declared' and give a shade-side vector."},
+    "sun_positions_used_in_study": 48
+  },
+
+  "scale": {
+    "plank_m": {"bridge_width": 0.15, "veranda_width": 0.26, "gap": 0.012},
+    "roof_tile_m": [0.30, 0.66],
+    "typical_stone_m": [0.6, 0.9],
+    "moss_clump_radius_m": 0.14, "pebble_radius_m": 0.07,
+    "gravel_rake_pitch_m": 0.17, "gravel_rake_relief_m": 0.016,
+    "bridge_deck_top_z": 0.20, "veranda_floor_z": 0.55, "eave_z": 3.2, "ridge_z": 4.68
+  },
+
+  "cameras": [
+    {"name": "Camera", "location": [-5.2, -5.6, 3.0], "target": [1.0, 3.9, 1.0], "hfov_deg": 69.4, "photo_px": [2400, 1600],
+     "note": "the only camera in the scene; a plate for the film would be another camera (tall plate shape): list it here"}
+  ],
+  "plate": {"engine": "EEVEE", "tested": "1200 x 800, 48 samples: 1.2 s on the rented card; the scene was built for Cycles but EEVEE draws it (see study)", "painter_scale": 0.45},
+
+  "hook": {
+    "skip_if_emission_strength_above": 0.0,
+    "add_on_groups": {"adapter": "rebuild one Principled from the group's Albedo, Roughness and Normal outputs, copy the other plain numbers (Specular IOR Level 0.4, IOR 1.5 ...) from the Principled inside the group",
+                      "groups": ["FOUNDRY / Wet Stone", "FOUNDRY / Wood"], "tested": "46 of 46 materials, picture identical in Cycles (0.0 largest difference in float), within one step of 255 on 0.8 % of dots in EEVEE"}
+  },
+
+  "palette_from_the_scene": {
+    "note": "so that kit growth matches what is already there",
+    "add_on_moss_tones_linear": [[0.035, 0.075, 0.022], [0.085, 0.15, 0.04], [0.15, 0.22, 0.065], [0.055, 0.105, 0.03]],
+    "ground_ramp_linear": [[0.07, 0.05, 0.03], [0.05, 0.15, 0.035]],
+    "gravel_ramp_linear": [[0.115, 0.092, 0.068], [0.25, 0.205, 0.155]],
+    "plaster_ramp_linear": [[0.62, 0.585, 0.52], [0.80, 0.765, 0.69]],
+    "roof_tile_linear": {"base": [0.013, 0.02, 0.027], "shadow": [0.004, 0.007, 0.009], "highlight": [0.051, 0.078, 0.089]},
+    "stone_linear": {"base": [0.078, 0.113, 0.113], "shadow": [0.01, 0.036, 0.051], "highlight": [0.223, 0.196, 0.107]},
+    "plank_tone_linear_after_build_shim": [[0.13, 0.078, 0.05], [0.17, 0.107, 0.068], [0.204, 0.136, 0.086], [0.148, 0.094, 0.055], [0.229, 0.155, 0.101], [0.179, 0.116, 0.072]]
+  },
+
+  "plate_brightness_measured": {
+    "note": "mean brightness of each family in the 1200 x 800 EEVEE picture (0 black .. 1 white); share of dots under 0.13 is the zone the stage crushes",
+    "roof.tile": {"mean": 0.14, "under_0.13": 0.47}, "timber (all wood)": {"mean": 0.31, "under_0.13": 0.15}, "stone.natural": {"mean": 0.37, "under_0.13": 0.0},
+    "wall.plaster": {"mean": 0.64, "under_0.13": 0.0}, "ground.earth": {"mean": 0.27, "under_0.13": 0.02}, "ground.gravel": {"mean": 0.41, "under_0.13": 0.0}
+  }
+}

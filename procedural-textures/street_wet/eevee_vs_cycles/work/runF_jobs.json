@@ -1,0 +1,79 @@
+{
+ "kind": "street",
+ "masks": [],
+ "ground_masks": [],
+ "cameras": {
+  "brick_A": {
+   "loc": [
+    -1.0,
+    0.3,
+    1.5
+   ],
+   "look": [
+    -4.15,
+    6.1,
+    1.6
+   ],
+   "fov": 48
+  },
+  "brick_B": {
+   "loc": [
+    -1.6,
+    2.6,
+    1.35
+   ],
+   "look": [
+    -4.15,
+    6.4,
+    1.6
+   ],
+   "fov": 46
+  }
+ },
+ "jobs": [
+  {
+   "name": "brickA_wet_eevee",
+   "engine": "eevee",
+   "camera": "brick_A",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 64,
+   "look": "rubbish"
+  },
+  {
+   "name": "brickA_wet_cycles",
+   "engine": "cycles",
+   "camera": "brick_A",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 512,
+   "look": "rubbish"
+  },
+  {
+   "name": "brickB_wet_eevee",
+   "engine": "eevee",
+   "camera": "brick_B",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 64,
+   "look": "rubbish"
+  },
+  {
+   "name": "brickB_wet_cycles",
+   "engine": "cycles",
+   "camera": "brick_B",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 512,
+   "look": "rubbish"
+  }
+ ]
+}

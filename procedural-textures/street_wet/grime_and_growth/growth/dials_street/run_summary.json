@@ -1,0 +1,119 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "jobs": 17,
+ "seconds_total": 21.4,
+ "registered": {
+  "walls.apply_walls": [
+   "foot",
+   "paint",
+   "runoff",
+   "soot",
+   "steps",
+   "wallcracks",
+   "wallgrowth"
+  ],
+  "ground.apply_ground": [
+   "dirt",
+   "groundcracks",
+   "groundmoss",
+   "iron"
+  ],
+  "growth.apply_growth": [
+   "growth"
+  ]
+ },
+ "register_errors": {},
+ "growth": {
+  "timings": {
+   "build_s": 0.34,
+   "calibrate_s": 0.28
+  },
+  "notes": [
+   "population toad: no plants even at gain 64, target 1.0 not reachable (no site for it in the window)"
+  ],
+  "stats": {
+   "area_m2": 86.8752,
+   "wall_foot_m": 0.0,
+   "gutter_side_m": 18.349333333333334,
+   "gutter_strip_width_m": 0.6,
+   "camera": [
+    0.8999999761581421,
+    4.599999904632568,
+    0.949999988079071
+   ],
+   "forward": [
+    0.3608027994632721,
+    0.9311041235923767,
+    -0.053538352251052856
+   ],
+   "cone_cos": 0.8480481015375296
+  },
+  "calibration": {
+   "g_bg": 16.355975341786422,
+   "g_wall": 0.0,
+   "g_gut": 0.5968788155671105,
+   "g_moss": 75.19171159830498,
+   "g_toad": 1.0,
+   "scale_total": 1.0,
+   "target": {
+    "bg": 245.33963012679635,
+    "wall": 0.0,
+    "gut": 10.743818680207989,
+    "moss": 601.5336927864398,
+    "toad": 1.0
+   },
+   "one_gain_counts": {
+    "bg": 15,
+    "wall": 0,
+    "gut": 18,
+    "moss": 8,
+    "toad": 0
+   },
+   "notes": [
+    "population toad: no plants even at gain 64, target 1.0 not reachable (no site for it in the window)"
+   ],
+   "seconds": 0.28
+  },
+  "section": {
+   "_note": "The street's growth section (the plan says set-specific choices belong in the set file's `growth` block; builders may not edit sets/, so the integrator moves this block into sets/pit_village_street.json as key `growth`). The set file's apply.growth already names targets and piece_sets; everything else the growth layer needs is here.",
+   "targets": {
+    "roles": [
+     "ground.sett",
+     "ground.flag",
+     "ground.channel",
+     "ground.kerb"
+    ],
+    "align_normal": 0.0
+   },
+   "piece_sets": [
+    "weeds",
+    "moss_cushions"
+   ],
+   "avoid_pieces_of": {
+    "objects": [
+     "rubbish_scatter"
+    ],
+    "_note": "the earlier rubbish layer's litter host: weeds keep avoid_m clear of its real pieces"
+   },
+   "gutter_side": {
+    "role": "ground.sett",
+    "beside": "ground.channel",
+    "from_m": 0.3,
+    "reach_m": 0.9,
+    "_note": "rule W1: the 0.3 to 0.9 m of setts beside the channel stones"
+   },
+   "wall_foot": {
+    "reach_m": 0.15,
+    "_note": "rule W3: the 0 to 15 cm where wall meets pavement"
+   },
+   "yaw_axis": "y",
+   "calibration_camera": "main",
+   "zones_for_report": {
+    "fire_role": "fire",
+    "doorstep_mask": "step_foot",
+    "doorstep_min": 0.5
+   }
+  }
+ }
+}

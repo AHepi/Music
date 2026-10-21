@@ -1,0 +1,102 @@
+{
+ "what": "main street wet 1080x1920, Cycles OptiX denoise, two seeds per sample count. noise = RMS(seed0-seed1)/sqrt2 in 0-255 levels; err_vs_ref = RMS against a 4096-sample undenoised picture",
+ "seconds": {},
+ "128": {
+  "whole": {
+   "noise": 2.04,
+   "err_vs_ref": 2.89
+  },
+  "road_near": {
+   "noise": 2.52,
+   "err_vs_ref": 3.78
+  },
+  "road_mid": {
+   "noise": 4.08,
+   "err_vs_ref": 5.59
+  },
+  "left_wall": {
+   "noise": 0.97,
+   "err_vs_ref": 1.51
+  },
+  "sky": {
+   "noise": 0.24,
+   "err_vs_ref": 0.42
+  },
+  "pixels_seed_difference_over_32": 1867,
+  "seconds": 4.99
+ },
+ "256": {
+  "whole": {
+   "noise": 1.72,
+   "err_vs_ref": 2.43
+  },
+  "road_near": {
+   "noise": 2.08,
+   "err_vs_ref": 3.19
+  },
+  "road_mid": {
+   "noise": 3.48,
+   "err_vs_ref": 4.63
+  },
+  "left_wall": {
+   "noise": 0.89,
+   "err_vs_ref": 1.33
+  },
+  "sky": {
+   "noise": 0.24,
+   "err_vs_ref": 0.42
+  },
+  "pixels_seed_difference_over_32": 746,
+  "seconds": 8.36
+ },
+ "512": {
+  "whole": {
+   "noise": 1.43,
+   "err_vs_ref": 2.08
+  },
+  "road_near": {
+   "noise": 1.7,
+   "err_vs_ref": 2.73
+  },
+  "road_mid": {
+   "noise": 2.88,
+   "err_vs_ref": 3.82
+  },
+  "left_wall": {
+   "noise": 0.83,
+   "err_vs_ref": 1.23
+  },
+  "sky": {
+   "noise": 0.23,
+   "err_vs_ref": 0.42
+  },
+  "pixels_seed_difference_over_32": 237,
+  "seconds": 14.12
+ },
+ "1024": {
+  "whole": {
+   "noise": 1.22,
+   "err_vs_ref": 1.84
+  },
+  "road_near": {
+   "noise": 1.41,
+   "err_vs_ref": 2.39
+  },
+  "road_mid": {
+   "noise": 2.39,
+   "err_vs_ref": 3.26
+  },
+  "left_wall": {
+   "noise": 0.79,
+   "err_vs_ref": 1.2
+  },
+  "sky": {
+   "noise": 0.23,
+   "err_vs_ref": 0.42
+  },
+  "pixels_seed_difference_over_32": 45,
+  "seconds": 23.56
+ },
+ "ref4096_nodenoise_seconds": 120.01,
+ "s256_nocaustics_seconds": 8.21
+}

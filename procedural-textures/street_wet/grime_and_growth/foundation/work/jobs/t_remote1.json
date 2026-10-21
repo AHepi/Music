@@ -1,0 +1,117 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [],
+ "jobs": [
+  {
+   "name": "today_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    270,
+    480,
+    8
+   ]
+  },
+  {
+   "name": "base_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    270,
+    480,
+    8
+   ]
+  },
+  {
+   "name": "demo_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:template_b",
+   "view": "beauty",
+   "size": [
+    270,
+    480,
+    8
+   ],
+   "dials": {
+    "template_b": {
+     "demo": 1.0
+    }
+   }
+  },
+  {
+   "name": "mask_shade",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "mask:shade",
+   "size": [
+    270,
+    480,
+    1
+   ]
+  },
+  {
+   "name": "mask_three",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "mask:wall_dist+lowness+crown",
+   "size": [
+    270,
+    480,
+    1
+   ]
+  },
+  {
+   "name": "class_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "class",
+   "size": [
+    270,
+    480,
+    1
+   ]
+  },
+  {
+   "name": "puddles_main",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "puddles",
+   "size": [
+    270,
+    480,
+    1
+   ]
+  },
+  {
+   "name": "dirt_main",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "dirt",
+   "size": [
+    270,
+    480,
+    1
+   ]
+  }
+ ]
+}

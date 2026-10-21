@@ -1,0 +1,345 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "when": "2026-10-21 13:55:45",
+ "tests": {
+  "pieces": {
+   "passed": true,
+   "kinds": {
+    "grass": {
+     "faces": [
+      80,
+      130
+     ],
+     "size_cm": [
+      3.2,
+      11.0
+     ],
+     "width_cm": [
+      2.6,
+      10.2
+     ],
+     "height_cm": [
+      4.2,
+      14.2
+     ],
+     "variants": 6,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "dead_grass": {
+     "faces": [
+      72,
+      104
+     ],
+     "size_cm": [
+      5.6,
+      11.1
+     ],
+     "width_cm": [
+      5.1,
+      11.7
+     ],
+     "height_cm": [
+      4.9,
+      7.8
+     ],
+     "variants": 4,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "pearlwort": {
+     "faces": [
+      52,
+      58
+     ],
+     "size_cm": [
+      2.2,
+      5.2
+     ],
+     "width_cm": [
+      2.7,
+      6.8
+     ],
+     "height_cm": [
+      0.8,
+      1.9
+     ],
+     "variants": 4,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "dandelion": {
+     "faces": [
+      154,
+      203
+     ],
+     "size_cm": [
+      9.2,
+      18.3
+     ],
+     "width_cm": [
+      8.9,
+      19.5
+     ],
+     "height_cm": [
+      3.3,
+      17.1
+     ],
+     "variants": 5,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "plantain": {
+     "faces": [
+      140,
+      160
+     ],
+     "size_cm": [
+      7.3,
+      13.3
+     ],
+     "width_cm": [
+      5.4,
+      13.4
+     ],
+     "height_cm": [
+      5.0,
+      9.7
+     ],
+     "variants": 4,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "groundsel": {
+     "faces": [
+      95,
+      119
+     ],
+     "size_cm": [
+      6.1,
+      17.0
+     ],
+     "width_cm": [
+      2.7,
+      7.1
+     ],
+     "height_cm": [
+      6.5,
+      17.5
+     ],
+     "variants": 4,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "chickweed": {
+     "faces": [
+      88,
+      152
+     ],
+     "size_cm": [
+      11.6,
+      26.2
+     ],
+     "width_cm": [
+      9.3,
+      27.7
+     ],
+     "height_cm": [
+      0.8,
+      1.6
+     ],
+     "variants": 4,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "shepherds_purse": {
+     "faces": [
+      108,
+      167
+     ],
+     "size_cm": [
+      5.5,
+      9.5
+     ],
+     "width_cm": [
+      4.1,
+      7.9
+     ],
+     "height_cm": [
+      1.1,
+      23.9
+     ],
+     "variants": 5,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "toadflax": {
+     "faces": [
+      113,
+      158
+     ],
+     "size_cm": [
+      11.2,
+      26.3
+     ],
+     "width_cm": [
+      14.7,
+      23.2
+     ],
+     "height_cm": [
+      2.0,
+      2.2
+     ],
+     "variants": 3,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "moss_string": {
+     "faces": [
+      84,
+      156
+     ],
+     "size_cm": [
+      1.1,
+      2.9
+     ],
+     "width_cm": [
+      4.9,
+      13.4
+     ],
+     "height_cm": [
+      0.8,
+      0.9
+     ],
+     "variants": 8,
+     "faces_ok": true,
+     "sizes_ok": true
+    }
+   },
+   "seconds": 3.07
+  },
+  "dial_zero": {
+   "amount_0": 0,
+   "weeds0_cushions0": 0,
+   "default": 427,
+   "master_0": 0,
+   "master_1": 427,
+   "layer_off": 0,
+   "layer_on": 427,
+   "passed": true,
+   "seconds": 5.26
+  },
+  "isolation": {
+   "passed": true,
+   "plants": 427,
+   "materials_changed": [],
+   "objects_changed": [],
+   "objects_added": [],
+   "materials": 41,
+   "seconds": 2.76
+  },
+  "remove": {
+   "passed": true,
+   "before": {
+    "objects": [],
+    "materials": [],
+    "node_groups": [],
+    "images": [],
+    "collections": [],
+    "meshes": []
+   },
+   "left_after_remove": {},
+   "leftovers_after_all": {},
+   "materials_same": true,
+   "seconds": 3.96
+  },
+  "zones": {
+   "passed": true,
+   "zone_hits_total": 0,
+   "per_camera": {
+    "main_camera": {
+     "plants": 427,
+     "zone_counts": {
+      "footfall": 0,
+      "crown": 0,
+      "keepclear": 0,
+      "doorstep": 0,
+      "fire_1m": 0
+     }
+    },
+    "side_camera": {
+     "plants": 369,
+     "zone_counts": {
+      "footfall": 0,
+      "crown": 0,
+      "keepclear": 0,
+      "doorstep": 0,
+      "fire_1m": 0
+     }
+    }
+   },
+   "habitat_fields": {
+    "ok": true,
+    "worst": {
+     "moss_site": 0.0,
+     "weed_site": 0.0,
+     "lichen_site": 0.0,
+     "algae_site": 0.0
+    }
+   },
+   "seconds": 4.11
+  },
+  "determinism": {
+   "first_equals_second": true,
+   "plants": 427,
+   "two_cameras": {
+    "cameras": [
+     "main_camera",
+     "side_camera"
+    ],
+    "plants": [
+     427,
+     369
+    ],
+    "shared": 186
+   },
+   "passed": true,
+   "seconds": 3.3
+  },
+  "caps": {
+   "plants": 496,
+   "max_pieces": 600,
+   "notes": [
+    "population toad: no plants even at gain 64, target 3.0 not reachable (no site for it in the window)",
+    "targets 1683 plants exceed max_pieces 600: every gain scaled by 0.356"
+   ],
+   "scale_total": 0.35647032799078143,
+   "passed": true,
+   "back_to_default": 427,
+   "seconds": 3.89
+  },
+  "rubbish": {
+   "passed": true,
+   "weeds": 123,
+   "near_rubbish": 0,
+   "share": 0.0,
+   "rubbish_pieces": 6439,
+   "seconds": 13.73
+  },
+  "generic": {
+   "plants": 143,
+   "grass": 96,
+   "moss": 47,
+   "grass_only_on_mask_half": true,
+   "moss_only_on_mask_half": true,
+   "min_cos_to_normal": 0.973,
+   "mean_cos": 0.989,
+   "max_off_surface_m": 0.0,
+   "passed": "True",
+   "seconds": 1.2
+  }
+ },
+ "passed": true,
+ "seconds": 44.4
+}

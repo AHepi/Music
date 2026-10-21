@@ -1,0 +1,824 @@
+{
+ "schema": "weathering-set/1",
+ "id": "japanese_courtyard",
+ "title": "Japanese temple courtyard, golden hour (built with the Astra add-on)",
+ "_how_to_read": "FIRST DRAFT, written from study 12b to prove the settings format covers a second, very different set. Same keys as pit_village_street.json. Every number comes from the saved scene or its build script, or is marked GUESS. Nothing in the kit code repeats any of it.",
+ "units": {
+  "length": "m",
+  "up": "z"
+ },
+ "scenes": [
+  {
+   "id": "courtyard",
+   "file": "scratchpad/astra-work/out/courtyard_final.blend",
+   "read_only": true,
+   "default_camera": "photo",
+   "engine_note": "a Cycles scene that EEVEE draws well (1.2 s a picture at 1200 x 800 on the rented card)",
+   "built_by": "/home/user/Music/japanese-courtyard/build_courtyard.py with the Astra add-on 0.2.0 (read only)"
+  }
+ ],
+ "plate": {
+  "size": [
+   1536,
+   2730
+  ],
+  "painter_scale": 0.45,
+  "alt_painter_scale": 0.4,
+  "engine": "EEVEE",
+  "samples": 48,
+  "states_start_with": "today",
+  "_note": "GUESS: the courtyard's plate camera does not exist yet; a tall plate shape is assumed, as in the street"
+ },
+ "detail": {
+  "fade_start_m": 14.0,
+  "fade_end_m": 45.0,
+  "growth_distance_m": 25.0,
+  "far_band_handover_m": [
+   20.0,
+   30.0
+  ]
+ },
+ "roles": {
+  "ground.earth": {
+   "objects": [
+    "^Astra / Courtyard receiving ground$"
+   ],
+   "_note": "material 'Moss and earth' (noise colour + bump); the add-on's moss and pebbles sit on it"
+  },
+  "ground.gravel": {
+   "objects": [
+    "^Raked gravel court$"
+   ],
+   "_note": "31,486 faces; the rake lines are REAL 1.6 cm relief: weathering must not flatten them. Bounds x 0.9..9.1, y -5.9..1.9"
+  },
+  "growth.existing": {
+   "objects": [
+    "^Astra / moss grouped bodies$",
+    "^Astra / pebbles grouped bodies$"
+   ],
+   "_note": "32,365 moss faces and 5,654 pebble faces the add-on already grew; used as a density picture, never doubled"
+  },
+  "stone.natural": {
+   "objects": [
+    "^Stepping stone \\d+$",
+    "^Veranda step",
+    "^Pond edge stone \\d+$",
+    "^Rock \\d+$",
+    "^Gravel rock \\d+$",
+    "^Lantern (base|post|gallery|firebox|cap)$",
+    "^Water basin$",
+    "^Bridge pier \\d+$"
+   ],
+   "custom_props": {
+    "ct_material_role": "stone"
+   },
+   "_note": "42 separate add-on materials (one per stone), each a 'FOUNDRY / Wet Stone' group with NO Principled box on the surface: needs the adapter. 61 to 72 faces each"
+  },
+  "stone.dressed": {
+   "objects": [
+    "^Stone plinth$",
+    "^Lantern finial$"
+   ],
+   "_note": "plain noise material; the plinth is a 10.9 x 5.6 m slab, top at z 0.55"
+  },
+  "timber.deck": {
+   "objects": [
+    "^Astra / varied planks"
+   ],
+   "_note": "8 plank runs: .000-.002 veranda (planks run along y), .003-.007 bridge (planks run across). One plain Principled material per tone, no grain in the material"
+  },
+  "timber.frame": {
+   "objects": [
+    "^Hall posts$",
+    "^Hall beams$",
+    "^Eave soffit$",
+    "^Shoji bars$"
+   ]
+  },
+  "roof.tile": {
+   "objects": [
+    "^Hall roof$",
+    "^CT / Ceramic pan prototype$"
+   ],
+   "custom_props": {
+    "ct_material_role": "ceramic"
+   },
+   "_note": "geometry nodes: the roof object has 42 faces; the tiles are 688 INSTANCES of one hidden 12-face tile. Layers read the surface in the shader or work on a realised copy"
+  },
+  "roof.deck": {
+   "materials": [
+    "^CT / Timber painterly surface$"
+   ],
+   "custom_props": {
+    "ct_material_role": "timber"
+   }
+  },
+  "wall.plaster": {
+   "objects": [
+    "^Hall plaster$",
+    "^Back wall, (left|right)$",
+    "^Right wall behind hall$"
+   ],
+   "_note": "6-face boxes; the garden walls are 0.3 m thick, 2.1 to 2.2 m tall; every wall is an axis-aligned box in world space"
+  },
+  "wall.cap": {
+   "objects": [
+    "^(Back wall, (left|right)|Right wall behind hall) cap$"
+   ],
+   "_note": "0.5 m wide dark tiled cap, 0.1 m overhang each side of the 0.3 m wall: the run-off source for the wall faces"
+  },
+  "bamboo": {
+   "objects": [
+    "^Bamboo fence$",
+    "^Bamboo stalks$"
+   ],
+   "_note": "left alone in round one (0.5 % of the picture)"
+  },
+  "bark": {
+   "objects": [
+    "^(Maple|Pine) (trunk|branch|limb)"
+   ],
+   "_note": "left alone in round one (0.4 %)"
+  }
+ },
+ "never": {
+  "objects": [
+   "^Shoji paper$",
+   "^Open room back$",
+   "^Lantern window glow$",
+   "^Hills, ",
+   "^Dark plain$",
+   "^Maple leaves$",
+   "^Maple inner mass$",
+   "^Pine pads$",
+   "^Bamboo leaves$",
+   "^Fallen leaves$",
+   "^Lily pads$",
+   "^Lotus blossoms$",
+   "^Courtyard ground source$",
+   "^CT / "
+  ],
+  "materials": [
+   "^Shoji paper",
+   "^Open room",
+   "^Lantern flame",
+   "haze$",
+   "^Far hill$",
+   "^Maple",
+   "^Pine needles$",
+   "^Fallen leaves$",
+   "^Lily pad$",
+   "^Lotus blossom$",
+   "^Bamboo leaf colour$"
+  ],
+  "own_layer_later": [
+   "^Pond water$",
+   "^Basin water$"
+  ],
+  "_note": "6 glow-only and 6 leaf-type materials. 'CT / ' objects include a hidden tile prototype that carries the roof tile MATERIAL: hook the material, skip the object when measuring."
+ },
+ "apply": {
+  "soot": {
+   "roles": [
+    "wall.plaster",
+    "stone.dressed",
+    "timber.frame",
+    "roof.tile"
+   ],
+   "_note": "in this set the layer is the dust-and-algae film, not soot (look file: film_mult near 1, tint grey-green)"
+  },
+  "runoff": {
+   "roles": [
+    "wall.plaster",
+    "stone.dressed"
+   ],
+   "sources": [
+    "wall.cap",
+    "roof.tile",
+    "stone.natural",
+    "timber.deck"
+   ]
+  },
+  "foot": {
+   "roles": [
+    "wall.plaster",
+    "stone.dressed",
+    "timber.frame"
+   ]
+  },
+  "steps": {
+   "roles": []
+  },
+  "wallgrowth": {
+   "roles": [
+    "wall.plaster",
+    "wall.cap",
+    "stone.dressed",
+    "roof.tile",
+    "timber.deck"
+   ]
+  },
+  "wallcracks": {
+   "roles": [
+    "wall.plaster",
+    "stone.natural",
+    "stone.dressed",
+    "timber.frame",
+    "timber.deck"
+   ]
+  },
+  "paint": {
+   "roles": []
+  },
+  "dirt": {
+   "roles": [
+    "ground.gravel",
+    "ground.earth"
+   ]
+  },
+  "groundcracks": {
+   "roles": []
+  },
+  "groundmoss": {
+   "roles": [
+    "ground.earth",
+    "stone.natural",
+    "ground.gravel"
+   ]
+  },
+  "iron": {
+   "roles": []
+  },
+  "growth": {
+   "targets": [
+    "ground.earth",
+    "stone.natural",
+    "ground.gravel"
+   ],
+   "piece_sets": [
+    "moss_cushions",
+    "grass_edge"
+   ],
+   "realise_instances": [
+    "roof.tile"
+   ]
+  }
+ },
+ "geometry": {
+  "ground": {
+   "roles": [
+    "ground.earth",
+    "ground.gravel"
+   ],
+   "bounds": {
+    "x": [
+     -11.0,
+     11.0
+    ],
+    "y": [
+     -8.5,
+     12.5
+    ]
+   },
+   "dot_m": 0.04,
+   "fine_dot_m": 0.02,
+   "coarse_dot_m": 0.16,
+   "skip_objects": [
+    "^Courtyard ground source$"
+   ]
+  },
+  "solids_for_wall_dist": [
+   "wall.plaster",
+   "stone.dressed",
+   "timber.frame"
+  ],
+  "wall_reach_m": 1.275,
+  "steps": {
+   "from": [
+    "stone.natural"
+   ],
+   "near_entrances": true,
+   "within_m": 1.2,
+   "min_height_m": 0.05
+  },
+  "frames": [
+   {
+    "roles": [
+     "wall.plaster"
+    ],
+    "kind": "wall_front",
+    "sheet_per": "object",
+    "frame": "world",
+    "dots_per_m": 50,
+    "sides": [
+     "both"
+    ],
+    "_note": "world-axis boxes, two visible faces each"
+   },
+   {
+    "roles": [
+     "stone.natural",
+     "stone.dressed",
+     "roof.tile",
+     "timber.frame",
+     "timber.deck",
+     "wall.cap"
+    ],
+    "kind": "none",
+    "mask_overrides": {
+     "edge": "group_output:Wear Mask"
+    },
+    "_note": "stones read the ground picture, their own height above contact and the add-on group's Wear Mask for edges"
+   }
+  ],
+  "ledges": {
+   "sources_from_roles": [
+    "wall.cap",
+    "roof.tile",
+    "stone.natural",
+    "timber.deck"
+   ],
+   "min_width_m": 0.25,
+   "in_front_m": 0.8,
+   "behind_m": 0.6,
+   "up_normal_z_min": 0.9,
+   "min_area_m2": 0.02,
+   "drip_length_m": 1.5,
+   "kinds": [
+    "cap_overhang",
+    "eave",
+    "kasa",
+    "veranda_edge"
+   ],
+   "named": [
+    {
+     "what": "roof eave line",
+     "from": "roof.tile lowest edge",
+     "drops_to": "ground and plinth in front of the hall",
+     "note": "front eave about y 4.4, z 3.2; the drip line lands between pond and plinth (the amaochi)"
+    },
+    {
+     "what": "wall cap overhang",
+     "from": "wall.cap",
+     "overhang_m": 0.1
+    },
+    {
+     "what": "lantern roof (kasa)",
+     "from": "Lantern cap",
+     "drops_to": "gallery, firebox and post"
+    },
+    {
+     "what": "veranda edge",
+     "from": "timber.deck front edge",
+     "drops_to": "plinth face and step stones"
+    }
+   ]
+  },
+  "water": {
+   "objects": [
+    "^Pond water$",
+    "^Basin water$"
+   ],
+   "level_z": -0.12,
+   "shore": "from_ground_height",
+   "_note": "the pond water is one big plane under the shore: the visible shore is where the GROUND crosses z -0.12. Pond centre (-3.0, 1.0), radii 3.3 x 2.5, turned 10 degrees."
+  },
+  "lowness": {
+   "radius_m": 1.0,
+   "scale_m": 0.08
+  },
+  "crown": null,
+  "ground_height_picture": {
+   "z_range": [
+    -1.0,
+    5.0
+   ]
+  },
+  "entrances": {
+   "role": "stone.natural",
+   "names": [
+    "^Veranda step$"
+   ],
+   "_note": "GUESS: the main veranda step stands in for the entrance (entry_rand, step feet)"
+  },
+  "prop_roles": [],
+  "vertical_feet": {
+   "roles": [],
+   "reach_m": 0.6,
+   "radius_m": 0.2
+  }
+ },
+ "footfall": [
+  {
+   "id": "stepping_stone_path",
+   "kind": "polyline",
+   "points": [
+    [
+     4.3,
+     -5.6
+    ],
+    [
+     3.2,
+     -3.1
+    ],
+    [
+     2.4,
+     -1.0
+    ],
+    [
+     2.0,
+     0.9
+    ],
+    [
+     2.2,
+     2.8
+    ]
+   ],
+   "width_m": 1.15,
+   "feather_m": 0.5,
+   "weight": 0.8
+  },
+  {
+   "id": "zigzag_bridge",
+   "kind": "polyline",
+   "points": [
+    [
+     -0.55,
+     -0.6
+    ],
+    [
+     -2.0,
+     1.0
+    ],
+    [
+     -3.9,
+     0.15
+    ],
+    [
+     -5.95,
+     1.55
+    ]
+   ],
+   "width_m": 1.05,
+   "weight": 0.8
+  },
+  {
+   "id": "veranda_front",
+   "kind": "rect",
+   "min": [
+    -5.25,
+    4.6
+   ],
+   "max": [
+    5.65,
+    6.4
+   ],
+   "weight": 0.7
+  }
+ ],
+ "keep_clear": [
+  {
+   "id": "raked_gravel_court",
+   "kind": "rect",
+   "min": [
+    0.9,
+    -5.9
+   ],
+   "max": [
+    9.1,
+    1.9
+   ],
+   "feather_m": 0.4,
+   "for": [
+    "moss",
+    "weeds",
+    "lichen"
+   ],
+   "_note": "raked, nobody walks on it: no footfall, but plants and moss are raked out"
+  },
+  {
+   "id": "trodden",
+   "kind": "from_footfall",
+   "above": 0.5,
+   "to": 0.7,
+   "for": [
+    "moss",
+    "weeds",
+    "lichen"
+   ]
+  }
+ ],
+ "shade": {
+  "mode": "year_sun_and_openness",
+  "latitude_deg": 35.0,
+  "north": [
+   0.0,
+   1.0,
+   0.0
+  ],
+  "weights": {
+   "openness": 0.4,
+   "sun": 0.6
+  },
+  "year_sun_positions": 48,
+  "openness_rays": 48,
+  "ray_length_m": 40.0,
+  "leaf_block": 0.6,
+  "_note": "ASSUMPTION to confirm with the person: north = +y and latitude 35 (the hall faces south). If the film places the courtyard differently, change this block and nothing else.",
+  "extra_blockers": {
+   "objects": [
+    "^Maple leaves$",
+    "^Maple inner mass$",
+    "^Pine pads$",
+    "^Bamboo leaves$"
+   ],
+   "block": 0.6,
+   "_note": "leaf masses shade at 60 % (the draft's leaf_block)"
+  }
+ },
+ "dampness": {
+  "weights": {
+   "wall_foot": 0.2,
+   "drip": 0.25,
+   "water": 0.3,
+   "lowness": 0.15,
+   "shelter": 0.1
+  },
+  "wall_foot_reach_m": 0.5
+ },
+ "habitat": {
+  "moss": {
+   "dampness": 0.45,
+   "shade": 0.35,
+   "edge": 0.2,
+   "edge_reach_m": 0.4,
+   "extend_existing": true,
+   "_note": "the add-on's moss does not follow shade (rank match +0.15): kit moss extends into shaded damp places the add-on left bare (a choice for the person: extend or match)"
+  },
+  "weed": {
+   "edge": 0.6,
+   "cracks_and_seams": 0.2,
+   "light": 0.2
+  },
+  "algae": {
+   "dampness": 0.5,
+   "shade": 0.3,
+   "pipe_outlets": 0.0
+  },
+  "lichen": {
+   "enabled": true,
+   "rough_stone_only": true,
+   "north_bias": 0.6
+  }
+ },
+ "texture_maps": {
+  "_note": "no photo height pictures in this set: cavity comes from the add-on stones' own Wear Mask and from the kit's shader-made edge mask"
+ },
+ "flags": {},
+ "limewash": {
+  "objects": []
+ },
+ "existing_growth": {
+  "objects": [
+   "growth.existing"
+  ],
+  "avoid_doubling": true,
+  "patches": "front-left (-7.4,-3.0), hill (-8.2,6.0), maple root (-6.9,2.0), rocks (-3.4,4.0), lantern (1.0,1.4), gravel islands (5.9,-2.2), path edge (3.9,-3.3)"
+ },
+ "existing_layers": {
+  "wetness": {
+   "present": false
+  },
+  "joints": {
+   "present": false
+  },
+  "rubbish": {
+   "present": false
+  }
+ },
+ "legacy": null,
+ "hook": {
+  "skip_if_emission_strength_above": 0.0,
+  "adapters": [
+   {
+    "groups": [
+     "^FOUNDRY / (Wet Stone|Wood)"
+    ],
+    "outputs": {
+     "Base Color": "Albedo",
+     "Roughness": "Roughness",
+     "Normal": "Normal"
+    },
+    "_note": "rebuild one Principled box from the group's Albedo, Roughness and Normal outputs and copy the plain numbers (Specular IOR Level 0.4, IOR 1.5 ...) from the Principled box inside the group; tested in study 12b on 46 of 46 materials: picture identical in Cycles (0.0 in full float), within one step of 255 on 0.8 % of dots in EEVEE"
+   }
+  ],
+  "per_object_seed": "write wk_seed on every object (renamed objects '.001' ... and add-on rebuilds must not reshuffle)"
+ },
+ "scale": {
+  "plank_m": {
+   "bridge_width": 0.15,
+   "veranda_width": 0.26,
+   "gap": 0.012
+  },
+  "roof_tile_m": [
+   0.3,
+   0.66
+  ],
+  "typical_stone_m": [
+   0.6,
+   0.9
+  ],
+  "moss_clump_radius_m": 0.14,
+  "pebble_radius_m": 0.07,
+  "gravel_rake_pitch_m": 0.17,
+  "gravel_rake_relief_m": 0.016,
+  "bridge_deck_top_z": 0.2,
+  "veranda_floor_z": 0.55,
+  "eave_z": 3.2,
+  "ridge_z": 4.68
+ },
+ "cameras": [
+  {
+   "name": "photo",
+   "location": [
+    -5.2,
+    -5.6,
+    3.0
+   ],
+   "look_at": [
+    1.0,
+    3.9,
+    1.0
+   ],
+   "fov_v": 49.6,
+   "photo_px": [
+    2400,
+    1600
+   ],
+   "_note": "the only camera in the scene (hfov 69.4 degrees). A plate camera for the film is still to be added here."
+  }
+ ],
+ "lighting": {
+  "rigs": {
+   "A": {
+    "describe": "golden hour as the file has it",
+    "suns": "file",
+    "lamps": "file"
+   }
+  },
+  "sun_toward": {
+   "Golden hour sun": [
+    -0.944,
+    -0.244,
+    0.223
+   ]
+  },
+  "other_lamps": [
+   "Lantern light (point, 120 W)",
+   "Hall glow 0-3 (area)",
+   "Cool sky fill (disc area, 3500)"
+  ]
+ },
+ "test_set": {
+  "lighting22": null,
+  "_note": "no 22-picture set here yet: the courtyard job writes its own (golden hour, overcast, low sun, wet and dry)"
+ },
+ "palette_from_the_scene": {
+  "add_on_moss_tones_linear": [
+   [
+    0.035,
+    0.075,
+    0.022
+   ],
+   [
+    0.085,
+    0.15,
+    0.04
+   ],
+   [
+    0.15,
+    0.22,
+    0.065
+   ],
+   [
+    0.055,
+    0.105,
+    0.03
+   ]
+  ],
+  "ground_ramp_linear": [
+   [
+    0.07,
+    0.05,
+    0.03
+   ],
+   [
+    0.05,
+    0.15,
+    0.035
+   ]
+  ],
+  "gravel_ramp_linear": [
+   [
+    0.115,
+    0.092,
+    0.068
+   ],
+   [
+    0.25,
+    0.205,
+    0.155
+   ]
+  ],
+  "plaster_ramp_linear": [
+   [
+    0.62,
+    0.585,
+    0.52
+   ],
+   [
+    0.8,
+    0.765,
+    0.69
+   ]
+  ],
+  "roof_tile_linear": {
+   "base": [
+    0.013,
+    0.02,
+    0.027
+   ],
+   "shadow": [
+    0.004,
+    0.007,
+    0.009
+   ],
+   "highlight": [
+    0.051,
+    0.078,
+    0.089
+   ]
+  },
+  "stone_linear": {
+   "base": [
+    0.078,
+    0.113,
+    0.113
+   ],
+   "shadow": [
+    0.01,
+    0.036,
+    0.051
+   ],
+   "highlight": [
+    0.223,
+    0.196,
+    0.107
+   ]
+  }
+ },
+ "plate_brightness_measured": {
+  "_note": "mean brightness of each family in a 1200 x 800 EEVEE picture; the share under 0.13 is the zone the film's finishing step crushes. The kit chooses dark or pale marks per role from this, not from a typed rule.",
+  "roof.tile": {
+   "mean": 0.14,
+   "under_0.13": 0.47
+  },
+  "timber (all wood)": {
+   "mean": 0.31,
+   "under_0.13": 0.15
+  },
+  "stone.natural": {
+   "mean": 0.37,
+   "under_0.13": 0.0
+  },
+  "wall.plaster": {
+   "mean": 0.64,
+   "under_0.13": 0.0
+  },
+  "ground.earth": {
+   "mean": 0.27,
+   "under_0.13": 0.02
+  },
+  "ground.gravel": {
+   "mean": 0.41,
+   "under_0.13": 0.0
+  }
+ },
+ "looks": {
+  "default": "mossy_courtyard_kept",
+  "available": [
+   "mossy_courtyard_kept",
+   "mossy_courtyard_neglected"
+  ]
+ },
+ "expect": {
+  "objects": 88,
+  "materials": 134,
+  "plain_principled": 75,
+  "addon_group_materials": 46,
+  "glow_only": 6,
+  "roof_instances": 688,
+  "addon_moss_faces": 32365,
+  "existing_growth_patches": 7
+ }
+}

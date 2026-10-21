@@ -1,0 +1,377 @@
+{
+ "set": "proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+ "scene": "lockout",
+ "jobs": 11,
+ "seconds_total": 49.0,
+ "registered": {
+  "walls.apply_walls": [
+   "foot",
+   "paint",
+   "runoff",
+   "soot",
+   "steps",
+   "wallcracks",
+   "wallgrowth"
+  ],
+  "ground.apply_ground": [
+   "dirt",
+   "groundcracks",
+   "groundmoss",
+   "iron"
+  ],
+  "growth.apply_growth": [
+   "growth"
+  ]
+ },
+ "register_errors": {},
+ "camera_notes": {
+  "flag_close": "feature report missing: aimed at the entry's own look_at"
+ },
+ "kit_report": {
+  "set": "pit_village_street",
+  "scene": "lockout",
+  "look": "sooty_1926_walls_tuned",
+  "master": 1.0,
+  "roles": {
+   "ground.sett": 1,
+   "ground.channel": 1,
+   "ground.kerb": 1,
+   "ground.flag": 1,
+   "ground.yard": 1,
+   "wall.masonry": 28,
+   "wall.trim": 28,
+   "wall.industrial": 7,
+   "chimney": 32,
+   "roof.slate": 28,
+   "timber.paint": 112,
+   "iron.pipe": 28,
+   "iron.post": 5,
+   "iron": 4,
+   "fire": 1,
+   "prop": 52,
+   "sign": 7,
+   "doorway": 28
+  },
+  "hookable": 70,
+  "skipped": {
+   "never": [
+    "Lantern_01_brass",
+    "Lantern_01_glass",
+    "black-boards",
+    "brass",
+    "brazier coals",
+    "brazier dark coal",
+    "colliery-board-paint",
+    "engine_window_glow",
+    "interior_dark",
+    "lamp_glass_glow",
+    "moor",
+    "notice-paper",
+    "sky_dome_glow",
+    "window_dark_0",
+    "window_dark_1",
+    "window_dark_2",
+    "window_lit_glow_0",
+    "window_lit_glow_1",
+    "window_lit_glow_2"
+   ]
+  },
+  "chains": {
+   "channel_stones": [
+    "wetness",
+    "rubbish"
+   ],
+   "colliery_brick": [
+    "soot",
+    "foot",
+    "wetness"
+   ],
+   "colliery_yard": [
+    "wetness"
+   ],
+   "cottage_brick": [
+    "soot",
+    "runoff",
+    "foot",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "cottage_brick_door_left": [
+    "soot",
+    "runoff",
+    "foot",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "cottage_brick_door_right": [
+    "soot",
+    "runoff",
+    "foot",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "cottage_stone": [
+    "soot",
+    "runoff",
+    "foot",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "cottage_stone_door_left": [
+    "soot",
+    "runoff",
+    "foot",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "cottage_stone_door_right": [
+    "soot",
+    "runoff",
+    "foot",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "dark_dressed_stone": [
+    "soot",
+    "runoff",
+    "foot",
+    "steps",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "dressed_stone": [
+    "soot",
+    "runoff",
+    "foot",
+    "steps",
+    "wetness",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "kerb_stone": [
+    "wetness",
+    "rubbish"
+   ],
+   "pavement_flags": [
+    "wetness",
+    "rubbish"
+   ],
+   "roof_slate": [
+    "soot",
+    "foot",
+    "wetness"
+   ],
+   "street_setts": [
+    "wetness",
+    "joints",
+    "rubbish"
+   ],
+   "boarded_blue": [
+    "soot",
+    "foot"
+   ],
+   "boarded_green": [
+    "soot",
+    "foot"
+   ],
+   "cast_iron": [
+    "soot",
+    "foot"
+   ],
+   "chimney_pot_clay": [
+    "soot"
+   ],
+   "chimney_pot_sooted": [
+    "soot"
+   ],
+   "fascia_board": [
+    "soot",
+    "runoff",
+    "foot",
+    "steps",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "plaster_dark": [
+    "soot"
+   ],
+   "ridge_clay": [
+    "soot",
+    "foot"
+   ]
+  },
+  "layers": {
+   "soot": {
+    "on": true,
+    "materials": 18,
+    "values": {
+     "amount": 1.0,
+     "seed": 0.0,
+     "inflate_limit": 8.0,
+     "fade_start": 12.0,
+     "fade_end": 40.0,
+     "wet_follow": 1.0,
+     "film_mult": 0.6,
+     "sheltered_mult": 0.5,
+     "washed_mult": 1.0,
+     "washed_share": 0.17,
+     "floor_mult": 0.3,
+     "grey_pull": 0.25,
+     "mortar_soot": 0.4,
+     "mottle_size": 0.9,
+     "mottle_contrast": 0.5,
+     "edge_sharp": 0.85,
+     "stack_mult": 0.8,
+     "roof_mult": 0.8,
+     "base_lift": 0.0,
+     "mottle_stretch": 3.0,
+     "patch_min_dots": 15.0,
+     "rough_gain": 0.1,
+     "shade_wash": 0.2,
+     "washed_pale": 0.8
+    }
+   },
+   "runoff": {
+    "on": true,
+    "materials": 9,
+    "values": {
+     "amount": 1.0,
+     "seed": 0.0,
+     "inflate_limit": 12.0,
+     "fade_start": 12.0,
+     "fade_end": 40.0,
+     "wet_follow": 1.0,
+     "strength": 1.0,
+     "tone": -0.5,
+     "edge_dark": 0.5,
+     "width_dots": 10.0,
+     "length_mult": 1.0,
+     "ragged": 0.6,
+     "source_share": 0.8,
+     "leak_share": 0.15,
+     "leak_length": 0.9,
+     "iron_rust": 0.5,
+     "eave_streaks": 0.5,
+     "pitch_mult": 1.0,
+     "pair_share": 0.8,
+     "stain_value": 0.9
+    }
+   },
+   "foot": {
+    "on": true,
+    "materials": 15,
+    "values": {
+     "amount": 1.0,
+     "seed": 0.0,
+     "inflate_limit": 8.0,
+     "fade_start": 12.0,
+     "fade_end": 40.0,
+     "wet_follow": 1.0,
+     "splash_height": 0.28,
+     "splash_strength": 0.9,
+     "splash_ragged": 0.7,
+     "finger_height": 0.1,
+     "pipe_foot_boost": 1.4,
+     "tide_share": 0.45,
+     "tide_height": 0.8,
+     "tide_strength": 0.4,
+     "tide_green": 0.3,
+     "salt_bloom": 0.02,
+     "mortar_wear": 0.5,
+     "spall_share": 0.07,
+     "wear_height": 0.6,
+     "splash_pale": 0.9,
+     "band_min_dots": 15.0,
+     "salt_dots": 6.0
+    }
+   },
+   "steps": {
+    "on": true,
+    "materials": 3,
+    "values": {
+     "amount": 1.0,
+     "seed": 0.0,
+     "inflate_limit": 6.0,
+     "fade_start": 12.0,
+     "fade_end": 40.0,
+     "wet_follow": 1.0,
+     "whitened_share": 0.55,
+     "scrubbed_share": 0.35,
+     "frame_m": 0.07,
+     "frame_dots": 8.0,
+     "boot_grey": 0.3,
+     "dish_depth": 0.005,
+     "nosing_chips": 0.3,
+     "wear_polish": 0.5,
+     "tread_pale": 0.5,
+     "chip_m": 0.05,
+     "riser_share": 0.8
+    }
+   },
+   "wallcracks": {
+    "on": true,
+    "materials": 9,
+    "values": {
+     "amount": 1.0,
+     "seed": 0.0,
+     "inflate_limit": 8.0,
+     "fade_start": 12.0,
+     "fade_end": 40.0,
+     "wet_follow": 1.0,
+     "crack_amount": 0.5,
+     "crack_dots": 3.5,
+     "crack_contrast": 0.11,
+     "stepped_cracks": 1.0,
+     "corner_chips": 0.5,
+     "chip_cm": 5.0,
+     "plaster_cracks": 0.0,
+     "spall_patches": 0.2,
+     "near_only": 15.0,
+     "slope_mm": 1.5,
+     "dull": 1.0,
+     "chip_pale": 0.6,
+     "step_cm": 15.0,
+     "crack_pale": 0.5
+    }
+   },
+   "wallgrowth": {
+    "on": true,
+    "materials": 9,
+    "values": {
+     "amount": 1.0,
+     "seed": 0.0,
+     "inflate_limit": 8.0,
+     "fade_start": 12.0,
+     "fade_end": 40.0,
+     "wet_follow": 1.0,
+     "moss_amount": 0.05,
+     "algae_amount": 0.6,
+     "lichen_amount": 0.0,
+     "moss_height": 0.35,
+     "patch_dots": 15.0,
+     "drip_moss": 0.4,
+     "cap_moss": 0.3,
+     "roof_moss": 0.0,
+     "tone_steps": 5.0,
+     "clump_stretch": 1.8,
+     "relief": 0.006,
+     "lichen_dots": 8.0,
+     "brightness_floor": 0.25,
+     "moss_value": 0.2,
+     "algae_strength": 0.4,
+     "hue": 100.0,
+     "saturation": 0.5
+    }
+   }
+  },
+  "unassigned_objects": 115,
+  "log": []
+ }
+}

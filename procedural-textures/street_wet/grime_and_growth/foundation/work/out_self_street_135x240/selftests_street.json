@@ -1,0 +1,170 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "size": [
+  135,
+  240
+ ],
+ "seconds": 10.8,
+ "results": {
+  "hook": {
+   "passed": true,
+   "materials_total": 41,
+   "hooked_plain": 41,
+   "hooked_adapted": 0,
+   "layers_in": {
+    "template_a": 41,
+    "template_b": 41,
+    "template_c": 41
+   },
+   "skipped_no_surface": [],
+   "forced_past_policy": [],
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 0.4
+  },
+  "remove": {
+   "passed": true,
+   "order": [
+    "template_c",
+    "template_a",
+    "template_b",
+    "template_c",
+    "template_a"
+   ],
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 0.3
+  },
+  "nothing": {
+   "passed": true,
+   "identical_16bit": false,
+   "size": [
+    135,
+    240
+   ],
+   "samples": 4,
+   "dots": 32400,
+   "max_diff": 0.0003509521484375,
+   "mean_diff": 1.461543348568739e-07,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.002993827160493827,
+   "seconds": 1.6
+  },
+  "legacy_nothing": {
+   "passed": true,
+   "identical_16bit": false,
+   "size": [
+    135,
+    240
+   ],
+   "samples": 4,
+   "dots": 32400,
+   "max_diff": 0.000244140625,
+   "mean_diff": 1.4269946291278757e-07,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.0030555555555555557,
+   "seconds": 3.3
+  },
+  "dial_zero": {
+   "passed": true,
+   "identical_16bit": false,
+   "acts_at_amount_1": {
+    "dots": 32400,
+    "max_diff": 0.6041809916496277,
+    "mean_diff": 0.1383979469537735,
+    "share_over_one_step": 0.7141358024691358,
+    "share_changed": 0.8030246913580247
+   },
+   "at_amount_0": {
+    "dots": 32400,
+    "max_diff": 0.0006408840417861938,
+    "mean_diff": 1.789641679295073e-08,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0001234567901234568
+   },
+   "seconds": 1.0
+  },
+  "isolation": {
+   "passed": true,
+   "dots_acting": 3644,
+   "dots_acting_outside_roles": 0,
+   "roles": [
+    6
+   ],
+   "class_id_counts": {
+    "0": 10557,
+    "1": 10650,
+    "2": 346,
+    "3": 347,
+    "4": 692,
+    "5": 7,
+    "6": 3644,
+    "7": 1428,
+    "8": 2043,
+    "9": 3,
+    "10": 283,
+    "11": 161,
+    "12": 1176,
+    "13": 258,
+    "14": 805
+   },
+   "mask_max": 1.0,
+   "outside_by_role": {},
+   "seconds": 0.8
+  },
+  "determinism": {
+   "passed": true,
+   "identical_16bit": true,
+   "dots": 32400,
+   "max_diff": 0.0,
+   "mean_diff": 0.0,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.0,
+   "seconds": 0.5
+  },
+  "reuse": {
+   "passed": true,
+   "layers": {
+    "template_a": 44,
+    "template_b": 44,
+    "template_c": 44
+   },
+   "errors": {},
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 0.4
+  },
+  "lighting": {
+   "passed": true,
+   "rigs": {
+    "A": {
+     "passed": true,
+     "share_over_one_step": 0.0,
+     "max_diff": 0.0005340650677680969
+    },
+    "C": {
+     "passed": true,
+     "share_over_one_step": 0.0,
+     "max_diff": 0.0004882961511611938
+    },
+    "D": {
+     "passed": true,
+     "share_over_one_step": 0.0,
+     "max_diff": 0.0006256252527236938
+    },
+    "E": {
+     "passed": true,
+     "share_over_one_step": 0.0,
+     "max_diff": 0.0001983642578125
+    }
+   },
+   "size": [
+    270,
+    480
+   ],
+   "samples": 8,
+   "seconds": 2.4
+  }
+ }
+}

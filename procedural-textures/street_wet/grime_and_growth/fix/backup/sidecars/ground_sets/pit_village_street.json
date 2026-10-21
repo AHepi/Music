@@ -1,0 +1,618 @@
+{
+  "_note": "The 'ground' section of the street set file, kept beside the ground layers until the integrator moves it into sets/pit_village_street.json under the key 'ground' (the layers read settings.ground first, then this file). role_dials = per-role multipliers of dials (1 where a role says nothing): they say WHICH kind of surface gets WHICH element, so the layer code never names a surface. rings = objects of these roles get a rust ring painted on the ground round their footprint (the fire drum).",
+  "schema": "weathering-ground/1",
+  "role_dials": {
+    "dirt": {
+      "ground.sett": {
+        "film": 1.0,
+        "polish": 1.0,
+        "water_marks": 1.0,
+        "rust_halo": 0.0,
+        "drum_ring": 1.0,
+        "tar_patches": 1.0,
+        "tar_splash": 0.0,
+        "scrub_strip": 0.0
+      },
+      "ground.flag": {
+        "film": 1.0,
+        "polish": 0.6,
+        "water_marks": 1.0,
+        "rust_halo": 1.0,
+        "drum_ring": 0.0,
+        "tar_patches": 0.0,
+        "tar_splash": 0.0,
+        "scrub_strip": 1.0
+      },
+      "ground.channel": {
+        "film": 1.0,
+        "polish": 0.0,
+        "water_marks": 1.0,
+        "rust_halo": 0.0,
+        "drum_ring": 0.0,
+        "tar_patches": 0.0,
+        "tar_splash": 1.0,
+        "scrub_strip": 0.0
+      },
+      "ground.kerb": {
+        "film": 0.8,
+        "polish": 0.3,
+        "water_marks": 0.5,
+        "rust_halo": 0.0,
+        "drum_ring": 0.0,
+        "tar_patches": 0.0,
+        "tar_splash": 1.0,
+        "scrub_strip": 0.0
+      }
+    },
+    "groundcracks": {
+      "ground.sett": {
+        "flag_cracks": 0.0,
+        "kerb_chips": 0.0,
+        "sett_disturb": 1.0
+      },
+      "ground.flag": {
+        "flag_cracks": 1.0,
+        "kerb_chips": 0.0,
+        "sett_disturb": 0.0
+      },
+      "ground.channel": {
+        "flag_cracks": 0.0,
+        "kerb_chips": 0.4,
+        "sett_disturb": 0.0
+      },
+      "ground.kerb": {
+        "flag_cracks": 0.0,
+        "kerb_chips": 1.0,
+        "sett_disturb": 0.0
+      }
+    },
+    "groundmoss": {
+      "ground.sett": {
+        "joint_share": 1.0,
+        "patch_moss": 0.0,
+        "algae_fan": 0.0,
+        "liverwort": 0.0,
+        "far_band": 1.0
+      },
+      "ground.flag": {
+        "joint_share": 1.0,
+        "patch_moss": 0.0,
+        "algae_fan": 1.0,
+        "liverwort": 1.0,
+        "far_band": 1.0
+      },
+      "ground.channel": {
+        "joint_share": 1.0,
+        "patch_moss": 0.0,
+        "algae_fan": 0.5,
+        "liverwort": 0.0,
+        "far_band": 1.0
+      },
+      "ground.kerb": {
+        "joint_share": 1.0,
+        "patch_moss": 0.0,
+        "algae_fan": 0.3,
+        "liverwort": 0.0,
+        "far_band": 1.0
+      }
+    },
+    "iron": {
+      "iron.pipe": {
+        "rust_cover": 1.0,
+        "collar_rust": 1.0,
+        "shoe_streak": 1.0,
+        "base_ring": 0.0,
+        "drum_rust": 0.0,
+        "heat_scale": 0.0,
+        "soot_halo": 0.0
+      },
+      "iron.post": {
+        "rust_cover": 1.0,
+        "collar_rust": 0.5,
+        "shoe_streak": 0.0,
+        "base_ring": 1.0,
+        "drum_rust": 0.0,
+        "heat_scale": 0.0,
+        "soot_halo": 0.0
+      },
+      "iron": {
+        "rust_cover": 1.0,
+        "collar_rust": 0.0,
+        "shoe_streak": 0.0,
+        "base_ring": 0.4,
+        "drum_rust": 0.0,
+        "heat_scale": 0.0,
+        "soot_halo": 0.0
+      },
+      "fire": {
+        "rust_cover": 0.6,
+        "collar_rust": 0.0,
+        "shoe_streak": 0.0,
+        "base_ring": 0.0,
+        "drum_rust": 1.0,
+        "heat_scale": 1.0,
+        "soot_halo": 1.0
+      }
+    }
+  },
+  "rings": {
+    "layer": "dirt",
+    "roles": [
+      "fire"
+    ],
+    "note": "the fire drum stands on the road; the ash ring is the rubbish layer's, this is the rust that bleeds out of the drum"
+  },
+  "readable": [
+    {
+      "element": "cracks in flags, kerbs and setts (the foundation row, all crack parts together)",
+      "layer": "groundcracks",
+      "parts": [
+        "flag_fine",
+        "flag_broken",
+        "flag_tilt",
+        "flag_chip",
+        "kerb_chips",
+        "kerb_joints",
+        "sett_disturbed",
+        "sett_joints"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "max_m": 15
+      },
+      "min_good": 3
+    },
+    {
+      "element": "cracks in flags (fine and broken)",
+      "layer": "groundcracks",
+      "parts": [
+        "flag_fine",
+        "flag_broken"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "class": "pavement",
+        "max_m": 15
+      },
+      "min_good": 3
+    },
+    {
+      "element": "tilted flags and chipped corners",
+      "layer": "groundcracks",
+      "parts": [
+        "flag_tilt",
+        "flag_chip"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "class": "pavement",
+        "max_m": 15
+      },
+      "min_good": 2
+    },
+    {
+      "element": "kerb chips, open kerb joints and cracked kerbs",
+      "layer": "groundcracks",
+      "parts": [
+        "kerb_chips",
+        "kerb_joints"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "class": "kerb_gutter",
+        "max_m": 15
+      },
+      "min_good": 3
+    },
+    {
+      "element": "disturbed setts and open sett joints",
+      "layer": "groundcracks",
+      "parts": [
+        "sett_disturbed",
+        "sett_joints"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "class": "road",
+        "max_m": 15
+      },
+      "min_good": 3
+    },
+    {
+      "element": "tar patches",
+      "layer": "dirt",
+      "parts": [
+        "tar"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "class": "road",
+        "max_m": 30
+      },
+      "min_good": 1
+    },
+    {
+      "element": "ground film, polish, water marks",
+      "layer": "dirt",
+      "parts": [
+        "film",
+        "polish",
+        "marks"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {},
+      "min_good": 8
+    },
+    {
+      "element": "rust halos, drum ring, scrubbed strips",
+      "layer": "dirt",
+      "parts": [
+        "halo",
+        "drum",
+        "scrub"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "max_m": 20
+      },
+      "min_good": 4
+    },
+    {
+      "element": "moss ribbons, algae fans, liverwort",
+      "layer": "groundmoss",
+      "parts": [
+        "joint_moss",
+        "patch_moss",
+        "algae",
+        "liverwort"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "max_m": 20
+      },
+      "min_good": 8
+    },
+    {
+      "element": "rust on iron",
+      "layer": "iron",
+      "parts": [
+        "foot_rust",
+        "collars",
+        "base_ring",
+        "drum_rust"
+      ],
+      "plates": [
+        "main",
+        "lockout",
+        "notice"
+      ],
+      "zone": {
+        "class": "iron",
+        "max_m": 20
+      },
+      "min_good": 4
+    }
+  ],
+  "dial_sheet": [
+    {
+      "layer": "dirt",
+      "dial": "film",
+      "camera": "gutter_close",
+      "label": "dirt: film (grime skin)",
+      "values": [
+        0,
+        0.5,
+        2.0
+      ]
+    },
+    {
+      "layer": "dirt",
+      "dial": "polish",
+      "camera": "doorstep_close",
+      "label": "dirt: polish (worn, shiny tops)",
+      "values": [
+        0,
+        0.4,
+        1.0
+      ]
+    },
+    {
+      "layer": "dirt",
+      "dial": "tar_patches",
+      "camera": "close_road",
+      "label": "dirt: tar patches",
+      "values": [
+        0,
+        0.3,
+        1.0
+      ]
+    },
+    {
+      "layer": "dirt",
+      "dial": "rust_halo",
+      "camera": "pipe_close",
+      "label": "dirt: rust halo at pipe feet",
+      "values": [
+        0,
+        0.5,
+        1.0
+      ]
+    },
+    {
+      "layer": "groundcracks",
+      "dial": "flag_cracks",
+      "camera": "flag_close",
+      "label": "cracks: flag cracks",
+      "values": [
+        0,
+        1.0,
+        2.0
+      ]
+    },
+    {
+      "layer": "groundcracks",
+      "dial": "kerb_chips",
+      "camera": "gutter_close",
+      "label": "cracks: kerb chips",
+      "values": [
+        0,
+        1.0,
+        2.0
+      ]
+    },
+    {
+      "layer": "groundcracks",
+      "dial": "sett_disturb",
+      "camera": "close_road",
+      "label": "cracks: disturbed setts",
+      "values": [
+        0,
+        0.7,
+        2.0
+      ]
+    },
+    {
+      "layer": "groundmoss",
+      "dial": "joint_share",
+      "camera": "gutter_close",
+      "label": "moss: joint moss share",
+      "values": [
+        0,
+        0.08,
+        0.3
+      ]
+    },
+    {
+      "layer": "groundmoss",
+      "dial": "algae_fan",
+      "camera": "pipe_close",
+      "label": "moss: algae under the pipe",
+      "values": [
+        0,
+        0.6,
+        1.0
+      ]
+    },
+    {
+      "layer": "iron",
+      "dial": "rust_cover",
+      "camera": "pipe_close",
+      "label": "iron: rust cover",
+      "values": [
+        0,
+        0.3,
+        1.0
+      ]
+    },
+    {
+      "layer": "iron",
+      "dial": "base_ring",
+      "camera": "wall_lamp",
+      "label": "iron: rust ring at post base",
+      "values": [
+        0,
+        0.7,
+        1.0
+      ]
+    }
+  ],
+  "period": [
+    {
+      "element": "flags with fine cracks (share of flag area)",
+      "kind": "share",
+      "part": "groundcracks:flag_fine_cells",
+      "over": [
+        "pavement"
+      ],
+      "cap": [
+        0.08,
+        0.15
+      ]
+    },
+    {
+      "element": "flags with broken cracks",
+      "kind": "share",
+      "part": "groundcracks:flag_broken_cells",
+      "over": [
+        "pavement"
+      ],
+      "cap": [
+        0.02,
+        0.04
+      ]
+    },
+    {
+      "element": "tilted flags",
+      "kind": "share",
+      "part": "groundcracks:flag_tilt",
+      "over": [
+        "pavement"
+      ],
+      "cap": [
+        0.03,
+        0.06
+      ]
+    },
+    {
+      "element": "kerb chips (share of kerb length)",
+      "kind": "length_share",
+      "part": "groundcracks:kerb_chips",
+      "over": [
+        "kerb_gutter"
+      ],
+      "cap": [
+        0.2,
+        0.35
+      ]
+    },
+    {
+      "element": "setts disturbed (share of road area)",
+      "kind": "share",
+      "part": "groundcracks:sett_disturbed",
+      "over": [
+        "road"
+      ],
+      "minus": "groundcracks:sett_joint_all",
+      "cap": [
+        0.03,
+        0.06
+      ]
+    },
+    {
+      "element": "open sett joints (share of joint area)",
+      "kind": "share",
+      "part": "groundcracks:sett_joints",
+      "over": [
+        "road"
+      ],
+      "cap": [
+        0.1,
+        0.2
+      ],
+      "of": "groundcracks:sett_joint_all"
+    },
+    {
+      "element": "tar (share of road)",
+      "kind": "share",
+      "part": "dirt:tar",
+      "over": [
+        "road"
+      ],
+      "cap": [
+        0.0,
+        0.04
+      ]
+    },
+    {
+      "element": "tar patches in the first 30 m",
+      "kind": "count",
+      "part": "dirt:tar",
+      "over": [
+        "road"
+      ],
+      "zone_y": [
+        0,
+        30
+      ],
+      "cap": [
+        1,
+        3
+      ]
+    },
+    {
+      "element": "moss in joints (share of kerb and gutter joint length)",
+      "kind": "share",
+      "part": "groundmoss:joint_moss",
+      "over": [
+        "kerb_gutter"
+      ],
+      "cap": [
+        0.05,
+        0.15
+      ],
+      "of": "groundmoss:joint_all"
+    },
+    {
+      "element": "liverwort patches",
+      "kind": "count",
+      "part": "groundmoss:liverwort",
+      "over": [],
+      "cap": [
+        0,
+        2
+      ]
+    },
+    {
+      "element": "algae fans (count of fans on the whole ground)",
+      "kind": "count",
+      "part": "groundmoss:algae",
+      "over": [],
+      "cap": [
+        0,
+        999
+      ]
+    },
+    {
+      "element": "moss in road joints (share of joint length, at most 15 % of any joint length)",
+      "kind": "share",
+      "part": "groundmoss:joint_moss",
+      "of": "groundmoss:joint_all",
+      "over": [
+        "road"
+      ],
+      "cap": [
+        0.0,
+        0.15
+      ]
+    },
+    {
+      "element": "moss in pavement joints (share of joint length)",
+      "kind": "share",
+      "part": "groundmoss:joint_moss",
+      "of": "groundmoss:joint_all",
+      "over": [
+        "pavement"
+      ],
+      "cap": [
+        0.0,
+        0.15
+      ]
+    }
+  ]
+}

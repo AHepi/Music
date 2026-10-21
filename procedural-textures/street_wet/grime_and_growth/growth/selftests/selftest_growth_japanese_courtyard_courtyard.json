@@ -1,0 +1,162 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "when": "2026-10-21 13:56:32",
+ "tests": {
+  "pieces": {
+   "passed": true,
+   "kinds": {
+    "moss_string": {
+     "faces": [
+      84,
+      156
+     ],
+     "size_cm": [
+      1.1,
+      2.9
+     ],
+     "width_cm": [
+      4.9,
+      13.4
+     ],
+     "height_cm": [
+      0.8,
+      0.9
+     ],
+     "variants": 8,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "grass": {
+     "faces": [
+      80,
+      130
+     ],
+     "size_cm": [
+      3.2,
+      11.0
+     ],
+     "width_cm": [
+      2.6,
+      10.2
+     ],
+     "height_cm": [
+      4.2,
+      14.2
+     ],
+     "variants": 6,
+     "faces_ok": true,
+     "sizes_ok": true
+    },
+    "dead_grass": {
+     "faces": [
+      72,
+      104
+     ],
+     "size_cm": [
+      5.6,
+      11.1
+     ],
+     "width_cm": [
+      5.1,
+      11.7
+     ],
+     "height_cm": [
+      4.9,
+      7.8
+     ],
+     "variants": 4,
+     "faces_ok": true,
+     "sizes_ok": true
+    }
+   },
+   "seconds": 2.13
+  },
+  "dial_zero": {
+   "amount_0": 0,
+   "weeds0_cushions0": 0,
+   "default": 1690,
+   "master_0": 0,
+   "master_1": 1690,
+   "layer_off": 0,
+   "layer_on": 1690,
+   "passed": true,
+   "seconds": 3.22
+  },
+  "isolation": {
+   "passed": true,
+   "plants": 1840,
+   "materials_changed": [],
+   "objects_changed": [],
+   "objects_added": [],
+   "materials": 134,
+   "seconds": 1.94
+  },
+  "remove": {
+   "passed": true,
+   "before": {
+    "objects": [],
+    "materials": [],
+    "node_groups": [],
+    "images": [],
+    "collections": [],
+    "meshes": []
+   },
+   "left_after_remove": {},
+   "leftovers_after_all": {},
+   "materials_same": true,
+   "seconds": 2.25
+  },
+  "generic": {
+   "plants": 143,
+   "grass": 96,
+   "moss": 47,
+   "grass_only_on_mask_half": true,
+   "moss_only_on_mask_half": true,
+   "min_cos_to_normal": 0.973,
+   "mean_cos": 0.989,
+   "max_off_surface_m": 0.0,
+   "passed": "True",
+   "seconds": 0.93
+  },
+  "second_set": {
+   "passed": true,
+   "plants": 1840,
+   "by_kind": {
+    "dead_grass": 3,
+    "grass": 5,
+    "moss_string": 1832
+   },
+   "amount_0": 0,
+   "targets": 45,
+   "target_sample": [
+    "Raked gravel court",
+    "Stepping stone 0",
+    "Stepping stone 1",
+    "Stepping stone 2",
+    "Stepping stone 3",
+    "Stepping stone 4"
+   ],
+   "z_range": [
+    -0.074,
+    1.435
+   ],
+   "calibration_notes": [],
+   "targets_roles": {
+    "roles": [
+     "ground.earth",
+     "stone.natural",
+     "ground.gravel"
+    ],
+    "align_normal": 0.8
+   },
+   "timings": {
+    "build_s": 1.01,
+    "calibrate_s": 0.25
+   },
+   "seconds": 1.61
+  }
+ },
+ "passed": true,
+ "seconds": 15.3
+}

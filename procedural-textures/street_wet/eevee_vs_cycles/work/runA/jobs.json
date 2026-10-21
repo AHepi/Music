@@ -1,0 +1,153 @@
+{
+ "kind": "street",
+ "masks": [
+  [
+   "main",
+   1080,
+   1920
+  ]
+ ],
+ "ground_masks": [
+  [
+   "main",
+   1080,
+   1920
+  ]
+ ],
+ "cameras": {
+  "cot_B": {
+   "loc": [
+    1.0,
+    1.0,
+    1.5
+   ],
+   "look": [
+    4.15,
+    6.8,
+    1.6
+   ],
+   "fov": 48
+  }
+ },
+ "jobs": [
+  {
+   "name": "main_today_eevee",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "today",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "today",
+   "eevee_set": {
+    "shadow_pool_size": "1024"
+   }
+  },
+  {
+   "name": "main_today_cycles",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "today",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "today"
+  },
+  {
+   "name": "main_dry_eevee",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "shadow_pool_size": "1024"
+   }
+  },
+  {
+   "name": "main_dry_cycles",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish"
+  },
+  {
+   "name": "main_wet_eevee",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "shadow_pool_size": "1024"
+   }
+  },
+  {
+   "name": "main_wet_cycles",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish"
+  },
+  {
+   "name": "main_wet_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "main_wet_dirt",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 4,
+   "look": "rubbish",
+   "view": "dirt"
+  },
+  {
+   "name": "cottage_wet_eevee",
+   "engine": "eevee",
+   "camera": "cot_B",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 64,
+   "look": "rubbish"
+  },
+  {
+   "name": "cottage_wet_cycles",
+   "engine": "cycles",
+   "camera": "cot_B",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 512,
+   "look": "rubbish"
+  }
+ ]
+}

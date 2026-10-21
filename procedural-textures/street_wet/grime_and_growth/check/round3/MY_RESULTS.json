@@ -1,0 +1,16 @@
+{
+ "note": "Round-3 fresh-eyes checker (art director and period; measurement, claims and reuse). Own numbers, re-measured from saved plates and redrawn pictures on the rented machine.",
+ "joints_redrawn_kit_all_with_kit_layer_pictures": {"street": "official 16/16, all dots 16/16, kit dots left out 16/16, max near contrast 0.62, kit share of road 0.222 main / 0.161 close", "lockout": "official 5/6 (fail B_heavy), all dots 3/6 (fail B_heavy, B_wet, E_wet), kit dots left out 4/6 (fail B_heavy, B_wet), max near 0.493, kit share 0.19", "total": "official 21/22, all dots 19/22, kit dots left out 20/22 (line 20)", "fixer_claim_without_kit": "21/22 but its kit_share is 0.0 on all 22 pictures, i.e. the kit layer pictures were not drawn, so nothing was left out"},
+ "dial_at_zero_street": "master 0 and all amounts 0: 0.033 percent of dots over one step, max 0.047 (12 steps of 255); ground, iron, growth, paint layers bit-identical",
+ "dial_at_zero_lockout": "master 0 and all amounts 0: 0.043 percent over one step, max 0.035",
+ "drawing_time_best_of_three_48_samples": {"street": "base 2.46 s, kit 3.05 s = 1.24 (fixer 2.20 to 3.05 = 1.39; both draws shared the card with the lockout draw)", "lockout": "base 3.34 s, kit 4.37 s = 1.31 (fixer 1.32)"},
+ "plants_main_plate_dry": {"before_fix_green_dots": 9707, "after": 4648, "median_lum_before": 0.393, "median_lum_after": 0.258, "share_lum_over_0.3_after": 0.417},
+ "plants_main_plate_wet": {"green_dots": 3873, "median_lum": 0.171, "clusters": 38, "clusters_with_root_in_puddle_picture": 8, "note": "8 are gutter moss, kerb-face moss and flat leaves on damp setts, not floating weeds; exact test against the pack's above_water map: 0 of 157 plants on it (orientation checked: with the wrong orientation 32 of 157, chance level)"},
+ "zones": "157 street / 120 lockout plants; footfall max 0.502, crown max 0.271, keep-clear max 0.196/0.29; 0 plants with footfall over 0.6; 29/19 plants stand at footfall 0.3 to 0.5 (pavement edge)",
+ "mush_main_plate": {"dry_plate_ratio": 0.9906, "wet_plate_ratio": 0.9931, "walls_mean_ratio_dry": 0.931, "left_terrace_red_over_blue": "2.02 to 1.76 dry, 2.30 to 1.87 wet", "left_terrace_saturation": "0.408 to 0.314 dry"},
+ "kit_visible_change_share_main_plate_more_than_10_steps": {"before_fix_dry": 0.072, "after_fix_dry": 0.030, "after_fix_wet": 0.037, "walls_after_fix_dry": 0.173, "road_after_fix_dry": 0.010},
+ "marks_at_painter_size_0.45_contrast_at_least_0.04_area_at_least_30_dots_dry_main": {"walls_dark_before_fix": "26 marks, 4.1 percent of wall area", "walls_dark_after_fix": "6 marks, 0.85 percent", "walls_pale_after_fix": "27 marks, 4.3 percent", "road_dark_after": "2 marks", "road_pale_after": "11 marks"},
+ "wet_look_main_plate_wet_over_dry": {"road_base": 2.011, "road_fix": 2.020, "walls_base": 0.847, "walls_fix": 0.865, "road_p95_wet": "0.499 to 0.471"},
+ "notice_plate_dry_after_fix": "about 50 plants within a 3 m by 2.5 m patch of pavement, many standing mid-slab (not in joints), several pale cream dead-grass tufts; the notice and close-road plates were not redrawn by the fix round",
+ "disk": "free space 924 MiB at start, fell to 887 MiB for a few minutes while the first redraw downloaded 32 MB (street download stopped, heavy zero-test pictures deleted), 910 MiB at the end"
+}

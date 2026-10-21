@@ -1,0 +1,15 @@
+{
+  "_note": "The 'ground' section of the courtyard set file (see pit_village_street.json). The courtyard has no road, flags, kerbs or iron, so only the dirt and moss layers go on (gravel, earth, natural stone); every element the courtyard look leaves at 0 stays off. patch_moss is ON here (no joints to follow) and joint_share is OFF where there are no joints.",
+  "schema": "weathering-ground/1",
+  "role_dials": {
+    "dirt": {
+      "ground.gravel": {"film": 1.0, "polish": 0.0, "water_marks": 0.6, "rust_halo": 0.0, "drum_ring": 0.0, "tar_patches": 0.0, "tar_splash": 0.0, "scrub_strip": 0.0},
+      "ground.earth":  {"film": 1.0, "polish": 0.0, "water_marks": 1.0, "rust_halo": 0.0, "drum_ring": 0.0, "tar_patches": 0.0, "tar_splash": 0.0, "scrub_strip": 0.0}
+    },
+    "groundmoss": {
+      "ground.gravel": {"joint_share": 0.0, "patch_moss": 0.15, "algae_fan": 0.0, "liverwort": 0.0, "far_band": 0.5},
+      "ground.earth":  {"joint_share": 0.0, "patch_moss": 1.0, "algae_fan": 0.0, "liverwort": 0.0, "far_band": 0.5},
+      "stone.natural": {"joint_share": 0.0, "patch_moss": 1.0, "algae_fan": 0.0, "liverwort": 0.0, "far_band": 0.0}
+    }
+  }
+}

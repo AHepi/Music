@@ -1,0 +1,115 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "jobs": 7,
+ "seconds_total": 51.7,
+ "registered": {
+  "walls.apply_walls": [
+   "foot",
+   "paint",
+   "runoff",
+   "soot",
+   "steps",
+   "wallcracks",
+   "wallgrowth"
+  ],
+  "ground.apply_ground": [
+   "dirt",
+   "groundcracks",
+   "groundmoss",
+   "iron"
+  ],
+  "growth.apply_growth": [
+   "growth"
+  ]
+ },
+ "register_errors": {},
+ "growth": {
+  "timings": {
+   "build_s": 0.53,
+   "calibrate_s": 5.31
+  },
+  "notes": [
+   "population toad: no plants even at gain 64, target 1.0 not reachable (no site for it in the window)"
+  ],
+  "stats": {
+   "area_m2": 113.46560000000001,
+   "wall_foot_m": 16.256,
+   "gutter_side_m": 24.248,
+   "gutter_strip_width_m": 0.6,
+   "camera": [
+    0.0,
+    3.0,
+    1.8897804021835327
+   ],
+   "forward": [
+    0.0,
+    0.993571937084198,
+    0.11320322751998901
+   ],
+   "cone_cos": 0.8480481015375296
+  },
+  "calibration": {
+   "g_bg": 48.790641994998886,
+   "g_wall": 13.325395457690314,
+   "g_gut": 0.43022967617960417,
+   "g_moss": 28.56904088633269,
+   "g_toad": 1.0,
+   "scale_total": 1.0,
+   "target": {
+    "bg": 146.37192598499666,
+    "wall": 6.662697728845157,
+    "gut": 14.197579313926937,
+    "moss": 314.2594497496596,
+    "toad": 1.0
+   },
+   "one_gain_counts": {
+    "bg": 3,
+    "wall": 4,
+    "gut": 33,
+    "moss": 11,
+    "toad": 0
+   },
+   "notes": [
+    "population toad: no plants even at gain 64, target 1.0 not reachable (no site for it in the window)"
+   ],
+   "seconds": 5.31
+  },
+  "section": {
+   "targets": {
+    "roles": [
+     "ground.sett",
+     "ground.flag",
+     "ground.channel",
+     "ground.kerb"
+    ],
+    "align_normal": 0.0
+   },
+   "piece_sets": [
+    "weeds",
+    "moss_cushions"
+   ],
+   "avoid_pieces_of": {
+    "objects": [
+     "rubbish_scatter"
+    ]
+   },
+   "gutter_side": {
+    "role": "ground.sett",
+    "beside": "ground.channel",
+    "from_m": 0.3,
+    "reach_m": 0.9
+   },
+   "wall_foot": {
+    "reach_m": 0.15
+   },
+   "yaw_axis": "y",
+   "calibration_camera": "main",
+   "zones_for_report": {
+    "fire_role": "fire",
+    "doorstep_mask": "step_foot",
+    "doorstep_min": 0.5
+   }
+  }
+ }
+}

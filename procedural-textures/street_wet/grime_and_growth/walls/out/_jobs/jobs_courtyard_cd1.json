@@ -1,0 +1,51 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "pack": true,
+ "feature_dirs": [],
+ "jobs": [
+  {
+   "name": "cd_drip",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "mask:drip",
+   "size": [
+    600,
+    400,
+    1
+   ],
+   "plate_height": 1600
+  },
+  {
+   "name": "cd_fv",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "mask:frame_valid",
+   "size": [
+    600,
+    400,
+    1
+   ],
+   "plate_height": 1600
+  },
+  {
+   "name": "cd_height",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "mask:height",
+   "size": [
+    600,
+    400,
+    1
+   ],
+   "plate_height": 1600
+  }
+ ],
+ "extra_cameras": []
+}

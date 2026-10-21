@@ -1,0 +1,31 @@
+OUTPUT NodeSocketShader       Shader  default=None
+OUTPUT NodeSocketColor        Albedo  default=[0.0, 0.0, 0.0, 1.0]
+OUTPUT NodeSocketFloat        Roughness  default=0.0
+OUTPUT NodeSocketFloat        Height  default=0.0
+OUTPUT NodeSocketVector       Normal  default=[0.0, 0.0, 0.0]
+OUTPUT NodeSocketFloat        Wear Mask  default=0.0
+INPUT  NodeSocketVector       Vector  default=[0.0, 0.0, 0.0]
+INPUT  NodeSocketVector       Generated  default=[0.0, 0.0, 0.0]
+INPUT  NodeSocketColor        Base  default=[0.11280478537082672, 0.059253521263599396, 0.027211781591176987, 1.0]
+INPUT  NodeSocketColor        Shadow  default=[0.02451501414179802, 0.03310476616024971, 0.03310476616024971, 1.0]
+INPUT  NodeSocketColor        Highlight  default=[0.2846466898918152, 0.16264718770980835, 0.06372379511594772, 1.0]
+INPUT  NodeSocketFloat        Seed  default=17.0
+INPUT  NodeSocketFloat        Scale  default=3.0
+INPUT  NodeSocketFloat        Variation  default=0.47999998927116394
+INPUT  NodeSocketFloat        Roughness  default=0.800000011920929
+INPUT  NodeSocketFloat        Bump  default=0.20000000298023224
+INPUT  NodeSocketFloat        Wear  default=0.5
+INPUT  NodeSocketFloat        Wetness  default=0.0
+INPUT  NodeSocketFloat        Stroke Length  default=0.3799999952316284
+INPUT  NodeSocketFloat        Stroke Width  default=0.054999999701976776
+Exportable material channels: "Shader" <- Light-responsive layered pigment.BSDF
+Exportable material channels: "Albedo" <- 11 / Exposed undercoat.Color
+Exportable material channels: "Roughness" <- Local dry roughness.Value
+Exportable material channels: "Height" <- Macro relief + tooth.Color
+Exportable material channels: "Normal" <- Fine bump only / true relief is modifier.Normal
+Exportable material channels: "Wear Mask" <- Wear amount.Value
+Light-responsive layered pigment: "Base Color" <- 11 / Exposed undercoat.Color
+Light-responsive layered pigment: "Roughness" <- Local dry roughness.Value
+Light-responsive layered pigment: "Normal" <- Fine bump only / true relief is modifier.Normal
+nodes: 65
+users of FOUNDRY / Wood: 2; Wet Stone users: 3

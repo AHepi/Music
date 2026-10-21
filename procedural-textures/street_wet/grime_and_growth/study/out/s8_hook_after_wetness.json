@@ -1,0 +1,648 @@
+{
+ "with_wetness_applied": true,
+ "materials": {
+  "boarded_blue": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "boarded_green": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "brass": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "cast_iron": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "channel_stones": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "chimney_pot_clay": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "chimney_pot_sooted": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "colliery_brick": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "colliery_yard": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "cottage_brick": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "cottage_brick_door_left": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "cottage_brick_door_right": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "cottage_stone": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "cottage_stone_door_left": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "cottage_stone_door_right": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "dark_dressed_stone": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "dressed_stone": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "engine_window_glow": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": true
+  },
+  "fascia_board": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "headframe_steel": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "interior_dark": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "kerb_stone": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "lamp_glass_glow": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": true
+  },
+  "moor": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "paint_black": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "paint_bottle_green": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "paint_brown": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "paint_cream": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "paint_maroon": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "paint_navy": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "pavement_flags": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "plaster_dark": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "ridge_clay": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "roof_slate": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "sky_dome_glow": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": true
+  },
+  "spoil_heap": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "street_setts": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": true,
+    "Specular IOR Level": true,
+    "Coat Weight": true,
+    "Normal": true
+   },
+   "old_hook_works": true,
+   "emission": false
+  },
+  "wheel_iron": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "window_dark_0": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "window_dark_1": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "window_dark_2": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": false
+  },
+  "window_lit_glow_0": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": true
+  },
+  "window_lit_glow_1": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": true
+  },
+  "window_lit_glow_2": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": false
+   },
+   "old_hook_works": false,
+   "emission": true
+  },
+  "wire_rope": {
+   "principled": 1,
+   "surface_from": "ShaderNodeBsdfPrincipled",
+   "wired": {
+    "Base Color": true,
+    "Roughness": false,
+    "Specular IOR Level": false,
+    "Coat Weight": false,
+    "Normal": true
+   },
+   "old_hook_works": false,
+   "emission": false
+  }
+ },
+ "summary": {
+  "total": 45,
+  "old_hook_works": 15,
+  "no_principled": 0,
+  "roughness_wired": 15,
+  "normal_wired": 36,
+  "specular_wired": 15,
+  "coat_wired": 15
+ },
+ "old_hook_cannot": [
+  "boarded_blue",
+  "boarded_green",
+  "brass",
+  "cast_iron",
+  "chimney_pot_clay",
+  "chimney_pot_sooted",
+  "engine_window_glow",
+  "fascia_board",
+  "headframe_steel",
+  "interior_dark",
+  "lamp_glass_glow",
+  "moor",
+  "paint_black",
+  "paint_bottle_green",
+  "paint_brown",
+  "paint_cream",
+  "paint_maroon",
+  "paint_navy",
+  "plaster_dark",
+  "ridge_clay",
+  "sky_dome_glow",
+  "spoil_heap",
+  "wheel_iron",
+  "window_dark_0",
+  "window_dark_1",
+  "window_dark_2",
+  "window_lit_glow_0",
+  "window_lit_glow_1",
+  "window_lit_glow_2",
+  "wire_rope"
+ ],
+ "old_hook_works_on": [
+  "channel_stones",
+  "colliery_brick",
+  "colliery_yard",
+  "cottage_brick",
+  "cottage_brick_door_left",
+  "cottage_brick_door_right",
+  "cottage_stone",
+  "cottage_stone_door_left",
+  "cottage_stone_door_right",
+  "dark_dressed_stone",
+  "dressed_stone",
+  "kerb_stone",
+  "pavement_flags",
+  "roof_slate",
+  "street_setts"
+ ]
+}

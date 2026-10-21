@@ -1,0 +1,65 @@
+{
+ "layers": {
+  "soot": {
+   "film_mult": 0.6,
+   "sheltered_mult": 0.5,
+   "washed_mult": 1.0,
+   "washed_share": 0.17,
+   "washed_pale": 0.8,
+   "floor_mult": 0.3,
+   "grey_pull": 0.25,
+   "mortar_soot": 0.4,
+   "stack_mult": 0.5,
+   "roof_mult": 0.8,
+   "inflate_limit": 8.0,
+   "edge_sharp": 0.85,
+   "mottle_stretch": 3.0
+  },
+  "runoff": {
+   "strength": 1.0,
+   "tone": -0.5,
+   "stain_value": 0.9,
+   "edge_dark": 0.5,
+   "width_dots": 10.0,
+   "source_share": 0.8,
+   "pair_share": 0.8,
+   "leak_share": 0.15,
+   "inflate_limit": 12.0
+  },
+  "foot": {
+   "splash_strength": 0.9,
+   "splash_pale": 0.9,
+   "inflate_limit": 8.0,
+   "salt_bloom": 0.02
+  },
+  "steps": {},
+  "wallgrowth": {
+   "moss_amount": 0.05,
+   "algae_amount": 0.6,
+   "lichen_amount": 0.0,
+   "patch_dots": 15.0,
+   "inflate_limit": 8.0,
+   "moss_value": 0.2,
+   "saturation": 0.5,
+   "algae_strength": 0.4
+  },
+  "wallcracks": {
+   "crack_amount": 0.5,
+   "crack_dots": 3.5,
+   "stepped_cracks": 1.0,
+   "corner_chips": 0.5,
+   "inflate_limit": 8.0
+  }
+ },
+ "role_dials": {
+  "soot": {
+   "wall.trim": {
+    "film_mult": 1.15,
+    "sheltered_mult": 1.5
+   },
+   "wall.industrial": {
+    "film_mult": 1.4
+   }
+  }
+ }
+}

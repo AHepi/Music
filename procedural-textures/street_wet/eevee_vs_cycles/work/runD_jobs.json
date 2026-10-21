@@ -1,0 +1,125 @@
+{
+ "kind": "street",
+ "masks": [],
+ "ground_masks": [],
+ "cameras": {
+  "cot_B": {
+   "loc": [
+    1.0,
+    1.0,
+    1.5
+   ],
+   "look": [
+    4.15,
+    6.8,
+    1.6
+   ],
+   "fov": 48
+  }
+ },
+ "jobs": [
+  {
+   "name": "dg_main_eevee_plate_pool512",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish"
+  },
+  {
+   "name": "dg_main_eevee_threshold_0001",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "shadow_pool_size": "1024",
+    "light_threshold": 0.0001
+   }
+  },
+  {
+   "name": "dg_main_eevee_nofastgi",
+   "engine": "eevee",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "shadow_pool_size": "1024",
+    "use_fast_gi": false
+   }
+  },
+  {
+   "name": "dg_main_cycles_domedark",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "dome_dark"
+  },
+  {
+   "name": "dg_main_cycles_glowdark",
+   "engine": "cycles",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "glow_dark"
+  },
+  {
+   "name": "dg_cottage_eevee_threshold_0001",
+   "engine": "eevee",
+   "camera": "cot_B",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "light_threshold": 0.0001
+   }
+  },
+  {
+   "name": "dg_cottage_cycles_domedark",
+   "engine": "cycles",
+   "camera": "cot_B",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "dome_dark"
+  },
+  {
+   "name": "dg_cottage_cycles_glowdark",
+   "engine": "cycles",
+   "camera": "cot_B",
+   "light": "A",
+   "state": "wet",
+   "w": 1600,
+   "h": 1200,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "glow_dark"
+  }
+ ]
+}

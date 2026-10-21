@@ -1,0 +1,303 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "size": [
+  300,
+  200
+ ],
+ "samples": 4,
+ "seconds": 76.3,
+ "layers": [
+  "soot",
+  "runoff",
+  "foot",
+  "steps",
+  "paint",
+  "wallcracks",
+  "wallgrowth"
+ ],
+ "all_passed": false,
+ "results": {
+  "soot": {
+   "dial_zero": {
+    "identical_16bit": false,
+    "passed_zero": true,
+    "acts_at_amount_1_share_changed": 0.2853,
+    "acts_max_diff": 0.037354081869125366,
+    "at_amount_0": {
+     "dots": 60000,
+     "max_diff": 0.0007019340991973877,
+     "mean_diff": 3.803396111834445e-06,
+     "share_over_one_step": 0.0,
+     "share_changed": 0.058133333333333335
+    }
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 1196,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     5,
+     7,
+     8,
+     10
+    ],
+    "class_id_counts": {
+     "0": 28507,
+     "1": 9232,
+     "2": 4425,
+     "3": 522,
+     "4": 5962,
+     "5": 1043,
+     "6": 4407,
+     "7": 1878,
+     "8": 446,
+     "10": 3058,
+     "11": 198,
+     "12": 322
+    },
+    "mask_max": 1.0,
+    "outside_by_role": {}
+   },
+   "nodes": 126,
+   "noise_nodes": 2,
+   "forbidden_nodes": [],
+   "passed": true,
+   "seconds": 8.5
+  },
+  "runoff": {
+   "dial_zero": {
+    "identical_16bit": false,
+    "passed_zero": true,
+    "acts_at_amount_1_share_changed": 0.0008203703703703704,
+    "acts_max_diff": 0.00091552734375,
+    "at_amount_0": {
+     "dots": 540000,
+     "max_diff": 0.00091552734375,
+     "mean_diff": 5.707987327241426e-08,
+     "share_over_one_step": 0.0,
+     "share_changed": 0.0008203703703703704
+    }
+   },
+   "isolation": {
+    "passed": false,
+    "dots_acting": 0,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     5,
+     10
+    ],
+    "class_id_counts": {
+     "0": 257012,
+     "1": 83142,
+     "2": 39809,
+     "3": 4606,
+     "4": 53717,
+     "5": 10295,
+     "6": 38637,
+     "7": 16511,
+     "8": 4040,
+     "10": 27524,
+     "11": 1822,
+     "12": 2885
+    },
+    "mask_max": 0.0,
+    "outside_by_role": {}
+   },
+   "note": "the layer drew nothing in this view, so isolation could not be proven (no dot changed outside its roles either)",
+   "nodes": 146,
+   "noise_nodes": 3,
+   "forbidden_nodes": [],
+   "passed": false,
+   "seconds": 7.1
+  },
+  "foot": {
+   "dial_zero": {
+    "identical_16bit": true,
+    "passed_zero": true,
+    "acts_at_amount_1_share_changed": 0.12522916666666667,
+    "acts_max_diff": 0.252964049577713,
+    "at_amount_0": {
+     "dots": 240000,
+     "max_diff": 0.0,
+     "mean_diff": 0.0,
+     "share_over_one_step": 0.0,
+     "share_changed": 0.0
+    }
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 3250,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     5,
+     7,
+     10
+    ],
+    "class_id_counts": {
+     "0": 114238,
+     "1": 36957,
+     "2": 17691,
+     "3": 2054,
+     "4": 23866,
+     "5": 5062,
+     "6": 16661,
+     "7": 7357,
+     "8": 1808,
+     "10": 12217,
+     "11": 805,
+     "12": 1284
+    },
+    "mask_max": 1.0,
+    "outside_by_role": {}
+   },
+   "nodes": 140,
+   "noise_nodes": 3,
+   "forbidden_nodes": [],
+   "passed": true,
+   "seconds": 6.6
+  },
+  "steps": {
+   "passed": true,
+   "note": "no role in this set: the layer goes into no material",
+   "seconds": 0.0
+  },
+  "paint": {
+   "passed": true,
+   "note": "no role in this set: the layer goes into no material",
+   "seconds": 0.0
+  },
+  "wallcracks": {
+   "dial_zero": {
+    "identical_16bit": false,
+    "passed_zero": true,
+    "acts_at_amount_1_share_changed": 0.17381666666666667,
+    "acts_max_diff": 0.09396505355834961,
+    "at_amount_0": {
+     "dots": 60000,
+     "max_diff": 0.0012512356042861938,
+     "mean_diff": 2.524098135836539e-06,
+     "share_over_one_step": 0.0,
+     "share_changed": 0.04085
+    }
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 164,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     4,
+     5,
+     6,
+     7,
+     10
+    ],
+    "class_id_counts": {
+     "0": 28507,
+     "1": 9232,
+     "2": 4425,
+     "3": 522,
+     "4": 5962,
+     "5": 1043,
+     "6": 4407,
+     "7": 1878,
+     "8": 446,
+     "10": 3058,
+     "11": 198,
+     "12": 322
+    },
+    "mask_max": 1.0,
+    "outside_by_role": {}
+   },
+   "nodes": 172,
+   "noise_nodes": 2,
+   "forbidden_nodes": [],
+   "passed": true,
+   "seconds": 13.8
+  },
+  "wallgrowth": {
+   "dial_zero": {
+    "identical_16bit": false,
+    "passed_zero": true,
+    "acts_at_amount_1_share_changed": 0.31925,
+    "acts_max_diff": 0.3514000177383423,
+    "at_amount_0": {
+     "dots": 60000,
+     "max_diff": 0.0012512356042861938,
+     "mean_diff": 2.407539234638989e-08,
+     "share_over_one_step": 0.0,
+     "share_changed": 0.00011666666666666667
+    }
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 1154,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     5,
+     6,
+     8,
+     10,
+     11
+    ],
+    "class_id_counts": {
+     "0": 28507,
+     "1": 9232,
+     "2": 4425,
+     "3": 522,
+     "4": 5962,
+     "5": 1043,
+     "6": 4407,
+     "7": 1878,
+     "8": 446,
+     "10": 3058,
+     "11": 198,
+     "12": 322
+    },
+    "mask_max": 1.0,
+    "outside_by_role": {}
+   },
+   "nodes": 152,
+   "noise_nodes": 3,
+   "forbidden_nodes": [],
+   "passed": true,
+   "seconds": 13.1
+  },
+  "reuse": {
+   "passed": true,
+   "layers": {
+    "soot": 4,
+    "runoff": 2,
+    "foot": 4,
+    "steps": 0,
+    "paint": 0,
+    "wallcracks": 103,
+    "wallgrowth": 59
+   },
+   "errors": {},
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 4.0
+  },
+  "master_zero": {
+   "passed": true,
+   "identical_16bit": false,
+   "dots": 60000,
+   "max_diff": 0.0034638047218322754,
+   "mean_diff": 6.619627129111905e-06,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.0906,
+   "seconds": 11.9
+  },
+  "determinism": {
+   "passed": true,
+   "identical_16bit": false,
+   "dots": 60000,
+   "max_diff": 0.0010986477136611938,
+   "mean_diff": 3.221341415837742e-08,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.0002666666666666667,
+   "seconds": 11.1
+  }
+ }
+}

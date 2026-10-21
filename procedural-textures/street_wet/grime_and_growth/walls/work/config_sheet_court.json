@@ -1,0 +1,87 @@
+{
+ "size": [
+  1200,
+  800
+ ],
+ "samples": 24,
+ "camera": "backwall",
+ "extra_cameras": [
+  {
+   "name": "backwall",
+   "location": [
+    9.6,
+    3.0,
+    1.3
+   ],
+   "look_at": [
+    7.2,
+    10.35,
+    1.1
+   ],
+   "fov_v": 46.0
+  }
+ ],
+ "pictures": [
+  {
+   "name": "c_before",
+   "layers": []
+  },
+  {
+   "name": "c_kept",
+   "layers": [
+    "soot",
+    "runoff",
+    "foot",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "look": "mossy_courtyard_kept"
+  },
+  {
+   "name": "c_neglected",
+   "layers": [
+    "soot",
+    "runoff",
+    "foot",
+    "wallcracks",
+    "wallgrowth"
+   ],
+   "look": "mossy_courtyard_neglected"
+  },
+  {
+   "name": "c_soot",
+   "layers": [
+    "soot"
+   ],
+   "look": "mossy_courtyard_kept"
+  },
+  {
+   "name": "c_runoff",
+   "layers": [
+    "runoff"
+   ],
+   "look": "mossy_courtyard_kept"
+  },
+  {
+   "name": "c_foot",
+   "layers": [
+    "foot"
+   ],
+   "look": "mossy_courtyard_kept"
+  },
+  {
+   "name": "c_wallcracks",
+   "layers": [
+    "wallcracks"
+   ],
+   "look": "mossy_courtyard_kept"
+  },
+  {
+   "name": "c_wallgrowth",
+   "layers": [
+    "wallgrowth"
+   ],
+   "look": "mossy_courtyard_kept"
+  }
+ ]
+}

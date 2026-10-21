@@ -1,0 +1,101 @@
+{
+ "set": "pit_village_street",
+ "scene": "lockout",
+ "size": [
+  540,
+  960
+ ],
+ "seconds": 11.2,
+ "results": {
+  "nothing": {
+   "passed": true,
+   "identical_16bit": true,
+   "size": [
+    540,
+    960
+   ],
+   "samples": 4,
+   "dots": 518400,
+   "max_diff": 0.0,
+   "mean_diff": 0.0,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.0,
+   "seconds": 2.5
+  },
+  "legacy_nothing": {
+   "passed": true,
+   "identical_16bit": false,
+   "size": [
+    540,
+    960
+   ],
+   "samples": 4,
+   "dots": 518400,
+   "max_diff": 0.0005645900964736938,
+   "mean_diff": 1.5207961556740202e-09,
+   "share_over_one_step": 0.0,
+   "share_changed": 1.3503086419753087e-05,
+   "seconds": 4.3
+  },
+  "dial_zero": {
+   "passed": true,
+   "identical_16bit": true,
+   "acts_at_amount_1": {
+    "dots": 518400,
+    "max_diff": 0.731151282787323,
+    "mean_diff": 0.15575626492500305,
+    "share_over_one_step": 0.6584529320987654,
+    "share_changed": 0.79765625
+   },
+   "at_amount_0": {
+    "dots": 518400,
+    "max_diff": 0.0,
+    "mean_diff": 0.0,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0
+   },
+   "seconds": 2.1
+  },
+  "isolation": {
+   "passed": true,
+   "dots_acting": 50687,
+   "dots_acting_outside_roles": 0,
+   "roles": [
+    6
+   ],
+   "class_id_counts": {
+    "0": 187504,
+    "1": 121402,
+    "2": 2865,
+    "3": 3541,
+    "4": 7097,
+    "5": 48,
+    "6": 50687,
+    "7": 24139,
+    "8": 21375,
+    "9": 2221,
+    "10": 4358,
+    "11": 5404,
+    "12": 17785,
+    "13": 2730,
+    "14": 9605,
+    "15": 8607,
+    "16": 37169,
+    "17": 11863
+   },
+   "mask_max": 1.0,
+   "outside_by_role": {},
+   "seconds": 1.2
+  },
+  "determinism": {
+   "passed": true,
+   "identical_16bit": true,
+   "dots": 518400,
+   "max_diff": 0.0,
+   "mean_diff": 0.0,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.0,
+   "seconds": 1.1
+  }
+ }
+}

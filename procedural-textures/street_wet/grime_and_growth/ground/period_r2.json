@@ -1,0 +1,130 @@
+{
+ "rows": [
+  {
+   "element": "flags with fine cracks (share of flag area)",
+   "cap": [
+    0.08,
+    0.15
+   ],
+   "kind": "share",
+   "part": "groundcracks:flag_fine_cells",
+   "value": 0.0788,
+   "inside_cap": false
+  },
+  {
+   "element": "flags with broken cracks",
+   "cap": [
+    0.02,
+    0.04
+   ],
+   "kind": "share",
+   "part": "groundcracks:flag_broken_cells",
+   "value": 0.0349,
+   "inside_cap": true
+  },
+  {
+   "element": "tilted flags",
+   "cap": [
+    0.03,
+    0.06
+   ],
+   "kind": "share",
+   "part": "groundcracks:flag_tilt",
+   "value": 0.0165,
+   "inside_cap": false
+  },
+  {
+   "element": "kerb chips (share of kerb length)",
+   "cap": [
+    0.2,
+    0.35
+   ],
+   "kind": "length_share",
+   "part": "groundcracks:kerb_chips",
+   "sides": [
+    0.7843,
+    0.7245
+   ],
+   "value": 0.7544,
+   "inside_cap": false
+  },
+  {
+   "element": "setts disturbed (share of road area)",
+   "cap": [
+    0.03,
+    0.06
+   ],
+   "kind": "share",
+   "part": "groundcracks:sett_disturbed",
+   "value": 0.0486,
+   "inside_cap": true
+  },
+  {
+   "element": "open sett joints (share of joint area)",
+   "cap": [
+    0.1,
+    0.2
+   ],
+   "kind": "share",
+   "part": "groundcracks:sett_joints",
+   "value": 0.1571,
+   "inside_cap": true
+  },
+  {
+   "element": "tar (share of road)",
+   "cap": [
+    0.0,
+    0.04
+   ],
+   "kind": "share",
+   "part": "dirt:tar",
+   "value": 0.0072,
+   "inside_cap": true
+  },
+  {
+   "element": "tar patches in the first 30 m",
+   "cap": [
+    1,
+    3
+   ],
+   "kind": "count",
+   "part": "dirt:tar",
+   "value": 2,
+   "inside_cap": true
+  },
+  {
+   "element": "moss in joints (share of kerb and gutter joint length)",
+   "cap": [
+    0.05,
+    0.15
+   ],
+   "kind": "share",
+   "part": "groundmoss:joint_moss",
+   "value": 0.031,
+   "inside_cap": false
+  },
+  {
+   "element": "liverwort patches",
+   "cap": [
+    0,
+    2
+   ],
+   "kind": "count",
+   "part": "groundmoss:liverwort",
+   "value": 0,
+   "inside_cap": true
+  },
+  {
+   "element": "algae fans (count of fans on the whole ground)",
+   "cap": [
+    0,
+    999
+   ],
+   "kind": "count",
+   "part": "groundmoss:algae",
+   "value": 0,
+   "inside_cap": true
+  }
+ ],
+ "all_inside": false
+}

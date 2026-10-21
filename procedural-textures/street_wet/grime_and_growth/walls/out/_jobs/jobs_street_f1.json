@@ -1,0 +1,239 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "f_base_right02",
+   "camera": "right02",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "f_soot_right02",
+   "camera": "right02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fm_soot_layer_soot_right02",
+   "camera": "right02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fm_soot_layer_soot.washed_right02",
+   "camera": "right02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot.washed",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fm_soot_layer_soot.sheltered_right02",
+   "camera": "right02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot.sheltered",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "f_class_right02",
+   "camera": "right02",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "class",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "f_base_left02",
+   "camera": "left02",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "f_soot_left02",
+   "camera": "left02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fm_soot_layer_soot_left02",
+   "camera": "left02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fm_soot_layer_soot.washed_left02",
+   "camera": "left02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot.washed",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fm_soot_layer_soot.sheltered_left02",
+   "camera": "left02",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot.sheltered",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "f_class_left02",
+   "camera": "left02",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "class",
+   "size": [
+    1000,
+    1500,
+    1
+   ],
+   "plate_height": 2730
+  }
+ ],
+ "extra_cameras": [
+  {
+   "name": "right02",
+   "location": [
+    -2.0,
+    6.25,
+    3.87
+   ],
+   "look_at": [
+    4.15,
+    6.25,
+    3.87
+   ],
+   "fov_v": 58.0
+  },
+  {
+   "name": "left02",
+   "location": [
+    2.0,
+    6.25,
+    3.87
+   ],
+   "look_at": [
+    -4.15,
+    6.25,
+    3.87
+   ],
+   "fov_v": 58.0
+  },
+  {
+   "name": "right03",
+   "location": [
+    -2.0,
+    10.75,
+    4.19
+   ],
+   "look_at": [
+    4.15,
+    10.75,
+    4.19
+   ],
+   "fov_v": 58.0
+  },
+  {
+   "name": "left03",
+   "location": [
+    2.0,
+    10.75,
+    4.19
+   ],
+   "look_at": [
+    -4.15,
+    10.75,
+    4.19
+   ],
+   "fov_v": 58.0
+  }
+ ]
+}

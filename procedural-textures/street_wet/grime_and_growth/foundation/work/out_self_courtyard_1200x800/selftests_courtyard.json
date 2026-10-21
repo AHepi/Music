@@ -1,0 +1,121 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "size": [
+  1200,
+  800
+ ],
+ "seconds": 12.2,
+ "results": {
+  "hook": {
+   "passed": true,
+   "materials_total": 134,
+   "hooked_plain": 82,
+   "hooked_adapted": 46,
+   "layers_in": {
+    "template_a": 128,
+    "template_b": 128,
+    "template_c": 128
+   },
+   "skipped_no_surface": [],
+   "forced_past_policy": [],
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 1.1
+  },
+  "remove": {
+   "passed": true,
+   "order": [
+    "template_c",
+    "template_a",
+    "template_b",
+    "template_c",
+    "template_a"
+   ],
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 1.3
+  },
+  "nothing": {
+   "passed": true,
+   "identical_16bit": false,
+   "size": [
+    1200,
+    800
+   ],
+   "samples": 4,
+   "dots": 960000,
+   "max_diff": 0.021805137395858765,
+   "mean_diff": 5.327311737346463e-05,
+   "share_over_one_step": 1.1458333333333333e-05,
+   "share_changed": 0.5108375,
+   "seconds": 3.3
+  },
+  "dial_zero": {
+   "passed": true,
+   "identical_16bit": false,
+   "acts_at_amount_1": {
+    "dots": 960000,
+    "max_diff": 0.6765239834785461,
+    "mean_diff": 0.15706929564476013,
+    "share_over_one_step": 0.6214802083333333,
+    "share_changed": 0.753971875
+   },
+   "at_amount_0": {
+    "dots": 960000,
+    "max_diff": 0.021698325872421265,
+    "mean_diff": 5.955693995929323e-05,
+    "share_over_one_step": 1.3541666666666666e-05,
+    "share_changed": 0.5464208333333334
+   },
+   "seconds": 2.6
+  },
+  "isolation": {
+   "passed": true,
+   "dots_acting": 48831,
+   "dots_acting_outside_roles": 0,
+   "roles": [
+    10
+   ],
+   "class_id_counts": {
+    "0": 456982,
+    "1": 147799,
+    "2": 70770,
+    "3": 8173,
+    "4": 95448,
+    "5": 20250,
+    "6": 66783,
+    "7": 29385,
+    "8": 7217,
+    "10": 48831,
+    "11": 3217,
+    "12": 5145
+   },
+   "mask_max": 1.0,
+   "outside_by_role": {},
+   "seconds": 1.3
+  },
+  "determinism": {
+   "passed": true,
+   "identical_16bit": false,
+   "dots": 960000,
+   "max_diff": 0.00901806354522705,
+   "mean_diff": 0.00016644819697830826,
+   "share_over_one_step": 2.604166666666667e-05,
+   "share_changed": 0.7227177083333334,
+   "seconds": 1.4
+  },
+  "reuse": {
+   "passed": true,
+   "layers": {
+    "template_a": 120,
+    "template_b": 120,
+    "template_c": 120
+   },
+   "errors": {},
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 1.1
+  }
+ }
+}

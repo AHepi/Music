@@ -1,0 +1,45 @@
+{
+ "kind": "lockout",
+ "masks": [],
+ "ground_masks": [],
+ "jobs": [
+  {
+   "name": "dg_lockout_eevee_threshold_0001",
+   "engine": "eevee",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "rubbish",
+   "eevee_set": {
+    "light_threshold": 0.0001
+   }
+  },
+  {
+   "name": "dg_lockout_cycles_domedark",
+   "engine": "cycles",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "dome_dark"
+  },
+  {
+   "name": "dg_lockout_cycles_glowdark",
+   "engine": "cycles",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 512,
+   "look": "rubbish",
+   "diag": "glow_dark"
+  }
+ ]
+}

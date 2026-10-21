@@ -1,0 +1,102 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "jobs": 5,
+ "seconds_total": 4.6,
+ "registered": {
+  "walls.apply_walls": [
+   "foot",
+   "paint",
+   "runoff",
+   "soot",
+   "steps",
+   "wallcracks",
+   "wallgrowth"
+  ],
+  "ground.apply_ground": [
+   "dirt",
+   "groundcracks",
+   "groundmoss",
+   "iron"
+  ],
+  "growth.apply_growth": [
+   "growth"
+  ]
+ },
+ "register_errors": {},
+ "growth": {
+  "timings": {
+   "build_s": 0.38,
+   "calibrate_s": 0.06
+  },
+  "notes": [],
+  "stats": {
+   "area_m2": 249.36960000000002,
+   "wall_foot_m": 361.28000000000003,
+   "gutter_side_m": 0.0,
+   "gutter_strip_width_m": 0.6,
+   "camera": [
+    -5.199999809265137,
+    -5.599999904632568,
+    3.0
+   ],
+   "forward": [
+    0.5382359027862549,
+    0.8247162103652954,
+    -0.17362454533576965
+   ],
+   "cone_cos": 0.8007313863464504
+  },
+  "calibration": {
+   "g_bg": 14.174094496057261,
+   "g_wall": 0.0,
+   "g_gut": 0.0,
+   "g_moss": 2.971881692918925,
+   "g_toad": 0.0,
+   "scale_total": 1.0,
+   "target": {
+    "bg": 722.8788192989203,
+    "wall": 0.0,
+    "gut": 0.0,
+    "moss": 1726.6632635858955,
+    "toad": 0.0
+   },
+   "one_gain_counts": {
+    "bg": 51,
+    "wall": 0,
+    "gut": 0,
+    "moss": 581,
+    "toad": 0
+   },
+   "notes": [],
+   "seconds": 0.06
+  },
+  "section": {
+   "_note": "The courtyard's growth section (first draft, to confirm in the courtyard job): moss cushions on earth, stones and the edge of the gravel, a little grass at the gravel edge; the add-on already grew moss and pebbles, so cushions leave most of the existing growth alone (existing_avoid) and the weeds dial of the kept look is 0.1.",
+   "targets": {
+    "roles": [
+     "ground.earth",
+     "stone.natural",
+     "ground.gravel"
+    ],
+    "align_normal": 0.8
+   },
+   "piece_sets": [
+    "moss_cushions",
+    "grass_edge"
+   ],
+   "avoid_pieces_of": {
+    "objects": []
+   },
+   "wall_foot": {
+    "reach_m": 0.25
+   },
+   "yaw_axis": null,
+   "calibration_camera": null,
+   "realise_targets": true,
+   "realise_instances": [
+    "roof.tile"
+   ]
+  }
+ }
+}

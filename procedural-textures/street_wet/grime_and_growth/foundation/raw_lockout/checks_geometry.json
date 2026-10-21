@@ -1,0 +1,354 @@
+{
+ "checks": {
+  "slope_degrees": {
+   "passed": true,
+   "value": 4.000073374135233,
+   "wanted": 4.0,
+   "note": "plane fitted through the crown role (the overall lean)"
+  },
+  "crown_height_m": {
+   "passed": true,
+   "value": 0.07999992370605469,
+   "wanted": 0.08,
+   "note": "highest minus lowest road dot in a row"
+  },
+  "crown_near_middle": {
+   "passed": true,
+   "value": 1.0,
+   "wanted": ">= 0.9 of dots at >= 0.6",
+   "note": "within 1 m of the middle line"
+  },
+  "crown_far": {
+   "passed": true,
+   "value": 1.0,
+   "wanted": ">= 0.95 of dots at 0.0",
+   "note": "farther than 1.8 m from the middle line"
+  },
+  "crown_off_role": {
+   "passed": true,
+   "value": 0.0,
+   "wanted": 0.0,
+   "note": "no crown on other ground roles"
+  },
+  "lowness_gutter": {
+   "passed": true,
+   "value": 0.9998065015479877,
+   "wanted": ">= 0.95 of dots at >= 0.7",
+   "note": "ground.channel dots"
+  },
+  "lowness_road_middle": {
+   "passed": true,
+   "value": 0.0,
+   "wanted": "<= 0.2",
+   "note": "95th percentile of the middle of the crown role"
+  },
+  "entrances_found": {
+   "passed": true,
+   "value": 28,
+   "wanted": 28,
+   "note": ""
+  },
+  "ledge_sills": {
+   "passed": true,
+   "value": [
+    -0.26,
+    -0.08,
+    0.0,
+    0.0,
+    0.0,
+    0.85,
+    0.85,
+    2.68,
+    2.88,
+    3.1,
+    3.55,
+    3.55,
+    3.55,
+    3.55,
+    5.18,
+    5.18,
+    5.9,
+    6.0,
+    6.1
+   ],
+   "wanted": [
+    0.85,
+    3.55
+   ],
+   "note": "within 5 cm: [True, True]"
+  },
+  "ledge_lintels": {
+   "passed": true,
+   "value": [
+    -0.26,
+    -0.08,
+    0.0,
+    0.0,
+    0.0,
+    0.85,
+    0.85,
+    2.68,
+    2.88,
+    3.1,
+    3.55,
+    3.55,
+    3.55,
+    3.55,
+    5.18,
+    5.18,
+    5.9,
+    6.0,
+    6.1
+   ],
+   "wanted": [
+    2.68,
+    2.88,
+    5.18
+   ],
+   "note": "within 5 cm: [True, True, True]"
+  },
+  "ledge_string_course_m": {
+   "passed": true,
+   "value": [
+    -0.26,
+    -0.08,
+    0.0,
+    0.0,
+    0.0,
+    0.85,
+    0.85,
+    2.68,
+    2.88,
+    3.1,
+    3.55,
+    3.55,
+    3.55,
+    3.55,
+    5.18,
+    5.18,
+    5.9,
+    6.0,
+    6.1
+   ],
+   "wanted": 3.1,
+   "note": ""
+  },
+  "ledge_eaves_course_m": {
+   "passed": true,
+   "value": [
+    -0.26,
+    -0.08,
+    0.0,
+    0.0,
+    0.0,
+    0.85,
+    0.85,
+    2.68,
+    2.88,
+    3.1,
+    3.55,
+    3.55,
+    3.55,
+    3.55,
+    5.18,
+    5.18,
+    5.9,
+    6.0,
+    6.1
+   ],
+   "wanted": 5.9,
+   "note": ""
+  },
+  "ledge_steps_out": {
+   "passed": true,
+   "value": [
+    0.18,
+    0.48
+   ],
+   "wanted": [
+    0.18,
+    0.48
+   ],
+   "note": "middle of each step tread (m out from the wall face)"
+  },
+  "pipe_across": {
+   "passed": true,
+   "value": 2.05,
+   "wanted": 2.0,
+   "note": "pipe column across the front (sign depends on the frame)"
+  },
+  "pipe_proud": {
+   "passed": true,
+   "value": 0.153,
+   "wanted": 0.18,
+   "note": ""
+  },
+  "stone_pieces_wanted": {
+   "passed": null,
+   "value": null,
+   "wanted": {
+    "role": "ground.kerb",
+    "count": 187
+   },
+   "note": "compare with stats.fine.pieces of the pack"
+  }
+ },
+ "timings": [
+  [
+   "scene geometry gathered",
+   0.46
+  ],
+  [
+   "ground height",
+   0.88
+  ],
+  [
+   "slope, lowness, crown",
+   0.11
+  ],
+  [
+   "wall distance",
+   2.53
+  ],
+  [
+   "prop, feet, cover distances",
+   1.25
+  ],
+  [
+   "inside corners (90129 dots)",
+   3.65
+  ],
+  [
+   "seams, water",
+   0.41
+  ],
+  [
+   "steps (504 tread triangles)",
+   0.54
+  ],
+  [
+   "sharp edges (13260 edges)",
+   0.19
+  ],
+  [
+   "stone gaps (pieces per role: {'ground.sett': 1, 'ground.channel': 2, 'ground.kerb': 187, 'ground.flag': 2})",
+   0.29
+  ],
+  [
+   "openness (ground)",
+   11.57
+  ],
+  [
+   "sun (1 positions, ground)",
+   0.12
+  ],
+  [
+   "sheltered ground",
+   3.42
+  ],
+  [
+   "footfall",
+   0.48
+  ],
+  [
+   "keep clear",
+   2.27
+  ],
+  [
+   "entry random, existing growth",
+   0.29
+  ],
+  [
+   "ground drip lines",
+   0.06
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_left_walls: sheltered (230x350)",
+   5.72
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_left_walls: reveal",
+   0.27
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_left_walls: ledges (25 sources)",
+   0.08
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_left_walls: corners",
+   0.0
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_left_walls: shade (8 cm)",
+   1.39
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_right_walls: sheltered (230x350)",
+   5.72
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_right_walls: reveal",
+   0.28
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_right_walls: ledges (25 sources)",
+   0.11
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_right_walls: corners",
+   0.0
+  ],
+  [
+   "sheet cottage_shell_cottage_brick_door_right_walls: shade (8 cm)",
+   1.74
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_left_walls: sheltered (230x350)",
+   6.1
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_left_walls: reveal",
+   0.26
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_left_walls: ledges (25 sources)",
+   0.08
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_left_walls: corners",
+   0.0
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_left_walls: shade (8 cm)",
+   1.35
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_right_walls: sheltered (230x350)",
+   6.83
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_right_walls: reveal",
+   0.33
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_right_walls: ledges (25 sources)",
+   0.09
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_right_walls: corners",
+   0.0
+  ],
+  [
+   "sheet cottage_shell_cottage_stone_door_right_walls: shade (8 cm)",
+   1.62
+  ],
+  [
+   "raw arrays saved",
+   1.12
+  ],
+  [
+   "checks",
+   0.07
+  ]
+ ]
+}

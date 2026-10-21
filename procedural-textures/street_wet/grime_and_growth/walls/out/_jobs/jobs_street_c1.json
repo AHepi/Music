@@ -1,0 +1,380 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "c_base_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ]
+  },
+  {
+   "name": "c_soot_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "soot": {
+     "film_mult": 0.88,
+     "sheltered_mult": 0.55,
+     "washed_mult": 1.0,
+     "washed_pale": 0.8,
+     "mortar_soot": 0.4,
+     "grey_pull": 0.25
+    }
+   }
+  },
+  {
+   "name": "c_runoff_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "runoff": {
+     "strength": 0.8,
+     "stain_value": 0.8
+    }
+   }
+  },
+  {
+   "name": "c_foot_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "foot": {
+     "splash_strength": 0.6,
+     "splash_pale": 0.6
+    }
+   }
+  },
+  {
+   "name": "c_steps_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "steps": {}
+   }
+  },
+  {
+   "name": "c_all_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "soot": {
+     "film_mult": 0.88,
+     "sheltered_mult": 0.55,
+     "washed_mult": 1.0,
+     "washed_pale": 0.8,
+     "mortar_soot": 0.4,
+     "grey_pull": 0.25
+    },
+    "runoff": {
+     "strength": 0.8,
+     "stain_value": 0.8
+    },
+    "foot": {
+     "splash_strength": 0.6,
+     "splash_pale": 0.6
+    },
+    "steps": {}
+   }
+  },
+  {
+   "name": "c_base_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ]
+  },
+  {
+   "name": "c_soot_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "soot": {
+     "film_mult": 0.88,
+     "sheltered_mult": 0.55,
+     "washed_mult": 1.0,
+     "washed_pale": 0.8,
+     "mortar_soot": 0.4,
+     "grey_pull": 0.25
+    }
+   }
+  },
+  {
+   "name": "c_runoff_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "runoff": {
+     "strength": 0.8,
+     "stain_value": 0.8
+    }
+   }
+  },
+  {
+   "name": "c_foot_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "foot": {
+     "splash_strength": 0.6,
+     "splash_pale": 0.6
+    }
+   }
+  },
+  {
+   "name": "c_steps_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "steps": {}
+   }
+  },
+  {
+   "name": "c_all_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "soot": {
+     "film_mult": 0.88,
+     "sheltered_mult": 0.55,
+     "washed_mult": 1.0,
+     "washed_pale": 0.8,
+     "mortar_soot": 0.4,
+     "grey_pull": 0.25
+    },
+    "runoff": {
+     "strength": 0.8,
+     "stain_value": 0.8
+    },
+    "foot": {
+     "splash_strength": 0.6,
+     "splash_pale": 0.6
+    },
+    "steps": {}
+   }
+  },
+  {
+   "name": "c_base_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ]
+  },
+  {
+   "name": "c_soot_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "soot": {
+     "film_mult": 0.88,
+     "sheltered_mult": 0.55,
+     "washed_mult": 1.0,
+     "washed_pale": 0.8,
+     "mortar_soot": 0.4,
+     "grey_pull": 0.25
+    }
+   }
+  },
+  {
+   "name": "c_runoff_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "runoff": {
+     "strength": 0.8,
+     "stain_value": 0.8
+    }
+   }
+  },
+  {
+   "name": "c_foot_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "foot": {
+     "splash_strength": 0.6,
+     "splash_pale": 0.6
+    }
+   }
+  },
+  {
+   "name": "c_steps_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "steps": {}
+   }
+  },
+  {
+   "name": "c_all_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "soot": {
+     "film_mult": 0.88,
+     "sheltered_mult": 0.55,
+     "washed_mult": 1.0,
+     "washed_pale": 0.8,
+     "mortar_soot": 0.4,
+     "grey_pull": 0.25
+    },
+    "runoff": {
+     "strength": 0.8,
+     "stain_value": 0.8
+    },
+    "foot": {
+     "splash_strength": 0.6,
+     "splash_pale": 0.6
+    },
+    "steps": {}
+   }
+  }
+ ],
+ "extra_cameras": []
+}

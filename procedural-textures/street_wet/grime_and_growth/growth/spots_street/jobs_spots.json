@@ -1,0 +1,152 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "today_street",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "today",
+   "scene": "street"
+  },
+  {
+   "name": "spots_spot_right_base",
+   "camera": "spot_right",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ],
+   "group": "spots",
+   "plate_height": 2730
+  },
+  {
+   "name": "spots_spot_right_wet_growth",
+   "camera": "spot_right",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ],
+   "group": "spots",
+   "plate_height": 2730,
+   "pieces_json": true
+  },
+  {
+   "name": "spots_spot_right_dry_growth",
+   "camera": "spot_right",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ],
+   "group": "spots",
+   "plate_height": 2730,
+   "pieces_json": false
+  },
+  {
+   "name": "spots_spot_left_base",
+   "camera": "spot_left",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ],
+   "group": "spots",
+   "plate_height": 2730
+  },
+  {
+   "name": "spots_spot_left_wet_growth",
+   "camera": "spot_left",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ],
+   "group": "spots",
+   "plate_height": 2730,
+   "pieces_json": true
+  },
+  {
+   "name": "spots_spot_left_dry_growth",
+   "camera": "spot_left",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ],
+   "group": "spots",
+   "plate_height": 2730,
+   "pieces_json": false
+  }
+ ],
+ "extra_cameras": [
+  {
+   "name": "spot_right",
+   "location": [
+    1.0,
+    10.0,
+    1.05
+   ],
+   "look_at": [
+    2.55,
+    12.8,
+    0.85
+   ],
+   "fov_v": 42.0
+  },
+  {
+   "name": "spot_left",
+   "location": [
+    -1.0,
+    6.0,
+    0.62
+   ],
+   "look_at": [
+    -2.5,
+    9.0,
+    0.25
+   ],
+   "fov_v": 42.0
+  }
+ ]
+}

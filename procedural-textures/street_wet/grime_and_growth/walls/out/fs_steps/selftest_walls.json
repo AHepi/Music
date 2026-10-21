@@ -1,0 +1,88 @@
+{
+ "set": "proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+ "scene": "street",
+ "size": [
+  135,
+  240
+ ],
+ "samples": 4,
+ "seconds": 7.7,
+ "layers": [
+  "steps"
+ ],
+ "all_passed": true,
+ "results": {
+  "steps": {
+   "dial_zero": {
+    "identical_16bit": false,
+    "passed_zero": true,
+    "acts_at_amount_1_share_changed": 0.6791550925925925,
+    "acts_max_diff": 0.3286793529987335,
+    "at_amount_0": {
+     "dots": 172800,
+     "max_diff": 0.013763636350631714,
+     "mean_diff": 2.3553759547212394e-06,
+     "share_over_one_step": 0.00026041666666666666,
+     "share_changed": 0.00849537037037037
+    }
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 6354,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     7
+    ],
+    "class_id_counts": {
+     "0": 537,
+     "2": 596,
+     "3": 10236,
+     "4": 68780,
+     "5": 96,
+     "6": 31757,
+     "7": 34908,
+     "11": 21355,
+     "12": 3463,
+     "13": 1072
+    },
+    "mask_max": 1.0,
+    "outside_by_role": {}
+   },
+   "nodes": 100,
+   "noise_nodes": 1,
+   "forbidden_nodes": [],
+   "passed": true,
+   "seconds": 4.5
+  },
+  "reuse": {
+   "passed": true,
+   "layers": {
+    "steps": 3
+   },
+   "errors": {},
+   "wiring_problems": [],
+   "not_restored": [],
+   "seconds": 0.5
+  },
+  "master_zero": {
+   "passed": true,
+   "identical_16bit": false,
+   "dots": 32400,
+   "max_diff": 0.014892801642417908,
+   "mean_diff": 4.053220891364617e-06,
+   "share_over_one_step": 0.0004320987654320988,
+   "share_changed": 0.013796296296296296,
+   "seconds": 1.4
+  },
+  "determinism": {
+   "passed": true,
+   "identical_16bit": false,
+   "dots": 32400,
+   "max_diff": 0.0018005669116973877,
+   "mean_diff": 1.1522798359919761e-07,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.0007716049382716049,
+   "seconds": 1.3
+  }
+ }
+}

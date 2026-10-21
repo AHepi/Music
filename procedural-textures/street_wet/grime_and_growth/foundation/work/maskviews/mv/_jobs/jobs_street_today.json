@@ -1,0 +1,433 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground",
+  "proc-work/street_wet/grime_and_growth/walls",
+  "proc-work/street_wet/grime_and_growth/growth",
+  "proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "maskview_height_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:height",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_shade_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:shade",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_dampness_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:dampness",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_sheltered_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:sheltered",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_drip_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:drip",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_wall_dist_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:wall_dist",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_lowness_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:lowness",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_crown_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:crown",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_footfall_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:footfall",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_keepclear_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:keepclear",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_moss_site_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:moss_site",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_weed_site_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:weed_site",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_algae_site_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:algae_site",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_edge_dist_main",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:edge_dist",
+   "size": [
+    270,
+    480,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_height_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:height",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_shade_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:shade",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_dampness_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:dampness",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_sheltered_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:sheltered",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_drip_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:drip",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_wall_dist_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:wall_dist",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_lowness_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:lowness",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_crown_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:crown",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_footfall_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:footfall",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_keepclear_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:keepclear",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_moss_site_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:moss_site",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_weed_site_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:weed_site",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_algae_site_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:algae_site",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  },
+  {
+   "name": "maskview_edge_dist_close_road",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "today",
+   "view": "mask:edge_dist",
+   "size": [
+    270,
+    202,
+    1
+   ],
+   "group": "maskview",
+   "plate_height": 2730
+  }
+ ]
+}

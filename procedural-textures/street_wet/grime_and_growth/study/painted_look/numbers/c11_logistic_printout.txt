@@ -1,0 +1,46 @@
+full  speck  n=  3667  p(back) = logistic(9.17 + 0.69*ln(width) + 3.12*ln(contrast))
+      contrast needed for 50% : 2 px: 0.045   3 px: 0.041   4 px: 0.039   5 px: 0.037   8 px: 0.033   12 px: 0.030   16 px: 0.029
+      contrast needed for 80% : 2 px: 0.071   3 px: 0.065   4 px: 0.061   5 px: 0.058   8 px: 0.052   12 px: 0.047   16 px: 0.044
+        check width 1-2.5, contrast 0.03-0.05: observed 0.35  fitted 0.31  (n=109)
+        check width 2.5-4.5, contrast 0.03-0.05: observed 0.35  fitted 0.40  (n=295)
+        check width 2.5-4.5, contrast 0.05-0.08: observed 0.83  fitted 0.77  (n=53)
+        check width 4.5-8, contrast 0.03-0.05: observed 0.50  fitted 0.51  (n=282)
+        check width 4.5-8, contrast 0.05-0.08: observed 0.91  fitted 0.84  (n=55)
+        check width 8-16, contrast 0.03-0.05: observed 0.75  fitted 0.63  (n=67)
+        check width 8-16, contrast 0.05-0.08: observed 0.90  fitted 0.89  (n=30)
+        check width 8-16, contrast 0.08-0.14: observed 1.00  fitted 0.97  (n=16)
+full  line   n=  2025  p(back) = logistic(6.28 + 1.05*ln(width) + 2.35*ln(contrast))
+      contrast needed for 50% : 2 px: 0.051   3 px: 0.042   4 px: 0.037   5 px: 0.034   8 px: 0.027   12 px: 0.023   16 px: 0.020
+      contrast needed for 80% : 2 px: 0.091   3 px: 0.076   4 px: 0.067   5 px: 0.061   8 px: 0.049   12 px: 0.041   16 px: 0.036
+        check width 1-2.5, contrast 0.03-0.05: observed 0.32  fitted 0.31  (n=225)
+        check width 1-2.5, contrast 0.05-0.08: observed 0.57  fitted 0.57  (n=46)
+        check width 2.5-4.5, contrast 0.03-0.05: observed 0.45  fitted 0.44  (n=131)
+        check width 2.5-4.5, contrast 0.05-0.08: observed 0.48  fitted 0.72  (n=29)
+        check width 4.5-8, contrast 0.03-0.05: observed 0.68  fitted 0.59  (n=117)
+        check width 4.5-8, contrast 0.05-0.08: observed 0.94  fitted 0.85  (n=34)
+        check width 8-16, contrast 0.03-0.05: observed 0.72  fitted 0.72  (n=43)
+        check width 8-16, contrast 0.05-0.08: observed 0.89  fitted 0.89  (n=28)
+small speck  n=  1632  p(back) = logistic(3.62 + 1.57*ln(width) + 1.85*ln(contrast))
+      contrast needed for 50% : 2 px: 0.079   3 px: 0.056   4 px: 0.044   5 px: 0.036   8 px: 0.024   12 px: 0.017   16 px: 0.013
+      contrast needed for 80% : 2 px: 0.166   3 px: 0.118   4 px: 0.092   5 px: 0.076   8 px: 0.051   12 px: 0.036   16 px: 0.028
+        check width 1-2.5, contrast 0.03-0.05: observed 0.20  fitted 0.18  (n=103)
+        check width 2.5-4.5, contrast 0.03-0.05: observed 0.35  fitted 0.36  (n=257)
+        check width 2.5-4.5, contrast 0.05-0.08: observed 0.45  fitted 0.57  (n=38)
+        check width 2.5-4.5, contrast 0.08-0.14: observed 0.53  fitted 0.79  (n=15)
+        check width 4.5-8, contrast 0.03-0.05: observed 0.51  fitted 0.55  (n=158)
+        check width 4.5-8, contrast 0.05-0.08: observed 0.85  fitted 0.78  (n=67)
+        check width 4.5-8, contrast 0.08-0.14: observed 1.00  fitted 0.91  (n=17)
+        check width 8-16, contrast 0.03-0.05: observed 0.77  fitted 0.76  (n=43)
+        check width 8-16, contrast 0.05-0.08: observed 0.97  fitted 0.90  (n=32)
+        check width 8-16, contrast 0.08-0.14: observed 0.96  fitted 0.96  (n=27)
+small line   n=  1686  p(back) = logistic(3.99 + 1.22*ln(width) + 1.78*ln(contrast))
+      contrast needed for 50% : 2 px: 0.066   3 px: 0.050   4 px: 0.041   5 px: 0.035   8 px: 0.025   12 px: 0.019   16 px: 0.016
+      contrast needed for 80% : 2 px: 0.143   3 px: 0.109   4 px: 0.089   5 px: 0.077   8 px: 0.055   12 px: 0.042   16 px: 0.035
+        check width 1-2.5, contrast 0.03-0.05: observed 0.28  fitted 0.25  (n=214)
+        check width 1-2.5, contrast 0.05-0.08: observed 0.34  fitted 0.44  (n=71)
+        check width 2.5-4.5, contrast 0.03-0.05: observed 0.42  fitted 0.40  (n=143)
+        check width 2.5-4.5, contrast 0.05-0.08: observed 0.70  fitted 0.63  (n=44)
+        check width 4.5-8, contrast 0.03-0.05: observed 0.61  fitted 0.58  (n=102)
+        check width 4.5-8, contrast 0.05-0.08: observed 0.86  fitted 0.78  (n=44)
+        check width 8-16, contrast 0.03-0.05: observed 0.87  fitted 0.73  (n=31)
+        check width 8-16, contrast 0.05-0.08: observed 0.95  fitted 0.89  (n=19)

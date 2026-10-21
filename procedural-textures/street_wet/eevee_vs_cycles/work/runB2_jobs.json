@@ -1,0 +1,121 @@
+{
+ "kind": "lockout",
+ "masks": [
+  [
+   "lockout",
+   1536,
+   2730
+  ]
+ ],
+ "ground_masks": [
+  [
+   "lockout",
+   1536,
+   2730
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "lockout_wet_eevee",
+   "engine": "eevee",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "rubbish"
+  },
+  {
+   "name": "lockout_wet_cycles",
+   "engine": "cycles",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 512,
+   "look": "rubbish"
+  },
+  {
+   "name": "lockout_wet_cycles_seed1",
+   "engine": "cycles",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 512,
+   "look": "rubbish",
+   "cycles": {
+    "seed": 1
+   }
+  },
+  {
+   "name": "lockout_wet_joints_eevee",
+   "engine": "eevee",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "joints"
+  },
+  {
+   "name": "lockout_wet_joints_cycles",
+   "engine": "cycles",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 512,
+   "look": "joints"
+  },
+  {
+   "name": "lockout_wet_round2_eevee",
+   "engine": "eevee",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 64,
+   "look": "round2"
+  },
+  {
+   "name": "lockout_wet_round2_cycles",
+   "engine": "cycles",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 512,
+   "look": "round2"
+  },
+  {
+   "name": "lockout_wet_puddlemask",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "lockout_wet_dirt",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 4,
+   "look": "rubbish",
+   "view": "dirt"
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "pack": true,
+ "feature_dirs": [
+  "proc-work/street_wet/grime_and_growth/ground"
+ ],
+ "jobs": [
+  {
+   "name": "photo__base",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1200,
+    800,
+    16
+   ],
+   "group": "x"
+  },
+  {
+   "name": "photo__kit_dirt-groundmoss",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundmoss",
+   "view": "beauty",
+   "size": [
+    1200,
+    800,
+    16
+   ],
+   "group": "x"
+  },
+  {
+   "name": "photo__solo_groundmoss",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:groundmoss",
+   "view": "beauty",
+   "size": [
+    1200,
+    800,
+    16
+   ],
+   "group": "x"
+  },
+  {
+   "name": "photo__solo_dirt",
+   "camera": "photo",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:dirt",
+   "view": "beauty",
+   "size": [
+    1200,
+    800,
+    16
+   ],
+   "group": "x"
+  }
+ ]
+}

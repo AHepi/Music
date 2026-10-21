@@ -53,8 +53,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   dark plain sky, no dry patches when the camera moves (new wet behind painting), and the stage no longer crushes the wet road dark (fix found and made in a
   copy of the stage; not yet in the real film). It looks more like a detailed 3D picture with a paint finish than the flat, outlined look of the earlier
   dry painting; your decision: "No keep it. The reference doesn't have to be followed exactly. This already looks incredible."
-- **Running now:** a reusable weathering kit (log 25: grime, cracks, stains, weeds and moss, tuned on the street and proven on the Japanese courtyard with only
-  a settings file), and EEVEE and Cycles side by side (log 26).
+- **Weathering kit done as a first version (log 25):** one reusable kit of grime, cracks, stains, weeds and moss (code in `kits/weathering/`, one settings
+  file per place, looks as presets). On the street it works but, after calming, adds little you can see at film size except rust and small weeds; the
+  courtyard took it from a settings file alone and turned visibly mossy. Three things block the courtyard job (roof, long garden wall, per-material dials).
+- **EEVEE and Cycles compared (log 26)** and **the wet street is in the real film (log 27).**
+- **Nothing running now. All rented machines are ended (18:44).** Waiting for your instructions.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -326,6 +329,27 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     project, so it waits for your go); only stills, not the whole clip. **RunPod:** the machine has served this and three other jobs since 05:39 (about
     US$2.65 so far). Pictures: `24 Wet street painting round 2 - pictures/`; work: `street_wet/painter_round_2/`.
 
+25. **A reusable weathering kit: grime, cracks, stains, weeds and moss.** You said: "The next thing to apply to the streets is things like: grime, cracks,
+    stains, weeds and moss." then "They should be reusable too. Which is perfect. Because next is the Japanese forecourt again". Sixteen helpers: four
+    studies (1926 pit villages; our pipeline; what survives the painter; the courtyard), a plan, shared "where things may go" maps read from any set's
+    shape, three builders (walls, ground, growth), a combiner, a reuse test, two checkers, a fix round, a re-check and one painter test. **Built:** the kit
+    (`kits/weathering/`): twelve layers (soot and dirt film, run-off streaks, damp tide-marks, rust, whitened doorsteps, tar and water marks, cracks and
+    chipped kerbs, flat moss, algae, lichen, 3D weeds and moss cushions, worn paint) that go on any scene in one call and come off leaving it exactly as it
+    was; everything about one place sits in a settings file (`sets/pit_village_street.json`, `sets/japanese_courtyard.json`), looks are presets. The study
+    found no direct account of 1926 Durham street grime; its rules come from soot and damp science, plant surveys and northern practice, with honest
+    confidence marks (one surprise: many East Durham colliery villages had tarmac roads by 1917). **On the street:** joints still pass (21 of 22; 20 counting
+    every dot), the street is not turned to dark mush (plate brightness moves 1-1.6 %), no plant on the road middle, lanes or doorsteps. The first checkers
+    found lime-bright weeds standing in puddles, pale panels on the brick row, cold blue doorsteps and over-even cracks; the fix round calmed all of that
+    and cut the extra drawing time from 2.1 to 1.4 times. **But** the re-check says that at film size the kit now adds little a viewer can see except rust
+    and a few weeds: the walls are nearly black and seen edge-on, so soot, run-off streaks and damp bands vanish; the notice shot's pavement got about 50
+    weeds mid-slab; moss pieces look like cut-outs. **Painter test** (one call, US$0.197-0.277): the big weed clumps, the drum's soot and rust, and rust on
+    the walls survive; hairline cracks and tiny tufts do not; the painter again added (grey) clouds. **Reuse:** the courtyard took the kit from a settings
+    file and a new look alone, no code changed, and became visibly mossy (stones, lantern, wall caps, weeds at the gravel edge). Three things could not be
+    done by settings: moss on the hall roof (its materials hide inside a node setup the kit cannot see), run-off streaks on the long garden wall, and
+    different strengths per material for anything but soot. **Not tested:** Cycles with the kit, moving pictures, the courtyard after the fix round.
+    Pictures: `25 Street grime, cracks, stains, weeds and moss - pictures/`; recipe: `kits/weathering/15 Recipe - weathering kit - grime, cracks, stains,
+    weeds and moss - how it is made.md`.
+
 26. **EEVEE and Cycles side by side.** You saw the Cycles door and said the bricks "look incredible", then "Yeah do it!" to drawing the whole wet street both
     ways. Same file, camera, lights, wetness, joints and rubbish; only the renderer differs; drawn on the rented RTX 4090. **Answer (fresh checker):** the
     whole street does NOT get the door's jump. The bricks and stone are the same photo scans in both, and walls look about the same (the drawer's claim that
@@ -355,6 +379,5 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 
 ## Next step
 
-Running now: the wet street is going into the real film's lockout shot (the old dry paintings kept as alternates), then the clip is filmed and checked
-frame by frame (log 27). Also still running: the weathering kit (log 25) and EEVEE and Cycles side by side (log 26). Later: the immersive camera through the
-full set, with lighting that reacts to characters.
+Waiting for your instructions (you asked me to stop after these jobs). When you pick it up, the obvious candidates are the courtyard job (with the three kit
+blockers fixed first) and the immersive camera through the full street, using Cycles where the lights are on.

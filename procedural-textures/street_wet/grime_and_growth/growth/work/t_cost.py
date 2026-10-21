@@ -1,0 +1,15 @@
+import bpy, time
+t=bpy.data.node_groups.new('c','GeometryNodeTree')
+t0=time.time()
+for i in range(300): t.nodes.new('ShaderNodeMath')
+print('300 nodes', round(time.time()-t0,3))
+t0=time.time()
+ns=list(t.nodes)
+for i in range(299): t.links.new(ns[i].outputs[0], ns[i+1].inputs[0])
+print('299 links', round(time.time()-t0,3))
+t0=time.time()
+for n in ns: n.inputs[1].default_value=2.0
+print('300 defaults', round(time.time()-t0,3))
+t0=time.time()
+for i in range(300): t.nodes.new('ShaderNodeMath')
+print('300 more nodes (tree now 600)', round(time.time()-t0,3))

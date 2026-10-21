@@ -1,0 +1,160 @@
+{
+ "set": "japanese_courtyard",
+ "scene": "courtyard",
+ "size": [
+  270,
+  480
+ ],
+ "seconds": 24.0,
+ "results": {
+  "dirt": {
+   "dial_zero": {
+    "passed": true,
+    "identical_16bit_at_amount_0": false,
+    "identical_16bit_master_0": false,
+    "acts_on_strong_values": {
+     "dots": 129600,
+     "max_diff": 0.07748529314994812,
+     "mean_diff": 0.0019940296187996864,
+     "share_over_one_step": 0.1633101851851852,
+     "share_changed": 0.45643518518518517
+    },
+    "at_amount_0": {
+     "dots": 129600,
+     "max_diff": 0.007141202688217163,
+     "mean_diff": 3.158830077154562e-05,
+     "share_over_one_step": 3.08641975308642e-05,
+     "share_changed": 0.3396604938271605
+    },
+    "at_master_0": {
+     "dots": 129600,
+     "max_diff": 0.007141202688217163,
+     "mean_diff": 3.158830077154562e-05,
+     "share_over_one_step": 3.08641975308642e-05,
+     "share_changed": 0.3396604938271605
+    }
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 16453,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     1,
+     2
+    ],
+    "class_id_counts": {
+     "0": 56001,
+     "1": 20632,
+     "2": 1345,
+     "3": 1661,
+     "4": 16020,
+     "5": 4819,
+     "6": 11735,
+     "7": 8640,
+     "8": 2007,
+     "10": 6583,
+     "11": 157
+    },
+    "mask_max": 1.0,
+    "outside_by_role": {}
+   },
+   "remove": {
+    "passed": true,
+    "wiring_problems": [],
+    "not_restored": []
+   },
+   "passed": true,
+   "seconds": 7.0
+  },
+  "groundcracks": {
+   "passed": true,
+   "skipped": "no roles in this set (nothing to test)"
+  },
+  "groundmoss": {
+   "dial_zero": {
+    "passed": true,
+    "identical_16bit_at_amount_0": false,
+    "identical_16bit_master_0": false,
+    "acts_on_strong_values": {
+     "dots": 129600,
+     "max_diff": 0.21045240759849548,
+     "mean_diff": 0.005021767225116491,
+     "share_over_one_step": 0.100625,
+     "share_changed": 0.4931327160493827
+    },
+    "at_amount_0": {
+     "dots": 129600,
+     "max_diff": 0.04979020357131958,
+     "mean_diff": 0.00010334093531128019,
+     "share_over_one_step": 0.008125,
+     "share_changed": 0.2530246913580247
+    },
+    "at_master_0": {
+     "dots": 129600,
+     "max_diff": 0.04979020357131958,
+     "mean_diff": 9.123246127273887e-05,
+     "share_over_one_step": 0.008125,
+     "share_changed": 0.11162037037037037
+    }
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 10549,
+    "dots_acting_outside_roles": 0,
+    "roles": [
+     1,
+     2,
+     4
+    ],
+    "class_id_counts": {
+     "0": 56001,
+     "1": 20632,
+     "2": 1345,
+     "3": 1661,
+     "4": 16020,
+     "5": 4819,
+     "6": 11735,
+     "7": 8640,
+     "8": 2007,
+     "10": 6583,
+     "11": 157
+    },
+    "mask_max": 0.5996032357215881,
+    "outside_by_role": {}
+   },
+   "remove": {
+    "passed": true,
+    "wiring_problems": [],
+    "not_restored": []
+   },
+   "passed": true,
+   "seconds": 8.5
+  },
+  "iron": {
+   "passed": true,
+   "skipped": "no roles in this set (nothing to test)"
+  },
+  "determinism": {
+   "passed": true,
+   "identical_16bit": false,
+   "dots": 129600,
+   "max_diff": 0.0010223537683486938,
+   "mean_diff": 1.0766318155219778e-05,
+   "share_over_one_step": 0.0,
+   "share_changed": 0.15396604938271605
+  },
+  "reuse_smoke": {
+   "passed": true,
+   "layers": {
+    "dirt": 2,
+    "groundcracks": 0,
+    "groundmoss": 45,
+    "iron": 0
+   },
+   "errors": {},
+   "wiring_problems": [],
+   "not_restored": []
+  },
+  "passed": true
+ }
+}
