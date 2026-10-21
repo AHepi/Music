@@ -1,0 +1,249 @@
+{
+ "masks": [
+  [
+   "main",
+   1536,
+   2730
+  ],
+  [
+   "close_road",
+   1920,
+   1440
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "main_A_dry_before",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "variant": "baseline",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_A_dry_after",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_A_dry_real",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_A_wet_before",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "baseline",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_A_wet_after",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_A_wet_real",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_E_wet_before",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "variant": "baseline",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_E_wet_after",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "main_E_wet_real",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "close_A_wet_before",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "baseline",
+   "args": {},
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_A_wet_after",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_A_wet_real",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_E_wet_before",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "variant": "baseline",
+   "args": {},
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_E_wet_after",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_E_wet_real",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_A_dry_before",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "variant": "baseline",
+   "args": {},
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_A_dry_after",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_A_dry_real",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1920,
+   "h": 1440,
+   "samples": 48
+  },
+  {
+   "name": "close_A_wet_puddlemask",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "show_masks",
+   "args": {},
+   "w": 1920,
+   "h": 1440,
+   "samples": 4
+  },
+  {
+   "name": "main_A_wet_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "show_masks",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 4
+  }
+ ],
+ "after_apply": "proc-work/street_wet/relief_and_rubbish/setts/tools/register_variants.py"
+}

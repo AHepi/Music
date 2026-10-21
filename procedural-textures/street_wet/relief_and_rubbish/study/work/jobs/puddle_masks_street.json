@@ -1,0 +1,60 @@
+{
+ "masks": [
+  [
+   "main",
+   540,
+   960
+  ],
+  [
+   "close_road",
+   640,
+   480
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "main_A_wet_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "show_masks",
+   "args": {},
+   "w": 540,
+   "h": 960,
+   "samples": 4
+  },
+  {
+   "name": "close_A_wet_puddlemask",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "show_masks",
+   "args": {},
+   "w": 640,
+   "h": 480,
+   "samples": 4
+  },
+  {
+   "name": "main_A_heavy_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "variant": "show_masks",
+   "args": {},
+   "w": 540,
+   "h": 960,
+   "samples": 4
+  },
+  {
+   "name": "close_A_heavy_puddlemask",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "variant": "show_masks",
+   "args": {},
+   "w": 640,
+   "h": 480,
+   "samples": 4
+  }
+ ]
+}

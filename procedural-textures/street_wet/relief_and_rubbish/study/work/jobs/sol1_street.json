@@ -1,0 +1,406 @@
+{
+ "masks": [
+  [
+   "main",
+   540,
+   960
+  ],
+  [
+   "close_road",
+   640,
+   480
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "close_A_wet_joint_a",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": null,
+    "spec_keep": null,
+    "coat_keep": null
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_joint_b",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_joint_c",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.3,
+    "rough_to": 1.0,
+    "spec_keep": 0.05,
+    "coat_keep": 0.0
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_geometry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "geometry",
+   "args": {
+    "y_min": 3.0,
+    "y_max": 14.0,
+    "level": 6,
+    "depth": 0.025
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_geometry_sharp",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "geometry",
+   "args": {
+    "y_min": 3.0,
+    "y_max": 14.0,
+    "level": 6,
+    "depth": 0.02,
+    "picture": "joint_height.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_combo_b_geosharp",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "combo",
+   "args": {
+    "parts": [
+     [
+      "joint_picture",
+      {
+       "colour_mult": 0.45,
+       "rough_to": 0.95,
+       "spec_keep": 0.25,
+       "coat_keep": 0.15
+      }
+     ],
+     [
+      "geometry",
+      {
+       "y_min": 3.0,
+       "y_max": 14.0,
+       "level": 6,
+       "depth": 0.02,
+       "picture": "joint_height.png"
+      }
+     ]
+    ]
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_dry_joint_b",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "main_A_wet_joint_b",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_A_wet_joint_c",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.3,
+    "rough_to": 1.0,
+    "spec_keep": 0.05,
+    "coat_keep": 0.0
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_A_wet_geometry_sharp",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "geometry",
+   "args": {
+    "y_min": 3.0,
+    "y_max": 18.0,
+    "level": 6,
+    "depth": 0.02,
+    "picture": "joint_height.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_A_wet_combo_b_geosharp",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "combo",
+   "args": {
+    "parts": [
+     [
+      "joint_picture",
+      {
+       "colour_mult": 0.45,
+       "rough_to": 0.95,
+       "spec_keep": 0.25,
+       "coat_keep": 0.15
+      }
+     ],
+     [
+      "geometry",
+      {
+       "y_min": 3.0,
+       "y_max": 18.0,
+       "level": 6,
+       "depth": 0.02,
+       "picture": "joint_height.png"
+      }
+     ]
+    ]
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_A_dry_joint_b",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_C_wet_joint_b",
+   "camera": "main",
+   "light": "C",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_D_wet_joint_b",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_E_wet_joint_b",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "close_C_wet_joint_b",
+   "camera": "close_road",
+   "light": "C",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_D_wet_joint_b",
+   "camera": "close_road",
+   "light": "D",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_E_wet_joint_b",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "main_A_heavy_joint_b",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_E_heavy_joint_b",
+   "camera": "main",
+   "light": "E",
+   "state": "heavy",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.45,
+    "rough_to": 0.95,
+    "spec_keep": 0.25,
+    "coat_keep": 0.15
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "close_E_wet_geometry_sharp",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "variant": "geometry",
+   "args": {
+    "y_min": 3.0,
+    "y_max": 14.0,
+    "level": 6,
+    "depth": 0.02,
+    "picture": "joint_height.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_D_wet_geometry_sharp",
+   "camera": "close_road",
+   "light": "D",
+   "state": "wet",
+   "variant": "geometry",
+   "args": {
+    "y_min": 3.0,
+    "y_max": 14.0,
+    "level": 6,
+    "depth": 0.02,
+    "picture": "joint_height.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  }
+ ]
+}

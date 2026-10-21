@@ -1,0 +1,689 @@
+{
+ "kind": "street",
+ "masks": [],
+ "ground_masks": [],
+ "jobs": [
+  {
+   "name": "maskview_main_A_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 16,
+   "look": "rubbish",
+   "view": "mask_colours",
+   "film_look": true
+  },
+  {
+   "name": "maskview_gutter_A_wet",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 16,
+   "look": "rubbish",
+   "view": "mask_colours",
+   "film_look": true
+  },
+  {
+   "name": "maskview_doorstep_A_wet",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 16,
+   "look": "rubbish",
+   "view": "mask_colours",
+   "film_look": true
+  },
+  {
+   "name": "doorstepC_amount_0",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "amount": 0
+   }
+  },
+  {
+   "name": "doorstepC_default",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty"
+  },
+  {
+   "name": "doorstepC_amount_2",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "amount": 2.0
+   }
+  },
+  {
+   "name": "doorstepC_dust_off",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "dust": 0
+   }
+  },
+  {
+   "name": "doorstepC_ash_off",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "ash": 0
+   }
+  },
+  {
+   "name": "doorstepC_mud_off",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "mud": 0
+   }
+  },
+  {
+   "name": "doorstepC_straw_off",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "straw": 0
+   }
+  },
+  {
+   "name": "doorstepC_paper_off",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "paper": 0
+   }
+  },
+  {
+   "name": "doorstepC_leaves_off",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "leaves": 0
+   }
+  },
+  {
+   "name": "doorstepC_pieces_off",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "pieces_density": 0
+   }
+  },
+  {
+   "name": "doorstepC_dust_only",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "ash": 0,
+    "mud": 0,
+    "straw": 0,
+    "paper": 0,
+    "leaves": 0,
+    "pieces_density": 0
+   }
+  },
+  {
+   "name": "doorstepC_pieces_only",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "dust": 0,
+    "ash": 0,
+    "mud": 0,
+    "straw": 0,
+    "paper": 0,
+    "leaves": 0,
+    "relief": 0.0
+   }
+  },
+  {
+   "name": "doorstepC_relief_0",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "relief": 0.0
+   }
+  },
+  {
+   "name": "doorstepC_grit_size_2",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "grit_size": 2.0
+   }
+  },
+  {
+   "name": "doorstepC_grit_size_0.6",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "grit_size": 0.6
+   }
+  },
+  {
+   "name": "doorstepC_wet_look_0",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "wet_look": 0.0
+   }
+  },
+  {
+   "name": "doorstepC_dust_darkness_0.3",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "dust_darkness": 0.3
+   }
+  },
+  {
+   "name": "doorstepC_dust_darkness_1",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "dust_darkness": 1.0
+   }
+  },
+  {
+   "name": "doorstepC_pieces_density_2",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "pieces_density": 2.0
+   }
+  },
+  {
+   "name": "doorstepC_piece_size_1.6",
+   "camera": "doorstep_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "piece_size": 1.6
+   }
+  },
+  {
+   "name": "gutterC_default",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty"
+  },
+  {
+   "name": "wallC_default",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty"
+  },
+  {
+   "name": "gutterC_corners_0",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "corners": 0
+   }
+  },
+  {
+   "name": "wallC_corners_0",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "corners": 0
+   }
+  },
+  {
+   "name": "gutterC_corners_2",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "corners": 2.0
+   }
+  },
+  {
+   "name": "wallC_corners_2",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "corners": 2.0
+   }
+  },
+  {
+   "name": "gutterC_wall_foot_0",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "wall_foot": 0
+   }
+  },
+  {
+   "name": "wallC_wall_foot_0",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "wall_foot": 0
+   }
+  },
+  {
+   "name": "gutterC_wall_foot_2",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "wall_foot": 2.0
+   }
+  },
+  {
+   "name": "wallC_wall_foot_2",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "wall_foot": 2.0
+   }
+  },
+  {
+   "name": "gutterC_gutter_0",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "gutter": 0
+   }
+  },
+  {
+   "name": "wallC_gutter_0",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "gutter": 0
+   }
+  },
+  {
+   "name": "gutterC_gutter_2",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "gutter": 2.0
+   }
+  },
+  {
+   "name": "wallC_gutter_2",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "gutter": 2.0
+   }
+  },
+  {
+   "name": "gutterC_patchiness_0",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "patchiness": 0.0
+   }
+  },
+  {
+   "name": "wallC_patchiness_0",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "patchiness": 0.0
+   }
+  },
+  {
+   "name": "gutterC_patchiness_1",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "patchiness": 1.0
+   }
+  },
+  {
+   "name": "wallC_patchiness_1",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "patchiness": 1.0
+   }
+  },
+  {
+   "name": "gutterC_seed_5",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5
+   }
+  },
+  {
+   "name": "wallC_seed_5",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5
+   }
+  },
+  {
+   "name": "gutterC_seed_11",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 11
+   }
+  },
+  {
+   "name": "wallC_seed_11",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 11
+   }
+  },
+  {
+   "name": "gutterC_wall_width_1.4",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "wall_width": 1.4
+   }
+  },
+  {
+   "name": "wallC_wall_width_1.4",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "wall_width": 1.4
+   }
+  },
+  {
+   "name": "gutterC_gutter_width_1",
+   "camera": "gutter_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "gutter_width": 1.0
+   }
+  },
+  {
+   "name": "wallC_gutter_width_1",
+   "camera": "wall_close",
+   "light": "C",
+   "state": "wet",
+   "w": 960,
+   "h": 720,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "gutter_width": 1.0
+   }
+  }
+ ]
+}

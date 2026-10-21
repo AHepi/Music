@@ -42,7 +42,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   1.5-4 minutes, the full-size plate in 2.4 s instead of 20 minutes. Started on demand, ends itself after 30 idle minutes, so you pay per second of use plus about
   14 US cents a day for two permanent stores. Three routes when cards are short (Romania store, Iceland store, any community card), each proven end to end.
 - **Skills scout done (log 20):** seven skill sets on skills.sh worth keeping; none installed. Waiting for your answer on the first (Scenario's Blender set).
-- **Running now:** the street's sett joints (round 1 finished) and the rubbish mask along gutters and building feet (round 1 being built).
+- **Sett joints and rubbish done (log 22):** the joints between the road stones now read as grooves between raised stones in 21 of 22 lightings (before: 6 of 22,
+  only the dry ones), wet or dry, at no extra drawing time; a rubbish mask built from the street's real shape puts coal dust, cinders, ash, mud, straw, paper and leaves
+  along gutters, wall feet, doorsteps and round the props, never on the middle of the road. A fresh checker: joints "yes", rubbish "nearly".
+- **Running now:** the second painter round (small rubbish and joint fixes, a new wet plate, a repaint with a dark plain sky, a wet behind painting, the stage
+  brightness fix in a copy, a fresh check), and the install and try-out of Scenario's seven Blender skills.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -77,6 +81,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Plate:** the picture drawn once from the 3D street that the image model repaints in the series' style; the film shows that painting shone back onto the 3D set.
 - **Stamp sheet:** one generated picture of many separate shapes (moss clumps, chips) that a recipe places one by one.
 - **Rented machine / card:** a computer with a graphics card hired from RunPod by the second. **Store:** a permanent RunPod disk in one data centre that keeps Blender and the uploaded files between machines. **Community card:** a cheaper card from RunPod's shared pool that cannot use a store.
+- **Joint (sett joint):** the narrow gap between two road stones. **Behind painting:** a second painting of the street without the near props, which the stage shows where a moving camera sees past them. **Mask:** a black-and-white picture saying where something goes (white = there).
 - **Skill:** a packaged set of written instructions (sometimes with scripts) that Claude loads for one kind of task.
 - **Seamless / half-tile test:** a tile is seamless if moving the recipe half a tile gives the same picture moved half a tile.
 
@@ -256,7 +261,29 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     two helpers asking for a machine at the same moment (a lock makes one wait). Notes: `RunPod set-up for rendering - findings.md`; spending:
     `SPENDING - paid image generation ledger.md`.
 
+22. **Sett joints that hold under all light, and a rubbish mask.** You said: "Add a rubbish mask for gutters and along buildings. And the normal maps between
+    bricks on the ground needs a little work. The light shouldn't be able to wash out the 3d affect so easily. The geometry should still be visible under all
+    conditions." Five helpers (a study, a joints builder, a rubbish builder, a fresh checker), all drawing on the rented machine. **What was wrong (measured):**
+    the joints only ever showed because they were dark in the photo; the relief picture added nothing measurable (a relief picture tells the light which way a
+    dot faces, not how deep it is), and the shine water adds lay equally over stones and joints, so wet joints vanished (6 of 22 test lightings passed, only the
+    dry ones). **Joints fix:** a new layer, JOINTS, after the wetness layer on the road only: the joint is darker and stays dull when wet (rougher, less shine and
+    water film), the stone edge gets a rounded slope, puddles still cover joints; one master dial. It needed a rebuilt joint picture (the first one missed about
+    half the pale sand joints). Result: 21 of 22 lightings pass (all 9 full-size pictures pass); the one failure is the lockout shot in heavy rain, middle distance,
+    under the brazier glare, at the small test size only. Same drawing time. Real 8 mm grooves cut into the near road were also built (plate only, +2 s a picture
+    on the rented card), but they look worse in the middle distance, so they are off. **Rubbish:** a mask made from the street's real shape (gutters, wall feet,
+    doorsteps, rain-pipe and lamp-post feet, inside corners, rings round the props) broken into patches, never on the middle of the road; it drives painted muck
+    on the road, flags, kerbs and gutter stones (coal dust, cinders, ash, mud, wet straw, sodden paper, dead leaves, wet where the street is wet) and about 6,400
+    to 7,200 small 3D pieces; 24 dials, one master "amount" dial. The joints keep their numbers with rubbish on. **Fresh checker:** joints read 3D everywhere
+    "yes"; rubbish "nearly": near-camera coal chips look like faceted gems, straw like matchsticks, the gutters too thin in the street view, some bright ticks on
+    middle-distance joints; with every dot counted (not leaving out puddle and rubbish dots) the pass count is 18 of 22, not 21. The wet road came out 3-8 %
+    darker, which also cut blown-out dots near the brazier from 4.7 % to 2.8 %. **Failures on the way:** black road pictures from a stale picture left on the
+    rented machine; a plan picture turned the wrong way round; four wrong explanations of the one remaining failure; about 60 Blender runs against a plan of 40.
+    **Cost:** no paid painter calls; the builders' drawing took about US$0.45 of the first rented machine, which ran about 3 hours in all including set-up and waiting (about US$1.00 at US$0.34 an hour). **Not done:** the painter (now running, log 24), the .glb and stage, Cycles, joints on
+    the flags and kerbs, dirt on the walls themselves, other shots (each needs its own "places" picture). Pictures: `22 Sett joints and rubbish - pictures/`;
+    recipe: `street_wet/relief_and_rubbish/10 Recipe - sett relief and rubbish - how it is made.md`.
+
 ## Next step
 
-Let the running sett-joints and rubbish job finish (it already renders on the rented machine), look at its pictures, then do the painter steps you already
-cleared: repaint the new wet plate keeping the sky dark and plain, a wet behind painting with the props painted out, the stage brightness fix, and a fresh check.
+The second painter round is running (log 24, about US$1-3 of painter calls within your US$20): it fixes the small rubbish faults, paints the new wet street with
+a dark plain sky, adds a wet behind painting so no dry patches show when the camera moves, and fixes the stage's darkening in a copy. I will show you the
+painting and the moving-camera stills when it is checked.

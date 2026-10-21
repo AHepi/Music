@@ -1,0 +1,135 @@
+{
+ "masks": [
+  [
+   "main",
+   540,
+   960
+  ],
+  [
+   "main",
+   1080,
+   1920
+  ],
+  [
+   "close_road",
+   640,
+   480
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "close_A_wet_mild1_aniso16b",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24,
+   "aniso": "FILTER_16"
+  },
+  {
+   "name": "close_A_wet_mild1_geo8",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "combo",
+   "args": {
+    "parts": [
+     [
+      "joint_picture",
+      {
+       "colour_mult": 0.85,
+       "rough_to": 0.9,
+       "spec_keep": 0.65,
+       "coat_keep": 0.55,
+       "picture": "joint_cavity_closed.png"
+      }
+     ],
+     [
+      "geometry",
+      {
+       "y_min": 3.0,
+       "y_max": 14.0,
+       "level": 6,
+       "depth": 0.008,
+       "picture": "joint_height.png"
+      }
+     ]
+    ]
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "main_A_wet_mild1_geo8",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "combo",
+   "args": {
+    "parts": [
+     [
+      "joint_picture",
+      {
+       "colour_mult": 0.85,
+       "rough_to": 0.9,
+       "spec_keep": 0.65,
+       "coat_keep": 0.55,
+       "picture": "joint_cavity_closed.png"
+      }
+     ],
+     [
+      "geometry",
+      {
+       "y_min": 3.0,
+       "y_max": 18.0,
+       "level": 6,
+       "depth": 0.008,
+       "picture": "joint_height.png"
+      }
+     ]
+    ]
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "big_A_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "baseline",
+   "args": {},
+   "w": 1080,
+   "h": 1920,
+   "samples": 16
+  },
+  {
+   "name": "big_A_wet_mild1",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 1080,
+   "h": 1920,
+   "samples": 16
+  }
+ ]
+}

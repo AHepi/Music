@@ -1,0 +1,305 @@
+{
+ "close_A_wet_mild1_aniso16b": {
+  "far": {
+   "rows": [
+    120,
+    240
+   ],
+   "njoint": 1442,
+   "nstone": 25958,
+   "stone": 0.2546,
+   "contrast": 0.326,
+   "delta": 0.0971,
+   "seen": 0.816
+  },
+  "middle": {
+   "rows": [
+    240,
+    360
+   ],
+   "njoint": 5207,
+   "nstone": 54860,
+   "stone": 0.3466,
+   "contrast": 0.52,
+   "delta": 0.2036,
+   "seen": 0.999
+  },
+  "near": {
+   "rows": [
+    360,
+    480
+   ],
+   "njoint": 5699,
+   "nstone": 52951,
+   "stone": 0.3122,
+   "contrast": 0.603,
+   "delta": 0.1856,
+   "seen": 1.0
+  },
+  "road_mean": 0.2802,
+  "job": {
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  }
+ },
+ "close_A_wet_mild1_geo8": {
+  "far": {
+   "rows": [
+    120,
+    240
+   ],
+   "njoint": 1442,
+   "nstone": 25958,
+   "stone": 0.2612,
+   "contrast": 0.271,
+   "delta": 0.0875,
+   "seen": 0.762
+  },
+  "middle": {
+   "rows": [
+    240,
+    360
+   ],
+   "njoint": 5207,
+   "nstone": 54860,
+   "stone": 0.3442,
+   "contrast": 0.553,
+   "delta": 0.2537,
+   "seen": 0.923
+  },
+  "near": {
+   "rows": [
+    360,
+    480
+   ],
+   "njoint": 5699,
+   "nstone": 52951,
+   "stone": 0.3088,
+   "contrast": 0.641,
+   "delta": 0.1968,
+   "seen": 0.972
+  },
+  "road_mean": 0.2691,
+  "job": {
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "combo",
+   "args": {
+    "parts": [
+     [
+      "joint_picture",
+      {
+       "colour_mult": 0.85,
+       "rough_to": 0.9,
+       "spec_keep": 0.65,
+       "coat_keep": 0.55,
+       "picture": "joint_cavity_closed.png"
+      }
+     ],
+     [
+      "geometry",
+      {
+       "y_min": 3.0,
+       "y_max": 14.0,
+       "level": 6,
+       "depth": 0.008,
+       "picture": "joint_height.png"
+      }
+     ]
+    ]
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  }
+ },
+ "main_A_wet_mild1_geo8": {
+  "far": {
+   "rows": [
+    569,
+    699
+   ],
+   "njoint": 254,
+   "nstone": 10209,
+   "stone": 0.1869,
+   "contrast": -0.002,
+   "delta": 0.0019,
+   "seen": 0.311
+  },
+  "middle": {
+   "rows": [
+    699,
+    829
+   ],
+   "njoint": 2159,
+   "nstone": 41450,
+   "stone": 0.2012,
+   "contrast": 0.182,
+   "delta": 0.0451,
+   "seen": 0.682
+  },
+  "near": {
+   "rows": [
+    829,
+    960
+   ],
+   "njoint": 4094,
+   "nstone": 50045,
+   "stone": 0.223,
+   "contrast": 0.399,
+   "delta": 0.1018,
+   "seen": 0.851
+  },
+  "road_mean": 0.1994,
+  "job": {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "combo",
+   "args": {
+    "parts": [
+     [
+      "joint_picture",
+      {
+       "colour_mult": 0.85,
+       "rough_to": 0.9,
+       "spec_keep": 0.65,
+       "coat_keep": 0.55,
+       "picture": "joint_cavity_closed.png"
+      }
+     ],
+     [
+      "geometry",
+      {
+       "y_min": 3.0,
+       "y_max": 18.0,
+       "level": 6,
+       "depth": 0.008,
+       "picture": "joint_height.png"
+      }
+     ]
+    ]
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  }
+ },
+ "big_A_wet": {
+  "far": {
+   "rows": [
+    1137,
+    1398
+   ],
+   "njoint": 2305,
+   "nstone": 60424,
+   "stone": 0.1717,
+   "contrast": 0.041,
+   "delta": 0.0074,
+   "seen": 0.054
+  },
+  "middle": {
+   "rows": [
+    1398,
+    1659
+   ],
+   "njoint": 14930,
+   "nstone": 186765,
+   "stone": 0.2134,
+   "contrast": 0.09,
+   "delta": 0.0189,
+   "seen": 0.207
+  },
+  "near": {
+   "rows": [
+    1659,
+    1920
+   ],
+   "njoint": 17695,
+   "nstone": 208588,
+   "stone": 0.2492,
+   "contrast": 0.115,
+   "delta": 0.0272,
+   "seen": 0.395
+  },
+  "road_mean": 0.2165,
+  "job": {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "baseline",
+   "args": {},
+   "w": 1080,
+   "h": 1920,
+   "samples": 16
+  }
+ },
+ "big_A_wet_mild1": {
+  "far": {
+   "rows": [
+    1137,
+    1398
+   ],
+   "njoint": 2305,
+   "nstone": 60424,
+   "stone": 0.1856,
+   "contrast": 0.137,
+   "delta": 0.03,
+   "seen": 0.423
+  },
+  "middle": {
+   "rows": [
+    1398,
+    1659
+   ],
+   "njoint": 14930,
+   "nstone": 186765,
+   "stone": 0.1847,
+   "contrast": 0.346,
+   "delta": 0.0681,
+   "seen": 0.791
+  },
+  "near": {
+   "rows": [
+    1659,
+    1920
+   ],
+   "njoint": 17695,
+   "nstone": 208588,
+   "stone": 0.1772,
+   "contrast": 0.529,
+   "delta": 0.0956,
+   "seen": 0.997
+  },
+  "road_mean": 0.1733,
+  "job": {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 1080,
+   "h": 1920,
+   "samples": 16
+  }
+ }
+}

@@ -1,0 +1,525 @@
+{
+ "kind": "street",
+ "masks": [
+  [
+   "main",
+   540,
+   960
+  ],
+  [
+   "main",
+   1080,
+   1920
+  ],
+  [
+   "main",
+   1536,
+   2730
+  ],
+  [
+   "close_road",
+   1920,
+   1440
+  ]
+ ],
+ "ground_masks": [
+  [
+   "main",
+   540,
+   960
+  ],
+  [
+   "main",
+   1080,
+   1920
+  ],
+  [
+   "main",
+   1536,
+   2730
+  ],
+  [
+   "close_road",
+   1920,
+   1440
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "chk_main_D_wet_round2",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "round2",
+   "view": "beauty"
+  },
+  {
+   "name": "chk_main_D_wet_joints",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "joints",
+   "view": "beauty"
+  },
+  {
+   "name": "chk_main_D_wet_rubbish",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "rubbish",
+   "view": "beauty",
+   "dirt": true
+  },
+  {
+   "name": "chk_main_E_heavy_round2",
+   "camera": "main",
+   "light": "E",
+   "state": "heavy",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "round2",
+   "view": "beauty"
+  },
+  {
+   "name": "chk_main_E_heavy_joints",
+   "camera": "main",
+   "light": "E",
+   "state": "heavy",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "joints",
+   "view": "beauty"
+  },
+  {
+   "name": "chk_main_E_heavy_rubbish",
+   "camera": "main",
+   "light": "E",
+   "state": "heavy",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "rubbish",
+   "view": "beauty",
+   "dirt": true
+  },
+  {
+   "name": "chk_main_A_wet_round2",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "round2",
+   "view": "beauty"
+  },
+  {
+   "name": "chk_main_A_wet_joints",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "joints",
+   "view": "beauty"
+  },
+  {
+   "name": "chk_main_A_wet_rubbish",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 16,
+   "look": "rubbish",
+   "view": "beauty",
+   "dirt": true
+  },
+  {
+   "name": "chk2x_main_D_wet_joints",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 32,
+   "look": "joints",
+   "view": "beauty"
+  },
+  {
+   "name": "chk2x_main_D_wet_rubbish",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   },
+   "dirt": true
+  },
+  {
+   "name": "plate_main_A_wet_round2",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 48,
+   "look": "round2",
+   "view": "beauty"
+  },
+  {
+   "name": "plate_main_A_wet_rubbish",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 48,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   },
+   "dirt": true
+  },
+  {
+   "name": "plate_main_A_heavy_rubbish",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "w": 1536,
+   "h": 2730,
+   "samples": 48,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   },
+   "dirt": true
+  },
+  {
+   "name": "plate_main_D_wet_rubbish",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 48,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   },
+   "dirt": true
+  },
+  {
+   "name": "plate_close_E_wet_rubbish",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "w": 1920,
+   "h": 1440,
+   "samples": 48,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   },
+   "dirt": true
+  },
+  {
+   "name": "plate_close_D_wet_rubbish",
+   "camera": "close_road",
+   "light": "D",
+   "state": "wet",
+   "w": 1920,
+   "h": 1440,
+   "samples": 48,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   },
+   "dirt": true
+  },
+  {
+   "name": "close_gutter_amount0.5",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 0.5
+   }
+  },
+  {
+   "name": "close_gutter_amount1.0",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 1.0
+   }
+  },
+  {
+   "name": "close_gutter_amount2.0",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 2.0
+   }
+  },
+  {
+   "name": "close_wall_amount0.5",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 0.5
+   }
+  },
+  {
+   "name": "close_wall_amount1.0",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 1.0
+   }
+  },
+  {
+   "name": "close_wall_amount2.0",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 2.0
+   }
+  },
+  {
+   "name": "close_doorstep_amount0.5",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 0.5
+   }
+  },
+  {
+   "name": "close_doorstep_amount1.0",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 1.0
+   }
+  },
+  {
+   "name": "close_doorstep_amount2.0",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0,
+    "amount": 2.0
+   }
+  },
+  {
+   "name": "close_gutter_dry",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   }
+  },
+  {
+   "name": "close_wall_dry",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "dry",
+   "w": 1200,
+   "h": 900,
+   "samples": 32,
+   "look": "rubbish",
+   "view": "beauty",
+   "dials": {
+    "seed": 5.0
+   }
+  },
+  {
+   "name": "main_A_wet_540x960_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 540,
+   "h": 960,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "main_A_heavy_540x960_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "w": 540,
+   "h": 960,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "main_A_wet_1080x1920_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1080,
+   "h": 1920,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "main_A_wet_1536x2730_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "w": 1536,
+   "h": 2730,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "main_A_heavy_1536x2730_puddlemask",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "w": 1536,
+   "h": 2730,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "close_A_wet_1920x1440_puddlemask",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "w": 1920,
+   "h": 1440,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "gutter_A_wet_1200x900_puddlemask",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "wall_A_wet_1200x900_puddlemask",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  },
+  {
+   "name": "doorstep_A_wet_1200x900_puddlemask",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "w": 1200,
+   "h": 900,
+   "samples": 4,
+   "look": "joints",
+   "view": "puddles"
+  }
+ ]
+}

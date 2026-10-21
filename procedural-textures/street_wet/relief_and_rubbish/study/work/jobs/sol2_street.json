@@ -1,0 +1,151 @@
+{
+ "masks": [
+  [
+   "main",
+   540,
+   960
+  ],
+  [
+   "close_road",
+   640,
+   480
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "close_A_wet_soft1",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.7,
+    "rough_to": 0.9,
+    "spec_keep": 0.5,
+    "coat_keep": 0.35,
+    "picture": "joint_cavity_soft.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_soft2",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.6,
+    "rough_to": 0.95,
+    "spec_keep": 0.35,
+    "coat_keep": 0.25,
+    "picture": "joint_cavity_soft.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_soft3",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.8,
+    "rough_to": 0.9,
+    "spec_keep": 0.6,
+    "coat_keep": 0.5,
+    "picture": "joint_cavity_soft.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_dry_soft2",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.6,
+    "rough_to": 0.95,
+    "spec_keep": 0.35,
+    "coat_keep": 0.25,
+    "picture": "joint_cavity_soft.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_geometry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "geometry",
+   "args": {
+    "y_min": 3.0,
+    "y_max": 14.0,
+    "level": 6,
+    "depth": 0.025
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_geometry_sharp",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "geometry",
+   "args": {
+    "y_min": 3.0,
+    "y_max": 14.0,
+    "level": 6,
+    "depth": 0.02,
+    "picture": "joint_height.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "close_A_wet_combo_soft2_geosharp",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "combo",
+   "args": {
+    "parts": [
+     [
+      "joint_picture",
+      {
+       "colour_mult": 0.6,
+       "rough_to": 0.95,
+       "spec_keep": 0.35,
+       "coat_keep": 0.25,
+       "picture": "joint_cavity_soft.png"
+      }
+     ],
+     [
+      "geometry",
+      {
+       "y_min": 3.0,
+       "y_max": 14.0,
+       "level": 6,
+       "depth": 0.02,
+       "picture": "joint_height.png"
+      }
+     ]
+    ]
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  }
+ ]
+}

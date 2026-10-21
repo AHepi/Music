@@ -1,0 +1,24 @@
+picture                              puddle  dirt |    near c/delta/seen |               middle | verdict
+chk_main_D_wet_round2                  0.10  0.00 |    0.09  0.023  0.16 |    0.07  0.016  0.08 | FAIL near contrast 0.086 < 0.18; near seen 0.164 < 0.65
+chk_main_D_wet_joints                  0.10  0.00 |    0.45  0.150  0.96 |    0.32  0.098  0.78 | PASS
+chk_main_D_wet_rubbish                 0.10  0.05 |    0.45  0.150  0.96 |    0.32  0.098  0.78 | PASS
+chk_main_E_heavy_round2                0.35  0.00 |    0.03  0.008  0.07 |    0.02  0.010  0.02 | FAIL near contrast 0.029 < 0.18; near delta 0.008 < 0.02
+chk_main_E_heavy_joints                0.35  0.00 |    0.50  0.258  0.89 |    0.39  0.250  0.87 | PASS
+chk_main_E_heavy_rubbish               0.35  0.05 |    0.50  0.258  0.89 |    0.39  0.250  0.87 | PASS
+chk_main_A_wet_round2                  0.10  0.00 |    0.07  0.018  0.11 |    0.05  0.012  0.07 | FAIL near contrast 0.066 < 0.18; near delta 0.018 < 0.02
+chk_main_A_wet_joints                  0.10  0.00 |    0.53  0.162  0.98 |    0.40  0.112  0.88 | PASS
+chk_main_A_wet_rubbish                 0.10  0.05 |    0.53  0.162  0.98 |    0.40  0.112  0.88 | PASS
+chk2x_main_D_wet_joints                0.10  0.00 |    0.51  0.163  0.99 |    0.40  0.116  0.90 | PASS
+chk2x_main_D_wet_rubbish               0.10  0.04 |    0.51  0.163  0.99 |    0.40  0.116  0.90 | PASS
+plate_main_A_wet_round2                0.09  0.00 |    0.08  0.020  0.19 |    0.06  0.013  0.14 | FAIL near contrast 0.078 < 0.18; near seen 0.189 < 0.65
+plate_main_A_wet_rubbish               0.09  0.04 |    0.59  0.162  0.99 |    0.52  0.132  0.97 | PASS
+plate_main_A_heavy_rubbish             0.33  0.04 |    0.53  0.099  0.98 |    0.48  0.108  0.97 | PASS
+plate_main_D_wet_rubbish               0.09  0.04 |    0.51  0.155  0.99 |    0.44  0.121  0.94 | PASS
+plate_close_E_wet_rubbish              0.04  0.01 |    0.56  0.225  0.91 |    0.55  0.238  0.95 | PASS
+plate_close_D_wet_rubbish              0.04  0.01 |    0.47  0.152  0.97 |    0.50  0.178  0.98 | PASS
+
+rubbish picture                      dirt share of road  diff in dirt  changed  diff outside
+chk_main_D_wet_rubbish                            0.038        0.0315    0.494         1e-05
+chk_main_E_heavy_rubbish                          0.038        0.0307    0.438         1e-05
+chk_main_A_wet_rubbish                            0.038        0.0308     0.47         1e-05
+chk2x_main_D_wet_rubbish                          0.037        0.0284    0.478         7e-05

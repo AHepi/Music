@@ -1,0 +1,221 @@
+{
+ "masks": [
+  [
+   "main",
+   540,
+   960
+  ],
+  [
+   "close_road",
+   640,
+   480
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "close_A_wet_mild1",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "main_A_wet_mild1",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "close_A_wet_mild2",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.9,
+    "rough_to": 0.85,
+    "spec_keep": 0.75,
+    "coat_keep": 0.7,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "main_A_wet_mild2",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.9,
+    "rough_to": 0.85,
+    "spec_keep": 0.75,
+    "coat_keep": 0.7,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "close_A_dry_mild1",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24
+  },
+  {
+   "name": "main_A_dry_mild1",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_C_wet_mild1",
+   "camera": "main",
+   "light": "C",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_D_wet_mild1",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_E_wet_mild1",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_E_wet_mild2",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.9,
+    "rough_to": 0.85,
+    "spec_keep": 0.75,
+    "coat_keep": 0.7,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "main_A_heavy_mild1",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 540,
+   "h": 960,
+   "samples": 16
+  },
+  {
+   "name": "close_A_wet_mild1_aniso16",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "variant": "joint_picture",
+   "args": {
+    "colour_mult": 0.85,
+    "rough_to": 0.9,
+    "spec_keep": 0.65,
+    "coat_keep": 0.55,
+    "picture": "joint_cavity_closed.png"
+   },
+   "w": 640,
+   "h": 480,
+   "samples": 24,
+   "aniso": "16"
+  }
+ ]
+}

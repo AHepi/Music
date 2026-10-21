@@ -33,4 +33,4 @@ Helpers still look up the price before every paid call and never repeat a call j
 | 21 Oct 04:29-04:41 | Iceland store test machine (RTX 4090, secure), ended by me when the test was done | US$0.89 an hour | about US$0.18 |
 | 21 Oct 04:34-04:40 | community route test machine (RTX A5000, no store), ended by me | about US$0.27 an hour | about US$0.03 |
 | 21 Oct 04:40 | RunPod's own bill for machines so far today: US$1.13 (it lags about an hour; the newest machines are not in it yet) | | about US$1.6-1.8 in all |
-| 21 Oct 02:08-  | first machine (community RTX 4090) still serving the setts-and-rubbish job; the job ends by stopping it | US$0.34 an hour | |
+| 21 Oct 02:08-05:10 | first machine (community RTX 4090) served the setts-and-rubbish job; the job stopped it at the end and I ended it for good at 05:12 (a stopped machine still pays for its disk) | US$0.34 an hour, about 3 hours | about US$1.00 |
