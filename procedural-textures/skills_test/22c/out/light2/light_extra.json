@@ -1,0 +1,157 @@
+{
+ "lamp1": {
+  "today": {
+   "mask_area_pct": 0.528,
+   "subject": {
+    "area_pct": 0.5,
+    "internal_range": 0.816,
+    "internal_ratio": 19.47,
+    "median": 0.063,
+    "bg_median": 0.137,
+    "ring_median": 0.072,
+    "minus_bg": -0.074,
+    "minus_ring": -0.009,
+    "edge_contrast_median": 0.027,
+    "edge_merge_pct": 69.1,
+    "band": 0,
+    "ring_band": 0,
+    "mean_sat": 0.385,
+    "bg_mean_sat": 0.303
+   },
+   "focus": {
+    "peak_xy": [
+     0.167,
+     0.46
+    ],
+    "peak_on_subject": true,
+    "top2pct_on_subject": 0.237,
+    "concentration": 6.85
+   },
+   "thirds": {
+    "subject_xy": [
+     0.164,
+     0.539
+    ],
+    "distance": 0.212
+   },
+   "squint_on_subject": false,
+   "verdict": [
+    "subject vs surrounding value only -0.009 (< 0.1): separation missing, check desaturated (Andy)",
+    "silhouette merges with the background on 69.1% of the outline",
+    "subject and its surroundings fall in the same value band",
+    "frame edges brighter than the center (ratio 1.191): the eye drifts out"
+   ]
+  },
+  "wet": {
+   "mask_area_pct": 0.528,
+   "subject": {
+    "area_pct": 0.5,
+    "internal_range": 0.815,
+    "internal_ratio": 19.0,
+    "median": 0.064,
+    "bg_median": 0.178,
+    "ring_median": 0.057,
+    "minus_bg": -0.114,
+    "minus_ring": 0.007,
+    "edge_contrast_median": 0.029,
+    "edge_merge_pct": 69.6,
+    "band": 0,
+    "ring_band": 0,
+    "mean_sat": 0.378,
+    "bg_mean_sat": 0.346
+   },
+   "focus": {
+    "peak_xy": [
+     0.167,
+     0.46
+    ],
+    "peak_on_subject": true,
+    "top2pct_on_subject": 0.235,
+    "concentration": 6.78
+   },
+   "thirds": {
+    "subject_xy": [
+     0.164,
+     0.539
+    ],
+    "distance": 0.212
+   },
+   "squint_on_subject": false,
+   "verdict": [
+    "subject vs surrounding value only +0.007 (< 0.1): separation missing, check desaturated (Andy)",
+    "silhouette merges with the background on 69.6% of the outline",
+    "subject and its surroundings fall in the same value band",
+    "frame edges brighter than the center (ratio 1.251): the eye drifts out"
+   ]
+  }
+ },
+ "image_colourspaces_in_wet_state": {
+  "blue_painted_planks_colour.jpg": "sRGB",
+  "blue_painted_planks_normal.jpg": "Non-Color",
+  "green_rough_planks_colour.jpg": "sRGB",
+  "green_rough_planks_normal.jpg": "Non-Color",
+  "rusty_metal_02_colour.jpg": "sRGB",
+  "rusty_metal_02_normal.jpg": "Non-Color",
+  "large_sandstone_blocks_colour.jpg": "sRGB",
+  "large_sandstone_blocks_normal.jpg": "Non-Color",
+  "grey_plaster_02_colour.jpg": "sRGB",
+  "grey_plaster_02_normal.jpg": "Non-Color",
+  "castle_brick_02_red_colour.jpg": "sRGB",
+  "castle_brick_02_red_normal.jpg": "Non-Color",
+  "muddy_tracks_colour.jpg": "sRGB",
+  "muddy_tracks_normal.jpg": "Non-Color",
+  "red_brick_colour.jpg": "sRGB",
+  "red_brick_normal.jpg": "Non-Color",
+  "red_brick_rough.jpg": "Non-Color",
+  "red_brick_displacement.jpg": "Non-Color",
+  "stone_brick_wall_001_colour.jpg": "sRGB",
+  "stone_brick_wall_001_normal.jpg": "Non-Color",
+  "stone_brick_wall_001_rough.jpg": "Non-Color",
+  "stone_brick_wall_001_displacement.jpg": "Non-Color",
+  "rock_surface_colour.jpg": "sRGB",
+  "rock_surface_normal.jpg": "Non-Color",
+  "window_lit_2.jpg": "sRGB",
+  "distressed_painted_planks_colour.jpg": "sRGB",
+  "distressed_painted_planks_normal.jpg": "Non-Color",
+  "lamp_glass.jpg": "sRGB",
+  "large_grey_tiles_colour.jpg": "sRGB",
+  "large_grey_tiles_normal.jpg": "Non-Color",
+  "large_grey_tiles_rough.jpg": "Non-Color",
+  "large_grey_tiles_displacement.jpg": "Non-Color",
+  "large_grey_tiles_normal_smooth_2.png": "Non-Color",
+  "roof_slates_03_colour.jpg": "sRGB",
+  "roof_slates_03_normal.jpg": "Non-Color",
+  "dusk_sky.jpg": "sRGB",
+  "rocks_ground_02_colour.jpg": "sRGB",
+  "rocks_ground_02_normal.jpg": "Non-Color",
+  "square_cobblestone_colour.jpg": "sRGB",
+  "square_cobblestone_normal.jpg": "Non-Color",
+  "square_cobblestone_rough.jpg": "Non-Color",
+  "square_cobblestone_displacement.jpg": "Non-Color",
+  "square_cobblestone_normal_smooth_4.png": "Non-Color",
+  "window_dark_0.jpg": "sRGB",
+  "window_dark_1.jpg": "sRGB",
+  "window_dark_2.jpg": "sRGB",
+  "window_lit_0.jpg": "sRGB",
+  "window_lit_1.jpg": "sRGB"
+ },
+ "color_audit": {
+  "baseline_wet_state": [],
+  "plain_fault_planted": [
+   "trial_plain_fault: image 'trial_fake_rough' feeds Roughness but is 'sRGB' (use Non-Color)"
+  ],
+  "wetness_layer_picture_set_to_sRGB": {
+   "image": "green_rough_planks_colour.jpg",
+   "audit": [
+    "trial_plain_fault: image 'trial_fake_rough' feeds Roughness but is 'sRGB' (use Non-Color)"
+   ]
+  }
+ },
+ "baseline_without_lights": {
+  "colliery_mean_linear_all_lights_on": 0.01431,
+  "colliery_mean_linear_all_lights_off_and_world_off": 0.00427,
+  "share_left_with_no_lamp_at_all": 0.298,
+  "frame_mean_all_on": 0.03887,
+  "frame_mean_all_off": 0.02365
+ }
+}

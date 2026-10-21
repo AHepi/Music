@@ -1,0 +1,319 @@
+{
+ "blender": "5.2.2 LTS",
+ "skill_version": "0.1",
+ "raw_camera_lens_as_the_street_stores_it": {
+  "main": {
+   "lens_mm": 32.97,
+   "sensor_fit": "VERTICAL",
+   "sensor_height_mm": 24.0,
+   "vertical_fov_deg": 40.0
+  },
+  "lockout": {
+   "lens_mm": 29.7,
+   "sensor_fit": "VERTICAL",
+   "sensor_height_mm": 24.0,
+   "vertical_fov_deg": 44.0
+  },
+  "notice": {
+   "lens_mm": 19.06,
+   "sensor_fit": "VERTICAL",
+   "sensor_height_mm": 24.0,
+   "vertical_fov_deg": 64.4
+  }
+ },
+ "clone_check_same_framing": {
+  "main": {
+   "raw_xy": [
+    0.6116,
+    0.3574
+   ],
+   "clone_xy": [
+    0.6116,
+    0.3574
+   ],
+   "clone_lens_mm_36wide": 87.9
+  },
+  "lockout": {
+   "raw_xy": [
+    0.5264,
+    0.3556
+   ],
+   "clone_xy": [
+    0.5264,
+    0.3556
+   ],
+   "clone_lens_mm_36wide": 79.2
+  },
+  "notice": {
+   "raw_xy": [
+    2.4087,
+    0.9628
+   ],
+   "clone_xy": [
+    2.4087,
+    0.9628
+   ],
+   "clone_lens_mm_36wide": 50.8
+  }
+ },
+ "walker_spots_xyz": {
+  "walkerA": [
+   -0.3,
+   9.0,
+   0.71
+  ],
+  "walkerB": [
+   -3.27,
+   26.76,
+   2.01
+  ],
+  "walkerC": [
+   -0.53,
+   5.68,
+   0.47
+  ],
+  "walkerD": [
+   2.75,
+   23.38,
+   1.76
+  ],
+  "walkerE": [
+   3.5,
+   8.0,
+   0.7
+  ]
+ },
+ "audit_seconds": 0.02,
+ "audit": {
+  "rows": [
+   {
+    "id": "sh010",
+    "frame": 10,
+    "switch_ok": true,
+    "lens": 87.9,
+    "cam_z": 1.89,
+    "pitch": 6.5,
+    "height": "low",
+    "subjects": {
+     "walkerA": {
+      "cover": 0.4,
+      "size": "wide",
+      "head_in": true,
+      "feet_in": true,
+      "eye_in": true,
+      "eye_xy": [
+       0.38,
+       0.44
+      ],
+      "eye_visible": true,
+      "mid_visible": true,
+      "blockers": []
+     }
+    },
+    "size_measured": "wide",
+    "size_intended": "wide",
+    "block": 10
+   },
+   {
+    "id": "sh020",
+    "frame": 20,
+    "switch_ok": true,
+    "prev_ok": true,
+    "lens": 87.9,
+    "cam_z": 1.89,
+    "pitch": 6.5,
+    "height": "low",
+    "subjects": {
+     "walkerB": {
+      "cover": 0.1,
+      "size": "ews",
+      "head_in": true,
+      "feet_in": true,
+      "eye_in": true,
+      "eye_xy": [
+       0.16,
+       0.44
+      ],
+      "eye_visible": false,
+      "mid_visible": false,
+      "blockers": [
+       "gas_lamp_1_post"
+      ]
+     }
+    },
+    "size_measured": "ews",
+    "size_intended": "ews",
+    "block": 10
+   },
+   {
+    "id": "sh030",
+    "frame": 30,
+    "switch_ok": true,
+    "prev_ok": true,
+    "lens": 79.2,
+    "cam_z": 1.7,
+    "pitch": 8.0,
+    "height": "low",
+    "subjects": {
+     "walkerC": {
+      "cover": 0.49,
+      "size": "wide",
+      "head_in": true,
+      "feet_in": false,
+      "eye_in": true,
+      "eye_xy": [
+       0.5,
+       0.42
+      ],
+      "eye_visible": true,
+      "mid_visible": true,
+      "blockers": []
+     }
+    },
+    "size_measured": "wide",
+    "size_intended": "medium",
+    "block": 10
+   },
+   {
+    "id": "sh040",
+    "frame": 40,
+    "switch_ok": true,
+    "prev_ok": true,
+    "lens": 50.8,
+    "cam_z": 3.19,
+    "pitch": 0.0,
+    "height": "low",
+    "subjects": {
+     "walkerD": {
+      "cover": 0.19,
+      "size": "ews",
+      "head_in": true,
+      "feet_in": true,
+      "eye_in": true,
+      "eye_xy": [
+       0.62,
+       0.52
+      ],
+      "eye_visible": true,
+      "mid_visible": true,
+      "blockers": []
+     }
+    },
+    "size_measured": "ews",
+    "size_intended": "full",
+    "block": 10
+   },
+   {
+    "id": "sh050",
+    "frame": 50,
+    "switch_ok": true,
+    "prev_ok": true,
+    "lens": 87.9,
+    "cam_z": 1.89,
+    "pitch": 6.5,
+    "height": "low",
+    "subjects": {
+     "walkerE": {
+      "cover": 0.48,
+      "size": "wide",
+      "head_in": false,
+      "feet_in": false,
+      "eye_in": false,
+      "eye_xy": [
+       2.21,
+       0.45
+      ],
+      "eye_visible": true,
+      "mid_visible": true,
+      "blockers": []
+     }
+    },
+    "size_measured": "wide",
+    "size_intended": "wide",
+    "block": 10
+   }
+  ],
+  "problems": [
+   "sh020: main subject walkerB eye hidden behind gas_lamp_1_post",
+   "sh040: camera low (3.19 m) with no stated intent",
+   "sh050: main subject walkerE eye line out of frame"
+  ],
+  "warnings": [
+   "33 light object(s) in the previs scene: Workbench ignores them; mood lighting is not previs"
+  ]
+ },
+ "table_after_audit": [
+  {
+   "id": "sh010",
+   "camera": "CA-main",
+   "subjects": [
+    "walkerA"
+   ],
+   "size": "wide",
+   "size_measured": "wide",
+   "lens_measured": 87.9,
+   "height_measured": "low 1.89m",
+   "intent": "the street seen from its foot, standing height, the colliery at the end"
+  },
+  {
+   "id": "sh020",
+   "camera": "CA-main",
+   "subjects": [
+    "walkerB"
+   ],
+   "size": "ews",
+   "size_measured": "ews",
+   "lens_measured": 87.9,
+   "height_measured": "low 1.89m",
+   "intent": "the same camera on the walker behind the lamp post"
+  },
+  {
+   "id": "sh030",
+   "camera": "CA-lockout",
+   "subjects": [
+    "walkerC"
+   ],
+   "size": "medium",
+   "size_measured": "wide",
+   "lens_measured": 79.2,
+   "height_measured": "low 1.7m",
+   "intent": "lockout plate camera"
+  },
+  {
+   "id": "sh040",
+   "camera": "CA-notice",
+   "subjects": [
+    "walkerD"
+   ],
+   "size": "full",
+   "size_measured": "ews",
+   "lens_measured": 50.8,
+   "height_measured": "low 3.19m",
+   "intent": null
+  },
+  {
+   "id": "sh050",
+   "camera": "CA-main",
+   "subjects": [
+    "walkerE"
+   ],
+   "size": "wide",
+   "size_measured": "wide",
+   "lens_measured": 87.9,
+   "height_measured": "low 1.89m",
+   "intent": "the same camera on a walker outside its frame"
+  }
+ ],
+ "contact_sheet": {
+  "path": "out/previs_b/sheet/contact_sheet_v001.png",
+  "seconds": 3.5
+ },
+ "ab_lens": {
+  "path": "out/previs_b/ab/sh010_ab_v001.png",
+  "seconds": 1.34,
+  "note": "lenses in the skill 36 mm-wide-sensor terms; 88 mm is the main camera as it is"
+ },
+ "floor_plan": {
+  "path": "out/previs_b/floor_plan.png"
+ }
+}

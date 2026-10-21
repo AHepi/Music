@@ -1,0 +1,101 @@
+{
+ "audit": [
+  [
+   "warn",
+   "image node 'grey_plaster_02_colour.jpg' has no explicit UV Map/vector input (uses the active render UV; Kaspar: set it)"
+  ],
+  [
+   "warn",
+   "image node 'grey_plaster_02_normal.jpg' has no explicit UV Map/vector input (uses the active render UV; Kaspar: set it)"
+  ]
+ ],
+ "value_report_cycles": {
+  "pixels": 1817,
+  "problems": [
+   "100.0% of metal pixels have reflectance below sRGB 180 (too dark for raw metal)"
+  ],
+  "albedo_srgb_max_channel": {
+   "dielectric_p1_p50_p99": [
+    45.495,
+    58.195,
+    96.351
+   ],
+   "metal_p1_p50_p99": [
+    154.066,
+    163.072,
+    166.458
+   ]
+  },
+  "roughness_p1_p50_p99": [
+   0.45,
+   0.45,
+   0.697
+  ],
+  "roughness_std": 0.0567,
+  "metal_fraction": 0.0061,
+  "metallic_grey_fraction": 0.0033,
+  "dielectric_below_30": 0.0,
+  "dielectric_above_243": 0.0
+ },
+ "value_report_eevee": {
+  "pixels": 1786,
+  "problems": [
+   "100.0% of metal pixels have reflectance below sRGB 180 (too dark for raw metal)"
+  ],
+  "albedo_srgb_max_channel": {
+   "dielectric_p1_p50_p99": [
+    49.353,
+    57.817,
+    75.899
+   ],
+   "metal_p1_p50_p99": [
+    149.275,
+    163.433,
+    165.017
+   ]
+  },
+  "roughness_p1_p50_p99": [
+   0.447,
+   0.45,
+   0.566
+  ],
+  "roughness_std": 0.0246,
+  "metal_fraction": 0.0045,
+  "metallic_grey_fraction": 0.0062,
+  "dielectric_below_30": 0.0,
+  "dielectric_above_243": 0.0
+ },
+ "preview_sheet": "proc-work/skills_test/22b/out/checks/preview/navy_wear_sheet.png",
+ "mask_numbers": {
+  "Wear_BLENDER_EEVEE": {
+   "mean": 0.0035,
+   "share_above_0.5": 0.0,
+   "max": 0.176
+  },
+  "Wear_CYCLES": {
+   "mean": 0.0567,
+   "share_above_0.5": 0.0359,
+   "max": 0.945
+  },
+  "Edges_BLENDER_EEVEE": {
+   "mean": 0.0121,
+   "share_above_0.5": 0.0,
+   "max": 0.176
+  },
+  "Edges_CYCLES": {
+   "mean": 0.1375,
+   "share_above_0.5": 0.1245,
+   "max": 0.957
+  },
+  "Dirt_BLENDER_EEVEE": {
+   "mean": 0.0437,
+   "share_above_0.5": 0.0182,
+   "max": 0.996
+  },
+  "Dirt_CYCLES": {
+   "mean": 0.1211,
+   "share_above_0.5": 0.1136,
+   "max": 1.0
+  }
+ }
+}

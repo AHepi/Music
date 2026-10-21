@@ -1,0 +1,249 @@
+{
+ "res": 512,
+ "seams": {
+  "seams_added": 1276,
+  "seams_total": 1276
+ },
+ "seconds": {
+  "seams": 0.0,
+  "unwrap": 5.8,
+  "pack": 5.8,
+  "uv_done": 6.0,
+  "bake": 8.0,
+  "rebuilt": 8.0
+ },
+ "unwrap": {
+  "method": "BEST",
+  "islands": 687,
+  "chosen": {
+   "ANGLE_BASED": 469,
+   "MINIMUM_STRETCH": 106,
+   "CONFORMAL": 112
+  },
+  "unsolved_faces": {
+   "ANGLE_BASED": 0,
+   "CONFORMAL": 0,
+   "MINIMUM_STRETCH": 0
+  },
+  "folding_islands": [
+   {
+    "island": 197,
+    "n_faces": 5,
+    "self_overlap": 0.0619
+   },
+   {
+    "island": 199,
+    "n_faces": 5,
+    "self_overlap": 0.0619
+   },
+   {
+    "island": 504,
+    "n_faces": 1,
+    "self_overlap": 0.0099
+   }
+  ]
+ },
+ "density": {
+  "target_px_per_m": 98.0,
+  "before_min_max": [
+   7.3,
+   2620069554.3
+  ],
+  "islands": 687,
+  "weights_min_max": [
+   1.0,
+   1.0
+  ]
+ },
+ "pack": {
+  "coverage": 0.0182,
+  "shape": "CONCAVE",
+  "rotate": "CARDINAL",
+  "gap_px": 4.0,
+  "margin_fraction": 0.003906,
+  "fits_tile": true,
+  "tried": [
+   {
+    "shape": "CONCAVE",
+    "rotate": "CARDINAL",
+    "coverage": 0.0182,
+    "loops_outside_tile": 0
+   },
+   {
+    "shape": "CONCAVE",
+    "rotate": "AXIS_ALIGNED",
+    "coverage": 0.0182,
+    "loops_outside_tile": 0
+   },
+   {
+    "shape": "CONVEX",
+    "rotate": "CARDINAL",
+    "coverage": 0.0182,
+    "loops_outside_tile": 0
+   },
+   {
+    "shape": "CONVEX",
+    "rotate": "AXIS_ALIGNED",
+    "coverage": 0.0182,
+    "loops_outside_tile": 0
+   }
+  ]
+ },
+ "uv_qa": {
+  "object": "door_low",
+  "uv_map": "bake_uv",
+  "tex_res": 512,
+  "faces": 790,
+  "islands": 687,
+  "td_px_per_m": 21.3,
+  "td_face_spread_p95_p05": 1.0,
+  "td_island_spread_p95_p05": 1.0,
+  "td_island_min_max": [
+   0.0,
+   21579.2
+  ],
+  "angle_err_mean_deg": 1.85,
+  "angle_err_p95_deg": 5.6,
+  "area_stretch_p95_log2": 0.01,
+  "flipped_faces": 3,
+  "zero_area_faces": 36,
+  "overlap_px_pct": 0.0,
+  "overlapping_island_pairs": 0,
+  "self_overlapping_islands": [],
+  "tiles": [
+   1001
+  ],
+  "per_tile": {
+   "1001": {
+    "coverage": 0.019,
+    "overlap_px_pct": 0.0,
+    "min_gap_px": 3.0,
+    "border_px": 2.0
+   }
+  },
+  "faces_crossing_tiles": 0,
+  "min_gap_px": 3.0,
+  "gap_required_px": 4.0,
+  "tiny_islands": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ],
+  "sharp_edges_not_on_seams": 0,
+  "flat_shaded_share": 0.005,
+  "mirror_stacked_hint": false
+ },
+ "uv_verdict": [
+  "36 faces with zero UV area (unsolved island or collapsed faces)",
+  "3 flipped UV faces",
+  "coverage 2% < 70% (Gambrell >70, Huge Menace 75% studio minimum)",
+  "islands smaller than 4x4 px: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
+ ],
+ "prepare": {
+  "smooth": true
+ },
+ "bake_paths": {
+  "DIFFUSE": "proc-work/skills_test/22b/out/bake512/door_diffuse.png",
+  "ROUGHNESS": "proc-work/skills_test/22b/out/bake512/door_roughness.png",
+  "NORMAL": "proc-work/skills_test/22b/out/bake512/door_normal.png"
+ },
+ "bake_sanity": {
+  "DIFFUSE": {
+   "pixels": 4989,
+   "mean": [
+    0.193,
+    0.196,
+    0.213
+   ],
+   "std": [
+    0.046,
+    0.04,
+    0.035
+   ],
+   "problems": [],
+   "notes": []
+  },
+  "ROUGHNESS": {
+   "pixels": 4989,
+   "mean": [
+    0.583,
+    0.583,
+    0.583
+   ],
+   "std": [
+    0.109,
+    0.109,
+    0.109
+   ],
+   "problems": [],
+   "notes": []
+  },
+  "NORMAL": {
+   "pixels": 4989,
+   "inverted_pct": 19.002,
+   "flat_exact_pct": 4.97,
+   "bad_length_pct": 0.0,
+   "steep_pct": 19.062,
+   "mean": [
+    0.504,
+    0.505,
+    0.809
+   ],
+   "std": [
+    0.019,
+    0.028,
+    0.392
+   ],
+   "nan": 0,
+   "problems": [
+    "19.002% inverted normals (blue < 0.5): rays start inside or behind the high; if a sweep does not move it, low and high differ there (map_problem_review)"
+   ],
+   "notes": []
+  }
+ },
+ "bake_settings": {
+  "cage_extrusion": 0.00063,
+  "max_ray_distance": 0.00153,
+  "cage": null,
+  "margin_px": 4,
+  "normal_convention": "OPENGL"
+ },
+ "bake_projection": {
+  "samples": 1512,
+  "outward_q": 0.00032,
+  "inward_q": 0.00056,
+  "outward_max": 0.00034,
+  "inward_max": 0.00075,
+  "cage_extrusion": 0.00063,
+  "max_ray_distance": 0.00153,
+  "miss_pct": 0.0,
+  "uncovered_pct": 0.0,
+  "wrong_part_pct": 3.11,
+  "search": 0.2192,
+  "quantile": 0.995
+ },
+ "bake_warnings": [
+  "3.11% of rays would hit another part first: explode or bake per pair"
+ ],
+ "hookup": {
+  "materials": 1
+ },
+ "saved": "proc-work/skills_test/22b/street_copy/door_baked_512.blend"
+}

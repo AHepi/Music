@@ -41,12 +41,13 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Rented graphics machine works (log 21):** Blender renders on a rented RunPod card instead of this shared computer: a street picture in 0.4-6 s instead of
   1.5-4 minutes, the full-size plate in 2.4 s instead of 20 minutes. Started on demand, ends itself after 30 idle minutes, so you pay per second of use plus about
   14 US cents a day for two permanent stores. Three routes when cards are short (Romania store, Iceland store, any community card), each proven end to end.
-- **Skills scout done (log 20):** seven skill sets on skills.sh worth keeping; none installed. Waiting for your answer on the first (Scenario's Blender set).
+- **Skills scout done (log 20); Scenario's Blender skills installed (log 23):** seven Blender skills in the project, every file read twice first, the self-install lines removed. Tried on the street: they found 73 inside-out headframe parts nobody had noticed and give useful light-and-dark and export checks; for textures our own layers stay better (their wear shows only in Cycles unless baked).
 - **Sett joints and rubbish done (log 22):** the joints between the road stones now read as grooves between raised stones in 21 of 22 lightings (before: 6 of 22,
   only the dry ones), wet or dry, at no extra drawing time; a rubbish mask built from the street's real shape puts coal dust, cinders, ash, mud, straw, paper and leaves
   along gutters, wall feet, doorsteps and round the props, never on the middle of the road. A fresh checker: joints "yes", rubbish "nearly".
-- **Running now:** the second painter round (small rubbish and joint fixes, a new wet plate, a repaint with a dark plain sky, a wet behind painting, the stage
-  brightness fix in a copy, a fresh check), and the install and try-out of Scenario's seven Blender skills.
+- **Running now:** the second painter round (log 24: small rubbish and joint fixes, a new wet plate, a repaint with a dark plain sky, a wet behind painting,
+  the stage brightness fix in a copy, a fresh check), and a reusable weathering kit (log 25: grime, cracks, stains, weeds and moss, tuned on the street and
+  proven on the Japanese courtyard with only a settings file).
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -281,6 +282,22 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     **Cost:** no paid painter calls; the builders' drawing took about US$0.45 of the first rented machine, which ran about 3 hours in all including set-up and waiting (about US$1.00 at US$0.34 an hour). **Not done:** the painter (now running, log 24), the .glb and stage, Cycles, joints on
     the flags and kerbs, dirt on the walls themselves, other shots (each needs its own "places" picture). Pictures: `22 Sett joints and rubbish - pictures/`;
     recipe: `street_wet/relief_and_rubbish/10 Recipe - sett relief and rubbish - how it is made.md`.
+
+23. **Scenario's Blender skills installed.** You said: "Ok install scenario for now." Seven of Scenario's Blender skills (expert, texturing and shading, UV and
+    baking, geometry nodes, lighting and rendering, export, previs and storyboard; MIT licence) went into the project's skills folder. Before installing, two
+    helpers per skill read every file in full; 83 text edits were made: the "npx skills add" self-install lines now say "do not install anything, tell the
+    person"; Scenario's add-on and live-window bridge are marked "not used here"; one line telling the agent to try another spelling when a safety filter
+    blocked a quit, reset or delete was reversed; a storyboard template that wiped the whole open scene now stops instead; commands use our Blender path and
+    a pretend screen (without it Blender stops as soon as it draws anything: tested). Six of nine helper scripts are unchanged; three got tiny safety changes.
+    A final checker confirmed only the intended edits differ from the download. **Four try-outs on the street (rented machine):** (a) the delivery check found
+    73 inside-out parts (69 headframe bars, both winding wheels, 2 trims), invisible now but see-through if back faces are ever hidden; as shipped it gives a
+    useless 908 "errors" on the whole street because of the 3.5 km sky dome. (b) Its wear layer follows a prop's real mouldings but shows only in Cycles, not
+    in EEVEE, unless baked; its automatic UV seams failed on our door; our own layers stay better for walls and ground. (c) Its light-and-dark study, blown and
+    crushed shares, and colour-setting audit are useful (the audit found data pictures set to colour inside our wetness layer); its subject verdicts are
+    built for faces. (d) Its scatter builder worked first time with proper counting checks; its export check found three real faults the exporter hides; its
+    "web" export squeezes shapes lossily (up to 52 mm) and needs one line added to our stage. **Not tested:** that a new session picks the skills up; most of
+    the tools. **Unsure:** whether Claude will always follow the written "local rules" (they are instructions, not locks). Note:
+    `23 Scenario Blender skills - what was installed, changed and learned.md`; pictures: `23 Scenario Blender skills test - pictures/`.
 
 ## Next step
 

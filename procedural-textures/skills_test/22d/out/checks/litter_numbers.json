@@ -1,0 +1,192 @@
+{
+ "host": {
+  "faces": 840,
+  "area_m2": 144.37,
+  "eligible_area_m2_slope_le_35deg": 144.37
+ },
+ "inputs": {
+  "Kerb": "street_kerbs",
+  "Seed": 7,
+  "Max Slope": 0.6108652353286743,
+  "Scale Min": 0.800000011920929,
+  "Scale Max": 1.25,
+  "Kerb Pull": 0.75,
+  "Kerb Reach": 0.25,
+  "Clumping": 0.6000000238418579,
+  "Clump Size": 1.600000023841858,
+  "Paper": "litter_paper",
+  "Paper Density": 1.2000000476837158,
+  "Leaves": "litter_leaves",
+  "Leaf Density": 3.0,
+  "Bottles": "litter_bottles",
+  "Bottle Density": 0.11999999731779099,
+  "Keep Surface": false,
+  "Realize": false
+ },
+ "count_plain_mask1": {
+  "expected": [
+   173.2,
+   433.1,
+   173.2
+  ],
+  "mean_of_5_seeds": [
+   165.8,
+   438.4,
+   174.8
+  ],
+  "per_seed": [
+   [
+    177,
+    426,
+    176
+   ],
+   [
+    169,
+    417,
+    174
+   ],
+   [
+    166,
+    457,
+    166
+   ],
+   [
+    160,
+    447,
+    180
+   ],
+   [
+    157,
+    445,
+    178
+   ]
+  ],
+  "percent_off": [
+   -4.3,
+   1.2,
+   0.9
+  ]
+ },
+ "count_kerb_pull_only": {
+  "mean_mask_by_hand": 0.363,
+  "expected": [
+   62.9,
+   157.3,
+   62.9
+  ],
+  "mean_of_5_seeds": [
+   60.0,
+   161.6,
+   62.4
+  ],
+  "percent_off": [
+   -4.6,
+   2.7,
+   -0.8
+  ]
+ },
+ "count_shipped_settings": {
+  "instances": 154,
+  "paper": 35,
+  "leaves": 117,
+  "bottles": 2
+ },
+ "stats": {
+  "instances": 154,
+  "references": 10,
+  "mesh_faces_out": 0,
+  "bbox": [
+   [
+    -2.5412,
+    -11.8966,
+    -0.8449
+   ],
+   [
+    2.5518,
+    72.0082,
+    5.0494
+   ]
+  ]
+ },
+ "reference_index_use": {
+  "0": 7,
+  "1": 10,
+  "2": 11,
+  "3": 3,
+  "4": 4,
+  "5": 29,
+  "6": 22,
+  "7": 37,
+  "8": 29,
+  "9": 2
+ },
+ "reference_count": 10,
+ "placement": {
+  "instances": 154,
+  "max_distance_origin_to_surface_m": 4e-06,
+  "max_tilt_vs_surface_normal_deg": 0.0,
+  "scale_range": [
+   0.803,
+   1.249
+  ]
+ },
+ "kerb_share": {
+  "litter_within_reach_percent": 52.6,
+  "host_area_within_reach_percent": 23.7
+ },
+ "probes": {
+  "base_count_mask1": 834,
+  "turned_90_about_z": 834,
+  "flipped_180_about_x": 0,
+  "tilted_25_about_x": 834,
+  "tilted_40_about_x": 0,
+  "double_detail_host_faces": 3360,
+  "double_detail_mean_count_5_seeds": 789.4,
+  "normal_detail_mean_count_5_seeds": 779.0,
+  "double_detail_percent_vs_normal": 1.3
+ },
+ "camera_view": {
+  "shipped": {
+   "film_main_camera": {
+    "pieces_in_frame": 110,
+    "of": 154,
+    "size_of_a_10cm_piece_px_median": 3.2,
+    "pieces_bigger_than_8px": 11
+   },
+   "lockout_camera": {
+    "pieces_in_frame": 115,
+    "of": 154,
+    "size_of_a_10cm_piece_px_median": 2.8,
+    "pieces_bigger_than_8px": 8
+   }
+  },
+  "messy": {
+   "film_main_camera": {
+    "pieces_in_frame": 322,
+    "of": 486,
+    "size_of_a_10cm_piece_px_median": 3.2,
+    "pieces_bigger_than_8px": 26
+   },
+   "lockout_camera": {
+    "pieces_in_frame": 342,
+    "of": 486,
+    "size_of_a_10cm_piece_px_median": 2.9,
+    "pieces_bigger_than_8px": 30
+   }
+  }
+ },
+ "time_to_evaluate_seconds": 0.0085,
+ "skill_recipe_scatter_tree": {
+  "check_ok": true,
+  "instances": 1740,
+  "expected_density12_x_eligible_area": 1732.4,
+  "percent_off": 0.4,
+  "surface_faces_also_in_output": 840,
+  "time_s": 0.0062
+ },
+ "slice": {
+  "faces": 40,
+  "instances": 19,
+  "check_ok": true
+ }
+}

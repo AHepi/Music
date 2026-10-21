@@ -1,0 +1,61 @@
+{
+ "audit_before": [],
+ "rough_picture_used_by": [
+  [
+   "street_setts",
+   "Image Texture.002",
+   [
+    "ShaderNodeGroup:Roughness"
+   ]
+  ]
+ ],
+ "audit_after_two_data_pictures_set_to_sRGB": [
+  "street_setts: image 'square_cobblestone_rough.jpg' feeds Roughness but is 'sRGB' (use Non-Color)",
+  "street_setts: image 'square_cobblestone_normal_smooth_4.png' feeds Color but is 'sRGB' (use Non-Color)"
+ ],
+ "baseline_mean_linear_no_lights": 0.00788,
+ "group_share_skill_as_given": {
+  "gas_lamps": 0.142,
+  "cottage_window_lights": 0.683,
+  "engine_house_lights": 0.057,
+  "suns": 0.068,
+  "world": 0.049
+ },
+ "group_share_glow_taken_away": {
+  "gas_lamps": 0.008,
+  "cottage_window_lights": 0.039,
+  "engine_house_lights": 0.003,
+  "suns": 0.343,
+  "world": 0.607
+ },
+ "top_net_lights": [
+  [
+   "World",
+   0.607
+  ],
+  [
+   "afterglow",
+   0.32
+  ],
+  [
+   "dusk_skylight",
+   0.023
+  ],
+  [
+   "right_row_a_cottage_01_window_light_upper_0",
+   0.002
+  ],
+  [
+   "right_row_a_cottage_02_window_light_ground",
+   0.002
+  ],
+  [
+   "right_row_a_cottage_03_window_light_ground",
+   0.002
+  ]
+ ],
+ "sum_of_net_vs_all_on": {
+  "sum_of_net_means": 0.00942,
+  "all_on_minus_baseline": 0.00643
+ }
+}

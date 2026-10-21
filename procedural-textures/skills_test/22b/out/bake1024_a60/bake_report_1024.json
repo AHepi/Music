@@ -1,0 +1,330 @@
+{
+ "res": 1024,
+ "seam_angle": 60.0,
+ "use_sharp_attr": false,
+ "seams": {
+  "seams_added": 78,
+  "seams_total": 78
+ },
+ "seconds": {
+  "seams": 0.0,
+  "unwrap": 1.6,
+  "pack": 2.5,
+  "uv_done": 2.8,
+  "bake": 5.7,
+  "rebuilt": 5.8
+ },
+ "unwrap": {
+  "method": "BEST",
+  "islands": 43,
+  "chosen": {
+   "CONFORMAL": 14,
+   "MINIMUM_STRETCH": 4,
+   "ANGLE_BASED": 25
+  },
+  "unsolved_faces": {
+   "ANGLE_BASED": 514,
+   "CONFORMAL": 514,
+   "MINIMUM_STRETCH": 514
+  },
+  "folding_islands": [
+   {
+    "island": 9,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 10,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 11,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 12,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 22,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 23,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 24,
+    "n_faces": 26,
+    "self_overlap": 0.9714
+   },
+   {
+    "island": 26,
+    "n_faces": 26,
+    "self_overlap": 0.9792
+   },
+   {
+    "island": 28,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 32,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 36,
+    "n_faces": 50,
+    "self_overlap": 0.9344
+   },
+   {
+    "island": 37,
+    "n_faces": 50,
+    "self_overlap": 0.8553
+   },
+   {
+    "island": 38,
+    "n_faces": 26,
+    "self_overlap": 0.9974
+   },
+   {
+    "island": 39,
+    "n_faces": 26,
+    "self_overlap": 0.9968
+   },
+   {
+    "island": 40,
+    "n_faces": 26,
+    "self_overlap": 1.0
+   },
+   {
+    "island": 41,
+    "n_faces": 50,
+    "self_overlap": 0.6952
+   },
+   {
+    "island": 42,
+    "n_faces": 26,
+    "self_overlap": 0.8818
+   }
+  ]
+ },
+ "density": {
+  "target_px_per_m": 169.5,
+  "before_min_max": [
+   13.3,
+   1272333072.1
+  ],
+  "islands": 138,
+  "weights_min_max": [
+   1.0,
+   1.0
+  ]
+ },
+ "pack": {
+  "coverage": 0.2863,
+  "shape": "CONCAVE",
+  "rotate": "AXIS_ALIGNED",
+  "gap_px": 8.0,
+  "margin_fraction": 0.003906,
+  "fits_tile": true,
+  "tried": [
+   {
+    "shape": "CONCAVE",
+    "rotate": "CARDINAL",
+    "coverage": 0.2863,
+    "loops_outside_tile": 0
+   },
+   {
+    "shape": "CONCAVE",
+    "rotate": "AXIS_ALIGNED",
+    "coverage": 0.2863,
+    "loops_outside_tile": 0
+   },
+   {
+    "shape": "CONVEX",
+    "rotate": "CARDINAL",
+    "coverage": 0.2863,
+    "loops_outside_tile": 0
+   },
+   {
+    "shape": "CONVEX",
+    "rotate": "AXIS_ALIGNED",
+    "coverage": 0.2863,
+    "loops_outside_tile": 0
+   }
+  ]
+ },
+ "uv_qa": {
+  "object": "door_low",
+  "uv_map": "bake_uv",
+  "tex_res": 1024,
+  "faces": 790,
+  "islands": 138,
+  "td_px_per_m": 168.9,
+  "td_face_spread_p95_p05": 1.49,
+  "td_island_spread_p95_p05": 1.0,
+  "td_island_min_max": [
+   0.0,
+   43158.4
+  ],
+  "angle_err_mean_deg": 11.0,
+  "angle_err_p95_deg": 58.04,
+  "area_stretch_p95_log2": 3.52,
+  "flipped_faces": 221,
+  "zero_area_faces": 36,
+  "overlap_px_pct": 0.022,
+  "overlapping_island_pairs": 0,
+  "self_overlapping_islands": [
+   11,
+   16,
+   18,
+   43,
+   47
+  ],
+  "tiles": [
+   1001
+  ],
+  "per_tile": {
+   "1001": {
+    "coverage": 0.2863,
+    "overlap_px_pct": 0.022,
+    "min_gap_px": 7.0,
+    "border_px": 4.0
+   }
+  },
+  "faces_crossing_tiles": 0,
+  "min_gap_px": 7.0,
+  "gap_required_px": 8.0,
+  "tiny_islands": [
+   0,
+   1,
+   2,
+   3,
+   6,
+   7,
+   8,
+   9,
+   12,
+   13,
+   14,
+   15,
+   86,
+   95,
+   97,
+   101,
+   108,
+   112,
+   114,
+   118
+  ],
+  "sharp_edges_not_on_seams": 406,
+  "flat_shaded_share": 0.005,
+  "mirror_stacked_hint": false
+ },
+ "uv_verdict": [
+  "36 faces with zero UV area (unsolved island or collapsed faces)",
+  "221 flipped UV faces",
+  "coverage 29% < 70% (Gambrell >70, Huge Menace 75% studio minimum)",
+  "angle stretch p95 58.04 deg (> 15: add a seam or relax with pins)",
+  "406 hard edges inside islands (bake seams): seam them or smooth them",
+  "islands smaller than 4x4 px: [0, 1, 2, 3, 6, 7, 8, 9, 12, 13, 14, 15, 86, 95, 97, 101, 108, 112, 114, 118]"
+ ],
+ "prepare": {
+  "smooth": true
+ },
+ "bake_paths": {
+  "DIFFUSE": "proc-work/skills_test/22b/out/bake1024_a60/door_diffuse.png",
+  "ROUGHNESS": "proc-work/skills_test/22b/out/bake1024_a60/door_roughness.png",
+  "NORMAL": "proc-work/skills_test/22b/out/bake1024_a60/door_normal.png"
+ },
+ "bake_sanity": {
+  "DIFFUSE": {
+   "pixels": 300220,
+   "mean": [
+    0.197,
+    0.2,
+    0.215
+   ],
+   "std": [
+    0.065,
+    0.055,
+    0.045
+   ],
+   "problems": [],
+   "notes": []
+  },
+  "ROUGHNESS": {
+   "pixels": 300220,
+   "mean": [
+    0.581,
+    0.581,
+    0.581
+   ],
+   "std": [
+    0.114,
+    0.114,
+    0.114
+   ],
+   "problems": [],
+   "notes": []
+  },
+  "NORMAL": {
+   "pixels": 300220,
+   "inverted_pct": 20.685,
+   "flat_exact_pct": 0.12,
+   "bad_length_pct": 0.037,
+   "steep_pct": 20.856,
+   "mean": [
+    0.501,
+    0.514,
+    0.792
+   ],
+   "std": [
+    0.039,
+    0.024,
+    0.403
+   ],
+   "nan": 0,
+   "problems": [
+    "20.685% inverted normals (blue < 0.5): rays start inside or behind the high; if a sweep does not move it, low and high differ there (map_problem_review)"
+   ],
+   "notes": []
+  }
+ },
+ "bake_settings": {
+  "cage_extrusion": 0.00063,
+  "max_ray_distance": 0.00153,
+  "cage": null,
+  "margin_px": 8,
+  "normal_convention": "OPENGL"
+ },
+ "bake_projection": {
+  "samples": 1512,
+  "outward_q": 0.00032,
+  "inward_q": 0.00056,
+  "outward_max": 0.00034,
+  "inward_max": 0.00075,
+  "cage_extrusion": 0.00063,
+  "max_ray_distance": 0.00153,
+  "miss_pct": 0.0,
+  "uncovered_pct": 0.0,
+  "wrong_part_pct": 3.11,
+  "search": 0.2192,
+  "quantile": 0.995
+ },
+ "bake_warnings": [
+  "3.11% of rays would hit another part first: explode or bake per pair"
+ ],
+ "normal_used": false,
+ "hookup": {
+  "materials": 1
+ },
+ "saved": "proc-work/skills_test/22b/street_copy/door_baked_1024_a60.blend"
+}

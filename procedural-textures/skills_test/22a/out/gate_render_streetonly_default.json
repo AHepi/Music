@@ -1,0 +1,3628 @@
+{
+ "profile": "render",
+ "eps": 0.044144,
+ "tol": 0.882871,
+ "gap": 4.414356,
+ "pass": false,
+ "errors": [
+  "headframe_lattice: 69 closed parts with normals pointing inward",
+  "winding_wheel_left: 1 closed part with normals pointing inward",
+  "winding_wheel_right: 1 closed part with normals pointing inward",
+  "engine_house_trim: 2 closed parts with normals pointing inward",
+  "colliery_chimney, between its own parts: 4 coplanar overlapping faces (z-fighting)",
+  "engine_house_glass <-> engine_house_trim: 114 coplanar overlapping faces (z-fighting)",
+  "engine_house_trim, between its own parts: 34 coplanar overlapping faces (z-fighting)",
+  "engine_house_trim <-> engine_house_walls: 215 coplanar overlapping faces (z-fighting)",
+  "engine_house_walls <-> ground: 1 coplanar overlapping face (z-fighting)",
+  "gas_lamp_0_post, between its own parts: 36 coplanar overlapping faces (z-fighting)",
+  "gas_lamp_1_post, between its own parts: 36 coplanar overlapping faces (z-fighting)",
+  "gas_lamp_2_post, between its own parts: 36 coplanar overlapping faces (z-fighting)",
+  "gas_lamp_3_post, between its own parts: 36 coplanar overlapping faces (z-fighting)",
+  "gas_lamp_4_post, between its own parts: 36 coplanar overlapping faces (z-fighting)",
+  "ground <-> heapstead_walls: 1 coplanar overlapping face (z-fighting)",
+  "headframe_lattice, between its own parts: 208 coplanar overlapping faces (z-fighting)",
+  "headframe_lattice <-> heapstead_trim: 1 coplanar overlapping face (z-fighting)",
+  "headframe_lattice <-> winding_wheel_left: 52 coplanar overlapping faces (z-fighting)",
+  "headframe_lattice <-> winding_wheel_right: 52 coplanar overlapping faces (z-fighting)",
+  "heapstead_trim, between its own parts: 54 coplanar overlapping faces (z-fighting)",
+  "heapstead_trim <-> heapstead_walls: 1 coplanar overlapping face (z-fighting)",
+  "left_row_a_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_chimney <-> left_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_02_chimney: 188 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_glass_ground <-> left_row_a_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_glass_upper_0 <-> left_row_a_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_glass_upper_1 <-> left_row_a_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_roof <-> left_row_a_cottage_02_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_trim <-> left_row_a_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_chimney <-> left_row_a_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_door, between its own parts: 112 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_glass_ground <-> left_row_a_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_glass_upper_0 <-> left_row_a_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_glass_upper_1 <-> left_row_a_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_roof <-> left_row_a_cottage_03_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_trim <-> left_row_a_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_chimney <-> left_row_a_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_door, between its own parts: 112 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_glass_ground <-> left_row_a_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_glass_upper_0 <-> left_row_a_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_glass_upper_1 <-> left_row_a_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_roof <-> left_row_a_cottage_04_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_trim <-> left_row_a_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_chimney <-> left_row_a_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_door, between its own parts: 112 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_glass_ground <-> left_row_a_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_glass_upper_0 <-> left_row_a_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_glass_upper_1 <-> left_row_a_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_roof <-> left_row_a_cottage_05_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_trim <-> left_row_a_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_chimney <-> left_row_a_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_glass_ground <-> left_row_a_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_glass_upper_0 <-> left_row_a_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_glass_upper_1 <-> left_row_a_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_roof <-> left_row_a_cottage_06_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_trim <-> left_row_a_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_chimney <-> left_row_a_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_glass_ground <-> left_row_a_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_glass_upper_0 <-> left_row_a_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_glass_upper_1 <-> left_row_a_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_roof <-> left_row_a_cottage_07_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_trim <-> left_row_a_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_chimney <-> left_row_a_cottage_07_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_glass_ground <-> left_row_a_cottage_07_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_glass_upper_0 <-> left_row_a_cottage_07_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_glass_upper_1 <-> left_row_a_cottage_07_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_roof <-> left_row_a_cottage_08_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_trim <-> left_row_a_cottage_07_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_07_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_chimney <-> left_row_a_cottage_08_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_glass_ground <-> left_row_a_cottage_08_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_glass_upper_0 <-> left_row_a_cottage_08_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_glass_upper_1 <-> left_row_a_cottage_08_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_trim <-> left_row_a_cottage_08_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_a_cottage_08_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_chimney <-> left_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_02_chimney: 188 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_glass_ground <-> left_row_b_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_glass_upper_0 <-> left_row_b_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_glass_upper_1 <-> left_row_b_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_roof <-> left_row_b_cottage_02_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_trim <-> left_row_b_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_chimney <-> left_row_b_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_glass_ground <-> left_row_b_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_glass_upper_0 <-> left_row_b_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_glass_upper_1 <-> left_row_b_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_roof <-> left_row_b_cottage_03_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_trim <-> left_row_b_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_chimney <-> left_row_b_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_glass_ground <-> left_row_b_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_glass_upper_0 <-> left_row_b_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_glass_upper_1 <-> left_row_b_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_roof <-> left_row_b_cottage_04_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_trim <-> left_row_b_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_chimney <-> left_row_b_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_glass_ground <-> left_row_b_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_glass_upper_0 <-> left_row_b_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_glass_upper_1 <-> left_row_b_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_roof <-> left_row_b_cottage_05_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_trim <-> left_row_b_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_chimney <-> left_row_b_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_glass_ground <-> left_row_b_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_glass_upper_0 <-> left_row_b_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_glass_upper_1 <-> left_row_b_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_roof <-> left_row_b_cottage_06_chimney: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_trim <-> left_row_b_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_chimney <-> left_row_b_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_glass_ground <-> left_row_b_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_glass_upper_0 <-> left_row_b_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_glass_upper_1 <-> left_row_b_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_trim <-> left_row_b_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "left_row_b_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_chimney <-> right_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_chimney <-> right_row_a_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_end_chimney <-> right_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_glass_ground <-> right_row_a_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_glass_upper_0 <-> right_row_a_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_glass_upper_1 <-> right_row_a_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_trim <-> right_row_a_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_chimney <-> right_row_a_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_chimney <-> right_row_a_cottage_03_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_door, between its own parts: 112 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_glass_ground <-> right_row_a_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_glass_upper_0 <-> right_row_a_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_glass_upper_1 <-> right_row_a_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_trim <-> right_row_a_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_chimney <-> right_row_a_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_chimney <-> right_row_a_cottage_04_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_door, between its own parts: 112 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_glass_ground <-> right_row_a_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_glass_upper_0 <-> right_row_a_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_glass_upper_1 <-> right_row_a_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_trim <-> right_row_a_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_chimney <-> right_row_a_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_chimney <-> right_row_a_cottage_05_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_glass_ground <-> right_row_a_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_glass_upper_0 <-> right_row_a_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_glass_upper_1 <-> right_row_a_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_trim <-> right_row_a_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_chimney <-> right_row_a_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_chimney <-> right_row_a_cottage_06_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_glass_ground <-> right_row_a_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_glass_upper_0 <-> right_row_a_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_glass_upper_1 <-> right_row_a_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_trim <-> right_row_a_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_chimney <-> right_row_a_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_chimney <-> right_row_a_cottage_07_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_glass_ground <-> right_row_a_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_glass_upper_0 <-> right_row_a_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_glass_upper_1 <-> right_row_a_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_trim <-> right_row_a_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_chimney <-> right_row_a_cottage_07_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_chimney <-> right_row_a_cottage_08_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_glass_ground <-> right_row_a_cottage_07_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_glass_upper_0 <-> right_row_a_cottage_07_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_glass_upper_1 <-> right_row_a_cottage_07_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_trim <-> right_row_a_cottage_07_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_07_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_chimney <-> right_row_a_cottage_08_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_glass_ground <-> right_row_a_cottage_08_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_glass_upper_0 <-> right_row_a_cottage_08_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_glass_upper_1 <-> right_row_a_cottage_08_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_trim <-> right_row_a_cottage_08_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_a_cottage_08_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_chimney <-> right_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_chimney <-> right_row_b_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_end_chimney <-> right_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_glass_ground <-> right_row_b_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_glass_upper_0 <-> right_row_b_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_glass_upper_1 <-> right_row_b_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_trim <-> right_row_b_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_chimney <-> right_row_b_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_chimney <-> right_row_b_cottage_03_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_glass_ground <-> right_row_b_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_glass_upper_0 <-> right_row_b_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_glass_upper_1 <-> right_row_b_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_trim <-> right_row_b_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_chimney <-> right_row_b_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_chimney <-> right_row_b_cottage_04_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_glass_ground <-> right_row_b_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_glass_upper_0 <-> right_row_b_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_glass_upper_1 <-> right_row_b_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_trim <-> right_row_b_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_chimney <-> right_row_b_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_chimney <-> right_row_b_cottage_05_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_glass_ground <-> right_row_b_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_glass_upper_0 <-> right_row_b_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_glass_upper_1 <-> right_row_b_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_trim <-> right_row_b_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_chimney <-> right_row_b_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_chimney <-> right_row_b_cottage_06_roof: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_glass_ground <-> right_row_b_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_glass_upper_0 <-> right_row_b_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_glass_upper_1 <-> right_row_b_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_trim <-> right_row_b_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_chimney <-> right_row_b_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_glass_ground <-> right_row_b_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_glass_upper_0 <-> right_row_b_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_glass_upper_1 <-> right_row_b_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_trim <-> right_row_b_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "right_row_b_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)",
+  "second_winding_house_trim, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+  "second_winding_house_trim <-> second_winding_house_walls: 4 coplanar overlapping faces (z-fighting)",
+  "spoil_heap_main <-> spoil_heap_old: 524 coplanar overlapping faces (z-fighting)"
+ ],
+ "warnings": [],
+ "per_object": {
+  "street_setts": {
+   "tris": 2688,
+   "parts": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "street_channels": {
+   "tris": 1008,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "street_kerbs": {
+   "tris": 8228,
+   "parts": 187,
+   "errors": [],
+   "warnings": []
+  },
+  "street_pavements": {
+   "tris": 336,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "ground": {
+   "tris": 4270,
+   "parts": 1,
+   "errors": [
+    "engine_house_walls <-> ground: 1 coplanar overlapping face (z-fighting)",
+    "ground <-> heapstead_walls: 1 coplanar overlapping face (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_01_trim <-> right_row_a_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_trim <-> right_row_a_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_01_chimney <-> right_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_end_chimney <-> right_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_01_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_chimney <-> right_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_chimney <-> right_row_a_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_01_glass_ground <-> right_row_a_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_01_glass_ground <-> right_row_a_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_01_glass_upper_0 <-> right_row_a_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_01_glass_upper_0 <-> right_row_a_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_01_glass_upper_1 <-> right_row_a_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_01_glass_upper_1 <-> right_row_a_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_01_end_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_01_end_chimney <-> right_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_02_trim <-> right_row_a_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_trim <-> right_row_a_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_01_chimney <-> right_row_a_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_chimney <-> right_row_a_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_02_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_chimney <-> right_row_a_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_chimney <-> right_row_a_cottage_03_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_02_door, between its own parts: 112 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_02_glass_ground <-> right_row_a_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_02_glass_ground <-> right_row_a_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_02_glass_upper_0 <-> right_row_a_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_02_glass_upper_0 <-> right_row_a_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_02_glass_upper_1 <-> right_row_a_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_02_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_02_glass_upper_1 <-> right_row_a_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_03_trim <-> right_row_a_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_trim <-> right_row_a_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_02_chimney <-> right_row_a_cottage_03_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_chimney <-> right_row_a_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_chimney <-> right_row_a_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_chimney <-> right_row_a_cottage_04_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_03_door, between its own parts: 112 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_03_glass_ground <-> right_row_a_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_03_glass_ground <-> right_row_a_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_03_glass_upper_0 <-> right_row_a_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_03_glass_upper_0 <-> right_row_a_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_03_glass_upper_1 <-> right_row_a_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_03_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_03_glass_upper_1 <-> right_row_a_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_04_trim <-> right_row_a_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_trim <-> right_row_a_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_03_chimney <-> right_row_a_cottage_04_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_chimney <-> right_row_a_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_chimney <-> right_row_a_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_chimney <-> right_row_a_cottage_05_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_04_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_04_glass_ground <-> right_row_a_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_04_glass_ground <-> right_row_a_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_04_glass_upper_0 <-> right_row_a_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_04_glass_upper_0 <-> right_row_a_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_04_glass_upper_1 <-> right_row_a_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_04_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_04_glass_upper_1 <-> right_row_a_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_05_trim <-> right_row_a_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_trim <-> right_row_a_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_04_chimney <-> right_row_a_cottage_05_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_chimney <-> right_row_a_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_chimney <-> right_row_a_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_chimney <-> right_row_a_cottage_06_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_05_glass_ground <-> right_row_a_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_05_glass_ground <-> right_row_a_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_05_glass_upper_0 <-> right_row_a_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_05_glass_upper_0 <-> right_row_a_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_05_glass_upper_1 <-> right_row_a_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_05_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_05_glass_upper_1 <-> right_row_a_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_06_trim <-> right_row_a_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_trim <-> right_row_a_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_05_chimney <-> right_row_a_cottage_06_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_chimney <-> right_row_a_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_06_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_chimney <-> right_row_a_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_chimney <-> right_row_a_cottage_07_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_06_glass_ground <-> right_row_a_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_06_glass_ground <-> right_row_a_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_06_glass_upper_0 <-> right_row_a_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_06_glass_upper_0 <-> right_row_a_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_06_glass_upper_1 <-> right_row_a_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_06_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_06_glass_upper_1 <-> right_row_a_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_07_trim <-> right_row_a_cottage_07_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_07_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_trim <-> right_row_a_cottage_07_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_06_chimney <-> right_row_a_cottage_07_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_chimney <-> right_row_a_cottage_07_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_07_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_07_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_chimney <-> right_row_a_cottage_07_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_chimney <-> right_row_a_cottage_08_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_07_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_07_glass_ground <-> right_row_a_cottage_07_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_07_glass_ground <-> right_row_a_cottage_07_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_07_glass_upper_0 <-> right_row_a_cottage_07_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_07_glass_upper_0 <-> right_row_a_cottage_07_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_07_glass_upper_1 <-> right_row_a_cottage_07_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_07_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_07_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_07_glass_upper_1 <-> right_row_a_cottage_07_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "right_row_a_cottage_08_trim <-> right_row_a_cottage_08_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_a_cottage_08_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_08_trim <-> right_row_a_cottage_08_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_a_cottage_07_chimney <-> right_row_a_cottage_08_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_08_chimney <-> right_row_a_cottage_08_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_08_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_a_cottage_08_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_a_cottage_08_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_08_chimney <-> right_row_a_cottage_08_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_a_cottage_08_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_08_glass_ground <-> right_row_a_cottage_08_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_08_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_08_glass_ground <-> right_row_a_cottage_08_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_08_glass_upper_0 <-> right_row_a_cottage_08_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_08_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_08_glass_upper_0 <-> right_row_a_cottage_08_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_a_cottage_08_glass_upper_1 <-> right_row_a_cottage_08_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_a_cottage_08_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_a_cottage_08_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_a_cottage_08_glass_upper_1 <-> right_row_a_cottage_08_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "right_row_b_cottage_01_trim <-> right_row_b_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_b_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_trim <-> right_row_b_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_b_cottage_01_chimney <-> right_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_end_chimney <-> right_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_b_cottage_01_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_b_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_chimney <-> right_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_chimney <-> right_row_b_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_b_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_01_glass_ground <-> right_row_b_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_01_glass_ground <-> right_row_b_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_01_glass_upper_0 <-> right_row_b_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_01_glass_upper_0 <-> right_row_b_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_01_glass_upper_1 <-> right_row_b_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_01_glass_upper_1 <-> right_row_b_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_01_end_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_b_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_01_end_chimney <-> right_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "right_row_b_cottage_02_trim <-> right_row_b_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_b_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_trim <-> right_row_b_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_b_cottage_01_chimney <-> right_row_b_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_chimney <-> right_row_b_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_b_cottage_02_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_b_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_chimney <-> right_row_b_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_chimney <-> right_row_b_cottage_03_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_b_cottage_02_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_02_glass_ground <-> right_row_b_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_02_glass_ground <-> right_row_b_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_02_glass_upper_0 <-> right_row_b_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_02_glass_upper_0 <-> right_row_b_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_02_glass_upper_1 <-> right_row_b_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_02_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_02_glass_upper_1 <-> right_row_b_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "right_row_b_cottage_03_trim <-> right_row_b_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_b_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_trim <-> right_row_b_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_b_cottage_02_chimney <-> right_row_b_cottage_03_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_chimney <-> right_row_b_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_b_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_b_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_chimney <-> right_row_b_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_chimney <-> right_row_b_cottage_04_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_b_cottage_03_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_03_glass_ground <-> right_row_b_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_03_glass_ground <-> right_row_b_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_03_glass_upper_0 <-> right_row_b_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_03_glass_upper_0 <-> right_row_b_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_03_glass_upper_1 <-> right_row_b_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_03_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_03_glass_upper_1 <-> right_row_b_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "right_row_b_cottage_04_trim <-> right_row_b_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_b_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_trim <-> right_row_b_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_b_cottage_03_chimney <-> right_row_b_cottage_04_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_chimney <-> right_row_b_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_b_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_b_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_chimney <-> right_row_b_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_chimney <-> right_row_b_cottage_05_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_b_cottage_04_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_04_glass_ground <-> right_row_b_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_04_glass_ground <-> right_row_b_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_04_glass_upper_0 <-> right_row_b_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_04_glass_upper_0 <-> right_row_b_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_04_glass_upper_1 <-> right_row_b_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_04_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_04_glass_upper_1 <-> right_row_b_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "right_row_b_cottage_05_trim <-> right_row_b_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_b_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_trim <-> right_row_b_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_b_cottage_04_chimney <-> right_row_b_cottage_05_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_chimney <-> right_row_b_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_b_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_b_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_chimney <-> right_row_b_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_chimney <-> right_row_b_cottage_06_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_b_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_05_glass_ground <-> right_row_b_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_05_glass_ground <-> right_row_b_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_05_glass_upper_0 <-> right_row_b_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_05_glass_upper_0 <-> right_row_b_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_05_glass_upper_1 <-> right_row_b_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_05_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_05_glass_upper_1 <-> right_row_b_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "right_row_b_cottage_06_trim <-> right_row_b_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "right_row_b_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_06_trim <-> right_row_b_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "right_row_b_cottage_05_chimney <-> right_row_b_cottage_06_roof: 2 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_06_chimney <-> right_row_b_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "right_row_b_cottage_06_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "right_row_b_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_06_chimney <-> right_row_b_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "right_row_b_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_06_glass_ground <-> right_row_b_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_06_glass_ground <-> right_row_b_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_06_glass_upper_0 <-> right_row_b_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_06_glass_upper_0 <-> right_row_b_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "right_row_b_cottage_06_glass_upper_1 <-> right_row_b_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "right_row_b_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "right_row_b_cottage_06_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "right_row_b_cottage_06_glass_upper_1 <-> right_row_b_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_01_trim <-> left_row_a_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_trim <-> left_row_a_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_01_chimney <-> left_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_roof <-> left_row_a_cottage_02_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_01_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_chimney <-> left_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_01_glass_ground <-> left_row_a_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_01_glass_ground <-> left_row_a_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_01_glass_upper_0 <-> left_row_a_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_01_glass_upper_0 <-> left_row_a_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_01_glass_upper_1 <-> left_row_a_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_01_glass_upper_1 <-> left_row_a_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_01_end_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_02_chimney: 188 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_02_trim <-> left_row_a_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_trim <-> left_row_a_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_chimney <-> left_row_a_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_roof <-> left_row_a_cottage_03_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_02_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_01_end_chimney <-> left_row_a_cottage_02_chimney: 188 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_01_roof <-> left_row_a_cottage_02_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_chimney <-> left_row_a_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_02_door, between its own parts: 112 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_02_glass_ground <-> left_row_a_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_02_glass_ground <-> left_row_a_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_02_glass_upper_0 <-> left_row_a_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_02_glass_upper_0 <-> left_row_a_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_02_glass_upper_1 <-> left_row_a_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_02_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_02_glass_upper_1 <-> left_row_a_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_03_trim <-> left_row_a_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_trim <-> left_row_a_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_03_chimney <-> left_row_a_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_roof <-> left_row_a_cottage_04_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_02_roof <-> left_row_a_cottage_03_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_chimney <-> left_row_a_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_03_door, between its own parts: 112 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_03_glass_ground <-> left_row_a_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_03_glass_ground <-> left_row_a_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_03_glass_upper_0 <-> left_row_a_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_03_glass_upper_0 <-> left_row_a_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_03_glass_upper_1 <-> left_row_a_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_03_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_03_glass_upper_1 <-> left_row_a_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_04_trim <-> left_row_a_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_trim <-> left_row_a_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_04_chimney <-> left_row_a_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_roof <-> left_row_a_cottage_05_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_03_roof <-> left_row_a_cottage_04_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_chimney <-> left_row_a_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_04_door, between its own parts: 112 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_04_glass_ground <-> left_row_a_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_04_glass_ground <-> left_row_a_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_04_glass_upper_0 <-> left_row_a_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_04_glass_upper_0 <-> left_row_a_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_04_glass_upper_1 <-> left_row_a_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_04_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_04_glass_upper_1 <-> left_row_a_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_05_trim <-> left_row_a_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_trim <-> left_row_a_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_05_chimney <-> left_row_a_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_roof <-> left_row_a_cottage_06_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_04_roof <-> left_row_a_cottage_05_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_chimney <-> left_row_a_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_05_glass_ground <-> left_row_a_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_05_glass_ground <-> left_row_a_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_05_glass_upper_0 <-> left_row_a_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_05_glass_upper_0 <-> left_row_a_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_05_glass_upper_1 <-> left_row_a_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_05_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_05_glass_upper_1 <-> left_row_a_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_06_trim <-> left_row_a_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_trim <-> left_row_a_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_06_chimney <-> left_row_a_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_roof <-> left_row_a_cottage_07_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_06_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_05_roof <-> left_row_a_cottage_06_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_chimney <-> left_row_a_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_06_glass_ground <-> left_row_a_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_06_glass_ground <-> left_row_a_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_06_glass_upper_0 <-> left_row_a_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_06_glass_upper_0 <-> left_row_a_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_06_glass_upper_1 <-> left_row_a_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_06_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_06_glass_upper_1 <-> left_row_a_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_07_trim <-> left_row_a_cottage_07_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_07_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_trim <-> left_row_a_cottage_07_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_07_chimney <-> left_row_a_cottage_07_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_roof <-> left_row_a_cottage_08_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_07_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_06_roof <-> left_row_a_cottage_07_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_chimney <-> left_row_a_cottage_07_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_07_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_07_glass_ground <-> left_row_a_cottage_07_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_07_glass_ground <-> left_row_a_cottage_07_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_07_glass_upper_0 <-> left_row_a_cottage_07_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_07_glass_upper_0 <-> left_row_a_cottage_07_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_07_glass_upper_1 <-> left_row_a_cottage_07_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_07_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_07_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_07_glass_upper_1 <-> left_row_a_cottage_07_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "left_row_a_cottage_08_trim <-> left_row_a_cottage_08_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_a_cottage_08_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_08_trim <-> left_row_a_cottage_08_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_a_cottage_08_chimney <-> left_row_a_cottage_08_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_08_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_a_cottage_08_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_a_cottage_07_roof <-> left_row_a_cottage_08_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_08_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_08_chimney <-> left_row_a_cottage_08_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_a_cottage_08_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_08_glass_ground <-> left_row_a_cottage_08_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_08_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_08_glass_ground <-> left_row_a_cottage_08_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_08_glass_upper_0 <-> left_row_a_cottage_08_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_08_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_08_glass_upper_0 <-> left_row_a_cottage_08_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_a_cottage_08_glass_upper_1 <-> left_row_a_cottage_08_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_a_cottage_08_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_a_cottage_08_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_a_cottage_08_glass_upper_1 <-> left_row_a_cottage_08_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "left_row_b_cottage_01_trim <-> left_row_b_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_b_cottage_01_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_trim <-> left_row_b_cottage_01_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_b_cottage_01_chimney <-> left_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_roof <-> left_row_b_cottage_02_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_b_cottage_01_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_b_cottage_01_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_chimney <-> left_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_b_cottage_01_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_01_glass_ground <-> left_row_b_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_01_glass_ground <-> left_row_b_cottage_01_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_01_glass_upper_0 <-> left_row_b_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_01_glass_upper_0 <-> left_row_b_cottage_01_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_01_glass_upper_1 <-> left_row_b_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_01_glass_upper_1 <-> left_row_b_cottage_01_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_01_end_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_b_cottage_01_end_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_01_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_02_chimney: 188 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "left_row_b_cottage_02_trim <-> left_row_b_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_b_cottage_02_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_trim <-> left_row_b_cottage_02_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_02_roof: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_chimney <-> left_row_b_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_roof <-> left_row_b_cottage_03_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_b_cottage_02_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_b_cottage_01_end_chimney <-> left_row_b_cottage_02_chimney: 188 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_01_roof <-> left_row_b_cottage_02_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_chimney <-> left_row_b_cottage_02_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_b_cottage_02_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_02_glass_ground <-> left_row_b_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_02_glass_ground <-> left_row_b_cottage_02_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_02_glass_upper_0 <-> left_row_b_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_02_glass_upper_0 <-> left_row_b_cottage_02_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_02_glass_upper_1 <-> left_row_b_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_02_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_02_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_02_glass_upper_1 <-> left_row_b_cottage_02_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "left_row_b_cottage_03_trim <-> left_row_b_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_b_cottage_03_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_trim <-> left_row_b_cottage_03_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_b_cottage_03_chimney <-> left_row_b_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_roof <-> left_row_b_cottage_04_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_b_cottage_03_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_b_cottage_02_roof <-> left_row_b_cottage_03_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_chimney <-> left_row_b_cottage_03_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_b_cottage_03_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_03_glass_ground <-> left_row_b_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_03_glass_ground <-> left_row_b_cottage_03_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_03_glass_upper_0 <-> left_row_b_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_03_glass_upper_0 <-> left_row_b_cottage_03_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_03_glass_upper_1 <-> left_row_b_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_03_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_03_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_03_glass_upper_1 <-> left_row_b_cottage_03_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "left_row_b_cottage_04_trim <-> left_row_b_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_b_cottage_04_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_trim <-> left_row_b_cottage_04_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_b_cottage_04_chimney <-> left_row_b_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_roof <-> left_row_b_cottage_05_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_b_cottage_04_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_b_cottage_03_roof <-> left_row_b_cottage_04_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_chimney <-> left_row_b_cottage_04_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_b_cottage_04_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_04_glass_ground <-> left_row_b_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_04_glass_ground <-> left_row_b_cottage_04_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_04_glass_upper_0 <-> left_row_b_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_04_glass_upper_0 <-> left_row_b_cottage_04_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_04_glass_upper_1 <-> left_row_b_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_04_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_04_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_04_glass_upper_1 <-> left_row_b_cottage_04_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_walls": {
+   "tris": 92,
+   "parts": 2,
+   "errors": [
+    "left_row_b_cottage_05_trim <-> left_row_b_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_b_cottage_05_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_trim <-> left_row_b_cottage_05_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_b_cottage_05_chimney <-> left_row_b_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_roof <-> left_row_b_cottage_06_chimney: 2 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_b_cottage_05_rainwater, between its own parts: 8 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_b_cottage_04_roof <-> left_row_b_cottage_05_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_chimney <-> left_row_b_cottage_05_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_b_cottage_05_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_05_glass_ground <-> left_row_b_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_05_glass_ground <-> left_row_b_cottage_05_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_05_glass_upper_0 <-> left_row_b_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_05_glass_upper_0 <-> left_row_b_cottage_05_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_05_glass_upper_1 <-> left_row_b_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_05_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_05_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_05_glass_upper_1 <-> left_row_b_cottage_05_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_walls": {
+   "tris": 90,
+   "parts": 2,
+   "errors": [
+    "left_row_b_cottage_06_trim <-> left_row_b_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_trim": {
+   "tris": 748,
+   "parts": 17,
+   "errors": [
+    "left_row_b_cottage_06_trim, between its own parts: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_06_trim <-> left_row_b_cottage_06_walls: 21 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_roof": {
+   "tris": 742,
+   "parts": 21,
+   "errors": [
+    "left_row_b_cottage_06_chimney <-> left_row_b_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_06_roof, between its own parts: 126 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_rainwater": {
+   "tris": 710,
+   "parts": 11,
+   "errors": [
+    "left_row_b_cottage_06_rainwater, between its own parts: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_chimney": {
+   "tris": 1696,
+   "parts": 12,
+   "errors": [
+    "left_row_b_cottage_05_roof <-> left_row_b_cottage_06_chimney: 2 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_06_chimney, between its own parts: 148 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_06_chimney <-> left_row_b_cottage_06_roof: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_door": {
+   "tris": 1312,
+   "parts": 23,
+   "errors": [
+    "left_row_b_cottage_06_door, between its own parts: 111 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_window_ground": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_06_glass_ground <-> left_row_b_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_06_window_ground, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_glass_ground": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_06_glass_ground <-> left_row_b_cottage_06_window_ground: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_window_upper_0": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_06_glass_upper_0 <-> left_row_b_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_06_window_upper_0, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_glass_upper_0": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_06_glass_upper_0 <-> left_row_b_cottage_06_window_upper_0: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_window_upper_1": {
+   "tris": 226,
+   "parts": 9,
+   "errors": [
+    "left_row_b_cottage_06_glass_upper_1 <-> left_row_b_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)",
+    "left_row_b_cottage_06_window_upper_1, between its own parts: 12 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "left_row_b_cottage_06_glass_upper_1": {
+   "tris": 2,
+   "parts": 1,
+   "errors": [
+    "left_row_b_cottage_06_glass_upper_1 <-> left_row_b_cottage_06_window_upper_1: 9 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "gas_lamp_0_post": {
+   "tris": 2096,
+   "parts": 25,
+   "errors": [
+    "gas_lamp_0_post, between its own parts: 36 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "gas_lamp_0_glass": {
+   "tris": 40,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "gas_lamp_1_post": {
+   "tris": 2096,
+   "parts": 25,
+   "errors": [
+    "gas_lamp_1_post, between its own parts: 36 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "gas_lamp_1_glass": {
+   "tris": 40,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "gas_lamp_2_post": {
+   "tris": 2096,
+   "parts": 25,
+   "errors": [
+    "gas_lamp_2_post, between its own parts: 36 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "gas_lamp_2_glass": {
+   "tris": 40,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "gas_lamp_3_post": {
+   "tris": 2096,
+   "parts": 25,
+   "errors": [
+    "gas_lamp_3_post, between its own parts: 36 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "gas_lamp_3_glass": {
+   "tris": 40,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "gas_lamp_4_post": {
+   "tris": 2096,
+   "parts": 25,
+   "errors": [
+    "gas_lamp_4_post, between its own parts: 36 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "gas_lamp_4_glass": {
+   "tris": 40,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "headframe_lattice": {
+   "tris": 12470,
+   "parts": 225,
+   "errors": [
+    "headframe_lattice: 69 closed parts with normals pointing inward",
+    "headframe_lattice, between its own parts: 208 coplanar overlapping faces (z-fighting)",
+    "headframe_lattice <-> heapstead_trim: 1 coplanar overlapping face (z-fighting)",
+    "headframe_lattice <-> winding_wheel_left: 52 coplanar overlapping faces (z-fighting)",
+    "headframe_lattice <-> winding_wheel_right: 52 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "winding_wheel_left": {
+   "tris": 3720,
+   "parts": 20,
+   "errors": [
+    "winding_wheel_left: 1 closed part with normals pointing inward",
+    "headframe_lattice <-> winding_wheel_left: 52 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "winding_wheel_right": {
+   "tris": 3720,
+   "parts": 20,
+   "errors": [
+    "winding_wheel_right: 1 closed part with normals pointing inward",
+    "headframe_lattice <-> winding_wheel_right: 52 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "winding_ropes": {
+   "tris": 80,
+   "parts": 4,
+   "errors": [],
+   "warnings": []
+  },
+  "heapstead_walls": {
+   "tris": 36,
+   "parts": 2,
+   "errors": [
+    "ground <-> heapstead_walls: 1 coplanar overlapping face (z-fighting)",
+    "heapstead_trim <-> heapstead_walls: 1 coplanar overlapping face (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "heapstead_trim": {
+   "tris": 862,
+   "parts": 13,
+   "errors": [
+    "headframe_lattice <-> heapstead_trim: 1 coplanar overlapping face (z-fighting)",
+    "heapstead_trim, between its own parts: 54 coplanar overlapping faces (z-fighting)",
+    "heapstead_trim <-> heapstead_walls: 1 coplanar overlapping face (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "engine_house_walls": {
+   "tris": 462,
+   "parts": 2,
+   "errors": [
+    "engine_house_trim <-> engine_house_walls: 215 coplanar overlapping faces (z-fighting)",
+    "engine_house_walls <-> ground: 1 coplanar overlapping face (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "engine_house_trim": {
+   "tris": 11714,
+   "parts": 265,
+   "errors": [
+    "engine_house_trim: 2 closed parts with normals pointing inward",
+    "engine_house_glass <-> engine_house_trim: 114 coplanar overlapping faces (z-fighting)",
+    "engine_house_trim, between its own parts: 34 coplanar overlapping faces (z-fighting)",
+    "engine_house_trim <-> engine_house_walls: 215 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "engine_house_glass": {
+   "tris": 84,
+   "parts": 6,
+   "errors": [
+    "engine_house_glass <-> engine_house_trim: 114 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "second_winding_house_walls": {
+   "tris": 52,
+   "parts": 2,
+   "errors": [
+    "second_winding_house_trim <-> second_winding_house_walls: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "second_winding_house_trim": {
+   "tris": 858,
+   "parts": 19,
+   "errors": [
+    "second_winding_house_trim, between its own parts: 8 coplanar overlapping faces (z-fighting)",
+    "second_winding_house_trim <-> second_winding_house_walls: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "second_winding_house_glass": {
+   "tris": 4,
+   "parts": 2,
+   "errors": [],
+   "warnings": []
+  },
+  "colliery_chimney": {
+   "tris": 2582,
+   "parts": 11,
+   "errors": [
+    "colliery_chimney, between its own parts: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "spoil_heap_main": {
+   "tris": 3520,
+   "parts": 1,
+   "errors": [
+    "spoil_heap_main <-> spoil_heap_old: 524 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  },
+  "spoil_heap_old": {
+   "tris": 3520,
+   "parts": 1,
+   "errors": [
+    "spoil_heap_main <-> spoil_heap_old: 524 coplanar overlapping faces (z-fighting)"
+   ],
+   "warnings": []
+  }
+ },
+ "skipped": [],
+ "seconds": 9.9,
+ "objects_checked": 370,
+ "excluded_prefixes": [
+  "sky_dome",
+  "moorland_hills"
+ ]
+}

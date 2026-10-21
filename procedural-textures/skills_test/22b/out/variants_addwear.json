@@ -1,0 +1,43 @@
+{
+ "variant": "addwear",
+ "audit_before": [
+  [
+   "warn",
+   "image node 'grey_plaster_02_colour.jpg' has no explicit UV Map/vector input (uses the active render UV; Kaspar: set it)"
+  ],
+  [
+   "warn",
+   "image node 'grey_plaster_02_normal.jpg' has no explicit UV Map/vector input (uses the active render UV; Kaspar: set it)"
+  ],
+  [
+   "info",
+   "constant Roughness 0.45: roughness variation is what sells a surface"
+  ]
+ ],
+ "audit_after": [
+  [
+   "warn",
+   "image node 'grey_plaster_02_colour.jpg' has no explicit UV Map/vector input (uses the active render UV; Kaspar: set it)"
+  ],
+  [
+   "warn",
+   "image node 'grey_plaster_02_normal.jpg' has no explicit UV Map/vector input (uses the active render UV; Kaspar: set it)"
+  ]
+ ],
+ "nodes_added": [
+  "ShaderNodeBsdfPrincipled",
+  "ShaderNodeGroup/BX Edge Wear",
+  "ShaderNodeGroup/BX Grunge",
+  "ShaderNodeHueSaturation",
+  "ShaderNodeMapRange",
+  "ShaderNodeMath",
+  "ShaderNodeMix",
+  "ShaderNodeNormalMap",
+  "ShaderNodeOutputMaterial",
+  "ShaderNodeTexCoord",
+  "ShaderNodeTexImage",
+  "ShaderNodeValue"
+ ],
+ "node_count_before": 6,
+ "node_count_after": 19
+}
