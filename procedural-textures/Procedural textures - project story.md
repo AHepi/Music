@@ -7,6 +7,10 @@ procedural tools (nodes, geometry nodes, curves, modifiers, physics), research h
 settings change the picture. In your words: "textures that can be scaled to larger sets with lessons that are transferable to other types of surfaces. Pixel accuracy isn't the
 end goal, but it is required for this first step." Then: keep colour and fading, damage and moss on separate layers inside the recipe, with your picture used only as a guide.
 
+**Later goal (21 October), in your words:** "I want to use the full set when we get around to it. Because I want to now do something more immersive with the camera moving through the street. The lighting reacting to characters moving around on set will add more detail and narrative context for some sequences." The textures, wetness, joints, rubbish and the weathering kit are all on the full 3D street, so they carry into that.
+
+**Renderer rule (21 October), in your words:** "Cycles looks absolutely incredible. But it could be expensive. You know what? I think it's worth it. But only for scenes where the lights are on. When they're off, eeve is fine." So: Cycles for plates and frames where lamps, windows or fires are lit; EEVEE when they are off.
+
 ## Where things stand
 
 - **Done:** research (five tested guides), a check of the three extra tools you found, and all six surfaces rebuilt from Blender recipes, each scored dot for dot against your
@@ -47,8 +51,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   along gutters, wall feet, doorsteps and round the props, never on the middle of the road. A fresh checker: joints "yes", rubbish "nearly".
 - **Wet street painting round 2 done (log 24):** usable as the lockout picture by the checker's verdict: reads wet, joints and rubbish survive the painter,
   dark plain sky, no dry patches when the camera moves (new wet behind painting), and the stage no longer crushes the wet road dark (fix found and made in a
-  copy of the stage; not yet in the real film). Open question for you: it looks more like a detailed 3D picture with a paint finish than the flat, outlined
-  look of the earlier dry painting.
+  copy of the stage; not yet in the real film). It looks more like a detailed 3D picture with a paint finish than the flat, outlined look of the earlier
+  dry painting; your decision: "No keep it. The reference doesn't have to be followed exactly. This already looks incredible."
 - **Running now:** a reusable weathering kit (log 25: grime, cracks, stains, weeds and moss, tuned on the street and proven on the Japanese courtyard with only
   a settings file), and EEVEE and Cycles side by side (log 26).
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
@@ -322,8 +326,35 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     project, so it waits for your go); only stills, not the whole clip. **RunPod:** the machine has served this and three other jobs since 05:39 (about
     US$2.65 so far). Pictures: `24 Wet street painting round 2 - pictures/`; work: `street_wet/painter_round_2/`.
 
+26. **EEVEE and Cycles side by side.** You saw the Cycles door and said the bricks "look incredible", then "Yeah do it!" to drawing the whole wet street both
+    ways. Same file, camera, lights, wetness, joints and rubbish; only the renderer differs; drawn on the rented RTX 4090. **Answer (fresh checker):** the
+    whole street does NOT get the door's jump. The bricks and stone are the same photo scans in both, and walls look about the same (the drawer's claim that
+    walls gain relief did not hold: 0.86 to 1.22 times). **Where Cycles clearly wins:** wet ground: lamps, lamp posts and house fronts mirrored in puddles and
+    gutters, warm light reaching the road (road brightness 0.336 against 0.183), clean gutter water where EEVEE shows sandy grain; and the door's panels.
+    **Where EEVEE holds its own:** joints read a little crisper; shadows keep some detail (Cycles leaves shade truly dark: 6-7 % crushed black against about
+    1.5 %). **Biggest surprise:** the colour: EEVEE streets are cold blue, Cycles warm gold, and the painter would follow that mood. **Why:** mostly one EEVEE
+    setting (its light cut-off stops lamp light reaching the road); lowering it brings EEVEE close but makes it as slow as Cycles. **Time per picture:** main
+    street wet 3.7 s against 14.1 s; lockout plate 2.8 s against 25.3 s; close cottage view 1.6 s against 15.4 s. **Unexplained:** the fire drum lit orange
+    in Cycles only; a bright speck at one roof corner in wet Cycles only; the sky dome and some glowing meshes darkening Cycles. **Not tested:** moving
+    pictures (the clean-up step could flicker frame to frame), whether the painter paints better from Cycles pictures. **Why it matters for your later
+    immersive plan:** with characters walking through the street, Cycles gives them real shadows and real reflections in the wet road for free.
+    Pictures: `26 EEVEE and Cycles side by side - pictures/`; work: `street_wet/eevee_vs_cycles/`.
+
+27. **The wet street in the real film.** You said: "Oh yes please." The lockout shot in the austerity explainer now uses the round 2 wet front and behind
+    paintings; the old dry ones are kept beside them (lockout-painted-dry.jpg, lockout-behind-dry.jpg), so going back is four renames and one look line.
+    The stage's darkening fix went in too: a new "toe" switch, off for every other scene, and the lockout's dark frame edge eased from 0.30 to 0.25. The
+    12-second clip was filmed the kit's own way (56 minutes on this computer; the dry clip filmed the same way came out byte for byte the kit's earlier
+    one). **Checked:** all 360 frames on contact sheets, the first seconds of the camera move frame by frame, the ground the props uncover: no dry patches,
+    no seams between the front and behind paintings, no leftover painted shadows, no jumps except the planned cut at 7.3 s; the road arrives at 0.93 of
+    its painted brightness (0.75 in the first wet test); eight pictures of other scenes come out dot for dot the same with the old and new stage. Two
+    fresh checkers: "ready to show". **Failures on the way:** a record file's prices were damaged when written through the shell (the "$0" in "US$0.048"
+    was read as a command name; fixed); the first fix round blamed a faint speckle in a ninth scene on the exact text of the stage code, and the second
+    checker showed that scene comes out two ways from run to run even with the old stage (notes corrected, film project log 39). **Not tested:** the clip
+    at full speed on a phone; it is silent (the kit's lockout example has no sound). The film project's own notes follow its house rules: decisions 43
+    and 44 (your renderer rule), Status, Lessons 140-142, Workflows, its story logs 37-39. Pictures: `27 Wet lockout shot in the film - pictures/`.
+
 ## Next step
 
-Your call on the painting's look: keep round 2's detailed look, or one paid repaint of both paintings asking for flatter colour and thicker dark outlines
-(about US$0.40-0.55, some joints and rubbish may be lost). Then, with your go, put the two paintings and the stage fix into the real film and film the clip.
-The weathering kit and the EEVEE-and-Cycles comparison are still running.
+Running now: the wet street is going into the real film's lockout shot (the old dry paintings kept as alternates), then the clip is filmed and checked
+frame by frame (log 27). Also still running: the weathering kit (log 25) and EEVEE and Cycles side by side (log 26). Later: the immersive camera through the
+full set, with lighting that reacts to characters.

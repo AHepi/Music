@@ -66,6 +66,9 @@ things to `kit.scene` and returns `{ pose(t), draw2D(ctx, t), join? }`:
 - `look` fields (all optional): `exposure` (0.9–1.0), `aperture` (focus blur strength, 7–9 good,
   0 = all sharp), `maxBlur`, `glowThreshold` (0.9–0.95), `glowStrength` (0.55–0.75), `contrast`,
   `saturation`, `vignette`, `tintAmount`, `fade` (0 = normal, 1 = black; use for a dip to black).
+  `toe` (0 = the filmic curve as it always was; 1 = the curve may still brighten a value but never darkens one, so
+  dark painted values arrive as painted; for a dark painted street such as the wet lockout, with `vignette` 0.25;
+  added in log 37, off unless a scene asks for it).
 
 ## 3. How to test (do this often)
 

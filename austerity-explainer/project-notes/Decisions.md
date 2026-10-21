@@ -633,6 +633,44 @@ overturn any of them in one line. Changes to the project must follow this file.
 42. **Wrap up for now** (your words, 16 October): "It might be time to wrap up. Can you show me everything so far. I'm
     just running out of usage unfortunately." Round 6 and the plugin's last checks were stopped; everything is saved.
 
+43. **The wet street goes into the film's lockout shot; the full set, an immersive camera and reacting light come later**
+    (your words, in the wet street test that ran beside the film, 21 October 2026). About the look of the wet painting: "No keep it. The
+    reference doesn't have to be followed exactly. This already looks incredible." Asked whether the lockout shot in the actual film
+    should become the wet street: "Oh yes please. But I want to use the full set when we get around to it. Because I want to now do
+    something more immersive with the camera moving through the street. The lighting reacting to characters moving around on set will add
+    more detail and narrative context for some sequences."
+
+### Claude's calls for item 43
+
+- "The lockout shot in the actual film" is the 12-second clip `film-kit/paper-film/scenes/lockout-test.js` (log 29). Its two paintings
+  are now the wet ones from the wet street test, round 2; the dry ones stay beside them as `lockout-painted-dry.jpg` and
+  `lockout-behind-dry.jpg`, so the dry look is a swap of the wet pair of paintings for the dry pair (four renames) and one look line away (see `Workflows.md`). Overturn in one line.
+- The brightness fix that was tested beside it goes in with it: the stage's new look value `toe` (off unless a scene asks for it) and, in
+  the lockout's look only, the dark frame edge eased from 0.30 to 0.25 with `toe: 1`. No other scene's look changes: eight stills are dot for dot the
+  same, and a ninth (house sample, 20 s) differed in a checker's redraw only by a faint speckle (7.7 percent of dots, at most 7 of 255, no lighter or
+  darker lean); that picture comes out two slightly different ways from run to run even with the old, unchanged stage, so the speckle
+  is not caused by the change (logs 37 to 39, lesson 141).
+- "The full set ... more immersive ... lighting reacting to characters" is recorded as a later plan, not started (`Status.md`, "Later").
+  I read "the full set" as the whole pit village street (`street.glb`, 28 cottages, the colliery) rather than the one lockout view the
+  painting covers. Overturn in one line.
+- The new clip is filmed silent: the kit's lockout example has no sound (log 29's clip had your soundtrack laid under it, and the
+  soundtrack is not kept in the repository).
+- This job spent nothing. The two wet paintings were paid for in the wet street test (about US$0.20 to US$0.28 each; that project's ledger).
+- After a checker's report (log 38) I corrected the notes only and filmed nothing again: the faint contour steps in the dark sky cannot be seen at normal
+  contrast, and filming the clip again takes over an hour on this machine. I also corrected log 37's "Other scenes" line in place instead of leaving it and
+  adding a note, because log 37 had not been committed yet. Overturn either in one line.
+
+44. **Which renderer for the 3D street: Cycles when the lights are on** (your words, in the wet street test, 21 October 2026, after seeing the same
+    wet street drawn with EEVEE and with Cycles side by side): "Cycles looks absolutely incredible. But it could be expensive. You know what? I think it's
+    worth it. But only for scenes where the lights are on. When they're off, eeve is fine."
+
+### Claude's calls for item 44
+
+- "Lights on" means a plate or frame where lamps, lit windows or a fire light the scene (dusk and night street shots, the lockout's brazier);
+  "off" means daylight or unlit shots. Cycles pictures are drawn on the rented graphics machine (seconds each: the wet main street 14 s, the lockout
+  plate 25 s, against 4 s and 3 s with EEVEE). Not yet tested: Cycles in moving pictures (its noise clean-up could flicker frame to frame), and
+  whether the painter paints better from Cycles pictures. The current wet lockout painting was made from an EEVEE plate and stays as it is.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

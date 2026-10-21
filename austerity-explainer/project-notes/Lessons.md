@@ -518,6 +518,28 @@ Only failures in doing the work belong here. Newest at the bottom.
     written and 4.8 a day later, so each painting costs about twice the planned amount. Check the price with
     fal's estimate before each paid batch (log 34, people test).
 
+## 2026-10-21 (the wet lockout shot in the film, logs 37 and 38)
+
+140. **A planning test that needs free disk fails on a nearly full machine, for the wrong reason.** Two of the plugin's 730 checks
+    (the preflight's "filming is ready" cases) failed on 21 October: the filming plan keeps a reserve of 4 GB of free disk, and this
+    machine had about 1.3 GB. Nothing in the film, the stage or the paintings was wrong: on a scratch copy of the plugin in which the free-disk
+    reading was set to 50 GB (the plugin itself untouched), all 66 checks of that test file passed (log 38).
+    Before reading a failed planning check as a fault in a change, look at the free disk first (log 37).
+
+141. **"Dot for dot" proved less than the notes said: one scene comes out two slightly different ways from run to run.** Eight
+    comparison pictures drawn with the old and the new stage came out dot for dot the same, and the notes said no other scene changes, proved. A
+    checker redrew a ninth (the house sample at 20 s) and found 160,257 of 2,073,600 dots (7.7 percent) different, by at most 7 of 255 (average
+    0.07), only in rows 1007 to 1648, with no lighter or darker lean, and named the film grain. Drawn again (log 38): old against new came out
+    identical in my drawing, but the old stage with one space added in the finishing code gave exactly those 160,257 dots, while two spaces, or a
+    changed comment elsewhere in the file, gave none; and with the grain set to 0 the one-space edit still changed 5.9 percent of dots by at most
+    6, so the grain is not shown to be the cause. A re-check then drew the picture ten times (log 39): the unchanged old stage alone gave both
+    versions (3 and 2 of five draws), the new stage too (3 and 1 of four). So the speckle is ordinary run-to-run variation in that scene, and the
+    "one space" result was the same chance, not a rule about the code's text. Fix: the notes now say this. Next time draw each comparison picture
+    several times (at least three) with each stage before calling a difference real, and say how many pictures and draws were compared.
+142. **Dollar signs were eaten when a record file was written through the shell.** `lockout-paintings.json` came out with `US/bin/bash.048` where
+    `US$0.048` was meant (the shell read `$0` as its own name); a checker found it. Fix: `US$0.` put back and the file loaded again to check it is
+    still valid. Write any text with prices through the file-writing tool or a quoted here-document, then search the file for `bin/bash` (log 38).
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -547,3 +569,6 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Measure the model before using a size a helper worked out from a picture (lesson 116).
 - Line every painting up with its plate, and keep the painted shadows in the props-removed copy (lessons 122, 123).
 - Plan a script at the narrator's measured speed, and test it on someone who sees only what a viewer sees (lessons 126, 130).
+- Before blaming a change for a failed planning check (the preflight's "filming" cases), check the free disk (lesson 140).
+- A "dot for dot" proof needs several draws of each picture with each stage and a count of the pictures compared: some scenes (the house
+  sample at 20 s) come out two slightly different ways from run to run with no change at all (lesson 141). After writing text with prices through the shell, search it for `bin/bash` (lesson 142).

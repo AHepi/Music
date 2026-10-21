@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-15, afternoon.**
+**As of 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -199,6 +199,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   FROM 1 MAY 1926. Two rounds of three independent critics (looks, history, faults) and a motion check
   of the filmed clip; filmed, scanned frame by frame and sent as "29 Test - pit village lockout" (not in
   the repository: video). Frame sheet: `experiments/29 Test - pit village lockout - two frames a second.jpg`.
+  Since log 37 this shot shows the wet street (section below); the dry paintings are kept as `-dry` files.
 
 ## Composition test and why it works (log 30, 2026-10-14)
 
@@ -283,8 +284,60 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   doubled to 4.8 US cents a megapixel). Painted men work, dark figures don't; lessons 135 to 139. The other paintings and
   the recording wait for your yes.
 
+## The wet lockout shot, in the film (log 37, 2026-10-21)
+
+- Your words (decision 43): "No keep it. The reference doesn't have to be followed exactly. This already looks incredible." and, asked
+  whether the lockout shot in the actual film should become the wet street: "Oh yes please. But I want to use the full set when we get
+  around to it. ..." The shot is now the wet street; the full set is a later plan (below).
+- **What changed in the film** (all in `film-kit/`): `assets/models/pit-village/lockout-painted.jpg` and `lockout-behind.jpg` are the wet
+  front and behind paintings (same size 1536 x 2730, JPEG quality 92, byte for byte the files tested in a copy); the dry pair is kept as
+  `lockout-painted-dry.jpg` and `lockout-behind-dry.jpg`; `lockout-paintings.json` records how both wet ones were made and how to go back to
+  dry; `paper-film/stage/cinema-stage.js` has one new finishing value, `toe` (0 = as before); `paper-film/scenes/lockout-test.js` sets
+  `toe: 1` and a dark frame edge of 0.25 (was 0.30). Both stage files equal the tested copy.
+- **The new clip** (not in the repository: video): `27 Lockout shot - wet street.mp4`, 12 seconds, 1080 x 1920, 30 a second, 360 frames, 48 MB,
+  silent, with the kit's live fire, flames, sparks and smoke; the dry clip was filmed first the same way for comparison (42.7 MB, and it came out
+  byte for byte the same as the dry clip the kit had made in log 29). Pictures: `27 Wet lockout shot in the film - pictures/` (wet street test's
+  working folder).
+- **Checked:** no other scene's look changes (eight pictures drawn with the old and the new stage file are dot for dot the same; a ninth, the house
+  sample at 20 s, differed in a checker's redraw only by a faint speckle, 7.7 percent of dots by at most 7 of 255 with no lighter or darker lean; that
+  picture comes out two ways from run to run even with the old stage alone, so it says nothing about the change: log 39, lesson 141; the kit's two
+  smoke-test pictures match its example stills); the wet stills drawn from the film's real files match the tested copy dot for dot (five views);
+  the road arrives at 0.93 of its painted brightness in the film (0.75 in the first wet test, 0.92 for the old dry film); every frame looked at
+  (360, on six contact sheets), 25 full-size frames, the first 1.5 seconds of the move frame by frame; no dry patches (against a reference the
+  difference is about zero, 5 to 8 percent of ground dots a little lighter and 3 to 6 percent a little darker), no painted prop shadows left behind, no
+  jumps except the planned cut at 7.3 s (the kit's jump finder), no flicker beyond the dry clip's; roof line: about 1 dot from the painting's own edge, no halo.
+- **Not checked:** watching at full speed, and playing on a phone (the file is in the usual phone format, H.264, 1080 x 1920, 30 a second, with its index
+  at the front, checked with the file inspector in log 38, but it was not played on one; in the plain dark sky I saw no contour steps at normal contrast, one faint
+  horizontal line in one frame at 3 times contrast, and faint steps at 10 times, as in any 8-bit video; not fixed, because it cannot be seen and fixing it means filming again); sound (the kit's lockout example has none, so the clip is silent); the kit's Blender-based
+  checks (Blender is not on this machine); the plugin's preflight stages for a film (this shot has no plan file); a copy of the stage in the plugin
+  and in `chapter-2-inflation/film-code/` (they still have the old stage file).
+- **Unsure:** the wet street reads as a detailed picture with a paint finish, not as flat colour with thick dark outlines like the dry one, and has a plain
+  dark sky (no clouds and no painted chimney smoke); next to the notice corner it is a different look (you kept it knowing this). The warm glare round the
+  barrel is a flat pale patch at close range (it is in the painting). The camera audit still lists one problem it listed before (the notice's slow push-in
+  is almost never still).
+- **Fix round after a check (log 38):** notes only, nothing in the film changed and nothing was filmed again. The statements that said no other scene
+  changes "dot for dot" now say what was measured (a faint speckle in a ninth picture; lesson 141); the prices in `lockout-paintings.json` got their dollar
+  signs back (lesson 142); the filming times agree; the way back to dry is described as four renames and one look line; lesson 140 now says what was tried.
+- **Correction after a re-check (log 39):** log 38 had blamed that faint speckle on the exact text of the stage's finishing code ("one added space").
+  A re-check drew the picture ten times: the unchanged old stage alone gives both versions, so it is ordinary run-to-run variation in that one scene.
+  Lesson 141, Workflows step 8 and its trap, the kit's traps document and decision 43 now say so. Notes only; the film is unchanged.
+- **Renderer rule (decision 44):** Cycles for plates and frames where the lights are on; EEVEE when they are off.
+  Not fixed: the faint contour steps in the dark sky (invisible at normal contrast; filming again takes over an hour for nothing a viewer sees) and
+  the plugin's and chapter 2's copies of the stage (outside this job).
+
+## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
+
+- Your words: "I want to use the full set when we get around to it. Because I want to now do something more immersive with the camera moving through
+  the street. The lighting reacting to characters moving around on set will add more detail and narrative context for some sequences."
+- Recorded only. Nothing is started. Not tried yet, and what it will have to settle: a painted plate covers one view, so a camera that moves through
+  the street needs the whole street set (`street.glb`, not the lockout slice) painted or lit so it holds from many views; light that reacts to people
+  needs the set itself to carry the light (the painting carries it today); the people test (log 34) found painted men work and dark figures laid over a
+  painting don't. Start by asking you which sequence comes first.
+
 ## Waiting on you
 
+- The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
+  (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),
   then whether to record it (about 6,300 ElevenLabs credits, about US$1.10).
 - Whether to correct pages 8 and 10 of the recorded chapter 2 (round 20), which say a little more than the
@@ -299,6 +352,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Not started
 
+- The full set, an immersive camera and light that reacts to characters (decision 43; see "Later" above).
 - Chapters 3 onward (where austerity was tested; Thatcher; social spending; New Zealand and
   Australia; what it did to people; bargaining power; why it is oppressive).
 
@@ -330,3 +384,5 @@ bank street, and about 4,300 ElevenLabs credits, about 75 US cents).
 - The video's first frame is page 1's empty parliament; use the cover picture where an app lets you
   choose one.
 - The sent copy is squeezed under 30 MB; the master is the one to upload anywhere that takes large files.
+- The wet lockout paintings and the dry ones go in and out as a pair, with the look line (`toe`, `vignette`); a wet front over the old dry behind
+  painting shows pale dry patches (log 37). The plugin's copy of the stage still lacks `toe`.

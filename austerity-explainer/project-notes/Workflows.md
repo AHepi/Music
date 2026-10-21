@@ -200,6 +200,15 @@ three zip files.
    helpers critique the stills, film with `film-chapter-parallel.sh`, lay music under a clip without
    narration with `paper-film/tools/add_music_bed.sh` (the music never goes into the repository), then
    check the film in motion.
+8. A dark or wet painted place (log 37): the stage's filmic curve darkens dark painted values, so a dark wet road
+   arrived at 0.75 to 0.86 of its painted brightness. Give that page `toe: 1` in its `look` (the curve may brighten
+   a value but never darkens one) and, if the picture is dark, a lighter dark frame edge (`vignette: 0.25`). `toe` is 0
+   by default, so no other scene's look changes (eight stills are dot for dot the same; a ninth, the house sample at 20 s,
+   differs in a checker's redraw only by a faint speckle of at most 7 of 255, and it comes out two ways from run to run even
+   with the old stage alone: lesson 141, log 39). To check other scenes after a stage change, draw each several times (at least
+   three) with the old stage and with the new stage, and call a difference real only if it shows in every draw. Then draw
+   the plate view and measure how bright the road arrives against the painting (the wet lockout: 0.935 of painted). Paint the
+   front and the behind painting as a wet pair; never mix a wet front with a dry behind painting.
 
 Before step 2 (from log 30): compose the shot with `film-kit/07 Composing a shot.md`. Optionally sketch
 the composition first by giving Nano Banana Pro (on fal, 15 US cents) the empty street and the prop
@@ -208,6 +217,29 @@ props, never its lettering. Run `paper-film/tools/measure_composition.py` on a t
 Blender and check the main rule: where the lines meet,
 the brightest parts and the biggest near props all fall on the subject. Move the camera by sliding, never
 turning.
+
+## The lockout shot: wet street or dry street (log 37)
+
+The film's lockout shot (`film-kit/paper-film/scenes/lockout-test.js`, 12 seconds) shows the WET street since log 37.
+It loads two files, `assets/models/pit-village/lockout-painted.jpg` (the front painting) and `lockout-behind.jpg` (the
+painting with the near props painted out), and the wet pair is in those names. The dry pair kept from log 29 is
+`lockout-painted-dry.jpg` and `lockout-behind-dry.jpg`; how both were made is in `lockout-paintings.json` in the same folder.
+
+To go back to the dry street (swap the wet pair of paintings for the dry pair, which is four renames, and change one look line; nothing else):
+1. Rename the pair together: `lockout-painted.jpg` to `lockout-painted-wet.jpg`, then `lockout-painted-dry.jpg` to
+   `lockout-painted.jpg`; the same for `lockout-behind.jpg` and `lockout-behind-dry.jpg`. Never swap only one of the two.
+2. In `lockout-test.js`, in the look line inside `pose()`, put `vignette` back to 0.3 and remove `toe: 1`. (Leaving them
+   in works too, but the dry street then comes out about 4 percent brighter than it was in log 29: the road arrives at
+   0.96 of painted against 0.92.)
+3. Film the lockout again (`bash paper-film/tools/film-chapter-parallel.sh lockout-test 2 240` from inside `film-kit/`; the wet clip took
+   56 minutes in all (its two halves, filmed side by side, took 47 and 56) and the dry clip before it 71 minutes (62 and 71), while other
+   drawing jobs were running on the machine, so plan for an hour or more; the output goes to
+   `paper-film/out/`, which is not kept). No other scene needs filming again, because the stage change leaves their look the same (step 8 above;
+   at most a faint speckle can differ).
+   Filming from a copy of the kit (stage, scenes and tools copied, models linked) gives the same film: the dry clip made that way was
+   byte for byte the dry clip made in log 29.
+To draw a still of one street without renaming anything, make a copy of the scene that reads the file names from the
+address (`?painting=NAME&behind=NAME`); the film's own scene does not.
 
 ## How to edit the documentation
 
@@ -282,3 +314,10 @@ turning.
   once is about 17% faster, and three is not worth it.
 - In a one-page picture, folded props must not push their shadows along the face (Lessons 36), or
   they go dark.
+- The lockout's wet front and behind paintings go in and out as a pair, with the look line (`toe`, `vignette`); a wet
+  front over the old dry behind painting shows pale dry patches where the camera uncovers what the near props hid (log 37).
+- The stage file with `toe` is in the film kit only. The plugin's copy (`plugins/explainer-film/kit/paper-film/stage/`)
+  and `chapter-2-inflation/film-code/stage/` still have the old file: copy `cinema-stage.js` there when they are next brought
+  up to date (not done in log 37, which touched only the film project).
+- A "no other scene changes" check after a stage change needs several draws of each picture with each stage and a count of the pictures
+  compared: some scenes come out two slightly different ways from run to run with no change at all (lesson 141, log 39).

@@ -14,6 +14,11 @@ about 3 and a half minutes on where austerity came from and why it was put in pl
 
 ## Where things stand
 
+- **The lockout shot is now the wet street** (log 37): you said "Oh yes please" to putting the wet street into the film's lockout shot, and
+  to using "the full set" later for a more immersive camera and light that reacts to characters (that is recorded, not started). The two wet
+  paintings and the stage's brightness fix are in the film; the dry paintings are kept beside them. New 12-second clip and pictures: "27 Lockout shot -
+  wet street" and "27 Wet lockout shot in the film - pictures". No other scene's look changes (eight comparison pictures are dot for dot the same; a ninth
+  comes out two slightly different ways from run to run even with the old stage: logs 37 to 39).
 - **The plugin can now work out the settings we used to search for by hand** (log 35): calculators, one
   command per stage, 344 house numbers and 163 tips for AIs, version 1.3.0, about 780 checks passing.
 - **Chapter 2's full redesign is being built** (log 34; rounds 5 and 6 below it): the Works (pages 3 to 5) built in 3D over four
@@ -232,6 +237,8 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
       surface, the props-removed painting where a near prop hid it, the painted sky alone on a far
       card, and the sign's own surfaces. Hands a moving, painted street to the cinema stage, which
       films it like the other pages.
+    - Since log 37 the two paintings are the wet street's (the dry pair is kept as `-dry` files), and the stage's
+      finishing step has one new setting, `toe`, which the lockout shot switches on so its dark road arrives as painted.
 
 28. **The shot checker** (`film-kit/paper-film/tools/check-shot.sh`; explained in "07 Composing a shot").
     A concrete example: given our first camera for the notice corner, its report's first fix was "Lower the
@@ -349,6 +356,9 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
 | Listener questions | A few questions to ask a real newcomer after they hear the script, to see if the idea landed; in the script file under "Before recording". |
 | Workflow | A set of helpers that run in a fixed order, each doing one job (for example four testers, then a fixer, then a re-checker). |
 | Words a minute | How fast Malina reads. Measured on chapter 2: 164 (planned: 140). |
+| Toe | One finishing setting of the film's stage: with 1, the film-style brightness curve may still brighten a value but never makes a dark painted value darker; 0 (the default) is the curve as it always was. |
+| Wet street | The lockout shot's street as painted after rain (wet setts, puddles, small rubbish), in the film since log 37; the dry street is kept as `-dry` painting files. |
+| Dry patch | A pale, dry-looking patch of road that shows where the camera uncovers what a near prop hid, when the behind painting does not match the front painting. |
 
 ## Log (added to, never rewritten)
 
@@ -1472,9 +1482,93 @@ factory behind it softly out of focus. Every moving thing in the film is timed l
     (nothing filmed) and the older finished chapter 2 film (round 20), which is a different version. Checked by
     looking at seven frames across the join. Like every film, it stays out of the repository. Cost: nothing.
 
+37. **The wet street goes into the film's lockout shot** (decision 43; 21 October 2026). A helper had painted a wet version of the lockout shot's
+    street beside the film (the "wet street test", its own project folder), with a fix for the film's stage. About the look you said "No keep
+    it. The reference doesn't have to be followed exactly. This already looks incredible." Asked whether the lockout shot in the actual film should
+    become the wet street, you said "Oh yes please. But I want to use the full set when we get around to it. Because I want to now do something more
+    immersive with the camera moving through the street. The lighting reacting to characters moving around on set will add more detail and narrative
+    context for some sequences." (The pictures for this job are named "27 ..." after the wet street project's own log; this is the film's log 37.)
+    - **What was done:** the clip was filmed first as it was (dry) for comparison, the way the kit films it; then the dry paintings were renamed
+      `lockout-painted-dry.jpg` and `lockout-behind-dry.jpg`, the wet front and behind paintings went in under the names the scene loads (same size, same
+      JPEG quality as before, byte for byte the files that were tested), the two stage changes were applied from the helper's patch files and found
+      identical to the tested copy, and the wet clip was filmed the same way (same length, size and frame rate, with the kit's own fire, flames, sparks
+      and smoke; silent, because the kit's lockout example has no sound). A small record, `lockout-paintings.json`, says how both pairs were made and
+      how to go back to dry.
+    - **The stage change in plain words:** the film's stage runs every picture through a film-style brightness curve that makes dark values darker, so
+      the dark wet road arrived at about three quarters of its painted brightness. A new setting, `toe`, tells the curve never to darken; the lockout
+      scene turns it on (and eases its dark frame edge from 0.30 to 0.25). Every other scene leaves it off.
+    - **What was checked and found:**
+      - Other scenes: nine pictures drawn with the old and the new stage. In the first eight (the dry lockout drawn with the dry painting files, the
+        notice corner twice, chapter 2 twice, chapter 1) 0 dots differ. A fresh checker redrew a ninth, the house sample at 20 s, and found 160,257 of
+        2,073,600 dots (7.7 percent) different, by at most 7 of 255 (average 0.07), only in rows 1007 to 1648, with no lighter or darker lean: a faint
+        speckle no viewer could see. (This entry first said "no other scene changes" for the other scenes; that was too strong, and log 38 says what was
+        found.) I drew that picture again: old against new came out dot for dot the same in my drawing, but adding one space to the old stage's finishing
+        code (which changes nothing in the maths) gave exactly the checker's 160,257 dots in the same rows, while two spaces, or a change to a comment
+        elsewhere in the file, gave none. So the speckle comes from this machine's software drawing and depends on the exact text of the finishing code,
+        not from `toe` (which is 0 there and does nothing); I could not show that it is the film grain (with the grain set to 0 the one-space edit still
+        changed 5.9 percent of dots by at most 6). The kit's own smoke test (two chapter 1 pictures) still matches its example pictures.
+      - The wet pictures drawn from the film's real files equal the tested copy's, dot for dot (five views).
+      - The road arrives at 0.93 of its painted brightness in the film (the first wet test 0.75; the old dry film 0.92); the share of road dots crushed to
+        black fell from 4 percent to 0.1 percent.
+      - Every one of the 360 frames looked at on six contact sheets; 25 full-size frames (every half second); the first 1.5 seconds of the move frame by
+        frame; close-ups at 300 percent. Looked for and not found: dry patches where the camera uncovers the ground behind the sacks, the cart and the barrel (against a
+        reference where nothing can differ, the ground is on average within 0.01 in brightness, a few percent of dots a little lighter and a few a little
+        darker); painted shadows or outlines of props left on the road; a seam where front and behind paintings meet; a halo at the roof line (which sits about
+        1 dot of 1,080 from the painting's own edge; the earlier checker's "possible 2 dots"); jumps other than the planned cut at 7.3 s; more flicker than the
+        dry clip has. This was done by looking and measuring, not by a fresh independent helper.
+      - The kit's other checks: the plugin's tests (728 of 730 pass; the two that fail are the preflight's "filming is ready" cases, which need 4 GB of free
+        disk while this machine had 1.3: lesson 140; in log 38 they passed on a scratch copy told there was room), the style check on both paintings (no failures; the same kind of warnings for wet and dry), the
+        camera audit (one problem, the same as before, the notice's slow push-in).
+    - **What went wrong:** nothing in the film. The only failures were those two disk-space test cases (and, found later by a checker, notes that said
+      more than was tested: log 38). (Filming took 62 and 71 minutes for the two halves of the dry clip and 47 and 56 for the wet; the halves ran side by
+      side, so the whole clips took 71 and 56 minutes. Other drawing jobs were running on the machine at the time, so these are not the fastest times; the dry
+      clip, filmed first, took longer than the wet one for the same work.)
+    - **Not checked, or unsure:** how it plays at full speed or on a phone (log 38 checked the file's format and the dark sky for contour steps, not a phone); sound; the kit's Blender-based checks (no Blender on this machine). The wet street
+      reads as a detailed picture with a paint finish, not flat colour with thick dark outlines, and has a plain dark sky with no clouds and no painted
+      chimney smoke, so beside the notice corner it is a different look. The warm glare round the barrel is a flat pale patch close up. The plugin's copy of the
+      stage and `chapter-2-inflation/film-code/stage/` still have the old stage file.
+    - **The later plan (recorded, not started):** the full street set, a camera that moves through the street, and light that reacts to characters moving on
+      set (see `Status.md`, "Later").
+    - **Cost:** nothing (the two wet paintings were paid for in the wet street test: about US$0.20 to US$0.28 each).
+
+38. **The wet lockout notes corrected after a check** (21 October 2026, the same day as log 37; decision 43 unchanged). A fresh checker went over log 37's
+    work and found notes that said more than was tested, a record file with damaged prices, and two sentences that disagreed. Nothing in the film
+    changed and nothing was filmed again; the clip and the pictures sent with log 37 stand.
+    - **Changed in the notes:** "no other scene changes / proved dot for dot" now says what was measured (decision 43, Status, Workflows step 8, the kit's
+      traps, and the "Other scenes" line of log 37, in place, because log 37 had not been committed yet); the filming time in Workflows now agrees with
+      log 37 (56 minutes for the wet clip and 71 for the dry, both while other drawing jobs shared the machine); the way back to dry is now said as "swap
+      the wet pair of paintings for the dry pair (four renames) and change one look line", where Status, the next step and decision 43 had said "one rename";
+      lesson 140 now says what was tried.
+    - **Changed in a file:** the two price lines of `film-kit/assets/models/pit-village/lockout-paintings.json` had lost their dollar signs
+      (`US/bin/bash.048`); they read `US$0.048` and so on again, and the file still loads.
+    - **What was tried and found:** (1) I drew the house sample at 20 s again with the old stage, the new stage and variants of the old one. Old against
+      new: identical in my drawing. Old plus one space in the finishing code against old: 160,257 dots (7.7 percent) different, at most 7 of 255, rows
+      1007 to 1648, exactly the checker's numbers. Old plus two spaces, or a changed comment elsewhere in the file: identical to old. With the grain set to 0
+      the one-space edit still changed 5.9 percent of dots by at most 6, so I could not confirm the checker's "it is the grain"; the speckle belongs to
+      this machine's software drawing and its response to the text of the finishing code (lesson 141). (2) The two disk-space test cases: on a scratch copy
+      of the plugin with the free-disk reading set to 50 GB, all 66 checks of that file passed; the plugin itself was not touched (lesson 140). (3) The
+      clip's file: H.264 High, 1080 x 1920, 30 a second, 360 frames, 48 MB (32 megabits a second), index at the front, standard 4:2:0 colour, colour matrix
+      tagged; at normal contrast the dark plain sky shows no contour steps in the three frames I looked at (1.5, 7.0 and 11.5 s); at 3 times contrast there is one
+      faint horizontal line in the first; at 10 times faint steps (as in any 8-bit video).
+    - **Not fixed, and why:** the faint contour steps (invisible at normal contrast, and a fix means filming for over an hour again); a phone was not
+      used to play the clip; the plugin's and chapter 2's copies of the stage still lack `toe` (outside this job).
+    - **What went wrong:** lessons 141 (a "dot for dot" proof with no control) and 142 (dollar signs eaten by the shell).
+    - **Pictures:** in "27 Wet lockout shot in the film - pictures" (the wet street test's working folder) one new picture, "27 The ninth picture - the
+      house sample, a faint speckle from one added space" (old stage, new stage, old stage plus one space, and the difference made 36 times stronger), and the
+      picture of the eight other scenes was renamed "27 Other scenes - eight pictures, old stage and new stage, no dots differ" (it had been called "unchanged").
+    - **Cost:** nothing.
+
+39. **A wrong cause corrected, and a renderer rule** (21 October 2026, after log 38; decisions 43 and 44). A second fresh checker found that log 38 had
+    blamed the house sample's faint speckle on the exact text of the stage's finishing code ("one added space"). It drew that picture ten times: the
+    unchanged old stage alone gave both versions (3 and 2 of five draws), and the new stage too (3 and 1 of four). So it is ordinary run-to-run
+    variation in that one scene and has nothing to do with the stage change, which makes the "no other scene's look changes" statement stronger.
+    Corrected in decision 43, Status, Workflows step 8 and its trap, the kit's traps document, lesson 141 and this story's trap line; log 38 is left as
+    written. Notes only; nothing in the film changed. Also recorded: decision 44, your renderer rule after seeing EEVEE and Cycles side by side
+    ("Cycles ... only for scenes where the lights are on. When they're off, eeve is fine.").
+
 ## Next step
 
-When you have usage again, say "carry on from the project story". The first job is to finish round 6:
+Watch the wet lockout clip (log 37) and tell me if you want the dry street back (swap the wet pair of paintings for the dry pair and change one look line; `Workflows.md`). Otherwise: when you have usage again, say "carry on from the project story". The first job is to finish round 6:
 redraw the Works plates, film pages 3 to 5 and have fresh critics check them. Then I'll ask your yes for the
 Works' first three paintings (about US$1.30).
 
@@ -1506,3 +1600,6 @@ Works' first three paintings (about US$1.30).
   with a password or key in it.
 - A cloud machine can restart and silently end long jobs: watch for a job stopping, not only for it
   finishing (lesson 56).
+- The lockout shot is the wet street since log 37. Its wet and dry paintings swap as a pair, with the look line (`toe`, `vignette`); see `Workflows.md`.
+- Do not write "dot for dot" for a stage change without drawing each picture several times with each stage and counting the pictures compared
+  (logs 38 and 39, lesson 141).

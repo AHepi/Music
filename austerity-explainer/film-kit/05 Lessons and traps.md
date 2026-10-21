@@ -112,3 +112,18 @@ new series doesn't walk into the same holes.
     the bottom left, where the eye enters.
   - In one run, Nano Banana Pro made a good sketch of the composition when free to choose the camera;
     never use a program's lettering: the notices came back garbled.
+
+- A dark painted street (the wet lockout, log 37; `paper-film/scenes/lockout-test.js`):
+  - The stage's filmic curve darkens dark values, so a dark wet road arrived at 0.75 to 0.86 of its painted
+    brightness and some of it crushed to black. Give that scene `toe: 1` in its look (the curve may brighten
+    but never darkens a value) and ease the dark frame edge (`vignette: 0.25`). `toe` is 0 for every scene
+    that does not ask, so no other scene's look changes (eight stills drawn with the old and the new stage are dot for dot
+    the same; a ninth, the house sample at 20 s, differed in a checker's redraw only by a faint speckle, 7.7 percent of dots by at
+    most 7 of 255 with no lighter or darker lean, and that picture comes out two ways from run to run even with the old
+    stage alone: project `Lessons.md`, lesson 141). After a new painting, measure how bright the road arrives in the plate view against the
+    painting (the wet lockout: 0.935, the dry one with the same look: 0.96).
+  - A wet front painting needs its own wet behind painting: with the old dry behind painting the road
+    the near props hid came back pale and dry when the camera moved (59 percent of the road dots lighter).
+    Swap the two paintings as a pair, with the look line (`lockout-paintings.json` says how to go back to dry).
+  - Painted dry and wet streets differ in feel: the wet painting reads as a detailed picture with a paint
+    finish (no thick ink outlines, a plain dark sky); the dry one has flat colour and thick outlines.
