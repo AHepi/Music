@@ -38,7 +38,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Painter test done (log 19):** with a changed brief the painter keeps the wet look (road sheen, reflections in the same places, gutter puddles with mirrored
   windows); the checker says it reads as wet. Not yet usable as the lockout picture: the painter added heavy white clouds, the film's old DRY behind painting shows
   next to the wet road once the camera moves, and the stage's finishing curve darkens the wet road. Cost about 20-28 US cents (more than the 10 I estimated).
-- **Nothing running now.**
+- **Rented graphics machine works (log 21):** Blender renders on a rented RunPod card instead of this shared computer: a street picture in 0.4-6 s instead of
+  1.5-4 minutes, the full-size plate in 2.4 s instead of 20 minutes. Started on demand, ends itself after 30 idle minutes, so you pay per second of use plus about
+  14 US cents a day for two permanent stores. Three routes when cards are short (Romania store, Iceland store, any community card), each proven end to end.
+- **Skills scout done (log 20):** seven skill sets on skills.sh worth keeping; none installed. Waiting for your answer on the first (Scenario's Blender set).
+- **Running now:** the street's sett joints (round 1 finished) and the rubbish mask along gutters and building feet (round 1 being built).
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -55,6 +59,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | `recipes/<surface>/` | Each surface: analysis, description, generator, scores, new tiles, bigger area, three resolutions, one surface you did not give, guides (04), builder and checker reports | The recipes and lessons |
 | `recipes/slate_layers/` | Slate made of separate layers inside one recipe: `recipe/` (the recipe, settings, controls table), `layers/` (one file per layer), tests, variations, areas, brick reuse | Baked maps; guides (05) |
 | `cookbook/` | Tool guides (06), start-here page, new-surface checklist (in progress) | The finished cookbook |
+| Rented graphics machine (scripts kept outside the repository, in the scratch folder `runpod/`; keys never saved here) | A small job server on the rented machine and a client here: start a machine if none is running, send files, run Blender, fetch the pictures | Rendered pictures, in seconds instead of minutes |
 
 ## Word list
 
@@ -71,6 +76,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Roughness / specularity map:** pictures saying how shiny each dot is. Roughness: low = glossy (wet), high = matt (dry). Specularity: how strong the reflection is.
 - **Plate:** the picture drawn once from the 3D street that the image model repaints in the series' style; the film shows that painting shone back onto the 3D set.
 - **Stamp sheet:** one generated picture of many separate shapes (moss clumps, chips) that a recipe places one by one.
+- **Rented machine / card:** a computer with a graphics card hired from RunPod by the second. **Store:** a permanent RunPod disk in one data centre that keeps Blender and the uploaded files between machines. **Community card:** a cheaper card from RunPod's shared pool that cannot use a store.
+- **Skill:** a packaged set of written instructions (sometimes with scripts) that Claude loads for one kind of task.
 - **Seamless / half-tile test:** a tile is seamless if moving the recipe half a tile gives the same picture moved half a tile.
 
 ## Log (added to, never rewritten)
@@ -224,8 +231,32 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     ghosts beside the drum), and the stage's finishing curve darkens the wet road to about 0.7 of its painted brightness (dry 0.89). Pictures: `19 Wet street painting -
     pictures/`; notes: `street_wet/painter_test/notes - wet street painter test.md`; briefs old and new: `street_wet/painter_test/briefs/`.
 
+20. **Skills scout.** You asked: set a helper on skills.sh to see if anything is worth keeping. The helper ran about 120 searches and read the instruction files of
+    about 37 packages; it installed nothing and tested nothing. **Worth keeping, best first:** Scenario's "Blender expert" set (7 skills: scripting rules, shader and mask
+    layers, baking, geometry nodes, EEVEE lighting, export to a three.js stage; leave out its two skills that use Scenario's add-on and outside services); a small
+    "porting to Blender 5" set; a baking skill; a plain-language reporting skill; two three.js loading skills; ElevenLabs' own narration and music skills (say no
+    to its sign-in installer); RunPod's pod-doctor and cost-audit. **Nothing found** for seamless or non-repeating textures, moss, wetness or rubbish recipes,
+    measuring closeness to a reference picture, or frame-exact filming of the three.js stage: our own tools already go further. One trap: its first copies of
+    other repositories filled this computer's disk (cleared). Report: `20 Skills scout - what is worth keeping from skills.sh.md`. Asked you before installing,
+    because a skill runs with full permissions.
+
+21. **Rented graphics machine (RunPod).** You asked whether a rented machine would help, gave a key and a US$5 start budget, then: "rent per second and cache
+    the config", and later "Don't worry about runpod budget. Just find a workflow that works". **Built:** a small job server that runs on the rented machine
+    (this session cannot open a terminal on it, so it sends files, starts Blender and fetches pictures over the machine's web address with a secret code), a
+    client here that starts a machine only when a helper asks, a saved machine set-up, and two permanent 30 GB stores (Romania and Iceland) holding Blender and the
+    street files. The machine ends itself after 30 minutes without a request (proven: it ended exactly on time in the first test with 15 minutes).
+    **Speed (tested):** EEVEE and Cycles both use the card on the stores; street pictures in 0.4-6 s, the full-size 1536 x 2730 street plate in 2.4 s (20 minutes
+    here). **When cards are short (tested):** Romania store ready in 25 s; Iceland store ready in about 80 s; with both stores switched off, a community RTX A5000
+    was ready in 157 s, installing Blender from mirror sites and receiving the street files, and drew today and wet in 17 s. **Failures on the way:** the RunPod
+    command tool could not be installed here (its download is blocked), so everything goes through RunPod's web interface; RunPod's web address refused Python's
+    default name; sending 135 files one by one took 9 minutes (now one bundle, 8 s); my first two stored machines broke at start-up (my mistakes, fixed); the
+    official Blender site refused or crawled for some machines (now mirror sites with a checksum); community cards often vanish between asking and starting (now
+    three tries). On one community host Cycles could not use the card (it ran on 25 processor cores). **Cost so far:** RunPod's bill showed US$1.13 for machines
+    at 04:40 (it lags); my estimate is about US$1.6-1.8 in all, plus about 14 US cents a day for the two stores. **Not tested:** Cycles on the community card;
+    two helpers asking for a machine at the same moment (a lock makes one wait). Notes: `RunPod set-up for rendering - findings.md`; spending:
+    `SPENDING - paid image generation ledger.md`.
+
 ## Next step
 
-The checker's free first step: swap the old dry painting's sky into the wet painting (a copy, cut with Blender's exact sky mask), redraw the stage stills and look
-again (no cost, about an hour). After that, still waiting for your go: a wet behind painting (one more repaint, about 20-28 US cents), the wood's stone-wall look, and
-the slate's straight-edged facets.
+Let the running sett-joints and rubbish job finish (it already renders on the rented machine), look at its pictures, then do the painter steps you already
+cleared: repaint the new wet plate keeping the sky dark and plain, a wet behind painting with the props painted out, the stage brightness fix, and a fresh check.
