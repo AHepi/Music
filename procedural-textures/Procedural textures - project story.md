@@ -63,8 +63,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   (stones, posts, cross beams, long beams, pegged planks), worn and mossy planks, varied roof tiles with moss, chunky grass tufts, a pond that reads,
   a layered maple; 85 materials now carry real normal maps (there were none). A fresh re-check: style kept, more character, bridge makes sense, all
   "yes". Still weak: the smeared lawn colour under the tufts, moss cushion banks that heap up, a clean orange veranda deck.
-- **Nothing running** (checked 22 October 15:21): no machines; the pay-per-second workers stand by free of charge; the two stores cost about
-  US$0.006 an hour.
+- **Nothing running** (checked 22 October 15:27): no machines, and the pay-per-second endpoint is switched fully off (most workers set to 0, as
+  you asked); it is switched back on before the next render. The two stores cost about US$0.006 an hour; RunPod balance US$12.61.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -465,7 +465,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     close; the squint test missed (0.883 and 0.873 against 0.92), because the maple and pond now follow the concepts; strongly coloured pixels a
     little over the limit; 6 of 8 iron straps have a nail head floating 14-18 mm above the plank and 3 footing stones overhang the bank (both hidden
     from every camera); 48 leftover test cameras in the scene file. **Cost:** images US$3.86 at most of US$15; pay-per-second cards US$10.89 by
-    RunPod's hourly bill (about 4 hours of card time), plus about 3 US cents for a test machine. Afterwards nothing was running. Pictures: `31
+    RunPod's hourly bill (about 4 hours of card time), plus about 3 US cents for a test machine. Afterwards nothing was running, and as you asked I switched the
+    pay-per-second endpoint fully off (most workers 0; it goes back to 3 before the next render). Pictures: `31
     Japanese garden character - pictures/` (start with "31 Final - hero view", "31 Final - veranda view", the two "31 Before and after" sheets and
     "31 Final - close-ups"); scripts and notes: `garden/character/`; the scene files stay on the RunPod store.
 
