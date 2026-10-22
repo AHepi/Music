@@ -1,7 +1,7 @@
 ---
 name: make-explainer-film
-description: Make a narrated, fact-checked explainer film for a phone screen (1080x1920) chapter by chapter, from research to a finished video with captions, in a cinematic look (places built in 3D and painted over, painted rooms with depth, card models, paper cut-outs, film grain, documentary graphics) or the simpler paper pop-up look, with automatic checks (calculators and a preflight) at every stage. Use when someone asks for an explainer video, a documentary-style chapter, or "the next chapter" of such a film.
-when_to_use: The user wants a short documentary or explainer video made end to end (research, script, voice, pictures, animation, filming), or wants to continue a series made this way.
+description: Make a narrated, fact-checked explainer film for a phone screen (1080x1920) chapter by chapter, from research to a finished video with captions, in a cinematic look (places built in 3D and painted over, painted rooms with depth, card models, paper cut-outs, film grain, documentary graphics) or the simpler paper pop-up look, with automatic checks (calculators and a preflight) at every stage. Use when someone asks for an explainer video, a documentary-style chapter, or "the next chapter" of such a film. Also use when the work includes building any place or props in Blender (a village, town, harbour, mine, farm, garden, interior, building, set or props), even if the request never mentions surfaces or wear: that work goes through the skill surfaces-wear-and-construction.
+when_to_use: The user wants a short documentary or explainer video made end to end (research, script, voice, pictures, animation, filming), or wants to continue a series made this way, or any request to build a place, village, town, set or props in Blender.
 ---
 
 # Make an explainer film (master steps)
@@ -32,6 +32,9 @@ at the counter. The whole film is built like that.
    It holds the short rules this project learned over 35 logs, each with the tool that checks it, the numbers
    to know (with their units and whether they were measured, judged or invented), the traps that cost the
    most rounds, and the list of things only a critic can judge.
+5. **If any part of the work builds a place, set or props in Blender** (also when the request names no surfaces, textures or
+   wear), read `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/SKILL.md` first and make the preflight stage
+   `place` pass before any picture is drawn or painted. Do this without being asked.
 
 ## Compute, don't search: the preflight and the calculators
 
@@ -59,6 +62,7 @@ It spends nothing and changes no project file.
 | `script` | before recording (before paying for the voice) | 1-2 |
 | `record` | after recording | 3 |
 | `shots` | before building or drawing a place's views | 4a |
+| `place` | after a place is built, before its views are drawn: the surface, wear and construction audit | 4a |
 | `plates` | before paying for paintings | 4, 4a |
 | `paint` | after each painting arrives | 4, 4a |
 | `pages` | while building pages | 5 |
@@ -78,7 +82,7 @@ spend) goes to critics: section 19 of the tips guide lists it.
 | 2. Fact check the script, and test it on newcomers | `check-facts` (workflows `verify-facts`, then `test-script-with-newcomers`) | fixes before recording; then read it to one or two real newcomers with the script's listener questions | `script` |
 | 3. Record and time the voice | `record-narration` | recordings, word times, `timeline.json`, the mix | `record` |
 | 4. Paintings, rooms with depth, cut-outs | `paint-and-cut` | `assets/reliefs/<chapter>/`, `paper-film/pieces/<chapter>/` | `plates`, `paint` |
-| 4a. Or: places built in 3D and painted over (the look of chapter 2 for newcomers) | `build-and-paint-a-place` (and `make-3d-models`) | a Blender set per place, its place facts, planned and checked views, plates, lined-up paintings, `assets/models/<place>/` | `shots`, `plates`, `paint` |
+| 4a. Or: places built in 3D and painted over (the look of chapter 2 for newcomers) | `build-and-paint-a-place` (and `make-3d-models`, and `surfaces-wear-and-construction` for every place or prop) | a Blender set per place, its place facts, planned and checked views, plates, lined-up paintings, `assets/models/<place>/` | `shots`, `place`, `plates`, `paint` |
 | 5. Pages | `build-cinema-page` (workflow `build-pages` for many at once) | `paper-film/scenes/<chapter>/page-N.js` and `<chapter>.js` | `pages` |
 | 6. Check and critique | `check-and-critique` (workflows `critique-film`, `verify-facts` again for on-screen words) | fixes before filming | `pages`, then `film` |
 | 7. Film and finish | `film-and-finish` | the master film, a sendable copy under 28 MB, captions, cover, measurements | `film`, `finish` |
@@ -115,6 +119,8 @@ spend) goes to critics: section 19 of the tips guide lists it.
   before (they are filmed in separate stretches).
 - Leave room for phone buttons (rule 12): anything to read ends left of 0.90 across (972 px of 1080)
   and sits above 0.80 down; typed words go in the top band, 0.05 to 0.22 down.
+- A place is not built until its surfaces, wear and construction pass the audit (stage `place`): a flat clean model that
+  passes the model lint is not finished.
 - Check pictures with your own eyes (contact sheets with the Read tool) before filming, and get an
   independent critique (subagents) before you call it done. The tools measure; the critics judge what they
   can't (section 19 of the tips guide).

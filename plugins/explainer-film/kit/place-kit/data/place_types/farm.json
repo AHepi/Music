@@ -1,0 +1,56 @@
+{
+ "about": "Starting preset for a farm or farmyard. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
+ "id": "farm",
+ "default_look": "lived_in",
+ "default_state": "damp",
+ "roles_likely": [
+  "ground.mud",
+  "ground.grass",
+  "ground.dirt_road",
+  "timber.fence",
+  "wall.timber_frame",
+  "roof.shingle",
+  "prop.straw",
+  "prop.cart",
+  "prop.wood"
+ ],
+ "require_more": {
+  "ground": [
+   "moss_and_algae"
+  ]
+ },
+ "allowed_off": [
+  {
+   "id": "floors_indoors",
+   "treatments": [
+    "moss_and_algae",
+    "weathering",
+    "wetness",
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows"
+  }
+ ],
+ "footfall_shapes": [
+  {
+   "shape": "auto_door_strip",
+   "role": "timber.door",
+   "depth": 1.5,
+   "width": 1.6
+  }
+ ],
+ "plan_mask_cell_metres": 0.1,
+ "facts": [
+  "door_height",
+  "door_width",
+  "fence_height",
+  "cart_gauge"
+ ],
+ "notes": "mud, straw, fences, tracks between buildings",
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

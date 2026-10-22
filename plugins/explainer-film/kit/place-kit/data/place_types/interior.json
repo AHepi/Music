@@ -1,0 +1,52 @@
+{
+ "about": "Starting preset for a room or interior set. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
+ "id": "interior",
+ "default_look": "lived_in",
+ "default_state": "dry",
+ "roles_likely": [
+  "floor.planks",
+  "floor.tile",
+  "wall.interior",
+  "timber.beam",
+  "prop.furniture",
+  "glass.window",
+  "prop.cloth"
+ ],
+ "require_more": {},
+ "allowed_off": [
+  {
+   "id": "indoors_dry",
+   "treatments": [
+    "moss_and_algae",
+    "weathering",
+    "wetness",
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "wall.interior",
+    "floor.*",
+    "timber.floor",
+    "prop.*"
+   ],
+   "reason": "indoors: dry, in no sun or rain, nothing grows"
+  }
+ ],
+ "footfall_shapes": [
+  {
+   "shape": "rect",
+   "note": "the walking area of the room"
+  }
+ ],
+ "plan_mask_cell_metres": 0.05,
+ "facts": [
+  "door_height",
+  "door_width",
+  "window_width",
+  "table_height",
+  "bench_height"
+ ],
+ "notes": "dust, scuffs, worn edges; no growth",
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

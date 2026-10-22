@@ -1,17 +1,24 @@
 ---
 name: make-3d-models
-description: Make detailed 3D models for a film's model sets (buildings, a town, a desk, props) by scripting Blender with its Python module (bpy) - no screen needed - check each one with the model lint (stripes, two surfaces on one plane, copy-numbered names, glass, measured size and front) and load them into cinema pages as .glb files with baked corner shading. Use when a page's card models look plain or sparse, a set needs to fill a tall frame (top and bottom thirds), or a downloaded or scripted model must be checked before use.
+description: Make detailed 3D models and places in Blender by scripting it (bpy), no screen needed: buildings, a town, a village, a desk, props. Every place, set or prop built this way gets the surface-and-wear pass and the construction check (skill surfaces-wear-and-construction: normal maps, displacement, dirt, grime, weeds, moss, weathering, damage, wetness, rubbish; every part carried; real sizes) before it counts as built, even when the request mentions none of that. Then check each model with the model lint (stripes, two surfaces on one plane, copy-numbered names, glass, measured size and front) and load them into cinema pages as .glb files with baked corner shading. Use when a request says build, model or make a place, building, village, town, set or props in Blender, when a page's card models look plain or sparse, or when a downloaded or scripted model must be checked before use.
 ---
 
 # Make 3D models in Blender (by script)
+
+> **REQUIRED for every place, set or prop you build in Blender** (also when the request never mentions surfaces, wear or realism). Do it without being asked. In your report say plainly what the pass did, what the audit measured and what you skipped.
+> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating) and at real size, and give every object a role.
+> 2. Run the surface-and-wear pass. Draft the settings once (skip it if `place-settings.json` exists): `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json` (TYPE is the nearest of village, town, harbour, mine, farm, garden, interior). Then: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend`. It adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds and rubbish.
+> 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
+> Details, every command and the live-Blender route: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/SKILL.md`.
 
 Chapter 2's viewer called the old card-box factories "a sudden drop in visual quality" and asked for
 "significantly higher quality" models, pointing at Blender's official MCP server. Research found:
 Blender Lab's MCP server (projects.blender.org/lab/blender_mcp; Blender 5.1+) and the community
 ahujasid/blender-mcp both mostly send Python to a running Blender. An agent that can run code gets
-the same result by scripting Blender's `bpy` module directly, headless. Rendering whole frames in
-Blender's Cycles on 4 CPU cores takes 35 to 90 s a frame (80 to 200 hours a film), so Blender only
-BUILDS the models; the three.js stage still films them.
+the same result by scripting Blender's `bpy` module directly, headless. On the 4-core computer this
+was made on, Cycles takes 35 to 90 s a frame (80 to 200 hours a film), so the film's card models are built here and filmed by the three.js
+stage; places drawn in Blender (plates) use the renderer rule and rented cards: see
+`${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/rendering-on-rented-cards.md`.
 
 **Places built in 3D and painted over** (logs 29 to 34: Blender builds a whole place, draws one picture of
 it, an image model paints that over, and the page shines the painting back onto the set) have their own
@@ -94,7 +101,8 @@ picture. `explainer-film-setup` looks for Blender and Xvfb and writes them into 
    `array`, `cut` (Boolean openings), `marker` (a named spot the page can find), `group`,
    `material(kind)` with tiling textures from `textures.py` (brick red/brown/yellow, stone,
    corrugated, slate, setts, cinders, planks, riveted, wood, leather) at true world size, lit
-   materials named `...-glow` (the page turns them up and down).
+   materials named `...-glow` (the page turns them up and down). Give every object a role (`place_role`) and an owner
+   (`place_owner`) with the place kit's part helpers (`pk.new_part_object`); plain materials are replaced by the surface step.
 3. Rules learned:
    - Blender's -y is the front (three.js +z, towards the camera); z is up.
    - The output name must end in `.glb` (Blender adds `.glb` to any other name).
@@ -120,6 +128,12 @@ picture. `explainer-film-setup` looks for Blender and Xvfb and writes them into 
    ".001" copy; it warns on glowing materials with light base colours. Inside Blender it checks the open
    scene instead. Measure a model before fitting anything to it: a size worked out from a picture or a
    helper's note was wrong more than once. (Tips and traps: the kit's `docs/LLM tips and tricks.md`, section 8.)
+5b. **Run the surface-and-wear pass and the construction check** (they are not optional):
+   `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend`, then
+   `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json` and
+   `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend`. `model_lint.py --surfaces` checks
+   .glb files for missing normal maps and constant roughness. A model that passes the model lint but is flat, clean boxes is not
+   finished. The steps are in `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/the-required-steps.md`.
 6. Look at it in the stage before using it:
    `PAPER_FILM_QUERY="model=/assets/models/<chapter>/X.glb&cam=3.6,2.4,7.5&look=0,1,0&fov=42" node paper-film/tools/render-paper-film.mjs model-preview OUT --stills 1`
 

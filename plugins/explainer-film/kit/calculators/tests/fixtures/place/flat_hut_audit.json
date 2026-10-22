@@ -1,0 +1,1110 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-22T12:00:00",
+ "blender": "5.2.2",
+ "scene_file": "hut.blend",
+ "scene_sha1": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "settings_file": "place-settings.json",
+ "settings_sha1": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+ "place": "hut",
+ "place_type": "generic",
+ "look": "lived_in",
+ "state": "dry",
+ "quick": false,
+ "map_size_pixels": 1024,
+ "mask": {
+  "cell_metres": 0.1,
+  "seconds": 3.0,
+  "source": "whole_scene"
+ },
+ "masks_from": "whole_scene",
+ "picture": {
+  "camera": null,
+  "height_pixels": null,
+  "set": false
+ },
+ "counts": {
+  "objects_visible": 9,
+  "materials": 5,
+  "triangles": 108,
+  "triangles_by_owner": {
+   "hut": 108
+  },
+  "scatter_pieces": 0,
+  "ground_area_m2": 100
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.earth": 1,
+   "wall.plaster": 4,
+   "roof.shingle": 1,
+   "timber.door": 1,
+   "timber.floor": 2
+  }
+ },
+ "materials": [
+  {
+   "name": "ground_mat",
+   "role": "ground.earth",
+   "users": 1,
+   "objects": [
+    "ground"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "displacement": {
+     "has": false,
+     "required": false,
+     "wanted": true,
+     "amount": null,
+     "detail": {}
+    },
+    "roughness_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": false,
+     "required": false,
+     "wanted": true,
+     "amount": null,
+     "detail": {}
+    },
+    "rubbish": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "plants": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "litter_pieces": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish",
+    "plants",
+    "litter_pieces"
+   ],
+   "off_with_reason": {}
+  },
+  {
+   "name": "wall_mat",
+   "role": "wall.plaster",
+   "users": 1,
+   "objects": [
+    "wall_north",
+    "wall_south",
+    "wall_east",
+    "wall_west"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "roughness_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": false,
+     "required": false,
+     "wanted": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "off_with_reason": {}
+  },
+  {
+   "name": "roof_mat",
+   "role": "roof.shingle",
+   "users": 1,
+   "objects": [
+    "roof"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "roughness_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "moss_and_algae",
+    "shape_damage"
+   ],
+   "off_with_reason": {}
+  },
+  {
+   "name": "door_mat",
+   "role": "timber.door",
+   "users": 1,
+   "objects": [
+    "door"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "roughness_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": false,
+     "required": false,
+     "wanted": true,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "off_with_reason": {}
+  },
+  {
+   "name": "floor_mat",
+   "role": "timber.floor",
+   "users": 1,
+   "objects": [
+    "floor_plank_1",
+    "floor_plank_2"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "roughness_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": false,
+     "required": false,
+     "wanted": true,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": false,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "off_with_reason": {}
+  }
+ ],
+ "objects": [
+  {
+   "name": "ground",
+   "role": "ground.earth",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "ground_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_north",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "wall_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_south",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "wall_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_east",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "wall_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_west",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "wall_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "roof",
+   "role": "roof.shingle",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "roof_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "moss_and_algae"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "door",
+   "role": "timber.door",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "door_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "floor_plank_1",
+   "role": "timber.floor",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "floor_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "floor_plank_2",
+   "role": "timber.floor",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "floor_mat"
+   ],
+   "has_normal_map": false,
+   "uv": {
+    "has": false,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": false,
+    "via": "ground",
+    "gap_mm": 60.0,
+    "hung": false,
+    "floating": true,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false
+  }
+ ],
+ "siblings": {},
+ "scatter": {
+  "groups": []
+ },
+ "normal_maps": {
+  "images": [],
+  "test_light": {
+   "verdict": "pass"
+  }
+ },
+ "displacement": {
+  "materials": [],
+  "objects": [],
+  "too_coarse": []
+ },
+ "roads": [],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "clip_share": 0.0
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [],
+  "share": 0.0
+ },
+ "problems": [],
+ "floating_note": "one floor plank floats 6 cm"
+}

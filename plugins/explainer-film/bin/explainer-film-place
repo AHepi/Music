@@ -1,0 +1,27 @@
+#!/bin/bash
+# What this does: runs the place kit's one-command-per-job tool: `explainer-film-place VERB [options]`. The verbs make a place built in Blender believable and
+# prove it: roles, surfaces (real normal maps and displacement), roads, damage as shape, the nine wear layers (dirt, grime, weathering, wetness, cracks and chips,
+# edge wear, moss, rust, rubbish), weeds and litter, the construction check, the audit, the renderer rule, rented-card rendering and picture measures.
+# It only starts the kit's launcher (kit/place-kit/place_command.py); everything else is there.
+#
+# Use: explainer-film-place --verbs                  the verbs, one per line
+#      explainer-film-place VERB --help              a verb's options
+#      explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend
+#      explainer-film-place audit --scene FINISHED.blend
+# Exit: 0 pass (read the LOOK lines), 1 fail, 2 an input is missing or unusable (the sentence says which file and what makes it).
+# Which kit: --kit DIR (or EXPLAINER_FILM_KIT) names an installed kit (the folder explainer-film-setup made). Without either, the plugin's own kit is used.
+set -u
+HERE="$(cd "$(dirname "$0")/.." && pwd)"
+kit="${EXPLAINER_FILM_KIT:-}"
+previous=""
+for argument in "$@"; do
+  [ "$previous" = "--kit" ] && kit="$argument"
+  case "$argument" in --kit=*) kit="${argument#--kit=}" ;; esac
+  previous="$argument"
+done
+launcher="$HERE/kit/place-kit/place_command.py"
+if [ -n "$kit" ] && [ -f "$kit/place-kit/place_command.py" ]; then
+  launcher="$kit/place-kit/place_command.py"
+fi
+command -v python3 >/dev/null || { echo "explainer-film-place: python3 is needed (install Python 3.10 or newer)" >&2; exit 2; }
+exec python3 -B "$launcher" "$@"

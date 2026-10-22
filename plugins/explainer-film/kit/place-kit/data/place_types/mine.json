@@ -1,0 +1,75 @@
+{
+ "about": "Starting preset for a mine, quarry or industrial yard. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
+ "id": "mine",
+ "default_look": "neglected",
+ "default_state": "damp",
+ "roles_likely": [
+  "ground.rock",
+  "ground.mud",
+  "wall.brick",
+  "wall.metal_sheet",
+  "iron.fitting",
+  "iron.sheet",
+  "timber.beam",
+  "prop.cart"
+ ],
+ "require_more": {
+  "iron": [
+   "grime"
+  ]
+ },
+ "allowed_off": [
+  {
+   "id": "underground_no_sun",
+   "treatments": [
+    "weathering"
+   ],
+   "roles": [
+    "floor.*",
+    "wall.interior",
+    "ground.rock"
+   ],
+   "reason": "underground or under cover: no sun fade"
+  },
+  {
+   "id": "bare_rock_no_moss",
+   "treatments": [
+    "moss_and_algae",
+    "plants"
+   ],
+   "roles": [
+    "ground.rock"
+   ],
+   "reason": "bare spoil and rock: nothing takes root"
+  },
+  {
+   "id": "floors_indoors",
+   "treatments": [
+    "moss_and_algae",
+    "weathering",
+    "wetness",
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows"
+  }
+ ],
+ "footfall_shapes": [
+  {
+   "shape": "polyline",
+   "note": "a track along the rails or the yard route"
+  }
+ ],
+ "plan_mask_cell_metres": 0.1,
+ "facts": [
+  "door_height",
+  "door_width",
+  "cart_wheel_diameter"
+ ],
+ "notes": "coal dust, rails, rust, ruts in mud",
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

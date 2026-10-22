@@ -7,7 +7,7 @@ searching by hand. Where no tool can check it, the tip says **judgement: ask a c
 
 How to read it:
 - **Preflight stages.** `explainer-film-preflight STAGE` runs the checks for one stage of the work and
-  writes one report. The eight stages are in the table below. Its `--help` says exactly what each stage
+  writes one report. The nine stages are in the table below. Its `--help` says exactly what each stage
   runs and which files it needs; if it skips a tool because a file is missing, run that tool yourself.
 - **Commands** such as `calculators/plan_shot.py` run from the kit folder (the folder `explainer-film-setup`
   made). Every tool answers `--help`, prints a plain report, takes `--json`, `--out` and `--report`, and ends
@@ -26,6 +26,7 @@ How to read it:
 | `script` | before recording | `lint_script.py before`, the estimated timeline, the voice's credits and dollars, the spend ledger | recording the narration |
 | `record` | after recording | `lint_script.py after`, `sound_gates.py voice` | using the recordings |
 | `shots` | before building or drawing a place's views | `place_facts.py check`, `plan_shot.py`, `view_audit.py`, `plan_effects.py wind`, `plan_lights.py plan`, `plan_states.py plan`, each view's check file | building and drawing the views and plates |
+| `place` | after a place is built, before its views are drawn (order: `shots`, build, `place`, `plates`) | `place_audit_check.py check` (roles, treatments, layer amounts, normal maps, UVs, displacement, construction, scale, keep-out, renderer), a stale-audit check against the scene file, and when given `picture_measures.py check` and `place_audit_check.py fresh` | drawing the place's views and plates (a flat, clean or floating place is drawn again) |
 | `plates` | before paying for paintings | `plan_lights.py render-log`, the shot checker's report (new problems only), `paint_request.py preflight` and `price`, `model_lint.py`, the spend ledger | asking the painter |
 | `paint` | after each painting arrives | `after_painting.py check` | using the painting |
 | `pages` | while building pages | `plan_page_timing.py check`, `check_page_layout.mjs`, `camera_audit.py`, `plan_effects.py lint`, all from `page_events.mjs`'s events | filming the pages |
@@ -125,6 +126,25 @@ How to run it:
 | Paintings | 4.8 US cents a megapixel, returned + every picture sent (read 16 October 2026; 2.4 when the plan was written a day earlier) | the rate on one day, not a bill | `money.fal_flux_3_edit_cents_per_megapixel` |
 | Voice | about 1 ElevenLabs credit a letter (about US$0.75 for 4,300) | credits measured; dollars judged | `money.elevenlabs_*` |
 | Sendable copy | under 28 MB | judged | `delivery.sendable_megabytes` |
+| Normal map size | at least 1024 pixels for a final (256 with `--quick`) | judged | `place_surfaces.normal_map_size_min_pixels` |
+| Normal map direction | correlation at least +0.25 under a low light | judged | `place_surfaces.normal_direction_correlation_min` |
+| Normal strength where displaced | times 0.6 | judged | `place_surfaces.normal_strength_with_displacement_factor` |
+| Required treatments missing | none allowed | judged | `place_audit.required_treatments_missing_allowed` |
+| Share of treatments switched off | at most a quarter, each with a reason | invented | `place_audit.off_share_max` |
+| Touching, carried | within 5 mm; rest patch 16 square centimetres | judged | `place_construction.touch_metres`, `place_construction.rest_patch_square_centimetres_min` |
+| Longest stretch between supports | 1.38 m | judged | `place_construction.support_span_metres_max` |
+| Floating | a gap over 5 mm fails | judged | `place_construction.float_gap_millimetres_fail` |
+| Doorway floor | within 0.30 m below the sill | invented | `place_construction.doorway_floor_gap_metres_max` |
+| Size out of range | fails beyond 1.5 times the range | invented | `place_scale.fail_factor` |
+| Grime | at most a quarter of an area, a third darker | measured on the street | `place_wear.grime_area_share`, `place_wear.grime_darkening_share` |
+| No plants where | footfall 0.6, crown 0.7, keep-clear 0.5 | measured on the street | `place_wear.exact_zero_gate_footfall`, `place_wear.exact_zero_gate_crown`, `place_wear.exact_zero_gate_keepclear` |
+| Smallest mark that survives the painter | a patch 15 dots, a line 3 dots, a fleck 5 dots | measured on painted plates | `place_wear.mark_dots_patches_size`, `place_wear.mark_dots_lines_size`, `place_wear.mark_dots_marks_size` |
+| Picture value range | each percentile within 0.03 of the guard | judged | `place_measures.percentile_tolerance` |
+| Detail energy | 0.9 to 1.4 times the guard, never above 10 | judged | `place_measures.detail_energy_ratio_low`, `place_measures.detail_energy_ratio_high`, `place_measures.detail_energy_cap` |
+| Squint test | 0.92 (a look, not a fail) | judged | `place_measures.squint_target` |
+| Rented card | about US$1.10 an hour on an RTX 4090 (read 22 October 2026) | measured on one day, not a bill | `place_render.card_dollars_per_hour` |
+| Stop waiting | jobs wait over 5 minutes while workers show idle | judged | `place_render.jobs_waiting_stop_minutes` |
+| Fix rounds | one, then stop | judged | `place_checks.fix_rounds` |
 
 ## 2. The script (stage `script`, before recording)
 
@@ -327,7 +347,42 @@ For painted relief rooms and paper pages:
 8. One heavy job at a time; turn `.blend1` backups off. Filming while Blender draws is about 1.8 times slower.
 9. Budget a set by filming time, not triangles: profile one frame. *Check:*
    `node paper-film/tools/profile_frame.mjs PAGE TIME`.
-10. Open every downloaded texture at full size and look for stickers, brands and digits. **Judgement.**
+10. Open every downloaded texture at full size and look for stickers, brands and digits. **Judgement.** For the surfaces,
+    wear and construction of a place, see section 8a.
+
+## 8a. Surfaces, wear and construction (stage `place`, before drawing a place's views)
+
+The full treatment is the skill `surfaces-wear-and-construction` (start with its first screen). Every place, set or prop
+built in Blender goes through it, whatever the request says. In short:
+
+1. Build with supports: every plank on a support, every support on the ground, nothing floating, at real size.
+   *Check:* `explainer-film-place construction` (stage `place`: "place: construction", "place: scale").
+2. Give every object a role and an owner as you make it. *Check:* `explainer-film-place roles`; the audit fails an
+   object with no role ("place: roles").
+3. Run the whole pass in one call, not piece by piece, and repeat it freely (it gives the same counts twice).
+   *Check:* `explainer-film-place finish`, then `audit`.
+4. Real normal maps that point the right way: OpenGL, Non-Color, through a Normal Map node with a UV layer, at least
+   1024 pixels for a final. *Check:* `explainer-film-place normals-test`; the audit's "place: normal maps".
+5. UVs first: a normal map needs a UV layer on every object that uses it. *Check:* "place: uv".
+6. Displacement only where the role says (dirt road, mud, thatch, rock ground), on a dense mesh, with the normal
+   strength x 0.6. *Check:* "place: displacement".
+7. Layers in their fixed order: dirt and grime, then wetness, then cracks and edge wear, then moss, then rubbish.
+   Every object needs its `pk_<layer>_amount` property. *Check:* `explainer-film-place age`; "place: layer amounts".
+8. Marks few and big, sized in picture dots, in the place's own style (a designed mark, not photographic noise).
+   *Check:* `explainer-film-place measure` (detail energy, flat windows). Whether it reads as designed is a
+   **judgement: ask a critic**.
+9. Plants and rubbish stay off wheel tracks, crowns, doorsteps and puddles; the counts there are exactly 0.
+   *Check:* "place: keep-out".
+10. A layer set to 0 needs an `off` entry with a reason (or a signed accepted entry). *Check:* "place: off reasons".
+11. Draw with the renderer rule: Cycles where lamps, windows, lanterns or fires are lit, EEVEE when they are off.
+    *Check:* `explainer-film-place renderer-for`; "place: renderer".
+12. Make the style guard from the first honest picture and call it provisional until a reference or a critic agrees.
+    *Check:* `explainer-film-place measure PICTURE --make-guard`.
+13. Audit last, on the exact file you will draw. A scene saved after the audit makes it stale and the preflight says so.
+    *Check:* `explainer-film-preflight place --place-audit FILE --blend SCENE.blend` ("place: stale audit").
+14. Output made with `--quick` is for trials, not for a final. *Check:* the audit records it.
+15. Have the place checked by helpers who did not build it, who recompute the builders' claims. *Check:* the workflow
+    `build-a-place`; the preflight's `--fresh-check`.
 
 ## 9. Before painting (stage `plates`)
 
@@ -571,6 +626,10 @@ The tools measure; people still judge these. **Judgement: ask a critic** for eac
 - The overall feel of the light (cool against warm, dusk mood), beyond the rule numbers.
 - Whether a flagged near-touch, thin part or small sign is worth fixing or fine for the story; if fine, put
   it in the `accepted` list with the reason, who and the date.
+- Whether a worn road reads as driven by carts and not as noise; whether an empty stable reads empty-but-used and not deserted.
+- Whether wear reads as designed (the style rule) and not photographic, and whether a mark that passes the dot-size rule
+  still reads at phone size.
+- Whether a squint-test miss is acceptable (the garden missed at 0.883 and 0.873 against 0.92 and the person decided).
 - Paid steps: the user's own clear yes.
 
 How to get those judgements:
@@ -589,7 +648,9 @@ How to get those judgements:
    check its file is there.
 4. For built-and-painted sets, the rules of logs 30 to 34 (the kit's `docs/paper-look - 07 Composing a shot.md`)
    beat the older rules of log 20 for painted rooms.
-5. Known disagreements a person should settle: the default pause after a plain page turn (1.4 s in the
+5. The place kit's data files (looks, surfaces, roles, facts) are checked by `explainer-film-place check-presets`: every
+   number there carries its kind and its source.
+6. Known disagreements a person should settle: the default pause after a plain page turn (1.4 s in the
    table, 1.5 s in `estimate_timeline.py`, about 1.3 s from the timing formula); `frame_check.py` still
    warns at 0.87 across, where the rule is 0.90 (`frame_geometry.py boxes` uses 0.90); a state cut at 0.10 or
    0.12 of the frame.

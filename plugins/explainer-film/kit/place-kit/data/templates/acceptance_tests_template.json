@@ -1,0 +1,189 @@
+{
+ "about": "A template for a place's acceptance list: numbered tests in groups, each with the command that runs it and the line that means it passed. The planner copies it, deletes what does not apply, adds the place's own tests and gives it to the builders and the fresh checkers. 'kind_of_check' says whether a tool measures the test or a person or critic judges it.",
+ "tests": [
+  {
+   "id": 1,
+   "group": "global look",
+   "what": "Squint test: the big shapes and light are unchanged from the last picture",
+   "command": "explainer-film-place measure NEW.png --previous OLD.png --guard style-guard.json",
+   "pass_line": "squint similarity 0.92 or better (a LOOK, never a fail; report the region that loses most)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 2,
+   "group": "global look",
+   "what": "Value range",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "each percentile within 0.03 of the guard; the 99th not above 0.92; mean saturation within 0.04",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 3,
+   "group": "global look",
+   "what": "Detail energy per region",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json --id-map IDS.png --id-colours IDS.json",
+   "pass_line": "each region from 0.9 times the guard to the smaller of 1.4 times and 10",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 4,
+   "group": "global look",
+   "what": "No flat colour at 100 percent",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "no 96 x 96 window below the sky with luminance spread under 0.010; under 2 percent under 0.014",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 5,
+   "group": "global look",
+   "what": "Palette",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "at most 1 percent of pixels over saturation 0.70 outside the accent; at most 0.3 percent turquoise; no pure white patch over 30 pixels",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 6,
+   "group": "global look",
+   "what": "Character reads at normal size (blind reading test)",
+   "command": "the workflow's blind reader, at half size",
+   "pass_line": "a reviewer who has not seen the list names at least 12 of 16 planned features",
+   "kind_of_check": "judged"
+  },
+  {
+   "id": 7,
+   "group": "global look",
+   "what": "Designed-in test: marks are few, big and clean",
+   "command": "a fresh look checker on 100 percent crops next to the previous crops",
+   "pass_line": "the same picture language, not a photographic layer",
+   "kind_of_check": "judged"
+  },
+  {
+   "id": 8,
+   "group": "global look",
+   "what": "Render safety",
+   "command": "explainer-film-place render --job JOB.json",
+   "pass_line": "both finals draw on the card under 90 seconds with the card in use; the light groups add up within 2 percent",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 9,
+   "group": "construction",
+   "what": "Connected structure: every part carried from the ground up",
+   "command": "explainer-film-place construction --out construction.json",
+   "pass_line": "no floating part, no span over 1.38 m, nothing hung unless its role may hang",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 10,
+   "group": "construction",
+   "what": "Walkability along each declared route",
+   "command": "explainer-film-place construction --out construction.json",
+   "pass_line": "rays every 5 cm hit a surface; steps at most 2 cm; slope at most 1 in 20",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 11,
+   "group": "construction",
+   "what": "Siblings are not copies: planks, tiles and posts differ",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "the audit finds no group of siblings that are mostly exact copies",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 12,
+   "group": "construction",
+   "what": "Real sizes",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "no size beyond 1.5 times the facts table's range; out-of-range sizes are LOOK lines",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 13,
+   "group": "surfaces",
+   "what": "Every required treatment is present on every material",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "no FAIL line named 'place: treatments'",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 14,
+   "group": "surfaces",
+   "what": "Every layer has its amount property and none is silently 0",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "no FAIL line named 'place: layer amounts'; every 0 has an off entry with a reason",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 15,
+   "group": "surfaces",
+   "what": "Plants and rubbish keep out of the gates",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "the counts on wheel tracks, crowns, keep-clear places and in puddles are exactly 0",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 16,
+   "group": "surfaces",
+   "what": "Wear and moss shares are inside the style's numbers",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "grime at most about a quarter of an area, a third darker; moss and mould inside the place's range",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 17,
+   "group": "normal maps",
+   "what": "Each normal map is wired right",
+   "command": "explainer-film-place normals-test --out normals.json",
+   "pass_line": "Tangent space, Non-Color image, Normal Map node reaching the shader, at least 1024 pixels for a final, no leftover Bump above 0.3",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 18,
+   "group": "normal maps",
+   "what": "Each normal map points the right way",
+   "command": "explainer-film-place normals-test --out normals.json",
+   "pass_line": "correlation at least +0.25 under a low light from two sides on each informative axis; the flipped copy fails",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 19,
+   "group": "UV",
+   "what": "UV hygiene",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "a UV layer on every user of a normal map; mirrored faces at most 2 percent",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 20,
+   "group": "ownership and idempotence",
+   "what": "Nothing of another owner changed",
+   "command": "explainer-film-place ownership-diff --start FP1.json --end FP2.json --owners ownership.json",
+   "pass_line": "no violation; every new object carries place_owner and place_role",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 21,
+   "group": "ownership and idempotence",
+   "what": "The pass can be repeated",
+   "command": "explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as OUT.blend",
+   "pass_line": "running it twice gives the same object, material and node counts",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 22,
+   "group": "combined scene",
+   "what": "Parts combine in any order",
+   "command": "explainer-film-place combine --stages stage_a.py stage_b.py --order plain --owners ownership.json --save-as OUT.blend",
+   "pass_line": "no violation in plain or reverse order; the chain run twice gives the same counts",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 23,
+   "group": "reports",
+   "what": "Every report is plain and complete",
+   "command": "read each part report",
+   "pass_line": "it says what was finished, tested, not tested, unsure, every failure, the card seconds used, and measured versus judged",
+   "kind_of_check": "judged"
+  }
+ ]
+}

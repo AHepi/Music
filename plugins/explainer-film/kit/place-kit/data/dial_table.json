@@ -1,0 +1,417 @@
+{
+ "about": "Every dial of every wear layer: name, range, default, unit, plain-words doc, kind and source. A dial name that is not in this table is an error, so a typo cannot hide. The common dials (amount, seed) belong to every layer. The look presets (data/looks) set the amount per layer and may set other dials. Carried from the weathering kit's table with the street-only dials dropped.",
+ "common": [
+  {
+   "name": "amount",
+   "lo": 0.0,
+   "hi": 1.0,
+   "default": 1.0,
+   "unit": "multiplier",
+   "doc": "How strongly the layer acts, 0 = exactly nothing (the layer node returns its input unchanged).",
+   "kind": "judged",
+   "source": "the weathering kit re-check and the street (logs 22 and 25)"
+  },
+  {
+   "name": "seed",
+   "lo": 0.0,
+   "hi": 1000.0,
+   "default": 0.0,
+   "unit": "number",
+   "doc": "Picks one random pattern; a new number gives a new pattern with the same character.",
+   "kind": "judged",
+   "source": "the weathering kit"
+  }
+ ],
+ "layers": {
+  "dirt": {
+   "dials": [
+    {
+     "name": "film",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.35,
+     "unit": "share",
+     "doc": "How much of the surface carries a thin soil film.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "foot_splash",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.5,
+     "unit": "share",
+     "doc": "Mud splashed up the foot of walls and posts.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "foot_height_metres",
+     "lo": 0.05,
+     "hi": 1.5,
+     "default": 0.45,
+     "unit": "metres",
+     "doc": "How high the splash reaches from the object's own lowest point.",
+     "kind": "judged",
+     "source": "the street grime budget (log 22)"
+    },
+    {
+     "name": "dust",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.2,
+     "unit": "share",
+     "doc": "Pale dust on up-facing surfaces.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "polish",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.3,
+     "unit": "share",
+     "doc": "Smooth polished look where feet or wheels pass.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "grime": {
+   "dials": [
+    {
+     "name": "area_share",
+     "lo": 0.05,
+     "hi": 0.6,
+     "default": 0.25,
+     "unit": "share of an area",
+     "doc": "About how much of the area carries dark grime (the street measured: a quarter; more is mush).",
+     "kind": "measured",
+     "source": "the street grime budget (log 22)"
+    },
+    {
+     "name": "darkening",
+     "lo": 0.05,
+     "hi": 0.6,
+     "default": 0.33,
+     "unit": "share darker",
+     "doc": "How much darker the grime makes the colour (a third).",
+     "kind": "measured",
+     "source": "the street grime budget (log 22)"
+    },
+    {
+     "name": "soot_under_shelter",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.6,
+     "unit": "share",
+     "doc": "Soot on surfaces under eaves and overhangs.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "runoff_streaks",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.4,
+     "unit": "share",
+     "doc": "Run-off streaks running down from sills and eaves.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "damp_band",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.35,
+     "unit": "share",
+     "doc": "A darker damp band at the foot of walls.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "weathering": {
+   "dials": [
+    {
+     "name": "silvering",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.5,
+     "unit": "share",
+     "doc": "Timber turning silver-grey.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "sun_fade",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.3,
+     "unit": "share",
+     "doc": "Colour fading on surfaces that face the sky.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "patina",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.2,
+     "unit": "share",
+     "doc": "Green-blue patina on metal and stone.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "wetness": {
+   "dials": [
+    {
+     "name": "darken",
+     "lo": 0.0,
+     "hi": 0.6,
+     "default": 0.25,
+     "unit": "share darker",
+     "doc": "How much darker a wet surface is.",
+     "kind": "judged",
+     "source": "the street wet recipe"
+    },
+    {
+     "name": "wet_roughness",
+     "lo": 0.05,
+     "hi": 0.6,
+     "default": 0.3,
+     "unit": "roughness",
+     "doc": "Roughness of a wet surface (dry is about 0.9).",
+     "kind": "measured",
+     "source": "the street wet recipe"
+    },
+    {
+     "name": "puddles",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.5,
+     "unit": "share",
+     "doc": "How much low ground holds standing water.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "film_coat",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.4,
+     "unit": "share",
+     "doc": "A thin clear coat on wet surfaces.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "cracks_and_chips": {
+   "dials": [
+    {
+     "name": "crack_density",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.3,
+     "unit": "share",
+     "doc": "How many cracks.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "crack_width_metres",
+     "lo": 0.002,
+     "hi": 0.05,
+     "default": 0.012,
+     "unit": "metres",
+     "doc": "Width of a crack line (about 3 dots at plate size).",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "chip_amount",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.3,
+     "unit": "share",
+     "doc": "Chipped patches at edges.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "edge_wear": {
+   "dials": [
+    {
+     "name": "width_metres",
+     "lo": 0.005,
+     "hi": 0.1,
+     "default": 0.02,
+     "unit": "metres",
+     "doc": "How far in from the edge the rubbed zone reaches.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "pale",
+     "lo": 0.0,
+     "hi": 0.6,
+     "default": 0.25,
+     "unit": "share lighter",
+     "doc": "How much paler the rubbed edge is.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "roughness_drop",
+     "lo": 0.0,
+     "hi": 0.5,
+     "default": 0.2,
+     "unit": "roughness",
+     "doc": "How much smoother the rubbed edge is.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "moss_and_algae": {
+   "dials": [
+    {
+     "name": "cover",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.4,
+     "unit": "share",
+     "doc": "How much of the damp, shaded area is covered.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "clump_size_metres",
+     "lo": 0.03,
+     "hi": 0.6,
+     "default": 0.15,
+     "unit": "metres",
+     "doc": "Size of a moss clump.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "damp_need",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.5,
+     "unit": "share",
+     "doc": "How damp it must be.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "shade_need",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.4,
+     "unit": "share",
+     "doc": "How shaded it must be.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "rust": {
+   "dials": [
+    {
+     "name": "band",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.4,
+     "unit": "share",
+     "doc": "Rust bands by height on the object.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "runs",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.3,
+     "unit": "share",
+     "doc": "Rust runs below joins.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "collar",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.3,
+     "unit": "share",
+     "doc": "Rust collars where iron meets other material.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  },
+  "rubbish": {
+   "dials": [
+    {
+     "name": "density",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.3,
+     "unit": "share",
+     "doc": "Muck and litter marks at gutters, wall feet and lane edges.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    },
+    {
+     "name": "straw_share",
+     "lo": 0.0,
+     "hi": 1.0,
+     "default": 0.4,
+     "unit": "share",
+     "doc": "How much of the litter is straw-coloured.",
+     "kind": "judged",
+     "source": "the weathering kit re-check and the street (logs 22 and 25)"
+    }
+   ]
+  }
+ },
+ "growth": {
+  "dials": [
+   {
+    "name": "weeds_amount",
+    "lo": 0.0,
+    "hi": 1.0,
+    "default": 0.5,
+    "unit": "share",
+    "doc": "How many weeds, tufts, ferns and nettles.",
+    "kind": "judged",
+    "source": "the weathering kit re-check and the street (logs 22 and 25)"
+   },
+   {
+    "name": "cushions_amount",
+    "lo": 0.0,
+    "hi": 1.0,
+    "default": 0.3,
+    "unit": "share",
+    "doc": "How many moss cushions.",
+    "kind": "judged",
+    "source": "the weathering kit re-check and the street (logs 22 and 25)"
+   },
+   {
+    "name": "litter_amount",
+    "lo": 0.0,
+    "hi": 1.0,
+    "default": 0.4,
+    "unit": "share",
+    "doc": "How many leaves, sticks, straw pieces and dung lumps.",
+    "kind": "judged",
+    "source": "the weathering kit re-check and the street (logs 22 and 25)"
+   }
+  ]
+ }
+}

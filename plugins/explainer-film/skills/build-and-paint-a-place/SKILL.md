@@ -1,9 +1,15 @@
 ---
 name: build-and-paint-a-place
-description: Build a place for a film in Blender by script (free Poly Haven models and surfaces, scripted props with real lettering, people), plan each view by calculation before drawing it (place facts, the shot planner, the lettering, light and smoke planners, model lint), compose it with the shot checker, draw a plate, check it before paying, have it painted over with an image-edit model on fal, check and line up the painting when it arrives, and shine it back onto the 3D set in a page so the camera can hold or slide without tearing; with held shots, state pictures (people gone, a factory slowed) and the checks before filming. Use for the built-and-painted look (chapter 2 for newcomers), or whenever a page needs a place the camera moves in.
+description: A place built here (a village, town, harbour, mine, farm, garden, interior or any set) must first pass the surface-and-wear pass and the construction check (skill surfaces-wear-and-construction; preflight stage place), whatever the request says. Build a place for a film in Blender by script (free Poly Haven models and surfaces, scripted props with real lettering, people), plan each view by calculation before drawing it (place facts, the shot planner, the lettering, light and smoke planners, model lint), compose it with the shot checker, draw a plate, check it before paying, have it painted over with an image-edit model on fal, check and line up the painting when it arrives, and shine it back onto the 3D set in a page so the camera can hold or slide without tearing; with held shots, state pictures (people gone, a factory slowed) and the checks before filming. Use for the built-and-painted look (chapter 2 for newcomers), or whenever a page needs a place the camera moves in.
 ---
 
 # Build a place in 3D and paint it over
+
+> **REQUIRED for every place, set or prop you build in Blender** (also when the request never mentions surfaces, wear or realism). Do it without being asked. In your report say plainly what the pass did, what the audit measured and what you skipped.
+> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating) and at real size, and give every object a role.
+> 2. Run the surface-and-wear pass. Draft the settings once (skip it if `place-settings.json` exists): `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json` (TYPE is the nearest of village, town, harbour, mine, farm, garden, interior). Then: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend`. It adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds and rubbish.
+> 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
+> Details, every command and the live-Blender route: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/SKILL.md`.
 
 What this is: the way the austerity project made its places from log 29 to log 35 (the pit village's notice
 corner, the people test, the Works of chapter 2 for newcomers, the checkout), as one set of steps, with the
@@ -23,6 +29,11 @@ without turning. Two paintings cost about 20 to 45 US cents.
 
 | Moment | Tool (from KIT) | What it works out | Preflight |
 |---|---|---|---|
+| After building each model, and the dressed scene: roles, surfaces, wear, growth | `explainer-film-place finish` (then `audit`) | the whole surface-and-wear pass and the facts table of the scene (skill `surfaces-wear-and-construction`) | `place` |
+| When parts are built by several helpers | `explainer-film-place finish-part`, `combine`, `ownership-diff` | each owner's share, the combined scene, who touched what | `place` |
+| After the pass | `explainer-film-place construction`, `normals-test` | every part carried, in reach and the right size; every normal map pointing the right way | `place` |
+| Before drawing | `explainer-film-place renderer-for`, `render` | Cycles where lamps, windows, lanterns or fires are lit, otherwise EEVEE; previews on a rented card | `place` |
+| After drawing | `explainer-film-place measure` | value range, detail energy, flat windows, palette and squint against the style guard | `place` |
 | After building each model, and the dressed scene | `paper-film/blender/model_lint.py` | stripes, two surfaces on one plane, floors just over the ground, ".001" copies, glass reading its picture's see-through, glowing light bases, sizes against the index, fronts | `plates` (run it while building too) |
 | When the place exists | `calculators/place_facts.py` | the place facts every later tool reads: views, signs, chimneys and fires, figures, lights, surfaces things stand on, the accepted list | `shots` |
 | Before drawing a view | `calculators/plan_shot.py` | the camera spot, eye, turn, the slide and its limit, the plate's lens and rows, the people (6 m rule, crowd across the view), the reach | `shots` |
@@ -48,12 +59,15 @@ Every tool answers `--help`, prints a plain report and lists the house numbers i
 
 - The full Blender program (5.2.2 was used), not only the `bpy` Python module: plates are drawn with EEVEE and
   the shot checker draws its flat-colour pictures in Blender. EEVEE runs without a graphics card under a
-  virtual screen: `Xvfb :96 -screen 0 1920x1080x24 &`, then `DISPLAY=:96 blender -b ...`. (Cycles on the
-  processor works too, but is far slower for plates.)
+  virtual screen: `Xvfb :96 -screen 0 1920x1080x24 &`, then `DISPLAY=:96 blender -b ...`. EEVEE only where lamps,
+  windows, lanterns and fires are off. Where they are lit, use Cycles, on a rented card (the film owner's rule; skill
+  `surfaces-wear-and-construction`, `rendering-on-rented-cards.md`).
 - `explainer-film-setup` checks for Blender and Xvfb and writes `machine-settings.env` in the kit (BLENDER,
   BLENDER_DISPLAY); `check-shot.sh` and the checker's tests read it. In the commands below, `"$BLENDER"` is
   that program (`set -a; . ./machine-settings.env; set +a` in the kit folder sets it), run with
   `DISPLAY=:96` when it draws with EEVEE.
+- Blender's own Python has numpy but no Pillow (and no OpenCV): the place kit needs only numpy inside Blender, and the plain
+  Python tools outside it (`calculators/`) may use numpy and Pillow. `explainer-film-setup` notes this.
 - Budget a set by how long a frame takes to film, not by a triangle count: on the Works a held frame took
   about 0.9 s and a sliding one about 4.3 s (round 4, one worker). Measure a slow page with
   `node paper-film/tools/profile_frame.mjs PAGE TIME` (or `PROFILE_SCENE=notice-corner ... - 9` for a scene).
@@ -65,13 +79,17 @@ Copy the pit village as the pattern (`paper-film/blender/pit-village/`):
    lists the models, `props/download_poly_haven.py` fetches them and `props/convert_poly_haven.py` makes the
    prop library (it can paint out a maker's label: `PAINT_OUT` in the choices file). Open every downloaded
    texture at full size and look for stickers, brands and digits.
+   **Give every object a role (`place_role`) and an owner (`place_owner`) as you make it, then run the surface-and-wear pass
+   (`explainer-film-place finish`).** Poly Haven pictures alone read bland: real normal maps, shape, designed marks and
+   plants go on top (skill `surfaces-wear-and-construction`).
 2. Props Poly Haven doesn't have are built by script (`props/build_scripted_props.py` with `scripted_kit.py`
    and `prop_library.py`). No blank signs, book covers or plain boxes: every sign carries real lettering
    (`props/paint_prop_pictures.py`; fonts and their OFL licences in `props/fonts/`), and the painter writes
    `lettering-sizes.json` before the builder runs. Check lettering reads at phone size
-   (`props/readability_test.py`, `props/make_sheet.py`).
-3. The street: `build_street.py --out FOLDER --name NAME` (it refuses to overwrite without `--replace`).
-4. People: `paper-film/blender/figures/build_figures.py` (waiting men, walkers; cloth from
+   (`props/readability_test.py`, `props/make_sheet.py`). Every prop gets a role and an owner too.
+3. The street: `build_street.py --out FOLDER --name NAME` (it refuses to overwrite without `--replace`). Give its objects roles
+   and seat everything on the ground height (`pk.seat_on_ground`).
+4. People (each with a role and an owner): `paper-film/blender/figures/build_figures.py` (waiting men, walkers; cloth from
    `fetch_cloth_textures.py`). Check them lit by a lamp from the camera's side (`figure_sheet.py`): that light
    showed bald-looking heads. Dark matt hair, collars up, the back of each head darker than its coat.
 5. A second place's props: `paper-film/blender/inflation-chapter-2-newcomers/props/` (built with `--choices`,
@@ -88,6 +106,18 @@ Copy the pit village as the pattern (`paper-film/blender/pit-village/`):
    Name each view's kinds of shot (still_life, crowd, overview, interior, dark_subject) and the surfaces
    things stand on (a counter as well as the floor). Check it:
    `python3 calculators/place_facts.py check place-facts.json`.
+
+## 2b. Check the place (preflight `place`)
+
+A place that is built but flat is not finished, and a model that passes the model lint can still be three plain boxes.
+1. `explainer-film-place finish --scene SET.blend --settings place-settings.json --save-as FINISHED.blend`, then
+   `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`.
+2. `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend` must PASS before any view is drawn.
+   It fails when a material or the scene lacks a required treatment (normal map, displacement, dirt, grime, weathering,
+   wetness, cracks, edge wear, moss, rust, rubbish, plants), when a part floats, when a size is wrong, or when the audit is
+   stale. The order is: `shots` (plan the views), build, `place`, then `plates`.
+3. The steps, the shortcuts that fail and the live-Blender route are in
+   `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/the-required-steps.md`.
 
 ## 3. Plan each view by calculation, before drawing it (preflight `shots`)
 
@@ -123,7 +153,7 @@ Copy the pit village as the pattern (`paper-film/blender/pit-village/`):
 
 1. Write the shot's assemble script (pattern: `pit-village/assemble_notice_corner.py`; shared steps in
    `pit-village/set_dressing.py`: `place_prop` stands a prop on the first surface a ray straight down meets,
-   `light_reaches` limits a light to some objects, `glow_material`, `brazier_fire`, `render`,
+   give every object it places a role (`place_role`), `light_reaches` limits a light to some objects, `glow_material`, `brazier_fire`, `render`,
    `export_for_film`). Use the planned camera from step 3.
 2. **Write the check file from the scene**, not by hand. Only the story roles are yours, in a short shot
    list (subject, support, story, work, and any groups you merge, split or add):
@@ -152,8 +182,9 @@ Copy the pit village as the pattern (`paper-film/blender/pit-village/`):
 ## 5. Draw the plate and export the set (preflight `plates`)
 
 - Draw the plate from the start of the slide, with the lens the planner gave (the notice corner: 64.4 degrees
-  against the film's 60.4), 1536 x 2730, with EEVEE: about 6 to 11 minutes. A 540 x 960 preview takes about a
-  minute.
+  against the film's 60.4), 1536 x 2730, with the renderer rule: EEVEE only where lamps, windows, lanterns and fires are off (about 6 to 11 minutes
+  under a virtual screen; a 540 x 960 preview about a minute); where they are lit, Cycles on a rented card
+  (`explainer-film-place renderer-for` says which, `render` draws it; about 40 s for a 2400 x 1600 final on a card).
 - Check its render log before anything else: `python3 calculators/plan_lights.py render-log RENDER.log`
   refuses a plate drawn with a shadow fault.
 - Draw people so they cast no long shadows (only a small soft shadow under their feet): the painter leaves
@@ -178,6 +209,9 @@ Copy the pit village as the pattern (`paper-film/blender/pit-village/`):
    only each story prop's `paint_as` words in the check file (what it is, its colour, its state, what it must
    not become) and the short brief; the rest of the prompt is built from the template (every person counted;
    far walkers "flat dark shapes with no pale spots"; no flames, smoke, glows or new shadows).
+   **Wet or dusk places:** the template's words "matte painted finish" and "never puddles or reflections" make the painter
+   remove wet ground (a wet street came back dry). Change them for that view, so the painted finish keeps the sheen of wet
+   ground, its puddles, mirrored lights, joints and gutters (or use `paint_request.py`'s `--keep-wetness` when it exists).
 2. **The price.** Prices change between plan and purchase (Flux 3 edit was 2.4 US cents a megapixel when
    planned and 4.8 a day later, lesson 139): read fal's live price, then
    `python3 calculators/paint_request.py price --rate-cents CENTS` (the returned picture and every picture sent,
@@ -264,6 +298,11 @@ const sky = skyCard(kit, projection, painting, projector);   // the painted sky 
   project's film kit has everything.
 
 ## Traps (and the tool that catches each now)
+
+- A flat, clean model passes the model lint (a hut of three plain boxes got PASS): run the place audit (`explainer-film-preflight place`).
+- A stale audit: the scene was saved again after it, so the facts no longer match (`place` compares the scene's hash).
+- Wear that vanishes on dark, edge-on walls at film size: lean on shape, normal maps and plants, and look at a 100 percent
+  crop and a phone-sized one (`explainer-film-place measure`, `crops`).
 
 - Never put a picture program's lettering on screen; use the set's own lettered props (`paint_request.py prompt`).
 - A turn during a move slides where the lines meet across the frame: slide only (`camera_audit.py --built-set`).

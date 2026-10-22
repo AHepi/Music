@@ -1,0 +1,29 @@
+{
+ "about": "A template for a place's own facts table, which the scale check reads beside place-kit/data/real_world_facts.json. Copy it, replace the two sample rows, and add one row for every size the place is built to. Every number says its unit, its kind (measured, judged or invented), its source in plain words and a confidence (strong, weak or guess). A number from memory is a guess until a real source confirms it. Facts set the size; the style note sets how much detail.",
+ "facts": [
+  {
+   "id": "door_height",
+   "what": "height of a doorway for a person",
+   "applies_to_role": "door.*",
+   "dimension": "height",
+   "min": 1.6,
+   "max": 1.9,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "common building practice, from memory; replace with a source for the period and place",
+   "confidence": "weak"
+  },
+  {
+   "id": "cart_gauge",
+   "what": "distance between the two wheel tracks of a cart",
+   "applies_to_role": "ground.dirt_road",
+   "dimension": "gauge",
+   "min": 1.2,
+   "max": 1.5,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "from memory; the coal-mine yard's roads used 1.24 m; confirm with a source for the period",
+   "confidence": "weak"
+  }
+ ]
+}

@@ -1,5 +1,10 @@
 # 22 Blender MCP notes: detailed models
 
+**Where the full treatment lives.** The skill `surfaces-wear-and-construction` holds the surface-and-wear pass, the
+construction check and the audit for every place, set or prop built in Blender. These notes are the per-model to-do list
+for the card route (a model saved as .glb and filmed by three.js). Where a note here and that skill disagree, the line
+below each one says which route it is for.
+
 These notes are for the helpers who will rebuild the chapter 2 models: the two 1915 munitions works,
 the model town, the reviewer's desk and the loose props. The viewer asked for "significantly higher
 quality" and said: "Blender has an official MCP to use for this ... It'll teach you how to use it to
@@ -272,7 +277,10 @@ the mesh surface, but merely changes the shading"); `manual/render/shader_nodes/
 (Strength); `manual/addons/scene_gltf2.rst` (Normal Map: "Image Texture ... Normal Map node ... Normal
 input ... Color Space ... Non-Color ... must remain on ... Tangent Space ... will copy the strength
 setting into the glTF").
-- glTF and three.js have **no displacement**. Displacement must be real geometry (B9) or nothing.
+- glTF and three.js have **no displacement**. Displacement must be real geometry (B9) or nothing. This is true for the
+  card-model route (a .glb into three.js). For plates drawn in Blender, displacement works in Cycles (tested in the
+  cookbook's relief tests, and used in the coal-mine yard) on a dense or adaptive mesh; in EEVEE it was not tested here, so
+  draw a small test under a virtual screen before relying on it. See the skill `surfaces-wear-and-construction`.
 - Normal maps: keep the `Image Texture (Non-Color) → Normal Map (Tangent) → Principled Normal` chain
   (which `model_kit.material` already uses). Raise `normal_strength` to 1.5 to 2.5 for brick and setts:
   under the low warm lamp, mortar lines are what make brick read as brick. Export
@@ -323,7 +331,8 @@ bpy.ops.object.bake(type='AO', margin=8, use_clear=True)
 # (c) high-to-low: put the detailed copy and the low copy in place, select high, then make low active
 bpy.ops.object.bake(type='NORMAL', use_selected_to_active=True, cage_extrusion=0.02, max_ray_distance=0.05)
 ```
-**Curvature and edge wear:** Pointiness is Cycles-only and not baked by a bake type of its own. Bake
+**Curvature and edge wear:** (For wear that must show in EEVEE, use the place kit's masks, which need no Bevel, AO or
+Pointiness node; those show only in Cycles. Otherwise bake it, as here.) Pointiness is Cycles-only and not baked by a bake type of its own. Bake
 it as `type='EMIT'` with Geometry > Pointiness → ColorRamp (0.5 to 0.55) → Emission. Then multiply it
 into the base-colour picture in Pillow (lighter worn edges on stone and painted iron, darker dirt in
 recesses from the AO map). This is untested here and costs one extra bake per part.
@@ -509,7 +518,10 @@ Out of focus in the foreground, so **silhouette is everything**.
    `bpy.ops.wm.read_homefile(use_empty=True, use_factory_startup=True)`. `model_kit.reset()` uses the
    refused call. That is fine when the build scripts run in their own Python, but they fail if you run
    them through `execute_blender_code`. Patch `reset()` only in your own copy.
-2. **Set CYCLES and CPU before any render or bake.** EEVEE needs a GPU here and takes Blender down.
+2. **Set CYCLES and CPU before any render or bake** (on the bare `bpy` route for the film's card models). EEVEE needs a GPU
+   here and takes Blender down. Pictures of whole places use the renderer rule instead: Cycles where lights are lit, EEVEE under
+   a virtual screen where they are off, and rented cards for the long jobs (`rendering-on-rented-cards.md` in the skill
+   `surfaces-wear-and-construction`).
    The MCP thumbnail tool "temporarily overrides settings", but `render_viewport_to_path` uses yours.
 3. **The front is -y.** Blender -y becomes three.js +z (towards the camera). The town script converts
    with `at(x, z, y)`: keep using it.
@@ -536,7 +548,8 @@ Out of focus in the foreground, so **silhouette is everything**.
     modifier, or `mesh.set_sharp_from_angle`.
 12. **Vertex colours are all-or-nothing per material** in three.js. If one mesh has COLOR_0 and another
     with the same material does not, results differ (B14).
-13. **Texture size cap is 1024**, and JPEG suits colour. Normal maps are JPEG today (q 94) to save
+13. **Texture size cap is 1024** (a .glb budget; plate work uses 1024 to 2048 pixel maps, and 2k Poly Haven pictures near the
+    camera), and JPEG suits colour. Normal maps are JPEG today (q 94) to save
     size. That is acceptable under film grain, but **baked bevel-edge normals and AO should be PNG**,
     because JPEG blocks show up on smooth gradients.
 14. **`box_map` uses `obj.location` and `obj.scale` but not rotation.** For rotated parts (copings

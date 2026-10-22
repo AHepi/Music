@@ -25,6 +25,19 @@ never changed) and 81 new files.
   projection test, lockout test, house sample, chapter 2 for newcomers: the estimated timeline and the W1 to W3
   check files; chapter 1's captions and transcripts); `.gitignore`.
 
+## Place kit (new in 1.4.0)
+
+`place-kit/` is the plugin's own work. It was carried on 22 October 2026 from the project's procedural-textures work (the
+weathering kit, the wet street, the garden and the cookbook) and from the coal-mine scene's ground code, and made generic: no
+place, street or object name from those projects sits in its code (a lint checks). What was carried, what was rewritten and
+what was left out is listed in `place-kit/SOURCES-AND-LICENCES.md`. Nothing from the austerity film kit changed, and nothing
+in the film kit's own files was replaced by it.
+
+What waits (said plainly): the lighter plan masks of the wear layers have only been tried on small scenes, Cycles with the
+kit was not run on a real village, the generic rented-card client was tested only against a pretend transport, and the painter
+template's wet-place words are changed by hand unless `paint_request.py` has the `--keep-wetness` option (see
+`place-kit/DEVIATIONS.md` for what changed from the design and why).
+
 ## Changed in the plugin only (keep these; merge by hand if the film kit changes the same file)
 
 | File | What the plugin has that the film kit doesn't |

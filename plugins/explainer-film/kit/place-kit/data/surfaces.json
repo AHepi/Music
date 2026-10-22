@@ -1,0 +1,3255 @@
+{
+ "about": "One entry per surface id: a recipe that makes a material. Every number is {value, unit, kind, source}; check-presets fails an entry without kind and source. height_recipe names a function in place_kit/surfaces/heights.py (soft large shapes, nothing under about 5 mm). tile_metres is the real size of one picture repeat. uv_method: box (one box mapping in metres), planar (from above), plank (u along the length, v across, random offset per plank). normal_strength is the Normal Map node strength (multiplied by 0.6 where displacement is on). displacement_depth_metres is used only for roles with displace true. Most values are first tries marked judged (from the garden and mine work) or invented; judge by looking.",
+ "surfaces": {
+  "dirt_road": {
+   "label": "packed dirt road, clods and a few big dark patches",
+   "height_recipe": "earth_clods",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) ground 1.0, softened for ruts"
+   },
+   "displacement_depth_metres": {
+    "value": 0.06,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#6e5b45",
+      "#5c4a38",
+      "#7b6850",
+      "#4f4233"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "brown_mud_dry",
+   "real_scale_note": "a 2 m tile; soft clods blurred 1 to 2 px at 2048"
+  },
+  "packed_earth": {
+   "label": "trodden earth, a little drier",
+   "height_recipe": "earth_clods",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": {
+    "value": 0.03,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#78664f",
+      "#695842",
+      "#86735a"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "brown_mud_02",
+   "real_scale_note": ""
+  },
+  "mud": {
+   "label": "wet mud with slick patches",
+   "height_recipe": "earth_clods",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": {
+    "value": 0.06,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.3,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the wet street recipe"
+    },
+    "high": {
+     "value": 0.7,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#4a3b2c",
+      "#3d3125",
+      "#574634"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {
+    "wetness": 1.3
+   },
+   "polyhaven": "brown_mud",
+   "real_scale_note": "roughness about 0.3 where wet"
+  },
+  "forest_floor": {
+   "label": "needles, leaf litter and moss on soil",
+   "height_recipe": "earth_clods",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": {
+    "value": 0.04,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#4e4631",
+      "#5b4f35",
+      "#3f3a29",
+      "#675a3c"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "forrest_ground_01",
+   "real_scale_note": ""
+  },
+  "grass": {
+   "label": "short grass over soil (a ground picture; tufts are separate pieces)",
+   "height_recipe": "soft_noise",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#5f6b3a",
+      "#4f5c30",
+      "#6f7a45"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "leafy_grass",
+   "real_scale_note": ""
+  },
+  "gravel_path": {
+   "label": "gravel path",
+   "height_recipe": "gravel_bits",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": {
+    "value": 0.04,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.7,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#8a8070",
+      "#766d5f",
+      "#9b917f"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "gravel_embedded",
+   "real_scale_note": "mine gravel depth 4"
+  },
+  "cobble_paving": {
+   "label": "rounded stones in joints",
+   "height_recipe": "cobbles",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) stone 0.8 to 1.0"
+   },
+   "displacement_depth_metres": {
+    "value": 0.03,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#7a756c",
+      "#6a665f",
+      "#8b857a"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "cobblestone_01",
+   "real_scale_note": "joints darker, duller and sloped (street lesson)"
+  },
+  "flagstone": {
+   "label": "big flat stones",
+   "height_recipe": "stone_blocks",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#857f75",
+      "#736e65",
+      "#968f84"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "timber_weathered": {
+   "label": "old silvered timber with grain and checks",
+   "height_recipe": "planks_grain",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "plank",
+   "grain_axis": "u",
+   "normal_strength": {
+    "value": 1.5,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) planks 1.5"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.65,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#7a6b58",
+      "#6a5d4c",
+      "#8c7f6b",
+      "#5a4e40"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.006,
+     0.012
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": "u along the length, v across"
+  },
+  "timber_planks": {
+   "label": "plank boards",
+   "height_recipe": "planks_grain",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "plank",
+   "grain_axis": "u",
+   "normal_strength": {
+    "value": 1.5,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) planks 1.5"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#7d6347",
+      "#6b5239",
+      "#8c7152"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.006,
+     0.012
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": "mirror or rotate some planks"
+  },
+  "timber_beam": {
+   "label": "square timber beams and posts",
+   "height_recipe": "planks_grain",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "plank",
+   "grain_axis": "u",
+   "normal_strength": {
+    "value": 1.2,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#5b4630",
+      "#4b3a28",
+      "#6a5339"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.006,
+     0.012
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "log_wall": {
+   "label": "round logs",
+   "height_recipe": "log_bark",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "plank",
+   "grain_axis": "u",
+   "normal_strength": {
+    "value": 1.2,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.7,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#6a5238",
+      "#5a4430",
+      "#7a6044"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "wattle_and_daub": {
+   "label": "plaster over woven sticks",
+   "height_recipe": "plaster_blotch",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) plaster 1.0"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.75,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#b8a98a",
+      "#a89977",
+      "#c4b79a"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": "clay_plaster",
+   "real_scale_note": ""
+  },
+  "plaster_lime": {
+   "label": "lime plaster",
+   "height_recipe": "plaster_blotch",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) plaster 1.0"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.75,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#c9bda5",
+      "#bab092",
+      "#d6ccb5"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": "clay_plaster",
+   "real_scale_note": ""
+  },
+  "cob_wall": {
+   "label": "earth walls",
+   "height_recipe": "plaster_blotch",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#9a8666",
+      "#8a7656",
+      "#a9966f"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "stone_rubble": {
+   "label": "rough fitted stones",
+   "height_recipe": "stone_blocks",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) stone 0.8 to 1.0"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#8a857b",
+      "#76726a",
+      "#9b968a",
+      "#6a665e"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": "castle_wall_slates",
+   "real_scale_note": ""
+  },
+  "stone_dressed": {
+   "label": "cut stone blocks",
+   "height_recipe": "stone_blocks",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.55,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#9a948a",
+      "#85807a"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "thatch": {
+   "label": "bunched straw or reed, ridges down the slope",
+   "height_recipe": "thatch_bunches",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) roof 0.9, plus the design: x 0.6 when displacement is on"
+   },
+   "displacement_depth_metres": {
+    "value": 0.05,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#8a7646",
+      "#74633a",
+      "#9a8554",
+      "#5c4e30"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "thatch_roof_angled",
+   "real_scale_note": "displacement 4 to 6 cm near the camera"
+  },
+  "shingle_wood": {
+   "label": "wooden shingles in rows",
+   "height_recipe": "shingle_rows",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) roof tile 0.9"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.7,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#6f5a43",
+      "#5f4d39",
+      "#7e6a50"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "roof_tile_clay": {
+   "label": "clay roof tiles",
+   "height_recipe": "tile_rows",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) roof tile 0.9"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.55,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#a05a3a",
+      "#8d4d30",
+      "#b06a46"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "clay_roof_tiles",
+   "real_scale_note": "UV on the prototype tile"
+  },
+  "slate": {
+   "label": "slate roof",
+   "height_recipe": "tile_rows",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.5,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#4d5258",
+      "#42474d",
+      "#5a6066"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "castle_wall_slates",
+   "real_scale_note": ""
+  },
+  "iron_forged": {
+   "label": "dark forged iron",
+   "height_recipe": "iron_pits",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the coal mine yard depths metal 1.6"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.45,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#3a3a3c",
+      "#2e2e30",
+      "#48484b"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.004,
+     0.008
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {
+    "rust": 1.2
+   },
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "rope": {
+   "label": "twisted rope",
+   "height_recipe": "rope_twist",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "plank",
+   "grain_axis": "u",
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#a08a62",
+      "#8a7650"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "straw": {
+   "label": "loose straw",
+   "height_recipe": "straw_strands",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#c2a85e",
+      "#b09650",
+      "#d0b86e"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "hay": {
+   "label": "packed hay",
+   "height_recipe": "straw_strands",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#b8a258",
+      "#a69048"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "wicker": {
+   "label": "woven basket cane",
+   "height_recipe": "fabric_weave",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.7,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#9a7a4a",
+      "#866a3e"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "cloth_sack": {
+   "label": "coarse cloth",
+   "height_recipe": "fabric_weave",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.7,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#b0a080",
+      "#9a8c6e"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "leather": {
+   "label": "worn leather",
+   "height_recipe": "soft_noise",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.7,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.5,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#5a3d2a",
+      "#4a3222"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "ceramic_glazed": {
+   "label": "glazed clay",
+   "height_recipe": "soft_noise",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.4,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.25,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#8a5a3c",
+      "#6e4a30"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "bark": {
+   "label": "rough bark",
+   "height_recipe": "log_bark",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31) bark 0.9"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#4a3d30",
+      "#3b3026",
+      "#58493a"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": "bark_brown_01",
+   "real_scale_note": ""
+  },
+  "foliage": {
+   "label": "leaf cards",
+   "height_recipe": "soft_noise",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.4,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#4a6a35",
+      "#3b5a2b",
+      "#5b7a40"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "water_still": {
+   "label": "still water with a gentle swell",
+   "height_recipe": "wave_swell",
+   "tile_metres": {
+    "value": 4.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.3,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.05,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.25,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#2c3b36",
+      "#26332f"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": "roughness low"
+  },
+  "water_sea": {
+   "label": "open water with swell",
+   "height_recipe": "wave_swell",
+   "tile_metres": {
+    "value": 8.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.4,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.05,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.3,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#26454f",
+      "#1f3a44"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "glass_old": {
+   "label": "old glass with smudges",
+   "height_recipe": "soft_noise",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.2,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.1,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.35,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#9db0ac",
+      "#8ca09c"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "brick": {
+   "label": "fired brick in courses",
+   "height_recipe": "brick_courses",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the coal mine yard depths brick 3"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.65,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#8a4a36",
+      "#7a3f2e",
+      "#9a5640"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": "brick_moss_001",
+   "real_scale_note": ""
+  },
+  "concrete": {
+   "label": "poured concrete",
+   "height_recipe": "plaster_blotch",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.7,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.92,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#8e8d88",
+      "#7d7c77",
+      "#9c9b96"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "tarmac": {
+   "label": "laid tarmac",
+   "height_recipe": "gravel_bits",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.75,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#3a3a3a",
+      "#2e2e2e",
+      "#464646"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "sand": {
+   "label": "sand with ripples",
+   "height_recipe": "sand_ripples",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": {
+    "value": 0.02,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#c2ad82",
+      "#b09b72",
+      "#d0bc92"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "snow": {
+   "label": "snow",
+   "height_recipe": "soft_noise",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.6,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.5,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#e6eaee",
+      "#d4dae0"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "rock_ore": {
+   "label": "rock or ore ground",
+   "height_recipe": "rock_facets",
+   "tile_metres": {
+    "value": 2.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.0,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the coal mine yard depths slate and gravel 4"
+   },
+   "displacement_depth_metres": {
+    "value": 0.04,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the coal mine yard depths and the design"
+   },
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#55524c",
+      "#45423d",
+      "#66635b"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "steel_plate": {
+   "label": "steel plate",
+   "height_recipe": "iron_pits",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the coal mine yard depths metal 1.6"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.4,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.75,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#6a6e72",
+      "#585c60",
+      "#7a7e82"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.004,
+     0.008
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {
+    "rust": 1.0
+   },
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "painted_metal": {
+   "label": "painted metal",
+   "height_recipe": "iron_pits",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.6,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.35,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.7,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#3f5a6a",
+      "#34495a"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.004,
+     0.008
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {
+    "rust": 0.8
+   },
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "tile_floor": {
+   "label": "floor tiles",
+   "height_recipe": "tile_rows",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.7,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.4,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#9a6a4a",
+      "#8a5c3e"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "carpet_fabric": {
+   "label": "carpet and heavy cloth",
+   "height_recipe": "fabric_weave",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "planar",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.6,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the wet street recipe"
+    },
+    "high": {
+     "value": 0.98,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#6a3a3a",
+      "#5a2e2e"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": ""
+  },
+  "generic_wood": {
+   "label": "any wood (fallback)",
+   "height_recipe": "planks_grain",
+   "tile_metres": {
+    "value": 1.0,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 1.2,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.65,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#7a6246",
+      "#665038",
+      "#8a7050"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.006,
+     0.012
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": "fallback"
+  },
+  "generic_stone": {
+   "label": "any stone (fallback)",
+   "height_recipe": "stone_blocks",
+   "tile_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.9,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.6,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.9,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#8a857b",
+      "#76726a",
+      "#9b968a"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": "fallback"
+  },
+  "generic_metal": {
+   "label": "any metal (fallback)",
+   "height_recipe": "iron_pits",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the texture cookbook relief tests tile sizes"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.8,
+    "unit": "Normal Map strength",
+    "kind": "judged",
+    "source": "the coal mine yard depths"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.4,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.8,
+     "unit": "roughness",
+     "kind": "judged",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#5a5a5c",
+      "#4a4a4c"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": {
+    "value": [
+     0.004,
+     0.008
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job strengths (log 31)"
+   },
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": "fallback"
+  },
+  "generic_cloth": {
+   "label": "any cloth (fallback)",
+   "height_recipe": "fabric_weave",
+   "tile_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "uv_method": "box",
+   "grain_axis": null,
+   "normal_strength": {
+    "value": 0.7,
+    "unit": "Normal Map strength",
+    "kind": "invented",
+    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+   },
+   "displacement_depth_metres": null,
+   "roughness": {
+    "low": {
+     "value": 0.85,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "high": {
+     "value": 0.95,
+     "unit": "roughness",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "map": "height"
+   },
+   "colour": {
+    "palette": {
+     "value": [
+      "#a89a7a",
+      "#8f8264"
+     ],
+     "unit": "sRGB hex colours",
+     "kind": "invented",
+     "source": "the plugin 1.4.0 design: a first try, judge by looking"
+    },
+    "variation": {
+     "per_object": {
+      "value": 0.08,
+      "unit": "share of value",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     },
+     "macro_scale_metres": {
+      "value": 3.0,
+      "unit": "metres",
+      "kind": "invented",
+      "source": "the plugin 1.4.0 design: a first try, judge by looking"
+     }
+    }
+   },
+   "bevel_metres": null,
+   "dials": {},
+   "polyhaven": null,
+   "real_scale_note": "fallback"
+  }
+ }
+}

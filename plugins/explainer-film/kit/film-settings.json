@@ -4233,5 +4233,937 @@
    "kind": "judged",
    "source": "The adversarial test of the preflight (log 35): one entry {\"check\": \"e\"} matched every one of the script's 12 findings and opened the paid recording. A real acceptance names one problem (a page, a view), sometimes the same problem seen by two tools; a broader entry stops the stage (exit 2)."
   }
+ },
+ "place_surfaces": {
+  "about": "The surface pass of the place kit: map sizes, normal-map checks, displacement, bevels and how repeats are hidden. Read by place_kit/surfaces and the audit.",
+  "map_size_pixels": {
+   "value": 1024,
+   "unit": "pixels a side",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): the garden check wanted 1024 and more"
+  },
+  "map_size_near_camera_pixels": {
+   "value": 2048,
+   "unit": "pixels a side",
+   "kind": "judged",
+   "source": "the texture cookbook (procedural-textures/cookbook): height pictures blurred 1 to 2 px at 2048"
+  },
+  "map_size_quick_pixels": {
+   "value": 256,
+   "unit": "pixels a side",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): a trial size for this slow machine; a final built from it fails the audit"
+  },
+  "normal_map_size_min_pixels": {
+   "value": 1024,
+   "unit": "pixels a side",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): normal-map check (1024 px)"
+  },
+  "normal_strength_with_displacement_factor": {
+   "value": 0.6,
+   "unit": "times the normal strength",
+   "kind": "judged",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): normal strength x 0.6 where displacement is on (decision D7, not yet proved by a picture of ours)"
+  },
+  "steepest_one_percent_tilt_degrees": {
+   "value": [
+    26,
+    34
+   ],
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): wood_maps.calibrate_height"
+  },
+  "height_blur_pixels_at_2048": {
+   "value": [
+    1,
+    2
+   ],
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the texture cookbook (procedural-textures/cookbook): soft clods, no micro pores"
+  },
+  "smallest_feature_metres": {
+   "value": 0.005,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): style note, nothing under about 5 mm"
+  },
+  "normal_blue_mean_min": {
+   "value": 0.85,
+   "unit": "share of 1",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): nm_struct.py"
+  },
+  "normal_red_green_mean_band": {
+   "value": [
+    0.47,
+    0.53
+   ],
+   "unit": "share of 1",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): nm_struct.py"
+  },
+  "normal_direction_correlation_min": {
+   "value": 0.25,
+   "unit": "correlation",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): nm_dir.py (a real map read +0.55 to +0.87)"
+  },
+  "normal_slope_energy_min": {
+   "value": 0.02,
+   "unit": "mean absolute slope of the map on that axis",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): a map with less slope on one axis says nothing about that axis, so that axis is reported \"not informative\" (the garden plank map had almost no X slope)"
+  },
+  "normal_maps_per_material_max": {
+   "value": 4,
+   "unit": "pictures",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): nm_struct.py"
+  },
+  "bump_leftover_strength_max": {
+   "value": 0.3,
+   "unit": "strength",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): a leftover Bump above 0.3 not fed by the Normal Map fights it"
+  },
+  "uv_mirrored_face_share_max": {
+   "value": 0.02,
+   "unit": "share of faces",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): uv_check.py"
+  },
+  "displacement_dicing_rate_pixels": {
+   "value": [
+    1,
+    2
+   ],
+   "unit": "pixels",
+   "kind": "measured",
+   "source": "the texture cookbook (procedural-textures/cookbook): relief tests"
+  },
+  "displacement_mesh_edge_metres_max": {
+   "value": 0.3,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): a mesh with longer edges is \"coarse\" for displacement unless it is subdivided"
+  },
+  "displacement_graded_grid_near_metres": {
+   "value": 0.12,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): graded grid near the camera"
+  },
+  "displacement_graded_grid_growth": {
+   "value": 1.09,
+   "unit": "times a step",
+   "kind": "judged",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): graded grid"
+  },
+  "displacement_graded_grid_far_metres": {
+   "value": 5.0,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): graded grid"
+  },
+  "bevel_metres": {
+   "wall": {
+    "value": [
+     0.008,
+     0.015
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job (procedural-textures/garden/character, log 31): builder briefs"
+   },
+   "trim": {
+    "value": 0.006,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job (procedural-textures/garden/character, log 31): builder briefs"
+   },
+   "plank": {
+    "value": [
+     0.006,
+     0.012
+    ],
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the garden character job (procedural-textures/garden/character, log 31): wood_geo.py chamfer"
+   }
+  },
+  "repeat_hiding": {
+   "second_scale": {
+    "value": 0.79,
+    "unit": "times the first scale",
+    "kind": "judged",
+    "source": "the texture cookbook (procedural-textures/cookbook): repeat breaker"
+   },
+   "offset": {
+    "value": [
+     0.37,
+     0.58
+    ],
+    "unit": "tile fractions",
+    "kind": "judged",
+    "source": "the texture cookbook (procedural-textures/cookbook): repeat breaker"
+   },
+   "blend_noise_scale": {
+    "value": 0.17,
+    "unit": "noise scale",
+    "kind": "judged",
+    "source": "the texture cookbook (procedural-textures/cookbook): repeat breaker"
+   }
+  },
+  "roughness_dry_wet": {
+   "dry": {
+    "value": 0.9,
+    "unit": "roughness",
+    "kind": "measured",
+    "source": "the wet street work (procedural-textures/street_wet, logs 18 and 22): wet recipe, dry sett roughness about 0.9"
+   },
+   "wet": {
+    "value": 0.3,
+    "unit": "roughness",
+    "kind": "measured",
+    "source": "the wet street work (procedural-textures/street_wet, logs 18 and 22): wet recipe, wet roughness about 0.3"
+   }
+  },
+  "glb_surfaces_fail_share": {
+   "value": 0.5,
+   "unit": "share of triangle area",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): model_lint --surfaces fails a .glb when more than this share of its area has no normal map, constant roughness and no vertex colours"
+  }
+ },
+ "place_audit": {
+  "about": "What the place audit (place_audit_check.py) allows. Thresholds live here, never in the code; the audit only gathers facts (D2 of the 1.4.0 design).",
+  "unknown_role_objects_allowed": {
+   "value": 0,
+   "unit": "objects",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): every visible mesh gets a role"
+  },
+  "fallback_role_share_max": {
+   "value": 0.1,
+   "unit": "share of objects",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): objects the kit could only give a fallback role (prop.generic); more than this is a look, far more a fail"
+  },
+  "fallback_role_share_fail": {
+   "value": 0.5,
+   "unit": "share of objects",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): above this share the roles say nothing"
+  },
+  "required_treatments_missing_allowed": {
+   "value": 0,
+   "unit": "treatments",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): decision D3"
+  },
+  "layer_amount_zero_needs_reason": {
+   "value": true,
+   "unit": "rule",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): a layer with amount 0 and no off entry fails"
+  },
+  "plain_box_share_max": {
+   "value": 0.15,
+   "unit": "share of objects",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): objects that are plain six-sided boxes with no bevel"
+  },
+  "off_share_max": {
+   "value": 0.25,
+   "unit": "share of required role-and-treatment pairs",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): more off entries than this is a look; each off entry is reported as KNOWN with its reason"
+  },
+  "quick_allowed_for_final": {
+   "value": false,
+   "unit": "rule",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): output made with --quick is for trials only"
+  },
+  "layer_amount_floor_by_look": {
+   "kept": {
+    "value": 0.15,
+    "unit": "amount",
+    "kind": "judged",
+    "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25): a layer with an amount this small does nothing a viewer can see"
+   },
+   "lived_in": {
+    "value": 0.25,
+    "unit": "amount",
+    "kind": "judged",
+    "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25)"
+   },
+   "neglected": {
+    "value": 0.4,
+    "unit": "amount",
+    "kind": "judged",
+    "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25)"
+   },
+   "derelict": {
+    "value": 0.5,
+    "unit": "amount",
+    "kind": "judged",
+    "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25)"
+   }
+  },
+  "plants_min_per_100_square_metres": {
+   "value": 20,
+   "unit": "pieces",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): weeds and tufts per 100 square metres of ground (the street calibration: about 1 percent cover)"
+  },
+  "litter_min_per_100_square_metres": {
+   "value": 30,
+   "unit": "pieces",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): leaves, straw, sticks, dung lumps per 100 square metres of ground"
+  },
+  "triangles_total_max": {
+   "value": 6000000,
+   "unit": "triangles",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): the card draws 1.5 million per builder comfortably"
+  },
+  "triangles_per_builder_max": {
+   "value": 1500000,
+   "unit": "triangles",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): builder brief"
+  },
+  "scatter_pieces_max": {
+   "value": 400000,
+   "unit": "pieces",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): a cap so a scatter cannot fill the memory"
+  },
+  "draw_seconds_final_max": {
+   "value": 90,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): final draw time cap"
+  },
+  "card_memory_gigabytes_max": {
+   "value": 12,
+   "unit": "gigabytes",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): card memory cap"
+  }
+ },
+ "place_construction": {
+  "about": "The construction check: every visible part carried from the ground up, nothing floating, sizes and doorways. Numbers from the garden bridge checks.",
+  "touch_metres": {
+   "value": 0.005,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): struct.py touching"
+  },
+  "overlap_centimetres_min": {
+   "value": 4,
+   "unit": "centimetres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): a joined member overlaps its carrier by at least this"
+  },
+  "rest_patch_square_centimetres_min": {
+   "value": 16,
+   "unit": "square centimetres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): struct.py rest patch"
+  },
+  "rest_patch_reach_millimetres": {
+   "value": 8,
+   "unit": "millimetres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): struct.py rest patch"
+  },
+  "float_gap_millimetres_fail": {
+   "value": 5,
+   "unit": "millimetres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): a gap over this is floating"
+  },
+  "z_fight_gap_millimetres": {
+   "value": 1,
+   "unit": "millimetres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): coplanar faces closer than this fight"
+  },
+  "support_span_metres_max": {
+   "value": 1.38,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): no plank span between supports over 1.4 m"
+  },
+  "ground_seat_metres_tolerance": {
+   "value": 0.02,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): how far above or below the ground an object seated on it may be"
+  },
+  "doorway_floor_gap_metres_max": {
+   "value": 0.3,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): a doorway needs a floor within this below the sill (the coal-mine engine house had a door onto nothing)"
+  },
+  "walk_ray_step_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): walk rays"
+  },
+  "walk_step_metres_max": {
+   "value": 0.02,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): walk rays"
+  },
+  "walk_slope_max": {
+   "value": 0.05,
+   "unit": "rise over run",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): walk rays"
+  },
+  "peg_seat_millimetres": {
+   "value": 1,
+   "unit": "millimetres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): seat.py pegs"
+  },
+  "inside_out_parts_allowed": {
+   "value": 0,
+   "unit": "parts",
+   "kind": "judged",
+   "source": "Scenario skills test on the street (73 inside-out parts found by hand-free checks), log 23"
+  },
+  "sample_spacing_metres": {
+   "value": 0.02,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): struct.py samples"
+  },
+  "parts_checked_max": {
+   "value": 4000,
+   "unit": "parts",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): above this the check samples fewer rays a part and says so"
+  }
+ },
+ "place_scale": {
+  "about": "The scale check: sizes against real-world numbers (data/real_world_facts.json plus the place's own facts).",
+  "warn_factor": {
+   "value": 1.0,
+   "unit": "times the range",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): outside the range is a look"
+  },
+  "fail_factor": {
+   "value": 1.5,
+   "unit": "times the range",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): beyond 1.5 times the range (or under 1/1.5) fails; a door 1.0 m high fails"
+  }
+ },
+ "place_wear": {
+  "about": "Wear: where it may go, how much, how big. The exact-zero gates and budgets are measured on the street and the painted plates.",
+  "exact_zero_gate_footfall": {
+   "value": 0.6,
+   "unit": "mask 0..1",
+   "kind": "measured",
+   "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25): growth gates (nothing grows on a worn track)"
+  },
+  "exact_zero_gate_crown": {
+   "value": 0.7,
+   "unit": "mask 0..1",
+   "kind": "measured",
+   "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25): growth gates"
+  },
+  "exact_zero_gate_keepclear": {
+   "value": 0.5,
+   "unit": "mask 0..1",
+   "kind": "measured",
+   "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25): growth gates"
+  },
+  "plants_in_puddles_allowed": {
+   "value": 0,
+   "unit": "plants",
+   "kind": "measured",
+   "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25): above_water gate"
+  },
+  "litter_clearance_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "measured",
+   "source": "the weathering kit re-check (procedural-textures kits/weathering, log 25): litter_dist"
+  },
+  "rubbish_on_crown_allowed": {
+   "value": 0,
+   "unit": "pieces",
+   "kind": "measured",
+   "source": "the wet street work (procedural-textures/street_wet, logs 18 and 22): rubbish mask"
+  },
+  "grime_area_share": {
+   "value": 0.25,
+   "unit": "share of an area",
+   "kind": "measured",
+   "source": "the wet street work (procedural-textures/street_wet, logs 18 and 22): more than a quarter is mush"
+  },
+  "grime_darkening_share": {
+   "value": 0.33,
+   "unit": "share darker",
+   "kind": "measured",
+   "source": "the wet street work (procedural-textures/street_wet, logs 18 and 22)"
+  },
+  "darkest_mark_min": {
+   "value": 0.1,
+   "unit": "luminance 0..1",
+   "kind": "measured",
+   "source": "the painted plates (procedural-textures kits/weathering, log 25)"
+  },
+  "mark_surround_min": {
+   "value": 0.18,
+   "unit": "luminance 0..1",
+   "kind": "measured",
+   "source": "the painted plates (log 25)"
+  },
+  "mark_dots_marks_size": {
+   "value": 5,
+   "unit": "picture dots",
+   "kind": "measured",
+   "source": "the painted plates (log 25): marks 5 dots at contrast 0.08"
+  },
+  "mark_dots_marks_contrast": {
+   "value": 0.08,
+   "unit": "luminance",
+   "kind": "measured",
+   "source": "the painted plates (log 25)"
+  },
+  "mark_dots_lines_size": {
+   "value": 3,
+   "unit": "picture dots",
+   "kind": "measured",
+   "source": "the painted plates (log 25): lines 3 dots at contrast 0.11"
+  },
+  "mark_dots_lines_contrast": {
+   "value": 0.11,
+   "unit": "luminance",
+   "kind": "measured",
+   "source": "the painted plates (log 25)"
+  },
+  "mark_dots_patches_size": {
+   "value": 15,
+   "unit": "picture dots",
+   "kind": "measured",
+   "source": "the painted plates (log 25): patches 15 dots at contrast 0.04"
+  },
+  "mark_dots_patches_contrast": {
+   "value": 0.04,
+   "unit": "luminance",
+   "kind": "measured",
+   "source": "the painted plates (log 25)"
+  },
+  "plan_mask_cell_metres": {
+   "value": 0.1,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): decision D4 (the lighter masks are not tested anywhere yet)"
+  },
+  "plan_mask_cell_metres_quick": {
+   "value": 0.5,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): decision D4"
+  },
+  "plan_mask_cells_across_max": {
+   "value": 1500,
+   "unit": "cells",
+   "kind": "judged",
+   "source": "the critic's review of the design: cell = max(0.10, extent / 1500)"
+  },
+  "plan_mask_time_budget_seconds": {
+   "value": 120,
+   "unit": "seconds",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): a mask run slower than this is reported, not hidden"
+  },
+  "wall_foot_height_metres": {
+   "value": 0.45,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the wet street work (procedural-textures/street_wet, logs 18 and 22): stone plinths 15 to 46 cm high hid a wall-foot band measured from the ground; measure it from each object's own lowest point"
+  },
+  "puddle_depth_shares": {
+   "value": [
+    0.4,
+    0.4,
+    0.2
+   ],
+   "unit": "shares",
+   "kind": "judged",
+   "source": "the wet street work (procedural-textures/street_wet, logs 18 and 22): wetness layer puddles by depth"
+  },
+  "shape_damage_bow_per_length_max": {
+   "value": 0.012,
+   "unit": "share of the length",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): planks bow, cup and twist a little (wood_geo.py)"
+  },
+  "shape_sibling_min_count": {
+   "value": 4,
+   "unit": "objects",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): varied planks and tiles"
+  },
+  "shape_sibling_copy_share_max": {
+   "value": 0.5,
+   "unit": "share of siblings",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): siblings of one role that are exact copies (same mesh and size)"
+  },
+  "ground_relief_metres_min": {
+   "value": 0.03,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): the yard ruts were 4 to 9 cm deep; a road with less relief than this reads flat"
+  },
+  "rut_depth_metres": {
+   "value": [
+    0.05,
+    0.15
+   ],
+   "unit": "metres",
+   "kind": "invented",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): yard ruts 4 to 9 cm; deeper for an unkept lane"
+  },
+  "cart_gauge_metres": {
+   "value": [
+    1.2,
+    1.5
+   ],
+   "unit": "metres",
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026): from memory, confirm in the facts table"
+  },
+  "hoof_dimple_spacing_metres": {
+   "value": [
+    0.8,
+    1.0
+   ],
+   "unit": "metres",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026)"
+  }
+ },
+ "place_measures": {
+  "about": "Picture measures (calculators/picture_measures.py): value range, detail energy, flat windows, palette, squint. Thresholds from the garden character round.",
+  "percentile_tolerance": {
+   "value": 0.03,
+   "unit": "luminance",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py measures"
+  },
+  "percentile_99_max": {
+   "value": 0.92,
+   "unit": "luminance",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "mean_saturation_tolerance": {
+   "value": 0.04,
+   "unit": "saturation",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "detail_energy_blur_pixels": {
+   "value": 2,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "detail_energy_ratio_low": {
+   "value": 0.9,
+   "unit": "times the guard",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "detail_energy_ratio_high": {
+   "value": 1.4,
+   "unit": "times the guard",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "detail_energy_cap": {
+   "value": 10,
+   "unit": "energy",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "squint_blur_pixels": {
+   "value": 12,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): squint_regions.py"
+  },
+  "squint_window_pixels": {
+   "value": 6,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): squint_regions.py"
+  },
+  "squint_target": {
+   "value": 0.92,
+   "unit": "similarity",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): the garden missed it at 0.883 and 0.873"
+  },
+  "flat_window_pixels": {
+   "value": 96,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "flat_window_step_pixels": {
+   "value": 48,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "flat_window_std_max": {
+   "value": 0.01,
+   "unit": "luminance spread",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "flat_window_share_under_0_014_max": {
+   "value": 0.02,
+   "unit": "share of windows",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "strong_saturation_level": {
+   "value": 0.7,
+   "unit": "saturation",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "strong_saturation_share_max": {
+   "value": 0.01,
+   "unit": "share of pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "turquoise_hue_band": {
+   "value": [
+    160,
+    210
+   ],
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "turquoise_saturation_min": {
+   "value": 0.35,
+   "unit": "saturation",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "turquoise_share_max": {
+   "value": 0.003,
+   "unit": "share of pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "white_patch_pixels_max": {
+   "value": 30,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): finish_character.py"
+  },
+  "silhouette_iou_min": {
+   "value": 0.85,
+   "unit": "overlap",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): sil_iou.py (two yardsticks disagreed)"
+  },
+  "light_group_sum_error_max": {
+   "value": 0.02,
+   "unit": "share",
+   "kind": "measured",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): light groups sum to the picture"
+  },
+  "reading_test_share_min": {
+   "value": 0.75,
+   "unit": "share of features",
+   "kind": "judged",
+   "source": "the garden character job (procedural-textures/garden/character, log 31): never run blind before; 12 of 16"
+  }
+ },
+ "place_render": {
+  "about": "Drawing places: the renderer rule (Cycles where lights are lit, EEVEE when they are off), picture sizes and the rented-card limits. Prices carry the date they were read.",
+  "renderer_rule": {
+   "value": "Cycles for views where lamps, windows, lanterns or fires are lit; EEVEE when they are off",
+   "unit": "rule",
+   "kind": "judged",
+   "source": "the film owner's rule of 21 October 2026 (procedural-textures project story)"
+  },
+  "preview_size_pixels": {
+   "value": [
+    1200,
+    800
+   ],
+   "unit": "pixels",
+   "kind": "measured",
+   "source": "the rented-card runs: previews 6 to 10 s (RunPod set-up findings)"
+  },
+  "preview_samples": {
+   "value": 96,
+   "unit": "samples",
+   "kind": "measured",
+   "source": "the rented-card runs (RunPod set-up findings)"
+  },
+  "close_up_size_pixels": {
+   "value": [
+    1600,
+    1067
+   ],
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the garden light job"
+  },
+  "final_size_pixels": {
+   "value": [
+    2400,
+    1600
+   ],
+   "unit": "pixels",
+   "kind": "measured",
+   "source": "the rented-card runs: 44.3 s and 39.7 s on an RTX 4090"
+  },
+  "final_samples": {
+   "value": 512,
+   "unit": "samples",
+   "kind": "measured",
+   "source": "the rented-card runs"
+  },
+  "eevee_shadow_rays": {
+   "value": 4,
+   "unit": "rays",
+   "kind": "measured",
+   "source": "the wet street (white speckle on wet ground was soft shadows, not the material)"
+  },
+  "eevee_shadow_steps": {
+   "value": 16,
+   "unit": "steps",
+   "kind": "measured",
+   "source": "the wet street"
+  },
+  "eevee_samples": {
+   "value": 48,
+   "unit": "samples",
+   "kind": "measured",
+   "source": "the wet street"
+  },
+  "job_minutes_max": {
+   "value": 55,
+   "unit": "minutes",
+   "kind": "measured",
+   "source": "the rented-card guide: keep each job under about an hour"
+  },
+  "jobs_waiting_stop_minutes": {
+   "value": 5,
+   "unit": "minutes",
+   "kind": "judged",
+   "source": "the film owner's rule: if jobs wait this long while workers show idle, stop and report"
+  },
+  "preview_download_kilobytes_max": {
+   "value": 400,
+   "unit": "kilobytes",
+   "kind": "judged",
+   "source": "the rented-card guide: bring back small JPG previews only"
+  },
+  "disk_free_gigabytes_stop_here": {
+   "value": 0.4,
+   "unit": "gigabytes",
+   "kind": "measured",
+   "source": "this machine's disk during the 1.4.0 build (2.7 GB free and shared)"
+  },
+  "card_dollars_per_hour": {
+   "value": 1.1,
+   "unit": "US dollars an hour",
+   "kind": "measured",
+   "source": "the rented-card guide (an RTX 4090 on a pay-per-second endpoint)",
+   "date_read": "2026-10-22",
+   "note": "A price shown on the day, not a bill: one bill came out 2.5 times the work seconds and was never explained, so never promise a cost from seconds alone."
+  },
+  "workers_max": {
+   "value": 3,
+   "unit": "workers",
+   "kind": "judged",
+   "source": "the rented-card guide: a usual set-up; the person sets their own"
+  },
+  "local_cycles_preview_size_pixels": {
+   "value": [
+    320,
+    240
+   ],
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "this machine: Cycles takes 35 to 90 s a frame on 4 cores, so local pictures stay tiny"
+  }
+ },
+ "place_light": {
+  "about": "Starting values for the light verb (sun, sky, fill and lit lamps). They are a first try, not tuned: judge by looking.",
+  "sun_strength": {
+   "value": 3.5,
+   "unit": "watts per square metre",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026): a bright but not blown-out day sun"
+  },
+  "sky_strength": {
+   "value": 0.8,
+   "unit": "world strength",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design (22 October 2026)"
+  },
+  "clip_share_max": {
+   "value": 0.005,
+   "unit": "share of pixels",
+   "kind": "judged",
+   "source": "the Scenario lighting skill: value study clip under 0.5 percent"
+  },
+  "sun_elevation_degrees": {
+   "value": 35,
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "the garden light job (golden hour low sun)"
+  }
+ },
+ "place_checks": {
+  "about": "How the fresh checkers work (workflow build-a-place).",
+  "fix_rounds": {
+   "value": 1,
+   "unit": "rounds",
+   "kind": "judged",
+   "source": "the garden job: one fix round, then stop"
+  },
+  "checkers_see_builder_reports": {
+   "value": false,
+   "unit": "rule",
+   "kind": "judged",
+   "source": "the garden job: a checker recomputes claims without the builders' numbers"
+  },
+  "claims_recheck": {
+   "value": true,
+   "unit": "rule",
+   "kind": "judged",
+   "source": "the garden job: builders' claims were wrong three times out of three"
+  }
  }
 }

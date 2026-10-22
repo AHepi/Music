@@ -4,7 +4,7 @@ accepted, the cost of the paid step this stage guards and the time it takes. A f
 that follows (exit 1); a missing input stops the stage with the exact file to make and the tool that makes it (exit 2).
 It spends nothing and changes no project file: it only reads, runs the kit's calculators, and writes its reports.
 
-The stages, in the order a film is made (the names are fixed; the skills and docs name them):
+The nine stages, in the order a film is made (the names are fixed; the skills and docs name them):
   script   before recording the narration   lint_script.py before (cues, capitals, sentences, figures a minute, the
                                             main rule twice, key page, out-of-date facts), the estimated timeline, the
                                             voice's credits and dollars, and the spend ledger
@@ -13,6 +13,11 @@ The stages, in the order a film is made (the names are fixed; the skills and doc
   shots    before building or drawing a     place_facts.py check, plan_shot.py (camera, reach, slide, people, signs),
            place's views                    view_audit.py (letters, loud signs, heads, landmarks), plan_effects.py wind,
                                             plan_lights.py plan, plan_states.py plan, and each view's check file
+  place    after the place is built, before place_audit_check.py check (every material and object has its surface
+           its views are drawn              and wear treatments, real normal maps that point the right way, displacement,
+                                            believable construction, sizes, plants off the wheel tracks; the audit is of
+                                            THIS scene file), picture_measures.py check (with a style guard), and a fresh
+                                            checker's result; the order is shots, build the place, place, then plates
   plates   before paying for paintings      plan_lights.py render-log, the shot checker's report (new problems only),
                                             paint_request.py preflight and price, model_lint.py, the spend ledger
   paint    after each painting arrives      after_painting.py check (line-up, figures, skin, style, behind painting)
@@ -81,11 +86,12 @@ if HERE not in sys.path:
     sys.path.insert(0, HERE)
 
 DEFAULT_KIT = os.path.dirname(HERE)
-STAGES = ['script', 'record', 'shots', 'plates', 'paint', 'pages', 'film', 'finish']
+STAGES = ['script', 'record', 'shots', 'place', 'plates', 'paint', 'pages', 'film', 'finish']
 STAGE_WORDS = {
     'script': 'before recording the narration',
     'record': 'after recording',
     'shots': 'before building or drawing a place\'s views',
+    'place': 'after building a place and before drawing its views (the order: shots, build the place, place, plates)',
     'plates': 'before paying for paintings',
     'paint': 'after a painting arrives',
     'pages': 'while building pages',
@@ -97,6 +103,7 @@ GUARDED = {
     'script': ('recording the narration with the voice service', 'paid'),
     'record': ('using these recordings (re-recording any page listed is paid)', 'paid'),
     'shots': ('building and rendering the place\'s views and plates', 'long'),
+    'place': ('drawing this place\'s views and plates (the long step: a place that fails is drawn again)', 'long'),
     'plates': ('asking the painter for these paintings', 'paid'),
     'paint': ('using this painting (cutting it, state pictures, filming it); a failed painting needs a free fix or a paid re-ask', None),
     'pages': ('filming these pages (run the film stage next)', None),
@@ -171,6 +178,15 @@ INPUTS = {
     'deliver': ('the files about to be pushed or sent', 'the finish step'),
     'planned_cuts': ('the planned cuts (plan_page_timing.py check\'s JSON, or the newest pages report)',
                      'python3 calculators/plan_page_timing.py check EVENTS --out timing.json (the pages stage keeps one)'),
+    'place_audit': ('the place audit (place-audit.json: the facts about the finished Blender scene)',
+                    'explainer-film-place audit --scene SCENE.blend --settings place-settings.json --out place-audit.json (explainer-film-place finish writes one too)'),
+    'blend': ('the finished scene file the audit was made from (a changed file makes the audit stale)', 'explainer-film-place finish --scene SCENE.blend --save-as FINISHED.blend'),
+    'place_settings': ('the place settings (place-settings.json)', 'explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json'),
+    'place_pictures': ('a folder of the place\'s preview pictures (JPG or PNG)', 'explainer-film-place render --job JOB.json (previews)'),
+    'previous_pictures': ('a folder of the previous round\'s pictures of the same views (for the squint test)', 'the previous round\'s explainer-film-place render'),
+    'style_guard': ('the style guard (style-guard.json: percentiles, detail energy per region, palette)', 'explainer-film-place measure PICTURE --make-guard --out style-guard.json (from the first honest picture; it is provisional until a person accepts it)'),
+    'real_world_facts': ('the place\'s own real-world facts (number, source, confidence), on top of the kit\'s generic ones', 'the place-planner agent writes plan/real-world-facts.json'),
+    'fresh_check': ('a fresh checker\'s result (claims it recomputed, problems, what it did not test)', 'the place-checker agent (workflow build-a-place, phase Check)'),
 }
 PATH_KEYS = (set(INPUTS) | {'events'}) - {'scene'}   # the scene is a name, not a file
 # inputs that are not a stage's item (shown when one of them cannot be used)
@@ -188,8 +204,11 @@ STAGE_INPUTS = {
     'script': {'script': 'r', 'word_times': 'o', 'timeline': 'o', 'research_ledger': 'o', 'spend_ledger': 'o'},
     'record': {'script': 'r', 'transcripts': 'r', 'recordings': 'o', 'heard': 'o', 'word_times': 'o', 'narration': 'o', 'timeline': 'o'},
     'shots': {'place_facts': 'r', 'shot_list': 'o', 'check_files': 'o', 'state_plan': 'o', 'smoke': 'o', 'timeline': 'o'},
+    'place': {'place_audit': 'r', 'blend': 'o', 'place_settings': 'o', 'place_pictures': 'o', 'previous_pictures': 'o', 'style_guard': 'o',
+              'real_world_facts': 'o', 'fresh_check': 'o'},
     'plates': {'check': 'r', 'plate': 'r', 'plate_facts': 'r', 'render_log': 'r', 'shot_report': 'r', 'helper_plate': 'o',
-               'place_facts': 'o', 'brief': 'o', 'real_names': 'o', 'models': 'o', 'spend_ledger': 'o', 'style_picture': 'o'},
+               'place_facts': 'o', 'brief': 'o', 'real_names': 'o', 'models': 'o', 'spend_ledger': 'o', 'style_picture': 'o',
+               'blend': 'o', 'place_audit': 'o', 'place_settings': 'o'},
     'paint': {'painting': 'r', 'plate': 'r', 'check': 'r', 'plate_facts': 'r', 'behind': 'o', 'near_list': 'o', 'helper_plate': 'o',
               'standard': 'o'},
     'pages': {'events': 'r', 'numbers_ledger': 'o', 'timing_accepted': 'o', 'camera_log': 'o', 'timeline': 'o', 'place_facts': 'o',
@@ -763,7 +782,7 @@ class Run:
 
 ITEM_VALUE_KEYS = {'today', 'allowance', 'view', 'views', 'shot_names', 'page', 'scene', 'pages_list', 'exposure', 'hollow', 'figures',
                    'check_files', 'with_behind', 'processors', 'free_memory_gb', 'from_frame', 'to_frame', 'make_events', 'jumps',
-                   'name', 'count_ground', 'blender_running', 'models_as_set'}
+                   'name', 'count_ground', 'blender_running', 'models_as_set', 'allow_quick'}
 
 
 # ------------------------------------------------------------------------------------------------ the stages
@@ -1082,6 +1101,86 @@ def picture_size(path):
     return None
 
 
+PICTURE_EXTENSIONS = ('.png', '.jpg', '.jpeg')
+
+
+def picture_files(folder):
+    if not folder or not os.path.isdir(folder):
+        return []
+    return sorted(os.path.join(folder, name) for name in os.listdir(folder) if name.lower().endswith(PICTURE_EXTENSIONS))
+
+
+def audit_freshness(run, audit_path, audit_data, blend, where):
+    """The audit must describe THIS scene file: its scene_sha1 against the sha1 of the scene file (the one given, else the one the audit names
+    beside itself). Without a scene file it is a look (not checked); a changed file fails (a stale audit)."""
+    if not blend and isinstance(audit_data, dict) and audit_data.get('scene_file'):
+        beside = os.path.join(os.path.dirname(os.path.abspath(audit_path)), audit_data['scene_file'])
+        if os.path.exists(beside):
+            blend = beside
+            run.register(beside)
+            run.notes.append(f'The scene file was not given (--blend); {beside}, the one the audit names beside itself, was used for the freshness check.')
+    if not blend:
+        return [{'verdict': 'warn', 'check': 'place: stale audit', 'where': where, 'text': 'not checked: the scene file was not given (--blend FILE.blend), so a changed scene would not be noticed.',
+                 'fix': 'give --blend with the finished scene file.'}]
+    recorded = audit_data.get('scene_sha1') if isinstance(audit_data, dict) else None
+    now = sha1_of(blend)
+    if not recorded:
+        return [{'verdict': 'fail', 'check': 'place: stale audit', 'where': where, 'text': f'the audit records no scene_sha1, so it cannot be tied to {os.path.basename(blend)}.',
+                 'fix': 'make the audit again: explainer-film-place audit --scene SCENE.blend'}]
+    if now != recorded:
+        return [{'verdict': 'fail', 'check': 'place: stale audit', 'where': where,
+                 'text': f'the scene file changed after the audit was made (audit {recorded[:8]}, file {str(now)[:8]}): the audit says nothing about this file.',
+                 'fix': 'run explainer-film-place audit on the saved file again, then this stage.'}]
+    return [{'verdict': 'pass', 'check': 'place: stale audit', 'where': where, 'text': f'the audit was made from this exact scene file ({os.path.basename(blend)})', 'fix': ''}]
+
+
+def run_place_audit(run, item, where, blend, why):
+    """The place audit's checks for a stage: the judge, and the freshness of the audit. Returns True when an audit was read."""
+    audit = run.need(item, 'place_audit', why)
+    if not audit:
+        return False
+    facts = item.get('real_world_facts') if item.get('real_world_facts') and run.need(item, 'real_world_facts', 'place_audit_check.py check', required=False) else None
+    settings_path = item.get('place_settings') if item.get('place_settings') and run.need(item, 'place_settings', 'place_audit_check.py check', required=False) else None
+    arguments = ['check', audit] + (['--facts', facts] if facts else []) + (['--place-settings', settings_path] if settings_path else []) + (['--allow-quick'] if item.get('allow_quick') else []) + ['--skip-freshness']
+    run.run_tool('the place audit: surfaces, wear and construction (place_audit_check.py)', 'calculators/place_audit_check.py', arguments, where=where)
+    data = run.read_json('place_audit', audit, why)
+    run.add_check('the audit is about this scene file (freshness)', audit_freshness(run, audit, data, blend, where), where=where, tool='preflight.py place')
+    return True
+
+
+def stage_place(run, item, where):
+    blend = item.get('blend') if item.get('blend') and run.need(item, 'blend', 'the freshness check of the audit', required=False) else None
+    if not item.get('blend'):
+        run.need(item, 'blend', 'the freshness check of the audit', required=False, why='without it a scene changed after the audit would not be noticed (the audit\'s own scene_file is used when it is beside the audit)')
+    audited = run_place_audit(run, item, where, blend, 'place_audit_check.py check')
+    pictures = picture_files(item.get('place_pictures'))
+    if item.get('place_pictures'):
+        run.need(item, 'place_pictures', 'picture_measures.py check', required=False)
+    guard = item.get('style_guard') if item.get('style_guard') and run.need(item, 'style_guard', 'picture_measures.py check', required=False) else None
+    if pictures and guard:
+        previous = picture_files(item.get('previous_pictures')) if item.get('previous_pictures') else []
+        arguments = ['check'] + pictures + ['--guard', guard] + (['--previous', previous[0]] if previous else [])
+        run.run_tool('the place pictures against the style guard (picture_measures.py)', 'calculators/picture_measures.py', arguments, where=where)
+        data = run.read_json('style_guard', guard, 'picture_measures.py check')
+        if isinstance(data, dict) and data.get('provisional'):
+            run.add_check('the style guard is provisional', [{'verdict': 'warn', 'check': 'place pictures: guard', 'where': where,
+                          'text': 'the guard was made from the first honest picture and has not been accepted by a person yet, so it locks in whatever that picture looked like.',
+                          'fix': 'have a person accept it (remove "provisional": true and write who and when), or measure against absolute floors.'}], where=where, tool='preflight.py place')
+    elif pictures:
+        run.add_check('the place pictures against the style guard', [{'verdict': 'warn', 'check': 'place pictures: not checked', 'where': where,
+                      'text': 'not checked: there are pictures but no style guard (--style-guard).', 'fix': 'make one from the first honest picture: explainer-film-place measure PICTURE --make-guard --out style-guard.json'}], where=where, tool='preflight.py place')
+    fresh = item.get('fresh_check') if item.get('fresh_check') and run.need(item, 'fresh_check', 'place_audit_check.py fresh', required=False) else None
+    if fresh:
+        arguments = ['fresh', fresh] + (['--audit', item['place_audit']] if item.get('place_audit') and os.path.exists(item['place_audit']) else [])
+        run.run_tool('a fresh checker\'s result (place_audit_check.py fresh)', 'calculators/place_audit_check.py', arguments, where=where)
+    else:
+        run.add_check('a fresh checker has looked', [{'verdict': 'warn', 'check': 'place: fresh checker', 'where': where, 'text': 'not checked: no fresh checker has looked at this place (--fresh-check).',
+                      'fix': 'run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.'}], where=where, tool='preflight.py place')
+    run.notes.append('The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). '
+                     'A place that passes here has not been judged by eye: the fresh checkers and the person still look.')
+    return audited
+
+
 def stage_plates(run, item, where):
     check = run.need(item, 'check', 'paint_request.py preflight')
     plate = run.need(item, 'plate', 'paint_request.py preflight')
@@ -1095,12 +1194,23 @@ def stage_plates(run, item, where):
     if shot_report:
         report_findings = shot_report_findings(shot_report)
         run.add_check('the shot checker\'s report: new problems only', report_findings, where=where, tool='check_shot.py report')
+    blend = item.get('blend')
     if check:
         data = run.read_json('check', check, 'paint_request.py preflight')
         if isinstance(data, dict):
             run.show_known(f'{os.path.basename(check)} (check file)', data.get('accepted', []), where=where)
+            stamped = data.get('scene_file')
+            if stamped and not blend:
+                beside = stamped if os.path.isabs(stamped) else os.path.join(os.path.dirname(os.path.abspath(check)), stamped)
+                if os.path.exists(beside):
+                    blend = beside
+                    item['blend'] = beside
+                    run.register(beside)
+                    run.notes.append(f'The check file names the scene it was made from ({stamped}), so the place audit is required before paying for a painting of it.')
         else:
             check = None
+    if blend:
+        run_place_audit(run, item, where, blend, 'place_audit_check.py check (a place built in Blender must pass its audit before a paid painting)')
     if check and plate and plate_facts:
         arguments = ['preflight', '--check', check, '--facts', plate_facts, '--plate', plate, '--work-folder', os.path.join(run.work, 'paint-work')]
         for key, option in (('render_log', '--render-log'), ('shot_report', '--shot-report'), ('helper_plate', '--helper-plate'),
@@ -1538,7 +1648,7 @@ def planned_cuts(run, item):
         return []
 
 
-STAGE_RUNNERS = {'script': stage_script, 'record': stage_record, 'shots': stage_shots, 'plates': stage_plates, 'paint': stage_paint,
+STAGE_RUNNERS = {'script': stage_script, 'record': stage_record, 'shots': stage_shots, 'place': stage_place, 'plates': stage_plates, 'paint': stage_paint,
                  'pages': stage_pages, 'film': stage_film, 'finish': stage_finish}
 
 
@@ -1783,6 +1893,8 @@ EXAMPLE_PLAN = {
                'word_times': 'narration/word-times.json'},
     'shots': [{'place_facts': 'places/works-place-facts.json', 'shot_list': 'places/works-shots.json',
                'check_files': {'w1': 'places/works-w1-shot-check.json', 'w3': 'places/works-w3-shot-check.json'}}],
+    'place': [{'name': 'village', 'place_audit': 'places/village-place-audit.json', 'blend': 'places/village-finished.blend', 'place_settings': 'places/place-settings.json',
+               'place_pictures': 'places/previews', 'style_guard': 'places/style-guard.json', 'fresh_check': 'places/fresh-check.json'}],
     'plates': [{'name': 'w1', 'view': 'w1', 'check': 'places/works-w1-shot-check.json', 'plate': 'plates/works-w1-plate.png',
                 'plate_facts': 'plates/w1-plate-facts', 'render_log': 'plates/plates.log', 'shot_report': 'checks/w1/report.md',
                 'helper_plate': 'plates/works-w1-behind-plate.png', 'place_facts': 'places/works-place-facts.json', 'brief': 'places/works-brief.json',
@@ -1802,7 +1914,7 @@ EXAMPLE_PLAN = {
 # ------------------------------------------------------------------------------------------------ main
 def build_parser():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('stage', nargs='?', choices=STAGES, help='script, record, shots, plates, paint, pages, film or finish')
+    parser.add_argument('stage', nargs='?', choices=STAGES, help='script, record, shots, place, plates, paint, pages, film or finish')
     general = parser.add_argument_group('general')
     general.add_argument('--project', help='the film\'s folder (default: the plan\'s folder, else the current folder)')
     general.add_argument('--plan', help='a preflight plan (default: PROJECT/preflight-plan.json when there is one)')
@@ -1858,6 +1970,16 @@ def build_parser():
     places.add_argument('--near-list', dest='near_list')
     places.add_argument('--figures', nargs='+')
     places.add_argument('--standard')
+    place = parser.add_argument_group('place (and plates: --blend, --place-audit)')
+    place.add_argument('--place-audit', dest='place_audit', help='the place audit (place-audit.json from explainer-film-place audit)')
+    place.add_argument('--blend', help='the finished scene file the audit was made from (the audit goes stale when it changes)')
+    place.add_argument('--place-settings', dest='place_settings', help='the place settings (place-settings.json)')
+    place.add_argument('--place-pictures', dest='place_pictures', help='a folder of the place\'s preview pictures')
+    place.add_argument('--previous-pictures', dest='previous_pictures', help='a folder of the previous round\'s pictures (for the squint test)')
+    place.add_argument('--style-guard', dest='style_guard', help='the style guard (style-guard.json)')
+    place.add_argument('--real-world-facts', dest='real_world_facts', help='the place\'s own real-world facts')
+    place.add_argument('--fresh-check', dest='fresh_check', help='a fresh checker\'s result')
+    place.add_argument('--allow-quick', dest='allow_quick', action='store_true', default=None, help='accept an audit made with --quick (a trial) as a look')
     pages = parser.add_argument_group('pages, film and finish')
     pages.add_argument('--events')
     pages.add_argument('--scene')
