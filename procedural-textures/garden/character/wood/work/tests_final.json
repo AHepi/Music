@@ -1,0 +1,889 @@
+[
+ {
+  "name": "test 9 connected structure",
+  "details": {
+   "bad_planks": [],
+   "bad_rails": [],
+   "bad_bearers": []
+  },
+  "result": "PASS",
+  "planks": 51,
+  "rails": 10,
+  "bearers": 7,
+  "posts": 18,
+  "footings": 14,
+  "sills": 2,
+  "planks_with_less_than_2_rails": 0,
+  "rails_with_less_than_2_supports": 0,
+  "bearers_with_less_than_2_posts": 0,
+  "posts_without_footing": 0,
+  "footings_not_on_bed": 0,
+  "floating_parts": 0,
+  "max_support_span_m": 1.041,
+  "footing_bottom_error_cm": [
+   -9.15,
+   -0.32
+  ],
+  "footing_thickness_cm": [
+   14.9,
+   10.2,
+   14.1,
+   11.0,
+   13.0,
+   13.6,
+   14.7,
+   13.0,
+   10.2,
+   11.0,
+   13.6,
+   12.0,
+   14.1,
+   13.0
+  ]
+ },
+ {
+  "name": "test 10 walkability",
+  "result": "PASS",
+  "samples": 147,
+  "misses": 18,
+  "longest_miss_cm": 5.0,
+  "deck_top_min": 0.205,
+  "deck_top_max": 0.2263,
+  "max_step_between_neighbours_cm": 1.9,
+  "max_slope_1m_window": 0.0116,
+  "end_meets_bank_cm": 0.0,
+  "route_offset_from_today_cm": 0.0,
+  "deck_width_m": {
+   "mean": 1.048,
+   "min": 1.025,
+   "max": 1.073
+  }
+ },
+ {
+  "name": "test 11 plank character",
+  "result": "PASS",
+  "plank_count": 142,
+  "width_cm": {
+   "std": 1.58,
+   "min": 9.4,
+   "max": 16.7,
+   "range": 7.3
+  },
+  "thickness_mm": {
+   "std": 3.86,
+   "min": 47.0,
+   "max": 62.6
+  },
+  "gap_mm": {
+   "min": 5.7,
+   "max": 13.8,
+   "std": 2.23
+  },
+  "warp_over_threshold_pct": 97.2,
+  "max_bow_mm": 6.0,
+  "max_cup_mm": 4.0,
+  "max_twist_deg": 1.48,
+  "min_top_edge_bevel_mm": 6.0,
+  "chipped_pct": 16.2,
+  "end_check_pct": 21.8,
+  "replaced_pct": 7.8,
+  "max_vertices_per_plank": 391,
+  "all_planks_unique": true,
+  "pegs": 82,
+  "nails": 8,
+  "iron_cramps": 8,
+  "floating_pegs": 0
+ },
+ {
+  "name": "test 12 veranda deck",
+  "result": "PASS",
+  "rows": 14,
+  "boards": 91,
+  "board_len_m": [
+   1.196,
+   2.396
+  ],
+  "distinct_lengths": 5,
+  "min_joint_distance_neighbour_rows_cm": 60.0,
+  "deck_top_z": [
+   0.557,
+   0.5628
+  ],
+  "board_thickness_mm": [
+   49.1,
+   59.7
+  ],
+  "plinth_front_top": 0.46,
+  "plinth_hall_top": 0.55,
+  "nosing_cm": 3.5
+ },
+ {
+  "name": "test 20 normal map nodes",
+  "result": "PASS",
+  "materials": [
+   {
+    "material": "G6 wood / plank top",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 1.5,
+    "reaches_bsdf": true,
+    "image": "plank_top_normal.png",
+    "size": [
+     2048,
+     512
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.995
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "G6 wood / plank side",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 1.0,
+    "reaches_bsdf": true,
+    "image": "plank_top_normal.png",
+    "size": [
+     2048,
+     512
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.995
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "G6 wood / plank end grain",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.9,
+    "reaches_bsdf": true,
+    "image": "end_grain_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.984
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "G6 wood / deck top",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 1.5,
+    "reaches_bsdf": true,
+    "image": "plank_top_normal.png",
+    "size": [
+     2048,
+     512
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.995
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "G6 wood / deck side",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 1.0,
+    "reaches_bsdf": true,
+    "image": "plank_top_normal.png",
+    "size": [
+     2048,
+     512
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.995
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "G6 wood / deck end grain",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.9,
+    "reaches_bsdf": true,
+    "image": "end_grain_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.984
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "G6 wood / post timber",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.9,
+    "reaches_bsdf": true,
+    "image": "post_timber_normal.png",
+    "size": [
+     1024,
+     2048
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.996
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "G6 wood / footing stone",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "Dark timber",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "post_timber_normal.png",
+    "size": [
+     1024,
+     2048
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.996
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "Beam timber",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "post_timber_normal.png",
+    "size": [
+     1024,
+     2048
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.996
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "GARDEN timber.post",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "post_timber_normal.png",
+    "size": [
+     1024,
+     2048
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.996
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "Plinth stone",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "CT / Stone painterly surface.008",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "CT / Stone painterly surface.009",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "CT / Stone painterly surface.039",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "CT / Stone painterly surface.040",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "CT / Stone painterly surface.041",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   },
+   {
+    "material": "CT / Stone painterly surface.042",
+    "space": "TANGENT",
+    "uv_map": "UVMap",
+    "strength": 0.8,
+    "reaches_bsdf": true,
+    "image": "footing_stone_normal.png",
+    "size": [
+     1024,
+     1024
+    ],
+    "colorspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "objects_missing_uv": [],
+    "bump_above_0.3_not_fed_by_normal_map": [],
+    "ok": true
+   }
+  ]
+ },
+ {
+  "name": "test 22 UV hygiene",
+  "result": "PASS",
+  "objects": [
+   {
+    "object": "Astra / varied planks",
+    "faces": 9468,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -2.93,
+     2.93,
+     -0.06,
+     0.3
+    ]
+   },
+   {
+    "object": "Astra / varied planks.001",
+    "faces": 9084,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -3.35,
+     3.35,
+     -0.05,
+     0.29
+    ]
+   },
+   {
+    "object": "Astra / varied planks.002",
+    "faces": 9916,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -3.38,
+     3.38,
+     -0.05,
+     0.29
+    ]
+   },
+   {
+    "object": "Astra / varied planks.003",
+    "faces": 4982,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -2.02,
+     2.02,
+     -0.05,
+     0.31
+    ]
+   },
+   {
+    "object": "Astra / varied planks.004",
+    "faces": 4246,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -1.84,
+     1.84,
+     -0.04,
+     0.31
+    ]
+   },
+   {
+    "object": "Astra / varied planks.005",
+    "faces": 5828,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -1.93,
+     1.93,
+     -0.07,
+     0.29
+    ]
+   },
+   {
+    "object": "Astra / varied planks.006",
+    "faces": 302,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -2.13,
+     2.13,
+     0.16,
+     0.32
+    ]
+   },
+   {
+    "object": "Astra / varied planks.007",
+    "faces": 302,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -1.37,
+     1.37,
+     0.08,
+     0.24
+    ]
+   },
+   {
+    "object": "Bridge pier 0",
+    "faces": 14,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -0.81,
+     0.81,
+     -1.2,
+     0.14
+    ]
+   },
+   {
+    "object": "Bridge pier 1",
+    "faces": 29,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -2.11,
+     2.09,
+     -0.25,
+     2.04
+    ]
+   },
+   {
+    "object": "Bridge pier 2",
+    "faces": 29,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -3.88,
+     3.88,
+     0.39,
+     1.79
+    ]
+   },
+   {
+    "object": "Bridge pier 3",
+    "faces": 14,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -6.2,
+     6.2,
+     0.56,
+     3.08
+    ]
+   },
+   {
+    "object": "Bridge stringers",
+    "faces": 196,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -6.19,
+     6.19,
+     -0.84,
+     2.68
+    ]
+   },
+   {
+    "object": "Veranda step",
+    "faces": 1802,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -0.89,
+     0.89,
+     -0.25,
+     0.38
+    ]
+   },
+   {
+    "object": "Veranda step, lower",
+    "faces": 1730,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -0.92,
+     0.92,
+     -0.27,
+     0.26
+    ]
+   },
+   {
+    "object": "Hall posts",
+    "faces": 2104,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -10.09,
+     10.09,
+     0.55,
+     10.09
+    ]
+   },
+   {
+    "object": "Hall beams",
+    "faces": 182,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -6.59,
+     -0.55,
+     -6.6,
+     6.6
+    ]
+   },
+   {
+    "object": "Eave soffit",
+    "faces": 6,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -6.55,
+     -3.13,
+     -6.55,
+     6.55
+    ]
+   },
+   {
+    "object": "Roof carrying frame",
+    "faces": 5252,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -10.12,
+     10.12,
+     3.0,
+     10.12
+    ]
+   },
+   {
+    "object": "Gravel timber edge",
+    "faces": 156,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -1.9,
+     5.89,
+     -9.18,
+     9.18
+    ]
+   },
+   {
+    "object": "Shoji bars",
+    "faces": 588,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -6.54,
+     6.54,
+     0.67,
+     6.54
+    ]
+   },
+   {
+    "object": "Stone plinth",
+    "faces": 12,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -10.3,
+     10.3,
+     -0.04,
+     10.3
+    ]
+   },
+   {
+    "object": "G6 wood / bridge posts",
+    "faces": 468,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -5.45,
+     5.45,
+     -1.02,
+     3.13
+    ]
+   },
+   {
+    "object": "G6 wood / bridge bearers",
+    "faces": 98,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -5.32,
+     5.32,
+     0.15,
+     1.94
+    ]
+   },
+   {
+    "object": "G6 wood / bridge footings",
+    "faces": 348,
+    "mirrored_faces": 0,
+    "uv_range": [
+     -5.0,
+     5.0,
+     -0.41,
+     2.39
+    ]
+   }
+  ]
+ },
+ {
+  "name": "test 23 ownership",
+  "result": "PASS",
+  "objects_created": [
+   "G6 wood / bridge bearers",
+   "G6 wood / bridge cramps",
+   "G6 wood / bridge footings",
+   "G6 wood / bridge leaf 1",
+   "G6 wood / bridge leaf 2",
+   "G6 wood / bridge leaf 3",
+   "G6 wood / bridge pegs",
+   "G6 wood / bridge posts",
+   "G6 wood / deck joists",
+   "G6 wood / deck leaf 1",
+   "G6 wood / deck leaf 2",
+   "G6 wood / deck leaf 3",
+   "G6 wood / deck leaf 4",
+   "G6 wood / deck leaf 5",
+   "G6 wood / deck leaf 6",
+   "G6 wood / deck pegs",
+   "G6 wood cam 12",
+   "G6 wood cam 3",
+   "G6 wood cam 4",
+   "G6 wood cam 5",
+   "G6 wood cam 6",
+   "G6 wood cam 7",
+   "G6 wood cam 8",
+   "G6 wood cam 9"
+  ],
+  "objects_changed": [
+   "Astra / varied planks",
+   "Astra / varied planks.001",
+   "Astra / varied planks.002",
+   "Astra / varied planks.003",
+   "Astra / varied planks.004",
+   "Astra / varied planks.005",
+   "Astra / varied planks.006",
+   "Astra / varied planks.007",
+   "Bridge pier 0",
+   "Bridge pier 1",
+   "Bridge pier 2",
+   "Bridge pier 3",
+   "Bridge stringers",
+   "Gravel timber edge",
+   "Hall beams",
+   "Hall posts",
+   "Roof carrying frame",
+   "Stone plinth",
+   "Veranda step",
+   "Veranda step, lower"
+  ],
+  "objects_deleted": [],
+  "materials_created": [
+   "G6 wood / bridge leaf",
+   "G6 wood / deck end grain",
+   "G6 wood / deck leaf",
+   "G6 wood / deck side",
+   "G6 wood / deck top",
+   "G6 wood / footing stone",
+   "G6 wood / iron",
+   "G6 wood / nail",
+   "G6 wood / peg",
+   "G6 wood / plank end grain",
+   "G6 wood / plank side",
+   "G6 wood / plank top",
+   "G6 wood / post timber"
+  ],
+  "materials_changed": [
+   "Beam timber",
+   "CT / Stone painterly surface.008",
+   "CT / Stone painterly surface.009",
+   "CT / Stone painterly surface.039",
+   "CT / Stone painterly surface.040",
+   "CT / Stone painterly surface.041",
+   "CT / Stone painterly surface.042",
+   "Dark timber",
+   "GARDEN timber.post",
+   "Plinth stone"
+  ],
+  "materials_deleted": [],
+  "node_groups_changed": [],
+  "other_builders_objects_changed": [],
+  "other_new_objects": [],
+  "other_materials_changed": [],
+  "other_new_materials": [],
+  "cameras_render_lights_world_unchanged": true
+ },
+ {
+  "name": "test 23b idempotence (apply twice)",
+  "result": "PASS",
+  "objects": [
+   204,
+   204
+  ],
+  "g6_materials": [
+   13,
+   13
+  ],
+  "vertices": [
+   707432,
+   707432
+  ],
+  "objects_that_differ": []
+ }
+]

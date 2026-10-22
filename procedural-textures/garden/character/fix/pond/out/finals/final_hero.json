@@ -1,0 +1,107 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/pond/out/garden_fixpond.blend",
+ "args": {
+  "out": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/pond/out/finals/final_hero",
+  "camera": "photo",
+  "size": "2400x1600",
+  "samples": 512,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": true,
+  "check_groups": true,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "fa0ae9fe03c4b6b706a7a6b386ea77baa9e4d4bcc04872d9eb6712e62c8f412a",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD EPYC 7352 24-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 512,
+ "seed": 7,
+ "camera": "photo",
+ "size": [
+  2400,
+  1600,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 43.65,
+ "files": {
+  "exr": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/pond/out/finals/final_hero.exr",
+   "bytes": 41741849,
+   "sha256": "a62ad5438462b49fbd2d91cd4a7df7e17708aab5555fb485b5d13268e8f03801"
+  },
+  "png": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/pond/out/finals/final_hero.png",
+   "bytes": 5906028,
+   "sha256": "32af1c4de898ac58978936d66978a8a9d835a5af1d265420b9a39709d0e7fbfd"
+  }
+ },
+ "group_check": {
+  "groups": [
+   "Combined_sun",
+   "Combined_rim",
+   "Combined_sky",
+   "Combined_fill",
+   "Combined_hall",
+   "Combined_lantern",
+   "Combined_rest"
+  ],
+  "rel_error": 0.01246,
+  "share": {
+   "sun": 0.3005,
+   "rim": 0.003,
+   "sky": 0.3075,
+   "fill": 0.1226,
+   "hall": 0.252,
+   "lantern": 0.0056,
+   "rest": 0.0069
+  },
+  "denoise_on": true
+ }
+}

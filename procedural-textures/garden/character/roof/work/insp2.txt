@@ -1,0 +1,505 @@
+00:00.552  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/garden_real_fixed.blend"
+=== GROUP CT / Complete two-bank ceramic roof users 2
+NODE Group Input [NodeGroupInput] loc=(0,0)
+NODE Group Output [NodeGroupOutput] loc=(240,0)
+    in Geometry <- ['Transform Geometry.Geometry']
+NODE Join Geometry [GeometryNodeJoinGeometry] loc=(480,0)
+    in Geometry <- ['Group.001.Geometry', 'Group.Geometry']
+NODE Group [GeometryNodeGroup] node_tree=CT / Roof bank 1 local mechanism loc=(720,0)
+    in Width <- ['Group Input.Width']
+    in Half Depth <- ['Group Input.Half Depth']
+    in Rise <- ['Group Input.Rise']
+    in Columns <- ['Group Input.Columns']
+    in Courses <- ['Group Input.Courses']
+    in Seed <- ['Group Input.Seed']
+NODE Group.001 [GeometryNodeGroup] node_tree=CT / Roof bank 2 local mechanism loc=(960,0)
+    in Width <- ['Group Input.Width']
+    in Half Depth <- ['Group Input.Half Depth']
+    in Rise <- ['Group Input.Rise']
+    in Columns <- ['Group Input.Columns']
+    in Courses <- ['Group Input.Courses']
+    in Seed <- ['Group Input.Seed']
+NODE Transform Geometry [GeometryNodeTransform] loc=(1200,0)
+    in Geometry <- ['Join Geometry.Geometry']
+    in Mode = Components
+    in Translation = (0.0, -3.6, -3.57)
+    in Rotation = (0.0, 0.0, 0.0)
+    in Scale = (1.0, 1.0, 1.0)
+=== GROUP CT / Roof bank 1 local mechanism users 2
+NODE Group Input [NodeGroupInput] loc=(0,0)
+NODE Group Output [NodeGroupOutput] loc=(205,0)
+    in Geometry <- ['Join Geometry.Geometry']
+NODE Grid [GeometryNodeMeshGrid] loc=(410,0)
+    in Size X <- ['Group Input.Width']
+    in Size Y <- ['Group Input.Half Depth']
+    in Vertices X <- ['Group Input.Columns']
+    in Vertices Y <- ['Group Input.Courses']
+NODE Position [GeometryNodeInputPosition] loc=(615,0)
+NODE Separate XYZ [ShaderNodeSeparateXYZ] loc=(820,0)
+    in Vector <- ['Position.Position']
+NODE Math [ShaderNodeMath] operation=MULTIPLY loc=(1025,0)
+    in Value <- ['Group Input.Half Depth']
+    in Value = 0.5
+NODE Math.001 [ShaderNodeMath] operation=ADD loc=(1230,0)
+    in Value <- ['Separate XYZ.Y']
+    in Value <- ['Math.Value']
+NODE Math.002 [ShaderNodeMath] operation=DIVIDE loc=(1435,0)
+    in Value <- ['Math.001.Value']
+    in Value <- ['Group Input.Half Depth']
+NODE Math.003 [ShaderNodeMath] operation=SUBTRACT loc=(1640,0)
+    in Value = 1.0
+    in Value <- ['Math.002.Value']
+NODE Math.004 [ShaderNodeMath] operation=MULTIPLY loc=(0,-190)
+    in Value <- ['Math.003.Value']
+    in Value <- ['Group Input.Rise']
+NODE Math.005 [ShaderNodeMath] operation=MULTIPLY loc=(205,-190)
+    in Value <- ['Math.002.Value']
+    in Value <- ['Math.002.Value']
+NODE Math.006 [ShaderNodeMath] operation=MULTIPLY loc=(410,-190)
+    in Value <- ['Math.005.Value']
+    in Value = 0.16
+NODE Math.007 [ShaderNodeMath] operation=ADD loc=(615,-190)
+    in Value <- ['Math.004.Value']
+    in Value <- ['Math.006.Value']
+NODE Math.008 [ShaderNodeMath] operation=ABSOLUTE loc=(820,-190)
+    in Value <- ['Separate XYZ.X']
+NODE Math.009 [ShaderNodeMath] operation=DIVIDE loc=(1025,-190)
+    in Value <- ['Math.008.Value']
+    in Value <- ['Group Input.Width']
+NODE Math.010 [ShaderNodeMath] operation=POWER loc=(1230,-190)
+    in Value <- ['Math.009.Value']
+    in Value = 4.0
+NODE Math.011 [ShaderNodeMath] operation=MULTIPLY loc=(1435,-190)
+    in Value <- ['Math.010.Value']
+    in Value = 2.7
+NODE Math.012 [ShaderNodeMath] operation=ADD loc=(1640,-190)
+    in Value <- ['Math.007.Value']
+    in Value <- ['Math.011.Value']
+NODE Math.013 [ShaderNodeMath] operation=ADD loc=(0,-380)
+    in Value <- ['Math.012.Value']
+    in Value = 3.57
+NODE Math.014 [ShaderNodeMath] operation=ADD loc=(205,-380)
+    in Value <- ['Separate XYZ.X']
+    in Value = 0.0
+NODE Math.015 [ShaderNodeMath] operation=MULTIPLY loc=(410,-380)
+    in Value <- ['Math.001.Value']
+    in Value = -1.0
+NODE Math.016 [ShaderNodeMath] operation=ADD loc=(615,-380)
+    in Value <- ['Math.015.Value']
+    in Value = 3.6
+NODE Combine XYZ [ShaderNodeCombineXYZ] loc=(820,-380)
+    in X <- ['Math.014.Value']
+    in Y <- ['Math.016.Value']
+    in Z <- ['Math.013.Value']
+NODE Set Position [GeometryNodeSetPosition] loc=(1025,-380)
+    in Geometry <- ['Store Named Attribute.Geometry']
+    in Selection = True
+    in Position <- ['Combine XYZ.Vector']
+    in Offset = (0.0, 0.0, 0.0)
+NODE Object Info [GeometryNodeObjectInfo] transform_space=ORIGINAL loc=(1230,-380)
+    in Object = <bpy_struct, Object("CT / Ceramic pan prototype") at 0x7f4ebadcc120>
+    in As Instance = True
+NODE Instance on Points [GeometryNodeInstanceOnPoints] loc=(1435,-380)
+    in Points <- ['Set Position.Geometry']
+    in Selection = True
+    in Instance <- ['Object Info.Geometry']
+    in Pick Instance = False
+    in Instance Index = 0
+    in Rotation <- ['Vector Math.Vector']
+    in Scale <- ['Random Value.001.Value']
+NODE Random Value [FunctionNodeRandomValue] data_type=FLOAT_VECTOR loc=(1640,-380)
+    in Min = (-0.01, -0.008, -0.008)
+    in Max = (0.01, 0.008, 0.008)
+    in ID = 0
+    in Seed <- ['Math.033.Value']
+NODE Random Value.001 [FunctionNodeRandomValue] data_type=FLOAT_VECTOR loc=(0,-570)
+    in Min = (0.97, 0.98, 0.93)
+    in Max = (1.025, 1.025, 1.07)
+    in ID = 0
+    in Seed <- ['Math.034.Value']
+NODE Math.017 [ShaderNodeMath] operation=SUBTRACT loc=(205,-570)
+    in Value <- ['Group Input.Rise']
+    in Value = 0.2
+NODE Math.018 [ShaderNodeMath] operation=DIVIDE loc=(410,-570)
+    in Value <- ['Math.017.Value']
+    in Value <- ['Group Input.Half Depth']
+NODE Math.019 [ShaderNodeMath] operation=ARCTANGENT loc=(615,-570)
+    in Value <- ['Math.018.Value']
+NODE Combine XYZ.001 [ShaderNodeCombineXYZ] loc=(820,-570)
+    in X <- ['Math.023.Value']
+    in Y = 0.0
+    in Z = 0.0
+NODE Vector Math [ShaderNodeVectorMath] operation=ADD loc=(1025,-570)
+    in Vector <- ['Combine XYZ.001.Vector']
+    in Vector <- ['Random Value.Value']
+NODE Store Named Attribute [GeometryNodeStoreNamedAttribute] data_type=FLOAT domain=POINT loc=(1230,-570)
+    in Geometry <- ['Grid.Mesh']
+    in Selection = True
+    in Name = roof_course_t
+    in Value <- ['Math.002.Value']
+NODE Named Attribute [GeometryNodeInputNamedAttribute] data_type=FLOAT loc=(1435,-570)
+    in Name = roof_course_t
+NODE Math.020 [ShaderNodeMath] operation=MULTIPLY loc=(1640,-570)
+    in Value <- ['Named Attribute.Attribute']
+    in Value = 0.32
+NODE Math.021 [ShaderNodeMath] operation=SUBTRACT loc=(0,-760)
+    in Value <- ['Group Input.Rise']
+    in Value <- ['Math.020.Value']
+NODE Math.022 [ShaderNodeMath] operation=DIVIDE loc=(205,-760)
+    in Value <- ['Math.021.Value']
+    in Value <- ['Group Input.Half Depth']
+NODE Math.023 [ShaderNodeMath] operation=ARCTANGENT loc=(410,-760)
+    in Value <- ['Math.022.Value']
+NODE Math.024 [ShaderNodeMath] operation=MULTIPLY loc=(615,-760)
+    in Value <- ['Group Input.Width']
+    in Value = 0.5
+NODE Math.025 [ShaderNodeMath] operation=SUBTRACT loc=(820,-760)
+    in Value = 0.0
+    in Value <- ['Math.024.Value']
+NODE Math.026 [ShaderNodeMath] operation=ADD loc=(1025,-760)
+    in Value = 0.0
+    in Value <- ['Math.024.Value']
+NODE Math.027 [ShaderNodeMath] operation=MULTIPLY loc=(1230,-760)
+    in Value <- ['Group Input.Half Depth']
+    in Value = -1.0
+NODE Math.028 [ShaderNodeMath] operation=ADD loc=(1435,-760)
+    in Value <- ['Math.027.Value']
+    in Value = 3.6
+NODE Math.029 [ShaderNodeMath] operation=ADD loc=(1640,-760)
+    in Value <- ['Group Input.Rise']
+    in Value = 3.6
+NODE Join Geometry [GeometryNodeJoinGeometry] loc=(0,-950)
+    in Geometry <- ['Set Material.003.Geometry', 'Set Material.002.Geometry', 'Set Material.001.Geometry', 'Set Material.Geometry', 'Instance on Points.Instances']
+NODE Combine XYZ.002 [ShaderNodeCombineXYZ] loc=(205,-950)
+    in X <- ['Math.025.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.7
+NODE Combine XYZ.003 [ShaderNodeCombineXYZ] loc=(410,-950)
+    in X <- ['Math.026.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.7
+NODE Curve Line [GeometryNodeCurvePrimitiveLine] mode=POINTS loc=(615,-950)
+    in Start <- ['Combine XYZ.002.Vector']
+    in End <- ['Combine XYZ.003.Vector']
+NODE Quadrilateral [GeometryNodeCurvePrimitiveQuadrilateral] mode=RECTANGLE loc=(820,-950)
+    in Width = 0.18
+    in Height = 0.22
+NODE Curve to Mesh [GeometryNodeCurveToMesh] loc=(1025,-950)
+    in Curve <- ['Curve Line.Curve']
+    in Profile Curve <- ['Quadrilateral.Curve']
+    in Scale = 1.0
+    in Fill Caps = True
+NODE Set Material [GeometryNodeSetMaterial] loc=(1230,-950)
+    in Geometry <- ['Curve to Mesh.Mesh']
+    in Selection = True
+    in Material = <bpy_struct, Material("CT / Timber painterly surface") at 0x7f4eb5453120>
+NODE Combine XYZ.004 [ShaderNodeCombineXYZ] loc=(1435,-950)
+    in X <- ['Math.025.Value']
+    in Y = 3.6
+    in Z <- ['Math.029.Value']
+NODE Combine XYZ.005 [ShaderNodeCombineXYZ] loc=(1640,-950)
+    in X <- ['Math.025.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.71
+NODE Curve Line.001 [GeometryNodeCurvePrimitiveLine] mode=POINTS loc=(0,-1140)
+    in Start <- ['Combine XYZ.004.Vector']
+    in End <- ['Combine XYZ.005.Vector']
+NODE Quadrilateral.001 [GeometryNodeCurvePrimitiveQuadrilateral] mode=RECTANGLE loc=(205,-1140)
+    in Width = 0.18
+    in Height = 0.19
+NODE Curve to Mesh.001 [GeometryNodeCurveToMesh] loc=(410,-1140)
+    in Curve <- ['Curve Line.001.Curve']
+    in Profile Curve <- ['Quadrilateral.001.Curve']
+    in Scale = 1.0
+    in Fill Caps = True
+NODE Set Material.001 [GeometryNodeSetMaterial] loc=(615,-1140)
+    in Geometry <- ['Curve to Mesh.001.Mesh']
+    in Selection = True
+    in Material = <bpy_struct, Material("CT / Timber painterly surface") at 0x7f4eb5453120>
+NODE Combine XYZ.006 [ShaderNodeCombineXYZ] loc=(820,-1140)
+    in X <- ['Math.026.Value']
+    in Y = 3.6
+    in Z <- ['Math.029.Value']
+NODE Combine XYZ.007 [ShaderNodeCombineXYZ] loc=(1025,-1140)
+    in X <- ['Math.026.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.71
+NODE Curve Line.002 [GeometryNodeCurvePrimitiveLine] mode=POINTS loc=(1230,-1140)
+    in Start <- ['Combine XYZ.006.Vector']
+    in End <- ['Combine XYZ.007.Vector']
+NODE Quadrilateral.002 [GeometryNodeCurvePrimitiveQuadrilateral] mode=RECTANGLE loc=(1435,-1140)
+    in Width = 0.18
+    in Height = 0.19
+NODE Curve to Mesh.002 [GeometryNodeCurveToMesh] loc=(1640,-1140)
+    in Curve <- ['Curve Line.002.Curve']
+    in Profile Curve <- ['Quadrilateral.002.Curve']
+    in Scale = 1.0
+    in Fill Caps = True
+NODE Set Material.002 [GeometryNodeSetMaterial] loc=(0,-1330)
+    in Geometry <- ['Curve to Mesh.002.Mesh']
+    in Selection = True
+    in Material = <bpy_struct, Material("CT / Timber painterly surface") at 0x7f4eb5453120>
+NODE Math.030 [ShaderNodeMath] operation=SUBTRACT loc=(205,-1330)
+    in Value <- ['Math.025.Value']
+    in Value = 0.15
+NODE Math.031 [ShaderNodeMath] operation=ADD loc=(410,-1330)
+    in Value <- ['Math.026.Value']
+    in Value = 0.15
+NODE Math.032 [ShaderNodeMath] operation=ADD loc=(615,-1330)
+    in Value <- ['Math.029.Value']
+    in Value = 0.08
+NODE Combine XYZ.008 [ShaderNodeCombineXYZ] loc=(820,-1330)
+    in X <- ['Math.030.Value']
+    in Y = 3.6
+    in Z <- ['Math.032.Value']
+NODE Combine XYZ.009 [ShaderNodeCombineXYZ] loc=(1025,-1330)
+    in X <- ['Math.031.Value']
+    in Y = 3.6
+    in Z <- ['Math.032.Value']
+NODE Curve Line.003 [GeometryNodeCurvePrimitiveLine] mode=POINTS loc=(1230,-1330)
+    in Start <- ['Combine XYZ.008.Vector']
+    in End <- ['Combine XYZ.009.Vector']
+NODE Quadrilateral.003 [GeometryNodeCurvePrimitiveQuadrilateral] mode=RECTANGLE loc=(1435,-1330)
+    in Width = 0.29
+    in Height = 0.25
+NODE Curve to Mesh.003 [GeometryNodeCurveToMesh] loc=(1640,-1330)
+    in Curve <- ['Curve Line.003.Curve']
+    in Profile Curve <- ['Quadrilateral.003.Curve']
+    in Scale = 1.0
+    in Fill Caps = True
+NODE Set Material.003 [GeometryNodeSetMaterial] loc=(0,-1520)
+    in Geometry <- ['Curve to Mesh.003.Mesh']
+    in Selection = True
+    in Material = <bpy_struct, Material("CT / Ceramic ridge host-local surface") at 0x7f4eb68a1320>
+NODE Math.033 [ShaderNodeMath] operation=ADD loc=(0,0)
+    in Value <- ['Group Input.Seed']
+    in Value = 0.0
+NODE Math.034 [ShaderNodeMath] operation=ADD loc=(0,0)
+    in Value <- ['Group Input.Seed']
+    in Value = 137.0
+=== GROUP CT / Roof bank 2 local mechanism users 2
+NODE Group Input [NodeGroupInput] loc=(0,0)
+NODE Group Output [NodeGroupOutput] loc=(205,0)
+    in Geometry <- ['Join Geometry.Geometry']
+NODE Grid [GeometryNodeMeshGrid] loc=(410,0)
+    in Size X <- ['Group Input.Width']
+    in Size Y <- ['Group Input.Half Depth']
+    in Vertices X <- ['Group Input.Columns']
+    in Vertices Y <- ['Group Input.Courses']
+NODE Position [GeometryNodeInputPosition] loc=(615,0)
+NODE Separate XYZ [ShaderNodeSeparateXYZ] loc=(820,0)
+    in Vector <- ['Position.Position']
+NODE Math [ShaderNodeMath] operation=MULTIPLY loc=(1025,0)
+    in Value <- ['Group Input.Half Depth']
+    in Value = 0.5
+NODE Math.001 [ShaderNodeMath] operation=ADD loc=(1230,0)
+    in Value <- ['Separate XYZ.Y']
+    in Value <- ['Math.Value']
+NODE Math.002 [ShaderNodeMath] operation=DIVIDE loc=(1435,0)
+    in Value <- ['Math.001.Value']
+    in Value <- ['Group Input.Half Depth']
+NODE Math.003 [ShaderNodeMath] operation=SUBTRACT loc=(1640,0)
+    in Value = 1.0
+    in Value <- ['Math.002.Value']
+NODE Math.004 [ShaderNodeMath] operation=MULTIPLY loc=(0,-190)
+    in Value <- ['Math.003.Value']
+    in Value <- ['Group Input.Rise']
+NODE Math.005 [ShaderNodeMath] operation=MULTIPLY loc=(205,-190)
+    in Value <- ['Math.002.Value']
+    in Value <- ['Math.002.Value']
+NODE Math.006 [ShaderNodeMath] operation=MULTIPLY loc=(410,-190)
+    in Value <- ['Math.005.Value']
+    in Value = 0.16
+NODE Math.007 [ShaderNodeMath] operation=ADD loc=(615,-190)
+    in Value <- ['Math.004.Value']
+    in Value <- ['Math.006.Value']
+NODE Math.008 [ShaderNodeMath] operation=ABSOLUTE loc=(820,-190)
+    in Value <- ['Separate XYZ.X']
+NODE Math.009 [ShaderNodeMath] operation=DIVIDE loc=(1025,-190)
+    in Value <- ['Math.008.Value']
+    in Value <- ['Group Input.Width']
+NODE Math.010 [ShaderNodeMath] operation=POWER loc=(1230,-190)
+    in Value <- ['Math.009.Value']
+    in Value = 4.0
+NODE Math.011 [ShaderNodeMath] operation=MULTIPLY loc=(1435,-190)
+    in Value <- ['Math.010.Value']
+    in Value = 2.7
+NODE Math.012 [ShaderNodeMath] operation=ADD loc=(1640,-190)
+    in Value <- ['Math.007.Value']
+    in Value <- ['Math.011.Value']
+NODE Math.013 [ShaderNodeMath] operation=ADD loc=(0,-380)
+    in Value <- ['Math.012.Value']
+    in Value = 3.57
+NODE Math.014 [ShaderNodeMath] operation=ADD loc=(205,-380)
+    in Value <- ['Separate XYZ.X']
+    in Value = 0.0
+NODE Math.015 [ShaderNodeMath] operation=MULTIPLY loc=(410,-380)
+    in Value <- ['Math.001.Value']
+    in Value = 1.0
+NODE Math.016 [ShaderNodeMath] operation=ADD loc=(615,-380)
+    in Value <- ['Math.015.Value']
+    in Value = 3.6
+NODE Combine XYZ [ShaderNodeCombineXYZ] loc=(820,-380)
+    in X <- ['Math.014.Value']
+    in Y <- ['Math.016.Value']
+    in Z <- ['Math.013.Value']
+NODE Set Position [GeometryNodeSetPosition] loc=(1025,-380)
+    in Geometry <- ['Store Named Attribute.Geometry']
+    in Selection = True
+    in Position <- ['Combine XYZ.Vector']
+    in Offset = (0.0, 0.0, 0.0)
+NODE Object Info [GeometryNodeObjectInfo] transform_space=ORIGINAL loc=(1230,-380)
+    in Object = <bpy_struct, Object("CT / Ceramic pan prototype") at 0x7f4ebadcc120>
+    in As Instance = True
+NODE Instance on Points [GeometryNodeInstanceOnPoints] loc=(1435,-380)
+    in Points <- ['Set Position.Geometry']
+    in Selection = True
+    in Instance <- ['Object Info.Geometry']
+    in Pick Instance = False
+    in Instance Index = 0
+    in Rotation <- ['Vector Math.Vector']
+    in Scale <- ['Random Value.001.Value']
+NODE Random Value [FunctionNodeRandomValue] data_type=FLOAT_VECTOR loc=(1640,-380)
+    in Min = (-0.01, -0.008, -0.008)
+    in Max = (0.01, 0.008, 0.008)
+    in ID = 0
+    in Seed <- ['Math.030.Value']
+NODE Random Value.001 [FunctionNodeRandomValue] data_type=FLOAT_VECTOR loc=(0,-570)
+    in Min = (0.97, 0.98, 0.93)
+    in Max = (1.025, 1.025, 1.07)
+    in ID = 0
+    in Seed <- ['Math.031.Value']
+NODE Math.017 [ShaderNodeMath] operation=SUBTRACT loc=(205,-570)
+    in Value <- ['Group Input.Rise']
+    in Value = 0.2
+NODE Math.018 [ShaderNodeMath] operation=DIVIDE loc=(410,-570)
+    in Value <- ['Math.017.Value']
+    in Value <- ['Group Input.Half Depth']
+NODE Math.019 [ShaderNodeMath] operation=ARCTANGENT loc=(615,-570)
+    in Value <- ['Math.018.Value']
+NODE Combine XYZ.001 [ShaderNodeCombineXYZ] loc=(820,-570)Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/roof/work/insp2.py", line 32, in <module>
+    print("MOD",m.name,m.node_group.name,[ (k,m[k]) for k in m.keys()])
+                                                             ~~~~~~^^
+TypeError: bpy_struct.keys(): this type doesn't support IDProperties
+    in X <- ['Math.023.Value']
+    in Y = 0.0
+    in Z = 3.1416
+NODE Vector Math [ShaderNodeVectorMath] operation=ADD loc=(1025,-570)
+    in Vector <- ['Combine XYZ.001.Vector']
+    in Vector <- ['Random Value.Value']
+NODE Store Named Attribute [GeometryNodeStoreNamedAttribute] data_type=FLOAT domain=POINT loc=(1230,-570)
+    in Geometry <- ['Grid.Mesh']
+    in Selection = True
+    in Name = roof_course_t
+    in Value <- ['Math.002.Value']
+NODE Named Attribute [GeometryNodeInputNamedAttribute] data_type=FLOAT loc=(1435,-570)
+    in Name = roof_course_t
+NODE Math.020 [ShaderNodeMath] operation=MULTIPLY loc=(1640,-570)
+    in Value <- ['Named Attribute.Attribute']
+    in Value = 0.32
+NODE Math.021 [ShaderNodeMath] operation=SUBTRACT loc=(0,-760)
+    in Value <- ['Group Input.Rise']
+    in Value <- ['Math.020.Value']
+NODE Math.022 [ShaderNodeMath] operation=DIVIDE loc=(205,-760)
+    in Value <- ['Math.021.Value']
+    in Value <- ['Group Input.Half Depth']
+NODE Math.023 [ShaderNodeMath] operation=ARCTANGENT loc=(410,-760)
+    in Value <- ['Math.022.Value']
+NODE Math.024 [ShaderNodeMath] operation=MULTIPLY loc=(615,-760)
+    in Value <- ['Group Input.Width']
+    in Value = 0.5
+NODE Math.025 [ShaderNodeMath] operation=SUBTRACT loc=(820,-760)
+    in Value = 0.0
+    in Value <- ['Math.024.Value']
+NODE Math.026 [ShaderNodeMath] operation=ADD loc=(1025,-760)
+    in Value = 0.0
+    in Value <- ['Math.024.Value']
+NODE Math.027 [ShaderNodeMath] operation=MULTIPLY loc=(1230,-760)
+    in Value <- ['Group Input.Half Depth']
+    in Value = 1.0
+NODE Math.028 [ShaderNodeMath] operation=ADD loc=(1435,-760)
+    in Value <- ['Math.027.Value']
+    in Value = 3.6
+NODE Math.029 [ShaderNodeMath] operation=ADD loc=(1640,-760)
+    in Value <- ['Group Input.Rise']
+    in Value = 3.6
+NODE Join Geometry [GeometryNodeJoinGeometry] loc=(0,-950)
+    in Geometry <- ['Set Material.002.Geometry', 'Set Material.001.Geometry', 'Set Material.Geometry', 'Instance on Points.Instances']
+NODE Combine XYZ.002 [ShaderNodeCombineXYZ] loc=(205,-950)
+    in X <- ['Math.025.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.7
+NODE Combine XYZ.003 [ShaderNodeCombineXYZ] loc=(410,-950)
+    in X <- ['Math.026.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.7
+NODE Curve Line [GeometryNodeCurvePrimitiveLine] mode=POINTS loc=(615,-950)
+    in Start <- ['Combine XYZ.002.Vector']
+    in End <- ['Combine XYZ.003.Vector']
+NODE Quadrilateral [GeometryNodeCurvePrimitiveQuadrilateral] mode=RECTANGLE loc=(820,-950)
+    in Width = 0.18
+    in Height = 0.22
+NODE Curve to Mesh [GeometryNodeCurveToMesh] loc=(1025,-950)
+    in Curve <- ['Curve Line.Curve']
+    in Profile Curve <- ['Quadrilateral.Curve']
+    in Scale = 1.0
+    in Fill Caps = True
+NODE Set Material [GeometryNodeSetMaterial] loc=(1230,-950)
+    in Geometry <- ['Curve to Mesh.Mesh']
+    in Selection = True
+    in Material = <bpy_struct, Material("CT / Timber painterly surface") at 0x7f4eb5453120>
+NODE Combine XYZ.004 [ShaderNodeCombineXYZ] loc=(1435,-950)
+    in X <- ['Math.025.Value']
+    in Y = 3.6
+    in Z <- ['Math.029.Value']
+NODE Combine XYZ.005 [ShaderNodeCombineXYZ] loc=(1640,-950)
+    in X <- ['Math.025.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.71
+NODE Curve Line.001 [GeometryNodeCurvePrimitiveLine] mode=POINTS loc=(0,-1140)
+    in Start <- ['Combine XYZ.004.Vector']
+    in End <- ['Combine XYZ.005.Vector']
+NODE Quadrilateral.001 [GeometryNodeCurvePrimitiveQuadrilateral] mode=RECTANGLE loc=(205,-1140)
+    in Width = 0.18
+    in Height = 0.19
+NODE Curve to Mesh.001 [GeometryNodeCurveToMesh] loc=(410,-1140)
+    in Curve <- ['Curve Line.001.Curve']
+    in Profile Curve <- ['Quadrilateral.001.Curve']
+    in Scale = 1.0
+    in Fill Caps = True
+NODE Set Material.001 [GeometryNodeSetMaterial] loc=(615,-1140)
+    in Geometry <- ['Curve to Mesh.001.Mesh']
+    in Selection = True
+    in Material = <bpy_struct, Material("CT / Timber painterly surface") at 0x7f4eb5453120>
+NODE Combine XYZ.006 [ShaderNodeCombineXYZ] loc=(820,-1140)
+    in X <- ['Math.026.Value']
+    in Y = 3.6
+    in Z <- ['Math.029.Value']
+NODE Combine XYZ.007 [ShaderNodeCombineXYZ] loc=(1025,-1140)
+    in X <- ['Math.026.Value']
+    in Y <- ['Math.028.Value']
+    in Z = 3.71
+NODE Curve Line.002 [GeometryNodeCurvePrimitiveLine] mode=POINTS loc=(1230,-1140)
+    in Start <- ['Combine XYZ.006.Vector']
+    in End <- ['Combine XYZ.007.Vector']
+NODE Quadrilateral.002 [GeometryNodeCurvePrimitiveQuadrilateral] mode=RECTANGLE loc=(1435,-1140)
+    in Width = 0.18
+    in Height = 0.19
+NODE Curve to Mesh.002 [GeometryNodeCurveToMesh] loc=(1640,-1140)
+    in Curve <- ['Curve Line.002.Curve']
+    in Profile Curve <- ['Quadrilateral.002.Curve']
+    in Scale = 1.0
+    in Fill Caps = True
+NODE Set Material.002 [GeometryNodeSetMaterial] loc=(0,-1330)
+    in Geometry <- ['Curve to Mesh.002.Mesh']
+    in Selection = True
+    in Material = <bpy_struct, Material("CT / Timber painterly surface") at 0x7f4eb5453120>
+NODE Math.030 [ShaderNodeMath] operation=ADD loc=(0,0)
+    in Value <- ['Group Input.Seed']
+    in Value = 997.0
+NODE Math.031 [ShaderNodeMath] operation=ADD loc=(0,0)
+    in Value <- ['Group Input.Seed']
+    in Value = 1134.0
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+Blender quit

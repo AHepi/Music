@@ -1,0 +1,236 @@
+{
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/roof/out/dbg4",
+ "apply_stages": [
+  "wood",
+  "roof",
+  "ground",
+  "pond",
+  "final"
+ ],
+ "extra_cameras": {
+  "eave A": [
+   [
+    -1.2,
+    1.6,
+    3.6
+   ],
+   [
+    -0.8,
+    4.5,
+    3.4
+   ],
+   28
+  ],
+  "eave B": [
+   [
+    2.8,
+    1.4,
+    3.0
+   ],
+   [
+    -1.0,
+    4.6,
+    3.45
+   ],
+   35
+  ],
+  "lantern A": [
+   [
+    -0.7,
+    -0.5,
+    0.55
+   ],
+   [
+    1.0,
+    1.0,
+    0.25
+   ],
+   35
+  ],
+  "lantern B": [
+   [
+    2.4,
+    -0.3,
+    0.65
+   ],
+   [
+    0.9,
+    1.2,
+    0.2
+   ],
+   35
+  ],
+  "lantern C": [
+   [
+    -1.2,
+    2.3,
+    0.6
+   ],
+   [
+    0.9,
+    0.9,
+    0.25
+   ],
+   35
+  ],
+  "lantern D": [
+   [
+    -0.3,
+    0.2,
+    0.45
+   ],
+   [
+    1.0,
+    1.1,
+    0.2
+   ],
+   30
+  ],
+  "bridge B": [
+   [
+    -1.0,
+    -2.5,
+    0.9
+   ],
+   [
+    -3.3,
+    0.2,
+    0.2
+   ],
+   32
+  ],
+  "bridge C": [
+   [
+    -6.2,
+    -1.0,
+    1.0
+   ],
+   [
+    -3.8,
+    0.3,
+    0.2
+   ],
+   30
+  ],
+  "pond P1": [
+   [
+    -2.4,
+    -2.1,
+    0.5
+   ],
+   [
+    -2.6,
+    -0.5,
+    -0.15
+   ],
+   45
+  ],
+  "pond P2": [
+   [
+    0.1,
+    -0.8,
+    0.5
+   ],
+   [
+    -2.2,
+    0.8,
+    -0.15
+   ],
+   40
+  ],
+  "pond P3": [
+   [
+    -3.0,
+    -1.9,
+    0.9
+   ],
+   [
+    -3.2,
+    -0.3,
+    -0.12
+   ],
+   40
+  ],
+  "pond Q1": [
+   [
+    -4.6,
+    -1.4,
+    0.5
+   ],
+   [
+    -3.4,
+    -0.2,
+    -0.15
+   ],
+   40
+  ],
+  "pond Q2": [
+   [
+    -2.0,
+    -1.7,
+    0.35
+   ],
+   [
+    -3.8,
+    -0.1,
+    -0.15
+   ],
+   45
+  ],
+  "pond Q3": [
+   [
+    -1.4,
+    0.3,
+    0.45
+   ],
+   [
+    -3.6,
+    1.5,
+    -0.12
+   ],
+   50
+  ]
+ },
+ "pictures": [
+  {
+   "name": "red0",
+   "camera": "G6 final cam eave A",
+   "size": "800x533",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "import bpy\nname = p['mat']\nfor m in bpy.data.materials:\n    if m.node_tree is None: continue\n    b = [n for n in m.node_tree.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled']\n    if not b: continue\n    b = b[0]\n    if m.name == name:\n        for l in list(b.inputs['Base Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Base Color'].default_value = (1, 0, 0, 1)\n        for l in list(b.inputs['Emission Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Emission Color'].default_value = (1, 0, 0, 1)\n        b.inputs['Emission Strength'].default_value = 3.0\n        print('DBGRED set', name, flush=True)\n",
+   "mat": "CT / Timber painterly surface"
+  },
+  {
+   "name": "red1",
+   "camera": "G6 final cam eave A",
+   "size": "800x533",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "import bpy\nname = p['mat']\nfor m in bpy.data.materials:\n    if m.node_tree is None: continue\n    b = [n for n in m.node_tree.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled']\n    if not b: continue\n    b = b[0]\n    if m.name == name:\n        for l in list(b.inputs['Base Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Base Color'].default_value = (1, 0, 0, 1)\n        for l in list(b.inputs['Emission Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Emission Color'].default_value = (1, 0, 0, 1)\n        b.inputs['Emission Strength'].default_value = 3.0\n        print('DBGRED set', name, flush=True)\n",
+   "mat": "G6 roof / underlay"
+  },
+  {
+   "name": "red2",
+   "camera": "G6 final cam eave A",
+   "size": "800x533",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "import bpy\nname = p['mat']\nfor m in bpy.data.materials:\n    if m.node_tree is None: continue\n    b = [n for n in m.node_tree.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled']\n    if not b: continue\n    b = b[0]\n    if m.name == name:\n        for l in list(b.inputs['Base Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Base Color'].default_value = (1, 0, 0, 1)\n        for l in list(b.inputs['Emission Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Emission Color'].default_value = (1, 0, 0, 1)\n        b.inputs['Emission Strength'].default_value = 3.0\n        print('DBGRED set', name, flush=True)\n",
+   "mat": "G6 roof / eave disc"
+  },
+  {
+   "name": "red3",
+   "camera": "G6 final cam eave A",
+   "size": "800x533",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "import bpy\nname = p['mat']\nfor m in bpy.data.materials:\n    if m.node_tree is None: continue\n    b = [n for n in m.node_tree.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled']\n    if not b: continue\n    b = b[0]\n    if m.name == name:\n        for l in list(b.inputs['Base Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Base Color'].default_value = (1, 0, 0, 1)\n        for l in list(b.inputs['Emission Color'].links): m.node_tree.links.remove(l)\n        b.inputs['Emission Color'].default_value = (1, 0, 0, 1)\n        b.inputs['Emission Strength'].default_value = 3.0\n        print('DBGRED set', name, flush=True)\n",
+   "mat": "G6 roof / ridge ceramic"
+  }
+ ]
+}

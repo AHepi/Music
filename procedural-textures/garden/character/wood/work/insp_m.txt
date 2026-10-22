@@ -1,0 +1,1008 @@
+00:00.483  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/garden_real_fixed.blend"
+MAT Astra / planks tone 0 users 1 nodes 25 links 60 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan weathered_planks tri-x
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Map Range MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.50 dist=0.01
+   N Material Output OutputMaterial 
+   N WK wallgrowth Group  group=WK WALL GROWTH
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK MASKS Group  group=WK MASKS Astra / planks tone 0
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Group : Roughness -> Map Range : Value
+   L Group : Height -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK wallgrowth : Dot Across
+   L WK SCALE : Dot Along -> WK wallgrowth : Dot Along
+   L WK SCALE : Fade Near -> WK wallgrowth : Fade Near
+   L WK SCALE : Far Blend -> WK wallgrowth : Far Blend
+   L Vector Math.002 : Vector -> WK wallcracks : Colour
+   L Map Range : Result -> WK wallcracks : Roughness
+   L Value : Value -> WK wallcracks : Specular IOR Level
+   L Value.001 : Value -> WK wallcracks : Coat Weight
+   L Bump : Normal -> WK wallcracks : Normal
+   L Value.002 : Value -> WK wallcracks : Metallic
+   L Bump : Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> WK wallgrowth : Colour
+   L WK wallcracks : Roughness -> WK wallgrowth : Roughness
+   L WK wallcracks : Specular IOR Level -> WK wallgrowth : Specular IOR Level
+   L WK wallcracks : Coat Weight -> WK wallgrowth : Coat Weight
+   L WK wallcracks : Normal -> WK wallgrowth : Normal
+   L WK wallcracks : Metallic -> WK wallgrowth : Metallic
+   L WK wallcracks : Wet Normal -> WK wallgrowth : Wet Normal
+   L WK wallgrowth : Colour -> Principled BSDF : Base Color
+   L WK wallgrowth : Roughness -> Principled BSDF : Roughness
+   L WK wallgrowth : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK wallgrowth : Coat Weight -> Principled BSDF : Coat Weight
+   L WK wallgrowth : Normal -> Principled BSDF : Normal
+   L WK wallgrowth : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Moss Site -> WK wallgrowth : M Moss Site
+   L WK MASKS : M Algae Site -> WK wallgrowth : M Algae Site
+   L WK MASKS : M Lichen Site -> WK wallgrowth : M Lichen Site
+   L WK MASKS : M Dampness -> WK wallgrowth : M Dampness
+   L WK MASKS : M Drip -> WK wallgrowth : M Drip
+   L WK MASKS : M Drip Dist -> WK wallgrowth : M Drip Dist
+   L WK MASKS : M Height -> WK wallgrowth : M Height
+   L WK MASKS : M Frame Valid -> WK wallgrowth : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+MAT Astra / planks tone 3 users 1 nodes 25 links 60 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan weathered_planks tri-x
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Map Range MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.50 dist=0.01
+   N Material Output OutputMaterial 
+   N WK wallgrowth Group  group=WK WALL GROWTH
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK MASKS Group  group=WK MASKS Astra / planks tone 3
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Group : Roughness -> Map Range : Value
+   L Group : Height -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK wallgrowth : Dot Across
+   L WK SCALE : Dot Along -> WK wallgrowth : Dot Along
+   L WK SCALE : Fade Near -> WK wallgrowth : Fade Near
+   L WK SCALE : Far Blend -> WK wallgrowth : Far Blend
+   L Vector Math.002 : Vector -> WK wallcracks : Colour
+   L Map Range : Result -> WK wallcracks : Roughness
+   L Value : Value -> WK wallcracks : Specular IOR Level
+   L Value.001 : Value -> WK wallcracks : Coat Weight
+   L Bump : Normal -> WK wallcracks : Normal
+   L Value.002 : Value -> WK wallcracks : Metallic
+   L Bump : Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> WK wallgrowth : Colour
+   L WK wallcracks : Roughness -> WK wallgrowth : Roughness
+   L WK wallcracks : Specular IOR Level -> WK wallgrowth : Specular IOR Level
+   L WK wallcracks : Coat Weight -> WK wallgrowth : Coat Weight
+   L WK wallcracks : Normal -> WK wallgrowth : Normal
+   L WK wallcracks : Metallic -> WK wallgrowth : Metallic
+   L WK wallcracks : Wet Normal -> WK wallgrowth : Wet Normal
+   L WK wallgrowth : Colour -> Principled BSDF : Base Color
+   L WK wallgrowth : Roughness -> Principled BSDF : Roughness
+   L WK wallgrowth : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK wallgrowth : Coat Weight -> Principled BSDF : Coat Weight
+   L WK wallgrowth : Normal -> Principled BSDF : Normal
+   L WK wallgrowth : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Moss Site -> WK wallgrowth : M Moss Site
+   L WK MASKS : M Algae Site -> WK wallgrowth : M Algae Site
+   L WK MASKS : M Lichen Site -> WK wallgrowth : M Lichen Site
+   L WK MASKS : M Dampness -> WK wallgrowth : M Dampness
+   L WK MASKS : M Drip -> WK wallgrowth : M Drip
+   L WK MASKS : M Drip Dist -> WK wallgrowth : M Drip Dist
+   L WK MASKS : M Height -> WK wallgrowth : M Height
+   L WK MASKS : M Frame Valid -> WK wallgrowth : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+MAT Dark timber users 2 nodes 26 links 75 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan old_wood_floor tri-z
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Map Range MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.45 dist=0.01
+   N Material Output OutputMaterial 
+   N WK soot Group  group=WK SOOT
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK foot Group  group=WK FOOT
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK MASKS Group  group=WK MASKS Dark timber
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Group : Roughness -> Map Range : Value
+   L Group : Height -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK soot : Dot Across
+   L WK SCALE : Dot Along -> WK soot : Dot Along
+   L WK SCALE : Fade Near -> WK soot : Fade Near
+   L WK SCALE : Far Blend -> WK soot : Far Blend
+   L WK SCALE : Dot Across -> WK foot : Dot Across
+   L WK SCALE : Dot Along -> WK foot : Dot Along
+   L WK SCALE : Fade Near -> WK foot : Fade Near
+   L WK SCALE : Far Blend -> WK foot : Far Blend
+   L Vector Math.002 : Vector -> WK soot : Colour
+   L Map Range : Result -> WK soot : Roughness
+   L Value : Value -> WK soot : Specular IOR Level
+   L Value.001 : Value -> WK soot : Coat Weight
+   L Bump : Normal -> WK soot : Normal
+   L Value.002 : Value -> WK soot : Metallic
+   L Bump : Normal -> WK soot : Wet Normal
+   L WK soot : Colour -> WK foot : Colour
+   L WK soot : Roughness -> WK foot : Roughness
+   L WK soot : Specular IOR Level -> WK foot : Specular IOR Level
+   L WK soot : Coat Weight -> WK foot : Coat Weight
+   L WK soot : Normal -> WK foot : Normal
+   L WK soot : Metallic -> WK foot : Metallic
+   L WK soot : Wet Normal -> WK foot : Wet Normal
+   L WK foot : Colour -> WK wallcracks : Colour
+   L WK foot : Roughness -> WK wallcracks : Roughness
+   L WK foot : Specular IOR Level -> WK wallcracks : Specular IOR Level
+   L WK foot : Coat Weight -> WK wallcracks : Coat Weight
+   L WK foot : Normal -> WK wallcracks : Normal
+   L WK foot : Metallic -> WK wallcracks : Metallic
+   L WK foot : Wet Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> Principled BSDF : Base Color
+   L WK wallcracks : Roughness -> Principled BSDF : Roughness
+   L WK wallcracks : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK wallcracks : Coat Weight -> Principled BSDF : Coat Weight
+   L WK wallcracks : Normal -> Principled BSDF : Normal
+   L WK wallcracks : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Sheltered -> WK soot : M Sheltered
+   L WK MASKS : M Reveal -> WK soot : M Reveal
+   L WK MASKS : M Shade -> WK soot : M Shade
+   L WK MASKS : M Tx Cavity -> WK soot : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK soot : M Frame Valid
+   L WK MASKS : M Height -> WK foot : M Height
+   L WK MASKS : M Dampness -> WK foot : M Dampness
+   L WK MASKS : M Vertical Foot -> WK foot : M Vertical Foot
+   L WK MASKS : M Tx Cavity -> WK foot : M Tx Cavity
+   L WK MASKS : M Tx Cell -> WK foot : M Tx Cell
+   L WK MASKS : M Shade -> WK foot : M Shade
+   L WK MASKS : M Frame Valid -> WK foot : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+MAT Beam timber users 2 nodes 26 links 75 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan old_wood_floor tri-x
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Map Range MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.45 dist=0.01
+   N Material Output OutputMaterial 
+   N WK soot Group  group=WK SOOT
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK foot Group  group=WK FOOT
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK MASKS Group  group=WK MASKS Beam timber
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Group : Roughness -> Map Range : Value
+   L Group : Height -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK soot : Dot Across
+   L WK SCALE : Dot Along -> WK soot : Dot Along
+   L WK SCALE : Fade Near -> WK soot : Fade Near
+   L WK SCALE : Far Blend -> WK soot : Far Blend
+   L WK SCALE : Dot Across -> WK foot : Dot Across
+   L WK SCALE : Dot Along -> WK foot : Dot Along
+   L WK SCALE : Fade Near -> WK foot : Fade Near
+   L WK SCALE : Far Blend -> WK foot : Far Blend
+   L Vector Math.002 : Vector -> WK soot : Colour
+   L Map Range : Result -> WK soot : Roughness
+   L Value : Value -> WK soot : Specular IOR Level
+   L Value.001 : Value -> WK soot : Coat Weight
+   L Bump : Normal -> WK soot : Normal
+   L Value.002 : Value -> WK soot : Metallic
+   L Bump : Normal -> WK soot : Wet Normal
+   L WK soot : Colour -> WK foot : Colour
+   L WK soot : Roughness -> WK foot : Roughness
+   L WK soot : Specular IOR Level -> WK foot : Specular IOR Level
+   L WK soot : Coat Weight -> WK foot : Coat Weight
+   L WK soot : Normal -> WK foot : Normal
+   L WK soot : Metallic -> WK foot : Metallic
+   L WK soot : Wet Normal -> WK foot : Wet Normal
+   L WK foot : Colour -> WK wallcracks : Colour
+   L WK foot : Roughness -> WK wallcracks : Roughness
+   L WK foot : Specular IOR Level -> WK wallcracks : Specular IOR Level
+   L WK foot : Coat Weight -> WK wallcracks : Coat Weight
+   L WK foot : Normal -> WK wallcracks : Normal
+   L WK foot : Metallic -> WK wallcracks : Metallic
+   L WK foot : Wet Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> Principled BSDF : Base Color
+   L WK wallcracks : Roughness -> Principled BSDF : Roughness
+   L WK wallcracks : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK wallcracks : Coat Weight -> Principled BSDF : Coat Weight
+   L WK wallcracks : Normal -> Principled BSDF : Normal
+   L WK wallcracks : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Sheltered -> WK soot : M Sheltered
+   L WK MASKS : M Reveal -> WK soot : M Reveal
+   L WK MASKS : M Shade -> WK soot : M Shade
+   L WK MASKS : M Tx Cavity -> WK soot : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK soot : M Frame Valid
+   L WK MASKS : M Height -> WK foot : M Height
+   L WK MASKS : M Dampness -> WK foot : M Dampness
+   L WK MASKS : M Vertical Foot -> WK foot : M Vertical Foot
+   L WK MASKS : M Tx Cavity -> WK foot : M Tx Cavity
+   L WK MASKS : M Tx Cell -> WK foot : M Tx Cell
+   L WK MASKS : M Shade -> WK foot : M Shade
+   L WK MASKS : M Frame Valid -> WK foot : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+MAT GARDEN timber.post users 3 nodes 26 links 75 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan old_wood_floor tri-z
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Map Range MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.45 dist=0.01
+   N Material Output OutputMaterial 
+   N WK soot Group  group=WK SOOT
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK foot Group  group=WK FOOT
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK MASKS Group  group=WK MASKS GARDEN timber.post
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Group : Roughness -> Map Range : Value
+   L Group : Height -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK soot : Dot Across
+   L WK SCALE : Dot Along -> WK soot : Dot Along
+   L WK SCALE : Fade Near -> WK soot : Fade Near
+   L WK SCALE : Far Blend -> WK soot : Far Blend
+   L WK SCALE : Dot Across -> WK foot : Dot Across
+   L WK SCALE : Dot Along -> WK foot : Dot Along
+   L WK SCALE : Fade Near -> WK foot : Fade Near
+   L WK SCALE : Far Blend -> WK foot : Far Blend
+   L Vector Math.002 : Vector -> WK soot : Colour
+   L Map Range : Result -> WK soot : Roughness
+   L Value : Value -> WK soot : Specular IOR Level
+   L Value.001 : Value -> WK soot : Coat Weight
+   L Bump : Normal -> WK soot : Normal
+   L Value.002 : Value -> WK soot : Metallic
+   L Bump : Normal -> WK soot : Wet Normal
+   L WK soot : Colour -> WK foot : Colour
+   L WK soot : Roughness -> WK foot : Roughness
+   L WK soot : Specular IOR Level -> WK foot : Specular IOR Level
+   L WK soot : Coat Weight -> WK foot : Coat Weight
+   L WK soot : Normal -> WK foot : Normal
+   L WK soot : Metallic -> WK foot : Metallic
+   L WK soot : Wet Normal -> WK foot : Wet Normal
+   L WK foot : Colour -> WK wallcracks : Colour
+   L WK foot : Roughness -> WK wallcracks : Roughness
+   L WK foot : Specular IOR Level -> WK wallcracks : Specular IOR Level
+   L WK foot : Coat Weight -> WK wallcracks : Coat Weight
+   L WK foot : Normal -> WK wallcracks : Normal
+   L WK foot : Metallic -> WK wallcracks : Metallic
+   L WK foot : Wet Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> Principled BSDF : Base Color
+   L WK wallcracks : Roughness -> Principled BSDF : Roughness
+   L WK wallcracks : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK wallcracks : Coat Weight -> Principled BSDF : Coat Weight
+   L WK wallcracks : Normal -> Principled BSDF : Normal
+   L WK wallcracks : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Sheltered -> WK soot : M Sheltered
+   L WK MASKS : M Reveal -> WK soot : M Reveal
+   L WK MASKS : M Shade -> WK soot : M Shade
+   L WK MASKS : M Tx Cavity -> WK soot : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK soot : M Frame Valid
+   L WK MASKS : M Height -> WK foot : M Height
+   L WK MASKS : M Dampness -> WK foot : M Dampness
+   L WK MASKS : M Vertical Foot -> WK foot : M Vertical Foot
+   L WK MASKS : M Tx Cavity -> WK foot : M Tx Cavity
+   L WK MASKS : M Tx Cell -> WK foot : M Tx Cell
+   L WK MASKS : M Shade -> WK foot : M Shade
+   L WK MASKS : M Frame Valid -> WK foot : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+MAT Plinth stone users 1 nodes 28 links 111 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan japanese_stone_wall tri
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Map Range MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.60 dist=0.01
+   N Material Output OutputMaterial 
+   N WK soot Group  group=WK SOOT
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK runoff Group  group=WK RUNOFF
+   N WK foot Group  group=WK FOOT
+   N WK wallgrowth Group  group=WK WALL GROWTH
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK MASKS Group  group=WK MASKS Plinth stone
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Group : Roughness -> Map Range : Value
+   L Group : Height -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK soot : Dot Across
+   L WK SCALE : Dot Along -> WK soot : Dot Along
+   L WK SCALE : Fade Near -> WK soot : Fade Near
+   L WK SCALE : Far Blend -> WK soot : Far Blend
+   L WK SCALE : Dot Across -> WK runoff : Dot Across
+   L WK SCALE : Dot Along -> WK runoff : Dot Along
+   L WK SCALE : Fade Near -> WK runoff : Fade Near
+   L WK SCALE : Far Blend -> WK runoff : Far Blend
+   L WK SCALE : Dot Across -> WK foot : Dot Across
+   L WK SCALE : Dot Along -> WK foot : Dot Along
+   L WK SCALE : Fade Near -> WK foot : Fade Near
+   L WK SCALE : Far Blend -> WK foot : Far Blend
+   L WK SCALE : Dot Across -> WK wallgrowth : Dot Across
+   L WK SCALE : Dot Along -> WK wallgrowth : Dot Along
+   L WK SCALE : Fade Near -> WK wallgrowth : Fade Near
+   L WK SCALE : Far Blend -> WK wallgrowth : Far Blend
+   L Vector Math.002 : Vector -> WK soot : Colour
+   L Map Range : Result -> WK soot : Roughness
+   L Value : Value -> WK soot : Specular IOR Level
+   L Value.001 : Value -> WK soot : Coat Weight
+   L Bump : Normal -> WK soot : Normal
+   L Value.002 : Value -> WK soot : Metallic
+   L Bump : Normal -> WK soot : Wet Normal
+   L WK soot : Colour -> WK runoff : Colour
+   L WK soot : Roughness -> WK runoff : Roughness
+   L WK soot : Specular IOR Level -> WK runoff : Specular IOR Level
+   L WK soot : Coat Weight -> WK runoff : Coat Weight
+   L WK soot : Normal -> WK runoff : Normal
+   L WK soot : Metallic -> WK runoff : Metallic
+   L WK soot : Wet Normal -> WK runoff : Wet Normal
+   L WK runoff : Colour -> WK foot : Colour
+   L WK runoff : Roughness -> WK foot : Roughness
+   L WK runoff : Specular IOR Level -> WK foot : Specular IOR Level
+   L WK runoff : Coat Weight -> WK foot : Coat Weight
+   L WK runoff : Normal -> WK foot : Normal
+   L WK runoff : Metallic -> WK foot : Metallic
+   L WK runoff : Wet Normal -> WK foot : Wet Normal
+   L WK foot : Colour -> WK wallcracks : Colour
+   L WK foot : Roughness -> WK wallcracks : Roughness
+   L WK foot : Specular IOR Level -> WK wallcracks : Specular IOR Level
+   L WK foot : Coat Weight -> WK wallcracks : Coat Weight
+   L WK foot : Normal -> WK wallcracks : Normal
+   L WK foot : Metallic -> WK wallcracks : Metallic
+   L WK foot : Wet Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> WK wallgrowth : Colour
+   L WK wallcracks : Roughness -> WK wallgrowth : Roughness
+   L WK wallcracks : Specular IOR Level -> WK wallgrowth : Specular IOR Level
+   L WK wallcracks : Coat Weight -> WK wallgrowth : Coat Weight
+   L WK wallcracks : Normal -> WK wallgrowth : Normal
+   L WK wallcracks : Metallic -> WK wallgrowth : Metallic
+   L WK wallcracks : Wet Normal -> WK wallgrowth : Wet Normal
+   L WK wallgrowth : Colour -> Principled BSDF : Base Color
+   L WK wallgrowth : Roughness -> Principled BSDF : Roughness
+   L WK wallgrowth : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK wallgrowth : Coat Weight -> Principled BSDF : Coat Weight
+   L WK wallgrowth : Normal -> Principled BSDF : Normal
+   L WK wallgrowth : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Sheltered -> WK soot : M Sheltered
+   L WK MASKS : M Reveal -> WK soot : M Reveal
+   L WK MASKS : M Shade -> WK soot : M Shade
+   L WK MASKS : M Tx Cavity -> WK soot : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK soot : M Frame Valid
+   L WK MASKS : M Drip -> WK runoff : M Drip
+   L WK MASKS : M Drip Dist -> WK runoff : M Drip Dist
+   L WK MASKS : M Drip Kind -> WK runoff : M Drip Kind
+   L WK MASKS : M Sheltered -> WK runoff : M Sheltered
+   L WK MASKS : M Height -> WK runoff : M Height
+   L WK MASKS : M Frame Valid -> WK runoff : M Frame Valid
+   L WK MASKS : M Height -> WK foot : M Height
+   L WK MASKS : M Dampness -> WK foot : M Dampness
+   L WK MASKS : M Vertical Foot -> WK foot : M Vertical Foot
+   L WK MASKS : M Tx Cavity -> WK foot : M Tx Cavity
+   L WK MASKS : M Tx Cell -> WK foot : M Tx Cell
+   L WK MASKS : M Shade -> WK foot : M Shade
+   L WK MASKS : M Frame Valid -> WK foot : M Frame Valid
+   L WK MASKS : M Moss Site -> WK wallgrowth : M Moss Site
+   L WK MASKS : M Algae Site -> WK wallgrowth : M Algae Site
+   L WK MASKS : M Lichen Site -> WK wallgrowth : M Lichen Site
+   L WK MASKS : M Dampness -> WK wallgrowth : M Dampness
+   L WK MASKS : M Drip -> WK wallgrowth : M Drip
+   L WK MASKS : M Drip Dist -> WK wallgrowth : M Drip Dist
+   L WK MASKS : M Height -> WK wallgrowth : M Height
+   L WK MASKS : M Frame Valid -> WK wallgrowth : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+MAT CT / Stone painterly surface.039 users 2 nodes 52 links 160 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan rock_boulder_dry tri
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Group.001 Group  group=GARDEN scan lichen_rock tri
+   N Vector Math.003 VectorMath 
+   N Vector Math.004 VectorMath 
+   N Vector Math.005 VectorMath 
+   N Vector Math.006 VectorMath 
+   N Vector Math.007 VectorMath 
+   N Vector Math.008 VectorMath 
+   N Noise Texture TexNoise 
+   N Map Range MapRange 
+   N Math.006 Math 
+   N Math.007 Math 
+   N Separate XYZ SeparateXYZ 
+   N Math.008 Math 
+   N Map Range.001 MapRange 
+   N Math.009 Math 
+   N Math.010 Math 
+   N Math.011 Math 
+   N Mix Mix 
+   N Math.012 Math 
+   N Mix.001 Mix 
+   N Math.013 Math 
+   N Math.014 Math 
+   N Math.015 Math 
+   N Vector Math.009 VectorMath 
+   N Map Range.002 MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.55 dist=0.02
+   N Material Output OutputMaterial 
+   N WK foot Group  group=WK FOOT
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK wallgrowth Group  group=WK WALL GROWTH
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK dirt Group  group=WK GROUND DIRT [film,marks]
+   N WK groundmoss Group  group=WK GROUND MOSS [algae,patch]
+   N WK MASKS Group  group=WK MASKS CT / Stone painterly surface.039
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Geometry : Position -> Group.001 : Position
+   L Geometry : Normal -> Group.001 : Normal
+   L Combine XYZ.001 : Vector -> Vector Math.003 : Vector
+   L Vector Math.003 : Vector -> Group.001 : Offset
+   L Group.001 : Color -> Vector Math.004 : Vector
+   L Vector Math.004 : Vector -> Vector Math.005 : Vector
+   L Vector Math.005 : Vector -> Vector Math.006 : Vector
+   L Geometry : Position -> Vector Math.007 : Vector
+   L Vector Math.007 : Vector -> Vector Math.008 : Vector
+   L Combine XYZ.001 : Vector -> Vector Math.008 : Vector
+   L Vector Math.008 : Vector -> Noise Texture : Vector
+   L Noise Texture : Factor -> Map Range : Value
+   L Object Info : Random -> Math.006 : Value
+   L Math.006 : Value -> Math.007 : Value
+   L Geometry : Normal -> Separate XYZ : Vector
+   L Separate XYZ : Z -> Math.008 : Value
+   L Math.008 : Value -> Map Range.001 : Value
+   L Map Range.001 : Result -> Math.009 : Value
+   L Math.009 : Value -> Math.010 : Value
+   L Map Range : Result -> Math.010 : Value
+   L Math.010 : Value -> Math.011 : Value
+   L Math.007 : Value -> Math.011 : Value
+   L Math.011 : Value -> Mix : Factor
+   L Vector Math.002 : Vector -> Mix : A
+   L Vector Math.006 : Vector -> Mix : B
+   L Math.011 : Value -> Math.012 : Value
+   L Math.012 : Value -> Mix.001 : Factor
+   L Group : Height -> Mix.001 : A
+   L Group.001 : Height -> Mix.001 : B
+   L Object Info : Random -> Math.013 : Value
+   L Math.013 : Value -> Math.014 : Value
+   L Math.014 : Value -> Math.015 : Value
+   L Mix : Result -> Vector Math.009 : Vector
+   L Math.015 : Value -> Vector Math.009 : Scale
+   L Group : Roughness -> Map Range.002 : Value
+   L Mix.001 : Result -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK foot : Dot Across
+   L WK SCALE : Dot Along -> WK foot : Dot Along
+   L WK SCALE : Fade Near -> WK foot : Fade Near
+   L WK SCALE : Far Blend -> WK foot : Far Blend
+   L WK SCALE : Dot Across -> WK wallgrowth : Dot Across
+   L WK SCALE : Dot Along -> WK wallgrowth : Dot Along
+   L WK SCALE : Fade Near -> WK wallgrowth : Fade Near
+   L WK SCALE : Far Blend -> WK wallgrowth : Far Blend
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   L WK SCALE : Dot Across -> WK dirt : Dot Across
+   L WK SCALE : Dot Along -> WK dirt : Dot Along
+   L WK SCALE : Fade Near -> WK dirt : Fade Near
+   L WK SCALE : Far Blend -> WK dirt : Far Blend
+   L WK SCALE : Distance -> WK dirt : Distance
+   L WK SCALE : Cos View -> WK dirt : Cos View
+   L Vector Math.009 : Vector -> WK foot : Colour
+   L Map Range.002 : Result -> WK foot : Roughness
+   L Value : Value -> WK foot : Specular IOR Level
+   L Value.001 : Value -> WK foot : Coat Weight
+   L Bump : Normal -> WK foot : Normal
+   L Value.002 : Value -> WK foot : Metallic
+   L Bump : Normal -> WK foot : Wet Normal
+   L WK foot : Colour -> WK dirt : Colour
+   L WK foot : Roughness -> WK dirt : Roughness
+   L WK foot : Specular IOR Level -> WK dirt : Specular IOR Level
+   L WK foot : Coat Weight -> WK dirt : Coat Weight
+   L WK foot : Normal -> WK dirt : Normal
+   L WK foot : Metallic -> WK dirt : Metallic
+   L WK foot : Wet Normal -> WK dirt : Wet Normal
+   L WK dirt : Colour -> WK wallcracks : Colour
+   L WK dirt : Roughness -> WK wallcracks : Roughness
+   L WK dirt : Specular IOR Level -> WK wallcracks : Specular IOR Level
+   L WK dirt : Coat Weight -> WK wallcracks : Coat Weight
+   L WK dirt : Normal -> WK wallcracks : Normal
+   L WK dirt : Metallic -> WK wallcracks : Metallic
+   L WK dirt : Wet Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> WK wallgrowth : Colour
+   L WK wallcracks : Roughness -> WK wallgrowth : Roughness
+   L WK wallcracks : Specular IOR Level -> WK wallgrowth : Specular IOR Level
+   L WK wallcracks : Coat Weight -> WK wallgrowth : Coat Weight
+   L WK wallcracks : Normal -> WK wallgrowth : Normal
+   L WK wallcracks : Metallic -> WK wallgrowth : Metallic
+   L WK wallcracks : Wet Normal -> WK wallgrowth : Wet Normal
+   L WK wallgrowth : Colour -> WK groundmoss : Colour
+   L WK wallgrowth : Roughness -> WK groundmoss : Roughness
+   L WK wallgrowth : Specular IOR Level -> WK groundmoss : Specular IOR Level
+   L WK wallgrowth : Coat Weight -> WK groundmoss : Coat Weight
+   L WK wallgrowth : Normal -> WK groundmoss : Normal
+   L WK wallgrowth : Metallic -> WK groundmoss : Metallic
+   L WK groundmoss : Colour -> Principled BSDF : Base Color
+   L WK groundmoss : Roughness -> Principled BSDF : Roughness
+   L WK groundmoss : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK groundmoss : Coat Weight -> Principled BSDF : Coat Weight
+   L WK groundmoss : Normal -> Principled BSDF : Normal
+   L WK groundmoss : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Height -> WK foot : M Height
+   L WK MASKS : M Dampness -> WK foot : M Dampness
+   L WK MASKS : M Vertical Foot -> WK foot : M Vertical Foot
+   L WK MASKS : M Tx Cavity -> WK foot : M Tx Cavity
+   L WK MASKS : M Tx Cell -> WK foot : M Tx Cell
+   L WK MASKS : M Shade -> WK foot : M Shade
+   L WK MASKS : M Frame Valid -> WK foot : M Frame Valid
+   L WK MASKS : M Moss Site -> WK wallgrowth : M Moss Site
+   L WK MASKS : M Algae Site -> WK wallgrowth : M Algae Site
+   L WK MASKS : M Lichen Site -> WK wallgrowth : M Lichen Site
+   L WK MASKS : M Dampness -> WK wallgrowth : M Dampness
+   L WK MASKS : M Drip -> WK wallgrowth : M Drip
+   L WK MASKS : M Drip Dist -> WK wallgrowth : M Drip Dist
+   L WK MASKS : M Height -> WK wallgrowth : M Height
+   L WK MASKS : M Frame Valid -> WK wallgrowth : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK MASKS : M Footfall -> WK dirt : M Footfall
+   L WK MASKS : M Keepclear -> WK dirt : M Keepclear
+   L WK MASKS : M Lowness -> WK dirt : M Lowness
+   L WK MASKS : M Crown -> WK dirt : M Crown
+   L WK MASKS : M Wall Dist -> WK dirt : M Wall Dist
+   L WK MASKS : M Shade -> WK dirt : M Shade
+   L WK MASKS : M Vertical Foot -> WK dirt : M Vertical Foot
+   L WK MASKS : M Seam Dist -> WK dirt : M Seam Dist
+   L WK MASKS : M Entry Rand -> WK dirt : M Entry Rand
+   L WK MASKS : M Step Foot -> WK dirt : M Step Foot
+   L WK MASKS : M Rubbish Heap -> WK dirt : M Rubbish Heap
+   L WK MASKS : M Moss Site -> WK groundmoss : M Moss Site
+   L WK MASKS : M Algae Site -> WK groundmoss : M Algae Site
+   L WK MASKS : M Shade -> WK groundmoss : M Shade
+   L WK MASKS : M Dampness -> WK groundmoss : M Dampness
+   L WK MASKS : M Footfall -> WK groundmoss : M Footfall
+   L WK MASKS : M Keepclear -> WK groundmoss : M Keepclear
+   L WK MASKS : M Crown -> WK groundmoss : M Crown
+   L WK MASKS : M Existing Growth -> WK groundmoss : M Existing Growth
+   L WK MASKS : M Vertical Foot -> WK groundmoss : M Vertical Foot
+   L WK MASKS : M Wall Dist -> WK groundmoss : M Wall Dist
+   L WK MASKS : M Seam Dist -> WK groundmoss : M Seam Dist
+   L WK MASKS : M Piece Gap -> WK groundmoss : M Piece Gap
+   L WK SCALE : Dot Across -> WK groundmoss : Dot Across
+   L WK SCALE : Dot Along -> WK groundmoss : Dot Along
+   L WK SCALE : Fade Near -> WK groundmoss : Fade Near
+   L WK SCALE : Far Blend -> WK groundmoss : Far Blend
+   L WK SCALE : Distance -> WK groundmoss : Distance
+   L WK SCALE : Cos View -> WK groundmoss : Cos View
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+MAT CT / Stone painterly surface.008 users 2 nodes 32 links 131 blend DITHERED
+   N Geometry NewGeometry 
+   N Object Info ObjectInfo 
+   N Combine XYZ CombineXYZ 
+   N Math Math 
+   N Math.001 Math 
+   N Math.002 Math 
+   N Math.003 Math 
+   N Math.004 Math 
+   N Math.005 Math 
+   N Combine XYZ.001 CombineXYZ 
+   N Group Group  group=GARDEN scan rock_08 tri
+   N Vector Math VectorMath 
+   N Vector Math.001 VectorMath 
+   N Vector Math.002 VectorMath 
+   N Math.006 Math 
+   N Math.007 Math 
+   N Math.008 Math 
+   N Vector Math.003 VectorMath 
+   N Map Range MapRange 
+   N Principled BSDF BsdfPrincipled 
+   N Bump Bump  strength=0.55 dist=0.02
+   N Material Output OutputMaterial 
+   N WK foot Group  group=WK FOOT
+   N Value Value 
+   N Value.001 Value 
+   N Value.002 Value 
+   N WK SCALE Group  group=WK SCALE
+   N WK wallgrowth Group  group=WK WALL GROWTH
+   N WK wallcracks Group  group=WK WALL CRACKS
+   N WK dirt Group  group=WK GROUND DIRT [film,marks]
+   N WK groundmoss Group  group=WK GROUND MOSS [algae,patch]
+   N WK MASKS Group  group=WK MASKS CT / Stone painterly surface.008
+   L Object Info : Random -> Math : Value
+   L Math : Value -> Math.001 : Value
+   L Object Info : Random -> Math.002 : Value
+   L Math.002 : Value -> Math.003 : Value
+   L Object Info : Random -> Math.004 : Value
+   L Math.004 : Value -> Math.005 : Value
+   L Math.001 : Value -> Combine XYZ.001 : X
+   L Math.003 : Value -> Combine XYZ.001 : Y
+   L Math.005 : Value -> Combine XYZ.001 : Z
+   L Geometry : Position -> Group : Position
+   L Geometry : Normal -> Group : Normal
+   L Combine XYZ.001 : Vector -> Group : Offset
+   L Group : Color -> Vector Math : Vector
+   L Vector Math : Vector -> Vector Math.001 : Vector
+   L Vector Math.001 : Vector -> Vector Math.002 : Vector
+   L Object Info : Random -> Math.006 : Value
+   L Math.006 : Value -> Math.007 : Value
+   L Math.007 : Value -> Math.008 : Value
+   L Vector Math.002 : Vector -> Vector Math.003 : Vector
+   L Math.008 : Value -> Vector Math.003 : Scale
+   L Group : Roughness -> Map Range : Value
+   L Group : Height -> Bump : Height
+   L Principled BSDF : BSDF -> Material Output : Surface
+   L WK SCALE : Dot Across -> WK foot : Dot Across
+   L WK SCALE : Dot Along -> WK foot : Dot Along
+   L WK SCALE : Fade Near -> WK foot : Fade Near
+   L WK SCALE : Far Blend -> WK foot : Far Blend
+   L WK SCALE : Dot Across -> WK wallgrowth : Dot Across
+   L WK SCALE : Dot Along -> WK wallgrowth : Dot Along
+   L WK SCALE : Fade Near -> WK wallgrowth : Fade Near
+   L WK SCALE : Far Blend -> WK wallgrowth : Far Blend
+   L WK SCALE : Dot Across -> WK wallcracks : Dot Across
+   L WK SCALE : Dot Along -> WK wallcracks : Dot Along
+   L WK SCALE : Fade Near -> WK wallcracks : Fade Near
+   L WK SCALE : Far Blend -> WK wallcracks : Far Blend
+   L WK SCALE : Dot Across -> WK dirt : Dot Across
+   L WK SCALE : Dot Along -> WK dirt : Dot Along
+   L WK SCALE : Fade Near -> WK dirt : Fade Near
+   L WK SCALE : Far Blend -> WK dirt : Far Blend
+   L WK SCALE : Distance -> WK dirt : Distance
+   L WK SCALE : Cos View -> WK dirt : Cos View
+   L Vector Math.003 : Vector -> WK foot : Colour
+   L Map Range : Result -> WK foot : Roughness
+   L Value : Value -> WK foot : Specular IOR Level
+   L Value.001 : Value -> WK foot : Coat Weight
+   L Bump : Normal -> WK foot : Normal
+   L Value.002 : Value -> WK foot : Metallic
+   L Bump : Normal -> WK foot : Wet Normal
+   L WK foot : Colour -> WK dirt : Colour
+   L WK foot : Roughness -> WK dirt : Roughness
+   L WK foot : Specular IOR Level -> WK dirt : Specular IOR Level
+   L WK foot : Coat Weight -> WK dirt : Coat Weight
+   L WK foot : Normal -> WK dirt : Normal
+   L WK foot : Metallic -> WK dirt : Metallic
+   L WK foot : Wet Normal -> WK dirt : Wet Normal
+   L WK dirt : Colour -> WK wallcracks : Colour
+   L WK dirt : Roughness -> WK wallcracks : Roughness
+   L WK dirt : Specular IOR Level -> WK wallcracks : Specular IOR Level
+   L WK dirt : Coat Weight -> WK wallcracks : Coat Weight
+   L WK dirt : Normal -> WK wallcracks : Normal
+   L WK dirt : Metallic -> WK wallcracks : Metallic
+   L WK dirt : Wet Normal -> WK wallcracks : Wet Normal
+   L WK wallcracks : Colour -> WK wallgrowth : Colour
+   L WK wallcracks : Roughness -> WK wallgrowth : Roughness
+   L WK wallcracks : Specular IOR Level -> WK wallgrowth : Specular IOR Level
+   L WK wallcracks : Coat Weight -> WK wallgrowth : Coat Weight
+   L WK wallcracks : Normal -> WK wallgrowth : Normal
+   L WK wallcracks : Metallic -> WK wallgrowth : Metallic
+   L WK wallcracks : Wet Normal -> WK wallgrowth : Wet Normal
+   L WK wallgrowth : Colour -> WK groundmoss : Colour
+   L WK wallgrowth : Roughness -> WK groundmoss : Roughness
+   L WK wallgrowth : Specular IOR Level -> WK groundmoss : Specular IOR Level
+   L WK wallgrowth : Coat Weight -> WK groundmoss : Coat Weight
+   L WK wallgrowth : Normal -> WK groundmoss : Normal
+   L WK wallgrowth : Metallic -> WK groundmoss : Metallic
+   L WK groundmoss : Colour -> Principled BSDF : Base Color
+   L WK groundmoss : Roughness -> Principled BSDF : Roughness
+   L WK groundmoss : Specular IOR Level -> Principled BSDF : Specular IOR Level
+   L WK groundmoss : Coat Weight -> Principled BSDF : Coat Weight
+   L WK groundmoss : Normal -> Principled BSDF : Normal
+   L WK groundmoss : Metallic -> Principled BSDF : Metallic
+   L WK MASKS : M Height -> WK foot : M Height
+   L WK MASKS : M Dampness -> WK foot : M Dampness
+   L WK MASKS : M Vertical Foot -> WK foot : M Vertical Foot
+   L WK MASKS : M Tx Cavity -> WK foot : M Tx Cavity
+   L WK MASKS : M Tx Cell -> WK foot : M Tx Cell
+   L WK MASKS : M Shade -> WK foot : M Shade
+   L WK MASKS : M Frame Valid -> WK foot : M Frame Valid
+   L WK MASKS : M Moss Site -> WK wallgrowth : M Moss Site
+   L WK MASKS : M Algae Site -> WK wallgrowth : M Algae Site
+   L WK MASKS : M Lichen Site -> WK wallgrowth : M Lichen Site
+   L WK MASKS : M Dampness -> WK wallgrowth : M Dampness
+   L WK MASKS : M Drip -> WK wallgrowth : M Drip
+   L WK MASKS : M Drip Dist -> WK wallgrowth : M Drip Dist
+   L WK MASKS : M Height -> WK wallgrowth : M Height
+   L WK MASKS : M Frame Valid -> WK wallgrowth : M Frame Valid
+   L WK MASKS : M Corner -> WK wallcracks : M Corner
+   L WK MASKS : M Reveal -> WK wallcracks : M Reveal
+   L WK MASKS : M Height -> WK wallcracks : M Height
+   L WK MASKS : M Tx Cell -> WK wallcracks : M Tx Cell
+   L WK MASKS : M Tx Cavity -> WK wallcracks : M Tx Cavity
+   L WK MASKS : M Frame Valid -> WK wallcracks : M Frame Valid
+   L WK MASKS : M Footfall -> WK dirt : M Footfall
+   L WK MASKS : M Keepclear -> WK dirt : M Keepclear
+   L WK MASKS : M Lowness -> WK dirt : M Lowness
+   L WK MASKS : M Crown -> WK dirt : M Crown
+   L WK MASKS : M Wall Dist -> WK dirt : M Wall Dist
+   L WK MASKS : M Shade -> WK dirt : M Shade
+   L WK MASKS : M Vertical Foot -> WK dirt : M Vertical Foot
+   L WK MASKS : M Seam Dist -> WK dirt : M Seam Dist
+   L WK MASKS : M Entry Rand -> WK dirt : M Entry Rand
+   L WK MASKS : M Step Foot -> WK dirt : M Step Foot
+   L WK MASKS : M Rubbish Heap -> WK dirt : M Rubbish Heap
+   L WK MASKS : M Moss Site -> WK groundmoss : M Moss Site
+   L WK MASKS : M Algae Site -> WK groundmoss : M Algae Site
+   L WK MASKS : M Shade -> WK groundmoss : M Shade
+   L WK MASKS : M Dampness -> WK groundmoss : M Dampness
+   L WK MASKS : M Footfall -> WK groundmoss : M Footfall
+   L WK MASKS : M Keepclear -> WK groundmoss : M Keepclear
+   L WK MASKS : M Crown -> WK groundmoss : M Crown
+   L WK MASKS : M Existing Growth -> WK groundmoss : M Existing Growth
+   L WK MASKS : M Vertical Foot -> WK groundmoss : M Vertical Foot
+   L WK MASKS : M Wall Dist -> WK groundmoss : M Wall Dist
+   L WK MASKS : M Seam Dist -> WK groundmoss : M Seam Dist
+   L WK MASKS : M Piece Gap -> WK groundmoss : M Piece Gap
+   L WK SCALE : Dot Across -> WK groundmoss : Dot Across
+   L WK SCALE : Dot Along -> WK groundmoss : Dot Along
+   L WK SCALE : Fade Near -> WK groundmoss : Fade Near
+   L WK SCALE : Far Blend -> WK groundmoss : Far Blend
+   L WK SCALE : Distance -> WK groundmoss : Distance
+   L WK SCALE : Cos View -> WK groundmoss : Cos View
+   BSDF Principled BSDF {'Base Color': (0.8, 0.8, 0.8, 1.0), 'Metallic': 0.0, 'Roughness': 0.5, 'Specular IOR Level': 0.5, 'Coat Weight': 0.0, 'Sheen Weight': 0.0}
+GROUPS [('GARDEN finish', 1), ('GARDEN scan clean_pebbles tri', 4), ('GARDEN scan forest_leaves_02 planar+AT', 2), ('GARDEN scan gravel_floor_02 planar+AT', 1), ('GARDEN scan grey_roof_tiles tri', 3), ('GARDEN scan japanese_stone_wall tri', 1), ('GARDEN scan lichen_rock tri', 28), ('GARDEN scan old_wood_floor tri-x', 2), ('GARDEN scan old_wood_floor tri-z', 2), ('GARDEN scan pine_bark tri', 1), ('GARDEN scan rock_08 tri', 17), ('GARDEN scan rock_boulder_dry tri', 28), ('GARDEN scan trident_maple_bark tri', 1), ('GARDEN scan weathered_planks tri-x', 21), ('GARDEN scan white_stucco tri', 1), ('GARDEN scan wood_planks_grey tri-x', 35), ('GARDEN scan worn_cracked_plaster tri', 1), ('GARDEN scan worn_plaster_wall tri', 1), ('WK FOOT', 53), ('WK GROUND DIRT [film,marks]', 51), ('WK GROUND MOSS [algae,patch]', 44), ('WK GROUND MOSS [band,patch]', 7), ('WK MARK WIDTH', 7), ('WK MASKS Astra / pebbles tone 0', 1), ('WK MASKS Astra / pebbles tone 1', 1), ('WK MASKS Astra / pebbles tone 2', 1), ('WK MASKS Astra / pebbles tone 3', 1), ('WK MASKS Astra / planks tone 0', 1), ('WK MASKS Astra / planks tone 0.001', 1), ('WK MASKS Astra / planks tone 0.002', 1), ('WK MASKS Astra / planks tone 0.003', 1), ('WK MASKS Astra / planks tone 0.004', 1), ('WK MASKS Astra / planks tone 0.005', 1), ('WK MASKS Astra / planks tone 0.006', 1), ('WK MASKS Astra / planks tone 0.007', 1), ('WK MASKS Astra / planks tone 1', 1), ('WK MASKS Astra / planks tone 1.001', 1), ('WK MASKS Astra / planks tone 1.002', 1), ('WK MASKS Astra / planks tone 1.003', 1), ('WK MASKS Astra / planks tone 1.004', 1), ('WK MASKS Astra / planks tone 1.005', 1), ('WK MASKS Astra / planks tone 1.006', 1), ('WK MASKS Astra / planks tone 1.007', 1), ('WK MASKS Astra / planks tone 2', 1), ('WK MASKS Astra / planks tone 2.001', 1), ('WK MASKS Astra / planks tone 2.002', 1), ('WK MASKS Astra / planks tone 2.003', 1), ('WK MASKS Astra / planks tone 2.004', 1), ('WK MASKS Astra / planks tone 2.005', 1), ('WK MASKS Astra / planks tone 2.006', 1), ('WK MASKS Astra / planks tone 2.007', 1), ('WK MASKS Astra / planks tone 3', 1), ('WK MASKS Astra / planks tone 3.001', 1), ('WK MASKS Astra / planks tone 3.002', 1), ('WK MASKS Astra / planks tone 3.003', 1), ('WK MASKS Astra / planks tone 3.004', 1), ('WK MASKS Astra / planks tone 3.005', 1), ('WK MASKS Astra / planks tone 3.006', 1), ('WK MASKS Astra / planks tone 3.007', 1), ('WK MASKS Astra / planks tone 4', 1)]
+IMAGES [('clean_pebbles_diff_1k.jpg', (1024, 1024), 'sRGB', '/surfaces/maps/clean_pebbles_diff_1k.jpg'), ('clean_pebbles_disp_1k.jpg', (1024, 1024), 'Non-Color', '/surfaces/maps/clean_pebbles_disp_1k.jpg'), ('clean_pebbles_rough_1k.jpg', (1024, 1024), 'Non-Color', 'surfaces/maps/clean_pebbles_rough_1k.jpg'), ('forest_leaves_02_diff_1k.jpg', (1024, 1024), 'sRGB', 'rfaces/maps/forest_leaves_02_diff_1k.jpg'), ('forest_leaves_02_disp_1k.jpg', (1024, 1024), 'Non-Color', 'rfaces/maps/forest_leaves_02_disp_1k.jpg'), ('forest_leaves_02_rough_1k.jpg', (1024, 1024), 'Non-Color', 'faces/maps/forest_leaves_02_rough_1k.jpg'), ('gp_a.png', (550, 525), 'Non-Color', 'ks/japanese_courtyard/courtyard/gp_a.png'), ('gp_b.png', (550, 525), 'Non-Color', 'ks/japanese_courtyard/courtyard/gp_b.png'), ('gp_c.png', (550, 525), 'Non-Color', 'ks/japanese_courtyard/courtyard/gp_c.png'), ('gp_d.png', (550, 525), 'Non-Color', 'ks/japanese_courtyard/courtyard/gp_d.png'), ('gp_e.png', (550, 525), 'Non-Color', 'ks/japanese_courtyard/courtyard/gp_e.png'), ('gp_f.png', (550, 525), 'Non-Color', 'ks/japanese_courtyard/courtyard/gp_f.png'), ('gp_fine.png', (1100, 1050), 'Non-Color', 'japanese_courtyard/courtyard/gp_fine.png'), ('gp_g.png', (550, 525), 'Non-Color', 'ks/japanese_courtyard/courtyard/gp_g.png'), ('gp_height.png', (550, 525), 'Non-Color', 'panese_courtyard/courtyard/gp_height.png'), ('gravel_floor_02_diff_1k.jpg', (1024, 1024), 'sRGB', 'urfaces/maps/gravel_floor_02_diff_1k.jpg'), ('gravel_floor_02_disp_1k.jpg', (1024, 1024), 'Non-Color', 'urfaces/maps/gravel_floor_02_disp_1k.jpg'), ('gravel_floor_02_rough_1k.jpg', (1024, 1024), 'Non-Color', 'rfaces/maps/gravel_floor_02_rough_1k.jpg'), ('grey_roof_tiles_diff_1k.jpg', (1024, 1024), 'sRGB', 'urfaces/maps/grey_roof_tiles_diff_1k.jpg'), ('grey_roof_tiles_disp_1k.jpg', (1024, 1024), 'Non-Color', 'urfaces/maps/grey_roof_tiles_disp_1k.jpg'), ('grey_roof_tiles_rough_1k.jpg', (1024, 1024), 'Non-Color', 'rfaces/maps/grey_roof_tiles_rough_1k.jpg'), ('japanese_stone_wall_diff_1k.jpg', (1024, 1024), 'sRGB', 'ces/maps/japanese_stone_wall_diff_1k.jpg'), ('japanese_stone_wall_disp_1k.jpg', (1024, 1024), 'Non-Color', 'ces/maps/japanese_stone_wall_disp_1k.jpg'), ('japanese_stone_wall_rough_1k.jpg', (1024, 1024), 'Non-Color', 'es/maps/japanese_stone_wall_rough_1k.jpg'), ('lichen_rock_diff_1k.jpg', (1024, 1024), 'sRGB', 'en/surfaces/maps/lichen_rock_diff_1k.jpg'), ('lichen_rock_disp_1k.jpg', (1024, 1024), 'Non-Color', 'en/surfaces/maps/lichen_rock_disp_1k.jpg'), ('lichen_rock_rough_1k.jpg', (1024, 1024), 'Non-Color', 'n/surfaces/maps/lichen_rock_rough_1k.jpg'), ('old_wood_floor_diff_1k.jpg', (1024, 1024), 'sRGB', 'surfaces/maps/old_wood_floor_diff_1k.jpg'), ('old_wood_floor_disp_1k.jpg', (1024, 1024), 'Non-Color', 'surfaces/maps/old_wood_floor_disp_1k.jpg'), ('old_wood_floor_rough_1k.jpg', (1024, 1024), 'Non-Color', 'urfaces/maps/old_wood_floor_rough_1k.jpg'), ('pine_bark_diff_1k.jpg', (1024, 1024), 'sRGB', 'rden/surfaces/maps/pine_bark_diff_1k.jpg'), ('pine_bark_disp_1k.jpg', (1024, 1024), 'Non-Color', 'rden/surfaces/maps/pine_bark_disp_1k.jpg'), ('pine_bark_rough_1k.jpg', (1024, 1024), 'Non-Color', 'den/surfaces/maps/pine_bark_rough_1k.jpg'), ('rock_08_diff_1k.jpg', (1024, 1024), 'sRGB', 'garden/surfaces/maps/rock_08_diff_1k.jpg'), ('rock_08_disp_1k.jpg', (1024, 1024), 'Non-Color', 'garden/surfaces/maps/rock_08_disp_1k.jpg'), ('rock_08_rough_1k.jpg', (1024, 1024), 'Non-Color', 'arden/surfaces/maps/rock_08_rough_1k.jpg'), ('rock_boulder_dry_diff_1k.jpg', (1024, 1024), 'sRGB', 'rfaces/maps/rock_boulder_dry_diff_1k.jpg'), ('rock_boulder_dry_disp_1k.jpg', (1024, 1024), 'Non-Color', 'rfaces/maps/rock_boulder_dry_disp_1k.jpg'), ('rock_boulder_dry_rough_1k.jpg', (1024, 1024), 'Non-Color', 'faces/maps/rock_boulder_dry_rough_1k.jpg'), ('trident_maple_bark_diff_1k.jpg', (1024, 1024), 'sRGB', 'aces/maps/trident_maple_bark_diff_1k.jpg'), ('trident_maple_bark_disp_1k.jpg', (1024, 1024), 'Non-Color', 'aces/maps/trident_maple_bark_disp_1k.jpg'), ('trident_maple_bark_rough_1k.jpg', (1024, 1024), 'Non-Color', 'ces/maps/trident_maple_bark_rough_1k.jpg'), ('weathered_planks_diff_1k.jpg', (1024, 1024), 'sRGB', 'rfaces/maps/weathered_planks_diff_1k.jpg'), ('weathered_planks_disp_1k.jpg', (1024, 1024), 'Non-Color', 'rfaces/maps/weathered_planks_disp_1k.jpg'), ('weathered_planks_rough_1k.jpg', (1024, 1024), 'Non-Color', 'faces/maps/weathered_planks_rough_1k.jpg'), ('wf_a.png', (525, 410), 'Non-Color', 'ks/japanese_courtyard/courtyard/wf_a.png'), ('wf_b.png', (525, 410), 'Non-Color', 'ks/japanese_courtyard/courtyard/wf_b.png'), ('wf_c.png', (132, 116), 'Non-Color', 'ks/japanese_courtyard/courtyard/wf_c.png'), ('wf_d.png', (132, 116), 'Non-Color', 'ks/japanese_courtyard/courtyard/wf_d.png'), ('wf_height.png', (525, 410), 'Non-Color', 'panese_courtyard/courtyard/wf_height.png'), ('white_stucco_diff_1k.jpg', (1024, 1024), 'sRGB', 'n/surfaces/maps/white_stucco_diff_1k.jpg'), ('white_stucco_disp_1k.jpg', (1024, 1024), 'Non-Color', 'n/surfaces/maps/white_stucco_disp_1k.jpg'), ('white_stucco_rough_1k.jpg', (1024, 1024), 'Non-Color', '/surfaces/maps/white_stucco_rough_1k.jpg'), ('wood_planks_grey_diff_1k.jpg', (1024, 1024), 'sRGB', 'rfaces/maps/wood_planks_grey_diff_1k.jpg'), ('wood_planks_grey_disp_1k.jpg', (1024, 1024), 'Non-Color', 'rfaces/maps/wood_planks_grey_disp_1k.jpg'), ('wood_planks_grey_rough_1k.jpg', (1024, 1024), 'Non-Color', 'faces/maps/wood_planks_grey_rough_1k.jpg'), ('worn_cracked_plaster_diff_1k.jpg', (1024, 1024), 'sRGB', 'es/maps/worn_cracked_plaster_diff_1k.jpg'), ('worn_cracked_plaster_disp_1k.jpg', (1024, 1024), 'Non-Color', 'es/maps/worn_cracked_plaster_disp_1k.jpg'), ('worn_cracked_plaster_rough_1k.jpg', (1024, 1024), 'Non-Color', 's/maps/worn_cracked_plaster_rough_1k.jpg'), ('worn_plaster_wall_diff_1k.jpg', (1024, 1024), 'sRGB', 'faces/maps/worn_plaster_wall_diff_1k.jpg'), ('worn_plaster_wall_disp_1k.jpg', (1024, 1024), 'Non-Color', 'faces/maps/worn_plaster_wall_disp_1k.jpg'), ('worn_plaster_wall_rough_1k.jpg', (1024, 1024), 'Non-Color', 'aces/maps/worn_plaster_wall_rough_1k.jpg')]
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+Blender quit

@@ -1,0 +1,204 @@
+00:00.537  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/garden_real_fixed.blend"
+=====MAT CT / Ceramic painterly surface users 2 blend HASHED
+NODE Geometry [NewGeometry]
+NODE Object Info [ObjectInfo]
+NODE Combine XYZ [CombineXYZ]
+    in X = 0.0
+    in Y = 0.0
+    in Z = 0.0
+NODE Math [Math] operation=ADD
+    in Value <- ['Object Info.Random']
+    in Value = 0.232
+NODE Math.001 [Math] operation=MULTIPLY
+    in Value <- ['Math.Value']
+    in Value = 41.0
+NODE Math.002 [Math] operation=ADD
+    in Value <- ['Object Info.Random']
+    in Value = 0.394
+NODE Math.003 [Math] operation=MULTIPLY
+    in Value <- ['Math.002.Value']
+    in Value = 29.0
+NODE Math.004 [Math] operation=ADD
+    in Value <- ['Object Info.Random']
+    in Value = 0.534
+NODE Math.005 [Math] operation=MULTIPLY
+    in Value <- ['Math.004.Value']
+    in Value = 17.0
+NODE Combine XYZ.001 [CombineXYZ]
+    in X <- ['Math.001.Value']
+    in Y <- ['Math.003.Value']
+    in Z <- ['Math.005.Value']
+NODE Group [Group] GROUP=GARDEN scan grey_roof_tiles tri
+    in Position <- ['Geometry.Position']
+    in Normal <- ['Geometry.Normal']
+    in Scale = 2.4
+    in Offset <- ['Combine XYZ.001.Vector']
+    in Rotation = 0.0
+    in Sharpness = 3.0
+NODE Vector Math [VectorMath] operation=DIVIDE
+    in Vector <- ['Group.Color']
+    in Vector = (0.126, 0.113, 0.079)
+NODE Vector Math.001 [VectorMath] operation=POWER
+    in Vector <- ['Vector Math.Vector']
+    in Vector = (0.6, 0.6, 0.6)
+NODE Vector Math.002 [VectorMath] operation=MULTIPLY
+    in Vector <- ['Vector Math.001.Vector']
+    in Vector = (0.088, 0.092, 0.098)
+NODE Math.006 [Math] operation=SUBTRACT
+    in Value <- ['Object Info.Random']
+    in Value = 0.5
+NODE Math.007 [Math] operation=MULTIPLY
+    in Value <- ['Math.006.Value']
+    in Value = 0.24
+NODE Math.008 [Math] operation=ADD
+    in Value <- ['Math.007.Value']
+    in Value = 1.0
+NODE Vector Math.003 [VectorMath] operation=SCALE
+    in Vector <- ['Vector Math.002.Vector']
+    in Scale <- ['Math.008.Value']
+NODE Map Range [MapRange] data_type=FLOAT
+    in Value <- ['Group.Roughness']
+    in From Min = 0.3
+    in From Max = 0.8
+    in To Min = 0.4
+    in To Max = 0.82
+NODE Principled BSDF [BsdfPrincipled]
+    in Base Color <- ['WK wallgrowth.Colour']
+    in Metallic <- ['WK wallgrowth.Metallic']
+    in Roughness <- ['WK wallgrowth.Roughness']
+    in IOR = 1.5
+    in Alpha = 1.0
+    in Thin Wall = False
+    in Normal <- ['WK wallgrowth.Normal']
+    in Diffuse Roughness = 0.0
+    in Subsurface Weight = 0.0
+    in Subsurface Radius = (1.0, 0.2, 0.1)
+    in Subsurface Scale = 0.005
+    in Subsurface Anisotropy = 0.0
+    in Specular IOR Level <- ['WK wallgrowth.Specular IOR Level']
+    in Specular Tint = (1.0, 1.0, 1.0, 1.0)
+    in Anisotropic = 0.0
+    in Anisotropic Rotation = 0.0
+    in Transmission Weight = 0.0
+    in Coat Weight <- ['WK wallgrowth.Coat Weight']
+    in Coat Roughness = 0.03
+    in Coat IOR = 1.5
+    in Coat Tint = (1.0, 1.0, 1.0, 1.0)
+    in Sheen Weight = 0.0
+    in Sheen Roughness = 0.5
+    in Sheen Tint = (1.0, 1.0, 1.0, 1.0)
+    in Emission Color = (1.0, 1.0, 1.0, 1.0)
+    in Emission Strength = 0.0
+    in Thin Film Thickness = 0.0
+    in Thin Film IOR = 1.33
+NODE Bump [Bump]
+    in Strength = 0.5
+    in Distance = 0.02
+    in Filter Width = 0.1
+    in Height <- ['Group.Height']
+NODE Material Output [OutputMaterial]
+    in Surface <- ['Principled BSDF.BSDF']
+NODE WK soot [Group] GROUP=WK SOOT
+    in Colour <- ['Vector Math.003.Vector']
+    in Roughness <- ['Map Range.Result']
+    in Specular IOR Level <- ['Value.Value']
+    in Coat Weight <- ['Value.001.Value']
+    in Normal <- ['Bump.Normal']
+    in Metallic <- ['Value.002.Value']
+    in Wet Normal <- ['Bump.Normal']
+    in M Sheltered <- ['WK MASKS.M Sheltered']
+    in M Reveal <- ['WK MASKS.M Reveal']
+    in M Shade <- ['WK MASKS.M Shade']
+    in M Tx Cavity <- ['WK MASKS.M Tx Cavity']
+    in M Frame Valid <- ['WK MASKS.M Frame Valid']
+    in Wet Mask = 0.0
+    in Puddle Mask = 0.0
+    in Dot Across <- ['WK SCALE.Dot Across']
+    in Dot Along <- ['WK SCALE.Dot Along']
+    in Fade Near <- ['WK SCALE.Fade Near']
+    in Far Blend <- ['WK SCALE.Far Blend']
+    in Amount = 1.0
+    in Seed = 0.0
+    in Inflate Limit = 6.0
+    in Fade Start = 12.0
+    in Fade End = 40.0
+    in Wet Follow = 1.0
+    in Film Mult = 0.97
+    in Sheltered Mult = 0.85
+    in Washed Mult = 1.0
+    in Washed Share = 0.3
+    in Floor Mult = 0.6
+    in Grey Pull = 0.15
+    in Mortar Soot = 0.1
+    in Mottle Size = 1.2
+    in Mottle Contrast = 0.3
+    in Edge Sharp = 0.4
+    in Stack Mult = 1.0
+    in Roof Mult = 0.95
+    in Base Lift = 0.0
+    in Mottle Stretch = 2.0
+    in Patch Min Dots = 15.0
+    in Rough Gain = 0.1
+    in Shade Wash = 0.6
+    in Pale Warm = 0.0
+    in Washed Pale = 0.5
+NODE Value [Value]
+NODE Value.001 [Value]
+NODE Value.002 [Value]
+NODE WK SCALE [Group] GROUP=WK SCALE
+    in Dot Angle = 0.0
+    in Painter Widen = 1.111
+    in Fade Start = 14.0
+    in Fade End = 45.0
+    in Handover Start = 20.0
+    in Handover End = 30.0
+NODE WK wallgrowth [Group] GROUP=WK WALL GROWTH
+    in Colour <- ['WK soot.Colour']
+    in Roughness <- ['WK soot.Roughness']
+    in Specular IOR Level <- ['WK soot.Specular IOR Level']
+    in Coat Weight <- ['WK soot.Coat Weight']
+    in Normal <- ['WK soot.Normal']
+    in Metallic <- ['WK soot.Metallic']
+    in Wet Normal <- ['WK soot.Wet Normal']
+    in M Moss Site <- ['WK MASKS.M Moss Site']
+    in M Algae Site <- ['WK MASKS.M Algae Site']
+    in M Lichen Site <- ['WK MASKS.M Lichen Site']
+    in M Dampness <- ['WK MASKS.M Dampness']
+    in M Drip <- ['WK MASKS.M Drip']
+    in M Drip Dist <- ['WK MASKS.M Drip Dist']
+    in M Height <- ['WK MASKS.M Height']
+    in M Frame Valid <- ['WK MASKS.M Frame Valid']
+    in Wet Mask = 0.0
+    in Puddle Mask = 0.0
+    in Dot Across <- ['WK SCALE.Dot Across']
+    in Dot Along <- ['WK SCALE.Dot Along']
+    in Fade Near <- ['WK SCALE.Fade Near']
+    in Far Blend <- ['WK SCALE.Far Blend']
+    in Amount = 1.0
+    in Seed = 0.0
+    in Inflate Limit = 6.0
+    in Fade Start = 12.0
+    in Fade End = 40.0
+    in Wet Follow = 1.0
+    in Moss Amount = 1.2
+    in Algae Amount = 1.0
+    in Lichen Amount = 0.6
+    in Moss Height = 0.5
+    in Patch Dots = 15.0
+    in Drip Moss = 0.5
+    in Cap Moss = 0.6
+    in Roof Moss = 0.4
+    in Tone Steps = 4.0
+    in Clump Stretch = 1.5
+    in Relief = 0.008
+    in Lichen Dots = 8.0
+    in Brightness Floor = 0.25
+    in Moss Value = 0.35
+    in Algae Strength = 0.5
+    in Hue = 100.0
+    in Saturation = 0.55
+    in Moss Vs Stone = 1.6
+NODE WK MASKS [Group] GROUP=WK MASKS CT / Ceramic painterly surface
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

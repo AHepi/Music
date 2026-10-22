@@ -1,0 +1,6185 @@
+{
+ "materials_total": 159,
+ "materials_with_normal_map": 83,
+ "materials_with_normal_map_names": [
+  "Astra / moss tone 0",
+  "Astra / moss tone 1",
+  "Astra / moss tone 2",
+  "Astra / moss tone 3",
+  "Astra / pebbles tone 0",
+  "Astra / pebbles tone 1",
+  "Astra / pebbles tone 2",
+  "Astra / pebbles tone 3",
+  "Bark",
+  "Beam timber",
+  "CT / Stone painterly surface",
+  "CT / Stone painterly surface.001",
+  "CT / Stone painterly surface.002",
+  "CT / Stone painterly surface.003",
+  "CT / Stone painterly surface.004",
+  "CT / Stone painterly surface.005",
+  "CT / Stone painterly surface.006",
+  "CT / Stone painterly surface.007",
+  "CT / Stone painterly surface.008",
+  "CT / Stone painterly surface.009",
+  "CT / Stone painterly surface.030",
+  "CT / Stone painterly surface.031",
+  "CT / Stone painterly surface.032",
+  "CT / Stone painterly surface.039",
+  "CT / Stone painterly surface.040",
+  "CT / Stone painterly surface.041",
+  "CT / Stone painterly surface.042",
+  "Dark timber",
+  "G6 ground / stone.rock",
+  "G6 pond / pebble",
+  "G6 pond / silt",
+  "G6 roof / Basin_bucket_stone GARDEN stone.lantern",
+  "G6 roof / Basin_candle_stone GARDEN stone.lantern",
+  "G6 roof / Basin_front_stone GARDEN stone.lantern",
+  "G6 roof / cap tile",
+  "G6 roof / ceramic",
+  "G6 roof / eave disc",
+  "G6 roof / footing stone",
+  "G6 roof / Lantern_base Stone painterly surface.033",
+  "G6 roof / Lantern_cap Stone painterly surface.037",
+  "G6 roof / Lantern_finial GARDEN stone.lantern",
+  "G6 roof / Lantern_firebox Stone painterly surface.036",
+  "G6 roof / Lantern_gallery Stone painterly surface.035",
+  "G6 roof / Lantern_post Stone painterly surface.034",
+  "G6 roof / moss cap",
+  "G6 roof / plaster wall",
+  "G6 roof / Pond_edge_stone_0 Stone painterly surface.010",
+  "G6 roof / Pond_edge_stone_1 Stone painterly surface.011",
+  "G6 roof / Pond_edge_stone_10 Stone painterly surface.020",
+  "G6 roof / Pond_edge_stone_11 Stone painterly surface.021",
+  "G6 roof / Pond_edge_stone_12 Stone painterly surface.022",
+  "G6 roof / Pond_edge_stone_13 Stone painterly surface.023",
+  "G6 roof / Pond_edge_stone_14 Stone painterly surface.024",
+  "G6 roof / Pond_edge_stone_2 Stone painterly surface.012",
+  "G6 roof / Pond_edge_stone_3 Stone painterly surface.013",
+  "G6 roof / Pond_edge_stone_4 Stone painterly surface.014",
+  "G6 roof / Pond_edge_stone_5 Stone painterly surface.015",
+  "G6 roof / Pond_edge_stone_6 Stone painterly surface.016",
+  "G6 roof / Pond_edge_stone_7 Stone painterly surface.017",
+  "G6 roof / Pond_edge_stone_8 Stone painterly surface.018",
+  "G6 roof / Pond_edge_stone_9 Stone painterly surface.019",
+  "G6 roof / ridge ceramic",
+  "G6 roof / Rock_0 Stone painterly surface.025",
+  "G6 roof / Rock_1 Stone painterly surface.026",
+  "G6 roof / Rock_2 Stone painterly surface.027",
+  "G6 roof / Rock_3 Stone painterly surface.028",
+  "G6 roof / Rock_4 Stone painterly surface.029",
+  "G6 roof / stone.rock",
+  "G6 roof / wall.garden",
+  "G6 roof / Water_basin Stone painterly surface.038",
+  "G6 wood / deck end grain",
+  "G6 wood / deck side",
+  "G6 wood / deck top",
+  "G6 wood / footing stone",
+  "G6 wood / plank end grain",
+  "G6 wood / plank side",
+  "G6 wood / plank top",
+  "G6 wood / post timber",
+  "GARDEN bark.pine",
+  "GARDEN timber.post",
+  "Moss and earth",
+  "Plinth stone",
+  "Pond water"
+ ],
+ "problems": [
+  {
+   "material": "G6 wood / deck side",
+   "node": "NM Normal Map",
+   "problems": [
+    "image smaller than 1024: [2048, 512]"
+   ]
+  },
+  {
+   "material": "G6 wood / deck top",
+   "node": "NM Normal Map",
+   "problems": [
+    "image smaller than 1024: [2048, 512]"
+   ]
+  },
+  {
+   "material": "G6 wood / plank side",
+   "node": "NM Normal Map",
+   "problems": [
+    "image smaller than 1024: [2048, 512]"
+   ]
+  },
+  {
+   "material": "G6 wood / plank top",
+   "node": "NM Normal Map",
+   "problems": [
+    "image smaller than 1024: [2048, 512]"
+   ]
+  }
+ ],
+ "bump_leftovers_over_0.3_not_fed": [
+  {
+   "material": "Bark",
+   "bumps": [
+    {
+     "tree": "Bark > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Bark > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "Beam timber",
+   "bumps": [
+    {
+     "tree": "Beam timber > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Beam timber > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Ceramic painterly surface",
+   "bumps": [
+    {
+     "tree": "CT / Ceramic painterly surface",
+     "strength": 0.5,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Ceramic painterly surface > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Ceramic ridge host-local surface",
+   "bumps": [
+    {
+     "tree": "CT / Ceramic ridge host-local surface",
+     "strength": 0.5,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Ceramic ridge host-local surface > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.001",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.001 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.001 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.001 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.002",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.002 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.002 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.002 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.003",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.003 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.003 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.003 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.004",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.004 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.004 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.004 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.005",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.005 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.005 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.005 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.006",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.006 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.006 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.006 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.007",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.007 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.007 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.007 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.008",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.008 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.008 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.008 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.009",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.009 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.009 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.009 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.010",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.010",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.010 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.010 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.010 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.011",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.011",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.011 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.011 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.011 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.012",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.012",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.012 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.012 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.012 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.013",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.013",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.013 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.013 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.013 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.014",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.014",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.014 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.014 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.014 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.015",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.015",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.015 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.015 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.015 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.016",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.016",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.016 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.016 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.016 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.017",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.017",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.017 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.017 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.017 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.018",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.018",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.018 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.018 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.018 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.019",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.019",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.019 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.019 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.019 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.020",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.020",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.020 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.020 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.020 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.021",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.021",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.021 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.021 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.021 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.022",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.022",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.022 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.022 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.022 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.023",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.023",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.023 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.023 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.023 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.024",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.024",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.024 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.024 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.024 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.025",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.025",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.025 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.025 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.025 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.026",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.026",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.026 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.026 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.026 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.027",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.027",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.027 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.027 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.027 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.028",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.028",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.028 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.028 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.028 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.029",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.029",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.029 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.029 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.029 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.030",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.030 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.030 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.030 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.031",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.031 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.031 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.031 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.032",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.032 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.032 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.032 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.033",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.033",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.033 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.033 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.033 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.034",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.034",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.034 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.034 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.034 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.035",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.035",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.035 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.035 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.035 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.036",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.036",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.036 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.036 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.036 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.037",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.037",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.037 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.037 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.037 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.038",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.038",
+     "strength": 0.55,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.038 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.038 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.038 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.039",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.039 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.039 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.039 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.040",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.040 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.040 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.040 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.041",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.041 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.041 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.041 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.042",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.042 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.042 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.042 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "CT / Timber painterly surface",
+   "bumps": [
+    {
+     "tree": "CT / Timber painterly surface",
+     "strength": 0.4,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Timber painterly surface > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "Dark timber",
+   "bumps": [
+    {
+     "tree": "Dark timber > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Dark timber > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 ground / soil lip",
+   "bumps": [
+    {
+     "tree": "G6 ground / soil lip",
+     "strength": 0.45,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 ground / stone.rock",
+   "bumps": [
+    {
+     "tree": "G6 ground / stone.rock > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 ground / stone.rock > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 ground / stone.rock > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Basin_bucket_stone GARDEN stone.lantern",
+   "bumps": [
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Basin_candle_stone GARDEN stone.lantern",
+   "bumps": [
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Basin_front_stone GARDEN stone.lantern",
+   "bumps": [
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / cap tile",
+   "bumps": [
+    {
+     "tree": "G6 roof / cap tile > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / ceramic",
+   "bumps": [
+    {
+     "tree": "G6 roof / ceramic > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / eave disc",
+   "bumps": [
+    {
+     "tree": "G6 roof / eave disc > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / footing stone",
+   "bumps": [
+    {
+     "tree": "G6 roof / footing stone > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / footing stone > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / footing stone > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_base Stone painterly surface.033",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_cap Stone painterly surface.037",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ]
+  }
+ ],
+ "n_bump_leftover_materials": 60,
+ "images_used": {
+  "G6 moss_normal": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.998
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "Astra / moss tone 0",
+    "Astra / moss tone 1",
+    "Astra / moss tone 2",
+    "Astra / moss tone 3"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.45
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 4
+  },
+  "G6 pebble_normal": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.998
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "Astra / pebbles tone 0",
+    "Astra / pebbles tone 1",
+    "Astra / pebbles tone 2",
+    "Astra / pebbles tone 3"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    1.0
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 4
+  },
+  "maple_bark_normal.png": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.982
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "Bark"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.9
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 1
+  },
+  "post_timber_normal.png": {
+   "stats": {
+    "size": [
+     1024,
+     2048
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.996
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "Beam timber",
+    "Dark timber",
+    "G6 wood / post timber",
+    "GARDEN timber.post"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.8,
+    0.9
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 4
+  },
+  "G6 stone_normal": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "CT / Stone painterly surface",
+    "CT / Stone painterly surface.001",
+    "CT / Stone painterly surface.002",
+    "CT / Stone painterly surface.003",
+    "CT / Stone painterly surface.004"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    1.0
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 12
+  },
+  "footing_stone_normal.png": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.99
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "CT / Stone painterly surface.008",
+    "CT / Stone painterly surface.009",
+    "CT / Stone painterly surface.039",
+    "CT / Stone painterly surface.040",
+    "CT / Stone painterly surface.041"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.8
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 8
+  },
+  "pebble_normal.png": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.985
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "G6 pond / pebble",
+    "G6 pond / silt"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.6,
+    0.7
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 2
+  },
+  "G6 roof / stone normal": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.996
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "G6 roof / Basin_bucket_stone GARDEN stone.lantern",
+    "G6 roof / Basin_candle_stone GARDEN stone.lantern",
+    "G6 roof / Basin_front_stone GARDEN stone.lantern",
+    "G6 roof / footing stone",
+    "G6 roof / Lantern_base Stone painterly surface.033"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.8
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 32
+  },
+  "G6 roof / glaze normal": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.997
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "G6 roof / cap tile",
+    "G6 roof / ceramic",
+    "G6 roof / eave disc",
+    "G6 roof / ridge ceramic"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.8,
+    0.9
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 4
+  },
+  "G6 roof / moss normal": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.979
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "G6 roof / moss cap"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.5
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 1
+  },
+  "G6 roof / plaster normal": {
+   "stats": {
+    "size": [
+     2048,
+     2048
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "G6 roof / plaster wall",
+    "G6 roof / wall.garden"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    1.0
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 2
+  },
+  "end_grain_normal.png": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.984
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "G6 wood / deck end grain",
+    "G6 wood / plank end grain"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.9
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 2
+  },
+  "plank_top_normal.png": {
+   "stats": {
+    "size": [
+     2048,
+     512
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.995
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "G6 wood / deck side",
+    "G6 wood / deck top",
+    "G6 wood / plank side",
+    "G6 wood / plank top"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    1.0,
+    1.5
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 4
+  },
+  "pine_bark_normal.png": {
+   "stats": {
+    "size": [
+     1024,
+     1024
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.982
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "GARDEN bark.pine"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.9
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 1
+  },
+  "G6 ground_normal": {
+   "stats": {
+    "size": [
+     2048,
+     2048
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.997
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "NONE"
+   },
+   "materials": [
+    "Moss and earth"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    1.0
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 1
+  },
+  "swell_normal.png": {
+   "stats": {
+    "size": [
+     2048,
+     2048
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "Pond water"
+   ],
+   "uv_maps": [
+    "UVMap"
+   ],
+   "strengths": [
+    0.6
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 1
+  },
+  "ripple_normal.png": {
+   "stats": {
+    "size": [
+     2048,
+     2048
+    ],
+    "cs": "Non-Color",
+    "mean_rgb": [
+     0.502,
+     0.502,
+     1.0
+    ],
+    "packed": true,
+    "is_float": false,
+    "alpha_mode": "STRAIGHT"
+   },
+   "materials": [
+    "Pond water"
+   ],
+   "uv_maps": [
+    "RippleUV"
+   ],
+   "strengths": [
+    1.0
+   ],
+   "spaces": [
+    "TANGENT"
+   ],
+   "n_materials": 1
+  }
+ },
+ "n_images_used": 17,
+ "rows": [
+  {
+   "material": "Astra / moss tone 0",
+   "bumps": [
+    {
+     "tree": "Astra / moss tone 0",
+     "strength": 0.1,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / moss tone 0",
+     "node": "G6 moss Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.45,
+     "strength_linked": false,
+     "image": "G6 moss_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Astra / moss tone 1",
+   "bumps": [
+    {
+     "tree": "Astra / moss tone 1",
+     "strength": 0.1,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / moss tone 1",
+     "node": "G6 moss Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.45,
+     "strength_linked": false,
+     "image": "G6 moss_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Astra / moss tone 2",
+   "bumps": [
+    {
+     "tree": "Astra / moss tone 2",
+     "strength": 0.1,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / moss tone 2",
+     "node": "G6 moss Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.45,
+     "strength_linked": false,
+     "image": "G6 moss_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Astra / moss tone 3",
+   "bumps": [
+    {
+     "tree": "Astra / moss tone 3",
+     "strength": 0.1,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / moss tone 3",
+     "node": "G6 moss Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.45,
+     "strength_linked": false,
+     "image": "G6 moss_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Astra / pebbles tone 0",
+   "bumps": [
+    {
+     "tree": "Astra / pebbles tone 0",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / pebbles tone 0",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 pebble_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Astra / pebbles tone 1",
+   "bumps": [
+    {
+     "tree": "Astra / pebbles tone 1",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / pebbles tone 1",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 pebble_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Astra / pebbles tone 2",
+   "bumps": [
+    {
+     "tree": "Astra / pebbles tone 2",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / pebbles tone 2",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 pebble_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Astra / pebbles tone 3",
+   "bumps": [
+    {
+     "tree": "Astra / pebbles tone 3",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Astra / pebbles tone 3",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 pebble_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Bark",
+   "bumps": [
+    {
+     "tree": "Bark",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "Bark > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Bark > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 18,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Bark",
+     "node": "G6 bark Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "strength_linked": false,
+     "image": "maple_bark_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Beam timber",
+   "bumps": [
+    {
+     "tree": "Beam timber",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "Beam timber > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Beam timber > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Beam timber",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "post_timber_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.001",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.001",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.001 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.001 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.001 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.001",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.002",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.002",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.002 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.002 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.002 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.002",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.003",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.003",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.003 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.003 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.003 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.003",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.004",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.004",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.004 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.004 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.004 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.004",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.005",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.005",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.005 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.005 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.005 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.005",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.006",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.006",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.006 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.006 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.006 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.006",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.007",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.007",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.007 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.007 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.007 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.007",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.008",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.008",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.008 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.008 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.008 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.008",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.009",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.009",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.009 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.009 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.009 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.009",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.030",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.030",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.030 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.030 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.030 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.030",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.031",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.031",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.031 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.031 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.031 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.031",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.032",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.032",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.032 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.032 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.032 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.032",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.039",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.039",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.039 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.039 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.039 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.039",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.040",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.040",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.040 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.040 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.040 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.040",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.041",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.041",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.041 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.041 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.041 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.041",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "CT / Stone painterly surface.042",
+   "bumps": [
+    {
+     "tree": "CT / Stone painterly surface.042",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.042 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.042 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "CT / Stone painterly surface.042 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "CT / Stone painterly surface.042",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Dark timber",
+   "bumps": [
+    {
+     "tree": "Dark timber",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "Dark timber > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Dark timber > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Dark timber",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "post_timber_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 ground / stone.rock",
+   "bumps": [
+    {
+     "tree": "G6 ground / stone.rock",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 ground / stone.rock > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 ground / stone.rock > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 ground / stone.rock > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 ground / stone.rock",
+     "node": "G6 stone Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 stone_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 pond / pebble",
+   "bumps": [],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 pond / pebble",
+     "node": "Pebble Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.7,
+     "strength_linked": false,
+     "image": "pebble_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 pond / silt",
+   "bumps": [],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 pond / silt",
+     "node": "Silt Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.6,
+     "strength_linked": false,
+     "image": "pebble_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Basin_bucket_stone GARDEN stone.lantern",
+   "bumps": [
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Basin_bucket_stone GARDEN stone.lantern",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Basin_candle_stone GARDEN stone.lantern",
+   "bumps": [
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Basin_candle_stone GARDEN stone.lantern",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Basin_front_stone GARDEN stone.lantern",
+   "bumps": [
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Basin_front_stone GARDEN stone.lantern",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / cap tile",
+   "bumps": [
+    {
+     "tree": "G6 roof / cap tile",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / cap tile > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / cap tile",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / glaze normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / ceramic",
+   "bumps": [
+    {
+     "tree": "G6 roof / ceramic",
+     "strength": 0.22,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / ceramic",
+     "strength": 0.55,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / ceramic > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 5,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / ceramic",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "strength_linked": false,
+     "image": "G6 roof / glaze normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / eave disc",
+   "bumps": [
+    {
+     "tree": "G6 roof / eave disc",
+     "strength": 0.2,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / eave disc > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / eave disc",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / glaze normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / footing stone",
+   "bumps": [
+    {
+     "tree": "G6 roof / footing stone",
+     "strength": 0.25,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / footing stone > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / footing stone > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / footing stone > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / footing stone",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_base Stone painterly surface.033",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Lantern_base Stone painterly surface.033",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_cap Stone painterly surface.037",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Lantern_cap Stone painterly surface.037",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_finial GARDEN stone.lantern",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_finial GARDEN stone.lantern",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_finial GARDEN stone.lantern > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_finial GARDEN stone.lantern > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_finial GARDEN stone.lantern > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Lantern_finial GARDEN stone.lantern",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_firebox Stone painterly surface.036",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_firebox Stone painterly surface.036",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_firebox Stone painterly surface.036 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_firebox Stone painterly surface.036 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_firebox Stone painterly surface.036 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Lantern_firebox Stone painterly surface.036",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_gallery Stone painterly surface.035",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_gallery Stone painterly surface.035",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_gallery Stone painterly surface.035 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_gallery Stone painterly surface.035 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_gallery Stone painterly surface.035 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Lantern_gallery Stone painterly surface.035",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Lantern_post Stone painterly surface.034",
+   "bumps": [
+    {
+     "tree": "G6 roof / Lantern_post Stone painterly surface.034",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_post Stone painterly surface.034 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_post Stone painterly surface.034 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Lantern_post Stone painterly surface.034 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Lantern_post Stone painterly surface.034",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / moss cap",
+   "bumps": [],
+   "users": 14,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / moss cap",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.5,
+     "strength_linked": false,
+     "image": "G6 roof / moss normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / plaster wall",
+   "bumps": [
+    {
+     "tree": "G6 roof / plaster wall",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / plaster wall > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / plaster wall > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / plaster wall > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / plaster wall",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 roof / plaster normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_0 Stone painterly surface.010",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_0 Stone painterly surface.010",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_0 Stone painterly surface.010 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_0 Stone painterly surface.010 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_0 Stone painterly surface.010 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_0 Stone painterly surface.010",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_1 Stone painterly surface.011",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_1 Stone painterly surface.011",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_1 Stone painterly surface.011 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_1 Stone painterly surface.011 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_1 Stone painterly surface.011 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_1 Stone painterly surface.011",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_10 Stone painterly surface.020",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_10 Stone painterly surface.020",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_10 Stone painterly surface.020 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_10 Stone painterly surface.020 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_10 Stone painterly surface.020 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_10 Stone painterly surface.020",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_11 Stone painterly surface.021",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_11 Stone painterly surface.021",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_11 Stone painterly surface.021 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_11 Stone painterly surface.021 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_11 Stone painterly surface.021 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_11 Stone painterly surface.021",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_12 Stone painterly surface.022",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_12 Stone painterly surface.022",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_12 Stone painterly surface.022 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_12 Stone painterly surface.022 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_12 Stone painterly surface.022 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_12 Stone painterly surface.022",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_13 Stone painterly surface.023",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_13 Stone painterly surface.023",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_13 Stone painterly surface.023 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_13 Stone painterly surface.023 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_13 Stone painterly surface.023 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_13 Stone painterly surface.023",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_14 Stone painterly surface.024",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_14 Stone painterly surface.024",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_14 Stone painterly surface.024 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_14 Stone painterly surface.024 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_14 Stone painterly surface.024 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_14 Stone painterly surface.024",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_2 Stone painterly surface.012",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_2 Stone painterly surface.012",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_2 Stone painterly surface.012 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_2 Stone painterly surface.012 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_2 Stone painterly surface.012 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_2 Stone painterly surface.012",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_3 Stone painterly surface.013",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_3 Stone painterly surface.013",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_3 Stone painterly surface.013 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_3 Stone painterly surface.013 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_3 Stone painterly surface.013 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_3 Stone painterly surface.013",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_4 Stone painterly surface.014",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_4 Stone painterly surface.014",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_4 Stone painterly surface.014 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_4 Stone painterly surface.014 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_4 Stone painterly surface.014 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_4 Stone painterly surface.014",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_5 Stone painterly surface.015",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_5 Stone painterly surface.015",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_5 Stone painterly surface.015 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_5 Stone painterly surface.015 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_5 Stone painterly surface.015 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_5 Stone painterly surface.015",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_6 Stone painterly surface.016",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_6 Stone painterly surface.016",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_6 Stone painterly surface.016 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_6 Stone painterly surface.016 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_6 Stone painterly surface.016 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_6 Stone painterly surface.016",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_7 Stone painterly surface.017",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_7 Stone painterly surface.017",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_7 Stone painterly surface.017 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_7 Stone painterly surface.017 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_7 Stone painterly surface.017 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_7 Stone painterly surface.017",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_8 Stone painterly surface.018",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_8 Stone painterly surface.018",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_8 Stone painterly surface.018 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_8 Stone painterly surface.018 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_8 Stone painterly surface.018 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_8 Stone painterly surface.018",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Pond_edge_stone_9 Stone painterly surface.019",
+   "bumps": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_9 Stone painterly surface.019",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_9 Stone painterly surface.019 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_9 Stone painterly surface.019 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Pond_edge_stone_9 Stone painterly surface.019 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Pond_edge_stone_9 Stone painterly surface.019",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / ridge ceramic",
+   "bumps": [
+    {
+     "tree": "G6 roof / ridge ceramic",
+     "strength": 0.2,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / ridge ceramic > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / ridge ceramic",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / glaze normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Rock_0 Stone painterly surface.025",
+   "bumps": [
+    {
+     "tree": "G6 roof / Rock_0 Stone painterly surface.025",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_0 Stone painterly surface.025 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_0 Stone painterly surface.025 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_0 Stone painterly surface.025 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Rock_0 Stone painterly surface.025",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Rock_1 Stone painterly surface.026",
+   "bumps": [
+    {
+     "tree": "G6 roof / Rock_1 Stone painterly surface.026",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_1 Stone painterly surface.026 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_1 Stone painterly surface.026 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_1 Stone painterly surface.026 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Rock_1 Stone painterly surface.026",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Rock_2 Stone painterly surface.027",
+   "bumps": [
+    {
+     "tree": "G6 roof / Rock_2 Stone painterly surface.027",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_2 Stone painterly surface.027 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_2 Stone painterly surface.027 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_2 Stone painterly surface.027 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Rock_2 Stone painterly surface.027",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Rock_3 Stone painterly surface.028",
+   "bumps": [
+    {
+     "tree": "G6 roof / Rock_3 Stone painterly surface.028",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_3 Stone painterly surface.028 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_3 Stone painterly surface.028 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_3 Stone painterly surface.028 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Rock_3 Stone painterly surface.028",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Rock_4 Stone painterly surface.029",
+   "bumps": [
+    {
+     "tree": "G6 roof / Rock_4 Stone painterly surface.029",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_4 Stone painterly surface.029 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_4 Stone painterly surface.029 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Rock_4 Stone painterly surface.029 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Rock_4 Stone painterly surface.029",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / stone.rock",
+   "bumps": [
+    {
+     "tree": "G6 roof / stone.rock",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / stone.rock > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / stone.rock > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / stone.rock > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / stone.rock",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / wall.garden",
+   "bumps": [
+    {
+     "tree": "G6 roof / wall.garden",
+     "strength": 0.28,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / wall.garden",
+     "strength": 0.8,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / wall.garden > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / wall.garden > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / wall.garden > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / wall.garden",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 roof / plaster normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 roof / Water_basin Stone painterly surface.038",
+   "bumps": [
+    {
+     "tree": "G6 roof / Water_basin Stone painterly surface.038",
+     "strength": 0.28,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Water_basin Stone painterly surface.038 > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Water_basin Stone painterly surface.038 > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "G6 roof / Water_basin Stone painterly surface.038 > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 roof / Water_basin Stone painterly surface.038",
+     "node": "G6 NM",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "G6 roof / stone normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / deck end grain",
+   "bumps": [
+    {
+     "tree": "G6 wood / deck end grain",
+     "strength": 0.25,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / deck end grain",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "strength_linked": false,
+     "image": "end_grain_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / deck side",
+   "bumps": [
+    {
+     "tree": "G6 wood / deck side",
+     "strength": 0.25,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / deck side",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "plank_top_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / deck top",
+   "bumps": [
+    {
+     "tree": "G6 wood / deck top",
+     "strength": 0.25,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 3,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / deck top",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.5,
+     "strength_linked": false,
+     "image": "plank_top_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / footing stone",
+   "bumps": [],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / footing stone",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / plank end grain",
+   "bumps": [
+    {
+     "tree": "G6 wood / plank end grain",
+     "strength": 0.25,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 6,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / plank end grain",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "strength_linked": false,
+     "image": "end_grain_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / plank side",
+   "bumps": [
+    {
+     "tree": "G6 wood / plank side",
+     "strength": 0.25,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 5,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / plank side",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "plank_top_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / plank top",
+   "bumps": [
+    {
+     "tree": "G6 wood / plank top",
+     "strength": 0.25,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 5,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / plank top",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.5,
+     "strength_linked": false,
+     "image": "plank_top_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "G6 wood / post timber",
+   "bumps": [],
+   "users": 4,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "G6 wood / post timber",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "strength_linked": false,
+     "image": "post_timber_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "GARDEN bark.pine",
+   "bumps": [
+    {
+     "tree": "GARDEN bark.pine",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "GARDEN bark.pine > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "GARDEN bark.pine > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 9,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "GARDEN bark.pine",
+     "node": "G6 bark Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "strength_linked": false,
+     "image": "pine_bark_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "GARDEN timber.post",
+   "bumps": [
+    {
+     "tree": "GARDEN timber.post",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "GARDEN timber.post > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "GARDEN timber.post > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "GARDEN timber.post",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "post_timber_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Moss and earth",
+   "bumps": [
+    {
+     "tree": "Moss and earth",
+     "strength": 0.5,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    }
+   ],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Moss and earth",
+     "node": "G6 ground Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "G6 ground_normal",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Plinth stone",
+   "bumps": [
+    {
+     "tree": "Plinth stone",
+     "strength": 0.3,
+     "fed_by_normal_map": true,
+     "strength_linked": false
+    },
+    {
+     "tree": "Plinth stone > WK FOOT",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Plinth stone > WK WALL GROWTH",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    },
+    {
+     "tree": "Plinth stone > WK WALL CRACKS",
+     "strength": 1.0,
+     "fed_by_normal_map": false,
+     "strength_linked": false
+    }
+   ],
+   "users": 1,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Plinth stone",
+     "node": "NM Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.8,
+     "strength_linked": false,
+     "image": "footing_stone_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeBump",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeGroup",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  },
+  {
+   "material": "Pond water",
+   "bumps": [],
+   "users": 2,
+   "via_geometry_nodes": [],
+   "nm": [
+    {
+     "tree": "Pond water",
+     "node": "Swell Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.6,
+     "strength_linked": false,
+     "image": "swell_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeVectorMath",
+      "ShaderNodeVectorMath",
+      "ShaderNodeVectorMath",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    },
+    {
+     "tree": "Pond water",
+     "node": "Ripple Normal Map",
+     "space": "TANGENT",
+     "uv_map": "RippleUV",
+     "strength": 1.0,
+     "strength_linked": false,
+     "image": "ripple_normal.png",
+     "tex_extension": "REPEAT",
+     "reaches_principled_normal": [
+      "ShaderNodeVectorMath",
+      "ShaderNodeVectorMath",
+      "ShaderNodeVectorMath",
+      "ShaderNodeBsdfPrincipled"
+     ],
+     "color_linked": true,
+     "tex_colorspace_node": "Non-Color",
+     "users_missing_uv_layer": [],
+     "n_users_missing_uv_layer": 0
+    }
+   ]
+  }
+ ],
+ "mesh_objects_with_normal_mapped_material_but_no_uv": [],
+ "images_in_blend": 82
+}

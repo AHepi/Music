@@ -1,0 +1,49 @@
+COLL G1 shapes ['Bridge stringers', 'Roof carrying frame', 'Gravel kerb', 'Gravel timber edge', 'Basin front stone', 'Basin candle stone', 'Basin bucket stone', 'Basin drain pebbles', 'Basin bamboo spout', 'Basin ladle', 'Shore stones']
+COLL G2 life ['Maple branch.003', 'Maple branch.004', 'Maple branch.005', 'Maple branch.006', 'Maple branch.007', 'Maple branch.008', 'Maple branch.009', 'Maple branch.010', 'Maple branch.011', 'Maple branch.012', 'Maple branch.013', 'Maple branch.014', 'Maple branch.015', 'Maple branch.016', 'Life / moss at feet and damp edges', 'Life / tufts', 'Life / pebble fringe', 'Life / pond bed', 'Life / pond pebbles', 'Life / lily stems', 'Life / iris clumps', 'Pine limb.005', 'Pine limb.006', 'Pine limb.007', 'Life / shrubs']
+COLL G4 light ['veranda', 'Hills, farthest', 'Hills, foot', 'Rim light (maple, hall edge)', 'Roof lift (hall roof only)']
+COLL G4 rim receivers ['Eave soffit', 'Hall beams', 'Hall roof', 'Maple branch', 'Maple branch.001', 'Maple branch.002', 'Maple branch.003', 'Maple branch.004', 'Maple branch.005', 'Maple branch.006', 'Maple branch.007', 'Maple branch.008', 'Maple branch.009', 'Maple branch.010', 'Maple branch.011', 'Maple branch.012', 'Maple branch.013', 'Maple branch.014', 'Maple branch.015', 'Maple branch.016', 'Maple inner mass', 'Maple leaf source 0', 'Maple leaf source 1', 'Maple leaf source 2', 'Maple leaf source 3', 'Maple leaf source 4', 'Maple leaves', 'Maple trunk']
+COLL G4 roof receivers ['Hall roof']
+COLL G5 fix ['Fix / far hedge']
+LIGHTLINK Cool sky fill recv None blocker None lightgroup fill
+LIGHTLINK Golden hour sun recv None blocker None lightgroup sun
+LIGHTLINK Hall glow 0 recv None blocker None lightgroup hall
+LIGHTLINK Hall glow 1 recv None blocker None lightgroup hall
+LIGHTLINK Hall glow 2 recv None blocker None lightgroup hall
+LIGHTLINK Hall glow 3 recv None blocker None lightgroup hall
+LIGHTLINK Lantern light recv None blocker None lightgroup lantern
+LIGHTLINK Rim light (maple, hall edge) recv G4 rim receivers blocker None lightgroup rim
+LIGHTLINK Roof lift (hall roof only) recv G4 roof receivers blocker None lightgroup fill
+lightgroups ['sun', 'rim', 'sky', 'fill', 'hall', 'lantern', 'rest']
+view layers ['ViewLayer']
+OBJ lightgroup Bamboo leaves rest
+OBJ lightgroup Cool sky fill fill
+OBJ lightgroup Dark plain sky
+OBJ lightgroup Fallen leaves rest
+OBJ lightgroup Golden hour sun sun
+OBJ lightgroup Hall glow 0 hall
+OBJ lightgroup Hall glow 1 hall
+OBJ lightgroup Hall glow 2 hall
+OBJ lightgroup Hall glow 3 hall
+OBJ lightgroup Hills, far sky
+OBJ lightgroup Hills, farthest sky
+OBJ lightgroup Hills, foot sky
+OBJ lightgroup Hills, middle sky
+OBJ lightgroup Hills, near sky
+OBJ lightgroup Lantern light lantern
+OBJ lightgroup Lantern window glow lantern
+OBJ lightgroup Lotus blossoms rest
+OBJ lightgroup Maple inner mass rest
+OBJ lightgroup Maple leaf source 0 rest
+OBJ lightgroup Maple leaf source 1 rest
+OBJ lightgroup Maple leaf source 2 rest
+OBJ lightgroup Maple leaf source 3 rest
+OBJ lightgroup Maple leaf source 4 rest
+OBJ lightgroup Maple leaves rest
+OBJ lightgroup Open room back hall
+OBJ lightgroup Pine pads rest
+OBJ lightgroup Rim light (maple, hall edge) rim
+OBJ lightgroup Roof lift (hall roof only) fill
+OBJ lightgroup Shoji paper hall
+Pond water mats ['Pond water']
+Life / pond bed mats ['Life / pond bed']
+visible_camera True cast shadow True

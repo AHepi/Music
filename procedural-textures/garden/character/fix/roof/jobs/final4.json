@@ -1,0 +1,349 @@
+{
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/roof/out/finals4",
+ "apply_stages": [
+  "wood",
+  "roof",
+  "ground",
+  "pond",
+  "final"
+ ],
+ "extra_cameras": {
+  "eave A": [
+   [
+    -1.2,
+    1.6,
+    3.6
+   ],
+   [
+    -0.8,
+    4.5,
+    3.4
+   ],
+   28
+  ],
+  "eave B": [
+   [
+    2.8,
+    1.4,
+    3.0
+   ],
+   [
+    -1.0,
+    4.6,
+    3.45
+   ],
+   35
+  ],
+  "lantern A": [
+   [
+    -0.7,
+    -0.5,
+    0.55
+   ],
+   [
+    1.0,
+    1.0,
+    0.25
+   ],
+   35
+  ],
+  "lantern B": [
+   [
+    2.4,
+    -0.3,
+    0.65
+   ],
+   [
+    0.9,
+    1.2,
+    0.2
+   ],
+   35
+  ],
+  "lantern C": [
+   [
+    -1.2,
+    2.3,
+    0.6
+   ],
+   [
+    0.9,
+    0.9,
+    0.25
+   ],
+   35
+  ],
+  "lantern D": [
+   [
+    -0.3,
+    0.2,
+    0.45
+   ],
+   [
+    1.0,
+    1.1,
+    0.2
+   ],
+   30
+  ],
+  "bridge B": [
+   [
+    -1.0,
+    -2.5,
+    0.9
+   ],
+   [
+    -3.3,
+    0.2,
+    0.2
+   ],
+   32
+  ],
+  "bridge C": [
+   [
+    -6.2,
+    -1.0,
+    1.0
+   ],
+   [
+    -3.8,
+    0.3,
+    0.2
+   ],
+   30
+  ],
+  "pond P1": [
+   [
+    -2.4,
+    -2.1,
+    0.5
+   ],
+   [
+    -2.6,
+    -0.5,
+    -0.15
+   ],
+   45
+  ],
+  "pond P2": [
+   [
+    0.1,
+    -0.8,
+    0.5
+   ],
+   [
+    -2.2,
+    0.8,
+    -0.15
+   ],
+   40
+  ],
+  "pond P3": [
+   [
+    -3.0,
+    -1.9,
+    0.9
+   ],
+   [
+    -3.2,
+    -0.3,
+    -0.12
+   ],
+   40
+  ],
+  "pond Q1": [
+   [
+    -4.6,
+    -1.4,
+    0.5
+   ],
+   [
+    -3.4,
+    -0.2,
+    -0.15
+   ],
+   40
+  ],
+  "pond Q2": [
+   [
+    -2.0,
+    -1.7,
+    0.35
+   ],
+   [
+    -3.8,
+    -0.1,
+    -0.15
+   ],
+   45
+  ],
+  "pond Q3": [
+   [
+    -1.4,
+    0.3,
+    0.45
+   ],
+   [
+    -3.6,
+    1.5,
+    -0.12
+   ],
+   50
+  ],
+  "capA": [
+   [
+    -0.8,
+    -0.6,
+    2.3
+   ],
+   [
+    0.95,
+    1.1,
+    1.7
+   ],
+   50
+  ],
+  "capB": [
+   [
+    2.5,
+    -0.2,
+    2.2
+   ],
+   [
+    0.95,
+    1.1,
+    1.7
+   ],
+   50
+  ],
+  "joint": [
+   [
+    -0.15,
+    0.2,
+    0.75
+   ],
+   [
+    0.95,
+    1.1,
+    0.35
+   ],
+   40
+  ]
+ },
+ "pictures": [
+  {
+   "name": "areas_probe",
+   "camera": "photo",
+   "size": "320x200",
+   "samples": 8,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "import bpy, json, os\nres = {}\nfor o in bpy.data.objects:\n    if o.type == 'MESH' and (o.name.startswith('G6 roof / lantern moss') or o.name.startswith('G6 roof / roof moss') or o.name.startswith('G6 roof / moss cap')):\n        me = o.data\n        res[o.name] = round(sum(p.area for p in me.polygons), 5)\n    if o.type == 'MESH' and o.name.startswith('G6 roof / lantern moss'):\n        pass\n# materials colours for the lantern moss\nfor m in bpy.data.materials:\n    if m.name in ('G6 roof / moss cap', 'G6 roof / lantern moss', 'G6 roof / roof moss'):\n        res['MAT ' + m.name] = [round(c, 3) for n in m.node_tree.nodes if n.bl_idname == 'ShaderNodeMix' and n.data_type == 'RGBA' for c in [0]][:0]\nos.makedirs(os.path.dirname(p['out']), exist_ok=True)\njson.dump(res, open(p['out'], 'w'), indent=1)\nprint('AREAS', json.dumps(res)[:800], flush=True)\n",
+   "out": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/roof/out/finals4/areas.json"
+  },
+  {
+   "name": "rc2",
+   "camera": "G6 roof cam 2",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "rc3",
+   "camera": "G6 roof cam 3",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "rc5",
+   "camera": "G6 roof cam 5",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "eaveA",
+   "camera": "G6 final cam eave A",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "lanternB",
+   "camera": "G6 final cam lantern B",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "lanternC",
+   "camera": "G6 final cam lantern C",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "lanternD",
+   "camera": "G6 final cam lantern D",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "bridgeB",
+   "camera": "G6 final cam bridge B",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "capA",
+   "camera": "G6 final cam capA",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "capB",
+   "camera": "G6 final cam capB",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "fix_hero",
+   "camera": "photo",
+   "size": "2400x1600",
+   "samples": 512,
+   "seed": 7,
+   "mode": "final",
+   "exr": true,
+   "extra": [
+    "--check-groups"
+   ]
+  },
+  {
+   "name": "fix_veranda",
+   "camera": "veranda",
+   "size": "2400x1600",
+   "samples": 512,
+   "seed": 7,
+   "mode": "final",
+   "exr": true,
+   "extra": [
+    "--check-groups"
+   ]
+  }
+ ]
+}

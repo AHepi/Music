@@ -1,0 +1,26 @@
+MOD CT / Shared roof controls CT / Complete two-bank ceramic roof
+    OUTPUT Geometry NodeSocketGeometry = None
+    INPUT Geometry NodeSocketGeometry = None
+    INPUT Width NodeSocketFloat = None
+    INPUT Half Depth NodeSocketFloat = None
+    INPUT Rise NodeSocketFloat = None
+    INPUT Columns NodeSocketInt = None
+    INPUT Courses NodeSocketInt = None
+    INPUT Seed NodeSocketInt = None
+   node Group Input NodeGroupInput None
+   node Group Output NodeGroupOutput None
+   node Join Geometry GeometryNodeJoinGeometry None
+   node Group GeometryNodeGroup CT / Roof bank 1 local mechanism
+   node Group.001 GeometryNodeGroup CT / Roof bank 2 local mechanism
+   node Transform Geometry GeometryNodeTransform None
+BANK1 setmats ['CT / Timber painterly surface', 'CT / Timber painterly surface', 'CT / Timber painterly surface', 'CT / Ceramic ridge host-local surface']
+BANK1 node types ['CurvePrimitiveLine', 'CurvePrimitiveQuadrilateral', 'CurveToMesh', 'FunctionNodeRandomValue', 'InputNamedAttribute', 'InputPosition', 'InstanceOnPoints', 'JoinGeometry', 'MeshGrid', 'NodeGroupInput', 'NodeGroupOutput', 'ObjectInfo', 'SetMaterial', 'SetPosition', 'ShaderNodeCombineXYZ', 'ShaderNodeMath', 'ShaderNodeSeparateXYZ', 'ShaderNodeVectorMath', 'StoreNamedAttribute']
+   in Geometry NodeSocketGeometry
+   in Width NodeSocketFloat
+   in Half Depth NodeSocketFloat
+   in Rise NodeSocketFloat
+   in Columns NodeSocketInt
+   in Courses NodeSocketInt
+   in Seed NodeSocketInt
+ROOF EVAL verts 56 faces 42 attrs ['position', '.edge_verts', '.corner_vert', '.corner_edge', 'sharp_face', 'sharp_edge', 'material_index'] uv []
+ROOF instances (depsgraph) 688

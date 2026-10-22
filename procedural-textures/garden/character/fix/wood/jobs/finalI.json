@@ -1,0 +1,181 @@
+{
+ "blend": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/wood/work/garden_fix.blend",
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/wood/previews/rI",
+ "variants": [
+  {
+   "name": "F",
+   "pictures": [
+    {
+     "name": "final_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 512,
+     "seed": 7,
+     "mode": "final",
+     "exr": false,
+     "check_groups": false
+    },
+    {
+     "name": "final_veranda",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 512,
+     "seed": 7,
+     "mode": "final",
+     "exr": false
+    },
+    {
+     "name": "close_bridge",
+     "camera": "G6 final cam bridge C",
+     "size": "1600x1067",
+     "samples": 512,
+     "seed": 7,
+     "mode": "final",
+     "exr": false
+    },
+    {
+     "name": "cam10_stepfoot",
+     "camera": "G6 wood cam 10",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam11_posts",
+     "camera": "G6 wood cam 11",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam6_macro",
+     "camera": "G6 wood cam 6",
+     "size": "1600x1066",
+     "samples": 128,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam4_top",
+     "camera": "G6 wood cam 4",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam3_south",
+     "camera": "G6 wood cam 3",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam5_lowwest",
+     "camera": "G6 wood cam 5",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "bridgeB",
+     "camera": "G6 final cam bridge B",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam7_deck",
+     "camera": "G6 wood cam 7",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam8_steps",
+     "camera": "G6 wood cam 8",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "cam9_posts",
+     "camera": "G6 wood cam 9",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "hero_prev",
+     "camera": "photo",
+     "size": "1200x800",
+     "samples": 128,
+     "seed": 7,
+     "mode": "preview"
+    },
+    {
+     "name": "veranda_prev",
+     "camera": "veranda",
+     "size": "1200x800",
+     "samples": 128,
+     "seed": 7,
+     "mode": "preview"
+    }
+   ]
+  },
+  {
+   "name": "S0",
+   "blend": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/direction/start/garden_real_fixed.blend",
+   "post": "silhouette",
+   "pictures": [
+    {
+     "name": "sil_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 8,
+     "seed": 7,
+     "mode": "preview",
+     "format": "PNG"
+    }
+   ]
+  },
+  {
+   "name": "S1",
+   "post": "silhouette",
+   "pictures": [
+    {
+     "name": "sil_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 8,
+     "seed": 7,
+     "mode": "preview",
+     "format": "PNG"
+    }
+   ]
+  },
+  {
+   "name": "M",
+   "post": "debug_mask",
+   "pictures": [
+    {
+     "name": "mask_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 8,
+     "seed": 7,
+     "mode": "preview",
+     "format": "PNG"
+    }
+   ]
+  }
+ ]
+}

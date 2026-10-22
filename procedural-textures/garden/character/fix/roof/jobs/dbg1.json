@@ -1,0 +1,546 @@
+{
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/roof/out/dbg1",
+ "apply_stages": [
+  "wood",
+  "roof",
+  "ground",
+  "pond",
+  "final"
+ ],
+ "extra_cameras": {
+  "eave A": [
+   [
+    -1.2,
+    1.6,
+    3.6
+   ],
+   [
+    -0.8,
+    4.5,
+    3.4
+   ],
+   28
+  ],
+  "eave B": [
+   [
+    2.8,
+    1.4,
+    3.0
+   ],
+   [
+    -1.0,
+    4.6,
+    3.45
+   ],
+   35
+  ],
+  "lantern A": [
+   [
+    -0.7,
+    -0.5,
+    0.55
+   ],
+   [
+    1.0,
+    1.0,
+    0.25
+   ],
+   35
+  ],
+  "lantern B": [
+   [
+    2.4,
+    -0.3,
+    0.65
+   ],
+   [
+    0.9,
+    1.2,
+    0.2
+   ],
+   35
+  ],
+  "lantern C": [
+   [
+    -1.2,
+    2.3,
+    0.6
+   ],
+   [
+    0.9,
+    0.9,
+    0.25
+   ],
+   35
+  ],
+  "lantern D": [
+   [
+    -0.3,
+    0.2,
+    0.45
+   ],
+   [
+    1.0,
+    1.1,
+    0.2
+   ],
+   30
+  ],
+  "bridge B": [
+   [
+    -1.0,
+    -2.5,
+    0.9
+   ],
+   [
+    -3.3,
+    0.2,
+    0.2
+   ],
+   32
+  ],
+  "bridge C": [
+   [
+    -6.2,
+    -1.0,
+    1.0
+   ],
+   [
+    -3.8,
+    0.3,
+    0.2
+   ],
+   30
+  ],
+  "pond P1": [
+   [
+    -2.4,
+    -2.1,
+    0.5
+   ],
+   [
+    -2.6,
+    -0.5,
+    -0.15
+   ],
+   45
+  ],
+  "pond P2": [
+   [
+    0.1,
+    -0.8,
+    0.5
+   ],
+   [
+    -2.2,
+    0.8,
+    -0.15
+   ],
+   40
+  ],
+  "pond P3": [
+   [
+    -3.0,
+    -1.9,
+    0.9
+   ],
+   [
+    -3.2,
+    -0.3,
+    -0.12
+   ],
+   40
+  ],
+  "pond Q1": [
+   [
+    -4.6,
+    -1.4,
+    0.5
+   ],
+   [
+    -3.4,
+    -0.2,
+    -0.15
+   ],
+   40
+  ],
+  "pond Q2": [
+   [
+    -2.0,
+    -1.7,
+    0.35
+   ],
+   [
+    -3.8,
+    -0.1,
+    -0.15
+   ],
+   45
+  ],
+  "pond Q3": [
+   [
+    -1.4,
+    0.3,
+    0.45
+   ],
+   [
+    -3.6,
+    1.5,
+    -0.12
+   ],
+   50
+  ]
+ },
+ "pictures": [
+  {
+   "name": "lanternB_scan",
+   "camera": "G6 final cam lantern B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "scan"
+  },
+  {
+   "name": "lanternB_foot",
+   "camera": "G6 final cam lantern B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "foot"
+  },
+  {
+   "name": "lanternB_dirt",
+   "camera": "G6 final cam lantern B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "dirt"
+  },
+  {
+   "name": "lanternB_cracks",
+   "camera": "G6 final cam lantern B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "cracks"
+  },
+  {
+   "name": "lanternB_growth",
+   "camera": "G6 final cam lantern B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "growth"
+  },
+  {
+   "name": "lanternB_moss",
+   "camera": "G6 final cam lantern B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "moss"
+  },
+  {
+   "name": "lanternB_full",
+   "camera": "G6 final cam lantern B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "full"
+  },
+  {
+   "name": "lanternC_scan",
+   "camera": "G6 final cam lantern C",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "scan"
+  },
+  {
+   "name": "lanternC_foot",
+   "camera": "G6 final cam lantern C",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "foot"
+  },
+  {
+   "name": "lanternC_dirt",
+   "camera": "G6 final cam lantern C",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "dirt"
+  },
+  {
+   "name": "lanternC_cracks",
+   "camera": "G6 final cam lantern C",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "cracks"
+  },
+  {
+   "name": "lanternC_growth",
+   "camera": "G6 final cam lantern C",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "growth"
+  },
+  {
+   "name": "lanternC_moss",
+   "camera": "G6 final cam lantern C",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "moss"
+  },
+  {
+   "name": "lanternC_full",
+   "camera": "G6 final cam lantern C",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "full"
+  },
+  {
+   "name": "lanternD_scan",
+   "camera": "G6 final cam lantern D",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "scan"
+  },
+  {
+   "name": "lanternD_foot",
+   "camera": "G6 final cam lantern D",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "foot"
+  },
+  {
+   "name": "lanternD_dirt",
+   "camera": "G6 final cam lantern D",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "dirt"
+  },
+  {
+   "name": "lanternD_cracks",
+   "camera": "G6 final cam lantern D",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "cracks"
+  },
+  {
+   "name": "lanternD_growth",
+   "camera": "G6 final cam lantern D",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "growth"
+  },
+  {
+   "name": "lanternD_moss",
+   "camera": "G6 final cam lantern D",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "moss"
+  },
+  {
+   "name": "lanternD_full",
+   "camera": "G6 final cam lantern D",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "full"
+  },
+  {
+   "name": "bridgeB_scan",
+   "camera": "G6 final cam bridge B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "scan"
+  },
+  {
+   "name": "bridgeB_foot",
+   "camera": "G6 final cam bridge B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "foot"
+  },
+  {
+   "name": "bridgeB_dirt",
+   "camera": "G6 final cam bridge B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "dirt"
+  },
+  {
+   "name": "bridgeB_cracks",
+   "camera": "G6 final cam bridge B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "cracks"
+  },
+  {
+   "name": "bridgeB_growth",
+   "camera": "G6 final cam bridge B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "growth"
+  },
+  {
+   "name": "bridgeB_moss",
+   "camera": "G6 final cam bridge B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "moss"
+  },
+  {
+   "name": "bridgeB_full",
+   "camera": "G6 final cam bridge B",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "full"
+  },
+  {
+   "name": "rc5_scan",
+   "camera": "G6 roof cam 5",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "scan"
+  },
+  {
+   "name": "rc5_foot",
+   "camera": "G6 roof cam 5",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "foot"
+  },
+  {
+   "name": "rc5_dirt",
+   "camera": "G6 roof cam 5",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "dirt"
+  },
+  {
+   "name": "rc5_cracks",
+   "camera": "G6 roof cam 5",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "cracks"
+  },
+  {
+   "name": "rc5_growth",
+   "camera": "G6 roof cam 5",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "growth"
+  },
+  {
+   "name": "rc5_moss",
+   "camera": "G6 roof cam 5",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "moss"
+  },
+  {
+   "name": "rc5_full",
+   "camera": "G6 roof cam 5",
+   "size": "640x427",
+   "samples": 48,
+   "mode": "preview",
+   "quality": 88,
+   "exec": "# code snippet run (exec) before each debug picture: rewires every G6 roof stone material's Base Color to a chosen point of the weathering-kit chain\n# p['dbg'] in: scan, foot, dirt, cracks, growth, moss (end of kit), full (no change = marks as built)\nimport bpy\nstage = p['dbg']\nnames = {'foot': 'WK foot', 'dirt': 'WK dirt', 'cracks': 'WK wallcracks', 'growth': 'WK wallgrowth', 'moss': 'WK groundmoss'}\nn_ok = 0\nfor m in bpy.data.materials:\n    if not m.name.startswith('G6 roof / ') or m.node_tree is None:\n        continue\n    nt = m.node_tree\n    if nt.nodes.get('WK foot') is None or nt.nodes.get('WK groundmoss') is None:\n        continue\n    b = [n for n in nt.nodes if n.bl_idname == 'ShaderNodeBsdfPrincipled'][0]\n    if '_orig_col' not in m:\n        m['_orig_col'] = 1\n        # remember the full link source by node/socket name\n        l = b.inputs['Base Color'].links[0]\n        m['_orig_from'] = [l.from_node.name, l.from_socket.identifier]\n    if stage == 'full':\n        fn, fs = m['_orig_from']\n        src = [s for s in nt.nodes[fn].outputs if s.identifier == fs][0]\n    elif stage == 'scan':\n        src = nt.nodes['WK foot'].inputs['Colour'].links[0].from_socket\n    else:\n        src = nt.nodes[names[stage]].outputs['Colour']\n    nt.links.new(src, b.inputs['Base Color'])\n    n_ok += 1\nprint('DBG', stage, 'materials rewired', n_ok, flush=True)\n",
+   "dbg": "full"
+  }
+ ]
+}

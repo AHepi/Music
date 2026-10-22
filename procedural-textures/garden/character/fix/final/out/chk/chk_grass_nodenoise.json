@@ -1,0 +1,107 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/final/garden_character_fix.blend",
+ "args": {
+  "out": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/final/out/chk/chk_grass_nodenoise",
+  "camera": "G6 final cam grass G4",
+  "size": "1600x1067",
+  "samples": 512,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": false,
+  "exr": true,
+  "check_groups": true,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "265ccaf756493dd200f28bf563ad9cb65c6b7bbd5e70bad33f7f7bede4ece86d",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD EPYC 7352 24-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 512,
+ "seed": 7,
+ "camera": "G6 final cam grass G4",
+ "size": [
+  1600,
+  1067,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": false,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 19.63,
+ "files": {
+  "exr": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/final/out/chk/chk_grass_nodenoise.exr",
+   "bytes": 17837366,
+   "sha256": "bfd55917a530f054fde3e08a5dae44355734dae6be7e2b0ad7c0f4cd420e2aba"
+  },
+  "png": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/final/out/chk/chk_grass_nodenoise.png",
+   "bytes": 2713873,
+   "sha256": "28fde0293ccb53b5b671d23a7ece2b83444d5f1689453b49f4fd1018f153a5ad"
+  }
+ },
+ "group_check": {
+  "groups": [
+   "Combined_sun",
+   "Combined_rim",
+   "Combined_sky",
+   "Combined_fill",
+   "Combined_hall",
+   "Combined_lantern",
+   "Combined_rest"
+  ],
+  "rel_error": 0.00966,
+  "share": {
+   "sun": 0.4445,
+   "rim": 0.0001,
+   "sky": 0.1614,
+   "fill": 0.2264,
+   "hall": 0.1646,
+   "lantern": 0.0023,
+   "rest": 0.0004
+  },
+  "denoise_on": false
+ }
+}

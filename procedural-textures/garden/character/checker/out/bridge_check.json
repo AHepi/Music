@@ -1,0 +1,1040 @@
+{
+ "counts": {
+  "planks": 51,
+  "stringers": 14,
+  "bearers": 7,
+  "posts": 18,
+  "footings_incl_piers12": 14,
+  "sills": 2,
+  "pegs": 90,
+  "cramps": 24
+ },
+ "planks_on_stringers": {
+  "name": "planks on stringers (>=2, area>=8cm2)",
+  "n_upper": 51,
+  "min_supports": 2,
+  "max_supports": 6,
+  "n_bad": 0,
+  "bad": [],
+  "contact_min_gap_mm_range": [
+   -4.1,
+   7.7
+  ]
+ },
+ "planks_on_bearers_extra": {},
+ "stringers_on_bearers_or_sills": {
+  "name": "stringers on bearers or bank sills (>=2)",
+  "n_upper": 14,
+  "min_supports": 1,
+  "max_supports": 3,
+  "n_bad": 4,
+  "bad": [
+   {
+    "upper": 0,
+    "upper_obj": "Bridge stringers",
+    "upper_idx": 0,
+    "contacts": {
+     "8": {
+      "n": 86,
+      "area_cm2": 344.0,
+      "min_gap_mm": 0.0
+     }
+    },
+    "near": {}
+   },
+   {
+    "upper": 2,
+    "upper_obj": "Bridge stringers",
+    "upper_idx": 2,
+    "contacts": {
+     "8": {
+      "n": 86,
+      "area_cm2": 344.0,
+      "min_gap_mm": -0.0
+     }
+    },
+    "near": {}
+   },
+   {
+    "upper": 10,
+    "upper_obj": "Bridge stringers",
+    "upper_idx": 10,
+    "contacts": {
+     "7": {
+      "n": 88,
+      "area_cm2": 352.0,
+      "min_gap_mm": -0.0
+     }
+    },
+    "near": {}
+   },
+   {
+    "upper": 12,
+    "upper_obj": "Bridge stringers",
+    "upper_idx": 12,
+    "contacts": {
+     "7": {
+      "n": 88,
+      "area_cm2": 352.0,
+      "min_gap_mm": -0.0
+     }
+    },
+    "near": {}
+   }
+  ],
+  "contact_min_gap_mm_range": [
+   0.0,
+   0.0
+  ],
+  "detail": {
+   "0": [
+    "Bridge pier 3:0 a=344.0 g=0.0"
+   ],
+   "1": [
+    "bearers:0 a=100.0 g=-0.0",
+    "bearers:1 a=100.0 g=-0.0",
+    "bearers:5 a=56.0 g=-0.0"
+   ],
+   "2": [
+    "Bridge pier 3:0 a=344.0 g=-0.0"
+   ],
+   "3": [
+    "bearers:0 a=92.0 g=-0.0",
+    "bearers:1 a=92.0 g=-0.0",
+    "bearers:5 a=52.0 g=-0.0"
+   ],
+   "4": [
+    "bearers:1 a=104.0 g=-0.0",
+    "bearers:5 a=52.0 g=-0.0"
+   ],
+   "5": [
+    "bearers:5 a=60.0 g=-0.0",
+    "bearers:2 a=92.0 g=-0.0",
+    "bearers:6 a=56.0 g=-0.0"
+   ],
+   "6": [
+    "bearers:5 a=60.0 g=-0.0",
+    "bearers:2 a=96.0 g=-0.0",
+    "bearers:6 a=44.0 g=-0.0"
+   ],
+   "7": [
+    "bearers:5 a=60.0 g=0.0",
+    "bearers:2 a=100.0 g=-0.0"
+   ],
+   "8": [
+    "bearers:2 a=96.0 g=-0.0",
+    "bearers:6 a=56.0 g=-0.0"
+   ],
+   "9": [
+    "bearers:6 a=60.0 g=-0.0",
+    "bearers:3 a=88.0 g=-0.0",
+    "bearers:4 a=88.0 g=-0.0"
+   ],
+   "10": [
+    "Bridge pier 0:0 a=352.0 g=-0.0"
+   ],
+   "11": [
+    "bearers:6 a=40.0 g=-0.0",
+    "bearers:3 a=96.0 g=-0.0",
+    "bearers:4 a=100.0 g=-0.0"
+   ],
+   "12": [
+    "Bridge pier 0:0 a=352.0 g=-0.0"
+   ],
+   "13": [
+    "bearers:6 a=56.0 g=-0.0",
+    "bearers:3 a=100.0 g=-0.0"
+   ]
+  }
+ },
+ "bearers_on_posts_vertical": {
+  "name": "bearers vertically resting on posts (>=2)",
+  "n_upper": 7,
+  "min_supports": 0,
+  "max_supports": 2,
+  "n_bad": 6,
+  "bad": [
+   {
+    "upper": 0,
+    "upper_obj": "G6 wood / bridge bearers",
+    "upper_idx": 0,
+    "contacts": {
+     "0": {
+      "n": 1,
+      "area_cm2": 1.0,
+      "min_gap_mm": 5.3
+     }
+    },
+    "near": {
+     "1": 8.5
+    }
+   },
+   {
+    "upper": 1,
+    "upper_obj": "G6 wood / bridge bearers",
+    "upper_idx": 1,
+    "contacts": {},
+    "near": {
+     "3": 127.4,
+     "2": 246.1
+    }
+   },
+   {
+    "upper": 2,
+    "upper_obj": "G6 wood / bridge bearers",
+    "upper_idx": 2,
+    "contacts": {},
+    "near": {
+     "4": 186.9,
+     "5": 244.2
+    }
+   },
+   {
+    "upper": 3,
+    "upper_obj": "G6 wood / bridge bearers",
+    "upper_idx": 3,
+    "contacts": {
+     "7": {
+      "n": 1,
+      "area_cm2": 1.0,
+      "min_gap_mm": 1.5
+     }
+    },
+    "near": {
+     "6": 192.2
+    }
+   },
+   {
+    "upper": 5,
+    "upper_obj": "G6 wood / bridge bearers",
+    "upper_idx": 5,
+    "contacts": {},
+    "near": {
+     "11": 158.6,
+     "10": 133.1
+    }
+   },
+   {
+    "upper": 6,
+    "upper_obj": "G6 wood / bridge bearers",
+    "upper_idx": 6,
+    "contacts": {},
+    "near": {
+     "13": 241.6,
+     "12": 248.3
+    }
+   }
+  ],
+  "contact_min_gap_mm_range": [
+   -26.8,
+   5.3
+  ]
+ },
+ "bearers_touch_posts_box": {
+  "0": [
+   [
+    0,
+    0.047,
+    0.0
+   ],
+   [
+    1,
+    0.051,
+    0.0
+   ]
+  ],
+  "1": [
+   [
+    2,
+    0.05,
+    0.0
+   ],
+   [
+    3,
+    0.05,
+    0.0
+   ]
+  ],
+  "2": [
+   [
+    4,
+    0.049,
+    0.0
+   ],
+   [
+    5,
+    0.048,
+    0.0
+   ]
+  ],
+  "3": [
+   [
+    6,
+    0.047,
+    0.0
+   ],
+   [
+    7,
+    0.049,
+    0.0
+   ]
+  ],
+  "4": [
+   [
+    8,
+    0.05,
+    0.0
+   ],
+   [
+    9,
+    0.05,
+    0.0
+   ]
+  ],
+  "5": [
+   [
+    10,
+    0.047,
+    0.0
+   ],
+   [
+    11,
+    0.049,
+    0.0
+   ]
+  ],
+  "6": [
+   [
+    12,
+    0.05,
+    0.0
+   ],
+   [
+    13,
+    0.05,
+    0.0
+   ]
+  ]
+ },
+ "posts_on_footings": {
+  "name": "posts standing on a footing stone (>=1, tol 10mm)",
+  "n_upper": 18,
+  "min_supports": 0,
+  "max_supports": 1,
+  "n_bad": 4,
+  "bad": [
+   {
+    "upper": 14,
+    "upper_obj": "G6 wood / bridge posts",
+    "upper_idx": 14,
+    "contacts": {},
+    "near": {}
+   },
+   {
+    "upper": 15,
+    "upper_obj": "G6 wood / bridge posts",
+    "upper_idx": 15,
+    "contacts": {},
+    "near": {}
+   },
+   {
+    "upper": 16,
+    "upper_obj": "G6 wood / bridge posts",
+    "upper_idx": 16,
+    "contacts": {},
+    "near": {}
+   },
+   {
+    "upper": 17,
+    "upper_obj": "G6 wood / bridge posts",
+    "upper_idx": 17,
+    "contacts": {},
+    "near": {}
+   }
+  ],
+  "contact_min_gap_mm_range": [
+   0.0,
+   0.0
+  ],
+  "posts_without_footing_or_sill": [],
+  "post_to_support": {
+   "0": [
+    "footings:0 g=0.0"
+   ],
+   "1": [
+    "footings:1 g=-0.0"
+   ],
+   "2": [
+    "footings:2 g=0.0"
+   ],
+   "3": [
+    "footings:3 g=-0.0"
+   ],
+   "4": [
+    "footings:4 g=0.0"
+   ],
+   "5": [
+    "footings:5 g=0.0"
+   ],
+   "6": [
+    "footings:6 g=0.0"
+   ],
+   "7": [
+    "footings:7 g=0.0"
+   ],
+   "8": [
+    "footings:8 g=-0.0"
+   ],
+   "9": [
+    "footings:9 g=-0.0"
+   ],
+   "10": [
+    "Bridge pier 2:0 g=0.0"
+   ],
+   "11": [
+    "footings:10 g=0.0"
+   ],
+   "12": [
+    "Bridge pier 1:0 g=0.0"
+   ],
+   "13": [
+    "footings:11 g=0.0"
+   ],
+   "14": [
+    "SILL:Bridge pier 3 g=-0.0"
+   ],
+   "15": [
+    "SILL:Bridge pier 3 g=-0.0"
+   ],
+   "16": [
+    "SILL:Bridge pier 0 g=-0.0"
+   ],
+   "17": [
+    "SILL:Bridge pier 0 g=-0.0"
+   ]
+  }
+ },
+ "terrain_objects": [
+  "Astra / Courtyard receiving ground",
+  "Life / pond bed"
+ ],
+ "footings_on_bed": [
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 0,
+   "bottom_z": -0.4489,
+   "top_z": -0.2995,
+   "gap_to_top_surface_mm_min_max": [
+    -5.9,
+    -3.4
+   ],
+   "gap_to_ground_mm": [
+    20.4,
+    115.0
+   ],
+   "gap_to_bedplate_mm": [
+    -5.9,
+    -3.4
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 1,
+   "bottom_z": -0.1705,
+   "top_z": -0.0685,
+   "gap_to_top_surface_mm_min_max": [
+    -188.1,
+    24.9
+   ],
+   "gap_to_ground_mm": [
+    -188.1,
+    24.9
+   ],
+   "gap_to_bedplate_mm": null
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 2,
+   "bottom_z": -0.4468,
+   "top_z": -0.3061,
+   "gap_to_top_surface_mm_min_max": [
+    -7.2,
+    -3.4
+   ],
+   "gap_to_ground_mm": [
+    96.8,
+    123.3
+   ],
+   "gap_to_bedplate_mm": [
+    -7.2,
+    -3.4
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 3,
+   "bottom_z": -0.2974,
+   "top_z": -0.1874,
+   "gap_to_top_surface_mm_min_max": [
+    -166.7,
+    143.1
+   ],
+   "gap_to_ground_mm": [
+    -166.7,
+    150.1
+   ],
+   "gap_to_bedplate_mm": [
+    129.3,
+    143.1
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 4,
+   "bottom_z": -0.4303,
+   "top_z": -0.3,
+   "gap_to_top_surface_mm_min_max": [
+    -6.7,
+    0.7
+   ],
+   "gap_to_ground_mm": [
+    140.5,
+    146.2
+   ],
+   "gap_to_bedplate_mm": [
+    -6.7,
+    0.7
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 5,
+   "bottom_z": -0.4413,
+   "top_z": -0.305,
+   "gap_to_top_surface_mm_min_max": [
+    -13.1,
+    0.8
+   ],
+   "gap_to_ground_mm": [
+    118.7,
+    129.4
+   ],
+   "gap_to_bedplate_mm": [
+    -13.1,
+    0.8
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 6,
+   "bottom_z": -0.4464,
+   "top_z": -0.2991,
+   "gap_to_top_surface_mm_min_max": [
+    -204.7,
+    -4.3
+   ],
+   "gap_to_ground_mm": [
+    -204.7,
+    120.3
+   ],
+   "gap_to_bedplate_mm": [
+    -54.4,
+    -4.3
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 7,
+   "bottom_z": -0.4373,
+   "top_z": -0.3071,
+   "gap_to_top_surface_mm_min_max": [
+    -135.2,
+    0.5
+   ],
+   "gap_to_ground_mm": [
+    -135.2,
+    131.9
+   ],
+   "gap_to_bedplate_mm": [
+    -52.5,
+    0.5
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 8,
+   "bottom_z": -0.1453,
+   "top_z": -0.0433,
+   "gap_to_top_surface_mm_min_max": [
+    -146.0,
+    69.7
+   ],
+   "gap_to_ground_mm": [
+    -146.0,
+    69.7
+   ],
+   "gap_to_bedplate_mm": null
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 9,
+   "bottom_z": -0.1432,
+   "top_z": -0.0332,
+   "gap_to_top_surface_mm_min_max": [
+    -131.8,
+    184.9
+   ],
+   "gap_to_ground_mm": [
+    -131.8,
+    184.9
+   ],
+   "gap_to_bedplate_mm": null
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 10,
+   "bottom_z": -0.4246,
+   "top_z": -0.3048,
+   "gap_to_top_surface_mm_min_max": [
+    -141.3,
+    19.6
+   ],
+   "gap_to_ground_mm": [
+    -141.3,
+    91.1
+   ],
+   "gap_to_bedplate_mm": [
+    -22.0,
+    19.6
+   ]
+  },
+  {
+   "obj": "G6 wood / bridge footings",
+   "idx": 11,
+   "bottom_z": -0.4321,
+   "top_z": -0.3016,
+   "gap_to_top_surface_mm_min_max": [
+    -8.0,
+    3.7
+   ],
+   "gap_to_ground_mm": [
+    61.4,
+    143.6
+   ],
+   "gap_to_bedplate_mm": [
+    -8.0,
+    3.7
+   ]
+  },
+  {
+   "obj": "Bridge pier 1",
+   "idx": 0,
+   "bottom_z": -0.4491,
+   "top_z": -0.3083,
+   "gap_to_top_surface_mm_min_max": [
+    -14.9,
+    -0.7
+   ],
+   "gap_to_ground_mm": [
+    113.8,
+    130.2
+   ],
+   "gap_to_bedplate_mm": [
+    -14.9,
+    -0.7
+   ]
+  },
+  {
+   "obj": "Bridge pier 2",
+   "idx": 0,
+   "bottom_z": -0.442,
+   "top_z": -0.3063,
+   "gap_to_top_surface_mm_min_max": [
+    -10.4,
+    -1.9
+   ],
+   "gap_to_ground_mm": [
+    118.5,
+    127.5
+   ],
+   "gap_to_bedplate_mm": [
+    -10.4,
+    -1.9
+   ]
+  }
+ ],
+ "sills_on_ground": [
+  {
+   "obj": "Bridge pier 0",
+   "idx": 0,
+   "bottom_z": -0.25,
+   "top_z": 0.1,
+   "gap_to_top_surface_mm_min_max": [
+    -257.6,
+    -159.8
+   ],
+   "gap_to_ground_mm": [
+    -257.6,
+    -159.8
+   ],
+   "gap_to_bedplate_mm": null
+  },
+  {
+   "obj": "Bridge pier 3",
+   "idx": 0,
+   "bottom_z": -0.25,
+   "top_z": 0.1,
+   "gap_to_top_surface_mm_min_max": [
+    -299.5,
+    -5.4
+   ],
+   "gap_to_ground_mm": [
+    -299.5,
+    -5.4
+   ],
+   "gap_to_bedplate_mm": null
+  }
+ ],
+ "pegs": {
+  "n": 90,
+  "not_over_a_plank": 28,
+  "gap_mm_min": -2.13,
+  "gap_mm_max": -1.84,
+  "n_floating_over_1mm": 0,
+  "n_over_5mm": 0,
+  "gap_hist_mm": [
+   0,
+   62,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "walk": {
+  "n_points": 134,
+  "n_hit": 120,
+  "first_hit_index": 0,
+  "last_hit_index": 132,
+  "route_length_m": 6.7,
+  "top_z_min_max": [
+   0.2053,
+   0.2254
+  ],
+  "max_step_between_5cm_samples_mm": 12.8,
+  "miss_run_lengths_samples": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "first_hit_xy": [
+   -5.95,
+   1.55
+  ],
+  "last_hit_xy": [
+   -0.5837209302325583,
+   -0.5627906976744186
+  ]
+ },
+ "bank_west_end": [
+  {
+   "beyond_node_m": -0.2,
+   "ground_z": -0.047,
+   "plank_top_z": 0.22
+  },
+  {
+   "beyond_node_m": 0.0,
+   "ground_z": 0.003,
+   "plank_top_z": 0.219
+  },
+  {
+   "beyond_node_m": 0.2,
+   "ground_z": 0.032,
+   "plank_top_z": 0.217
+  },
+  {
+   "beyond_node_m": 0.4,
+   "ground_z": 0.054,
+   "plank_top_z": null
+  },
+  {
+   "beyond_node_m": 0.6,
+   "ground_z": 0.064,
+   "plank_top_z": null
+  },
+  {
+   "beyond_node_m": 0.8,
+   "ground_z": 0.076,
+   "plank_top_z": null
+  },
+  {
+   "beyond_node_m": 1.0,
+   "ground_z": 0.09,
+   "plank_top_z": null
+  }
+ ],
+ "bank_east_end": [
+  {
+   "beyond_node_m": -0.2,
+   "ground_z": 0.002,
+   "plank_top_z": 0.215
+  },
+  {
+   "beyond_node_m": 0.0,
+   "ground_z": 0.002,
+   "plank_top_z": null
+  },
+  {
+   "beyond_node_m": 0.2,
+   "ground_z": 0.002,
+   "plank_top_z": 0.219
+  },
+  {
+   "beyond_node_m": 0.4,
+   "ground_z": 0.002,
+   "plank_top_z": null
+  },
+  {
+   "beyond_node_m": 0.6,
+   "ground_z": 0.002,
+   "plank_top_z": null
+  },
+  {
+   "beyond_node_m": 0.8,
+   "ground_z": 0.001,
+   "plank_top_z": null
+  },
+  {
+   "beyond_node_m": 1.0,
+   "ground_z": 0.006,
+   "plank_top_z": null
+  }
+ ],
+ "plank_character": {
+  "n": 51,
+  "width_cm_min_max_std": [
+   9.43,
+   18.17,
+   2.25
+  ],
+  "z_extent_mm_min_max_std(includes bow)": [
+   49.6,
+   68.9,
+   4.5
+  ],
+  "length_m_min_max": [
+   0.676,
+   1.2
+  ],
+  "max_vertices": 378,
+  "distinct_vertex_sums": 51
+ },
+ "plank_gaps_mm": {
+  "n": 78,
+  "min": -11.1,
+  "max": 174.3,
+  "std": 65.93,
+  "n_under_5mm": 7,
+  "n_over_14mm": 34,
+  "n_negative": 4
+ },
+ "plank_pairs_closer_than_1cm": {
+  "n": 26,
+  "pairs": [
+   [
+    3,
+    4,
+    8.4,
+    "003",
+    "003"
+   ],
+   [
+    4,
+    5,
+    9.9,
+    "003",
+    "003"
+   ],
+   [
+    5,
+    6,
+    6.1,
+    "003",
+    "003"
+   ],
+   [
+    8,
+    9,
+    7.6,
+    "003",
+    "003"
+   ],
+   [
+    9,
+    10,
+    6.8,
+    "003",
+    "003"
+   ],
+   [
+    11,
+    12,
+    9.1,
+    "003",
+    "003"
+   ],
+   [
+    13,
+    14,
+    7.2,
+    "003",
+    "003"
+   ],
+   [
+    14,
+    15,
+    5.7,
+    "003",
+    "003"
+   ],
+   [
+    17,
+    18,
+    6.2,
+    "004",
+    "004"
+   ],
+   [
+    18,
+    19,
+    9.9,
+    "004",
+    "004"
+   ],
+   [
+    19,
+    20,
+    6.0,
+    "004",
+    "004"
+   ],
+   [
+    21,
+    22,
+    5.5,
+    "004",
+    "004"
+   ],
+   [
+    22,
+    23,
+    8.5,
+    "004",
+    "004"
+   ],
+   [
+    24,
+    25,
+    9.1,
+    "004",
+    "004"
+   ],
+   [
+    26,
+    27,
+    9.4,
+    "004",
+    "004"
+   ],
+   [
+    28,
+    29,
+    7.4,
+    "004",
+    "004"
+   ],
+   [
+    31,
+    32,
+    9.5,
+    "005",
+    "005"
+   ],
+   [
+    34,
+    35,
+    5.8,
+    "005",
+    "005"
+   ],
+   [
+    35,
+    36,
+    9.3,
+    "005",
+    "005"
+   ],
+   [
+    36,
+    37,
+    9.1,
+    "005",
+    "005"
+   ],
+   [
+    38,
+    39,
+    6.3,
+    "005",
+    "005"
+   ],
+   [
+    40,
+    41,
+    7.5,
+    "005",
+    "005"
+   ],
+   [
+    41,
+    42,
+    9.1,
+    "005",
+    "005"
+   ],
+   [
+    42,
+    43,
+    8.4,
+    "005",
+    "005"
+   ],
+   [
+    44,
+    45,
+    9.2,
+    "005",
+    "005"
+   ],
+   [
+    45,
+    46,
+    8.0,
+    "005",
+    "005"
+   ]
+  ]
+ },
+ "seconds": 0.5
+}

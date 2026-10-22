@@ -1,0 +1,379 @@
+{
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/roof/out/t3",
+ "apply_stages": [
+  "wood",
+  "roof",
+  "ground",
+  "pond",
+  "final"
+ ],
+ "extra_cameras": {
+  "eave A": [
+   [
+    -1.2,
+    1.6,
+    3.6
+   ],
+   [
+    -0.8,
+    4.5,
+    3.4
+   ],
+   28
+  ],
+  "eave B": [
+   [
+    2.8,
+    1.4,
+    3.0
+   ],
+   [
+    -1.0,
+    4.6,
+    3.45
+   ],
+   35
+  ],
+  "lantern A": [
+   [
+    -0.7,
+    -0.5,
+    0.55
+   ],
+   [
+    1.0,
+    1.0,
+    0.25
+   ],
+   35
+  ],
+  "lantern B": [
+   [
+    2.4,
+    -0.3,
+    0.65
+   ],
+   [
+    0.9,
+    1.2,
+    0.2
+   ],
+   35
+  ],
+  "lantern C": [
+   [
+    -1.2,
+    2.3,
+    0.6
+   ],
+   [
+    0.9,
+    0.9,
+    0.25
+   ],
+   35
+  ],
+  "lantern D": [
+   [
+    -0.3,
+    0.2,
+    0.45
+   ],
+   [
+    1.0,
+    1.1,
+    0.2
+   ],
+   30
+  ],
+  "bridge B": [
+   [
+    -1.0,
+    -2.5,
+    0.9
+   ],
+   [
+    -3.3,
+    0.2,
+    0.2
+   ],
+   32
+  ],
+  "bridge C": [
+   [
+    -6.2,
+    -1.0,
+    1.0
+   ],
+   [
+    -3.8,
+    0.3,
+    0.2
+   ],
+   30
+  ],
+  "pond P1": [
+   [
+    -2.4,
+    -2.1,
+    0.5
+   ],
+   [
+    -2.6,
+    -0.5,
+    -0.15
+   ],
+   45
+  ],
+  "pond P2": [
+   [
+    0.1,
+    -0.8,
+    0.5
+   ],
+   [
+    -2.2,
+    0.8,
+    -0.15
+   ],
+   40
+  ],
+  "pond P3": [
+   [
+    -3.0,
+    -1.9,
+    0.9
+   ],
+   [
+    -3.2,
+    -0.3,
+    -0.12
+   ],
+   40
+  ],
+  "pond Q1": [
+   [
+    -4.6,
+    -1.4,
+    0.5
+   ],
+   [
+    -3.4,
+    -0.2,
+    -0.15
+   ],
+   40
+  ],
+  "pond Q2": [
+   [
+    -2.0,
+    -1.7,
+    0.35
+   ],
+   [
+    -3.8,
+    -0.1,
+    -0.15
+   ],
+   45
+  ],
+  "pond Q3": [
+   [
+    -1.4,
+    0.3,
+    0.45
+   ],
+   [
+    -3.6,
+    1.5,
+    -0.12
+   ],
+   50
+  ],
+  "capA": [
+   [
+    -0.8,
+    -0.6,
+    2.3
+   ],
+   [
+    0.95,
+    1.1,
+    1.7
+   ],
+   50
+  ],
+  "capB": [
+   [
+    2.5,
+    -0.2,
+    2.2
+   ],
+   [
+    0.95,
+    1.1,
+    1.7
+   ],
+   50
+  ],
+  "joint": [
+   [
+    -0.15,
+    0.2,
+    0.75
+   ],
+   [
+    0.95,
+    1.1,
+    0.35
+   ],
+   40
+  ]
+ },
+ "pictures": [
+  {
+   "name": "hero",
+   "camera": "photo",
+   "size": "1200x800",
+   "samples": 128,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "veranda",
+   "camera": "veranda",
+   "size": "1200x800",
+   "samples": 128,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "hero_roof",
+   "camera": "photo",
+   "size": "2400x1600",
+   "samples": 192,
+   "mode": "preview",
+   "quality": 88,
+   "border": [
+    0.12,
+    0.7,
+    0.72,
+    0.89
+   ]
+  },
+  {
+   "name": "hero_wall",
+   "camera": "photo",
+   "size": "2400x1600",
+   "samples": 192,
+   "mode": "preview",
+   "quality": 88,
+   "border": [
+    0.6,
+    0.42,
+    0.98,
+    0.7
+   ]
+  },
+  {
+   "name": "hero_rocks",
+   "camera": "photo",
+   "size": "2400x1600",
+   "samples": 192,
+   "mode": "preview",
+   "quality": 88,
+   "border": [
+    0.03,
+    0.28,
+    0.58,
+    0.47
+   ]
+  },
+  {
+   "name": "ver_lantern",
+   "camera": "veranda",
+   "size": "2400x1600",
+   "samples": 192,
+   "mode": "preview",
+   "quality": 88,
+   "border": [
+    0.12,
+    0.4,
+    0.4,
+    0.8
+   ]
+  },
+  {
+   "name": "rc2",
+   "camera": "G6 roof cam 2",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "rc3",
+   "camera": "G6 roof cam 3",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "rc4",
+   "camera": "G6 roof cam 4",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "rc5",
+   "camera": "G6 roof cam 5",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "eaveA",
+   "camera": "G6 final cam eave A",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "lanternB",
+   "camera": "G6 final cam lantern B",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "capA",
+   "camera": "G6 final cam capA",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "capB",
+   "camera": "G6 final cam capB",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  },
+  {
+   "name": "joint",
+   "camera": "G6 final cam joint",
+   "size": "960x640",
+   "samples": 96,
+   "mode": "preview",
+   "quality": 88
+  }
+ ]
+}

@@ -1,0 +1,370 @@
+00:00.464  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/garden_real_fixed.blend"
+=====MAT CT / Ceramic painterly surface users 2 nodes 29
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan grey_roof_tiles tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Math.006 [Math]
+  Math.007 [Math]
+  Math.008 [Math]
+  Vector Math.003 [VectorMath]
+  Map Range [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK wallgrowth.Colour'], Metallic<-['WK wallgrowth.Metallic'], Roughness<-['WK wallgrowth.Roughness'], Normal<-['WK wallgrowth.Normal'], Specular IOR Level<-['WK wallgrowth.Specular IOR Level'], Coat Weight<-['WK wallgrowth.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.5 dist=0.019999999552965164 Height<-['Group'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK soot [Group] GROUP=WK SOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK MASKS [Group] GROUP=WK MASKS CT / Ceramic painterly surface
+=====MAT CT / Ceramic ridge host-local surface users 1 nodes 29
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan grey_roof_tiles tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Math.006 [Math]
+  Math.007 [Math]
+  Math.008 [Math]
+  Vector Math.003 [VectorMath]
+  Map Range [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK wallgrowth.Colour'], Metallic<-['WK wallgrowth.Metallic'], Roughness<-['WK wallgrowth.Roughness'], Normal<-['WK wallgrowth.Normal'], Specular IOR Level<-['WK wallgrowth.Specular IOR Level'], Coat Weight<-['WK wallgrowth.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.5 dist=0.019999999552965164 Height<-['Group'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK soot [Group] GROUP=WK SOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK MASKS [Group] GROUP=WK MASKS CT / Ceramic ridge host-local surface
+=====MAT Plaster wall users 1 nodes 32
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan white_stucco tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Vector Math.003 [VectorMath]
+  Noise Texture [TexNoise]
+  Map Range [MapRange]
+  Vector Math.004 [VectorMath]
+  Map Range.001 [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK wallgrowth.Colour'], Metallic<-['WK wallgrowth.Metallic'], Roughness<-['WK wallgrowth.Roughness'], Normal<-['WK wallgrowth.Normal'], Specular IOR Level<-['WK wallgrowth.Specular IOR Level'], Coat Weight<-['WK wallgrowth.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.3499999940395355 dist=0.00800000037997961 Height<-['Group'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK soot [Group] GROUP=WK SOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK runoff [Group] GROUP=WK RUNOFF
+  WK foot [Group] GROUP=WK FOOT
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK wallcracks [Group] GROUP=WK WALL CRACKS
+  WK MASKS [Group] GROUP=WK MASKS Plaster wall
+=====MAT GARDEN wall.garden users 3 nodes 46
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan worn_plaster_wall tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Group.001 [Group] GROUP=GARDEN scan worn_cracked_plaster tri
+  Vector Math.003 [VectorMath]
+  Vector Math.004 [VectorMath]
+  Vector Math.005 [VectorMath]
+  Vector Math.006 [VectorMath]
+  Separate XYZ [SeparateXYZ]
+  Map Range [MapRange]
+  Math.006 [Math]
+  Vector Math.007 [VectorMath]
+  Noise Texture [TexNoise]
+  Map Range.001 [MapRange]
+  Math.007 [Math]
+  Mix [Mix]
+  Mix.001 [Mix]
+  Math.008 [Math]
+  Math.009 [Math]
+  Math.010 [Math]
+  Vector Math.008 [VectorMath]
+  Map Range.002 [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK wallgrowth.Colour'], Metallic<-['WK wallgrowth.Metallic'], Roughness<-['WK wallgrowth.Roughness'], Normal<-['WK wallgrowth.Normal'], Specular IOR Level<-['WK wallgrowth.Specular IOR Level'], Coat Weight<-['WK wallgrowth.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.5 dist=0.012000000104308128 Height<-['Mix.001'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK soot [Group] GROUP=WK SOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK runoff [Group] GROUP=WK RUNOFF
+  WK foot [Group] GROUP=WK FOOT
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK wallcracks [Group] GROUP=WK WALL CRACKS
+  WK MASKS [Group] GROUP=WK MASKS GARDEN wall.garden
+=====MAT Wall cap tile users 3 nodes 25
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan grey_roof_tiles tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Map Range [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK wallgrowth.Colour'], Metallic<-['WK wallgrowth.Metallic'], Roughness<-['WK wallgrowth.Roughness'], Normal<-['WK wallgrowth.Normal'], Specular IOR Level<-['WK wallgrowth.Specular IOR Level'], Coat Weight<-['WK wallgrowth.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.44999998807907104 dist=0.012000000104308128 Height<-['Group'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK soot [Group] GROUP=WK SOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK MASKS [Group] GROUP=WK MASKS Wall cap tile
+=====MAT CT / Stone painterly surface.025 users 2 nodes 52
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan rock_boulder_dry tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Group.001 [Group] GROUP=GARDEN scan lichen_rock tri
+  Vector Math.003 [VectorMath]
+  Vector Math.004 [VectorMath]
+  Vector Math.005 [VectorMath]
+  Vector Math.006 [VectorMath]
+  Vector Math.007 [VectorMath]
+  Vector Math.008 [VectorMath]
+  Noise Texture [TexNoise]
+  Map Range [MapRange]
+  Math.006 [Math]
+  Math.007 [Math]
+  Separate XYZ [SeparateXYZ]
+  Math.008 [Math]
+  Map Range.001 [MapRange]
+  Math.009 [Math]
+  Math.010 [Math]
+  Math.011 [Math]
+  Mix [Mix]
+  Math.012 [Math]
+  Mix.001 [Mix]
+  Math.013 [Math]
+  Math.014 [Math]
+  Math.015 [Math]
+  Vector Math.009 [VectorMath]
+  Map Range.002 [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK groundmoss.Colour'], Metallic<-['WK groundmoss.Metallic'], Roughness<-['WK groundmoss.Roughness'], Normal<-['WK groundmoss.Normal'], Specular IOR Level<-['WK groundmoss.Specular IOR Level'], Coat Weight<-['WK groundmoss.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.550000011920929 dist=0.019999999552965164 Height<-['Mix.001'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK foot [Group] GROUP=WK FOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK wallcracks [Group] GROUP=WK WALL CRACKS
+  WK dirt [Group] GROUP=WK GROUND DIRT [film,marks]
+  WK groundmoss [Group] GROUP=WK GROUND MOSS [algae,patch]
+  WK MASKS [Group] GROUP=WK MASKS CT / Stone painterly surface.025
+=====MAT GARDEN stone.lantern users 4 nodes 32
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan rock_08 tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Math.006 [Math]
+  Math.007 [Math]
+  Math.008 [Math]
+  Vector Math.003 [VectorMath]
+  Map Range [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK wallgrowth.Colour'], Metallic<-['WK wallgrowth.Metallic'], Roughness<-['WK wallgrowth.Roughness'], Normal<-['WK wallgrowth.Normal'], Specular IOR Level<-['WK wallgrowth.Specular IOR Level'], Coat Weight<-['WK wallgrowth.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.550000011920929 dist=0.019999999552965164 Height<-['Group'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK soot [Group] GROUP=WK SOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK runoff [Group] GROUP=WK RUNOFF
+  WK foot [Group] GROUP=WK FOOT
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK wallcracks [Group] GROUP=WK WALL CRACKS
+  WK MASKS [Group] GROUP=WK MASKS GARDEN stone.lantern
+=====MAT GARDEN stone.rock users 3 nodes 52
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan rock_boulder_dry tri
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Group.001 [Group] GROUP=GARDEN scan lichen_rock tri
+  Vector Math.003 [VectorMath]
+  Vector Math.004 [VectorMath]
+  Vector Math.005 [VectorMath]
+  Vector Math.006 [VectorMath]
+  Vector Math.007 [VectorMath]
+  Vector Math.008 [VectorMath]
+  Noise Texture [TexNoise]
+  Map Range [MapRange]
+  Math.006 [Math]
+  Math.007 [Math]
+  Separate XYZ [SeparateXYZ]
+  Math.008 [Math]
+  Map Range.001 [MapRange]
+  Math.009 [Math]
+  Math.010 [Math]
+  Math.011 [Math]
+  Mix [Mix]
+  Math.012 [Math]
+  Mix.001 [Mix]
+  Math.013 [Math]
+  Math.014 [Math]
+  Math.015 [Math]
+  Vector Math.009 [VectorMath]
+  Map Range.002 [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK groundmoss.Colour'], Metallic<-['WK groundmoss.Metallic'], Roughness<-['WK groundmoss.Roughness'], Normal<-['WK groundmoss.Normal'], Specular IOR Level<-['WK groundmoss.Specular IOR Level'], Coat Weight<-['WK groundmoss.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.550000011920929 dist=0.019999999552965164 Height<-['Mix.001'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK foot [Group] GROUP=WK FOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK wallcracks [Group] GROUP=WK WALL CRACKS
+  WK dirt [Group] GROUP=WK GROUND DIRT [film,marks]
+  WK groundmoss [Group] GROUP=WK GROUND MOSS [algae,patch]
+  WK MASKS [Group] GROUP=WK MASKS GARDEN stone.rock
+=====MAT CT / Timber painterly surface users 7 nodes 25
+  Geometry [NewGeometry]
+  Object Info [ObjectInfo]
+  Combine XYZ [CombineXYZ]
+  Math [Math]
+  Math.001 [Math]
+  Math.002 [Math]
+  Math.003 [Math]
+  Math.004 [Math]
+  Math.005 [Math]
+  Combine XYZ.001 [CombineXYZ]
+  Group [Group] GROUP=GARDEN scan old_wood_floor tri-x
+  Vector Math [VectorMath]
+  Vector Math.001 [VectorMath]
+  Vector Math.002 [VectorMath]
+  Map Range [MapRange]
+  Principled BSDF [BsdfPrincipled] Base Color<-['WK wallgrowth.Colour'], Metallic<-['WK wallgrowth.Metallic'], Roughness<-['WK wallgrowth.Roughness'], Normal<-['WK wallgrowth.Normal'], Specular IOR Level<-['WK wallgrowth.Specular IOR Level'], Coat Weight<-['WK wallgrowth.Coat Weight'] | base=(0.8, 0.8, 0.8, 1.0) rough=0.5 emis=(
+  Bump [Bump] strength=0.4000000059604645 dist=0.009999999776482582 Height<-['Group'] Normal<-[]
+  Material Output [OutputMaterial]
+  WK soot [Group] GROUP=WK SOOT
+  Value [Value]
+  Value.001 [Value]
+  Value.002 [Value]
+  WK SCALE [Group] GROUP=WK SCALE
+  WK wallgrowth [Group] GROUP=WK WALL GROWTH
+  WK MASKS [Group] GROUP=WK MASKS CT / Timber painterly surface
+PROTO
+(-0.155, -0.335, 0.105)
+(-0.102, -0.335, 0.14)
+(0.0, -0.335, 0.165)
+(0.102, -0.335, 0.14)
+(0.155, -0.335, 0.105)
+(-0.155, 0.335, -0.0)
+(-0.102, 0.335, 0.035)
+(0.0, 0.335, 0.06)
+(0.102, 0.335, 0.035)
+(0.155, 0.335, -0.0)
+(-0.155, -0.335, 0.05)
+(-0.102, -0.335, 0.085)
+(0.0, -0.335, 0.11)
+(0.102, -0.335, 0.085)
+(0.155, -0.335, 0.05)
+(-0.155, 0.335, -0.055)
+(-0.102, 0.335, -0.02)
+(0.0, 0.335, 0.005)
+(0.102, 0.335, -0.02)
+(0.155, 0.335, -0.055)
+[0, 1, 6, 5] 0 0.83
+[10, 15, 16, 11] 0 -0.83
+[1, 2, 7, 6] 0 0.96
+[11, 16, 17, 12] 0 -0.96
+[2, 3, 8, 7] 0 0.96
+[12, 17, 18, 13] 0 -0.96
+[3, 4, 9, 8] 0 0.83
+[13, 18, 19, 14] 0 -0.83
+[0, 5, 15, 10] 0 0.0
+[4, 14, 19, 9] 0 0.0
+[0, 10, 11, 12, 13, 14, 4, 3, 2, 1] 0 0.0
+[5, 6, 7, 8, 9, 19, 18, 17, 16, 15] 0 -0.0
+proto attrs ['.select_vert', 'position', '.corner_vert', '.corner_edge', '.select_poly', 'sharp_face', '.edge_verts', '.select_edge', 'CT_rest']
+proto rot <Euler (x=0.0000, y=0.0000, z=0.0000), order='XYZ'> <Vector (1.0000, 1.0000, 1.0000)> None
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

@@ -1,0 +1,330 @@
+scene Scene engine CYCLES res 2400 1600 unit METRIC 1.0
+camera photo
+COLL Scene Collection 2
+  COLL Ground and water 7
+  COLL Hall and walls 16
+    COLL Astra / Planked run 2
+    COLL Astra / Planked run.001 2
+    COLL Astra / Planked run.002 2
+  COLL Stones and bridge 46
+    COLL Astra / Planked run.003 2
+    COLL Astra / Planked run.004 2
+    COLL Astra / Planked run.005 2
+    COLL Astra / Planked run.006 2
+    COLL Astra / Planked run.007 2
+  COLL Plants 18
+  COLL Lights 7
+  COLL Astra / Courtyard 4
+  COLL G4 light 5
+  COLL G1 shapes 11
+  COLL G2 life 25
+    COLL Life / moss sources 6
+    COLL Life / tuft sources 4
+    COLL Life / pebble sources 6
+  COLL G5 fix 1
+N objects 180
+OBJ Astra / Courtyard controls x1 EMPTY verts(first) 0 loc (0.0, 0.0, 0.0) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['astra_runtime_owner', 'astra_kind', 'astra_source', 'astra_spec']
+OBJ Astra / Courtyard receiving ground x1 MESH verts(first) 7565 loc (0.0, 0.0, 0.0) dim (22.0, 21.0, 1.53) vis True mods [] mats ['Moss and earth'] props ['astra_runtime_owner', 'astra_role', 'garden_owner', 'garden_role']
+OBJ Astra / moss grouped bodies x1 MESH verts(first) 24351 loc (0.0, 0.0, 0.0) dim (12.16, 12.78, 1.05) vis True mods [] mats ['Astra / moss tone 0', 'Astra / moss tone 1', 'Astra / moss tone 2', 'Astra / moss tone 3'] props ['astra_runtime_owner', 'astra_role', 'wk_frame_id', 'wk_seed']
+OBJ Astra / pebbles grouped bodies x1 MESH verts(first) 5654 loc (0.0, 0.0, 0.0) dim (7.37, 5.71, 0.5) vis True mods [] mats ['Astra / pebbles tone 0', 'Astra / pebbles tone 1', 'Astra / pebbles tone 2', 'Astra / pebbles tone 3'] props ['astra_runtime_owner', 'astra_role', 'garden_owner', 'garden_role']
+OBJ Astra / Planked run controls x8 EMPTY verts(first) 0 loc (-3.43, 5.5, 0.56) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['astra_runtime_owner', 'astra_kind', 'astra_active', 'astra_spec']
+OBJ Astra / varied planks x8 MESH verts(first) 224 loc (0.0, 0.0, 0.0) dim (3.63, 1.8, 0.09) vis True mods ['BEVEL:Small bounded plank edge'] mats ['Astra / planks tone 0', 'Astra / planks tone 0.001', 'Astra / planks tone 0.002', 'Astra / planks tone 0.003', 'Astra / planks tone 0.004', 'Astra / planks tone 0.005'] props ['astra_runtime_owner', 'astra_role', 'garden_owner', 'garden_role']
+OBJ Back wall, left x1 MESH verts(first) 8 loc (0.0, 0.0, 0.0) dim (5.2, 0.58, 2.25) vis True mods [] mats ['GARDEN wall.garden'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Back wall, left cap x1 MESH verts(first) 446 loc (0.0, 0.0, 0.0) dim (5.3, 0.5, 0.19) vis True mods [] mats ['Wall cap tile'] props ['garden_owner', 'garden_role', 'garden_shape_baked', 'wk_frame_id']
+OBJ Back wall, right x1 MESH verts(first) 8 loc (0.0, 0.0, 0.0) dim (4.8, 0.58, 2.25) vis True mods [] mats ['GARDEN wall.garden'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Back wall, right cap x1 MESH verts(first) 418 loc (0.0, 0.0, 0.0) dim (4.9, 0.5, 0.19) vis True mods [] mats ['Wall cap tile'] props ['garden_owner', 'garden_role', 'garden_shape_baked', 'wk_frame_id']
+OBJ Bamboo fence x1 MESH verts(first) 1180 loc (0.0, 0.0, 0.0) dim (0.1, 7.8, 1.77) vis True mods [] mats ['Bamboo stalk'] props ['garden_owner', 'garden_role', 'garden_look', 'garden_keep_materials']
+OBJ Bamboo leaves x1 MESH verts(first) 2380 loc (0.0, 0.0, 0.0) dim (4.2, 6.27, 5.04) vis True mods [] mats ['Bamboo leaf colour'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Bamboo stalks x1 MESH verts(first) 8448 loc (0.0, 0.0, 0.0) dim (3.52, 5.6, 7.76) vis True mods [] mats ['Bamboo stalk'] props ['garden_owner', 'garden_role', 'garden_look', 'garden_keep_materials']
+OBJ Basin bamboo spout x1 MESH verts(first) 32 loc (0.0, 0.0, 0.0) dim (0.06, 0.52, 0.83) vis True mods [] mats ['Bamboo stalk'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Basin bucket stone x1 MESH verts(first) 494 loc (3.78, 4.0, -0.11) dim (0.26, 0.21, 0.26) vis True mods [] mats ['GARDEN stone.lantern'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Basin candle stone x1 MESH verts(first) 462 loc (5.02, 3.98, -0.1) dim (0.21, 0.21, 0.34) vis True mods [] mats ['GARDEN stone.lantern'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Basin drain pebbles x1 MESH verts(first) 42614 loc (0.0, 0.0, 0.0) dim (1.55, 1.11, 0.07) vis True mods [] mats ['GARDEN stone.rock'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Basin front stone x1 MESH verts(first) 618 loc (4.38, 3.42, -0.14) dim (0.4, 0.28, 0.22) vis True mods [] mats ['GARDEN stone.lantern'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Basin ladle x1 MESH verts(first) 28 loc (0.0, 0.0, 0.0) dim (0.5, 0.18, 0.08) vis True mods [] mats ['Bamboo stalk'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Basin water x1 MESH verts(first) 24 loc (0.0, 0.0, 0.0) dim (0.41, 0.41, 0.1) vis True mods [] mats ['Pond water'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Bridge pier x4 MESH verts(first) 54 loc (-0.55, -0.6, -0.12) dim (0.59, 0.57, 0.15) vis True mods [] mats ['CT / Stone painterly surface.039', 'CT / Stone painterly surface.040', 'CT / Stone painterly surface.041', 'CT / Stone painterly surface.042'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Bridge stringers x1 MESH verts(first) 48 loc (0.0, 0.0, 0.0) dim (6.04, 2.79, 0.11) vis True mods [] mats ['GARDEN timber.post'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Cool sky fill x1 LIGHT verts(first) 0 loc (-13.0, -11.0, 9.0) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['wk_frame_id']
+OBJ Courtyard ground source x1 MESH verts(first) 7565 loc (0.0, 0.0, 0.0) dim (22.0, 21.0, 1.53) vis False mods [] mats ['Moss and earth'] props ['astra_landscape_active', 'wk_frame_id', 'wk_seed', 'wk_role_id']
+OBJ CT / Ceramic pan prototype x1 MESH verts(first) 20 loc (0.0, 0.0, 0.0) dim (0.31, 0.67, 0.22) vis False mods [] mats ['CT / Ceramic painterly surface'] props ['ct_prototype', 'ct_source_mesh_sha256']
+OBJ Dark plain x1 MESH verts(first) 2016 loc (0.0, 0.0, 0.0) dim (1800.0, 1800.0, 0.0) vis True mods [] mats ['Dark plain ground'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Eave soffit x1 MESH verts(first) 8 loc (0.0, 0.0, 0.0) dim (11.6, 1.1, 0.06) vis True mods [] mats ['Beam timber'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Fallen leaves x1 MESH verts(first) 3948 loc (0.0, 0.0, 0.0) dim (11.32, 6.56, 0.42) vis True mods [] mats ['Fallen leaves'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Fix / far hedge x1 MESH verts(first) 1911 loc (0.0, 0.0, 0.0) dim (15.63, 17.51, 1.71) vis True mods [] mats ['Life / shrub'] props ['garden_owner', 'garden_role', 'garden_keep_materials', 'fix_created']
+OBJ Focus x1 EMPTY verts(first) 0 loc (-2.5, 0.6, 0.4) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Golden hour sun x1 LIGHT verts(first) 0 loc (0.0, 0.0, 0.0) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['wk_frame_id']
+OBJ Gravel kerb x1 MESH verts(first) 2912 loc (0.0, 0.0, 0.0) dim (8.36, 8.1, 0.11) vis True mods [] mats ['GARDEN stone.rock'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Gravel rock x3 MESH verts(first) 4458 loc (5.5, -1.9, -0.33) dim (1.16, 0.77, 0.97) vis True mods [] mats ['CT / Stone painterly surface.030', 'CT / Stone painterly surface.031', 'CT / Stone painterly surface.032'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Gravel timber edge x1 MESH verts(first) 48 loc (0.0, 0.0, 0.0) dim (0.08, 7.79, 0.1) vis True mods [] mats ['GARDEN timber.post'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Hall beams x1 MESH verts(first) 56 loc (0.0, 0.0, 0.0) dim (10.7, 0.85, 2.69) vis True mods [] mats ['Beam timber'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Hall glow x4 LIGHT verts(first) 0 loc (-3.4, 5.7, 1.55) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['wk_frame_id']
+OBJ Hall plaster x1 MESH verts(first) 32 loc (0.0, 0.0, 0.0) dim (10.4, 3.76, 2.45) vis True mods [] mats ['Plaster wall'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Hall posts x1 MESH verts(first) 56 loc (0.0, 0.0, 0.0) dim (10.27, 3.67, 2.45) vis True mods [] mats ['Dark timber'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Hall roof x1 MESH verts(first) 0 loc (0.2, 7.2, 3.2) dim (11.9, 5.78, 1.46) vis True mods ['NODES:CT / Shared roof controls'] mats [] props ['procedural_role', 'ct_component', 'ct_version', 'ct_spec']
+OBJ Hills, far x1 MESH verts(first) 1505 loc (0.0, 0.0, 0.0) dim (240.0, 240.0, 36.03) vis True mods [] mats ['Hills, far haze'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Hills, farthest x1 MESH verts(first) 1505 loc (0.0, 0.0, 0.0) dim (380.0, 380.0, 39.89) vis True mods [] mats ['Hills, farthest haze'] props ['garden_owner', 'garden_role', 'garden_keep_materials']
+OBJ Hills, foot x1 MESH verts(first) 1505 loc (0.0, 0.0, 0.0) dim (72.0, 72.0, 9.99) vis True mods [] mats ['Hills, foot haze'] props ['garden_owner', 'garden_role', 'garden_keep_materials']
+OBJ Hills, middle x1 MESH verts(first) 1505 loc (0.0, 0.0, 0.0) dim (160.0, 160.0, 28.08) vis True mods [] mats ['Hills, middle haze'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Hills, near x1 MESH verts(first) 1505 loc (0.0, 0.0, 0.0) dim (112.0, 112.0, 16.91) vis True mods [] mats ['Hills, near haze'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Lantern base x1 MESH verts(first) 24 loc (0.95, 1.1, -0.05) dim (0.79, 0.81, 0.22) vis True mods [] mats ['CT / Stone painterly surface.033'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Lantern cap x1 MESH verts(first) 84 loc (0.95, 1.1, 1.56) dim (1.18, 1.21, 0.28) vis True mods [] mats ['CT / Stone painterly surface.037'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Lantern finial x1 MESH verts(first) 100 loc (0.95, 1.1, 1.82) dim (0.19, 0.19, 0.22) vis True mods [] mats ['GARDEN stone.lantern'] props ['garden_owner', 'garden_role', 'garden_shape_baked', 'wk_frame_id']
+OBJ Lantern firebox x1 MESH verts(first) 40 loc (0.95, 1.1, 1.18) dim (0.47, 0.48, 0.38) vis True mods [] mats ['CT / Stone painterly surface.036'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Lantern gallery x1 MESH verts(first) 48 loc (0.95, 1.1, 0.95) dim (0.75, 0.77, 0.23) vis True mods [] mats ['CT / Stone painterly surface.035'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Lantern light x1 LIGHT verts(first) 0 loc (0.95, 1.1, 1.39) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['wk_frame_id']
+OBJ Lantern post x1 MESH verts(first) 36 loc (0.95, 1.1, 0.17) dim (0.33, 0.34, 0.79) vis True mods [] mats ['CT / Stone painterly surface.034'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Lantern window glow x1 MESH verts(first) 8 loc (0.95, 1.1, 1.23) dim (0.44, 0.46, 0.19) vis True mods [] mats ['Lantern flame'] props ['garden_owner', 'garden_role', 'garden_shape_baked', 'wk_frame_id']
+OBJ Life / iris clumps x1 MESH verts(first) 665 loc (0.0, 0.0, 0.0) dim (5.79, 3.71, 0.63) vis True mods [] mats ['Life / iris blade'] props ['garden_owner', 'garden_role', 'garden_look', 'garden_keep_materials']
+OBJ Life / lily stems x1 MESH verts(first) 340 loc (0.0, 0.0, 0.0) dim (4.73, 3.74, 0.33) vis True mods [] mats ['Life / lily stem'] props ['garden_owner', 'garden_role', 'garden_look', 'garden_keep_materials']
+OBJ Life / moss at feet and damp edges x1 MESH verts(first) 2348 loc (0.0, 0.0, 0.0) dim (15.75, 7.47, 0.0) vis True mods ['NODES:Astra / Live grounded semantic scatter'] mats [] props ['astra_runtime_owner', 'astra_kind', 'astra_receiver', 'astra_bank']
+OBJ Life / moss sources x6 MESH verts(first) 104 loc (0.0, 0.0, 0.0) dim (2.14, 2.01, 0.82) vis False mods [] mats ['Astra / moss tone 0', 'Astra / moss tone 1', 'Astra / moss tone 2', 'Astra / moss tone 3'] props ['garden_owner', 'garden_role', 'life_created', 'garden_keep_materials']
+OBJ Life / pebble fringe x1 MESH verts(first) 495 loc (0.0, 0.0, 0.0) dim (14.56, 9.37, 0.0) vis True mods ['NODES:Astra / Live grounded semantic scatter'] mats [] props ['astra_runtime_owner', 'astra_kind', 'astra_receiver', 'astra_bank']
+OBJ Life / pebble sources x6 MESH verts(first) 6 loc (0.0, 0.0, 0.0) dim (1.76, 1.15, 0.4) vis False mods [] mats ['Astra / pebbles tone 0', 'Astra / pebbles tone 1', 'Astra / pebbles tone 2', 'Astra / pebbles tone 3'] props ['garden_owner', 'garden_role', 'life_created', 'garden_keep_materials']
+OBJ Life / pond bed x1 MESH verts(first) 1117 loc (0.0, 0.0, 0.0) dim (4.3, 3.3, 0.1) vis True mods [] mats ['Life / pond bed'] props ['garden_owner', 'garden_role', 'garden_look', 'garden_keep_materials']
+OBJ Life / pond pebbles x1 MESH verts(first) 3900 loc (0.0, 0.0, 0.0) dim (5.56, 4.19, 0.33) vis True mods [] mats ['GARDEN ground.earth'] props ['garden_owner', 'garden_role', 'garden_look', 'garden_keep_materials']
+OBJ Life / shrubs x1 MESH verts(first) 910 loc (0.0, 0.0, 0.0) dim (15.23, 3.42, 0.5) vis True mods [] mats ['Life / shrub'] props ['garden_owner', 'garden_role', 'garden_look', 'garden_keep_materials']
+OBJ Life / tuft sources x4 MESH verts(first) 56 loc (0.0, 0.0, 0.0) dim (0.3, 0.31, 0.75) vis False mods [] mats ['Life / tuft'] props ['garden_owner', 'garden_role', 'life_created', 'garden_keep_materials']
+OBJ Life / tufts x1 MESH verts(first) 960 loc (0.0, 0.0, 0.0) dim (12.7, 6.68, 0.0) vis True mods ['NODES:Astra / Live grounded semantic scatter'] mats [] props ['astra_runtime_owner', 'astra_kind', 'astra_receiver', 'astra_bank']
+OBJ Lily pads x1 MESH verts(first) 697 loc (0.0, 0.0, 0.0) dim (5.01, 4.07, 0.01) vis True mods [] mats ['Lily pad'] props ['life_pad_centres', 'garden_owner', 'garden_role', 'garden_look']
+OBJ Lotus blossoms x1 MESH verts(first) 36 loc (0.0, 0.0, 0.0) dim (0.78, 1.27, 0.09) vis True mods [] mats ['Lotus blossom'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Maple branch x17 CURVE verts(first) 0 loc (0.0, 0.0, 0.0) dim (2.94, 0.7, 0.84) vis True mods [] mats ['Bark'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Maple inner mass x1 MESH verts(first) 220 loc (0.0, 0.0, 0.0) dim (4.06, 2.98, 1.76) vis True mods [] mats ['Maple inner mass'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Maple leaf source x5 MESH verts(first) 47 loc (0.0, 0.0, 0.0) dim (1.55, 1.37, 0.12) vis True mods [] mats ['Maple leaves'] props ['garden_owner', 'garden_role', 'life_created']
+OBJ Maple leaves x1 MESH verts(first) 55991 loc (0.0, 0.0, 0.0) dim (5.61, 3.95, 2.42) vis True mods ['NODES:Life / maple leaves'] mats ['Maple leaves'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Maple trunk x1 CURVE verts(first) 0 loc (0.0, 0.0, 0.0) dim (1.94, 0.58, 3.36) vis True mods [] mats ['Bark'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Open room back x1 MESH verts(first) 8 loc (0.0, 0.0, 0.0) dim (1.18, 0.05, 1.53) vis True mods [] mats ['Open room, dim'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ photo x1 CAMERA verts(first) 0 loc (-5.2, -5.6, 3.0) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['wk_frame_id']
+OBJ Pine limb x8 CURVE verts(first) 0 loc (0.0, 0.0, 0.0) dim (0.93, 0.34, 0.42) vis True mods [] mats ['GARDEN bark.pine'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Pine pads x1 MESH verts(first) 193747 loc (0.0, 0.0, 0.0) dim (4.23, 2.69, 3.57) vis True mods [] mats ['Pine needles'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Pine trunk x1 CURVE verts(first) 0 loc (0.0, 0.0, 0.0) dim (0.85, 0.47, 4.05) vis True mods [] mats ['GARDEN bark.pine'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Pond edge stone x15 MESH verts(first) 4130 loc (0.27, 1.47, -0.38) dim (0.66, 0.83, 0.63) vis True mods [] mats ['CT / Stone painterly surface.010', 'CT / Stone painterly surface.011', 'CT / Stone painterly surface.012', 'CT / Stone painterly surface.013', 'CT / Stone painterly surface.014', 'CT / Stone painterly surface.015'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Pond water x1 MESH verts(first) 911 loc (0.0, 0.0, 0.0) dim (5.85, 4.35, 0.0) vis True mods [] mats ['Pond water'] props ['garden_owner', 'garden_role', 'garden_look', 'wk_frame_id']
+OBJ Raked gravel court x1 MESH verts(first) 111818 loc (0.0, 0.0, 0.0) dim (8.2, 7.8, 0.02) vis True mods [] mats ['Raked gravel'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Right wall behind hall x1 MESH verts(first) 8 loc (0.0, 0.0, 0.0) dim (0.59, 9.1, 2.35) vis True mods [] mats ['GARDEN wall.garden'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Right wall behind hall cap x1 MESH verts(first) 754 loc (0.0, 0.0, 0.0) dim (0.5, 9.2, 0.19) vis True mods [] mats ['Wall cap tile'] props ['garden_owner', 'garden_role', 'garden_shape_baked', 'wk_frame_id']
+OBJ Rim light (maple, hall edge) x1 LIGHT verts(first) 0 loc (0.0, 0.0, 0.0) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['garden_owner', 'garden_role', 'garden_keep_materials']
+OBJ Rock x5 MESH verts(first) 6090 loc (-4.3, 3.75, -0.47) dim (1.25, 0.88, 1.83) vis True mods [] mats ['CT / Stone painterly surface.025', 'CT / Stone painterly surface.026', 'CT / Stone painterly surface.027', 'CT / Stone painterly surface.028', 'CT / Stone painterly surface.029'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Roof carrying frame x1 MESH verts(first) 1364 loc (0.0, 0.0, 0.0) dim (11.4, 5.72, 1.28) vis True mods [] mats ['GARDEN timber.post'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Roof lift (hall roof only) x1 LIGHT verts(first) 0 loc (-6.0, -9.0, 9.0) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['garden_owner', 'garden_role', 'garden_keep_materials']
+OBJ Shoji bars x1 MESH verts(first) 784 loc (0.0, 0.0, 0.0) dim (9.93, 0.07, 1.53) vis True mods [] mats ['Dark timber'] props ['garden_shoji_fixed', 'wk_frame_id', 'wk_seed', 'wk_role_id']
+OBJ Shoji paper x1 MESH verts(first) 56 loc (0.0, 0.0, 0.0) dim (9.91, 0.06, 1.51) vis True mods [] mats ['Shoji paper glow'] props ['wk_frame_id', 'wk_seed', 'wk_role_id', 'wk_zmin']
+OBJ Shore stones x1 MESH verts(first) 9134 loc (0.0, 0.0, 0.0) dim (4.64, 4.19, 0.4) vis True mods [] mats ['GARDEN stone.rock'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ Stepping stone x8 MESH verts(first) 3714 loc (3.99, -5.19, -0.12) dim (0.65, 0.55, 0.16) vis True mods [] mats ['CT / Stone painterly surface', 'CT / Stone painterly surface.001', 'CT / Stone painterly surface.002', 'CT / Stone painterly surface.003', 'CT / Stone painterly surface.004', 'CT / Stone painterly surface.005'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Stone plinth x1 MESH verts(first) 8 loc (0.0, 0.0, 0.0) dim (10.92, 5.6, 0.59) vis True mods [] mats ['Plinth stone'] props ['garden_owner', 'garden_role', 'wk_frame_id', 'wk_seed']
+OBJ veranda x1 CAMERA verts(first) 0 loc (3.6, 5.3, 1.55) dim (0.0, 0.0, 0.0) vis True mods [] mats [] props ['garden_owner', 'garden_role']
+OBJ Veranda step x1 MESH verts(first) 54 loc (2.2, 4.41, -0.04) dim (1.78, 0.61, 0.4) vis True mods [] mats ['CT / Stone painterly surface.008'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Veranda step, lower x1 MESH verts(first) 52 loc (2.2, 3.89, -0.04) dim (1.83, 0.53, 0.21) vis True mods [] mats ['CT / Stone painterly surface.009'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+OBJ Water basin x1 MESH verts(first) 110 loc (4.4, 4.0, -0.2) dim (0.6, 0.58, 0.5) vis True mods [] mats ['CT / Stone painterly surface.038'] props ['ct_component', 'ct_version', 'ct_source_mesh_sha256', 'ct_normalized_mesh_sha256']
+MATERIALS 147
+MAT Astra / moss tone 0 users 2 {'TexCoord': 1, 'TexNoise': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'TexVoronoi': 1, 'Bump': 1} imgs []
+MAT Astra / moss tone 1 users 3 {'TexCoord': 1, 'TexNoise': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'TexVoronoi': 1, 'Bump': 1} imgs []
+MAT Astra / moss tone 2 users 3 {'TexCoord': 1, 'TexNoise': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'TexVoronoi': 1, 'Bump': 1} imgs []
+MAT Astra / moss tone 3 users 2 {'TexCoord': 1, 'TexNoise': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'TexVoronoi': 1, 'Bump': 1} imgs []
+MAT Astra / pebbles tone 0 users 3 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 5, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / pebbles tone 1 users 3 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 5, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / pebbles tone 2 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 5, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / pebbles tone 3 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 5, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0.001 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0.002 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0.003 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0.004 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0.005 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0.006 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 0.007 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1.001 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1.002 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1.003 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1.004 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1.005 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1.006 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 1.007 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2.001 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2.002 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2.003 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2.004 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2.005 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2.006 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 2.007 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3.001 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3.002 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3.003 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3.004 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3.005 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3.006 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 3.007 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4.001 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4.002 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4.003 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4.004 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4.005 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4.006 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 4.007 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5.001 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5.002 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5.003 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5.004 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5.005 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5.006 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 5.007 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6.001 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6.002 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6.003 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6.004 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6.005 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6.006 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Astra / planks tone 6.007 users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Bamboo leaf colour users 1 {'BsdfPrincipled': 1, 'OutputMaterial': 1, 'VertexColor': 1, 'BsdfTranslucent': 1, 'MixShader': 1} imgs []
+MAT Bamboo stalk users 4 {'VertexColor': 1, 'TexCoord': 1, 'Mapping': 1, 'TexNoise': 2, 'MapRange': 1, 'Mix': 1, 'CombineColor': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'Bump': 1} imgs []
+MAT Bark users 18 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 6, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Beam timber users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 6, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Ceramic painterly surface users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 5, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Ceramic ridge host-local surface users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 5, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.001 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.002 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.003 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.004 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.005 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.006 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.007 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.008 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.009 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.010 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.011 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.012 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.013 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.014 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.015 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.016 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.017 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.018 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.019 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.020 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.021 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.022 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.023 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.024 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.025 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.026 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.027 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.028 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.029 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.030 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.031 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.032 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.033 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.034 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.035 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.036 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.037 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.038 users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT CT / Stone painterly surface.039 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.040 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.041 users 2 nodes=52 imgs []
+MAT CT / Stone painterly surface.042 users 2 nodes=52 imgs []
+MAT CT / Timber painterly surface users 7 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Dark plain ground users 1 {'Attribute': 1, 'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Dark timber users 2 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 6, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Fallen leaves users 1 {'BsdfPrincipled': 1, 'OutputMaterial': 1, 'VertexColor': 1} imgs []
+MAT GARDEN bark.pine users 9 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 6, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT GARDEN ground.earth users 4 nodes=37 imgs []
+MAT GARDEN stone.lantern users 4 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 9, 'Group': 8, 'VectorMath': 4, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT GARDEN stone.rock users 3 nodes=52 imgs []
+MAT GARDEN timber.post users 3 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 6, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT GARDEN wall.garden users 3 nodes=46 imgs []
+MAT Hills, far haze users 1 {'Attribute': 1, 'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Hills, farthest haze users 1 {'Attribute': 1, 'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Hills, foot haze users 1 {'Attribute': 1, 'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Hills, middle haze users 1 {'Attribute': 1, 'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Hills, near haze users 1 {'Attribute': 1, 'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Lantern flame users 1 {'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Life / iris blade users 1 {'TexCoord': 1, 'SeparateXYZ': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'BsdfTranslucent': 1, 'MixShader': 1} imgs []
+MAT Life / lily stem users 1 {'BsdfPrincipled': 1, 'OutputMaterial': 1} imgs []
+MAT Life / pond bed users 1 {'TexCoord': 1, 'TexNoise': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1} imgs []
+MAT Life / shrub users 2 {'TexCoord': 1, 'TexVoronoi': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'Bump': 1} imgs []
+MAT Life / tuft users 4 {'TexCoord': 1, 'SeparateXYZ': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'BsdfTranslucent': 1, 'MixShader': 1} imgs []
+MAT Lily pad users 1 {'BsdfPrincipled': 1, 'OutputMaterial': 1} imgs []
+MAT Lotus blossom users 1 {'BsdfPrincipled': 1, 'OutputMaterial': 1} imgs []
+MAT Maple inner mass users 1 {'BsdfPrincipled': 1, 'OutputMaterial': 1, 'VertexColor': 1} imgs []
+MAT Maple leaves users 6 {'Attribute': 2, 'ValToRGB': 1, 'Mix': 1, 'CombineColor': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'BsdfTranslucent': 1, 'MixShader': 1} imgs []
+MAT Moss and earth users 2 nodes=37 imgs []
+MAT Open room, dim users 1 {'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Pine needles users 1 {'VertexColor': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'BsdfTranslucent': 1, 'MixShader': 1} imgs []
+MAT Plaster wall users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 8, 'VectorMath': 5, 'TexNoise': 1, 'MapRange': 2, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Plinth stone users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 8, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Pond water users 2 {'Attribute': 1, 'MapRange': 1, 'ValToRGB': 1, 'BsdfPrincipled': 1, 'OutputMaterial': 1, 'TexCoord': 1, 'TexNoise': 1, 'Bump': 1, 'LightPath': 1, 'BsdfTransparent': 1, 'MixShader': 1} imgs []
+MAT Raked gravel users 1 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 5, 'TexNoise': 1, 'MapRange': 2, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+MAT Shoji paper glow users 1 {'Emission': 1, 'OutputMaterial': 1} imgs []
+MAT Wall cap tile users 3 {'NewGeometry': 1, 'ObjectInfo': 1, 'CombineXYZ': 2, 'Math': 6, 'Group': 5, 'VectorMath': 3, 'MapRange': 1, 'BsdfPrincipled': 1, 'Bump': 1, 'OutputMaterial': 1, 'Value': 3} imgs []
+IMAGES 62
+IMG clean_pebbles_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG clean_pebbles_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG clean_pebbles_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG forest_leaves_02_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG forest_leaves_02_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG forest_leaves_02_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG gp_a.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_b.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_c.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_d.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_e.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_f.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_fine.png (1100, 1050) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_g.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gp_height.png (550, 525) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG gravel_floor_02_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG gravel_floor_02_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG gravel_floor_02_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG grey_roof_tiles_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG grey_roof_tiles_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG grey_roof_tiles_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG japanese_stone_wall_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG japanese_stone_wall_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG japanese_stone_wall_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG lichen_rock_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG lichen_rock_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG lichen_rock_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG old_wood_floor_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG old_wood_floor_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG old_wood_floor_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG pine_bark_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG pine_bark_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG pine_bark_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG rock_08_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG rock_08_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG rock_08_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG rock_boulder_dry_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG rock_boulder_dry_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG rock_boulder_dry_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG trident_maple_bark_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG trident_maple_bark_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG trident_maple_bark_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG weathered_planks_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG weathered_planks_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG weathered_planks_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG wf_a.png (525, 410) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG wf_b.png (525, 410) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG wf_c.png (132, 116) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG wf_d.png (132, 116) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG wf_height.png (525, 410) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g packed
+IMG white_stucco_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG white_stucco_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG white_stucco_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG wood_planks_grey_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG wood_planks_grey_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG wood_planks_grey_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG worn_cracked_plaster_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG worn_cracked_plaster_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG worn_cracked_plaster_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG worn_plaster_wall_diff_1k.jpg (1024, 1024) sRGB /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG worn_plaster_wall_disp_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+IMG worn_plaster_wall_rough_1k.jpg (1024, 1024) Non-Color /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/g 
+NODEGROUPS ['Astra / Life / moss at feet and damp edges semantic scatter', 'Astra / Life / pebble fringe semantic scatter', 'Astra / Life / tufts semantic scatter', 'CT / Anchored chiseled variation', 'CT / Anchored chiseled variation.001', 'CT / Anchored chiseled variation.002', 'CT / Anchored chiseled variation.003', 'CT / Anchored chiseled variation.004', 'CT / Anchored chiseled variation.005', 'CT / Anchored chiseled variation.006', 'CT / Anchored chiseled variation.007', 'CT / Anchored chiseled variation.008', 'CT / Anchored chiseled variation.009', 'CT / Anchored chiseled variation.010', 'CT / Anchored chiseled variation.011', 'CT / Anchored chiseled variation.012', 'CT / Anchored chiseled variation.013', 'CT / Anchored chiseled variation.014', 'CT / Anchored chiseled variation.015', 'CT / Anchored chiseled variation.016', 'CT / Anchored chiseled variation.017', 'CT / Anchored chiseled variation.018', 'CT / Anchored chiseled variation.019', 'CT / Anchored chiseled variation.020', 'CT / Anchored chiseled variation.021', 'CT / Anchored chiseled variation.022', 'CT / Anchored chiseled variation.023', 'CT / Anchored chiseled variation.024', 'CT / Anchored chiseled variation.025', 'CT / Anchored chiseled variation.026', 'CT / Anchored chiseled variation.027', 'CT / Anchored chiseled variation.028', 'CT / Anchored chiseled variation.029', 'CT / Anchored chiseled variation.030', 'CT / Anchored chiseled variation.031', 'CT / Anchored chiseled variation.032', 'CT / Anchored chiseled variation.033', 'CT / Anchored chiseled variation.034', 'CT / Anchored chiseled variation.035', 'CT / Anchored chiseled variation.036', 'CT / Anchored chiseled variation.037', 'CT / Anchored chiseled variation.038', 'CT / Anchored chiseled variation.039', 'CT / Anchored chiseled variation.040', 'CT / Anchored chiseled variation.041', 'CT / Anchored chiseled variation.042', 'CT / Complete two-bank ceramic roof', 'CT / Roof bank 1 local mechanism', 'CT / Roof bank 2 local mechanism', 'FOUNDRY / Wet Stone', 'FOUNDRY / Wet Stone.001', 'FOUNDRY / Wet Stone.002', 'FOUNDRY / Wet Stone.003', 'FOUNDRY / Wet Stone.004', 'FOUNDRY / Wet Stone.005', 'FOUNDRY / Wet Stone.006', 'FOUNDRY / Wet Stone.007', 'FOUNDRY / Wet Stone.008', 'FOUNDRY / Wet Stone.009', 'FOUNDRY / Wet Stone.010', 'FOUNDRY / Wet Stone.011', 'FOUNDRY / Wet Stone.012', 'FOUNDRY / Wet Stone.013', 'FOUNDRY / Wet Stone.014', 'FOUNDRY / Wet Stone.015', 'FOUNDRY / Wet Stone.016', 'FOUNDRY / Wet Stone.017', 'FOUNDRY / Wet Stone.018', 'FOUNDRY / Wet Stone.019', 'FOUNDRY / Wet Stone.020', 'FOUNDRY / Wet Stone.021', 'FOUNDRY / Wet Stone.022', 'FOUNDRY / Wet Stone.023', 'FOUNDRY / Wet Stone.024', 'FOUNDRY / Wet Stone.025', 'FOUNDRY / Wet Stone.026', 'FOUNDRY / Wet Stone.027', 'FOUNDRY / Wet Stone.028', 'FOUNDRY / Wet Stone.029', 'FOUNDRY / Wet Stone.030', 'FOUNDRY / Wet Stone.031', 'FOUNDRY / Wet Stone.032', 'FOUNDRY / Wet Stone.033', 'FOUNDRY / Wet Stone.034', 'FOUNDRY / Wet Stone.035', 'FOUNDRY / Wet Stone.036', 'FOUNDRY / Wet Stone.037', 'FOUNDRY / Wet Stone.038', 'FOUNDRY / Wet Stone.039', 'FOUNDRY / Wet Stone.040', 'FOUNDRY / Wet Stone.041', 'FOUNDRY / Wet Stone.042', 'FOUNDRY / Wet Stone.043', 'FOUNDRY / Wood', 'GARDEN finish', 'GARDEN scan clean_pebbles tri', 'GARDEN scan forest_leaves_02 planar+AT', 'GARDEN scan gravel_floor_02 planar+AT', 'GARDEN scan grey_roof_tiles tri', 'GARDEN scan japanese_stone_wall tri', 'GARDEN scan lichen_rock tri', 'GARDEN scan old_wood_floor tri-x', 'GARDEN scan old_wood_floor tri-z', 'GARDEN scan pine_bark tri', 'GARDEN scan rock_08 tri', 'GARDEN scan rock_boulder_dry tri', 'GARDEN scan trident_maple_bark tri', 'GARDEN scan weathered_planks tri-x', 'GARDEN scan white_stucco tri', 'GARDEN scan wood_planks_grey tri-x', 'GARDEN scan worn_cracked_plaster tri', 'GARDEN scan worn_plaster_wall tri', 'Life / maple leaf instancer', 'Rounded Square Mask', 'Vignette', 'WK FOOT', 'WK GROUND DIRT [film,marks]', 'WK GROUND MOSS [algae,patch]', 'WK GROUND MOSS [band,patch]', 'WK MARK WIDTH', 'WK MASKS Astra / pebbles tone 0', 'WK MASKS Astra / pebbles tone 1', 'WK MASKS Astra / pebbles tone 2', 'WK MASKS Astra / pebbles tone 3', 'WK MASKS Astra / planks tone 0', 'WK MASKS Astra / planks tone 0.001', 'WK MASKS Astra / planks tone 0.002', 'WK MASKS Astra / planks tone 0.003', 'WK MASKS Astra / planks tone 0.004', 'WK MASKS Astra / planks tone 0.005', 'WK MASKS Astra / planks tone 0.006', 'WK MASKS Astra / planks tone 0.007', 'WK MASKS Astra / planks tone 1', 'WK MASKS Astra / planks tone 1.001', 'WK MASKS Astra / planks tone 1.002', 'WK MASKS Astra / planks tone 1.003', 'WK MASKS Astra / planks tone 1.004', 'WK MASKS Astra / planks tone 1.005', 'WK MASKS Astra / planks tone 1.006', 'WK MASKS Astra / planks tone 1.007', 'WK MASKS Astra / planks tone 2', 'WK MASKS Astra / planks tone 2.001', 'WK MASKS Astra / planks tone 2.002', 'WK MASKS Astra / planks tone 2.003', 'WK MASKS Astra / planks tone 2.004', 'WK MASKS Astra / planks tone 2.005', 'WK MASKS Astra / planks tone 2.006', 'WK MASKS Astra / planks tone 2.007', 'WK MASKS Astra / planks tone 3', 'WK MASKS Astra / planks tone 3.001', 'WK MASKS Astra / planks tone 3.002', 'WK MASKS Astra / planks tone 3.003', 'WK MASKS Astra / planks tone 3.004', 'WK MASKS Astra / planks tone 3.005', 'WK MASKS Astra / planks tone 3.006', 'WK MASKS Astra / planks tone 3.007', 'WK MASKS Astra / planks tone 4', 'WK MASKS Astra / planks tone 4.001', 'WK MASKS Astra / planks tone 4.002', 'WK MASKS Astra / planks tone 4.003', 'WK MASKS Astra / planks tone 4.004', 'WK MASKS Astra / planks tone 4.005', 'WK MASKS Astra / planks tone 4.006', 'WK MASKS Astra / planks tone 4.007', 'WK MASKS Astra / planks tone 5', 'WK MASKS Astra / planks tone 5.001', 'WK MASKS Astra / planks tone 5.002', 'WK MASKS Astra / planks tone 5.003', 'WK MASKS Astra / planks tone 5.004', 'WK MASKS Astra / planks tone 5.005', 'WK MASKS Astra / planks tone 5.006', 'WK MASKS Astra / planks tone 5.007', 'WK MASKS Astra / planks tone 6', 'WK MASKS Astra / planks tone 6.001', 'WK MASKS Astra / planks tone 6.002', 'WK MASKS Astra / planks tone 6.003', 'WK MASKS Astra / planks tone 6.004', 'WK MASKS Astra / planks tone 6.005', 'WK MASKS Astra / planks tone 6.006', 'WK MASKS Astra / planks tone 6.007', 'WK MASKS Bark', 'WK MASKS Beam timber', 'WK MASKS CT / Ceramic painterly surface', 'WK MASKS CT / Ceramic ridge host-local surface', 'WK MASKS CT / Stone painterly surface', 'WK MASKS CT / Stone painterly surface.001', 'WK MASKS CT / Stone painterly surface.002', 'WK MASKS CT / Stone painterly surface.003', 'WK MASKS CT / Stone painterly surface.004', 'WK MASKS CT / Stone painterly surface.005', 'WK MASKS CT / Stone painterly surface.006', 'WK MASKS CT / Stone painterly surface.007', 'WK MASKS CT / Stone painterly surface.008', 'WK MASKS CT / Stone painterly surface.009', 'WK MASKS CT / Stone painterly surface.010', 'WK MASKS CT / Stone painterly surface.011', 'WK MASKS CT / Stone painterly surface.012', 'WK MASKS CT / Stone painterly surface.013', 'WK MASKS CT / Stone painterly surface.014', 'WK MASKS CT / Stone painterly surface.015', 'WK MASKS CT / Stone painterly surface.016', 'WK MASKS CT / Stone painterly surface.017', 'WK MASKS CT / Stone painterly surface.018', 'WK MASKS CT / Stone painterly surface.019', 'WK MASKS CT / Stone painterly surface.020', 'WK MASKS CT / Stone painterly surface.021', 'WK MASKS CT / Stone painterly surface.022', 'WK MASKS CT / Stone painterly surface.023', 'WK MASKS CT / Stone painterly surface.024', 'WK MASKS CT / Stone painterly surface.025', 'WK MASKS CT / Stone painterly surface.026', 'WK MASKS CT / Stone painterly surface.027', 'WK MASKS CT / Stone painterly surface.028', 'WK MASKS CT / Stone painterly surface.029', 'WK MASKS CT / Stone painterly surface.030', 'WK MASKS CT / Stone painterly surface.031', 'WK MASKS CT / Stone painterly surface.032', 'WK MASKS CT / Stone painterly surface.033', 'WK MASKS CT / Stone painterly surface.034', 'WK MASKS CT / Stone painterly surface.035', 'WK MASKS CT / Stone painterly surface.036', 'WK MASKS CT / Stone painterly surface.037', 'WK MASKS CT / Stone painterly surface.038', 'WK MASKS CT / Stone painterly surface.039', 'WK MASKS CT / Stone painterly surface.040', 'WK MASKS CT / Stone painterly surface.041', 'WK MASKS CT / Stone painterly surface.042', 'WK MASKS CT / Timber painterly surface', 'WK MASKS Dark timber', 'WK MASKS GARDEN bark.pine', 'WK MASKS GARDEN ground.earth', 'WK MASKS GARDEN stone.lantern', 'WK MASKS GARDEN stone.rock', 'WK MASKS GARDEN timber.post', 'WK MASKS GARDEN wall.garden', 'WK MASKS Moss and earth', 'WK MASKS Plaster wall', 'WK MASKS Plinth stone', 'WK MASKS Raked gravel', 'WK MASKS Wall cap tile', 'WK RUNOFF', 'WK SCALE', 'WK SOOT', 'WK WALL CRACKS', 'WK WALL GROWTH']

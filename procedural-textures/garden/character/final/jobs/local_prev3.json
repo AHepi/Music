@@ -1,0 +1,51 @@
+{
+ "apply_stages": [
+  "wood",
+  "roof",
+  "ground",
+  "pond"
+ ],
+ "cpu": true,
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/final/out/localprev",
+ "extra_cameras": {
+  "stone test": [
+   [
+    -2.2,
+    -1.9,
+    0.75
+   ],
+   [
+    -3.3,
+    -0.5,
+    0.25
+   ],
+   40
+  ]
+ },
+ "pictures": [
+  {
+   "name": "s_asis",
+   "camera": "G6 pond cam 7",
+   "size": "640x427",
+   "samples": 24,
+   "mode": "preview",
+   "exec": "\nimport re\nfor m in bpy.data.materials:\n    if m.node_tree and (m.name.startswith('G6 roof / Rock_') or m.name.startswith('G6 roof / Pond_edge_stone')):\n        for n in m.node_tree.nodes:\n            if n.bl_idname == 'ShaderNodeBump':\n                if 'orig' not in n: n['orig'] = n.inputs['Strength'].default_value\n                n.inputs['Strength'].default_value = n['orig'] * 1.0\n            if n.bl_idname == 'ShaderNodeNormalMap':\n                if 'orig' not in n: n['orig'] = n.inputs['Strength'].default_value\n                n.inputs['Strength'].default_value = n['orig'] * 1.0\n"
+  },
+  {
+   "name": "s_nobump",
+   "camera": "G6 pond cam 7",
+   "size": "640x427",
+   "samples": 24,
+   "mode": "preview",
+   "exec": "\nimport re\nfor m in bpy.data.materials:\n    if m.node_tree and (m.name.startswith('G6 roof / Rock_') or m.name.startswith('G6 roof / Pond_edge_stone')):\n        for n in m.node_tree.nodes:\n            if n.bl_idname == 'ShaderNodeBump':\n                if 'orig' not in n: n['orig'] = n.inputs['Strength'].default_value\n                n.inputs['Strength'].default_value = n['orig'] * 0.0\n            if n.bl_idname == 'ShaderNodeNormalMap':\n                if 'orig' not in n: n['orig'] = n.inputs['Strength'].default_value\n                n.inputs['Strength'].default_value = n['orig'] * 1.0\n"
+  },
+  {
+   "name": "s_nonormal",
+   "camera": "G6 pond cam 7",
+   "size": "640x427",
+   "samples": 24,
+   "mode": "preview",
+   "exec": "\nimport re\nfor m in bpy.data.materials:\n    if m.node_tree and (m.name.startswith('G6 roof / Rock_') or m.name.startswith('G6 roof / Pond_edge_stone')):\n        for n in m.node_tree.nodes:\n            if n.bl_idname == 'ShaderNodeBump':\n                if 'orig' not in n: n['orig'] = n.inputs['Strength'].default_value\n                n.inputs['Strength'].default_value = n['orig'] * 1.0\n            if n.bl_idname == 'ShaderNodeNormalMap':\n                if 'orig' not in n: n['orig'] = n.inputs['Strength'].default_value\n                n.inputs['Strength'].default_value = n['orig'] * 0.0\n"
+  }
+ ]
+}

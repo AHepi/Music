@@ -1,0 +1,132 @@
+{
+ "blend": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/direction/start/garden_real_fixed.blend",
+ "look": "real",
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/roof/previews/r13",
+ "variants": [
+  {
+   "name": "mask",
+   "fix": {
+    "steps": [
+     0,
+     1,
+     2
+    ],
+    "debug": "masks",
+    "mask_render": true,
+    "cameras": false
+   },
+   "pictures": [
+    {
+     "name": "top_masks",
+     "camera": "G6 roof cam top",
+     "size": "2400x800",
+     "samples": 16,
+     "quality": 95
+    }
+   ]
+  },
+  {
+   "name": "final",
+   "fix": {
+    "steps": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "save_blend": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/roof/work_scene/garden_roof_staged.blend"
+   },
+   "pictures": [
+    {
+     "name": "roof_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 512,
+     "seed": 7,
+     "mode": "final",
+     "exr": true,
+     "extra": [
+      "--check-groups"
+     ]
+    },
+    {
+     "name": "roof_veranda",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 512,
+     "seed": 7,
+     "mode": "final",
+     "exr": false,
+     "extra": []
+    },
+    {
+     "name": "cam1",
+     "camera": "G6 roof cam 1",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "cam2",
+     "camera": "G6 roof cam 2",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "cam3",
+     "camera": "G6 roof cam 3",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "cam4",
+     "camera": "G6 roof cam 4",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "cam5",
+     "camera": "G6 roof cam 5",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "cam6",
+     "camera": "G6 roof cam 6",
+     "size": "1200x800",
+     "samples": 96
+    }
+   ]
+  },
+  {
+   "name": "extra",
+   "fix": {
+    "steps": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "pictures": [
+    {
+     "name": "ver_rocks",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 128,
+     "border": [
+      0.7,
+      0.25,
+      0.9,
+      0.6
+     ]
+    }
+   ]
+  }
+ ]
+}

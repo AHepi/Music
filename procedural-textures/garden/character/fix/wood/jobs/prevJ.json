@@ -1,0 +1,74 @@
+{
+ "blend": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/final/garden_character.blend",
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/wood/previews/rJ",
+ "variants": [
+  {
+   "name": "INT",
+   "pictures": [
+    {
+     "name": "int_cam3_south",
+     "camera": "tmp_cam3_south",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview",
+     "exec": "from mathutils import Vector\ncd = bpy.data.cameras.new('tmp_cam3_south'); cd.lens = 35; cd.clip_start = 0.05\nco = bpy.data.objects.new('tmp_cam3_south', cd)\nbpy.context.scene.collection.objects.link(co)\nco.location = (-2.9, -2.2, 0.55)\nco.rotation_euler = (Vector((-3.0, 0.7, 0.2)) - Vector((-2.9, -2.2, 0.55))).to_track_quat('-Z', 'Y').to_euler()\n"
+    },
+    {
+     "name": "int_cam4_top",
+     "camera": "tmp_cam4_top",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview",
+     "exec": "from mathutils import Vector\ncd = bpy.data.cameras.new('tmp_cam4_top'); cd.lens = 40; cd.clip_start = 0.05\nco = bpy.data.objects.new('tmp_cam4_top', cd)\nbpy.context.scene.collection.objects.link(co)\nco.location = (-3.6, -1.8, 2.8)\nco.rotation_euler = (Vector((-3.5, 0.7, 0.2)) - Vector((-3.6, -1.8, 2.8))).to_track_quat('-Z', 'Y').to_euler()\n"
+    },
+    {
+     "name": "int_cam5_lowwest",
+     "camera": "tmp_cam5_lowwest",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview",
+     "exec": "from mathutils import Vector\ncd = bpy.data.cameras.new('tmp_cam5_lowwest'); cd.lens = 28; cd.clip_start = 0.05\nco = bpy.data.objects.new('tmp_cam5_lowwest', cd)\nbpy.context.scene.collection.objects.link(co)\nco.location = (-0.2, -1.0, 0.35)\nco.rotation_euler = (Vector((-4.0, 0.4, 0.15)) - Vector((-0.2, -1.0, 0.35))).to_track_quat('-Z', 'Y').to_euler()\n"
+    },
+    {
+     "name": "int_cam6_macro",
+     "camera": "tmp_cam6_macro",
+     "size": "1600x1066",
+     "samples": 128,
+     "seed": 7,
+     "mode": "preview",
+     "exec": "from mathutils import Vector\ncd = bpy.data.cameras.new('tmp_cam6_macro'); cd.lens = 85; cd.clip_start = 0.05\nco = bpy.data.objects.new('tmp_cam6_macro', cd)\nbpy.context.scene.collection.objects.link(co)\nco.location = (-4.55, -0.2, 0.62)\nco.rotation_euler = (Vector((-4.9, 0.55, 0.22)) - Vector((-4.55, -0.2, 0.62))).to_track_quat('-Z', 'Y').to_euler()\n"
+    },
+    {
+     "name": "int_cam10_stepfoot",
+     "camera": "tmp_cam10_stepfoot",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview",
+     "exec": "from mathutils import Vector\ncd = bpy.data.cameras.new('tmp_cam10_stepfoot'); cd.lens = 35; cd.clip_start = 0.05\nco = bpy.data.objects.new('tmp_cam10_stepfoot', cd)\nbpy.context.scene.collection.objects.link(co)\nco.location = (2.3, 2.75, 0.5)\nco.rotation_euler = (Vector((2.2, 3.75, 0.08)) - Vector((2.3, 2.75, 0.5))).to_track_quat('-Z', 'Y').to_euler()\n"
+    },
+    {
+     "name": "int_cam11_posts",
+     "camera": "tmp_cam11_posts",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview",
+     "exec": "from mathutils import Vector\ncd = bpy.data.cameras.new('tmp_cam11_posts'); cd.lens = 32; cd.clip_start = 0.05\nco = bpy.data.objects.new('tmp_cam11_posts', cd)\nbpy.context.scene.collection.objects.link(co)\nco.location = (-2.6, -1.3, 0.45)\nco.rotation_euler = (Vector((-2.5, 0.3, 0.0)) - Vector((-2.6, -1.3, 0.45))).to_track_quat('-Z', 'Y').to_euler()\n"
+    },
+    {
+     "name": "int_cam8_steps",
+     "camera": "tmp_cam8_steps",
+     "size": "1200x800",
+     "samples": 96,
+     "seed": 7,
+     "mode": "preview",
+     "exec": "from mathutils import Vector\ncd = bpy.data.cameras.new('tmp_cam8_steps'); cd.lens = 35; cd.clip_start = 0.05\nco = bpy.data.objects.new('tmp_cam8_steps', cd)\nbpy.context.scene.collection.objects.link(co)\nco.location = (2.3, 3.0, 0.95)\nco.rotation_euler = (Vector((2.2, 4.5, 0.3)) - Vector((2.3, 3.0, 0.95))).to_track_quat('-Z', 'Y').to_euler()\n"
+    }
+   ]
+  }
+ ]
+}

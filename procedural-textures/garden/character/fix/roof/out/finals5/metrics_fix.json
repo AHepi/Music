@@ -1,0 +1,180 @@
+{
+ "fix_hero": {
+  "percentiles": {
+   "1": 0.0486,
+   "5": 0.0728,
+   "25": 0.1684,
+   "50": 0.3061,
+   "75": 0.4714,
+   "95": 0.612,
+   "99": 0.8822
+  },
+  "mean_lum": 0.3265,
+  "mean_saturation": 0.3973,
+  "detail_energy": {
+   "roof": 7.79,
+   "bridge": 5.28,
+   "grass fg": 4.08,
+   "maple": 9.02,
+   "sand": 7.6,
+   "wall": 3.33,
+   "rock": 4.64
+  },
+  "detail_energy_mine": {
+   "roof": 6.53,
+   "wall": 4.19,
+   "rocks": 6.64,
+   "lantern": 5.29
+  },
+  "flat_windows_below_sky": {
+   "windows": 931,
+   "std_below_0.010": 3,
+   "share_below_0.014": 0.0032
+  },
+  "share_sat_above_0.70_outside_maple": 0.01492,
+  "share_turquoise_below_sky": 0.03104,
+  "roof_box_olive_share": 0.0245,
+  "before": {
+   "percentiles": {
+    "1": 0.0486,
+    "5": 0.0728,
+    "25": 0.1681,
+    "50": 0.3062,
+    "75": 0.4726,
+    "95": 0.6116,
+    "99": 0.8822
+   },
+   "mean_lum": 0.3267,
+   "mean_saturation": 0.398,
+   "detail_energy": {
+    "roof": 8.33,
+    "bridge": 5.28,
+    "grass fg": 4.08,
+    "maple": 9.11,
+    "sand": 7.59,
+    "wall": 3.31,
+    "rock": 4.57
+   },
+   "detail_energy_mine": {
+    "roof": 6.79,
+    "wall": 4.18,
+    "rocks": 6.63,
+    "lantern": 5.25
+   },
+   "flat_windows_below_sky": {
+    "windows": 931,
+    "std_below_0.010": 3,
+    "share_below_0.014": 0.0032
+   },
+   "share_sat_above_0.70_outside_maple": 0.01497,
+   "share_turquoise_below_sky": 0.03112,
+   "roof_box_olive_share": 0.0193
+  },
+  "ssim_blur12_whole": 0.9983,
+  "corr_blur12_whole": 0.9995,
+  "ssim_blur12_regions": {
+   "roof": 0.9945,
+   "wall": 0.9937,
+   "rocks": 0.9987,
+   "lantern": 0.9978
+  },
+  "ssim_blur12_below_sky_median_window": 1.0,
+  "abs_diff_mean": 0.0031,
+  "abs_diff_in_my_boxes": {
+   "roof": 0.0112,
+   "wall": 0.0067,
+   "rocks": 0.0051,
+   "lantern": 0.0061
+  },
+  "share_pixels_changed_over_0.03": 0.0317
+ },
+ "fix_veranda": {
+  "percentiles": {
+   "1": 0.0583,
+   "5": 0.0881,
+   "25": 0.1858,
+   "50": 0.3047,
+   "75": 0.4602,
+   "95": 0.6362,
+   "99": 0.7359
+  },
+  "mean_lum": 0.3308,
+  "mean_saturation": 0.419,
+  "detail_energy": {
+   "roof": 4.28,
+   "bridge": 3.49,
+   "grass fg": 2.76,
+   "maple": 1.52,
+   "sand": 4.06,
+   "wall": 4.31,
+   "rock": 8.42
+  },
+  "detail_energy_mine": {
+   "roof": 3.41,
+   "wall": 3.78,
+   "rocks": 7.16,
+   "lantern": 5.29
+  },
+  "flat_windows_below_sky": {
+   "windows": 931,
+   "std_below_0.010": 1,
+   "share_below_0.014": 0.0032
+  },
+  "share_sat_above_0.70_outside_maple": 0.14873,
+  "share_turquoise_below_sky": 0.00782,
+  "roof_box_olive_share": 0.0026,
+  "before": {
+   "percentiles": {
+    "1": 0.0583,
+    "5": 0.0882,
+    "25": 0.186,
+    "50": 0.3045,
+    "75": 0.4595,
+    "95": 0.6362,
+    "99": 0.7359
+   },
+   "mean_lum": 0.3306,
+   "mean_saturation": 0.4212,
+   "detail_energy": {
+    "roof": 4.28,
+    "bridge": 3.49,
+    "grass fg": 2.76,
+    "maple": 1.53,
+    "sand": 4.07,
+    "wall": 4.26,
+    "rock": 8.42
+   },
+   "detail_energy_mine": {
+    "roof": 3.4,
+    "wall": 3.72,
+    "rocks": 7.16,
+    "lantern": 5.14
+   },
+   "flat_windows_below_sky": {
+    "windows": 931,
+    "std_below_0.010": 1,
+    "share_below_0.014": 0.0032
+   },
+   "share_sat_above_0.70_outside_maple": 0.14948,
+   "share_turquoise_below_sky": 0.00772,
+   "roof_box_olive_share": 0.0026
+  },
+  "ssim_blur12_whole": 0.9994,
+  "corr_blur12_whole": 0.9997,
+  "ssim_blur12_regions": {
+   "roof": 0.9998,
+   "wall": 0.9993,
+   "rocks": 0.9982,
+   "lantern": 0.9981
+  },
+  "ssim_blur12_below_sky_median_window": 1.0,
+  "abs_diff_mean": 0.0015,
+  "abs_diff_in_my_boxes": {
+   "roof": 0.0006,
+   "wall": 0.0028,
+   "rocks": 0.0041,
+   "lantern": 0.0073
+  },
+  "share_pixels_changed_over_0.03": 0.0165
+ }
+}

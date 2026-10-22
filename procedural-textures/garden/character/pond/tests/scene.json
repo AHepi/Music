@@ -1,0 +1,567 @@
+{
+ "stage_numbers": {
+  "bed_plate_verts": 1117,
+  "bed_plate_verts_lowered": 196,
+  "bed_plate_z_range": [
+   -0.515,
+   -0.354
+  ],
+  "bed_plate_max_change_inside_corridor": 0.0,
+  "pebbles": 760,
+  "pebble_triangles": 60800,
+  "pebbles_on_slopes_z_-0.12_to_-0.40": 496,
+  "pebbles_in_middle_depth_gt_0.3": 235,
+  "pebble_top_z_max": -0.113,
+  "pebbles_per_m2_shelf": 77.9,
+  "bed_area_m2_shelf": 4.68,
+  "pebbles_per_m2_slope": 67.2,
+  "bed_area_m2_slope": 2.4,
+  "pebbles_per_m2_middle": 23.4,
+  "bed_area_m2_middle": 10.05,
+  "flat_stones_under_water": 4,
+  "flat_stone_places": [
+   [
+    -3.15,
+    -0.88,
+    0.36,
+    1.25
+   ],
+   [
+    -4.55,
+    2.05,
+    0.3,
+    1.2
+   ],
+   [
+    -1.75,
+    2.35,
+    0.34,
+    1.37
+   ],
+   [
+    -0.95,
+    1.65,
+    0.27,
+    1.21
+   ]
+  ],
+  "submerged_leaves": 8,
+  "algae_rims": 8,
+  "algae_rim_stones": [
+   "Pond edge stone 0",
+   "Pond edge stone 1",
+   "Pond edge stone 2",
+   "Pond edge stone 3",
+   "Pond edge stone 5",
+   "Pond edge stone 6",
+   "Pond edge stone 11",
+   "Rock 2"
+  ],
+  "lily_pads": 26,
+  "lily_pad_diameters_cm": [
+   14,
+   34
+  ],
+  "lily_flowers": 4,
+  "lily_buds": 2,
+  "iris_clumps": 7,
+  "iris_clumps_with_flowers": 4,
+  "iris_blades": 60,
+  "iris_flower_stems": 17,
+  "cattail_clumps": 2,
+  "cattail_heads": 9,
+  "reed_clumps": 3,
+  "floating_leaves": 13,
+  "maple_leaves": 56000,
+  "maple_pads": 7,
+  "maple_leaf_colour_ramp_mean_std": [
+   0.429,
+   0.279
+  ],
+  "maple_leaf_width_cm_min_median_max": [
+   5.5,
+   9.0,
+   12.5
+  ],
+  "maple_branches_meshes": 17,
+  "pine_pads": 8,
+  "pine_triangles_after": 64565,
+  "pine_pad_thickness_over_diameter_max": 0.266
+ },
+ "created": [
+  "G6 pond / algae rim 0",
+  "G6 pond / algae rim 1",
+  "G6 pond / algae rim 11",
+  "G6 pond / algae rim 17",
+  "G6 pond / algae rim 2",
+  "G6 pond / algae rim 3",
+  "G6 pond / algae rim 5",
+  "G6 pond / algae rim 6",
+  "G6 pond / bed stones",
+  "G6 pond / cattails and reeds",
+  "G6 pond / floating leaf 0",
+  "G6 pond / floating leaf 1",
+  "G6 pond / floating leaf 10",
+  "G6 pond / floating leaf 11",
+  "G6 pond / floating leaf 12",
+  "G6 pond / floating leaf 2",
+  "G6 pond / floating leaf 3",
+  "G6 pond / floating leaf 4",
+  "G6 pond / floating leaf 5",
+  "G6 pond / floating leaf 6",
+  "G6 pond / floating leaf 7",
+  "G6 pond / floating leaf 8",
+  "G6 pond / floating leaf 9",
+  "G6 pond / iris flowers",
+  "G6 pond / submerged leaf 0",
+  "G6 pond / submerged leaf 1",
+  "G6 pond / submerged leaf 2",
+  "G6 pond / submerged leaf 3",
+  "G6 pond / submerged leaf 4",
+  "G6 pond / submerged leaf 5",
+  "G6 pond / submerged leaf 6",
+  "G6 pond / submerged leaf 7",
+  "G6 pond cam 1",
+  "G6 pond cam 2",
+  "G6 pond cam 3",
+  "G6 pond cam 4",
+  "G6 pond cam 5",
+  "G6 pond cam 6",
+  "G6 pond cam 7"
+ ],
+ "seconds": 2.6,
+ "materials": {
+  "Pond water": {
+   "normal_maps": [
+    {
+     "node": "Swell Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.6,
+     "image": "swell_normal.png",
+     "image_colorspace": "Non-Color",
+     "image_size": [
+      2048,
+      2048
+     ],
+     "reaches_principled_normal": true,
+     "uv_exists_on_all_users": true,
+     "users": 2
+    },
+    {
+     "node": "Ripple Normal Map",
+     "space": "TANGENT",
+     "uv_map": "RippleUV",
+     "strength": 1.0,
+     "image": "ripple_normal.png",
+     "image_colorspace": "Non-Color",
+     "image_size": [
+      2048,
+      2048
+     ],
+     "reaches_principled_normal": true,
+     "uv_exists_on_all_users": true,
+     "users": 2
+    }
+   ],
+   "bumps": []
+  },
+  "G6 pond / silt": {
+   "normal_maps": [
+    {
+     "node": "Silt Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.6,
+     "image": "pebble_normal.png",
+     "image_colorspace": "Non-Color",
+     "image_size": [
+      1024,
+      1024
+     ],
+     "reaches_principled_normal": true,
+     "uv_exists_on_all_users": true,
+     "users": 1
+    }
+   ],
+   "bumps": []
+  },
+  "G6 pond / pebble": {
+   "normal_maps": [
+    {
+     "node": "Pebble Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.7,
+     "image": "pebble_normal.png",
+     "image_colorspace": "Non-Color",
+     "image_size": [
+      1024,
+      1024
+     ],
+     "reaches_principled_normal": true,
+     "uv_exists_on_all_users": true,
+     "users": 2
+    }
+   ],
+   "bumps": []
+  },
+  "Bark": {
+   "normal_maps": [
+    {
+     "node": "G6 bark Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "image": "maple_bark_normal.png",
+     "image_colorspace": "Non-Color",
+     "image_size": [
+      1024,
+      1024
+     ],
+     "reaches_principled_normal": true,
+     "uv_exists_on_all_users": true,
+     "users": 18
+    }
+   ],
+   "bumps": [
+    {
+     "node": "Bump",
+     "strength": 0.3,
+     "fed_by_normal_map": true
+    }
+   ]
+  },
+  "GARDEN bark.pine": {
+   "normal_maps": [
+    {
+     "node": "G6 bark Normal Map",
+     "space": "TANGENT",
+     "uv_map": "UVMap",
+     "strength": 0.9,
+     "image": "pine_bark_normal.png",
+     "image_colorspace": "Non-Color",
+     "image_size": [
+      1024,
+      1024
+     ],
+     "reaches_principled_normal": true,
+     "uv_exists_on_all_users": true,
+     "users": 9
+    }
+   ],
+   "bumps": [
+    {
+     "node": "Bump",
+     "strength": 0.3,
+     "fed_by_normal_map": true
+    }
+   ]
+  }
+ },
+ "normal_map_images": {
+  "maple_bark_normal.png": {
+   "size": [
+    1024,
+    1024
+   ],
+   "mean_rgb": [
+    0.4997,
+    0.5,
+    0.9816
+   ]
+  },
+  "pebble_normal.png": {
+   "size": [
+    1024,
+    1024
+   ],
+   "mean_rgb": [
+    0.5,
+    0.5001,
+    0.9848
+   ]
+  },
+  "pine_bark_normal.png": {
+   "size": [
+    1024,
+    1024
+   ],
+   "mean_rgb": [
+    0.4997,
+    0.5,
+    0.9825
+   ]
+  },
+  "ripple_normal.png": {
+   "size": [
+    2048,
+    2048
+   ],
+   "mean_rgb": [
+    0.5017,
+    0.5017,
+    1.0
+   ]
+  },
+  "swell_normal.png": {
+   "size": [
+    2048,
+    2048
+   ],
+   "mean_rgb": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  }
+ },
+ "uv": {
+  "Basin water": {
+   "UVMap": {
+    "u_range": [
+     1.401,
+     1.537
+    ],
+    "v_range": [
+     1.268,
+     1.404
+    ],
+    "negative_area_tris": 4,
+    "positive_area_tris": 4
+   },
+   "RippleUV": {
+    "u_range": [
+     0.02,
+     0.02
+    ],
+    "v_range": [
+     0.02,
+     0.02
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 0
+   }
+  },
+  "G6 pond / bed stones": {
+   "UVMap": {
+    "u_range": [
+     -4.694,
+     4.7
+    ],
+    "v_range": [
+     -1.047,
+     2.521
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 216
+   }
+  },
+  "Life / pond bed": {
+   "UVMap": {
+    "u_range": [
+     -5.0,
+     -0.7
+    ],
+    "v_range": [
+     -0.7,
+     2.6
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 0
+   }
+  },
+  "Life / pond pebbles": {
+   "UVMap": {
+    "u_range": [
+     -5.577,
+     5.577
+    ],
+    "v_range": [
+     -1.2,
+     3.06
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 60800
+   }
+  },
+  "Maple branch": {
+   "UVMap": {
+    "u_range": [
+     0.0,
+     1.0
+    ],
+    "v_range": [
+     0.0,
+     1.149
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 288
+   }
+  },
+  "Maple trunk": {
+   "UVMap": {
+    "u_range": [
+     0.0,
+     2.0
+    ],
+    "v_range": [
+     0.0,
+     7.636
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 1984
+   }
+  },
+  "Pine limb": {
+   "UVMap": {
+    "u_range": [
+     0.0,
+     1.0
+    ],
+    "v_range": [
+     0.0,
+     3.154
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 288
+   }
+  },
+  "Pine trunk": {
+   "UVMap": {
+    "u_range": [
+     0.0,
+     1.0
+    ],
+    "v_range": [
+     0.0,
+     4.431
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 1024
+   }
+  },
+  "Pond water": {
+   "UVMap": {
+    "u_range": [
+     -1.883,
+     0.067
+    ],
+    "v_range": [
+     -0.417,
+     1.033
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 0
+   },
+   "RippleUV": {
+    "u_range": [
+     0.0,
+     1.0
+    ],
+    "v_range": [
+     0.0,
+     1.0
+    ],
+    "negative_area_tris": 0,
+    "positive_area_tris": 0
+   }
+  }
+ },
+ "water_depth_attr": {
+  "min": 0.0,
+  "max": 0.4593876600265503,
+  "verts_clear_lt_0_1": 249,
+  "verts_deep_gt_0_3": 453
+ },
+ "ripple_spots_in_map": 4,
+ "ripple_spots_defined": [
+  [
+   -3.55,
+   1.72,
+   6,
+   0.08,
+   "lily stems"
+  ],
+  [
+   -2.55,
+   2.45,
+   4,
+   0.06,
+   "falling leaf"
+  ],
+  [
+   -2.35,
+   -0.3,
+   7,
+   0.09,
+   "open water"
+  ],
+  [
+   -1.15,
+   1.75,
+   5,
+   0.07,
+   "lily pad"
+  ]
+ ],
+ "counts": {
+  "floating_leaves": 13,
+  "submerged_leaves": 8,
+  "algae_rims": 8,
+  "lily_pad_faces": 2860,
+  "maple_branch_meshes": 17,
+  "pine_limb_meshes": 8,
+  "curves_left": [],
+  "maple_leaf_points": 56000,
+  "pine_triangles": 64565
+ },
+ "algae_rim_stones": [
+  "Pond edge stone 0",
+  "Pond edge stone 1",
+  "Pond edge stone 11",
+  "Pond edge stone 2",
+  "Pond edge stone 3",
+  "Pond edge stone 5",
+  "Pond edge stone 6",
+  "Rock 2"
+ ],
+ "maple_hue_hist_after": [
+  8157,
+  4840,
+  6458,
+  7672,
+  7448,
+  6437,
+  4679,
+  3139,
+  3287,
+  3883
+ ],
+ "maple_hue_mean_std_after": [
+  0.4291,
+  0.2793
+ ],
+ "maple_hue_hist_before": [
+  8143,
+  4850,
+  6463,
+  7669,
+  7453,
+  6432,
+  4678,
+  3103,
+  3373,
+  3827
+ ],
+ "maple_hue_mean_std_before": [
+  0.429,
+  0.2794
+ ],
+ "maple_leaves_before": 55991,
+ "maple_leaf_scale_mean_before_after": [
+  0.05855,
+  null
+ ],
+ "maple_leaf_scale_mean_after": 0.05851
+}

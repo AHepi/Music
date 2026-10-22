@@ -1,0 +1,121 @@
+{
+ "blend": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/final/garden_character.blend",
+ "look": "real",
+ "outdir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/ground/out/v1",
+ "variants": [
+  {
+   "name": "A",
+   "fix": {
+    "steps": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "cameras": false,
+    "maps_dir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/ground/maps",
+    "ground": {},
+    "moss": {}
+   },
+   "pictures": [
+    {
+     "name": "A_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 160,
+     "mode": "final"
+    },
+    {
+     "name": "A_ver",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 160,
+     "mode": "final"
+    }
+   ]
+  },
+  {
+   "name": "B",
+   "fix": {
+    "steps": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "cameras": false,
+    "maps_dir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/ground/maps",
+    "ground": {
+     "lawn_mottle": 0.5,
+     "lawn_fine": 0.03,
+     "earth_middle": 1.12,
+     "earth_blotch": 0.08
+    },
+    "moss": {
+     "moss_tone": 0.08
+    }
+   },
+   "pictures": [
+    {
+     "name": "B_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 160,
+     "mode": "final"
+    },
+    {
+     "name": "B_ver",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 160,
+     "mode": "final"
+    }
+   ]
+  },
+  {
+   "name": "C",
+   "fix": {
+    "steps": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "cameras": false,
+    "maps_dir": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/character/fix/ground/maps",
+    "ground": {
+     "lawn_mottle": 0.0,
+     "lawn_fine": 0.0,
+     "earth_middle": 1.05,
+     "earth_blotch": 0.05,
+     "earth_fine": 0.03
+    },
+    "moss": {
+     "moss_tone": 0.0
+    }
+   },
+   "pictures": [
+    {
+     "name": "C_hero",
+     "camera": "photo",
+     "size": "2400x1600",
+     "samples": 160,
+     "mode": "final"
+    },
+    {
+     "name": "C_ver",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 160,
+     "mode": "final"
+    }
+   ]
+  }
+ ]
+}

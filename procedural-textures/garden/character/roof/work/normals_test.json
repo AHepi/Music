@@ -1,0 +1,66 @@
+{
+ "direction_line": "NORMAL_DIRECTION PASS (right/left under sun from +X: 0.804 vs 0.158; top/bottom under sun from +Y: 0.806 vs 0.156; flipped-green test detects the error: True)",
+ "maps": [
+  {
+   "map": "glaze",
+   "strength_in_material": 0.9,
+   "mean_slope_target": 0.1,
+   "ok": {
+    "corr_sun_from_+X": 0.956,
+    "corr_sun_from_+Y": 0.968
+   },
+   "flipped": {
+    "corr_sun_from_+X": 0.957,
+    "corr_sun_from_+Y": -0.964
+   },
+   "PASS": true,
+   "flipped_Y_fails": true
+  },
+  {
+   "map": "plaster",
+   "strength_in_material": 1.0,
+   "mean_slope_target": 0.045,
+   "ok": {
+    "corr_sun_from_+X": 0.962,
+    "corr_sun_from_+Y": 0.961
+   },
+   "flipped": {
+    "corr_sun_from_+X": 0.962,
+    "corr_sun_from_+Y": -0.96
+   },
+   "PASS": true,
+   "flipped_Y_fails": true
+  },
+  {
+   "map": "stone",
+   "strength_in_material": 0.8,
+   "mean_slope_target": 0.11,
+   "ok": {
+    "corr_sun_from_+X": 0.957,
+    "corr_sun_from_+Y": 0.961
+   },
+   "flipped": {
+    "corr_sun_from_+X": 0.957,
+    "corr_sun_from_+Y": -0.96
+   },
+   "PASS": true,
+   "flipped_Y_fails": true
+  },
+  {
+   "map": "moss",
+   "strength_in_material": 0.5,
+   "mean_slope_target": 0.28,
+   "ok": {
+    "corr_sun_from_+X": 0.983,
+    "corr_sun_from_+Y": 0.985
+   },
+   "flipped": {
+    "corr_sun_from_+X": 0.983,
+    "corr_sun_from_+Y": -0.984
+   },
+   "PASS": true,
+   "flipped_Y_fails": true
+  }
+ ],
+ "all_pass": true
+}

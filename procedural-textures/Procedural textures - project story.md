@@ -59,7 +59,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **EEVEE and Cycles compared (log 26)** and **the wet street is in the real film (log 27).**
 - **Pay-per-second rendering works (log 29):** a RunPod "serverless" endpoint: a card starts only when a picture is waiting and stops about 5 seconds after, so idle time costs nothing. EEVEE and Cycles both proven on it.
 - **Japanese garden done in both looks (log 30):** realistic and painted, drawn with Cycles on the pay-per-second route; a fresh checker: the realistic one "reads as a real temple garden at golden hour", the painted one "nearly" follows your add-on's rules and your own words.
-- **Nothing running.** Pay-per-second workers stand by free of charge (checked against RunPod's hourly bill).
+- **Japanese garden character done (log 31):** the realistic garden kept its art style and gained designed detail: a bridge that is built
+  (stones, posts, cross beams, long beams, pegged planks), worn and mossy planks, varied roof tiles with moss, chunky grass tufts, a pond that reads,
+  a layered maple; 85 materials now carry real normal maps (there were none). A fresh re-check: style kept, more character, bridge makes sense, all
+  "yes". Still weak: the smeared lawn colour under the tufts, moss cushion banks that heap up, a clean orange veranda deck.
+- **Nothing running** (checked 22 October 15:21): no machines; the pay-per-second workers stand by free of charge; the two stores cost about
+  US$0.006 an hour.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -77,6 +82,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | `recipes/slate_layers/` | Slate made of separate layers inside one recipe: `recipe/` (the recipe, settings, controls table), `layers/` (one file per layer), tests, variations, areas, brick reuse | Baked maps; guides (05) |
 | `cookbook/` | Tool guides (06), start-here page, new-surface checklist (in progress) | The finished cookbook |
 | Rented graphics machine (scripts kept outside the repository, in the scratch folder `runpod/`; keys never saved here) | A small job server on the rented machine and a client here: start a machine if none is running, send files, run Blender, fetch the pictures | Rendered pictures, in seconds instead of minutes |
+| Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
+| `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 
 ## Word list
 
@@ -97,6 +104,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Joint (sett joint):** the narrow gap between two road stones. **Behind painting:** a second painting of the street without the near props, which the stage shows where a moving camera sees past them. **Mask:** a black-and-white picture saying where something goes (white = there).
 - **Skill:** a packaged set of written instructions (sometimes with scripts) that Claude loads for one kind of task.
 - **Seamless / half-tile test:** a tile is seamless if moving the recipe half a tile gives the same picture moved half a tile.
+- **Concept image:** a picture made by an image model showing what we aim for; the builders work from it, it is not used in the film. **Style note:** the written rules of the art style (shapes, edges, palette, light, how much detail).
+- **Builder, fixer, checker:** helpers that build a part, fix a part, or look at the result fresh without having done the work.
+- **Stage:** one script that changes only its own part of the garden scene; the stages run one after another to make the whole garden.
+- **Squint test:** blur the new and the old picture and compare them; a high score (target 0.92) means the big shapes and light are unchanged. **Detail energy:** how much fine contrast one part of a picture has; too much reads as busy or photographic.
+- **The bridge, from the bottom up:** footing stones on the pond bed carry posts; cross beams sit across pairs of posts; long beams run along the bridge on the cross beams; planks lie across the long beams.
+- **Pay-per-second endpoint, worker:** the RunPod set-up where a card (a worker) starts only when a job waits; idle workers cost nothing. **Balance:** the money left in the RunPod account; with too little, workers will not take jobs.
 
 ## Log (added to, never rewritten)
 
@@ -422,7 +435,41 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     for 40 minutes; RunPod's own hour-by-hour bill shows they cost nothing (they are free standby for a fast start). Pictures: `30 Japanese
     garden - pictures/` (start with the two "30 Final" sheets); plan: `garden/30 Plan - Japanese garden - all the advice.md`.
 
+31. **The garden's character, inside its own art style (22 October).** You said: "The realistic one. But don't make it more realistic. I still
+    want the art style. What's missing now is the details in grass, pond, roof, wood and so on. They have textures, but they're bland and have no
+    character. The geometry of the wood planks is also very basic. No wear, no mold or moss, the logic behind how the bridge is constructed makes
+    no sense. Even for an artistic style. Are there any normal maps used? Generate an image of trees and so on in the art style and work from that.
+    The image gen budget is $15." Then: "These things need to be integrated into the style. So it's just part of design." **Your normal-map
+    question:** no, there were none; only gentle bump from height pictures, and the planks were plain boxes. **Concepts (paid):** paint-overs of
+    the two views, element sheets (bridge construction, planks, roof, trees, pond edge, lantern, grass and moss) and swatches, 29 calls, US$3.86
+    at most of the US$15. Nano Banana 2 kept the style best; Nano Banana Pro was too photographic; Flux 3 moved the picture around. A style note
+    turned your rule into "the rule for every builder": details are designed parts of the style. **My mistake:** a message I sent to the concept
+    helper woke a second copy of it, which made 8 extra paid calls (about US$0.70 of the total) before it stopped. **Direction and four builders
+    (on the rented cards):** the bridge rebuilt so it stands up (footing stones, posts, cross beams pegged to the posts, long beams, planks with
+    gaps, pegs, iron cramps and a diagonal board at each turn); planks with rounded edges, grain and knots; roof tiles in different tones, slipped,
+    chipped and missing ones, round end discs, a ridge cap, moss and drip stains; walls with cracks; rocks with moss caps; 12 grass tuft shapes with
+    seed heads, a worn path, moss cushions; lily pads, iris and ripples; the maple rebuilt as layered pads; the pine as flat discs. 85 materials
+    now use 17 real normal-map pictures, each checked to point the right way. **First full-size pictures (Cycles):** a fresh art checker said
+    the style was kept, there was more character and the bridge made sense, but: pale clean planks with almost no moss (a builder claimed 9.8
+    percent, the checker measured 0.6), one knot stamped on most planks, a pond that only read up close, a darker and heavier maple, moss cushions
+    like rows of bean bags, a hairy pine, a moss "sticker" on the lantern and green stripes on the rocks. **Two stoppages:** from 07:31 to 08:30
+    the cards took no jobs because the RunPod balance had run down to US$0.13 (you added credit); and the container restarted twice (about 02:48
+    and 09:40). Both times the job carried on from where it stopped; the second time one checker's work was lost. **Fix round:** four fixers, one
+    per part, worked at the same time, then one step put the fixes together and drew the pictures again, and a fresh checker looked. Fixed:
+    moss patches and greyer bridge wood, varied knots, the lantern sticker and rock stripes (they came from the weathering kit's splash, crack and
+    growth layers, now toned down on stones), roof moss cushions, bolder wall cracks, chunky tufts, varied moss cushions, a soft worn path, readable
+    flowers and red leaves, a pond that reads (bigger pads, pink flowers, a pebble shelf, floating leaves), a brighter maple with its branches
+    showing, a pine with brush-stroke clumps. Re-check: style kept "yes", more character "yes", the bridge "yes" (checked in the scene: all 59
+    planks rest on at least two supports); no further round needed now. **Still weak:** the lawn colour under the tufts is the old smeared scan;
+    the moss cushion banks still heap up; the veranda deck is clean and the most orange area; drip stains, slipped tiles and ripples only read up
+    close; the squint test missed (0.883 and 0.873 against 0.92), because the maple and pond now follow the concepts; strongly coloured pixels a
+    little over the limit; 6 of 8 iron straps have a nail head floating 14-18 mm above the plank and 3 footing stones overhang the bank (both hidden
+    from every camera); 48 leftover test cameras in the scene file. **Cost:** images US$3.86 at most of US$15; pay-per-second cards US$10.89 by
+    RunPod's hourly bill (about 4 hours of card time), plus about 3 US cents for a test machine. Afterwards nothing was running. Pictures: `31
+    Japanese garden character - pictures/` (start with "31 Final - hero view", "31 Final - veranda view", the two "31 Before and after" sheets and
+    "31 Final - close-ups"); scripts and notes: `garden/character/`; the scene files stay on the RunPod store.
+
 ## Next step
 
-Your pick between the realistic and painted garden (or both kept). Then the cheapest fixes left: the veranda hedge, the painted sky curve, and
-redrawing the blue evening with the fix round's changes (a few cents on the pay-per-second route).
+Waiting for your instructions. If you want more on this garden, the change a viewer would notice most is replacing the smeared lawn colour under the
+new grass tufts.
