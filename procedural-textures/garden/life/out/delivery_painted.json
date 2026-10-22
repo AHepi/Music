@@ -1,0 +1,209 @@
+{
+ "look": "painted",
+ "groups": {
+  "maple_mass": {
+   "objects": [
+    "Maple inner mass"
+   ],
+   "pass": false,
+   "n_errors": 1,
+   "errors": [
+    "Maple inner mass: 10 floating fragments (91% of its faces), nearest 0.134 from the rest"
+   ],
+   "n_warnings": 0,
+   "warnings": [],
+   "skipped": []
+  },
+  "pine_pads": {
+   "objects": [
+    "Pine pads"
+   ],
+   "pass": false,
+   "n_errors": 1,
+   "errors": [
+    "Pine pads: 7 floating fragments (88% of its faces), nearest 0.0887 from the rest"
+   ],
+   "n_warnings": 0,
+   "warnings": [],
+   "skipped": []
+  },
+  "pond_bed_and_pebbles": {
+   "objects": [
+    "Life / pond bed",
+    "Life / pond pebbles"
+   ],
+   "pass": false,
+   "n_errors": 1,
+   "errors": [
+    "Life / pond pebbles: 140 floating fragments (39% of its faces), nearest 0.0706 from the rest"
+   ],
+   "n_warnings": 1,
+   "warnings": [
+    "Life / pond pebbles: 17 detached fragments (4.7% of its faces), nearest 0.017 from the rest"
+   ],
+   "skipped": []
+  },
+  "pond_surface_plants": {
+   "objects": [
+    "Pond water",
+    "Lily pads",
+    "Lotus blossoms",
+    "Life / lily stems",
+    "Life / iris clumps"
+   ],
+   "pass": true,
+   "n_errors": 0,
+   "errors": [],
+   "n_warnings": 0,
+   "warnings": [],
+   "skipped": []
+  },
+  "shrubs": {
+   "objects": [
+    "Life / shrubs"
+   ],
+   "pass": false,
+   "n_errors": 1,
+   "errors": [
+    "Life / shrubs: 9 floating fragments (82% of its faces), nearest 3.63 from the rest"
+   ],
+   "n_warnings": 0,
+   "warnings": [],
+   "skipped": []
+  },
+  "fallen_leaves": {
+   "objects": [
+    "Fallen leaves"
+   ],
+   "pass": false,
+   "n_errors": 1,
+   "errors": [
+    "Fallen leaves: 82 floating fragments (98% of its faces), nearest 1.29 from the rest"
+   ],
+   "n_warnings": 0,
+   "warnings": [],
+   "skipped": []
+  },
+  "bamboo_stalks": {
+   "objects": [
+    "Bamboo stalks"
+   ],
+   "pass": false,
+   "n_errors": 2,
+   "errors": [
+    "Bamboo stalks, between its own parts: 1052 coplanar overlapping faces (z-fighting)",
+    "Bamboo stalks: 416 floating fragments (79% of its faces), nearest 0.13 from the rest"
+   ],
+   "n_warnings": 1,
+   "warnings": [
+    "Bamboo stalks: 28 detached fragments (5.3% of its faces), nearest 0.101 from the rest"
+   ],
+   "skipped": []
+  },
+  "bamboo_fence": {
+   "objects": [
+    "Bamboo fence"
+   ],
+   "pass": false,
+   "n_errors": 1,
+   "errors": [
+    "Bamboo fence, between its own parts: 4 coplanar overlapping faces (z-fighting)"
+   ],
+   "n_warnings": 0,
+   "warnings": [],
+   "skipped": []
+  }
+ },
+ "scatter_audits": {
+  "Life / moss at feet and damp edges": {
+   "checks": {
+    "receiver_retained": true,
+    "source_bank_retained": true,
+    "source_members_retained": true,
+    "native_modifier_retained": true,
+    "receiver_anchor": true,
+    "source_meshes_unchanged": true,
+    "initial_footprint_checked": true,
+    "support_surface_matches_initial_check": true,
+    "source_evaluation_unchanged": true,
+    "source_transforms_identity": true,
+    "complete_control_schema": true,
+    "control_ranges": true
+   },
+   "controls": {
+    "Density": 1.0,
+    "Traffic Width": 0.574999988079071,
+    "Waterline": -0.11999999731779099,
+    "Damp Reach": 100.0,
+    "Contact Influence": 0.6000000238418579,
+    "Seed": 521
+   },
+   "contract": {
+    "candidate_count": 1286,
+    "retained_candidates": 1145,
+    "footprint_rejections": 141,
+    "kind": "moss"
+   }
+  },
+  "Life / pebble fringe": {
+   "checks": {
+    "receiver_retained": true,
+    "source_bank_retained": true,
+    "source_members_retained": true,
+    "native_modifier_retained": true,
+    "receiver_anchor": true,
+    "source_meshes_unchanged": true,
+    "initial_footprint_checked": true,
+    "support_surface_matches_initial_check": true,
+    "source_evaluation_unchanged": true,
+    "source_transforms_identity": true,
+    "complete_control_schema": true,
+    "control_ranges": true
+   },
+   "controls": {
+    "Density": 1.0,
+    "Traffic Width": 0.574999988079071,
+    "Waterline": -0.11999999731779099,
+    "Damp Reach": 1.0,
+    "Contact Influence": 0.6000000238418579,
+    "Seed": 307
+   },
+   "contract": {
+    "candidate_count": 488,
+    "retained_candidates": 481,
+    "footprint_rejections": 7,
+    "kind": "pebble"
+   }
+  },
+  "Life / tufts": {
+   "checks": {
+    "receiver_retained": true,
+    "source_bank_retained": true,
+    "source_members_retained": true,
+    "native_modifier_retained": true,
+    "receiver_anchor": true,
+    "source_meshes_unchanged": true,
+    "initial_footprint_checked": true,
+    "support_surface_matches_initial_check": true,
+    "source_evaluation_unchanged": true,
+    "source_transforms_identity": true,
+    "complete_control_schema": true,
+    "control_ranges": true
+   },
+   "controls": {
+    "Density": 1.0,
+    "Traffic Width": 0.574999988079071,
+    "Waterline": -0.11999999731779099,
+    "Damp Reach": 1.5,
+    "Contact Influence": 0.6000000238418579,
+    "Seed": 733
+   },
+   "contract": {
+    "candidate_count": 293,
+    "retained_candidates": 266,
+    "footprint_rejections": 27,
+    "kind": "tuft"
+   }
+  }
+ }
+}

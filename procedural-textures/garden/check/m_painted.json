@@ -1,0 +1,183 @@
+{
+ "A_bridge_piers": {
+  "Bridge pier 0": {
+   "pier_top_z": 0.029,
+   "n_samples": 19,
+   "n_hit": 16,
+   "gap_cm_min": -0.0,
+   "gap_cm_median": 8.6,
+   "gap_cm_max": 8.6
+  },
+  "Bridge pier 1": {
+   "pier_top_z": 0.041,
+   "n_samples": 19,
+   "n_hit": 19,
+   "gap_cm_min": 7.4,
+   "gap_cm_median": 7.4,
+   "gap_cm_max": 8.6
+  },
+  "Bridge pier 2": {
+   "pier_top_z": 0.053,
+   "n_samples": 17,
+   "n_hit": 17,
+   "gap_cm_min": 7.4,
+   "gap_cm_median": 7.4,
+   "gap_cm_max": 8.6
+  },
+  "Bridge pier 3": {
+   "pier_top_z": 0.053,
+   "n_samples": 17,
+   "n_hit": 16,
+   "gap_cm_min": 8.6,
+   "gap_cm_median": 8.6,
+   "gap_cm_max": 8.6
+  }
+ },
+ "B_veranda_steps": {
+  "Veranda step": {
+   "lowest_z": -0.04,
+   "top_z": 0.36,
+   "n_low_verts": 3,
+   "clearance_cm_over_ground_min": -4.0,
+   "clearance_cm_over_ground_max": -3.1
+  },
+  "Veranda step, lower": {
+   "lowest_z": -0.04,
+   "top_z": 0.17,
+   "n_low_verts": 4,
+   "clearance_cm_over_ground_min": -4.0,
+   "clearance_cm_over_ground_max": -3.1
+  }
+ },
+ "C_wall_caps": {
+  "Back wall, left": {
+   "wall_top_z": 2.1,
+   "cap_min_z": 2.09,
+   "cap_max_z": 2.283,
+   "samples": 40,
+   "samples_with_cap_above": 40,
+   "gap_cm_min": -1.0,
+   "gap_cm_median": -1.0,
+   "gap_cm_max": -1.0,
+   "wall_bbox_xy": [
+    -10.4,
+    -5.2,
+    10.35,
+    10.65
+   ],
+   "cap_bbox_xy": [
+    -10.45,
+    -5.15,
+    10.25,
+    10.75
+   ]
+  },
+  "Back wall, right": {
+   "wall_top_z": 2.1,
+   "cap_min_z": 2.09,
+   "cap_max_z": 2.283,
+   "samples": 40,
+   "samples_with_cap_above": 40,
+   "gap_cm_min": -1.0,
+   "gap_cm_median": -1.0,
+   "gap_cm_max": -1.0,
+   "wall_bbox_xy": [
+    5.6,
+    10.4,
+    10.35,
+    10.65
+   ],
+   "cap_bbox_xy": [
+    5.55,
+    10.45,
+    10.25,
+    10.75
+   ]
+  },
+  "Right wall behind hall": {
+   "wall_top_z": 2.2,
+   "cap_min_z": 2.19,
+   "cap_max_z": 2.383,
+   "samples": 40,
+   "samples_with_cap_above": 40,
+   "gap_cm_min": -1.0,
+   "gap_cm_median": -1.0,
+   "gap_cm_max": -1.0,
+   "wall_bbox_xy": [
+    10.25,
+    10.55,
+    1.4,
+    10.5
+   ],
+   "cap_bbox_xy": [
+    10.15,
+    10.65,
+    1.35,
+    10.55
+   ]
+  }
+ },
+ "D_lantern": {
+  "glow_center": [
+   0.95,
+   1.1,
+   1.327
+  ],
+  "glow_bbox": [
+   [
+    0.731,
+    1.169
+   ],
+   [
+    0.87,
+    1.33
+   ],
+   [
+    1.232,
+    1.422
+   ]
+  ],
+  "photo": {
+   "cam_pos": [
+    -5.2,
+    -5.6,
+    3.0
+   ],
+   "dist_to_glow": 9.25,
+   "hit_minus_distance_m (negative = something in front)": [
+    -0.249,
+    -0.0,
+    0.0,
+    -0.499,
+    -0.467
+   ],
+   "first_object_hit": "Lantern window glow"
+  },
+  "veranda": {
+   "cam_pos": [
+    3.6,
+    5.3,
+    1.55
+   ],
+   "dist_to_glow": 4.97,
+   "hit_minus_distance_m (negative = something in front)": [
+    -0.249,
+    -0.468,
+    null,
+    -0.0,
+    -0.0
+   ],
+   "first_object_hit": "Lantern window glow"
+  },
+  "lantern_light_pos": [
+   0.95,
+   1.1,
+   1.385
+  ],
+  "lantern_light_inside_glow_bbox": true,
+  "lantern_light_type": "POINT",
+  "lantern_light_energy_W": 18.0,
+  "lantern_light_shadow_soft_size": 0.06,
+  "glow_material_Emission_Strength": 7.0
+ }
+}

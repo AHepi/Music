@@ -1,0 +1,71 @@
+{
+ "blend": "proc-work/garden/final/garden_real.blend",
+ "look": "real",
+ "outdir": "proc-work/garden/fix/out/rp1",
+ "variants": [
+  {
+   "name": "v0base",
+   "fix": null,
+   "pictures": [
+    {
+     "name": "hero",
+     "camera": "photo",
+     "size": "1200x800",
+     "samples": 96
+    }
+   ]
+  },
+  {
+   "name": "v1pondA",
+   "fix": {
+    "steps": [
+     "pond"
+    ],
+    "pond_variant": "lamps"
+   },
+   "pictures": [
+    {
+     "name": "hero",
+     "camera": "photo",
+     "size": "1200x800",
+     "samples": 96
+    }
+   ]
+  },
+  {
+   "name": "v2pondB",
+   "fix": {
+    "steps": [
+     "pond"
+    ],
+    "pond_variant": "lamps+paper"
+   },
+   "pictures": [
+    {
+     "name": "hero",
+     "camera": "photo",
+     "size": "1200x800",
+     "samples": 96
+    }
+   ]
+  },
+  {
+   "name": "v3full",
+   "fix": {},
+   "pictures": [
+    {
+     "name": "hero",
+     "camera": "photo",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "veranda",
+     "camera": "veranda",
+     "size": "1200x800",
+     "samples": 96
+    }
+   ]
+  }
+ ]
+}

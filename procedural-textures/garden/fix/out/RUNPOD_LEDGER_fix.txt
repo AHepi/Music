@@ -1,0 +1,19 @@
+RunPod jobs of the fix round (billed_work_ms as printed by the client wait/job output; RTX 4090 with OptiX every time)
+job  billed seconds  what
+  1    19.667  regrade test of shadow lifts on the drawn EXRs (first try, lifts wrongly tone-mapped twice, redone as job 5)
+  2    34.105  preview round 1, real look: pond variants and the full fix, 6 small pictures
+  3     8.599  preview round 1, painted look: stopped at once, the script could not find a helper file (surf_kit.py not on the store)
+  4    16.783  regrade test of shadow lifts, second try (5 variants on the real hero)
+  5    37.679  preview round 2, real look: 7 pictures (hero, veranda, five close crops)
+  6    97.338  preview round 2, painted look: 5 pictures (first picture took about 75 s against 3 s for the others; cause not found, it did not repeat in round 4)
+  7    28.631  preview round 3, real look: 4 pictures
+  8   102.850  preview round 3, painted look: 5 pictures (first picture again about 80 s; unexplained)
+  9    25.289  preview round 4, real look: 3 pictures
+ 10    24.432  preview round 4, painted look: 4 pictures, with and without the gravel groove shadow to time it (no extra wait this time)
+ 11    84.240  FINAL real look: hero + veranda, 2400x1600, 512 samples, light-group EXR
+ 12    55.761  FINAL painted look: hero + veranda (first version)
+ 13    62.307  FINAL painted look again, after one ground colour was made greener
+total of the 13 jobs: 597.681 s (10.0 minutes); of that the final pictures 202.308 s, previews and tests 395.373 s
+At US$1.10 an hour (4090): about US$0.18 for the jobs. Not itemised by the client: about 70 small upload and download calls (a few seconds each at most). Guess: US$0.03 to 0.06 more.
+No status ping was sent (it wakes a worker). Every job ended by itself. Whether the idle workers really stop 5 seconds after the last job could not be checked from here.
+Large files left on the store (not downloaded): 4 new light-group EXR files (about 35 MB each) in fix/out/final; the 6 EXRs of the first round are still in final/renders and no longer match the new pictures.

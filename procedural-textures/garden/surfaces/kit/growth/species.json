@@ -1,0 +1,106 @@
+{
+  "schema": "weathering-growth-species/1",
+  "_note": "The piece library as DATA (sizes, shares, colours, where each likes to grow). pieces.py builds the meshes from this file; scatter.py and apply_growth.py read the shares and sizes. Nothing in it names a place. Sizes are the May 1926 period rules (rules W1 to W5, M1) in centimetres, tall (or across for flat things). Colours are plate sRGB 0..255 and are START values, lighter and stronger than the finished look because the painter weakens colour (hue 85 to 120 degrees, saturation 0.45 or more); they are tuned against the plate brightness (0.17 to 0.33 at least, never under 0.12 wet). The wet colour is made in the material from the dry one (value times the wet_dark dial, richer green, a little glossier, no coat).",
+  "palette": {
+    "leaf": [74, 112, 52],
+    "leaf_light": [96, 134, 62],
+    "leaf_pale": [118, 150, 84],
+    "leaf_dark": [58, 92, 42],
+    "straw": [175, 152, 95],
+    "stem": [104, 128, 64],
+    "grass_head": [128, 140, 92],
+    "dandelion_flower": [240, 195, 35],
+    "seed_clock": [214, 212, 196],
+    "groundsel_head": [150, 158, 70],
+    "purse_pod": [132, 154, 82],
+    "toadflax_flower": [170, 146, 196],
+    "moss": [82, 118, 54],
+    "moss_light": [112, 142, 66],
+    "pearlwort": [92, 130, 60]
+  },
+  "piece_sets": {
+    "weeds": ["grass", "dead_grass", "pearlwort", "dandelion", "plantain", "groundsel", "chickweed", "shepherds_purse", "toadflax"],
+    "moss_cushions": ["moss_string"],
+    "grass_edge": ["grass", "dead_grass"],
+    "_left_out": "buddleia, rosebay willowherb, pellitory-of-the-wall, lichen, flower boxes (period study); leaves and pine needles are for the courtyard job later"
+  },
+  "kinds": {
+    "grass": {
+      "group": "weed", "builder": "tuft", "variants": 6, "share": 0.34, "size_cm": [3, 12], "scale": [0.8, 1.25], "min_dots": 6.0, "upright": 0.85,
+      "params": {"blades": [10, 16], "flower_share": 0.3, "droop": [0.5, 1.1]},
+      "colour": "leaf", "colour_light": "leaf_light", "head": "grass_head",
+      "prefer": {"base": 0.4, "damp": 0.3, "light": 0.2, "wall": 0.2, "seam": 0.4},
+      "note": "meadow-grass tufts 3 to 12 cm, bent blades, flowering heads 5 to 7 cm on some (W1)"
+    },
+    "dead_grass": {
+      "group": "weed", "builder": "tuft", "variants": 4, "share": 0.06, "size_cm": [4, 12], "scale": [0.8, 1.2], "min_dots": 6.0, "upright": 0.8, "share_of": "grass",
+      "params": {"blades": [9, 14], "flower_share": 0.0, "droop": [0.9, 1.5], "dead": true},
+      "colour": "straw", "colour_light": "straw",
+      "prefer": {"base": 0.5, "damp": 0.0, "light": 0.5, "wall": 0.2, "seam": 0.3},
+      "note": "dead and straw-coloured tufts, the dead_grass_share dial says how many of the grass pieces"
+    },
+    "pearlwort": {
+      "group": "weed", "builder": "cushion_star", "variants": 4, "share": 0.18, "size_cm": [2, 6], "scale": [0.8, 1.2], "min_dots": 6.0, "upright": 0.2,
+      "params": {"needles": [14, 22]},
+      "colour": "pearlwort", "colour_light": "leaf_light",
+      "prefer": {"base": 0.4, "damp": 0.4, "light": 0.1, "wall": 0.1, "seam": 0.9},
+      "note": "pearlwort cushions 2 to 6 cm across in joints"
+    },
+    "dandelion": {
+      "group": "weed", "builder": "rosette_toothed", "variants": 5, "share": 0.12, "size_cm": [8, 20], "scale": [0.85, 1.15], "min_dots": 6.0, "upright": 0.4,
+      "params": {"leaves": [9, 13], "flower_dial": "flower_share"},
+      "colour": "leaf", "colour_light": "leaf_light", "flower": "dandelion_flower", "seed": "seed_clock",
+      "prefer": {"base": 0.4, "damp": 0.0, "light": 0.6, "wall": 0.3, "seam": 0.5},
+      "note": "dandelion rosettes 8 to 20 cm across, a few in flower or seed-clock"
+    },
+    "plantain": {
+      "group": "weed", "builder": "rosette_broad", "variants": 4, "share": 0.08, "size_cm": [6, 15], "scale": [0.85, 1.15], "min_dots": 6.0, "upright": 0.5,
+      "params": {"leaves": [6, 9]},
+      "colour": "leaf_dark", "colour_light": "leaf",
+      "prefer": {"base": 0.5, "damp": 0.1, "light": 0.3, "wall": 0.2, "seam": 0.4},
+      "note": "greater plantain rosettes 6 to 15 cm"
+    },
+    "groundsel": {
+      "group": "weed", "builder": "groundsel", "variants": 4, "share": 0.08, "size_cm": [5, 20], "scale": [0.85, 1.15], "min_dots": 6.0, "upright": 0.95,
+      "params": {"pairs": [4, 8]},
+      "colour": "leaf_pale", "colour_light": "leaf_light", "head": "groundsel_head",
+      "prefer": {"base": 0.4, "damp": 0.1, "light": 0.3, "wall": 0.6, "seam": 0.3},
+      "note": "groundsel 5 to 20 cm, wall foot"
+    },
+    "chickweed": {
+      "group": "weed", "builder": "mat_leaves", "variants": 4, "share": 0.08, "size_cm": [10, 30], "scale": [0.85, 1.15], "min_dots": 6.0, "upright": 0.1,
+      "params": {"stems": [5, 8], "pairs": [3, 5]},
+      "colour": "leaf_pale", "colour_light": "leaf_pale",
+      "prefer": {"base": 0.3, "damp": 0.7, "light": 0.0, "wall": 0.3, "seam": 0.3},
+      "note": "chickweed mats 10 to 30 cm, damp"
+    },
+    "shepherds_purse": {
+      "group": "weed", "builder": "rosette_spike", "variants": 5, "share": 0.04, "size_cm": [5, 10], "spike_cm": [20, 30], "scale": [0.85, 1.15], "min_dots": 6.0, "upright": 0.7,
+      "params": {"leaves": [6, 8], "spike_share": 0.6},
+      "colour": "leaf_pale", "colour_light": "leaf_light", "pod": "purse_pod", "stem": "stem",
+      "prefer": {"base": 0.4, "damp": 0.0, "light": 0.4, "wall": 0.5, "seam": 0.4},
+      "note": "shepherd's purse rosettes 5 to 10 cm, flower spikes to 20 to 30 cm on some"
+    },
+    "toadflax": {
+      "group": "weed", "builder": "trail", "variants": 3, "share": 0.0, "count_dial": "toadflax_clumps", "size_cm": [10, 30], "scale": [0.9, 1.1], "min_dots": 6.0, "upright": 0.0,
+      "params": {"stems": [3, 5], "leaves_per_stem": [5, 7]},
+      "colour": "leaf_light", "colour_light": "leaf_pale", "flower": "toadflax_flower",
+      "prefer": {"base": 0.1, "damp": 0.9, "light": 0.0, "wall": 1.0, "seam": 0.2},
+      "note": "ivy-leaved toadflax trails on damp mortar at a wall foot, 0 to 2 clumps in the whole street (the toadflax_clumps dial)"
+    },
+    "moss_string": {
+      "group": "moss", "builder": "cushion_string", "variants": 8, "share": 1.0, "size_cm": [1, 3], "scale": [0.85, 1.2], "min_dots": 5.0, "upright": 0.0,
+      "params": {"cushions": [2, 4], "radius_cm": [0.9, 1.6], "height_cm": [0.5, 1.0]},
+      "colour": "moss", "colour_light": "moss_light",
+      "prefer": {"base": 0.4, "damp": 0.0, "light": 0.0, "wall": 0.3, "seam": 0.6},
+      "note": "moss cushions 1 to 3 cm across, 0.5 to 1 cm high, strung 2 to 4 along a joint (M1); one piece is one string"
+    }
+  },
+  "material": {
+    "albedo_gain": 8.0,
+    "saturation_gain": 0.8,
+    "wet_dark_boost": 2.4,
+    "rough_dry": 0.72, "rough_wet": 0.46, "specular_dry": 0.30, "specular_wet": 0.38, "wet_saturation": 1.18, "tint_spread": 0.14,
+    "_note": "no coat on any piece; wet makes the colour richer and darker (wet_dark dial) and a little glossier"
+  }
+}

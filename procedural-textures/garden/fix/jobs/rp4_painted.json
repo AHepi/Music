@@ -1,0 +1,51 @@
+{
+ "blend": "proc-work/garden/final/garden_painted.blend",
+ "look": "painted",
+ "outdir": "proc-work/garden/fix/out/rp4",
+ "variants": [
+  {
+   "name": "p4noao",
+   "fix": {
+    "gravel_ao": false
+   },
+   "pictures": [
+    {
+     "name": "hero",
+     "camera": "photo",
+     "size": "1200x800",
+     "samples": 96
+    }
+   ]
+  },
+  {
+   "name": "p4",
+   "fix": {},
+   "pictures": [
+    {
+     "name": "hero",
+     "camera": "photo",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "veranda",
+     "camera": "veranda",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "vground",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 96,
+     "border": [
+      0.0,
+      0.0,
+      0.7,
+      0.45
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,227 @@
+{
+ "look": "real",
+ "hero_camera_same_place_and_rotation": true,
+ "first_run": {
+  "objects_created": [
+   "Hills, farthest",
+   "Hills, foot",
+   "Rim light (maple, hall edge)",
+   "Roof lift (hall roof only)",
+   "photo",
+   "veranda"
+  ],
+  "objects_deleted": [
+   "Camera"
+  ],
+  "objects_changed": {
+   "Bamboo leaves": [
+    "lightgroup"
+   ],
+   "Cool sky fill": [
+    "lightgroup",
+    "energy",
+    "color"
+   ],
+   "Dark plain": [
+    "vis",
+    "mats",
+    "lightgroup",
+    "nv",
+    "nf",
+    "vsum"
+   ],
+   "Fallen leaves": [
+    "lightgroup"
+   ],
+   "Golden hour sun": [
+    "lightgroup",
+    "energy"
+   ],
+   "Hall glow 0": [
+    "lightgroup"
+   ],
+   "Hall glow 1": [
+    "lightgroup"
+   ],
+   "Hall glow 2": [
+    "lightgroup"
+   ],
+   "Hall glow 3": [
+    "lightgroup"
+   ],
+   "Hills, far": [
+    "vis",
+    "lightgroup",
+    "nv",
+    "nf",
+    "vsum"
+   ],
+   "Hills, middle": [
+    "vis",
+    "lightgroup",
+    "nv",
+    "nf",
+    "vsum"
+   ],
+   "Hills, near": [
+    "vis",
+    "lightgroup",
+    "nv",
+    "nf",
+    "vsum"
+   ],
+   "Lantern light": [
+    "lightgroup",
+    "energy",
+    "color"
+   ],
+   "Lantern window glow": [
+    "lightgroup"
+   ],
+   "Lotus blossoms": [
+    "lightgroup"
+   ],
+   "Maple inner mass": [
+    "lightgroup"
+   ],
+   "Maple leaves": [
+    "lightgroup"
+   ],
+   "Open room back": [
+    "lightgroup"
+   ],
+   "Pine pads": [
+    "lightgroup"
+   ],
+   "Shoji paper": [
+    "lightgroup"
+   ]
+  },
+  "materials_created": [
+   "Dark plain ground",
+   "Hills, farthest haze",
+   "Hills, foot haze"
+  ],
+  "materials_changed": [
+   "Hills, far haze",
+   "Hills, middle haze",
+   "Hills, near haze",
+   "Lantern flame"
+  ],
+  "materials_deleted": [],
+  "unexpected": [],
+  "collections_added": [
+   "G4 light",
+   "G4 rim receivers",
+   "G4 roof receivers"
+  ],
+  "collections_removed": [],
+  "render_before": [
+   "CYCLES",
+   2400,
+   1600,
+   "AgX",
+   "AgX - Punchy",
+   0.5,
+   true,
+   true
+  ],
+  "render_after": [
+   "CYCLES",
+   2400,
+   1600,
+   "AgX",
+   "AgX - Punchy",
+   0.5,
+   false,
+   false
+  ],
+  "camera_before": "Camera",
+  "camera_after": "photo"
+ },
+ "second_run_vs_first": {
+  "objects_created": [],
+  "objects_deleted": [],
+  "unexpected": [],
+  "objects_changed": {},
+  "materials_changed": []
+ },
+ "names_the_kit_relies_on_still_there": true,
+ "lantern_window_glow_kept": true,
+ "no_object_lost_materials": [],
+ "photo_lens_mm": 26.0,
+ "photo_dof": [
+  true,
+  "Focus",
+  3.200000047683716
+ ],
+ "sun_rotation_euler_unchanged": true,
+ "veranda": {
+  "loc": [
+   3.6,
+   5.3,
+   1.55
+  ],
+  "lens": 24.0
+ },
+ "light_groups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "evening_on_top": {
+  "objects_created": [],
+  "objects_deleted": [],
+  "objects_changed": {
+   "Cool sky fill": [
+    "energy",
+    "color"
+   ],
+   "Golden hour sun": [
+    "energy"
+   ],
+   "Lantern light": [
+    "energy",
+    "color"
+   ],
+   "Rim light (maple, hall edge)": [
+    "energy"
+   ],
+   "Roof lift (hall roof only)": [
+    "energy"
+   ]
+  },
+  "materials_created": [],
+  "materials_changed": [
+   "Lantern flame"
+  ],
+  "materials_deleted": [],
+  "unexpected": [],
+  "render_before": [
+   "CYCLES",
+   2400,
+   1600,
+   "AgX",
+   "AgX - Punchy",
+   0.5,
+   false,
+   false
+  ],
+  "render_after": [
+   "CYCLES",
+   2400,
+   1600,
+   "AgX",
+   "AgX - Punchy",
+   1.4,
+   false,
+   false
+  ],
+  "camera_before": "photo",
+  "camera_after": "photo"
+ }
+}

@@ -1,0 +1,42 @@
+00:06.647  blend            | Read blend: "proc-work/garden/final/garden_painted.blend"
+[fix] --- step sky
+[light] world 'Golden hour' rebuilt (golden, sky look painted); sun direction from the lamp = (-0.944, -0.244, 0.223), elevation 12.9 deg, azimuth -165.5 deg
+[fix] sky: painted world rebuilt: sun rings are 8-10 sided unequal polygons, band warp is a straight-edged polyline of the azimuth
+[fix]     (0.1 s)
+[fix] --- step ground
+[fix] ground: 3 painted materials rebuilt with straight-edged flat passages (ground 6 colours, gravel 4 pale ones, rake grooves darkened by ambient shadow)
+[fix]     (0.0 s)
+[fix] --- step pond
+[fix] pond: glossy-ray visibility switched off for ['Hall glow 0', 'Hall glow 1', 'Hall glow 2', 'Hall glow 3', 'Shoji paper'] (they still light the garden and are still seen directly; they are no longer mirrored in the water as white shards)
+[fix]     (0.0 s)
+[fix] --- step toe
+[fix] toe: shadow lift added at the end of the compositor (T 0.03, L0 0.014, tint 0.75,1.0,0.95)
+[fix]     (0.0 s)
+[fix] --- step pine
+[fix] pine: painted look keeps its chiselled pads (nothing to do)
+[fix]     (0.0 s)
+[fix] --- step plants
+[fix] plants: painted look keeps its flat tufts and moss (nothing to do)
+[fix]     (0.0 s)
+[fix] --- step maple
+[fix] maple: 135 leaves added in front of the dark gap (ray hits at [(-3.26, 0.69, 2.72), (-3.59, 0.79, 2.72), (-4.45, 0.62, 2.77)]), copied from the nearest existing leaves
+[fix] maple: painted leaves kept 38% and grown x1.62 (chunkier planes, same coverage)
+[fix]     (0.2 s)
+[fix] --- step hedge
+[fix] hedge: 21 clipped shrubs (840 triangles) along the far west and south edges of the ground, material Life / shrub
+[fix]     (0.0 s)
+[fix] done in 0.4 s; created ['Fix / far hedge']; changed 11 things
+FINAL_START proc-work/garden/fix/out/final/painted_hero dot-angle nodes set: 0
+00:08.537  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+DEVICES {"requested": "GPU", "backend": "OPTIX", "devices": [["NVIDIA GeForce RTX 4090", "CUDA", false], ["AMD Ryzen 9 7950X 16-Core Processor", "CPU", false], ["NVIDIA GeForce RTX 4090", "OPTIX", true]], "gpu_in_use": true}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+00:32.326  render           | Saved: 'proc-work/garden/fix/out/final/painted_hero.exr'
+RENDER_JOB_DONE {"engine": "CYCLES", "samples": 512, "seed": 7, "camera": "photo", "size": [2400, 1600, 100], "render_seconds": 24.32}
+GROUP_CHECK {"groups": ["Combined_sun", "Combined_rim", "Combined_sky", "Combined_fill", "Combined_hall", "Combined_lantern", "Combined_rest"], "rel_error": 0.01172, "share": {"sun": 0.3161, "rim": 0.0034, "sky": 0.2982, "fill": 0.1137, "hall": 0.2557, "lantern": 0.0052, "rest": 0.0074}, "denoise_on": true}
+FINAL_START proc-work/garden/fix/out/final/painted_veranda dot-angle nodes set: 0
+DEVICES {"requested": "GPU", "backend": "OPTIX", "devices": [["NVIDIA GeForce RTX 4090", "CUDA", false], ["AMD Ryzen 9 7950X 16-Core Processor", "CPU", false], ["NVIDIA GeForce RTX 4090", "OPTIX", true]], "gpu_in_use": true}
+00:57.683  render           | Saved: 'proc-work/garden/fix/out/final/painted_veranda.exr'
+RENDER_JOB_DONE {"engine": "CYCLES", "samples": 512, "seed": 7, "camera": "veranda", "size": [2400, 1600, 100], "render_seconds": 23.01}
+FIX_RENDER_ALL [["painted", "painted_hero", "ok", "proc-work/garden/fix/out/final/painted_hero.png", 28.3], ["painted", "painted_veranda", "ok", "proc-work/garden/fix/out/final/painted_veranda.png", 52.2]] total seconds 52.2
+
+Blender quit

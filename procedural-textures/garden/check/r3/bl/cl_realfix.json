@@ -1,0 +1,310 @@
+{
+ "A_steps": {
+  "Veranda step": {
+   "lowest8_gap_to_ground_m": [
+    -0.04,
+    -0.032,
+    -0.031,
+    -0.023,
+    -0.019,
+    -0.019,
+    -0.014,
+    -0.013
+   ],
+   "top_z": 0.36
+  },
+  "Veranda step, lower": {
+   "lowest8_gap_to_ground_m": [
+    -0.04,
+    -0.036,
+    -0.035,
+    -0.031,
+    -0.027,
+    -0.026,
+    -0.023,
+    -0.023
+   ],
+   "top_z": 0.17
+  }
+ },
+ "B_piers": {
+  "pier0": {
+   "top_z": 0.029,
+   "bottom_z": -0.118,
+   "grid_hits": 805,
+   "of": 900,
+   "min_gap_cm": -0.0,
+   "median_gap_cm": 8.6,
+   "touching_within_1cm_share": 0.17,
+   "ground_z_under_pier_centre": 0.0020351409912109375
+  },
+  "pier1": {
+   "top_z": 0.041,
+   "bottom_z": -0.698,
+   "grid_hits": 900,
+   "of": 900,
+   "min_gap_cm": -1.2,
+   "median_gap_cm": 7.4,
+   "touching_within_1cm_share": 0.31,
+   "ground_z_under_pier_centre": -0.578026294708252
+  },
+  "pier2": {
+   "top_z": 0.053,
+   "bottom_z": -0.67,
+   "grid_hits": 899,
+   "of": 900,
+   "min_gap_cm": -1.2,
+   "median_gap_cm": 7.4,
+   "touching_within_1cm_share": 0.34,
+   "ground_z_under_pier_centre": -0.5507240295410156
+  },
+  "pier3": {
+   "top_z": 0.053,
+   "bottom_z": -0.117,
+   "grid_hits": 794,
+   "of": 900,
+   "min_gap_cm": -0.0,
+   "median_gap_cm": 8.6,
+   "touching_within_1cm_share": 0.17,
+   "ground_z_under_pier_centre": 0.006006717681884766
+  }
+ },
+ "C_caps": {
+  "Back wall, left cap": {
+   "wall_top_z": 2.1,
+   "pieces": 33,
+   "floating_pieces_over_3mm": 33,
+   "worst_gap_mm": 10.8,
+   "lowest_cap_z": 2.09,
+   "unsupported_no_hit": 3
+  },
+  "Back wall, right cap": {
+   "wall_top_z": 2.1,
+   "pieces": 31,
+   "floating_pieces_over_3mm": 31,
+   "worst_gap_mm": 44.5,
+   "lowest_cap_z": 2.09,
+   "unsupported_no_hit": 1
+  },
+  "Right wall behind hall cap": {
+   "wall_top_z": 2.2,
+   "pieces": 55,
+   "floating_pieces_over_3mm": 55,
+   "worst_gap_mm": 44.5,
+   "lowest_cap_z": 2.19,
+   "unsupported_no_hit": 1
+  }
+ },
+ "D_lantern": {
+  "glow_centre": [
+   0.95,
+   1.1,
+   1.327
+  ],
+  "photo": [
+   [
+    "Lantern window glow",
+    -0.249
+   ],
+   [
+    "Lantern window glow",
+    -0.1
+   ],
+   [
+    "Lantern window glow",
+    -0.1
+   ],
+   [
+    "Lantern window glow",
+    -0.1
+   ],
+   [
+    "Lantern window glow",
+    -0.1
+   ]
+  ],
+  "veranda": [
+   [
+    "Lantern window glow",
+    -0.249
+   ],
+   [
+    "Lantern window glow",
+    -0.399
+   ],
+   [
+    "Lantern window glow",
+    -0.399
+   ],
+   [
+    "Lantern firebox",
+    -0.368
+   ],
+   [
+    "Lantern firebox",
+    -0.367
+   ]
+  ]
+ },
+ "E_visibility": {
+  "Hall glow 0": {
+   "visible_camera": false,
+   "visible_diffuse": true,
+   "visible_glossy": false,
+   "visible_transmission": true,
+   "visible_shadow": true
+  },
+  "Hall glow 1": {
+   "visible_camera": false,
+   "visible_diffuse": true,
+   "visible_glossy": false,
+   "visible_transmission": true,
+   "visible_shadow": true
+  },
+  "Hall glow 2": {
+   "visible_camera": false,
+   "visible_diffuse": true,
+   "visible_glossy": false,
+   "visible_transmission": true,
+   "visible_shadow": true
+  },
+  "Hall glow 3": {
+   "visible_camera": false,
+   "visible_diffuse": true,
+   "visible_glossy": false,
+   "visible_transmission": true,
+   "visible_shadow": true
+  },
+  "Lantern light": {
+   "visible_camera": false,
+   "visible_diffuse": true,
+   "visible_glossy": true,
+   "visible_transmission": true,
+   "visible_shadow": true
+  },
+  "Lantern window glow": {
+   "visible_camera": true,
+   "visible_diffuse": true,
+   "visible_glossy": true,
+   "visible_transmission": true,
+   "visible_shadow": true
+  },
+  "Shoji bars": {
+   "visible_camera": true,
+   "visible_diffuse": true,
+   "visible_glossy": true,
+   "visible_transmission": true,
+   "visible_shadow": true
+  },
+  "Shoji paper": {
+   "visible_camera": true,
+   "visible_diffuse": true,
+   "visible_glossy": false,
+   "visible_transmission": true,
+   "visible_shadow": true
+  }
+ },
+ "F_comp": {
+  "nodes": [
+   [
+    "Render Layers",
+    "RLayers"
+   ],
+   [
+    "Group Output",
+    "GroupOutput"
+   ],
+   [
+    "Glare",
+    "Glare"
+   ],
+   [
+    "Group",
+    "Group"
+   ],
+   [
+    "fixtoe luminance",
+    "RGBToBW"
+   ],
+   [
+    "fixtoe T + lum",
+    "Math"
+   ],
+   [
+    "fixtoe T / (T + lum)",
+    "Math"
+   ],
+   [
+    "fixtoe tint x lift",
+    "Mix"
+   ],
+   [
+    "fixtoe add",
+    "Mix"
+   ]
+  ],
+  "scene_comp_nodes": [
+   [
+    "Render Layers",
+    "CompositorNodeRLayers"
+   ],
+   [
+    "Group Output",
+    "NodeGroupOutput"
+   ],
+   [
+    "Glare",
+    "CompositorNodeGlare"
+   ],
+   [
+    "Group",
+    "CompositorNodeGroup"
+   ],
+   [
+    "fixtoe luminance",
+    "CompositorNodeRGBToBW"
+   ],
+   [
+    "fixtoe T + lum",
+    "ShaderNodeMath"
+   ],
+   [
+    "fixtoe T / (T + lum)",
+    "ShaderNodeMath"
+   ],
+   [
+    "fixtoe tint x lift",
+    "ShaderNodeMix"
+   ],
+   [
+    "fixtoe add",
+    "ShaderNodeMix"
+   ]
+  ]
+ },
+ "G_misc": {
+  "hedge": {
+   "tris": 3360,
+   "bbox": [
+    [
+     -12.2,
+     3.42
+    ],
+    [
+     -8.85,
+     8.66
+    ],
+    [
+     0.0,
+     1.72
+    ]
+   ],
+   "verts_visible_in_hero_frame": 0,
+   "of": 1911,
+   "lowest_z": 0.005,
+   "ground_under_lowest": 2.6226043701171875e-05
+  },
+  "pine_pads_polys": 65537,
+  "maple_leaves_object_points": 55991
+ }
+}

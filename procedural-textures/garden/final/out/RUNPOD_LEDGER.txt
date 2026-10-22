@@ -1,0 +1,13 @@
+RunPod jobs of the final step (billed_work_ms as printed by the client's wait/job output; cards: RTX 4090 with OptiX every time)
+job  what                                                              billed seconds
+1    tiny Cycles proof, 240x160 at 16 samples, real file (opens, kit dot-angle, card)        21.897
+2    preview round, real look: hero + veranda + 10 close views, 960x640 at 64 samples         49.764
+3    preview round, painted look: same 12 pictures                                            49.154
+4    preview, blue evening, real: 5 pictures                                                  29.840
+5    FINAL real look: hero + veranda, 2400x1600 at 512 samples, with light-group EXR          95.073
+6    FINAL painted look: hero + veranda, 2400x1600 at 512 samples, with light-group EXR       54.064
+7    FINAL blue evening (real): veranda + hero, 2400x1600 at 384 samples, with EXR           146.662
+total of the 7 picture jobs: 446.354 s  (about 7.4 minutes)
+Not itemised by the client: about 50 small upload / download / info calls (each a few seconds at most). Guess for those: 2 to 4 minutes more.
+At US$1.10 an hour (4090) the picture jobs cost about US$0.14; with the small calls guessed in, about US$0.20 to 0.25.
+Large files left on the RunPod store (not downloaded, they would not fit the local limit): the six light-group EXR files (33 to 41 MB each) in the same renders folder.

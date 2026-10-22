@@ -1,0 +1,80 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "proc-work/garden/final/garden_real.blend",
+ "args": {
+  "out": "proc-work/garden/final/renders/prev_eve/eve_v_pond",
+  "camera": "v_pond",
+  "size": "960x640",
+  "samples": 64,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": false,
+  "check_groups": false,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "9aa0c82e4704fe43077802e930659b91a542fb573918d1937de045ae77acfdde",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD Ryzen 9 7950X 16-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 64,
+ "seed": 7,
+ "camera": "v_pond",
+ "size": [
+  960,
+  640,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 1.399999976158142,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 3.13,
+ "files": {
+  "png": {
+   "path": "proc-work/garden/final/renders/prev_eve/eve_v_pond.png",
+   "bytes": 840654,
+   "sha256": "8fb3dd925c40a691d8495609588ea659825c8a89e3a81641b07ddea55ba5a307"
+  }
+ }
+}

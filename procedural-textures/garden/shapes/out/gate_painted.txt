@@ -1,0 +1,35 @@
+00:00.565  blend            | Read blend: "scratchpad/astra-work/out/courtyard_final.blend"
+[shapes] repair bridge: pier gap to what carries it before {'pier 0': 0.022, 'pier 1': 0.025, 'pier 2': 0.05, 'pier 3': 0.044} after {'pier 0': -0.0, 'pier 1': -0.012, 'pier 2': -0.012, 'pier 3': -0.0} (m, negative = overlap); 6 stringers added; landing boards (trimmed, removed) {'Astra / varied planks.006': (8, 0), 'Astra / varied planks.007': (8, 0)}
+[shapes] repair steps: (lowest point over ground, top z) before {'Veranda step': (0.23, 0.567), 'Veranda step, lower': (-0.14, 0.118)} after {'Veranda step': (-0.04, 0.36), 'Veranda step, lower': (-0.04, 0.17)}; upper step back now 2 cm into the plinth, deck top 0.56
+[shapes] repair caps: (gap before, moved down) {'Back wall, left cap': (0.085, 0.085), 'Back wall, right cap': (0.085, 0.085), 'Right wall behind hall cap': (0.085, 0.085)}
+[shapes] repair deck: 3 veranda plank runs raised 1 cm so their top is no longer in the plinth top plane, plinth made 1 cm longer at both ends (8 corner points) so the plank ends no longer share its end planes (the coplanar faces)
+[shapes] repair plaster: 12 top and 12 bottom corner points of the hall plaster moved 4 mm and 3 mm so the plaster no longer shares planes with the posts
+[shapes] repair shoji: 63 rails made 22 percent shallower (top/bottom rails 3 mm in), 14 outer upright bars moved 2 mm inward so no face lies within 1 mm of another bar's plane
+[shapes] repair beams: 3 deck-edge posts raised 4.5 cm so they touch the eave beam above them (they stopped 4 cm short)
+[shapes] repair roof: hidden frame added (ridge beam, 2 purlins, 21 rafters, 5 tie beams, 5 king posts); tile rows used: 15
+[shapes] step repairs done in 0.2 s
+[shapes] lantern rebuilt (hexagonal, yaw 47.5 deg, hollow firebox with 2 openings, curled roof, finial); part z ranges: {'Lantern base': (-0.05, 0.17), 'Lantern post': (0.165, 0.955), 'Lantern gallery': (0.95, 1.185), 'Lantern firebox': (1.18, 1.56), 'Lantern cap': (1.555, 1.83), 'Lantern finial': (1.818, 2.035), 'Lantern window glow': (1.232, 1.422)}
+[shapes] step lantern done in 0.1 s
+[shapes] rocks: nudged 6 stones (metres): {'Rock 1': 0.04, 'Rock 2': 0.15, 'Rock 4': 0.18, 'Pond edge stone 2': 0.15, 'Pond edge stone 3': 0.04, 'Pond edge stone 4': 0.18}
+[shapes] rocks: Rock 0 151f buried 34% top/base (0.71, 0.71), Rock 1 160f buried 34% top/base (0.7, 0.7), Rock 2 162f buried 34% top/base (0.78, 0.78), Rock 3 209f buried 34% top/base (0.82, 0.82), Rock 4 169f buried 34% top/base (0.68, 0.68), Gravel rock 0 123f buried 34% top/base (0.78, 0.78), Gravel rock 1 125f buried 34% top/base (0.75, 0.75), Gravel rock 2 177f buried 34% top/base (0.74, 0.74), Pond edge stone 0 114f buried 49% top/base (0.72, 0.72), Pond edge stone 1 116f buried 52% top/base (0.66, 0.66), Pond edge stone 2 116f buried 51% top/base (0.67, 0.67), Pond edge stone 3 108f buried 50% top/base (0.78, 0.78), Pond edge stone 4 111f buried 63% top/base (0.74, 0.74), Pond edge stone 5 145f buried 56% top/base (0.79, 0.79), Pond edge stone 6 160f buried 57% top/base (0.69, 0.69), Pond edge stone 7 158f buried 56% top/base (0.72, 0.72), Pond edge stone 8 159f buried 55% top/base (0.72, 0.72), Pond edge stone 9 113f buried 61% top/base (0.7, 0.7), Pond edge stone 10 157f buried 53% top/base (0.74, 0.74), Pond edge stone 11 166f buried 57% top/base (0.9, 0.9), Pond edge stone 12 104f buried 56% top/base (0.72, 0.72), Pond edge stone 13 164f buried 55% top/base (0.74, 0.74), Pond edge stone 14 103f buried 50% top/base (0.75, 0.75)
+[shapes] step rocks done in 2.3 s
+[shapes] gravel: mesh 342x325 cells of 2.4 cm = 111150 faces (was 31486); rake lines every 12 cm, 1.5 cm high, about 68 lines across, 4 rings round each of 3 rocks, flat corridor for the stepping stones
+[shapes] gravel edge: 52 kerb stones on the pond, front and hall sides (open where the path crosses, at the lantern), 6 timber boards on the fence side
+[shapes] step gravel done in 0.8 s
+[shapes] stepping stones re-laid in a zigzag (offsets [0.12, -0.2, 0.0, 0.22, -0.16, 0.2, -0.12, 0.1]); top above ground (m): [('Stepping stone 0', 0.041), ('Stepping stone 1', 0.034), ('Stepping stone 2', 0.053), ('Stepping stone 3', 0.053), ('Stepping stone 4', 0.052), ('Stepping stone 5', 0.057), ('Stepping stone 6', 0.058), ('Stepping stone 7', 0.047)]; gaps between neighbours (m): [0.4, 0.3, 0.22, 0.4, 0.59, 0.48, 0.38]
+[shapes] step stepping done in 0.3 s
+[shapes] walls: 3 walls rebuilt slightly battered (3.5 degrees each face; thickness top 0.30 m, foot [0.575, 0.575, 0.587]), garden face stays one flat plane; tiled caps (gable, eave strips, half-round ridge tiles, 10 cm overhang) sit 1 cm into the wall: lowest cap point minus wall top = {'Back wall, left cap': -0.01, 'Back wall, right cap': -0.01, 'Right wall behind hall cap': -0.01}
+[shapes] step walls done in 0.0 s
+[shapes] basin set: bowl cut into the basin stone (water 4 cm under the rim), front stone, candle stone (right), bucket stone (left), 116 drain pebbles, bamboo spout on a post, ladle
+[shapes] step basin done in 0.2 s
+[shapes] shore: 5 groups, 21 small stones set into the water line (tops 4 to 13 cm over the water), one object
+[shapes] step shore done in 0.1 s
+[shapes] stage_shapes done in 4.1 s, look=painted
+GATE main objects 83 pass False errors 2 warnings 0 sec 6.0
+    E Bamboo fence, between its own parts: 4 coplanar overlapping faces (z-fighting)
+    E Open room back: floating, 0.12 from the nearest part
+GATE roof_with_walls_and_beams objects 6 pass False errors 1 warnings 0 sec 0.4
+    E ROOF_REALIZED_COPY, between its own parts: 43 coplanar overlapping faces (z-fighting)
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

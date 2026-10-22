@@ -1,0 +1,550 @@
+{
+ "schema": "weathering-look/1",
+ "id": "sooty_1926",
+ "note": "A coal-smoke colliery village in County Durham, May 1926 (the lockout). Old hard soot crust, washed streaks, damp wall feet, rust only on iron, whitened doorsteps, tar patches, few small weeds, moss in the damp gutter-side joints, NO lichen, nothing modern. Values are first starts from the period and painted-look studies (a guess where the studies say so); the integrator tunes them.",
+ "layers": {
+  "soot": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 8.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "film_mult": 0.8,
+   "sheltered_mult": 0.5,
+   "washed_mult": 1.0,
+   "washed_share": 0.07,
+   "floor_mult": 0.3,
+   "grey_pull": 0.1,
+   "mortar_soot": 0.4,
+   "mottle_size": 0.9,
+   "mottle_contrast": 0.5,
+   "edge_sharp": 0.55,
+   "stack_mult": 1.15,
+   "roof_mult": 1.0,
+   "base_lift": 0.0,
+   "washed_pale": 0.5,
+   "mottle_stretch": 3.0,
+   "shade_wash": 0.2,
+   "pale_warm": 1.0
+  },
+  "runoff": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 12.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "strength": 1.0,
+   "tone": -0.5,
+   "edge_dark": 0.5,
+   "width_dots": 14.0,
+   "length_mult": 1.0,
+   "ragged": 0.6,
+   "source_share": 0.9,
+   "leak_share": 0.3,
+   "leak_length": 0.9,
+   "iron_rust": 0.9,
+   "eave_streaks": 0.5,
+   "stain_value": 1.0,
+   "pair_share": 1.0
+  },
+  "foot": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 8.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "splash_height": 0.28,
+   "splash_strength": 0.9,
+   "splash_ragged": 0.7,
+   "finger_height": 0.1,
+   "pipe_foot_boost": 1.4,
+   "tide_share": 0.45,
+   "tide_height": 0.8,
+   "tide_strength": 0.4,
+   "tide_green": 0.3,
+   "salt_bloom": 0.008,
+   "mortar_wear": 0.5,
+   "spall_share": 0.07,
+   "wear_height": 0.6,
+   "splash_pale": 0.9
+  },
+  "steps": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 6.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "whitened_share": 0.55,
+   "scrubbed_share": 0.35,
+   "frame_m": 0.07,
+   "frame_dots": 8.0,
+   "boot_grey": 0.3,
+   "dish_depth": 0.005,
+   "nosing_chips": 0.3,
+   "wear_polish": 0.5,
+   "white_cream": 1.0,
+   "white_value": 0.85
+  },
+  "wallgrowth": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 8.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "moss_amount": 0.05,
+   "algae_amount": 0.6,
+   "lichen_amount": 0.0,
+   "moss_height": 0.35,
+   "patch_dots": 15.0,
+   "drip_moss": 0.4,
+   "cap_moss": 0.3,
+   "roof_moss": 0.0,
+   "tone_steps": 5.0,
+   "clump_stretch": 1.8,
+   "relief": 0.006,
+   "lichen_dots": 8.0,
+   "brightness_floor": 0.25,
+   "moss_value": 0.2,
+   "saturation": 0.5,
+   "algae_strength": 0.4
+  },
+  "wallcracks": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 8.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "crack_amount": 0.5,
+   "crack_dots": 3.5,
+   "crack_contrast": 0.11,
+   "stepped_cracks": 1.0,
+   "corner_chips": 0.5,
+   "chip_cm": 5.0,
+   "plaster_cracks": 0.0,
+   "spall_patches": 0.2,
+   "near_only": 15.0,
+   "slope_mm": 1.5,
+   "dull": 1.0
+  },
+  "paint": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 6.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "paint_dark": 0.93,
+   "flake_share": 0.2,
+   "door_scuff": 0.3,
+   "latch_grease": 0.4,
+   "gloss_loss": 0.5
+  },
+  "dirt": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 6.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "film": 0.4,
+   "film_scale": 1.6,
+   "film_darkness": 0.3,
+   "film_max_share": 0.15,
+   "film_near_walls": 0.5,
+   "polish": 0.5,
+   "polish_lift": 0.0,
+   "polish_rough": 0.2,
+   "water_marks": 0.4,
+   "rust_halo": 0.7,
+   "rust_halo_m": 0.18,
+   "drum_ring": 0.5,
+   "tar_patches": 0.5,
+   "tar_max_share": 0.03,
+   "tar_splash": 0.3,
+   "tar_gloss": 0.6,
+   "scrub_strip": 0.6,
+   "scrub_strip_m": 0.4,
+   "ring_pale": 0.0,
+   "dip_dark": 0.12
+  },
+  "groundcracks": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 6.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "flag_cracks": 1.0,
+   "flag_fine_share": 0.11,
+   "flag_broken_share": 0.03,
+   "flag_tilt_share": 0.04,
+   "tilt_lip": 8.0,
+   "corner_chip_share": 0.07,
+   "kerb_chips": 1.0,
+   "kerb_chip_share": 0.28,
+   "kerb_break_share": 0.067,
+   "kerb_scuffs": 0.3,
+   "kerb_joint_open": 8.0,
+   "sett_disturb": 0.35,
+   "sett_disturbed_share": 0.04,
+   "open_joint_share": 0.07,
+   "missing_share": 0.003,
+   "sunken_patch": 0.8,
+   "crack_dots": 4.5,
+   "crack_contrast": 0.16,
+   "near_only": 20.0,
+   "max_contrast": 0.75,
+   "dull": 1.0,
+   "site_bias": 0.9,
+   "open_depth_mm": 0.8
+  },
+  "groundmoss": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 6.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "joint_share": 0.1,
+   "shade_bias": 0.6,
+   "ribbon_dots": 6.0,
+   "ribbon_m": 0.02,
+   "broken_len": 0.3,
+   "algae_fan": 0.6,
+   "algae_radius": 0.55,
+   "liverwort": 0.1,
+   "far_band": 0.5,
+   "far_band_m": 0.45,
+   "moss_value": 0.36
+  },
+  "iron": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 6.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "rust_cover": 0.5,
+   "rust_height": 0.55,
+   "chip_share": 0.3,
+   "collar_spacing": 1.9,
+   "collar_rust": 0.5,
+   "metallic_drop": 0.6,
+   "heat_scale": 0.3,
+   "soot_halo": 0.5,
+   "paint_keep": 0.6,
+   "rust_run": 0.12
+  },
+  "growth": {
+   "amount": 1.0,
+   "seed": 0.0,
+   "inflate_limit": 6.0,
+   "fade_start": 12.0,
+   "fade_end": 40.0,
+   "wet_follow": 1.0,
+   "weeds_amount": 1.0,
+   "cushions_amount": 0.3,
+   "distance": 18.0,
+   "distance_fade": 5.0,
+   "piece_size": 1.0,
+   "weed_cover": 0.02,
+   "gutter_tuft_share": 0.1,
+   "wall_foot_share": 0.035,
+   "cushion_cover": 0.008,
+   "min_spacing": 0.15,
+   "toadflax_clumps": 1.0,
+   "rubbish_thin_max": 0.45,
+   "rubbish_heap_min": 0.75,
+   "dead_grass_share": 0.08,
+   "flower_share": 0.08,
+   "max_pieces": 2500.0,
+   "wet_dark": 0.7,
+   "tilt_random": 0.5,
+   "piece_inflate_limit": 3.0,
+   "colour_gain": 0.55,
+   "colour_sat": 0.85
+  }
+ },
+ "readable": [
+  {
+   "element": "soot and dust patches",
+   "layer": "soot",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "class": "walls"
+   },
+   "min_good": 15,
+   "smallest": [
+    15,
+    0.06
+   ]
+  },
+  {
+   "element": "run-off streaks",
+   "layer": "runoff",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "class": "walls",
+    "max_m": 20
+   },
+   "min_good": 10,
+   "smallest": [
+    8,
+    0.04
+   ]
+  },
+  {
+   "element": "whitened or scrubbed steps",
+   "layer": "steps",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "max_m": 15
+   },
+   "min_good": 4,
+   "smallest": [
+    8,
+    0.08
+   ]
+  },
+  {
+   "element": "rust",
+   "layer": "iron",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "class": "iron",
+    "max_m": 20
+   },
+   "min_good": 4,
+   "smallest": [
+    8,
+    0.06
+   ]
+  },
+  {
+   "element": "cracks in flags, kerbs, setts",
+   "layer": "groundcracks",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "max_m": 15
+   },
+   "min_good": 3,
+   "smallest": [
+    3,
+    0.11
+   ]
+  },
+  {
+   "element": "tar patches",
+   "layer": "dirt",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "class": "road",
+    "max_m": 30
+   },
+   "min_good": 1,
+   "smallest": [
+    15,
+    0.06
+   ]
+  },
+  {
+   "element": "ground film, polish, water marks",
+   "layer": "dirt",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "class": "road"
+   },
+   "min_good": 8,
+   "smallest": [
+    15,
+    0.04
+   ]
+  },
+  {
+   "element": "weed tufts and moss cushions",
+   "layer": "growth",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "max_m": 15
+   },
+   "min_good": 12,
+   "smallest": [
+    5,
+    0.08
+   ]
+  },
+  {
+   "element": "moss ribbons and algae fans",
+   "layer": "groundmoss",
+   "plates": [
+    "main",
+    "lockout",
+    "notice"
+   ],
+   "zone": {
+    "max_m": 20
+   },
+   "min_good": 8,
+   "smallest": [
+    5,
+    0.08
+   ]
+  },
+  {
+   "element": "wall-foot band and tide-mark",
+   "layer": "foot",
+   "plates": [
+    "main"
+   ],
+   "zone": {
+    "class": "walls",
+    "max_m": 30
+   },
+   "min_good": 0,
+   "measure": "not_automated",
+   "note": "P3 asks for visibility along 60 % of the wall length in the first 30 m (a length share, not a mark count): count it on the wall sheet or by eye"
+  }
+ ],
+ "period": [
+  {
+   "element": "soot on wall area",
+   "layer": "soot",
+   "class": "walls",
+   "measure": "area_share",
+   "cap": [
+    0.85,
+    1.0
+   ],
+   "note": "soot on 85 to 100 % of wall area"
+  },
+  {
+   "element": "run-off streaks on wall area",
+   "layer": "runoff",
+   "class": "walls",
+   "measure": "area_share",
+   "cap": [
+    0.03,
+    0.06
+   ],
+   "note": "3 to 6 % of wall area"
+  },
+  {
+   "element": "washed wall area",
+   "measure": "not_automated",
+   "note": "15 to 25 % of wall area washed (the soot layer's washed_share dial; read it from the layer's own report)"
+  },
+  {
+   "element": "streak pairs at sills / heavy leaks at downpipes",
+   "measure": "not_automated",
+   "note": "a pair at 60 to 80 % of sills; a heavy leak at 10 to 20 % of downpipes (the walls builder's feature report)"
+  },
+  {
+   "element": "splash band",
+   "measure": "not_automated",
+   "note": "on 70 to 90 % of wall length, 15 to 35 cm tall (wall sheets)"
+  },
+  {
+   "element": "whitened steps",
+   "measure": "not_automated",
+   "note": "40 to 70 % of steps"
+  },
+  {
+   "element": "flag, kerb and sett damage",
+   "measure": "not_automated",
+   "note": "flags: fine cracks 8 to 15 %, broken 2 to 4 %, tilted 3 to 6 %, chipped corner 5 to 10 %; kerb chips 20 to 35 % of length; setts disturbed 3 to 6 % with 10 to 20 % of joints open (the ground builder's feature report)"
+  },
+  {
+   "element": "tar",
+   "measure": "not_automated",
+   "note": "1 to 3 patches in the first 30 m and at most 4 % of the road"
+  },
+  {
+   "element": "weed cover",
+   "measure": "not_automated",
+   "note": "0.5 to 2 % of the ground inside the pieces distance (pieces.json)"
+  },
+  {
+   "element": "moss in joints",
+   "measure": "not_automated",
+   "note": "5 to 15 % of the gutter-side joint length; at most 15 % of any joint length (P1)"
+  },
+  {
+   "element": "algae, liverwort",
+   "measure": "not_automated",
+   "note": "algae at all pipe outlets; liverwort 0 to 2 patches"
+  },
+  {
+   "element": "whitewash",
+   "measure": "not_automated",
+   "note": "at most 15 % of visible wall; nothing whiter than the whitened steps (the hue check reports the brightest changed dots)"
+  }
+ ],
+ "forbidden": [
+  "graffiti",
+  "road_line",
+  "roadline",
+  "stud",
+  "yellow_line",
+  "wheelie",
+  "bin",
+  "dish",
+  "oil",
+  "trench",
+  "flower_box",
+  "flowerbox",
+  "buddleia",
+  "limewash",
+  "bird_lime",
+  "lichen_site"
+ ],
+ "must_be_zero": [
+  "lichen_amount"
+ ],
+ "hue_allowed": [
+  "iron",
+  "growth"
+ ],
+ "green_layers": [
+  "growth",
+  "groundmoss"
+ ],
+ "_measure_note": "readable, period, forbidden, must_be_zero, hue_allowed, green_layers are read by harness/measure_readable.py, coverage.py, measure_period.py and measure_zones.py (the plan's P3, P4 and P6 numbers as data)"
+}

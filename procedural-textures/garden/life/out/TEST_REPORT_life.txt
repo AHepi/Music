@@ -1,0 +1,156 @@
+TEST REPORT - life stage (builder 2), Japanese garden. Made by work/make_report.py from the measured files in this folder.
+Blender 5.2.2 headless. Starting file: astra-work/out/courtyard_final.blend (opened, never saved). Stage file: life/stage_life.py, apply(options).
+
+=== 1. WHAT CHANGED, look = real (before and after, every object, material, node group, light, camera, world, render setting) ===
+Existing objects changed : Astra / Courtyard receiving ground, Astra / pebbles grouped bodies, Fallen leaves, Lily pads, Maple inner mass, Maple leaves, Pine pads, Pond water
+Existing objects removed : none
+New objects added       : 46 (all tagged garden_owner=life with a garden_role; none without)
+Existing materials changed: Astra / moss tone 0, Astra / moss tone 1, Astra / moss tone 2, Astra / moss tone 3, Bamboo stalk, Fallen leaves, Maple leaves, Pine needles, Pond water
+New materials          : Life / iris blade, Life / lily stem, Life / pond bed, Life / shrub, Life / tuft
+New node groups        : Astra / Life / moss at feet and damp edges semantic scatter, Astra / Life / pebble fringe semantic scatter, Astra / Life / tufts semantic scatter, Life / maple leaf instancer; existing node groups changed: none
+World changed: False; render settings changed: False
+Things changed that this stage does not own: {'objects_changed_not_owned': 0, 'materials_changed_not_owned': 0, 'node_groups_changed_not_owned': 0, 'objects_added_not_tagged': 0, 'objects_added_without_role': 0, 'objects_added_outside_G2_life_collection_or_bank': 0, 'lost_material_slots': 0}
+  -> objects changed not owned: []; materials changed not owned: []
+
+=== 1. WHAT CHANGED, look = painted (before and after, every object, material, node group, light, camera, world, render setting) ===
+Existing objects changed : Astra / Courtyard receiving ground, Astra / moss grouped bodies, Fallen leaves, Lily pads, Maple inner mass, Maple leaves, Pine pads, Pond water
+Existing objects removed : none
+New objects added       : 46 (all tagged garden_owner=life with a garden_role; none without)
+Existing materials changed: Astra / moss tone 0, Astra / moss tone 1, Astra / moss tone 2, Astra / moss tone 3, Bamboo stalk, Fallen leaves, Maple leaves, Pine needles, Pond water
+New materials          : Life / iris blade, Life / lily stem, Life / pond bed, Life / shrub, Life / tuft
+New node groups        : Astra / Life / moss at feet and damp edges semantic scatter, Astra / Life / pebble fringe semantic scatter, Astra / Life / tufts semantic scatter, Life / maple leaf instancer; existing node groups changed: none
+World changed: False; render settings changed: False
+Things changed that this stage does not own: {'objects_changed_not_owned': 0, 'materials_changed_not_owned': 0, 'node_groups_changed_not_owned': 0, 'objects_added_not_tagged': 0, 'objects_added_without_role': 0, 'objects_added_outside_G2_life_collection_or_bank': 0, 'lost_material_slots': 0}
+  -> objects changed not owned: []; materials changed not owned: []
+
+=== 2. RUNNING IT TWICE (and switching looks) ===
+Object, mesh, material, node group, collection and curve counts after run 1 versus run 2 (same look) versus a switch to painted and back: differences = {'real2_minus_real1': {}, 'painted_minus_real': {}, 'real_again_minus_real1': {}}; leaf count equal: True; scatter counts equal: [True, True, True]
+
+=== 3. NUMBERS PER STEP ===
+--- real
+  maple_leaves: 55991
+  maple_leaf_width_cm: [5.5, 9.0, 12.5]
+  maple_leaf_unique_triangles: 208
+  maple_leaf_kinds: 5
+  maple_inner_mass_faces: 396
+  maple_scaffold_twigs: 14
+  moss_drifts: 9
+  tuft_clumps_on_bank: 23
+  scatter_moss: {'candidates': 1606, 'retained_after_footprint': 1264, 'expected_kept': 979.2, 'instances': 980, 'within_12pct': True}
+  scatter_tuft: {'candidates': 287, 'retained_after_footprint': 261, 'expected_kept': 187.1, 'instances': 174, 'within_12pct': True}
+  scatter_pebble: {'candidates': 483, 'retained_after_footprint': 475, 'expected_kept': 437.0, 'instances': 445, 'within_12pct': True}
+  moss_collar_perimeter_samples: {'rock': 184, 'grock': 134, 'pond': 536, 'step': 132, 'other': 137}
+  pond_water_faces: 842
+  pond_depth_max_m: 0.459
+  pond_bed_faces: 1040
+  pond_pebbles: 650
+  lily_pads: 17
+  iris_clumps: 7
+  pine_pads: 8
+  pine_pad_faces: 3708
+  shrubs_lantern: 2
+  shrubs_rocks_A: 2
+  shrubs_rocks_B: 2
+  shrubs_pine: 5
+  shrubs_block_lantern_window: False
+  shrubs: 11
+  shrub_faces: 1760
+  bamboo_inside_out_pieces_flipped: {'Bamboo stalks': 2, 'Bamboo fence': 0}
+  fallen_leaves: 84
+  fallen_leaves_on_water: 9
+--- painted
+  maple_leaves: 47992
+  maple_leaf_width_cm: [8.0, 11.0, 14.0]
+  maple_leaf_unique_triangles: 142
+  maple_leaf_kinds: 5
+  maple_inner_mass_faces: 308
+  maple_scaffold_twigs: 14
+  moss_drifts: 8
+  tuft_clumps_on_bank: 24
+  scatter_moss: {'candidates': 1286, 'retained_after_footprint': 1145, 'expected_kept': 962.1, 'instances': 959, 'within_12pct': True}
+  scatter_tuft: {'candidates': 293, 'retained_after_footprint': 266, 'expected_kept': 185.3, 'instances': 173, 'within_12pct': True}
+  scatter_pebble: {'candidates': 488, 'retained_after_footprint': 481, 'expected_kept': 442.5, 'instances': 450, 'within_12pct': True}
+  moss_collar_perimeter_samples: {'rock': 184, 'grock': 134, 'pond': 536, 'step': 132, 'other': 137}
+  pond_water_faces: 842
+  pond_depth_max_m: 0.459
+  pond_bed_faces: 1040
+  pond_pebbles: 360
+  lily_pads: 17
+  iris_clumps: 5
+  pine_pads: 8
+  pine_pad_faces: 768
+  shrubs_lantern: 2
+  shrubs_rocks_A: 2
+  shrubs_rocks_B: 2
+  shrubs_pine: 5
+  shrubs_block_lantern_window: False
+  shrubs: 11
+  shrub_faces: 440
+  bamboo_inside_out_pieces_flipped: {'Bamboo stalks': 2, 'Bamboo fence': 0}
+  fallen_leaves: 84
+  fallen_leaves_on_water: 9
+
+=== 4. LIVE SCATTER (the add-on, patched copy): counts against what the records predict, and where the pieces really stand ===
+--- real
+  scatter_moss: {'candidates': 1606, 'retained_after_footprint': 1264, 'expected_kept': 979.2, 'instances': 980, 'within_12pct': True}
+  scatter_tuft: {'candidates': 287, 'retained_after_footprint': 261, 'expected_kept': 187.1, 'instances': 174, 'within_12pct': True}
+  scatter_pebble: {'candidates': 483, 'retained_after_footprint': 475, 'expected_kept': 437.0, 'instances': 445, 'within_12pct': True}
+  stands: Life / moss at feet and damp edges: {'instances': 980, 'min_distance_to_stepping_path_m': 0.96, 'inside_gravel_court': 136, 'below_waterline': 18, 'z_range_m': [-0.152, 0.216]}
+  stands: Life / pebble fringe: {'instances': 445, 'min_distance_to_stepping_path_m': 0.921, 'inside_gravel_court': 0, 'below_waterline': 0, 'z_range_m': [-0.132, -0.01]}
+  stands: Life / tufts: {'instances': 174, 'min_distance_to_stepping_path_m': 1.111, 'inside_gravel_court': 0, 'below_waterline': 1, 'z_range_m': [-0.148, 0.218]}
+--- painted
+  scatter_moss: {'candidates': 1286, 'retained_after_footprint': 1145, 'expected_kept': 962.1, 'instances': 959, 'within_12pct': True}
+  scatter_tuft: {'candidates': 293, 'retained_after_footprint': 266, 'expected_kept': 185.3, 'instances': 173, 'within_12pct': True}
+  scatter_pebble: {'candidates': 488, 'retained_after_footprint': 481, 'expected_kept': 442.5, 'instances': 450, 'within_12pct': True}
+  stands: Life / moss at feet and damp edges: {'instances': 959, 'min_distance_to_stepping_path_m': 0.96, 'inside_gravel_court': 136, 'below_waterline': 13, 'z_range_m': [-0.152, 0.216]}
+  stands: Life / pebble fringe: {'instances': 450, 'min_distance_to_stepping_path_m': 0.972, 'inside_gravel_court': 0, 'below_waterline': 0, 'z_range_m': [-0.13, -0.01]}
+  stands: Life / tufts: {'instances': 173, 'min_distance_to_stepping_path_m': 0.987, 'inside_gravel_court': 0, 'below_waterline': 0, 'z_range_m': [-0.131, 0.221]}
+  (moss inside the gravel court = the collars round the three gravel rocks, by design; no stepping-stone moss because the stones lie on the raked court and the
+   keep-clear rule (half the path width, 0.575 m) takes the path itself)
+
+=== 5. DELIVERY CHECK (Scenario expert skill, bx_audit.deliverable, profile render) on the objects this stage owns ===
+--- real
+  maple_mass: pass=False errors=1 warnings=1 :: Maple inner mass: 9 floating fragments (82% of its faces), nearest 0.0725 from the rest
+  pine_pads: pass=False errors=2 warnings=1 :: Pine pads, between its own parts: 14 coplanar overlapping faces (z-fighting) | Pine pads: 1973 floating fragments (76% of its faces), nearest 0.0594 from the rest
+  pond_bed_and_pebbles: pass=False errors=1 warnings=1 :: Life / pond pebbles: 249 floating fragments (38% of its faces), nearest 0.0717 from the rest
+  pond_surface_plants: pass=False errors=2 warnings=1 :: Life / iris clumps, between its own parts: 2 coplanar overlapping faces (z-fighting) | Life / iris clumps: 4 floating fragments (4.5% of its faces), nearest 0.0749 from the rest
+  shrubs: pass=False errors=1 warnings=0 :: Life / shrubs: 9 floating fragments (82% of its faces), nearest 3.65 from the rest
+  fallen_leaves: pass=False errors=1 warnings=0 :: Fallen leaves: 82 floating fragments (98% of its faces), nearest 1 from the rest
+  bamboo_stalks: pass=False errors=2 warnings=1 :: Bamboo stalks, between its own parts: 1052 coplanar overlapping faces (z-fighting) | Bamboo stalks: 416 floating fragments (79% of its faces), nearest 0.13 from the rest
+  bamboo_fence: pass=False errors=1 warnings=0 :: Bamboo fence, between its own parts: 4 coplanar overlapping faces (z-fighting)
+  add-on audit of Life / moss at feet and damp edges: all checks true = True
+  add-on audit of Life / pebble fringe: all checks true = True
+  add-on audit of Life / tufts: all checks true = True
+--- painted
+  maple_mass: pass=False errors=1 warnings=0 :: Maple inner mass: 10 floating fragments (91% of its faces), nearest 0.134 from the rest
+  pine_pads: pass=False errors=1 warnings=0 :: Pine pads: 7 floating fragments (88% of its faces), nearest 0.0887 from the rest
+  pond_bed_and_pebbles: pass=False errors=1 warnings=1 :: Life / pond pebbles: 140 floating fragments (39% of its faces), nearest 0.0706 from the rest
+  pond_surface_plants: pass=True errors=0 warnings=0 :: 
+  shrubs: pass=False errors=1 warnings=0 :: Life / shrubs: 9 floating fragments (82% of its faces), nearest 3.63 from the rest
+  fallen_leaves: pass=False errors=1 warnings=0 :: Fallen leaves: 82 floating fragments (98% of its faces), nearest 1.29 from the rest
+  bamboo_stalks: pass=False errors=2 warnings=1 :: Bamboo stalks, between its own parts: 1052 coplanar overlapping faces (z-fighting) | Bamboo stalks: 416 floating fragments (79% of its faces), nearest 0.13 from the rest
+  bamboo_fence: pass=False errors=1 warnings=0 :: Bamboo fence, between its own parts: 4 coplanar overlapping faces (z-fighting)
+  add-on audit of Life / moss at feet and damp edges: all checks true = True
+  add-on audit of Life / pebble fringe: all checks true = True
+  add-on audit of Life / tufts: all checks true = True
+  Reading: every error is either (a) pieces that are separate by design (leaf lenses, needle pads, shrubs, pebbles, fallen leaves, iris) and that the check calls floating
+  because the ground is not in their group, or (b) bamboo stalk caps that coincide inside the culms (1,052 faces; 1,056 before this stage, not made by it and not visible).
+  Pine needle tufts (real look) give 14 coincident faces. Support was measured separately: shrub domes sink 4 cm into the ground, fallen leaves lie 6 mm over it,
+  pads sit on the old limbs (limb tips end 7 cm inside each pad) and the new satellite limbs end inside their pads.
+
+=== 6. FACE COUNTS (the whole scene, instances counted as the renderer sees them) ===
+  before the stage: meshes 229,050 + instances 0 = 229,050 faces (97 renderable objects)
+  real: meshes 110,606 + instances 2,539,200 = 2,649,806 faces (122 renderable objects)
+  painted: meshes 102,553 + instances 1,374,540 = 1,477,093 faces (122 renderable objects)
+  (the roof tiles are instanced by the add-on and are not counted by this counter in any of the three lines)
+
+=== 7. PICTURES DRAWN ON RUNPOD (Cycles, OptiX, per second) ===
+  pics_r3/painted_log.json: device OPTIX:NVIDIA GeForce RTX 4090,NVIDIA GeForce RTX 4090; stage 3.9 s; pictures {'hero': 3.8, 'pond': 2.5, 'maple': 2.6, 'rocks': 2.4, 'lantern': 2.3}
+  pics_r3/real+shapes_log.json: device OPTIX:NVIDIA L4,NVIDIA L4; stage 14.4 s; pictures {'hero': 5.7, 'veranda': 3.8, 'rocks': 4.5}
+  pics_r3/real_log.json: device OPTIX:NVIDIA GeForce RTX 4090,NVIDIA GeForce RTX 4090; stage 12.3 s; pictures {'hero': 4.5, 'pond': 3.4, 'maple': 3.6, 'rocks': 3.3, 'lantern': 3.3, 'hero@eevee': 25.5}
+  pics_r4/painted_log.json: device OPTIX:NVIDIA GeForce RTX 4090,NVIDIA GeForce RTX 4090; stage 4.3 s; pictures {'hero': 3.1, 'maple': 2.8, 'pond': 2.5, 'rocks': 2.6}
+  pics_r4/real_log.json: device OPTIX:NVIDIA L4,NVIDIA L4; stage 7.9 s; pictures {'hero': 5.5, 'maple': 5.3, 'pond': 4.6, 'rocks': 4.6}
+  pics_r5/painted_log.json: device OPTIX:NVIDIA GeForce RTX 4090,NVIDIA GeForce RTX 4090; stage 8.7 s; pictures {'hero': 14.0}
+  pics_r5/real_log.json: device OPTIX:NVIDIA L4,NVIDIA L4; stage 7.8 s; pictures {'hero': 20.2}
+  Billed work per job as reported by RunPod (seconds): round 1 real 37.6, painted 22.5; round 2 real 45.6, painted 34.3; round 3 real 73.1, painted 27.9, shapes+life 40.0;
+  round 4 real 41.2, painted 26.7; round 5 (2400 x 1600) real 40.5, painted 37.1. Total 426.6 s over 11 render jobs, plus about 1.5 minutes of uploads and wake-ups.

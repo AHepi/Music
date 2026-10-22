@@ -1,0 +1,91 @@
+TEST REPORT - builder 4 "light" (sky, hills, lights, light layers, cameras, render job) - 21 October
+Folder: proc-work/garden/light/
+
+WHAT IS DELIVERED
+  stage_light.py     one function  apply(options)  (+ apply_evening(options)); options look 'real' | 'painted'
+  render_job.py      draws ONE picture on the graphics card (OptiX, else CUDA), proves the card is used, writes PNG + multi-layer EXR with every light group,
+                     and a .json log (engine, device, samples, seed, view transform, exposure, size, camera, seconds, SHA-256 of the scene and of each file)
+  regrade.py         after drawing: turn any light group up or down (or recolour it) from the EXR, same finish, about 3 seconds, no card needed
+  test_stage_light.py, chain_job.py, rp_round1-5.sh   the tests and the RunPod batches that were run (kept as a record)
+  out/               this report, the test JSONs, the logs of the final RunPod pictures (out/logs), small previews (out/previews), two extra sheets
+  Pictures for the person (3): in "30 Japanese garden - pictures/": "30 Light - ..." (whole view; veranda and evening; all the way round)
+
+HOW THE FINAL STEP USES IT
+  1. optional, FIRST (the weathering kit looks for a camera called "photo"):   stage_light.apply({'steps': ['cameras']})
+  2. LAST, after shapes, life, surfaces, weathering:                          stage_light.apply({'look': 'real'})      # or 'painted'
+  3. save garden_real.blend / garden_painted.blend, then one picture per run:
+       blender -b --disable-autoexec FILE.blend -P render_job.py -- --out /abs/base --camera photo --size 2400x1600 --samples 512 --seed 7 --exr --require-gpu
+     (camera 'veranda' for the second view; --exr writes the light-group layers; add --check-groups to get the "groups add up" number)
+  4. evening picture: apply_evening({'look':'real'}) after apply(), or give render_job.py  --evening  (it applies it for you)
+  5. re-balance after drawing:  blender -b --disable-autoexec -P regrade.py -- base.exr out_base --gain hall=0.5 --gain sun=1.1,1.0,0.9
+  Useful options of apply: sun_energy (12), fill_energy (2600), rim_energy (4.5), roof_energy (5000; 0 = no roof lamp), exposure (0.5), vignette (0.55), bloom (0.05).
+
+TEST 1 - the stage on its own, both looks (local, Blender 5.2.2, starting file opened read-only and never saved)
+  Method: fingerprint of all 117 objects and 134 materials (place, size, vertex sums, material slots, visibility, light values) before and after.
+  Both looks gave the same list:
+   - NEW objects (5): Hills, farthest / Hills, foot (two more ridges); Rim light (maple, hall edge); Roof lift (hall roof only); veranda (camera).
+     Plus 3 new materials: Hills, farthest haze / Hills, foot haze / Dark plain ground. The old material "Far hill" is now unused.
+   - RENAMED (1): the hero camera "Camera" -> "photo". Same place, same rotation, same lens (26 mm), same depth of field (focus object "Focus", f/3.2). Checked: yes.
+   - CHANGED, mine: Golden hour sun (strength 8 -> 12; its direction is exactly as before: checked), Cool sky fill (3500 -> 2600 W, bluer), Lantern light
+     (120 -> 18 W), material Lantern flame (strength 80 -> 7), Hills, far / middle / near (new 360-degree shape and colours), Dark plain (new shape and material),
+     the world "Golden hour" (rebuilt), render settings (caustics off) and the compositor (bloom, vignette). Hall glow lamps and Shoji paper glow: unchanged values.
+   - CHANGED, not mine, name of the light group only (never shape, colour or material): Bamboo leaves, Fallen leaves, Lotus blossoms, Maple inner mass, Maple leaves,
+     Pine pads (all -> group "rest", so the layers add up). The maple parts and the hall roof are also LISTED as receivers of the two linked lamps (that changes nothing on them).
+   - DELETED: none.      UNEXPECTED changes found by the check: none (both looks, first run, second run, evening on top).
+   - Running the stage a second time: nothing new made, nothing else changed.
+   - Names the kit relies on are all still there (photo, Golden hour sun, Lantern window glow, Hall posts); no object lost a material.
+   - Evening variant on top of the main stage: changes only sun (0), fill, rim, roof lamp, Lantern light, Lantern flame, world and hills.
+  Files: out/test_real.json, out/test_painted.json
+
+TEST 2 - the same stage after the other two finished stages (extra check, not asked for)
+  Local: shapes -> life -> light, both looks: no error, no object without a material, light groups assigned, camera 'photo'.
+  RunPod: 3 pictures (hero real, hero painted, veranda real) - see out/chain_check_shapes_life_light.jpg. The light sits well on the new maple, pine, lantern and kerbs.
+  (chain_job.py needs copies of stage_shapes.py, stage_life.py, astra_loader.py in work/chain/ - I deleted the copies to save disk; copy them back from the two builders' folders to repeat.)
+
+TEST 3 - pictures on RunPod (Cycles on the card, OptiX, NVIDIA RTX 4090 every time; the job fails if no card, --require-gpu)
+  960 x 640, 192 samples, denoised: 2.5 to 6 s of drawing each (about 8 s more for Blender to start). 360-degree 2400 x 1000, 64 samples: 4.9 s. EEVEE 480 x 320: 10 s.
+  Hero view, original photo beside the two new looks (numbers from the pictures themselves; the original is the 2400 x 1600 photo shrunk):
+                                           original   real    painted
+    sky band (top 9 percent) brightness     0.551     0.462   0.466     (0 black .. 1 white, on the finished picture)
+    screens brightness                       0.726     0.778   0.778
+    screens divided by sky                   1.32      1.68    1.67      sky is now clearly below the screens (plan: "well below")
+    edge divided by centre brightness        1.11      0.87    0.88      plan target about 0.8: not quite reached (vignette 0.55; more would crush the corners)
+    roof band (tiles) mean brightness        0.139     0.255   0.256     lifted
+    roof band share nearly black             9.7 %     4.2 %   4.2 %
+    white wall, in shade, blue / red         0.87      1.12    1.12      shadows are now cool (before: warm)
+    white wall, in sun, blue / red           0.80      0.79    0.79      the low sun stays as warm as before
+    whole picture mean / 5th percentile      0.331/0.081  0.314/0.043  0.316/0.043   darker darks (weak point, see below)
+  Lantern window against the stone around it (linear picture): golden hour 3.3 stops brighter (dim, a lit opening); evening 6.2 stops over the median stone,
+  4.9 over the mean (plan: 3 to 6). Pond reflection of the lantern: NOT visible from the hero camera (the lantern stands beside the pond, its mirror image falls on land).
+  Sun in the veranda view: it sits behind the maple crown at the top of the picture as a soft glow; no disc, no blown rectangle. Checked by eye on 3 pictures.
+  Hills: the 360-degree picture (from the gravel court) shows ridges all round with no gap and no dark slab; seam invisible. Looked at in both looks.
+  Light groups (hero, realistic): do the layers add up to the picture? 0.6 percent difference when drawn without the denoiser (two pictures), 2 percent when the
+  picture is denoised (the layers are not). Share of the frame: sun 29, sky+hills 30, hall glow 32, fill 9, rim 0.35 (only maple and roof edge: seen in its layer),
+  lantern 0.35, rest 0.4.   Re-balance test: regrade.py with every gain 1 gives the drawn picture to 0.7 of 255 on average (it denoises the sum itself).
+  Seed 7, view transform AgX "AgX - Punchy", exposure 0.5 (evening 1.4); logs with file hashes: out/logs/*.json
+
+WHAT WAS NOT TESTED / NOT SEEN
+  - No full-size picture (2400 x 1600 at 384-512 samples) was drawn. Estimate from the 960 x 640 numbers: about 40 to 60 s of card time each; not measured.
+  - Not tested after the surfaces and weathering stages (they do not exist yet): their materials may change how the sky and the rim light read.
+  - Noise of the bright sun glow in the sky at high samples; the OptiX denoiser (only OIDN used).
+  - Evening variant was drawn only on the starting file (not on shapes + life): the maple stays bright orange there because its leaf material emits a little light of its own
+    (builder 2's material); lowering that emission in the evening is not done by this stage.
+  - The pond's white mirror patches of the screens are still there (the pond belongs to builder 2); this stage only made the sky they reflect less bright.
+  - Light linking was checked by looking at the rim layer (only maple and roof edge lit), not by a pixel mask.
+
+THINGS I AM UNSURE ABOUT (my judgment, easy to change with the options above)
+  - Sun strength 12 instead of 8, fill 2600 instead of 3500: chosen by eye from three pictures (8, 10, 12); the plan did not give a number.
+  - Bloom starts at 2.0 (not 1.0) so that only the screens and the lantern glow; sunlit gravel and wall do not bloom.
+  - The rim lamp comes from the north-west although the sun is in the south-west: an artistic cheat, allowed by the plan ("back-light the maple"), linked to the maple and roof only.
+  - Painted look: sky as flat brush-edged bands with three flat rings round the sun; hills as unequal flat planes (3 to 9 degrees wide, uneven rows), each plane one flat tone
+    chosen by how it faces the sun. Light itself (sun, fill, rim, roof lamp, lantern) is the same in both looks, as the plan says.
+  - 5.2 note: the Image node must be told layer 'ViewLayer' or it shows no light-group layers (regrade.py does that).
+
+WHAT WENT WRONG ALONG THE WAY (all fixed)
+  1 First sky was too cool and lilac (lost the golden mood); rim lamp first as a weak area lamp (0.04 percent of the frame) -> warmer sky, rim as a stronger sun-type lamp.
+  2 First "groups add up" check read every layer as the same one (wrong argument) and reported nonsense; fixed, then 0.6 percent.
+  3 regrade.py first found no light layers (needs layer 'ViewLayer'); first version was noisy (layers are not denoised) -> added a denoise step.
+  4 Workbench picture needs xvfb-run on this computer (no libEGL).
+  5 I updated the real-look sky colours but forgot the painted-look ones for two rounds; noticed on the side-by-side, fixed in the last round.
+  6 One waiting command hit the 120 s tool limit (the RunPod job itself was fine). One "status" ping woke a worker (a few seconds billed).
+  7 Disk free fell to 680 MB at one point (others also write); I deleted my scratch pictures; this folder is now small.

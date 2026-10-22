@@ -1,0 +1,309 @@
+{
+ "source": "api.polyhaven.com (assets?t=textures and files/<id>), checked 21 Oct 2026; licence page https://polyhaven.com/license says every asset is CC0 (public domain, no credit needed)",
+ "url_pattern": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/<1k|2k|4k>/<id>/<id>_<diff|rough|nor_gl|disp|ao|arm>_<1k|2k>.jpg",
+ "maps_every_one_has": [
+  "Diffuse",
+  "Rough",
+  "nor_gl (OpenGL normal, Blender's kind)",
+  "nor_dx",
+  "Displacement",
+  "AO",
+  "arm (AO+Rough+Metal packed)"
+ ],
+ "size_note": "2k set (diffuse+rough+nor_gl+disp, jpg) is roughly 7 to 13 MB per surface; 1k about 1.5 MB. Disk here is tight: take 1k unless it is a near-camera surface.",
+ "no_personal_data_sent": "requests carried the generic agent 'Mozilla/5.0 (texture-research)' only",
+ "surfaces": [
+  {
+   "use": "roof tiles (kawara)",
+   "id": "grey_roof_tiles",
+   "name": "Grey Roof Tiles",
+   "real_size_m": 3.0,
+   "artists": [
+    "Rob Tuytel"
+   ],
+   "why": "charcoal-grey overlapping ceramic with moss and damp; closest to the add-on's near-black tile",
+   "caution": "the add-on roof is real instanced tiles: use the scan for colour/roughness/moss pattern or a flat roof deck, not as a replacement without a look at the geometry; it carries its own moss"
+  },
+  {
+   "use": "roof tiles (alt)",
+   "id": "roof_07",
+   "name": "Roof 07",
+   "real_size_m": 2.0,
+   "artists": [
+    "Rob Tuytel"
+   ],
+   "why": "dark worn ceramic, olive moss",
+   "caution": "brownish"
+  },
+  {
+   "use": "roof tiles (alt)",
+   "id": "roof_tiles_14",
+   "name": "Roof Tiles 14",
+   "real_size_m": 1.5,
+   "artists": [
+    "Rob Tuytel"
+   ],
+   "why": "dark brown ceramic, weathered",
+   "caution": "warmer than the add-on tile"
+  },
+  {
+   "use": "veranda deck",
+   "id": "weathered_planks",
+   "name": "Weathered Planks",
+   "real_size_m": 2.0,
+   "artists": [
+    "Dario Barresi",
+    "Dimitrios Savva"
+   ],
+   "why": "dark silver-brown boards, worn",
+   "caution": "planks run across the picture: rotate the mapping to the add-on's plank axis (y)"
+  },
+  {
+   "use": "veranda deck (alt)",
+   "id": "old_wood_floor",
+   "name": "Old Wood Floor",
+   "real_size_m": 3.0,
+   "artists": [
+    "Guillaume Monsergent"
+   ],
+   "why": "dark worn deck boards",
+   "caution": ""
+  },
+  {
+   "use": "bridge boards",
+   "id": "wood_planks_grey",
+   "name": "Wood Planks Grey",
+   "real_size_m": 1.5,
+   "artists": [
+    "Rob Tuytel"
+   ],
+   "why": "silver-grey weathered boards, the look of a pond bridge",
+   "caution": ""
+  },
+  {
+   "use": "bridge boards (alt)",
+   "id": "weathered_plank_siding",
+   "name": "Weathered Plank Siding",
+   "real_size_m": 1.57,
+   "artists": [
+    "Dimitrios Savva"
+   ],
+   "why": "rough grey-brown boards",
+   "caution": ""
+  },
+  {
+   "use": "posts, beams, shoji frames",
+   "id": "hinoki_planks",
+   "name": "Hinoki Planks",
+   "real_size_m": 1.89,
+   "artists": [
+    "Charlotte Baglioni"
+   ],
+   "why": "Japanese cypress, the real temple timber; pale gold - darken/age for old posts",
+   "caution": "16K source; new asset (2026-09)"
+  },
+  {
+   "use": "posts, beams (dark alt)",
+   "id": "dark_planks",
+   "name": "Dark Planks",
+   "real_size_m": 2.0,
+   "artists": [
+    "Rob Tuytel"
+   ],
+   "why": "dark overlapping planks",
+   "caution": ""
+  },
+  {
+   "use": "hall plaster (clean)",
+   "id": "white_stucco",
+   "name": "White Stucco",
+   "real_size_m": 2.0,
+   "artists": [
+    "Amal Kumar"
+   ],
+   "why": "pale granular plaster, matte",
+   "caution": ""
+  },
+  {
+   "use": "hall plaster (alt)",
+   "id": "plastered_wall",
+   "name": "Plastered Wall",
+   "real_size_m": 2.0,
+   "artists": [
+    "Amal Kumar"
+   ],
+   "why": "pale plaster with a little wear",
+   "caution": "16K source"
+  },
+  {
+   "use": "garden wall (earthen dobei)",
+   "id": "worn_plaster_wall",
+   "name": "Worn Plaster Wall",
+   "real_size_m": 1.8,
+   "artists": [
+    "Dimitrios Savva"
+   ],
+   "why": "tan plaster with worn patches",
+   "caution": ""
+  },
+  {
+   "use": "garden wall foot / damp",
+   "id": "worn_cracked_plaster",
+   "name": "Worn Cracked Plaster",
+   "real_size_m": 1.8,
+   "artists": [
+    "Amal Kumar"
+   ],
+   "why": "fine map cracks",
+   "caution": ""
+  },
+  {
+   "use": "garden wall (already mossy)",
+   "id": "worn_mossy_plasterwall",
+   "name": "Worn Mossy Plasterwall",
+   "real_size_m": 1.8,
+   "artists": [
+    "Amal Kumar"
+   ],
+   "why": "moss already painted in",
+   "caution": "do not combine with kit moss on the same wall"
+  },
+  {
+   "use": "pond rocks",
+   "id": "rock_boulder_dry",
+   "name": "Rock Boulder Dry",
+   "real_size_m": 1.8,
+   "artists": [
+    "Dimitrios Savva",
+    "Rico Cilliers"
+   ],
+   "why": "pale grey weathered boulder",
+   "caution": ""
+  },
+  {
+   "use": "lantern, steps",
+   "id": "rock_08",
+   "name": "Rock 08",
+   "real_size_m": 1.5,
+   "artists": [
+    "Rob Tuytel"
+   ],
+   "why": "beige pitted granite-like stone",
+   "caution": ""
+  },
+  {
+   "use": "shaded rock sides",
+   "id": "lichen_rock",
+   "name": "Lichen Rock",
+   "real_size_m": 2.0,
+   "artists": [
+    "Rico Cilliers"
+   ],
+   "why": "dark rock with lichen",
+   "caution": "carries lichen already"
+  },
+  {
+   "use": "plinth slab",
+   "id": "japanese_stone_wall",
+   "name": "Japanese Stone Wall",
+   "real_size_m": 1.8999998569488525,
+   "artists": [
+    "Rico Cilliers",
+    "Charlotte Baglioni",
+    "Dario Barresi"
+   ],
+   "why": "ashlar stone blocks",
+   "caution": "regular joints; check scale"
+  },
+  {
+   "use": "raked gravel (pale)",
+   "id": "gravel_floor_02",
+   "name": "Gravel Floor 02",
+   "real_size_m": 2.0,
+   "artists": [
+    "Jenelle van Heerden",
+    "Dimitrios Savva"
+   ],
+   "why": "light grey gravel, the right pale value",
+   "caution": "rake lines are real geometry: keep them"
+  },
+  {
+   "use": "raked gravel (white)",
+   "id": "sandy_gravel",
+   "name": "Sandy Gravel",
+   "real_size_m": 2.1,
+   "artists": [
+    "Charlotte Baglioni"
+   ],
+   "why": "near-white fine gravel",
+   "caution": ""
+  },
+  {
+   "use": "pond-edge pebbles",
+   "id": "clean_pebbles",
+   "name": "Clean Pebbles",
+   "real_size_m": 2.0,
+   "artists": [
+    "Dario Barresi",
+    "Charlotte Baglioni"
+   ],
+   "why": "small round grey pebbles",
+   "caution": ""
+  },
+  {
+   "use": "pond shore stones",
+   "id": "dry_river_pebbles",
+   "name": "Dry River Pebbles",
+   "real_size_m": 2.0,
+   "artists": [
+    "Amal Kumar"
+   ],
+   "why": "loose river stones",
+   "caution": ""
+  },
+  {
+   "use": "maple trunk",
+   "id": "trident_maple_bark",
+   "name": "Trident Maple Bark",
+   "real_size_m": 1.8,
+   "artists": [
+    "Charlotte Baglioni"
+   ],
+   "why": "a real maple relative's bark",
+   "caution": ""
+  },
+  {
+   "use": "pine trunk",
+   "id": "knotted_pine_bark",
+   "name": "Knotted Pine Bark",
+   "real_size_m": 1.7,
+   "artists": [
+    "Dimitrios Savva"
+   ],
+   "why": "dark knotty pine bark",
+   "caution": "the trunks are CURVE objects: UVs/bevel UVs differ"
+  },
+  {
+   "use": "pine trunk (red alt)",
+   "id": "pine_bark",
+   "name": "Pine Bark",
+   "real_size_m": 2.0,
+   "artists": [
+    "Dimitrios Savva"
+   ],
+   "why": "reddish scaly bark",
+   "caution": ""
+  },
+  {
+   "use": "mossy ground",
+   "id": "forest_leaves_02",
+   "name": "Forest Leaves 02",
+   "real_size_m": 3.0,
+   "artists": [
+    "Rob Tuytel"
+   ],
+   "why": "moss and leaf litter floor",
+   "caution": "carries moss already: use under the add-on moss, not with the kit's moss"
+  }
+ ]
+}

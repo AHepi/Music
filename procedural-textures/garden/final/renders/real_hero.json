@@ -1,0 +1,107 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "proc-work/garden/final/garden_real.blend",
+ "args": {
+  "out": "proc-work/garden/final/renders/real_hero",
+  "camera": "photo",
+  "size": "2400x1600",
+  "samples": 512,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": true,
+  "check_groups": true,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "9aa0c82e4704fe43077802e930659b91a542fb573918d1937de045ae77acfdde",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD EPYC 7352 24-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 512,
+ "seed": 7,
+ "camera": "photo",
+ "size": [
+  2400,
+  1600,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 39.07,
+ "files": {
+  "exr": {
+   "path": "proc-work/garden/final/renders/real_hero.exr",
+   "bytes": 41359877,
+   "sha256": "3483f2b2353c131ce8862d0d02771048efe93cad74f619879e15961a2158ed7e"
+  },
+  "png": {
+   "path": "proc-work/garden/final/renders/real_hero.png",
+   "bytes": 5881376,
+   "sha256": "390c1a1b7cf4ababd64ea3663443dbfeef08f6f833479852996675145811c9a2"
+  }
+ },
+ "group_check": {
+  "groups": [
+   "Combined_sun",
+   "Combined_rim",
+   "Combined_sky",
+   "Combined_fill",
+   "Combined_hall",
+   "Combined_lantern",
+   "Combined_rest"
+  ],
+  "rel_error": 0.01194,
+  "share": {
+   "sun": 0.2997,
+   "rim": 0.0034,
+   "sky": 0.3014,
+   "fill": 0.1142,
+   "hall": 0.271,
+   "lantern": 0.0054,
+   "rest": 0.0045
+  },
+  "denoise_on": true
+ }
+}

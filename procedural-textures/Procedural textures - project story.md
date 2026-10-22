@@ -57,7 +57,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   file per place, looks as presets). On the street it works but, after calming, adds little you can see at film size except rust and small weeds; the
   courtyard took it from a settings file alone and turned visibly mossy. Three things block the courtyard job (roof, long garden wall, per-material dials).
 - **EEVEE and Cycles compared (log 26)** and **the wet street is in the real film (log 27).**
-- **Nothing running now. All rented machines are ended (18:44).** Waiting for your instructions.
+- **Pay-per-second rendering works (log 29):** a RunPod "serverless" endpoint: a card starts only when a picture is waiting and stops about 5 seconds after, so idle time costs nothing. EEVEE and Cycles both proven on it.
+- **Japanese garden done in both looks (log 30):** realistic and painted, drawn with Cycles on the pay-per-second route; a fresh checker: the realistic one "reads as a real temple garden at golden hour", the painted one "nearly" follows your add-on's rules and your own words.
+- **Nothing running.** Pay-per-second workers stand by free of charge (checked against RunPod's hourly bill).
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -383,7 +385,44 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     the repository (removed from both scripts before saving; this folder had never been saved before, and every earlier save was checked for it). Future
     helper briefs should say: never put the person's email or name into requests to outside websites.
 
+29. **Pay-per-second rendering.** You said: "Then render on runpod. There's an option where you only pay per second used. So you don't pay for
+    seconds or minutes not used." Today's always-on machine ran 13 hours (about US$11.60), much of it waiting between jobs. **Built:** a RunPod
+    "serverless" endpoint: a worker (a card) starts only when a job waits, runs it, and stops about 5 seconds after its last job; billing is per
+    second while a worker is up (RTX 4090: US$1.10 an hour, about 0.03 US cents a second). No custom software image was needed: the workers use a
+    plain Ubuntu image, and everything else lives on our Romania store: Blender, a small job taker run by the Python that ships inside Blender,
+    RunPod's job library, and 60 system libraries copied from a normal machine so Blender can draw. A new client (`render_client_serverless.py`)
+    has the same commands as before (upload, run, wait, download); files go in 6 MB pieces. **Proven:** a cold worker woke in 20-22 s; the wet
+    street with EEVEE on the card (wet picture 5.8 s, whole job 31.6 s billed, about one US cent); Cycles on the card through OptiX (128 samples,
+    5.2 s), with a warm worker answering in half a second. **Failures on the way:** RunPod's newer interface started answering "authentication
+    failed" mid-setup; I checked that your key was fine (their older interface accepted it, a wrong key got a clean refusal) and built the
+    endpoint through the older interface instead; the job library pulled 2 GB of extras onto the store (only the parts used are read). **Not
+    tested yet:** what RunPod's bill shows for these seconds (their billing page was down), long renders near the 55-minute job limit.
+    Guide for helpers: `runpod/HOW TO RENDER - pay per second.md` (scratch folder, not in the repository).
+
+30. **The Japanese garden, with all the advice, in both looks.** You said: "Ok. Can you work on the Japanese garden using all the advice
+    available. Then render on runpod." and, asked which look, "Both, side by side". **Study (five helpers):** your Astra add-on's 17 guidance
+    documents and all 83 lessons (its painted rules: broad unequal colour passages, marks that differ by material, chiselled unequal planes, and your
+    own recorded words "No rounded smooth curves. Just edges and flat surfaces that approximate a curve"); everything learned on the street; an
+    inspection of the scene (it found a veranda step floating 23 cm in the air, bridge posts 2-7 cm short of the boards, wall caps floating 6.5 cm,
+    a lantern glow buried inside solid stone, 77 deck faces fighting the plinth); research on real temple gardens (gravel should be pale grey
+    granite, not pink-brown; maple leaves 4-12 cm, not 20-34 cm; rocks half-buried with moss collars). One plan ranked 11 improvements by what a
+    viewer notices. **Build (four builders, then one combiner):** repairs and new shapes (all floating parts fixed; a carved six-sided lantern
+    with a lit window; rocks rebuilt, deeper set; straight rake lines every 12 cm with rings and a kerb; battered walls with tile caps; a basin
+    set), living things (56,000 real-size maple leaves in layers, moss and tufts grown with your add-on's live scatter after a 3-line fix for
+    Blender 5.2, a pine with needle sprays, clear pond water), surfaces (photo-scanned Poly Haven stone, wood, plaster, gravel, roof and ground for
+    the realistic look; broad brushed colour with your add-on's pigment tool and flat-shaded planes for the painted look; the weathering kit on
+    top, its three courtyard blockers fixed), light (a graded dusk sky instead of one flat orange, hills fading with distance, cooler shadows, each
+    light on its own layer). **Pictures (Cycles, RTX 4090, pay per second):** the original view in both looks, the veranda view in both looks,
+    and a blue evening with the lantern lit. **Checks:** two fresh checkers, a fix round (white shards on the pond were the hall lamps mirrored,
+    now hidden from reflections; black corners lifted; painted sun rings and ground made straight-edged; a needle pine; tufts varied), a re-check:
+    realistic "yes", painted "nearly", both "better than the original" "yes". **Still weak:** the far hedge in the veranda view reads as dark
+    boulders; the painted original view still has one long smooth curve in its sky and smooth-shaded ground; the evening pictures were not redrawn
+    after the fix round (old pond shards); the lantern's light sits inside its glow box. **Cost:** about 47 minutes of card time in all;
+    RunPod's hourly bill for the endpoint: US$1.21 to midnight plus about US$0.20 after. A checker worried that three "idle" workers stayed up
+    for 40 minutes; RunPod's own hour-by-hour bill shows they cost nothing (they are free standby for a fast start). Pictures: `30 Japanese
+    garden - pictures/` (start with the two "30 Final" sheets); plan: `garden/30 Plan - Japanese garden - all the advice.md`.
+
 ## Next step
 
-Waiting for your instructions (you asked me to stop after these jobs). When you pick it up, the obvious candidates are the courtyard job (with the three kit
-blockers fixed first) and the immersive camera through the full street, using Cycles where the lights are on.
+Your pick between the realistic and painted garden (or both kept). Then the cheapest fixes left: the veranda hedge, the painted sky curve, and
+redrawing the blue evening with the fix round's changes (a few cents on the pay-per-second route).

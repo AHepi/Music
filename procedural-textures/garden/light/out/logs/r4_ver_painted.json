@@ -1,0 +1,103 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "scratchpad/astra-work/out/courtyard_final.blend",
+ "args": {
+  "out": "proc-work/garden/light/out/rp/r4/ver_painted",
+  "camera": "veranda",
+  "size": "960x640",
+  "samples": 192,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": "painted",
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": false,
+  "check_groups": false,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": {
+  "look": "painted",
+  "created": [
+   "Hills, farthest",
+   "Hills, foot",
+   "Rim light (maple, hall edge)",
+   "Roof lift (hall roof only)",
+   "veranda"
+  ],
+  "changed": [
+   "Camera -> photo",
+   "Cool sky fill",
+   "Dark plain",
+   "Golden hour sun",
+   "Hills, far",
+   "Hills, middle",
+   "Hills, near",
+   "Lantern light",
+   "Material:Lantern flame",
+   "Scene render settings and compositor",
+   "ViewLayer lightgroups",
+   "World:Golden hour"
+  ]
+ },
+ "scene_sha256": "074212b261ca8c90a1aa28090bb1552961b897ab2b04d8efd845747df39ec6f5",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ],
+   [
+    "AMD EPYC 7352 24-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 192,
+ "seed": 7,
+ "camera": "veranda",
+ "size": [
+  960,
+  640,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 3.47,
+ "files": {
+  "png": {
+   "path": "proc-work/garden/light/out/rp/r4/ver_painted.png",
+   "bytes": 813392,
+   "sha256": "6489eca2e1e7e42809662f6763a27043ee7e7f9ca4f5a580331285e50895cc74"
+  }
+ }
+}

@@ -1,0 +1,1380 @@
+{
+ "schema": "weathering-dials/1",
+ "note": "Generated from the design helper's list (design/work/make_dials.py). Builders may add finer dials with dials.register_layer().",
+ "common": [
+  {
+   "name": "amount",
+   "lo": 0.0,
+   "hi": 2.0,
+   "unit": "",
+   "default": 1.0,
+   "doc": "Master dial of the layer. 0 = the surface is exactly as it was before the layer. 1 = normal. 2 = double."
+  },
+  {
+   "name": "seed",
+   "lo": 0.0,
+   "hi": 100.0,
+   "unit": "",
+   "default": 0.0,
+   "doc": "Moves where things fall; the same seed gives the same picture every time. (The kit also gives every object its own seed.)"
+  },
+  {
+   "name": "inflate_limit",
+   "lo": 1.0,
+   "hi": 12.0,
+   "unit": "",
+   "default": 6.0,
+   "doc": "A mark may be drawn at most this many times wider than real so that it stays visible at distance; beyond that it fades into an average tone."
+  },
+  {
+   "name": "fade_start",
+   "lo": 5.0,
+   "hi": 40.0,
+   "unit": "m",
+   "default": 12.0,
+   "doc": "Metres from the camera where fine detail starts to give way to the average tone."
+  },
+  {
+   "name": "fade_end",
+   "lo": 15.0,
+   "hi": 80.0,
+   "unit": "m",
+   "default": 40.0,
+   "doc": "Metres from the camera where fine detail has fully given way to the average tone (never to \"clean\")."
+  },
+  {
+   "name": "wet_follow",
+   "lo": 0.0,
+   "hi": 1.0,
+   "unit": "",
+   "default": 1.0,
+   "doc": "How much the layer follows the Wet Mask where a wetness layer exists (darker and glossier when wet). 0 = ignores wetness."
+  }
+ ],
+ "layers": {
+  "soot": {
+   "owner": "walls",
+   "group": "WK SOOT",
+   "priority": "MUST",
+   "roles": "wall.masonry, wall.trim, wall.industrial, chimney, roof.*",
+   "masks": "sheltered, drip, reveal, shade, tx_cavity, height",
+   "dials": [
+    {
+     "name": "film_mult",
+     "lo": 0.3,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.8,
+     "doc": "Colour multiplier of the general film on the clean surface (brick 0.50 to 0.65 in 1926)."
+    },
+    {
+     "name": "sheltered_mult",
+     "lo": 0.2,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "Multiplier where rain cannot reach (under sills, eaves, in reveals)."
+    },
+    {
+     "name": "washed_mult",
+     "lo": 0.5,
+     "hi": 1.2,
+     "unit": "",
+     "default": 0.95,
+     "doc": "Multiplier where rain washes (sill tops, the windward upper wall)."
+    },
+    {
+     "name": "washed_share",
+     "lo": 0.0,
+     "hi": 0.6,
+     "unit": "",
+     "default": 0.2,
+     "doc": "Share of wall area that is rain-washed (15 to 25 % in 1926)."
+    },
+    {
+     "name": "floor_mult",
+     "lo": 0.2,
+     "hi": 0.8,
+     "unit": "",
+     "default": 0.4,
+     "doc": "No dot may go below this multiple of its clean colour (keeps the film curve from crushing it)."
+    },
+    {
+     "name": "grey_pull",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.2,
+     "doc": "How far colour is pulled toward grey (25 to 35 % in 1926)."
+    },
+    {
+     "name": "mortar_soot",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Extra darkening in mortar hollows (soot sits in hollows first)."
+    },
+    {
+     "name": "mottle_size",
+     "lo": 0.2,
+     "hi": 3.0,
+     "unit": "m",
+     "default": 1.0,
+     "doc": "Size of the slow mottling."
+    },
+    {
+     "name": "mottle_contrast",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "How strong the mottling is."
+    },
+    {
+     "name": "edge_sharp",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "How crisp the line is between washed and sheltered (a clean line under a sill)."
+    },
+    {
+     "name": "stack_mult",
+     "lo": 0.2,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "Multiplier on chimney stacks (blackest in a coal town)."
+    },
+    {
+     "name": "roof_mult",
+     "lo": 0.5,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.9,
+     "doc": "Multiplier on roof surfaces."
+    },
+    {
+     "name": "base_lift",
+     "lo": 0.0,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.0,
+     "doc": "LAST-RESORT dial: lifts the whole wall colour so that a pattern has room above the film-black zone. Off unless the integrator proves it is needed and says so."
+    }
+   ]
+  },
+  "runoff": {
+   "owner": "walls",
+   "group": "WK RUNOFF",
+   "priority": "MUST",
+   "roles": "wall.masonry, wall.trim (iron-sourced streaks use iron objects as sources)",
+   "masks": "drip, drip_dist, drip_kind, sheltered, height",
+   "dials": [
+    {
+     "name": "strength",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "Contrast of the streaks."
+    },
+    {
+     "name": "tone",
+     "lo": -1.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "-1 = pale washed stripe, +1 = dark stain. 1926 sooty walls: pale stripes with dark tide-lines. Courtyard plaster: dark grey-green streaks."
+    },
+    {
+     "name": "edge_dark",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Dark tide-line along the streak edges."
+    },
+    {
+     "name": "width_dots",
+     "lo": 4.0,
+     "hi": 24.0,
+     "unit": "",
+     "default": 8.0,
+     "doc": "Smallest streak width in plate dots (the layer widens a streak with distance up to Inflate Limit)."
+    },
+    {
+     "name": "length_mult",
+     "lo": 0.3,
+     "hi": 3.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Length of every streak."
+    },
+    {
+     "name": "ragged",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Ragged sides and a stretched-down shape."
+    },
+    {
+     "name": "source_share",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "Share of sills, ledges and cap edges that carry a streak pair (60 to 80 % in 1926)."
+    },
+    {
+     "name": "leak_share",
+     "lo": 0.0,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.1,
+     "doc": "Share of downpipes that leak heavily and carry a long streak."
+    },
+    {
+     "name": "leak_length",
+     "lo": 0.3,
+     "hi": 1.5,
+     "unit": "m",
+     "default": 0.8,
+     "doc": "Length of a heavy leak streak."
+    },
+    {
+     "name": "iron_rust",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "How orange (rust) a streak is when its source is an iron joint or bracket."
+    },
+    {
+     "name": "eave_streaks",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Streaks hanging from eave lines, gutter ends and cap overhangs."
+    }
+   ]
+  },
+  "foot": {
+   "owner": "walls",
+   "group": "WK FOOT",
+   "priority": "MUST",
+   "roles": "wall.masonry, wall.trim, wall.industrial",
+   "masks": "height, dampness, drip (pipe feet), tx_cavity, shade",
+   "dials": [
+    {
+     "name": "splash_height",
+     "lo": 0.1,
+     "hi": 0.6,
+     "unit": "m",
+     "default": 0.25,
+     "doc": "Height of the dirt splash band at the wall foot (15 to 35 cm in 1926)."
+    },
+    {
+     "name": "splash_strength",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "How dark the band is at the ground line."
+    },
+    {
+     "name": "splash_ragged",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "Ragged top edge of splash dots and short upward fingers."
+    },
+    {
+     "name": "finger_height",
+     "lo": 0.0,
+     "hi": 0.2,
+     "unit": "m",
+     "default": 0.08,
+     "doc": "Height of the splash fingers above the band."
+    },
+    {
+     "name": "pipe_foot_boost",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Extra heavy splash and damp where a downpipe ends."
+    },
+    {
+     "name": "tide_share",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Share of house lengths that carry a damp tide-mark (older rows only)."
+    },
+    {
+     "name": "tide_height",
+     "lo": 0.3,
+     "hi": 1.3,
+     "unit": "m",
+     "default": 0.7,
+     "doc": "Ragged top of the damp tide-mark."
+    },
+    {
+     "name": "tide_strength",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Darkening inside the tide-mark."
+    },
+    {
+     "name": "tide_green",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.2,
+     "doc": "How green the damp zone is."
+    },
+    {
+     "name": "salt_bloom",
+     "lo": 0.0,
+     "hi": 0.1,
+     "unit": "",
+     "default": 0.02,
+     "doc": "Share of the band covered by white salts along its top."
+    },
+    {
+     "name": "mortar_wear",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "Recessed, eroded mortar in the lowest 0.6 m."
+    },
+    {
+     "name": "spall_share",
+     "lo": 0.0,
+     "hi": 0.2,
+     "unit": "",
+     "default": 0.05,
+     "doc": "Share of bricks or blocks with a flaked face near the foot."
+    },
+    {
+     "name": "wear_height",
+     "lo": 0.2,
+     "hi": 0.9,
+     "unit": "m",
+     "default": 0.5,
+     "doc": "How high mortar wear and spalls reach."
+    }
+   ]
+  },
+  "steps": {
+   "owner": "walls",
+   "group": "WK STEPS",
+   "priority": "MUST",
+   "roles": "wall.trim (the steps are found by the step masks, not by object)",
+   "masks": "step_top, step_edge, entry_rand, edge_dist, footfall",
+   "dials": [
+    {
+     "name": "whitened_share",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Share of doorsteps that are whitened or donkey-stoned (40 to 70 %; medium confidence for Durham)."
+    },
+    {
+     "name": "scrubbed_share",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Share that are only scrubbed pale."
+    },
+    {
+     "name": "frame_m",
+     "lo": 0.03,
+     "hi": 0.12,
+     "unit": "m",
+     "default": 0.06,
+     "doc": "Real width of the white frame along nosing and riser (4 to 10 cm)."
+    },
+    {
+     "name": "frame_dots",
+     "lo": 4.0,
+     "hi": 20.0,
+     "unit": "",
+     "default": 8.0,
+     "doc": "Smallest frame width in plate dots (widened with distance up to Inflate Limit)."
+    },
+    {
+     "name": "boot_grey",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Boots grey the centre of the tread (30 %)."
+    },
+    {
+     "name": "dish_depth",
+     "lo": 0.0,
+     "hi": 0.012,
+     "unit": "m",
+     "default": 0.004,
+     "doc": "Depth of the worn dish in the tread (relief, faded with distance)."
+    },
+    {
+     "name": "nosing_chips",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Share of steps with a chipped nosing or corner."
+    },
+    {
+     "name": "wear_polish",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "Polish of the worn centre."
+    }
+   ]
+  },
+  "wallgrowth": {
+   "owner": "walls",
+   "group": "WK WALL GROWTH",
+   "priority": "SHOULD",
+   "roles": "wall.masonry, wall.trim, wall.plaster, roof.tile (painted moss, algae, lichen)",
+   "masks": "moss_site, algae_site, dampness, drip, lichen_site, height",
+   "dials": [
+    {
+     "name": "moss_amount",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Painted moss at wall feet, drips, copings."
+    },
+    {
+     "name": "algae_amount",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 0.8,
+     "doc": "Green-black algae film at pipe outlets and shaded feet."
+    },
+    {
+     "name": "lichen_amount",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "Lichen. 1926 coal town: NONE (the smoke killed it). Courtyard: sparse colonies."
+    },
+    {
+     "name": "moss_height",
+     "lo": 0.1,
+     "hi": 1.0,
+     "unit": "m",
+     "default": 0.3,
+     "doc": "How high up a wall moss may reach from the foot."
+    },
+    {
+     "name": "patch_dots",
+     "lo": 8.0,
+     "hi": 40.0,
+     "unit": "",
+     "default": 15.0,
+     "doc": "Smallest moss patch width in plate dots (patches of 15 dots or more survive the painter)."
+    },
+    {
+     "name": "drip_moss",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Moss below run-off lines."
+    },
+    {
+     "name": "cap_moss",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Moss along copings and wall caps."
+    },
+    {
+     "name": "roof_moss",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "Moss on roof surfaces (probably very little in 1926)."
+    },
+    {
+     "name": "tone_steps",
+     "lo": 3.0,
+     "hi": 6.0,
+     "unit": "",
+     "default": 5.0,
+     "doc": "Number of flat painted tones in a moss patch."
+    },
+    {
+     "name": "clump_stretch",
+     "lo": 1.0,
+     "hi": 3.0,
+     "unit": "",
+     "default": 1.8,
+     "doc": "How much taller than wide a clump is (drip shape)."
+    },
+    {
+     "name": "relief",
+     "lo": 0.0,
+     "hi": 0.02,
+     "unit": "m",
+     "default": 0.005,
+     "doc": "Height of moss relief (a bump on the incoming normal, faded with distance)."
+    },
+    {
+     "name": "lichen_dots",
+     "lo": 4.0,
+     "hi": 16.0,
+     "unit": "",
+     "default": 8.0,
+     "doc": "Lichen disc size in plate dots."
+    },
+    {
+     "name": "brightness_floor",
+     "lo": 0.12,
+     "hi": 0.4,
+     "unit": "",
+     "default": 0.25,
+     "doc": "Lowest plate brightness of a moss patch (it must stay lighter than the stone and above the film-black zone)."
+    }
+   ]
+  },
+  "wallcracks": {
+   "owner": "walls",
+   "group": "WK WALL CRACKS",
+   "priority": "SHOULD",
+   "roles": "wall.masonry, wall.trim, wall.plaster",
+   "masks": "corner, reveal, height, tx_cavity, house flag",
+   "dials": [
+    {
+     "name": "crack_amount",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "How many cracks (the master Amount scales it too)."
+    },
+    {
+     "name": "crack_dots",
+     "lo": 2.0,
+     "hi": 8.0,
+     "unit": "",
+     "default": 3.5,
+     "doc": "Smallest crack width in plate dots (3 dots needs contrast 0.11)."
+    },
+    {
+     "name": "crack_contrast",
+     "lo": 0.04,
+     "hi": 0.2,
+     "unit": "",
+     "default": 0.11,
+     "doc": "Smallest crack contrast against the surround."
+    },
+    {
+     "name": "stepped_cracks",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "Stepped mining cracks on the houses the set file flags (1 or 2 of 28)."
+    },
+    {
+     "name": "corner_chips",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Chips at wall corners and opening corners."
+    },
+    {
+     "name": "chip_cm",
+     "lo": 2.0,
+     "hi": 12.0,
+     "unit": "",
+     "default": 5.0,
+     "doc": "Chip size in centimetres (chips of about 5 cm and bigger read)."
+    },
+    {
+     "name": "plaster_cracks",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "Map cracks and corner cracks in plaster."
+    },
+    {
+     "name": "spall_patches",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.15,
+     "doc": "Spalled patches near the foot."
+    },
+    {
+     "name": "near_only",
+     "lo": 6.0,
+     "hi": 30.0,
+     "unit": "m",
+     "default": 15.0,
+     "doc": "Cracks fade out beyond this distance (the painter invents its own texture there)."
+    },
+    {
+     "name": "slope_mm",
+     "lo": 0.0,
+     "hi": 5.0,
+     "unit": "",
+     "default": 1.5,
+     "doc": "Real slope of a crack edge so a lamp lights one side."
+    },
+    {
+     "name": "dull",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Cracks are dull: roughness back to 0.9, shine cut 35 %, water film cut 45 %."
+    }
+   ]
+  },
+  "paint": {
+   "owner": "walls",
+   "group": "WK PAINT",
+   "priority": "COULD",
+   "roles": "timber.paint (doors, window frames, fascia)",
+   "masks": "height, footfall (door line), shade",
+   "dials": [
+    {
+     "name": "paint_dark",
+     "lo": 0.5,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.85,
+     "doc": "General darkening of paint (0.70 to 0.85 in 1926)."
+    },
+    {
+     "name": "flake_share",
+     "lo": 0.0,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.15,
+     "doc": "Share of painted area that has lost flakes."
+    },
+    {
+     "name": "door_scuff",
+     "lo": 0.1,
+     "hi": 0.5,
+     "unit": "m",
+     "default": 0.25,
+     "doc": "Height of kicked scuffs at the foot of doors (bare grey wood)."
+    },
+    {
+     "name": "latch_grease",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "Dark hand-grease patch at the latch."
+    },
+    {
+     "name": "gloss_loss",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "How much the paint has lost its gloss."
+    }
+   ]
+  },
+  "dirt": {
+   "owner": "ground",
+   "group": "WK GROUND DIRT",
+   "priority": "MUST",
+   "roles": "ground.sett, ground.flag, ground.channel, ground.kerb (gravel and earth in other sets)",
+   "masks": "footfall, keepclear, lowness, crown, wall_dist, shade, vertical_foot, prop_dist, seam_dist, entry_rand, step_foot",
+   "dials": [
+    {
+     "name": "film",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Broad soft film of soot and dust, 0.5 to 3 m patches. NOT ash or coal dust (the rubbish layer has those)."
+    },
+    {
+     "name": "film_scale",
+     "lo": 0.5,
+     "hi": 4.0,
+     "unit": "m",
+     "default": 1.6,
+     "doc": "Patch size of the film."
+    },
+    {
+     "name": "film_darkness",
+     "lo": 0.0,
+     "hi": 0.6,
+     "unit": "",
+     "default": 0.25,
+     "doc": "Darkening of the film (at most about one third)."
+    },
+    {
+     "name": "film_max_share",
+     "lo": 0.0,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.25,
+     "doc": "Ceiling on the share of a surface the film may darken by a third or more."
+    },
+    {
+     "name": "film_near_walls",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Keeps the film off the places the rubbish layer already dirties (wall foot, gutter strip). 1 = film everywhere; 0.5 = half strength there."
+    },
+    {
+     "name": "polish",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.4,
+     "doc": "Traffic polish: worn lanes are lighter and smoother."
+    },
+    {
+     "name": "polish_lift",
+     "lo": 0.0,
+     "hi": 0.2,
+     "unit": "",
+     "default": 0.05,
+     "doc": "Brightness added to polished lanes."
+    },
+    {
+     "name": "polish_rough",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Roughness taken off polished lanes when dry."
+    },
+    {
+     "name": "water_marks",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Dried puddle rings and tide lines in low spots."
+    },
+    {
+     "name": "rust_halo",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Rust stain on the ground round the foot of iron posts and pipes (10 to 25 cm)."
+    },
+    {
+     "name": "rust_halo_m",
+     "lo": 0.05,
+     "hi": 0.4,
+     "unit": "m",
+     "default": 0.18,
+     "doc": "Reach of the rust halo."
+    },
+    {
+     "name": "drum_ring",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Rust bleed ring on the ground at the foot of the fire drum (the ash ring is already in the rubbish layer)."
+    },
+    {
+     "name": "tar_patches",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Tar patches over lost setts: scalloped edges, speckle of chippings."
+    },
+    {
+     "name": "tar_max_share",
+     "lo": 0.0,
+     "hi": 0.06,
+     "unit": "",
+     "default": 0.03,
+     "doc": "Ceiling on tar patches as a share of road area (2 to 4 %)."
+    },
+    {
+     "name": "tar_splash",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Splashes of tar at the kerb foot."
+    },
+    {
+     "name": "tar_gloss",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "How glossy new tar is (near black when wet)."
+    },
+    {
+     "name": "scrub_strip",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "Pale scrubbed strip on the flags in front of a whitened or scrubbed doorstep (reads the same door random as the steps layer)."
+    },
+    {
+     "name": "scrub_strip_m",
+     "lo": 0.2,
+     "hi": 0.8,
+     "unit": "m",
+     "default": 0.4,
+     "doc": "Reach of the scrubbed strip."
+    }
+   ]
+  },
+  "groundcracks": {
+   "owner": "ground",
+   "group": "WK GROUND CRACKS",
+   "priority": "MUST",
+   "roles": "ground.flag, ground.kerb, ground.sett (hard ground only)",
+   "masks": "edge_dist, seam_dist, cover_dist, footfall, tx_cell (flags, setts), tx_cavity, crown",
+   "dials": [
+    {
+     "name": "flag_cracks",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Amount of flag cracking."
+    },
+    {
+     "name": "flag_fine_share",
+     "lo": 0.05,
+     "hi": 0.2,
+     "unit": "",
+     "default": 0.11,
+     "doc": "Share of flags with a fine crack (8 to 15 %)."
+    },
+    {
+     "name": "flag_broken_share",
+     "lo": 0.01,
+     "hi": 0.06,
+     "unit": "",
+     "default": 0.03,
+     "doc": "Share broken in two or three with a gap (2 to 4 %)."
+    },
+    {
+     "name": "flag_tilt_share",
+     "lo": 0.02,
+     "hi": 0.08,
+     "unit": "",
+     "default": 0.04,
+     "doc": "Share tilted or sunk (3 to 6 %)."
+    },
+    {
+     "name": "tilt_lip",
+     "lo": 3.0,
+     "hi": 20.0,
+     "unit": "mm",
+     "default": 8.0,
+     "doc": "Height of the raised edge of a tilted flag (throws a dark shadow line)."
+    },
+    {
+     "name": "corner_chip_share",
+     "lo": 0.03,
+     "hi": 0.15,
+     "unit": "",
+     "default": 0.07,
+     "doc": "Share of flags with a chipped corner."
+    },
+    {
+     "name": "kerb_chips",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Amount of kerb damage."
+    },
+    {
+     "name": "kerb_chip_share",
+     "lo": 0.1,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.28,
+     "doc": "Share of kerb length with edge chips (20 to 35 %)."
+    },
+    {
+     "name": "kerb_break_share",
+     "lo": 0.0,
+     "hi": 0.15,
+     "unit": "",
+     "default": 0.067,
+     "doc": "Share of kerb stones cracked or broken (1 in 15)."
+    },
+    {
+     "name": "kerb_scuffs",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Pale wheel scuffs on kerb faces."
+    },
+    {
+     "name": "kerb_joint_open",
+     "lo": 3.0,
+     "hi": 20.0,
+     "unit": "mm",
+     "default": 8.0,
+     "doc": "Width of open, dark kerb joints."
+    },
+    {
+     "name": "sett_disturb",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 0.7,
+     "doc": "Amount of disturbed setts (tilted, sunk, missing, ash or tar filled)."
+    },
+    {
+     "name": "sett_disturbed_share",
+     "lo": 0.02,
+     "hi": 0.08,
+     "unit": "",
+     "default": 0.04,
+     "doc": "Share of the sett field disturbed (3 to 6 %), gathered round seams, covers and wheel bands."
+    },
+    {
+     "name": "open_joint_share",
+     "lo": 0.05,
+     "hi": 0.25,
+     "unit": "",
+     "default": 0.14,
+     "doc": "Share of sett joints open and dark (10 to 20 %)."
+    },
+    {
+     "name": "missing_share",
+     "lo": 0.0,
+     "hi": 0.01,
+     "unit": "",
+     "default": 0.003,
+     "doc": "Share of setts missing (dark rectangle)."
+    },
+    {
+     "name": "sunken_patch",
+     "lo": 0.3,
+     "hi": 1.5,
+     "unit": "m",
+     "default": 0.8,
+     "doc": "Length of a sunken patch."
+    },
+    {
+     "name": "crack_dots",
+     "lo": 2.0,
+     "hi": 8.0,
+     "unit": "",
+     "default": 3.5,
+     "doc": "Smallest crack width in plate dots."
+    },
+    {
+     "name": "crack_contrast",
+     "lo": 0.04,
+     "hi": 0.2,
+     "unit": "",
+     "default": 0.11,
+     "doc": "Smallest crack contrast."
+    },
+    {
+     "name": "near_only",
+     "lo": 8.0,
+     "hi": 30.0,
+     "unit": "m",
+     "default": 15.0,
+     "doc": "Cracks fade out beyond this distance."
+    },
+    {
+     "name": "max_contrast",
+     "lo": 0.4,
+     "hi": 0.9,
+     "unit": "",
+     "default": 0.75,
+     "doc": "Guard: no harsh black grid. Sett joints may not exceed this contrast."
+    },
+    {
+     "name": "dull",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Cracks are dull so the wet look cannot wash them out."
+    }
+   ]
+  },
+  "groundmoss": {
+   "owner": "ground",
+   "group": "WK GROUND MOSS",
+   "priority": "MUST",
+   "roles": "ground.sett, ground.flag, ground.channel, ground.kerb (ground.earth, stone.natural in other sets)",
+   "masks": "moss_site, algae_site, tx_cavity, tx_joint, shade, dampness, footfall, keepclear, existing_growth",
+   "dials": [
+    {
+     "name": "joint_share",
+     "lo": 0.03,
+     "hi": 0.3,
+     "unit": "",
+     "default": 0.08,
+     "doc": "Share of joint length carrying painted moss in the best (gutter-side) strip."
+    },
+    {
+     "name": "shade_bias",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "How much shade favours moss over sun."
+    },
+    {
+     "name": "ribbon_dots",
+     "lo": 3.0,
+     "hi": 12.0,
+     "unit": "",
+     "default": 4.0,
+     "doc": "Smallest moss ribbon width in plate dots (a 1 to 3 cm joint ribbon is drawn wider near the camera)."
+    },
+    {
+     "name": "ribbon_m",
+     "lo": 0.01,
+     "hi": 0.06,
+     "unit": "m",
+     "default": 0.02,
+     "doc": "Real ribbon width."
+    },
+    {
+     "name": "broken_len",
+     "lo": 0.1,
+     "hi": 0.8,
+     "unit": "m",
+     "default": 0.3,
+     "doc": "Length of a broken ribbon piece."
+    },
+    {
+     "name": "algae_fan",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "Dark green-black algae fan under every downpipe outlet and gully."
+    },
+    {
+     "name": "algae_radius",
+     "lo": 0.3,
+     "hi": 1.0,
+     "unit": "m",
+     "default": 0.55,
+     "doc": "Reach of an algae fan."
+    },
+    {
+     "name": "liverwort",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "The one bright green: 0 to 2 patches of 10 to 40 cm in damp shade."
+    },
+    {
+     "name": "far_band",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Beyond the pieces distance: a slightly greener, darker strip along gutter and wall foot instead of single plants."
+    },
+    {
+     "name": "far_band_m",
+     "lo": 0.2,
+     "hi": 0.8,
+     "unit": "m",
+     "default": 0.45,
+     "doc": "Width of the far band."
+    },
+    {
+     "name": "moss_value",
+     "lo": 0.25,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.36,
+     "doc": "Plate brightness of dry moss (lighter than the stone; painted values under 0.12 are black on the film)."
+    }
+   ]
+  },
+  "iron": {
+   "owner": "ground",
+   "group": "WK IRON",
+   "priority": "MUST",
+   "roles": "iron, iron.post, iron.pipe, fire (cast iron, steel, drum, rails)",
+   "masks": "height, object zmin and zmax, drip_kind, vertical_foot",
+   "dials": [
+    {
+     "name": "rust_cover",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Share of the lower part of an iron object with paint chipped back to rust."
+    },
+    {
+     "name": "rust_height",
+     "lo": 0.2,
+     "hi": 1.2,
+     "unit": "m",
+     "default": 0.55,
+     "doc": "How high rust reaches from the foot of a post."
+    },
+    {
+     "name": "chip_share",
+     "lo": 0.1,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Share of paint chipped in the rust zone."
+    },
+    {
+     "name": "collar_spacing",
+     "lo": 1.2,
+     "hi": 2.5,
+     "unit": "m",
+     "default": 1.9,
+     "doc": "Spacing of pipe collars and joints where rust rings sit."
+    },
+    {
+     "name": "collar_rust",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Share of collars with rust."
+    },
+    {
+     "name": "metallic_drop",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "Rust lowers Metallic by up to this fraction (cast iron 0.6, steel 0.5, brass 0.9)."
+    },
+    {
+     "name": "heat_scale",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.3,
+     "doc": "Heat-blued scale on the fire drum only."
+    },
+    {
+     "name": "soot_halo",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "Sooty halo above the drum vent holes and black rim."
+    },
+    {
+     "name": "paint_keep",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.6,
+     "doc": "Share of the original paint kept (black or dark green)."
+    },
+    {
+     "name": "rust_run",
+     "lo": 0.05,
+     "hi": 0.3,
+     "unit": "m",
+     "default": 0.12,
+     "doc": "Length of rust runs below fixings."
+    }
+   ]
+  },
+  "growth": {
+   "owner": "growth",
+   "group": "WK GROWTH (3D pieces)",
+   "priority": "MUST",
+   "roles": "ground.sett, ground.flag, ground.channel, ground.kerb (scatter targets; others by settings)",
+   "masks": "weed_site, moss_site, keepclear, footfall, rubbish_heap, wall_dist, seam_dist, shade, dampness, existing_growth",
+   "dials": [
+    {
+     "name": "weeds_amount",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Amount of weed pieces (grass tufts, rosettes). 0 = none."
+    },
+    {
+     "name": "cushions_amount",
+     "lo": 0.0,
+     "hi": 2.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Amount of moss cushion pieces. 0 = none."
+    },
+    {
+     "name": "distance",
+     "lo": 8.0,
+     "hi": 40.0,
+     "unit": "m",
+     "default": 18.0,
+     "doc": "Pieces are laid only up to this far from the camera (the camera of the picture being drawn)."
+    },
+    {
+     "name": "distance_fade",
+     "lo": 2.0,
+     "hi": 10.0,
+     "unit": "m",
+     "default": 5.0,
+     "doc": "Length of the fade-out at the pieces distance."
+    },
+    {
+     "name": "piece_size",
+     "lo": 0.5,
+     "hi": 2.0,
+     "unit": "",
+     "default": 1.0,
+     "doc": "Size of every piece (1 = as built to the period sizes)."
+    },
+    {
+     "name": "weed_cover",
+     "lo": 0.0,
+     "hi": 0.03,
+     "unit": "",
+     "default": 0.01,
+     "doc": "Green cover of weeds as a share of ground area inside the pieces distance (0.5 to 2 % in 1926)."
+    },
+    {
+     "name": "gutter_tuft_share",
+     "lo": 0.02,
+     "hi": 0.1,
+     "unit": "",
+     "default": 0.05,
+     "doc": "Share of gutter-side joint length with a visible tuft (3 to 8 %)."
+    },
+    {
+     "name": "wall_foot_share",
+     "lo": 0.01,
+     "hi": 0.08,
+     "unit": "",
+     "default": 0.035,
+     "doc": "Share of wall-foot length with a plant (2 to 5 %)."
+    },
+    {
+     "name": "cushion_cover",
+     "lo": 0.0,
+     "hi": 0.03,
+     "unit": "",
+     "default": 0.008,
+     "doc": "Moss cushion cover as a share of ground area inside the pieces distance."
+    },
+    {
+     "name": "min_spacing",
+     "lo": 0.05,
+     "hi": 0.4,
+     "unit": "m",
+     "default": 0.15,
+     "doc": "Nearest two pieces of one kind may be."
+    },
+    {
+     "name": "toadflax_clumps",
+     "lo": 0.0,
+     "hi": 3.0,
+     "unit": "",
+     "default": 0.0,
+     "doc": "Ivy-leaved toadflax trails on damp mortar: 0 to 2 clumps in the whole street."
+    },
+    {
+     "name": "rubbish_thin_max",
+     "lo": 0.2,
+     "hi": 0.7,
+     "unit": "",
+     "default": 0.45,
+     "doc": "Weeds grow at full density through rubbish thinner than this mask value."
+    },
+    {
+     "name": "rubbish_heap_min",
+     "lo": 0.5,
+     "hi": 0.95,
+     "unit": "",
+     "default": 0.75,
+     "doc": "No weeds (and no moss above 0.6) on rubbish heavier than this mask value; between the two it thins out linearly."
+    },
+    {
+     "name": "dead_grass_share",
+     "lo": 0.0,
+     "hi": 0.5,
+     "unit": "",
+     "default": 0.15,
+     "doc": "Share of grass tufts that are dead and straw-coloured."
+    },
+    {
+     "name": "flower_share",
+     "lo": 0.0,
+     "hi": 0.3,
+     "unit": "",
+     "default": 0.08,
+     "doc": "Share of dandelions in flower or seed-clock (a few only)."
+    },
+    {
+     "name": "max_pieces",
+     "lo": 500.0,
+     "hi": 6000.0,
+     "unit": "",
+     "default": 2500.0,
+     "doc": "Hard ceiling on pieces in one picture (drawing time)."
+    },
+    {
+     "name": "wet_dark",
+     "lo": 0.4,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.7,
+     "doc": "Colour multiple of wet pieces (richer green, darker)."
+    },
+    {
+     "name": "tilt_random",
+     "lo": 0.0,
+     "hi": 1.0,
+     "unit": "",
+     "default": 0.5,
+     "doc": "How much each piece leans."
+    }
+   ]
+  }
+ }
+}

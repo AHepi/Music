@@ -1,0 +1,87 @@
+TEST REPORT - stage_shapes.py (builder 1, "shapes"), 21 October
+Plain-words log of what was run and what came out. All numbers are from the runs listed; where a number is only measured (not looked at) it says so.
+
+WHAT WAS RUN
+  Starting file (read-only, never saved over): astra-work/out/courtyard_final.blend. Blender 5.2.2, headless.
+  Stage: shapes/stage_shapes.py, function apply({'look': 'real'}) and apply({'look': 'painted'}). Runs in 4 s (painted) and 7 s (real) on this computer, 2 to 5 s on RunPod.
+  Checks (scripts in shapes/work/): check_diff.py (object, material, light, world and render lists before and after), gate_after.py (the Scenario delivery gate,
+  profile render, 1 mm distances, like scene/scripts/run_gate_courtyard.py), delivery_after.py (the team's own group check, ours/work/delivery_check.py),
+  closeups_after.py (flat-colour check pictures), taper_check.py (stone widths).
+  Full object and material name lists before and after: out/diff_real_names.txt and out/diff_painted_names.txt (117 objects before, 128 after).
+  Test scenes after the stage (compressed): out/shapes_test_real.blend (17 MB), out/shapes_test_painted.blend (11 MB).
+
+NOTHING ELSE CHANGED (both looks give the same result)
+  Objects 117 -> 128: 11 created, 0 deleted, 65 changed. Every changed object is on the ownership list (planks and their control empties, piers, veranda steps, plinth,
+  hall plaster, shoji bars, the three walls and caps, rocks, gravel rocks, pond-edge stones, stepping stones, the seven lantern parts, water basin, basin water,
+  raked gravel). Changed objects that are NOT on the list: none.
+  The stage's own printed list of created and changed objects equals the independent before/after comparison (checked, True).
+  Materials: 3 added ('GARDEN placeholder stone.dressed', '... stone.natural', '... timber.frame'); none removed; none changed; no existing object had a material slot
+  changed or lost its materials. World, lights, camera, hills, render settings: identical before and after. One new collection: 'G1 shapes'.
+  All 11 new objects carry garden_owner = shapes and a garden_role. Names the weathering kit looks for (Rock n, Stepping stone n, Pond edge stone n, the lantern parts,
+  Hall posts, the wall names, Astra / varied planks) all still exist.
+  Created: Basin bamboo spout, Basin bucket stone, Basin candle stone, Basin drain pebbles, Basin front stone, Basin ladle, Bridge stringers, Gravel kerb,
+  Gravel timber edge, Roof carrying frame, Shore stones.
+  The stage refuses to run twice on the same scene (it says so and does nothing) unless it is given {'force': True}.
+
+DELIVERY GATE (Scenario gate, 1 mm, whole scene except leaf/moss/pebble/pad scatters and the three hill ridges)
+  Main group: 19 errors before -> 2 after (look painted and look real alike).
+    Still reported, none of them ours to fix: 'Bamboo fence, between its own parts: 4 coplanar faces' (builder 2's object);
+    'Open room back: floating 0.12 m' (a dim plane behind the open shoji leaf that nobody owns; option fix_open_room=True lowers it onto the floor, default off).
+  Roof + hall timbers group: 6 errors before -> 1 after ('roof tiles overlap each other, 43 coplanar faces': the add-on's own roof, not ours).
+  The team's own group check: hall 6 errors -> 0, lantern 2 -> 0, bridge 0 -> 0, ground and water 0 -> 0. The groups of loose stones (walls, pond rocks, stepping
+  stones, bamboo) still list 'floating' because those groups hold stones that are meant to stand apart; in the whole-scene gate each stone touches the ground.
+
+REPAIRS, BEFORE AND AFTER (measured by the stage itself)
+  Bridge piers: gap from pier top to what carries it 2.2, 2.5, 5.0, 4.4 cm before (the plan's figures, matched exactly) -> 0, -1.2, -1.2, 0 cm after (overlap, touching).
+    6 stringers added (two under each run, 7 x 9 cm). Pier tops now sit just under the stringers; stringers carry the boards.
+  Corner boards: all 16 boards of the two landing squares trimmed to the width of the runs (none deleted).
+  Veranda steps: upper step lowest point 23 cm over the ground -> 4 cm into the ground, top 0.567 -> 0.36 m, back 2 cm into the plinth; lower step -14 cm -> -4 cm,
+    top 0.118 -> 0.17 m, now overlapping the upper step by 4 cm.
+  Wall caps: 8.5 cm gap (the plan said 6.5; measured 0.085) -> repaired first, then replaced by the new cap that sits 1 cm into the wall (0 gap).
+  Plinth and deck: 77 coplanar faces (38 + 13 + 26) -> 0 (veranda plank runs raised 1 cm, plinth 1 cm longer at both ends).
+  Hall plaster against posts: 8 coplanar faces -> 0 (plaster 4 mm lower at the top, 3 mm into the plinth).
+  Shoji bars: 368 coplanar faces -> 0 (63 rails made shallower, 14 outer upright bars moved 2 mm).
+  Deck-edge posts stopped 4 cm short of the eave beam -> raised 4.5 cm, touching (found by the gate, not in the plan).
+  Roof carried: nothing under the tiles (22 cm gap) -> hidden frame added: ridge beam, 2 purlins, 21 rafters (they show as dark rafters under the front eave),
+    5 tie beams, 5 king posts; the hall timbers group now has no floating part.
+
+THE OTHER STEPS, MEASURED
+  Lantern: one hexagonal carved lantern, same spot (0.95, 1.1), top at 2.035 m (was 2.065); parts overlap by 5 mm so no gaps; firebox is hollow with two opposite openings
+    (turned to face the hero camera and the veranda view); glow box sits on the cavity floor and stands 3 cm proud of both openings. 0 gate errors.
+  Rocks (5 rocks, 3 gravel rocks, 15 pond-edge stones): baked from the add-on stones, then 3,700 to 6,100 smooth faces each (real) or 108 to 209 flat planes each (painted; the add-on's stones had 52 to 72).
+    Buried: rocks 22 percent -> 34 percent of their height; pond-edge stones were already 55 percent and were left where they sat.
+    Width at the top over width at the base: 0.66 to 0.82 for every one of the 23 (never wider at the top). Yaw changed up to 14 degrees, size up to 12 percent.
+    Overlapping stones nudged apart: six stones moved 4 to 18 cm.
+  Gravel court: 31,486 faces -> 111,150 (342 x 325 squares of 2.4 cm, 5 squares across every rake line). Lines every 12 cm, crest 1.5 cm, crests exactly regular
+    (peak positions identical at every y checked), 4 rings round each of the 3 rocks, flat seam where rings meet lines, flat corridor for the stepping stones.
+    Kerb: 52 stones on the pond, front and hall sides (open where the path crosses and at the lantern); 6 timber boards on the fence side.
+  Stepping stones: 8 re-laid in a zigzag (offsets -0.2 to +0.22 m), pitch 0.95 to 1.15 m, one big stone (0.98 x 0.78) at the turn; tops 3.4 to 5.8 cm over the ground;
+    gaps between neighbours 0.22 to 0.60 m (rule was at least 0.10).
+  Walls: three walls battered 3.5 degrees on each face (top 0.30 m thick, foot 0.575 m; the garden face stays one flat plane, inside the kit's 25 degree limit);
+    tiled cap with 10 cm overhang, eave strips and a row of half-round ridge tiles, 1 cm into the wall. Names and materials unchanged.
+  Basin set: bowl cut into the basin stone, water disc 4 cm under the rim, front stone, candle stone (right), bucket stone (left), 109 drain pebbles,
+    bamboo spout on a post, ladle on the rim. Shore: 5 groups, 17 small stones set into the water line.
+
+LOOKS
+  Only the rocks, pond-edge stones, stepping stones, kerb, basin stones, pebbles and shore stones differ between the looks.
+  real: facets bevelled, subdivided with the big creases kept, fine noise, smooth shading.  painted: flat planes of very unequal size, narrow worn chamfers, flat shading,
+  no smoothing anywhere. Everything else (repairs, lantern, gravel, walls, steps) is the same in both.
+
+RUNPOD (pay per second, endpoint of 21 October 21:30)
+  Four jobs, billed work seconds: 32.9 (6 EEVEE pictures, both looks, first try), 71.2 (13 pictures, second try), 37.7 (16 pictures, final), 33.0 (stage only, both looks).
+  Total 174.8 s billed work, about US$0.05 at the quoted US$1.10 an hour. A few small upload, download and status calls are not billed separately in what the client prints.
+  Pictures: EEVEE 960 x 640, real and painted, from the hero camera, the lantern, rocks, gravel, wall, basin, bridge and the veranda view.
+
+NOT TESTED / NOT SEEN
+  Cycles (not used; EEVEE previews only). The weathering kit on these shapes (surfaces builder). Wall sheets on the battered walls and on the new caps.
+  Whether the new gravel material shows the 12 cm lines well at the hero distance (they show in the previews with the old brown material).
+  The roof frame seen from below at the eave in a lit picture (only measured and seen in a flat-colour check). Add-on editing of the baked stones (the stones no
+  longer carry the add-on's modifiers; the add-on's update_stone would not work on them). The 'Lantern light' point light sits inside the glow box
+  (z 1.385 against box z 1.23 to 1.42), so in Cycles the box blocks it: builder 4 should move it just outside an opening or rely on the glow box.
+
+FAILURES AND FIXES ALONG THE WAY
+  First rock cutter ate 93 percent of the stone's volume (replaced by one that cuts shallow caps, 3 percent loss). Convex-hull helper crashed on a repeated geometry list (fixed).
+  Shoji rails shortened by 3 mm first made the whole lattice 'float' in the gate (fixed by keeping rail ends on the posts and moving the outer uprights instead).
+  First shore stones and ladle floated or were buried under the bank (fixed). First rake mesh (2.5 cm cells) made the crests zigzag between mesh columns, visible in the
+  first EEVEE preview; the period is now fitted to 5 squares and the lines are exactly straight. The 'real' test file was 23 MB (over 20); basin and shore stones now use
+  one subdivision level (17 MB). One shell command was refused by the safety check (a delete with a relative glob); nothing was lost and the cleanup was redone in Python.

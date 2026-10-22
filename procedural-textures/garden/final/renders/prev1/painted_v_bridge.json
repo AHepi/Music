@@ -1,0 +1,80 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "proc-work/garden/final/garden_painted.blend",
+ "args": {
+  "out": "proc-work/garden/final/renders/prev1/painted_v_bridge",
+  "camera": "v_bridge",
+  "size": "960x640",
+  "samples": 64,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": false,
+  "check_groups": false,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "059b1808c60c0e310aba5f514ac7c68372c16489bc92d2cab41ffd3dee7cec76",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD EPYC 7352 24-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 64,
+ "seed": 7,
+ "camera": "v_bridge",
+ "size": [
+  960,
+  640,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 2.84,
+ "files": {
+  "png": {
+   "path": "proc-work/garden/final/renders/prev1/painted_v_bridge.png",
+   "bytes": 806937,
+   "sha256": "f9a1b2490e431884a96974834d7b6c6738d754f8f0236ef39cebf4389c33c16c"
+  }
+ }
+}

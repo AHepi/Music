@@ -1,0 +1,114 @@
+{
+ "hall": {
+  "objects": 11,
+  "pass": true,
+  "errors": [],
+  "n_errors": 0,
+  "warnings": [],
+  "n_warnings": 0,
+  "tol": 0.028271,
+  "gap": 0.141356
+ },
+ "bridge": {
+  "objects": 10,
+  "pass": true,
+  "errors": [],
+  "n_errors": 0,
+  "warnings": [],
+  "n_warnings": 0,
+  "tol": 0.014687,
+  "gap": 0.073435
+ },
+ "lantern": {
+  "objects": 7,
+  "pass": true,
+  "errors": [],
+  "n_errors": 0,
+  "warnings": [],
+  "n_warnings": 0,
+  "tol": 0.005371,
+  "gap": 0.026854
+ },
+ "walls": {
+  "objects": 6,
+  "pass": false,
+  "errors": [
+   "Back wall, left: floating, 10.7 from the nearest part",
+   "Back wall, left cap: floating, 10.7 from the nearest part"
+  ],
+  "n_errors": 2,
+  "warnings": [],
+  "n_warnings": 0,
+  "tol": 0.046585,
+  "gap": 0.232925
+ },
+ "pond_rocks_and_stones": {
+  "objects": 23,
+  "pass": false,
+  "errors": [
+   "Pond edge stone 0: floating, 2.41 from the nearest part",
+   "Pond edge stone 1: floating, 1.51 from the nearest part",
+   "Pond edge stone 5: floating, 0.286 from the nearest part",
+   "Pond edge stone 6: floating, 1.49 from the nearest part",
+   "Pond edge stone 7: floating, 1.49 from the nearest part",
+   "Pond edge stone 8: floating, 3.44 from the nearest part",
+   "Pond edge stone 9: floating, 3.87 from the nearest part",
+   "Pond edge stone 10: floating, 4.15 from the nearest part",
+   "Pond edge stone 11: floating, 4.04 from the nearest part",
+   "Pond edge stone 12: floating, 3.62 from the nearest part",
+   "Pond edge stone 13: floating, 3.41 from the nearest part",
+   "Pond edge stone 14: floating, 2.96 from the nearest part"
+  ],
+  "n_errors": 16,
+  "warnings": [
+   "Pond edge stone 2: not touching, 0.0968 from the nearest part",
+   "Rock 2: not touching, 0.0968 from the nearest part"
+  ],
+  "n_warnings": 2,
+  "tol": 0.033258,
+  "gap": 0.16629
+ },
+ "stepping_stones": {
+  "objects": 10,
+  "pass": false,
+  "errors": [
+   "Stepping stone 0: floating, 8.65 from the nearest part",
+   "Stepping stone 1: floating, 7.58 from the nearest part",
+   "Stepping stone 2: floating, 6.47 from the nearest part",
+   "Stepping stone 3: floating, 5.8 from the nearest part",
+   "Stepping stone 4: floating, 4.75 from the nearest part",
+   "Stepping stone 5: floating, 3.75 from the nearest part",
+   "Stepping stone 6: floating, 2.61 from the nearest part",
+   "Stepping stone 7: floating, 1.58 from the nearest part"
+  ],
+  "n_errors": 8,
+  "warnings": [],
+  "n_warnings": 0,
+  "tol": 0.021606,
+  "gap": 0.108028
+ },
+ "ground_and_water": {
+  "objects": 5,
+  "pass": true,
+  "errors": [],
+  "n_errors": 0,
+  "warnings": [],
+  "n_warnings": 0,
+  "tol": 0.060904,
+  "gap": 0.304521
+ },
+ "bamboo": {
+  "objects": 2,
+  "pass": false,
+  "errors": [
+   "Bamboo fence, between its own parts: 4 coplanar overlapping faces (z-fighting)",
+   "Bamboo stalks, between its own parts: 1056 coplanar overlapping faces (z-fighting)",
+   "Bamboo stalks: floating, 17.8 from the nearest part"
+  ],
+  "n_errors": 3,
+  "warnings": [],
+  "n_warnings": 0,
+  "tol": 0.053543,
+  "gap": 0.267716
+ }
+}

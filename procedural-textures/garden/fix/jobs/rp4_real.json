@@ -1,0 +1,43 @@
+{
+ "blend": "proc-work/garden/final/garden_real.blend",
+ "look": "real",
+ "outdir": "proc-work/garden/fix/out/rp4",
+ "variants": [
+  {
+   "name": "r4",
+   "fix": {},
+   "pictures": [
+    {
+     "name": "veranda",
+     "camera": "veranda",
+     "size": "1200x800",
+     "samples": 96
+    },
+    {
+     "name": "shrubs",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 96,
+     "border": [
+      0.15,
+      0.15,
+      0.55,
+      0.45
+     ]
+    },
+    {
+     "name": "hedge",
+     "camera": "veranda",
+     "size": "2400x1600",
+     "samples": 96,
+     "border": [
+      0.0,
+      0.4,
+      0.6,
+      0.62
+     ]
+    }
+   ]
+  }
+ ]
+}

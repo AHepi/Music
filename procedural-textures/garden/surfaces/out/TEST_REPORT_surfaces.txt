@@ -1,0 +1,102 @@
+TEST REPORT - builder 3 "surfaces" (materials and weathering), Japanese garden, 21 October
+=====================================================================================================
+Folder: proc-work/garden/surfaces/
+Pictures for the person: ".../proc-work/30 Japanese garden - pictures/30 Surfaces - *.jpg" (three files)
+
+WHAT IT IS, IN PLAIN WORDS
+  One stage file, stage_surfaces.py, with apply(options). It changes MATERIALS ONLY (no geometry, lights, world or camera) on the open garden scene,
+  in one of two looks:
+    look = "real"     photographed surfaces (Poly Haven, free CC0) on everything, then the weathering kit on top
+    look = "painted"  the add-on's painted look: broad hand-made colour passages, the add-on's own stone shader retuned, no scans, no kit
+  Use:   sys.path.insert(0, '<surfaces folder>');  import stage_surfaces as ss;  ss.apply({'look': 'real'})      (or 'painted')
+  Options (all optional): look, weathering (real only, default True), weathering_look (default garden_kept), rebuild_masks ('auto' | 'always' | 'never'),
+         maps_dir, pack_images (True before the final save: packs the 62 pictures into the .blend), addon_dir (painted only: also use the add-on's pigment tool), verbose.
+  Order in the chain: after shapes and life, before light. It finds objects by name (same patterns as the kit) or by the custom property garden_role, and swaps
+  every "GARDEN placeholder <role>" material for its role's material. Glow, leaf, water, hill and sky materials are never touched. Running it twice is safe.
+  Files: stage_surfaces.py (the stage), surf_kit.py (node toolbox + scan groups), painted_stack.py, pigment_stage.py (optional), weathering_stage.py (kit part),
+         kit/ (private patched copy of the weathering kit), maps/ (16 Poly Haven surfaces, 1k, 24 MB, licence note inside), render_preview.py, render_plates.py, tests/.
+
+WHAT EACH LOOK DOES (family -> real / painted)
+  ground (Moss and earth)       forest-floor scan, from above, two sizes mixed by noise so no tile repeats; three broad passages (damp dark / mossy green / dry earth),
+                                quiet middles.  /  five unequal directional flat passages, firm and lost edges, warm lit against cool shadow.
+  raked gravel                  gravel scan normalised to a pale grey-white (albedo about 0.46); the scan height is only a faint grain, the rake lines stay real geometry.  /  pale
+                                grey passages, no grain.
+  43 stone materials            Rock Boulder Dry (rocks, piers) or Rock 08 (steps, lantern) by box projection, height as bump only, per-stone tone from the object's random value,
+                                Lichen Rock mixed in on steep shaded sides.  /  the add-on's own "Wet Stone" shader kept but retuned: chalky pale fields, short marks, matte.
+  roof (3 materials inside the roof nodes)   Grey Roof Tiles colour and roughness, world-position mapping because the tiles are instances; mean raised from 44 to 64 (of 255).
+                                /  the add-on's painted ceramic shader lifted out of crushed black.
+  veranda boards (runs 0-2), bridge boards (runs 3-7)   Weathered Planks (amber-brown) and Wood Planks Grey (silver); each of the 56 tone materials has its own tint and its own
+                                picture offset; boards run along x (measured, see below).  /  tone kept, silver on the bridge, interrupted wear streaks along each board.
+  hall posts, beams, shoji bars Old Wood Floor, grain up the posts and along the beams.  /  board-directed flat grain with interrupted wear (or the add-on's pigment tool, optional).
+  hall plaster                  White Stucco dulled to grey-cream, soft macro variation.  /  held and lost edges, drip tails running up the wall.
+  3 garden walls (own material now)   Worn Plaster Wall with Worn Cracked Plaster at the foot.  /  earth-cream passages.
+  wall cap, plinth, bark, pebbles    cap: roof tile scan; plinth: Japanese Stone Wall; maple and pine bark scans (pine got its own material); pebbles: scan grain on the old tone.
+                                /  cap flat dark, plinth retuned, bark and pebbles left as the add-on made them.
+  Weathering kit (real only)    dust-and-algae film, runoff under caps and eaves, damp foot, plaster hairlines and stone chips, wall growth, dirt, patch moss.  Not used: steps,
+                                paint, ground cracks, iron, puddles and wetness, joints, rubbish, the 3D growth layer.  Everything the kit does can be removed again.
+
+THINGS THE START FILE DOES DIFFERENTLY FROM THE PLAN
+  * Plank direction: the plan said the veranda boards run along y. Measured on all 8 runs: the long edge of every top board runs along x (veranda and bridge). I set the grain to x.
+  * Nothing has UVs; the 43 stones are "FOUNDRY / Wet Stone" groups; the roof's three materials are set inside the roof nodes (the kit's patched role finder reaches them).
+  * Hall plaster, the three garden walls, the lantern finial and the pine all shared a material with something else: they now have their own (GARDEN wall.garden, GARDEN stone.lantern,
+    GARDEN bark.pine). 10 object slots changed for that reason; no object lost a material.
+
+WHAT I TESTED (all on Blender 5.2.2, headless; pictures drawn on RunPod)
+  1. Changes only what it owns. Opened the start file, recorded everything, applied each look, compared (tests/prove_stage.py, out/proof_real.json, out/proof_painted.json):
+       objects added 0, removed 0; geometry changed 0; transforms 0; modifiers 0; visibility 0; lights, cameras, world and render settings unchanged (both looks).
+       real: 114 materials rebuilt (all tagged garden_owner=surfaces), 20 untouched (moss tones, bamboo, leaves, pine needles, pond water, hills, glow); no changed material without the tag.
+       painted: 108 rebuilt, 26 untouched. Real look with the kit also writes small wk_* custom properties on every object (the kit's own seed values); nothing else.
+  2. Objects made by other builders. tests/prove_new_objects.py: 10 test objects with odd names, tagged garden_role, wearing placeholders -> all got the right material in both looks, no placeholder
+     left, and the kit gave each one its right role from garden_role alone. tests/cross_check.py on builder 1's real and painted test files (70 new objects): no placeholder left, no
+     object left without a surface material, kit leaves 2 objects without a role: 'Basin bamboo spout' and 'Basin ladle' (builder 1 tagged them growth, bamboo material; they keep that material and get no weathering), no problems.
+  3. Delivery check (Scenario gate, same groups as ours/work): results identical before and after, both looks. 6 of 8 groups already fail in the start file for geometry reasons
+     (builder 1's job); the stage added no new error.
+  4. Running twice: object, material, node-group and picture counts identical after the second run; removing the kit brings node groups back to 134 + 17 scan groups.
+  5. Kit patches: kit_patched (fix 1-4) copied; my patch 5 (out/kit_patch5_diffs.txt) adds: bark role matches curves; roof.deck role removed (matched nothing); never patterns that matched
+     nothing fixed; roles may list several custom_props alternatives (garden_role); the set follows the sun lamp (declared direction from the lamp, was an assumed north and latitude 35);
+     garden_kept look (3D growth off); per-material first-guess dials; reader reads the set non-strict (builders' own dials such as moss_vs_stone are only known after they register).
+     Street check: the street's layer node signatures with my kit match the ORIGINAL kit run today except wallgrowth +1 link (the planned fix-4 input, default keeps the street unchanged).
+     (groundcracks differed by 5 nodes between the original kit's own two runs - drift, not the patches.)
+  6. Mask pack: rebuilt from the scene in 21 s, written into kit/ (auto-rebuilt whenever objects tagged garden_owner shapes or life exist, or the lamp moved). The pack now shipped in kit/ matches the START file.
+  7. Packing: pack_images=True packs all 62 pictures (48 scans + 14 kit mask pictures). A packed real file is about 35 MB (too big to keep here); test files here are not packed.
+  8. Pictures (Cycles, RTX 4090, 960 x 640, 48 samples, denoised): 3 to 4 s a picture; I looked at hero plus rocks, gravel, wall, roof, posts, bridge, lantern, ground in both looks.
+     Rough numbers from the preview JPGs (display brightness 0-255, boxes drawn by hand): roof band 44 -> 64 real / 60 painted (5th percentile 2 -> 14 / 9); gravel 100 -> 140 / 145;
+     bridge boards 85 -> 109 / 88; garden wall 143 -> 113 / 126 (the peeling wall is mid-tone now); whole picture 85 -> 93 / 94; edge to centre brightness stays 1.08 (light is builder 4's).
+  9. Save and reload: the two test files in out/ (surfaces_test_real.blend 11 MB, surfaces_test_painted.blend 8 MB, compressed, pictures not packed) were opened on RunPod WITHOUT running the
+     stage again and drew the same hero picture (3 s; the job took 24 s). So the final step can save once and draw from the saved file.
+ 10. Test plates (out/plates_final_labelled.jpg, out/plates_candidates_round1.jpg): one cube per surface in neutral light. Picked by drawing: Old Wood Floor for timber (Hinoki and Dark
+     Planks showed hard board seams that read as cracks on a post), Pine Bark (red scaly) for the pine.
+
+WHAT I DID NOT TEST OR AM UNSURE OF
+  * Not tested after builder 4's world, lights and hills, nor on builder 2's test files (only builder 1's), nor in EEVEE. Colour balance depends on the final light (the pine bark and the
+    stones look warmer in the orange sun than in the plates).
+  * Not seen at 100 percent: scans are 1k. Close crops of ground and gravel may be soft.
+  * Kit dials are first guesses. The kit draws moss in flat painted tones (built for the film's painter), so it looks like paint on a photo. Found by a layer-by-layer sweep: the pale-mint blotches
+    on stones came from patch moss (groundmoss), not from the wall-growth moss dial I tuned first. Now stones are grey-beige with a few small green patches and small pale lichen spots
+    (they read a little like polka dots). Left for the final step to tune by eye.
+  * Roof: scan tile rows do not line up with the add-on's tile rows (world-position mapping); it reads as aged tile with yellow-green moss on crests, not proven at hero distance in a final.
+  * Ground uses a from-above projection (it is a gentle height field) instead of box projection; steep sides of the mound could stretch a little. Not seen.
+  * Painted look: judged by eye only; passages are my reading of the add-on's rules. The add-on's pigment tool works on Blender 5.2.2 (4 objects, 0.1 s each) but swaps each object's
+    mesh for an identical private copy and adds a hidden handle object per target; the difference to my hand-made passages is small, so it is OFF by default (addon_dir turns it on, tested once).
+  * Switching looks in one session: painted after real works (stones fall back to hand-made nodes), real after painted works. Best: reopen the start file.
+  * "Wet means darker, greener, glossier" not tried (state kept dry).
+
+FAILURES AND FIXES ALONG THE WAY
+  * First plate sheet had four black cubes: every material rebuilt the shared scan node group, which cut the wires of materials built before it. Fixed (each group is built once per run). No RunPod
+    picture was drawn before the fix.
+  * Kit set file: mode name was wrong ('declared_and_openness' is the real one); reader refused the set because of builder dials (fixed, patch 5).
+  * Kit moss came out pale lime on stones: four tuning rounds (see above).
+  * One command was refused by Claude Code's safety check (an rm inside a bash -c script); I re-ran it without the removal. Nothing was lost.
+  * RunPod itself: no failure. The first call (status) woke a worker; it only cost a few seconds.
+
+RUNPOD
+  11 render jobs, 714 s billed in total (about US$0.22 at the quoted US$1.10 an hour for a 4090) plus about 60 small upload and download calls (a second or two each). Every job ended by itself;
+  nothing is left running. Uploaded to the store (same paths): maps/, kit/, the .py files, a copy of the add-on 0.2.1 under its own path (4.4 MB), and the start file (already there).
+  A preview job costs about 45 s (Blender start 6 s, kit 25-40 s, 3 s a picture).
+
+FOR THE FINAL STEP
+  * Run order: shapes, life, surfaces, (weathering is inside surfaces for real), light. Save garden_real.blend after ss.apply({'look': 'real', 'pack_images': True}); save garden_painted.blend after
+    ss.apply({'look': 'painted'}). Do not apply weathering twice. For every real picture call weathering_stage.camera_for_picture(camera, picture_height_px) first.
+  * Preview list: out/preview_requests.json (hero, rocks, gravel, wall, roof, bridge, lantern, ground, posts). render_preview.py has --dialtest and --sweep for tuning kit dials.
+  * Things to look at in the first full preview: roof not black, gravel pale with lines, stones not green blotches, ground not camouflage, bridge boards silver and different from each other,
+    hall plaster not clean white, lantern stone grey with its glow box untouched.

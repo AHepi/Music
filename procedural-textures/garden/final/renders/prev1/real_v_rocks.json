@@ -1,0 +1,80 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "proc-work/garden/final/garden_real.blend",
+ "args": {
+  "out": "proc-work/garden/final/renders/prev1/real_v_rocks",
+  "camera": "v_rocks",
+  "size": "960x640",
+  "samples": 64,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": false,
+  "check_groups": false,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "9aa0c82e4704fe43077802e930659b91a542fb573918d1937de045ae77acfdde",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD Ryzen 9 7950X 16-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 64,
+ "seed": 7,
+ "camera": "v_rocks",
+ "size": [
+  960,
+  640,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 3.26,
+ "files": {
+  "png": {
+   "path": "proc-work/garden/final/renders/prev1/real_v_rocks.png",
+   "bytes": 900790,
+   "sha256": "083871d81207c14481fb937888714e0652a4707d0043514f61d0a85994e8600c"
+  }
+ }
+}

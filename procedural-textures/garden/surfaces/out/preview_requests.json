@@ -1,0 +1,25 @@
+{
+ "what": "Preview request list for the final step (builder 3 surfaces). Each name is a view that render_preview.py already knows; draw them at 100 percent (2400 x 1600) crops or at 1200 x 800 first.",
+ "how": "blender -b --disable-autoexec <garden .blend> --python <surfaces folder>/render_preview.py -- real <outdir> --weather 1 --views hero,rocks,gravel,wall,roof,bridge,lantern,ground,posts   (for the painted look: -- painted <outdir> --views ...)",
+ "camera_note": "render_preview.py makes its own temporary cameras. For real pictures with the weathering kit on, call weathering_stage.camera_for_picture(camera, picture_height_px) before each picture (render_preview.py does it).",
+ "views": {
+  "hero": "the photo camera: whole picture, the one to compare with the original",
+  "roof": "roof edge and eave: tile colour and roughness, moss only on shaded rows, roof no longer near black",
+  "wall": "long garden wall (Right wall behind hall) from the courtyard: peeling plaster, damp foot, cap overhang",
+  "gravel": "raked gravel court: pale grey, rake lines crisp, no pink, stepping stones",
+  "rocks": "pond rocks: scan surface, lichen on the shaded sides, kit moss only at the feet",
+  "bridge": "bridge boards: silver-grey, per-board tone, wear along each board",
+  "lantern": "lantern and the rocks behind it",
+  "ground": "ground near the maple: passages, no camouflage, tiling not visible",
+  "posts": "hall posts, veranda deck, plinth stone"
+ },
+ "judge": [
+  "thumbnail first against the original",
+  "roof not black (5th percentile above about 10 of 255 in the 960 x 640 preview)",
+  "gravel pale, lines visible",
+  "no flat pale-green blotches on stones (the kit's patch moss)",
+  "ground not camouflage",
+  "bridge boards silver and each a little different"
+ ],
+ "kit_dial_test": "render_preview.py --dialtest '{\"name\": {\"wallgrowth\": {\"moss_amount\": 0}}}' draws the first view once per variant; --sweep draws it once per kit layer switched off."
+}

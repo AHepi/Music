@@ -1,0 +1,57 @@
+{
+ "look": "painted",
+ "steps": [
+  "sky",
+  "ground",
+  "pond",
+  "toe",
+  "pine",
+  "plants",
+  "maple",
+  "hedge"
+ ],
+ "seconds": 0.4,
+ "created": [
+  "Fix / far hedge"
+ ],
+ "changed": [
+  "Compositor group GARDEN finish",
+  "Hall glow 0",
+  "Hall glow 1",
+  "Hall glow 2",
+  "Hall glow 3",
+  "Maple leaves",
+  "Material:GARDEN ground.earth",
+  "Material:Moss and earth",
+  "Material:Raked gravel",
+  "Shoji paper",
+  "World (painted sky: polygon rings, polyline band warp)"
+ ],
+ "log": [
+  "--- step sky",
+  "sky: painted world rebuilt: sun rings are 8-10 sided unequal polygons, band warp is a straight-edged polyline of the azimuth",
+  "    (0.1 s)",
+  "--- step ground",
+  "ground: 3 painted materials rebuilt with straight-edged flat passages (ground 6 colours, gravel 4 pale ones, rake grooves darkened by ambient shadow)",
+  "    (0.0 s)",
+  "--- step pond",
+  "pond: glossy-ray visibility switched off for ['Hall glow 0', 'Hall glow 1', 'Hall glow 2', 'Hall glow 3', 'Shoji paper'] (they still light the garden and are still seen directly; they are no longer mirrored in the water as white shards)",
+  "    (0.0 s)",
+  "--- step toe",
+  "toe: shadow lift added at the end of the compositor (T 0.03, L0 0.014, tint 0.75,1.0,0.95)",
+  "    (0.0 s)",
+  "--- step pine",
+  "pine: painted look keeps its chiselled pads (nothing to do)",
+  "    (0.0 s)",
+  "--- step plants",
+  "plants: painted look keeps its flat tufts and moss (nothing to do)",
+  "    (0.0 s)",
+  "--- step maple",
+  "maple: 135 leaves added in front of the dark gap (ray hits at [(-3.26, 0.69, 2.72), (-3.59, 0.79, 2.72), (-4.45, 0.62, 2.77)]), copied from the nearest existing leaves",
+  "maple: painted leaves kept 38% and grown x1.62 (chunkier planes, same coverage)",
+  "    (0.2 s)",
+  "--- step hedge",
+  "hedge: 21 clipped shrubs (840 triangles) along the far west and south edges of the ground, material Life / shrub",
+  "    (0.0 s)"
+ ]
+}

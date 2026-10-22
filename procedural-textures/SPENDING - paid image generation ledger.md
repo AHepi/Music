@@ -41,6 +41,9 @@ Helpers still look up the price before every paid call and never repeat a call j
 | 21 Oct 08:38 | RunPod's own bill for machines today: US$3.85 (lags about an hour); the two stores so far US$0.03 | | |
 | 21 Oct 05:39-18:44 | the same machine served every job until the end (EEVEE and Cycles comparison, the wet lockout checks, the weathering kit with its fix round); ended by me at 18:44 when all jobs were done, as you asked | US$0.89 an hour, about 13 hours | about US$11.60 |
 | 21 Oct 18:44 | RunPod's own bill for machines today: US$12.85 (lags about an hour); stores so far US$0.09; no machine running | | |
+| 21 Oct 21:05-21:30 | set-up machine (RTX 4090 on the Romania store) to put the pay-per-second job taker on the store; ended by me | US$0.89 an hour, about 25 minutes | about US$0.37 |
+| 21 Oct 21:20 onwards | PAY-PER-SECOND endpoint (serverless, Romania store, RTX 4090 first): billed only while a worker runs | US$1.10 an hour of work (0.03 cents a second) | tests so far about 1 minute of work, about US$0.02 |
+| 21 Oct 21:00 - 22 Oct 01:30 | Japanese garden: builders' previews, the combined finals, the fix round and the checkers' jobs (about 47 minutes of card time, plus about 900 small file-transfer jobs) | RunPod's hourly bill for the endpoint: 21h US$0.03, 22h US$0.30, 23h US$0.68, 00h US$0.20 | US$1.21 billed to 01:00; idle standby workers billed nothing |
 
 
 ## Seen in fal's history but not from this work

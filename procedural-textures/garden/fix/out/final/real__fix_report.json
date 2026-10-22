@@ -1,0 +1,62 @@
+{
+ "look": "real",
+ "steps": [
+  "sky",
+  "ground",
+  "pond",
+  "toe",
+  "pine",
+  "plants",
+  "maple",
+  "hedge"
+ ],
+ "seconds": 0.3,
+ "created": [
+  "Fix / far hedge"
+ ],
+ "changed": [
+  "Astra / moss tone 0",
+  "Astra / moss tone 1",
+  "Astra / moss tone 2",
+  "Astra / moss tone 3",
+  "Compositor group GARDEN finish",
+  "Hall glow 0",
+  "Hall glow 1",
+  "Hall glow 2",
+  "Hall glow 3",
+  "Life / tufts (records)",
+  "Material:Life / shrub",
+  "Material:Life / tuft",
+  "Pine pads",
+  "Shoji paper"
+ ],
+ "log": [
+  "--- step sky",
+  "sky: realistic look keeps its smooth sky (nothing to do)",
+  "    (0.0 s)",
+  "--- step ground",
+  "ground: realistic look keeps its scan ground (nothing to do)",
+  "    (0.0 s)",
+  "--- step pond",
+  "pond: glossy-ray visibility switched off for ['Hall glow 0', 'Hall glow 1', 'Hall glow 2', 'Hall glow 3', 'Shoji paper'] (they still light the garden and are still seen directly; they are no longer mirrored in the water as white shards)",
+  "    (0.0 s)",
+  "--- step toe",
+  "toe: shadow lift added at the end of the compositor (T 0.03, L0 0.014, tint 0.75,1.0,0.95)",
+  "    (0.0 s)",
+  "--- step pine",
+  "pine: 8 pads kept (body colour x0.72), old needle fringe 2556 triangles replaced by 64385 needle triangles in sprays of 5 (density 700.0/m2 of pad)",
+  "    (0.3 s)",
+  "--- step plants",
+  "plants: tuft tips green, 4 tuft shapes replaced by four different recipes, tuft sizes x0.62-1.7 and tilt +-0.22 rad varied",
+  "plants: 4 moss tones: colour difference between the two ramp ends cut to 40 percent, mottling scale 9 -> 4.5, cell bump strength 0.35 -> 0.10 and cells 140 -> 320 per object",
+  "plants: shrub material (lantern shrubs and the far hedge): colour difference halved, cells 26 -> 80 per metre, bump 0.6 -> 0.25",
+  "plants: lichen amount 0.6 -> 0 on 17 dressed-stone materials and -> 0.12 on 34 natural-stone materials (moss kept)",
+  "    (0.0 s)",
+  "--- step maple",
+  "maple: realistic look keeps its fine leaves (nothing to do)",
+  "    (0.0 s)",
+  "--- step hedge",
+  "hedge: 21 clipped shrubs (3360 triangles) along the far west and south edges of the ground, material Life / shrub",
+  "    (0.0 s)"
+ ]
+}
