@@ -191,7 +191,7 @@ explainer-film-place variations refine moss-run/variations-result.json --pick v0
 - The variations (and the baseline, the saved scene as it is) are split over up to `place_render.workers_max` (3) card jobs, at least 3 variations in each, sent at the same time. Each job opens the scene once; for each variation it
   applies the settings, draws small quick pictures (600 x 400; EEVEE 16 samples or Cycles 24 samples by the renderer rule, chosen once from the baseline) through every camera, then puts the values back and checks a fingerprint
   (a script hook, or a reset that did not come back exact, reopens the scene). The scene is never saved. `--where local` runs the same jobs here, one after another (tiny scenes and tests).
-- The scene waits on the store under its own checksum, so a second batch on the same scene uploads nothing again.
+- The scene waits on the store under its own checksum, so a second batch on the same scene does not upload the scene again.
 - AFTER drawing, the pictures are measured here (no card seconds): value range, detail energy, colour shift, saturation shift and squint score against the baseline; every pair is compared pixel by pixel, and variations that came
   out nearly the same as the baseline ("does not show in these cameras") or as each other are flagged, one line for each group. ONE contact sheet (a JPG under 400,000 bytes) shows the baseline, each variation's name, settings and measures,
   the flags and the card seconds. `variations-result.json` holds everything.
@@ -222,9 +222,9 @@ are first tries too. The style rule (few, big, clean, designed marks; no photogr
 - A large place: only a hut, a 36 by 26 m yard and a 12 m canal lock were built and finished here. The plan masks, the wear and the growth are untested at
   hundreds of buildings, and Cycles was not run with the kit on a place that size.
 - The plugin's own rented-card client (`rent`, `render --where rented`) was tested against a pretend card (a fake service that hands each job to the real job taker), never
-  against a real endpoint: the settings it needs were never read. The `variations` batch WAS run on real rented cards (23 October 2026, twice, 3 jobs at once), but through the project's own
+  against a real endpoint: the settings it needs were never read. The `variations` batch WAS run on real rented cards (23 October 2026: two batches of 10 in 3 jobs at once, then a refined batch of 6 in 2 jobs), but through the project's own
   command-line client (`--card-client`), not through the plugin's client.
-- The card-time allowance numbers are judged guesses (10 minutes for a builder, 5 for a fixer); the two real batches used 180 and 158 card seconds each. How a whole run of the workflow `build-a-place` keeps inside them was tested only against canned helpers.
+- The card-time allowance numbers are judged guesses (10 minutes for a builder, 5 for a fixer); the three real batches used 180, 158 and 104 card seconds. How a whole run of the workflow `build-a-place` keeps inside them was tested only against canned helpers.
 - The batch rule and the allowance work as tools that refuse; that a smaller model, asked only for a place in plain words, then really batches its tries was not tried.
 - `paint_request.py --keep-wetness` (the painter prompt for a place built wet) was tried on the template's words only; no painting was paid for, so how the painter treats the words is not known.
 - The `balance` action of the client was written from RunPod's documented query and never run.

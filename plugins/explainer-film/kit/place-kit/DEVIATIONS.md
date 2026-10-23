@@ -175,12 +175,13 @@ Each of these is small, has its own test, and leaves the old behaviour reachable
 - **The difference threshold is 8 percent of a setting's range** (first written as 15): ten values of ONE dial must fit in its range, 10 percent apart. A first real batch showed that settings far apart can still give nearly the same picture
   (moss at 0.15 and 0.75 in a scene where moss hardly shows); so the pictures decide after drawing, and the sheet says which variations did not show.
 - **The sheet stays under 400,000 bytes** (not 400 KiB): the quality and then the size are lowered until it fits.
-- **The scene is stored on the card's store under its checksum** (`place-jobs/scenes/<8 letters>/`), so the second and last batch for a change uploads nothing again.
+- **The scene is stored on the card's store under its checksum** (`place-jobs/scenes/<8 letters>/`), so the second and last batch for a change does not upload the scene again.
 
 ## Left out or not done (said plainly)
 
-- **Measured on a real card, but only twice, and not through the plugin's own client.** Two batches of 10 variations of the finished canal lock (3 jobs each, two cameras, Cycles 600 x 400) took 180 and 158 card seconds (about US$0.05 each at
-  the price of the day; an estimate, not a bill). The estimate of the plan (250 s) was above both. Wake-up times were 0.8 to 24.3 s.
+- **Measured on a real card, but only three times, and not through the plugin's own client.** Two batches of 10 variations of the finished canal lock (3 jobs each, two cameras, Cycles 600 x 400) took 180 and 158 card seconds (about US$0.05 each at
+  the price of the day; an estimate, not a bill), and the one more batch the rule allows, 6 variations around the picks in 2 jobs, took 104. The first two plans estimated 250 s each (too high); the house numbers for the seconds of opening a scene and drawing a picture were then refitted to what was measured, and the same plans now estimate 208 s (real: 180 and 158) and, for the refined batch, 148 s
+  (real: 104): always a little above, so an estimate is never too small. Wake-up times were 0.8 to 24.3 s. Whether the scene was really not uploaded again in the third batch was shown with the pretend card only; on the real card the set-up time fell from 31 s to 28 s, too little to call it proof.
 - **A script hook that needs more than its own file does not travel to a card** (only the hook file is uploaded): the template says so and offers local drawing for tiny scenes.
 - **The workflow's card-time rules ran only against canned helpers.**
 

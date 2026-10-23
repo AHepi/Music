@@ -414,6 +414,15 @@ check.true('`make` writes the scene and the settings beside the file (relative),
            and sp.read_spec(made_args.out)['scene'] == made_scene, str(made_content.get('scene')))
 
 
+refine_args = types.SimpleNamespace(action='refine', spec=os.path.join(folder, 'run-one', 'variations-result.json'), pick=['moss1', 'moss3'], count=6, seed=3, radius=0.3, out=os.path.join(made_folder, 'batch2.json'))
+spoken.clear()
+code = verb_module.main_command(refine_args, say=say)
+refined = json.load(open(refine_args.out))
+check.true('`refine` on a finished run writes its scene and settings beside the new file too, names the blend short (blend-moss1-moss3), keeps four decimals, and the new file is read by the real reader',
+           code == 0 and refined['scene'] == '../work/scene.blend' and refined['settings'] == '../work/place-settings.json' and refined['variations'][0]['name'] == 'blend-moss1-moss3'
+           and sp.read_spec(refine_args.out)['scene'] == scene_file and len(refined['variations']) == 6, str(refined['variations'][0]))
+
+
 class RecordingService(FakeService):
     """The fake card service that also writes down every file operation of the small jobs."""
 
@@ -433,7 +442,7 @@ for service_used, tag in ((first_service, 'again-1'), (second_service, 'again-2'
                           backend=cards.ClientCard(rc.Client(service_used, sleep=lambda s: None), card_settings), environ=settings_env)
 scene_paths_1 = {path for op, path in first_service.operations if path and path.endswith('scene.blend')}
 scene_paths_2 = {path for op, path in second_service.operations if path and path.endswith('scene.blend')}
-check.true('the scene waits on the store under its own checksum, in the same place for every batch (place-jobs/scenes/<8 letters>/), so the second and last batch uploads nothing again',
+check.true('the scene waits on the store under its own checksum, in the same place for every batch (place-jobs/scenes/<8 letters>/), so the second and last batch does not upload the scene again',
            len(scene_paths_1) == 1 and scene_paths_1 == scene_paths_2 and re.search(r'/place-jobs/scenes/[0-9a-f]{8}/scene\.blend$', next(iter(scene_paths_1))) is not None
            and not [1 for op, path in second_service.operations if op == 'put' and path.endswith('scene.blend')], str(sorted(scene_paths_1)))
 check.true('  (the settings file and its owners table wait there too, under their own checksum, and are checked, not sent again)',

@@ -51,24 +51,24 @@ def _write(path, content):
         json.dump(content, handle, indent=1)
 
 
+def beside(path, folder):
+    """A path written relative to the folder of the variations file when it can be (the file then still works after the folder is moved or copied)."""
+    if not path:
+        return None
+    try:
+        return os.path.relpath(os.path.abspath(path), folder)
+    except ValueError:          # another drive
+        return os.path.abspath(path)
+
+
 def make_file(parsed, say):
     count = int(parsed.count or 10)
     change = parsed.change or 'one change'
     out = parsed.out or f'{spec_module.safe_name(change)}-variations.json'
     here = os.path.dirname(os.path.abspath(out))
-
-    def beside(path):
-        """A path written relative to the variations file when it can be (the file then still works after the folder is moved or copied)."""
-        if not path:
-            return None
-        try:
-            return os.path.relpath(os.path.abspath(path), here)
-        except ValueError:          # another drive
-            return os.path.abspath(path)
-
     scene = os.path.abspath(parsed.scene) if parsed.scene else None
     settings = os.path.abspath(parsed.settings) if parsed.settings else None
-    content = spec_module.make_variations(list(parsed.keys or []), count, parsed.seed, change, beside(scene), beside(settings), parsed.cameras)
+    content = spec_module.make_variations(list(parsed.keys or []), count, parsed.seed, change, beside(scene, here), beside(settings, here), parsed.cameras)
     _write(out, content)
     say(f'PASS made {out}: {count} variation(s) that spread {", ".join(parsed.keys)} across their ranges (seed {parsed.seed}); every pair differs by at least {100 // count}% of the range on each setting.')
     if not scene:
@@ -86,6 +86,9 @@ def refine_file(parsed, say):
     result = json.load(open(path, encoding='utf-8'))
     content = spec_module.refine_variations(result, list(parsed.pick), int(parsed.count or 6), parsed.seed, parsed.radius)
     out = parsed.out or os.path.join(os.path.dirname(os.path.abspath(path)), f'{result.get("change_id", "change")}-batch2.json')
+    for field in ('scene', 'settings'):
+        if content.get(field):
+            content[field] = beside(content[field], os.path.dirname(os.path.abspath(out)))
     _write(out, content)
     say(f'PASS made {out}: {len(content["variations"])} variation(s) around {", ".join(parsed.pick)}'
         + ('; the first is their blend' if len(parsed.pick) > 1 else '') + '. This is the last batch the rule allows for this change.')
