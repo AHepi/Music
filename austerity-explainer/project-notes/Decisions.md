@@ -671,6 +671,43 @@ overturn any of them in one line. Changes to the project must follow this file.
   plate 25 s, against 4 s and 3 s with EEVEE). Not yet tested: Cycles in moving pictures (its noise clean-up could flicker frame to frame), and
   whether the painter paints better from Cycles pictures. The current wet lockout painting was made from an EEVEE plate and stays as it is.
 
+45. **The plugin must carry every technique, so a model uses it without being told** (your words, 22 October 2026, asking for a forest village as a
+    test of the plugin): "Sonnet needs to use normals, displacements, dirt, grime, weeds, weathering, damage.. basically everything. But don't tell it
+    that. These things need to be in the plugin."
+
+### Claude's calls for item 45
+
+- The village test was given only your village words and the plugin; its helpers could read only the plugin, their work folder and the rented-card guide.
+- A leak to fix, found on the way: helpers started in the same turn as your message were handed that message automatically, so plugin 1.4.0 at first
+  carried your request word for word with a plan for it. All of that was removed, a guard test keeps those words out (stored scrambled), and later runs
+  were started so that nothing of yours was handed on.
+
+46. **Batch the test pictures with workers** (your words, 22 October 2026, after the garden's US$10.89 of card time): "And batch them with workers. Do one
+    full sweep of changes, then look. Instead of one small change, then check. Maybe even batch according to variations. So maybe 10 variations that are
+    measurably different for each asset change. That way, they can test multiple different types of changes at once."
+
+### Claude's calls for item 46
+
+- In the plugin as `explainer-film-place variations`: a free tiny first pass on this computer drops versions that would look alike, then up to 3 rented
+  cards draw the rest at once and one labelled sheet comes back; every helper has a card-time allowance and every card job is logged.
+
+47. **Opus for the plugin work** (your words, 23 October 2026): "I'm thinking you should use Opus for the plugin work. So switch to Opus 5.5 as subagents
+    for now". And for the next round: "Yes. But you only need three Opus runs: Plugin update, rebuild using Sonnet, Verify using Opus."
+
+### Claude's calls for item 47
+
+- Helpers that write or check the plugin run on Opus 5.5; the blind test models and the village builder stay on Sonnet, because they stand for the
+  smaller model the plugin is written for.
+
+48. **Every new set that uses different tools updates the plugin** (your words, 23 October 2026): "Also for future reference, every new set that uses
+    different tools needs to update the plugin."
+
+### Claude's calls for item 48
+
+- "Set" means any place, set or props built for this project (a film set, a test scene like the coal mine or the garden). When a set uses a tool,
+  technique, material source or lesson the plugin does not carry, adding it to the plugin is part of that set's job, done before the set is called
+  finished, and checked like the rest of the plugin. The repository's CLAUDE.md says this so every future session sees it.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
