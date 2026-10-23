@@ -433,9 +433,9 @@ check.true('effort low for builders, max for checkers; the planner follows the e
 check.true('the Blender path reaches the helpers; the reference pictures reach the planner and the renderer (the guard is not provisional); the accepted file reaches the audit; the ledger the process checker',
            '--blender /path/to/blender' in prompt_of(cheap, 'build:lock_gate') and '/path/to/reference.jpg' in prompt_of(cheap, 'plan') and 'the reference pictures: /path/to/reference.jpg' in prompt_of(cheap, 'render')
            and '--accepted /path/to/accepted.json' in prompt_of(cheap, 'audit') and '/path/to/ledger.json' in prompt_of(cheap, 'check:process'))
-given_parts = run_case('given_parts', args={'parts': [{'name': 'smithy', 'owner': 'smithy', 'brief': 'a small smithy'}], 'views': [{'name': 'sunset', 'size': [600, 400]}]})
+given_parts = run_case('given_parts', args={'parts': [{'name': 'pump_house', 'owner': 'pump_house', 'brief': 'a small pump house'}], 'views': [{'name': 'sunset', 'size': [600, 400]}]})
 check.true('a part the person asked for that the planner left out is added with its brief and built; the person\'s views win over the planner\'s',
-           'build:smithy' in labels(given_parts) and any('smithy' in one_label and 'added' in one_label for one_label in given_parts['logs']) and 'sunset: camera "View sunset", 600 x 400' in prompt_of(given_parts, 'render')
+           'build:pump_house' in labels(given_parts) and any('pump_house' in one_label and 'added' in one_label for one_label in given_parts['logs']) and 'sunset: camera "View sunset", 600 x 400' in prompt_of(given_parts, 'render')
            and 'wide: camera' not in prompt_of(given_parts, 'render'))
 check.true('every non-blind prompt names the folders of the run and the place and preflight commands by full path',
            all('/path/to/run' in one_call['prompt'] and f'{PLUGIN_PATH}/bin/explainer-film-place' in one_call['prompt'] for one_call in happy['calls'] if not one_call['label'].startswith('blind')))
@@ -449,9 +449,9 @@ check.true('the card-time allowances written in the script (builder, fixer, inte
            details=f'script {written_minutes}, house {house_minutes}')
 LEDGER_PATH = '/path/to/run/card-time-ledger.jsonl'
 builder_text = prompt_of(happy, 'build:lock_gate')
-check.true('card time: a builder\'s prompt gives its own helper name, its role, the run\'s ledger and its allowance, and carries the batch rule (one sweep, about 10 versions in ONE batch, at most one more, small quick pictures, full-size once at the end)',
+check.true('card time: a builder\'s prompt gives its own helper name, its role, the run\'s ledger and its allowance, and carries the batch rule (one sweep, about 10 variations in ONE batch, at most one more, small quick pictures, full-size once at the end)',
            f'--helper builder-lock_gate --role builder --ledger {LEDGER_PATH}' in builder_text and 'Your allowance is 10 minutes' in builder_text and 'THE BATCH RULE' in builder_text
-           and 'batched-rounds-and-card-time.md' in builder_text and 'ONE sweep' in builder_text and 'about 10 versions' in builder_text and 'ONE batch' in builder_text and 'at most ONE more batch' in builder_text
+           and 'batched-rounds-and-card-time.md' in builder_text and 'ONE sweep' in builder_text and 'about 10 variations' in builder_text and 'ONE batch' in builder_text and 'at most ONE more batch' in builder_text
            and 'full-size pictures are drawn once, at the very end' in builder_text and 'variations plan FILE.json' in builder_text)
 check.true('  (the ground builder, a fixer and a repairer have their own names and the fixer\'s 5 minutes; the integrator and the renderer theirs)',
            '--helper builder-ground_and_water --role builder' in prompt_of(happy, 'ground:ground_and_water') and '--helper fixer-lock_gate --role fixer' in prompt_of(happy, 'fix:lock_gate')

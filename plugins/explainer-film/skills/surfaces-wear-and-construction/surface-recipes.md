@@ -133,20 +133,27 @@ The recipes above are the ones this text explains. `surfaces.json` holds 45 ids;
 
 ## Photo surfaces from Poly Haven (CC0, fetched at run time, never shipped)
 
-Poly Haven pictures are free to use without credit. The slugs below were read from its site on 22 October 2026; the
-kit's `place-kit/data/polyhaven_choices.json` records each with its real size and a caution. The picture URL pattern is
+Poly Haven pictures are free to use without credit. The kit's `place-kit/data/polyhaven_choices.json` is a SMALL
+SAMPLE read once from the public Poly Haven list on 23 October 2026: one or two pictures for each kind of surface the kit
+knows, and a few everyday props, each with its real size read from the list and a caution. It is not a shopping list for
+any place. **Search the site for the surfaces and props your own place needs** (https://polyhaven.com/textures and
+https://polyhaven.com/models, or the full list `https://api.polyhaven.com/assets?t=textures`, whose `dimensions` give
+the real size in millimetres). The picture URL pattern is
 `https://dl.polyhaven.org/file/ph-assets/Textures/jpg/<1k|2k>/<id>/<id>_<map>_<1k|2k>.jpg`. Send a generic client name
 with the request, never a person's name or address.
 
-- Textures: brown_mud, brown_mud_02, brown_mud_03, brown_mud_dry, brown_mud_leaves_01, brown_mud_rocks_01,
-  forrest_ground_01, forrest_ground_03, forest_ground_05, forest_leaves_02, grass_path_2, leafy_grass,
-  thatch_roof_angled, reed_roof_03, reed_roof_04, riet_01, clay_plaster, clay_roof_tiles, castle_wall_slates,
-  cobblestone_01 to cobblestone_05, bark_brown_01, bark_brown_02, brick_moss_001.
-- Models: Barrel_01, Barrel_02, barrel_03, wine_barrel_01, wooden_bucket_01, wooden_bucket_02, wooden_crate_01,
-  wooden_crate_02, wicker_basket_01, wicker_basket_02, wooden_ladder, wooden_ladder_02, tree_stump_01, tree_stump_02,
-  dead_tree_trunk, dead_tree_trunk_02, Lantern_01, wooden_lantern_01, jug_01, metal_jug, rusted_wheel_rim_01,
-  rusted_wheel_rim_02.
-- Not found (script these yourself): a cart, hay or straw bales, a trough, an anvil, a well.
+- Example: for a wet stone quay you would search "cobblestone", "paving" and "stone wall", draw a small test plate of two
+  or three, and keep the one that reads right at film size. The sample's `cobblestone_05` (2.4 m a copy) and
+  `stone_wall` (2 m) are only a starting point.
+- Sample textures (one or two per kind): ground: asphalt_02, concrete_floor_worn_001, cobblestone_05,
+  rectangular_paving, gravel_road, dry_ground_01, brown_mud_02, leafy_grass, forest_leaves_02, coast_sand_01, snow_02;
+  floors: wood_floor_worn, floor_tiles_06; walls: brick_wall_001, plastered_wall_02, concrete_wall_001, stone_wall,
+  corrugated_iron; metal: rusty_metal_02, metal_plate; roofs: clay_roof_tiles, roof_slates_02, thatch_roof_angled;
+  wood: weathered_planks, rough_wood, bark_brown_02.
+- Sample models: wooden_crate_01, plastic_crate_01, cardboard_box_01, wine_barrel_01, Barrel_01, propane_tank,
+  metal_trash_can, old_tyre, ladder_sectioned_01, street_lamp_01, fire_hydrant, concrete_road_barrier, utility_box_01,
+  painted_wooden_bench, wooden_picnic_table, planter_box_01, lifebuoy.
+- If Poly Haven has no model of a prop you need, build it in a script.
 
 How to use them: draw a small test plate of the surface first; open every downloaded picture at full size and look for
 stickers, brands and digits (judgement); remember that scans alone read bland. In the street, scanned bricks looked

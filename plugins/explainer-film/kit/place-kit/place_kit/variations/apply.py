@@ -1,14 +1,16 @@
 """What this does (inside Blender): APPLIES one variation to the open, finished scene and puts everything back afterwards, so one card job can draw many variations from one opened scene.
-It changes only what the variation names (see keys.py): the strength of wear layers (the layer nodes' Amount input), a layer's dials (the node's own inputs), the state (the wetness amount
-written on every object) and the look (every layer's amount written on every object), or runs a script hook. It never saves the scene.
+It changes only what the variation names (see keys.py): the strength of wear layers (master and amount.<layer> MULTIPLY the layer nodes' Amount input as the saved scene has it, so 1 is
+the saved scene and 2 is twice as strong), a layer's dials (the node's own inputs, set to the variation's value in every material), the state (the wetness amount written on every object) and
+the look (every layer's amount written on every object), or runs a script hook. It never saves the scene. saved_values() reads what the saved scene has for the dials a batch varies (lowest
+and highest over the materials), so the sheet can show them and the next check before drawing can use them.
 
 Putting back: every value it changes is written down first (which material, which node, which input, what it was; which object property, what it was). restore() writes them back, and
 fingerprint() (a short hash of every wear-layer input and every pk_<layer>_amount on every object) says whether the scene is exactly as it was: the worker compares it with the fingerprint
 taken before the first variation and REOPENS the scene when they differ, so a reset that did not work can never leak one variation into the next. A script hook can change anything, so after a
 hook the worker always reopens.
 
-A concrete example: apply({'set': {'amount.moss_and_algae': 0.2, 'dials.moss_and_algae.cover': 0.9}}) sets the Amount of every moss layer node to 0.2 and its Cover input to 0.9 and
-returns a note for any layer that is in no material of the scene (then the setting changed nothing there). It needs Blender (bpy).
+A concrete example: apply({'set': {'amount.moss_and_algae': 1.6, 'dials.moss_and_algae.cover': 0.9}}) multiplies the Amount of every moss layer node by 1.6 (a node saved at 0.45 becomes
+0.72), sets its Cover input to 0.9, and returns a note for any layer that is in no material of the scene (then the setting changed nothing there). It needs Blender (bpy).
 """
 import hashlib
 import importlib.util
@@ -54,13 +56,26 @@ class Applier:
     def layer_nodes(layer):
         return [(material, node) for material in bpy.data.materials for node in chain.layer_nodes(material, layer)]
 
-    def _set_input(self, material, node, input_name, value):
+    def _set_input(self, material, node, input_name, value, scale=False):
+        """Sets one input (scale=True multiplies what is there instead). The old value is written down first, so restore() can put it back."""
         socket = node.inputs.get(input_name)
         if socket is None:
             return False
         self.sockets.append((material.name, node.name, input_name, _plain(socket.default_value)))
-        socket.default_value = float(value)
+        socket.default_value = float(socket.default_value) * float(value) if scale else float(value)
         return True
+
+    def saved_values(self, key_list):
+        """{key: [lowest, highest]} over the materials, for every dial key in key_list, as the scene has it NOW (call it before applying anything). A layer in no material gives None."""
+        found = {}
+        for key in key_list:
+            info = keys.describe_key(key)
+            if info['kind'] != 'dial':
+                continue
+            socket_name = 'Seed' if info['dial'] == 'seed' else dials_module.socket_name(info['dial'])
+            values = [float(node.inputs[socket_name].default_value) for _, node in self.layer_nodes(info['layer']) if node.inputs.get(socket_name) is not None]
+            found[key] = [round(min(values), 6), round(max(values), 6)] if values else None
+        return found
 
     def _remember_props(self):
         if self.remembered_props:
@@ -98,12 +113,12 @@ class Applier:
             amount = values.get(f'amount.{layer}')
             if master is None and amount is None:
                 continue
-            number = (1.0 if master is None else master) * (1.0 if amount is None else amount)
+            factor = (1.0 if master is None else master) * (1.0 if amount is None else amount)
             found = self.layer_nodes(layer)
             if not found and amount is not None:
                 notes.append(f'the layer {layer} is in no material of this scene, so its amount changed nothing')
             for material, node in found:
-                self._set_input(material, node, 'Amount', number)
+                self._set_input(material, node, 'Amount', factor, scale=True)
         if master is not None and not any(self.layer_nodes(layer) for layer in names.LAYER_ORDER):
             notes.append('no wear layer is in any material of this scene, so "master" changed nothing (was the scene finished?)')
         for key, value in values.items():

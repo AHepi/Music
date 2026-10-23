@@ -2,7 +2,8 @@
 surface-and-wear skill first, even when other Blender skills compete for the request.
 1. hooks.json is valid JSON, names one UserPromptSubmit hook that runs place-reminder.py from the plugin folder, and that script is there.
 2. Requests that build a place, a set or props (a village, a lock, a garden, a prop, Blender itself) get the reminder, which names the skill and the three commands.
-3. Requests that are not about building a place (weather, a typo, a poem, a shopping cart in a web page, a random forest, a stable build, film pages) get nothing at all.
+3. Requests that are not about building a place (weather, a typo, a poem, a shopping cart in a web page, a random forest, a stable build, film pages, a market analysis, the plugin
+   marketplace file, a street address parser, a docking station) get nothing at all; railway, station, market, street and pier requests do get it.
 4. A message the script cannot read (not JSON, no prompt, empty input) gets nothing and exit 0: a hook must never stop the person's work.
 5. The reminder names only commands and skills that exist (the skill folder, the three commands) and holds no key, no address and no personal detail.
 Run: python3 kit/calculators/tests/test_place_hook.py
@@ -55,6 +56,13 @@ positive = [
     'write a python script for blender that makes a tavern interior',
     'I need a 3D diorama of a mill',
     'furnish the kitchen with props',
+    # the second newcomer round: plain place requests that say neither Blender nor 3D
+    'Build an old railway station for a film.',
+    'Make a railway station with platforms and tracks for the film',
+    'Make a fish market by the sea for the film',
+    'Build a street with shops',
+    'build a pier',
+    'make a small chapel on a hill',
 ]
 for prompt in positive:
     text = reminder_for(prompt)
@@ -64,7 +72,8 @@ for prompt in positive:
 negative = [
     'what is the weather in Oslo', 'fix the typo in my README', 'write a poem about the sea', 'add a test for the road parser', 'make the music louder in the film',
     'build a random forest classifier', 'make the nightly build stable', 'add a cart to the shop page', 'make room for the new button', 'Build the film scene for page 4', 'record the narration for chapter 2',
-    'explain what causes inflation', '',
+    'explain what causes inflation', 'make a market analysis for the report', 'update the marketplace file', 'make a street address parser', 'create a docking station for the laptop',
+    'build a work station list', '',
 ]
 for prompt in negative:
     text = reminder_for(prompt)

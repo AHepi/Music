@@ -149,7 +149,7 @@ def check_agreement(place_kit):
         for treatment in spec.get('exempt', {}):
             if treatment not in TREATMENTS:
                 problems.append(f'roles.json {role_id}: exempt "{treatment}" is not a treatment')
-        for pattern in spec.get('name_hints', []):
+        for pattern in spec.get('name_hints', []) + spec.get('weak_name_hints', []):
             try:
                 re.compile(pattern)
             except re.error as error:

@@ -52,7 +52,7 @@ check.true('the allowances are marked judged (nobody measured how long a good tr
            all(row['kind'] == 'judged' for row in card['allowance_minutes'].values()) and card['estimated_wake_up_seconds']['kind'] == 'measured' and card['estimated_seconds_per_final_picture']['kind'] == 'measured')
 
 # (2) the REQUIRED block of the three skills
-BLOCK_WORDS = ['ONE sweep', 'about 10 versions', 'ONE batch', 'variations run', 'ONE more batch', '600 x 400', 'once, at the very end', 'allowance', 'builder 10 minutes, fixer 5', 'batched-rounds-and-card-time.md']
+BLOCK_WORDS = ['ONE sweep', 'about 10 variations', 'ONE batch', 'variations scout', 'variations run', 'ONE more batch', '600 x 400', 'once, at the very end', 'allowance', 'builder 10 minutes, fixer 5', 'batched-rounds-and-card-time.md']
 
 
 def required_block(text):
@@ -73,7 +73,7 @@ check.true('  (a block without the rule is found lacking: the check can fail)', 
 rule = read(RULE_FILE) if os.path.exists(RULE_FILE) else ''
 check.true('the skill file batched-rounds-and-card-time.md exists, starts with what it is, and gives a concrete example (the garden) before the rule',
            rule.startswith('# Batched rounds and card time') and 'What this is:' in rule and rule.index('US$10.89') < rule.index('## 2. The rule'))
-actions = ['variations make', 'variations plan', 'variations run', 'variations refine', 'variations keys', 'card-time show', 'card-time check', 'card-time start']
+actions = ['variations make', 'variations scout', 'variations plan', 'variations run', 'variations collect', 'variations refine', 'variations keys', 'card-time show', 'card-time check', 'card-time start']
 check.true('it names every action it asks a helper to use: ' + ', '.join(actions), all(action in rule for action in actions), details=', '.join(a for a in actions if a not in rule) or 'all named')
 numbers_named = sorted(set(re.findall(r'\bplace_(?:card_time|variations|render|measures)\.[a-z_]+(?:\.[a-z_]+)?', rule)))
 
@@ -98,8 +98,9 @@ check.true('the skill file says where the measures are made and what a card seco
 
 # (4) the five agents
 agent_text = {role: read(os.path.join(PLUGIN, 'agents', f'place-{role}.md')) for role in AGENTS}
-check.true('the builder carries the rule: a section on trying versions, the allowance (builder 10, fixer 5), the ledger flags, the batch, no third batch, and that it reports card_seconds and batches',
-           all(word in agent_text['builder'] for word in ('## 3b. Trying versions', 'builder 10 minutes, fixer 5', '--helper NAME --role ROLE --ledger LEDGER', 'variations plan', 'variations run', 'at most ONE more batch', '`card_seconds`', '`batches`')))
+check.true('the builder carries the rule: a section on trying variations, the allowance (builder 10, fixer 5), the ledger flags, the batch, no third batch, and that it reports card_seconds and batches',
+           all(word in agent_text['builder'] for word in ('## 3b. Trying variations', 'builder 10 minutes, fixer 5', '--helper NAME --role ROLE --ledger LEDGER', 'variations scout', 'variations plan', 'variations run',
+                                                    'variations collect', 'at most ONE more batch', '`card_seconds`', '`batches`')))
 check.true('the integrator may try a dial the batch way (role integrator, 10 minutes) and reports card seconds; the renderer has 10 minutes, draws full size once at the very end and reports card_seconds',
            'role integrator' in agent_text['integrator'] and 'variations run' in agent_text['integrator'] and 'card_seconds' in agent_text['integrator']
            and 'ONCE, at the very end' in agent_text['renderer'] and '`card_seconds`' in agent_text['renderer'] and '(10 minutes: judged)' in agent_text['renderer'])
@@ -123,7 +124,8 @@ check.true('the figure from the garden job (US$10.89 of card time against pictur
 # (6) the tips guide, the hook, the README
 tips = read(os.path.join(KIT, 'docs', 'LLM tips and tricks.md'))
 check.true('the tips guide has the four tips (sweep, batch of about 10, small until the end and full size once, ledger and allowance) in section 8a and a line in the money section',
-           all(f'\n{number}. ' in tips.split('## 9.')[0] for number in (16, 17, 18, 19)) and 'ONE sweep' in tips and 'about 10 versions' in tips and 'ledger' in tips.split('## 17.')[0] and 'Rented-card time is limited' in tips)
+           all(f'\n{number}. ' in tips.split('## 9.')[0] for number in (16, 17, 18, 19)) and 'ONE sweep' in tips and 'about 10 variations' in tips and 'ledger' in tips.split('## 17.')[0] and 'Rented-card time is limited' in tips
+           and 'variations scout' in tips and 'variations collect' in tips)
 hook = read(os.path.join(PLUGIN, 'hooks', 'place-reminder.py'))
 sys.path.insert(0, os.path.join(PLUGIN, 'hooks'))
 import importlib.util  # noqa: E402
@@ -175,7 +177,8 @@ check.true('the hook template is valid Python, starts with a plain note and a co
 # (8) the workflow
 workflow = read(os.path.join(PLUGIN, 'workflows', 'build-a-place.js'))
 check.true('the workflow writes the card ledger, the allowances by role, the batch rule and the ONE full-size drawing at the end (and no rounds drawn at full size)',
-           all(word in workflow for word in ('CARD_LEDGER', 'CARD_MINUTES', 'THE BATCH RULE', 'cardTeamMinutes', "label: 'render:final'", 'THIS IS THE ONE FULL-SIZE DRAWING OF THE RUN', 'function cardTimeSummary'))
+           all(word in workflow for word in ('CARD_LEDGER', 'CARD_MINUTES', 'THE BATCH RULE', 'cardTeamMinutes', "label: 'render:final'", 'THIS IS THE ONE FULL-SIZE DRAWING OF THE RUN', 'function cardTimeSummary',
+                                             'variations scout', 'variations collect'))
            and "${FINALS ? ' --finals' : ''}" not in workflow)
 
 check.finish()

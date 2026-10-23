@@ -13,10 +13,19 @@
 # Use: explainer-film-setup /path/to/work/film-kit
 #   BLENDER=/path/to/blender explainer-film-setup ...   to name the Blender program if it isn't found
 set -u
-TARGET="${1:?Use: explainer-film-setup /path/to/work/film-kit}"
+USE="Use: explainer-film-setup /path/to/work/film-kit   (copies the kit into that folder; never overwrites a file already there)"
+# a word that starts with - is an option, not a folder: --help prints the use line; anything else stops before a folder is made
+case "${1:-}" in
+  -h|--help) echo "$USE"; exit 0 ;;
+  -*) echo "explainer-film-setup: \"$1\" is not a folder (it starts with -). $USE" >&2; exit 2 ;;
+esac
+TARGET="${1:?$USE}"
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
-mkdir -p "$TARGET"
-TARGET="$(cd "$TARGET" && pwd)"
+mkdir -p -- "$TARGET" || { echo "explainer-film-setup: cannot make the folder $TARGET. Nothing was copied." >&2; exit 2; }
+TARGET="$(cd -- "$TARGET" 2>/dev/null && pwd)" || { echo "explainer-film-setup: cannot open the folder $TARGET. Nothing was copied." >&2; exit 2; }
+if [ -z "$TARGET" ] || [ "$TARGET" = "/" ]; then
+  echo "explainer-film-setup: will not set up the kit in the top folder of the computer (/). Name a folder for the kit. Nothing was copied." >&2; exit 2
+fi
 # copy the kit without overwriting anything already there; list the files that differ from the plugin's
 : > "$TARGET/kit-differences.txt"
 (cd "$HERE/kit" && find . -type f ! -name '*.pyc' ! -path '*/__pycache__/*' | while read -r f; do

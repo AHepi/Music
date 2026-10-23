@@ -1,5 +1,5 @@
 {
- "about": "The 10 variations of the real proof batch of the plugin 1.4.0 batching step (23 October 2026), made by `explainer-film-place variations make ... --seed 5`: the cracks and chips of the canal lock walls and gate, spread across the ranges of three dials (crack_density, crack_width_metres, chip_amount). The scene is the finished lock of the first smoke test; write your own file for your own scene.",
+ "about": "The real proof batch of the plugin 1.4.0 batching step (23 October 2026), made by `explainer-film-place variations make --keys dials.cracks_and_chips.crack_density dials.cracks_and_chips.crack_width_metres dials.cracks_and_chips.chip_amount amount.cracks_and_chips --range dials.cracks_and_chips.crack_density 0.6 1 --range amount.cracks_and_chips 0.6 2 --count 10 --seed 12`: the cracks and chips of the finished canal lock of the first smoke test, two cameras. The free scout here (240 x 160, 38 s) found all 10 measurably different; on the rented cards (3 jobs at once, 600 x 400, Cycles 24 samples on RTX 4090s) all 10 came out measurably different too, in 178 card seconds (about US$0.05, an estimate, not a bill). Two earlier files on the same scene were scouted first and each had one pair too alike (density 0.5 to 1 with seed 11, and 0.6 to 1 with seed 11); they never went to a card. Names show each of the first two settings as a percent of its whole range: crackwid25 = a quarter of the way from 0.002 to 0.05 m (not 25 mm). Write your own file for your own scene.",
  "change": "cracks and chips on the lock walls and gate",
  "scene": "canal_finished.blend",
  "settings": "place-settings.json",
@@ -9,83 +9,93 @@
  ],
  "variations": [
   {
-   "name": "v01-crackden25-crackwid45",
+   "name": "v01-crackden94-crackwid25",
    "set": {
-    "dials.cracks_and_chips.crack_density": 0.25,
-    "dials.cracks_and_chips.crack_width_metres": 0.0236,
-    "dials.cracks_and_chips.chip_amount": 0.45
-   }
-  },
-  {
-   "name": "v02-crackden35-crackwid95",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.35,
-    "dials.cracks_and_chips.crack_width_metres": 0.0476,
-    "dials.cracks_and_chips.chip_amount": 0.65
-   }
-  },
-  {
-   "name": "v03-crackden15-crackwid65",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.15,
-    "dials.cracks_and_chips.crack_width_metres": 0.0332,
-    "dials.cracks_and_chips.chip_amount": 0.75
-   }
-  },
-  {
-   "name": "v04-crackden5-crackwid55",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.05,
-    "dials.cracks_and_chips.crack_width_metres": 0.0284,
-    "dials.cracks_and_chips.chip_amount": 0.25
-   }
-  },
-  {
-   "name": "v05-crackden85-crackwid75",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.85,
-    "dials.cracks_and_chips.crack_width_metres": 0.038,
-    "dials.cracks_and_chips.chip_amount": 0.85
-   }
-  },
-  {
-   "name": "v06-crackden75-crackwid35",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.75,
-    "dials.cracks_and_chips.crack_width_metres": 0.0188,
-    "dials.cracks_and_chips.chip_amount": 0.15
-   }
-  },
-  {
-   "name": "v07-crackden65-crackwid85",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.65,
-    "dials.cracks_and_chips.crack_width_metres": 0.0428,
-    "dials.cracks_and_chips.chip_amount": 0.55
-   }
-  },
-  {
-   "name": "v08-crackden55-crackwid15",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.55,
-    "dials.cracks_and_chips.crack_width_metres": 0.0092,
-    "dials.cracks_and_chips.chip_amount": 0.05
-   }
-  },
-  {
-   "name": "v09-crackden45-crackwid25",
-   "set": {
-    "dials.cracks_and_chips.crack_density": 0.45,
+    "dials.cracks_and_chips.crack_density": 0.94,
     "dials.cracks_and_chips.crack_width_metres": 0.014,
-    "dials.cracks_and_chips.chip_amount": 0.35
+    "dials.cracks_and_chips.chip_amount": 0.65,
+    "amount.cracks_and_chips": 0.95
    }
   },
   {
-   "name": "v10-crackden95-crackwid5",
+   "name": "v02-crackden98-crackwid95",
    "set": {
-    "dials.cracks_and_chips.crack_density": 0.95,
+    "dials.cracks_and_chips.crack_density": 0.98,
+    "dials.cracks_and_chips.crack_width_metres": 0.0476,
+    "dials.cracks_and_chips.chip_amount": 0.95,
+    "amount.cracks_and_chips": 1.09
+   }
+  },
+  {
+   "name": "v03-crackden86-crackwid65",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.86,
+    "dials.cracks_and_chips.crack_width_metres": 0.0332,
+    "dials.cracks_and_chips.chip_amount": 0.85,
+    "amount.cracks_and_chips": 1.65
+   }
+  },
+  {
+   "name": "v04-crackden70-crackwid85",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.7,
+    "dials.cracks_and_chips.crack_width_metres": 0.0428,
+    "dials.cracks_and_chips.chip_amount": 0.25,
+    "amount.cracks_and_chips": 1.93
+   }
+  },
+  {
+   "name": "v05-crackden62-crackwid15",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.62,
+    "dials.cracks_and_chips.crack_width_metres": 0.0092,
+    "dials.cracks_and_chips.chip_amount": 0.75,
+    "amount.cracks_and_chips": 1.23
+   }
+  },
+  {
+   "name": "v06-crackden74-crackwid45",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.74,
+    "dials.cracks_and_chips.crack_width_metres": 0.0236,
+    "dials.cracks_and_chips.chip_amount": 0.15,
+    "amount.cracks_and_chips": 1.37
+   }
+  },
+  {
+   "name": "v07-crackden66-crackwid55",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.66,
+    "dials.cracks_and_chips.crack_width_metres": 0.0284,
+    "dials.cracks_and_chips.chip_amount": 0.45,
+    "amount.cracks_and_chips": 1.51
+   }
+  },
+  {
+   "name": "v08-crackden82-crackwid5",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.82,
     "dials.cracks_and_chips.crack_width_metres": 0.0044,
-    "dials.cracks_and_chips.chip_amount": 0.95
+    "dials.cracks_and_chips.chip_amount": 0.05,
+    "amount.cracks_and_chips": 1.79
+   }
+  },
+  {
+   "name": "v09-crackden78-crackwid35",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.78,
+    "dials.cracks_and_chips.crack_width_metres": 0.0188,
+    "dials.cracks_and_chips.chip_amount": 0.35,
+    "amount.cracks_and_chips": 0.67
+   }
+  },
+  {
+   "name": "v10-crackden90-crackwid75",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.9,
+    "dials.cracks_and_chips.crack_width_metres": 0.038,
+    "dials.cracks_and_chips.chip_amount": 0.55,
+    "amount.cracks_and_chips": 0.81
    }
   }
  ]

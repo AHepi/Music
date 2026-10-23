@@ -287,7 +287,7 @@
    },
    "name_hints": [
     "\\broad\\b",
-    "\\btrack\\b",
+    "(?<!rail )(?<!railway )(?<!tram )(?<!train )\\btrack\\b(?!.*(signal|sleeper|\\brail))",
     "cart ?way",
     "dirt ?road"
    ],
@@ -354,7 +354,7 @@
    "name_hints": [
     "paving",
     "cobble",
-    "flagstone",
+    "(?<!floor )flagstone(?! floor)",
     "\\bsett",
     "pavement",
     "apron",
@@ -599,7 +599,9 @@
    "dials": {},
    "name_hints": [
     "stone floor",
-    "flag floor"
+    "flag floor",
+    "\\bfloor (flag|flagstone|slab)s?\\b",
+    "\\b(flagstone|flag|slab) floor\\b"
    ],
    "exempt": {},
    "kind": "judged",
@@ -832,14 +834,16 @@
    "name_hints": [
     "plaster",
     "render",
-    "whitewash",
-    "\\bwall\\b",
-    "\\bhouse\\b"
+    "whitewash"
    ],
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "meaning": "a plastered or whitewashed wall (the general wall)"
+   "meaning": "a plastered or whitewashed wall (the general wall)",
+   "weak_name_hints": [
+    "\\bwall\\b",
+    "\\bhouse\\b"
+   ]
   },
   "roof.thatch": {
    "class": "roof",
@@ -878,13 +882,15 @@
    ],
    "dials": {},
    "name_hints": [
-    "shingle",
-    "\\broof\\b"
+    "shingle"
    ],
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "meaning": "a wooden shingle roof"
+   "meaning": "a wooden shingle roof",
+   "weak_name_hints": [
+    "\\broof\\b"
+   ]
   },
   "roof.tile": {
    "class": "roof",
@@ -1036,7 +1042,8 @@
    "name_hints": [
     "plank",
     "board",
-    "\\bslat"
+    "\\bslat",
+    "\\b(timber|wooden|wood|plank|board)s? walls?\\b"
    ],
    "exempt": {},
    "kind": "judged",
@@ -1098,7 +1105,7 @@
     "fence",
     "palisade",
     "railing",
-    "\\brail\\b",
+    "^(?!.*\\brailway).*\\brail\\b",
     "\\bgates?\\b"
    ],
    "exempt": {},
@@ -1678,7 +1685,7 @@
     "shrub",
     "hedge",
     "\\bfern",
-    "canopy",
+    "\\b(tree|leaf|leafy|forest|woodland) canopy\\b|\\bcanopy of (leaves|trees)\\b",
     "needles",
     "\\breeds?\\b",
     "\\brushes\\b"
@@ -1698,7 +1705,7 @@
    "scale": [],
    "dials": {},
    "name_hints": [
-    "\\bwater\\b",
+    "\\bwater\\b(?! ?(tower|crane|tank|butt|pump|wheel|trough|tap|main|pipe))",
     "pond",
     "puddle",
     "\\blake\\b",

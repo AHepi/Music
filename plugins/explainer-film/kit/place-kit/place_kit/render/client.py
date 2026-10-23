@@ -434,6 +434,7 @@ def render_on_rented(parsed, client=None, environ=None, say=print):
                f'-- render --job {shlex.quote(remote["job"])} --where on-card' + (' --finals' if parsed.finals else '') + (f' --engine {parsed.engine}' if parsed.engine not in (None, 'auto') else ''))
     minutes = numbers.value('place_render.job_minutes_max')
     job_id = client.submit({'op': 'run', 'command': command, 'cwd': remote['folder'], 'timeout': minutes * 60})
+    card_time.log_sent(ledger, helper, role, job_id, estimate, f'render job {os.path.basename(parsed.job)} ({pictures_asked} picture(s)), sent')
     lines.append(f'PASS job sent (id {job_id})')
     try:
         state = client.wait_for(job_id, minutes * 60 + 120)
@@ -532,7 +533,9 @@ def main_command(parsed, client=None, environ=None):
         elif action == 'run':
             if not target:
                 raise RentProblem('rent run needs the command: explainer-film-place rent run "COMMAND" [--cwd FOLDER] [--timeout SECONDS]')
-            print(client.submit({'op': 'run', 'command': target[0], 'cwd': parsed.cwd, 'timeout': parsed.timeout or numbers.value('place_render.job_minutes_max') * 60}))
+            job_id = client.submit({'op': 'run', 'command': target[0], 'cwd': parsed.cwd, 'timeout': parsed.timeout or numbers.value('place_render.job_minutes_max') * 60})
+            card_time.log_sent(ledger, helper, role, job_id, estimate, f'rent run (its billed seconds are written when `rent wait {job_id}` or `rent job {job_id}` sees it finished)')
+            print(job_id)
         elif action in ('job', 'wait'):
             if not target:
                 raise RentProblem(f'rent {action} needs the job id')

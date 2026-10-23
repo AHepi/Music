@@ -55,7 +55,7 @@ def read_settings(path=None, create_if_missing=False, place=None, place_type=Non
     if create_if_missing and path:
         with open(path, 'w', encoding='utf-8') as handle:
             json.dump(draft, handle, indent=1)
-        print(f'LOOK there was no settings file, so one was drafted and written: {path} ({len(report["guessed"])} role(s) guessed from names, {len(report["unknown"])} object(s) unclassified, '
+        print(f'LOOK there was no settings file, so one was drafted and written: {path} ({settings_file.role_sources_text(report["guessed"])}, {len(report["unknown"])} object(s) unclassified, '
               f'{len(report.get("roads", []))} road(s) drafted from the roads\' shapes). Edit it (the look, the state, the roles it could not guess), then run again.')
     return settings_file.Settings(data, path if path and os.path.exists(path) else None)
 
@@ -370,12 +370,14 @@ def verb_new_settings(parsed):
     if len(report['unknown']) > 12:
         print(f'LOOK and {len(report["unknown"]) - 12} more object(s) have no role guessed: `explainer-film-place roles --scene SCENE.blend` lists them all, `explainer-film-place roles --list` lists the role ids')
     print(f'LOOK look and state: the place type "{parsed.place_type}" starts at look "{draft["look"]}" and state "{draft["state"]}". The person\'s words decide, not the preset: say kept, lived_in, neglected or derelict, and dry, damp or wet, '
-          f'in the settings file (an unkempt place is neglected; a place nobody described is lived_in, dry).')
+          f'in the settings file (an unkempt place is neglected; a place nobody described is lived_in, and damp outdoors where there is water, a ditch or deep shade, dry indoors '
+          f'or when the words say dry: dry switches every wet mark off, also at the water\'s edge).')
     for road in draft.get('roads', []):
         print(f'PASS road drafted from the road "{road["name"]}": {len(road["polyline"])} points, {road["width"]} m wide, gauge {road["gauge"]} m, rut depth {road["rut_depth"]} m')
     for warning in settings_file.road_warnings(draft):
         print(f'LOOK {warning}')
-    print(f'{len(report["guessed"])} object(s) guessed in {len(by_role)} role(s), {len(report["unknown"])} unclassified, owners: {", ".join(report["owners"]) or "none"}')
+    print(f'{len(report["guessed"])} object(s) given {len(by_role)} role(s): {settings_file.role_sources_text(report["guessed"])}; {len(report["unknown"])} unclassified, '
+          f'owners: {", ".join(report["owners"]) or "none"}')
     return 0
 
 

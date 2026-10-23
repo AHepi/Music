@@ -5,7 +5,8 @@ Why it exists: the plugin's skills are picked by their descriptions, and other s
 skill and the commands in the one place a model cannot miss, the start of its turn.
 It reads the message from the JSON Claude Code sends on standard input ({"prompt": "..."}); a message it cannot read gets no reminder, and it always exits 0 (a hook must never stop the person's work).
 Needs only Python 3 (standard library). Plain words, no keys, no settings.
-A concrete example: "Build a canal lock with a brick wall and a wooden gate" gets the reminder; "what is the weather in Oslo" and "fix the typo in my README" get nothing.
+A concrete example: "Build a canal lock with a brick wall and a wooden gate" gets the reminder, and so do "Build an old railway station for a film" and "Make a fish market by the sea";
+"what is the weather in Oslo", "fix the typo in my README" and "make a market analysis" get nothing.
 """
 import json
 import re
@@ -16,7 +17,10 @@ import sys
 BUILD_WORDS = r'build|building|built|make|making|create|creating|design|construct|assemble|put together|generate|populate|dress|furnish'
 PLACE_WORDS = (r'village|hamlet|harbou?r|quay|canal|quarry|farm|barn|cabin|hut|house|castle|ruins?|tower|temple|church|windmill|watermill|mill|courtyard|yard|garden|'
                r'jungle|island|cave|dungeon|tavern|inn|warehouse|diorama|landscape|town|city|alley|interior|kitchen|bedroom|cellar|attic|props?|furniture|barrel|crate|wagon|'
-               r'fence|coal mine|a mine|the mine|mine yard|mine shaft')
+               r'fence|coal mine|a mine|the mine|mine yard|mine shaft|'
+               # streets, railways, markets and the water's edge (a market or a station only with a word that makes it a place: "market research" and "work station" stay silent)
+               r'street(?! address)|railway|(?:railway|train|bus|tram|petrol|gas|fire|police|pumping|weather|lifeboat|signal) station|station (?:building|yard|platform|house)|'
+               r'(?:fish|street|flower|cattle|covered|night|meat|fruit|food|town|village|old) market|market (?:square|hall|stalls?|street|place|cross)|pier|wharf|chapel')
 ALWAYS_WORDS = r'blender|bpy|3d|three-d|\.blend'
 
 REMINDER = (
@@ -24,7 +28,7 @@ REMINDER = (
     'request names neither (real normal maps and displacement, dirt, grime, weeds, moss, weathering, damage, wetness, parts that are carried and at real size).\n'
     'Read the skill surfaces-wear-and-construction first (its first screen has the steps), then run: explainer-film-place finish, explainer-film-place audit, explainer-film-preflight place.\n'
     'Nothing is drawn, rendered or painted until the preflight place stage passes; report what was measured, what was only judged and what failed. Rented-card time is limited: make every change in ONE sweep, then look once; '
-    'try a change as about 10 far-apart versions in ONE batch (explainer-film-place variations), small quick pictures until the end, full-size pictures once at the very end, and report your card seconds.'
+    'try a change as about 10 far-apart variations in ONE batch (explainer-film-place variations), small quick pictures until the end, full-size pictures once at the very end, and report your card seconds.'
 )
 
 

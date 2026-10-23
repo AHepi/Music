@@ -176,12 +176,49 @@ Each of these is small, has its own test, and leaves the old behaviour reachable
   (moss at 0.15 and 0.75 in a scene where moss hardly shows); so the pictures decide after drawing, and the sheet says which variations did not show.
 - **The sheet stays under 400,000 bytes** (not 400 KiB): the quality and then the size are lowered until it fits.
 - **The scene is stored on the card's store under its checksum** (`place-jobs/scenes/<8 letters>/`), so the second and last batch for a change does not upload the scene again.
+- **The free scout (`variations scout`) was added after the first real batches** (a second helper, the same day). The first real moss batch drew 10 variations whose settings were far apart, yet 5 showed nothing on the card:
+  the settings check before drawing cannot know which part of a dial shows. The task asked for a check BEFORE drawing; the scout is that check made with pictures, drawn here for free. Its own limits were calibrated on the two
+  real batches (see `place_kit/variations/scout.py`); `plan` and `run` use it by themselves. It is only as good as one scene and two cameras have shown.
+- **`amount.<layer>` and `master` now SCALE the saved scene (0 to 2, 1 = as saved).** They first SET the layer's strength (0 to 1, 1 = "the look as written"), which could only ever try less wear than a scene whose look
+  already set a layer to full strength, and whose "saved" value was not known before drawing. A file written for the first meaning reads differently now; the two earlier real batch files used it.
+- **The saved scene's own dial values are read** (by the scout, and by every job: `saved_values`), shown under the baseline on both sheets, and used by the settings check before drawing; a dial's default is used only
+  when there is no scout.
+- **`make --range KEY LOW HIGH`** spreads a setting over the part of its range that shows (the cracks of the lock disappear below a density of about 0.5).
+- **A job is written into the ledger when it is SENT** ("sent", with an estimate) and again with its billed seconds; the run folder keeps `run-state.json`, and `variations collect RUN-FOLDER` finishes a batch whose command
+  was cut off (the earlier design wrote the ledger only after every job had come back, so a command stopped by a time limit wrote nothing although the cards had billed). `rent run` and `render --where rented` write a
+  "sent" line too. The set-up uploads are written before the long wait, the downloads after it (two lines instead of one).
+- **The ledger file is locked while a line is written** (`fcntl` where the system has it), so helpers writing at the same moment never mix their lines.
+
+## Found by the last check and the second newcomer round, and fixed (23 October 2026)
+
+- **The Poly Haven list was one place's shopping list.** It is now a small, even-handed sample read from the public Poly Haven list (one or two pictures per kind of surface, a
+  few everyday props, real sizes read from the list), with no "not found" list, and its text says to search the site for what your own place needs. Three per-surface picks in
+  `surfaces.json` were wrong (a gravel name that is not on the site, a wall slate for roof slate, a mossy brick floor for a brick wall) and were changed.
+- **"Measurably" is not always "visibly".** A pair that differs only by its mean (a faint, even tint; in every camera almost no pixel moved by more than the pixel step) is now
+  named "may not be visible" on the sheet, in the report and in the scout, and `plan` repeats it from the scout. It is NOT dropped. Changing the rule itself to the changed
+  share alone was tried on the two saved real batches (from their saved numbers, nothing drawn again): the card's verdict changed on 7 moss pairs and the scout then missed one
+  of them (21 of 22), so the measured rule was kept and only the note added.
+- **`finish` and `new-settings` count roles by where they came from**: place_role tags, settings rules, guesses from names. Tagged roles were reported as "guessed from names".
+- **Weak name hints.** The bare words "roof", "wall" and "house" name the thing but not what it is made of; any other hint found at the same place (the name, a collection,
+  a material) now beats them, and the name still counts more than a material, so "Station roof slate" is a slate roof, "Roof tiles" a tile roof and "Timber wall" a plank wall. "Railway track", "Water tower", "Water crane" and "Canopy column" no longer read as a dirt road,
+  still water or foliage (they stay unknown, so the builder must say), and "Market floor flagstones" is a stone floor. (A rule "the longer match wins" was the first idea; it
+  would have made "Fence post 3" a fence, so the weak hints were used instead.)
+- **The harbour preset's `quay_no_growth` switch is gone**: it switched plants and litter off on the whole quay, for a reason no tool kept (footfall already keeps the
+  walking strip clear). The canal lock, a harbour-type place with no off entry, passed the audit with 66 plant and 101 litter pieces.
+- **Words**: the pass never removes a piece and does not darken the ground where things touch or where water runs (the builder builds those as shape); the trade's own
+  rubbish is built as shape too; the state is `damp` outdoors near water or deep shade when the words say nothing (`dry` switches every wet mark off); a local batch counts
+  as one of the two; `--helper` takes a helper's short name, never a person's; the names `make` writes are percent of a setting's range.
+- **`explainer-film-setup --help`** printed mkdir's help and could then copy the kit into a folder named after cd's help text; it now prints its use line, and any other word
+  that starts with - stops before a folder is made.
 
 ## Left out or not done (said plainly)
 
-- **Measured on a real card, but only three times, and not through the plugin's own client.** Two batches of 10 variations of the finished canal lock (3 jobs each, two cameras, Cycles 600 x 400) took 180 and 158 card seconds (about US$0.05 each at
+- **Measured on a real card four times, and not through the plugin's own client.** Two batches of 10 variations of the finished canal lock (3 jobs each, two cameras, Cycles 600 x 400) took 180 and 158 card seconds (about US$0.05 each at
   the price of the day; an estimate, not a bill), and the one more batch the rule allows, 6 variations around the picks in 2 jobs, took 104. The first two plans estimated 250 s each (too high); the house numbers for the seconds of opening a scene and drawing a picture were then refitted to what was measured, and the same plans now estimate 208 s (real: 180 and 158) and, for the refined batch, 148 s
   (real: 104): always a little above, so an estimate is never too small. Wake-up times were 0.8 to 24.3 s. Whether the scene was really not uploaded again in the third batch was shown with the pretend card only; on the real card the set-up time fell from 31 s to 28 s, too little to call it proof.
+  The fourth, the final proof (cracks and chips, made with `--range`, scouted first): the scout here took 38 s and found all 10 measurably different; on the cards all 10 came out measurably different too (the closest pair
+  0.76 to 0.78 of 255 and 0.46 to 0.57 percent of pixels, just above the limits), in 178 card seconds (estimate 208), wake-ups 0.8, 19.9 and 23.3 s, 48 s from sending to the last result, 92 s for the whole command.
+  Its file is `data/examples/canal-lock-cracks-variations.json`. Two files scouted before it each had one pair too alike and never went to a card. `collect` was proved only with the pretend card.
 - **A script hook that needs more than its own file does not travel to a card** (only the hook file is uploaded): the template says so and offers local drawing for tiny scenes.
 - **The workflow's card-time rules ran only against canned helpers.**
 

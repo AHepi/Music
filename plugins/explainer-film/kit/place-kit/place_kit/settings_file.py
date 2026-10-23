@@ -278,6 +278,30 @@ def road_warnings(data):
 
 
 # ------------------------------------------------------------------ drafting
+GUESS_SOURCES = ('name hint', 'material rule')     # a role the kit only guessed: read these before you trust them
+
+
+def role_sources(guessed):
+    """How each drafted role was found, counted: {'tagged': place_role tags, 'rules': settings and never rules, 'guessed': name hints and material rules}.
+    guessed: the draft report's {name: [role, how]}. Example: three objects tagged place_role and one called "Brick wall" give {'tagged': 3, 'rules': 0, 'guessed': 1}."""
+    counts = {'tagged': 0, 'rules': 0, 'guessed': 0}
+    for _role, how in (guessed or {}).values():
+        if how == 'place_role property':
+            counts['tagged'] += 1
+        elif how in GUESS_SOURCES:
+            counts['guessed'] += 1
+        else:
+            counts['rules'] += 1
+    return counts
+
+
+def role_sources_text(guessed):
+    """'4 role(s) from place_role tags, 0 from settings rules, 1 guessed from names (read the guessed ones)'."""
+    counts = role_sources(guessed)
+    return (f'{counts["tagged"]} role(s) from place_role tags, {counts["rules"]} from settings rules, {counts["guessed"]} guessed from names'
+            + (' (read the guessed ones: a guess can be wrong)' if counts['guessed'] else ''))
+
+
 def draft(objects, place, type_id, hints_only=True):
     """A draft settings dict from the scene's objects (dicts with name, collections, materials, properties), plus the report:
     {'guessed': {name: [role, how]}, 'unknown': [names], 'owners': [...]}. Unknown objects are named with the cheapest way to classify them."""

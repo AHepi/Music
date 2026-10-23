@@ -18,7 +18,7 @@ Follow them unless the user's own instructions say otherwise.
   bigger than agreed. Keep a running total (for example a `fal-spend.txt` line per request batch).
 - Download paid results at once (ElevenLabs links expire after 2 hours).
 - Rented-card time (drawing places in Blender) is money too and is limited: every helper has an allowance in card minutes, a ledger counts every card job, and the tools refuse past it. Make every change in one sweep,
-  then look once; try a change as about 10 far-apart versions in ONE batch, at most one more batch; small quick pictures until the end, full-size ones once at the very end (skill `surfaces-wear-and-construction`,
+  then look once; try a change as about 10 far-apart variations in ONE batch, at most one more batch; small quick pictures until the end, full-size ones once at the very end (skill `surfaces-wear-and-construction`,
   file `batched-rounds-and-card-time.md`). A price made from card seconds is an estimate, never a bill.
 
 ## Notes the project keeps (in a `project-notes/` folder)
@@ -40,6 +40,8 @@ Follow them unless the user's own instructions say otherwise.
 
 ## Helpers (subagents and workflows)
 
-- Run helpers at the effort the user asks for (the austerity project: medium, never higher).
+- Run helpers at the effort the user asks for (the austerity project: medium, never higher). The workflow build-a-place runs its
+  builders at medium and its checkers at high unless told otherwise: when the person or the project says "medium, never higher",
+  pass `checkEffort: 'medium'`. Helpers run on the model of the session that starts them (the workflow has no model argument).
 - Give helpers a written guide and finished pattern files; never let parallel helpers edit shared
   files; check their work yourself and get an independent critique before calling anything done.

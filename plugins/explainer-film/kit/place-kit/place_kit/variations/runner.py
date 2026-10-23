@@ -25,7 +25,7 @@ import time
 
 from .. import card_time, house_numbers as numbers
 from ..render import client as client_module
-from . import cards, compare, keys, sheet, spec as spec_module
+from . import cards, compare, keys, scout as scout_module, sheet, spec as spec_module
 
 
 class BatchRefused(Exception):
@@ -56,16 +56,23 @@ def job_file_content(job, spec, scene, settings, out_folder, cameras, check_rese
             item['script'] = hook_paths[item['script']]
         entries.append(item)
     return {'job': job['index'], 'scene': scene, 'settings': settings, 'out_folder': out_folder, 'cameras': cameras, 'engine': spec['engine'], 'size': spec['size'], 'samples': spec['samples'],
-            'quality': numbers.value('place_variations.jpeg_quality'), 'check_reset': bool(check_reset and any(e.get('is_baseline') for e in job['entries'])), 'entries': entries}
+            'quality': numbers.value('place_variations.jpeg_quality'), 'check_reset': bool(check_reset and any(e.get('is_baseline') for e in job['entries'])), 'scout': bool(job.get('scout')),
+            'entries': entries}
 
 
 # ------------------------------------------------------------------ the plan
-def make_plan(options, say=print, ledger_entries=None, for_run=False):
-    """Reads and checks everything that costs nothing. Returns the plan dictionary; raises spec.SpecProblem (exit 2) or BatchRefused (exit 1)."""
+def make_plan(options, say=print, ledger_entries=None, for_run=False, drawn_here=False):
+    """Reads and checks everything that costs nothing. Returns the plan dictionary; raises spec.SpecProblem (exit 2) or BatchRefused (exit 1).
+    When a free scout of the same file and scene was drawn (scout.py), its pictures decide too: what the scout found nearly the same is dropped here, before any card.
+    drawn_here: the batch will be drawn on this computer, so the card-seconds estimate is said as 'if it were sent to the cards'."""
     spec = spec_module.read_spec(options.spec, scene=getattr(options, 'scene', None), settings=getattr(options, 'settings', None), cameras=getattr(options, 'cameras', None),
                                  engine=getattr(options, 'engine', None) if getattr(options, 'engine', None) not in (None, 'auto') else None,
                                  size=_size_option(getattr(options, 'size', None)), samples=getattr(options, 'samples', None))
-    checked = spec_module.check_before(spec)
+    scout_document, scout_line = scout_module.find_scout(spec, getattr(options, 'scout', None), bool(getattr(options, 'no_scout', False)))
+    if scout_line:
+        say(scout_line)
+    saved = (scout_document or {}).get('saved_values') or None
+    checked = spec_module.check_before(spec, saved)
     for line in checked['lines']:
         say(line)
     big_batch_override = False
@@ -76,6 +83,25 @@ def make_plan(options, say=print, ledger_entries=None, for_run=False):
             say(f'LOOK before drawing: more than {numbers.value("place_variations.batch_size_max")} variations is allowed only because of the reason you wrote: "{over}".')
         else:
             raise BatchRefused('nothing was drawn')
+    if scout_document:
+        kept, scout_dropped, unscouted = scout_module.drops_from_scout(scout_document, checked['kept'])
+        for drop in scout_dropped:
+            say(f'LOOK dropped "{drop["name"]}": {drop["why"]}.')
+        if unscouted:
+            say(f'LOOK scout: {len(unscouted)} variation(s) were not in the scout (new or changed since), so it says nothing about them: ' + ', '.join(f'"{n}"' for n in unscouted) + '.')
+        if not scout_dropped:
+            say(f'PASS scout: none of the {len(kept)} variation(s) came out nearly the same in the scout.')
+        faint_pairs = scout_module.faint_in_scout(scout_document, kept)
+        if faint_pairs:
+            shown = '; '.join(f'"{a}" and "{b}"' for a, b in faint_pairs[:4]) + (f'; and {len(faint_pairs) - 4} more' if len(faint_pairs) > 4 else '')
+            say(f'LOOK scout: {len(faint_pairs)} pair(s) differ in the scout only by a faint, even shift, measurably but maybe not visibly ({shown}). They are kept: look at the '
+                'scout sheet, and take out of the file any variation you cannot tell apart before sending, so card time is not spent on it.')
+        checked = dict(checked, kept=kept, dropped=checked['dropped'] + scout_dropped)
+        if not kept:
+            say('FAIL before drawing: in the free scout every variation came out nearly the same as the saved scene. Change a setting that shows in these cameras, or spread wider, and scout again.')
+            raise BatchRefused('nothing was drawn')
+        if len(kept) < int(numbers.value('place_variations.batch_size_min')):
+            say(f'LOOK before drawing: only {len(kept)} variation(s) would show. Spread the settings wider, or over the part of a dial that shows (`variations make ... --range KEY LOW HIGH`), and scout again.')
     jobs = spec_module.split_jobs(checked['kept'], getattr(options, 'jobs', None))
     asked_jobs = getattr(options, 'jobs', None)
     if asked_jobs and int(asked_jobs) > len(jobs):
@@ -85,9 +111,12 @@ def make_plan(options, say=print, ledger_entries=None, for_run=False):
     counts = ', '.join(str(len([e for e in job['entries'] if not e.get('is_baseline')])) for job in jobs)
     where_baseline = next(job['index'] for job in jobs if any(e.get('is_baseline') for e in job['entries']))
     say(f'PASS plan: {len(checked["kept"])} variation(s) and the baseline in {len(jobs)} job(s) ({counts} variations; the baseline is drawn in job {where_baseline}), '
-        f'{pictures} small picture(s) {spec["size"][0]} x {spec["size"][1]} through {max(1, len(spec["cameras"]))} camera(s); about {card_seconds:.0f} card seconds in all and about {elapsed_seconds:.0f} s from sending to the last picture '
-        f'(an estimate from the house numbers; the first real batch gives better ones)')
-    return {'spec': spec, 'checked': checked, 'jobs': jobs, 'big_batch_override': big_batch_override, 'estimate_card_seconds': card_seconds, 'estimate_elapsed_seconds': elapsed_seconds, 'pictures': pictures}
+        f'{pictures} small picture(s) {spec["size"][0]} x {spec["size"][1]} through {max(1, len(spec["cameras"]))} camera(s); '
+        + (f'drawn here it uses no card seconds (if it were sent to the cards: about {card_seconds:.0f} card seconds)' if drawn_here else
+           f'about {card_seconds:.0f} card seconds in all and about {elapsed_seconds:.0f} s from sending to the last picture '
+           f'(an estimate from the house numbers; the first real batch gives better ones)'))
+    return {'spec': spec, 'checked': checked, 'jobs': jobs, 'big_batch_override': big_batch_override, 'estimate_card_seconds': card_seconds, 'estimate_elapsed_seconds': elapsed_seconds, 'pictures': pictures,
+            'scout': (scout_document or {}).get('path'), 'saved_values': saved}
 
 
 def _size_option(text):
@@ -133,11 +162,36 @@ def draw_here(plan, run_folder, blender, check_reset, say):
 
 
 # ------------------------------------------------------------------ drawing: on rented cards
-def draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, say):
-    """Uploads once, sends every job at the same time, waits, brings the pictures back, writes the seconds into the ledger. Returns (job records, timing dictionary)."""
+STATE_FILE = 'run-state.json'
+
+
+def _log_small(backend, ledger, helper, role, what):
+    """Writes the small jobs the backend ran since the last call (uploads, checks, downloads) into the ledger, then forgets them. Returns (seconds, measured)."""
+    small = backend.small_jobs()
+    entry = None
+    if small:
+        entry = card_time.log_small_jobs(ledger, helper, role, small, what)
+    elif backend.wall_seconds():
+        entry = card_time.log_wall_clock(ledger, helper, role, backend.wall_seconds(), what + ' (wall clock)')
+    backend.clear_small()
+    return (entry['card_seconds'], bool(entry.get('measured', True))) if entry else (0.0, True)
+
+
+def send_jobs(plan, run_folder, backend, check_reset, helper, role, ledger, say, card_text=None):
+    """Uploads once, then sends every job at the same time. The moment each job is sent a "sent" line goes into the ledger (it counts at the job's estimate until its billed seconds are in),
+    and the run's state file (run-state.json in the run folder) is written, so `variations collect RUN-FOLDER` can finish the batch if this command is cut off. Returns the state.
+    When an upload fails, the small jobs it already ran are still written into the ledger before the failure is passed on."""
+    try:
+        return _send_jobs(plan, run_folder, backend, check_reset, helper, role, ledger, say, card_text)
+    except Exception:
+        _log_small(backend, ledger, helper, role, f'set-up (uploads and checks, stopped by a failure) for the variations batch "{plan["spec"]["change"]}"')
+        raise
+
+
+def _send_jobs(plan, run_folder, backend, check_reset, helper, role, ledger, say, card_text=None):
     spec = plan['spec']
     store = backend.store_folder
-    timing = {'started': time.time()}
+    started = time.time()
     uploaded_note = []
     with tempfile.TemporaryDirectory() as work:
         bundle = client_module.kit_bundle_folder(os.path.join(work, 'kit-bundle'))
@@ -176,12 +230,12 @@ def draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, 
         if owner_file:
             backend.upload(owner_file, f'{settings_home}/{owners}')
     hook_paths = {}
-    for variation in spec['variations']:
+    for variation in plan['checked']['kept']:
         script = variation.get('script')
         if script and script not in hook_paths:
             hook_paths[script] = f'{base}/hooks/{len(hook_paths) + 1}-{os.path.basename(script)}'
             backend.upload(script, hook_paths[script])
-    records, submitted = [], []
+    submitted = []
     for job in plan['jobs']:
         out_remote = f'{base}/job-{job["index"]}'
         job_content = job_file_content(job, spec, remote_scene, remote_settings, out_remote, spec['cameras'], check_reset, hook_paths)
@@ -194,34 +248,51 @@ def draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, 
                    f'--python {shlex.quote(remote_kit + "/kit/place-kit/blender_run.py")} -- variations-worker --job {shlex.quote(remote_job)} --where on-card; '
                    f'code=$?; tar -cf {shlex.quote(tar_remote)} -C {shlex.quote(out_remote)} . ; exit $code')
         submitted.append((job, command, out_remote))
-    timing['set_up_done'] = time.time()
-    job_ids = []
+    set_up_seconds, set_up_measured = _log_small(backend, ledger, helper, role, f'set-up (uploads and checks) for the variations batch "{spec["change"]}"')
+    set_up_done = time.time()
+    state = {'about': 'The state of one variations batch sent to rented cards. `explainer-film-place variations collect THIS-FOLDER` finishes it if the command that sent it was cut off.',
+             'spec': spec, 'checked': {'kept': plan['checked']['kept'], 'dropped': plan['checked']['dropped']}, 'jobs': plan['jobs'], 'estimate_card_seconds': plan['estimate_card_seconds'],
+             'estimate_elapsed_seconds': plan['estimate_elapsed_seconds'], 'pictures': plan.get('pictures'), 'saved_values_before': plan.get('saved_values'), 'scout': plan.get('scout'),
+             'base': base, 'helper': helper, 'role': role, 'ledger': ledger, 'card': {'kind': backend.kind, 'card_client': card_text, 'store_folder': store},
+             'check_reset': bool(check_reset), 'uploaded_note': uploaded_note, 'sent': [], 'finished': False,
+             'timing': {'started': started, 'set_up_done': set_up_done, 'small_seconds': set_up_seconds, 'small_measured': set_up_measured}}
+    cameras = len(spec['cameras'])
     for job, command, out_remote in submitted:
-        job_ids.append(backend.submit(command, base, numbers.value('place_render.job_minutes_max') * 60))
-    timing['sent'] = time.time()
-    say(f'PASS jobs sent: {len(job_ids)} job(s) at the same time ({", ".join(uploaded_note)}; the scene and the job files are on the store)')
+        job_id = backend.submit(command, base, numbers.value('place_render.job_minutes_max') * 60)
+        card_time.log_sent(ledger, helper, role, job_id, spec_module.estimate_job(job, cameras), f'variations job {job["index"]} of {len(plan["jobs"])} for "{spec["change"]}"')
+        state['sent'].append({'index': job['index'], 'job_id': job_id, 'remote': out_remote})
+        _write_json(os.path.join(run_folder, STATE_FILE), state)
+    state['timing']['sent'] = time.time()
+    _write_json(os.path.join(run_folder, STATE_FILE), state)
+    say(f'PASS jobs sent: {len(state["sent"])} job(s) at the same time ({", ".join(uploaded_note)}; the scene and the job files are on the store). If this command is cut off, '
+        f'`explainer-film-place variations collect {run_folder}` finishes the batch without sending anything again.')
+    return state
+
+
+def bring_back(state, run_folder, backend, say):
+    """Waits for every sent job, writes its billed seconds into the ledger (once), and brings its pictures back in one bundle. Returns (job records, timing)."""
+    spec, base, ledger, helper, role = state['spec'], state['base'], state['ledger'], state['helper'], state['role']
+    timing = dict(state.get('timing') or {})
+    records = []
     try:
-        for (job, command, out_remote), job_id in zip(submitted, job_ids):
-            summary = backend.wait(job_id, numbers.value('place_render.job_minutes_max') * 60 + 120)
-            records.append({'index': job['index'], 'job_id': job_id, 'where': 'a rented card', 'remote': out_remote, **{k: summary.get(k) for k in ('runpod_status', 'return_code', 'seconds', 'wake_up_ms', 'billed_work_ms', 'log_tail')}})
+        for sent in state['sent']:
+            summary = backend.wait(sent['job_id'], numbers.value('place_render.job_minutes_max') * 60 + 120)
+            records.append({'index': sent['index'], 'job_id': sent['job_id'], 'where': 'a rented card', 'remote': sent['remote'],
+                            **{k: summary.get(k) for k in ('runpod_status', 'return_code', 'seconds', 'wake_up_ms', 'billed_work_ms', 'log_tail')}})
     finally:
         timing['jobs_done'] = time.time()
-        small = backend.small_jobs()
-        small_entry = None
-        if small:
-            small_entry = card_time.log_small_jobs(ledger, helper, role, small, f'set-up and download for the variations batch "{spec["change"]}"')
-        elif backend.wall_seconds():
-            small_entry = card_time.log_wall_clock(ledger, helper, role, backend.wall_seconds(), f'uploads and downloads of the variations batch "{spec["change"]}" (wall clock)')
-        timing['small_seconds'] = small_entry['card_seconds'] if small_entry else 0.0
-        timing['small_measured'] = bool(small_entry and small_entry.get('measured', True))
         for record in records:
-            card_time.log_job(ledger, helper, role, {'id': record['job_id'], 'billed_work_ms': record['billed_work_ms'], 'wake_up_ms': record['wake_up_ms'], 'runpod_status': record['runpod_status']},
-                              f'variations job {record["index"]} of {len(plan["jobs"])} for "{spec["change"]}"')
+            if record.get('runpod_status') in client_module.DONE:
+                card_time.log_job(ledger, helper, role, {'id': record['job_id'], 'billed_work_ms': record['billed_work_ms'], 'wake_up_ms': record['wake_up_ms'], 'runpod_status': record['runpod_status']},
+                                  f'variations job {record["index"]} of {len(state["sent"])} for "{spec["change"]}"')
     for record in records:
-        say(f'{"PASS" if record["runpod_status"] == "COMPLETED" and record["return_code"] == 0 else "FAIL"} job {record["index"]} (a rented card): {record["runpod_status"]}, exit {record["return_code"]}, '
+        finished = record['runpod_status'] == 'COMPLETED' and record['return_code'] == 0
+        say(f'{"PASS" if finished else "FAIL"} job {record["index"]} (a rented card): {record["runpod_status"]}, exit {record["return_code"]}, '
             f'work {record["billed_work_ms"] / 1000.0 if record["billed_work_ms"] else 0:.1f} s billed, wake-up {record["wake_up_ms"] / 1000.0 if record["wake_up_ms"] else 0:.1f} s (the job\'s own clock: {record["seconds"]} s)')
-        if record['runpod_status'] != 'COMPLETED' or record['return_code'] != 0:
+        if not finished:
             say('      the end of its log: ' + str(record.get('log_tail') or '')[-700:].replace('\n', '\n      '))
+        if record['runpod_status'] not in client_module.DONE:
+            say(f'LOOK job {record["index"]} is still {record["runpod_status"]}: its billed seconds are not in the ledger yet (its "sent" line counts at the estimate). Run `variations collect {run_folder}` later.')
         folder = os.path.join(run_folder, 'pictures', f'job-{record["index"]}')
         os.makedirs(folder, exist_ok=True)
         record['folder'] = folder
@@ -234,14 +305,22 @@ def draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, 
         except (cards.CardProblem, client_module.RentFailed, tarfile.TarError, OSError) as problem:
             say(f'FAIL job {record["index"]}: the pictures did not come back ({problem})')
             record['download_failed'] = str(problem)
+    seconds, measured = _log_small(backend, ledger, helper, role, f'downloads for the variations batch "{spec["change"]}"')
+    timing['small_seconds'] = float(timing.get('small_seconds') or 0.0) + seconds
+    timing['small_measured'] = bool(timing.get('small_measured', True) and measured)
     timing['downloaded'] = time.time()
     return records, timing
+
+
+def draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, say, card_text=None):
+    """Sends every job at the same time, waits, brings the pictures back, writes the seconds into the ledger. Returns (job records, timing dictionary)."""
+    state = send_jobs(plan, run_folder, backend, check_reset, helper, role, ledger, say, card_text)
+    return bring_back(state, run_folder, backend, say)
 
 
 # ------------------------------------------------------------------ reading what the jobs wrote
 def collect(plan, records, run_folder):
     """The result of every variation, from the files the workers wrote. A variation with no file is a failed one, said plainly."""
-    spec = plan['spec']
     by_job = {record['index']: record for record in records}
     results, summaries = [], {}
     for job in plan['jobs']:
@@ -316,7 +395,45 @@ def flag_results(results, pairs):
         gaps = [pair_of[frozenset((a, b))]['mean_difference'] for a, b in close if a in members and b in members]
         names = ' and '.join([', '.join(f'"{n}"' for n in members[:-1]), f'"{members[-1]}"']) if len(members) > 1 else f'"{members[0]}"'
         lines.append(f'{names} came out nearly the same as each other (mean difference {min(gaps):.2f}' + (f' to {max(gaps):.2f}' if len(gaps) > 1 and abs(max(gaps) - min(gaps)) >= 0.005 else '')
-                     + f' of 255; they differ in their settings but not in these cameras): keep one of them')
+                     + ' of 255; they differ in their settings but not in these cameras): keep one of them')
+    return lines
+
+
+def faint_lines(results, pairs):
+    """Plain lines for the pairs that are MEASURABLY but maybe not VISIBLY different (compare.pair_differences 'faint': only the mean moved; in every camera fewer than the
+    changed-share limit of pixels moved by more than the pixel step). They are kept, not dropped; each gets a note. Adds a flag to each variation that differs from the baseline
+    only faintly. Returns the lines (one for the baseline, one for the pairs of variations), or [] when there is none."""
+    by_name = {r['name']: r for r in results}
+    number = {r['name']: i for i, r in enumerate(results)}
+    pair_of = {frozenset((p['a'], p['b'])): p for p in pairs.get('pairs', [])}
+    share = pairs.get('changed_share_limit')
+    step = pairs.get('pixel_step')
+    how = (f'in every camera fewer than {share * 100:.1f} percent of the pixels changed by more than {step} levels' if share is not None and step is not None
+           else 'almost no pixel changed by more than the pixel step')
+    lines = []
+    against_baseline = sorted(set(pairs.get('faint_against_baseline') or []), key=lambda name: number.get(name, 0))
+    for name in against_baseline:
+        if name in by_name:
+            by_name[name].setdefault('flags', []).append('may not be visible (a faint, even shift from the baseline)')
+    if against_baseline:
+        means = [pair_of[frozenset(('baseline', name))]['mean_difference'] for name in against_baseline if frozenset(('baseline', name)) in pair_of]
+        spread = f'{min(means):.2f}' if means and abs(max(means) - min(means)) < 0.005 else (f'{min(means):.2f} to {max(means):.2f}' if means else 'over the limit')
+        names = ', '.join(f'"{name}"' for name in against_baseline)
+        lines.append(f'{names} {"differs" if len(against_baseline) == 1 else "each differ"} from the baseline only by a faint, even shift (mean difference {spread} of 255, but {how}): '
+                     'measurably, not always visibly, different. Look at the sheet; if you cannot see the change, it does not show from these cameras')
+    # a pair of one variation nearly the same as the baseline and one that differs from it only faintly says nothing new (the baseline line says it already)
+    hidden = set(pairs.get('invisible') or [])
+    faint_from_baseline = set(against_baseline)
+    others = [(a, b) for a, b in (pairs.get('faint') or []) if 'baseline' not in (a, b)
+              and not ((a in hidden and b in faint_from_baseline) or (b in hidden and a in faint_from_baseline))]
+    if others:
+        others.sort(key=lambda pair: (number.get(pair[0], 0), number.get(pair[1], 0)))
+        shown = others[:6]
+        means = [pair_of[frozenset(pair)]['mean_difference'] for pair in others if frozenset(pair) in pair_of]
+        spread = f'{min(means):.2f}' if means and abs(max(means) - min(means)) < 0.005 else (f'{min(means):.2f} to {max(means):.2f}' if means else 'over the limit')
+        listed = '; '.join(f'"{a}" and "{b}"' for a, b in shown) + (f'; and {len(others) - len(shown)} more pair(s) (all in the result file)' if len(others) > len(shown) else '')
+        lines.append(f'{listed} differ from each other only by a faint, even shift (mean difference {spread} of 255, but {how}): measurably, not always visibly, different. '
+                     'If you cannot tell a pair apart on the sheet, keep one of the two')
     return lines
 
 
@@ -343,15 +460,18 @@ def card_lines_for(records, timing, ledger_entries, helper, where_local):
     total += small_seconds
     lines = ['Card seconds (work + wake-up + the idle tail): ' + '; '.join(pieces) + (f'; set-up and downloads {small_seconds:.0f} s' + ('' if timing.get('small_measured', True) else ' (an estimate from the wall clock)') if small_seconds else '') + f'; in all {total:.0f} s, '
              + card_time.dollars_text(total) + '.']
-    if timing.get('sent') and timing.get('jobs_done'):
+    wake_text = ', '.join(f'{(r.get("wake_up_ms") or 0) / 1000.0:.1f} s' for r in records)
+    if timing.get('collected_later'):
+        lines.append(f'The {len(records)} job(s) were sent side by side and collected later (`variations collect`). Wake-up times (waiting for a card to start): {wake_text}.')
+    elif timing.get('sent') and timing.get('jobs_done'):
         lines.append(f'The {len(records)} job(s) ran side by side: from sending to the last result took {timing["jobs_done"] - timing["sent"]:.0f} s. Wake-up times (waiting for a card to start): '
-                     + ', '.join(f'{(r.get("wake_up_ms") or 0) / 1000.0:.1f} s' for r in records) + '.')
+                     + wake_text + '.')
     return lines, total
 
 
 # ------------------------------------------------------------------ the verb
 def run_variations(options, say=print, backend=None, blender=None, environ=None):
-    """`variations plan | run | sheet`. Returns the exit code."""
+    """`variations plan | run | sheet | scout | collect`. Returns the exit code."""
     action = getattr(options, 'action', None) or 'run'
     helper, role = card_time.who(options, environ)
     ledger = card_time.ledger_path(getattr(options, 'ledger', None), environ)
@@ -359,23 +479,31 @@ def run_variations(options, say=print, backend=None, blender=None, environ=None)
         entries, _ = card_time.read_ledger(ledger)
         if action == 'sheet':
             return rebuild_sheet(options, say)
-        plan = make_plan(options, say, entries, for_run=(action == 'run'))
-        spec = plan['spec']
+        if action == 'scout':
+            return scout_module.run_scout(options, say, blender)
+        if action == 'collect':
+            return collect_batch(options, say, backend, environ)
         where = (getattr(options, 'where', None) or 'auto')
         card_wanted = where in ('rented',) or (where == 'auto' and (backend is not None or getattr(options, 'card_client', None) or not client_module.read_settings(environ).missing()))
+        plan = make_plan(options, say, entries, for_run=(action == 'run'), drawn_here=not card_wanted)
+        spec = plan['spec']
         batch_check = card_time.check_batch(entries, helper, spec['change_id'], getattr(options, 'over_allowance', None))
         for line in batch_check['lines']:
             say(line)
+        if card_wanted and not plan.get('scout') and not getattr(options, 'no_scout', False):
+            say(f'LOOK no free scout of this file: `explainer-film-place variations scout {os.path.basename(spec["path"])}` draws the same batch HERE, tiny, for no card seconds, and says which '
+                'variations would not show (on two real batches it called exactly the same pairs nearly the same as the cards did). Skip it only when this computer is too slow to open the scene.')
         if card_wanted:
             gate = card_time.check(entries, helper, role, plan['estimate_card_seconds'], getattr(options, 'over_allowance', None), f'this batch ({len(plan["jobs"])} job(s))')
             for line in gate['lines']:
                 say(line)
             say(f'ledger: {ledger}')
         else:
-            say('PASS card time: this batch is drawn on this computer, so no rented-card seconds are used.')
+            say('PASS card time: this batch is drawn on this computer, so no rented-card seconds are used. It still counts as one of the '
+                f'{numbers.value("place_card_time.batches_per_change_max")} batches for this change (a look is a look); the free scout (`variations scout`) does not.')
             gate = {'status': 'ok', 'override': False}
         if action == 'plan':
-            say(f'NEXT: to draw it, run the same command with `run`' + (' (it is refused as it stands)' if 'refuse' in (gate['status'], batch_check['status']) else '') + '.')
+            say('NEXT: to draw it, run the same command with `run`' + (' (it is refused as it stands)' if 'refuse' in (gate['status'], batch_check['status']) else '') + '.')
             return 1 if 'refuse' in (gate['status'], batch_check['status']) else 0
         if 'refuse' in (gate['status'], batch_check['status']):
             return 1
@@ -390,7 +518,8 @@ def run_variations(options, say=print, backend=None, blender=None, environ=None)
         if card_wanted:
             backend = backend or make_backend(options, environ)
             say(f'PASS card: {backend.kind}')
-            records, drawn_timing = draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, say)
+            card_text = getattr(options, 'card_client', None) or (environ or os.environ).get('PLACE_CARD_CLIENT')
+            records, drawn_timing = draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, say, card_text)
             timing.update(drawn_timing)
         else:
             blender = blender or _find_blender(options)
@@ -420,6 +549,40 @@ def run_variations(options, say=print, backend=None, blender=None, environ=None)
         return 1
 
 
+def collect_batch(options, say=print, backend=None, environ=None):
+    """`variations collect RUN-FOLDER`: finishes a batch whose command was cut off after its jobs were sent (a time limit, a lost connection). Nothing is sent again: it waits for the jobs
+    named in run-state.json, writes their billed seconds into the ledger (once), brings the pictures back, and makes the sheet and the result. Returns the exit code."""
+    target = options.spec
+    if not target:
+        raise spec_module.SpecProblem('collect needs the run folder of the batch (it holds run-state.json): explainer-film-place variations collect RUN-FOLDER')
+    path = target if target.endswith('.json') else os.path.join(target, STATE_FILE)
+    if not os.path.exists(path):
+        raise spec_module.SpecProblem(f'{path} is not there: give the run folder of a batch that was sent to rented cards (the folder the run printed)')
+    state = json.load(open(path, encoding='utf-8'))
+    run_folder = os.path.dirname(os.path.abspath(path))
+    if state.get('finished'):
+        say(f'PASS collect: this batch was already finished; its sheet and result are in {run_folder}. Nothing was asked of a card.')
+        return 0
+    if not state.get('sent'):
+        say('FAIL collect: no job of this batch was sent, so there is nothing to collect. Run the batch again (`variations run`).')
+        return 1
+    card = state.get('card') or {}
+    if backend is None:
+        text = getattr(options, 'card_client', None) or card.get('card_client') or (environ or os.environ).get('PLACE_CARD_CLIENT')
+        if text:
+            backend = cards.CommandCard.from_text(text, store_folder=getattr(options, 'store_folder', None) or card.get('store_folder') or '/workspace')
+        else:
+            backend = make_backend(options, environ)
+    say(f'PASS collect: {len(state["sent"])} job(s) of "{state["spec"]["change"]}" were sent earlier; waiting for them and bringing the pictures back (nothing is sent again).')
+    plan = {'spec': state['spec'], 'checked': state['checked'], 'jobs': state['jobs'], 'estimate_card_seconds': state.get('estimate_card_seconds'),
+            'estimate_elapsed_seconds': state.get('estimate_elapsed_seconds'), 'scout': state.get('scout'), 'saved_values': state.get('saved_values_before')}
+    began = time.time()
+    records, timing = bring_back(state, run_folder, backend, say)
+    timing['collected_later'] = True
+    results, summaries = collect(plan, records, run_folder)
+    return finish_batch(options, plan, records, results, summaries, run_folder, state['ledger'], state['helper'], state['role'], timing, False, began, say)
+
+
 def _find_blender(options):
     here = numbers.PLACE_KIT
     if here not in sys.path:
@@ -447,6 +610,7 @@ def finish_batch(options, plan, records, results, summaries, run_folder, ledger,
     compare.measure_variations(results)
     pairs = compare.pair_differences(results)
     pair_lines = flag_results(results, pairs)
+    faint = faint_lines(results, pairs)
     failed = [r for r in results if not r.get('ok')]
     reset_note = None
     for job_index, summary in summaries.items():
@@ -458,25 +622,41 @@ def finish_batch(options, plan, records, results, summaries, run_folder, ledger,
     card_lines, card_total = card_lines_for(records, timing, entries, helper, local)
     engine = next((s.get('engine') for s in summaries.values() if s.get('engine')), '?')
     cameras = spec['cameras'] or sorted({p['camera'] for r in results for p in r.get('pictures', [])})
+    saved = {}
+    for summary in summaries.values():
+        saved.update({key: value for key, value in (summary.get('saved_values') or {}).items() if value is not None})
+    baseline_note = scout_module.saved_values_text(saved)
     sheet_path = os.path.join(run_folder, f'{spec["change_id"]}-sheet.jpg')
     made = sheet.make_sheet(sheet_path, results, cameras, {'change': 'Variations: ' + spec['change'], 'scene': os.path.basename(spec['scene']), 'engine': engine.lower(),
                                                               'size': f'{spec["size"][0]} x {spec["size"][1]}', 'dropped': [f'Dropped before drawing: "{d["name"]}": {d["why"]}.' for d in plan['checked']['dropped']],
-                                                              'pair_lines': ['Nearly the same: ' + line for line in pair_lines], 'card_lines': card_lines})
+                                                              'pair_lines': ['Nearly the same: ' + line for line in pair_lines] + ['May not be visible: ' + line for line in faint],
+                                                              'card_lines': card_lines, 'baseline_note': baseline_note})
     result_path = os.path.join(run_folder, 'variations-result.json')
     document = {'change': spec['change'], 'change_id': spec['change_id'], 'scene': spec['scene'], 'settings': spec['settings'], 'cameras': cameras, 'engine': engine, 'size': spec['size'],
                 'variations': [{'name': v['name'], 'set': v['set'], 'args': v['args'], 'script': v['script']} for v in plan['checked']['kept']],
                 'dropped': plan['checked']['dropped'], 'jobs': records, 'job_summaries': summaries,
                 'results': [_result_document(r, run_folder) for r in results],
-                'pairs': pairs['pairs'], 'nearly_the_same': pairs['nearly_same'], 'invisible': pairs['invisible'], 'reset_check': reset_note, 'sheet': made,
+                'pairs': pairs['pairs'], 'nearly_the_same': pairs['nearly_same'], 'invisible': pairs['invisible'], 'faint': pairs.get('faint', []),
+                'faint_against_baseline': pairs.get('faint_against_baseline', []), 'reset_check': reset_note, 'sheet': made,
                 'card_seconds': card_total, 'card_lines': card_lines, 'estimate_card_seconds': plan['estimate_card_seconds'], 'estimate_elapsed_seconds': plan['estimate_elapsed_seconds'],
-                'where': 'this computer' if local else 'a rented card', 'helper': helper, 'role': role, 'ledger': ledger}
+                'where': 'this computer' if local else 'a rented card', 'helper': helper, 'role': role, 'ledger': ledger, 'saved_values': saved, 'scout': plan.get('scout')}
     _write_json(result_path, document)
+    state_path = os.path.join(run_folder, STATE_FILE)
+    if not local and os.path.exists(state_path):
+        try:
+            state = json.load(open(state_path, encoding='utf-8'))
+            state['finished'] = all(record.get('runpod_status') in client_module.DONE for record in records) and len(records) == len(state.get('sent') or [])
+            _write_json(state_path, state)
+        except (OSError, ValueError):
+            pass
     say(f'{"PASS" if not failed else "LOOK"} pictures: {sum(len(r["pictures"]) for r in results)} drawn for {len(results) - 1} variation(s) and the baseline, {engine.lower()}, {spec["size"][0]} x {spec["size"][1]}' +
         (f'; {len(failed)} variation(s) failed: {", ".join(r["name"] for r in failed)}' if failed else ''))
     for r in failed:
         say(f'FAIL {r["name"]}: ' + ' '.join(r.get('notes') or ['it was not drawn']))
     for line in pair_lines:
         say(f'LOOK nearly the same: {line}')
+    for line in faint:
+        say(f'LOOK may not be visible: {line}')
     for r in results:
         for flag in r.get('flags', []):
             if flag.startswith('changes nothing here'):
@@ -508,12 +688,18 @@ def rebuild_sheet(options, say):
         for p in r.get('pictures', []):
             p['path'] = os.path.join(run_folder, p['path']) if p.get('path') else None
     compare.measure_variations(results)
-    pairs = compare.pair_differences(results)
+    is_scout = bool(document.get('scout') is True)
+    pairs = compare.pair_differences(results, scout=is_scout)
     pair_lines = flag_results(results, pairs)
-    sheet_path = os.path.join(run_folder, f'{document["change_id"]}-sheet.jpg')
-    made = sheet.make_sheet(sheet_path, results, document['cameras'], {'change': 'Variations: ' + document['change'], 'scene': os.path.basename(document['scene']), 'engine': str(document.get('engine', '')).lower(),
-                                                                          'size': f'{document["size"][0]} x {document["size"][1]}', 'dropped': [f'Dropped before drawing: "{d["name"]}": {d["why"]}.' for d in document.get('dropped', [])],
-                                                                          'pair_lines': ['Nearly the same: ' + line for line in pair_lines], 'card_lines': document.get('card_lines', [])},
+    faint = faint_lines(results, pairs)
+    sheet_path = os.path.join(run_folder, f'{document["change_id"]}-scout-sheet.jpg' if is_scout else f'{document["change_id"]}-sheet.jpg')
+    card_lines = document.get('card_lines') or ([f'Drawn on this computer in {document.get("seconds", 0):.0f} s; no rented-card seconds were used; a scout is not a batch.'] if is_scout else [])
+    made = sheet.make_sheet(sheet_path, results, document['cameras'], {'change': ('Free scout (drawn here, tiny): ' if is_scout else 'Variations: ') + document['change'], 'scene': os.path.basename(document['scene']),
+                                                                          'engine': str(document.get('engine', '')).lower(), 'size': f'{document["size"][0]} x {document["size"][1]}',
+                                                                          'dropped': [f'Dropped before drawing: "{d["name"]}": {d["why"]}.' for d in document.get('dropped', [])],
+                                                                          'pair_lines': [('Nearly the same in the scout: ' if is_scout else 'Nearly the same: ') + line for line in pair_lines]
+                                                                          + ['May not be visible: ' + line for line in faint], 'card_lines': card_lines,
+                                                                          'baseline_note': scout_module.saved_values_text(document.get('saved_values'))},
                             max_kilobytes=getattr(options, 'max_kilobytes', None))
     say(f'PASS sheet: {made["path"]} ({made["bytes"] // 1024} KB) made again from the pictures already drawn; no card seconds were used')
     return 0

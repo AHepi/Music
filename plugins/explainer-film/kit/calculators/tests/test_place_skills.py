@@ -8,7 +8,8 @@ three skills that carry it; (4) every `explainer-film-place VERB` written in a s
 written as place_section.key exists in film-settings.json; (6) every kit file named in backticks exists; (7) plugin.json says
 1.4.0 and the README has a 1.4.0 entry and says nine stages (a marketplace file two folders up is only reported); (8) no new
 text holds an email-like string, a provider settings folder, a long hex id or a key-looking value; (9) the agents the workflow
-names exist. Every check is also run on a deliberately wrong text (fixtures/place-skills/bad_skill.md, and texts made here) and
+names exist; (10) explainer-film-setup treats a word that starts with - as an option, not a folder: --help prints the use line and
+makes nothing, any other such word stops before a folder is made. Every check is also run on a deliberately wrong text (fixtures/place-skills/bad_skill.md, and texts made here) and
 must fail there, so a check that can never fail cannot pass for nothing. Standard library only. The verb checks are skipped, said
 plainly, when the launcher bin/explainer-film-place is not there or cannot print its verbs.
 Run: python3 kit/calculators/tests/test_place_skills.py
@@ -440,4 +441,19 @@ if os.path.exists(workflow):
                details=', '.join(missing) or 'all exist')
 else:
     check.note('skipped: workflows/build-a-place.js is not there yet')
+
+# (10) the setup command and a word that starts with - (a newcomer once ran it with --help: it made a junk folder tree named after cd's help text)
+import tempfile  # noqa: E402
+setup = os.path.join(PLUGIN, 'bin', 'explainer-film-setup')
+empty = tempfile.mkdtemp(prefix='setup-argument-test-')
+try:
+    asked_help = subprocess.run(['bash', setup, '--help'], cwd=empty, capture_output=True, text=True, timeout=60)
+    asked_option = subprocess.run(['bash', setup, '-q'], cwd=empty, capture_output=True, text=True, timeout=60)
+    left = os.listdir(empty)
+    check.true('`explainer-film-setup --help` prints the use line, exits 0 and makes nothing; `explainer-film-setup -q` stops with exit 2 and makes nothing',
+               asked_help.returncode == 0 and 'Use: explainer-film-setup' in asked_help.stdout and asked_option.returncode == 2 and 'is not a folder' in asked_option.stderr and not left,
+               details=f'exits {asked_help.returncode} and {asked_option.returncode}; left in the folder: {left or "nothing"}')
+finally:
+    shutil_rmtree = __import__('shutil').rmtree
+    shutil_rmtree(empty, ignore_errors=True)
 check.finish()

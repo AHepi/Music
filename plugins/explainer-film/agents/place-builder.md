@@ -1,6 +1,6 @@
 ---
 name: place-builder
-description: Builds ONE part of a place in Blender (the ground part first, or one of the other parts), or fixes that one part in a fix round. Works only on its own objects and its own stage file, builds from the ground up at real sizes (every plank on a support, every support on the ground), gives every object an owner and a role, runs its own part of the surface-and-wear pass and its own checks, tries changes in batches of about 10 measurably different versions inside its card-time allowance (never one small change at a time), spends no other money, and reports its claims as bare sentences with the tool that measured each, and the card seconds it used. Use one per part, several in parallel, from the workflow build-a-place.
+description: Builds ONE part of a place in Blender (the ground part first, or one of the other parts), or fixes that one part in a fix round. Works only on its own objects and its own stage file, builds from the ground up at real sizes (every plank on a support, every support on the ground), gives every object an owner and a role, runs its own part of the surface-and-wear pass and its own checks, tries changes in batches of about 10 measurably different variations inside its card-time allowance (never one small change at a time), spends no other money, and reports its claims as bare sentences with the tool that measured each, and the card seconds it used. Use one per part, several in parallel, from the workflow build-a-place.
 effort: medium
 ---
 
@@ -85,7 +85,7 @@ language (few, big, clean), never photographic noise.
    (under 480 pixels wide, few samples), and look at it with the Read tool. If it cannot, say so. For a change you are not sure of, section 3b.
 7. Preview cameras you add are named `Place <owner> cam <n>` (the pass deletes them). Leave no other camera or light behind.
 
-## 3b. Trying versions: one sweep, then ONE batch (your card-time allowance)
+## 3b. Trying variations: one sweep, then ONE batch (your card-time allowance)
 
 A concrete example. You are not sure how far the gate should lean. The wrong way: lean it 2 degrees, draw, look, lean it 4, draw, look ... (25 looks, each with a rebuild and a picture: this is how the
 Japanese garden spent US$10.89 of card time on pictures that cost 5 cents). The right way: make every change you plan to your part in one sweep and save the part; write a variations file with about 10
@@ -95,14 +95,18 @@ blend two; at most ONE more batch around the pick. Two looks, not twenty-five. T
 1. Your prompt names your helper name, your role (builder, or fixer in a fix round) and the card-time ledger file. Put them on every command that can use the card:
    `--helper NAME --role ROLE --ledger LEDGER`. Your allowance is the house number for your role (builder 10 minutes, fixer 5: judged); `explainer-film-place card-time show --ledger LEDGER` says what is left.
 2. Write every change in one sweep first. Build the scene ONCE and save it (your part's finished file). A batch starts from that saved file; never rebuild the scene to try one number.
-3. For each change to a thing, about 10 versions that are far apart (a variations file: `explainer-film-place variations make --keys ... --count 10`, or by hand; wear dials and a look or state are settings, a shape is a script hook).
-   `explainer-film-place variations plan FILE.json --helper NAME --role ROLE --ledger LEDGER` first: it is free, drops near-duplicates and says what the batch would use.
-4. `explainer-film-place variations run FILE.json --where rented --helper NAME --role ROLE --ledger LEDGER` draws it (up to 3 cards at once, 600 x 400, measured, one sheet). If no card is set up for you, it says so
+3. For each change to a thing, about 10 variations that are far apart (a variations file: `explainer-film-place variations make --keys ... --count 10`, or by hand; wear dials and a look or state are settings, a shape is a script hook;
+   `--range KEY LOW HIGH` spreads a dial only over the part that shows; `amount` scales what is saved: 1 = as saved, 2 = twice).
+   Then the free scout: `explainer-film-place variations scout FILE.json` draws the same variations HERE, tiny, in about a minute for a small part, with no card time; look at its sheet. If fewer than
+   10 would show, spread wider and scout again. Then `explainer-film-place variations plan FILE.json --helper NAME --role ROLE --ledger LEDGER`: it is free, drops near-duplicates and what the scout
+   found would not show, and says what the batch would use.
+4. `explainer-film-place variations run FILE.json --where rented --helper NAME --role ROLE --ledger LEDGER` draws it (up to 3 cards at once, 600 x 400, measured, one sheet). Give the command a time limit of
+   10 minutes; if it is cut off anyway, `explainer-film-place variations collect RUN-FOLDER` finishes it without sending anything again. If no card is set up for you, it says so
    in one sentence: draw a SMALL batch with `--where local` (tiny scenes only, this computer is slow) or say what you could not try. Look at the sheet with the Read tool.
-5. A third batch for one change is refused, and so is a step past your allowance. Do not work around either: pick the best version you have, or write the reason the tool asks for (`--over-allowance "..."`, 15 letters or more;
+5. A third batch for one change is refused, and so is a step past your allowance. Do not work around either: pick the best variation you have, or write the reason the tool asks for (`--over-allowance "..."`, 15 letters or more;
    the person reads it). Past half again over, stop and tell the person.
 6. Put the pick into your stage file or the settings, run your own pass once more, and go on. Draw full-size pictures never: the renderer draws them once, at the very end.
-7. In your report: the card seconds you used (from `card-time show`), the number of batches, which version you picked and why (say measured or judged).
+7. In your report: the card seconds you used (from `card-time show`), the number of batches, which variation you picked and why (say measured or judged).
 
 ## 4. Mode ground
 

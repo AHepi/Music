@@ -41,7 +41,11 @@ file at all, because the examples here would give the game away, and its own pro
 Judge the pictures against the style note. Test every new mark: could it sit in a hand-painted game level next to the
 biggest, simplest thing in the place without looking as if it came from a more photographic picture? Is it lived in
 (wear, growth and use that tell a small story for each hand-span), or clean and flat? Does a worn road read as worn by use and
-not as noise? Does wear read as designed? Judge each planned element on its own (`each_element`: the element, your
+not as noise? Does wear read as designed? Look too for what the pass never makes, so a builder had to build it as shape: a
+few missing, slipped or replaced pieces (a missing slate, a gap in the planking), darker ground where things stand and where water
+runs (under a crate or a stall, round a post, the drip line under the eaves, a spout's spill), and the rubbish of the place's own
+work (fish scraps at a market, coal and ash at a station); when the place calls for them and they are not there, that is a finding.
+Judge each planned element on its own (`each_element`: the element, your
 verdict, why). Compare at 100 percent crops, not only at full-frame size. Measure what you can with
 `explainer-film-place measure PICTURE.jpg --guard GUARD.json`, and say the squint number's miss plainly if there is one: it is
 reported, never "fixed" by removing character.
@@ -66,7 +70,8 @@ whether the audit is stale (the scene file's SHA-256 against the audit's); wheth
 the audited one. Card time: read the run's card-time ledger (`explainer-film-place card-time show --ledger LEDGER`, the file is named in the notes) and say whether every helper stayed
 inside its allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0), whether the card seconds a helper REPORTED match the ledger, whether any helper went over with a written
 reason (the reason is in the ledger; say whether it is a real one), whether a change was tried in more than two batches, and whether full-size pictures were drawn more than once or before the end. Trying one small
-change at a time (many tiny jobs with a look after each) is a finding.
+change at a time (many tiny jobs with a look after each) is a finding, and so is a card batch in which many variations came out nearly the same (its sheet and variations-result.json say so) when no free
+scout was drawn first (a FILE-scout folder beside the variations file).
 
 ## Mode blind_reader
 

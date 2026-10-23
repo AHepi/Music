@@ -79,6 +79,30 @@ check.true('small jobs are written as ONE entry (work, wake-up and one idle tail
 estimate = ct.log_wall_clock(ledger, 'walls', 'builder', 12.0, 'uploads (wall clock)')
 check.true('a step a client cannot measure is counted from the wall clock and marked as an estimate', estimate['measured'] is False and estimate['card_seconds'] == 17.0 and 'wall clock' in estimate['estimate_note'])
 
+# the "sent" line: a job counts at its estimate the moment it goes out, and at its billed seconds once they are in (never both)
+sent_ledger = os.path.join(folder, 'sent.jsonl')
+ct.log_sent(sent_ledger, 'walls', 'builder', 'job-a', 80.0, 'variations job 1 of 2')
+ct.log_sent(sent_ledger, 'walls', 'builder', 'job-b', 70.0, 'variations job 2 of 2')
+entries_sent, _ = ct.read_ledger(sent_ledger)
+check.equal('two jobs sent and not yet finished count at their estimates (80 + 70), so a command that is cut off still counts the card time it started', ct.used_seconds(entries_sent, 'walls'), 150.0)
+ct.log_job(sent_ledger, 'walls', 'builder', {'id': 'job-a', 'billed_work_ms': 30000, 'wake_up_ms': 20000, 'runpod_status': 'COMPLETED'}, 'variations job 1 of 2')
+entries_sent, _ = ct.read_ledger(sent_ledger)
+check.equal('once job-a\'s billed seconds are in (30 + 20 + 5 = 55), it counts at those and no longer at its estimate: 55 + 70', ct.used_seconds(entries_sent, 'walls'), 125.0)
+check.true('a "sent" line does not stop the job\'s billed seconds from being written (only a billed line does: never twice)',
+           ct.log_job(sent_ledger, 'walls', 'builder', {'id': 'job-b', 'billed_work_ms': 1000, 'wake_up_ms': 0, 'runpod_status': 'COMPLETED'}, 'x') is not None
+           and ct.log_job(sent_ledger, 'walls', 'builder', {'id': 'job-b', 'billed_work_ms': 1000, 'wake_up_ms': 0, 'runpod_status': 'COMPLETED'}, 'x') is None)
+# many helpers writing at the same moment: every line stays whole (the file is locked while a line is written)
+parallel_ledger = os.path.join(folder, 'parallel.jsonl')
+writer = ("import sys; sys.path.insert(0, %r)\nfrom place_kit import card_time as ct\nfor i in range(150):\n    ct.append_entry(%r, {'kind': 'small', 'helper': sys.argv[1], 'card_seconds': 1.0, "
+          "'what': 'x' * 300})\n") % (PLACE_KIT, parallel_ledger)
+import subprocess  # noqa: E402
+writers = [subprocess.Popen([sys.executable, '-B', '-c', writer, f'helper-{n}']) for n in range(4)]
+for process in writers:
+    process.wait(timeout=120)
+parallel_entries, parallel_problems = ct.read_ledger(parallel_ledger)
+check.true('four helpers writing 150 lines each at the same moment: 600 whole lines, none broken, each helper 150 s', len(parallel_entries) == 600 and not parallel_problems
+           and all(ct.used_seconds(parallel_entries, f'helper-{n}') == 150.0 for n in range(4)), f'{len(parallel_entries)} lines, {len(parallel_problems)} broken')
+
 # ---------------------------------------------------------------- 3. the gate
 fresh = []
 ok = ct.check(fresh, 'x', 'builder', 100)
@@ -175,11 +199,17 @@ planner_args = types.SimpleNamespace(action='run', target=['echo hi'], out=None,
 transport = FakeTransport()
 code = rc.main_command(planner_args, client=rc.Client(transport), environ=environment)
 check.true('`rent run` for a role with no card time is refused BEFORE any call is made (exit 1, the fake service saw nothing)', code == 1 and transport.calls == [], f'exit {code}, {len(transport.calls)} call(s)')
+builder_run = types.SimpleNamespace(action='run', target=['echo hi'], out=None, json=False, cwd=None, timeout=None, ledger=client_ledger, helper='walls', role='builder', over_allowance=None)
+rc.main_command(builder_run, client=rc.Client(FakeTransport()), environ=environment)
+sent_now = [e for e in ct.read_ledger(client_ledger)[0] if e['kind'] == 'sent']
+check.true('`rent run` writes a "sent" line with an estimate the moment the job goes out (it counts until `rent wait` or `rent job` sees the job finished)',
+           len(sent_now) == 1 and sent_now[0]['job_id'] == 'jobrun1' and sent_now[0]['estimate_seconds'] > 0 and ct.open_sent(ct.read_ledger(client_ledger)[0]), f'{sent_now}')
 wait_args = types.SimpleNamespace(action='wait', target=['jobrun1'], out=None, json=False, limit=60, ledger=client_ledger, helper='walls', role='builder', over_allowance=None)
 rc.main_command(wait_args, client=rc.Client(FakeTransport(), sleep=lambda s: None), environ=environment)
 rc.main_command(wait_args, client=rc.Client(FakeTransport(), sleep=lambda s: None), environ=environment)
 jobs = [e for e in ct.read_ledger(client_ledger)[0] if e['kind'] == 'job']
-check.true('a finished job seen by `rent wait` is logged ONCE with its wake-up and work (21 + 3 + 5 = 29 s)', len(jobs) == 1 and jobs[0]['card_seconds'] == 29.0, f'{len(jobs)} job entry')
+check.true('a finished job seen by `rent wait` is logged ONCE with its wake-up and work (21 + 3 + 5 = 29 s), and its "sent" line no longer counts', len(jobs) == 1 and jobs[0]['card_seconds'] == 29.0
+           and not ct.open_sent(ct.read_ledger(client_ledger)[0]), f'{len(jobs)} job entry')
 missing_settings = types.SimpleNamespace(action='status', target=[], out=None, json=False, ledger=os.path.join(folder, 'never.jsonl'), helper='x', role='builder', over_allowance=None)
 code = rc.main_command(missing_settings, environ={})
 check.true('missing settings give exit 2 and write no ledger at all', code == 2 and not os.path.exists(os.path.join(folder, 'never.jsonl')))

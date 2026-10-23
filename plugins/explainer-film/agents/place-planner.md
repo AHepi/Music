@@ -35,7 +35,7 @@ towpath with puddles...). This place was really built that way:
    its OWN look and state (the harbour at neglected and wet): the person's words decide them, so set `look` and `state` in the
    settings yourself. The role ids and what they mean: `explainer-film-place roles --list`; plan which role each kind of
    object will have, because each builder tags its objects with a role as it makes them.
-3b. Plan for batches and card time. Tell each brief: make every change to the part in one sweep, build the scene once and save it, and try a change you are unsure of as about 10 measurably different versions in ONE batch
+3b. Plan for batches and card time. Tell each brief: make every change to the part in one sweep, build the scene once and save it, and try a change you are unsure of as about 10 measurably different variations in ONE batch
    (`explainer-film-place variations`), at most one more batch, small quick pictures until the end; the finals are drawn once, at the very end. Each helper has a card-time allowance
    (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0: house numbers, judged), and the run's card-time ledger counts every card second. You use no card time yourself. If the notes name a
    total for the whole job in card minutes, write it into the style note's last line. The rule: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`.

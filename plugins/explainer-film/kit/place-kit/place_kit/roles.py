@@ -75,24 +75,31 @@ def _singular(text):
 
 
 def hint_role(roles_table, obj):
-    """The first role in data/roles.json whose name hint fits the object's name, collection or material names. The generic role's hints (a name like "Object.012" says nothing) count
-    only when nothing else fits, so a collection called "Roofs" still decides for an object called "Object.012"."""
+    """The role in data/roles.json whose name hint fits the object best, read from its name, then its collections, then its materials.
+    1. Where a hint is found matters most: the object's own name counts more than its collection, and the collection more than its materials.
+    2. At the same place, a name hint ("slate", "brick", "plank") beats a WEAK name hint: a bare word that names the thing but not what it is made of
+       ("roof", "wall", "house"). So "Station roof slate" is a slate roof, "Roof tiles" a tile roof and "Timber wall" a plank wall, while "Hut 1 wall" is still the
+       general (plaster) wall, and so is "wall_north" with a material called "wall_mat" (the name counts more than the material's "mat").
+    3. Still a tie: the first role in the table wins.
+    4. The generic role's hints (a name like "Object.012" says nothing) count only when nothing else fits, so a collection called "Roofs" still decides for an object
+       called "Object.012"."""
     texts = [re.sub(r'[_\-.]+', ' ', t) for t in [obj.get('name', '')] + list(obj.get('collections') or []) + list(obj.get('materials') or [])]
     texts = [t for pair in ((t, _singular(t)) for t in texts) for t in pair]            # each text also in its singular form (same rank)
     best = None
     generic = False
     for role_id, spec in roles_table.get('roles', {}).items():
-        for pattern in spec.get('name_hints', []):
-            for position, text in enumerate(texts):
-                if re.search(pattern, text, re.I):
-                    if role_id == FALLBACK_ROLE:
-                        generic = True
+        for weakness, field in ((0, 'name_hints'), (1, 'weak_name_hints')):
+            for pattern in spec.get(field, []):
+                for position, text in enumerate(texts):
+                    if re.search(pattern, text, re.I):
+                        if role_id == FALLBACK_ROLE:
+                            generic = True
+                            break
+                        # the object's own name counts most, then its collection, then its materials
+                        rank = (position // 2) if position // 2 == 0 else 1 + position // 2
+                        if best is None or (rank, weakness) < best[0]:
+                            best = ((rank, weakness), role_id)
                         break
-                    # the object's own name counts most, then its collection, then its materials
-                    rank = (position // 2) if position // 2 == 0 else 1 + position // 2
-                    if best is None or rank < best[0]:
-                        best = (rank, role_id)
-                    break
     if best:
         return best[1]
     return FALLBACK_ROLE if generic else None

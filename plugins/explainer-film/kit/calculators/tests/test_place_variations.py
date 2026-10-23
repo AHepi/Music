@@ -131,18 +131,19 @@ except sp.SpecProblem as problem:
 check.true('all the problems of a file are said at once: reserved name, unknown key (with the allowed ones), duplicate name, bad name, missing hook, args without a hook, missing scene',
            all(word in outcome for word in ('reserved name', 'is not a setting a variation can change', 'two variations are called "a"', 'plain characters', 'script hook', 'belong to a script hook', 'is not there')), outcome[:300])
 
-ten = [variation(f'm{i}', **{'amount.moss_and_algae': round(0.1 * i, 2)}) for i in range(10)]
-ten.append(variation('m-near', **{'amount.moss_and_algae': 0.52}))
+ten_values = [0.0, 0.2, 0.4, 0.6, 0.8, 1.2, 1.4, 1.6, 1.8, 2.0]          # the amount SCALES the saved scene (1.0), from 0 to 2: ten values 10 percent of the range apart, around 1.0
+ten = [variation(f'm{i}', **{'amount.moss_and_algae': value}) for i, value in enumerate(ten_values)]
+ten.append(variation('m-near', **{'amount.moss_and_algae': 0.45}))
 ten.append(variation('nothing'))
 ten.append(variation('same-as-saved', **{'amount.moss_and_algae': 1.0}))
 good = write_spec('good.json', [{'name': v['name'], 'set': v['set']} for v in ten])
 spec_good = sp.read_spec(good)
 checked = sp.check_before(spec_good)
 dropped = {d['name']: d for d in checked['dropped']}
-check.equal('ten values 0.1 apart are kept; the near-duplicate, the empty one and the one equal to the saved scene are dropped', sorted(dropped), ['m-near', 'nothing', 'same-as-saved'])
+check.equal('ten amounts 0.2 apart (0 to 2, around the saved 1.0) are kept; the near-duplicate, the empty one and the one equal to the saved scene (1.0) are dropped', sorted(dropped), ['m-near', 'nothing', 'same-as-saved'])
 check.true('...and each drop is a plain sentence naming what it is too close to', 'near-duplicate of "m' in dropped['m-near']['why'] and 'changes nothing' in dropped['nothing']['why'] and 'baseline again' in dropped['same-as-saved']['why'],
            dropped['m-near']['why'][:150])
-check.true('the later variation goes, never the earlier (m-near came after m4 and m5)', dropped['m-near']['like'] in ('m4', 'm5') and 'm4' in [v['name'] for v in checked['kept']])
+check.true('the later variation goes, never the earlier (m-near, 0.45, came after m2, 0.4)', dropped['m-near']['like'] == 'm2' and 'm2' in [v['name'] for v in checked['kept']])
 check.equal('ten kept variations pass the before-drawing check', checked['status'], 'ok')
 jobs = sp.split_jobs(checked['kept'])
 counts = [len(job['entries']) for job in jobs]
@@ -161,7 +162,7 @@ check.true('more than 16 variations is refused as wandering (status refuse and t
 check.equal('...and so is a batch where nothing is left after the drops', sp.check_before(sp.read_spec(write_spec('none.json', [{'name': 'a', 'set': {'amount.dirt': 1.0}}, {'name': 'b', 'set': {}}])))['status'], 'refuse')
 
 made = sp.make_variations(['amount.moss_and_algae', 'dials.moss_and_algae.cover', 'dials.moss_and_algae.clump_size_metres', 'state'], 10, seed=7, change='moss')
-spans = {'amount.moss_and_algae': 1.0, 'dials.moss_and_algae.cover': 1.0, 'dials.moss_and_algae.clump_size_metres': 0.57}
+spans = {'amount.moss_and_algae': 2.0, 'dials.moss_and_algae.cover': 1.0, 'dials.moss_and_algae.clump_size_metres': 0.57}
 worst = min(abs(a['set'][k] - b['set'][k]) / spans[k] for i, a in enumerate(made['variations']) for b in made['variations'][i + 1:] for k in spans)
 check.true('`make` spreads 10 variations so that every pair differs by at least a tenth of the range on EVERY number setting (a Latin hypercube)', worst >= 0.0999, f'the closest pair is {worst:.3f} of the range apart')
 check.true('...gives each variation its own name and keeps words in turn', len({v['name'] for v in made['variations']}) == 10 and {v['set']['state'] for v in made['variations']} == {'dry', 'damp', 'wet'})
@@ -177,6 +178,42 @@ try:
 except sp.SpecProblem as problem:
     outcome = str(problem)
 check.true('a pick that is not in the result is named, with the names that are', 'no-such-pick' in outcome and made['variations'][0]['name'] in outcome)
+
+# ---- added with the scout: amounts scale the saved scene, the saved scene's real dial values, and a spread limited to the part of a range that shows
+check.true('`keys` says what amount and master mean: they SCALE the saved scene, 0 to 2, 1 = as saved', any(line.startswith('amount.moss_and_algae: 0 to 2 (1 = as the saved scene has it') for line in keys.all_dial_lines())
+           and keys.all_dial_lines()[0].startswith('master: 0 to 2'), keys.all_dial_lines()[0])
+check.true('an amount of 1.6 is far enough from the saved scene (30 percent of 0 to 2); 1.1 is not (5 percent): it would draw the baseline again',
+           keys.apart(variation('a', **{'amount.moss_and_algae': 1.6}), base)[0] is True and keys.apart(variation('a', **{'amount.moss_and_algae': 1.1}), base)[0] is False)
+saved_cover = {'dials.moss_and_algae.cover': [0.7, 0.7]}
+at_default = variation('at-default', **{'dials.moss_and_algae.cover': 0.4})       # the dial's default is 0.4, but this scene was saved with 0.7
+check.true('with the saved scene\'s real value (read by a scout) a dial equal to its DEFAULT is far from the scene (0.4 against 0.7), and one equal to the scene is "the baseline again"',
+           keys.apart(at_default, base)[0] is False and keys.apart(at_default, base, saved_cover)[0] is True
+           and keys.apart(variation('same', **{'dials.moss_and_algae.cover': 0.7}), base, saved_cover)[0] is False)
+check.true('when the materials of the saved scene differ (0.3 here, 0.7 there), a variation counts as far as its LARGEST gap: 0.3 everywhere still changes the materials that had 0.7',
+           keys.apart(variation('low', **{'dials.moss_and_algae.cover': 0.3}), base, {'dials.moss_and_algae.cover': [0.3, 0.7]})[0] is True
+           and keys.apart(variation('mid', **{'dials.moss_and_algae.cover': 0.5}), base, {'dials.moss_and_algae.cover': [0.48, 0.52]})[0] is False)
+limited = sp.make_variations(['dials.cracks_and_chips.crack_density', 'dials.cracks_and_chips.chip_amount'], 10, seed=4, change='cracks', limits={'dials.cracks_and_chips.crack_density': ('0.5', '1')})
+densities = sorted(v['set']['dials.cracks_and_chips.crack_density'] for v in limited['variations'])
+chips = sorted(v['set']['dials.cracks_and_chips.chip_amount'] for v in limited['variations'])
+check.true('`make --range KEY LOW HIGH` spreads that setting only over the part of its range that shows (crack density 0.5 to 1, 0.05 apart), the others over their whole range, and says so in "about"',
+           densities[0] >= 0.5 and densities[-1] <= 1.0 and all(abs(b - a - 0.05) < 1e-6 for a, b in zip(densities, densities[1:])) and chips[0] < 0.1 and chips[-1] > 0.9
+           and 'crack_density only from 0.5 to 1' in limited['about'], f'{densities}')
+range_problems = []
+for wrong in ({'dials.cracks_and_chips.crack_density': (0.8, 0.2)}, {'dials.cracks_and_chips.crack_density': (0.5, 1.5)}, {'dials.dirt.film': (0.1, 0.5)}, {'state': (0, 1)},
+              {'dials.cracks_and_chips.crack_density': ('a', 'b')}):
+    try:
+        sp.make_variations(['dials.cracks_and_chips.crack_density', 'state'], 4, limits=wrong)
+        range_problems.append('no problem raised')
+    except sp.SpecProblem as problem:
+        range_problems.append(str(problem))
+check.true('a wrong --range is a plain sentence: LOW above HIGH, outside the setting\'s range, a key that is not being spread, a word, not numbers',
+           all('--range' in text for text in range_problems) and 'LOW under HIGH' in range_problems[0] and 'inside 0 to 1' in range_problems[1] and 'not one of the --keys' in range_problems[2]
+           and 'a word or a seed' in range_problems[3] and 'needs two numbers' in range_problems[4], ' | '.join(text[:60] for text in range_problems))
+
+note_width = sp.name_note(['dials.cracks_and_chips.crack_width_metres', 'dials.cracks_and_chips.crack_density'])
+made_about = sp.make_variations(['dials.cracks_and_chips.crack_width_metres', 'dials.cracks_and_chips.crack_density'], 4)['about']
+check.true('the names `make` writes are explained where they are read: crackwid25 is a quarter of the way from 0.002 to 0.05 m, that is 0.014 m, not 25 mm (in the file and the PASS line)',
+           'crackwid25 = a quarter of the way from 0.002 to 0.05 m, that is 0.014 m' in note_width and note_width in made_about and sp.name_note(['state', 'look']) == '', note_width)
 
 # ================================================================ part A: after drawing (synthetic pictures)
 pictures_folder = os.path.join(folder, 'synthetic')
@@ -208,6 +245,39 @@ check.true('a pair of identical pictures is flagged as nearly the same, and so i
 check.true('a picture brighter by 40 of 255 is NOT nearly the same as the baseline', 'brighter' not in pairs['invisible'])
 check.true('a change on a small part of the picture (a patch of 30 x 50 pixels) still counts as different (the changed share, not only the mean)', 'small-patch' not in pairs['invisible'],
            f'{next(p for p in pairs["pairs"] if {p["a"], p["b"]} == {"baseline", "small-patch"})["mean_difference"]:.2f} of 255 on average')
+check.true('a picture brighter by 40 and a small patch are clearly different, so neither gets the "may not be visible" note', not ({'brighter', 'small-patch'} & set(pairs['faint_against_baseline'])))
+
+
+# The tiny-wall case (a check of 23 October 2026, scout 240 x 160): a dial that tints a whole surface faintly. Against the saved scene the mean difference was 0.68 and 0.97 in the two
+# cameras, but only 0.02 and 0.05 percent of the pixels changed by more than the pixel step; by eye the pictures look the same. Built here with the same numbers.
+def faint_picture(name, share_one_level, strong_pixels, camera_seed):
+    array = texture.copy()
+    pick = np.random.default_rng(camera_seed).random(texture.shape[:2]) < share_one_level
+    array[pick] += 1
+    array[0, :strong_pixels] += 30
+    path = os.path.join(pictures_folder, name + '.png')
+    Image.fromarray(np.clip(array, 0, 255).astype(np.uint8)).save(path)
+    return path
+
+
+tiny_wall = [{'name': 'baseline', 'set': {}, 'args': {}, 'script': None, 'ok': True, 'notes': [],
+              'pictures': [{'camera': 'Camera A', 'path': picture('wall-a'), 'ok': True}, {'camera': 'Camera B', 'path': picture('wall-b'), 'ok': True}]},
+             {'name': 'v10-faint-film', 'set': {}, 'args': {}, 'script': None, 'ok': True, 'notes': [],
+              'pictures': [{'camera': 'Camera A', 'path': faint_picture('wall-v10-a', 0.68, 4, 1), 'ok': True},
+                           {'camera': 'Camera B', 'path': faint_picture('wall-v10-b', 0.97, 11, 2), 'ok': True}]}]
+compare.measure_variations(tiny_wall)
+tiny_pairs = compare.pair_differences(tiny_wall)
+tiny_pair = tiny_pairs['pairs'][0]
+tiny_lines = runner.faint_lines(tiny_wall, tiny_pairs)
+check.true('the tiny-wall case: a faint, even tint (mean 0.68 and 0.97 of 255, 0.02 and 0.05 percent of pixels changed) is NOT dropped as nearly the same (the measured rule stays) '
+           'but is named "may not be visible": measurably, not always visibly, different',
+           not tiny_pair['nearly_the_same'] and tiny_pair['faint'] and tiny_pairs['faint_against_baseline'] == ['v10-faint-film'] and len(tiny_lines) == 1
+           and 'measurably, not always visibly, different' in tiny_lines[0] and 'Look at the sheet' in tiny_lines[0]
+           and 'may not be visible' in ' '.join(tiny_wall[1]['flags']),
+           f'mean {tiny_pair["mean_difference"]:.2f}, changed {tiny_pair["changed_share"] * 100:.3f}% | ' + ' '.join(tiny_lines)[:160])
+check.true('  (the numbers are the tiny wall\'s: about 0.68 and 0.97 of 255 on average, under 0.1 percent of the pixels changed)',
+           all(abs(tiny_pair['per_camera'][camera]['mean_difference'] - want) < 0.05 for camera, want in (('Camera A', 0.68), ('Camera B', 0.97)))
+           and all(v['changed_share'] < 0.001 for v in tiny_pair['per_camera'].values()), str({c: (round(v['mean_difference'], 3), round(v['changed_share'] * 100, 3)) for c, v in tiny_pair['per_camera'].items()}))
 row = synthetic[2]['average']
 check.true('the measures of the brighter picture: the value range moved up, the colour shifted from the baseline, and the squint score is under 1', row['colour_shift'] > 2 and row['squint'] < 1.0 and row['p95'] > synthetic[0]['average']['p95'] + 0.1,
            f'colour shift {row["colour_shift"]:.1f}, squint {row["squint"]:.3f}')
@@ -270,9 +340,9 @@ def options(**fields):
     return types.SimpleNamespace(**base)
 
 
-batch_variations = ([{'name': f'moss{i}', 'set': {'amount.moss_and_algae': round(0.1 + 0.2 * i, 2)}} for i in range(5)] +
-                    [{'name': 'rubbish-low', 'set': {'amount.rubbish': 0.3}}, {'name': 'rubbish-high', 'set': {'amount.rubbish': 0.9}}, {'name': 'wet', 'set': {'state': 'wet'}},
-                     {'name': 'broken', 'set': {'amount.dirt': 0.5}}, {'name': 'moss-near', 'set': {'amount.moss_and_algae': 0.32}}])
+batch_variations = ([{'name': f'moss{i}', 'set': {'amount.moss_and_algae': value}} for i, value in enumerate([0.1, 0.4, 0.7, 1.4, 1.8])] +
+                    [{'name': 'rubbish-low', 'set': {'amount.rubbish': 0.3}}, {'name': 'rubbish-high', 'set': {'amount.rubbish': 1.8}}, {'name': 'wet', 'set': {'state': 'wet'}},
+                     {'name': 'broken', 'set': {'amount.dirt': 0.5}}, {'name': 'moss-near', 'set': {'amount.moss_and_algae': 0.42}}])
 batch_file = write_spec('batch.json', batch_variations)
 settings_env = {rc.KEY_NAME: FAKE_KEY, rc.ENDPOINT_NAME: FAKE_ENDPOINT, rc.STORE_NAME: store, rc.REMOTE_BLENDER_NAME: os.path.join(store, 'blender', 'blender')}
 card_settings = rc.read_settings(settings_env)
@@ -299,7 +369,13 @@ entries, _ = ct.read_ledger(ledger_one)
 job_entries = [e for e in entries if e['kind'] == 'job']
 check.equal('the ledger has one entry for each job with its billed seconds: work 41, 42, 43 + wake-up 22 + idle 5', sorted(e['card_seconds'] for e in job_entries), [68.0, 69.0, 70.0])
 small_entries = [e for e in entries if e['kind'] == 'small']
-check.true('...and one for the small jobs (uploads, checks, downloads), measured', len(small_entries) == 1 and small_entries[0]['measured'] is True and small_entries[0]['jobs'] > 5, f'{small_entries[0]["jobs"]} small jobs')
+check.true('...and two for the small jobs, measured: the set-up (uploads and checks, written BEFORE the long wait, so a cut-off command still counts them) and the downloads',
+           len(small_entries) == 2 and all(e['measured'] is True for e in small_entries) and 'set-up' in small_entries[0]['what'] and 'downloads' in small_entries[1]['what']
+           and sum(e['jobs'] for e in small_entries) > 5, f'{[(e["what"][:30], e["jobs"]) for e in small_entries]}')
+sent_entries = [e for e in entries if e['kind'] == 'sent']
+check.true('every job got a "sent" line the moment it went out (with an estimate), before any wait; their billed seconds came in later, so none is still counted at its estimate',
+           len(sent_entries) == 3 and {e['job_id'] for e in sent_entries} == {e['job_id'] for e in job_entries} and all(e['estimate_seconds'] > 30 for e in sent_entries)
+           and not ct.open_sent(entries) and ct.used_seconds(entries, 'walls') == round(sum(e['card_seconds'] for e in entries if e['kind'] in ('job', 'small')), 1), f'{len(sent_entries)} sent lines')
 check.true('...and one batch entry (the batch rule counts them)', [e for e in entries if e['kind'] == 'batch'][0]['variations'] == 9)
 check.true('the sheet\'s footer carries the card seconds, the wake-up times and says it is an estimate, not a bill', any('Card seconds' in line and 'not a bill' in line for line in result['card_lines']) and any('Wake-up times' in line for line in result['card_lines']), result['card_lines'][0][:200])
 check.true('the report says where the jobs ran and how many seconds they used', 'PASS card seconds' in text and 'in all' in text)
@@ -354,8 +430,8 @@ entries_two, _ = ct.read_ledger(ledger_two)
 check.true('the older command-line client works too: jobs sent with `run`, waited for with `job` (it answers IN_QUEUE first), pictures downloaded', code == 1 and len(result_two['jobs']) == 3 and all(j['runpod_status'] == 'COMPLETED' for j in result_two['jobs'])
            and os.path.exists(result_two['sheet']['path']), text_two[-300:])
 small_two = [e for e in entries_two if e['kind'] == 'small']
-check.true('...it cannot say what an upload billed, so those steps are counted from the wall clock and MARKED as an estimate in the ledger and on the sheet', len(small_two) == 1 and small_two[0]['measured'] is False
-           and any('estimate from the wall clock' in line for line in result_two['card_lines']), f'{small_two[0]["what"] if small_two else None}')
+check.true('...it cannot say what an upload billed, so those steps are counted from the wall clock and MARKED as an estimate in the ledger and on the sheet', len(small_two) == 2 and all(e['measured'] is False for e in small_two)
+           and any('estimate from the wall clock' in line for line in result_two['card_lines']), f'{[e["what"] for e in small_two]}')
 check.true('...and its jobs are logged with the wake-up and billed seconds the client printed', len([e for e in entries_two if e['kind'] == 'job']) == 3 and all(e['wake_up_seconds'] >= 21.5 for e in entries_two if e['kind'] == 'job'))
 # a job that never leaves the line stops the batch, at the time limit, and changes nothing
 orig_value = numbers.value
@@ -458,6 +534,139 @@ marker_backend.upload(marker_local, '/workspace/kit-x/kit/place-kit/blender_run.
 check.true('the command-line client can tell whether the kit is already on the store (it fetches a small marker file: one small job), so the kit is not uploaded twice',
            before_upload is False and marker_backend.have_file('/workspace/kit-x/kit/place-kit/blender_run.py') is True)
 
+# ---- the free scout (drawn here with the fake Blender), and plan and run using it
+fake_blender_path = os.path.join(store, 'blender', 'blender')
+scouted_variations = [v for v in batch_variations if v['name'] not in ('broken', 'moss-near')]
+scout_file = write_spec('scouted.json', scouted_variations, change='scouted moss')
+scout_folder = os.path.join(folder, 'work', 'scouted-scout')
+ledger_scout = os.path.join(folder, 'ledgers', 'scout.jsonl')
+spoken.clear()
+code = runner.run_variations(options(action='scout', spec=scout_file, ledger=ledger_scout, blender=fake_blender_path, where='local'), say=say, environ={})
+scout_text = spoken_text()
+scout_doc = json.load(open(os.path.join(scout_folder, 'variations-result.json')))
+check.true('`variations scout` draws the same file HERE, in ONE job, tiny (240 x 160 from the house numbers), and writes a result marked as a scout beside the file',
+           code == 0 and scout_doc['scout'] is True and scout_doc['size'] == [240, 160] and len(scout_doc['jobs']) == 1 and os.path.exists(scout_doc['sheet']['path'])
+           and scout_doc['sheet']['bytes'] <= 400 * 1000, scout_text[-300:])
+check.true('...it finds the two variations that would not show (the fake worker ignores rubbish) and says plan and run will drop them before any card',
+           {'rubbish-low', 'rubbish-high'} <= set(scout_doc['invisible']) and 'would not show on a card' in scout_text and '"rubbish-low"' in scout_text, [l for l in spoken if 'would not show' in l][:1])
+check.true('...it costs no card seconds and is NOT a batch: nothing at all is written into the ledger (the batch rule does not count it)', not os.path.exists(ledger_scout))
+check.true('...every variation carries a fingerprint of what it does (settings, hook numbers, hook file), and the scene its checksum, so a scout is only used for the same batch on the same scene',
+           all(len(v['fingerprint']) == 12 for v in scout_doc['variations']) and len(scout_doc['scene_checksum']) == 16)
+plan_backend = cards.ClientCard(rc.Client(FakeService(), sleep=lambda s: None), card_settings)
+spoken.clear()
+code = runner.run_variations(options(action='plan', spec=scout_file, ledger=os.path.join(folder, 'ledgers', 'scout-plan.jsonl')), say=say, backend=plan_backend, environ=settings_env)
+plan_text = spoken_text()
+check.true('`plan` finds the scout by itself and drops what it found nearly the same as the saved scene, each with a sentence, BEFORE any card (6 of 8 left)',
+           code == 0 and 'PASS scout: using the free scout' in plan_text and 'dropped "rubbish-low": in the free scout it came out nearly the same as the saved scene' in plan_text
+           and 'dropped "rubbish-high"' in plan_text and 'PASS plan: 6 variation(s)' in plan_text and plan_backend.client.transport.calls == [], plan_text[-400:])
+renamed = [dict(v, name='moss-zero') if v['name'] == 'moss0' else v for v in scouted_variations] + [{'name': 'dirt-new', 'set': {'amount.dirt': 1.6}}]
+renamed_file = write_spec('scouted-renamed.json', renamed, change='scouted moss')
+spoken.clear()
+runner.run_variations(options(action='plan', spec=renamed_file, scout=scout_folder, ledger=os.path.join(folder, 'ledgers', 'scout-plan.jsonl')), say=say, backend=plan_backend, environ=settings_env)
+check.true('a variation is matched to the scout by WHAT it does, not its name (moss0 renamed moss-zero is still scouted); a new one is named as "not in the scout"',
+           'not in the scout' in spoken_text() and '"dirt-new"' in spoken_text() and '"moss-zero"' not in [l for l in spoken if 'not in the scout' in l][0], [l for l in spoken if 'not in the scout' in l][:1])
+# a pair the scout found only faintly different (a faint, even shift) is KEPT, and plan says to look at it before sending
+scout_result_path = os.path.join(scout_folder, 'variations-result.json')
+scout_saved = open(scout_result_path, encoding='utf-8').read()
+faint_doc = json.loads(scout_saved)
+kept_names = [v['name'] for v in faint_doc['variations'] if v['name'] not in faint_doc['invisible']][:2]
+faint_doc['faint'] = [kept_names]
+open(scout_result_path, 'w', encoding='utf-8').write(json.dumps(faint_doc))
+spoken.clear()
+runner.run_variations(options(action='plan', spec=scout_file, ledger=os.path.join(folder, 'ledgers', 'scout-plan.jsonl')), say=say, backend=plan_backend, environ=settings_env)
+open(scout_result_path, 'w', encoding='utf-8').write(scout_saved)
+faint_lines = [l for l in spoken if 'faint, even shift' in l]
+check.true('a pair the scout found only faintly different is kept, and `plan` says so in ONE line naming both, measurably but maybe not visibly, so the helper looks before spending card time',
+           len(faint_lines) == 1 and all(f'"{name}"' in faint_lines[0] for name in kept_names) and 'PASS plan: 6 variation(s)' in spoken_text(), faint_lines[:1] or spoken_text()[-200:])
+spoken.clear()
+runner.run_variations(options(action='plan', spec=scout_file, where='local', ledger=os.path.join(folder, 'ledgers', 'scout-plan-local.jsonl')), say=say, environ={})
+check.true('a batch that will be drawn HERE: the plan says it uses no card seconds and gives the card estimate only as "if it were sent to the cards", and that it still counts as a batch',
+           'drawn here it uses no card seconds (if it were sent to the cards: about' in spoken_text() and 'card seconds in all' not in spoken_text()
+           and 'still counts as one of the 2 batches' in spoken_text(), [l for l in spoken if l.startswith('PASS plan')][:1])
+spoken.clear()
+runner.run_variations(options(action='plan', spec=scout_file, no_scout=True, ledger=os.path.join(folder, 'ledgers', 'scout-plan.jsonl')), say=say, backend=plan_backend, environ=settings_env)
+check.true('--no-scout leaves the scout out (said plainly) and nothing is dropped by it', 'not used (--no-scout)' in spoken_text() and 'in the free scout' not in spoken_text() and 'PASS plan: 8 variation(s)' in spoken_text())
+original_scene = open(scene_file, 'rb').read()
+open(scene_file, 'wb').write(original_scene + b' changed')
+spoken.clear()
+runner.run_variations(options(action='plan', spec=scout_file, ledger=os.path.join(folder, 'ledgers', 'scout-plan.jsonl')), say=say, backend=plan_backend, environ=settings_env)
+open(scene_file, 'wb').write(original_scene)
+check.true('a scout of an older version of the scene is NOT used (the .blend changed since), and the sentence says to scout again', 'drawn from another version of the scene' in spoken_text() and 'in the free scout' not in spoken_text())
+ledger_scouted = os.path.join(folder, 'ledgers', 'scouted-run.jsonl')
+spoken.clear()
+code = runner.run_variations(options(spec=scout_file, run_folder=os.path.join(folder, 'run-scouted'), ledger=ledger_scouted), say=say,
+                             backend=cards.ClientCard(rc.Client(FakeService(), sleep=lambda s: None), card_settings), environ=settings_env)
+scouted_result = json.load(open(os.path.join(folder, 'run-scouted', 'variations-result.json')))
+check.true('`run` on the card uses the scout too: only the 6 that show are drawn, the dropped ones are named on the sheet and in the result ("by": "scout"), and none of the 6 came out nearly the same',
+           code == 0 and len(scouted_result['results']) == 7 and {d['name'] for d in scouted_result['dropped'] if d.get('by') == 'scout'} == {'rubbish-low', 'rubbish-high'}
+           and scouted_result['invisible'] == [] and scouted_result['scout'], f'{len(scouted_result["results"])} results, invisible {scouted_result["invisible"]}')
+spoken.clear()
+runner.run_variations(options(action='plan', spec=batch_file, ledger=os.path.join(folder, 'ledgers', 'scout-plan.jsonl')), say=say, backend=plan_backend, environ=settings_env)
+check.true('a batch for the card with no scout gets ONE line saying the free scout exists and what it is for', sum(1 for l in spoken if l.startswith('LOOK no free scout')) == 1)
+
+# ---- an upload that fails half way: the small jobs it already ran are still written into the ledger, and nothing is sent
+
+
+class FailingSceneUpload(cards.ClientCard):
+    """A card whose upload of the scene fails (the kit before it uploads fine)."""
+
+    def upload(self, local, remote):
+        if remote.endswith('.blend'):
+            raise cards.CardProblem('the upload of the scene broke off (a test)')
+        return super().upload(local, remote)
+
+
+failing_service = FakeService()
+ledger_failing = os.path.join(folder, 'ledgers', 'failing-upload.jsonl')
+spoken.clear()
+code = runner.run_variations(options(spec=scout_file, run_folder=os.path.join(folder, 'run-failing'), ledger=ledger_failing, no_scout=True), say=say,
+                             backend=FailingSceneUpload(rc.Client(failing_service, sleep=lambda s: None), card_settings), environ=settings_env)
+entries_failing, _ = ct.read_ledger(ledger_failing)
+check.true('an upload that breaks off: exit 1 with the reason, no job is sent, and the small jobs that already ran (the kit upload) are still written into the ledger',
+           code == 1 and 'broke off' in spoken_text() and not [c for c in failing_service.calls if c[1] == '/run'] and not [e for e in entries_failing if e['kind'] == 'sent']
+           and any(e['kind'] == 'small' and 'stopped by a failure' in e['what'] and e['jobs'] > 0 for e in entries_failing), f'{[(e["kind"], e.get("what", "")[:40]) for e in entries_failing]}')
+
+# ---- a batch whose command is cut off after its jobs were sent: the ledger still counts them, and `collect` finishes the batch without sending anything again
+
+
+class CutOffCard(cards.ClientCard):
+    """A card whose connection is lost after the jobs were sent: every wait fails."""
+
+    def wait(self, job_id, limit):
+        raise cards.CardProblem('the connection was lost (a test)')
+
+
+cut_service = FakeService()
+ledger_cut = os.path.join(folder, 'ledgers', 'cut.jsonl')
+run_cut = os.path.join(folder, 'run-cut')
+spoken.clear()
+code = runner.run_variations(options(spec=scout_file, run_folder=run_cut, ledger=ledger_cut, no_scout=True), say=say, backend=CutOffCard(rc.Client(cut_service, sleep=lambda s: None), card_settings), environ=settings_env)
+cut_text = spoken_text()
+entries_cut, _ = ct.read_ledger(ledger_cut)
+state_cut = json.load(open(os.path.join(run_cut, 'run-state.json')))
+open_lines = ct.open_sent(entries_cut)
+check.true('cut off after sending: exit 1, and the three jobs are in the ledger as "sent" lines that COUNT at their estimates (so the allowance still sees them), with no billed seconds yet',
+           code == 1 and len(open_lines) == 3 and not [e for e in entries_cut if e['kind'] == 'job']
+           and ct.used_seconds(entries_cut, 'walls') >= round(sum(e['estimate_seconds'] for e in open_lines), 1) > 100, f'exit {code}, {len(open_lines)} open, used {ct.used_seconds(entries_cut, "walls")}')
+check.true('...the run folder keeps the state (the three job ids, not finished) and the report says how to finish it: `variations collect RUN-FOLDER`',
+           len(state_cut['sent']) == 3 and state_cut['finished'] is False and 'variations collect' in cut_text and FAKE_KEY not in json.dumps(state_cut) and FAKE_ENDPOINT not in json.dumps(state_cut))
+check.true('  (`card-time show` says that jobs were sent whose billed seconds are not in yet)', any('not in yet' in line for line in ct.show_lines(ledger_cut, entries_cut)))
+runs_before = len([c for c in cut_service.calls if c[1] == '/run'])
+spoken.clear()
+code = runner.run_variations(options(action='collect', spec=run_cut, ledger=None), say=say, backend=cards.ClientCard(rc.Client(cut_service, sleep=lambda s: None), card_settings), environ=settings_env)
+collect_text = spoken_text()
+entries_after, _ = ct.read_ledger(ledger_cut)
+collected = json.load(open(os.path.join(run_cut, 'variations-result.json')))
+check.true('`collect` finishes it: nothing is sent again, the three jobs get their billed seconds (so no "sent" line counts any more), the pictures come back and the sheet is made',
+           code == 0 and len([c for c in cut_service.calls if c[1] == '/run']) == runs_before and len([e for e in entries_after if e['kind'] == 'job']) == 3 and not ct.open_sent(entries_after)
+           and os.path.exists(collected['sheet']['path']) and sum(len(r['pictures']) for r in collected['results']) == 18, collect_text[-300:])
+check.true('...it writes into the ledger the batch was sent with (read from the state), counts no second batch, and the sheet says the jobs were collected later',
+           len([e for e in entries_after if e['kind'] == 'batch']) == 1 and any('collected later' in line for line in collected['card_lines'])
+           and json.load(open(os.path.join(run_cut, 'run-state.json')))['finished'] is True)
+spoken.clear()
+code = runner.run_variations(options(action='collect', spec=run_cut, ledger=None), say=say, backend=cards.ClientCard(rc.Client(FakeService(), sleep=lambda s: None), card_settings), environ=settings_env)
+check.true('a second `collect` of a finished batch asks nothing of a card and writes nothing', code == 0 and 'already finished' in spoken_text() and len(ct.read_ledger(ledger_cut)[0]) == len(entries_after))
+
 # ================================================================ part C: the real worker inside Blender
 blender = blender_program()
 if not blender:
@@ -503,6 +712,25 @@ else:
     check.true('the squint score of every variation against the baseline is a number between 0 and 1 and the baseline\'s own is exactly 1', all(0.0 <= r['average']['squint'] <= 1.0 for r in document['results']) and by_name['baseline']['average']['squint'] == 1.0)
     check.true('the sheet is one JPG under 400 KB', os.path.getsize(document['sheet']['path']) <= 400 * 1000, f'{document["sheet"]["bytes"] // 1024} KB')
     check.true('a batch drawn here writes no card seconds', not [e for e in ct.read_ledger(local_ledger)[0] if e['kind'] in ('job', 'small')])
+    check.true('each job reads what the saved scene has for every dial IT varies (lowest and highest over the materials), and the result holds them all: moss cover here',
+               isinstance(document['saved_values'].get('dials.moss_and_algae.cover'), list) and sum(1 for s in summaries.values() if s.get('saved_values')) == 1,
+               str([s.get('saved_values') for s in summaries.values()])[:200])
+    # the free scout on the real hut: amounts above 1 show, a layer that is not in the scene does not, and the saved scene's dial values are read
+    scout_hut = write_json(os.path.join(hut_folder, 'scout-hut.json'), {
+        'change': 'scout on the hut', 'scene': 'hut-finished.blend', 'settings': 'place-settings.json', 'cameras': ['Camera A', 'Camera B'], 'engine': 'cycles',
+        'variations': [{'name': 'dirt-double', 'set': {'amount.dirt': 2.0}}, {'name': 'moss-off', 'set': {'amount.moss_and_algae': 0.0}},
+                       {'name': 'cover-high', 'set': {'dials.moss_and_algae.cover': 0.95}}, {'name': 'no-such-layer', 'set': {'amount.rust': 0.2}}]})
+    spoken.clear()
+    code = runner.run_variations(options(action='scout', spec=scout_hut, blender=blender, ledger=os.path.join(hut_folder, 'scout-ledger.jsonl')), say=say, environ={})
+    scout_hut_doc = json.load(open(os.path.join(hut_folder, 'scout-hut-scout', 'variations-result.json')))
+    check.true('the free scout on the real hut: drawn here at 240 x 160, the layer that is in no material does not show, twice the dirt (amount 2) DOES show, no ledger line',
+               code == 0 and scout_hut_doc['size'] == [240, 160] and 'no-such-layer' in scout_hut_doc['invisible'] and 'dirt-double' not in scout_hut_doc['invisible']
+               and not os.path.exists(os.path.join(hut_folder, 'scout-ledger.jsonl')), f'invisible {scout_hut_doc["invisible"]}; ' + spoken_text()[-200:])
+    check.true('...it read the saved scene\'s moss cover (a lowest-highest pair over the materials) and puts it under the baseline on its sheet',
+               isinstance(scout_hut_doc['saved_values'].get('dials.moss_and_algae.cover'), list) and 'The saved scene has' in spoken_text(), str(scout_hut_doc['saved_values']))
+    spoken.clear()
+    code = runner.run_variations(options(action='plan', spec=scout_hut, where='local', ledger=os.path.join(hut_folder, 'scout-ledger.jsonl')), say=say, environ={})
+    check.true('...and `plan` drops what the scout found would not show (the missing layer), before anything is drawn', code == 0 and 'dropped "no-such-layer": in the free scout' in spoken_text(), spoken_text()[-300:])
     check.equal('a camera that is not in the scene stops before anything is drawn (exit 2 from the worker, said plainly)', 'no camera named' in subprocess.run(
         [sys.executable, '-I', '-B', launcher, 'variations', 'run', hut_variations, '--where', 'local', '--cameras', 'Camera Z', '--engine', 'cycles', '--size', '96x64', '--samples', '2', '--ledger', local_ledger,
          '--run-folder', os.path.join(hut_folder, 'run-z')], capture_output=True, text=True, env=environment, timeout=300).stdout, True)

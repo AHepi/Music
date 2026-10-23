@@ -9,6 +9,9 @@ answer back. This test checks four things:
    things, starts from the same state as the generic preset, and its notes name none of the leaning words.
 4. The example files in the kit are about places this project really built (a canal lock), and the skill's worked-example file names
    both real places and says what was measured and what was judged.
+5. The Poly Haven sample (kit/place-kit/data/polyhaven_choices.json) is a small, even-handed sample and not one place's shopping list:
+   it has no list of things 'not found' to script, it spreads over every kind of surface (ground, floor, wall, roof, timber, iron),
+   no kind holds more than a third of it, and its own text tells the helper to search the site for what its place needs.
 It uses only the Python standard library.
 Run: python3 kit/calculators/tests/test_place_generic.py
 """
@@ -31,6 +34,9 @@ KEPT_OUT = {
     'c670b23a57410814670c1905e62ff9e31a93d5eefb523fc5728a4c9a87896a12', 'f0672e740dedec60d93c8fada6cbb8e4a562be704c1fc9d27684e9c60b96aea0',
     '2cf5134c9cb48e57227b4c122da25de32f30e55438e8b54ae8c72637caaa36c8', '05b3b66d444b8ed761948161aa8e4b986d2df0588facc556b4c97dc60d44c286',
     'fd62862b6dc213bee77c2badd6311528253c6cb3107e03c16051aa15584eca1c', 'a2a52f3eba927ee4e451df164d0c2e0e42bef8c04713d493140f50620696a789',
+    # two more words of the same trade (one word and its plural each), added after a check found them in a test and in a props list
+    '50bc66d8aae5ae9020e15d53a103ddf91de202b3af5aeb3fd124b6861cdd2405', '232f246c372d9200db52eafb585a647e194a1ad680946b7721f9fb477a0bc881',
+    '4d50c52025f8bc9d06fe9f5ca6470e9433baa8509e127b059b6b286f8b4dc71d', '67fb5cc4b3fc7bd57d7c0be6c0d6ceade4acc897e8491051a2a45ff38d617bfc',
 }
 TEXT_EXTENSIONS = {'.md', '.py', '.json', '.js', '.mjs', '.txt', '.sh'}
 PLACE_PARTS = [
@@ -121,4 +127,21 @@ skill = read(os.path.join(PLUGIN, 'skills', 'surfaces-wear-and-construction', 'S
 check.true('the skill points to the worked-example file and to no other worked example', 'worked-examples-garden-and-canal-lock.md' in skill and not re.search(r'a-[a-z-]+-example\.md', skill))
 check.true('the skill still says the pass and the construction check are REQUIRED for every place (the routing is not weakened)',
            'REQUIRED for every place, set or prop you build in Blender' in skill and 'It must PASS before you draw, render or paint anything' in skill)
+
+# ------------------------------------------------------------------------------------------ 5. the Poly Haven sample is even-handed
+polyhaven = json.load(open(os.path.join(KIT, 'place-kit', 'data', 'polyhaven_choices.json'), encoding='utf-8'))
+check.true('the Poly Haven sample has no list of things "not found" to script (such a list is one place\'s props) and its text names none',
+           'not_found' not in polyhaven and 'not found' not in polyhaven['about'].lower(), details=', '.join(sorted(polyhaven)))
+kinds_of_texture = {}
+for item in polyhaven['textures']:
+    kind = item.get('sample_for_role', '?').split('.')[0]
+    kinds_of_texture[kind] = kinds_of_texture.get(kind, 0) + 1
+check.true('the sample spreads over every kind of surface: ground, floor, wall, roof, timber and iron',
+           all(kind in kinds_of_texture for kind in ('ground', 'floor', 'wall', 'roof', 'timber', 'iron')), details=str(kinds_of_texture))
+largest = max(kinds_of_texture.values())
+check.true('no single role holds more than two sample textures, and the ground (the biggest kind) holds at most half of them',
+           all(sum(1 for item in polyhaven['textures'] if item.get('sample_for_role') == role) <= 2 for role in {item.get('sample_for_role') for item in polyhaven['textures']})
+           and kinds_of_texture.get('ground', 0) <= len(polyhaven['textures']) / 2, details=f'largest kind {largest} of {len(polyhaven["textures"])}')
+check.true('the sample says it is a small sample and tells the helper to search the site for its own place',
+           'SMALL SAMPLE' in polyhaven['about'] and 'NOT a shopping list' in polyhaven['about'] and 'polyhaven.com/textures' in polyhaven['about'])
 check.finish()

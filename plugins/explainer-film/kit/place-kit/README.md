@@ -53,7 +53,7 @@ Exit 0 is a pass (read the LOOK lines), 1 is a fail, 2 is an input that is missi
 | `undo` | removes everything the kit added and puts the original materials back |
 | `combine`, `fingerprint`, `ownership-diff` | build in parts by different builders at the same time and check who changed what |
 | `renderer-for`, `render`, `rent` | which renderer, drawing pictures (here, tiny; or on a rented card), the rented-card client |
-| `variations` | a batch of about 10 measurably different versions of ONE change, drawn small and quick in up to 3 card jobs at once, measured, on ONE labelled contact sheet (`make`, `plan`, `run`, `refine`, `sheet`, `keys`) |
+| `variations` | a batch of about 10 measurably different variations of ONE change, drawn small and quick in up to 3 card jobs at once, measured, on ONE labelled contact sheet (`make`, `scout`, `plan`, `run`, `collect`, `refine`, `sheet`, `keys`) |
 | `card-time` | the card-time ledger and each helper's allowance (`show`, `check`, `add`, `start`) |
 | `measure`, `crops` | measure pictures against a style guard; cut 100 percent crops |
 | `check-presets` | checks the kit's own data and code (see Tests) |
@@ -169,40 +169,53 @@ A view is drawn as a preview (and with `--finals` also as a final) unless it say
 preview is wasted. Files are named by view and kind once (`towpath_wide_preview.jpg`; a view already called `closeup` is not named
 `closeup_closeup`), each with a `.json` log beside it.
 
-## Trying versions in batches, and the card-time ledger
+## Trying variations in batches, and the card-time ledger
 
 The rule (the person's words: "Do one full sweep of changes, then look. Instead of one small change, then check. Maybe even batch according to variations. So maybe 10 variations that are measurably different for each asset change."):
-make every change in ONE sweep, then look once; for each change to a thing, draw about 10 measurably different versions in ONE batch and look at ONE sheet; pick or combine; at most ONE more batch; build the scene once and save it;
+make every change in ONE sweep, then look once; for each change to a thing, draw about 10 measurably different variations in ONE batch and look at ONE sheet; pick or combine; at most ONE more batch; build the scene once and save it;
 small quick pictures until the end, full-size pictures once, at the very end. The skill file is `skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`.
 
 `variations` (code in `place_kit/variations/`, one plain note at the top of each file):
 
 ```
-explainer-film-place variations make --keys amount.moss_and_algae dials.moss_and_algae.cover --count 10 --change "moss on the walls" --scene lock-finished.blend --cameras "Camera A" "Camera B" --out moss.json
-explainer-film-place variations plan moss.json --helper builder-walls --role builder      (free: draws nothing)
-explainer-film-place variations run moss.json --where rented --helper builder-walls --role builder
-explainer-film-place variations refine moss-run/variations-result.json --pick v03 v05      (the ONE more batch, around the picks)
+explainer-film-place variations make --keys dials.cracks_and_chips.crack_density dials.cracks_and_chips.chip_amount amount.cracks_and_chips \
+    --range dials.cracks_and_chips.crack_density 0.6 1 --count 10 --change "cracks on the walls" --scene lock-finished.blend --cameras "Camera A" "Camera B" --out cracks.json
+explainer-film-place variations scout cracks.json                                            (free: drawn HERE, tiny, about 40 s for the small lock; not a batch)
+explainer-film-place variations plan cracks.json --helper builder-walls --role builder      (free: draws nothing; uses the scout)
+explainer-film-place variations run cracks.json --where rented --helper builder-walls --role builder
+explainer-film-place variations collect cracks-run                                           (only if the run was cut off after its jobs were sent)
+explainer-film-place variations refine cracks-run/variations-result.json --pick v03 v05     (the ONE more batch, around the picks)
 ```
 
 - A variations file lists named variations. Each is a set of settings (`master`, `amount.<layer>`, `dials.<layer>.<dial>`, `state`, `look`; `variations keys` lists them with their ranges) or a small script hook
   (`apply(variation)` inside Blender, with its numbers in `args`; the template is `data/templates/variation_hook.py`). A real example: `data/examples/canal-lock-cracks-variations.json`.
+  `master` and `amount.<layer>` SCALE what the saved scene has (1 = as saved, 0 = off, up to `place_variations.amount_scale_max`, 2), so a batch can try more wear as well as less; a dial is set to the
+  variation's value in every material. `make --range KEY LOW HIGH` spreads one setting only over the part of its range that shows.
+- The FREE SCOUT (`variations scout FILE.json`, `place_kit/variations/scout.py`) draws the same variations HERE, tiny (`place_variations.scout_size_pixels`, 240 x 160, 8 samples), in one job, with no card seconds,
+  and is not counted as a batch. Its limits for "nearly the same" are its own (`scout_picture_mean_difference_min` 0.75, `scout_picture_changed_share_min` 0.3 percent), calibrated on 23 October 2026: two real card
+  batches of the canal lock (110 pairs) drawn again as scouts gave exactly the same 22 nearly-the-same pairs as the cards did, and no other (one scene; a thin margin for cracks). `plan` and `run` find the scout beside the
+  file and drop what it found nearly the same as the saved scene or as an earlier variation, each with a sentence; a scout of another version of the scene, or of other settings, is not used (scene checksum and a
+  fingerprint of each variation). The scout also reads what the saved scene has for every dial the batch varies (shown under the baseline on the sheets), and the settings check then compares with that.
 - BEFORE drawing, a variation is dropped when none of its settings is at least `place_variations.settings_difference_min_share` (8 percent: invented) of the setting's range away from the saved scene or from an earlier variation;
   the sentence says which and why. `make` spreads the settings so that no two variations share a tenth of any range (a Latin hypercube), so ten made variations are far apart by construction.
 - The variations (and the baseline, the saved scene as it is) are split over up to `place_render.workers_max` (3) card jobs, at least 3 variations in each, sent at the same time. Each job opens the scene once; for each variation it
   applies the settings, draws small quick pictures (600 x 400; EEVEE 16 samples or Cycles 24 samples by the renderer rule, chosen once from the baseline) through every camera, then puts the values back and checks a fingerprint
   (a script hook, or a reset that did not come back exact, reopens the scene). The scene is never saved. `--where local` runs the same jobs here, one after another (tiny scenes and tests).
 - The scene waits on the store under its own checksum, so a second batch on the same scene does not upload the scene again.
+- Every job is written into the ledger as "sent" (with an estimate) the moment it goes out, and the run folder keeps `run-state.json`; a command cut off while it waits (a time limit, a lost connection) loses
+  nothing: `variations collect RUN-FOLDER` waits for the same jobs, writes their billed seconds, brings the pictures back and makes the sheet, sending nothing again.
 - AFTER drawing, the pictures are measured here (no card seconds): value range, detail energy, colour shift, saturation shift and squint score against the baseline; every pair is compared pixel by pixel, and variations that came
   out nearly the same as the baseline ("does not show in these cameras") or as each other are flagged, one line for each group. ONE contact sheet (a JPG under 400,000 bytes) shows the baseline, each variation's name, settings and measures,
   the flags and the card seconds. `variations-result.json` holds everything.
 - Two ways to reach a card: the plugin's own client (the settings of section "Drawing pictures"), or any command-line client with the actions `upload`, `run`, `job` and `download`:
   `--card-client "python3 -I /path/render_client_serverless.py"` (or `PLACE_CARD_CLIENT`). The second cannot say what an upload billed, so those steps are counted from the wall clock and marked as an estimate.
 
-`card-time` (code in `place_kit/card_time.py`): every card job (and every small job: an upload, a check, a download) is written to one ledger file, `--ledger FILE` or `PLACE_CARD_LEDGER`, one line for each, with `--helper NAME`
+`card-time` (code in `place_kit/card_time.py`): every card job (and every small job: an upload, a check, a download) is written to one ledger file (locked while a line is written, so helpers writing at the same moment never mix their lines), `--ledger FILE` or `PLACE_CARD_LEDGER`, one line for each, with `--helper NAME`
 (`PLACE_HELPER`) and `--role builder|fixer|integrator|renderer|checker|planner` (`PLACE_HELPER_ROLE`). Card seconds = work + wake-up + the idle tail (5 s). Allowances are house numbers (`place_card_time.allowance_minutes`:
 builder 10, fixer 5, integrator 10, renderer 10, checker 3, planner 0, default 5; judged); a warning at 80 percent, a refusal that sends nothing when a step would pass the allowance, a refusal of a third batch for one change,
 `--over-allowance "a reason of 15 letters or more"` to go over by at most half again (the reason is written into the ledger), and a total for the whole job (`place_card_time.team_total_minutes`, 60; `card-time start --team-minutes N`
-writes the person's own). `render --where rented` and `rent upload|run|status` pass the same gate. A price made from seconds is an estimate, never a bill.
+writes the person's own). `render --where rented` and `rent upload|run|status` pass the same gate. A job counts at its estimate from the moment it is sent ("sent" line) until its billed seconds are in. A price made
+from seconds is an estimate, never a bill.
 
 ## What was measured and what was only judged
 
@@ -222,9 +235,9 @@ are first tries too. The style rule (few, big, clean, designed marks; no photogr
 - A large place: only a hut, a 36 by 26 m yard and a 12 m canal lock were built and finished here. The plan masks, the wear and the growth are untested at
   hundreds of buildings, and Cycles was not run with the kit on a place that size.
 - The plugin's own rented-card client (`rent`, `render --where rented`) was tested against a pretend card (a fake service that hands each job to the real job taker), never
-  against a real endpoint: the settings it needs were never read. The `variations` batch WAS run on real rented cards (23 October 2026: two batches of 10 in 3 jobs at once, then a refined batch of 6 in 2 jobs), but through the project's own
+  against a real endpoint: the settings it needs were never read. The `variations` batch WAS run on real rented cards (23 October 2026: four real batches: two batches of 10 in 3 jobs at once, a refined batch of 6 in 2 jobs, and the scouted proof batch of 10 in 3 jobs), but through the project's own
   command-line client (`--card-client`), not through the plugin's client.
-- The card-time allowance numbers are judged guesses (10 minutes for a builder, 5 for a fixer); the three real batches used 180, 158 and 104 card seconds. How a whole run of the workflow `build-a-place` keeps inside them was tested only against canned helpers.
+- The card-time allowance numbers are judged guesses (10 minutes for a builder, 5 for a fixer); the four real batches used 180, 158 and 104 card seconds, and the scouted proof batch of 10 used 178. How a whole run of the workflow `build-a-place` keeps inside them was tested only against canned helpers.
 - The batch rule and the allowance work as tools that refuse; that a smaller model, asked only for a place in plain words, then really batches its tries was not tried.
 - `paint_request.py --keep-wetness` (the painter prompt for a place built wet) was tried on the template's words only; no painting was paid for, so how the painter treats the words is not known.
 - The `balance` action of the client was written from RunPod's documented query and never run.

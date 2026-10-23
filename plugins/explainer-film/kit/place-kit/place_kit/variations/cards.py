@@ -63,6 +63,10 @@ class ClientCard:
     def wall_seconds(self):
         return None
 
+    def clear_small(self):
+        """Forgets the small jobs already written into the ledger (so they are never written twice)."""
+        self.client.small_jobs.clear()
+
 
 class CommandCard:
     kind = 'a command-line client'
@@ -151,3 +155,7 @@ class CommandCard:
 
     def wall_seconds(self):
         return self.seconds_used
+
+    def clear_small(self):
+        """Forgets the upload and download seconds already written into the ledger."""
+        self.seconds_used = 0.0

@@ -10,8 +10,9 @@ The job file (written by the runner, place_kit/variations/runner.py):
      "engine": "auto" | "cycles" | "eevee", "size": [600, 400], "samples": null or N, "check_reset": false,
      "entries": [{"name": "baseline", "is_baseline": true, "set": {}, "script": null, "args": {}, "reset": "auto"}, {"name": "moss-heavy", "set": {...}, ...}]}
 It writes, into out_folder: NN_<name>__<camera>.jpg for each picture, NN_<name>.json for each variation (the settings, the notes, the seconds it took, how it was put back) and job-result.json
-(the whole job: blender version, device, engine and why, seconds in all). Plain lines start with PASS, LOOK or FAIL. Exit: 0 every picture drawn, 1 a picture or a hook failed, 2 the job file or
-a camera is missing.
+(the whole job: blender version, device, engine and why, seconds in all, and saved_values: what the saved scene has for every dial the job varies, lowest and highest over the materials).
+"scout": true in the job file (a free scout drawn here) takes the scout's samples (place_variations.scout_cycles_samples, scout_eevee_samples) when the job names none.
+Plain lines start with PASS, LOOK or FAIL. Exit: 0 every picture drawn, 1 a picture or a hook failed, 2 the job file or a camera is missing.
 
 A concrete example: a job of four variations and two cameras draws 8 pictures; with a warm card and EEVEE or low-sample Cycles each picture takes a few seconds.
 """
@@ -110,13 +111,16 @@ def run_command(parsed):
     forced = job.get('engine') or 'auto'
     engine, reasons = render_job.choose_engine({}, forced)
     size = [int(job['size'][0]), int(job['size'][1])] if job.get('size') else list(numbers.value('place_variations.picture_size_pixels'))
-    samples = int(job['samples']) if job.get('samples') else int(numbers.value('place_variations.cycles_samples' if engine == 'CYCLES' else 'place_variations.eevee_samples'))
+    prefix = 'place_variations.scout_' if job.get('scout') else 'place_variations.'          # a free scout draws tinier and with fewer samples (house numbers place_variations.scout_*)
+    samples = int(job['samples']) if job.get('samples') else int(numbers.value(prefix + ('cycles_samples' if engine == 'CYCLES' else 'eevee_samples')))
     quality = job.get('quality') or numbers.value('place_variations.jpeg_quality')
     device, applied = render_job.set_up_engine(bpy.context.scene, engine, size[0], size[1], samples, on_card)
     applier = apply_module.Applier(job.get('settings'))
     baseline_fingerprint = applier.fingerprint()
+    varied = sorted({key for entry in job['entries'] for key in (entry.get('set') or {})})
     summary = {'job': job.get('job'), 'scene': os.path.basename(scene_path), 'blender': bpy.app.version_string, 'device': device, 'engine': engine, 'engine_reasons': reasons[:3], 'size': size,
-               'samples': samples, 'where': 'card' if on_card else 'local', 'cameras': [c.name for c in camera_objects()], 'fingerprint_at_start': baseline_fingerprint}
+               'samples': samples, 'where': 'card' if on_card else 'local', 'cameras': [c.name for c in camera_objects()], 'fingerprint_at_start': baseline_fingerprint,
+               'saved_values': applier.saved_values(varied)}           # what the saved scene has for every dial this job varies (lowest and highest over its materials)
     reopened = 0
     for position, entry in enumerate(job['entries'], 1):
         label = keys.file_label(position, entry['name'])

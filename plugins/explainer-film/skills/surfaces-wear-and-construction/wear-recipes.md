@@ -32,7 +32,7 @@ Each object needs its own `pk_<layer>_amount` property; `age` writes it. Without
 | Layer | What it is (and the words people use) | Where it goes |
 |---|---|---|
 | dirt | soil film, mud splash, dust, polish on worn roads, dried puddle rings | low places; a band up the wall foot measured from each wall's own bottom edge (the street's splash band was 15 to 35 cm; stone plinths 15 to 46 cm high once hid it when measured from the world floor); footfall |
-| grime | soot, run-off streaks under eaves and sills, damp bands, stains | sheltered places and under projections; soot above hearths and chimneys. A real TIDE LINE (a band at the water's own height) is not made by a layer: build it as shape (a band of darker, slimier stone, a row of barnacle shapes) in the part that owns the quay or the wheel pit |
+| grime | soot, run-off streaks under eaves and sills, damp bands, stains | sheltered places and under projections; soot above hearths and chimneys. A real TIDE LINE (a band at the water's own height) is not made by a layer: build it as shape (a band of darker, slimier stone, a row of barnacle shapes) in the part that owns the quay or the wheel pit. The layers darken an object's own foot and the wall under a sill. They do NOT darken the ground where a thing stands (under a crate, a stall or a wagon, round a post), stone under iron (a rust run below a ring), or where water runs on the ground (the drip line under the eaves, a spout's spill, down a slipway): build those as a few big, soft, darker designed shapes in the part that owns the thing |
 | weathering | silvering of timber, sun fade, bleaching, patina | sun-facing, rain-facing, upper surfaces; the grey-silver of old unpainted timber |
 | wetness | darker, smoother, a film coat, puddles | low places and rut bottoms; ground within 1.5 m of any water (the plan masks wet it: full at the waterline, fading to nothing 1.5 m away; measured on a quay: 0.59 at 10 cm, 0.16 at 1 m, 0 from 3 m); by state (dry, damp, wet) |
 | cracks_and_chips | split planks, plaster loss, chipped stone corners, a sagging roof | corners and ends; one clean line, not a net |
@@ -84,15 +84,17 @@ The looks are presets of dial values and nothing else (`place-kit/data/looks/`):
 - `lived_in` (default): normal use: some dirt and grime, edge wear on what is touched, a little moss in the damp,
   a few weeds at the edges, some rubbish at the wall feet.
 - `neglected`: stronger dirt, grime, weeds, moss, rubbish and wetness. A road nobody maintains.
-- `derelict`: adds cracks, sag, missing pieces and heavy moss. A ruin.
+- `derelict`: adds cracks, sag and heavy moss. A ruin. (The pass bends, chips and leans parts but never removes one: missing,
+  slipped or replaced pieces are built by the builder as shape, for example a missing slate, a gap in the planking, one new board.)
 Different roles can have different looks (`look_by_role`). State: `dry`, `damp`, `wet`; switch it with
 `age --state wet` or `finish --state damp`. Only the wetness layer changes, and puddles appear by depth (judged: about
 40, 40 and 20 percent of the puddle area in three depths).
 
 **The dials and the state are the same for every role.** There is no setting that turns the wetness or the moss up for the waterside roles only. To treat one role differently, give it its own look with `look_by_role` (the four
 looks differ in how much wetness and moss they hold), or switch a layer off for it with an `off` entry and a true reason; for a wet quay, put the whole place in state `wet` and rely on the water-edge dampness above. What the
-kit does NOT make: seaweed, barnacles, shells, foam and reeds as plants (the plants it scatters are tuft, clover, nettle, fern, bramble and moss cushion, `place-kit/data/species.json`): build those as a few big designed
-shapes in the part that owns them.
+kit does NOT make: seaweed, barnacles, shells, foam and reeds as plants (the plants it scatters are tuft, clover, nettle, fern, bramble and moss cushion, `place-kit/data/species.json`), nor the rubbish of the place's own
+work (its litter is only leaves, pine needles, sticks, straw and clods): fish scraps, crushed ice and broken fish boxes at a market; coal, cinders and ash at a station or a mine; sawdust at a mill. Build those as a
+few big designed shapes in the part that owns them, where the work happens.
 
 ## Honest note: what shows at film size
 

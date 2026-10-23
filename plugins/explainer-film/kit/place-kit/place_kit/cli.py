@@ -32,7 +32,7 @@ VERBS = {
     'rent': {'blender': False, 'help': 'the rented-card client: status, upload, run, job, wait, download, balance'},
     'measure': {'blender': False, 'help': 'measure pictures (value range, detail energy, flat windows, palette, squint) and make or check a style guard'},
     'crops': {'blender': False, 'help': 'cut 100 percent crops of a picture (with before and after strips)'},
-    'variations': {'blender': False, 'help': 'a batch of about 10 measurably different versions of one change, drawn small and quick in up to 3 card jobs at once, measured, on ONE labelled contact sheet (actions: make, plan, run, refine, sheet, keys)'},
+    'variations': {'blender': False, 'help': 'a batch of about 10 measurably different variations of one change, drawn small and quick in up to 3 card jobs at once, measured, on ONE labelled contact sheet (actions: make, scout, plan, run, collect, refine, sheet, keys)'},
     'variations-worker': {'blender': True, 'help': 'internal: one job of a variations batch, inside Blender (`variations run` starts it, here or on a card)'},
     'card-time': {'blender': False, 'help': 'the card-time ledger and each helper\'s allowance: show, check, add, start'},
     'check-presets': {'blender': False, 'help': 'check the kit\'s own data and code (kinds and sources, agreement, required treatments are made and tested, no place words, nothing private)'},
@@ -161,9 +161,11 @@ def build_parser():
     p.add_argument('--previous', help='the earlier picture (for before and after strips)')
     p.add_argument('--out-folder', dest='out_folder', help='where the crops go')
     p = verb('variations')
-    p.add_argument('action', choices=['make', 'plan', 'run', 'refine', 'sheet', 'keys'], help='make: write a variations file that spreads settings across their ranges; plan: check and plan, draw nothing; run: draw the batch and make the sheet; '
-                   'refine: write the second batch around the variations you picked; sheet: make the sheet again from pictures already drawn; keys: list the settings a variation may change')
-    p.add_argument('spec', nargs='?', help='plan and run: the variations file; refine and sheet: the variations-result.json (or its folder) of a finished run')
+    p.add_argument('action', choices=['make', 'scout', 'plan', 'run', 'collect', 'refine', 'sheet', 'keys'], help='make: write a variations file that spreads settings across their ranges; '
+                   'scout: draw the same file HERE, tiny, for free, and say which variations would not show (not a batch); plan: check and plan, draw nothing; run: draw the batch and make the sheet; '
+                   'collect: finish a batch whose command was cut off after its jobs were sent; refine: write the second batch around the variations you picked; sheet: make the sheet again from '
+                   'pictures already drawn; keys: list the settings a variation may change')
+    p.add_argument('spec', nargs='?', help='scout, plan and run: the variations file; collect: the run folder; refine and sheet: the variations-result.json (or its folder) of a finished run')
     p.add_argument('--cameras', nargs='+', help='the cameras to look through (default: the file\'s, else the scene\'s own camera)')
     p.add_argument('--where', choices=['local', 'rented', 'auto'], default='auto', help='local: draw here (tiny scenes, tests); rented: on rented cards; auto: a card when one is set up (--card-client, PLACE_CARD_CLIENT, or the plugin client\'s settings), else here')
     p.add_argument('--card-client', dest='card_client', help='the command that starts a card client with the actions upload, run, job and download, for example "python3 -I /path/render_client_serverless.py" (or PLACE_CARD_CLIENT)')
@@ -176,6 +178,9 @@ def build_parser():
     p.add_argument('--check-reset', dest='check_reset', action='store_true', help='draw the baseline again after all the variations in its job, to prove the reset put everything back (one more small picture)')
     p.add_argument('--max-kilobytes', dest='max_kilobytes', type=int, help='the sheet stays under this size (default 400)')
     p.add_argument('--keys', nargs='+', help='make: the settings to spread, for example amount.moss_and_algae dials.moss_and_algae.cover')
+    p.add_argument('--range', nargs=3, action='append', metavar=('KEY', 'LOW', 'HIGH'), help='make: spread KEY only from LOW to HIGH (the part of its range that shows, from a scout); give it once for each setting to limit')
+    p.add_argument('--scout', help='plan and run: the scout to use (its folder or its variations-result.json; default: the FILE-scout folder beside the variations file)')
+    p.add_argument('--no-scout', dest='no_scout', action='store_true', help='plan and run: do not use a scout even when there is one')
     p.add_argument('--count', type=int, help='make: how many variations (default 10); refine: how many (default 6)')
     p.add_argument('--seed', type=int, default=1, help='make and refine: the seed of the spread (the same seed gives the same file)')
     p.add_argument('--change', help='make: the one change this batch tries, in plain words')

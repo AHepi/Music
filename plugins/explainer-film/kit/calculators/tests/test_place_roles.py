@@ -12,6 +12,10 @@
 7. The 1.4.0 fix round: the name hints read the harbour and mill words the newcomer judge tried (a "Waterwheel" is not a cart wheel, "Reed bed" is not a thatch roof, "Quay wall" is stone,
    "Haystack" is straw, "Fish boxes stack" is not a chimney, "Stone steps" are steps and "Step trench cheek" is NOT a step); every role has a plain meaning; `roles --list` prints them all
    without a scene; steps have their own role, and the indoor-floor skip of the place types does not cover a flagstone floor.
+8. The place's own facts are put on top of the generic ones, key by key.
+9. The second newcomer round: railway, station and harbour names no longer read wrong ("Railway track" is not a dirt road, "Water tower" is not still water, "Roof tiles" and
+   "Station roof slate" are tile and slate roofs, "Timber wall" is timber, "Market floor flagstones" is a stone floor). The bare words "roof", "wall" and "house" are WEAK hints: at
+   the same place (the name, a collection, a material) any other hint beats them; the name still counts more than a material. And a drafted settings file counts its roles by where they came from: tags, rules, or guesses from names.
 Run: python3 kit/calculators/tests/test_place_roles.py
 """
 import os
@@ -104,12 +108,12 @@ check.true('every role has a class that exists, and a surface that exists (or no
            f'{len(table["roles"])} roles')
 bad_patterns = []
 for role, spec in table['roles'].items():
-    for pattern in spec.get('name_hints', []):
+    for pattern in spec.get('name_hints', []) + spec.get('weak_name_hints', []):
         try:
             re.compile(pattern)
         except re.error:
             bad_patterns.append(f'{role}: {pattern}')
-check.equal('every name hint is a valid pattern', bad_patterns, [])
+check.equal('every name hint (and every weak name hint) is a valid pattern', bad_patterns, [])
 used = {t for klass in classes.values() for t in klass.get('requires', []) + klass.get('wanted', [])}
 check.true('every treatment a class names is one of the seventeen', used <= set(names.ALL_TREATMENTS), str(sorted(used - set(names.ALL_TREATMENTS))))
 check.equal('there are seventeen treatments', len(names.ALL_TREATMENTS), 17)
@@ -168,4 +172,30 @@ check.true('a partial own fact keeps the generic fact\'s pattern (it still appli
 json.dump({'facts': [{'id': 'canal_lock_depth', 'what': 'a made-up fact of one place', 'applies_to_role': '^water\\.', 'dimension': 'height', 'min': 1.0, 'max': 3.0, 'unit': 'metres', 'confidence': 'weak'}]}, open(own_path, 'w'))
 ids = [f['id'] for f in scale.load_facts({}, own_path)]
 check.true('a new fact of the place is added beside the generic ones', 'canal_lock_depth' in ids and 'door_height' in ids)
+
+# ---------------------------------------------------------------- 9. the second newcomer round: railway, station and harbour names
+second_round = {'Railway track': None, 'Water tower': None, 'Water crane': None, 'Canopy column': None, 'Station roof slate': 'roof.slate', 'Roof tiles': 'roof.tile',
+                'Slate roof': 'roof.slate', 'Timber wall': 'timber.plank', 'Market floor flagstones': 'floor.stone', 'Flagstones': 'ground.stone_paving', 'Cart track': 'ground.dirt_road',
+                'Pond water': 'water.still', 'Rail fence': 'timber.fence', 'Hut 1 wall': 'wall.plaster', 'Hut 1 roof': 'roof.shingle', 'Fence post 3': 'timber.post'}
+wrong_second = {name: (tag(name)['role'], role) for name, role in second_round.items() if tag(name)['role'] != role}
+check.equal('railway, station and harbour names read as what they are, or stay unknown (so the builder must say) instead of a wrong guess', wrong_second, {},
+            recorded='judge-blind-newcomers-round2: the role guesser run on 31 names and 12 collection names')
+check.true('a collection "Place: track_and_signals" no longer turns every untagged object in it into a dirt road', tag('Object.5', collections=['Place: track_and_signals'])['role'] != 'ground.dirt_road',
+           str(tag('Object.5', collections=['Place: track_and_signals'])['role']))
+check.true('the bare word "wall" is weak only against a word at the same place: "Brick wall" is brick, "Station building walls" is still the general wall, and so is "wall_north" '
+           'with a material called "wall_mat" (the name counts more than the material\'s "mat", which alone would mean a carpet)',
+           tag('Brick wall')['role'] == 'wall.brick' and tag('Station building walls')['role'] == 'wall.plaster' and tag('wall_north', materials=['wall_mat'])['role'] == 'wall.plaster',
+           str((tag('Brick wall')['role'], tag('Station building walls')['role'], tag('wall_north', materials=['wall_mat'])['role'])))
+
+# a drafted settings file says where each role came from (a tagged object whose name matches no hint is counted as tagged, not as guessed)
+drafted_objects = [{'name': 'Thing qqq 1', 'collections': [], 'materials': [], 'properties': {'place_role': 'wall.brick'}},
+                   {'name': 'Thing qqq 2', 'collections': [], 'materials': [], 'properties': {'place_role': 'timber.post'}},
+                   {'name': 'Brick wall 3', 'collections': [], 'materials': [], 'properties': {}},
+                   {'name': 'qqq xyz', 'collections': [], 'materials': [], 'properties': {}}]
+_draft, draft_report = settings_file.draft(drafted_objects, 'test place', 'generic')
+sources = settings_file.role_sources(draft_report['guessed'])
+sources_text = settings_file.role_sources_text(draft_report['guessed'])
+check.true('a drafted settings file counts 2 roles from place_role tags and 1 guessed from names (it no longer calls tagged roles "guessed from names")',
+           sources == {'tagged': 2, 'rules': 0, 'guessed': 1} and sources_text.startswith('2 role(s) from place_role tags, 0 from settings rules, 1 guessed from names'), sources_text)
+check.true('  (with every object tagged, nothing is called guessed)', settings_file.role_sources_text({'a': ['wall.brick', 'place_role property']}) == '1 role(s) from place_role tags, 0 from settings rules, 0 guessed from names')
 check.finish()

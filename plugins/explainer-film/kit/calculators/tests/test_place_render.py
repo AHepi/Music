@@ -270,7 +270,11 @@ check.true('nothing the client printed holds the key or the endpoint id', FAKE_K
 ledger_entries, _ = card_time.read_ledger(os.environ['PLACE_CARD_LEDGER'])
 logged_jobs = [e for e in ledger_entries if e['kind'] == 'job']
 check.true('the render job is written into the card-time ledger with its billed seconds (work 1.5 + wake-up 0.7 + the idle tail 5 = 7.2)', len(logged_jobs) == 1 and logged_jobs[0]['card_seconds'] == 7.2 and logged_jobs[0]['helper'] == 'unnamed-helper',
-           f'{[(e["kind"], e["card_seconds"]) for e in ledger_entries]}')
+           f'{[(e["kind"], e.get("card_seconds")) for e in ledger_entries]}')
+sent_lines = [e for e in ledger_entries if e['kind'] == 'sent']
+check.true('...and a "sent" line was written the moment it went out (with an estimate); once the billed seconds are in, it no longer counts, so nothing is counted twice',
+           len(sent_lines) == 1 and sent_lines[0]['job_id'] == logged_jobs[0]['job_id'] and sent_lines[0]['estimate_seconds'] > 0 and not card_time.open_sent(ledger_entries)
+           and card_time.used_seconds(ledger_entries, 'unnamed-helper') == round(sum(e['card_seconds'] for e in ledger_entries if e['kind'] in ('job', 'small')), 1), f'{sent_lines}')
 check.true('...and so are its small jobs (uploads, checks, the pictures coming back), as one entry', len([e for e in ledger_entries if e['kind'] == 'small']) == 1)
 Parsed.role = 'planner'
 card_refused = FakeCard()

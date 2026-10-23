@@ -2,8 +2,8 @@
 Plain Python (standard library only); no Blender needed.
 
 A variation changes a place that is already finished and saved. It names the change with a "set" table of dotted keys:
-    master                        0 to 1     scales every wear layer (0 gives exactly the picture without wear)
-    amount.<layer>                0 to 1     how strongly one wear layer acts (1 = the look as written; 0 = that layer does nothing)
+    master                        0 to 2     scales every wear layer of the saved scene (1 = as saved; 0 gives exactly the picture without wear; 2 = twice as strong)
+    amount.<layer>                0 to 2     scales one wear layer of the saved scene (1 = as saved; 0 = that layer does nothing; 1.6 = 60 percent stronger)
     dials.<layer>.<dial>          the dial's own range (from data/dial_table.json): cover, film, foot_height_metres, puddles ... ; dials.<layer>.seed picks another random pattern
     state                         dry, damp or wet   (rewrites the wetness amount on every object)
     look                          kept, lived_in, neglected or derelict   (rewrites every layer's amount on every object from that look)
@@ -13,9 +13,12 @@ numbers go in "args". Numbers in args may carry their range in the variations fi
 
 Measurably different, BEFORE drawing: two variations are different enough when at least one setting differs by place_variations.settings_difference_min_share (8 percent) of that setting's range
 (a number in a script hook with no range: place_variations.number_without_range_difference_min_share, 25 percent of the larger value; a word such as wet and dry, or a seed: any difference counts).
-A setting a variation does not name stays as the saved scene has it (read here as the dial's default; the pictures drawn afterwards decide whether that guess was right).
+A setting a variation does not name stays as the saved scene has it. For master and amount.<layer> the saved scene is exactly 1 (they scale what is saved). For a dial the saved value
+is read from the scene by a free scout (`variations scout`, see spec.py) when there is one; without a scout it is read here as the dial's default (the pictures drawn afterwards decide
+whether that guess was right).
 
 A concrete example: {"dials.moss_and_algae.cover": 0.5} and {"dials.moss_and_algae.cover": 0.55} are 5 percent of the range apart, so the second is a near-duplicate; 0.5 and 0.9 are 40 percent apart.
+{"amount.moss_and_algae": 1.6} is 30 percent of the range (0 to 2) away from the saved scene (1.0), so it is far enough; 1.1 is only 5 percent away and would draw the baseline again.
 """
 import math
 import re
@@ -35,6 +38,11 @@ def known_keys_text():
             'See the note at the top of place_kit/variations/keys.py; `explainer-film-place variations keys` lists every dial with its range.')
 
 
+def amount_scale_max():
+    """The top of master and amount.<layer> (house number place_variations.amount_scale_max): they SCALE what the saved scene has, so 1 is the saved scene."""
+    return float(numbers.value('place_variations.amount_scale_max'))
+
+
 def dial_rows(layer):
     """{dial: (low, high, default)} for a layer, from the dial table (the common dials amount and seed included)."""
     table = settings_file.dial_table()
@@ -44,9 +52,10 @@ def dial_rows(layer):
 
 def all_dial_lines():
     """Plain lines naming every key a variation may set, with its range and default."""
-    lines = ['master: 0 to 1 (default 1)', 'state: ' + ', '.join(names.STATES), 'look: ' + ', '.join(names.LOOKS)]
+    top = amount_scale_max()
+    lines = [f'master: 0 to {top:g} (1 = every wear layer as the saved scene has it; 0 = no wear)', 'state: ' + ', '.join(names.STATES), 'look: ' + ', '.join(names.LOOKS)]
     for layer in names.LAYER_ORDER:
-        lines.append(f'amount.{layer}: 0 to 1 (default 1)')
+        lines.append(f'amount.{layer}: 0 to {top:g} (1 = as the saved scene has it; 0 = off; {top:g} = {top:g} times as strong)')
     for layer in names.LAYER_ORDER:
         for dial, (low, high, default) in dial_rows(layer).items():
             if dial == 'amount':
@@ -59,7 +68,7 @@ def describe_key(key):
     """What a key is, as a dictionary: kind, layer, dial, low, high, default, categorical (True for words and seeds), choices."""
     parts = key.split('.')
     if key == 'master':
-        return {'kind': 'master', 'layer': None, 'dial': None, 'low': 0.0, 'high': 1.0, 'default': 1.0, 'categorical': False, 'choices': None}
+        return {'kind': 'master', 'layer': None, 'dial': None, 'low': 0.0, 'high': amount_scale_max(), 'default': 1.0, 'categorical': False, 'choices': None}
     if key == 'state':
         return {'kind': 'state', 'layer': None, 'dial': None, 'low': None, 'high': None, 'default': None, 'categorical': True, 'choices': list(names.STATES)}
     if key == 'look':
@@ -67,7 +76,7 @@ def describe_key(key):
     if len(parts) == 2 and parts[0] == 'amount':
         if parts[1] not in names.LAYER_ORDER:
             raise KeyProblem(f'the key "{key}" names the layer "{parts[1]}", which is not one of {", ".join(names.LAYER_ORDER)}')
-        return {'kind': 'amount', 'layer': parts[1], 'dial': 'amount', 'low': 0.0, 'high': 1.0, 'default': 1.0, 'categorical': False, 'choices': None}
+        return {'kind': 'amount', 'layer': parts[1], 'dial': 'amount', 'low': 0.0, 'high': amount_scale_max(), 'default': 1.0, 'categorical': False, 'choices': None}
     if len(parts) == 3 and parts[0] == 'dials':
         layer, dial = parts[1], parts[2]
         if layer not in names.LAYER_ORDER:
@@ -130,9 +139,24 @@ def _ratio_numbers(a, b, share_needed, span):
     return (abs(a - b) / span) / share_needed if span > 0 else 0.0
 
 
-def setting_ratios(first, second):
+def saved_value_of(key, info, saved=None):
+    """The saved scene's value of a setting as (lowest, highest) over its materials: from `saved` ({key: [lowest, highest]}, read from the scene by a scout or a finished run) when it is
+    there, else the dial's default for both. master and amount.<layer> are always (1, 1): they scale what is saved."""
+    if info['kind'] in ('master', 'amount'):
+        return 1.0, 1.0
+    if saved and key in saved and saved[key] is not None:
+        value = saved[key]
+        if isinstance(value, (list, tuple)) and len(value) == 2:
+            return float(value[0]), float(value[1])
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            return float(value), float(value)
+    return info['default'], info['default']
+
+
+def setting_ratios(first, second, saved=None):
     """{key: ratio}: for every setting either variation names, how many times the smallest difference that counts the two are apart (1.0 or more = far enough on that setting).
-    first and second are {"set": {...}, "args": {...}, "ranges": {...}, "script": path-or-None}."""
+    first and second are {"set": {...}, "args": {...}, "ranges": {...}, "script": path-or-None}. A setting only one of them names is compared with the saved scene's value (saved_value_of):
+    when the saved scene has different values in different materials, the variation is as far away as its LARGEST gap, because the change shows wherever any material moves enough."""
     share = float(numbers.value('place_variations.settings_difference_min_share'))
     unranged = float(numbers.value('place_variations.number_without_range_difference_min_share'))
     ratios = {}
@@ -142,9 +166,13 @@ def setting_ratios(first, second):
         if info['categorical']:
             ratios[key] = 0.0 if a == b else 1.0
             continue
-        a = info['default'] if a is None else a
-        b = info['default'] if b is None else b
-        ratios[key] = _ratio_numbers(a, b, share, info['high'] - info['low'])
+        span = info['high'] - info['low']
+        if a is not None and b is not None:
+            ratios[key] = _ratio_numbers(a, b, share, span)
+            continue
+        given = a if a is not None else b
+        lowest, highest = saved_value_of(key, info, saved)
+        ratios[key] = max(_ratio_numbers(given, lowest, share, span), _ratio_numbers(given, highest, share, span))
     if first.get('script') != second.get('script'):
         ratios['script'] = 1.0
     for key in sorted(set(first.get('args', {})) | set(second.get('args', {}))):
@@ -164,10 +192,10 @@ def setting_ratios(first, second):
     return ratios
 
 
-def apart(first, second):
+def apart(first, second, saved=None):
     """(far_enough, best_ratio, key, can_be_checked): whether two variations are measurably different by their settings. can_be_checked is False when neither names any setting
-    (a script hook with no numbers cannot be compared before drawing; the pictures decide)."""
-    ratios = setting_ratios(first, second)
+    (a script hook with no numbers cannot be compared before drawing; the pictures decide). saved: the saved scene's values (see saved_value_of)."""
+    ratios = setting_ratios(first, second, saved)
     if not ratios:
         return False, 0.0, None, False
     key, best = max(ratios.items(), key=lambda item: item[1])

@@ -5271,7 +5271,7 @@
   }
  },
  "place_variations": {
-  "about": "Batched variation rounds (explainer-film-place variations): about 10 measurably different versions of one change, drawn small and quick in up to 3 rented-card jobs at the same time, measured, and shown on one labelled contact sheet. The numbers that say 'measurably different' are starting points: nobody has yet shown by experiment how far apart settings must be for a picture to change enough to see.",
+  "about": "Batched variation rounds (explainer-film-place variations): about 10 measurably different versions of one change, drawn small and quick in up to 3 rented-card jobs at the same time, measured, and shown on one labelled contact sheet. The numbers that say 'measurably different' are starting points: nobody has yet shown by experiment how far apart settings must be for a picture to change enough to see. A free scout (`variations scout`) draws the same batch here, tiny (240 x 160), first; its own limits for \"nearly the same\" were calibrated on two real batches, and plan and run drop what the scout found would not show.",
   "picture_size_pixels": {
    "value": [
     600,
@@ -5292,6 +5292,12 @@
    "unit": "samples",
    "kind": "judged",
    "source": "judged by eye on the two real batches of 23 October 2026 (canal lock, 600 x 400, OptiX denoising on an RTX 4090): the pictures read clearly on the sheet at 24 samples; the full-size pictures use place_render.final_samples"
+  },
+  "amount_scale_max": {
+   "value": 2.0,
+   "unit": "times the saved strength",
+   "kind": "judged",
+   "source": "master and amount.<layer> SCALE the wear the saved scene has (1 = as saved, 0 = off), so a batch can try more wear as well as less; above about twice most wear masks are already full (judged: a first try)"
   },
   "jpeg_quality": {
    "value": 85,
@@ -5352,6 +5358,39 @@
    "unit": "of 255",
    "kind": "judged",
    "source": "a pixel whose largest colour channel moved more than this counts as changed (JPEG noise stays under it)"
+  },
+  "scout_size_pixels": {
+   "value": [
+    240,
+    160
+   ],
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "the free scout drawn on this computer (`variations scout`): 22 pictures of the small canal lock took 37 to 39 s here on 23 October 2026; small enough to be quick, big enough that cracks and moss clumps still show"
+  },
+  "scout_cycles_samples": {
+   "value": 8,
+   "unit": "samples",
+   "kind": "judged",
+   "source": "the two scouts of 23 October 2026 at 240 x 160 (denoised): enough that the scout called the same pairs nearly the same as the rented-card batches at 24 samples"
+  },
+  "scout_eevee_samples": {
+   "value": 8,
+   "unit": "samples",
+   "kind": "invented",
+   "source": "the scout's EEVEE samples: a quick look (no EEVEE scout has been compared with a card batch yet)"
+  },
+  "scout_picture_mean_difference_min": {
+   "value": 0.75,
+   "unit": "of 255, mean absolute difference",
+   "kind": "measured",
+   "source": "calibrated on 23 October 2026: two real rented-card batches of the canal lock (moss and cracks, 10 variations each, 600 x 400, 24 samples, 110 pairs) were drawn again here as scouts (240 x 160, 8 samples). Tiny low-sample pictures differ more (card 0.24 became 0.41 in the scout, card 0.67 became 0.88). With 0.75 and scout_picture_changed_share_min the scout called exactly the same 22 pairs nearly the same as the card did, and no other (the closest wrong pair was at 0.74 for one camera, so the margin is thin). One scene and two cameras only"
+  },
+  "scout_picture_changed_share_min": {
+   "value": 0.003,
+   "unit": "share of pixels",
+   "kind": "measured",
+   "source": "calibrated with scout_picture_mean_difference_min on the same two batches: the pairs the card called nearly the same changed at most 0.26 percent of the scout's pixels per camera; at 0.4 percent the scout wrongly added two cracks pairs"
   },
   "estimated_seconds_open_scene": {
    "value": 14,

@@ -45,7 +45,8 @@ of the barrel. Then you run the whole pass on the combined place, audit the save
    amount of 0 with no reason fails. Never write an accepted entry: only the person signs those. Never edit geometry.
    Write each repair in `repairs_made`.
 7. A dial or a look you are not sure of (how much moss, how strong the cracks, damp or wet) is tried the batch way, never one small change at a time: make every settings change in one sweep, then
-   `explainer-film-place variations make --keys dials.moss_and_algae.cover ... --count 10` (or write the file), `variations plan`, then `variations run FILE.json --where rented --helper NAME --role integrator --ledger LEDGER`
+   `explainer-film-place variations make --keys dials.moss_and_algae.cover ... --count 10` (or write the file), `variations scout FILE.json` (free, here, tiny: it says which would not show),
+   `variations plan`, then `variations run FILE.json --where rented --helper NAME --role integrator --ledger LEDGER`
    on the saved finished scene, look at ONE sheet, pick or combine, at most ONE more batch. Your allowance is the role integrator (10 minutes: judged); your prompt names your helper name and the ledger. Read
    `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`. Never save a trial scene over the audited file.
 

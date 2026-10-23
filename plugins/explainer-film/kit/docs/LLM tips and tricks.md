@@ -56,7 +56,7 @@ How to run it:
    *Check:* `calculators/frame_geometry.py project | boxes | reach | slide`, `calculators/plan_shot.py`.
 3. Make one change, then measure again. A camera change moves everything, so fix in this order: the camera,
    then the props, then the light. *Check:* the shot checker lists problems in that order
-   (`paper-film/tools/check-shot.sh`); fix problem 1 only and run it again.
+   (`paper-film/tools/check-shot.sh`); fix problem 1 only and run it again. (This is for measured checks that run here and cost no card time; a look at a picture follows the batch rule: one sweep, then one look.)
 4. Quote measured numbers in every report ("reaches 0.71 down", "-15.0 LUFS"), never "looks fine". Say what
    you did not measure (nobody watched it at full speed; nobody listened).
 5. Never trust a single still. Page turns, one-frame pops, snapping fades and smoke only show between
@@ -385,12 +385,17 @@ built in Blender goes through it, whatever the request says. In short:
     `build-a-place`; the preflight's `--fresh-check`.
 16. Make every change in ONE sweep, then look once. Build the scene once and save it; every test starts from the saved file. A change tried one small step at a time, with a look after each,
     cost US$10.89 of card time in the Japanese garden (the finished pictures cost about 5 cents). *Check:* `explainer-film-place variations plan` (free) and the card-time ledger.
-17. For each change to a thing, draw about 10 versions that are measurably different, in ONE batch on up to 3 rented cards at once, and look at ONE labelled sheet. Pick or combine, then at most ONE
-    more batch around the pick. Versions closer than 8 percent of a setting's range are dropped before drawing; pictures that came out nearly the same are flagged after drawing.
-    *Check:* `explainer-film-place variations make | plan | run | refine`; the batch rule is counted by `card-time` (a third batch for one change is refused).
-18. Small quick pictures (600 x 400, EEVEE or low-sample Cycles) until the end; full-size pictures drawn ONCE, at the very end. *Check:* `variations` draws small by itself; `render --finals` only on the last audited file.
+17. For each change to a thing, draw about 10 variations that are measurably different, in ONE batch on up to 3 rented cards at once, and look at ONE labelled sheet. Pick or combine, then at most ONE
+    more batch around the pick. Variations closer than 8 percent of a setting's range are dropped before drawing; pictures that came out nearly the same are flagged after drawing.
+    Before the card, scout for free: `variations scout FILE.json` draws the same batch here, tiny (about 40 s for a small place), and `plan` and `run` then drop what would not show
+    (on the canal lock half of a first moss batch showed nothing on the card, and the scout named exactly those). A dial that shows only above some value: spread it over that part
+    (`variations make --range KEY LOW HIGH`). `amount` and `master` scale the saved scene (1 = as saved, up to 2).
+    *Check:* `explainer-film-place variations make | scout | plan | run | refine`; the batch rule is counted by `card-time` (a third batch for one change is refused; a scout is not a batch).
+18. Small quick pictures (600 x 400 for trying variations, EEVEE or low-sample Cycles; 1200 x 800 for the checkers' previews) until the end; full-size pictures drawn ONCE, at the very end. *Check:* `variations` draws small by itself; `render --finals` only on the last audited file.
 19. Every card job goes in the card-time ledger and each helper has an allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0: judged); the tool warns at 80 percent and refuses
     past it; going over needs a written reason and never more than half again. Report the card seconds you used. *Check:* `explainer-film-place card-time show | check`.
+    A batch waits for the cards (1 to 3 minutes for a small place): give the command a long time limit. If it is cut off, its jobs still count (each was written as "sent"), and
+    `explainer-film-place variations collect RUN-FOLDER` finishes it without sending anything again.
     Seconds are work + wake-up + idle tail; the price is an estimate, never a bill. The skill is `surfaces-wear-and-construction`, file `batched-rounds-and-card-time.md`.
 
 ## 9. Before painting (stage `plates`)
@@ -544,8 +549,8 @@ built in Blender goes through it, whatever the request says. In short:
 5. Budget one repaint for every two paintings and one page of re-recording.
 6. Do every free step first, then ask once, with the exact cost. A vague reply is not a yes, and a refusal
    is never worked around. **Judgement:** only the user's own clear yes counts.
-7. Rented-card time is limited the same way as painting money: each helper has an allowance in card minutes, written in a ledger, and the tools refuse past it. Try versions in batches (one sweep, about 10
-   far-apart versions, one sheet, at most one more batch); full-size pictures once at the end (section 8a, tips 16 to 19). *Check:* `explainer-film-place card-time show`.
+7. Rented-card time is limited the same way as painting money: each helper has an allowance in card minutes, written in a ledger, and the tools refuse past it. Try variations in batches (one sweep, about 10
+   far-apart variations, one sheet, at most one more batch); full-size pictures once at the end (section 8a, tips 16 to 19). *Check:* `explainer-film-place card-time show`.
 
 ## 17. The people test's lessons (lessons 135 to 139)
 

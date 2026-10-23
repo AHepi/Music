@@ -59,7 +59,8 @@ def measure_lines(result, baseline, target):
 
 def make_sheet(path, results, cameras, meta, thumbnail_width=None, max_kilobytes=None):
     """Writes the contact sheet to path (a .jpg). results: the baseline first, each with 'name', 'set', 'args', 'script', 'pictures' (each with an absolute 'path'), 'average', 'flags' (list of text),
-    'ok'. meta: {'change', 'scene', 'engine', 'size', 'dropped': [text], 'pair_lines': [text], 'card_lines': [text], 'legend': True}. Returns {'path', 'bytes', 'quality', 'scale', 'width', 'height'}."""
+    'ok'. meta: {'change', 'scene', 'engine', 'size', 'dropped': [text], 'pair_lines': [text], 'card_lines': [text], 'legend': True,
+    'baseline_note': text under the baseline: what the saved scene has for the dials the batch varies}. Returns {'path', 'bytes', 'quality', 'scale', 'width', 'height'}."""
     tw = int(thumbnail_width or numbers.value('place_variations.sheet_thumbnail_width_pixels'))
     limit = int((max_kilobytes or numbers.value('place_render.preview_download_kilobytes_max')) * 1000)       # 400 KB means under 400,000 bytes, so it is under 400 KiB too
     target = float(numbers.value('place_measures.squint_target'))
@@ -87,8 +88,11 @@ def make_sheet(path, results, cameras, meta, thumbnail_width=None, max_kilobytes
         flags = result.get('flags') or []
         label = 'baseline (the saved scene)' if result['name'] == 'baseline' else f'#{index} {result["name"]}'
         block = [(label, mid, WARN if flags or not result.get('ok', True) else TEXT)]
-        settings_text = 'the saved scene as it is' if result['name'] == 'baseline' else keys.describe_variation(result, limit=4)
-        block += [(line, small, QUIET) for line in wrap(probe, settings_text, small, cell_w, 2)]
+        if result['name'] == 'baseline':
+            settings_text = meta.get('baseline_note') or 'the saved scene as it is'
+        else:
+            settings_text = keys.describe_variation(result, limit=4)
+        block += [(line, small, QUIET) for line in wrap(probe, settings_text, small, cell_w, 3 if result['name'] == 'baseline' else 2)]
         for line in measure_lines(result, baseline, target):
             block += [(piece, small, TEXT) for piece in wrap(probe, line, small, cell_w, 2)]
         for flag in flags[:3]:
