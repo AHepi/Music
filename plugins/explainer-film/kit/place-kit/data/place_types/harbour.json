@@ -43,9 +43,13 @@
     "litter_pieces"
    ],
    "roles": [
-    "floor.*"
+    "floor.planks",
+    "floor.tile",
+    "floor.carpet",
+    "floor.earth",
+    "floor.concrete"
    ],
-   "reason": "inside the buildings: dry, nothing grows"
+   "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)"
   }
  ],
  "footfall_shapes": [
@@ -59,7 +63,7 @@
   "door_height",
   "door_width"
  ],
- "notes": "wet stone, rope, boats, tide marks",
+ "notes": "wet stone, rope, boats; the ground near water is damp (the wear masks), but a tide line, a band at the height of the water, is built as shape: no wear layer makes it",
  "kind": "invented",
  "source": "the plugin 1.4.0 design: a first try, judge by looking"
 }

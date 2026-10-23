@@ -5,17 +5,21 @@
 # which way each spot of the surface faces, so mortar lines and cobbles catch the lamp light).
 #
 # How it fits: model_kit.py calls these when it makes a material; nothing here needs Blender, only
-# numpy and Pillow. Every function returns Pillow pictures; `units` says how many world units one tile
-# covers, so model_kit can repeat it at the right size.
+# numpy. Pillow is NOT needed to make a picture or to write a PNG (Blender's own Python has no
+# Pillow): every function returns a `Picture` that holds its pixels as a numpy array and writes a PNG
+# with numpy and zlib alone; a JPEG still needs Pillow, which is loaded only at that moment, and a
+# plain sentence says so when it is missing. `units` says how many world units one tile covers, so
+# model_kit can repeat it at the right size.
 #
 # Use on its own to look at them: python3 textures.py OUT_FOLDER   (writes every texture as a picture)
 
 import math
 import os
+import struct
 import sys
+import zlib
 
 import numpy as np
-from PIL import Image
 
 # ------------------------------------------------------------------------------------------- noise
 
@@ -46,9 +50,65 @@ def streak_noise(height, width, rng, length=24):
     return out / max(1e-9, out.max())
 
 
+def write_png(path, pixels):
+    """Writes whole numbers 0..255 shaped (height, width), (height, width, 3) or (height, width, 4) as a PNG file, using
+    numpy and zlib only (no Pillow). Each row is stored as the difference from the row above, which makes smooth pictures
+    (normal maps) much smaller and loses nothing."""
+    pixels = np.ascontiguousarray(pixels, dtype=np.uint8)
+    if pixels.ndim == 2:
+        pixels = pixels[:, :, None]
+    height, width, channels = pixels.shape
+    colour_type = {1: 0, 3: 2, 4: 6}[channels]
+    rows = pixels.reshape(height, width * channels)
+    stored = np.empty((height, width * channels + 1), dtype=np.uint8)
+    stored[:, 0] = 2                                           # filter 2 = "Up"
+    stored[0, 1:] = rows[0]
+    stored[1:, 1:] = rows[1:] - rows[:-1]                      # whole-number wrap-around on purpose (that is how Up is defined)
+
+    def chunk(kind, data):
+        body = kind + data
+        return struct.pack('>I', len(data)) + body + struct.pack('>I', zlib.crc32(body) & 0xffffffff)
+
+    with open(path, 'wb') as handle:
+        handle.write(b'\x89PNG\r\n\x1a\n')
+        handle.write(chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, 8, colour_type, 0, 0, 0)))
+        handle.write(chunk(b'IDAT', zlib.compress(stored.tobytes(), 6)))
+        handle.write(chunk(b'IEND', b''))
+
+
+class Picture:
+    """A picture held as numpy whole numbers 0..255 in `pixels` (height, width, 3). It writes a PNG with no Pillow;
+    `save` to a .jpg (or any other kind) loads Pillow at that moment and says plainly if it is missing."""
+
+    def __init__(self, pixels):
+        self.pixels = np.ascontiguousarray(pixels, dtype=np.uint8)
+
+    @property
+    def size(self):
+        return (self.pixels.shape[1], self.pixels.shape[0])
+
+    def save(self, path, quality=None, **_ignored):
+        if str(path).lower().endswith('.png'):
+            write_png(path, self.pixels)
+            return
+        picture = self.to_pillow()
+        if quality is None:
+            picture.save(path)
+        else:
+            picture.save(path, quality=quality)
+
+    def to_pillow(self):
+        try:
+            from PIL import Image
+        except ImportError:
+            raise RuntimeError('Pillow is not installed here and this needs it (to write a JPEG or to draw on a picture). '
+                               'Write a .png instead (no Pillow needed), or run this part outside Blender where Pillow is installed.')
+        return Image.fromarray(self.pixels, 'RGB' if self.pixels.shape[2] == 3 else 'RGBA')
+
+
 def to_picture(array):
-    """numpy (h, w, 3) floats 0..1 -> Pillow RGB picture."""
-    return Image.fromarray(np.clip(array * 255 + 0.5, 0, 255).astype(np.uint8), 'RGB')
+    """numpy (h, w, 3) floats 0..1 -> a Picture (see above; `.to_pillow()` gives a Pillow picture when one is needed)."""
+    return Picture(np.clip(array * 255 + 0.5, 0, 255).astype(np.uint8))
 
 
 def normal_map(height_field, strength=4.0):

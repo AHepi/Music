@@ -77,6 +77,12 @@ SECRET_PATTERNS = [
     ('a GitHub token', re.compile(r'\bgh[pousr]_[A-Za-z0-9]{30,}')),
     ('a Google API key', re.compile(r'\bAIza[0-9A-Za-z_-]{35}\b')),
     ('a fal key (id:secret)', re.compile(r'\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}:[0-9a-f]{32}\b')),
+    # RunPod rented-card settings. The key's form (it begins rpa_) is a BELIEF about RunPod's keys, not something read from their documents here; the settings-name
+    # pattern below does not depend on that belief, so a key of any other form written next to its name is still caught.
+    ('a RunPod API key (a belief: such keys begin rpa_)', re.compile(r'\brpa_[A-Za-z0-9]{20,}')),
+    ('a rented-card setting written out (RUNPOD_API_KEY or RUNPOD_ENDPOINT_ID set to a value)',
+     re.compile(r'\bRUNPOD_(?:API_KEY|ENDPOINT_ID)\b["\']?\s*[:=]\s*["\']?(?!your|YOUR|example|EXAMPLE|xxx|XXX|VALUE|NAME|\.\.\.|<|\$)[A-Za-z0-9_-]{16,}')),
+    ('a rented-card endpoint address with its id', re.compile(r'api\.runpod\.ai/v2/[A-Za-z0-9]{10,}/')),
     ('a key or password written out', re.compile(r'(?i)\b(api[_-]?key|secret|password|access[_-]?token)\b["\']?\s*[:=]\s*["\'][^"\'\s]{12,}["\']')),
 ]
 

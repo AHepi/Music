@@ -6,7 +6,7 @@ code (0 pass, 1 fail, 2 an input is missing or unusable). A verb that may draw w
 exists and no screen is set, because EEVEE needs a screen on a machine without a graphics card (set PLACE_NO_XVFB=1 to switch that off).
 It refuses a verb that needs a scene when the scene file is missing, with one plain sentence naming the file and how to make one.
 
-A concrete example: python3 place_command.py finish --scene village.blend --settings place-settings.json --save-as village-finished.blend
+A concrete example: python3 place_command.py finish --scene place.blend --settings place-settings.json --save-as place-finished.blend
 """
 import os
 import re
@@ -54,15 +54,76 @@ def blender_command(blender, scene, verb, verb_args, with_screen=False):
     return command
 
 
+def needs_scene_file(parsed):
+    """A render job names its own scene, and a combine of stage files builds on whatever scene they make; every other scene verb needs --scene."""
+    if parsed.verb == 'render':
+        return False
+    if parsed.verb == 'combine':
+        return not getattr(parsed, 'stages', None)
+    return True
+
+
+def ask_renderer_rule(parsed, kit_root):
+    """Starts Blender once on the scene to ask the film owner's renderer rule ('CYCLES' or 'EEVEE'); None when that cannot be asked (no scene, no Blender). It is asked only when a
+    rented card is set up, because that is the only time the answer changes where the previews are drawn."""
+    scene = parsed.scene
+    if not scene and parsed.job and os.path.exists(parsed.job):
+        try:
+            import json
+            with open(parsed.job, encoding='utf-8') as handle:
+                scene = (json.load(handle) or {}).get('scene')
+        except (OSError, ValueError, AttributeError):
+            scene = None
+    blender = find_blender(parsed.blender, kit_root)
+    if not scene or not os.path.exists(scene) or not blender:
+        return None
+    run = subprocess.run(blender_command(blender, os.path.abspath(scene), 'renderer-for', []), env=dict(os.environ, EXPLAINER_FILM_KIT=kit_root), capture_output=True, text=True)
+    for line in run.stdout.splitlines():
+        if line.strip() in ('CYCLES', 'EEVEE'):
+            return line.strip()
+    return None
+
+
+def send_render_to_a_card(parsed, kit_root=None):
+    """For `render`: the exit code when the job went to a rented card, or None when it is drawn here (a plain LOOK line says why when it stays local although a card was wanted)."""
+    from place_kit.render import client
+    engine = {'cycles': 'CYCLES', 'eevee': 'EEVEE'}.get(parsed.engine)
+    if parsed.where == 'auto' and not parsed.finals and engine is None:
+        try:
+            ready = not client.read_settings().missing()
+        except client.RentProblem:
+            ready = False
+        if ready:
+            engine = ask_renderer_rule(parsed, kit_root or os.path.dirname(HERE))
+    where, reason = client.choose_where(parsed.where, parsed.finals, engine=engine)
+    if where == 'rented':
+        if parsed.where == 'auto':
+            print('LOOK ' + reason)
+        return client.render_command(parsed)
+    if parsed.where == 'auto' and (parsed.finals or engine == 'CYCLES'):
+        print('LOOK ' + reason)
+    return None
+
+
+def print_role_list(parsed):
+    """`roles --list`: every role id with one plain line (plain Python: no scene and no Blender needed)."""
+    from place_kit import roles, settings_file
+    print('\n'.join(roles.role_list_lines(settings_file.roles_table())))
+    print('Give an object one of these ids with the object property place_role (pk.new_part_object does it as the object is made), or with a "roles" rule in place-settings.json.')
+    return 0
+
+
 def run_blender_verb(parsed, raw_args):
     verb = parsed.verb
+    if verb == 'roles' and getattr(parsed, 'list', False):
+        return print_role_list(parsed)
     scene = parsed.scene
     kit_root = os.path.abspath(parsed.kit) if parsed.kit else (os.environ.get('EXPLAINER_FILM_KIT') or os.path.dirname(HERE))
-    needs_scene = verb not in ('combine',) or not getattr(parsed, 'stages', None)
-    if verb in ('render',) and not scene:
-        scene = None                                   # a render job names its own scene
-        needs_scene = False
-    if needs_scene and verb not in ('render',) and not scene:
+    if verb == 'render':
+        rented = send_render_to_a_card(parsed, kit_root)
+        if rented is not None:
+            return rented
+    if needs_scene_file(parsed) and not scene:
         print(f'explainer-film-place {verb}: give the scene with --scene FILE.blend (the place you built and saved). To try the kit on a tiny demo, run: '
               f'python3 {os.path.join(os.path.dirname(HERE), "calculators", "tests", "fixtures", "place", "make_hut_scene.py")} --help', file=sys.stderr)
         return EXIT_MISSING
@@ -133,6 +194,8 @@ def measure_arguments(parsed, raw_args):
         arguments = ['make-guard'] + pictures[:1]
         if parsed.out:
             arguments += ['--out', parsed.out]
+        if getattr(parsed, 'view', None):
+            arguments += ['--view', parsed.view]
         return arguments
     arguments = ['check' if parsed.guard else 'measure'] + pictures
     for flag, value in (('--guard', parsed.guard), ('--regions', parsed.regions), ('--id-map', parsed.id_map), ('--id-colours', parsed.id_colours), ('--previous', parsed.previous),

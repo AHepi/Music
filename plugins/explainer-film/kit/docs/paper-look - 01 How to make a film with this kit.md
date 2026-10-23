@@ -42,7 +42,7 @@ picture in the film is placed the same way: by a spoken word.
   the `PAPER_FILM_BROWSER` setting (a path to the program), Playwright's own downloaded browser
   (`npx playwright-core install chromium` inside `paper-film/` if you have none), then the usual places
   (`/usr/bin/chromium`, Google Chrome). It runs with software graphics, so no graphics card is needed.
-- **Python 3.9 or newer** with numpy, opencv (`opencv-python-headless`) and Pillow.
+- **Python 3.10 or newer** with numpy, opencv (`opencv-python-headless`) and Pillow.
 - **ffmpeg and ffprobe** (with libx264 and libmp3lame).
 - **A bold font for words printed on objects**: DejaVu Sans Bold is looked for in the usual places;
   otherwise set `PAPER_FILM_LABEL_FONT` to any bold .ttf file.

@@ -278,6 +278,16 @@ problems = check_routing(descriptions)
 check.true('make-3d-models, build-and-paint-a-place and make-explainer-film name the new skill in their descriptions', not problems,
            details='; '.join(problems) or 'yes')
 check.true('  (on the wrong text this check fails)', bool(check_routing({'bad': front_matter(bad).get('description', '')})))
+# every skill's front matter must be plain YAML: a colon followed by a space inside a value breaks a strict parser
+def yaml_problems(text, name):
+    return [f'{name}: {key}' for key, value in front_matter(text).items() if key in ('description', 'when_to_use') and ': ' in value]
+
+
+yaml_bad = []
+for path in sorted(glob.glob(os.path.join(PLUGIN, 'skills', '*', 'SKILL.md'))):
+    yaml_bad += yaml_problems(read(path), os.path.basename(os.path.dirname(path)))
+check.true('no skill description or when_to_use holds a colon followed by a space (strict YAML)', not yaml_bad, details=', '.join(yaml_bad) or 'none does')
+check.true('  (a description with such a colon fails this check)', bool(yaml_problems('---\nname: x\ndescription: it does this: and that\n---\n', 'made-up')))
 master = read(os.path.join(PLUGIN, 'skills', 'make-explainer-film', 'SKILL.md'))
 check.true('make-explainer-film sends place work to the new skill in "Before you start" and has the place stage row',
            'surfaces-wear-and-construction/SKILL.md' in master and '| `place` |' in master)
@@ -310,6 +320,35 @@ else:
         check.true(f'verbs and options in {where} ({len(found)} commands)', not problems, details='; '.join(problems[:4]) or 'all exist')
     bad_found = commands_in(bad, '.md')
     check.true('  (a made-up verb and a made-up option fail these checks)', len(check_commands(bad_found, launcher, 'bad')) >= 2)
+
+# (4b) the preflight stages and their options, as written in the skills and guides
+PREFLIGHT_STAGES = ['script', 'record', 'shots', 'place', 'plates', 'paint', 'pages', 'film', 'finish']
+preflight = os.path.join(PLUGIN, 'bin', 'explainer-film-preflight')
+if os.path.exists(preflight):
+    try:
+        run = subprocess.run(['bash', preflight, '--help'], capture_output=True, text=True, timeout=90)
+        preflight_help = run.stdout + run.stderr
+    except (OSError, subprocess.TimeoutExpired):
+        preflight_help = ''
+    problems, written = [], 0
+    for path in files:
+        where = os.path.relpath(path, PLUGIN)
+        for span in code_spans(read(path), os.path.splitext(path)[1]):
+            for match in re.finditer(r'explainer-film-preflight\s+([a-z]+)\b', span):
+                if match.group(1) not in PREFLIGHT_STAGES:
+                    continue
+                written += 1
+                rest = span[match.end():]
+                nxt = re.search(r'explainer-film-', rest)
+                rest = rest[:nxt.start()] if nxt else rest
+                for option in re.findall(r'(?<![\w-])(--[a-z][a-z0-9-]*)', rest):
+                    if option not in preflight_help:
+                        problems.append(f'{where}: {option} is written beside the preflight stage {match.group(1)} but is not in its --help')
+    check.true(f'every option written beside `explainer-film-preflight STAGE` is in the preflight\'s --help ({written} commands)',
+               bool(preflight_help) and not problems, details='; '.join(problems[:4]) or 'all exist')
+    check.true('the preflight has the stage place', 'place' in preflight_help)
+else:
+    check.note('skipped: bin/explainer-film-preflight is not there')
 
 # (5) house numbers
 settings = json.load(open(os.path.join(KIT, 'film-settings.json'), encoding='utf-8'))
@@ -347,6 +386,7 @@ plugin_json = json.load(open(os.path.join(PLUGIN, '.claude-plugin', 'plugin.json
 check.equal('plugin.json says 1.4.0', plugin_json.get('version'), '1.4.0')
 readme = read(os.path.join(PLUGIN, 'README.md'))
 check.true('the README has a 1.4.0 entry and says nine stages', '**1.4.0 (' in readme and 'nine stages' in readme)
+check.true('the README names the reminder hook and says its format was not run inside Claude Code', 'hooks/hooks.json' in readme and 'place-reminder.py' in readme and 'run inside Claude Code' in ' '.join(readme.split()))
 marketplace = os.path.normpath(os.path.join(PLUGIN, '..', '..', '.claude-plugin', 'marketplace.json'))
 if os.path.exists(marketplace):
     try:
@@ -361,6 +401,24 @@ if os.path.exists(marketplace):
                    '(it is outside the plugin folder; whoever publishes sets it)')
 else:
     check.note('not checked: no marketplace file two folders up (the plugin stands alone)')
+
+# (7b) the parts the README and the 1.4.0 entry say are inside the plugin really are there
+claimed = ['bin/explainer-film-place', 'kit/calculators/place_audit_check.py', 'kit/calculators/picture_measures.py',
+           'workflows/build-a-place.js', 'kit/place-kit/README.md', 'kit/place-kit/SOURCES-AND-LICENCES.md', 'kit/place-kit/DEVIATIONS.md',
+           'hooks/hooks.json', 'hooks/place-reminder.py']
+claimed += [f'agents/place-{role}.md' for role in ('planner', 'builder', 'integrator', 'renderer', 'checker')]
+absent = [name for name in claimed if not os.path.exists(os.path.join(PLUGIN, name))]
+check.true(f'every part the README says is inside the plugin is there ({len(claimed)} named)', not absent, details=', '.join(absent) or 'all are there')
+model_lint = os.path.join(KIT, 'paper-film', 'blender', 'model_lint.py')
+lint_help = ''
+if os.path.exists(model_lint):
+    try:
+        run = subprocess.run([sys.executable, '-I', '-B', model_lint, '--help'], capture_output=True, text=True, timeout=90)
+        lint_help = run.stdout + run.stderr
+    except (OSError, subprocess.TimeoutExpired):
+        lint_help = ''
+check.true('model_lint.py has the --surfaces option the README, the skills and the tips guide mention', '--surfaces' in lint_help,
+           details='yes' if '--surfaces' in lint_help else 'model_lint.py --help does not list --surfaces')
 
 # (8) privacy
 all_hits = []

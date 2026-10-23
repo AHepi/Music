@@ -20,7 +20,8 @@ import numpy as np
 
 import bpy
 
-from .. import house_numbers, names, parts, roles as roles_module, run_record, scene_read, settings_file
+from .. import convert, house_numbers, names, parts, roles as roles_module, run_record, scene_read, settings_file
+from ..surfaces import ground_mesh
 from . import construction, material_inspect, normals_test, scale
 
 AUDIT_VERSION = 1
@@ -115,7 +116,8 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
     construction_by_object = built['objects']
     pairs = [(o, by_object[o.name]['role']) for o in objects if by_object[o.name]['role'] and not scene_read.is_scatter(o) and not roles_module.is_never(by_object[o.name]['role'])]
     scale_by_object = scale.scale_report(settings, pairs, facts_path)
-    road_gauges = scale.gauge_entries(settings.roads, scale.load_facts(settings.data, facts_path))
+    all_facts = scale.load_facts(settings.data, facts_path)
+    road_gauges = scale.gauge_entries(settings.roads, all_facts)
 
     # ---- materials
     inspected = {}
@@ -143,6 +145,13 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
     scatter['litter_per_100m2'] = per100(litter_count)
     plants_floor = house_numbers.value('place_audit.plants_min_per_100_square_metres')
     litter_floor = house_numbers.value('place_audit.litter_min_per_100_square_metres')
+    scatter['required'] = {}                  # what the ground roles require, whether or not any ground object has a material (a bare ground with no material must still grow things)
+    for treatment, count, floor in (('plants', plants_count, plants_floor), ('litter_pieces', litter_count, litter_floor)):
+        required_by = [o.name for o in ground_objects if treatment in roles_module.requirements(by_object[o.name]['role'], table, rules)['required']
+                       and not roles_module.off_entries_for(by_object[o.name]['role'], treatment, rules)]
+        density = per100(count)
+        scatter['required'][treatment] = {'required_by': required_by[:12], 'count': count, 'per_100_square_metres': density,
+                                          'has': bool(count) and (density is None or density >= floor)}
 
     # ---- per object
     object_rows, triangles_by_owner, total_triangles = [], {}, 0
@@ -175,15 +184,34 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
             else:
                 layer_missing.append(layer)
         has_normal = any(inspected.get(m.name, {}).get('normal_map', {}).get('has') for m in material_list)
+        usable = [inspected[m.name] for m in material_list if m.name in inspected and inspected[m.name].get('principled')]
         geometry = {'triangles': triangles, 'plain_box': scene_read.is_plain_box(obj), 'bevel': scene_read.has_bevel(obj), 'shape_damage': scene_read.has_shape_damage(obj),
                     'mean_edge_m': scene_read.mean_edge_length(obj) if len(obj.data.edges) else 0.0, 'subdivided': scene_read.has_subdivision(obj)}
+        geometry['fine_edge_m'] = scene_read.fine_edge_length(obj) if (role or '').startswith('ground.') and len(obj.data.edges) else geometry['mean_edge_m']
         if role and role.startswith('ground.'):
             geometry['relief_m'] = round(scene_read.relief_metres(obj), 4)
+            if ground_mesh.AREA_KEY in obj.keys() and obj[ground_mesh.AREA_KEY] > 0:
+                geometry['area_growth'] = round(ground_mesh.outline_facts(obj)['area'] / float(obj[ground_mesh.AREA_KEY]), 3)
+            if role == 'ground.dirt_road':
+                low_box, high_box = scene_read.world_bounds(obj)
+                geometry['road_entry'] = any(low_box[0] - 1.0 <= px <= high_box[0] + 1.0 and low_box[1] - 1.0 <= py <= high_box[1] + 1.0 for road in settings.roads for px, py in road['polyline'])
         wants_displacement = any(inspected.get(m.name, {}).get('displacement', {}).get('has') for m in material_list)
         if wants_displacement:
             displacement_objects.append(obj.name)
-            if geometry['mean_edge_m'] > edge_limit and not geometry['subdivided']:
+            if geometry['fine_edge_m'] > edge_limit and not geometry['subdivided']:
                 too_coarse.append(obj.name)
+        # what THIS object has of the treatments that live in its materials, against what its role requires: an object with no material at all (or none with nodes) has none of them,
+        # and no material row would ever say so
+        unsurfaced, surface_missing = False, []
+        if role and not exempt:
+            unsurfaced = not usable
+            have = {'normal_map': bool(has_normal), 'displacement': bool(wants_displacement), 'roughness_variation': any(u.get('roughness_variation') for u in usable),
+                    'colour_variation': any(u.get('colour_variation') for u in usable)}
+            for layer in names.LAYER_ORDER:
+                have[layer] = layer in layers_here
+            for treatment in roles_module.requirements(role, table, rules)['required']:
+                if treatment in have and not have[treatment] and not roles_module.off_entries_for(role, treatment, rules):
+                    surface_missing.append(treatment)
         missing = []
         if role and not exempt:
             req = roles_module.requirements(role, table, rules)
@@ -194,12 +222,15 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
         row = {'name': obj.name, 'role': role, 'owner': owner, 'collection': (obj.users_collection[0].name if obj.users_collection else None), 'materials': [m.name for m in material_list],
                'mesh_name': obj.data.name, 'size': [round(float(v), 4) for v in scene_read.object_size(obj)], 'has_normal_map': bool(has_normal), 'needs_uv': True,
                'uv': scene_read.uv_facts(obj), 'look': settings.look_for_role(role) if role else settings.look_id, 'layer_amounts': layer_amounts,
-               'layer_amounts_missing': layer_missing, 'layers_off': layers_off, 'geometry': geometry, 'missing': missing, 'visible': True, 'exempt': exempt}
+               'layer_amounts_missing': layer_missing, 'layers_off': layers_off, 'geometry': geometry, 'missing': missing, 'visible': True, 'exempt': exempt,
+               'unsurfaced': bool(unsurfaced), 'surface_missing': surface_missing}
         if obj.name in construction_by_object and not exempt:
             row['construction'] = construction_by_object[obj.name]
         entries = list(scale_by_object.get(obj.name, []))
         if role == 'ground.dirt_road':
             entries += road_gauges
+        if obj.name in construction_by_object and construction_by_object[obj.name].get('rise_m') is not None:
+            entries += scale.rise_entries(construction_by_object[obj.name]['rise_m'], role, obj.name, all_facts)
         if entries:
             row['scale'] = entries
         object_rows.append(row)
@@ -293,6 +324,7 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
             off_entries.append({'layer': e.get('layer') or e.get('treatment'), 'roles': e.get('roles'), 'reason': e.get('reason'), 'reason_id': e.get('reason_id')})
     scene_sha1 = sha1_of_file(path)
     settings_sha1 = sha1_of_file(settings.path) if settings.path and os.path.exists(settings.path) else None
+    non_mesh = convert.find_unconverted(settings)
     audit = {'audit_version': AUDIT_VERSION, 'made': datetime.datetime.now().isoformat(timespec='seconds'), 'blender': bpy.app.version_string, 'scene_file': os.path.basename(path),
              'scene_sha1': scene_sha1, 'settings_file': os.path.basename(settings.path) if settings.path else None, 'settings_sha1': settings_sha1, 'place': settings.place,
              'place_type': place_type, 'look': record.get('look') or settings.look_id, 'state': record.get('state') or settings.state, 'quick': quick,
@@ -305,7 +337,7 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
              'displacement': {'materials': [m['name'] for m in material_rows if m['treatments'].get('displacement', {}).get('has')], 'objects': displacement_objects, 'too_coarse': too_coarse},
              'roads': roads, 'renderer': renderer, 'light': _light_facts(),
              'off': {'entries': off_entries, 'allowed_ids': allowed_ids, 'share': (off_pairs / required_pairs) if required_pairs else 0.0},
-             'construction_summary': built['summary'], 'problems': problems}
+             'construction_summary': built['summary'], 'non_mesh': non_mesh, 'problems': problems}
     if renderer is None:
         del audit['renderer']
     if out_path:

@@ -2,9 +2,10 @@
 # What this does: sets up the explainer-film kit in a working folder: copies the kit (engine, tools,
 # templates, examples, docs) there, installs the drawing engine's packages with npm, and checks what the
 # tools need: Python's packages, ffmpeg, a Chromium browser, the Blender program and a virtual screen (for
-# places built in 3D), and a soundtrack. It writes what it found about this machine into the kit's
+# places built in 3D), a soundtrack, and whether the person's own rented-card settings are there (it only
+# says yes or no: it never prints, reads or copies a value). It writes what it found about this machine into the kit's
 # machine-settings.env (BLENDER, BLENDER_DISPLAY), which check-shot.sh and the checker's tests read, and
-# checks that every kit file the plugin's skills name is in the kit.
+# checks that every kit file the plugin's skills name (paper-film, narration-tools, examples, docs, place-kit) is in the kit.
 # Safe to run again: it never overwrites a kit file that already exists in the folder, so your own pages
 # and pictures are kept; files that differ from the plugin's copy are listed in kit-differences.txt.
 # machine-settings.env is rewritten each time (run it again after installing something).
@@ -26,12 +27,19 @@ mkdir -p "$TARGET/assets/reliefs" "$TARGET/assets/paintings" "$TARGET/assets/mod
 echo "kit copied to $TARGET"
 differ=$(wc -l < "$TARGET/kit-differences.txt")
 [ "$differ" -gt 0 ] && echo "  $differ kit files there differ from the plugin's copy and were kept: see $TARGET/kit-differences.txt"
+# a kept older copy of these files lacks the place stage and the place checks: say so by name (the setup never overwrites your files)
+for important in calculators/preflight.py calculators/place_audit_check.py calculators/picture_measures.py film-settings.json; do
+  if grep -qx "$important" "$TARGET/kit-differences.txt"; then
+    echo "  NOTE: your $important is not the plugin's current one and was kept, so it may lack the place stage or the place numbers (version 1.4.0). To get them: cp \"$HERE/kit/$important\" \"$TARGET/$important\" (after saving your own changes)"
+  fi
+done
 if [ ! -d "$TARGET/paper-film/node_modules/three" ]; then
   (cd "$TARGET/paper-film" && npm install --no-audit --no-fund) || echo "npm install failed: install Node.js 18+ and run 'npm install' in $TARGET/paper-film"
 fi
 
 echo "--- checks ---"
 command -v ffmpeg >/dev/null && echo "ffmpeg: ok" || echo "ffmpeg: MISSING (install ffmpeg with libx264)"
+python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null && echo "python: ok ($(python3 --version 2>&1))" || echo "python: 3.10 or newer is needed (this is $(python3 --version 2>&1))"
 python3 -c "import numpy, PIL, cv2" 2>/dev/null && echo "python packages: ok" || echo "python packages: MISSING (pip install numpy pillow opencv-python-headless)"
 browser=$(cd "$TARGET" && node -e "import('./paper-film/tools/find-browser.mjs').then((m) => console.log(m.findBrowser())).catch(() => {})" 2>/dev/null)
 if [ -n "$browser" ]; then echo "browser: ok ($browser)"
@@ -49,6 +57,12 @@ fi
 if [ -n "$blender" ] && [ -x "$blender" ]; then
   version=$("$blender" --version 2>/dev/null | head -1)
   echo "blender (for places built in 3D and the shot checker): ok (${version:-unknown version}, $blender)"
+  # Blender's own Python has numpy but normally no Pillow; the place kit and model_kit.py need none (pictures are written as PNG)
+  if "$blender" -b --disable-autoexec --python-exit-code 3 --python-expr "import PIL" >/dev/null 2>&1; then
+    echo "  blender's own Python has Pillow (the place kit does not need it)"
+  else
+    echo "  blender's own Python has no Pillow: normal, the place kit and model_kit.py need none (a script that draws text with Pillow does: run that part outside Blender)"
+  fi
 else
   blender=""
   echo "blender (optional, for places built in 3D and the shot checker): not found. Download Blender 5.2 or newer"
@@ -59,8 +73,20 @@ display="${BLENDER_DISPLAY:-:96}"
 if [ -e "/tmp/.X11-unix/X${display#:}" ]; then echo "virtual screen: $display is running"
 elif command -v Xvfb >/dev/null; then echo "virtual screen: Xvfb found but $display is not running; start it with: Xvfb $display -screen 0 1920x1080x24 &"
 else echo "virtual screen (for EEVEE plates without a graphics card): Xvfb MISSING (install xvfb)"; fi
-if [ -n "${BLENDER_PYTHON:-}" ] && "$BLENDER_PYTHON" -c "import bpy, PIL" 2>/dev/null; then
-  echo "blender python module (for the model scripts in paper-film/blender/build_*.py): ok ($BLENDER_PYTHON)"
+command -v xvfb-run >/dev/null && echo "xvfb-run (the place kit draws its local EEVEE pictures and its normals test with it): ok" \
+  || echo "xvfb-run (the place kit's local EEVEE pictures and normals test): MISSING (install xvfb; Cycles pictures and every other place verb do not need it)"
+if [ -n "${BLENDER_PYTHON:-}" ] && "$BLENDER_PYTHON" -c "import bpy" 2>/dev/null; then
+  if "$BLENDER_PYTHON" -c "import PIL" 2>/dev/null; then with="with Pillow"; else with="without Pillow, which the model scripts no longer need"; fi
+  echo "blender python module (for the model scripts in paper-film/blender/build_*.py): ok ($BLENDER_PYTHON, $with)"
+fi
+# rented cards (optional): big pictures go to the person's own rented graphics cards. This only says whether the settings are there. It never prints,
+# reads or copies a value, and machine-settings.env never holds one; the render command reads them from the environment when it runs.
+if [ -n "${RUNPOD_API_KEY:-}" ] && [ -n "${RUNPOD_ENDPOINT_ID:-}" ]; then
+  echo "rented cards (optional, for pictures too big for this computer): your account's settings are set in this shell (values are never shown or saved)"
+elif [ -n "${RENDER_SETTINGS_FILE:-}" ] && [ -f "${RENDER_SETTINGS_FILE}" ]; then
+  echo "rented cards (optional, for pictures too big for this computer): a settings file is named in RENDER_SETTINGS_FILE (its contents are not read here)"
+else
+  echo "rented cards (optional, for pictures too big for this computer): no settings in this shell. To use them set RUNPOD_API_KEY and RUNPOD_ENDPOINT_ID (your own account's), or name a file kept outside any git folder in RENDER_SETTINGS_FILE (lines NAME=VALUE: RUNPOD_API_KEY=..., RUNPOD_ENDPOINT_ID=..., and optionally RENDER_STORE_FOLDER=...); 'explainer-film-place rent status' says what is missing"
 fi
 # a soundtrack
 soundtrack=$(find "$TARGET/assets/soundtrack" -maxdepth 1 -type f \( -iname '*.mp3' -o -iname '*.wav' -o -iname '*.flac' -o -iname '*.m4a' \) 2>/dev/null | head -1)
@@ -94,7 +120,7 @@ for folder, _, files in os.walk(skills):
                 for word in words:
                     word = word.strip('"\'(),;:')
                     word = re.sub(r'^(\$\{CLAUDE_PLUGIN_ROOT\}/)?(film-)?kit/', '', word)
-                    if not re.match(r'(paper-film|narration-tools|examples|docs)/', word):
+                    if not re.match(r'(paper-film|narration-tools|examples|docs|place-kit)/', word):
                         continue
                     if re.search(r'[<>*{}$]|\bN\b|NAME|CHAPTER|\.\.\.', word) or word.endswith('/') or word.startswith('paper-film/out/'):
                         continue   # a pattern, a folder or something a tool writes, not a kit file

@@ -1,0 +1,44 @@
+{
+ "owner": "roads_and_ground",
+ "stage_file": "/path/to/run/stages/stage_roads_and_ground.py",
+ "work_file": "/path/to/run/work/{owner}/part.blend",
+ "steps_finished": "steps 1, 2 and 3",
+ "objects_added": 412,
+ "triangles": 48213,
+ "own_audit": {
+  "verdict": "PASS",
+  "problems": [
+   "LOOK PLANT-5502 only a fallback role for two objects"
+  ]
+ },
+ "surface_pass_done": true,
+ "wear_preview_done": false,
+ "claims": [
+  {
+   "claim": "the ground has two ruts a cart gauge apart on every lane",
+   "measured_by": "a height profile across the lane, PLANT-4471"
+  }
+ ],
+ "unsure": [
+  "PLANT-8821 the ridge of the thatch may be too regular"
+ ],
+ "shared_problems": [
+  "PLANT-6609 the shared lamp is slightly off centre"
+ ],
+ "failures": [
+  "PLANT-9915 the first run of the normal-map test crashed and was run again"
+ ],
+ "not_tested": [
+  "no picture was drawn of the part"
+ ],
+ "views_to_redraw": [],
+ "seconds": 187.4,
+ "start_file": "/path/to/run/scene/start.blend",
+ "ground_file": "/path/to/run/scene/ground.blend",
+ "cameras": [
+  "View wide",
+  "View lane_close",
+  "View detail_close"
+ ],
+ "ground_promise": "inside 1.2 m of each lane centre line the ground is as it is"
+}

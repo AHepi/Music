@@ -1,0 +1,38 @@
+{
+ "owner": "{owner}",
+ "stage_file": "/path/to/run/stages/stage_{owner}.py",
+ "work_file": "/path/to/run/work/{owner}/part.blend",
+ "steps_finished": "the fix: the findings given to this part",
+ "objects_added": 412,
+ "triangles": 48213,
+ "own_audit": {
+  "verdict": "PASS",
+  "problems": [
+   "LOOK PLANT-5502 only a fallback role for two objects"
+  ]
+ },
+ "surface_pass_done": true,
+ "wear_preview_done": false,
+ "claims": [
+  {
+   "claim": "the {owner} part has no object floating above its support",
+   "measured_by": "construction.json PLANT-1188"
+  }
+ ],
+ "unsure": [
+  "PLANT-8821 the ridge of the thatch may be too regular"
+ ],
+ "shared_problems": [
+  "PLANT-6609 the shared lamp is slightly off centre"
+ ],
+ "failures": [
+  "PLANT-9915 the first run of the normal-map test crashed and was run again"
+ ],
+ "not_tested": [
+  "no picture was drawn of the part"
+ ],
+ "views_to_redraw": [
+  "lane_close"
+ ],
+ "seconds": 61.5
+}

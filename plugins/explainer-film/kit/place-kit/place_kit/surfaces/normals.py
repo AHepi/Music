@@ -63,8 +63,15 @@ def direction_correlation(rgb, height):
     """How well a normal map (picture 0..1, rows from the top) agrees with the height picture it should come from (same rows, same size):
     the correlation of the red channel's slope with the height's slope along +U, and of the green channel's with the slope along +V.
     +1 means it points the right way; about -1 means that axis is flipped. An axis with almost no slope returns the text 'not informative'
-    (a map with no slope on one axis says nothing about that axis)."""
-    from_height = height_to_normal(height, 1.0, tile=True)
+    (a map with no slope on one axis says nothing about that axis).
+    The height may be in any units (a picture stretched to 0..1 is what the scene keeps): it is scaled here so its steepest one percent tilts the surface by 30 degrees, the way
+    the maps are made, before the slope of each axis is judged. (Without this a 0..1 picture has a slope of about 0.005 a pixel and EVERY axis would read "not informative", which
+    is a check that cannot fail.)"""
+    from .heights import calibrate_height
+    height = np.asarray(height, dtype=np.float32)
+    if height.ndim == 3:
+        height = height[..., :3].mean(axis=2)
+    from_height = height_to_normal(calibrate_height(height - float(height.mean()), 30.0), 1.0, tile=True)
     normals = from_rgb(rgb)
     result = {}
     for axis, name in ((0, 'x'), (1, 'y')):

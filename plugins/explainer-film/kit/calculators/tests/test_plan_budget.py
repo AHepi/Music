@@ -245,13 +245,19 @@ with tempfile.TemporaryDirectory() as folder:
     open(os.path.join(folder, 'voice.mp3'), 'wb').write(b'\0' * 100)
     open(os.path.join(folder, 'notes.txt'), 'w').write('FAL_KEY = "sk-' + 'a1B2' * 8 + '"\n')
     open(os.path.join(folder, 'key.pem'), 'w').write('-----BEGIN RSA PRIVATE ' + 'KEY-----\nabc\n')
+    # rented-card settings, made up at run time (a pretend key and pretend endpoint id; nothing real is written in this test file)
+    open(os.path.join(folder, 'card-key.txt'), 'w').write('token ' + 'rpa' + '_' + 'Q9x7' * 8 + '\n')
+    open(os.path.join(folder, 'card-setting.env'), 'w').write('RUNPOD_' + 'ENDPOINT_ID=' + 'ab12cd34ef56gh78' + '\n')
+    open(os.path.join(folder, 'card-address.md'), 'w').write('https://api.' + 'runpod.ai/v2/' + 'ab12cd34ef56gh78' + '/run\n')
+    open(os.path.join(folder, 'card-help.md'), 'w').write('set RUNPOD_API_KEY=your_key_here and RUNPOD_ENDPOINT_ID=<your endpoint>; the address is api.runpod.ai/v2/{endpoint}/run\n')
     with open(os.path.join(folder, 'huge.bin'), 'wb') as handle:
         handle.truncate(int(91e6))
     for i in range(3):
         open(os.path.join(folder, f'part{i}.bin'), 'wb').write(b'\1' * int(12e6))
     planted = budget.check_push(budget.files_to_check([folder]), settings)
-    check.equal('planted faults refused: audio, a token, a private key, a 91 MB file', sorted(os.path.basename(r['file']) for r in planted['refused']),
-                ['huge.bin', 'key.pem', 'notes.txt', 'voice.mp3'], proves='each kind of fault is caught')
+    check.equal('planted faults refused: audio, a token, a private key, a 91 MB file, a pretend rented-card key, setting and address (and NOT the help text that shows the names with placeholders)',
+                sorted(os.path.basename(r['file']) for r in planted['refused']),
+                ['card-address.md', 'card-key.txt', 'card-setting.env', 'huge.bin', 'key.pem', 'notes.txt', 'voice.mp3'], proves='each kind of fault is caught and the settings-name help is not a false alarm')
     check.true('the three 12 MB files go in chat parts of at most 28 MB', all(p['megabytes'] <= 28 for p in planted['chat_parts']) and len(planted['chat_parts']) == 2,
                details=str(planted['chat_parts']))
 

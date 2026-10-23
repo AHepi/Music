@@ -1,0 +1,45 @@
+{
+ "mode": "look",
+ "was_blind": false,
+ "art_style_kept": "nearly",
+ "lived_in": "yes",
+ "construction_makes_sense": "not judged",
+ "each_element": [
+  {
+   "element": "wheel ruts",
+   "verdict": "reads well",
+   "why": "two clear ruts with water"
+  }
+ ],
+ "claims_checked": [
+  {
+   "claim": "[cottages] the cottages part has no object floating above its support",
+   "holds": true,
+   "evidence": "looked at the close view"
+  }
+ ],
+ "problems": [
+  {
+   "what": "the thatch ridge is too regular",
+   "where": "cottages, wide view",
+   "severity": "should fix",
+   "cheapest_fix": "vary the ridge height along its length",
+   "owner": "cottages"
+  },
+  {
+   "what": "squint test miss: the far hills lose most",
+   "where": "wide view",
+   "severity": "should fix",
+   "cheapest_fix": "remove detail from the far hills",
+   "owner": "forest_edge"
+  }
+ ],
+ "should_fix_now": "the thatch ridge",
+ "not_tested": [
+  "nothing outside the pictures was looked at"
+ ],
+ "measures": {
+  "squint": 0.88
+ },
+ "audit_scene_sha1": "fixture-sha1-round-1"
+}

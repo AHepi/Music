@@ -1,0 +1,35 @@
+{
+ "mode": "structure",
+ "was_blind": false,
+ "art_style_kept": "not judged",
+ "lived_in": "yes",
+ "construction_makes_sense": "yes",
+ "each_element": [],
+ "claims_checked": [
+  {
+   "claim": "[stable] the stable part has no object floating above its support",
+   "holds": false,
+   "evidence": "a ray from above finds a bench plank 3 cm over its posts"
+  },
+  {
+   "claim": "[props] the props part has no object floating above its support",
+   "holds": true,
+   "evidence": "rays from above, 41 props all on supports"
+  }
+ ],
+ "problems": [
+  {
+   "what": "a bench plank floats 3 cm above its posts",
+   "where": "stable bench",
+   "severity": "must fix",
+   "cheapest_fix": "lower the plank onto the posts",
+   "owner": "stable"
+  }
+ ],
+ "should_fix_now": "the floating plank",
+ "not_tested": [
+  "nothing outside the pictures was looked at"
+ ],
+ "measures": {},
+ "audit_scene_sha1": "fixture-sha1-round-1"
+}

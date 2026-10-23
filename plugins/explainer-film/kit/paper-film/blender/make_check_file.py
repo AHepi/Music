@@ -16,7 +16,9 @@ The story choices come from a short shot list the author writes; everything else
                        puts words over a soft dark band; match_excludes (dark, thin or lettered groups and repeated
                        figures, which fool the picture-match test); own_surface_materials; and the keys the plugin's
                        check_shot.py reads for kinds of shot: kind_of_shot, figures, fill, support_surfaces (indoors) and
-                       accepted (the shot list's and the place facts' entries for this view).
+                       accepted (the shot list's and the place facts' entries for this view); and, when the scene
+                       was saved, `scene_file`: the scene's path from the check file's folder, which makes the preflight's
+                       `plates` stage require that scene's place audit before a painting is paid for.
 Run it inside Blender, after the place's assemble script (as check-shot.sh does), or on a saved scene:
   blender -b BASE.blend --python ASSEMBLE.py --python make_check_file.py -- --shot-list SHOT.json --check-file OUT.json
         [--place-facts PLACE.json] [--compare HAND.json] [--out RESULT.json] [--report REPORT.txt] [assemble options]
@@ -704,6 +706,19 @@ def comparison_lines(result):
 
 
 # ------------------------------------------------------------------------------------------------ run
+def scene_file_stamp(saved_path, check_file_path):
+    """The saved scene this check file was made from, written so the preflight can find it again: the path from the check file's folder when
+    both are on the same drive, else the whole path. Empty for a scene that was never saved (nothing to point at). The preflight's `plates`
+    stage reads it: a check file that names a scene makes that scene's place audit required before a painting is paid for."""
+    if not saved_path:
+        return ''
+    here = os.path.dirname(os.path.abspath(check_file_path))
+    try:
+        return os.path.relpath(os.path.abspath(saved_path), here)
+    except ValueError:
+        return os.path.abspath(saved_path)
+
+
 def main():
     parser = make_parser()
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
@@ -726,6 +741,9 @@ def main():
     scene.scene.render.resolution_x, scene.scene.render.resolution_y, scene.scene.render.resolution_percentage = scene.width, scene.height, 100
     bpy.context.view_layer.update()
     check, facts, notes = generate(scene, shot, settings, place_facts)
+    stamp = scene_file_stamp(bpy.data.filepath, args.check_file)
+    if stamp:
+        check['scene_file'] = stamp
     os.makedirs(os.path.dirname(os.path.abspath(args.check_file)), exist_ok=True)
     with open(args.check_file, 'w') as handle:
         json.dump(check, handle, indent=1)

@@ -5,10 +5,12 @@ verdict (a door 1.0 m high fails, 1.7 m passes) is the judge's (calculators/plac
 How a fact applies to an object: its role matches the fact's applies_to_role pattern and, when given, its name matches applies_to_name.
 How a dimension is read (so a model and a checker mean the same thing): height = the z extent; width = the larger horizontal extent;
 depth = the smaller horizontal extent; thickness = the smallest of the three extents; middle = the middle one; span = the largest one;
-pitch = the typical slope of a roof's up-facing faces in degrees; gauge = the distance between the wheel ruts of a road in the settings.
-Two guards against false alarms: a fact marked only_if_slab_like is used only when the object's smallest extent is at most 0.4 of its
-middle one (a whole building in one object is not read as one thick wall), and an object made of several loose pieces is not read for
-single-piece facts (the report says so).
+pitch = the typical slope of a roof's up-facing faces in degrees; gauge = the distance between the wheel ruts of a road in the settings; rise = how far a step's top stands above
+what it rests on or the next lower step beside it (measured by the construction check, top to top).
+Three guards against false alarms: a fact marked only_if_slab_like is used only when the object's smallest extent is at most 0.4 of its
+middle one (a whole building in one object is not read as one thick wall); a fact marked skip_if_lying is not used for an object that is lower than
+the fact's minimum and more than three times longer than it is high (a rail along a fence is not the fence); and an object made of several loose
+pieces is not read for single-piece facts (the report says so).
 The plain-Python part (measure_object) has no Blender in it and is tested without Blender.
 """
 import re
@@ -43,6 +45,12 @@ def is_slab_like(size):
     return ordered[0] <= SLAB_RATIO * ordered[1] if ordered[1] > 0 else False
 
 
+def is_lying(size, minimum):
+    """True for a long low piece: lower than `minimum` and more than three times longer than it is high (a rail, a board lying along something)."""
+    x, y, z = (float(v) for v in size)
+    return z < minimum and max(x, y) > 3.0 * z
+
+
 def applicable_facts(role, name, facts):
     found = []
     for fact in facts:
@@ -59,10 +67,13 @@ def measure_object(name, role, size, facts, parts_count=1, pitch=None):
     entries, notes = [], []
     for fact in applicable_facts(role, name, facts):
         dimension = fact['dimension']
-        if dimension == 'gauge':
-            continue                                    # read from the roads in the settings, not from an object
+        if dimension in ('gauge', 'rise'):
+            continue                                    # a gauge is read from the roads in the settings, a rise from the construction check (top to top), not from an object's own extents
         if fact.get('only_if_slab_like') and not is_slab_like(size):
             notes.append(f'{fact["id"]}: skipped, the object is not slab-like')
+            continue
+        if fact.get('skip_if_lying') and is_lying(size, fact['min']):
+            notes.append(f'{fact["id"]}: skipped, the object lies along something (it is a rail or a board, not the whole)')
             continue
         if parts_count > 1 and dimension != 'pitch':
             notes.append(f'{fact["id"]}: skipped, the object is made of {parts_count} loose pieces')
@@ -91,8 +102,25 @@ def gauge_entries(roads, facts):
     return entries
 
 
+def rise_entries(rise_metres, role, name, facts):
+    """The step-rise entries of one step: the rise (top of the step minus the top of what it rests on or of the next lower step beside it) against the facts that apply to its role."""
+    entries = []
+    for fact in applicable_facts(role, name, facts):
+        if fact.get('dimension') == 'rise' and rise_metres is not None:
+            entries.append({'fact': fact['id'], 'dimension': 'rise', 'value': round(float(rise_metres), 4), 'min': fact['min'], 'max': fact['max'], 'unit': fact.get('unit', 'metres'),
+                            'confidence': fact.get('confidence', 'guess')})
+    return entries
+
+
+def put_fact(merged, fact):
+    """Adds the place's own fact on top of the generic one with the same id: the keys it gives replace the generic ones, the keys it leaves out stay (so a fact that only gives a new
+    min and max for `door_height` still applies to doors only, not to every object)."""
+    base = merged.get(fact['id'])
+    merged[fact['id']] = {**base, **fact} if base else fact
+
+
 def load_facts(settings_data, extra_facts_path=None):
-    """The generic facts, with the place's own facts on top (a fact with the same id replaces the generic one)."""
+    """The generic facts, with the place's own facts on top (see put_fact)."""
     import json
     from .. import settings_file
     merged = {f['id']: f for f in settings_file.facts_table()}
@@ -102,14 +130,14 @@ def load_facts(settings_data, extra_facts_path=None):
         sources.append(own)
     elif isinstance(own, list):
         for fact in own:
-            merged[fact['id']] = fact
+            put_fact(merged, fact)
     if extra_facts_path:
         sources.append(extra_facts_path)
     for path in sources:
         with open(path, encoding='utf-8') as handle:
             data = json.load(handle)
         for fact in (data.get('facts', data) if isinstance(data, dict) else data):
-            merged[fact['id']] = fact
+            put_fact(merged, fact)
     return list(merged.values())
 
 
@@ -119,7 +147,7 @@ def scale_report(settings, objects_and_roles, extra_facts_path=None):
     facts = load_facts(settings.data if hasattr(settings, 'data') else (settings or {}), extra_facts_path)
     report = {}
     for obj, role in objects_and_roles:
-        size = scene_read.object_size(obj)
+        size = scene_read.oriented_size(obj)           # the object's own rectangle, not its box along the world axes (a wall turned 45 degrees is still as thick as it is)
         labels, pieces = scene_read.loose_part_labels(obj.data)
         pitch = scene_read.facing_slope_degrees(obj) if (role or '').startswith('roof.') else None
         entries, _ = measure_object(obj.name, role, size, facts, parts_count=pieces, pitch=pitch)

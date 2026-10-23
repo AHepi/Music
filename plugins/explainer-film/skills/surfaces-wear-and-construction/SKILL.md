@@ -1,15 +1,15 @@
 ---
 name: surfaces-wear-and-construction
-description: The finishing pass that every place, set or prop built in Blender must go through, whatever the request says: real normal maps and displacement, roughness and colour variation, dirt, grime, stains, weathering, wetness, moss, weeds, rust, cracks, chips, edge wear, damage and rubbish; believable construction (every plank on a support, every support on the ground, nothing floating); real-world sizes; and the place's art-style rule. One command does it (explainer-film-place finish) and an audit proves it (preflight stage place). Use whenever someone asks to build, model, make or improve a village, town, harbour, mine, farm, garden, interior, street, building, cottage, stable, road, level, set or props in Blender or in 3D, even if they never mention surfaces, textures, wear or realism, and before drawing, rendering or painting any such place.
+description: The finishing pass that every place, set or prop built in Blender must go through, whatever the request says. It gives real normal maps and displacement, roughness and colour variation, dirt, grime, stains, weathering, wetness, moss, weeds, rust, cracks, chips, edge wear, damage and rubbish, believable construction (every plank on a support, every support on the ground, nothing floating), real-world sizes, and the place's art-style rule. One command does it (explainer-film-place finish) and an audit proves it (preflight stage place). Use whenever someone asks to build, model, make or improve a village, town, harbour, mine, farm, garden, interior, street, building, cottage, stable, road, level, set or props in Blender or in 3D, even if they never mention surfaces, textures, wear or realism, and before drawing, rendering or painting any such place.
 when_to_use: Any request to make a place, set, building or props in Blender, and before any picture of one is drawn.
 ---
 
 # Surfaces, wear and construction (the finishing pass for every place built in Blender)
 
 > **REQUIRED for every place, set or prop you build in Blender** (also when the request never mentions surfaces, wear or realism). Do it without being asked. In your report say plainly what the pass did, what the audit measured and what you skipped.
-> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating) and at real size, and give every object a role.
-> 2. Run the surface-and-wear pass. Draft the settings once (skip it if `place-settings.json` exists): `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json` (TYPE is the nearest of village, town, harbour, mine, farm, garden, interior). Then: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend`. It adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds and rubbish.
-> 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
+> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating; a rail tenoned into two posts counts as carried) and at real size, and give every object its role AS YOU MAKE IT (`pk.new_part_object(owner, role, name, mesh)`, or the object property `place_role`). The role ids are listed by `explainer-film-place roles --list`. Never trust a role the kit only guessed from a name.
+> 2. Run the surface-and-wear pass: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend` (it needs `--save-as`; it drafts `place-settings.json` when there is none, with a road for every dirt-road object). To read and improve a draft first: `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json`, where TYPE is the nearest of village, town, harbour, mine, farm, garden, interior or generic. It turns curves, text and instanced props into meshes, then adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds, rubbish and damage as shape.
+> 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend --reports REPORTS_FOLDER`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
 > Details, every command and the live-Blender route: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/SKILL.md`.
 
 What this is: a place built from plain boxes with flat colours is not finished, even when it looks tidy and passes
@@ -30,14 +30,16 @@ picture that was drawn: the tests prove the gates work, and fresh checkers and t
 
 ## The words (one word for each thing; every file here uses these)
 
-- **role**: what an object is (`wall.timber_frame`, `ground.dirt_road`). Every visible mesh gets exactly one.
+- **role**: what an object is (`wall.timber_frame`, `ground.dirt_road`, `stone.step`). Every visible mesh gets exactly one. Give it as the object is made (`pk.new_part_object(owner, role, name, mesh)` does it, or the
+  object property `place_role`). The ids and what each is for: `explainer-film-place roles --list` (every role, one plain line each; the data is `kit/place-kit/data/roles.json`). The kit also GUESSES a role from an
+  object's name, but a guess can be wrong (a "Waterwheel" used to read as a cart wheel): read the roles it guessed, not only the ones it could not.
 - **surface**: a recipe that makes a material (height picture, normal strength, displacement depth, roughness range,
   colours, tile size): `dirt_road`, `thatch`, `timber_weathered`.
 - **layer**: one wear effect put on a material: dirt, grime, weathering, wetness, cracks_and_chips, edge_wear,
   moss_and_algae, rust, rubbish. 3D plants and litter are scattered as separate pieces.
-- **treatment**: a thing the audit looks for. There are sixteen: normal_map, displacement, roughness_variation,
+- **treatment**: a thing the audit looks for. There are seventeen: normal_map, displacement, roughness_variation,
   colour_variation, bevelled_edges, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae,
-  rust, rubbish, plants, litter_pieces. Each role says which are REQUIRED (missing = FAIL) and which are WANTED (LOOK).
+  rust, rubbish, plants, litter_pieces, shape_damage (bent boards, chipped corners, no two parts alike). Each role says which are REQUIRED (missing = FAIL) and which are WANTED (LOOK).
 - **look**: a mood preset (kept, lived_in, neglected, derelict). **state**: dry, damp or wet.
 - **owner** and **part**: one builder is responsible for one piece of the place. **audit**: `place-audit.json`, the
   facts table of the scene (Blender writes the facts, plain Python judges them). **fresh checker**: a helper who did
@@ -57,6 +59,11 @@ Otherwise `dry`. Different roles may have different looks (`look_by_role` in the
 `neglected` for the lanes and `lived_in` for the cottages. "Empty stable" is not "ruined stable": give it
 `lived_in`, with old straw and dung left inside, so it reads empty-but-used.
 
+**A place type is only a starting point.** `new-settings --type harbour` writes look `neglected` and state `wet` (a harbour preset's own starting values); `generic` writes `lived_in` and `dry`. The types are
+village, town, harbour, mine, farm, garden, interior and generic; a canal or a mill has no preset, so take the nearest (harbour for a canal) and then change the look and the state in `place-settings.json` to what the
+person's words say. `new-settings` prints the look and state it started from, so you can see them. The state and the dials are the SAME for every role: to change one role, use `look_by_role`, or an `off` entry with a true
+reason (a dial such as the wall-foot splash is not per role).
+
 A request with no word "Blender" still counts when you will use Blender to do it. Treat "village", "town",
 "set", "level", "scene", "props", "in 3D" and a named kind of place the same way.
 
@@ -69,14 +76,16 @@ file and the tool that makes it). `explainer-film-place --verbs` lists the verbs
 
 | Job | Verb and its main options |
 |---|---|
-| Draft the settings from names and collections | `new-settings --place NAME --type TYPE --out place-settings.json` |
-| One role per object | `roles --write` (needs `--save-as`) |
+| Draft the settings from names and collections (also a road for each dirt-road object, from its shape) | `new-settings --place NAME --type TYPE --out place-settings.json` |
+| One role per object; the list of role ids | `roles --write` (needs `--save-as`); `roles --list` (no scene needed) |
 | UVs, normal maps, roughness and colour variation, bevels, displacement | `surfaces --map-size PIXELS --maps-folder DIR` |
 | Shaped lanes: ruts, banks, hoof prints, grass crown, puddle hollows | `roads` |
+| Damage as shape: bent boards, chipped corners, leaning posts, sag, no two parts alike | `damage --amount X` |
 | Wear layers in their fixed order | `age --look ID --state dry\|damp\|wet --master X --layers a,b --layers-off a,b --mask-cell-metres X` |
 | 3D plants, moss cushions, litter | `grow --density X` |
-| The whole pass, then the audit | `finish --save-as OUT.blend --look ID --state S --map-size P` |
-| A part builder's share of the pass | `finish-part --owner NAME --save-as OUT.blend --out part-audit.json` |
+| A sun, sky, fill and lamps for glowing things, when the scene has none (no light draws black) | `light --sun-only` |
+| The whole pass, then the audit | `finish --save-as OUT.blend --look ID --state S --map-size P --type TYPE --place NAME --facts FACTS.json` (it stops at once if there is no `--save-as`; `--type`, `--place` matter only when it drafts the settings) |
+| A part builder's share of the pass (always a quick trial; its audit accepts that) | `finish-part --owner NAME --save-as OUT.blend --out part-audit.json` |
 | Is everything carried, in reach and the right size? | `construction --out construction.json` |
 | Do the normal maps point the right way? | `normals-test --size 96 --samples 24 --out normals.json` |
 | The facts table and its verdict | `audit --out place-audit.json --no-judge` |
@@ -84,9 +93,9 @@ file and the tool that makes it). `explainer-film-place --verbs` lists the verbs
 | Combine parts built by different owners | `combine --stages stage_a.py stage_b.py --order plain\|reverse --owners ownership.json --save-as OUT.blend --out combine-report.json` |
 | Did a stage touch what is not its own? | `fingerprint --out fp.json`, then `ownership-diff --start FP1.json --end FP2.json --owners ownership.json --out diff.json` |
 | Which renderer, and why | `renderer-for` |
-| Draw the pictures with that rule | `render --job JOB.json --where rented\|local\|auto --engine auto\|cycles\|eevee --finals` |
+| Draw the pictures with that rule (the job file's shape is in `rendering-on-rented-cards.md`) | `render --job JOB.json --where rented\|local\|auto --engine auto\|cycles\|eevee --finals` |
 | The rented graphics card | `rent status`, `rent upload`, `rent run`, `rent job`, `rent wait`, `rent download`, `rent balance` |
-| Measure pictures against the style | `measure PICTURE... --guard G --make-guard --previous PICTURE`, `crops --picture P --boxes x,y,w,h --out-folder DIR` |
+| Measure pictures against the style (one guard file can hold one guard per view) | `measure PICTURE... --guard G --make-guard --view NAME --previous PICTURE`, `crops --picture P --boxes x,y,w,h --out-folder DIR` |
 | Are the data files consistent and private? | `check-presets` |
 
 `--quick` makes trial sizes (256 px maps, 0.5 m mask cells) for a fast look on a slow computer. A quick
@@ -109,14 +118,16 @@ result is for trying things; the audit records that it was quick and the place s
 
 | You will be tempted to ... | What happens |
 |---|---|
-| skip this skill because the request says nothing about surfaces | the descriptions and first lines of three skills, the README and the tips guide say it; `preflight place` and `plates` refuse |
+| skip this skill because the request says nothing about surfaces | the descriptions and first lines of three skills, the README and the tips guide say it; `preflight place` refuses, and `plates` refuses when a scene is named (it says so as a LOOK when none is) |
 | build plain boxes and finish (they pass the model lint) | `finish` replaces plain materials by role; the audit fails plain boxes; `model_lint.py --surfaces` warns on .glb files |
 | leave out UVs | `finish` writes them; the audit fails an object under a normal-mapped material with no UV layer |
 | use Bump only, a green channel the wrong way up, or sRGB colour on a normal map | wiring check plus `normals-test` with a flipped control |
 | put a displacement node on a flat plane, or leave the material on Bump Only | the audit's displacement check |
 | set a layer to 0, or forget its `pk_<layer>_amount` property (the layer silently reads 0) | audit "layer amounts" fails; 0 needs an `off` entry with a reason |
 | grow weeds on wheel tracks, in puddles, on doorsteps, or no weeds at all | exact-zero keep-out counts; weeds and moss are required by role and look |
-| leave a plank floating or a post short | the construction check is required and exits 1 |
+| leave a plank floating or a post short | the construction check is required and exits 1 (a rail tenoned into two carried posts counts as carried; a boat afloat counts as carried by the water) |
+| leave an object with no material, or build a rope from a bevelled curve, a sign from text, a prop by instancing | the audit fails an object with no material by name, `finish` turns curves, text and instances into meshes, and the audit fails what is still not a mesh |
+| let a name decide a role and never look (a "Reed bed" read as a thatch roof) | tag the role as you make the object; the audit warns on every fallback role and fails above 15 percent of the objects |
 | make a door 1.0 m high | the facts table and the scale check |
 | add photographic noise instead of a few big designed marks | the style rule, the guard and detail-energy band, the fresh look checker |
 | say "it looks fine" | fresh checkers recompute the claims without seeing your numbers |
@@ -129,7 +140,7 @@ result is for trying things; the audit records that it was quick and the place s
 
 - **Normal map and displacement together.** The Scenario texturing skill says never both. The coal-mine yard used both
   (normal strength x 0.6) and the cookbook measured no doubling. Decision (judged): a real normal map carries the fine
-  grain on every surface; displacement is added only where `roles.json` says (dirt road, mud, thatch, rock ground) and
+  grain on every surface; displacement is added only where `roles.json` says `displace` (nine roles: dirt road, mud, forest floor, stone paving, gravel, rock ground, plain earth ground, stone wall and thatch) and
   the mesh is dense or adaptive; where it is on, normal strength is multiplied by 0.6. A low-angle test result is in
   `place-kit/DEVIATIONS.md`.
 - **Cycles when lit.** The Scenario skills default to EEVEE for finals. The film owner's rule wins: Cycles where lamps,

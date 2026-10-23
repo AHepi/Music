@@ -9,7 +9,7 @@ How "varies" is decided: following the wire UPSTREAM from the Principled input (
 wear layer passes the surface through), the first texture, noise, image, ramp-from-texture or object property counts as variation; a plain
 number, a plain colour or a Value node does not.
 """
-import bpy
+import bpy  # noqa: F401 - kept on purpose: this module needs Blender, and the tests tell Blender-only modules apart by this line
 
 from .. import names
 

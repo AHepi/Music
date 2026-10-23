@@ -62,7 +62,7 @@ Use:
   explainer-film-preflight --list              every stage's inputs, and which tool makes each
   explainer-film-preflight --example-plan      an example preflight plan
   (or: python3 kit/calculators/preflight.py ...; the wrapper is plugins/explainer-film/bin/explainer-film-preflight)
-Reports go to PROJECT/preflight-reports/ (or --reports DIR): preflight-STAGE-DATE-TIME.md, the same as .json, and a
+Reports go to PROJECT/preflight-reports/ (or --reports DIR; for the stage `place` with --place-audit, the preflight-reports folder beside the audit, so a run started from any folder, the plugin's own included, leaves nothing there): preflight-STAGE-DATE-TIME.md, the same as .json, and a
 folder of the same name with every tool's output. Exit: 0 pass (perhaps with things to look at), 1 fail (or stale),
 2 an input is missing or cannot be used (not there, not valid JSON, not the kind of file asked for, or an accepted entry
 that matches too much).
@@ -520,8 +520,9 @@ class Run:
         self.started = time.time()
         self.stamp = datetime.now().strftime('%Y-%m-%d-%H%M%S')
         project = os.path.abspath(args.project or (plan_folder if args.plan else os.getcwd()))
+        beside_audit = os.path.join(os.path.dirname(os.path.abspath(args.place_audit)), 'preflight-reports') if stage == 'place' and getattr(args, 'place_audit', None) else None
         self.reports = os.path.abspath(args.reports or (self.resolve(plan['reports'], plan_folder) if plan.get('reports') else
-                                                        os.path.join(project, 'preflight-reports')))
+                                                        beside_audit or os.path.join(project, 'preflight-reports')))
         self.name = f'preflight-{stage}-{self.stamp}'
         self.work = os.path.join(self.reports, self.name)
         self.settings_path = os.path.abspath(args.settings or os.environ.get('FILM_SETTINGS') or os.path.join(self.kit, 'film-settings.json'))
@@ -781,7 +782,7 @@ class Run:
 
 
 ITEM_VALUE_KEYS = {'today', 'allowance', 'view', 'views', 'shot_names', 'page', 'scene', 'pages_list', 'exposure', 'hollow', 'figures',
-                   'check_files', 'with_behind', 'processors', 'free_memory_gb', 'from_frame', 'to_frame', 'make_events', 'jumps',
+                   'check_files', 'with_behind', 'processors', 'free_memory_gb', 'free_disk_gb', 'from_frame', 'to_frame', 'make_events', 'jumps',
                    'name', 'count_ground', 'blender_running', 'models_as_set', 'allow_quick'}
 
 
@@ -1211,6 +1212,10 @@ def stage_plates(run, item, where):
             check = None
     if blend:
         run_place_audit(run, item, where, blend, 'place_audit_check.py check (a place built in Blender must pass its audit before a paid painting)')
+    else:
+        run.add_check('the place audit (when the plate comes from a place built in Blender)', [{'verdict': 'warn', 'check': 'place: not audited', 'where': where,
+                      'text': 'not checked: no scene file was named (--blend FILE.blend with --place-audit, or scene_file in the check file), so nothing here says the place passed the surface, wear and construction audit before this paid painting.',
+                      'fix': 'if the plate comes from a place built in Blender, give --blend and --place-audit (explainer-film-place finish writes the audit); if it does not, this look can stay.'}], where=where, tool='preflight.py plates')
     if check and plate and plate_facts:
         arguments = ['preflight', '--check', check, '--facts', plate_facts, '--plate', plate, '--work-folder', os.path.join(run.work, 'paint-work')]
         for key, option in (('render_log', '--render-log'), ('shot_report', '--shot-report'), ('helper_plate', '--helper-plate'),
@@ -1531,7 +1536,7 @@ def stage_film(run, item, where):
         else:
             run.need(item, 'rates', 'plan_budget.py filming', required=False,
                      why='without this film\'s own measured rates the plan uses the table (round 4), which missed round 5 by 52%')
-        for key, option in (('processors', '--processors'), ('free_memory_gb', '--free-memory-gb'), ('from_frame', '--from-frame'),
+        for key, option in (('processors', '--processors'), ('free_memory_gb', '--free-memory-gb'), ('free_disk_gb', '--free-disk-gb'), ('from_frame', '--from-frame'),
                             ('to_frame', '--to-frame'), ('blender_running', '--blender-running')):
             if item.get(key) is not None:
                 arguments += [option, str(item[key])]
@@ -1893,7 +1898,7 @@ EXAMPLE_PLAN = {
                'word_times': 'narration/word-times.json'},
     'shots': [{'place_facts': 'places/works-place-facts.json', 'shot_list': 'places/works-shots.json',
                'check_files': {'w1': 'places/works-w1-shot-check.json', 'w3': 'places/works-w3-shot-check.json'}}],
-    'place': [{'name': 'village', 'place_audit': 'places/village-place-audit.json', 'blend': 'places/village-finished.blend', 'place_settings': 'places/place-settings.json',
+    'place': [{'name': 'place one', 'place_audit': 'places/place-one-place-audit.json', 'blend': 'places/place-one-finished.blend', 'place_settings': 'places/place-settings.json',
                'place_pictures': 'places/previews', 'style_guard': 'places/style-guard.json', 'fresh_check': 'places/fresh-check.json'}],
     'plates': [{'name': 'w1', 'view': 'w1', 'check': 'places/works-w1-shot-check.json', 'plate': 'plates/works-w1-plate.png',
                 'plate_facts': 'plates/w1-plate-facts', 'render_log': 'plates/plates.log', 'shot_report': 'checks/w1/report.md',
@@ -1977,7 +1982,7 @@ def build_parser():
     place.add_argument('--place-pictures', dest='place_pictures', help='a folder of the place\'s preview pictures')
     place.add_argument('--previous-pictures', dest='previous_pictures', help='a folder of the previous round\'s pictures (for the squint test)')
     place.add_argument('--style-guard', dest='style_guard', help='the style guard (style-guard.json)')
-    place.add_argument('--real-world-facts', dest='real_world_facts', help='the place\'s own real-world facts')
+    place.add_argument('--real-world-facts', '--facts', dest='real_world_facts', help='the place\'s own real-world facts (the same file `explainer-film-place audit --facts` and `finish --facts` take)')
     place.add_argument('--fresh-check', dest='fresh_check', help='a fresh checker\'s result')
     place.add_argument('--allow-quick', dest='allow_quick', action='store_true', default=None, help='accept an audit made with --quick (a trial) as a look')
     pages = parser.add_argument_group('pages, film and finish')
@@ -1994,6 +1999,7 @@ def build_parser():
     pages.add_argument('--rates')
     pages.add_argument('--processors', type=int)
     pages.add_argument('--free-memory-gb', dest='free_memory_gb', type=float)
+    pages.add_argument('--free-disk-gb', dest='free_disk_gb', type=float, help='the free disk space in gigabytes (the film stage measures it when this is not given)')
     pages.add_argument('--from-frame', dest='from_frame', type=int)
     pages.add_argument('--to-frame', dest='to_frame', type=int)
     pages.add_argument('--blender-running', dest='blender_running', choices=['yes', 'no', 'auto'])

@@ -18,12 +18,14 @@ stage `place` fails when a material or the scene lacks them.
 /plugin install explainer-film@ahepi-music
 ```
 Then, in the project's working folder: `explainer-film-setup /path/to/work/film-kit`
-(copies the kit and installs its drawing engine; needs Node.js 18+, Python 3.9+ with numpy, Pillow
+(copies the kit and installs its drawing engine; needs Node.js 18+, Python 3.10+ with numpy, Pillow
 and opencv, ffmpeg, and a Chromium browser). Paid steps use the ElevenLabs (voice) and fal
 (paintings) connectors, and always ask the user before spending.
 Optional, only for drawing places on a rented graphics card: the person's own settings are read at run time from the
-environment (`RUNPOD_API_KEY`, `RUNPOD_ENDPOINT_ID`, optionally `RENDER_STORE_FOLDER`) or from a JSON file named by
-`RENDER_SETTINGS_FILE` that sits outside any repository. Never write them in a file the plugin or a repository holds.
+environment (`RUNPOD_API_KEY`, `RUNPOD_ENDPOINT_ID`, optionally `RENDER_STORE_FOLDER`, which is `/workspace` when not set) or
+from a file named by `RENDER_SETTINGS_FILE` that sits outside any repository (lines `NAME=VALUE` with the same names; a JSON
+file with those names as keys is read too). `explainer-film-place rent status` says which setting is missing. Never write them
+in a file the plugin or a repository holds.
 
 ## How to use it
 
@@ -38,7 +40,9 @@ environment (`RUNPOD_API_KEY`, `RUNPOD_ENDPOINT_ID`, optionally `RENDER_STORE_FO
    the tool that makes each. It spends nothing and changes no project file.
 2b. For any place, set or props built in Blender, even when the request names no surfaces or wear, run the surface-and-wear
    pass first: `explainer-film-place finish`, then `explainer-film-place audit`, then `explainer-film-preflight place` (skill
-   `surfaces-wear-and-construction`). Nothing is drawn, rendered or painted until it passes.
+   `surfaces-wear-and-construction`; `explainer-film-place roles --list` prints every role id). Nothing is drawn, rendered or
+   painted until it passes. A small reminder hook (`hooks/`) prints these three lines at the start of a turn when the request is
+   about building a place, a set or props, so the skill is read even when other Blender skills compete for the request.
 3. Compute before you render: every calculator answers `--help`, prints a plain report and names the house
    numbers it used. What no tool can judge (history, what a detail reads as on a phone, newcomer
    understanding, story choices, the user's yes to spend) goes to the critics.
@@ -60,11 +64,12 @@ environment (`RUNPOD_API_KEY`, `RUNPOD_ENDPOINT_ID`, optionally `RENDER_STORE_FO
 | `skills/film-and-finish` | Filming in parallel stretches, sound, sendable copy, captions, cover, measurements. |
 | `agents/` | `page-builder`, `fact-checker`, `film-critic`, `place-planner`, `place-builder`, `place-integrator`, `place-renderer`, `place-checker` (eight, all at medium effort unless the workflow raises it). |
 | `workflows/` | `verify-facts`, `test-script-with-newcomers`, `critique-film`, `check-fixes`, `build-pages`, `build-a-place` (builds a place in parts with fresh checkers; run as `/explainer-film:NAME`, or with the Workflow tool). |
+| `hooks/` | `hooks.json` and `place-reminder.py`: a prompt-time reminder (a `UserPromptSubmit` hook) that names the surface-and-wear skill and its three commands when a request is about building a place, a set or props in 3D; it prints nothing for any other request and never stops the person's work. |
 | `bin/explainer-film-setup` | Sets up the kit in a working folder (on the PATH once installed); checks the browser, Blender and its virtual screen, the soundtrack and every kit file the skills name, and writes `machine-settings.env`. |
 | `bin/explainer-film-place` | `explainer-film-place VERB`: the one door to the place kit (draft the settings, roles, surfaces, roads, wear, growth, `finish`, `audit`, construction and normal-map checks, renderer choice, rented-card client, picture measures). `--verbs` lists them. |
 | `bin/explainer-film-preflight` | `explainer-film-preflight STAGE`: runs the checks for one stage (script, record, shots, place, plates, paint, pages, film, finish) and writes one report (on the PATH once installed). |
 | Calculators (`kit/calculators/`) | Small tools that work out, from a new film's own files, what was found by trial: `frame_geometry.py` (where things land, sizes, reach, slides), `place_facts.py` (the standard facts of a place), `plan_shot.py` (camera, slide, plate and people before anything is drawn), `view_audit.py` (letter sizes, signs, landmark tops, heads), `plan_lights.py`, `plan_effects.py` (wind and smoke, contact shadows, fire), `paint_request.py` (the plate's preflight, the painter's prompt and price; never sends), `after_painting.py` (line-up, figures, style), `plan_states.py` (state pictures, cut or blend), `plan_page_timing.py` (reading times, pauses, word lookups, stills to check), `plan_budget.py` (money, filming time, workers, pieces, disk, pushes), `place_audit_check.py` (the verdict on a place's audit: treatments, layer amounts, normal maps, construction, scale, keep-out; and on a fresh checker's result) and `picture_measures.py` (value range, detail energy, flat windows, palette, squint, crops). Their guide is `kit/calculators/README.md`; tests: `python3 kit/calculators/tests/run_all.py`. |
-| Place kit (`kit/place-kit/`) | Own work of the plugin, made generic from the project's texture, street, garden and mine work: roles, the sixteen treatments, surfaces, looks (kept, lived_in, neglected, derelict), wear layers, 3D plants and litter, construction and scale checks, the audit, the renderer choice and the rented-card client. `kit/place-kit/README.md` is its guide; `SOURCES-AND-LICENCES.md` says where each part came from. |
+| Place kit (`kit/place-kit/`) | Own work of the plugin, made generic from the project's texture, street, garden and mine work: roles, the seventeen treatments, surfaces, looks (kept, lived_in, neglected, derelict), wear layers, 3D plants and litter, construction and scale checks, the audit, the renderer choice and the rented-card client. `kit/place-kit/README.md` is its guide; `SOURCES-AND-LICENCES.md` says where each part came from. |
 | House numbers (`kit/film-settings.json`) | One table of every number the tools share, each marked measured, judged or invented with its source; prices carry the date they were read. Change numbers only here (`kit/calculators/settings.py`). The place kit's numbers are in the sections named `place_...`. |
 | Tips guide (`kit/docs/LLM tips and tricks.md`) | The short rules for a model making the next film, grouped by stage, each naming the tool that checks it or saying "ask a critic"; the numbers to know; the people test's lessons; money; the traps that cost the most rounds; what only critics can judge. |
 | Checking tools | `paper-film/tools/camera_audit.py` (measures every camera move per shot; `--timeline` finds the page's window, `--built-set` checks a built-and-painted slide), `frame_check.py` (where things land in the frame for a camera, before rendering), `check-shot.sh` (the shot checker: measures a Blender shot against the composing rules and says what to change, in metres; reads a view's kinds of shot and accepted problems), `page_events.mjs` and `check_page_layout.mjs` (what every page draws, frame by frame, without filming; pops, held shots, overlaps), `find_jumps.py` (sudden jumps in a finished film), `tone_piece.py` (calms an over-coloured cut-out), `room.clearance()` and `boxesOverlap()` in the engine (nothing passing through anything); in `paper-film/blender/`, `make_check_file.py` (a view's check file measured from the scene) and `model_lint.py` (stripes, same-plane faces, names, glass, sizes); in `narration-tools/`, `lint_script.py` (the script before recording, the recordings after) and `sound_gates.py` (length, loudness, alignment, music under the voice), which the mix and finish scripts call. |
@@ -91,7 +96,8 @@ to spoken words like that.
   steps, and their descriptions carry the words so they are picked even when the request names no surfaces.
 - New command `explainer-film-place VERB` (the verbs are listed by `--verbs`) and the place kit behind it (`kit/place-kit/`).
 - New preflight stage `place` (nine stages now) and new `place_...` house numbers in `film-settings.json`; the plates stage
-  refuses a paid painting when a scene is named and its audit fails.
+  refuses a paid painting when its audit fails; it knows the scene from `--blend` or from the `scene_file` its check file records
+  (the shot-check files the kit makes now record it), and with no scene named it says, as a LOOK, that no audit could be required.
 - New calculators `place_audit_check.py` and `picture_measures.py`.
 - New workflow `build-a-place` (builds a place in parts, with fresh checkers) and five agents (`place-planner`, `place-builder`,
   `place-integrator`, `place-renderer`, `place-checker`).
@@ -100,11 +106,27 @@ to spoken words like that.
 - Conflicts settled in the skills: displacement and a normal map together (displacement only where the role says, normal
   strength x 0.6), the Cycles rule (Cycles where lights are lit), the painter template's words for wet places, glTF having no
   displacement (true for the card route only).
-- NOT tested, said plainly: the lighter plan masks of the wear layers (the proven ones need OpenCV and 25 to 80 s a scene);
-  Cycles with the kit; the generic rented-card client against a real endpoint (its tests use a pretend transport); the blind
-  reading test (never run blind before); that a smaller model, asked only for "a village in the forest", loads the skill by
-  itself (the plugin ships no hook, so routing rests on skill descriptions and first screens). The tests prove the gates work,
-  not that a village looks good: fresh checkers and the person's own eyes judge that.
+- A prompt-time reminder hook (`hooks/hooks.json`, `hooks/place-reminder.py`): when a request is about building a place, a set or
+  props, it prints the three lines (the skill to read, the three commands) at the start of the turn.
+- Fix round (23 October 2026), after a first full check built a canal lock with the plugin alone and a second check read the code
+  and docs: an object with no material at all can no longer pass the audit; a lane drawn as a separate curved strip keeps its
+  outline when its ground is made fine, and a road is drafted for every road-role object; curves, text, metaballs and instanced
+  collections are turned into meshes so nothing drawn escapes the pass; `finish-part` ends cleanly for a part; the ground part may
+  make the cameras, lights and world; the ground-seat, joinery, mirrored-wall, turned-wall, step, boat-afloat and sun checks stopped
+  failing correct work; `undo` works after the kit added the sun; a material that carries its own picture gets roughness variation
+  and a normal map without losing its picture; a plain sky and teal water no longer fail the picture measures, and one guard file
+  holds a guard per view; the rented-card client never prints the endpoint id, reads `NAME=VALUE` lines and JSON, and sends Cycles
+  previews to the card; a close-up is saved once as `closeup`, not `closeup_closeup`; a role id for steps (`stone.step`),
+  `roles --list`, better name hints, damp ground near water, and the docs say what the kit does not make (a tide line, reeds).
+  The faults each have a test that also shows the old behaviour (`test_place_fixes.py`).
+- NOT tested, said plainly: a real village of hundreds of buildings (only a hut, a 36 by 26 m yard, small test scenes and a 12 m
+  canal lock were run; the wear masks are numpy-only and were timed at hut and yard size); Cycles with the kit on a village-size
+  place; the rented-card client against a real endpoint (its tests use a pretend card; one real card job was run by hand through
+  the project's own client, not through this one); the blind reading test; the workflow `build-a-place` and its agents under the
+  real Workflow tool (they ran only against canned helpers); that a smaller model, asked only for "a village in the forest", loads
+  the skill by itself (the new hook should help, and its format was written from Claude Code's documented plugin hook form but was not
+  run inside Claude Code here). The tests prove the gates work, not that a village looks good: fresh checkers and the person's own
+  eyes judge that.
 
 **1.3.0 (16 October 2026): calculations instead of searches.**
 - New: calculators in `kit/calculators/` that work out what used to be found by trial, each tested on the

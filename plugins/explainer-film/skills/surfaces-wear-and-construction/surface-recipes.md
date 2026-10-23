@@ -29,8 +29,8 @@ Roughness is 0.85 to 0.95 when dry (measured on the wet street: dry about 0.9) a
    before writing any pixels. Blender 5.2.2 wipes a generated image to black if you change it afterwards.
 3. The Bump node's Distance default (0.001) is nearly flat. Never turn Strength up where the real fix is Distance
    (0.02 to 0.1 for a visible bump; judged from the cookbook).
-4. Fine grain is carried by the normal map on every surface. Displacement is added only where a surface is listed
-   below with a depth (dirt road, mud, thatch, rock ground), on a dense or adaptive mesh, never on a flat plane.
+4. Fine grain is carried by the normal map on every surface. Displacement is added only for the roles whose `displace` flag is true in `place-kit/data/roles.json` (nine: dirt road, mud, forest floor, stone paving, gravel,
+   rock ground, plain earth ground, stone wall and thatch), on a dense or adaptive mesh, never on a flat plane (`finish` makes the mesh fine: a grid for a plain rectangle, a split in place for any other shape).
 5. UV first. A tangent-space normal map needs a UV layer on every object that uses it (box UV per face in metres for
    walls, stones and timber; planar from above for ground and water; planks: u along the length, v across, plus a
    random offset for each plank, and mirror or turn some planks and switch the knot off on about half; roof tiles: put
@@ -48,12 +48,12 @@ Roughness is 0.85 to 0.95 when dry (measured on the wet street: dry about 0.9) a
 Each line: tile size (metres); height; node strength and displacement; UV; roughness; colour. Kinds in brackets.
 
 **dirt_road** is above. UV planar from above. Colour value about 0.20 to 0.40 (invented).
-**packed_earth** (yard, doorstep, stable floor): tile 1.5 m (invented); flatter clods, half the size of the road's;
-normal only, no displacement (judged); UV planar; roughness 0.8 to 0.9, lower (about 0.7) where feet polish it (judged).
+**packed_earth** (yard, doorstep, stable floor, a bank, a seabed; the role `ground.earth`): tile 2 m, node strength 0.8 and displacement 3 cm in the data; flatter clods, half the size of the road's; UV planar; roughness 0.8 to
+0.95, lower (about 0.7) where feet polish it (judged).
 **mud**: tile 5 m, displacement 6 cm, strength 0.8, roughness 0.9 (judged, coal-mine yard); dark brown, wetter than the
 road; puddle hollows 4 cm deep (judged, same yard); shine in the hollows (roughness 0.3, measured).
 **forest_floor** (leaf litter, needles, bare soil): tile 2 m (invented); height from a few big leaf shapes over soft earth;
-normal strength 0.8; no displacement; roughness 0.8 to 0.9; dull olive-brown with a few red-brown leaves; moss and plants
+normal strength 1.0 and displacement 4 cm in the data (the role displaces); roughness 0.85 to 0.95; dull olive-brown with a few red-brown leaves; moss and plants
 come from the growth step, not from the picture.
 **grass**: tile 3 m (invented); very soft height; strength 0.6; roughness 0.85; olive and dusk green (never fresh spring
 green: judged, garden style note); chunky 3D tufts (5 to 9 simple blades) do the real work.
@@ -94,6 +94,26 @@ chunky clumps (the garden's pine needles read as hair until made as brush-stroke
 (judged); the garden's swell map read +0.39 in the direction test, lower than its other maps but above the +0.25 line.
 **glass_old**: roughness 0.05 to 0.2, a little dirt (a thin grime layer); glass needs its see-through unhooked from any
 picture (model lint checks it).
+
+### The other surfaces in the data (read the numbers from `place-kit/data/surfaces.json`; this table is the short form)
+
+The recipes above are the ones this text explains. `surfaces.json` holds 48 ids; these are the ones not named above. All their numbers are first tries (invented) unless the file says otherwise.
+
+| Surface id | Used for | Tile | Normal strength, displacement | Roughness | Bevel and UV |
+|---|---|---|---|---|---|
+| `gravel_path` | a gravel path, towpath or drive (role `ground.gravel`) | 1.5 m | 1.0, 4 cm | 0.7 to 0.95 | planar |
+| `cobble_paving` | cobbles, setts, a paved quay (role `ground.stone_paving`) | 1.5 m | 0.9, 3 cm | 0.6 to 0.9 | planar; joints darker and duller |
+| `flagstone` | a flagstone floor (`floor.stone`) | 2 m | 0.9, none | 0.6 to 0.9 | planar |
+| `timber_beam` | posts and beams (`timber.post`, `timber.beam`) | 1 m | 1.2, none | 0.6 to 0.85 | 6 to 12 mm, plank UV |
+| `plaster_lime` | plastered and whitewashed walls (`wall.plaster`, `wall.timber_frame`) | 1.5 m | 1.0, none | 0.75 to 0.95 | 8 to 15 mm, box UV |
+| `cob_wall` | a cob or clay wall (`wall.cob`) | 1.5 m | 1.0, none | 0.8 to 0.95 | 8 to 15 mm, box UV |
+| `stone_dressed` | cut stone: coping, steps, quoins (`stone.step`) | 1.5 m | 0.8, none | 0.55 to 0.85 | 8 to 15 mm, box UV |
+| `ceramic_glazed` | pots, jugs, bowls (`prop.ceramic`) | 0.5 m | 0.4, none | 0.25 to 0.6 | box UV |
+| `water_sea` | sea and harbour water (`water.sea`) | 8 m | 0.4, none | 0.05 to 0.3 | planar |
+| `rock_ore` | bare rock ground, a quarry (`ground.rock`) | 2 m | 1.0, 4 cm | 0.6 to 0.9 | box UV |
+| `tile_floor` | a tiled floor (`floor.tile`) | 1 m | 0.7, none | 0.4 to 0.8 | planar |
+| `carpet_fabric` | a carpet or rug (`floor.carpet`) | 0.5 m | 0.6, none | 0.9 to 0.98 | planar |
+| `generic_wood`, `generic_stone`, `generic_metal`, `generic_cloth` | the fallback for an unnamed prop of that stuff (`prop.wood`, `prop.generic`, `prop.imported`) | 1.0, 1.5, 0.5, 0.5 m | 1.2, 0.9, 0.8, 0.7; none | 0.65 to 0.9, 0.6 to 0.9, 0.4 to 0.8, 0.85 to 0.95 | 6 to 12 mm, 8 to 15 mm, 4 to 8 mm, none; box UV |
 
 ### First guesses for other kinds of place (invented unless marked; confirm with a small test plate)
 

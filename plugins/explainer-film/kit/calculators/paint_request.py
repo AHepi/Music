@@ -32,7 +32,9 @@ Inputs: --check (the view's shot-check file, with "paint_as" words and optional 
 person's words for the place: its sentence, set things to keep, notes, colours, warm-light words, the people's dress and
 poses, removed parts, library props, what lies behind; see tests/fixtures/painting/*-brief.json), --place-facts and
 --view (figures' facing, the slide, the film camera). Optional: --helper-plate, --render-log, --shot-report,
---real-names FILE, --exposure (the page's), --hollow GROUP... (props with an open top), --behind-remove figures|GROUP...
+--real-names FILE, --exposure (the page's), --hollow GROUP... (props with an open top), --behind-remove figures|GROUP...,
+--keep-wetness (a place built wet: the prompt keeps its wet ground, puddles and reflections and forbids only new ones, where the default words
+forbid every puddle and reflection)
 The request is refused without a render log and a shot report (a paid repaint needs both, decision 37).
 
 Use:
@@ -124,6 +126,7 @@ class View:
         self.plate_path = args.plate
         self.plate = measures.read_rgb(args.plate, (self.width, self.height)) if args.plate else None
         self.brief = measures.load_json(args.brief) if getattr(args, 'brief', None) else {}
+        self.keep_wetness = bool(getattr(args, 'keep_wetness', False) or self.brief.get('keep_wetness'))
         self.place_facts = measures.load_json(args.place_facts) if getattr(args, 'place_facts', None) else None
         self.view_name = getattr(args, 'view', None)
         self.view = None
@@ -760,6 +763,15 @@ def edges_part(view, sentences):
     return (sentences['edges'].format(pairs=join_words(items)) if items else ''), {'pairs': pairs, 'band_pixels': limits['band']}
 
 
+def wetness_words(sentences, keep_wetness):
+    """The "never add" words about puddles, and the Keep item for wet ground. By default a place has no puddles to paint, so none may be added (the
+    notice corner's and the people test's words, word for word). A place built wet (--keep-wetness, or "keep_wetness": true in the brief) has wet
+    ground the painter must KEEP, so only NEW puddles and reflections are forbidden. Returns (the never-add sentence, the Keep item or an empty text)."""
+    if keep_wetness:
+        return sentences['never_rest_wet'], sentences['keep_wet']
+    return sentences['never_rest'], ''
+
+
 def never_part(view, sentences, has_people):
     brief = view.brief
     notes = brief.get('never_add_notes', {})
@@ -770,7 +782,7 @@ def never_part(view, sentences, has_people):
     items += brief.get('removed_parts', [])
     items.append(sentences['never_animals'] if has_people else sentences['never_people'])
     items.append(sentences['never_props'].format(note=props_note))
-    items.append(sentences['never_rest'])
+    items.append(wetness_words(sentences, view.keep_wetness)[0])
     items += brief.get('never_add_also', [])
     return sentences['never_add'].format(items='; '.join(items)), {'absent_library_props': absent, 'removed_parts': brief.get('removed_parts', [])}
 
@@ -792,6 +804,9 @@ def main_prompt(view):
     people_text, people_numbers = people_part(view, sentences)
     keep_items, kept = keep_list(view, sentences)
     keep_items += lettering_items(view, sentences, keep_items)
+    wet_item = wetness_words(sentences, view.keep_wetness)[1]
+    if wet_item:
+        keep_items.append(wet_item)
     warm_text, warm_numbers = warm_part(view, sentences)
     bright_text, bright_numbers = brightest_part(view, sentences)
     thin_text, thin_numbers = thin_part(view, sentences)
@@ -1032,6 +1047,7 @@ def view_options(parser, need_brief=False):
     parser.add_argument('--check', required=True, help='the view\'s shot-check file (with "paint_as" words)')
     parser.add_argument('--facts', required=True, help='shot_facts.py\'s folder for the PLATE\'s camera and lens')
     parser.add_argument('--plate', required=True, help='the plate picture')
+    parser.add_argument('--keep-wetness', action='store_true', help='the place is built wet: the prompt keeps its wet ground, puddles and reflections and forbids only NEW ones (or "keep_wetness": true in the brief)')
     parser.add_argument('--brief', required=need_brief, help='the place\'s painting brief (a person\'s words; see tests/fixtures/painting)')
     parser.add_argument('--place-facts', help='the place facts file (figures, the slide, the film camera)')
     parser.add_argument('--view', help='the view in the place facts')

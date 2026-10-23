@@ -282,7 +282,7 @@ try:
         json.dump({'verdict': {'confirmed': [{'page': '3', 'time': '55.1', 'severity': 'must fix', 'what': 'MACHINES is cut too soon', 'fix': 'start it on "and"',
                                               'evidence': 'still 55.0', 'from': 'pictures'}], 'rejected': [], 'summary': ''}}, open(critique, 'w'))
         film_args = ['film', '--project', work, '--events', events, '--scene', 'inflation-chapter-2-newcomers', '--critique', critique,
-                     '--page-files', pages_folder, '--processors', '4', '--free-memory-gb', '8', '--blender-running', 'no']
+                     '--page-files', pages_folder, '--processors', '4', '--free-memory-gb', '8', '--free-disk-gb', '40', '--blender-running', 'no']
         code, out, data = run(*film_args)
         titles = {c['title']: c['verdict'] for c in data.get('checks', [])}
         check.true('film: the critique is newer than the pages but its must-fix finding is open: blocked', code == 1

@@ -1,5 +1,5 @@
 {
- "about": "The role table: what each kind of object IS and what treatments it needs. Roles may name example things (thatch, barrel) because this is data, never code. A role is \"class.name\". The class decides which treatments are REQUIRED (the audit fails without them) and which are WANTED (the audit says look). Each role carries a surface id (data/surfaces.json), a displace flag (real displacement only where true), may_hang (a part hung from above is allowed), needs_support (ground: stands on the ground, part: carried by another part, none), max_span_metres (the longest free span of a plank or beam), scale (fact ids in data/real_world_facts.json), dials (multipliers per wear layer, 0 = the layer is not for this role), exempt (treatments the role does not need, with the reason) and name_hints (regular expressions that guess the role from an object, collection or material name when the settings say nothing). Numbers in a role (max_span_metres, dials) share the role's own kind and source. A treatment is REQUIRED only if the kit really makes it and a test proves it (check-presets enforces this).",
+ "about": "The role table: what each kind of object IS and what treatments it needs. Roles may name example things (thatch, barrel) because this is data, never code. A role is \"class.name\". The class decides which treatments are REQUIRED (the audit fails without them) and which are WANTED (the audit says look). Each role carries a surface id (data/surfaces.json), a displace flag (real displacement only where true), may_hang (a part hung from above is allowed), needs_support (ground: stands on the ground, part: carried by another part, none), max_span_metres (the longest free span of a plank or beam), scale (fact ids in data/real_world_facts.json), dials (multipliers per wear layer, 0 = the layer is not for this role), exempt (treatments the role does not need, with the reason) a meaning (one plain line: what the role is for; `explainer-film-place roles --list` prints them all) and name_hints (regular expressions that guess the role from an object, collection or material name when the settings say nothing). Numbers in a role (max_span_metres, dials) share the role's own kind and source. A treatment is REQUIRED only if the kit really makes it and a test proves it (check-presets enforces this).",
  "classes": {
   "ground": {
    "requires": [
@@ -20,7 +20,26 @@
     "displacement"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.0,
+     "polish": 0.5,
+     "film": 0.5
+    },
+    "grime": {
+     "soot_under_shelter": 0.0,
+     "runoff_streaks": 0.0,
+     "damp_band": 0.0,
+     "area_share": 0.2
+    },
+    "cracks_and_chips": {
+     "chip_amount": 0.0
+    },
+    "rubbish": {
+     "density": 0.4
+    }
+   }
   },
   "floor": {
    "requires": [
@@ -38,7 +57,21 @@
     "weathering"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.0,
+     "polish": 0.5
+    },
+    "grime": {
+     "soot_under_shelter": 0.0,
+     "runoff_streaks": 0.0,
+     "damp_band": 0.0
+    },
+    "cracks_and_chips": {
+     "chip_amount": 0.1
+    }
+   }
   },
   "wall": {
    "requires": [
@@ -58,7 +91,8 @@
     "shape_damage"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
   },
   "roof": {
    "requires": [
@@ -75,7 +109,20 @@
    ],
    "wanted": [],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.0,
+     "dust": 0.3
+    },
+    "grime": {
+     "damp_band": 0.0,
+     "soot_under_shelter": 0.2
+    },
+    "cracks_and_chips": {
+     "chip_amount": 0.1
+    }
+   }
   },
   "timber": {
    "requires": [
@@ -95,7 +142,8 @@
     "moss_and_algae"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
   },
   "stone": {
    "requires": [
@@ -114,7 +162,13 @@
     "shape_damage"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "weathering": {
+     "silvering": 0.0,
+     "patina": 0.2
+    }
+   }
   },
   "iron": {
    "requires": [
@@ -130,7 +184,16 @@
     "bevelled_edges"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.2
+    },
+    "weathering": {
+     "silvering": 0.0,
+     "patina": 0.3
+    }
+   }
   },
   "prop": {
    "requires": [
@@ -147,7 +210,8 @@
     "shape_damage"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
   },
   "tree": {
    "requires": [
@@ -159,7 +223,12 @@
    ],
    "wanted": [],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "weathering": {
+     "silvering": 0.0
+    }
+   }
   },
   "plant": {
    "requires": [
@@ -168,7 +237,8 @@
    ],
    "wanted": [],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
   },
   "water": {
    "requires": [
@@ -178,7 +248,8 @@
     "colour_variation"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
   },
   "glass": {
    "requires": [],
@@ -187,13 +258,15 @@
     "dirt"
    ],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
   },
   "never": {
    "requires": [],
    "wanted": [],
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
   }
  },
  "roles": {
@@ -222,7 +295,8 @@
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "note": "ruts, banks and hoof prints are shaped by the roads step"
+   "note": "ruts, banks and hoof prints are shaped by the roads step",
+   "meaning": "a dirt lane or track that carts and horses drive on (gets ruts, banks, hoof prints)"
   },
   "ground.mud": {
    "class": "ground",
@@ -242,12 +316,13 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "wet mud, a churned gateway or a puddled yard"
   },
   "ground.forest_floor": {
    "class": "ground",
    "surface": "forest_floor",
-   "displace": false,
+   "displace": true,
    "may_hang": false,
    "needs_support": "ground",
    "max_span_metres": null,
@@ -263,12 +338,13 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "leaf litter, moss and roots under trees"
   },
   "ground.stone_paving": {
    "class": "ground",
    "surface": "cobble_paving",
-   "displace": false,
+   "displace": true,
    "may_hang": false,
    "needs_support": "ground",
    "max_span_metres": null,
@@ -281,16 +357,20 @@
     "cobble",
     "flagstone",
     "\\bsett",
-    "pavement"
+    "pavement",
+    "apron",
+    "slipway",
+    "\\bquay(side)? ?(floor|surface)"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "cobbles, setts, flagstones or a paved quay or square outdoors"
   },
   "ground.gravel": {
    "class": "ground",
    "surface": "gravel_path",
-   "displace": false,
+   "displace": true,
    "may_hang": false,
    "needs_support": "ground",
    "max_span_metres": null,
@@ -303,7 +383,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a gravel path, towpath or drive"
   },
   "ground.sand": {
    "class": "ground",
@@ -321,7 +402,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a beach, dune or sandy floor"
   },
   "ground.snow": {
    "class": "ground",
@@ -337,11 +419,12 @@
    ],
    "exempt": {
     "rubbish": "snow: rubbish would be buried",
-    "plants": "snow: nothing grows",
-    "moss_and_algae": "snow"
+    "plants": "snow: nothing grows through it",
+    "moss_and_algae": "snow: nothing grows on it"
    },
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "snow lying on the ground"
   },
   "ground.tarmac": {
    "class": "ground",
@@ -359,7 +442,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a tarmac or asphalt road or yard"
   },
   "ground.concrete": {
    "class": "ground",
@@ -372,12 +456,12 @@
    "dials": {},
    "name_hints": [
     "concrete (ground|slab|yard|floor)",
-    "\\bslab\\b",
-    "apron"
+    "concrete slab"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a concrete yard, slab or apron outdoors"
   },
   "ground.rock": {
    "class": "ground",
@@ -400,7 +484,8 @@
     "plants": "bare rock: only a few weeds in cracks, set by the place"
    },
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "bare rock ground or a quarry floor"
   },
   "ground.grass": {
    "class": "ground",
@@ -420,12 +505,13 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a lawn, meadow or pasture"
   },
   "ground.earth": {
    "class": "ground",
    "surface": "packed_earth",
-   "displace": false,
+   "displace": true,
    "may_hang": false,
    "needs_support": "ground",
    "max_span_metres": null,
@@ -436,11 +522,15 @@
     "terrain",
     "\\bsoil\\b",
     "\\bearth\\b",
-    "\\byard\\b"
+    "\\byard\\b",
+    "sea ?bed",
+    "river ?bed",
+    "stream ?bed"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "plain ground, soil, a bank, a seabed or a stream bed"
   },
   "floor.earth": {
    "class": "floor",
@@ -460,7 +550,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a beaten earth floor inside a building"
   },
   "floor.planks": {
    "class": "floor",
@@ -478,7 +569,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a plank floor inside a building"
   },
   "floor.tile": {
    "class": "floor",
@@ -495,7 +587,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a tiled floor inside a building"
   },
   "floor.stone": {
    "class": "floor",
@@ -512,7 +605,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a flagstone floor (inside or on a patio; steps are stone.step, not this)"
   },
   "floor.concrete": {
    "class": "floor",
@@ -529,7 +623,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a concrete floor inside a building"
   },
   "floor.carpet": {
    "class": "floor",
@@ -547,7 +642,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a carpet or rug"
   },
   "wall.timber_frame": {
    "class": "wall",
@@ -567,7 +663,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a timber-framed wall with infill (a cottage wall)"
   },
   "wall.log": {
    "class": "wall",
@@ -586,12 +683,13 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a wall of stacked logs (a log cabin wall)"
   },
   "wall.stone": {
    "class": "wall",
    "surface": "stone_rubble",
-   "displace": false,
+   "displace": true,
    "may_hang": false,
    "needs_support": "ground",
    "max_span_metres": null,
@@ -606,11 +704,14 @@
     "rubble",
     "masonry",
     "drystone",
-    "\\bgable stone"
+    "\\bgable stone",
+    "\\b(quay|harbou?r|sea|retaining|canal|lock|boundary|garden|yard|castle|town|city) walls?\\b",
+    "quay ?side wall"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a stone wall: house, garden, quay, canal, retaining or boundary wall"
   },
   "wall.brick": {
    "class": "wall",
@@ -628,7 +729,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a brick wall"
   },
   "wall.cob": {
    "class": "wall",
@@ -648,7 +750,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a cob or clay wall"
   },
   "wall.concrete": {
    "class": "wall",
@@ -667,7 +770,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a concrete wall"
   },
   "wall.metal_sheet": {
    "class": "wall",
@@ -688,7 +792,8 @@
     "bevelled_edges": "folded sheet, no bevel"
    },
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a corrugated or sheet-metal wall"
   },
   "wall.interior": {
    "class": "wall",
@@ -708,12 +813,13 @@
     "moss_and_algae": "indoors: dry, nothing grows",
     "weathering": "indoors: no sun or rain on it",
     "wetness": "indoors: dry floor and walls",
-    "plants": "indoors: no weeds",
+    "plants": "indoors: no weeds grow",
     "litter_pieces": "indoors: swept, no leaves"
    },
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "note": "indoor wall: the dry-indoors exemptions apply"
+   "note": "indoor wall: the dry-indoors exemptions apply",
+   "meaning": "an inside wall or partition"
   },
   "wall.plaster": {
    "class": "wall",
@@ -737,7 +843,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a plastered or whitewashed wall (the general wall)"
   },
   "roof.thatch": {
    "class": "roof",
@@ -755,12 +862,14 @@
    },
    "name_hints": [
     "thatch",
-    "\\breed\\b",
-    "straw roof"
+    "reed ?(roof|thatch)",
+    "straw roof",
+    "reed-thatch"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a thatched roof (straw or reed)"
   },
   "roof.shingle": {
    "class": "roof",
@@ -779,7 +888,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a wooden shingle roof"
   },
   "roof.tile": {
    "class": "roof",
@@ -798,7 +908,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a clay tile roof"
   },
   "roof.slate": {
    "class": "roof",
@@ -816,7 +927,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a slate roof"
   },
   "roof.metal": {
    "class": "roof",
@@ -836,7 +948,8 @@
     "moss_and_algae": "metal roof: moss does not take"
    },
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a tin or metal roof"
   },
   "timber.post": {
    "class": "timber",
@@ -853,11 +966,16 @@
     "\\bposts?\\b",
     "pillar",
     "stanchion",
-    "upright"
+    "upright",
+    "\\bpiles?\\b",
+    "piling",
+    "\\bmast\\b",
+    "stake"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a post, pile, mast, pillar or upright"
   },
   "timber.beam": {
    "class": "timber",
@@ -883,7 +1001,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a beam, lintel, rafter or joist (a long piece resting on or tenoned into supports)"
   },
   "timber.floor": {
    "class": "timber",
@@ -903,7 +1022,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a floor plank or a floor board in a loft or deck"
   },
   "timber.plank": {
    "class": "timber",
@@ -925,7 +1045,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a plank or board (cladding, a bridge deck, a door board)"
   },
   "timber.door": {
    "class": "timber",
@@ -945,7 +1066,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a door or gate leaf (may hang from hinges)"
   },
   "timber.shutter": {
    "class": "timber",
@@ -963,13 +1085,14 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a window shutter (may hang from hinges)"
   },
   "timber.fence": {
    "class": "timber",
    "surface": "timber_weathered",
    "displace": false,
-   "may_hang": false,
+   "may_hang": true,
    "needs_support": "ground",
    "max_span_metres": 2.5,
    "scale": [
@@ -985,7 +1108,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a fence, rail, railing, palisade or gate frame (may hang)"
   },
   "timber.generic": {
    "class": "timber",
@@ -1000,11 +1124,19 @@
     "timber",
     "wood(en)?\\b",
     "\\boak\\b",
-    "\\bpine\\b"
+    "\\bpine\\b",
+    "water ?wheel",
+    "mill ?wheel",
+    "\\bweir\\b",
+    "launder",
+    "\\bflume\\b",
+    "sluice",
+    "gutter"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "any other wood: a frame, a weir, a wheel, a flume, a gutter"
   },
   "stone.footing": {
    "class": "stone",
@@ -1026,7 +1158,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a footing, plinth or foundation stone"
   },
   "stone.chimney": {
    "class": "stone",
@@ -1042,11 +1175,12 @@
    "name_hints": [
     "chimney",
     "flue",
-    "stack\\b"
+    "chimney ?stack"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a chimney stack"
   },
   "stone.well": {
    "class": "stone",
@@ -1066,7 +1200,36 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a well, trough or stone sink"
+  },
+  "stone.step": {
+   "class": "stone",
+   "surface": "stone_dressed",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "step_rise"
+   ],
+   "dials": {
+    "moss_and_algae": 1.1,
+    "dirt": 1.2
+   },
+   "name_hints": [
+    "\\bstairs?\\b",
+    "staircase",
+    "\\btreads?\\b",
+    "\\brisers?\\b",
+    "\\bsteps? ?\\d",
+    "\\b(stone|garden|front|entrance|back|canal|flight of) steps?\\b",
+    "\\bstep$"
+   ],
+   "exempt": {},
+   "kind": "invented",
+   "source": "plugin 1.4.0 fix round (23 October 2026): steps had no role of their own and fell under floor.stone, whose indoor skip switched off moss, weathering, wetness, plants and litter on outdoor steps",
+   "meaning": "a stone step, stair or tread (the rise from one step to the next is size-checked)"
   },
   "stone.rock": {
    "class": "stone",
@@ -1083,11 +1246,17 @@
     "\\brocks?\\b",
     "boulder",
     "\\bstone\\b",
-    "cairn"
+    "cairn",
+    "millstone",
+    "quern",
+    "grindstone",
+    "gravestone",
+    "headstone"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a rock, boulder, millstone or loose stone"
   },
   "iron.sheet": {
    "class": "iron",
@@ -1106,7 +1275,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "sheet or plate iron and steel"
   },
   "iron.painted": {
    "class": "iron",
@@ -1124,7 +1294,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "painted metal: railings, signs, doors"
   },
   "iron.fitting": {
    "class": "iron",
@@ -1148,11 +1319,16 @@
     "\\bchain\\b",
     "hook",
     "cramp",
-    "metal"
+    "metal",
+    "bollard",
+    "cleat",
+    "mooring ring",
+    "iron ring"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "ironwork: hinges, bands, hooks, chains, bollards, cleats, rings (may hang)"
   },
   "prop.barrel": {
    "class": "prop",
@@ -1174,7 +1350,8 @@
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "note": "iron bands: give the band material a rule so its slot gets iron.fitting"
+   "note": "iron bands: give the band material a rule so its slot gets iron.fitting",
+   "meaning": "a barrel, cask or keg"
   },
   "prop.crate": {
    "class": "prop",
@@ -1195,7 +1372,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a crate, box or chest"
   },
   "prop.cart": {
    "class": "prop",
@@ -1209,14 +1387,15 @@
    ],
    "dials": {},
    "name_hints": [
-    "\\bcart\\b",
-    "wagon",
-    "carriage",
+    "\\b(hand ?)?carts?\\b(?! ?wheels?)",
+    "wagon(?! ?wheels?)",
+    "carriage(?! ?wheels?)",
     "barrow"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a cart or wagon body"
   },
   "prop.wheel": {
    "class": "prop",
@@ -1234,7 +1413,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a cart wheel"
   },
   "prop.boat": {
    "class": "prop",
@@ -1255,7 +1435,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a boat or hull"
   },
   "prop.furniture": {
    "class": "prop",
@@ -1275,7 +1456,7 @@
     "\\bbench\\b",
     "\\bstool\\b",
     "shelf",
-    "\\bbed\\b",
+    "(?<!reed )(?<!flower )\\bbed\\b",
     "cupboard",
     "\\bdesk\\b",
     "manger",
@@ -1283,7 +1464,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a table, bench, stool, chair or bed"
   },
   "prop.wicker": {
    "class": "prop",
@@ -1297,11 +1479,16 @@
    "name_hints": [
     "wicker",
     "basket",
-    "\\bwattle (fence|panel)"
+    "\\bwattle (fence|panel)",
+    "lobster ?pot",
+    "crab ?pot",
+    "fish ?trap",
+    "creel"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "wicker, a basket, a fish trap or a woven hurdle"
   },
   "prop.cloth": {
    "class": "prop",
@@ -1323,7 +1510,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a sack, cloth, canvas or awning"
   },
   "prop.rope": {
    "class": "prop",
@@ -1342,7 +1530,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "rope, net or cable (may hang)"
   },
   "prop.ceramic": {
    "class": "prop",
@@ -1364,7 +1553,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a pot, jug, bowl or urn"
   },
   "prop.straw": {
    "class": "prop",
@@ -1379,11 +1569,15 @@
     "\\bstraw\\b",
     "\\bhay\\b",
     "bale",
-    "\\bfodder"
+    "\\bfodder",
+    "hay ?stack",
+    "haystack",
+    "\\brick\\b"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "straw, hay, a bale or a haystack"
   },
   "prop.imported": {
    "class": "prop",
@@ -1402,7 +1596,8 @@
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "note": "its own maps count as normal_map and roughness_variation when they feed those inputs"
+   "note": "its own maps count as normal_map and roughness_variation when they feed those inputs",
+   "meaning": "a downloaded or imported prop that carries its own maps"
   },
   "prop.wood": {
    "class": "prop",
@@ -1425,7 +1620,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a small wooden prop: a bucket, a ladder, a woodpile, a chopping block"
   },
   "prop.generic": {
    "class": "prop",
@@ -1444,7 +1640,8 @@
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "note": "the role an object gets when nothing else matched and its material gives no hint (the audit reports every one)"
+   "note": "the role an object gets when nothing else matched and its material gives no hint (the audit reports every one)",
+   "meaning": "a prop nobody could name (a grey fallback; give it a real role)"
   },
   "tree.bark": {
    "class": "tree",
@@ -1463,11 +1660,15 @@
     "\\bbark\\b",
     "\\blog\\b",
     "branch",
-    "stump"
+    "stump",
+    "willow",
+    "\\balder\\b",
+    "\\bbirch\\b"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a tree trunk, log, branch or stump"
   },
   "plant.foliage": {
    "class": "plant",
@@ -1487,11 +1688,14 @@
     "hedge",
     "\\bfern",
     "canopy",
-    "needles"
+    "needles",
+    "\\breeds?\\b",
+    "\\brushes\\b"
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "leaves, bushes, hedges, ferns, reeds and rushes"
   },
   "water.still": {
    "class": "water",
@@ -1513,7 +1717,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "still water: a pond, puddle, pool, stream or river"
   },
   "water.sea": {
    "class": "water",
@@ -1532,7 +1737,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "sea or harbour water"
   },
   "glass.window": {
    "class": "glass",
@@ -1555,7 +1761,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "glass: a window pane or lantern glass (may hang)"
   },
   "never.sky": {
    "class": "never",
@@ -1575,7 +1782,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "sky, backdrop or horizon: no surface pass"
   },
   "never.glow": {
    "class": "never",
@@ -1596,7 +1804,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a glowing thing (a lit window, a flame, a lantern flame): its own light"
   },
   "never.light": {
    "class": "never",
@@ -1614,7 +1823,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a lamp or sun object"
   },
   "never.helper": {
    "class": "never",
@@ -1638,7 +1848,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "a helper, guide, preview or empty that is not part of the place"
   },
   "never.scatter": {
    "class": "never",
@@ -1656,7 +1867,8 @@
    ],
    "exempt": {},
    "kind": "judged",
-   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "meaning": "plants and litter the kit scatters itself"
   }
  }
 }

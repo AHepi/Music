@@ -6,9 +6,9 @@ description: A place built here (a village, town, harbour, mine, farm, garden, i
 # Build a place in 3D and paint it over
 
 > **REQUIRED for every place, set or prop you build in Blender** (also when the request never mentions surfaces, wear or realism). Do it without being asked. In your report say plainly what the pass did, what the audit measured and what you skipped.
-> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating) and at real size, and give every object a role.
-> 2. Run the surface-and-wear pass. Draft the settings once (skip it if `place-settings.json` exists): `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json` (TYPE is the nearest of village, town, harbour, mine, farm, garden, interior). Then: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend`. It adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds and rubbish.
-> 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
+> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating; a rail tenoned into two posts counts as carried) and at real size, and give every object its role AS YOU MAKE IT (`pk.new_part_object(owner, role, name, mesh)`, or the object property `place_role`). The role ids are listed by `explainer-film-place roles --list`. Never trust a role the kit only guessed from a name.
+> 2. Run the surface-and-wear pass: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend` (it needs `--save-as`; it drafts `place-settings.json` when there is none, with a road for every dirt-road object). To read and improve a draft first: `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json`, where TYPE is the nearest of village, town, harbour, mine, farm, garden, interior or generic. It turns curves, text and instanced props into meshes, then adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds, rubbish and damage as shape.
+> 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend --reports REPORTS_FOLDER`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
 > Details, every command and the live-Blender route: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/SKILL.md`.
 
 What this is: the way the austerity project made its places from log 29 to log 35 (the pit village's notice
@@ -35,7 +35,7 @@ without turning. Two paintings cost about 20 to 45 US cents.
 | Before drawing | `explainer-film-place renderer-for`, `render` | Cycles where lamps, windows, lanterns or fires are lit, otherwise EEVEE; previews on a rented card | `place` |
 | After drawing | `explainer-film-place measure` | value range, detail energy, flat windows, palette and squint against the style guard | `place` |
 | After building each model, and the dressed scene | `paper-film/blender/model_lint.py` | stripes, two surfaces on one plane, floors just over the ground, ".001" copies, glass reading its picture's see-through, glowing light bases, sizes against the index, fronts | `plates` (run it while building too) |
-| When the place exists | `calculators/place_facts.py` | the place facts every later tool reads: views, signs, chimneys and fires, figures, lights, surfaces things stand on, the accepted list | `shots` |
+| Once the place is built (its facts are read from the finished scene) | `calculators/place_facts.py` | the place facts every later tool reads: views, signs, chimneys and fires, figures, lights, surfaces things stand on, the accepted list | `shots` |
 | Before drawing a view | `calculators/plan_shot.py` | the camera spot, eye, turn, the slide and its limit, the plate's lens and rows, the people (6 m rule, crowd across the view), the reach | `shots` |
 | Before drawing a view | `calculators/frame_geometry.py` | where any point or box lands, sizes in pixels, reach, eye needed, slide magnification at the nearest painted thing | (by hand; `plan_shot.py` uses the same sums) |
 | Before drawing a view | `calculators/view_audit.py` | letter heights per view, drum turns, loud signs nobody names, backs of signs, landmark tops in the words band, heads that could show a face | `shots` |
@@ -115,7 +115,7 @@ A place that is built but flat is not finished, and a model that passes the mode
 2. `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend` must PASS before any view is drawn.
    It fails when a material or the scene lacks a required treatment (normal map, displacement, dirt, grime, weathering,
    wetness, cracks, edge wear, moss, rust, rubbish, plants), when a part floats, when a size is wrong, or when the audit is
-   stale. The order is: `shots` (plan the views), build, `place`, then `plates`.
+   stale. The order is: `shots` once from the brief for the rough camera plan, build, `place`, then `shots` again once the scene exists to read the place facts from, then `plates`; both `shots` runs and `place` must pass before any plate.
 3. The steps, the shortcuts that fail and the live-Blender route are in
    `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/the-required-steps.md`.
 
@@ -211,7 +211,7 @@ A place that is built but flat is not finished, and a model that passes the mode
    far walkers "flat dark shapes with no pale spots"; no flames, smoke, glows or new shadows).
    **Wet or dusk places:** the template's words "matte painted finish" and "never puddles or reflections" make the painter
    remove wet ground (a wet street came back dry). Change them for that view, so the painted finish keeps the sheen of wet
-   ground, its puddles, mirrored lights, joints and gutters (or use `paint_request.py`'s `--keep-wetness` when it exists).
+   ground, its puddles, mirrored lights, joints and gutters (or use `paint_request.py`'s `--keep-wetness`).
 2. **The price.** Prices change between plan and purchase (Flux 3 edit was 2.4 US cents a megapixel when
    planned and 4.8 a day later, lesson 139): read fal's live price, then
    `python3 calculators/paint_request.py price --rate-cents CENTS` (the returned picture and every picture sent,

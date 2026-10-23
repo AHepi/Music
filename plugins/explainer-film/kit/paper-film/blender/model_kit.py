@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import textures  # noqa: E402
 
 TEXTURE_FOLDER = tempfile.mkdtemp(prefix='model-textures-')
+HARDEN_BEVEL_NORMALS = True      # a model script may set this to False to get the old plain flat-shaded bevel
 _materials = {}
 _texture_cache = {}
 
@@ -43,13 +44,27 @@ def reset():
 # ----------------------------------------------------------------------------------- materials
 
 def _image(name, picture, colour_data=True):
-    """Save a Pillow picture and load it into Blender (packed into the .glb on export)."""
-    # JPEG for everything (normal maps too): a tenth of the size, and the film's grain hides the rest
-    path = os.path.join(TEXTURE_FOLDER, f'{name}.jpg')
-    picture.save(path, quality=90 if colour_data else 94)
+    """Save a picture and load it into Blender (packed into the .glb on export). `picture` is a textures.Picture or a
+    Pillow picture. A normal map is always saved as a PNG (a JPEG's blocks show as faint squares in the shading, and a PNG
+    needs no Pillow, which Blender's own Python does not have). A colour picture is a JPEG (a tenth of the size, and the
+    film's grain hides the rest) when Pillow is there to write it, and a PNG when it is not."""
+    path = os.path.join(TEXTURE_FOLDER, f'{name}.png')
+    if colour_data and (_pillow_here() or not hasattr(picture, 'pixels')):
+        path = os.path.join(TEXTURE_FOLDER, f'{name}.jpg')
+        picture.save(path, quality=90)
+    else:
+        picture.save(path)
     image = bpy.data.images.load(path)
     image.colorspace_settings.name = 'sRGB' if colour_data else 'Non-Color'
     return image
+
+
+def _pillow_here():
+    try:
+        import PIL  # noqa: F401
+        return True
+    except ImportError:
+        return False
 
 
 def _texture(kind):
@@ -109,7 +124,17 @@ def _finish_part(obj, material_, bevel, map_units):
     if material_ is not None: obj.data.materials.append(material_)
     if bevel:
         mod = obj.modifiers.new('bevel', 'BEVEL'); mod.width = bevel; mod.segments = 2
-        mod.limit_method = 'ANGLE'; mod.harden_normals = False
+        mod.limit_method = 'ANGLE'
+        if HARDEN_BEVEL_NORMALS:
+            # The usual recipe for bevelled hard-surface shapes: the bevel strip takes the shading of the big face beside it
+            # (harden_normals), every face is smooth-shaded, and a Weighted Normal modifier makes each corner lean toward the
+            # biggest face that meets it and keeps sharp edges sharp. Without it a big flat face shades unevenly near its edge.
+            mod.harden_normals = True
+            for poly in obj.data.polygons: poly.use_smooth = True
+            weighted = obj.modifiers.new('weighted-normal', 'WEIGHTED_NORMAL')
+            weighted.mode = 'FACE_AREA'; weighted.keep_sharp = True; weighted.weight = 50
+        else:
+            mod.harden_normals = False
     if map_units is not False: box_map(obj, map_units)
     return obj
 

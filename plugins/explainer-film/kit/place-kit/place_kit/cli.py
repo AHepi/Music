@@ -2,7 +2,7 @@
 launcher (place_command.py), the code that runs inside Blender (blender_run.py) and the tests all read the same list. It is plain Python
 with no Blender in it, so `--verbs` and `VERB --help` work on any machine.
 
-A concrete example: build_parser().parse_args(['finish', '--scene', 'village.blend', '--save-as', 'out.blend', '--look', 'neglected']).
+A concrete example: build_parser().parse_args(['finish', '--scene', 'place.blend', '--save-as', 'out.blend', '--look', 'neglected']).
 Each verb says whether it runs inside Blender ("blender": True) or in plain Python.
 """
 import argparse
@@ -18,8 +18,8 @@ VERBS = {
     'age': {'blender': True, 'help': 'the nine wear layers in their fixed order (dirt, grime, weathering, wetness, cracks and chips, edge wear, moss, rust, rubbish)'},
     'grow': {'blender': True, 'help': 'weeds, tufts, ferns, nettles, moss cushions and litter pieces, with exact keep-out gates'},
     'light': {'blender': True, 'help': 'add a sun, sky, fill and lamps for glowing things when the scene has none (a scene with no light renders black)'},
-    'finish': {'blender': True, 'help': 'the whole pass in order, then save, reopen and audit; idempotent'},
-    'finish-part': {'blender': True, 'help': 'a part builder\'s share: only that owner\'s objects, masks from that part alone'},
+    'finish': {'blender': True, 'help': 'the whole pass in order (curves, text and instances become meshes, then roles, roads, surfaces, damage, wear, growth, light), then save, reopen and audit; idempotent; say where to save with --save-as'},
+    'finish-part': {'blender': True, 'help': 'a part builder\'s share: only that owner\'s objects, masks from that part alone; always a quick trial, and its audit accepts that (the integrator runs the full finish)'},
     'construction': {'blender': True, 'help': 'the construction check alone: every part carried from the ground up, sizes of doorways, spans'},
     'normals-test': {'blender': True, 'help': 'prove every normal map points the right way (against its own height, and a test light with a flipped control)'},
     'audit': {'blender': True, 'help': 'gather the facts into place-audit.json, then judge them (PASS, LOOK or FAIL lines)'},
@@ -68,6 +68,7 @@ def build_parser():
     p.add_argument('--type', dest='place_type', default='generic', help='the place type (a file in data/place_types: ' + ', '.join(settings_file.place_type_ids()) + ')')
     p = verb('roles')
     p.add_argument('--write', action='store_true', help='store each object\'s role as its place_role property (needs --save-as)')
+    p.add_argument('--list', action='store_true', help='print every role id with one plain line saying what it is for (needs no scene)')
     p = verb('surfaces')
     p.add_argument('--map-size', dest='map_size', type=int, help='normal-map size in pixels (default 1024; 256 with --quick)')
     p.add_argument('--maps-folder', dest='maps_folder', help='also save the maps as PNG files here')
@@ -90,9 +91,13 @@ def build_parser():
     p.add_argument('--state', choices=['dry', 'damp', 'wet'])
     p.add_argument('--map-size', dest='map_size', type=int)
     p.add_argument('--no-audit', dest='no_audit', action='store_true', help='skip the audit at the end (the place is then not proved)')
+    p.add_argument('--type', dest='place_type', help='when there is no settings file: the place type the draft starts from (a file in data/place_types: ' + ', '.join(settings_file.place_type_ids()) + '; default generic)')
+    p.add_argument('--place', help='when there is no settings file: the place\'s name')
+    p.add_argument('--facts', help='the place\'s own real-world facts file (the same file `audit --facts` and `explainer-film-preflight place --real-world-facts` take)')
     p = verb('finish-part')
     p.add_argument('--look', choices=['kept', 'lived_in', 'neglected', 'derelict'])
     p.add_argument('--state', choices=['dry', 'damp', 'wet'])
+    p.add_argument('--facts', help='the place\'s own real-world facts file')
     p = verb('construction')
     p = verb('normals-test')
     p.add_argument('--size', type=int, default=96, help='size of the test pictures in pixels')
@@ -104,17 +109,19 @@ def build_parser():
     verb('undo')
     p = verb('combine')
     p.add_argument('--stages', nargs='+', required=False, help='the stage files (stage_<owner>.py), in order')
-    p.add_argument('--order', choices=['plain', 'reverse'], default='plain')
+    p.add_argument('--order', choices=['plain', 'reverse', 'both'], default='plain', help='plain order, reverse order, or both (each from the same saved start, compared)')
+    p.add_argument('--options', help='a JSON object passed to every stage\'s apply(options)')
     p.add_argument('--owners', help='ownership.json')
     verb('fingerprint')
     p = verb('ownership-diff')
     p.add_argument('--start', required=False, help='the fingerprint before')
     p.add_argument('--end', required=False, help='the fingerprint after')
     p.add_argument('--owners', required=False, help='ownership.json')
+    p.add_argument('--actor', help='the owner whose stage just ran (changes to other owners\' things are violations)')
     verb('renderer-for')
     p = verb('render')
     p.add_argument('--job', required=False, help='the job file (scene, out_folder, views)')
-    p.add_argument('--where', choices=['rented', 'local', 'auto'], default='auto')
+    p.add_argument('--where', choices=['rented', 'local', 'auto', 'on-card'], default='auto', help='local (this computer, tiny), rented (a rented card), auto (a card when one is set up and the renderer is Cycles or finals are asked, else tiny local previews), on-card (used by the client: already on the card; to ask for a card say rented)')
     p.add_argument('--engine', choices=['auto', 'cycles', 'eevee'], default='auto')
     p.add_argument('--finals', action='store_true', help='draw final-size pictures too (default: previews only)')
     p = verb('rent')
@@ -129,6 +136,7 @@ def build_parser():
     p.add_argument('pictures', nargs='*', help='the pictures to measure')
     p.add_argument('--guard', help='a style guard JSON to check against')
     p.add_argument('--make-guard', dest='make_guard', action='store_true', help='make a style guard from the first picture (provisional until a person accepts it)')
+    p.add_argument('--view', help='with --make-guard: the view this guard is for (a name inside its pictures\' file names); several views can share one --out guard file')
     p.add_argument('--regions', help='a regions JSON')
     p.add_argument('--id-map', dest='id_map', help='a flat-colour picture of role classes')
     p.add_argument('--id-colours', dest='id_colours', help='the colours of the id map')

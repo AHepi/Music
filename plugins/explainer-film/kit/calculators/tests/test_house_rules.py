@@ -1,7 +1,8 @@
 """What this does: checks the house rules every file in kit/calculators keeps, for every builder's calculator, not only
 the core's: each Python file (and each test) opens with a plain note starting "What this does", and every one that can be
 run from the command line answers --help (exit 0) within a minute. It also checks the page-side twin frame-geometry.js
-opens with its note. A new calculator that forgets its note or its --help fails here.
+opens with its note, that every Python file of the place kit (kit/place-kit, all folders) opens with the note too, and that the
+place kit's two command-line programs answer --help. A new calculator or kit file that forgets its note or its --help fails here.
 Run: python3 kit/calculators/tests/test_house_rules.py
 """
 import ast
@@ -41,4 +42,26 @@ check.true(f'every file in kit/calculators opens with a "What this does" note ({
 check.true(f'every calculator that runs from the command line answers --help ({helped} answered)', not no_help, details=', '.join(no_help) or 'all do')
 twin = os.path.join(os.path.dirname(CALCULATORS), 'paper-film', 'scenes', 'frame-geometry.js')
 check.true('frame-geometry.js opens with its note', open(twin).read().startswith('// What this does'))
+
+# the place kit: every Python file opens with the note; its two command-line programs answer --help
+PLACE_KIT = os.path.join(os.path.dirname(CALCULATORS), 'place-kit')
+kit_files = sorted(glob.glob(os.path.join(PLACE_KIT, '**', '*.py'), recursive=True))
+kit_no_note = []
+for path in kit_files:
+    if '__pycache__' in path:
+        continue
+    try:
+        note = ast.get_docstring(ast.parse(open(path).read())) or ''
+    except SyntaxError as problem:
+        kit_no_note.append(f'{os.path.relpath(path, PLACE_KIT)} (not valid Python: {problem})')
+        continue
+    if not note.strip().startswith('What this does'):
+        kit_no_note.append(os.path.relpath(path, PLACE_KIT))
+check.true(f'every Python file of the place kit opens with a "What this does" note ({len(kit_files)} files)', len(kit_files) > 20 and not kit_no_note, details=', '.join(kit_no_note) or 'all do')
+kit_no_help = []
+for name in ('place_command.py', 'check_presets.py'):
+    run = subprocess.run([sys.executable, '-I', '-B', os.path.join(PLACE_KIT, name), '--help'], capture_output=True, text=True, timeout=60, cwd=PLACE_KIT)
+    if run.returncode != 0 or 'usage' not in (run.stdout + run.stderr).lower():
+        kit_no_help.append(f'{name} (exit {run.returncode})')
+check.true('the place kit\'s command-line programs (place_command.py, check_presets.py) answer --help', not kit_no_help, details=', '.join(kit_no_help) or 'both do')
 check.finish()

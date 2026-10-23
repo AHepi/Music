@@ -33,8 +33,10 @@ def layer_dial_name(layer, dial):
     return f'pk_{layer}_{dial}'
 
 
-# ---- the nine wear layers, in their fixed order (a layer earlier in the list goes in front of a later one)
-LAYER_ORDER = ('dirt', 'grime', 'weathering', 'wetness', 'cracks_and_chips', 'edge_wear', 'moss_and_algae', 'rust', 'rubbish')
+# ---- the nine wear layers, in their fixed order (a layer earlier in the list goes in front of a later one). Measured on an earlier outdoor test: dirt and grime go on BEFORE the
+# water (so water sits on top of them), rust is part of that first group for iron, then wetness, then cracks and chips and edge wear (they stay dull when wet),
+# then moss, then rubbish last. 3D plants and litter pieces are separate objects.
+LAYER_ORDER = ('dirt', 'grime', 'weathering', 'rust', 'wetness', 'cracks_and_chips', 'edge_wear', 'moss_and_algae', 'rubbish')
 
 # ---- the sixteen treatments the audit looks for
 TREATMENTS = ('normal_map', 'displacement', 'roughness_variation', 'colour_variation', 'bevelled_edges', 'dirt', 'grime',

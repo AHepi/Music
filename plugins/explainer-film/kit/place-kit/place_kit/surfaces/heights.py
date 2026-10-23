@@ -162,17 +162,17 @@ def log_bark(size, seed, tile_metres=1.0):
 
 
 def plaster_blotch(size, seed, tile_metres=1.5):
+    """Lime plaster: a soft undulation, thin raised seams where one patch of plaster meets the next (the zero line of a slow noise, so a seam is a long curve, never a ring),
+    a few hairline cracks and a scatter of small pits. Few, big, clean shapes."""
     rng = _rng(seed)
-    h = periodic_noise(size, seed, _cycles(tile_metres, 0.5)) + 0.5 * periodic_noise(size, seed + 1, _cycles(tile_metres, 0.2))
-    x = (np.arange(size) + 0.5) / size
-    X, Y = np.meshgrid(x, x)
-    for _ in range(3):
-        cx, cy, radius = rng.uniform(0, 1), rng.uniform(0, 1), rng.uniform(0.1, 0.2)
-        dx = np.minimum(np.abs(X - cx), 1 - np.abs(X - cx))
-        dy = np.minimum(np.abs(Y - cy), 1 - np.abs(Y - cy))
-        ring = np.exp(-((np.sqrt(dx * dx + dy * dy) - radius) / 0.02) ** 2)
-        h += 0.35 * ring.astype(np.float32)
-    return _normalise(h)
+    wave = periodic_noise(size, seed, _cycles(tile_metres, 0.5))
+    patches = periodic_noise(size, seed + 1, _cycles(tile_metres, 0.9))
+    seam = np.exp(-(patches / 0.06) ** 2)
+    f1, f2, _ = worley(size, int(_cycles(tile_metres, 1.1)), seed + 2, jitter=0.95)
+    crack = np.exp(-((f2 - f1) / 0.025) ** 2) * smoothstep(0.35, 0.6, periodic_noise(size, seed + 3, _cycles(tile_metres, 0.7)) * 0.5 + 0.5)
+    pits = smoothstep(0.80, 0.90, periodic_noise(size, seed + 4, _cycles(tile_metres, 0.07)))
+    h = 0.8 * wave + 0.22 * seam.astype(np.float32) - 0.3 * crack.astype(np.float32) - 0.25 * pits.astype(np.float32)
+    return _normalise(blur(h, size / 400.0))
 
 
 def stone_blocks(size, seed, tile_metres=1.5):

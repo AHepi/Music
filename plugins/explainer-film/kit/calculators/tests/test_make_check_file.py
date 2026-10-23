@@ -67,6 +67,11 @@ check.true('checkout: the ceiling is the sky and no counter prop is on the stree
            generated['checkout-c1'].get('sky') == 'ceiling*' and not set(generated['checkout-c1']['on_ground']) & {'basket', 'divider', 'bill stand', 'bill', 'till', 'card terminal'},
            recorded='checkout-c1-shot-check.json ("sky": "ceiling*", on_ground []); round5-checkout/check1 (four counter props "landed on something high")')
 
+# the scene stamp: the saved scene's path from the check file's folder (the preflight's plates stage reads it)
+check.equal('a check file beside its scene names it by file name', maker.scene_file_stamp('/work/place/scene.blend', '/work/place/check.json'), 'scene.blend')
+check.equal('a check file in a folder below its scene names the way up', maker.scene_file_stamp('/work/place/scene.blend', '/work/place/checks/view-a.json'), '../scene.blend')
+check.equal('a scene that was never saved gets no stamp (nothing to point at)', maker.scene_file_stamp('', '/work/place/check.json'), '')
+
 # ---------------------------------------------------------------------------------------------------- B. Blender
 note = json.load(open(os.path.join(HERE, 'project.json')))
 project = project_folder() or ''

@@ -216,6 +216,23 @@ try:
     check.equal('round 1 props with a copy-numbered root', len(failed), 8,
                 recorded='round1-result.json checked.findings (eight props had a "name.001" root)', proves='the prop-file names rule; ' + ', '.join(sorted(failed)))
 
+    # --surfaces: a material that is a plain colour is a warning; a material with a normal picture or a base picture is not
+    plain_file = os.path.join(folder, 'plain-and-mapped.glb')
+    write_glb(plain_file, [quad('plain-wall', [(0, 0, 0), (4, 0, 0), (4, 0, 3), (0, 0, 3)], material=0), quad('mapped-wall', [(0, 1, 0), (4, 1, 0), (4, 1, 3), (0, 1, 3)], material=1),
+                           quad('picture-wall', [(0, 2, 0), (4, 2, 0), (4, 2, 3), (0, 2, 3)], material=2)],
+              materials=[{'name': 'plain colour', 'pbrMetallicRoughness': {'baseColorFactor': [0.5, 0.4, 0.3, 1]}},
+                         {'name': 'with a normal map', 'pbrMetallicRoughness': {'baseColorFactor': [0.5, 0.4, 0.3, 1]}, 'normalTexture': {'index': 0}},
+                         {'name': 'with a picture', 'pbrMetallicRoughness': {'baseColorFactor': [1, 1, 1, 1], 'baseColorTexture': {'index': 0}}}],
+              image=png_rgb())
+    surfaced = model_lint.lint([model_lint.parts_from_glb(plain_file)], settings, ('names',), False, None, None, surfaces=True)
+    bare = list(surfaced[0]['plain_colour_materials'].values())[0]
+    check.equal('--surfaces names the plain-colour material and only that one', bare, ['plain colour'])
+    check.true('--surfaces is a warning, never a failure (the verdict stays PASS)', surfaced[0]['failed'] == [] and any(line.startswith('WARN Plain-colour materials') for line in surfaced[1]), surfaced[1][-3] if len(surfaced[1]) > 2 else '')
+    quiet = model_lint.lint([model_lint.parts_from_glb(plain_file)], settings, ('names',), False, None, None)
+    check.true('without --surfaces nothing about plain colours is said (the older reports are unchanged)', 'plain_colour_materials' not in quiet[0] and not any('Plain-colour' in line for line in quiet[1]))
+    shown = subprocess.run([sys.executable, '-I', '-B', os.path.join(BLENDER_FOLDER, 'model_lint.py'), plain_file, '--surfaces', '--only', 'names'], capture_output=True, text=True, timeout=120)
+    check.true('the command line takes --surfaces and exits 0 with the warning shown', shown.returncode == 0 and 'Plain-colour materials' in shown.stdout, f'exit {shown.returncode}')
+
     # ---------------------------------------------------------------------------------------------------- B. the project's files
     project_note = json.load(open(os.path.join(HERE_FIXTURES, 'project.json')))
     project = project_folder() or ''

@@ -9,7 +9,7 @@ real size; uv_facts(obj)['mirrored_share'] is then 0.0.
 """
 import numpy as np
 
-import bpy
+import bpy  # noqa: F401 - kept on purpose: this module needs Blender, and the tests tell Blender-only modules apart by this line
 
 from .. import house_numbers, scene_read
 

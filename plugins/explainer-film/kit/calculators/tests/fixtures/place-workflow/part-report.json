@@ -1,0 +1,44 @@
+{
+ "owner": "{owner}",
+ "stage_file": "/path/to/run/stages/stage_{owner}.py",
+ "work_file": "/path/to/run/work/{owner}/part.blend",
+ "steps_finished": "steps 1, 2 and 3",
+ "objects_added": 412,
+ "triangles": 48213,
+ "own_audit": {
+  "verdict": "PASS",
+  "problems": [
+   "LOOK PLANT-5502 only a fallback role for two objects"
+  ]
+ },
+ "surface_pass_done": true,
+ "wear_preview_done": false,
+ "claims": [
+  {
+   "claim": "the {owner} part has no object floating above its support",
+   "measured_by": "explainer-film-place construction, construction.json: 59 planks, minimum supports 2, PLANT-4417"
+  },
+  {
+   "claim": "every doorway of the {owner} part has a floor behind it (measured: 7 doorways, gap 0.03 m, PLANT-7716)",
+   "measured_by": "construction.json opening_floor_gap_m PLANT-3390"
+  },
+  {
+   "claim": "the {owner} part has no two planks alike",
+   "measured_by": "a script over the plank sizes, spread 0.07 m PLANT-2284"
+  }
+ ],
+ "unsure": [
+  "PLANT-8821 the ridge of the thatch may be too regular"
+ ],
+ "shared_problems": [
+  "PLANT-6609 the shared lamp is slightly off centre"
+ ],
+ "failures": [
+  "PLANT-9915 the first run of the normal-map test crashed and was run again"
+ ],
+ "not_tested": [
+  "no picture was drawn of the part"
+ ],
+ "views_to_redraw": [],
+ "seconds": 187.4
+}

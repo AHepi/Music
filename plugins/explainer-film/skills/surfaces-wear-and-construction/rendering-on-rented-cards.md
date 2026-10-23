@@ -11,7 +11,12 @@ where the lights are on (lamps, lit windows, lanterns, fires). When the lights a
 
 So: **Cycles where any lamp, lit window, lantern or fire is on; EEVEE otherwise.** `explainer-film-place renderer-for`
 applies the rule and prints the reasons (a lamp other than the sun with energy, an emissive material that is lit, an
-object with the glow role). `explainer-film-place render` uses it. If the scene is lit and no rented card is set up,
+object with the glow role). `explainer-film-place render` uses it.
+
+One reason is this plugin's own addition, not the film owner's: **water in view also gives Cycles.** In EEVEE, still water
+came out as a flat dark slab, and in Cycles on a card the same canal scene had reflective water and strong relief (judged by
+eye, plugin 1.4.0 fix round). `renderer-for` names it ("water ... is in view"). The house number
+`place_render.cycles_when_water_in_view` switches it off if the owner's rule alone is wanted. If the scene is lit and no rented card is set up,
 do not quietly fall back to EEVEE: say so, and draw only tiny Cycles previews here, or ask the person to set up a card.
 The Scenario skills default to EEVEE for finals; the film owner's rule wins.
 
@@ -28,8 +33,8 @@ A "serverless endpoint" on the person's own rented-card account: a worker (a car
 does the job, and stops about 5 s after its last job. Billing runs per second while a worker is up, so nothing bills
 while nothing is drawn. A cold worker wakes in 20 to 22 s; a warm one answers in under 1 s (measured). Several workers
 may run at once, so several jobs can run side by side. A 4090 costs about US$1.10 an hour (measured, read 22 October
-2026; read the live price before you rely on it). A bill once came out about 2.5 times the seconds of work and was not
-explained, so never promise a cost from seconds alone.
+2026; read the live price before you rely on it). The seconds of work and the price on the day give an estimate, not a bill (the
+provider's own bill is the only truth, and a bill once came out well above the estimate without an explanation), so never promise a cost from seconds alone.
 
 ## 4. The one-time set-up (the PERSON does this, in the provider's web pages)
 
@@ -45,16 +50,34 @@ endpoint, and an agent may run `rent run` only with a job file, never a free-for
 
 ## 5. Settings at run time (never written down)
 
-The client reads `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID` (and `RENDER_STORE_FOLDER`, default
-`explainer-film-places`) from the environment, or from the JSON file named by `RENDER_SETTINGS_FILE`
-(`{"api_key": ..., "endpoint_id": ..., "store_folder": ...}`), which the person keeps OUTSIDE any repository. The client
-never prints, logs or stores them, and refuses a settings file inside a git repository. Never write them into a note, a
+The client reads `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID` (and `RENDER_STORE_FOLDER`, default `/workspace`; and
+`RENDER_REMOTE_BLENDER`, default `STORE/blender/blender`) from the environment, or from the file named by
+`RENDER_SETTINGS_FILE`: lines `NAME=VALUE` (`RUNPOD_API_KEY=...`, `RUNPOD_ENDPOINT_ID=...`, optionally
+`RENDER_STORE_FOLDER=...`; the environment wins). A JSON file with the same names as keys, or `api_key`, `endpoint_id`,
+`store_folder`, `remote_blender`, is read too. The file is kept OUTSIDE any repository. The client
+never prints, logs or stores them (an error message that would hold the key or the endpoint id is scrubbed first, and the
+web address in a message never includes the id), and refuses a settings file inside a git repository. Never write them into a note, a
 prompt, a log or the repository. `explainer-film-setup` says whether they are set, never their values.
 
 ## 6. Daily use
 
 - `explainer-film-place rent status | upload | run | job | wait | download | balance` and
-  `explainer-film-place render --job JOB.json` (the job file format is in `place-kit/README.md`).
+  `explainer-film-place render --job JOB.json --where auto` (see below). `--where rented` forces the card (the word `on-card`
+  is only for the client itself: it means "already on the card" and checks nothing). `--where auto` sends the job to the card
+  when a card is set up and the renderer is Cycles (previews too: Cycles here is 320 x 240 at 16 samples, too small to judge) or
+  finals are asked for; otherwise it draws tiny previews here and says so.
+- **The job file** is a small JSON file:
+  ```
+  { "scene": "FINISHED.blend", "out_folder": "pictures/round1", "views": [
+    { "name": "lane_wide", "camera": "View wide", "width": 1200, "height": 800, "samples": 96 },
+    { "name": "cottage", "camera": "View cottage", "kinds": ["final"], "width": 1600, "height": 1067 } ] }
+  ```
+  A view is drawn as a preview (and with `--finals` also as a final) unless it says `"kinds"`: exactly the pictures to draw for it
+  (`"preview"`, `"close_up"`, `"final"`), so one local picture at one size is `"kinds": ["final"]` and no wasted preview. The file
+  names are the view name plus the kind (`lane_wide_preview.jpg`; a view already called `closeup` is not named `closeup_closeup`).
+  Each picture gets a `.json` log beside it (engine, device, size, samples, seconds, scene hash, nearly black or not).
+- The first EEVEE picture of a finished scene on this computer takes about 70 s (the shaders build once); later ones 7 to 15 s
+  (measured on a canal scene of 94 objects).
 - Batch: one `run` that draws many pictures costs one wake-up; many tiny jobs cost many.
 - Each job at most about 55 minutes (measured limit); split longer work. A folder goes up as one bundle.
 - Write outputs into the store. Clear the remote output folder before a run (a stale picture once came back as a black road).

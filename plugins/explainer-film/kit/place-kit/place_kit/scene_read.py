@@ -6,6 +6,8 @@ and numpy; the role matcher and the judge work on the plain dictionaries it retu
 A concrete example: object_facts(obj) for a plank returns {"name": "plank 3", "collections": ["Place: huts"],
 "materials": ["oak"], "properties": {"place_role": "timber.plank"}, "size": [1.2, 0.15, 0.04], ...}.
 """
+import math
+
 import numpy as np
 
 import bpy
@@ -100,6 +102,83 @@ def object_size(obj):
     return high - low
 
 
+def oriented_size(obj, steps=90):
+    """(first side, second side, height) in metres of the smallest rectangle (seen from above) that holds the object, turned to fit it, and its height (the z extent). A wall turned 30 or
+    45 degrees has its true thickness and length here; the box along the world axes (object_size) would read it too thick. A big mesh is sampled (4000 points) to keep this quick."""
+    points = world_points(obj)
+    if len(points) == 0:
+        return (0.0, 0.0, 0.0)
+    if len(points) > 4000:
+        points = points[::len(points) // 4000 + 1]
+    xy = points[:, :2]
+    height = float(points[:, 2].max() - points[:, 2].min())
+    best = None
+    for k in range(steps):
+        angle = (math.pi / 2.0) * k / steps
+        along = xy @ np.array([math.cos(angle), math.sin(angle)])
+        across = xy @ np.array([-math.sin(angle), math.cos(angle)])
+        extents = (float(along.max() - along.min()), float(across.max() - across.min()))
+        area = extents[0] * extents[1]
+        if best is None or area < best[0] - 1e-12:
+            best = (area, extents)
+    return (best[1][0], best[1][1], height)
+
+
+def surface_samples(obj, count=6000):
+    """Points spread over the object's surface (in world metres, chosen by area, the same every run): a mesh of a few big faces still gives a full picture of where it lies."""
+    mesh = obj.data
+    mesh.calc_loop_triangles()
+    triangles = np.empty(len(mesh.loop_triangles) * 3, dtype=np.int64)
+    mesh.loop_triangles.foreach_get('vertices', triangles)
+    triangles = triangles.reshape(-1, 3)
+    points = world_points(obj)
+    if len(triangles) == 0:
+        return points
+    corners = points[triangles]
+    areas = np.linalg.norm(np.cross(corners[:, 1] - corners[:, 0], corners[:, 2] - corners[:, 0]), axis=1) / 2.0
+    if areas.sum() <= 0:
+        return points
+    rng = np.random.default_rng(1)
+    chosen = rng.choice(len(triangles), size=count, p=areas / areas.sum())
+    u, v = rng.random(count), rng.random(count)
+    flip = u + v > 1.0
+    u[flip], v[flip] = 1.0 - u[flip], 1.0 - v[flip]
+    picked = corners[chosen]
+    return picked[:, 0] + (picked[:, 1] - picked[:, 0]) * u[:, None] + (picked[:, 2] - picked[:, 0]) * v[:, None]
+
+
+def lane_skeleton(obj, stations=12):
+    """The centre line and width of a lane-shaped ground object, from its own mesh: ([[x, y], ...], width in metres). The mesh is cut into slices along its long direction and the average
+    point of each slice is one point of the line (the first and last slices are narrow, so the line reaches the lane's ends), so a lane that curves gets a curved line. The width is the
+    lane's area divided by the length of that line (a slice across a curve would read too wide). A lane that bends back on itself (a U) cannot be read this way: write its line in the settings."""
+    xy = surface_samples(obj)[:, :2]
+    centre = xy.mean(axis=0)
+    _, _, vt = np.linalg.svd(xy - centre, full_matrices=False)
+    axis, across = vt[0], vt[1]
+    along_values = (xy - centre) @ axis
+    across_values = (xy - centre) @ across
+    low, high = float(along_values.min()), float(along_values.max())
+    span = high - low
+    edges = np.concatenate([[low], np.linspace(low + 0.03 * span, high - 0.03 * span, stations - 1), [high]])
+    line = []
+    for k in range(stations):
+        inside = (along_values >= edges[k]) & (along_values <= edges[k + 1])
+        if inside.sum() >= 3:
+            line.append((float(along_values[inside].mean()), float(across_values[inside].mean())))
+    if len(line) < 2:
+        line = [(low, 0.0), (high, 0.0)]
+    middles = np.array([m for _, m in line])
+    if len(middles) >= 3:
+        smooth = middles.copy()
+        smooth[1:-1] = (middles[:-2] + middles[1:-1] + middles[2:]) / 3.0
+        middles = smooth
+    polyline = [centre + axis * t + across * m for (t, _), m in zip(line, middles)]
+    length = float(sum(np.linalg.norm(b - a) for a, b in zip(polyline[:-1], polyline[1:]))) or 1.0
+    scale = np.abs(np.array(obj.scale, dtype=np.float64))
+    area = float(sum(polygon.area for polygon in obj.data.polygons)) * float(scale[0] * scale[1])
+    return [[round(float(p[0]), 3), round(float(p[1]), 3)] for p in polyline], round(area / length, 3)
+
+
 def object_facts(obj):
     """Plain facts for the role matcher and the audit."""
     low, high = world_bounds(obj)
@@ -190,6 +269,19 @@ def mean_edge_length(obj):
     mesh.edges.foreach_get('vertices', edges)
     edges = edges.reshape(-1, 2)
     return float(np.linalg.norm(points[edges[:, 0]] - points[edges[:, 1]], axis=1).mean())
+
+
+def fine_edge_length(obj, percentile=20.0):
+    """A short edge length of the mesh in world metres: the given percentile of its edge lengths (0 for a mesh with no edges). On an even mesh it is the same as the mean; on a graded
+    ground (small squares where the viewer looks, big ones far away) it reads the small squares, which is what decides whether displacement can show."""
+    mesh = obj.data
+    if len(mesh.edges) == 0:
+        return 0.0
+    points = world_points(obj)
+    edges = np.empty(len(mesh.edges) * 2, dtype=np.int64)
+    mesh.edges.foreach_get('vertices', edges)
+    edges = edges.reshape(-1, 2)
+    return float(np.percentile(np.linalg.norm(points[edges[:, 0]] - points[edges[:, 1]], axis=1), percentile))
 
 
 def relief_metres(obj):

@@ -9,7 +9,8 @@ any plate is drawn from them:
   - glowing materials with a light base colour (lesson 89: a glow lit by its own lamp renders white);
   - sizes in props/index.json that do not match the saved model (round 1: the jacket "about 0.6 m wide" was 0.516);
   - each model's front (the way its lettering faces), measured, for the index;
-  - in Blender: bevels without hardened normals (lesson 67) and materials shared by many objects (join by material).
+  - in Blender: bevels without hardened normals (lesson 67) and materials shared by many objects (join by material);
+  - with --surfaces: materials that are a plain colour, with no picture and no normal map (a warning: it passes the faults above, and the place audit fails it).
 It reads .glb files with plain Python (numpy), or the scene open in Blender (bpy). Places and sizes are Blender
 metres (x across, y forward, z up); a .glb's own axes (y up) are turned into Blender's on reading.
 
@@ -23,6 +24,7 @@ Use:
   blender -b SCENE.blend --disable-autoexec --python model_lint.py -- [--report FILE] [--out FILE.json]
   blender -b BASE.blend --python ASSEMBLE.py --python model_lint.py -- ...   (after a place's assemble script)
   --only stripes,same-plane,floors,names,glass,glow,sizes,front   run only these checks
+  --surfaces                                                  also warn about plain-colour materials (no picture, no normal map); a warning, never a failure
   --json / --out FILE / --report FILE / --settings FILE           as every calculator (kit/calculators)
 The house numbers come from kit/film-settings.json (section views_and_models.model_lint and models); the report
 names each one it used. Exit 1 when a check fails (striped parts, same-plane faces, floors over ground, '.001' names,
@@ -154,7 +156,7 @@ def glb_materials(gltf, binary, folder):
         emissive = list(material.get('emissiveFactor', [0, 0, 0]))
         strength = material.get('extensions', {}).get('KHR_materials_emissive_strength', {}).get('emissiveStrength', 1.0)
         glows = (max(emissive) * strength > 0) or ('emissiveTexture' in material and strength > 0)
-        found.append({'name': material.get('name', ''), 'base_colour': list(base[:3]), 'base_picture': texture is not None,
+        found.append({'name': material.get('name', ''), 'base_colour': list(base[:3]), 'base_picture': texture is not None, 'normal_picture': 'normalTexture' in material,
                       'alpha_mode': material.get('alphaMode', 'OPAQUE'), 'alpha_from_picture': alpha_from_picture,
                       'picture_has_alpha': picture_has_alpha,
                       'glows': bool(glows), 'glow_colour': [e * strength for e in emissive]})
@@ -269,7 +271,7 @@ def parts_from_blender(scene=None):
 
 
 def blender_material_facts(material):
-    facts = {'name': material.name if material else '', 'base_colour': [1, 1, 1], 'base_picture': False, 'alpha_mode': 'OPAQUE',
+    facts = {'name': material.name if material else '', 'base_colour': [1, 1, 1], 'base_picture': False, 'normal_picture': False, 'alpha_mode': 'OPAQUE',
              'alpha_from_picture': False, 'glows': False, 'glow_colour': [0, 0, 0]}
     if material is None or not material.use_nodes:
         return facts
@@ -279,6 +281,8 @@ def blender_material_facts(material):
     base = principled.inputs['Base Color']
     facts['base_colour'] = list(base.default_value)[:3]
     facts['base_picture'] = base.is_linked
+    normal = principled.inputs['Normal']
+    facts['normal_picture'] = bool(normal.is_linked and any(link.from_node.type == 'NORMAL_MAP' and link.from_node.inputs['Color'].is_linked for link in normal.links))
     alpha = principled.inputs['Alpha']
     if alpha.is_linked:
         facts['alpha_mode'] = 'LINKED'
@@ -633,6 +637,26 @@ def check_materials(models, settings, only):
     return glass, glows, sorted(set(glows_over_pictures))
 
 
+def check_surfaces(models):
+    """The --surfaces check (a warning, never a failure): a material that is a plain colour with no picture and no normal map is what a model builds when it is only asked for a shape.
+    Returns {file: [material names]} and {file: number of materials used}."""
+    plain, used = {}, {}
+    for model in models:
+        seen, bare = set(), []
+        for part in model['parts']:
+            material = part['material']
+            if material['name'] in seen:
+                continue
+            seen.add(material['name'])
+            if material.get('glows') or material.get('alpha_mode') not in ('OPAQUE', None):
+                continue                                           # glass and lights are not surfaces to texture
+            if not material.get('base_picture') and not material.get('normal_picture'):
+                bare.append(material['name'])
+        plain[model['file']] = bare
+        used[model['file']] = len(seen)
+    return plain, used
+
+
 def measured_size(model):
     corners = np.concatenate([p['corners'].reshape(-1, 3) for p in model['parts']]) if model['parts'] else np.zeros((1, 3))
     low, high = corners.min(axis=0), corners.max(axis=0)
@@ -691,8 +715,8 @@ def check_index_entry(entry, size, settings):
 
 
 # ------------------------------------------------------------------------------------------------ the run
-def lint(models, settings, only=CHECKS, as_set=False, index=None, one_prop=None):
-    """Runs the checks; returns the result dict and plain report lines."""
+def lint(models, settings, only=CHECKS, as_set=False, index=None, one_prop=None, surfaces=False):
+    """Runs the checks; returns the result dict and plain report lines. surfaces=True also lists the plain-colour materials (a warning)."""
     result = {'files': [m['file'] for m in models], 'checks_run': list(only), 'stripes': [], 'same_plane': [], 'floors_over_ground': [],
               'names': {}, 'glass_alpha_from_picture': [], 'glowing_light_base': [], 'sizes': {}, 'fronts': {}, 'triangles': {}, 'blender': {}}
     lines = []
@@ -713,6 +737,8 @@ def lint(models, settings, only=CHECKS, as_set=False, index=None, one_prop=None)
             result['same_plane'] += find_same_plane(group, settings)
         if 'floors' in only:
             result['floors_over_ground'] += find_floors_over_ground(group, settings)
+    if surfaces:
+        result['plain_colour_materials'], materials_used = check_surfaces(models)
     glass, glows, over_pictures = check_materials(models, settings, only)
     result['glass_alpha_from_picture'], result['glowing_light_base'] = glass, glows
     result['glowing_over_a_picture'] = over_pictures
@@ -837,6 +863,15 @@ def lint(models, settings, only=CHECKS, as_set=False, index=None, one_prop=None)
             lines.append('')
             lines.append('Note: materials used by several objects (when building one model, join its parts by material: lesson 67): '
                          + '; '.join(f'{name} ({len(objects)})' for name, objects in busy))
+    if surfaces:
+        lines.append('')
+        for file_name, bare in result['plain_colour_materials'].items():
+            used = materials_used[file_name]
+            lines.append(f'{"WARN" if bare else "PASS"} Plain-colour materials in {os.path.basename(file_name)}: {len(bare)} of {used} (no picture and no normal map)'
+                         + (': ' + ', '.join(bare[:8]) + (' ...' if len(bare) > 8 else '') if bare else ''))
+        if any(result['plain_colour_materials'].values()):
+            lines.append('  Look: a place built of plain colours reads as boxes. Inside Blender run `explainer-film-place finish` (real normal maps, variation, wear); for a .glb, give each surface a base picture and a normal map '
+                         '(the model lint passes plain colours, the place audit does not).')
     result['failed'] = sorted(set(failures))
     lines.append('')
     lines.append('Verdict: ' + ('FAIL (' + ', '.join(result['failed']) + ')' if failures else 'PASS'))
@@ -876,6 +911,7 @@ def main(argv=None):
     parser.add_argument('--only', help='comma list of checks: ' + ','.join(CHECKS))
     parser.add_argument('--prop', action='store_true', help='each file is one prop: it must have one root named as the file')
     parser.add_argument('--lint-files', action='store_true', help='inside Blender: check the .glb files given instead of the open scene')
+    parser.add_argument('--surfaces', action='store_true', help='also warn about materials that are a plain colour (no picture, no normal map); never a failure')
     add_output_options(parser)
     args, _unknown = parser.parse_known_args(argv) if inside_blender else (parser.parse_args(argv), [])
     settings = load_settings(args.settings)
@@ -893,7 +929,7 @@ def main(argv=None):
     if args.index:
         with open(args.index) as handle:
             index = json.load(handle)
-    result, lines = lint(models, settings, only, args.as_set, index, True if args.prop else None)
+    result, lines = lint(models, settings, only, args.as_set, index, True if args.prop else None, surfaces=args.surfaces)
     if args.write_index:
         if not index:
             raise SystemExit('model_lint: --write-index needs --index')

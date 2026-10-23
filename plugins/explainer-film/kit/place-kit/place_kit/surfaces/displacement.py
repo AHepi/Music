@@ -1,9 +1,9 @@
-"""What this does: switches a material to REAL displacement where its role says so (roads, mud, thatch, rock ground), and makes sure the mesh under it is
+"""What this does: switches a material to REAL displacement where its role says so (every role whose `displace` flag is true in data/roles.json: nine in all, the soft and rough ground roles, stone walls and thatch), and makes sure the mesh under it is
 fine enough to show it. A Displacement node reads the surface's height picture (mid level 0.5, scale = the true depth in metres) and feeds the material
 output's Displacement; the material's method is set to "Displacement and Bump" (never Bump Only, where the node does nothing); the normal map's strength is
-multiplied by 0.6 where displacement is on (decision D7 of the 1.4.0 design: the coal mine yard did this; the cookbook measured no doubling). If the mesh is
-too coarse (edges longer than the house number) a ground object is regraded (ground_mesh.py) and anything else gets a Subdivision Surface modifier that
-makes it dense enough. It refuses to claim displacement on a flat plane: the audit reads the same facts and fails it.
+multiplied by 0.6 where displacement is on (decision D7 of the 1.4.0 design: an earlier test yard did this; the cookbook measured no doubling). If the mesh is
+too coarse (edges longer than the house number) a ground object is made fine by ground_mesh.make_fine (a plain rectangle is regraded, any other outline is subdivided in place so
+its shape is kept) and anything else gets a Subdivision Surface modifier that makes it dense enough. It refuses to claim displacement on a flat plane: the audit reads the same facts and fails it.
 It needs Blender (bpy). A concrete example: set_displacement(material, height_node_output, depth=0.06) wires the node and sets the method to BOTH.
 """
 import math
@@ -44,10 +44,12 @@ def prepare_mesh(obj, near_xy=None):
     from . import ground_mesh
     limit = house_numbers.value('place_surfaces.displacement_mesh_edge_metres_max')
     if (obj.get(names.ROLE) or '').startswith('ground.'):
-        report = ground_mesh.regrade_object(obj, near_xy)
-        if report:
-            return f'{obj.name}: regraded to {report["faces"]} faces (squares of {report["near_cell"]} m near the camera)'
-        return f'{obj.name}: the ground mesh is already fine'
+        if near_xy is None:
+            camera = bpy.context.scene.camera
+            low, high = scene_read.world_bounds(obj)
+            near_xy = (camera.matrix_world.translation.x, camera.matrix_world.translation.y) if camera is not None else ((low[0] + high[0]) / 2, (low[1] + high[1]) / 2)
+        said = ground_mesh.make_fine(obj, near_xy, limit)
+        return said or f'{obj.name}: the ground mesh is already fine'
     mean_edge = scene_read.mean_edge_length(obj)
     levels = levels_needed(mean_edge, limit)
     for modifier in list(obj.modifiers):

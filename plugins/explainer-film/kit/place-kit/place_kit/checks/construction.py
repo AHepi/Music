@@ -4,10 +4,12 @@ bed), or when it is joined into a carried part by overlapping it (a peg through 
 nothing, stop short of what they should meet, span too far, are turned inside out, have flickering twin faces, stand on nothing, or
 (for lights) sit inside a solid; and doorways with no floor behind them. Scattered pieces (plants, leaves, litter) are left out on purpose
 and the report says so.
-It is written in our own words from the garden bridge checks (a bridge that "made no sense" was rebuilt from the ground up and then proved:
+It is written in our own words from earlier bridge checks (a bridge that "made no sense" was rebuilt from the ground up and then proved:
 59 planks, none on fewer than 2 supports, 18 posts on footings). It reads the mesh as built (before modifiers), part by part (a loose piece
 of a mesh is its own part), and needs Blender (bpy), mathutils and numpy.
 
+A part that stands in water and rises through its surface (a boat afloat, a pile in a river) is carried by the water; a part joined into two carried parts (a rail tenoned into two posts)
+is framed in and carried; a part may sit up to 4 cm into what carries it (a board bedded into its post, a post set into the ground) and still count as resting on it.
 A concrete example: a plank lying on two stringers that lie on two posts that stand on the ground passes; the same plank lifted 2 cm fails
 with "floats" and the gap in millimetres; a post 4 cm short of its beam is reported short by 40 mm.
 The numbers (touch 5 mm, rest patch 16 square centimetres within 8 mm, overlap 4 cm, span 1.38 m, floating over 5 mm, z-fight 1 mm) are the
@@ -54,10 +56,10 @@ class Part:
             self._bvh = BVHTree.FromPolygons([tuple(v) for v in self.V], [tuple(t) for t in self.T], epsilon=0.0)
         return self._bvh
 
-    def face_samples(self, spacing, down_only=False, max_count=2500):
+    def face_samples(self, spacing, down_only=False, max_count=2500, up_only=False):
         """Points on the part's triangles about `spacing` apart (the corners, edge midpoints and a grid inside bigger triangles). down_only keeps
-        triangles that face down (the underside, where a part rests)."""
-        key = (round(spacing, 4), down_only)
+        triangles that face down (the underside, where a part rests); up_only keeps triangles that face up (the top, where something may rest on it)."""
+        key = (round(spacing, 4), down_only, up_only)
         if key in self._down:
             return self._down[key]
         tri = self.V[self.T]                                      # (n, 3, 3)
@@ -65,7 +67,7 @@ class Part:
         lengths = np.linalg.norm(normals, axis=1)
         valid = lengths > 1e-12
         normals[valid] /= lengths[valid][:, None]
-        keep = (normals[:, 2] < -0.5) & valid if down_only else valid
+        keep = (normals[:, 2] < -0.5) & valid if down_only else (normals[:, 2] > 0.5) & valid if up_only else valid
         if down_only and not keep.any():
             lowest = tri[:, :, 2].mean(axis=1)
             keep = lowest <= np.percentile(lowest, 20)
@@ -105,6 +107,8 @@ def _loose_parts(obj, role_info, roles_table):
     tri = np.empty(len(mesh.loop_triangles) * 3, dtype=np.int64)
     mesh.loop_triangles.foreach_get('vertices', tri)
     tri = tri.reshape(-1, 3)
+    if parts.is_mirrored(matrix):
+        tri = tri[:, [0, 2, 1]]            # a negative scale (a mirrored wall) turns every triangle round: turn it back, so up, inside and outside still mean what they say
     labels, number = scene_read.loose_part_labels(mesh)
     role = role_info.get('role') or ''
     spec = roles_table['roles'].get(role, {})
@@ -139,22 +143,24 @@ def _boxes_overlap_matrix(parts_list, margin):
     return pairs
 
 
-def rest_patch(upper, lower_bvh, spacing, reach, lower_box=None):
+def rest_patch(upper, lower_bvh, spacing, reach, lower_box=None, sink=0.0):
     """How much of `upper`'s underside lies within `reach` of an up-facing face of the other tree and not below it: (area in square metres,
-    smallest gap in metres)."""
+    smallest gap in metres). A part may also sit a little INTO the other (up to `sink` metres, for example a board bedded 6 mm into its post, or a post set into the ground): that
+    counts as resting, and the gap then comes out negative (minus how far it sits in)."""
     samples = upper.face_samples(spacing, down_only=True)
     if lower_box is not None:
         lo, hi = lower_box
-        samples = samples[np.all((samples >= lo - reach) & (samples <= hi + reach), axis=1)]
+        samples = samples[np.all((samples >= lo - reach - sink) & (samples <= hi + reach + sink), axis=1)]
     count, gap = 0, None
     for p in samples:
-        hit = lower_bvh.find_nearest(Vector(p), reach)
+        hit = lower_bvh.find_nearest(Vector(p), reach + sink)
         if hit[0] is None:
             continue
         location, normal = hit[0], hit[1]
-        if normal.z > 0.6 and p[2] >= location.z - 0.003:
+        height = p[2] - location.z
+        if normal.z > 0.6 and -sink - 0.003 <= height <= reach:
             count += 1
-            gap = (p[2] - location.z) if gap is None else min(gap, p[2] - location.z)
+            gap = height if gap is None else min(gap, height)
     return count * spacing * spacing, gap
 
 
@@ -173,8 +179,9 @@ def long_axis(part):
     return centre, np.array([axis2[0], axis2[1], 0.0])
 
 
-def unsupported_span(part, combined_bvh, step, reach):
-    """The longest stretch (metres) along the part's long axis where nothing is within `reach` under it, between two supported stretches."""
+def unsupported_span(part, support_trees, step, reach):
+    """The longest stretch (metres) along the part's long axis where nothing holds it up from below, between two supported stretches. A spot is held up when an up-facing
+    surface of one of `support_trees` (the parts around it and the ground) lies within `reach` under its underside there (the same test as the rest patch)."""
     centre, axis = long_axis(part)
     if np.linalg.norm(axis) < 1e-9:
         return 0.0
@@ -189,8 +196,14 @@ def unsupported_span(part, combined_bvh, step, reach):
         if bottom[0] is None:
             supported.append(None)                      # the long axis leaves the part here (a bent or diagonal part)
             continue
-        hit = combined_bvh.ray_cast(Vector((x, y, bottom[0].z - 0.0005)), Vector((0, 0, -1)), 2.0)
-        supported.append(hit[0] is not None and (bottom[0].z - hit[0].z) <= reach)
+        point = Vector((x, y, bottom[0].z))
+        held = False
+        for tree in support_trees:
+            hit = tree.find_nearest(point, reach)
+            if hit[0] is not None and hit[1].z > 0.6 and point.z >= hit[0].z - 0.003:
+                held = True
+                break
+        supported.append(held)
     longest, run, seen_support = 0.0, 0, False
     for state in supported:
         if state is None:
@@ -236,13 +249,13 @@ def check_construction(settings=None, owner=None, out_path=None):
     z_fight = number('place_construction.z_fight_gap_millimetres') / 1000.0
     span_step = number('place_construction.walk_ray_step_metres')
     spacing = number('place_construction.sample_spacing_metres')
+    sink = number('place_construction.sunk_in_centimetres_max') / 100.0          # a part may sit this far into what carries it and still count as resting on it
     max_parts = number('place_construction.parts_checked_max')
     rules = settings.rules_dict() if hasattr(settings, 'rules_dict') else (settings or {})
     roles_table = settings_file.roles_table()
     bpy.context.view_layer.update()
     objects = scene_read.mesh_objects(only_visible=True)
     tagged = roles_module.tag_objects([scene_read.object_facts(o) for o in objects], rules, roles_table)['by_object']
-    parts.refresh_ground()
     exempt, ground_objects, all_parts = [], [], []
     for obj in objects:
         info = tagged.get(obj.name, {})
@@ -253,6 +266,7 @@ def check_construction(settings=None, owner=None, out_path=None):
             ground_objects.append(obj)
         else:
             all_parts.extend(_loose_parts(obj, info, roles_table))
+    parts.refresh_ground(ground_objects)         # the ground the seat and rise questions are asked of is the ground by THESE roles (a role rule of the settings counts as much as a place_role property)
     ground_blocks = [parts.world_triangles(obj) for obj in ground_objects]
     ground_bvh = _build_tree([v for v, _ in ground_blocks], [t for _, t in ground_blocks])
     sampled_coarser = len(all_parts) > max_parts
@@ -265,32 +279,42 @@ def check_construction(settings=None, owner=None, out_path=None):
     rest_on = {i: set() for i in range(count)}
     embedded = {i: set() for i in range(count)}
     touching = {i: set() for i in range(count)}
-    grounded, ground_gap = set(), {}
+    sunk_in = {}                                   # part -> how far (metres) it sits into the part that carries it
+    grounded, ground_gap, ground_seen = set(), {}, {}
     for i, part in enumerate(all_parts):
         if part.needs_support == 'none':
             grounded.add(i)
             continue
-        centre_xy = (part.bmin[:2] + part.bmax[:2]) / 2
-        ground_z = max(parts.ground_height_at(*point) for point in [tuple(centre_xy), (part.bmin[0], part.bmin[1]), (part.bmax[0], part.bmax[1])])
+        # the ground under the part is read at the same footprint points that parts.seat_on_ground uses, so a part that was seated is never failed for a different corner; a point with no ground
+        # object under it is unknown, never "height 0"
+        ground_z, ground_name = parts.ground_under_box(part.bmin, part.bmax)
         lowest = float(part.bmin[2])
-        patch = rest_patch(part, ground_bvh, spacing, reach)[0] if ground_bvh is not None else 0.0
-        if patch * 1e4 >= rest_cm2 or (ground_z - 1.0 <= lowest <= ground_z + reach and part.bmax[2] > ground_z):
+        patch = rest_patch(part, ground_bvh, spacing, reach, sink=sink)[0] if ground_bvh is not None else 0.0
+        if patch * 1e4 >= rest_cm2 or (ground_z is not None and ground_z - 1.0 <= lowest <= ground_z + reach and part.bmax[2] > ground_z):
             grounded.add(i)
-        ground_gap[i] = lowest - ground_z
+        if ground_z is not None:
+            ground_gap[i] = lowest - ground_z
+            ground_seen[i] = (ground_name, ground_z)
     pairs = _boxes_overlap_matrix(all_parts, max(reach, touch))
+    neighbours = {i: set() for i in range(count)}
+    for i, j in pairs:
+        neighbours[i].add(j)
+        neighbours[j].add(i)
     for i, j in pairs:
         a, b = all_parts[i], all_parts[j]
         for upper, lower, u, l in ((a, b, i, j), (b, a, j, i)):
-            area, _ = rest_patch(upper, lower.bvh, spacing, reach, lower_box=(lower.bmin, lower.bmax))
+            area, deepest = rest_patch(upper, lower.bvh, spacing, reach, lower_box=(lower.bmin, lower.bmax), sink=sink)
             if area * 1e4 >= rest_cm2:
                 rest_on[u].add(l)
+                if deepest is not None and deepest < 0:
+                    sunk_in[u] = max(sunk_in.get(u, 0.0), -deepest)
         try:
             crossings = a.bvh.overlap(b.bvh)
         except Exception:   # noqa: BLE001 - a degenerate tree counts as no overlap
             crossings = []
         if crossings:
             extent = np.minimum(a.bmax, b.bmax) - np.maximum(a.bmin, b.bmin)
-            if float(extent.max()) * 100.0 >= overlap_cm:
+            if float(extent.min()) * 100.0 >= overlap_cm:             # the shallowest way through the overlap is how deep one part really sits in the other
                 embedded[i].add(j)
                 embedded[j].add(i)
         if a.may_hang or b.may_hang:
@@ -299,14 +323,42 @@ def check_construction(settings=None, owner=None, out_path=None):
                     touching[f].add(s)
                     touching[s].add(f)
 
-    # ---- who is carried: by resting chains from the ground (carried); else by being joined or touching a carried part (hung)
-    carried = set(grounded)
+    # ---- a part that stands in water and rises through its surface (a boat afloat, a pile in a river) is carried by the water: its underside is below the water's top and its top is above it
+    afloat = {}
+    water_parts = [j for j, other in enumerate(all_parts) if (other.role or '').startswith('water.')]
+    for i, part in enumerate(all_parts):
+        if (part.role or '').startswith('water.') or i in grounded:
+            continue
+        centre_xy = (part.bmin[:2] + part.bmax[:2]) / 2
+        for j in water_parts:
+            water = all_parts[j]
+            if np.all(centre_xy >= water.bmin[:2]) and np.all(centre_xy <= water.bmax[:2]) and part.bmin[2] < water.bmax[2] <= part.bmax[2] + 1e-9:
+                afloat[i] = j
+                rest_on[i].add(j)
+                break
+
+    # ---- who is carried: by resting chains from the ground, by being set into the top of a carried part (a stake driven in), or by being framed in (joined into two or more
+    # carried parts, like a rail tenoned into two posts); else by being joined to or touching a carried part with nothing under it (hung)
+    carried, framed = set(grounded), {}
     changed = True
     while changed:
         changed = False
         for i in range(count):
-            if i not in carried and any(j in carried for j in rest_on[i]):
+            if i in carried:
+                continue
+            if any(j in carried for j in rest_on[i]):
                 carried.add(i)
+                changed = True
+                continue
+            holders = sorted(j for j in embedded[i] if j in carried)
+            sets_into_top = [j for j in holders if all_parts[i].bmin[2] < all_parts[j].bmax[2] and all_parts[i].bmax[2] > all_parts[j].bmax[2]]
+            if sets_into_top:
+                carried.add(i)
+                rest_on[i].add(sets_into_top[0])
+                changed = True
+            elif len(holders) >= 2:
+                carried.add(i)
+                framed[i] = holders
                 changed = True
     joined, hung = set(carried), set()
     changed = True
@@ -325,10 +377,12 @@ def check_construction(settings=None, owner=None, out_path=None):
     # ---- facts per part
     facts = {}
     for i, part in enumerate(all_parts):
-        facts[i] = {'carried': i in joined, 'via': ([all_parts[j].name for j in sorted(rest_on[i])][:3] + (['ground'] if i in grounded else [])),
-                    'hung': i in hung, 'hang_allowed': bool(part.may_hang), 'gap_mm': 0.0, 'floating': i not in joined, 'short_by_mm': 0, 'span_max_m': 0.0,
+        facts[i] = {'carried': i in joined, 'via': ([all_parts[j].name for j in sorted(rest_on[i])][:3] + (['ground'] if i in grounded else [])
+                                                    + ([f'joined into {", ".join(all_parts[j].name for j in framed[i][:3])}'] if i in framed else [])),
+                    'hung': i in hung, 'hang_allowed': bool(part.may_hang), 'framed': i in framed, 'afloat_on': all_parts[afloat[i]].name if i in afloat else None, 'sunk_in_mm': round(sunk_in.get(i, 0.0) * 1000.0, 1),
+                    'gap_mm': 0.0, 'floating': i not in joined, 'short_by_mm': 0, 'span_max_m': 0.0,
                     'max_span_m': part.max_span, 'inside_out': False, 'coplanar_faces': 0, 'buried_light': False, 'opening_floor_gap_m': None,
-                    'seat_error_m': None, 'needs_ground': part.needs_support == 'ground'}
+                    'seat_error_m': None, 'seat_ground_object': None, 'seat_ground_m': None, 'needs_ground': part.needs_support == 'ground', 'rise_m': None}
         if i not in joined and combined_bvh is not None:
             best = None
             for p in part.face_samples(spacing * 2, down_only=True)[:200]:
@@ -338,17 +392,40 @@ def check_construction(settings=None, owner=None, out_path=None):
             facts[i]['gap_mm'] = round((best if best is not None else 99.0) * 1000.0, 1)
         volume, closed = signed_volume_and_closed(part)
         facts[i]['inside_out'] = bool(closed and volume < 0)
-        if part.max_span and combined_bvh is not None:
-            facts[i]['span_max_m'] = round(unsupported_span(part, combined_bvh, span_step, reach), 3)
-        if part.needs_support == 'ground' and i in grounded and not rest_on[i]:
-            facts[i]['seat_error_m'] = round(float(ground_gap.get(i, 0.0)), 4)
+        if part.max_span:
+            around = [all_parts[j].bvh for j in sorted(neighbours[i])] + ([ground_bvh] if ground_bvh is not None else [])
+            facts[i]['span_max_m'] = round(unsupported_span(part, around, span_step, reach), 3)
+        if part.needs_support == 'ground' and i in grounded and not rest_on[i] and i in ground_gap:
+            facts[i]['seat_error_m'] = round(float(ground_gap[i]), 4)
+            facts[i]['seat_ground_object'], facts[i]['seat_ground_m'] = ground_seen[i][0], round(float(ground_seen[i][1]), 3)
+
+    # ---- the rise of a step: its top minus the top of what it rests on or of the next lower step beside it (top to top), never its own height from the bed
+    step_reach = 0.35
+    step_parts = [i for i, part in enumerate(all_parts) if part.role == 'stone.step']
+    for i in step_parts:
+        part = all_parts[i]
+        tops = [float(all_parts[j].bmax[2]) for j in rest_on[i] if j != i]
+        for j in step_parts:
+            other = all_parts[j]
+            if j == i or float(other.bmax[2]) >= float(part.bmax[2]) - 0.02:
+                continue
+            gap = np.maximum(np.maximum(other.bmin[:2] - part.bmax[:2], part.bmin[:2] - other.bmax[:2]), 0.0)
+            if float(np.hypot(gap[0], gap[1])) <= step_reach:
+                tops.append(float(other.bmax[2]))
+        if tops:
+            base = max(tops)
+        elif i in ground_seen:
+            base = float(ground_seen[i][1])
+        else:
+            continue
+        facts[i]['rise_m'] = round(float(part.bmax[2]) - base, 4)
 
     # ---- a post or footing a few centimetres under something it does not touch is "short"
     for i, part in enumerate(all_parts):
         if part.role not in CARRIER_ROLES or combined_bvh is None:
             continue
         best = None
-        for p in part.face_samples(spacing * 2)[:300]:
+        for p in part.face_samples(spacing * 2, up_only=True)[:300]:
             if p[2] < part.bmax[2] - 0.01:
                 continue
             hit = combined_bvh.ray_cast(Vector((p[0], p[1], p[2] + 0.0005)), Vector((0, 0, 1)), SHORT_REACH_METRES)
@@ -378,13 +455,17 @@ def check_construction(settings=None, owner=None, out_path=None):
         for i, part in enumerate(all_parts):
             if part.role == 'timber.door':
                 centre = (part.bmin + part.bmax) / 2
-                hit = combined_bvh.ray_cast(Vector((centre[0], centre[1], part.bmin[2] + 0.001)), Vector((0, 0, -1)), 50.0)
-                facts[i]['opening_floor_gap_m'] = round(float(part.bmin[2] - hit[0].z), 3) if hit[0] is not None else 99.0
+                # the floor under the sill: the ground there, or the top of whatever lies just below the sill (a ray from the sill downward, started 0.5 mm under the door's own underside)
+                floor = parts.ground_height_at(float(centre[0]), float(centre[1]))
+                hit = combined_bvh.ray_cast(Vector((centre[0], centre[1], part.bmin[2] - 0.0005)), Vector((0, 0, -1)), 50.0)
+                if hit[0] is not None and hit[1].z > 0.6:
+                    floor = max(floor, hit[0].z)
+                facts[i]['opening_floor_gap_m'] = round(max(float(part.bmin[2] - floor), 0.0), 3)
 
     # ---- lights inside a solid: a ray up from the lamp crosses an odd number of surfaces
     lamps_buried = []
     if combined_bvh is not None:
-        for lamp in [o for o in bpy.context.scene.objects if o.type == 'LIGHT' and not o.hide_render]:
+        for lamp in [o for o in bpy.context.scene.objects if o.type == 'LIGHT' and not o.hide_render and o.data.type != 'SUN']:     # a sun shines from far away: where its object sits does not matter
             origin, crossings = lamp.matrix_world.translation.copy(), 0
             direction = Vector((0.0001, 0.0002, 1.0)).normalized()
             for _ in range(40):
@@ -415,6 +496,11 @@ def check_construction(settings=None, owner=None, out_path=None):
             now['opening_floor_gap_m'] = max(now['opening_floor_gap_m'] or 0.0, fact['opening_floor_gap_m'])
         if fact['seat_error_m'] is not None and (now['seat_error_m'] is None or abs(fact['seat_error_m']) > abs(now['seat_error_m'])):
             now['seat_error_m'] = fact['seat_error_m']
+            now['seat_ground_object'], now['seat_ground_m'] = fact['seat_ground_object'], fact['seat_ground_m']
+        if fact.get('rise_m') is not None:
+            now['rise_m'] = max(now.get('rise_m') or 0.0, fact['rise_m'])
+        now['framed'] = now.get('framed', False) or fact.get('framed', False)
+        now['sunk_in_mm'] = max(now.get('sunk_in_mm', 0.0), fact.get('sunk_in_mm', 0.0))
     for obj in objects:
         if obj.name in folded:
             sink = float(obj.get(names.SEAT_SINK, 0.0))

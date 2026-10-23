@@ -65,17 +65,26 @@ it. Every number is judged unless marked; all are house numbers in `film-setting
   square centimetres within 8 mm, and the carrier is itself carried, all the way down to the ground. Touching is not
   carrying: a part that touches a carrier only along an edge, or that is carried only by something that floats, fails.
 - **Overlap** between two joined parts at least 4 cm.
+- **Framed in** (checked, plugin 1.4.0 fix round): a part joined at least 4 cm into TWO or more carried parts, such as a gate rail tenoned into both posts, counts as carried, and it needs no role that may hang. A part joined into only
+  ONE carried part, with its other end in the air, is "hung": allowed only for roles that may hang. The roles that may hang (data `roles.json`, `may_hang`): `timber.door`, `timber.shutter`, `timber.fence`, `iron.fitting`, `prop.rope`
+  and `glass.window`. So a gate's leaf is a `timber.fence` or `timber.door`; a frame whose rails are `timber.beam` needs both ends in posts.
+- **Sunk in**: a part may sit up to 4 cm into what carries it and still counts as resting on it (a board bedded into its post, a post set into the ground; `place_construction.sunk_in_centimetres_max`, invented). The facts say how
+  far it sits in, in millimetres. A stake driven 4 cm or more into the top of a carried part, and sticking out above it, is carried by it.
+- **Afloat**: a part that goes down through a water plane and out above it (a boat, a pile in a river) is carried by the water. A hull that hangs 3 cm above the water is reported as "floating in the air" (a fail). For a boat, model the hull below the waterline
+  as well as above it; the check does not need its underside exactly on the water plane.
 - **Span**: no stretch between supports longer than 1.38 m (from the garden's 1.4 m), found by rays straight down every
   5 cm along planks and beams.
 - **Floating**: a gap over 5 mm fails. A gap between 5 mm and the carrier's expected gap is reported as short.
 - **Hung**: a part carried from above (a lantern on a hook) is allowed only for roles that may hang.
-- **Ground seating**: a part meant to stand on the ground is within 2 cm of the ground height (invented).
+- **Ground seating**: a part meant to stand on the ground is within 2 cm of the ground height (invented). The ground is read at the SAME five points under the part's box that `pk.seat_on_ground` uses (its centre and its four
+  corners pulled in a tenth), so a part that was seated is not failed for another corner; a point with no ground object under it is unknown, not height 0; and the report names the ground object and height it measured against.
+  A wall that stands on a canal bed beside a higher towpath is read against the bed. If the ground named is not the one the part stands on, a corner of its box lies over the other ground object: move that corner clear.
 - **Doorway floor**: a floor within 0.30 m below the sill (invented).
-- **Inside-out closed parts** fail: a mesh whose volume is negative shows only from inside. The street's scene study found
+- **Inside-out closed parts** fail: a mesh whose volume is negative shows only from inside. An object with a negative scale (a mirrored wall) is turned back before this test, so a mirrored wall is not called inside out. The street's scene study found
   73 such parts that nobody had noticed.
 - **Coplanar faces**: two overlapping faces within 1 mm of the same plane flicker. The garden had 77 deck faces fighting a
   plinth top.
-- **Buried lights**: a light inside solid stone, or a glow box buried inside a stone lantern, reads as a flat white
+- **Buried lights** (point, spot and area lamps; a sun shines from far away, so where its object sits does not matter): a light inside solid stone, or a glow box buried inside a stone lantern, reads as a flat white
   cut-out (the garden's lantern); put the glow box 3 cm proud of its opening. A lamp inside its own glow box is blocked
   in Cycles.
 - **Walkability** along declared routes: rays every 5 cm, steps between neighbours at most 2 cm, slope at most 1 in 20.
@@ -84,6 +93,8 @@ it. Every number is judged unless marked; all are house numbers in `film-setting
 
 `explainer-film-place audit` also runs the **scale check**: each object's size against the facts table. It warns when a
 size is out of range and fails beyond the fail factor (1.5 times: invented). A 1.0 m door fails; a 1.7 m door passes.
+Sizes are read from the object's OWN sides (the smallest rectangle that holds it seen from above, and its height), so a wall turned 45 degrees is still as thick as it is. The step rise is read by the construction check, top
+to top, and judged by the role `stone.step` (not by a name): a flight of 17 cm steps passes whether it is built from slabs on a core or from solid blocks, and one 1.8 m block called a step fails.
 
 ## The scene study before building (when the place already exists)
 

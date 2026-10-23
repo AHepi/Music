@@ -54,6 +54,11 @@ def rule_matches(match, obj):
     return tested
 
 
+def _material_only(rule):
+    match = rule.get('match') or {}
+    return bool(match.get('materials')) and not (match.get('names') or match.get('collections') or match.get('properties'))
+
+
 def material_rule_role(settings_roles, material_name):
     """The role a material name alone maps to (rules that only match materials), or None."""
     for rule in settings_roles:
@@ -64,20 +69,33 @@ def material_rule_role(settings_roles, material_name):
     return None
 
 
+def _singular(text):
+    """'Roofs and walls' -> 'Roof and wall': a plural in a collection name reads as the single word (a word ending in ss, like grass, is left alone)."""
+    return re.sub(r'\b(\w{3,}?)(?<!s)s\b', r'\1', text)
+
+
 def hint_role(roles_table, obj):
-    """The first role in data/roles.json whose name hint fits the object's name, collection or material names."""
+    """The first role in data/roles.json whose name hint fits the object's name, collection or material names. The generic role's hints (a name like "Object.012" says nothing) count
+    only when nothing else fits, so a collection called "Roofs" still decides for an object called "Object.012"."""
     texts = [re.sub(r'[_\-.]+', ' ', t) for t in [obj.get('name', '')] + list(obj.get('collections') or []) + list(obj.get('materials') or [])]
+    texts = [t for pair in ((t, _singular(t)) for t in texts) for t in pair]            # each text also in its singular form (same rank)
     best = None
+    generic = False
     for role_id, spec in roles_table.get('roles', {}).items():
         for pattern in spec.get('name_hints', []):
             for position, text in enumerate(texts):
                 if re.search(pattern, text, re.I):
+                    if role_id == FALLBACK_ROLE:
+                        generic = True
+                        break
                     # the object's own name counts most, then its collection, then its materials
-                    rank = position if position == 0 else 1 + position
+                    rank = (position // 2) if position // 2 == 0 else 1 + position // 2
                     if best is None or rank < best[0]:
                         best = (rank, role_id)
                     break
-    return best[1] if best else None
+    if best:
+        return best[1]
+    return FALLBACK_ROLE if generic else None
 
 
 def tag_object(obj, settings, roles_table):
@@ -95,6 +113,8 @@ def tag_object(obj, settings, roles_table):
                 break
         else:
             for index, rule in enumerate(settings.get('roles') or [], start=1):
+                if _material_only(rule):
+                    continue              # a rule that names only a material decides that material's SLOT (below), not the whole object
                 if rule_matches(rule.get('match'), obj):
                     result.update(role=rule['role'], how=f'settings rule {index}', surface=rule.get('surface'))
                     break
@@ -102,6 +122,13 @@ def tag_object(obj, settings, roles_table):
                 hinted = hint_role(roles_table, obj)
                 if hinted:
                     result.update(role=hinted, how='name hint')
+    if result['role'] is None:
+        # nothing named the object itself: the first material rule that fits one of its materials gives it its role (an object with only an "iron band" material is iron)
+        for material_name in obj.get('materials') or []:
+            slot = material_rule_role(settings.get('roles') or [], material_name)
+            if slot:
+                result.update(role=slot, how='material rule')
+                break
     if result['role'] is None:
         return result
     slot_roles = []
@@ -189,3 +216,23 @@ def off_entries_for(role_id, treatment, settings):
                 found.append(entry)
                 break
     return found
+
+
+def role_list_lines(roles_table):
+    """One plain line per role (id, what it is, what it requires beyond its class) for `explainer-film-place roles --list`, grouped by class, so a newcomer can find the id of a step,
+    a coping stone or a weir without opening the data file. Plain Python."""
+    lines = []
+    current = None
+    for role_id, spec in roles_table.get('roles', {}).items():
+        klass = spec.get('class')
+        if klass != current:
+            current = klass
+            required = roles_table.get('classes', {}).get(klass, {}).get('requires', [])
+            lines.append(f'== {klass}' + (f' (requires {", ".join(required)})' if required else ' (nothing is required of it)'))
+        flags = []
+        if spec.get('displace'):
+            flags.append('real displacement')
+        if spec.get('may_hang'):
+            flags.append('may hang from above')
+        lines.append(f'{role_id}: {spec.get("meaning", "(no meaning written)")}' + (f' [{"; ".join(flags)}]' if flags else ''))
+    return lines

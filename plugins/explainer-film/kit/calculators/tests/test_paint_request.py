@@ -67,6 +67,12 @@ header = ' '.join(lines[:1])
 check.true('the style header is the ledgers\' first two sentences word for word', NOTICE_LEDGER['paintings'][0]['prompt'].startswith(header)
            and PEOPLE_LEDGER['paintings'][0]['prompt'].startswith(header), recorded='notice-corner-paintings.json and people-test-paintings.json prompts',
            proves='only that the template holds the words (an echo); lesson 97 is why they matter')
+dry_never, dry_keep = pr.wetness_words(sentences, False)
+wet_never, wet_keep = pr.wetness_words(sentences, True)
+check.true('the default words forbid every puddle and reflection and keep nothing wet (the notice corner\'s and people test\'s words, unchanged)', dry_never.startswith('puddles or reflections;') and dry_keep == '',
+           recorded='notice-corner-paintings.json and people-test-paintings.json prompts end "Never add: ...; puddles or reflections; a moon..."')
+check.true('--keep-wetness keeps the wet ground and forbids only NEW puddles and reflections (a place built wet is not painted dry)', wet_never.startswith('new puddles or reflections') and 'wet ground' in wet_keep and 'image 1' in wet_keep,
+           proves='the painter template\'s wet-place words no longer have to be changed by hand for a place built wet')
 look = dict(settings.value('painting_tools.paint_request.film_look'))
 film = pm.stage_finish(np.array([[46, 39, 32]], float), look)[0]
 hue, _ = pm.hue_degrees_and_saturation(film)

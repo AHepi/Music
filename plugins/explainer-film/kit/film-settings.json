@@ -4453,10 +4453,10 @@
    "source": "the plugin 1.4.0 design (22 October 2026): objects the kit could only give a fallback role (prop.generic); more than this is a look, far more a fail"
   },
   "fallback_role_share_fail": {
-   "value": 0.5,
+   "value": 0.15,
    "unit": "share of objects",
    "kind": "invented",
-   "source": "the plugin 1.4.0 design (22 October 2026): above this share the roles say nothing"
+   "source": "the plugin 1.4.0 design (22 October 2026) said 0.5; lowered to 0.15 in the 1.4.0 fix round, because after finish a roleless object only warns and a harbour of grey stone piles could pass at 0.5: above this share the roles say nothing"
   },
   "required_treatments_missing_allowed": {
    "value": 0,
@@ -4555,6 +4555,12 @@
    "unit": "gigabytes",
    "kind": "judged",
    "source": "the garden character job (procedural-textures/garden/character, log 31): card memory cap"
+  },
+  "ground_area_growth_max": {
+   "value": 1.5,
+   "unit": "times",
+   "kind": "judged",
+   "source": "plugin 1.4.0 fix round: a ground object whose outline area grew more than this after the roads step was reshaped into its bounding box (a curved lane became a rectangle: the fault the code review measured grew its area 3.4 times; a correct change keeps it at 1.0)"
   }
  },
  "place_construction": {
@@ -4654,6 +4660,12 @@
    "unit": "parts",
    "kind": "invented",
    "source": "the plugin 1.4.0 design (22 October 2026): above this the check samples fewer rays a part and says so"
+  },
+  "sunk_in_centimetres_max": {
+   "value": 4,
+   "unit": "centimetres",
+   "kind": "judged",
+   "source": "plugin 1.4.0 fix round (23 October 2026): the smoke check found a board bedded 6 mm into its post failing as \"floats\"; a part may sit this far into what carries it and still count as resting on it (the same size as the overlap that counts as joined, judged from the garden bridge)"
   }
  },
  "place_scale": {
@@ -4831,7 +4843,7 @@
    "value": 0.03,
    "unit": "metres",
    "kind": "invented",
-   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): the yard ruts were 4 to 9 cm deep; a road with less relief than this reads flat"
+   "source": "this plugin's own first try: a road with less relief than 3 cm reads flat (the coal mine yard's ruts, mine-scene/modules/ground_and_yard.py RUT_DEPTH, are 0.15 m deep, so 3 cm is a low floor; nobody has measured where a lane starts to read flat)"
   },
   "rut_depth_metres": {
    "value": [
@@ -4840,7 +4852,7 @@
    ],
    "unit": "metres",
    "kind": "invented",
-   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py): yard ruts 4 to 9 cm; deeper for an unkept lane"
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py) has RUT_DEPTH 0.15 m (about 0.13 to 0.21 m with its variation), gauge 1.24 m, a trench about 0.4 m across at half depth; this plugin's lighter lane (5 to 15 cm, 8 cm by default) is its own first try, so the kind stays invented"
   },
   "cart_gauge_metres": {
    "value": [
@@ -5100,7 +5112,7 @@
    "kind": "measured",
    "source": "the rented-card guide (an RTX 4090 on a pay-per-second endpoint)",
    "date_read": "2026-10-22",
-   "note": "A price shown on the day, not a bill: one bill came out 2.5 times the work seconds and was never explained, so never promise a cost from seconds alone."
+   "note": "A price shown on the day, not a bill: one bill came out well above the estimate from the work seconds and was never explained, so never promise a cost from seconds alone."
   },
   "workers_max": {
    "value": 3,
@@ -5116,6 +5128,45 @@
    "unit": "pixels",
    "kind": "judged",
    "source": "this machine: Cycles takes 35 to 90 s a frame on 4 cores, so local pictures stay tiny"
+  },
+  "local_cycles_samples": {
+   "value": 16,
+   "unit": "samples",
+   "kind": "judged",
+   "source": "this machine: Cycles on 4 cores; a local picture is only a quick look (the same note as local_cycles_preview_size_pixels)"
+  },
+  "upload_megabytes_max": {
+   "value": 300,
+   "unit": "megabytes",
+   "kind": "judged",
+   "source": "a scene bigger than this goes to the rented store once by hand (the pay-per-second guide: uploads cost wake-up time)"
+  },
+  "dark_picture_mean_luminance_min": {
+   "value": 0.01,
+   "unit": "luminance 0 to 1",
+   "kind": "judged",
+   "source": "a scene with no light draws black (a place built with no lamps and no sky)"
+  },
+  "local_eevee_preview_size_pixels": {
+   "value": [
+    480,
+    320
+   ],
+   "unit": "pixels",
+   "kind": "measured",
+   "source": "this computer, 22 October 2026: a 1200 x 800 EEVEE picture at 48 samples took 94 s on software graphics"
+  },
+  "local_eevee_samples": {
+   "value": 8,
+   "unit": "samples",
+   "kind": "judged",
+   "source": "this computer: EEVEE is drawn on the processor, so a local picture is only a quick look"
+  },
+  "cycles_when_water_in_view": {
+   "value": true,
+   "unit": "yes or no",
+   "kind": "judged",
+   "source": "plugin 1.4.0 fix round: the film owner's rule is Cycles where lights are lit; the smoke check drew still water in EEVEE as a flat dark slab and in Cycles as reflective water, so water in view also gives Cycles. Set it to false to follow the owner's rule exactly"
   }
  },
  "place_light": {

@@ -1,5 +1,5 @@
 {
- "about": "Generic scale facts the scale check uses (every number has kind and source; most are weak or guesses because they are from memory). dimension: height = z extent; width = larger horizontal extent; depth = smaller horizontal extent; thickness = smallest of the three extents; middle = middle of the three; span = largest; pitch = roof slope in degrees; gauge = distance between wheel ruts (read from the settings, not from an object). only_if_slab_like: used only when the object's smallest extent is at most 0.4 of its middle one, so a whole building in one object is not read as one thick wall. A fact applies to an object when its role matches applies_to_role (a regular expression) and, if given, its name matches applies_to_name. A place adds or replaces facts in its own facts file (the planner researches them with sources).",
+ "about": "Generic scale facts the scale check uses (every number has kind and source; most are weak or guesses because they are from memory). dimension: height = z extent; width = larger horizontal extent; depth = smaller horizontal extent; thickness = smallest of the three extents; middle = middle of the three; span = largest; pitch = roof slope in degrees; gauge = distance between wheel ruts (read from the settings, not from an object); rise = how far a stone.step stands above what it rests on or the next lower step (read from the construction check, top to top). only_if_slab_like: used only when the object's smallest extent is at most 0.4 of its middle one, so a whole building in one object is not read as one thick wall. A fact applies to an object when its role matches applies_to_role (a regular expression) and, if given, its name matches applies_to_name. A place adds or replaces facts in its own facts file (the planner researches them with sources).",
  "facts": [
   {
    "id": "door_height",
@@ -172,7 +172,9 @@
    "unit": "metres",
    "kind": "judged",
    "source": "common building and prop practice (from memory; confirm for the period and place)",
-   "confidence": "weak"
+   "confidence": "weak",
+   "skip_if_lying": true,
+   "note": "a rail or board that lies along the fence is not the fence: an object lower than the minimum and much longer than it is high is skipped"
   },
   {
    "id": "chimney_height",
@@ -313,16 +315,16 @@
   },
   {
    "id": "step_rise",
-   "what": "one stair or step rise",
-   "applies_to_role": ".*",
-   "dimension": "height",
+   "what": "one stair or step rise: how far this step's top stands above what it rests on or the next lower step (top to top)",
+   "applies_to_role": "^stone\\.step$",
+   "dimension": "rise",
    "min": 0.1,
    "max": 0.25,
    "unit": "metres",
    "kind": "judged",
    "source": "common building and prop practice (from memory; confirm for the period and place)",
    "confidence": "weak",
-   "applies_to_name": "\\bstep\\b|\\bstair\\b"
+   "note": "read from the construction check (the top of the step minus the top of the support below it or of the next lower step beside it), not from the object's own height: a solid block that stands on the bed is not a 1.8 m rise"
   },
   {
    "id": "ladder_width",

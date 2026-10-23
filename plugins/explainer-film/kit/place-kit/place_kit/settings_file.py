@@ -264,6 +264,19 @@ def validate(data):
     return problems
 
 
+def road_warnings(data):
+    """Plain sentences about roads that will fail the audit later (not errors: the verbs go on, the person reads them). A rut shallower than the ground relief the audit asks for makes
+    the audit's relief check fail, and the draft gave no hint of it."""
+    from . import house_numbers
+    floor = house_numbers.value('place_wear.ground_relief_metres_min')
+    found = []
+    for index, road in enumerate(data.get('roads') or [], start=1):
+        depth = road.get('rut_depth')
+        if isinstance(depth, (int, float)) and depth < floor:
+            found.append(f'road "{road.get("name", index)}": a rut depth of {depth} m is under the {floor} m of ground relief the audit asks for, so its ground-relief check would fail; use at least {round(floor * 1.5, 3)} m')
+    return found
+
+
 # ------------------------------------------------------------------ drafting
 def draft(objects, place, type_id, hints_only=True):
     """A draft settings dict from the scene's objects (dicts with name, collections, materials, properties), plus the report:

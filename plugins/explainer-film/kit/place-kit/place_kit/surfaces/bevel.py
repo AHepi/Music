@@ -7,7 +7,7 @@ A concrete example: bevel_objects(objects_with_widths) puts "PK Bevel" and "PK W
 """
 import numpy as np
 
-import bpy
+import bpy  # noqa: F401 - kept on purpose: this module needs Blender, and the tests tell Blender-only modules apart by this line
 
 from .. import house_numbers, names, scene_read, settings_file
 

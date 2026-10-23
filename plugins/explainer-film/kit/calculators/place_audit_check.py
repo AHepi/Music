@@ -11,23 +11,23 @@ should read.
 
 Verbs:
   check AUDIT.json [--blend FILE.blend] [--place-settings FILE] [--facts FILE] [--allow-quick]
-        judges the audit (the checks are listed below). --blend makes a changed scene file a failure (a stale audit).
+        judges the audit (the checks are listed below). --blend makes a changed scene file a failure (a stale audit); --place-settings makes a settings file edited after the
+        audit a failure too (the audit records the hash of the settings it was made with, and roles, off entries and roads come from them).
   fresh FRESH_CHECK.json [--audit AUDIT.json]
         judges a fresh checker's result (the shape is in the fresh-checkers guide): a claim that does not hold fails unless it is
         accepted; a missing was_blind or not_tested is a look.
   compare BEFORE.json AFTER.json
         which treatments appeared or vanished per material and per object between two audits.
 Checks (each finding is pass, warn (printed LOOK), fail, or known (a treatment switched off on purpose, with its reason)):
-  place: quick output, place: stale audit, place: roles, place: treatments, place: layer amounts, place: off reasons,
+  place: quick output, place: stale audit, place: stale settings, place: roles, place: object types, place: treatments, place: layer amounts, place: off reasons,
   place: normal maps, place: uv, place: displacement, place: construction, place: scale, place: plain boxes,
   place: shape damage, place: ground relief, place: keep-out, place: budgets, place: light, place: renderer.
+An object that has no material at all (or none with nodes) is failed by name in place: treatments: the material checks alone would never see it, because there is no material to look at.
 Plain lines start with PASS, LOOK, FAIL or KNOWN. Exit: 0 pass (read the LOOK lines), 1 fail, 2 an input is missing or unusable.
 """
 import argparse
 import hashlib
-import json
 import os
-import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -79,7 +79,7 @@ class Judge:
         self.findings.append(finding(verdict, check, where, text, fix))
 
     def run_all(self):
-        for step in (self.quick_output, self.stale, self.roles, self.treatments, self.layer_amounts, self.off_reasons, self.normal_maps, self.uv,
+        for step in (self.quick_output, self.stale, self.roles, self.object_types, self.treatments, self.layer_amounts, self.off_reasons, self.normal_maps, self.uv,
                      self.displacement, self.construction, self.scale, self.plain_boxes, self.shape_damage, self.ground_relief, self.keep_out,
                      self.budgets, self.light, self.renderer):
             step()
@@ -131,6 +131,10 @@ class Judge:
         roles = self.audit.get('roles', {})
         unknown = roles.get('unknown', [])
         allowed = self.number('place_audit.unknown_role_objects_allowed')
+        if (self.audit.get('counts', {}).get('objects_visible') or 0) == 0:
+            self.add('fail', 'place: roles', 'the scene', 'the audit holds no visible mesh objects, so nothing was audited (an empty scene, or every object hidden, or the wrong file).',
+                     'open the right scene file, unhide the place, and make the audit again.')
+            return
         total = max(1, self.audit.get('counts', {}).get('objects_visible', 0) or 1)
         if len(unknown) > allowed:
             self.add('fail', 'place: roles', names_text(unknown), f'{len(unknown)} object(s) have no role, so nothing is known about what they need.',
@@ -144,6 +148,15 @@ class Judge:
                      'give them a real role: a role rule in place-settings.json, or the place_role property.')
         if not unknown and not fallback:
             self.add('pass', 'place: roles', 'every object', f'every visible object has a role ({sum(roles.get("by_role", {}).values())} objects)')
+
+    def object_types(self):
+        left = self.audit.get('non_mesh') or []
+        if left:
+            listed = [f'{item.get("name")} ({item.get("what", item.get("type"))})' for item in left]
+            self.add('fail', 'place: object types', names_text(listed), f'{len(left)} thing(s) are drawn but are not meshes, so they get no surface and no wear.',
+                     'run explainer-film-place finish (it turns curves, text, metaballs and instanced collections into meshes), or convert them yourself, or tag them with a never role if they are helpers.')
+        else:
+            self.add('pass', 'place: object types', 'every drawn object', 'everything that is drawn is a mesh (or has a never role)')
 
     def treatments(self):
         missing_allowed = self.number('place_audit.required_treatments_missing_allowed')
@@ -181,16 +194,31 @@ class Judge:
             bad += 1
             fix = {'bevelled_edges': 'run explainer-film-place surfaces (it bevels with hardened normals)', 'shape_damage': 'run explainer-film-place damage'}[key]
             self.add('fail', 'place: treatments', names_text(objects), f'{len(objects)} object(s) lack {key}.', fix)
+        bare = [o for o in self.audit.get('objects', []) if not o.get('exempt') and not str(o.get('role', '')).startswith('never.') and o.get('unsurfaced') and o.get('surface_missing')]
+        if bare:
+            bad += 1
+            missing_here = []
+            for o in bare:
+                for key in o['surface_missing']:
+                    if key not in missing_here:
+                        missing_here.append(key)
+            self.add('fail', 'place: treatments', names_text([o['name'] for o in bare]),
+                     f'{len(bare)} object(s) have no material with a surface (no material at all, or one with no nodes), so none of what their role requires is there: {", ".join(missing_here[:12])}.',
+                     'run explainer-film-place finish (its surfaces step gives every object a material with a normal map and variation, then the wear layers go on top); do not lower the requirement.')
         scatter_bad = []
         for key in ('plants', 'litter_pieces'):
             for material in self.audit.get('materials', []):
                 info = material.get('treatments', {}).get(key)
                 if info and info.get('required') and not info.get('has') and key not in material.get('off_with_reason', {}):
                     scatter_bad.append((key, material['name']))
+        # ground that has no material at all (or any ground at all) must still grow things: the audit also records what the ground ROLES require, whatever the materials are
+        for key, info in ((self.audit.get('scatter') or {}).get('required') or {}).items():
+            if info.get('required_by') and not info.get('has') and not any(k == key for k, _ in scatter_bad):
+                scatter_bad.append((key, ', '.join(info['required_by'][:4])))
         for key in sorted({k for k, _ in scatter_bad}):
             names = [m for k, m in scatter_bad if k == key]
             bad += 1
-            self.add('fail', 'place: treatments', names_text(names), f'no {key.replace("_", " ")} on the ground ({len(names)} ground material(s)).', 'run explainer-film-place grow.')
+            self.add('fail', 'place: treatments', names_text(names), f'no {key.replace("_", " ")} on the ground ({len(names)} ground material(s) or object(s)).', 'run explainer-film-place grow.')
         if not bad:
             self.add('pass', 'place: treatments', 'every material', 'every required treatment is there')
 
@@ -410,17 +438,18 @@ class Judge:
                 no_floor.append(f'{obj["name"]} ({gap:.2f} m)')
             seat_error = c.get('seat_error_m')
             if seat_error is not None and abs(seat_error) > self.number('place_construction.ground_seat_metres_tolerance') and c.get('needs_ground'):
-                seat.append(f'{obj["name"]} ({seat_error:+.2f} m)')
+                found = f', the ground it was measured against is "{c["seat_ground_object"]}" at {c["seat_ground_m"]:.2f} m' if c.get('seat_ground_object') else ''
+                seat.append(f'{obj["name"]} ({seat_error:+.2f} m{found})')
         fixes = {
             'floating': 'move it onto a support or add one (a post under the beam, a footing under the post); seat things with seat_on_ground',
-            'hung': 'something must carry it from below, or give the role may_hang',
+            'hung': 'something must carry it from below; or frame it into TWO carried parts (a rail tenoned 5 cm into two posts counts as carried); or give the role may_hang (doors, shutters, fences, ironwork, rope, windows may hang)',
             'short': 'lengthen the post or lower the beam so they meet',
             'span': 'add a support under the long span (no plank spans more than about 1.4 m)',
             'inside_out': 'flip the normals (a negative-volume closed part is inside out)',
             'coplanar': 'move one of two overlapping faces by a millimetre or delete one',
             'buried': 'move the light out of the solid',
             'no_floor': 'add a floor or step behind the doorway',
-            'seat': 'seat it again: pk.seat_on_ground(obj), or run explainer-film-place finish (it seats parts again after the ground changes)',
+            'seat': 'seat it again: pk.seat_on_ground(obj), or run explainer-film-place finish (it seats parts again after the ground changes). If the ground named is not the one the part stands on, a corner of the part lies over that other ground: move the corner clear or cut the ground there',
         }
         groups = (('floating', floating, 'floats: nothing carries it (gap over {mm} mm)'), ('hung', hung, 'hangs from above with no carrier below and its role may not hang'),
                   ('short', short, 'stops short of what it should meet'), ('span', span, 'has a free span longer than its role allows'),
@@ -482,7 +511,8 @@ class Judge:
         limit = self.number('place_audit.plain_box_share_max')
         if share > limit:
             self.add('fail', 'place: plain boxes', names_text(boxes), f'{share:.0%} of the objects are plain sharp-edged boxes (at most {limit:.0%}).',
-                     'run explainer-film-place surfaces (bevels) and damage; shape the parts (chamfers, uneven boards).')
+                     'run explainer-film-place surfaces (it bevels every hard-edged role) and damage; if they have run, these objects have a role the surfaces step does not bevel (ground, water, glass, plants, trees), '
+                     'so chamfer their meshes yourself (bmesh.ops.bevel) or give them a role that is not a plain box.')
         else:
             self.add('pass', 'place: plain boxes', 'the objects', f'{share:.0%} plain boxes (at most {limit:.0%})')
 
@@ -508,8 +538,21 @@ class Judge:
                 bad.append(f'{road.get("name")}: no ground object carries the road')
             elif (road.get('relief_m') or 0) < minimum or road.get('ruts_found') is False:
                 bad.append(f'{road.get("name")}: relief {road.get("relief_m", 0):.3f} m (at least {minimum} m), ruts found: {road.get("ruts_found")}')
+        for obj in self.audit.get('objects', []):
+            geometry = obj.get('geometry') or {}
+            if obj.get('exempt') or obj.get('role') != 'ground.dirt_road':
+                continue
+            if geometry.get('road_entry') is False and (geometry.get('relief_m') or 0) < minimum:
+                bad.append(f'{obj["name"]}: a dirt road with no entry in the settings\' roads and no real relief ({geometry.get("relief_m", 0):.3f} m, at least {minimum} m)')
+        growth_limit = self.number('place_audit.ground_area_growth_max')
+        for obj in self.audit.get('objects', []):
+            growth = (obj.get('geometry') or {}).get('area_growth')
+            if growth is not None and growth > growth_limit:
+                bad.append(f'{obj["name"]}: its outline is {growth:.1f} times bigger than before the kit reshaped it (at most {growth_limit}): its shape was replaced by a rectangle')
         if bad:
-            self.add('fail', 'place: ground relief', names_text(bad), '; '.join(bad[:MAX_NAMES]), 'run explainer-film-place roads (it grades the ground and shapes ruts, banks and hoof prints).')
+            self.add('fail', 'place: ground relief', names_text(bad), '; '.join(bad[:MAX_NAMES]),
+                     'run explainer-film-place roads (it grades the ground and shapes ruts, banks and hoof prints); a dirt-road object needs an entry in the settings\' "roads" (a centre line, width, gauge): '
+                     'explainer-film-place new-settings drafts one from the lane\'s shape; a ground whose outline grew was reshaped into a box: undo, then give the lane its own fine mesh.')
         elif roads:
             self.add('pass', 'place: ground relief', 'the roads', f'{len(roads)} road(s) have real relief and ruts')
 
@@ -551,6 +594,9 @@ class Judge:
             return
         if not light.get('any_light'):
             self.add('fail', 'place: light', 'the scene', 'the scene has no light (no sun, lamp, emissive surface or lit world): it renders black.', 'run explainer-film-place light.')
+        elif light.get('lamps') == 0:
+            self.add('warn', 'place: light', 'the scene', 'only the world or a glowing surface lights the scene: no lamp, so no direction of light, no raking shadows and little to show the normal maps.',
+                     'run explainer-film-place light (it adds a sun when the scene has no lamp of its own).')
         elif light.get('clip_share') is not None and light['clip_share'] > self.number('place_light.clip_share_max'):
             self.add('warn', 'place: light', 'the first picture', f'{light["clip_share"]:.1%} of the picture is clipped to white (more than {self.number("place_light.clip_share_max"):.1%}).', 'lower the sun or the exposure.')
         else:
@@ -562,7 +608,7 @@ class Judge:
             return
         decision, chosen = info.get('decision'), (info.get('settings_choice') or 'auto').lower()
         if decision == 'CYCLES' and chosen == 'eevee':
-            self.add('fail', 'place: renderer', 'the settings', 'lamps, windows or fires are lit here, so the rule is Cycles, but the settings say eevee. Reasons: ' + names_text(info.get('reasons', [])) + '.',
+            self.add('fail', 'place: renderer', 'the settings', 'lamps, windows or fires are lit here, or water is in view, so the rule is Cycles, but the settings say eevee. Reasons: ' + names_text(info.get('reasons', [])) + '.',
                      'set "renderer": "auto" (or "cycles") in place-settings.json; draw with explainer-film-place render.')
         elif decision == 'EEVEE' and chosen == 'cycles':
             self.add('warn', 'place: renderer', 'the settings', 'nothing is lit, so EEVEE would do; the settings ask for Cycles (slower and dearer).', 'set "renderer": "auto".')
@@ -586,6 +632,21 @@ def plain_lines(findings, header):
     return lines
 
 
+def settings_freshness(audit, settings_path):
+    """One finding: was the audit made with this very place-settings file? (An edit after the audit changes roles, off entries and roads, so the audit would say nothing about it.)"""
+    name = os.path.basename(settings_path)
+    if not os.path.exists(settings_path):
+        raise InputProblem(f'the place settings {settings_path} are not there. Make them with: explainer-film-place new-settings --scene SCENE.blend --out place-settings.json')
+    recorded = audit.get('settings_sha1')
+    if not recorded:
+        return finding('warn', 'place: stale settings', name, f'the audit records no hash of the settings it was made with, so it cannot be tied to {name}.',
+                       'make the audit again with the settings: explainer-film-place audit --scene SCENE.blend --settings place-settings.json --out place-audit.json')
+    if sha1_of_file(settings_path) != recorded:
+        return finding('fail', 'place: stale settings', name, f'{name} changed after the audit was made: roles, off entries, roads and looks come from it, so the audit says nothing about the new one.',
+                       'run explainer-film-place audit again with this settings file (or finish again), then this check.')
+    return finding('pass', 'place: stale settings', name, f'the audit was made with this exact settings file ({name})')
+
+
 # ---------------------------------------------------------------- check
 def command_check(args, settings):
     audit = read_json(args.audit, 'the place audit', 'explainer-film-place audit --scene SCENE.blend --settings place-settings.json --out place-audit.json (finish writes one too)')
@@ -597,6 +658,8 @@ def command_check(args, settings):
         facts = data.get('facts', data) if isinstance(data, dict) else data
     judge = Judge(audit, settings, blend=args.blend, allow_quick=args.allow_quick, facts=facts, skip_freshness=args.skip_freshness)
     findings = judge.run_all()
+    if args.place_settings:
+        findings.append(settings_freshness(audit, args.place_settings))
     verdict = verdict_of(findings)
     counts = {v: sum(1 for f in findings if f['verdict'] == v) for v in ('fail', 'warn', 'known', 'pass')}
     header = f'Place audit of {audit.get("place", "the place")} ({audit.get("look")}, {audit.get("state")}): {verdict.upper()}. {counts["fail"]} to fix, {counts["warn"]} to look at, {counts["known"]} known (switched off on purpose), {counts["pass"]} passed.'
@@ -699,8 +762,8 @@ def main(argv=None):
     p = add_output_options(commands.add_parser('check', help='judge an audit'))
     p.add_argument('audit', help='place-audit.json')
     p.add_argument('--blend', help='the scene file the audit was made from (a changed file makes the audit stale)')
-    p.add_argument('--place-settings', dest='place_settings', help='the place settings (read for notes; the audit already holds what it needs)')
-    p.add_argument('--facts', help='the place\'s own real-world facts (replaces the ranges of facts with the same id)')
+    p.add_argument('--place-settings', dest='place_settings', help='the place settings the audit was made with: an edit after the audit is a failure (place: stale settings)')
+    p.add_argument('--facts', help='the place\'s own real-world facts (a fact with the same id as a generic one replaces the keys it gives, such as min and max, and keeps the rest, such as the roles it applies to)')
     p.add_argument('--allow-quick', dest='allow_quick', action='store_true', help='accept an audit made with --quick (a trial), as a look')
     p.add_argument('--skip-freshness', dest='skip_freshness', action='store_true', help='leave out the stale-audit check (the preflight makes it itself)')
     p = add_output_options(commands.add_parser('fresh', help='judge a fresh checker\'s result'))

@@ -29,9 +29,9 @@ Each object needs its own `pk_<layer>_amount` property; `age` writes it. Without
 | Layer | What it is (and the words people use) | Where it goes |
 |---|---|---|
 | dirt | soil film, mud splash, dust, polish on worn lanes, dried puddle rings | low places; a band up the wall foot measured from each wall's own bottom edge (the street's splash band was 15 to 35 cm; stone plinths 15 to 46 cm high once hid it when measured from the world floor); footfall |
-| grime | soot, run-off streaks under eaves and sills, damp bands, tide marks, stains | sheltered places and under projections; soot on thatch above hearths and chimneys |
+| grime | soot, run-off streaks under eaves and sills, damp bands, stains | sheltered places and under projections; soot on thatch above hearths and chimneys. A real TIDE LINE (a band at the water's own height) is not made by a layer: build it as shape (a band of darker, slimier stone, a row of barnacle shapes) in the part that owns the quay or the wheel pit |
 | weathering | silvering of timber, sun fade, bleaching, patina | sun-facing, rain-facing, upper surfaces; the grey-silver of old unpainted timber |
-| wetness | darker, smoother, a film coat, puddles | low places and rut bottoms; by state (dry, damp, wet) |
+| wetness | darker, smoother, a film coat, puddles | low places and rut bottoms; ground within 1.5 m of any water (the plan masks wet it: full at the waterline, fading to nothing 1.5 m away; measured on a quay: 0.59 at 10 cm, 0.16 at 1 m, 0 from 3 m); by state (dry, damp, wet) |
 | cracks_and_chips | split planks, plaster loss, chipped stone corners, thatch sag | corners and ends; one clean line, not a net |
 | edge_wear | worn bevels, pale rubbed edges | edges and corners a hand or a cart touches |
 | moss_and_algae | flat moss, algae, lichen | damp and shaded; never on a trodden or keep-clear dot |
@@ -85,6 +85,11 @@ The looks are presets of dial values and nothing else (`place-kit/data/looks/`):
 Different roles can have different looks (`look_by_role`). State: `dry`, `damp`, `wet`; switch it with
 `age --state wet` or `finish --state damp`. Only the wetness layer changes, and puddles appear by depth (judged: about
 40, 40 and 20 percent of the puddle area in three depths).
+
+**The dials and the state are the same for every role.** There is no setting that turns the wetness or the moss up for the waterside roles only. To treat one role differently, give it its own look with `look_by_role` (the four
+looks differ in how much wetness and moss they hold), or switch a layer off for it with an `off` entry and a true reason; for a wet quay, put the whole place in state `wet` and rely on the water-edge dampness above. What the
+kit does NOT make: seaweed, barnacles, shells, foam and reeds as plants (the plants it scatters are tuft, clover, nettle, fern, bramble and moss cushion, `place-kit/data/species.json`): build those as a few big designed
+shapes in the part that owns them.
 
 ## Honest note: what shows at film size
 

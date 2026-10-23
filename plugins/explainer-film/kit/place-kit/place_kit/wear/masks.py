@@ -1,6 +1,6 @@
 """What this does: makes the PLAN MASKS: twelve small "where-pictures" of the ground plan that say, for every spot of the place, how low it lies
 (where water gathers), where the crown of a lane is, how much feet and wheels trample it, where nothing may grow or lie, how far it is from a wall,
-from a prop, from litter, how sheltered and how shady it is, how damp, whether it is above water, and where the wheel tracks run. Materials look
+from a prop, from litter, how sheltered and how shady it is, how damp (low ground, shade, the foot of a wall and the margin of any water), whether it is above water, and where the wheel tracks run. Materials look
 them up by world x and y; the scatter uses them for exact keep-out gates; the audit counts against them. They are made with numpy only: the ground
 and the objects are painted into grids from above (plan2d.py), then combined. This is the lighter route of decision D4 of the 1.4.0 design (the
 proven weathering masks needed OpenCV and 25 to 80 seconds a scene); it is judged by the tests (isolation, dial zero, keep-out counts) and the time
@@ -159,7 +159,7 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
     rules = settings.rules_dict()
     objects = scene_read.mesh_objects(only_visible=True)
     tagged = roles_module.tag_objects([scene_read.object_facts(o) for o in objects], rules, table)['by_object']
-    ground, walls, props, roofs, doors_boxes = [], [], [], [], []
+    ground, walls, props, roofs, doors_boxes, waters = [], [], [], [], [], []
     for obj in objects:
         role = tagged[obj.name]['role'] or ''
         if scene_read.is_scatter(obj) or roles_module.is_never(role):
@@ -171,6 +171,8 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
             ground.append(obj)
         elif klass == 'roof':
             roofs.append(obj)
+        elif klass == 'water':
+            waters.append(obj)                 # water is not a solid prop (a sea box is not a 2.4 m tall wall that shades the seabed); it wets what lies beside it (below)
         elif klass in ('wall', 'stone'):
             walls.append(obj)
         else:
@@ -221,7 +223,11 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
     shadow = plan2d.shadow_map(above, cell, SUN_AZIMUTH_DEGREES, SUN_ELEVATION_DEGREES)
     shade = np.clip(np.maximum(0.7 * sheltered, 0.9 * plan2d.box_blur(shadow, 0.3 / cell)), 0.0, 1.0)
     foot_of_wall = 1.0 - plan2d.smoothstep(0.0, 0.6, wall_dist)
-    dampness = np.clip(0.5 * lowness + 0.4 * shade + 0.2 * foot_of_wall, 0.0, 1.0)
+    # ground within 1.5 m of water, where the water stands above the ground, is wet: full at the waterline, fading to nothing 1.5 m away (a quay edge, a bank, a wheel pit)
+    water_top = raster(waters, 'max')
+    water_here = np.nan_to_num(water_top - ground_top, nan=-1.0) > 0.0
+    near_water = 1.0 - plan2d.smoothstep(0.0, 1.5, plan2d.distance_to_marked(water_here, cell, 3.0)) if water_here.any() else np.zeros(shape)
+    dampness = np.clip(0.5 * lowness + 0.4 * shade + 0.2 * foot_of_wall + 0.6 * near_water, 0.0, 1.0)
     state_is_dry = (settings.state == 'dry')
     puddle = (lowness >= PUDDLE_LOWNESS) & (not state_is_dry)
 
@@ -236,8 +242,9 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
         rut_width = float(road.get('rut_width', WHEEL_TRACK_WIDTH))
         distance, sign, _ = plan2d.polyline_field(x0, y0, cell, shape, road['polyline'], width)
         centre_offset = np.abs(sign * distance)
-        wheels = np.abs(centre_offset - gauge / 2.0) <= rut_width / 2.0
-        centre = centre_offset <= max(CENTRE_STRIP_HALF_WIDTH, gauge / 2.0 - rut_width)
+        reach = 0.71 * cell                          # half the diagonal of a cell: a cell that the rut touches anywhere is blocked, so the gates are exact-zero on the whole nominal rut
+        wheels = np.abs(centre_offset - gauge / 2.0) <= rut_width / 2.0 + reach
+        centre = centre_offset <= max(CENTRE_STRIP_HALF_WIDTH, gauge / 2.0 - rut_width) + reach
         centre_grass = bool(road.get('centre_grass', False))
         track[wheels] = 1.0
         footfall[wheels] = 1.0
@@ -268,25 +275,35 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
 
 # ---------------------------------------------------------------- in the Blender file
 def write_plan_images(masks):
-    """Puts the three pictures into Blender as packed Non-Color images with their bounds written on them. Returns the images."""
+    """Puts the three pictures into Blender as packed Non-Color images with their bounds written on them. A picture of the same size is rewritten in place (so the Plan group
+    that reads it keeps working); otherwise it is made again and the Plan group is rebuilt. Returns the images."""
     from ..surfaces import normals
-    images = []
+    images, remade = [], False
     for which in PICTURES:
         array = masks.picture(which).astype(np.float32) / 255.0                 # rows from y0 up: Blender's own order
         name = names.plan_image_name(which)
-        old = bpy.data.images.get(name)
-        if old is not None:
-            bpy.data.images.remove(old)
         rows, cols = array.shape[:2]
-        image = bpy.data.images.new(name, cols, rows, alpha=True, float_buffer=False)
-        image.colorspace_settings.name = 'Non-Color'
-        image.pixels.foreach_set(array.ravel())
-        image.update()
+        image = bpy.data.images.get(name)
+        if image is not None and tuple(image.size) == (cols, rows):
+            image.pixels.foreach_set(array.ravel())
+            image.update()
+        else:
+            if image is not None:
+                bpy.data.images.remove(image)
+            image = bpy.data.images.new(name, cols, rows, alpha=True, float_buffer=False)
+            image.colorspace_settings.name = 'Non-Color'
+            image.alpha_mode = 'CHANNEL_PACKED'
+            image.pixels.foreach_set(array.ravel())
+            image.update()
+            remade = True
         image['pk_made'] = 1
         image['pk_bounds'] = list(masks.bounds)
         image['pk_cell'] = masks.cell
         normals.pack(image)
         images.append(image)
+    if remade and bpy.data.node_groups.get(names.PLAN_GROUP) is not None:
+        from . import plan_group
+        plan_group.build_plan_group()
     return images
 
 

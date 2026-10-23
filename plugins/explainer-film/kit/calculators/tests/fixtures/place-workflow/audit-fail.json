@@ -1,0 +1,39 @@
+{
+ "scene_file": "/path/to/run/scene/round1/finished.blend",
+ "audit_file": "/path/to/run/reports/place-audit-round1.json",
+ "scene_sha256": "fixture-sha256-round-1",
+ "audit_exit_code": 1,
+ "preflight_exit_code": 1,
+ "verdict": "fail",
+ "quick": false,
+ "problems": [
+  {
+   "check": "place: construction",
+   "where": "stable bench plank",
+   "owner": "stable",
+   "text": "AUDITSTABLE a bench plank floats 3 cm above its posts",
+   "fix": "lower the plank onto the posts"
+  },
+  {
+   "check": "place: keep-out",
+   "where": "forest floor weeds",
+   "owner": "roads_and_ground",
+   "text": "AUDITGROUND two weeds grow on a wheel track",
+   "fix": "run the ground step again"
+  },
+  {
+   "check": "place: layer amounts",
+   "where": "ground.dirt_road",
+   "owner": "integrator",
+   "text": "AUDITSETTINGS dirt amount is 0 with no reason",
+   "fix": "raise the dial or write an off entry with a true reason"
+  }
+ ],
+ "looks": [
+  "place: fresh checker: not checked: no fresh checker has looked"
+ ],
+ "known": [
+  "off: wetness on floor.earth (nothing is wet indoors)"
+ ],
+ "notes": []
+}

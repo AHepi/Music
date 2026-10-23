@@ -6,7 +6,7 @@ wear comes from the object's own bounds instead); at most about 150 nodes and th
 Amount is exactly 0 at Amount 0 and cannot become NaN (NaN times 0 is NaN): clamp before you divide.
 Carried from the project's weathering kit (own work) and made generic: the tags are pk, not the old kit's.
 
-A concrete example: n = Net(tree); y = n.math('MULTIPLY', n.attr('pk_seed'), 3.0); c = n.mix_colour(fac, colour_a, colour_b).
+A concrete example: net = Net(tree); y = net.math('MULTIPLY', net.attr('pk_seed'), 3.0); c = net.mix_colour(fac, colour_a, colour_b).
 """
 import bpy
 
@@ -165,12 +165,26 @@ class Net:
         self.tree.links.new(fac, node.inputs['Fac'])
         return node.outputs['Color']
 
-    def hsv(self, colour, hue=0.5, saturation=1.0, value=1.0, fac=1.0):
+    def hue_saturation_value(self, colour, hue=0.5, saturation=1.0, value=1.0, fac=1.0):
         node = self.new('ShaderNodeHueSaturation')
-        for name, item in (('Hue', hue), ('Saturation', saturation), ('Value', value), ('Fac', fac)):
+        for name, item in (('Hue', hue), ('Saturation', saturation), ('Value', value), ('Factor', fac)):
             self._feed(node, node.inputs.find(name), item)
-        self.tree.links.new(colour, node.inputs['Color'])
+        if isinstance(colour, bpy.types.NodeSocket):
+            self.tree.links.new(colour, node.inputs['Color'])
+        else:
+            node.inputs['Color'].default_value = colour
         return node.outputs['Color']
+
+    def scale_vector(self, vector, factor):
+        """A vector times a number (the number may be a plain value or a socket)."""
+        node = self.new('ShaderNodeVectorMath')
+        node.operation = 'SCALE'
+        self.tree.links.new(vector, node.inputs[0])
+        if isinstance(factor, bpy.types.NodeSocket):
+            self.tree.links.new(factor, node.inputs['Scale'])
+        else:
+            node.inputs['Scale'].default_value = factor
+        return node.outputs[0]
 
     def luminance(self, colour):
         node = self.new('ShaderNodeRGBToBW')

@@ -7,7 +7,9 @@ is installed. In a part's own words: a step that is skipped is reported as skipp
 
 The order of the film's preflight stages around a place is: `shots` (plan the views), then build the place, then
 `place` (this skill's audit), then `plates` (before paying for paintings). `shots` and `place` are different checks.
-Passing one does not mean the other was run.
+Passing one does not mean the other was run. Run `shots` twice: once from the brief for the rough camera plan, before
+anything is built, and again once `place` passes, when the scene exists and the place facts can be read from it; both
+must pass before any plate.
 
 ## Step 0. Write down the rules of this place (about 20 minutes)
 
@@ -25,13 +27,30 @@ for you):
 One part is one piece of the place that one builder shapes: `roads_and_ground`, `cottages`, `stable`, `props`,
 `forest_edge`. One collection each, named `Place: <owner>`. Build the ground first and keep its height fixed (the
 lane's ruts and banks belong to the ground part), because everything else is seated on it. If the ground changes
-later, every part is seated again before the construction check runs (step 4).
+later, every part is seated again before the construction check runs (step 4). A lane must be PART of the ground
+mesh or its own ground object; either way the kit keeps its outline (a curved lane stays curved, a trench cut in a
+towpath stays a trench) and makes it fine by splitting its faces in place.
+
+The ground part also makes the view cameras, the lights, the world and the render settings, and they are frozen
+from then on: write `"frozen": {..., "set_by": "<the ground owner>"}` in `ownership.json`, or the ground part's own
+camera is reported as a violation.
+
+Combine the parts in two steps, because every other part is seated on the ground (a combine that lists the ground
+with the others fails the order test, since the ground cannot come last):
+`explainer-film-place combine --scene start.blend --stages stage_ground.py --owners ownership.json --save-as ground-frozen.blend`
+then
+`explainer-film-place combine --scene ground-frozen.blend --stages stage_cottages.py stage_stable.py stage_props.py --owners ownership.json --order both --save-as combined.blend`
+The second run does the plain order, the reverse order and the idempotent test, each from the frozen ground.
 
 ## Step 2. Shape the parts
 
 Use the part helpers (inside Blender, `import place_kit as pk`): `pk.begin_part(owner)`,
 `pk.new_part_object(owner, role, name, mesh)`, `pk.seat_on_ground(obj)`, `pk.ground_height_at(x, y)`,
-`pk.is_keep_clear(x, y)`. Every object gets an owner and a role as it is made.
+`pk.is_keep_clear(x, y)`. Every object gets an owner and a role as it is made (the ids: `explainer-film-place roles --list`).
+A rail tenoned about 5 cm into each of two posts is framed in and counts as carried, even in a role that may not hang;
+a board bedded up to 4 cm into its support rests on it; a boat afloat is carried by the water if its underside is below
+the water plane and its top above it. A step needs the role `stone.step`; its rise is measured top to top (17 cm for
+a stack of 17 cm slabs, and for a flight of solid blocks each 17 cm higher than the one before).
 
 Build from the ground up, with real sizes from the facts table, and give the shape its own character as geometry:
 - every plank on a support, every support on the ground (`construction-and-scale.md`);
@@ -39,30 +58,44 @@ Build from the ground up, with real sizes from the facts table, and give the sha
 - **no two siblings alike**: planks of different widths (9 to 17 cm) and thickness, a bow, a worn or chipped corner on
   some, a replaced board here and there; roof tiles or shingles of different tones, a few slipped, chipped or missing;
   posts a little out of plumb; a thatch roof that sags between rafters. This is what read at film size in the garden
-  (the shader wear alone barely did), and it is damage and age as SHAPE.
+  (the shader wear alone barely did), and it is damage and age as SHAPE (the treatment `shape_damage`). Make it as you
+  shape the part, or let `explainer-film-place damage --amount 0.5` bend, chip and vary the parts afterwards (`finish` runs
+  it); the audit lists groups of siblings that are exact copies.
 
 ## Step 3. Give every object a role
 
+Tag every object WHEN YOU MAKE IT (`pk.new_part_object(owner, role, name, mesh)` or the property `place_role`). The
+ids and what they mean: `explainer-film-place roles --list`. The kit also guesses a role from a name, and a guess can
+be wrong (measured on 70 plain names: "Waterwheel" read as a cart wheel, "Reed bed" as a thatch roof, "Quay wall" as
+plaster; the hints were fixed for those, but others will exist), so read the roles it GUESSED as well as the unknown ones.
 `explainer-film-place roles --scene village.blend --settings place-settings.json` lists the role of every visible
 object and the ones it could not classify. For each unknown one, add a match rule in the settings (a name pattern, a
 collection, a material name) or set the property `place_role` on the object. An object may stay roleless only when a
-`never` rule covers it (sky, glow, lights, helpers). A roleless object fails the audit. If `finish` ever gives an
-object a fallback role, it prints LOOK; read each one and tag it properly.
+`never` rule covers it (sky, glow, lights, helpers). After `finish`, an object nothing matched becomes `prop.generic`
+(a grey stone prop) with a LOOK line; the audit warns on each, and FAILS when more than 15 percent of the objects are
+fallbacks (`place_audit.fallback_role_share_fail`). Read each one and tag it properly. Steps are `stone.step`, not
+`floor.stone`; the indoor-floor skip of the place types does not cover `floor.stone`, so a patio or a step outdoors keeps
+its moss, weathering, wetness, plants and litter.
 A joined mesh or an imported prop with several materials gets one role for each material (the barrel's wood and its
 iron bands): match by material name in the settings.
 
 ## Step 4. Run the pass
 
-Whole place, in one go:
+Whole place, in one go (it needs `--save-as`; without it the command stops at once, before doing anything):
 `explainer-film-place finish --scene village.blend --settings place-settings.json --state damp --save-as village-finished.blend`
+(with no settings file it drafts one, using `--type TYPE --place NAME` if you give them; add `--facts FACTS.json` when the place has its own facts table)
 The look of each role comes from the settings (`look` and `look_by_role`: in the village, `neglected` for the lanes and
-`lived_in` for the rest); `--look ID` changes the default look. It runs, in this order: roles, roads, surfaces (UVs, normal maps, displacement, bevels), wear layers, growth, picture
-size, construction check, audit. Run twice it gives the same counts (it is safe to repeat). It never overwrites
-`village.blend` unless you say `--overwrite`.
+`lived_in` for the rest); `--look ID` changes the default look. It runs, in this order: convert (a bevelled curve, a text sign or an instanced collection becomes meshes; the originals are kept, hidden), roles (an object that no
+rule matches gets a fallback role and a LOOK line; a dirt-road object that the settings name no road for gets a road drafted from its own shape and written into the settings), the ground (roads, then
+everything is seated on it again; every object that moves more than 3 cm is named with the distance), surfaces (UVs, normal maps, displacement, bevels), damage as shape, the plan masks, the
+wear layers, growth, light, the picture size; then it saves the file, reopens the saved file and audits it (the audit holds
+the construction check). Run twice it gives the same counts (it is safe to repeat). It never overwrites `village.blend`
+unless you say `--overwrite`.
 
 When parts are built by different owners: each owner runs `finish-part --owner NAME --save-as part.blend` on its own
-objects (the wear masks come from that part alone, which the audit records as `masks_from: part_only`), and the
-integrator combines the parts (`combine`, in plain and in reverse order) and runs `finish` once on the whole.
+objects (it is always a quick trial, the wear masks come from that part alone, which the audit records as `masks_from: part_only`,
+and its audit accepts that as a LOOK, so a clean part exits 0), and the integrator combines the parts (`combine`, in plain
+and in reverse order, as in step 1) and runs `finish` once on the whole.
 
 `--quick` is for trials on a slow computer. A quick pass is not a final: the audit records it.
 
@@ -72,7 +105,7 @@ The audit prints one line for each finding: FAIL, LOOK or PASS. Fix by what the 
 
 | The line says | Fix |
 |---|---|
-| a treatment is missing (a name from the sixteen) | run the verb its fix text names (`surfaces`, `age`, `grow`); if the place really cannot have it, write an `off` entry with a reason |
+| a treatment is missing (a name from the seventeen) | run the verb its fix text names (`surfaces`, `age`, `grow`); if the place really cannot have it, write an `off` entry with a reason |
 | a layer amount is 0 or missing | the object lacks its `pk_<layer>_amount` property, or the look set it to 0: run `age` again, or write an `off` entry |
 | an object has no role | step 3 |
 | a part is floating, short or hung | move it, or add the support under it (step 2) |
@@ -80,6 +113,11 @@ The audit prints one line for each finding: FAIL, LOOK or PASS. Fix by what the 
 | keep-out: a plant on a wheel track, a crown or in a puddle | run `grow` again after `roads`; the order is fixed |
 | stale audit | the scene was saved after the audit: run `audit` again |
 | quick output | run `finish` without `--quick` |
+| an object has no material with a surface (named) | `finish` gives it one; nothing in the scene may be left without a material |
+| things drawn that are not meshes (named) | `finish` turns curves, text, metaballs and instanced collections into meshes (undo shows the originals again) |
+| ground: a dirt-road object with no road entry, or an outline that grew | the settings need a `roads` entry for the lane (`new-settings` drafts one from its shape); a grown outline means the lane was reshaped into a box: `undo` and give the lane its own fine mesh |
+| plain boxes (a share of the objects) | `surfaces` bevels every hard-edged role; objects of a role it does not bevel (ground, water, glass, plants, trees) need a chamfer you make yourself |
+| light: only the world lights the scene | `light` adds a sun (a world colour alone is no key light) |
 
 Read the WHOLE output of `finish`, including any list of what it skipped or could not do. A skipped item is reported, never
 ignored. The audit also holds budgets (house numbers, section `place_audit`): triangles in all (`place_audit.triangles_total_max`)
@@ -103,7 +141,9 @@ so decide the light before you draw:
   box itself hidden from the lamp's own rays;
 - a value study of the first preview: nothing blown or crushed (judged: under 0.5 percent of dots clipped at either end).
   Read the picture's actual numbers, not how it looks.
-If the kit has a `light` verb (`explainer-film-place --verbs`), use it and read its audit lines; otherwise do these by hand.
+`explainer-film-place light --scene village-finished.blend --save-as village-lit.blend` adds a sun, a sky, a fill and a lamp
+for every glowing thing when the scene has none (`--sun-only` adds just a sun); `finish` runs it too. Its numbers are starting
+values, not tuned: look at the first preview and adjust. If the scene has its own lights, do these by hand.
 
 ## Step 8. Draw previews, then make the style guard
 

@@ -28,7 +28,7 @@ Build the ground first, then the others side by side, then combine.
 
 | Part (owner) | What it makes |
 |---|---|
-| `roads_and_ground` (first, serial) | the graded ground mesh, two lanes with ruts and hoof prints, the verge, puddle hollows. Its height is then frozen and everyone else is seated on it. |
+| `roads_and_ground` (first, serial) | the ground mesh, two lanes with ruts and hoof prints, the verge, puddle hollows, and the view cameras, the lights and the world (`frozen.set_by` in `ownership.json` names this part, so its cameras are not a violation). Its height is then frozen and everyone else is seated on it. |
 | `cottages` | 3 or 4: stone footing, timber frame with wattle-and-daub plaster or log walls, thatch or shingle roof, chimney, door and step, shutters |
 | `stable` | timber frame, three stalls with posts and rails, a manger in each, a plank door, tack hooks, an earth or plank floor with a drain, straw remnants, old dung |
 | `props` | barrels with iron bands, buckets, crates, a handcart, a well, a woodpile and chopping block, a ladder, a leaning fence, sacks, hay litter |
@@ -36,27 +36,29 @@ Build the ground first, then the others side by side, then combine.
 
 ## Roles
 
-Every visible object gets exactly one role: `ground.dirt_road`, `ground.forest_floor`, `ground.floor_earth` (inside the
-stable), `wall.plaster`, `wall.timber_frame`, `roof.thatch`, `timber.post`, `timber.beam`, `timber.plank`, `stone.footing`,
-`iron.fitting`, `prop.wood`, `prop.straw`, `tree.bark`, `plant.foliage`, and the glow role for a lit window. A barrel's wood
-and its iron bands are two roles (one for each material).
+Every visible object gets exactly one role: `ground.dirt_road`, `ground.forest_floor`, `floor.earth` (inside the stable),
+`wall.plaster`, `wall.timber_frame`, `roof.thatch`, `timber.post`, `timber.beam`, `timber.plank`, `timber.door`,
+`timber.fence`, `stone.footing`, `stone.chimney`, `stone.well`, `iron.fitting`, `prop.barrel`, `prop.cart`, `prop.wheel`,
+`prop.crate`, `prop.wood`, `prop.straw`, `tree.bark`, `plant.foliage`, and `never.glow` for a lit window. A barrel's wood and
+its iron bands are two roles (one for each material).
 
 ## Settings (a fragment; the whole file is `place-kit/data/examples/forest-village-place-settings.json`)
 
 ```
 "place": "village", "place_type": "village", "look": "lived_in", "state": "damp",
 "look_by_role": { "ground.dirt_road": "neglected", "ground.forest_floor": "neglected" },
-"roads": [ { "name": "main lane", "polyline": [[0,0],[12,3],[30,2]], "gauge": 1.3, "rut_depth": 0.08, "hoof": true } ],
-"off": [ { "layer": "wetness", "roles": ["ground.floor_earth"], "reason": "inside the stable, under the roof: dry earth" } ],
+"roads": [ { "name": "main lane", "polyline": [[0,0],[12,3],[30,2]], "width": 3.0, "gauge": 1.3, "rut_depth": 0.08, "hoof": true } ],
 "renderer": "auto"
 ```
-The lane's walking lines go down the two wheel tracks and the middle hoof line (nothing may grow there); the strips of
+The village preset also writes an `off` entry, with its reason, for the floors inside the buildings (plank, tile, carpet, earth and concrete floors: nothing grows or weathers
+indoors; a flagstone floor, `floor.stone`, is not covered, and neither are steps, which are `stone.step`): that, or a signed accepted entry, is the only kind of skip allowed. If you write no `roads` at all,
+`finish` drafts a road for every `ground.dirt_road` object from the lane's own shape and writes it into the settings; look at it and change it if the lane runs differently. The lane's walking lines go down the two wheel tracks and the middle hoof line (nothing may grow there); the strips of
 grass between them are left free. Keep-clear shapes cover the tracks and the doorsteps.
 
 ## Renderer
 
-A lit lantern or window means Cycles on a rented card; plain daylight (sun only) means EEVEE. `explainer-film-place
-renderer-for` says which and why. This village has a lit window in one cottage, so its pictures are drawn with Cycles.
+A lit lantern or window means Cycles on a rented card; plain daylight (sun only) means EEVEE, unless water is in view (a pond, a stream), which also means Cycles. `explainer-film-place
+renderer-for` says which and why. This village has a lit window in one cottage, so its pictures are drawn with Cycles; `render --where auto` then sends even the previews to the card when one is set up.
 
 ## The facts table (a starter; judged, WEAK, to be confirmed)
 
@@ -91,7 +93,8 @@ The blind reading test names these from a half-size picture, with keywords that 
 
 1. The planner writes the style note, the facts table (with sources), `place-settings.json`, the ownership table and the
    acceptance list. 2. `roads_and_ground` is built and frozen. 3. The other four parts are built side by side; each runs
-   `finish-part`. 4. The integrator combines the parts (both orders), seats them again on the ground, runs `finish` and
+   `finish-part`. 4. The integrator combines the ground alone into a frozen start file, then the other four with `--order both`
+   from it (`the-required-steps.md` step 1), seats them again on the ground, runs `finish` and
    `audit`. 5. `explainer-film-preflight place` must pass before anything is drawn. 6. The renderer draws previews with the
    renderer rule, measures them and makes the guard (provisional). 7. Fresh checkers (look, structure, process, blind
    reader) recompute; a skeptic ranks; one fix round by the owners; a different checker looks again. 8. A plain report:
