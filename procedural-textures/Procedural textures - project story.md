@@ -63,8 +63,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   (stones, posts, cross beams, long beams, pegged planks), worn and mossy planks, varied roof tiles with moss, chunky grass tufts, a pond that reads,
   a layered maple; 85 materials now carry real normal maps (there were none). A fresh re-check: style kept, more character, bridge makes sense, all
   "yes". Still weak: the smeared lawn colour under the tufts, moss cushion banks that heap up, a clean orange veranda deck.
-- **Nothing running** (checked 22 October 15:27): no machines, and the pay-per-second endpoint is switched fully off (most workers set to 0, as
-  you asked); it is switched back on before the next render. The two stores cost about US$0.006 an hour; RunPod balance US$12.61.
+- **The plugin carries the place work (log 32):** the film plugin, now version 1.5.0, makes any model building a place give it real photographed
+  surfaces (your own uploads first, then free scans), normal maps, displacement, dirt, grime, weeds by site, weathering, damage, puddles, stones and a
+  construction check, without being told; it tests changes in batches of about 10 versions on the rented cards. Test: Sonnet built a forest village from
+  your words and the plugin alone and used every treatment. Still weak: the road's relief, the puddle shapes, weeds round tree crowns and inside
+  buildings, crude trees.
+- **Nothing running** (checked 23 October about 21:00): no machines; RunPod balance US$11.00.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -84,6 +88,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Rented graphics machine (scripts kept outside the repository, in the scratch folder `runpod/`; keys never saved here) | A small job server on the rented machine and a client here: start a machine if none is running, send files, run Blender, fetch the pictures | Rendered pictures, in seconds instead of minutes |
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
+| The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
 
 ## Word list
 
@@ -110,6 +115,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Squint test:** blur the new and the old picture and compare them; a high score (target 0.92) means the big shapes and light are unchanged. **Detail energy:** how much fine contrast one part of a picture has; too much reads as busy or photographic.
 - **The bridge, from the bottom up:** footing stones on the pond bed carry posts; cross beams sit across pairs of posts; long beams run along the bridge on the cross beams; planks lie across the long beams.
 - **Pay-per-second endpoint, worker:** the RunPod set-up where a card (a worker) starts only when a job waits; idle workers cost nothing. **Balance:** the money left in the RunPod account; with too little, workers will not take jobs.
+- **Plugin:** a package of written steps, tools and checks that Claude loads; ours is the film plugin. **Blind test:** a fresh model gets only the plugin and a plain request, to see what it does without being told. **Guard test:** a test that fails if the words of one coming test request appear in the plugin.
+- **Scan:** a surface photographed in real life with its normal and height maps (free from Poly Haven). **Your own texture library:** your uploaded surfaces (mud, gravel, brick, slate, wood, metal), which the plugin can use but never copies into GitHub.
+- **Variation batch:** about 10 measurably different versions of one change, drawn at once on the rented cards and shown on one labelled sheet.
 
 ## Log (added to, never rewritten)
 
@@ -470,7 +478,37 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     Japanese garden character - pictures/` (start with "31 Final - hero view", "31 Final - veranda view", the two "31 Before and after" sheets and
     "31 Final - close-ups"); scripts and notes: `garden/character/`; the scene files stay on the RunPod store.
 
+32. **The plugin learns the place work, and a forest village tests it (22-23 October).** You said: "Sonnet needs to use normals, displacements,
+    dirt, grime, weeds, weathering, damage.. basically everything. But don't tell it that. These things need to be in the plugin." **Plugin 1.4.0
+    (Sonnet helpers):** four readers went through the weathering kit, the street, the garden and the cookbook; a design, a critic, three builders
+    (skill text; kit code with a one-command finishing pass, an audit that fails a scene missing a treatment, and a new preflight stage; a place-building
+    workflow), a small canal-lock scene built with it, two blind models and a judge. **My mistake, found and fixed:** the system hands your latest message
+    to every helper started in the same turn, so they all saw your village request and wrote it into the plugin as a worked plan; that made the test
+    worthless, so everything written for it was removed, the worked examples became the garden and the canal lock, and a guard test keeps those words
+    out. **Your money question:** "Why did it cost $10? That's really expensive for a few photos": the garden's finished pictures cost about 5 cents; the
+    rest was helpers trying one change at a time with no limit. You added: "batch them with workers... 10 variations that are measurably different".
+    Now in the plugin: a free tiny first pass drops versions that would look alike, up to 3 cards draw the rest at once, one labelled sheet comes back
+    (10 versions in 48 s for about 5 cents), and every helper has a card-time allowance. **Lessons from the earlier sets:** you asked whether they were
+    used; an audit of about 370 found about 210 carried, 90 partly, 70 missing; Opus helpers (you switched the plugin work to Opus) added the 40 that
+    mattered, most with an automatic check, and the stage's dark-and-wet fix. Clean blind tests (harbour, railway station, monastery courtyard)
+    applied the treatments without being told. **The village (Sonnet, the plugin alone):** 6 parts, ground first; it used normal maps on 61 of 67
+    materials (23 pictures, all pointing the right way), displacement, dirt, grime, weathering, wetness, damage, moss, 88,000 weeds and litter pieces,
+    ruts 10-12 cm deep with hoof prints; card cost about US$0.70 (the garden: US$10.89). It took about 5 hours, mostly thinking at extra-high effort
+    (you moved the later helpers to high). The plugin's own gate then stopped it before any picture, because it contradicted itself twice; I drew the
+    four views myself. **You looked and said** the dirt track had nothing like the mine's detail, and asked where those normals and materials went and
+    why the weeds lost their edge logic. I looked: the plugin made every surface in code (it never used a scan or your uploads), and its weeds had a
+    20-50 percent chance of growing anywhere. **Three runs, as you asked:** Opus updated the plugin to 1.5.0 (real scans and your own library, weeds by
+    site, puddles and stones, the specks and sparkles fixed, the gate made consistent); Sonnet re-finished the village (the road and yard now wear your
+    own mud; 17 scanned surfaces; weeds gathered at wall feet, verges and seams; the specks, sparkles and rectangles gone; the gate passed); Opus
+    checked: the road now matches the mine in fine grain, colour spread and small lumps, but reaches only 68 percent of its large shapes and looks
+    pleated, because the road mesh is too coarse for its displacement; the puddles are long grey channels (the plugin's "rounded pools" did not hold);
+    almost no stones on the road itself; 26 percent of weeds ring the tree crowns and 109 stand inside buildings; the kit calls python3 by name, which
+    the rented cards lack; your pictures are packed inside the finished scene file on the rented store (never in the plugin or GitHub). **Your rule:**
+    "every new set that uses different tools needs to update the plugin" (now in CLAUDE.md, the film's decisions 45-48 and the plugin's house rules).
+    **Cost:** RunPod about US$1.60 for all of this (balance US$12.61 to US$11.00); no paid pictures. Pictures: `32 Forest village and the plugin -
+    pictures/` (start with "32 Village - first and rebuilt, next to the coal mine").
+
 ## Next step
 
-Waiting for your instructions. If you want more on this garden, the change a viewer would notice most is replacing the smeared lawn colour under the
-new grass tufts.
+Waiting for your instructions. If you want the village taken further, the change a viewer would notice most is the road: a finer ground mesh so the
+scan's relief shows, real stones in the ruts and rounded puddles, then weeds kept off tree crowns and out of buildings (all as plugin fixes).

@@ -1,10 +1,10 @@
-"""What this does: tests the plugin 1.5.0 fix round of the place kit, the faults a real test place showed (a model asked for a settlement among trees with unkept dirt tracks):
+"""What this does: tests the plugin 1.5.0 fix round of the place kit, the faults a real test place showed:
   1. PLAIN SURFACES: every surface now comes from a photographed scan when one can be had: the person's own library first (settings "own_surfaces"), then the free Poly Haven
      scan named in data/surfaces.json (downloaded once per machine into a cache outside every repository), else the made-in-code recipe, and the kit says which and why. Each
      scan's normal map is checked against its own height map and turned round when it points the other way; a map that leans as a whole is levelled; the material has the
      scan's colour, normal, roughness and height (real displacement on the ground roles), at the scan's real size, with the wear layers on top. Stones and pebbles are seated
      in unpaved ground, sized by the facts table; puddles lie in hollows and ruts when the place is damp or wet.
-  2. WEEDS WITHOUT EDGE LOGIC: plants, litter and stones grow by SITE (wall feet, verges, fence lines, joints, the grass between ruts, damp corners, a thin background), each
+  2. WEEDS SPREAD EVENLY: plants, litter and stones grow by SITE (wall feet, verges, fence lines, joints, the grass between ruts, damp corners, a thin background), each
      site counted to its own dial, the species' "seam" liking read, and the audit measures the share of each site again.
   3. VISIBLE FAULTS: fern fronds stood on their edge and drew as dark V shapes (they now lie with their faces to the sky, and thin leaves let light through); a clear wet
      film and mirror puddles on a thatched roof drew white sparkles (no film on surfaces that soak water up; puddles only on level ground); two ground surfaces met at a

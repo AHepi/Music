@@ -102,7 +102,7 @@ to spoken words like that.
 ## Changes
 
 **1.5.0 (23 October 2026): real photographed surfaces, weeds where they really grow, and a gate that no longer fails its own work.**
-A test build of a small settlement in a clearing, made by a smaller model with the plugin alone, showed four faults: plain made-in-code surfaces,
+A test build of a place, made by a smaller model with the plugin alone, showed four faults: plain made-in-code surfaces,
 weeds spread evenly, three faults you could see in the picture, and a gate that failed the kit's own work. Each is fixed in general, for every place.
 - Real photographed surfaces. The surface pass now fetches, for each surface, the free Poly Haven scan named in `kit/place-kit/data/surfaces.json`
   (36 of the 45 surfaces have one; CC0, no account, nothing about the person in the request): its colour, OpenGL normal, roughness and height

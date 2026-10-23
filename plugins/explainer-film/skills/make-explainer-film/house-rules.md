@@ -98,7 +98,11 @@ tested and what you did not (the coal mine was built in plain Blender on purpose
 - Run helpers at the effort the person asks for. Medium is the standing effort (the austerity project: "medium, no higher");
   when the person later asks for more effort for one job (they asked for maximum effort for one design review), that wins
   for that job only. The workflow build-a-place runs its builders at medium and its checkers at high unless told otherwise:
-  when the person or the project says "medium, never higher", pass `checkEffort: 'medium'`. Helpers run on the model of the session that starts them (the workflow has no model argument).
+  when the person or the project says "medium, never higher", pass `checkEffort: 'medium'`. Helpers run on the model of the session that starts them, unless the workflow is given `model` (for example 'sonnet' or 'opus').
+- **Every new set updates this plugin.** The person's words (23 October 2026): "Also for future reference, every new set that uses different tools
+  needs to update the plugin." When a place, set or props uses a tool, technique, surface source or lesson this plugin does not carry, adding it to
+  the plugin is part of that set's job: do it before calling the set finished, keep it general (any place, no words from that one request), and check it
+  like the rest of the plugin (its tests and a fresh checker).
 - Give helpers a written guide and finished pattern files; never let parallel helpers edit shared
   files; check their work yourself and get an independent critique before calling anything done.
 
