@@ -261,6 +261,14 @@
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
    "dial_defaults": {}
   },
+  "backdrop": {
+   "requires": [],
+   "wanted": [],
+   "kind": "judged",
+   "source": "lessons round (23 October 2026): the mine and the courtyard (story logs 5, 9): far scenery lit like cloth floated as a green sheet, and hazy hills blocked the sun",
+   "dial_defaults": {},
+   "note": "far scenery round the place: a plain unlit colour, no surface pass, no wear, no shadow (the kit treats it like a never role; the audit's place: world checks it casts no shadow)"
+  },
   "never": {
    "requires": [],
    "wanted": [],
@@ -1762,6 +1770,28 @@
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
    "meaning": "glass: a window pane or lantern glass (may hang)"
   },
+  "backdrop": {
+   "class": "backdrop",
+   "surface": null,
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "backdrop",
+    "far hills?",
+    "distant (hills?|ridge|ridges|buildings?|town|houses)",
+    "hill ring",
+    "ridge ?line"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "lessons round (23 October 2026): the mine (village_and_sky) and the courtyard (story logs 5, 9, 10)",
+   "meaning": "far scenery round the place (rings of hills, far buildings, lighter and bluer when far): a plain unlit colour that casts no shadow and gets no surface or wear",
+   "note": "the finish step turns its shadow off (visible_shadow False); give it a plain colour that does not take light (an Emission or unlit colour); real shapes, not a flat card, so it moves against the place in a slide"
+  },
   "never.sky": {
    "class": "never",
    "surface": null,
@@ -1773,7 +1803,6 @@
    "dials": {},
    "name_hints": [
     "^sky",
-    "backdrop",
     "horizon",
     "skydome",
     "^world"
@@ -1781,7 +1810,7 @@
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "meaning": "sky, backdrop or horizon: no surface pass"
+   "meaning": "sky or a sky dome: no surface pass (far scenery round the place is the role backdrop)"
   },
   "never.glow": {
    "class": "never",

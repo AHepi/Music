@@ -23,7 +23,7 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, KIT  # noqa: E402
+from checks import Checker, KIT, work_folder  # noqa: E402
 
 sys.path.insert(0, os.path.join(KIT, 'place-kit'))
 from place_kit import roles, settings_file, names  # noqa: E402
@@ -100,11 +100,17 @@ check.equal('an off entry with a pattern fits matching roles', len(roles.off_ent
 check.equal('...and not other roles', roles.off_entries_for('wall.plaster', 'moss_and_algae', off), [])
 check.equal('...and not other treatments', roles.off_entries_for('floor.planks', 'dirt', off), [])
 check.true('the class of a role is the word before the dot, and never.* is never', roles.role_class('wall.plaster') == 'wall' and roles.is_never('never.glow') and not roles.is_never('wall.plaster'))
+check.true('the backdrop (far scenery) gets no surface pass, like a never role, and is its own class', roles.role_class('backdrop') == 'backdrop' and roles.is_never('backdrop')
+           and table['roles']['backdrop']['class'] == 'backdrop' and table['classes']['backdrop']['requires'] == [])
+check.equal('far hills called "Backdrop hills" get the role backdrop by name, a sky dome stays never.sky',
+            [roles.tag_object({'name': n, 'collections': [], 'materials': [], 'properties': {}}, {}, table)['role'] for n in ('Backdrop hills', 'Far hills', 'Sky dome')],
+            ['backdrop', 'backdrop', 'never.sky'])
 
 # ---------------------------------------------------------------- 6. the data agree
 classes = table['classes']
-check.true('every role has a class that exists, and a surface that exists (or none for never.*)',
-           all(spec.get('class') in classes for spec in table['roles'].values()) and all((spec.get('surface') in settings_file.surfaces_table()) or spec.get('class') == 'never' for spec in table['roles'].values()),
+check.true('every role has a class that exists, and a surface that exists (or none for never.* and the backdrop)',
+           all(spec.get('class') in classes for spec in table['roles'].values())
+           and all((spec.get('surface') in settings_file.surfaces_table()) or spec.get('class') in roles.NO_SURFACE_CLASSES for spec in table['roles'].values()),
            f'{len(table["roles"])} roles')
 bad_patterns = []
 for role, spec in table['roles'].items():
@@ -160,9 +166,8 @@ check.true('...so moss is still required on a floor.stone object and a stone.ste
 
 # ---------------------------------------------------------------- 8. the place's own facts are put on top of the generic ones, key by key
 import json
-import tempfile
 from place_kit.checks import scale  # noqa: E402
-own_path = os.path.join(tempfile.mkdtemp(prefix='place-facts-test-'), 'own-facts.json')
+own_path = os.path.join(work_folder('place-facts-test-'), 'own-facts.json')
 partial = {'id': 'door_height', 'min': 0.3, 'max': 0.5, 'confidence': 'strong'}          # only a new range for a fact the kit already has
 json.dump({'facts': [partial]}, open(own_path, 'w'))
 merged = {f['id']: f for f in scale.load_facts({}, own_path)}['door_height']

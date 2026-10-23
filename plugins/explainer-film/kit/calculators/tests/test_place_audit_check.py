@@ -11,6 +11,12 @@ with no normal maps, no wear, a floating plank; fixtures/place/finished_hut_audi
 5. The gaps the 1.4.0 smoke check, review and newcomer judge found in the gate (section 2b): an object with no material at all, ground that must grow things whatever its material, things drawn
    that are not meshes, an audit of nothing, too many fallback roles, a dirt road with no road entry or one whose outline grew, a scene lit by its world alone, a seat error that names its ground,
    a step rise judged top to top; each is planted in the finished hut, must fail there with the object's name, and must NOT fail when the fault is taken out again.
+6. The lessons round's checks (23 October; inside Blender they are tested by test_place_world.py): an audit made before they existed says "not measured by this audit" (a LOOK,
+   never a FAIL) for place: film frame, world, sun, lettering and the object count; a place for the film at a preview size of the same tall shape passes, a view camera set to a
+   wide size fails; too many objects fail place: budgets; a wear-layer sun far from the scene's sun is a LOOK; a sign with a lettering picture passes; a haze volume is a LOOK.
+7. The fix round's changes (23 October): a prop built alone (3 m across, not for the film) gets a LOOK, not a FAIL, for a view that sees past its small ground, while the same prop
+   for the film, or a place 40 m across, still fails; a clip end too short names the figure needed; 1,500 objects is a LOOK and 5,000 a FAIL; a beam with 2.8 m free fails and names its
+   role's 2.5 m, and passes when the place's own facts file holds a sourced "free_span" fact for it (not when the fact has no source, nor past the fact's own figure).
 Run: python3 kit/calculators/tests/test_place_audit_check.py
 """
 import copy
@@ -18,16 +24,15 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, work_folder  # noqa: E402
 import place_audit_check as pac  # noqa: E402
 from settings import load_settings  # noqa: E402
 
 check = Checker('place audit judge: flat hut fails, finished hut passes, planted faults are named')
 settings = load_settings()
-folder = tempfile.mkdtemp(prefix='place-audit-test-')
+folder = work_folder('place-audit-test-')
 
 
 def load(name):
@@ -343,4 +348,84 @@ done = run(['check', audit_no_hash, '--skip-freshness', '--place-settings', sett
 check.true('an audit that records no settings hash is a LOOK, not a pass', done.returncode == 0 and 'LOOK place: stale settings' in done.stdout, f'exit {done.returncode}')
 done = run(['check', audit_with_settings, '--skip-freshness', '--place-settings', os.path.join(folder, 'no-such-settings.json')])
 check.true('a settings file that is not there exits 2 and names the command that makes one', done.returncode == 2 and 'new-settings' in done.stdout + done.stderr, f'exit {done.returncode}')
+
+# ---------------------------------------------------------------- 6. the lessons round's checks (film frame, world, sun, lettering, object count)
+older = copy.deepcopy(finished)
+for key in ('views', 'world', 'sun', 'lettering'):
+    older.pop(key, None)
+older['counts'].pop('objects_total', None)
+older_findings = judge(older, skip_freshness=True)
+for name in ('place: film frame', 'place: world', 'place: sun', 'place: lettering', 'place: budgets'):
+    check.true(f'an audit made before the lessons round: {name} says "not measured by this audit" as a LOOK, never a FAIL',
+               'warn' in verdicts(older_findings, name) and 'fail' not in verdicts(older_findings, name) and 'not measured by this audit' in text_of(older_findings, name, 'warn'),
+               str(verdicts(older_findings, name)))
+check.true('...so the older audit still has no FAIL line (exit 0)', not [f for f in older_findings if f['verdict'] == 'fail'])
+film = copy.deepcopy(finished)
+film['views']['for_film'] = True
+film['views']['render_size'] = [540, 960, 100]
+check.equal('a place for the film at a preview size of the same tall shape (540 x 960) passes place: film frame', verdicts(judge(film, skip_freshness=True), 'place: film frame'), ['pass'])
+film['views']['cameras'][0]['view_size'] = [1200, 800]
+check.true('the case that must fail: a view camera set to 1200 x 800 in a place for the film FAILS place: film frame',
+           verdicts(judge(film, skip_freshness=True), 'place: film frame') == ['fail'] and 'Camera A' in after(film, 'place: film frame'), after(film, 'place: film frame')[:160])
+film['views']['for_film'] = False
+check.equal('...and the same camera is fine when the place is not for the film', verdicts(judge(film, skip_freshness=True), 'place: film frame'), ['pass'])
+crowded = copy.deepcopy(finished)
+crowded['counts']['objects_total'] = 5000
+check.true('the case that must fail: 5,000 objects FAIL place: budgets and say to build in bulk', 'in bulk' in after(crowded, 'place: budgets'), after(crowded, 'place: budgets')[:200])
+turned = copy.deepcopy(finished)
+turned['sun'] = {'name': 'Evening sun', 'compass_degrees': 300.0, 'height_degrees': 12.0, 'energy': 3.0}
+check.true('a wear-layer sun far from the scene\'s sun is a LOOK that says to finish again', 'finish again' in ' '.join(f['fix'] for f in judge(turned, skip_freshness=True) if f['check'] == 'place: sun' and f['verdict'] == 'warn'),
+           text_of(judge(turned, skip_freshness=True), 'place: sun', 'warn')[:200])
+signs = copy.deepcopy(finished)
+signs['lettering'] = {'checked': 2, 'objects': [{'name': 'Bank sign', 'word': 'sign', 'found_by': 'name', 'picture_texture': True, 'text_made': False, 'lettering_on_it': []},
+                                                 {'name': 'Notice 2', 'word': 'notice', 'found_by': 'name', 'picture_texture': False, 'text_made': False, 'lettering_on_it': []}]}
+letter_findings = judge(signs, skip_freshness=True)
+check.true('a sign with a lettering picture passes and a bare notice FAILS place: lettering, named', 'Notice 2' in ' '.join(f['where'] for f in letter_findings if f['check'] == 'place: lettering' and f['verdict'] == 'fail')
+           and 'Bank sign' not in ' '.join(f['where'] for f in letter_findings if f['check'] == 'place: lettering' and f['verdict'] == 'fail'), text_of(letter_findings, 'place: lettering')[:160])
+hazy = copy.deepcopy(finished)
+hazy['world']['haze_volume'] = True
+check.true('a haze volume in the world is a LOOK', 'haze' in text_of(judge(hazy, skip_freshness=True), 'place: world', 'warn'))
+
+# ---------------------------------------------------------------- 7. the fix round (23 October): a prop built alone, the clip end's figure, the object count's band, a sourced long span
+prop = copy.deepcopy(finished)
+prop['world']['place_span_m'] = 3.0          # the verify step's crate: one crate on a 3 m square of ground and one close camera; 290 of 544 rays below the horizon hit nothing
+prop['views']['cameras'][0].update({'name': 'View crate', 'rays_below_horizon': 544, 'empty_below_horizon': 290, 'empty_below_horizon_share': 290 / 544})
+prop_findings = judge(prop, skip_freshness=True)
+check.true('a prop built alone (3 m across, not for the film) whose close camera sees past its small ground gets a LOOK in place: world, not a FAIL, and the LOOK says why',
+           verdicts(prop_findings, 'place: world') == ['warn'] and 'built alone' in text_of(prop_findings, 'place: world', 'warn'), str(verdicts(prop_findings, 'place: world')))
+prop['views']['for_film'] = True
+check.true('...the case that must fail: the same prop marked for the film FAILS place: world', 'fail' in verdicts(judge(prop, skip_freshness=True), 'place: world'))
+prop['views']['for_film'] = False
+prop['world']['place_span_m'] = 40.0
+check.true('...and so does a place 40 m across (the test yard\'s size)', 'fail' in verdicts(judge(prop, skip_freshness=True), 'place: world'))
+far = copy.deepcopy(finished)
+far['views']['cameras'][0].update({'clip_end_m': 1000.0, 'farthest_depth_m': 1958.99, 'farthest_object': 'Ground'})
+far_fix = ' '.join(f['fix'] for f in judge(far, skip_freshness=True) if f['check'] == 'place: world' and f['verdict'] == 'fail')
+check.true('a 1000 m clip end with a ground reaching 1959 m deep FAILS, and the fix names the figure needed (at least 1960 m), not only "1000 m or more"',
+           'at least 1960 m' in far_fix and 'past the far edge of the ground and the backdrop' in far_fix, far_fix[-220:])
+busy = copy.deepcopy(finished)
+busy['counts']['objects_total'] = 1500
+busy_findings = judge(busy, skip_freshness=True)
+check.true('1,500 objects (over 1,000, under 3,000) is a LOOK in place: budgets, not a FAIL: a large place can be over for honest reasons',
+           'warn' in verdicts(busy_findings, 'place: budgets') and 'fail' not in verdicts(busy_findings, 'place: budgets') and 'honest' in text_of(busy_findings, 'place: budgets', 'warn'),
+           str(verdicts(busy_findings, 'place: budgets')))
+gallery = copy.deepcopy(finished)
+beam = copy.deepcopy(next(o for o in gallery['objects'] if o['name'] == 'floor_plank_1'))
+beam.update({'name': 'Gallery beam', 'role': 'timber.beam'})
+beam['construction'].update({'span_max_m': 2.8, 'max_span_m': 2.5})      # a gallery beam on posts 3.0 m apart has 2.8 m free (the newcomer judge's measure)
+gallery['objects'].append(beam)
+span_text = after(gallery, 'place: construction')
+span_fix = ' '.join(f['fix'] for f in judge(gallery, skip_freshness=True) if f['check'] == 'place: construction' and f['verdict'] == 'fail')
+check.true('the case that must fail: a beam with 2.8 m free FAILS place: construction and names its role\'s own limit (2.5 m), and the fix names every role\'s limit and the free_span fact',
+           'Gallery beam' in span_text and 'allows 2.5 m' in span_text and '1.38 m' in span_fix and '2.5 m' in span_fix and 'free_span' in span_fix, span_text[:200])
+fact = {'id': 'gallery_bay_span', 'applies_to_role': '^timber\\.beam$', 'applies_to_name': 'gallery', 'dimension': 'free_span', 'max': 3.0, 'unit': 'metres', 'kind': 'judged',
+        'source': 'the place plan: the gallery bays are 3 m between posts', 'confidence': 'good'}
+allowed = judge(gallery, skip_freshness=True, facts=[fact])
+check.true('...a sourced "free_span" fact in the place\'s own facts file (3.0 m for the gallery beam) lets it pass, and the pass line names the fact',
+           'fail' not in verdicts(allowed, 'place: construction') and 'gallery_bay_span' in text_of(allowed, 'place: construction', 'pass'), str(verdicts(allowed, 'place: construction')))
+unsourced = dict(fact, source='')
+check.true('...a free_span fact with no source does not count (the span still FAILS)', 'fail' in verdicts(judge(gallery, skip_freshness=True, facts=[unsourced]), 'place: construction'))
+beam['construction']['span_max_m'] = 3.4
+check.true('...and a span longer than the fact allows still FAILS, naming the fact\'s figure',
+           'gallery_bay_span 3 m' in text_of(judge(gallery, skip_freshness=True, facts=[fact]), 'place: construction'), text_of(judge(gallery, skip_freshness=True, facts=[fact]), 'place: construction')[:200])
 check.finish()

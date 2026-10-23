@@ -20,7 +20,7 @@ stage `place` fails when a material or the scene lacks them.
 Then, in the project's working folder: `explainer-film-setup /path/to/work/film-kit`
 (copies the kit and installs its drawing engine; needs Node.js 18+, Python 3.10+ with numpy, Pillow
 and opencv, ffmpeg, and a Chromium browser). Paid steps use the ElevenLabs (voice) and fal
-(paintings) connectors, and always ask the user before spending.
+(paintings) connectors, and always ask the person before spending.
 Optional, only for drawing places on a rented graphics card: the person's own settings are read at run time from the
 environment (`RUNPOD_API_KEY`, `RUNPOD_ENDPOINT_ID`, optionally `RENDER_STORE_FOLDER`, which is `/workspace` when not set) or
 from a file named by `RENDER_SETTINGS_FILE` that sits outside any repository (lines `NAME=VALUE` with the same names; a JSON
@@ -41,18 +41,26 @@ in a file the plugin or a repository holds.
 2b. For any place, set or props built in Blender, even when the request names no surfaces or wear, run the surface-and-wear
    pass first: `explainer-film-place finish`, then `explainer-film-place audit`, then `explainer-film-preflight place` (skill
    `surfaces-wear-and-construction`; `explainer-film-place roles --list` prints every role id). Nothing is drawn, rendered or
-   painted until it passes. A small reminder hook (`hooks/`) prints these three lines (the last one also names the card-time and batch rule) at the start of a turn when the request is
-   about building a place, a set or props, so the skill is read even when other Blender skills compete for the request. Rented-card time is limited: one sweep of changes then one look, about 10
+   painted until it passes. The one exception is the person's own word: when they say not to use this plugin or a named part
+   of it ("plain Blender", "do not use the skill"), that wins, and the helper says in one line what it left out. A small
+   reminder hook (`hooks/`) prints three lines at the start of a turn when the request is about building a place, a set or
+   props (the second also sends a place for the film to `build-and-paint-a-place` before a camera is placed; the last names
+   the card-time and batch rule), so the skill is read even when other Blender skills compete for the request; it prints
+   nothing when the request says to leave the plugin out. Rented-card time is limited: one sweep of changes then one look, about 10
    far-apart variations in ONE batch (`explainer-film-place variations`), small quick pictures until the end, full-size ones once at the end; `explainer-film-place card-time show` says what each helper has used and has left.
 3. Compute before you render: every calculator answers `--help`, prints a plain report and names the house
    numbers it used. What no tool can judge (history, what a detail reads as on a phone, newcomer
-   understanding, story choices, the user's yes to spend) goes to the critics.
+   understanding, story choices, the person's yes to spend) goes to the critics.
+4. Start small: one small test for the person's reaction (a place built and audited with only its first view drawn
+   small, one test page, one short clip) before drawing or paying for the whole thing. Know what the built-and-painted route cannot do: a painted plate covers one
+   view and a little more, so it gives no camera that moves through a whole street and no light that reacts to people
+   moving about (that would need the whole set lit and drawn live: a later project).
 
 ## What is inside
 
 | Part | What it does |
 |---|---|
-| `skills/make-explainer-film` | The master steps, costs and rules, and which preflight stage goes with each step; start here. `house-rules.md`: how to talk to the user, money, notes, file names. |
+| `skills/make-explainer-film` | The master steps, costs and rules, and which preflight stage goes with each step; start here. `house-rules.md`: how to talk to the person, money, notes, file names. |
 | `skills/research-and-script` | Research ledger with sources, about three outlines, the script for the voice, and how to write it for newcomers. |
 | `skills/check-facts` | Skeptical fact checking of spoken and on-screen claims (workflow `verify-facts`). |
 | `skills/record-narration` | ElevenLabs recording page by page, word times, timeline, mix, voice checks. |
@@ -78,7 +86,9 @@ in a file the plugin or a repository holds.
 
 The kit holds code and timelines, not pictures, sound or models: a chapter's paintings, cut-outs,
 recordings and Blender models stay in its own project (the austerity explainer keeps them in
-`austerity-explainer/film-kit/` and `austerity-explainer/chapter-2-inflation/`).
+`austerity-explainer/film-kit/` and `austerity-explainer/chapter-2-inflation/`). The house sample
+(`kit/examples/house-sample/`, `kit/paper-film/scenes/house-sample*`) is kept for its code only: the person rejected its
+cut-away house look ("It looks terrible. The 3d looks fantastic though"), so it is never a pattern for a look.
 
 ## A concrete example
 
@@ -132,6 +142,25 @@ to spoken words like that.
   previews to the card; a close-up is saved once as `closeup`, not `closeup_closeup`; a role id for steps (`stone.step`),
   `roles --list`, better name hints, damp ground near water, and the docs say what the kit does not make (a tide line, reeds).
   The faults each have a test that also shows the old behaviour (`test_place_fixes.py`).
+- Lessons round (23 October 2026). An audit read about 370 lessons of the earlier work (the austerity film, the coal mine, the
+  Japanese garden, the texture and garden work) and found about 70 missing and 90 only partly carried; the 40 that matter were
+  added, as a check wherever a check can hold them and as a short line of text elsewhere. The workflow `build-a-place` now
+  starts small (it draws only the first view, small, and stops for the person's reaction; `allViews: true` goes on), takes
+  `film: true` for tall 1080 x 1920 views planned with `plan_shot.py`, and gives every Blender run a thread limit; the
+  workflow `critique-film` has a history critic, and `verify-facts` takes the pictures and the words written on props. The
+  house rules gained privacy (no name or email in a request to an outside website), never messaging a helper that is
+  spending money, writing prices without the shell, start small, the person's "no plugin" winning, keeping the old version
+  beside the new one, and wrapping up. The surfaces skill gained the world round a place, the low sun, Blender 5.2 traps 17
+  to 21, and wet and dry paintings as a pair. A test, `test_lessons_text.py`, keeps the three old contradictions out (the
+  empty lower quarter, blank placards, the old phone-button numbers). NOT tested: that a model uses these lessons unprompted.
+- Fix round of the lessons round (23 October 2026), after a verify step and a blind newcomer's plan: a prop built alone (at
+  most 20 m across, not for the film) gets a LOOK, not a FAIL, for a view with no horizon; a clip end that is too short is
+  named with the figure each camera needs; 1,000 to 3,000 objects is a LOOK and only more FAILs; a span longer than its
+  role allows passes when the place's facts file holds a sourced `free_span` fact; variations and the scout of a place for
+  the film are drawn in its tall shape (360 x 640 and 144 x 256); the reminder hook knows more plain place words and reads
+  "with and without the plugin" as a comparison, not a leave-out; the tests remove their own temporary folders. The text
+  says which renderer rule wins (one renderer per place), names `after_painting.py sky`, the place's own rubbish, the start
+  small test as one thing, that `light` adds no fill, and "the person" throughout.
 - NOT tested, said plainly: a large place of hundreds of buildings (only a hut, a 36 by 26 m yard, small test scenes and a 12 m
   canal lock were run; the wear masks are numpy-only and were timed at hut and yard size); Cycles with the kit on a place that
   size; the rented-card client against a real endpoint (its tests use a pretend card; one real card job was run by hand through

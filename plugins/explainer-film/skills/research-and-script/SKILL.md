@@ -7,7 +7,7 @@ description: Research a chapter of an explainer film into a sourced research led
 
 **Example.** For "what really causes inflation", four research helpers gathered 72 sourced facts in
 four groups (history, real cases, the home country now, how inflation works); 43 claims they could
-not confirm were listed and kept out. Three outlines were offered; the user chose one; the script
+not confirm were listed and kept out. Three outlines were offered; the person chose one; the script
 was written from it and checked before recording.
 
 ## 1. Research ledger (helpers in parallel)
@@ -26,7 +26,7 @@ was written from it and checked before recording.
 - Each outline: a one-line idea, then ten pages, each with what is said (2-4 sentences), what is
   seen, and the ledger ids it uses; estimated length and paid costs (voice letters, paintings).
 - Draft from different angles, then have each checked against the ledger and the project's rules,
-  and revise. Recommend one. Stop and let the user choose before writing the script.
+  and revise. Recommend one. Stop and let the person choose before writing the script.
 
 ## 3. Script
 

@@ -23,11 +23,17 @@ The nine stages, in the order a film is made (the names are fixed; the skills an
   paint    after each painting arrives      after_painting.py check (line-up, figures, skin, style, behind painting)
   pages    while building pages             plan_page_timing.py check, check_page_layout.mjs, camera_audit.py,
                                             plan_effects.py lint (from page_events.mjs's events)
-  film     before filming                   a critique newer than every page file with each finding fixed or accepted,
-                                            a passed pages report newer than every page file, plan_budget.py filming
-  finish   after finishing                  sound_gates.py loudness, length and alignment, find_jumps.py with the
-                                            planned cuts (when the memory allows: about 10 bytes a pixel of every
-                                            frame at 270 x 480), plan_budget.py push
+  film     before filming                   a critique newer than every page file with each finding fixed or accepted
+                                            and a critic whose area starts with "history" (period accuracy of what is
+                                            seen), a passed pages report newer than every page file, plan_budget.py filming
+  finish   after finishing                  a clip critique newer than the film (a fresh helper judged the FILMED clip in
+                                            motion: the film-critic agent's clip mode), sound_gates.py loudness, length
+                                            and alignment, find_jumps.py with the planned cuts (when the memory allows:
+                                            about 10 bytes a pixel of every frame at 270 x 480), plan_budget.py push
+The plates stage also reads each plate's render record (PLATE.json beside the picture, written by explainer-film-place
+render): a LOOK when plates of one place were drawn with different engines (EEVEE streets came out cold blue and Cycles
+streets warm gold, and the painter follows the plate), and a LOOK for a Cycles plate, because the painting checks were
+tuned on EEVEE plates. The paint stage passes the page's look.toe ("toe" in the plan) to after_painting.py --toe.
 
 Known and accepted problems: the project keeps some problems on purpose. Each is written down once, with who accepted
 it and when, and is then reported as KNOWN instead of failing every run:
@@ -173,6 +179,11 @@ INPUTS = {
     'rates': ('this film\'s measured seconds a frame (rates.json)',
               'python3 calculators/plan_budget.py profile-commands EVENTS --scene S, film those short pieces, then plan_budget.py measure LOGS --events EVENTS --out rates.json'),
     'film': ('the finished film (mp4)', 'narration-tools/finish_film.sh'),
+    'clip_critique': ('a fresh helper\'s critique of the FILMED clip in motion, newer than the film: {"film": PATH, "looked_at": [...], "findings": '
+                      '[{"time", "what", "severity", "status", "who", "date"}]} (each "must fix" finding fixed or accepted)',
+                      'the film-critic agent in its clip mode (it watches the filmed clip and its contact sheets, and saves this file)'),
+    'render_record': ('the place kit\'s render record of the plate (PLATE.json beside the picture: it names the engine)',
+                      'explainer-film-place render --job JOB.json (it writes one beside every picture)'),
     'mix': ('the mixed sound (narration over music)', 'narration-tools/mix_narration_over_music.sh'),
     'send': ('the sendable copy of the film', 'narration-tools/finish_film.sh (its SEND output)'),
     'deliver': ('the files about to be pushed or sent', 'the finish step'),
@@ -208,13 +219,13 @@ STAGE_INPUTS = {
               'real_world_facts': 'o', 'fresh_check': 'o'},
     'plates': {'check': 'r', 'plate': 'r', 'plate_facts': 'r', 'render_log': 'r', 'shot_report': 'r', 'helper_plate': 'o',
                'place_facts': 'o', 'brief': 'o', 'real_names': 'o', 'models': 'o', 'spend_ledger': 'o', 'style_picture': 'o',
-               'blend': 'o', 'place_audit': 'o', 'place_settings': 'o'},
+               'blend': 'o', 'place_audit': 'o', 'place_settings': 'o', 'render_record': 'o'},
     'paint': {'painting': 'r', 'plate': 'r', 'check': 'r', 'plate_facts': 'r', 'behind': 'o', 'near_list': 'o', 'helper_plate': 'o',
               'standard': 'o'},
     'pages': {'events': 'r', 'numbers_ledger': 'o', 'timing_accepted': 'o', 'camera_log': 'o', 'timeline': 'o', 'place_facts': 'o',
               'paper_pages': 'o'},
     'film': {'events': 'r', 'scene': 'r', 'critique': 'r', 'page_files': 'r', 'rates': 'o'},
-    'finish': {'film': 'r', 'mix': 'r', 'timeline': 'r', 'send': 'o', 'deliver': 'o', 'planned_cuts': 'o'},
+    'finish': {'film': 'r', 'mix': 'r', 'timeline': 'r', 'clip_critique': 'r', 'send': 'o', 'deliver': 'o', 'planned_cuts': 'o'},
 }
 
 FAIL_WORDS = {'fail', 'failed', 'error', 'refused', 'problem', 'stop', 'stale'}
@@ -783,7 +794,7 @@ class Run:
 
 ITEM_VALUE_KEYS = {'today', 'allowance', 'view', 'views', 'shot_names', 'page', 'scene', 'pages_list', 'exposure', 'hollow', 'figures',
                    'check_files', 'with_behind', 'processors', 'free_memory_gb', 'free_disk_gb', 'from_frame', 'to_frame', 'make_events', 'jumps',
-                   'name', 'count_ground', 'blender_running', 'models_as_set', 'allow_quick'}
+                   'name', 'count_ground', 'blender_running', 'models_as_set', 'allow_quick', 'toe'}
 
 
 # ------------------------------------------------------------------------------------------------ the stages
@@ -1182,9 +1193,56 @@ def stage_place(run, item, where):
     return audited
 
 
+def plate_engine(item, plate):
+    """The engine a plate was drawn with, from the place kit's render record (PLATE.json beside the picture, or the plan's render_record);
+    (engine, record path, scene) or (None, None, None)."""
+    record = item.get('render_record') or (os.path.splitext(plate)[0] + '.json' if plate else None)
+    if not record or not os.path.exists(record):
+        return None, None, None
+    try:
+        data = load_json(record)
+    except (ValueError, OSError):
+        return None, None, None
+    engine = str(data.get('engine') or '').upper() if isinstance(data, dict) else ''
+    return (engine or None), record, (data.get('scene') if isinstance(data, dict) else None)
+
+
+def plate_engines_check(run, items):
+    """After every plate: a LOOK when plates of one place were drawn with different engines (EEVEE streets came out cold blue and Cycles
+    streets warm gold, mostly because EEVEE's light cut-off stops lamp light reaching the road; the painter follows the plate)."""
+    places = {}
+    for item, (engine, record, scene) in getattr(run, 'plate_engines', []):
+        if engine:
+            key = item.get('place') or scene or item.get('blend') or 'the plates of this run'
+            places.setdefault(key, {}).setdefault(engine, []).append(item.get('name') or item.get('view') or os.path.basename(record))
+    findings = []
+    for place, engines in places.items():
+        if len(engines) > 1:
+            findings.append({'verdict': 'warn', 'check': 'one engine per place', 'where': str(place),
+                             'text': 'plates of one place were drawn with different engines (' + '; '.join(f'{e}: {", ".join(v)}' for e, v in sorted(engines.items()))
+                                     + '). The renderer sets the mood the painter follows: EEVEE streets came out cold blue and Cycles streets warm gold.',
+                             'fix': 'draw every plate of one place with the same renderer (if any plate needs Cycles, draw them all with Cycles: "renderer": "cycles" in place-settings.json), then paint'})
+        else:
+            findings.append({'verdict': 'pass', 'check': 'one engine per place', 'where': str(place), 'text': f'every plate drawn with {next(iter(engines))}'})
+    if findings:
+        run.add_check('the plates of one place drawn with one engine', findings, tool='preflight.py plates')
+
+
 def stage_plates(run, item, where):
     check = run.need(item, 'check', 'paint_request.py preflight')
     plate = run.need(item, 'plate', 'paint_request.py preflight')
+    engine, record, scene = plate_engine(item, plate)
+    if record:
+        run.register(record)
+    if not hasattr(run, 'plate_engines'):
+        run.plate_engines = []
+    run.plate_engines.append((item, (engine, record, scene)))
+    if engine == 'CYCLES':
+        run.add_check('the plate\'s engine against the painting checks', [{'verdict': 'warn', 'check': 'cycles plate', 'where': where,
+                      'text': 'this plate was drawn with Cycles: the painting checks (paint_request.py, after_painting.py) were tuned on EEVEE plates and are untested on '
+                              'Cycles plates, and Cycles has effects of its own (a fire drum lit orange, a speck at a roof corner, a sky dome that darkened). Not tried '
+                              'either: Cycles in a moving shot (its noise clean-up could flicker).',
+                      'fix': 'look at the plate and the painting yourself as well as reading the checks'}], where=where, tool='preflight.py plates')
     plate_facts = run.need(item, 'plate_facts', 'paint_request.py preflight')
     render_log = run.need(item, 'render_log', 'plan_lights.py render-log and paint_request.py (a paid repaint needs a clean render)')
     shot_report = run.need(item, 'shot_report', 'paint_request.py (a paid repaint needs the shot checker\'s light rules passed)')
@@ -1291,6 +1349,8 @@ def stage_paint(run, item, where):
             arguments += [option, item[key]]
     if item.get('figures'):
         arguments += ['--figures'] + list(item['figures'])
+    if item.get('toe') is not None:
+        arguments += ['--toe', str(int(item['toe']))]
     run.run_tool('the painting as it arrived (after_painting.py check)', 'calculators/after_painting.py', arguments, where=where)
     run.notes.append(f'The lined-up painting (PNG) is in {out_folder}: use that file, not the one the painter returned.')
 
@@ -1404,6 +1464,25 @@ def severity_of(finding):
     return words if words in SEVERITY_VERDICT else 'must fix'
 
 
+def history_critic_finding(data):
+    """Period accuracy needs its own critic: the critique's "critics" list must hold one whose area starts with "history" (it looks at every
+    still and every word written on a prop and asks: was this in that place and that year?). A FAIL without one (an accepted entry, stage
+    film, check "history critic", can waive it); only a LOOK when the file has no "critics" list at all (an older shape)."""
+    critics = data.get('critics') if isinstance(data, dict) else None
+    if not isinstance(critics, list):
+        return {'verdict': 'warn', 'check': 'history critic', 'where': '',
+                'text': 'the critique has no "critics" list (an older shape), so whether a critic judged period accuracy is not known',
+                'fix': 'run the critique-film workflow again: it has a history critic (wrong-era objects, too much of a thing, words on props)'}
+    areas = [str((c.get('area') or c.get('key') or '') if isinstance(c, dict) else c) for c in critics]
+    if any(area.strip().lower().startswith('history') for area in areas):
+        return {'verdict': 'pass', 'check': 'history critic', 'where': '', 'text': f'a history critic looked (areas: {", ".join(a for a in areas if a)})'}
+    return {'verdict': 'fail', 'check': 'history critic', 'where': '',
+            'text': f'no critic\'s area starts with "history" (areas: {", ".join(a for a in areas if a) or "none named"}): nobody judged whether what the viewer '
+                    'sees was in that place and that year (wrong-era vehicles, a symbol that reads wrongly today, too much of a thing that was scarce)',
+            'fix': 'run the critique-film workflow again (it has a history critic), or accept this in the plan\'s "accepted" (stage film, check history critic, '
+                   'with a reason, who and date)'}
+
+
 def critique_findings(run, path, newest, newest_file):
     found = []
     age = os.path.getmtime(path)
@@ -1428,6 +1507,7 @@ def critique_findings(run, path, newest, newest_file):
         run.unusable('critique', path, 'not a critique-film result: it holds no "verdict": {"confirmed": [...]} (the workflow\'s list of confirmed '
                      'findings, empty when there is nothing to fix)', 'the critique gate')
         return found
+    found.append(history_critic_finding(data))
     if not findings:
         found.append({'verdict': 'pass', 'check': 'critique findings', 'where': '',
                       'text': 'the critique confirmed no findings' + (f' ({len(data["verdict"].get("rejected", []))} rejected by its skeptic)'
@@ -1547,10 +1627,63 @@ def stage_film(run, item, where):
                           f'rates from {"this film" if item.get("rates") else "the table (a fallback)"}')
 
 
+def clip_critique_findings(run, path, film):
+    """A fresh helper's critique of the FILMED clip in motion (faults stills cannot show: a shadow that fades in when a move starts, a barrel
+    that floats, a one-frame colour change, a pale outline once the camera moves). It must be newer than the film and about this film, say
+    what it looked at, and every "must fix" finding must be fixed or accepted (with who and date), as for the critique before filming."""
+    found = []
+    data = run.read_json('clip_critique', path, 'the clip critique gate')
+    if data is None:
+        return found
+    if not isinstance(data, dict) or not isinstance(data.get('findings'), list):
+        run.unusable('clip_critique', path, 'not a clip critique: it needs {"film": PATH, "looked_at": [...], "findings": [{"time", "what", "severity", '
+                     '"status", "who", "date"}]} (an empty findings list when there is nothing to fix)', 'the clip critique gate')
+        return found
+    when = datetime.fromtimestamp(os.path.getmtime(path)).strftime('%Y-%m-%d %H:%M')
+    if film and os.path.getmtime(path) <= os.path.getmtime(film):
+        found.append({'verdict': 'fail', 'check': 'clip critique newer than the film', 'where': '',
+                      'text': f'the clip critique ({when}) is older than the film {os.path.basename(film)}: the film changed after it was judged',
+                      'fix': 'have a fresh helper judge the new film in motion (the film-critic agent\'s clip mode) and save its clip critique'})
+    elif film:
+        found.append({'verdict': 'pass', 'check': 'clip critique newer than the film', 'where': '', 'text': f'the clip critique ({when}) is newer than the film'})
+    named = data.get('film')
+    if film and named and os.path.basename(str(named)) != os.path.basename(film):
+        found.append({'verdict': 'fail', 'check': 'clip critique of this film', 'where': '',
+                      'text': f'the clip critique judged {os.path.basename(str(named))}, not {os.path.basename(film)}', 'fix': 'judge this film in motion'})
+    if not data.get('looked_at'):
+        found.append({'verdict': 'warn', 'check': 'clip critique looked at', 'where': '', 'text': 'the clip critique does not say what it looked at (the clip, contact sheets, times)',
+                      'fix': 'ask the helper to list what it watched'})
+    open_count = 0
+    for f in data['findings']:
+        if not isinstance(f, dict):
+            continue
+        status, severity = plain_name(f.get('status', '')), severity_of(f)
+        where = f'at {f.get("time")}' if f.get('time') is not None else ''
+        text = short(f.get('what', ''), 300)
+        if status in ('fixed', 'rejected', 'not a fault'):
+            found.append({'verdict': 'pass', 'check': f'clip critique finding ({severity})', 'where': where, 'text': f'{status}: {text}'})
+        elif status == 'accepted' and entry_is_signed(f):
+            found.append({'verdict': 'known', 'check': f'clip critique finding ({severity})', 'where': where, 'text': text,
+                          'accepted': {'reason': f.get('reason', ''), 'who': f['who'], 'date': f['date'], 'source': 'the clip critique'}})
+        else:
+            open_count += 1
+            found.append({'verdict': SEVERITY_VERDICT[severity], 'check': f'clip critique finding ({severity})', 'where': where,
+                          'text': text + (' (marked accepted without who and a real date: still open)' if status == 'accepted' else ''), 'fix': short(f.get('fix', ''), 300)})
+    if not data['findings']:
+        found.append({'verdict': 'pass', 'check': 'clip critique findings', 'where': '', 'text': 'the clip critique found nothing to fix in motion'})
+    if open_count:
+        found.append({'verdict': 'info', 'check': 'clip critique findings', 'where': '', 'text': f'{open_count} finding(s) not yet marked "status": "fixed" or "accepted" (with "who" and "date")'})
+    return found
+
+
 def stage_finish(run, item, where):
     film = run.need(item, 'film', 'sound_gates.py loudness, length and alignment')
     mix = run.need(item, 'mix', 'sound_gates.py alignment')
     timeline = run.need(item, 'timeline', 'sound_gates.py length and alignment')
+    clip = run.need(item, 'clip_critique', 'the clip critique gate (a fresh helper judged the filmed clip in motion)')
+    if clip:
+        run.add_check('a fresh critique of the filmed clip in motion, newer than the film, each must-fix finding fixed or accepted',
+                      clip_critique_findings(run, clip, film), where=where, tool='preflight.py finish')
     if film:
         run.run_tool('loudness and true peak of the film (sound_gates.py loudness)', 'narration-tools/sound_gates.py', ['loudness', film], where=where)
     if film and timeline:
@@ -1910,7 +2043,8 @@ EXAMPLE_PLAN = {
               'camera_log': 'checks/camera.json'},
     'film': {'events': 'checks/page-events-3-5.json', 'scene': 'my-chapter', 'critique': 'checks/critique.json',
              'page_files': ['film-kit/paper-film/scenes/my-chapter'], 'rates': 'checks/rates.json'},
-    'finish': {'film': 'deliver/chapter.mp4', 'mix': 'mix/chapter-mix.flac', 'timeline': 'narration/timeline.json', 'send': 'deliver/chapter-send.mp4'},
+    'finish': {'film': 'deliver/chapter.mp4', 'mix': 'mix/chapter-mix.flac', 'timeline': 'narration/timeline.json', 'clip_critique': 'checks/clip-critique.json',
+               'send': 'deliver/chapter-send.mp4'},
     'accepted': [{'stage': 'pages', 'check': 'lookups', 'text': 'workers', 'page': 3, 'reason': 'takes the first time, which is the one meant',
                   'who': 'the director', 'date': '2026-10-16'}],
 }
@@ -1975,6 +2109,8 @@ def build_parser():
     places.add_argument('--near-list', dest='near_list')
     places.add_argument('--figures', nargs='+')
     places.add_argument('--standard')
+    places.add_argument('--toe', type=int, choices=(0, 1), help='paint: the page\'s look.toe (1 for a dark, dusk or wet page), passed to after_painting.py --toe')
+    places.add_argument('--render-record', dest='render_record', help='plates: the place kit\'s render record of the plate (default: PLATE.json beside the picture)')
     place = parser.add_argument_group('place (and plates: --blend, --place-audit)')
     place.add_argument('--place-audit', dest='place_audit', help='the place audit (place-audit.json from explainer-film-place audit)')
     place.add_argument('--blend', help='the finished scene file the audit was made from (the audit goes stale when it changes)')
@@ -2004,6 +2140,7 @@ def build_parser():
     pages.add_argument('--to-frame', dest='to_frame', type=int)
     pages.add_argument('--blender-running', dest='blender_running', choices=['yes', 'no', 'auto'])
     pages.add_argument('--film')
+    pages.add_argument('--clip-critique', dest='clip_critique', help='finish: a fresh helper\'s critique of the filmed clip in motion (the film-critic agent\'s clip mode)')
     pages.add_argument('--mix')
     pages.add_argument('--send')
     pages.add_argument('--deliver', nargs='+')
@@ -2061,6 +2198,8 @@ def main(argv=None):
             STAGE_RUNNERS[args.stage](run, item, where)
     if args.stage in ('script', 'plates') and not accepted_broken:
         spend_ledger_check(run, items)
+    if args.stage == 'plates' and not accepted_broken:
+        plate_engines_check(run, items)
     run.check_accepted_breadth()
     hashes_before = dict(run.input_paths)   # each input's hash from when it was first seen, before a tool read it
     hashes_after = run.hash_inputs()

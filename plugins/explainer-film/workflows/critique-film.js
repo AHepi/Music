@@ -1,9 +1,9 @@
 export const meta = {
   name: 'critique-film',
-  description: 'Independent critique of a cinema-look chapter (pictures, on-screen content, code), then a skeptic verifies, merges and ranks every finding',
-  whenToUse: 'When all pages of a chapter are built (before or while filming). Pass the kit folder, chapter name, script, word times, guide, and where the stills of each page group are.',
+  description: 'Independent critique of a cinema-look chapter (pictures, on-screen content, history and period, code), then a skeptic verifies, merges and ranks every finding',
+  whenToUse: 'When all pages of a chapter are built (before or while filming). Pass the kit folder, chapter name, script, word times, guide, and where the stills of each page group are; for built places also the list of words written on props (propLettering).',
   phases: [
-    { title: 'Critique', detail: 'picture critics per page group, content critics, one code critic' },
+    { title: 'Critique', detail: 'picture critics per page group, content critics, one history critic, one code critic' },
     { title: 'Verify', detail: 'one skeptic re-checks every finding, dedupes and ranks' },
   ],
 }
@@ -19,6 +19,8 @@ export const meta = {
 //   pictureGroups: [{ label: 'pages 1-3', stills: 'which contact sheets / stills to look at, and fixes made since' }]  (required, 1-4 groups)
 //   contentGroups: [{ label: 'pages 1-5', pages: '1-5' }]  (optional, default two halves of 10 pages)
 //   notes: 'fixes already made that critics should not report again' (optional)
+//   propLettering: '/path/to/prop-lettering.json' (optional: every word written on a built prop, as kit/calculators/list_prop_lettering.py --out writes it; the history critic reads it)
+//   period: 'the place and the year the film shows, e.g. a pit village street, May 1926' (optional: otherwise the history critic reads it from the script)
 //   effort: 'medium'                             (optional)
 // }
 const A = args ?? {}
@@ -42,14 +44,22 @@ const FINDINGS = { type: 'object', properties: {
 }, required: ['findings', 'overall'] }
 
 const contentGroups = A.contentGroups ?? [{ label: 'pages 1-5', pages: '1-5' }, { label: 'pages 6-10', pages: '6-10' }]
+// what no tool can judge: the tips guide's section 19, given to every critic that looks at pictures (and to the history critic)
+const JUDGE_LIST = `Read section 19 of ${A.kit}/docs/LLM tips and tricks.md ("What the calculators can't judge") first: those judgements are yours, because no tool makes them. Look at stills at phone size (about 300 px wide) too and ask "what else could this read as?".`
+const ALL_STILLS = A.pictureGroups.map((g) => `${g.label}: ${g.stills}`).join('; ')
 const CRITICS = [
   ...A.pictureGroups.map((g) => ({ key: `pictures ${g.label}`, prompt: `${COMMON}
 
-Your area: the PICTURES of ${g.label}, as a film director and an information designer. Look at every still with the Read tool (open single stills at full size when a detail matters): ${g.stills}
-Judge: does each moment clearly show what the narrator says then (check the script and word times)? Is it cinematic (composition, light, depth, framing, focus) while staying informative? Are words readable, not clipped or overlapping, and out of the phone-button zones (bottom 380 px, right 140 px)? Anything confusing, cluttered, empty, ugly, anachronistic or inconsistent with the other pages? Rendering faults (tearing, streaks, white blocks, stray marks, things floating or sinking wrongly)? Anything passing through anything (into the painted room, the floor or another thing)? Does the frame feel full (subject large, top and bottom thirds used, no big empty dark floor or sky)? Does the camera hold still except for at most 3 meaningful moves per shot (zoom in/out, pan left/right/up/down, move up/down)?` })),
+Your area: the PICTURES of ${g.label}, as a film director and an information designer. ${JUDGE_LIST} Look at every still with the Read tool (open single stills at full size when a detail matters): ${g.stills}
+Judge: does each moment clearly show what the narrator says then (check the script and word times)? Is it cinematic (composition, light, depth, framing, focus) while staying informative? Are words readable, not clipped or overlapping, and out of the phone-button zones (anything to read ends left of 0.90 across and above 0.80 down)? Anything confusing, cluttered, empty, ugly, anachronistic or inconsistent with the other pages? Rendering faults (tearing, streaks, white blocks, stray marks, things floating or sinking wrongly)? Anything passing through anything (into the painted room, the floor or another thing)? Does the frame feel full (subject large, top and bottom thirds used, no big empty dark floor or sky)? Does the camera hold still except for at most 3 meaningful moves per shot (zoom in/out, pan left/right/up/down, move up/down)?` })),
   ...contentGroups.map((g) => ({ key: `content ${g.label}`, prompt: `${COMMON}
 
 Your area: the ON-SCREEN CONTENT of pages ${g.pages}. Read those page files and list every word, number and label they put on screen (draw2D strings, kit.word / kit.card, price tags, flip counters, dial scales) with its timing word. For each check: (1) it is a short form of what the narrator says at that moment, or plainly illustrative; (2) every number matches the research and adds no claim the narration does not make; (3) the strict on-screen rules in the guide; (4) it appears while the matching words are said. Also spelling and typography (quotes, %, ×, currency, dates).` })),
+  { key: 'history', prompt: `${COMMON}
+
+Your area: HISTORY AND PERIOD ACCURACY of everything the viewer SEES, not only the words: every painted object, every built prop, every person's clothes, and every word written on a prop (a notice, a sign, a newspaper, a shop or firm name, a date). ${JUDGE_LIST}
+The place and year: ${A.period ?? 'read them from the script'}. Look at every still with the Read tool: ${ALL_STILLS}. ${A.propLettering ? `Every word written on the built props, with the prop and the file it comes from, is in ${A.propLettering}: check each one.` : 'No list of the words on built props was given: read every word you can see on a prop in the stills and in the page files, and say that the list was missing.'}
+For each thing ask: "was this in that place and that year?" The faults this project really made, so you know what to look for: wrong-era tanks; too much coal heaped in a lockout, when coal was scarce; snow-like blotches the painter added on a May road; sacks shaped like clay jars; an oil-drum brazier that looks more 1984 than 1926; a symbol like a hooked cross. Words on a prop are claims too: a date and its weekday must agree (30 April 1926 was a Friday), and an invented name (a newspaper, a shop, a firm) must not copy a real one by accident. Use the web tools when you need a source (ToolSearch with query "select:WebSearch,WebFetch") and say whether you opened each source. Put each finding in the category "accuracy".` },
   { key: 'code', prompt: `${COMMON}
 
 Your area: the CODE, looking for faults that would show in the filmed chapter. The film is drawn in separate stretches (each starts in a fresh browser at its first frame after 3 warm-up frames), so every page's pose(t) and draw2D(ctx, t) must give the same picture for a given t whatever was drawn before. Check every page file and the shared code for: state carried between frames, Math.random or Date, camera keys out of time order, kit.at lookups hitting the wrong occurrence of a repeated word (check against the word times), events outside the page's window (about the previous page's last word + 0.3 s to its own last word + 1.2 s), objects left visible after a cut inside a page, and canvas state leaking between pages. Cite file and line.` },

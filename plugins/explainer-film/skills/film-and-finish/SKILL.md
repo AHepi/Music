@@ -21,7 +21,7 @@ the kit's `docs/LLM tips and tricks.md`, sections 14 and 15.
 
 ## 1. Film (in the background)
 
-Tell the user the estimated filming time before starting, and never film while Blender is drawing a plate
+Tell the person the estimated filming time before starting, and never film while Blender is drawing a plate
 (about 1.8 times slower).
 
 **Plan it first, from measured costs** (`kit/calculators/plan_budget.py`; the round 4 table alone missed
@@ -78,9 +78,9 @@ title there). `finish_film.sh` checks what it made with `narration-tools/sound_g
 FAIL line: each file's sound as long as the mix (within 0.05 s), the sendable copy as encoded at -15 LUFS
 +/- 0.5 with a true peak of at most -1 dBTP, its size under the limit, and its sound within 2 ms of the
 mix at every page's first word. Without the timeline (6th argument) it makes the files but ends with
-exit 3: the alignment was not checked. Report the PASS lines' numbers to the user.
+exit 3: the alignment was not checked. Report the PASS lines' numbers to the person.
 
-**A clip without narration** (a test of a place, a sample for the user): lay music under it with
+**A clip without narration** (a test of a place, a sample for the person): lay music under it with
 `bash paper-film/tools/add_music_bed.sh SILENT.mp4 MUSIC OUT.mp4 [START] [LOUDNESS=-14]` (fades in and
 out, -14 LUFS, peaks under -1 dB; -17.7 was found faint on a phone speaker, log 32). The music file is
 only read; never put it into a repository. Choose START by measurement, since nobody can listen here:
@@ -102,12 +102,23 @@ script then checks the clip's length, loudness and true peak, and stops on a FAI
   in the chapter). Any jump that is not a planned cut is a must-fix.
 - Before pushing or sending files: `python3 calculators/plan_budget.py push PATHS` refuses audio and video
   (none goes in the repository), a file over 90 MB (GitHub refuses 100 MB) and anything that looks like a
-  key, and packs the rest into pushes and chat-sized parts.
+  key, and packs the rest into pushes and chat-sized parts. It also fails on an email-like string in a script that
+  makes web requests, and on a dollar sign eaten by the shell ("bin/bash", or "US/" and a digit, in a money file:
+  US$0.048 once became US/bin/bash.048). Write files with prices through the file-writing tool or a quoted
+  here-document (`<<'EOF'`), never with `echo`.
 - Contact sheet of the finished film at one frame every 2 seconds:
   `mkdir -p sheet && ffmpeg -i FILM.mp4 -vf fps=0.5 sheet/frame-%03d.jpg` then
   `python3 -I paper-film/tools/contact_sheet.py film-sheet.jpg 10 sheet/frame-*.jpg` and look at it
   (frame-001 is 0 s, frame-002 is 2 s, and so on).
 - Size of the sendable copy (under 30 MB for sending in a chat).
 
-Tell the user what was measured and what was not (nobody watched it at full speed; how it plays on
+- **A fresh helper judges the clip in motion** (skill `check-and-critique`, section 5): stills cannot show a shadow
+  that fades in when the move starts, a floating barrel, a one-frame colour change or a pale outline that appears only
+  once the camera moves. It writes the clip critique, and `explainer-film-preflight finish --clip-critique FILE` needs it
+  (newer than the film, every "must fix" finding fixed or accepted).
+- **Banding in a dark sky.** A big dark plain sky can show faint contour steps (banding) when its contrast is raised 3
+  to 10 times, as in any 8-bit video (seen on the wet lockout clip). Do not promise it is absent, and do not film again
+  to chase it unless a viewer would see it at normal contrast.
+
+Tell the person what was measured and what was not (nobody watched it at full speed; how it plays on
 a phone).

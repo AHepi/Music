@@ -6,10 +6,12 @@ description: A place built here (a village, town, harbour, mine, farm, garden, i
 # Build a place in 3D and paint it over
 
 > **REQUIRED for every place, set or prop you build in Blender** (also when the request never mentions surfaces, wear or realism). Do it without being asked. In your report say plainly what the pass did, what the audit measured and what you skipped.
-> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating; a rail tenoned into two posts counts as carried) and at real size, and give every object its role AS YOU MAKE IT (`pk.new_part_object(owner, role, name, mesh)`, or the object property `place_role`). The role ids are listed by `explainer-film-place roles --list`. Never trust a role the kit only guessed from a name. The pass bends, chips and leans parts but never removes one, and it does not darken the ground where things touch or where water runs: build those yourself, as shape, while you build (a missing slate, a gap in the planking, one new board among grey ones; a few big, soft, darker shapes under a crate or a stall, round a post's foot, a rust run below an iron ring, the drip line under the eaves, a spout's spill).
+> 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating; a rail tenoned into two posts counts as carried) and at real size, and give every object its role AS YOU MAKE IT (`pk.new_part_object(owner, role, name, mesh)`, or the object property `place_role`). The role ids are listed by `explainer-film-place roles --list`. Never trust a role the kit only guessed from a name. The pass bends, chips and leans parts but never removes one, and it does not darken the ground where things touch or where water runs: build those yourself, as shape, while you build (a missing slate, a gap in the planking, one new board among grey ones; a few big, soft, darker shapes under a crate or a stall, round a post's foot, a rust run below an iron ring, the drip line under the eaves, a spout's spill), and the rubbish of the place's own work where the work happens (chips and bark by a woodpile, ash under a lamp or hearth, the broken pieces of a fallen slate below its gap).
 > 2. Run the surface-and-wear pass: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend` (it needs `--save-as`; it drafts `place-settings.json` when there is none, with a road for every dirt-road object). To read and improve a draft first: `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json`, where TYPE is the nearest of village, town, harbour, mine, farm, garden, interior or generic. It turns curves, text and instanced props into meshes, then adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds, rubbish and damage as shape.
 > 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend --reports REPORTS_FOLDER`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
-> 4. Try things in batches, inside a card-time allowance: make every change you plan in ONE sweep, then look once. Build the scene once and save it. For each change to a thing (a tree, a wall, moss) do not try one small change at a time: write about 10 variations whose settings are far apart, check them for free here first (`explainer-film-place variations scout FILE.json`: tiny pictures on this computer, no card time; it says which would not show), and draw them in ONE batch (`explainer-film-place variations run FILE.json --where rented --helper builder-walls --role builder` (`--helper` takes a short name for this helper, never a person's name): it drops near-duplicates and what the scout found would not show, spreads the variations over up to 3 rented cards, measures every picture and makes ONE labelled sheet). Look at the sheet, pick or combine, at most ONE more batch. Small quick pictures until the end (600 x 400 for trying variations, 1200 x 800 for the checkers' previews); full-size pictures once, at the very end. Every card job is written in a ledger and each helper has an allowance (builder 10 minutes, fixer 5): the tool refuses past it. Report the card seconds you used. Read `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md` first.
+> 4. Try things in batches, inside a card-time allowance: make every change you plan in ONE sweep, then look once. Build the scene once and save it. For each change to a thing (a tree, a wall, moss) do not try one small change at a time: write about 10 variations whose settings are far apart, check them for free here first (`explainer-film-place variations scout FILE.json`: tiny pictures on this computer, no card time; it says which would not show), and draw them in ONE batch (`explainer-film-place variations run FILE.json --where rented --helper builder-walls --role builder` (`--helper` takes a short name for this helper, never a person's name): it drops near-duplicates and what the scout found would not show, spreads the variations over up to 3 rented cards, measures every picture and makes ONE labelled sheet). Look at the sheet, pick or combine, at most ONE more batch. Small quick pictures until the end (600 x 400 for trying variations, or the tall 360 x 640 for a place marked for the film: the tool picks it; 1200 x 800 for the checkers' previews); full-size pictures once, at the very end. Every card job is written in a ledger and each helper has an allowance (builder 10 minutes, fixer 5): the tool refuses past it. Report the card seconds you used. Read `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md` first.
+> 5. When the place will be shown in the film (on a phone): its views are 1080 x 1920 (previews in the same tall shape, for example 540 x 960, not 1200 x 800), write `"for_film": true` in `place-settings.json`, and read `${CLAUDE_PLUGIN_ROOT}/skills/build-and-paint-a-place/SKILL.md` before you place a camera.
+> The person's words win: if they say not to use this plugin or a named part of it ("plain Blender", "do not use the skill"), that wins over this block and over the reminder. Say in one line what you leave out, and still say what you tested and what you did not.
 > Details, every command and the live-Blender route: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/SKILL.md`.
 
 What this is: the way the austerity project made its places from log 29 to log 35 (the pit village's notice
@@ -25,6 +27,18 @@ the start of the slide; Flux 3 edit painted it over and a second time with the n
 lined up with the plate (the painter had stretched it 0.65% and shifted it 3 pixels); the page
 `paper-film/scenes/notice-corner.js` shines the paintings back onto the set and slides 1.5 m toward the notice
 without turning. Two paintings cost about 20 to 45 US cents.
+
+**Start small.** Before you draw every view or pay for anything, deliver one small test for the person's reaction:
+build and audit the place (free, on this computer), draw only the first view's small picture (and, if asked, one
+painting of it), then stop and wait. The other views, the fresh checkers, the fix round and any other painting wait
+for the person (the workflow `build-a-place` does exactly this unless told `allViews: true`). Say what it costs and
+what it will not show. When the person is choosing a look, show a few versions of the SAME view so only the
+look changes (five style samples of one scene cost about US$0.90 in all), and say which you would pick and why.
+
+**What this method cannot do.** A painted plate covers one view and a little more (a slide of about 1.29 times
+nearer at most). Do not promise a camera that moves through the whole street, or light that reacts to people moving
+about: for that the whole set (every side, the interiors, the people) would need its own light and be drawn live,
+which is a later project the person has named. If they ask for it, say so and ask which sequence comes first.
 
 ## The tools, in the order you use them
 
@@ -88,7 +102,20 @@ Copy the pit village as the pattern (`paper-film/blender/pit-village/`):
    and `prop_library.py`). No blank signs, book covers or plain boxes: every sign carries real lettering
    (`props/paint_prop_pictures.py`; fonts and their OFL licences in `props/fonts/`), and the painter writes
    `lettering-sizes.json` before the builder runs. Check lettering reads at phone size
-   (`props/readability_test.py`, `props/make_sheet.py`). Every prop gets a role and an owner too.
+   (`props/readability_test.py`, `props/make_sheet.py`). Every prop gets a role and an owner too. The place audit's
+   check "place: lettering" fails a sign, notice, placard, poster, name board or book that has no lettering. (The
+   painter is asked for blank placards only so that it invents no writing: skill `paint-and-cut`.)
+   A name written on a prop (a newspaper, a shop, a firm) is either made up on purpose and checked against real
+   ones (a newspaper masthead was checked against 1,617 New Zealand newspaper titles), or a real one used
+   correctly: never let a made-up name copy a real one by accident. Text on a prop is a claim too: check its
+   dates and weekdays (30 April 1926 was a Friday, 1 May a Saturday) and its wording against a real source.
+   `python3 calculators/list_prop_lettering.py --out prop-lettering.json` lists every string written on a prop;
+   give that file and the pictures to the fact checker (skill `check-facts`) and to the critics.
+   When two buildings or objects stand for different things (two factories, a before and an after), make them
+   tellable apart at a glance in the half-size picture: a different colour, roof, count and shape of chimneys
+   (dark red brick with one round chimney against pale stone with two square chimneys and a tank). Test it: show
+   the half-size picture to a blind reader and ask which is which. A background landmark must look like neither.
+   (No tool checks this yet: it is judged.)
 3. The street: `build_street.py --out FOLDER --name NAME` (it refuses to overwrite without `--replace`). Give its objects roles
    and seat everything on the ground height (`pk.seat_on_ground`).
 4. People (each with a role and an owner): `paper-film/blender/figures/build_figures.py` (waiting men, walkers; cloth from
@@ -123,7 +150,7 @@ A place that is built but flat is not finished, and a model that passes the mode
 
 ## 2c. Try changes in batches, inside a card-time allowance (before any plate)
 
-Trying things one small change at a time, with a look after each, is what turned a US$10.89 card bill in the Japanese garden into pictures that cost about 5 cents. The rule: **plan every change, make them all in one sweep, then look once.** Build the scene once and save it (`FINISHED.blend`). For each change to a thing (a tree, a wall's moss, a gate's lean), write about 10 variations whose settings are far apart and draw them in ONE batch: `explainer-film-place variations make` writes the file, `variations plan` checks it for free, `variations run FILE.json --where rented --helper builder-walls --role builder` (a short name for this helper, never a person's name) draws it on up to 3 rented cards at once (600 x 400, EEVEE or low-sample Cycles by the renderer rule), measures every picture against the baseline and makes ONE labelled sheet. Look at the sheet with the Read tool, pick or combine, and draw at most ONE more batch (`variations refine`). Small quick pictures until the end; the plate and the full-size pictures once, at the very end. Every card job is written in the card-time ledger (`explainer-film-place card-time show`), and each helper has an allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0: judged): the tool refuses past it. Report the card seconds you used. The whole rule, the sheet's measures and a variations file written by hand are in `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`.
+Trying things one small change at a time, with a look after each, is what turned a US$10.89 card bill in the Japanese garden into pictures that cost about 5 cents. The rule: **plan every change, make them all in one sweep, then look once.** Build the scene once and save it (`FINISHED.blend`). For each change to a thing (a tree, a wall's moss, a gate's lean), write about 10 variations whose settings are far apart and draw them in ONE batch: `explainer-film-place variations make` writes the file, `variations plan` checks it for free, `variations run FILE.json --where rented --helper builder-walls --role builder` (a short name for this helper, never a person's name) draws it on up to 3 rented cards at once (600 x 400, or 360 x 640 for a place marked `"for_film": true`, EEVEE or low-sample Cycles by the renderer rule), measures every picture against the baseline and makes ONE labelled sheet. Look at the sheet with the Read tool, pick or combine, and draw at most ONE more batch (`variations refine`). Small quick pictures until the end; the plate and the full-size pictures once, at the very end. Every card job is written in the card-time ledger (`explainer-film-place card-time show`), and each helper has an allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0: judged): the tool refuses past it. Report the card seconds you used. The whole rule, the sheet's measures and a variations file written by hand are in `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`.
 
 ## 3. Plan each view by calculation, before drawing it (preflight `shots`)
 
@@ -180,7 +207,7 @@ Trying things one small change at a time, with a look after each, is what turned
    (`python3 calculators/settings.py profile crowd dark_subject` prints the rules a view is held to). A
    problem the project chooses to keep goes in the check file's `accepted` list with the rule, the reason, who
    accepted it and the date; the checker then reports it under "Known and allowed", and fails it again only if
-   it grows past what was accepted. Whether to accept is a judgement: ask the user or a critic.
+   it grows past what was accepted. Whether to accept is a judgement: ask the person or a critic.
 5. Before trusting a change to the checker itself, run its tests:
    `paper-film/blender/tests/run-checker-tests.sh OUT_FOLDER` (eleven faults planted on purpose; each report's
    first fix must name its fault; needs the pit village street, see the note in that file).
@@ -204,7 +231,16 @@ Trying things one small change at a time, with a look after each, is what turned
 - Export the set for the film: `assemble_notice_corner.py --plate PLATE --export` writes the set and signs as
   .glb and the camera as `notice-corner-camera.json` (`set_dressing.export_for_film` needs its folder).
 
-## 6. Paint it over (paid: confirm the cost with the user first)
+## 6. Paint it over (paid: confirm the cost with the person first)
+
+**Draw every plate of one place with the same renderer.** EEVEE streets came out cold blue and Cycles streets warm
+gold (mostly because EEVEE's light cut-off stops lamp light reaching the road), and the painter follows the mood of
+the plate it is given, so do not mix renderers inside one place or compare pictures across them (the plates stage
+gives a LOOK when the plates of one place were drawn with different engines). This rule wins over the per-scene rule:
+if any plate of a place needs Cycles (a lamp, window, lantern or fire lit, or water in view), draw every plate of that
+place with Cycles (`"renderer": "cycles"` in place-settings.json), the unlit ones too. Not yet tried: whether the painting
+checks, tuned on EEVEE plates, hold for Cycles plates (the plates stage says so as a LOOK), and Cycles in a moving
+shot (its noise clean-up could flicker). Test one before sending a Cycles plate to the paid painter.
 
 1. **Before paying**, run the request builder. It checks the plate, writes both prompts and prices them; it
    never sends anything:
@@ -224,7 +260,7 @@ Trying things one small change at a time, with a look after each, is what turned
    about 44 cents for a 2k repaint with a style picture at 4.8) and
    `python3 calculators/plan_budget.py ledger LEDGER.json --next-cost DOLLARS`. Then
    `explainer-film-preflight plates` (it needs the check file, the plate, the plate's facts folder, the render
-   log and the shot checker's report), and ask the user once with the exact cost. A vague reply is not a yes.
+   log and the shot checker's report), and ask the person once with the exact cost. A vague reply is not a yes.
    Right before paying, `explainer-film-preflight plates --gate` says whether that report still stands.
 3. Flux 3 edit on fal: image 1 the plate, image 2 the place's master painting in the film's style (send it at
    about 1 million pixels). Paint the master view first and use it as the style picture for the rest.
@@ -233,14 +269,38 @@ Trying things one small change at a time, with a look after each, is what turned
    It resizes to the plate, lines it up (the notice corner's painter had stretched it 0.65% and shifted it 3
    pixels), counts the figures and checks their outlines, darkness (painted men lifted from 15% to 50% of their
    surroundings turned mid-grey on a phone) and skin on heads, and compares the style. It writes PNG only.
-   Then `explainer-film-preflight paint`.
-5. **A "behind" painting** for what the near props hide: ask Flux once more, with the lined-up painting as the
-   only picture, to paint the near props out; check it with
+   Read its LOOK lines too: "bottom fifth" (the bottom fifth is more than 30 percent darker than the middle, so
+   the bottom is going empty: the nearest story thing should reach about 0.70 down) and "clouds" (the painted sky
+   has more contrast than a plain sky: the painter added clouds). Then `explainer-film-preflight paint`.
+4b. **A plain sky.** The painter adds heavy pale clouds even when told not to (three sentences against them did not
+   hold). Do not rely on words, and do not write your own masking code: run
+   `python3 calculators/after_painting.py sky --painting ALIGNED.png --plate PLATE.png --facts PLATE_FACTS --to NEW.png`
+   (ALIGNED.png is the lined-up painting, the `-aligned.png` picture that `check` wrote in its folder). It lays the plate's own plain sky in exactly inside the
+   plate's sky area (Blender's exact sky outline, from the plate's facts folder), keeps thin rails and roof edges as
+   painted, never writes over the painting or the plate, and keeps an earlier NEW.png as NEW-previous.png. Look at the
+   edges at full size (by hand it took four tries to keep thin rails and wires clean), read the "clouds" LOOK again on
+   the new picture, and say that you did it.
+5. **A "behind" painting** for what the near props hide. The better route: draw a twin plate in Blender with
+   exactly the props the page hides left out (read the page to find them), have that painted, then match its
+   brightness to the front painting (free). The older route: ask Flux once more, with the lined-up painting as the
+   only picture, to paint the near props out. Check either with
    `after_painting.py check ... --behind RETURNED_BEHIND.png --near-list REQUEST_FOLDER/near-list.json`, which
    lines it up against the painting and keeps the first painting's shadows round the near props (the painter
-   takes them away, lesson 122). For a slide past people with no painting of them gone,
+   takes them away, lesson 122). It FAILs with a "pale patch" line when the behind painting is lighter than the
+   front one where the near props stood. For a slide past people with no painting of them gone,
    `paper-film/tools/make_behind_picture.py` fills in their outlines from round about (free; look at its
-   `--look` picture).
+   `--look` picture). The page hands over from the painting to the behind painting as soon as the camera starts
+   to move (`projected-set.js` does it; waiting for more movement showed the gap, and it took three tries to find).
+5b. **Wet and dry paintings go in and out as a pair.** Never put a wet front painting over a dry behind painting:
+   where the camera uncovers what a near prop hid, a pale dry patch shows (59 percent of the road dots came out
+   lighter, measured; `after_painting.py check --behind` fails it as a "pale patch"). Draw the plate and the behind
+   plate in the same state, paint both, and swap both at once together with the page's look line (section 7). Keep
+   the other pair beside them under clear names (for example `NAME-dry.png` beside `NAME-wet.png`) with a short
+   note saying how to go back (a few renames and one look line). Never write over a painting the person liked.
+5c. **After a slide, look for these** (stills of the move, and the filmed clip): pale or dry-looking patches where
+   the behind and front paintings differ; painted shadows or outlines left on the road where a prop stood; a seam
+   between the front and behind paintings; a halo along the roofline; jumps other than the planned cut
+   (`paper-film/tools/find_jumps.py`); more flicker than before.
 6. **State pictures**: `python3 calculators/plan_states.py plan --plan STATE_PLAN.json --measure` measures how
    much of the frame each change swaps (a time cut up to about 12%, otherwise a blend of 0.8 s in 3 steps) and
    prints the exact `paper-film/tools/make_state_picture.py` commands.
@@ -273,6 +333,18 @@ const sky = skyCard(kit, projection, painting, projector);   // the painted sky 
   with them (the fire lower, the light later), or it reads as a glitch (lesson 136). A change that teaches a
   word must move the picture by 15 levels: `python3 calculators/plan_effects.py window-change --box l,t,r,b STILL_AT_WORD STILL_LATER`.
 - Long chapters of heavy sets: `buildCinemaChapter({ ..., lazy: true })`; each page exports its `join`.
+- **A dark, dusk or wet page.** The stage's film curve darkens dark values: in the wet lockout test the wet road
+  arrived at 0.75 to 0.86 of how bright it was painted, and some of it crushed to black (measured). For such a page
+  set `toe: 1` and `vignette: 0.25` in its look (`toe` 1 means the curve may still brighten a value but never darkens
+  one; 0, the default, is the old behaviour, so no other scene changes; `paper-film/scenes/lockout-test.js` is the
+  pattern). After every new painting run
+  `python3 calculators/after_painting.py check --painting P --plate PLATE --check C --facts F --out-folder D --toe 1`:
+  it prints how bright the road "arrives at" against its painting. The wet lockout reached 0.935 and the dry one with the same look 0.96 (measured); there is no limit yet, so treat
+  anything under about 0.9 as a reason to look (invented). A wet painting also reads differently from a dry one (a
+  detailed picture with a paint finish, no thick ink outlines and a plain dark sky, against flat colour with thick
+  outlines): tell the person when two shots of one film differ in look like this.
+- **Define each place's look once**, in one shared set file that every page showing the place loads: one works'
+  door looked different on pages 3 and 8 when it was built twice.
 
 ## 8. Check before filming
 
@@ -323,3 +395,7 @@ const sky = skyCard(kit, projection, painting, projector);   // the painted sky 
   123; `after_painting.py check`).
 - People's long shadows stay behind when the painter removes the people (lesson 135; `paint_request.py preflight --helper-plate`).
 - One small change, then a look, then the next, with the scene rebuilt and the picture drawn at full size each time, ran up US$10.89 of card time in the garden: batch about 10 far-apart variations, small, from the saved scene, and stay inside the allowance (`explainer-film-place variations`, `card-time`).
+- A mark in a picture that nobody can explain (a white shape, a streak): hide one group of objects at a time and draw a small
+  picture each time until the mark goes. In the Japanese garden it was the pond mirroring the glowing paper screens: roughen the
+  water slightly, dim the glowing thing, or hide the lamps from reflections.
+- A wet front painting over a dry behind painting shows a pale dry patch when the camera moves (`after_painting.py check --behind`, "pale patch").

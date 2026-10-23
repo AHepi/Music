@@ -213,12 +213,13 @@ const glowBlurMaterial = pass(/* glsl */`
 
 // 4. the finish: exposure, glow, a filmic curve, film colour (cool shadows, warm lights), a touch of
 //    colour fringing at the edges, words and charts on top, dark edges and grain. Output is sRGB.
+//    look.toe (0 by default = the curve as it always was): 1 = the filmic curve may still brighten a value but never darkens one, so dark painted values stay as painted (wet street test, round 2).
 const finishMaterial = pass(/* glsl */`
   varying vec2 vUv;
   uniform sampler2D colourMap; uniform sampler2D glowNear; uniform sampler2D glowFar; uniform sampler2D overlayMap;
   uniform float useOverlay; uniform float exposure; uniform float glowStrength; uniform float contrast; uniform float saturation;
   uniform vec3 shadowTint; uniform vec3 highlightTint; uniform float tintAmount;
-  uniform float vignette; uniform float grain; uniform float fringe; uniform float seed; uniform float lift; uniform float fade;
+  uniform float toe; uniform float vignette; uniform float grain; uniform float fringe; uniform float seed; uniform float lift; uniform float fade;
   vec3 aces(vec3 x) { return clamp((x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14), 0.0, 1.0); }
   float hash(vec2 p) { p = fract(p * vec2(443.897, 441.423)); p += dot(p, p.yx + 19.19); return fract((p.x + p.y) * p.x); }
   vec3 toSrgb(vec3 c) { return mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c)); }
@@ -231,7 +232,8 @@ const finishMaterial = pass(/* glsl */`
     c.b = texture2D(colourMap, vUv + shift).b;
     c *= exposure;
     c += (texture2D(glowNear, vUv).rgb * 0.6 + texture2D(glowFar, vUv).rgb * 0.8) * glowStrength;
-    c = aces(c);
+    vec3 filmicValue = aces(c);
+    c = mix(filmicValue, max(filmicValue, c), toe);
     float luma = dot(c, vec3(0.2126, 0.7152, 0.0722));
     c = mix(vec3(luma), c, saturation);
     c = (c - 0.5) * contrast + 0.5;
@@ -254,7 +256,7 @@ const finishMaterial = pass(/* glsl */`
   colourMap: { value: null }, glowNear: { value: null }, glowFar: { value: null }, overlayMap: { value: null },
   useOverlay: { value: 0 }, exposure: { value: 1 }, glowStrength: { value: 0.6 }, contrast: { value: 1.04 }, saturation: { value: 1.0 },
   shadowTint: { value: new THREE.Vector3(0.44, 0.52, 0.56) }, highlightTint: { value: new THREE.Vector3(0.56, 0.5, 0.42) }, tintAmount: { value: 0.35 },
-  vignette: { value: 0.32 }, grain: { value: 0.035 }, fringe: { value: 0.006 }, seed: { value: 0 }, lift: { value: 0.015 }, fade: { value: 0 },
+  toe: { value: 0 }, vignette: { value: 0.32 }, grain: { value: 0.035 }, fringe: { value: 0.006 }, seed: { value: 0 }, lift: { value: 0.015 }, fade: { value: 0 },
 });
 
 // The finishing settings every page starts from; a page changes only what it needs.
@@ -262,6 +264,7 @@ export const DEFAULT_LOOK = {
   exposure: 1.0, glowStrength: 0.55, glowThreshold: 0.9, contrast: 1.05, saturation: 1.0,
   shadowTint: [0.44, 0.52, 0.56], highlightTint: [0.56, 0.5, 0.42], tintAmount: 0.35,
   vignette: 0.32, grain: 0.035, fringe: 0.006, lift: 0.015, fade: 0,
+  toe: 0,   // toe: 0 = the filmic curve as it always was; 1 = the curve may brighten but never darken a value (dark painted values stay as painted)
   aperture: 0.0, maxBlur: 16,
 };
 
@@ -328,7 +331,7 @@ export function drawPage(shot, target) {
   u.glowFar.value = glowTargets[3].texture;
   u.exposure.value = look.exposure; u.glowStrength.value = look.glowStrength; u.contrast.value = look.contrast; u.saturation.value = look.saturation;
   u.shadowTint.value.set(...look.shadowTint); u.highlightTint.value.set(...look.highlightTint); u.tintAmount.value = look.tintAmount;
-  u.vignette.value = look.vignette; u.grain.value = look.grain; u.fringe.value = look.fringe; u.lift.value = look.lift; u.fade.value = look.fade;
+  u.toe.value = look.toe; u.vignette.value = look.vignette; u.grain.value = look.grain; u.fringe.value = look.fringe; u.lift.value = look.lift; u.fade.value = look.fade;
   u.seed.value = ((shot.time ?? 0) * 30) % 97;
   u.useOverlay.value = 0;
   if (shot.drawOverlay) {

@@ -41,8 +41,17 @@ language (few, big, clean), never photographic noise.
 ## 3. How to work
 
 1. Work on your own COPY of the scene file you are given (copy `ground.blend` to your own folder first). Run Blender
-   headless: `blender -b --disable-autoexec FILE.blend --python your_script.py`. The plugin's commands find Blender
-   themselves; give them the Blender path you were told with `--blender PATH` when there is one.
+   headless with the thread limit your prompt gives (2 unless told): `blender -t 2 -b --disable-autoexec FILE.blend --python your_script.py`.
+   Other builders run Blender on the same computer at the same time, and without a limit they starve each other. The plugin's
+   commands find Blender themselves; put `EXPLAINER_FILM_BLENDER_THREADS=2` in front of each (the launcher then adds `-t 2`),
+   and give them the Blender path you were told with `--blender PATH` when there is one.
+   Never change or write over what the person gave you or approved (the starting scene, an uploaded add-on or toolkit, an
+   approved painting): work on a copy. When you make a new version of your own file, keep the old one beside it under a
+   clear name, with a short note on how to go back.
+   An add-on or a toolkit the person uploaded: unpack it into its own folder, read its guide first, search its code for
+   anything risky (internet access, starting programs, deleting files), run Blender with `--disable-autoexec`, and run it
+   only on copies. If it breaks in Blender 5.2 (`blender-5-traps.md`, traps 17 and 18), patch it with a small shim in your
+   own script and leave the add-on untouched.
 2. Write your work as a stage file, `stage_<owner>.py`, with a function `apply(options)` that works on the open scene
    and is IDEMPOTENT: it first removes what an earlier run of it made (found by `place_owner`), so that running it twice
    gives the same scene. The shape of it, inside Blender:
@@ -69,7 +78,16 @@ language (few, big, clean), never photographic noise.
    hang (doors, shutters, fences, ironwork, rope, windows) are allowed to be. Bevel every edge a hand could
    touch. Make no two siblings alike (planks of different widths, a bow, a chipped corner, a replaced board; tiles or
    shingles of different tones with a few slipped or missing; posts a little out of plumb). That is damage and age as
-   SHAPE, and it is what shows at film size.
+   SHAPE, and it is what shows at film size. Build the rubbish of the place's own work where the work happens, as a few
+   big shapes in the part that owns them (chips and bark by a woodpile, ash under a lamp or hearth, the broken pieces of a
+   fallen slate below its gap): the pass scatters only general litter.
+   If a span is really longer than its role allows (planks 1.38 m, beams 2.5 m: a hall's tie beam between its walls, a
+   gallery bay of 3 m), do not add posts nobody would build: ask the planner for a "free_span" fact with a source in the
+   place's facts file (`construction-and-scale.md`).
+   Thousands of small shapes (leaves, slates, pebbles, tufts): build them as arrays into ONE mesh for each material, never
+   one object at a time (the garden's leaves took 7 minutes one by one and about 10 seconds in bulk, measured); keep each
+   mesh under about 300,000 triangles before displacement. Object count, not triangles, slows scripts and exports: the
+   audit holds it to the house number `place_audit.objects_total_max`.
 4. Run only small tests on this computer (it is slow): small pictures, `--quick`. Anything bigger waits for the renderer.
    You have a card-time allowance (section 3b) and spend no other money. Never try a change one small step at a time.
 5. Run your own pass and your own checks, in this order, on your copy:
@@ -100,7 +118,7 @@ blend two; at most ONE more batch around the pick. Two looks, not twenty-five. T
    Then the free scout: `explainer-film-place variations scout FILE.json` draws the same variations HERE, tiny, in about a minute for a small part, with no card time; look at its sheet. If fewer than
    10 would show, spread wider and scout again. Then `explainer-film-place variations plan FILE.json --helper NAME --role ROLE --ledger LEDGER`: it is free, drops near-duplicates and what the scout
    found would not show, and says what the batch would use.
-4. `explainer-film-place variations run FILE.json --where rented --helper NAME --role ROLE --ledger LEDGER` draws it (up to 3 cards at once, 600 x 400, measured, one sheet). Give the command a time limit of
+4. `explainer-film-place variations run FILE.json --where rented --helper NAME --role ROLE --ledger LEDGER` draws it (up to 3 cards at once, 600 x 400, or 360 x 640 for a place marked for the film, measured, one sheet). Give the command a time limit of
    10 minutes; if it is cut off anyway, `explainer-film-place variations collect RUN-FOLDER` finishes it without sending anything again. If no card is set up for you, it says so
    in one sentence: draw a SMALL batch with `--where local` (tiny scenes only, this computer is slow) or say what you could not try. Look at the sheet with the Read tool.
 5. A third batch for one change is refused, and so is a step past your allowance. Do not work around either: pick the best variation you have, or write the reason the tool asks for (`--over-allowance "..."`, 15 letters or more;
@@ -144,6 +162,12 @@ the scene), `steps_finished`, `objects_added` (how many objects your stage makes
 - `seconds` is the total of the seconds your Blender runs took (add up what the commands print).
 - `card_seconds` is the card seconds you used (the number `card-time show` gives for your name; 0 when you used none) and `batches` is how many batches you drew; the person reads both.
 - Plain everyday words. Say what was measured by a tool and what you only judged.
+- Never put the person's name, email or any address into a request to an outside website: not in a download script's
+  identity line (User-Agent), not in a header, not in a file name. Use a generic client name. (One helper wrote the
+  person's email into the identity line of its picture downloads.)
+- Never send a message to a helper that is spending money while it runs: a message to a running paid helper once woke a
+  second copy of it, which made 8 extra paid calls (about US$0.70). If `explainer-film-place card-time check` says your
+  helper name "already has a job in flight", another copy of you is working: start nothing, and report it.
 - Do not commit or push. Never write a key, an id or a personal detail into any file. Save your evidence as JSON or text
   files in your own folder as you go (a helper may be refused a report file, and a restart can lose your work), and return
   the report as text in your final answer.

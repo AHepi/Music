@@ -16,12 +16,11 @@ import os
 import struct
 import subprocess
 import sys
-import tempfile
 
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES, project_folder, blender_program, PROJECT_WORDS  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, project_folder, blender_program, PROJECT_WORDS, work_folder  # noqa: E402
 from settings import load_settings  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
@@ -110,7 +109,7 @@ def lint(paths, only, as_set=False, index=None, prop=None):
     return model_lint.lint(models, settings, tuple(only), as_set, index, prop)[0]
 
 
-folder = tempfile.mkdtemp(prefix='model-lint-test-')
+folder = work_folder('model-lint-test-')
 try:
     # ---------------------------------------------------------------------------------------------------- A. made-up models
     wall = os.path.join(folder, 'wall.glb')

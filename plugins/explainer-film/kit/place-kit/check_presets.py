@@ -24,6 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 KIT_ROOT_DEFAULT = os.path.dirname(HERE)            # the kit folder (holds place-kit, calculators, film-settings.json)
 KINDS = ('measured', 'judged', 'invented')
 LAYERS = ('dirt', 'grime', 'weathering', 'wetness', 'cracks_and_chips', 'edge_wear', 'moss_and_algae', 'rust', 'rubbish')
+NO_SURFACE_CLASSES = ('never', 'backdrop')     # role classes with no surface pass (place_kit/roles.py is_never)
 TREATMENTS = ('normal_map', 'displacement', 'roughness_variation', 'colour_variation', 'bevelled_edges', 'dirt', 'grime', 'weathering', 'wetness',
               'cracks_and_chips', 'edge_wear', 'moss_and_algae', 'rust', 'rubbish', 'plants', 'litter_pieces', 'shape_damage')
 # modules that may use outside packages because they never run inside Blender
@@ -138,7 +139,7 @@ def check_agreement(place_kit):
             problems.append(f'roles.json {role_id}: its class "{spec["class"]}" does not match the name')
         if spec['class'] not in roles['classes']:
             problems.append(f'roles.json {role_id}: class "{spec["class"]}" does not exist')
-        if spec['class'] != 'never' and spec['surface'] not in surfaces:
+        if spec['class'] not in NO_SURFACE_CLASSES and spec['surface'] not in surfaces:
             problems.append(f'roles.json {role_id}: surface "{spec["surface"]}" is not in surfaces.json')
         for fact in spec.get('scale', []):
             if fact not in facts:

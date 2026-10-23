@@ -1,6 +1,6 @@
 ---
 name: check-and-critique
-description: Check a finished set of cinema-look pages before filming - first the automatic page checks (timing, words on screen, layout, camera, by calculation), then stills of every beat, the page turns from the whole chapter, and an independent critique by helper agents (pictures, on-screen content, code) aimed at what the tools cannot judge, whose findings a skeptic verifies and ranks. Use when all pages are built, and again after big fixes.
+description: Check a finished set of cinema-look pages before filming - first the automatic page checks (timing, words on screen, layout, camera, by calculation), then stills of every beat, the page turns from the whole chapter, and an independent critique by helper agents (pictures, on-screen content, history and period, code) aimed at what the tools cannot judge, whose findings a skeptic verifies and ranks; after filming, a fresh helper judges the clip in motion. Use when all pages are built, again after big fixes, and once the film is made.
 ---
 
 # Check and critique before filming
@@ -26,7 +26,10 @@ The tools measure; they cannot judge these. Put this list in the critics' brief 
 below), so they spend their effort where no tool can (the full list with examples: the kit's
 `docs/LLM tips and tricks.md`, section 19):
 - what a detail reads as on a phone (a contour map, a bar chart, a tank), at about 300 px wide;
-- history and story accuracy of every painted object, not only the words (a history critic);
+- history and story accuracy of every painted object and every word written on a prop, not only the spoken words: the
+  workflow `critique-film` runs a history critic that asks of each "was this in that place and that year?" (the project's
+  faults: wrong-era tanks, too much coal in a lockout, snow-like blotches on a May road, sacks shaped like clay jars, an
+  oil-drum brazier more 1984 than 1926, a symbol like a hooked cross);
 - whether a motion matches the meaning of its words (a needle falling on "raising");
 - whether machines read as machines and props as what they are, and whether a hero prop has enough detail;
 - whether a picture contradicts a card, or a colour or symbol carries political or commercial meaning;
@@ -62,16 +65,21 @@ Workflow({ name: "explainer-film:critique-film", args: {
   script: "/abs/path/NN Script.md", wordTimes: "/abs/path/film-kit/examples/<chapter>/timeline.json",
   guide: "${CLAUDE_PLUGIN_ROOT}/skills/build-cinema-page/guide.md",
   ledger: "/abs/path/NN Research.md",
-  brief: "the user's words about the look",
+  brief: "the person's words about the look",
   pictureGroups: [ { label: "pages 1-3", stills: "OUT/p1/sheet.jpg, OUT/p2/sheet.jpg, OUT/p3/sheet.jpg, OUT/joins/sheet.jpg" },
                    { label: "pages 4-6", stills: "..." }, { label: "pages 7-10", stills: "..." } ],
   notes: "fixes already made since those sheets",
+  propLettering: "/abs/path/prop-lettering.json",   // optional, for built places: python3 calculators/list_prop_lettering.py --out FILE
+  period: "the place and the year the film shows",  // optional
   effort: "medium" } })
 ```
+It returns `{ critics, verdict }`; one critic's area is `history`, and the `film` stage refuses a critique with no history area.
 Without workflows: start the same critics as Agents (type `explainer-film:film-critic`), one per
 area, all at once, then one more agent to verify and rank their findings.
 
-Then run `check-facts` again with `onScreen` set to the page files, so every number shown is checked.
+Then run `check-facts` again with `onScreen` set to the page files, `pictures` set to the stills and paintings, and
+`propLettering` set to the file `calculators/list_prop_lettering.py` writes, so every number shown, every picture's
+period and every word on a prop is checked.
 
 ## 4. Fix, then check the fixes independently
 
@@ -89,8 +97,25 @@ Then run `check-facts` again with `onScreen` set to the page files, so every num
   ```
 - Fix what it finds, run `explainer-film-preflight pages` again (fixes make new faults), look again, and
   record each fault and its fix in Lessons.md. Only then run `explainer-film-preflight film` and film.
+- Before you say a fix left the other pages unchanged, draw each comparison still at least three times with the old
+  and the new code and compare them with `python3 calculators/regression_compare.py --old OLD_FOLDER --new NEW_FOLDER`
+  (some pictures come out two ways from run to run: the house sample at 20 s differed in 7.7 percent of its dots by at
+  most 7 of 255 with nothing changed). Before you blame a change for a faint speckle, redraw the unchanged old version
+  several times first (the control), and say how many pictures and draws you compared.
 - Save the critique's findings as JSON and mark each `"status": "fixed"` or `"accepted"` (with `"who"` and
   `"date"`) once dealt with: the `film` stage (`--critique FILE`) refuses a critique, or a `pages` report,
   older than any page file, or with a finding still open.
 - If filming has already started: a stretch only needs re-filming if its page changed after the
   stretch started (compare the stretch file's time with the page file's).
+
+## 5. After filming: a fresh helper judges the clip in motion
+
+Stills cannot show a shadow that fades in only when the move starts, a barrel that floats, a one-frame colour change,
+or a pale outline that appears only once the camera moves (three separate rounds found faults only this way). After
+filming, a fresh helper who did not make the clip (agent `explainer-film:film-critic` in its clip mode) looks at it in
+motion: a contact sheet at about 2 frames a second, the frame-to-frame jump list (`paper-film/tools/find_jumps.py`),
+and close-ups of the first second after each camera move starts. It saves its findings as the clip critique, a JSON
+file shaped `{"film": PATH, "looked_at": [...], "findings": [{"time", "what", "severity", "status", "who", "date"}]}`;
+mark each finding `"status": "fixed"` or `"accepted"` once dealt with. The finish stage needs it:
+`explainer-film-preflight finish --clip-critique FILE` refuses one older than the film or with a "must fix" finding
+still open.

@@ -12,10 +12,9 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, skip  # noqa: E402
+from checks import Checker, CALCULATORS, skip, work_folder  # noqa: E402
 
 try:
     import numpy as np
@@ -28,7 +27,7 @@ from settings import load_settings  # noqa: E402
 
 check = Checker('picture measures: made-up pictures with known answers')
 settings = load_settings()
-folder = tempfile.mkdtemp(prefix='picture-measures-test-')
+folder = work_folder('picture-measures-test-')
 
 
 def save(name, array):

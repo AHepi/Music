@@ -13,7 +13,9 @@ A variations file is JSON:
         {"name": "lean-more", "script": "hooks/lean.py", "args": {"lean_degrees": 8}, "ranges": {"lean_degrees": [0, 20]}}   a small script hook
      ]}
 The settings a variation may set are listed at the top of keys.py (`explainer-film-place variations keys` prints them with their ranges). "engine", "picture": {"size": [600, 400], "samples": 24}
-are optional. "baseline" is a reserved name: the saved scene as it is is always drawn too, because every measure is against it.
+are optional. With no size given, a place whose settings say "for_film": true (the settings file the variations file names, else place-settings.json beside the scene, the
+kit's own default) is drawn in the film's tall shape (place_variations.picture_size_pixels_film, 360 x 640; the scout 144 x 256), because a wide picture through a camera placed
+for 1080 x 1920 shows a different frame; any other place in 600 x 400. "baseline" is a reserved name: the saved scene as it is is always drawn too, because every measure is against it.
 A variation with a script hook is always drawn from a freshly reopened scene; a variation made only of settings is reset by putting the old values back and checking them ("reset": "reopen"
 forces a reopen).
 
@@ -127,10 +129,24 @@ def read_spec(path, scene=None, settings=None, cameras=None, engine=None, size=N
         shown = problems[:10]
         raise SpecProblem(f'the variations file {path} has {len(problems)} problem(s):\n  - ' + '\n  - '.join(shown) + ('\n  - ...' if len(problems) > 10 else ''))
     picture = raw.get('picture') if isinstance(raw.get('picture'), dict) else {}
-    chosen_size = size or picture.get('size') or numbers.value('place_variations.picture_size_pixels')
+    for_film = says_for_film(settings_path or (os.path.join(os.path.dirname(scene_path), 'place-settings.json') if scene_path else None))
+    chosen_size = size or picture.get('size') or numbers.value('place_variations.picture_size_pixels_film' if for_film else 'place_variations.picture_size_pixels')
     return {'path': os.path.abspath(path), 'folder': folder, 'about': raw.get('about'), 'change': str(raw.get('change') or 'one change'), 'change_id': safe_name(raw.get('change') or 'one change'),
             'scene': scene_path, 'settings': settings_path, 'cameras': camera_list, 'engine': (engine or raw.get('engine') or 'auto').lower(),
-            'size': [int(chosen_size[0]), int(chosen_size[1])], 'samples': int(samples or picture.get('samples') or 0) or None, 'variations': variations}
+            'size': [int(chosen_size[0]), int(chosen_size[1])], 'samples': int(samples or picture.get('samples') or 0) or None, 'variations': variations,
+            'for_film': for_film}
+
+
+def says_for_film(settings_path):
+    """True when the place settings file says "for_film": true (the place will be in the film, in the tall 1080 x 1920 frame). A missing or unreadable file says no."""
+    if not settings_path or not os.path.isfile(settings_path):
+        return False
+    try:
+        with open(settings_path, encoding='utf-8') as handle:
+            data = json.load(handle)
+    except (OSError, ValueError):
+        return False
+    return isinstance(data, dict) and data.get('for_film') is True
 
 
 # ------------------------------------------------------------------ the check before drawing

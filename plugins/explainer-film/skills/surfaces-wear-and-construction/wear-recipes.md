@@ -28,6 +28,8 @@ The order was measured on the street and never changes: dirt and grime go on fir
 then wetness; then cracks_and_chips and edge_wear (they stay dull when wet); then moss_and_algae; then rubbish last.
 Rust is part of the first group, for iron. 3D plants and litter are separate pieces placed after the layers.
 Each object needs its own `pk_<layer>_amount` property; `age` writes it. Without it the layer is silently off there.
+The layers that tell sheltered sides from sun-facing ones (moss, soot, fade) read the scene's one sun lamp; with none, or
+more than one, they assume 135 degrees (compass) and 45 degrees up. Add your own sun before `finish`.
 
 | Layer | What it is (and the words people use) | Where it goes |
 |---|---|---|
@@ -76,6 +78,12 @@ rely on the colour alone.
   the road by only 0.006 (measured). No shine on walls.
 - **Dirt darkens by multiplying** the colour under it, so the surface's own variation shows through (judged). A layer
   that paints a flat colour over the top hides everything below it.
+- **Keep distant ground quiet**: shrink its small bumps to about a quarter of their strength far away and fade painted
+  flecks with distance, or far ground shimmers like water, worst in a moving shot (judged, the coal mine's wet mud). The
+  layers have no distance input: do it in the ground's material (a fade of the normal strength with distance).
+- **A place that is painted over**: none of the set's own maps reach the film, because the projected painting covers
+  about 98 percent of a view that has moved (measured, the wet street). So a wet look is painted from the wet plate
+  (skill `build-and-paint-a-place`, section 6); a wet roughness on the set alone does not show.
 
 ## The four looks, and the three states
 

@@ -19,7 +19,7 @@ and 3.
 
 ## Steps
 
-1. **Check the script, then confirm the cost** with the user. First
+1. **Check the script, then confirm the cost** with the person. First
    `python3 -I narration-tools/lint_script.py before narration-script.json --word-times EARLIER_WORD_TIMES.json --timeline-out timeline-estimated.json`
    (EARLIER_WORD_TIMES: any earlier recording of the same voice). Its errors stop the recording: a cue
    that is not the one accent line, capitals, a name not in its sound spelling, sentences over 20 words,
@@ -28,11 +28,11 @@ and 3.
    credits and dollars to quote (about 1 credit per letter, the cue included). Its LOOK lists are for a
    person: unfamiliar words, names, repeated words with their sentences, the first 30 seconds. Then check
    the money: `python3 calculators/plan_budget.py ledger LEDGER.json --next-cost DOLLARS` (what is left of
-   the user's allowance; it refuses a step bigger than that), and ask once with the exact cost. A vague
+   the person's allowance; it refuses a step bigger than that), and ask once with the exact cost. A vague
    reply is not a yes.
 2. **Record each page on its own** with the ElevenLabs connector, all on one flow
    (`creative_create_flow` first, then `creative_generate_speech` per page with the page's full text,
-   the voice id, model `eleven_v4`, and `generations_count: 1` unless the user wants takes to choose
+   the voice id, model `eleven_v4`, and `generations_count: 1` unless the person wants takes to choose
    from). Poll `creative_get_flow_run_status`; **download each recording at once** (links expire
    after 2 hours) as `recordings/pageN.mp3`.
 3. **Transcribe** each recording (`creative_transcribe_audio`, model `eleven_scribe_v1`, free) and save
@@ -48,7 +48,7 @@ and 3.
    she speaks, and the mix lines up with the narration within 2 ms. A new soundtrack: find its level first
    with `python3 -I narration-tools/sound_gates.py duck MUSIC.mp3 narration.wav timeline.json` (then
    `MUSIC_LEVEL_DB=...`); "slightly louder" is `--louder 3`.
-7. **Check the recordings** (by measurement; tell the user nobody listened unless they did):
+7. **Check the recordings** (by measurement; tell the person nobody listened unless they did):
    `python3 -I narration-tools/lint_script.py after narration-script.json --transcripts transcripts --recordings recordings`
    (a cue read aloud, words that differ, missing downloads; lists each "..." that left under 1 s of
    silence and words placed late after a pause) and

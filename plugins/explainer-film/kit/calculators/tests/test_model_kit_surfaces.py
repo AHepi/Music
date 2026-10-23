@@ -15,18 +15,17 @@ import os
 import struct
 import subprocess
 import sys
-import tempfile
 import zlib
 
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, KIT, FIXTURES, blender_program  # noqa: E402
+from checks import Checker, KIT, FIXTURES, blender_program, work_folder  # noqa: E402
 
 BLENDER_FOLDER = os.path.join(KIT, 'paper-film', 'blender')
 FIXTURE = os.path.join(FIXTURES, 'model_kit', 'check_bevel.py')
 check = Checker('film model helpers: no Pillow, lossless normal maps, hardened bevels')
-folder = tempfile.mkdtemp(prefix='model-kit-test-')
+folder = work_folder('model-kit-test-')
 
 
 def decode_png(path):

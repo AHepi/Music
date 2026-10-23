@@ -49,6 +49,12 @@ Judge each planned element on its own (`each_element`: the element, your
 verdict, why). Compare at 100 percent crops, not only at full-frame size. Measure what you can with
 `explainer-film-place measure PICTURE.jpg --guard GUARD.json`, and say the squint number's miss plainly if there is one: it is
 reported, never "fixed" by removing character.
+Period: when the place has a time and a place (the request or the style note says so), ask of every object, every person's
+clothes and every word written on a prop: "was this in that place and that year?" (the project's own faults: wrong-era tanks,
+too much coal in a lockout, snow-like blotches on a May road, sacks shaped like clay jars, an oil-drum brazier more 1984
+than 1926). A name written on a prop must not copy a real one by accident, and a date's weekday must agree (30 April 1926 was
+a Friday). When two buildings or objects stand for different things, check they are tellable apart at half size; when they
+are not, that is a finding.
 
 ## Mode structure
 
@@ -67,7 +73,11 @@ ledger (the pictures' seconds against their logs, any spending not asked for); p
 for keys, ids, the folder where the rented-card account keeps its settings, email-like strings and personal details); disk
 (what was left behind, sizes); leftovers (preview cameras `Place <owner> cam <n>`, unused data dropped on save, stray files);
 whether the audit is stale (the scene file's SHA-256 against the audit's); whether any picture was drawn from a file other than
-the audited one. Card time: read the run's card-time ledger (`explainer-film-place card-time show --ledger LEDGER`, the file is named in the notes) and say whether every helper stayed
+the audited one. Open every script written in the run that makes web requests (look for urllib, requests, curl, wget) and
+search its identity line (User-Agent) and headers for an email-like string or the person's name: that is a must fix (a helper
+once sent the person's email to two outside sites this way). Re-read the notes and record files against the data they
+describe: every number against its file, every path, every price; and search money files for a dollar sign eaten by the
+shell (`bin/bash`, or `US/` and a digit). Card time: read the run's card-time ledger (`explainer-film-place card-time show --ledger LEDGER`, the file is named in the notes) and say whether every helper stayed
 inside its allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0), whether the card seconds a helper REPORTED match the ledger, whether any helper went over with a written
 reason (the reason is in the ledger; say whether it is a real one), whether a change was tried in more than two batches, and whether full-size pictures were drawn more than once or before the end. Trying one small
 change at a time (many tiny jobs with a look after each) is a finding, and so is a card batch in which many variations came out nearly the same (its sheet and variations-result.json say so) when no free
@@ -77,7 +87,8 @@ scout was drawn first (a FILE-scout folder beside the variations file).
 
 You are shown only pictures, at half size, and told nothing else on purpose. Do not open any other file or folder. List
 everything you can name in them, as short plain phrases, one thing for each phrase: what it is, what it is made of, what state
-it is in. Do not guess what the request was. Return `{"seen": ["...", "..."]}`. The script counts how many of the planned
+it is in. Do not guess what the request was. When two things in the pictures look alike, say so, and say what tells them
+apart (or that nothing does). Return `{"seen": ["...", "..."]}`. The script counts how many of the planned
 features your words cover; that count is the reading test.
 
 ## Mode recheck
@@ -86,7 +97,8 @@ You are a DIFFERENT checker from the first round and you did not make the fixes.
 round, the old pictures, the new pictures and the scene. For each old finding: is it fixed, partly fixed or not fixed? (Put
 each as a claim: "finding X is fixed", `holds` true or false with the evidence from the new picture or the scene.) Then look for
 NEW faults the fixes caused, because fixes make new faults (in the garden the fix round made the squint score worse). Report
-what you find in `problems`.
+what you find in `problems`. A part that got worse than before the fix is a finding of its own: it keeps its old version (say
+which file), and the person decides.
 
 ## Mode skeptic
 

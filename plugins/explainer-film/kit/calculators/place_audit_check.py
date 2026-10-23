@@ -21,12 +21,21 @@ Verbs:
 Checks (each finding is pass, warn (printed LOOK), fail, or known (a treatment switched off on purpose, with its reason)):
   place: quick output, place: stale audit, place: stale settings, place: roles, place: object types, place: treatments, place: layer amounts, place: off reasons,
   place: normal maps, place: uv, place: displacement, place: construction, place: scale, place: plain boxes,
-  place: shape damage, place: ground relief, place: keep-out, place: budgets, place: light, place: renderer.
+  place: shape damage, place: ground relief, place: keep-out, place: budgets, place: light, place: renderer,
+  place: film frame (a place whose settings say "for_film": true must have the film's tall 9:16 frame, 1080 x 1920),
+  place: world (every view sees a finished horizon: no empty sky below the horizon, no clip end shorter than the farthest object, no
+  backdrop or large far object casting shadows; a prop or small set built alone, not for the film and at most place_audit.world.place_span_metres
+  across, gets a LOOK for a missing horizon instead of a FAIL), place: sun (the share of the ground each view sees that is shadowed from the sun, and
+  which sun the wear layers' shade used), place: lettering (every sign, notice, placard, poster, name board or book carries lettering).
+place: construction fails a free span longer than the part's role allows (planks 1.38 m, beams 2.5 m: data/roles.json) unless the place's own facts file
+(--facts) holds a "free_span" fact with a max and a source for it (a hall's tie beam 7 m between its walls is real; then it passes and is named).
+An audit made before a check existed lacks its facts: that check says "not measured by this audit" (a LOOK), never a FAIL.
 An object that has no material at all (or none with nodes) is failed by name in place: treatments: the material checks alone would never see it, because there is no material to look at.
 Plain lines start with PASS, LOOK, FAIL or KNOWN. Exit: 0 pass (read the LOOK lines), 1 fail, 2 an input is missing or unusable.
 """
 import argparse
 import hashlib
+import json
 import os
 import sys
 
@@ -81,7 +90,7 @@ class Judge:
     def run_all(self):
         for step in (self.quick_output, self.stale, self.roles, self.object_types, self.treatments, self.layer_amounts, self.off_reasons, self.normal_maps, self.uv,
                      self.displacement, self.construction, self.scale, self.plain_boxes, self.shape_damage, self.ground_relief, self.keep_out,
-                     self.budgets, self.light, self.renderer):
+                     self.budgets, self.light, self.renderer, self.film_frame, self.world, self.sun, self.lettering):
             step()
         return self.findings
 
@@ -410,7 +419,7 @@ class Judge:
 
     def construction(self):
         floating, hung, short, span, inside_out, coplanar, buried, no_floor, not_carried = [], [], [], [], [], [], [], [], []
-        seat = []
+        seat, span_allowed = [], []
         float_mm = self.number('place_construction.float_gap_millimetres_fail')
         for obj in self.audit.get('objects', []):
             c = obj.get('construction')
@@ -426,7 +435,12 @@ class Judge:
                 short.append(obj['name'])
             max_span = c.get('max_span_m')
             if c.get('span_max_m') and max_span and c['span_max_m'] > max_span + 1e-9:
-                span.append(f'{obj["name"]} ({c["span_max_m"]:.2f} m)')
+                fact = self.span_fact(obj)
+                if fact and c['span_max_m'] <= float(fact['max']) + 1e-9:
+                    span_allowed.append(f'{obj["name"]} ({c["span_max_m"]:.2f} m free; the place fact {fact["id"]} allows up to {float(fact["max"]):g} m)')
+                else:
+                    span.append(f'{obj["name"]} ({c["span_max_m"]:.2f} m free; its role {obj.get("role")} allows {max_span:g} m'
+                                + (f', the place fact {fact["id"]} {float(fact["max"]):g} m' if fact else '') + ')')
             if c.get('inside_out'):
                 inside_out.append(obj['name'])
             if c.get('coplanar_faces'):
@@ -444,7 +458,10 @@ class Judge:
             'floating': 'move it onto a support or add one (a post under the beam, a footing under the post); seat things with seat_on_ground',
             'hung': 'something must carry it from below; or frame it into TWO carried parts (a rail tenoned 5 cm into two posts counts as carried); or give the role may_hang (doors, shutters, fences, ironwork, rope, windows may hang)',
             'short': 'lengthen the post or lower the beam so they meet',
-            'span': 'add a support under the long span (no plank spans more than about 1.4 m)',
+            'span': 'add a support under the long span. Each role has its own limit (' + role_span_limits() + ', judged, in place-kit/data/roles.json). A real longer '
+                    'span (a hall\'s tie beam between its walls, a gallery bay of 3 m) is allowed when the place\'s own facts file holds a "free_span" fact for it with a '
+                    'source, for example {"id": "hall_tie_beam_span", "applies_to_role": "^timber\\\\.beam$", "applies_to_name": "tie beam", "dimension": "free_span", '
+                    '"max": 7.5, "unit": "metres", "kind": "judged", "source": "WHERE THE SIZE COMES FROM", "confidence": "good"}, and the audit is judged with --facts',
             'inside_out': 'flip the normals (a negative-volume closed part is inside out)',
             'coplanar': 'move one of two overlapping faces by a millimetre or delete one',
             'buried': 'move the light out of the solid',
@@ -464,9 +481,29 @@ class Judge:
         if not_carried:
             any_bad = True
             self.add('fail', 'place: construction', names_text(not_carried), f'{len(not_carried)} part(s) are not carried from the ground up.', fixes['floating'])
+        if span_allowed:
+            self.add('pass', 'place: construction', names_text([t.split(' (')[0] for t in span_allowed]), f'{len(span_allowed)} span(s) longer than the role allows, each '
+                     'allowed by a sourced fact in the place\'s own facts file: ' + '; '.join(span_allowed[:MAX_NAMES]) + '.')
         if not any_bad:
             checked = sum(1 for o in self.audit.get('objects', []) if o.get('construction'))
             self.add('pass', 'place: construction', 'every part', f'{checked} part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose')
+
+    def span_fact(self, obj):
+        """The place's own "free_span" fact for this object (its role matches applies_to_role and, when given, its name matches applies_to_name), or None.
+        Only a fact with a max and a source counts: a longer span is allowed only when somebody wrote down where the real size comes from."""
+        import re
+        for fact in self.facts.values():
+            if fact.get('dimension') != 'free_span' or fact.get('max') is None or not str(fact.get('source') or '').strip():
+                continue
+            try:
+                if not re.search(fact.get('applies_to_role', '.*'), str(obj.get('role') or '')):
+                    continue
+                if fact.get('applies_to_name') and not re.search(fact['applies_to_name'], str(obj.get('name') or ''), re.I):
+                    continue
+            except re.error:
+                continue
+            return fact
+        return None
 
     def effective_fact(self, entry):
         fact = self.facts.get(entry.get('fact'))
@@ -580,13 +617,26 @@ class Judge:
                 problems.append(f'owner {owner}: {triangles:,} triangles (at most {per_owner:,})')
         if counts.get('scatter_pieces', 0) > self.number('place_audit.scatter_pieces_max'):
             problems.append(f'{counts["scatter_pieces"]:,} scattered pieces (at most {self.number("place_audit.scatter_pieces_max"):,})')
+        objects_max = self.number('place_audit.objects_total_max')
+        objects_fail = self.number('place_audit.objects_total_fail')
+        bulk = ('build thousands of small shapes in bulk, one object per material, not one object each (an earlier place\'s leaves took 7 minutes one at a time '
+                'and about 10 s in bulk)')
+        if 'objects_total' not in counts:
+            self.not_measured('place: budgets', 'how many objects the scene holds')
+        elif counts['objects_total'] > objects_fail:
+            problems.append(f'{counts["objects_total"]:,} objects in the scene (more than {objects_fail:,}): {bulk}')
+        elif counts['objects_total'] > objects_max:
+            self.add('warn', 'place: budgets', 'the scene', f'{counts["objects_total"]:,} objects in the scene: more than {objects_max:,} (a LOOK up to {objects_fail:,}, a FAIL above). '
+                     'A large place with many buildings can be over for honest reasons; thousands of leaves, stones or boards made one object each is the fault.',
+                     f'if many objects are small pieces of one kind, {bulk}; if the place is simply large, say so in your report.')
         mask = self.audit.get('mask') or {}
         if mask.get('seconds') and mask['seconds'] > self.number('place_wear.plan_mask_time_budget_seconds'):
             self.add('warn', 'place: budgets', 'the plan masks', f'making the masks took {mask["seconds"]:.0f} s (budget {self.number("place_wear.plan_mask_time_budget_seconds")} s).', 'use a larger cell (--mask-cell-metres) or --quick.')
         if problems:
             self.add('fail', 'place: budgets', 'the scene', '; '.join(problems) + '.', 'thin out the scatter or simplify meshes; a card draws about 1.5 million triangles per builder comfortably.')
         else:
-            self.add('pass', 'place: budgets', 'the scene', 'triangles and scattered pieces are within the budgets')
+            self.add('pass', 'place: budgets', 'the scene', 'triangles and scattered pieces are within the budgets'
+                     + (f'; {counts["objects_total"]:,} objects (at most {objects_max:,})' if 'objects_total' in counts else ''))
 
     def light(self):
         light = self.audit.get('light')
@@ -602,6 +652,157 @@ class Judge:
         else:
             self.add('pass', 'place: light', 'the scene', 'the scene has light')
 
+    def not_measured(self, check, what):
+        """A LOOK for an audit made before a check existed (or whose facts could not be gathered): never a FAIL."""
+        why = [p for p in (self.audit.get('problems') or []) if 'could not be gathered' in p]
+        self.add('warn', check, 'the audit', f'not measured by this audit ({what}): it was made before this check existed' + (f', or {why[0]}' if why else '') + '.',
+                 'make the audit again with this kit: explainer-film-place audit --scene SCENE.blend --settings place-settings.json --out place-audit.json')
+
+    def film_frame(self):
+        views = self.audit.get('views')
+        if views is None:
+            self.not_measured('place: film frame', 'the render size and the view cameras')
+            return
+        if not views.get('for_film'):
+            self.add('pass', 'place: film frame', 'the settings', 'not marked for the film ("for_film" is not true in place-settings.json): any frame shape is allowed')
+            return
+        width, height = self.number('frame.width_pixels'), self.number('frame.height_pixels')
+        tall = width / height
+        same_shape = lambda w, h: bool(h) and abs(w / h - tall) <= 0.01 * tall      # noqa: E731
+        size = views.get('render_size') or [0, 0, 100]
+        bad = []
+        if not same_shape(size[0], size[1]):
+            bad.append(f'the render size is {size[0]} x {size[1]}')
+        for camera in views.get('cameras') or []:
+            own = camera.get('view_size')
+            if own and not same_shape(own[0], own[1]):
+                bad.append(f'the view camera {camera["name"]} is set to {own[0]} x {own[1]}')
+        if bad:
+            self.add('fail', 'place: film frame', 'the views', f'the place is marked for the film ("for_film": true), but {"; ".join(bad)}: a film view is the tall {width} x {height} '
+                     f'frame (9:16), and its previews have the same shape (for example {width // 2} x {height // 2}).',
+                     f'set the render size to {width} x {height} (or {width // 2} x {height // 2} for previews) and place every view camera for the tall frame '
+                     '(read the skill build-and-paint-a-place before placing a camera; kit/calculators/plan_shot.py works out where it stands).')
+        else:
+            note = '' if [size[0], size[1]] == [width, height] else f' (a preview size of the same shape as {width} x {height})'
+            self.add('pass', 'place: film frame', 'the views', f'marked for the film; the render size is {size[0]} x {size[1]}, the tall 9:16 frame{note}')
+
+    def world(self):
+        views, world = self.audit.get('views'), self.audit.get('world')
+        if views is None or world is None:
+            self.not_measured('place: world', 'what the view cameras see round the place')
+            return
+        numbers = self.number('place_audit.world')
+        cameras = views.get('cameras') or []
+        # A prop or a small set built alone (not for the film, under place_span_metres across: a crate on a 3 m square of ground with its own close
+        # camera) may leave the world out: its missing horizon is a LOOK. A place, or anything marked for the film, must have it: a FAIL.
+        span = world.get('place_span_m')
+        alone = not views.get('for_film') and span is not None and span <= numbers['place_span_metres']
+        problems, where, clip_needs = [], [], []
+        for camera in cameras:
+            depth = camera.get('farthest_depth_m') or 0
+            if depth and camera.get('clip_end_m') is not None and camera['clip_end_m'] < depth:
+                problems.append(f'the view camera {camera["name"]} stops drawing at {camera["clip_end_m"]:g} m, but {camera.get("farthest_object")} reaches {depth:g} m deep in its view')
+                clip_needs.append(f'{camera["name"]} at least {int(depth // 10 + 1) * 10} m')
+                where.append(camera['name'])
+            share = camera.get('empty_below_horizon_share')
+            if share is not None and share > numbers['empty_below_horizon_share_max']:
+                problems.append(f'{camera["name"]}: {camera.get("empty_below_horizon")} of its {camera.get("rays_below_horizon")} rays below the horizon hit nothing ({share:.0%}): '
+                                'the view sees past the edge of the ground into empty sky')
+                where.append(camera['name'])
+        shadow_problems = []
+        for item in world.get('backdrops_casting_shadows') or []:
+            shadow_problems.append(f'the backdrop {item["name"]} casts shadows (far scenery must never block the sun)')
+            where.append(item['name'])
+        for item in world.get('far_large_casting_shadows') or []:
+            shadow_problems.append(f'{item["name"]} ({item["size_m"]:g} m across, {item["distance_m"]:g} m from the nearest view camera) is large and far and casts shadows')
+            where.append(item['name'])
+        clip_fix = ('set every view camera\'s clip end to 1000 m or more and past the far edge of the ground and the backdrop'
+                    + (f' (here: {"; ".join(clip_needs)})' if clip_needs else ''))
+        fix = ('every view must see a finished horizon: continue the plain ground to the horizon and hide its edge (a low rim bank, faded out beyond about 60 m); '
+               'put an all-round backdrop of real shapes with the role backdrop (finish turns its shadow off; give it a plain unlit colour); ' + clip_fix +
+               '; turn the shadow off on far scenery (Object > Visibility > Shadow).')
+        if problems and alone:
+            self.add('warn', 'place: world', names_text(list(dict.fromkeys(where))), '; '.join(problems[:MAX_NAMES]) + f'. This looks like a prop or a small set built alone '
+                     f'({span:g} m across, at most {numbers["place_span_metres"]:g} m, and not marked "for_film"), so the missing world is only a LOOK; a place, or anything '
+                     'that will be in the film, FAILS here.',
+                     'nothing to do for a prop on its own (say in your report that its views show no horizon). When it goes into a place, the place\'s views must pass: ' + fix)
+        if (problems and not alone) or shadow_problems:
+            self.add('fail', 'place: world', names_text(list(dict.fromkeys(where))), '; '.join(((problems if not alone else []) + shadow_problems)[:MAX_NAMES]) + '.', fix)
+        if not cameras:
+            self.add('warn', 'place: world', 'the scene', 'no view camera in the scene (only the kit\'s own previews, or none): the world round the place could not be looked at from a view.',
+                     'add the view cameras (named views of the plan) before the audit.')
+        if world.get('haze_volume'):
+            self.add('warn', 'place: world', 'the world', 'the world has a haze volume: in an earlier place a thin golden haze dimmed the whole picture and erased the main building.',
+                     'leave the haze out: depth comes from colour (lighter and bluer when far) and from losing edges.')
+        if cameras and not problems and not shadow_problems:
+            backdrops = world.get('backdrops') or []
+            self.add('pass', 'place: world', 'the views', f'{len(cameras)} view camera(s): no empty sky below the horizon, every clip end reaches the farthest object, '
+                     f'nothing far casts shadows ({len(backdrops)} backdrop object(s))')
+
+    def sun(self):
+        views = self.audit.get('views')
+        if views is None:
+            self.not_measured('place: sun', 'how much of the seen ground is shadowed from the sun')
+            return
+        sun = self.audit.get('sun')
+        limit = self.number('place_audit.sun')['shadowed_share_look']
+        if sun is None:
+            self.add('pass', 'place: sun', 'the scene', 'no sun lamp in the scene, so nothing is shadowed from the sun')
+        else:
+            dark = []
+            measured = 0
+            for camera in views.get('cameras') or []:
+                info = camera.get('sun')
+                if not info:
+                    continue
+                measured += 1
+                if info['shadowed_share'] > limit:
+                    worst = (info.get('shadowed_by') or [{}])[0]
+                    dark.append(f'{camera["name"]}: {info["shadowed_share"]:.0%} of the {info["ground_points"]} ground points it sees are shadowed'
+                                + (f', most by {worst.get("object")} ({worst.get("points")} points)' if worst.get('object') else ''))
+            height = sun.get('height_degrees')
+            if dark:
+                self.add('warn', 'place: sun', names_text([d.split(':')[0] for d in dark]), '; '.join(dark[:MAX_NAMES]) + f' (more than {limit:.0%}, invented; the sun "{sun.get("name")}" '
+                         f'stands {height:g} degrees up). A low sun throws long shadows: length = height / tan(sun height), so a 4 m wall at 9 degrees throws about 25 m, and the '
+                         'scene looks flat while the materials get the blame.',
+                         'raise the sun, turn it so it comes from the side, move or remove what shadows most, or turn the shadow off on far scenery (role backdrop).')
+            elif measured:
+                self.add('pass', 'place: sun', 'the views', f'no view has more than {limit:.0%} of the ground it sees shadowed from the sun "{sun.get("name")}" ({height:g} degrees up)')
+            else:
+                self.add('pass', 'place: sun', 'the views', 'no view sees any ground to measure')
+        used = (self.audit.get('mask') or {}).get('sun')
+        if used:
+            line = (f'the wear layers\' shade used {used.get("from")} (compass {used.get("compass_degrees", 0):.0f}, {used.get("height_degrees", 0):.0f} degrees up)')
+            if sun is not None and sun.get('compass_degrees') is not None:
+                import math
+                to = lambda c, h: (math.cos(math.radians(c)) * math.cos(math.radians(h)), math.sin(math.radians(c)) * math.cos(math.radians(h)), math.sin(math.radians(h)))  # noqa: E731
+                a, b = to(used['compass_degrees'], used['height_degrees']), to(sun['compass_degrees'], sun['height_degrees'])
+                angle = math.degrees(math.acos(max(-1.0, min(1.0, sum(x * y for x, y in zip(a, b))))))
+                most = self.number('place_audit.sun')['wear_shade_angle_look_degrees']
+                if angle > most:
+                    self.add('warn', 'place: sun', 'the wear layers', f'{line}, but the scene\'s sun "{sun.get("name")}" stands at compass {sun["compass_degrees"]:.0f}, '
+                             f'{sun["height_degrees"]:.0f} up: {angle:.0f} degrees apart (more than {most}, invented), so moss, soot and fade sit on the wrong sides.',
+                             'add or turn your sun first, then run explainer-film-place finish again (the shade reads the scene\'s one sun lamp).')
+                    return
+            self.add('pass', 'place: sun', 'the wear layers', line)
+
+    def lettering(self):
+        found = self.audit.get('lettering')
+        if found is None:
+            self.not_measured('place: lettering', 'whether signs and books carry lettering')
+            return
+        bare = [o for o in found.get('objects') or [] if not (o.get('picture_texture') or o.get('text_made') or o.get('lettering_on_it'))]
+        if bare:
+            self.add('fail', 'place: lettering', names_text([f'{o["name"]} ({o.get("word")})' for o in bare]),
+                     f'{len(bare)} sign(s), notice(s), placard(s), poster(s), name board(s) or book(s) carry no lettering: no picture texture, no shape made from text, and no '
+                     'lettering object on them. Every sign and book carries real lettering made by our own code; the painter is asked for blank placards only so it does '
+                     'not invent writing.',
+                     'add the lettering with Blender text on the object (finish turns it into a mesh) or a lettering picture our own code makes (never a picture program\'s '
+                     'lettering); if it is not a sign or a book, rename it or give it a role.')
+        else:
+            count = found.get('checked', 0)
+            self.add('pass', 'place: lettering', 'signs and books', f'{count} sign(s) and book(s) found, each carries lettering' if count else 'no sign, notice, placard, poster, name board or book in the place')
+
     def renderer(self):
         info = self.audit.get('renderer')
         if not info:
@@ -611,9 +812,24 @@ class Judge:
             self.add('fail', 'place: renderer', 'the settings', 'lamps, windows or fires are lit here, or water is in view, so the rule is Cycles, but the settings say eevee. Reasons: ' + names_text(info.get('reasons', [])) + '.',
                      'set "renderer": "auto" (or "cycles") in place-settings.json; draw with explainer-film-place render.')
         elif decision == 'EEVEE' and chosen == 'cycles':
-            self.add('warn', 'place: renderer', 'the settings', 'nothing is lit, so EEVEE would do; the settings ask for Cycles (slower and dearer).', 'set "renderer": "auto".')
+            self.add('warn', 'place: renderer', 'the settings', 'nothing is lit, so EEVEE would do; the settings ask for Cycles (slower and dearer).',
+                     'keep "cycles" if another plate of this place is lit (every plate of one place is drawn with one renderer); otherwise set "renderer": "auto".')
         else:
             self.add('pass', 'place: renderer', 'the scene', f'renderer {decision}: ' + names_text(info.get('reasons', ['nothing is lit'])))
+
+
+def role_span_limits():
+    """'timber.plank and timber.floor 1.38 m, timber.beam and timber.fence 2.5 m': each role's longest free span, read from the role table."""
+    try:
+        with open(os.path.join(KIT_ROOT, 'place-kit', 'data', 'roles.json')) as handle:
+            roles = json.load(handle).get('roles', {})
+    except (OSError, ValueError):
+        return 'see max_span_metres in each role'
+    by_limit = {}
+    for role, spec in sorted(roles.items()):
+        if spec.get('max_span_metres'):
+            by_limit.setdefault(float(spec['max_span_metres']), []).append(role)
+    return ', '.join(f'{" and ".join(names)} {limit:g} m' for limit, names in sorted(by_limit.items())) or 'see max_span_metres in each role'
 
 
 def verdict_of(findings):

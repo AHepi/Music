@@ -119,3 +119,30 @@ new series doesn't walk into the same holes.
     the bottom left, where the eye enters.
   - In one run, Nano Banana Pro made a good sketch of the composition when free to choose the camera;
     never use a program's lettering: the notices came back garbled.
+
+- A dark painted street (the wet lockout, log 37; `paper-film/scenes/lockout-test.js`):
+  - The stage's filmic curve darkens dark values, so a dark wet road arrived at 0.75 to 0.86 of its painted
+    brightness and some of it crushed to black. Give that scene `toe: 1` in its look (the curve may brighten
+    but never darkens a value) and ease the dark frame edge (`vignette: 0.25`). `toe` is 0 for every scene
+    that does not ask, so no other scene's look should change. What was measured: eight stills drawn once with
+    the old and once with the new stage showed no difference; a ninth, the house sample at 20 s, differed in a
+    checker's redraw by a faint speckle (7.7 percent of dots, by at most 7 of 255, with no lighter or darker lean),
+    and drawn ten times that picture came out two ways even with the unchanged old stage alone (lesson 141 of the
+    austerity project's notes). After a new painting, measure how bright the road arrives in the plate view against
+    the painting (the wet lockout: 0.935, the dry one with the same look: 0.96;
+    `calculators/after_painting.py check --toe 1` prints it).
+  - A wet front painting needs its own wet behind painting: with the old dry behind painting the road
+    the near props hid came back pale and dry when the camera moved (59 percent of the road dots lighter).
+    Swap the two paintings as a pair, with the look line, and keep the dry pair beside them with a short note
+    saying how to go back.
+  - Painted dry and wet streets differ in feel: the wet painting reads as a detailed picture with a paint
+    finish (no thick ink outlines, a plain dark sky); the dry one has flat colour and thick outlines.
+
+- A proof that a change left other scenes unchanged needs several draws of each picture with each version
+  (at least three) and a count of the pictures and draws compared: some scenes (the house sample at 20 s) come
+  out two slightly different ways from run to run with nothing changed (lesson 141). Before you blame a change
+  for a speckle, redraw the unchanged old version several times. Compare with `calculators/regression_compare.py`,
+  and write what was measured, never "dot for dot".
+- Text with prices written through the shell loses its dollar signs: US$0.048 became US/bin/bash.048 (the
+  shell read `$0` as its own name; lesson 142). Write such text with the file-writing tool or a quoted
+  here-document (`<<'EOF'`), then search the file for `bin/bash`.

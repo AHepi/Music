@@ -9,6 +9,9 @@ What it proves:
   5. The verb `card-time`: show, check, add (not twice), start; exit 1 for a refusal and 2 for an unusable input.
   6. The rented-card client: `rent status` writes its small job's billed seconds into the ledger; `rent run` for a helper that has used up its allowance is refused BEFORE any call is made; a finished
      job seen by `rent wait` is logged once.
+  7. One job in flight per helper (lessons round, 23 October): a paid step for a helper name that already has a job in flight (a "sent" line with no "job" line yet) is refused with
+     "already has a job in flight" and the attempt is written into the ledger as a double run; another helper is not blocked; once the job's seconds are in (or written by hand)
+     the helper may go on.
 Run: python3 kit/calculators/tests/test_place_card_time.py
 """
 import atexit
@@ -162,6 +165,30 @@ lines.clear()
 check.equal('start writes the person\'s total cap', ct.main_command(namespace(action='start', team_minutes=3.0), {}, say), 0)
 check.equal('...and the gate then uses it (180 s)', ct.team_total_seconds(ct.read_ledger(verb_ledger)[0]), 180.0)
 check.equal('a role that does not exist is an unusable input (exit 2)', ct.main_command(namespace(role='wizard'), {}, say), 2)
+
+# ---------------------------------------------------------------- 7. one job in flight per helper (a second copy of a helper must not spend)
+flight_ledger = os.path.join(folder, 'flight-ledger.jsonl')
+ct.log_sent(flight_ledger, 'walls', 'builder', 'job-in-flight', 60.0, 'variations job 1 of 1')
+entries_flight, _ = ct.read_ledger(flight_ledger)
+second = ct.check(entries_flight, 'walls', 'builder', estimate_seconds=30.0)
+check.true('the case that must fail: a second paid step from a helper with a job in flight is REFUSED with "already has a job in flight"',
+           second['status'] == 'refuse' and 'already has a job in flight' in second['lines'][0] and second.get('in_flight') == ['job-in-flight'], second['lines'][0][:200],
+           recorded='textures story log 31: a message to a running paid helper woke a second copy that made 8 extra paid calls (about US$0.70)')
+check.equal('another helper is not blocked by it', ct.check(entries_flight, 'roof', 'builder', estimate_seconds=30.0)['status'], 'ok')
+flight_args = types.SimpleNamespace(ledger=flight_ledger, helper='walls', role='builder', over_allowance='a reason of more than fifteen letters')
+allowed, _, _, _ = ct.before_paid_step(flight_args, 30.0, 'a second variations batch', None, lambda line: None)
+doubles = [e for e in ct.read_ledger(flight_ledger)[0] if e['kind'] == 'double_run']
+check.true('the gate refuses it even with a written reason, and writes the attempt into the ledger as a double run', not allowed and len(doubles) == 1 and doubles[0]['in_flight'] == ['job-in-flight']
+           and doubles[0]['what'] == 'a second variations batch', json.dumps(doubles))
+said = []
+code = ct.main_command(types.SimpleNamespace(ledger=flight_ledger, helper='walls', role='builder', action='check', estimate_seconds=10.0, over_allowance=None, what=None), {}, said.append)
+check.true('`card-time check` says exit 1 and writes a second double-run line', code == 1 and sum(1 for e in ct.read_ledger(flight_ledger)[0] if e['kind'] == 'double_run') == 2, f'exit {code}')
+said.clear()
+ct.main_command(types.SimpleNamespace(ledger=flight_ledger, helper=None, role=None, action='show'), {}, said.append)
+check.true('`card-time show` lists the double runs', 'DOUBLE RUN refused' in '\n'.join(said), '\n'.join(said)[-200:])
+ct.main_command(types.SimpleNamespace(ledger=flight_ledger, helper='walls', role='builder', action='add', work_seconds=40.0, wake_up_seconds=0.0, job_id='job-in-flight',
+                                      what='the cut-off job, written by hand'), {}, said.append)
+check.equal('once the job\'s seconds are written (by hand here), the helper may go on', ct.check(ct.read_ledger(flight_ledger)[0], 'walls', 'builder', estimate_seconds=30.0)['status'], 'ok')
 
 # ---------------------------------------------------------------- 6. the rented-card client
 FAKE_KEY = 'rp' + 'a_' + 'k' * 24

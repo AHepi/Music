@@ -10,6 +10,7 @@
 #      explainer-film-place audit --scene FINISHED.blend
 # Exit: 0 pass (read the LOOK lines), 1 fail, 2 an input is missing or unusable (the sentence says which file and what makes it).
 # Which kit: --kit DIR (or EXPLAINER_FILM_KIT) names an installed kit (the folder explainer-film-setup made). Without either, the plugin's own kit is used.
+# Several helpers on one computer: EXPLAINER_FILM_BLENDER_THREADS=2 explainer-film-place ... gives every Blender run it starts -t 2 (unset: as before).
 set -u
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 kit="${EXPLAINER_FILM_KIT:-}"

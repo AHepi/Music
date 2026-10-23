@@ -9,9 +9,40 @@ import math
 import bpy
 from mathutils import Vector
 
-from . import house_numbers, names, scene_read
+from . import house_numbers, names, roles as roles_module, scene_read
 
-TOWARD_SUN_AZIMUTH_DEGREES = 135.0          # the direction the plan masks' shade estimate assumes (wear/masks.py SUN_AZIMUTH_DEGREES)
+TOWARD_SUN_AZIMUTH_DEGREES = 135.0          # the direction the kit's own sun is put in, and the plan masks' fallback (wear/masks.py SUN_AZIMUTH_DEGREES)
+FALLBACK_SUN_COMPASS_DEGREES = 135.0        # the wear layers' shade when the scene has no sun lamp, or more than one
+FALLBACK_SUN_HEIGHT_DEGREES = 45.0
+
+
+def scene_sun_direction(scene=None):
+    """Where the sun stands for the wear layers' shade (which sides stay sheltered and damp: moss, soot, fade):
+    {'compass_degrees', 'height_degrees', 'from', 'sun'}. The scene's own sun lamp when there is exactly one (a sun lamp shines along its own -Z,
+    so the sun stands along +Z); otherwise the fallback, 135 degrees compass and 45 degrees up, with the reason. Compass is measured from +x
+    toward +y, the kit's own way of writing a sun: (cos compass cos height, sin compass cos height, sin height).
+    A concrete example: one sun lamp tipped so it shines from the west at 20 degrees up gives compass 180, height 20, from 'the scene's sun lamp "Sun"'."""
+    scene = scene or bpy.context.scene
+    suns = [o for o in scene.objects if o.type == 'LIGHT' and o.data.type == 'SUN' and not o.hide_render and getattr(o.data, 'energy', 0) > 0]
+    if len(suns) == 1:
+        toward = (suns[0].matrix_world.to_3x3() @ Vector((0.0, 0.0, 1.0))).normalized()
+        height = math.degrees(math.asin(max(-1.0, min(1.0, toward.z))))
+        compass = math.degrees(math.atan2(toward.y, toward.x)) % 360.0
+        return {'compass_degrees': round(compass, 2), 'height_degrees': round(height, 2), 'from': f'the scene\'s sun lamp "{suns[0].name}"', 'sun': suns[0].name}
+    why = 'the scene has no sun lamp' if not suns else f'the scene has {len(suns)} sun lamps ({", ".join(o.name for o in suns[:4])}), so none is picked'
+    return {'compass_degrees': FALLBACK_SUN_COMPASS_DEGREES, 'height_degrees': FALLBACK_SUN_HEIGHT_DEGREES,
+            'from': f'the fallback, 135 degrees compass and 45 degrees up ({why})', 'sun': None}
+
+
+def quiet_backdrops():
+    """Far scenery (the role backdrop) casts no shadow, so it can never block the sun (hazy hills that cast shadows blocked it in an earlier
+    place). Returns the names of the objects changed."""
+    changed = []
+    for obj in scene_read.mesh_objects(only_visible=True):
+        if roles_module.role_class(str(obj.get(names.ROLE) or '')) == 'backdrop' and getattr(obj, 'visible_shadow', False):
+            obj.visible_shadow = False
+            changed.append(obj.name)
+    return changed
 
 
 def scene_has_light():

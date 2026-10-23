@@ -7,7 +7,7 @@ It holds:
     ids.png and solo/ pictures), and its masks at any picture size;
   - which groups are people (the check file's "figures", or the place facts' figures matched to the check file's groups);
   - brightness, a figure's brightness against what surrounds it, skin-coloured pixels on a head;
-  - the stage's colour finish (exposure, ACES curve, contrast, film tint, lift) ported from cinema-stage.js, so a
+  - the stage's colour finish (exposure, ACES curve with look.toe, contrast, film tint, lift) ported from cinema-stage.js, so a
     plate colour can be judged as it will look in the film (round 2: tan coats came out crimson);
   - running the kit's own tools (align_painting.py, keep_painted_shadows.py, make_state_picture.py) and reading the
     numbers they print, instead of copying their sums here.
@@ -196,13 +196,25 @@ def linear_to_srgb(values):
     return np.where(c < 0.0031308, c * 12.92, 1.055 * np.power(np.maximum(c, 1e-12), 1 / 2.4) - 0.055) * 255.0
 
 
+def filmic_curve(c, toe=0.0):
+    """The stage's filmic (ACES) curve on linear values, with the page's look.toe exactly as cinema-stage.js has it:
+    filmicValue = aces(c); c = mix(filmicValue, max(filmicValue, c), toe).
+    toe 0 (the default) is the curve as it always was: mix with 0 gives the filmic value itself, so nothing changes.
+    toe 1 means the curve may still brighten a value but never darkens one (dark or wet painted places: the wet lockout
+    road arrived at 0.75 to 0.86 of its painted brightness without it)."""
+    filmic_value = np.clip((c * (2.51 * c + 0.03)) / (c * (2.43 * c + 0.59) + 0.14), 0, 1)
+    if not toe:
+        return filmic_value
+    return filmic_value * (1.0 - toe) + np.maximum(filmic_value, c) * toe
+
+
 def stage_finish(rgb, look):
     """A plate colour (0-255 sRGB) as the film shows it, through cinema-stage.js's finish pass with a page's look (exposure,
-    ACES filmic curve, saturation, contrast, film tint, lift). Glow, vignette, grain and the projector's softening are
-    left out, so it is a sum for dark cloth, not for lamps. Round 3's slate-grey coats (plate about 46/39/32) come out
-    about 30/18/4 here against 27/16/3 sampled from the film."""
+    ACES filmic curve with the look's toe, saturation, contrast, film tint, lift). Glow, vignette, grain and the
+    projector's softening are left out, so it is a sum for dark cloth, not for lamps. Round 3's slate-grey coats (plate
+    about 46/39/32) come out about 30/18/4 here against 27/16/3 sampled from the film. A look without 'toe' is toe 0."""
     c = srgb_to_linear(rgb) * look['exposure']
-    c = np.clip((c * (2.51 * c + 0.03)) / (c * (2.43 * c + 0.59) + 0.14), 0, 1)
+    c = filmic_curve(c, look.get('toe', 0))
     luma = c @ np.array([0.2126, 0.7152, 0.0722])
     c = luma[..., None] + (c - luma[..., None]) * look['saturation']
     c = (c - 0.5) * look['contrast'] + 0.5

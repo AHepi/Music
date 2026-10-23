@@ -2,10 +2,10 @@
 
 What this file is: the rules for placing props and the camera so a shot looks arranged rather than
 scattered. They come from log 30 of the project story (the composition test). Nano Banana Pro, given our
-empty pit village street and our props and free to choose its own camera, made a picture the user liked
-("30 Test - composed by Nano Banana - own camera" in `experiments/`; below, "the picture the user
+empty pit village street and our props and free to choose its own camera, made a picture the person liked
+("30 Test - composed by Nano Banana - own camera" in `experiments/`; below, "the picture the person
 liked"). It was measured and taken apart by independent critics, and a skeptic checked each reason
-against the picture and against our own clip 29, which the user found unarranged. Reasons were kept only
+against the picture and against our own clip 29, which the person found unarranged. Reasons were kept only
 if they told the two apart, or (like balance, rule 10) were needed by both.
 
 The comparison picture "30 Why it works - do the strongest things agree" shows the main rule at a glance.
@@ -38,7 +38,7 @@ They must all fall in one part of the frame, the part that holds the subject. If
 any other adjustment.
 
 Why: a picture feels balanced and "hard to vary" when its strong things agree. It is not an even weight
-left and right: clip 29 is just as even (46 to 54 per cent) as the picture the user liked (43 to 57),
+left and right: clip 29 is just as even (46 to 54 per cent) as the picture the person liked (43 to 57),
 and still looks unarranged, because its lines meet at the colliery door, its brightest parts are
 scattered over the sky, the fire's glow on the road and the lamps, and its biggest near prop is the
 sacks: three different places.
@@ -81,24 +81,24 @@ the frame wide and 0.50 tall that holds the subject.
    distances that only just meet make near and far things look the same distance away, as if stuck
    together.
    Check: on a frame 1,536 pixels wide, overlaps of at least 20 pixels and gaps of at least 25. The
-   picture the user liked has three pairs that just touch (the street lamp and a winding wheel, the drum
+   picture the person liked has three pairs that just touch (the street lamp and a winding wheel, the drum
    and the board's corner, the lantern and the board's bottom): fix them in the rebuild.
 
 5. **Make the subject the biggest bright thing, and keep the sky dim.** The notice is the largest bright
    shape; nothing large in the top third is bright. Dim the sky rather than brightening everything else.
    A white chair may be the next brightest, but dirty it a little so it stays darker than the notice.
    Check: at least three quarters of the brightest parts lie in the story props' box and at least two
-   fifths on the notice (the picture the user liked: about 80 per cent, and half to two thirds; clip 29:
+   fifths on the notice (the picture the person liked: about 80 per cent, and half to two thirds; clip 29:
    about a fifth for each). The notice is at least 1.8 times as bright as the frame's average.
 
 6. **Light the subject from the people's own lights.** The drum's fire and the lantern sit below the
    notice and warm it from below: the notice is cool at the top and warm at the bottom, with a little
    warm spill on the seat and the road. Do not spotlight particular words.
-   Check: the tool's warm light share is about 1.5 to 3 per cent of the frame (the picture the user
+   Check: the tool's warm light share is about 1.5 to 3 per cent of the frame (the picture the person
    liked: 2.3; clip 29: 0.5), most of it round the story props.
 
 7. **Use the height of the tall frame.** Stack the story in upright columns so the eye travels from top
-   to bottom. In the picture the user liked: a "pit" column (winding wheels, shut gate, the drum) beside a
+   to bottom. In the picture the person liked: a "pit" column (winding wheels, shut gate, the drum) beside a
    "notice" column (street lamp, the notice, the lantern on the chair, the pail). The top third holds at
    least one story object, not just sky.
    Check: each column has something in the top, middle and bottom thirds of the frame, lined up within
@@ -107,7 +107,10 @@ the frame wide and 0.50 tall that holds the subject.
 8. **Sort props by meaning.** Story props go near: big, warm, lit, touching. Work props go back up the
    street: small, in shadow, in the middle band of the frame. Nothing big and dark sits in the bottom
    left, where the eye enters the frame. Story props may be drawn somewhat bigger than life so they read
-   on a phone; keep the same sizes in every shot of the place.
+   on a phone; keep the same sizes in every shot of the place. An object the story treats as an authority (chapter
+   2's book) is drawn big enough to carry that weight (about 40 per cent of the frame) and placed further back; fix
+   clipping by zooming out and moving the big thing back in depth, leaving room for the people and props in front,
+   never by shrinking what matters.
    Check: each work prop covers at most 2 per cent of the frame and is darker than the frame's average;
    nothing in the bottom-left quarter covers more than 1 per cent (clip 29's sacks cover about 7).
 
@@ -136,7 +139,7 @@ the frame wide and 0.50 tall that holds the subject.
 12. **Leave room for phone buttons and titles.** Keep anything that must be read left of 0.90 across;
     only unimportant edges may reach 0.95. Video apps put their buttons down the right edge, from a little
     above the middle to near the bottom. Put titles in dim sky, away from the brightest lamp.
-    Check: the notice's right edge is at or left of 0.90 (the picture the user liked: 0.91, with the
+    Check: the notice's right edge is at or left of 0.90 (the picture the person liked: 0.91, with the
     chair and pail at 0.96 to 0.97, so fix it in the rebuild).
 
 ## Checking a shot automatically
@@ -232,6 +235,12 @@ our camera it spread them like a catalogue. Use such a picture as a sketch of th
 rebuild it with our own 3D set and props. Never use a program's lettering: Nano Banana Pro and Seedance
 garbled the notice (1756, 1828) and Flux's looks wrong too. Nano Banana Pro and Seedance also redraw the
 street, and every program redraws the props, so their pictures can't be cut together with ours.
+
+The recipe (log 30): give the program the empty painted street and the prop pictures, and let it choose its own camera.
+Flux takes at most ten pictures in all; Nano Banana Pro takes up to 14 and cost about 15 US cents a picture (measured). A
+Seedance draft video 480 pixels wide is its cheapest size (a 10-second draft cost about US$2.06, measured) and can be finished
+at full size within 7 days without being made again. Seedance's way of moving the camera was the best guide of the three. The results are guides only and never go on screen: rebuild the composition in
+our own 3D set, with our own props and our own lettering.
 
 ## Traps
 

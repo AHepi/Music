@@ -13,17 +13,16 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, KIT, blender_program  # noqa: E402
+from checks import Checker, KIT, blender_program, work_folder  # noqa: E402
 
 PLACE_KIT = os.path.join(KIT, 'place-kit')
 sys.path.insert(0, PLACE_KIT)
 from place_kit.checks import ownership  # noqa: E402
 
 check = Checker('place combine: ownership between builders, and stage files run in two orders')
-folder = tempfile.mkdtemp(prefix='place-combine-test-')
+folder = work_folder('place-combine-test-')
 
 OWNERS = {'owners': {'roads': {'objects': ['^Road'], 'materials': ['Road material'], 'collections': []},
                      'huts': {'objects': ['^Hut'], 'materials': ['Hut material'], 'collections': []}},

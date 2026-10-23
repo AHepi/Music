@@ -86,6 +86,74 @@ SECRET_PATTERNS = [
     ('a key or password written out', re.compile(r'(?i)\b(api[_-]?key|secret|password|access[_-]?token)\b["\']?\s*[:=]\s*["\'][^"\'\s]{12,}["\']')),
 ]
 
+# Privacy: an email-like string in a file that goes to a public repository (one helper put the person's email into the identity line, User-Agent,
+# of its download scripts, so every website it asked received it). Obviously generic addresses are allowed, and so are licence files that carry
+# their authors' published contact (a font's OFL text).
+EMAIL = re.compile(r'(?<![\w.+%-])[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}\b')
+GENERIC_EMAIL_NAMES = re.compile(r'^(no-?reply|do-?not-?reply|noreply\+.*|git|example|someone|somebody|user|username|name|your[._-]?name|you|me|test|nobody|email)$', re.I)
+GENERIC_EMAIL_DOMAINS = ('example.com', 'example.org', 'example.net', 'users.noreply.github.com')
+LICENCE_FILE = re.compile(r'(OFL|LICEN[CS]E|COPYING|NOTICE|AUTHORS|CREDITS)', re.I)
+WEB_REQUEST = re.compile(r'User-Agent|urllib|requests\.(get|post|Session)|http\.client|\bfetch\(|\bcurl\b|\bwget\b|aiohttp|httpx', re.I)
+# Installed software stays out of a public repository (the person's rule: save each piece of work, but not video or audio, other people's
+# work or installed software; say where to get it instead): package folders and installers.
+INSTALLED_FOLDERS = ('node_modules', 'site-packages', 'dist-packages', '.venv', 'venv')
+INSTALLER_ENDINGS = ('.deb', '.rpm', '.dmg', '.exe', '.msi', '.appimage', '.pkg')
+# Money files written through the shell: US$0.048 became US/bin/bash.048 (the shell read $0 as its own name).
+MONEY_FILE_NAME = re.compile(r'(ledger|spend|price|cost|budget|money|allowance|charges|bill|receipt|payment)', re.I)
+MONEY_DATA_ENDINGS = ('.json', '.jsonl', '.csv', '.tsv')
+MONEY_NOTE_ENDINGS = MONEY_DATA_ENDINGS + ('.md', '.txt', '.log')        # code (a .py, .js or .sh file) is never a money file
+EATEN_DOLLAR = re.compile(r'US/\d|US/bin/\w*sh\b|bin/bash')
+
+
+def generic_email(address):
+    local, domain = address.rsplit('@', 1)
+    domain = domain.lower()
+    return bool(GENERIC_EMAIL_NAMES.match(local)) or domain in GENERIC_EMAIL_DOMAINS or domain.endswith(('.example', '.invalid', '.test', '.localhost', '.local'))
+
+
+def masked_email(address):
+    """Never the whole string: its first letter and the end of its domain ('a***@***.com')."""
+    local, domain = address.rsplit('@', 1)
+    return f'{local[:1]}***@***.{domain.rsplit(".", 1)[-1]}'
+
+
+def personal_emails(text):
+    """[(line number, masked address, whether that line is an identity line or a header)] for every email-like string that is not generic."""
+    found = []
+    for number, line in enumerate(text.splitlines(), 1):
+        for address in EMAIL.findall(line):
+            if not generic_email(address):
+                found.append((number, masked_email(address), bool(re.search(r'User-Agent|header|From:', line, re.I))))
+    return found
+
+
+def is_money_file(path, text):
+    """A spending record: a note or data file (.md, .txt, .log, .json, .jsonl, .csv, .tsv) whose name says ledger, spend, price, cost, budget,
+    money, allowance, charges, bill or receipt, or a data file that holds dollars, cents or US$. Code, and notes that only explain the trap
+    (house rules, skills), are not money files."""
+    if MONEY_FILE_NAME.search(os.path.basename(path)) and (path.lower().endswith(MONEY_NOTE_ENDINGS) or '.' not in os.path.basename(path)):
+        return True
+    return path.lower().endswith(MONEY_DATA_ENDINGS) and bool(re.search(r'"dollars"|"cents"|US\$', text))
+
+
+def eaten_dollar_signs(text):
+    """[(line number, what)] where a dollar sign was eaten by the shell ("bin/bash", or "US/" and a digit); a script's first line (#!/bin/bash) is not counted."""
+    found = []
+    for number, line in enumerate(text.splitlines(), 1):
+        if line.startswith('#!'):
+            continue
+        hit = EATEN_DOLLAR.search(line)
+        if hit:
+            found.append((number, hit.group(0)))
+    return found
+
+
+def eaten_dollar_lines(path, text):
+    """Plain FAIL sentences for a money file whose dollar signs were eaten by the shell (empty when there is none)."""
+    return [f'line {number}: "{what}": a dollar sign was eaten by the shell (US$0.048 once became US/bin/bash.048 because the shell read $0 as its own name). '
+            'Write money text with the file-writing tool or a quoted here-document (<<\'EOF\'), then mend this line from the real price.'
+            for number, what in eaten_dollar_signs(text)]
+
 
 # ------------------------------------------------------------------------------------------------- small helpers
 def load_json(path):
@@ -216,7 +284,7 @@ def ledger_state(ledger, allowance_name=None, today=None, settings=None):
         house = settings.value('money.user_allowance_dollars')
         if isinstance(house, dict) and float(house.get('allowance', -1)) == float(allowance['dollars']):
             line, line_from = house.get('spending_line'), 'film-settings.json money.user_allowance_dollars'
-    return {'allowance': allowance['name'], 'allowance_dollars': float(allowance['dollars']), 'start': allowance['start'],
+    return {'allowance': allowance['name'], 'allowance_dollars': float(allowance['dollars']), 'start': allowance['start'], 'covers': sorted(covers),
             'spending_line_dollars': float(line) if line is not None else None, 'spending_line_from': line_from if line is not None else None,
             'spent_dollars': spent, 'left_dollars': round(float(allowance['dollars']) - spent, 4),
             'entries_counted': len(counted), 'entries_before_or_outside': len(skipped), 'counted': counted,
@@ -574,8 +642,9 @@ def plan_filming(events, settings, scene, rates=None, first=None, last=None, pro
     free_disk = free_disk if free_disk is not None else shutil.disk_usage(KIT).free / 1e9
     disk_reserve = settings.value('budget_planner.disk_free_reserve_gb')
     if free_disk - film_megabytes / 1000 < disk_reserve:
-        problems.append(f'disk: filming needs about {film_megabytes / 1000:.2f} GB and would leave {free_disk - film_megabytes / 1000:.2f} GB '
-                        f'free (keep {disk_reserve} GB)')
+        problems.append(f'disk: {free_disk:.2f} GB free now; filming needs about {film_megabytes / 1000:.2f} GB and would leave {free_disk - film_megabytes / 1000:.2f} GB '
+                        f'free (keep {disk_reserve} GB). A nearly full disk fails this whatever changed: free space first, before blaming a change '
+                        '(a planning test once failed at 1.3 GB free against a 4 GB reserve)')
     return {'scene': scene, 'frames': [first, last], 'frame_count': frames, 'frame_kinds': mix, 'frame_kinds_by_view': by_view,
             'rates': rates, 'steady_seconds_a_frame': round(steady, 3), 'workers': workers, 'speed_up': round(speed_up, 3),
             'processors': processors, 'free_memory_gb': None if free_memory is None else round(free_memory, 1),
@@ -615,8 +684,9 @@ def files_to_check(paths, repo=None):
 
 
 def check_push(files, settings):
-    """Refuses audio and video, files over the repository limit and anything that looks like a key; packs the rest into
-    pushes under the batch limit and chat parts under the sendable limit (largest first)."""
+    """Refuses audio and video, installed software, files over the repository limit, anything that looks like a key, an email-like
+    string (personal details never go into a public repository) and a money file whose dollar signs the shell ate; packs the rest
+    into pushes under the batch limit and chat parts under the sendable limit (largest first)."""
     file_limit = settings.value('delivery.repository_file_max_megabytes') * 1e6
     batch_limit = settings.value('delivery.repository_batch_max_megabytes') * 1e6
     part_limit = settings.value('delivery.sendable_megabytes') * 1e6
@@ -626,6 +696,10 @@ def check_push(files, settings):
         sizes[path] = size
         if path.lower().endswith(AUDIO_VIDEO):
             refused.append({'file': path, 'why': 'audio or video (the user\'s rule: none in the repository)'})
+            continue
+        parts = os.path.normpath(path).split(os.sep)
+        if any(part in INSTALLED_FOLDERS for part in parts) or path.lower().endswith(INSTALLER_ENDINGS):
+            refused.append({'file': path, 'why': 'installed software (a package folder or an installer): it stays out of the repository; write down where to get it instead'})
             continue
         if size > file_limit:
             refused.append({'file': path, 'why': f'{size / 1e6:.1f} MB, over {file_limit / 1e6:.0f} MB (GitHub refuses 100 MB)'})
@@ -639,6 +713,18 @@ def check_push(files, settings):
                 if pattern.search(text):
                     refused.append({'file': path, 'why': f'looks like it holds {what}'})
                     break
+            else:
+                emails = [] if LICENCE_FILE.search(os.path.basename(path)) else personal_emails(text)
+                if emails:
+                    web = bool(WEB_REQUEST.search(text))
+                    number, shown, identity = next((e for e in emails if e[2]), emails[0])
+                    where = ('in the identity line (User-Agent) or a header of a script that makes web requests: it is sent to every website the script asks'
+                             if web and identity else 'in a script that makes web requests' if web else 'in a file for a public repository')
+                    refused.append({'file': path, 'why': f'holds an email-like string ({shown}, line {number}; {len(emails)} in all) {where}. No name, email or other personal '
+                                                         'detail goes into a public repository or a request to an outside website: use a generic identity line (a tool name and '
+                                                         'a project page, or noreply) or none'})
+                elif is_money_file(path, text) and eaten_dollar_signs(text):
+                    refused.append({'file': path, 'why': 'a money file: ' + '; '.join(eaten_dollar_lines(path, text)[:3])})
     kept = sorted((p for p in files if p not in {r['file'] for r in refused}), key=lambda p: -sizes[p])
 
     def pack(limit):
@@ -776,6 +862,11 @@ def main():
         lines.append(f'Total: about US${result["total_dollars"]:.2f}. Prices are estimates: fal shows no exact charge, and ElevenLabs\' '
                      'dollars a credit was counted by text length, not billed.')
         if args.ledger:
+            eaten = eaten_dollar_lines(args.ledger, open(args.ledger, encoding='utf-8', errors='replace').read())
+            for line in eaten:
+                lines.append(f'FAIL {os.path.basename(args.ledger)} {line}')
+            if eaten:
+                code = 2
             state = ledger_state(load_json(args.ledger), args.allowance, settings=settings)
             result['ledger'] = {k: v for k, v in state.items() if k != 'counted'}
             lines.append(f'Allowance "{state["allowance"]}": US${state["spent_dollars"]:.2f} spent since {state["start"]}, US${state["left_dollars"]:.2f} left.')
@@ -784,8 +875,13 @@ def main():
                 code = 2
         lines.append('Ask the user with these numbers before any paid call; a vague reply ("that\'s ok") is not a yes to spending.')
     elif args.command == 'ledger':
+        eaten = eaten_dollar_lines(args.ledger, open(args.ledger, encoding='utf-8', errors='replace').read())
+        for text_line in eaten:
+            lines.append(f'FAIL {os.path.basename(args.ledger)} {text_line}')
+        if eaten:
+            code = 2
         state = ledger_state(load_json(args.ledger), args.allowance, args.today, settings)
-        result = state
+        result = dict(state, eaten_dollar_signs=eaten)
         lines.append(f'Allowance "{state["allowance"]}": US${state["allowance_dollars"]:.2f} from {state["start"]}.')
         lines.append(f'  spent since then: US${state["spent_dollars"]:.2f} ({state["entries_counted"]} entries); left: US${state["left_dollars"]:.2f}')
         lines.append(f'  (all entries in the ledger, any date: US${state["spent_all_entries_dollars"]:.2f}; only those since the start count)')
@@ -793,6 +889,14 @@ def main():
         if line is not None:
             lines.append(f'  spending line: US${line:.2f} of it ({state["spending_line_from"]}): paid steps stop there and the user is asked again; '
                          f'US${line - state["spent_dollars"]:.2f} before it')
+        covers = state.get('covers') or []
+        brief = (f'For helper briefs: US${state["left_dollars"]:.2f} is left of the allowance "{state["allowance"]}" (US${state["allowance_dollars"]:.2f} from '
+                 f'{state["start"]}' + (f'; US${line - state["spent_dollars"]:.2f} before its spending line' if line is not None else '') + '). '
+                 + (f'It covers {", ".join(covers)} only: a step of another service is not covered and needs the person\'s fresh yes. ' if covers else
+                    'It names no service it covers: ask the person what kind of spending it is for; a step of another kind needs a fresh yes. ')
+                 + 'Every paid step inside it is still reported to the person. Give helpers this figure, never a guess (one brief said US$3 when US$8.70 was left).')
+        result['for_helper_briefs'] = brief
+        lines.append(brief)
         if args.next_cost is not None:
             result['next_cost_dollars'] = args.next_cost
             if args.next_cost > state['left_dollars']:
@@ -862,7 +966,8 @@ def main():
         lines.append(f'Needs about {result["total_gb"]:.2f} GB ({result["film_megabytes"]:.0f} MB of film, {result["exports_megabytes"]:.0f} MB exports, '
                      f'{result["stills_megabytes"]:.0f} MB stills); {free:.2f} GB free, {free - result["total_gb"]:.2f} GB after.')
         if free - result['total_gb'] < reserve:
-            lines.append(f'STOP: that leaves less than {reserve} GB free. Delete pieces of film already joined and checked first.')
+            lines.append(f'STOP: {free:.2f} GB free now, and that leaves less than {reserve} GB free. Delete pieces of film already joined and checked first '
+                         '(a nearly full disk fails this whatever changed: free space before blaming a change).')
             code = 1
     elif args.command == 'push':
         files = files_to_check(args.paths, args.git)

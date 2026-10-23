@@ -6,8 +6,26 @@ A concrete example: build_parser().parse_args(['finish', '--scene', 'place.blend
 Each verb says whether it runs inside Blender ("blender": True) or in plain Python.
 """
 import argparse
+import os
+import sys
 
 from . import settings_file
+
+THREADS_VARIABLE = 'EXPLAINER_FILM_BLENDER_THREADS'
+
+
+def blender_thread_arguments(environment=None):
+    """['-t', 'N'] when the environment variable EXPLAINER_FILM_BLENDER_THREADS=N is set to a whole number of 1 or more: every Blender run the kit
+    starts then uses at most N processor threads, so several helpers on one computer do not starve each other (an earlier project's six builders each
+    ran blender -t 2). Unset or empty: [] and Blender chooses as before. Anything else is ignored with a LOOK line on the error stream.
+    A concrete example: with EXPLAINER_FILM_BLENDER_THREADS=2 the launcher runs blender -b -t 2 --disable-autoexec ..."""
+    text = str((environment if environment is not None else os.environ).get(THREADS_VARIABLE, '')).strip()
+    if not text:
+        return []
+    if text.isdigit() and int(text) >= 1:
+        return ['-t', str(int(text))]
+    print(f'LOOK {THREADS_VARIABLE}="{text}" is not a whole number of 1 or more, so it is ignored (Blender chooses its own thread count).', file=sys.stderr)
+    return []
 
 VERBS = {
     'new-settings': {'blender': True, 'help': 'draft place-settings.json from the scene\'s names, collections and materials; lists what it could not classify'},
@@ -17,7 +35,7 @@ VERBS = {
     'damage': {'blender': True, 'help': 'damage as shape: bent boards, chipped corners, leaning posts, sag; no two parts alike'},
     'age': {'blender': True, 'help': 'the nine wear layers in their fixed order (dirt, grime, weathering, wetness, cracks and chips, edge wear, moss, rust, rubbish)'},
     'grow': {'blender': True, 'help': 'weeds, tufts, ferns, nettles, moss cushions and litter pieces, with exact keep-out gates'},
-    'light': {'blender': True, 'help': 'add a sun, sky, fill and lamps for glowing things when the scene has none (a scene with no light renders black)'},
+    'light': {'blender': True, 'help': 'add a sun, a sky and a lamp in every glowing thing when the scene has none (a scene with no light renders black); no fill: add a soft area lamp or raise the sky yourself, never a second sun lamp'},
     'finish': {'blender': True, 'help': 'the whole pass in order (curves, text and instances become meshes, then roles, roads, surfaces, damage, wear, growth, light), then save, reopen and audit; idempotent; say where to save with --save-as'},
     'finish-part': {'blender': True, 'help': 'a part builder\'s share: only that owner\'s objects, masks from that part alone; always a quick trial, and its audit accepts that (the integrator runs the full finish)'},
     'construction': {'blender': True, 'help': 'the construction check alone: every part carried from the ground up, sizes of doorways, spans'},

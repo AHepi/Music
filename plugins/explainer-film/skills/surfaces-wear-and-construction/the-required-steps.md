@@ -142,9 +142,25 @@ so decide the light before you draw:
   box itself hidden from the lamp's own rays;
 - a value study of the first preview: nothing blown or crushed (judged: under 0.5 percent of dots clipped at either end).
   Read the picture's actual numbers, not how it looks.
-`explainer-film-place light --scene lock-finished.blend --save-as lock-lit.blend` adds a sun, a sky, a fill and a lamp
-for every glowing thing when the scene has none (`--sun-only` adds just a sun); `finish` runs it too. Its numbers are starting
-values, not tuned: look at the first preview and adjust. If the scene has its own lights, do these by hand.
+**The sun can do nothing.** Before you judge the materials, check that the sun reaches the ground you show. A low
+sun makes long shadows: shadow length = height / tan(elevation). A 4 m hall with the sun 9 degrees up throws a shadow
+about 25 m long (worked out: 4 / tan 9 degrees = 25). In the Japanese garden that, and hazy backdrop hills, put most
+of the view in shadow, and the materials were blamed. If most of a view is in one shadow, raise the sun or move what
+stands in its way, and give far shapes the role `backdrop` (they cast no shadow). The audit's check "place: sun"
+reports the share of the seen ground that is in shadow and names the object that shadows most. Do not plan a daylight
+view that is mostly in shade to make the subject stand out: the wear you built goes unseen and gets the blame (the
+garden). In daylight the subject stands out by its own narrow key light (tips guide section 7, rule 1), not by darkness.
+The wear layers decide which sides stay sheltered and damp (moss, soot, fade) from the scene's one sun lamp; with no
+sun lamp (or more than one) they assume a sun at 135 degrees (compass) and 45 degrees up. So add your own sun BEFORE
+`finish`, or moss and soot sit on the wrong sides; the audit prints which sun direction it used.
+At dusk, add a soft warm fill from the camera's side, so mud and brick show their own warm colours and not only cool
+sky light (the coal mine tuned it against its reference picture with about 10 small test pictures: today that is one
+batch of `variations`).
+`explainer-film-place light --scene lock-finished.blend --save-as lock-lit.blend` adds a sun, a sky and a lamp in every
+glowing thing when the scene has none (`--sun-only` adds just a sun); `finish` runs it too. It adds no fill: add the soft fill
+yourself (an area lamp, or more sky from the other side), never a second sun lamp (with two sun lamps the wear layers fall back
+to their default sun). Its numbers are starting values, not tuned: look at the first preview and adjust. If the scene has its
+own lights, do these by hand.
 
 ## Step 7b. Plan every change, then make them in one sweep
 
@@ -164,7 +180,9 @@ there is one (`style-rule-and-measures.md`).
 ## Step 9. Fresh checkers
 
 A helper who did not build the place recomputes the builders' claims and judges the pictures (`fresh-checkers.md`).
-The workflow `build-a-place` does steps 5 to 9 for you, with a blind reader and one fix round.
+The workflow `build-a-place` does steps 5 to 9 for you, with a blind reader and one fix round. By default it stops after
+the first view's small picture, for the person's reaction; `allViews: true` goes on to every view, the checkers and the fix
+round. Pass `film: true` for a place that will be in the film (tall 1080 x 1920 views, `"for_film": true`).
 
 ## Step 10. The place stage, then go on
 

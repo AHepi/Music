@@ -47,7 +47,7 @@ picture in the film is placed the same way: by a spoken word.
 - **A bold font for words printed on objects**: DejaVu Sans Bold is looked for in the usual places;
   otherwise set `PAPER_FILM_LABEL_FONT` to any bold .ttf file.
 - **Paid services** (through their connectors): ElevenLabs for the voice and transcripts, fal for
-  paintings and cut-out masks. Confirm costs with the user before spending (see `06`).
+  paintings and cut-out masks. Confirm costs with the person before spending (see `06`).
 
 ## Step by step
 
@@ -102,13 +102,13 @@ loudness by a plain volume change. The timeline is what the page files read.
 ### 5. Mix
 
 The soundtrack is never stored in the kit: copy the music you are allowed to use into
-`assets/soundtrack/` first (the austerity project used the user's own track "Tension and Gravity").
+`assets/soundtrack/` first (the austerity project used the person's own track "Tension and Gravity").
 ```
 bash narration-tools/mix_narration_over_music.sh "assets/soundtrack/Tension and Gravity.mp3" narration.wav mix.wav mix.mp3
 ```
 The music plays from its start 11 dB down, dips under the voice (about 18 dB under while she speaks,
 about 12 in pauses), fades in over 0.8 s and out over the last 4 s; the whole mix is set to -15 LUFS
-with peaks held under clipping. These levels were approved by the user ("music slightly louder"
+with peaks held under clipping. These levels were approved by the person ("music slightly louder"
 than a first try at 14 dB down).
 
 Steps 3 to 5 on the example's files reproduce the example's timeline, narration track and mix byte
@@ -119,7 +119,9 @@ for byte (checked when the kit was made).
 - Model `blackforestlabs/flux-3/text-to-image`, `output_format` png. Use the style words in
   `04 Painting prompts.md` exactly, every time, so pictures from different requests match.
 - **Backgrounds**: aspect `9:16`, resolution `2k` (1536 x 2736), about 10 US cents each; the scene
-  with nothing standing in it and the lower quarter empty.
+  with nothing standing in it and the lower quarter empty (the paper route only: cut-out pieces stand
+  there; a place built in Blender and painted over fills its bottom third, the nearest story thing
+  reaching about 0.70 down).
 - **Big figures and groups**: `21:9` (3136 x 1344) or `4:5` (1824 x 2288), `2k`, about 10 cents;
   **small objects**: `1:1`, `4:5` or `3:2` at `1k`, about 2.5 cents. Always on a plain flat light grey
   background (#cfcfcf), no floor, no cast shadow, the whole subject inside the picture.

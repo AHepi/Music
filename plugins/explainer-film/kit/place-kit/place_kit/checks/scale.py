@@ -6,7 +6,9 @@ How a fact applies to an object: its role matches the fact's applies_to_role pat
 How a dimension is read (so a model and a checker mean the same thing): height = the z extent; width = the larger horizontal extent;
 depth = the smaller horizontal extent; thickness = the smallest of the three extents; middle = the middle one; span = the largest one;
 pitch = the typical slope of a roof's up-facing faces in degrees; gauge = the distance between the wheel ruts of a road in the settings; rise = how far a step's top stands above
-what it rests on or the next lower step beside it (measured by the construction check, top to top).
+what it rests on or the next lower step beside it (measured by the construction check, top to top); free_span = the longest free stretch of a
+plank or beam between its supports, which only the judge reads (a place's own sourced free_span fact lets a real longer span pass, such as a hall's
+tie beam between its walls; it is never measured here).
 Three guards against false alarms: a fact marked only_if_slab_like is used only when the object's smallest extent is at most 0.4 of its
 middle one (a whole building in one object is not read as one thick wall); a fact marked skip_if_lying is not used for an object that is lower than
 the fact's minimum and more than three times longer than it is high (a rail along a fence is not the fence); and an object made of several loose
@@ -67,8 +69,8 @@ def measure_object(name, role, size, facts, parts_count=1, pitch=None):
     entries, notes = [], []
     for fact in applicable_facts(role, name, facts):
         dimension = fact['dimension']
-        if dimension in ('gauge', 'rise'):
-            continue                                    # a gauge is read from the roads in the settings, a rise from the construction check (top to top), not from an object's own extents
+        if dimension in ('gauge', 'rise', 'free_span'):
+            continue                                    # a gauge is read from the roads in the settings, a rise from the construction check (top to top), a free span by the judge from the construction check; none from an object's own extents
         if fact.get('only_if_slab_like') and not is_slab_like(size):
             notes.append(f'{fact["id"]}: skipped, the object is not slab-like')
             continue

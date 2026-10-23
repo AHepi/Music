@@ -2,7 +2,10 @@
 put in it: a big flat ground, two sheds (four wall boxes, a gable roof and a door each), a fence of posts and rails, a well, a barrel with two iron bands, an iron post and a stump, a
 sun and a camera named "Camera A". Nothing has a normal map, wear or damage. It has everything the kit's roles and treatments need to be proved at a larger size than the one-hut
 scene: wood, stone, iron, a tree, roofs, walls, a lot of ground for a road, ruts and plants, and a fence the plants must stay out from under.
-Run: blender -b --python make_yard_scene.py -- OUT.blend [--no-light] [--no-camera]
+Since the lessons round (23 October 2026) the yard also has the finished horizon the audit asks of every place (place: world): the camera looks over the far edge of the
+ground, so a ring of far hills with the role backdrop stands round the yard (110 m out, from 40 m below the ground to about 12 m up, so every ray below the horizon that
+leaves the ground meets it) and the camera's clip end is 1000 m. --no-horizon leaves both out (the view then sees past the ground into empty sky, and the audit fails).
+Run: blender -b --python make_yard_scene.py -- OUT.blend [--no-light] [--no-camera] [--no-horizon]
 The road the tests cut into the ground is written in the settings file the test makes (a polyline through y = 3 to 5); the scene itself has no road, only the ground.
 """
 import math
@@ -14,7 +17,7 @@ from mathutils import Vector
 
 arguments = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 if not arguments or arguments[0].startswith('-'):
-    print('usage: blender -b --python make_yard_scene.py -- OUT.blend [--no-light] [--no-camera]')
+    print('usage: blender -b --python make_yard_scene.py -- OUT.blend [--no-light] [--no-camera] [--no-horizon]')
     sys.exit(2)
 out_path = arguments[0]
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -125,5 +128,21 @@ if '--no-camera' not in arguments:
     camera.rotation_euler = (Vector((13.0, 5.0, 0.8)) - Vector(camera.location)).to_track_quat('-Z', 'Y').to_euler()
     scene.collection.objects.link(camera)
     scene.camera = camera
+    if '--no-horizon' not in arguments:
+        data.clip_end = 1000.0
+if '--no-horizon' not in arguments:                     # far hills all round: an open ring with a wavy top, the role backdrop by its name
+    centre, radius, segments = (16.0, 3.0), 110.0, 96
+    vertices, faces = [], []
+    for index in range(segments):
+        angle = 2 * math.pi * index / segments
+        x, y = centre[0] + radius * math.cos(angle), centre[1] + radius * math.sin(angle)
+        vertices += [(x, y, -40.0), (x, y, 9.0 + 2.5 * math.sin(3 * angle) + 1.5 * math.sin(7 * angle))]
+    for index in range(segments):
+        a, b = 2 * index, 2 * ((index + 1) % segments)
+        faces.append((a, b, b + 1, a + 1))
+    hills = bpy.data.meshes.new('Far hills backdrop')
+    hills.from_pydata(vertices, [], faces)
+    hills.update()
+    add('Far hills backdrop', hills, material('far_hills_mat', (0.42, 0.48, 0.55, 1)), (0, 0, 0))
 bpy.ops.wm.save_as_mainfile(filepath=out_path)
 print('saved', out_path)

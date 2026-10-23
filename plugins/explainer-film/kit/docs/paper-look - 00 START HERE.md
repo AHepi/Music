@@ -74,3 +74,7 @@ copied, what waits and what only the plugin has: `kit-sync-notes.md` beside the 
   `assets/` and `paper-film/pieces/`; read them as patterns, or copy the pictures over from the
   austerity project's film kit.
 - A soundtrack belongs to its owner; use it only as they allow, and never add it to a public repository.
+- The house sample (`paper-film/scenes/house-sample.js`, `examples/house-sample/`) is kept for its code only. The
+  person rejected its look, each chapter inside one cut-away doll's-house building ("It looks terrible. The 3d looks
+  fantastic though"), and liked the real 3D rooms the camera moves through without tearing. Never copy that look or
+  propose it again (`examples/house-sample/00 About this example.md`).

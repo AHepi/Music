@@ -31,7 +31,9 @@ feedback on chapter 2):
 - **Nothing passes through anything**: `room.clearance(object)` (distance in front of the painting;
   negative = poking through), `boxesOverlap(a, b)`; standing things sit ON the floor point; falling
   things stop on the surface they land on.
-- Plain card models look poor next to paintings: make detailed ones in Blender (skill `make-3d-models`).
+- Plain card models look poor next to paintings: make detailed ones in Blender (skill `make-3d-models`). Keep one way
+  of making pictures for a film: chapter 2's look read as a collage of five kinds of picture, and plain code-built props
+  (banknote bundles) looked like soap beside the paintings and the real models.
 - Words at the top over a busy set need a soft dark band behind them (see chapter 2 page 8, or
   `topShade` in `graphics.js`).
 - A cut-out that fades: `setFading(piece, pose)` from `cinema-kit.js`, not `piece.set({ opacity })`

@@ -44,7 +44,7 @@ Exit 0 is a pass (read the LOOK lines), 1 is a fail, 2 is an input that is missi
 | `damage` | damage as shape: boards that bow, chipped corners, leaning posts; no two parts alike |
 | `age` | the nine wear layers (dirt, grime, weathering, wetness, cracks and chips, edge wear, moss, rust, rubbish) in their fixed order |
 | `grow` | weeds, tufts, ferns, nettles, moss cushions, leaves, sticks, straw and clods as small 3D pieces, with exact keep-out gates |
-| `light` | adds a sun, a sky, a fill and lamps for glowing things when the scene has none (a scene with no light draws black) |
+| `light` | adds a sun, a sky and a lamp in every glowing thing when the scene has none (a scene with no light draws black); it adds no fill: add a soft area lamp or raise the sky from the other side yourself, never a second sun lamp |
 | `finish` | everything above in the right order, then save, reopen, audit; safe to run twice |
 | `finish-part` | one builder's share (`--owner NAME`): only that owner's objects, masks from that part alone |
 | `construction` | the construction check alone: every part carried from the ground up, doorways, spans |
@@ -72,6 +72,7 @@ Everything is optional; an empty file means "a lived-in place, dry, every role f
 - `place_type`: a starting preset (`data/place_types/`: village, town, harbour, farm, garden, mine, interior, `generic`) with its own look, state and allowed skips. `new-settings` prints the look and state it started from, so you can see and change them. `generic` is the default.
 - `roles`: rules that say what an object is, by name, collection, material or property. A rule that matches only a material gives that slot its own role (a barrel's wood and its iron bands). `roles --list` prints the role ids.
 - `never`: rules for objects that have no surface to give (a measuring helper, a hidden sky dome), each with a reason: `{"role": "never.helper", "match": {"names": ["^Helper"]}, "reason": "a measuring helper hidden in every picture"}`.
+- The role **`backdrop`**: far scenery round the place (rings of hills or far buildings all the way round, lighter and bluer when far, real shapes so they move against the place in a slide). It gets no surface pass and no wear, `finish` turns its shadow off (so it can never block the sun: hazy hills that cast shadows once did), and it should be a plain colour that does not take light. Give it by a role rule or the `place_role` property; an object called "backdrop" or "far hills" gets it by name. The audit's check **place: world** looks at it.
 - `require_more`: treatments that a whole class must have on top of what the kit already requires, for a place that needs them: `"require_more": {"timber": ["moss_and_algae"], "stone": ["wetness"]}` (the harbour preset does this: wood by water goes green, stone by water stays wet).
 - `owners`: for a place built in parts, the path of the ownership file (who owns which objects, collections and materials; what is frozen and who sets it). Example: `"owners": "canal-lock-ownership.json"`.
 - `roads`: a polyline, a width, a cart gauge, a rut depth, and optionally `"hoof": true` (hoof prints, for a track that animals walk) or `"centre_grass": true`. When none is written, `finish` drafts one for every object whose role is a road role (its centre line from the object's own shape) and says so; a road drawn as one strip is shaped in place (the strip keeps its outline).
@@ -79,6 +80,7 @@ Everything is optional; an empty file means "a lived-in place, dry, every role f
 - `off`: a treatment switched off for some roles, with a reason of at least 15 letters. It is listed in the audit as KNOWN with the reason and is capped: a place that skips most of the pass is not finished.
 - `dials`: a layer's own numbers (how high the foot splash reaches, how many cracks). A dial name that is not in `data/dial_table.json` is an error, so a typo cannot hide. **Dials and the state are the same for every role.** To treat one role differently (more moss on the waterside timber), give it its own look with `look_by_role`, or switch a treatment off for it with an `off` entry and a true reason.
 - `picture`: the camera and picture height, so marks are sized in picture dots (a crack is never thinner than three dots).
+- `for_film`: `true` when the place will be shown in the film (on a phone). Its views are then the film's tall 9:16 frame, 1080 x 1920 (previews in the same shape, for example 540 x 960), and the audit's check **place: film frame** fails any other render size or a view camera set to another shape. Read the skill build-and-paint-a-place before placing a camera.
 
 What the kit makes and what it does not: the plants it grows are only the species in `data/species.json` (tuft, clover, nettle, fern, bramble, moss cushion, with leaves, pine needles, sticks, straw and clods as litter). Reeds, seaweed, barnacles and foam are NOT made by `grow`: build them as a few big designed shapes in the part that owns the props. Near water, the wear masks make the ground damp (full at the water's edge, nothing from about 3 m away; measured on a quay) and the water itself is not treated as a solid, but a tide line (a band at the height of the water) is not made by any layer: build it as shape.
 
@@ -114,7 +116,30 @@ renderer, so the audit checks that every object has them. Amount 0 gives exactly
 floats, how big a door is), measured from the saved file (it records the file's hash, so a changed file makes the audit stale).
 `place_audit_check.py` judges the facts with the house numbers (`kit/film-settings.json`, sections `place_...`) and prints
 PASS, LOOK, FAIL or KNOWN with a fix. `explainer-film-preflight place` runs the judge, checks the audit is about this file, and
-looks at the preview pictures against a style guard. The `plates` stage asks for the same audit when it is given a scene (`--blend`, or the `scene_file` its check file records), so a
+looks at the preview pictures against a style guard. Four checks of the lessons round (23 October 2026) look at the place as the film will see it: **place: film frame** (above);
+**place: world** (rays through every view camera: no empty sky below the horizon, which means the view sees past the edge of the
+ground; no clip end shorter than the farthest object, with the figure each camera needs; no backdrop or large far object casting
+shadows; a haze volume in the world is a LOOK; a prop or small set built alone, at most 20 m across and not marked "for_film", gets a
+LOOK instead of a FAIL for a view with no horizon); **place: sun** (from the ground points each view sees, rays toward the sun: more than half shadowed is a LOOK, invented,
+naming the object that shadows most, since a 4 m wall with the sun 9 degrees up throws about 25 m of shadow; and which sun the wear
+layers' shade used); **place: lettering** (every sign, notice, placard, poster, name board or book, found by its role first and then
+by those whole words in its name, carries lettering: a picture texture, a shape made from text, or a lettering object on it; "board"
+alone does not count, so floorboards stay out). **place: budgets** also counts every object in the scene
+(`place_audit.objects_total_max`, 1,000, judged: an earlier place's thousands of leaves took 7 minutes made one object at a time and
+about 10 s built in bulk): from 1,000 to `place_audit.objects_total_fail` (3,000, judged) it is a LOOK, above that a FAIL.
+**place: construction** fails a free span longer than the part's role allows (planks and floor boards 1.38 m, beams and fences 2.5 m)
+unless the place's own facts file holds a sourced `free_span` fact for it (a hall's tie beam between its walls). An audit made before these checks says "not measured by this audit" (a LOOK, never a FAIL).
+The wear layers' shade (which sides stay sheltered and damp: moss, soot, fade) is worked out for the scene's own sun lamp when
+there is exactly one, else for a sun at 135 degrees compass and 45 up; `finish` and the audit say which was used, so add your sun
+before `finish`. `explainer-film-setup` prints a "Blender 5.2 probe" (`probe_blender.py`): which way of setting a Geometry Nodes
+modifier input works in the installed Blender, and how a collection's light-linking entries pair with its objects.
+
+Several helpers on one computer: set the environment variable `EXPLAINER_FILM_BLENDER_THREADS=N` (for example 2) and every Blender
+run the kit starts gets `-t N`, so they do not starve each other; unset, Blender chooses as before. A Blender you start yourself:
+`blender -t N ...`. On the card-time ledger, a helper name that already has a job in flight is refused a second paid step
+("already has a job in flight"), and the attempt is written into the ledger as a double run.
+
+The `plates` stage asks for the same audit when it is given a scene (`--blend`, or the `scene_file` its check file records), so a
 place that was never audited cannot reach a paid painting; when no scene is named at all it cannot know, and says so as a LOOK. The order: shots, build the place, `place`, then `plates`.
 
 ## Building in parts
@@ -191,7 +216,7 @@ explainer-film-place variations refine cracks-run/variations-result.json --pick 
   (`apply(variation)` inside Blender, with its numbers in `args`; the template is `data/templates/variation_hook.py`). A real example: `data/examples/canal-lock-cracks-variations.json`.
   `master` and `amount.<layer>` SCALE what the saved scene has (1 = as saved, 0 = off, up to `place_variations.amount_scale_max`, 2), so a batch can try more wear as well as less; a dial is set to the
   variation's value in every material. `make --range KEY LOW HIGH` spreads one setting only over the part of its range that shows.
-- The FREE SCOUT (`variations scout FILE.json`, `place_kit/variations/scout.py`) draws the same variations HERE, tiny (`place_variations.scout_size_pixels`, 240 x 160, 8 samples), in one job, with no card seconds,
+- The FREE SCOUT (`variations scout FILE.json`, `place_kit/variations/scout.py`) draws the same variations HERE, tiny (`place_variations.scout_size_pixels`, 240 x 160, 8 samples; 144 x 256 for a place marked `"for_film": true`), in one job, with no card seconds,
   and is not counted as a batch. Its limits for "nearly the same" are its own (`scout_picture_mean_difference_min` 0.75, `scout_picture_changed_share_min` 0.3 percent), calibrated on 23 October 2026: two real card
   batches of the canal lock (110 pairs) drawn again as scouts gave exactly the same 22 nearly-the-same pairs as the cards did, and no other (one scene; a thin margin for cracks). `plan` and `run` find the scout beside the
   file and drop what it found nearly the same as the saved scene or as an earlier variation, each with a sentence; a scout of another version of the scene, or of other settings, is not used (scene checksum and a
@@ -199,7 +224,7 @@ explainer-film-place variations refine cracks-run/variations-result.json --pick 
 - BEFORE drawing, a variation is dropped when none of its settings is at least `place_variations.settings_difference_min_share` (8 percent: invented) of the setting's range away from the saved scene or from an earlier variation;
   the sentence says which and why. `make` spreads the settings so that no two variations share a tenth of any range (a Latin hypercube), so ten made variations are far apart by construction.
 - The variations (and the baseline, the saved scene as it is) are split over up to `place_render.workers_max` (3) card jobs, at least 3 variations in each, sent at the same time. Each job opens the scene once; for each variation it
-  applies the settings, draws small quick pictures (600 x 400; EEVEE 16 samples or Cycles 24 samples by the renderer rule, chosen once from the baseline) through every camera, then puts the values back and checks a fingerprint
+  applies the settings, draws small quick pictures (600 x 400, or the film's tall 360 x 640 when the place settings say `"for_film": true` and no size is given; EEVEE 16 samples or Cycles 24 samples by the renderer rule, chosen once from the baseline) through every camera, then puts the values back and checks a fingerprint
   (a script hook, or a reset that did not come back exact, reopens the scene). The scene is never saved. `--where local` runs the same jobs here, one after another (tiny scenes and tests).
 - The scene waits on the store under its own checksum, so a second batch on the same scene does not upload the scene again.
 - Every job is written into the ledger as "sent" (with an estimate) the moment it goes out, and the run folder keeps `run-state.json`; a command cut off while it waits (a time limit, a lost connection) loses

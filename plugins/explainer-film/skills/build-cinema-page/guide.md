@@ -210,7 +210,9 @@ Seven critics and a skeptic found these; each cost a re-film. Check for them you
   cut-outs are only drawn where at least half solid. Use `setFading(piece, pose)` from
   `cinema-kit.js` instead of `piece.set(pose)` for a piece that fades, on every frame it shows: it builds
   the piece see-through once and lowers `alphaTest` to 0.02 while it fades (the same function as in
-  `house-sample/page-1.js`).
+  `house-sample/page-1.js`). The house sample is kept for its code only: the person rejected its cut-away house look
+  ("It looks terrible. The 3d looks fantastic though"), so never copy or propose that look
+  (`kit/examples/house-sample/00 About this example.md`).
 - **Two surfaces in one plane flicker when the camera moves.** Keep built walls, floors and ceilings a
   hair (about 0.01 units) apart from the boxes behind them.
 - **A place built in 3D and painted over** (plan 3: the austerity project's pit village,

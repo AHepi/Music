@@ -8,7 +8,7 @@ export const meta = {
     { title: 'Build parts', detail: 'one builder per part, side by side up to a cap, each running its own share of the pass and its own checks' },
     { title: 'Combine', detail: 'one integrator: both orders, ownership check, the whole surface-and-wear pass' },
     { title: 'Audit', detail: 'the audit and the preflight stage place on the exact file; up to two repair rounds routed to the owners; no picture before it passes' },
-    { title: 'Render', detail: 'the renderer rule (Cycles where lit, EEVEE when not), small quick previews on the rented card inside the allowance, measures, the style guard' },
+    { title: 'Render', detail: 'the renderer rule (Cycles where lit, EEVEE when not), small quick previews on the rented card inside the allowance, measures, the style guard; by default only the first view, then the run stops for the person to react' },
     { title: 'Check', detail: 'fresh checkers (look, structure, process, a blind reader), then a skeptic merges and ranks' },
     { title: 'Fix', detail: 'exactly one fix round: one fixer per owner, given only the confirmed findings' },
     { title: 'Re-check', detail: 'a different fresh checker and a second blind reader look at the changed place' },
@@ -31,7 +31,9 @@ export const meta = {
 // is written in one card-time ledger, and the batch rule applies (make every change in one sweep, then look once; try a change as about 10 measurably different variations in ONE batch with
 // `explainer-film-place variations`, at most one more batch; small quick pictures until the end; full-size pictures drawn ONCE, at the very end); no commit; checkers get no
 // builder reports or numbers; the blind reader gets no feature list; a part that comes back empty is reported as missing, never
-// dropped quietly; a squint-test miss is reported to the person and never "fixed" by removing character.
+// dropped quietly; a squint-test miss is reported to the person and never "fixed" by removing character; start small: unless the person asked
+// for every view (allViews: true), the run draws only the first view's small picture and stops there for the person's reaction; every Blender
+// run on this computer has a thread limit (blenderThreads); nobody sends a message to a helper that is spending money.
 // The helpers are told to read their own agent file first, because a plugin agent type is not assumed to be available.
 //
 // args: {
@@ -43,7 +45,15 @@ export const meta = {
 //   scene: '/path/to/start.blend'                  (optional: a scene to start from; otherwise the ground builder makes an empty one)
 //   blender: '/path/to/blender'                    (optional: otherwise the commands look for it themselves)
 //   parts: [{ name, owner, brief }]                (optional: otherwise the planner proposes 3 to 8)
-//   views: [{ name, camera, size: [w, h] }]        (optional: otherwise the planner proposes at least 3)
+//   views: [{ name, camera, size: [w, h] }]        (optional: otherwise the planner proposes at least 3; the size defaults to 1200 x 800, or 1080 x 1920 with film)
+//   film: true | false                             (default false: true when the place will be shown in the film on a phone. Every view is then 1080 x 1920
+//                                                  (previews in the same tall shape, 540 x 960), the planner runs kit/calculators/plan_shot.py for each view
+//                                                  and writes "for_film": true into place-settings.json, so the audit's check "place: film frame" holds it to that)
+//   firstViewOnly: true                            (default true: start small. The run builds the place, draws ONLY the first view's small picture and stops,
+//                                                  reporting "stopped for the person's reaction", before any checker, fixer or other view)
+//   allViews: false                                (true: draw every view and go on to the checkers, the fix round and the report; the same as firstViewOnly: false)
+//   blenderThreads: 2                              (default 2: the thread limit of every Blender run on this computer, so helpers side by side do not
+//                                                  starve each other; the plugin's commands get it as EXPLAINER_FILM_BLENDER_THREADS, own runs as blender -t)
 //   references: ['/path/to/picture.jpg']           (optional: pictures the person gave; the style guard is made from them)
 //   accepted: '/path/to/accepted.json'             (optional: problems the person accepted in writing, with who and date)
 //   ledger: '/path/to/spend-ledger.json'           (optional: for the process checker)
@@ -57,8 +67,9 @@ export const meta = {
 //   maxParallelBuilders: 4                         (default 4: more parts wait in a queue, none is skipped; use 2 on a slow computer)
 //   maxRepairRounds: 2                             (default 2, never more)
 //   effort: 'medium', checkEffort: 'high', planEffort: same as effort   (the person's word wins: when the person or the project's house rules say "medium, never higher",
-//                                                  pass checkEffort: 'medium'. There is no model argument: every helper runs on the model of the session that starts
-//                                                  the workflow, so to run the helpers on another model, start the workflow from a session on that model)
+//                                                  pass checkEffort: 'medium')
+//   model: 'sonnet'                                (optional: the model every helper runs on, for example 'sonnet' or 'opus'; without it every helper
+//                                                  runs on the model of the session that starts the workflow)
 //   today: 'YYYY-MM-DD'                            (so "latest" figures are judged right; the script never reads the clock)
 // }
 // Returns { plan, ground, parts, missing_parts, combine, audit, repairs, render, final_render, card_time, checks, confirmed, fixes, recheck, reading_test,
@@ -75,12 +86,17 @@ if (lacking.length) {
 const EFFORT = ARGS.effort ?? 'medium'
 const CHECK_EFFORT = ARGS.checkEffort ?? 'high'
 const PLAN_EFFORT = ARGS.planEffort ?? EFFORT
+const MODEL = ARGS.model ? { model: ARGS.model } : {}   // the model every helper runs on, when the caller names one
 const CAP = Math.max(1, Math.floor(Number(ARGS.maxParallelBuilders) || 4))
 const MAX_REPAIRS = Math.max(0, Math.min(2, Math.floor(Number(ARGS.maxRepairRounds ?? 2))))
 const READING_LINE = 0.75   // film-settings.json, place_measures reading_test_share_min (judged: 12 of 16 features)
 const RENTED = ARGS.rented ?? 'auto'
 const RENDERER = ARGS.renderer ?? 'auto'
 const FINALS = ARGS.finals === true
+const FILM = ARGS.film === true
+const DEFAULT_VIEW_SIZE = FILM ? [1080, 1920] : [1200, 800]     // a film view is tall (phone); a place not for the film keeps the old wide default
+const FIRST_VIEW_ONLY = !(ARGS.allViews === true || ARGS.firstViewOnly === false)
+const THREADS = Math.max(1, Math.floor(Number(ARGS.blenderThreads) || 2))   // 2 by default: six helpers on one computer (the coal mine's builders) each ran blender -t 2
 const CARD_LEDGER = String(ARGS.cardLedger ?? `${String(ARGS.folder).replace(/\/+$/, '')}/card-time-ledger.jsonl`)
 const CARD_CLIENT = ARGS.cardClient ? String(ARGS.cardClient) : null
 const CARD_TEAM_MINUTES = Number(ARGS.cardTeamMinutes) > 0 ? Number(ARGS.cardTeamMinutes) : null
@@ -106,7 +122,7 @@ const STATE = {
   render: null, checks: {}, skeptic: null, confirmed: [], notFixedOnPurpose: [], unverified: [],
   fixes: [], fixOwners: [], fixCombine: null, fixAudit: null, fixRender: null, recheck: null, recheckBlind: null,
   readingTests: [], freshCheck: null, finalGate: null, version: 1, finalFile: null, finalAuditFile: null, finalRender: null, claimOwners: [],
-  havePictures: false, stopped: null, notes: [], cardRows: [], finalsRender: null,
+  havePictures: false, stopped: null, notes: [], cardRows: [], finalsRender: null, firstViewStop: null,
 }
 
 // ------------------------------------------------------------------------------------------------------------- small helpers
@@ -154,7 +170,8 @@ const partOf = (owner) => STATE.plan.parts.find((part) => part.owner === owner)
 // ----------------------------------------------------------------------------------------------------------- shared prompt text
 const RULES = `RULES FOR EVERYONE
 - Spend no money. The only paid thing in this run is time on the person's own rented card, and it is LIMITED: every helper has an allowance in card minutes by its role, every card job is written in the card-time ledger, and the tools refuse a step that would pass the allowance. The card is used only through the batch tool (explainer-film-place variations) and render, and only when the notes say it may be used. Try things in batches (one sweep of changes, then look once; about 10 measurably different variations in ONE batch; at most one more batch), small quick pictures until the end, full-size pictures once at the very end. Your own section below names your allowance.
-- Never commit or push. Never write a key, an id or a personal detail into any file or answer, and never open the folder where the rented-card account keeps its settings (the client reads the person's settings when it runs).
+- Never commit or push. Never write a key, an id or a personal detail into any file or answer (nor into a request to an outside website: no name or email in a download script's identity line), and never open the folder where the rented-card account keeps its settings (the client reads the person's settings when it runs).
+- Never send a message to a helper that is spending money while it is running: a message to a running paid helper once woke a second copy of it, which made 8 extra paid calls (about US$0.70). Read the card-time ledger instead.
 - Never lower a requirement to make a check pass. The only allowed ways to skip a treatment are an off entry with a true reason in the place settings, and an accepted entry that the person signed (who and the date). You never sign for the person.
 - This computer is slow and its disk is small: run only small tests here (small pictures, quick runs); anything bigger waits for the renderer. Keep .blend files few, delete your own scratch files, keep big pictures on the rented card's store and bring back only small previews (under 400 KB).
 - Plain everyday words, one word for each thing. Say what a tool measured and what you only judged. Say what you did not test and every failure; never write that something passed when you did not see it pass.
@@ -165,12 +182,13 @@ const environmentText = () => (ARGS.environment ? `\nNOTES ABOUT THIS COMPUTER, 
 const cardBlock = (name, role) => `YOUR CARD TIME
 Your helper name for the card-time ledger is ${name}. Your role is ${role}. The ledger is ${CARD_LEDGER}. Your allowance is ${CARD_MINUTES[role]} minutes of rented-card time (a house number, judged): the tools count it and refuse a step that would pass it. Put --helper ${name} --role ${role} --ledger ${CARD_LEDGER} on every variations, render and rent command you run. \`explainer-film-place card-time show --ledger ${CARD_LEDGER}\` says what you have left.
 ${RENTED === false ? 'The person said: no rented card in this run. Draw nothing on a card. A batch may be drawn with --where local on a tiny scene, or not at all; say what you could not try.' : `Rented card allowed: ${RENTED}.`}
-THE BATCH RULE (read ${ARGS.plugin}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md first): make every change you plan in ONE sweep, then look once. Build the scene once and save it. For each change to a thing you are not sure of, write about 10 variations whose settings are far apart and draw them in ONE batch: explainer-film-place variations scout FILE.json (free: the same variations drawn here, tiny; it says which would not show; spread wider and scout again if fewer than 10 would), explainer-film-place variations plan FILE.json (free), then explainer-film-place variations run FILE.json --where ${WHERE}${CARD_CLIENT ? ` --card-client "${CARD_CLIENT}"` : ''} (up to 3 cards at once, 600 x 400, one labelled sheet with measures and the card seconds; give it a 10-minute time limit, and if it is cut off anyway run explainer-film-place variations collect RUN-FOLDER, which sends nothing again). Look at the sheet with the Read tool, pick or combine, and draw at most ONE more batch. Small quick pictures until the end; full-size pictures are drawn once, at the very end, by the renderer. Report the card seconds you used (card_seconds) and the batches you drew (batches).`
+THE BATCH RULE (read ${ARGS.plugin}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md first): make every change you plan in ONE sweep, then look once. Build the scene once and save it. For each change to a thing you are not sure of, write about 10 variations whose settings are far apart and draw them in ONE batch: explainer-film-place variations scout FILE.json (free: the same variations drawn here, tiny; it says which would not show; spread wider and scout again if fewer than 10 would), explainer-film-place variations plan FILE.json (free), then explainer-film-place variations run FILE.json --where ${WHERE}${CARD_CLIENT ? ` --card-client "${CARD_CLIENT}"` : ''} (up to 3 cards at once, 600 x 400, or 360 x 640 for a place marked for the film, one labelled sheet with measures and the card seconds; give it a 10-minute time limit, and if it is cut off anyway run explainer-film-place variations collect RUN-FOLDER, which sends nothing again). Look at the sheet with the Read tool, pick or combine, and draw at most ONE more batch. Small quick pictures until the end; full-size pictures are drawn once, at the very end, by the renderer. Report the card seconds you used (card_seconds) and the batches you drew (batches).`
 const builderHelper = (part, mode) => (mode === 'fix' ? { name: `fixer-${part.owner}`, role: 'fixer' } : { name: `builder-${part.owner}`, role: 'builder' })
 
+const threadText = () => `THREAD LIMIT: other helpers run Blender on this computer at the same time, so every Blender run here uses at most ${THREADS} threads. Your own runs: blender -t ${THREADS} -b --disable-autoexec FILE.blend --python SCRIPT.py. The plugin's commands: put EXPLAINER_FILM_BLENDER_THREADS=${THREADS} in front of each one (for example EXPLAINER_FILM_BLENDER_THREADS=${THREADS} explainer-film-place finish-part ...); the launcher then adds -t ${THREADS}.`
 const blenderText = () => (ARGS.blender
-  ? `Blender is at ${ARGS.blender}: give every command that starts Blender the option --blender ${ARGS.blender}.`
-  : 'Blender: the commands look for it themselves (the BLENDER setting, then the kit machine settings file, then the PATH). If it cannot be found, stop and say so.')
+  ? `Blender is at ${ARGS.blender}: give every command that starts Blender the option --blender ${ARGS.blender}.\n${threadText()}`
+  : `Blender: the commands look for it themselves (the BLENDER setting, then the kit machine settings file, then the PATH). If it cannot be found, stop and say so.\n${threadText()}`)
 
 const runHeader = (who) => `THE RUN
 The place: ${STATE.plan?.place ?? ARGS.place ?? '(the planner chooses a name)'}. Today is ${ARGS.today ?? '(not given)'}.
@@ -275,6 +293,9 @@ ${ARGS.place ? `The person calls it: ${ARGS.place}.` : 'Choose a short plain nam
 ${ARGS.parts ? `The person asked for these parts, so use them (you may add parts and improve their briefs):\n${asText(ARGS.parts)}` : 'Propose 3 to 8 parts.'}
 The ground part is built first, alone, then frozen. Its owner goes in ground_owner, and in ownership.json under frozen.set_by (the ground part is the one that makes the cameras, the lights and the world, so without that field its own camera is a violation). ${ARGS.scene ? `The starting scene is ${ARGS.scene}; the ground builder starts from it.` : `There is no starting scene: the ground builder makes an empty one at ${START_FILE}.`}
 ${ARGS.views ? `The person wants these views:\n${asText(ARGS.views)}` : 'Propose at least three views.'} The cameras are named "View <name>".
+THE WORLD ROUND THE PLACE: every named view must see a finished horizon, not empty sky above a dark slab or the edge of the ground. The ground part owns the world: an all-round backdrop of real shapes (rings of hills or far buildings all the way round, lighter and bluer when far), unlit plain colour that casts no shadow (role backdrop), the plain ground continued to the horizon, the ground's edge hidden, every view camera's clip end at 1000 m or more and past the far edge of the ground and the backdrop (the audit names the figure each camera needs), and no haze volume. Put this in the ground part's brief; the audit's check "place: world" looks for it.
+${FILM ? `THE FILM FRAME: this place will be shown in the film, on a phone. Every view is 1080 x 1920 (tall), and its previews are drawn in the same tall shape (540 x 960). Write "for_film": true into place-settings.json (the audit's check "place: film frame" then fails a view of another size). Before you name the views, read ${ARGS.plugin}/skills/build-and-paint-a-place/SKILL.md (section 3) and sections 4 to 12 of ${ARGS.kit}/docs/LLM tips and tricks.md. For each view write a rough place-facts file from your planned layout (its shape: ${ARGS.kit}/calculators/place_facts_schema.json) and run python3 ${ARGS.kit}/calculators/plan_shot.py --place-facts PLACE_FACTS.json --view VIEW --plan; put the camera spot, the eye height and the turn it gives into the ground part's brief (it makes the cameras). Anything to be read ends left of 0.90 across and above 0.80 down.` : 'This place is not marked for the film: its views keep the wide default (1200 x 800). If it will be shown in the film after all, the run should be started again with film: true.'}
+START SMALL: ${FIRST_VIEW_ONLY ? 'this run draws only the FIRST view you name, small, and then stops for the person to react before anything else is drawn or checked. Name first the view that shows the most of what the person asked for.' : 'the person asked for every view in this run.'}
 ${REFERENCES.length ? `The person gave reference pictures: ${REFERENCES.join(', ')}. Measure them; the style note and the style guard come from them, so the style note is not provisional.` : 'There are no reference pictures: the style note is PROVISIONAL (say so in its first line); the first honest picture will make the style guard.'}
 Renderer wished: ${RENDERER}. Rented card allowed: ${RENTED}.
 CARD TIME: you have none (planner allowance ${CARD_MINUTES.planner} minutes). The run's card-time ledger is ${CARD_LEDGER}; each helper has an allowance by its role (builder ${CARD_MINUTES.builder} minutes, fixer ${CARD_MINUTES.fixer}, integrator ${CARD_MINUTES.integrator}, renderer ${CARD_MINUTES.renderer}, checker ${CARD_MINUTES.checker}). ${CARD_TEAM_MINUTES ? `The person set a total for the whole run of ${CARD_TEAM_MINUTES} card minutes: write it down with explainer-film-place card-time start --team-minutes ${CARD_TEAM_MINUTES} --ledger ${CARD_LEDGER} (it costs nothing) and say so in the last line of the style note.` : 'The person set no total for the whole run: the house number holds.'} Tell each part's brief to make every change in one sweep, build the scene once, and try an unsure change as about 10 far-apart variations in ONE batch (explainer-film-place variations), at most one more batch.
@@ -285,6 +306,7 @@ Starting scene: ${ARGS.scene ? `${ARGS.scene} (copy it, never change the origina
 Make the ground (a plain rectangle gets a graded grid; any other shape is split in place and keeps its outline), the road shapes, the verge and the puddle hollows; make the view cameras named in the views list and the sun (ownership.json lets you, through frozen.set_by); apply your stage file to the starting scene and save the result as ${GROUND_FILE}. The quick way, which also checks your stage file against the ownership table:
 explainer-film-place combine --scene ${START_FILE} --stages ${DIR.stages}/stage_${STATE.plan.ground_owner}.py --order plain --owners ${STATE.plan.files.ownership} --save-as ${GROUND_FILE}
 That file is then FROZEN: every other part is seated on it.
+You also own the world round the place: every view must see a finished horizon (an all-round backdrop of real shapes with the role backdrop, unlit and casting no shadow; the plain ground continued to the horizon and its edge hidden; each view camera's clip end at 1000 m or more and past the far edge of the ground and the backdrop; no haze volume). The audit's check "place: world" looks for it and names the clip end each camera needs.
 No buildings and no props are yours. Say in ground_promise what the ground promises the others (for example "inside 1.2 m of each road centre line the ground is as it is").`
 
 const buildBlock = (part) => `Work on your own COPY of ${GROUND_FILE}, saved as ${DIR.work}/${part.owner}/scene.blend, with your stage file applied to it (the frozen ground: never change the original, never save over it). Seat everything on it.`
@@ -380,7 +402,8 @@ Views to draw:
 ${numbered(views.map((view) => `${view.name}: camera "${view.camera}", ${view.size[0]} x ${view.size[1]}`))}
 ${finalOnly
     ? 'THIS IS THE ONE FULL-SIZE DRAWING OF THE RUN, at the very end: draw ONLY the final-size pictures (no previews, so write each view as "kinds": ["final"] in the job file), at the sizes above, from this file, which is the last audited file. Nothing is tried here: the small quick pictures of the earlier rounds were for that.'
-    : `Finals: no. These are the small quick pictures (previews) that the checkers look at. The full-size pictures are drawn ONCE, at the very end, and only when the person asked for them (${FINALS ? 'they did' : 'they did not'}); never draw one to test something.`}
+    : `Finals: no. These are the small quick pictures (previews) that the checkers look at. The full-size pictures are drawn ONCE, at the very end, and only when the person asked for them (${FINALS ? 'they did' : 'they did not'}); never draw one to test something.${FILM ? ' This place is for the film: draw each preview in the same tall shape at half size (540 x 960 for a 1080 x 1920 view), never a wide frame.' : ''}`}
+${FIRST_VIEW_ONLY && !finalOnly ? 'START SMALL: this is the one small test the person sees first. Draw only the view listed; nothing else is drawn until the person has reacted.' : ''}
 ${cardBlock('renderer', 'renderer')}
 Write the job file to ${DIR.render}/job-${tag}.json (its scene is ${file}), the pictures into ${DIR.pictures}/${tag}/ and the half-size copies into ${DIR.pictures}/half/${tag}/. Name each half-size copy by its number only (view-1.jpg, view-2.jpg and so on, in the order of the views), so that its file name tells a reader nothing.
 Draw with: explainer-film-place render --scene ${file} --job ${DIR.render}/job-${tag}.json --where ${WHERE} --engine ${ENGINE}${finalOnly ? ' --finals' : ''} --helper renderer --role renderer --ledger ${CARD_LEDGER}
@@ -448,7 +471,7 @@ const blindPrompt = (render, round) => `You are a reader of pictures. Round ${ro
 Look at these pictures with the Read tool. They are half-size pictures of one drawn scene:
 ${numbered(picturePaths(render, true))}
 Do not open any other file and do not look in any other folder: you are told nothing else, on purpose.
-List everything you can name in them, as short plain phrases, one thing for each phrase: what it is, what it is made of, what state it is in. Do not guess what anyone asked for.
+List everything you can name in them, as short plain phrases, one thing for each phrase: what it is, what it is made of, what state it is in. Do not guess what anyone asked for. When two things in the pictures look alike, say so, and say what tells them apart (or that nothing does).
 Return your list as the shape asked.`
 
 const skepticPrompt = (findings) => `${first('checker')}
@@ -501,9 +524,16 @@ function normalisePlan(raw) {
     groundOwner = parts[0]?.owner
   }
   const givenViews = Array.isArray(ARGS.views) && ARGS.views.length ? ARGS.views : (raw.views ?? [])
+  const personViews = Array.isArray(ARGS.views) && ARGS.views.length > 0
   const views = (givenViews.length ? givenViews : [{ name: 'wide' }, { name: 'road_close' }, { name: 'detail_close' }]).map((view, index) => {
     const name = safeWord(view.name) || `view_${index + 1}`
-    return { name, camera: view.camera || `View ${name}`, size: Array.isArray(view.size) && view.size.length === 2 ? view.size : [1200, 800] }
+    let size = Array.isArray(view.size) && view.size.length === 2 ? view.size : DEFAULT_VIEW_SIZE
+    // a place for the film is drawn in the tall phone frame: a size the planner gave in another shape is changed (the person's own sizes are kept and only noted)
+    if (FILM && !(size[0] === 1080 && size[1] === 1920)) {
+      if (personViews) log(`The view ${name} is ${size[0]} x ${size[1]}, but the place is for the film (1080 x 1920): kept as the person gave it; the audit's film-frame check will say so.`)
+      else { log(`The planner gave the view ${name} as ${size[0]} x ${size[1]}; the place is for the film, so it is drawn at 1080 x 1920.`); size = [1080, 1920] }
+    }
+    return { name, camera: view.camera || `View ${name}`, size }
   })
   const named = raw.files ?? {}
   const files = {
@@ -549,7 +579,7 @@ const groupByOwner = (problems) => {
 }
 
 async function runAudit(version, label) {
-  const result = await agent(auditPrompt(version), { label, phase: 'Audit', schema: AUDIT_REPORT, effort: EFFORT })
+  const result = await agent(auditPrompt(version), { label, phase: 'Audit', schema: AUDIT_REPORT, effort: EFFORT , ...MODEL })
   if (result) return result
   return { scene_file: finishedFile(version), audit_file: auditFile(version), audit_exit_code: 2, preflight_exit_code: 2, verdict: 'fail', quick: false,
     problems: [{ check: 'audit', where: 'the audit did not run', owner: 'integrator', text: 'the helper that proves the file returned nothing', fix: 'run the audit again' }], looks: [], known: [], notes: ['no answer came back'] }
@@ -732,6 +762,7 @@ function reportMarkdown() {
   if (STATE.readingTests.some((test) => !test.passed)) decide.push('The reading test missed its line: some planned features do not read at half size.')
   if (STATE.audit && STATE.audit.verdict === 'fail') decide.push('The audit still fails; nothing was drawn. Read the FAIL lines above. Only you can accept a problem, in writing, with your name and the date.')
   if (STATE.audit?.known?.length) decide.push('Some treatments were switched off on purpose (KNOWN above): check the reasons are true.')
+  if (STATE.firstViewStop) decide.push(`This was the small first test: only the first view (${STATE.firstViewStop}) was drawn and nothing was checked by the fresh checkers yet. Look at it and say whether to go on; the next run with allViews: true draws every view, runs the checkers and the one fix round.`)
   say(...(decide.length ? decide.map((line) => `- ${line}`) : ['- Nothing is waiting for you except looking at the pictures.']))
   return report.join('\n')
 }
@@ -752,7 +783,7 @@ function done(stopped) {
 // ======================================================================================================== the run
 // ---- Plan
 phase('Plan')
-const rawPlan = await agent(planPrompt(), { label: 'plan', phase: 'Plan', schema: PLAN, effort: PLAN_EFFORT })
+const rawPlan = await agent(planPrompt(), { label: 'plan', phase: 'Plan', schema: PLAN, effort: PLAN_EFFORT , ...MODEL })
 if (!rawPlan || !(rawPlan.parts ?? []).length) {
   return done('the planner came back with no plan (or a plan with no parts), so nothing was built')
 }
@@ -764,7 +795,7 @@ log(`Plan: ${STATE.plan.parts.map((part) => part.owner).join(', ')}; the ground 
 // ---- Ground (serial: everything else is seated on it)
 phase('Ground')
 const groundPart = partOf(STATE.plan.ground_owner)
-STATE.ground = await agent(builderPrompt(groundPart, 'ground'), { label: `ground:${groundPart.owner}`, phase: 'Ground', schema: GROUND_REPORT, effort: EFFORT })
+STATE.ground = await agent(builderPrompt(groundPart, 'ground'), { label: `ground:${groundPart.owner}`, phase: 'Ground', schema: GROUND_REPORT, effort: EFFORT , ...MODEL })
 if (!STATE.ground || !STATE.ground.ground_file) {
   return done('the ground part came back with no ground file, so nothing can be seated on it')
 }
@@ -775,7 +806,7 @@ log(`Ground frozen: ${STATE.ground.ground_file}`)
 phase('Build parts')
 const others = STATE.plan.parts.filter((part) => part.owner !== STATE.plan.ground_owner)
 if (others.length > CAP) log(`${others.length} parts and room for ${CAP} builders at once: the rest wait in a queue, none is skipped.`)
-const reports = await runQueued(others, CAP, (part) => agent(builderPrompt(part, 'build'), { label: `build:${part.owner}`, phase: 'Build parts', schema: PART_REPORT, effort: EFFORT }))
+const reports = await runQueued(others, CAP, (part) => agent(builderPrompt(part, 'build'), { label: `build:${part.owner}`, phase: 'Build parts', schema: PART_REPORT, effort: EFFORT , ...MODEL }))
 STATE.built = others.map((part, index) => ({ part, report: reports[index] }))
 others.forEach((part, index) => noteCard(`builder-${part.owner}`, 'builder', reports[index]))
 STATE.missing = STATE.built.filter((entry) => !entry.report).map((entry) => entry.part.owner)
@@ -787,7 +818,7 @@ if (others.length && STATE.built.every((entry) => !entry.report)) {
 // ---- Combine
 phase('Combine')
 STATE.version = 1
-STATE.combine = await agent(combinePrompt(STATE.version, [], false), { label: 'combine', phase: 'Combine', schema: COMBINE_REPORT, effort: EFFORT })
+STATE.combine = await agent(combinePrompt(STATE.version, [], false), { label: 'combine', phase: 'Combine', schema: COMBINE_REPORT, effort: EFFORT , ...MODEL })
 if (!STATE.combine) {
   return done('the integrator came back with nothing, so there is no combined scene to audit')
 }
@@ -808,7 +839,7 @@ while (!gateOk(STATE.combine, STATE.audit) && repairRound < MAX_REPAIRS) {
   if (asked.length > owners.length) STATE.notes.push(`Repair round ${repairRound}: ${asked.filter((owner) => STATE.missing.includes(owner)).join(', ')} never reported, so its problems could not be sent to a builder.`)
   const settingsRepairs = byOwner.get('integrator') ?? []
   log(`Audit round ${repairRound}: ${problems.length} problem(s); asking ${owners.join(', ') || 'only the integrator (settings)'} to repair them.`)
-  const fixed = await runQueued(owners, CAP, (owner) => agent(builderPrompt(partOf(owner), 'fix', byOwner.get(owner), `repair before any picture, round ${repairRound}`), { label: `repair${repairRound}:${owner}`, phase: 'Audit', schema: PART_REPORT, effort: EFFORT }))
+  const fixed = await runQueued(owners, CAP, (owner) => agent(builderPrompt(partOf(owner), 'fix', byOwner.get(owner), `repair before any picture, round ${repairRound}`), { label: `repair${repairRound}:${owner}`, phase: 'Audit', schema: PART_REPORT, effort: EFFORT , ...MODEL }))
   const stillMissing = owners.filter((owner, index) => !fixed[index])
   if (stillMissing.length) STATE.notes.push(`Repair round ${repairRound}: no report from ${stillMissing.join(', ')}.`)
   fixed.forEach((report, index) => {
@@ -820,7 +851,7 @@ while (!gateOk(STATE.combine, STATE.audit) && repairRound < MAX_REPAIRS) {
   })
   STATE.repairs.push({ round: repairRound, owners, problems: problems.length, reported: fixed.filter(Boolean).length, summary: problems.slice(0, 5).map((problem) => `${problem.check}: ${problem.text}`) })
   STATE.version += 1
-  STATE.combine = await agent(combinePrompt(STATE.version, settingsRepairs, owners.includes(STATE.plan.ground_owner)), { label: `recombine${repairRound}`, phase: 'Audit', schema: COMBINE_REPORT, effort: EFFORT })
+  STATE.combine = await agent(combinePrompt(STATE.version, settingsRepairs, owners.includes(STATE.plan.ground_owner)), { label: `recombine${repairRound}`, phase: 'Audit', schema: COMBINE_REPORT, effort: EFFORT , ...MODEL })
   if (!STATE.combine) {
     return done(`the integrator came back with nothing in repair round ${repairRound}, so there is no scene to audit`)
   }
@@ -837,7 +868,7 @@ log(`Audit passed on ${STATE.finalFile} after ${repairRound} repair round(s).`)
 
 // ---- Render (the renderer rule decides the engine; only previews unless finals were asked for)
 phase('Render')
-STATE.render = await agent(renderPrompt('round1', STATE.plan.views, null, STATE.finalFile), { label: 'render', phase: 'Render', schema: RENDER_REPORT, effort: EFFORT })
+STATE.render = await agent(renderPrompt('round1', FIRST_VIEW_ONLY ? STATE.plan.views.slice(0, 1) : STATE.plan.views, null, STATE.finalFile), { label: 'render', phase: 'Render', schema: RENDER_REPORT, effort: EFFORT , ...MODEL })
 noteCard('renderer', 'renderer', STATE.render)
 if (!STATE.render) {
   STATE.notes.push('The renderer came back with nothing: no picture was drawn.')
@@ -849,15 +880,23 @@ if (!STATE.render) {
   STATE.havePictures = true
   STATE.finalRender = STATE.render
 }
+// start small: the first view's small picture is the person's first look; nothing more is drawn, checked or fixed until they have reacted
+if (FIRST_VIEW_ONLY) {
+  STATE.firstViewStop = STATE.plan.views[0].name
+  log(`Start small: only the first view (${STATE.plan.views[0].name}) was drawn; the run stops here for the person's reaction (allViews: true goes on).`)
+  return done(STATE.havePictures
+    ? `stopped for the person's reaction: the first view (${STATE.plan.views[0].name}) was drawn small, as the first test, and nothing else was drawn or checked (run again with allViews: true to draw every view and run the checkers)`
+    : `stopped for the person's reaction: the first view (${STATE.plan.views[0].name}) could not be drawn (see the failures), and nothing else was drawn or checked`)
+}
 if (!STATE.havePictures) log('No pictures: only the structure and process checkers run, and there is no fix round (a fix needs pictures to be checked).')
 
 // ---- Check (fresh checkers; none of them sees a builder report or number)
 phase('Check')
-const jobs = [{ key: 'structure', run: () => agent(checkerPrompt('structure', structureExtra()), { label: 'check:structure', phase: 'Check', schema: CHECK, effort: CHECK_EFFORT }) },
-  { key: 'process', run: () => agent(checkerPrompt('process', processExtra()), { label: 'check:process', phase: 'Check', schema: CHECK, effort: CHECK_EFFORT }) }]
+const jobs = [{ key: 'structure', run: () => agent(checkerPrompt('structure', structureExtra()), { label: 'check:structure', phase: 'Check', schema: CHECK, effort: CHECK_EFFORT , ...MODEL }) },
+  { key: 'process', run: () => agent(checkerPrompt('process', processExtra()), { label: 'check:process', phase: 'Check', schema: CHECK, effort: CHECK_EFFORT , ...MODEL }) }]
 if (STATE.havePictures) {
-  jobs.unshift({ key: 'look', run: () => agent(checkerPrompt('look', lookExtra()), { label: 'check:look', phase: 'Check', schema: CHECK, effort: CHECK_EFFORT }) })
-  jobs.push({ key: 'blind', run: () => agent(blindPrompt(STATE.render, 1), { label: 'blind:1', phase: 'Check', schema: BLIND, effort: CHECK_EFFORT }) })
+  jobs.unshift({ key: 'look', run: () => agent(checkerPrompt('look', lookExtra()), { label: 'check:look', phase: 'Check', schema: CHECK, effort: CHECK_EFFORT , ...MODEL }) })
+  jobs.push({ key: 'blind', run: () => agent(blindPrompt(STATE.render, 1), { label: 'blind:1', phase: 'Check', schema: BLIND, effort: CHECK_EFFORT , ...MODEL }) })
 }
 const checkResults = await parallel(jobs.map((job) => job.run))
 jobs.forEach((job, index) => { if (checkResults[index]) STATE.checks[job.key] = checkResults[index]; else STATE.notes.push(`The ${job.key} checker came back with nothing.`) })
@@ -878,7 +917,7 @@ for (const key of ['look', 'structure', 'process']) {
   for (const claim of check.claims_checked) if (claim.holds === false) findings.push({ from: `${key} checker: a builder's claim did not hold`, what: `claim: ${bareClaim(claim.claim)}`, where: 'the claim', severity: 'must fix', cheapest_fix: 'correct the scene or the claim', owner: claimOwner(claim.claim), evidence: claim.evidence })
 }
 if (findings.length) {
-  STATE.skeptic = await agent(skepticPrompt(findings), { label: 'skeptic', phase: 'Check', schema: SKEPTIC, effort: CHECK_EFFORT })
+  STATE.skeptic = await agent(skepticPrompt(findings), { label: 'skeptic', phase: 'Check', schema: SKEPTIC, effort: CHECK_EFFORT , ...MODEL })
   if (STATE.skeptic) {
     // a squint-test miss whose cure is to take character away is never fixed here, even when a skeptic confirmed it: the person decides
     const takesCharacterAway = (finding) => /squint/i.test(finding.what) && /\b(remove|delete|cut|reduce|fewer|less|simplif|flatten|blur|tone down)/i.test(finding.cheapest_fix)
@@ -907,12 +946,12 @@ if (!toFix.length) {
   const settingsRepairs = (byOwner.get('integrator') ?? []).map((finding) => ({ text: finding.what, where: finding.where, fix: finding.cheapest_fix }))
   STATE.fixOwners = owners
   log(`Fix round (the only one): ${owners.length} owner(s) (${owners.join(', ') || 'settings only'}), ${toFix.length} finding(s).`)
-  const fixed = await runQueued(owners, CAP, (owner) => agent(builderPrompt(partOf(owner), 'fix', byOwner.get(owner), 'the one fix round after the checkers'), { label: `fix:${owner}`, phase: 'Fix', schema: PART_REPORT, effort: EFFORT }))
+  const fixed = await runQueued(owners, CAP, (owner) => agent(builderPrompt(partOf(owner), 'fix', byOwner.get(owner), 'the one fix round after the checkers'), { label: `fix:${owner}`, phase: 'Fix', schema: PART_REPORT, effort: EFFORT , ...MODEL }))
   STATE.fixes = fixed.filter(Boolean)
   fixed.forEach((report, index) => noteCard(`fixer-${owners[index]}`, 'fixer', report))
   owners.forEach((owner, index) => { if (!fixed[index]) STATE.notes.push(`Fix round: no report from ${owner}.`) })
   STATE.version += 1
-  STATE.fixCombine = await agent(combinePrompt(STATE.version, settingsRepairs, owners.includes(STATE.plan.ground_owner)), { label: 'combine:fix', phase: 'Fix', schema: COMBINE_REPORT, effort: EFFORT })
+  STATE.fixCombine = await agent(combinePrompt(STATE.version, settingsRepairs, owners.includes(STATE.plan.ground_owner)), { label: 'combine:fix', phase: 'Fix', schema: COMBINE_REPORT, effort: EFFORT , ...MODEL })
   if (STATE.fixCombine) {
     noteCard('integrator', 'integrator', STATE.fixCombine)
     STATE.fixAudit = await runAudit(STATE.version, 'audit:fix')
@@ -931,7 +970,7 @@ if (!toFix.length) {
     if (!wanted.length) log('The fixers did not name the views that changed: all views are drawn again.')
     const previous = picturePaths(STATE.render, false)
     fixFile = STATE.fixCombine.finished_file || finishedFile(STATE.version)
-    STATE.fixRender = await agent(renderPrompt('round2', redraw, previous, fixFile), { label: 'render:fix', phase: 'Fix', schema: RENDER_REPORT, effort: EFFORT })
+    STATE.fixRender = await agent(renderPrompt('round2', redraw, previous, fixFile), { label: 'render:fix', phase: 'Fix', schema: RENDER_REPORT, effort: EFFORT , ...MODEL })
     noteCard('renderer', 'renderer', STATE.fixRender)
     if (!STATE.fixRender || STATE.fixRender.stalled || !STATE.fixRender.pictures.length) {
       STATE.notes.push(`The pictures after the fix round could not be drawn (nothing came back, or the card stalled). The fixed scene ${fixFile} passed its audit but nobody has looked at it, so the first audited scene stays the final one.`)
@@ -950,8 +989,8 @@ if (fixDone) {
   STATE.finalAuditFile = STATE.fixAudit.audit_file || auditFile(STATE.version)
   STATE.finalRender = mixed
   const results = await parallel([
-    () => agent(checkerPrompt('recheck', recheckExtra(STATE.render), mixed), { label: 'recheck', phase: 'Re-check', schema: CHECK, effort: CHECK_EFFORT }),
-    () => agent(blindPrompt(mixed, 2), { label: 'blind:2', phase: 'Re-check', schema: BLIND, effort: CHECK_EFFORT }),
+    () => agent(checkerPrompt('recheck', recheckExtra(STATE.render), mixed), { label: 'recheck', phase: 'Re-check', schema: CHECK, effort: CHECK_EFFORT , ...MODEL }),
+    () => agent(blindPrompt(mixed, 2), { label: 'blind:2', phase: 'Re-check', schema: BLIND, effort: CHECK_EFFORT , ...MODEL }),
   ])
   STATE.recheck = results[0]
   STATE.recheckBlind = results[1]
@@ -970,7 +1009,7 @@ if (fixDone) {
 phase('Report')
 // the full-size pictures: drawn ONCE, at the very end, from the last audited file, and only when the person asked for them
 if (FINALS && STATE.havePictures && STATE.finalFile) {
-  STATE.finalsRender = await agent(renderPrompt('final', STATE.plan.views, picturePaths(STATE.finalRender, false), STATE.finalFile, true), { label: 'render:final', phase: 'Report', schema: RENDER_REPORT, effort: EFFORT })
+  STATE.finalsRender = await agent(renderPrompt('final', STATE.plan.views, picturePaths(STATE.finalRender, false), STATE.finalFile, true), { label: 'render:final', phase: 'Report', schema: RENDER_REPORT, effort: EFFORT , ...MODEL })
   noteCard('renderer', 'renderer', STATE.finalsRender)
   if (!STATE.finalsRender || STATE.finalsRender.stalled || !STATE.finalsRender.pictures.length) {
     STATE.notes.push('The full-size pictures could not be drawn (nothing came back, or the card stalled). The small pictures the checkers looked at stay the only pictures.')
@@ -981,7 +1020,7 @@ if (FINALS && STATE.havePictures && STATE.finalFile) {
 }
 STATE.freshCheck = composeFresh()
 if (STATE.freshCheck && STATE.finalFile) {
-  STATE.finalGate = await agent(gatePrompt(STATE.freshCheck), { label: 'gate', phase: 'Report', schema: FINAL_GATE, effort: EFFORT })
+  STATE.finalGate = await agent(gatePrompt(STATE.freshCheck), { label: 'gate', phase: 'Report', schema: FINAL_GATE, effort: EFFORT , ...MODEL })
   if (!STATE.finalGate) STATE.notes.push('The final gate came back with nothing: the preflight stage place was not run on the final file.')
 } else {
   STATE.notes.push('No fresh checker result, so the final gate was not run with one.')

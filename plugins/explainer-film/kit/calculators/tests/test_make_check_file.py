@@ -15,10 +15,9 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES, project_folder, blender_program  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, project_folder, blender_program, work_folder  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
 BLENDER_FOLDER = os.path.join(KIT, 'paper-film', 'blender')
@@ -85,7 +84,7 @@ if os.environ.get('VIEWS_AND_MODELS_NO_BLENDER') or not blender or not os.path.i
 environment = dict(os.environ, DISPLAY=os.environ.get('BLENDER_DISPLAY', note['display']))
 script = os.path.join(BLENDER_FOLDER, 'make_check_file.py')
 works_folder = os.path.join(kit_folder, 'assets', 'models', 'inflation-chapter-2-newcomers', 'works')
-folder = tempfile.mkdtemp(prefix='check-file-test-')
+folder = work_folder('check-file-test-')
 assemble_real = os.path.join(kit_folder, 'paper-film', 'blender', 'inflation-chapter-2-newcomers', 'works', 'assemble_works.py')
 assemble_copy = os.path.join(folder, 'assemble_works.py')
 with open(assemble_copy, 'wb') as handle:

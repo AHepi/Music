@@ -18,6 +18,12 @@ Its exact prompt is the `prompt` of `303-iron-weight.jpg` in `paintings.json`.
 
 > Painterly 2D digital illustration, the look of a modern animated history documentary: semi-realistic with slightly stylised, expressive proportions, visible confident brush strokes, rich detail, cinematic lighting. Restrained palette: deep teal-blue shadows, cold blue-grey midtones, warm amber lamplight, with only small touches of dull brick red. Tense, uneasy mood. Absolutely no text, letters, numbers, logos, emblems or symbols anywhere.
 
+The empty lower quarter is for the paper route only: cut-out pieces stand in it. A place built in Blender and painted
+over is never asked for an empty lower part: its nearest story thing reaches about 0.70 down the frame and the bottom
+third is not bare floor (`07 Composing a shot.md`, rule 7). Measured on chapter 2: in about 70 percent of frames the
+bottom fifth was over 30 percent darker than the middle, and the review traced it to this sentence. The painter's
+prompt for a built place comes from `calculators/paint_request.py`, not from this page.
+
 **Figures and groups** (aspect 21:9 = 3136 x 1344 for groups, 4:5 = 1824 x 2288 for one figure; 2k; about 10 US cents).
 Subject sentence: who, how many, the year, seen from the front, waist up or full length, what they wear and do. Then:
 

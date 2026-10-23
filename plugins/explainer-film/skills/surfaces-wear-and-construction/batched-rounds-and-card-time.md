@@ -26,6 +26,9 @@ then check. Maybe even batch according to variations. So maybe 10 variations tha
    the same time). Look at the one sheet. Pick one or combine two or three. At most ONE more batch for that change (the tool counts
    batches and refuses a third).
 4. **Small quick pictures until the end:** 600 x 400, EEVEE or low-sample Cycles by the renderer rule (the tool does this for you).
+   A place whose settings say `"for_film": true` is drawn in the film's tall shape instead, 360 x 640 (the scout 144 x 256): a wide
+   picture through a camera placed for 1080 x 1920 shows a different frame (measured: only 0.667 of the view's height). The tool
+   reads the settings file the variations file names, else `place-settings.json` beside the scene; `--size` still wins.
 5. **Full-size pictures are drawn ONCE, at the very end,** from the last audited file (`render --finals`, in views that say
    `"kinds": ["final"]`).
 6. **Stay inside your card-time allowance and report the card seconds you used** (builder 10 minutes, fixer 5, integrator 10, renderer 10,
@@ -147,7 +150,10 @@ Every job sent to a rented card is written into one ledger file (one line for ea
 - Say who you are on every command that can use a card: `--helper NAME --role builder|fixer|integrator|renderer|checker|planner`, where NAME is a
   short name for this helper, such as `builder-walls` (never a person's name)
   (or the environment `PLACE_HELPER`, `PLACE_HELPER_ROLE`, and `PLACE_CARD_LEDGER` for the file). Use the ledger file you were given: all helpers of one run use the same one.
-- `explainer-film-place card-time show` prints the ledger and what each helper has left. `card-time check --estimate-seconds 200` says whether a step would fit.
+- `explainer-film-place card-time show` prints the ledger and what each helper has left. `card-time check --estimate-seconds 200` says whether a step would fit,
+  and refuses a second job for a helper name that already has one in flight (a "sent" line with no finished line yet: the line says "already has a job in flight").
+  Never send a message to a helper that is spending money while it runs: a message to a running paid helper once woke a second copy of it, which made 8 extra paid
+  calls (about US$0.70). Wait for its job, or stop it.
 - The tool WARNS at 80 percent of your allowance, REFUSES a step that would pass it (nothing is sent), and refuses a third batch for one change.
   A scout is free and is not counted as a batch. A run with `--where local` IS counted as one of the two batches (it uses no card seconds,
   but it is a look).

@@ -59,11 +59,19 @@ towpath with puddles...). This place was really built that way:
    `real_world_facts_template.json`: for each size an id, what it is, the role it applies to, the dimension, min, max,
    unit, kind (measured, judged or invented), a source in plain words and a confidence (strong, weak or guess). A number
    from memory is a GUESS until a real source confirms it. Never call a remembered number strong. Say which numbers
-   you could not confirm in `open_questions`.
+   you could not confirm in `open_questions`. Spans: planks and floor boards may run at most 1.38 m free and beams 2.5 m
+   (the roles' own limits). Do not write one span limit for everything: where the place really has a longer free span
+   (a hall's tie beam between its walls, a gallery bay of 3 m), write a `free_span` fact for it with its source
+   (`construction-and-scale.md`, "Span"), so the builders do not add posts nobody would build.
 6. Write the style note from `style_note.md` to `style-note.md`. Section 0 (the rule) stays word for word. When there are
    reference pictures (you are told), measure them with `explainer-film-place measure PICTURE --make-guard --out style-guard.json`
    and fill the numbers in from that. When there are none, say in its first line that the style note is PROVISIONAL (made
-   without a reference; the first honest picture will make the guard).
+   without a reference; the first honest picture will make the guard). Put the person's own words about the look into part 1
+   (form); for a faceted painted look they once said: "No rounded smooth curves. Just edges and flat surfaces that approximate
+   a curve." (`style-rule-and-measures.md`). Concept pictures from the painter are the better start when money allows (the
+   garden painted over its two main views and made sheets of its main elements and swatches: 29 calls, US$3.86 of a US$15
+   allowance; Nano Banana 2 kept the style best). You spend no money: when the notes allow it, put such a step and its exact
+   cost into `open_questions` for the person to say yes to.
 7. Write a DRAFT `place-settings.json`: place, place_type, look, look_by_role, state, seed, picture (the camera and the height in
    pixels), owners (collections for each), role rules, never rules, off entries (only real ones, each with its reason: for
    example nothing grows indoors), roads (road centre lines in metres, gauge from the facts table, rut depth, hoof prints only where animals walk),
@@ -78,9 +86,28 @@ towpath with puddles...). This place was really built that way:
 10. Name the views: at least three (one wide view that shows the whole place, one close view at eye height of the main
     ground, one close view of the most detailed building or thing). Each view has a name (letters, digits and
     underscores), a camera object name (`View <name>`) and a size. The ground builder makes the cameras.
+    - **Start small.** Name first the view that shows the most of what the person asked for: the workflow builds and audits
+      the place, draws only that view, small, and stops for the person's reaction (the other views, the checkers, the fix
+      round and any painting wait), unless the person asked for every view.
+    - **Every named view must see a finished horizon.** Say in the ground part's brief that it owns the world round the
+      place: an all-round backdrop of real shapes (role `backdrop`: plain unlit colour, no shadow, no wear), lighter and
+      bluer when far; the plain ground continued to the horizon and its edge hidden; each view camera's clip end at 1000 m
+      or more and past the far edge of the ground and the backdrop; no haze volume (`construction-and-scale.md`, "The world round the place"; the audit's check "place: world").
+    - **A place for the film** (your prompt says so, or the request speaks of the film or a phone): every view is 1080 x 1920
+      (tall) and its previews are drawn in the same tall shape (540 x 960); anything to be read ends left of 0.90 across and
+      above 0.80 down (the phone's buttons). Write `"for_film": true` in `place-settings.json` (the audit's check "place: film
+      frame" then holds every view to it). First read `${CLAUDE_PLUGIN_ROOT}/skills/build-and-paint-a-place/SKILL.md`
+      (section 3) and sections 4 to 12 of `${CLAUDE_PLUGIN_ROOT}/kit/docs/LLM tips and tricks.md`; then, for each view, write
+      a rough place-facts file from your layout (its shape: `${CLAUDE_PLUGIN_ROOT}/kit/calculators/place_facts_schema.json`)
+      and run `python3 ${CLAUDE_PLUGIN_ROOT}/kit/calculators/plan_shot.py --place-facts PLACE_FACTS.json --view VIEW --plan`;
+      put the camera spot, the eye height and the turn it gives into the ground part's brief.
 11. List 12 to 16 readable features: things that, if the place is right, a stranger looking at a half-size picture could
     name. For each: a short name and the plain words a viewer would use for it (keywords). Example: "brick courses with
     moss" with keywords brick, moss. Choose only things the builders will really make and that show at half size.
+    When two buildings or objects must stand for different things (two factories, a before and an after), list both and
+    plan them tellable apart at a glance at half size: a different colour, a different roof, a different count and shape of
+    chimneys (dark red brick with one round chimney against pale stone with two square chimneys and a tank). A background
+    landmark must look like neither. The blind reader is asked to say which things look alike.
 12. Say which renderer the rule gives (Cycles where a lamp, lit window, lantern or fire is on; EEVEE when all are off)
     in `renderer_hint`; if the request puts a lit thing in the place, plan the lamp so the rule can see it.
 

@@ -98,7 +98,7 @@ under the real Workflow tool. The choice of two repair rounds before drawing (th
 
 ## What the workflow builder added to the design
 
-- A **Ground phase** before the parts (the ground is built alone first and frozen, then the other parts are seated on it), on a checker's advice. No paid Concept phase: reference pictures come in as arguments.
+- A **Ground phase** before the parts (the ground is built alone first and frozen, then the other parts are seated on it), on a checker's advice. No paid Concept phase: reference pictures come in as arguments, and concept pictures made earlier can come in the same way. When money allows, a paid concept step is the better start (lessons round, 23 October 2026): an earlier place painted over its two main views and made element sheets and swatches (29 calls, US$3.86 of a US$15 allowance) and wrote its style note from them; ask the person once, with the cost, before any such step.
 - Extra arguments (`scene`, `references`, `accepted`, `ledger`, `environment`, `planEffort`, `maxRepairRounds`) and extra fields in the reports (the plan's `ground_owner`, `scene_file`, `look`, `state`, `notes`;
   a part's `work_file`, `steps_finished`, `failures`, `not_tested`, `views_to_redraw`; the render report's `half_path` and `guard_provisional`; "not judged" as a verdict; `audit_scene_sha1`).
 - The blind reader's prompt does not start with "First read <agent file>" and holds no word of the feature list; the skeptic is a sixth mode of the checker agent.

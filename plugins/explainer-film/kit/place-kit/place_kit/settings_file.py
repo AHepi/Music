@@ -7,6 +7,8 @@ A concrete example of a settings file (everything is optional; an empty file mea
     {"place": "demo", "place_type": "generic", "look": "neglected", "state": "damp",
      "roads": [{"name": "towpath", "polyline": [[0, 0], [30, 5]], "width": 3.0, "gauge": 1.3, "rut_depth": 0.08, "hoof": true}],
      "off": [{"layer": "moss_and_algae", "roles": ["floor.*"], "reason": "inside: dry, nothing grows", "reason_id": "floors_indoors"}]}
+A place that will be shown in the film (on a phone) also says "for_film": true: the audit's check "place: film frame" then fails a render size
+that is not the film's tall 9:16 frame (1080 x 1920; previews in the same shape, for example 540 x 960).
 """
 import copy
 import json
@@ -135,6 +137,11 @@ class Settings:
         return dict(self.data.get('picture') or {})
 
     @property
+    def for_film(self):
+        """True when the place will be shown in the film: its views are the tall 1080 x 1920 frame (place: film frame checks it)."""
+        return self.data.get('for_film') is True
+
+    @property
     def off_entries(self):
         return list(self.data.get('off') or [])
 
@@ -254,6 +261,8 @@ def validate(data):
         for index, shape in enumerate(data.get(group) or [], start=1):
             if shape.get('shape') not in SHAPES:
                 problems.append(f'{group} entry {index}: shape "{shape.get("shape")}" is not one of {", ".join(SHAPES)}')
+    if 'for_film' in data and not isinstance(data['for_film'], bool):
+        problems.append('for_film must be true or false (true: the place will be shown in the film, so its views are 1080 x 1920)')
     if data.get('renderer') and data['renderer'] not in ('auto', 'cycles', 'eevee'):
         problems.append('renderer must be auto, cycles or eevee')
     owners = data.get('owners')

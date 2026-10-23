@@ -9,7 +9,8 @@
 //     kit.at('word', 2) (second time). Never type seconds.
 //   - pose(t) and draw2D(ctx, t) must work from t alone: the film is drawn in separate stretches.
 //   - words on screen are short forms of what the narrator says at that moment.
-//   - keep words out of the bottom 380 pixels and the right 140 pixels (phone buttons).
+//   - phone buttons: anything to be read ends left of 0.90 across (972 pixels, TEXT_RIGHT in graphics.js) and
+//     above 0.80 down (keep the bottom 380 pixels clear). The older "right 140 pixels" (0.87 across) is stricter than needed.
 
 import { popUp, clamp01, smooth } from '../cinema-kit.js';
 import { banknoteBundle } from '../models.js';

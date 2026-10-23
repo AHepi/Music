@@ -1,7 +1,8 @@
 """What this does: gathers the FACTS about a finished (or unfinished) place into one place-audit.json: for every material which treatments it
 has and which its role requires, for every object its role, UVs, wear-layer amounts, shape and construction, sizes against real-world facts,
 the scattered plants and litter with the keep-out counts, the normal maps and their direction, displacement, roads, the renderer rule and the
-light. It decides nothing: calculators/place_audit_check.py judges the audit with the house numbers (decision D2 of the 1.4.0 design), so thresholds
+light, and (views_and_world.py) the render size and view cameras, the world round the place, the sun and the lettering on signs and books, and
+how many objects the scene holds. It decides nothing: calculators/place_audit_check.py judges the audit with the house numbers (decision D2 of the 1.4.0 design), so thresholds
 live in one table and the judge is tested without Blender.
 The audit describes the scene file ON DISK: it hashes the saved file (scene_sha1) and never saves the scene itself, so a file that is changed
 afterwards is recognised as a different file (the audit is then stale). An unsaved scene is refused (exit 2).
@@ -325,12 +326,21 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
     scene_sha1 = sha1_of_file(path)
     settings_sha1 = sha1_of_file(settings.path) if settings.path and os.path.exists(settings.path) else None
     non_mesh = convert.find_unconverted(settings)
+    # ---- the views, the world round the place, the sun and the lettering (views_and_world.py); a fact that cannot be gathered is written into
+    # problems and left out, and the judge then says "not measured by this audit" (a LOOK), never a crash
+    gathered, lettering = None, None
+    try:
+        from . import views_and_world
+        gathered = views_and_world.gather(settings, objects, by_object)
+        lettering = views_and_world.lettering_facts(objects, by_object)
+    except Exception as problem:            # noqa: BLE001  (any failure here must not stop the rest of the audit)
+        problems.append(f'the views, world, sun and lettering facts could not be gathered ({type(problem).__name__}: {problem})')
     audit = {'audit_version': AUDIT_VERSION, 'made': datetime.datetime.now().isoformat(timespec='seconds'), 'blender': bpy.app.version_string, 'scene_file': os.path.basename(path),
              'scene_sha1': scene_sha1, 'settings_file': os.path.basename(settings.path) if settings.path else None, 'settings_sha1': settings_sha1, 'place': settings.place,
              'place_type': place_type, 'look': record.get('look') or settings.look_id, 'state': record.get('state') or settings.state, 'quick': quick,
              'map_size_pixels': record.get('map_size_pixels'), 'mask': record.get('mask') or {}, 'masks_from': record.get('masks_from', 'whole_scene'),
              'picture': record.get('picture') or {'camera': None, 'height_pixels': None, 'set': False},
-             'counts': {'objects_visible': len(objects), 'materials': len(material_rows), 'triangles': total_triangles, 'triangles_by_owner': triangles_by_owner,
+             'counts': {'objects_visible': len(objects), 'objects_total': len(bpy.context.scene.objects), 'materials': len(material_rows), 'triangles': total_triangles, 'triangles_by_owner': triangles_by_owner,
                         'scatter_pieces': sum(g['count'] for g in scatter['groups']), 'ground_area_m2': round(ground_area, 2)},
              'roles': {'unknown': unknown, 'fallback': fallback, 'by_role': tagged['by_role']}, 'materials': material_rows, 'objects': object_rows,
              'siblings': _sibling_facts(object_rows, house_numbers.value('place_wear.shape_sibling_min_count')), 'scatter': scatter, 'normal_maps': maps,
@@ -338,6 +348,8 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
              'roads': roads, 'renderer': renderer, 'light': _light_facts(),
              'off': {'entries': off_entries, 'allowed_ids': allowed_ids, 'share': (off_pairs / required_pairs) if required_pairs else 0.0},
              'construction_summary': built['summary'], 'non_mesh': non_mesh, 'problems': problems}
+    if gathered is not None:
+        audit.update(views=gathered['views'], world=gathered['world'], sun=gathered['sun'], lettering=lettering)
     if renderer is None:
         del audit['renderer']
     if out_path:

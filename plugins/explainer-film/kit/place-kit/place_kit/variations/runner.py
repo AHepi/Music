@@ -111,7 +111,8 @@ def make_plan(options, say=print, ledger_entries=None, for_run=False, drawn_here
     counts = ', '.join(str(len([e for e in job['entries'] if not e.get('is_baseline')])) for job in jobs)
     where_baseline = next(job['index'] for job in jobs if any(e.get('is_baseline') for e in job['entries']))
     say(f'PASS plan: {len(checked["kept"])} variation(s) and the baseline in {len(jobs)} job(s) ({counts} variations; the baseline is drawn in job {where_baseline}), '
-        f'{pictures} small picture(s) {spec["size"][0]} x {spec["size"][1]} through {max(1, len(spec["cameras"]))} camera(s); '
+        f'{pictures} small picture(s) {spec["size"][0]} x {spec["size"][1]}' + (' (the film\'s tall shape: the place settings say "for_film": true)' if spec.get('for_film') else '')
+        + f' through {max(1, len(spec["cameras"]))} camera(s); '
         + (f'drawn here it uses no card seconds (if it were sent to the cards: about {card_seconds:.0f} card seconds)' if drawn_here else
            f'about {card_seconds:.0f} card seconds in all and about {elapsed_seconds:.0f} s from sending to the last picture '
            f'(an estimate from the house numbers; the first real batch gives better ones)'))
@@ -133,7 +134,8 @@ def _size_option(text):
 
 # ------------------------------------------------------------------ drawing: here
 def local_command(blender, scene, job_file):
-    command = [blender, '-b', '--disable-autoexec', '--python-exit-code', '1', scene, '--python', os.path.join(numbers.PLACE_KIT, 'blender_run.py'), '--', 'variations-worker', '--job', job_file, '--where', 'local']
+    from .. import cli
+    command = [blender, '-b'] + cli.blender_thread_arguments() + ['--disable-autoexec', '--python-exit-code', '1', scene, '--python', os.path.join(numbers.PLACE_KIT, 'blender_run.py'), '--', 'variations-worker', '--job', job_file, '--where', 'local']
     if not os.environ.get('DISPLAY') and not os.environ.get('PLACE_NO_XVFB') and shutil.which('xvfb-run'):
         command = ['xvfb-run', '-a'] + command
     return command
@@ -497,6 +499,8 @@ def run_variations(options, say=print, backend=None, blender=None, environ=None)
             gate = card_time.check(entries, helper, role, plan['estimate_card_seconds'], getattr(options, 'over_allowance', None), f'this batch ({len(plan["jobs"])} job(s))')
             for line in gate['lines']:
                 say(line)
+            if gate.get('double_run') and action == 'run':
+                card_time.log_double_run(ledger, helper, role, f'variations batch "{spec["change"]}"', gate['in_flight'])
             say(f'ledger: {ledger}')
         else:
             say('PASS card time: this batch is drawn on this computer, so no rented-card seconds are used. It still counts as one of the '

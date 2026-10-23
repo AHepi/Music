@@ -4,7 +4,35 @@ What this file is: when this plugin kit was last brought up to date with the aus
 (`austerity-explainer/film-kit/` in its repository), what was copied, what the plugin changed on its own (keep
 those on the next copy), and what still waits. Read it before copying film kit files into the plugin again.
 
-## Last copy: 16 October 2026
+## Last copy: 23 October 2026 (the lessons round)
+
+From the film kit as it stood on 23 October 2026 (logs 37 to 39 of the project). Three film kit files had changed since the
+16 October copy; `explainer-film-setup` lists such files by itself now (the film kit's files changed after the newest date in
+a heading of this file).
+
+- Copied from the film kit: the stage's `toe` (`paper-film/stage/cinema-stage.js`: the page look's `toe`, 0 by default, the
+  filmic curve as it always was; 1 means the curve may still brighten a value but never darkens one, for dark, dusk or wet
+  pages) and the lockout test's look (`paper-film/scenes/lockout-test.js`: `vignette: 0.25, toe: 1`). Both are now the film
+  kit's files byte for byte (checked with diff). That `toe` 0 changes nothing was shown three ways: by reading the code
+  (`mix(filmicValue, max(filmicValue, c), 0)` is `filmicValue` itself); by `calculators/tests/test_stage_toe.py` (the Python
+  copy of the finish pass gives exactly the old numbers with toe 0 and never darkens a value with toe 1); and by drawing
+  (measured: the graphics test at 3 s and the house sample at 20 s, drawn three times with the old stage and three times
+  with the new, gave 0 changed dots in every draw; the lockout test at 5 s changed in every draw, as it should: its near-black
+  dots fell from 7.1 to 0.7 percent of the frame), compared with `calculators/regression_compare.py`.
+- The plugin's Python copy of the finish pass (`calculators/painting_measures.py`) has the toe too, and
+  `calculators/after_painting.py check --toe 0|1` says how bright the painted road arrives in the film.
+- Doc 05 now carries the film kit's "dark painted street" block: the text writer copied it in this round and reworded it to
+  say what was measured instead of "dot for dot".
+- The plugin's own text changes this round are in docs 00, 01, 02, 04 and 07 (the lower quarter is for the paper route only,
+  the rejected house look, story objects drawn big and further back, composition by a picture program).
+- The plugin's own comments (the fix round of the same day): the notes at the top of `paper-film/scenes/graphics.js` and
+  `paper-film/scenes/cinema-chapter-template/page-1.js` give the phone-button rule as 0.90 across and 0.80 down (the
+  code's own `TEXT_RIGHT`), not the film kit's older "right 140 pixels" (0.87 across, stricter than needed). Only the
+  comments changed; keep them on the next copy.
+- Still waiting: the Works and checkout builders (see "Waiting for a later copy" below: skipped again in this round; each
+  folder is one chain, copied whole or not at all).
+
+## Copy of 16 October 2026
 
 From the film kit as committed at `ae74a9b` (every copied file was checked equal to that commit).
 92 files, 1.33 MB: 11 older plugin copies replaced (each was an earlier film kit version the plugin had

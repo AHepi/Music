@@ -20,14 +20,26 @@ steps or judge them by eye each time. It spends nothing; a paid re-ask it sugges
      for near props (a slide) the painted shadows are kept round them (keep_painted_shadows.py) and the ground just beside
      each must not change by more than 2 levels at the handover (log 32: the pavement by the pail rose from 70 to 89);
      for people who leave at a cut (with --helper-plate, the plate drawn without them) their cast shadows must be gone
-     (lesson 135: the painter left them).
+     (lesson 135: the painter left them). Wet and dry paintings go in and out as a pair: over the ground round the area
+     the near props hid, the behind picture must not be lighter than the painting (a "pale patch": the wet lockout's
+     old dry behind painting brought the hidden road back pale and dry, 59 percent of those road dots lighter; FAIL
+     above 0.10 of the compared dots, an invented limit).
+  7. The look as filmed (warnings only): how bright the painted ground arrives through the stage's finish pass with the
+     page's look (--toe 0 or 1, the page's look.toe; the line says "the road arrives at X of its painted brightness",
+     LOOK under 0.9, invented: the wet lockout reached 0.935 and the dry one 0.96 with toe 1); a "bottom fifth" more
+     than composing.bottom_fifth_darker_max_share darker than the middle (a built place painted over should not end
+     in a bare dark floor); "clouds" the painter added in the plate's sky area (textures logs 19-25: it adds heavy pale
+     clouds even when told not to; put a plain sky back with Blender's exact sky outline).
 Cut-out (paper look) checks are not here (the skeptic moved them to a second priority).
 
 Use:
   python3 after_painting.py check --painting RETURNED.png --plate PLATE.png --check CHECK.json --facts PLATE_FACTS \\
           --out-folder DIR [--behind RETURNED_BEHIND.png] [--near GROUP ... | --near-list near-list.json] \\
-          [--helper-plate HELPER.png] [--standard STANDARD_PAINTING]
+          [--helper-plate HELPER.png] [--standard STANDARD_PAINTING] [--toe 0|1]
   python3 after_painting.py style --painting P.png [--standard S.png]      the style match alone
+  python3 after_painting.py sky --painting LINED_UP.png --plate PLATE.png --facts PLATE_FACTS --to NEW.png
+        lays the plate's plain sky over the painting, exactly inside the plate's sky area (a "clouds" LOOK); never writes over a file
+An output that is already there (from an earlier run) is kept as NAME-previous.png beside the new one, never written over.
   python3 after_painting.py figures --painting LINED_UP.png --plate PLATE.png --check C.json --facts F   the figure checks alone
 PLATE_FACTS is shot_facts.py's folder for the PLATE's camera and lens. Every command prints a plain report (or --json) and
 names the film-settings.json values it used. Exit 1 when a check fails.
@@ -51,6 +63,19 @@ import painting_measures as measures  # noqa: E402
 
 def item(found, name, verdict, words, numbers=None, fix=''):
     found.append({'check': name, 'verdict': verdict, 'what': words, 'numbers': measures.round_all(numbers or {}), 'fix': fix})
+
+
+def keep_previous(path, kept=None):
+    """Never writes over what came before (a person may have looked at it or approved it): an existing output is kept beside the new
+    one as NAME-previous.png (an older -previous is replaced). Returns the kept path or None; adds it to the kept list when given."""
+    if not os.path.exists(path):
+        return None
+    stem, ending = os.path.splitext(path)
+    previous = f'{stem}-previous{ending}'
+    os.replace(path, previous)
+    if kept is not None:
+        kept.append(previous)
+    return previous
 
 
 def write_png(path, rgb):
@@ -318,12 +343,13 @@ def leftover_shadows(painting, behind, plate, helper, masks, settings):
             'share_of_expected': actual / expected if expected > 0 else None}
 
 
-def behind_checks(args, settings, shot, aligned_path, painting, plate, found, out):
+def behind_checks(args, settings, shot, aligned_path, painting, plate, found, out, kept=None):
     s = settings
     size = plate_size(s)
     stem = os.path.splitext(os.path.basename(args.behind))[0]
     resized = measures.read_painting_at_plate_size(args.behind, size)
     resized_path = os.path.join(out, f'{stem}-plate-size.png')
+    keep_previous(resized_path, kept)
     write_png(resized_path, resized)
     near = list(args.near or [])
     if args.near_list:
@@ -335,6 +361,7 @@ def behind_checks(args, settings, shot, aligned_path, painting, plate, found, ou
     if not near:
         near = [g for g in shot.core if g in shot.visible]
     lined = os.path.join(out, f'{stem}-aligned.png')
+    keep_previous(lined, kept)
     numbers = measures.align(args.check, args.facts, resized_path, lined, against=aligned_path, groups=near)
     verdict, words = judge_alignment(numbers, s)
     against_floor = s.value('painting.align_outline_agreement_aim')
@@ -361,10 +388,11 @@ def behind_checks(args, settings, shot, aligned_path, painting, plate, found, ou
                        'with no long shadows from people who come and go.' if bad else '')
         result['leftover'] = left
     else:
-        kept = os.path.join(out, f'{stem}-shadows-kept.png')
+        shadows_kept = os.path.join(out, f'{stem}-shadows-kept.png')
+        keep_previous(shadows_kept, kept)
         widen = s.value('painting.keep_painted_shadows_widen_pixels')
-        measures.run_tool('keep_painted_shadows.py', [args.check, args.facts, aligned_path, lined, kept, widen] + near)
-        combined = measures.read_rgb(kept)
+        measures.run_tool('keep_painted_shadows.py', [args.check, args.facts, aligned_path, lined, shadows_kept, widen] + near)
+        combined = measures.read_rgb(shadows_kept)
         others = np.zeros(combined.shape[:2], bool)
         for g in shot.facts['groups']:
             others |= measures.mask_at(shot.alone[g], (combined.shape[1], combined.shape[0]))
@@ -377,9 +405,216 @@ def behind_checks(args, settings, shot, aligned_path, painting, plate, found, ou
              (f'The ground beside each near prop changes at most {max((v["combined_change"] for v in bands.values()), default=0):.1f} levels at the '
               f'handover (the raw behind painting would change it up to {max((v["behind_change"] for v in bands.values()), default=0):.1f}).'),
              bands)
-        result['shadows_kept'] = kept
+        result['shadows_kept'] = shadows_kept
         result['bands'] = bands
+        hid = np.zeros(combined.shape[:2], bool)
+        for g in near:
+            if g in shot.alone:
+                hid |= measures.mask_at(shot.alone[g], (combined.shape[1], combined.shape[0]))
+        visible = np.zeros(combined.shape[:2], bool)
+        for g in shot.facts['groups']:
+            visible |= measures.mask_at(shot.visible[g], (combined.shape[1], combined.shape[0]))
+        result['pale_patch'] = pale_patch(painting, combined, hid, visible, s)
+        judge_pale_patch(found, result['pale_patch'], s)
     return result
+
+
+# ------------------------------------------------------------------------------------------------ 6b. pale patch
+def pale_patch(main, behind, hid, groups, settings):
+    """Wet and dry go in and out as a pair: over the ground round the area the near props hid (grown by the band, with
+    every measured group and a blur's width round it left out, so only ground both pictures show is compared), the share
+    of dots where the behind picture is lighter than the painting by more than lighter_by_levels, after a blur (two
+    paintings never match dot for dot, so local brightness is compared). None when there is too little ground."""
+    s = settings.value('painting_tools.after_painting.pale_patch')
+    width = main.shape[1]
+    band = max(1, int(round(s['band_pixels_at_1536'] * width / 1536)))
+    blur = max(0.5, s['blur_pixels_at_1536'] * width / 1536)
+    grown = cv2.dilate(hid.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * band + 1,) * 2)).astype(bool)
+    margin = int(round(3 * blur)) + 2
+    keep_out = cv2.dilate(groups.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * margin + 1,) * 2)).astype(bool)
+    area = grown & ~keep_out
+    if area.sum() < 100:
+        return None
+    painted = cv2.GaussianBlur(measures.luminance(main).astype(np.float32), (0, 0), blur)
+    behind_lum = cv2.GaussianBlur(measures.luminance(behind).astype(np.float32), (0, 0), blur)
+    change = (behind_lum - painted)[area]
+    return {'compared_dots': int(area.sum()), 'lighter_share': float((change > s['lighter_by_levels']).mean()),
+            'darker_share': float((change < -s['lighter_by_levels']).mean()), 'mean_change_levels': float(change.mean())}
+
+
+def judge_pale_patch(found, numbers, settings):
+    s = settings.value('painting_tools.after_painting.pale_patch')
+    if numbers is None:
+        item(found, 'behind picture as wet or dry as the painting', 'pass', 'Too little ground round the near props to compare (no pale patch can show).')
+        return
+    bad = numbers['lighter_share'] > s['lighter_share_max']
+    item(found, 'behind picture as wet or dry as the painting', 'fail' if bad else 'pass',
+         (f'pale patch: {numbers["lighter_share"]:.2f} of the ground round the area the near props hid is lighter in the behind picture than '
+          f'in the painting (by more than {s["lighter_by_levels"]} levels; limit {s["lighter_share_max"]}, invented; the wet lockout\'s old dry '
+          f'behind painting: 0.59, measured). When the camera moves the hidden road comes back pale and dry.') if bad else
+         (f'The behind picture matches the painting round the near props ({numbers["lighter_share"]:.2f} of the ground lighter, limit '
+          f'{s["lighter_share_max"]}, invented): no pale patch.'), numbers,
+         'Wet and dry paintings go in and out as a pair: ask for (or make) the behind painting in the same state as the front painting, '
+         'and keep the other pair beside it under -dry or -wet names with a note on how to go back.' if bad else '')
+
+
+# ------------------------------------------------------------------------------------------------ 7. the look as filmed
+def ground_mask(shot, size):
+    """The painted ground: below the height where the street's lines meet (the ground's horizon), not sky and not any
+    measured group, at a picture's (width, height)."""
+    width, height = size
+    ground = np.zeros((height, width), bool)
+    ground[int(round(shot.ground_horizon / shot.height * height)):, :] = True
+    ground &= ~measures.mask_at(shot.sky, size)
+    for g in shot.facts['groups']:
+        ground &= ~measures.mask_at(shot.visible[g], size)
+    return ground
+
+
+def road_arrival(painting, ground, look):
+    """How bright the painted ground arrives in the film: its mean brightness after the stage's finish pass (with the
+    page's look, toe included; glow, vignette and grain left out) over its painted mean brightness."""
+    if ground.sum() < 100:
+        return None
+    colours = painting[ground]
+    step = max(1, len(colours) // 200000)
+    colours = colours[::step]
+    painted = float(measures.luminance(colours).mean())
+    filmed = float(measures.luminance(measures.stage_finish(colours, look)).mean())
+    return {'ground_dots': int(ground.sum()), 'painted_brightness': painted, 'filmed_brightness': filmed,
+            'arrives_share': filmed / painted if painted > 0 else None, 'toe': look.get('toe', 0)}
+
+
+def bottom_fifth(painting, settings):
+    """How much darker the bottom fifth of the picture is than its middle (1 - bottom / middle)."""
+    bands = settings.value('painting_tools.after_painting.bottom_fifth_bands')
+    lum = measures.luminance(painting)
+    height = lum.shape[0]
+    part = lambda band: float(lum[int(band[0] * height):max(int(band[0] * height) + 1, int(band[1] * height))].mean())
+    bottom, middle = part(bands['bottom']), part(bands['middle'])
+    return {'bottom_fifth_brightness': bottom, 'middle_brightness': middle, 'darker_share': 1 - bottom / middle if middle > 0 else 0.0}
+
+
+def sky_clouds(painting, sky, settings):
+    """The spread of brightness inside the plate's sky area once each row's own middle level is taken away: a plain or
+    evenly graded sky spreads close to 0; painted clouds spread it. The sky area is shrunk first so rails, roof edges and
+    wires at its border do not count."""
+    s = settings.value('painting_tools.after_painting.sky_clouds')
+    size = (painting.shape[1], painting.shape[0])
+    mask = measures.mask_at(sky, size)
+    result = {'sky_share': float(mask.mean())}
+    if mask.mean() < s['sky_share_min']:
+        return result
+    erode = int(round(s['erode_pixels_at_1536'] * size[0] / 1536))
+    inner = cv2.erode(mask.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * erode + 1,) * 2)).astype(bool)
+    if inner.sum() < 100:
+        return result
+    blur = max(0.5, s['blur_pixels_at_1536'] * size[0] / 1536)
+    lum = cv2.GaussianBlur(measures.luminance(painting).astype(np.float32), (0, 0), blur)
+    row_middle = np.ma.median(np.ma.masked_array(lum, ~inner), axis=1).filled(0)
+    residual = (lum - row_middle[:, None])[inner]
+    result.update({'sky_dots': int(inner.sum()), 'spread_levels': float(residual.std()),
+                   'lighter_share': float((residual > 2 * s['spread_levels_max']).mean())})
+    return result
+
+
+def look_checks(painting, shot, toe, settings, found):
+    """Step 7, warnings only: the road's arrival through the finish with the page's toe, the bottom fifth, clouds."""
+    result = {}
+    size = (painting.shape[1], painting.shape[0])
+    look = dict(settings.value('painting_tools.paint_request.film_look'), toe=toe)
+    below = settings.value('painting_tools.after_painting.road_arrives_look_below')
+    road = road_arrival(painting, ground_mask(shot, size), look)
+    result['road'] = road
+    if road is None or road['arrives_share'] is None:
+        item(found, 'the road as filmed', 'pass', 'No painted ground below the horizon to measure.')
+    else:
+        dark = road['arrives_share'] < below
+        item(found, 'the road as filmed', 'look' if dark else 'pass',
+             f'With the page\'s look (toe {toe}) the road arrives at {road["arrives_share"]:.3f} of its painted brightness '
+             f'({road["painted_brightness"]:.1f} painted, {road["filmed_brightness"]:.1f} filmed; the finish pass without glow, vignette and grain). '
+             + (f'Under {below} (invented; the wet lockout reached 0.935 and the dry one 0.96 with toe 1): dark painted values are being '
+                'crushed. Look at it in the film.' if dark else f'Not under {below} (invented).'),
+             road, ('For a dark, dusk or wet page set toe: 1 and vignette: 0.25 in its look (cinema-stage.js look.toe; the lockout test '
+                    'page does), then check again with --toe 1.' if dark and not toe else 'Look at the page in the film.' if dark else ''))
+    fifth = bottom_fifth(painting, settings)
+    result['bottom_fifth'] = fifth
+    most = settings.value('composing.bottom_fifth_darker_max_share')
+    dark_floor = fifth['darker_share'] > most
+    item(found, 'the bottom of the frame', 'look' if dark_floor else 'pass',
+         (f'The bottom fifth is {fifth["darker_share"]:.0%} darker than the middle (limit {most:.0%}, composing.bottom_fifth_darker_max_share; '
+          'in the log 26 review about 70 percent of frames failed this because the prompts asked for an empty floor). On a built place painted '
+          'over, the nearest story thing should reach about 0.70 down and the bottom third is not bare floor (only the paper route keeps the '
+          'lower quarter for its pieces).') if dark_floor else
+         f'The bottom fifth is {max(0.0, fifth["darker_share"]):.0%} darker than the middle (limit {most:.0%}).', fifth)
+    clouds = sky_clouds(painting, shot.sky, settings)
+    result['sky'] = clouds
+    limit = settings.value('painting_tools.after_painting.sky_clouds')['spread_levels_max']
+    if 'spread_levels' not in clouds:
+        item(found, 'a plain sky', 'pass', f'Too little sky in this view to measure ({clouds["sky_share"]:.1%} of the frame).', clouds)
+    else:
+        cloudy = clouds['spread_levels'] > limit
+        item(found, 'a plain sky', 'look' if cloudy else 'pass',
+             (f'clouds: inside the plate\'s sky area the brightness spreads {clouds["spread_levels"]:.1f} levels once each row\'s own level is '
+              f'taken away (limit {limit}, invented; a plain or evenly graded sky is close to 0). The painter adds heavy pale clouds even when '
+              'told not to.') if cloudy else
+             f'The sky is plain: it spreads {clouds["spread_levels"]:.1f} levels inside the plate\'s sky area (limit {limit}, invented; no clouds).',
+             clouds, 'Put a plain sky back from the plate, using Blender\'s exact sky outline (the plate\'s sky area), keeping thin rails and '
+                     'roof edges clean; look at it at full size.' if cloudy else '')
+    return result
+
+
+def plain_sky(painting, plate, sky):
+    """The painting with the plate's own plain sky laid over it, exactly inside the plate's sky area (Blender's own outline: the dots
+    where nothing is drawn), so thin rails, wires and roof edges stay as painted. Returns (picture, share of the frame replaced)."""
+    out = painting.copy()
+    out[sky] = plate[sky]
+    return out, float(sky.mean())
+
+
+def sky_mask_from_facts(facts_folder, size):
+    """The plate's sky area at a picture's (width, height): the dots of the facts folder's ids.png where nothing is drawn (as the shot
+    checker reads it), resized dot for dot (nearest), never blurred."""
+    ids = cv2.imread(os.path.join(facts_folder, 'ids.png'))
+    if ids is None:
+        raise SystemExit(f'after_painting: {facts_folder} has no ids.png: measure the plate with shot_facts.py first')
+    return measures.mask_at(ids.astype(np.int32).sum(axis=2) < 24, size)
+
+
+def command_sky(args, settings):
+    """Lays the plate's plain sky over a painting the painter gave clouds (it adds heavy pale clouds even when told not to)."""
+    if os.path.abspath(args.to) in (os.path.abspath(args.painting), os.path.abspath(args.plate)):
+        raise SystemExit('after_painting sky: --to must be a new file (the painting and the plate are never written over)')
+    painting = measures.read_rgb(args.painting)
+    size = (painting.shape[1], painting.shape[0])
+    plate = measures.read_rgb(args.plate, size)
+    sky = sky_mask_from_facts(args.facts, size)
+    result_picture, share = plain_sky(painting, plate, sky)
+    found = []
+    kept = []
+    keep_previous(args.to, kept)
+    off = write_png(args.to, result_picture)
+    spread_before = sky_spread(painting, sky, settings)
+    spread_after = sky_spread(result_picture, sky, settings)
+    item(found, 'a plain sky laid in', 'pass' if off == 0 else 'fail',
+         f'the plate\'s plain sky laid over {share:.1%} of the frame (the plate\'s exact sky outline; thin rails and roof edges stay as painted); '
+         f'the sky\'s spread {spread_before:.1f} levels before, {spread_after:.1f} after; written to {os.path.basename(args.to)}'
+         + (f' (the earlier one kept as {os.path.basename(kept[0])})' if kept else '') + '. Look at the edges at full size.',
+         {'sky_share': share, 'spread_before_levels': spread_before, 'spread_after_levels': spread_after, 'read_back_levels_off': off})
+    return finish_lines(found, {'picture': args.to, 'sky_share': share}, 'A plain sky: ' + os.path.basename(args.painting))
+
+
+def sky_spread(picture, sky, settings):
+    """The clouds measure's spread (levels) inside a sky mask already at the picture's size."""
+    s = settings.value('painting_tools.after_painting.sky_clouds')
+    erode = int(round(s['erode_pixels_at_1536'] * picture.shape[1] / 1536))
+    inner = cv2.erode(sky.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * erode + 1,) * 2)).astype(bool)
+    if inner.sum() < 100:
+        return 0.0
+    blur = max(0.5, s['blur_pixels_at_1536'] * picture.shape[1] / 1536)
+    lum = cv2.GaussianBlur(measures.luminance(picture).astype(np.float32), (0, 0), blur)
+    row_middle = np.ma.median(np.ma.masked_array(lum, ~inner), axis=1).filled(0)
+    return float((lum - row_middle[:, None])[inner].std())
 
 
 # ------------------------------------------------------------------------------------------------ commands
@@ -399,12 +634,15 @@ def command_check(args, settings):
     stem = os.path.splitext(os.path.basename(args.painting))[0]
     resized = measures.read_painting_at_plate_size(args.painting, size)
     resized_path = os.path.join(out, f'{stem}-plate-size.png')
+    kept = []
+    keep_previous(resized_path, kept)
     off = write_png(resized_path, resized)
     returned = cv2.imread(args.painting).shape[:2][::-1]
     item(found, 'resized to the plate', 'pass' if off == 0 else 'fail', f'{returned[0]} x {returned[1]} resized to {size[0]} x {size[1]} '
          f'(Lanczos, as the ledgers\' paintings were) and read back {off} levels off.', {'returned_size': list(returned), 'read_back_levels_off': off})
     # 3. line-up
     aligned_path = os.path.join(out, f'{stem}-aligned.png')
+    keep_previous(aligned_path, kept)
     numbers = measures.align(args.check, args.facts, resized_path, aligned_path)
     verdict, words = judge_alignment(numbers, settings)
     item(found, 'lined up with the plate', verdict, words[0].upper() + words[1:] + '.', numbers,
@@ -418,9 +656,15 @@ def command_check(args, settings):
         result['figures'] = figure_checks(painting, plate, shot, figures, settings, found)
     # 5. style
     result['style'] = style_check(painting, settings, found, args.standard)
+    # 7. the look as filmed (warnings only; before the behind painting so its lines stay together)
+    result['look'] = look_checks(painting, shot, args.toe, settings, found)
     # 6. behind
     if args.behind:
-        result['behind'] = behind_checks(args, settings, shot, aligned_path, painting, plate, found, out)
+        result['behind'] = behind_checks(args, settings, shot, aligned_path, painting, plate, found, out, kept)
+    if kept:
+        result['kept_previous'] = kept
+        item(found, 'earlier outputs kept', 'pass', f'{len(kept)} earlier output(s) were kept beside the new ones as NAME-previous.png ('
+             + ', '.join(os.path.basename(k) for k in kept[:4]) + '): to go back, copy a -previous file over its new one.')
     return finish_lines(found, result, 'Painting arrival checks: ' + os.path.basename(args.painting))
 
 
@@ -469,10 +713,18 @@ def main(argv=None):
     p.add_argument('--helper-plate', help='the plate drawn without the people who leave (for their shadows)')
     p.add_argument('--figures', nargs='*', help='the groups that are people (default: the check file\'s "figures")')
     p.add_argument('--standard', help='the standard painting to match (default: its numbers in film-settings.json)')
+    p.add_argument('--toe', type=int, choices=(0, 1), default=0,
+                   help='the page\'s look.toe (0, the default, the filmic curve as it always was; 1 for a dark, dusk or wet page)')
     add_output_options(p)
     p = commands.add_parser('style', help='the style match alone')
     p.add_argument('--painting', required=True)
     p.add_argument('--standard', help='the standard painting (default: its numbers in film-settings.json)')
+    add_output_options(p)
+    p = commands.add_parser('sky', help='lay the plate\'s plain sky over a painting (exactly inside the plate\'s sky area), into a new file')
+    p.add_argument('--painting', required=True, help='the lined-up painting (the -aligned.png check wrote)')
+    p.add_argument('--plate', required=True, help='the plate it was painted from')
+    p.add_argument('--facts', required=True, help='shot_facts.py\'s folder for the PLATE (its ids.png gives the sky area)')
+    p.add_argument('--to', required=True, help='the new picture file (PNG); an earlier one is kept as NAME-previous.png')
     add_output_options(p)
     p = commands.add_parser('figures', help='the figure checks alone, on a lined-up painting')
     p.add_argument('--painting', required=True)
@@ -483,7 +735,7 @@ def main(argv=None):
     add_output_options(p)
     args = parser.parse_args(argv)
     settings = load_settings(args.settings)
-    job = {'check': command_check, 'style': command_style, 'figures': command_figures}[args.command]
+    job = {'check': command_check, 'style': command_style, 'figures': command_figures, 'sky': command_sky}[args.command]
     result, lines, code = job(args, settings)
     finish(f'after_painting {args.command}', result, lines, settings, args)
     return code

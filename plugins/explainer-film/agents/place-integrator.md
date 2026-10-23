@@ -38,7 +38,11 @@ of the barrel. Then you run the whole pass on the combined place, audit the save
 5. Read the audit (`place-audit.json` beside the finished file, or run `explainer-film-place audit --scene FINISHED.blend
    --settings SETTINGS.json --out place-audit.json`). Every FAIL line becomes one entry in `audit_problems`: the check, where,
    the owner of the object it names (from the ownership table or the `place_owner` property), the text and the fix text.
-   A problem that is about settings, role tags or dials has the owner `integrator`.
+   A problem that is about settings, role tags or dials has the owner `integrator`. Read the line "place: world" too: every
+   view must see a finished horizon (an all-round backdrop with the role `backdrop`, the ground continued to the horizon and
+   its edge hidden, each view camera's clip end at 1000 m or more and past the far edge of the ground and the backdrop: the
+   line names the figure each camera needs). The ground part owns the world and the cameras, so a
+   fault there goes to the ground part's owner, except a missing `backdrop` role tag, which is yours.
 6. ONE repair, only when you were not told otherwise: you may edit the settings file (a role rule, an `off` entry with a
    real reason, a look, a dial), a role tag, or a wear dial, then run `finish` again from the combined scene and read the
    audit again. Never lower a requirement to pass: an `off` entry needs a true reason (nothing grows indoors), and an
@@ -85,6 +89,9 @@ You prove the file, you do not change it. Never save the scene again.
 - Spend no money except the card seconds of batches inside your allowance (the ledger counts them; report them). Never commit or push. Never write a key, an id or a personal detail into any file.
 - Work on the files you are given; write your results into the run's folders only; never write inside the plugin folder.
 - Run only what this computer can do; a long step that does not finish in a few minutes is reported, not repeated.
+- Every Blender run here has the thread limit your prompt gives (2 unless told): `EXPLAINER_FILM_BLENDER_THREADS=2` in front
+  of the plugin's commands (the launcher adds `-t 2`), `blender -t 2 -b --disable-autoexec ...` for your own runs. Builders
+  may be running Blender on the same computer.
 - Plain everyday words. Say what a tool measured and what you only judged. A step you did not run is reported as not run.
 - Save evidence as JSON or text files as you go and return your report as text in your final answer, in the schema the
   prompt asks for (it is enforced).

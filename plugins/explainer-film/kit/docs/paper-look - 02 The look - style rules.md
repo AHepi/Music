@@ -1,12 +1,12 @@
 # The look: style rules
 
-**What this is:** what the paper pop-up look is, in the user's own words and as rules, so a new
-series looks like the austerity chapter. The user approved this look after seeing a test page
+**What this is:** what the paper pop-up look is, in the person's own words and as rules, so a new
+series looks like the austerity chapter. The person approved this look after seeing a test page
 ("This is great!") and then the whole chapter ("This is fantastic.").
 
-## The user's words (quoted exactly)
+## The person's words (quoted exactly)
 
-When asking for the look, the user showed four pictures from the "Briefed History" channel (painted,
+When asking for the look, the person showed four pictures from the "Briefed History" channel (painted,
 semi-realistic stills in teal and amber) and wrote:
 
 > I meant a style more like this. With still images with graphics like:
@@ -44,17 +44,18 @@ semi-realistic stills in teal and amber) and wrote:
 - Restrained palette: deep teal-blue shadows, cold blue-grey midtones, warm amber lamplight, small
   touches of dull brick red. Tense, uneasy mood.
 - Backgrounds are tall (9:16), seen at standing eye level, with the lower quarter empty so pieces can
-  stand in front. Figures and objects are painted alone on plain grey and cut out.
+  stand in front. This is for the paper route only: a place built in Blender and painted over fills its
+  bottom third (the nearest story thing reaches about 0.70 down, `07 Composing a shot.md` rule 7). Figures and objects are painted alone on plain grey and cut out.
 - No writing, numbers, logos, emblems or symbols in any painting; words are added by the kit.
 - The exact style words are in `04 Painting prompts.md`.
 
-## Things the austerity series decided (keep unless the user says otherwise)
+## Things the austerity series decided (keep unless the person says otherwise)
 
 - No drawn portraits of real people. Real people appear as their name or their work (the author
   appeared only as her name printed on a plain book). Invented figures stand for groups.
 - Every painting is checked for wrong-era details, symbols that could be misread (a hooked-cross-like
   shape, a real movement's flag), and flags before it goes in.
-- Tall phone screen, 1080 x 1920, 30 frames a second. Narration by the user's ElevenLabs voice Malina
+- Tall phone screen, 1080 x 1920, 30 frames a second. Narration by the person's ElevenLabs voice Malina
   over a quiet soundtrack; captions as a separate file, not burned into the picture.
 - An author's interpretations are said as theirs ("Mattei argues"), not as plain fact.
 

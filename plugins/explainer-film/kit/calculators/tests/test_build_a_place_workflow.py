@@ -19,6 +19,10 @@ plugin author's name (read from plugin.json while the test runs, never written h
 Card time and batches (plugin 1.4.0, batching step): the card-time allowances written in the script equal the house numbers; every builder, fixer, integrator and renderer prompt names the helper's own name, role and the ledger and carries the
 batch rule (one sweep, about 10 measurably different versions in ONE batch, at most one more, small quick pictures, full-size once at the very end); the rounds draw small previews only and, when finals are asked for, ONE full-size drawing comes
 last, after the re-check and before the gate; the report has a card-time section and flags a helper that reports more seconds than its allowance; the planner is asked to write the person's total for the run; "no rented card" reaches the helpers.
+Lessons round (plugin 1.4.0): start small (by default the run draws only the first view's small picture and stops "for the person's reaction";
+the other cases pass allViews: true); a place for the film (film: true) gets 1080 x 1920 views, tall previews, and a planner told to run plan_shot.py and to
+write "for_film": true; every named view must see a finished horizon (the world round the place, the ground part's job); every Blender run gets a thread
+limit (EXPLAINER_FILM_BLENDER_THREADS, blender -t; blenderThreads, default 2); nobody messages a helper that is spending money.
 Also: no Date.now, Math.random, new Date() or agentType in the script; the meta block is a pure literal whose phases are the phase()
 calls; the reading-test line equals the house number; the agent files have their front matter and name every field of the report they
 must return. A part of the test is skipped (exit 77 for the whole test when node is missing) with a plain reason.
@@ -63,7 +67,8 @@ source = read(WORKFLOW)
 REQUEST = "Build one side of a small canal lock: brick walls with stone coping, stone steps, a gravel towpath, a timber gate and a few props."
 ENVIRONMENT = 'ENVNOTE: the disk is small; only the renderer may use the rented card; nothing else costs money.'
 PLUGIN_PATH = '/path/to/explainer-film'
-BASE_ARGS = {'plugin': PLUGIN_PATH, 'kit': PLUGIN_PATH + '/kit', 'folder': '/path/to/run', 'request': REQUEST, 'today': '2026-10-22', 'environment': ENVIRONMENT}
+# every case but the start-small ones asks for all views (allViews: true), so the whole run is exercised; the default (start small) has its own cases below
+BASE_ARGS = {'plugin': PLUGIN_PATH, 'kit': PLUGIN_PATH + '/kit', 'folder': '/path/to/run', 'request': REQUEST, 'today': '2026-10-22', 'environment': ENVIRONMENT, 'allViews': True}
 DEFAULT_RESPONSES = {
     'plan': 'plan.json', 'ground:*': 'ground-report.json', 'build:*': 'part-report.json', 'combine': 'combine-report.json',
     '~^audit\\d*$': 'audit-pass.json', 'render': 'render-report.json', 'check:look': 'check-look.json', 'check:structure': 'check-structure.json',
@@ -499,6 +504,43 @@ check.true('a card client named in the arguments reaches the builders\' batch co
 check.true('"rented: false" reaches every helper that could use the card: no card in this run, a batch only locally on a tiny scene',
            'no rented card in this run' in prompt_of(cheap, 'build:lock_gate') and 'no rented card in this run' in prompt_of(cheap, 'render') and 'no rented card in this run' not in builder_text)
 
+# ------------------------------------------------------------------------ the lessons round: start small, the film frame, threads, the world
+small = run_case('first_view_only', args={'allViews': None}, responses={'render': 'render-first-view.json'})
+slabs = labels(small)
+check.true('start small (the default, no allViews): the run builds, audits, draws ONLY the first view and stops there for the person\'s reaction (no checker, no fixer, no other view)',
+           slabs[-1] == 'render' and slabs.count('render') == 1 and not any(one_label.startswith(('check', 'blind', 'skeptic', 'fix', 'gate', 'render:')) for one_label in slabs)
+           and small['phases'][-1] == 'Render' and small['result']['stopped'] and "stopped for the person's reaction" in small['result']['stopped'], details=', '.join(slabs[-4:]))
+check.true('  (the render prompt names only the first view, says it is the one small test, and the report tells the person how to go on)',
+           'wide: camera "View wide"' in prompt_of(small, 'render') and 'towpath_close: camera' not in prompt_of(small, 'render') and 'START SMALL' in prompt_of(small, 'render')
+           and 'allViews: true' in small['result']['report_markdown'] and sorted(small['result'].keys()) == sorted(RESULT_KEYS))
+check.true('  (the planner is told to name first the view that shows the most of the request)', 'START SMALL' in prompt_of(small, 'plan') and 'Name first the view' in prompt_of(small, 'plan'))
+again_small = run_case('first_view_false', args={'allViews': None, 'firstViewOnly': False})
+check.true('  (firstViewOnly: false goes on to the end like allViews: true)', labels(again_small)[-1] == 'gate' and 'START SMALL' not in prompt_of(again_small, 'render'))
+nothing_drawn = run_case('first_view_null', args={'allViews': None}, responses={'render': None})
+check.true('  (when the first view cannot be drawn, the run still stops there and says so)', labels(nothing_drawn)[-1] == 'render' and 'could not be drawn' in nothing_drawn['result']['stopped'])
+
+film = run_case('film', args={'film': True})
+check.true('a place for the film (film: true): every view is drawn at 1080 x 1920 (the planner\'s 1200 x 800 is changed, and the log says so), the previews in the same tall shape (540 x 960)',
+           'wide: camera "View wide", 1080 x 1920' in prompt_of(film, 'render') and '1200 x 800' not in prompt_of(film, 'render') and '540 x 960' in prompt_of(film, 'render')
+           and any('drawn at 1080 x 1920' in one_line for one_line in film['logs']))
+check.true('  (the planner is told to read build-and-paint-a-place and the tips guide, run plan_shot.py for each view and write "for_film": true; without film it is told the wide default)',
+           all(word in prompt_of(film, 'plan') for word in ('THE FILM FRAME', 'calculators/plan_shot.py --place-facts', '"for_film": true', 'build-and-paint-a-place/SKILL.md', 'sections 4 to 12', 'place: film frame', '0.90 across'))
+           and 'plan_shot.py' not in prompt_of(happy, 'plan') and 'not marked for the film' in prompt_of(happy, 'plan') and 'wide: camera "View wide", 1200 x 800' in prompt_of(happy, 'render'))
+film_given = run_case('film_person_views', args={'film': True, 'views': [{'name': 'street', 'size': [600, 400]}]})
+check.true('  (a size the person gave is kept even for the film, and the log says the film-frame check will speak)',
+           'street: camera "View street", 600 x 400' in prompt_of(film_given, 'render') and any('kept as the person gave it' in one_line for one_line in film_given['logs']))
+check.true('every named view must see a finished horizon: the planner and the ground part are told the world round the place is the ground part\'s, with the role backdrop and the check "place: world"',
+           all('finished horizon' in prompt_of(happy, label) and 'place: world' in prompt_of(happy, label) and 'backdrop' in prompt_of(happy, label) for label in ('plan', 'ground:ground_and_water'))
+           and 'clip end at 1000 m' in prompt_of(happy, 'ground:ground_and_water'))
+thread_labels = ('ground:ground_and_water', 'build:lock_gate', 'combine', 'audit', 'fix:lock_gate')
+check.true('every builder and integrator prompt gives the thread limit (EXPLAINER_FILM_BLENDER_THREADS=2 for the plugin\'s commands, blender -t 2 for their own runs; default 2)',
+           all('EXPLAINER_FILM_BLENDER_THREADS=2 explainer-film-place' in prompt_of(happy, label) and 'blender -t 2 -b --disable-autoexec' in prompt_of(happy, label) for label in thread_labels))
+threads = run_case('threads', args={'blenderThreads': 3})
+check.true('  (blenderThreads: 3 reaches them as 3)', 'EXPLAINER_FILM_BLENDER_THREADS=3' in prompt_of(threads, 'build:lock_gate') and 'blender -t 3' in prompt_of(threads, 'combine')
+           and 'EXPLAINER_FILM_BLENDER_THREADS=2' not in prompt_of(threads, 'build:lock_gate'))
+check.true('every prompt except the blind reader\'s says never to send a message to a helper that is spending money (it once woke a second copy: 8 extra paid calls)',
+           all('Never send a message to a helper that is spending money' in one_call['prompt'] for one_call in happy['calls'] if not one_call['label'].startswith('blind')))
+
 # ----------------------------------------------------------------------------- the commands written in the prompts are real
 def launcher(args):
     wrapper = os.path.join(PLUGIN, 'bin', 'explainer-film-place')
@@ -667,5 +709,9 @@ if changed_script:
 changed_script = mutant('extra_phase', "phase('Re-check')", "phase('Fix')\nS.version += 0\nphase('Re-check')")
 if changed_script:
     check.true('mutation: a script whose phases are out of step with its meta block is caught', run_case('m7', workflow=changed_script)['phases'] != PHASES)
+
+changed_script = mutant('no_first_view_stop', 'if (FIRST_VIEW_ONLY) {\n  STATE.firstViewStop', 'if (false) {\n  STATE.firstViewStop')
+if changed_script:
+    check.true('mutation: a script that does not stop after the first view by default is caught', labels(run_case('m8', workflow=changed_script, args={'allViews': None}))[-1] != 'render')
 
 check.finish()

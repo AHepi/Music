@@ -32,7 +32,27 @@ file written for keys, ids, the name of the provider's settings folder and perso
 dropped on save).
 
 After the fixes, a DIFFERENT fresh checker compares each old finding with the new pictures and looks for new faults,
-because fixes make new faults (the garden's fix round made the squint score worse). One fix round, then stop.
+because fixes make new faults (the garden's fix round made the squint score worse). One fix round, then stop. A part that
+got worse in a fix keeps its old version, and the person decides.
+
+After the last edit, a fresh checker re-reads the notes and the record files against the data they describe: every
+number against the file it came from, every path, every price. In the textures work a fresh checker followed all 320
+links of a cookbook (none broken) and re-read 55 numbers against their files: 9 were wrong. One report's notes said more
+than was tested, and a record file had damaged prices. Write what was measured, never "proved".
+
+**Unchanged needs several draws.** To say a change leaves other pictures unchanged, draw each comparison picture at least
+three times with each version and compare with `python3 calculators/regression_compare.py --old OLD_FOLDER --new NEW_FOLDER`
+(pictures named NAME-1.png, NAME-2.png and so on): it prints the old-against-old spread first and calls a difference real
+only when it is bigger than that spread in every draw. Some pictures come out two slightly different ways from one run to
+the next: the house sample at 20 s differed in 7.7 percent of its dots by at most 7 of 255, and the unchanged old version
+alone gave both (measured). Before you blame a change for a faint speckle, redraw the unchanged old version several times
+first (the control). Say how many pictures and draws you compared.
+
+**Controls for every new measure.** Before you trust a new measuring tool, give it a copy that must score high (a shuffled
+copy of the same picture scored about 0.99) and copies that must score low (a blurred copy 0.17, another surface 0.09);
+a first version scored 0 even for alike pictures and had to be loosened (measured, the textures work). Tune a look on
+several random seeds: the seed you tuned on scores 0.04 to 0.08 higher than the others, so quote scores on other seeds
+too, and say when most of a gain came from one jumpy measure.
 
 ## The result shape (the same for every checker)
 

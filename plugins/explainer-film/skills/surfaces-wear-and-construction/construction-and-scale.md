@@ -52,7 +52,7 @@ sourced facts). The kind is in the last column.
 | rut depth of a heavily used cart road | 0.15 m (about 0.13 to 0.21 m with its variation), about 0.4 m across at half depth | measured in the same code |
 | raised bank beside a rut | about 0.3 of the rut's depth | measured in the same code |
 | lightly used road | rut 5 to 15 cm deep | invented |
-| longest free stretch between supports | 1.38 m or less | judged from the garden bridge (1.4 m) |
+| longest free stretch between supports | by role: planks and floor boards 1.38 m or less, beams and fences 2.5 m or less; longer only with a sourced `free_span` fact | judged from the garden bridge (1.4 m); beams judged (`roles.json`, `max_span_metres`) |
 | bridge post | 14 cm across, 1.5 cm chamfer | measured in the garden |
 | planks of a bridge or deck | 9 to 17 cm wide, gaps 5 to 14 mm | judged from the garden bridge |
 | stone step rise | 15 to 20 cm, top to top | judged (from memory) |
@@ -76,8 +76,12 @@ it. Every number is judged unless marked; all are house numbers in `film-setting
   far it sits in, in millimetres. A stake driven 4 cm or more into the top of a carried part, and sticking out above it, is carried by it.
 - **Afloat**: a part that goes down through a water plane and out above it (a boat, a pile in a river) is carried by the water. A hull that hangs 3 cm above the water is reported as "floating in the air" (a fail). For a boat, model the hull below the waterline
   as well as above it; the check does not need its underside exactly on the water plane.
-- **Span**: no stretch between supports longer than 1.38 m (from the garden's 1.4 m), found by rays straight down every
-  5 cm along planks and beams.
+- **Span**: no free stretch longer than the role allows: planks and floor boards 1.38 m (judged, the garden bridge's
+  1.4 m), beams and fences 2.5 m (judged); found by rays straight down every 5 cm along planks and beams. A real longer
+  span (a hall's tie beam 7 m between its walls, a gallery bay of 3 m) is allowed when the place's own facts file holds a
+  `free_span` fact for it with a source, for example `{"id": "gallery_bay_span", "applies_to_role": "^timber\\.beam$",
+  "applies_to_name": "gallery", "dimension": "free_span", "max": 3.0, "unit": "metres", "kind": "judged", "source": "...",
+  "confidence": "good"}`; the audit then names the fact instead of failing. Do not add posts nobody would build.
 - **Floating**: a gap over 5 mm fails. A gap between 5 mm and the carrier's expected gap is reported as short.
 - **Hung**: a part carried from above (a lantern on a hook) is allowed only for roles that may hang.
 - **Ground seating**: a part meant to stand on the ground is within 2 cm of the ground height (invented). The ground is read at the SAME five points under the part's box that `pk.seat_on_ground` uses (its centre and its four
@@ -99,6 +103,32 @@ it. Every number is judged unless marked; all are house numbers in `film-setting
 size is out of range and fails beyond the fail factor (1.5 times: invented). A 1.0 m door fails; a 1.7 m door passes.
 Sizes are read from the object's OWN sides (the smallest rectangle that holds it seen from above, and its height), so a wall turned 45 degrees is still as thick as it is. The step rise is read by the construction check, top
 to top, and judged by the role `stone.step` (not by a name): a flight of 17 cm steps passes whether it is built from slabs on a core or from solid blocks, and one 1.8 m block called a step fails.
+
+## The world round the place (every view must see a finished horizon)
+
+**Example first.** The Japanese garden was built for one camera. Its first picture from the veranda showed what was
+missing at once: empty sky above a dark slab of ground. A backdrop of ordinary lit shapes then washed the first
+picture out (a huge green sheet floated at the top of the frame), and a thin golden haze dimmed the whole picture and
+erased the main building. In the coal mine, a tall bank at the ground's rim (about 12 m high and 100 m out) covered
+the low hills behind it. A place is seen from several views, so the world round it must work from all of them:
+- **An all-round backdrop**: rings of hills (or far buildings) all the way round, lighter and bluer when far, made of
+  real shapes so a moving view has parallax. Give its objects the role `backdrop` (plain unlit colour, casts no
+  shadow, gets no wear), so they never block the sun.
+- **Clip end**: every view camera's clip end at 1000 m or more, and past the far edge of the ground and the backdrop
+  (judged; the pit-village scripts use 1500 m). A 4 km ground has a corner about 2 km away: the audit names the clip end
+  each camera needs.
+- **Ground to the horizon**: continue the plain ground far enough that no view shows empty sky above a dark slab.
+- **Hide the ground's edge**: the ground is a rectangle, so something must hide its edge (hills in front of it, or a
+  rim bank that fades out beyond about 60 m: judged, coal mine).
+- **No haze volume**: get depth from colour (lighter and bluer when far) and from losing edges, not from a thin
+  haze volume.
+- **The audit's check "place: world"** flags a view camera whose clip end is shorter than the farthest object, a
+  large far object or backdrop that casts shadows, and, where it can measure it, the ground's edge or empty sky below
+  the horizon inside a view. A prop or small set built alone (at most 20 m across and not marked `"for_film"`) gets
+  only a LOOK for a missing horizon; when it goes into a place, the place's views must pass.
+- **A sky dome is not a closed part**: when you check faces for inside-out parts yourself, leave it out (one 3.5 km
+  sky dome gave 908 useless errors in the coal mine's delivery check), and test each closed piece of a joined mesh,
+  not only the whole object (the same check found 73 inside-out headframe parts nobody had seen).
 
 ## The scene study before building (when the place already exists)
 

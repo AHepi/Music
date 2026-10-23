@@ -38,4 +38,26 @@ record it. The kit's code already works around them; this is for when you write 
 15. **A light inside its own glow box is blocked in Cycles.** Put the glow box in front of the lamp and hide it from the
     lamp's rays.
 16. **Free disk.** A saved test scene or a few EXR pictures fill a small disk. Keep big files on the rented store; turn
-    `.blend1` backups off; if free space falls under about 0.4 GB, stop and report.
+    `.blend1` backups off; if free space falls under about 0.4 GB, stop and report. And when a planning or filming check
+    fails, look at the free disk (`df -h`) before you blame your change: the filming plan keeps a 4 GB reserve, and a
+    machine with 1.3 GB free failed the check for that reason alone (from the notes, lesson 140).
+17. **Geometry Nodes modifier inputs moved in Blender 5.2.** Set them with `mod.properties.inputs.<identifier>.value`, not
+    `mod[identifier]` (from the notes: an add-on written for 5.1 broke this way, and the first courtyard test of the
+    Japanese garden failed until a small shim in the builder's own script fixed it, leaving the person's add-on untouched).
+    Test one input in your own Blender before building on it: `explainer-film-setup` prints a "Blender 5.2 probe" block
+    that says which way works in the installed Blender.
+18. **A collection's light-linking entries do not name their object in Blender 5.2.** Pair them with the collection's
+    objects in order (from the notes, lesson 120; the kit's `set_dressing.light_reaches` does it for you), and check the
+    first light with a small test picture. The setup probe also reads one pairing and says what it found.
+19. **Build thousands of small shapes in bulk, never one object at a time.** One at a time gets slower as it goes: the
+    garden's leaves took 7 minutes made one by one and about 10 seconds built in bulk from arrays (measured). Build them
+    as arrays (`foreach_set`) into ONE mesh for each material, keep each mesh under about 300,000 triangles before
+    displacement (judged, coal mine), and keep the number of objects low: object count, not triangles, is what slows
+    scripts and exports. The audit holds the count to the house number `place_audit.objects_total_max`.
+20. **Several helpers on one computer: give each Blender run a thread limit.** `blender -t 2` (or the computer's cores
+    divided by the number of helpers), so they do not starve each other (the coal mine's six builders ran this way). The
+    plugin's commands take it from the environment: `EXPLAINER_FILM_BLENDER_THREADS=2` before the command, and the
+    launcher adds `-t 2`.
+21. **Try a tool you have not used on tiny meshes first**, in the real Blender version, before you rely on it. Probes in
+    the garden work found tools that fill only one colour slot, refuse objects with modifiers, or report the wrong
+    settings: report what works and what breaks.

@@ -403,7 +403,7 @@ def probe_damage():
     by_role = {}
     for obj in scene_read.mesh_objects(only_visible=True):
         role = obj.get(names.ROLE) or ''
-        if scene_read.is_scatter(obj) or role.startswith('ground.') or role.startswith('never.'):
+        if scene_read.is_scatter(obj) or role.startswith('ground.') or role.split('.')[0] in ('never', 'backdrop'):    # far scenery (backdrop) gets no damage and is not seated
             continue
         evaluated = obj.evaluated_get(depsgraph)
         mesh = evaluated.to_mesh()

@@ -11,6 +11,11 @@ estimate and was never explained. A job is written TWICE: a "sent" line the mome
 "job" line is there, the "sent" line counts at its estimate, so a command that is cut off (a time limit, a lost connection) still counts the card time it started; `variations collect`
 finishes such a batch later and writes the billed seconds.
 
+One helper, one job in flight: a paid step is REFUSED for a helper name that already has a job in flight (a "sent" line with no "job" line yet), and
+the attempt is written into the ledger as a "double_run" line. A message to a running paid helper once woke a second copy of it, which made 8 extra
+paid calls (about US$0.70) before it stopped. Wait for the first job (rent wait, variations collect); a job that was cut off and will never finish
+is closed by writing its seconds by hand (card-time add --job-id ID --work-seconds N).
+
 A concrete example: a builder has used 480 s of its 600 s. check(entries, 'builder-ground', 'builder', estimate_seconds=200) answers 'refuse': 480 + about 200 is 680 s, over 600 s.
 With over_reason="the first batch missed the wall, one more batch is needed" it answers 'warn' (680 s is inside 600 x 1.5 = 900 s) and the reason goes into the ledger.
 
@@ -187,6 +192,17 @@ def check(entries, helper, role, estimate_seconds=0.0, over_reason=None, what='t
     words = f'{helper} (role {role}) has used {used:.0f} s of {allowance:.0f} s ({allowance / 60:g} min)'
     if estimate_seconds:
         words += f'; {what} needs about {float(estimate_seconds):.0f} s more, {projected:.0f} s in all'
+    in_flight = open_sent(entries, helper)
+    if in_flight:
+        result['status'] = 'refuse'
+        result['double_run'] = True
+        result['in_flight'] = [e.get('job_id') for e in in_flight]
+        listed = '; '.join(f'{e.get("job_id")} ({e.get("what", "")}, sent {e.get("when", "at an unknown time")})' for e in in_flight[:3])
+        result['lines'].append(f'FAIL card time: {helper} already has a job in flight: {listed}. A second copy of a helper must not start paid work (a message to a running paid '
+                               'helper once woke a second copy that made 8 extra paid calls, about US$0.70). Nothing was sent, and this attempt is written into the ledger as a '
+                               'double run. Wait for the first job (rent wait ID, or variations collect RUN-FOLDER); if it was cut off and will never finish, write its seconds by '
+                               'hand: card-time add --job-id ID --work-seconds N.' + (' Every helper needs its own name (--helper NAME or PLACE_HELPER).' if helper == 'unnamed-helper' else ''))
+        return result
     if team_total and team_used + float(estimate_seconds or 0.0) > team_total:
         result['status'] = 'refuse'
         result['lines'].append(f'FAIL card time: the whole job has used {team_used:.0f} s of its {team_total:.0f} s ({team_total / 60:g} min) and {what} would pass it. Stop and tell the person: only they raise the total '
@@ -274,6 +290,11 @@ def log_wall_clock(path, helper, role, seconds, what):
     return append_entry(path, {'kind': 'small', 'helper': helper, 'role': role, 'what': what, 'measured': False, 'estimate_note': 'counted from the wall clock because this client does not say what the step billed', **pieces})
 
 
+def log_double_run(path, helper, role, what, in_flight):
+    """Writes a refused second paid step from a helper that already had a job in flight (a "double_run" line: it counts no seconds)."""
+    return append_entry(path, {'kind': 'double_run', 'helper': helper, 'role': role, 'what': what, 'in_flight': list(in_flight or [])})
+
+
 def log_override(path, helper, role, reason, what):
     return append_entry(path, {'kind': 'override', 'helper': helper, 'role': role, 'what': what, 'reason': reason})
 
@@ -310,6 +331,8 @@ def show_lines(path, entries, helper=None, role=None):
                 lines.append(f'      {entry.get("when", "")} OVER-ALLOWANCE reason: {entry.get("reason", "")} ({entry.get("what", "")})')
             elif entry.get('kind') == 'sent' and entry in waiting:
                 lines.append(f'      {entry.get("when", "")} sent, billed seconds not in yet: about {entry.get("estimate_seconds", 0)} s (an estimate)  {entry.get("what", "")}')
+            elif entry.get('kind') == 'double_run':
+                lines.append(f'      {entry.get("when", "")} DOUBLE RUN refused: {entry.get("what", "")} while {", ".join(str(j) for j in entry.get("in_flight") or [])} was in flight')
             elif entry.get('kind') == 'batch':
                 lines.append(f'      {entry.get("when", "")} batch {entry.get("number")} for "{entry.get("change")}": {entry.get("variations")} variation(s) in {entry.get("jobs")} job(s)')
     return lines
@@ -335,6 +358,8 @@ def main_command(parsed, environ=None, say=print):
             result = check(entries, helper, role, estimate_seconds=getattr(parsed, 'estimate_seconds', None) or 0.0, over_reason=getattr(parsed, 'over_allowance', None))
             for line in result['lines']:
                 say(line)
+            if result.get('double_run'):
+                log_double_run(path, helper, role, getattr(parsed, 'what', None) or 'a card-time check', result['in_flight'])
             say(f'ledger: {path}')
             return 1 if result['status'] == 'refuse' else 0
         if action == 'add':
@@ -371,6 +396,8 @@ def before_paid_step(parsed, estimate_seconds=0.0, what='this paid step', enviro
     result = check(entries, helper, role, estimate_seconds, getattr(parsed, 'over_allowance', None), what)
     for line in result['lines']:
         say(line)
+    if result.get('double_run'):
+        log_double_run(path, helper, role, what, result['in_flight'])
     if result['status'] == 'refuse':
         return False, path, helper, role
     if result['override']:

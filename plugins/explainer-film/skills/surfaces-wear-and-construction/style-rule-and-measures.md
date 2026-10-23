@@ -21,6 +21,12 @@ place without looking as if it came from a more photographic picture? If it is f
 make fewer, bigger, cleaner shapes: a moss patch is one soft rounded shape with a lighter top edge, a crack is one clean
 dark line, a peg is one small round shape, a grass tuft is 5 to 9 simple blades.
 
+**The person's words for a faceted painted look** (the garden work): "No rounded smooth curves. Just edges and flat
+surfaces that approximate a curve." So: broad, few, unequal passages of colour; marks that differ by material;
+chiselled, unequal planes; short mineral marks; depth by colour and by losing edges, not by haze or fine detail. Judge
+the whole picture first, then the details. Smooth-shade only ground and pebbles (they are ground, not designed forms);
+keep architecture and lanterns faceted. No kit check measures facets: a person or a fresh look checker judges it.
+
 **How much.** One small story per hand-span, never a hundred tiny details of equal weight. About one readable feature
 per 5 to 10 cm on timber, per 20 to 30 cm on ground, per 50 cm on stone and walls (judged, garden style note). For
 normal maps the same rule: soft, large relief (grain grooves, plank edges, tile ridges), no micro-pore noise.
@@ -45,6 +51,15 @@ bland guard. Look at the detail-energy numbers it recorded. The garden's hand-pa
 0 to 255 scale (judged), and photographs of the same things sit above 12. A first picture with regions above 10 is too
 photographic to be a guard; fix the picture first. A budget-gated concept step (a picture from an image model as a target,
 with the person's yes) is the better start when money allows; the garden's came from paid concept pictures.
+
+**Concept pictures, when money allows (the garden).** Pictures from the painter set the character of a place before anything
+is built: the garden painted over its two main views, made sheets of its main elements (bridge, planks, roof, trees, water
+edge, lantern, grass and moss) and swatches, and wrote the style note from what it saw: 29 calls, US$3.86 of a US$15
+allowance (measured). Nano Banana 2 kept the style best; Nano Banana Pro was too photographic; Flux 3 moved the picture
+around (judged). Ask the person once, with the exact cost, before you start.
+
+**Rank the fixes by what a viewer notices**: each element's share of the picture (measured on a flat-colour picture of the
+role classes, from the same camera) times how wrong it looks (judged), and fix in that order.
 
 ## The measures (all computed by `explainer-film-place measure`)
 

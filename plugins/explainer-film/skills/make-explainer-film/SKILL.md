@@ -1,7 +1,7 @@
 ---
 name: make-explainer-film
 description: Make a narrated, fact-checked explainer film for a phone screen (1080x1920) chapter by chapter, from research to a finished video with captions, in a cinematic look (places built in 3D and painted over, painted rooms with depth, card models, paper cut-outs, film grain, documentary graphics) or the simpler paper pop-up look, with automatic checks (calculators and a preflight) at every stage. Use when someone asks for an explainer video, a documentary-style chapter, or "the next chapter" of such a film. Also use when the work includes building any place or props in Blender (a village, town, harbour, mine, farm, garden, interior, building, set or props), even if the request never mentions surfaces or wear, because that work goes through the skill surfaces-wear-and-construction.
-when_to_use: The user wants a short documentary or explainer video made end to end (research, script, voice, pictures, animation, filming), or wants to continue a series made this way, or any request to build a place, village, town, set or props in Blender.
+when_to_use: The person wants a short documentary or explainer video made end to end (research, script, voice, pictures, animation, filming), or wants to continue a series made this way, or any request to build a place, village, town, set or props in Blender.
 ---
 
 # Make an explainer film (master steps)
@@ -24,9 +24,9 @@ at the counter. The whole film is built like that.
    `machine-settings.env`). Read its checks. The kit's own docs are in `film-kit/docs/` (start with
    `paper-look - 00 START HERE.md`).
 2. **House rules** (read `${CLAUDE_PLUGIN_ROOT}/skills/make-explainer-film/house-rules.md`): confirm
-   every paid step's estimated cost before spending; keep a project story, decisions (the user's
+   every paid step's estimated cost before spending; keep a project story, decisions (the person's
    exact words), status, lessons; name delivered files with a two-digit log number and plain words.
-3. **Ask the user only about wants, risk or cost.** Make routine technical choices yourself.
+3. **Ask the person only about wants, risk or cost.** Make routine technical choices yourself.
 4. **Read the tips guide** once before the first step, and the section for each stage as you reach it:
    `${CLAUDE_PLUGIN_ROOT}/kit/docs/LLM tips and tricks.md` (in the kit folder: `docs/LLM tips and tricks.md`).
    It holds the short rules this project learned over 35 logs, each with the tool that checks it, the numbers
@@ -71,14 +71,14 @@ It spends nothing and changes no project file.
 
 Work like this: compute before you render; make one change, then measure again (camera first, then props,
 then light); quote measured numbers in every report; never trust a single still. What no tool can judge
-(history, what a detail reads as on a phone, newcomer understanding, story choices, the user's yes to
+(history, what a detail reads as on a phone, newcomer understanding, story choices, the person's yes to
 spend) goes to critics: section 19 of the tips guide lists it.
 
 ## The steps (each has its own skill; do them in order)
 
 | Step | Skill | Hands on | Preflight |
 |---|---|---|---|
-| 1. Research, outlines, script | `research-and-script` | a research ledger (every fact with a source), 2-3 outlines for the user to choose, the script (`narration-script.json`) | `script` |
+| 1. Research, outlines, script | `research-and-script` | a research ledger (every fact with a source), 2-3 outlines for the person to choose, the script (`narration-script.json`) | `script` |
 | 2. Fact check the script, and test it on newcomers | `check-facts` (workflows `verify-facts`, then `test-script-with-newcomers`) | fixes before recording; then read it to one or two real newcomers with the script's listener questions | `script` |
 | 3. Record and time the voice | `record-narration` | recordings, word times, `timeline.json`, the mix | `record` |
 | 4. Paintings, rooms with depth, cut-outs | `paint-and-cut` | `assets/reliefs/<chapter>/`, `paper-film/pieces/<chapter>/` | `plates`, `paint` |
@@ -103,8 +103,10 @@ spend) goes to critics: section 19 of the tips guide lists it.
 - Work these out instead of guessing (from the kit folder):
   `python3 calculators/plan_budget.py cost PLAN.json --rate CENTS --rate-date DATE` prices the paid steps at today's rate (paintings by the
   megapixels returned AND sent, the narration's credits, a repaint and re-record reserve);
-  `plan_budget.py ledger LEDGER.json --next-cost DOLLARS` says what is left of the user's allowance,
-  counted from the day it began, and refuses a step larger than that; `plan_budget.py filming` plans the
+  `plan_budget.py ledger LEDGER.json --next-cost DOLLARS` says what is left of the person's allowance,
+  counted from the day it began, and refuses a step larger than that (an allowance covers only the kind of
+  spending it was given for, its `covers` list: a step of another kind needs a fresh yes; spending inside it is
+  still reported each time; a helper's brief gets the true remaining figure, the ledger's line "For helper briefs:"); `plan_budget.py filming` plans the
   filming time and stretches from a short measured profile (skill `film-and-finish`). Do the free steps
   first, then ask once with the exact cost. A vague reply is not a yes.
 

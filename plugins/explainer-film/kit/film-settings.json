@@ -2207,7 +2207,8 @@
    "value": 0,
    "unit": "pixels",
    "kind": "judged",
-   "source": "Rounds 1-5 (the notice corner redrawn and all 518,400 pixels compared)"
+   "source": "Rounds 1-5 (the notice corner redrawn and all 518,400 pixels compared: 0 changed). Story logs 37-39: the house sample at 20 s drawn ten times with the UNCHANGED old stage came out two ways (7.7 percent of dots apart, at most 7 levels of 255), measured",
+   "note": "Not a promise. Zero held for the notice corner; other moments vary from draw to draw with no change at all. Draw each moment at least 3 times with the old and the new code and compare with calculators/regression_compare.py (the old-against-old spread first) before calling a difference real or a change harmless."
   },
   "contact_sheet_every_seconds": {
    "value": {
@@ -3631,6 +3632,49 @@
     "unit": "plate over helper plate brightness, share of the expected brightening, levels",
     "kind": "judged",
     "source": "People test painter-faults helper (log 34): the men's cast-shadow area is where the plate is under 0.75 of the helper plate; the people-out painting brightened it 0.7 L where the helper plate is 11.3 L brighter (lesson 135)"
+   },
+   "pale_patch": {
+    "value": {
+     "band_pixels_at_1536": 60,
+     "blur_pixels_at_1536": 6,
+     "lighter_by_levels": 8,
+     "lighter_share_max": 0.1
+    },
+    "unit": "pixels on a plate 1536 wide, levels of 255 (after the blur), share of the compared ground dots",
+    "kind": "invented",
+    "source": "Lessons round (23 October 2026). Measured fault: the wet lockout's old dry behind painting brought the road the near props hid back pale and dry when the camera moved, 59 percent of those road dots lighter (film kit 05 'A dark painted street', log 37; the textures logs measured 56 to 71 percent). The limit 0.10 and the blur are a starting point nobody has tested on a matched wet pair"
+   },
+   "road_arrives_look_below": {
+    "value": 0.9,
+    "unit": "share of the painted ground's brightness that reaches the film (the finish pass without glow, vignette and grain)",
+    "kind": "judged",
+    "source": "Wet lockout (log 37): without a toe the wet road arrived at 0.75 to 0.86 of its painted brightness and some crushed to black (measured in the stage); with toe 1 the wet lockout reached 0.935 and the dry one with the same look 0.96 (measured). The project set no limit: under about 0.9 is a reason to look. Judged (fix round, 23 October 2026): 0.9 is placed between the measured faulty cases (0.75 to 0.86) and the measured good ones (0.935, 0.96)"
+   },
+   "bottom_fifth_bands": {
+    "value": {
+     "bottom": [
+      0.8,
+      1.0
+     ],
+     "middle": [
+      0.4,
+      0.6
+     ]
+    },
+    "unit": "share of the picture's height, from the top",
+    "kind": "judged",
+    "source": "Lessons round: the bottom fifth is the lesson's own measure (the log 26 review: in about 70 percent of frames the bottom fifth was over 30 percent darker than the middle, measured); the middle is taken as the middle fifth, a rule of thumb, since the review did not say how wide it was"
+   },
+   "sky_clouds": {
+    "value": {
+     "erode_pixels_at_1536": 9,
+     "blur_pixels_at_1536": 4,
+     "spread_levels_max": 8,
+     "sky_share_min": 0.02
+    },
+    "unit": "pixels on a plate 1536 wide, levels of 255 (the spread left once each row's own middle level is taken away), share of the frame",
+    "kind": "invented",
+    "source": "Textures logs 19, 24, 25: the painter added heavy pale clouds to a plain dark sky though three sentences said not to; a plain dark sky was put back using Blender's exact sky outline (four tries to keep thin rails clean). A plain or evenly graded sky spreads close to 0 levels by this measure; 8 is a starting point"
    }
   },
   "plan_states": {
@@ -4544,6 +4588,38 @@
    "kind": "invented",
    "source": "the plugin 1.4.0 design (22 October 2026): a cap so a scatter cannot fill the memory"
   },
+  "objects_total_max": {
+   "value": 1000,
+   "unit": "objects in the scene (every kind)",
+   "kind": "judged",
+   "source": "Lessons round (23 October 2026). The courtyard's thousands of leaves took 7 minutes to build one object at a time and about 10 s built in bulk (japanese-courtyard story log 7, measured); the finished courtyard holds 89 objects (log 13); the mine's builder notes say one object per material group, not one per shape. Set well above 89 and far below thousands: object count, not triangles, slows scripts, saving and export"
+  },
+  "objects_total_fail": {
+   "value": 3000,
+   "unit": "objects in the scene (every kind)",
+   "kind": "judged",
+   "source": "Fix round (23 October 2026). Between objects_total_max (1000) and this number the object count is a LOOK, above it a FAIL: the measured fault was thousands of leaves made one object each (japanese-courtyard story log 7: 7 minutes, about 10 s in bulk), while a large place with many buildings could pass 1000 for honest reasons (never tested). 3000 is 'thousands'"
+  },
+  "world": {
+   "value": {
+    "far_object_metres": 100,
+    "large_object_metres": 20,
+    "empty_below_horizon_share_max": 0.0,
+    "place_span_metres": 20
+   },
+   "unit": "metres from the nearest view camera, metres across, share of a view's rays that go below the horizon and hit nothing, metres across (the widest horizontal extent of the visible objects that are not backdrop)",
+   "kind": "invented",
+   "source": "Lessons round: the mine (village_and_sky, ground_and_yard known flaws: empty sky above a dark slab, the ground's square edge in view) and the courtyard (story log 9: hazy backdrop hills blocked the sun until they stopped casting shadows). Any ray below the horizon that hits nothing means the view sees past the edge of the ground; far and large are starting points. place_span_metres (fix round, 23 October 2026): a crate on a 3 m square of ground with its own close camera failed this check as if it were a place (measured by the verify step: 290 of 544 rays below the horizon hit nothing); a prop or small set built alone, not for the film, at most this wide gets a LOOK instead. The test yard is 40 m across and the courtyard and the mine far wider; 20 m is a starting point"
+  },
+  "sun": {
+   "value": {
+    "shadowed_share_look": 0.5,
+    "wear_shade_angle_look_degrees": 20
+   },
+   "unit": "share of the ground points a view sees that are shadowed from the sun; degrees between the sun the wear layers' shade used and the scene's sun lamp",
+   "kind": "invented",
+   "source": "Lessons round (23 October 2026). Courtyard story log 9: the sun did nothing (a 4 m hall with the sun low behind it shadowed about 25 m of ground, and hazy hills blocked the sun too; the scene looked flat and the materials were blamed): more than half the seen ground in shadow is a reason to look. Garden plan 30 section 5 note: the wear layers assumed a sun at 135 degrees compass and 45 up whatever the scene's sun; they now read the scene's one sun lamp, and the kit's own sun stands 10 degrees lower than that fallback, so 20 degrees leaves room for it. Both are starting points"
+  },
   "draw_seconds_final_max": {
    "value": 90,
    "unit": "seconds",
@@ -5281,6 +5357,15 @@
    "kind": "judged",
    "source": "the person: 'small quick test pictures'; about 600 x 400"
   },
+  "picture_size_pixels_film": {
+   "value": [
+    360,
+    640
+   ],
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "Fix round (23 October 2026): the same number of dots as 600 x 400 (about 230,000) in the film's tall 9:16 shape (1080 x 1920 divided by 3), used when the place settings say \"for_film\": true and no size is given. A wide 600 x 400 picture through a camera placed for 1080 x 1920 shows a different frame: measured in Blender 5.2.2 with camera.view_frame, it showed only 0.667 of the view's height (sensor fit AUTO), or the film's view filled only about 150 of its 600 dots across (sensor fit VERTICAL)"
+  },
   "eevee_samples": {
    "value": 16,
    "unit": "samples",
@@ -5367,6 +5452,15 @@
    "unit": "pixels",
    "kind": "judged",
    "source": "the free scout drawn on this computer (`variations scout`): 22 pictures of the small canal lock took 37 to 39 s here on 23 October 2026; small enough to be quick, big enough that cracks and moss clumps still show"
+  },
+  "scout_size_pixels_film": {
+   "value": [
+    144,
+    256
+   ],
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "Fix round (23 October 2026): about the same number of dots as the scout's 240 x 160 (36,864 against 38,400) in the film's tall 9:16 shape (1080 x 1920 divided by 7.5), used when the place settings say \"for_film\": true. The scout's limits for 'nearly the same' were calibrated on wide 240 x 160 pictures; keeping the number of dots close keeps them comparable, but they have not yet been checked on a tall batch"
   },
   "scout_cycles_samples": {
    "value": 8,

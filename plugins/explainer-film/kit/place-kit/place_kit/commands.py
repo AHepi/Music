@@ -274,6 +274,12 @@ def finish_place(settings, look=None, state=None, quick=False, map_size=None, ow
     note('growth', grow_report, f'PASS growth: {grow_report.get("summary", "")}')
     light_report = light_place(settings)
     note('light', light_report, f'PASS light: {light_report.get("summary", "")}')
+    from . import light as light_module
+    quieted = light_module.quiet_backdrops()
+    if quieted:
+        note('backdrop', {'no_shadow': quieted}, f'PASS backdrop: {len(quieted)} far object(s) with the role backdrop now cast no shadow ({", ".join(quieted[:6])})')
+    print(f'PASS sun: the wear layers\' shade used {plan_record["sun"]["from"]} (compass {plan_record["sun"]["compass_degrees"]:.0f}, '
+          f'{plan_record["sun"]["height_degrees"]:.0f} up)')
     picture = settings.picture
     if picture.get('camera') and picture.get('height_pixels'):
         door.set_picture_size(picture['camera'], picture['height_pixels'])

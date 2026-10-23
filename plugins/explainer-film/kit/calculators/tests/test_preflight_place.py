@@ -16,11 +16,10 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES, skip  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, skip, work_folder  # noqa: E402
 
 try:
     import numpy as np
@@ -32,7 +31,7 @@ import preflight  # noqa: E402
 
 PREFLIGHT = os.path.join(CALCULATORS, 'preflight.py')
 check = Checker('preflight: the place stage (audit, freshness, pictures, fresh checker) and the plates stage asking for it')
-work = tempfile.mkdtemp(prefix='preflight-place-test-')
+work = work_folder('preflight-place-test-')
 
 
 def run(*arguments, timeout=300):

@@ -8,8 +8,9 @@
 // build on spoken words, rule cards, the guess ring, small name tags, a price arrow and a small pointer.
 //
 // Every function takes the moment t and its own times (at, until), and draws nothing outside them.
-// Positions are in pixels: x from the left, y from the top. Phone apps cover roughly the bottom 380
-// pixels and the right 140 pixels with their own buttons, so keep important words out of there.
+// Positions are in pixels: x from the left, y from the top. Phone apps cover the bottom and the right edge
+// with their own buttons: anything to be read ends left of 0.90 across (TEXT_RIGHT, 972 pixels) and above
+// 0.80 down (keep the bottom 380 pixels clear). The older "right 140 pixels" (0.87 across) is stricter than needed.
 //
 // Page events (plugin kit): when paper-film/tools/page_events.mjs switches them on (globalThis.pageEvents), each
 // function here also notes what it drew in that frame: its kind, words, times, how visible it is (0 to 1) and its box

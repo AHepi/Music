@@ -261,6 +261,52 @@ with tempfile.TemporaryDirectory() as folder:
     check.true('the three 12 MB files go in chat parts of at most 28 MB', all(p['megabytes'] <= 28 for p in planted['chat_parts']) and len(planted['chat_parts']) == 2,
                details=str(planted['chat_parts']))
 
+# 9b. privacy and money files (lessons round, 23 October): an email-like string in a file for a public repository (hardest: the identity line of a
+# script that makes web requests), and a dollar sign eaten by the shell in a money file. Every address here is made up at run time.
+made_up = 'some.one' + '@' + 'mailhost' + '.org'
+with tempfile.TemporaryDirectory() as folder:
+    open(os.path.join(folder, 'fetch_pictures.py'), 'w').write('import urllib.request\nHEADERS = {"User-Agent": "picture-fetch/1.0 (' + made_up + ')"}\n')
+    open(os.path.join(folder, 'notes.md'), 'w').write('Asked by ' + made_up + ' on Monday.\n')
+    open(os.path.join(folder, 'generic_fetch.py'), 'w').write('import urllib.request\nHEADERS = {"User-Agent": "tool/1.0 (no' + 'reply@' + 'example.com)"}\nREPO = "git@github.com:owner/repo"\n')
+    open(os.path.join(folder, 'OFL.txt'), 'w').write('Copyright 2010 The Font Author (' + 'author' + '@' + 'fontmaker.cl)\n')
+    open(os.path.join(folder, 'spend-ledger.json'), 'w').write('{"entries": [{"what": "a painting", "note": "US/bin/bash.048"}]}\n')
+    open(os.path.join(folder, 'paintings-cost.md'), 'w').write('Painting 2 cost US/5 cents more.\n')
+    open(os.path.join(folder, 'house-rules.md'), 'w').write('Trap: US$0.048 once became US/bin/bash.048 when written through the shell.\n')
+    open(os.path.join(folder, 'estimate_cost.sh'), 'w').write('#!/bin/bash\necho "about US$1"\n')
+    planted = budget.check_push(budget.files_to_check([folder]), settings)
+    refused = {os.path.basename(r['file']): r['why'] for r in planted['refused']}
+    check.true('the case that must fail: an email in the identity line (User-Agent) of a script that makes web requests is refused, and says so',
+               'fetch_pictures.py' in refused and 'identity line (User-Agent)' in refused['fetch_pictures.py'], refused.get('fetch_pictures.py', '')[:200],
+               recorded='textures story log 28: a helper put the person\'s email into the identity line of its download scripts')
+    check.true('...and the refusal never prints the address in full', made_up not in json.dumps(planted) and 's***@***.org' in refused.get('fetch_pictures.py', ''))
+    check.true('an email in a note for a public repository is refused too', 'notes.md' in refused, sorted(refused))
+    check.true('generic addresses (noreply, git@) and a font\'s licence file are not refused', not ({'generic_fetch.py', 'OFL.txt'} & set(refused)), sorted(refused))
+    check.true('the case that must fail: a money file with "bin/bash" or "US/" and a digit is refused: "a dollar sign was eaten by the shell"',
+               all(name in refused and 'a dollar sign was eaten by the shell' in refused[name] for name in ('spend-ledger.json', 'paintings-cost.md')), sorted(refused),
+               recorded='project Lessons.md 142: US$0.048 became US/bin/bash.048')
+    check.true('a note that explains the trap, and a script\'s first line #!/bin/bash, are not refused', not ({'house-rules.md', 'estimate_cost.sh'} & set(refused)), sorted(refused))
+    os.makedirs(os.path.join(folder, 'tools', 'node_modules', 'three'))
+    open(os.path.join(folder, 'tools', 'node_modules', 'three', 'index.js'), 'w').write('// a package\n')
+    open(os.path.join(folder, 'Blender-setup.exe'), 'wb').write(b'MZ')
+    installed = {os.path.basename(r['file']) for r in budget.check_push(budget.files_to_check([os.path.join(folder, 'Blender-setup.exe')])
+                                                                          + [os.path.join(folder, 'tools', 'node_modules', 'three', 'index.js')], settings)['refused']
+                 if 'installed software' in r['why']}
+    check.equal('installed software stays out: a package folder\'s file and an installer are refused', sorted(installed), ['Blender-setup.exe', 'index.js'])
+    eaten_ledger = os.path.join(folder, 'eaten-ledger.json')
+    good = budget.load_json(os.path.join(HERE, 'spend-ledger-logs-10-to-34.json'))
+    good['entries'][0]['note'] = 'cost US/bin/bash.048 by the shell'
+    json.dump(good, open(eaten_ledger, 'w'))
+    run = subprocess.run([sys.executable, '-I', '-B', os.path.join(CALCULATORS, 'plan_budget.py'), 'ledger', eaten_ledger, '--allowance', 'chapter 2 pictures',
+                          '--settings', settings.path], capture_output=True, text=True)
+    check.true('the ledger reader FAILS (exit 2) on a ledger whose dollar sign was eaten by the shell', run.returncode == 2 and 'a dollar sign was eaten by the shell' in run.stdout,
+               run.stdout[:200])
+run = subprocess.run([sys.executable, '-I', '-B', os.path.join(CALCULATORS, 'plan_budget.py'), 'ledger', os.path.join(HERE, 'spend-ledger-logs-10-to-34.json'),
+                      '--allowance', 'chapter 2 pictures', '--today', '2026-10-13T12:00', '--settings', settings.path], capture_output=True, text=True)
+brief = [l for l in run.stdout.splitlines() if l.startswith('For helper briefs:')]
+check.true('the ledger prints a line for helper briefs with the true remaining figure, and says another service needs a fresh yes',
+           run.returncode == 0 and brief and 'US$8.7' in brief[0] and 'fresh yes' in brief[0] and 'fal only' in brief[0], brief[0][:220] if brief else run.stdout[-200:],
+           recorded='Decisions item 31: one brief said US$3 when about US$8.70 was left')
+
 # 10. status of a finished-but-incomplete run (round 4's chunk logs: no process alive)
 status = budget.filming_status(os.path.join(HERE), 300, settings)
 check.equal('a folder with no filming process alive reads as stopped', status['state'], 'stopped')

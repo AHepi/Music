@@ -131,6 +131,21 @@ except sp.SpecProblem as problem:
 check.true('all the problems of a file are said at once: reserved name, unknown key (with the allowed ones), duplicate name, bad name, missing hook, args without a hook, missing scene',
            all(word in outcome for word in ('reserved name', 'is not a setting a variation can change', 'two variations are called "a"', 'plain characters', 'script hook', 'belong to a script hook', 'is not there')), outcome[:300])
 
+# the frame shape of a place for the film (fix round, 23 October 2026): a wide 600 x 400 picture through a camera placed for 1080 x 1920 shows a different frame, so with no
+# size given a place whose settings say "for_film": true is drawn in the film's tall shape (360 x 640); the settings named in the file, else place-settings.json beside the scene
+film_folder = os.path.join(folder, 'film-place')
+os.makedirs(film_folder)
+open(os.path.join(film_folder, 'scene.blend'), 'wb').write(b'not a real scene')
+write_json(os.path.join(film_folder, 'place-settings.json'), {'for_film': True})
+film_spec_path = write_json(os.path.join(film_folder, 'film.json'), {'change': 'moss', 'scene': 'scene.blend', 'cameras': ['View wide'],
+                                                                     'variations': [{'name': 'a', 'set': {'amount.dirt': 0.2}}, {'name': 'b', 'set': {'amount.dirt': 1.8}}]})
+check.equal('a place for the film ("for_film": true in place-settings.json beside the scene, no size given) draws its variations in the film\'s tall shape, 360 x 640',
+            sp.read_spec(film_spec_path)['size'], [360, 640])
+check.equal('...and a control: a place not marked for the film keeps 600 x 400', sp.read_spec(write_spec('wide.json', [{'name': 'a', 'set': {'amount.dirt': 0.2}}]))['size'], [600, 400])
+check.equal('...a size the file gives wins ("picture": {"size": [600, 400]})', sp.read_spec(write_json(os.path.join(film_folder, 'given.json'), dict(
+    json.load(open(film_spec_path)), picture={'size': [600, 400]})))['size'], [600, 400])
+check.equal('...and so does --size', sp.read_spec(film_spec_path, size=[180, 320])['size'], [180, 320])
+
 ten_values = [0.0, 0.2, 0.4, 0.6, 0.8, 1.2, 1.4, 1.6, 1.8, 2.0]          # the amount SCALES the saved scene (1.0), from 0 to 2: ten values 10 percent of the range apart, around 1.0
 ten = [variation(f'm{i}', **{'amount.moss_and_algae': value}) for i, value in enumerate(ten_values)]
 ten.append(variation('m-near', **{'amount.moss_and_algae': 0.45}))
@@ -547,6 +562,14 @@ scout_doc = json.load(open(os.path.join(scout_folder, 'variations-result.json'))
 check.true('`variations scout` draws the same file HERE, in ONE job, tiny (240 x 160 from the house numbers), and writes a result marked as a scout beside the file',
            code == 0 and scout_doc['scout'] is True and scout_doc['size'] == [240, 160] and len(scout_doc['jobs']) == 1 and os.path.exists(scout_doc['sheet']['path'])
            and scout_doc['sheet']['bytes'] <= 400 * 1000, scout_text[-300:])
+film_scout_file = write_json(os.path.join(film_folder, 'scouted.json'), {'change': 'scouted moss', 'scene': 'scene.blend', 'settings': 'place-settings.json', 'cameras': ['Camera A', 'Camera B'],
+                                                                        'variations': scouted_variations})
+film_code = runner.run_variations(options(action='scout', spec=film_scout_file, ledger=os.path.join(folder, 'ledgers', 'film-scout.jsonl'), blender=fake_blender_path, where='local'),
+                                  say=say, environ={})
+film_result = os.path.join(film_folder, 'scouted-scout', 'variations-result.json')
+film_scout_doc = json.load(open(film_result)) if os.path.exists(film_result) else {}
+check.true('...and the scout of a place for the film is drawn tall too (144 x 256: about the scout\'s number of dots, in the 9:16 shape)', film_code == 0 and film_scout_doc['size'] == [144, 256],
+           f'exit {film_code}, size {film_scout_doc.get("size")}')
 check.true('...it finds the two variations that would not show (the fake worker ignores rubbish) and says plan and run will drop them before any card',
            {'rubbish-low', 'rubbish-high'} <= set(scout_doc['invisible']) and 'would not show on a card' in scout_text and '"rubbish-low"' in scout_text, [l for l in spoken if 'would not show' in l][:1])
 check.true('...it costs no card seconds and is NOT a batch: nothing at all is written into the ledger (the batch rule does not count it)', not os.path.exists(ledger_scout))

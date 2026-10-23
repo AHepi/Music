@@ -13,10 +13,9 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES, project_folder, PROJECT_WORDS  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, project_folder, PROJECT_WORDS, work_folder  # noqa: E402
 from settings import load_settings  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
@@ -34,7 +33,7 @@ CH1 = os.path.join(KIT, 'examples', 'austerity-chapter-1')
 CH2 = os.path.join(KIT, 'examples', 'inflation-chapter-2')
 NEW_TIMELINE = os.path.join(KIT, 'examples', 'inflation-chapter-2-newcomers', 'timeline-estimated.json')
 RECORDINGS = os.path.join(project_folder() or '(project not found)', 'chapter-2-inflation', 'narration', 'recordings')   # audio: not in the plugin
-WORK = tempfile.mkdtemp()
+WORK = work_folder()
 
 
 def problems(result, check_name=None, verdict=None, page=None):

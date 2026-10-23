@@ -19,6 +19,11 @@ noisier or more scan-like, make fewer, bigger, cleaner shapes (a moss patch is o
 edge, a crack is one clean dark line, a peg is one small round shape, a grass tuft is 5 to 9 simple blades).
 
 ## 1. Form
+A worked example of the person's own words for a painted look (an earlier place): "No rounded smooth curves. Just edges and
+flat surfaces that approximate a curve." That meant broad, few, unequal colour passages; marks that differ by material;
+chiselled, unequal planes; short mineral marks; depth from colour and from losing edges; the whole picture judged first.
+Only the ground and pebbles were smooth-shaded, never architecture or lanterns. Write this place's own rule here in the
+person's words when they gave any, then say what it means for shapes.
 <How big and simple the shapes are, how chunky, how soft; what the silhouettes are, so that a viewer can name every
 object from its outline when they squint; how bevels read (a generous 1 to 3 cm?). Repeats allowed? (rows of tiles, planks)>
 

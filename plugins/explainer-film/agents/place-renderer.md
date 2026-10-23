@@ -39,7 +39,15 @@ say that they are not a fair look at the place.
 3. If settings for the card are missing, the client says so in one sentence and exits 2: report that sentence. Never look
    for the settings yourself, never open the folder where the rented-card account keeps its settings, never print or write a key
    or an id anywhere.
-4. Write the job file once (see section 3) and send ONE job for all the views. Many tiny jobs cost many wake-ups.
+4. Write the job file once (see section 3) and send ONE job for all the views. Many tiny jobs cost many wake-ups. Draw
+   every view of one place with the same renderer: the painter follows the plate's mood, and EEVEE streets came out cold
+   blue while Cycles streets came out warm gold, so never mix the engines inside one place. If any view of the place
+   needs Cycles, draw every view with Cycles (`"renderer": "cycles"` in place-settings.json), the unlit ones too.
+4b. Never send a message to a helper that is spending money while it runs (a message once woke a second copy: 8 extra
+   paid calls, about US$0.70). `explainer-film-place card-time check` refuses a second job under your name while one is in
+   flight ("already has a job in flight"): wait for the first, never send it again.
+4c. Write the job file, your notes and anything with a price through the file-writing tool or a quoted here-document
+   (`<<'EOF'`): written through the shell, US$0.048 once became US/bin/bash.048. Search such a file for `bin/bash`.
 5. The job taker on the card runs any shell command it is sent, and the person's key is the only lock. So you draw only with
    `render` and a job file. Never use the client's run action with a free-form command, never upload anything but the scene
    and the job, and never change or purge anything on the account.

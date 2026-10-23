@@ -1,5 +1,5 @@
 """What this does: the FREE SCOUT of a variations batch. Before a batch goes to the rented cards, `explainer-film-place variations scout FILE.json` draws the very same variations HERE,
-on this computer, tiny (place_variations.scout_size_pixels, 240 x 160) and with few samples, in one job, measures them and says which variations would come out nearly the same as the
+on this computer, tiny (place_variations.scout_size_pixels, 240 x 160; 144 x 256 for a place whose settings say "for_film": true) and with few samples, in one job, measures them and says which variations would come out nearly the same as the
 saved scene or as each other. It costs no card seconds and it is not a batch (the batch rule does not count it). Then `variations plan` and `variations run` read the scout by themselves and
 drop those variations BEFORE anything goes to a card, each with a sentence that says why. The scout also reads what the saved scene really has for every dial the batch varies (lowest and
 highest over its materials), so the settings check before drawing compares with the real scene instead of a dial's default.
@@ -124,7 +124,7 @@ def run_scout(options, say=print, blender=None):
     from . import runner          # runner imports this module; imported here so the two do not import each other at load time
     spec = spec_module.read_spec(options.spec, scene=getattr(options, 'scene', None), settings=getattr(options, 'settings', None), cameras=getattr(options, 'cameras', None),
                                  engine=getattr(options, 'engine', None) if getattr(options, 'engine', None) not in (None, 'auto') else None)
-    size = runner._size_option(getattr(options, 'size', None)) or list(numbers.value('place_variations.scout_size_pixels'))
+    size = runner._size_option(getattr(options, 'size', None)) or list(numbers.value('place_variations.scout_size_pixels_film' if spec.get('for_film') else 'place_variations.scout_size_pixels'))
     spec = dict(spec, size=[int(size[0]), int(size[1])], samples=getattr(options, 'samples', None) or None)
     checked = spec_module.check_before(spec)
     for line in checked['lines']:

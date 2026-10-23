@@ -20,6 +20,25 @@ eye, plugin 1.4.0 fix round). `renderer-for` names it ("water ... is in view"). 
 do not quietly fall back to EEVEE: say so, and draw only tiny Cycles previews here, or ask the person to set up a card.
 The Scenario skills default to EEVEE for finals; the film owner's rule wins.
 
+**One renderer for every plate of one place.** EEVEE streets came out cold blue and Cycles streets warm gold (mostly
+because EEVEE's light cut-off stops lamp light reaching the road; lowering the cut-off makes EEVEE as slow as Cycles),
+and the painter follows the mood of the plate it is given (judged, the wet street). So do not mix renderers inside one
+place, and do not compare pictures across them. This rule wins over the per-scene rule above: if any plate of a place
+needs Cycles, draw every plate of that place with Cycles (`"renderer": "cycles"` in place-settings.json), the unlit
+ones too. Cycles also showed effects of its own: a fire drum lit orange, a speck
+at a roof corner, a sky dome that darkened. NOT yet tried: Cycles pictures in a moving shot (its noise clean-up could
+flicker from frame to frame), and whether the painting checks, tuned on EEVEE plates, hold for Cycles plates (the
+preflight's plates stage says so as a LOOK). Test one before you send a Cycles plate to the paid painter.
+
+**EEVEE against Cycles on the whole wet street** (times measured, look judged): the bricks and stone look the same (the same
+scans); Cycles clearly wins on wet ground (mirrored lamps and fronts, warm light reaching the road, clean gutter water);
+EEVEE keeps joints crisper and shadows with detail; 3.7 s against 14.1 s a picture.
+
+**Light groups save a paid redraw.** Draw once with each light on its own light group (sun, sky, fill, a hall's glow, a
+lantern) into one multi-layer EXR, so the glow can be rebalanced and the picture regraded afterwards for free. Light groups
+are Cycles only; they must add up to the normal picture (within 2 percent, measured; `style-rule-and-measures.md`); keep
+caustics off, and bloom only above 1.0.
+
 ## 2. Why a rented card
 
 - A shared computer without a graphics card is slow: on the one this plugin was made on, a small EEVEE picture of a

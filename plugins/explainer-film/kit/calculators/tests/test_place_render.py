@@ -18,14 +18,13 @@ import re
 import stat
 import subprocess
 import sys
-import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, KIT, FIXTURES, blender_program  # noqa: E402
+from checks import Checker, KIT, FIXTURES, blender_program, work_folder  # noqa: E402
 
 PLACE_KIT = os.path.join(KIT, 'place-kit')
 sys.path.insert(0, PLACE_KIT)
-folder = tempfile.mkdtemp(prefix='place-render-test-')
+folder = work_folder('place-render-test-')
 os.environ['PLACE_CARD_LEDGER'] = os.path.join(folder, 'card-time-ledger.jsonl')      # every rented-card command writes a ledger: keep this test's out of the plugin folder
 os.environ['WORKER_VOLUME'] = os.path.join(folder, 'volume')
 os.makedirs(os.environ['WORKER_VOLUME'])
@@ -277,6 +276,9 @@ check.true('...and a "sent" line was written the moment it went out (with an est
            and card_time.used_seconds(ledger_entries, 'unnamed-helper') == round(sum(e['card_seconds'] for e in ledger_entries if e['kind'] in ('job', 'small')), 1), f'{sent_lines}')
 check.true('...and so are its small jobs (uploads, checks, the pictures coming back), as one entry', len([e for e in ledger_entries if e['kind'] == 'small']) == 1)
 Parsed.role = 'planner'
+# a fresh ledger for this check: the first run above uploads the kit in 1000-byte pieces, thousands of pretend small jobs whose seconds grow with
+# the kit's size; once they passed the whole job's 3600 s (fix round, 23 October 2026) the planner was refused for the TEAM total instead of its role
+rented_environment['PLACE_CARD_LEDGER'] = os.path.join(folder, 'card-time-ledger-refused.jsonl')
 card_refused = FakeCard()
 said_refused = []
 code_refused = rc.render_on_rented(Parsed, rc.Client(card_refused, sleep=lambda seconds: None), rented_environment, said_refused.append)

@@ -19,7 +19,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, CALCULATORS, FIXTURES  # noqa: E402
+from checks import Checker, CALCULATORS, FIXTURES, work_folder  # noqa: E402
 
 KIT = os.path.dirname(CALCULATORS)
 TOOLS = os.path.join(KIT, 'paper-film', 'tools')
@@ -76,7 +76,7 @@ def still_shot_log(start, end, move_from, move_to, until, name='shot', page=1, s
 
 
 def write(data):
-    path = os.path.join(tempfile.mkdtemp(prefix='camera-audit-'), 'camera.json')
+    path = os.path.join(work_folder('camera-audit-'), 'camera.json')
     with open(path, 'w') as handle:
         json.dump(data, handle)
     return path

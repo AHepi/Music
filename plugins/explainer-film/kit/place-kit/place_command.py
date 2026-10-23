@@ -2,7 +2,8 @@
 the plain verbs itself (check-presets, ownership-diff, measure, crops, rent, --verbs) and starts Blender in the background for every verb that works
 on a scene: it finds Blender (the --blender option, then the BLENDER environment variable, then machine-settings.env beside the kit, then the PATH),
 runs `blender -b --disable-autoexec --python-exit-code 1 SCENE.blend --python blender_run.py -- VERB options`, and hands back Blender's output and exit
-code (0 pass, 1 fail, 2 an input is missing or unusable). A verb that may draw with EEVEE (render, normals-test) is started under xvfb-run -a when that
+code (0 pass, 1 fail, 2 an input is missing or unusable). With the environment variable EXPLAINER_FILM_BLENDER_THREADS=N set (for example 2 when
+several helpers share one computer), every Blender run gets -t N; unset, Blender chooses as before. A verb that may draw with EEVEE (render, normals-test) is started under xvfb-run -a when that
 exists and no screen is set, because EEVEE needs a screen on a machine without a graphics card (set PLACE_NO_XVFB=1 to switch that off).
 It refuses a verb that needs a scene when the scene file is missing, with one plain sentence naming the file and how to make one.
 
@@ -44,8 +45,9 @@ def wants_screen(verb):
 
 
 def blender_command(blender, scene, verb, verb_args, with_screen=False):
-    """The full command list that runs one verb inside Blender."""
-    command = [blender, '-b', '--disable-autoexec', '--python-exit-code', '1']
+    """The full command list that runs one verb inside Blender. With EXPLAINER_FILM_BLENDER_THREADS=N set, Blender gets -t N (at most N processor
+    threads, so several helpers on one computer do not starve each other); unset, the command is as it always was."""
+    command = [blender, '-b'] + cli.blender_thread_arguments() + ['--disable-autoexec', '--python-exit-code', '1']
     if scene:
         command.append(scene)
     command += ['--python', os.path.join(HERE, 'blender_run.py'), '--', verb] + verb_args

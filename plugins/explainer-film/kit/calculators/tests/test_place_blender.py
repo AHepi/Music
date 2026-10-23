@@ -1,5 +1,5 @@
 """What this does: tests the place kit INSIDE Blender, on two small made-up places (a flat hut of plain boxes with a plank that floats, and a yard with sheds, a fence, a well, a barrel
-with iron bands, an iron post and a stump on a big flat ground), by running the same commands a model runs: `explainer-film-place audit`, `finish`, `normals-test`, `undo`, `light`.
+with iron bands, an iron post and a stump on a big flat ground, with a ring of far hills as its horizon), by running the same commands a model runs: `explainer-film-place audit`, `finish`, `normals-test`, `undo`, `light`.
 What it proves, and how (each measurement is read straight from Blender's own data by fixtures/place/probe_place.py, not from the kit's own audit):
   1. The flat hut FAILS the audit and the report names what it lacks and the floating plank; the finished hut passes; a quick trial finishes but is refused as a final.
   2. Every treatment is really there after `finish`: normal maps are OpenGL, Non-Color, wired to the shader and point the right way (and a copy with the green flipped reads wrong, so
@@ -24,11 +24,10 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from checks import Checker, KIT, FIXTURES, blender_program, skip  # noqa: E402
+from checks import Checker, KIT, FIXTURES, blender_program, skip, work_folder  # noqa: E402
 
 blender = blender_program()
 if not blender:
@@ -40,7 +39,7 @@ HUT = os.path.join(FIXTURES, 'place', 'make_hut_scene.py')
 YARD = os.path.join(FIXTURES, 'place', 'make_yard_scene.py')
 PROBE = os.path.join(FIXTURES, 'place', 'probe_place.py')
 check = Checker('place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo')
-folder = tempfile.mkdtemp(prefix='place-blender-test-')
+folder = work_folder('place-blender-test-')
 environment = {name: value for name, value in os.environ.items() if name not in ('RUNPOD_API_KEY', 'RUNPOD_ENDPOINT_ID', 'RENDER_SETTINGS_FILE')}
 environment['BLENDER'] = blender
 timings = {}
@@ -124,12 +123,13 @@ check.equal('the same quick scene is accepted as a trial with --allow-quick', co
 # ---------------------------------------------------------------- 2. the treatments are really there
 facts_hut = probe(finished_hut, 'facts')
 code, text, seconds = place('finish', yard, '--settings', yard_settings, '--save-as', path('yard', 'finished.blend'))
-timings['finish, yard (36 x 26 m ground, 41 objects, one road), full size'] = seconds
+timings['finish, yard (36 x 26 m ground, 42 objects with the far hills, one road), full size'] = seconds
 check.true('the yard finishes and passes the audit (exit 0 or a LOOK-only warning)', code == 0, f'exit {code}: ' + ' '.join(lines(text, 'FAIL'))[:200])
 yard_finished = path('yard', 'finished.blend')
 facts = probe(yard_finished, 'facts')
 kit_materials = [(o['name'], m) for o in facts['objects'] if not o['scatter'] for m in o['materials'] if m['name'].startswith('PK ')]
-check.true('every visible object has a kit material (not a plain colour any more)', all(o['materials'] and o['materials'][0]['name'].startswith('PK ') for o in facts['objects'] if not o['scatter']), f'{len(kit_materials)} slots')
+check.true('every visible object has a kit material (not a plain colour any more); the far hills (role backdrop) keep their plain colour', all(o['materials'] and o['materials'][0]['name'].startswith('PK ') for o in facts['objects'] if not o['scatter'] and (o['role'] or '').split('.')[0] != 'backdrop')
+           and any((o['role'] or '') == 'backdrop' and not o['materials'][0]['name'].startswith('PK ') for o in facts['objects']), f'{len(kit_materials)} slots')
 
 directions = probe(yard_finished, 'directions')
 partnered = [i for i in directions['images'] if i['partner']]

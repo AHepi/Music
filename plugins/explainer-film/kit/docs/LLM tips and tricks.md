@@ -26,12 +26,12 @@ How to read it:
 | `script` | before recording | `lint_script.py before`, the estimated timeline, the voice's credits and dollars, the spend ledger | recording the narration |
 | `record` | after recording | `lint_script.py after`, `sound_gates.py voice` | using the recordings |
 | `shots` | before building or drawing a place's views | `place_facts.py check`, `plan_shot.py`, `view_audit.py`, `plan_effects.py wind`, `plan_lights.py plan`, `plan_states.py plan`, each view's check file | building and drawing the views and plates |
-| `place` | after a place is built, before its views are drawn (order: `shots`, build, `place`, `plates`) | `place_audit_check.py check` (roles, treatments, layer amounts, normal maps, UVs, displacement, construction, scale, keep-out, renderer), a stale-audit check against the scene file, and when given `picture_measures.py check` and `place_audit_check.py fresh` | drawing the place's views and plates (a flat, clean or floating place is drawn again) |
-| `plates` | before paying for paintings | `plan_lights.py render-log`, the shot checker's report (new problems only), `paint_request.py preflight` and `price`, `model_lint.py`, the spend ledger, and the place audit again when a scene is named (a LOOK says so when none is) | asking the painter |
-| `paint` | after each painting arrives | `after_painting.py check` | using the painting |
+| `place` | after a place is built, before its views are drawn (order: `shots`, build, `place`, `plates`) | `place_audit_check.py check` (roles, treatments, layer amounts, normal maps, UVs, displacement, construction, scale, keep-out, renderer; film frame, world, sun, lettering and the object count), a stale-audit check against the scene file, and when given `picture_measures.py check` and `place_audit_check.py fresh` | drawing the place's views and plates (a flat, clean or floating place is drawn again) |
+| `plates` | before paying for paintings | `plan_lights.py render-log`, the shot checker's report (new problems only), `paint_request.py preflight` and `price`, `model_lint.py`, the spend ledger, the place audit again when a scene is named (a LOOK says so when none is), and LOOKs for a Cycles plate (the painting checks were tuned on EEVEE plates) and for one place drawn with two engines | asking the painter |
+| `paint` | after each painting arrives | `after_painting.py check` (with its LOOKs: bottom fifth, clouds, how much of the ground's brightness arrives with `--toe`; a behind painting's "pale patch" FAILs) | using the painting |
 | `pages` | while building pages | `plan_page_timing.py check`, `check_page_layout.mjs`, `camera_audit.py`, `plan_effects.py lint`, all from `page_events.mjs`'s events | filming the pages |
-| `film` | before filming | a critique newer than every page file, each finding fixed or accepted; a passed `pages` report newer than every page file; `plan_budget.py filming` | filming the chapter |
-| `finish` | after finishing | `sound_gates.py` loudness, length and alignment; `find_jumps.py` with the planned cuts; `plan_budget.py push` | sending or publishing |
+| `film` | before filming | a critique newer than every page file, each finding fixed or accepted, with a history critic among its critics (a FAIL without one, unless accepted); a passed `pages` report newer than every page file; `plan_budget.py filming` | filming the chapter |
+| `finish` | after finishing | `sound_gates.py` loudness, length and alignment; `find_jumps.py` with the planned cuts; `plan_budget.py push`; a fresh helper's critique of the filmed clip in motion (`--clip-critique`, required: newer than the film, no must-fix finding left open) | sending or publishing |
 
 How to run it:
 - `explainer-film-preflight STAGE --project FILM_FOLDER [inputs]`. Name a film's files once in a preflight
@@ -77,7 +77,16 @@ How to run it:
     *Check:* `calculators/settings.py show SECTION` prints each number's kind.
 11. Don't edit a file while helpers are checking it. Every report names its tool version and settings, so
     two helpers can tell whether they checked the same thing.
-12. Ask the user only about what they want, risk or money. Make routine technical choices yourself.
+12. Ask the person only about what they want, risk or money. Make routine technical choices yourself.
+13. Prove "unchanged" with several draws, and run the control before you blame a change. Some pictures come out two
+    slightly different ways from one run to the next: the house sample at 20 s differed in 7.7 percent of its dots, by
+    at most 7 of 255, with nothing changed, and the unchanged old stage alone gave both versions (lesson 141). Draw each
+    comparison picture at least three times with the old and the new version, say how many pictures and draws you
+    compared, and call a difference real only when it shows in every draw and is bigger than the old-against-old
+    difference. Before you blame a change for a faint speckle, redraw the unchanged old version several times first.
+    Write what was measured, never "dot for dot". *Check:* `calculators/regression_compare.py --old OLD_FOLDER --new NEW_FOLDER`.
+14. When a planning or filming check fails, look at the free disk before you blame your change: the filming plan keeps
+    a 4 GB reserve, and a machine with 1.3 GB free failed the check for that reason alone (lesson 140). *Check:* `df -h`.
 
 ## 1. Numbers to know
 
@@ -132,7 +141,7 @@ How to run it:
 | Required treatments missing | none allowed | judged | `place_audit.required_treatments_missing_allowed` |
 | Share of treatments switched off | at most a quarter, each with a reason | invented | `place_audit.off_share_max` |
 | Touching, carried | within 5 mm; rest patch 16 square centimetres | judged | `place_construction.touch_metres`, `place_construction.rest_patch_square_centimetres_min` |
-| Longest stretch between supports | 1.38 m | judged | `place_construction.support_span_metres_max` |
+| Longest free stretch between supports | by role: planks and floor boards 1.38 m, beams and fences 2.5 m; longer only with a sourced `free_span` fact in the place's facts file | judged | `max_span_metres` in `place-kit/data/roles.json` (`place_construction.support_span_metres_max` keeps the garden's 1.38 m) |
 | Floating | a gap over 5 mm fails | judged | `place_construction.float_gap_millimetres_fail` |
 | Doorway floor | within 0.30 m below the sill | invented | `place_construction.doorway_floor_gap_metres_max` |
 | Size out of range | fails beyond 1.5 times the range | invented | `place_scale.fail_factor` |
@@ -238,7 +247,7 @@ For places built in 3D and painted over:
 15. Put the view's kinds of shot and its accepted problems in its check file (`kind_of_shot`, `figures`,
     `accepted` with rule, reason, who and date), so a kept problem shows as known instead of failing every
     run. *Check:* `paper-film/tools/check_shot.py` reads them.
-16. When the user likes a picture, match its camera by landmarks before moving any prop. **Judgement:** read
+16. When the person likes a picture, match its camera by landmarks before moving any prop. **Judgement:** read
     the landmarks by hand; the line finder only helps.
 17. A rule-of-thirds reason was tested and dropped (log 30). Don't use it.
 18. Indoors, props rest on declared surfaces (the checkout's counter at 0.885 m) and the reach is measured
@@ -318,8 +327,9 @@ For painted relief rooms and paper pages:
 6. Show a dark subject (an iron gate, a doorway) against a lit background and judge it by silhouette
    contrast. Whether a view counts as a "dark subject" is a **judgement**: round 5 tried to make the gate the
    brightest thing and failed. *Check:* `plan_lights.py contrast`; the `dark_subject` kind of shot.
-7. Warm light covers 1.5 to 3% of the frame, and the subject is at least 1.8 times the frame's mean.
-   *Check:* the shot checker on a finished still.
+7. Warm light covers 1.5 to 3% of the frame, and the subject is at least 1.8 times the frame's mean (still-life and
+   lamp-lit views; in daylight the subject stands out by its own narrow key light, never by putting the place in shade:
+   rule 12). *Check:* the shot checker on a finished still.
 8. Tune by the checker's numbers on small renders, one named light per round. The notice corner took 26
    lighting rounds by eye; most changed position, linking or colour, not watts. *Check:* the shot checker;
    `plan_lights.py plan` for the starting point. (The automatic tuner is not built.)
@@ -329,6 +339,19 @@ For painted relief rooms and paper pages:
     **judgement** (the darkest Works view was accepted at 1.6). *Check:* `plan_lights.py exposure`.
 11. Never add a lamp to projected surfaces; signs on their own surfaces need copies of the plate's lights in
     the page, or they look flat.
+12. The sun can do nothing: check that it reaches the ground you show before you judge the materials. Shadow
+    length = height / tan(elevation): a 4 m hall with the sun 9 degrees up throws a shadow about 25 m long, and in
+    the Japanese garden that, with hazy backdrop hills, put most of the view in shadow while the materials were
+    blamed. Raise the sun or move what is in its way; far shapes get the role `backdrop` (they cast no shadow).
+    *Check:* the place audit's line "place: sun" (the share of the seen ground in shadow, and the object that shadows most).
+13. A mark nobody can explain (a white shape, a streak): hide one group of objects at a time and draw a small
+    picture each time until the mark goes. Glowing things reflected in water are a common cause (the garden's pond
+    mirrored its glowing paper screens): roughen the water slightly, dim the glow, or hide the lamps from
+    reflections. **Judgement** (no tool hunts it yet).
+14. Lit rooms at night: make back walls solid (light leaked out of a cottage's back windows); rooms lit by their own
+    glow are cheap and can change on a word; in a dark room the cut-outs go dark too; a street needs its own light (a
+    lit pavement, a lamp's pool of light), or the people look as if they stand inside the lit rooms. **Judgement**;
+    the house sample's code shows each (its look was rejected; its code is kept).
 
 ## 8. Models and Blender
 
@@ -391,7 +414,7 @@ built in Blender goes through it, whatever the request says. In short:
     (on the canal lock half of a first moss batch showed nothing on the card, and the scout named exactly those). A dial that shows only above some value: spread it over that part
     (`variations make --range KEY LOW HIGH`). `amount` and `master` scale the saved scene (1 = as saved, up to 2).
     *Check:* `explainer-film-place variations make | scout | plan | run | refine`; the batch rule is counted by `card-time` (a third batch for one change is refused; a scout is not a batch).
-18. Small quick pictures (600 x 400 for trying variations, EEVEE or low-sample Cycles; 1200 x 800 for the checkers' previews) until the end; full-size pictures drawn ONCE, at the very end. *Check:* `variations` draws small by itself; `render --finals` only on the last audited file.
+18. Small quick pictures (600 x 400 for trying variations, or 360 x 640 for a place marked for the film, EEVEE or low-sample Cycles; 1200 x 800 for the checkers' previews, 540 x 960 for a film place) until the end; full-size pictures drawn ONCE, at the very end. *Check:* `variations` draws small by itself; `render --finals` only on the last audited file.
 19. Every card job goes in the card-time ledger and each helper has an allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0: judged); the tool warns at 80 percent and refuses
     past it; going over needs a written reason and never more than half again. Report the card seconds you used. *Check:* `explainer-film-place card-time show | check`.
     A batch waits for the cards (1 to 3 minutes for a small place): give the command a long time limit. If it is cut off, its jobs still count (each was written as "sent"), and
@@ -424,8 +447,11 @@ built in Blender goes through it, whatever the request says. In short:
 1. Line every painting up with its plate before anything else: the painter shifted one 3 px and stretched it
    0.65%. *Check:* `calculators/after_painting.py check --painting P --plate PLATE --check C --facts F --out-folder D`.
 2. Make the behind painting from the same state, line it up against the main painting, then keep the main
-   painting's shadows round the near props: the painter took them away (lesson 122). *Check:*
-   `after_painting.py check --behind B`.
+   painting's shadows round the near props: the painter took them away (lesson 122). The same state means wet with
+   wet and dry with dry: a wet front painting over a dry behind painting shows a pale dry patch where the camera
+   uncovers what a near prop hid (59 percent of the road dots came out lighter). Wet and dry paintings go in and out
+   as a pair, with the page's look line; keep the other pair beside them with a note on how to go back. *Check:*
+   `after_painting.py check --behind B` (it fails with a "pale patch" line).
 3. Count the figures and check their outlines and darkness: painted men lifted from 15% to 50% of their
    surroundings' brightness turned mid-grey on a phone. Darken them back. *Check:* `after_painting.py`
    (figures).
@@ -433,7 +459,7 @@ built in Blender goes through it, whatever the request says. In short:
    invented, so look at the head).
 5. Save PNG only. A JPEG moves every pixel, and a state picture made from it changes everywhere. *Check:*
    `after_painting.py` writes PNG.
-6. If a result looks like a photograph, re-ask once, and ask the user before paying again. Whether it looks
+6. If a result looks like a photograph, re-ask once, and ask the person before paying again. Whether it looks
    painted enough is a **judgement**.
 
 ## 11. State changes on a held shot
@@ -502,7 +528,7 @@ built in Blender goes through it, whatever the request says. In short:
 
 ## 14. Filming (stage `film`)
 
-1. Work out the time and tell the user before starting. Profile first: the old cost table missed round 5's
+1. Work out the time and tell the person before starting. Profile first: the old cost table missed round 5's
    filming by half, while a short profile got three rounds within about 5%. *Check:*
    `calculators/plan_budget.py profile-commands EVENTS.json --scene CHAPTER`, film those pieces, then
    `plan_budget.py measure LOGS... --events EVENTS.json --out rates.json` and
@@ -532,6 +558,10 @@ built in Blender goes through it, whatever the request says. In short:
 6. Run the jump finder with the planned cuts; any jump that is not a planned cut is a must-fix. *Check:*
    `paper-film/tools/find_jumps.py` with the cut list `plan_page_timing.py check` prints.
 7. Check files before pushing: GitHub refuses anything over 100 MB. *Check:* `calculators/plan_budget.py push`.
+8. Have a fresh helper judge the filmed clip in motion (the film-critic agent's clip mode: jumps, flicker, seams, pale
+   patches, words on screen at the wrong time), then fix its must-fix findings. Stills miss what moves. *Check:* the
+   `finish` stage refuses to run without `--clip-critique CRITIQUE.json` (exit 2), and fails one older than the film or
+   with a must-fix finding neither fixed nor accepted.
 
 ## 16. Money and approval
 
@@ -548,9 +578,18 @@ built in Blender goes through it, whatever the request says. In short:
    what is left.
 5. Budget one repaint for every two paintings and one page of re-recording.
 6. Do every free step first, then ask once, with the exact cost. A vague reply is not a yes, and a refusal
-   is never worked around. **Judgement:** only the user's own clear yes counts.
+   is never worked around. **Judgement:** only the person's own clear yes counts.
 7. Rented-card time is limited the same way as painting money: each helper has an allowance in card minutes, written in a ledger, and the tools refuse past it. Try variations in batches (one sweep, about 10
    far-apart variations, one sheet, at most one more batch); full-size pictures once at the end (section 8a, tips 16 to 19). *Check:* `explainer-film-place card-time show`.
+8. Write any file that holds prices with the file-writing tool or a quoted here-document (`<<'EOF'`): written
+   through the shell, US$0.048 became US/bin/bash.048 (lesson 142). Then search the file for `bin/bash`.
+   *Check:* `plan_budget.py ledger` and `plan_budget.py push` fail on it.
+9. An allowance covers the kind of spending it was given for (pictures and props from the painting service; voice
+   only from the voice service). Spending inside it is still reported each time, a different kind of spending needs
+   a fresh, clear yes, and a helper's brief gets the true remaining figure (one brief said US$3 when US$8.70 was
+   left). *Check:* `plan_budget.py ledger` prints a line that starts "For helper briefs:".
+10. Never send a message to a helper that is spending money while it runs: it woke a second copy, which made 8 extra
+    paid calls (about US$0.70). *Check:* `explainer-film-place card-time check` refuses a second card job in flight.
 
 ## 17. The people test's lessons (lessons 135 to 139)
 
@@ -617,8 +656,12 @@ The tools measure; people still judge these. **Judgement: ask a critic** for eac
 
 - Whether a detail reads as something else on a phone (little cameras, sunglasses, wood like a contour map,
   doorways like a bar chart, a gasholder as a tank). The tools only supply phone-size sheets and a stripe test.
-- Period and story accuracy of every painted object (wrong-era tanks, coal heaps in a lockout, snow in May).
-  A history critic checks every painted object, not only the words.
+- Period and story accuracy of every painted object, built prop, person's clothes and word written on a prop:
+  "was this in that place and that year?" The project's faults: wrong-era tanks, too much coal in a lockout,
+  snow-like blotches on a May road, sacks shaped like clay jars, an oil-drum brazier more 1984 than 1926, a symbol
+  like a hooked cross. A history critic checks every one, not only the words (workflow `critique-film`, the critic
+  whose area is history), and the fact checker gets the pictures and the words on props (workflow `verify-facts`,
+  `pictures` and `propLettering`). A date on a prop and its weekday must agree (30 April 1926 was a Friday).
 - Whether motion matches the meaning of the words (a needle falling on "raising").
 - Whether machines read as machines and props as what they are (looms that read as church benches).
 - Whether a hero prop has enough detail.
@@ -627,7 +670,9 @@ The tools measure; people still judge these. **Judgement: ask a critic** for eac
 - Whether a newcomer understands, and the 3 or 4 things a newcomer must see in each shot (workflow
   `test-script-with-newcomers`; testers get only the spoken and on-screen words).
 - Whether a time cut where people vanish reads as time passing or as a glitch.
-- Whether a picture contradicts a card, beyond the small table the tools know.
+- Whether a picture contradicts a card, beyond the small table the tools know, or contradicts its own rule (a
+  closing picture said "more things made" while pointing at a cold chimney with men still waiting); and whether a
+  label's arrow runs through a number board (it must not).
 - Whether a colour or symbol carries political or commercial meaning in context.
 - Whether to keep an on-screen short form that the words check could not match to the narration.
 - The story choices: place, era, mood, which thing is the subject, which props tell the story, and what
@@ -646,7 +691,7 @@ The tools measure; people still judge these. **Judgement: ask a critic** for eac
 - Whether wear reads as designed (the style rule) and not photographic, and whether a mark that passes the dot-size rule
   still reads at phone size.
 - Whether a squint-test miss is acceptable (the garden missed at 0.883 and 0.873 against 0.92 and the person decided).
-- Paid steps: the user's own clear yes.
+- Paid steps: the person's own clear yes.
 
 How to get those judgements:
 - A fresh critic, who has not seen the work, compares it with the best frame made so far; then a skeptic

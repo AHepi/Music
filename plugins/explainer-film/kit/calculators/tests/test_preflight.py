@@ -314,8 +314,12 @@ try:
                                                                                  'fix': 'x', 'evidence': 'y', 'from': 'z'}], 'rejected': [], 'summary': ''}}, 1, 'fail'),
                  ('an open finding with a severity the workflow never uses', {'verdict': {'confirmed': [{'page': '3', 'severity': 'urgent', 'what': 'x'}]}}, 1, 'fail'),
                  ('a clean result (confirmed: []) whose critics\' raw finding the skeptic rejected',
-                  {'critics': [{'key': 'pictures', 'findings': [{'page': '3', 'time': '55', 'severity': 'must fix', 'what': 'a raw critic finding the skeptic rejected'}]}],
-                   'verdict': {'confirmed': [], 'rejected': [{'what': 'a raw critic finding the skeptic rejected', 'reason': 'wrong'}], 'summary': 'nothing to fix'}}, 0, 'pass'))
+                  {'critics': [{'key': 'pictures', 'findings': [{'page': '3', 'time': '55', 'severity': 'must fix', 'what': 'a raw critic finding the skeptic rejected'}]},
+                               {'area': 'history', 'findings': []}],
+                   'verdict': {'confirmed': [], 'rejected': [{'what': 'a raw critic finding the skeptic rejected', 'reason': 'wrong'}], 'summary': 'nothing to fix'}}, 0, 'pass'),
+                 ('critics but no history critic (period accuracy unjudged)',
+                  {'critics': [{'area': 'pictures-3-5', 'findings': []}, {'area': 'content', 'findings': []}], 'verdict': {'confirmed': [], 'rejected': [], 'summary': ''}}, 1, 'fail'),
+                 ('no "critics" list at all (an older shape: only a LOOK)', {'verdict': {'confirmed': [], 'rejected': [], 'summary': ''}}, 0, 'warn'))
         for label, content, wanted, verdict in cases:
             path = os.path.join(work, f'critique-{slug(label)}.json')
             json.dump(content, open(path, 'w'))
@@ -324,6 +328,21 @@ try:
             got = titles.get('a critique newer than every page file, each finding fixed or accepted')
             check.true(f'film: a critique with {label}: exit {wanted}' + (f', the critique check {verdict}' if verdict else ' ("not a critique-film result")'),
                        code == wanted and (verdict is None and 'not a critique-film result' in out or got == verdict), details=out.splitlines()[0])
+        history_findings = [f for c in data.get('checks', []) for f in c['findings'] if f['check'] == 'history critic']
+        check.true('film: the older shape\'s LOOK says whether a critic judged period accuracy is not known', history_findings and history_findings[0]['verdict'] == 'warn'
+                   and 'older shape' in history_findings[0]['text'], details=str(history_findings)[:200])
+        waiver = os.path.join(work, 'accepted-history.json')
+        json.dump([{'stage': 'film', 'check': 'history critic', 'reason': 'a test film of made-up pages with no period to judge', 'who': 'the test', 'date': '2026-10-20'}],
+                  open(waiver, 'w'))
+        code, out, data = run(*(film_critique(os.path.join(work, f'critique-{slug("critics but no history critic (period accuracy unjudged)")}.json')) + ['--accepted', waiver]))
+        history_findings = [f for c in data.get('checks', []) for f in c['findings'] if f['check'] == 'history critic']
+        check.true('film: an accepted entry (stage film, check history critic, with who and date) waives the history critic: KNOWN, exit 0',
+                   code == 0 and history_findings and history_findings[0]['verdict'] == 'known', details=f'exit {code}: ' + str(history_findings)[:160])
+        low_disk = [a if a != '40' else '1.3' for a in film_args]
+        code, out, data = run(*low_disk)
+        disk_lines = [f['text'] for c in data.get('checks', []) for f in c['findings'] if 'GB free now' in f['text']]
+        check.true('film: a check that fails on the free-disk reserve prints the free disk in its line', code == 1 and disk_lines and '1.30 GB free now' in disk_lines[0],
+                   details=(disk_lines[0][:200] if disk_lines else out.splitlines()[0]), recorded='project Lessons.md 140: a planning test failed at 1.3 GB free against a 4 GB reserve')
         other_events = os.path.join(work, 'events-test-clean.json.gz')
         shutil.copy(os.path.join(FIXTURES, 'page-timing', 'events-test-clean.json.gz'), other_events)
         code, out, data = run(*[a if a != events else other_events for a in film_args])
@@ -377,6 +396,81 @@ try:
     code, out, _ = run('finish', '--project', work, '--film', film_file, '--mix', film_file, '--timeline', timeline_broken)
     check.true('finish: a broken timeline is "given but it cannot be used" (exit 2), not a Python error', code == 2 and 'Traceback' not in out
                and 'not valid JSON' in out, details=out.splitlines()[0])
+    # the finish stage: a fresh critique of the FILMED clip in motion (the film-critic agent's clip mode), newer than the film
+    timeline_good = os.path.join(work, 'timeline-good.json')
+    json.dump({'chapter_seconds': 10.0}, open(timeline_good, 'w'))
+    code, out, _ = run('finish', '--project', work, '--film', film_file, '--mix', film_file, '--timeline', timeline_good)
+    check.true('finish: without a clip critique the stage stops (exit 2) and says the film-critic agent\'s clip mode makes it', code == 2 and 'film-critic agent' in out
+               and '--clip-critique' in out, details=out.splitlines()[0])
+    clip = os.path.join(work, 'clip-critique.json')
+    title = 'a fresh critique of the filmed clip in motion, newer than the film, each must-fix finding fixed or accepted'
+    for label, findings, wanted in (('an open must-fix finding', [{'time': 12.4, 'what': 'a barrel floats once the camera moves', 'severity': 'must fix', 'status': 'open'}], 'fail'),
+                                    ('the finding fixed', [{'time': 12.4, 'what': 'a barrel floats once the camera moves', 'severity': 'must fix', 'status': 'fixed'}], 'pass'),
+                                    ('the finding accepted with who and date', [{'time': 12.4, 'what': 'a pale outline for one frame', 'severity': 'must fix', 'status': 'accepted',
+                                                                                   'reason': 'shows only on a large screen', 'who': 'the director', 'date': '2026-10-20'}], 'known')):
+        time.sleep(0.05)
+        json.dump({'film': film_file, 'looked_at': ['the clip at 30 frames a second', 'the 0.5 s contact sheets'], 'findings': findings}, open(clip, 'w'))
+        os.utime(clip, (time.time() + 5, time.time() + 5))
+        code, out, data = run('finish', '--project', work, '--film', film_file, '--mix', film_file, '--timeline', timeline_good, '--clip-critique', clip)
+        clip_checks = [c for c in data.get('checks', []) if c['title'] == title]
+        verdicts = [f['verdict'] for c in clip_checks for f in c['findings'] if f['check'].startswith('clip critique finding (')]
+        check.true(f'finish: a clip critique with {label}: that finding is {wanted.upper()}', verdicts == [wanted], details=f'exit {code}; {verdicts}')
+    os.utime(clip, (time.time() - 3600, time.time() - 3600))
+    code, out, data = run('finish', '--project', work, '--film', film_file, '--mix', film_file, '--timeline', timeline_good, '--clip-critique', clip)
+    older = [f for c in data.get('checks', []) for f in c['findings'] if f['check'] == 'clip critique newer than the film']
+    check.true('finish: a clip critique older than the film fails (the film changed after it was judged)', code == 1 and older and older[0]['verdict'] == 'fail', details=str(older)[:160])
+    json.dump({'notes': 'not a clip critique'}, open(clip, 'w'))
+    code, out, _ = run('finish', '--project', work, '--film', film_file, '--mix', film_file, '--timeline', timeline_good, '--clip-critique', clip)
+    check.true('finish: a file that is not a clip critique is "given but it cannot be used" (exit 2)', code == 2 and 'not a clip critique' in out, details=out.splitlines()[0])
+
+    # the plates stage: the engine each plate was drawn with (the place kit's render record beside the picture)
+    class Collect:
+        def __init__(self):
+            self.checks = []
+
+        def add_check(self, title, findings, where='', tool=''):
+            self.checks.append((title, findings))
+
+    plates_folder = os.path.join(work, 'engine-plates')
+    os.makedirs(plates_folder, exist_ok=True)
+    items = []
+    for name, engine in (('w1', 'EEVEE'), ('w2', 'CYCLES')):
+        picture = os.path.join(plates_folder, f'{name}-plate.png')
+        open(picture, 'wb').write(b'stand-in')
+        json.dump({'view': name, 'engine': engine, 'scene': 'works-finished.blend'}, open(os.path.join(plates_folder, f'{name}-plate.json'), 'w'))
+        items.append(({'name': name, 'plate': picture}, preflight.plate_engine({'name': name}, picture)))
+    collect = Collect()
+    collect.plate_engines = items
+    preflight.plate_engines_check(collect, [i for i, _ in items])
+    mixed = [f for _, fs in collect.checks for f in fs if f['check'] == 'one engine per place']
+    check.true('plates: two plates of one place drawn with EEVEE and Cycles give a LOOK "one engine per place"', mixed and mixed[0]['verdict'] == 'warn'
+               and 'EEVEE' in mixed[0]['text'] and 'CYCLES' in mixed[0]['text'], details=str(mixed)[:200])
+    collect = Collect()
+    collect.plate_engines = [items[0], (dict(items[0][0], name='w3'), items[0][1])]
+    preflight.plate_engines_check(collect, [])
+    check.equal('plates: plates of one place all drawn with EEVEE pass', [f['verdict'] for _, fs in collect.checks for f in fs], ['pass'])
+    check.equal('plates: the render record beside a Cycles plate is read (the stage then gives a LOOK that the painting checks were tuned on EEVEE)', items[1][1][0], 'CYCLES')
+    # the paint stage passes the page's look.toe ("toe" in the plan, or --toe) on to after_painting.py --toe
+    class PaintRun:
+        def __init__(self):
+            self.work, self.notes, self.calls = work, [], []
+
+        def need(self, item, key, needed_by, required=True, why=''):
+            return item.get(key)
+
+        def read_json(self, key, path, needed_by):
+            return {}
+
+        def show_known(self, *a, **k):
+            return None
+
+        def run_tool(self, title, tool, arguments, where=''):
+            self.calls.append(arguments)
+
+    paint_run = PaintRun()
+    preflight.stage_paint(paint_run, {'painting': 'p.png', 'plate': 'plate.png', 'check': 'c.json', 'plate_facts': 'facts', 'toe': 1}, 'w1')
+    check.true('paint: the plan\'s "toe": 1 reaches after_painting.py check as --toe 1', paint_run.calls and paint_run.calls[0][-2:] == ['--toe', '1'], str(paint_run.calls)[:200])
+    check.equal('paint: --toe is an option of the preflight', preflight.build_parser().parse_args(['paint', '--toe', '1']).toe, 1)
     found = preflight.findings_from(None, 'Traceback (most recent call last):\nKeyError: step', 1)
     check.true('a tool that stops with an error is a failure that says so', found[-1]['verdict'] == 'fail' and 'stopped with an error' in found[-1]['text'],
                details=found[-1]['text'])

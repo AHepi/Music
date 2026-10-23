@@ -168,8 +168,13 @@ def role_class(role_id):
     return (role_id or '').split('.', 1)[0]
 
 
+NO_SURFACE_CLASSES = ('never', 'backdrop')    # roles that get no surface pass and no wear: helpers, sky, lights, glows, and far scenery (backdrop)
+
+
 def is_never(role_id):
-    return role_class(role_id) == 'never'
+    """True for a role the surface and wear pass leaves alone: the never.* roles and the backdrop (far scenery: a plain unlit colour that
+    casts no shadow; the audit's place: world checks it)."""
+    return role_class(role_id) in NO_SURFACE_CLASSES
 
 
 def fallback_for_unknown(obj, roles_table):

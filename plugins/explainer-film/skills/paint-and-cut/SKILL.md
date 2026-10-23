@@ -23,8 +23,8 @@ Prices change between plan and purchase (Flux 3 edit went from 2.4 to 4.8 US cen
 lesson 139 of the austerity project): read fal's live price before each paid batch, then work the total out
 instead of adding it up by hand: `python3 calculators/plan_budget.py cost PLAN.json --rate CENTS --rate-date DATE`
 (it counts every picture sent as well as the one returned, and adds a repaint for every two paintings) and
-`python3 calculators/plan_budget.py ledger LEDGER.json --next-cost DOLLARS` (what is left of the user's
-allowance, from the day it began). Do the free steps first, then tell the user the total and confirm once. A
+`python3 calculators/plan_budget.py ledger LEDGER.json --next-cost DOLLARS` (what is left of the person's
+allowance, from the day it began). Do the free steps first, then tell the person the total and confirm once. A
 vague reply is not a yes. Before plates are painted, run `explainer-film-preflight plates`; when paintings
 arrive, `explainer-film-preflight paint`.
 
@@ -32,7 +32,11 @@ arrive, `explainer-film-preflight paint`.
 
 - Model `blackforestlabs/flux-3/text-to-image`, `output_format: "png"`.
 - Rooms: `aspect_ratio: "9:16"`, `resolution: "2k"` (1536 x 2736), seen at standing eye level, "the
-  lower quarter of the picture is the empty floor/street/counter", "No people".
+  lower quarter of the picture is the empty floor/street/counter", "No people". The empty lower quarter is
+  for the paper route only: cut-out pieces stand in it. A place built in Blender and painted over (section 5)
+  never asks for it: there the nearest story thing reaches about 0.70 down the frame and the bottom third is
+  not bare floor (measured on chapter 2: in about 70 percent of frames the bottom fifth was over 30 percent
+  darker than the middle, and the review traced it to this sentence).
 - Cut-outs: `21:9` or `4:5` at 2k for groups and big figures, `1:1`/`4:5` at 1k for objects, "on a
   perfectly plain, flat, light grey background (#cfcfcf) with no floor, no cast shadow".
 - Put the SAME style words at the end of every prompt (keeps pictures matching), e.g.: "Painterly 2D
@@ -41,7 +45,11 @@ arrive, `explainer-film-preflight paint`.
   lighting. Restrained palette: deep teal-blue shadows, cold blue-grey midtones, warm amber
   lamplight, with only small touches of dull brick red. Tense, uneasy mood. Absolutely no text,
   letters, numbers, logos, emblems or symbols anywhere."
-- Never ask for real people's faces. Ask for blank placards and plain signs (models invent writing).
+- Never ask for real people's faces. Ask the painter for blank placards and plain signs only so that it
+  does not invent writing (models write garbled words). That is about the painting, not the set: every sign,
+  notice, board and book built in 3D carries real lettering made by our own code (skill
+  `build-and-paint-a-place`, step 2; the place audit's check "place: lettering"), and those lettered props
+  are what show on screen.
 - Submit up to 8 at a time, collect, then save with their prompts:
   `python3 -I paper-film/tools/save_fal_paintings.py assets/paintings/<chapter> new-paintings.json`.
 - **Look at every painting** on a contact sheet (`paper-film/tools/contact_sheet.py`): wrong era,
@@ -108,7 +116,7 @@ sections 9 to 11). Run them at these moments, from the kit folder:
    or a stepped blend from how much of the frame changes, and prints the
    `paper-film/tools/make_state_picture.py` commands.
 6. Whether a returned painting looks painted enough is a judgement: if it looks like a photograph, re-ask
-   once, and ask the user before paying again.
+   once, and ask the person before paying again.
 
 Cost: about 4.8 US cents a megapixel of the returned picture plus every picture sent (October 2026),
 so about 44 cents for a 2k repaint with a style picture:

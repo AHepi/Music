@@ -14,14 +14,27 @@ Workflow({ name: "explainer-film:verify-facts", args: {
   today: "12 October 2026",
   ledger: "/abs/path/NN Research - chapter.md",          // optional
   onScreen: "/abs/path/film-kit/paper-film/scenes/<chapter>/page-*.js",   // optional, once pages exist
+  pictures: "/abs/path/stills/sheet.jpg, /abs/path/paintings/*.png",       // optional: what the pictures show is checked for its period
+  propLettering: "/abs/path/prop-lettering.json",        // optional: every word written on a built prop (see below)
   audience: "a general New Zealand audience",            // optional
-  effort: "medium"                                       // match the user's wish
+  effort: "medium"                                       // match the person's wish
 } })
 ```
 
 If workflows are not available, do the same by hand with the Agent tool: one agent per topic group
 (at most 7) with the prompt in `${CLAUDE_PLUGIN_ROOT}/workflows/verify-facts.js` (`verifyPrompt`),
 then one final reviewer agent given all their verdicts.
+
+## Words on props and what pictures show are claims too
+
+A name written on a prop (a newspaper, a shop, a firm) is either made up on purpose and checked against real ones, or a
+real one used correctly: a newspaper masthead on a prop was checked against 1,617 New Zealand newspaper titles, and the
+colliery and firm names were invented on purpose. Never let a made-up name copy a real one by accident. Text on a prop
+is a claim: check its dates and weekdays (30 April 1926 was a Friday, 1 May a Saturday) and its wording against a real
+source. Before the check, list every string written on the props:
+`python3 calculators/list_prop_lettering.py --out prop-lettering.json` (from the kit folder; it writes
+`{"strings": [{"text", "prop", "file", "line"}]}`), and pass that file as `propLettering` and the stills and paintings
+as `pictures`, so the checkers see what the viewer sees, not only what the narrator says.
 
 ## Then test it on newcomers
 
@@ -48,10 +61,10 @@ anything above minor.
 ## Then
 
 - Apply must-fix and should-fix items. Prefer changing on-screen words; a spoken change means
-  re-recording that page and redoing the timing, mix and filming after it (tell the user the cost).
+  re-recording that page and redoing the timing, mix and filming after it (tell the person the cost).
 - Write the result into the research ledger as a new section (claim, verdict, what the sources say,
   sources, change made) and keep the raw JSON next to it.
-- Tell the user in plain words: what was checked, what holds, what changed, what is still unverified,
+- Tell the person in plain words: what was checked, what holds, what changed, what is still unverified,
   and which figures will go out of date soon (next statistics release, next central bank decision).
 
 ## What the checkers caught in chapter 2 (so you know what to expect)

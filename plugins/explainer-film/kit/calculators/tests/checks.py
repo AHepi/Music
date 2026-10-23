@@ -9,6 +9,7 @@ Use in a test:
     check.close('notice corner meeting point across', got, 0.68401, 0.0001, recorded='experiments/31 .../facts.json lines_meet',
                 proves='our sums agree with Blender\\'s own camera')
     check.true('settings file has no problems', not problems, details=...)
+    check.controls('the new measure tells alike from unlike', {'shuffled copy': 0.99}, {'blurred copy': 0.17, 'another surface': 0.09}, 0.9, 0.3)
     check.finish()
 (Not itself a test: run_all.py runs only files named test_*.py.)
 
@@ -21,10 +22,14 @@ folders; when a file is not found the check is skipped with a plain reason, neve
                             which were never put in the repository: FILM_WORKING_FILES, else none
     blender_program()       BLENDER, else the kit's machine-settings.env (written by explainer-film-setup), else blender on the PATH
     missing(paths)          the paths that are not there (a test skips a part when this is not empty)
+    work_folder(prefix)     a new temporary folder for the test's own files, removed when the test ends; kept (and its path printed) only
+                            when a check failed or the test stopped early, so the files can be looked at
 """
+import atexit
 import os
 import shutil
 import sys
+import tempfile
 
 TESTS = os.path.dirname(os.path.abspath(__file__))
 CALCULATORS = os.path.dirname(TESTS)
@@ -73,6 +78,31 @@ def missing(paths):
     return [p for p in paths if not p or not os.path.exists(p)]
 
 
+_WORK_FOLDERS = []
+_ENDED_CLEANLY = [False]          # set by Checker.finish (no check failed) and by skip(); a test that stops with an error leaves it False
+
+
+def work_folder(prefix='explainer-film-test-'):
+    """A new temporary folder for this test's own files. It is removed when the test ends, unless a check failed or the test stopped with an
+    error: then it is kept and its path printed, so the files can be looked at. Before the fix round of 23 October 2026 the tests never removed
+    theirs: /tmp held 833 MB of them on a disk with 1.4 GB free (measured), and a full disk makes checks fail for the wrong reason."""
+    folder = tempfile.mkdtemp(prefix=prefix)
+    if not _WORK_FOLDERS:
+        atexit.register(_remove_work_folders)
+    _WORK_FOLDERS.append(folder)
+    return folder
+
+
+def _remove_work_folders():
+    for folder in _WORK_FOLDERS:
+        if not os.path.isdir(folder):
+            continue
+        if _ENDED_CLEANLY[0]:
+            shutil.rmtree(folder, ignore_errors=True)
+        else:
+            print(f'NOTE  kept this test\'s own folder for a look (a check failed or the test stopped early): {folder}')
+
+
 WORKING_FILES_WORDS = ('set FILM_WORKING_FILES to the folder holding the project\'s working files from the redesign rounds '
                        '(redesign/, plan3/, held-back/ ...) to run it')
 PROJECT_WORDS = ('the project\'s files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; '
@@ -113,6 +143,19 @@ class Checker:
     def equal(self, name, got, expected, recorded='', proves=''):
         return self._line(got == expected, name, f'got {got!r}, expected {expected!r}', recorded, proves)
 
+    def controls(self, name, must_be_high, must_be_low, high_at_least, low_at_most, recorded='', proves=''):
+        """A new measure's controls, before it is trusted: copies it must score HIGH and copies it must score LOW. In the textures work a
+        shuffled copy of a picture scored about 0.99, a blurred copy 0.17 and another surface 0.09 (measured); a first version scored 0 even
+        for alike pictures. must_be_high and must_be_low are {case: score}; the check passes only when both are given, every high case is at
+        least high_at_least and every low case at most low_at_most."""
+        bad = [f'{case} {fmt(score)} (needs at least {fmt(high_at_least)})' for case, score in must_be_high.items() if score is None or score < high_at_least]
+        bad += [f'{case} {fmt(score)} (needs at most {fmt(low_at_most)})' for case, score in must_be_low.items() if score is None or score > low_at_most]
+        if not must_be_high or not must_be_low:
+            bad.append('a control is missing: give at least one case that must score high and one that must score low')
+        text = ('controls hold: ' if not bad else 'controls FAIL: ') + '; '.join(
+            bad or [f'high {", ".join(f"{c} {fmt(v)}" for c, v in must_be_high.items())}; low {", ".join(f"{c} {fmt(v)}" for c, v in must_be_low.items())}'])
+        return self._line(not bad, name, text, recorded, proves)
+
     def note(self, text):
         """A note; a note that says a part was skipped (with its reason) is counted as a skipped part."""
         print(f'NOTE  {text}')
@@ -126,11 +169,13 @@ class Checker:
         skipped = self.skipped_parts()
         print(f'-- {self.title}: {self.passed} of {total} checks passed' + (f'; {len(skipped)} part(s) skipped' if skipped else '')
               + (f'; FAILED: {", ".join(self.failed)}' if self.failed else ''))
+        _ENDED_CLEANLY[0] = not self.failed
         sys.exit(1 if self.failed else 0)
 
 
 def skip(title, reason):
     print(f'== {title}\nSKIP  {reason}')
+    _ENDED_CLEANLY[0] = True
     sys.exit(SKIPPED)
 
 

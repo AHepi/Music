@@ -9,7 +9,9 @@ The twelve masks, with the picture (a, b or c) and channel that holds each (8-bi
   a: lowness, crown, footfall, keepclear     b: wall_dist, prop_dist, sheltered, shade     c: dampness, above_water, litter_dist, track
 Distances are stored as a share of a longest distance (wall_dist and prop_dist 4 m, litter_dist 1 m). above_water is 1 on dry ground and 0 in a puddle.
 Before the plan masks exist, every question about where things may go answers "anywhere" (False for keep_clear_at).
-It needs Blender (bpy) and numpy. A concrete example: after build_plan_masks(...), masks.sample('footfall', [[x, y, 0]]) is 1.0 on a wheel track.
+The shade (and so the dampness, moss, soot and fade that follow it) is worked out for the scene's own sun lamp when there is exactly one, else
+for a sun at 135 degrees compass and 45 degrees up (light.scene_sun_direction); the record and the audit say which was used, so add your sun
+before finish. It needs Blender (bpy) and numpy. A concrete example: after build_plan_masks(...), masks.sample('footfall', [[x, y, 0]]) is 1.0 on a wheel track.
 """
 import re
 import time
@@ -32,7 +34,7 @@ LOWNESS_FULL_METRES = 0.15
 PUDDLE_LOWNESS = 0.55
 SOLID_MIN_HEIGHT = 0.3
 ROOF_MIN_CLEARANCE = 0.8
-SUN_AZIMUTH_DEGREES = 135.0
+SUN_AZIMUTH_DEGREES = 135.0        # the fallback only: the shade reads the scene's sun lamp when there is exactly one (light.scene_sun_direction)
 SUN_ELEVATION_DEGREES = 45.0
 WHEEL_TRACK_WIDTH = 0.18
 CENTRE_STRIP_HALF_WIDTH = 0.3
@@ -220,7 +222,9 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
     wall_dist = plan2d.distance_to_marked(wall_solid, cell, DISTANCE_SCALE['wall_dist'])
     prop_dist = plan2d.distance_to_marked(prop_solid, cell, DISTANCE_SCALE['prop_dist'])
     sheltered = np.clip(plan2d.box_blur(roofed.astype(np.float64), 0.5 / cell), 0.0, 1.0)
-    shadow = plan2d.shadow_map(above, cell, SUN_AZIMUTH_DEGREES, SUN_ELEVATION_DEGREES)
+    from .. import light
+    sun = light.scene_sun_direction()
+    shadow = plan2d.shadow_map(above, cell, sun['compass_degrees'], sun['height_degrees'])
     shade = np.clip(np.maximum(0.7 * sheltered, 0.9 * plan2d.box_blur(shadow, 0.3 / cell)), 0.0, 1.0)
     foot_of_wall = 1.0 - plan2d.smoothstep(0.0, 0.6, wall_dist)
     # ground within 1.5 m of water, where the water stands above the ground, is wet: full at the waterline, fading to nothing 1.5 m away (a quay edge, a bank, a wheel pit)
@@ -269,7 +273,7 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
              'litter_dist': quantise(np.ones(shape)), 'track': quantise(track)}
     masks = PlanMasks(x0, y0, cell, grids)
     record = {'cell_metres': cell, 'cells': [cols, rows], 'seconds': round(time.time() - started, 2), 'source': 'part_only' if only_owner else 'whole_scene',
-              'bounds': [x0, y0, x0 + cols * cell, y0 + rows * cell]}
+              'bounds': [x0, y0, x0 + cols * cell, y0 + rows * cell], 'sun': sun}
     return masks, record
 
 

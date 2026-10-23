@@ -15,7 +15,13 @@
  "mask": {
   "cell_metres": 0.1,
   "seconds": 3.0,
-  "source": "whole_scene"
+  "source": "whole_scene",
+  "sun": {
+   "compass_degrees": 135.0,
+   "height_degrees": 45.0,
+   "from": "the fallback, 135 degrees compass and 45 degrees up (the scene has no sun lamp)",
+   "sun": null
+  }
  },
  "masks_from": "whole_scene",
  "picture": {
@@ -31,7 +37,8 @@
    "hut": 108
   },
   "scatter_pieces": 0,
-  "ground_area_m2": 100
+  "ground_area_m2": 100,
+  "objects_total": 12
  },
  "roles": {
   "unknown": [],
@@ -1103,5 +1110,62 @@
   "allowed_ids": [],
   "share": 0.0
  },
- "problems": []
+ "problems": [],
+ "views": {
+  "for_film": false,
+  "render_size": [
+   1200,
+   800,
+   100
+  ],
+  "cameras": [
+   {
+    "name": "Camera A",
+    "scene_camera": true,
+    "kind": "PERSP",
+    "lens_mm": 35.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 100.0,
+    "farthest_depth_m": 14.2,
+    "farthest_object": "ground",
+    "view_size": null,
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 400,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 300,
+    "sun": {
+     "ground_points": 300,
+     "shadowed": 60,
+     "shadowed_share": 0.2,
+     "shadowed_by": [
+      {
+       "object": "wall_south",
+       "points": 60
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "world": {
+  "backdrops": [],
+  "backdrops_casting_shadows": [],
+  "far_large_casting_shadows": [],
+  "haze_volume": false
+ },
+ "sun": {
+  "name": "PK sun",
+  "compass_degrees": 135.0,
+  "height_degrees": 35.0,
+  "energy": 3.5
+ },
+ "lettering": {
+  "checked": 0,
+  "objects": []
+ }
 }

@@ -27,6 +27,11 @@ Roughness is 0.85 to 0.95 when dry (measured on the wet street: dry about 0.9) a
 1. Colour pictures are sRGB. Data pictures (normal, roughness, height) are Non-Color.
 2. Normal maps are OpenGL: green is up the picture. Set a generated image's colour space right after `images.new` and
    before writing any pixels. Blender 5.2.2 wipes a generated image to black if you change it afterwards.
+   A normal map you did NOT make may use the other (DirectX) convention, and a name such as `nor_gl` is only a label
+   (for such maps `normals-test` reads the convention from the file name, it does not measure it). Measure it: draw three
+   small panels under a low raking light, one with the map as it is, one with its green channel flipped, and one with
+   real displacement from the same height picture; the right map agrees with the displaced panel (the coal mine did this
+   for every uploaded map). Flip green in a copy, never in the person's file.
 3. The Bump node's Distance default (0.001) is nearly flat. Never turn Strength up where the real fix is Distance
    (0.02 to 0.1 for a visible bump; judged from the cookbook).
 4. Fine grain is carried by the normal map on every surface. Displacement is added only for the roles whose `displace` flag is true in `place-kit/data/roles.json` (nine: dirt road, mud, forest floor, stone paving, gravel,
@@ -42,6 +47,10 @@ Roughness is 0.85 to 0.95 when dry (measured on the wet street: dry about 0.9) a
 9. Where two ground surfaces meet (road, verge, forest floor), blend them with a mask instead of a hard line, and keep to
    one ground mesh with a material driven by attributes where you can: two overlapping meshes with two materials show a hard
    seam or fight each other (z-fighting). The coal-mine yard did it with one graded ground mesh.
+10. Real displacement is heavy on memory: 1.8 GB at 540 x 960 and 4.7 GB at 1080 x 1920 with a dicing rate of 2 pixels
+   (measured, coal mine). If memory is short, raise the dicing number to 3 or 4. Adaptive subdivision with simple (not
+   smooth) subdivision keeps flat faces flat.
+11. Never a normal map and a bump on one surface (judged, garden): one of them is doubled relief.
 
 ## The surfaces
 
@@ -91,6 +100,10 @@ twist normal map (all invented).
 **bark**: strength 0.9 (garden); deep soft ridges along the trunk, moss on the damp, shaded side (judged).
 **foliage cards**: leaves and needles on cards or clumps; colour variation only, no normal map (judged); designed as
 chunky clumps (the garden's pine needles read as hair until made as brush-stroke clumps).
+**trees** (the Japanese garden's maples, judged): leaves made as chunky balls looked like popcorn. Use flat pointed leaves
+over a dark core, at real size (5 to 12 cm, not 20 to 34 cm; about seven lobes for a maple), a crown in separate layers
+with gaps so the trunk and a low sun show through, translucent leaves, and colours from deep red to a few yellow-green
+and brown.
 **water_still**: planar UV, a gentle swell normal map, roughness 0.05 to 0.15, clear with a visible bed near the bank
 (judged); the garden's swell map read +0.39 in the direction test, lower than its other maps but above the +0.25 line.
 **glass_old**: roughness 0.05 to 0.2, a little dirt (a thin grime layer); glass needs its see-through unhooked from any
@@ -140,7 +153,10 @@ any place. **Search the site for the surfaces and props your own place needs** (
 https://polyhaven.com/models, or the full list `https://api.polyhaven.com/assets?t=textures`, whose `dimensions` give
 the real size in millimetres). The picture URL pattern is
 `https://dl.polyhaven.org/file/ph-assets/Textures/jpg/<1k|2k>/<id>/<id>_<map>_<1k|2k>.jpg`. Send a generic client name
-with the request, never a person's name or address.
+with the request, never a person's name or address. That holds for EVERY outside website or service, not only Poly
+Haven (Wikipedia, Wikimedia, any download script): no name, email or address in the identity line (User-Agent), in a
+header or in a file name. One helper wrote the person's email into the identity line of its picture downloads;
+`plan_budget.py push` fails on an email-like string in a script that makes web requests.
 
 - Example: for a wet stone quay you would search "cobblestone", "paving" and "stone wall", draw a small test plate of two
   or three, and keep the one that reads right at film size. The sample's `cobblestone_05` (2.4 m a copy) and
@@ -159,4 +175,8 @@ How to use them: draw a small test plate of the surface first; open every downlo
 stickers, brands and digits (judgement); remember that scans alone read bland. In the street, scanned bricks looked
 good in a plate, but wear showed little at film size. Designed marks, real shape and 3D plants go on top. An imported
 prop counts its own maps as the normal map and roughness variation (role `prop.imported`), but still gets dirt, grime,
-weathering and wetness from the pass.
+weathering and wetness from the pass. A scan that already carries moss gets no moss layer on top (doubled moss, judged).
+
+A painterly material library (one the person uploaded) was tried on the street and rejected: drawing was about 7 times
+slower (223 s against 33 s, measured), nothing looked painted, the brick was richer but the wet stone road came out icy
+(judged). Do not offer it again unless the person asks.
