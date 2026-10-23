@@ -1,7 +1,8 @@
 """What this does: one small function per verb of `explainer-film-place`, running inside Blender. Each calls the kit's public pieces in the right
 order and prints plain lines (PASS, LOOK, FAIL) so a model or a person can read the result. `finish` does the whole pass in the fixed order:
-roles, ground regrade and roads (then parts that stood on the old ground are seated again), surfaces, damage as shape, wear (plan masks first), growth,
-light, picture size, then save, reopen the saved file and audit it; running it twice gives the same scene. No Blender-only name is imported at the top, so
+roles, ground regrade and roads (then parts that stood on the old ground are seated again), surfaces (photographed scans first: the person's own library,
+then the free Poly Haven scans, else the made-in-code recipe, and it says which), damage as shape, wear (plan masks first), puddles (damp or wet places), growth
+(by site: wall feet, verges, joints, damp corners, a thin background), light, picture size, then save, reopen the saved file and audit it; running it twice gives the same scene. No Blender-only name is imported at the top, so
 `--help` and the settings checks work in plain Python.
 
 Before the steps, finish turns anything that is drawn but is not a mesh (a bevelled curve, text, a metaball, an instanced collection) into meshes, and drafts a roads entry for every
@@ -183,6 +184,11 @@ def grow_things(settings, owner=None, density=None):
     return scatter.grow_things(settings, owner=owner, density=density)
 
 
+def make_puddles(settings):
+    from .growth import puddles
+    return puddles.make_puddles(settings)
+
+
 def light_place(settings, sun_only=False):
     from . import light
     return light.light_place(settings, sun_only=sun_only)
@@ -262,6 +268,9 @@ def finish_place(settings, look=None, state=None, quick=False, map_size=None, ow
             print(f'LOOK parts: and {len(far) - 8} more moved by more than 3 cm')
     surface_report = give_surfaces(settings, owner=owner, map_size=map_size, quick=quick, maps_folder=maps_folder)
     note('surfaces', surface_report, f'PASS surfaces: {surface_report.get("summary", "")}')
+    for line in surface_report.get('looks', []):
+        if line.startswith('made-in-code surface') or 'pointed the other way' in line:
+            print(f'LOOK surfaces: {line}')
     damage_report = damage_objects(settings, owner=owner)
     note('damage', damage_report, f'PASS damage: {damage_report.get("summary", "")}')
     plan, plan_record = masks.build_plan_masks(settings, quick=quick, only_owner=owner)
@@ -270,6 +279,8 @@ def finish_place(settings, look=None, state=None, quick=False, map_size=None, ow
     note('plan masks', plan_record, f'PASS plan masks: {plan_record["cells"][0]} x {plan_record["cells"][1]} cells of {plan_record["cell_metres"]:.2f} m in {plan_record["seconds"]} s ({plan_record["source"]})')
     wear = door.age_place(settings, look=look, state=state, owner=owner)
     note('wear', wear.report(), f'PASS wear: layers {", ".join(wear.report().get("layers_in", []))} in {wear.report().get("materials", 0)} material(s)')
+    puddle_report = make_puddles(settings)
+    note('puddles', puddle_report, f'PASS puddles: {puddle_report.get("summary", "")}')
     grow_report = grow_things(settings, owner=owner)
     note('growth', grow_report, f'PASS growth: {grow_report.get("summary", "")}')
     light_report = light_place(settings)
@@ -459,6 +470,8 @@ def verb_age(parsed):
 def verb_grow(parsed):
     settings = read_settings(settings_path_for(parsed), create_if_missing=True)
     tag_roles(settings, write=True, fallback=True)
+    puddle_report = make_puddles(settings)
+    print(f'PASS puddles: {puddle_report.get("summary", "")}')
     report = grow_things(settings, owner=parsed.owner, density=parsed.density)
     print(f'PASS growth: {report.get("summary", "")}')
     print(f'PASS saved: {save_scene(parsed)}')
@@ -601,7 +614,12 @@ def verb_combine(parsed):
             print(f'FAIL   {violation}')
     failed = bool(report['violations']) or not report['idempotent'] or report.get('order_independent') is False
     print(f'{"FAIL" if report["violations"] else "PASS"} combine ({report["order"]} order): {len(report["violations"])} violation(s)')
-    print(('PASS' if report['idempotent'] else 'FAIL') + ' idempotent: ' + ('running the stages again gives the same scene' if report['idempotent'] else 'running the stages a second time changed the scene: a stage must remove what it made before making it again'))
+    who = report.get('not_idempotent_owners') or []
+    print(('PASS' if report['idempotent'] else 'FAIL') + ' idempotent: ' + ('running the stages again gives the same scene' if report['idempotent'] else
+          'running the stages a second time changed the scene' + (f' (the objects of {", ".join(who)} came out different)' if who else '')
+          + ': a stage must remove what it made before making it again, and read only the ground and the plan, never what a later stage makes'))
+    print(f'PASS stages ran in order: every stage ran with no violation (this is the "{report["order"]}" order; whether it is idempotent is the line above)' if not report['violations']
+          else f'FAIL stages ran in order: {len(report["violations"])} violation(s) (see above)')
     if 'order_independent' in report:
         print(('PASS' if report['order_independent'] else 'FAIL') + ' order: ' + ('plain and reverse order give the same scene' if report['order_independent'] else 'plain and reverse order give different scenes: a stage relies on what an earlier stage made'))
     if parsed.save_as or parsed.overwrite:

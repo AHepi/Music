@@ -265,6 +265,21 @@ def validate(data):
         problems.append('for_film must be true or false (true: the place will be shown in the film, so its views are 1080 x 1920)')
     if data.get('renderer') and data['renderer'] not in ('auto', 'cycles', 'eevee'):
         problems.append('renderer must be auto, cycles or eevee')
+    if 'surface_scans' in data and str(data['surface_scans']).lower() not in ('auto', 'off'):
+        problems.append('surface_scans must be "auto" (download the free Poly Haven scans when there is a network) or "off" (use the made-in-code surfaces)')
+    own = data.get('own_surfaces')
+    if own is not None:
+        if not isinstance(own, dict) or not own.get('folder'):
+            problems.append('own_surfaces needs a "folder": the folder of your own surfaces, one sub-folder per surface with a colour, a normal and a height picture')
+        else:
+            if not isinstance(own.get('use', {}), dict) or not own.get('use'):
+                problems.append('own_surfaces needs "use": which role or surface wears which sub-folder, for example {"ground.dirt_road": "mud", "wall.*": "brick"}')
+            for key in (own.get('use') or {}):
+                if key not in known_roles and key not in surfaces_table() and '*' not in key:
+                    problems.append(f'own_surfaces "use": "{key}" is neither a role, a role pattern ending in *, nor a surface id')
+            for key, value in (own.get('metres') or {}).items():
+                if not (isinstance(value, (int, float)) and value > 0):
+                    problems.append(f'own_surfaces "metres": "{key}" must be a number above 0 (how many metres one copy of the picture covers)')
     owners = data.get('owners')
     if isinstance(owners, dict):
         for owner, spec in owners.items():

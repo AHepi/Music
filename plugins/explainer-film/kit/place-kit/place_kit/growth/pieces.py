@@ -91,6 +91,8 @@ def stalk(rng):
 
 
 def frond(rng):
+    """A fern: 4 to 6 fronds arching up and out, each a LEAFY BLADE LYING FLAT (its width across, its face to the sky), as a real frond spreads its leaflets. An earlier
+    version stood each frond on its edge (a vertical ribbon): in sunlight it showed only its unlit side and drew as a dark V on the grass and the road."""
     parts = []
     for _ in range(int(rng.integers(4, 7))):
         angle = rng.uniform(0, 2 * math.pi)
@@ -98,7 +100,7 @@ def frond(rng):
         t = np.linspace(0, 1, 6)
         reach = rng.uniform(0.55, 1.0)
         pts = np.stack([direction[0] * reach * t ** 1.4, direction[1] * reach * t ** 1.4, np.sin(t * 2.2) * 0.55 * reach], axis=1)
-        parts.append(_strip(pts, (0.22 * np.sin(np.clip(t, 0.05, 1) * math.pi * 0.9) + 0.03) * reach, (-direction[1], direction[0], 0.0)))
+        parts.append(_strip(pts, (0.22 * np.sin(np.clip(t, 0.05, 1) * math.pi * 0.9) + 0.03) * reach, (0.0, 0.0, 1.0)))
     return _merge(parts)
 
 
@@ -186,7 +188,36 @@ def lump(rng):
     return _sphere(rng, 3, 7, rng.uniform(0.5, 0.8), 0.2)
 
 
-BUILDERS = {'tuft': tuft, 'rosette': rosette, 'stalk': stalk, 'frond': frond, 'arch': arch, 'cushion': cushion, 'flake': flake, 'clump': clump, 'stick': stick, 'straw': straw, 'lump': lump}
+def pebble(rng):
+    """A water-worn pebble: a smooth, flattened dome (the scatter sinks its lower part into the ground)."""
+    return _sphere(rng, 3, 9, rng.uniform(0.35, 0.65), 0.07)
+
+
+def stone(rng):
+    """A broken field stone: an angular, uneven lump with few sides."""
+    return _sphere(rng, 3, 6, rng.uniform(0.5, 0.9), 0.28)
+
+
+BUILDERS = {'tuft': tuft, 'rosette': rosette, 'stalk': stalk, 'frond': frond, 'arch': arch, 'cushion': cushion, 'flake': flake, 'clump': clump, 'stick': stick, 'straw': straw,
+            'lump': lump, 'pebble': pebble, 'stone': stone}
+LEAFY_BUILDERS = ('rosette', 'frond', 'flake')        # pieces whose leaves must lie with their faces mostly to the sky (tested: their mean face points up)
+
+
+def mean_face_up(piece):
+    """The area-weighted mean of how much each face of a piece looks up or down (|normal z|, 0 = on its edge, 1 = flat): a leafy piece on its edge reads dark."""
+    vertices = np.asarray(piece['vertices'], dtype=np.float64)
+    total, weighted = 0.0, 0.0
+    for face in piece['faces']:
+        a = vertices[face[0]]
+        for i in range(1, len(face) - 1):
+            b, c = vertices[face[i]], vertices[face[i + 1]]
+            cross = np.cross(b - a, c - a)
+            area = float(np.linalg.norm(cross)) / 2.0
+            if area <= 0:
+                continue
+            total += area
+            weighted += area * abs(cross[2]) / (2.0 * area)
+    return weighted / total if total else 0.0
 
 
 def normalise_height(piece):

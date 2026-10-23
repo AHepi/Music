@@ -1,5 +1,5 @@
 {
- "about": "The 3D plant and litter species: chunky designed shapes built in code (growth/pieces.py), where each likes to grow (likes: 0..1 weights on base, damp, shade, wall_foot, edge, seam) and its gates. Sizes are tall (or across for flat things) in centimetres. Colours are sRGB hex, pulled 45 percent toward their own grey so they sit in the style. Gates are exact: a piece whose root is inside footfall 0.6, crown 0.7, keepclear 0.5, a puddle or within 5 cm of litter is never made.",
+ "about": "The 3D plant and litter species: chunky designed shapes built in code (growth/pieces.py), where each likes to grow (likes: 0..1 weights on base, damp, shade, wall_foot, edge, seam) and its gates. Sizes are tall (or across for flat things) in centimetres. Colours are sRGB hex, pulled 45 percent toward their own grey so they sit in the style. Gates are exact: a piece whose root is inside footfall 0.6, crown 0.7, keepclear 0.5, a puddle or within 5 cm of litter is never made. The \"sites\" block says where pieces gather and how many: a strip at the foot of walls, a strip along road edges, between ruts and where two ground surfaces meet (verge), a strip along fences and building lines, the joints between stones or boards, damp shady corners, and a thin background. Counts are at FULL growth (a derelict place); the look's growth amount scales them (plants by weeds_amount, litter by litter_amount, stones by half of it plus half). Stones (group \"stone\") lie only on unpaved ground (data/surfaces.json \"unpaved\"), are sized by a fact of the facts table (size_fact) and are seated part way into the ground (sink_share of their height).",
  "palette": {
   "leaf": "#4d6f36",
   "leaf_light": "#6a8a44",
@@ -15,7 +15,11 @@
   "stick": "#5a4630",
   "clod_earth": "#4a3a24",
   "autumn_leaf": "#8a5a2a",
-  "clover": "#5a8040"
+  "clover": "#5a8040",
+  "stone_grey": "#8c877d",
+  "stone_brown": "#7d6c59",
+  "stone_dark": "#5c574e",
+  "stone_pale": "#a69d8b"
  },
  "tuning": {
   "grey_pull": 0.45,
@@ -43,7 +47,7 @@
     "damp": 0.3,
     "shade": 0.1,
     "wall_foot": 0.3,
-    "edge": 0.5,
+    "edge": 0.8,
     "seam": 0.4
    },
    "gates": {},
@@ -68,7 +72,7 @@
     "damp": 0.4,
     "shade": 0.2,
     "wall_foot": 0.1,
-    "edge": 0.3,
+    "edge": 0.5,
     "seam": 0.6
    },
    "gates": {},
@@ -93,7 +97,7 @@
     "damp": 0.5,
     "shade": 0.3,
     "wall_foot": 0.7,
-    "edge": 0.4,
+    "edge": 0.15,
     "seam": 0.1
    },
    "gates": {},
@@ -118,7 +122,7 @@
     "damp": 0.7,
     "shade": 0.8,
     "wall_foot": 0.3,
-    "edge": 0.2,
+    "edge": 0.1,
     "seam": 0.0
    },
    "gates": {},
@@ -143,7 +147,7 @@
     "damp": 0.3,
     "shade": 0.4,
     "wall_foot": 0.3,
-    "edge": 0.8,
+    "edge": 0.25,
     "seam": 0.0
    },
    "gates": {},
@@ -168,7 +172,7 @@
     "damp": 0.8,
     "shade": 0.8,
     "wall_foot": 0.5,
-    "edge": 0.3,
+    "edge": 0.2,
     "seam": 0.5
    },
    "gates": {},
@@ -297,6 +301,249 @@
    "note": "a lump of earth or a small stone on or beside a track (never on the crown)",
    "kind": "invented",
    "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "pebble": {
+   "group": "stone",
+   "builder": "pebble",
+   "size_fact": "pebble_size",
+   "visible_min_cm": 1.5,
+   "size_cm": [
+    1.5,
+    6.4
+   ],
+   "sink_share": 0.35,
+   "share": 0.75,
+   "colours": [
+    "stone_grey",
+    "stone_brown",
+    "stone_pale"
+   ],
+   "likes": {
+    "base": 0.6,
+    "damp": 0.1,
+    "shade": 0.1,
+    "wall_foot": 0.1,
+    "edge": 0.8,
+    "seam": 0.0
+   },
+   "gates": {},
+   "note": "water-worn pebbles on unpaved ground, a third sunk in it",
+   "kind": "judged",
+   "source": "the coal mine yard (stones sunk part way into the ground, mine-scene/modules/ground_and_yard.py add_lump) and the Wentworth grain-size scale (pebble 4 to 64 mm)"
+  },
+  "cobble": {
+   "group": "stone",
+   "builder": "stone",
+   "size_fact": "cobble_size",
+   "visible_min_cm": 6.4,
+   "size_cm": [
+    6.4,
+    25.6
+   ],
+   "sink_share": 0.4,
+   "share": 0.25,
+   "colours": [
+    "stone_grey",
+    "stone_dark",
+    "stone_brown"
+   ],
+   "likes": {
+    "base": 0.4,
+    "damp": 0.1,
+    "shade": 0.1,
+    "wall_foot": 0.2,
+    "edge": 0.9,
+    "seam": 0.0
+   },
+   "gates": {},
+   "note": "broken field stones, mostly thrown to the verge",
+   "kind": "judged",
+   "source": "the coal mine yard (stones sunk part way into the ground) and the Wentworth grain-size scale (cobble 64 to 256 mm)"
+  }
+ },
+ "sites": {
+  "about": "Where pieces gather and how many (growth/sites.py). width_metres is the strip's width (a strip narrower than one plan cell is widened to one cell). per_metre counts are per metre of a strip's length; per_100_square_metres counts are per 100 square metres of the area. centre_strip is the grass strip between the two wheel ruts of a road whose settings say \"centre_grass\": a close, low sward. All at FULL growth (see \"about\").",
+  "wall_foot": {
+   "width_metres": {
+    "value": 0.18,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: the wall-foot strip is 1 at the wall and 0 at 1.2 x 15 cm = 18 cm out"
+   },
+   "plant_per_metre": {
+    "value": 6.0,
+    "unit": "pieces per metre of wall foot",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: the wall_foot_share dial; looked at on the street plates (logs 22 and 25)"
+   },
+   "litter_per_metre": {
+    "value": 4.0,
+    "unit": "pieces per metre of wall foot",
+    "kind": "judged",
+    "source": "leaves and straw gather at a wall's foot (the street rubbish mask, log 22)"
+   },
+   "stone_per_metre": {
+    "value": 0.0,
+    "unit": "pieces per metre of wall foot",
+    "kind": "judged",
+    "source": "stones are swept to the verge, not to the wall"
+   }
+  },
+  "verge": {
+   "width_metres": {
+    "value": 0.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: the gutter-side strip lies 0.3 to 0.9 m beside the channel (rule W1)"
+   },
+   "plant_per_metre": {
+    "value": 5.0,
+    "unit": "pieces per metre of verge",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: the gutter_tuft_share dial"
+   },
+   "litter_per_metre": {
+    "value": 3.0,
+    "unit": "pieces per metre of verge",
+    "kind": "judged",
+    "source": "leaves and twigs gather along a road's edge (the street rubbish mask, log 22)"
+   },
+   "stone_per_metre": {
+    "value": 2.0,
+    "unit": "pieces per metre of verge",
+    "kind": "judged",
+    "source": "stones thrown aside by wheels lie along the edge of an unpaved road (the coal mine yard lessons, mine-scene/modules/ground_and_yard.py)"
+   }
+  },
+  "fence_line": {
+   "width_metres": {
+    "value": 0.25,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the strip a mower or a foot cannot reach beside a post or a fence: about a hand and a half"
+   },
+   "plant_per_metre": {
+    "value": 4.0,
+    "unit": "pieces per metre of fence line",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: weeds at the foot of anything standing"
+   },
+   "litter_per_metre": {
+    "value": 2.0,
+    "unit": "pieces per metre of fence line",
+    "kind": "judged",
+    "source": "leaves catch against a fence"
+   },
+   "stone_per_metre": {
+    "value": 0.5,
+    "unit": "pieces per metre of fence line",
+    "kind": "judged",
+    "source": "a few stones at a post's foot"
+   }
+  },
+  "joint": {
+   "width_metres": {
+    "value": 0.08,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: moss cushions 1 to 3 cm strung along a joint (rule M1)"
+   },
+   "plant_per_metre": {
+    "value": 6.0,
+    "unit": "pieces per metre of joint",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: the cushion_cover dial (moss in short lines along joints)"
+   },
+   "litter_per_metre": {
+    "value": 0.5,
+    "unit": "pieces per metre of joint",
+    "kind": "judged",
+    "source": "a little grit and leaf in a joint"
+   },
+   "stone_per_metre": {
+    "value": 0.0,
+    "unit": "pieces per metre of joint",
+    "kind": "judged",
+    "source": "a joint holds no loose stones"
+   }
+  },
+  "centre_strip": {
+   "plant_per_100_square_metres": {
+    "value": 250.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "the plugin 1.5.0 proof scene: the grass strip between two wheel ruts is a close, low sward (tufts, clover, moss), never nettles; the plants that like joints and seams grow there"
+   },
+   "litter_per_100_square_metres": {
+    "value": 20.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "as the background"
+   },
+   "stone_per_100_square_metres": {
+    "value": 8.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "a few stones kicked up between the ruts"
+   }
+  },
+  "damp_corner": {
+   "dampness_min": {
+    "value": 0.55,
+    "unit": "mask value 0..1",
+    "kind": "judged",
+    "source": "the plan mask's dampness above about half: low, shaded or beside a wall"
+   },
+   "shade_min": {
+    "value": 0.45,
+    "unit": "mask value 0..1",
+    "kind": "judged",
+    "source": "the plan mask's shade above about half"
+   },
+   "wall_reach_metres": {
+    "value": 1.5,
+    "unit": "metres",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: trailing plants on damp mortar at a wall foot"
+   },
+   "plant_per_100_square_metres": {
+    "value": 60.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: ferns and moss in damp shade"
+   },
+   "litter_per_100_square_metres": {
+    "value": 60.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "leaves rot where it is damp and shady"
+   },
+   "stone_per_100_square_metres": {
+    "value": 0.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "no extra stones in a damp corner"
+   }
+  },
+  "background": {
+   "plant_per_100_square_metres": {
+    "value": 12.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "the project's own weathering kit (procedural-textures/kits/weathering/growth/local_masks.py and apply_growth.py): weeds grown by place, in separate populations counted to their dials: only a thin background (a lived-in look gives 6)"
+   },
+   "litter_per_100_square_metres": {
+    "value": 20.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "a thin scatter of leaves and twigs anywhere"
+   },
+   "stone_per_100_square_metres": {
+    "value": 12.0,
+    "unit": "pieces per 100 square metres",
+    "kind": "judged",
+    "source": "pebbles and stones on unpaved ground (the coal mine yard: about two thousand lumps and stones on its yard)"
+   }
   }
  }
 }

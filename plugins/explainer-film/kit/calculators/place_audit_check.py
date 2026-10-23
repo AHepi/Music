@@ -21,14 +21,17 @@ Verbs:
 Checks (each finding is pass, warn (printed LOOK), fail, or known (a treatment switched off on purpose, with its reason)):
   place: quick output, place: stale audit, place: stale settings, place: roles, place: object types, place: treatments, place: layer amounts, place: off reasons,
   place: normal maps, place: uv, place: displacement, place: construction, place: scale, place: plain boxes,
-  place: shape damage, place: ground relief, place: keep-out, place: budgets, place: light, place: renderer,
+  place: shape damage, place: ground relief, place: keep-out, place: sites (the share of the plants at wall feet, verges, fence lines, joints and damp corners),
+  place: surfaces (which materials wear a photographed scan, which fell back to the made-in-code recipe and why), place: budgets (the kit's own scattered pieces and puddles
+  have their own budget, place_audit.scatter_triangles_max, never a builder's), place: light, place: renderer,
   place: film frame (a place whose settings say "for_film": true must have the film's tall 9:16 frame, 1080 x 1920),
   place: world (every view sees a finished horizon: no empty sky below the horizon, no clip end shorter than the farthest object, no
   backdrop or large far object casting shadows; a prop or small set built alone, not for the film and at most place_audit.world.place_span_metres
   across, gets a LOOK for a missing horizon instead of a FAIL), place: sun (the share of the ground each view sees that is shadowed from the sun, and
   which sun the wear layers' shade used), place: lettering (every sign, notice, placard, poster, name board or book carries lettering).
 place: construction fails a free span longer than the part's role allows (planks 1.38 m, beams 2.5 m: data/roles.json) unless the place's own facts file
-(--facts) holds a "free_span" fact with a max and a source for it (a hall's tie beam 7 m between its walls is real; then it passes and is named).
+holds a "free_span" fact with a max and a source for it (a hall's tie beam 7 m between its walls is real; then it passes and is named). The place's own facts are
+written INTO the audit when it is made (its settings' "facts" file and --facts), so the judge reads the same facts whether or not --facts is given again; --facts adds to them.
 An audit made before a check existed lacks its facts: that check says "not measured by this audit" (a LOOK), never a FAIL.
 An object that has no material at all (or none with nodes) is failed by name in place: treatments: the material checks alone would never see it, because there is no material to look at.
 Plain lines start with PASS, LOOK, FAIL or KNOWN. Exit: 0 pass (read the LOOK lines), 1 fail, 2 an input is missing or unusable.
@@ -47,6 +50,9 @@ from calculator_output import add_output_options, finish, run_main, read_json, I
 
 KIT_ROOT = os.path.dirname(HERE)
 MAX_NAMES = 6                    # names listed in one finding
+KIT_SCATTER_OWNER = 'kit scatter'  # the owner the audit gives the pieces and puddles the kit lays itself (place-kit checks/scene_audit.py)
+SITE_WORDS = {'wall_foot': 'wall feet', 'verge': 'verges and road edges', 'fence_line': 'fence and building lines', 'joint': 'joints', 'centre_strip': 'the grass between ruts',
+              'damp_corner': 'damp corners', 'background': 'open ground'}
 LAYERS = ('dirt', 'grime', 'weathering', 'wetness', 'cracks_and_chips', 'edge_wear', 'moss_and_algae', 'rust', 'rubbish')
 OBJECT_LEVEL_TREATMENTS = ('bevelled_edges', 'shape_damage')
 
@@ -90,7 +96,7 @@ class Judge:
     def run_all(self):
         for step in (self.quick_output, self.stale, self.roles, self.object_types, self.treatments, self.layer_amounts, self.off_reasons, self.normal_maps, self.uv,
                      self.displacement, self.construction, self.scale, self.plain_boxes, self.shape_damage, self.ground_relief, self.keep_out,
-                     self.budgets, self.light, self.renderer, self.film_frame, self.world, self.sun, self.lettering):
+                     self.sites, self.surfaces, self.budgets, self.light, self.renderer, self.film_frame, self.world, self.sun, self.lettering):
             step()
         return self.findings
 
@@ -606,6 +612,53 @@ class Judge:
         elif (self.audit.get('scatter') or {}).get('groups'):
             self.add('pass', 'place: keep-out', 'the scattered pieces', 'no plant or litter on a wheel track, a crown, a puddle or a keep-out')
 
+    def sites(self):
+        """Weeds grow by place: the share of the plants at wall feet, verges, fence lines, joints and damp corners, and whether each site holds the count it was planned."""
+        scatter = self.audit.get('scatter') or {}
+        found = scatter.get('sites')
+        if not scatter.get('groups'):
+            return
+        if not isinstance(found, dict) or 'plant' not in found:
+            self.not_measured('place: sites', 'how many plants grow at wall feet, verges, joints and damp corners')
+            return
+        plants = found['plant']
+        if not plants.get('count'):
+            return
+        shares = plants.get('shares') or {}
+        text = ', '.join(f'{SITE_WORDS.get(site, site)} {share:.0%}' for site, share in shares.items() if share > 0)
+        minimum = self.number('place_audit.plants_in_sites_share_min')
+        if plants.get('in_sites_share', 0.0) < minimum and any((plants.get('measures') or {}).get(site, {}).get('cells') for site in SITE_WORDS if site != 'background'):
+            self.add('warn', 'place: sites', 'the plants', f'only {plants["in_sites_share"]:.0%} of the {plants["count"]} plants grow at wall feet, verges, fence lines, joints or damp '
+                     f'corners (at least {minimum:.0%}): they are spread evenly, not where weeds grow ({text}).',
+                     'run explainer-film-place grow again with this kit (it grows by site); a settings "dials" or species change that raised the background undoes it.')
+        planned = ((scatter.get('record') or {}).get('sites') or {})
+        share_min = self.number('place_audit.site_count_share_min')
+        short = []
+        for group in ('plant', 'litter', 'stone'):
+            by_site = (found.get(group) or {}).get('by_site') or {}
+            for site, numbers in (planned.get(group) or {}).items():
+                wanted = numbers.get('planned') or 0
+                if wanted >= 5 and by_site.get(site, 0) < share_min * wanted:
+                    short.append(f'{group} at {SITE_WORDS.get(site, site)}: {by_site.get(site, 0)} of {wanted} planned')
+        if short:
+            self.add('warn', 'place: sites', names_text(short), '; '.join(short[:MAX_NAMES]) + ' (a site that could not take its count: little ground there a piece may stand on).',
+                     'look at the keep-out shapes and the footfall in place-settings.json near that site.')
+        self.add('pass', 'place: sites', 'the plants', f'{plants["count"]} plants by site: {text}; {plants.get("in_sites_share", 0.0):.0%} at wall feet, verges, fence lines, joints '
+                 'and damp corners (measured again from the roots and the plan masks)')
+
+    def surfaces(self):
+        """Which materials wear a photographed surface (Poly Haven or the person's own library) and which fell back to the made-in-code recipe, with the reason."""
+        surfaces = self.audit.get('surfaces')
+        if surfaces is None:
+            return
+        photographed, in_code = surfaces.get('photographed') or [], surfaces.get('made_in_code') or []
+        if photographed:
+            self.add('pass', 'place: surfaces', names_text(photographed), f'{len(photographed)} material(s) wear a photographed surface (colour, normal, roughness and height from a scan)')
+        if in_code:
+            reasons = sorted(set((surfaces.get('fallbacks') or {}).values()))
+            self.add('warn', 'place: surfaces', names_text(in_code), f'{len(in_code)} material(s) use the made-in-code surface: ' + ('; '.join(reasons[:3]) if reasons else 'no reason recorded') + '.',
+                     'with network on, run explainer-film-place finish again (it downloads the free Poly Haven scans once per machine), or give your own surfaces in place-settings.json ("own_surfaces").')
+
     def budgets(self):
         counts = self.audit.get('counts', {})
         problems = []
@@ -613,6 +666,11 @@ class Judge:
             problems.append(f'{counts["triangles"]:,} triangles (at most {self.number("place_audit.triangles_total_max"):,})')
         per_owner = self.number('place_audit.triangles_per_builder_max')
         for owner, triangles in (counts.get('triangles_by_owner') or {}).items():
+            if owner == KIT_SCATTER_OWNER:
+                scatter_max = self.number('place_audit.scatter_triangles_max')
+                if triangles > scatter_max:              # the growth step scales its counts to stay under this: over it means the kit itself went wrong
+                    problems.append(f'the kit\'s own scattered pieces and puddles: {triangles:,} triangles (their budget is {scatter_max:,})')
+                continue
             if triangles > per_owner:
                 problems.append(f'owner {owner}: {triangles:,} triangles (at most {per_owner:,})')
         if counts.get('scatter_pieces', 0) > self.number('place_audit.scatter_pieces_max'):
@@ -868,12 +926,18 @@ def command_check(args, settings):
     audit = read_json(args.audit, 'the place audit', 'explainer-film-place audit --scene SCENE.blend --settings place-settings.json --out place-audit.json (finish writes one too)')
     if not isinstance(audit, dict) or audit.get('audit_version') != 1:
         raise InputProblem(f'{args.audit} is not a place audit (audit_version 1). Make one with: explainer-film-place audit --scene SCENE.blend --out place-audit.json')
-    facts = []
+    facts = [f for f in (audit.get('place_facts') or []) if isinstance(f, dict)]       # the facts the audit itself read (so a judge without --facts agrees with it)
     if args.facts:
         data = read_json(args.facts, 'the place\'s own facts file', 'plan/real-world-facts.json (the planner writes it; the format is in data/real_world_facts.json)')
-        facts = data.get('facts', data) if isinstance(data, dict) else data
+        given = data.get('facts', data) if isinstance(data, dict) else data
+        by_id = {f.get('id'): f for f in facts}
+        by_id.update({f.get('id'): f for f in given if isinstance(f, dict)})
+        facts = list(by_id.values())
     judge = Judge(audit, settings, blend=args.blend, allow_quick=args.allow_quick, facts=facts, skip_freshness=args.skip_freshness)
     findings = judge.run_all()
+    if not args.facts and audit.get('place_facts'):
+        findings.append(finding('pass', 'place: facts', 'the audit', f'the place\'s own facts were read from the audit ({len(audit["place_facts"])} fact(s), from '
+                                + ', '.join(os.path.basename(f.get('path') or '?') for f in audit.get('facts_files') or []) + '), the same the audit used'))
     if args.place_settings:
         findings.append(settings_freshness(audit, args.place_settings))
     verdict = verdict_of(findings)

@@ -1896,6 +1896,23 @@
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
    "meaning": "plants and litter the kit scatters itself"
+  },
+  "never.puddle": {
+   "class": "never",
+   "surface": null,
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "^pk puddle"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py: glossy water sheets lying in hollows and cart ruts) and the plugin 1.5.0 fix round",
+   "meaning": "standing water the kit lays in hollows and ruts when the place is damp or wet: a flat dark sheet at the water's level (not a water role, so the renderer rule is not changed by it)"
   }
  }
 }

@@ -146,13 +146,25 @@ The recipes above are the ones this text explains. `surfaces.json` holds 45 ids;
 
 ## Photo surfaces from Poly Haven (CC0, fetched at run time, never shipped)
 
+**Since 1.5.0 the kit does this by itself.** `finish` (and `surfaces`) gives each surface the scan that `place-kit/data/surfaces.json` names for it
+(`polyhaven`, 36 of the 45 surfaces; for example `dirt_road` the scan `brown_mud_dry`, `thatch` the scan `thatch_roof_angled`), downloads its colour,
+OpenGL normal, roughness and height pictures once per machine into a cache outside every repository (`PLACE_KIT_SCAN_CACHE`, else
+`~/.cache/explainer-film/surface-scans`; colour 2k, the other maps 1k: `place_surfaces.scan_colour_resolution` and `scan_maps_resolution`), checks every normal
+picture against its own height picture (a map pointing the other way is turned round in a copy; an even lean is taken out), and builds the material with the
+wear layers on top, real displacement on the roles that displace (its middle at the picture's mean height) and the scan's real size as the tile size
+(`scan_metres`, from Poly Haven's record). The person's own library comes first when the place settings name one (`own_surfaces`, one sub-folder per surface:
+read where it is, never copied). With no network, or `"surface_scans": "off"`, the made-in-code recipe below is used and `finish` says so for each surface.
+To use another scan for a surface, change its `polyhaven` id and `scan_metres` in a copy of the data, or put it in your own library. The rest of this section is
+for a scan or a model you fetch by hand.
+
 Poly Haven pictures are free to use without credit. The kit's `place-kit/data/polyhaven_choices.json` is a SMALL
 SAMPLE read once from the public Poly Haven list on 23 October 2026: one or two pictures for each kind of surface the kit
 knows, and a few everyday props, each with its real size read from the list and a caution. It is not a shopping list for
 any place. **Search the site for the surfaces and props your own place needs** (https://polyhaven.com/textures and
 https://polyhaven.com/models, or the full list `https://api.polyhaven.com/assets?t=textures`, whose `dimensions` give
-the real size in millimetres). The picture URL pattern is
-`https://dl.polyhaven.org/file/ph-assets/Textures/jpg/<1k|2k>/<id>/<id>_<map>_<1k|2k>.jpg`. Send a generic client name
+the real size in millimetres). The address of each picture differs from scan to scan (some
+have no `jpg` normal map, some name their maps differently): read it from the scan's own file list, `https://api.polyhaven.com/files/<id>`, never guess it
+(the kit does exactly that). Send a generic client name
 with the request, never a person's name or address. That holds for EVERY outside website or service, not only Poly
 Haven (Wikipedia, Wikimedia, any download script): no name, email or address in the identity line (User-Agent), in a
 header or in a file name. One helper wrote the person's email into the identity line of its picture downloads;

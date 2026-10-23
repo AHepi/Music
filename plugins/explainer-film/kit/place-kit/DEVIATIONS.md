@@ -211,6 +211,27 @@ Each of these is small, has its own test, and leaves the old behaviour reachable
 - **`explainer-film-setup --help`** printed mkdir's help and could then copy the kit into a folder named after cd's help text; it now prints its use line, and any other word
   that starts with - stops before a folder is made.
 
+## The 1.5.0 fix round: a test place built by a smaller model (23 October 2026)
+
+A smaller model built a small settlement in a clearing with dirt tracks using the plugin alone. Four faults, each fixed in general:
+- **Plain surfaces.** The 1.4.0 design said "designed shapes read at film size, not scans" (from the garden), and every surface was made in code. On a real
+  build that read as flat colours. The person asked for real photographed scans, so the design changed: a scan (the person's own library, else the free
+  Poly Haven scan, downloaded once per machine, never shipped) is used wherever one can be had, with the wear layers on top, and the made-in-code surface is
+  the fallback, said aloud. Each scan's normal map is checked against its own height: on the proof scene two Poly Haven normal maps leaned as a whole
+  (mean red and green about 0.35 and 0.41 for a map that should sit at 0.5, measured), so the lean is taken out in a checked copy. Grass scans came out beige
+  beside the place's palette (mean colour about 0.59, 0.52, 0.35, measured), so a scan may be pulled toward the palette (`scan_colour_pull`, judged).
+- **Weeds without edge logic.** 1.4.0 spread plants by habitat masks over the whole ground; they gathered nowhere. Now every group is laid by site (wall feet,
+  verges, fence lines, joints, the centre strip, damp corners, a thin background) and counted to each site's own number.
+- **Three visible faults.** Dark V specks were fern fronds standing on their edge (the frond's normal hint was sideways; now up); white sparkles on thatch
+  were the wetness layer's clear coat on a surface that soaks water (removing the coat removed them; a rougher coat and bump-only did not, measured on
+  crops); flat brown rectangles were a plain forest-floor ground showing between a clearing's straight edge and the verge (hiding the object showed the void
+  under it). Fixed by real scans, a 1 m seam blend between grounds, and verge weeds.
+- **A gate that contradicted itself.** The kit's own scatter (87,812 pieces, 2.7 million triangles) was counted as "unowned" and failed a builder's budget;
+  the preflight was called without the facts the audit had used; a repair round that saved no finished file failed the whole run. Now the kit's scatter
+  has its own budget and keeps inside it, the audit carries the facts, and a round that lost its file keeps the last audited one.
+- **Stones and puddles** were not in the 1.4.0 design; they were asked for with the surfaces (stones sized by the Wentworth classes; puddles only in
+  hollows and ruts, only when damp or wet).
+
 ## Left out or not done (said plainly)
 
 - **Measured on a real card four times, and not through the plugin's own client.** Two batches of 10 variations of the finished canal lock (3 jobs each, two cameras, Cycles 600 x 400) took 180 and 158 card seconds (about US$0.05 each at

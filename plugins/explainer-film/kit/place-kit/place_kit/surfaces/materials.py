@@ -20,9 +20,9 @@ import bpy
 from .. import house_numbers, names, roles as roles_module, run_record, scene_read, settings_file
 from ..wear import hook, seed as seed_module
 from ..wear.nodes import Net
-from . import bevel, displacement, heights, normals, uvs
+from . import bevel, displacement, heights, normals, scans, uvs
 
-MATERIAL_VERSION = 3
+MATERIAL_VERSION = 4
 BEVEL_CLASSES = ('wall', 'timber', 'iron', 'stone', 'prop', 'roof', 'floor')       # roles whose objects get rounded edges (ground, water, glass, plants and trees do not)
 SURFACE_TILT_DEGREES = 30.0
 
@@ -170,6 +170,7 @@ def build_surface_material(role, surface_id, spec, size, displace, quick=False):
     output = net.new('ShaderNodeOutputMaterial')
     output.is_active_output = True
     principled = net.new('ShaderNodeBsdfPrincipled')
+    principled.inputs['Coat Roughness'].default_value = COAT_ROUGHNESS
     tree.links.new(principled.outputs['BSDF'], output.inputs['Surface'])
     tile = float(settings_file.number(spec['tile_metres']))
     seed_value = net.attr(names.SEED)
@@ -227,7 +228,9 @@ def build_surface_material(role, surface_id, spec, size, displace, quick=False):
     else:
         material.displacement_method = 'BUMP'
     material[names.MADE] = 1
-    for key, value in (('pk_surface', surface_id), ('pk_role', role), ('pk_size', size), ('pk_version', MATERIAL_VERSION)):
+    mean_colour = [sum(c[i] for c in (hex_to_linear(h) for h in palette)) / max(len(palette), 1) for i in range(3)]
+    for key, value in (('pk_surface', surface_id), ('pk_role', role), ('pk_size', size), ('pk_version', MATERIAL_VERSION), ('pk_source', 'made_in_code'),
+                       ('pk_mean_colour', mean_colour)):
         material[key] = value
     return material
 
@@ -240,6 +243,98 @@ def _scale_vector(net, vector, factor):
     return node.outputs[0]
 
 
+COAT_ROUGHNESS = 0.15          # a wet film is never a mirror (the Principled default of 0.03 over a bumpy surface made white sparkles in a damp place)
+
+
+def build_scan_material(role, surface_id, spec, scan, pictures, displace, settings_quick=False):
+    """Makes (or rebuilds in place) the material 'PK <role> / <surface>' from a PHOTOGRAPHED scan (scans.py): the scan's colour picture (with slow colour change
+    across the surface and a little per object), its OpenGL normal map into a tangent Normal Map node, its roughness map, and its height map into real displacement
+    where the role says. Each picture is read twice, at two sizes and offsets, blended by slow noise, so the repeat does not show; the tile is the scan's REAL size.
+    The wear layers go on top of it in the next pass like on any other material. Returns the material."""
+    name = names.material_name(role, surface_id)
+    material = bpy.data.materials.get(name)
+    if material is None:
+        material = bpy.data.materials.new(name)
+    material.use_nodes = True
+    if hook.BASE_KEY in material.keys():
+        del material[hook.BASE_KEY]
+    tree = material.node_tree
+    tree.nodes.clear()
+    net = Net(tree)
+    output = net.new('ShaderNodeOutputMaterial')
+    output.is_active_output = True
+    principled = net.new('ShaderNodeBsdfPrincipled')
+    principled.inputs['Coat Roughness'].default_value = COAT_ROUGHNESS
+    tree.links.new(principled.outputs['BSDF'], output.inputs['Surface'])
+    tile = float(scan.get('metres') or settings_file.number(spec['tile_metres']))
+    seed_value = net.attr(names.SEED)
+    hiding = {k: house_numbers.value(f'place_surfaces.repeat_hiding.{k}') for k in ('second_scale', 'offset', 'blend_noise_scale')}
+    turn = (spec.get('scan_grain') == 'v' and spec.get('uv_method') == 'plank')      # a plank's u runs along its length; this scan's grain runs up the picture
+    uv = net.new('ShaderNodeUVMap')
+    uv.uv_map = 'UVMap'
+
+    def mapping(scale, extra_x=0.0, extra_y=0.0, angle=0.0):
+        node = net.new('ShaderNodeMapping')
+        node.inputs['Scale'].default_value = (scale / tile, scale / tile, 1.0)
+        node.inputs['Rotation'].default_value = (0.0, 0.0, angle + (1.5707963 if turn else 0.0))
+        tree.links.new(uv.outputs['UV'], node.inputs['Vector'])
+        shift = net.combine(net.math('ADD', net.math('MULTIPLY', seed_value, 7.31), extra_x), net.math('ADD', net.math('MULTIPLY', seed_value, 3.77), extra_y), 0.0)
+        tree.links.new(shift, node.inputs['Location'])
+        return node.outputs['Vector']
+
+    first = mapping(1.0)
+    second = mapping(float(hiding['second_scale']), float(hiding['offset'][0]), float(hiding['offset'][1]), 0.0)
+    slow = net.noise(first, scale=float(hiding['blend_noise_scale']) * 12.0, detail=1.0)
+    blend = net.smoothstep(slow, 0.35, 0.65)
+    colour = net.mix_colour(blend, net.image(pictures['colour'], first, 'sRGB', 'Linear'), net.image(pictures['colour'], second, 'sRGB', 'Linear'))
+    normal_colour = net.mix_colour(blend, net.image(pictures['normal'], first, 'Non-Color', 'Linear'), net.image(pictures['normal'], second, 'Non-Color', 'Linear'))
+    height_value = None
+    if pictures.get('height') is not None:
+        height_value = net.mix(blend, net.sep_rgb(net.image(pictures['height'], first, 'Non-Color', 'Linear'))[0],
+                               net.sep_rgb(net.image(pictures['height'], second, 'Non-Color', 'Linear'))[0])
+    strength = float(settings_file.number(spec['normal_strength']))
+    depth = settings_file.number(spec['displacement_depth_metres']) if (displace and spec.get('displacement_depth_metres') and height_value is not None) else None
+    if depth:
+        strength *= house_numbers.value('place_surfaces.normal_strength_with_displacement_factor')
+    normal_map = net.new('ShaderNodeNormalMap')
+    normal_map.space = 'TANGENT'
+    normal_map.uv_map = 'UVMap'
+    normal_map.inputs['Strength'].default_value = strength
+    tree.links.new(normal_colour, normal_map.inputs['Color'])
+    tree.links.new(normal_map.outputs['Normal'], principled.inputs['Normal'])
+    # colour: the photograph, a slow change of value across the surface and a little per object (the scan brings the detail; the place decides nothing else)
+    per_object = float(settings_file.number(spec['colour']['variation']['per_object']))
+    macro_scale = float(settings_file.number(spec['colour']['variation']['macro_scale_metres']))
+    macro = net.noise(_scale_vector(net, net.geometry().outputs['Position'], 1.0 / macro_scale), scale=1.0, detail=3.0)
+    mean_colour = list(pictures.get('colour_mean') or (0.2, 0.18, 0.15))
+    pull = float(settings_file.number(spec['scan_colour_pull'])) if spec.get('scan_colour_pull') else 0.0
+    if pull > 0:                 # the scene decides this surface's mean colour, the scan brings the detail (a grass scan is dry and olive; a living verge is greener)
+        palette = settings_file.number(spec['colour']['palette'])
+        target = [sum(hex_to_linear(h)[i] for h in palette) / max(len(palette), 1) for i in range(3)]
+        factor = [(t / max(m, 1e-4)) ** pull for t, m in zip(target, mean_colour)]
+        colour = net.mix_colour(1.0, colour, net.comb_rgb(*factor), blend='MULTIPLY')
+        mean_colour = [m * f for m, f in zip(mean_colour, factor)]
+    varied = net.hue_saturation_value(colour, value=net.math('ADD', net.math('ADD', 0.92, net.math('MULTIPLY', macro, 0.16)),
+                                                             net.math('MULTIPLY', net.math('SUBTRACT', seed_value, 0.5), 2.0 * per_object)))
+    tree.links.new(varied, principled.inputs['Base Color'])
+    if pictures.get('roughness') is not None:
+        rough_picture = net.sep_rgb(net.mix_colour(blend, net.image(pictures['roughness'], first, 'Non-Color', 'Linear'), net.image(pictures['roughness'], second, 'Non-Color', 'Linear')))[0]
+        rough = net.clamp01(net.math('ADD', rough_picture, net.math('MULTIPLY', net.math('SUBTRACT', macro, 0.5), 0.1)))
+    else:
+        low, high = settings_file.number(spec['roughness']['low']), settings_file.number(spec['roughness']['high'])
+        rough = net.map_range(net.clamp01(net.math('ADD', net.math('MULTIPLY', height_value if height_value is not None else macro, 0.5), net.math('MULTIPLY', macro, 0.5))), 0.0, 1.0, float(low), float(high))
+    tree.links.new(rough, principled.inputs['Roughness'])
+    if depth:
+        displacement.set_displacement(material, height_value, float(depth), tree, midlevel=float(pictures.get('height_mean') or 0.5))
+    else:
+        material.displacement_method = 'BUMP'
+    material[names.MADE] = 1
+    for key, value in (('pk_surface', surface_id), ('pk_role', role), ('pk_size', int(pictures['normal'].size[0])), ('pk_version', MATERIAL_VERSION),
+                       ('pk_source', f'{scan["source"]}:{scan["id"]}'), ('pk_scan_metres', tile), ('pk_mean_colour', mean_colour)):
+        material[key] = value
+    return material
+
+
 def give_surfaces(settings, owner=None, map_size=None, quick=False, maps_folder=None):
     """The surface pass (see the note at the top). Returns a report: {'summary', 'materials': [names], 'map_size_pixels', 'bevelled', 'displacement', 'looks': [...]}."""
     table = settings_file.roles_table()
@@ -249,6 +344,29 @@ def give_surfaces(settings, owner=None, map_size=None, quick=False, maps_folder=
     facts = [scene_read.object_facts(o) for o in objects]
     tagged = roles_module.tag_objects(facts, rules, table)['by_object']
     made, replaced, kept, uv_written, bevel_items, displaced, notes, kept_names = {}, 0, 0, 0, [], [], [], []
+    chosen_scans, prepared, sources, fallbacks = {}, {}, {}, {}
+
+    def scan_for(slot_role, surface_id, spec):
+        """The photographed scan for a role and surface (the person's library, then Poly Haven), prepared once; (scan, pictures) or (None, None) with the reason kept."""
+        key = (slot_role, surface_id)
+        if key not in chosen_scans:
+            scan, said = scans.choose_scan(slot_role, surface_id, spec, settings, quick=quick)
+            pictures = None
+            if scan is not None:
+                try:
+                    if scan['key'] not in prepared:
+                        prepared[scan['key']] = scans.prepare_images(scan)
+                    pictures = prepared[scan['key']]
+                    if pictures.get('turned'):
+                        notes.append(f'{scan["id"]}: its normal map pointed the other way along {", ".join(pictures["turned"])} (checked against its own height map); a corrected copy is used')
+                except (scans.ScanUnavailable, RuntimeError, OSError) as problem:
+                    said = f'the scan {scan["id"]} could not be read ({problem}), so the made-in-code surface is used'
+                    scan, pictures = None, None
+            chosen_scans[key] = (scan, pictures)
+            if scan is None:
+                fallbacks[f'{slot_role} / {surface_id}'] = said
+        return chosen_scans[key]
+
     for obj in objects:
         if owner is not None and obj.get(names.OWNER) != owner and not (obj.get(names.ROLE) or '').startswith('ground.'):
             continue
@@ -283,7 +401,13 @@ def give_surfaces(settings, owner=None, map_size=None, quick=False, maps_folder=
             displace = bool(table['roles'].get(slot_role, {}).get('displace')) and not roles_module.off_entries_for(slot_role, 'displacement', rules)
             key = (slot_role, surface_id, displace)
             if key not in made:
-                made[key] = build_surface_material(slot_role, surface_id, spec, size, displace, quick)
+                scan, pictures = scan_for(slot_role, surface_id, spec)
+                if scan is not None:
+                    made[key] = build_scan_material(slot_role, surface_id, spec, scan, pictures, displace, quick)
+                    sources[made[key].name] = f'{scan["source"]}:{scan["id"]}'
+                else:
+                    made[key] = build_surface_material(slot_role, surface_id, spec, size, displace, quick)
+                    sources[made[key].name] = 'made_in_code'
             if slot.material is not None and not slot.material.name.startswith(names.MATERIAL_PREFIX):
                 if not slot.material.use_fake_user:
                     slot.material['pk_fake_added'] = 1
@@ -301,7 +425,12 @@ def give_surfaces(settings, owner=None, map_size=None, quick=False, maps_folder=
             layer, wrote = uvs.ensure_uvs(obj, method)
             uv_written += int(wrote)
     seed_module.write_object_values([o for o in objects if tagged[o.name]['role'] and not roles_module.is_never(tagged[o.name]['role'])])
-    run_record.write(map_size_pixels=size, quick=bool(quick) or bool(run_record.read().get('quick') and not run_record.read().get('finished')))
+    if str((settings.get('pack_surface_pictures', True))).lower() not in ('false', '0', 'no'):
+        scans.pack_images([image for pictures in prepared.values() for image in (pictures['colour'], pictures['normal'], pictures['roughness'], pictures['height'])])
+    for line in sorted(set(fallbacks.values())):
+        notes.append('made-in-code surface: ' + line)
+    run_record.write(map_size_pixels=size, quick=bool(quick) or bool(run_record.read().get('quick') and not run_record.read().get('finished')),
+                     surface_sources=dict(sorted(sources.items())), surface_fallbacks=dict(sorted(fallbacks.items())))
     widths = bevel.bevel_objects(list({o.name: (o, s) for o, s in bevel_items}.values()))
     if maps_folder:
         os.makedirs(maps_folder, exist_ok=True)
@@ -309,8 +438,13 @@ def give_surfaces(settings, owner=None, map_size=None, quick=False, maps_folder=
             array = normals.image_to_array(image)
             normals.write_png(os.path.join(maps_folder, image.name + '.png'), np.rint(array[..., :3] * 255).astype(np.uint8))
     bpy.context.view_layer.update()
-    summary = (f'{len(made)} material(s) made for {len({k[0] for k in made})} role(s), {replaced} slot(s) replaced, {kept} kept (they carry their own maps); '
+    photographed = sorted({v for v in sources.values() if v != 'made_in_code'})
+    in_code = sum(1 for v in sources.values() if v == 'made_in_code')
+    summary = (f'{len(made)} material(s) made for {len({k[0] for k in made})} role(s): {len(made) - in_code} from photographed scans'
+               + (f' ({", ".join(p.split(":", 1)[1] for p in photographed[:6])})' if photographed else '') + f', {in_code} made in code; '
+               f'{replaced} slot(s) replaced, {kept} kept (they carry their own maps); '
                f'normal maps {size} px, {uv_written} object(s) got UVs, {sum(1 for w in widths.values() if w)} bevelled, displacement on {len(displaced)} object(s)'
                + (f'; kept (own picture): {", ".join(sorted(set(kept_names))[:6])}' if kept_names else ''))
     return {'summary': summary, 'materials': sorted(m.name for m in made.values()), 'map_size_pixels': size, 'bevelled': sorted(k for k, v in widths.items() if v),
-            'displacement': displaced, 'looks': notes, 'replaced_slots': replaced, 'kept_slots': kept, 'kept_materials': sorted(set(kept_names))}
+            'displacement': displaced, 'looks': notes, 'replaced_slots': replaced, 'kept_slots': kept, 'kept_materials': sorted(set(kept_names)),
+            'sources': dict(sorted(sources.items())), 'fallbacks': dict(sorted(fallbacks.items()))}

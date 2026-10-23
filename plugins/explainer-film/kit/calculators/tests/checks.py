@@ -41,6 +41,13 @@ if CALCULATORS not in sys.path:
 
 SKIPPED = 77
 
+# The tests never download anything: the place kit's surface pass would fetch the free Poly Haven scans when there is a network, and a test must give the same
+# answer on any machine, so every test runs with downloads off (the made-in-code surfaces), unless PLACE_KIT_NETWORK_TESTS=1 asks for the one network check in
+# test_place_scans.py. A test that wants scans makes its own small library of pictures (the "own_surfaces" route) in its work folder.
+if os.environ.get('PLACE_KIT_NETWORK_TESTS') != '1':
+    os.environ.setdefault('PLACE_KIT_OFFLINE', '1')
+    os.environ.setdefault('PLACE_KIT_SCAN_CACHE', os.path.join(tempfile.gettempdir(), 'explainer-film-tests-no-scan-cache'))     # never the machine's own cache
+
 
 def project_folder():
     """The project the plugin was made in (its git history, recordings and films), or None when it is not on this machine."""

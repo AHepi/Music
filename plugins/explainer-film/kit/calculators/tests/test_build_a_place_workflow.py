@@ -327,6 +327,31 @@ lied = run_case('audit_liar', responses={'~^audit\\d*$': [liar, 'audit-pass.json
 check.true('an audit helper that says pass while the preflight exited 1 is not believed: the exit code is a fact, the word is a claim',
            'recombine1' in labels(lied) and "the helper said the audit passed, but the preflight's exit code was 1" in prompt_of(lied, 'recombine1'))
 
+# ------------------------------------------------------------------ plugin 1.5.0: the gate never contradicts itself, and a repair round never loses its file
+first_audit = prompt_of(once, 'audit')
+check.true('the audit helper runs the preflight WITH the place\'s own facts (--real-world-facts), so it cannot fail a span the audit passed',
+           '--real-world-facts /path/to/run/plan/real-world-facts.json' in first_audit and 'explainer-film-preflight place' in first_audit,
+           recorded='the village run, 23 October 2026: the preflight was called without the facts and failed a 3.50 m ridge span the audit had passed')
+check.true('  (and is told never to make a missing scene file itself: it says scene_missing instead)', 'scene_missing true' in first_audit)
+lost_combine = dict(fixture('combine-report-fixed.json'), finished_file='', finished_file_made=False, failures=['LOSTFILE the finished scene of this round was never saved'])
+lost_audit = dict(fixture('audit-fail.json'), scene_missing=True, audit_exit_code=2, preflight_exit_code=2, scene_file='/path/to/run/scene/round2/finished.blend',
+                  problems=[{'check': 'audit input', 'where': 'the scene file', 'owner': 'integrator', 'text': 'the scene file is not there', 'fix': 'none'}])
+lost = run_case('repair_lost_file', responses={'~^audit\\d*$': ['audit-fail.json', lost_audit], '~^repair\\d+:': 'part-report-fixed.json', '~^recombine\\d+$': lost_combine})
+labs = labels(lost)
+check.true('a repair round that made no finished file does not lose the last one: the run keeps round 1\'s file and its audit, records the round as lost, and asks for no second repair on top of nothing',
+           lost['result']['repairs'] and lost['result']['repairs'][0].get('lost_file') is True and 'repair2:lock_gate' not in labs
+           and lost['result']['combine']['finished_file'] == '/path/to/run/scene/round1/finished.blend' and lost['result']['audit']['scene_file'] == '/path/to/run/scene/round1/finished.blend',
+           details=', '.join(labs[-6:]), recorded='the village run: repair round 2 failed with "the scene file ... is not there" and the run ended with no audited file of that round')
+check.true('  (the report says nothing was lost and names the file that stays)', 'nothing was lost' in lost['result']['report_markdown'] and 'round1/finished.blend' in lost['result']['report_markdown'])
+check.true('  (the integrator is told the exact path of the round\'s finished file, to copy its best try there, and that the kit\'s own scatter is never thinned to pass)',
+           'THE FINISHED FILE OF THIS ROUND IS /path/to/run/scene/round1/finished.blend' in prompt_of(once, 'combine') and 'never thin them' in prompt_of(once, 'combine'))
+looping = dict(fixture('combine-report.json'), idempotent=False, not_idempotent_owners=['lock_gate'])
+twice = run_case('idempotence_owner', responses={'combine': looping, '~^repair\\d+:': 'part-report-fixed.json', '~^recombine\\d+$': 'combine-report-fixed.json'})
+check.true('a stage that is not idempotent goes back to the owner the combine verb names, not to the integrator as "could not be combined in plain order"',
+           'repair1:lock_gate' in labels(twice) and 'running the stages twice changed the objects of lock_gate' in prompt_of(twice, 'repair1:lock_gate')
+           and 'could not be combined in plain order' not in ' '.join(one_call['prompt'] for one_call in twice['calls']),
+           recorded='the village run: the forest stage placed its trees round buildings of later stages; the problem went to the integrator, who cannot change a stage')
+
 # --------------------------------------------------------------------------------------------------------- a part comes back empty
 miss = run_case('missing_part', responses={'build:lock_gate': None})
 check.true('a part that returns nothing is reported as missing, not dropped quietly',

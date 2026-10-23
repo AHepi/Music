@@ -1,8 +1,9 @@
 # The place kit
 
 What this is: everything the plugin knows about making a believable place in Blender, as code you can run, so a model that
-is only told "build a place" still gets real normal maps, real displacement, dirt, grime, weathering, damage, weeds and parts
-that stand on the ground, and is stopped when it forgets one. You do not need to read this to use it: the skill
+is only told "build a place" still gets real photographed surfaces with real normal maps and real displacement, dirt, grime,
+weathering, damage, weeds, litter and stones where they really grow, puddles, and parts that stand on the ground, and is stopped
+when it forgets one. You do not need to read this to use it: the skill
 `skills/surfaces-wear-and-construction/SKILL.md` sends you here at the right moment, and every command says what to do next.
 
 ## A concrete example first
@@ -39,11 +40,11 @@ Exit 0 is a pass (read the LOOK lines), 1 is a fail, 2 is an input that is missi
 |---|---|
 | `new-settings` | drafts `place-settings.json` from the object names, collections and materials, and lists what it could not classify |
 | `roles` | gives every object exactly one role (exit 1 when one is unknown); `--write` stores it on the object; `--list` prints every role id with one line of meaning (no scene needed), and the roles it GUESSED are worth reading, not only the unknown ones |
-| `surfaces` | UVs in metres first, then real normal maps made from designed height pictures, roughness and colour variation, bevels with hardened normals, displacement where the role needs it |
+| `surfaces` | UVs in metres first, then for each surface a real photographed scan (the person's own library, else the free Poly Haven scan, downloaded once per machine; see "Real photographed surfaces"), else normal maps made from designed height pictures; roughness and colour variation, bevels with hardened normals, displacement where the role needs it |
 | `roads` | grades the ground and cuts two wheel ruts a gauge apart with banks, puddle hollows and (when the settings ask) hoof prints, as real geometry |
 | `damage` | damage as shape: boards that bow, chipped corners, leaning posts; no two parts alike |
 | `age` | the nine wear layers (dirt, grime, weathering, wetness, cracks and chips, edge wear, moss, rust, rubbish) in their fixed order |
-| `grow` | weeds, tufts, ferns, nettles, moss cushions, leaves, sticks, straw and clods as small 3D pieces, with exact keep-out gates |
+| `grow` | standing water in hollows and ruts (damp or wet places), then stones and pebbles, weeds, tufts, ferns, nettles, moss cushions, leaves, sticks, straw and clods as small 3D pieces, laid by SITE (wall feet, verges, fence lines, joints, damp corners, a thin background), with exact keep-out gates |
 | `light` | adds a sun, a sky and a lamp in every glowing thing when the scene has none (a scene with no light draws black); it adds no fill: add a soft area lamp or raise the sky from the other side yourself, never a second sun lamp |
 | `finish` | everything above in the right order, then save, reopen, audit; safe to run twice |
 | `finish-part` | one builder's share (`--owner NAME`): only that owner's objects, masks from that part alone |
@@ -80,6 +81,13 @@ Everything is optional; an empty file means "a lived-in place, dry, every role f
 - `off`: a treatment switched off for some roles, with a reason of at least 15 letters. It is listed in the audit as KNOWN with the reason and is capped: a place that skips most of the pass is not finished.
 - `dials`: a layer's own numbers (how high the foot splash reaches, how many cracks). A dial name that is not in `data/dial_table.json` is an error, so a typo cannot hide. **Dials and the state are the same for every role.** To treat one role differently (more moss on the waterside timber), give it its own look with `look_by_role`, or switch a treatment off for it with an `off` entry and a true reason.
 - `picture`: the camera and picture height, so marks are sized in picture dots (a crack is never thinner than three dots).
+- `surface_scans`: `"auto"` (the default: download the free Poly Haven scans when there is a network) or `"off"` (the made-in-code surfaces, as before 1.5.0).
+- `own_surfaces`: the person's own texture library, used before any download. `{"folder": "/path/to/my-surfaces", "use": {"ground.dirt_road": "mud", "wall.*": "brick", "thatch": "straw"}, "metres": {"mud": 2.0}}`:
+  one sub-folder per surface, each holding a colour picture, a normal picture and a height picture (a roughness picture if there is one), found by the usual words in
+  their names (`albedo`, `basecolor`, `diff`; `normal`, `nor_gl`; `height`, `disp`; `rough`). `use` maps a role, a role pattern ending in `*` or a surface id to a
+  sub-folder; `metres` says how many metres one copy of the picture covers (or a file `metres.txt` in the sub-folder; without either a sensible size is assumed and said).
+  The pictures are read where they are and are never copied into the plugin or a repository.
+- `pack_surface_pictures`: `true` (the default) packs the scan pictures into the saved scene, so it opens on a rented card; `false` keeps them as links to the cache.
 - `for_film`: `true` when the place will be shown in the film (on a phone). Its views are then the film's tall 9:16 frame, 1080 x 1920 (previews in the same shape, for example 540 x 960), and the audit's check **place: film frame** fails any other render size or a view camera set to another shape. Read the skill build-and-paint-a-place before placing a camera.
 
 What the kit makes and what it does not: the plants it grows are only the species in `data/species.json` (tuft, clover, nettle, fern, bramble, moss cushion, with leaves, pine needles, sticks, straw and clods as litter). Reeds, seaweed, barnacles and foam are NOT made by `grow`: build them as a few big designed shapes in the part that owns the props. Near water, the wear masks make the ground damp (full at the water's edge, nothing from about 3 m away; measured on a quay) and the water itself is not treated as a solid, but a tide line (a band at the height of the water) is not made by any layer: build it as shape.
@@ -110,6 +118,61 @@ trodden, how sheltered, how damp, how near a wall) that are drawn once from abov
 strength is "Amount" times a number written on each object (`pk_<layer>_amount`); an object with no such number reads 0 in every
 renderer, so the audit checks that every object has them. Amount 0 gives exactly the picture without the layer.
 
+## Real photographed surfaces
+
+Since 1.5.0 the surface pass dresses each material slot with a real photographed surface, in this order (`place_kit/surfaces/scans.py`):
+
+1. the person's own library (`own_surfaces` above), when it maps the slot's role or surface;
+2. the free Poly Haven scan (CC0, no account) that `data/surfaces.json` names for the surface (`polyhaven`; 36 of the 45 surfaces have one). Its colour, OpenGL
+   normal, roughness and height pictures are downloaded ONCE per machine into a cache outside every repository (`PLACE_KIT_SCAN_CACHE`, else
+   `~/.cache/explainer-film/surface-scans`), at the sizes of the house numbers `place_surfaces.scan_colour_resolution` (2k) and `scan_maps_resolution` (1k;
+   the audit's normal-map minimum is 1024). The address of every file is read from Poly Haven's own file list (`https://api.polyhaven.com/files/ID`), never guessed;
+   the request carries a plain agent name and nothing about the person;
+3. else the made-in-code recipe, as before: a surface with no scan named, no network, `PLACE_KIT_OFFLINE=1`, `"surface_scans": "off"` or a download that failed. `finish`
+   says so in a LOOK line for each such surface, with the reason.
+
+Every normal picture (downloaded or the person's own) is checked once against its own height picture with the kit's normal test (`normals.direction_correlation`):
+a green or red that points the other way (a DirectX map) is turned round, and an even lean of the whole picture (its mean red or green outside the audit's band) is taken
+out; the checked copy is kept in the cache and used. The material keeps the full wear chain on top. On the roles that displace, the height picture drives real
+displacement (EEVEE and Cycles), its middle set to the picture's own mean height so the surface does not rise or sink as a whole. The tile size is the scan's
+real size in metres (`scan_metres` in `surfaces.json`, read from Poly Haven's record). Two mappings blended by a slow noise hide the repeat; planks follow the
+boards' own direction (`scan_grain`); a scan whose colour is far from the place's palette is pulled toward it (`scan_colour_pull`, grass 0.7). Every material
+records where its surface came from (`pk_source`: `polyhaven:ID`, `own:NAME` or `made_in_code`); the audit lists it.
+
+Surfaces that soak up water (`absorbent` in `surfaces.json`: thatch, earth, timber ...) get no wet clear coat, and a wet roughness of at least 0.55 unless a dial says
+otherwise: a mirror film on thatch drew white sparkles. Where two grounds meet, their colours blend across a soft band 1 m wide (`seam`, a node in the material).
+
+## Where plants, litter, stones and puddles go
+
+Weeds do not grow evenly: they gather where the mower and the feet do not reach. `grow` (`place_kit/growth/sites.py` and `scatter.py`) lays every group by SITE:
+
+| Site | Where | Counted per |
+|---|---|---|
+| `wall_foot` | an 18 cm strip at the foot of every wall | metre |
+| `verge` | road edges, and the seam where two different grounds meet (half a metre) | metre |
+| `fence_line` | along fences and building lines | metre |
+| `joint` | the joints between pieces of the same ground (stones, boards; 8 cm) | metre |
+| `centre_strip` | the grass strip down a road's centre (`centre_grass`) | 100 square metres |
+| `damp_corner` | damp, shady corners (from the wear masks) | 100 square metres |
+| `background` | a thin scatter over the rest of the ground that grows | 100 square metres |
+
+The numbers per site are in `data/species.json` (`sites`: plants, litter and stones each); each is scaled by the look's dial and by how much of the site the view
+cameras see (full within `place_wear.scatter_full_metres`, 35 m, nothing past `scatter_reach_metres`, 100 m), so pieces go where a picture can show them. Each
+species' liking for a site is read (the `seam` liking for joints and the centre strip); a site that no species likes gets nothing; the top-up after the keep-out
+recount adds only inside sites. Stones and pebbles (`pebble` 4 to 64 mm, `cobble` 64 to 256 mm: the Wentworth sizes, in `real_world_facts.json`) are seated only in
+unpaved ground and sunk by part of their height; plants keep 5 cm clear of litter and stones. Fern fronds lie near flat with their faces to the sky, and thin leaves
+let light through (a frond on its edge drew as a dark V).
+
+Standing water (`place_kit/growth/puddles.py`): when the state is damp or wet, the low cells of the ground (and the wheel ruts) that the cameras see become still
+water: a long hollow or rut is cut into stretches of about 1.5 m, a share of them hold water (`place_wear.puddle_keep_share`), picked by a slow noise so wet
+stretches come in short runs with dry ground between; each pool's level is a share of the depth below the rim of its hollow, varied from pool to pool, and the water
+draws back toward the pool's ends, so a pool is a lens or a rounded patch. It is one flat sheet at each pool's level with a small ripple (`PK puddles`, role
+`never.puddle`, casts no shadow), at most `puddle_area_max_square_metres` (150), the nearest first. A first try kept stretches at random and the two ruts read as long blue rails. The wet layer of the wear chain shows puddles only on ground that holds
+them (`pk_holds_puddles`), so a roof never gets one.
+
+The scatter has its own triangle budget (`place_audit.scatter_triangles_max`, 1,200,000): the growth step plans with 10 percent spare and trims itself if it is still
+over, and the audit counts its pieces as `kit scatter`, never as a builder's work or as unowned.
+
 ## The audit and the gate
 
 `audit` writes `place-audit.json`: FACTS only (which material has which treatment, how deep the ruts really are, which part
@@ -129,6 +192,11 @@ alone does not count, so floorboards stay out). **place: budgets** also counts e
 about 10 s built in bulk): from 1,000 to `place_audit.objects_total_fail` (3,000, judged) it is a LOOK, above that a FAIL.
 **place: construction** fails a free span longer than the part's role allows (planks and floor boards 1.38 m, beams and fences 2.5 m)
 unless the place's own facts file holds a sourced `free_span` fact for it (a hall's tie beam between its walls). An audit made before these checks says "not measured by this audit" (a LOOK, never a FAIL).
+Two checks of 1.5.0: **place: sites** (a LOOK when less than `place_audit.plants_in_sites_share_min`, 0.5, of the plants grow in sites, or when a site holds less
+than `site_count_share_min`, 0.8, of what was planned for it; both numbers judged) and **place: surfaces** (how many materials come from photographed scans and which fell back to the
+made-in-code recipe, with the reason; a LOOK, never a FAIL, since a machine with no network must still finish). **place: budgets** judges the kit's own scatter
+(`kit scatter`) against `scatter_triangles_max`, not against a builder's budget. The audit records the place's own real-world facts (the file the settings' `facts` names,
+and the one given to `audit --facts`), with a checksum of each file, so the judge reads the same facts with or without `--real-world-facts`.
 The wear layers' shade (which sides stay sheltered and damp: moss, soot, fade) is worked out for the scene's own sun lamp when
 there is exactly one, else for a sun at 135 degrees compass and 45 up; `finish` and the audit say which was used, so add your sun
 before `finish`. `explainer-film-setup` prints a "Blender 5.2 probe" (`probe_blender.py`): which way of setting a Geometry Nodes
@@ -244,7 +312,9 @@ from seconds is an estimate, never a bill.
 
 ## What was measured and what was only judged
 
-Measured here (the tests run these): the audit fails a flat hut and passes the finished one; every normal map agrees with its own
+Measured here (the tests run these): a library of the person's own surfaces is read (one of its normal maps made DirectX on purpose is turned round, one surface with
+no normal map gets one made from its height), every material says where its surface came from, plants and litter land in their sites and the audit measures the share,
+a tiny scatter budget is kept, puddles lie flat in hollows and ruts and not on roofs (`test_place_real_surfaces.py`); the audit fails a flat hut and passes the finished one; every normal map agrees with its own
 height and a flipped copy reads wrong; the master at 0 gives exactly the picture without wear; drawing twice gives the same
 picture; finishing twice, and the same scene finished twice, give the same scene and the same pictures; the road's ruts, measured
 by rays, are about as deep as the settings say and a gauge apart, and no plant stands in a rut or the road's centre strip; the
@@ -266,6 +336,10 @@ are first tries too. The style rule (few, big, clean, designed marks; no photogr
 - The batch rule and the allowance work as tools that refuse; that a smaller model, asked only for a place in plain words, then really batches its tries was not tried.
 - `paint_request.py --keep-wetness` (the painter prompt for a place built wet) was tried on the template's words only; no painting was paid for, so how the painter treats the words is not known.
 - The `balance` action of the client was written from RunPod's documented query and never run.
+- The Poly Haven downloads were tried on this machine for the proof scene (seven surfaces) and by hand for more; the tests never download (they run with
+  `PLACE_KIT_OFFLINE=1`; `PLACE_KIT_NETWORK_TESTS=1` adds one real download). The 36 scans named in `surfaces.json` were chosen from Poly Haven's list and a
+  preview each, not all built into a scene; the site numbers and the colour pull are first tries judged on one small scene and the yard.
+- How the scans and sites look on a large place, and whether a smaller model, told only to build a place, gets a good result from them, was not tried here.
 
 ## Tests
 
@@ -273,7 +347,7 @@ are first tries too. The style rule (few, big, clean, designed marks; no photogr
 so and are skipped). The files for this kit: `test_place_data.py` (data and the checker of the data), `test_place_roles.py`,
 `test_place_shapes.py` (recipes, normal maps, roads, grids, pieces), `test_place_audit_check.py` (the judge),
 `test_preflight_place.py` (the place stage), `test_place_blender.py` (everything inside Blender), `test_place_combine.py`,
-`test_place_render.py`, `test_place_card_time.py` (the ledger, the allowance, the batch rule, the gate on every card command), `test_place_variations.py` (settings, the checks before and after drawing, the split, a fake card and a fake Blender, and with Blender the real worker on a tiny hut), `test_picture_measures.py`, `test_place_fixes.py` (the faults a first full check found, each with the old behaviour as a control) and `test_place_hook.py` (the prompt reminder in `hooks/`); and for the film's model builder, which the kit's bevel rule and PNG normal maps also reach, `test_model_kit_surfaces.py`. `python3 kit/place-kit/check_presets.py` checks that every number has a
+`test_place_render.py`, `test_place_card_time.py` (the ledger, the allowance, the batch rule, the gate on every card command), `test_place_variations.py` (settings, the checks before and after drawing, the split, a fake card and a fake Blender, and with Blender the real worker on a tiny hut), `test_picture_measures.py`, `test_place_fixes.py` (the faults a first full check found, each with the old behaviour as a control), `test_place_real_surfaces.py` (1.5.0: photographed surfaces from a small library made by the test, the normal check, sites, stones, puddles, the scatter budget and the judge's new checks) and `test_place_hook.py` (the prompt reminder in `hooks/`); and for the film's model builder, which the kit's bevel rule and PNG normal maps also reach, `test_model_kit_surfaces.py`. `python3 kit/place-kit/check_presets.py` checks that every number has a
 kind and a source, the data agree, every treatment a class requires is made by a real function and proved by a test, no kit code
 names a kind of place, no code that runs in Blender imports Pillow, OpenCV or SciPy, and nothing private is written anywhere.
 
@@ -281,8 +355,8 @@ names a kind of place, no code that runs in Blender imports Pillow, OpenCV or Sc
 
 `place_command.py` is the launcher (it finds Blender and runs the verb in it); `blender_run.py` is what runs inside Blender;
 `place_kit/` is the package: `commands.py` and `cli.py` (the verbs), `roles.py`, `settings_file.py`, `surfaces/` (heights,
-normals, UVs, materials, bevels, displacement, roads, damage), `wear/` (the nine layers, their masks and the chain),
-`growth/` (the 3D pieces, the scatter and its keep-out recount), `variations/` (batched rounds: keys, spec, apply and worker inside Blender, cards, compare, sheet, runner, verb), `card_time.py` (the ledger and the allowance), `checks/` (audit, construction, scale, normal-map test, ownership,
+normals, UVs, photographed scans, materials, bevels, displacement, roads, damage), `wear/` (the nine layers, their masks and the chain),
+`growth/` (the 3D pieces, the sites, the scatter and its keep-out recount, the puddles), `variations/` (batched rounds: keys, spec, apply and worker inside Blender, cards, compare, sheet, runner, verb), `card_time.py` (the ledger and the allowance), `checks/` (audit, construction, scale, normal-map test, ownership,
 fingerprint, combine), `render/` (the renderer rule, the render job, the rented-card client and the worker), `parts.py`,
 `undo.py`, `light.py`, `convert.py` (curves, text, metaballs and collection instances are turned into meshes at the start of `finish`, so no drawn object escapes the pass; `undo` brings the originals back). `data/` holds the roles, surfaces, looks, place types, dial table, species, real-world facts, templates and
 examples. `SOURCES-AND-LICENCES.md` says where every part came from; `DEVIATIONS.md` says where the build differs from its design and why, and lists the small changes made to the film's older tools

@@ -22,11 +22,13 @@ import numpy as np
 import bpy
 
 from .. import convert, house_numbers, names, parts, roles as roles_module, run_record, scene_read, settings_file
+from ..growth import keepout
 from ..surfaces import ground_mesh
 from . import construction, material_inspect, normals_test, scale
 
 AUDIT_VERSION = 1
 LAYER_SET = set(names.LAYER_ORDER)
+KIT_SCATTER_OWNER = 'kit scatter'        # the owner the audit gives the pieces and puddles the kit itself lays
 
 
 class AuditRefused(Exception):
@@ -135,23 +137,33 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
             material_objects.setdefault(slot_material.name, []).append(obj)
 
     # ---- scatter (plants and litter)
-    from ..growth import keepout
     scatter = keepout.scatter_facts(settings)
-    ground_objects = [o for o in objects if (by_object[o.name]['role'] or '').startswith('ground.') and not scene_read.is_scatter(o)]
+    ground_objects = [o for o in objects if (by_object[o.name]['role'] or '').startswith('ground.') and not scene_read.is_scatter(o) and not o.get('pk_puddle')]
     ground_area = _ground_area(ground_objects)
-    per100 = (lambda count: (count / ground_area * 100.0) if ground_area > 0 else None)
     plants_count = sum(g['count'] for g in scatter['groups'] if g.get('group') == 'plant')
     litter_count = sum(g['count'] for g in scatter['groups'] if g.get('group') == 'litter')
-    scatter['plants_per_100m2'] = per100(plants_count)
-    scatter['litter_per_100m2'] = per100(litter_count)
-    plants_floor = house_numbers.value('place_audit.plants_min_per_100_square_metres')
-    litter_floor = house_numbers.value('place_audit.litter_min_per_100_square_metres')
+    # the density floors are measured on the ground a view camera SEES and a piece may stand on (growth/sites.py), the same ground the growth step fills: an earlier audit
+    # measured them over every square metre of a 380 m ground and failed the kit's own scatter for it
+    site_facts = scatter.get('sites') if isinstance(scatter.get('sites'), dict) and 'plant' in (scatter.get('sites') or {}) else None
+    seen = {'plants': (site_facts or {}).get('plant', {}).get('seen_area_m2'), 'litter_pieces': (site_facts or {}).get('litter', {}).get('seen_area_m2')}
+    budget_scale = float((scatter.get('record') or {}).get('budget_scale', 1.0) or 1.0)
+    scatter['measured_on'] = 'the ground a view camera sees' if site_facts else 'all the ground (the plan masks are older than the sites)'
+    scatter['budget_scale'] = budget_scale
+
+    def per100(count, treatment='plants'):
+        area = seen[treatment] if site_facts and seen[treatment] else ground_area
+        return (count / area * 100.0) if area and area > 0 else None
+
+    scatter['plants_per_100m2'] = per100(plants_count, 'plants')
+    scatter['litter_per_100m2'] = per100(litter_count, 'litter_pieces')
+    plants_floor = house_numbers.value('place_audit.plants_min_per_100_square_metres') * min(budget_scale, 1.0)
+    litter_floor = house_numbers.value('place_audit.litter_min_per_100_square_metres') * min(budget_scale, 1.0)
     scatter['required'] = {}                  # what the ground roles require, whether or not any ground object has a material (a bare ground with no material must still grow things)
     for treatment, count, floor in (('plants', plants_count, plants_floor), ('litter_pieces', litter_count, litter_floor)):
         required_by = [o.name for o in ground_objects if treatment in roles_module.requirements(by_object[o.name]['role'], table, rules)['required']
                        and not roles_module.off_entries_for(by_object[o.name]['role'], treatment, rules)]
-        density = per100(count)
-        scatter['required'][treatment] = {'required_by': required_by[:12], 'count': count, 'per_100_square_metres': density,
+        density = per100(count, treatment)
+        scatter['required'][treatment] = {'required_by': required_by[:12], 'count': count, 'per_100_square_metres': density, 'floor': floor,
                                           'has': bool(count) and (density is None or density >= floor)}
 
     # ---- per object
@@ -164,6 +176,8 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
         info = by_object[obj.name]
         role = info['role']
         owner = settings.owner_of(scene_read.object_facts(obj)) or 'unowned'
+        if scene_read.is_scatter(obj) or obj.get('pk_puddle'):
+            owner = KIT_SCATTER_OWNER          # the kit's own pieces and puddles: their own budget (place_audit.scatter_triangles_max), never a builder's
         exempt = scene_read.is_scatter(obj) or (role is not None and roles_module.is_never(role))
         triangles = scene_read.triangle_count(obj, True, depsgraph)
         total_triangles += triangles
@@ -288,12 +302,14 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
                 entry['has'] = bool(plants_count) and (per100(plants_count) is None or per100(plants_count) >= plants_floor)
                 entry['detail'] = {'count': plants_count, 'per_100_square_metres': per100(plants_count)}
             elif treatment == 'litter_pieces':
-                entry['has'] = bool(litter_count) and (per100(litter_count) is None or per100(litter_count) >= litter_floor)
-                entry['detail'] = {'count': litter_count, 'per_100_square_metres': per100(litter_count)}
+                entry['has'] = bool(litter_count) and (per100(litter_count, 'litter_pieces') is None or per100(litter_count, 'litter_pieces') >= litter_floor)
+                entry['detail'] = {'count': litter_count, 'per_100_square_metres': per100(litter_count, 'litter_pieces')}
             treatments[treatment] = entry
+        source_material = bpy.data.materials.get(material_name)
         material_rows.append({'name': material_name, 'role': sorted(real_roles)[0], 'roles': sorted(real_roles), 'users': len(users), 'objects': [o.name for o in users][:12],
                               'treatments': treatments, 'missing': [k for k, v in treatments.items() if v['required'] and not v['has']], 'off_with_reason': off_map,
-                              'glows': info['glows']})
+                              'glows': info['glows'], 'source': (source_material.get('pk_source') if source_material is not None else None) or 'own material',
+                              'surface': source_material.get('pk_surface') if source_material is not None else None})
 
     # ---- normal maps, roads, renderer, off entries
     maps = normals_test.normal_map_facts(run_light=run_light_test and not quick)
@@ -326,6 +342,10 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
     scene_sha1 = sha1_of_file(path)
     settings_sha1 = sha1_of_file(settings.path) if settings.path and os.path.exists(settings.path) else None
     non_mesh = convert.find_unconverted(settings)
+    place_facts, facts_files = own_facts(settings, facts_path)
+    surfaces = {'sources': record.get('surface_sources') or {}, 'fallbacks': record.get('surface_fallbacks') or {},
+                'photographed': sorted({m['name'] for m in material_rows if str(m.get('source', '')).startswith(('polyhaven:', 'own:'))}),
+                'made_in_code': sorted({m['name'] for m in material_rows if m.get('source') == 'made_in_code'})}
     # ---- the views, the world round the place, the sun and the lettering (views_and_world.py); a fact that cannot be gathered is written into
     # problems and left out, and the judge then says "not measured by this audit" (a LOOK), never a crash
     gathered, lettering = None, None
@@ -347,7 +367,8 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
              'displacement': {'materials': [m['name'] for m in material_rows if m['treatments'].get('displacement', {}).get('has')], 'objects': displacement_objects, 'too_coarse': too_coarse},
              'roads': roads, 'renderer': renderer, 'light': _light_facts(),
              'off': {'entries': off_entries, 'allowed_ids': allowed_ids, 'share': (off_pairs / required_pairs) if required_pairs else 0.0},
-             'construction_summary': built['summary'], 'non_mesh': non_mesh, 'problems': problems}
+             'construction_summary': built['summary'], 'non_mesh': non_mesh, 'problems': problems, 'surfaces': surfaces, 'puddles': keepout.puddle_facts(),
+             'place_facts': place_facts, 'facts_files': facts_files}
     if gathered is not None:
         audit.update(views=gathered['views'], world=gathered['world'], sun=gathered['sun'], lettering=lettering)
     if renderer is None:
@@ -357,6 +378,36 @@ def audit_place(settings, out_path=None, judge=True, run_light_test=True, facts_
         with open(out_path, 'w') as handle:
             json.dump(audit, handle, indent=1, default=_json_default)
     return audit
+
+
+def own_facts(settings, facts_path=None):
+    """The place's OWN facts (its facts file named in the settings' "facts" and by --facts, with a sha1 of each file), written into the audit so the judge reads the same
+    facts whether or not it is given --facts again: an earlier run's preflight was called without them and failed a span the audit had passed."""
+    sources = []
+    own = settings.data.get('facts') if hasattr(settings, 'data') else None
+    found = []
+    if isinstance(own, list):
+        found.extend(f for f in own if isinstance(f, dict))
+    elif isinstance(own, str):
+        base = os.path.dirname(settings.path) if getattr(settings, 'path', None) else os.getcwd()
+        sources.append(own if os.path.isabs(own) else os.path.join(base, own))
+    if facts_path:
+        sources.append(facts_path)
+    files = []
+    for path in sources:
+        try:
+            with open(path, encoding='utf-8') as handle:
+                data = json.load(handle)
+        except (OSError, ValueError) as problem:
+            files.append({'path': path, 'sha1': None, 'problem': str(problem)})
+            continue
+        files.append({'path': os.path.abspath(path), 'sha1': sha1_of_file(path)})
+        found.extend(f for f in (data.get('facts', data) if isinstance(data, dict) else data) if isinstance(f, dict))
+    by_id = {}
+    for fact in found:
+        if fact.get('id'):
+            by_id[fact['id']] = fact
+    return list(by_id.values()), files
 
 
 def _json_default(value):

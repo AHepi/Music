@@ -243,14 +243,14 @@ const PART_REPORT = obj(PART_PROPS, PART_REQUIRED)
 const GROUND_REPORT = obj({ ...PART_PROPS, start_file: str, ground_file: str, cameras: strs, ground_promise: str }, [...PART_REQUIRED, 'ground_file', 'cameras', 'ground_promise'])
 
 const COMBINE_REPORT = obj({
-  order_plain_ok: bool, order_reverse_ok: bool, violations: strs, idempotent: bool,
+  order_plain_ok: bool, order_reverse_ok: bool, violations: strs, idempotent: bool, not_idempotent_owners: strs, finished_file_made: bool,
   combined_file: str, finished_file: str, audit_file: str,
   audit_verdict: { type: 'string', enum: ['pass', 'fail', 'not run'] }, audit_problems: list(AUDIT_PROBLEM),
   repairs_made: strs, missing_parts: strs, failures: strs, not_tested: strs, card_seconds: num, batches: num,
 }, ['order_plain_ok', 'order_reverse_ok', 'violations', 'idempotent', 'finished_file', 'audit_verdict', 'audit_problems', 'repairs_made', 'failures', 'not_tested'])
 
 const AUDIT_REPORT = obj({
-  scene_file: str, audit_file: str, scene_sha256: str, audit_exit_code: num, preflight_exit_code: num,
+  scene_file: str, audit_file: str, scene_sha256: str, audit_exit_code: num, preflight_exit_code: num, scene_missing: bool,
   verdict: { type: 'string', enum: ['pass', 'fail'] }, quick: bool,
   problems: list(AUDIT_PROBLEM), looks: strs, known: strs, notes: strs,
 }, ['scene_file', 'audit_file', 'audit_exit_code', 'preflight_exit_code', 'verdict', 'problems', 'looks', 'known'])
@@ -376,19 +376,23 @@ Run these, in this order (each one starts Blender):
 2. explainer-film-place combine --scene ${GROUND_FILE} --stages ${stagePaths().join(' ')} --order reverse --owners ${STATE.plan.files.ownership} --out ${DIR.reports}/combine-reverse-round${version}.json
 3. explainer-film-place finish --scene ${combinedFile(version)} --settings ${STATE.plan.files.settings} --facts ${STATE.plan.files.facts} --save-as ${finishedFile(version)}
 Never use a quick run for the finished scene. Step 3 writes place-audit.json beside the finished scene and prints the audit; the official audit of this round is made later by another helper. Delete the combined scene of any older round when you are sure it is not needed.
+THE FINISHED FILE OF THIS ROUND IS ${finishedFile(version)} AND NOTHING ELSE: the audit helper opens exactly that path. If you try anything under another name, the last thing you do is save (or copy) the finished scene you stand behind to that exact path; say finished_file_made true only when it is there. Answer finished_file with that path. Never answer with a round that has no finished file when an earlier round had one: say finished_file_made false and why, and the workflow keeps the earlier file.
+order_plain_ok and order_reverse_ok say whether the stages RAN in that order with no violation (the combine verb's lines "PASS combine (... order)" and "PASS stages ran in order"); they are not the exit code. Whether a second run gives the same scene is the separate field idempotent, and the combine verb names the owners whose objects came out different ("the objects of OWNER came out different"): put them in not_idempotent_owners.
+The kit's own scattered pieces and puddles have their own budget and the growth step stays inside it by itself: never thin them to pass an audit; a budget line about a builder's triangles goes back to that builder.
 Look: ${STATE.plan.look ?? 'from the settings'}; state: ${STATE.plan.state ?? 'from the settings'} (change them only when a repair below says so).
 ${repairs.length ? `REPAIRS ASKED OF YOU (settings, role tags and dials only: geometry is never yours and goes back to its owner):\n${numbered(repairs.map((repair) => `${repair.text} (where: ${repair.where}; fix: ${repair.fix})`))}\n` : ''}${cardBlock('integrator', 'integrator')}
 Return your report in the shape asked.`
 
-const auditPrompt = (version) => `${first('integrator')}
+const auditPrompt = (version, file = finishedFile(version)) => `${first('integrator')}
 
 ${runHeader('integrator')}
 
-YOUR MODE: audit. Prove this file and change nothing: ${finishedFile(version)}. Never save it again and never run the whole pass again.
+YOUR MODE: audit. Prove this file and change nothing: ${file}. Never save it again and never run the whole pass again.
 Settings: ${STATE.plan.files.settings}. Facts table: ${STATE.plan.files.facts}. Ownership table: ${STATE.plan.files.ownership}.
+If ${file} is not there, do NOT make it and do not audit another file: answer scene_missing true, verdict fail, and one problem with check "audit input", owner "integrator". The workflow then keeps the last audited file.
 Run these, in this order:
-1. explainer-film-place audit --scene ${finishedFile(version)} --settings ${STATE.plan.files.settings} --facts ${STATE.plan.files.facts} --out ${auditFile(version)}
-2. explainer-film-preflight place --place-audit ${auditFile(version)} --blend ${finishedFile(version)} --place-settings ${STATE.plan.files.settings} --reports ${DIR.reports}/preflight-round${version}${ARGS.accepted ? ` --accepted ${ARGS.accepted}` : ''}
+1. explainer-film-place audit --scene ${file} --settings ${STATE.plan.files.settings} --facts ${STATE.plan.files.facts} --out ${auditFile(version)}
+2. explainer-film-preflight place --place-audit ${auditFile(version)} --blend ${file} --place-settings ${STATE.plan.files.settings} --real-world-facts ${STATE.plan.files.facts} --reports ${DIR.reports}/preflight-round${version}${ARGS.accepted ? ` --accepted ${ARGS.accepted}` : ''}
 The preflight reports go into ${DIR.reports}/preflight-round${version}/, so nothing lands beside the plugin. ${ARGS.accepted ? 'The accepted file is the person\'s: you never write an accepted entry.' : 'There is no accepted file.'}
 Every FAIL goes into problems with the owner of the object it names ('integrator' for settings, role tags and dials). Return your report in the shape asked.`
 
@@ -561,7 +565,14 @@ function collectProblems(combine, audit) {
   for (const text of combine?.violations ?? []) found.push({ check: 'ownership', where: 'combine', owner: ownerFromText(text), text, fix: 'each owner changes only its own objects' })
   if (combine && combine.order_plain_ok === false) found.push({ check: 'combine', where: 'plain order', owner: 'integrator', text: 'the stages could not be combined in plain order', fix: 'read the combine report; the stage that fails goes back to its owner' })
   if (combine && combine.order_reverse_ok === false) found.push({ check: 'combine', where: 'reverse order', owner: 'integrator', text: 'the reverse order gives a different or broken scene: a stage depends on the order', fix: 'the stage that depends on another stage goes back to its owner' })
-  if (combine && combine.idempotent === false) found.push({ check: 'combine', where: 'run twice', owner: 'integrator', text: 'running the stages twice does not give the same scene: a stage is not idempotent', fix: 'the stage must first remove what it made earlier' })
+  if (combine && combine.idempotent === false) {
+    const named = (combine.not_idempotent_owners ?? []).map(knownOwner).filter((owner) => owner !== 'integrator')
+    for (const owner of named.length ? [...new Set(named)] : ['integrator']) {
+      found.push({ check: 'combine', where: 'run twice', owner, text: named.length
+        ? `running the stages twice changed the objects of ${owner}: its stage is not idempotent (it reads objects a later stage makes, or does not remove what it made)`
+        : 'running the stages twice does not give the same scene: a stage is not idempotent', fix: 'the stage must first remove what it made earlier, and read only the ground and the plan, never what another stage makes' })
+    }
+  }
   if (audit && audit.verdict === 'pass' && audit.preflight_exit_code !== 0) found.push({ check: 'audit', where: 'the audit helper', owner: 'integrator', text: `the helper said the audit passed, but the preflight's exit code was ${audit.preflight_exit_code}`, fix: 'run the preflight stage place again and read its lines' })
   for (const problem of audit?.problems ?? []) found.push({ ...problem, owner: knownOwner(problem.owner) })
   for (const problem of combine?.audit_problems ?? []) if (!audit) found.push({ ...problem, owner: knownOwner(problem.owner) })
@@ -578,12 +589,18 @@ const groupByOwner = (problems) => {
   return groups
 }
 
-async function runAudit(version, label) {
-  const result = await agent(auditPrompt(version), { label, phase: 'Audit', schema: AUDIT_REPORT, effort: EFFORT , ...MODEL })
+// the finished file of a round: the one the integrator says it saved, else the round's own name (the audit helper is told to say so when it is not there)
+const roundFile = (combine, version) => (combine && combine.finished_file_made !== false && combine.finished_file) ? combine.finished_file : finishedFile(version)
+
+async function runAudit(version, label, file = finishedFile(version)) {
+  const result = await agent(auditPrompt(version, file), { label, phase: 'Audit', schema: AUDIT_REPORT, effort: EFFORT , ...MODEL })
   if (result) return result
-  return { scene_file: finishedFile(version), audit_file: auditFile(version), audit_exit_code: 2, preflight_exit_code: 2, verdict: 'fail', quick: false,
+  return { scene_file: file, audit_file: auditFile(version), audit_exit_code: 2, preflight_exit_code: 2, verdict: 'fail', quick: false,
     problems: [{ check: 'audit', where: 'the audit did not run', owner: 'integrator', text: 'the helper that proves the file returned nothing', fix: 'run the audit again' }], looks: [], known: [], notes: ['no answer came back'] }
 }
+
+// a round that made no finished file must not lose the last one: the audit helper says scene_missing, or the integrator says it made none
+const roundLostItsFile = (combine, audit) => (combine && combine.finished_file_made === false) || (audit && audit.scene_missing === true)
 
 // --------------------------------------------------------------------------------------------------------- reading test
 function readingTest(round, seen, blind) {
@@ -827,8 +844,10 @@ log(`Combined: plain ${STATE.combine.order_plain_ok}, reverse ${STATE.combine.or
 
 // ---- Audit: nothing is drawn until it passes; at most MAX_REPAIRS repair rounds, routed to the owners the audit names
 phase('Audit')
-STATE.audit = await runAudit(STATE.version, 'audit')
+STATE.audit = await runAudit(STATE.version, 'audit', roundFile(STATE.combine, STATE.version))
 STATE.auditRounds.push(STATE.audit)
+const keepAsLastGood = () => { STATE.lastGood = { combine: { ...STATE.combine, finished_file: roundFile(STATE.combine, STATE.version) }, audit: STATE.audit, version: STATE.version } }
+keepAsLastGood()
 let repairRound = 0
 while (!gateOk(STATE.combine, STATE.audit) && repairRound < MAX_REPAIRS) {
   repairRound++
@@ -856,13 +875,22 @@ while (!gateOk(STATE.combine, STATE.audit) && repairRound < MAX_REPAIRS) {
     return done(`the integrator came back with nothing in repair round ${repairRound}, so there is no scene to audit`)
   }
   noteCard('integrator', 'integrator', STATE.combine)
-  STATE.audit = await runAudit(STATE.version, `audit${repairRound}`)
+  const audited = await runAudit(STATE.version, `audit${repairRound}`, roundFile(STATE.combine, STATE.version))
+  if (roundLostItsFile(STATE.combine, audited)) {
+    STATE.notes.push(`Repair round ${repairRound} made no finished file (${roundFile(STATE.combine, STATE.version)}), so the last audited file ${STATE.lastGood.combine.finished_file} and its audit stay the current ones; nothing was lost.`)
+    STATE.repairs[STATE.repairs.length - 1].lost_file = true
+    STATE.combine = STATE.lastGood.combine
+    STATE.audit = STATE.lastGood.audit
+    break
+  }
+  STATE.audit = audited
   STATE.auditRounds.push(STATE.audit)
+  keepAsLastGood()
 }
 if (!gateOk(STATE.combine, STATE.audit)) {
   return done(`the audit still fails after ${repairRound} repair round(s), so no picture was drawn (nothing is drawn unless the audit passes or fails only on items the person accepted in writing)`)
 }
-STATE.finalFile = STATE.combine.finished_file || finishedFile(STATE.version)
+STATE.finalFile = roundFile(STATE.combine, STATE.version)
 STATE.finalAuditFile = STATE.audit.audit_file || auditFile(STATE.version)
 log(`Audit passed on ${STATE.finalFile} after ${repairRound} repair round(s).`)
 
@@ -954,8 +982,10 @@ if (!toFix.length) {
   STATE.fixCombine = await agent(combinePrompt(STATE.version, settingsRepairs, owners.includes(STATE.plan.ground_owner)), { label: 'combine:fix', phase: 'Fix', schema: COMBINE_REPORT, effort: EFFORT , ...MODEL })
   if (STATE.fixCombine) {
     noteCard('integrator', 'integrator', STATE.fixCombine)
-    STATE.fixAudit = await runAudit(STATE.version, 'audit:fix')
-    if (gateOk(STATE.fixCombine, STATE.fixAudit)) {
+    STATE.fixAudit = await runAudit(STATE.version, 'audit:fix', roundFile(STATE.fixCombine, STATE.version))
+    if (roundLostItsFile(STATE.fixCombine, STATE.fixAudit)) {
+      STATE.notes.push(`The fix round made no finished file (${roundFile(STATE.fixCombine, STATE.version)}), so the first audited file ${STATE.finalFile} stays the final one; nothing was lost.`)
+    } else if (gateOk(STATE.fixCombine, STATE.fixAudit)) {
       fixDone = true
     } else {
       STATE.notes.push('After the fix round the audit does not pass, so nothing was drawn again and the first audited file stays the final one. The stage files have changed since that file was made.')
@@ -969,7 +999,7 @@ if (!toFix.length) {
     const redraw = wanted.length ? wanted : STATE.plan.views
     if (!wanted.length) log('The fixers did not name the views that changed: all views are drawn again.')
     const previous = picturePaths(STATE.render, false)
-    fixFile = STATE.fixCombine.finished_file || finishedFile(STATE.version)
+    fixFile = roundFile(STATE.fixCombine, STATE.version)
     STATE.fixRender = await agent(renderPrompt('round2', redraw, previous, fixFile), { label: 'render:fix', phase: 'Fix', schema: RENDER_REPORT, effort: EFFORT , ...MODEL })
     noteCard('renderer', 'renderer', STATE.fixRender)
     if (!STATE.fixRender || STATE.fixRender.stalled || !STATE.fixRender.pictures.length) {

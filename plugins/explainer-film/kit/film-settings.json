@@ -4480,6 +4480,18 @@
    "unit": "share of triangle area",
    "kind": "invented",
    "source": "the plugin 1.4.0 design (22 October 2026): model_lint --surfaces fails a .glb when more than this share of its area has no normal map, constant roughness and no vertex colours"
+  },
+  "scan_colour_resolution": {
+   "value": "2k",
+   "unit": "Poly Haven picture size",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round (23 October 2026): the coal mine yard used photographed 2k colour; 2k colour is 3.5 MB a surface"
+  },
+  "scan_maps_resolution": {
+   "value": "1k",
+   "unit": "Poly Haven picture size",
+   "kind": "judged",
+   "source": "the garden surfaces (procedural-textures/garden/surfaces, log 30) used 1k scans; 1024 px is the audit's normal-map minimum; a 1k normal and height are about 4.5 MB a surface against 18 MB at 2k (the disk and the packed scene stay small)"
   }
  },
  "place_audit": {
@@ -4559,16 +4571,16 @@
    }
   },
   "plants_min_per_100_square_metres": {
-   "value": 20,
+   "value": 2,
    "unit": "pieces",
-   "kind": "invented",
-   "source": "the plugin 1.4.0 design (22 October 2026): weeds and tufts per 100 square metres of ground (the street calibration: about 1 percent cover)"
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: weeds now grow by site (wall feet, verges, joints, damp corners) with only a thin background; the floor is the thinnest look's background (kept: 12 x 0.2 = 2.4 per 100 m2) on the ground a view camera sees, so a bare place still fails"
   },
   "litter_min_per_100_square_metres": {
-   "value": 30,
+   "value": 3,
    "unit": "pieces",
-   "kind": "invented",
-   "source": "the plugin 1.4.0 design (22 October 2026): leaves, straw, sticks, clods per 100 square metres of ground"
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: the thinnest look's litter background (kept: 20 x 0.2 = 4 per 100 m2) on the ground a view camera sees"
   },
   "triangles_total_max": {
    "value": 6000000,
@@ -4637,6 +4649,24 @@
    "unit": "times",
    "kind": "judged",
    "source": "plugin 1.4.0 fix round: a ground object whose outline area grew more than this after the roads step was reshaped into its bounding box (a curved road became a rectangle: the fault the code review measured grew its area 3.4 times; a correct change keeps it at 1.0)"
+  },
+  "scatter_triangles_max": {
+   "value": 1200000,
+   "unit": "triangles",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round (23 October 2026): the kit's own scattered pieces have their own budget, under the 1.5 million a card draws for a builder; the growth step scales its counts down to stay inside it, so the kit never fails its own output (the village run: 2,723,900 scatter triangles failed the per-builder budget as \"unowned\")"
+  },
+  "plants_in_sites_share_min": {
+   "value": 0.5,
+   "unit": "share of the plants",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: weeds grow where they are left alone (the weathering kit's populations); fewer than half at wall feet, verges, fence lines, joints and damp corners reads as an even spread (a LOOK)"
+  },
+  "site_count_share_min": {
+   "value": 0.8,
+   "unit": "share of a site's planned count",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: a site that holds far fewer pieces than its count could not be reached (a LOOK naming the site)"
   }
  },
  "place_construction": {
@@ -4947,6 +4977,42 @@
    "unit": "metres",
    "kind": "invented",
    "source": "the plugin 1.4.0 design (22 October 2026)"
+  },
+  "scatter_full_metres": {
+   "value": 35,
+   "unit": "metres from a view camera",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: a 20 cm tuft is about 7 picture dots tall at 35 m in a 1200 x 800 view with a 40 degree lens"
+  },
+  "scatter_reach_metres": {
+   "value": 100,
+   "unit": "metres from a view camera",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: at 100 m a 20 cm tuft is about 2 dots; past it the photographed ground surface carries the detail (the village run scattered 87,812 pieces over 113,408 m2 and failed its own budget)"
+  },
+  "puddle_fill_share_damp": {
+   "value": 0.35,
+   "unit": "share of a hollow's depth",
+   "kind": "judged",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py: water 1.5 cm above the lowest ground of each hollow)"
+  },
+  "puddle_fill_share_wet": {
+   "value": 0.6,
+   "unit": "share of a hollow's depth",
+   "kind": "judged",
+   "source": "the coal mine yard: after rain the hollows hold more"
+  },
+  "puddle_keep_share": {
+   "value": 0.5,
+   "unit": "share of the stretches of a hollow",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: water lies in some stretches of a rut, not all"
+  },
+  "puddle_area_max_square_metres": {
+   "value": 150,
+   "unit": "square metres",
+   "kind": "judged",
+   "source": "the plugin 1.5.0 fix round: a cap so a long road does not turn into a canal (the coal mine yard had eight puddles)"
   }
  },
  "place_measures": {

@@ -26,15 +26,21 @@ of the barrel. Then you run the whole pass on the combined place, audit the save
    (`--order both` does both from the same start in one run):
    - `explainer-film-place combine --scene GROUND.blend --stages stage_a.py stage_b.py --order plain --owners OWNERSHIP.json --save-as COMBINED.blend --out combine-plain.json`
    - `explainer-film-place combine --scene GROUND.blend --stages stage_a.py stage_b.py --order reverse --owners OWNERSHIP.json --out combine-reverse.json`
-   Each run also runs the chain a second time and says whether the scene came out the same (idempotent). Every violation
+   Each run also runs the chain a second time and says whether the scene came out the same (idempotent); when it did not, the run names the owners whose objects
+   changed (the line "FAIL idempotent: ... (the objects of OWNER came out different)"): put them in `not_idempotent_owners`, so the repair goes to them and not to you. `order_plain_ok` and `order_reverse_ok`
+   say whether the stages RAN in that order with no violation (the lines "PASS combine (... order)" and "PASS stages ran in order"), not the exit code. Every violation
    (a foreign object or material changed, an object with no owner, a shared node group changed, a frozen thing changed)
    goes into your answer with the owner that did it. If the ground stage was repaired since the last round, rebuild
    `ground.blend` first (apply the ground stage to the starting scene and save), because every part is seated on it.
 4. Run the whole pass on the combined scene, never with `--quick` (a quick result is refused as a final):
    `explainer-film-place finish --scene COMBINED.blend --settings SETTINGS.json --save-as FINISHED.blend`
-   It runs, in order: roles, the ground (and every part is seated on it again, in case the ground changed), surfaces, damage as
-   shape, wear, growth, light, picture size, then saves, reopens the saved file and audits it. Read the WHOLE output, including
-   anything it says it skipped.
+   It runs, in order: roles, the ground (and every part is seated on it again, in case the ground changed), surfaces (a photographed
+   scan for each surface when one can be had; a LOOK line names each surface still made in code, and why), damage as
+   shape, wear, puddles and growth by site, light, picture size, then saves, reopens the saved file and audits it. Read the WHOLE output, including
+   anything it says it skipped. The finished file of a round is the exact path your prompt names: whatever you try, the last thing you do is save (or copy)
+   the scene you stand behind to that path, and say `finished_file_made` true; if you could not make it, say false (the workflow then keeps the last audited file).
+   The kit's own weeds, litter, stones and puddles (`kit scatter` in the audit) have their own budget and keep inside it by themselves: never thin them to
+   pass; a budget line about a builder's triangles goes back to that builder.
 5. Read the audit (`place-audit.json` beside the finished file, or run `explainer-film-place audit --scene FINISHED.blend
    --settings SETTINGS.json --out place-audit.json`). Every FAIL line becomes one entry in `audit_problems`: the check, where,
    the owner of the object it names (from the ownership table or the `place_owner` property), the text and the fix text.
@@ -57,8 +63,10 @@ of the barrel. Then you run the whole pass on the combined place, audit the save
 ## Mode audit
 
 You prove the file, you do not change it. Never save the scene again.
+0. If FINISHED.blend is not there, do not make it and do not audit another file: answer `scene_missing` true, verdict fail, and one problem with check
+   "audit input" and owner `integrator`. The workflow keeps the last audited file.
 1. `explainer-film-place audit --scene FINISHED.blend --settings SETTINGS.json --facts FACTS.json --out place-audit.json`
-2. `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend --place-settings SETTINGS.json --reports FOLDER`
+2. `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend --place-settings SETTINGS.json --real-world-facts FACTS.json --reports FOLDER`
    (add `--accepted FILE` when the prompt names an accepted file; always pass `--reports` so the reports land in the run's own
    folder and not beside the plugin). It must exit 0.
 3. Your verdict comes from the exit codes and the FAIL lines, not from how things look. Every FAIL goes into `problems`
@@ -77,10 +85,10 @@ You prove the file, you do not change it. Never save the scene again.
 
 ## What you return (the shape is enforced)
 
-- Mode combine (also `card_seconds` when you used the card): `order_plain_ok`, `order_reverse_ok`, `violations` (each with the owner that did it), `idempotent`,
+- Mode combine (also `card_seconds` when you used the card): `order_plain_ok`, `order_reverse_ok`, `violations` (each with the owner that did it), `idempotent`, `not_idempotent_owners`, `finished_file_made`,
   `combined_file`, `finished_file`, `audit_file`, `audit_verdict` (pass, fail or not run), `audit_problems` (each with `check`,
   `where`, `owner`, `text` and `fix`), `repairs_made`, `missing_parts`, `failures` and `not_tested`.
-- Mode audit: `scene_file`, `audit_file`, `scene_sha256`, `audit_exit_code`, `preflight_exit_code`, `verdict` (pass only when the
+- Mode audit: `scene_file`, `audit_file`, `scene_sha256`, `audit_exit_code`, `preflight_exit_code`, `scene_missing`, `verdict` (pass only when the
   preflight exits 0), `quick`, `problems` (as above), `looks`, `known` and `notes`.
 - Mode gate: `preflight_exit_code`, `verdict`, `lines`, `stale`, `fresh_check_file` and `notes`.
 

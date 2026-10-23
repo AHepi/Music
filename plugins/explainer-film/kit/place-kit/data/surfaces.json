@@ -1,5 +1,5 @@
 {
- "about": "One entry per surface id: a recipe that makes a material. Every number is {value, unit, kind, source}; check-presets fails an entry without kind and source. height_recipe names a function in place_kit/surfaces/heights.py (soft large shapes, nothing under about 5 mm). tile_metres is the real size of one picture repeat. uv_method: box (one box mapping in metres), planar (from above), plank (u along the length, v across, random offset per plank). normal_strength is the Normal Map node strength (multiplied by 0.6 where displacement is on). displacement_depth_metres is used only for roles with displace true. Most values are first tries marked judged (from the garden and mine work) or invented; judge by looking.",
+ "about": "One entry per surface id: a recipe that makes a material. Every number is {value, unit, kind, source}; check-presets fails an entry without kind and source. height_recipe names a function in place_kit/surfaces/heights.py (soft large shapes, nothing under about 5 mm). tile_metres is the real size of one picture repeat. uv_method: box (one box mapping in metres), planar (from above), plank (u along the length, v across, random offset per plank). normal_strength is the Normal Map node strength (multiplied by 0.6 where displacement is on). displacement_depth_metres is used only for roles with displace true. Most values are first tries marked judged (from the garden and mine work) or invented; judge by looking. polyhaven names the free Poly Haven scan (CC0) the surface pass downloads and builds the material from (scan_metres is its real size, so one copy of the picture covers that many metres; scan_grain \"v\" means the grain runs up the picture, so a plank turns it a quarter); a surface with none, or a machine with no network, gets the made-in-code recipe above. absorbent true: the surface soaks water up (earth, straw, cloth, weathered wood), so the wetness layer darkens it but never puts a clear film of water on it. unpaved true: an unpaved ground (earth, mud, gravel, grass, sand, rock): loose stones and pebbles lie on it, and hollows in it hold puddles when the place is damp or wet. scan_colour_pull (a share 0..1, grass only for now): how far the scan's mean colour is pulled toward the palette's mean, keeping the scan's own detail (the scans of grass are dry and olive).",
  "surfaces": {
   "dirt_road": {
    "label": "packed dirt road, clods and a few big dark patches",
@@ -68,8 +68,18 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "a 2 m tile; soft clods blurred 1 to 2 px at 2048",
    "polyhaven": "brown_mud_dry",
-   "real_scale_note": "a 2 m tile; soft clods blurred 1 to 2 px at 2048"
+   "scan_metres": {
+    "value": 1.3,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of brown_mud_dry), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": true,
+   "scan_colour_pull": null
   },
   "packed_earth": {
    "label": "trodden earth, a little drier",
@@ -137,8 +147,18 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": "brown_mud_02",
-   "real_scale_note": ""
+   "scan_metres": {
+    "value": 1.3,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of brown_mud_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": true,
+   "scan_colour_pull": null
   },
   "mud": {
    "label": "wet mud with slick patches",
@@ -208,8 +228,18 @@
    "dials": {
     "wetness": 1.3
    },
+   "real_scale_note": "roughness about 0.3 where wet",
    "polyhaven": "brown_mud",
-   "real_scale_note": "roughness about 0.3 where wet"
+   "scan_metres": {
+    "value": 1.3,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of brown_mud), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": true,
+   "scan_colour_pull": null
   },
   "forest_floor": {
    "label": "needles, leaf litter and moss on soil",
@@ -278,8 +308,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": "forrest_ground_01",
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "forest_leaves_02",
+   "scan_metres": {
+    "value": 3.001,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of forest_leaves_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": true,
+   "scan_colour_pull": null
   },
   "grass": {
    "label": "short grass over soil (a ground picture; tufts are separate pieces)",
@@ -342,8 +382,23 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": "leafy_grass",
-   "real_scale_note": ""
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of leafy_grass), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": true,
+   "scan_colour_pull": {
+    "value": 0.7,
+    "unit": "share of the way from the scan's mean colour to the palette's",
+    "kind": "judged",
+    "source": "the garden surfaces' colour rule (procedural-textures/garden/surfaces/surf_kit.py: the scene decides the mean colour, the scan brings the detail) and the plugin 1.5.0 proof scene: Poly Haven's grass scans are dry and olive (leafy_grass mean sRGB 0.59, 0.52, 0.35, measured 23 October 2026) and read as bare earth beside a road"
+   }
   },
   "gravel_path": {
    "label": "gravel path",
@@ -411,8 +466,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": "gravel_road",
-   "real_scale_note": "mine gravel depth 4"
+   "real_scale_note": "mine gravel depth 4",
+   "polyhaven": "gravel_floor",
+   "scan_metres": {
+    "value": 2.25,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of gravel_floor), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": true,
+   "scan_colour_pull": null
   },
   "cobble_paving": {
    "label": "rounded stones in joints",
@@ -480,8 +545,18 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "joints darker, duller and sloped (street lesson)",
    "polyhaven": "cobblestone_01",
-   "real_scale_note": "joints darker, duller and sloped (street lesson)"
+   "scan_metres": {
+    "value": 2.4,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of cobblestone_01), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "flagstone": {
    "label": "big flat stones",
@@ -544,8 +619,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "rectangular_paving",
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of rectangular_paving), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "timber_weathered": {
    "label": "old silvered timber with grain and checks",
@@ -617,8 +702,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": "u along the length, v across"
+   "real_scale_note": "u along the length, v across",
+   "polyhaven": "rough_wood",
+   "scan_metres": {
+    "value": 0.5,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of rough_wood), read 23 October 2026"
+   },
+   "scan_grain": "v",
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "timber_planks": {
    "label": "plank boards",
@@ -689,8 +784,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": "mirror or rotate some planks"
+   "real_scale_note": "mirror or rotate some planks",
+   "polyhaven": "brown_planks_04",
+   "scan_metres": {
+    "value": 1.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of brown_planks_04), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "timber_beam": {
    "label": "square timber beams and posts",
@@ -761,8 +866,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "rough_wood",
+   "scan_metres": {
+    "value": 0.5,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of rough_wood), read 23 October 2026"
+   },
+   "scan_grain": "v",
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "log_wall": {
    "label": "round logs",
@@ -833,8 +948,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "bark_brown_02",
+   "scan_metres": {
+    "value": 1.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of bark_brown_02), read 23 October 2026"
+   },
+   "scan_grain": "v",
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "plaster_lime": {
    "label": "lime plaster",
@@ -905,8 +1030,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": "clay_plaster",
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "painted_plaster_wall",
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of painted_plaster_wall), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "cob_wall": {
    "label": "earth walls",
@@ -977,8 +1112,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "clay_plaster",
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of clay_plaster), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "stone_rubble": {
    "label": "rough fitted stones",
@@ -1055,8 +1200,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": "castle_wall_slates",
-   "real_scale_note": ""
+   "scan_metres": {
+    "value": 2.5,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of castle_wall_slates), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "stone_dressed": {
    "label": "cut stone blocks",
@@ -1126,8 +1281,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "large_sandstone_blocks",
+   "scan_metres": {
+    "value": 3.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of large_sandstone_blocks), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "thatch": {
    "label": "bunched straw or reed, ridges down the slope",
@@ -1196,8 +1361,18 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "displacement 4 to 6 cm near the camera",
    "polyhaven": "thatch_roof_angled",
-   "real_scale_note": "displacement 4 to 6 cm near the camera"
+   "scan_metres": {
+    "value": 0.54,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of thatch_roof_angled), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "shingle_wood": {
    "label": "wooden shingles in rows",
@@ -1260,8 +1435,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "roof_tile_clay": {
    "label": "clay roof tiles",
@@ -1324,8 +1504,18 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "UV on the prototype tile",
    "polyhaven": "clay_roof_tiles",
-   "real_scale_note": "UV on the prototype tile"
+   "scan_metres": {
+    "value": 4.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of clay_roof_tiles), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "slate": {
    "label": "slate roof",
@@ -1388,8 +1578,18 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": "roof_slates_02",
-   "real_scale_note": ""
+   "scan_metres": {
+    "value": 3.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of roof_slates_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "iron_forged": {
    "label": "dark forged iron",
@@ -1462,8 +1662,18 @@
    "dials": {
     "rust": 1.2
    },
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "rusty_metal_02",
+   "scan_metres": {
+    "value": 1.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of rusty_metal_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "rope": {
    "label": "twisted rope",
@@ -1525,8 +1735,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "straw": {
    "label": "loose straw",
@@ -1589,8 +1804,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "wicker": {
    "label": "woven basket cane",
@@ -1652,8 +1872,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "cloth_sack": {
    "label": "coarse cloth",
@@ -1715,8 +1940,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "hessian_230",
+   "scan_metres": {
+    "value": 0.269,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of hessian_230), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "ceramic_glazed": {
    "label": "glazed clay",
@@ -1778,8 +2013,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "bark": {
    "label": "rough bark",
@@ -1842,8 +2082,18 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": "bark_brown_01",
-   "real_scale_note": ""
+   "scan_metres": {
+    "value": 1.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of bark_brown_01), read 23 October 2026"
+   },
+   "scan_grain": "v",
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "foliage": {
    "label": "leaf cards",
@@ -1906,8 +2156,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "water_still": {
    "label": "still water with a gentle swell",
@@ -1969,8 +2224,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "roughness low",
    "polyhaven": null,
-   "real_scale_note": "roughness low"
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "water_sea": {
    "label": "open water with swell",
@@ -2032,8 +2292,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "glass_old": {
    "label": "old glass with smudges",
@@ -2095,8 +2360,13 @@
    },
    "bevel_metres": null,
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": null,
-   "real_scale_note": ""
+   "scan_metres": null,
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "brick": {
    "label": "fired brick in courses",
@@ -2167,8 +2437,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
+   "real_scale_note": "",
    "polyhaven": "brick_wall_001",
-   "real_scale_note": ""
+   "scan_metres": {
+    "value": 3.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of brick_wall_001), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "concrete": {
    "label": "poured concrete",
@@ -2239,8 +2519,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "concrete_floor_worn_001",
+   "scan_metres": {
+    "value": 3.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of concrete_floor_worn_001), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "tarmac": {
    "label": "laid tarmac",
@@ -2303,8 +2593,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "asphalt_02",
+   "scan_metres": {
+    "value": 3.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of asphalt_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "sand": {
    "label": "sand with ripples",
@@ -2372,8 +2672,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "sand_01",
+   "scan_metres": {
+    "value": 1.5,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of sand_01), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": true,
+   "scan_colour_pull": null
   },
   "snow": {
    "label": "snow",
@@ -2435,8 +2745,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "snow_02",
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of snow_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "rock_ore": {
    "label": "rock or ore ground",
@@ -2504,8 +2824,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "rock_surface",
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of rock_surface), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": true,
+   "scan_colour_pull": null
   },
   "steel_plate": {
    "label": "steel plate",
@@ -2578,8 +2908,18 @@
    "dials": {
     "rust": 1.0
    },
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "metal_plate_02",
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of metal_plate_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "painted_metal": {
    "label": "painted metal",
@@ -2651,8 +2991,18 @@
    "dials": {
     "rust": 0.8
    },
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "blue_metal_plate",
+   "scan_metres": {
+    "value": 2.5,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of blue_metal_plate), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "tile_floor": {
    "label": "floor tiles",
@@ -2714,8 +3064,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "floor_tiles_08",
+   "scan_metres": {
+    "value": 1.5,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of floor_tiles_08), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "carpet_fabric": {
    "label": "carpet and heavy cloth",
@@ -2777,8 +3137,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": ""
+   "real_scale_note": "",
+   "polyhaven": "dirty_carpet",
+   "scan_metres": {
+    "value": 0.6,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of dirty_carpet), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "generic_wood": {
    "label": "any wood (fallback)",
@@ -2849,8 +3219,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": "fallback"
+   "real_scale_note": "fallback",
+   "polyhaven": "rough_wood",
+   "scan_metres": {
+    "value": 0.5,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of rough_wood), read 23 October 2026"
+   },
+   "scan_grain": "v",
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "generic_stone": {
    "label": "any stone (fallback)",
@@ -2921,8 +3301,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": "fallback"
+   "real_scale_note": "fallback",
+   "polyhaven": "stone_wall",
+   "scan_metres": {
+    "value": 2.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of stone_wall), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "generic_metal": {
    "label": "any metal (fallback)",
@@ -2992,8 +3382,18 @@
     "source": "the garden character job strengths (log 31)"
    },
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": "fallback"
+   "real_scale_note": "fallback",
+   "polyhaven": "rusty_metal_02",
+   "scan_metres": {
+    "value": 1.0,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of rusty_metal_02), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": false,
+   "unpaved": false,
+   "scan_colour_pull": null
   },
   "generic_cloth": {
    "label": "any cloth (fallback)",
@@ -3055,8 +3455,18 @@
    },
    "bevel_metres": null,
    "dials": {},
-   "polyhaven": null,
-   "real_scale_note": "fallback"
+   "real_scale_note": "fallback",
+   "polyhaven": "hessian_230",
+   "scan_metres": {
+    "value": 0.269,
+    "unit": "metres one copy of the picture covers",
+    "kind": "measured",
+    "source": "the Poly Haven list (api.polyhaven.com/assets, \"dimensions\" of hessian_230), read 23 October 2026"
+   },
+   "scan_grain": null,
+   "absorbent": true,
+   "unpaved": false,
+   "scan_colour_pull": null
   }
  }
 }

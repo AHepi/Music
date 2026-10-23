@@ -30,6 +30,8 @@ class Wear:
         self.dials = {}                 # material name -> {layer: {dial: value}}
         self.skipped = {}               # material name -> reason
         self.dot_metres = None
+        self.absorbent = set()          # materials of surfaces that soak water up (no clear film when wet)
+        self.ground_materials = set()   # materials of the ground: two ground surfaces blend into each other across their seam
 
     # ---- the chain, rebuilt from the lists
     def rebuild(self, material_names=None):
@@ -39,7 +41,8 @@ class Wear:
             if material is None:
                 continue
             wanted = [k for k in self.materials[name] if k not in self.layers_off]
-            inserted, reason = chain.insert_layers(material, wanted, self.dials.get(name, {}), plan, master=self.master, layer_masters=self.layer_masters, dot_metres=self.dot_metres)
+            inserted, reason = chain.insert_layers(material, wanted, self.dials.get(name, {}), plan, master=self.master, layer_masters=self.layer_masters, dot_metres=self.dot_metres,
+                                                   seam_blend=name in self.ground_materials)
             if reason:
                 self.skipped[name] = reason
 
@@ -109,6 +112,8 @@ class Wear:
                 key = names.layer_amount_name(layer)
                 if key in obj.keys():
                     del obj[key]
+            if HOLDS_PUDDLES in obj.keys():
+                del obj[HOLDS_PUDDLES]
         return True
 
 
@@ -158,7 +163,30 @@ def write_amounts(settings, look_override, state, layers_off, only_layers=None, 
         for layer, value in best.items():
             obj[names.layer_amount_name(layer)] = float(value)
             count += 1
+        # only the ground holds standing water: the plan masks also describe the ground under a roof, and a roof once got mirror puddles from the hollow below it
+        obj[HOLDS_PUDDLES] = 1.0 if any(roles_module.role_class(r) == 'ground' for r in set(info['slot_roles']) if not roles_module.is_never(r)) else 0.0
     return count
+
+
+HOLDS_PUDDLES = 'pk_holds_puddles'
+WET_ROUGHNESS_ABSORBENT_MIN = 0.55        # a surface that soaks water up gets darker when wet, and only a little smoother (judged: a damp thatch or earth is never glossy)
+
+
+def slot_surface(material, slot_role, table):
+    """The surface id a material slot wears: the kit material's own (pk_surface), else the role's surface in data/roles.json, else None."""
+    if material is not None and material.get('pk_surface'):
+        return material['pk_surface']
+    return (table['roles'].get(slot_role) or {}).get('surface')
+
+
+def is_absorbent(surface_id):
+    """True for a surface that soaks water up (data/surfaces.json "absorbent"): earth, straw, thatch, cloth, weathered wood."""
+    if not surface_id:
+        return False
+    try:
+        return bool(settings_file.surface(surface_id).get('absorbent'))
+    except (KeyError, ValueError):
+        return False
 
 
 def age_place(settings, look=None, state=None, owner=None, layers=None, layers_off=None, master=None):
@@ -197,13 +225,22 @@ def age_place(settings, look=None, state=None, owner=None, layers=None, layers_o
                 continue
             look_data = settings_file.look(look or settings.look_for_role(slot_role))
             klass = roles_module.role_class(slot_role)
+            absorbent = is_absorbent(slot_surface(material, slot_role, table)) or material.name in wear.absorbent
+            if absorbent:
+                wear.absorbent.add(material.name)
+            if klass == 'ground':
+                wear.ground_materials.add(material.name)
             for layer in object_layers(settings, slot_role, look, rules, table):
                 if wanted_filter is not None and layer not in wanted_filter:
                     continue
                 wear.materials.setdefault(material.name, [])
                 if layer not in wear.materials[material.name]:
                     wear.materials[material.name].append(layer)
-                wear.dials.setdefault(material.name, {})[layer] = dials_module.dial_values(layer, klass, look_data, settings_dials)
+                values = dials_module.dial_values(layer, klass, look_data, settings_dials)
+                if layer == 'wetness' and absorbent and 'film_coat' not in (settings_dials.get('wetness') or {}):
+                    values['film_coat'] = 0.0               # earth, straw and cloth soak water up: darker when wet, never a clear film (a film over bumps drew as sparkles)
+                    values['wet_roughness'] = max(values['wet_roughness'], WET_ROUGHNESS_ABSORBENT_MIN)
+                wear.dials.setdefault(material.name, {})[layer] = values
     seed_module.write_object_values([o for o in objects if tagged[o.name]['role'] and not roles_module.is_never(tagged[o.name]['role'])])
     write_amounts(settings, look, state, wear.layers_off, owner=owner)
     wear.rebuild()

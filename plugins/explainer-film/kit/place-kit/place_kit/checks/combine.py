@@ -47,13 +47,26 @@ def same_scene(first, second):
     return bool(same_objects and first['materials'] == second['materials'])
 
 
+def owners_changed(first, second):
+    """The owners whose objects are not the same in two fingerprints (an object made, lost, moved or reshaped), so a stage that is not idempotent is named, not guessed."""
+    changed = set()
+    for name in set(first['objects']) | set(second['objects']):
+        a, b = first['objects'].get(name), second['objects'].get(name)
+        if a is None or b is None or any(a.get(key) != b.get(key) for key in ('mesh', 'matrix', 'owner', 'slots', 'modifiers')):
+            changed.add((a or b).get('owner') or 'unowned')
+    return sorted(changed)
+
+
 def combine_stages(stage_files, owners, order='plain', options=None):
-    """Runs the chain (plain or reverse order), then runs it again to see whether it is idempotent. Returns the report (see the note at the top)."""
+    """Runs the chain (plain or reverse order), then runs it again to see whether it is idempotent. Returns the report (see the note at the top); when the second run
+    changed the scene, not_idempotent_owners names whose objects changed (a stage that places its trees round the buildings of LATER stages changes on the
+    second run, because those buildings exist by then: it must read only the ground and the plan)."""
     files = list(stage_files)[::-1] if order == 'reverse' else list(stage_files)
     stages, violations, first = run_chain(files, owners, options)
     _, _, second = run_chain(files, owners, options)
-    return {'order': order, 'stages': stages, 'violations': violations, 'idempotent': same_scene(first, second), 'fingerprint_objects': len(first['objects']),
-            'fingerprint': {'objects': len(first['objects']), 'materials': len(first['materials'])}, '_final': first}
+    idempotent = same_scene(first, second)
+    return {'order': order, 'stages': stages, 'violations': violations, 'idempotent': idempotent, 'not_idempotent_owners': [] if idempotent else owners_changed(first, second),
+            'fingerprint_objects': len(first['objects']), 'fingerprint': {'objects': len(first['objects']), 'materials': len(first['materials'])}, '_final': first}
 
 
 def combine_both(stage_files, owners, options=None):
@@ -72,4 +85,5 @@ def combine_both(stage_files, owners, options=None):
     for report in (plain, reverse):
         report.pop('_final', None)
     return {'order': 'both', 'plain': plain, 'reverse': reverse, 'violations': plain['violations'] + [f'(reverse order) {v}' for v in reverse['violations']],
-            'idempotent': bool(plain['idempotent'] and reverse['idempotent']), 'order_independent': not different, 'stages': plain['stages']}
+            'idempotent': bool(plain['idempotent'] and reverse['idempotent']), 'not_idempotent_owners': sorted(set(plain['not_idempotent_owners']) | set(reverse['not_idempotent_owners'])),
+            'order_independent': not different, 'stages': plain['stages']}

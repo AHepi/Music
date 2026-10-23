@@ -9,7 +9,9 @@ stand, how long a slide may be, how loud the music sits, how long filming takes,
 worked out automatically by calculators in the kit, and a preflight command runs the right checks at each
 stage of the work. Since version 1.4.0 a place built in Blender (a village, a town, a harbour, a mine, a farm, a garden,
 an interior, a set or props) goes through a surface-and-wear pass and a construction check automatically, and a preflight
-stage `place` fails when a material or the scene lacks them.
+stage `place` fails when a material or the scene lacks them. Since version 1.5.0 those surfaces are real photographed scans (free
+Poly Haven scans, downloaded once per machine, or the person's own texture library), and weeds, litter, stones and puddles grow where they
+grow in the world (wall feet, verges, fence lines, joints, damp corners) instead of evenly.
 
 ## Install
 
@@ -98,6 +100,50 @@ coins stack beside it, and a red label PRICES CLIMB points at the counter. The w
 to spoken words like that.
 
 ## Changes
+
+**1.5.0 (23 October 2026): real photographed surfaces, weeds where they really grow, and a gate that no longer fails its own work.**
+A test build of a small settlement in a clearing, made by a smaller model with the plugin alone, showed four faults: plain made-in-code surfaces,
+weeds spread evenly, three faults you could see in the picture, and a gate that failed the kit's own work. Each is fixed in general, for every place.
+- Real photographed surfaces. The surface pass now fetches, for each surface, the free Poly Haven scan named in `kit/place-kit/data/surfaces.json`
+  (36 of the 45 surfaces have one; CC0, no account, nothing about the person in the request): its colour, OpenGL normal, roughness and height
+  pictures (colour 2k and the others 1k by default, the house numbers `place_surfaces.scan_colour_resolution` and `scan_maps_resolution`), once per
+  machine, into a folder outside any repository (`~/.cache/explainer-film/surface-scans`, or `PLACE_KIT_SCAN_CACHE`). The address of every file is
+  read from Poly Haven's own file list, never guessed. Each normal picture is checked against its own height picture with the kit's normal test
+  (an axis that points the wrong way is flipped, an even lean of the whole picture is taken out) and the checked copy is the one used. The material
+  keeps the wear layers on top; the roles that displace get real displacement from the height picture in EEVEE and Cycles, its middle set to the
+  picture's own mean height; the tile size is the scan's real size in metres from Poly Haven's record; two mappings blended by slow noise hide the
+  repeat; a scan whose colour is far from the place's palette is pulled toward it (`scan_colour_pull` in surfaces.json, grass 0.7).
+- The person's own texture library: the place-settings key `own_surfaces` (`folder`, one sub-folder per surface, `use` mapping roles, role patterns
+  or surface ids to sub-folders, `metres` for the real size). Its pictures are read where they are and never copied into the plugin or a repository
+  (only packed into the scene file, which `pack_surface_pictures: false` turns off).
+- With no network, with `surface_scans: "off"` or with `PLACE_KIT_OFFLINE=1`, the made-in-code surfaces are used as before and the finish says so,
+  surface by surface. Every material records where its surface came from; the audit lists it and a new judge check `place: surfaces` counts the
+  photographed ones.
+- Stones and pebbles seated in unpaved ground, sized by the Wentworth grain sizes (pebble 4 to 64 mm, cobble 64 to 256 mm, now in
+  `real_world_facts.json`) and sunk by part of their height; standing water (`PK puddles`) in hollows and wheel ruts when the state is damp or
+  wet: short pools in runs with dry ground between, each level set by the rim of its hollow, at most 150 square metres; the wet layer shows puddles only on
+  ground that can hold them.
+- Weeds by site (`kit/place-kit/place_kit/growth/sites.py`). Plants, litter and stones are laid in sites: wall feet (an 18 cm strip), road edges and
+  verges (and the seam where two grounds meet), fence and building lines, the joints between stones or boards, the grass strip down a road's centre, damp shady corners, and a thin
+  background. Each site is counted to its own number per metre or per 100 square metres (`species.json`, `sites`), scaled by the look's dial and by how
+  much of it the cameras see; each species' liking for seams is read; a top-up adds only inside sites; the audit measures the share in every site,
+  and a new judge check `place: sites` says so (a LOOK) when the plants are spread evenly or a site is left short.
+- Three faults you could see, fixed at their cause: dark V-shaped specks (fern fronds stood on edge; now laid near flat and lit through), white
+  sparkles on thatch (the wet clear coat on a surface that soaks up water; such surfaces now get no coat and a wet roughness of at least 0.55),
+  and flat brown rectangles beside the road (a plain ground left between a straight edge and the verge; now a photographed ground, a soft 1 m blend
+  across every seam between two grounds, and verge weeds over it).
+- The gate no longer fails the kit's own work: the kit's scatter and puddles are counted as `kit scatter`, not unowned, against their own budget
+  (`place_audit.scatter_triangles_max` 1,200,000; the growth step keeps 10 percent spare and trims itself if it is still over); the audit records the
+  real-world facts it used, so the judge no longer needs `--real-world-facts` (the workflow's preflight now passes it too); `combine` names the owners
+  whose objects changed on a second run; in the workflow `build-a-place` a repair round that made no finished file keeps the last audited file
+  ("nothing was lost") instead of failing, and the integrator is told the exact file to save.
+- Tests: new `test_place_real_surfaces.py` (54 checks, with Blender; it makes its own small texture library, so it never downloads), four new cases
+  in `test_build_a_place_workflow.py`, and every test runs with downloads off (`PLACE_KIT_NETWORK_TESTS=1` adds one real download of a small scan).
+- Measured on a small proof scene (a dirt road through grass, a stone wall, a plastered hut with thatch, a fence; neglected, damp): with 1.4.0, every
+  surface made in code, 6,657 plants and 9,349 litter pieces spread evenly; with 1.5.0, 7 of 7 materials from photographed scans, 2,331 plants (54 percent
+  of them in sites: verges 38, wall feet 5, fence lines 1, the strip between the ruts 10; the rest a thin scatter), 2,277 litter pieces, 1,565 stones,
+  80 small puddles (11.6 square metres) in the ruts, 229,540 kit-scatter triangles (budget 1,200,000), and the audit passes with two LOOKs. Whether it
+  looks right is judged, not measured.
 
 **1.4.0 (22 and 23 October 2026): places that look lived in, automatically; and cheap, batched tries.**
 - Batched rounds and card time (the person's rule after the Japanese garden job spent US$10.89 of rented-card time on pictures that cost about 5 cents): make every change in one sweep, then look once; for each change to a thing,

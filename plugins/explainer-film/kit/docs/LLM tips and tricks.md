@@ -420,6 +420,17 @@ built in Blender goes through it, whatever the request says. In short:
     A batch waits for the cards (1 to 3 minutes for a small place): give the command a long time limit. If it is cut off, its jobs still count (each was written as "sent"), and
     `explainer-film-place variations collect RUN-FOLDER` finishes it without sending anything again.
     Seconds are work + wake-up + idle tail; the price is an estimate, never a bill. The skill is `surfaces-wear-and-construction`, file `batched-rounds-and-card-time.md`.
+20. Real photographed surfaces, not flat colours made in code (1.5.0: a test place built with 1.4.0 read as plain and flat). `finish` gives each surface a photographed scan by
+    itself: the person's own library when the settings name one (`own_surfaces`), else the free Poly Haven scan, downloaded once per machine into a cache outside every
+    repository. Never copy the person's texture files into the plugin or a repository, and never send their name or any detail of theirs to a website. With no network
+    the made-in-code surface is used: say so in the report. *Check:* "place: surfaces" names every surface still made in code, and why.
+21. Weeds grow by site, not evenly: wall feet, verges and the seams where two grounds meet, fence lines, the joints between stones, damp corners, and only a thin scatter elsewhere. To add weeds, raise a site,
+    never the whole ground. *Check:* "place: sites" (the share of plants in each site, measured again from the roots).
+22. A fault you can see is fixed at its cause, not hidden: dark V specks in grass were ferns on their edge, white sparkles on thatch were a wet clear coat on a surface that
+    soaks up water, flat brown rectangles by a road were a plain ground left between a straight edge and a verge. Find the object under the fault first
+    (hide it and look again), then change the thing that made it.
+23. The kit's own weeds, litter, stones and puddles have their own triangle budget (`place_audit.scatter_triangles_max`) and stay inside it by themselves: never thin
+    them to pass an audit. A repair round that made no finished file keeps the last audited file; it is not a failure of the place. *Check:* "place: budgets".
 
 ## 9. Before painting (stage `plates`)
 

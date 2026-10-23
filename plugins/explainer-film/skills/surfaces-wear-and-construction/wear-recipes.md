@@ -42,7 +42,7 @@ more than one, they assume 135 degrees (compass) and 45 degrees up. Add your own
 | moss_and_algae | flat moss, algae, lichen | damp and shaded; never on a trodden or keep-clear dot |
 | rust | iron: height bands, collars at joins, runs below | iron roles only |
 | rubbish | leaf litter, straw, wet straw, mud | wall feet, gutters, road edges, the corners; never on the wheel tracks |
-| plants, litter_pieces | nettle, fern, bramble, tufts, leaves, sticks, pine needles, clods, straw | by habitat gates; chunky designed shapes |
+| plants, litter_pieces | nettle, fern, bramble, tufts, leaves, sticks, pine needles, clods, straw; stones and pebbles | by SITE (below), inside the habitat gates; chunky designed shapes |
 
 ## Joints (between stones, bricks and planks)
 
@@ -53,6 +53,29 @@ film), and the stone's edge gets a rounded slope; puddles still cover joints. Th
 counting every dot; measured). Real 8 mm grooves cut into the road looked worse in the middle distance and were switched
 off. So: give every joint a darker, duller, sloped look, check the first preview under flat, wet and side light, and do not
 rely on the colour alone.
+
+## Where weeds, litter and stones go: by site (1.5.0)
+
+A test place built by a smaller model with 1.4.0 had its weeds spread evenly over the grass, with nothing gathered at the wall feet or the road edge: it read
+as a lawn with dots. Weeds grow where the mower, the wheels and the feet do not reach. Since 1.5.0 `grow` lays plants, litter and stones by site
+(`place-kit/place_kit/growth/sites.py`, numbers in `place-kit/data/species.json` under `sites`; all first tries, judged on a small scene and the yard):
+
+| Site | Where | Plants, litter, stones |
+|---|---|---|
+| wall foot | an 18 cm strip at every wall's foot | 6, 4, 0 a metre |
+| verge | the road's edges and the seam where two grounds meet, half a metre wide | 5, 3, 2 a metre |
+| fence line | along fences and building lines | 4, 2, 0.5 a metre |
+| joint | the joints between stones or boards of one ground | 6, 0.5, 0 a metre |
+| centre strip | the grass between the ruts (`centre_grass`) | 250, 20, 8 per 100 square metres, low species only |
+| damp corner | damp, shady corners (from the wear masks) | 60, 60, 0 per 100 square metres |
+| background | the rest of the ground that grows | 12, 20, 12 per 100 square metres |
+
+Each count is scaled by the look's dial and by how much of the site the view cameras see (full to 35 m, nothing past 100 m). A site no species likes gets nothing,
+and the species' own likings decide which grows where (the `seam` liking for joints and the centre strip). The top-up after the keep-out recount adds only inside
+sites. The audit measures the share of plants in each site again from the roots, and **place: sites** says (a LOOK) when less than half of them are in sites.
+Stones and pebbles (Wentworth: pebble 4 to 64 mm, cobble 64 to 256 mm) lie only on unpaved ground, sunk by part of their height. When the state is damp or wet,
+`grow` also lays standing water in the hollows and ruts the cameras see (`PK puddles`), its level set by the rim of the hollow; the wet layer shows puddles only
+on ground (never on a roof). Fern fronds lie near flat with their faces up: a frond on its edge drew as a dark V in a low view.
 
 ## How much, how big (the numbers)
 
@@ -71,7 +94,9 @@ rely on the colour alone.
   5 cm clear of other litter; no rubbish on the crown. The audit counts these and each count must be 0.
 - **Moss is never brighter than the stone it grows on** (a courtyard fix), and it reads by contrast, not by size.
 - **Cover**: the street's weed dial settled at 0.01 to 0.02, about 1 to 2 percent of the ground (judged); a `neglected`
-  place can take about twice that (invented).
+  place can take about twice that (invented). Raise a site, not the whole ground: more weeds everywhere reads as a lawn.
+- **A surface that soaks up water** (thatch, earth, timber, plaster: `absorbent` in `surfaces.json`) gets no wet film coat and a wet roughness of at least 0.55:
+  a mirror film on thatch drew white sparkles in a test place (1.5.0).
 - **Wetness colours** were measured only for stone and brick: wet walls came out 0.84 of dry and the wet foot 0.66, and
   the first try made walls lighter when wet (wrong). For timber, thatch and plaster the ratios are UNMEASURED: judge
   by eye and say so. The roughness map does the work (dry about 0.9, wet about 0.3: measured); the specular map changed
@@ -120,5 +145,8 @@ audit does not know it: look at a 100 percent crop and at a phone-sized one.
 - A moss patch looked like a "sticker" on a lantern and the weathering splash gave stripes on rocks: tone the layers
   down on stone, and keep marks few and soft.
 - Moss cushions heaped up like rows of bean bags: vary their size and keep them off the ridges.
+- (1.5.0, a test place) dark V specks in the grass were fern fronds standing on their edge; white sparkles on a thatched roof were the wet clear coat; flat
+  brown rectangles beside the road were a plain made-in-code ground left between a straight edge and the verge. Fixed at the cause: fronds lie with their
+  faces up, surfaces that soak water get no coat, grounds blend 1 m across their seam and wear a photographed scan, and verge weeds cover the edge.
 - A builder claimed 9.8 percent moss and mould on planks; a fresh checker counted 0.6 percent olive pixels on one run
   of planks and 3.8 percent on the other. Count by the picture.

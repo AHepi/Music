@@ -15,15 +15,16 @@ from .. import house_numbers, names, scene_read
 ENABLED_METHODS = ('DISPLACEMENT', 'BOTH')
 
 
-def set_displacement(material, height_socket, depth_metres, tree=None):
-    """Wires a Displacement node from a height socket into the material output and sets the method. Returns the node."""
+def set_displacement(material, height_socket, depth_metres, tree=None, midlevel=0.5):
+    """Wires a Displacement node from a height socket into the material output and sets the method. midlevel is the height that stays where the mesh is (the
+    height picture's own mean for a photographed scan, so the surface neither rises nor sinks as a whole). Returns the node."""
     tree = tree or material.node_tree
     output = next(n for n in tree.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output)
     for link in list(output.inputs['Displacement'].links):
         tree.links.remove(link)
     node = tree.nodes.new('ShaderNodeDisplacement')
     node.name = node.label = 'PK Displacement'
-    node.inputs['Midlevel'].default_value = 0.5
+    node.inputs['Midlevel'].default_value = float(midlevel)
     node.inputs['Scale'].default_value = float(depth_metres)
     tree.links.new(height_socket, node.inputs['Height'])
     tree.links.new(node.outputs['Displacement'], output.inputs['Displacement'])

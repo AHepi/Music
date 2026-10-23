@@ -311,6 +311,30 @@
    "kind": "judged",
    "source": "common building and prop practice (from memory; confirm for the period and place)",
    "confidence": "guess"
+  },
+  {
+   "id": "pebble_size",
+   "what": "a pebble: a stone small enough to hold between two fingers",
+   "applies_to_role": "^never\\.scatter$",
+   "dimension": "across",
+   "min": 0.004,
+   "max": 0.064,
+   "unit": "metres",
+   "kind": "measured",
+   "source": "the Wentworth grain-size scale (C. K. Wentworth, 1922, Journal of Geology 30: 377-392): pebble 4 to 64 mm",
+   "confidence": "strong"
+  },
+  {
+   "id": "cobble_size",
+   "what": "a cobble: a loose stone you would pick up with one hand",
+   "applies_to_role": "^never\\.scatter$",
+   "dimension": "across",
+   "min": 0.064,
+   "max": 0.256,
+   "unit": "metres",
+   "kind": "measured",
+   "source": "the Wentworth grain-size scale (C. K. Wentworth, 1922, Journal of Geology 30: 377-392): cobble 64 to 256 mm",
+   "confidence": "strong"
   }
  ]
 }

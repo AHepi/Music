@@ -27,8 +27,31 @@ def layer_tree(key):
     return getattr(module, f'build_{key}')()
 
 
-def insert_layers(material, layer_keys, dials_by_layer, plan_masks, master=1.0, layer_masters=None, dot_metres=None):
-    """Rebuilds the material's chain with these layers (those in names.LAYER_ORDER, in that order). Returns (layers inserted, reason skipped or None)."""
+SEAM_TAG = 'seam'
+
+
+def add_seam_blend(material, plan_node, colour_socket):
+    """For a GROUND material: mixes the colour toward the other ground surface near their seam (the Plan node's Seam Blend and Seam R, G, B), broken up by a noise of
+    about 40 cm, so two ground surfaces meet in a ragged, soft band instead of a ruled line (a straight edge between grass and earth once read as a brown rectangle
+    laid on the meadow). Far from any seam the blend is 0 and the colour is exactly as it was. Returns the new colour socket."""
+    from .nodes import Net
+    tree = material.node_tree
+    before = set(node.name for node in tree.nodes)
+    net = Net(tree)
+    position = net.geometry().outputs['Position']
+    ragged = net.noise(net.scale_vector(position, 2.5), scale=1.0, detail=3.0)
+    factor = net.clamp01(net.math('MULTIPLY', plan_node.outputs['Seam Blend'], net.map_range(ragged, 0.3, 0.7, 0.4, 1.6)))
+    other = net.comb_rgb(plan_node.outputs['Seam R'], plan_node.outputs['Seam G'], plan_node.outputs['Seam B'])
+    result = net.mix_colour(factor, colour_socket, other)
+    for node in tree.nodes:
+        if node.name not in before:
+            hook.tag(node, SEAM_TAG)
+    return result
+
+
+def insert_layers(material, layer_keys, dials_by_layer, plan_masks, master=1.0, layer_masters=None, dot_metres=None, seam_blend=False):
+    """Rebuilds the material's chain with these layers (those in names.LAYER_ORDER, in that order). seam_blend=True (ground materials) also blends the colour into the
+    neighbouring ground surface near their seam (add_seam_blend). Returns (layers inserted, reason skipped or None)."""
     reason, principled = hook.classify(material)
     if reason != 'ok':
         return [], reason
@@ -70,6 +93,8 @@ def insert_layers(material, layer_keys, dials_by_layer, plan_masks, master=1.0, 
         if dot_metres is not None:
             node.inputs['Dot Metres'].default_value = float(dot_metres)
         current = {port: node.outputs[port] for port in hook.BUNDLE}
+    if seam_blend and 'Seam Blend' in plan_node.outputs:
+        current['Colour'] = add_seam_blend(material, plan_node, current['Colour'])
     for port in hook.BUNDLE:
         socket = principled.inputs[hook.PLUG[port]]
         for link in list(socket.links):

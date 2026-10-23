@@ -257,7 +257,7 @@
    "skip_and_stop": "as dirt"
   },
   "plants": {
-   "plain": "weeds, tufts, ferns, nettles and moss cushions as small 3D pieces, off the wheel tracks and out of puddles",
+   "plain": "weeds, tufts, ferns, nettles and moss cushions as small 3D pieces, grown by site (wall feet, verges, fence lines, joints, damp corners, a thin background), off the wheel tracks and out of puddles",
    "persons_words": [
     "weeds",
     "moss"
@@ -265,9 +265,9 @@
    "made_by": {
     "verb": "grow",
     "module": "growth/scatter.py",
-    "function": "scatter_plants"
+    "function": "lay_group"
    },
-   "checked_by": "scatter.groups[] counts and keep-out counts",
+   "checked_by": "scatter.groups[] counts and keep-out counts; scatter.sites (the share of the plants in each site)",
    "tested_by": {
     "file": "test_place_blender.py",
     "phrase": "plants kept out"
@@ -276,14 +276,14 @@
    "skip_and_stop": "the audit counts pieces per 100 square metres and the roots inside keep-out (must be 0)"
   },
   "litter_pieces": {
-   "plain": "leaves, sticks, straw, pine needles, clods as small 3D pieces",
+   "plain": "leaves, sticks, straw, pine needles, clods as small 3D pieces, gathered at wall feet, verges and fence lines; pebbles and stones seated in unpaved ground",
    "persons_words": [
     "rubbish"
    ],
    "made_by": {
     "verb": "grow",
     "module": "growth/scatter.py",
-    "function": "scatter_litter"
+    "function": "lay_group"
    },
    "checked_by": "scatter.groups[]",
    "tested_by": {

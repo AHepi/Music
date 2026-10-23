@@ -6,7 +6,7 @@ build-and-paint-a-place and make-explainer-film name the new skill; (3) the REQU
 three skills that carry it; (4) every `explainer-film-place VERB` written in a skill, agent, workflow or guide is a verb that
 `explainer-film-place --verbs` prints, and every --option written beside it is in that verb's --help; (5) every house number
 written as place_section.key exists in film-settings.json; (6) every kit file named in backticks exists; (7) plugin.json says
-1.4.0 and the README has a 1.4.0 entry and says nine stages (a marketplace file two folders up is only reported); (8) no new
+1.5.0 and the README has a 1.5.0 and a 1.4.0 entry and says nine stages (a marketplace file two folders up is only reported); (8) no new
 text holds an email-like string, a provider settings folder, a long hex id or a key-looking value; (9) the agents the workflow
 names exist; (10) explainer-film-setup treats a word that starts with - as an option, not a folder: --help prints the use line and
 makes nothing, any other such word stops before a folder is made. Every check is also run on a deliberately wrong text (fixtures/place-skills/bad_skill.md, and texts made here) and
@@ -384,9 +384,9 @@ check.true('the new skill folder holds all ten files', not missing, details=', '
 
 # (7) versions, README
 plugin_json = json.load(open(os.path.join(PLUGIN, '.claude-plugin', 'plugin.json'), encoding='utf-8'))
-check.equal('plugin.json says 1.4.0', plugin_json.get('version'), '1.4.0')
+check.equal('plugin.json says 1.5.0', plugin_json.get('version'), '1.5.0')
 readme = read(os.path.join(PLUGIN, 'README.md'))
-check.true('the README has a 1.4.0 entry and says nine stages', '**1.4.0 (' in readme and 'nine stages' in readme)
+check.true('the README has a 1.5.0 entry and a 1.4.0 entry and says nine stages', '**1.5.0 (' in readme and '**1.4.0 (' in readme and 'nine stages' in readme)
 check.true('the README names the reminder hook and says its format was not run inside Claude Code', 'hooks/hooks.json' in readme and 'place-reminder.py' in readme and 'run inside Claude Code' in ' '.join(readme.split()))
 marketplace = os.path.normpath(os.path.join(PLUGIN, '..', '..', '.claude-plugin', 'marketplace.json'))
 if os.path.exists(marketplace):

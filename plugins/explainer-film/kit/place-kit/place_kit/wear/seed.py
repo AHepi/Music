@@ -51,5 +51,5 @@ def clear_object_values(objects=None):
     """Takes the kit's per-object numbers off (used by undo): seeds, heights and layer amounts."""
     import bpy
     for obj in objects if objects is not None else list(bpy.context.scene.objects):
-        for key in [k for k in obj.keys() if k in (names.SEED, names.BOTTOM_Z, names.TOP_Z, names.HEIGHT, 'pk_size_x', 'pk_size_y', 'pk_size_z') or (k.startswith('pk_') and (k.endswith('_amount')))]:
+        for key in [k for k in obj.keys() if k in (names.SEED, names.BOTTOM_Z, names.TOP_Z, names.HEIGHT, 'pk_size_x', 'pk_size_y', 'pk_size_z', 'pk_holds_puddles') or (k.startswith('pk_') and (k.endswith('_amount')))]:
             del obj[key]

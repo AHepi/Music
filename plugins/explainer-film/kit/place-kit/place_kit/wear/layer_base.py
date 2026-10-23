@@ -14,11 +14,11 @@ from .. import names
 from . import dials as dials_module
 from .nodes import Net, new_group
 
-GROUP_VERSION = 4
+GROUP_VERSION = 5
 BUNDLE_SOCKETS = [('Colour', 'NodeSocketColor', (0.5, 0.5, 0.5, 1.0)), ('Roughness', 'NodeSocketFloat', 0.5), ('Specular IOR Level', 'NodeSocketFloat', 0.5),
                   ('Coat Weight', 'NodeSocketFloat', 0.0), ('Normal', 'NodeSocketVector', (0.0, 0.0, 1.0)), ('Metallic', 'NodeSocketFloat', 0.0)]
 SHORT_TO_SOCKET = {'colour': 'Colour', 'roughness': 'Roughness', 'specular': 'Specular IOR Level', 'coat': 'Coat Weight', 'normal': 'Normal', 'metallic': 'Metallic'}
-MASK_DEFAULTS = {'Above Water': 1.0, 'Wall Dist': 4.0, 'Prop Dist': 4.0, 'Litter Dist': 1.0, 'Edge Dist': 1.0, 'Up': 0.5}
+MASK_DEFAULTS = {'Above Water': 1.0, 'Wall Dist': 4.0, 'Prop Dist': 4.0, 'Litter Dist': 1.0, 'Edge Dist': 1.0, 'Up': 0.5, 'Verge Dist': 2.0, 'Joint Dist': 1.0}
 
 
 def mask_socket(mask):

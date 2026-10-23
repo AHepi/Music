@@ -5,9 +5,16 @@ them up by world x and y; the scatter uses them for exact keep-out gates; the au
 and the objects are painted into grids from above (plan2d.py), then combined. This is the lighter route of decision D4 of the 1.4.0 design (the
 proven weathering masks needed OpenCV and 25 to 80 seconds a scene); it is judged by the tests (isolation, dial zero, keep-out counts) and the time
 is written into the audit.
-The twelve masks, with the picture (a, b or c) and channel that holds each (8-bit, so value/255):
+The masks, with the picture (a to e) and channel that holds each (8-bit, so value/255):
   a: lowness, crown, footfall, keepclear     b: wall_dist, prop_dist, sheltered, shade     c: dampness, above_water, litter_dist, track
-Distances are stored as a share of a longest distance (wall_dist and prop_dist 4 m, litter_dist 1 m). above_water is 1 on dry ground and 0 in a puddle.
+  d: verge_dist (how far to a road's edge, a grass strip between ruts, or the line where two different ground surfaces meet), joint_dist (how far to a joint
+     between two pieces of the same ground surface: separate stones or boards), seam_blend (how much of the OTHER ground surface lies within a metre), grows (1 where
+     the top ground is one that grows plants and litter)
+  e: seam_r, seam_g, seam_b (the colour of that other ground surface), unpaved (1 where the top ground is unpaved: earth, mud, gravel, grass, sand: stones lie there)
+  f: centre_strip (1 on the grass strip between the two ruts of a road whose settings say "centre_grass"), three spare channels (only the growth step and the audit read f)
+Distances are stored as a share of a longest distance (wall_dist and prop_dist 4 m, litter_dist 1 m, verge_dist 2 m, joint_dist 1 m). above_water is 1 on dry ground
+and 0 in a puddle. The growth step finds its sites with d (weeds along road edges and verges, moss along joints); the wear chain blends two ground surfaces into
+each other across their seam with d and e, so grass never meets earth at a ruled line.
 Before the plan masks exist, every question about where things may go answers "anywhere" (False for keep_clear_at).
 The shade (and so the dampness, moss, soot and fade that follow it) is worked out for the scene's own sun lamp when there is exactly one, else
 for a sun at 135 degrees compass and 45 degrees up (light.scene_sun_direction); the record and the audit say which was used, so add your sun
@@ -22,13 +29,17 @@ import bpy
 
 from .. import house_numbers, names, parts, plan2d, roles as roles_module, scene_read, settings_file
 
-PICTURES = ('a', 'b', 'c')
+PICTURES = ('a', 'b', 'c', 'd', 'e', 'f')
 CHANNELS = {
     'lowness': ('a', 0), 'crown': ('a', 1), 'footfall': ('a', 2), 'keepclear': ('a', 3),
     'wall_dist': ('b', 0), 'prop_dist': ('b', 1), 'sheltered': ('b', 2), 'shade': ('b', 3),
     'dampness': ('c', 0), 'above_water': ('c', 1), 'litter_dist': ('c', 2), 'track': ('c', 3),
+    'verge_dist': ('d', 0), 'joint_dist': ('d', 1), 'seam_blend': ('d', 2), 'grows': ('d', 3),
+    'seam_r': ('e', 0), 'seam_g': ('e', 1), 'seam_b': ('e', 2), 'unpaved': ('e', 3),
+    'centre_strip': ('f', 0), 'f_spare_g': ('f', 1), 'f_spare_b': ('f', 2), 'f_spare_a': ('f', 3),
 }
-DISTANCE_SCALE = {'wall_dist': 4.0, 'prop_dist': 4.0, 'litter_dist': 1.0}       # metres a full value stands for
+DISTANCE_SCALE = {'wall_dist': 4.0, 'prop_dist': 4.0, 'litter_dist': 1.0, 'verge_dist': 2.0, 'joint_dist': 1.0}       # metres a full value stands for
+SEAM_BLEND_METRES = 1.0          # two ground surfaces blend into each other over about this far on each side of their seam
 LOWNESS_WINDOW_METRES = 1.5
 LOWNESS_FULL_METRES = 0.15
 PUDDLE_LOWNESS = 0.55
@@ -207,7 +218,16 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
                 grid = np.where(both, np.where(np.isnan(grid), painted, np.minimum(grid, painted)), grid)
         return grid
 
-    ground_top = plan2d.fill_nan(raster(ground, 'max'), 0.0)
+    ground_top, ground_id = np.full(shape, np.nan), np.full(shape, -1, dtype=np.int64)
+    for index, obj in enumerate(ground):                         # the top ground surface in every cell, and which object it is
+        vertices, triangles = parts.world_triangles(obj)
+        if len(triangles) == 0:
+            continue
+        painted = plan2d.rasterize_triangles(vertices, triangles, x0, y0, cell, shape, 'max')
+        better = ~np.isnan(painted) & (np.isnan(ground_top) | (painted > ground_top))
+        ground_top[better] = painted[better]
+        ground_id[better] = index
+    ground_top = plan2d.fill_nan(ground_top, 0.0)
     wall_top = raster(walls, 'max')
     prop_top = raster(props, 'max')
     roof_top = raster(roofs, 'max')
@@ -267,14 +287,123 @@ def build_plan_masks(settings, quick=False, cell=None, only_owner=None):
         stamp_shape(shape_spec, settings, x0, y0, cell, keepclear, boxes)
     keepclear = np.maximum(keepclear, (footfall >= house_numbers.value('place_wear.exact_zero_gate_footfall')).astype(np.float64))
 
+    # ---- verges, joints and seams: where weeds gather along edges, and where two ground surfaces blend into each other
+    surfaces_of = [ground_surface_key(obj) for obj in ground]
+    verge_marked, joint_marked = ground_seams(ground_id, surfaces_of)
+    centre_strip = np.zeros(shape, dtype=bool)
+    for road in settings.roads:
+        width = float(road.get('width', 3.0))
+        distance, _, _ = plan2d.polyline_field(x0, y0, cell, shape, road['polyline'], width / 2.0 + 1.0)
+        verge_marked |= np.abs(distance - width / 2.0) <= max(0.5 * cell, 0.05)
+        if road.get('centre_grass'):
+            gauge = float(road.get('gauge', 1.3))
+            rut_width = float(road.get('rut_width', WHEEL_TRACK_WIDTH))
+            centre_strip |= distance <= max(gauge / 2.0 - rut_width, 0.5 * cell)
+    verge_dist = plan2d.distance_to_marked(verge_marked, cell, DISTANCE_SCALE['verge_dist'])
+    joint_dist = plan2d.distance_to_marked(joint_marked, cell, DISTANCE_SCALE['joint_dist'])
+    tones = [ground_tone(obj) for obj in ground]
+    seam_blend, seam_tone = seam_blend_grids(ground_id, tones, SEAM_BLEND_METRES / cell)
+    grows_of = np.array([ground_grows(obj, tagged[obj.name]['role'] or '', rules, table) for obj in ground] + [False], dtype=bool)
+    unpaved_of = np.array([ground_unpaved(key) for key in surfaces_of] + [False], dtype=bool)
+    grows = grows_of[np.where(ground_id >= 0, ground_id, len(ground))]
+    unpaved = unpaved_of[np.where(ground_id >= 0, ground_id, len(ground))]
+
     grids = {'lowness': quantise(lowness), 'crown': quantise(crown), 'footfall': quantise(footfall), 'keepclear': quantise(keepclear),
              'wall_dist': quantise(wall_dist / DISTANCE_SCALE['wall_dist']), 'prop_dist': quantise(prop_dist / DISTANCE_SCALE['prop_dist']),
              'sheltered': quantise(sheltered), 'shade': quantise(shade), 'dampness': quantise(dampness), 'above_water': quantise(np.where(puddle, 0.0, 1.0)),
-             'litter_dist': quantise(np.ones(shape)), 'track': quantise(track)}
+             'litter_dist': quantise(np.ones(shape)), 'track': quantise(track),
+             'verge_dist': quantise(verge_dist / DISTANCE_SCALE['verge_dist']), 'joint_dist': quantise(joint_dist / DISTANCE_SCALE['joint_dist']),
+             'seam_blend': quantise(seam_blend), 'grows': quantise(grows.astype(np.float64)),
+             'seam_r': quantise(seam_tone[..., 0]), 'seam_g': quantise(seam_tone[..., 1]), 'seam_b': quantise(seam_tone[..., 2]), 'unpaved': quantise(unpaved.astype(np.float64)),
+             'centre_strip': quantise((centre_strip & (track < 0.5)).astype(np.float64)), 'f_spare_g': quantise(np.zeros(shape)), 'f_spare_b': quantise(np.zeros(shape)),
+             'f_spare_a': quantise(np.zeros(shape))}
     masks = PlanMasks(x0, y0, cell, grids)
     record = {'cell_metres': cell, 'cells': [cols, rows], 'seconds': round(time.time() - started, 2), 'source': 'part_only' if only_owner else 'whole_scene',
               'bounds': [x0, y0, x0 + cols * cell, y0 + rows * cell], 'sun': sun}
     return masks, record
+
+
+# ---------------------------------------------------------------- verges, joints and seams between ground surfaces (plain numpy, tested without Blender)
+def ground_seams(ground_id, surface_keys):
+    """Two boolean grids from the grid of which ground object is on top in each cell: (verge, joint). A cell is on a VERGE when a neighbouring cell holds another ground
+    object of a different surface (grass meeting earth); on a JOINT when the neighbour is another object of the same surface (two stones or boards of one paving).
+    Cells with no ground (-1) and the outer edge of the ground are neither."""
+    ids = np.asarray(ground_id)
+    keys = np.array([str(k) for k in surface_keys] + ['(none)'], dtype=object)
+    verge = np.zeros(ids.shape, dtype=bool)
+    joint = np.zeros(ids.shape, dtype=bool)
+    for axis in (0, 1):
+        for step in (1, -1):
+            other = np.roll(ids, step, axis=axis)
+            valid = np.ones(ids.shape, dtype=bool)
+            edge = [slice(None)] * 2
+            edge[axis] = slice(0, 1) if step == 1 else slice(-1, None)
+            valid[tuple(edge)] = False                                  # np.roll wraps round: the far row is not a neighbour
+            different = valid & (ids >= 0) & (other >= 0) & (other != ids)
+            same_surface = keys[np.where(ids >= 0, ids, len(keys) - 1)] == keys[np.where(other >= 0, other, len(keys) - 1)]
+            verge |= different & ~same_surface
+            joint |= different & same_surface
+    return verge, joint
+
+
+def seam_blend_grids(ground_id, tones, radius_cells):
+    """(blend, tone): for every cell, how much of the OTHER ground surfaces lies within the radius (0 far from any seam, 0.5 on the seam itself, at most 0.5), and the
+    mean colour of those other surfaces (linear RGB). A material mixes its own colour toward that tone by the blend, so on the seam both sides meet half way."""
+    ids = np.asarray(ground_id)
+    shape = ids.shape
+    if not len(tones):
+        return np.zeros(shape), np.zeros(shape + (3,))
+    tone_array = np.asarray(tones, dtype=np.float64).reshape(-1, 3)
+    total = np.zeros(shape + (3,))
+    own_share = np.zeros(shape)
+    coverage = np.zeros(shape)
+    for index in range(len(tone_array)):
+        share = plan2d.box_blur((ids == index).astype(np.float64), radius_cells)
+        total += share[..., None] * tone_array[index][None, None, :]
+        coverage += share
+        own_share = np.where(ids == index, share, own_share)
+    own_tone = np.where((ids >= 0)[..., None], tone_array[np.clip(ids, 0, None)], 0.0)
+    other_share = np.clip(coverage - own_share, 0.0, None)
+    other = np.where(other_share[..., None] > 1e-3, (total - own_share[..., None] * own_tone) / np.maximum(other_share, 1e-3)[..., None], own_tone)
+    blend = np.where(ids >= 0, np.clip(other_share / np.maximum(coverage, 1e-6), 0.0, 0.5), 0.0)
+    return blend, np.clip(other, 0.0, 1.0)
+
+
+def ground_surface_key(obj):
+    """Which surface a ground object wears (its first kit material's surface id, else the first material's name): ground objects of one surface meet at a joint, of two at a verge."""
+    for slot in obj.material_slots:
+        if slot.material is not None:
+            return slot.material.get('pk_surface') or slot.material.name
+    return obj.get(names.ROLE) or obj.name
+
+
+def ground_grows(obj, role, rules, table):
+    """True when this ground object grows plants and litter (its role requires or wants them and no off entry switches them off)."""
+    req = roles_module.requirements(role, table, rules) if role else {'required': [], 'wanted': []}
+    return ('plants' in set(req['required']) | set(req['wanted'])) and not roles_module.off_entries_for(role, 'plants', rules)
+
+
+def ground_unpaved(surface_key):
+    """True when the surface is unpaved (data/surfaces.json "unpaved": earth, mud, gravel, grass, sand): loose stones and pebbles lie on it."""
+    try:
+        return bool(settings_file.surface(surface_key).get('unpaved'))
+    except (KeyError, ValueError, TypeError):
+        return False
+
+
+def ground_tone(obj):
+    """The mean colour (linear RGB) of a ground object's surface: written on kit materials (pk_mean_colour), else the Principled colour, else a neutral earth."""
+    for slot in obj.material_slots:
+        material = slot.material
+        if material is None:
+            continue
+        if material.get('pk_mean_colour'):
+            return [float(v) for v in material['pk_mean_colour']][:3]
+        if material.node_tree is not None:
+            for node in material.node_tree.nodes:
+                if node.type == 'BSDF_PRINCIPLED':
+                    return [float(v) for v in node.inputs['Base Color'].default_value[:3]]
+    return [0.12, 0.1, 0.08]
 
 
 # ---------------------------------------------------------------- in the Blender file
@@ -301,6 +430,7 @@ def write_plan_images(masks):
             image.update()
             remade = True
         image['pk_made'] = 1
+        image.use_fake_user = True          # picture f is read by the growth step and the audit only, never by a material: without a fake user Blender drops it on save
         image['pk_bounds'] = list(masks.bounds)
         image['pk_cell'] = masks.cell
         normals.pack(image)

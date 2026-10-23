@@ -6,7 +6,8 @@ file to it. Third-party code that is ever added keeps its own licence file next 
 
 ## The short answer
 
-The place kit is the plugin's own work. It contains no third-party code, no third-party picture, no photograph and no model. The
+The place kit is the plugin's own work. It contains no third-party code, no third-party picture, no photograph and no model (the photographed scans
+it uses since 1.5.0 are downloaded at run time into a cache outside the plugin). The
 only things it uses that it does not own are listed under "What it uses at run time".
 
 ## What was carried over (rules and numbers, not code)
@@ -40,6 +41,8 @@ which traps to avoid) and they were rewritten in the kit's own words. No code, n
 | Pillow | MIT-CMU (HPND) | used only by plain tools outside Blender (`picture_measures.py`, the picture tests); a check fails if code that runs inside Blender imports it |
 | The `runpod` Python library | MIT | imported only by the job taker on a rented card (`worker/handler.py`), where it is kept on the card's own store; never bundled |
 | RunPod's REST interface | the account owner's own terms | called by `render/client.py` with the person's own key and endpoint, read at run time |
+| Poly Haven texture scans for the surface pass (since 1.5.0) | CC0 (public domain) | NOTHING is shipped. `data/surfaces.json` names one scan for each of 36 surfaces (`polyhaven`) with its real size from Poly Haven's own list (`scan_metres`). `surfaces/scans.py` reads each scan's file list from `api.polyhaven.com/files/ID` and downloads its colour, OpenGL normal, roughness and height pictures ONCE per machine into a cache outside every repository (`PLACE_KIT_SCAN_CACHE`, else `~/.cache/explainer-film/surface-scans`). The request carries a plain agent name (`explainer-film-place-kit/1.5`) and nothing about the person. The pictures are packed only into the person's own scene file |
+| The person's own texture library (`own_surfaces` in the place settings) | the person's own | read where it is; never copied into the kit, the plugin or a repository (the checked normal picture the kit makes from it is kept in the same cache, outside every repository) |
 | Poly Haven textures and models | CC0 (public domain) | NOTHING is shipped. `data/polyhaven_choices.json` is a small, even-handed sample of names read from the public Poly Haven list on 23 October 2026 (one or two per kind of surface and a few everyday props), not a shopping list: a helper searches the site for what its own place needs; they are fetched at run time, the real size is read before use, and every downloaded picture is opened and checked for stickers, brands and digits |
 | Scenario's Blender skills (installed in the film owner's project) | the skills' own licences | their rules (use normals, never leave a plain colour, check the colour space) are summarised in the kit's own words in `skills/surfaces-wear-and-construction/`; no text of them is copied. Where this kit decides against one of them, `DEVIATIONS.md` says so |
 
@@ -49,12 +52,15 @@ which traps to avoid) and they were rewritten in the kit's own words. No code, n
 marked guess can only give a LOOK in the audit, never a fail, until a person confirms it with a real source. A place's own facts
 file (`--real-world-facts`) is put on top of the generic fact of the same id (the keys it gives replace the generic ones; the keys it leaves out, such as the roles the fact applies to, stay).
 
+The pebble and cobble sizes the stones are cut from (pebble 4 to 64 mm, cobble 64 to 256 mm, since 1.5.0) are the grain-size classes of C. K. Wentworth,
+"A scale of grade and class terms for clastic sediments", Journal of Geology 30 (1922), the standard scale in geology (confidence strong).
+
 ## Rules for adding to the kit
 
 1. Write new code in plain words; one name per thing; a note at the top of each file starting "What this does".
 2. Any third-party code goes in its own folder with its licence file and a line in the table above saying where it came from and
    what was changed. Nothing is pasted in without its licence.
-3. No picture, texture, model or font is added: they stay out of the repository and are fetched at run time.
+3. No picture, texture, model or font is added: they stay out of the repository and are fetched at run time (the scans into the cache above).
 4. No key, endpoint id, machine id, volume id, personal name, email or personal folder is written anywhere in the kit.
    `check_presets.py` scans for them (and for the rented-card settings folder used as a path).
 5. No code names a kind of place (`data/banned_place_nouns.json`); data files and examples may.

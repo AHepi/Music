@@ -1,6 +1,6 @@
 """What this does: builds the shader node group "PK Plan", the ONE place where a material asks "what is here?": it turns the world position of the spot being
-shaded into a look-up in the three plan-mask pictures (lowness, crown, footfall, keep-clear, distance to walls and props, sheltered, shade, dampness, above water,
-distance to litter, wheel track) and adds the facts only the object itself knows: how high the spot is above the object's OWN lowest point (a wall's foot starts at
+shaded into a look-up in the five plan-mask pictures (lowness, crown, footfall, keep-clear, distance to walls and props, sheltered, shade, dampness, above water,
+distance to litter, wheel track, distance to a verge and to a joint, and how much of another ground surface is near with its colour) and adds the facts only the object itself knows: how high the spot is above the object's OWN lowest point (a wall's foot starts at
 its own base, not at the ground: a stone plinth 15 to 46 cm high once hid the foot band), how far up the object it is (a share of its height), how far it is from the
 object's own edges (from the object's bounds: no Bevel or Ambient Occlusion node, which differ or fail in EEVEE), and whether the surface faces up.
 Every wear layer reads these through its mask inputs; each material has one Plan node and the chain wires the masks by name. Needs Blender (bpy).
@@ -13,9 +13,13 @@ from . import masks
 from .nodes import Net, new_group
 
 OUTPUTS = ['Lowness', 'Crown', 'Footfall', 'Keepclear', 'Wall Dist', 'Prop Dist', 'Sheltered', 'Shade', 'Dampness', 'Above Water', 'Litter Dist', 'Track',
-           'Height Above Foot', 'Height Share', 'Edge Dist', 'Up']
+           'Height Above Foot', 'Height Share', 'Edge Dist', 'Up', 'Verge Dist', 'Joint Dist', 'Seam Blend', 'Seam R', 'Seam G', 'Seam B']
 SOCKET_OF_MASK = {'lowness': 'Lowness', 'crown': 'Crown', 'footfall': 'Footfall', 'keepclear': 'Keepclear', 'wall_dist': 'Wall Dist', 'prop_dist': 'Prop Dist', 'sheltered': 'Sheltered',
-                  'shade': 'Shade', 'dampness': 'Dampness', 'above_water': 'Above Water', 'litter_dist': 'Litter Dist', 'track': 'Track'}
+                  'shade': 'Shade', 'dampness': 'Dampness', 'above_water': 'Above Water', 'litter_dist': 'Litter Dist', 'track': 'Track', 'verge_dist': 'Verge Dist',
+                  'joint_dist': 'Joint Dist', 'seam_blend': 'Seam Blend', 'seam_r': 'Seam R', 'seam_g': 'Seam G', 'seam_b': 'Seam B'}
+PICTURE_CHANNELS = (('a', ('Lowness', 'Crown', 'Footfall', 'Keepclear')), ('b', ('Wall Dist', 'Prop Dist', 'Sheltered', 'Shade')),
+                    ('c', ('Dampness', 'Above Water', 'Litter Dist', 'Track')), ('d', ('Verge Dist', 'Joint Dist', 'Seam Blend', 'Grows')),
+                    ('e', ('Seam R', 'Seam G', 'Seam B', 'Unpaved')))
 BOUND_INPUTS = ['Min X', 'Min Y', 'Size X', 'Size Y']
 
 
@@ -27,6 +31,10 @@ def build_plan_group():
     else:
         tree = group
         tree.nodes.clear()
+        have = {item.name for item in tree.interface.items_tree if getattr(item, 'in_out', None) == 'OUTPUT'}
+        for name in OUTPUTS:                     # a group made by an older kit lacks the newer outputs: they are added, the old wires keep working
+            if name not in have:
+                tree.interface.new_socket(name, in_out='OUTPUT', socket_type='NodeSocketFloat')
         group_in = tree.nodes.new('NodeGroupInput')
         group_out = tree.nodes.new('NodeGroupOutput')
         group_in.location, group_out.location = (-400, 0), (3200, 0)
@@ -39,7 +47,7 @@ def build_plan_group():
     v = net.math('DIVIDE', net.math('SUBTRACT', y, group_input('Min Y')), net.math('MAXIMUM', group_input('Size Y'), 0.001))
     coordinate = net.combine(u, v, 0.0)
     values = {}
-    for which, channels in (('a', ('Lowness', 'Crown', 'Footfall', 'Keepclear')), ('b', ('Wall Dist', 'Prop Dist', 'Sheltered', 'Shade')), ('c', ('Dampness', 'Above Water', 'Litter Dist', 'Track'))):
+    for which, channels in PICTURE_CHANNELS:
         image = bpy.data.images.get(names.plan_image_name(which))
         node = net.new('ShaderNodeTexImage')
         node.image = image
@@ -50,7 +58,9 @@ def build_plan_group():
         for name, socket in zip(channels, (red, green, blue, node.outputs['Alpha'])):
             values[name] = socket
     # distances are stored as shares of their longest distance
-    out = {name: values[name] for name in ('Lowness', 'Crown', 'Footfall', 'Keepclear', 'Sheltered', 'Shade', 'Dampness', 'Above Water', 'Track')}
+    out = {name: values[name] for name in ('Lowness', 'Crown', 'Footfall', 'Keepclear', 'Sheltered', 'Shade', 'Dampness', 'Above Water', 'Track', 'Seam Blend', 'Seam R', 'Seam G', 'Seam B')}
+    out['Verge Dist'] = net.math('MULTIPLY', values['Verge Dist'], masks.DISTANCE_SCALE['verge_dist'])
+    out['Joint Dist'] = net.math('MULTIPLY', values['Joint Dist'], masks.DISTANCE_SCALE['joint_dist'])
     out['Wall Dist'] = net.math('MULTIPLY', values['Wall Dist'], masks.DISTANCE_SCALE['wall_dist'])
     out['Prop Dist'] = net.math('MULTIPLY', values['Prop Dist'], masks.DISTANCE_SCALE['prop_dist'])
     out['Litter Dist'] = net.math('MULTIPLY', values['Litter Dist'], masks.DISTANCE_SCALE['litter_dist'])

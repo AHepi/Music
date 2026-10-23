@@ -88,8 +88,8 @@ Whole place, in one go (it needs `--save-as`; without it the command stops at on
 The look of each role comes from the settings (`look` and `look_by_role`: for example `neglected` for a towpath and
 `lived_in` for the rest); `--look ID` changes the default look. It runs, in this order: convert (a bevelled curve, a text sign or an instanced collection becomes meshes; the originals are kept, hidden), roles (an object that no
 rule matches gets a fallback role and a LOOK line; a dirt-road object that the settings name no road for gets a road drafted from its own shape and written into the settings), the ground (roads, then
-everything is seated on it again; every object that moves more than 3 cm is named with the distance), surfaces (UVs, normal maps, displacement, bevels), damage as shape, the plan masks, the
-wear layers, growth, light, the picture size; then it saves the file, reopens the saved file and audits it (the audit holds
+everything is seated on it again; every object that moves more than 3 cm is named with the distance), surfaces (UVs, then a photographed scan for each surface: the person's own library, else the free Poly Haven scan, downloaded once per machine; else the made-in-code surface, said in a LOOK line; normal maps, displacement, bevels), damage as shape, the plan masks, the
+wear layers, puddles (damp or wet), growth by site, light, the picture size; then it saves the file, reopens the saved file and audits it (the audit holds
 the construction check). Run twice it gives the same counts (it is safe to repeat). It never overwrites `lock.blend`
 unless you say `--overwrite`.
 
@@ -119,6 +119,9 @@ The audit prints one line for each finding: FAIL, LOOK or PASS. Fix by what the 
 | ground: a dirt-road object with no road entry, or an outline that grew | the settings need a `roads` entry for the road (`new-settings` drafts one from its shape); a grown outline means the road was reshaped into a box: `undo` and give the road its own fine mesh |
 | plain boxes (a share of the objects) | `surfaces` bevels every hard-edged role; objects of a role it does not bevel (ground, water, glass, plants, trees) need a chamfer you make yourself |
 | light: only the world lights the scene | `light` adds a sun (a world colour alone is no key light) |
+| surfaces: a material uses the made-in-code surface (named, with the reason) | a LOOK, not a FAIL: with a network, run `finish` again (it downloads the scans once), or give your own library (`own_surfaces` in `place-settings.json`); say it in the report |
+| sites: the plants are spread evenly, or a site is short | run `grow` again with this kit; never raise the background to add weeds; look at keep-out shapes and footfall near the short site |
+| budgets: the kit's own scatter (`kit scatter`) | the growth step keeps inside its budget by itself; over it means the kit went wrong: say so, never thin the pieces by hand. A budget line about a builder's triangles goes back to that builder |
 
 Read the WHOLE output of `finish`, including any list of what it skipped or could not do. A skipped item is reported, never
 ignored. The audit also holds budgets (house numbers, section `place_audit`): triangles in all (`place_audit.triangles_total_max`)
@@ -219,6 +222,8 @@ Do not save over the file after the audit. If you must, run the audit again.
 - **A layer with amount 0, or an object with no `pk_<layer>_amount`.** An Attribute node on an object that lacks the
   property reads 0 in Blender (tested in EEVEE and Cycles), so the layer is silently off on that object.
 - **Weeds on the wheel tracks, or in puddles.** The gates are exact zeros; the audit counts roots in the keep-out places.
+- **Weeds spread evenly, flat made-in-code colours, a texture pack copied into the repository** (a test place, 1.5.0). `grow` lays weeds by site; `finish` fetches
+  photographed scans once per machine into a cache outside every repository, or reads the person's own library where it is (`own_surfaces`); never copy those files.
 - **A stale audit after edits.** The audit names the scene's hash; a changed file fails it.
 - **Photographic noise instead of a few big designed marks.** See `style-rule-and-measures.md`.
 - **Wrong sizes.** A 1 m door passes every other check; only the scale check catches it.
