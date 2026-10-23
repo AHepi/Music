@@ -77,6 +77,29 @@ def add_engine_house_floor():
 add_engine_house_floor()
 
 
+def add_engine_house_interior_lights():
+    """Warm practical bounce light makes the doorway timbers readable without flattening the dusk exterior."""
+    if ONLY and 'engine_house' not in ONLY:
+        return
+
+    def area(name, location, target, energy, size):
+        data = bpy.data.lights.new(name, 'AREA')
+        data.energy = energy
+        data.color = (1.0, 0.56, 0.28)
+        data.shape = 'DISK'
+        data.size = size
+        obj = bpy.data.objects.new(name, data)
+        bpy.context.scene.collection.objects.link(obj)
+        obj.location = location
+        obj.rotation_euler = (mc.Vector(target) - mc.Vector(location)).to_track_quat('-Z', 'Y').to_euler()
+
+    area('Engine house doorway bounce', (0.0, 0.65, 3.2), (0.0, 4.8, 1.9), 180.0, 2.4)
+    area('Engine house rear practical', (-2.2, 4.6, 2.8), (0.0, 1.8, 1.5), 90.0, 1.5)
+
+
+add_engine_house_interior_lights()
+
+
 def add_front_fill_light():
     """A big, soft, warm light from the camera's side (low in the sky), so the fronts of the buildings and the mud show their
     own warm colours the way the painted reference does, instead of only the cool sky light."""
@@ -91,6 +114,60 @@ if scene.world is None:
     mc.set_flat_world((0.4, 0.5, 0.6), 1.0)
     mc.set_sun(8, 40, strength=3.0, colour=(1.0, 0.6, 0.35))
     mc.say('no world from the parts: used a plain fallback')
+
+
+def apply_design_finishing():
+    """Close-up edge work and a resolution-independent sky, applied without changing the asset builders."""
+    for name, width, angle in (
+        ('Coal in carts', 0.009, 28.0),
+        ('Engine house stone', 0.012, 35.0),
+        ('Headframe footings', 0.018, 35.0),
+    ):
+        obj = bpy.data.objects.get(name)
+        if obj is None:
+            continue
+        bevel = obj.modifiers.new('Soft worn edges', 'BEVEL')
+        bevel.width = width
+        bevel.segments = 2
+        bevel.limit_method = 'ANGLE'
+        bevel.angle_limit = math.radians(angle)
+        bevel.use_clamp_overlap = True
+
+    if os.environ.get('MINE_SKY_MODE', 'physical').lower() == 'painted':
+        return
+    world = bpy.data.worlds.new('Physical dusk sky')
+    scene.world = world
+    world.use_nodes = True
+    nodes, links = world.node_tree.nodes, world.node_tree.links
+    nodes.clear()
+    output = nodes.new('ShaderNodeOutputWorld'); output.location = (500, 0)
+    background = nodes.new('ShaderNodeBackground'); background.name = 'Sky strength'; background.location = (250, 0)
+    background.inputs['Strength'].default_value = 0.18
+    sky = nodes.new('ShaderNodeTexSky'); sky.name = 'Physical dusk sky'; sky.location = (-250, 0)
+    try:
+        sky.sky_type = 'MULTIPLE_SCATTERING'
+    except TypeError:
+        sky.sky_type = 'NISHITA'  # Blender 4.x compatibility
+    sky.sun_disc = False
+    sky.sun_elevation = math.radians(6.0)
+    sky.sun_rotation = math.radians(40.0)
+    sky.altitude = 120.0
+    sky.air_density = 1.0
+    if hasattr(sky, 'aerosol_density'):
+        sky.aerosol_density = 1.8
+    elif hasattr(sky, 'dust_density'):
+        sky.dust_density = 1.8
+    sky.ozone_density = 1.0
+    links.new(sky.outputs['Color'], background.inputs['Color'])
+    links.new(background.outputs['Background'], output.inputs['Surface'])
+
+
+apply_design_finishing()
+report['design_finishing'] = {
+    'edge_softening': ['Coal in carts', 'Engine house stone', 'Headframe footings'],
+    'sky': os.environ.get('MINE_SKY_MODE', 'physical').lower(),
+    'interior_practical_lights': True,
+}
 
 # camera
 camera = mc.make_camera(CAMERA[:3], CAMERA[3:6], lens=LENS, name='Photo camera')

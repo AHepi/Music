@@ -9,8 +9,8 @@ Build a coal-mine scene in Blender from the colour pictures, normal maps and dis
 - **Done:** a full coal-mine scene and one finished photo, 1080 x 1920 pixels: "01 Coal mine - dusk photo 1080x1920.png". It shows a tall brick chimney with a plume of smoke, a steel headframe (the tower with the two big wheels), a brick engine house with a slate roof and glowing windows, mine carts on a curved track, a muddy yard with puddles, a row of village houses, hills, and a painted dusk sky.
 - **Your pictures and maps are all used:** brick, slate, wood, rusted metal, mud and gravel. The mud, gravel, brick and slate show real bumps pushed out of your height maps, not just shading.
 - **Stopped on purpose:** three reviewers had just started checking the scene (look and mood, materials, parts overlapping). You said "that's fine for now", so I stopped them. Their findings do not exist.
-- **Known rough edges** (reported by the builders, not yet fixed): the headframe's front-left footing may touch the crate and plank pile beside the engine-house door; the inside of the engine house is nearly black; the carts' coal lumps look a little sharp-cornered up close; the stone parts (door frame, chimney base, footings) use a plain grey stone made in code, not one of your six pictures; the sky is a painted picture made in code, not a Blender sky.
-- **Not tested:** the photo was rendered once at full size (128 samples, 8 minutes 11 seconds). I have not rendered other views at full size.
+- **Design-review pass on `design/3d-quality-improvements`:** moved the crate, leaning planks and offcuts clear of the headframe footings; added warm interior practical lights; bevelled close coal and dressed-stone edges; increased gutter and downpipe resolution; and made a physical Blender sky the default. The old painted sky remains available with `MINE_SKY_MODE=painted`.
+- **Not tested:** the original photo was rendered once at full size (128 samples, 8 minutes 11 seconds). The new design pass has dependency-free layout and syntax checks, but still needs a full Blender render with the external texture folder before its lighting and materials are approved.
 
 ## How the pieces fit
 
@@ -23,8 +23,9 @@ Build a coal-mine scene in Blender from the colour pictures, normal maps and dis
 | `modules/chimney_and_smoke.py` | Brick chimney and the smoke plume | Objects |
 | `modules/track_and_carts.py` | Rails, sleepers, stones, three carts, coal | Objects |
 | `modules/ground_and_yard.py` | The muddy ground, ruts, puddles, coal lumps, timber, fence, lamp post | Objects |
-| `modules/village_and_sky.py` | Village houses, hills, the painted sky, the lights | Objects, the sky and the lights |
-| `assemble_mine.py` | Builds all parts, adds the engine-house floor and a soft warm light from the camera's side, sets the camera, takes the photo | The photo and a short report |
+| `modules/village_and_sky.py` | Village houses, hills, the physical or legacy painted sky, the lights | Objects, the sky and the lights |
+| `assemble_mine.py` | Builds all parts, adds the engine-house floor and interior practicals plus a soft warm front fill, sets the camera, takes the photo | The photo and a short report |
+| `tests/test_design_regressions.py` | Checks prop-to-footing clearances and the presence of the new lighting, edge and sky work | Dependency-free regression report |
 
 To make it again: unpack your uploads, run `lib/prepare_textures.py` (see its first lines), then
 `blender -b --disable-autoexec --python assemble_mine.py -- OUT_NAME --width 1080 --samples 128`.
@@ -50,7 +51,8 @@ To make it again: unpack your uploads, run `lib/prepare_textures.py` (see its fi
 7. **Fixes:** thinner, lighter, more irregular smoke leaving the chimney on a rising path; coal heaps moved out of the foreground; the track bent toward the camera so it sweeps across the bottom of the picture like in your screenshot; a floor in the engine house; a soft warm light from the camera's side so the mud and brick show their warm colours; ground made level around the buildings; far hills no longer hidden by the ground's bank; camera and exposure chosen by comparing ten small test photos with your screenshot. A first attempt at test cameras silently used the same camera three times (I typed the settings the wrong way); caught by looking.
 8. **Reviewers started, then stopped** at your request.
 9. **Final photo** rendered at 1080 x 1920, 128 samples, 8 minutes 11 seconds.
+10. **3D design-review pass.** Cleared the documented prop/footing collisions, lit the engine-house interior, softened close-up coal and stone edges, refined rainwater goods, and added a physical sky with a painted-sky fallback. Seven regression checks pass. A new full render is still required because the uploaded texture maps are not stored in this folder.
 
 ## Next step
 
-Replace the picture textures with fully procedural Blender materials (the new texture job) and photograph the same scene again to see how close they get.
+Render the revised scene at full size and compare the doorway, coal, stone and dusk exposure with the original photo. Then continue replacing the picture textures with fully procedural Blender materials.
