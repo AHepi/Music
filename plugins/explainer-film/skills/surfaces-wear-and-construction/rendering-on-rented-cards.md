@@ -78,13 +78,17 @@ prompt, a log or the repository. `explainer-film-setup` says whether they are se
   Each picture gets a `.json` log beside it (engine, device, size, samples, seconds, scene hash, nearly black or not).
 - The first EEVEE picture of a finished scene on this computer takes about 70 s (the shaders build once); later ones 7 to 15 s
   (measured on a canal scene of 94 objects).
-- Batch: one `run` that draws many pictures costs one wake-up; many tiny jobs cost many.
+- Batch: one `run` that draws many pictures costs one wake-up; many tiny jobs cost many. For trying versions of a change, use `explainer-film-place variations` (about 10 versions, up to 3 jobs at once, one sheet; see `batched-rounds-and-card-time.md`).
+- Card time is limited: every job is written into the card-time ledger (`explainer-film-place card-time show`) and each helper has an allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0: judged). A command that would pass it is refused before anything is sent.
+- Small quick pictures (600 x 400) until the end; full-size pictures drawn once, at the very end.
 - Each job at most about 55 minutes (measured limit); split longer work. A folder goes up as one bundle.
 - Write outputs into the store. Clear the remote output folder before a run (a stale picture once came back as a black road).
 - Download only small JPG previews (under 400 KB) and JSON. Keep .blend, EXR and big PNG on the store: a local disk fills quickly.
 - The client sends a name that says what it is (generic) and nothing about the person.
 
 ## 7. Before a long job
+
+0. Check your allowance: `explainer-film-place card-time check --helper NAME --role ROLE --estimate-seconds N` (the commands that start a paid step do this themselves and refuse past it).
 
 1. Check the balance (`rent balance`; it may say "unknown" when the provider cannot be asked). A nearly empty balance
    stalls every job while the workers show idle and the jobs wait.
@@ -95,8 +99,8 @@ prompt, a log or the repository. `explainer-film-setup` says whether they are se
 
 ## 8. Settings that matter
 
-- Cycles: OptiX denoise, adaptive threshold 0.01, light tree on (judged). Previews 1200 x 800 at 96 samples, close-ups
-  1600 x 1067, finals 2400 x 1600 at 512 (judged).
+- Cycles: OptiX denoise, adaptive threshold 0.01, light tree on (judged). Pictures for the checkers 1200 x 800 at 96 samples, close-ups
+  1600 x 1067, finals 2400 x 1600 at 512 (judged). Pictures for TRYING versions are smaller still: 600 x 400, EEVEE 16 samples or Cycles 24 samples (`variations`).
 - EEVEE (when lights are off): shadow rays 4, shadow steps 16, 32 to 48 samples (measured). White speckle on wet ground
   was EEVEE's soft shadows, not the material. A render log with "Shadow buffer full" or "Could not allocate shadow atlas"
   means the picture cannot be judged.

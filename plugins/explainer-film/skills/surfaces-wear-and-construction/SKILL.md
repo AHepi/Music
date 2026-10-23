@@ -1,6 +1,6 @@
 ---
 name: surfaces-wear-and-construction
-description: The finishing pass that every place, set or prop built in Blender must go through, whatever the request says. It gives real normal maps and displacement, roughness and colour variation, dirt, grime, stains, weathering, wetness, moss, weeds, rust, cracks, chips, edge wear, damage and rubbish, believable construction (every plank on a support, every support on the ground, nothing floating), real-world sizes, and the place's art-style rule. One command does it (explainer-film-place finish) and an audit proves it (preflight stage place). Use whenever someone asks to build, model, make or improve a village, town, harbour, mine, farm, garden, interior, street, building, house, barn, bridge, road, level, set or props in Blender or in 3D, even if they never mention surfaces, textures, wear or realism, and before drawing, rendering or painting any such place.
+description: The finishing pass that every place, set or prop built in Blender must go through, whatever the request says. It gives real normal maps and displacement, roughness and colour variation, dirt, grime, stains, weathering, wetness, moss, weeds, rust, cracks, chips, edge wear, damage and rubbish, believable construction (every plank on a support, every support on the ground, nothing floating), real-world sizes, and the place's art-style rule. One command does it (explainer-film-place finish) and an audit proves it (preflight stage place). Use whenever someone asks to build, model, make or improve a village, town, harbour, mine, farm, garden, interior, street, building, house, barn, bridge, road, level, set or props in Blender or in 3D, even if they never mention surfaces, textures, wear or realism, and before drawing, rendering or painting any such place. It also says how to try versions cheaply (one sweep of changes, about 10 measurably different versions in one batch on the rented cards, one labelled sheet) and gives every helper a card-time allowance.
 when_to_use: Any request to make a place, set, building or props in Blender, and before any picture of one is drawn.
 ---
 
@@ -10,6 +10,7 @@ when_to_use: Any request to make a place, set, building or props in Blender, and
 > 1. Build it so every part is carried (planks on supports, supports on the ground, nothing floating; a rail tenoned into two posts counts as carried) and at real size, and give every object its role AS YOU MAKE IT (`pk.new_part_object(owner, role, name, mesh)`, or the object property `place_role`). The role ids are listed by `explainer-film-place roles --list`. Never trust a role the kit only guessed from a name.
 > 2. Run the surface-and-wear pass: `explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as FINISHED.blend` (it needs `--save-as`; it drafts `place-settings.json` when there is none, with a road for every dirt-road object). To read and improve a draft first: `explainer-film-place new-settings --scene SCENE.blend --place NAME --type TYPE --out place-settings.json`, where TYPE is the nearest of village, town, harbour, mine, farm, garden, interior or generic. It turns curves, text and instanced props into meshes, then adds real normal maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss, rust, weeds, rubbish and damage as shape.
 > 3. Run `explainer-film-place audit --scene FINISHED.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend --reports REPORTS_FOLDER`. It must PASS before you draw, render or paint anything. Do not save the scene again after the audit; if you do, audit again.
+> 4. Try things in batches, inside a card-time allowance: make every change you plan in ONE sweep, then look once. Build the scene once and save it. For each change to a thing (a tree, a wall, moss) do not try one small change at a time: write about 10 versions whose settings are far apart and draw them in ONE batch (`explainer-film-place variations run FILE.json --where rented --helper YOUR-NAME --role builder`: it drops near-duplicates, spreads the versions over up to 3 rented cards, measures every picture and makes ONE labelled sheet). Look at the sheet, pick or combine, at most ONE more batch. Small quick pictures (600 x 400) until the end; full-size pictures once, at the very end. Every card job is written in a ledger and each helper has an allowance (builder 10 minutes, fixer 5): the tool refuses past it. Report the card seconds you used. Read `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md` first.
 > Details, every command and the live-Blender route: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/SKILL.md`.
 
 What this is: a place built from plain boxes with flat colours is not finished, even when it looks tidy and passes
@@ -93,6 +94,8 @@ file and the tool that makes it). `explainer-film-place --verbs` lists the verbs
 | Which renderer, and why | `renderer-for` |
 | Draw the pictures with that rule (the job file's shape is in `rendering-on-rented-cards.md`) | `render --job JOB.json --where rented\|local\|auto --engine auto\|cycles\|eevee --finals` |
 | The rented graphics card | `rent status`, `rent upload`, `rent run`, `rent job`, `rent wait`, `rent download`, `rent balance` |
+| About 10 measurably different versions of ONE change, drawn small on up to 3 cards at once, on ONE labelled sheet (the batch rule: `batched-rounds-and-card-time.md`) | `variations make`, `variations plan` (free), `variations run FILE.json --where rented --helper NAME --role builder`, `variations refine RESULT.json --pick NAME`, `variations sheet`, `variations keys` |
+| The card-time ledger and each helper's allowance | `card-time show`, `card-time check --estimate-seconds N`, `card-time add`, `card-time start --team-minutes N` |
 | Measure pictures against the style (one guard file can hold one guard per view) | `measure PICTURE... --guard G --make-guard --view NAME --previous PICTURE`, `crops --picture P --boxes x,y,w,h --out-folder DIR` |
 | Are the data files consistent and private? | `check-presets` |
 
@@ -111,6 +114,9 @@ result is for trying things; the audit records that it was quick and the place s
    character to chase a number: the person decides.
 5. Tell the person what you did: what the pass did, what the audit measured, what you skipped, what you did not test,
    every failure. Measured and judged are different words; use both correctly.
+6. Card time is limited. Make every change in one sweep and look once; try a change as about 10 measurably different versions in ONE batch
+   (`variations`), at most one more batch; small quick pictures until the end, full-size pictures once at the very end; stay inside your allowance and
+   report the card seconds you used. A tool that refuses because of the allowance is not worked around: write the reason it asks for, or tell the person.
 
 ## Where a smaller model skips it, and what stops that
 
@@ -133,6 +139,7 @@ result is for trying things; the audit records that it was quick and the place s
 | draw from a scene you changed after the audit | the audit's scene hash no longer matches: stale |
 | build parts in parallel and overwrite each other | owners, idempotent stage files, a scene fingerprint diff, both orders |
 | write a key, an id or a personal detail into a file | the client reads settings at run time; `check-presets` and the push guard scan for them |
+| try one small change, look, change again; rebuild the scene for every test; draw every test at full size; run 25 versions of one tree one after another (the garden spent US$10.89 of card time this way) | the `variations` tool draws about 10 far-apart versions of a change in one batch from the saved scene, small and quick; the card-time ledger writes every job and the allowance refuses past it; a third batch for one change is refused |
 
 ## Rules that conflict, and which wins
 
@@ -160,6 +167,7 @@ result is for trying things; the audit records that it was quick and the place s
 - `style-rule-and-measures.md`: the style rule, the style note, the picture measures.
 - `fresh-checkers.md`: how to be checked honestly.
 - `rendering-on-rented-cards.md`: cheap Cycles on rented cards, set-up by the person, daily use.
+- `batched-rounds-and-card-time.md`: the batch rule, the `variations` tool, the sheet and its measures, the card-time ledger and the allowance.
 - `blender-5-traps.md`: the Blender 5.2 traps that cost whole rounds.
 - `worked-examples-garden-and-canal-lock.md`: two real places walked through, with their measured numbers.
 - Also: the workflow `build-a-place` builds a place in parts with fresh checkers; the tips guide section 8a.

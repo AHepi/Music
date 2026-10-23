@@ -149,28 +149,32 @@ def draw_on_cards(plan, run_folder, backend, check_reset, helper, role, ledger, 
             backend.upload(os.path.dirname(bundle), remote_kit)
             uploaded_note.append('kit uploaded')
     run_id = f'{spec["change_id"]}-{int(time.time())}'
-    base = f'{store}/place-jobs/variations-{run_id}'
+    base = f'{store}/place-jobs/variations-{run_id}'                       # this batch's own jobs and pictures
+    scene_home = f'{store}/place-jobs/scenes/{_sha8(spec["scene"])}'         # the scene waits here under its own checksum, so a second batch on the same scene does not upload it again
     extras = client_module.extra_uploads(spec['scene'], {})
     megabytes = (os.path.getsize(spec['scene']) + sum(client_module.size_of(path) for path, _ in extras)) / 1e6
     limit = numbers.value('place_render.upload_megabytes_max')
     if megabytes > limit:
         raise cards.CardProblem(f'the scene and its files come to {megabytes:.0f} MB, over {limit} MB: upload it once by hand and name it in the variations file')
-    remote_scene = f'{base}/{os.path.basename(spec["scene"])}'
-    backend.upload(spec['scene'], remote_scene)
+    remote_scene = f'{scene_home}/{os.path.basename(spec["scene"])}'
+    backend.upload(spec['scene'], remote_scene)                             # an upload of a file that is already there is only a check
     for path, name in extras:
-        backend.upload(path, f'{base}/{name}')
+        backend.upload(path, f'{scene_home}/{name}')
     remote_settings = None
     if spec['settings']:
-        remote_settings = f'{base}/settings/{os.path.basename(spec["settings"])}'
-        backend.upload(spec['settings'], remote_settings)
+        owners, owner_file = None, None
         try:
             owners = json.load(open(spec['settings'], encoding='utf-8')).get('owners')
         except (OSError, ValueError):
             owners = None
         if isinstance(owners, str) and not os.path.isabs(owners):
             owner_file = os.path.join(os.path.dirname(spec['settings']), owners)
-            if os.path.exists(owner_file):
-                backend.upload(owner_file, f'{base}/settings/{owners}')
+            owner_file = owner_file if os.path.exists(owner_file) else None
+        settings_home = f'{scene_home}/settings-{_sha8(spec["settings"])}' + (f'-{_sha8(owner_file)}' if owner_file else '')
+        remote_settings = f'{settings_home}/{os.path.basename(spec["settings"])}'
+        backend.upload(spec['settings'], remote_settings)
+        if owner_file:
+            backend.upload(owner_file, f'{settings_home}/{owners}')
     hook_paths = {}
     for variation in spec['variations']:
         script = variation.get('script')
@@ -266,26 +270,53 @@ def collect(plan, records, run_folder):
 
 
 def flag_results(results, pairs):
-    """Adds plain 'flags' to each result from the pair check and from the worker's own notes. Returns lines for the sheet and the report."""
+    """Adds plain 'flags' to each result from the pair check and from the worker's own notes. Returns the lines for the sheet and the report.
+    Short on purpose: every variation that came out nearly the same as the baseline is named in ONE line (they are then nearly the same as each other too, which is not said again pair by pair);
+    only a pair of variations that DO show against the baseline gets a line of its own. The full list of pairs stays in the result file."""
     number = {r['name']: i for i, r in enumerate(results)}
+    by_name = {r['name']: r for r in results}
     lines = []
     for result in results:
         result['flags'] = []
         for note in result.get('notes', []):
             if note.startswith(('the layer ', 'no wear layer', 'state and look wrote')):
                 result['flags'].append('changes nothing here: ' + note)
-    for first, second in pairs['nearly_same']:
-        a, b = (first, second) if number[first] < number[second] else (second, first)
-        if a == 'baseline':
-            target = next(r for r in results if r['name'] == b)
-            target['flags'].append('does not show in these cameras (nearly the same as the baseline)')
-            lines.append(f'"{b}" came out nearly the same as the baseline (mean difference '
-                         f'{next(p for p in pairs["pairs"] if {p["a"], p["b"]} == {a, b})["mean_difference"]:.2f} of 255): the change does not show from these cameras, or it changes nothing in this scene')
-        else:
-            later = next(r for r in results if r['name'] == b)
-            later['flags'].append(f'nearly the same as #{number[a]} {a}')
-            pair = next(p for p in pairs['pairs'] if {p['a'], p['b']} == {a, b})
-            lines.append(f'"{b}" and "{a}" came out nearly the same (mean difference {pair["mean_difference"]:.2f} of 255, {pair["changed_share"]:.2%} of pixels changed): keep one')
+    pair_of = {frozenset((p['a'], p['b'])): p for p in pairs['pairs']}
+    hidden = sorted(set(pairs.get('invisible', [])), key=lambda name: number[name])
+    for name in hidden:
+        by_name[name]['flags'].append('does not show in these cameras (nearly the same as the baseline)')
+    if hidden:
+        means = [pair_of[frozenset(('baseline', name))]['mean_difference'] for name in hidden if frozenset(('baseline', name)) in pair_of]
+        spread = ('under the limit' if not means else f'{min(means):.2f}' if len(set(round(m, 2) for m in means)) == 1 else f'{min(means):.2f} to {max(means):.2f}')
+        names = ', '.join(f'"{name}"' for name in hidden)
+        unit = '' if not means else ' of 255'
+        verb = 'came' if len(hidden) == 1 else 'all came'
+        lines.append(f'{names} {verb} out nearly the same as the baseline (mean difference {spread}{unit}): the change does not show from these cameras, or it changes nothing in this scene'
+                     + ('' if len(hidden) == 1 else ', and so they are nearly the same as each other too'))
+    # the rest: variations that DO show against the baseline but came out nearly the same as each other. Groups of such variations (a pair, or several that are all alike) get ONE line each.
+    close = [(a, b) for a, b in pairs['nearly_same'] if 'baseline' not in (a, b) and not (a in hidden and b in hidden)]
+    parent = {}
+
+    def find(name):
+        parent.setdefault(name, name)
+        while parent[name] != name:
+            parent[name] = parent[parent[name]]
+            name = parent[name]
+        return name
+
+    for a, b in close:
+        parent[find(a)] = find(b)
+    groups = {}
+    for name in list(parent):
+        groups.setdefault(find(name), []).append(name)
+    for members in sorted((sorted(group, key=lambda n: number[n]) for group in groups.values()), key=lambda group: number[group[0]]):
+        first_member = members[0]
+        for later in members[1:]:
+            by_name[later]['flags'].append(f'nearly the same as #{number[first_member]} {first_member}')
+        gaps = [pair_of[frozenset((a, b))]['mean_difference'] for a, b in close if a in members and b in members]
+        names = ' and '.join([', '.join(f'"{n}"' for n in members[:-1]), f'"{members[-1]}"']) if len(members) > 1 else f'"{members[0]}"'
+        lines.append(f'{names} came out nearly the same as each other (mean difference {min(gaps):.2f}' + (f' to {max(gaps):.2f}' if len(gaps) > 1 and abs(max(gaps) - min(gaps)) >= 0.005 else '')
+                     + f' of 255; they differ in their settings but not in these cameras): keep one of them')
     return lines
 
 

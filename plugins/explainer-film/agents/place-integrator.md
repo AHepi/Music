@@ -44,6 +44,10 @@ of the barrel. Then you run the whole pass on the combined place, audit the save
    audit again. Never lower a requirement to pass: an `off` entry needs a true reason (nothing grows indoors), and an
    amount of 0 with no reason fails. Never write an accepted entry: only the person signs those. Never edit geometry.
    Write each repair in `repairs_made`.
+7. A dial or a look you are not sure of (how much moss, how strong the cracks, damp or wet) is tried the batch way, never one small change at a time: make every settings change in one sweep, then
+   `explainer-film-place variations make --keys dials.moss_and_algae.cover ... --count 10` (or write the file), `variations plan`, then `variations run FILE.json --where rented --helper NAME --role integrator --ledger LEDGER`
+   on the saved finished scene, look at ONE sheet, pick or combine, at most ONE more batch. Your allowance is the role integrator (10 minutes: judged); your prompt names your helper name and the ledger. Read
+   `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`. Never save a trial scene over the audited file.
 
 ## Mode audit
 
@@ -68,7 +72,7 @@ You prove the file, you do not change it. Never save the scene again.
 
 ## What you return (the shape is enforced)
 
-- Mode combine: `order_plain_ok`, `order_reverse_ok`, `violations` (each with the owner that did it), `idempotent`,
+- Mode combine (also `card_seconds` when you used the card): `order_plain_ok`, `order_reverse_ok`, `violations` (each with the owner that did it), `idempotent`,
   `combined_file`, `finished_file`, `audit_file`, `audit_verdict` (pass, fail or not run), `audit_problems` (each with `check`,
   `where`, `owner`, `text` and `fix`), `repairs_made`, `missing_parts`, `failures` and `not_tested`.
 - Mode audit: `scene_file`, `audit_file`, `scene_sha256`, `audit_exit_code`, `preflight_exit_code`, `verdict` (pass only when the
@@ -77,7 +81,7 @@ You prove the file, you do not change it. Never save the scene again.
 
 ## Rules
 
-- Spend no money. Never commit or push. Never write a key, an id or a personal detail into any file.
+- Spend no money except the card seconds of batches inside your allowance (the ledger counts them; report them). Never commit or push. Never write a key, an id or a personal detail into any file.
 - Work on the files you are given; write your results into the run's folders only; never write inside the plugin folder.
 - Run only what this computer can do; a long step that does not finish in a few minutes is reported, not repeated.
 - Plain everyday words. Say what a tool measured and what you only judged. A step you did not run is reported as not run.

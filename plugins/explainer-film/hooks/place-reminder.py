@@ -1,5 +1,5 @@
 """What this does: runs each time the person sends a message (a UserPromptSubmit hook of the explainer-film plugin). When the message is about BUILDING a place, a set or props in 3D (a
-village, a harbour, a mine, a barn, a room, a prop, Blender itself), it prints a three-line reminder, which Claude Code adds to what the model reads: such work goes through the
+village, a harbour, a mine, a barn, a room, a prop, Blender itself), it prints a three-line reminder (the last line also names the card-time and batch rule), which Claude Code adds to what the model reads: such work goes through the
 surface-and-wear pass and the construction check, even when the message names neither. For any other message it prints nothing and costs nothing.
 Why it exists: the plugin's skills are picked by their descriptions, and other skills (a general Blender skill, for example) compete for the same request. This reminder names the plugin's
 skill and the commands in the one place a model cannot miss, the start of its turn.
@@ -23,7 +23,8 @@ REMINDER = (
     'explainer-film reminder (ignore it if this is not 3D work): a place, a set or props built in Blender go through the surface-and-wear pass and the construction check, even when the '
     'request names neither (real normal maps and displacement, dirt, grime, weeds, moss, weathering, damage, wetness, parts that are carried and at real size).\n'
     'Read the skill surfaces-wear-and-construction first (its first screen has the steps), then run: explainer-film-place finish, explainer-film-place audit, explainer-film-preflight place.\n'
-    'Nothing is drawn, rendered or painted until the preflight place stage passes; report what was measured, what was only judged and what failed.'
+    'Nothing is drawn, rendered or painted until the preflight place stage passes; report what was measured, what was only judged and what failed. Rented-card time is limited: make every change in ONE sweep, then look once; '
+    'try a change as about 10 far-apart versions in ONE batch (explainer-film-place variations), small quick pictures until the end, full-size pictures once at the very end, and report your card seconds.'
 )
 
 

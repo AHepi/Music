@@ -61,7 +61,7 @@ def make_sheet(path, results, cameras, meta, thumbnail_width=None, max_kilobytes
     """Writes the contact sheet to path (a .jpg). results: the baseline first, each with 'name', 'set', 'args', 'script', 'pictures' (each with an absolute 'path'), 'average', 'flags' (list of text),
     'ok'. meta: {'change', 'scene', 'engine', 'size', 'dropped': [text], 'pair_lines': [text], 'card_lines': [text], 'legend': True}. Returns {'path', 'bytes', 'quality', 'scale', 'width', 'height'}."""
     tw = int(thumbnail_width or numbers.value('place_variations.sheet_thumbnail_width_pixels'))
-    limit = int((max_kilobytes or numbers.value('place_render.preview_download_kilobytes_max')) * 1024)
+    limit = int((max_kilobytes or numbers.value('place_render.preview_download_kilobytes_max')) * 1000)       # 400 KB means under 400,000 bytes, so it is under 400 KiB too
     target = float(numbers.value('place_measures.squint_target'))
     camera_names = list(cameras) or sorted({p['camera'] for r in results for p in r.get('pictures', [])})
     cams = max(1, len(camera_names))

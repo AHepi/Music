@@ -17,6 +17,9 @@ Follow them unless the user's own instructions say otherwise.
 - Before any paid step (voice, paintings), say the estimated cost and confirm it if it is new or
   bigger than agreed. Keep a running total (for example a `fal-spend.txt` line per request batch).
 - Download paid results at once (ElevenLabs links expire after 2 hours).
+- Rented-card time (drawing places in Blender) is money too and is limited: every helper has an allowance in card minutes, a ledger counts every card job, and the tools refuse past it. Make every change in one sweep,
+  then look once; try a change as about 10 far-apart versions in ONE batch, at most one more batch; small quick pictures until the end, full-size ones once at the very end (skill `surfaces-wear-and-construction`,
+  file `batched-rounds-and-card-time.md`). A price made from card seconds is an estimate, never a bill.
 
 ## Notes the project keeps (in a `project-notes/` folder)
 

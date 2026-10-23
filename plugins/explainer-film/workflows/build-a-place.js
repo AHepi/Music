@@ -8,11 +8,11 @@ export const meta = {
     { title: 'Build parts', detail: 'one builder per part, side by side up to a cap, each running its own share of the pass and its own checks' },
     { title: 'Combine', detail: 'one integrator: both orders, ownership check, the whole surface-and-wear pass' },
     { title: 'Audit', detail: 'the audit and the preflight stage place on the exact file; up to two repair rounds routed to the owners; no picture before it passes' },
-    { title: 'Render', detail: 'the renderer rule (Cycles where lit, EEVEE when not), previews, measures, the style guard' },
+    { title: 'Render', detail: 'the renderer rule (Cycles where lit, EEVEE when not), small quick previews on the rented card inside the allowance, measures, the style guard' },
     { title: 'Check', detail: 'fresh checkers (look, structure, process, a blind reader), then a skeptic merges and ranks' },
     { title: 'Fix', detail: 'exactly one fix round: one fixer per owner, given only the confirmed findings' },
     { title: 'Re-check', detail: 'a different fresh checker and a second blind reader look at the changed place' },
-    { title: 'Report', detail: 'the final gate on the saved file, then a plain-words report' },
+    { title: 'Report', detail: 'full-size pictures drawn once, at the very end, when asked for; the final gate on the saved file; then a plain-words report with the card seconds' },
   ],
 }
 
@@ -27,7 +27,9 @@ export const meta = {
 //
 // The rules the script keeps: nothing is drawn unless the audit passed (or failed only on items the person accepted in writing);
 // at most two repair rounds before any picture, routed to the owners the audit names; exactly one fix round after the checkers;
-// no paid step (only the renderer may use the person's rented card, and only when the notes allow it); no commit; checkers get no
+// no paid step except rented-card time, which is LIMITED: every helper has a card-time allowance by its role (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0), every card job
+// is written in one card-time ledger, and the batch rule applies (make every change in one sweep, then look once; try a change as about 10 measurably different versions in ONE batch with
+// `explainer-film-place variations`, at most one more batch; small quick pictures until the end; full-size pictures drawn ONCE, at the very end); no commit; checkers get no
 // builder reports or numbers; the blind reader gets no feature list; a part that comes back empty is reported as missing, never
 // dropped quietly; a squint-test miss is reported to the person and never "fixed" by removing character.
 // The helpers are told to read their own agent file first, because a plugin agent type is not assumed to be available.
@@ -47,14 +49,17 @@ export const meta = {
 //   ledger: '/path/to/spend-ledger.json'           (optional: for the process checker)
 //   environment: 'notes about this computer, the disk, where to render, the money rules'   (optional text: the notes win)
 //   renderer: 'auto' | 'cycles' | 'eevee'          (default auto: the film owner's rule)
-//   rented: true | false | 'auto'                  (default auto: may the renderer use the person's rented card?)
-//   finals: false                                  (default: previews only)
+//   rented: true | false | 'auto'                  (default auto: may helpers use the person's rented card? true or auto lets the batch tool and the renderer use it; false keeps every helper off it)
+//   finals: false                                  (default: small previews only; true: the renderer draws the full-size finals ONCE, at the very end, after the last fix)
+//   cardLedger: '/path/to/card-time-ledger.jsonl'  (default: card-time-ledger.jsonl in the run's folder: every helper writes its card jobs there, under its own name and role)
+//   cardClient: 'python3 -I /path/to/client.py'    (optional: a command-line card client with the actions upload, run, job and download; passed to `variations run` as --card-client when the person's settings for the plugin's own client are not set; never put a key or an id in it)
+//   cardTeamMinutes: 30                            (optional: the most card minutes the whole run may use; the planner writes it into the ledger; without it the house number holds)
 //   maxParallelBuilders: 4                         (default 4: more parts wait in a queue, none is skipped; use 2 on a slow computer)
 //   maxRepairRounds: 2                             (default 2, never more)
 //   effort: 'medium', checkEffort: 'high', planEffort: same as effort
 //   today: 'YYYY-MM-DD'                            (so "latest" figures are judged right; the script never reads the clock)
 // }
-// Returns { plan, ground, parts, missing_parts, combine, audit, repairs, render, checks, confirmed, fixes, recheck, reading_test,
+// Returns { plan, ground, parts, missing_parts, combine, audit, repairs, render, final_render, card_time, checks, confirmed, fixes, recheck, reading_test,
 //           fresh_check, final_gate, stopped, report_markdown }. Every key is always there (null when its phase did not run).
 const ARGS = args ?? {}
 
@@ -74,6 +79,10 @@ const READING_LINE = 0.75   // film-settings.json, place_measures reading_test_s
 const RENTED = ARGS.rented ?? 'auto'
 const RENDERER = ARGS.renderer ?? 'auto'
 const FINALS = ARGS.finals === true
+const CARD_LEDGER = String(ARGS.cardLedger ?? `${String(ARGS.folder).replace(/\/+$/, '')}/card-time-ledger.jsonl`)
+const CARD_CLIENT = ARGS.cardClient ? String(ARGS.cardClient) : null
+const CARD_TEAM_MINUTES = Number(ARGS.cardTeamMinutes) > 0 ? Number(ARGS.cardTeamMinutes) : null
+const CARD_MINUTES = { builder: 10, fixer: 5, integrator: 10, renderer: 10, checker: 3, planner: 0 }   // film-settings.json place_card_time.allowance_minutes (judged); a test keeps them equal
 const WHERE = RENTED === true ? 'rented' : RENTED === false ? 'local' : 'auto'
 const ENGINE = ['cycles', 'eevee'].includes(String(RENDERER).toLowerCase()) ? String(RENDERER).toLowerCase() : 'auto'
 const REFERENCES = Array.isArray(ARGS.references) ? ARGS.references : []
@@ -95,7 +104,7 @@ const STATE = {
   render: null, checks: {}, skeptic: null, confirmed: [], notFixedOnPurpose: [], unverified: [],
   fixes: [], fixOwners: [], fixCombine: null, fixAudit: null, fixRender: null, recheck: null, recheckBlind: null,
   readingTests: [], freshCheck: null, finalGate: null, version: 1, finalFile: null, finalAuditFile: null, finalRender: null, claimOwners: [],
-  havePictures: false, stopped: null, notes: [],
+  havePictures: false, stopped: null, notes: [], cardRows: [], finalsRender: null,
 }
 
 // ------------------------------------------------------------------------------------------------------------- small helpers
@@ -142,7 +151,7 @@ const partOf = (owner) => STATE.plan.parts.find((part) => part.owner === owner)
 
 // ----------------------------------------------------------------------------------------------------------- shared prompt text
 const RULES = `RULES FOR EVERYONE
-- Spend no money. The only paid thing in this run is drawing pictures on the person's own rented card: only the renderer does it, and only when the notes say it may.
+- Spend no money. The only paid thing in this run is time on the person's own rented card, and it is LIMITED: every helper has an allowance in card minutes by its role, every card job is written in the card-time ledger, and the tools refuse a step that would pass the allowance. The card is used only through the batch tool (explainer-film-place variations) and render, and only when the notes say it may be used. Try things in batches (one sweep of changes, then look once; about 10 measurably different versions in ONE batch; at most one more batch), small quick pictures until the end, full-size pictures once at the very end. Your own section below names your allowance.
 - Never commit or push. Never write a key, an id or a personal detail into any file or answer, and never open the folder where the rented-card account keeps its settings (the client reads the person's settings when it runs).
 - Never lower a requirement to make a check pass. The only allowed ways to skip a treatment are an off entry with a true reason in the place settings, and an accepted entry that the person signed (who and the date). You never sign for the person.
 - This computer is slow and its disk is small: run only small tests here (small pictures, quick runs); anything bigger waits for the renderer. Keep .blend files few, delete your own scratch files, keep big pictures on the rented card's store and bring back only small previews (under 400 KB).
@@ -150,6 +159,13 @@ const RULES = `RULES FOR EVERYONE
 - Return your report as text in your final answer, in the shape asked (it is enforced). Save your evidence as JSON or text files in your own folder as you go: a helper can be refused a report file, and a restart can lose work.`
 
 const environmentText = () => (ARGS.environment ? `\nNOTES ABOUT THIS COMPUTER, THE DISK AND THE MONEY, from the person who started the run (they win over anything else written here):\n${asText(ARGS.environment)}\n` : '')
+// the part every helper that may use the card gets: who it is in the ledger, its allowance, and the batch rule in a few plain lines
+const cardBlock = (name, role) => `YOUR CARD TIME
+Your helper name for the card-time ledger is ${name}. Your role is ${role}. The ledger is ${CARD_LEDGER}. Your allowance is ${CARD_MINUTES[role]} minutes of rented-card time (a house number, judged): the tools count it and refuse a step that would pass it. Put --helper ${name} --role ${role} --ledger ${CARD_LEDGER} on every variations, render and rent command you run. \`explainer-film-place card-time show --ledger ${CARD_LEDGER}\` says what you have left.
+${RENTED === false ? 'The person said: no rented card in this run. Draw nothing on a card. A batch may be drawn with --where local on a tiny scene, or not at all; say what you could not try.' : `Rented card allowed: ${RENTED}.`}
+THE BATCH RULE (read ${ARGS.plugin}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md first): make every change you plan in ONE sweep, then look once. Build the scene once and save it. For each change to a thing you are not sure of, write about 10 versions whose settings are far apart and draw them in ONE batch: explainer-film-place variations plan FILE.json (free), then explainer-film-place variations run FILE.json --where ${WHERE}${CARD_CLIENT ? ` --card-client "${CARD_CLIENT}"` : ''} (up to 3 cards at once, 600 x 400, one labelled sheet with measures and the card seconds). Look at the sheet with the Read tool, pick or combine, and draw at most ONE more batch. Small quick pictures until the end; full-size pictures are drawn once, at the very end, by the renderer. Report the card seconds you used (card_seconds) and the batches you drew (batches).`
+const builderHelper = (part, mode) => (mode === 'fix' ? { name: `fixer-${part.owner}`, role: 'fixer' } : { name: `builder-${part.owner}`, role: 'builder' })
+
 const blenderText = () => (ARGS.blender
   ? `Blender is at ${ARGS.blender}: give every command that starts Blender the option --blender ${ARGS.blender}.`
   : 'Blender: the commands look for it themselves (the BLENDER setting, then the kit machine settings file, then the PATH). If it cannot be found, stop and say so.')
@@ -200,7 +216,7 @@ const PART_PROPS = {
   own_audit: obj({ verdict: str, problems: strs }),
   surface_pass_done: bool, wear_preview_done: bool,
   claims: list(obj({ claim: str, measured_by: str })),
-  unsure: strs, shared_problems: strs, failures: strs, not_tested: strs, views_to_redraw: strs, seconds: num,
+  unsure: strs, shared_problems: strs, failures: strs, not_tested: strs, views_to_redraw: strs, seconds: num, card_seconds: num, batches: num,
 }
 const PART_REQUIRED = ['owner', 'stage_file', 'steps_finished', 'objects_added', 'triangles', 'own_audit', 'surface_pass_done', 'wear_preview_done', 'claims', 'unsure', 'shared_problems', 'failures', 'not_tested', 'seconds']
 const PART_REPORT = obj(PART_PROPS, PART_REQUIRED)
@@ -210,7 +226,7 @@ const COMBINE_REPORT = obj({
   order_plain_ok: bool, order_reverse_ok: bool, violations: strs, idempotent: bool,
   combined_file: str, finished_file: str, audit_file: str,
   audit_verdict: { type: 'string', enum: ['pass', 'fail', 'not run'] }, audit_problems: list(AUDIT_PROBLEM),
-  repairs_made: strs, missing_parts: strs, failures: strs, not_tested: strs,
+  repairs_made: strs, missing_parts: strs, failures: strs, not_tested: strs, card_seconds: num, batches: num,
 }, ['order_plain_ok', 'order_reverse_ok', 'violations', 'idempotent', 'finished_file', 'audit_verdict', 'audit_problems', 'repairs_made', 'failures', 'not_tested'])
 
 const AUDIT_REPORT = obj({
@@ -222,7 +238,7 @@ const AUDIT_REPORT = obj({
 const RENDER_REPORT = obj({
   renderer: str, why: str, where: { type: 'string', enum: ['rented', 'local'] }, device: str, balance_checked: bool, stalled: bool,
   pictures: list(obj({ view: str, path: str, half_path: str, size: list(num), samples: num, seconds: num }, ['view', 'path', 'half_path', 'size', 'samples', 'seconds'])),
-  seconds_total: num, estimated_dollars: num, guard_file: str, guard_made_from: str, guard_provisional: bool,
+  seconds_total: num, estimated_dollars: num, card_seconds: num, guard_file: str, guard_made_from: str, guard_provisional: bool,
   measures: freeObject, notes: strs, failures: strs,
 }, ['renderer', 'why', 'where', 'device', 'balance_checked', 'stalled', 'pictures', 'seconds_total', 'estimated_dollars', 'guard_made_from', 'measures', 'notes'])
 
@@ -259,6 +275,7 @@ The ground part is built first, alone, then frozen. Its owner goes in ground_own
 ${ARGS.views ? `The person wants these views:\n${asText(ARGS.views)}` : 'Propose at least three views.'} The cameras are named "View <name>".
 ${REFERENCES.length ? `The person gave reference pictures: ${REFERENCES.join(', ')}. Measure them; the style note and the style guard come from them, so the style note is not provisional.` : 'There are no reference pictures: the style note is PROVISIONAL (say so in its first line); the first honest picture will make the style guard.'}
 Renderer wished: ${RENDERER}. Rented card allowed: ${RENTED}.
+CARD TIME: you have none (planner allowance ${CARD_MINUTES.planner} minutes). The run's card-time ledger is ${CARD_LEDGER}; each helper has an allowance by its role (builder ${CARD_MINUTES.builder} minutes, fixer ${CARD_MINUTES.fixer}, integrator ${CARD_MINUTES.integrator}, renderer ${CARD_MINUTES.renderer}, checker ${CARD_MINUTES.checker}). ${CARD_TEAM_MINUTES ? `The person set a total for the whole run of ${CARD_TEAM_MINUTES} card minutes: write it down with explainer-film-place card-time start --team-minutes ${CARD_TEAM_MINUTES} --ledger ${CARD_LEDGER} (it costs nothing) and say so in the last line of the style note.` : 'The person set no total for the whole run: the house number holds.'} Tell each part's brief to make every change in one sweep, build the scene once, and try an unsure change as about 10 far-apart versions in ONE batch (explainer-film-place variations), at most one more batch.
 Return the plan in the shape asked.`
 
 const groundBlock = () => `YOU ARE THE GROUND PART and you go first, alone. Nothing else is built until you are done.
@@ -308,6 +325,8 @@ ${part.brief}
 
 ${requiredStepsText(part, mode === 'ground' ? START_FILE : GROUND_FILE)}
 
+${cardBlock(builderHelper(part, mode).name, builderHelper(part, mode).role)}
+
 YOUR STEPS, in priority order (a finished step 1 plus step 2 is already a valid delivery):
 ${numbered(part.steps_in_order)}
 
@@ -334,7 +353,8 @@ Run these, in this order (each one starts Blender):
 3. explainer-film-place finish --scene ${combinedFile(version)} --settings ${STATE.plan.files.settings} --facts ${STATE.plan.files.facts} --save-as ${finishedFile(version)}
 Never use a quick run for the finished scene. Step 3 writes place-audit.json beside the finished scene and prints the audit; the official audit of this round is made later by another helper. Delete the combined scene of any older round when you are sure it is not needed.
 Look: ${STATE.plan.look ?? 'from the settings'}; state: ${STATE.plan.state ?? 'from the settings'} (change them only when a repair below says so).
-${repairs.length ? `REPAIRS ASKED OF YOU (settings, role tags and dials only: geometry is never yours and goes back to its owner):\n${numbered(repairs.map((repair) => `${repair.text} (where: ${repair.where}; fix: ${repair.fix})`))}\n` : ''}Return your report in the shape asked.`
+${repairs.length ? `REPAIRS ASKED OF YOU (settings, role tags and dials only: geometry is never yours and goes back to its owner):\n${numbered(repairs.map((repair) => `${repair.text} (where: ${repair.where}; fix: ${repair.fix})`))}\n` : ''}${cardBlock('integrator', 'integrator')}
+Return your report in the shape asked.`
 
 const auditPrompt = (version) => `${first('integrator')}
 
@@ -348,7 +368,7 @@ Run these, in this order:
 The preflight reports go into ${DIR.reports}/preflight-round${version}/, so nothing lands beside the plugin. ${ARGS.accepted ? 'The accepted file is the person\'s: you never write an accepted entry.' : 'There is no accepted file.'}
 Every FAIL goes into problems with the owner of the object it names ('integrator' for settings, role tags and dials). Return your report in the shape asked.`
 
-const renderPrompt = (tag, views, previous, file) => `${first('renderer')}
+const renderPrompt = (tag, views, previous, file, finalOnly = false) => `${first('renderer')}
 
 ${runHeader('renderer')}
 
@@ -356,9 +376,12 @@ YOUR JOB: draw the pictures of ${file}. Round: ${tag}.
 The renderer rule: ${RENDERER} (auto means the film owner's rule: Cycles where lamps, lit windows, lanterns or fires are on, EEVEE when they are off). Rented card allowed: ${RENTED} (auto: use it when the client says workers can start, otherwise only tiny local pictures, and say so).
 Views to draw:
 ${numbered(views.map((view) => `${view.name}: camera "${view.camera}", ${view.size[0]} x ${view.size[1]}`))}
-Finals: ${FINALS ? 'yes, also draw the final-size pictures' : 'no, previews only'}.
+${finalOnly
+    ? 'THIS IS THE ONE FULL-SIZE DRAWING OF THE RUN, at the very end: draw ONLY the final-size pictures (no previews, so write each view as "kinds": ["final"] in the job file), at the sizes above, from this file, which is the last audited file. Nothing is tried here: the small quick pictures of the earlier rounds were for that.'
+    : `Finals: no. These are the small quick pictures (previews) that the checkers look at. The full-size pictures are drawn ONCE, at the very end, and only when the person asked for them (${FINALS ? 'they did' : 'they did not'}); never draw one to test something.`}
+${cardBlock('renderer', 'renderer')}
 Write the job file to ${DIR.render}/job-${tag}.json (its scene is ${file}), the pictures into ${DIR.pictures}/${tag}/ and the half-size copies into ${DIR.pictures}/half/${tag}/. Name each half-size copy by its number only (view-1.jpg, view-2.jpg and so on, in the order of the views), so that its file name tells a reader nothing.
-Draw with: explainer-film-place render --scene ${file} --job ${DIR.render}/job-${tag}.json --where ${WHERE} --engine ${ENGINE}${FINALS ? ' --finals' : ''}
+Draw with: explainer-film-place render --scene ${file} --job ${DIR.render}/job-${tag}.json --where ${WHERE} --engine ${ENGINE}${finalOnly ? ' --finals' : ''} --helper renderer --role renderer --ledger ${CARD_LEDGER}
 ${previous ? `This is a later round. Use the existing style guard ${STATE.render.guard_file ?? `${DIR.pictures}/style-guard.json`} and do not make a new one. The previous round's pictures (for the squint test): ${previous.join(', ')}.` : `Make the style guard from ${REFERENCES.length ? `the reference pictures: ${REFERENCES.join(', ')}` : 'your first honest picture (say it is PROVISIONAL)'} and write it to ${DIR.pictures}/style-guard.json.`}
 Return your report in the shape asked.`
 
@@ -414,6 +437,7 @@ const structureExtra = () => `The builders' claims, as bare sentences to recompu
 ${claimsText()}`
 
 const processExtra = () => `The money and disk rules, and anything else about how the work may be done, are in the notes above. ${ARGS.ledger ? `The spend ledger is ${ARGS.ledger}.` : 'There is no spend ledger.'}
+THE CARD-TIME LEDGER is ${CARD_LEDGER} (read it with explainer-film-place card-time show --ledger ${CARD_LEDGER}). Allowances in minutes by role: ${Object.entries(CARD_MINUTES).map(([role, minutes]) => `${role} ${minutes}`).join(', ')}${CARD_TEAM_MINUTES ? `; the whole run: ${CARD_TEAM_MINUTES}` : ''}. Say whether every helper stayed inside its allowance, whether the card seconds that helpers REPORTED match the ledger, whether any change was tried in more than two batches, whether tests were drawn at full size, and whether full-size pictures were drawn more than once or before the end. What the helpers reported: ${asText(cardTimeSummary().reported)}.
 What the renderer says it did (check it against the logs next to the pictures, do not trust it): ${STATE.render ? JSON.stringify({ renderer: STATE.render.renderer, where: STATE.render.where, device: STATE.render.device, balance_checked: STATE.render.balance_checked, stalled: STATE.render.stalled, seconds_total: STATE.render.seconds_total, estimated_dollars: STATE.render.estimated_dollars, pictures: STATE.render.pictures.map((picture) => ({ view: picture.view, seconds: picture.seconds })) }) : 'no pictures were drawn'}
 The audited file is ${STATE.finalFile}; its audit is ${STATE.finalAuditFile}. Check privacy over every file written in the run's folders, leftovers in the scene (preview cameras, unused data), the disk used, and whether the audit is stale.`
 
@@ -475,7 +499,7 @@ function normalisePlan(raw) {
     groundOwner = parts[0]?.owner
   }
   const givenViews = Array.isArray(ARGS.views) && ARGS.views.length ? ARGS.views : (raw.views ?? [])
-  const views = (givenViews.length ? givenViews : [{ name: 'wide' }, { name: 'lane_close' }, { name: 'detail_close' }]).map((view, index) => {
+  const views = (givenViews.length ? givenViews : [{ name: 'wide' }, { name: 'road_close' }, { name: 'detail_close' }]).map((view, index) => {
     const name = safeWord(view.name) || `view_${index + 1}`
     return { name, camera: view.camera || `View ${name}`, size: Array.isArray(view.size) && view.size.length === 2 ? view.size : [1200, 800] }
   })
@@ -579,6 +603,30 @@ function composeFresh() {
   }
 }
 
+// ------------------------------------------------------------------------------------------------------ card time as the helpers reported it
+// every helper reports the card seconds it used (read from the ledger, which the tools write); the process checker compares them with the ledger itself
+function noteCard(name, role, report) {
+  if (!report || (report.card_seconds === undefined && report.batches === undefined)) return
+  STATE.cardRows.push({ name, role, card_seconds: Number(report.card_seconds ?? 0), batches: Number(report.batches ?? 0) })
+}
+
+function cardTimeSummary() {
+  const byName = new Map()
+  for (const row of STATE.cardRows) {
+    const known = byName.get(row.name) ?? { name: row.name, role: row.role, card_seconds: 0, batches: 0 }
+    // a helper that reports twice (a ledger total each time) is counted once, at its largest total; batches add up
+    known.card_seconds = Math.max(known.card_seconds, row.card_seconds)
+    known.batches += row.batches
+    byName.set(row.name, known)
+  }
+  const reported = [...byName.values()]
+  return {
+    ledger: CARD_LEDGER, team_minutes: CARD_TEAM_MINUTES, allowance_minutes: CARD_MINUTES, reported,
+    reported_card_seconds: Math.round(reported.reduce((sum, row) => sum + row.card_seconds, 0) * 10) / 10,
+    over_allowance: reported.filter((row) => row.card_seconds > (CARD_MINUTES[row.role] ?? 0) * 60).map((row) => row.name),
+  }
+}
+
 // ------------------------------------------------------------------------------------------------------------ the report
 function reportMarkdown() {
   const plan = STATE.plan
@@ -622,6 +670,14 @@ function reportMarkdown() {
     if (STATE.fixRender) say(`- After the fix round ${STATE.fixRender.pictures.length} picture(s) were drawn again (${STATE.fixRender.seconds_total} seconds; an estimate of about US$${STATE.fixRender.estimated_dollars}). The renderer's own words: ${STATE.fixRender.why}.`)
     for (const failure of render.failures ?? []) say(`- Renderer failure: ${failure}`)
   } else say('- No pictures were drawn.')
+  say('', '## Card time (the rented cards)')
+  const card = cardTimeSummary()
+  if (card.reported.length) {
+    for (const row of card.reported) say(`- ${row.name} (${row.role}): ${row.card_seconds} card seconds of ${(CARD_MINUTES[row.role] ?? 0) * 60} allowed; ${row.batches} batch(es).${card.over_allowance.includes(row.name) ? ' **OVER ITS ALLOWANCE.**' : ''}`)
+    say(`- In all the helpers reported ${card.reported_card_seconds} card seconds${CARD_TEAM_MINUTES ? ` (the person's total for the run: ${CARD_TEAM_MINUTES} minutes)` : ''}. Card seconds are work + wake-up + the idle tail, read from the card-time ledger (${card.ledger}); a price made from them is an ESTIMATE, never a bill. The process checker compared these figures with the ledger: see its findings above.`)
+  } else say(`- No helper reported any card seconds (the ledger is ${card.ledger}). Either the card was not used, or a helper did not say so: read the ledger with explainer-film-place card-time show.`)
+  if (STATE.finalsRender) say(`- Full-size pictures, drawn once at the very end: ${STATE.finalsRender.pictures.length} picture(s), ${STATE.finalsRender.seconds_total} seconds (an estimate of about US$${STATE.finalsRender.estimated_dollars}).`)
+  else if (FINALS) say('- Full-size pictures were asked for but not drawn (see the failures).')
   say('', '## What the fresh checkers found (judged, with the numbers they recomputed)')
   for (const key of ['look', 'structure', 'process']) {
     const check = STATE.checks[key]
@@ -683,7 +739,7 @@ function done(stopped) {
   const reading = STATE.readingTests.length ? STATE.readingTests[STATE.readingTests.length - 1] : null
   return {
     plan: STATE.plan, ground: STATE.ground, parts: [...(STATE.ground ? [STATE.ground] : []), ...STATE.built.filter((entry) => entry.report).map((entry) => entry.report)], missing_parts: STATE.missing,
-    combine: STATE.combine, audit: STATE.audit, repairs: STATE.repairs, render: STATE.render,
+    combine: STATE.combine, audit: STATE.audit, repairs: STATE.repairs, render: STATE.render, final_render: STATE.finalsRender, card_time: cardTimeSummary(),
     checks: { look: STATE.checks.look ?? null, structure: STATE.checks.structure ?? null, process: STATE.checks.process ?? null, blind_reader: STATE.checks.blind ?? null, skeptic: STATE.skeptic },
     confirmed: STATE.confirmed, fixes: STATE.fixes,
     recheck: STATE.recheck ? { check: STATE.recheck, blind_reader: STATE.recheckBlind, audit_after_fix: STATE.fixAudit, render_after_fix: STATE.fixRender } : null,
@@ -710,6 +766,7 @@ STATE.ground = await agent(builderPrompt(groundPart, 'ground'), { label: `ground
 if (!STATE.ground || !STATE.ground.ground_file) {
   return done('the ground part came back with no ground file, so nothing can be seated on it')
 }
+noteCard(`builder-${groundPart.owner}`, 'builder', STATE.ground)
 log(`Ground frozen: ${STATE.ground.ground_file}`)
 
 // ---- Build parts (side by side, at most CAP at a time; the rest wait in a queue)
@@ -718,6 +775,7 @@ const others = STATE.plan.parts.filter((part) => part.owner !== STATE.plan.groun
 if (others.length > CAP) log(`${others.length} parts and room for ${CAP} builders at once: the rest wait in a queue, none is skipped.`)
 const reports = await runQueued(others, CAP, (part) => agent(builderPrompt(part, 'build'), { label: `build:${part.owner}`, phase: 'Build parts', schema: PART_REPORT, effort: EFFORT }))
 STATE.built = others.map((part, index) => ({ part, report: reports[index] }))
+others.forEach((part, index) => noteCard(`builder-${part.owner}`, 'builder', reports[index]))
 STATE.missing = STATE.built.filter((entry) => !entry.report).map((entry) => entry.part.owner)
 if (STATE.missing.length) log(`No report from: ${STATE.missing.join(', ')}. They are reported as missing and not combined.`)
 if (others.length && STATE.built.every((entry) => !entry.report)) {
@@ -731,6 +789,7 @@ STATE.combine = await agent(combinePrompt(STATE.version, [], false), { label: 'c
 if (!STATE.combine) {
   return done('the integrator came back with nothing, so there is no combined scene to audit')
 }
+noteCard('integrator', 'integrator', STATE.combine)
 log(`Combined: plain ${STATE.combine.order_plain_ok}, reverse ${STATE.combine.order_reverse_ok}, idempotent ${STATE.combine.idempotent}, ${STATE.combine.violations.length} violation(s).`)
 
 // ---- Audit: nothing is drawn until it passes; at most MAX_REPAIRS repair rounds, routed to the owners the audit names
@@ -752,6 +811,7 @@ while (!gateOk(STATE.combine, STATE.audit) && repairRound < MAX_REPAIRS) {
   if (stillMissing.length) STATE.notes.push(`Repair round ${repairRound}: no report from ${stillMissing.join(', ')}.`)
   fixed.forEach((report, index) => {
     if (!report) return
+    noteCard(`fixer-${owners[index]}`, 'fixer', report)
     if (owners[index] === STATE.plan.ground_owner) STATE.ground = { ...STATE.ground, ...report }
     const built = STATE.built.find((entry) => entry.part.owner === owners[index])
     if (built) built.report = { ...built.report, ...report }
@@ -762,6 +822,7 @@ while (!gateOk(STATE.combine, STATE.audit) && repairRound < MAX_REPAIRS) {
   if (!STATE.combine) {
     return done(`the integrator came back with nothing in repair round ${repairRound}, so there is no scene to audit`)
   }
+  noteCard('integrator', 'integrator', STATE.combine)
   STATE.audit = await runAudit(STATE.version, `audit${repairRound}`)
   STATE.auditRounds.push(STATE.audit)
 }
@@ -775,6 +836,7 @@ log(`Audit passed on ${STATE.finalFile} after ${repairRound} repair round(s).`)
 // ---- Render (the renderer rule decides the engine; only previews unless finals were asked for)
 phase('Render')
 STATE.render = await agent(renderPrompt('round1', STATE.plan.views, null, STATE.finalFile), { label: 'render', phase: 'Render', schema: RENDER_REPORT, effort: EFFORT })
+noteCard('renderer', 'renderer', STATE.render)
 if (!STATE.render) {
   STATE.notes.push('The renderer came back with nothing: no picture was drawn.')
 } else if (STATE.render.stalled) {
@@ -845,10 +907,12 @@ if (!toFix.length) {
   log(`Fix round (the only one): ${owners.length} owner(s) (${owners.join(', ') || 'settings only'}), ${toFix.length} finding(s).`)
   const fixed = await runQueued(owners, CAP, (owner) => agent(builderPrompt(partOf(owner), 'fix', byOwner.get(owner), 'the one fix round after the checkers'), { label: `fix:${owner}`, phase: 'Fix', schema: PART_REPORT, effort: EFFORT }))
   STATE.fixes = fixed.filter(Boolean)
+  fixed.forEach((report, index) => noteCard(`fixer-${owners[index]}`, 'fixer', report))
   owners.forEach((owner, index) => { if (!fixed[index]) STATE.notes.push(`Fix round: no report from ${owner}.`) })
   STATE.version += 1
   STATE.fixCombine = await agent(combinePrompt(STATE.version, settingsRepairs, owners.includes(STATE.plan.ground_owner)), { label: 'combine:fix', phase: 'Fix', schema: COMBINE_REPORT, effort: EFFORT })
   if (STATE.fixCombine) {
+    noteCard('integrator', 'integrator', STATE.fixCombine)
     STATE.fixAudit = await runAudit(STATE.version, 'audit:fix')
     if (gateOk(STATE.fixCombine, STATE.fixAudit)) {
       fixDone = true
@@ -866,6 +930,7 @@ if (!toFix.length) {
     const previous = picturePaths(STATE.render, false)
     fixFile = STATE.fixCombine.finished_file || finishedFile(STATE.version)
     STATE.fixRender = await agent(renderPrompt('round2', redraw, previous, fixFile), { label: 'render:fix', phase: 'Fix', schema: RENDER_REPORT, effort: EFFORT })
+    noteCard('renderer', 'renderer', STATE.fixRender)
     if (!STATE.fixRender || STATE.fixRender.stalled || !STATE.fixRender.pictures.length) {
       STATE.notes.push(`The pictures after the fix round could not be drawn (nothing came back, or the card stalled). The fixed scene ${fixFile} passed its audit but nobody has looked at it, so the first audited scene stays the final one.`)
       fixDone = false
@@ -901,6 +966,17 @@ if (fixDone) {
 
 // ---- Report (the final gate on the saved file, then the plain-words report)
 phase('Report')
+// the full-size pictures: drawn ONCE, at the very end, from the last audited file, and only when the person asked for them
+if (FINALS && STATE.havePictures && STATE.finalFile) {
+  STATE.finalsRender = await agent(renderPrompt('final', STATE.plan.views, picturePaths(STATE.finalRender, false), STATE.finalFile, true), { label: 'render:final', phase: 'Report', schema: RENDER_REPORT, effort: EFFORT })
+  noteCard('renderer', 'renderer', STATE.finalsRender)
+  if (!STATE.finalsRender || STATE.finalsRender.stalled || !STATE.finalsRender.pictures.length) {
+    STATE.notes.push('The full-size pictures could not be drawn (nothing came back, or the card stalled). The small pictures the checkers looked at stay the only pictures.')
+    STATE.finalsRender = null
+  }
+} else if (FINALS) {
+  STATE.notes.push('Full-size pictures were asked for, but there were no pictures to build on (the audit failed or nothing was drawn), so none were drawn.')
+}
 STATE.freshCheck = composeFresh()
 if (STATE.freshCheck && STATE.finalFile) {
   STATE.finalGate = await agent(gatePrompt(STATE.freshCheck), { label: 'gate', phase: 'Report', schema: FINAL_GATE, effort: EFFORT })

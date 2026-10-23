@@ -54,10 +54,21 @@ def _write(path, content):
 def make_file(parsed, say):
     count = int(parsed.count or 10)
     change = parsed.change or 'one change'
+    out = parsed.out or f'{spec_module.safe_name(change)}-variations.json'
+    here = os.path.dirname(os.path.abspath(out))
+
+    def beside(path):
+        """A path written relative to the variations file when it can be (the file then still works after the folder is moved or copied)."""
+        if not path:
+            return None
+        try:
+            return os.path.relpath(os.path.abspath(path), here)
+        except ValueError:          # another drive
+            return os.path.abspath(path)
+
     scene = os.path.abspath(parsed.scene) if parsed.scene else None
     settings = os.path.abspath(parsed.settings) if parsed.settings else None
-    content = spec_module.make_variations(list(parsed.keys or []), count, parsed.seed, change, scene, settings, parsed.cameras)
-    out = parsed.out or f'{spec_module.safe_name(change)}-variations.json'
+    content = spec_module.make_variations(list(parsed.keys or []), count, parsed.seed, change, beside(scene), beside(settings), parsed.cameras)
     _write(out, content)
     say(f'PASS made {out}: {count} variation(s) that spread {", ".join(parsed.keys)} across their ranges (seed {parsed.seed}); every pair differs by at least {100 // count}% of the range on each setting.')
     if not scene:

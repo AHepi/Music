@@ -146,11 +146,15 @@ so decide the light before you draw:
 for every glowing thing when the scene has none (`--sun-only` adds just a sun); `finish` runs it too. Its numbers are starting
 values, not tuned: look at the first preview and adjust. If the scene has its own lights, do these by hand.
 
+## Step 7b. Plan every change, then make them in one sweep
+
+Before you try anything on the finished place, write down EVERY change you mean to make (the moss, the wall damage, the gate's lean, the towpath ruts, the light). Make them all in one sweep, save the scene (`lock-finished.blend`), and only then look. Build the scene once and keep that file: every test starts from it. A change made one at a time, with a look after each, costs one look and one card wake-up each (the garden spent US$10.89 of card time this way; the finished pictures cost about 5 cents). The rule and the tools are in `batched-rounds-and-card-time.md`: for each change to a thing, about 10 measurably different versions in ONE batch (`explainer-film-place variations`), one sheet, pick or combine, at most one more batch.
+
 ## Step 8. Draw previews, then make the style guard
 
 `explainer-film-place renderer-for --scene lock-finished.blend` prints CYCLES or EEVEE and the reasons.
 `explainer-film-place render --job JOB.json` draws previews with that rule (a rented card when set up:
-`rendering-on-rented-cards.md`). Draw the first preview under three lights (flat, side, and wet if the place is wet):
+`rendering-on-rented-cards.md`). Small and quick until the end; the full-size pictures (`--finals`) are drawn once, at the very end, from the last audited file; every card job goes into the card-time ledger and is limited by your allowance. Draw the first preview under three lights (flat, side, and wet if the place is wet):
 a mark that vanishes under one of them is not carrying the place. Then
 `explainer-film-place measure PICTURE.jpg --make-guard --out style-guard.json` makes the guard from the first honest
 picture. A guard made from the first picture is PROVISIONAL: it locks in whatever that picture looked like, so a
@@ -200,6 +204,8 @@ Do not save over the file after the audit. If you must, run the audit again.
 - **A stale audit after edits.** The audit names the scene's hash; a changed file fails it.
 - **Photographic noise instead of a few big designed marks.** See `style-rule-and-measures.md`.
 - **Wrong sizes.** A 1 m door passes every other check; only the scale check catches it.
+- **One small change, then a look, then the next.** Twenty-five looks at one tree cost real money and tell you little: ten versions that are far apart, in one batch on one sheet, tell you more. `variations` drops versions that are too close before drawing and flags pictures that came out the same after.
+- **Rebuilding the scene for every test, or drawing every test at full size.** Save the finished scene once; a batch starts from it, at 600 x 400.
 
 ## When a step fails
 

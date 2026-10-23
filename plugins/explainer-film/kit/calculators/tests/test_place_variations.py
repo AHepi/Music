@@ -3,7 +3,7 @@ Part A (plain Python, always runs): the words of a variation (keys), the check B
 keys name the allowed ones), the split into card jobs (10 variations make 3 jobs of 4, 3 and 3 with the baseline in the smallest; 4 make 2; 2 make 1; never more than 3), the estimate, the spread
 that `make` writes (a Latin hypercube: every pair differs by at least a tenth of the range on every setting, and the same seed gives the same file) and `refine` (the second batch around a pick,
 blended when there are several), the check AFTER drawing on synthetic pictures (a pair that came out nearly the same is flagged, a change that does not show is called out, the reset check
-measures drift) and the contact sheet (one JPG under 400 KB even for noisy pictures, with the baseline first).
+measures drift) and the contact sheet (one JPG under 400 KB (400,000 bytes) even for noisy pictures, with the baseline first).
 Part B (plain Python, needs only Pillow): the whole batch with a FAKE CARD and a FAKE BLENDER: the plugin client over a fake service (jobs are sent at the same time, before any wait; the
 wake-up and billed seconds of each job are written into the ledger; the pictures come back in one bundle each) and the older command-line client over a fake command (the waiting loop, the
 estimate for uploads, the 5-minute stop). A variation that fails is named and the sheet is still made. A helper over its allowance, or asking for a third batch, is refused BEFORE any call is
@@ -17,6 +17,7 @@ import importlib.util
 import atexit
 import json
 import os
+import re
 import shutil
 import stat
 import subprocess
@@ -222,7 +223,7 @@ for item in noisy:
 noisy[3]['flags'] = ['nearly the same as #2 n2']
 made_sheet = sheet.make_sheet(os.path.join(folder, 'noisy-sheet.jpg'), noisy, ['Camera A', 'Camera B'], {'change': 'Variations: noise', 'scene': 'scene.blend', 'engine': 'cycles', 'size': '180 x 120',
                                                                                                           'dropped': ['Dropped before drawing: "x": a test.'], 'pair_lines': [], 'card_lines': ['Card seconds: a test.']})
-check.true('the contact sheet is ONE jpg under 400 KB even for noisy pictures (quality, then size, are lowered until it fits)', os.path.getsize(made_sheet['path']) <= 400 * 1024 and made_sheet['bytes'] <= 400 * 1024,
+check.true('the contact sheet is ONE jpg under 400 KB (400,000 bytes) even for noisy pictures (quality, then size, are lowered until it fits)', os.path.getsize(made_sheet['path']) <= 400 * 1000 and made_sheet['bytes'] <= 400 * 1000,
            f'{made_sheet["bytes"] // 1024} KB at quality {made_sheet["quality"]}, scale {made_sheet["scale"]}, {made_sheet["width"]} x {made_sheet["height"]}')
 with Image.open(made_sheet['path']) as opened:
     check.true('...and it is a real picture of the right shape for 11 cells in 3 columns', opened.format == 'JPEG' and opened.width > 900 and opened.height > 600, f'{opened.width} x {opened.height}')
@@ -288,7 +289,7 @@ check.equal('a variation that failed is named and gives exit 1', (code, 'FAIL br
 check.true('the sentence before drawing names the near-duplicate that was dropped', 'dropped "moss-near"' in text and 'near-duplicate' in text, [l for l in spoken if 'moss-near' in l][0][:140])
 result_path = os.path.join(folder, 'run-one', 'variations-result.json')
 result = json.load(open(result_path))
-check.true('the result file and the sheet are made even though one variation failed', os.path.exists(result_path) and os.path.exists(result['sheet']['path']) and result['sheet']['bytes'] <= 400 * 1024, f'{result["sheet"]["bytes"] // 1024} KB')
+check.true('the result file and the sheet are made even though one variation failed', os.path.exists(result_path) and os.path.exists(result['sheet']['path']) and result['sheet']['bytes'] <= 400 * 1000, f'{result["sheet"]["bytes"] // 1024} KB')
 check.equal('the baseline and every kept variation have a result (9 kept + the baseline = 10; the near-duplicate was dropped)', len(result['results']), 10)
 invisible = set(result['invisible'])
 check.true('the two rubbish variations (settings far apart, pictures identical) are flagged AFTER drawing as not showing', {'rubbish-low', 'rubbish-high'} <= invisible, f'{sorted(invisible)}')
@@ -373,6 +374,81 @@ finally:
     numbers.value = orig_value
 check.true('a job that waits in line past the time limit STOPS the batch with a plain sentence (exit 1); nothing is cancelled or changed', code == 1 and 'stopped: job' in spoken_text() and 'Nothing was cancelled' in spoken_text(), spoken_text()[-200:])
 
+# ---- details added by the batching step: short flags, names cut between words, paths beside the file, ONE upload of a scene, the command client's marker check
+from place_kit.variations import verb as verb_module  # noqa: E402
+
+
+def fake_result(name):
+    return {'name': name, 'ok': True, 'pictures': [], 'notes': []}
+
+
+def fake_pair(a, b, mean):
+    return {'a': a, 'b': b, 'mean_difference': mean, 'changed_share': 0.0, 'nearly_the_same': True}
+
+
+names_fake = ['baseline', 'a', 'b', 'c', 'd', 'e', 'f', 'g']
+pairs_fake = {'pairs': [fake_pair('baseline', 'a', 0.2), fake_pair('baseline', 'b', 0.3), fake_pair('baseline', 'c', 0.25), fake_pair('a', 'b', 0.0), fake_pair('a', 'c', 0.1), fake_pair('b', 'c', 0.1),
+                        fake_pair('d', 'e', 0.3), fake_pair('d', 'f', 0.2), fake_pair('e', 'f', 0.4)],
+              'nearly_same': [('baseline', 'a'), ('baseline', 'b'), ('baseline', 'c'), ('a', 'b'), ('a', 'c'), ('b', 'c'), ('d', 'e'), ('d', 'f'), ('e', 'f')], 'invisible': ['a', 'b', 'c']}
+fake_results = [fake_result(name) for name in names_fake]
+short_lines = runner.flag_results(fake_results, pairs_fake)
+flags_of = {r['name']: r['flags'] for r in fake_results}
+check.true('the report and the sheet are SHORT: the variations that came out nearly the same as the baseline are named in ONE line (not pair by pair), and a group of alike variations that DO show is one line too',
+           len(short_lines) == 2 and '"a", "b", "c"' in short_lines[0] and 'all came out nearly the same as the baseline' in short_lines[0] and 'nearly the same as each other too' in short_lines[0]
+           and '"d", "e" and "f"' in short_lines[1] and 'keep one of them' in short_lines[1], ' || '.join(short_lines)[:300])
+check.true('  (each flagged variation still carries its own flag; the first of a group is the one to keep; the full pairs stay in the result file)',
+           all('does not show' in flags_of[n][0] for n in 'abc') and flags_of['d'] == [] and flags_of['e'] == ['nearly the same as #4 d'] and flags_of['f'] == ['nearly the same as #4 d'] and flags_of['g'] == [], str(flags_of))
+check.true('a change name is cut between words, never in the middle of one, and stays within 40 characters',
+           sp.safe_name('cracks and chips on the lock walls and gate') == 'cracks-and-chips-on-the-lock-walls-and' and len(sp.safe_name('word ' * 20)) <= 40 and not sp.safe_name('word ' * 20).endswith('-w')
+           and sp.safe_name('moss test') == 'moss-test', sp.safe_name('cracks and chips on the lock walls and gate'))
+made_folder = os.path.join(folder, 'made')
+os.makedirs(made_folder)
+made_scene = os.path.join(folder, 'work', 'scene.blend')
+made_args = types.SimpleNamespace(action='make', spec=None, count=4, change='moss test', scene=made_scene, settings=os.path.join(folder, 'work', 'place-settings.json'), keys=['amount.moss_and_algae'], seed=2,
+                                  cameras=['Camera A'], out=os.path.join(made_folder, 'moss.json'))
+spoken.clear()
+code = verb_module.main_command(made_args, say=say)
+made_content = json.load(open(made_args.out))
+check.true('`make` writes the scene and the settings beside the file (relative), so the file still works after its folder is copied; the keys come in the order about, change, scene, settings, cameras, variations',
+           code == 0 and made_content['scene'] == '../work/scene.blend' and made_content['settings'] == '../work/place-settings.json' and list(made_content)[:6] == ['about', 'change', 'scene', 'settings', 'cameras', 'variations']
+           and sp.read_spec(made_args.out)['scene'] == made_scene, str(made_content.get('scene')))
+
+
+class RecordingService(FakeService):
+    """The fake card service that also writes down every file operation of the small jobs."""
+
+    def __init__(self):
+        super().__init__()
+        self.operations = []
+
+    def call(self, method, path, body=None, attempts=1):
+        if path == '/runsync' and (body or {}).get('input', {}).get('op') in ('put', 'info'):
+            self.operations.append((body['input']['op'], body['input'].get('path')))
+        return super().call(method, path, body, attempts)
+
+
+first_service, second_service = RecordingService(), RecordingService()
+for service_used, tag in ((first_service, 'again-1'), (second_service, 'again-2')):
+    runner.run_variations(options(spec=batch_file, run_folder=os.path.join(folder, 'run-' + tag), ledger=os.path.join(folder, 'ledgers', tag + '.jsonl')), say=say,
+                          backend=cards.ClientCard(rc.Client(service_used, sleep=lambda s: None), card_settings), environ=settings_env)
+scene_paths_1 = {path for op, path in first_service.operations if path and path.endswith('scene.blend')}
+scene_paths_2 = {path for op, path in second_service.operations if path and path.endswith('scene.blend')}
+check.true('the scene waits on the store under its own checksum, in the same place for every batch (place-jobs/scenes/<8 letters>/), so the second and last batch uploads nothing again',
+           len(scene_paths_1) == 1 and scene_paths_1 == scene_paths_2 and re.search(r'/place-jobs/scenes/[0-9a-f]{8}/scene\.blend$', next(iter(scene_paths_1))) is not None
+           and not [1 for op, path in second_service.operations if op == 'put' and path.endswith('scene.blend')], str(sorted(scene_paths_1)))
+check.true('  (the settings file and its owners table wait there too, under their own checksum, and are checked, not sent again)',
+           any(path and '/settings-' in path for op, path in second_service.operations) and not [1 for op, path in second_service.operations if op == 'put' and '/settings-' in (path or '')])
+marker_store = os.path.join(folder, 'marker-store')
+os.makedirs(marker_store)
+os.environ['FAKE_CARD_STORE'] = marker_store
+marker_backend = cards.CommandCard([sys.executable, os.path.join(FIXTURES, 'place', 'fake_card_client.py')], store_folder='/workspace', poll_seconds=0.01)
+before_upload = marker_backend.have_file('/workspace/kit-x/kit/place-kit/blender_run.py')
+marker_local = os.path.join(folder, 'marker.py')
+open(marker_local, 'w').write('# a marker file')
+marker_backend.upload(marker_local, '/workspace/kit-x/kit/place-kit/blender_run.py')
+check.true('the command-line client can tell whether the kit is already on the store (it fetches a small marker file: one small job), so the kit is not uploaded twice',
+           before_upload is False and marker_backend.have_file('/workspace/kit-x/kit/place-kit/blender_run.py') is True)
+
 # ================================================================ part C: the real worker inside Blender
 blender = blender_program()
 if not blender:
@@ -416,7 +492,7 @@ else:
     check.true('state, look, master and the hook each change the pictures (none of them is "nearly the same" as the baseline)', not ({'wet', 'derelict', 'no-wear', 'dark-sun'} & set(document['invisible'])), f'invisible: {document["invisible"]}')
     check.true('the master at 0 gives the picture without wear: it measurably moved from the baseline, and `moss-high` moved the detail energy', by_name['no-wear']['average']['colour_shift'] > 0.3, f'colour shift {by_name["no-wear"]["average"]["colour_shift"]:.2f}')
     check.true('the squint score of every variation against the baseline is a number between 0 and 1 and the baseline\'s own is exactly 1', all(0.0 <= r['average']['squint'] <= 1.0 for r in document['results']) and by_name['baseline']['average']['squint'] == 1.0)
-    check.true('the sheet is one JPG under 400 KB', os.path.getsize(document['sheet']['path']) <= 400 * 1024, f'{document["sheet"]["bytes"] // 1024} KB')
+    check.true('the sheet is one JPG under 400 KB', os.path.getsize(document['sheet']['path']) <= 400 * 1000, f'{document["sheet"]["bytes"] // 1024} KB')
     check.true('a batch drawn here writes no card seconds', not [e for e in ct.read_ledger(local_ledger)[0] if e['kind'] in ('job', 'small')])
     check.equal('a camera that is not in the scene stops before anything is drawn (exit 2 from the worker, said plainly)', 'no camera named' in subprocess.run(
         [sys.executable, '-I', '-B', launcher, 'variations', 'run', hut_variations, '--where', 'local', '--cameras', 'Camera Z', '--engine', 'cycles', '--size', '96x64', '--samples', '2', '--ledger', local_ledger,

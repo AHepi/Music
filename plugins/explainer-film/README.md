@@ -41,8 +41,9 @@ in a file the plugin or a repository holds.
 2b. For any place, set or props built in Blender, even when the request names no surfaces or wear, run the surface-and-wear
    pass first: `explainer-film-place finish`, then `explainer-film-place audit`, then `explainer-film-preflight place` (skill
    `surfaces-wear-and-construction`; `explainer-film-place roles --list` prints every role id). Nothing is drawn, rendered or
-   painted until it passes. A small reminder hook (`hooks/`) prints these three lines at the start of a turn when the request is
-   about building a place, a set or props, so the skill is read even when other Blender skills compete for the request.
+   painted until it passes. A small reminder hook (`hooks/`) prints these three lines (the last one also names the card-time and batch rule) at the start of a turn when the request is
+   about building a place, a set or props, so the skill is read even when other Blender skills compete for the request. Rented-card time is limited: one sweep of changes then one look, about 10
+   far-apart versions in ONE batch (`explainer-film-place variations`), small quick pictures until the end, full-size ones once at the end; `explainer-film-place card-time show` says what each helper has used and has left.
 3. Compute before you render: every calculator answers `--help`, prints a plain report and names the house
    numbers it used. What no tool can judge (history, what a detail reads as on a phone, newcomer
    understanding, story choices, the user's yes to spend) goes to the critics.
@@ -88,7 +89,14 @@ to spoken words like that.
 
 ## Changes
 
-**1.4.0 (22 October 2026): places that look lived in, automatically.**
+**1.4.0 (22 and 23 October 2026): places that look lived in, automatically; and cheap, batched tries.**
+- Batched rounds and card time (the person's rule after the Japanese garden job spent US$10.89 of rented-card time on pictures that cost about 5 cents): make every change in one sweep, then look once; for each change to a thing,
+  about 10 measurably different versions in ONE batch; at most one more batch; small quick pictures until the end; full-size pictures once, at the very end. New verbs `explainer-film-place variations` (checks BEFORE drawing that the versions
+  differ and drops near-duplicates, splits them over up to 3 rented cards sent at the same time, draws 600 x 400 pictures, checks AFTER drawing that the pictures differ, measures them against a baseline, makes ONE labelled sheet
+  with the card seconds) and `explainer-film-place card-time` (a ledger of every card job and an allowance for each helper by role: builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3; the tools warn at 80 percent and refuse
+  past it). The rule is in the REQUIRED block of the three skills, in the new file `skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`, in the tips guide (8a, 16 to 19), in the five agents and in the workflow
+  `build-a-place` (every helper gets its name, role, allowance and ledger; the rounds draw small pictures; the full-size drawing is ONE call at the very end; the report has a card-time section). Proved once on real rented cards
+  (two batches of 10, three jobs at once, 180 and 158 card seconds) and in tests with a pretend card.
 - New skill `surfaces-wear-and-construction`: the finishing pass for every place, set or prop built in Blender (real normal
   maps and displacement, roughness and colour variation, dirt, grime, weathering, wetness, cracks, chips, edge wear, moss,
   rust, weeds, rubbish, damage as shape, believable construction, real sizes, the style rule). The skills a model reads first

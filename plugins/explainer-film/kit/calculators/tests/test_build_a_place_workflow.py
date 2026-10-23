@@ -16,6 +16,9 @@ builders' fixture reports starts PLANT-), only the claims as bare sentences; the
 nor a word of the feature list; no prompt names a verb that explainer-film-place does not print, or an option its --help lacks;
 no prompt holds a key, a long hex id, the folder where the rented-card account keeps its settings, an email-like string or the
 plugin author's name (read from plugin.json while the test runs, never written here); two runs give the same prompts (resume-safe).
+Card time and batches (plugin 1.4.0, batching step): the card-time allowances written in the script equal the house numbers; every builder, fixer, integrator and renderer prompt names the helper's own name, role and the ledger and carries the
+batch rule (one sweep, about 10 measurably different versions in ONE batch, at most one more, small quick pictures, full-size once at the very end); the rounds draw small previews only and, when finals are asked for, ONE full-size drawing comes
+last, after the re-check and before the gate; the report has a card-time section and flags a helper that reports more seconds than its allowance; the planner is asked to write the person's total for the run; "no rented card" reaches the helpers.
 Also: no Date.now, Math.random, new Date() or agentType in the script; the meta block is a pure literal whose phases are the phase()
 calls; the reading-test line equals the house number; the agent files have their front matter and name every field of the report they
 must return. A part of the test is skipped (exit 77 for the whole test when node is missing) with a plain reason.
@@ -66,10 +69,10 @@ DEFAULT_RESPONSES = {
     '~^audit\\d*$': 'audit-pass.json', 'render': 'render-report.json', 'check:look': 'check-look.json', 'check:structure': 'check-structure.json',
     'check:process': 'check-process.json', 'blind:1': 'blind-1.json', 'skeptic': 'skeptic.json', 'fix:*': 'part-report-fixed.json',
     'combine:fix': 'combine-report-fixed.json', 'audit:fix': 'audit-pass.json', 'render:fix': 'render-fix.json', 'recheck': 'recheck.json',
-    'blind:2': 'blind-2.json', 'gate': 'gate.json',
+    'blind:2': 'blind-2.json', 'gate': 'gate.json', 'render:final': 'render-final.json',
 }
 PHASES = ['Plan', 'Ground', 'Build parts', 'Combine', 'Audit', 'Render', 'Check', 'Fix', 'Re-check', 'Report']
-RESULT_KEYS = ['plan', 'ground', 'parts', 'missing_parts', 'combine', 'audit', 'repairs', 'render', 'checks', 'confirmed', 'fixes', 'recheck',
+RESULT_KEYS = ['plan', 'ground', 'parts', 'missing_parts', 'combine', 'audit', 'repairs', 'render', 'final_render', 'card_time', 'checks', 'confirmed', 'fixes', 'recheck',
                'reading_test', 'fresh_check', 'final_gate', 'stopped', 'report_markdown']
 AGENT_OF = {'plan': 'planner', 'ground': 'builder', 'build': 'builder', 'repair': 'builder', 'fix': 'builder', 'combine': 'integrator', 'recombine': 'integrator',
             'audit': 'integrator', 'gate': 'integrator', 'render': 'renderer', 'check': 'checker', 'skeptic': 'checker', 'recheck': 'checker'}
@@ -422,7 +425,9 @@ check.true('when the blind reader\'s prompt would share a word with the feature 
 # --------------------------------------------------------------------------------------------- the arguments change the prompts
 cheap = run_case('options', args={'renderer': 'eevee', 'rented': False, 'finals': True, 'effort': 'low', 'checkEffort': 'max', 'blender': '/path/to/blender',
                                   'references': ['/path/to/reference.jpg'], 'accepted': '/path/to/accepted.json', 'ledger': '/path/to/ledger.json'})
-check.true('renderer eevee, rented false and finals true change the render command', '--where local --engine eevee --finals' in prompt_of(cheap, 'render'))
+check.true('renderer eevee and rented false change the render command; finals true does NOT make the rounds draw full size (they stay small and quick), the ONE full-size drawing comes last',
+           '--where local --engine eevee --helper renderer' in prompt_of(cheap, 'render') and '--finals' not in prompt_of(cheap, 'render') and '--finals' not in prompt_of(cheap, 'render:fix')
+           and '--where local --engine eevee --finals' in prompt_of(cheap, 'render:final'))
 check.true('effort low for builders, max for checkers; the planner follows the effort', [one_call['effort'] for one_call in cheap['calls'] if one_call['label'] == 'plan'] == ['low']
            and all(one_call['effort'] == 'max' for one_call in cheap['calls'] if re.match(r'(check|skeptic|recheck|blind)', one_call['label'])))
 check.true('the Blender path reaches the helpers; the reference pictures reach the planner and the renderer (the guard is not provisional); the accepted file reaches the audit; the ledger the process checker',
@@ -434,6 +439,65 @@ check.true('a part the person asked for that the planner left out is added with 
            and 'wide: camera' not in prompt_of(given_parts, 'render'))
 check.true('every non-blind prompt names the folders of the run and the place and preflight commands by full path',
            all('/path/to/run' in one_call['prompt'] and f'{PLUGIN_PATH}/bin/explainer-film-place' in one_call['prompt'] for one_call in happy['calls'] if not one_call['label'].startswith('blind')))
+
+# ------------------------------------------------------------------------ card time and batches (the batching step)
+card_minutes_text = re.search(r'const CARD_MINUTES = \{([^}]*)\}', source)
+written_minutes = {role: float(number) for role, number in re.findall(r'(\w+):\s*(\d+)', card_minutes_text.group(1))} if card_minutes_text else {}
+house_minutes = {role: float(row['value']) for role, row in settings['place_card_time']['allowance_minutes'].items()}
+check.true('the card-time allowances written in the script (builder, fixer, integrator, renderer, checker, planner) equal the house numbers place_card_time.allowance_minutes',
+           written_minutes and all(house_minutes[role] == minutes for role, minutes in written_minutes.items()) and {'builder', 'fixer', 'integrator', 'renderer', 'checker', 'planner'} <= set(written_minutes),
+           details=f'script {written_minutes}, house {house_minutes}')
+LEDGER_PATH = '/path/to/run/card-time-ledger.jsonl'
+builder_text = prompt_of(happy, 'build:lock_gate')
+check.true('card time: a builder\'s prompt gives its own helper name, its role, the run\'s ledger and its allowance, and carries the batch rule (one sweep, about 10 versions in ONE batch, at most one more, small quick pictures, full-size once at the end)',
+           f'--helper builder-lock_gate --role builder --ledger {LEDGER_PATH}' in builder_text and 'Your allowance is 10 minutes' in builder_text and 'THE BATCH RULE' in builder_text
+           and 'batched-rounds-and-card-time.md' in builder_text and 'ONE sweep' in builder_text and 'about 10 versions' in builder_text and 'ONE batch' in builder_text and 'at most ONE more batch' in builder_text
+           and 'full-size pictures are drawn once, at the very end' in builder_text and 'variations plan FILE.json' in builder_text)
+check.true('  (the ground builder, a fixer and a repairer have their own names and the fixer\'s 5 minutes; the integrator and the renderer theirs)',
+           '--helper builder-ground_and_water --role builder' in prompt_of(happy, 'ground:ground_and_water') and '--helper fixer-lock_gate --role fixer' in prompt_of(happy, 'fix:lock_gate')
+           and 'Your allowance is 5 minutes' in prompt_of(happy, 'fix:lock_gate') and '--helper fixer-lock_gate --role fixer' in prompt_of(once, 'repair1:lock_gate')
+           and '--helper integrator --role integrator' in prompt_of(happy, 'combine') and 'Your allowance is 10 minutes' in prompt_of(happy, 'combine')
+           and f'--helper renderer --role renderer --ledger {LEDGER_PATH}' in prompt_of(happy, 'render'))
+check.true('  (the planner is told it has no card time and which allowances the others have; the process checker gets the ledger and the allowances and is asked to compare)',
+           'you have none' in prompt_of(happy, 'plan') and 'builder 10 minutes, fixer 5' in prompt_of(happy, 'plan') and LEDGER_PATH in prompt_of(happy, 'check:process')
+           and 'THE CARD-TIME LEDGER' in prompt_of(happy, 'check:process') and 'match the ledger' in prompt_of(happy, 'check:process') and 'more than two batches' in prompt_of(happy, 'check:process'))
+check.true('the rounds draw small quick pictures only: no render prompt of the happy path asks for --finals, and each says finals come once, at the very end',
+           all('--finals' not in prompt_of(happy, one_label) for one_label in ('render', 'render:fix')) and 'ONCE, at the very end' in prompt_of(happy, 'render') and 'render:final' not in labels(happy))
+check.true('the report has a Card time section: each helper\'s reported card seconds against its allowance, the total, and that seconds are not a bill',
+           '## Card time' in happy['result']['report_markdown'] and 'renderer (renderer): 60 card seconds of 600 allowed' in happy['result']['report_markdown']
+           and 'fixer-lock_gate (fixer): 61.5 card seconds of 300 allowed; 1 batch(es)' in happy['result']['report_markdown'] and 'never a bill' in happy['result']['report_markdown'],
+           details=re.sub(r'\s+', ' ', happy['result']['report_markdown'].split('## Card time')[-1][:300]))
+summary = happy['result']['card_time']
+check.true('the result carries card_time: the ledger path, the allowances, what each helper reported (the largest ledger total of a helper that reported twice), and nobody over',
+           summary['ledger'] == LEDGER_PATH and summary['over_allowance'] == [] and summary['allowance_minutes']['builder'] == 10
+           and {row['name'] for row in summary['reported']} >= {'renderer', 'fixer-lock_gate', 'builder-lock_gate'} and next(row for row in summary['reported'] if row['name'] == 'renderer')['card_seconds'] == 60.0,
+           details=str(summary['reported'][:3]))
+over = run_case('over_allowance', responses={'build:lock_gate': dict(part, card_seconds=700, batches=3)})
+check.true('a helper that reports more card seconds than its allowance (700 of 600) is named in the result and the report says OVER ITS ALLOWANCE; the process checker is told what was reported',
+           'builder-lock_gate' in over['result']['card_time']['over_allowance'] and 'OVER ITS ALLOWANCE' in over['result']['report_markdown'] and '700' in prompt_of(over, 'check:process'))
+finals = run_case('finals', args={'finals': True})
+flabs = labels(finals)
+check.true('finals asked for: the ONE full-size drawing is a single call after the re-check and just before the gate, from the last audited file (the fixed one), only final-size views, no extra preview',
+           flabs.count('render:final') == 1 and flabs.index('recheck') < flabs.index('render:final') < flabs.index('gate') and flabs[-1] == 'gate' and '/round2/finished.blend' in prompt_of(finals, 'render:final')
+           and 'ONE FULL-SIZE DRAWING OF THE RUN' in prompt_of(finals, 'render:final') and '"kinds": ["final"]' in prompt_of(finals, 'render:final') and ' --finals ' in prompt_of(finals, 'render:final') + ' ',
+           details=', '.join(flabs[-6:]))
+check.true('  (the earlier rounds still drew small previews only; the result holds the final render, and the report says full-size pictures were drawn once at the very end)',
+           all('--finals' not in prompt_of(finals, one_label) for one_label in ('render', 'render:fix')) and finals['result']['final_render'] and 'drawn once at the very end' in finals['result']['report_markdown']
+           and 'renderer (renderer): 152' in finals['result']['report_markdown'])
+nopics = run_case('finals_no_pictures', args={'finals': True}, responses={'render': None})
+check.true('finals asked for but there are no pictures to build on: no full-size drawing, and the report says so',
+           'render:final' not in labels(nopics) and 'asked for, but there were no pictures' in nopics['result']['report_markdown'])
+failed_finals = run_case('finals_fail', args={'finals': True}, responses={'render:final': None})
+check.true('a full-size drawing that comes back empty is reported (not silently dropped) and does not stop the gate',
+           failed_finals['result']['final_render'] is None and 'full-size pictures could not be drawn' in failed_finals['result']['report_markdown'] and labels(failed_finals)[-1] == 'gate')
+team = run_case('card_team', args={'cardTeamMinutes': 30, 'cardLedger': '/path/to/shared/card-ledger.jsonl', 'cardClient': 'python3 -I /path/to/card_client.py'})
+check.true('a total for the whole run and a ledger file given in the arguments reach the planner and every helper; the report names the total',
+           'card-time start --team-minutes 30 --ledger /path/to/shared/card-ledger.jsonl' in prompt_of(team, 'plan') and '--ledger /path/to/shared/card-ledger.jsonl' in prompt_of(team, 'build:lock_gate')
+           and 'the person\'s total for the run: 30 minutes' in team['result']['report_markdown'] and 'The person set no total' in prompt_of(happy, 'plan'))
+check.true('a card client named in the arguments reaches the builders\' batch command as --card-client (and is not in the prompts when none was named)',
+           'variations run FILE.json --where auto --card-client "python3 -I /path/to/card_client.py"' in prompt_of(team, 'build:lock_gate') and '--card-client' not in prompt_of(happy, 'build:lock_gate'))
+check.true('"rented: false" reaches every helper that could use the card: no card in this run, a batch only locally on a tiny scene',
+           'no rented card in this run' in prompt_of(cheap, 'build:lock_gate') and 'no rented card in this run' in prompt_of(cheap, 'render') and 'no rented card in this run' not in builder_text)
 
 # ----------------------------------------------------------------------------- the commands written in the prompts are real
 def launcher(args):

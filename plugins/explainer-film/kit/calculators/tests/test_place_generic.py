@@ -112,7 +112,8 @@ check.true('the village preset facts are the plain ones (a door, a roof pitch, a
 settings_example = json.load(open(os.path.join(KIT, 'place-kit', 'data', 'examples', 'canal-lock-place-settings.json'), encoding='utf-8'))
 check.true('the kit example settings are the canal lock that was really built', settings_example['place'] == 'canal lock side' and settings_example['owners'] == 'canal-lock-ownership.json')
 other_examples = sorted(os.path.basename(p) for p in glob.glob(os.path.join(KIT, 'place-kit', 'data', 'examples', '*')))
-check.equal('the kit holds exactly the two canal lock example files and no other example place', other_examples, ['canal-lock-ownership.json', 'canal-lock-place-settings.json'])
+check.equal('the kit holds exactly the canal lock example files (settings, owners, and the 10 variations of its real proof batch) and no other example place', other_examples,
+            ['canal-lock-cracks-variations.json', 'canal-lock-ownership.json', 'canal-lock-place-settings.json'])
 worked = read(os.path.join(PLUGIN, 'skills', 'surfaces-wear-and-construction', 'worked-examples-garden-and-canal-lock.md'))
 check.true('the worked-example file names both real places and says what was measured and what was judged',
            'Japanese garden' in worked and 'canal lock' in worked and '**measured**' in worked and '**judged**' in worked and worked.count('measured') >= 10)

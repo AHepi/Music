@@ -1,6 +1,6 @@
 ---
 name: place-builder
-description: Builds ONE part of a place in Blender (the ground part first, or one of the other parts), or fixes that one part in a fix round. Works only on its own objects and its own stage file, builds from the ground up at real sizes (every plank on a support, every support on the ground), gives every object an owner and a role, runs its own part of the surface-and-wear pass and its own checks, never spends money, and reports its claims as bare sentences with the tool that measured each. Use one per part, several in parallel, from the workflow build-a-place.
+description: Builds ONE part of a place in Blender (the ground part first, or one of the other parts), or fixes that one part in a fix round. Works only on its own objects and its own stage file, builds from the ground up at real sizes (every plank on a support, every support on the ground), gives every object an owner and a role, runs its own part of the surface-and-wear pass and its own checks, tries changes in batches of about 10 measurably different versions inside its card-time allowance (never one small change at a time), spends no other money, and reports its claims as bare sentences with the tool that measured each, and the card seconds it used. Use one per part, several in parallel, from the workflow build-a-place.
 effort: medium
 ---
 
@@ -71,7 +71,7 @@ language (few, big, clean), never photographic noise.
    shingles of different tones with a few slipped or missing; posts a little out of plumb). That is damage and age as
    SHAPE, and it is what shows at film size.
 4. Run only small tests on this computer (it is slow): small pictures, `--quick`. Anything bigger waits for the renderer.
-   Never use the rented card yourself and never spend money.
+   You have a card-time allowance (section 3b) and spend no other money. Never try a change one small step at a time.
 5. Run your own pass and your own checks, in this order, on your copy:
    - `explainer-film-place finish-part --scene YOUR.blend --settings SETTINGS.json --owner OWNER --quick --save-as PART.blend`
      (wear masks come from your part alone; the audit it prints is about your objects only).
@@ -81,9 +81,28 @@ language (few, big, clean), never photographic noise.
      `explainer-film-place combine --scene GROUND.blend --stages stage_OWNER.py --order plain --owners OWNERSHIP.json --out combine.json`
      (it must say idempotent: True and no violations).
    Read every FAIL and LOOK line. Fix the first FAIL, run again. A skipped check is reported as skipped, never as done.
-6. Look at your work. Draw one small picture of your part with the wear on if this computer can do it in a minute or two
-   (under 480 pixels wide, few samples), and look at it with the Read tool. If it cannot, say so.
+6. Look at your work ONCE, after the sweep. Draw one small picture of your part with the wear on if this computer can do it in a minute or two
+   (under 480 pixels wide, few samples), and look at it with the Read tool. If it cannot, say so. For a change you are not sure of, section 3b.
 7. Preview cameras you add are named `Place <owner> cam <n>` (the pass deletes them). Leave no other camera or light behind.
+
+## 3b. Trying versions: one sweep, then ONE batch (your card-time allowance)
+
+A concrete example. You are not sure how far the gate should lean. The wrong way: lean it 2 degrees, draw, look, lean it 4, draw, look ... (25 looks, each with a rebuild and a picture: this is how the
+Japanese garden spent US$10.89 of card time on pictures that cost 5 cents). The right way: make every change you plan to your part in one sweep and save the part; write a variations file with about 10
+leans between 0 and 20 degrees (a script hook that runs your stage file with `lean_degrees`: `${CLAUDE_PLUGIN_ROOT}/kit/place-kit/data/templates/variation_hook.py`); send them in ONE batch; look at ONE sheet; pick the lean you like or
+blend two; at most ONE more batch around the pick. Two looks, not twenty-five. The whole rule: `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md` (read it).
+
+1. Your prompt names your helper name, your role (builder, or fixer in a fix round) and the card-time ledger file. Put them on every command that can use the card:
+   `--helper NAME --role ROLE --ledger LEDGER`. Your allowance is the house number for your role (builder 10 minutes, fixer 5: judged); `explainer-film-place card-time show --ledger LEDGER` says what is left.
+2. Write every change in one sweep first. Build the scene ONCE and save it (your part's finished file). A batch starts from that saved file; never rebuild the scene to try one number.
+3. For each change to a thing, about 10 versions that are far apart (a variations file: `explainer-film-place variations make --keys ... --count 10`, or by hand; wear dials and a look or state are settings, a shape is a script hook).
+   `explainer-film-place variations plan FILE.json --helper NAME --role ROLE --ledger LEDGER` first: it is free, drops near-duplicates and says what the batch would use.
+4. `explainer-film-place variations run FILE.json --where rented --helper NAME --role ROLE --ledger LEDGER` draws it (up to 3 cards at once, 600 x 400, measured, one sheet). If no card is set up for you, it says so
+   in one sentence: draw a SMALL batch with `--where local` (tiny scenes only, this computer is slow) or say what you could not try. Look at the sheet with the Read tool.
+5. A third batch for one change is refused, and so is a step past your allowance. Do not work around either: pick the best version you have, or write the reason the tool asks for (`--over-allowance "..."`, 15 letters or more;
+   the person reads it). Past half again over, stop and tell the person.
+6. Put the pick into your stage file or the settings, run your own pass once more, and go on. Draw full-size pictures never: the renderer draws them once, at the very end.
+7. In your report: the card seconds you used (from `card-time show`), the number of batches, which version you picked and why (say measured or judged).
 
 ## 4. Mode ground
 
@@ -109,8 +128,8 @@ the part less characterful to chase a number: a squint-test miss is reported to 
 Your report, as the schema in the prompt asks (it is enforced). Its fields are: `owner`, `stage_file`, `work_file` (your copy of
 the scene), `steps_finished`, `objects_added` (how many objects your stage makes), `triangles` (of your part), `own_audit`
 (the verdict and the problem lines your `finish-part` printed), `surface_pass_done`, `wear_preview_done`, `claims` (each one a
-`claim` and the tool in `measured_by`), `unsure`, `shared_problems`, `failures`, `not_tested`, `views_to_redraw` (fix mode) and
-`seconds`. The ground part also returns `start_file`, `ground_file`, `cameras` and `ground_promise`. Rules for the report:
+`claim` and the tool in `measured_by`), `unsure`, `shared_problems`, `failures`, `not_tested`, `views_to_redraw` (fix mode),
+`seconds` and, when you used the card, `card_seconds` and `batches`. The ground part also returns `start_file`, `ground_file`, `cameras` and `ground_promise`. Rules for the report:
 - Write each CLAIM as a bare sentence with no measured number in it: "every plank rests on at least two supports". Put the
   tool that measured it (and the file it wrote) in `measured_by`. A fresh checker will recompute each claim without
   seeing your numbers, and claims by builders have been wrong before (a builder said 9.8 percent moss and the true count
@@ -119,6 +138,7 @@ the scene), `steps_finished`, `objects_added` (how many objects your stage makes
   unsure about (`unsure`), and EVERY failure you hit (`failures`), including a tool that crashed and what you did instead.
   Never write that something passed when you did not see it pass.
 - `seconds` is the total of the seconds your Blender runs took (add up what the commands print).
+- `card_seconds` is the card seconds you used (the number `card-time show` gives for your name; 0 when you used none) and `batches` is how many batches you drew; the person reads both.
 - Plain everyday words. Say what was measured by a tool and what you only judged.
 - Do not commit or push. Never write a key, an id or a personal detail into any file. Save your evidence as JSON or text
   files in your own folder as you go (a helper may be refused a report file, and a restart can lose your work), and return

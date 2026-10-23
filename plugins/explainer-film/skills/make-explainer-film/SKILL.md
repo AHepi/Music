@@ -121,6 +121,8 @@ spend) goes to critics: section 19 of the tips guide lists it.
   and sits above 0.80 down; typed words go in the top band, 0.05 to 0.22 down.
 - A place is not built until its surfaces, wear and construction pass the audit (stage `place`): a flat clean model that
   passes the model lint is not finished.
+- Rented-card time is limited like painting money: make every change in one sweep, then look once; try a change as about 10 far-apart versions in ONE batch (`explainer-film-place variations`), at most one more batch;
+  small quick pictures until the end, full-size pictures once at the very end; every helper has a card-time allowance and the ledger counts it (skill `surfaces-wear-and-construction`, file `batched-rounds-and-card-time.md`).
 - Check pictures with your own eyes (contact sheets with the Read tool) before filming, and get an
   independent critique (subagents) before you call it done. The tools measure; the critics judge what they
   can't (section 19 of the tips guide).

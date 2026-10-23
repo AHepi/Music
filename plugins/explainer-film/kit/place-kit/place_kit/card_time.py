@@ -246,15 +246,15 @@ def show_lines(path, entries, helper=None, role=None):
     lines.append(f'The whole job: {team_used:.0f} s used of {team_total:.0f} s ({team_total / 60:g} min); {dollars_text(team_used)}.')
     helpers = sorted({e.get('helper') for e in entries if e.get('helper')} | ({helper} if helper else set()))
     for name in helpers:
-        mine = [e for e in entries if e.get('helper') == name]
-        role_of = next((e.get('role') for e in reversed(mine) if e.get('role')), 'default')
+        own = [e for e in entries if e.get('helper') == name]
+        role_of = next((e.get('role') for e in reversed(own) if e.get('role')), 'default')
         if name == helper and role:
             role_of = role
         allowance = allowance_seconds(role_of)
         used = used_seconds(entries, name)
         share = (used / allowance) if allowance else (1.0 if used else 0.0)
         lines.append(f'  {name} (role {role_of}): used {used:.0f} s of {allowance:.0f} s ({share:.0%}); left {max(0.0, allowance - used):.0f} s')
-        for entry in mine:
+        for entry in own:
             if entry.get('kind') in ('job', 'small', 'manual'):
                 flag = '' if entry.get('measured', True) else ' (estimate from the wall clock)'
                 lines.append(f'      {entry.get("when", "")} {entry.get("kind")}: work {entry.get("work_seconds", 0)} + wake-up {entry.get("wake_up_seconds", 0)} + idle {entry.get("idle_tail_seconds", 0)} = '

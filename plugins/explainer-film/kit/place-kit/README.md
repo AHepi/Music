@@ -53,6 +53,8 @@ Exit 0 is a pass (read the LOOK lines), 1 is a fail, 2 is an input that is missi
 | `undo` | removes everything the kit added and puts the original materials back |
 | `combine`, `fingerprint`, `ownership-diff` | build in parts by different builders at the same time and check who changed what |
 | `renderer-for`, `render`, `rent` | which renderer, drawing pictures (here, tiny; or on a rented card), the rented-card client |
+| `variations` | a batch of about 10 measurably different versions of ONE change, drawn small and quick in up to 3 card jobs at once, measured, on ONE labelled contact sheet (`make`, `plan`, `run`, `refine`, `sheet`, `keys`) |
+| `card-time` | the card-time ledger and each helper's allowance (`show`, `check`, `add`, `start`) |
 | `measure`, `crops` | measure pictures against a style guard; cut 100 percent crops |
 | `check-presets` | checks the kit's own data and code (see Tests) |
 
@@ -167,6 +169,41 @@ A view is drawn as a preview (and with `--finals` also as a final) unless it say
 preview is wasted. Files are named by view and kind once (`towpath_wide_preview.jpg`; a view already called `closeup` is not named
 `closeup_closeup`), each with a `.json` log beside it.
 
+## Trying versions in batches, and the card-time ledger
+
+The rule (the person's words: "Do one full sweep of changes, then look. Instead of one small change, then check. Maybe even batch according to variations. So maybe 10 variations that are measurably different for each asset change."):
+make every change in ONE sweep, then look once; for each change to a thing, draw about 10 measurably different versions in ONE batch and look at ONE sheet; pick or combine; at most ONE more batch; build the scene once and save it;
+small quick pictures until the end, full-size pictures once, at the very end. The skill file is `skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`.
+
+`variations` (code in `place_kit/variations/`, one plain note at the top of each file):
+
+```
+explainer-film-place variations make --keys amount.moss_and_algae dials.moss_and_algae.cover --count 10 --change "moss on the walls" --scene lock-finished.blend --cameras "Camera A" "Camera B" --out moss.json
+explainer-film-place variations plan moss.json --helper builder-walls --role builder      (free: draws nothing)
+explainer-film-place variations run moss.json --where rented --helper builder-walls --role builder
+explainer-film-place variations refine moss-run/variations-result.json --pick v03 v05      (the ONE more batch, around the picks)
+```
+
+- A variations file lists named variations. Each is a set of settings (`master`, `amount.<layer>`, `dials.<layer>.<dial>`, `state`, `look`; `variations keys` lists them with their ranges) or a small script hook
+  (`apply(variation)` inside Blender, with its numbers in `args`; the template is `data/templates/variation_hook.py`). A real example: `data/examples/canal-lock-cracks-variations.json`.
+- BEFORE drawing, a variation is dropped when none of its settings is at least `place_variations.settings_difference_min_share` (8 percent: invented) of the setting's range away from the saved scene or from an earlier variation;
+  the sentence says which and why. `make` spreads the settings so that no two variations share a tenth of any range (a Latin hypercube), so ten made variations are far apart by construction.
+- The variations (and the baseline, the saved scene as it is) are split over up to `place_render.workers_max` (3) card jobs, at least 3 variations in each, sent at the same time. Each job opens the scene once; for each variation it
+  applies the settings, draws small quick pictures (600 x 400; EEVEE 16 samples or Cycles 24 samples by the renderer rule, chosen once from the baseline) through every camera, then puts the values back and checks a fingerprint
+  (a script hook, or a reset that did not come back exact, reopens the scene). The scene is never saved. `--where local` runs the same jobs here, one after another (tiny scenes and tests).
+- The scene waits on the store under its own checksum, so a second batch on the same scene uploads nothing again.
+- AFTER drawing, the pictures are measured here (no card seconds): value range, detail energy, colour shift, saturation shift and squint score against the baseline; every pair is compared pixel by pixel, and variations that came
+  out nearly the same as the baseline ("does not show in these cameras") or as each other are flagged, one line for each group. ONE contact sheet (a JPG under 400,000 bytes) shows the baseline, each variation's name, settings and measures,
+  the flags and the card seconds. `variations-result.json` holds everything.
+- Two ways to reach a card: the plugin's own client (the settings of section "Drawing pictures"), or any command-line client with the actions `upload`, `run`, `job` and `download`:
+  `--card-client "python3 -I /path/render_client_serverless.py"` (or `PLACE_CARD_CLIENT`). The second cannot say what an upload billed, so those steps are counted from the wall clock and marked as an estimate.
+
+`card-time` (code in `place_kit/card_time.py`): every card job (and every small job: an upload, a check, a download) is written to one ledger file, `--ledger FILE` or `PLACE_CARD_LEDGER`, one line for each, with `--helper NAME`
+(`PLACE_HELPER`) and `--role builder|fixer|integrator|renderer|checker|planner` (`PLACE_HELPER_ROLE`). Card seconds = work + wake-up + the idle tail (5 s). Allowances are house numbers (`place_card_time.allowance_minutes`:
+builder 10, fixer 5, integrator 10, renderer 10, checker 3, planner 0, default 5; judged); a warning at 80 percent, a refusal that sends nothing when a step would pass the allowance, a refusal of a third batch for one change,
+`--over-allowance "a reason of 15 letters or more"` to go over by at most half again (the reason is written into the ledger), and a total for the whole job (`place_card_time.team_total_minutes`, 60; `card-time start --team-minutes N`
+writes the person's own). `render --where rented` and `rent upload|run|status` pass the same gate. A price made from seconds is an estimate, never a bill.
+
 ## What was measured and what was only judged
 
 Measured here (the tests run these): the audit fails a flat hut and passes the finished one; every normal map agrees with its own
@@ -184,8 +221,11 @@ are first tries too. The style rule (few, big, clean, designed marks; no photogr
 
 - A large place: only a hut, a 36 by 26 m yard and a 12 m canal lock were built and finished here. The plan masks, the wear and the growth are untested at
   hundreds of buildings, and Cycles was not run with the kit on a place that size.
-- The rented-card client was tested against a pretend card (a fake service that hands each job to the real job taker), never
-  against a real endpoint: the endpoint was switched off while this was made and the settings were never read.
+- The plugin's own rented-card client (`rent`, `render --where rented`) was tested against a pretend card (a fake service that hands each job to the real job taker), never
+  against a real endpoint: the settings it needs were never read. The `variations` batch WAS run on real rented cards (23 October 2026, twice, 3 jobs at once), but through the project's own
+  command-line client (`--card-client`), not through the plugin's client.
+- The card-time allowance numbers are judged guesses (10 minutes for a builder, 5 for a fixer); the two real batches used 180 and 158 card seconds each. How a whole run of the workflow `build-a-place` keeps inside them was tested only against canned helpers.
+- The batch rule and the allowance work as tools that refuse; that a smaller model, asked only for a place in plain words, then really batches its tries was not tried.
 - `paint_request.py --keep-wetness` (the painter prompt for a place built wet) was tried on the template's words only; no painting was paid for, so how the painter treats the words is not known.
 - The `balance` action of the client was written from RunPod's documented query and never run.
 
@@ -195,7 +235,7 @@ are first tries too. The style rule (few, big, clean, designed marks; no photogr
 so and are skipped). The files for this kit: `test_place_data.py` (data and the checker of the data), `test_place_roles.py`,
 `test_place_shapes.py` (recipes, normal maps, roads, grids, pieces), `test_place_audit_check.py` (the judge),
 `test_preflight_place.py` (the place stage), `test_place_blender.py` (everything inside Blender), `test_place_combine.py`,
-`test_place_render.py`, `test_picture_measures.py`, `test_place_fixes.py` (the faults a first full check found, each with the old behaviour as a control) and `test_place_hook.py` (the prompt reminder in `hooks/`); and for the film's model builder, which the kit's bevel rule and PNG normal maps also reach, `test_model_kit_surfaces.py`. `python3 kit/place-kit/check_presets.py` checks that every number has a
+`test_place_render.py`, `test_place_card_time.py` (the ledger, the allowance, the batch rule, the gate on every card command), `test_place_variations.py` (settings, the checks before and after drawing, the split, a fake card and a fake Blender, and with Blender the real worker on a tiny hut), `test_picture_measures.py`, `test_place_fixes.py` (the faults a first full check found, each with the old behaviour as a control) and `test_place_hook.py` (the prompt reminder in `hooks/`); and for the film's model builder, which the kit's bevel rule and PNG normal maps also reach, `test_model_kit_surfaces.py`. `python3 kit/place-kit/check_presets.py` checks that every number has a
 kind and a source, the data agree, every treatment a class requires is made by a real function and proved by a test, no kit code
 names a kind of place, no code that runs in Blender imports Pillow, OpenCV or SciPy, and nothing private is written anywhere.
 
@@ -204,7 +244,7 @@ names a kind of place, no code that runs in Blender imports Pillow, OpenCV or Sc
 `place_command.py` is the launcher (it finds Blender and runs the verb in it); `blender_run.py` is what runs inside Blender;
 `place_kit/` is the package: `commands.py` and `cli.py` (the verbs), `roles.py`, `settings_file.py`, `surfaces/` (heights,
 normals, UVs, materials, bevels, displacement, roads, damage), `wear/` (the nine layers, their masks and the chain),
-`growth/` (the 3D pieces, the scatter and its keep-out recount), `checks/` (audit, construction, scale, normal-map test, ownership,
+`growth/` (the 3D pieces, the scatter and its keep-out recount), `variations/` (batched rounds: keys, spec, apply and worker inside Blender, cards, compare, sheet, runner, verb), `card_time.py` (the ledger and the allowance), `checks/` (audit, construction, scale, normal-map test, ownership,
 fingerprint, combine), `render/` (the renderer rule, the render job, the rented-card client and the worker), `parts.py`,
 `undo.py`, `light.py`, `convert.py` (curves, text, metaballs and collection instances are turned into meshes at the start of `finish`, so no drawn object escapes the pass; `undo` brings the originals back). `data/` holds the roles, surfaces, looks, place types, dial table, species, real-world facts, templates and
 examples. `SOURCES-AND-LICENCES.md` says where every part came from; `DEVIATIONS.md` says where the build differs from its design and why, and lists the small changes made to the film's older tools

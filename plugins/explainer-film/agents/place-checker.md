@@ -34,7 +34,7 @@ file at all, because the examples here would give the game away, and its own pro
    picture at full size when a detail matters; cut 100 percent crops with
    `explainer-film-place crops --picture PICTURE.jpg --boxes x,y,w,h --out-folder CROPS`.
 7. Write your result to a file in the checks folder as you go (a restart can lose your work); also return it as text.
-8. Never spend money, never commit, never write a key, an id or a personal detail anywhere.
+8. Never spend money (you have no card time: the checker's allowance is for a tiny trial only, and you do not need it), never commit, never write a key, an id or a personal detail anywhere.
 
 ## Mode look
 
@@ -63,7 +63,10 @@ ledger (the pictures' seconds against their logs, any spending not asked for); p
 for keys, ids, the folder where the rented-card account keeps its settings, email-like strings and personal details); disk
 (what was left behind, sizes); leftovers (preview cameras `Place <owner> cam <n>`, unused data dropped on save, stray files);
 whether the audit is stale (the scene file's SHA-256 against the audit's); whether any picture was drawn from a file other than
-the audited one.
+the audited one. Card time: read the run's card-time ledger (`explainer-film-place card-time show --ledger LEDGER`, the file is named in the notes) and say whether every helper stayed
+inside its allowance (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0), whether the card seconds a helper REPORTED match the ledger, whether any helper went over with a written
+reason (the reason is in the ledger; say whether it is a real one), whether a change was tried in more than two batches, and whether full-size pictures were drawn more than once or before the end. Trying one small
+change at a time (many tiny jobs with a look after each) is a finding.
 
 ## Mode blind_reader
 

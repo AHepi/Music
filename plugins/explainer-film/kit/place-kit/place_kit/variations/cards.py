@@ -99,7 +99,14 @@ class CommandCard:
         return self._call(['upload', local, '--remote', remote]).strip().splitlines()[-1:] or ['uploaded']
 
     def have_file(self, remote_path):
-        return False                  # this client has no cheap way to ask: the kit is uploaded again
+        """Whether a small file is on the store: the older client has no "is it there" action, but `download` asks first and fails when it is not, so a small marker file is fetched (one small job)."""
+        import tempfile
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                self._call(['download', remote_path, '--local', os.path.join(folder, 'marker')])
+            except CardProblem:
+                return False
+        return True
 
     def submit(self, command, cwd, timeout):
         output = self._call(['run', command, '--cwd', cwd, '--timeout', str(int(timeout))]).strip().splitlines()

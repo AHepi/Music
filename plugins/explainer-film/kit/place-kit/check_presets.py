@@ -27,7 +27,7 @@ LAYERS = ('dirt', 'grime', 'weathering', 'wetness', 'cracks_and_chips', 'edge_we
 TREATMENTS = ('normal_map', 'displacement', 'roughness_variation', 'colour_variation', 'bevelled_edges', 'dirt', 'grime', 'weathering', 'wetness',
               'cracks_and_chips', 'edge_wear', 'moss_and_algae', 'rust', 'rubbish', 'plants', 'litter_pieces', 'shape_damage')
 # modules that may use outside packages because they never run inside Blender
-PLAIN_PYTHON_FILES = ('render/client.py', 'render/worker/handler.py', 'render/worker/cycles_check.py')
+PLAIN_PYTHON_FILES = ('render/client.py', 'render/worker/handler.py', 'render/worker/cycles_check.py', 'variations/compare.py', 'variations/sheet.py')
 PRIVATE_PIECES = ('As' + 'tra', 'CT' + ' /', '/ho' + 'me/', 'claude' + '-0')
 SETTINGS_FOLDER_PATTERN = re.compile(r'(~/|/)\.run' + r'pod\b|\.run' + r'pod/')   # the rented-card settings folder used as a path (naming it in a sentence is allowed)
 

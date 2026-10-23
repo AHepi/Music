@@ -41,6 +41,8 @@ NAME_OK = re.compile(r'^[a-z0-9][a-z0-9_-]{0,39}$')
 
 def safe_name(text, fallback='change'):
     word = re.sub(r'[^a-z0-9]+', '-', str(text or '').strip().lower()).strip('-')
+    if len(word) > 40:                                 # cut between words, not in the middle of one
+        word = word[:41].rsplit('-', 1)[0] if '-' in word[:41] else word[:40]
     return (word or fallback)[:40].strip('-') or fallback
 
 
@@ -280,14 +282,14 @@ def make_variations(key_list, count, seed=1, change='one change', scene=None, se
             else:
                 tag += f'-{(info["dial"] or key).replace("_metres", "").replace("_", "")[:8]}{round((chosen[key] - info["low"]) / (info["high"] - info["low"]) * 100):d}'
         variations.append({'name': f'v{i + 1:02d}{tag}'[:40], 'set': chosen})
-    content = {'about': f'Made by `explainer-film-place variations make`: {count} variations that spread {", ".join(key_list)} across their ranges (seed {seed}).', 'change': change,
-               'variations': variations}
+    content = {'about': f'Made by `explainer-film-place variations make`: {count} variations that spread {", ".join(key_list)} across their ranges (seed {seed}).', 'change': change}
     if scene:
         content['scene'] = scene
     if settings:
         content['settings'] = settings
     if cameras:
         content['cameras'] = list(cameras)
+    content['variations'] = variations
     return content
 
 
@@ -305,13 +307,13 @@ def refine_variations(result, picks, count=6, seed=1, radius=0.3):
     for key in sorted({k for v in chosen for k in v['set']}):
         info = keys.describe_key(key)
         values = [v['set'][key] for v in chosen if key in v['set']]
-        blend[key] = values[0] if info['choices'] is not None else round(sum(values) / len(values), 3)
+        blend[key] = values[0] if info['choices'] is not None else round(sum(values) / len(values), 4)
     if not blend:
         raise SpecProblem('the picked variation(s) set nothing, so there is nothing to refine')
     spread = stratified_values(list(blend), count, seed, radius=radius, centre={k: v for k, v in blend.items() if not isinstance(v, str)})
     variations = []
     if len(chosen) > 1:
-        variations.append({'name': 'blend-' + '-'.join(picks)[:30], 'set': dict(blend)})
+        variations.append({'name': safe_name('blend-' + '-'.join(pick.split('-')[0] for pick in picks), 'blend')[:40].strip('-'), 'set': dict(blend)})
     for i in range(count - len(variations)):
         item = {key: (blend[key] if isinstance(blend[key], str) else spread[key][i]) for key in blend}
         variations.append({'name': f'r{i + 1:02d}', 'set': item})

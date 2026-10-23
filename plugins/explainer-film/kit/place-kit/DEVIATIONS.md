@@ -165,7 +165,24 @@ Each of these is small, has its own test, and leaves the old behaviour reachable
 - **`test_preflight.py`.** The film stage reads the free disk of the computer it runs on, so the test failed whenever the disk was nearly full (a fault from before this work).
   The test now passes `--free-disk-gb 40`; `preflight.py` gained the option `--free-disk-gb` for the film stage to make that possible.
 
+## Added in the batching step (23 October 2026)
+
+- **`variations` and `card-time`** (new verbs; design in `skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md`). The design asked for jobs that "measure" their pictures. The measures are made HERE, from the small
+  JPGs after they come back (Pillow is not in Blender's Python, and measuring costs no card seconds), so the card only draws.
+- **Two ways to reach a card.** The plugin's own client, and any command-line client with `upload`, `run`, `job` and `download` (`--card-client`). The real proof batches used the second one with the project's own client, because the
+  plugin's client needs the person's settings, which a helper may not read. A command-line client cannot say what an upload billed, so those steps are counted from the wall clock and marked as an estimate in the ledger and on the sheet.
+- **The card gate is in every command that starts a paid step** (`rent upload|run|status`, `render --where rented`, `variations run`); `render` and `rent` got `--helper`, `--role`, `--ledger` and `--over-allowance`.
+- **The difference threshold is 8 percent of a setting's range** (first written as 15): ten values of ONE dial must fit in its range, 10 percent apart. A first real batch showed that settings far apart can still give nearly the same picture
+  (moss at 0.15 and 0.75 in a scene where moss hardly shows); so the pictures decide after drawing, and the sheet says which variations did not show.
+- **The sheet stays under 400,000 bytes** (not 400 KiB): the quality and then the size are lowered until it fits.
+- **The scene is stored on the card's store under its checksum** (`place-jobs/scenes/<8 letters>/`), so the second and last batch for a change uploads nothing again.
+
 ## Left out or not done (said plainly)
+
+- **Measured on a real card, but only twice, and not through the plugin's own client.** Two batches of 10 variations of the finished canal lock (3 jobs each, two cameras, Cycles 600 x 400) took 180 and 158 card seconds (about US$0.05 each at
+  the price of the day; an estimate, not a bill). The estimate of the plan (250 s) was above both. Wake-up times were 0.8 to 24.3 s.
+- **A script hook that needs more than its own file does not travel to a card** (only the hook file is uploaded): the template says so and offers local drawing for tiny scenes.
+- **The workflow's card-time rules ran only against canned helpers.**
 
 - **A large place was not built here.** The tests built a one-hut place and a 36 by 26 m yard (41 objects, one road); a smoke test by hand built a 12 m canal lock (94 objects). The wear,
   growth, masks and audit were not tried at hundreds of buildings, and Cycles with the kit was not run on a place that size.

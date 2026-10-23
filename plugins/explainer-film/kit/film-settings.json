@@ -5290,8 +5290,8 @@
   "cycles_samples": {
    "value": 24,
    "unit": "samples",
-   "kind": "invented",
-   "source": "a quick look with denoising; the full-size pictures use place_render.final_samples"
+   "kind": "judged",
+   "source": "judged by eye on the two real batches of 23 October 2026 (canal lock, 600 x 400, OptiX denoising on an RTX 4090): the pictures read clearly on the sheet at 24 samples; the full-size pictures use place_render.final_samples"
   },
   "jpeg_quality": {
    "value": 85,
@@ -5338,14 +5338,14 @@
   "picture_mean_difference_min": {
    "value": 0.6,
    "unit": "of 255, mean absolute difference",
-   "kind": "invented",
-   "source": "two pictures that differ by less than this on average AND in fewer than picture_changed_share_min of their pixels came out nearly the same"
+   "kind": "judged",
+   "source": "judged from the two real batches (22 pictures each, 55 pairs each): the pairs called nearly the same differed by at most 0.48 of 255 on average and by at most 0.38 percent of pixels, and were the ones that looked the same on the sheet; no pair that looked different was under it. Pairs just above (0.48 to 0.76) were not each looked at. A pair is nearly the same when it is under BOTH this and picture_changed_share_min"
   },
   "picture_changed_share_min": {
    "value": 0.004,
    "unit": "share of pixels",
-   "kind": "invented",
-   "source": "share of pixels that differ by more than picture_pixel_step; a change on a small part of the picture still counts"
+   "kind": "judged",
+   "source": "judged from the same two real batches: nearly-the-same pairs changed at most 0.38 percent of their pixels by more than picture_pixel_step; a change on a small part of the picture still counts"
   },
   "picture_pixel_step": {
    "value": 8,
@@ -5354,22 +5354,22 @@
    "source": "a pixel whose largest colour channel moved more than this counts as changed (JPEG noise stays under it)"
   },
   "estimated_seconds_open_scene": {
-   "value": 6,
+   "value": 14,
    "unit": "seconds",
-   "kind": "invented",
-   "source": "planning only, to estimate card seconds before drawing; replaced by what the first real batch measured when there is one"
+   "kind": "measured",
+   "source": "the two real batches of 23 October 2026: a job's billed work minus the seconds spent drawing was 10.2 to 16.3 s (Blender starts, opens a 14 MB scene, loads the kit, writes the bundle); a reopen after a script hook is counted the same, cautiously (not measured)"
   },
   "estimated_seconds_first_picture": {
-   "value": 12,
+   "value": 6,
    "unit": "seconds",
-   "kind": "invented",
-   "source": "planning only: the first picture of a job builds the shaders and the light tree"
+   "kind": "measured",
+   "source": "the two real batches: the first picture of a job took 2.8 to 5.7 s (the light tree and shaders are built once); the high end is used so an estimate is never too small"
   },
   "estimated_seconds_per_picture": {
-   "value": 4,
+   "value": 1.5,
    "unit": "seconds",
-   "kind": "invented",
-   "source": "planning only: one small picture after the first"
+   "kind": "measured",
+   "source": "the two real batches: a 600 x 400 Cycles picture at 24 samples after the first took 0.82 to 1.49 s on an RTX 4090; the high end is used so an estimate is never too small"
   },
   "sheet_thumbnail_width_pixels": {
    "value": 300,
