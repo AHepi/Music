@@ -5245,6 +5245,24 @@
    "kind": "judged",
    "source": "the rented-card guide: a worker stops about 5 seconds after its last job, and billing runs while a worker is up"
   },
+  "estimated_wake_up_seconds": {
+   "value": 25,
+   "unit": "seconds",
+   "kind": "measured",
+   "source": "the rented-card guide: 20 to 25 s when no worker is warm (14.7 s once in the plugin 1.4.0 smoke test)"
+  },
+  "estimated_seconds_per_preview_picture": {
+   "value": 10,
+   "unit": "seconds",
+   "kind": "measured",
+   "source": "the rented-card runs: previews 6 to 10 s (RunPod set-up findings)"
+  },
+  "estimated_seconds_per_final_picture": {
+   "value": 45,
+   "unit": "seconds",
+   "kind": "measured",
+   "source": "the rented-card runs: 44.3 s and 39.7 s on an RTX 4090 at 2400 x 1600"
+  },
   "batches_per_change_max": {
    "value": 2,
    "unit": "batches",
@@ -5306,10 +5324,10 @@
    "source": "each wake-up of a card (20 to 25 s) should be shared by at least this many variations; the number of jobs is at most place_render.workers_max"
   },
   "settings_difference_min_share": {
-   "value": 0.15,
+   "value": 0.08,
    "unit": "share of the setting's range",
    "kind": "invented",
-   "source": "two variations whose every setting is closer than this are near-duplicates (the later one is dropped before drawing and the sheet says so)"
+   "source": "two variations whose every setting is closer than this are near-duplicates (the later one is dropped before drawing and the sheet says so). 8 percent lets ten values of ONE dial fit its range (10 percent apart); the pictures drawn afterwards decide whether a gap was big enough"
   },
   "number_without_range_difference_min_share": {
    "value": 0.25,

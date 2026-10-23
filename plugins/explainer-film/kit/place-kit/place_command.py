@@ -171,6 +171,12 @@ def run_plain_verb(parsed, raw_args):
     if verb == 'rent':
         from place_kit.render import client
         return client.main_command(parsed)
+    if verb == 'card-time':
+        from place_kit import card_time
+        return card_time.main_command(parsed)
+    if verb == 'variations':
+        from place_kit.variations import verb as variations_verb
+        return variations_verb.main_command(parsed, find_blender)
     print(f'explainer-film-place: the verb {verb} is not available here', file=sys.stderr)
     return EXIT_MISSING
 

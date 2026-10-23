@@ -160,12 +160,12 @@ def check(entries, helper, role, estimate_seconds=0.0, over_reason=None, what='t
         result['status'] = 'refuse'
         result['lines'].append(f'FAIL card time: the role {role} has no card time ({words}). Ask the integrator for the picture you need.')
         return result
-    if projected <= allowance * warn_share:
+    if projected < allowance * warn_share:
         result['lines'].append(f'PASS card time: {words}.')
         return result
     if projected <= allowance:
         result['status'] = 'warn'
-        result['lines'].append(f'LOOK card time: {words}: that is more than {warn_share:.0%} of the allowance. Plan the rest with fewer pictures.')
+        result['lines'].append(f'LOOK card time: {words}: that is {warn_share:.0%} or more of the allowance. Plan the rest with fewer pictures.')
         return result
     # over the allowance
     if len(reason) >= letters and projected <= allowance * (1.0 + extra):
@@ -191,7 +191,7 @@ def check_batch(entries, helper, change, over_reason=None):
     letters = int(numbers.value('place_card_time.override_reason_letters_min'))
     if number > maximum:
         if len((over_reason or '').strip()) >= letters:
-            return {'status': 'warn', 'number': number, 'lines': [f'LOOK batches: batch {number} for the change "{change}" is over the rule of {maximum}; allowed only because of the reason you wrote: "{over_reason.strip()}".']}
+            return {'status': 'warn', 'number': number, 'override': True, 'lines': [f'LOOK batches: batch {number} for the change "{change}" is over the rule of {maximum}; allowed only because of the reason you wrote: "{over_reason.strip()}".']}
         return {'status': 'refuse', 'number': number, 'lines': [f'FAIL batches: {helper} already drew {done} batch(es) for the change "{change}" (the rule: one batch, look, at most one more). Pick or combine the best '
                                                                 f'versions and go on; to draw another add --over-allowance "a reason of at least {letters} letters".']}
     if number == maximum:

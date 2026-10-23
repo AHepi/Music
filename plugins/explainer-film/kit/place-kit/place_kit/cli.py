@@ -32,9 +32,12 @@ VERBS = {
     'rent': {'blender': False, 'help': 'the rented-card client: status, upload, run, job, wait, download, balance'},
     'measure': {'blender': False, 'help': 'measure pictures (value range, detail energy, flat windows, palette, squint) and make or check a style guard'},
     'crops': {'blender': False, 'help': 'cut 100 percent crops of a picture (with before and after strips)'},
+    'variations': {'blender': False, 'help': 'a batch of about 10 measurably different versions of one change, drawn small and quick in up to 3 card jobs at once, measured, on ONE labelled contact sheet (actions: make, plan, run, refine, sheet, keys)'},
+    'variations-worker': {'blender': True, 'help': 'internal: one job of a variations batch, inside Blender (`variations run` starts it, here or on a card)'},
+    'card-time': {'blender': False, 'help': 'the card-time ledger and each helper\'s allowance: show, check, add, start'},
     'check-presets': {'blender': False, 'help': 'check the kit\'s own data and code (kinds and sources, agreement, required treatments are made and tested, no place words, nothing private)'},
 }
-SCREEN_VERBS = ('render', 'normals-test')           # verbs that may draw with EEVEE and so want a virtual screen when there is no real one
+SCREEN_VERBS = ('render', 'normals-test', 'variations-worker')           # verbs that may draw with EEVEE and so want a virtual screen when there is no real one
 NEEDS_SCENE = tuple(v for v, spec in VERBS.items() if spec['blender'] and v not in ('new-settings', 'combine')) + ('new-settings', 'combine')
 
 
@@ -50,6 +53,15 @@ def add_global_options(parser):
     parser.add_argument('--owner', help='only this owner\'s objects (the part builders\' share)')
     parser.add_argument('--save-as', dest='save_as', help='for verbs that change the scene: the file to save to (the input is never overwritten without --overwrite)')
     parser.add_argument('--overwrite', action='store_true', help='allow --save-as to overwrite the input scene')
+    return parser
+
+
+def add_card_options(parser):
+    """The options every command that can use a rented card takes: who you are (for the card-time ledger) and how to go over the allowance."""
+    parser.add_argument('--helper', help='your name, for the card-time ledger (default: PLACE_HELPER, else unnamed-helper)')
+    parser.add_argument('--role', choices=['builder', 'fixer', 'integrator', 'renderer', 'checker', 'planner', 'default'], help='your role: it sets your card-time allowance (default: PLACE_HELPER_ROLE, else default)')
+    parser.add_argument('--ledger', help='the card-time ledger file (default: PLACE_CARD_LEDGER, else card-time-ledger.jsonl in the folder you run in)')
+    parser.add_argument('--over-allowance', dest='over_allowance', help='a reason of at least 15 letters to go over your allowance by at most half again; it is written into the ledger and the person reads it')
     return parser
 
 
@@ -124,6 +136,7 @@ def build_parser():
     p.add_argument('--where', choices=['rented', 'local', 'auto', 'on-card'], default='auto', help='local (this computer, tiny), rented (a rented card), auto (a card when one is set up and the renderer is Cycles or finals are asked, else tiny local previews), on-card (used by the client: already on the card; to ask for a card say rented)')
     p.add_argument('--engine', choices=['auto', 'cycles', 'eevee'], default='auto')
     p.add_argument('--finals', action='store_true', help='draw final-size pictures too (default: previews only)')
+    add_card_options(p)
     p = verb('rent')
     p.add_argument('action', nargs='?', choices=['status', 'upload', 'run', 'job', 'wait', 'download', 'balance'], help='what to do on the rented card')
     p.add_argument('target', nargs='*', help='the file, folder, command or job id the action needs')
@@ -132,6 +145,7 @@ def build_parser():
     p.add_argument('--timeout', type=float, help='run: seconds before the job is given up')
     p.add_argument('--limit', type=float, help='wait: seconds to wait at most')
     p.add_argument('--local', help='download: the local path')
+    add_card_options(p)
     p = verb('measure')
     p.add_argument('pictures', nargs='*', help='the pictures to measure')
     p.add_argument('--guard', help='a style guard JSON to check against')
@@ -146,5 +160,39 @@ def build_parser():
     p.add_argument('--boxes', nargs='+', help='boxes as x,y,w,h')
     p.add_argument('--previous', help='the earlier picture (for before and after strips)')
     p.add_argument('--out-folder', dest='out_folder', help='where the crops go')
+    p = verb('variations')
+    p.add_argument('action', choices=['make', 'plan', 'run', 'refine', 'sheet', 'keys'], help='make: write a variations file that spreads settings across their ranges; plan: check and plan, draw nothing; run: draw the batch and make the sheet; '
+                   'refine: write the second batch around the variations you picked; sheet: make the sheet again from pictures already drawn; keys: list the settings a variation may change')
+    p.add_argument('spec', nargs='?', help='plan and run: the variations file; refine and sheet: the variations-result.json (or its folder) of a finished run')
+    p.add_argument('--cameras', nargs='+', help='the cameras to look through (default: the file\'s, else the scene\'s own camera)')
+    p.add_argument('--where', choices=['local', 'rented', 'auto'], default='auto', help='local: draw here (tiny scenes, tests); rented: on rented cards; auto: a card when one is set up (--card-client, PLACE_CARD_CLIENT, or the plugin client\'s settings), else here')
+    p.add_argument('--card-client', dest='card_client', help='the command that starts a card client with the actions upload, run, job and download, for example "python3 -I /path/render_client_serverless.py" (or PLACE_CARD_CLIENT)')
+    p.add_argument('--store-folder', dest='store_folder', help='with --card-client: the folder on the card\'s store for jobs (default /workspace)')
+    p.add_argument('--jobs', type=int, help='how many card jobs at the same time (default: enough that each holds at least 3 variations, at most 3)')
+    p.add_argument('--engine', choices=['auto', 'cycles', 'eevee'], default='auto', help='auto: the renderer rule (Cycles where lit or water is in view, EEVEE when not)')
+    p.add_argument('--size', help='picture size such as 600x400 (default: place_variations.picture_size_pixels)')
+    p.add_argument('--samples', type=int, help='samples for each picture (default: low, from the house numbers)')
+    p.add_argument('--run-folder', dest='run_folder', help='where the job files, pictures, result and sheet go (default: beside the variations file)')
+    p.add_argument('--check-reset', dest='check_reset', action='store_true', help='draw the baseline again after all the variations in its job, to prove the reset put everything back (one more small picture)')
+    p.add_argument('--max-kilobytes', dest='max_kilobytes', type=int, help='the sheet stays under this size (default 400)')
+    p.add_argument('--keys', nargs='+', help='make: the settings to spread, for example amount.moss_and_algae dials.moss_and_algae.cover')
+    p.add_argument('--count', type=int, help='make: how many variations (default 10); refine: how many (default 6)')
+    p.add_argument('--seed', type=int, default=1, help='make and refine: the seed of the spread (the same seed gives the same file)')
+    p.add_argument('--change', help='make: the one change this batch tries, in plain words')
+    p.add_argument('--pick', nargs='+', help='refine: the names of the variation(s) you picked (several are blended)')
+    p.add_argument('--radius', type=float, default=0.3, help='refine: how far around the pick to spread, as a share of each setting\'s range (default 0.3)')
+    add_card_options(p)
+    p = verb('variations-worker')
+    p.add_argument('--job', required=False, help='the job file the runner wrote')
+    p.add_argument('--where', choices=['local', 'on-card'], default='local')
+    p = verb('card-time')
+    p.add_argument('action', nargs='?', choices=['show', 'check', 'add', 'start'], help='show: the ledger and every helper\'s allowance; check: would a paid step of --estimate-seconds fit; add: log a job you ran by hand; start: the person\'s total cap for the whole job')
+    p.add_argument('--estimate-seconds', dest='estimate_seconds', type=float, help='check: the card seconds the step would use')
+    p.add_argument('--work-seconds', dest='work_seconds', type=float, help='add: the billed work seconds of the job')
+    p.add_argument('--wake-up-seconds', dest='wake_up_seconds', type=float, help='add: its wake-up seconds')
+    p.add_argument('--job-id', dest='job_id', help='add: the job id (a job already in the ledger is not added twice)')
+    p.add_argument('--what', help='add and start: a plain note')
+    p.add_argument('--team-minutes', dest='team_minutes', type=float, help='start: the most card minutes the whole job may use')
+    add_card_options(p)
     verb('check-presets')
     return parser

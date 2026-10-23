@@ -617,8 +617,13 @@ def verb_render(parsed):
     return render_job.run_command(parsed)
 
 
+def verb_variations_worker(parsed):
+    from .variations import worker
+    return worker.run_command(parsed)
+
+
 VERB_HANDLERS = {
     'new-settings': verb_new_settings, 'roles': verb_roles, 'surfaces': verb_surfaces, 'roads': verb_roads, 'damage': verb_damage, 'age': verb_age, 'grow': verb_grow,
     'light': verb_light, 'finish': verb_finish, 'finish-part': verb_finish_part, 'construction': verb_construction, 'normals-test': verb_normals_test, 'audit': verb_audit,
-    'undo': verb_undo, 'combine': verb_combine, 'fingerprint': verb_fingerprint, 'renderer-for': verb_renderer_for, 'render': verb_render,
+    'undo': verb_undo, 'combine': verb_combine, 'fingerprint': verb_fingerprint, 'renderer-for': verb_renderer_for, 'render': verb_render, 'variations-worker': verb_variations_worker,
 }

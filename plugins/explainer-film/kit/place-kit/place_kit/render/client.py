@@ -31,6 +31,7 @@ import time
 import urllib.error
 import urllib.request
 
+from .. import card_time
 from .. import house_numbers as numbers
 
 KEY_NAME, ENDPOINT_NAME, STORE_NAME = 'RUNPOD_API_KEY', 'RUNPOD_ENDPOINT_ID', 'RENDER_STORE_FOLDER'
@@ -395,6 +396,13 @@ def render_on_rented(parsed, client=None, environ=None, say=print):
     limit = numbers.value('place_render.upload_megabytes_max')
     if megabytes > limit:
         raise RentProblem(f'the scene and its files come to {megabytes:.0f} MB, over {limit} MB: upload it once by hand (rent upload) and name it in the job; each upload costs wake-up time')
+    pictures_asked = len(job['views']) * (2 if parsed.finals else 1)
+    estimate = (float(numbers.value('place_card_time.estimated_wake_up_seconds')) + card_time.idle_tail_seconds() + len(job['views']) * float(numbers.value('place_card_time.estimated_seconds_per_preview_picture'))
+                + (len(job['views']) * float(numbers.value('place_card_time.estimated_seconds_per_final_picture')) if parsed.finals else 0.0))
+    allowed, ledger, helper, role = card_time.before_paid_step(parsed, estimate, f'drawing {pictures_asked} picture(s) on a card', environ, say)
+    if not allowed:
+        return 1
+    say(f'ledger: {ledger}')
     job_name = os.path.splitext(os.path.basename(parsed.job))[0] + '-' + file_checksum(scene)[:8]
     store = settings.store_folder
     remote = {'folder': f'{store}/place-jobs/{job_name}', 'uploads': f'{store}/place-jobs/uploads'}
@@ -430,11 +438,14 @@ def render_on_rented(parsed, client=None, environ=None, say=print):
     try:
         state = client.wait_for(job_id, minutes * 60 + 120)
     except RentStuck as problem:
+        card_time.log_small_jobs(ledger, helper, role, client.small_jobs, f'set-up for render job {os.path.basename(parsed.job)} (stopped: the job waited in line)')
         for line in lines:
             say(line)
         say('FAIL ' + str(problem))
         return 1
     summary = job_summary(state)
+    card_time.log_job(ledger, helper, role, summary, f'render job {os.path.basename(parsed.job)} ({pictures_asked} picture(s))')
+    card_time.log_small_jobs(ledger, helper, role, client.small_jobs, f'set-up for render job {os.path.basename(parsed.job)}')
     for line in lines:
         say(line)
     if state.get('status') != 'COMPLETED' or summary['return_code'] != 0:
@@ -486,11 +497,23 @@ def _print_json(parsed, payload):
 
 def main_command(parsed, client=None, environ=None):
     """The `rent` verb. Returns the exit code (see the note at the top)."""
+    ledger = helper = role = None
+    client_made_here = None
     try:
         action = parsed.action or 'status'
         settings = require_settings(environ)
         client = client or Client(WebTransport(settings))
+        client_made_here = client
         target = list(parsed.target or [])
+        if action in ('run', 'upload', 'status'):
+            # the card-time gate: a command that starts a paid step is refused when the helper's allowance is used up
+            estimate = float(numbers.value('place_card_time.estimated_wake_up_seconds')) + card_time.idle_tail_seconds() + (30.0 if action == 'run' else 0.0)
+            allowed, ledger, helper, role = card_time.before_paid_step(parsed, estimate, f'rent {action}', environ)
+            if not allowed:
+                return 1
+        else:
+            ledger = card_time.ledger_path(getattr(parsed, 'ledger', None), environ)
+            helper, role = card_time.who(parsed, environ)
         if action == 'status':
             _print_json(parsed, {**client.do({'op': 'ping'}), 'endpoint_health': client.transport.call('GET', '/health')})
         elif action == 'balance':
@@ -514,7 +537,10 @@ def main_command(parsed, client=None, environ=None):
             if not target:
                 raise RentProblem(f'rent {action} needs the job id')
             state = client.status(target[0]) if action == 'job' else client.wait_for(target[0], parsed.limit or 3600)
-            _print_json(parsed, job_summary(state))
+            summary = job_summary(state)
+            if summary['state'] == 'finished':
+                card_time.log_job(ledger, helper, role, summary, f'rent {action} {target[0]}')
+            _print_json(parsed, summary)
         elif action == 'download':
             if not target:
                 raise RentProblem('rent download needs the remote file or folder')
@@ -539,6 +565,9 @@ def main_command(parsed, client=None, environ=None):
     except RentFailed as problem:
         print(f'FAIL {scrubbed(problem, environ)}')
         return 1
+    finally:
+        if client_made_here is not None and ledger and getattr(client_made_here, 'small_jobs', None):
+            card_time.log_small_jobs(ledger, helper, role, client_made_here.small_jobs, f'rent {getattr(parsed, "action", None) or "status"}')
 
 
 def scrubbed(problem, environ=None):

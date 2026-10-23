@@ -2,7 +2,8 @@
 prism: a ground plane, four walls, a roof, a door and a few floor planks, each with a plain Principled material and no normal map, no wear, no bevel). It is the
 shape of thing a model builds when it is only told "make a hut": it passes the older model lint and must FAIL the place audit. One floor plank can float
 6 cm above the ground on purpose (the negative proof that the construction check can fail); --no-floating leaves it out.
-Run: blender -b --python make_hut_scene.py -- OUT.blend [--no-floating] [--no-light] [--roles-by-property]
+Run: blender -b --python make_hut_scene.py -- OUT.blend [--no-floating] [--no-light] [--roles-by-property] [--cameras]
+--cameras adds two cameras, "Camera A" (a wide view) and "Camera B" (a view of the door), for the variations tests.
 --roles-by-property also tags place_role on every object (the way a part builder would). The scene is a few boxes: it saves in about a second.
 """
 import math
@@ -13,7 +14,7 @@ import bmesh
 
 arguments = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 if not arguments or arguments[0].startswith('-'):
-    print('usage: blender -b --python make_hut_scene.py -- OUT.blend [--no-floating] [--no-light] [--roles-by-property]')
+    print('usage: blender -b --python make_hut_scene.py -- OUT.blend [--no-floating] [--no-light] [--roles-by-property] [--cameras]')
     sys.exit(2)
 out_path = arguments[0]
 floating = '--no-floating' not in arguments
@@ -97,5 +98,15 @@ if with_light:
     scene.world = bpy.data.worlds.new('world')
     scene.world.use_nodes = True
     scene.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.6
+if '--cameras' in arguments:
+    from mathutils import Vector
+    for camera_name, location, target in (('Camera A', (6.0, -6.5, 3.2), (0, 0, 1.2)), ('Camera B', (1.2, -5.0, 1.4), (0, -2.2, 1.0))):
+        camera_data = bpy.data.cameras.new(camera_name)
+        camera_object = bpy.data.objects.new(camera_name, camera_data)
+        camera_object.location = location
+        camera_object.rotation_euler = (Vector(target) - Vector(location)).to_track_quat('-Z', 'Y').to_euler()
+        scene.collection.objects.link(camera_object)
+        if scene.camera is None:
+            scene.camera = camera_object
 bpy.ops.wm.save_as_mainfile(filepath=out_path)
 print('saved', out_path)

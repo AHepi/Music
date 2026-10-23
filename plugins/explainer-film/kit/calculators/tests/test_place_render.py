@@ -26,10 +26,12 @@ from checks import Checker, KIT, FIXTURES, blender_program  # noqa: E402
 PLACE_KIT = os.path.join(KIT, 'place-kit')
 sys.path.insert(0, PLACE_KIT)
 folder = tempfile.mkdtemp(prefix='place-render-test-')
+os.environ['PLACE_CARD_LEDGER'] = os.path.join(folder, 'card-time-ledger.jsonl')      # every rented-card command writes a ledger: keep this test's out of the plugin folder
 os.environ['WORKER_VOLUME'] = os.path.join(folder, 'volume')
 os.makedirs(os.environ['WORKER_VOLUME'])
 
 from place_kit.render import client as rc  # noqa: E402
+from place_kit import card_time  # noqa: E402
 
 spec = importlib.util.spec_from_file_location('worker_handler', os.path.join(PLACE_KIT, 'place_kit', 'render', 'worker', 'handler.py'))
 handler = importlib.util.module_from_spec(spec)
@@ -87,7 +89,7 @@ class FakeClock:
 
 
 # ---------------------------------------------------------------- settings
-environment = {rc.KEY_NAME: FAKE_KEY, rc.ENDPOINT_NAME: FAKE_ENDPOINT}
+environment = {rc.KEY_NAME: FAKE_KEY, rc.ENDPOINT_NAME: FAKE_ENDPOINT, 'PLACE_CARD_LEDGER': os.path.join(folder, 'card-time-ledger-rent.jsonl')}
 settings = rc.read_settings(environment)
 check.equal('both settings from the environment are read', settings.missing(), [])
 check.true('the text form of the settings never shows a value', FAKE_KEY not in repr(settings) and FAKE_ENDPOINT not in repr(settings) and FAKE_KEY not in ' '.join(settings.describe()),
@@ -252,7 +254,7 @@ class Parsed:
     job, finals, engine, scene, json, out = job_path, False, 'auto', None, False, None
 
 
-rented_environment = {rc.KEY_NAME: FAKE_KEY, rc.ENDPOINT_NAME: FAKE_ENDPOINT, rc.STORE_NAME: store, rc.REMOTE_BLENDER_NAME: fake_blender}
+rented_environment = {rc.KEY_NAME: FAKE_KEY, rc.ENDPOINT_NAME: FAKE_ENDPOINT, rc.STORE_NAME: store, rc.REMOTE_BLENDER_NAME: fake_blender, 'PLACE_CARD_LEDGER': os.environ['PLACE_CARD_LEDGER']}
 said = []
 card = FakeCard()
 client = rc.Client(card, sleep=lambda seconds: None)
@@ -265,6 +267,19 @@ check.true('the scene and the maps beside it were uploaded', os.path.exists(os.p
 check.true('the kit was uploaded once to the store', os.path.exists(os.path.join(store, 'place-kit-run')) and any('blender_run.py' in names for _, _, names in os.walk(os.path.join(store, 'place-kit-run'))))
 check.true('the report names the work seconds and says a price is not a bill', 'billed work 1500 ms' in text and 'not a bill' in text)
 check.true('nothing the client printed holds the key or the endpoint id', FAKE_KEY not in text and FAKE_ENDPOINT not in text)
+ledger_entries, _ = card_time.read_ledger(os.environ['PLACE_CARD_LEDGER'])
+logged_jobs = [e for e in ledger_entries if e['kind'] == 'job']
+check.true('the render job is written into the card-time ledger with its billed seconds (work 1.5 + wake-up 0.7 + the idle tail 5 = 7.2)', len(logged_jobs) == 1 and logged_jobs[0]['card_seconds'] == 7.2 and logged_jobs[0]['helper'] == 'unnamed-helper',
+           f'{[(e["kind"], e["card_seconds"]) for e in ledger_entries]}')
+check.true('...and so are its small jobs (uploads, checks, the pictures coming back), as one entry', len([e for e in ledger_entries if e['kind'] == 'small']) == 1)
+Parsed.role = 'planner'
+card_refused = FakeCard()
+said_refused = []
+code_refused = rc.render_on_rented(Parsed, rc.Client(card_refused, sleep=lambda seconds: None), rented_environment, said_refused.append)
+check.true('a helper whose role has no card time is refused BEFORE anything is uploaded or sent (exit 1, no call, one plain FAIL line)', code_refused == 1 and card_refused.calls == [] and 'no card time' in '\n'.join(said_refused),
+           f'exit {code_refused}, {len(card_refused.calls)} call(s)')
+del Parsed.role
+rented_environment['PLACE_CARD_LEDGER'] = os.path.join(folder, 'card-time-ledger-later.jsonl')      # this test uploads in tiny pieces, which makes thousands of small jobs: the later runs start with a fresh ledger
 Parsed.finals = True
 said2 = []
 card2 = FakeCard()
