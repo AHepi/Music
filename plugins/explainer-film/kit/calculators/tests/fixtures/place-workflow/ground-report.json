@@ -1,6 +1,6 @@
 {
- "owner": "roads_and_ground",
- "stage_file": "/path/to/run/stages/stage_roads_and_ground.py",
+ "owner": "ground_and_water",
+ "stage_file": "/path/to/run/stages/stage_ground_and_water.py",
  "work_file": "/path/to/run/work/{owner}/part.blend",
  "steps_finished": "steps 1, 2 and 3",
  "objects_added": 412,
@@ -15,12 +15,12 @@
  "wear_preview_done": false,
  "claims": [
   {
-   "claim": "the ground has two ruts a cart gauge apart on every lane",
-   "measured_by": "a height profile across the lane, PLANT-4471"
+   "claim": "the ground has two ruts a cart gauge apart on every towpath",
+   "measured_by": "a height profile across the towpath, PLANT-4471"
   }
  ],
  "unsure": [
-  "PLANT-8821 the ridge of the thatch may be too regular"
+  "PLANT-8821 the joints between the coping stones may be too regular"
  ],
  "shared_problems": [
   "PLANT-6609 the shared lamp is slightly off centre"
@@ -37,8 +37,8 @@
  "ground_file": "/path/to/run/scene/ground.blend",
  "cameras": [
   "View wide",
-  "View lane_close",
+  "View towpath_close",
   "View detail_close"
  ],
- "ground_promise": "inside 1.2 m of each lane centre line the ground is as it is"
+ "ground_promise": "inside 1.2 m of each road centre line the ground is as it is"
 }

@@ -1,5 +1,5 @@
 """What this does: counts, for the audit, how many of the small scattered pieces (weeds, tufts, ferns, leaves, litter) stand where nothing may
-stand: inside a keep-out (worn track or kept-clear ground), on the crown of a lane, on a wheel track, in a puddle, or within 5 cm of litter.
+stand: inside a keep-out (worn track or kept-clear ground), on the crown of a road, on a wheel track, in a puddle, or within 5 cm of litter.
 All of these must be 0. The pieces are objects marked pk_scatter; each remembers its roots (one point per piece) in a small text block, so the
 count is made again from the roots and the plan masks, never taken from what the scatter said it did.
 It needs Blender (bpy) and numpy. A concrete example: scatter_facts(settings) returns {'groups': [{'name': 'tuft', 'group': 'plant', 'count': 80,

@@ -1,5 +1,5 @@
 """What this does: makes the PLAN MASKS: twelve small "where-pictures" of the ground plan that say, for every spot of the place, how low it lies
-(where water gathers), where the crown of a lane is, how much feet and wheels trample it, where nothing may grow or lie, how far it is from a wall,
+(where water gathers), where the crown of a road is, how much feet and wheels trample it, where nothing may grow or lie, how far it is from a wall,
 from a prop, from litter, how sheltered and how shady it is, how damp (low ground, shade, the foot of a wall and the margin of any water), whether it is above water, and where the wheel tracks run. Materials look
 them up by world x and y; the scatter uses them for exact keep-out gates; the audit counts against them. They are made with numpy only: the ground
 and the objects are painted into grids from above (plan2d.py), then combined. This is the lighter route of decision D4 of the 1.4.0 design (the

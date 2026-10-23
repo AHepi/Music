@@ -43,7 +43,7 @@ DO NOT COPY: <what looks wrong in it>.
 
 ## C. You own / you must not touch
 OWN: <objects, collections, materials>.
-DO NOT TOUCH: <every other part, by name>. Contracts with other builders: <e.g. "inside 1.2 m of the lane's centre line the
+DO NOT TOUCH: <every other part, by name>. Contracts with other builders: <e.g. "inside 1.2 m of the road's centre line the
 ground stays as it is">.
 
 ## D. Surface notes (roles and surfaces)

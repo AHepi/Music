@@ -1,6 +1,6 @@
 """What this does: the GROWTH step: stands small 3D plants and litter on the ground: tufts, clover, nettles, ferns, brambles, moss cushions (plants) and leaves, pine needles, sticks,
-straw and dung lumps (litter). Where each goes comes from the plan masks and the species' likings (damp, shady, the foot of walls, lane edges), cut by EXACT-ZERO gates: nothing
-on a wheel track, a worn path (footfall 0.6 or more), the crown of a lane (0.7 or more), kept-clear ground (0.5 or more), in a puddle, inside a wall or prop, and plants never within
+straw and clods (litter). Where each goes comes from the plan masks and the species' likings (damp, shady, the foot of walls, road edges), cut by EXACT-ZERO gates: nothing
+on a wheel track, a worn path (footfall 0.6 or more), the crown of a road (0.7 or more), kept-clear ground (0.5 or more), in a puddle, inside a wall or prop, and plants never within
 5 cm of a litter piece. The pieces are real geometry (pieces.py: chunky, designed shapes, several variants, sizes in a range of at least 3 to 1, colours pulled 45 percent toward grey),
 laid out in plain numpy and joined into a few meshes (one per kind), each marked pk_scatter so the construction check leaves it out, and each remembering its roots so the audit counts
 the keep-out cases again from the roots and the masks. Running it twice removes what the first run made and makes the same again (a fixed seed). It needs Blender (bpy) and numpy.
@@ -270,7 +270,7 @@ def place_group(group, settings, ground_objects, plan, amount, density_multiplie
 
 
 def scatter_litter(settings, ground_objects, plan, amount, density_multiplier=1.0, seed=1):
-    """Leaves, pine needles, sticks, straw, dung lumps. Returns (roots by kind, objects made)."""
+    """Leaves, pine needles, sticks, straw, clods. Returns (roots by kind, objects made)."""
     return place_group('litter', settings, ground_objects, plan, amount, density_multiplier, np.zeros((0, 3)), seed)
 
 
@@ -314,5 +314,5 @@ def grow_things(settings, owner=None, density=None):
     bpy.context.view_layer.update()
     plants = int(sum(len(r) for r in plant_roots.values()))
     litter = int(len(all_litter))
-    return {'summary': f'{plants} plant piece(s) and {litter} litter piece(s) in {len(plant_objects) + len(litter_objects)} object(s); none on a wheel track, a worn path, a lane crown, a puddle or within 5 cm of litter',
+    return {'summary': f'{plants} plant piece(s) and {litter} litter piece(s) in {len(plant_objects) + len(litter_objects)} object(s); none on a wheel track, a worn path, a road crown, a puddle or within 5 cm of litter',
             'plants': plants, 'litter': litter, 'objects': [o.name for o in plant_objects + litter_objects], 'removed': removed}

@@ -20,9 +20,10 @@ export const meta = {
 // request never has to mention surfaces or wear: the surface-and-wear pass (normal maps, displacement, dirt, grime, weathering,
 // wetness, moss, weeds, rust, cracks, chips, edge wear, rubbish, damage as shape), the construction check, the audit and the
 // preflight stage place, picture measures, fresh checkers who never see the builders' reports, and ONE fix round.
-// A concrete example: the request "Build a village in the forest. Needs unkept dirt roads like they've been driven down by horse
-// and carriage, an empty stable, a few cottages, some scattered mediaeval props." becomes a plan of five parts (roads_and_ground
-// first, then cottages, stable, props, forest_edge), five builders, one integrator, one renderer and four checkers.
+// A concrete example: the request "Build one side of a small canal lock: brick walls with stone coping, stone steps, a gravel
+// towpath, a timber gate and a few props." becomes a plan of four or five parts (ground_and_water first, then walls_and_steps,
+// lock_gate, props), one builder for each, one integrator, one renderer and four checkers. (The lock in the plugin's worked
+// examples was built by hand with the same steps.)
 //
 // The rules the script keeps: nothing is drawn unless the audit passed (or failed only on items the person accepted in writing);
 // at most two repair rounds before any picture, routed to the owners the audit names; exactly one fix round after the checkers;
@@ -35,8 +36,8 @@ export const meta = {
 //   plugin: '/path/to/explainer-film'              (required: the plugin folder, which holds agents/, skills/, bin/, kit/)
 //   kit: '/path/to/explainer-film/kit'             (required: the folder that holds place-kit/ and calculators/)
 //   folder: '/path/to/work/folder'                 (required: plan, scene, stages, reports, pictures and checks go in it)
-//   request: 'Build a village in the forest. ...'  (required: the person's words, exactly as written)
-//   place: 'village'                               (optional: the person's name for it)
+//   request: 'Build one side of a small canal lock ...'  (required: the person's words, exactly as written)
+//   place: 'canal lock'                            (optional: the person's name for it)
 //   scene: '/path/to/start.blend'                  (optional: a scene to start from; otherwise the ground builder makes an empty one)
 //   blender: '/path/to/blender'                    (optional: otherwise the commands look for it themselves)
 //   parts: [{ name, owner, brief }]                (optional: otherwise the planner proposes 3 to 8)
@@ -110,7 +111,7 @@ async function runQueued(items, cap, work) {
   const results = new Array(items.length).fill(null)
   if (!items.length) return results
   let next = 0
-  const lane = () => async () => {
+  const slot = () => async () => {
     while (next < items.length) {
       const index = next++
       try {
@@ -121,7 +122,7 @@ async function runQueued(items, cap, work) {
       }
     }
   }
-  await parallel(Array.from({ length: Math.min(cap, items.length) }, lane))
+  await parallel(Array.from({ length: Math.min(cap, items.length) }, slot))
   return results
 }
 
@@ -262,10 +263,10 @@ Return the plan in the shape asked.`
 
 const groundBlock = () => `YOU ARE THE GROUND PART and you go first, alone. Nothing else is built until you are done.
 Starting scene: ${ARGS.scene ? `${ARGS.scene} (copy it, never change the original)` : `none: make an empty scene and save it as ${START_FILE}`}.
-Make the ground (a plain rectangle gets a graded grid; any other shape is split in place and keeps its outline), the lane shapes, the verge and the puddle hollows; make the view cameras named in the views list and the sun (ownership.json lets you, through frozen.set_by); apply your stage file to the starting scene and save the result as ${GROUND_FILE}. The quick way, which also checks your stage file against the ownership table:
+Make the ground (a plain rectangle gets a graded grid; any other shape is split in place and keeps its outline), the road shapes, the verge and the puddle hollows; make the view cameras named in the views list and the sun (ownership.json lets you, through frozen.set_by); apply your stage file to the starting scene and save the result as ${GROUND_FILE}. The quick way, which also checks your stage file against the ownership table:
 explainer-film-place combine --scene ${START_FILE} --stages ${DIR.stages}/stage_${STATE.plan.ground_owner}.py --order plain --owners ${STATE.plan.files.ownership} --save-as ${GROUND_FILE}
 That file is then FROZEN: every other part is seated on it.
-No buildings and no props are yours. Say in ground_promise what the ground promises the others (for example "inside 1.2 m of each lane centre line the ground is as it is").`
+No buildings and no props are yours. Say in ground_promise what the ground promises the others (for example "inside 1.2 m of each road centre line the ground is as it is").`
 
 const buildBlock = (part) => `Work on your own COPY of ${GROUND_FILE}, saved as ${DIR.work}/${part.owner}/scene.blend, with your stage file applied to it (the frozen ground: never change the original, never save over it). Seat everything on it.`
 
@@ -658,7 +659,7 @@ function reportMarkdown() {
     ...Object.values(STATE.checks).flatMap((check) => check?.not_tested ?? []), ...(STATE.recheck?.not_tested ?? []),
   ])
   say(...(notTested.length ? notTested.map((line) => `- ${line}`) : ['- Nothing was reported as untested (check that this is believable).']))
-  say('- Not tested by this workflow at all: the place seen by the person, a blind reader who was never given any hint (the reading test was only ever run this way here), and the lighter plan masks and the Cycles runs of the kit on a village-size scene unless a log above says otherwise.')
+  say('- Not tested by this workflow at all: the place seen by the person, a blind reader who was never given any hint (the reading test was only ever run this way here), and the lighter plan masks and the Cycles runs of the kit on a scene much bigger than the small test places unless a log above says otherwise.')
   say('', '## Every failure and everything that came back empty')
   const failures = unique([
     ...STATE.missing.map((owner) => `part ${owner}: no report came back`),

@@ -14,6 +14,8 @@ or the endpoint switched off); it does not retry, purge or change anything. The 
 Actions of `explainer-film-place rent ...`: status, upload LOCAL [--remote PATH], run "COMMAND" [--cwd FOLDER] [--timeout SECONDS], job ID, wait ID [--limit SECONDS],
 download REMOTE [--local PATH], balance (read-only: the account's money left).
 Exit: 0 done, 1 a job failed or the wait was stopped, 2 a setting or input is missing or unusable.
+Card time: every job these actions send is written into the card-time ledger with its billed seconds (place_kit/card_time.py; --helper, --role, --ledger say whose and where), and `run` and
+`upload` and `render --where rented` are refused when the helper's allowance is used up (--over-allowance "reason" goes over by at most half again).
 A concrete example: with the three settings in place, `rent status` wakes a worker (about 20 to 25 s when none is warm) and says which card it has.
 """
 import base64
@@ -192,6 +194,7 @@ def file_checksum(path):
 class Client:
     def __init__(self, transport, sleep=time.sleep, clock=time.time, poll_seconds=3.0):
         self.transport, self.sleep, self.clock, self.poll_seconds = transport, sleep, clock, poll_seconds
+        self.small_jobs = []        # what each small job (a check, a piece of a file, a short command) billed: the card-time ledger writes them down
 
     # -- jobs
     def submit(self, job_input):
@@ -205,6 +208,7 @@ class Client:
         state = self.transport.call('POST', '/runsync', {'input': job_input})
         if state.get('status') not in DONE:
             state = self.wait_for(state['id'], limit)
+        self.small_jobs.append({'id': state.get('id'), 'work_ms': state.get('executionTime') or 0, 'wake_up_ms': state.get('delayTime') or 0})
         if state.get('status') != 'COMPLETED':
             raise RentFailed(f'job {state.get("id")} ended {state.get("status")}: {str(state.get("error") or state.get("output"))[:400]}')
         output = state.get('output') or {}

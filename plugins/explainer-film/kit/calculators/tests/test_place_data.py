@@ -2,7 +2,7 @@
 1. The six groups of check_presets pass on the kit as it is: every number has a kind and a source; the data files agree with each other; every REQUIRED treatment is made by a real
    function and proved by a test phrase; no kit code names a kind of place; no Blender code imports Pillow, OpenCV or SciPy; nothing private is written anywhere.
 2. The checker is not blind: on a copy of the kit with one planted fault at a time (a number with no source, a role with a surface that does not exist, a required treatment whose test
-   phrase is gone, the word "village" in code, an import of PIL in a Blender module, an email-like string, a key-looking value, a personal folder), the right group fails and names it.
+   phrase is gone, the word "harbour" in code, an import of PIL in a Blender module, an email-like string, a key-looking value, a personal folder), the right group fails and names it.
 3. The data make sense on their own: the four looks rise from kept to derelict in every layer; every dial default sits inside its range; every surface names a recipe that exists, a
    believable tile size and a valid palette; every plant kind has a size range of at least 3 to 1 and a builder that exists; every place type's allowed-off reasons are real sentences.
 4. The settings file reader: a model's plain settings are checked with plain-words problems (a bad look, a one-word off reason, a road with one point, an unknown role, an unknown
@@ -101,16 +101,16 @@ else:
 edit('data/treatments.json', '"function": "give_surfaces"', '"function": "no_such_function"')
 check.true('a required treatment whose maker function does not exist is caught (group 3)', any('no_such_function' in p for p in group(2)))
 edit('data/treatments.json', '"function": "no_such_function"', '"function": "give_surfaces"')
-append('place_kit/names.py', '\n# a plain comment about the village is not allowed in code\n')
-check.true('the word "village" in kit code is caught (group 4)', any('village' in p for p in group(3)))
-edit('place_kit/names.py', '# a plain comment about the village is not allowed in code\n', '')
+append('place_kit/names.py', '\n# a plain comment about the harbour is not allowed in code\n')
+check.true('the word "harbour" in kit code is caught (group 4)', any('harbour' in p for p in group(3)))
+edit('place_kit/names.py', '# a plain comment about the harbour is not allowed in code\n', '')
 append('place_kit/surfaces/heights.py', '\nimport PIL  # a Blender module may not import Pillow\n')
 check.true('an import of Pillow in a module that runs in Blender is caught (group 5)', any('PIL' in p or 'Pillow' in p for p in group(4)))
 edit('place_kit/surfaces/heights.py', '\nimport PIL  # a Blender module may not import Pillow\n', '')
 EMAIL = 'someone' + '@' + 'example.org'
-append('data/examples/forest-village-place-settings.json.note.md', f'write to {EMAIL}\n')
+append('data/examples/canal-lock-place-settings.json.note.md', f'write to {EMAIL}\n')
 check.true('an email-like string is caught (group 6)', any('email' in p for p in group(5)))
-os.remove(os.path.join(copy_kit, 'place-kit', 'data/examples/forest-village-place-settings.json.note.md'))
+os.remove(os.path.join(copy_kit, 'place-kit', 'data/examples/canal-lock-place-settings.json.note.md'))
 append('data/examples/key.md', 'api_key = "' + 'k' * 24 + '"\n')
 check.true('a key-looking value is caught (group 6)', any('key-looking' in p for p in group(5)))
 os.remove(os.path.join(copy_kit, 'place-kit', 'data/examples/key.md'))
@@ -177,7 +177,7 @@ banned = read('banned_place_nouns.json')
 check.true('the banned place words include the place kinds the design names', all(word in banned['banned_nouns'] for word in ('town', 'harbour', 'mine', 'farm', 'garden', 'interior', 'forest')))
 
 # ---------------------------------------------------------------- 4. the settings file reader
-good = {'place_type': 'village', 'look': 'neglected', 'state': 'damp', 'roads': [{'name': 'lane', 'polyline': [[0, 0], [10, 2]], 'width': 3.0, 'gauge': 1.3}],
+good = {'place_type': 'harbour', 'look': 'neglected', 'state': 'damp', 'roads': [{'name': 'road', 'polyline': [[0, 0], [10, 2]], 'width': 3.0, 'gauge': 1.3}],
         'off': [{'layer': 'moss_and_algae', 'roles': ['floor.*'], 'reason': 'inside the buildings: dry, nothing grows'}]}
 check.equal('a good settings dict has no problems', settings_file.validate(good), [])
 bad_cases = {
@@ -186,8 +186,8 @@ bad_cases = {
     'a place type that does not exist': ({'place_type': 'moon base'}, 'place_type'),
     'a one-word off reason': ({'off': [{'layer': 'dirt', 'roles': ['wall.*'], 'reason': 'n/a'}]}, '15 letters'),
     'an off entry for something that is not a treatment': ({'off': [{'layer': 'sparkle', 'roles': ['wall.*'], 'reason': 'because it is fine as it is'}]}, 'not a treatment'),
-    'a road with one point': ({'roads': [{'name': 'lane', 'polyline': [[0, 0]]}]}, 'at least two'),
-    'a road with a width of zero': ({'roads': [{'name': 'lane', 'polyline': [[0, 0], [1, 1]], 'width': 0}]}, '"width"'),
+    'a road with one point': ({'roads': [{'name': 'road', 'polyline': [[0, 0]]}]}, 'at least two'),
+    'a road with a width of zero': ({'roads': [{'name': 'road', 'polyline': [[0, 0], [1, 1]], 'width': 0}]}, '"width"'),
     'a role rule for a role that does not exist': ({'roles': [{'role': 'wall.paper', 'match': {'names': ['x']}}]}, 'wall.paper'),
     'a role rule that matches nothing': ({'roles': [{'role': 'wall.plaster'}]}, 'no "match"'),
     'a never rule with no reason': ({'never': [{'role': 'never.helper', 'match': {'names': ['x']}}]}, 'reason'),
@@ -200,8 +200,8 @@ for label, (settings_dict, word) in bad_cases.items():
 draft, report = settings_file.draft([{'name': 'wall 1', 'collections': [], 'materials': [], 'properties': {}}, {'name': 'qqq xyz', 'collections': [], 'materials': [], 'properties': {}}], 'a place', 'generic')
 check.true('a draft lists the object it could not classify, with the cheapest fix', report['unknown'] and 'qqq xyz' in report['unknown'][0]['name'] and 'role' in report['unknown'][0]['fix'])
 check.true('a draft starts from the place type (the generic type gives the indoor-floor off entries)', any(e['layer'] == 'plants' for e in draft['off']))
-merged = settings_file.merged({'place_type': 'village', 'look': 'derelict'})
-check.true("the place's own look wins over the place type's default look, the type's state default stays", merged['look'] == 'derelict' and merged['state'] == 'damp')
+merged = settings_file.merged({'place_type': 'harbour', 'look': 'derelict'})
+check.true("the place's own look wins over the place type's default look, the type's state default stays (the harbour starts wet, the generic default is dry)", merged['look'] == 'derelict' and merged['state'] == 'wet')
 check.true('the place type\'s off entries come with their reasons', all(len(e['reason']) >= 15 for e in merged['off']))
 try:
     settings_file.look('shiny')
@@ -209,12 +209,12 @@ try:
 except ValueError as problem:
     raised = str(problem)
 check.true('an unknown look stops with the known ones named', 'kept' in raised and 'derelict' in raised, raised)
-for example in ('forest-village-place-settings.json', 'forest-village-ownership.json'):
+for example in ('canal-lock-place-settings.json', 'canal-lock-ownership.json'):
     check.true(f'the example {example} exists and is valid JSON', os.path.exists(os.path.join(data_dir, 'examples', example)))
-example_settings = read('examples', 'forest-village-place-settings.json')
+example_settings = read('examples', 'canal-lock-place-settings.json')
 check.equal('the example place settings pass the reader', settings_file.validate(settings_file.merged(example_settings)), [])
-example_owners = read('examples', 'forest-village-ownership.json')
-check.true('the example ownership names five owners and freezes the cameras, lights, world and render settings', len(example_owners['owners']) == 5 and all(example_owners['frozen'].values()))
+example_owners = read('examples', 'canal-lock-ownership.json')
+check.true('the example ownership names four owners and freezes the cameras, lights, world and render settings', len(example_owners['owners']) == 4 and all(example_owners['frozen'].values()))
 template = os.path.join(data_dir, 'templates', 'stage_template.py')
 try:
     py_compile.compile(template, cfile=os.path.join(copy_root, 'stage_template.pyc'), doraise=True)
@@ -249,7 +249,7 @@ check.true('the numbers the 1.4.0 fix round added are there: a part may sit 4 cm
            and house_numbers.value('place_audit.fallback_role_share_fail') == 0.15 and house_numbers.value('place_render.cycles_when_water_in_view') is True)
 rut_sources = ' '.join(table['place_wear'][key]['source'] for key in ('rut_depth_metres', 'ground_relief_metres_min'))
 check.true('the rut-depth numbers cite the coal yard\'s real 0.15 m (the 4 to 9 cm of the first design was a wrong memory)', '4 to 9' not in rut_sources and '0.15' in rut_sources, rut_sources[:160])
-shallow = settings_file.road_warnings({'roads': [{'name': 'towpath', 'polyline': [[0, 0], [5, 0]], 'rut_depth': 0.025}, {'name': 'lane', 'polyline': [[0, 0], [5, 0]], 'rut_depth': 0.08}]})
+shallow = settings_file.road_warnings({'roads': [{'name': 'towpath', 'polyline': [[0, 0], [5, 0]], 'rut_depth': 0.025}, {'name': 'road', 'polyline': [[0, 0], [5, 0]], 'rut_depth': 0.08}]})
 check.true('a rut of 2.5 cm is warned about by name (the audit would fail its relief later), a rut of 8 cm is not', len(shallow) == 1 and 'towpath' in shallow[0] and 'at least' in shallow[0], str(shallow))
 check.equal('a road with no rut_depth written has nothing to warn about', settings_file.road_warnings({'roads': [{'name': 'x', 'polyline': [[0, 0], [1, 0]]}]}), [])
 try:

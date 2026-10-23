@@ -1,18 +1,22 @@
 {
- "about": "Starting preset for a village or hamlet. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
+ "about": "Starting preset for a village or hamlet: houses, a road or two, fences and gardens. It names no one kind of wall, roof, ground or climate more than another. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
  "id": "village",
  "default_look": "lived_in",
- "default_state": "damp",
+ "default_state": "dry",
  "roles_likely": [
   "ground.dirt_road",
-  "ground.forest_floor",
-  "wall.timber_frame",
+  "ground.stone_paving",
+  "ground.grass",
+  "wall.stone",
+  "wall.brick",
   "wall.plaster",
+  "wall.timber_frame",
+  "roof.tile",
+  "roof.slate",
+  "roof.shingle",
   "roof.thatch",
-  "timber.post",
-  "stone.footing",
-  "prop.barrel",
-  "tree.bark"
+  "timber.door",
+  "glass.window"
  ],
  "require_more": {},
  "allowed_off": [
@@ -47,11 +51,10 @@
  "facts": [
   "door_height",
   "door_width",
-  "cart_gauge",
   "roof_pitch",
   "wall_thickness"
  ],
- "notes": "dirt lanes with ruts, timber and thatch, trees close by",
+ "notes": "walls of stone, brick, plaster or timber under roofs of tile, slate, shingle or thatch; roads paved or unpaved; the person's words choose the materials, the climate and the look",
  "kind": "invented",
  "source": "the plugin 1.4.0 design: a first try, judge by looking"
 }

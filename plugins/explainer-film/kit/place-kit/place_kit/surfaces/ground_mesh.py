@@ -1,14 +1,14 @@
 """What this does: makes ground FINE ENOUGH for real displacement and shaped ruts, in the way that suits its shape (make_fine is the one entry point).
 A ground mesh is judged coarse by its real mean square (the square root of its area divided by its face count), not by its box, so a long thin strip of 0.1 m squares is
 fine and is left alone. A coarse ground that is a plain RECTANGLE (one outline, no holes, filling its box) gets a GRADED GRID: small squares near the camera (0.12 m) that grow
-a step at a time (1.09 times) to large ones far away (5 m), keeping the height of the old ground (read by a ray from above). Any other coarse ground (a curved lane, a
+a step at a time (1.09 times) to large ones far away (5 m), keeping the height of the old ground (read by a ray from above). Any other coarse ground (a curved road, a
 ground with a trench or a hole cut in it, a turned rectangle) is SUBDIVIDED IN PLACE: every face is split in four, as often as needed, so its outline and its holes stay exactly
-as the builder made them (an earlier version replaced every ground by a grid over its box: a curved lane became a rectangle and a trench was filled in). The old mesh is kept with
+as the builder made them (an earlier version replaced every ground by a grid over its box: a curved road became a rectangle and a trench was filled in). The old mesh is kept with
 a fake user so undo can swap it back, and the ground's outline area before the change is written on the object (pk_area_before) so the audit can see if it ever grows.
 The grid's squares are laid out in plain numpy (graded_axis, graded_grid, is_coarse: tested without Blender). The numbers come from an earlier test yard
 (house numbers place_surfaces.displacement_graded_grid_*). It needs numpy; the rest needs Blender (bpy).
 A concrete example: graded_axis(0, 14, near=7, near_cell=0.12, growth=1.09, far_cell=5) gives the x lines of a 14 m ground: 0.12 m apart around x = 7; make_fine(lane_strip, ...)
-on a curved 160 square metre lane of 20 big faces splits it five times (20480 faces of about 9 cm) and the lane is still curved.
+on a curved 160 square metre road of 20 big faces splits it five times (20480 faces of about 9 cm) and the road is still curved.
 """
 import math
 
@@ -235,5 +235,5 @@ def make_fine(obj, near_xy, limit, uniform_cell=None, face_cap=150000):
     shape = f'{facts["boundary_loops"]} outline(s)' + (f', {facts["pieces"]} pieces' if facts['pieces'] > 1 else '')
     if report is None:
         return (f'LOOK {obj.name}: not a plain rectangle ({shape}) and too coarse (squares of {mean_cell_metres(facts["area"], facts["faces"]):.2f} m, over the {limit} m limit), '
-                f'but splitting it would pass {face_cap} faces: make its mesh finer yourself near the lane, or cut it into smaller ground objects')
+                f'but splitting it would pass {face_cap} faces: make its mesh finer yourself near the road, or cut it into smaller ground objects')
     return f'{obj.name}: split in place {report["levels"]} time(s) to {report["faces"]} faces of about {report["cell"]} m; its outline ({shape}) is unchanged'

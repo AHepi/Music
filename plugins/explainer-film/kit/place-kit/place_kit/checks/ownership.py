@@ -4,7 +4,7 @@ stage just ran (the actor), these are VIOLATIONS: an object or material of anoth
 changed, a name that is not the actor's. The ONE exception is the owner named in ownership.json under frozen.set_by (the ground part, which is built first): it makes the view cameras, the lights,
 the world and the render settings, and from then on they are frozen for everyone else (a camera or light it makes needs no place_owner). Without set_by nobody may change them. These are WARNINGS: new ".001" names (a copy made by accident). Without an actor only the actor-free violations are found. Plain Python (no Blender),
 so it is tested with made-up fingerprints.
-A concrete example: diff(start, end, owners, actor='huts') says "huts changed the object 'lane' owned by 'roads_and_ground'" when the lane's mesh hash differs.
+A concrete example: diff(start, end, owners, actor='huts') says "huts changed the object 'road' owned by 'roads_and_ground'" when the road's mesh hash differs.
 """
 import json
 import re

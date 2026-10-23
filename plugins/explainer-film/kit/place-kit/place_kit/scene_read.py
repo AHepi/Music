@@ -147,10 +147,10 @@ def surface_samples(obj, count=6000):
     return picked[:, 0] + (picked[:, 1] - picked[:, 0]) * u[:, None] + (picked[:, 2] - picked[:, 0]) * v[:, None]
 
 
-def lane_skeleton(obj, stations=12):
-    """The centre line and width of a lane-shaped ground object, from its own mesh: ([[x, y], ...], width in metres). The mesh is cut into slices along its long direction and the average
-    point of each slice is one point of the line (the first and last slices are narrow, so the line reaches the lane's ends), so a lane that curves gets a curved line. The width is the
-    lane's area divided by the length of that line (a slice across a curve would read too wide). A lane that bends back on itself (a U) cannot be read this way: write its line in the settings."""
+def road_skeleton(obj, stations=12):
+    """The centre line and width of a road-shaped ground object, from its own mesh: ([[x, y], ...], width in metres). The mesh is cut into slices along its long direction and the average
+    point of each slice is one point of the line (the first and last slices are narrow, so the line reaches the road's ends), so a road that curves gets a curved line. The width is the
+    road's area divided by the length of that line (a slice across a curve would read too wide). A road that bends back on itself (a U) cannot be read this way: write its line in the settings."""
     xy = surface_samples(obj)[:, :2]
     centre = xy.mean(axis=0)
     _, _, vt = np.linalg.svd(xy - centre, full_matrices=False)

@@ -1,12 +1,13 @@
-"""What this does: shapes ROADS as real geometry: for a lane driven down by horses and carts, two wheel ruts a gauge apart (each a few centimetres to a hand deep, with a
-little wobble in depth and line), a raised bank beside each rut, a trodden centre strip with hoof prints (round dimples about 12 to 14 cm across, one every 0.8 to 1.0 m, left and
-right in turn), optionally a low crown of grass between the wheel lines on a lightly used lane, and puddle hollows in the bottoms of some ruts. All of it is a plain numpy HEIGHT
-FUNCTION of position (lane_height_offset: tested without Blender); shape_roads moves the vertices of the ground object(s) the road lies on, after making the mesh fine enough
-(a coarse ground mesh is first made fine by ground_mesh.make_fine: a grid for a plain rectangle, a split in place for any other shape, so a curved lane stays curved and a trench stays a trench). It remembers each ground vertex's own height (a vertex attribute), so shaping twice gives the
+"""What this does: shapes ROADS as real geometry: for a dirt road that carts or other wheeled vehicles drive on, two wheel ruts a gauge apart (each a few centimetres to a hand deep, with a
+little wobble in depth and line), a raised bank beside each rut, optionally a low crown of grass between the wheel lines on a lightly used road, optionally hoof prints down the middle
+(round dimples about 12 to 14 cm across, one every 0.8 to 1.0 m, left and right in turn: for a track that animals walk, such as a field track or a towpath; off unless the settings say "hoof": true),
+and puddle hollows in the bottoms of some ruts. All of it is a plain numpy HEIGHT
+FUNCTION of position (road_height_offset: tested without Blender); shape_roads moves the vertices of the ground object(s) the road lies on, after making the mesh fine enough
+(a coarse ground mesh is first made fine by ground_mesh.make_fine: a grid for a plain rectangle, a split in place for any other shape, so a curved road stays curved and a trench stays a trench). It remembers each ground vertex's own height (a vertex attribute), so shaping twice gives the
 same ground, not a ground dug twice. audit_roads measures the finished ground (from the real surface by rays, not from what the shaper meant to do) and says whether two ruts a gauge apart
-are really there. The numbers are first tries (rut depth 5 to 15 cm, hoof spacing 0.8 to 1.0 m: invented; an earlier test yard's own ruts are 0.15 m deep, gauge 1.24 m); the cart gauge is a fact to confirm.
+are really there. The numbers are first tries (rut depth 5 to 15 cm, hoof spacing 0.8 to 1.0 m: invented; a coal yard built earlier in this project has ruts 0.15 m deep and 1.24 m apart: measured in its build code); the cart gauge is a fact to confirm.
 It needs numpy (the height function) and Blender (bpy) for the rest.
-A concrete example: lane_height_offset(points, road) for a point on a wheel track gives about -0.08 (the rut depth) and for a point on the bank beside it a small positive number.
+A concrete example: road_height_offset(points, road) for a point on a wheel track gives about -0.08 (the rut depth) and for a point on the bank beside it a small positive number.
 """
 import json
 import math
@@ -19,23 +20,23 @@ RUT_WIDTH_DEFAULT = 0.18
 BANK_SHARE = 0.3                  # the bank beside a rut stands about this share of the rut's depth
 HOOF_RADIUS = 0.065
 HOOF_DEPTH = 0.02
-LANE_FADE_METRES = 0.4
+ROAD_FADE_METRES = 0.4
 CROWN_HEIGHT = 0.02
 NEAR_CELL_METRES = 0.12
 UNIFORM_FACE_CAP = 150000
 
 
 def _wobble(distance, seed, scale=1.0):
-    """A smooth repeatable number in [-1, 1] along the lane (a few incommensurate waves)."""
+    """A smooth repeatable number in [-1, 1] along the road (a few incommensurate waves)."""
     rng = np.random.default_rng(int(seed))
     phases = rng.uniform(0, 2 * math.pi, 4)
     return (np.sin(distance / (7.0 * scale) + phases[0]) * 0.45 + np.sin(distance / (2.9 * scale) + phases[1]) * 0.3
             + np.sin(distance / (1.3 * scale) + phases[2]) * 0.15 + np.sin(distance / (0.55 * scale) + phases[3]) * 0.1)
 
 
-def lane_height_offset(points, road, seed=1):
+def road_height_offset(points, road, seed=1):
     """The change of ground height (metres, negative = lower) at each point (n, 2) from this road's ruts, banks, hoof prints, crown and puddle hollows.
-    Also returns the rut mask (0..1, 1 in a wheel rut). Points farther than the lane's width plus a fade get 0."""
+    Also returns the rut mask (0..1, 1 in a wheel rut). Points farther than the road's width plus a fade get 0."""
     p = np.asarray(points, dtype=np.float64).reshape(-1, 2)
     polyline = road['polyline']
     distance, side, along = plan2d.distance_to_polyline(p, polyline)
@@ -66,7 +67,7 @@ def lane_height_offset(points, road, seed=1):
         dz -= HOOF_DEPTH * np.exp(-((radial / (HOOF_RADIUS * 0.8)) ** 2)) * (centre > 0.15)
     hollow = np.clip((_wobble(along, seed + 23, 2.5) - 0.35) / 0.3, 0.0, 1.0)
     dz -= 0.03 * hollow * rut
-    fade = 1.0 - plan2d.smoothstep(width / 2.0, width / 2.0 + LANE_FADE_METRES, distance)
+    fade = 1.0 - plan2d.smoothstep(width / 2.0, width / 2.0 + ROAD_FADE_METRES, distance)
     return dz * fade, rut * fade
 
 
@@ -76,7 +77,7 @@ def total_offset(points, roads, seed=1):
     dz = np.zeros(len(p))
     rut = np.zeros(len(p))
     for index, road in enumerate(roads):
-        d, r = lane_height_offset(p, road, seed + 101 * index)
+        d, r = road_height_offset(p, road, seed + 101 * index)
         dz += d
         rut = np.maximum(rut, r)
     return dz, rut
@@ -85,7 +86,7 @@ def total_offset(points, roads, seed=1):
 # ------------------------------------------------------------------ Blender side
 def _road_box(roads):
     pts = np.vstack([np.asarray(r['polyline'], dtype=float) for r in roads])
-    margin = max(float(r.get('width', 3.0)) for r in roads) / 2.0 + LANE_FADE_METRES + 1.0
+    margin = max(float(r.get('width', 3.0)) for r in roads) / 2.0 + ROAD_FADE_METRES + 1.0
     return pts.min(axis=0) - margin, pts.max(axis=0) + margin
 
 
@@ -103,7 +104,7 @@ def ground_objects_for(roads, objects):
 
 def make_fine(obj, roads):
     """Makes the ground object fine enough for ruts, in the way that suits its shape (ground_mesh.make_fine): a plain rectangle gets a uniform grid of 0.12 m squares when that is
-    not too many faces, else a graded grid around the road; any other coarse ground (a curved lane, a ground with a trench cut in it) is split in place so its outline and holes stay.
+    not too many faces, else a graded grid around the road; any other coarse ground (a curved road, a ground with a trench cut in it) is split in place so its outline and holes stay.
     Returns a sentence or None."""
     from .. import house_numbers
     from . import ground_mesh
@@ -165,7 +166,7 @@ def shape_roads(settings):
 
 
 def measure_ruts(road, ground_height, stations=9):
-    """From the real ground (ground_height(x, y) by rays): across the lane at several stations along the road, where the two lowest points lie and how deep they are below the
+    """From the real ground (ground_height(x, y) by rays): across the road at several stations along the road, where the two lowest points lie and how deep they are below the
     banks. Returns {'ruts_found': bool, 'depth_m': median depth, 'gauge_m': median distance between the two ruts}."""
     polyline = np.asarray(road['polyline'], dtype=float)
     distance, _, _ = plan2d.distance_to_polyline(polyline[:1], polyline)

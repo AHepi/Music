@@ -2,7 +2,7 @@
 bottom of walls, and NEVER where feet or wheels pass or where the settings keep things clear (exact zero on those masks). The moss is never brighter than the surface it grows
 on (an earlier fix: lime-bright moss on stone looked wrong), a little rougher, with a soft bump. Reads the masks Dampness, Shade, Footfall, Keepclear, Track, Height Share and
 the dials cover, clump_size_metres, damp_need, shade_need. Amount 0 gives exactly the input. Needs Blender (bpy).
-A concrete example: on a north wall foot in the shade moss spreads in 15 cm clumps; on the wheel tracks of a lane it is exactly 0.
+A concrete example: on a north wall foot in the shade moss spreads in 15 cm clumps; on the wheel tracks of a road it is exactly 0.
 """
 from ..layer_base import LayerBase, linear
 

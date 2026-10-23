@@ -377,7 +377,7 @@ for path in sorted(glob.glob(os.path.join(SKILL_FOLDER, '*.md'))):
             loose.append(f'{os.path.basename(path)}: `{name}`')
 check.true('every plain file name ending in .md written in the new skill is a file of the plugin', not loose, details='; '.join(loose) or 'all are')
 expected = ['SKILL.md', 'the-required-steps.md', 'surface-recipes.md', 'wear-recipes.md', 'construction-and-scale.md',
-            'style-rule-and-measures.md', 'fresh-checkers.md', 'rendering-on-rented-cards.md', 'a-forest-village-example.md', 'blender-5-traps.md']
+            'style-rule-and-measures.md', 'fresh-checkers.md', 'rendering-on-rented-cards.md', 'worked-examples-garden-and-canal-lock.md', 'blender-5-traps.md']
 missing = [n for n in expected if not os.path.exists(os.path.join(SKILL_FOLDER, n))]
 check.true('the new skill folder holds all ten files', not missing, details=', '.join(missing) or 'all ten')
 

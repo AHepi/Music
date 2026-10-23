@@ -1,6 +1,6 @@
 """What this does: builds the small 3D PIECES the scatter stands on the ground, as numpy arrays (vertices and faces), in code and in a designed, slightly chunky style:
 a tuft of 5 to 9 folded blades, a low rosette of round leaves, a tall stalk with toothed leaves (nettle), an arching frond (fern), an arching stem (bramble), a lumpy moss
-cushion, a single leaf, a clump of pine needles, a bent stick, a few straws and a dung lump. Every kind is made in several VARIANTS (at least 8 tuft meshes), each at a
+cushion, a single leaf, a clump of pine needles, a bent stick, a few straws and a clod (a lump of earth). Every kind is made in several VARIANTS (at least 8 tuft meshes), each at a
 height of 1 unit with its root at the origin and z up; the scatter scales them (a range of at least 3 to 1) and tints them. No photographic noise: few, big, clean shapes.
 Plain numpy, no Blender, so it is tested without Blender. A piece is {'vertices': (n, 3), 'faces': [tuple of vertex numbers]}.
 A concrete example: make_variants('tuft', 8, seed=1) gives eight different tufts, each with 5 to 9 blades; every vertex has z between 0 and about 1.

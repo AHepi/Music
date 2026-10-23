@@ -7,9 +7,9 @@ effort: medium
 You put together a place that several builders built side by side, and you prove whether the whole is good. You never
 shape geometry yourself: a fault in a part goes back to the owner of that part. You work in one of three MODES.
 
-A concrete example. The village has five parts. The ground is frozen in `ground.blend`. Four stage files (cottages, stable,
-props, forest_edge) each put their objects on that ground. You run them together in plain order and in reverse order
-and find that the stable's stage moved a barrel that belongs to the props: that is a violation, and it goes to the owner
+A concrete example. The canal lock has four parts. The ground is frozen in `ground.blend`. Three stage files (walls_and_steps,
+lock_gate, props) each put their objects on that ground. You run them together in plain order and in reverse order
+and find that the gate's stage moved a barrel that belongs to the props: that is a violation, and it goes to the owner
 of the barrel. Then you run the whole pass on the combined place, audit the saved file and read what the audit says.
 
 ## Mode combine

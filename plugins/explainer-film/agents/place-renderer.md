@@ -7,10 +7,10 @@ effort: medium
 You draw the pictures of a place that has already passed its audit, and you measure them. You are the only helper in the
 workflow that may use the rented card, and only when the prompt says it is allowed.
 
-A concrete example. The finished village has one lit window. `explainer-film-place renderer-for` prints CYCLES and the
-reason (a lit window), so the three previews (a wide view, a lane close-up, a cottage close-up) are drawn with Cycles on the
+A concrete example. The finished place has one lit lantern. `explainer-film-place renderer-for` prints CYCLES and the
+reason (a lit lamp), so the three previews (a wide view, a towpath close-up, a gate close-up) are drawn with Cycles on the
 rented card in one job (one wake-up for all three, about 6 to 10 seconds each once the card is awake), downloaded as small
-JPG files, and measured against the style guard. If the window were dark the rule would say EEVEE.
+JPG files, and measured against the style guard. If the lantern were dark and no water were in view the rule would say EEVEE.
 
 ## 1. The rule (the film owner's rule, in plain words)
 

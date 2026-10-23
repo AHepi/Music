@@ -1,9 +1,9 @@
 """What this does: THE ONE DOOR for wear. age_place puts the nine wear layers into the materials of a place by role, in their fixed order, with amounts from the look (kept,
-lived_in, neglected, derelict), the state (dry, damp, wet) and the role (a lane gets more dirt, a wall less), and writes on every object the property pk_<layer>_amount for each
+lived_in, neglected, derelict), the state (dry, damp, wet) and the role (a road gets more dirt, a wall less), and writes on every object the property pk_<layer>_amount for each
 layer in its materials (an Attribute node on an object without the property reads 0 in every renderer, so a layer would silently do nothing: the audit checks these). It returns a
 Wear handle with the master controls: set_master (one number that scales everything; 0 gives exactly the picture without any wear), set_layer_master, set_dials, layer_off and
 layer_on (take a layer out of every chain and put it back), set_state, report and remove (everything off, every material as it was).
-Layers a role does not need (rust on thatch) are not put in; a layer the settings switch off with a reason (an 'off' entry) is not put in either and the audit shows it as KNOWN.
+Layers a role does not need (rust on wood) are not put in; a layer the settings switch off with a reason (an 'off' entry) is not put in either and the audit shows it as KNOWN.
 set_picture_size(camera, height_pixels) tells every layer how big one picture dot is in metres at that camera, so marks are sized in picture dots (a crack is never thinner
 than three dots). It needs Blender (bpy).
 A concrete example: wear = age_place(settings, look='neglected', state='damp'); wear.set_master(0.0) leaves the picture exactly as before; wear.set_state('wet') makes it wetter.

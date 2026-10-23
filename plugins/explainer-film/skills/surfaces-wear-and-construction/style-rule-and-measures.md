@@ -71,8 +71,7 @@ vanishes under one of them is not carrying the place.
 
 ## What the measures cannot judge
 
-A measure is not a look. The eye decides whether a worn lane reads as driven by carts and not as noise, whether an empty
-stable reads empty-but-used and not deserted, whether wear reads as designed and not photographic, whether a mark that
+A measure is not a look. The eye decides whether a worn road reads as worn by use and not as noise, whether wear reads as designed and not photographic, whether a mark that
 passes the dot-size rule still reads at phone size, and whether a squint miss is acceptable. The tips guide (section 19)
 lists them for critics. The reading test (a reviewer names the features at half size) was never run with a truly blind
 reviewer before this version; the workflow `build-a-place` runs it blind, and its 12-of-16 line is a judgement.

@@ -52,7 +52,7 @@ below was reproduced, fixed, and given a test that ALSO shows the old behaviour 
 1. **A scene whose objects had no material at all passed the audit** (the treatments were counted material by material, so no material meant nothing to fail). The audit now lists every
    treatment missing on an object with no kit material, and the judge fails it; plants and litter are required per ground role whatever the materials. (`test_place_audit_check.py`, `test_place_fixes.py`.)
 2. **`undo` crashed after the kit itself had added the sun** (it read the light's name after removing the object). Names are read first now.
-3. **A lane drawn as one curved strip was replaced by a grid over its whole box**, and a hole cut in a towpath was filled (which also moved the steps in it up 2 m, silently). Coarseness is
+3. **A road drawn as one curved strip was replaced by a grid over its whole box**, and a hole cut in a towpath was filled (which also moved the steps in it up 2 m, silently). Coarseness is
    now judged from the area per face; a plain rectangle is regraded, any other outline is subdivided in place and keeps its shape and holes; the audit fails a ground whose area grew more than
    1.5 times (`pk_area_before`); and `finish` prints every object a re-seat moved by more than 3 cm, with the distance.
 4. **The ground-seat check read the raw box corners**, while `seat_on_ground` reads points pulled in. Both use the same footprint points now, a point with no ground under it is unknown (not
@@ -80,7 +80,7 @@ below was reproduced, fixed, and given a test that ALSO shows the old behaviour 
     All three fixed (oriented size, flipped winding, lamps skipped for the sun).
 17. **The ground part could not make the cameras it was told to make** (they are frozen for everyone). `frozen.set_by` in the ownership file names the one owner that may make them.
 18. **A plain request never got ruts.** `finish` drafted `roads: []`. It now drafts a road entry for every object with a road role (centre line from the object's shape, the width from its short side) and
-    takes `--type` and `--place`; the lane's centre line is read from the lane skeleton (its ends can be about 1 m short, and a U-shaped lane cannot be read: write the polyline).
+    takes `--type` and `--place`; the road's centre line is read from the road skeleton (its ends can be about 1 m short, and a U-shaped road cannot be read: write the polyline).
 19. **The rented-card client printed the endpoint id in one error, and the docs and the code disagreed about the settings file.** Messages never hold the part of the address after `/v2/` and every message is scrubbed;
     the client reads `NAME=VALUE` lines and a JSON file; the default store folder is `/workspace` everywhere. (`test_place_render.py`.)
 20. **`render --where auto` kept previews tiny even when the renderer is Cycles and a card is set up.** It now sends them to the card (and says so). A water-in-view scene draws with Cycles (switchable:
@@ -167,12 +167,12 @@ Each of these is small, has its own test, and leaves the old behaviour reachable
 
 ## Left out or not done (said plainly)
 
-- **A real village was not built here.** The tests built a one-hut place and a 36 by 26 m yard (41 objects, one lane). The wear,
+- **A large place was not built here.** The tests built a one-hut place and a 36 by 26 m yard (41 objects, one road); a smoke test by hand built a 12 m canal lock (94 objects). The wear,
   growth, masks and audit were not tried at hundreds of buildings, and Cycles with the kit was not run on a place that size.
 - **The rented-card client was never run against a real endpoint.** The endpoint was switched off while this was made and the
   person's settings were never read. The tests send its jobs to a pretend card that hands each one to the real job taker. The
   `balance` action (a read-only query of the money left) was written from RunPod's documented query and never run.
 - **The style guard is provisional.** It is made from the first honest picture and locks in whatever that picture looked like until
   a person accepts it; the preflight says so as a LOOK.
-- **Visual quality is judged, not measured.** The plaster has seams and hairline cracks and the lane shows ruts, but nobody has
+- **Visual quality is judged, not measured.** The plaster has seams and hairline cracks and the road shows ruts, but nobody has
   decided yet whether they look right; fresh checkers and the person's own eyes do that.

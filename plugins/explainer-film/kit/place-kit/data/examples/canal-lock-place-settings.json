@@ -1,0 +1,43 @@
+{
+ "about": "An EXAMPLE place-settings.json for a small canal lock side that was really built and finished with this kit (the plugin 1.4.0 smoke test): a 12 m brick lock wall with stone coping, a flight of stone steps down a trench, a gravel towpath, a two-leaf timber gate with balance beams and five props. Copy the shape, never the content: the names, roads and numbers below are this example's own. Every key is optional; an empty file means a lived-in place, dry, every role from object names. A canal has no place type of its own, so it started from the nearest one (harbour) and the look and the state were then set by hand. The smoke test tagged every object with its role as it was made, so its real file had no role rules; the ones below show how a rule is written.",
+ "place": "canal lock side",
+ "place_type": "harbour",
+ "look": "lived_in",
+ "state": "damp",
+ "seed": 1,
+ "owners": "canal-lock-ownership.json",
+ "roles": [
+  {"role": "ground.mud", "match": {"names": ["^Ground canal bed"]}},
+  {"role": "ground.gravel", "match": {"names": ["^Ground towpath"]}},
+  {"role": "ground.grass", "match": {"names": ["verge$"]}},
+  {"role": "water.still", "match": {"names": ["^Water"]}},
+  {"role": "wall.brick", "match": {"names": ["^Wall"]}},
+  {"role": "stone.footing", "match": {"names": ["^Coping", "^Trench", "^Flight"]}},
+  {"role": "stone.step", "match": {"names": ["^Step \\d", "^Step landing"]}},
+  {"role": "timber.beam", "match": {"names": ["balance beam"]}},
+  {"role": "timber.post", "match": {"names": ["post$"]}},
+  {"role": "timber.fence", "match": {"names": ["rail \\d"]}},
+  {"role": "timber.plank", "match": {"names": ["board \\d"]}},
+  {"role": "iron.fitting", "match": {"names": ["strap", "band \\d"]}},
+  {"role": "iron.painted", "match": {"names": ["^Prop bollard"]}},
+  {"role": "prop.crate", "match": {"names": ["^Prop crate"]}},
+  {"role": "prop.barrel", "match": {"names": ["^Prop barrel$"]}},
+  {"role": "prop.rope", "match": {"names": ["^Prop rope"]}}
+ ],
+ "never": [
+  {"role": "never.helper", "match": {"names": ["^Helper"]}, "reason": "a measuring helper that is hidden in every picture"}
+ ],
+ "off": [],
+ "require_more": {"timber": ["moss_and_algae"], "stone": ["wetness"]},
+ "roads": [
+  {"name": "towpath", "polyline": [[-7, -1.7], [7, -1.7]], "width": 1.8, "gauge": 0.9, "rut_depth": 0.05, "hoof": true}
+ ],
+ "footfall": [
+  {"shape": "rect", "x0": -3.4, "x1": -2.2, "y0": -2.6, "y1": -0.5}
+ ],
+ "keep_clear": [
+  {"shape": "rect", "x0": -3.6, "x1": -2.0, "y0": -2.8, "y1": -0.5}
+ ],
+ "picture": {"camera": "Camera A", "height_pixels": 800},
+ "renderer": "auto"
+}

@@ -5,7 +5,7 @@ light, picture size, then save, reopen the saved file and audit it; running it t
 `--help` and the settings checks work in plain Python.
 
 Before the steps, finish turns anything that is drawn but is not a mesh (a bevelled curve, text, a metaball, an instanced collection) into meshes, and drafts a roads entry for every
-dirt-road object the settings do not cover (from the lane's own shape), so a plain request still gets ruts. It checks where to save BEFORE it starts, and says how far it moved any
+dirt-road object the settings do not cover (from the road's own shape), so a plain request still gets ruts. It checks where to save BEFORE it starts, and says how far it moved any
 object it seated again.
 
 A concrete example, inside Blender: commands.finish_place(settings, look='neglected', state='damp', save_as='place-finished.blend') returns
@@ -49,14 +49,14 @@ def read_settings(path=None, create_if_missing=False, place=None, place_type=Non
         return settings_file.Settings(data, path)
     scene_name = os.path.splitext(os.path.basename(bpy.data.filepath))[0] if bpy.data.filepath else 'place'
     draft, report = settings_file.draft(scene_read.scene_facts(only_visible=True), place or scene_name, place_type or 'generic')
-    draft['roads'] = lane_roads({}, existing=[])
+    draft['roads'] = roads_from_shapes({}, existing=[])
     report['roads'] = [road['name'] for road in draft['roads']]
     data = settings_file.merged(draft)
     if create_if_missing and path:
         with open(path, 'w', encoding='utf-8') as handle:
             json.dump(draft, handle, indent=1)
         print(f'LOOK there was no settings file, so one was drafted and written: {path} ({len(report["guessed"])} role(s) guessed from names, {len(report["unknown"])} object(s) unclassified, '
-              f'{len(report.get("roads", []))} road(s) drafted from the lanes\' shapes). Edit it (the look, the state, the roles it could not guess), then run again.')
+              f'{len(report.get("roads", []))} road(s) drafted from the roads\' shapes). Edit it (the look, the state, the roles it could not guess), then run again.')
     return settings_file.Settings(data, path if path and os.path.exists(path) else None)
 
 
@@ -64,7 +64,7 @@ def new_settings(scene=None, place='place', place_type='generic', out_path=None)
     """Drafts a settings dict from the open scene (see settings_file.draft); returns (dict, report) and writes out_path when given."""
     from . import scene_read
     draft, report = settings_file.draft(scene_read.scene_facts(only_visible=True), place, place_type)
-    draft['roads'] = lane_roads({}, existing=[])
+    draft['roads'] = roads_from_shapes({}, existing=[])
     report['roads'] = [road['name'] for road in draft['roads']]
     if out_path:
         os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
@@ -88,9 +88,9 @@ def require_save_target(parsed):
         raise InputMissing('this verb changes the scene, so say where to save it: --save-as OUT.blend (the input scene is never overwritten without --overwrite). Nothing was done.')
 
 
-def lane_roads(rules, existing=None):
-    """Roads entries (a centre line, width, gauge, rut depth, hoof prints) for every visible object whose role is a dirt road and that no road in `existing` lies on, read from
-    the lane's own mesh. `rules` is the settings' rules dict (roles, never) used to find the role; with no settings the object names decide. Returns a list of dicts marked drafted."""
+def roads_from_shapes(rules, existing=None):
+    """Roads entries (a centre line, width, gauge, rut depth) for every visible object whose role is a dirt road and that no road in `existing` lies on, read from
+    the road's own mesh. `rules` is the settings' rules dict (roles, never) used to find the role; with no settings the object names decide. Returns a list of dicts marked drafted."""
     from . import roles as roles_module, scene_read
     table = settings_file.roles_table()
     objects = scene_read.mesh_objects(only_visible=True)
@@ -104,15 +104,15 @@ def lane_roads(rules, existing=None):
         low, high = scene_read.world_bounds(obj)
         if any(low[0] - 1.0 <= px <= high[0] + 1.0 and low[1] - 1.0 <= py <= high[1] + 1.0 for road in existing for px, py in road['polyline']):
             continue
-        polyline, width = scene_read.lane_skeleton(obj)
-        roads.append({'name': obj.name, 'polyline': polyline, 'width': max(width, 2.0), 'gauge': 1.3, 'rut_depth': 0.08, 'hoof': True, 'drafted': True})
+        polyline, width = scene_read.road_skeleton(obj)
+        roads.append({'name': obj.name, 'polyline': polyline, 'width': max(width, 2.0), 'gauge': 1.3, 'rut_depth': 0.08, 'hoof': False, 'drafted': True})
     return roads
 
 
 def ensure_roads(settings):
-    """When the settings name no road yet but the scene has dirt-road objects, drafts a road for each from the lane's shape, adds it to the settings in memory, and writes it into
+    """When the settings name no road yet but the scene has dirt-road objects, drafts a road for each from the road's shape, adds it to the settings in memory, and writes it into
     the settings file when there is one (so the audit and the next run see the same roads). Returns the names of the roads drafted."""
-    drafted = lane_roads(settings.rules_dict(), existing=settings.roads)
+    drafted = roads_from_shapes(settings.rules_dict(), existing=settings.roads)
     if not drafted:
         return []
     settings.data['roads'] = list(settings.roads) + drafted
@@ -241,8 +241,8 @@ def finish_place(settings, look=None, state=None, quick=False, map_size=None, ow
     tagged = tag_roles(settings, write=True, fallback=True)
     drafted_roads = ensure_roads(settings)
     if drafted_roads:
-        print(f'LOOK roads: the settings named no road for the dirt-road object(s) {", ".join(drafted_roads[:5])}, so one was drafted from each lane\'s own shape (centre line, width, 1.3 m gauge, 8 cm ruts, hoof prints)'
-              + (f' and written into {os.path.basename(settings.path)}' if settings.path else '') + '. Look at them and change them in the settings if the lane runs differently.')
+        print(f'LOOK roads: the settings named no road for the dirt-road object(s) {", ".join(drafted_roads[:5])}, so one was drafted from each road\'s own shape (centre line, width, 1.3 m gauge, 8 cm ruts, no hoof prints)'
+              + (f' and written into {os.path.basename(settings.path)}' if settings.path else '') + '. Look at them and change them in the settings if the road runs differently.')
     for warning in settings_file.road_warnings(settings.data):
         print(f'LOOK roads: {warning}')
     note('roles', {'by_role': tagged['by_role'], 'fallback': tagged['fallback']},
@@ -370,9 +370,9 @@ def verb_new_settings(parsed):
     if len(report['unknown']) > 12:
         print(f'LOOK and {len(report["unknown"]) - 12} more object(s) have no role guessed: `explainer-film-place roles --scene SCENE.blend` lists them all, `explainer-film-place roles --list` lists the role ids')
     print(f'LOOK look and state: the place type "{parsed.place_type}" starts at look "{draft["look"]}" and state "{draft["state"]}". The person\'s words decide, not the preset: say kept, lived_in, neglected or derelict, and dry, damp or wet, '
-          f'in the settings file (an unkept place is neglected; a place nobody described is lived_in, dry).')
+          f'in the settings file (an unkempt place is neglected; a place nobody described is lived_in, dry).')
     for road in draft.get('roads', []):
-        print(f'PASS road drafted from the lane "{road["name"]}": {len(road["polyline"])} points, {road["width"]} m wide, gauge {road["gauge"]} m, rut depth {road["rut_depth"]} m')
+        print(f'PASS road drafted from the road "{road["name"]}": {len(road["polyline"])} points, {road["width"]} m wide, gauge {road["gauge"]} m, rut depth {road["rut_depth"]} m')
     for warning in settings_file.road_warnings(draft):
         print(f'LOOK {warning}')
     print(f'{len(report["guessed"])} object(s) guessed in {len(by_role)} role(s), {len(report["unknown"])} unclassified, owners: {", ".join(report["owners"]) or "none"}')

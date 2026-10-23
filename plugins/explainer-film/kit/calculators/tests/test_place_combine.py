@@ -25,24 +25,24 @@ from place_kit.checks import ownership  # noqa: E402
 check = Checker('place combine: ownership between builders, and stage files run in two orders')
 folder = tempfile.mkdtemp(prefix='place-combine-test-')
 
-OWNERS = {'owners': {'roads': {'objects': ['^Lane'], 'materials': ['Lane material'], 'collections': []},
+OWNERS = {'owners': {'roads': {'objects': ['^Road'], 'materials': ['Road material'], 'collections': []},
                      'huts': {'objects': ['^Hut'], 'materials': ['Hut material'], 'collections': []}},
           'frozen': {'render': True, 'cameras': True, 'world': True, 'lights': True}}
 
 
 def fingerprint(**objects):
     return {'objects': {name: dict({'type': 'MESH', 'owner': None, 'made': False, 'mesh': 'aaa', 'matrix': [0] * 16}, **entry) for name, entry in objects.items()},
-            'materials': {'Lane material': 'm1', 'Shared': 's1'}, 'node_groups': {'Group': 'g1'}, 'collections': {},
+            'materials': {'Road material': 'm1', 'Shared': 's1'}, 'node_groups': {'Group': 'g1'}, 'collections': {},
             'frozen': {'render': {'engine': 'X'}, 'cycles': {}, 'view': {}, 'camera': {'name': 'C', 'lens': 35}, 'world': None, 'lights': ['Sun']}}
 
 
-start = fingerprint(**{'Lane 1': {'owner': 'roads'}, 'Hut 1': {'owner': 'huts'}})
+start = fingerprint(**{'Road 1': {'owner': 'roads'}, 'Hut 1': {'owner': 'huts'}})
 
 # ---------------------------------------------------------------- part A
 end = copy.deepcopy(start)
-end['objects']['Lane 1']['mesh'] = 'bbb'
+end['objects']['Road 1']['mesh'] = 'bbb'
 result = ownership.diff(start, end, OWNERS, actor='huts')
-check.true('a stage that changes another owner\'s object is a violation that names both', any('huts changed the object "Lane 1", which roads owns' in v for v in result['violations']), str(result['violations']))
+check.true('a stage that changes another owner\'s object is a violation that names both', any('huts changed the object "Road 1", which roads owns' in v for v in result['violations']), str(result['violations']))
 check.equal('the same change by its owner is clean', ownership.diff(start, end, OWNERS, actor='roads')['violations'], [])
 end = copy.deepcopy(start)
 end['objects']['Hut 2'] = dict(end['objects']['Hut 1'], owner=None)
@@ -52,8 +52,8 @@ check.equal('a new object that says whose it is is clean', ownership.diff(start,
 end['objects']['Hut 2']['owner'] = 'roads'
 check.true('a new object marked as another owner\'s is a violation', bool(ownership.diff(start, end, OWNERS, actor='huts')['violations']))
 end = copy.deepcopy(start)
-del end['objects']['Lane 1']
-check.true('removing another owner\'s object is a violation', any('removed the object "Lane 1"' in v for v in ownership.diff(start, end, OWNERS, actor='huts')['violations']))
+del end['objects']['Road 1']
+check.true('removing another owner\'s object is a violation', any('removed the object "Road 1"' in v for v in ownership.diff(start, end, OWNERS, actor='huts')['violations']))
 end = copy.deepcopy(start)
 end['materials']['Shared'] = 's2'
 check.true('changing a shared material is a violation that says copy it', any('copy it and change the copy' in v for v in ownership.diff(start, end, OWNERS, actor='huts')['violations']))
@@ -84,11 +84,11 @@ files = {}
 for name, data in (('start', start), ('clean', start), ('dirty', None), ('owners', OWNERS)):
     if name == 'dirty':
         data = copy.deepcopy(start)
-        data['objects']['Lane 1']['mesh'] = 'bbb'
+        data['objects']['Road 1']['mesh'] = 'bbb'
     files[name] = os.path.join(folder, name + '.json')
     json.dump(data, open(files[name], 'w'))
 done = subprocess.run([sys.executable, '-I', '-B', launcher, 'ownership-diff', '--start', files['start'], '--end', files['dirty'], '--owners', files['owners'], '--actor', 'huts'], capture_output=True, text=True)
-check.true('the ownership-diff command exits 1 on a violation and says so', done.returncode == 1 and 'FAIL huts changed the object "Lane 1"' in done.stdout, done.stdout[-160:])
+check.true('the ownership-diff command exits 1 on a violation and says so', done.returncode == 1 and 'FAIL huts changed the object "Road 1"' in done.stdout, done.stdout[-160:])
 done = subprocess.run([sys.executable, '-I', '-B', launcher, 'ownership-diff', '--start', files['start'], '--end', files['clean'], '--owners', files['owners'], '--actor', 'huts'], capture_output=True, text=True)
 check.equal('the ownership-diff command exits 0 on a clean change', done.returncode, 0)
 done = subprocess.run([sys.executable, '-I', '-B', launcher, 'ownership-diff', '--start', files['start']], capture_output=True, text=True)
@@ -132,8 +132,8 @@ OWNER = 'roads'
 
 
 def apply(options):
-    remove_mine('Lane')
-    make_box('Lane 1', (8, 2, 0.05), (0, 0, 0.025), 'roads')
+    remove_mine('Road')
+    make_box('Road 1', (8, 2, 0.05), (0, 0, 0.025), 'roads')
 ''',
     'stage_huts.py': STAGE_HEADER + '''
 OWNER = 'huts'
@@ -149,7 +149,7 @@ OWNER = 'huts'
 
 
 def apply(options):
-    bpy.data.objects['Lane 1'].data.vertices[0].co.z += 0.5
+    bpy.data.objects['Road 1'].data.vertices[0].co.z += 0.5
 ''',
     'stage_forgetful.py': STAGE_HEADER + '''
 OWNER = 'huts'
@@ -164,8 +164,8 @@ OWNER = 'roads'
 
 
 def apply(options):
-    remove_mine('Lane')
-    make_box('Lane 1', (8, 2, 0.05), (0, 0, 0.025), 'roads')
+    remove_mine('Road')
+    make_box('Road 1', (8, 2, 0.05), (0, 0, 0.025), 'roads')
     for obj in [o for o in bpy.data.objects if o.name in ('View A', 'View sun')]:
         data = obj.data
         bpy.data.objects.remove(obj)
@@ -185,8 +185,8 @@ OWNER = 'huts'
 
 def apply(options):
     remove_mine('Hut')
-    lane = bpy.data.objects.get('Lane 1')
-    make_box('Hut 1', (2, 2, 2), (0, 3 if lane else 5, 1), 'huts')
+    road = bpy.data.objects.get('Road 1')
+    make_box('Hut 1', (2, 2, 2), (0, 3 if road else 5, 1), 'huts')
 ''',
 }
 stage_folder = os.path.join(folder, 'stages')
@@ -223,7 +223,7 @@ check.true('a ground stage that makes the view camera and the sun combines clean
 done = combine(['stage_ground_camera.py', 'stage_huts.py'])
 check.true('the same stage with no frozen.set_by fails and names the camera (so the field is what let it through)', done.returncode == 1 and 'View A' in done.stdout, last(done))
 done = combine(['stage_roads.py', 'stage_meddler.py'])
-check.true('a stage that moves another owner\'s object fails and the report names the object and both owners', done.returncode == 1 and 'huts changed the object "Lane 1", which roads owns' in done.stdout, last(done))
+check.true('a stage that moves another owner\'s object fails and the report names the object and both owners', done.returncode == 1 and 'huts changed the object "Road 1", which roads owns' in done.stdout, last(done))
 done = combine(['stage_roads.py', 'stage_forgetful.py'])
 check.true('a stage that adds a new object every time it runs is called not idempotent', done.returncode == 1 and 'FAIL idempotent' in done.stdout, last(done))
 done = combine(['stage_roads.py', 'stage_needy.py'], '--order', 'both')

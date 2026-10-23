@@ -10,8 +10,8 @@ Probes:
   uvs            the UV extent of every wall-like object compared with its size in metres (the texture is in metres)
   roads          the shape of the ground around a road: depth of each rut, the gauge, and how many kit plants stand on a wheel track, in a puddle or on a keep-clear spot
   construction   runs the construction check on the open scene and lists its findings by name
-  roads          the lane measured from the real ground by rays (depth of each rut, the gauge between them) and every kit plant and litter root counted against the lane's own
-                 geometry (not against the kit's masks): in a wheel rut, in the centre strip, near the lane, elsewhere
+  roads          the road measured from the real ground by rays (depth of each rut, the gauge between them) and every kit plant and litter root counted against the road's own
+                 geometry (not against the kit's masks): in a wheel rut, in the centre strip, near the road, elsewhere
   damage         for every role with several objects: how many of them have a different shape from the others once the damage modifiers are applied; how far the objects still stand
                  from the ground; the strength of each damage modifier
   images         a fingerprint of every picture the kit made (name, size, colour space and a hash of its pixels): same inputs, same pictures
@@ -365,7 +365,7 @@ def probe_roads():
             shoulders.append(float(ground[np.abs(offsets) < 0.1].mean() - reference))
         entry = {'name': road.get('name'), 'depth_median_m': float(np.median(depths)), 'depth_min_m': float(min(depths)), 'depth_max_m': float(max(depths)), 'gauge_median_m': float(np.median(gauges)),
                  'gauge_in_settings_m': gauge, 'centre_above_reference_m': float(np.median(shoulders)), 'rut_depth_in_settings_m': float(road.get('rut_depth', 0.08))}
-        counts = {'in_rut_core': 0, 'in_rut_band': 0, 'in_centre_strip': 0, 'within_lane': 0, 'near_lane_outside': 0, 'elsewhere': 0, 'total': 0}
+        counts = {'in_rut_core': 0, 'in_rut_band': 0, 'in_centre_strip': 0, 'within_road': 0, 'near_road_outside': 0, 'elsewhere': 0, 'total': 0}
         nearest_to_rut = 9.0
         for group, blocks in scatter.items():
             for roots in blocks:
@@ -382,9 +382,9 @@ def probe_roads():
                     if abs(signed) <= 0.4 and 0 < along < length:
                         counts['in_centre_strip'] += 1
                     if distance <= width / 2:
-                        counts['within_lane'] += 1
+                        counts['within_road'] += 1
                     elif distance <= width / 2 + 2.0:
-                        counts['near_lane_outside'] += 1
+                        counts['near_road_outside'] += 1
                     else:
                         counts['elsewhere'] += 1
         entry['roots'] = counts

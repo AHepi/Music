@@ -626,7 +626,7 @@ The tools measure; people still judge these. **Judgement: ask a critic** for eac
 - The overall feel of the light (cool against warm, dusk mood), beyond the rule numbers.
 - Whether a flagged near-touch, thin part or small sign is worth fixing or fine for the story; if fine, put
   it in the `accepted` list with the reason, who and the date.
-- Whether a worn road reads as driven by carts and not as noise; whether an empty stable reads empty-but-used and not deserted.
+- Whether a worn road reads as worn by use and not as noise.
 - Whether wear reads as designed (the style rule) and not photographic, and whether a mark that passes the dot-size rule
   still reads at phone size.
 - Whether a squint-test miss is acceptable (the garden missed at 0.883 and 0.873 against 0.92 and the person decided).

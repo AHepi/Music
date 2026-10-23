@@ -7,17 +7,17 @@ effort: medium
 You build ONE part of a place, in Blender, by script. Other builders build the other parts at the same time on the same
 computer, so you touch only what is yours. You are told your MODE:
 
-- **ground**: you are the ground part. You go first, alone. You make the starting scene, the graded ground, the lane
+- **ground**: you are the ground part. You go first, alone. You make the starting scene, the graded ground, the road
   shapes and the view cameras, and you freeze the result as `ground.blend`.
 - **build**: you build your part, seated on the frozen ground.
 - **fix**: a fix round. You get a short list of confirmed findings about your part (and only those). You change your
   stage file to fix them, run it again, and report. You never touch anything else.
 
-A concrete example. The part is `cottages` of a village. Step 1: for each cottage, a flat stone footing laid on the
-ground, a sill on the stone, posts on the sill, a wall plate on the posts, rafters on the plate, thatch on the rafters,
-a floor and a doorstep so the doorway looks onto something. Step 2: bevel the edges, make no two planks alike, let one
-roof sag between its rafters. Step 3: give each object its role and run the part's pass. A part that stops after steps
-1 and 2 is still a valid delivery; a part that stops half way through a step is not.
+A concrete example. The part is `lock_gate` of a canal lock. Step 1: a heel post and a mitre post standing on the bed,
+rails tenoned into both posts, boards on the rails, iron straps, a long balance beam lying on top of the heel post.
+Step 2: bevel the edges, make no two boards alike, let one board bow. Step 3: give each object its role and run the
+part's pass. A part that stops after steps 1 and 2 is still a valid delivery; a part that stops half way through a
+step is not.
 
 ## 1. Read first (about 20 minutes)
 
@@ -48,11 +48,11 @@ language (few, big, clean), never photographic noise.
    gives the same scene. The shape of it, inside Blender:
    ```
    import sys; sys.path.insert(0, KIT + '/place-kit'); import place_kit as pk     # KIT is the kit folder you were given
-   OWNER = 'cottages'
+   OWNER = 'lock_gate'
    def apply(options):
        pk.forget_part(OWNER); pk.begin_part(OWNER)
-       wall = pk.new_part_object(OWNER, 'wall.plaster', 'cottage 1 wall', mesh)
-       pk.seat_on_ground(wall)           # its lowest point rests on the real ground under it
+       post = pk.new_part_object(OWNER, 'timber.post', 'Gate west heel post', mesh)
+       pk.seat_on_ground(post)           # its lowest point rests on the real ground under it
        print('objects created, changed and deleted: ...')
    ```
    The helpers are `pk.begin_part`, `pk.new_part_object(owner, role, name, mesh)`, `pk.forget_part`, `pk.seat_on_ground`,
@@ -89,14 +89,14 @@ language (few, big, clean), never photographic noise.
 
 Make the starting scene when none is given (an empty scene: delete the default cube; the kit's light step adds light
 later), make the ground (a plain rectangle gets a graded grid, dense near the camera and coarse far away; any other
-shape, such as a curved lane or a ground with a trench cut in it, is split in place and keeps its outline), shape the lanes from the settings
-(`explainer-film-place roads`: ruts a cart's gauge apart, banks, hoof prints, a grass crown, puddle hollows), the verge and
+shape, such as a curved road or a ground with a trench cut in it, is split in place and keeps its outline), shape the roads from the settings
+(`explainer-film-place roads`: ruts a cart's gauge apart, banks, hoof prints only where the settings ask for them, a grass crown, puddle hollows), the verge and
 the puddle hollows, then the cameras named in the views (`View <name>`) and the sun (your stage makes them; `ownership.json` lets the ground part do
 that through `frozen.set_by`), then save the result as the ground file you were told
 (the quick way: `explainer-film-place combine --scene START.blend --stages stage_OWNER.py --order plain --owners OWNERSHIP.json --save-as GROUND.blend`;
 `explainer-film-place fingerprint` of the result goes next to it). Then run your own pass and checks like any part (section 3, step 5;
 your scene to combine on is the starting scene). Nothing else goes in: no buildings, no props. Say in your report
-what the ground promises the others (for example "inside 1.2 m of each lane's centre line the ground is as it is").
+what the ground promises the others (for example "inside 1.2 m of each road's centre line the ground is as it is").
 
 ## 5. Mode fix
 

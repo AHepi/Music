@@ -40,8 +40,8 @@ file at all, because the examples here would give the game away, and its own pro
 
 Judge the pictures against the style note. Test every new mark: could it sit in a hand-painted game level next to the
 biggest, simplest thing in the place without looking as if it came from a more photographic picture? Is it lived in
-(wear, growth and use that tell a small story for each hand-span), or clean and flat? Does a worn road read as driven by
-carts and not as noise? Does wear read as designed? Judge each planned element on its own (`each_element`: the element, your
+(wear, growth and use that tell a small story for each hand-span), or clean and flat? Does a worn road read as worn by use and
+not as noise? Does wear read as designed? Judge each planned element on its own (`each_element`: the element, your
 verdict, why). Compare at 100 percent crops, not only at full-frame size. Measure what you can with
 `explainer-film-place measure PICTURE.jpg --guard GUARD.json`, and say the squint number's miss plainly if there is one: it is
 reported, never "fixed" by removing character.

@@ -1,6 +1,6 @@
 """What this does: the helpers a part builder uses so that its objects are tagged (owner and role), kept in their own
 collection, seated on the real ground and easy to rebuild without leaving old copies behind. A part is one piece of the place
-built by one owner (for example the lanes, or the huts); every visible object of it gets exactly one role.
+built by one owner (for example the roads, or the huts); every visible object of it gets exactly one role.
 
 A concrete example, as in a stage file:
     pk.forget_part('huts')                       # idempotent: remove what an earlier run made

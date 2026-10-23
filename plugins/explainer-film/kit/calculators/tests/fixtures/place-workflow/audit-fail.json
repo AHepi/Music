@@ -9,15 +9,15 @@
  "problems": [
   {
    "check": "place: construction",
-   "where": "stable bench plank",
-   "owner": "stable",
-   "text": "AUDITSTABLE a bench plank floats 3 cm above its posts",
-   "fix": "lower the plank onto the posts"
+   "where": "gate board",
+   "owner": "lock_gate",
+   "text": "AUDITGATE a gate board floats 3 cm above its rails",
+   "fix": "lower the board onto the rails"
   },
   {
    "check": "place: keep-out",
-   "where": "forest floor weeds",
-   "owner": "roads_and_ground",
+   "where": "verge weeds",
+   "owner": "ground_and_water",
    "text": "AUDITGROUND two weeds grow on a wheel track",
    "fix": "run the ground step again"
   },

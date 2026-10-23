@@ -3,7 +3,7 @@
 Probes: outline (every ground object: faces, outline area, boundary loops, relief), positions (every mesh object's lowest and highest point), kinds (every object: type, hidden, made by the
 kit, materials), sign (the lettered sign's material: is its picture still the colour, does its roughness vary, is there a normal map, how many nodes does the kit own), masks (the plan masks
 of a quay and a sea: dampness and shade at points on a line), sizes (the true size of a wall turned 45 degrees), lights (the lights and the world).
-A concrete example: probe 'outline' on the lanes scene says the lane ribbon still has 1 boundary loop and an area within 5 percent of what it had.
+A concrete example: probe 'outline' on the curved road scene says the road ribbon still has 1 boundary loop and an area within 5 percent of what it had.
 """
 import json
 import os

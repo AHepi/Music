@@ -1,9 +1,9 @@
 """What this does: builds the second test scene the place kit's tests use, inside Blender: a YARD of plain-colour shapes, the way a model builds a place when it is only told what to
 put in it: a big flat ground, two sheds (four wall boxes, a gable roof and a door each), a fence of posts and rails, a well, a barrel with two iron bands, an iron post and a stump, a
 sun and a camera named "Camera A". Nothing has a normal map, wear or damage. It has everything the kit's roles and treatments need to be proved at a larger size than the one-hut
-scene: wood, stone, iron, a tree, roofs, walls, a lot of ground for a lane, ruts and plants, and a fence the plants must stay out from under.
+scene: wood, stone, iron, a tree, roofs, walls, a lot of ground for a road, ruts and plants, and a fence the plants must stay out from under.
 Run: blender -b --python make_yard_scene.py -- OUT.blend [--no-light] [--no-camera]
-The lane the tests cut into the ground is written in the settings file the test makes (a polyline through y = 3 to 5); the scene itself has no lane, only the ground.
+The road the tests cut into the ground is written in the settings file the test makes (a polyline through y = 3 to 5); the scene itself has no road, only the ground.
 """
 import math
 import sys

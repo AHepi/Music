@@ -13,7 +13,7 @@ VERBS = {
     'new-settings': {'blender': True, 'help': 'draft place-settings.json from the scene\'s names, collections and materials; lists what it could not classify'},
     'roles': {'blender': True, 'help': 'give every object one role (exit 1 when one is unknown); --write stores place_role on each object'},
     'surfaces': {'blender': True, 'help': 'UVs, real normal maps, roughness and colour variation, bevels and displacement by role'},
-    'roads': {'blender': True, 'help': 'grade the ground and shape ruts, banks, hoof prints, a grass crown and puddle hollows from the settings'},
+    'roads': {'blender': True, 'help': 'grade the ground and shape ruts, banks, optional hoof prints, a grass crown and puddle hollows from the settings'},
     'damage': {'blender': True, 'help': 'damage as shape: bent boards, chipped corners, leaning posts, sag; no two parts alike'},
     'age': {'blender': True, 'help': 'the nine wear layers in their fixed order (dirt, grime, weathering, wetness, cracks and chips, edge wear, moss, rust, rubbish)'},
     'grow': {'blender': True, 'help': 'weeds, tufts, ferns, nettles, moss cushions and litter pieces, with exact keep-out gates'},

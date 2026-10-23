@@ -13,7 +13,7 @@
 //                                                                    used one answer at a time (the last one repeats)
 //                                 "render": null,                    a helper that returns nothing (null)
 //                                 "gate": { "inline": "object" } } } an object is the answer as it stands
-// In a fixture file, {owner} is replaced by the text after the colon in the label (build:cottages gives cottages).
+// In a fixture file, {owner} is replaced by the text after the colon in the label (build:lock_gate gives lock_gate).
 // A call with no canned answer stops the run with an error that names the label, so a script that asks for something new is noticed.
 // The harness also refuses what the real tool refuses or what would break resume: Date.now, Math.random and new Date() with no
 // argument throw, and the script runs in strict mode. It checks that every schema is well formed (every required name is a property)

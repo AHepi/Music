@@ -69,12 +69,12 @@ prompt, a log or the repository. `explainer-film-setup` says whether they are se
 - **The job file** is a small JSON file:
   ```
   { "scene": "FINISHED.blend", "out_folder": "pictures/round1", "views": [
-    { "name": "lane_wide", "camera": "View wide", "width": 1200, "height": 800, "samples": 96 },
-    { "name": "cottage", "camera": "View cottage", "kinds": ["final"], "width": 1600, "height": 1067 } ] }
+    { "name": "towpath_wide", "camera": "View wide", "width": 1200, "height": 800, "samples": 96 },
+    { "name": "lock_gate", "camera": "View lock gate", "kinds": ["final"], "width": 1600, "height": 1067 } ] }
   ```
   A view is drawn as a preview (and with `--finals` also as a final) unless it says `"kinds"`: exactly the pictures to draw for it
   (`"preview"`, `"close_up"`, `"final"`), so one local picture at one size is `"kinds": ["final"]` and no wasted preview. The file
-  names are the view name plus the kind (`lane_wide_preview.jpg`; a view already called `closeup` is not named `closeup_closeup`).
+  names are the view name plus the kind (`towpath_wide_preview.jpg`; a view already called `closeup` is not named `closeup_closeup`).
   Each picture gets a `.json` log beside it (engine, device, size, samples, seconds, scene hash, nearly black or not).
 - The first EEVEE picture of a finished scene on this computer takes about 70 s (the shaders build once); later ones 7 to 15 s
   (measured on a canal scene of 94 objects).

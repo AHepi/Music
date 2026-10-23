@@ -4,20 +4,23 @@ What this is: the rules for dirt, grime, weathering, wetness, damage, moss, rust
 are in `place-kit/data/dial_table.json` and `place-kit/data/looks/`; this text says why. Each number says what kind it
 is: **measured** (taken from a picture, render or test), **judged** (chosen from evidence) or **invented** (a guess).
 
-**Example first: a lane driven by a horse and cart.** Across the lane, from one side to the other:
-a verge of grass, weeds and nettles; a left wheel rut (bare, with a puddle in its low places); a raised bank of
-thrown-up earth; a strip of grass; a bare trodden hoof line down the middle with hoof dimples; another strip of grass;
-the bank; the right rut; the verge. The numbers (all judged or invented, confirm in the facts table):
-- the two wheel ruts are a cart's gauge apart, 1.2 to 1.5 m (judged; the coal-mine yard used 1.24 m for coal carts);
-- each rut 12 to 25 cm wide and 5 to 12 cm deep on a lightly used lane (invented; the coal-mine yard's heavy carts cut
-  15 cm deep and about 40 cm across at half depth, in deep mud);
-- a bank beside each rut about 0.3 of the rut's depth (judged: the coal-mine yard's raised edge was 0.30 of the depth);
-- hoof dimples 12 to 14 cm across, one every 0.8 to 1.0 m, alternating a little to each side (invented);
-- the strips of grass each about 30 cm wide on a lightly used lane; on a busy lane the whole width is bare;
-- puddles in the rut bottoms, dried rings round the old ones, dung lumps and straw near the edges;
-- nothing grows in the wheel tracks or on the hoof line: the count of roots there is exactly 0 (measured gate).
+**Example first: a road cut by heavy carts (the coal-mine yard built earlier in this project).** The yard has five cart
+roads, each with two wheel ruts. Across a road, from one side to the other: the rough ground beside it; a raised bank
+of thrown-up earth; the left rut (a trench, with water lying in its low places); the strip between the ruts; the right
+rut; the bank; the rough ground again. The numbers (measured in the yard's build code unless marked):
+- the two ruts of a road are 1.24 m apart (a cart's gauge; the generic range is 1.0 to 1.8 m: judged);
+- each rut is about 0.15 m deep (0.13 to 0.21 m along the road, because the depth wanders) and about 0.4 m across at
+  half depth;
+- a bank beside each rut stands about 0.30 of the rut's depth;
+- the yard has eight puddles, some of them lying in the ruts;
+- a lighter road, the way the plugin drafts one, has ruts 5 to 15 cm deep (invented, 8 cm by default);
+- on a lightly used road a low crown of grass may grow between the ruts (the setting `centre_grass`); on a busy road the
+  whole width is bare;
+- where animals walk (a farm track, a towpath) hoof prints can be added with `"hoof": true`: round dimples 12 to 14 cm
+  across, one every 0.8 to 1.0 m, left and right in turn (invented; the canal lock's towpath used them);
+- nothing grows in the wheel tracks: the count of roots there is exactly 0 (measured gate).
 These are real shape: the `roads` verb cuts them into the ground mesh, and the dirt-road surface and the wetness layer
-go on top. A texture alone makes a flat lane with brown stripes.
+go on top. A texture alone makes a flat road with brown stripes.
 
 ## The layers, in their fixed order
 
@@ -28,16 +31,16 @@ Each object needs its own `pk_<layer>_amount` property; `age` writes it. Without
 
 | Layer | What it is (and the words people use) | Where it goes |
 |---|---|---|
-| dirt | soil film, mud splash, dust, polish on worn lanes, dried puddle rings | low places; a band up the wall foot measured from each wall's own bottom edge (the street's splash band was 15 to 35 cm; stone plinths 15 to 46 cm high once hid it when measured from the world floor); footfall |
-| grime | soot, run-off streaks under eaves and sills, damp bands, stains | sheltered places and under projections; soot on thatch above hearths and chimneys. A real TIDE LINE (a band at the water's own height) is not made by a layer: build it as shape (a band of darker, slimier stone, a row of barnacle shapes) in the part that owns the quay or the wheel pit |
+| dirt | soil film, mud splash, dust, polish on worn roads, dried puddle rings | low places; a band up the wall foot measured from each wall's own bottom edge (the street's splash band was 15 to 35 cm; stone plinths 15 to 46 cm high once hid it when measured from the world floor); footfall |
+| grime | soot, run-off streaks under eaves and sills, damp bands, stains | sheltered places and under projections; soot above hearths and chimneys. A real TIDE LINE (a band at the water's own height) is not made by a layer: build it as shape (a band of darker, slimier stone, a row of barnacle shapes) in the part that owns the quay or the wheel pit |
 | weathering | silvering of timber, sun fade, bleaching, patina | sun-facing, rain-facing, upper surfaces; the grey-silver of old unpainted timber |
 | wetness | darker, smoother, a film coat, puddles | low places and rut bottoms; ground within 1.5 m of any water (the plan masks wet it: full at the waterline, fading to nothing 1.5 m away; measured on a quay: 0.59 at 10 cm, 0.16 at 1 m, 0 from 3 m); by state (dry, damp, wet) |
-| cracks_and_chips | split planks, plaster loss, chipped stone corners, thatch sag | corners and ends; one clean line, not a net |
+| cracks_and_chips | split planks, plaster loss, chipped stone corners, a sagging roof | corners and ends; one clean line, not a net |
 | edge_wear | worn bevels, pale rubbed edges | edges and corners a hand or a cart touches |
 | moss_and_algae | flat moss, algae, lichen | damp and shaded; never on a trodden or keep-clear dot |
 | rust | iron: height bands, collars at joins, runs below | iron roles only |
-| rubbish | leaf litter, straw, wet straw, mud, dung | wall feet, gutters, lane edges, the corners; never on the wheel tracks or hoof line |
-| plants, litter_pieces | nettle, fern, bramble, tufts, leaves, sticks, pine needles, dung lumps, straw | by habitat gates; chunky designed shapes |
+| rubbish | leaf litter, straw, wet straw, mud | wall feet, gutters, road edges, the corners; never on the wheel tracks |
+| plants, litter_pieces | nettle, fern, bramble, tufts, leaves, sticks, pine needles, clods, straw | by habitat gates; chunky designed shapes |
 
 ## Joints (between stones, bricks and planks)
 
@@ -80,7 +83,7 @@ The looks are presets of dial values and nothing else (`place-kit/data/looks/`):
 - `kept`: light dirt, no moss on walls, little rubbish. A tidy farmyard or a museum.
 - `lived_in` (default): normal use: some dirt and grime, edge wear on what is touched, a little moss in the damp,
   a few weeds at the edges, some rubbish at the wall feet.
-- `neglected`: stronger dirt, grime, weeds, moss, rubbish and wetness. A lane nobody maintains.
+- `neglected`: stronger dirt, grime, weeds, moss, rubbish and wetness. A road nobody maintains.
 - `derelict`: adds cracks, sag, missing pieces and heavy moss. A ruin.
 Different roles can have different looks (`look_by_role`). State: `dry`, `damp`, `wet`; switch it with
 `age --state wet` or `finish --state damp`. Only the wetness layer changes, and puddles appear by depth (judged: about

@@ -1,8 +1,8 @@
-"""What this does: tests the plugin's prompt-time reminder (hooks/hooks.json and hooks/place-reminder.py), which makes a model that was asked only for "a village in the forest" read the
+"""What this does: tests the plugin's prompt-time reminder (hooks/hooks.json and hooks/place-reminder.py), which makes a model that was asked only for a place ("build a canal lock", "make a garden") read the
 surface-and-wear skill first, even when other Blender skills compete for the request.
 1. hooks.json is valid JSON, names one UserPromptSubmit hook that runs place-reminder.py from the plugin folder, and that script is there.
-2. Requests that build a place, a set or props (the person's own village request among them) get the reminder, which names the skill and the three commands.
-3. Requests that are not about building a place (weather, a typo, a poem, a shopping cart in a web page, a random forest, film pages) get nothing at all.
+2. Requests that build a place, a set or props (a village, a lock, a garden, a prop, Blender itself) get the reminder, which names the skill and the three commands.
+3. Requests that are not about building a place (weather, a typo, a poem, a shopping cart in a web page, a random forest, a stable build, film pages) get nothing at all.
 4. A message the script cannot read (not JSON, no prompt, empty input) gets nothing and exit 0: a hook must never stop the person's work.
 5. The reminder names only commands and skills that exist (the skill folder, the three commands) and holds no key, no address and no personal detail.
 Run: python3 kit/calculators/tests/test_place_hook.py
@@ -45,10 +45,11 @@ check.true('place-reminder.py is there', os.path.exists(SCRIPT))
 
 # 2. requests that build a place
 positive = [
-    'Perfect. Now build a village in the forest. Needs unkept dirt roads like they\'ve been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.',
-    'make a cottage',
+    'Perfect. Now build a canal lock beside a towpath. Needs weathered brick walls, a wooden gate, stone steps and a few props.',
+    'Build a village with a few houses and some props.',
+    'make a cabin',
     'create a harbour with boats',
-    'put together a medieval market with props',
+    'put together a market square with props',
     'build a small farm with a barn and a yard',
     'Model a barrel in Blender',
     'write a python script for blender that makes a tavern interior',
@@ -62,7 +63,7 @@ for prompt in positive:
 # 3. requests that are not
 negative = [
     'what is the weather in Oslo', 'fix the typo in my README', 'write a poem about the sea', 'add a test for the road parser', 'make the music louder in the film',
-    'build a random forest classifier', 'add a cart to the shop page', 'make room for the new button', 'Build the film scene for page 4', 'record the narration for chapter 2',
+    'build a random forest classifier', 'make the nightly build stable', 'add a cart to the shop page', 'make room for the new button', 'Build the film scene for page 4', 'record the narration for chapter 2',
     'explain what causes inflation', '',
 ]
 for prompt in negative:

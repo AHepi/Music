@@ -3,7 +3,7 @@ climbs a wall's foot where it is damp and gets a thin clear coat. The room's STA
 accepts), damp or wet. The roughness map does the work, not the specular map, and walls get no mirror shine. Puddles come from the plan masks (the same low places the growth keeps
 plants out of). Cracks, chips and edge wear go on AFTER the water so they stay dull when wet. Reads the masks Dampness, Above Water, Height Above Foot and the dials darken,
 wet_roughness, puddles, film_coat. Amount 0 gives exactly the input. Needs Blender (bpy).
-A concrete example: state damp on a lane darkens it a little and fills the ruts' bottoms with standing water that reflects the sky.
+A concrete example: state damp on a road darkens it a little and fills the ruts' bottoms with standing water that reflects the sky.
 """
 from ..layer_base import LayerBase
 

@@ -2,7 +2,7 @@
 small made-up scene (fixtures/place/make_fix_scenes.py) and is checked against Blender's own data (fixtures/place/probe_fixes.py), and where the fault was a gate that let something through,
 the same gate must still fail the planted fault (the negative proof). The faults:
   1. objects with no material at all passed the audit (the blocking hole): the audit must fail them by name, and `finish` must repair them;
-  2. a curved lane strip was reshaped into a rectangle and a lane with a trench cut in it had the trench filled in (and the steps in it moved 2 m): neither may happen;
+  2. a curved road strip was reshaped into a rectangle and a road with a trench cut in it had the trench filled in (and the steps in it moved 2 m): neither may happen;
   3. a plain request got no ruts: a dirt-road object with no road in the settings gets a road drafted from its own shape, and the settings file says so;
   4. curves, text and instanced collections escaped the whole pass: they are turned into meshes (and undo brings the originals back);
   5. a lettered sign (a material with its own picture) failed the audit for ever: it keeps its picture and gets roughness and a normal map, and undo takes those out;
@@ -85,35 +85,35 @@ failed = ' '.join(lines(text, 'FAIL'))
 check.equal('objects with NO material at all (bevels and shape damage put on by hand) FAIL the audit (exit 1)', code, 1,
             recorded='the smoke check of the canal lock: a scene with no material passed with zero normal maps, zero wear and zero weeds',
             proves='the gate that used to let a materialless scene through now fails it')
-check.true('...and the report names the objects and what they lack (normal_map, dirt, grime, weathering)', all(word in failed for word in ('Cottage wall 1', 'Prop barrel 1', 'normal_map', 'dirt', 'grime', 'weathering')), failed[:200])
+check.true('...and the report names the objects and what they lack (normal_map, dirt, grime, weathering)', all(word in failed for word in ('House wall 1', 'Prop barrel 1', 'normal_map', 'dirt', 'grime', 'weathering')), failed[:200])
 check.true('...and says the ground gets no plants and no litter even though it has no material', 'no plants on the ground' in failed and 'no litter pieces on the ground' in failed)
 code, text, _ = place('finish', lazy, '--save-as', path('lazy-done', 'done.blend'))
 check.equal('`finish` repairs it: the same scene passes after the pass (exit 0)', code, 0, proves='the audit is not simply failing everything')
 
-# ---------------------------------------------------------------- 2. a curved lane, and a lane with a trench cut in it (also: a plain request gets ruts)
-lanes = own_copy('lanes')
-code, text, seconds = place('finish', lanes, '--save-as', path('lanes-done', 'done.blend'))
-check.equal('a curved lane strip with no settings file finishes and passes (exit 0)', code, 0, f'{seconds:.0f} s')
-settings_written = json.load(open(path('lanes', 'place-settings.json')))
+# ---------------------------------------------------------------- 2. a curved road, and a road with a trench cut in it (also: a plain request gets ruts)
+curved = own_copy('curved_road')
+code, text, seconds = place('finish', curved, '--save-as', path('curved_road-done', 'done.blend'))
+check.equal('a curved road strip with no settings file finishes and passes (exit 0)', code, 0, f'{seconds:.0f} s')
+settings_written = json.load(open(path('curved_road', 'place-settings.json')))
 roads = settings_written.get('roads') or []
-check.true('a plain request still gets ruts: a road was drafted from the lane object\'s own shape and written into the settings file', len(roads) == 1 and len(roads[0]['polyline']) >= 8 and roads[0].get('drafted') and "road(s) drafted from the lanes' shapes" in text, str(roads)[:200])
-check.true('...its width is read from the lane (about 3.2 m, not the 4 m a slice across the curve would show) and it runs the length of the lane (50 m)', roads and 3.0 <= roads[0]['width'] <= 3.8
+check.true('a plain request still gets ruts: a road was drafted from the road object\'s own shape and written into the settings file', len(roads) == 1 and len(roads[0]['polyline']) >= 8 and roads[0].get('drafted') and "road(s) drafted from the roads' shapes" in text, str(roads)[:200])
+check.true('...its width is read from the road (about 3.2 m, not the 4 m a slice across the curve would show) and it runs the length of the road (50 m)', roads and 3.0 <= roads[0]['width'] <= 3.8
            and abs(roads[0]['polyline'][-1][0] - roads[0]['polyline'][0][0]) > 45, str(roads[0]['width']) if roads else '')
-outline = probe(path('lanes-done', 'done.blend'), 'outline')['ground']
+outline = probe(path('curved_road-done', 'done.blend'), 'outline')['ground']
 ribbon = outline['Dirt road ribbon']
-check.true('the curved lane strip is still ONE curved strip: the kit split its faces in place (more than 5000 faces), its outline area is within 2 percent of what it was and it is not a rectangle', ribbon['faces'] > 5000 and ribbon['boundary_loops'] == 1 and not ribbon['plain_rectangle']
+check.true('the curved road strip is still ONE curved strip: the kit split its faces in place (more than 5000 faces), its outline area is within 2 percent of what it was and it is not a rectangle', ribbon['faces'] > 5000 and ribbon['boundary_loops'] == 1 and not ribbon['plain_rectangle']
            and abs(ribbon['area'] / ribbon['area_before'] - 1.0) < 0.02, str(ribbon),
-           recorded='the code review: a 160 square metre curved lane became a 39,198-square rectangle of 50 x 11 m', proves='the lane was not replaced by a grid over its box')
+           recorded='the code review: a 160 square metre curved road became a 39,198-square rectangle of 50 x 11 m', proves='the road was not replaced by a grid over its box')
 check.true('...and it has real ruts: relief at least 3 cm (the audit asks for it)', ribbon['relief'] >= 0.03, f'{ribbon["relief"]} m')
 check.true('a plain rectangle ground still gets a graded grid (more than 4000 faces, still a rectangle)', outline['Ground']['faces'] > 4000 and outline['Ground']['plain_rectangle'], str(outline['Ground']))
-code, text, _ = place('undo', path('lanes-done', 'done.blend'), '--save-as', path('lanes-undone', 'undone.blend'))
-back = probe(path('lanes-undone', 'undone.blend'), 'outline')['ground'] if code == 0 else {}
-check.true('undo swaps the original lane mesh back (20 faces)', code == 0 and back.get('Dirt road ribbon', {}).get('faces') == 20, str(back.get('Dirt road ribbon')))
+code, text, _ = place('undo', path('curved_road-done', 'done.blend'), '--save-as', path('curved_road-undone', 'undone.blend'))
+back = probe(path('curved_road-undone', 'undone.blend'), 'outline')['ground'] if code == 0 else {}
+check.true('undo swaps the original road mesh back (20 faces)', code == 0 and back.get('Dirt road ribbon', {}).get('faces') == 20, str(back.get('Dirt road ribbon')))
 
-lanes_two = own_copy('lanes', 'lanes-two')                                 # a settings file that exists but names no road: finish drafts one and writes it in
-json.dump({'place': 'lanes', 'roads': []}, open(path('lanes-two', 'place-settings.json'), 'w'))
-code, text, _ = place('finish', lanes_two, '--save-as', path('lanes-two-done', 'done.blend'))
-check.true('a settings file with "roads": [] and a dirt-road object gets a road written into it (and the audit passes)', code == 0 and len(json.load(open(path('lanes-two', 'place-settings.json')))['roads']) == 1, text.strip().splitlines()[-1][:160])
+curved_two = own_copy('curved_road', 'curved_road-two')                                 # a settings file that exists but names no road: finish drafts one and writes it in
+json.dump({'place': 'curved_road', 'roads': []}, open(path('curved_road-two', 'place-settings.json'), 'w'))
+code, text, _ = place('finish', curved_two, '--save-as', path('curved_road-two-done', 'done.blend'))
+check.true('a settings file with "roads": [] and a dirt-road object gets a road written into it (and the audit passes)', code == 0 and len(json.load(open(path('curved_road-two', 'place-settings.json')))['roads']) == 1, text.strip().splitlines()[-1][:160])
 
 trench = own_copy('trench')
 json.dump({'place': 'trench', 'look': 'lived_in', 'state': 'damp', 'roads': [{'name': 'towpath', 'polyline': [[0, 0], [14, 0]], 'width': 2.4, 'gauge': 1.3, 'rut_depth': 0.08, 'hoof': True}]}, open(path('trench', 'place-settings.json'), 'w'))
@@ -178,17 +178,17 @@ check.true('the audit of an empty scene FAILS (exit 1: nothing was audited), it 
 
 # ---------------------------------------------------------------- 6. finish-part, the NEXT line, --facts, a world colour alone
 part = own_copy('part')
-code, text, _ = place('finish-part', part, '--owner', 'cottages', '--save-as', path('part-done', 'done.blend'))
+code, text, _ = place('finish-part', part, '--owner', 'houses', '--save-as', path('part-done', 'done.blend'))
 check.true('`finish-part` on a clean part exits 0 (it used to exit 1 with "place: quick output" on every run) and says in a LOOK that it was a quick trial', code == 0 and not lines(text, 'FAIL') and any('quick' in line for line in lines(text, 'LOOK')), ' | '.join(lines(text, 'LOOK'))[:200],
            recorded='the code review: finish-part always exits 1 and prints a FAIL no builder can clear', proves='a part builder can read its own result')
 facts_file = path('facts', 'facts.json')
-json.dump({'facts': [{'id': 'wall_thickness', 'what': 'a cottage wall', 'applies_to_role': '^wall\\.', 'dimension': 'thickness', 'min': 0.2, 'max': 0.5, 'unit': 'metres', 'kind': 'judged', 'source': 'this test', 'confidence': 'weak'}]}, open(facts_file, 'w'))
+json.dump({'facts': [{'id': 'wall_thickness', 'what': 'a house wall', 'applies_to_role': '^wall\\.', 'dimension': 'thickness', 'min': 0.2, 'max': 0.5, 'unit': 'metres', 'kind': 'judged', 'source': 'this test', 'confidence': 'weak'}]}, open(facts_file, 'w'))
 turned = own_copy('turned')
 code, text, _ = place('finish', turned, '--facts', facts_file, '--save-as', path('turned-done', 'done.blend'))
 next_line = lines(text, 'NEXT run:')
 check.true('`finish --facts` is accepted, and the NEXT line carries --reports and --real-world-facts (so the preflight writes beside the audit, and judges with the place\'s own facts)', code == 0 and next_line and '--reports' in next_line[0] and '--real-world-facts' in next_line[0] and facts_file in next_line[0], next_line[0][-200:] if next_line else text[-200:])
 check.true('the wall turned 45 degrees is size-checked by its own sides (4 x 0.3 m): the audit says 46 or more sizes fit, with no warning about its thickness', 'wall thickness' not in ' '.join(lines(text, 'LOOK')).lower() and not lines(text, 'FAIL'), ' | '.join(lines(text, 'LOOK'))[:200])
-sizes = probe(turned, 'sizes')['objects']['Cottage wall 1']
+sizes = probe(turned, 'sizes')['objects']['House wall 1']
 check.true('the oriented size of the turned wall is 4.0 x 0.3 (its box along the world axes says 3.0 x 3.0: the trap)', sorted(sizes['oriented'][:2]) == [0.3, 4.0] and abs(sizes['world_box'][0] - 3.04) < 0.05, str(sizes))
 world = own_copy('world')
 code, text, _ = place('audit', world)

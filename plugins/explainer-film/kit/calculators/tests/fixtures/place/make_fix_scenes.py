@@ -1,9 +1,9 @@
 """What this does: builds the small made-up scenes that test_place_fixes.py runs the place kit on, one Blender file each, into a folder. Every scene is a trap a smoke check found in
-the kit: objects with no material at all, a curved lane strip, a lane with a trench cut in it and steps in the trench, curves and text and instances that are drawn but are not meshes,
+the kit: objects with no material at all, a curved road strip, a road with a trench cut in it and steps in the trench, curves and text and instances that are drawn but are not meshes,
 a lettered sign whose material carries its own picture, a mirrored wall, an empty scene, a scene lit by its world colour alone, a quay with water beside it.
-Run inside Blender: blender -b --python make_fix_scenes.py -- OUTPUT_FOLDER   (it writes lazy.blend, lanes.blend, trench.blend, kinds.blend, sign.blend, empty.blend, world.blend, quay.blend,
+Run inside Blender: blender -b --python make_fix_scenes.py -- OUTPUT_FOLDER   (it writes lazy.blend, curved_road.blend, trench.blend, kinds.blend, sign.blend, empty.blend, world.blend, quay.blend,
 part.blend, turned.blend).
-A concrete example: lanes.blend holds a 50 x 40 m ground and a curved lane ribbon of 20 big faces called "Dirt road ribbon" lying on it.
+A concrete example: curved_road.blend holds a 50 x 40 m ground and a curved road ribbon of 20 big faces called "Dirt road ribbon" lying on it.
 """
 import math
 import os
@@ -66,7 +66,7 @@ def save(name):
 fresh()
 quad('Ground', -6, 6, -6, 6, 0.0)
 for index in range(4):
-    wall = box(f'Cottage wall {index + 1}', (2.2 + 0.1 * index, 0.3, 2.4), (-4.0 + 2.6 * index, 0.0, 1.2))
+    wall = box(f'House wall {index + 1}', (2.2 + 0.1 * index, 0.3, 2.4), (-4.0 + 2.6 * index, 0.0, 1.2))
     wall.modifiers.new('Hand bevel', 'BEVEL')
     wall['pk_shape_damage'] = 1
 barrel = box('Prop barrel 1', (0.7, 0.7, 0.9), (3.0, 3.0, 0.45))
@@ -75,7 +75,7 @@ barrel['pk_shape_damage'] = 1
 sun()
 save('lazy')
 
-# ---- lanes: a big flat ground and a CURVED lane ribbon (20 big faces, about 170 square metres) lying on it
+# ---- roads: a big flat ground and a CURVED road ribbon (20 big faces, about 170 square metres) lying on it
 fresh()
 quad('Ground', -5, 55, -20, 20, 0.0)
 mesh = bpy.data.meshes.new('Dirt road ribbon')
@@ -96,7 +96,7 @@ mesh.update()
 ribbon = bpy.data.objects.new('Dirt road ribbon', mesh)
 bpy.context.scene.collection.objects.link(ribbon)
 sun()
-save('lanes')
+save('curved_road')
 
 # ---- trench: a towpath strip of 0.1 m squares (14 x 2.4 m) with a trench cut through it, a floor 1 m below, and three solid step blocks standing on that floor
 fresh()
@@ -187,7 +187,7 @@ save('empty')
 # ---- world: a box and a world colour, no lamp
 fresh()
 quad('Ground', -6, 6, -6, 6, 0.0)
-box('Cottage wall 1', (4.0, 0.3, 2.4), (0, 0, 1.2))
+box('House wall 1', (4.0, 0.3, 2.4), (0, 0, 1.2))
 world = bpy.data.worlds.new('Sky colour')
 world.use_nodes = True
 world.node_tree.nodes['Background'].inputs['Color'].default_value = (0.4, 0.5, 0.8, 1.0)
@@ -201,14 +201,14 @@ box('Seabed', (16.0, 12.0, 0.5), (16.0, 0.0, -3.25))
 box('Sea', (16.0, 12.0, 2.4), (16.0, 0.0, -1.8))
 sun()
 save('quay')
-# ---- part: a ground owned by 'roads' and three cottage walls owned by 'cottages' (what a part builder's finish-part works on)
+# ---- part: a ground owned by 'ground' and three house walls owned by 'houses' (what a part builder's finish-part works on)
 fresh()
 ground = quad('Ground', -8, 8, -8, 8, 0.0)
-ground['place_owner'] = 'roads'
+ground['place_owner'] = 'ground'
 ground['place_role'] = 'ground.earth'
 for index in range(3):
-    wall = box(f'Cottage wall {index + 1}', (2.0 + 0.2 * index, 0.3, 2.4), (-4.0 + 4.0 * index, 0.0, 1.2))
-    wall['place_owner'] = 'cottages'
+    wall = box(f'House wall {index + 1}', (2.0 + 0.2 * index, 0.3, 2.4), (-4.0 + 4.0 * index, 0.0, 1.2))
+    wall['place_owner'] = 'houses'
     wall['place_role'] = 'wall.plaster'
 sun()
 save('part')
@@ -216,7 +216,7 @@ save('part')
 # ---- turned: a wall 4 m long and 0.3 m thick turned 45 degrees (its box along the world axes is about 3 m by 3 m)
 fresh()
 quad('Ground', -8, 8, -8, 8, 0.0)
-box('Cottage wall 1', (4.0, 0.3, 2.4), (0, 0, 1.2), rotation_z=math.radians(45.0))
+box('House wall 1', (4.0, 0.3, 2.4), (0, 0, 1.2), rotation_z=math.radians(45.0))
 sun()
 save('turned')
 print('FIX SCENES DONE', out_folder)

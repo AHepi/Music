@@ -34,7 +34,7 @@ what was left out is listed in `place-kit/SOURCES-AND-LICENCES.md`. Nothing from
 in the film kit's own files was replaced by it.
 
 What waits (said plainly): the lighter plan masks of the wear layers have only been tried on small scenes, Cycles with the
-kit was not run on a real village, the generic rented-card client was tested only against a pretend transport, and the painter
+kit was not run on a place of hundreds of buildings, the generic rented-card client was tested only against a pretend transport, and the painter
 template's wet-place words are changed by hand unless `paint_request.py` has the `--keep-wetness` option (see
 `place-kit/DEVIATIONS.md` for what changed from the design and why).
 

@@ -177,8 +177,8 @@ on_track = copy.deepcopy(finished)
 on_track['scatter'] = {'groups': [{'name': 'tuft', 'group': 'plant', 'count': 20, 'in_keepout': 0, 'in_puddle': 0, 'on_crown': 0, 'on_wheel_track': 2, 'within_5cm_of_litter': 0}]}
 check.true('a plant on a wheel track fails (the gate is exact zero)', 'wheel track' in text_of(judge(on_track, skip_freshness=True), 'place: keep-out'))
 flat_road = copy.deepcopy(finished)
-flat_road['roads'] = [{'name': 'main lane', 'ground_objects': ['ground'], 'relief_m': 0.0, 'ruts_found': False}]
-check.true('a road on flat ground with no ruts fails', 'main lane' in text_of(judge(flat_road, skip_freshness=True), 'place: ground relief'))
+flat_road['roads'] = [{'name': 'main road', 'ground_objects': ['ground'], 'relief_m': 0.0, 'ruts_found': False}]
+check.true('a road on flat ground with no ruts fails', 'main road' in text_of(judge(flat_road, skip_freshness=True), 'place: ground relief'))
 huge = copy.deepcopy(finished)
 huge['counts']['triangles'] = 9_000_000
 check.true('too many triangles fails', 'triangles' in text_of(judge(huge, skip_freshness=True), 'place: budgets'))
@@ -237,18 +237,18 @@ check.true('a third of the objects on a fallback role FAILS (the share is 15 per
 fallbacks['roles']['fallback'] = ['roof']
 check.equal('...and one object in nine (11 percent) is only a LOOK', verdicts(judge(fallbacks, skip_freshness=True), 'place: roles'), ['warn'])
 
-lane = copy.deepcopy(finished)
-lane['objects'][0].update(role='ground.dirt_road')
-lane['objects'][0]['geometry'].update(road_entry=False, relief_m=0.0)
-text = after(lane, 'place: ground relief')
+road = copy.deepcopy(finished)
+road['objects'][0].update(role='ground.dirt_road')
+road['objects'][0]['geometry'].update(road_entry=False, relief_m=0.0)
+text = after(road, 'place: ground relief')
 check.true('a dirt-road object with no road in the settings and no relief FAILS and says to write a road (a plain request drafted none before)', 'ground' in text and 'no entry' in text, text[:200])
-lane['objects'][0]['geometry'].update(relief_m=0.08)
-check.true('...and the same lane with real relief does not', 'no entry' not in after(lane, 'place: ground relief'))
-lane['objects'][0]['geometry'].update(road_entry=True, relief_m=0.0)
-check.true('...and one with a road entry is judged by the roads section, not by this', 'no entry' not in after(lane, 'place: ground relief'))
+road['objects'][0]['geometry'].update(relief_m=0.08)
+check.true('...and the same road with real relief does not', 'no entry' not in after(road, 'place: ground relief'))
+road['objects'][0]['geometry'].update(road_entry=True, relief_m=0.0)
+check.true('...and one with a road entry is judged by the roads section, not by this', 'no entry' not in after(road, 'place: ground relief'))
 grown = copy.deepcopy(finished)
 grown['objects'][0]['geometry']['area_growth'] = 3.4
-check.true('a ground object whose outline grew 3.4 times (a curved lane turned into its box) FAILS and says so', 'bigger than before' in after(grown, 'place: ground relief'))
+check.true('a ground object whose outline grew 3.4 times (a curved road turned into its box) FAILS and says so', 'bigger than before' in after(grown, 'place: ground relief'))
 grown['objects'][0]['geometry']['area_growth'] = 1.0
 check.true('...and one that kept its outline does not', 'bigger than before' not in after(grown, 'place: ground relief'))
 

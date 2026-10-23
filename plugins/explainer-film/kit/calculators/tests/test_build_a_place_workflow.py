@@ -57,7 +57,7 @@ def fixture(name):
 
 
 source = read(WORKFLOW)
-REQUEST = "Build a village in the forest. Needs unkept dirt roads like they've been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props."
+REQUEST = "Build one side of a small canal lock: brick walls with stone coping, stone steps, a gravel towpath, a timber gate and a few props."
 ENVIRONMENT = 'ENVNOTE: the disk is small; only the renderer may use the rented card; nothing else costs money.'
 PLUGIN_PATH = '/path/to/explainer-film'
 BASE_ARGS = {'plugin': PLUGIN_PATH, 'kit': PLUGIN_PATH + '/kit', 'folder': '/path/to/run', 'request': REQUEST, 'today': '2026-10-22', 'environment': ENVIRONMENT}
@@ -183,32 +183,32 @@ check.true('happy: no canned answer failed its schema and no schema was malforme
            all(not one_call['schema_problems'] for one_call in happy['calls']), details='; '.join(f"{one_call['label']}: {one_call['schema_problems'][:2]}" for one_call in happy['calls'] if one_call['schema_problems']) or 'all fit')
 labs = labels(happy)
 check.equal('happy: the helpers ran in this order (plan, ground, builders, combine, audit, render, checkers, skeptic, one fix round, re-check, gate)',
-            labs, ['plan', 'ground:roads_and_ground', 'build:cottages', 'build:stable', 'build:props', 'build:forest_edge', 'combine', 'audit', 'render',
-                   'check:look', 'check:structure', 'check:process', 'blind:1', 'skeptic', 'fix:stable', 'fix:cottages', 'combine:fix', 'audit:fix', 'render:fix',
+            labs, ['plan', 'ground:ground_and_water', 'build:walls_and_steps', 'build:lock_gate', 'build:props', 'build:bank_planting', 'combine', 'audit', 'render',
+                   'check:look', 'check:structure', 'check:process', 'blind:1', 'skeptic', 'fix:lock_gate', 'fix:walls_and_steps', 'combine:fix', 'audit:fix', 'render:fix',
                    'recheck', 'blind:2', 'gate'])
 check.true('happy: the audit helper ran before the renderer (nothing is drawn before the audit)', labs.index('audit') < labs.index('render'))
-check.equal('happy: exactly one fix round: one fixer per owner with a confirmed finding (stable, cottages), and the settings finding goes to the integrator',
-            [one_label for one_label in labs if one_label.startswith('fix:')], ['fix:stable', 'fix:cottages'])
+check.equal('happy: exactly one fix round: one fixer per owner with a confirmed finding (lock_gate, walls_and_steps), and the settings finding goes to the integrator',
+            [one_label for one_label in labs if one_label.startswith('fix:')], ['fix:lock_gate', 'fix:walls_and_steps'])
 check.true('  (no second fix round: the re-check problems are reported, not fixed)', labs.count('combine:fix') == 1 and labs.count('render:fix') == 1 and not any(re.match(r'fix\d', one_label) for one_label in labs))
-stable_prompt = prompt_of(happy, 'build:stable')
+gate_prompt = prompt_of(happy, 'build:lock_gate')
 check.true('the plugin\'s own steps are in every builder prompt whatever the brief says: the part pass (finish-part), the construction check and the stage-file safety run, each as a real command',
-           all('explainer-film-place ' + step in stable_prompt for step in ('finish-part --scene /path/to/run/work/stable/scene.blend', 'construction --scene /path/to/run/work/stable/part.blend', 'combine --scene /path/to/run/scene/ground.blend --stages /path/to/run/stages/stage_stable.py'))
-           and 'THE STEPS THE PLUGIN ADDS' in stable_prompt and 'never has to ask' in stable_prompt)
+           all('explainer-film-place ' + step in gate_prompt for step in ('finish-part --scene /path/to/run/work/lock_gate/scene.blend', 'construction --scene /path/to/run/work/lock_gate/part.blend', 'combine --scene /path/to/run/scene/ground.blend --stages /path/to/run/stages/stage_lock_gate.py'))
+           and 'THE STEPS THE PLUGIN ADDS' in gate_prompt and 'never has to ask' in gate_prompt)
 check.true('  (the ground part and a fixer get them too; the ground part checks its stage on the starting scene, the others on the frozen ground)',
-           all('THE STEPS THE PLUGIN ADDS' in prompt_of(happy, label) for label in ('ground:roads_and_ground', 'fix:stable'))
-           and 'combine --scene /path/to/run/scene/start.blend' in prompt_of(happy, 'ground:roads_and_ground'))
+           all('THE STEPS THE PLUGIN ADDS' in prompt_of(happy, label) for label in ('ground:ground_and_water', 'fix:lock_gate'))
+           and 'combine --scene /path/to/run/scene/start.blend' in prompt_of(happy, 'ground:ground_and_water'))
 check.true('the ground builder is told the quick way to freeze the ground (combine on the starting scene, saved as the ground file)',
-           'explainer-film-place combine --scene /path/to/run/scene/start.blend --stages /path/to/run/stages/stage_roads_and_ground.py --order plain' in prompt_of(happy, 'ground:roads_and_ground')
-           and '--save-as /path/to/run/scene/ground.blend' in prompt_of(happy, 'ground:roads_and_ground'))
+           'explainer-film-place combine --scene /path/to/run/scene/start.blend --stages /path/to/run/stages/stage_ground_and_water.py --order plain' in prompt_of(happy, 'ground:ground_and_water')
+           and '--save-as /path/to/run/scene/ground.blend' in prompt_of(happy, 'ground:ground_and_water'))
 check.true('happy: the squint miss is reported as not fixed on purpose (in the report) and no fixer is given its finding (the far hills)',
            'NOT FIXED ON PURPOSE' in happy['result']['report_markdown'] and 'far hills' in happy['result']['report_markdown']
-           and not any('far hills' in prompt_of(happy, one_label) for one_label in ('fix:stable', 'fix:cottages', 'combine:fix')))
-check.true('happy: the fixers got only their own findings (stable: the plank, not the thatch)',
-           'bench plank' in prompt_of(happy, 'fix:stable') and 'thatch ridge' not in prompt_of(happy, 'fix:stable')
-           and 'thatch ridge' in prompt_of(happy, 'fix:cottages') and 'bench plank' not in prompt_of(happy, 'fix:cottages'))
+           and not any('far hills' in prompt_of(happy, one_label) for one_label in ('fix:lock_gate', 'fix:walls_and_steps', 'combine:fix')))
+check.true('happy: the fixers got only their own findings (lock_gate: the board, not the coping stones)',
+           'gate board' in prompt_of(happy, 'fix:lock_gate') and 'coping stones' not in prompt_of(happy, 'fix:lock_gate')
+           and 'coping stones' in prompt_of(happy, 'fix:walls_and_steps') and 'gate board' not in prompt_of(happy, 'fix:walls_and_steps'))
 check.true('happy: the settings finding went to the recombine (the integrator), not to a builder',
-           'preview cameras' in prompt_of(happy, 'combine:fix') and 'preview cameras' not in prompt_of(happy, 'fix:stable'))
-check.true('happy: the fix round redrew only the view the fixers named (lane_close)', 'lane_close: camera' in prompt_of(happy, 'render:fix') and 'wide: camera' not in prompt_of(happy, 'render:fix'))
+           'preview cameras' in prompt_of(happy, 'combine:fix') and 'preview cameras' not in prompt_of(happy, 'fix:lock_gate'))
+check.true('happy: the fix round redrew only the view the fixers named (towpath_close)', 'towpath_close: camera' in prompt_of(happy, 'render:fix') and 'wide: camera' not in prompt_of(happy, 'render:fix'))
 check.true('happy: the redraw used the existing guard and gave the previous pictures for the squint test',
            'do not make a new one' in prompt_of(happy, 'render:fix') and 'wide_preview.jpg' in prompt_of(happy, 'render:fix'))
 reading = happy['result']['reading_test']
@@ -260,15 +260,15 @@ leaks = checkers_that_see_builder_numbers(happy)
 check.true('no checker, skeptic or reader prompt holds a number from a builder report (they get bare claims only)', not leaks and len(checker_calls) == 7, details=', '.join(leaks) or f'{len(checker_calls)} prompts clean')
 look = prompt_of(happy, 'check:look')
 check.true('the look checker gets the claims as bare sentences with the owner (the measured result in brackets is cut off)',
-           '[cottages] every doorway of the cottages part has a floor behind it\n' in look and '7 doorways' not in look and 'measured:' not in look)
+           '[walls_and_steps] every post of the walls_and_steps part stands on the ground\n' in look and '6 posts' not in look and 'measured:' not in look)
 check.true('  (a builder\'s own "measured_by" text is never given to a checker)', 'construction.json' not in look and 'minimum supports' not in look)
-check.true('the structure checker gets the same claims; the process checker gets none of them', 'every doorway of the stable part' in prompt_of(happy, 'check:structure') and 'every doorway of the stable part' not in prompt_of(happy, 'check:process'))
+check.true('the structure checker gets the same claims; the process checker gets none of them', 'every post of the lock_gate part' in prompt_of(happy, 'check:structure') and 'every post of the lock_gate part' not in prompt_of(happy, 'check:process'))
 check.true('the look checker is told it was NOT blind to the feature list; the process checker is told to keep out of the work folder',
            'you were NOT blind' in look and 'do not open the work folder' in prompt_of(happy, 'check:process'))
 blind = prompt_of(happy, 'blind:1')
 check.true('the blind reader\'s prompt is self-contained: it does not start "First read", names no agent file, holds neither the request nor the environment nor any feature',
-           not blind.startswith('First read') and '/agents/' not in blind and REQUEST not in blind and 'ENVNOTE' not in blind and 'village' not in blind.lower()
-           and not re.search(r'\b(rut|puddle|hoof|thatch|moss|plaster|barrel|cart|stall|fence|nettle)', blind.lower()))
+           not blind.startswith('First read') and '/agents/' not in blind and REQUEST not in blind and 'ENVNOTE' not in blind and 'canal' not in blind.lower()
+           and not re.search(r'\b(' + '|'.join(re.escape(word) for feature in fixture('plan.json')['readable_features'] for word in feature['keywords']) + ')', blind.lower()))
 check.true('the blind reader is shown half-size pictures with number-only names, and nothing else',
            all(f'view-{number}.jpg' in blind for number in (1, 2, 3)) and '_preview' not in blind and 'style-note' not in blind and 'wide' not in blind)
 check.true('the blind reading test is labelled blind, and says it is a crude keyword match', happy['result']['checks']['blind_reader'] is not None
@@ -289,12 +289,12 @@ check.true('no args at all lists every missing argument', bad['error'] and all(f
 # ------------------------------------------------------------------------------------------- audit fails once, then is repaired
 once = run_case('audit_once', responses={'~^audit\\d*$': ['audit-fail.json', 'audit-pass.json'], '~^repair\\d+:': 'part-report-fixed.json', '~^recombine\\d+$': 'combine-report-fixed.json'})
 labs = labels(once)
-check.true('audit fails once: the owners the audit names repair it (stable, roads_and_ground), the integrator combines again, the audit passes, the run goes on',
-           'repair1:stable' in labs and 'repair1:roads_and_ground' in labs and 'recombine1' in labs and 'audit1' in labs and 'render' in labs and 'repair2:stable' not in labs,
+check.true('audit fails once: the owners the audit names repair it (lock_gate, ground_and_water), the integrator combines again, the audit passes, the run goes on',
+           'repair1:lock_gate' in labs and 'repair1:ground_and_water' in labs and 'recombine1' in labs and 'audit1' in labs and 'render' in labs and 'repair2:lock_gate' not in labs,
            details=', '.join(labs[:14]))
 check.true('  (only one repair round was recorded, and nothing was drawn before the second audit passed)', len(once['result']['repairs']) == 1 and labs.index('audit1') < labs.index('render'))
 check.true('  (each repairer got only its own problem; the settings problem went to the recombine; the ground repair told the integrator to rebuild the ground)',
-           'AUDITSTABLE' in prompt_of(once, 'repair1:stable') and 'AUDITGROUND' not in prompt_of(once, 'repair1:stable') and 'AUDITSETTINGS' not in prompt_of(once, 'repair1:stable')
+           'AUDITGATE' in prompt_of(once, 'repair1:lock_gate') and 'AUDITGROUND' not in prompt_of(once, 'repair1:lock_gate') and 'AUDITSETTINGS' not in prompt_of(once, 'repair1:lock_gate')
            and 'AUDITSETTINGS' in prompt_of(once, 'recombine1') and 'THE GROUND STAGE WAS CHANGED' in prompt_of(once, 'recombine1'))
 check.true('  (the second audit was asked to prove the second round\'s file, and the renderer drew that file)',
            '/round2/finished.blend' in prompt_of(once, 'audit1') and '/round2/finished.blend' in prompt_of(once, 'render'))
@@ -304,12 +304,12 @@ always = run_case('audit_always', responses={'~^audit\\d*$': 'audit-fail.json', 
 labs = labels(always)
 check.true('an audit that always fails stops after two repair rounds and before any picture', always['result']['stopped'] and 'still fails' in always['result']['stopped']
            and not drew_pictures(always) and not any(one_label.startswith(('check', 'blind', 'skeptic', 'fix:')) for one_label in labs) and labs.count('audit') + len([one_label for one_label in labs if re.match(r'audit\d', one_label)]) == 3
-           and 'repair2:stable' in labs and 'repair3:stable' not in labs and always['phases'][-1] == 'Audit', details=', '.join(labs))
+           and 'repair2:lock_gate' in labs and 'repair3:lock_gate' not in labs and always['phases'][-1] == 'Audit', details=', '.join(labs))
 check.true('  (it returns every key, with null for what did not run, and the report names the failing problems and who must decide)',
-           sorted(always['result'].keys()) == sorted(RESULT_KEYS) and always['result']['render'] is None and 'AUDITSTABLE' in always['result']['report_markdown']
+           sorted(always['result'].keys()) == sorted(RESULT_KEYS) and always['result']['render'] is None and 'AUDITGATE' in always['result']['report_markdown']
            and 'Only you can accept a problem' in always['result']['report_markdown'])
 more = run_case('audit_always_five', args={'maxRepairRounds': 5}, responses={'~^audit\\d*$': 'audit-fail.json', '~^repair\\d+:': 'part-report-fixed.json', '~^recombine\\d+$': 'combine-report-fixed.json'})
-check.true('asking for five repair rounds still gives only two', 'repair3:stable' not in labels(more) and len(more['result']['repairs']) == 2)
+check.true('asking for five repair rounds still gives only two', 'repair3:lock_gate' not in labels(more) and len(more['result']['repairs']) == 2)
 none = run_case('audit_no_repairs', args={'maxRepairRounds': 0}, responses={'~^audit\\d*$': 'audit-fail.json'})
 check.true('asking for no repair rounds stops at the first failing audit', not [one_label for one_label in labels(none) if one_label.startswith('repair')] and none['result']['stopped'])
 
@@ -320,16 +320,16 @@ check.true('an audit helper that says pass while the preflight exited 1 is not b
            'recombine1' in labels(lied) and "the helper said the audit passed, but the preflight's exit code was 1" in prompt_of(lied, 'recombine1'))
 
 # --------------------------------------------------------------------------------------------------------- a part comes back empty
-miss = run_case('missing_part', responses={'build:stable': None})
+miss = run_case('missing_part', responses={'build:lock_gate': None})
 check.true('a part that returns nothing is reported as missing, not dropped quietly',
-           miss['result']['missing_parts'] == ['stable'] and 'MISSING parts' in miss['result']['report_markdown'] and 'stable' in miss['result']['report_markdown'])
+           miss['result']['missing_parts'] == ['lock_gate'] and 'MISSING parts' in miss['result']['report_markdown'] and 'lock_gate' in miss['result']['report_markdown'])
 check.true('  (it is not combined: the integrator is told, and its stage file is not in the list)',
-           'did NOT report (do not combine them; list them as missing in your answer): stable' in prompt_of(miss, 'combine') and 'stage_stable.py' not in prompt_of(miss, 'combine')
-           and 'stage_cottages.py' in prompt_of(miss, 'combine'))
-check.true('  (the other parts and the run carry on to the end)', labels(miss)[-1] == 'gate' and [part['owner'] for part in miss['result']['parts']] == ['roads_and_ground', 'cottages', 'props', 'forest_edge'])
-absent = run_case('missing_then_audit', responses={'build:stable': None, '~^audit\\d*$': ['audit-fail.json', 'audit-pass.json'], '~^repair\\d+:': 'part-report-fixed.json', '~^recombine\\d+$': 'combine-report-fixed.json'})
+           'did NOT report (do not combine them; list them as missing in your answer): lock_gate' in prompt_of(miss, 'combine') and 'stage_lock_gate.py' not in prompt_of(miss, 'combine')
+           and 'stage_walls_and_steps.py' in prompt_of(miss, 'combine'))
+check.true('  (the other parts and the run carry on to the end)', labels(miss)[-1] == 'gate' and [part['owner'] for part in miss['result']['parts']] == ['ground_and_water', 'walls_and_steps', 'props', 'bank_planting'])
+absent = run_case('missing_then_audit', responses={'build:lock_gate': None, '~^audit\\d*$': ['audit-fail.json', 'audit-pass.json'], '~^repair\\d+:': 'part-report-fixed.json', '~^recombine\\d+$': 'combine-report-fixed.json'})
 check.true('problems of a part that never reported are not sent to a builder that has nothing to fix; the report says so',
-           'repair1:stable' not in labels(absent) and 'never reported' in absent['result']['report_markdown'])
+           'repair1:lock_gate' not in labels(absent) and 'never reported' in absent['result']['report_markdown'])
 nobody = run_case('no_builder', responses={'build:*': None})
 check.true('when no builder reports, the run stops and says so', nobody['result']['stopped'] and 'no builder came back' in nobody['result']['stopped'] and 'combine' not in labels(nobody))
 noground = run_case('no_ground', responses={'ground:*': None})
@@ -361,11 +361,11 @@ check.true('a skeptic that returns nothing leaves the findings unconfirmed: repo
 
 squint_skeptic = fixture('skeptic.json')
 squint_skeptic['confirmed'].append({'what': 'squint test miss: the far hills lose most', 'where': 'wide view', 'severity': 'should fix', 'cheapest_fix': 'remove detail from the far hills',
-                                    'owner': 'forest_edge', 'evidence': 'the measure', 'from': 'look checker'})
+                                    'owner': 'bank_planting', 'evidence': 'the measure', 'from': 'look checker'})
 squint = run_case('squint_confirmed', responses={'skeptic': squint_skeptic})
 check.true('a squint-test miss whose cure is to remove character is never sent to a fixer, even when a skeptic confirmed it; it goes to the person',
            not any('far hills' in call['prompt'] for call in squint['calls'] if call['label'].startswith(('fix:', 'combine:fix')))
-           and 'forest_edge' not in ' '.join(call['label'] for call in squint['calls'] if call['label'].startswith('fix:'))
+           and 'bank_planting' not in ' '.join(call['label'] for call in squint['calls'] if call['label'].startswith('fix:'))
            and 'NOT FIXED ON PURPOSE' in squint['result']['report_markdown'] and 'remove detail from the far hills' in squint['result']['report_markdown'])
 
 # ---------------------------------------------------------------------------------------- no pictures: stalled card, empty renderer
@@ -387,7 +387,7 @@ check.true('when the pictures after the fix round cannot be drawn there is no re
            'recheck' not in labels(fr) and '/round1/finished.blend' in prompt_of(fr, 'gate') and 'nobody has looked at it' in fr['result']['report_markdown'])
 rc = run_case('recheck_fails', responses={'recheck': 'recheck-still-failing.json'})
 check.true('a re-check that still finds a fault does not start a second fix round, and the fault is in the report',
-           [one_label for one_label in labels(rc) if one_label.startswith('fix')] == ['fix:stable', 'fix:cottages'] and 'still floats 1 cm' in rc['result']['report_markdown'])
+           [one_label for one_label in labels(rc) if one_label.startswith('fix')] == ['fix:lock_gate', 'fix:walls_and_steps'] and 'still floats 1 cm' in rc['result']['report_markdown'])
 
 # ---------------------------------------------------------------------------------------- the fresh check closes the loop
 judge = os.path.join(KIT, 'calculators', 'place_audit_check.py')
@@ -426,7 +426,7 @@ check.true('renderer eevee, rented false and finals true change the render comma
 check.true('effort low for builders, max for checkers; the planner follows the effort', [one_call['effort'] for one_call in cheap['calls'] if one_call['label'] == 'plan'] == ['low']
            and all(one_call['effort'] == 'max' for one_call in cheap['calls'] if re.match(r'(check|skeptic|recheck|blind)', one_call['label'])))
 check.true('the Blender path reaches the helpers; the reference pictures reach the planner and the renderer (the guard is not provisional); the accepted file reaches the audit; the ledger the process checker',
-           '--blender /path/to/blender' in prompt_of(cheap, 'build:stable') and '/path/to/reference.jpg' in prompt_of(cheap, 'plan') and 'the reference pictures: /path/to/reference.jpg' in prompt_of(cheap, 'render')
+           '--blender /path/to/blender' in prompt_of(cheap, 'build:lock_gate') and '/path/to/reference.jpg' in prompt_of(cheap, 'plan') and 'the reference pictures: /path/to/reference.jpg' in prompt_of(cheap, 'render')
            and '--accepted /path/to/accepted.json' in prompt_of(cheap, 'audit') and '/path/to/ledger.json' in prompt_of(cheap, 'check:process'))
 given_parts = run_case('given_parts', args={'parts': [{'name': 'smithy', 'owner': 'smithy', 'brief': 'a small smithy'}], 'views': [{'name': 'sunset', 'size': [600, 400]}]})
 check.true('a part the person asked for that the planner left out is added with its brief and built; the person\'s views win over the planner\'s',
@@ -587,7 +587,7 @@ if changed_script:
 changed_script = mutant('draws_anyway', 'if (!gateOk(STATE.combine, STATE.audit)) {\n  return done(', 'if (false) {\n  return done(')
 if changed_script:
     check.true('mutation: a script that draws pictures after a failing audit is caught', drew_pictures(run_case('m2', workflow=changed_script, responses={'~^audit\\d*$': 'audit-fail.json', '~^repair\\d+:': 'part-report-fixed.json', '~^recombine\\d+$': 'combine-report-fixed.json'})))
-changed_script = mutant('no_cap', 'Array.from({ length: Math.min(cap, items.length) }, lane)', 'Array.from({ length: items.length }, lane)')
+changed_script = mutant('no_cap', 'Array.from({ length: Math.min(cap, items.length) }, slot)', 'Array.from({ length: items.length }, slot)')
 if changed_script:
     check.true('mutation: a script that ignores the cap on builders is caught', builders_at_once(run_case('m3', workflow=changed_script, args={'maxParallelBuilders': 3}, responses={'plan': 'plan-many.json'})) > 3)
 changed_script = mutant('blind_knows', 'You are a reader of pictures. Round ${round}.', 'You are a reader of pictures. Round ${round}. The request was: "${ARGS.request}".')
@@ -595,7 +595,7 @@ if changed_script:
     check.true('mutation: a script that tells the blind reader the request is caught', blind_prompt_knows_the_request(run_case('m4', workflow=changed_script)))
 changed_script = mutant('drops_missing', 'STATE.missing = STATE.built.filter((entry) => !entry.report).map((entry) => entry.part.owner)', 'STATE.missing = []')
 if changed_script:
-    check.true('mutation: a script that drops a part that returned nothing without a word is caught', 'MISSING parts' not in run_case('m5', workflow=changed_script, responses={'build:stable': None})['result']['report_markdown'])
+    check.true('mutation: a script that drops a part that returned nothing without a word is caught', 'MISSING parts' not in run_case('m5', workflow=changed_script, responses={'build:lock_gate': None})['result']['report_markdown'])
 changed_script = mutant('no_first_read', "const first = (role) => `First read ${ARGS.plugin}/agents/${AGENT[role]} and follow it. (In that file and in the skill files it names, \\${CLAUDE_PLUGIN_ROOT} means the plugin folder: ${ARGS.plugin}.)`", "const first = (role) => ''")
 if changed_script:
     mutated = run_case('m6', workflow=changed_script)

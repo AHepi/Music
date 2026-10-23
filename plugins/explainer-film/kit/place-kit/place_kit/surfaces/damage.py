@@ -1,5 +1,5 @@
 """What this does: damage as SHAPE. In earlier work it was designed shape, not painted wear, that read at film size: boards that bow and cup, stones with knocked corners, posts
-that lean, thatch that sags, and above all no two parts alike. This step gives every object whose role needs it (timber, roof, stone; wanted for walls and props) a non-destructive,
+that lean, roofs that sag, and above all no two parts alike. This step gives every object whose role needs it (timber, roof, stone; wanted for walls and props) a non-destructive,
 different-for-every-object bend and lumpiness: a Subdivision Surface (simple) modifier adds the vertices to move, then a Displace modifier moves them with a slow noise read at the
 object's world position (so two boards from one mesh come out different), by an amount that depends on the kind of object and the look (a derelict place sags more than a kept one).
 Posts and fences also lean a little about their base. Everything the step adds is named "PK Damage ..." and the object is marked pk_shape_damage, so the audit can see it and undo can

@@ -1,5 +1,5 @@
 {
- "about": "The role table: what each kind of object IS and what treatments it needs. Roles may name example things (thatch, barrel) because this is data, never code. A role is \"class.name\". The class decides which treatments are REQUIRED (the audit fails without them) and which are WANTED (the audit says look). Each role carries a surface id (data/surfaces.json), a displace flag (real displacement only where true), may_hang (a part hung from above is allowed), needs_support (ground: stands on the ground, part: carried by another part, none), max_span_metres (the longest free span of a plank or beam), scale (fact ids in data/real_world_facts.json), dials (multipliers per wear layer, 0 = the layer is not for this role), exempt (treatments the role does not need, with the reason) a meaning (one plain line: what the role is for; `explainer-film-place roles --list` prints them all) and name_hints (regular expressions that guess the role from an object, collection or material name when the settings say nothing). Numbers in a role (max_span_metres, dials) share the role's own kind and source. A treatment is REQUIRED only if the kit really makes it and a test proves it (check-presets enforces this).",
+ "about": "The role table: what each kind of object IS and what treatments it needs. Roles may name example things (slate, barrel) because this is data, never code. A role is \"class.name\". The class decides which treatments are REQUIRED (the audit fails without them) and which are WANTED (the audit says look). Each role carries a surface id (data/surfaces.json), a displace flag (real displacement only where true), may_hang (a part hung from above is allowed), needs_support (ground: stands on the ground, part: carried by another part, none), max_span_metres (the longest free span of a plank or beam), scale (fact ids in data/real_world_facts.json), dials (multipliers per wear layer, 0 = the layer is not for this role), exempt (treatments the role does not need, with the reason) a meaning (one plain line: what the role is for; `explainer-film-place roles --list` prints them all) and name_hints (regular expressions that guess the role from an object, collection or material name when the settings say nothing). Numbers in a role (max_span_metres, dials) share the role's own kind and source. A treatment is REQUIRED only if the kit really makes it and a test proves it (check-presets enforces this).",
  "classes": {
   "ground": {
    "requires": [
@@ -287,7 +287,6 @@
    },
    "name_hints": [
     "\\broad\\b",
-    "\\blane\\b",
     "\\btrack\\b",
     "cart ?way",
     "dirt ?road"
@@ -295,8 +294,8 @@
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "note": "ruts, banks and hoof prints are shaped by the roads step",
-   "meaning": "a dirt lane or track that carts and horses drive on (gets ruts, banks, hoof prints)"
+   "note": "ruts and banks are shaped by the roads step (hoof prints too, when the settings ask for them)",
+   "meaning": "a dirt road or track that carts, vehicles or animals use (gets wheel ruts and banks; hoof prints are an option)"
   },
   "ground.mud": {
    "class": "ground",
@@ -545,8 +544,7 @@
    },
    "name_hints": [
     "earth floor",
-    "dirt floor",
-    "stall floor"
+    "dirt floor"
    ],
    "exempt": {},
    "kind": "judged",
@@ -658,13 +656,12 @@
    "dials": {},
    "name_hints": [
     "timber.?frame",
-    "half.?timber",
-    "wattle"
+    "half.?timber"
    ],
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "meaning": "a timber-framed wall with infill (a cottage wall)"
+   "meaning": "a timber-framed wall with plaster or brick between the timbers"
   },
   "wall.log": {
    "class": "wall",
@@ -835,11 +832,9 @@
    "name_hints": [
     "plaster",
     "render",
-    "daub",
     "whitewash",
     "\\bwall\\b",
-    "\\bhouse\\b",
-    "cottage"
+    "\\bhouse\\b"
    ],
    "exempt": {},
    "kind": "judged",
@@ -1389,7 +1384,6 @@
    "name_hints": [
     "\\b(hand ?)?carts?\\b(?! ?wheels?)",
     "wagon(?! ?wheels?)",
-    "carriage(?! ?wheels?)",
     "barrow"
    ],
    "exempt": {},
@@ -1459,7 +1453,6 @@
     "(?<!reed )(?<!flower )\\bbed\\b",
     "cupboard",
     "\\bdesk\\b",
-    "manger",
     "trestle"
    ],
    "exempt": {},
@@ -1479,7 +1472,7 @@
    "name_hints": [
     "wicker",
     "basket",
-    "\\bwattle (fence|panel)",
+    "\\bhurdle",
     "lobster ?pot",
     "crab ?pot",
     "fish ?trap",
@@ -1610,9 +1603,7 @@
    "dials": {},
    "name_hints": [
     "\\bprop\\b",
-    "woodpile",
     "\\blog pile",
-    "chopping",
     "bucket",
     "ladder",
     "stump block",
@@ -1621,7 +1612,7 @@
    "exempt": {},
    "kind": "judged",
    "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
-   "meaning": "a small wooden prop: a bucket, a ladder, a woodpile, a chopping block"
+   "meaning": "a small wooden prop: a bucket, a ladder, a log pile or a block"
   },
   "prop.generic": {
    "class": "prop",

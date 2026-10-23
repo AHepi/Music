@@ -226,7 +226,7 @@
   },
   {
    "id": "cart_height",
-   "what": "a hand or horse cart",
+   "what": "a hand cart or a wagon",
    "applies_to_role": "^prop\\.cart$",
    "dimension": "height",
    "min": 0.5,
@@ -257,7 +257,7 @@
    "max": 1.8,
    "unit": "metres",
    "kind": "judged",
-   "source": "common building and prop practice (from memory; confirm for the period and place)",
+   "source": "the coal mine yard (mine-scene/modules/ground_and_yard.py RUT_GAUGE): its cart roads have wheel ruts 1.24 m apart (measured in the build code); the range around it is from memory (confirm for the vehicle and the place)",
    "confidence": "weak",
    "note": "compared with the gauge written in the place settings roads"
   },
@@ -288,32 +288,6 @@
    "applies_to_name": "bench|stool"
   },
   {
-   "id": "stall_width",
-   "what": "a horse stall",
-   "applies_to_role": ".*",
-   "dimension": "width",
-   "min": 1.4,
-   "max": 3.2,
-   "unit": "metres",
-   "kind": "judged",
-   "source": "common building and prop practice (from memory; confirm for the period and place)",
-   "confidence": "guess",
-   "applies_to_name": "\\bstall\\b"
-  },
-  {
-   "id": "manger_height",
-   "what": "a manger rim",
-   "applies_to_role": ".*",
-   "dimension": "height",
-   "min": 0.7,
-   "max": 1.3,
-   "unit": "metres",
-   "kind": "judged",
-   "source": "common building and prop practice (from memory; confirm for the period and place)",
-   "confidence": "guess",
-   "applies_to_name": "manger"
-  },
-  {
    "id": "step_rise",
    "what": "one stair or step rise: how far this step's top stands above what it rests on or the next lower step (top to top)",
    "applies_to_role": "^stone\\.step$",
@@ -325,32 +299,6 @@
    "source": "common building and prop practice (from memory; confirm for the period and place)",
    "confidence": "weak",
    "note": "read from the construction check (the top of the step minus the top of the support below it or of the next lower step beside it), not from the object's own height: a solid block that stands on the bed is not a 1.8 m rise"
-  },
-  {
-   "id": "ladder_width",
-   "what": "a ladder",
-   "applies_to_role": ".*",
-   "dimension": "width",
-   "min": 0.3,
-   "max": 0.7,
-   "unit": "metres",
-   "kind": "judged",
-   "source": "common building and prop practice (from memory; confirm for the period and place)",
-   "confidence": "guess",
-   "applies_to_name": "ladder"
-  },
-  {
-   "id": "bucket_height",
-   "what": "a bucket",
-   "applies_to_role": ".*",
-   "dimension": "height",
-   "min": 0.2,
-   "max": 0.5,
-   "unit": "metres",
-   "kind": "judged",
-   "source": "common building and prop practice (from memory; confirm for the period and place)",
-   "confidence": "weak",
-   "applies_to_name": "bucket"
   },
   {
    "id": "tree_height",

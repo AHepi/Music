@@ -13,7 +13,7 @@
   "straw": "#c2a85e",
   "needle": "#7a5a32",
   "stick": "#5a4630",
-  "dung": "#4a3a24",
+  "clod_earth": "#4a3a24",
   "autumn_leaf": "#8a5a2a",
   "clover": "#5a8040"
  },
@@ -198,7 +198,7 @@
     "seam": 0.3
    },
    "gates": {},
-   "note": "single leaves, at wall feet, gutters and lane edges",
+   "note": "single leaves, at wall feet, gutters and road edges",
    "kind": "invented",
    "source": "the plugin 1.4.0 design: a first try, judge by looking"
   },
@@ -270,11 +270,11 @@
     "seam": 0.2
    },
    "gates": {},
-   "note": "a few straws near doors and carts",
+   "note": "a few straws near doors, carts and sacks",
    "kind": "invented",
    "source": "the plugin 1.4.0 design: a first try, judge by looking"
   },
-  "dung_lump": {
+  "clod": {
    "group": "litter",
    "builder": "lump",
    "size_cm": [
@@ -283,7 +283,7 @@
    ],
    "share": 0.01,
    "colours": [
-    "dung"
+    "clod_earth"
    ],
    "likes": {
     "base": 0.5,
@@ -294,7 +294,7 @@
     "seam": 0.0
    },
    "gates": {},
-   "note": "a lump near stables and tracks (never on the crown)",
+   "note": "a lump of earth or a small stone on or beside a track (never on the crown)",
    "kind": "invented",
    "source": "the plugin 1.4.0 design: a first try, judge by looking"
   }

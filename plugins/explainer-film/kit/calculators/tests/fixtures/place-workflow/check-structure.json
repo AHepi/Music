@@ -7,9 +7,9 @@
  "each_element": [],
  "claims_checked": [
   {
-   "claim": "[stable] the stable part has no object floating above its support",
+   "claim": "[lock_gate] the lock_gate part has no object floating above its support",
    "holds": false,
-   "evidence": "a ray from above finds a bench plank 3 cm over its posts"
+   "evidence": "a ray from above finds a gate board 3 cm over its rails"
   },
   {
    "claim": "[props] the props part has no object floating above its support",
@@ -19,14 +19,14 @@
  ],
  "problems": [
   {
-   "what": "a bench plank floats 3 cm above its posts",
-   "where": "stable bench",
+   "what": "a gate board floats 3 cm above its rails",
+   "where": "gate boards",
    "severity": "must fix",
-   "cheapest_fix": "lower the plank onto the posts",
-   "owner": "stable"
+   "cheapest_fix": "lower the board onto the rails",
+   "owner": "lock_gate"
   }
  ],
- "should_fix_now": "the floating plank",
+ "should_fix_now": "the floating board",
  "not_tested": [
   "nothing outside the pictures was looked at"
  ],

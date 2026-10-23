@@ -1,6 +1,6 @@
 ---
 name: surfaces-wear-and-construction
-description: The finishing pass that every place, set or prop built in Blender must go through, whatever the request says. It gives real normal maps and displacement, roughness and colour variation, dirt, grime, stains, weathering, wetness, moss, weeds, rust, cracks, chips, edge wear, damage and rubbish, believable construction (every plank on a support, every support on the ground, nothing floating), real-world sizes, and the place's art-style rule. One command does it (explainer-film-place finish) and an audit proves it (preflight stage place). Use whenever someone asks to build, model, make or improve a village, town, harbour, mine, farm, garden, interior, street, building, cottage, stable, road, level, set or props in Blender or in 3D, even if they never mention surfaces, textures, wear or realism, and before drawing, rendering or painting any such place.
+description: The finishing pass that every place, set or prop built in Blender must go through, whatever the request says. It gives real normal maps and displacement, roughness and colour variation, dirt, grime, stains, weathering, wetness, moss, weeds, rust, cracks, chips, edge wear, damage and rubbish, believable construction (every plank on a support, every support on the ground, nothing floating), real-world sizes, and the place's art-style rule. One command does it (explainer-film-place finish) and an audit proves it (preflight stage place). Use whenever someone asks to build, model, make or improve a village, town, harbour, mine, farm, garden, interior, street, building, house, barn, bridge, road, level, set or props in Blender or in 3D, even if they never mention surfaces, textures, wear or realism, and before drawing, rendering or painting any such place.
 when_to_use: Any request to make a place, set, building or props in Blender, and before any picture of one is drawn.
 ---
 
@@ -17,24 +17,23 @@ the model lint. The plugin's own model kit once made a hut of three plain-colour
 This skill is the pass that gives a place real surfaces, wear and sensible construction, and the check that proves it.
 It works for any place: a village, a town, a harbour, a mine, a farm, a garden, an interior.
 
-**A concrete example.** The request, word for word: "Build a village in the forest. Needs unkept dirt roads like
-they've been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props."
-It says nothing about surfaces. Following this skill, the planner splits the village into parts (lanes and ground,
-cottages, stable, props, forest edge), and the finishing pass gives the lanes two wheel ruts a cart's width apart
-with hoof prints down the middle and grass on the strips between, the thatch bunch ridges and moss, the timber a silvered
-grey, the stone footings moss and chips, the barrels rust bands, the wall feet nettles and splashed mud. The
-construction check proves every plank lies on a support and every door is the height of a person. The audit
-then lists, material by material, which treatments are there. The whole walk-through is in
-`${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/a-forest-village-example.md`. It is a plan, not a
-picture that was drawn: the tests prove the gates work, and fresh checkers and the person's own eyes judge the look.
+**A concrete example.** A small canal lock side (a brick wall with stone coping, a flight of stone steps, a gravel
+towpath, a timber gate and five props) was built by a helper who had never seen this plugin and followed only its steps.
+The brief said nothing about surfaces. The finishing pass gave all 94 objects UVs and 1024 px normal maps, bevelled 33
+of them, bent or chipped 70 by the damage step, put nine wear layers into 15 materials, and grew 66 plant pieces and
+101 litter pieces, none on the wheel track or in a puddle (measured). The construction check proved 88 of 88 parts
+carried from the ground up. The audit failed three times for real faults before it passed, and it lists, material by
+material, which treatments are there. The whole walk-through, and the Japanese garden that the construction rules come
+from, are in `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/worked-examples-garden-and-canal-lock.md`.
+The tests prove the gates work; fresh checkers and the person's own eyes judge the look.
 
 ## The words (one word for each thing; every file here uses these)
 
-- **role**: what an object is (`wall.timber_frame`, `ground.dirt_road`, `stone.step`). Every visible mesh gets exactly one. Give it as the object is made (`pk.new_part_object(owner, role, name, mesh)` does it, or the
+- **role**: what an object is (`wall.brick`, `ground.dirt_road`, `stone.step`). Every visible mesh gets exactly one. Give it as the object is made (`pk.new_part_object(owner, role, name, mesh)` does it, or the
   object property `place_role`). The ids and what each is for: `explainer-film-place roles --list` (every role, one plain line each; the data is `kit/place-kit/data/roles.json`). The kit also GUESSES a role from an
   object's name, but a guess can be wrong (a "Waterwheel" used to read as a cart wheel): read the roles it guessed, not only the ones it could not.
 - **surface**: a recipe that makes a material (height picture, normal strength, displacement depth, roughness range,
-  colours, tile size): `dirt_road`, `thatch`, `timber_weathered`.
+  colours, tile size): `dirt_road`, `roof_tile_clay`, `timber_weathered`.
 - **layer**: one wear effect put on a material: dirt, grime, weathering, wetness, cracks_and_chips, edge_wear,
   moss_and_algae, rust, rubbish. 3D plants and litter are scattered as separate pieces.
 - **treatment**: a thing the audit looks for. There are seventeen: normal_map, displacement, roughness_variation,
@@ -51,13 +50,12 @@ picture that was drawn: the tests prove the gates work, and fresh checkers and t
 |---|---|
 | kept, tidy, clean, swept, new, cared for | `kept` |
 | (nothing said), lived in, working, ordinary | `lived_in` (the default) |
-| unkept, untidy, overgrown, muddy, run down, neglected, forgotten | `neglected` |
+| unkempt, untidy, overgrown, muddy, run down, neglected, forgotten | `neglected` |
 | ruined, derelict, collapsed, ancient, abandoned for years | `derelict` |
 
-Wet, rainy, after rain, puddles: state `wet`. Damp, misty, drizzle, dew, forest floor under trees: `damp`.
-Otherwise `dry`. Different roles may have different looks (`look_by_role` in the settings): in the village,
-`neglected` for the lanes and `lived_in` for the cottages. "Empty stable" is not "ruined stable": give it
-`lived_in`, with old straw and dung left inside, so it reads empty-but-used.
+Wet, rainy, after rain, puddles: state `wet`. Damp, misty, drizzle, dew, shaded ground under trees: `damp`.
+Otherwise `dry`. Different roles may have different looks (`look_by_role` in the settings): for example `neglected`
+for a towpath and `lived_in` for the walls beside it.
 
 **A place type is only a starting point.** `new-settings --type harbour` writes look `neglected` and state `wet` (a harbour preset's own starting values); `generic` writes `lived_in` and `dry`. The types are
 village, town, harbour, mine, farm, garden, interior and generic; a canal or a mill has no preset, so take the nearest (harbour for a canal) and then change the look and the state in `place-settings.json` to what the
@@ -79,7 +77,7 @@ file and the tool that makes it). `explainer-film-place --verbs` lists the verbs
 | Draft the settings from names and collections (also a road for each dirt-road object, from its shape) | `new-settings --place NAME --type TYPE --out place-settings.json` |
 | One role per object; the list of role ids | `roles --write` (needs `--save-as`); `roles --list` (no scene needed) |
 | UVs, normal maps, roughness and colour variation, bevels, displacement | `surfaces --map-size PIXELS --maps-folder DIR` |
-| Shaped lanes: ruts, banks, hoof prints, grass crown, puddle hollows | `roads` |
+| Shaped roads: wheel ruts, banks, optional hoof prints, grass crown, puddle hollows | `roads` |
 | Damage as shape: bent boards, chipped corners, leaning posts, sag, no two parts alike | `damage --amount X` |
 | Wear layers in their fixed order | `age --look ID --state dry\|damp\|wet --master X --layers a,b --layers-off a,b --mask-cell-metres X` |
 | 3D plants, moss cushions, litter | `grow --density X` |
@@ -157,11 +155,11 @@ result is for trying things; the audit records that it was quick and the place s
 
 - `${CLAUDE_PLUGIN_ROOT}/skills/surfaces-wear-and-construction/the-required-steps.md`: the numbered steps, the live-Blender route, the shortcuts that fail.
 - `surface-recipes.md`: surface by surface, with sizes, maps and the Poly Haven picks.
-- `wear-recipes.md`: where each kind of wear goes, how much, how big, in what order, and the lane driven by carts.
+- `wear-recipes.md`: where each kind of wear goes, how much, how big, in what order, and a road cut by heavy carts.
 - `construction-and-scale.md`: building from the ground up, the facts table, what the construction check measures.
 - `style-rule-and-measures.md`: the style rule, the style note, the picture measures.
 - `fresh-checkers.md`: how to be checked honestly.
 - `rendering-on-rented-cards.md`: cheap Cycles on rented cards, set-up by the person, daily use.
 - `blender-5-traps.md`: the Blender 5.2 traps that cost whole rounds.
-- `a-forest-village-example.md`: the worked example.
+- `worked-examples-garden-and-canal-lock.md`: two real places walked through, with their measured numbers.
 - Also: the workflow `build-a-place` builds a place in parts with fresh checkers; the tips guide section 8a.

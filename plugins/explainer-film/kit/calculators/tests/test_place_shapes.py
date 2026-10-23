@@ -4,8 +4,8 @@
 2. NORMAL MAPS from heights point the right way: a round hill gives a normal map whose red channel is brighter on the side facing +U and whose green channel is brighter on the side
    facing the top of the picture (OpenGL); a flipped green channel reads about -1 against the height; an axis with no slope is "not informative"; a map made from a seamless height is
    seamless; the PNG writer makes a file other programs can read.
-3. The LANE height function (two wheel ruts a gauge apart with banks, hoof dimples, puddle hollows): the ruts are where the settings say, as deep as they say, a gauge apart; nothing
-   happens far from the lane; the same call gives the same ground; a wider gauge moves the ruts apart.
+3. The ROAD height function (two wheel ruts a gauge apart with banks, hoof dimples, puddle hollows): the ruts are where the settings say, as deep as they say, a gauge apart; nothing
+   happens far from the road; the same call gives the same ground; a wider gauge moves the ruts apart.
 4. The GRADED GRID of the ground: small squares near the viewer, larger far away, ends exactly on the edges, every square a real quad.
 5. The 3D PIECES (tufts, leaves, sticks, lumps): at least 8 different tufts, each with 5 to 9 blades, every vertex between z = 0 and 1, a modest number of triangles.
 6. The flat-map maths (plan2d): distance to a polyline with its side, blur keeps the average, distance to the nearest marked cell, shadow behind a wall away from the sun.
@@ -26,7 +26,7 @@ from place_kit import plan2d, settings_file  # noqa: E402
 from place_kit.surfaces import heights, normals, ground_mesh, roads  # noqa: E402
 from place_kit.growth import pieces  # noqa: E402
 
-check = Checker('place shapes: recipes, normal maps, lane height, graded grid, pieces, flat-map maths')
+check = Checker('place shapes: recipes, normal maps, road height, graded grid, pieces, flat-map maths')
 
 # ---------------------------------------------------------------- 1. height recipes
 SIZE = 128
@@ -116,14 +116,14 @@ try:
 except ImportError:
     check.note('part skipped: Pillow is not installed, so the PNG readback was not checked')
 
-# ---------------------------------------------------------------- 3. the lane height function
+# ---------------------------------------------------------------- 3. the road height function
 road = {'polyline': [[0.0, 0.0], [40.0, 0.0]], 'width': 3.0, 'gauge': 1.3, 'rut_depth': 0.08, 'hoof': True}
 station = np.arange(5.0, 35.0, 0.25)
 across = np.arange(-2.4, 2.4, 0.01)
 profile_depths, gauges, banks = [], [], []
 for along in station[::4]:
     points = np.stack([np.full_like(across, along), across], axis=1)
-    offset, mask = roads.lane_height_offset(points, road, seed=3)
+    offset, mask = roads.road_height_offset(points, road, seed=3)
     left = offset[across > 0.2].min()
     right = offset[across < -0.2].min()
     profile_depths.append((-left, -right))
@@ -134,24 +134,24 @@ check.true('the ruts are about as deep as the settings say (mean within 30 perce
 check.true('...and never absurd (between 3 and 14 cm)', 0.03 <= float(depths.min()) and float(depths.max()) <= 0.14, f'{float(depths.min()) * 100:.1f} to {float(depths.max()) * 100:.1f} cm')
 check.close('the two ruts are a gauge apart (1.3 m, mean of the stations)', float(np.mean(gauges)), 1.3, 0.12)
 check.true('a bank stands beside each rut (the highest point of the profile is above the ground)', float(np.mean(banks)) > 0.005, f'{float(np.mean(banks)) * 100:.1f} cm')
-far = roads.lane_height_offset(np.array([[20.0, 4.0], [20.0, -4.0], [20.0, 9.0]]), road, seed=3)[0]
-check.true('three metres or more from the lane the ground is untouched', np.all(far == 0.0), str(far))
-one = roads.lane_height_offset(np.stack([station, np.full_like(station, 0.65)], axis=1), road, seed=3)
-two = roads.lane_height_offset(np.stack([station, np.full_like(station, 0.65)], axis=1), road, seed=3)
+far = roads.road_height_offset(np.array([[20.0, 4.0], [20.0, -4.0], [20.0, 9.0]]), road, seed=3)[0]
+check.true('three metres or more from the road the ground is untouched', np.all(far == 0.0), str(far))
+one = roads.road_height_offset(np.stack([station, np.full_like(station, 0.65)], axis=1), road, seed=3)
+two = roads.road_height_offset(np.stack([station, np.full_like(station, 0.65)], axis=1), road, seed=3)
 check.true('the same road and seed give exactly the same ground', np.array_equal(one[0], two[0]) and np.array_equal(one[1], two[1]))
-other = roads.lane_height_offset(np.stack([station, np.full_like(station, 0.65)], axis=1), road, seed=4)
+other = roads.road_height_offset(np.stack([station, np.full_like(station, 0.65)], axis=1), road, seed=4)
 check.true('another seed gives a different wobble', not np.array_equal(one[0], other[0]))
-check.true('the rut mask is 1 in a rut and 0 between the ruts', one[1].mean() > 0.4 and roads.lane_height_offset(np.array([[20.0, 0.0]]), road, seed=3)[1][0] < 0.05)
+check.true('the rut mask is 1 in a rut and 0 between the ruts', one[1].mean() > 0.4 and roads.road_height_offset(np.array([[20.0, 0.0]]), road, seed=3)[1][0] < 0.05)
 wide = dict(road, gauge=1.8)
 points = np.stack([np.full_like(across, 20.0), across], axis=1)
-offset_wide = roads.lane_height_offset(points, wide, seed=3)[0]
+offset_wide = roads.road_height_offset(points, wide, seed=3)[0]
 check.true('a wider gauge moves the ruts apart', abs(across[offset_wide.argmin()]) > 0.8, f'deepest at {across[offset_wide.argmin()]:+.2f} m')
 hoof_points = np.concatenate([np.stack([np.linspace(10.0, 30.0, 800), np.full(800, 0.1)], axis=1), np.stack([np.linspace(10.0, 30.0, 800), np.full(800, -0.1)], axis=1)])
-with_hoof = roads.lane_height_offset(hoof_points, road, seed=3)[0]
-without_hoof = roads.lane_height_offset(hoof_points, dict(road, hoof=False), seed=3)[0]
-check.true('hoof prints dimple the middle of the lane by about 2 cm (left and right in turn)', float((without_hoof - with_hoof).max()) > 0.015 and float((without_hoof - with_hoof).min()) >= -1e-9, f'deepest dimple {float((without_hoof - with_hoof).max()) * 100:.1f} cm')
+with_hoof = roads.road_height_offset(hoof_points, road, seed=3)[0]
+without_hoof = roads.road_height_offset(hoof_points, dict(road, hoof=False), seed=3)[0]
+check.true('hoof prints dimple the middle of the road by about 2 cm (left and right in turn)', float((without_hoof - with_hoof).max()) > 0.015 and float((without_hoof - with_hoof).min()) >= -1e-9, f'deepest dimple {float((without_hoof - with_hoof).max()) * 100:.1f} cm')
 wheel_points = np.stack([np.linspace(10.0, 30.0, 200), np.full(200, 0.65)], axis=1)
-check.true('...and none on the wheel track itself', np.allclose(roads.lane_height_offset(wheel_points, road, seed=3)[0], roads.lane_height_offset(wheel_points, dict(road, hoof=False), seed=3)[0], atol=0.003))
+check.true('...and none on the wheel track itself', np.allclose(roads.road_height_offset(wheel_points, road, seed=3)[0], roads.road_height_offset(wheel_points, dict(road, hoof=False), seed=3)[0], atol=0.003))
 total, mask = roads.total_offset(np.array([[20.0, 0.65], [20.0, 10.65]]), [road, {'polyline': [[0.0, 10.0], [40.0, 10.0]], 'width': 3.0, 'gauge': 1.3, 'rut_depth': 0.08}], seed=3)
 check.true('two roads add up: both have ruts', total[0] < -0.02 and total[1] < -0.02)
 

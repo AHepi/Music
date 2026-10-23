@@ -1,6 +1,6 @@
 {
- "place": "village",
- "place_type": "village",
+ "place": "canal lock",
+ "place_type": "harbour",
  "files": {
   "style_note": "/path/to/run/plan/style-note.md",
   "facts": "/path/to/run/plan/real-world-facts.json",
@@ -8,62 +8,62 @@
   "ownership": "/path/to/run/plan/ownership.json",
   "acceptance": "/path/to/run/plan/acceptance.json"
  },
- "ground_owner": "roads_and_ground",
+ "ground_owner": "ground_and_water",
  "scene_file": "/path/to/run/scene/start.blend",
  "look": "lived_in",
  "state": "damp",
  "parts": [
   {
-   "name": "roads and ground",
-   "owner": "roads_and_ground",
-   "collection": "Place: roads_and_ground",
+   "name": "ground and water",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
    "region": [
     0,
     0,
     20,
     20
    ],
-   "brief": "The graded ground, two lanes with ruts and hoof prints, the verge, puddle hollows and the view cameras.",
+   "brief": "The graded ground, the gravel towpath with ruts, the verges, puddle hollows, the water of the chamber and the view cameras.",
    "steps_in_order": [
     "graded ground mesh",
-    "lane shapes",
-    "verge and puddle hollows",
-    "view cameras"
+    "towpath shape",
+    "verges and puddle hollows",
+    "water and view cameras"
    ],
    "triangle_budget": 150000
   },
   {
-   "name": "cottages",
-   "owner": "cottages",
-   "collection": "Place: cottages",
+   "name": "walls and steps",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
    "region": [
     0,
     0,
     20,
     20
    ],
-   "brief": "Three cottages: stone footing, timber frame, thatch roof, chimney, door and step.",
+   "brief": "The brick lock wall with stone coping, a trench in the towpath and a flight of stone steps down to the water.",
    "steps_in_order": [
-    "footings and frames",
-    "roofs and bevels",
+    "wall panels and coping",
+    "trench and steps",
     "roles and the part pass"
    ],
    "triangle_budget": 250000
   },
   {
-   "name": "stable",
-   "owner": "stable",
-   "collection": "Place: stable",
+   "name": "lock gate",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
    "region": [
     0,
     0,
     20,
     20
    ],
-   "brief": "An empty stable: three stalls, mangers, a plank door, old straw and dung.",
+   "brief": "A two-leaf timber gate: heel posts, mitre posts, rails tenoned into both posts, boards, iron straps and balance beams.",
    "steps_in_order": [
-    "frame and stalls",
-    "door and mangers",
+    "posts and rails",
+    "boards and straps",
     "roles and the part pass"
    ],
    "triangle_budget": 120000
@@ -78,31 +78,31 @@
     20,
     20
    ],
-   "brief": "Barrels with iron bands, buckets, crates, a handcart, a well, a woodpile, a ladder, a fence.",
+   "brief": "Two bollards, a crate, a barrel with two iron bands and a coil of rope.",
    "steps_in_order": [
-    "barrels and crates",
-    "cart and well",
+    "bollards and crate",
+    "barrel and rope",
     "roles and the part pass"
    ],
-   "triangle_budget": 120000
+   "triangle_budget": 60000
   },
   {
-   "name": "forest edge",
-   "owner": "forest_edge",
-   "collection": "Place: forest_edge",
+   "name": "bank planting",
+   "owner": "bank_planting",
+   "collection": "Place: bank_planting",
    "region": [
     0,
     0,
     20,
     20
    ],
-   "brief": "Pines and broadleaf trees, stumps, logs, rocks, ferns, bramble, nettles, kept off the lanes.",
+   "brief": "Grass verges, reeds, nettles and bramble on the bank, kept off the towpath.",
    "steps_in_order": [
-    "trees and stumps",
-    "logs and rocks",
+    "verge tufts",
+    "reeds and bramble",
     "roles and the part pass"
    ],
-   "triangle_budget": 200000
+   "triangle_budget": 100000
   },
   {
    "name": "extra part 1",
@@ -208,7 +208,7 @@
   }
  ],
  "contracts": [
-  "inside 1.2 m of each lane centre line the ground is as it is"
+  "inside 1.2 m of each road centre line the ground is as it is"
  ],
  "frozen": [
   "cameras",
@@ -227,8 +227,8 @@
    ]
   },
   {
-   "name": "lane_close",
-   "camera": "View lane_close",
+   "name": "towpath_close",
+   "camera": "View towpath_close",
    "size": [
     1200,
     800
@@ -245,123 +245,122 @@
  ],
  "readable_features": [
   {
-   "name": "wheel ruts with puddles",
+   "name": "brick courses with moss",
    "keywords": [
-    "rut",
-    "puddle"
-   ]
-  },
-  {
-   "name": "hoof prints",
-   "keywords": [
-    "hoof"
-   ]
-  },
-  {
-   "name": "grass between the ruts",
-   "keywords": [
-    "grass",
-    "centre"
-   ]
-  },
-  {
-   "name": "thatch with moss and a sag",
-   "keywords": [
-    "thatch",
+    "brick",
     "moss"
    ]
   },
   {
-   "name": "plaster cracks on a timber frame",
+   "name": "stone coping with chips",
    "keywords": [
-    "crack",
-    "plaster"
+    "coping",
+    "chip"
    ]
   },
   {
-   "name": "silvered planks",
+   "name": "stone steps with worn edges",
+   "keywords": [
+    "step",
+    "tread"
+   ]
+  },
+  {
+   "name": "rutted gravel towpath with puddles",
+   "keywords": [
+    "rut",
+    "puddle",
+    "towpath"
+   ]
+  },
+  {
+   "name": "weeds along the towpath edge",
+   "keywords": [
+    "weed",
+    "tuft"
+   ]
+  },
+  {
+   "name": "silvered gate boards",
    "keywords": [
     "silver",
-    "weathered",
+    "board",
     "plank"
    ]
   },
   {
-   "name": "stone footings with moss",
+   "name": "balance beams with iron straps",
    "keywords": [
-    "footing",
-    "stone"
+    "beam",
+    "strap"
    ]
   },
   {
-   "name": "soot staining above the chimney",
+   "name": "rusty bollards",
    "keywords": [
-    "soot",
-    "smoke",
-    "chimney"
-   ]
-  },
-  {
-   "name": "empty stalls with straw",
-   "keywords": [
-    "stall",
-    "straw",
-    "empty"
-   ]
-  },
-  {
-   "name": "dung or straw by the door",
-   "keywords": [
-    "dung",
-    "straw",
-    "door"
-   ]
-  },
-  {
-   "name": "barrels with rusted bands",
-   "keywords": [
-    "barrel",
+    "bollard",
     "rust"
    ]
   },
   {
-   "name": "a cart with spoked wheels",
+   "name": "a barrel with iron bands",
    "keywords": [
-    "cart",
-    "wheel"
+    "barrel",
+    "band"
    ]
   },
   {
-   "name": "a woodpile and chopping block",
+   "name": "a coil of rope",
    "keywords": [
-    "woodpile",
-    "chopping"
+    "rope",
+    "coil"
    ]
   },
   {
-   "name": "a leaning fence",
+   "name": "a wooden crate",
    "keywords": [
-    "fence"
+    "crate"
    ]
   },
   {
-   "name": "ferns and nettles at the wall feet",
+   "name": "a dark waterline stain on the wall",
    "keywords": [
-    "fern",
-    "nettle"
+    "waterline",
+    "stain"
    ]
   },
   {
-   "name": "fallen leaves and logs",
+   "name": "dark water in the lock chamber",
+   "keywords": [
+    "water",
+    "chamber"
+   ]
+  },
+  {
+   "name": "cracked bricks",
+   "keywords": [
+    "crack"
+   ]
+  },
+  {
+   "name": "a gate leaf that leans",
+   "keywords": [
+    "leaning",
+    "crooked",
+    "leans"
+   ]
+  },
+  {
+   "name": "leaves and litter on the towpath",
    "keywords": [
     "leaves",
-    "log"
+    "litter"
    ]
   }
  ],
- "renderer_hint": "a lit window in one cottage means Cycles",
+ "renderer_hint": "a lit lantern on the gate post, and water in view, mean Cycles",
  "open_questions": [
-  "the cart gauge is a guess until a source confirms it"
+  "the lock wall thickness and the balance beam length are guesses until a source confirms them"
  ],
  "notes": ""
 }

@@ -81,9 +81,9 @@ wall = roles.requirements('wall.plaster', table)
 check.true('a plaster wall requires normal map, dirt, grime, weathering, wetness, cracks, edge wear, moss and bevels',
            all(t in wall['required'] for t in ('normal_map', 'dirt', 'grime', 'weathering', 'wetness', 'cracks_and_chips', 'edge_wear', 'moss_and_algae', 'bevelled_edges')), ', '.join(wall['required']))
 check.true('...and wants shape damage', 'shape_damage' in wall['wanted'])
-lane = roles.requirements('ground.dirt_road', table)
-check.true('a dirt road requires displacement (the role says displace), plants, litter pieces and rubbish', all(t in lane['required'] for t in ('displacement', 'plants', 'litter_pieces', 'rubbish')), ', '.join(lane['required']))
-check.true('a dirt road does not also "want" displacement (it is required)', 'displacement' not in lane['wanted'])
+road = roles.requirements('ground.dirt_road', table)
+check.true('a dirt road requires displacement (the role says displace), plants, litter pieces and rubbish', all(t in road['required'] for t in ('displacement', 'plants', 'litter_pieces', 'rubbish')), ', '.join(road['required']))
+check.true('a dirt road does not also "want" displacement (it is required)', 'displacement' not in road['wanted'])
 check.true('earth, forest floor, gravel and paving ground also require displacement', all('displacement' in roles.requirements(r, table)['required'] for r in ('ground.earth', 'ground.forest_floor', 'ground.gravel', 'ground.stone_paving')))
 check.true('thatch requires displacement too', 'displacement' in roles.requirements('roof.thatch', table)['required'])
 snow = roles.requirements('ground.snow', table)
@@ -142,7 +142,7 @@ lines = roles.role_list_lines(table)
 check.true('the role list has one line for every role, grouped by class', sum(1 for line in lines if not line.startswith('==')) == len(table['roles']) and sum(1 for line in lines if line.startswith('==')) == len({s['class'] for s in table['roles'].values()}))
 import subprocess  # noqa: E402
 done = subprocess.run([sys.executable, '-I', '-B', os.path.join(KIT, 'place-kit', 'place_command.py'), 'roles', '--list'], capture_output=True, text=True, timeout=60)
-check.true('`explainer-film-place roles --list` prints every role with its meaning, needs no scene and no Blender, and exits 0', done.returncode == 0 and 'stone.step: a stone step' in done.stdout and 'ground.dirt_road: a dirt lane' in done.stdout, f'exit {done.returncode}, {len(done.stdout.splitlines())} lines')
+check.true('`explainer-film-place roles --list` prints every role with its meaning, needs no scene and no Blender, and exits 0', done.returncode == 0 and 'stone.step: a stone step' in done.stdout and 'ground.dirt_road: a dirt road' in done.stdout, f'exit {done.returncode}, {len(done.stdout.splitlines())} lines')
 for type_id in settings_file.place_type_ids():
     preset = settings_file.place_type(type_id)
     indoors = [e for e in preset.get('allowed_off', []) if e['id'] == 'floors_indoors']
@@ -162,9 +162,9 @@ own_path = os.path.join(tempfile.mkdtemp(prefix='place-facts-test-'), 'own-facts
 partial = {'id': 'door_height', 'min': 0.3, 'max': 0.5, 'confidence': 'strong'}          # only a new range for a fact the kit already has
 json.dump({'facts': [partial]}, open(own_path, 'w'))
 merged = {f['id']: f for f in scale.load_facts({}, own_path)}['door_height']
-check.true('control: the partial fact on its own would apply to a wall (that is what replacing the whole entry gave)', scale.applicable_facts('wall.plaster', 'Cottage wall', [dict(partial, dimension='height')]) != [])
+check.true('control: the partial fact on its own would apply to a wall (that is what replacing the whole entry gave)', scale.applicable_facts('wall.plaster', 'House wall', [dict(partial, dimension='height')]) != [])
 check.true('a partial own fact keeps the generic fact\'s pattern (it still applies to doors only) and takes the new range', merged['min'] == 0.3 and merged['max'] == 0.5 and merged['confidence'] == 'strong'
-           and scale.applicable_facts('wall.plaster', 'Cottage wall', [merged]) == [] and scale.applicable_facts('timber.door', 'Door', [merged]) == [merged], str(merged)[:200])
+           and scale.applicable_facts('wall.plaster', 'House wall', [merged]) == [] and scale.applicable_facts('timber.door', 'Door', [merged]) == [merged], str(merged)[:200])
 json.dump({'facts': [{'id': 'canal_lock_depth', 'what': 'a made-up fact of one place', 'applies_to_role': '^water\\.', 'dimension': 'height', 'min': 1.0, 'max': 3.0, 'unit': 'metres', 'confidence': 'weak'}]}, open(own_path, 'w'))
 ids = [f['id'] for f in scale.load_facts({}, own_path)]
 check.true('a new fact of the place is added beside the generic ones', 'canal_lock_depth' in ids and 'door_height' in ids)

@@ -5,13 +5,13 @@ What it proves, and how (each measurement is read straight from Blender's own da
   2. Every treatment is really there after `finish`: normal maps are OpenGL, Non-Color, wired to the shader and point the right way (and a copy with the green flipped reads wrong, so
      the check is not blind); displacement is set on the roles that need it, on a mesh that can show it; roughness varies and colour varies; edges get a bevel with hardened normals;
      each wear layer (layer dirt, layer grime, layer weathering, layer wetness, layer cracks_and_chips, layer edge_wear, layer moss_and_algae, layer rust, layer rubbish) is in a
-     material and has a real amount on an object (an object with no amount reads 0 in every renderer); shape damage makes siblings differ; plants kept out of wheel ruts, the lane's
-     centre strip and puddles (counted against the lane's own geometry), while weeds still grow beside the lane.
+     material and has a real amount on an object (an object with no amount reads 0 in every renderer); shape damage makes siblings differ; plants kept out of wheel ruts, the road's
+     centre strip and puddles (counted against the road's own geometry), while weeds still grow beside the road.
   3. The wear is controllable and honest: the master at 0 gives EXACTLY the picture with every layer removed (the largest pixel difference is reported); drawing twice gives the
      same picture; each layer on its own changes the picture; layer_off and layer_on put a layer out of and back into every chain.
   4. The pass can be repeated and undone: finishing twice gives the same scene; finishing the same flat scene twice gives the same scene and the same pictures; `undo` puts the
      original materials back and removes everything the kit added.
-  5. The lane is real geometry: two ruts about a gauge apart, as deep as the settings say, measured from the ground by rays.
+  5. The road is real geometry: two ruts about a gauge apart, as deep as the settings say, measured from the ground by rays.
   6. The construction check on small scenes of boxes: seated, floating, a beam on posts, a beam 3 cm short, a rail joined into posts, a rail that barely overlaps, inside out, flicker,
      a door above a gap, a lamp in a solid, a plank that spans too far.
   7. One object with two materials gets two roles; a material that carries its own maps is kept; UVs are in metres; a scene with no light gets one.
@@ -89,9 +89,9 @@ def lines(text, start):
 flat_hut = make_scene(HUT, 'flat-hut')
 good_hut = make_scene(HUT, 'good-hut', '--no-floating')
 yard = make_scene(YARD, 'yard')
-with open(path('yard', 'place-settings.json'), 'w') as handle:           # the settings the yard test uses (a lane through the ground); the huts have none and get a draft
+with open(path('yard', 'place-settings.json'), 'w') as handle:           # the settings the yard test uses (a road through the ground); the huts have none and get a draft
     json.dump({'place': 'yard', 'place_type': 'generic', 'look': 'neglected', 'state': 'damp', 'seed': 5,
-               'roads': [{'name': 'main lane', 'polyline': [[0, 3], [14, 3], [30, 5]], 'width': 3.0, 'gauge': 1.3, 'rut_depth': 0.08, 'hoof': True}],
+               'roads': [{'name': 'main road', 'polyline': [[0, 3], [14, 3], [30, 5]], 'width': 3.0, 'gauge': 1.3, 'rut_depth': 0.08, 'hoof': True}],
                'footfall': [{'shape': 'auto_door_strip', 'role': 'timber.door', 'depth': 1.0, 'width': 1.2}], 'picture': {'camera': 'Camera A', 'height_pixels': 1200}}, handle)
 yard_settings = path('yard', 'place-settings.json')
 
@@ -124,7 +124,7 @@ check.equal('the same quick scene is accepted as a trial with --allow-quick', co
 # ---------------------------------------------------------------- 2. the treatments are really there
 facts_hut = probe(finished_hut, 'facts')
 code, text, seconds = place('finish', yard, '--settings', yard_settings, '--save-as', path('yard', 'finished.blend'))
-timings['finish, yard (36 x 26 m ground, 41 objects, one lane), full size'] = seconds
+timings['finish, yard (36 x 26 m ground, 41 objects, one road), full size'] = seconds
 check.true('the yard finishes and passes the audit (exit 0 or a LOOK-only warning)', code == 0, f'exit {code}: ' + ' '.join(lines(text, 'FAIL'))[:200])
 yard_finished = path('yard', 'finished.blend')
 facts = probe(yard_finished, 'facts')
@@ -179,18 +179,18 @@ check.true('...every wall, post and plank carries a damage modifier with a stren
            str({r: i['strengths_m'] for r, i in damage.items() if r.split('.')[0] in ('wall', 'timber')})[:200])
 check.true('...and damage does not lift anything off the ground (every lowest point is within 6 cm of where it was seated)', all(info['max_lowest_z_error_m'] < 0.06 for info in damage.values()), str({r: round(i['max_lowest_z_error_m'], 3) for r, i in damage.items() if i['max_lowest_z_error_m'] >= 0.03}))
 
-# ---------------------------------------------------------------- 5. the lane and plants kept out
+# ---------------------------------------------------------------- 5. the road and plants kept out
 roads = probe(yard_finished, 'roads', '--settings', yard_settings)
-lane = roads['roads'][0]
-check.true('the lane is real geometry: ruts measured from the ground by rays are about as deep as the settings say (within 40 percent of 8 cm)', abs(lane['depth_median_m'] - lane['rut_depth_in_settings_m']) <= 0.4 * lane['rut_depth_in_settings_m'],
-           f'median {lane["depth_median_m"] * 100:.1f} cm, settings {lane["rut_depth_in_settings_m"] * 100:.0f} cm (from {lane["depth_min_m"] * 100:.1f} to {lane["depth_max_m"] * 100:.1f})')
-check.close('...and the two ruts are a gauge apart (1.3 m, within 15 cm)', lane['gauge_median_m'], 1.3, 0.15)
-counts = lane['roots']
-check.equal('plants kept out: no plant or litter piece stands in a wheel rut (counted from the lane\'s own geometry)', counts['in_rut_core'], 0, recorded='exact-zero gate on the wheel-track mask')
+road = roads['roads'][0]
+check.true('the road is real geometry: ruts measured from the ground by rays are about as deep as the settings say (within 40 percent of 8 cm)', abs(road['depth_median_m'] - road['rut_depth_in_settings_m']) <= 0.4 * road['rut_depth_in_settings_m'],
+           f'median {road["depth_median_m"] * 100:.1f} cm, settings {road["rut_depth_in_settings_m"] * 100:.0f} cm (from {road["depth_min_m"] * 100:.1f} to {road["depth_max_m"] * 100:.1f})')
+check.close('...and the two ruts are a gauge apart (1.3 m, within 15 cm)', road['gauge_median_m'], 1.3, 0.15)
+counts = road['roots']
+check.equal('plants kept out: no plant or litter piece stands in a wheel rut (counted from the road\'s own geometry)', counts['in_rut_core'], 0, recorded='exact-zero gate on the wheel-track mask')
 check.equal('plants kept out: ...none within 2 cm of a rut edge', counts['in_rut_band'], 0)
-check.equal('plants kept out: ...none in the trodden centre strip of the lane', counts['in_centre_strip'], 0)
-check.true('...but weeds do grow beside the lane and across the yard (the gates are not "no plants at all")', counts['near_lane_outside'] >= 15 and counts['elsewhere'] >= 100 and roads['groups'].get('plant', 0) >= 100 and roads['groups'].get('litter', 0) >= 100,
-           f'near the lane {counts["near_lane_outside"]}, elsewhere {counts["elsewhere"]}, plants {roads["groups"].get("plant")}, litter {roads["groups"].get("litter")}')
+check.equal('plants kept out: ...none in the trodden centre strip of the road', counts['in_centre_strip'], 0)
+check.true('...but weeds do grow beside the road and across the yard (the gates are not "no plants at all")', counts['near_road_outside'] >= 15 and counts['elsewhere'] >= 100 and roads['groups'].get('plant', 0) >= 100 and roads['groups'].get('litter', 0) >= 100,
+           f'near the road {counts["near_road_outside"]}, elsewhere {counts["elsewhere"]}, plants {roads["groups"].get("plant")}, litter {roads["groups"].get("litter")}')
 with open(path('yard', 'place-audit.json')) as handle:
     yard_audit = json.load(handle)
 check.true('the audit\'s own recount agrees (every scatter group has 0 on a track, a crown, a puddle, a keep-out and within 5 cm of litter)', all(g[k] == 0 for g in yard_audit['scatter']['groups'] for k in ('in_keepout', 'in_puddle', 'on_crown', 'on_wheel_track', 'within_5cm_of_litter')))

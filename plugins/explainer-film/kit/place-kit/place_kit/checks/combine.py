@@ -3,7 +3,7 @@ them one after another in the open scene, takes a fingerprint of the whole scene
 own, new objects with no owner, shared node groups changed, frozen state changed. It also runs the whole chain a second time and says whether the scene came out the same (a stage must be
 idempotent: it removes what it made before making it again). The order matters only if a stage is wrong, so the integrator runs the chain in plain order and in reverse and compares (the
 `combine` verb with --order both does both from the same starting file). It needs Blender (bpy).
-A concrete example: combine_stages(['stage_roads.py', 'stage_cottages.py'], owners) returns {'stages': [{'name': 'roads', 'added': 12, 'violations': []}, ...], 'violations': [], 'idempotent': True}.
+A concrete example: combine_stages(['stage_roads.py', 'stage_walls.py'], owners) returns {'stages': [{'name': 'roads', 'added': 12, 'violations': []}, ...], 'violations': [], 'idempotent': True}.
 """
 import importlib.util
 import os

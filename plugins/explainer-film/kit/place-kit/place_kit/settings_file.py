@@ -5,7 +5,7 @@ works inside Blender and outside it and is tested without Blender.
 
 A concrete example of a settings file (everything is optional; an empty file means "a lived-in place, dry, every role from names"):
     {"place": "demo", "place_type": "generic", "look": "neglected", "state": "damp",
-     "roads": [{"name": "lane", "polyline": [[0, 0], [30, 5]], "width": 3.0, "gauge": 1.3, "rut_depth": 0.08, "hoof": true}],
+     "roads": [{"name": "towpath", "polyline": [[0, 0], [30, 5]], "width": 3.0, "gauge": 1.3, "rut_depth": 0.08, "hoof": true}],
      "off": [{"layer": "moss_and_algae", "roles": ["floor.*"], "reason": "inside: dry, nothing grows", "reason_id": "floors_indoors"}]}
 """
 import copy

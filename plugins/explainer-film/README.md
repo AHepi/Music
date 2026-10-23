@@ -94,6 +94,8 @@ to spoken words like that.
   rust, weeds, rubbish, damage as shape, believable construction, real sizes, the style rule). The skills a model reads first
   (`make-3d-models`, `build-and-paint-a-place`, `make-explainer-film`) now make the pass and the construction check required
   steps, and their descriptions carry the words so they are picked even when the request names no surfaces.
+- The skill's worked examples are two places this project really built and measured, with their numbers marked measured or judged:
+  a small canal lock (built with the plugin itself) and the Japanese garden (built by hand before the plugin existed).
 - New command `explainer-film-place VERB` (the verbs are listed by `--verbs`) and the place kit behind it (`kit/place-kit/`).
 - New preflight stage `place` (nine stages now) and new `place_...` house numbers in `film-settings.json`; the plates stage
   refuses a paid painting when its audit fails; it knows the scene from `--blend` or from the `scene_file` its check file records
@@ -109,7 +111,7 @@ to spoken words like that.
 - A prompt-time reminder hook (`hooks/hooks.json`, `hooks/place-reminder.py`): when a request is about building a place, a set or
   props, it prints the three lines (the skill to read, the three commands) at the start of the turn.
 - Fix round (23 October 2026), after a first full check built a canal lock with the plugin alone and a second check read the code
-  and docs: an object with no material at all can no longer pass the audit; a lane drawn as a separate curved strip keeps its
+  and docs: an object with no material at all can no longer pass the audit; a road drawn as a separate curved strip keeps its
   outline when its ground is made fine, and a road is drafted for every road-role object; curves, text, metaballs and instanced
   collections are turned into meshes so nothing drawn escapes the pass; `finish-part` ends cleanly for a part; the ground part may
   make the cameras, lights and world; the ground-seat, joinery, mirrored-wall, turned-wall, step, boat-afloat and sun checks stopped
@@ -119,13 +121,13 @@ to spoken words like that.
   previews to the card; a close-up is saved once as `closeup`, not `closeup_closeup`; a role id for steps (`stone.step`),
   `roles --list`, better name hints, damp ground near water, and the docs say what the kit does not make (a tide line, reeds).
   The faults each have a test that also shows the old behaviour (`test_place_fixes.py`).
-- NOT tested, said plainly: a real village of hundreds of buildings (only a hut, a 36 by 26 m yard, small test scenes and a 12 m
-  canal lock were run; the wear masks are numpy-only and were timed at hut and yard size); Cycles with the kit on a village-size
-  place; the rented-card client against a real endpoint (its tests use a pretend card; one real card job was run by hand through
+- NOT tested, said plainly: a large place of hundreds of buildings (only a hut, a 36 by 26 m yard, small test scenes and a 12 m
+  canal lock were run; the wear masks are numpy-only and were timed at hut and yard size); Cycles with the kit on a place that
+  size; the rented-card client against a real endpoint (its tests use a pretend card; one real card job was run by hand through
   the project's own client, not through this one); the blind reading test; the workflow `build-a-place` and its agents under the
-  real Workflow tool (they ran only against canned helpers); that a smaller model, asked only for "a village in the forest", loads
+  real Workflow tool (they ran only against canned helpers); that a smaller model, asked only for a place in plain words, loads
   the skill by itself (the new hook should help, and its format was written from Claude Code's documented plugin hook form but was not
-  run inside Claude Code here). The tests prove the gates work, not that a village looks good: fresh checkers and the person's own
+  run inside Claude Code here). The tests prove the gates work, not that a place looks good: fresh checkers and the person's own
   eyes judge that.
 
 **1.3.0 (16 October 2026): calculations instead of searches.**

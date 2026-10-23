@@ -39,7 +39,7 @@ Roughness is 0.85 to 0.95 when dry (measured on the wet street: dry about 0.9) a
    slow noise (judged); give every object its own small tint and offset.
 7. At most 4 image maps in one material (judged: render time and file size).
 8. Marks and relief are soft and large: nothing finer than the style allows (`style-rule-and-measures.md`).
-9. Where two ground surfaces meet (lane, verge, forest floor), blend them with a mask instead of a hard line, and keep to
+9. Where two ground surfaces meet (road, verge, forest floor), blend them with a mask instead of a hard line, and keep to
    one ground mesh with a material driven by attributes where you can: two overlapping meshes with two materials show a hard
    seam or fight each other (z-fighting). The coal-mine yard did it with one graded ground mesh.
 
@@ -48,7 +48,7 @@ Roughness is 0.85 to 0.95 when dry (measured on the wet street: dry about 0.9) a
 Each line: tile size (metres); height; node strength and displacement; UV; roughness; colour. Kinds in brackets.
 
 **dirt_road** is above. UV planar from above. Colour value about 0.20 to 0.40 (invented).
-**packed_earth** (yard, doorstep, stable floor, a bank, a seabed; the role `ground.earth`): tile 2 m, node strength 0.8 and displacement 3 cm in the data; flatter clods, half the size of the road's; UV planar; roughness 0.8 to
+**packed_earth** (yard, doorstep, an earth floor, a bank, a seabed; the role `ground.earth`): tile 2 m, node strength 0.8 and displacement 3 cm in the data; flatter clods, half the size of the road's; UV planar; roughness 0.8 to
 0.95, lower (about 0.7) where feet polish it (judged).
 **mud**: tile 5 m, displacement 6 cm, strength 0.8, roughness 0.9 (judged, coal-mine yard); dark brown, wetter than the
 road; puddle hollows 4 cm deep (judged, same yard); shine in the hollows (roughness 0.3, measured).
@@ -57,18 +57,19 @@ normal strength 1.0 and displacement 4 cm in the data (the role displaces); roug
 come from the growth step, not from the picture.
 **grass**: tile 3 m (invented); very soft height; strength 0.6; roughness 0.85; olive and dusk green (never fresh spring
 green: judged, garden style note); chunky 3D tufts (5 to 9 simple blades) do the real work.
-**timber_weathered** (cottage walls, posts, beams, fences): tile 1 m by 0.25 m for a plank (judged); grooves along the
+**timber_weathered** (house walls, posts, beams, fences, gate boards): tile 1 m by 0.25 m for a plank (judged); grooves along the
 grain, 2 to 4 soft knots, 1 or 2 thin checks, a calibrated steepness; node strength 0.8 to 1.5 (judged: the garden's
 planks used up to 1.5, stone 0.8); no displacement; UV plank method; roughness 0.65 to 0.9 (judged: no gloss); warm
 grey-brown #987a6a and #8e6958, silvered grey-brown #9b8476 on sun-bleached boards (judged, garden); darker, greener
 near the ground.
-**timber_planks** (floors, doors, cart beds): as timber_weathered; widths 9 to 17 cm, gaps 5 to 14 mm (judged, garden
+**timber_planks** (floors, doors, decks): as timber_weathered; widths 9 to 17 cm, gaps 5 to 14 mm (judged, garden
 bridge), worn pale along the walking line (0.02 to 0.06 lighter: judged).
 **log_wall**: tile 1.2 m (invented); round logs as real geometry (a bevelled cylinder with a crack), bark-like normal
 map; roughness 0.8; corner notches as shape, not texture.
-**wattle_and_daub / plaster**: tile 2 m (invented); soft blotches 20 to 60 cm across, a few clean cracks, plaster loss
-patches that show the timber or weave underneath; node strength 1.0 (garden plaster); roughness 0.85; cream to
-grey-cream, darker and greener at the foot.
+**plaster_lime** (plastered and whitewashed walls, and the plaster between the timbers of a timber frame): tile 1.5 m;
+soft blotches 20 to 60 cm across, a few clean cracks, plaster loss patches that show the brick, stone or timber
+underneath; node strength 1.0 (garden plaster); roughness 0.75 to 0.95; cream to grey-cream, darker and greener at
+the foot.
 **stone_rubble** (footings, walls, field stone): tile 2 m, strength 0.8 (garden stone); stones are geometry (blocky,
 4 to 6 readable planes, rounded corners, half-buried); roughness 0.75 to 0.9; warm grey-beige with olive moss.
 **thatch**: tile 1.5 m (invented); bunch ridges running down the slope, a ragged eave edge; displacement 4 to 6 cm
@@ -81,11 +82,11 @@ differ by at least 0.02 in brightness, a few chipped, slipped or missing (garden
 **iron_forged** (bands, hinges, nails, cramps): tile 2 m, depth 1.6 cm (judged, coal-mine scene: metal); a few pits, not
 a texture; roughness 0.6 clean to 0.85 rusty; rust brown #5a3a2a with a lighter edge (garden); metallic 1 on clean
 metal, 0 on rust (judged).
-**straw and hay**: loose strands as 3D litter pieces (thin, curved, short: the street's first straws looked like
+**straw**: loose strands as 3D litter pieces (thin, curved, short: the street's first straws looked like
 matchsticks); the surface under it is packed_earth.
 **wicker**: tile 0.5 m (invented); woven height picture, strength 0.8; roughness 0.8; warm tan.
-**cloth_sack / leather / rope**: cloth: tile 0.3 m, strength 0.5, roughness 0.9; leather: roughness 0.6 with a darker
-worn edge; rope as a twisted bevelled cylinder with a tiling twist normal map (all invented).
+**cloth_sack / rope**: cloth: tile 0.3 m, strength 0.5, roughness 0.9; rope as a twisted bevelled cylinder with a tiling
+twist normal map (all invented).
 **ceramic**: roughness 0.3 glazed, 0.8 unglazed; one clean chip is better than texture (judged).
 **bark**: strength 0.9 (garden); deep soft ridges along the trunk, moss on the damp, shaded side (judged).
 **foliage cards**: leaves and needles on cards or clumps; colour variation only, no normal map (judged); designed as
@@ -97,7 +98,7 @@ picture (model lint checks it).
 
 ### The other surfaces in the data (read the numbers from `place-kit/data/surfaces.json`; this table is the short form)
 
-The recipes above are the ones this text explains. `surfaces.json` holds 48 ids; these are the ones not named above. All their numbers are first tries (invented) unless the file says otherwise.
+The recipes above are the ones this text explains. `surfaces.json` holds 45 ids; these are the ones not named above. All their numbers are first tries (invented) unless the file says otherwise.
 
 | Surface id | Used for | Tile | Normal strength, displacement | Roughness | Bevel and UV |
 |---|---|---|---|---|---|
@@ -143,10 +144,9 @@ with the request, never a person's name or address.
   cobblestone_01 to cobblestone_05, bark_brown_01, bark_brown_02, brick_moss_001.
 - Models: Barrel_01, Barrel_02, barrel_03, wine_barrel_01, wooden_bucket_01, wooden_bucket_02, wooden_crate_01,
   wooden_crate_02, wicker_basket_01, wicker_basket_02, wooden_ladder, wooden_ladder_02, tree_stump_01, tree_stump_02,
-  dead_tree_trunk, dead_tree_trunk_02, fir_sapling, fir_sapling_medium, fir_tree_01, Lantern_01, wooden_lantern_01,
-  jug_01, metal_jug, spinning_wheel_01, rusted_wheel_rim_01, rusted_wheel_rim_02.
-- Not found (script these yourself): a cart, hay or straw bales, a trough, an anvil, a well, stable stalls, a thatched
-  cottage.
+  dead_tree_trunk, dead_tree_trunk_02, Lantern_01, wooden_lantern_01, jug_01, metal_jug, rusted_wheel_rim_01,
+  rusted_wheel_rim_02.
+- Not found (script these yourself): a cart, hay or straw bales, a trough, an anvil, a well.
 
 How to use them: draw a small test plate of the surface first; open every downloaded picture at full size and look for
 stickers, brands and digits (judgement); remember that scans alone read bland. In the street, scanned bricks looked

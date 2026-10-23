@@ -551,15 +551,15 @@ class Judge:
                 bad.append(f'{obj["name"]}: its outline is {growth:.1f} times bigger than before the kit reshaped it (at most {growth_limit}): its shape was replaced by a rectangle')
         if bad:
             self.add('fail', 'place: ground relief', names_text(bad), '; '.join(bad[:MAX_NAMES]),
-                     'run explainer-film-place roads (it grades the ground and shapes ruts, banks and hoof prints); a dirt-road object needs an entry in the settings\' "roads" (a centre line, width, gauge): '
-                     'explainer-film-place new-settings drafts one from the lane\'s shape; a ground whose outline grew was reshaped into a box: undo, then give the lane its own fine mesh.')
+                     'run explainer-film-place roads (it grades the ground and shapes ruts and banks, and hoof prints when the settings ask for them); a dirt-road object needs an entry in the settings\' "roads" (a centre line, width, gauge): '
+                     'explainer-film-place new-settings drafts one from the road\'s shape; a ground whose outline grew was reshaped into a box: undo, then give the road its own fine mesh.')
         elif roads:
             self.add('pass', 'place: ground relief', 'the roads', f'{len(roads)} road(s) have real relief and ruts')
 
     def keep_out(self):
         bad = []
         for group in (self.audit.get('scatter') or {}).get('groups', []):
-            for key, words in (('in_keepout', 'inside a keep-out'), ('in_puddle', 'in a puddle'), ('on_crown', 'on the crown of a lane'),
+            for key, words in (('in_keepout', 'inside a keep-out'), ('in_puddle', 'in a puddle'), ('on_crown', 'on the crown of a road'),
                                ('on_wheel_track', 'on a wheel track'), ('within_5cm_of_litter', 'within 5 cm of litter')):
                 if (group.get(key) or 0) > 0:
                     bad.append(f'{group.get("name")}: {group[key]} {words}')

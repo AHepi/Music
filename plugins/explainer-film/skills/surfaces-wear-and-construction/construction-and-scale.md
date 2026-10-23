@@ -22,14 +22,15 @@ carries. A part that nothing carries looks wrong even in a painted style.
 - Walls and sheds: a stone footing on the ground; a sill on the stone; posts on the sill; a wall plate along the top of
   the posts; rafters on the plate; the roof on the rafters; a floor, and a threshold, so a doorway looks onto something
   (the coal-mine engine house once had a door onto nothing).
-- A cottage: footing, timber frame or log wall, plaster or boards between the posts, thatch or shingle on rafters, a
-  chimney through the roof with a flashing, a door with a step, shutters on hinges.
-- A stable: the same frame, a floor with a drain, three stalls divided by posts and rails, a manger at the front of each,
-  a plank door, hooks for tack.
-- A fence: posts set into the ground, rails fixed to the posts, never rails floating between posts.
-- A cart: an axle-tree under the bed, wheels with spokes on the axle ends, shafts fixed to the bed.
-- A well: a ring of stone on the ground, two posts, a beam, a rope and a bucket.
-- A trough: a hollowed log or boards on legs that stand on the ground.
+- A gate (the canal lock's, built and checked): a heel post and a mitre post standing on the ground, rails tenoned into
+  both posts, boards on the rails, iron straps, and a long balance beam lying on top of the heel post.
+- A flight of steps: each step on the one below it, the lowest on a core that stands on the bed; the rise from the top
+  of one step to the top of the next is 15 to 20 cm, and the check reads it top to top.
+- A fence (the coal-mine yard has a post-and-rail one): posts set into the ground, rails fixed to the posts, never rails
+  floating between posts.
+- A hand cart (the coal-mine yard has a wooden one): an axle under the bed, a wheel on each end of the axle, handles or
+  shafts fixed to the bed.
+- A basin, a tank or a trough: boards or stone standing on the ground or on legs that stand on the ground.
 - Give wood and stone character as SHAPE (age and damage in the geometry, `the-required-steps.md` step 2): no two planks
   alike, tiles of different tones with a few slipped or missing, posts a little out of plumb. That is what read at film
   size in the garden.
@@ -38,24 +39,27 @@ carries. A part that nothing carries looks wrong even in a painted style.
 
 Write each fact as: number, unit, source and confidence (strong, weak or guess). Put the numbers in the brief as limits
 and in the acceptance tests. A weak fact gets a note so that builders do not treat it as law. Facts set the SIZE; the style
-note sets how much detail. `place-kit/data/real_world_facts.json` has about forty generic facts (marked weak or guess,
+note sets how much detail. `place-kit/data/real_world_facts.json` has about twenty-five generic facts (marked weak or guess,
 from common building and prop practice); the place's own facts file adds or replaces them, and the planner's research
 should confirm each one with a real source.
 
-Starter numbers for a mediaeval forest village. ALL are from memory and are judged, WEAK: confirm or replace them by
-research before they become law.
+Starter numbers this project has really used (any place can start from them and then replace them with its own
+sourced facts). The kind is in the last column.
 
-| What | Size |
-|---|---|
-| single-storey cottage | 4 to 5 m wide by 6 to 8 m long |
-| eaves height | 2.0 to 2.4 m |
-| thatch pitch | 45 to 55 degrees; thatch 25 to 35 cm thick |
-| door | 1.6 to 1.9 m high and 0.7 to 0.9 m wide |
-| window opening | 0.4 to 0.6 m |
-| stable stall | 1.5 to 1.8 m wide and 2.4 to 3 m long; manger 0.9 to 1.1 m high |
-| horse shoulder height | 1.3 to 1.6 m |
-| cart gauge | 1.2 to 1.5 m (the coal-mine yard used 1.24 m) |
-| wide boards | 20 to 30 cm |
+| What | Size | Kind and where it comes from |
+|---|---|---|
+| distance between two wheel ruts of a cart road | 1.24 m | measured in the coal-mine yard's build code; the generic range is 1.0 to 1.8 m (judged) |
+| rut depth of a heavily used cart road | 0.15 m (about 0.13 to 0.21 m with its variation), about 0.4 m across at half depth | measured in the same code |
+| raised bank beside a rut | about 0.3 of the rut's depth | measured in the same code |
+| lightly used road | rut 5 to 15 cm deep | invented |
+| longest free stretch between supports | 1.38 m or less | judged from the garden bridge (1.4 m) |
+| bridge post | 14 cm across, 1.5 cm chamfer | measured in the garden |
+| planks of a bridge or deck | 9 to 17 cm wide, gaps 5 to 14 mm | judged from the garden bridge |
+| stone step rise | 15 to 20 cm, top to top | judged (from memory) |
+| lock wall | 0.3 to 0.9 m thick | judged, weak (from memory), in the canal lock's own facts file |
+| balance beam of a narrow lock gate | 2.5 to 4 m | judged, weak (from memory) |
+| a door | 1.6 to 2.3 m high, 0.6 to 2.0 m wide | judged, weak (the generic facts) |
+| a window opening | 0.3 to 1.5 m wide | judged, weak (the generic facts) |
 
 ## What the construction check measures
 

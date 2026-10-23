@@ -1,8 +1,8 @@
 """What this does: the RUBBISH layer (the painted side of litter; the 3D litter pieces are a separate step): muck, scraps and straw-coloured specks gathered where litter really
-gathers: at wall feet, along gutters and lane edges and in damp low places, and NEVER on the crown of a lane or on a wheel track (exact zero). It is the last layer, over everything.
+gathers: at wall feet, along gutters and road edges and in damp low places, and NEVER on the crown of a road or on a wheel track (exact zero). It is the last layer, over everything.
 Specks are small and few rather than a dusting everywhere. Reads the masks Wall Dist, Crown, Track, Dampness, Litter Dist and the dials density, straw_share. Amount 0 gives exactly the
 input. Needs Blender (bpy).
-A concrete example: density 0.3 scatters a few dark and straw-coloured specks along the foot of a wall and the lane's edge, and none on the rutted middle.
+A concrete example: density 0.3 scatters a few dark and straw-coloured specks along the foot of a wall and the road's edge, and none on the rutted middle.
 """
 from ..layer_base import LayerBase, linear
 
