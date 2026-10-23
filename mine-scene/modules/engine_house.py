@@ -50,19 +50,16 @@ UP = np.array([0.0, 0.0, 1.0])
 
 # Honest list of things that are not perfect yet (also written into out/engine_house_report.json by the preview script).
 KNOWN_FLAWS = [
-    'The headframe footings (LAYOUT says legs at x=+-3.1, y=-0.7) will probably overlap the crate (x -4.1 to -3.2, y -0.8 to -0.2) and the two '
-    'plank piles (x -3.1 to -2.6 and 2.6 to 3.7, feet out to y -0.7); move them with the numbers in add_crate / add_leaning_planks if they clash.',
-    'No floor is built inside the doorway or the building: the yard ground (mud) must run under the whole footprint at about z = 0.',
+    'The module itself builds no floor or practical interior lights: assemble_mine.py adds both so this module also stays usable in isolated previews.',
     'From the standard camera the left wall is seen at only about 12 degrees, so the two glowing windows show as narrow slivers and the shed hides '
     'the low part of that wall; they read well from the side and 3/4 views.',
-    'The window panes and lamp bulb are one-sided light-giving surfaces facing outward: the inside of the building is dark and is not lit by them. '
-    'Their strength (materials Window glow A/B/C and Lamp bulb) was tuned by eye for a bright preview and a dim dusk preview, so tune it in the final light.',
+    'The window panes and lamp bulb are one-sided light-giving surfaces facing outward. The assembled scene uses separate warm practical lights '
+    'inside; isolated module previews still need their own interior lighting.',
     'Stone (plinth, doorway jambs and lintel, window sills, chimney cap) is a procedural grey stone made inside the module, not one of the uploaded pictures.',
     'Real displacement is only on the front gable wall, the long left wall and the two slate roof slopes; the right wall, back wall and small parts use the normal map only. '
     'The brick picture repeats every 1.5 m so its dark soot blotches show a repeat on the long plain walls.',
-    'The interior is only a dark shell with a few timber frames and a plank partition at y=6.4 (no machinery); the design picture shows lighter timbers lit from inside.',
+    'The interior contains timber frames and a plank partition at y=6.4 but no machinery; it is a lit background space, not a fully dressed engine room.',
     'The chimney stack shaft passes about 0.3 m below the roof underside near the ridge (visible only from inside the roof space).',
-    'Gutters and downpipes are low-polygon (12 and 10 sides): fine at the camera distances of the film, faceted if filmed from under 1 m.',
 ]
 
 
@@ -720,7 +717,7 @@ def add_gutter_and_pipes(kit):
     for side in (-1, 1):
         centre_x = side * (edge_across + 0.12)
         centre_z = slate_height(side * edge_across) - 0.06
-        steps = 12
+        steps = 24
         angles = [math.pi + math.pi * s / steps for s in range(steps + 1)]
 
         def ring(radius, y):
@@ -759,16 +756,16 @@ def add_downpipe(kit, side, y_position):
     metal.add_box((gutter_x, y_position, gutter_bottom + 0.16), (0.24, 0.26, 0.04), slot=IRON)
     # swan neck
     top_of_neck = gutter_bottom - 0.12
-    metal.add_cylinder((gutter_x, y_position, top_of_neck + 0.01), (gutter_x, y_position, top_of_neck - 0.22), radius, sides=10, slot=IRON, caps=False)
-    metal.add_cylinder((gutter_x, y_position, top_of_neck - 0.22), (pipe_x, y_position, top_of_neck - 0.52), radius, sides=10, slot=IRON, caps=False)
-    metal.add_cylinder((pipe_x, y_position, top_of_neck - 0.5), (pipe_x, y_position, ground + 0.34), radius, sides=10, slot=IRON, caps=False)
+    metal.add_cylinder((gutter_x, y_position, top_of_neck + 0.01), (gutter_x, y_position, top_of_neck - 0.22), radius, sides=20, slot=IRON, caps=False)
+    metal.add_cylinder((gutter_x, y_position, top_of_neck - 0.22), (pipe_x, y_position, top_of_neck - 0.52), radius, sides=20, slot=IRON, caps=False)
+    metal.add_cylinder((pipe_x, y_position, top_of_neck - 0.5), (pipe_x, y_position, ground + 0.34), radius, sides=20, slot=IRON, caps=False)
     # shoe at the bottom kicking out into the yard
-    metal.add_cylinder((pipe_x, y_position, ground + 0.36), (pipe_x + side * 0.12, y_position, ground + 0.17), radius, sides=10, slot=IRON, caps=False)
-    metal.add_cylinder((pipe_x + side * 0.12, y_position, ground + 0.17), (pipe_x + side * 0.30, y_position, ground + 0.12), radius, sides=10, slot=IRON)
+    metal.add_cylinder((pipe_x, y_position, ground + 0.36), (pipe_x + side * 0.12, y_position, ground + 0.17), radius, sides=20, slot=IRON, caps=False)
+    metal.add_cylinder((pipe_x + side * 0.12, y_position, ground + 0.17), (pipe_x + side * 0.30, y_position, ground + 0.12), radius, sides=20, slot=IRON)
     # collars and wall brackets
     wall_x = side * HALF_WIDTH
     for height in (0.85, 1.9, 2.95, top_of_neck - 0.75):
-        metal.add_cylinder((pipe_x, y_position, height - 0.025), (pipe_x, y_position, height + 0.025), radius + 0.014, sides=10, slot=IRON)
+        metal.add_cylinder((pipe_x, y_position, height - 0.025), (pipe_x, y_position, height + 0.025), radius + 0.014, sides=20, slot=IRON)
         arm_middle = (wall_x + pipe_x) / 2
         metal.add_box((arm_middle, y_position, height), (abs(pipe_x - wall_x), 0.035, 0.035), slot=IRON)
 
@@ -925,11 +922,11 @@ def add_leaning_planks(kit):
     """Two piles of rough timber planks leaning against the gable wall, one each side of the doorway."""
     face = FRONT_WALL
     random = kit.random
+    # Keep both piles inside the clear strip between the doorway and the headframe footings at x = +/-3.1.
     # (along position at the top, how far the foot stands from the wall, plank length, sideways lean at the foot)
     piles = [
-        [(-2.70, 0.46, 3.1, 0.10), (-2.86, 0.62, 2.6, -0.08), (-3.02, 0.44, 2.2, 0.06)],
-        [(2.70, 0.44, 3.5, -0.08), (2.88, 0.58, 3.1, 0.14), (3.06, 0.66, 2.7, -0.12), (3.24, 0.50, 2.3, 0.10), (3.42, 0.70, 1.9, -0.10),
-         (3.58, 0.52, 1.4, 0.05)],
+        [(-2.00, 0.46, 3.1, 0.10), (-2.16, 0.62, 2.6, -0.08), (-2.32, 0.44, 2.2, 0.06)],
+        [(2.00, 0.44, 3.5, -0.08), (2.18, 0.58, 3.1, 0.14), (2.36, 0.66, 2.7, -0.12)],
     ]
     for pile in piles:
         for along_top, foot_out, length, sideways in pile:
@@ -939,8 +936,8 @@ def add_leaning_planks(kit):
             top = face.point(along_top, foot[2] + drop, -0.06)
             add_timber(kit.timber, foot, top, 0.215, 0.05, TIMBER_PLANK, width_hint=face.along,
                        grain_shift=(float(random.random()), float(random.random())))
-    # two short offcuts lying on the ground beside the right pile
-    for along, out, yaw in ((3.1, 1.25, 0.4), (3.5, 1.45, -0.25)):
+    # Two short offcuts lie beyond the footings' front edge rather than underneath them.
+    for along, out, yaw in ((2.0, 2.00, 0.4), (2.35, 2.10, -0.25)):
         centre = face.point(along, 0.0, -out)
         centre[2] = mc.ground_height(centre[0], centre[1]) + 0.04
         direction = np.array([math.cos(yaw), math.sin(yaw), 0.0])
@@ -948,9 +945,9 @@ def add_leaning_planks(kit):
 
 
 def add_crate(kit):
-    """A slatted wooden crate standing against the front wall near the left corner, with cross braces and a lid."""
+    """A slatted wooden crate beside the left corner, clear of the headframe's front-left footing."""
     face = FRONT_WALL
-    along_centre, depth_centre = -3.68, -0.50
+    along_centre, depth_centre = -4.75, -0.75
     width, depth, height = 0.92, 0.62, 0.64
     ground = mc.ground_height(*face.point(along_centre, 0.0, depth_centre)[:2])
     base = ground + 0.04
