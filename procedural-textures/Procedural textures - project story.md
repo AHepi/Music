@@ -68,7 +68,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   construction check, without being told; it tests changes in batches of about 10 versions on the rented cards. Test: Sonnet built a forest village from
   your words and the plugin alone and used every treatment. Still weak: the road's relief, the puddle shapes, weeds round tree crowns and inside
   buildings, crude trees.
-- **Nothing running** (checked 23 October about 21:00): no machines; RunPod balance US$11.00.
+- **Control test without the plugin (log 33):** Sonnet at maximum effort built the same village with Blender alone (no plugin, no rented cards, no
+  pictures) in 2 h 22 min. It looks more real than the plugin's village: a dense forest of grown trees, a ground fine enough (about 3 cm) to hold real
+  ruts, hoof prints and puddles, low sun and haze. It used no normal maps, no displacement and no scans. Lesson: the plugin teaches surfaces; shapes,
+  light and cameras matter more, and the plugin does not teach them yet.
+- **Nothing running** (checked 23 October about 23:45): no rented machines; RunPod balance US$11.00; the local Blender connection was stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -118,6 +122,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Plugin:** a package of written steps, tools and checks that Claude loads; ours is the film plugin. **Blind test:** a fresh model gets only the plugin and a plain request, to see what it does without being told. **Guard test:** a test that fails if the words of one coming test request appear in the plugin.
 - **Scan:** a surface photographed in real life with its normal and height maps (free from Poly Haven). **Your own texture library:** your uploaded surfaces (mud, gravel, brick, slate, wood, metal), which the plugin can use but never copies into GitHub.
 - **Variation batch:** about 10 measurably different versions of one change, drawn at once on the rented cards and shown on one labelled sheet.
+- **Control test:** the same job done without the thing being tested (here, without the plugin), to see what difference it really makes. **Blender MCP connection:** a link that lets a helper drive a running Blender directly, one command at a time. **Triangle:** the smallest flat piece a 3D shape is made of; more triangles means finer real shape.
 
 ## Log (added to, never rewritten)
 
@@ -508,7 +513,25 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     **Cost:** RunPod about US$1.60 for all of this (balance US$12.61 to US$11.00); no paid pictures. Pictures: `32 Forest village and the plugin -
     pictures/` (start with "32 Village - first and rebuilt, next to the coal mine").
 
+33. **The same village without the plugin (23 October).** You asked: "Can you get sonnet on max to generate a similar village without the plugin?
+    No pods access, no image references. Isolate it completely and get it to use blender with its MCP plugin." One Sonnet helper at maximum effort got
+    only your original village words and Blender through its MCP connection, with orders not to read any other file, use any skill, the internet or the
+    rented cards. It ran 2 h 22 min on this computer's processor (each picture 6-7.6 minutes) and cost no rented-card money. **What it built:** a clearing
+    in a dense forest (about 2,200 trees grown from branch skeletons, 1,400 ferns), five cottages (half-timbered or stone, thatch or shingles), a 12 m
+    stable with four empty stalls and a cart, about 30 kinds of props, three dirt roads with modelled ruts, hoof prints and about a dozen puddles. Its
+    ground is about 3 cm between points near the roads, against the plugin village's 10.6 cm. **Counted in its scene:** 29 materials, all made by code;
+    no normal maps, no displacement, no pictures; bump on 21; edge wear on 4; dirt, damp, moss and silvered wood written into the materials; 40.7
+    million triangles of real shape. **Side by side** (`33 Village without the plugin - pictures/`): it looks more real than the plugin's village in
+    all five views, mainly because of shapes and light: real trees instead of faceted blobs, real ruts and puddles that reflect the sky, grass and
+    flowers, low morning sun and haze instead of flat light, and a true view from above. Its own weak spots: kite-shaped leaves, a repeating spruce
+    pattern, empty interiors, clean thatch and plaster, no clouds. **What it means:** the plugin makes a model apply every surface treatment, but
+    surfaces were not what held the village back. **Fairness, my mistake:** the project note every helper reads automatically (CLAUDE.md) named the
+    treatments from 18:27 that day, so this helper and the plugin village's rebuild both saw the list; the first plugin build did not. I reworded the
+    note so it no longer names them. Counts, the helper's report, its build scripts (about 5,000 lines) and the measuring scripts are in
+    `village-without-plugin/`; its 99 MB scene file stays in the scratch folder and is not saved (the scripts rebuild it).
+
 ## Next step
 
-Waiting for your instructions. If you want the village taken further, the change a viewer would notice most is the road: a finer ground mesh so the
-scan's relief shows, real stones in the ruts and rounded puddles, then weeds kept off tree crowns and out of buildings (all as plugin fixes).
+Your rule says a set that used different tools updates the plugin. The one next step: the three runs you set (Opus updates the plugin, Sonnet
+rebuilds the village, Opus checks), teaching the plugin what this control did better: fine ground near roads with modelled ruts, hoof prints and
+puddle hollows; trees grown from branch skeletons; real grass; low sun with a haze box; and choosing cameras. Waiting for your go-ahead.
