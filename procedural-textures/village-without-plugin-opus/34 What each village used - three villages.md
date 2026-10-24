@@ -30,3 +30,8 @@ plugin village's numbers come from its own audit and the checker's report (story
 
 Both no-plugin helpers read the project's standing note (`CLAUDE.md`) automatically. Sonnet's copy still named the surface treatments; Opus's
 copy did not (it was reworded between the two runs).
+
+**Blind judging** (`blind-judging/34 Blind judging - scores.md`): three fresh judges scored all 15 pictures without knowing which village was
+which. Out of 10: plugin village 2.7, Sonnet alone 6.3, Opus alone 6.4. Opus scored higher as a photograph (6.0 against 5.4), Sonnet higher on
+delivering the request (7.3 against 6.9), and they tied as a film backdrop (6.2). In short: the two models on their own are level, and both are far
+ahead of the plugin village.

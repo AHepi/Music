@@ -72,7 +72,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   pictures) in 2 h 22 min. It looks more real than the plugin's village: a dense forest of grown trees, a ground fine enough (about 3 cm) to hold real
   ruts, hoof prints and puddles, low sun and haze. It used no normal maps, no displacement and no scans. Lesson: the plugin teaches surfaces; shapes,
   light and cameras matter more, and the plugin does not teach them yet.
-- **Nothing running** (checked 23 October about 23:45): no rented machines; RunPod balance US$11.00; the local Blender connection was stopped.
+- **Second control test, Opus on its own (log 34):** Opus at maximum effort, same setup, 3 h 20 min. Three blind judges scored the three villages
+  out of 10: plugin village 2.7, Sonnet alone 6.3, Opus alone 6.4. Opus looks more like a photograph; Sonnet fits your request a little better;
+  they are level overall. The plugin's own building blocks (its trees, painted hill band, coarse ground and flat light) are what pull its village down.
+- **Nothing running** (checked 24 October about 03:45): no rented machines; RunPod balance US$11.00; the local Blender connection was stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -123,6 +126,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Scan:** a surface photographed in real life with its normal and height maps (free from Poly Haven). **Your own texture library:** your uploaded surfaces (mud, gravel, brick, slate, wood, metal), which the plugin can use but never copies into GitHub.
 - **Variation batch:** about 10 measurably different versions of one change, drawn at once on the rented cards and shown on one labelled sheet.
 - **Control test:** the same job done without the thing being tested (here, without the plugin), to see what difference it really makes. **Blender MCP connection:** a link that lets a helper drive a running Blender directly, one command at a time. **Triangle:** the smallest flat piece a 3D shape is made of; more triangles means finer real shape.
+- **Blind judging:** judges score pictures shown under shuffled letters, so they cannot favour a maker they know. **Copies (instances):** one
+  model shown in many places without storing it again; how Opus filled its meadow with 368,000 grass clumps.
 
 ## Log (added to, never rewritten)
 
@@ -530,8 +535,29 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     note so it no longer names them. Counts, the helper's report, its build scripts (about 5,000 lines) and the measuring scripts are in
     `village-without-plugin/`; its 99 MB scene file stays in the scratch folder and is not saved (the scripts rebuild it).
 
+34. **The same village by Opus on its own (23-24 October).** You said: "Let's see what Opus 5.5 achieves on max. The exact same setup, exact same
+    instructions. MCP Essential". One Opus helper at maximum effort got the same words as the Sonnet test (only the folder changed), a fresh empty
+    Blender, and the MCP connection as its only way in. One difference: the project note it read no longer named the surface treatments. It ran
+    3 h 20 min on this computer and cost no rented-card money. **A scare on the way:** its scene file grew to 616 MB plus a backup copy of the same
+    size, and free disk fell to 240 MB; I deleted the old backup, a raw picture dump and an unpacked download archive, and a watcher removed each new
+    backup so saves never ran out of room. **What it built:** a clearing in a forest of 15 tree models (about 5,900 copies), about 368,000 clumps of
+    grass, flowers and weeds, four cottages (timber frame, fieldstone, shingle, a mud hut), a three-stall stable with half doors, a cart, a hitching
+    rail and a manure heap, a paddock with haystacks, gardens and a well; roads with wandering, splitting, crumbling ruts on a 2.5-3 cm mesh, about
+    5,700 hoof prints, curved turning ruts at the forks and 46 puddles that each fill only their own hollow; a sky with soft clouds. **Counted:**
+    38 materials made by code, no normal maps, no displacement, no pictures, bump on 30; 105 geometry-node set-ups making 439,906 copies. **Blind
+    judging:** three fresh judges scored all 15 pictures under shuffled letters (real photograph? delivers the request? usable film backdrop?).
+    Out of 10: plugin village 2.7, Sonnet alone 6.3, Opus alone 6.4. Opus won on looking like a photograph (6.0 against 5.4), Sonnet on fitting
+    your words (7.3 against 6.9; its roads are the muddiest and wettest), and they tied as a film backdrop. The plugin village was called "a low-poly
+    game render" in every view. Shared faults of both: surfaces too clean, pebbles scattered evenly, striped conifer cards, blob haystacks, puddles
+    like flat paint (Opus left a black hole in the stable yard), too little mud, straw and dung where feet and hooves go. **What it means:** Opus is
+    not clearly better than Sonnet at this, and takes longer; and the plugin is not just missing things, its own trees, backdrop, ground and light
+    pull a model below what it does unaided. Opus also noticed the project rule about updating the plugin and said it could not, because the test
+    forbade opening other files. Pictures: `34 Village by Opus without the plugin - pictures/` (start with the three-way sheet); counts, report,
+    scripts and the judging in `village-without-plugin-opus/`.
+
 ## Next step
 
-Your rule says a set that used different tools updates the plugin. The one next step: the three runs you set (Opus updates the plugin, Sonnet
-rebuilds the village, Opus checks), teaching the plugin what this control did better: fine ground near roads with modelled ruts, hoof prints and
-puddle hollows; trees grown from branch skeletons; real grass; low sun with a haze box; and choosing cameras. Waiting for your go-ahead.
+Your rule says a set that used different tools updates the plugin. The one next step: your three runs (Opus updates the plugin, Sonnet
+rebuilds the village with it, Opus checks), this time replacing the plugin's own trees, backdrop, ground and light with what both controls did
+better: a 2.5-3 cm road mesh with modelled ruts, hoof prints and puddle hollows; grown or modelled trees and meadow grass as copies; sun, haze and
+clouds; and the judges' list (dirtier surfaces, random scatter, mud and dung where hooves go). Waiting for your go-ahead.
