@@ -1,0 +1,56 @@
+== film settings: the table, its reader and drift in the tools
+PASS  every entry has a value, unit, kind and source; every section an "about": 715 entries, 0 problems
+NOTE  kinds: {'measured': 115, 'judged': 527, 'invented': 73}
+PASS  the invented numbers are few (about a tenth of the table, at most 10.5 percent) and named: 73 of 715: camera.slide_magnification_borderline_share, people.facing_head_max_pixels, people.crowd_axis_min_angle_to_view_degrees, shot_planner.right_edge_aim_margin_share, shot_planner.planning_spot_box, shot_planner.face_visible_dot_min, shot_planner.crowd_min_figures, shot_planner.crowd_axis_min_elongation, shot_planner.check_shot_silhouette_band_share_of_width, shot_planner.check_shot_accepted_worse_share, views_and_models.model_lint.same_plane_gap_metres, views_and_models.model_lint.same_plane_normal_cos, views_and_models.model_lint.same_plane_overlap_min_square_metres, views_and_models.model_lint.upward_normal_z_min, views_and_models.model_lint.glowing_base_brightness_max, views_and_models.model_lint.size_claim_tolerance_share, views_and_models.model_lint.floor_min_square_metres, views_and_models.view_audit.must_read_facing_min_cos, views_and_models.view_audit.face_shows_within_degrees, views_and_models.check_file.dark_base_brightness, views_and_models.check_file.thin_fill_share, page_timing.pause_longer_than_needed_seconds, page_timing.overlap_pixels_min, page_timing.merge_stills_within_seconds, page_timing.layout.pop_strength_change, page_timing.layout.hold_without_still_key_frames, page_timing.layout.camera_still_tolerance, page_timing.layout.jump_pixels_min, painting_tools.paint_request.coat_band_share_of_height, painting_tools.after_painting.align_gain_min, painting_tools.after_painting.figure_surround_ratio_max, painting_tools.after_painting.figure_surround_lift_max, painting_tools.after_painting.head_widen_share_of_height, painting_tools.after_painting.new_skin_pixels_look, painting_tools.after_painting.style_tolerance, painting_tools.after_painting.added_figure_blob, painting_tools.after_painting.pale_patch, painting_tools.after_painting.sky_clouds, painting_tools.plan_states.behind_gap_metres, effects_planner.edge_strength_min, effects_planner.other_chimney_clearance_share, script_gate.stake_words, script_gate.long_word_letters, sound_gates.alignment_match_min, budget_planner.piece_load_share_max, budget_planner.memory_reserve_gb, place_surfaces.normal_slope_energy_min, place_surfaces.displacement_mesh_edge_metres_max, place_surfaces.glb_surfaces_fail_share, place_audit.fallback_role_share_max, place_audit.fallback_role_share_fail, place_audit.plain_box_share_max, place_audit.off_share_max, place_audit.plants_min_per_100_square_metres, place_audit.litter_min_per_100_square_metres, place_audit.scatter_pieces_max, place_audit.world, place_audit.sun, place_construction.ground_seat_metres_tolerance, place_construction.doorway_floor_gap_metres_max, place_construction.parts_checked_max, place_scale.fail_factor, place_wear.plan_mask_time_budget_seconds, place_wear.shape_sibling_copy_share_max, place_wear.ground_relief_metres_min, place_wear.rut_depth_metres, place_wear.hoof_dimple_spacing_metres, place_variations.eevee_samples, place_variations.settings_difference_min_share, place_variations.number_without_range_difference_min_share, place_variations.scout_eevee_samples, place_light.sun_strength, place_light.sky_strength
+PASS  section "frame" is there: yes
+PASS  section "camera" is there: yes
+PASS  section "composing" is there: yes
+PASS  section "safe_area" is there: yes
+PASS  section "lettering" is there: yes
+PASS  section "people" is there: yes
+PASS  section "light" is there: yes
+PASS  section "effects" is there: yes
+PASS  section "state_pictures" is there: yes
+PASS  section "painting" is there: yes
+PASS  section "timing" is there: yes
+PASS  section "sound" is there: yes
+PASS  section "filming" is there: yes
+PASS  section "money" is there: yes
+PASS  section "delivery" is there: yes
+PASS  section "models" is there: yes
+PASS  section "checking" is there: yes
+PASS  section "script" is there: yes
+PASS  section "graphics" is there: yes
+PASS  section "paper_look" is there: yes
+PASS  section "shot_kind_profiles" is there: yes
+PASS  every price says the date it was read: 12 prices
+PASS  a misspelt key stops with a clear message naming the nearest keys: film-settings.json has no "frame.widht_pixels" ("widht_pixels" is not in frame). Did you mean 'frame.width_pixels', 'frame.height_pixels', 'frame.plate_width_pi
+PASS  asking a section for a single number stops clearly: film-settings.json: "frame" is a section or group, not a single number (it holds: width_pixels, height_pixels, frames_pe
+PASS  the reader records exactly the values used (for the reports): got ['frame.width_pixels'], expected ['frame.width_pixels']
+PASS  crowd + dark subject: rule 3's box is the crowd's: got [0.8, 0.5], expected [0.8, 0.5]
+PASS  crowd + dark subject: rule 5's brightness test is off: got False, expected False
+PASS  crowd + dark subject: the silhouette contrast replaces it: got 2.2, expected 2.2
+PASS  crowd + dark subject: rules neither kind changes stay the still life's (rule 7 reach): got 0.7, expected 0.7
+PASS  interior: the stricter eye range [1.5, 1.7] is not loosened by the base: got [1.5, 1.7], expected [1.5, 1.7]
+PASS  overview + crowd: the loosest box wins (crowd 0.80 over overview 0.60): got [0.8, 0.5], expected [0.8, 0.5]
+PASS  overview + crowd: quiet-side ranges widen to cover both: got [0.4, 0.6], expected [0.4, 0.6]
+PASS  an unknown kind of shot stops and lists the known kinds: film-settings.json has no shot kind "crowded" (known kinds: still_life, crowd, overview, interior, dark_subject). (file:
+PASS  held frame cost: the table against the round 4 stretches (s a frame, median): got 0.9, recorded 0.905 (allowed difference 0.05)
+      recorded in: working files redesign/round4-film/film/frame-times.txt (18 full held stretches, one worker; copied to fixtures/filming)
+      proves: the table carries round 4's measured cost, not the plan's older 1.2 to 1.5 s
+PASS  sliding frame cost (s a frame): got 4.3, recorded 4.31 (allowed difference 0.05)
+      recorded in: same file: "sliding (W1): 4.31"
+PASS  loading a piece (s): first stretch of a piece minus that view's steady rate, averaged: got 34, recorded 33.975 (allowed difference 2)
+      recorded in: same file, "first stretch of each piece" (8 pieces: 22 to 58 s)
+PASS  the painter's returned size: got [1504, 2672], expected [1504, 2672]
+      recorded in: people-test-paintings.json returned_size (and notice-corner-paintings.json)
+PASS  the fal price is the one on the people test ledger, with its date: yes
+PASS  rule 7 reach in works-w1-shot-check.json is the profile's: got 0.7, expected 0.7
+PASS  W3's widened eye range is the overview profile's: got [0.8, 7.0], expected [0.8, 7.0]
+PASS  no new drift: 74 copies of house numbers in the kits' tools agree with the table, apart from the known ones: 74 compared
+      proves: a tool that changes its own copy of a house number is caught
+NOTE  known drift (allowed until the tool reads the table): plugin kit narration-tools/estimate_timeline.py: 1.5 against film-settings.json timing.default_page_pause_seconds = 1.4
+NOTE  known drift (allowed until the tool reads the table): plugin kit paper-film/tools/frame_check.py: 0.87037 against film-settings.json safe_area.must_read_right_edge_share = 0.9
+NOTE  known drift (allowed until the tool reads the table): film kit narration-tools/estimate_timeline.py: 1.5 against film-settings.json timing.default_page_pause_seconds = 1.4
+NOTE  known drift (allowed until the tool reads the table): film kit paper-film/tools/frame_check.py: 0.87037 against film-settings.json safe_area.must_read_right_edge_share = 0.9
+-- film settings: the table, its reader and drift in the tools: 43 of 43 checks passed

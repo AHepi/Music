@@ -1,0 +1,1140 @@
+{
+ "street_with_earlier_layers": {
+  "set": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+  "scene": "street",
+  "size": [
+   135,
+   240
+  ],
+  "samples": 4,
+  "seconds": 50.3,
+  "layers": [
+   "soot",
+   "runoff",
+   "foot",
+   "paint",
+   "wallcracks",
+   "wallgrowth"
+  ],
+  "all_passed": true,
+  "results": {
+   "soot": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.6673765432098765,
+     "acts_max_diff": 0.23360037803649902,
+     "at_amount_0": {
+      "dots": 32400,
+      "max_diff": 0.014892801642417908,
+      "mean_diff": 2.876925236705574e-06,
+      "share_over_one_step": 0.0002469135802469136,
+      "share_changed": 0.008333333333333333
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 1210,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "class_id_counts": {
+      "0": 10335,
+      "1": 10706,
+      "2": 404,
+      "3": 395,
+      "4": 750,
+      "5": 7,
+      "6": 3644,
+      "7": 1430,
+      "8": 2043,
+      "9": 3,
+      "10": 283,
+      "11": 161,
+      "12": 1176,
+      "13": 258,
+      "14": 805
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 126,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 5.8
+   },
+   "runoff": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.5000925925925926,
+     "acts_max_diff": 0.383825421333313,
+     "at_amount_0": {
+      "dots": 43200,
+      "max_diff": 0.01773098111152649,
+      "mean_diff": 6.1358696257229894e-06,
+      "share_over_one_step": 0.0004861111111111111,
+      "share_changed": 0.020023148148148148
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 1741,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7
+     ],
+     "class_id_counts": {
+      "0": 2668,
+      "1": 2357,
+      "2": 1612,
+      "3": 2691,
+      "4": 5215,
+      "5": 29,
+      "6": 16899,
+      "7": 5662,
+      "10": 184,
+      "11": 1973,
+      "12": 1386,
+      "13": 2524
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 146,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 4.4
+   },
+   "foot": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.4310185185185185,
+     "acts_max_diff": 0.14976729452610016,
+     "at_amount_0": {
+      "dots": 43200,
+      "max_diff": 0.023224227130413055,
+      "mean_diff": 1.3070835848338902e-05,
+      "share_over_one_step": 0.0012268518518518518,
+      "share_changed": 0.016226851851851853
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 4837,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7,
+      8
+     ],
+     "class_id_counts": {
+      "0": 2164,
+      "1": 1182,
+      "2": 99,
+      "3": 686,
+      "4": 18428,
+      "6": 7582,
+      "7": 7013,
+      "8": 854,
+      "9": 214,
+      "10": 164,
+      "11": 1643,
+      "12": 1915,
+      "13": 918,
+      "14": 338
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 140,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 4.8
+   },
+   "paint": {
+    "dial_zero": {
+     "identical_16bit": true,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.4895023148148148,
+     "acts_max_diff": 0.16894787549972534,
+     "at_amount_0": {
+      "dots": 172800,
+      "max_diff": 0.0,
+      "mean_diff": 0.0,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.0
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 2021,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      11
+     ],
+     "class_id_counts": {
+      "0": 537,
+      "2": 596,
+      "3": 10236,
+      "4": 68780,
+      "5": 96,
+      "6": 31757,
+      "7": 34908,
+      "11": 21355,
+      "12": 3463,
+      "13": 1072
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 87,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 2.8
+   },
+   "wallcracks": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.2634490740740741,
+     "acts_max_diff": 0.3189745843410492,
+     "at_amount_0": {
+      "dots": 43200,
+      "max_diff": 0.01773098111152649,
+      "mean_diff": 6.313774520094739e-06,
+      "share_over_one_step": 0.0004861111111111111,
+      "share_changed": 0.025763888888888888
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 174,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7
+     ],
+     "class_id_counts": {
+      "0": 2668,
+      "1": 2357,
+      "2": 1612,
+      "3": 2691,
+      "4": 5215,
+      "5": 29,
+      "6": 16899,
+      "7": 5662,
+      "10": 184,
+      "11": 1973,
+      "12": 1386,
+      "13": 2524
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 172,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 4.4
+   },
+   "wallgrowth": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.2755324074074074,
+     "acts_max_diff": 0.033905550837516785,
+     "at_amount_0": {
+      "dots": 43200,
+      "max_diff": 0.023224227130413055,
+      "mean_diff": 1.4095759070187341e-05,
+      "share_over_one_step": 0.0012268518518518518,
+      "share_changed": 0.03159722222222222
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 6,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7
+     ],
+     "class_id_counts": {
+      "0": 2164,
+      "1": 1182,
+      "2": 99,
+      "3": 686,
+      "4": 18428,
+      "6": 7582,
+      "7": 7013,
+      "8": 854,
+      "9": 214,
+      "10": 164,
+      "11": 1643,
+      "12": 1915,
+      "13": 918,
+      "14": 338
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 152,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 5.8
+   },
+   "reuse": {
+    "passed": true,
+    "layers": {
+     "soot": 18,
+     "runoff": 7,
+     "foot": 13,
+     "paint": 6,
+     "wallcracks": 7,
+     "wallgrowth": 7
+    },
+    "errors": {},
+    "wiring_problems": [],
+    "not_restored": [],
+    "seconds": 6.5
+   },
+   "master_zero": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 32400,
+    "max_diff": 0.014892801642417908,
+    "mean_diff": 2.562482222856488e-06,
+    "share_over_one_step": 0.0002469135802469136,
+    "share_changed": 0.0070987654320987656,
+    "seconds": 7.9
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": true,
+    "dots": 32400,
+    "max_diff": 0.0,
+    "mean_diff": 0.0,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0,
+    "seconds": 8.0
+   }
+  }
+ },
+ "street_steps_all_doors_whitened": {
+  "set": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+  "scene": "street",
+  "size": [
+   135,
+   240
+  ],
+  "samples": 4,
+  "seconds": 7.7,
+  "layers": [
+   "steps"
+  ],
+  "all_passed": true,
+  "results": {
+   "steps": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.6791550925925925,
+     "acts_max_diff": 0.3286793529987335,
+     "at_amount_0": {
+      "dots": 172800,
+      "max_diff": 0.013763636350631714,
+      "mean_diff": 2.3553759547212394e-06,
+      "share_over_one_step": 0.00026041666666666666,
+      "share_changed": 0.00849537037037037
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 6354,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      7
+     ],
+     "class_id_counts": {
+      "0": 537,
+      "2": 596,
+      "3": 10236,
+      "4": 68780,
+      "5": 96,
+      "6": 31757,
+      "7": 34908,
+      "11": 21355,
+      "12": 3463,
+      "13": 1072
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 100,
+    "noise_nodes": 1,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 4.5
+   },
+   "reuse": {
+    "passed": true,
+    "layers": {
+     "steps": 3
+    },
+    "errors": {},
+    "wiring_problems": [],
+    "not_restored": [],
+    "seconds": 0.5
+   },
+   "master_zero": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 32400,
+    "max_diff": 0.014892801642417908,
+    "mean_diff": 4.053220891364617e-06,
+    "share_over_one_step": 0.0004320987654320988,
+    "share_changed": 0.013796296296296296,
+    "seconds": 1.4
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 32400,
+    "max_diff": 0.0018005669116973877,
+    "mean_diff": 1.1522798359919761e-07,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0007716049382716049,
+    "seconds": 1.3
+   }
+  }
+ },
+ "lockout_file": {
+  "set": "pit_village_street",
+  "scene": "lockout",
+  "size": [
+   135,
+   240
+  ],
+  "samples": 4,
+  "seconds": 60.4,
+  "layers": [
+   "soot",
+   "runoff",
+   "foot",
+   "steps",
+   "paint",
+   "wallcracks",
+   "wallgrowth"
+  ],
+  "all_passed": true,
+  "results": {
+   "soot": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.3862962962962963,
+     "acts_max_diff": 0.22699317336082458,
+     "at_amount_0": {
+      "dots": 32400,
+      "max_diff": 0.0002593994140625,
+      "mean_diff": 1.8838317572544838e-08,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.00033950617283950616
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 1003,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "class_id_counts": {
+      "0": 11347,
+      "1": 7842,
+      "2": 207,
+      "3": 245,
+      "4": 495,
+      "5": 6,
+      "6": 3233,
+      "7": 1498,
+      "8": 1353,
+      "9": 142,
+      "10": 271,
+      "11": 340,
+      "12": 1071,
+      "13": 152,
+      "14": 603,
+      "15": 532,
+      "16": 2325,
+      "17": 738
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 126,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 5.6
+   },
+   "runoff": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.12080246913580248,
+     "acts_max_diff": 0.095368891954422,
+     "at_amount_0": {
+      "dots": 32400,
+      "max_diff": 0.0003204345703125,
+      "mean_diff": 1.2166407259428524e-07,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.0025
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 135,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7
+     ],
+     "class_id_counts": {
+      "0": 11347,
+      "1": 7842,
+      "2": 207,
+      "3": 245,
+      "4": 495,
+      "5": 6,
+      "6": 3233,
+      "7": 1498,
+      "8": 1353,
+      "9": 142,
+      "10": 271,
+      "11": 340,
+      "12": 1071,
+      "13": 152,
+      "14": 603,
+      "15": 532,
+      "16": 2325,
+      "17": 738
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 146,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 4.2
+   },
+   "foot": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.05388888888888889,
+     "acts_max_diff": 0.04638741910457611,
+     "at_amount_0": {
+      "dots": 32400,
+      "max_diff": 0.0003204345703125,
+      "mean_diff": 1.4097302880600182e-07,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.002962962962962963
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 209,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7,
+      8
+     ],
+     "class_id_counts": {
+      "0": 11347,
+      "1": 7842,
+      "2": 207,
+      "3": 245,
+      "4": 495,
+      "5": 6,
+      "6": 3233,
+      "7": 1498,
+      "8": 1353,
+      "9": 142,
+      "10": 271,
+      "11": 340,
+      "12": 1071,
+      "13": 152,
+      "14": 603,
+      "15": 532,
+      "16": 2325,
+      "17": 738
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 140,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 4.4
+   },
+   "steps": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.06111111111111111,
+     "acts_max_diff": 0.30695050954818726,
+     "at_amount_0": {
+      "dots": 32400,
+      "max_diff": 0.0003204345703125,
+      "mean_diff": 1.9340626522534876e-07,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.0037962962962962963
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 55,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      7
+     ],
+     "class_id_counts": {
+      "0": 11347,
+      "1": 7842,
+      "2": 207,
+      "3": 245,
+      "4": 495,
+      "5": 6,
+      "6": 3233,
+      "7": 1498,
+      "8": 1353,
+      "9": 142,
+      "10": 271,
+      "11": 340,
+      "12": 1071,
+      "13": 152,
+      "14": 603,
+      "15": 532,
+      "16": 2325,
+      "17": 738
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 100,
+    "noise_nodes": 1,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 3.3
+   },
+   "paint": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.1275,
+     "acts_max_diff": 0.22470435500144958,
+     "at_amount_0": {
+      "dots": 32400,
+      "max_diff": 0.0003204345703125,
+      "mean_diff": 2.034533537198513e-07,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.004104938271604938
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 14,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      11
+     ],
+     "class_id_counts": {
+      "0": 11347,
+      "1": 7842,
+      "2": 207,
+      "3": 245,
+      "4": 495,
+      "5": 6,
+      "6": 3233,
+      "7": 1498,
+      "8": 1353,
+      "9": 142,
+      "10": 271,
+      "11": 340,
+      "12": 1071,
+      "13": 152,
+      "14": 603,
+      "15": 532,
+      "16": 2325,
+      "17": 738
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 87,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 2.4
+   },
+   "wallcracks": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.09,
+     "acts_max_diff": 0.34036773443222046,
+     "at_amount_0": {
+      "dots": 43200,
+      "max_diff": 0.0004425123333930969,
+      "mean_diff": 2.352423109641677e-07,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.004166666666666667
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 71,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7
+     ],
+     "class_id_counts": {
+      "0": 2498,
+      "1": 2354,
+      "2": 1605,
+      "3": 2683,
+      "4": 4907,
+      "5": 28,
+      "6": 14534,
+      "7": 4257,
+      "10": 87,
+      "11": 1712,
+      "12": 1031,
+      "13": 2524,
+      "16": 1980,
+      "17": 3000
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 172,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 4.0
+   },
+   "wallgrowth": {
+    "dial_zero": {
+     "identical_16bit": true,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.19296296296296298,
+     "acts_max_diff": 0.1281757801771164,
+     "at_amount_0": {
+      "dots": 32400,
+      "max_diff": 0.0,
+      "mean_diff": 0.0,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.0
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 168,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      6,
+      7
+     ],
+     "class_id_counts": {
+      "0": 11347,
+      "1": 7842,
+      "2": 207,
+      "3": 245,
+      "4": 495,
+      "5": 6,
+      "6": 3233,
+      "7": 1498,
+      "8": 1353,
+      "9": 142,
+      "10": 271,
+      "11": 340,
+      "12": 1071,
+      "13": 152,
+      "14": 603,
+      "15": 532,
+      "16": 2325,
+      "17": 738
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 152,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 5.5
+   },
+   "reuse": {
+    "passed": true,
+    "layers": {
+     "soot": 14,
+     "runoff": 5,
+     "foot": 11,
+     "steps": 3,
+     "paint": 6,
+     "wallcracks": 5,
+     "wallgrowth": 5
+    },
+    "errors": {},
+    "wiring_problems": [],
+    "not_restored": [],
+    "seconds": 7.8
+   },
+   "master_zero": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 32400,
+    "max_diff": 0.0003204345703125,
+    "mean_diff": 2.6106641826117993e-07,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.00537037037037037,
+    "seconds": 8.6
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": true,
+    "dots": 32400,
+    "max_diff": 0.0,
+    "mean_diff": 0.0,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0,
+    "seconds": 14.7
+   }
+  }
+ },
+ "courtyard_courtyard_look": {
+  "set": "japanese_courtyard",
+  "scene": "courtyard",
+  "size": [
+   300,
+   200
+  ],
+  "samples": 4,
+  "seconds": 76.3,
+  "layers": [
+   "soot",
+   "runoff",
+   "foot",
+   "steps",
+   "paint",
+   "wallcracks",
+   "wallgrowth"
+  ],
+  "all_passed": false,
+  "results": {
+   "soot": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.2853,
+     "acts_max_diff": 0.037354081869125366,
+     "at_amount_0": {
+      "dots": 60000,
+      "max_diff": 0.0007019340991973877,
+      "mean_diff": 3.803396111834445e-06,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.058133333333333335
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 1196,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      5,
+      7,
+      8,
+      10
+     ],
+     "class_id_counts": {
+      "0": 28507,
+      "1": 9232,
+      "2": 4425,
+      "3": 522,
+      "4": 5962,
+      "5": 1043,
+      "6": 4407,
+      "7": 1878,
+      "8": 446,
+      "10": 3058,
+      "11": 198,
+      "12": 322
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 126,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 8.5
+   },
+   "runoff": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.0008203703703703704,
+     "acts_max_diff": 0.00091552734375,
+     "at_amount_0": {
+      "dots": 540000,
+      "max_diff": 0.00091552734375,
+      "mean_diff": 5.707987327241426e-08,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.0008203703703703704
+     }
+    },
+    "isolation": {
+     "passed": false,
+     "dots_acting": 0,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      5,
+      10
+     ],
+     "class_id_counts": {
+      "0": 257012,
+      "1": 83142,
+      "2": 39809,
+      "3": 4606,
+      "4": 53717,
+      "5": 10295,
+      "6": 38637,
+      "7": 16511,
+      "8": 4040,
+      "10": 27524,
+      "11": 1822,
+      "12": 2885
+     },
+     "mask_max": 0.0,
+     "outside_by_role": {}
+    },
+    "note": "the layer drew nothing in this view, so isolation could not be proven (no dot changed outside its roles either)",
+    "nodes": 146,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": false,
+    "seconds": 7.1
+   },
+   "foot": {
+    "dial_zero": {
+     "identical_16bit": true,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.12522916666666667,
+     "acts_max_diff": 0.252964049577713,
+     "at_amount_0": {
+      "dots": 240000,
+      "max_diff": 0.0,
+      "mean_diff": 0.0,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.0
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 3250,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      5,
+      7,
+      10
+     ],
+     "class_id_counts": {
+      "0": 114238,
+      "1": 36957,
+      "2": 17691,
+      "3": 2054,
+      "4": 23866,
+      "5": 5062,
+      "6": 16661,
+      "7": 7357,
+      "8": 1808,
+      "10": 12217,
+      "11": 805,
+      "12": 1284
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 140,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 6.6
+   },
+   "steps": {
+    "passed": true,
+    "note": "no role in this set: the layer goes into no material",
+    "seconds": 0.0
+   },
+   "paint": {
+    "passed": true,
+    "note": "no role in this set: the layer goes into no material",
+    "seconds": 0.0
+   },
+   "wallcracks": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.17381666666666667,
+     "acts_max_diff": 0.09396505355834961,
+     "at_amount_0": {
+      "dots": 60000,
+      "max_diff": 0.0012512356042861938,
+      "mean_diff": 2.524098135836539e-06,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.04085
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 164,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      4,
+      5,
+      6,
+      7,
+      10
+     ],
+     "class_id_counts": {
+      "0": 28507,
+      "1": 9232,
+      "2": 4425,
+      "3": 522,
+      "4": 5962,
+      "5": 1043,
+      "6": 4407,
+      "7": 1878,
+      "8": 446,
+      "10": 3058,
+      "11": 198,
+      "12": 322
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 172,
+    "noise_nodes": 2,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 13.8
+   },
+   "wallgrowth": {
+    "dial_zero": {
+     "identical_16bit": false,
+     "passed_zero": true,
+     "acts_at_amount_1_share_changed": 0.31925,
+     "acts_max_diff": 0.3514000177383423,
+     "at_amount_0": {
+      "dots": 60000,
+      "max_diff": 0.0012512356042861938,
+      "mean_diff": 2.407539234638989e-08,
+      "share_over_one_step": 0.0,
+      "share_changed": 0.00011666666666666667
+     }
+    },
+    "isolation": {
+     "passed": true,
+     "dots_acting": 1154,
+     "dots_acting_outside_roles": 0,
+     "roles": [
+      5,
+      6,
+      8,
+      10,
+      11
+     ],
+     "class_id_counts": {
+      "0": 28507,
+      "1": 9232,
+      "2": 4425,
+      "3": 522,
+      "4": 5962,
+      "5": 1043,
+      "6": 4407,
+      "7": 1878,
+      "8": 446,
+      "10": 3058,
+      "11": 198,
+      "12": 322
+     },
+     "mask_max": 1.0,
+     "outside_by_role": {}
+    },
+    "nodes": 152,
+    "noise_nodes": 3,
+    "forbidden_nodes": [],
+    "passed": true,
+    "seconds": 13.1
+   },
+   "reuse": {
+    "passed": true,
+    "layers": {
+     "soot": 4,
+     "runoff": 2,
+     "foot": 4,
+     "steps": 0,
+     "paint": 0,
+     "wallcracks": 103,
+     "wallgrowth": 59
+    },
+    "errors": {},
+    "wiring_problems": [],
+    "not_restored": [],
+    "seconds": 4.0
+   },
+   "master_zero": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 60000,
+    "max_diff": 0.0034638047218322754,
+    "mean_diff": 6.619627129111905e-06,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0906,
+    "seconds": 11.9
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 60000,
+    "max_diff": 0.0010986477136611938,
+    "mean_diff": 3.221341415837742e-08,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0002666666666666667,
+    "seconds": 11.1
+   }
+  }
+ }
+}

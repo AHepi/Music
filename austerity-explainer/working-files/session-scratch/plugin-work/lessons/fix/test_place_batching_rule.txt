@@ -1,0 +1,29 @@
+== batch rule and card-time allowance: written where models read, and equal to the house numbers
+PASS  the house numbers place_card_time.allowance_minutes are builder 10, fixer 5, integrator 10, renderer 10, checker 3, planner 0: {'builder': 10, 'fixer': 5, 'integrator': 10, 'renderer': 10, 'checker': 3, 'planner': 0, 'default': 5}
+PASS  every card-time and variations house number has a kind and a real source (41 numbers): all marked
+PASS  the allowances are marked judged (nobody measured how long a good try takes), and the wake-up and picture seconds are marked measured: yes
+PASS  the REQUIRED block of surfaces-wear-and-construction holds the batch rule, the tool, the sizes, the allowance and the file to read: lacks: 
+PASS  the REQUIRED block of make-3d-models holds the batch rule, the tool, the sizes, the allowance and the file to read: lacks: 
+PASS  the REQUIRED block of build-and-paint-a-place holds the batch rule, the tool, the sizes, the allowance and the file to read: lacks: 
+PASS    (a block without the rule is found lacking: the check can fail): yes
+PASS  the skill file batched-rounds-and-card-time.md exists, starts with what it is, and gives a concrete example (the garden) before the rule: yes
+PASS  it names every action it asks a helper to use: variations make, variations scout, variations plan, variations run, variations collect, variations refine, variations keys, card-time show, card-time check, card-time start: all named
+PASS  every house number the file writes exists in film-settings.json (place_card_time.team_total_minutes, place_measures.squint_target, place_render.workers_max, place_variations.amount_scale_max, place_variations.batch_size, place_variations.min_variations_per_job, place_variations.scout_picture_changed_share_min, place_variations.scout_picture_mean_difference_min, place_variations.settings_difference_min_share): all exist
+PASS  the skill file states the whole rule: one sweep, build once, one batch of about 10, one more batch at most, small pictures, full size once, the allowance, the refusal, the way over, and that price is an estimate: yes
+PASS  the skill file says where the measures are made and what a card second is (work + wake-up + idle tail): yes
+PASS  the builder carries the rule: a section on trying variations, the allowance (builder 10, fixer 5), the ledger flags, the batch, no third batch, and that it reports card_seconds and batches: yes
+PASS  the integrator may try a dial the batch way (role integrator, 10 minutes) and reports card seconds; the renderer has 10 minutes, draws full size once at the very end and reports card_seconds: yes
+PASS  the planner is told it has no card time and writes the rule into every brief; the checker compares the reported seconds with the ledger and counts batches: yes
+PASS  no agent still says that nobody but the renderer may use the card, or that a builder never uses it: yes
+PASS  every allowance written in words ("builder 10 minutes") equals the house number (12 places): 12 agree
+PASS    (a wrong number would be found): yes
+PASS  the figure from the garden job (US$10.89 of card time against pictures worth about 5 cents) is the same wherever it is written: yes
+PASS  the tips guide has the four tips (sweep, batch of about 10, small until the end and full size once, ledger and allowance) in section 8a and a line in the money section: yes
+PASS  the hook reminder names the rule (one sweep, one batch of about 10, explainer-film-place variations, full size once, card seconds) and is still three lines: 3
+PASS  the README says what changed (the rule, both verbs, the allowances, that it was proved on real cards) and which skill file holds the rule: yes
+PASS  the example variations file of the real canal lock has 10 variations, every key and value valid for the tool, and its scene and settings written beside the file (no absolute folder): yes
+PASS  the real reader reads it, and all 10 variations survive the check before drawing (they are far apart): 10 kept, 0 dropped
+PASS  the example holds no folder of this computer, no address, no key and no personal detail: yes
+PASS  the hook template is valid Python, starts with a plain note and a concrete example, and has apply(variation): yes
+PASS  the workflow writes the card ledger, the allowances by role, the batch rule and the ONE full-size drawing at the end (and no rounds drawn at full size): yes
+-- batch rule and card-time allowance: written where models read, and equal to the house numbers: 27 of 27 checks passed

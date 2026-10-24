@@ -1,0 +1,465 @@
+===== 1 film lessons | partly medium | general
+L: L42, L81, L82, L84: light leaked out of the cottage's back windows (make the back wall solid); rooms lit by their own glow are cheap and can change on a word; in a dark room the cut-outs must go dark too; a street needs its own light (lit pavement, lamp pool) or people look as if they stand inside lit rooms.
+S: Lessons.md #42, #81, #82, #84
+E: Only as code comments: kit/paper-film/scenes/house-sample/house-set.js:197 'in a dark room a cut-out goes dark too, paper edge and all (no moonlight indoors)'; :339 'the pavement in front ... with a gas lamp and its pool of light'; :115. No line in any skill or in the tips guide. The calculators/README.md:246-249 inventory lists the headings 'Rooms by their own glow; dark rooms darken cut-outs; Street needs its own light; solid back walls' with no rule behind them.
+W: Night scenes with lit windows are likely in new places. A model that does not open the house-sample code would not learn these (they cost time and look).
+===== 2 film lessons | partly medium | general
+L: L70: detailed models cost drawing time mostly in their surfaces, not their shapes (a profiling tool showed the realistic materials were most of a 12-second picture); matte materials halve it but looked flatter, so the realistic look was kept and the time accepted.
+S: Lessons.md #70
+E: The profiler and the rule 'Budget a set by filming time, not triangles' are carried: kit/docs/LLM tips and tricks.md:348-349; skills/make-3d-models/SKILL.md:114-120. The 'surfaces not shapes' finding and the matte trade-off appear only in code comments (kit/paper-film/scenes/projected-set.js:573-575 'matte ... about half the drawing time') and as a README inventory heading ('Drawing time comes from surfaces, not shapes'), with no code behind it in plan_budget.py.
+W: It tells a builder where detail is cheap (shape) and where it is costly (realistic materials). Today the model must find that in code.
+===== 3 film lessons | partly medium | general
+L: L72: check whether a repository is public before pushing everything; search new files for passwords, keys and personal details; when Claude Code's safety check blocks a save, take out what it most likely objects to (session records, job numbers, machine paths) and ask rather than forcing it through.
+S: Lessons.md #72
+E: skills/film-and-finish/SKILL.md:103-105 (plan_budget.py push refuses audio, video, files over 90 MB and anything that looks like a key); kit/place-kit/DEVIATIONS.md push check (rented-card key forms); skills/surfaces-wear-and-construction/fresh-checkers.md:30-33 (a process checker searches written files for keys, ids and personal details). Missing: the public-repository check, personal-detail search outside the rented-card settings, and the 'remove what it objects to and ask, do not force' rule.
+W: A wrong push of private details cannot be undone. The file gate is there, but the 'ask, don't force' behaviour is not.
+===== 4 film lessons | partly medium | general
+L: L73: prove a repository is complete by rebuilding from a fresh copy and comparing drawn moments pixel for pixel; read the notes against the files (16 stale paths a file count missed).
+S: Lessons.md #73
+E: bin/explainer-film-setup:104-110 and kit/docs/LLM tips and tricks.md:647 (every kit file a skill names must exist). The fresh-copy pixel comparison is not carried: calculators/README.md 'Not done yet' says the release step ('hash the plugin's kit against the film kit, redraw kept shots ... and compare pixels') 'is still by hand'; the inventory heading 'Rebuild from a fresh copy' has no code in preflight.py.
+W: It is the proof that a plugin works without the author's folders. The path check exists, the rebuild proof does not.
+===== 5 film lessons | partly high | general
+L: L83, L94: check the pictures against the history, not only the words (gold dropping into an empty vault said 'Britain gained gold'; snow-like blotches on 1 May, coal heaps in a lockout when coal was scarce, clay-jar sacks); give the fact checker and the critics the pictures.
+S: Lessons.md #83, #94
+E: Written as a judgement: skills/check-and-critique/SKILL.md:29 'history and story accuracy of every painted object, not only the words (a history critic)'; kit/docs/LLM tips and tricks.md:604-605. Not carried in the workflows: workflows/verify-facts.js receives only the script and on-screen words (no pictures), and workflows/critique-film.js has no history critic and does not pass the 'must still judge' list (its picture-critic prompt at line 49 only says 'anachronistic'). tips:614 notes that 'the picture must not contradict the card' is not built.
+W: History errors in pictures were the project's most repeated painter fault (lessons 19, 26, 52, 94). The rule is written, but the helper that runs the critics does not enforce it.
+===== 6 film lessons | partly medium | general
+L: L120: a light aimed at one thing lights everything in its beam; use Blender light linking to choose what each reaches (in Blender 5.2 a collection's light-linking entries do not name their object: pair them with the collection's objects in order).
+S: Lessons.md #120
+E: Carried: kit/docs/LLM tips and tricks.md:305 'linked to it alone'; kit/docs/paper-look - 07 Composing a shot.md:201-204; kit/paper-film/blender/pit-village/set_dressing.py:157-167 (light_reaches, which handles the pairing); film-settings.json:3869-3871. Not carried: the Blender 5.2 pairing quirk is not in skills/surfaces-wear-and-construction/blender-5-traps.md (its 16 traps do not mention light linking).
+W: The helper function hides the quirk, but a model writing its own light linking would lose a round to it.
+===== 7 film lessons | partly medium | general
+L: L140 and trap: a planning test that needs free disk fails on a nearly full machine for the wrong reason (the filming plan keeps a 4 GB reserve and the machine had 1.3 GB); look at the free disk before reading a failed planning check as a fault in a change.
+S: Lessons.md #140; Traps 'Before blaming a change'
+E: The plugin hit the same fault and worked around it in code: kit/place-kit/DEVIATIONS.md:165-166 (test_preflight.py now passes --free-disk-gb 40) and the --free-disk-gb option in calculators/preflight.py:2002; film-settings.json:4215-4219 (4 GB reserve). The advice itself ('check the free disk first') is not in any skill or in the tips guide (searched 'disk' there: nothing). Related only: skills/surfaces-wear-and-construction/blender-5-traps.md:40-41 (stop when free space falls under 0.4 GB).
+W: A full disk makes a correct change look broken. The fix exists, but the habit of checking the disk first is not written down.
+===== 8 film lessons | missing medium | general
+L: L141 and trap: 'dot for dot' proved less than the notes said; one scene (the house sample at 20 s) comes out two slightly different ways from run to run. Draw each comparison picture at least three times with each stage, and say how many pictures and draws were compared, before calling a difference real.
+S: Lessons.md #141; Traps 'A dot for dot proof'
+E: Searched all docs for 'dot for dot', 'run-to-run', 'several draws', 'draw each comparison': no hit. kit/docs/LLM tips and tricks.md:62-64 says 'Never trust a single still' (a different point). calculators/README.md 'Not done yet' lists regression stills as still by hand.
+W: It is how to prove a change left other scenes untouched, and the project's own earlier proof was wrong. It is after the 16 Oct sync.
+===== 9 film lessons | missing medium | general
+L: L142 and trap: dollar signs were eaten when a record file was written through the shell (US$0.048 became US/bin/bash.048); write text with prices through the file-writing tool or a quoted here-document, then search the file for 'bin/bash'.
+S: Lessons.md #142; Traps
+E: Searched all docs, skills and agents for 'bin/bash', 'here-document', 'dollar sign': no hit (only shell scripts that start with #!/bin/bash).
+W: It corrupts the money records a helper keeps, and it is a one-line habit. It is after the 16 Oct sync.
+===== 10 film lessons | missing high | general
+L: Dark painted street, part 1 (wet lockout, log 37): the stage's filmic curve darkens dark values, so a dark wet road arrived at 0.75 to 0.86 of its painted brightness and some crushed to black. Give that scene look.toe: 1 (the curve may brighten but never darken) and ease the dark frame edge (vignette 0.25).
+S: film-kit 05 Traps 'A dark painted street' (log 37), first bullet
+E: The plugin copy of the doc ends at kit/docs/paper-look - 05 Lessons and traps.md:121 without the block (the source has it at lines 116-129). Worse, the engine lacks the feature: kit/paper-film/stage/cinema-stage.js has no 'toe' (the source stage has it at lines 216, 222, 235-236, 259, 267, 334), and kit/paper-film/scenes/lockout-test.js:180 still has vignette 0.3 and no toe. kit/kit-sync-notes.md:7 says the last copy was 16 October; the lesson is from 21 October.
+W: Any night, dusk or wet place hits it. A model using the plugin's stage cannot apply the fix at all, so dark painted values come out crushed.
+===== 11 film lessons | missing high | general
+L: Dark painted street, part 2 (log 37): a wet front painting needs its own wet 'behind' painting; with the old dry behind painting the road hidden by near props came back pale and dry when the camera moved (59 percent of the road dots lighter). Swap the two paintings as a pair with the look line.
+S: film-kit 05 Traps 'A dark painted street' (log 37), second bullet
+E: Searched for 'wet behind', 'swap the two', 'as a pair' and 'lockout' (only scene names). skills/build-and-paint-a-place/SKILL.md:212-214 and skills/surfaces-wear-and-construction/SKILL.md:146-147 say to change the painter template's wet words for wet views, but nothing says the behind painting must be made in the same wet state. tips:405-406 says plan the behind painting with the plate, and :412-413 says make it 'from the same state', but this is not stated for dry-versus-wet.
+W: A place that changes between dry and wet, or is repainted wet, would show pale dry road behind its props. The plugin carries the wet-words fix but not the paired-painting fix.
+===== 12 film lessons | missing medium | general
+L: Dark painted street, part 3 (log 37): after a new painting, measure how bright the road arrives in the plate view against the painting (the wet lockout 0.935, the dry one with the same look 0.96); and painted dry and wet streets differ in feel (wet: detailed picture with a paint finish, no thick ink outlines, plain dark sky; dry: flat colour and thick outlines).
+S: film-kit 05 Traps 'A dark painted street' (log 37), third bullet
+E: Not found in any skill or doc. Related only: kit/docs/LLM tips and tricks.md:328-329 'Set each view's exposure from its measured brightness on the painting, not the plate' (plan_lights.py exposure), which is a different measure.
+W: It gives a number to judge whether a dark painting survives the stage. It also warns that wet places will not look like the dry ones.
+===== 13 film decisions and workflows | missing high | general
+L: Start small: deliver one small test (a 2 to 3 minute chapter, one test page, one short clip, one view) for the person's reaction before building or paying for the whole thing. The person did this four times: history chapter first, page 3 before the rest of chapter 1, 'Do plan 3. And a short clip', then 'now's the real test'.
+S: Decisions items 6, 13 (tested on page 3 first), 34, 40
+E: grep for 'start small', 'test page', 'short clip', 'first as a test', 'test chapter' over skills, docs and README found nothing. Nearest: skills/build-cinema-page/SKILL.md:99 'Build one or two pattern pages yourself first' (patterns for helpers, not a test for the person) and tips :536 'Do every free step first, then ask once'.
+W: It decides scope and spending (filming a chapter is hours; a repaint costs money). A model given 'build a place' will otherwise build and render the whole set before the person has reacted to one view.
+===== 14 film decisions and workflows | partly medium | general
+L: When the person is choosing a look or a direction, offer a few alternatives to pick from: five style samples of the SAME scene so only the look changes (about US$0.90), about three outlines, 'what were the other options', alternative plans from a synthesising agent.
+S: Decisions items 12, 19, 31, 33
+E: skills/research-and-script/SKILL.md section 2 'Outlines (about three) ... Stop and let the user choose' covers scripts only. Nothing for looks or sets (grep 'five styles', 'style samples', 'several looks' finds only a house-sample caption). skills/make-explainer-film/house-rules.md:13 'Give one next step, not a menu' could be read the other way.
+W: The person is not a programmer and chooses by looking; a same-scene sample set is the cheapest way to let them choose a look for a new place.
+===== 15 film decisions and workflows | partly high | general
+L: A standing allowance (US$10 fal from chapter 2's start, US$20 'starting from now') covers the KIND of spending it was given for (pictures and props, ElevenLabs only for speech); spending inside it is still reported each time; a different experiment needs a fresh clear yes; helpers must be told the true remaining figure (they were told US$3 by mistake, US$8.70 was left).
+S: Decisions items 19, 30, 31, 34, 40
+E: kit/calculators/plan_budget.py:6 and :39 (ledger from the allowance's start date, 'covers': ['fal'], 'spending_line'); tips :532-535; make-explainer-film/SKILL.md:105-109. Not carried: 'still reported', 'a new experiment needs a new yes', 'tell helpers the real remaining figure'.
+W: Without the scoping rules a model either asks too often or treats 'budget left' as permission for something the person never approved.
+===== 16 film decisions and workflows | partly medium | general
+L: Effort for helpers is the person's choice per job: 'all subagents on medium, no higher' was the standing rule, but for one design-review job the person explicitly asked for maximum effort, and that overrode it for that job only.
+S: Decisions items 19 and 31
+E: skills/make-explainer-film/house-rules.md:40 'Run helpers at the effort the user asks for (the austerity project: medium, never higher)'; README.md:65 and every agent file say effort: medium. Not said: the person can raise it for one job and the later instruction wins.
+W: 'Never higher' reads as permanent; a model could refuse a clear later request for deeper review.
+===== 17 film decisions and workflows | partly medium | general
+L: Never alter what the person supplied or approved: the soundtrack upload is left untouched (work on a copy), supplied toolkits are read as guidance and never changed, the original picture is kept when a tie is recoloured, the dry paintings were kept beside the wet ones so the old look is one swap away.
+S: Decisions items 7, 8, 22, 43
+E: agents/place-builder.md:43 'Work on your own COPY of the scene file'; kit/place-kit/place_kit/undo.py:2 (originals kept with a fake user); kit/docs/paper-look - 00 START HERE.md:76 (soundtrack never stored); kit/docs/paper-look - 06 House rules:42-43 (authority documents stay frozen). No general rule 'keep the old/approved version beside the new one'.
+W: The person overturns choices 'in one line'; that only works if the earlier version still exists.
+===== 18 film decisions and workflows | partly medium | general
+L: The person can hand over aesthetic choices ('I'm going to have to defer to your aesthetic discipline', 'I'll leave the aesthetic choices to you. It has to be cinematic, yet still carry the informational quality'): decide boldly, explain the reasons in plain words, let them overturn in one line.
+S: Decisions items 18, 20
+E: skills/build-cinema-page/guide.md:9-13 ('cinematic ... but every page must also explain'); house-rules.md:12 (routine technical choices are yours); tips :617-618 (story choices go to a critic). No statement for aesthetic delegation.
+W: A smaller model may ask the non-programmer to choose colours and layouts they just handed over.
+===== 19 film decisions and workflows | partly medium | general
+L: An object the story treats as an authority (the book) must be drawn big enough and placed further back; fix clipping by zooming out and moving the big thing back in depth, leaving room for the workers and the envelope, not by shrinking what matters.
+S: Decisions item 25 (screenshot 5)
+E: kit/docs/paper-look - 07 Composing a shot.md:109-111 ('Story props may be drawn somewhat bigger than life so they read on a phone'); kit/paper-film/scenes/inflation-chapter-2/page-9.js:19 (comment: stands for authority, 40% of the frame). Not stated as a general rule about meaning and scale.
+W: Scale is how a viewer reads importance; a model may draw the key object small to avoid overlap.
+===== 20 film decisions and workflows | partly medium | general
+L: After a helper improves a model, a reviewer compares before and after; any model that got worse keeps its old version.
+S: Decisions item 26 (calls)
+E: agents/place-checker.md:75-81 (recheck mode compares old findings with new pictures and hunts new faults); fresh-checkers.md:138-139. The 'a worse model keeps its old version' rule is not written.
+W: Fix rounds can make a place worse (the garden's squint score did).
+===== 21 film decisions and workflows | partly medium | general
+L: Save everything made to the repository after each piece of work except videos and audio (pictures, models, code, notes, logs); leave out other people's publications and code, downloaded manuals and installed software because the repository is public; keep files under GitHub's limits in batches; check text files for keys first.
+S: Decisions items 27 and 30; Workflows 'Saving to the repository'
+E: skills/film-and-finish/SKILL.md:103-106 and tips :520 (plan_budget.py push refuses audio and video, files over 90 MB and key-like text); kit/docs/paper-look - 00 START HERE.md:76; kit/place-kit/SOURCES-AND-LICENCES.md. Not carried: the habit 'save after each piece of work', 'other people's work stays out of a public repo', 'installed software stays out'.
+W: The person asked for it twice, and files that exist only in the session are lost when it ends.
+===== 22 film decisions and workflows | partly medium | general
+L: When a safety check blocks a save, leave it for the person's decision; do not force it through even after a search found no keys.
+S: Decisions items 27, 30; Status 'Working files'
+E: tips :536-537 ('a refusal is never worked around') applies to paid steps only; no equivalent line for blocked saves.
+W: Same respect for refusals; unstated for non-paid steps.
+===== 23 film decisions and workflows | missing medium | general
+L: A test stays a test: the delivered film is not changed by an experiment unless the person approves (chapter 2's film was unchanged by the SAM and station tests).
+S: Decisions items 28, 29 (calls)
+E: grep 'stays a test', 'test stays' found only unrelated test-file lines.
+W: A model could quietly fold an experiment into the shipped film.
+===== 24 film decisions and workflows | missing medium | specific
+L: The 'house' look (painted pages with a 3D house) was rejected by the person ('It looks terrible'); the real 3D rooms the camera moves through without tearing were liked and are the thing to build on.
+S: Decisions item 33
+E: The house sample ships as a worked example (kit/paper-film/scenes/house-sample*, kit/examples/house-sample/timeline.json) and is cited as a pattern (README.md, 00 START HERE.md, kit-sync-notes.md). grep 'terrible', 'rejected', 'plan 2' finds no note that the person rejected it.
+W: A model can copy a look the person already refused.
+===== 25 film decisions and workflows | partly high | general
+L: No blank signs, placards, book covers or plain boxes standing in for objects, from now on: every sign and book carries real lettering and detail.
+S: Decisions item 34; Workflows built-place step 1
+E: skills/build-and-paint-a-place/SKILL.md:86 states it; the audit fails plain sharp-edged boxes (kit/calculators/place_audit_check.py:513). But skills/paint-and-cut/SKILL.md:44 says 'Ask for blank placards and plain signs' (right for paintings, unexplained), and skills/make-3d-models/SKILL.md (the other place skill) does not carry the rule; nothing checks that a sign or book has lettering.
+W: A direct 'from now on' rule that two skills present in opposite ways.
+===== 26 film decisions and workflows | partly medium | general
+L: Composition by a picture program: give it the empty painted street plus ten prop pictures and let it choose its own camera (Nano Banana Pro, about 15 cents; Flux takes only ten images; Seedance draft video cheapest at 480 px and finishable within 7 days), judge the results as guides only, never put anything a program made on screen, rebuild the good composition in our own 3D set. Seedance's way of moving was the best guide.
+S: Decisions item 35; Status 'Composition test'
+E: kit/docs/paper-look - 07 Composing a shot.md:228-234; skills/build-cinema-page/guide.md:241-243; kit/film-settings.json:1899-1911 (prices); plan_budget.py:161-162 ('sketches'). The recipe (inputs, own-camera choice, the ten-image limit, draft video) is not a step in build-and-paint-a-place, and Seedance's finding is not recorded.
+W: Cheap way to get a better arrangement, but easy to misuse without the recipe.
+===== 27 film decisions and workflows | missing medium | general
+L: When the person is running out of usage and says to wrap up: stop, save everything, show everything so far, and record which state was last checked and which changes are saved but untested (round 5 was the last checked state; round 6's code changes were untested).
+S: Decisions item 42; Status 'Chapter 2's full redesign'
+E: grep 'running out of', 'wrap up', 'last checked state', 'untested' over skills and docs found nothing. Nearest: fresh-checkers.md:70 and place-builder.md:123 ('save evidence as you go').
+W: Limits are real for this person; a model should know what to do and what to tell them.
+===== 28 film decisions and workflows | missing medium | general
+L: A painted plate covers one view, so the later plan (a camera moving through the whole street, lighting that reacts to characters) needs the whole street set (street.glb) painted or lit to hold from many views and the set itself to carry the light; the painting carries it today; start by asking which sequence comes first.
+S: Decisions item 43 (calls); Status 'Later (not started)'
+E: grep 'immersive', 'moves through the street', 'react' found nothing. Only the limits are carried: tips :92 and camera-and-framing.md:73-77 (slide at most about 1.29 times nearer, plate only a little wider than the film lens).
+W: A model should not promise through-street camera moves or reactive light with this method.
+===== 29 film decisions and workflows | partly high | general
+L: A dark or wet painted place: the stage's filmic curve darkens dark painted values (a wet road arrived at 0.75 to 0.86 of its painted brightness); give that page a look value toe: 1 and a lighter dark frame edge (vignette 0.25), then measure how bright the road arrives against the painting (0.935 on the wet lockout).
+S: Decisions item 43 (calls); Workflows built-place step 8; Status 'The wet lockout shot'
+E: tips :328 and plan_lights.py:881-896 (exposure per view from the other views' brightness); inflation-chapter-2-newcomers/page-3.js:46-50 (comment that the filmic curve roughly halves a dark picture). But kit/paper-film/stage/cinema-stage.js has no 'toe' and scenes/lockout-test.js:180 has vignette 0.3 and no toe; no doc mentions toe or the 'arrives at X of painted' measure.
+W: Dusk, night and wet places are exactly where the person wants lights on; a model would paint a good road and film it too dark. The project's own notes admit the plugin's stage is behind.
+===== 30 film decisions and workflows | partly medium | general
+L: Wet and dry paintings go in and out as a pair: never a wet front over a dry behind painting (pale dry patches show where the camera uncovers what near props hid); keep the other look beside it so the swap is four renames and one look line.
+S: Decisions item 43; Workflows 'The lockout shot: wet street or dry street'; Workflows/Status Traps
+E: kit/calculators/plan_states.py:8 (the behind plate is 'the same state as the main plate with the near things left out'). The wet/dry-specific warning and the pale-patch symptom are not stated.
+W: Any place with two looks (wet/dry, lit/unlit) can hit it.
+===== 31 film decisions and workflows | missing medium | general
+L: Cycles caveats not yet tested: Cycles in moving pictures (its noise clean-up could flicker frame to frame); whether the painter paints better from Cycles plates; the current wet lockout painting was made from an EEVEE plate and stays.
+S: Decisions item 44 (calls)
+E: grep 'flicker', 'painter.*cycles' finds only the denoise setting at rendering-on-rented-cards.md:98. build-and-paint-a-place/SKILL.md:63 and :185 send lit plates to Cycles with no warning that the painting tools were tuned on EEVEE plates.
+W: A model will send Cycles plates to the painter believing the checks still hold.
+===== 32 film decisions and workflows | missing medium | general
+L: Check Decisions.md before any change; a change that contradicts a decision needs the person's say-so; after any change to drawing code re-draw the affected scene and look at it before re-making the film.
+S: Workflows 'How to change the project'
+E: house-rules.md:27-28 says to keep Decisions.md but not to consult it before changes; tips :57-59 covers 'make one change, then measure again' only.
+W: It is the mechanism that keeps the person's rules alive across sessions.
+===== 33 film decisions and workflows | missing medium | general
+L: After changing shared code (the stage), prove other scenes are unchanged by drawing each several times (at least three) with the old and the new stage and call a difference real only if it shows in every draw; some scenes come out two slightly different ways run to run (lesson 141).
+S: Workflows built-place step 8 and Traps; Status log 37-39
+E: grep 'run to run', 'several draws', 'ten times', 'speckle' over skills and docs found nothing. film-settings.json:2200-2211 only records 'regression_largest_difference_levels: 5' and 'kept_shot_changed_pixels: 0'.
+W: Without it a model blames a harmless change for ordinary draw-to-draw noise.
+===== 34 film decisions and workflows | missing medium | general
+L: Before blaming a cause, run the control: log 38 blamed a faint speckle on one added space in the stage's code; redrawing the picture ten times with the unchanged old stage gave both versions, so it was ordinary variation; and a note must say what was measured, not 'dot for dot'.
+S: Status 'Correction after a re-check (log 39)' and 'Fix round (log 38)'
+E: grep 'control' and 'false attribution' found nothing; tips :65-66 only says to test a tool's advice by following it.
+W: A wrong cause written into the notes misleads the next model.
+===== 35 film decisions and workflows | partly medium | general
+L: The FOUNDRY painterly material library (the person's upload) was tested and NOT used: richer brick but nothing looked painted, the wet-stone road came out icy, and drawing was about 7 times slower (223 s against 33 s).
+S: Status 'Chapter 2's full redesign'
+E: Only a data row: kit/film-settings.json:2150-2157 (painterly_library_slowdown, source 'FOUNDRY ... rejected'). No skill or doc says it was tried and why it was rejected.
+W: A model offered the library again would redo a failed test.
+===== 36 film story | partly medium | general
+L: Hand over from the painting to the behind painting before the eye can see the gap, as soon as the camera starts to move (it first waited for too much movement and took three tries to find).
+S: story log 29 (L964-967)
+E: Carried in code only: projected-set.js L446-449 ('the painting gives way to the behind painting as soon as the camera moves') and KS painting.projected_set.quickMove. No skill or tip states it as advice (grep for 'hand over', 'handover').
+W: A model rewriting the projection would not know the timing matters.
+===== 37 film story | partly medium | general
+L: Text on a 3D prop is a claim: the notice's wording was matched to a real 1926 colliery letter and its dates checked (30 April 1926 was a Friday, 1 May a Saturday); a history helper found the subsidy link.
+S: story log 29 (L975-979)
+E: skills/check-facts/SKILL.md and workflows/verify-facts.js check the script and page files (onScreen=page-*.js), not lettering written inside Blender prop scripts (build_scripted_props.py L708 holds the notice text). TIPS L605-606 asks a history critic to check every painted object, but names no step for prop lettering or weekday/date checks.
+W: Wrong dates on a prop notice would pass every tool.
+===== 38 film story | missing medium | general
+L: Invented names on props (a newspaper masthead, a firm) must be checked against real ones: THE EVENING LAMP was checked against 1,617 New Zealand newspaper titles; the colliery and firm names were deliberately invented.
+S: story log 29 (L942-943), log 34 round 5 (L1435-1436)
+E: grep for 1,617, masthead, newspaper title, real title, real brand, invented name across skills, docs, kit: nothing. paint_request.py --real-names guards real people only.
+W: A made-up shop or paper name can accidentally copy a real one, which the film must avoid.
+===== 39 film story | partly high | general
+L: A history critic must look at every painted object, not only the words: too much coal in a lockout, snow-like blotches on a May road (painter added), sacks shaped like clay jars, wrong-era tanks, an oil-drum brazier more 1984 than 1926.
+S: story log 29 (L970-974), log 32 (L1195-1196), log 10 (L445-448)
+E: TIPS L605-606 and skills/check-and-critique/SKILL.md L29-30 list it as a judgement for 'a history critic', but no workflow or agent has that role: critique-film.js picture critics only say 'anachronistic' (L49) and build-a-place has no period checker.
+W: Period errors passed every tool and were found only by a dedicated history helper.
+===== 40 film story | partly high | general
+L: After filming, a fresh helper must look at the finished clip in motion (contact sheet at about 2 frames a second, frame-to-frame scan, close-ups): stills cannot show a fading shadow, a floating barrel, a one-frame colour change or a pale outline that appears only after the move starts.
+S: story log 27 (L898-914), log 29 (L980-986), log 32 (L1237-1254)
+E: TIPS L62-64 (never trust a single still), find_jumps.py in the finish stage, BPP L281-282 ('look at the film in motion'), skills/film-and-finish/SKILL.md L214-232 (sheet every 2 s). No agent or workflow commissions a fresh helper to judge the filmed clip; critique-film and check-fixes judge stills before filming.
+W: Three separate logs found real faults only this way.
+===== 41 film story | missing medium | general
+L: Make two similar buildings or objects that stand for different things tellable apart at a glance (dark red brick with one round chimney against pale stone with two square chimneys and a tank).
+S: story log 34 round 2 (L1381-1383)
+E: calculators/README.md L245-ish lists 'Telling two similar buildings apart' and 'Background landmarks must not borrow a factory's identity' under view_audit.py, but the code (view_audit.py docstring L1-33, grep for identity, apart, identifying) has no such check; no skill or tip states the rule.
+W: The chapter's central comparison needs two places a viewer can tell apart; the README overstates what the tool does.
+===== 42 film story | missing medium | general
+L: Define each place's look once in a shared set so every page that shows it matches (works B's door looked different on pages 3 and 8).
+S: story log 20 (L683-685)
+E: grep for 'shared set', 'pages 3 and 8', 'works B', 'door looked': nothing. view_audit.py continuity counts only figures by view and state.
+W: One set shown from several views is exactly what built-and-painted places do.
+===== 43 film story | partly medium | general
+L: A closing picture must not contradict its own rule ('more things made' pointed at No. 1's cold chimney with men still waiting); label arrows must not run through the 'No.' boards.
+S: story log 34 round 5 (L1436-1439)
+E: TIPS L614 lists 'Whether a picture contradicts a card, beyond the small table the tools know' as a critic judgement; TIPS L470 (13.7) and guide.md L186-187 (a label's line must not cross its number) cover the arrows. A check that a picture agrees with the sentence's meaning is not built (calculators/README.md L230).
+W: Meaning errors survive every measure.
+===== 44 film story | missing medium | general
+L: When work is stopped partway (round 6), say which files changed, that the changes load but are untested, and name the last fully checked state (commit cdca253).
+S: story log 34 (L1440-1444); Next step (L1569-1573)
+E: grep for 'untested', 'last checked', 'stopped partway', 'wrap up' in skills, house rules, README: nothing as a rule. kit-sync-notes.md has a 'waiting' list for the plugin's own copy.
+W: The person stops sessions without warning; the next model must know what is safe to trust.
+===== 45 film story | partly high | general
+L: The plugin's value is unproven until a model that has never seen the project uses only the plugin (the adversarial tester and the fresh-model trial on the Japanese corner shop were stopped before they ran).
+S: story log 35 (L1470-1473)
+E: README.md L124-131 says plainly 'NOT tested ... that a smaller model, asked only for a place in plain words, loads the skill by itself'; the prompt-time hook hooks/place-reminder.py was written to help. No outside run has happened.
+W: This is the direct answer to 'are the lessons being used': the carriers exist, use by a fresh model is untested.
+===== 46 film story | partly medium | specific
+L: The Works and checkout Blender builders (assemble_works.py, works_kit.py, assemble_checkout.py and their props) were not copied into the plugin because round 6 was changing them; only their check files, test fixtures and page scenes are there.
+S: story log 35 (L1473-1474)
+E: kit/paper-film/blender/inflation-chapter-2-newcomers/ holds only props/; the film kit holds works/ and checkout/. kit-sync-notes.md 'Waiting for a later copy' and BPP L293-294 say so. Fixtures and examples carry the numbers (kit/calculators/tests/fixtures/works, checkout-c1).
+W: The crowd and interior builders are the best patterns for a new place with people; they are absent.
+===== 47 film story | partly medium | general
+L: Notes can say more than was tested: a fresh checker found log 37's notes overstated, a record file with damaged prices and two sentences that disagreed; a last fresh check of finished files found 37 small problems (picture notes with years and prices Malina never says, a source said to be opened that was a news-site copy, one word used for two things).
+S: story log 38 (L1534-1541), log 33 (L1334-1339), log 24 (L801-803)
+E: skills/make-explainer-film/house-rules.md L10-11 ('Never say something works unless you ran it') and fact-checker.md L12-13 (say whether you opened each source) carry the principle; no step has a fresh helper re-read the notes and record files after the last edit.
+W: Notes are what the next model trusts.
+===== 48 film story | missing high | general
+L: 'Dot for dot' proved less than the notes said: to claim a stage or shared-code change leaves other scenes unchanged, draw each comparison picture several times (at least three) with each stage and say how many were compared; one scene came out two ways from run to run, and the first explanation ('one added space in the code') was only chance.
+S: story logs 37-39 (L1500-1509, L1544-1552, L1561-1566); Traps (L1604-1605); Where things stand (L20-21)
+E: grep for 'dot for dot', 'run-to-run', 'several times with each stage': nothing. Only two bare numbers: KS checking.regression_largest_difference_levels 5 ('drawing noise 4-5 levels') and checking.kept_shot_changed_pixels 0 (judged), which would mislead; calculators/README.md L229 says regression stills are 'not in the preflight' and 'still by hand'.
+W: Any model changing the stage or a checker will claim 'unchanged' from one draw; the zero-pixel number is wrong for the house sample.
+===== 49 film story | missing medium | general
+L: Dollar signs were eaten when a record file was written through the shell (US$0.048 became US/bin/bash.048): write text with prices through the file-writing tool or a quoted here-document and search the file for bin/bash.
+S: story log 38 (L1542-1543, L1555)
+E: grep for bin/bash, heredoc, here-document, file-writing tool across skills, agents, docs: nothing. The plugin tells models to write price ledgers and a fal-spend line (house-rules.md L18).
+W: Silent damage to the money records the plugin tells models to keep.
+===== 50 film story | partly medium | general
+L: When a slide uncovers what a near prop hid, look for: dry-looking patches where behind and front paintings differ, painted shadows or outlines left on the road, a seam between front and behind paintings, a halo at the roofline, jumps other than the planned cut, more flicker than before.
+S: story log 37 (L1513-1518); word list (L331-334, L361)
+E: The parts are spread: TIPS L412-413 (behind painting from the same state), 05 L101-103, the weights view (BPP L273-275) and find_jumps.py; 'dry patch', halo and seam appear nowhere as a checklist.
+W: A ready checklist for the commonest fault after a slide.
+===== 51 film story | partly high | general
+L: The painting prompts' rule 'the lower quarter of the picture is the empty floor' is where an empty bottom comes from (in about 70% of frames the bottom fifth was over 30% darker than the middle).
+S: story log 26 (L843-844, L859-860)
+E: The cause is noted only in KS composing.bottom_fifth_darker_max_share, which no tool enforces. The instruction is still live: skills/paint-and-cut/SKILL.md L34-35, kit/docs/paper-look - 04 Painting prompts.md L17, 02 L46, 01 L122. The cure sits in TIPS L211-213 and 07 rule 7.
+W: A model following paint-and-cut reproduces the empty-bottom fault the review found.
+===== 52 film story | partly medium | general
+L: The chapter 2 look read as a collage of five kinds of image: plain code-built props (banknote bundles) looked like soap beside paintings and real models.
+S: story log 26 (L840-843)
+E: skills/build-cinema-page/SKILL.md L198 ('Plain card models look poor next to paintings: make detailed ones in Blender') and the built-and-painted route address it; the one-pipeline principle is not stated.
+W: The design review's top problem.
+===== 53 mine, courtyard, textures and garden | partly medium | general
+L: Uploaded normal maps may use the other (DirectX) convention: measure each map against its own height map, flip green in a copy, and prove it with raking-light panels (normal-only versus real displacement must agree).
+S: Coal mine story log 2-3; lib/prepare_textures.py comment; tests/test_swatches.py
+E: Rule 'Normal maps are OpenGL, green up' (skills/surfaces-wear-and-construction/surface-recipes.md rule 2) and normals-test with a flipped control. But kit/place-kit/place_kit/checks/normals_test.py lines 9-10 say maps the kit did not make 'cannot be proved this way': the convention is read from the file NAME (nor_gl / nor_dx) or a declared property, not measured against the height map.
+W: If the person uploads a texture pack with plain names, a small model following the plugin would pass a DirectX map as correct.
+===== 54 mine, courtyard, textures and garden | partly medium | general
+L: Use real displacement on the big close-up surfaces that carry the picture (brick walls, slate roof, mud, gravel, ballast), not on small ones; watch render time.
+S: Notes for the six builders; Coal mine story ('brick, slate, mud and gravel show real bumps')
+E: kit/place-kit/data/roles.json marks only nine roles as displace (dirt road, mud, forest floor, stone paving, gravel, rock ground, earth, stone wall, thatch); wall.brick and roof.slate have displace=false, and surfaces.json gives brick and slate displacement_depth null, although surface-recipes.md line ~123 quotes brick 'depth 3 cm (judged, coal mine)'.
+W: A brick engine house built by the plugin would get normal maps only, not the real bumps the mine photo showed.
+===== 55 mine, courtyard, textures and garden | partly medium | general
+L: Real displacement is heavy: peak memory 1.8 GB at 540x960 and 4.7 GB at 1080x1920 with dicing 2 pixels; raise the dicing number (3-4) if memory is short; adaptive subdivision with simple subdivision keeps faces flat.
+S: modules/ground_and_yard.py KNOWN_FLAWS and TERRAIN_DICING_PIXELS; mine_common.use_real_displacement
+E: kit/film-settings.json place_surfaces.displacement_dicing_rate_pixels [1,2] and place_audit.card_memory_gigabytes_max 12 (the audit can fail on memory), but no document says memory grows with output size or which knob to turn; the adaptive-subdivision recipe is not in the docs.
+W: A displaced ground at final size can crash a card or a shared computer.
+===== 56 mine, courtyard, textures and garden | missing medium | general
+L: Make distant ground quiet: shrink small bumps to a quarter of strength and fade painted flecks with distance so far ground does not shimmer like water.
+S: modules/ground_and_yard.build_wet_mud_material comments
+E: No hit for shimmer, farness or distance fade of normal strength; the wear layers and surface recipes have no distance input.
+W: Distant ground shimmer is a common fault in stills and especially in moving shots.
+===== 57 mine, courtyard, textures and garden | partly medium | general
+L: Build thousands of small shapes into ONE mesh per material group (one builder per material), under about 300k triangles per part before displacement.
+S: Notes for the six builders 'Efficiency'; MeshBuilder in mine_common.py
+E: skills/make-3d-models/blender-mcp-notes.md B15 'join parts that share a material (232 parts to 19)' (card-model route); DEVIATIONS.md 'plants and litter ... built in numpy and joined per kind'; film-settings place_audit.triangles_per_builder_max 1,500,000. No guidance for a builder writing its own bulk-shape code.
+W: Object count, not triangles, is what slows Blender scripts and exports.
+===== 58 mine, courtyard, textures and garden | partly medium | general
+L: Make sure faces point outward and check inside-out per closed piece: the delivery check found 73 inside-out headframe parts (69 bars, both winding wheels, 2 trims) that nobody saw; as shipped it also gave a useless 908 errors because of a 3.5 km sky dome.
+S: Textures story log 23; mine_common MeshBuilder winding note; garden/addon/tests/audit_courtyard_with_addon_lessons.py (winding per closed component)
+E: construction-and-scale.md line ~87 'Inside-out closed parts fail'; place_audit inside_out_parts_allowed 0. But kit/place-kit/place_kit/checks/construction.py lines 167-172 and 394 add up the signed volume of the WHOLE object, so one inverted bar inside a joined mesh (positive total volume) is not caught; the sky-dome noise is not mentioned.
+W: Joined headframe-style meshes are exactly where the inside-out parts hid.
+===== 59 mine, courtyard, textures and garden | partly medium | general
+L: Light a dusk scene with a soft warm fill from the camera's side so mud and brick show their own warm colours (not only cool sky light), tuned by comparing about ten small test photos with the reference screenshot.
+S: Coal mine story log 7; assemble_mine.add_front_fill_light; courtyard 'cool fill from camera side'
+E: the-required-steps.md Step 7 (sun, sky, 'a softer fill from the opposite side so shadows are not black'; value study under 0.5 percent clipped) and the new variations tool (batched-rounds-and-card-time.md, about 10 far-apart versions on one sheet). The fill-from-the-camera-side colour trick and reference-matched exposure are not written.
+W: Decides whether the place looks like the reference mood or just lit.
+===== 60 mine, courtyard, textures and garden | missing medium | general
+L: Cap the CPU threads of each Blender run (-t 2) so six helpers on one computer do not starve each other.
+S: Notes for the six builders 'Run Blender like this'
+E: No hit for '-t 2', threads or starving in agents, skills, workflow or kit docs; tips section 8 item 8 says only 'One heavy job at a time'. workflows/build-a-place.js has a maxParallelBuilders cap (default 4, 'use 2 on a slow computer') but passes no thread limit to Blender.
+W: Parallel builders on one shared machine is exactly how the plugin's workflow runs.
+===== 61 mine, courtyard, textures and garden | missing high | general
+L: Wrap the world in an all-round backdrop: three rings of hills all the way round, lighter and bluer when far (haze by colour), real geometry for parallax, camera clip end 1000 m or more, plain ground continued to the horizon so no other camera ever sees empty sky and a dark slab.
+S: modules/village_and_sky.py; Garden plan 30 section 3 item 1 and builder 4; Courtyard log 5 and 9
+E: No rule for a backdrop in any skill, agent or doc (grep for hills, backdrop, horizon finds only the film page's `kit.backdrop` for paper cards); clip_end 1500 is set only inside pit-village scripts (assemble_lockout.py, assemble_notice_corner.py). place-planner.md asks for at least three views but nothing makes the world work from all of them.
+W: The plugin demands several views per place; the garden's veranda view showed the missing backdrop at once.
+===== 62 mine, courtyard, textures and garden | missing medium | general
+L: The ground is a rectangle with hard edges and a tall bank at the rim (12 m high about 100 m out) can cover the low hills: another part must hide the rim, and the bank should fade out beyond about 60 m.
+S: modules/ground_and_yard.py and village_and_sky.py KNOWN_FLAWS; ground_height() in mine_common
+E: No hit for ground rim, terrain edge or bank covering hills. The plugin's graded ground (surfaces/ground_mesh.py) makes a rectangular grid with no edge treatment.
+W: Edge of the ground showing is a basic outdoor fault.
+===== 63 mine, courtyard, textures and garden | partly medium | general
+L: The person told the helpers NOT to use the film plugin (and a word was ambiguous, so the Astra add-on was left out too and this was written in the story).
+S: Coal mine story 'The goal'; Notes for the six builders 'Plain Blender only'
+E: The REQUIRED header (SKILL.md line ~9 of surfaces-wear-and-construction, make-3d-models and build-and-paint-a-place) says 'Do it without being asked', README says the pass runs 'even when the request names no surfaces', and hooks/place-reminder.py prints the reminder at every matching prompt; only skills/make-explainer-film/house-rules.md line 4 says 'Follow them unless the user's own instructions say otherwise' (house rules only). Nothing says an explicit 'do not use the plugin' wins over the hook and the REQUIRED header.
+W: The person tests ideas with and without the plugin; the plugin's loud 'REQUIRED' wording could override that.
+===== 64 mine, courtyard, textures and garden | missing medium | general
+L: The add-on built for Blender 5.1 broke on 5.2 because geometry-nodes modifier inputs moved from mod[identifier] to mod.properties.inputs.<identifier>.value: patch with a small shim in your own script and leave the person's add-on untouched.
+S: Courtyard story log 2; astra_loader.apply_blender_52_shim; garden/addon/tests/probe_inspect_component.py
+E: blender-5-traps.md lists 16 traps and none is this one; grep for properties.inputs or geometry-nodes modifier input finds nothing. The general habit 'work around a fault in a shared file, do not edit it' is in place-builder.md line ~39.
+W: Any script that sets geometry-nodes inputs on 5.2 will hit it; it cost the first courtyard test.
+===== 65 mine, courtyard, textures and garden | missing high | general
+L: A backdrop made of ordinary lit geometry washed the first picture out (a huge green sheet floated at the top): use flat, unlit hazy ridgelines and switch their shadow visibility off so they never block the sun.
+S: Courtyard story log 5 and 9; build_courtyard.py ridge() comment 'a painted backdrop: it must not block the sun'
+E: No document or rule about backdrop shadow visibility. The idea is used once, for people only: kit/calculators/plan_lights.py line ~846 'Figures: visible_shadow off, each with a soft foot patch'. Nothing for hills, sky domes or ground planes; the Garden plan said 'use object ray visibility if you need to separate things'.
+W: Without it the sun can silently do nothing (see the low-sun lesson).
+===== 66 mine, courtyard, textures and garden | missing medium | general
+L: A scripted build that makes thousands of leaves one object at a time gets slower as it goes (7 minutes); building them in bulk with arrays took about 10 seconds.
+S: Courtyard story log 7
+E: No hit for foreach_set bulk building, quadratic slowdown or per-object slowness. The plugin's own growth code builds pieces in numpy and joins them (DEVIATIONS.md) but no doc tells a model writing its own scatter code.
+W: Slow builds waste card and computer time on every leafy place.
+===== 67 mine, courtyard, textures and garden | partly medium | general
+L: Trees: maple leaves as chunky balls looked like popcorn; use flat pointed leaves over a dark core, later leaves at real size (5-12 cm, not 20-34 cm), about seven lobes, a crown in separate layers with windows so trunk and low sun show, translucent leaves, colours from deep red to a few yellow-green and brown.
+S: Courtyard story log 8; Garden plan 30 builder 2 and Textures log 30-31
+E: worked-examples-garden-and-canal-lock.md line ~109 'Maple leaves went from 20 to 34 cm wide to 5 to 12 cm (the real size) and were counted at 56,000'; surface-recipes.md 'foliage cards ... chunky clumps'. The crown layering, translucency and colour range are not written as rules, and species.json has no trees.
+W: Trees are the most noticed saturated element in many places.
+===== 68 mine, courtyard, textures and garden | missing high | general
+L: A low sun did nothing: a 4 m hall with the sun low behind it throws a shadow about 25 m long over the whole garden, and hazy hills were also blocking the sun; place the sun and remove blocking walls (shadow length is height divided by tan of the sun's elevation).
+S: Courtyard story log 9; Garden plan 30 (9 degree sun: 1 cm rake ridge throws a 6 cm shadow)
+E: No hit for shadow length, low sun geometry or a wall blocking the sun. The only sun guidance is light.py (a 35 degree sun when the scene has none) and tips section 7 about few shadow-casting lights.
+W: The 'sun does nothing' fault looks like a bad material and costs several rounds.
+===== 69 mine, courtyard, textures and garden | missing medium | general
+L: A mysterious white shape was found by hiding object groups one at a time: it was the pond mirroring the glowing paper screens; roughen the water slightly, dim the screens, and later hide the hall lamps from reflections.
+S: Courtyard story log 11; Textures log 30; build_courtyard.py --hide option
+E: No hit for bisecting by hiding groups or for reflections of emissive surfaces in water; the plugin only says 'Read the render log' and 'Look at 100 percent crops'.
+W: A debugging method that works for any unexplained mark in a picture.
+===== 70 mine, courtyard, textures and garden | partly medium | general
+L: Open an uploaded add-on safely: unpack into its own folder, read its guide first, search its code for anything risky (internet, starting programs, deleting files), open it with autoexec off, run it only on copies.
+S: Courtyard story log 1; Textures log 23 (read every file twice before installing skills)
+E: agents/place-builder.md and build-and-paint-a-place SKILL use `blender -b --disable-autoexec`; nothing tells a model to read or search third-party code first.
+W: The person uploads other people's code and skills.
+===== 71 mine, courtyard, textures and garden | missing medium | general
+L: Later goal: use the full 3D set for an immersive moving camera through the street, with lighting reacting to characters moving around; Cycles then gives characters real shadows and reflections for free.
+S: Textures story Goal ('Later goal, 21 October') and log 26
+E: No hit for immersive, characters moving, or lighting that reacts to people anywhere in the plugin; the film route is still 'paint over one plate and project it'.
+W: Tells a builder to model the whole place (all sides, interiors, people) rather than one facade.
+===== 72 mine, courtyard, textures and garden | partly medium | general
+L: Calibrate every measuring tool with controls before trusting it: a shuffled copy must score about 0.99, a blurred copy 0.17, another surface 0.09; a first version scored 0 on height even for alike pictures, so it was loosened and retested.
+S: Textures story log 1 and 3
+E: Tests with controls exist (normals-test flipped copy, picture_measures blurred copy and the opposite-pictures fault in DEVIATIONS.md item 11), and fresh-checkers.md says a checker 'can over-trust the builders' own test files'. No general rule 'give every new metric a positive and a negative control'.
+W: A metric that cannot fail is the commonest false comfort.
+===== 73 mine, courtyard, textures and garden | partly medium | general
+L: A fresh checker followed every link in the cookbook (320, none broken) and re-read 55 numbers against the files (9 wrong, fixed); one word for one thing.
+S: Textures story log 10
+E: `explainer-film-setup` checks that every kit file the skills name exists (LLM tips section 20 item 3); `explainer-film-place check-presets` checks every number has a kind and a source; fresh-checkers.md re-reads claims. No instruction to re-read a document's numbers against its files before release.
+W: Wrong numbers in guides were found by checkers three times.
+===== 74 mine, courtyard, textures and garden | missing medium | general
+L: Tune on several random seeds: the seed that was tuned scores 0.04-0.08 higher than others; quote scores beside plain ones when a measured-once curve lifts them; most of a gain came from one jumpy measure.
+S: Textures story logs 12, 14 and 15
+E: No hit for tuning on several seeds or for reporting a gain with and without a jumpy measure; the plugin labels numbers measured/judged/invented, which is related but not the same.
+W: Stops overfitting a look to one seed.
+===== 75 mine, courtyard, textures and garden | partly medium | general
+L: The roughness map makes the road look wet (0.28); the specularity map changed it by only 0.006; and none of the .glb maps reach the film because the projected painting covers 98 percent of a moved view.
+S: Textures story log 18
+E: wear-recipes.md line ~73-76 'The roughness map does the work (dry about 0.9, wet about 0.3: measured); the specular map changed the road by only 0.006'; rendering-on-rented-cards.md. The 'does not reach the film' finding is not stated.
+W: Explains why wet looks must be painted from the wet plate.
+===== 76 mine, courtyard, textures and garden | partly medium | general
+L: The painter added heavy pale clouds despite three sentences against them: a plain dark sky was put in for free using Blender's exact sky outline (four tries to keep the thin rails clean).
+S: Textures story logs 19, 24, 25
+E: kit/calculators/templates/paint-prompt.txt lines ~33-34 ban 'a moon, stars or bright clouds', but the ban did not hold in the project's tests; no step replaces the painted sky with a plate sky from a mask.
+W: Costs a repaint on every sky-bearing plate.
+===== 77 mine, courtyard, textures and garden | partly medium | general
+L: Make the 'behind' painting from a props-free twin plate drawn in Blender that hides exactly the props the film's page hides (found by reading the page), repaint that, and match its brightness to the front painting for free; the old dry behind painting showed on 56-71 percent of the near road when the camera moved.
+S: Textures story logs 19 and 24
+E: build-and-paint-a-place SKILL section 6 item 5 (behind painting made by asking the painter to paint the near props out of the lined-up painting) and make_behind_picture.py; no props-free twin plate route and no brightness-match step.
+W: Keeps wet ground wet behind props and was the cheaper, truer route.
+===== 78 mine, courtyard, textures and garden | partly medium | specific
+L: The film stage's finishing curve crushed the wet road to 0.7 of its painted brightness: a 'toe' switch plus easing the dark frame edge 0.30 to 0.25 brought it to 0.935 and left eight other scenes pixel-identical when off.
+S: Textures story logs 19, 24, 27
+E: wear-recipes.md line ~61 'The darkest part of a mark stays at 0.10 or above (measured: the film's finishing curve crushes values under about 0.12)'. The stage code in kit/paper-film/stage/cinema-stage.js (vignette 0.32, lift 0.015) has no toe switch; kit-sync-notes.md does not list it.
+W: Dark wet roads are crushed in the stage unless the fix is ported.
+===== 79 mine, courtyard, textures and garden | partly medium | general
+L: Joints between stones, bricks and planks vanish easily (6 of 22 lightings pass): make the joint darker, dull when wet and sloped at the stone edge, fade the slope with distance, do not cut real 8 mm grooves, and count every dot (18 of 22).
+S: Textures story logs 22 and 24
+E: wear-recipes.md 'Joints (between stones, bricks and planks)' lines ~45-53 and style-rule-and-measures.md 'Readability under three lights' give the advice and the 6/22, 21/22, 18/22 numbers; surfaces.json cobble note. There is no joints layer or lighting test in the kit code.
+W: Advice is carried; nothing enforces it.
+===== 80 mine, courtyard, textures and garden | partly high | general
+L: Never put the person's email or name into requests to outside websites: a helper wrote the person's email into the identity line its download scripts sent to Wikipedia and Wikimedia.
+S: Textures story log 28
+E: surface-recipes.md line ~138 'Send a generic client name with the request, never a person's name or address' (Poly Haven only); place-checker.md process mode searches written files for 'email-like strings'; clients use generic User-Agents (render/client.py). No general instruction for any outside website or fetch script.
+W: A privacy leak to third parties that no file-scan would catch.
+===== 81 mine, courtyard, textures and garden | partly medium | general
+L: EEVEE against Cycles on the whole street: the bricks and stone look the same (same scans); Cycles clearly wins on wet ground (mirrored lamps and fronts, warm light reaching the road, clean gutter water); EEVEE keeps joints crisper and shadows with detail; 3.7 s against 14.1 s.
+S: Textures story log 26
+E: rendering-on-rented-cards.md section 1 gives the rule and 'water in view also gives Cycles'; place_card_time estimates. The side-by-side findings and per-picture times are not written.
+W: Explains why the rule is Cycles-when-lit rather than always.
+===== 82 mine, courtyard, textures and garden | missing medium | general
+L: EEVEE streets come out cold blue and Cycles streets warm gold (mostly because EEVEE's light cut-off stops lamp light reaching the road; lowering it makes EEVEE as slow as Cycles), and the painter follows that mood: do not mix renderers within one place or compare across them; Cycles also showed odd Cycles-only effects (a fire drum lit orange, a roof-corner speck, sky dome darkening).
+S: Textures story log 26
+E: No hit for light threshold, cut-off, colour mood by renderer or the Cycles-only oddities in the plugin's docs.
+W: Changes the painted mood of a whole film if renderers are mixed.
+===== 83 mine, courtyard, textures and garden | missing medium | general
+L: A spend record was damaged by writing it through the shell: the '$0' inside 'US$0.048' was read as a command name; write money files with a quoted here-document or from Python.
+S: Textures story log 27
+E: No hit for dollar-sign or shell-quoting problems; plan_budget.py ledger exists but its docs do not warn about writing it through a shell.
+W: Corrupted ledgers undermine the money checks.
+===== 84 mine, courtyard, textures and garden | missing medium | general
+L: Before blaming a change for a faint speckle, run the OLD version twice: one scene came out two ways from run to run even with the old stage code.
+S: Textures story log 27
+E: No hit for run-to-run variation or testing the baseline twice; the plugin tests only that finishing twice gives the same counts.
+W: Stops a wrong root cause from being written into the notes.
+===== 85 mine, courtyard, textures and garden | missing high | general
+L: A message sent to a running paid helper woke a second copy of it, which made 8 extra paid calls (about US$0.70 of the total) before it stopped: never message a helper that spends money; check its status first.
+S: Textures story log 31 ('My mistake')
+E: No hit for waking, second copy or messaging a running helper in the plugin (the workflow build-a-place sends no messages).
+W: A direct money leak the ledger does not catch until after the fact.
+===== 86 mine, courtyard, textures and garden | missing medium | general
+L: Rank improvements by what a viewer notices: each element's share of the picture (measured on a flat-colour ID map from the same camera) times how wrong it looks, then build in that order.
+S: Garden plan 30 section 3
+E: No hit for ranking by share of the picture; style-rule-and-measures.md uses flat-colour region maps only for detail-energy measures.
+W: Tells a builder where limited time shows most.
+===== 87 mine, courtyard, textures and garden | missing medium | general
+L: The person's painted-look rules from the add-on: 'No rounded smooth curves. Just edges and flat surfaces that approximate a curve', broad few unequal colour passages, marks that differ by material, chiselled unequal planes, short mineral marks, depth by colour and selective edge loss; whole-image comparison before details.
+S: Garden plan 30 section 4 and Textures log 30
+E: kit/place-kit/SOURCES-AND-LICENCES.md lines 31-32 say only the add-on's 'rules they teach' were taken, but searching for chisel, flat planes, rounded smooth, selective edge or mineral finds only 'mineral veins as a few big marks' in surface-recipes.md; the style note template (data/templates/style_note.md) asks for these per place but carries none.
+W: These are the person's standing art-direction words for faceted painted looks.
+===== 88 mine, courtyard, textures and garden | partly medium | general
+L: Draw once with each light on its own layer (sun, sky, fill, hall glow, lantern) into a multi-layer EXR so glow can be rebalanced and the picture regraded afterwards for free; light groups are Cycles-only, must add up to the normal picture, caustics off, bloom only above 1.0.
+S: Garden plan 30 sections 6 and 11
+E: style-rule-and-measures.md 'light groups ... add up to the picture, within 2 percent (measured)' and film-settings place_measures.light_group_sum_error_max; no instruction or tool to render light groups or write the EXR.
+W: Saves a paid redraw when only the glow balance is wrong.
+===== 89 mine, courtyard, textures and garden | partly medium | general
+L: Poly Haven scans: pick by drawing a small test plate, not by thumbnail; use 1k maps and pack images; box projection when nothing has UVs; never use a normal map and a bump on the same surface; do not add weathering moss on a scan that already carries moss; world-position mapping for instanced tiles; tiling is the danger on a 16 percent ground area.
+S: Garden plan 30 builder 3 part A and section 13
+E: surface-recipes.md lines ~138-152 (test plate first, open every picture at full size, generic client name, hide repeats rule 6, UV rule 5) and place_surfaces.bump_leftover_strength_max 0.3. No rule against doubling moss on a mossy scan or against normal plus bump together.
+W: Half carried; the moss doubling is easy to repeat.
+===== 90 mine, courtyard, textures and garden | partly medium | general
+L: Make the weathering shade logic follow the scene's real sun lamp (the kit assumed north is +y and a fixed latitude/azimuth).
+S: Garden plan 30 section 5 note and builder 3 part B
+E: place_kit/wear/masks.py line 35 SUN_AZIMUTH_DEGREES = 135.0 and light.py TOWARD_SUN_AZIMUTH_DEGREES = 135.0: the shade masks assume a fixed sun and only match when the kit adds its own sun; a scene with its own sun lamp is not read.
+W: Moss and soot would sit on the wrong sides of a scene lit from another direction.
+===== 91 mine, courtyard, textures and garden | partly medium | general
+L: Probe every tool the build did NOT use on tiny meshes in the real Blender version before relying on it (pigment colours one slot only, refuses objects with modifiers, inspect reports the wrong settings, live scatter needs a patch); report what works and what breaks.
+S: garden/addon/tests/probe_unused_tools.py, probe_pigment_slots.py, probe_planks_modifiers.py, probe_inspect_component.py; Garden plan 30 section 2
+E: worked-examples-garden-and-canal-lock.md line ~77 'build one small place of your own kind early and read every FAIL'; the add-on facts are excluded by design (SOURCES-AND-LICENCES.md 31-32).
+W: The method is carried loosely; the add-on facts are not.
+===== 92 mine, courtyard, textures and garden | partly medium | general
+L: Concept images drive the character of a place: paid paint-overs of the two views, element sheets (bridge construction, planks, roof, trees, pond edge, lantern, grass and moss) and swatches (29 calls, US$3.86 of US$15); Nano Banana 2 kept the style best, Nano Banana Pro was too photographic, Flux 3 moved the picture around; write a style note from them.
+S: Textures story log 31
+E: style-rule-and-measures.md lines ~46-47 'A budget-gated concept step ... is the better start when money allows; the garden's came from paid concept pictures'; the planner has no paid concept phase (kit/place-kit/DEVIATIONS.md line 101 'No paid Concept phase: reference pictures come in as arguments'); no model comparison or element-sheet method.
+W: The person asked for exactly this ('generate an image of trees and so on in the art style and work from that').
+===== 93 mine, courtyard, textures and garden | partly medium | general
+L: Report in plain words with the original beside the new picture, a few clearly named 'start with' sheets, what was measured and not seen, what was skipped, and where everything is saved; treat checks as a checklist, not proof: the person's eyes decide.
+S: Garden plan 30 section 12; Textures story (pictures lists)
+E: house-rules.md ('Say what you tested', one next step, numbered files); build-a-place.js report_markdown; SKILL.md stop lines 4 and 5. No instruction to make before-and-after sheets for the person.
+W: The person kept asking for side-by-side looks.

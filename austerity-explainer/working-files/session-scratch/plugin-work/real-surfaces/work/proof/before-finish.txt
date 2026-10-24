@@ -1,0 +1,41 @@
+PASS roles: 28 object(s), 8 role(s)
+PASS roads: 1 road(s) shaped into 3 ground object(s): Ground grass north: regraded to 4050 faces (squares of 0.12 m near the camera); Ground grass south: regraded to 4050 faces (squares of 0.12 m near the camera); Ground road: a uniform grid of 27000 squares of 0.12 m
+PASS surfaces: 7 material(s) made for 7 role(s), 26 slot(s) replaced, 0 kept (they carry their own maps); normal maps 1024 px, 26 object(s) got UVs, 23 bevelled, displacement on 3 object(s)
+PASS damage: 23 object(s) bent, leaned or lumped differently (0 left alone)
+PASS plan masks: 1220 x 1220 cells of 0.10 m in 10.16 s (whole_scene)
+PASS wear: layers dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae, rubbish in 7 material(s)
+PASS growth: 6657 plant piece(s) and 9349 litter piece(s) in 11 object(s); none on a wheel track, a worn path, a road crown, a puddle or within 5 cm of litter
+PASS light: the scene already has a lamp of its own (left as it is)
+PASS backdrop: 2 far object(s) with the role backdrop now cast no shadow (Far hills backdrop, Ground far backdrop)
+PASS sun: the wear layers' shade used the scene's sun lamp "Sun" (compass 235, 40 up)
+Info: Saved as "before.blend"
+PASS saved: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof/before.blend
+Place audit of proof patch (neglected, damp): WARN. 0 to fix, 2 to look at, 0 known (switched off on purpose), 24 passed.
+PASS place: quick output [the audit]: not a quick trial
+PASS place: stale audit [/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof/before.blend]: the audit was made from this exact scene file
+PASS place: roles [every object]: every visible object has a role (39 objects)
+PASS place: object types [every drawn object]: everything that is drawn is a mesh (or has a never role)
+LOOK place: treatments [PK ground.dirt_road / dirt_road]: role ground.dirt_road: wanted but missing moss_and_algae.  Fix: worth adding; not required.
+LOOK place: treatments [PK ground.grass / grass]: role ground.grass: wanted but missing displacement.  Fix: worth adding; not required.
+PASS place: treatments [every material]: every required treatment is there
+PASS place: layer amounts [every object]: every layer amount is there and above its floor (state "damp")
+PASS place: off reasons [the settings]: nothing is switched off
+PASS place: normal maps [every normal map]: 7 normal map(s): Non-Color, tangent, wired, pointing the right way
+PASS place: uv [every object]: every normal-mapped object has UVs, none mirrored beyond the limit
+PASS place: displacement [the displacement materials]: displacement is set where the role needs it, on a mesh that can show it
+PASS place: construction [every part]: 23 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose
+PASS place: scale [every sized object]: 15 size(s) fit the real-world facts
+PASS place: plain boxes [the objects]: 0% plain boxes (at most 15%)
+PASS place: shape damage [siblings]: no role has most of its objects as exact copies
+PASS place: ground relief [the roads]: 1 road(s) have real relief and ruts
+PASS place: keep-out [the scattered pieces]: no plant or litter on a wheel track, a crown, a puddle or a keep-out
+PASS place: budgets [the scene]: triangles and scattered pieces are within the budgets; 41 objects (at most 1,000)
+PASS place: light [the scene]: the scene has light
+PASS place: renderer [the scene]: renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)
+PASS place: film frame [the settings]: not marked for the film ("for_film" is not true in place-settings.json): any frame shape is allowed
+PASS place: world [the views]: 1 view camera(s): no empty sky below the horizon, every clip end reaches the farthest object, nothing far casts shadows (2 backdrop object(s))
+PASS place: sun [the views]: no view has more than 50% of the ground it sees shadowed from the sun "Sun" (40 degrees up)
+PASS place: sun [the wear layers]: the wear layers' shade used the scene's sun lamp "Sun" (compass 235, 40 degrees up)
+PASS place: lettering [signs and books]: no sign, notice, placard, poster, name board or book in the place
+PASS audit written: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof/place-audit.json
+NEXT run: explainer-film-preflight place --place-audit /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof/place-audit.json --blend /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof/before.blend --reports /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof/preflight-reports --place-settings /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof/place-settings.json

@@ -1,0 +1,114 @@
+PLAIN WORDS (patch ignores this header; apply from the kit folder with:  patch -p1 < this file)
+FIX 2: the long garden wall got no wall sheet and three other courtyard sheets sat on the wrong face, because earth runs under every wall so the 'nearest ground' hint is
+undecided. A frames entry of the set file may now say  "front": {"<object name regex>": "-y" | "+x" | ... | "toward:X,Y", optionally "@N" for the plane}  (world directions).
+Without it, a wall the old rule could not decide is tried again toward the set's first camera. Where the old rule found a front, nothing changes.
+TESTED: the reader run on the street and the lockout file gives byte-identical pictures and arrays with and without this patch (14 of 15 pack files identical; manifest.json
+differs only by timings and its 'made' time stamp). Courtyard: 3 sheets (one wall failed) -> 4 sheets, all facing the garden once the set file names the fronts
+(see fix2 - courtyard set file).
+
+--- a/masks/wall_sheets.py
++++ b/masks/wall_sheets.py
+@@ -83,16 +83,8 @@
+     return sheets, frame_of
+ 
+ 
+-def _front_of(verts, tris, matrix, toward_xy):
+-    """The front of a wall mesh: the horizontal local axis direction (+-x, +-y) that has the most near-vertical face area and points toward `centre_xy` (world). Returns
+-    (axis index 0/1, sign, plane coordinate, top z). toward_xy: the world (x, y) the front must point to (the nearest ground seen from the mesh's middle)."""
+-    n = np.cross(verts[tris[:, 1]] - verts[tris[:, 0]], verts[tris[:, 2]] - verts[tris[:, 0]])
+-    area = np.linalg.norm(n, axis=1) * 0.5
+-    nn = n / np.maximum(np.linalg.norm(n, axis=1)[:, None], 1e-12)
+-    centre = (verts[tris[:, 0]] + verts[tris[:, 1]] + verts[tris[:, 2]]) / 3.0
+-    origin = matrix[:3, 3]
+-    middle = matrix[:3, :3] @ ((verts.min(axis=0) + verts.max(axis=0)) * 0.5) + origin
+-    to_centre = np.array([toward_xy[0] - middle[0], toward_xy[1] - middle[1], 0.0])
++def _choose_front(nn, area, matrix, to_centre):
++    """The old scoring of the four candidate fronts, unchanged: returns (best, fallback) as (weight, axis, sign, facing) or None."""
+     best = None
+     fallback = None
+     length = float(np.linalg.norm(to_centre))
+@@ -110,10 +102,61 @@
+                 continue
+             if best is None or weight > best[0]:
+                 best = (weight, axis, sign, facing)
++    return best, fallback
++
++
++_DIRECTIONS = {'+x': (1.0, 0.0), '-x': (-1.0, 0.0), '+y': (0.0, 1.0), '-y': (0.0, -1.0)}
++
++
++def forced_front(spec, object_name):
++    """The explicit front a set file gives a wall: geometry.frames[].front = {"<object name regex>": "-y" | "+x" | ... | "toward:X,Y" | "-y@6.55"} (WORLD directions; "toward:X,Y" = the
++    front faces that world point; a trailing "@N" = the wall plane sits at world coordinate N (metres) along that axis, for a mesh made of several boxes whose biggest plane is not
++    the visible one). Returns {'dir': (dx, dy) or None, 'toward': (x, y) or None, 'plane': N or None}, or None when the set says nothing about this object."""
++    for pattern, how in (spec.get('front') or {}).items():
++        if not re.match(pattern, object_name):
++            continue
++        plane = None
++        if isinstance(how, str) and '@' in how:
++            how, text = how.split('@', 1)
++            plane = float(text)
++        if how in _DIRECTIONS:
++            return {'dir': _DIRECTIONS[how], 'toward': None, 'plane': plane}
++        if isinstance(how, str) and how.startswith('toward:'):
++            x, y = (float(v) for v in how[7:].split(','))
++            return {'dir': None, 'toward': (x, y), 'plane': plane}
++        raise ValueError(f'geometry.frames front {how!r} for {pattern!r}: use "+x", "-x", "+y", "-y" or "toward:X,Y", optionally followed by "@N"')
++    return None
++
++
++def _front_of(verts, tris, matrix, toward_xy, forced=None, fallback_xy=None):
++    """The front of a wall mesh: the horizontal local axis direction (+-x, +-y) that has the most near-vertical face area and points toward `centre_xy` (world). Returns
++    (axis index 0/1, sign, plane coordinate, top z). toward_xy: the world (x, y) the front must point to (the nearest ground seen from the mesh's middle).
++    forced: an explicit front from the set file (forced_front); it replaces the ground hint. fallback_xy: a world (x, y) (the set's first camera) tried only when the old rule found
++    no front (earth running under the wall makes the nearest ground point straight below it, so the hint is undecided). Where the old rule finds a front, nothing changes."""
++    n = np.cross(verts[tris[:, 1]] - verts[tris[:, 0]], verts[tris[:, 2]] - verts[tris[:, 0]])
++    area = np.linalg.norm(n, axis=1) * 0.5
++    nn = n / np.maximum(np.linalg.norm(n, axis=1)[:, None], 1e-12)
++    centre = (verts[tris[:, 0]] + verts[tris[:, 1]] + verts[tris[:, 2]]) / 3.0
++    origin = matrix[:3, 3]
++    middle = matrix[:3, :3] @ ((verts.min(axis=0) + verts.max(axis=0)) * 0.5) + origin
++    to_centre = np.array([toward_xy[0] - middle[0], toward_xy[1] - middle[1], 0.0])
++    plane_hint = None
++    if forced is not None:
++        plane_hint = forced['plane']
++        if forced['dir'] is not None:
++            to_centre = np.array([forced['dir'][0], forced['dir'][1], 0.0])
++        elif forced['toward'] is not None:
++            to_centre = np.array([forced['toward'][0] - middle[0], forced['toward'][1] - middle[1], 0.0])
++    best, fallback = _choose_front(nn, area, matrix, to_centre)
+     if best is None and fallback is not None and fallback[0] > 0:
+         best = fallback
++    if best is None and fallback_xy is not None and forced is None:           # the old rule found nothing: try again toward the fallback point
++        to_centre = np.array([fallback_xy[0] - middle[0], fallback_xy[1] - middle[1], 0.0])
++        best, fallback = _choose_front(nn, area, matrix, to_centre)
++        if best is None and fallback is not None and fallback[0] > 0:
++            best = fallback
+     if best is None:
+-        raise RuntimeError('no wall face points toward the ground plan')
++        raise RuntimeError('no wall face points toward the ground plan (give this wall a front in geometry.frames[].front)')
+     _, axis, sign, facing = best
+     coords = centre[facing, axis]
+     w = area[facing]
+@@ -124,6 +167,10 @@
+     rounded = np.round(coords / 0.02) * 0.02
+     uniq, inv = np.unique(rounded, return_inverse=True)
+     plane = float(uniq[np.argmax(np.bincount(inv.ravel(), weights=w))])
++    if plane_hint is not None:                                                # the set says which plane is the visible one (a mesh of several boxes; world-aligned meshes only)
++        scale = float(matrix[axis, axis])
++        if abs(scale) > 1e-6 and abs(matrix[1 - axis, axis]) < 1e-6 and abs(matrix[2, axis]) < 1e-6:
++            plane = float(uniq[np.argmin(np.abs(origin[axis] + scale * uniq - plane_hint))])
+     on_plane = np.abs(verts[:, axis] - plane) < 0.03
+     return axis, sign, plane, float(verts[on_plane, 2].max()) if on_plane.any() else float(verts[:, 2].max())
+ 
+@@ -140,7 +187,9 @@
+     ground_tree = geo.tree(settings.geometry['ground']['roles'])
+     middle_world = M @ Vector(((verts.min(axis=0) + verts.max(axis=0)) * 0.5).tolist())
+     nearest = ground_tree.find_nearest(Vector((middle_world.x, middle_world.y, middle_world.z - 2.0)))
+-    axis, sign, plane, top_z = _front_of(verts, tris, matrix, (nearest[0].x, nearest[0].y))
++    cams = (settings.get('cameras') or [])
++    fallback_xy = tuple(cams[0]['location'][:2]) if cams and cams[0].get('location') else None
++    axis, sign, plane, top_z = _front_of(verts, tris, matrix, (nearest[0].x, nearest[0].y), forced=forced_front(sheet.spec, rep.name), fallback_xy=fallback_xy)
+     u_axis_index = 1 - axis
+     on_plane = np.abs(verts[:, axis] - plane) < 0.03
+     u_lo, u_hi = float(verts[on_plane, u_axis_index].min()) - 0.05, float(verts[on_plane, u_axis_index].max()) + 0.05

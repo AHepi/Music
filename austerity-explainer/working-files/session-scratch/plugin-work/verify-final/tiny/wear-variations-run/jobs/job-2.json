@@ -1,0 +1,65 @@
+{
+ "job": 2,
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/tiny-wall-finished.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/place-settings.json",
+ "out_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/wear-variations-run/pictures/job-2",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "auto",
+ "size": [
+  300,
+  200
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": true,
+ "scout": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v02-cover85-film85",
+   "is_baseline": false,
+   "set": {
+    "dials.moss_and_algae.cover": 0.85,
+    "dials.dirt.film": 0.85,
+    "amount.grime": 1.7
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v05-cover55-film55",
+   "is_baseline": false,
+   "set": {
+    "dials.moss_and_algae.cover": 0.55,
+    "dials.dirt.film": 0.55,
+    "amount.grime": 1.1
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v08-cover45-film75",
+   "is_baseline": false,
+   "set": {
+    "dials.moss_and_algae.cover": 0.45,
+    "dials.dirt.film": 0.75,
+    "amount.grime": 0.3
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

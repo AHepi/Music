@@ -1,0 +1,141 @@
+00:00.596  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/astra-work/out/courtyard_final.blend"
+[chain] === STAGE light_cameras real
+[light] --- step cameras
+[light] hero camera renamed 'Camera' -> 'photo' (place and lens unchanged)
+[light] camera 'veranda' added at (3.6, 5.3, 1.55) looking at (-2.5, 0.8, 0.55), 24 mm; scene camera stays 'photo'
+[light] REPORT created 1: veranda
+[light] REPORT changed 1: Camera -> photo
+[light] REPORT renamed {'Camera': 'photo'}; deleted 0: none
+[light] done in 0.0 s
+[chain] light_cameras seconds 0.0 summary {"objects_new": 2, "objects_deleted": 1, "geometry": 0, "transform": 0, "modifiers": 0, "slots": 0, "visibility": 0, "shading": 0, "collection": 0, "parent": 0, "materials_new": 0, "materials_deleted": 0, "materials_changed": 0, "groups_new": 0, "groups_deleted": 0, "groups_changed": 0, "lights_changed": 0, "cameras_changed": 3, "world_changed": false, "render_changed": {}} violations 1
+[chain] === STAGE shapes real
+[shapes] repair bridge: pier gap to what carries it before {'pier 0': 0.022, 'pier 1': 0.025, 'pier 2': 0.05, 'pier 3': 0.044} after {'pier 0': -0.0, 'pier 1': -0.012, 'pier 2': -0.012, 'pier 3': -0.0} (m, negative = overlap); 6 stringers added; landing boards (trimmed, removed) {'Astra / varied planks.006': (8, 0), 'Astra / varied planks.007': (8, 0)}
+[shapes] repair steps: (lowest point over ground, top z) before {'Veranda step': (0.23, 0.567), 'Veranda step, lower': (-0.14, 0.118)} after {'Veranda step': (-0.04, 0.36), 'Veranda step, lower': (-0.04, 0.17)}; upper step back now 2 cm into the plinth, deck top 0.56
+[shapes] repair caps: (gap before, moved down) {'Back wall, left cap': (0.085, 0.085), 'Back wall, right cap': (0.085, 0.085), 'Right wall behind hall cap': (0.085, 0.085)}
+[shapes] repair deck: 3 veranda plank runs raised 1 cm so their top is no longer in the plinth top plane, plinth made 1 cm longer at both ends (8 corner points) so the plank ends no longer share its end planes (the coplanar faces)
+[shapes] repair plaster: 12 top and 12 bottom corner points of the hall plaster moved 4 mm and 3 mm so the plaster no longer shares planes with the posts
+[shapes] repair shoji: 63 rails made 22 percent shallower (top/bottom rails 3 mm in), 14 outer upright bars moved 2 mm inward so no face lies within 1 mm of another bar's plane
+[shapes] repair beams: 3 deck-edge posts raised 4.5 cm so they touch the eave beam above them (they stopped 4 cm short)
+[shapes] repair roof: hidden frame added (ridge beam, 2 purlins, 21 rafters, 5 tie beams, 5 king posts); tile rows used: 15
+[shapes] step repairs done in 0.2 s
+[shapes] lantern rebuilt (hexagonal, yaw 47.5 deg, hollow firebox with 2 openings, curled roof, finial); part z ranges: {'Lantern base': (-0.05, 0.17), 'Lantern post': (0.165, 0.955), 'Lantern gallery': (0.95, 1.185), 'Lantern firebox': (1.18, 1.56), 'Lantern cap': (1.555, 1.83), 'Lantern finial': (1.818, 2.035), 'Lantern window glow': (1.232, 1.422)}
+[shapes] step lantern done in 0.1 s
+[shapes] rocks: nudged 6 stones (metres): {'Rock 1': 0.04, 'Rock 2': 0.15, 'Rock 4': 0.18, 'Pond edge stone 2': 0.15, 'Pond edge stone 3': 0.04, 'Pond edge stone 4': 0.18}
+[shapes] rocks: Rock 0 6088f buried 34% top/base (0.78, 0.78), Rock 1 5792f buried 34% top/base (0.76, 0.76), Rock 2 5728f buried 34% top/base (0.82, 0.82), Rock 3 6056f buried 34% top/base (0.8, 0.8), Rock 4 5480f buried 34% top/base (0.75, 0.75), Gravel rock 0 4456f buried 34% top/base (0.78, 0.78), Gravel rock 1 4480f buried 34% top/base (0.78, 0.78), Gravel rock 2 4480f buried 34% top/base (0.76, 0.76), Pond edge stone 0 4128f buried 49% top/base (0.75, 0.75), Pond edge stone 1 4328f buried 52% top/base (0.69, 0.69), Pond edge stone 2 3816f buried 52% top/base (0.72, 0.72), Pond edge stone 3 4120f buried 51% top/base (0.78, 0.78), Pond edge stone 4 4384f buried 62% top/base (0.7, 0.7), Pond edge stone 5 4384f buried 59% top/base (0.7, 0.7), Pond edge stone 6 4408f buried 59% top/base (0.69, 0.69), Pond edge stone 7 4432f buried 56% top/base (0.73, 0.73), Pond edge stone 8 4456f buried 55% top/base (0.71, 0.71), Pond edge stone 9 3728f buried 61% top/base (0.7, 0.7), Pond edge stone 10 4200f buried 54% top/base (0.75, 0.75), Pond edge stone 11 4408f buried 61% top/base (0.74, 0.74), Pond edge stone 12 4048f buried 56% top/base (0.73, 0.73), Pond edge stone 13 3760f buried 55% top/base (0.73, 0.73), Pond edge stone 14 4432f buried 49% top/base (0.75, 0.75)
+[shapes] step rocks done in 3.0 s
+[shapes] gravel: mesh 342x325 cells of 2.4 cm = 111150 faces (was 31486); rake lines every 12 cm, 1.5 cm high, about 68 lines across, 4 rings round each of 3 rocks, flat corridor for the stepping stones
+[shapes] gravel edge: 52 kerb stones on the pond, front and hall sides (open where the path crosses, at the lantern), 6 timber boards on the fence side
+[shapes] step gravel done in 1.2 s
+[shapes] stepping stones re-laid in a zigzag (offsets [0.12, -0.2, 0.0, 0.22, -0.16, 0.2, -0.12, 0.1]); top above ground (m): [('Stepping stone 0', 0.041), ('Stepping stone 1', 0.034), ('Stepping stone 2', 0.053), ('Stepping stone 3', 0.053), ('Stepping stone 4', 0.052), ('Stepping stone 5', 0.057), ('Stepping stone 6', 0.058), ('Stepping stone 7', 0.047)]; gaps between neighbours (m): [0.41, 0.3, 0.22, 0.41, 0.6, 0.48, 0.37]
+[shapes] step stepping done in 1.1 s
+[shapes] walls: 3 walls rebuilt slightly battered (3.5 degrees each face; thickness top 0.30 m, foot [0.575, 0.575, 0.587]), garden face stays one flat plane; tiled caps (gable, eave strips, half-round ridge tiles, 10 cm overhang) sit 1 cm into the wall: lowest cap point minus wall top = {'Back wall, left cap': -0.01, 'Back wall, right cap': -0.01, 'Right wall behind hall cap': -0.01}
+[shapes] step walls done in 0.0 s
+[shapes] basin set: bowl cut into the basin stone (water 4 cm under the rim), front stone, candle stone (right), bucket stone (left), 109 drain pebbles, bamboo spout on a post, ladle
+[shapes] step basin done in 0.8 s
+[shapes] shore: 5 groups, 17 small stones set into the water line (tops 4 to 13 cm over the water), one object
+[shapes] step shore done in 0.5 s
+[shapes] REPORT created (11): ['Basin bamboo spout', 'Basin bucket stone', 'Basin candle stone', 'Basin drain pebbles', 'Basin front stone', 'Basin ladle', 'Bridge stringers', 'Gravel kerb', 'Gravel timber edge', 'Roof carrying frame', 'Shore stones']
+[shapes] REPORT changed (65): ['Astra / Planked run controls', 'Astra / Planked run controls.001', 'Astra / Planked run controls.002', 'Astra / varied planks', 'Astra / varied planks.001', 'Astra / varied planks.002', 'Astra / varied planks.006', 'Astra / varied planks.007', 'Back wall, left', 'Back wall, left cap', 'Back wall, right', 'Back wall, right cap', 'Basin water', 'Bridge pier 0', 'Bridge pier 1', 'Bridge pier 2', 'Bridge pier 3', 'Gravel rock 0', 'Gravel rock 1', 'Gravel rock 2', 'Hall beams', 'Hall plaster', 'Lantern base', 'Lantern cap', 'Lantern finial', 'Lantern firebox', 'Lantern gallery', 'Lantern post', 'Lantern window glow', 'Pond edge stone 0', 'Pond edge stone 1', 'Pond edge stone 10', 'Pond edge stone 11', 'Pond edge stone 12', 'Pond edge stone 13', 'Pond edge stone 14', 'Pond edge stone 2', 'Pond edge stone 3', 'Pond edge stone 4', 'Pond edge stone 5', 'Pond edge stone 6', 'Pond edge stone 7', 'Pond edge stone 8', 'Pond edge stone 9', 'Raked gravel court', 'Right wall behind hall', 'Right wall behind hall cap', 'Rock 0', 'Rock 1', 'Rock 2', 'Rock 3', 'Rock 4', 'Shoji bars', 'Stepping stone 0', 'Stepping stone 1', 'Stepping stone 2', 'Stepping stone 3', 'Stepping stone 4', 'Stepping stone 5', 'Stepping stone 6', 'Stepping stone 7', 'Stone plinth', 'Veranda step', 'Veranda step, lower', 'Water basin']
+[shapes] REPORT deleted (0): none (this stage deletes nothing; the add-on modifiers of the stones it reshaped are baked into their meshes)
+[shapes] stage_shapes done in 7.1 s, look=real
+[chain] shapes seconds 7.1 summary {"objects_new": 11, "objects_deleted": 0, "geometry": 59, "transform": 47, "modifiers": 43, "slots": 0, "visibility": 0, "shading": 32, "collection": 0, "parent": 0, "materials_new": 3, "materials_deleted": 0, "materials_changed": 0, "groups_new": 0, "groups_deleted": 0, "groups_changed": 0, "lights_changed": 0, "cameras_changed": 1, "world_changed": false, "render_changed": {}} violations 1
+[chain] === STAGE life real
+[life] step maple (real)
+[life] step ground (real)
+[life] step pond (real)
+[life] step pine (real)
+[life] step shrubs (real)
+[life] step bamboo (real)
+[life] REPORT {"look": "real", "steps": ["maple", "ground", "pond", "pine", "shrubs", "bamboo"], "objects_before": 129, "objects_after": 175, "numbers": {"maple_leaves": 55991, "maple_leaf_width_cm": [5.5, 9.0, 12.5], "maple_leaf_unique_triangles": 208, "maple_leaf_kinds": 5, "maple_inner_mass_faces": 396, "maple_scaffold_twigs": 14, "moss_drifts": 9, "tuft_clumps_on_bank": 28, "scatter_moss": {"candidates": 2852, "retained_after_footprint": 2348, "expected_kept": 1985.2, "instances": 1988, "within_12pct": true}, "scatter_tuft": {"candidates": 1033, "retained_after_footprint": 960, "expected_kept": 670.4, "instances": 656, "within_12pct": true}, "scatter_pebble": {"candidates": 502, "retained_after_footprint": 495, "expected_kept": 455.4, "instances": 463, "within_12pct": true}, "moss_collar_perimeter_samples": {"rock": 518, "grock": 304, "pond": 1256, "step": 559, "other": 154}, "pond_water_faces": 842, "pond_depth_max_m": 0.459, "pond_bed_faces": 1040, "pond_pebbles": 650, "lily_pads": 17, "iris_clumps": 7, "pine_pads": 8, "pine_pad_faces": 3708, "shrubs_lantern": 2, "shrubs_rocks_A": 2, "shrubs_rocks_B": 1, "shrubs_pine": 5, "shrubs_block_lantern_window": false, "shrubs": 10, "shrub_faces": 1600, "bamboo_inside_out_pieces_flipped": {"Bamboo stalks": 2, "Bamboo fence": 0}, "fallen_leaves": 84, "fallen_leaves_on_water": 9}}
+[life] created 46: Maple leaf source 0, Maple leaf source 1, Maple leaf source 2, Maple leaf source 3, Maple leaf source 4, Maple branch.003, Maple branch.004, Maple branch.005, Maple branch.006, Maple branch.007, Maple branch.008, Maple branch.009, Maple branch.010, Maple branch.011, Maple branch.012, Maple branch.013, Maple branch.014, Maple branch.015, Maple branch.016, Life / moss sources 0, Life / moss sources 1, Life / moss sources 2, Life / moss sources 3, Life / moss sources 4, Life / moss sources 5, Life / tuft sources 0, Life / tuft sources 1, Life / tuft sources 2, Life / tuft sources 3, Life / pebble sources 0, Life / pebble sources 1, Life / pebble sources 2, Life / pebble sources 3, Life / pebble sources 4, Life / pebble sources 5, Life / moss at feet and damp edges, Life / tufts, Life / pebble fringe, Life / pond bed, Life / pond pebbles ... (+6 more)
+[life] changed 17: Maple leaves, Maple inner mass, Astra / Courtyard receiving ground, Astra / pebbles grouped bodies, Astra / moss tone 0, Astra / moss tone 1, Astra / moss tone 2, Astra / moss tone 3, Astra / moss grouped bodies, Pond water, material Pond water, Lily pads, Pine pads, material Bamboo stalk, Bamboo stalks, Bamboo fence, Fallen leaves
+[life] deleted 0: 
+[chain] life seconds 16.7 summary {"objects_new": 46, "objects_deleted": 0, "geometry": 6, "transform": 0, "modifiers": 1, "slots": 0, "visibility": 0, "shading": 5, "collection": 0, "parent": 0, "materials_new": 5, "materials_deleted": 0, "materials_changed": 9, "groups_new": 4, "groups_deleted": 0, "groups_changed": 0, "lights_changed": 0, "cameras_changed": 0, "world_changed": false, "render_changed": {}} violations 0
+[chain] === STAGE surfaces real
+set japanese_courtyard: ERRORS (12 errors, 12 warnings)
+  ERROR apply.wallgrowth.role_dials.stone.natural: unknown dial 'moss_vs_stone'
+  ERROR apply.wallgrowth.role_dials.stone.dressed: unknown dial 'moss_vs_stone'
+  ERROR apply.wallgrowth.role_dials.roof.tile: unknown dial 'moss_vs_stone'
+  ERROR apply.wallgrowth.role_dials.wall.cap: unknown dial 'moss_vs_stone'
+  ERROR apply.wallgrowth.role_dials.bark: unknown dial 'moss_vs_stone'
+  ERROR wallgrowth.moss_value: unknown dial
+  ERROR wallgrowth.hue: unknown dial
+  ERROR wallgrowth.saturation: unknown dial
+  ERROR growth.piece_inflate_limit: unknown dial
+  ERROR growth.colour_gain: unknown dial
+  ERROR growth.colour_sat: unknown dial
+  ERROR growth.existing_avoid: unknown dial
+  warning wallgrowth.brightness_floor: 0.1 is outside 0.12 to 0.4
+  warning groundcracks.flag_fine_share: 0.0 is outside 0.05 to 0.2
+  warning groundcracks.flag_broken_share: 0.0 is outside 0.01 to 0.06
+  warning groundcracks.flag_tilt_share: 0.0 is outside 0.02 to 0.08
+  warning groundcracks.corner_chip_share: 0.0 is outside 0.03 to 0.15
+  warning groundcracks.kerb_chip_share: 0.0 is outside 0.1 to 0.5
+  warning groundcracks.sett_disturbed_share: 0.0 is outside 0.02 to 0.08
+  warning groundcracks.open_joint_share: 0.0 is outside 0.05 to 0.25
+  warning groundmoss.moss_value: 0.12 is outside 0.25 to 0.5
+  warning growth.gutter_tuft_share: 0.0 is outside 0.02 to 0.1
+  warning growth.wall_foot_share: 0.0 is outside 0.01 to 0.08
+  warning growth.max_pieces: 0.0 is outside 500.0 to 6000.0
+[reader] scene geometry gathered: 1.5 s
+[reader] ground height: 1.4 s
+[reader] slope, lowness, crown: 0.0 s
+[reader] wall distance: 0.4 s
+[reader] prop, feet, cover distances: 0.0 s
+[reader] inside corners (72507 dots): 1.0 s
+[reader] seams, water: 0.0 s
+[reader] steps (37 tread triangles): 0.5 s
+[reader] sharp edges (11988 edges): 1.2 s
+[reader] stone gaps (pieces per role: {'ground.earth': 1371, 'ground.gravel': 1, 'stone.dressed': 5}): 1.2 s
+[reader] openness (ground): 18.5 s
+[reader] sun (1 positions, ground): 0.1 s
+[reader] sheltered ground: 2.1 s
+[reader] footfall: 0.1 s
+[reader] keep clear: 0.0 s
+[reader] entry random, existing growth: 0.4 s
+[reader] ground drip lines: 0.4 s
+[reader] SHEET FAILED Back wall, left ValueError('zero-size array to reduction operation minimum which has no identity')
+[reader] SHEET FAILED Back wall, right ValueError('zero-size array to reduction operation minimum which has no identity')
+[reader] sheet Hall plaster: sheltered (525x35): 2.1 s
+[reader] sheet Hall plaster: reveal: 0.0 s
+[reader] sheet Hall plaster: ledges (1 sources): 0.1 s
+[reader] sheet Hall plaster: corners: 0.0 s
+[reader] sheet Hall plaster: shade (8 cm): 0.7 s
+[reader] SHEET FAILED Right wall behind hall ValueError('zero-size array to reduction operation minimum which has no identity')
+[reader] raw arrays saved: 0.5 s
+[reader] checks: 0.0 s
+[reader] pack written: 5.1 s
+PACK DONE /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/stage/kit/masks/packs/japanese_courtyard/courtyard 1072518 bytes in 37.4 s
+=== stage_surfaces: look = real ===
+materials rebuilt in place: 114 | slots moved to a shared role material: 26
+objects created: [] | deleted: [] | slots changed on 23 objects
+materials created: 6 ['GARDEN bark.pine', 'GARDEN ground.earth', 'GARDEN stone.lantern', 'GARDEN stone.rock', 'GARDEN timber.post', 'GARDEN wall.garden'] | deleted: 3 ['GARDEN placeholder stone.dressed', 'GARDEN placeholder stone.natural', 'GARDEN placeholder timber.frame']
+node groups created: 149 | images loaded: 62 | seconds: 89.7
+[chain] surfaces seconds 89.8 summary {"objects_new": 0, "objects_deleted": 0, "geometry": 0, "transform": 0, "modifiers": 0, "slots": 23, "visibility": 0, "shading": 0, "collection": 0, "parent": 0, "materials_new": 6, "materials_deleted": 3, "materials_changed": 114, "groups_new": 149, "groups_deleted": 0, "groups_changed": 0, "lights_changed": 0, "cameras_changed": 0, "world_changed": false, "render_changed": {}} violations 0
+[chain] === STAGE light real
+[light] --- step cameras
+[light] camera 'veranda' added at (3.6, 5.3, 1.55) looking at (-2.5, 0.8, 0.55), 24 mm; scene camera stays 'photo'
+[light] --- step world
+[light] world 'Golden hour' rebuilt (golden, sky look real); sun direction from the lamp = (-0.944, -0.244, 0.223), elevation 12.9 deg, azimuth -165.5 deg
+[light] --- step hills
+[light] hills: 5 full-circle ridges + plain to the horizon (colour gradients, golden)
+[light] --- step lights
+[light] rim light (sun type, 4.5) linked to 28 objects (maple parts, hall roof edge)
+[light] roof lift light (5000.0 W) linked to ['Hall roof']
+[light] lights: sun 12.0, fill 2600.0 W cooler, lantern dim (18.0 W, flame 7.0), hall glow kept
+[light] --- step groups
+[light] light groups: rest (11), fill (2), sky (6), sun (1), hall (6), lantern (2), rim (1), world -> sky
+[light] --- step finish
+01:56.087  cycles           | WARNING CUEW initialization failed: Error opening the library
+[light] finish: Cycles, caustics off, AgX Punchy exposure 0.5, bloom 0.05 above 2.0, vignette 0.55, no blur
+[light] REPORT created 5: Hills, farthest, Hills, foot, Rim light (maple, hall edge), Roof lift (hall roof only), veranda
+[light] REPORT changed 11: Cool sky fill, Dark plain, Golden hour sun, Hills, far, Hills, middle, Hills, near, Lantern light, Material:Lantern flame, Scene render settings and compositor, ViewLayer lightgroups, World:Golden hour
+[light] REPORT renamed {}; deleted 0: none
+[light] done in 0.9 s
+[chain] light seconds 0.9 summary {"objects_new": 4, "objects_deleted": 0, "geometry": 4, "transform": 0, "modifiers": 0, "slots": 1, "visibility": 0, "shading": 0, "collection": 28, "parent": 0, "materials_new": 3, "materials_deleted": 0, "materials_changed": 4, "groups_new": 3, "groups_deleted": 0, "groups_changed": 0, "lights_changed": 5, "cameras_changed": 0, "world_changed": true, "render_changed": {}} violations 28
+Info: Saved copy as "garden_real.blend"
+[chain] SAVED /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/garden_real.blend 20799344 bytes; failed stages: [] ; stages with violations: ['light_cameras', 'shapes', 'light']
+[chain] CHAIN_DONE real 115.4 s
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

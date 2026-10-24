@@ -1,0 +1,24 @@
+== lessons round: the old contradictions stay gone and the new lessons stay where models read them
+PASS  (1a) every instruction about the empty lower quarter says "paper route only" and that a built place reaches about 0.70 down (14 mentions in 4 files): all qualified
+PASS    (the old sentence alone fails this check): yes
+PASS  (1b) blank placards are for the painter only (so it invents no writing); make-3d-models and build-and-paint-a-place both say every sign carries real lettering and name "place: lettering": all three agree
+PASS    (the old paint-and-cut line and a props skill without the rule fail this check): yes
+PASS  (1c) critique-film.js gives the phone-button rule as 0.90 across and 0.80 down, and no "140 px" or "380 px": yes
+PASS    (the old prompt fails this check): yes
+PASS  (2) critique-film.js has a critic keyed history that asks "was this in that place and that year?", and names section 19 of the tips guide: yes
+PASS    (a copy without the history critic fails this check): yes
+PASS  (3) verify-facts.js takes args.pictures and args.propLettering and asks for dates with their weekdays: yes
+PASS    (a copy without them fails this check): yes
+PASS  (2, run) critique-film returns { critics, verdict }, one critic's area is "history", and every picture critic and the history critic are told to read section 19: ['pictures pages 1-3', 'pictures pages 4-6', 'content pages 1-5', 'content pages 6-10', 'history', 'code']
+PASS    (the history critic looks at every still and the words on props, and asks the period question): yes
+PASS  (3, run) verify-facts hands the pictures and the prop lettering to the helper that splits the claims, and to the checkers: yes
+PASS    (without them the split helper is not sent looking for pictures: the check can fail): yes
+PASS  (4) the hook's reminder (its second line) names build-and-paint-a-place and the 1080 x 1920 film frame, and is still three lines: Read the skill surfaces-wear-and-construction first (its first screen has the st
+PASS    (the old second line, without the film routing, fails this check): yes
+PASS  (4) the hook prints nothing for "plain Blender", while the same request without those words still gets the reminder: yes
+PASS  (5) the house rules carry the privacy, paid-helper, dollar-sign and start-small lines: all four
+PASS    (a text without them fails this check, line by line): yes
+PASS  (5) doc 06 keeps step with the house rules where it repeats them (start small, privacy, the dollar sign, paid helpers, a menu only for looks): yes
+PASS  (6) the REQUIRED block is word for word the same in the three skills and holds the film-frame line and the "person's words win" line: yes
+PASS    (one changed block fails this check): yes
+-- lessons round: the old contradictions stay gone and the new lessons stay where models read them: 22 of 22 checks passed

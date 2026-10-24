@@ -1,0 +1,109 @@
+PLAIN WORDS (patch ignores this header; apply from the kit folder with:  patch -p1 < this file)
+FIX 3: apply.<layer>.role_dials only worked for the soot layer (it multiplied two dials by hand). Now Kit.apply notes which dials the set varies by role
+(dials.ROLE_DIAL_NAMES) and WallLayer.dial() multiplies exactly those by the object's value wk_<layer>_<dial>, for foot, runoff, wallcracks, wallgrowth, steps and paint alike.
+Soot lists its two hand-made dials in role_handled, so its node graph is unchanged. A role value of 0 reads as 'not named' (= 1), so 'off' is written as a hair above 0
+(MIN_ROLE_MULT 0.002).
+TESTED: all 11 layer node groups built for the street set have identical node and link counts and node kinds before and after; with role_dials in the courtyard set,
+foot gains 2 Attribute nodes (one per varied dial) and wallgrowth 3, nothing else changes; the per-object values land on the right objects (plaster lichen 0.002, stone 2.5).
+NOT TESTED: a picture showing lichen off plaster and on stone.
+
+--- a/apply/dials.py
++++ b/apply/dials.py
+@@ -113,6 +113,22 @@
+     return result
+ 
+ 
++# The dials the CURRENT set varies by role, per layer ({layer: {dial, ...}}), noted by Kit.apply just before the layers are built. A walls layer multiplies exactly these dials by the
++# object's role value (WallLayer.dial); a dial the set does not vary costs no node. Plain Python.
++ROLE_DIAL_NAMES = {}
++MIN_ROLE_MULT = 0.002      # the smallest role multiplier written: an object value of 0 reads as "the set names none" (1), so "off" is written as a hair above 0
++
++
++def note_role_dials(settings):
++    """Fills ROLE_DIAL_NAMES from the set's apply.<layer>.role_dials (the union over the roles). Call it before building a layer's node group."""
++    ROLE_DIAL_NAMES.clear()
++    for layer in settings.apply:
++        names = {dial for table in role_multipliers(settings, layer).values() for dial in table}
++        if names:
++            ROLE_DIAL_NAMES[layer] = names
++    return ROLE_DIAL_NAMES
++
++
+ def object_attribute_name(layer, dial):
+     return f'wk_{layer}_{dial}'
+ 
+--- a/apply/kit.py
++++ b/apply/kit.py
+@@ -196,6 +196,7 @@
+         if look is not None:
+             self.look = settings_module.load_look(look)
+         keys = list(layers) if layers is not None else list(self.registry)
++        dials.note_role_dials(self.settings)                       # which dials the set varies by role: the walls layers multiply exactly those by the object's role value
+         result = {}
+         for key in keys:
+             spec = self.registry.get(key)
+--- a/apply/seed.py
++++ b/apply/seed.py
+@@ -50,7 +50,7 @@
+             for r, table in dials.role_multipliers(settings, layer).items():
+                 if r == role:
+                     for dial, mult in table.items():
+-                        values[dials.object_attribute_name(layer, dial)] = float(mult)
++                        values[dials.object_attribute_name(layer, dial)] = max(float(mult), dials.MIN_ROLE_MULT)
+             for dial in {d for t in dials.role_multipliers(settings, layer).values() for d in t}:
+                 values.setdefault(dials.object_attribute_name(layer, dial), 1.0)
+     return values
+--- a/walls/walls_common.py
++++ b/walls/walls_common.py
+@@ -18,7 +18,7 @@
+ 
+ import bpy
+ 
+-from apply import layer_template, nodes
++from apply import dials as dials_module, layer_template, nodes
+ from masks import scale as scale_module
+ 
+ # constants of the BUS (documented in masks/CONTRACT.md): how far a scaled distance picture reaches
+@@ -46,8 +46,10 @@
+         L.finish_layer(colour=..., roughness=..., mask=..., parts={'washed': socket})
+     """
+ 
+-    def __init__(self, key, group_name, masks=(), parts=(), **kw):
++    def __init__(self, key, group_name, masks=(), parts=(), role_handled=(), **kw):
+         masks = list(masks)
++        self._role_handled = set(role_handled)         # dials this layer multiplies by role_mult itself (soot's film_mult and sheltered_mult): dial() must not do it twice
++        self._role_scaled = {}
+         super().__init__(key, group_name, masks=masks, **kw)
+         # extra debug outputs, one per named part (a view of one part of the layer: apply_walls.show_mask(kit, 'soot.washed')); the sockets are made in finish_layer
+         self.part_names = list(parts)
+@@ -206,6 +208,19 @@
+         return group.outputs['Width'], group.outputs['Fade']
+ 
+     # ------------------------------------------------------------------ per-role multiplier of a dial
++    def dial(self, dial):
++        """The group input of one dial. A dial the set varies by role (apply.<layer>.role_dials, noted by Kit.apply in dials.ROLE_DIAL_NAMES) comes multiplied by the object's role
++        value (wk_<layer>_<dial>; 1 where the role names none), so EVERY walls layer can differ between plaster, stone and wood by settings alone. Dials the set does not vary cost no
++        node; dials a layer multiplies itself (role_handled) are left as they are."""
++        socket = super().dial(dial)
++        if dial == 'amount' or dial in self._role_handled or dial not in dials_module.ROLE_DIAL_NAMES.get(self.key, ()):
++            return socket
++        scaled = self._role_scaled.get(dial)
++        if scaled is None:
++            scaled = self.mul(socket, self.role_mult(dial))
++            self._role_scaled[dial] = scaled
++        return scaled
++
+     def role_mult(self, dial):
+         """The role's multiplier of a dial: the object's value wk_<layer>_<dial> where the set names one, 1 where it does not (a missing value reads 0 -> 1)."""
+         attr = self.n.attr(f'wk_{self.key}_{dial}')
+--- a/walls/soot.py
++++ b/walls/soot.py
+@@ -28,7 +28,7 @@
+ 
+ def build(key=KEY):
+     dials_walls.register_all()
+-    L = WallLayer(key, GROUP, masks=MASKS, parts=PARTS)
++    L = WallLayer(key, GROUP, masks=MASKS, parts=PARTS, role_handled=('film_mult', 'sheltered_mult'))      # soot multiplies these two itself, below
+     g, dial = L.g, L.dial
+     fv = g('M Frame Valid')
+     fade = g('Fade Near')

@@ -1,0 +1,879 @@
+{
+ "generic": {
+  "summary": "WHAT I DID. I searched the whole plugin (/home/user/Music/plugins/explainer-film) for the person's test request and everything that exists only because of it, and made the plugin general again. The routing is not weakened: the REQUIRED block (surface-and-wear pass, construction check, preflight place stage) is unchanged in all three skills that carry it, and a new test checks this.\n\nREMOVED (and why):\n1. skills/surfaces-wear-and-construction/a-forest-village-example.md: a whole plan for the request (parts, readable-feature list, starter numbers). Deleted.\n2. kit/place-kit/data/examples/forest-village-place-settings.json and forest-village-ownership.json: the plan as data. Deleted.\n3. The quoted request in SKILL.md, the planner agent and the workflow header/args; the same request in the hook test and the workflow test. Replaced by neutral canal-lock words.\n4. 'Starter numbers for a mediaeval forest village' (construction-and-scale.md), the cottage and stable construction notes, the well/trough notes. Replaced by a table of numbers this project really used, each marked measured/judged/invented.\n5. The horse-and-cart lane example (wear-recipes.md). Replaced by the coal-mine yard's cart roads with the yard's real numbers (ruts 1.24 m apart, 0.15 m deep, 0.4 m wide at half depth, bank 0.30 of the depth, eight puddles; read from /home/user/Music/mine-scene/modules/ground_and_yard.py).\n6. 'Empty stable' readings (SKILL.md look text, planner step 2, style-rule-and-measures, tips guide, place-checker): removed, and I did NOT keep a generalised 'empty is not ruined' rule, because it would still hand the test its answer.\n7. The cottage camera in rendering-on-rented-cards.md and the place-kit README (now 'lock gate'); the 'unkept' word in the look table, neglected.json and a kit message (now 'unkempt').\n8. Data entries removed: real_world_facts stall_width (a horse stall; by name it would also mis-size any market stall) and manger_height; ladder_width and bucket_height (no role or preset used them, they only served the props list); surfaces wattle_and_daub, hay and leather (no role used them: wattle/daub, a duplicate of straw, tack); species dung_lump renamed clod (a neutral lump of earth; palette dung -> clod_earth); roles.json name hints lane, stall floor, wattle, daub, cottage, manger, carriage, woodpile, chopping (wattle fence became hurdle); Poly Haven spinning_wheel_01, fir_sapling, fir_sapling_medium, fir_tree_01 and the not-found items 'stable stalls' and 'thatched cottage'; the 'dirt road that carts and horses drive on' meaning (now carts, vehicles or animals).\n9. village preset made neutral: roles_likely now lists 6 stone/brick/tile/slate/paving/plaster roles against 4 dirt/timber/thatch ones (before: forest floor, timber frame, thatch, timber post, barrel, tree, dirt road); default_state damp -> dry (same as generic); cart_gauge fact dropped; notes neutral.\n10. Behaviour: drafted roads now default to hoof prints OFF (they were ON for every road); hoof prints stay an option (\"hoof\": true).\n11. Hook (hooks/place-reminder.py): trigger words stable, cottages, carriage, medieval, mediaeval removed ('stable' also fired on 'make the build stable'); the hook example now reads 'Build a canal lock...'.\n12. The word 'lane' (a second word for 'road') replaced by 'road' in prose and code; functions renamed lane_height_offset -> road_height_offset, lane_skeleton -> road_skeleton, lane_roads -> roads_from_shapes; probe keys near_lane_outside -> near_road_outside. 'lane' now remains only in the old Works/pit-village film files.\n\nREPLACED WITH REAL PLACES. New skills/surfaces-wear-and-construction/worked-examples-garden-and-canal-lock.md walks both through the steps with real numbers, each marked measured or judged. Canal lock (from the smoke test of the first 1.4.0 build, scratch folder plugin-work/verify and workflow_result_A.json): 94 objects, 16 roles, 16 materials, finish 27-28 s, 33 bevelled, 70 damaged, 66 plant pieces and 101 litter pieces, 88 of 88 parts carried, audit round by round (5, 2, 1 FAIL, then pass), 13 normal maps pointing the right way, wear on/off 3.7 and 2.8 percent mean change, EEVEE and Cycles close-ups on the card, and the faults the build found in the plugin. Japanese garden (garden/30 Plan, story logs 30-31): ray-check faults (step 23 cm up, posts 2.2-5.0 cm short, caps 6.5 cm up, roof 22 cm off, 77 fighting faces), bridge 59 planks/18 posts/0.85 m longest span, 85 materials with 17 checked normal maps, builder claim 9.8 percent moss against 0.6 and 3.8 measured, squint 0.883/0.873 against 0.92. Two canal-lock example files (settings from the real run, ownership table) replace the village ones; the-required-steps.md, SKILL.md, planner/builder/integrator/renderer agents, the workflow, README, tips guide and place-kit docs now use the lock. Workflow test and its 24 canned-answer fixtures, the hook test and the Blender test scenes were rewritten around the lock/neutral names and still test the same things (114 of 114 workflow checks, the 13-of-16 and 4-of-16 reading counts, owners, queue cap, fix round).\n\nNEW GUARD TEST kit/calculators/tests/test_place_generic.py (14 checks): the words of the request are kept only as SHA-256 hashes (so the test does not carry them) and none may appear in the place parts of the plugin; no file named after a village in a forest; presets even-handed; example files are the real canal lock; the skill still says REQUIRED. I also scanned the whole plugin (old film files included) for the hashed words: zero hits.\n\nFINAL SEARCH (whole words, plugin without the old film folders paper-film, examples, narration-tools, paper-look docs): horse 0, carriage 0, wattle 0, manger 0, dung 0, mediaeval/medieval 0. cottage 9 lines in 5 files: 4 are the old Works/pit-village film (plan_effects.py, test_plan_effects.py, works-shot.json, film-settings.json) and 1 is the guard list banned_place_nouns.json. stable 4 lines: the guard list, and the hook comment and hook test that use 'make the build stable' as a NON-match. forest 19 lines: forest floor (role, surface), 'random forest' non-match in the hook, the guard list, tests, DEVIATIONS/README. village 101 lines: the preset, place-type lists, the routing word the skill test requires, the pit-village street of the austerity film (old, legitimate), and guard/test words. lane 87 lines in 25 files: all old Works/pit-village film files. cart 64, hoof 28, thatch 35, straw 43, rut 128: see KEPT below.\n\nKEPT, BORDERLINE (and why): thatch (role roof.thatch, surface, height recipe, thatch_thickness fact, Poly Haven thatch/reed slugs) is one of five roof coverings next to tile, slate, shingle and metal (farms, harbours, tea houses; the village preset lists it level with tile, slate and shingle). straw (litter piece, prop.straw, surface): farmyards, packing, yards. forest_floor ground: the garden used a forest-floor/moss scan. ferns, brambles, nettles, pine needles: ordinary plants of towpaths, wall feet and gardens (the garden's pine). hoof prints: option only, the canal towpath used them. Wheel ruts, cart gauge, prop.cart, prop.wheel and cart facts: the coal-mine yard has five cart roads and a handcart. barrel, crate, well/trough/sink, wicker, cloth sack, rope, ceramic roles and their size facts (used by roles): canal lock and harbour props. wall.log, wall.cob, timber frame: general building types. Poly Haven barrels, buckets, crates, basket, ladders, stump, lantern, jug, wheel rim: plain props. Hook words barrel, crate, wagon, fence, props, village, house, cabin, hut, barn: ordinary nouns. Risk to know about: the old files are still in git history (checkpoint commits bd8125c and c8597fb); a test that copies the folder WITH .git, or pushes those commits, would show them. I made no commit and no push (I briefly staged three deletions by mistake and unstaged them; the index is clean, the files are deleted in the working tree). The plugin author handle in plugin.json and the install line in README are older than this step and untouched.",
+  "files_changed": [
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/a-forest-village-example.md",
+    "what": "DELETED: the worked plan for the request (parts, 16 readable features, starter numbers)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/examples/forest-village-place-settings.json",
+    "what": "DELETED: the plan as example settings."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/examples/forest-village-ownership.json",
+    "what": "DELETED: the plan as example ownership table."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/worked-examples-garden-and-canal-lock.md",
+    "what": "NEW: the two real worked examples (small canal lock built with the plugin; Japanese garden) with measured/judged numbers and what each taught."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/examples/canal-lock-place-settings.json",
+    "what": "NEW: example settings from the real canal lock run (validated by the settings reader)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/examples/canal-lock-ownership.json",
+    "what": "NEW: example ownership table for the lock (four owners, ground frozen)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_generic.py",
+    "what": "NEW guard test, 14 checks: hashed kept-out words absent from the place parts, no forest-village file names, even-handed village preset, real example files, REQUIRED routing still in the skill."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/SKILL.md",
+    "what": "Quoted request and village plan paragraph replaced by the canal lock example; empty-stable sentence removed; description now says house, barn, bridge instead of cottage, stable; unkept -> unkempt; lane -> road; links to the new example file. REQUIRED block untouched."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/the-required-steps.md",
+    "what": "Example is now the canal lock (lock.blend, ground_and_water, walls_and_steps, lock_gate, props, harbour type); lane -> road."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/construction-and-scale.md",
+    "what": "Cottage, stable, well and trough notes removed; gate and steps notes and a table of numbers this project really used (mine yard, garden, lock) added; fact count text."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/wear-recipes.md",
+    "what": "Horse-and-cart lane example replaced by the coal-mine yard cart roads (measured); dung, thatch soot/sag, lane wording removed."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/surface-recipes.md",
+    "what": "Cottage/stable/cart-bed wording, wattle_and_daub, hay, leather, fir/spinning wheel/stable stalls/thatched cottage removed; plaster_lime paragraph; 45 surface ids."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/rendering-on-rented-cards.md",
+    "what": "Job-file example: cottage camera -> lock gate, lane_wide -> towpath_wide."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/style-rule-and-measures.md",
+    "what": "Removed the 'worn lane driven by carts / empty stable' judgement line."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-planner.md",
+    "what": "Quoted request and five-part village plan replaced by a canal lock example; empty-stable rule removed; example files renamed."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-builder.md",
+    "what": "Cottages-part example -> lock_gate part; hoof prints only where asked; lane -> road."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-integrator.md",
+    "what": "Village five-part example -> canal lock four parts."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-renderer.md",
+    "what": "Lit-window-in-cottage example -> lantern and water in view."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-checker.md",
+    "what": "Worn-road judgement no longer says driven by carts."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/hooks/place-reminder.py",
+    "what": "Trigger words stable, cottages, carriage, medieval/mediaeval removed; example and comment neutral."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/workflows/build-a-place.js",
+    "what": "Header example and args docs now canal lock; lane variable renamed slot; ground prompt road; not-tested sentence neutral."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/README.md",
+    "what": "Not-tested bullet no longer quotes a village request; lane -> road; one bullet naming the two real worked examples."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/docs/LLM tips and tricks.md",
+    "what": "Removed the carts/empty-stable judgement line."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/kit-sync-notes.md",
+    "what": "'real village' -> 'place of hundreds of buildings'."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+    "what": "Source texts: lane -> road, dung lumps -> clods (numbers untouched)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py",
+    "what": "Messages: lane -> road; hoof prints only when settings ask."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/README.md",
+    "what": "Example files, hoof/centre_grass options, interior type listed, clods, job example, 'large place' not-tested note, lane -> road."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/DEVIATIONS.md",
+    "what": "lane -> road; 'a large place was not built here' with the lock noted."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/SOURCES-AND-LICENCES.md",
+    "what": "lane -> road."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/place_types/village.json",
+    "what": "Neutral preset: balanced roles, state dry, no cart_gauge, neutral notes."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/real_world_facts.json",
+    "what": "Removed stall_width, manger_height, ladder_width, bucket_height; cart_height wording; cart_gauge source cites the mine yard."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/roles.json",
+    "what": "Name hints lane, stall floor, wattle, daub, cottage, manger, carriage, woodpile, chopping removed; hurdle added; meanings neutral."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/species.json",
+    "what": "dung_lump -> clod (earth lump), palette dung -> clod_earth, notes."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/surfaces.json",
+    "what": "Removed unused wattle_and_daub, hay, leather (198 lines)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/polyhaven_choices.json",
+    "what": "Neutral about text; removed spinning wheel, three fir models, 'stable stalls', 'thatched cottage'."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/dial_table.json",
+    "what": "dung lumps -> clods, lane edges -> road edges."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/treatments.json",
+    "what": "Same two wording fixes."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/looks/neglected.json",
+    "what": "unkept -> unkempt."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/templates/part_brief.md",
+    "what": "lane -> road."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/commands.py",
+    "what": "Drafted roads default hoof False; messages; roads_from_shapes, road_skeleton names; unkempt."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/surfaces/roads.py",
+    "what": "Docstring now general (carts/vehicles, hoof optional, coal yard measured); road_height_offset; ROAD_FADE_METRES."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/scene_read.py",
+    "what": "road_skeleton (renamed from lane_skeleton) and wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/settings_file.py",
+    "what": "Docstring example is a towpath."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/cli.py",
+    "what": "roads help says optional hoof prints."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/checks/combine.py",
+    "what": "Docstring stage_cottages.py -> stage_walls.py."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/pieces.py",
+    "what": "dung -> clod in docstring."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/scatter.py",
+    "what": "dung -> clods; lane -> road."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/surfaces/damage.py",
+    "what": "'thatch that sags' -> 'roofs that sag'."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/door.py",
+    "what": "'rust on thatch' -> 'rust on wood'; lane -> road."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/parts.py",
+    "what": "lane -> road (docstring)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/checks/ownership.py",
+    "what": "lane -> road (docstring)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/keepout.py",
+    "what": "lane -> road (docstring)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/surfaces/ground_mesh.py",
+    "what": "lane -> road (docstring and message)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/masks.py",
+    "what": "lane -> road (docstring)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/layers/rubbish.py",
+    "what": "lane -> road (docstring)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/layers/moss_and_algae.py",
+    "what": "lane -> road (docstring)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/layers/wetness.py",
+    "what": "lane -> road (docstring)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_build_a_place_workflow.py",
+    "what": "Request, owners, labels, claims, reading-test words rewritten around the canal lock; same 114 checks."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/workflow_harness.mjs",
+    "what": "Comment example lock_gate."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow",
+    "what": "All 24 canned helper answers (plan, plan-many, blind-1/2, checkers, skeptic, audits, reports, render files) rewritten around the lock: 16 new readable features, 13-of-16 and 4-of-16 reading counts kept."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_hook.py",
+    "what": "Request replaced by canal lock and village+props prompts; 'make the build stable' added as a non-match."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_data.py",
+    "what": "Example file names, four owners, harbour used for the state-default check (village is now dry like generic), banned-word probe uses harbour."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_skills.py",
+    "what": "Expected skill file list names the new example file."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_roles.py",
+    "name_note": "",
+    "what": "Cottage wall -> House wall in two checks."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_shapes.py",
+    "what": "road_height_offset and wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_audit_check.py",
+    "what": "lane -> road names."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_combine.py",
+    "what": "Lane -> Road object names."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_blender.py",
+    "what": "lane -> road, probe key renamed."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_fixes.py",
+    "what": "Scene keys curved_road, House wall, owner houses."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place",
+    "what": "make_fix_scenes.py, make_yard_scene.py, probe_fixes.py, probe_place.py: lane/Cottage names -> road/House, scene curved_road, probe keys near_road_outside/within_road."
+   }
+  ],
+  "tests_run": "python3 kit/calculators/tests/run_all.py, run last after every edit. WITHOUT Blender: 40 test files, 36 passed, 0 failed, 4 skipped (test_after_painting, test_sound_gates: need the project's recordings and plates; test_place_blender and test_place_fixes: need Blender), 1388 checks passed, 0 failed, 17 skipped, 1 min 49 s. WITH BLENDER=/home/user/work/blender-app/blender-5.2.2-linux-x64/blender: 40 files, 38 passed, 0 failed, 2 skipped (the same two project-file tests), 1602 checks passed, 0 failed, 8 skipped, 7 min 30 s (test_place_blender 103 of 103, test_place_fixes 40 of 40, test_place_render 64 of 64, test_build_a_place_workflow 114 of 114, test_place_generic 14 of 14, test_place_hook 35 of 35, test_place_data 67 of 67). Before my edits the baseline without Blender was 35 passed, 0 failed, 1372 checks. Also check_presets.py: 6 of 6 groups passed. A whole-plugin scan for the hashed kept-out words found none. Two earlier with-Blender runs were stopped or superseded by later edits; only the last one counts.",
+  "pictures": [],
+  "runpod_seconds": "0 (no rented card was used; no picture was drawn; ~/.runpod was not touched)",
+  "failures": [
+   "I ran 'git rm --cached' on the three one-request files early on; they turned out to be in the newest checkpoint commit, so three deletions were staged. I noticed it, ran 'git reset' on those paths, and the index is clean again (nothing staged, nothing committed or pushed). The files are deleted in the working tree.",
+   "My first version of the new guard test failed once because the test file itself held one of the hashed words in a pattern; fixed. My first hook edit added the word 'shed' to the trigger words and I took it out again (it fires on 'shed light on').",
+   "My first edit of roads.py used the words 'farm' and 'mine' in code, and the kit's own banned-place-word check caught it (5 of 6 groups); reworded and 6 of 6 pass.",
+   "I started a full Blender test run, then stopped it to make more edits; one leftover Blender process was killed. A waiting loop I wrote matched its own command line and never ended; I killed it. Neither changed any file.",
+   "The three git history problem remains: the old one-request files are still in the earlier checkpoint commits (bd8125c and c8597fb). I did not rewrite history."
+  ],
+  "untested": [
+   "No fresh model was given the person's request and the cleaned plugin: whether a smaller model now applies the whole pass by itself is the coming test and was not tried.",
+   "The workflow build-a-place and the five place agents still only ran against canned helpers (the canal-lock answers), never under the real Workflow tool.",
+   "The hook's Claude Code format and the fact that other Blender skills do not outcompete it are still unproven inside Claude Code.",
+   "Nothing was built or drawn in Blender with the changed village preset, the dry default state, the clod litter piece or the road drafting without hoof prints beyond the existing test scenes (hut, yard, curved road, trench); no picture was judged by eye.",
+   "The numbers in the new worked-example file were copied from the smoke-test report and the garden notes; I did not re-measure them. The canal-lock numbers come from the first 1.4.0 build before its fix round (the file says so).",
+   "The marketplace file outside the plugin folder still says 1.3.0 (reported by the existing test, not changed).",
+   "Git history was not rewritten, so a copy of the repository that includes .git still shows the old material."
+  ]
+ },
+ "batching": {
+  "summary": "I did this step on top of the two earlier, unfinished attempts (saved in git between 6fab3bf and HEAD). I kept most of their work and fixed what was wrong. Nothing was committed or pushed.\n\nWHAT I FOUND IN THE EARLIER WORK. It mostly worked. The verbs `variations` and `card-time`, the ledger and allowance, the sheet, the skills, agents and workflow were all there, and 3 batches had already run on the rented cards. Five things were wrong:\n1. The check before drawing only compared settings, and that was not enough. In the first real moss batch 5 of 10 variations showed nothing on the card, and in the first cracks batch 5 of 10 came out alike.\n2. \"amount\" could only make wear weaker, never stronger. Its \"saved\" value was also a guess.\n3. If a command was cut off (for example by a time limit) while it waited for the cards, the ledger lost card time that had really been billed.\n4. The plugin's example file was the cracks batch in which half the variations came out alike.\n5. The text said \"version\" in some places and \"variation\" in others (one word for each thing is the rule).\n\nWHAT I ADDED OR CHANGED\n1. A free scout (`variations scout FILE.json`). It draws the same batch on this computer, tiny (240 x 160, 8 samples, about 40 s for the canal lock), costs no card time and does not count as a batch. `plan` and `run` then drop, before any card, every variation the scout found alike, each with a plain sentence.\n   - I matched it against the two real card batches it had to agree with. With its own limits (0.75 and 0.3%, now house numbers marked measured) it called exactly the same 22 pairs \"nearly the same\" as the cards did, and no others.\n   - It only uses a scout of the same scene and the same settings.\n   - It also reads what the saved scene really has for each dial. The sheet shows this under the baseline, and the settings check compares against it.\n2. `amount.<layer>` and `master` now multiply what the saved scene has: 0 to 2, where 1 means as saved. A batch can now try more wear as well as less.\n3. `make --range KEY LOW HIGH` spreads a dial only over the part of its range that shows.\n4. The ledger is safe against cut-off commands:\n   - Every job gets a \"sent\" line the moment it goes out, and it counts at its estimate until the billed seconds arrive. `rent run` and `render` do the same.\n   - The run folder keeps `run-state.json`, and `variations collect RUN-FOLDER` finishes a cut-off batch without sending anything again.\n   - A failed upload still writes the small jobs it already ran.\n   - The ledger file is locked while a line is written, so helpers writing at the same moment never mix their lines.\n5. Writing:\n   - \"Variation\" is now the one word everywhere the rule appears. The rule page `batched-rounds-and-card-time.md` is rewritten with a worked example first.\n   - The scout, `--range` and `collect` are now in the REQUIRED block of the three skills, the tips guide, the builder, integrator and checker agents, and the workflow.\n   - The example file is now the real proof batch. DEVIATIONS.md and both READMEs record what changed.\n\nTHE PROOF ON THE CARDS (small canal lock, 2 cameras, Cycles 600 x 400, RTX 4090s)\n- I made 10 variations of the cracks-and-chips wear, with crack density spread from 0.6 to 1 and its strength from 0.6 to 2. I scouted them here for free first.\n- Two earlier files each had one pair too alike in the scout, so they never went to a card. The third file scouted clean.\n- On the cards: 3 jobs sent at the same time, 22 pictures, and all 10 came out measurably different, as the scout had said. The closest pair differed by 0.76 to 0.78 of 255 on average and in 0.46 to 0.57% of pixels, just above the limits.\n- Card seconds: 178 in all, about US$0.05 (an estimate, not a bill). The plan had estimated 208.\n  - Job 1: work 26.0 s, wake-up 0.8 s.\n  - Job 2: work 22.4 s, wake-up 19.9 s.\n  - Job 3: work 24.6 s, wake-up 23.3 s.\n  - Uploads and downloads: 46 s, counted from the wall clock.\n- 48 s from sending to the last result; 92 s for the whole command.\n- The sheet is 378,180 bytes: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/final-proof-cracks-10-variations-on-3-cards-sheet.jpg",
+  "files_changed": [
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/scout.py",
+    "what": "NEW: the free scout. It draws the batch on this computer, tiny, in one job; uses its own limits; matches a scout by scene checksum and a fingerprint of each variation; drops_from_scout; reads the saved dial values; makes the scout sheet."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/runner.py",
+    "what": "The plan uses the scout (drops, saved values, a hint line when there is no scout). Sending a batch is split into send and bring-back, with 'sent' ledger lines, run-state.json and the logging of a failed upload. New 'collect' and 'scout' actions. The sheet shows the saved values; 'sheet' can redraw a scout sheet; small pyflakes fixes."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/keys.py",
+    "what": "amount and master scale the saved scene (0 to 2). The settings check compares with the saved scene's real values, using the largest gap over its materials."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/apply.py",
+    "what": "Amount is multiplied, not replaced; new saved_values() reads each varied dial (lowest and highest over the materials)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/worker.py",
+    "what": "Records saved_values in job-result.json; a scout job uses the scout samples."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/spec.py",
+    "what": "check_before takes the saved values; make_variations takes limits (--range) with plain error sentences; estimate_job; examples rewritten for the new amount."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/verb.py",
+    "what": "New scout and collect actions; make --range; NEXT lines point to the scout."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/compare.py",
+    "what": "pair_differences(scout=True) uses the scout's limits."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/sheet.py",
+    "what": "Shows a baseline note (what the saved scene has)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/cards.py",
+    "what": "clear_small() on both card backends."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/card_time.py",
+    "what": "'sent' lines that count at their estimate until billed; open_sent; measured_job_ids; a file lock on writes; card-time show lists jobs still open."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/render/client.py",
+    "what": "rent run and render --where rented write a 'sent' line."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/cli.py",
+    "what": "variations actions scout and collect; options --range, --scout, --no-scout."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+    "what": "New house numbers: place_variations.amount_scale_max (judged), scout_size_pixels, scout_cycles_samples (judged), scout_eevee_samples (invented), scout_picture_mean_difference_min and scout_picture_changed_share_min (measured, calibrated on the two real batches)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/examples/canal-lock-cracks-variations.json",
+    "what": "Now the real proof batch (scouted clean, all 10 measurably different on the cards), with relative paths."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md",
+    "what": "Rewritten: one word (variation), the scout step with its evidence, --range, collect and a long time limit, amount scaling, 'sent' lines, the proof numbers, fixed hand-written example."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/SKILL.md",
+    "what": "REQUIRED rule 4 names the free scout; 'variations' wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/build-and-paint-a-place/SKILL.md",
+    "what": "REQUIRED rule 4 names the scout; 'variations' wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/make-3d-models/SKILL.md",
+    "what": "REQUIRED rule 4 and section 5c name the scout; 'variations' wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/the-required-steps.md",
+    "what": "Step 7b names the scout; wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/rendering-on-rented-cards.md",
+    "what": "'variations' wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/make-explainer-film/SKILL.md",
+    "what": "'variations' wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/make-explainer-film/house-rules.md",
+    "what": "'variations' wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/docs/LLM tips and tricks.md",
+    "what": "Tip 17: scout, --range and amount scaling. Tip 19: long time limit and collect. Wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-builder.md",
+    "what": "Section 3b: --range, amount, the scout step, the 10-minute limit and collect."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-integrator.md",
+    "what": "Scout step added."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-checker.md",
+    "what": "Flags a card batch with many alike variations and no scout."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-planner.md",
+    "what": "'variations' wording."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/workflows/build-a-place.js",
+    "what": "THE BATCH RULE block: scout, plan, run with a 10-minute limit, collect."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/hooks/place-reminder.py",
+    "what": "'variations' wording (still three lines)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/README.md",
+    "what": "1.4.0 notes: the scout, amount scaling, --range, collect, the final proof numbers."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/README.md",
+    "what": "Variations section: scout, collect, --range, amount scaling, the ledger lock and 'sent' lines; verb table."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/DEVIATIONS.md",
+    "what": "Batching-step notes for the scout, the amount change, saved values, --range, 'sent' lines and collect, the lock; the fourth real batch."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_variations.py",
+    "what": "Updated for amounts 0 to 2 and two small-job lines. New checks: saved values, --range errors, the scout with a fake Blender (drops, renamed and new variations, --no-scout, changed scene), run using the scout, a cut-off batch finished by collect, a failed upload; with Blender, a scout on the hut. 92 checks without Blender, 110 with."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_card_time.py",
+    "what": "New checks: 'sent' lines counted then replaced, logged once, 4 processes writing 600 lines at the same moment, rent run writes a 'sent' line (52 checks)."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_render.py",
+    "what": "The ledger check allows 'sent' lines and checks there is no double counting."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_batching_rule.py",
+    "what": "Expects 'variations' wording, and the scout and collect in the REQUIRED blocks, rule page, builder, tips and workflow."
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_build_a_place_workflow.py",
+    "what": "'about 10 variations' wording."
+   }
+  ],
+  "tests_run": "FULL SUITE, run after the main changes (python3 /home/user/Music/plugins/explainer-film/kit/calculators/tests/run_all.py):\n- Without BLENDER: 43 files, 39 passed, 0 failed, 4 skipped (the two that need project recordings and plates, and the two that need Blender); 1578 checks passed, 0 failed; 3 min 16 s. Baseline before my changes: 39 passed, 1549 checks.\n- With BLENDER=/home/user/work/blender-app/blender-5.2.2-linux-x64/blender: 43 files, 41 passed, 0 failed, 2 skipped (project files only); 1810 checks passed, 0 failed; 10 min 37 s. Among them: test_place_blender 103/103, test_place_fixes 40/40, test_place_render 68/68, test_place_variations 109/109.\n\nAFTER THE FULL RUNS I added one check (a failed upload) and edited two skill texts, then reran the affected tests:\n- test_place_variations: 92/92 without Blender and 110/110 with Blender.\n- test_place_batching_rule 27/27, test_place_skills 69/69, test_place_generic 14/14, test_build_a_place_workflow 129/129, test_place_card_time 52/52, test_place_hook 35/35.\n- check_presets.py: 6 of 6 groups. pyflakes is clean on every changed module.\n\nCHECKING THE SCOUT AGAINST REAL CARD RESULTS (local, free): I redrew the two earlier real card batches (moss, cracks) as scouts at 240 x 160, 8 samples (37 to 39 s each). With the scout's limits, the pairs it called alike were exactly the ones the cards had: cracks 7 of 7 and moss 15 of 15, with no extra pairs.\n\nREAL CARD PROOF: one batch of 10 cracks-and-chips variations in 3 jobs at once: 178 card seconds, all 10 measurably different (numbers in the summary). Before it: 5 free scouts here (two files with one alike pair each, three clean seeds); I sent the clean seed with the widest margin.\n\nBY HAND: `variations sheet` redraws the sheet of a finished card run (369 KB); `card-time show` on the proof ledger.",
+  "pictures": [
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/final-proof-cracks-10-variations-on-3-cards-sheet.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/final-proof-cracks-free-scout-sheet.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof-final/cracks-variations-first-try-scout/cracks-and-chips-on-the-lock-walls-and-scout-sheet.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/opus/validate/moss-scout/scout-check-moss-sheet.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/opus/validate/cracks-scout/scout-check-cracks-sheet.jpg"
+  ],
+  "runpod_seconds": "This session: 178 card seconds for the final proof batch, about US$0.05 (an estimate, not a bill).\n- Job 1: work 26.0 + wake-up 0.8 + idle tail 5 = 31.8 s.\n- Job 2: work 22.4 + wake-up 19.9 + 5 = 47.3 s.\n- Job 3: work 24.6 + wake-up 23.3 + 5 = 52.9 s.\n- Set-up and downloads: 46 s, counted from the wall clock.\nLedger: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof-final/card-time-ledger.jsonl\nThe earlier attempts at this step had used 442 s (180 + 158 + 104), so the whole step used about 620 card seconds, about US$0.19 (an estimate). All scouts and checks were drawn on this computer at no card cost. Jobs never waited in line; ~/.runpod was never read.",
+  "failures": [
+   "My first try at the local scout check printed nothing, because /usr/bin/time does not exist here. I reran it with date.",
+   "I tried to remove an empty scratch folder with a relative path, and a safety check blocked it. The empty folder /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching-opus is still there; remove it by hand if wanted.",
+   "I first added a --blender option to the variations verb, which every verb already has. I caught it before it caused harm and removed it.",
+   "One new test check was wrong: it expected every job to record the moss cover, but only the job that varies it does. I fixed the check to read the merged result.",
+   "Copying the proof file up one folder broke its relative scene path, so plan refused it. I remade the file in place with the same seed, and the variations are identical.",
+   "The first two proof files each had one pair too alike in the free scout. This is the scout doing its job; neither file went to a card.",
+   "Two scout-check runs started while I was editing keys.py and apply.py. The file times show both used the code from before the edits.",
+   "The 4 card batches I counted are real; the earlier attempts' first moss and cracks batches each had 5 of 10 variations alike. Those were costs of the earlier attempts, and their files used the OLD meaning of amount."
+  ],
+  "untested": [
+   "The plugin's own card client (ClientCard) has still never run against the real endpoint. Every real batch went through the project's command-line client.",
+   "`variations collect` and the 'sent' lines were proved only with a pretend card, never by cutting off a real card batch.",
+   "The scout's limits were calibrated on one scene (the small canal lock), two cameras and Cycles only. The EEVEE scout samples are invented and were never compared with a card. The margin for cracks was thin (0.71 against 0.74).",
+   "How long a scout takes on a big place on this slow computer is unknown. The texts say to skip it when the scene takes more than a few minutes to open here.",
+   "No smaller model has yet followed the rule on its own, and the workflow build-a-place with its agents still ran only against canned helpers.",
+   "The new meaning of amount (scale the saved scene, 0 to 2) was drawn on the real card only for the cracks layer (0.67 to 1.93). Other layers were tried only on the tiny test hut.",
+   "The ledger lock was tested only here (4 processes, Linux fcntl), not on other systems.",
+   "The allowance numbers (builder 10 minutes, fixer 5, and so on) remain judged guesses.",
+   "Not changed, and older than this step: the marketplace file outside the plugin still says 1.3.0, and the author handle in plugin.json is untouched. The earlier step's note about old files in git history still stands."
+  ]
+ },
+ "verified": {
+  "passed": false,
+  "findings": [
+   {
+    "severity": "blocking",
+    "problem": "A leftover from the one particular request is still in the plugin: the Poly Haven list. It was first written \"for mediaeval and rural places\" (commit bd8125c). The earlier clean-up step only changed that label to \"many kinds of places\" and removed two items ('stable stalls' and 'thatched cottage'). What remains is that request's shopping list. Textures: 6 mud, 4 forest ground or leaves, 4 thatch or reed roofs and 2 bark, against 1 brick, 1 plaster, 1 clay tile and 1 slate. Models: barrels, buckets, wicker baskets, wooden ladders, stumps, dead tree trunks, lanterns, jugs and wheel rims. The \"not found, script these yourself\" list is a cart, hay or straw bales, a trough, an anvil and a well, which are exactly the period props of that request. A fresh model given the request would find its texture and prop list ready-made, so the coming test would not be clean. The guard test cannot catch this: its hashed words are horse(s), carriage(s), mediaeval, medieval, dung, wattle and manger, and not anvil or smithy.",
+    "where": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/polyhaven_choices.json (the 'about' text and the 'not_found' list; the textures and models lists) and /home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/surface-recipes.md lines 140-149",
+    "fix": "1. Delete 'not_found' and the 'Not found on that date: ...' sentence in the JSON's 'about'. Replace line 149 of surface-recipes.md with one neutral sentence: \"If Poly Haven has no model of a prop you need, build it in a script.\"\n2. Either make the lists even-handed (add slugs for concrete, planks, metal, asphalt, brick and plaster, each read on the site with a date), or say plainly that this is a small sample read once and that the helper must search the site for the surfaces its own place needs.\n3. Add anvil and smithy to the hashed kept-out words in /home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_generic.py, and add a check that polyhaven_choices.json has no not_found list."
+   },
+   {
+    "severity": "should fix",
+    "problem": "The free scout and the card both use the same rule for \"nearly the same\" (compare.py line 110). A pair counts as nearly the same only when, through EVERY camera, the mean difference AND the share of changed pixels are both under their limits. So a faint, even shift of about 1 level in 255, with no pixel changed by more than the 8-level step, counts as \"measurably different\".\n\nMy tiny wall, scout at 240 x 160 EEVEE:\n- The tool said all 10 variations were measurably different.\n- v10 against the saved scene: mean 0.68 and 0.97, changed share 0.02% and 0.05%. On the sheet: colour shift 0.2, squint 1.000.\n- v07 against v09: mean 0.49 and 0.98, changed share 0.008% and 0.0%.\n- By eye on both sheets these look the same. The sheet's own legend says a colour shift of about 2 is the least a person sees, and all 10 variations were under 2.\n\nThe limits were calibrated on one scene (the canal lock), where moss and cracks change a small part of the picture strongly. A dial that tints whole surfaces faintly (dirt film here) passes on the mean alone. Card time can then be spent on variations nobody can tell apart, which is what the scout is meant to stop.",
+    "where": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/compare.py line 110 (pair_differences); the house numbers place_variations.picture_mean_difference_min / scout_picture_mean_difference_min in /home/user/Music/plugins/explainer-film/kit/film-settings.json",
+    "fix": "1. Call a pair different only when, in at least one camera, the changed share reaches its limit. The share is what a person sees; the mean alone can be an even tint or noise. Alternatively, also flag a variation \"may not be visible\" when its colour shift is under 2 and its squint is 0.995 or higher.\n2. Before keeping the change, redraw the two saved real scouts (moss and cracks, in the batching scratch folder opus/validate/) and confirm the 22-of-22 agreement still holds. If it breaks, keep the rule and add only the \"may not be visible\" note.\n3. Add the tiny-wall case as a test. In the rule page, write \"measurably (not always visibly) different\"."
+   },
+   {
+    "severity": "minor",
+    "problem": "`finish` reports roles from the object's own `place_role` tag as \"guessed from names\". On my tiny scene every object had a `place_role` tag, and the run printed \"4 role(s) guessed from names\". The report it counts has how = 'place_role property' for each of them. The skill tells models never to trust a guessed role and to read the guessed ones, so this message makes a careful model think its tags were ignored.",
+    "where": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/commands.py line 58 (the count comes from settings_file.draft's 'guessed', which includes every role whatever its 'how')",
+    "fix": "Count by 'how': \"N role(s) from place_role tags, M from settings rules, K guessed from names\". Count only how == 'name hint' (and 'material rule') as guessed. Add a test with a tagged object named so that no name hint matches it."
+   },
+   {
+    "severity": "minor",
+    "problem": "Variation names made by `make` are percent of the setting's whole range: 'crackwid25' is a crack width of 0.014 m, and 'cover5' is cover 0.05. This is explained only inside the code (the docstring in spec.py). A newcomer reading the sheet or the example file will take 'crackwid25' as 25 mm.",
+    "where": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/spec.py line 298; /home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md section 3 step 2",
+    "fix": "Add one sentence to step 2 of the rule page and to the `make` PASS line: \"names show each of the first two settings as a percent of its whole range (crackwid25 = a quarter of the way from 0.002 to 0.05 m)\"."
+   },
+   {
+    "severity": "minor",
+    "problem": "The REQUIRED rule 4 and the rule page write `--helper YOUR-NAME`. In a plugin whose rule is never to write the person's name anywhere, a smaller model may fill in a person's name. The place-kit README already uses `--helper builder-walls`.",
+    "where": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/SKILL.md:13, /home/user/Music/plugins/explainer-film/skills/build-and-paint-a-place/SKILL.md:12 and :126, /home/user/Music/plugins/explainer-film/skills/make-3d-models/SKILL.md:12, /home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md:52 and :55",
+    "fix": "Use `--helper builder-walls` and add \"(a short name for this helper, never a person's name)\". Change all three REQUIRED blocks the same way: they are identical today, and the tests rely on that."
+   },
+   {
+    "severity": "minor",
+    "problem": "A local run of the batch tool (`variations run --where local`) is written in the ledger as batch 1 of 2, with 0 card seconds. The scout is not counted. The rule page does not say this. A helper who tries a batch here first has only one card batch left and cannot refine afterwards.\n\nAlso, `plan` prints \"about 208 card seconds in all\" for a batch that will be drawn here, before it says no rented-card seconds are used.",
+    "where": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md section 3 step 5 and section 6; /home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/runner.py line 108",
+    "fix": "Say in section 6: \"a run with --where local counts as one of the two batches; the scout does not\". Or stop counting local runs. When the batch will be drawn here, leave out the card estimate in the plan line, or say \"if sent to the cards: about N card seconds\"."
+   },
+   {
+    "severity": "minor",
+    "problem": "The place-kit README's \"Not tested\" section is out of date. It speaks of three real batches (180, 158 and 104 card seconds) and leaves out the fourth: the final proof batch of 10 cracks variations, 178 card seconds, which the main README, DEVIATIONS.md and the rule page all report.",
+    "where": "/home/user/Music/plugins/explainer-film/kit/place-kit/README.md lines 238 and 240",
+    "fix": "Add the final proof batch to both lines: \"four real batches: 180, 158 and 104 card seconds, and the scouted proof batch of 10 in 178\"."
+   },
+   {
+    "severity": "minor",
+    "problem": "A word from a mediaeval-village trade is left in a workflow test. The given_parts case builds a part called 'smithy' (\"a small smithy\"). It was added in c8597fb, and the guard test does not catch it.",
+    "where": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_build_a_place_workflow.py lines 436-438",
+    "fix": "Rename it to a neutral part, for example {'name': 'pump_house', 'owner': 'pump_house', 'brief': 'a small pump house'}, and change the label checks on line 438 to match."
+   },
+   {
+    "severity": "minor",
+    "problem": "The top note of the preflight command has a doubled heading line (\"# Stages, in the order a film is made:\" followed by \"# Nine stages, in the order a film is made:\"). It arrived with 1.4.0 (bd8125c).",
+    "where": "/home/user/Music/plugins/explainer-film/bin/explainer-film-preflight lines 7-8",
+    "fix": "Delete line 7."
+   },
+   {
+    "severity": "minor",
+    "problem": "Older than 1.4.0, for the person to decide. The plugin's author is the GitHub handle 'AHepi' (plugin.json), and the README install lines name 'AHepi/Music' and 'ahepi-music'. This is the public owner of the repository, there since the first plugin commit 2d3dd88. The old film example files and build scripts also hold machine paths (/home/user/work/...): 10 lines in each of kit/examples/inflation-chapter-2/word-times.json and timeline.json, and the Run lines of kit/paper-film/blender/build_desk.py, build_props.py, build_factory.py and build_town.py. None of this is in the place parts. No key, endpoint id, machine id, volume id or email was found anywhere.",
+    "where": "/home/user/Music/plugins/explainer-film/.claude-plugin/plugin.json:7; /home/user/Music/plugins/explainer-film/README.md:17-18; /home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2/; /home/user/Music/plugins/explainer-film/kit/paper-film/blender/build_*.py",
+    "fix": "Person decides. If wanted, use a neutral author name and write the install line as OWNER/REPO, and make the old example paths relative (recordings/page1.mp3; `blender --python build_desk.py`)."
+   }
+  ],
+  "evidence": "The tests, the agreement check and the tiny-scene trial all passed. One request leftover blocks a clean run of the coming test (see findings). I changed nothing in the plugin: `git status` showed the same 38 entries before and after, nothing staged, and no plugin file newer than my start.\n\nTESTS (python3 /home/user/Music/plugins/explainer-film/kit/calculators/tests/run_all.py):\n- Without BLENDER: 43 files, 39 passed, 0 failed, 4 skipped; 1579 checks passed, 0 failed, 17 skipped; 3 min 15 s. Log: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tests-without-blender.log\n- With BLENDER=/home/user/work/blender-app/blender-5.2.2-linux-x64/blender: 43 files, 41 passed, 0 failed, 2 skipped (they need the project's recordings and plates); 1811 checks passed, 0 failed, 8 skipped; 10 min 15 s. Log: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tests-with-blender.log\n- Inside the Blender run:\n\n| Test | Checks |\n|---|---|\n| test_place_blender | 103/103 |\n| test_place_fixes | 40/40 |\n| test_place_render | 68/68 |\n| test_place_variations | 110/110 |\n| test_place_generic | 14/14 |\n| test_build_a_place_workflow | 129/129 |\n| test_place_hook | 35/35 |\n| test_place_card_time | 52/52 |\n| test_place_batching_rule | 27/27 |\n| test_place_skills | 69/69 |\n\n- Known note: the marketplace file outside the plugin still says 1.3.0.\n\nSCAN:\n- Whole words over the whole plugin, git folder excluded: horse(s), carriage(s), mediaeval, medieval, wattle, manger, dung, \\\"empty stable\\\", \\\"forest village\\\" and \\\"horse and carriage\\\" were all 0.\n- 'stable' appears only in the guard list and as a NON-match in the hook and its test.\n- 'cottage(s)' appears only in the old pit-village film files, an old test fixture and the guard list.\n- 'dirt road' is a role name.\n- Leftovers found: the Poly Haven list (first version: \\\"may suit mediaeval and rural places\\\"; not-found list cart, hay or straw bales, trough, anvil, well, stable stalls, thatched cottage) and 'smithy' in a workflow test.\n- The guard's 10 hashes match 9 words I tried: horse, horses, carriage, carriages, mediaeval, medieval, dung, wattle, manger.\n- Checked and fine: the rubbish layer's straw_share dial comes from the earlier street work (logs 22 and 25). Plants and litter are ordinary weeds. The presets are even-handed. The facts are general.\n- Keys and ids: none (patterns for rpa_, sk-, Bearer, hf_, endpoint/volume/pod/machine ids, api.runpod.ai/v2/<id>). Email-like strings: only two font-licence credits in the old film fonts. Machine paths: only in old film files; /workspace paths are on the rented card. ~/.runpod was never read: the plugin's client reads only environment names or a named file, and none was set here.\n\nAGREEMENT (my script /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/check_names_agree.py, output names-agree.log):\n- Read 44 texts: the skills, place agents, hook, workflow, READMEs, tips guide and templates.\n- 240 explainer-film-place and preflight commands, 280 options and 53 house-number keys: all exist, 0 problems.\n- The 76 file-link notes are files the user makes, or real files I then found by hand.\n- All 5 agent files named by the workflow exist.\n- The REQUIRED block is byte-identical in the three skills (md5 e6a69be6...).\n- The allowance numbers (builder 10, fixer 5, integrator 10, renderer 10, checker 3, planner 0) agree in 63 mentions with film-settings.json. Scout numbers: 240x160, 8 samples, 0.75 and 0.3%. Workers: 3.\n\nTINY-SCENE TRIAL (my own scene: gravel ground, brick wall, timber post and gate, sun, two cameras, roles tagged; folder /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny):\n1. First `finish`: the audit failed because my gate leaf stood 1.5 cm from its post (floating). That was my fault; I moved the leaf onto the post.\n2. Second `finish`: 12 s, exit 0. Audit: 0 fail, 1 look (the gate is 1.10 m against the door-height fact of 1.6 to 2.3, weak).\n3. `explainer-film-preflight place`: PASS with 2 looks.\n4. `variations make`: 10 variations, seed 1.\n5. `scout` (under xvfb-run): 94 s here, EEVEE 240x160, 0 card seconds. It read what the saved scene has (dirt film 0.4 to 0.5, moss cover 0.4) and called all 10 measurably different.\n6. `plan`: used the scout by itself; 3 jobs; said no card seconds.\n7. `run --where local --size 300x200 --check-reset`: jobs of 57, 64 and 43 s; 22 pictures; reset difference 0.000; one 324 KB sheet; the ledger shows batch 1 with 0 s; `card-time show` worked.",
+  "pictures": [
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/wear-variations-scout/moss-and-dirt-on-the-tiny-wall-scout-sheet.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/wear-variations-run/moss-and-dirt-on-the-tiny-wall-sheet.jpg"
+  ],
+  "summary": "The plugin works and agrees with itself, but one leftover from the particular request is still there and should be removed before the fresh-model test. I changed nothing in the plugin.\n\nWHAT I DID\n1. I ran every plugin test, with and without Blender.\n2. I searched the whole plugin for the request's words, for plans or data made only for it, and for keys, ids, personal details and machine paths.\n3. I read the batching rule and tool as a newcomer would, and ran them once here on a tiny scene I made myself.\n4. I checked with a script that the skills, place agents, hook, workflow, READMEs and tips guide name only commands, options and house numbers that really exist.\n\nTESTS\n- All pass.\n- Without Blender: 39 of 43 files passed, 0 failed, 4 skipped. That is 1579 checks, 0 failed.\n- With Blender: 41 of 43 files passed, 0 failed, 2 skipped (they need the project's recordings). That is 1811 checks, 0 failed.\n\nWHAT IS GOOD\n- None of the request's own words are left (horse, carriage, mediaeval, wattle, manger, dung).\n- 'stable' and 'cottage' are left only in the guard list, as non-matches, or in the old pit-village film files.\n- No keys or ids anywhere, and no email.\n- 240 commands, 280 options and 53 house numbers in the texts all exist.\n- The REQUIRED block is identical in the three skills.\n- The allowance numbers agree everywhere.\n\nTHE TINY-SCENE TRIAL\n- The pass worked, and the audit caught a real fault in my own scene: my gate floated 1.5 cm from its post.\n- Once I fixed it, the preflight place stage passed.\n- The variation file, the free scout (94 s, no card time), the plan and the local batch all worked. The scene was put back exactly, and each run made one clear sheet.\n\nWHAT IS WRONG (most serious first)\n1. Leftover (blocks a clean test): the Poly Haven list in polyhaven_choices.json and surface-recipes.md.\n   - It is still the shopping list gathered for the request: mud, forest floor, thatch and bark textures; barrels, baskets, ladders, stumps and lanterns.\n   - Its \\\"script these yourself\\\" list is a cart, hay bales, a trough, an anvil and a well.\n   - The earlier clean-up only changed its label, from \\\"mediaeval and rural places\\\" to \\\"many kinds of places\\\".\n   - The guard test cannot catch it.\n2. The test for \\\"nearly the same\\\" lets a faint, even tint count as a difference.\n   - On my tiny wall the tool called all 10 variations different.\n   - Two pairs look the same by eye, and every variation's colour shift was under the sheet's own \\\"least a person sees\\\" level of 2.\n   - The fix needs re-checking against the two real card batches.\n3. Small things:\n   - `finish` calls tagged roles \\\"guessed from names\\\".\n   - Variation names are percent of the setting's range, which is not explained.\n   - The rule says `--helper YOUR-NAME` (a model might write a person's name there).\n   - A local run uses up one of the two allowed batches, and the rule does not say so.\n   - The plan shows a card estimate for a batch drawn here.\n   - The place-kit README leaves out the fourth real card batch.\n   - A workflow test builds a 'smithy'.\n   - The preflight command's note has a doubled line.\n4. Older than 1.4.0, for the person to decide: the author handle in plugin.json and the install line, and machine paths in the old film example files.\n\nWHAT I DID NOT DO\n- No rented card was used: 0 card seconds.\n- I did not try `collect` or `refine`, the workflow, or the hook inside Claude Code.\n- I did not look at git history beyond finding which commit added things.\n- I did not re-measure the earlier steps' numbers.\n- I did not read workflow_result_A.json; the plugin itself was enough for these checks.\n\nMY OWN SLIPS\n- The gate fault in my test scene was mine; I fixed it in my scene.\n- My checking script also flagged 76 file links. They are files the user makes, or real files it did not find; I checked them by hand. None is a real problem.\n\nAll my files are in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final"
+ },
+ "newcomers": [
+  {
+   "plan": "PLAN: a small fishing harbour with a fish market, built in Blender for the film\n\nI read the whole plugin route for this (README, make-explainer-film, surfaces-wear-and-construction with its step files, build-and-paint-a-place, make-3d-models, the five place agents, the build-a-place workflow, the tips guide, the harbour preset and the canal-lock worked example). Nothing is built here.\n\n0. SCOPE AND MY OWN CALLS (written in Decisions.md with the person's exact words, so any call can be overturned in one line)\n- The request names no mood, era, time of day or painting. I would choose: look lived_in (a working harbour); state damp (the harbour preset starts at neglected and wet, but the person's words decide; the canal lock used damp for the same reason, and the preset requires wet stone and mossy timber); a plain traditional look (wooden crates, baskets, barrels, which is what the Poly Haven library offers); soft overcast morning; portrait views matching the film frame (1080 x 1920). I would say these in one short message and not ask about them.\n- Deliverable: a finished place in Blender that passes the audit, planned and checked views, small preview pictures, and a plain report. I would stop before the paid steps (fal paintings, ElevenLabs voice) and before pages and filming. Nobody asked for them and they cost money; I would ask once with the exact cost. Only rented-card time may be spent before that, inside the card-time allowances, and only if the person has set a card up.\n- The prompt-time hook (hooks/place-reminder.py) would fire on these words. I would read the skill anyway.\n- Helpers: the person asked for Opus 5.5 as the subagent model. I would start every helper I launch by hand on it. The build-a-place script passes only an effort, not a model, so for helpers it starts I would check which model ran and say so, not assume. The house rule is medium effort, never higher, but the script's default for checkers is high, so I would pass effort and checkEffort as medium.\n\n1. SET UP (free)\n1. Read, in order: house-rules.md; the surfaces-wear-and-construction SKILL.md first screen and its look/state table; the-required-steps.md; batched-rounds-and-card-time.md; construction-and-scale.md; the build-and-paint-a-place and make-3d-models skills; blender-5-traps.md; tips guide sections 0, 4 to 8a, 9 and 19; the kit doc 07 Composing a shot.\n2. `explainer-film-setup /path/to/work/film-kit`. I read every check (Blender 5.2.x, the virtual screen, numpy and Pillow, ffmpeg, browser) and the machine-settings.env it writes. If Blender is missing I stop and say so.\n3. `explainer-film-place rent status`, `rent balance`, `card-time show`. Water in view makes the renderer rule choose Cycles (the plugin's own addition), and any lit lantern does too. A local Cycles picture is only 320 x 240 at 16 samples, which is not a fair look. If no card is set up I say that plainly, draw only tiny local previews, and tell the person what a card would give. I never open the card account's settings folder or write a key anywhere.\n4. Start project-notes (story, Decisions, Status, Lessons) as the house rules say.\n\n2. PLAN THE PLACE (the place-planner's job; uses no card time)\n1. Style note from templates/style_note.md: section 0 word for word, request quoted at the top. Marked PROVISIONAL unless the person gives a reference picture or the film's existing look. If they have one, I measure it with `explainer-film-place measure PICTURE --make-guard`.\n2. Facts table, real-world-facts.json, each size with number, unit, source and confidence. The generic file has 25 facts and none for a quay, bollard, boat, fish box or stall. I would research with sources: quay height above water, bollard height, ladder rung spacing, inshore boat length, beam and freeboard, fish box size, a market counter height (the checkout's 0.885 m is a measured house number), slipway slope, cart gauge (generic 1.0 to 1.8 m). Anything remembered stays marked guess.\n3. place-settings.json: `explainer-film-place new-settings --scene start.blend --place \"fishing harbour\" --type harbour --out place-settings.json`, then set look and state by hand.\n   - The preset's quay_no_growth off entry (no plants or litter on paving, a swept quay) goes in as KNOWN only if I judge the reason true. It counts toward the quarter-of-treatments limit.\n   - I would NOT take the preset's floors_indoors skip for the market floor. A hosed-down fish-market floor is wet. I tag it floor.stone, which that skip does not cover, so it keeps wetness.\n   - Roads: a cart track behind the market (ruts 5 to 15 cm, gauge from the facts). footfall: the quay strip and stall fronts. keep_clear: doorways, slipway, aisles, bollard bases, ladder foot.\n4. ownership.json (frozen.set_by = the ground owner), acceptance.json, and 12 to 16 readable features (stalls with fish crates, wet cobbles, moss band on the quay foot, a tide-line band, bollards and rope, a moored boat, nets, market roof, sign, piles).\n5. Seven parts, one owner and collection \"Place: <owner>\" each, with a region, triangle budget and steps in priority order:\n   - ground_and_water, built first and frozen: sea bed, water plane (water.sea) at a fixed level, cobbled quay deck (ground.stone_paving), slipway, shore ground, cart track (ground.dirt_road), the portrait cameras and the sun.\n   - quay: wall.stone courses; coping as stone.footing and steps as stone.step, as the lock did (a coping tagged stone.step would be read as a step rise); bollards and rings (iron.painted or iron.fitting); ladder rungs.\n   - jetty: piles (timber.post) through the water plane, timber.beam stringers, timber.plank deck with 9 to 17 cm planks, gaps 5 to 14 mm, no span over 1.38 m.\n   - market: open-sided hall on stone.footing, posts, plate, rafters, roof.tile or roof.slate, floor.stone, a back wall with real doorways (floor within 0.30 m of the sill), counters at about 0.9 m, a lettered sign, a lantern.\n   - boats: two or three small boats (prop.boat), hull modelled below and above the waterline so the check counts it as afloat, one roped to the jetty.\n   - props: Poly Haven Barrel_01, wooden_crate_01/02, wicker_basket_01/02, wooden_bucket, wooden_ladder, Lantern_01. Scripted: fish boxes, a few big designed fish, nets (prop.rope), floats, a handcart (Poly Haven has no cart).\n   - people: 3 to 6 figures (fishmonger, buyer, fisherman).\n6. The kit does not make a tide line, seaweed, barnacles, foam or reeds. The quay part builds the tide line as a darker band plus a row of barnacle shapes, as geometry, and the jetty part does the same for its piles.\n7. Views, all portrait: wide (overview), market at eye height 1.5 to 1.9 m (crowd or still life), and a detail (boat bow, bollard, rope).\n\n3. CAMERA PLAN FROM THE BRIEF (preflight stage shots, first run)\nWrite a rough place-facts.json (views with kind of shot, signs, figures, lights, support surfaces including quay, jetty deck and counter). Run `place_facts.py check`, `plan_shot.py --place-facts F --view V --plan` for each view, `frame_geometry.py slide`, `view_audit.py audit` (the FISH MARKET sign must come out at least 20 px tall), and `plan_lights.py plan`. Then `explainer-film-preflight shots --place-facts F --shot-list SHOTS.json`. I fix camera spot, reach (nearest story thing at 0.70 down), eye height and the people rules (backs at least 6 m away, a crowd across the view two deep, no silhouettes) before building.\n\n4. BUILD IN PARTS\nPreferred: the workflow build-a-place (args: plugin, kit, folder, the request verbatim, place, the portrait views, references if any, finals false, rented as found in 1.3, medium efforts). The README says it has only run against canned helpers, so the fallback is the same steps by hand with the five agents, in this order:\n1. Ground alone: `explainer-film-place combine --scene start.blend --stages stage_ground_and_water.py --owners ownership.json --save-as ground-frozen.blend`.\n2. Each other builder works on its own copy, writes an idempotent stage_<owner>.py (apply(options), pk.forget_part, pk.begin_part, pk.new_part_object(owner, role, name, mesh), pk.seat_on_ground) and gives every object a role as it is made (`explainer-film-place roles --list`). Build from the ground up at real sizes, bevel edges, and make no two siblings alike (planks of different widths, a bowed board, chipped corners, piles a little out of plumb).\n3. Each builder runs `finish-part --owner NAME --quick --save-as part.blend`, `construction --owner NAME`, `normals-test`, and `combine --scene ground-frozen.blend --stages stage_X.py --order plain` (must say idempotent and no violations). It may draw one tiny picture of its own part (under 480 px wide).\n4. Poly Haven: use the pit-village scripts as the pattern (fetch_street_textures.py, props/download_poly_haven.py, convert_poly_haven.py). Open every downloaded texture at full size and look for stickers, brands and digits. Lettering is real, via props/paint_prop_pictures.py, never a blank sign. `model_lint.py` runs on every imported model and on the dressed scene (stripes, same-plane faces, \".001\" names, glass, sizes). People come from figures/build_figures.py, checked with figure_sheet.py.\n\n5. THE GATE: SURFACES, WEAR AND CONSTRUCTION (nothing is drawn until it passes)\n1. Combine the other parts with `--order both` from ground-frozen.blend, then `explainer-film-place finish --scene combined.blend --settings place-settings.json --facts real-world-facts.json --save-as harbour-finished.blend`. This is never --quick for the final. I read every line it prints, including what it skipped.\n2. `explainer-film-place construction` and `normals-test`.\n3. `explainer-film-place audit --scene harbour-finished.blend --settings place-settings.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend harbour-finished.blend --place-settings place-settings.json --reports REPORTS`. I fix the first FAIL by its category using the table in the-required-steps.md, with at most two repair rounds. I never lower a requirement. Off entries need a true reason. I never write a signed accepted entry (only the person signs). I do not save the scene after the audit; if I do, I audit again.\n4. Harbour traps to watch: boats and piles at the water plane (afloat or floating); a quay wall seated on the bed beside higher paving; doorways without floors; guessed roles (above 15 percent fallbacks fails); the market floor's wetness; the budgets (triangles, scattered pieces, final draw time).\n\n6. LOOK, INSIDE THE CARD ALLOWANCE\n1. `explainer-film-place renderer-for` (expect CYCLES). One sweep of every planned change, then one look: small portrait previews of the three views under three lights (flat, side, wet). A mark that vanishes under one light is not carrying the place. I look with the Read tool at phone size (about 300 px) and at 100 percent crops (`explainer-film-place crops`), and run `measure`. The style guard made from the first honest picture is called PROVISIONAL.\n2. For any change I am unsure of (moss at the quay foot and on piles, wetness band, crack density, a pile's lean, net droop): `variations make --keys ... --count 10 --range KEY LOW HIGH`, then `variations scout` (free, here, tiny), `variations plan` (free), then ONE `variations run FILE.json --where rented --helper NAME --role builder`, one sheet, pick or combine, and at most one `variations refine`. Shapes go in a script hook (templates/variation_hook.py). Never one small change and a look at a time.\n3. Allowances: builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0, whole job 60 minutes. `card-time check` before a step and `card-time show` after. I report card seconds, which are an estimate and never a bill. Full-size pictures are drawn once, at the very end, with `render --finals` from the last audited file.\n\n7. FRESH CHECKERS AND ONE FIX ROUND\nAgents that did not build it, never given builder reports: place-checker in look, structure (their own ray scripts), process (money, ledger, privacy, leftover preview cameras), a blind reader on half-size pictures (reading test at least 12 of 16 features), then a skeptic who merges and ranks. Then exactly one fix round routed to owners, and a different checker rechecks. A squint-test miss is reported, never fixed by removing character.\n\n8. SECOND SHOTS RUN, THEN THE FINAL GATE\nAfter `place` passes, write the place facts from the finished scene (shot_facts.py, make_check_file.py inside Blender) and run `explainer-film-preflight shots` again. For each view run `check-shot.sh` and fix problem 1 only: camera first, then props, then light. Then the final `explainer-film-preflight place` with --place-pictures, --style-guard and --fresh-check on the saved file.\n\n9. HAND OVER\nA plain-words report. What the pass did; what the audit measured, with numbers; measured against judged; what I skipped and why (off entries); what I did not test; every failure; card seconds. Files carry a two-digit log number and plain words. Waiting on the person: the story calls (era, time of day, reference look), and a yes to painting. For that I would run `paint_request.py price` at fal's live rate (about 44 US cents for one 2k repaint with a style picture at 4.8 cents a megapixel in October 2026; prices move) and ask once. The later stages (plates, paint, pages, film, finish, and the script, fact-check and voice steps) are not started.\n\nHOW I TEST CHANGES\nStructure changes need no picture: rerun construction, combine (plain and reverse, idempotent) and the audit. Wear and shape changes go through scout, then one batch. Camera changes go through plan_shot and check-shot, one problem at a time. Every report quotes measured numbers.\n\nHOW I CHECK THE RESULT\nMeasured: preflight place exit 0, construction and scale lines, normal-map direction, the picture measures, and the stale-audit hash. Judged by fresh critics and the person's eyes: whether wear reads designed rather than photographic, whether boats read as boats and crates as fish crates at 300 px, and period accuracy of every object.\n\nKNOWN LIMITS I WOULD STATE\nNever run: the workflow under the real Workflow tool, the rented-card client against a real endpoint through this plugin, a place of hundreds of buildings (this one is small), the hook inside Claude Code. The tests prove the gates work, not that the harbour looks good.",
+   "plugin_parts_used": [
+    "README.md (route and stage order)",
+    "skills/make-explainer-film (SKILL.md and house-rules.md)",
+    "skills/surfaces-wear-and-construction (SKILL.md, the-required-steps.md, batched-rounds-and-card-time.md, construction-and-scale.md, surface-recipes.md, wear-recipes.md, style-rule-and-measures.md, fresh-checkers.md, rendering-on-rented-cards.md, blender-5-traps.md, worked-examples-garden-and-canal-lock.md)",
+    "skills/build-and-paint-a-place",
+    "skills/make-3d-models (with blender-mcp-notes.md)",
+    "agents/place-planner",
+    "agents/place-builder",
+    "agents/place-integrator",
+    "agents/place-renderer",
+    "agents/place-checker",
+    "workflows/build-a-place",
+    "hooks/place-reminder.py (UserPromptSubmit reminder)",
+    "bin/explainer-film-setup",
+    "bin/explainer-film-place: new-settings, roles --list, finish-part, finish, construction, normals-test, combine, audit, renderer-for, render, rent status and balance, variations (make, scout, plan, run, collect, refine), card-time (check, show), measure, crops, undo",
+    "bin/explainer-film-preflight: stages shots (twice) and place; plates and paint only if the person says yes to painting",
+    "kit/place-kit data (place_types/harbour.json, roles.json, surfaces.json, polyhaven_choices.json, real_world_facts.json, templates/, examples/canal-lock-*)",
+    "kit/film-settings.json (house numbers: place_audit, place_card_time, place_render, place_variations)",
+    "calculators/place_facts.py",
+    "calculators/plan_shot.py",
+    "calculators/frame_geometry.py",
+    "calculators/view_audit.py",
+    "calculators/plan_lights.py",
+    "calculators/place_audit_check.py (judge, fresh-check)",
+    "calculators/picture_measures.py",
+    "calculators/paint_request.py price (only for the cost quote)",
+    "paper-film/blender/model_lint.py",
+    "paper-film/blender/make_check_file.py and shot_facts.py",
+    "paper-film/tools/check-shot.sh",
+    "paper-film/blender/pit-village (build and set-dressing pattern scripts, props/ Poly Haven and lettering scripts)",
+    "paper-film/blender/figures (build_figures.py, figure_sheet.py)",
+    "kit/docs/LLM tips and tricks.md (sections 0, 4 to 8a, 9, 19)",
+    "kit/docs/paper-look - 07 Composing a shot.md"
+   ]
+  },
+  {
+   "plan": "PLAN: an old railway station with a goods yard, built in Blender for a film\n\nHow this was written: I read only the plugin folder (README, the skills named below, the agents, the build-a-place workflow, the hook, the place kit's data and code, the tips guide). Nothing was built. I ran a few read-only checks of the plugin's own code (the hook on your sentence, the role-name guesser, --verbs, --list, --help) and made one slip, noted in section 14. Helpers would run as subagents on the model you chose (Opus), at the plugin's own effort levels (medium; checkers high).\n\n1. HOW I READ THE REQUEST\n\n- It is a place built in Blender. The plugin says (README, make-explainer-film, build-and-paint-a-place, surfaces-wear-and-construction, the prompt hook) that any place, set or props built in Blender goes through the surface-and-wear pass, the construction check and an audit (preflight stage place), even when the request never mentions surfaces, wear or realism. Nothing is drawn, rendered or painted until that passes. Your sentence names none of it, so I do it anyway and say so in the report. I ran the hook on your exact words: it fires, because of \"Blender\" and because \"build\" plus \"yard\" match.\n- In scope: research of real sizes, the plan files, the build, the finishing pass, the audit, the planned and composed film views, small previews, the checks, a plain report. Not in scope until you say yes: paid painting (fal), narration, pages, filming. No script exists, so the preflight stages script, record, pages, film and finish do not apply to this request.\n- I stop at: an audited, finished .blend; film cameras planned and composed; small previews; and a priced paint request that has never been sent (paint_request.py request never sends).\n\n2. THE ONE QUESTION I WOULD ASK (wants only; everything technical I decide myself)\n\nOne short message, each item with the default I use if there is no answer:\na) Where and when? (decides gauge, sizes, signals, lamps, wagons and lettering). Default: a branch-line station around 1900 to 1930, standard gauge, generic British-style, every size marked \"guess\" until a source confirms it.\nb) Is \"old\" a working station or an abandoned one? Default: working but aged, look lived_in (the plugin's table maps \"nothing said / ordinary\" to lived_in; derelict is for \"ruined, abandoned for years\"). State dry unless you say damp or wet.\nc) Day or dusk or night, and may I use your rented graphics card? Lit lamps or windows make the renderer rule say Cycles, which needs the card. Default: daylight, lamps off, EEVEE.\nd) What must the film see (3 or 4 views, people, a train)? Default: three views (platform end looking down the line, the goods shed and dock, the station front), no people, no train.\ne) Any reference picture? If yes the style note and style guard come from it; if not both are PROVISIONAL.\nI would use an invented station name and company (no real company name or logo).\n\n3. SET UP AND FIRST READS (no cost)\n\n1. Work folder outside the plugin, for example work/railway-station/ with plan, scene, stages, work, reports, render, pictures, checks (the workflow's layout). Project notes in project-notes/ (story, decisions with your exact words, status, lessons), delivered files with a two-digit log number and plain words (house-rules.md).\n2. `explainer-film-setup /path/to/work/film-kit` with a real path (see section 14: it has no --help). Read its checks: Blender 5.2.2 (the full program), Xvfb for EEVEE, Node, Python packages, ffmpeg, and whether the rented-card settings exist (yes or no only). It writes machine-settings.env (BLENDER, BLENDER_DISPLAY). If Blender is missing, or free disk is under about 0.4 GB, I stop and say so.\n3. Reads, in the plugin's own order: make-explainer-film/SKILL.md and house-rules.md; the tips guide (kit/docs/LLM tips and tricks.md, sections 0, 4, 8, 8a, 19); surfaces-wear-and-construction/SKILL.md and the-required-steps.md; build-and-paint-a-place/SKILL.md; batched-rounds-and-card-time.md; construction-and-scale.md; blender-5-traps.md; the canal-lock worked example. Blender runs headless through `explainer-film-place` (it starts Blender itself). If a live Blender or the Blender MCP is connected I use it only to inspect or take thumbnails; anything it builds is saved to a file before the kit's commands (the skill's live-Blender route).\n\n4. STEP 0: THE PLAN FILES (the place-planner's job; I write them myself if the workflow is not used)\n\nWritten into plan/ from the kit's templates (kit/place-kit/data/templates/):\n- style-note.md from style_note.md: section 0 word for word. First line says PROVISIONAL if there is no reference.\n- real-world-facts.json from real_world_facts_template.json: every size as number, unit, kind, source, confidence. A number from memory stays \"guess\". To research: gauge; sleeper size and spacing; rail height; platform height above rail head and set-back from the track centre; platform length and width; goods-shed door size; loading-dock height (about wagon floor height); wagon length, width, height, wheel diameter, buffer height; signal post and arm; canopy and lamp-post heights.\n- Two traps in the generic facts, found by reading: door_height is 1.6 to 2.3 m and the scale check fails beyond 1.5 times that (3.45 m), so a 3.5 m goods-shed door would fail; cart_height is 0.5 to 2.4 m (fails beyond 3.6 m), so a wagon tagged as a cart is judged as a hand cart. The place's own facts replace the generic ones by id, and can be scoped by object name, so I write wagon and shed-door facts there. Then I read the audit's scale lines.\n- place-settings.json drafted with `explainer-film-place new-settings --scene start.blend --place \"railway station\" --type town --out place-settings.json`. Types are village, town, harbour, mine, farm, garden, interior, generic; nothing is rail-specific. Town fits (brick, stone, slate, paving); mine fits the industrial yard. I take town and then set look and state myself from your words. I add require_more {\"iron\": [\"grime\"]} (soot on ironwork), as the mine preset does. footfall lines (platform edge, crossings, forecourt path) and keep_clear shapes (cart-road wheel tracks, door thresholds, dock apron) go in so nothing grows there. A yard cart road gets a roads entry (gauge from the facts table, hoof prints only if horses pull the carts).\n- ownership.json: owners, frozen things (cameras, lights, world, render settings, ground height), set_by = the ground owner, contracts.\n- acceptance.json from the acceptance template, plus this place's tests (period accuracy, wagons stand on rails, platform height right).\n- 12 to 16 readable features a stranger could name at half size, for example brick station building, slate roof with chimneys, iron canopy columns, platform edge with coping, rails and sleepers in weedy ballast, goods shed with big timber doors, hand crane, goods wagon, loading dock, signal with arm, lamp posts, station name board, bench, crates and barrels, cobbled yard with ruts, rust, moss.\n- Views: at least three cameras named \"View <name>\" for the place checkers (1200 x 800), plus film cameras (tall frame, plate 1536 x 2730 at 64.4 degrees; film lens 60.4).\n- Card-time plan: each helper's allowance is a house number (builder 10 minutes, fixer 5, integrator 10, renderer 10, checker 3, planner 0; whole job 60), counted in one ledger (`card-time start --team-minutes N` only if you give a number).\n\n5. BEFORE BUILDING: THE CALCULATIONS (preflight shots, first run, from the brief)\n\nRough place-facts.json (views, subject, story props, signs, chimneys, support surfaces, kind of shot) from the planned layout in metres; check it with `python3 calculators/place_facts.py check`. Then:\n- `plan_shot.py --place-facts F --view V --plan`: camera where a person stands (eye 1.5 to 1.9 m above the surface under it, so on the platform), level, turned once and then only slid, as far back as the nearest story thing still reaches 0.70 down (aim 0.72), slide at most 1.29 times nearer, people at least 6 m away if any.\n- `view_audit.py audit` (name board and shed lettering at least 20 px tall; chimney, signal and water-tower tops below 0.24 down so they miss the typed words).\n- `plan_lights.py plan` (one narrow key for the subject, only a few shadow casters).\n- `plan_effects.py wind` (chimney smoke across the view, never away from it).\n- Then `explainer-film-preflight shots --project FOLDER --place-facts F` and fix what it lists. It runs again, on the real scene, after the place passes.\n- Kinds of shot are named per view (overview for the platform end; still_life for a story group; crowd only if passengers; dark_subject only if the signal is a silhouette). `settings.py profile` prints the rules each kind relaxes.\n\n6. PILOT SLICE (local, free, quick) BEFORE BRIEFING THE BUILDERS\n\nThe canal-lock lesson was \"build one small place of your own kind early and read every FAIL\". A railway has things the kit has never seen, so I make about 12 m of one track (rails, about 20 sleepers, a ballast bed), 6 m of platform with coping, one goods wagon standing on the rails, a 3 m wide shed door in a brick wall, one canopy column and girder, and one lettered name board. Then:\n- `explainer-film-place roles --scene pilot.blend --settings place-settings.json` and READ the guessed roles.\n- `explainer-film-place finish --scene pilot.blend --settings place-settings.json --quick --save-as pilot-finished.blend`; `construction`; `audit`; read every FAIL and LOOK (a quick audit is fine for a trial and is refused as a final).\n- A tiny local look at brick, steel rails, ballast and platform surface, because the brick, concrete, tarmac and steel recipes in surface-recipes.md are \"first guesses (invented)\".\n- Time the `finish`, because the largest place tried was 36 x 26 m (the canal lock took about 28 s for 94 objects).\n- What the pilot settles once: role tags, the facts-table overrides, owner names, mask cell size, whether wagons on rails pass the construction check. These go into every builder's brief.\n\n7. BUILD: GROUND FIRST AND FROZEN, THEN PARTS SIDE BY SIDE\n\nRun through workflow build-a-place (/explainer-film:build-a-place, or the Workflow tool) with args plugin, kit, folder, request (your words exactly), place, views, environment (this computer, disk, money rules), effort medium, checkEffort high, finals false, maxParallelBuilders 3, cardTeamMinutes only if you give one. Nothing from the README says the workflow has run under the real Workflow tool (it ran against canned helpers), so if it misbehaves I do the same phases by hand with the same agent files and commands.\n\nParts (3 to 8 allowed; each owner one collection \"Place: <owner>\", one stage_<owner>.py with idempotent apply(options)), each brief with its steps in priority order (1 structure from the ground up, 2 bevels and \"no two alike\" damage as shape, 3 roles and `finish-part --quick`, 4 extras):\n1. ground_and_bed (first, alone, then frozen): graded terrain with cutting or embankment, ballast bed for every track with shoulders (ground.gravel, displaced), platform decks at the real height (ground.stone_paving or ground.gravel), yard surface, cart road with ruts (`roads`), verge, ditch and puddle hollows, the cameras, sun and world. It states its promise to the others. A later change of platform height reseats everything and names each object that moved more than 3 cm, so it is set from the facts table at once.\n2. platforms: facing walls (wall.brick or wall.stone), coping (stone.footing, judged), steps and ramp (stone.step, rise 15 to 20 cm top to top), fences and gates (timber.fence).\n3. permanent_way: sleepers (timber.beam; a sleeper tagged post would fail its width check), rails (iron.sheet, judged), chairs, fishplates, spikes, point blades and lever (iron.fitting), buffer stops, signal posts and arms, telegraph poles (timber.post). Repeated small pieces are cheap, but every loose piece is a construction part, and the check samples more coarsely above 4,000 parts.\n4. station_house: brick walls (wall.brick), plinth, quoins, slate roof (roof.slate), chimneys (stone.chimney), window frames and glass (glass.window), doors (timber.door), cast-iron canopy with columns (iron.painted), girders (iron.sheet), brackets (iron.fitting), valance boards (timber.plank), glazed roof panes, gutters, steps. A doorway needs a floor behind it.\n5. freight_shed: goods shed, loading dock, hand crane (mast timber.post, jib timber.beam, chains iron.fitting), weighbridge and hut, coal stage, yard fence. Optional step 4: cattle dock, footbridge.\n6. wagons: two or three goods wagons on the sidings (body prop.cart, wheels prop.wheel, buffers and couplings iron.fitting). Poly Haven has no wagons, rails or cranes; they are scripted.\n7. furnishings: every lettered prop (name boards, platform signs, posters, shed fascia, invented wagon numbers: scripted with real lettering, fonts with open licences in props/fonts, lettering-sizes.json written first, readability_test.py at phone size), lamp posts and lanterns, benches (prop.furniture), trolleys, milk churns (iron.painted, judged), crates, barrels, sacks, buckets. Poly Haven supplies crates, barrels, ladder, lantern and bucket (CC0, each downloaded picture opened at full size to look for stickers and digits).\n8. people (only if you want them; kit figures script): backs to camera at 6 m or more, crowd across the view two deep, no faces, no long shadows.\nOwner names avoid role-hint words. Reading the code, I found that an untagged object takes a role from its collection name: \"Place: track_and_signals\" gives ground.dirt_road (wheel ruts), \"Place: goods_yard\" gives ground.earth, \"Place: rails_and_signals\" gives timber.fence. Neutral names such as permanent_way, freight_shed, furnishings and platforms fall to prop.generic, which the audit flags.\n\nEvery builder tags every object with its role AS IT IS MADE (pk.new_part_object(owner, role, name, mesh) or the place_role property). I never trust a guess. I ran the plugin's own guesser on railway names:\n- \"Rail 1\" -> timber.fence (wood surface, allowed to hang)\n- \"Railway track\" -> ground.dirt_road\n- \"Canopy column\" -> plant.foliage\n- \"Water tower\" and \"Water crane\" -> water.still\n- \"Station roof slate\" -> roof.shingle\n- \"Station building walls\" -> wall.plaster\n- \"Platform\", \"Sleeper\", \"Crane\", \"Footbridge\", \"Buffer stop\", \"Loading dock\", \"Weighbridge\" -> unknown, so prop.generic, and the audit fails when over 15 percent of objects are fallbacks.\n\nRules for all helpers (workflow RULES): spend no money beyond their card allowance; never commit; no keys or ids in files; never lower a requirement; never edit another owner's objects or any frozen thing; claims in reports are bare sentences with the tool that measured each; plain words, measured versus judged.\n\n8. COMBINE, FINISH, AUDIT, GATE (nothing is drawn before this passes)\n\nBy the integrator, in this order (ground alone first, because everything is seated on it and a combine that lists the ground with the rest fails the order test):\n1. `explainer-film-place combine --scene start.blend --stages stage_ground_and_bed.py --owners ownership.json --save-as ground-frozen.blend`\n2. `explainer-film-place combine --scene ground-frozen.blend --stages stage_platforms.py stage_permanent_way.py stage_station_house.py stage_freight_shed.py stage_wagons.py stage_furnishings.py --owners ownership.json --order both --save-as combined.blend` (plain order, reverse order and run twice must agree; zero ownership violations)\n3. `explainer-film-place finish --scene combined.blend --settings place-settings.json --facts real-world-facts.json --save-as finished.blend` (never --quick for the final). It turns curves, text and instances into meshes, tags roles, seats parts on the ground, makes UVs and 1024 px normal maps, displacement where the role says, roughness and colour variation, bevels, damage as shape, the nine wear layers in their fixed order, plants and litter, light, then saves, reopens and audits.\n4. `explainer-film-place construction --scene finished.blend --out construction.json` and `normals-test`.\n5. `explainer-film-place audit --scene finished.blend --settings place-settings.json --facts real-world-facts.json --out place-audit.json`, then `explainer-film-preflight place --place-audit place-audit.json --blend finished.blend --place-settings place-settings.json --reports REPORTS`. It must exit 0. I do not save finished.blend after the audit (a changed file makes it stale; audit again if I must).\nFixes: read the first FAIL, route it to the owner, at most two repair rounds before any picture. Expect several rounds: the canal lock failed 5, 2, 1 and then passed. Look for audit lines about weeds and the keep-out count (must be exactly 0), layer amounts, fallback roles, scale, and \"carried\". Budgets in the audit: 6,000,000 triangles in all, 1,500,000 per builder, 400,000 scattered pieces, a final draw of 90 s, card memory 12 GB, at least 20 plants and 30 litter pieces per 100 square metres. A treatment may be switched off only with an off entry and a true reason (at most a quarter of the pairs). Only you sign an accepted entry.\n\n9. LIGHT, RENDERER, PREVIEWS, STYLE GUARD\n\n- `explainer-film-place renderer-for --scene finished.blend` applies the rule: Cycles where lamps, lit windows, lanterns or fires are on (or water in view), otherwise EEVEE under Xvfb. If it says Cycles and no card is set up I say so and draw only tiny Cycles pictures, which are not a fair look. `rent status` and `rent balance` first; if jobs wait over 5 minutes while workers are idle I stop.\n- If lamps are lit: a real lamp inside each lantern, the glow box in front of it and hidden from its rays (a lamp inside its own glow box is blocked in Cycles); the glass is not brighter than the flame.\n- Previews by the renderer: one job, one wake-up, 1200 x 800, 96 samples, small JPGs back; half-size copies named by number for the blind reader.\n- `explainer-film-place measure PICTURE --make-guard --out style-guard.json`, PROVISIONAL unless you gave a reference. Look at 100 percent crops and phone-size crops, under flat light, side light and wet light.\n- Changes I am unsure of are tried in batches, not one at a time (section 12).\n\n10. COMPOSE THE FILM VIEWS (preflight shots again, then plates)\n\nAfter the place passes:\n- For each view an assemble script on the pit-village pattern (pit-village/assemble_notice_corner.py, set_dressing.py: place_prop, light_reaches, glow_material, export_for_film), with the planned camera. Story props touch as one group; work props are small, far and dim; nothing big and dark in the bottom-left; the tall frame is stacked in depth (crates and trolley near, wagon and platform in the middle, signal and chimneys far).\n- `make_check_file.py` writes each view's check file from the scene (I only write the story roles); then `BLEND=finished.blend paper-film/tools/check-shot.sh SCRIPT CHECK OUT -- --view V`. I read report.md and marked.jpg and fix the first problem only (camera first, then props, then light), and run it again.\n- `model_lint.py` on every model and on the dressed scene (stripes, same-plane faces, floors just over the ground, \".001\" copies, glass reading its picture's see-through).\n- Plate 1536 x 2730 from the start of the slide, with the render log checked (`plan_lights.py render-log` refuses a shadow fault). Then `explainer-film-preflight plates`. I run `paint_request.py request` (never sends) and quote the price from the live rate (it doubled in one day once). I stop there and ask once for your yes with the exact cost.\n\n11. FRESH CHECKERS, ONE FIX ROUND, FINAL GATE\n\nWorkflow phases Check, Fix, Re-check, Report:\n- Four fresh agents that never see builder reports: look (art style kept, lived in, construction makes sense, each planned feature), structure (recomputes the builders' claims with its own scripts), process (ledger against reports, privacy, leftovers such as preview cameras, disk, stale audit, batches and card seconds), and a blind reader who sees only half-size pictures. The reading test counts how many planned features it names (line 12 of 16; a crude keyword match, so judged).\n- A skeptic checks every finding, merges and ranks them. A squint-test miss, or any cure that would remove character, is reported and not \"fixed\": you decide.\n- Exactly one fix round (one fixer per owner, only confirmed findings), re-combine, re-audit, redraw only the changed views, then a DIFFERENT checker and a second blind reader.\n- Period accuracy is something no tool judges (tips guide section 19). I add one fresh critic given the era and an object list to flag anachronisms: signal type, lamp type, wagon type, enamel signs, lettering style.\n- Final gate on the saved file: `explainer-film-preflight place ... --place-pictures PICS --style-guard GUARD --fresh-check FRESH.json`. Full-size pictures are drawn once, at the very end, only if you asked.\n\n12. HOW I TEST CHANGES (cheapest first)\n\n1. Computed before building, no Blender: place_facts check, plan_shot, frame_geometry (project, boxes, reach, slide), view_audit, plan_lights, plan_effects.\n2. Each part, locally: `finish-part --quick`, `construction`, `normals-test` (correlation at least +0.25, plus a flipped control that must fail), `combine` for order and idempotence; always read FAIL and LOOK, and run the next step only when the first failure is fixed.\n3. Free scout: `explainer-film-place variations scout FILE.json` draws the batch here, tiny (240 x 160), and names the variations that would not show. It is not a batch.\n4. Batches on the card, only after the scout, inside the allowances. For each unsure change, about 10 settings far apart (`variations make --keys ... --range KEY LOW HIGH --count 10`), then `plan` (free), then `run FILE.json --where rented --helper NAME --role builder --ledger LEDGER` (up to 3 jobs at once, 600 x 400, one labelled sheet with measures and card seconds). I pick or combine and allow at most one more batch (`refine`); a third is refused. If a run is cut off, `variations collect RUN-FOLDER` finishes it without sending anything again. Candidates:\n- rust on rails and ironwork (amount.rust, dials.rust.band, runs, collar);\n- soot under the canopy and on chimneys (dials.grime.soot_under_shelter, runoff_streaks);\n- moss on coping and shed brick (dials.moss_and_algae.cover, damp_need, shade_need);\n- cracks and chips on brick (dials.cracks_and_chips.*);\n- weeds and rubbish in ballast and yard (look lived_in versus neglected, master 0.6 to 1.6);\n- shapes by a script hook (variation_hook.py): signal post lean, number of slipped slates, lamp lean.\n5. Every card job lands in the ledger; I report card seconds, batches, variations dropped before drawing and flagged after.\n6. I change the kit's code never. If I did, `python3 kit/calculators/tests/run_all.py` first.\n\n13. HOW I CHECK THE RESULT\n\n- Measured by tools: preflight place exit 0 with no stale audit; construction (every part carried within 5 mm, rest patch at least 16 square centimetres, longest span 1.38 m, floating gap over 5 mm fails, ground seating within 2 cm); normal maps pointing the right way; audit counts for treatments, layer amounts, keep-out zeros, roles, scale; model lint; picture measures against the guard (value range, detail energy 0.9 to 1.4 times the guard and never above 10, flat windows, palette, squint target 0.92 as a look); the shot checker's report; render logs (no \"Shadow buffer full\"); the card-time ledger against each helper's reported seconds.\n- Judged and reported as judged: how it looks (fresh checkers, reading test, the period critic), sizes taken from memory, the provisional guard, the cost estimate (never a bill).\n- I look myself at contact sheets and 100 percent crops with the Read tool, and at phone size (about 300 px wide), asking what each thing could read as (a signal as a lamp post, rails as a bar chart).\n\n14. WHAT I FOUND WHILE READING (for the plugin owner)\n\n- The hook's word list has no station, railway, rail, track or platform. It fired on your sentence only because of \"Blender\" and \"yard\". \"Build an old railway station for a film.\" and \"Make a railway station with platforms and tracks for the film\" print nothing, so the reminder would not appear.\n- The name-hint traps in section 7 (collection names too). There is no rail, sleeper, platform or signal role; my tags are judged choices.\n- The generic scale facts (door, cart) would fail a goods-shed door and a wagon.\n- `explainer-film-setup` has no --help and does not guard a failed cd. I ran `explainer-film-setup --help` by mistake: it treated \"--help\" as the target folder, mkdir printed its own usage and cd failed, leaving TARGET empty, so the later copy and mkdir lines would have written to the filesystem root. I listed the root afterwards and found nothing new, and the plugin folder had no changed files. I would not have run it that way.\n- Not tested in the plugin, so I would say so: a place larger than 36 x 26 m (a station slice is bigger); Cycles with the kit on a large place; the rented-card client against a real endpoint (only the variations batch went through your own client); the build-a-place workflow under the real Workflow tool; that a smaller model loads the skill by itself.\n\n15. MONEY AND APPROVALS\n\nFree: everything through the audit, tiny local previews, scouts, the paint request's price. Rented-card time only if a card is set up and you agree; the tools refuse past each allowance and the ledger shows every second (real batches used 104 to 180 card seconds, about US$0.05 as an estimate). Painting is a 2k repaint with a style picture, about 44 US cents at 4.8 cents a megapixel when it was read, so I read the live price first. Narration and filming are not part of this request. A vague reply is not a yes, and a refusal is never worked around.\n\n16. THE REPORT (plain words)\n\nWhat I did; what the audit measured, with numbers; what was measured and what only judged; what I switched off with a reason, accepted or ran quick; what I did not test; every failure and what I did; the card seconds and batches; what waits for your decision (the provisional guard, any squint miss, accepted items, the paid painting). Files delivered: finished.blend, place-settings.json, real-world-facts.json, style note, place-audit.json, the preflight reports, contact sheets, the view check files, and a project-notes entry.",
+   "plugin_parts_used": [
+    "skills/make-explainer-film (SKILL.md master steps; house-rules.md)",
+    "skills/surfaces-wear-and-construction (SKILL.md, the-required-steps.md, construction-and-scale.md, surface-recipes.md, wear-recipes.md, style-rule-and-measures.md, fresh-checkers.md, rendering-on-rented-cards.md, batched-rounds-and-card-time.md, blender-5-traps.md, worked-examples-garden-and-canal-lock.md)",
+    "skills/build-and-paint-a-place (views, shot planning, plate, paint request; stop before paying)",
+    "skills/make-3d-models (+ blender-mcp-notes.md: modelling notes, model lint, headless Blender)",
+    "skills/check-and-critique (only its list of what critics must still judge; page steps only if pages follow)",
+    "agents/place-planner.md",
+    "agents/place-builder.md (one per part, ground first)",
+    "agents/place-integrator.md (combine, audit, gate)",
+    "agents/place-renderer.md",
+    "agents/place-checker.md (modes look, structure, process, blind_reader, recheck, skeptic)",
+    "agents/film-critic.md (optional, for the period-accuracy critique of stills)",
+    "workflows/build-a-place.js (/explainer-film:build-a-place; by hand with the same phases if it fails)",
+    "hooks/hooks.json and hooks/place-reminder.py (UserPromptSubmit reminder; fires on this request)",
+    "bin/explainer-film-setup (kit copy, Blender, Xvfb, machine-settings.env)",
+    "bin/explainer-film-place (verbs: new-settings, roles, finish, finish-part, surfaces, roads, damage, age, grow, light, construction, normals-test, audit, undo, combine, fingerprint, ownership-diff, renderer-for, render, rent, measure, crops, variations make/scout/plan/run/collect/refine/sheet/keys, card-time)",
+    "bin/explainer-film-preflight (stages shots twice, place, plates; --gate; --list)",
+    "kit/calculators: place_facts.py, plan_shot.py, frame_geometry.py, view_audit.py, plan_lights.py, plan_effects.py, place_audit_check.py, picture_measures.py, paint_request.py (request and price, never sends), plan_budget.py (ledger), settings.py; film-settings.json",
+    "kit/place-kit: data/roles.json, surfaces.json, real_world_facts.json, looks/, place_types/town.json, polyhaven_choices.json, templates (style_note.md, part_brief.md, real_world_facts_template.json, acceptance_tests_template.json, stage_template.py, variation_hook.py), examples (canal-lock settings, ownership, variations)",
+    "kit/paper-film/blender: pit-village/ (set_dressing.py, assemble_notice_corner.py, fetch_street_textures.py, props/ scripted_kit.py, build_scripted_props.py, paint_prop_pictures.py, readability_test.py, make_sheet.py, poly_haven scripts, fonts), figures/build_figures.py (only if people), model_kit.py, textures.py, model_lint.py, make_check_file.py, shot_facts.py, set_measurements.py; paper-film/tools: check-shot.sh, check_shot.py",
+    "kit/docs: LLM tips and tricks.md; paper-look - 07 Composing a shot.md; paper-look - 00 START HERE.md",
+    "Not used for this request unless the whole film is wanted: research-and-script, check-facts, record-narration, paint-and-cut, build-cinema-page, film-and-finish, agents page-builder and fact-checker, workflows verify-facts, test-script-with-newcomers, critique-film, check-fixes, build-pages"
+   ]
+  }
+ ],
+ "judged": {
+  "passed": false,
+  "findings": [
+   {
+    "problem": "Neither plan builds missing pieces (a missing slate or tile, a gap in the deck, a broken crate slat). Both trust the pass to do it, and the pass never removes a piece. Plan A lists only 'chipped corners, a bowed board, piles a little out of plumb'. Plan B lists only 'slipped slates' and a leaning signal post. Plugin text that caused it: SKILL.md REQUIRED step 2 says finish 'adds ... cracks, chips, edge wear, ... and damage as shape'; wear-recipes.md says '`derelict`: adds cracks, sag, missing pieces and heavy moss. A ruin.' The code says the opposite: damage.py, 'Not done (said plainly): replaced boards, missing or slipped tiles and spalled corners as real holes'.",
+    "where": "skills/surfaces-wear-and-construction/SKILL.md (REQUIRED block, step 1); skills/surfaces-wear-and-construction/wear-recipes.md (the four looks, derelict line); kit/place-kit/place_kit/surfaces/damage.py (docstring)",
+    "fix": "Add one sentence to REQUIRED step 1: 'The pass bends, chips and leans parts but never removes one. Build a few missing, slipped or replaced pieces yourself as you build (a missing slate, a gap in the planking, one new board among grey ones).' Change the derelict line to: 'adds cracks, sag and heavy moss (missing pieces are built by the builder as shape)'.",
+    "severity": "should fix"
+   },
+   {
+    "problem": "Grime where things touch and where water runs is missing from both plans. Plan A plans only the tide line. Plan B names soot and run-off streaks on walls and nothing on the ground. The kit does not make these marks either. The dirt layer darkens only an object's own foot. Ground roles have grime soot, run-off and damp band all set to 0. No layer darkens the ground under a crate, a stall or a wagon, round a post's foot, stone below a rusty bollard ring, the drip line under eaves, a spout's spill or a slipway's run-off. Plugin text that caused it: the wear-recipes.md grime row, 'sheltered places and under projections; soot above hearths and chimneys.' No file mentions contact grime or water running on the ground.",
+    "where": "skills/surfaces-wear-and-construction/wear-recipes.md (layers table, grime row); kit/place-kit/data/roles.json (class ground, grime dial defaults)",
+    "fix": "Add to the grime row: 'The layers darken an object's own foot and the wall under a sill. They do NOT darken the ground where a thing stands (under a crate, stall or wagon, round a post), stone under iron (a rust run below a ring), or where water runs on the ground (the drip line under eaves, a spout's spill, down a slipway). Build those as a few big, soft, darker designed shapes in the part that owns the thing.' Add 'grime where things touch and where water runs' to the list in SKILL.md REQUIRED step 1.",
+    "severity": "should fix"
+   },
+   {
+    "problem": "Neither plan makes the rubbish that belongs to the place's own work. Plan A has no fish-market rubbish (scraps, crushed ice, broken fish boxes, rope ends). Plan B has only the kit's generic rubbish and no coal, cinders or ash at the coal stage or between the rails. The kit scatters only leaf, pine needles, stick, straw and clod (species.json). Plugin text that caused it: the wear-recipes rubbish row, '| rubbish | leaf litter, straw, wet straw, mud |'. Its list 'What the kit does NOT make: seaweed, barnacles, shells, foam and reeds' names no trade rubbish.",
+    "where": "skills/surfaces-wear-and-construction/wear-recipes.md (rubbish row; the 'What the kit does NOT make' sentence)",
+    "fix": "Extend that sentence: '... nor the rubbish of the place's own work (fish scraps, crushed ice and broken fish boxes at a market; coal, cinders and ash at a station or mine; sawdust at a mill): the props part builds a few big designed pieces where the work happens.'",
+    "severity": "should fix"
+   },
+   {
+    "problem": "The plugin's default state of 'dry' turns off every wet mark, including at the water's edge and in puddle hollows. Plan B followed the table and chose dry for an old station, so its planned ditch and puddle hollows would stay dry. A model that follows the same table for a harbour with no weather words would lose the wet quay foot. Plan A avoided this only by its own judgement (damp). Plugin text that caused it: SKILL.md, 'Wet, rainy, after rain, puddles: state `wet`. Damp, misty, drizzle, dew, shaded ground under trees: `damp`. Otherwise `dry`.' In the code, dials.py has STATE_WETNESS = {'dry': 0.0, ...}, and wetness.py says 'dry (amount 0 ...), which the audit accepts'. The harbour preset's require_more stone wetness then means nothing.",
+    "where": "skills/surfaces-wear-and-construction/SKILL.md (Choose the look and state); kit/place-kit/place_kit/wear/dials.py",
+    "fix": "Replace 'Otherwise `dry`.' with: 'Otherwise `damp` outdoors where there is water, a ditch, a pump or deep shade; `dry` indoors or when the words say dry, sunny, dusty or hot. `dry` switches every wet mark off, also at the water's edge and in puddle hollows.'",
+    "severity": "should fix"
+   },
+   {
+    "problem": "The harbour preset switches off plants and litter on the whole quay paving by default. Plan A plans no weeds and no litter on its main ground, and says it would keep this off entry 'if I judge the reason true'. settings_file.defaults_for copies every allowed_off entry into the settings as an 'off' entry. The reason promises something no tool does: 'a working quay is swept and salted: weeds only in cracks, set by the place'. Footfall already keeps exactly zero plants where feet go. The plugin's own canal-lock example cleared off to [].",
+    "where": "kit/place-kit/data/place_types/harbour.json (allowed_off quay_no_growth); kit/place-kit/place_kit/settings_file.py defaults_for",
+    "fix": "Smallest data change: remove the quay_no_growth entry, or at least drop 'litter_pieces' from it, and change its reason to: 'keep the walking strip clear with footfall; weeds stay at the wall foot, round bollards and in the back joints'. No test names this id (checked by grep).",
+    "severity": "should fix"
+   },
+   {
+    "problem": "The role guesser misreads ordinary railway and building names. I checked Plan B's list and it is right: 'Rail 1' becomes timber.fence, 'Railway track' becomes ground.dirt_road, 'Canopy column' becomes plant.foliage, 'Water tower' and 'Water crane' become water.still, 'Station roof slate' becomes roof.shingle and 'Station building walls' becomes wall.plaster. The collection 'Place: track_and_signals' turns every untagged object in it into ground.dirt_road. Harbour names fail too: 'Roof tiles' and 'Slate roof' become roof.shingle, 'Timber wall' becomes wall.plaster, and 'Market floor flagstones' becomes ground.stone_paving instead of floor.stone. These are wrong guesses, not fallbacks, so the 15 percent fallback gate does not catch them. A dirt-road guess also gets a road drafted and ruts cut by finish (SKILL.md: 'it drafts place-settings.json ... with a road for every dirt-road object'). Both plans tag every object by hand, so neither was hurt, but a smaller model that leaves names to the guesser would be.",
+    "where": "kit/place-kit/data/roles.json (name_hints: roof.shingle '\\broof\\b', wall.plaster '\\bwall\\b', ground.dirt_road '\\btrack\\b', plant.foliage 'canopy', water.still '\\bwater\\b', timber.fence '\\brail\\b'); kit/place-kit/place_kit/roles.py hint_role (ties go to the first role in table order)",
+    "fix": "In hint_role, when two roles match at the same rank, keep the one whose matched hint is longer, so 'slate' and 'tile' beat 'roof'. Narrow four hints: 'canopy' only with tree or leaf words; water.still not when tower, crane, tank, butt or pump follows; track not when rail or railway is in the name; rail not when railway is in the name. Add these names to the guesser's test.",
+    "severity": "should fix"
+   },
+   {
+    "problem": "explainer-film-setup does not check its folder argument. Plan B ran it with --help by mistake. `mkdir -p \"--help\"` prints mkdir's help, then `TARGET=\"$(cd \"$TARGET\" && pwd)\"` fails without stopping the script. I simulated only that line here, writing nothing. On this bash, TARGET becomes cd's help text, so the later `mkdir -p \"$TARGET/...\"` and `cp` lines would make a junk folder tree in the current folder and copy the kit into it. On a shell where cd prints its error to stderr, TARGET is empty and the writes go to the filesystem root. I found no leftovers at / and no 'cd: cd...' folder within 6 levels.",
+    "where": "bin/explainer-film-setup (lines 15-18)",
+    "fix": "Add `case \"$1\" in -h|--help) echo \"Use: explainer-film-setup /path/to/work/film-kit\"; exit 0;; esac` before TARGET is set, and change the line to `TARGET=\"$(cd \"$TARGET\" 2>/dev/null && pwd)\" || { echo \"cannot open $TARGET\"; exit 2; }`.",
+    "severity": "should fix"
+   },
+   {
+    "problem": "The reminder hook stays silent for many plain place requests that do not say Blender or 3D. Tested: 'Build an old railway station for a film.', 'Make a railway station with platforms and tracks for the film', 'Make a fish market by the sea for the film', 'Build a street with shops', 'Build a bridge over a river', 'build a pier', 'Make a factory for the film'. The skill's own description names street, bridge and road, but the hook does not. Both newcomer requests said 'in Blender', so the hook fired for both and this did not cause a miss here.",
+    "where": "hooks/place-reminder.py (PLACE_WORDS)",
+    "fix": "Add the safe words street|lane|railway|station|market|pier|wharf|shed|stable|forge|smithy|chapel. Leave out software-sounding words (bridge, factory, dock, jetty, platform). Add the two railway sentences to the hook's test.",
+    "severity": "should fix"
+   },
+   {
+    "problem": "Plan B never says in words 'make every planned change in one sweep, then look once'. Its shot loop, and Plan A's, fixes one problem at a time. That is what the tips guide tells them, and it reads as the opposite of the batch rule. Plugin text that caused it: tips guide section 0 item 3, 'Make one change, then measure again ... fix problem 1 only and run it again', and build-and-paint-a-place step 3, 'Fix the first problem only, then run it again'. Section 8a.16 of the same guide says 'Make every change in ONE sweep, then look once.'",
+    "where": "kit/docs/LLM tips and tricks.md (section 0 item 3); skills/build-and-paint-a-place/SKILL.md (section 4 step 3); skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md (section 7)",
+    "fix": "Add to both one-at-a-time lines: '(this is for measured checks that run here and cost no card time; a look at a picture follows the batch rule: one sweep, then one look)'. Add 'the shot checker's camera, props, light order' to batched-rounds section 7, 'When NOT to use a batch'.",
+    "severity": "minor"
+   },
+   {
+    "problem": "The rules give two picture sizes for 'small'. The first screen, README and tips 8a.18 say 'Small quick pictures (600 x 400) until the end'. The renderer agent and rendering-on-rented-cards.md draw the checkers' previews at 1200 x 800 and 96 samples, which Plan B used.",
+    "where": "skills/surfaces-wear-and-construction/SKILL.md (REQUIRED step 4); kit/docs/LLM tips and tricks.md 8a.18",
+    "fix": "Write: 'small quick pictures until the end (600 x 400 for trying variations, 1200 x 800 for the checkers' previews); full-size pictures once, at the very end'.",
+    "severity": "minor"
+   },
+   {
+    "problem": "The house rule and the workflow disagree on effort, and the workflow cannot choose a model. house-rules.md says 'Run helpers at the effort the user asks for (the austerity project: medium, never higher)', but build-a-place.js has `const CHECK_EFFORT = ARGS.checkEffort ?? 'high'`. Plan A overrode the checkers to medium and Plan B kept them at high. Plan A also noticed that the workflow takes no model argument, so the person's 'use Opus 5.5 as subagents' cannot be passed through it.",
+    "where": "skills/make-explainer-film/house-rules.md; workflows/build-a-place.js (line 74)",
+    "fix": "Make the default checkEffort 'medium', or add 'checkers at high unless the person says otherwise' to the house rule. In the workflow's args notes, say the helpers run on the session's model.",
+    "severity": "minor"
+   }
+  ],
+  "evidence": "What I did (read-only on the plugin; I changed no plugin file):\n- Read both plans in full, then the plugin text they used: README, surfaces-wear-and-construction (SKILL, the-required-steps, batched-rounds-and-card-time, wear-recipes, construction-and-scale, style-rule-and-measures, the size lines of rendering-on-rented-cards), the place-planner, place-builder and place-checker agents, the head and effort lines of workflows/build-a-place.js, the hook, the harbour and town presets, the looks, species.json, roles.json hints, tips guide 0 and 8a, and build-and-paint-a-place step 4. I searched the 1.4.0 report (workflow_result_A.json) for these issues. The earlier newcomers had already raised quay_no_growth, and it was not changed.\n- Checked in the kit code: settings_file.defaults_for copies every preset off entry; dials.STATE_WETNESS dry = 0.0, so wetness is 0 everywhere in dry state; damage.py says missing, slipped or replaced pieces are 'Not done'; grime.py uses no contact or ambient occlusion, and the ground class has soot, run-off and damp band at 0; the dirt foot band is the object's own foot.\n- Ran the hook on 15 sentences: the railway, market, street, bridge, pier and factory requests are silent; requests with harbour, village, or 'build' plus 'yard' fire.\n- Ran the kit's own guesser (roles.hint_role, plain Python) on 31 names and 12 collection names with /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/judge-blind-newcomers-round2/guess_names.py. Every misreading Plan B reported is confirmed, plus the harbour ones listed in the findings.\n- Checked Plan B's numbers against film-settings.json: door 1.6 to 2.3 m with fail factor 1.5 (3.45 m), cart_height up to 2.4 m, budgets of 6,000,000 and 1,500,000 triangles, 400,000 scattered pieces, 90 s, 12 GB, 20 plants and 30 litter per 100 m2, 4,000 parts checked. All are correct.\n- Read bin/explainer-film-setup and simulated only its folder line in a subshell; nothing was written. Searched for leftovers at / and for a 'cd: cd...' folder down to depth 6 and found none.\n- Tests without BLENDER: python3 kit/calculators/tests/run_all.py exited 0, with 43 files (39 passed, 0 failed, 4 skipped) and 1579 checks (0 failed). The log is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/judge-blind-newcomers-round2/tests-without-blender.log.\n\nNot done: no plugin edits (this step judges and proposes); no Blender run, no picture and no card time; tests with BLENDER set were not run, because I changed no plugin file. I did not test whether the audit's plants and litter minimum per 100 m2 still passes a harbour once quay_no_growth is removed. I did not draw anything to see whether the kit's generic rubbish reads as trade rubbish.\n\nTwo stray items in the plugin folder were left by earlier steps, not by me: the untracked file kit/place-kit/place_kit/variations/scout.py and the modified README and agent files.",
+  "pictures": [],
+  "summary": "Both blind newcomers picked up the treatment on their own, from plain requests: the whole finishing pass, construction, real sizes, the style rule, the measures, the audit and preflight, fresh checkers and the batch rule. Both fall short on the same \"where it belongs\" details, and each miss comes from plugin text that promises more than the kit does or says nothing.\n\nPLAN A, the fishing harbour with a fish market:\n- Normal maps: yes, through finish, normals-test and its own checks.\n- Displacement: yes, through the pass on paving and stone walls, but not named.\n- Dirt: yes, through the pass, with footfall strips planned.\n- Grime: partly. It builds the tide line as shape. Nothing where things touch or where water runs.\n- Weeds: partly. None are planned, and the preset would switch plants off on the whole quay.\n- Moss: yes, on the quay foot and the piles.\n- Weathering: through the pass only, not named.\n- Damage: partly. It plans chips, a bow, a lean and a crack batch, but no missing pieces.\n- Wetness: yes. It chose damp, kept the wet cobbles and kept the hosed market floor wet.\n- Rubbish: no. There is no fish-market rubbish, and the preset would also switch litter off on the quay.\n- Construction and scale: yes, strong.\n- Style rule, measures, audit and preflight, fresh checkers: yes.\n- Batched testing: yes, in full. One sweep then one look, 10 variations with --range, a free scout, plan, one run on the rented cards, one sheet, at most one refine, small previews, full size once at the end, allowances and card seconds.\n\nPLAN B, the old railway station with a goods yard:\n- Normal maps and displacement: yes.\n- Dirt: through the pass only.\n- Grime: partly. Soot and run-off streaks on walls, nothing where things touch.\n- Weeds and moss: yes.\n- Weathering: through the pass only.\n- Damage: partly. Cracks, chips, slipped slates and a lean, but no missing pieces.\n- Wetness: no. It chose state dry, which sets every wet mark to 0, so its puddle hollows stay dry.\n- Rubbish: partly. Only the kit's generic kind, no coal, cinders or ash.\n- Construction: yes, with a pilot slice.\n- Scale: yes, and it found the door and cart traps.\n- Style rule, measures, audit and preflight, fresh checkers: yes, plus a period critic.\n- Batched testing: yes. It never states \"one sweep, then one look\" in words.\n\nThe fixes are short text or data changes:\n- Say the pass never removes pieces, and correct the derelict line.\n- Add grime where things touch and where water runs to the grime row and the first screen.\n- Add the place's own trade rubbish to \"What the kit does NOT make\".\n- Make damp the default outdoors where there is water or shade, and say that dry switches every wet mark off.\n- Remove the quay_no_growth entry from the harbour preset.\n\nOther faults found and checked:\n- The role guesser misreads railway and roof names.\n- explainer-film-setup does not check its folder argument (a bad argument such as --help).\n- The hook stays silent for railway, station, street, bridge and market requests that do not say Blender or 3D.\n- Minor wording conflicts on one-change-at-a-time, the 600 x 400 versus 1200 x 800 preview size, and checker effort.\n\nI changed nothing in the plugin. The tests without Blender pass: 39 passed, 0 failed, 4 skipped."
+ },
+ "fix": {
+  "summary": "I fixed every blocking and should-fix finding, and every cheap minor one, in the plugin only. Two fixes go a different way from the one proposed, and one finding is partly left out on purpose. Nothing was committed or pushed, and no rented card was used.\n\nFROM THE VERIFY STEP\n1. BLOCKING, Poly Haven list left over from the one request: FIXED.\n   - polyhaven_choices.json is now a small, even-handed sample. I read it from Poly Haven's public asset list on 23 October 2026. No name, key or personal detail was sent.\n   - Textures: 26, one or two per kind of surface (ground 11, floors 2, walls 5, metal 2, roofs 3, wood 3). Before: 6 mud, 4 forest floor and 4 thatch or reed.\n   - Models: 17 everyday props from streets, yards and quays. No wicker, ladders, stumps, lanterns or jugs.\n   - Each entry has its real size, read from the list.\n   - The 'not_found' list and its sentence are gone. The text now says plainly that this is a sample and not a shopping list, and that the helper must search the site for what its own place needs.\n   - surface-recipes.md now has a worked example first and the neutral line \"If Poly Haven has no model of a prop you need, build it in a script.\"\n   - The licence note was updated.\n   - Three per-surface picks in surfaces.json were also fixed: one name (gravel_embedded) is not on the site, slate pointed to a wall slate, and brick pointed to a mossy brick floor.\n   - The guard test now also keeps out anvil, anvils, smithy and smithies (as hashes). It has 4 new checks: no not_found list, every kind of surface present, no role over two textures and ground at most half, and the text says \"sample\" and \"search the site\".\n2. SHOULD FIX, faint tint counted as \"measurably different\": FIXED, by the fallback the finding allowed.\n   - I tried the proposed rule (a pair is different only when the changed share reaches its limit) on the saved per-camera numbers of the two real batches. Nothing was drawn again.\n   - The card's verdict changed on 7 moss pairs, and the scout then missed one of them: 21 of 22 instead of 22 of 22. So I kept the measured rule.\n   - Instead, a pair that is different only through the mean is now named \"may not be visible\". It is kept, not dropped. The note shows on the sheet, in the run report, in the scout, and in `plan` when it reads the scout. The variation's own tile is flagged too.\n   - The rule page now says \"measurably (not always visibly) different\", with the tiny-wall example.\n   - The tiny-wall case is a new test, built with the same numbers.\n   - On the saved batches: the tiny wall gets the note for v10 against the saved scene and for v07 against v09, as the verify saw by eye. The real moss card batch gets it for v10 (on the sheet it looks the same as the baseline). The real cracks proof batch gets none.\n   - The 15 + 7 nearly-the-same pairs are unchanged.\n3. Minor, finish called tagged roles \"guessed from names\": FIXED. `finish` and `new-settings` now count \"N from place_role tags, M from settings rules, K guessed from names\". There is a test with tagged objects whose names match no hint.\n4. Minor, variation names are percent of the range: FIXED. The sentence is in the `make` PASS line, the made file's text, the example file and step 2 of the rule page, e.g. \"crackwid25 = a quarter of the way from 0.002 to 0.05 m, that is 0.014 m\". There is a test.\n5. Minor, `--helper YOUR-NAME`: FIXED. It is now `--helper builder-walls`, with \"a short name for this helper, never a person's name\". I changed this in all three REQUIRED blocks (still identical), in build-and-paint-a-place line 126, in the skill's table and in the rule page.\n6. Minor, a local run uses up a batch and the plan shows a card estimate for it: FIXED.\n   - The rule page (step 5 and section 6) and the run's own line now say a `--where local` run counts as one of the two batches and the scout does not.\n   - When the batch will be drawn here, `plan` says \"drawn here it uses no card seconds (if it were sent to the cards: about N)\". There is a test.\n7. Minor, the place-kit README left out the fourth real batch: FIXED (the proof batch, 178 card seconds, is added).\n8. Minor, 'smithy' part in a workflow test: FIXED (now pump_house).\n9. Minor, doubled line in the preflight command's top note: FIXED.\n10. Older than 1.4.0 (the author handle 'AHepi' in plugin.json and the install line, machine paths in old film files): NOT CHANGED. You decide.\n\nFROM THE NEWCOMER JUDGE\n1. The pass never removes pieces: FIXED. REQUIRED step 1 (same in all three skills) says so and tells the builder to build missing, slipped or replaced pieces as shape. The derelict line no longer says \"missing pieces\".\n2. No grime where things touch or where water runs: FIXED. The grime row in wear-recipes.md and REQUIRED step 1 now say what the layers do not darken and to build it as a few big, soft, darker shapes.\n3. No rubbish from the place's own work: FIXED. The \"What the kit does NOT make\" sentence now names it (fish scraps, coal and ash, sawdust). I also added these three gaps to the look checker in place-checker.md.\n4. dry turns off every wet mark: FIXED. With no weather words the skill now says damp outdoors near water, a ditch, a pump or deep shade; dry indoors or when the words say dry; and that dry switches every wet mark off. The new-settings message says the same.\n5. Harbour quay_no_growth: FIXED (removed). The canal lock, a harbour-type place with no off entry, already passed its audit with 66 plant and 101 litter pieces.\n6. Role guesser misreads: FIXED, a different way from the one proposed. \"Longer match wins\" would have turned the earlier test name \"Fence post 3\" into a fence.\n   - The bare words roof, wall and house are now \"weak\" hints: at the same place (the name, a collection, a material) any other hint beats them, and the name still counts more than a material.\n   - \"Station roof slate\" and \"Slate roof\" are slate roofs, \"Roof tiles\" a tile roof, \"Timber wall\" timber planks, \"Market floor flagstones\" a stone floor.\n   - \"Railway track\", \"Water tower\", \"Water crane\" and \"Canopy column\" now stay unknown instead of a wrong guess. The track_and_signals collection no longer makes dirt roads.\n   - Not fixed: \"Rail 1\" alone is still a fence (the name gives nothing else to go on), and \"Station building walls\" is still the general plaster wall.\n   - My first version let a material hint beat a weak name hint. The Blender test caught it: \"wall_north\" with material \"wall_mat\" became a carpet. I fixed it before the final runs.\n7. explainer-film-setup with a bad argument: FIXED. --help prints the use line and makes nothing. Any other word starting with - stops with exit 2. A folder it cannot open, or /, stops before anything is copied. There is a test.\n8. Hook silent for plain place requests: PARTLY FIXED.\n   - Added: street, railway, pier, wharf, chapel, and station and market only in place phrases (railway station, fish market, market square).\n   - The 6 judge-style requests now get the reminder. \"Market analysis\", the plugin marketplace file, a street address parser and a docking station stay silent (tested).\n   - Left out on purpose: stable and shed (fire on \"make the build stable\" and \"shed light\"), smithy (now a kept-out word), forge (same trade), lane (an earlier step made \"road\" the one word).\n9. Minor, one change at a time against the batch rule: FIXED, in the tips guide section 0 item 3, build-and-paint-a-place step 3, and the rule page's \"When NOT to use a batch\".\n10. Minor, two \"small\" sizes: FIXED. REQUIRED step 4 and tip 8a.18 say 600 x 400 for trying variations and 1200 x 800 for the checkers' previews.\n11. Minor, effort and model: FIXED IN WORDS. I did not change the default. The house rule and the workflow notes now say checkers run at high unless told otherwise, to pass checkEffort 'medium' when the person or project says \"medium, never higher\", and that helpers run on the session's model (the workflow has no model argument).\n\nDEVIATIONS.md has a new section recording all of this.\n\nFAILURES OF MY OWN (all fixed before the final runs)\n- The first Blender run failed 4 checks in test_place_blender because of my first guesser version (see judge item 6).\n- An earlier script attempt stopped before writing anything.",
+  "files_changed": [
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/polyhaven_choices.json",
+    "what": "Rebuilt: small, even-handed sample (26 textures by kind, 17 everyday props) read from Poly Haven's public list on 23 October 2026, real sizes, no not_found list, says it is a sample and to search the site"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/surface-recipes.md",
+    "what": "Poly Haven section rewritten: sample, example first, search the site, neutral 'build it in a script' line"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/surfaces.json",
+    "what": "Three per-surface Poly Haven picks corrected (gravel_road, roof_slates_02, brick_wall_001)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/SOURCES-AND-LICENCES.md",
+    "what": "Poly Haven line describes the new sample"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_generic.py",
+    "what": "Hashes for anvil(s) and smithy/smithies; 4 checks that the Poly Haven sample is even-handed and has no not_found list (18 checks)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_build_a_place_workflow.py",
+    "what": "Part 'smithy' renamed 'pump_house'"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/compare.py",
+    "what": "pair_differences marks 'faint' pairs (different only by the mean) and returns faint, faint_against_baseline and the limits; note at the top explains why the rule itself was kept"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/runner.py",
+    "what": "faint_lines(): 'may not be visible' lines and flags on the sheet, in the report and in the result file; plan repeats the scout's faint pairs; plan says 'if it were sent to the cards' when drawn here; a local batch says it counts as one of the two"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/scout.py",
+    "what": "Scout reports and stores faint pairs; final line no longer says simply 'measurably different' when some are faint; faint_in_scout() for plan"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/spec.py",
+    "what": "name_note(): names are percent of a setting's range, with the real value at 25 percent; written into made files"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/variations/verb.py",
+    "what": "make PASS line explains the names"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/examples/canal-lock-cracks-variations.json",
+    "what": "About text explains crackwid25"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_variations.py",
+    "what": "Tiny-wall faint case, faint and clear cases kept apart, plan's faint line from the scout, local plan wording, name note (116 checks with Blender)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md",
+    "what": "Names as percent, 'may not be visible' in the scout step, --helper builder-walls (never a person's name), local run counts as a batch, 'measurably (not always visibly) different' with the tiny-wall example, the shot checker's one-at-a-time order in 'When NOT to use a batch'"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/settings_file.py",
+    "what": "role_sources() and role_sources_text(): tags, rules, guesses counted apart"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/commands.py",
+    "what": "Drafted-settings and new-settings messages count roles by where they came from; look-and-state message gives the new damp/dry rule"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/roles.py",
+    "what": "hint_role: weak name hints (bare roof, wall, house) lose to any other hint at the same place; rank first"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/roles.json",
+    "what": "weak_name_hints for roof.shingle and wall.plaster; track, rail, canopy, water and flagstone hints narrowed; timber-wall and floor-flagstone hints added"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/check_presets.py",
+    "what": "Also checks weak name hints are valid patterns"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_roles.py",
+    "what": "Second-round names, collection track_and_signals, weak-hint and wall_mat cases, role counts by source (70 checks)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/SKILL.md",
+    "what": "REQUIRED block: pass never removes pieces, contact and water-run grime built as shape, --helper builder-walls, 600x400 and 1200x800 sizes; damp/dry state rule; table helper name"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/make-3d-models/SKILL.md",
+    "what": "Same REQUIRED block changes (identical)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/build-and-paint-a-place/SKILL.md",
+    "what": "Same REQUIRED block changes; helper name at line 126; shot-checker one-at-a-time note"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/wear-recipes.md",
+    "what": "Grime row: what the layers do not darken; derelict line corrected; trade rubbish named in 'does NOT make'"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/agents/place-checker.md",
+    "what": "Look mode looks for missing pieces, contact and water-run grime and trade rubbish"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/data/place_types/harbour.json",
+    "what": "quay_no_growth removed; note says keep the walking strip clear with footfall"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/bin/explainer-film-setup",
+    "what": "--help prints the use line; a word starting with - stops; a folder it cannot open, or /, stops before copying"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_skills.py",
+    "what": "Check (10): setup --help and -q make nothing and exit 0 and 2"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/hooks/place-reminder.py",
+    "what": "Place words street, railway, pier, wharf, chapel, station and market (place phrases only); note example"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_hook.py",
+    "what": "6 new place requests that fire, 5 new non-matches (46 checks)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/docs/LLM tips and tricks.md",
+    "what": "Section 0 item 3 note (measured checks vs looks); tip 18 gives both preview sizes"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/skills/make-explainer-film/house-rules.md",
+    "what": "Workflow checkers at high unless told; pass checkEffort 'medium'; helpers use the session's model"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/workflows/build-a-place.js",
+    "what": "Args note: effort rule and no model argument (default unchanged)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/README.md",
+    "what": "Not-tested lines name the fourth real batch (178 card seconds)"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/bin/explainer-film-preflight",
+    "what": "Doubled heading line removed"
+   },
+   {
+    "path": "/home/user/Music/plugins/explainer-film/kit/place-kit/DEVIATIONS.md",
+    "what": "New section recording this step's fixes and why two went a different way"
+   }
+  ],
+  "tests_run": "FINAL RUNS, after the last edit (python3 /home/user/Music/plugins/explainer-film/kit/calculators/tests/run_all.py):\n\nWithout BLENDER:\n- 43 files: 39 passed, 0 failed, 4 skipped.\n- Checks: 1606 passed, 0 failed, 17 skipped; 3 min 16 s.\n- Before this step it was 1579 checks.\n- Log: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/tests-without-blender.log\n\nWith BLENDER=/home/user/work/blender-app/blender-5.2.2-linux-x64/blender:\n- 43 files: 41 passed, 0 failed, 2 skipped (they need the project's recordings and plates).\n- Checks: 1838 passed, 0 failed, 8 skipped; 10 min 40 s. Before this step it was 1811.\n- Among them: test_place_blender 103/103, test_place_fixes 40/40, test_place_render 68/68, test_place_variations 116/116, test_place_generic 18/18, test_build_a_place_workflow 129/129, test_place_hook 46/46, test_place_roles 70/70, test_place_skills 70/70, test_place_data 67/67.\n- Log: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/tests-with-blender.log\n\nAn earlier with-Blender run had failed 4 checks in test_place_blender, caused by my first guesser version. After the fix, test_place_blender passed 103/103 alone, then in the full run.\n\ncheck_presets.py: 6 of 6 groups.\n\nNames agree (the verify step's script, read-only): 240 commands, 280 options and 53 house numbers all exist. The same 76 file-link notes as before (files the user makes); only line numbers moved. Log: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/names-agree.log\n\nThe faint rule on saved pictures (nothing drawn again), using my scripts in fix/scripts/:\n- The proposed share-only rule would have given 21 of 22 agreement, so I kept the old rule: 15 + 7 = 22 of 22.\n- The new note gave the expected pairs on the tiny wall and on the real moss batch, and none on the cracks batches.\n\nTiny-scene trial here (a copy of the verify step's tiny wall in fix/tiny-trial):\n- `variations scout`: 93 s, EEVEE 240 x 160, 0 card seconds. It printed the two \"may not be visible\" lines. I looked at the sheet: v10 is flagged and looks the same as the baseline.\n- `variations plan --where local`: repeats the 3 faint pairs, says \"drawn here it uses no card seconds (if it were sent to the cards: about 208)\", and says the run still counts as one of the 2 batches.\n\nBy hand:\n- explainer-film-setup --help, -x and / in an empty folder: nothing was made.\n- `variations make` printed the name note.\n- Whole-plugin scan: no anvil or smithy left; the old Poly Haven slugs are gone.",
+  "pictures": [
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/tiny-trial/wear-variations-scout/moss-and-dirt-on-the-tiny-wall-scout-sheet.jpg"
+  ],
+  "runpod_seconds": "0. No rented card was used, ~/.runpod was not touched, and the scout and plan ran on this computer.",
+  "failures": [
+   "My first role-guesser change let a strong hint on a material beat a weak name hint. The Blender test caught it: 'wall_north' with material 'wall_mat' became a carpet. That broke 4 checks in test_place_blender (shape damage, determinism, UVs in metres, and normals-test as a knock-on). I changed the rule to 'place first, then strong over weak'; the test then passed 103/103, and the final full run passed.",
+   "One edit script stopped on an assertion because a line had a different indent. Nothing was written. I fixed the match and ran it again.",
+   "Not fixed, on purpose: the share-only rule for 'nearly the same'. It broke the measured 22-of-22 agreement (21 of 22), so I added only the 'may not be visible' note, as the finding allowed.",
+   "Not fixed: 'Rail 1' alone is still guessed as a fence, and 'Station building walls' as the general plaster wall. The names give nothing more to go on; the skill says to tag roles and read the guessed ones.",
+   "Not added to the hook: stable and shed (they fire on ordinary talk), smithy (now a kept-out word), forge (same trade), lane (replaced by 'road' in an earlier step).",
+   "Not changed: the workflow's default checkEffort stays 'high'. Only the words now say how to pass 'medium'.",
+   "Not changed (you decide): the author handle in plugin.json and the README install line, and machine paths in the old film example files."
+  ],
+  "untested": [
+   "No rented card batch was drawn, so the 'may not be visible' note was seen on the cards only through the saved pictures of earlier batches.",
+   "The two real scouts were not redrawn; the rule check used their saved per-camera numbers and pictures.",
+   "No fresh model was given a plain request with the fixed plugin; whether a smaller model now builds missing pieces, contact grime and trade rubbish is untested.",
+   "The harbour preset without quay_no_growth was not built and audited again. The evidence is the earlier canal-lock run, a harbour-type place with no off entry, which passed.",
+   "The new damp default is words only; no place was finished in both states to compare.",
+   "The hook's new words were tested on sentences only, not inside Claude Code.",
+   "The new Poly Haven slugs were checked on the public list only; no picture was downloaded or looked at.",
+   "The workflow still ran only with canned helpers.",
+   "The marketplace file outside the plugin still says 1.3.0.",
+   "Git history still holds the earlier one-request material (checkpoint commits)."
+  ]
+ }
+}

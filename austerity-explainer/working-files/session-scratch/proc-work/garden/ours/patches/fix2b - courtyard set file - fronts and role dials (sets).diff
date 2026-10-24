@@ -1,0 +1,64 @@
+PLAIN WORDS: the courtyard set file with (1) the three wall fronts of fix 2 and (2) FIRST-GUESS per-material dial values for fix 3 (lichen off plaster and wood, moss
+stronger on stone and the roof, a stronger splash band on stones). The role dial values are a starting point to tune by eye, not measured. Apply with  patch -p1 < this file.
+
+--- a/sets/japanese_courtyard.json
++++ b/sets/japanese_courtyard.json
+@@ -216,7 +216,15 @@
+     "timber.frame",
+     "stone.natural"
+    ],
+-   "_why": "round 1: stone.natural added (damp splash band at the foot of every stone)."
++   "_why": "round 1: stone.natural added (damp splash band at the foot of every stone).",
++   "role_dials": {
++    "stone.natural": {
++     "splash_strength": 1.4
++    },
++    "timber.frame": {
++     "tide_green": 0.5
++    }
++   }
+   },
+   "steps": {
+    "roles": []
+@@ -230,7 +238,25 @@
+     "roof.tile",
+     "timber.deck"
+    ],
+-   "_why": "round 1: stone.natural added (moss, algae and lichen on the lantern, rocks and stepping stones)."
++   "_why": "round 1: stone.natural added (moss, algae and lichen on the lantern, rocks and stepping stones).",
++   "role_dials": {
++    "wall.plaster": {
++     "lichen_amount": 0.002,
++     "moss_amount": 0.5,
++     "algae_amount": 1.4
++    },
++    "stone.natural": {
++     "lichen_amount": 2.5,
++     "moss_amount": 1.2
++    },
++    "timber.frame": {
++     "lichen_amount": 0.002,
++     "moss_amount": 0.3
++    },
++    "roof.tile": {
++     "moss_amount": 1.5
++    }
++   }
+   },
+   "wallcracks": {
+    "roles": [
+@@ -333,7 +359,13 @@
+     "sides": [
+      "both"
+     ],
+-    "_note": "world-axis boxes, two visible faces each"
++    "_note": "world-axis boxes, two visible faces each",
++    "front": {
++     "^Back wall, (left|right)$": "-y",
++     "^Hall plaster$": "-y@6.55",
++     "^Right wall behind hall$": "-x"
++    },
++    "_front_note": "explicit fronts (world directions): the garden back walls and the hall face the courtyard (-y), the right wall faces -x. Needed because earth runs under every wall, so the 'nearest ground' hint is undecided."
+    },
+    {
+     "roles": [

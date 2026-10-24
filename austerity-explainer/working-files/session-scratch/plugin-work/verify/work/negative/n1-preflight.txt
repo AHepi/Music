@@ -1,0 +1,41 @@
+Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): FAIL. 4 to fix, 1 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+Long step BLOCKED: drawing this place's views and plates (the long step: a place that fails is drawn again). First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-22 23:50:18 by preflight.py version 241779d5; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/negative/reports/preflight-place-2026-10-22-235018.
+
+## To fix (these block the next step)
+
+- place: treatments: 33 object(s) lack bevelled_edges. (place_audit_check.py)
+  Fix: run explainer-film-place surfaces (it bevels with hardened normals)
+- place: treatments: 23 object(s) lack shape_damage. (place_audit_check.py)
+  Fix: run explainer-film-place damage
+- place: plain boxes: 35% of the objects are plain sharp-edged boxes (at most 15%). (place_audit_check.py)
+  Fix: run explainer-film-place surfaces (bevels) and damage; shape the parts (chamfers, uneven boards).
+- place: ground relief: towpath: relief 0.036 m (at least 0.03 m), ruts found: False (place_audit_check.py)
+  Fix: run explainer-film-place roads (it grades the ground and shapes ruts, banks and hoof prints).
+
+## To look at (they do not block; a person decides)
+
+- place: fresh checker: not checked: no fresh checker has looked at this place (--fresh-check). (preflight.py place)
+  Fix: run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.
+
+## Notes
+
+- The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look.
+
+## Checks run
+
+- FAIL  the place audit: surfaces, wear and construction (place_audit_check.py): 4 fail, 0 look, 0 known, 13 pass, 0 info; exit 1, 0.1 s; calculators/place_audit_check.py version 6b13d618
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/negative/n1-audit.json --skip-freshness --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/negative/reports/preflight-place-2026-10-22-235018/01-the-place-audit-surfaces-wear-and-construction-p.json
+- PASS  the audit is about this scene file (freshness): 0 fail, 0 look, 0 known, 1 pass, 0 info; exit 0, 0.0 s; preflight.py place version 241779d5
+  (inside the preflight)
+- WARN  a fresh checker has looked: 0 fail, 1 look, 0 known, 0 pass, 0 info; exit 0, 0.0 s; preflight.py place version 241779d5
+  (inside the preflight)
+
+## Inputs (sha1 when the run ended)
+
+- eca816ae0d43b38e4895054bbc8f9b883df09682  /home/user/Music/plugins/explainer-film/kit/film-settings.json
+- a8d4b90e77db83bc6d4be859498d15e9f65b41c5  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/canal_built.blend
+- 34aeaa54294bb0aa92585c70a62bf1cd3408d339  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/negative/n1-audit.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/negative/reports/preflight-place-2026-10-22-235018.json

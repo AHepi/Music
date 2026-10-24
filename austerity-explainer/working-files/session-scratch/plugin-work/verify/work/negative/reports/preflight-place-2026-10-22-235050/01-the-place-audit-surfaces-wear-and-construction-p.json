@@ -1,0 +1,242 @@
+{
+ "about": "The judge of one place audit. Facts are in the audit; the verdict and every threshold are here and in film-settings.json (place_* sections).",
+ "verdict": "pass",
+ "place": "canal lock side",
+ "audit_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/negative/lazy-audit.json",
+ "checks": [
+  {
+   "verdict": "pass",
+   "check": "place: quick output",
+   "where": "the audit",
+   "text": "not a quick trial",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: roles",
+   "where": "every object",
+   "text": "every visible object has a role (94 objects)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: treatments",
+   "where": "every material",
+   "text": "every required treatment is there",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: layer amounts",
+   "where": "every object",
+   "text": "every layer amount is there and above its floor (state \"damp\")",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: off reasons",
+   "where": "the settings",
+   "text": "nothing is switched off",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: normal maps",
+   "where": "every normal map",
+   "text": "0 normal map(s): Non-Color, tangent, wired, pointing the right way",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: uv",
+   "where": "every object",
+   "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: displacement",
+   "where": "the displacement materials",
+   "text": "displacement is set where the role needs it, on a mesh that can show it",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: construction",
+   "where": "every part",
+   "text": "88 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: scale",
+   "where": "every sized object",
+   "text": "26 size(s) fit the real-world facts",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: plain boxes",
+   "where": "the objects",
+   "text": "0% plain boxes (at most 15%)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: shape damage",
+   "where": "siblings",
+   "text": "no role has most of its objects as exact copies",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: ground relief",
+   "where": "the roads",
+   "text": "1 road(s) have real relief and ruts",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: budgets",
+   "where": "the scene",
+   "text": "triangles and scattered pieces are within the budgets",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: light",
+   "where": "the scene",
+   "text": "the scene has light",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: renderer",
+   "where": "the scene",
+   "text": "renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)",
+   "fix": ""
+  }
+ ],
+ "calculator": "place_audit_check check",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "place_surfaces.normal_map_size_min_pixels": {
+   "value": 1024,
+   "unit": "pixels a side",
+   "kind": "judged"
+  },
+  "place_audit.unknown_role_objects_allowed": {
+   "value": 0,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_audit.required_treatments_missing_allowed": {
+   "value": 0,
+   "unit": "treatments",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.kept": {
+   "value": 0.15,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.lived_in": {
+   "value": 0.25,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.neglected": {
+   "value": 0.4,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.derelict": {
+   "value": 0.5,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.off_share_max": {
+   "value": 0.25,
+   "unit": "share of required role-and-treatment pairs",
+   "kind": "invented"
+  },
+  "place_surfaces.normal_direction_correlation_min": {
+   "value": 0.25,
+   "unit": "correlation",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_blue_mean_min": {
+   "value": 0.85,
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_red_green_mean_band": {
+   "value": [
+    0.47,
+    0.53
+   ],
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.uv_mirrored_face_share_max": {
+   "value": 0.02,
+   "unit": "share of faces",
+   "kind": "judged"
+  },
+  "place_construction.float_gap_millimetres_fail": {
+   "value": 5,
+   "unit": "millimetres",
+   "kind": "judged"
+  },
+  "place_construction.ground_seat_metres_tolerance": {
+   "value": 0.02,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_scale.warn_factor": {
+   "value": 1.0,
+   "unit": "times the range",
+   "kind": "judged"
+  },
+  "place_scale.fail_factor": {
+   "value": 1.5,
+   "unit": "times the range",
+   "kind": "invented"
+  },
+  "place_audit.plain_box_share_max": {
+   "value": 0.15,
+   "unit": "share of objects",
+   "kind": "invented"
+  },
+  "place_wear.shape_sibling_min_count": {
+   "value": 4,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_wear.shape_sibling_copy_share_max": {
+   "value": 0.5,
+   "unit": "share of siblings",
+   "kind": "invented"
+  },
+  "place_wear.ground_relief_metres_min": {
+   "value": 0.03,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_audit.triangles_total_max": {
+   "value": 6000000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.triangles_per_builder_max": {
+   "value": 1500000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.scatter_pieces_max": {
+   "value": 400000,
+   "unit": "pieces",
+   "kind": "invented"
+  }
+ }
+}

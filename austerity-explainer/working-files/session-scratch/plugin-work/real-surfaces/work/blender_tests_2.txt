@@ -1,0 +1,40 @@
+passed   test_build_a_place_workflow.py  (6.2 s)  workflow build-a-place: run with canned helpers: 148 of 148 checks passed
+passed   test_model_kit_surfaces.py  (5.5 s)  film model helpers: no Pillow, lossless normal maps, hardened bevels: 18 of 18 checks passed
+passed   test_model_lint.py  (31.0 s)  model_lint: model faults before plates: 28 of 28 checks passed
+passed   test_place_audit_check.py  (0.9 s)  place audit judge: flat hut fails, finished hut passes, planted faults are named: 108 of 108 checks passed
+passed   test_place_batching_rule.py  (0.1 s)  batch rule and card-time allowance: written where models read, and equal to the house numbers: 27 of 27 checks passed
+passed   test_place_blender.py  (127.6 s)  place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo: 103 of 103 checks passed
+passed   test_place_card_time.py  (0.1 s)  place card time: the ledger, the allowance and the batch rule: 58 of 58 checks passed
+passed   test_place_combine.py  (9.7 s)  place combine: ownership between builders, and stage files run in two orders: 27 of 27 checks passed
+FAILED   test_place_data.py  (9.1 s)  place data: presets agree, the checker is not blind, the numbers make sense: 63 of 67 checks passed; FAILED: check_presets: no kit code names a kind of place, the command exits 0 and says "6 of 6 groups passed", the copy used for planting passes before any fault goes in (apart from the test file, which may not exist yet), after every planted fault is taken out the copy is clean again
+    == place data: presets agree, the checker is not blind, the numbers make sense
+    FAIL  check_presets: no kit code names a kind of place: place_kit/checks/combine.py line 62: the place word "forest" (code must work for any place)
+    FAIL  the command exits 0 and says "6 of 6 groups passed": 5 of 6 groups passed
+    FAIL  the copy used for planting passes before any fault goes in (apart from the test file, which may not exist yet): [0, 0, 0, 1, 0, 0]
+    FAIL  after every planted fault is taken out the copy is clean again: [0, 0, 0, 1, 0, 0]
+    -- place data: presets agree, the checker is not blind, the numbers make sense: 63 of 67 checks passed; FAILED: check_presets: no kit code names a kind of place, the command exits 0 and says "6 of 6 groups passed", the copy used for planting passes before any fault goes in (apart from the test file, which may not exist yet), after every planted fault is taken out the copy is clean again
+passed   test_place_facts.py  (0.6 s)  place facts: schema, converters and what they carry: 35 of 35 checks passed
+passed   test_place_fixes.py  (83.3 s)  place kit fixes inside Blender: the faults of the smoke check, the review and the newcomer judge: 40 of 40 checks passed
+passed   test_place_generic.py  (0.1 s)  place parts stay general: no word of one trade and period, even-handed presets, real worked examples: 18 of 18 checks passed
+passed   test_place_hook.py  (2.0 s)  place reminder hook: routing words at the start of a turn: 74 of 74 checks passed
+passed   test_place_real_surfaces.py  (66.9 s)  place kit 1.5.0: real photographed surfaces, weeds by site, the visible faults and a gate that agrees with itself: 54 of 54 checks passed; 1 part(s) skipped
+passed   test_place_render.py  (94.5 s)  place render: the rented-card client (fake card) and the render verb: 68 of 68 checks passed
+passed   test_place_roles.py  (0.2 s)  place roles: how objects get a role, and what a role needs: 72 of 72 checks passed
+passed   test_place_shapes.py  (2.7 s)  place shapes: recipes, normal maps, road height, graded grid, pieces, flat-map maths: 51 of 51 checks passed
+FAILED   test_place_skills.py  (3.5 s)  place skills: the words of the plugin against its code: 68 of 70 checks passed; FAILED: the REQUIRED block is identical in the three skills that carry it, plugin.json says 1.4.0
+    == place skills: the words of the plugin against its code
+    FAIL  the REQUIRED block is identical in the three skills that carry it: the REQUIRED block differs between skills: build-and-paint-a-place, make-3d-models, surfaces-wear-and-construction
+    FAIL  plugin.json says 1.4.0: got '1.5.0', expected '1.4.0'
+    -- place skills: the words of the plugin against its code: 68 of 70 checks passed; FAILED: the REQUIRED block is identical in the three skills that carry it, plugin.json says 1.4.0
+passed   test_place_threads.py  (0.9 s)  place kit: the Blender thread limit (EXPLAINER_FILM_BLENDER_THREADS): 12 of 12 checks passed
+passed   test_place_variations.py  (105.7 s)  place variations: settings, checks before and after drawing, the split, the card and the sheet: 121 of 121 checks passed
+passed   test_place_world.py  (19.2 s)  place audit inside Blender: film frame, world, sun, lettering; the wear layers' sun: 23 of 23 checks passed
+passed   test_preflight_place.py  (3.8 s)  preflight: the place stage (audit, freshness, pictures, fresh checker) and the plates stage asking for it: 30 of 30 checks passed
+passed   test_setup_probe.py  (7.4 s)  explainer-film-setup: the Blender 5.2 probe and the film kit files newer than the last copy: 6 of 6 checks passed
+
+23 test files: 21 passed, 2 failed, 0 skipped.
+Checks: 1252 passed, 6 failed, 1 skipped (1 part(s) of tests and 0 whole test file(s), each with its reason below).
+Time: 9 min 41 s.
+Skipped, and why:
+  - test_place_real_surfaces.py: the real download was skipped (set PLACE_KIT_NETWORK_TESTS=1 to try one small scan from Poly Haven)
+Failed: test_place_data.py, test_place_skills.py

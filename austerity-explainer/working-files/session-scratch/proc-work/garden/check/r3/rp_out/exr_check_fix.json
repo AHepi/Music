@@ -1,0 +1,806 @@
+{
+ "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_hero.exr": {
+  "bytes": 40874752,
+  "parts": [
+   {
+    "subimage": 0,
+    "name": "Composite.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "Composite.Combined.R",
+     "Composite.Combined.G",
+     "Composite.Combined.B",
+     "Composite.Combined.A"
+    ]
+   },
+   {
+    "subimage": 1,
+    "name": "ViewLayer.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Combined.R",
+     "ViewLayer.Combined.G",
+     "ViewLayer.Combined.B",
+     "ViewLayer.Combined.A"
+    ]
+   },
+   {
+    "subimage": 2,
+    "name": "ViewLayer.Noisy Image",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Noisy Image.R",
+     "ViewLayer.Noisy Image.G",
+     "ViewLayer.Noisy Image.B",
+     "ViewLayer.Noisy Image.A"
+    ]
+   },
+   {
+    "subimage": 3,
+    "name": "ViewLayer.Combined_sun",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sun.R",
+     "ViewLayer.Combined_sun.G",
+     "ViewLayer.Combined_sun.B"
+    ]
+   },
+   {
+    "subimage": 4,
+    "name": "ViewLayer.Combined_rim",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rim.R",
+     "ViewLayer.Combined_rim.G",
+     "ViewLayer.Combined_rim.B"
+    ]
+   },
+   {
+    "subimage": 5,
+    "name": "ViewLayer.Combined_sky",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sky.R",
+     "ViewLayer.Combined_sky.G",
+     "ViewLayer.Combined_sky.B"
+    ]
+   },
+   {
+    "subimage": 6,
+    "name": "ViewLayer.Combined_fill",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_fill.R",
+     "ViewLayer.Combined_fill.G",
+     "ViewLayer.Combined_fill.B"
+    ]
+   },
+   {
+    "subimage": 7,
+    "name": "ViewLayer.Combined_hall",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_hall.R",
+     "ViewLayer.Combined_hall.G",
+     "ViewLayer.Combined_hall.B"
+    ]
+   },
+   {
+    "subimage": 8,
+    "name": "ViewLayer.Combined_lantern",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_lantern.R",
+     "ViewLayer.Combined_lantern.G",
+     "ViewLayer.Combined_lantern.B"
+    ]
+   },
+   {
+    "subimage": 9,
+    "name": "ViewLayer.Combined_rest",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rest.R",
+     "ViewLayer.Combined_rest.G",
+     "ViewLayer.Combined_rest.B"
+    ]
+   }
+  ],
+  "channel_names_with_Combined": [
+   "Composite.Combined.A",
+   "Composite.Combined.B",
+   "Composite.Combined.G",
+   "Composite.Combined.R",
+   "ViewLayer.Combined.A",
+   "ViewLayer.Combined.B",
+   "ViewLayer.Combined.G",
+   "ViewLayer.Combined.R",
+   "ViewLayer.Combined_fill.B",
+   "ViewLayer.Combined_fill.G",
+   "ViewLayer.Combined_fill.R",
+   "ViewLayer.Combined_hall.B",
+   "ViewLayer.Combined_hall.G",
+   "ViewLayer.Combined_hall.R",
+   "ViewLayer.Combined_lantern.B",
+   "ViewLayer.Combined_lantern.G",
+   "ViewLayer.Combined_lantern.R",
+   "ViewLayer.Combined_rest.B",
+   "ViewLayer.Combined_rest.G",
+   "ViewLayer.Combined_rest.R",
+   "ViewLayer.Combined_rim.B",
+   "ViewLayer.Combined_rim.G",
+   "ViewLayer.Combined_rim.R",
+   "ViewLayer.Combined_sky.B",
+   "ViewLayer.Combined_sky.G",
+   "ViewLayer.Combined_sky.R",
+   "ViewLayer.Combined_sun.B",
+   "ViewLayer.Combined_sun.G",
+   "ViewLayer.Combined_sun.R"
+  ],
+  "group_passes": [
+   "ViewLayer.Combined_fill",
+   "ViewLayer.Combined_hall",
+   "ViewLayer.Combined_lantern",
+   "ViewLayer.Combined_rest",
+   "ViewLayer.Combined_rim",
+   "ViewLayer.Combined_sky",
+   "ViewLayer.Combined_sun"
+  ],
+  "layer": "ViewLayer",
+  "mean_combined_lum": 0.27155813574790955,
+  "mean_sum_of_groups_lum": 0.27144312858581543,
+  "total_rel_error": -0.0004235060478094965,
+  "share_of_groups_percent": {
+   "fill": 11.64,
+   "hall": 25.81,
+   "lantern": 0.56,
+   "rest": 0.47,
+   "rim": 0.36,
+   "sky": 30.99,
+   "sun": 30.18
+  },
+  "noisy_image_total_rel_error_of_group_sum": -0.00010318249405827373,
+  "noisy_image_max_abs_pixel_diff": 0.15428876876831055,
+  "noisy_image_pixels_with_diff_gt_1e-3_relative": 2783374,
+  "block16_rel_error": {
+   "median": 0.0008331476710736752,
+   "p90": 0.0023133500944823027,
+   "p99": 0.0055077699944376945,
+   "max": 0.0156719908118248,
+   "blocks": 14275
+  },
+  "pixel_rel_error": {
+   "median": 0.00802123174071312,
+   "p90": 0.04068263620138168,
+   "pixels": 3041222
+  },
+  "noise_median_rel_sd_in_16px_blocks": {
+   "combined": 0.23084095120429993,
+   "sum_of_groups": 0.23371624946594238
+  },
+  "has_composite_part": true
+ },
+ "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/painted_hero.exr": {
+  "bytes": 36907900,
+  "parts": [
+   {
+    "subimage": 0,
+    "name": "Composite.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "Composite.Combined.R",
+     "Composite.Combined.G",
+     "Composite.Combined.B",
+     "Composite.Combined.A"
+    ]
+   },
+   {
+    "subimage": 1,
+    "name": "ViewLayer.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Combined.R",
+     "ViewLayer.Combined.G",
+     "ViewLayer.Combined.B",
+     "ViewLayer.Combined.A"
+    ]
+   },
+   {
+    "subimage": 2,
+    "name": "ViewLayer.Noisy Image",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Noisy Image.R",
+     "ViewLayer.Noisy Image.G",
+     "ViewLayer.Noisy Image.B",
+     "ViewLayer.Noisy Image.A"
+    ]
+   },
+   {
+    "subimage": 3,
+    "name": "ViewLayer.Combined_sun",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sun.R",
+     "ViewLayer.Combined_sun.G",
+     "ViewLayer.Combined_sun.B"
+    ]
+   },
+   {
+    "subimage": 4,
+    "name": "ViewLayer.Combined_rim",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rim.R",
+     "ViewLayer.Combined_rim.G",
+     "ViewLayer.Combined_rim.B"
+    ]
+   },
+   {
+    "subimage": 5,
+    "name": "ViewLayer.Combined_sky",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sky.R",
+     "ViewLayer.Combined_sky.G",
+     "ViewLayer.Combined_sky.B"
+    ]
+   },
+   {
+    "subimage": 6,
+    "name": "ViewLayer.Combined_fill",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_fill.R",
+     "ViewLayer.Combined_fill.G",
+     "ViewLayer.Combined_fill.B"
+    ]
+   },
+   {
+    "subimage": 7,
+    "name": "ViewLayer.Combined_hall",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_hall.R",
+     "ViewLayer.Combined_hall.G",
+     "ViewLayer.Combined_hall.B"
+    ]
+   },
+   {
+    "subimage": 8,
+    "name": "ViewLayer.Combined_lantern",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_lantern.R",
+     "ViewLayer.Combined_lantern.G",
+     "ViewLayer.Combined_lantern.B"
+    ]
+   },
+   {
+    "subimage": 9,
+    "name": "ViewLayer.Combined_rest",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rest.R",
+     "ViewLayer.Combined_rest.G",
+     "ViewLayer.Combined_rest.B"
+    ]
+   }
+  ],
+  "channel_names_with_Combined": [
+   "Composite.Combined.A",
+   "Composite.Combined.B",
+   "Composite.Combined.G",
+   "Composite.Combined.R",
+   "ViewLayer.Combined.A",
+   "ViewLayer.Combined.B",
+   "ViewLayer.Combined.G",
+   "ViewLayer.Combined.R",
+   "ViewLayer.Combined_fill.B",
+   "ViewLayer.Combined_fill.G",
+   "ViewLayer.Combined_fill.R",
+   "ViewLayer.Combined_hall.B",
+   "ViewLayer.Combined_hall.G",
+   "ViewLayer.Combined_hall.R",
+   "ViewLayer.Combined_lantern.B",
+   "ViewLayer.Combined_lantern.G",
+   "ViewLayer.Combined_lantern.R",
+   "ViewLayer.Combined_rest.B",
+   "ViewLayer.Combined_rest.G",
+   "ViewLayer.Combined_rest.R",
+   "ViewLayer.Combined_rim.B",
+   "ViewLayer.Combined_rim.G",
+   "ViewLayer.Combined_rim.R",
+   "ViewLayer.Combined_sky.B",
+   "ViewLayer.Combined_sky.G",
+   "ViewLayer.Combined_sky.R",
+   "ViewLayer.Combined_sun.B",
+   "ViewLayer.Combined_sun.G",
+   "ViewLayer.Combined_sun.R"
+  ],
+  "group_passes": [
+   "ViewLayer.Combined_fill",
+   "ViewLayer.Combined_hall",
+   "ViewLayer.Combined_lantern",
+   "ViewLayer.Combined_rest",
+   "ViewLayer.Combined_rim",
+   "ViewLayer.Combined_sky",
+   "ViewLayer.Combined_sun"
+  ],
+  "layer": "ViewLayer",
+  "mean_combined_lum": 0.2919238209724426,
+  "mean_sum_of_groups_lum": 0.2917994558811188,
+  "total_rel_error": -0.00042607521754689515,
+  "share_of_groups_percent": {
+   "fill": 11.37,
+   "hall": 25.58,
+   "lantern": 0.52,
+   "rest": 0.74,
+   "rim": 0.34,
+   "sky": 29.83,
+   "sun": 31.62
+  },
+  "noisy_image_total_rel_error_of_group_sum": -8.600255387136713e-05,
+  "noisy_image_max_abs_pixel_diff": 0.17187833786010742,
+  "noisy_image_pixels_with_diff_gt_1e-3_relative": 2761043,
+  "block16_rel_error": {
+   "median": 0.0009666905389167368,
+   "p90": 0.002385465893894434,
+   "p99": 0.005528052803128958,
+   "max": 0.012352281250059605,
+   "blocks": 14236
+  },
+  "pixel_rel_error": {
+   "median": 0.009125919081270695,
+   "p90": 0.04508886858820915,
+   "pixels": 3210842
+  },
+  "noise_median_rel_sd_in_16px_blocks": {
+   "combined": 0.17686747014522552,
+   "sum_of_groups": 0.18214552104473114
+  },
+  "has_composite_part": true
+ },
+ "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_veranda.exr": {
+  "bytes": 34070912,
+  "parts": [
+   {
+    "subimage": 0,
+    "name": "Composite.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "Composite.Combined.R",
+     "Composite.Combined.G",
+     "Composite.Combined.B",
+     "Composite.Combined.A"
+    ]
+   },
+   {
+    "subimage": 1,
+    "name": "ViewLayer.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Combined.R",
+     "ViewLayer.Combined.G",
+     "ViewLayer.Combined.B",
+     "ViewLayer.Combined.A"
+    ]
+   },
+   {
+    "subimage": 2,
+    "name": "ViewLayer.Noisy Image",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Noisy Image.R",
+     "ViewLayer.Noisy Image.G",
+     "ViewLayer.Noisy Image.B",
+     "ViewLayer.Noisy Image.A"
+    ]
+   },
+   {
+    "subimage": 3,
+    "name": "ViewLayer.Combined_sun",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sun.R",
+     "ViewLayer.Combined_sun.G",
+     "ViewLayer.Combined_sun.B"
+    ]
+   },
+   {
+    "subimage": 4,
+    "name": "ViewLayer.Combined_rim",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rim.R",
+     "ViewLayer.Combined_rim.G",
+     "ViewLayer.Combined_rim.B"
+    ]
+   },
+   {
+    "subimage": 5,
+    "name": "ViewLayer.Combined_sky",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sky.R",
+     "ViewLayer.Combined_sky.G",
+     "ViewLayer.Combined_sky.B"
+    ]
+   },
+   {
+    "subimage": 6,
+    "name": "ViewLayer.Combined_fill",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_fill.R",
+     "ViewLayer.Combined_fill.G",
+     "ViewLayer.Combined_fill.B"
+    ]
+   },
+   {
+    "subimage": 7,
+    "name": "ViewLayer.Combined_hall",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_hall.R",
+     "ViewLayer.Combined_hall.G",
+     "ViewLayer.Combined_hall.B"
+    ]
+   },
+   {
+    "subimage": 8,
+    "name": "ViewLayer.Combined_lantern",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_lantern.R",
+     "ViewLayer.Combined_lantern.G",
+     "ViewLayer.Combined_lantern.B"
+    ]
+   },
+   {
+    "subimage": 9,
+    "name": "ViewLayer.Combined_rest",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rest.R",
+     "ViewLayer.Combined_rest.G",
+     "ViewLayer.Combined_rest.B"
+    ]
+   }
+  ],
+  "channel_names_with_Combined": [
+   "Composite.Combined.A",
+   "Composite.Combined.B",
+   "Composite.Combined.G",
+   "Composite.Combined.R",
+   "ViewLayer.Combined.A",
+   "ViewLayer.Combined.B",
+   "ViewLayer.Combined.G",
+   "ViewLayer.Combined.R",
+   "ViewLayer.Combined_fill.B",
+   "ViewLayer.Combined_fill.G",
+   "ViewLayer.Combined_fill.R",
+   "ViewLayer.Combined_hall.B",
+   "ViewLayer.Combined_hall.G",
+   "ViewLayer.Combined_hall.R",
+   "ViewLayer.Combined_lantern.B",
+   "ViewLayer.Combined_lantern.G",
+   "ViewLayer.Combined_lantern.R",
+   "ViewLayer.Combined_rest.B",
+   "ViewLayer.Combined_rest.G",
+   "ViewLayer.Combined_rest.R",
+   "ViewLayer.Combined_rim.B",
+   "ViewLayer.Combined_rim.G",
+   "ViewLayer.Combined_rim.R",
+   "ViewLayer.Combined_sky.B",
+   "ViewLayer.Combined_sky.G",
+   "ViewLayer.Combined_sky.R",
+   "ViewLayer.Combined_sun.B",
+   "ViewLayer.Combined_sun.G",
+   "ViewLayer.Combined_sun.R"
+  ],
+  "group_passes": [
+   "ViewLayer.Combined_fill",
+   "ViewLayer.Combined_hall",
+   "ViewLayer.Combined_lantern",
+   "ViewLayer.Combined_rest",
+   "ViewLayer.Combined_rim",
+   "ViewLayer.Combined_sky",
+   "ViewLayer.Combined_sun"
+  ],
+  "layer": "ViewLayer",
+  "mean_combined_lum": 0.2773507237434387,
+  "mean_sum_of_groups_lum": 0.27732551097869873,
+  "total_rel_error": -9.084279008675367e-05,
+  "share_of_groups_percent": {
+   "fill": 6.6,
+   "hall": 17.93,
+   "lantern": 1.8,
+   "rest": 0.22,
+   "rim": 0.44,
+   "sky": 49.39,
+   "sun": 23.62
+  },
+  "noisy_image_total_rel_error_of_group_sum": -8.00458001322113e-05,
+  "noisy_image_max_abs_pixel_diff": 0.25591087341308594,
+  "noisy_image_pixels_with_diff_gt_1e-3_relative": 2529865,
+  "block16_rel_error": {
+   "median": 0.0008142690639942884,
+   "p90": 0.0027006203308701515,
+   "p99": 0.006957042962312698,
+   "max": 0.8794399499893188,
+   "blocks": 14587
+  },
+  "pixel_rel_error": {
+   "median": 0.009288459084928036,
+   "p90": 0.05791069567203522,
+   "pixels": 3193944
+  },
+  "noise_median_rel_sd_in_16px_blocks": {
+   "combined": 0.1367851197719574,
+   "sum_of_groups": 0.14670097827911377
+  },
+  "has_composite_part": true
+ },
+ "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/painted_veranda.exr": {
+  "bytes": 30540529,
+  "parts": [
+   {
+    "subimage": 0,
+    "name": "Composite.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "Composite.Combined.R",
+     "Composite.Combined.G",
+     "Composite.Combined.B",
+     "Composite.Combined.A"
+    ]
+   },
+   {
+    "subimage": 1,
+    "name": "ViewLayer.Combined",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Combined.R",
+     "ViewLayer.Combined.G",
+     "ViewLayer.Combined.B",
+     "ViewLayer.Combined.A"
+    ]
+   },
+   {
+    "subimage": 2,
+    "name": "ViewLayer.Noisy Image",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 4,
+    "sample": [
+     "ViewLayer.Noisy Image.R",
+     "ViewLayer.Noisy Image.G",
+     "ViewLayer.Noisy Image.B",
+     "ViewLayer.Noisy Image.A"
+    ]
+   },
+   {
+    "subimage": 3,
+    "name": "ViewLayer.Combined_sun",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sun.R",
+     "ViewLayer.Combined_sun.G",
+     "ViewLayer.Combined_sun.B"
+    ]
+   },
+   {
+    "subimage": 4,
+    "name": "ViewLayer.Combined_rim",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rim.R",
+     "ViewLayer.Combined_rim.G",
+     "ViewLayer.Combined_rim.B"
+    ]
+   },
+   {
+    "subimage": 5,
+    "name": "ViewLayer.Combined_sky",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_sky.R",
+     "ViewLayer.Combined_sky.G",
+     "ViewLayer.Combined_sky.B"
+    ]
+   },
+   {
+    "subimage": 6,
+    "name": "ViewLayer.Combined_fill",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_fill.R",
+     "ViewLayer.Combined_fill.G",
+     "ViewLayer.Combined_fill.B"
+    ]
+   },
+   {
+    "subimage": 7,
+    "name": "ViewLayer.Combined_hall",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_hall.R",
+     "ViewLayer.Combined_hall.G",
+     "ViewLayer.Combined_hall.B"
+    ]
+   },
+   {
+    "subimage": 8,
+    "name": "ViewLayer.Combined_lantern",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_lantern.R",
+     "ViewLayer.Combined_lantern.G",
+     "ViewLayer.Combined_lantern.B"
+    ]
+   },
+   {
+    "subimage": 9,
+    "name": "ViewLayer.Combined_rest",
+    "w": 2400,
+    "h": 1600,
+    "n_channels": 3,
+    "sample": [
+     "ViewLayer.Combined_rest.R",
+     "ViewLayer.Combined_rest.G",
+     "ViewLayer.Combined_rest.B"
+    ]
+   }
+  ],
+  "channel_names_with_Combined": [
+   "Composite.Combined.A",
+   "Composite.Combined.B",
+   "Composite.Combined.G",
+   "Composite.Combined.R",
+   "ViewLayer.Combined.A",
+   "ViewLayer.Combined.B",
+   "ViewLayer.Combined.G",
+   "ViewLayer.Combined.R",
+   "ViewLayer.Combined_fill.B",
+   "ViewLayer.Combined_fill.G",
+   "ViewLayer.Combined_fill.R",
+   "ViewLayer.Combined_hall.B",
+   "ViewLayer.Combined_hall.G",
+   "ViewLayer.Combined_hall.R",
+   "ViewLayer.Combined_lantern.B",
+   "ViewLayer.Combined_lantern.G",
+   "ViewLayer.Combined_lantern.R",
+   "ViewLayer.Combined_rest.B",
+   "ViewLayer.Combined_rest.G",
+   "ViewLayer.Combined_rest.R",
+   "ViewLayer.Combined_rim.B",
+   "ViewLayer.Combined_rim.G",
+   "ViewLayer.Combined_rim.R",
+   "ViewLayer.Combined_sky.B",
+   "ViewLayer.Combined_sky.G",
+   "ViewLayer.Combined_sky.R",
+   "ViewLayer.Combined_sun.B",
+   "ViewLayer.Combined_sun.G",
+   "ViewLayer.Combined_sun.R"
+  ],
+  "group_passes": [
+   "ViewLayer.Combined_fill",
+   "ViewLayer.Combined_hall",
+   "ViewLayer.Combined_lantern",
+   "ViewLayer.Combined_rest",
+   "ViewLayer.Combined_rim",
+   "ViewLayer.Combined_sky",
+   "ViewLayer.Combined_sun"
+  ],
+  "layer": "ViewLayer",
+  "mean_combined_lum": 0.28648918867111206,
+  "mean_sum_of_groups_lum": 0.2864491939544678,
+  "total_rel_error": -0.00013964404934085906,
+  "share_of_groups_percent": {
+   "fill": 6.6,
+   "hall": 19.89,
+   "lantern": 1.74,
+   "rest": 0.44,
+   "rim": 0.38,
+   "sky": 49.12,
+   "sun": 21.83
+  },
+  "noisy_image_total_rel_error_of_group_sum": -8.045064168982208e-05,
+  "noisy_image_max_abs_pixel_diff": 0.14299392700195312,
+  "noisy_image_pixels_with_diff_gt_1e-3_relative": 2526652,
+  "block16_rel_error": {
+   "median": 0.000866739428602159,
+   "p90": 0.002836370375007391,
+   "p99": 0.006623625289648771,
+   "max": 0.11028417199850082,
+   "blocks": 14771
+  },
+  "pixel_rel_error": {
+   "median": 0.00833098217844963,
+   "p90": 0.05333131551742554,
+   "pixels": 3370979
+  },
+  "noise_median_rel_sd_in_16px_blocks": {
+   "combined": 0.04709765687584877,
+   "sum_of_groups": 0.06160254031419754
+  },
+  "has_composite_part": true
+ }
+}

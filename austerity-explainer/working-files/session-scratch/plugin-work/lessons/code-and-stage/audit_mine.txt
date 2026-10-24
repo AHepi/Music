@@ -1,0 +1,162 @@
+=== A1 high
+LESSON: [missing, and the stage cannot do it] Dark, dusk or wet painted places. The stage's film curve darkens dark values, so the wet road arrived at 0.75 to 0.86 of how bright it was painted and some of it crushed to black. The fix is a `toe` setting in the page's look plus a gentler dark frame edge, and a measure of how bright the road arrives. Searched: toe, look.toe, vignette, arrives at, crush, cinema-stage. The plugin's kit/paper-film/stage/cinema-stage.js has no toe at all (the project's film kit has it at lines 216, 222, 235-236, 259, 267, 334); kit/paper-film/scenes/lockout-test.js line 180 still has vignette 0.3 and no toe; only wear-recipes.md line 61 mentions that the curve crushes values under about 0.12.
+SRC: project-notes/Lessons.md log 37 (film kit 'Lessons and traps' block 'A dark painted street'); Decisions item 43; Status 'The wet lockout shot'; textures story logs 19, 24, 27. Seen by all four readers.
+WHERE: kit/paper-film/stage/cinema-stage.js (port the toe setting); kit/paper-film/scenes/lockout-test.js (set toe 1 and vignette 0.25); kit/docs/paper-look - 05 Lessons and traps.md (add the block); skills/build-and-paint-a-place/SKILL.md section 7 (the page's look); kit/kit-sync-notes.md (say it was copied)
+CODE: Yes. Port look.toe from the film kit's cinema-stage.js into the plugin's stage and set it in lockout-test.js. Add the same step to the Python copy of the finish pass in calculators/painting_measures.py. Add a check in calculators/after_painting.py or paint_request.py that reports how bright the road arrives in the plate view against the painting and flags a view under about 0.9 (invented limit) when the page has no toe. Prove that toe 0 leaves other scenes unchanged using the several-draws method (entry 3).
+
+=== A2 high
+LESSON: [partly] Wet and dry paintings go in and out as a pair. A wet front painting needs its own wet 'behind' painting, or the road the near props hid comes back pale and dry when the camera slides (59 percent of those road dots lighter; the textures logs measured 56 to 71 percent of the near road). Carried today: only that the behind plate is 'the same state as the main plate' (calculators/plan_states.py line 8) and that the painter template's wet words change for wet views. Searched: wet behind, behind wet, dry behind, pale dry, as a pair, in and out as a pair, -dry, how to go back. Nothing states the pair rule or the pale-dry-patch symptom.
+SRC: project-notes/Lessons.md log 37 (film kit traps); Decisions item 43; Workflows 'The lockout shot: wet street or dry street'; story log 37; textures logs 19, 24
+WHERE: skills/build-and-paint-a-place/SKILL.md section 6 (when a painting arrives, behind painting step) and the 'Wet or dusk places' part; skills/surfaces-wear-and-construction/SKILL.md ('Painter template words on wet places'); kit/docs/LLM tips and tricks.md section 10 item 10.2
+CODE: Yes. In calculators/after_painting.py (check --behind), compare the behind painting with the front painting over the area the near props hid, and fail when more than a set share of dots is lighter (59 percent was the fault; the limit would be invented, say 10 percent, and marked so).
+
+=== A3 high
+LESSON: [missing] Prove 'unchanged' with several draws, and run the control before blaming a change. Eight comparison pictures matched dot for dot, but the ninth (the house sample at 20 s) differed by 7.7 percent of dots; drawn ten times, the unchanged old stage alone gave both results, so the 'one added space in the code' explanation was only chance. Searched: dot for dot, run to run, several draws, at least three, each comparison, control run, baseline twice, ordinary variation. Nothing. The only numbers are kit/film-settings.json checking.regression_largest_difference_levels 5 and checking.kept_shot_changed_pixels 0, and the zero would mislead for the house sample. calculators/README.md 'Not done yet' says regression stills are still by hand.
+SRC: project-notes/Lessons.md 141 and the trap 'A dot for dot proof'; story logs 37-39; Workflows 'built place' step 8; textures log 27; courtyard log 13
+WHERE: kit/docs/LLM tips and tricks.md section 0 (after item 6, 'test a tool's advice'); skills/check-and-critique/SKILL.md (next to 'fixes make new faults'); kit/film-settings.json (note on checking.kept_shot_changed_pixels); kit/calculators/README.md ('Not done yet')
+CODE: Yes. A small compare tool in calculators (for example regression_compare.py): it takes folders of several draws per version, prints the old-against-old spread first, then old-against-new, and says 'real' only when the difference is above the spread in every draw. Preflight could refuse the word 'unchanged' in a report that lacks its output. Change the source note of checking.kept_shot_changed_pixels so zero is not read as a promise.
+
+=== A4 high
+LESSON: [partly] Routing: the composing, camera, people, smoke, lettering and painting lessons (about 100 of the carried ones) reach a builder only if it opens build-and-paint-a-place or the tips guide. The prompt-time hook (hooks/place-reminder.py) and the surface-and-wear skill name only surface-and-wear and card time. The place workflow and its agents carry no film-frame lessons at all: workflows/build-a-place.js defaults every view to 1200 x 800 (a wide frame), and agents/place-planner.md item 10 names views with no frame shape, phone safe area or camera rules. Searched: phone, portrait, 9:16, vertical, tall, 1080, plan_shot, tips, compos in agents/ and workflows/build-a-place.js; build-and-paint-a-place, LLM tips in the hook and the surfaces skill (only make-3d-models/SKILL.md line 26 points on). README lines 124-131 admit it was never tested that a smaller model finds the skill alone.
+SRC: reader 1 point 4 (hook); reader 3 (README caveat); my own check of the workflow and agents
+WHERE: hooks/place-reminder.py (REMINDER text, a fourth line); skills/surfaces-wear-and-construction/SKILL.md (first screen); skills/make-3d-models/SKILL.md (top); agents/place-planner.md item 10 (views); workflows/build-a-place.js (default view size and planner prompt)
+CODE: Yes. Add the new line to the hook and a test (like test_place_skills.py) that the hook names build-and-paint-a-place. Give build-a-place.js a film option that sets every view to 1080 x 1920 and tells the planner to run calculators/plan_shot.py. Let `preflight place` give a LOOK when a place marked as for the film has a view that is not 9:16.
+
+=== A5 high
+LESSON: [partly] Period and history accuracy needs its own critic, and the fact-checker needs the pictures. The text exists as a judgement (tips guide section 19; skills/check-and-critique/SKILL.md line 29) but no workflow or agent has the role: workflows/critique-film.js has only picture, content and code critics (its picture prompt says only 'anachronistic' and still says 'right 140 px', the older rule; rule 12 is 0.90 across), it does not pass the section 19 list of what critics must still judge, workflows/verify-facts.js reads only the script and on-screen words, and agents/place-checker.md has no period mode. Searched: history, period, anachron, 140 px, 0.90 in critique-film.js; picture, jpg, png in verify-facts.js; period, history, era in the place agents.
+SRC: Lessons.md 19, 26, 83, 94; story logs 29, 32, 10; Decisions items 12, 13, 15
+WHERE: workflows/critique-film.js (add a history critic, pass the section 19 list, change 'right 140 px' to 0.90 across and 0.80 down); workflows/verify-facts.js (also give it the pictures and every string written on props); agents/place-checker.md (a period check inside Mode look); skills/check-and-critique/SKILL.md
+CODE: Yes. A test that workflows/critique-film.js contains a history critic and the section 19 list. The preflight film stage can refuse a critique file that has no 'history' area. verify-facts.js takes a pictures argument and a prop-lettering list.
+
+=== A6 high
+LESSON: [missing] The world round a built place must hold from every view. An all-round backdrop (rings of hills all the way round, lighter and bluer when far, real shapes for parallax), camera clip end of 1000 m or more, plain ground continued to the horizon so no view shows empty sky above a dark slab, the ground's rectangular edge hidden (a rim bank can cover the hills; fade it out beyond about 60 m), and backdrop shapes unlit with their shadow visibility off so they never block the sun. A thin golden haze (a volume) dimmed the whole picture and erased the main building, so depth comes from colour and from losing edges. Searched: backdrop, hills, horizon, clip end, ground rim, edge of the ground, terrain edge, haze, volume, visible_shadow. Only the film page's kit.backdrop (a plain card) and a clip end of 1500 inside pit-village scripts turned up; plan_lights.py line 846 turns visible_shadow off for people only.
+SRC: mine story (village_and_sky and ground_and_yard known flaws); courtyard story logs 5, 9, 10; Garden plan 30 section 3 item 1 and section 4 'Atmosphere'
+WHERE: skills/surfaces-wear-and-construction/construction-and-scale.md (new section 'The world round the place'); agents/place-planner.md item 10 (every named view must see a finished horizon; the ground part owns the world); skills/surfaces-wear-and-construction/the-required-steps.md Step 7
+CODE: Yes. A 'horizon' check in the place audit: for each view camera, cast rays across the frame; flag rays that hit nothing below the horizon, flag the ground edge appearing inside the frame, flag a clip end shorter than the farthest object, and flag a large backdrop object whose shadows are on. A 'backdrop' role in place-kit/data/roles.json with those settings built in.
+
+=== A7 high
+LESSON: [missing] The sun can do nothing. A low sun throws long shadows (length is height divided by tan of the sun's elevation): a 4 m hall with the sun low behind it shadowed about 25 m of garden, and hazy backdrop hills also blocked the sun. The scene looked flat and the materials were blamed. Searched: shadow length, low sun, elevation, tan(, wall blocking the sun, cast_shadow. Only the kit's own sun (35 degrees, light.py) and 'only a few lights cast shadows' (tips section 7) turned up.
+SRC: courtyard story log 9; Garden plan 30 section 4 (9 degree sun: a 1 cm ridge throws a 6 cm shadow)
+WHERE: skills/surfaces-wear-and-construction/the-required-steps.md Step 7 (sun and sky); kit/docs/LLM tips and tricks.md section 7
+CODE: Yes. In calculators/plan_lights.py, send a ray from every ground sample in view toward the sun and report the share that meet geometry first. Warn when more than half is shadowed (an invented limit, marked so) and name the object that shadows most of it.
+
+=== A8 high
+LESSON: [partly, and two skills disagree] No blank signs, book covers or plain boxes: every sign and book carries real lettering made by our own code (the person's 'from now on' rule). Carried only in skills/build-and-paint-a-place/SKILL.md line 88. skills/make-3d-models/SKILL.md (the other skill a model builds props from) does not say it, and skills/paint-and-cut/SKILL.md line 44 says 'Ask for blank placards and plain signs' with no reason, which a model can read as permission for blank built signs. The place audit fails plain boxes (calculators/place_audit_check.py around line 513) but nothing checks that a sign has lettering. Searched: lettering, book cover, plain box, blank sign, placard in all skills.
+SRC: Decisions item 34; story log 29; Workflows built-place step 1
+WHERE: skills/make-3d-models/SKILL.md (add the rule); skills/paint-and-cut/SKILL.md line 44 (explain it); calculators/place_audit_check.py
+CODE: Yes. In the place audit, fail any object whose role or name says sign, notice, board or book and that has no lettering material (a picture or text-made shape).
+
+=== A9 high
+LESSON: [partly] Never put the person's email or name into a request to an outside website. A helper wrote the person's email into the identity line its download scripts sent to Wikipedia and Wikimedia. The plugin says it only for Poly Haven (skills/surfaces-wear-and-construction/surface-recipes.md line 139) and its scans find email-like strings in files it wrote itself. Searched: email, your name, person's name, User-Agent in skills, agents, house rules; agents/place-checker.md line 63 searches written files for email-like strings.
+SRC: textures story log 28
+WHERE: skills/make-explainer-film/house-rules.md (a new 'Privacy' bullet); agents/place-builder.md; agents/place-checker.md process mode; skills/surfaces-wear-and-construction/surface-recipes.md line 139 (say it for every site)
+CODE: Yes. Extend the process checker's file scan (and plan_budget.py push) to look inside every script that makes a web request for an email-like string or the person's name in a header, and fail on it.
+
+=== A10 high
+LESSON: [missing] Never message a helper that spends money while it is running. A message to a running paid helper woke a second copy of it, which made 8 extra paid calls (about US$0.70) before it stopped. Searched: second copy, wake, woke, message helper, SendMessage in skills, agents, workflows: nothing (the only 'wakes' are about card start-up).
+SRC: textures story log 31 ('My mistake')
+WHERE: skills/make-explainer-film/house-rules.md ('Helpers'); agents/place-renderer.md and agents/place-builder.md (what to do if another copy of you is working); workflows/build-a-place.js
+CODE: Yes. `explainer-film-place card-time check` (place_kit/card_time.py) and the spend ledger can refuse or flag a paid job from a helper name that already has a job in flight, and write the double run into the ledger.
+
+=== A12 medium
+LESSON: [missing] Shell eats dollar signs. A record file written through the shell had US$0.048 turn into US/bin/bash.048 because the shell read $0 as its own name; a spend record was damaged the same way twice. Searched: bin/bash, here-document, heredoc, dollar sign, dollar-sign over skills, agents, docs and kit: only shell scripts that start with the bash line. The plugin tells models to write price ledgers and a fal-spend line (house-rules.md 'Money').
+SRC: project-notes/Lessons.md 142 and its trap; story log 38; textures story log 27
+WHERE: skills/make-explainer-film/house-rules.md ('Money'); kit/docs/LLM tips and tricks.md section 16; agents/place-renderer.md (ledger notes); skills/film-and-finish/SKILL.md
+CODE: Yes. plan_budget.py (reading a ledger, and the push check) and preflight refuse a note or ledger that contains 'bin/bash' or 'US/'.
+
+=== A13 medium
+LESSON: [partly, contradicted] 'The lower quarter of the picture is the empty floor' is still an instruction in the plugin, although the review of chapter 2 traced the empty bottom third to that very sentence (about 70 percent of frames had the bottom fifth over 30 percent darker than the middle). It is right for the paper route (pieces stand in the empty part) and wrong for a built place painted over. Searched: lower quarter, empty floor: skills/paint-and-cut/SKILL.md lines 34-35, kit/docs/paper-look - 04 Painting prompts.md line 17, 02 style rules line 46, 01 line 122. The cure (the nearest story thing reaches about 0.70 down) is in tips section 4 and rule 7, and film-settings composing.bottom_fifth_darker_max_share has no tool behind it.
+SRC: story log 26; Lessons.md 133
+WHERE: skills/paint-and-cut/SKILL.md lines 34-35; kit/docs/paper-look - 04 Painting prompts.md line 17; 02 The look - style rules.md line 46; 01 How to make a film with this kit.md line 122
+CODE: Yes, small. Add a check on the finished plate or painting that compares the darkness of the bottom fifth with the middle against composing.bottom_fifth_darker_max_share (the number exists, the tool does not).
+
+=== A17 medium
+LESSON: [missing] The renderer sets the mood the painter follows. EEVEE streets came out cold blue and Cycles streets warm gold (mostly because EEVEE's light cut-off stops lamp light reaching the road), so one place must not mix renderers. Cycles also showed effects of its own (a fire drum lit orange, a speck at a roof corner, a sky dome that darkened). Not tried: Cycles in a moving shot (its noise clean-up could flicker) and whether the painting checks, tuned on EEVEE plates, hold for Cycles plates. Searched: cold blue, warm gold, light threshold, light cut-off, mix renderers, Cycles plate, flicker. Only the renderer rule itself is carried (rendering-on-rented-cards.md section 1).
+SRC: textures story log 26; Decisions item 44 (calls)
+WHERE: skills/surfaces-wear-and-construction/rendering-on-rented-cards.md section 1; skills/build-and-paint-a-place/SKILL.md section 6 (plates)
+CODE: Yes. The render record already stores the engine; preflight plates can give a LOOK when plates of one place were drawn with different engines, and a LOOK that the painting checks were tuned on EEVEE plates.
+
+=== A19 medium
+LESSON: [partly, code differs from the lesson] The wear layers decide which sides stay sheltered and damp (moss, soot, fade) as if the sun stood at azimuth 135 degrees and 45 degrees up (place_kit/wear/masks.py lines 35-36 and 223; light.py line 14), and do not read the scene's own sun lamp. Only a scene lit by the kit's own sun matches. Searched: sun, azimuth in place_kit/wear, light.py, checks.
+SRC: Garden plan 30 section 5 note and builder 3 part B
+WHERE: skills/surfaces-wear-and-construction/wear-recipes.md; skills/surfaces-wear-and-construction/the-required-steps.md Step 7; kit/place-kit/place_kit/wear/masks.py; kit/place-kit/place_kit/light.py
+CODE: Yes. masks.py reads the scene's sun lamp when there is one (keeping 135 and 45 as the fallback), or the audit warns when the scene's sun direction differs from the constants by more than a set angle (an invented limit).
+
+=== A21 medium
+LESSON: [missing] Blender 5.2 traps not yet in the list of 16. (1) Geometry Nodes modifier inputs moved: set them through mod.properties.inputs.<identifier>.value, not mod[identifier] (the add-on written for 5.1 broke this way; the courtyard test failed until a small shim in the script fixed it, leaving the add-on untouched). (2) In Blender 5.2 a collection's light-linking entries do not name their object: pair them with the collection's objects in order (lesson 120; the kit's set_dressing light_reaches hides it, but a model writing its own light linking would lose a round). Searched: properties.inputs, geometry nodes modifier input, light link, light_linking; blender-5-traps.md trap 11 is only about multi-input socket order.
+SRC: courtyard story log 2 (astra_loader shim); Lessons.md 120
+WHERE: skills/surfaces-wear-and-construction/blender-5-traps.md (new traps 17 and 18)
+CODE: Yes. Add a one-line Blender probe to `explainer-film-setup` that sets a Geometry Nodes input both ways and reads one light-linking pairing, and prints which worked in the installed Blender.
+
+=== A22 medium
+LESSON: [missing] Do not build thousands of small shapes one object at a time. The courtyard's leaves took 7 minutes made one by one and about 10 seconds built in bulk from arrays; one mesh per material, under about 300,000 triangles each before displacement; object count, not triangles, slows scripts and exports. The place kit builds its own growth in numpy and joins per kind (DEVIATIONS.md), but nothing tells a model writing its own scatter code. Searched: foreach_set bulk, one object at a time, per-object, quadratic, bulk building. Only join-by-material (blender-mcp-notes.md B15, card-model route) turned up.
+SRC: courtyard story log 7; mine 'Notes for the six builders' (Efficiency)
+WHERE: skills/surfaces-wear-and-construction/blender-5-traps.md (new trap); agents/place-builder.md section 3
+CODE: Yes, small. Add an objects_total_max number to the place audit next to the existing scatter and triangle limits.
+
+=== A23 medium
+LESSON: [missing] Cap each Blender run's processor threads (blender -t 2) when several helpers run on one computer, so six helpers do not starve each other. workflows/build-a-place.js allows up to 4 parallel builders (2 on a slow computer) but passes no limit. Searched: -t 2, --threads, threads, starving, one heavy job at a time (tips section 8 says only that); place_kit has no -t flag.
+SRC: mine 'Notes for the six builders' ('Run Blender like this')
+WHERE: agents/place-builder.md and agents/place-integrator.md (how to run Blender); workflows/build-a-place.js (the command text); the place kit's Blender launcher
+CODE: Yes. Let the place kit's Blender launcher add -t from the core count and the workflow's maxParallelBuilders.
+
+=== A25 medium
+LESSON: [missing] Names written on props. An invented name (newspaper masthead, shop, firm) must be one made up on purpose and checked against real ones; a real name must be used correctly. The checkout's newspaper name was checked against 1,617 New Zealand newspaper titles; the colliery and firm names were invented on purpose. Text on a prop is also a claim: its dates and weekdays were checked (30 April 1926 was a Friday, 1 May a Saturday). Searched: masthead, newspaper, real title, real brand, invented name, made-up shop. paint_request.py --real-names guards real people only, and verify-facts reads page files, not the lettering written in Blender prop scripts.
+SRC: story log 29 (lines 942, 975-979), log 34 round 5
+WHERE: skills/build-and-paint-a-place/SKILL.md step 1 (props); skills/check-facts/SKILL.md; workflows/verify-facts.js; agents/place-checker.md
+CODE: Yes. A small tool that lists every string in the prop scripts and in lettering-sizes.json and writes it to a file for verify-facts; extend paint_request.py --real-names from people to the names on props.
+
+=== A26 medium
+LESSON: [missing, and the README overstates] Two buildings or objects that must stand for different things have to be tellable apart at a glance (dark red brick with one round chimney against pale stone with two square chimneys and a tank), and a background landmark must not borrow a factory's identity. calculators/README.md line 245 lists 'Telling two similar buildings apart' and 'Background landmarks must not borrow a factory's identity' under view_audit.py, but view_audit.py has no such check. Searched: apart, similar, identity, borrow, tell apart, look alike in code and docs.
+SRC: story log 34 round 2; calculators/README.md inventory
+WHERE: agents/place-planner.md item 11 (readable features); skills/build-and-paint-a-place/SKILL.md; agents/place-checker.md Mode blind_reader; kit/calculators/README.md line 245 (correct the claim)
+CODE: Partly. Add a 'which is which' question to the blind reader, and a picture measure of the colour difference between two named regions on the flat-colour ID map, failing below a set value (invented). Correct the README inventory line now, since it says a tool does this.
+
+=== A28 medium
+LESSON: [missing] The person's own words for the painted look in the garden work: 'No rounded smooth curves. Just edges and flat surfaces that approximate a curve.' Broad, few, unequal colour passages; marks that differ by material; chiselled unequal planes; short mineral marks; depth by colour and selective edge loss; judge the whole picture first. Smooth-shade only ground and pebbles, not architecture or lanterns. Searched: rounded smooth curves, approximate a curve, chisel, flat surfaces, selective edge. Only 'few, bigger, cleaner marks' (style-rule-and-measures.md) and the kit's smoothing of the ground (ground_mesh.py) turned up.
+SRC: Garden plan 30 section 4 and builder 2; textures story log 30
+WHERE: skills/surfaces-wear-and-construction/style-rule-and-measures.md ('The rule'); kit/place-kit/data/templates/style_note.md part 1 (form); agents/place-planner.md
+CODE: No kit check exists for facets. The style guard measures fine contrast only, so a human or a fresh look checker judges this.
+
+=== A29 medium
+LESSON: [partly] The painter adds heavy pale clouds even when told not to (three sentences against them did not hold): a plain dark sky was put in using Blender's exact sky outline, and it took four tries to keep thin rails clean. The prompt template bans clouds, moon and stars (kit/calculators/templates/paint-prompt.txt lines 33-34), but no step replaces the painted sky from a mask. Searched: plain sky, clouds, sky mask, sky outline.
+SRC: textures story logs 19, 24, 25
+WHERE: skills/build-and-paint-a-place/SKILL.md section 6 (when a painting arrives)
+CODE: Yes. In calculators/after_painting.py measure the contrast inside the sky mask and flag clouds above a set value; a helper that lays the plate's plain sky over the painting.
+
+=== A30 medium
+LESSON: [partly] Concept pictures set the character of a place before anything is built. The garden painted over its two main views, made element sheets (bridge, planks, roof, trees, water edge, lantern, grass and moss) and swatches (29 calls, US$3.86 of a US$15 allowance) and wrote the style note from them. Nano Banana 2 kept the style best, Nano Banana Pro was too photographic, and Flux 3 moved the picture around. Carried: style-rule-and-measures.md lines 46-47 say a concept step is the better start when money allows; DEVIATIONS.md line 101 says the planner has no paid concept phase; the model comparison is nowhere.
+SRC: textures story log 31
+WHERE: skills/surfaces-wear-and-construction/style-rule-and-measures.md ('Writing a style note'); agents/place-planner.md; kit/place-kit/DEVIATIONS.md
+CODE: Partly. The ledger gate already covers a paid step; the prices are in film-settings.json money. No new tool needed.
+
+=== A32 medium
+LESSON: [partly] What a standing allowance covers. It covers the kind of spending it was given for (pictures and props from the painting service; voice only from the voice service). Spending inside it is still reported each time. A different kind of experiment needs a fresh clear yes. Helpers must be told the true remaining figure (one brief said US$3 when US$8.70 was left). Carried: plan_budget.py ledger counts the allowance from its start date and a `covers` list; make-explainer-film/SKILL.md lines 105-109. Missing: 'still reported', 'a new kind of experiment needs a new yes', 'give helpers the true figure'. Searched: allowance, covers, true remaining, what is left.
+SRC: Decisions items 19, 30, 31, 34, 40; story log 26
+WHERE: skills/make-explainer-film/house-rules.md ('Money'); skills/paint-and-cut/SKILL.md section 1
+CODE: Yes, small. plan_budget.py ledger counts only entries whose service is in `covers` toward an allowance but never says a step of another service needs a fresh yes; make it print that, and print the remaining figure in a line to paste into helper briefs.
+
+=== A34 medium
+LESSON: [partly] Calibrate every measuring tool with controls and tune on several seeds. A shuffled copy of a picture must score about 0.99, a blurred copy 0.17, a different surface 0.09; a first version scored 0 even for alike pictures and was loosened and retested. The seed that was tuned scores 0.04 to 0.08 higher than others, so quote scores on other seeds, and say when a gain came from one jumpy measure. Carried: individual tests with controls (normals-test flipped copy, picture_measures blurred copy) but no general rule. Searched: positive control, negative control, with controls, several seeds, tuned seed, overfit.
+SRC: textures story logs 1, 3, 12, 14, 15
+WHERE: kit/calculators/README.md ('How to add a calculator'); skills/surfaces-wear-and-construction/fresh-checkers.md
+CODE: Yes. The tests helper (calculators/tests/checks.py) can require a positive and a negative control case for each new metric.
+
+=== A35 medium
+LESSON: [partly] A fresh helper should judge the FILMED clip in motion. Three separate logs (27, 29, 32) found faults that stills could not show: a shadow that fades in only when the move starts, a barrel that floats, a one-frame colour change, a pale outline that appears only once the camera moves. Carried as advice (build-and-paint-a-place SKILL.md line 287 'look at the film in motion', find_jumps.py, the 2 s contact sheet in film-and-finish/SKILL.md lines 99-106), but no agent or workflow commissions a fresh helper to judge the clip; critique-film and check-fixes judge stills before filming. Searched: in motion, filmed clip, contact sheet in the workflows and check-and-critique.
+SRC: story logs 27, 29, 32
+WHERE: skills/check-and-critique/SKILL.md (a new step 'after filming'); skills/film-and-finish/SKILL.md lines 99-106; agents/film-critic.md
+CODE: Yes. The preflight finish stage can require a clip-critique file newer than the film, like the critique file the film stage already requires.
+
+=== A36 medium
+LESSON: [partly] The plugin's copy of the film kit is behind the project. kit/kit-sync-notes.md says the last copy was 16 October; logs 37 to 39 (stage toe, lockout test look, docs 05 wet-street block, lessons 141 and 142) are not in it. Also the film kit's Works and checkout Blender builders (blender/inflation-chapter-2-newcomers/works/ and checkout/, with assemble_works.py, works_kit.py and assemble_checkout.py) are absent: the plugin holds only props/. They are the best patterns for a crowd and an interior. Verified by listing both folders.
+SRC: story log 35; Workflows 'The reusable kit'; reader 1 and reader 3
+WHERE: kit/kit-sync-notes.md ('What waits'); kit/paper-film/blender/inflation-chapter-2-newcomers/ (add works/ and checkout/)
+CODE: Yes. The release step the README says is still by hand: have `explainer-film-setup` list files in the film kit that are newer than the last sync date when the project folder is present.
+
+=== A38 low
+LESSON: [partly] Check the free disk before reading a failed planning check as a fault in a change. A planning test failed on a nearly full machine for the wrong reason (1.3 GB free against a 4 GB reserve); the plugin hit and worked round it in code (place-kit/DEVIATIONS.md line 165, --free-disk-gb 40 in calculators/preflight.py) but the advice is nowhere. blender-5-traps.md trap 16 is about filling the disk, not about a failing test. Searched: free disk, disk.
+SRC: Lessons.md 140; story logs 37-38
+WHERE: skills/surfaces-wear-and-construction/blender-5-traps.md trap 16; kit/docs/LLM tips and tricks.md section 0
+CODE: Yes, small. Make the preflight failure message print the free disk when the failing check is the disk reserve.
+

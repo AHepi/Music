@@ -1,0 +1,22 @@
+[
+ {"section": "painting_tools.after_painting", "key": "pale_patch", "after": "leftover_shadow", "entry": {
+  "value": {"band_pixels_at_1536": 60, "blur_pixels_at_1536": 6, "lighter_by_levels": 8, "lighter_share_max": 0.1},
+  "unit": "pixels on a plate 1536 wide, levels of 255 (after the blur), share of the compared ground dots",
+  "kind": "invented",
+  "source": "Lessons round (23 October 2026). Measured fault: the wet lockout's old dry behind painting brought the road the near props hid back pale and dry when the camera moved, 59 percent of those road dots lighter (film kit 05 'A dark painted street', log 37; the textures logs measured 56 to 71 percent). The limit 0.10 and the blur are a starting point nobody has tested on a matched wet pair"}},
+ {"section": "painting_tools.after_painting", "key": "road_arrives_look_below", "after": "pale_patch", "entry": {
+  "value": 0.9,
+  "unit": "share of the painted ground's brightness that reaches the film (the finish pass without glow, vignette and grain)",
+  "kind": "invented",
+  "source": "Wet lockout (log 37): without a toe the wet road arrived at 0.75 to 0.86 of its painted brightness and some crushed to black (measured in the stage); with toe 1 the wet lockout reached 0.935 and the dry one with the same look 0.96 (measured). The project set no limit: under about 0.9 is a reason to look"}},
+ {"section": "painting_tools.after_painting", "key": "bottom_fifth_bands", "after": "road_arrives_look_below", "entry": {
+  "value": {"bottom": [0.8, 1.0], "middle": [0.4, 0.6]},
+  "unit": "share of the picture's height, from the top",
+  "kind": "invented",
+  "source": "Lessons round: where after_painting.py measures composing.bottom_fifth_darker_max_share on one painting (the log 26 review compared the bottom fifth with the middle of each frame, without saying how wide the middle was)"}},
+ {"section": "painting_tools.after_painting", "key": "sky_clouds", "after": "bottom_fifth_bands", "entry": {
+  "value": {"erode_pixels_at_1536": 9, "blur_pixels_at_1536": 4, "spread_levels_max": 8, "sky_share_min": 0.02},
+  "unit": "pixels on a plate 1536 wide, levels of 255 (the spread left once each row's own middle level is taken away), share of the frame",
+  "kind": "invented",
+  "source": "Textures logs 19, 24, 25: the painter added heavy pale clouds to a plain dark sky though three sentences said not to; a plain dark sky was put back using Blender's exact sky outline (four tries to keep thin rails clean). A plain or evenly graded sky spreads close to 0 levels by this measure; 8 is a starting point"}}
+]

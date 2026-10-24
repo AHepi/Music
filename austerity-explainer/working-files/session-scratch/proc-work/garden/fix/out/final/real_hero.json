@@ -1,0 +1,107 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/garden_real.blend",
+ "args": {
+  "out": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_hero",
+  "camera": "photo",
+  "size": "2400x1600",
+  "samples": 512,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": true,
+  "check_groups": true,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "9aa0c82e4704fe43077802e930659b91a542fb573918d1937de045ae77acfdde",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD Ryzen 9 7950X 16-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 512,
+ "seed": 7,
+ "camera": "photo",
+ "size": [
+  2400,
+  1600,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 36.28,
+ "files": {
+  "exr": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_hero.exr",
+   "bytes": 40874752,
+   "sha256": "b71d28a66b914adc8c9f072cdd05481bdad903281e7d68b9847d95cf247c96f9"
+  },
+  "png": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_hero.png",
+   "bytes": 5799176,
+   "sha256": "ac7d1bdf149822e5c521adc4ae90e3e2bd175d3c97d22e84bda0cd63bcde2a89"
+  }
+ },
+ "group_check": {
+  "groups": [
+   "Combined_sun",
+   "Combined_rim",
+   "Combined_sky",
+   "Combined_fill",
+   "Combined_hall",
+   "Combined_lantern",
+   "Combined_rest"
+  ],
+  "rel_error": 0.01139,
+  "share": {
+   "sun": 0.3017,
+   "rim": 0.0036,
+   "sky": 0.3098,
+   "fill": 0.1164,
+   "hall": 0.258,
+   "lantern": 0.0056,
+   "rest": 0.0047
+  },
+  "denoise_on": true
+ }
+}

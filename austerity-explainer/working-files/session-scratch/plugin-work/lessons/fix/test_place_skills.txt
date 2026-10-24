@@ -1,0 +1,73 @@
+== place skills: the words of the plugin against its code
+PASS  the new skill exists: /home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/SKILL.md
+PASS  the new skill: name equals its folder and the description holds every routing word: yes
+PASS    (on the wrong text this check fails): yes
+PASS  make-3d-models, build-and-paint-a-place and make-explainer-film name the new skill in their descriptions: yes
+PASS    (on the wrong text this check fails): yes
+PASS  no skill description or when_to_use holds a colon followed by a space (strict YAML): none does
+PASS    (a description with such a colon fails this check): yes
+PASS  make-explainer-film sends place work to the new skill in "Before you start" and has the place stage row: yes
+PASS  the REQUIRED block is identical in the three skills that carry it: yes
+PASS    (a changed block fails this check): yes
+PASS  the REQUIRED block says to report plainly (never to hide the work) and names the audit and the place stage: yes
+PASS  the launcher prints its verbs: 26 verbs
+PASS  verbs and options in skills/build-and-paint-a-place/SKILL.md (33 commands): all exist
+PASS  verbs and options in skills/build-cinema-page/SKILL.md (0 commands): all exist
+PASS  verbs and options in skills/build-cinema-page/camera-and-framing.md (0 commands): all exist
+PASS  verbs and options in skills/build-cinema-page/example-briefs.md (0 commands): all exist
+PASS  verbs and options in skills/build-cinema-page/guide.md (0 commands): all exist
+PASS  verbs and options in skills/check-and-critique/SKILL.md (0 commands): all exist
+PASS  verbs and options in skills/check-facts/SKILL.md (0 commands): all exist
+PASS  verbs and options in skills/film-and-finish/SKILL.md (0 commands): all exist
+PASS  verbs and options in skills/make-3d-models/SKILL.md (9 commands): all exist
+PASS  verbs and options in skills/make-3d-models/blender-mcp-notes.md (0 commands): all exist
+PASS  verbs and options in skills/make-explainer-film/SKILL.md (3 commands): all exist
+PASS  verbs and options in skills/make-explainer-film/house-rules.md (1 commands): all exist
+PASS  verbs and options in skills/paint-and-cut/SKILL.md (0 commands): all exist
+PASS  verbs and options in skills/record-narration/SKILL.md (0 commands): all exist
+PASS  verbs and options in skills/research-and-script/SKILL.md (0 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/SKILL.md (61 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/batched-rounds-and-card-time.md (10 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/blender-5-traps.md (0 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/construction-and-scale.md (2 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/fresh-checkers.md (0 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/rendering-on-rented-cards.md (7 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/style-rule-and-measures.md (2 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/surface-recipes.md (0 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/the-required-steps.md (16 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/wear-recipes.md (0 commands): all exist
+PASS  verbs and options in skills/surfaces-wear-and-construction/worked-examples-garden-and-canal-lock.md (0 commands): all exist
+PASS  verbs and options in agents/fact-checker.md (0 commands): all exist
+PASS  verbs and options in agents/film-critic.md (0 commands): all exist
+PASS  verbs and options in agents/page-builder.md (0 commands): all exist
+PASS  verbs and options in agents/place-builder.md (16 commands): all exist
+PASS  verbs and options in agents/place-checker.md (5 commands): all exist
+PASS  verbs and options in agents/place-integrator.md (7 commands): all exist
+PASS  verbs and options in agents/place-planner.md (3 commands): all exist
+PASS  verbs and options in agents/place-renderer.md (10 commands): all exist
+PASS  verbs and options in workflows/build-a-place.js (1 commands): all exist
+PASS  verbs and options in kit/docs/LLM tips and tricks.md (15 commands): all exist
+PASS  verbs and options in kit/place-kit/data/templates/part_brief.md (5 commands): all exist
+PASS  verbs and options in kit/place-kit/data/templates/style_note.md (3 commands): all exist
+PASS  verbs and options in kit/place-kit/data/templates/acceptance_tests_template.json (20 commands): all exist
+PASS  verbs and options in kit/place-kit/data/templates/real_world_facts_template.json (0 commands): all exist
+PASS    (a made-up verb and a made-up option fail these checks): yes
+PASS  every option written beside `explainer-film-preflight STAGE` is in the preflight's --help (33 commands): all exist
+PASS  the preflight has the stage place: yes
+PASS  every house number written as place_section.key exists in film-settings.json (46 written): all exist
+PASS    (a made-up house number fails this check): yes
+PASS  every kit file named in backticks exists (213 named): all exist
+PASS    (a made-up file name fails this check): yes
+PASS  every plain file name ending in .md written in the new skill is a file of the plugin: all are
+PASS  the new skill folder holds all ten files: all ten
+PASS  plugin.json says 1.4.0: got '1.4.0', expected '1.4.0'
+PASS  the README has a 1.4.0 entry and says nine stages: yes
+PASS  the README names the reminder hook and says its format was not run inside Claude Code: yes
+NOTE  not checked as a failure: the marketplace file two folders up says 1.3.0, plugin.json says 1.4.0 (it is outside the plugin folder; whoever publishes sets it)
+PASS  every part the README says is inside the plugin is there (14 named): all are there
+PASS  model_lint.py has the --surfaces option the README, the skills and the tips guide mention: yes
+PASS  no new text holds an email-like string, a provider settings folder, a long hex id or a key-looking value (24 files): none
+PASS    (made-up private text fails this check, with all four kinds): yes
+PASS  the agent files the workflow names exist (place-builder.md, place-checker.md, place-integrator.md, place-planner.md, place-renderer.md): all exist
+PASS  `explainer-film-setup --help` prints the use line, exits 0 and makes nothing; `explainer-film-setup -q` stops with exit 2 and makes nothing: exits 0 and 2; left in the folder: nothing
+-- place skills: the words of the plugin against its code: 70 of 70 checks passed; 1 part(s) skipped

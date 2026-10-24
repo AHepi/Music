@@ -1,0 +1,138 @@
+ M plugins/explainer-film/README.md
+ M plugins/explainer-film/bin/explainer-film-setup
+ M plugins/explainer-film/kit/calculators/README.md
+ M plugins/explainer-film/kit/calculators/paint_request.py
+ M plugins/explainer-film/kit/calculators/plan_budget.py
+ M plugins/explainer-film/kit/calculators/preflight.py
+ M plugins/explainer-film/kit/calculators/templates/paint-prompt.txt
+ M plugins/explainer-film/kit/calculators/tests/fixtures/place/finished_hut_audit.json
+ M plugins/explainer-film/kit/calculators/tests/fixtures/place/flat_hut_audit.json
+ M plugins/explainer-film/kit/calculators/tests/test_house_rules.py
+ M plugins/explainer-film/kit/calculators/tests/test_make_check_file.py
+ M plugins/explainer-film/kit/calculators/tests/test_model_lint.py
+ M plugins/explainer-film/kit/calculators/tests/test_paint_request.py
+ M plugins/explainer-film/kit/calculators/tests/test_place_skills.py
+ M plugins/explainer-film/kit/calculators/tests/test_plan_budget.py
+ M plugins/explainer-film/kit/calculators/tests/test_preflight.py
+ M plugins/explainer-film/kit/film-settings.json
+ M plugins/explainer-film/kit/kit-sync-notes.md
+ M plugins/explainer-film/kit/paper-film/blender/make_check_file.py
+ M plugins/explainer-film/kit/paper-film/blender/model_kit.py
+ M plugins/explainer-film/kit/paper-film/blender/model_lint.py
+ M plugins/explainer-film/kit/paper-film/blender/textures.py
+ M plugins/explainer-film/kit/place-kit/data/dial_table.json
+ M plugins/explainer-film/kit/place-kit/data/looks/derelict.json
+ M plugins/explainer-film/kit/place-kit/data/looks/kept.json
+ M plugins/explainer-film/kit/place-kit/data/looks/lived_in.json
+ M plugins/explainer-film/kit/place-kit/data/looks/neglected.json
+ M plugins/explainer-film/kit/place-kit/data/real_world_facts.json
+ M plugins/explainer-film/kit/place-kit/data/roles.json
+ M plugins/explainer-film/kit/place-kit/data/species.json
+ M plugins/explainer-film/kit/place-kit/data/surfaces.json
+ M plugins/explainer-film/kit/place-kit/place_command.py
+ M plugins/explainer-film/kit/place-kit/place_kit/checks/construction.py
+ M plugins/explainer-film/kit/place-kit/place_kit/checks/scale.py
+ M plugins/explainer-film/kit/place-kit/place_kit/checks/scene_audit.py
+ M plugins/explainer-film/kit/place-kit/place_kit/cli.py
+ M plugins/explainer-film/kit/place-kit/place_kit/commands.py
+ M plugins/explainer-film/kit/place-kit/place_kit/names.py
+ M plugins/explainer-film/kit/place-kit/place_kit/parts.py
+ M plugins/explainer-film/kit/place-kit/place_kit/roles.py
+ M plugins/explainer-film/kit/place-kit/place_kit/scene_read.py
+ M plugins/explainer-film/kit/place-kit/place_kit/surfaces/displacement.py
+ M plugins/explainer-film/kit/place-kit/place_kit/surfaces/ground_mesh.py
+ M plugins/explainer-film/kit/place-kit/place_kit/surfaces/heights.py
+ M plugins/explainer-film/kit/place-kit/place_kit/surfaces/normals.py
+ M plugins/explainer-film/kit/place-kit/place_kit/wear/masks.py
+ M plugins/explainer-film/kit/place-kit/place_kit/wear/nodes.py
+ M plugins/explainer-film/skills/build-and-paint-a-place/SKILL.md
+ M plugins/explainer-film/skills/make-3d-models/SKILL.md
+ M plugins/explainer-film/skills/make-explainer-film/SKILL.md
+ M plugins/explainer-film/skills/surfaces-wear-and-construction/SKILL.md
+ M plugins/explainer-film/skills/surfaces-wear-and-construction/a-forest-village-example.md
+ M plugins/explainer-film/skills/surfaces-wear-and-construction/the-required-steps.md
+?? plugins/explainer-film/agents/place-builder.md
+?? plugins/explainer-film/agents/place-checker.md
+?? plugins/explainer-film/agents/place-integrator.md
+?? plugins/explainer-film/agents/place-planner.md
+?? plugins/explainer-film/agents/place-renderer.md
+?? plugins/explainer-film/kit/calculators/picture_measures.py
+?? plugins/explainer-film/kit/calculators/tests/fixtures/model_kit/check_bevel.py
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/audit-fail.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/audit-pass.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/blind-1.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/blind-2.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/check-clean.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/check-look.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/check-process-clean.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/check-process.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/check-structure.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/combine-report-fixed.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/combine-report.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/gate.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/ground-report.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/part-report-fixed.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/part-report.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/plan-many.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/plan.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/recheck-still-failing.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/recheck.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/render-fix.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/render-report.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/render-stalled.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/skeptic-nothing-severe.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place-workflow/skeptic.json
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place/make_render_scene.py
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place/make_yard_scene.py
+?? plugins/explainer-film/kit/calculators/tests/fixtures/place/probe_place.py
+?? plugins/explainer-film/kit/calculators/tests/test_build_a_place_workflow.py
+?? plugins/explainer-film/kit/calculators/tests/test_model_kit_surfaces.py
+?? plugins/explainer-film/kit/calculators/tests/test_picture_measures.py
+?? plugins/explainer-film/kit/calculators/tests/test_place_audit_check.py
+?? plugins/explainer-film/kit/calculators/tests/test_place_blender.py
+?? plugins/explainer-film/kit/calculators/tests/test_place_combine.py
+?? plugins/explainer-film/kit/calculators/tests/test_place_data.py
+?? plugins/explainer-film/kit/calculators/tests/test_place_render.py
+?? plugins/explainer-film/kit/calculators/tests/test_place_roles.py
+?? plugins/explainer-film/kit/calculators/tests/test_place_shapes.py
+?? plugins/explainer-film/kit/calculators/tests/test_preflight_place.py
+?? plugins/explainer-film/kit/calculators/tests/workflow_harness.mjs
+?? plugins/explainer-film/kit/place-kit/DEVIATIONS.md
+?? plugins/explainer-film/kit/place-kit/README.md
+?? plugins/explainer-film/kit/place-kit/SOURCES-AND-LICENCES.md
+?? plugins/explainer-film/kit/place-kit/data/examples/forest-village-ownership.json
+?? plugins/explainer-film/kit/place-kit/data/examples/forest-village-place-settings.json
+?? plugins/explainer-film/kit/place-kit/data/templates/stage_template.py
+?? plugins/explainer-film/kit/place-kit/place_kit/checks/combine.py
+?? plugins/explainer-film/kit/place-kit/place_kit/checks/fingerprint.py
+?? plugins/explainer-film/kit/place-kit/place_kit/checks/ownership.py
+?? plugins/explainer-film/kit/place-kit/place_kit/growth/pieces.py
+?? plugins/explainer-film/kit/place-kit/place_kit/growth/scatter.py
+?? plugins/explainer-film/kit/place-kit/place_kit/light.py
+?? plugins/explainer-film/kit/place-kit/place_kit/render/client.py
+?? plugins/explainer-film/kit/place-kit/place_kit/render/render_job.py
+?? plugins/explainer-film/kit/place-kit/place_kit/render/worker/copy_libraries.sh
+?? plugins/explainer-film/kit/place-kit/place_kit/render/worker/cycles_check.py
+?? plugins/explainer-film/kit/place-kit/place_kit/render/worker/handler.py
+?? plugins/explainer-film/kit/place-kit/place_kit/render/worker/start.sh
+?? plugins/explainer-film/kit/place-kit/place_kit/surfaces/damage.py
+?? plugins/explainer-film/kit/place-kit/place_kit/surfaces/materials.py
+?? plugins/explainer-film/kit/place-kit/place_kit/surfaces/roads.py
+?? plugins/explainer-film/kit/place-kit/place_kit/undo.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/chain.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/dials.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/door.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/hook.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layer_base.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/cracks_and_chips.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/dirt.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/edge_wear.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/grime.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/moss_and_algae.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/rubbish.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/rust.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/weathering.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/layers/wetness.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/plan_group.py
+?? plugins/explainer-film/kit/place-kit/place_kit/wear/seed.py
+?? plugins/explainer-film/workflows/build-a-place.js

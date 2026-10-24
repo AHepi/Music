@@ -1,0 +1,79 @@
+{
+ "about": "The measures of the given pictures.",
+ "pictures": [
+  {
+   "file": "closeup_closeup.jpg",
+   "size": [
+    1600,
+    1067
+   ],
+   "percentiles": {
+    "1": 0.20316000282764435,
+    "5": 0.22390510141849518,
+    "25": 0.2821725606918335,
+    "50": 0.3107043206691742,
+    "75": 0.35708317160606384,
+    "95": 0.5249710083007812,
+    "99": 0.6586079001426697
+   },
+   "mean_saturation": 0.21897655725479126,
+   "detail_energy": {
+    "all": 1.0557864904403687
+   },
+   "flat_windows": {
+    "windows": 672,
+    "flat": 153,
+    "share_under_0_014": 0.40625
+   },
+   "strong_saturation_share": 0.0,
+   "turquoise_share": 0.0,
+   "white_patch_pixels": 0,
+   "regions": [
+    "all"
+   ]
+  }
+ ],
+ "verdict": "pass",
+ "calculator": "picture_measures measure",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "place_measures.detail_energy_blur_pixels": {
+   "value": 2,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "place_measures.strong_saturation_level": {
+   "value": 0.7,
+   "unit": "saturation",
+   "kind": "judged"
+  },
+  "place_measures.turquoise_hue_band": {
+   "value": [
+    160,
+    210
+   ],
+   "unit": "degrees",
+   "kind": "judged"
+  },
+  "place_measures.turquoise_saturation_min": {
+   "value": 0.35,
+   "unit": "saturation",
+   "kind": "judged"
+  },
+  "place_measures.flat_window_pixels": {
+   "value": 96,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "place_measures.flat_window_step_pixels": {
+   "value": 48,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "place_measures.flat_window_std_max": {
+   "value": 0.01,
+   "unit": "luminance spread",
+   "kind": "judged"
+  }
+ }
+}

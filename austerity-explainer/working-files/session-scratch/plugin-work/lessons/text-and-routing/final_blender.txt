@@ -1,0 +1,77 @@
+07:19:27
+skipped  test_after_painting.py  (0.2 s)
+    SKIP  the paintings as the painter returned them and their plate facts are in the working files; set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it
+passed   test_after_painting_lessons.py  (0.8 s)  after_painting: pale patch, the road as filmed, the bottom fifth, clouds: 11 of 11 checks passed
+passed   test_build_a_place_workflow.py  (6.5 s)  workflow build-a-place: run with canned helpers: 142 of 142 checks passed
+passed   test_camera_audit.py  (3.1 s)  camera_audit: old behaviour, page window from the timeline, built-and-painted set checks: 27 of 27 checks passed
+passed   test_check_page_layout.py  (0.4 s)  page layout: pops, effects after their moment, held shots, overlaps: 10 of 10 checks passed
+passed   test_check_shot_kinds.py  (36.7 s)  shot checker: kinds of shot and the accepted list: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_example_check_files.py  (0.5 s)  example check files: kinds of shot, figures and accepted problems: 23 of 23 checks passed
+passed   test_frame_geometry.py  (0.1 s)  frame geometry: recorded cases and hold-outs: 57 of 57 checks passed
+passed   test_frame_geometry_parity.py  (0.3 s)  frame geometry: Python and JavaScript give the same numbers: 31 of 31 checks passed
+passed   test_house_rules.py  (2.2 s)  house rules: a plain note at the top and a --help: 5 of 5 checks passed
+passed   test_lessons_text.py  (0.2 s)  lessons round: the old contradictions stay gone and the new lessons stay where models read them: 22 of 22 checks passed
+passed   test_lint_script.py  (2.3 s)  script and narration gate: before recording and after: 43 of 43 checks passed
+passed   test_make_check_file.py  (49.2 s)  make_check_file: check files from the scene: 48 of 48 checks passed
+passed   test_model_kit_surfaces.py  (5.7 s)  film model helpers: no Pillow, lossless normal maps, hardened bevels: 18 of 18 checks passed
+passed   test_model_lint.py  (29.5 s)  model_lint: model faults before plates: 28 of 28 checks passed
+passed   test_page_events.py  (58.2 s)  page events: the notes change nothing, and the events are reproducible: 13 of 13 checks passed
+passed   test_paint_request.py  (0.2 s)  paint_request: prompts, preflight and price against the recorded cases: 10 of 10 checks passed; 1 part(s) skipped
+passed   test_picture_measures.py  (3.6 s)  picture measures: made-up pictures with known answers: 42 of 42 checks passed
+passed   test_place_audit_check.py  (0.9 s)  place audit judge: flat hut fails, finished hut passes, planted faults are named: 99 of 99 checks passed
+passed   test_place_batching_rule.py  (0.1 s)  batch rule and card-time allowance: written where models read, and equal to the house numbers: 27 of 27 checks passed
+FAILED   test_place_blender.py  (142.2 s)  place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo: 102 of 103 checks passed; FAILED: the yard finishes and passes the audit (exit 0 or a LOOK-only warning)
+    == place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo
+    FAIL  the yard finishes and passes the audit (exit 0 or a LOOK-only warning): exit 1: FAIL place: world [Camera A]: Camera A: 138 of its 512 rays below the horizon hit nothing (27%): the view sees past the edge of the ground into empty sky.  Fix: every view must see a finished horizon:
+    -- place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo: 102 of 103 checks passed; FAILED: the yard finishes and passes the audit (exit 0 or a LOOK-only warning)
+passed   test_place_card_time.py  (0.2 s)  place card time: the ledger, the allowance and the batch rule: 58 of 58 checks passed
+passed   test_place_combine.py  (10.5 s)  place combine: ownership between builders, and stage files run in two orders: 27 of 27 checks passed
+passed   test_place_data.py  (9.3 s)  place data: presets agree, the checker is not blind, the numbers make sense: 67 of 67 checks passed
+passed   test_place_facts.py  (0.7 s)  place facts: schema, converters and what they carry: 35 of 35 checks passed
+passed   test_place_fixes.py  (94.7 s)  place kit fixes inside Blender: the faults of the smoke check, the review and the newcomer judge: 40 of 40 checks passed
+passed   test_place_generic.py  (0.2 s)  place parts stay general: no word of one trade and period, even-handed presets, real worked examples: 18 of 18 checks passed
+passed   test_place_hook.py  (1.6 s)  place reminder hook: routing words at the start of a turn: 57 of 57 checks passed
+passed   test_place_render.py  (91.2 s)  place render: the rented-card client (fake card) and the render verb: 68 of 68 checks passed
+passed   test_place_roles.py  (0.2 s)  place roles: how objects get a role, and what a role needs: 72 of 72 checks passed
+passed   test_place_shapes.py  (3.3 s)  place shapes: recipes, normal maps, road height, graded grid, pieces, flat-map maths: 51 of 51 checks passed
+passed   test_place_skills.py  (3.9 s)  place skills: the words of the plugin against its code: 70 of 70 checks passed; 1 part(s) skipped
+passed   test_place_threads.py  (1.1 s)  place kit: the Blender thread limit (EXPLAINER_FILM_BLENDER_THREADS): 12 of 12 checks passed
+passed   test_place_variations.py  (135.0 s)  place variations: settings, checks before and after drawing, the split, the card and the sheet: 116 of 116 checks passed
+passed   test_place_world.py  (16.7 s)  place audit inside Blender: film frame, world, sun, lettering; the wear layers' sun: 23 of 23 checks passed
+passed   test_plan_budget.py  (3.3 s)  budget planner: money, filming time, pieces, stretches, memory, disk, pushes: 56 of 56 checks passed
+passed   test_plan_effects.py  (3.3 s)  plan_effects: wind, plumes, colour, contact shadows, window change, fire, lint: 52 of 52 checks passed
+passed   test_plan_lights.py  (4.1 s)  plan_lights: watts, reach, cone, links, surfaces, lamps, dark subject, render log, exposure: 31 of 31 checks passed
+passed   test_plan_page_timing.py  (0.9 s)  page timing: pauses, reading times, cuts, margins, words, numbers, stills: 57 of 57 checks passed
+passed   test_plan_shot.py  (0.3 s)  shot planner: recorded cases and the checkout hold-out: 60 of 60 checks passed
+passed   test_plan_states.py  (0.2 s)  plan_states: helper plates, cut or blend, against the Works and the people test: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_preflight.py  (20.4 s)  preflight: stages, accepted problems, missing inputs, the critique and the gate: 82 of 82 checks passed
+passed   test_preflight_place.py  (4.9 s)  preflight: the place stage (audit, freshness, pictures, fresh checker) and the plates stage asking for it: 30 of 30 checks passed
+passed   test_regression_compare.py  (1.6 s)  regression_compare: several draws, the control first: 8 of 8 checks passed
+FAILED   test_settings.py  (0.1 s)  film settings: the table, its reader and drift in the tools: 42 of 43 checks passed; FAILED: the invented numbers are few (at most a tenth of the table) and named
+    == film settings: the table, its reader and drift in the tools
+    FAIL  the invented numbers are few (at most a tenth of the table) and named: 74 of 712: camera.slide_magnification_borderline_share, people.facing_head_max_pixels, people.crowd_axis_min_angle_to_view_degrees, shot_planner.right_edge_aim_margin_share, shot_planner.planning_spot_box, shot_planner.face_visible_dot_min, shot_planner.crowd_min_figures, shot_planner.crowd_axis_min_elongation, shot_planner.check_shot_silhouette_band_share_of_width, shot_planner.check_shot_accepted_worse_share, views_and_models.model_lint.same_plane_gap_metres, views_and_models.model_lint.same_plane_normal_cos, views_and_models.model_lint.same_plane_overlap_min_square_metres, views_and_models.model_lint.upward_normal_z_min, views_and_models.model_lint.glowing_base_brightness_max, views_and_models.model_lint.size_claim_tolerance_share, views_and_models.model_lint.floor_min_square_metres, views_and_models.view_audit.must_read_facing_min_cos, views_and_models.view_audit.face_shows_within_degrees, views_and_models.check_file.dark_base_brightness, views_and_models.check_file.thin_fill_share, page_timing.pause_longer_than_needed_seconds, page_timing.overlap_pixels_min, page_timing.merge_stills_within_seconds, page_timing.layout.pop_strength_change, page_timing.layout.hold_without_still_key_frames, page_timing.layout.camera_still_tolerance, page_timing.layout.jump_pixels_min, painting_tools.paint_request.coat_band_share_of_height, painting_tools.after_painting.align_gain_min, painting_tools.after_painting.figure_surround_ratio_max, painting_tools.after_painting.figure_surround_lift_max, painting_tools.after_painting.head_widen_share_of_height, painting_tools.after_painting.new_skin_pixels_look, painting_tools.after_painting.style_tolerance, painting_tools.after_painting.added_figure_blob, painting_tools.after_painting.pale_patch, painting_tools.after_painting.road_arrives_look_below, painting_tools.after_painting.sky_clouds, painting_tools.plan_states.behind_gap_metres, effects_planner.edge_strength_min, effects_planner.other_chimney_clearance_share, script_gate.stake_words, script_gate.long_word_letters, sound_gates.alignment_match_min, budget_planner.piece_load_share_max, budget_planner.memory_reserve_gb, place_surfaces.normal_slope_energy_min, place_surfaces.displacement_mesh_edge_metres_max, place_surfaces.glb_surfaces_fail_share, place_audit.fallback_role_share_max, place_audit.fallback_role_share_fail, place_audit.plain_box_share_max, place_audit.off_share_max, place_audit.plants_min_per_100_square_metres, place_audit.litter_min_per_100_square_metres, place_audit.scatter_pieces_max, place_audit.world, place_audit.sun, place_construction.ground_seat_metres_tolerance, place_construction.doorway_floor_gap_metres_max, place_construction.parts_checked_max, place_scale.fail_factor, place_wear.plan_mask_time_budget_seconds, place_wear.shape_sibling_copy_share_max, place_wear.ground_relief_metres_min, place_wear.rut_depth_metres, place_wear.hoof_dimple_spacing_metres, place_variations.eevee_samples, place_variations.settings_difference_min_share, place_variations.number_without_range_difference_min_share, place_variations.scout_eevee_samples, place_light.sun_strength, place_light.sky_strength
+    -- film settings: the table, its reader and drift in the tools: 42 of 43 checks passed; FAILED: the invented numbers are few (at most a tenth of the table) and named
+passed   test_shot_kind_profiles.py  (0.1 s)  shot-kind profiles against the views the project kept: 17 of 17 checks passed
+skipped  test_sound_gates.py  (0.1 s)
+    SKIP  the soundtrack "Tension and Gravity.mp3" or chapter 2's narration is not on this machine (audio stays out of the repository; name the soundtrack with FILM_SOUNDTRACK, or give the working files with FILM_WORKING_FILES)
+passed   test_stage_toe.py  (0.2 s)  stage toe: dark painted values stay as painted; toe 0 changes nothing: 15 of 15 checks passed
+passed   test_view_audit.py  (0.3 s)  view_audit: lettering, figures and landmarks per view: 55 of 55 checks passed
+
+49 test files: 45 passed, 2 failed, 2 skipped.
+Checks: 1997 passed, 2 failed, 8 skipped (6 part(s) of tests and 2 whole test file(s), each with its reason below).
+Time: 12 min 31 s.
+Skipped, and why:
+  - test_after_painting.py: the whole test (the paintings as the painter returned them and their plate facts are in the working files; set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_check_shot_kinds.py: part 2, notice corner: skipped (it needs the project's film kit and experiments, and the working files' redesign/round5-set/notice; set FILM_PROJECT and FILM_WORKING_FILES)
+  - test_check_shot_kinds.py: part 2, Works W1: skipped (round 5's final check folder is in the working files, redesign/round5-set/checks/final-w1-quiet; set FILM_WORKING_FILES)
+  - test_paint_request.py: part B skipped: the project's plates and plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_place_skills.py: not checked as a failure: the marketplace file two folders up says 1.3.0, plugin.json says 1.4.0 (it is outside the plugin folder; whoever publishes sets it)
+  - test_plan_states.py: part B for the Works skipped: its plates or plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_plan_states.py: part B for the people test skipped: its plates or plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_sound_gates.py: the whole test (the soundtrack "Tension and Gravity.mp3" or chapter 2's narration is not on this machine (audio stays out of the repository; name the soundtrack with FILM_SOUNDTRACK, or give the working files with FILM_WORKING_FILES))
+Failed: test_place_blender.py, test_settings.py
+
+real	12m31.134s
+user	16m39.207s
+sys	1m40.759s
+07:31:58

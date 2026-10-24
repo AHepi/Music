@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+import json, os, sys
+arguments = sys.argv[sys.argv.index('--') + 1:]
+job = json.load(open(arguments[arguments.index('--job') + 1]))
+finals = '--finals' in arguments
+print('fake blender drawing', len(job['views']), 'view(s)')
+os.makedirs(job['out_folder'], exist_ok=True)
+for view in job['views']:
+    if 'bad' in view['name']:
+        print('boom: the scene has no camera'); sys.exit(3)
+    kinds = ['preview'] + (['final'] if finals else [])
+    for kind in kinds:
+        base = os.path.join(job['out_folder'], view['name'] + '_' + kind)
+        open(base + ('.jpg' if kind == 'preview' else '.png'), 'wb').write(b'x' * (30000 if kind == 'preview' else 500000))
+        json.dump({'view': view['name'], 'kind': kind, 'ok': True, 'where': 'card'}, open(base + '.json', 'w'))

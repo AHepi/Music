@@ -1,0 +1,2145 @@
+{
+ "schema": "weathering-set/1",
+ "id": "pit_village_street",
+ "title": "Pit village street, County Durham, May 1926 (the lockout)",
+ "_how_to_read": "Everything that belongs to THIS set and to no other set is here. Kit code never contains a name, coordinate or size from this file. Regular expressions are Python re.match patterns. Numbers are metres unless a key says otherwise. Keys that start with an underscore are notes, not data.",
+ "units": {
+  "length": "m",
+  "up": "z"
+ },
+ "scenes": [
+  {
+   "id": "street",
+   "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/set_copy/street.blend",
+   "read_only": true,
+   "default_camera": "main",
+   "legacy_places": "street"
+  },
+  {
+   "id": "lockout",
+   "file": "/home/user/Music/austerity-explainer/film-kit/assets/models/pit-village/lockout.blend",
+   "read_only": true,
+   "default_camera": "lockout",
+   "legacy_places": "lockout",
+   "adds_roles": [
+    "prop",
+    "fire",
+    "sign"
+   ]
+  }
+ ],
+ "plate": {
+  "size": [
+   1536,
+   2730
+  ],
+  "painter_scale": 0.45,
+  "alt_painter_scale": 0.4,
+  "engine": "EEVEE",
+  "samples": 48,
+  "shadow_rays": 4,
+  "shadow_steps": 16,
+  "ray_tracing": true,
+  "states_start_with": "today",
+  "_note": "Every mark size in the kit is in plate dots (one dot of this 1536 x 2730 picture). The painter receives the plate at painter_scale; widths are widened by 0.5 / painter_scale."
+ },
+ "detail": {
+  "fade_start_m": 12.0,
+  "fade_end_m": 40.0,
+  "growth_distance_m": 18.0,
+  "far_band_handover_m": [
+   14.0,
+   22.0
+  ]
+ },
+ "roles": {
+  "_how_to_read": "A role is a kind of surface. A role is found by object name (regex), collection name, material name (regex) or a custom property. The first rule that matches wins; scenes limits a rule to some scenes.",
+  "ground.sett": {
+   "objects": [
+    "^street_setts$"
+   ],
+   "materials": [
+    "^street_setts$"
+   ]
+  },
+  "ground.channel": {
+   "objects": [
+    "^street_channels$"
+   ],
+   "materials": [
+    "^channel_stones$"
+   ]
+  },
+  "ground.kerb": {
+   "objects": [
+    "^street_kerbs$"
+   ],
+   "materials": [
+    "^kerb_stone$"
+   ]
+  },
+  "ground.flag": {
+   "objects": [
+    "^street_pavements$"
+   ],
+   "materials": [
+    "^pavement_flags$"
+   ]
+  },
+  "ground.yard": {
+   "objects": [
+    "^ground$"
+   ],
+   "materials": [
+    "^colliery_yard$"
+   ],
+   "_note": "320 x 300 m yard: never in the plan pictures; weathered by nothing in round one"
+  },
+  "wall.masonry": {
+   "objects": [
+    "^(left|right)_row_[ab]_cottage_\\d+_walls$"
+   ],
+   "materials": [
+    "^cottage_brick",
+    "^cottage_stone"
+   ],
+   "_note": "the wall MESHES are shared: 4 meshes serve 28 houses; the left row is turned 180 degrees; floor z = 0 and wall face x = 0 in the object's own frame (minus x toward the street)"
+  },
+  "wall.trim": {
+   "objects": [
+    "^(left|right)_row_[ab]_cottage_\\d+_trim$"
+   ],
+   "materials": [
+    "^dressed_stone$",
+    "^dark_dressed_stone$"
+   ],
+   "_note": "sills, lintels, string course, eaves course, plinth AND the two doorsteps are ONE mesh per cottage (442 faces); steps are found from the geometry (steps.from)"
+  },
+  "wall.industrial": {
+   "objects": [
+    "^(engine_house|heapstead|second_winding_house)_(walls|trim)$",
+    "^colliery_chimney$"
+   ],
+   "materials": [
+    "^colliery_brick$"
+   ]
+  },
+  "chimney": {
+   "objects": [
+    "^(left|right)_row_[ab]_cottage_\\d+(_end)?_chimney$"
+   ],
+   "materials": [
+    "^plaster_dark$",
+    "^chimney_pot_"
+   ]
+  },
+  "roof.slate": {
+   "objects": [
+    "^(left|right)_row_[ab]_cottage_\\d+_roof$"
+   ],
+   "materials": [
+    "^roof_slate$",
+    "^ridge_clay$"
+   ]
+  },
+  "timber.paint": {
+   "objects": [
+    "^(left|right)_row_[ab]_cottage_\\d+_(door|window_ground|window_upper_\\d)$"
+   ],
+   "materials": [
+    "^paint_",
+    "^fascia_board$",
+    "^boarded_"
+   ]
+  },
+  "iron.pipe": {
+   "objects": [
+    "^(left|right)_row_[ab]_cottage_\\d+_rainwater$"
+   ],
+   "materials": [
+    "^cast_iron$"
+   ]
+  },
+  "iron.post": {
+   "objects": [
+    "^gas_lamp_\\d+_post$"
+   ],
+   "materials": [
+    "^cast_iron$"
+   ]
+  },
+  "iron": {
+   "materials": [
+    "^cast_iron$",
+    "^wheel_iron$",
+    "^headframe_steel$",
+    "^wire_rope$",
+    "^wrought-iron",
+    "^black-iron$",
+    "^rail-steel$",
+    "^tub-steel$",
+    "^large_iron_gate",
+    "^metal_trash_can$"
+   ]
+  },
+  "fire": {
+   "materials": [
+    "^barrel_stove$"
+   ],
+   "scenes": [
+    "lockout"
+   ],
+   "_note": "the fire drum (the lockout file's barrel_stove); it sits in the props collection, so it is named here, before the prop role",
+   "objects": [
+    "^barrel_stove$"
+   ]
+  },
+  "prop": {
+   "collections": [
+    "^props$"
+   ],
+   "scenes": [
+    "lockout"
+   ]
+  },
+  "sign": {
+   "collections": [
+    "^signs$"
+   ],
+   "scenes": [
+    "lockout"
+   ]
+  },
+  "doorway": {
+   "objects": [
+    "^(left|right)_row_[ab]_cottage_\\d+_doorway$"
+   ],
+   "type": "EMPTY",
+   "_note": "28 empties at x = +-3.45, one in front of every door"
+  }
+ },
+ "never": {
+  "_note": "Surfaces no layer may touch. Anything with emission strength above 0 is skipped automatically as well.",
+  "materials": [
+   "^window_",
+   "^engine_window_glow$",
+   "^lamp_glass_glow$",
+   "^sky_dome_glow$",
+   "^interior_dark$",
+   "^moor$",
+   "^notice-paper$",
+   "^colliery-board-paint$",
+   "^black-boards$",
+   "^brass$",
+   "^Lantern_01_",
+   "^brazier "
+  ],
+  "objects": [
+   "^moorland_hills_\\d$",
+   "^sky_dome$",
+   "^dusk_skylight$",
+   "^afterglow$"
+  ]
+ },
+ "apply": {
+  "_note": "Which layer goes on which roles. The look file gives the dial values; role_dials give a few per-role multipliers (written as object attributes, so the material stays shared).",
+  "soot": {
+   "roles": [
+    "wall.masonry",
+    "wall.trim",
+    "wall.industrial",
+    "chimney",
+    "roof.slate"
+   ],
+   "role_dials": {
+    "wall.trim": {
+     "film_mult": 1.2,
+     "sheltered_mult": 1.75
+    },
+    "wall.industrial": {
+     "film_mult": 1.25
+    }
+   },
+   "_fix_round_note": "film_mult 0.60 -> 0.80 in the look (fix round); the role values were 1.4 (trims) and 1.65 (colliery) and are now 1.2 and 1.25, so trims (0.96) and the colliery (1.0, no film) keep about the film they had"
+  },
+  "runoff": {
+   "roles": [
+    "wall.masonry",
+    "wall.trim"
+   ]
+  },
+  "foot": {
+   "roles": [
+    "wall.masonry",
+    "wall.trim",
+    "wall.industrial"
+   ]
+  },
+  "steps": {
+   "roles": [
+    "wall.trim"
+   ]
+  },
+  "wallgrowth": {
+   "roles": [
+    "wall.masonry",
+    "wall.trim"
+   ]
+  },
+  "wallcracks": {
+   "roles": [
+    "wall.masonry",
+    "wall.trim"
+   ]
+  },
+  "paint": {
+   "roles": [],
+   "roles_when_tuned": [
+    "timber.paint"
+   ],
+   "_note": "OFF in the street for now (the integrator): the paint layer is untuned and, even at paint_dark 0.93, made the doors and window frames 12 to 21 percent darker with the share under plate brightness 0.10 up by 11 points (the line allows 8). Put the roles back from roles_when_tuned when it is tuned."
+  },
+  "dirt": {
+   "roles": [
+    "ground.sett",
+    "ground.flag",
+    "ground.channel",
+    "ground.kerb"
+   ]
+  },
+  "groundcracks": {
+   "roles": [
+    "ground.sett",
+    "ground.flag",
+    "ground.channel",
+    "ground.kerb"
+   ]
+  },
+  "groundmoss": {
+   "roles": [
+    "ground.sett",
+    "ground.flag",
+    "ground.channel",
+    "ground.kerb"
+   ]
+  },
+  "iron": {
+   "roles": [
+    "iron",
+    "iron.pipe",
+    "iron.post",
+    "fire"
+   ]
+  },
+  "growth": {
+   "targets": [
+    "ground.sett",
+    "ground.flag",
+    "ground.channel",
+    "ground.kerb"
+   ]
+  }
+ },
+ "geometry": {
+  "ground": {
+   "roles": [
+    "ground.sett",
+    "ground.channel",
+    "ground.kerb",
+    "ground.flag"
+   ],
+   "bounds": {
+    "x": [
+     -4.5,
+     4.5
+    ],
+    "y": [
+     -12.0,
+     72.0
+    ]
+   },
+   "dot_m": 0.04,
+   "fine_dot_m": 0.02,
+   "coarse_dot_m": 0.16,
+   "_note": "bounds are the places pictures' own, so the new pictures line up with the old ones"
+  },
+  "solids_for_wall_dist": [
+   "wall.masonry",
+   "wall.trim",
+   "wall.industrial"
+  ],
+  "wall_reach_m": 1.275,
+  "steps": {
+   "from": [
+    "wall.trim"
+   ],
+   "near_entrances": true,
+   "within_m": 0.9,
+   "min_height_m": 0.05,
+   "_note": "up-facing faces of the trim within 0.9 m of an entrance and at least 5 cm above the pavement are step treads max_height_m 0.8 (integrator): without a top limit every up-facing face of the trim within 0.9 m of a door (sills, lintels, eaves, roof ridges, 252 of 504 faces were over 3 m up) counted as a tread, which made the doorstep keep-clear strip cover every wall foot (growth builder, REQUESTS 1). max_extent_m 2.0 (integrator): 28 long strips (2.5 to 5 m) along the wall base also passed and made the keep-clear strip cover every wall foot; real treads are 0.6 to 1.3 m.",
+   "max_height_m": 0.8,
+   "max_extent_m": 2.0
+  },
+  "frames": [
+   {
+    "roles": [
+     "wall.masonry"
+    ],
+    "kind": "wall_front",
+    "sheet_per": "mesh",
+    "dots_per_m": 50,
+    "sides": [
+     "front"
+    ],
+    "_note": "front = the face whose normal points toward the street; faces that do not face the frame get the fallback masks"
+   },
+   {
+    "roles": [
+     "wall.trim"
+    ],
+    "kind": "wall_front",
+    "share_sheet_with": {
+     "object_regex": "^(.*)_trim$",
+     "use": "\\1_walls"
+    },
+    "_note": "a cottage's trim reads the sheet of its own walls"
+   },
+   {
+    "roles": [
+     "wall.industrial",
+     "chimney",
+     "roof.slate",
+     "iron.pipe",
+     "iron.post",
+     "iron",
+     "fire",
+     "prop"
+    ],
+    "kind": "none",
+    "_note": "these read the ground picture (height above ground, shade) and the object's own height only"
+   }
+  ],
+  "ledges": {
+   "sources_from_roles": [
+    "wall.masonry",
+    "wall.trim",
+    "iron.pipe"
+   ],
+   "min_width_m": 0.25,
+   "in_front_m": 0.8,
+   "behind_m": 0.6,
+   "up_normal_z_min": 0.9,
+   "min_area_m2": 0.02,
+   "drip_length_m": 1.2,
+   "kinds": [
+    "ledge",
+    "pipe_joint",
+    "pipe_foot",
+    "gutter_end",
+    "eave"
+   ],
+   "pipe_joint_spacing_m": 1.9
+  },
+  "water": null,
+  "lowness": {
+   "radius_m": 1.0,
+   "scale_m": 0.05
+  },
+  "crown": {
+   "roles": [
+    "ground.sett"
+   ],
+   "reach_m": 2.6,
+   "allow_m": 0.03,
+   "scale_m": 0.05,
+   "_note": "crown = how much higher a road dot is than the lowest road dot within reach_m, less an allowance, over scale_m: about 1.0 at the middle, 0.66 at 1 m, 0 beyond 1.7 m. Not used on pavements (they are raised on purpose)."
+  },
+  "ground_height_picture": {
+   "z_range": [
+    -2.0,
+    6.0
+   ]
+  },
+  "entrances": {
+   "role": "doorway",
+   "_note": "an entrance is the origin of an object of this role (28 empties in front of the doors); optional 'names': name patterns to narrow the role"
+  },
+  "prop_roles": [
+   "prop",
+   "fire"
+  ],
+  "vertical_feet": {
+   "roles": [
+    "iron.pipe",
+    "iron.post"
+   ],
+   "reach_m": 0.6,
+   "radius_m": 0.2
+  },
+  "covers": {
+   "role": "iron.cover"
+  }
+ },
+ "footfall": [
+  {
+   "id": "crown_and_horse_walk",
+   "kind": "band_along",
+   "x": [
+    -1.3,
+    1.3
+   ],
+   "weight": 0.9,
+   "feather_m": 0.35,
+   "_note": "the road middle: horses and carts; also the crown"
+  },
+  {
+   "id": "wheel_tracks",
+   "kind": "lines_along",
+   "x": [
+    -0.8,
+    0.8
+   ],
+   "width_m": 0.45,
+   "weight": 1.0,
+   "feather_m": 0.2,
+   "_note": "cart wheels, about 1.4 m apart (a guess; the research step may move it)"
+  },
+  {
+   "id": "door_to_kerb",
+   "kind": "auto_door_to_edge",
+   "to_role": "ground.kerb",
+   "width_m": 0.9,
+   "weight": 0.85,
+   "feather_m": 0.25,
+   "from_entrances": true
+  },
+  {
+   "id": "pavement_walk",
+   "kind": "lines_along",
+   "x": [
+    -3.5,
+    3.5
+   ],
+   "width_m": 0.8,
+   "weight": 0.5,
+   "feather_m": 0.3
+  }
+ ],
+ "keep_clear": [
+  {
+   "id": "doorstep_strip",
+   "kind": "auto_door_strip",
+   "reach_m": 0.5,
+   "feather_m": 0.2,
+   "for": [
+    "moss",
+    "weeds",
+    "lichen"
+   ],
+   "from_entrances": true
+  },
+  {
+   "id": "fire",
+   "kind": "around_role",
+   "role": "fire",
+   "radius_m": 1.0,
+   "feather_m": 0.2,
+   "for": [
+    "moss",
+    "weeds",
+    "lichen"
+   ]
+  },
+  {
+   "id": "carts_and_sacks",
+   "kind": "around_role",
+   "role": "prop",
+   "radius_m": 0.5,
+   "feather_m": 0.2,
+   "for": [
+    "moss",
+    "weeds",
+    "lichen"
+   ]
+  },
+  {
+   "id": "trodden",
+   "kind": "from_footfall",
+   "above": 0.5,
+   "to": 0.7,
+   "for": [
+    "moss",
+    "weeds",
+    "lichen"
+   ]
+  }
+ ],
+ "shade": {
+  "mode": "declared",
+  "toward_sun": [
+   -0.35,
+   0.25,
+   0.9
+  ],
+  "weights": {
+   "openness": 0.5,
+   "sun": 0.5
+  },
+  "openness_rays": 48,
+  "ray_length_m": 40.0,
+  "normalise_openness": true,
+  "_note": "DECLARED, not measured: the film's two lights are dusk lamps with no sun path. Sun from the -x side makes the left row's fronts the shaded, damper side. The art lead may flip it."
+ },
+ "dampness": {
+  "weights": {
+   "wall_foot": 0.6,
+   "drip": 0.2,
+   "water": 0.0,
+   "lowness": 0.2,
+   "shelter": 0.1,
+   "standing_foot": 0.6
+  },
+  "wall_foot_reach_m": 0.6,
+  "_note": "weights add up to more than 1 on purpose: the sum is clamped, so a wall foot or the foot of a pipe or post is damp (above 0.6) whatever else is there, and the middle of the road stays under 0.2"
+ },
+ "habitat": {
+  "moss": {
+   "dampness": 0.45,
+   "shade": 0.3,
+   "edge": 0.25,
+   "seams": [
+    [
+     "ground.sett",
+     "ground.channel"
+    ],
+    [
+     "ground.channel",
+     "ground.kerb"
+    ],
+    [
+     "ground.kerb",
+     "ground.flag"
+    ]
+   ],
+   "edge_reach_m": 0.5,
+   "rubbish_smother_from": 0.3,
+   "rubbish_smother_to": 0.6
+  },
+  "weed": {
+   "edge": 0.55,
+   "cracks_and_seams": 0.25,
+   "light": 0.2,
+   "rubbish_thin_max": 0.45,
+   "rubbish_heap_min": 0.75
+  },
+  "algae": {
+   "dampness": 0.5,
+   "shade": 0.2,
+   "pipe_outlets": 0.3
+  },
+  "lichen": {
+   "enabled": false,
+   "_note": "1926 coal smoke killed lichen: none on walls, roofs or ground"
+  }
+ },
+ "texture_maps": {
+  "_note": "photo pictures of the materials, for cavity and cell pictures. Paths are in the street copy's polyhaven_maps / textures folders.",
+  "street_setts": {
+   "height": "polyhaven_maps/square_cobblestone_displacement.jpg",
+   "colour": "textures/square_cobblestone_colour.jpg",
+   "period_m": 2.0,
+   "cells": "setts",
+   "joint_picture": "legacy:setts/maps/sett_joints_clean.png"
+  },
+  "pavement_flags": {
+   "height": "polyhaven_maps/large_grey_tiles_displacement.jpg",
+   "colour": "textures/large_grey_tiles_colour.jpg",
+   "period_m": 3.0,
+   "cells": "flags",
+   "joint_picture": "to make (flag joints are in the photo only)"
+  },
+  "cottage_brick": {
+   "height": "polyhaven_maps/red_brick_displacement.jpg",
+   "colour": "textures/red_brick_colour.jpg",
+   "cells": "mortar",
+   "period_m": 1.4
+  },
+  "cottage_stone": {
+   "height": "polyhaven_maps/stone_brick_wall_001_displacement.jpg",
+   "colour": "textures/stone_brick_wall_001_colour.jpg",
+   "cells": "mortar",
+   "period_m": 2.5
+  },
+  "root": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/set_copy"
+ },
+ "flags": {
+  "stepped": {
+   "attribute": "wk_stepped",
+   "objects": [
+    "right_row_a_cottage_04",
+    "left_row_a_cottage_03"
+   ]
+  },
+  "_note": "mining cracks on 1 or 2 houses of 28 (low confidence for 1926). Chosen so that one is visible from the main camera at 8 to 17 m; the art lead may change them."
+ },
+ "limewash": {
+  "objects": [],
+  "_note": "none in round one: the street has no yard walls modelled and front walls were left bare. The layer name lime is kept free."
+ },
+ "existing_growth": null,
+ "existing_layers": {
+  "wetness": {
+   "present": true,
+   "provides": [
+    "Wet Mask",
+    "Puddle Mask",
+    "Streak Mask"
+   ]
+  },
+  "joints": {
+   "present": true
+  },
+  "rubbish": {
+   "present": true,
+   "plan_picture": "to make: the rubbish mask seen from above (rubbish_runner 'plan' view), one per scene",
+   "provides": [
+    "rubbish_heap"
+   ]
+  }
+ },
+ "legacy": {
+  "paths": {
+   "wetness": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/tools",
+   "joints": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/relief_and_rubbish/setts/tools",
+   "rubbish": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/relief_and_rubbish/rubbish/tools",
+   "study_tools": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/relief_and_rubbish/study/tools",
+   "places_pictures": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/relief_and_rubbish/rubbish/maps"
+  },
+  "order": [
+   "wetness",
+   "joints",
+   "rubbish"
+  ],
+  "stage_ports": {
+   "wetness": {
+    "node": "WETNESS",
+    "takes": [
+     "Colour",
+     "Roughness",
+     "Normal",
+     "Wet Normal"
+    ],
+    "gives": [
+     "Colour",
+     "Roughness",
+     "Specular IOR Level",
+     "Coat Weight",
+     "Coat Roughness",
+     "Normal"
+    ],
+    "masks": [
+     "Wet Mask",
+     "Puddle Mask",
+     "Streak Mask"
+    ]
+   },
+   "joints": {
+    "node": "JOINTS",
+    "takes": [
+     "Colour",
+     "Roughness",
+     "Specular IOR Level",
+     "Coat Weight",
+     "Normal"
+    ],
+    "gives": [
+     "Colour",
+     "Roughness",
+     "Specular IOR Level",
+     "Coat Weight",
+     "Normal"
+    ],
+    "only_materials": [
+     "^street_setts$"
+    ]
+   },
+   "rubbish": {
+    "node": "RUBBISH",
+    "takes": [
+     "Colour",
+     "Roughness",
+     "Specular IOR Level",
+     "Coat Weight",
+     "Normal"
+    ],
+    "gives": [
+     "Colour",
+     "Roughness",
+     "Specular IOR Level",
+     "Coat Weight",
+     "Normal"
+    ],
+    "only_materials": [
+     "^street_setts$",
+     "^pavement_flags$",
+     "^channel_stones$",
+     "^kerb_stone$"
+    ]
+   }
+  },
+  "states": {
+   "today": null,
+   "dry": {
+    "wetness": 0.0,
+    "puddles": 0.0
+   },
+   "wet": {
+    "wetness": 0.85,
+    "puddles": 0.5
+   },
+   "heavy": {
+    "wetness": 1.0,
+    "puddles": 0.8
+   }
+  },
+  "_note": "the three earlier layers are applied by their own scripts, in this order, and registered with the kit's chain as stages. The kit never edits their code.",
+  "pinned_root": "integrate/legacy_round2/earlier",
+  "_pinned_note": "which pinned copy of the earlier layers is put on: the second painter round's (rubbish and joints fixed). The first set (integrate/legacy_pinned/earlier) is the frozen baseline's; WK_LEGACY_PINNED in the environment overrides for one-off comparisons.",
+  "places_grid": {
+   "x": [
+    -4.5,
+    4.5
+   ],
+   "y": [
+    -12.0,
+    72.0
+   ],
+   "dot_m": 0.04,
+   "road_middle_half_width_m": 2.7,
+   "_note": "the bounds, dot size and road-middle half width of the earlier rubbish layer's 'places' pictures (read by masks/check_against_earlier.py)"
+  }
+ },
+ "cameras": [
+  {
+   "name": "main",
+   "scene": "street",
+   "from_file": true,
+   "location": [
+    0.0,
+    3.0,
+    1.88978
+   ],
+   "quaternion_wxyz": [
+    0.665882,
+    0.746057,
+    0.0,
+    0.0
+   ],
+   "fov_v": 40.0
+  },
+  {
+   "name": "lockout",
+   "location": [
+    -1.0,
+    1.2,
+    1.69709
+   ],
+   "quaternion_wxyz": [
+    0.65516,
+    0.753675,
+    -0.039498,
+    -0.034335
+   ],
+   "fov_v": 44.0,
+   "_note": "also the lockout file's own main camera"
+  },
+  {
+   "name": "notice",
+   "location": [
+    2.99313,
+    16.35381,
+    3.18819
+   ],
+   "quaternion_wxyz": [
+    0.705836,
+    0.705836,
+    0.042367,
+    0.042367
+   ],
+   "fov_v": 64.4
+  },
+  {
+   "name": "close_road",
+   "location": [
+    0.5,
+    6.0,
+    1.0
+   ],
+   "look_at": [
+    0.0,
+    11.0,
+    0.45
+   ],
+   "fov_v": 38.0,
+   "size": [
+    640,
+    480
+   ]
+  },
+  {
+   "name": "wall_lamp",
+   "location": [
+    1.3,
+    7.6,
+    1.05
+   ],
+   "look_at": [
+    4.0,
+    11.3,
+    0.7
+   ],
+   "fov_v": 40.0,
+   "size": [
+    960,
+    720
+   ],
+   "_note": "foot of the right wall beside the first gas lamp (post at x 3.03, y 11)"
+  },
+  {
+   "name": "wall_close",
+   "location": [
+    3.05,
+    6.2,
+    0.82
+   ],
+   "look_at": [
+    4.0,
+    11.5,
+    0.88
+   ],
+   "fov_v": 44.0,
+   "size": [
+    960,
+    720
+   ],
+   "_note": "WALL FOOT view of the test set"
+  },
+  {
+   "name": "doorstep_close",
+   "location": [
+    2.3,
+    5.6,
+    1.1
+   ],
+   "look_at": [
+    3.55,
+    7.4,
+    0.85
+   ],
+   "fov_v": 42.0,
+   "size": [
+    960,
+    720
+   ],
+   "_note": "DOORSTEP view of the test set"
+  },
+  {
+   "name": "gutter_close",
+   "location": [
+    0.9,
+    4.6,
+    0.95
+   ],
+   "look_at": [
+    2.45,
+    8.6,
+    0.72
+   ],
+   "fov_v": 40.0,
+   "size": [
+    960,
+    720
+   ],
+   "_note": "GUTTER view of the test set"
+  },
+  {
+   "name": "left_gutter_close",
+   "location": [
+    -0.9,
+    4.6,
+    0.95
+   ],
+   "look_at": [
+    -2.45,
+    8.6,
+    0.72
+   ],
+   "fov_v": 40.0,
+   "size": [
+    960,
+    720
+   ]
+  },
+  {
+   "name": "pipe_close",
+   "location": [
+    1.4,
+    8.8,
+    1.2
+   ],
+   "look_at": [
+    4.0,
+    12.75,
+    1.8
+   ],
+   "fov_v": 42.0,
+   "size": [
+    960,
+    720
+   ],
+   "new": true,
+   "_note": "DOWNPIPE view (NEW, to confirm by drawing): the downpipe of right_row_a_cottage_03 stands at local y +2.0 = world y 12.75, 18 cm proud of the wall"
+  },
+  {
+   "name": "flag_close",
+   "location": [
+    2.9,
+    2.4,
+    1.1
+   ],
+   "look_at": [
+    3.3,
+    6.5,
+    0.35
+   ],
+   "fov_v": 40.0,
+   "size": [
+    960,
+    720
+   ],
+   "new": true,
+   "aim_at_feature": {
+    "layer": "groundcracks",
+    "feature": "strongest_flag_crack",
+    "within_y": [
+     0.0,
+     12.0
+    ]
+   },
+   "_note": "CRACKED FLAG view (NEW): the harness re-aims it at the ground-cracks layer's own strongest flag crack in the first 12 m, so the picture always has a crack in it"
+  },
+  {
+   "name": "drum_close",
+   "scene": "lockout",
+   "location": [
+    2.0,
+    6.3,
+    1.3
+   ],
+   "look_at": [
+    0.7,
+    9.6,
+    0.85
+   ],
+   "fov_v": 50.0,
+   "size": [
+    960,
+    720
+   ]
+  }
+ ],
+ "lighting": {
+  "_note": "the five rigs of the earlier lighting test set (study/tools/b02_lighting_and_variants.py), written as data",
+  "rigs": {
+   "A": {
+    "describe": "dusk lamps: the file exactly as the film lights it",
+    "suns": "file",
+    "lamps": "file"
+   },
+   "B": {
+    "describe": "brazier glare: the lockout file as the film lights it (same as A)",
+    "base": "A"
+   },
+   "C": {
+    "describe": "low side light: lamps off, one low sun across the street from the right, house shadows off",
+    "suns": [
+     {
+      "azimuth_deg": -15.0,
+      "elevation_deg": 10.0,
+      "colour": [
+       1.0,
+       0.86,
+       0.7
+      ],
+      "strength": 1.0
+     }
+    ],
+    "lamps": "off",
+    "house_shadows": "off"
+   },
+   "D": {
+    "describe": "flat overhead light: lamps off, one sun nearly overhead (house shadows stay on, as in the earlier set)",
+    "suns": [
+     {
+      "azimuth_deg": 0.0,
+      "elevation_deg": 88.0,
+      "colour": [
+       1.0,
+       0.92,
+       0.82
+      ],
+      "strength": 0.4
+     }
+    ],
+    "lamps": "off"
+   },
+   "E": {
+    "describe": "light from behind: A plus one strong low light at the far end shining toward the camera",
+    "base": "A",
+    "extra_lights": [
+     {
+      "kind": "point",
+      "location": [
+       0.0,
+       66.0,
+       5.9
+      ],
+      "colour": [
+       1.0,
+       0.78,
+       0.5
+      ],
+      "watts": 30000.0,
+      "radius": 0.35
+     }
+    ]
+   }
+  },
+  "sun_toward": {
+   "dusk_skylight": [
+    -0.198,
+    0.883,
+    0.425
+   ],
+   "afterglow": [
+    0.0,
+    -0.995,
+    0.105
+   ]
+  },
+  "keep_lights": [
+   "dusk_skylight",
+   "afterglow"
+  ],
+  "shadow_off_objects": [
+   "^(right_row|left_row|heapstead|engine_house|second_winding|colliery_chimney|headframe|spoil_heap)"
+  ],
+  "_note2": "keep_lights: the file's own sky lights that stay on when a rig switches the lamps off; shadow_off_objects: object name patterns whose shadows a rig with house_shadows off switches off (the earlier rigs' HOUSE_PREFIXES)"
+ },
+ "test_set": {
+  "lighting22": {
+   "main": [
+    [
+     "A",
+     [
+      "dry",
+      "wet",
+      "heavy"
+     ]
+    ],
+    [
+     "C",
+     [
+      "dry",
+      "wet"
+     ]
+    ],
+    [
+     "D",
+     [
+      "dry",
+      "wet"
+     ]
+    ],
+    [
+     "E",
+     [
+      "dry",
+      "wet",
+      "heavy"
+     ]
+    ]
+   ],
+   "close": [
+    [
+     "A",
+     [
+      "dry",
+      "wet",
+      "heavy"
+     ]
+    ],
+    [
+     "C",
+     [
+      "wet"
+     ]
+    ],
+    [
+     "D",
+     [
+      "wet"
+     ]
+    ],
+    [
+     "E",
+     [
+      "wet"
+     ]
+    ]
+   ],
+   "lockout": [
+    [
+     "B",
+     [
+      "dry",
+      "wet",
+      "heavy"
+     ]
+    ],
+    [
+     "C",
+     [
+      "wet"
+     ]
+    ],
+    [
+     "D",
+     [
+      "wet"
+     ]
+    ],
+    [
+     "E",
+     [
+      "wet"
+     ]
+    ]
+   ]
+  },
+  "camera_of": {
+   "main": "main",
+   "close": "close_road",
+   "lockout": "lockout"
+  },
+  "size_of": {
+   "main": [
+    540,
+    960,
+    16
+   ],
+   "close": [
+    640,
+    480,
+    24
+   ],
+   "lockout": [
+    540,
+    960,
+    16
+   ]
+  },
+  "close_views": [
+   "wall_close",
+   "pipe_close",
+   "doorstep_close",
+   "gutter_close",
+   "flag_close"
+  ],
+  "close_view_lights": [
+   "A",
+   "E"
+  ],
+  "close_view_states": [
+   "dry",
+   "wet",
+   "heavy"
+  ],
+  "plates": [
+   [
+    "main",
+    "A",
+    "wet"
+   ],
+   [
+    "lockout",
+    "B",
+    "wet"
+   ],
+   [
+    "notice",
+    "A",
+    "wet"
+   ],
+   [
+    "close_road",
+    "A",
+    "wet"
+   ]
+  ],
+  "joint_pass": {
+   "main": {
+    "near": [
+     0.18,
+     0.02,
+     0.65
+    ],
+    "middle": [
+     0.12,
+     0.015,
+     0.3
+    ],
+    "max_contrast": 0.75
+   },
+   "lockout": {
+    "near": [
+     0.15,
+     0.02,
+     0.5
+    ],
+    "middle": [
+     0.07,
+     0.015,
+     0.12
+    ],
+    "max_contrast": 0.75
+   },
+   "close": {
+    "near": [
+     0.25,
+     0.03,
+     0.7
+    ],
+    "middle": [
+     0.2,
+     0.025,
+     0.6
+    ],
+    "max_contrast": 0.8
+   },
+   "_note": "contrast, delta, seen (the earlier study's pass line, unchanged); max_contrast per camera = the harsh-black-grid line (close 0.80 as before)"
+  },
+  "classes": {
+   "walls": [
+    "wall.masonry"
+   ],
+   "trims": [
+    "wall.trim"
+   ],
+   "road": [
+    "ground.sett"
+   ],
+   "pavement": [
+    "ground.flag"
+   ],
+   "kerb_gutter": [
+    "ground.kerb",
+    "ground.channel"
+   ],
+   "iron": [
+    "iron",
+    "iron.pipe",
+    "iron.post"
+   ],
+   "roofs": [
+    "roof.slate"
+   ],
+   "colliery": [
+    "wall.industrial"
+   ],
+   "chimneys": [
+    "chimney"
+   ],
+   "paint": [
+    "timber.paint"
+   ]
+  },
+  "scene_of": {
+   "main": "street",
+   "close": "street",
+   "lockout": "lockout",
+   "wall_close": "street",
+   "pipe_close": "street",
+   "doorstep_close": "street",
+   "gutter_close": "street",
+   "flag_close": "street",
+   "notice": "street",
+   "close_road": "street"
+  },
+  "plate_sizes": {
+   "close_road": [
+    1920,
+    1440
+   ]
+  }
+ },
+ "hook": {
+  "skip_if_emission_strength_above": 0.0,
+  "adapters": [],
+  "per_object_seed": "write wk_seed on every object; the earlier layers' Object Info Random is name-based and is not used by the kit"
+ },
+ "scale": {
+  "kerb_stone_m": 0.92,
+  "house_width_m": 4.5,
+  "house_depth_m": 7.0,
+  "eaves_height_m": 6.0,
+  "sett_repeat_m": 2.0,
+  "flag_repeat_m": 3.0,
+  "doorstep_width_m": [
+   1.1,
+   1.22
+  ]
+ },
+ "plate_brightness_measured": {
+  "_note": "from the pipeline study (main camera, wet plate): 80 to 90 % of the dots on walls, stone trim, colliery brick, cast iron and the headframe are under 0.13, the zone the film's finishing step crushes; the lockout walls 57 to 83 %. Only the wet road and pavement have room to go darker. So on walls the kit makes pale or coloured marks (washed stripes, salt, whitened steps, moss lighter than the stone) and keeps dark soot above the floor multiple.",
+  "wall.masonry": {
+   "mean": 0.08,
+   "under_0.13": 0.85
+  },
+  "wall.trim": {
+   "mean": 0.09,
+   "under_0.13": 0.85
+  },
+  "ground.sett": {
+   "mean": 0.195,
+   "state": "wet"
+  },
+  "ground.flag": {
+   "mean": 0.2,
+   "state": "wet"
+  }
+ },
+ "looks": {
+  "default": "sooty_1926",
+  "available": [
+   "sooty_1926"
+  ],
+  "overrides": {},
+  "_note": "a look is a file in presets/ that holds only dial values; overrides here change single dials for this set only"
+ },
+ "expect": {
+  "_note": "numbers the kit's tests check against (measured earlier from the real geometry)",
+  "ground_slope_deg": 4.0,
+  "crown_m": 0.08,
+  "channel_dip_m": 0.025,
+  "kerb_top_m": 0.13,
+  "pavement_rise_m": 0.145,
+  "doorways": 28,
+  "posts": 5,
+  "places_regression": {
+   "a": "legacy:rubbish/maps/places_street_a.png",
+   "b": "legacy:rubbish/maps/places_street_b.png",
+   "tolerance_levels": 3,
+   "share_within": 0.99
+  },
+  "joints_before": {
+   "passed_without_puddle_and_rubbish_dots": 21,
+   "of": 22,
+   "passed_all_dots": 18
+  },
+  "main_camera": {
+   "height_m": 1.89,
+   "fov_v_deg": 40.0
+  },
+  "ledges_sample": {
+   "sills_m": [
+    0.85,
+    3.55
+   ],
+   "string_course_m": 3.1,
+   "eaves_course_m": 5.9,
+   "lintels_m": [
+    2.68,
+    2.88,
+    5.18
+   ],
+   "steps_out_m": [
+    0.18,
+    0.48
+   ],
+   "pipe_run_across_m": 2.0,
+   "pipe_proud_m": 0.18,
+   "object": "right_row_a_cottage_01"
+  },
+  "stone_pieces": {
+   "role": "ground.kerb",
+   "count": 187
+  },
+  "dampness_feet_min": 0.6,
+  "dampness_road_middle_max": 0.2
+ },
+ "feature_report_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "ground": {
+  "_note": "The 'ground' section of the street set file, kept beside the ground layers until the integrator moves it into sets/pit_village_street.json under the key 'ground' (the layers read settings.ground first, then this file). role_dials = per-role multipliers of dials (1 where a role says nothing): they say WHICH kind of surface gets WHICH element, so the layer code never names a surface. rings = objects of these roles get a rust ring painted on the ground round their footprint (the fire drum).",
+  "schema": "weathering-ground/1",
+  "role_dials": {
+   "dirt": {
+    "ground.sett": {
+     "film": 1.0,
+     "polish": 1.0,
+     "water_marks": 1.0,
+     "rust_halo": 0.0,
+     "drum_ring": 1.0,
+     "tar_patches": 1.0,
+     "tar_splash": 0.0,
+     "scrub_strip": 0.0
+    },
+    "ground.flag": {
+     "film": 1.0,
+     "polish": 0.6,
+     "water_marks": 1.0,
+     "rust_halo": 1.0,
+     "drum_ring": 0.0,
+     "tar_patches": 0.0,
+     "tar_splash": 0.0,
+     "scrub_strip": 1.0
+    },
+    "ground.channel": {
+     "film": 1.0,
+     "polish": 0.0,
+     "water_marks": 1.0,
+     "rust_halo": 0.0,
+     "drum_ring": 0.0,
+     "tar_patches": 0.0,
+     "tar_splash": 1.0,
+     "scrub_strip": 0.0
+    },
+    "ground.kerb": {
+     "film": 0.8,
+     "polish": 0.3,
+     "water_marks": 0.5,
+     "rust_halo": 0.0,
+     "drum_ring": 0.0,
+     "tar_patches": 0.0,
+     "tar_splash": 1.0,
+     "scrub_strip": 0.0
+    }
+   },
+   "groundcracks": {
+    "ground.sett": {
+     "flag_cracks": 0.0,
+     "kerb_chips": 0.0,
+     "sett_disturb": 1.0
+    },
+    "ground.flag": {
+     "flag_cracks": 1.0,
+     "kerb_chips": 0.0,
+     "sett_disturb": 0.0
+    },
+    "ground.channel": {
+     "flag_cracks": 0.0,
+     "kerb_chips": 0.4,
+     "sett_disturb": 0.0
+    },
+    "ground.kerb": {
+     "flag_cracks": 0.0,
+     "kerb_chips": 1.0,
+     "sett_disturb": 0.0
+    }
+   },
+   "groundmoss": {
+    "ground.sett": {
+     "joint_share": 1.0,
+     "patch_moss": 0.0,
+     "algae_fan": 0.0,
+     "liverwort": 0.0,
+     "far_band": 1.0
+    },
+    "ground.flag": {
+     "joint_share": 1.0,
+     "patch_moss": 0.0,
+     "algae_fan": 1.0,
+     "liverwort": 1.0,
+     "far_band": 1.0
+    },
+    "ground.channel": {
+     "joint_share": 1.0,
+     "patch_moss": 0.0,
+     "algae_fan": 0.5,
+     "liverwort": 0.0,
+     "far_band": 1.0
+    },
+    "ground.kerb": {
+     "joint_share": 1.0,
+     "patch_moss": 0.0,
+     "algae_fan": 0.3,
+     "liverwort": 0.0,
+     "far_band": 1.0
+    }
+   },
+   "iron": {
+    "iron.pipe": {
+     "rust_cover": 1.0,
+     "collar_rust": 1.0,
+     "shoe_streak": 1.0,
+     "base_ring": 0.0,
+     "drum_rust": 0.0,
+     "heat_scale": 0.0,
+     "soot_halo": 0.0
+    },
+    "iron.post": {
+     "rust_cover": 1.0,
+     "collar_rust": 0.5,
+     "shoe_streak": 0.0,
+     "base_ring": 1.0,
+     "drum_rust": 0.0,
+     "heat_scale": 0.0,
+     "soot_halo": 0.0
+    },
+    "iron": {
+     "rust_cover": 1.0,
+     "collar_rust": 0.0,
+     "shoe_streak": 0.0,
+     "base_ring": 0.4,
+     "drum_rust": 0.0,
+     "heat_scale": 0.0,
+     "soot_halo": 0.0
+    },
+    "fire": {
+     "rust_cover": 0.6,
+     "collar_rust": 0.0,
+     "shoe_streak": 0.0,
+     "base_ring": 0.0,
+     "drum_rust": 1.0,
+     "heat_scale": 1.0,
+     "soot_halo": 1.0
+    }
+   }
+  },
+  "rings": {
+   "layer": "dirt",
+   "roles": [
+    "fire"
+   ],
+   "note": "the fire drum stands on the road; the ash ring is the rubbish layer's, this is the rust that bleeds out of the drum"
+  },
+  "readable": [
+   {
+    "element": "cracks in flags, kerbs and setts (the foundation row, all crack parts together)",
+    "layer": "groundcracks",
+    "parts": [
+     "flag_fine",
+     "flag_broken",
+     "flag_tilt",
+     "flag_chip",
+     "kerb_chips",
+     "kerb_joints",
+     "sett_disturbed",
+     "sett_joints"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "max_m": 15
+    },
+    "min_good": 3
+   },
+   {
+    "element": "cracks in flags (fine and broken)",
+    "layer": "groundcracks",
+    "parts": [
+     "flag_fine",
+     "flag_broken"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "class": "pavement",
+     "max_m": 15
+    },
+    "min_good": 3
+   },
+   {
+    "element": "tilted flags and chipped corners",
+    "layer": "groundcracks",
+    "parts": [
+     "flag_tilt",
+     "flag_chip"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "class": "pavement",
+     "max_m": 15
+    },
+    "min_good": 2
+   },
+   {
+    "element": "kerb chips, open kerb joints and cracked kerbs",
+    "layer": "groundcracks",
+    "parts": [
+     "kerb_chips",
+     "kerb_joints"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "class": "kerb_gutter",
+     "max_m": 15
+    },
+    "min_good": 3
+   },
+   {
+    "element": "disturbed setts and open sett joints",
+    "layer": "groundcracks",
+    "parts": [
+     "sett_disturbed",
+     "sett_joints"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "class": "road",
+     "max_m": 15
+    },
+    "min_good": 3
+   },
+   {
+    "element": "tar patches",
+    "layer": "dirt",
+    "parts": [
+     "tar"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "class": "road",
+     "max_m": 30
+    },
+    "min_good": 1
+   },
+   {
+    "element": "ground film, polish, water marks",
+    "layer": "dirt",
+    "parts": [
+     "film",
+     "polish",
+     "marks"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {},
+    "min_good": 8
+   },
+   {
+    "element": "rust halos, drum ring, scrubbed strips",
+    "layer": "dirt",
+    "parts": [
+     "halo",
+     "drum",
+     "scrub"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "max_m": 20
+    },
+    "min_good": 4
+   },
+   {
+    "element": "moss ribbons, algae fans, liverwort",
+    "layer": "groundmoss",
+    "parts": [
+     "joint_moss",
+     "patch_moss",
+     "algae",
+     "liverwort"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "max_m": 20
+    },
+    "min_good": 8
+   },
+   {
+    "element": "rust on iron",
+    "layer": "iron",
+    "parts": [
+     "foot_rust",
+     "collars",
+     "base_ring",
+     "drum_rust"
+    ],
+    "plates": [
+     "main",
+     "lockout",
+     "notice"
+    ],
+    "zone": {
+     "class": "iron",
+     "max_m": 20
+    },
+    "min_good": 4
+   }
+  ],
+  "dial_sheet": [
+   {
+    "layer": "dirt",
+    "dial": "film",
+    "camera": "gutter_close",
+    "label": "dirt: film (grime skin)",
+    "values": [
+     0,
+     0.5,
+     2.0
+    ]
+   },
+   {
+    "layer": "dirt",
+    "dial": "polish",
+    "camera": "doorstep_close",
+    "label": "dirt: polish (worn, shiny tops)",
+    "values": [
+     0,
+     0.4,
+     1.0
+    ]
+   },
+   {
+    "layer": "dirt",
+    "dial": "tar_patches",
+    "camera": "close_road",
+    "label": "dirt: tar patches",
+    "values": [
+     0,
+     0.3,
+     1.0
+    ]
+   },
+   {
+    "layer": "dirt",
+    "dial": "rust_halo",
+    "camera": "pipe_close",
+    "label": "dirt: rust halo at pipe feet",
+    "values": [
+     0,
+     0.5,
+     1.0
+    ]
+   },
+   {
+    "layer": "groundcracks",
+    "dial": "flag_cracks",
+    "camera": "flag_close",
+    "label": "cracks: flag cracks",
+    "values": [
+     0,
+     1.0,
+     2.0
+    ]
+   },
+   {
+    "layer": "groundcracks",
+    "dial": "kerb_chips",
+    "camera": "gutter_close",
+    "label": "cracks: kerb chips",
+    "values": [
+     0,
+     1.0,
+     2.0
+    ]
+   },
+   {
+    "layer": "groundcracks",
+    "dial": "sett_disturb",
+    "camera": "close_road",
+    "label": "cracks: disturbed setts",
+    "values": [
+     0,
+     0.7,
+     2.0
+    ]
+   },
+   {
+    "layer": "groundmoss",
+    "dial": "joint_share",
+    "camera": "gutter_close",
+    "label": "moss: joint moss share",
+    "values": [
+     0,
+     0.08,
+     0.3
+    ]
+   },
+   {
+    "layer": "groundmoss",
+    "dial": "algae_fan",
+    "camera": "pipe_close",
+    "label": "moss: algae under the pipe",
+    "values": [
+     0,
+     0.6,
+     1.0
+    ]
+   },
+   {
+    "layer": "iron",
+    "dial": "rust_cover",
+    "camera": "pipe_close",
+    "label": "iron: rust cover",
+    "values": [
+     0,
+     0.3,
+     1.0
+    ]
+   },
+   {
+    "layer": "iron",
+    "dial": "base_ring",
+    "camera": "wall_lamp",
+    "label": "iron: rust ring at post base",
+    "values": [
+     0,
+     0.7,
+     1.0
+    ]
+   }
+  ],
+  "period": [
+   {
+    "element": "flags with fine cracks (share of flag area)",
+    "kind": "share",
+    "part": "groundcracks:flag_fine_cells",
+    "over": [
+     "pavement"
+    ],
+    "cap": [
+     0.08,
+     0.15
+    ]
+   },
+   {
+    "element": "flags with broken cracks",
+    "kind": "share",
+    "part": "groundcracks:flag_broken_cells",
+    "over": [
+     "pavement"
+    ],
+    "cap": [
+     0.02,
+     0.04
+    ]
+   },
+   {
+    "element": "tilted flags",
+    "kind": "share",
+    "part": "groundcracks:flag_tilt",
+    "over": [
+     "pavement"
+    ],
+    "cap": [
+     0.03,
+     0.06
+    ]
+   },
+   {
+    "element": "kerb chips (share of kerb length)",
+    "kind": "length_share",
+    "part": "groundcracks:kerb_chips",
+    "over": [
+     "kerb_gutter"
+    ],
+    "cap": [
+     0.2,
+     0.35
+    ]
+   },
+   {
+    "element": "setts disturbed (share of road area)",
+    "kind": "share",
+    "part": "groundcracks:sett_disturbed",
+    "over": [
+     "road"
+    ],
+    "minus": "groundcracks:sett_joint_all",
+    "cap": [
+     0.03,
+     0.06
+    ]
+   },
+   {
+    "element": "open sett joints (share of joint area)",
+    "kind": "share",
+    "part": "groundcracks:sett_joints",
+    "over": [
+     "road"
+    ],
+    "cap": [
+     0.1,
+     0.2
+    ],
+    "of": "groundcracks:sett_joint_all"
+   },
+   {
+    "element": "tar (share of road)",
+    "kind": "share",
+    "part": "dirt:tar",
+    "over": [
+     "road"
+    ],
+    "cap": [
+     0.0,
+     0.04
+    ]
+   },
+   {
+    "element": "tar patches in the first 30 m",
+    "kind": "count",
+    "part": "dirt:tar",
+    "over": [
+     "road"
+    ],
+    "zone_y": [
+     0,
+     30
+    ],
+    "cap": [
+     1,
+     3
+    ]
+   },
+   {
+    "element": "moss in joints (share of kerb and gutter joint length)",
+    "kind": "share",
+    "part": "groundmoss:joint_moss",
+    "over": [
+     "kerb_gutter"
+    ],
+    "cap": [
+     0.05,
+     0.15
+    ],
+    "of": "groundmoss:joint_all"
+   },
+   {
+    "element": "liverwort patches",
+    "kind": "count",
+    "part": "groundmoss:liverwort",
+    "over": [],
+    "cap": [
+     0,
+     2
+    ]
+   },
+   {
+    "element": "algae fans (count of fans on the whole ground)",
+    "kind": "count",
+    "part": "groundmoss:algae",
+    "over": [],
+    "cap": [
+     0,
+     999
+    ]
+   },
+   {
+    "element": "moss in road joints (share of joint length, at most 15 % of any joint length)",
+    "kind": "share",
+    "part": "groundmoss:joint_moss",
+    "of": "groundmoss:joint_all",
+    "over": [
+     "road"
+    ],
+    "cap": [
+     0.0,
+     0.15
+    ]
+   },
+   {
+    "element": "moss in pavement joints (share of joint length)",
+    "kind": "share",
+    "part": "groundmoss:joint_moss",
+    "of": "groundmoss:joint_all",
+    "over": [
+     "pavement"
+    ],
+    "cap": [
+     0.0,
+     0.15
+    ]
+   }
+  ]
+ },
+ "growth": {
+  "_note": "The street's growth section (the plan says set-specific choices belong in the set file's `growth` block; builders may not edit sets/, so the integrator moves this block into sets/pit_village_street.json as key `growth`). The set file's apply.growth already names targets and piece_sets; everything else the growth layer needs is here.",
+  "targets": {
+   "roles": [
+    "ground.sett",
+    "ground.flag",
+    "ground.channel",
+    "ground.kerb"
+   ],
+   "align_normal": 0.0
+  },
+  "piece_sets": [
+   "weeds",
+   "moss_cushions"
+  ],
+  "avoid_pieces_of": {
+   "objects": [
+    "rubbish_scatter"
+   ],
+   "_note": "the earlier rubbish layer's litter host: weeds keep avoid_m clear of its real pieces"
+  },
+  "gutter_side": {
+   "role": "ground.sett",
+   "beside": "ground.channel",
+   "from_m": 0.3,
+   "reach_m": 0.9,
+   "_note": "rule W1: the 0.3 to 0.9 m of setts beside the channel stones"
+  },
+  "wall_foot": {
+   "reach_m": 0.15,
+   "_note": "rule W3: the 0 to 15 cm where wall meets pavement"
+  },
+  "yaw_axis": "y",
+  "calibration_camera": "main",
+  "zones_for_report": {
+   "fire_role": "fire",
+   "doorstep_mask": "step_foot",
+   "doorstep_min": 0.5
+  }
+ }
+}

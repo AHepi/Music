@@ -1,0 +1,56 @@
+Place audit of one crate (lived_in, dry): FAIL. 7 to fix, 2 to look at, 0 known (switched off on purpose), 15 passed.
+PASS place: quick output [the audit]: not a quick trial
+PASS place: roles [every object]: every visible object has a role (2 objects)
+PASS place: object types [every drawn object]: everything that is drawn is a mesh (or has a never role)
+FAIL place: treatments [crate colour]: role prop.crate: missing normal_map, roughness_variation, colour_variation, dirt, wetness, edge_wear.  Fix: run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.
+LOOK place: treatments [crate colour]: role prop.crate: wanted but missing grime, weathering.  Fix: worth adding; not required.
+FAIL place: treatments [ground colour]: role ground.earth: missing normal_map, displacement, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, rubbish, plants, litter_pieces.  Fix: run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.
+LOOK place: treatments [ground colour]: role ground.earth: wanted but missing moss_and_algae.  Fix: worth adding; not required.
+FAIL place: treatments [ground colour]: no litter pieces on the ground (1 ground material(s) or object(s)).  Fix: run explainer-film-place grow.
+FAIL place: treatments [ground colour]: no plants on the ground (1 ground material(s) or object(s)).  Fix: run explainer-film-place grow.
+PASS place: layer amounts [every object]: every layer amount is there and above its floor (state "dry")
+PASS place: off reasons [the settings]: nothing is switched off
+PASS place: normal maps [every normal map]: 0 normal map(s): Non-Color, tangent, wired, pointing the right way
+PASS place: uv [every object]: every normal-mapped object has UVs, none mirrored beyond the limit
+FAIL place: displacement [ground colour]: ground colour: no displacement (role ground.earth needs it)  Fix: run explainer-film-place surfaces (it sets the method and grades or subdivides the mesh); roads: explainer-film-place roads.
+PASS place: construction [every part]: 1 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose
+PASS place: scale [every sized object]: 1 size(s) fit the real-world facts
+FAIL place: plain boxes [Crate]: 50% of the objects are plain sharp-edged boxes (at most 15%).  Fix: run explainer-film-place surfaces (it bevels every hard-edged role) and damage; if they have run, these objects have a role the surfaces step does not bevel (ground, water, glass, plants, trees), so chamfer their meshes yourself (bmesh.ops.bevel) or give them a role that is not a plain box.
+PASS place: budgets [the scene]: triangles and scattered pieces are within the budgets; 4 objects (at most 1,000)
+PASS place: light [the scene]: the scene has light
+PASS place: renderer [the scene]: renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)
+PASS place: film frame [the settings]: not marked for the film ("for_film" is not true in place-settings.json): any frame shape is allowed
+FAIL place: world [View crate]: the view camera View crate stops drawing at 1000 m, but Ground reaches 1958.99 m deep in its view.  Fix: every view must see a finished horizon: continue the plain ground to the horizon and hide its edge (a low rim bank, faded out beyond about 60 m); put an all-round backdrop of real shapes with the role backdrop (finish turns its shadow off; give it a plain unlit colour); set every view camera's clip end to 1000 m or more and past the far edge of the ground and the backdrop (here: View crate at least 1960 m); turn the shadow off on far scenery (Object > Visibility > Shadow).
+PASS place: sun [the views]: no view has more than 50% of the ground it sees shadowed from the sun "Sun" (50 degrees up)
+PASS place: lettering [signs and books]: no sign, notice, placard, poster, name board or book in the place
+The place is not finished: do not draw, render or paint it until these pass.
+
+Settings used (film-settings.json):
+  place_surfaces.normal_map_size_min_pixels = 1024 pixels a side (judged)
+  place_audit.unknown_role_objects_allowed = 0 objects (judged)
+  place_audit.required_treatments_missing_allowed = 0 treatments (judged)
+  place_audit.layer_amount_floor_by_look.kept = 0.15 amount (judged)
+  place_audit.layer_amount_floor_by_look.lived_in = 0.25 amount (judged)
+  place_audit.layer_amount_floor_by_look.neglected = 0.4 amount (judged)
+  place_audit.layer_amount_floor_by_look.derelict = 0.5 amount (judged)
+  place_audit.off_share_max = 0.25 share of required role-and-treatment pairs (invented)
+  place_surfaces.normal_direction_correlation_min = 0.25 correlation (judged)
+  place_surfaces.normal_blue_mean_min = 0.85 share of 1 (judged)
+  place_surfaces.normal_red_green_mean_band = [0.47, 0.53] share of 1 (judged)
+  place_surfaces.uv_mirrored_face_share_max = 0.02 share of faces (judged)
+  place_construction.float_gap_millimetres_fail = 5 millimetres (judged)
+  place_construction.ground_seat_metres_tolerance = 0.02 metres (invented)
+  place_scale.warn_factor = 1.0 times the range (judged)
+  place_scale.fail_factor = 1.5 times the range (invented)
+  place_audit.plain_box_share_max = 0.15 share of objects (invented)
+  place_wear.shape_sibling_min_count = 4 objects (judged)
+  place_wear.shape_sibling_copy_share_max = 0.5 share of siblings (invented)
+  place_wear.ground_relief_metres_min = 0.03 metres (invented)
+  place_audit.ground_area_growth_max = 1.5 times (judged)
+  place_audit.triangles_total_max = 6000000 triangles (judged)
+  place_audit.triangles_per_builder_max = 1500000 triangles (judged)
+  place_audit.scatter_pieces_max = 400000 pieces (invented)
+  place_audit.objects_total_max = 1000 objects in the scene (every kind) (judged)
+  place_audit.objects_total_fail = 3000 objects in the scene (every kind) (judged)
+  place_audit.world = {"far_object_metres": 100, "large_object_metres": 20, "empty_below_horizon_share_max": 0.0, "place_span_metres": 20} metres from the nearest view camera, metres across, share of a view's rays that go below the horizon and hit nothing, metres across (the widest horizontal extent of the visible objects that are not backdrop) (invented)
+  place_audit.sun = {"shadowed_share_look": 0.5, "wear_shade_angle_look_degrees": 20} share of the ground points a view sees that are shadowed from the sun; degrees between the sun the wear layers' shade used and the scene's sun lamp (invented)

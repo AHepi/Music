@@ -1,0 +1,9331 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-23T00:15:12",
+ "blender": "5.2.2 LTS",
+ "scene_file": "canal_finished.blend",
+ "scene_sha1": "106968c1da724c4d56df9df24808983d64135f4a",
+ "settings_file": "place-settings.json",
+ "settings_sha1": "0760aa52e82471455393b6df01498fb59b0ff602",
+ "place": "canal lock side",
+ "place_type": "harbour",
+ "look": "lived_in",
+ "state": "damp",
+ "quick": false,
+ "map_size_pixels": 1024,
+ "mask": {
+  "cell_metres": 0.1,
+  "cells": [
+   160,
+   200
+  ],
+  "seconds": 3.49,
+  "source": "whole_scene",
+  "bounds": [
+   -8.0,
+   -10.0,
+   8.0,
+   10.0
+  ]
+ },
+ "masks_from": "whole_scene",
+ "picture": {
+  "camera": "Camera A",
+  "height_pixels": 800,
+  "set": true
+ },
+ "counts": {
+  "objects_visible": 105,
+  "materials": 16,
+  "triangles": 70387,
+  "triangles_by_owner": {
+   "ground_and_water": 31110,
+   "walls_and_steps": 19872,
+   "lock_gate": 10368,
+   "props": 3568,
+   "unowned": 5469
+  },
+  "scatter_pieces": 167,
+  "ground_area_m2": 277.91
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.mud": 1,
+   "ground.gravel": 3,
+   "ground.grass": 2,
+   "water.still": 2,
+   "wall.brick": 10,
+   "stone.footing": 34,
+   "floor.stone": 8,
+   "timber.post": 4,
+   "timber.fence": 10,
+   "timber.plank": 7,
+   "iron.fitting": 6,
+   "timber.beam": 2,
+   "iron.painted": 2,
+   "prop.crate": 1,
+   "prop.barrel": 1,
+   "prop.rope": 1,
+   "never.scatter": 11
+  }
+ },
+ "materials": [
+  {
+   "name": "PK floor.stone / flagstone",
+   "role": "floor.stone",
+   "roles": [
+    "floor.stone"
+   ],
+   "users": 8,
+   "objects": [
+    "Step 1",
+    "Step 2",
+    "Step 3",
+    "Step 4",
+    "Step 5",
+    "Step 6",
+    "Step 7",
+    "Step landing"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_flagstone_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.grass / grass",
+   "role": "ground.grass",
+   "roles": [
+    "ground.grass"
+   ],
+   "users": 2,
+   "objects": [
+    "Ground back verge",
+    "Ground far verge"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_grass_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "node": null,
+      "method": "BUMP",
+      "depth_metres": 0.0,
+      "max_vertex_displacement": 0.0,
+      "mesh": null
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 66,
+      "per_100_square_metres": 23.748490553943473
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 101,
+      "per_100_square_metres": 36.34238705982259
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.gravel / gravel_path",
+   "role": "ground.gravel",
+   "roles": [
+    "ground.gravel"
+   ],
+   "users": 3,
+   "objects": [
+    "Ground towpath west",
+    "Ground towpath east",
+    "Ground towpath end"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_gravel_path_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.03999999910593033,
+      "max_vertex_displacement": 0.03999999910593033,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 66,
+      "per_100_square_metres": 23.748490553943473
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 101,
+      "per_100_square_metres": 36.34238705982259
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.mud / mud",
+   "role": "ground.mud",
+   "roles": [
+    "ground.mud"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground canal bed"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_mud_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05999999865889549,
+      "max_vertex_displacement": 0.05999999865889549,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 66,
+      "per_100_square_metres": 23.748490553943473
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 101,
+      "per_100_square_metres": 36.34238705982259
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK iron.fitting / iron_forged",
+   "role": "iron.fitting",
+   "roles": [
+    "iron.fitting"
+   ],
+   "users": 6,
+   "objects": [
+    "Gate near heel strap 1",
+    "Gate near heel strap 2",
+    "Gate far heel strap 1",
+    "Gate far heel strap 2",
+    "Prop barrel band 1",
+    "Prop barrel band 2"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_iron_forged_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "rust": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.72,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK iron.painted / painted_metal",
+   "role": "iron.painted",
+   "roles": [
+    "iron.painted"
+   ],
+   "users": 2,
+   "objects": [
+    "Prop bollard 1",
+    "Prop bollard 2"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_painted_metal_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "rust": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.barrel / timber_planks",
+   "role": "prop.barrel",
+   "roles": [
+    "prop.barrel"
+   ],
+   "users": 1,
+   "objects": [
+    "Prop barrel"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.crate / timber_planks",
+   "role": "prop.crate",
+   "roles": [
+    "prop.crate"
+   ],
+   "users": 1,
+   "objects": [
+    "Prop crate"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.rope / rope",
+   "role": "prop.rope",
+   "roles": [
+    "prop.rope"
+   ],
+   "users": 1,
+   "objects": [
+    "Prop rope coil"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_rope_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK stone.footing / stone_rubble",
+   "role": "stone.footing",
+   "roles": [
+    "stone.footing"
+   ],
+   "users": 34,
+   "objects": [
+    "Coping near west stone 1",
+    "Coping near west stone 2",
+    "Coping near west stone 3",
+    "Coping near east stone 1",
+    "Coping near east stone 2",
+    "Coping near east stone 3",
+    "Coping near east stone 4",
+    "Coping near east stone 5",
+    "Coping near east stone 6",
+    "Coping near east stone 7",
+    "Coping near east stone 8",
+    "Coping near east stone 9"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_stone_rubble_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.54,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK timber.beam / timber_beam",
+   "role": "timber.beam",
+   "roles": [
+    "timber.beam"
+   ],
+   "users": 2,
+   "objects": [
+    "Gate near balance beam",
+    "Gate far balance beam"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_beam_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.2,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK timber.fence / timber_weathered",
+   "role": "timber.fence",
+   "roles": [
+    "timber.fence"
+   ],
+   "users": 10,
+   "objects": [
+    "Gate near rail 1",
+    "Gate near rail 2",
+    "Gate near rail 3",
+    "Gate near rail 4",
+    "Gate near rail 5",
+    "Gate far rail 1",
+    "Gate far rail 2",
+    "Gate far rail 3",
+    "Gate far rail 4",
+    "Gate far rail 5"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_weathered_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK timber.plank / timber_planks",
+   "role": "timber.plank",
+   "roles": [
+    "timber.plank"
+   ],
+   "users": 7,
+   "objects": [
+    "Gate near board 1",
+    "Gate near board 2",
+    "Gate near board 3",
+    "Gate near board 4",
+    "Gate far board 1",
+    "Gate far board 2",
+    "Gate far board 3"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK timber.post / timber_beam",
+   "role": "timber.post",
+   "roles": [
+    "timber.post"
+   ],
+   "users": 4,
+   "objects": [
+    "Gate near heel post",
+    "Gate near mitre post",
+    "Gate far heel post",
+    "Gate far mitre post"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_beam_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.2,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK wall.brick / brick",
+   "role": "wall.brick",
+   "roles": [
+    "wall.brick"
+   ],
+   "users": 10,
+   "objects": [
+    "Wall near west panel 1",
+    "Wall near east panel 1",
+    "Wall near east panel 2",
+    "Wall near east panel 3",
+    "Wall near east panel 4",
+    "Wall far panel 1",
+    "Wall far panel 2",
+    "Wall far panel 3",
+    "Wall far panel 4",
+    "Wall far panel 5"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_brick_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK water.still / water_still",
+   "role": "water.still",
+   "roles": [
+    "water.still"
+   ],
+   "users": 2,
+   "objects": [
+    "Water lock chamber",
+    "Water upper pound"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_water_still_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.3,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "colour_variation": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  }
+ ],
+ "objects": [
+  {
+   "name": "Ground canal bed",
+   "role": "ground.mud",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK ground.mud / mud"
+   ],
+   "mesh_name": "Ground canal bed",
+   "size": [
+    13.0,
+    5.95,
+    0.0711
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.65,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "rubbish": 0.45
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 6960,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.14941482381335158,
+    "subdivided": false,
+    "fine_edge_m": 0.14875000715255737,
+    "relief_m": 0.0224
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "Ground towpath west",
+   "role": "ground.gravel",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK ground.gravel / gravel_path"
+   ],
+   "mesh_name": "Ground towpath west",
+   "size": [
+    3.38,
+    2.4,
+    0.0833
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "rubbish": 0.45
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2520,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.08126430808329727,
+    "subdivided": false,
+    "fine_edge_m": 0.08015655126468907,
+    "relief_m": 0.0583
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "Ground towpath east",
+   "role": "ground.gravel",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK ground.gravel / gravel_path"
+   ],
+   "mesh_name": "Ground towpath east",
+   "size": [
+    8.98,
+    2.4,
+    0.0689
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "rubbish": 0.45
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 6720,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.08086366177501872,
+    "subdivided": false,
+    "fine_edge_m": 0.0801296634062993,
+    "relief_m": 0.0476
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "Ground towpath end",
+   "role": "ground.gravel",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK ground.gravel / gravel_path"
+   ],
+   "mesh_name": "Ground towpath end fine",
+   "size": [
+    1.64,
+    0.06,
+    0.0099
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "rubbish": 0.45
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 28,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.09732100782272815,
+    "subdivided": false,
+    "fine_edge_m": 0.06006967732044025,
+    "relief_m": 0.0086
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "Ground back verge",
+   "role": "ground.grass",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground back verge fine",
+   "size": [
+    14.0,
+    6.1,
+    0.0391
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "rubbish": 0.45
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 11934,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.11981261352318763,
+    "subdivided": false,
+    "fine_edge_m": 0.11965036177609019,
+    "relief_m": 0.0263
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "Ground far verge",
+   "role": "ground.grass",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground far verge",
+   "size": [
+    14.0,
+    6.1,
+    0.0399
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "rubbish": 0.45
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2688,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.25253367218957207,
+    "subdivided": false,
+    "fine_edge_m": 0.2501392097406522,
+    "relief_m": 0.0354
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "Water lock chamber",
+   "role": "water.still",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK water.still / water_still"
+   ],
+   "mesh_name": "Water lock chamber",
+   "size": [
+    10.5,
+    2.4,
+    0.0
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 210,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4906779749918792,
+    "subdivided": false,
+    "fine_edge_m": 0.4906779749918792
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Water upper pound",
+   "role": "water.still",
+   "owner": "ground_and_water",
+   "collection": "Place: ground_and_water",
+   "materials": [
+    "PK water.still / water_still"
+   ],
+   "mesh_name": "Water upper pound",
+   "size": [
+    2.5,
+    2.4,
+    0.0
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 50,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.49000000953674316,
+    "subdivided": false,
+    "fine_edge_m": 0.49000000953674316
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Wall near west panel 1",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall near west panel 1",
+   "size": [
+    2.6028,
+    0.495,
+    2.005
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.6968093812465668,
+    "subdivided": true,
+    "fine_edge_m": 1.6968093812465668
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.495,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.495,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Coping near west stone 1",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near west stone 1",
+   "size": [
+    0.6389,
+    0.6122,
+    0.0872
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.14542501618563014,
+    "subdivided": true,
+    "fine_edge_m": 0.14542501618563014
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near west panel 1",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near west stone 2",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near west stone 2",
+   "size": [
+    0.8637,
+    0.6115,
+    0.0964
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.17164230149109677,
+    "subdivided": true,
+    "fine_edge_m": 0.17164230149109677
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near west panel 1",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near west stone 3",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near west stone 3",
+   "size": [
+    1.078,
+    0.6126,
+    0.0978
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.19560162517624577,
+    "subdivided": true,
+    "fine_edge_m": 0.19560162517624577
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near west panel 1",
+     "Trench cheek west",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Wall near east panel 1",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall near east panel 1",
+   "size": [
+    1.8467,
+    0.4959,
+    2.0038
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.4452403883139293,
+    "subdivided": true,
+    "fine_edge_m": 1.4452403883139293
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4959,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4959,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Wall near east panel 2",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall near east panel 2",
+   "size": [
+    2.3624,
+    0.4944,
+    2.0
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.6179010669390361,
+    "subdivided": true,
+    "fine_edge_m": 1.6179010669390361
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4944,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4944,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Wall near east panel 3",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall near east panel 3",
+   "size": [
+    1.8047,
+    0.4946,
+    2.0024
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.431486000617345,
+    "subdivided": true,
+    "fine_edge_m": 1.431486000617345
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4946,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4946,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Wall near east panel 4",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall near east panel 4",
+   "size": [
+    2.1974,
+    0.498,
+    2.0047
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.5619149208068848,
+    "subdivided": true,
+    "fine_edge_m": 1.5619149208068848
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.498,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.498,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Coping near east stone 1",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 1",
+   "size": [
+    0.8408,
+    0.6131,
+    0.1102
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.17035150915371108,
+    "subdivided": true,
+    "fine_edge_m": 0.17035150915371108
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 1",
+     "Trench cheek east",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 2",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 2",
+   "size": [
+    0.9268,
+    0.6136,
+    0.1014
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.17903765480683537,
+    "subdivided": true,
+    "fine_edge_m": 0.17903765480683537
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 1",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 3",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 3",
+   "size": [
+    0.6555,
+    0.6097,
+    0.0962
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1487885428910737,
+    "subdivided": true,
+    "fine_edge_m": 0.1487885428910737
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 1",
+     "Wall near east panel 2",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 4",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 4",
+   "size": [
+    0.8014,
+    0.6118,
+    0.1058
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.16598825875242612,
+    "subdivided": true,
+    "fine_edge_m": 0.16598825875242612
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 2",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 5",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 5",
+   "size": [
+    0.8219,
+    0.6117,
+    0.0842
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.16563043534818725,
+    "subdivided": true,
+    "fine_edge_m": 0.16563043534818725
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 2",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 6",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 6",
+   "size": [
+    0.6609,
+    0.612,
+    0.1041
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1499527093548197,
+    "subdivided": true,
+    "fine_edge_m": 0.1499527093548197
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 2",
+     "Wall near east panel 3",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 7",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 7",
+   "size": [
+    0.5438,
+    0.6117,
+    0.0925
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1359000526201731,
+    "subdivided": true,
+    "fine_edge_m": 0.1359000526201731
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 3",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 8",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 8",
+   "size": [
+    0.9324,
+    0.6109,
+    0.0837
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.17815409200632018,
+    "subdivided": true,
+    "fine_edge_m": 0.17815409200632018
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 3",
+     "Wall near east panel 4",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 9",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 9",
+   "size": [
+    0.6629,
+    0.6112,
+    0.1027
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.15005029189419475,
+    "subdivided": true,
+    "fine_edge_m": 0.15005029189419475
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 4",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 10",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 10",
+   "size": [
+    0.6702,
+    0.6126,
+    0.1106
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1516461560128801,
+    "subdivided": true,
+    "fine_edge_m": 0.1516461560128801
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 4",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping near east stone 11",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping near east stone 11",
+   "size": [
+    0.6125,
+    0.6113,
+    0.088
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.14291574857807895,
+    "subdivided": true,
+    "fine_edge_m": 0.14291574857807895
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall near east panel 4",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Wall far panel 1",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall far panel 1",
+   "size": [
+    2.2715,
+    0.5015,
+    2.0054
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.5870769023895264,
+    "subdivided": true,
+    "fine_edge_m": 1.5870769023895264
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.5015,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.5015,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Wall far panel 2",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall far panel 2",
+   "size": [
+    1.9704,
+    0.4972,
+    2.0025
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.4872116943200429,
+    "subdivided": true,
+    "fine_edge_m": 1.4872116943200429
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4972,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4972,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Wall far panel 3",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall far panel 3",
+   "size": [
+    2.3693,
+    0.4968,
+    2.0044
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.6203317046165466,
+    "subdivided": true,
+    "fine_edge_m": 1.6203317046165466
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4968,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4968,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Wall far panel 4",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall far panel 4",
+   "size": [
+    2.3537,
+    0.4971,
+    2.003
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.614682932694753,
+    "subdivided": true,
+    "fine_edge_m": 1.614682932694753
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4971,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4971,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Wall far panel 5",
+   "role": "wall.brick",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK wall.brick / brick"
+   ],
+   "mesh_name": "Wall far panel 5",
+   "size": [
+    3.0514,
+    0.4968,
+    2.0028
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.8463951547940571,
+    "subdivided": true,
+    "fine_edge_m": 1.8463951547940571
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4968,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_brick_wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4968,
+     "min": 0.3,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Coping far stone 1",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 1",
+   "size": [
+    0.8475,
+    0.612,
+    0.0878
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.168907546064504,
+    "subdivided": true,
+    "fine_edge_m": 0.168907546064504
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 1",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 2",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 2",
+   "size": [
+    0.8952,
+    0.6136,
+    0.1061
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.176119450258639,
+    "subdivided": true,
+    "fine_edge_m": 0.176119450258639
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 1",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 3",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 3",
+   "size": [
+    0.5838,
+    0.6112,
+    0.1036
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.14164130918678972,
+    "subdivided": true,
+    "fine_edge_m": 0.14164130918678972
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 1",
+     "Wall far panel 2",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 4",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 4",
+   "size": [
+    0.8853,
+    0.6142,
+    0.1013
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.17424375537355802,
+    "subdivided": true,
+    "fine_edge_m": 0.17424375537355802
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 2",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 5",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 5",
+   "size": [
+    0.7027,
+    0.6131,
+    0.1109
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1551644945240513,
+    "subdivided": true,
+    "fine_edge_m": 0.1551644945240513
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 2",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 6",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 6",
+   "size": [
+    0.7354,
+    0.6107,
+    0.0878
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.15659154592881108,
+    "subdivided": true,
+    "fine_edge_m": 0.15659154592881108
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 2",
+     "Wall far panel 3",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 7",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 7",
+   "size": [
+    0.6012,
+    0.6116,
+    0.1071
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.14392644273868818,
+    "subdivided": true,
+    "fine_edge_m": 0.14392644273868818
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 3",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 8",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 8",
+   "size": [
+    0.823,
+    0.6117,
+    0.089
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1661908051055951,
+    "subdivided": true,
+    "fine_edge_m": 0.1661908051055951
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 3",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 9",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 9",
+   "size": [
+    0.6592,
+    0.6111,
+    0.1103
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.15077769647028771,
+    "subdivided": true,
+    "fine_edge_m": 0.15077769647028771
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 3",
+     "Wall far panel 4",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 10",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 10",
+   "size": [
+    0.8909,
+    0.6104,
+    0.1008
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.17538261456214493,
+    "subdivided": true,
+    "fine_edge_m": 0.17538261456214493
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 4",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 11",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 11",
+   "size": [
+    0.6545,
+    0.6117,
+    0.1012
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.14884815173003468,
+    "subdivided": true,
+    "fine_edge_m": 0.14884815173003468
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 4",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 12",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 12",
+   "size": [
+    0.7699,
+    0.6131,
+    0.1121
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.16279085992540646,
+    "subdivided": true,
+    "fine_edge_m": 0.16279085992540646
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 4",
+     "Wall far panel 5",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 13",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 13",
+   "size": [
+    0.7042,
+    0.6106,
+    0.1064
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1549722894128656,
+    "subdivided": true,
+    "fine_edge_m": 0.1549722894128656
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 5",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 14",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 14",
+   "size": [
+    0.7884,
+    0.6118,
+    0.1065
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.16445982647237323,
+    "subdivided": true,
+    "fine_edge_m": 0.16445982647237323
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 5",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 15",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 15",
+   "size": [
+    0.6225,
+    0.6117,
+    0.0846
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.14350618229433698,
+    "subdivided": true,
+    "fine_edge_m": 0.14350618229433698
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 5",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Coping far stone 16",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Coping far stone 16",
+   "size": [
+    0.7386,
+    0.6131,
+    0.0948
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.1572771672698171,
+    "subdivided": true,
+    "fine_edge_m": 0.1572771672698171
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Wall far panel 5",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Trench back wall",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Trench back wall",
+   "size": [
+    1.6113,
+    0.2138,
+    2.0137
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.41991966892478694,
+    "subdivided": true,
+    "fine_edge_m": 0.41991966892478694
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Trench cheek west",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Trench cheek west",
+   "size": [
+    0.2077,
+    2.1074,
+    2.0047
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.47547520776069263,
+    "subdivided": true,
+    "fine_edge_m": 0.47547520776069263
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Trench cheek east",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Trench cheek east",
+   "size": [
+    0.2078,
+    2.1078,
+    2.0083
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.47547520776069263,
+    "subdivided": true,
+    "fine_edge_m": 0.47547520776069263
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Flight core",
+   "role": "stone.footing",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK stone.footing / stone_rubble"
+   ],
+   "mesh_name": "Flight core",
+   "size": [
+    1.2076,
+    2.6073,
+    0.6475
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.54,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.491030777121156,
+    "subdivided": true,
+    "fine_edge_m": 0.491030777121156
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Step 1",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step 1",
+   "size": [
+    1.2,
+    0.3,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.18325301522378215,
+    "subdivided": false,
+    "fine_edge_m": 0.18325301522378215
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Step 2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Step 2",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step 2",
+   "size": [
+    1.2,
+    0.6,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.21658635154923203,
+    "subdivided": false,
+    "fine_edge_m": 0.21658635154923203
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Step 3"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Step 3",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step 3",
+   "size": [
+    1.2,
+    0.9,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.24991967958437472,
+    "subdivided": false,
+    "fine_edge_m": 0.24991967958437472
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Step 4"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Step 4",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step 4",
+   "size": [
+    1.2,
+    1.2,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.28325301926701085,
+    "subdivided": false,
+    "fine_edge_m": 0.28325301926701085
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Step 5"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Step 5",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step 5",
+   "size": [
+    1.2,
+    1.5,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.31658633810809417,
+    "subdivided": false,
+    "fine_edge_m": 0.31658633810809417
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Step 6"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Step 6",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step 6",
+   "size": [
+    1.2,
+    1.8,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.3499196753372963,
+    "subdivided": false,
+    "fine_edge_m": 0.3499196753372963
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Step 7"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Step 7",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step 7",
+   "size": [
+    1.2,
+    2.1,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.38325299989823525,
+    "subdivided": false,
+    "fine_edge_m": 0.38325299989823525
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Flight core"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Step landing",
+   "role": "floor.stone",
+   "owner": "walls_and_steps",
+   "collection": "Place: walls_and_steps",
+   "materials": [
+    "PK floor.stone / flagstone"
+   ],
+   "mesh_name": "Step landing",
+   "size": [
+    1.2,
+    0.5,
+    0.17
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "rubbish": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.2054752361214567,
+    "subdivided": false,
+    "fine_edge_m": 0.2054752361214567
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Flight core"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_step_rise",
+     "dimension": "height",
+     "value": 0.17,
+     "min": 0.08,
+     "max": 0.7,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Gate near heel post",
+   "role": "timber.post",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.post / timber_beam"
+   ],
+   "mesh_name": "Gate near heel post",
+   "size": [
+    0.4207,
+    0.3994,
+    2.6269
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.0736588352279395,
+    "subdivided": true,
+    "fine_edge_m": 1.0736588352279395
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.002,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.4207,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Gate near mitre post",
+   "role": "timber.post",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.post / timber_beam"
+   ],
+   "mesh_name": "Gate near mitre post",
+   "size": [
+    0.3349,
+    0.2993,
+    2.3038
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.9269921033435824,
+    "subdivided": true,
+    "fine_edge_m": 0.9269921033435824
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0001,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.3349,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Gate near rail 1",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate near rail 1",
+   "size": [
+    0.425,
+    0.6674,
+    0.1856
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3425866639385126,
+    "subdivided": true,
+    "fine_edge_m": 0.3425866639385126
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near rail 2",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate near rail 2",
+   "size": [
+    0.4238,
+    0.6691,
+    0.1881
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.34258665820034095,
+    "subdivided": true,
+    "fine_edge_m": 0.34258665820034095
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near rail 3",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate near rail 3",
+   "size": [
+    0.4231,
+    0.666,
+    0.1827
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3425866597494019,
+    "subdivided": true,
+    "fine_edge_m": 0.3425866597494019
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near rail 4",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate near rail 4",
+   "size": [
+    0.4188,
+    0.6637,
+    0.1842
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.34258666524212256,
+    "subdivided": true,
+    "fine_edge_m": 0.34258666524212256
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near rail 5",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate near rail 5",
+   "size": [
+    0.4214,
+    0.6666,
+    0.1874
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3425866683633436,
+    "subdivided": true,
+    "fine_edge_m": 0.3425866683633436
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near board 1",
+   "role": "timber.plank",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.plank / timber_planks"
+   ],
+   "mesh_name": "Gate near board 1",
+   "size": [
+    0.0889,
+    0.1361,
+    2.2916
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8242100380949945,
+    "subdivided": true,
+    "fine_edge_m": 0.8242100380949945
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near board 2",
+   "role": "timber.plank",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.plank / timber_planks"
+   ],
+   "mesh_name": "Gate near board 2",
+   "size": [
+    0.0964,
+    0.1547,
+    2.2992
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8328687004347032,
+    "subdivided": true,
+    "fine_edge_m": 0.8328687004347032
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near board 3",
+   "role": "timber.plank",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.plank / timber_planks"
+   ],
+   "mesh_name": "Gate near board 3",
+   "size": [
+    0.0928,
+    0.1402,
+    2.287
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8223234616768472,
+    "subdivided": true,
+    "fine_edge_m": 0.8223234616768472
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near board 4",
+   "role": "timber.plank",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.plank / timber_planks"
+   ],
+   "mesh_name": "Gate near board 4",
+   "size": [
+    0.0826,
+    0.1104,
+    2.2993
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8152234236200216,
+    "subdivided": true,
+    "fine_edge_m": 0.8152234236200216
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near heel strap 1",
+   "role": "iron.fitting",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Gate near heel strap 1",
+   "size": [
+    0.4101,
+    0.4101,
+    0.07
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.72,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.07735385452300407,
+    "subdivided": false,
+    "fine_edge_m": 0.07735385452300407
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near heel strap 2",
+   "role": "iron.fitting",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Gate near heel strap 2",
+   "size": [
+    0.4101,
+    0.4101,
+    0.07
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.72,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.07735385452300407,
+    "subdivided": false,
+    "fine_edge_m": 0.07735385452300407
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate near balance beam",
+   "role": "timber.beam",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.beam / timber_beam"
+   ],
+   "mesh_name": "Gate near balance beam",
+   "size": [
+    0.9463,
+    2.1384,
+    0.2257
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8733333373040079,
+    "subdivided": true,
+    "fine_edge_m": 0.8733333373040079
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Gate near heel post"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "beam_size",
+     "dimension": "thickness",
+     "value": 0.2257,
+     "min": 0.04,
+     "max": 0.4,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_balance_beam_length",
+     "dimension": "span",
+     "value": 2.1384,
+     "min": 2.0,
+     "max": 5.0,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Gate far heel post",
+   "role": "timber.post",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.post / timber_beam"
+   ],
+   "mesh_name": "Gate far heel post",
+   "size": [
+    0.4075,
+    0.3907,
+    2.6216
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.0730077881043263,
+    "subdivided": true,
+    "fine_edge_m": 1.0730077881043263
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0013,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.4075,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Gate far mitre post",
+   "role": "timber.post",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.post / timber_beam"
+   ],
+   "mesh_name": "Gate far mitre post",
+   "size": [
+    0.3225,
+    0.3269,
+    2.3036
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.9263410578702057,
+    "subdivided": true,
+    "fine_edge_m": 0.9263410578702057
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.002,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.3269,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Gate far rail 1",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate far rail 1",
+   "size": [
+    0.4229,
+    0.6657,
+    0.1841
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3425866666861124,
+    "subdivided": true,
+    "fine_edge_m": 0.3425866666861124
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far rail 2",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate far rail 2",
+   "size": [
+    0.4278,
+    0.6692,
+    0.1901
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.34258665573218905,
+    "subdivided": true,
+    "fine_edge_m": 0.34258665573218905
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far rail 3",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate far rail 3",
+   "size": [
+    0.4257,
+    0.6692,
+    0.1882
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.34258666070186106,
+    "subdivided": true,
+    "fine_edge_m": 0.34258666070186106
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far rail 4",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate far rail 4",
+   "size": [
+    0.4272,
+    0.6701,
+    0.1912
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3425866469375114,
+    "subdivided": true,
+    "fine_edge_m": 0.3425866469375114
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far rail 5",
+   "role": "timber.fence",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.fence / timber_weathered"
+   ],
+   "mesh_name": "Gate far rail 5",
+   "size": [
+    0.4232,
+    0.6673,
+    0.1862
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.34258666447792274,
+    "subdivided": true,
+    "fine_edge_m": 0.34258666447792274
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far board 1",
+   "role": "timber.plank",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.plank / timber_planks"
+   ],
+   "mesh_name": "Gate far board 1",
+   "size": [
+    0.1039,
+    0.1706,
+    2.2879
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8338761331012715,
+    "subdivided": true,
+    "fine_edge_m": 0.8338761331012715
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far board 2",
+   "role": "timber.plank",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.plank / timber_planks"
+   ],
+   "mesh_name": "Gate far board 2",
+   "size": [
+    0.0946,
+    0.1475,
+    2.2892
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8267040801632168,
+    "subdivided": true,
+    "fine_edge_m": 0.8267040801632168
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far board 3",
+   "role": "timber.plank",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.plank / timber_planks"
+   ],
+   "mesh_name": "Gate far board 3",
+   "size": [
+    0.0975,
+    0.1574,
+    2.2937
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8318024875691069,
+    "subdivided": true,
+    "fine_edge_m": 0.8318024875691069
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far heel strap 1",
+   "role": "iron.fitting",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Gate far heel strap 1",
+   "size": [
+    0.4101,
+    0.4101,
+    0.07
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.72,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.07735385452300407,
+    "subdivided": false,
+    "fine_edge_m": 0.07735385452300407
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far heel strap 2",
+   "role": "iron.fitting",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Gate far heel strap 2",
+   "size": [
+    0.4101,
+    0.4101,
+    0.07
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.72,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 108,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.07735385452300407,
+    "subdivided": false,
+    "fine_edge_m": 0.07735385452300407
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Gate far balance beam",
+   "role": "timber.beam",
+   "owner": "lock_gate",
+   "collection": "Place: lock_gate",
+   "materials": [
+    "PK timber.beam / timber_beam"
+   ],
+   "mesh_name": "Gate far balance beam",
+   "size": [
+    0.945,
+    2.1381,
+    0.2243
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "cracks_and_chips": 0.5,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "moss_and_algae": 0.45,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8733333373040079,
+    "subdivided": true,
+    "fine_edge_m": 0.8733333373040079
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "Gate far heel post"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "beam_size",
+     "dimension": "thickness",
+     "value": 0.2243,
+     "min": 0.04,
+     "max": 0.4,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "canal_balance_beam_length",
+     "dimension": "span",
+     "value": 2.1381,
+     "min": 2.0,
+     "max": 5.0,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop bollard 1",
+   "role": "iron.painted",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.painted / painted_metal"
+   ],
+   "mesh_name": "Prop bollard 1",
+   "size": [
+    0.17,
+    0.17,
+    0.42
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.6,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 92,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.15479296398552933,
+    "subdivided": false,
+    "fine_edge_m": 0.15479296398552933
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop bollard 2",
+   "role": "iron.painted",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.painted / painted_metal"
+   ],
+   "mesh_name": "Prop bollard 2",
+   "size": [
+    0.17,
+    0.17,
+    0.42
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.6,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 92,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.15479296398552933,
+    "subdivided": false,
+    "fine_edge_m": 0.15479296398552933
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop crate",
+   "role": "prop.crate",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.crate / timber_planks"
+   ],
+   "mesh_name": "Prop crate",
+   "size": [
+    0.6363,
+    0.5425,
+    0.3817
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.14808121565388757,
+    "subdivided": true,
+    "fine_edge_m": 0.14808121565388757
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.001,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "crate_size",
+     "dimension": "span",
+     "value": 0.6363,
+     "min": 0.25,
+     "max": 1.8,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Prop barrel",
+   "role": "prop.barrel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.barrel / timber_planks"
+   ],
+   "mesh_name": "Prop barrel",
+   "size": [
+    0.5607,
+    0.561,
+    0.8515
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 240,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.3417355410643282,
+    "subdivided": true,
+    "fine_edge_m": 0.3417355410643282
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "barrel_height",
+     "dimension": "height",
+     "value": 0.8515,
+     "min": 0.4,
+     "max": 1.3,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop barrel band 1",
+   "role": "iron.fitting",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Prop barrel band 1",
+   "size": [
+    0.58,
+    0.58,
+    0.05
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.72,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 76,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.0771546598531621,
+    "subdivided": false,
+    "fine_edge_m": 0.0771546598531621
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop barrel band 2",
+   "role": "iron.fitting",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Prop barrel band 2",
+   "size": [
+    0.58,
+    0.58,
+    0.05
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "rust": 0.72,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 76,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.0771546598531621,
+    "subdivided": false,
+    "fine_edge_m": 0.0771546598531621
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop rope coil",
+   "role": "prop.rope",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.rope / rope"
+   ],
+   "mesh_name": "Prop rope coil",
+   "size": [
+    0.5391,
+    0.5406,
+    0.0968
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.65,
+    "weathering": 0.6,
+    "wetness": 0.5,
+    "grime": 0.6,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2560,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": true,
+    "mean_edge_m": 0.03701462043248851,
+    "subdivided": true,
+    "fine_edge_m": 0.03701462043248851
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   }
+  },
+  {
+   "name": "PK scatter leaf 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter leaf 0",
+   "size": [
+    12.9938,
+    17.3241,
+    2.018
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 366,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.019682029123009846,
+    "subdivided": false,
+    "fine_edge_m": 0.019682029123009846
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter pine_needles 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter pine_needles 0",
+   "size": [
+    9.4995,
+    14.8226,
+    2.0151
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 324,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.019360838239277166,
+    "subdivided": false,
+    "fine_edge_m": 0.019360838239277166
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter stick 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter stick 0",
+   "size": [
+    12.2522,
+    15.0226,
+    2.0165
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 90,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.05457331041834228,
+    "subdivided": false,
+    "fine_edge_m": 0.05457331041834228
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter straw 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter straw 0",
+   "size": [
+    12.1706,
+    11.7903,
+    0.0253
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 56,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.05775958915496384,
+    "subdivided": false,
+    "fine_edge_m": 0.05775958915496384
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter dung_lump 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter dung_lump 0",
+   "size": [
+    10.889,
+    1.1906,
+    0.0311
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 105,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.017127472017873197,
+    "subdivided": false,
+    "fine_edge_m": 0.017127472017873197
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter tuft 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter tuft 0",
+   "size": [
+    12.3329,
+    16.2402,
+    2.2714
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1104,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.028358121958188428,
+    "subdivided": false,
+    "fine_edge_m": 0.028358121958188428
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter clover 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter clover 0",
+   "size": [
+    10.9018,
+    14.4664,
+    0.026
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 180,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.0055683928172556895,
+    "subdivided": false,
+    "fine_edge_m": 0.0055683928172556895
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter nettle 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter nettle 0",
+   "size": [
+    9.7005,
+    16.9888,
+    2.8461
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 244,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.09301847219219016,
+    "subdivided": false,
+    "fine_edge_m": 0.09301847219219016
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter fern 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter fern 0",
+   "size": [
+    10.8821,
+    12.7408,
+    2.3092
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 350,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.06786136174647904,
+    "subdivided": false,
+    "fine_edge_m": 0.06786136174647904
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter bramble 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter bramble 0",
+   "size": [
+    7.6559,
+    10.344,
+    2.927
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 330,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.09268567946379239,
+    "subdivided": false,
+    "fine_edge_m": 0.09268567946379239
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK scatter moss_cushion 0",
+   "role": "never.scatter",
+   "owner": "unowned",
+   "collection": "PK made",
+   "materials": [
+    "PK Scatter"
+   ],
+   "mesh_name": "PK scatter moss_cushion 0",
+   "size": [
+    12.9159,
+    15.1985,
+    2.0167
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2320,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.010599530942987394,
+    "subdivided": false,
+    "fine_edge_m": 0.010599530942987394
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true
+  },
+  {
+   "name": "PK sun",
+   "role": "never.light",
+   "owner": "unowned",
+   "collection": null,
+   "materials": [],
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "uv": {
+    "has": true
+   },
+   "geometry": {},
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "buried_light": true,
+    "parts": 0,
+    "floating": false,
+    "hung": false
+   },
+   "mesh_name": null
+  }
+ ],
+ "siblings": {
+  "wall.brick": {
+   "count": 10,
+   "copies_share": 0.0,
+   "size_spread": 0.053,
+   "all_damaged": true
+  },
+  "stone.footing": {
+   "count": 34,
+   "copies_share": 0.0,
+   "size_spread": 0.963,
+   "all_damaged": true
+  },
+  "floor.stone": {
+   "count": 8,
+   "copies_share": 0.0,
+   "size_spread": 0.182,
+   "all_damaged": false
+  },
+  "timber.post": {
+   "count": 4,
+   "copies_share": 0.0,
+   "size_spread": 0.1,
+   "all_damaged": true
+  },
+  "timber.fence": {
+   "count": 10,
+   "copies_share": 0.0,
+   "size_spread": 0.008,
+   "all_damaged": true
+  },
+  "timber.plank": {
+   "count": 7,
+   "copies_share": 0.0,
+   "size_spread": 0.064,
+   "all_damaged": true
+  },
+  "iron.fitting": {
+   "count": 6,
+   "copies_share": 0.0,
+   "size_spread": 0.164,
+   "all_damaged": false
+  }
+ },
+ "scatter": {
+  "groups": [
+   {
+    "name": "leaf",
+    "group": "litter",
+    "objects": [
+     "PK scatter leaf 0"
+    ],
+    "count": 61,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "pine_needles",
+    "group": "litter",
+    "objects": [
+     "PK scatter pine_needles 0"
+    ],
+    "count": 18,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "stick",
+    "group": "litter",
+    "objects": [
+     "PK scatter stick 0"
+    ],
+    "count": 15,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "straw",
+    "group": "litter",
+    "objects": [
+     "PK scatter straw 0"
+    ],
+    "count": 4,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "dung_lump",
+    "group": "litter",
+    "objects": [
+     "PK scatter dung_lump 0"
+    ],
+    "count": 3,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "tuft",
+    "group": "plant",
+    "objects": [
+     "PK scatter tuft 0"
+    ],
+    "count": 26,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "clover",
+    "group": "plant",
+    "objects": [
+     "PK scatter clover 0"
+    ],
+    "count": 5,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "nettle",
+    "group": "plant",
+    "objects": [
+     "PK scatter nettle 0"
+    ],
+    "count": 9,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "fern",
+    "group": "plant",
+    "objects": [
+     "PK scatter fern 0"
+    ],
+    "count": 8,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "bramble",
+    "group": "plant",
+    "objects": [
+     "PK scatter bramble 0"
+    ],
+    "count": 5,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "moss_cushion",
+    "group": "plant",
+    "objects": [
+     "PK scatter moss_cushion 0"
+    ],
+    "count": 13,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   }
+  ],
+  "plants_per_100m2": 23.748490553943473,
+  "litter_per_100m2": 36.34238705982259
+ },
+ "normal_maps": {
+  "images": [
+   {
+    "name": "pk_flagstone_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5001029968261719,
+     0.4999464452266693,
+     0.9923607110977173
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9972738027572632,
+     "y": 0.9970970153808594,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_grass_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999738037586212,
+     0.499968558549881,
+     0.9861510992050171
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9901072978973389,
+     "y": 0.989354133605957,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_gravel_path_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999985992908478,
+     0.4999743402004242,
+     0.992335319519043
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9975884556770325,
+     "y": 0.9975885152816772,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_mud_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.500002384185791,
+     0.49968039989471436,
+     0.9770967960357666
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9796573519706726,
+     "y": 0.9811639785766602,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_iron_forged_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.500054121017456,
+     0.49965712428092957,
+     0.9923343658447266
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9840037822723389,
+     "y": 0.9850020408630371,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_painted_metal_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999064803123474,
+     0.4999002516269684,
+     0.9936956167221069
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9956541657447815,
+     "y": 0.9956457614898682,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_planks_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999784827232361,
+     0.4999958872795105,
+     0.9927515983581543
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": 0.9994350075721741,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_rope_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.499991774559021,
+     0.4999805688858032,
+     0.9650482535362244
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9989716410636902,
+     "y": 0.9968292117118835,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_stone_rubble_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5001420974731445,
+     0.4999140202999115,
+     0.9937453269958496
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9962939023971558,
+     "y": 0.9965739846229553,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_beam_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000760555267334,
+     0.49992549419403076,
+     0.9923515319824219
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": 0.9993743896484375,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_weathered_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49999237060546875,
+     0.5001358389854431,
+     0.9925232529640198
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": 0.9993835687637329,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_brick_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49998441338539124,
+     0.4999619424343109,
+     0.9856441617012024
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9990212321281433,
+     "y": 0.9997589588165283,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_water_still_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000066161155701,
+     0.5000767111778259,
+     0.9771960377693176
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9762468338012695,
+     "y": 0.9534593224525452,
+     "method": "height"
+    },
+    "verdict": "pass"
+   }
+  ],
+  "test_light": {
+   "verdict": "pass",
+   "detail": {
+    "ok +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4145,
+     "lit_is_brighter": true
+    },
+    "ok +Y": {
+     "lit_side": 0.7935,
+     "dark_side": 0.4108,
+     "lit_is_brighter": true
+    },
+    "flipped +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4146,
+     "lit_is_brighter": true
+    },
+    "flipped +Y": {
+     "lit_side": 0.4145,
+     "dark_side": 0.7941,
+     "lit_is_brighter": false
+    }
+   },
+   "line": "NORMAL_DIRECTION PASS (sun from +X: 0.794 vs 0.415; sun from +Y: 0.794 vs 0.411; the flipped-green control reads the other way: True)",
+   "control_fails": true
+  }
+ },
+ "displacement": {
+  "materials": [
+   "PK ground.gravel / gravel_path",
+   "PK ground.mud / mud"
+  ],
+  "objects": [
+   "Ground canal bed",
+   "Ground towpath west",
+   "Ground towpath east",
+   "Ground towpath end"
+  ],
+  "too_coarse": []
+ },
+ "roads": [
+  {
+   "name": "towpath",
+   "ground_objects": [
+    "Ground canal bed",
+    "Ground towpath west",
+    "Ground towpath east",
+    "Ground towpath end",
+    "Ground back verge"
+   ],
+   "relief_m": 0.0583,
+   "ruts_found": true,
+   "rut_depth_m": 0.041,
+   "gauge_m": 0.84,
+   "gauge_in_settings_m": 0.9
+  }
+ ],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [
+   "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+  ],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "lamps": 1,
+  "suns": 1,
+  "world_light": true,
+  "emissive_materials": false,
+  "clip_share": null
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [
+   "quay_no_growth",
+   "floors_indoors"
+  ],
+  "share": 0.0
+ },
+ "construction_summary": {
+  "parts_checked": 88,
+  "objects_checked": 89,
+  "carried": 89,
+  "floating": [],
+  "hung": [
+   "Gate far heel strap 1",
+   "Gate far heel strap 2",
+   "Gate far rail 1",
+   "Gate far rail 2",
+   "Gate far rail 3",
+   "Gate far rail 4",
+   "Gate far rail 5",
+   "Gate near heel strap 1",
+   "Gate near heel strap 2",
+   "Gate near rail 1",
+   "Gate near rail 2",
+   "Gate near rail 3",
+   "Gate near rail 4",
+   "Gate near rail 5",
+   "Prop barrel band 1",
+   "Prop barrel band 2"
+  ],
+  "sample_spacing_metres": 0.02,
+  "sampled_coarser": false,
+  "scatter_exempt": 11,
+  "note": "scattered pieces (plants, leaves, litter) and never-roles are exempt on purpose: they stand on the ground by their own roots"
+ },
+ "problems": []
+}

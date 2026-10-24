@@ -1,0 +1,32 @@
+Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): PASS, with things to look at. 0 to fix, 2 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+Long step ready: drawing this place's views and plates (the long step: a place that fails is drawn again).
+
+Made 2026-10-23 05:18:28 by preflight.py version d58b2d0e; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/reports/preflight-place-2026-10-23-051828.
+
+## To look at (they do not block; a person decides)
+
+- place: scale: Gate leaf: height is 1.10 metres; door_height says 1.6 to 2.3 (weak). (place_audit_check.py)
+  Fix: check the size; a weak or guessed fact may be wrong for this place.
+- place: fresh checker: not checked: no fresh checker has looked at this place (--fresh-check). (preflight.py place)
+  Fix: run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.
+
+## Notes
+
+- The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look.
+
+## Checks run
+
+- WARN  the place audit: surfaces, wear and construction (place_audit_check.py): 0 fail, 1 look, 0 known, 15 pass, 0 info; exit 0, 0.1 s; calculators/place_audit_check.py version 621b09b4
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/place-audit.json --skip-freshness --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/reports/preflight-place-2026-10-23-051828/01-the-place-audit-surfaces-wear-and-construction-p.json
+- PASS  the audit is about this scene file (freshness): 0 fail, 0 look, 0 known, 1 pass, 0 info; exit 0, 0.0 s; preflight.py place version d58b2d0e
+  (inside the preflight)
+- WARN  a fresh checker has looked: 0 fail, 1 look, 0 known, 0 pass, 0 info; exit 0, 0.0 s; preflight.py place version d58b2d0e
+  (inside the preflight)
+
+## Inputs (sha1 when the run ended)
+
+- b0fc0b2920aa900d89634c37edc27cb3782fbb10  /home/user/Music/plugins/explainer-film/kit/film-settings.json
+- f9acafd27caa91af6900c14cccc7f2d560216746  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/place-audit.json
+- 46334f769806d16b59daf89547b915bdb34b5f62  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/tiny-wall-finished.blend
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify-final/tiny/reports/preflight-place-2026-10-23-051828.json

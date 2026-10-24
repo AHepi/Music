@@ -1,0 +1,8 @@
+{
+ "about": "The canal lock side's own facts. Weak: from memory (narrow canal lock chambers in Britain are about 2.1 m wide; coping and steps are common building practice). Confirm with a source before treating as law.",
+ "facts": [
+  {"id": "canal_brick_wall_thickness", "what": "a brick lock wall", "applies_to_role": "^wall\\.brick$", "dimension": "thickness", "min": 0.3, "max": 0.9, "unit": "metres", "kind": "judged", "source": "from memory: lock walls are two to four bricks thick or more", "confidence": "weak", "only_if_slab_like": true},
+  {"id": "canal_step_rise", "what": "one stone step down to the water", "applies_to_role": "^floor\\.stone$", "dimension": "height", "min": 0.08, "max": 0.7, "unit": "metres", "kind": "judged", "source": "from memory: a step rises 15 to 20 cm; the block under it is taller", "confidence": "weak"},
+  {"id": "canal_balance_beam_length", "what": "a lock gate balance beam", "applies_to_role": "^timber\\.beam$", "applies_to_name": "balance beam", "dimension": "span", "min": 2.0, "max": 5.0, "unit": "metres", "kind": "judged", "source": "from memory: 2.5 to 4 m on a narrow lock", "confidence": "weak"}
+ ]
+}

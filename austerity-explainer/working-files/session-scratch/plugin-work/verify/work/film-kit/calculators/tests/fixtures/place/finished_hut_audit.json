@@ -1,0 +1,1107 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-22T12:00:00",
+ "blender": "5.2.2",
+ "scene_file": "hut.blend",
+ "scene_sha1": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "settings_file": "place-settings.json",
+ "settings_sha1": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+ "place": "hut",
+ "place_type": "generic",
+ "look": "lived_in",
+ "state": "dry",
+ "quick": false,
+ "map_size_pixels": 1024,
+ "mask": {
+  "cell_metres": 0.1,
+  "seconds": 3.0,
+  "source": "whole_scene"
+ },
+ "masks_from": "whole_scene",
+ "picture": {
+  "camera": null,
+  "height_pixels": null,
+  "set": false
+ },
+ "counts": {
+  "objects_visible": 9,
+  "materials": 5,
+  "triangles": 108,
+  "triangles_by_owner": {
+   "hut": 108
+  },
+  "scatter_pieces": 0,
+  "ground_area_m2": 100
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.earth": 1,
+   "wall.plaster": 4,
+   "roof.shingle": 1,
+   "timber.door": 1,
+   "timber.floor": 2
+  }
+ },
+ "materials": [
+  {
+   "name": "PK ground.earth / x",
+   "role": "ground.earth",
+   "users": 1,
+   "objects": [
+    "ground"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {
+      "images": 2,
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0
+     }
+    },
+    "displacement": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {
+      "method": "BOTH",
+      "depth_metres": 0.06,
+      "mesh": "dense"
+     }
+    },
+    "roughness_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "grime": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "weathering": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "wetness": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": true,
+     "required": false,
+     "wanted": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "rubbish": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "plants": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "litter_pieces": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {}
+  },
+  {
+   "name": "PK wall.plaster / x",
+   "role": "wall.plaster",
+   "users": 1,
+   "objects": [
+    "wall_north",
+    "wall_south",
+    "wall_east",
+    "wall_west"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {
+      "images": 2,
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0
+     }
+    },
+    "roughness_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "grime": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "weathering": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "wetness": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": true,
+     "required": false,
+     "wanted": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {}
+  },
+  {
+   "name": "PK roof.shingle / x",
+   "role": "roof.shingle",
+   "users": 1,
+   "objects": [
+    "roof"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {
+      "images": 2,
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0
+     }
+    },
+    "roughness_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "grime": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "weathering": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "wetness": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {}
+  },
+  {
+   "name": "PK timber.door / x",
+   "role": "timber.door",
+   "users": 1,
+   "objects": [
+    "door"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {
+      "images": 2,
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0
+     }
+    },
+    "roughness_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "grime": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "weathering": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "wetness": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": true,
+     "required": false,
+     "wanted": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {}
+  },
+  {
+   "name": "PK timber.floor / x",
+   "role": "timber.floor",
+   "users": 1,
+   "objects": [
+    "floor_plank_1",
+    "floor_plank_2"
+   ],
+   "treatments": {
+    "normal_map": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {
+      "images": 2,
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0
+     }
+    },
+    "roughness_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "grime": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "weathering": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "wetness": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "has": true,
+     "required": false,
+     "wanted": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "shape_damage": {
+     "has": true,
+     "required": true,
+     "wanted": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {}
+  }
+ ],
+ "objects": [
+  {
+   "name": "ground",
+   "role": "ground.earth",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK ground.earth / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "rubbish": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_north",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK wall.plaster / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.5,
+    "moss_and_algae": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_south",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK wall.plaster / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.5,
+    "moss_and_algae": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_east",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK wall.plaster / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.5,
+    "moss_and_algae": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_west",
+   "role": "wall.plaster",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK wall.plaster / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.5,
+    "moss_and_algae": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "roof",
+   "role": "roof.shingle",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK roof.shingle / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "moss_and_algae": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "door",
+   "role": "timber.door",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK timber.door / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "floor_plank_1",
+   "role": "timber.floor",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK timber.floor / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "floor_plank_2",
+   "role": "timber.floor",
+   "owner": "hut",
+   "collection": "Place: hut",
+   "materials": [
+    "PK timber.floor / x"
+   ],
+   "has_normal_map": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "dirt": 0.5,
+    "grime": 0.5,
+    "weathering": 0.5,
+    "wetness": 0.5,
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "relief_m": 0.0,
+    "mean_edge_m": 1.0
+   },
+   "construction": {
+    "carried": true,
+    "via": "ground",
+    "gap_mm": 0.0,
+    "hung": false,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "needs_ground": false
+   },
+   "scale": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  }
+ ],
+ "siblings": {},
+ "scatter": {
+  "groups": [
+   {
+    "name": "tuft",
+    "count": 80,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   }
+  ]
+ },
+ "normal_maps": {
+  "images": [
+   {
+    "name": "pk_plaster_lime_nor",
+    "size": [
+     1024,
+     1024
+    ],
+    "mean_rgb": [
+     0.5,
+     0.5,
+     0.97
+    ],
+    "convention": "opengl",
+    "made_by_kit": true,
+    "colourspace": "Non-Color",
+    "direction": {
+     "x": 0.6,
+     "y": 0.6,
+     "method": "height"
+    },
+    "verdict": "pass"
+   }
+  ],
+  "test_light": {
+   "verdict": "pass"
+  }
+ },
+ "displacement": {
+  "materials": [],
+  "objects": [],
+  "too_coarse": []
+ },
+ "roads": [],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "clip_share": 0.0
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [],
+  "share": 0.0
+ },
+ "problems": []
+}

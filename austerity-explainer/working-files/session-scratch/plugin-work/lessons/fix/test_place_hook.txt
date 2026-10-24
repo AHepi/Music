@@ -1,0 +1,76 @@
+== place reminder hook: routing words at the start of a turn
+PASS  hooks.json has exactly one UserPromptSubmit hook that is a command: ['python3 "${CLAUDE_PLUGIN_ROOT}/hooks/place-reminder.py"']
+PASS  that command runs place-reminder.py from the plugin folder: ['python3 "${CLAUDE_PLUGIN_ROOT}/hooks/place-reminder.py"']
+PASS  place-reminder.py is there: yes
+PASS  a reminder for: Perfect. Now build a canal lock beside a towpath. Needs weat: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Build a village with a few houses and some props.: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: make a cabin: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: create a harbour with boats: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: put together a market square with props: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: build a small farm with a barn and a yard: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Model a barrel in Blender: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: write a python script for blender that makes a tavern interi: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: I need a 3D diorama of a mill: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: furnish the kitchen with props: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Build an old railway station for a film.: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Make a railway station with platforms and tracks for the fil: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Make a fish market by the sea for the film: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Build a street with shops: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: build a pier: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: make a small chapel on a hill: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Make an old mountain monastery for the film: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Build an abbey cloister for a film: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Make a lighthouse on a cliff: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Build a factory floor for chapter 3: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Build a stone bridge over a river: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Make a fort on a hill: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  a reminder for: Build a school classroom: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  nothing for: what is the weather in Oslo: yes
+PASS  nothing for: fix the typo in my README: yes
+PASS  nothing for: write a poem about the sea: yes
+PASS  nothing for: add a test for the road parser: yes
+PASS  nothing for: make the music louder in the film: yes
+PASS  nothing for: build a random forest classifier: yes
+PASS  nothing for: make the nightly build stable: yes
+PASS  nothing for: add a cart to the shop page: yes
+PASS  nothing for: make room for the new button: yes
+PASS  nothing for: Build the film scene for page 4: yes
+PASS  nothing for: record the narration for chapter 2: yes
+PASS  nothing for: explain what causes inflation: yes
+PASS  nothing for: make a market analysis for the report: yes
+PASS  nothing for: update the marketplace file: yes
+PASS  nothing for: make a street address parser: yes
+PASS  nothing for: create a docking station for the laptop: yes
+PASS  nothing for: build a work station list: yes
+PASS  nothing for: make the lighthouse score better: yes
+PASS  nothing for: build a bridge pattern class: yes
+PASS  nothing for: make a factory function: yes
+PASS  nothing for: make it shed light on the problem: yes
+PASS  nothing for: (an empty message): yes
+PASS  unreadable input (not JSON): exit 0 and nothing printed: exit 0, ''
+PASS  unreadable input (no prompt): exit 0 and nothing printed: exit 0, ''
+PASS  unreadable input (a number for the prompt): exit 0 and nothing printed: exit 0, ''
+PASS  unreadable input (empty input): exit 0 and nothing printed: exit 0, ''
+PASS  unreadable input (a list): exit 0 and nothing printed: exit 0, ''
+PASS  the skill it names is a folder of the plugin: yes
+PASS  it is three lines or fewer and says to ignore it when the work is not 3D: 3
+PASS  it holds no key, address, e-mail or long id: explainer-film reminder (ignore it if this is not 3D work): a place, a set or pr
+PASS  line 2 sends a place for the film to build-and-paint-a-place and sections 4 to 12 of the tips guide before a camera is placed, and says 1080 x 1920: Read the skill surfaces-wear-and-construction first (its first screen has the steps), then run: explainer-film-place fin
+PASS    (the skill folder build-and-paint-a-place and the tips guide it names exist): yes
+PASS  nothing when the person says to leave the plugin out: Build a canal lock in plain Blender.: yes
+PASS  nothing when the person says to leave the plugin out: Build a village in Blender without the plugin.: yes
+PASS  nothing when the person says to leave the plugin out: Make a barn with a few props in Blender. Do not use the plug: yes
+PASS  nothing when the person says to leave the plugin out: Build a small farm with a barn, but don't use the plugin: yes
+PASS  nothing when the person says to leave the plugin out: Build a garden in Blender and do not use the skill: yes
+PASS  nothing when the person says to leave the plugin out: Build a cabin in 3D, don’t use the plugin: yes
+PASS    (the same kind of request without those words still gets the reminder: Build a canal lock in Blender.): yes
+PASS    (the same kind of request without those words still gets the reminder: Build a village in Blender with the plugin.): yes
+PASS    (the same kind of request without those words still gets the reminder: Make a barn with a few props in Blender.): yes
+PASS    (not a leave-out, so the reminder is still printed: Build a farm. Compare with and without the plugin later): explainer-film reminder (ignore it if this is not 3D work): 
+PASS    (not a leave-out, so the reminder is still printed: Build a farm with or without the plugin, your choice): explainer-film reminder (ignore it if this is not 3D work): 
+PASS    (not a leave-out, so the reminder is still printed: Build a garden in Blender and do not use skills from the Sce): explainer-film reminder (ignore it if this is not 3D work): 
+PASS    (not a leave-out, so the reminder is still printed: Build a garden in Blender, do not use the skill scenario-ble): explainer-film reminder (ignore it if this is not 3D work): 
+PASS  nothing when the person says to leave the plugin's skills out: Build a cabin, don't use the skills: yes
+PASS  nothing when the person says to leave the plugin's skills out: Do not use the explainer-film skills about lighting; build a: yes
+PASS  the script reads only standard input and prints (no network, no files, no settings): none found
+-- place reminder hook: routing words at the start of a turn: 74 of 74 checks passed

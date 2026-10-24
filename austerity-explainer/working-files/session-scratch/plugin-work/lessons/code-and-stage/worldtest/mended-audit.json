@@ -1,0 +1,1435 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-23T07:04:33",
+ "blender": "5.2.2 LTS",
+ "scene_file": "mended.blend",
+ "scene_sha1": "4f3c9b518eab3405339dc76b1cb55b9d2c3b566c",
+ "settings_file": "settings.json",
+ "settings_sha1": "b7c6e7552b6eac3d107dab949de8126b8810cdcd",
+ "place": "world test",
+ "place_type": "generic",
+ "look": "lived_in",
+ "state": "dry",
+ "quick": false,
+ "map_size_pixels": null,
+ "mask": {},
+ "masks_from": "whole_scene",
+ "picture": {
+  "camera": null,
+  "height_pixels": null,
+  "set": false
+ },
+ "counts": {
+  "objects_visible": 7,
+  "objects_total": 11,
+  "materials": 6,
+  "triangles": 74,
+  "triangles_by_owner": {
+   "unowned": 74
+  },
+  "scatter_pieces": 0,
+  "ground_area_m2": 16000000.0
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.earth": 1,
+   "wall.brick": 2,
+   "prop.wood": 1,
+   "prop.generic": 1,
+   "timber.plank": 1,
+   "backdrop": 1
+  }
+ },
+ "materials": [
+  {
+   "name": "Distant mill colour",
+   "role": "wall.brick",
+   "roles": [
+    "wall.brick"
+   ],
+   "users": 1,
+   "objects": [
+    "Distant mill"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Floor board 1 colour",
+   "role": "timber.plank",
+   "roles": [
+    "timber.plank"
+   ],
+   "users": 1,
+   "objects": [
+    "Floor board 1"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Ledger book colour",
+   "role": "prop.generic",
+   "roles": [
+    "prop.generic"
+   ],
+   "users": 1,
+   "objects": [
+    "Ledger book"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "edge_wear"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Shop sign colour",
+   "role": "prop.wood",
+   "roles": [
+    "prop.wood"
+   ],
+   "users": 1,
+   "objects": [
+    "Shop sign"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "edge_wear"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Wall north colour",
+   "role": "wall.brick",
+   "roles": [
+    "wall.brick"
+   ],
+   "users": 1,
+   "objects": [
+    "Wall north"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "ground colour",
+   "role": "ground.earth",
+   "roles": [
+    "ground.earth"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground yard"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "node": null,
+      "method": "BUMP",
+      "depth_metres": 0.0,
+      "max_vertex_displacement": 0.0,
+      "mesh": null
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "count": 0,
+      "per_100_square_metres": 0.0
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "count": 0,
+      "per_100_square_metres": 0.0
+     }
+    }
+   },
+   "missing": [
+    "normal_map",
+    "displacement",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish",
+    "plants",
+    "litter_pieces"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  }
+ ],
+ "objects": [
+  {
+   "name": "Ground yard",
+   "role": "ground.earth",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "ground colour"
+   ],
+   "mesh_name": "Ground yard",
+   "size": [
+    4000.0,
+    4000.0,
+    0.0
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 4000.0,
+    "subdivided": false,
+    "fine_edge_m": 4000.0,
+    "relief_m": 0.0
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish",
+    "displacement"
+   ]
+  },
+  {
+   "name": "Wall north",
+   "role": "wall.brick",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "Wall north colour"
+   ],
+   "mesh_name": "Wall north",
+   "size": [
+    40.0,
+    0.4,
+    4.0
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 14.800000001986822,
+    "subdivided": false,
+    "fine_edge_m": 14.800000001986822
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground yard",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.4,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shop sign",
+   "role": "prop.wood",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "Shop sign colour"
+   ],
+   "mesh_name": "Shop sign",
+   "size": [
+    1.2,
+    0.05,
+    0.4
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.5500000181297461,
+    "subdivided": false,
+    "fine_edge_m": 0.5500000181297461
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": false,
+    "via": [],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 1200.0,
+    "floating": true,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Ledger book",
+   "role": "prop.generic",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "Ledger book colour"
+   ],
+   "mesh_name": "Ledger book",
+   "size": [
+    0.3,
+    0.22,
+    0.05
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.19000000382463136,
+    "subdivided": false,
+    "fine_edge_m": 0.19000000382463136
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": false,
+    "via": [],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 825.0,
+    "floating": true,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Floor board 1",
+   "role": "timber.plank",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "Floor board 1 colour"
+   ],
+   "mesh_name": "Floor board 1",
+   "size": [
+    1.0,
+    0.15,
+    0.03
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.3933333350966374,
+    "subdivided": false,
+    "fine_edge_m": 0.3933333350966374
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "plank_width",
+     "dimension": "middle",
+     "value": 0.15,
+     "min": 0.08,
+     "max": 0.35,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "plank_thickness",
+     "dimension": "thickness",
+     "value": 0.03,
+     "min": 0.012,
+     "max": 0.08,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Far hills",
+   "role": "backdrop",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "Far hills colour"
+   ],
+   "mesh_name": "Far hills",
+   "size": [
+    600.0,
+    40.0,
+    60.0
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 233.33333333333334,
+    "subdivided": false,
+    "fine_edge_m": 233.33333333333334
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Distant mill",
+   "role": "wall.brick",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "Distant mill colour"
+   ],
+   "mesh_name": "Distant mill",
+   "size": [
+    12.0,
+    12.0,
+    30.0
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 18.0,
+    "subdivided": false,
+    "fine_edge_m": 18.0
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground yard",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  }
+ ],
+ "siblings": {},
+ "scatter": {
+  "groups": [],
+  "plants_per_100m2": 0.0,
+  "litter_per_100m2": 0.0,
+  "required": {
+   "plants": {
+    "required_by": [
+     "Ground yard"
+    ],
+    "count": 0,
+    "per_100_square_metres": 0.0,
+    "has": false
+   },
+   "litter_pieces": {
+    "required_by": [
+     "Ground yard"
+    ],
+    "count": 0,
+    "per_100_square_metres": 0.0,
+    "has": false
+   }
+  }
+ },
+ "normal_maps": {
+  "images": [],
+  "test_light": {
+   "verdict": "pass",
+   "detail": {
+    "ok +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4145,
+     "lit_is_brighter": true
+    },
+    "ok +Y": {
+     "lit_side": 0.7935,
+     "dark_side": 0.4108,
+     "lit_is_brighter": true
+    },
+    "flipped +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4146,
+     "lit_is_brighter": true
+    },
+    "flipped +Y": {
+     "lit_side": 0.4145,
+     "dark_side": 0.7941,
+     "lit_is_brighter": false
+    }
+   },
+   "line": "NORMAL_DIRECTION PASS (sun from +X: 0.794 vs 0.415; sun from +Y: 0.794 vs 0.411; the flipped-green control reads the other way: True)",
+   "control_fails": true
+  }
+ },
+ "displacement": {
+  "materials": [],
+  "objects": [],
+  "too_coarse": []
+ },
+ "roads": [],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [
+   "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+  ],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "lamps": 1,
+  "suns": 1,
+  "world_light": false,
+  "emissive_materials": false,
+  "clip_share": null
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [
+   "floors_indoors"
+  ],
+  "share": 0.0
+ },
+ "construction_summary": {
+  "parts_checked": 5,
+  "objects_checked": 5,
+  "carried": 3,
+  "floating": [
+   "Ledger book",
+   "Shop sign"
+  ],
+  "hung": [],
+  "sample_spacing_metres": 0.02,
+  "sampled_coarser": false,
+  "scatter_exempt": 1,
+  "note": "scattered pieces (plants, leaves, litter) and never-roles are exempt on purpose: they stand on the ground by their own roots"
+ },
+ "non_mesh": [
+  {
+   "name": "Shop sign lettering",
+   "type": "font",
+   "what": "a font object that draws faces"
+  },
+  {
+   "name": "Ledger book title",
+   "type": "font",
+   "what": "a font object that draws faces"
+  }
+ ],
+ "problems": [],
+ "views": {
+  "for_film": true,
+  "render_size": [
+   1080,
+   1920,
+   100
+  ],
+  "cameras": [
+   {
+    "name": "Camera A",
+    "scene_camera": true,
+    "kind": "PERSP",
+    "lens_mm": 24.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 2000.0,
+    "farthest_depth_m": 1941.13,
+    "farthest_object": "Ground yard",
+    "view_size": null,
+    "rays": 576,
+    "ray_grid": [
+     18,
+     32
+    ],
+    "rays_below_horizon": 396,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 265,
+    "sun": {
+     "ground_points": 265,
+     "shadowed": 0,
+     "shadowed_share": 0.0,
+     "shadowed_by": []
+    }
+   }
+  ]
+ },
+ "world": {
+  "backdrops": [
+   "Far hills"
+  ],
+  "backdrops_casting_shadows": [],
+  "far_large_casting_shadows": [],
+  "haze_volume": false
+ },
+ "sun": {
+  "name": "Sun",
+  "compass_degrees": 0.0,
+  "height_degrees": 50.0,
+  "energy": 3.0
+ },
+ "lettering": {
+  "checked": 2,
+  "objects": [
+   {
+    "name": "Shop sign",
+    "word": "sign",
+    "found_by": "name",
+    "picture_texture": false,
+    "text_made": false,
+    "lettering_on_it": [
+     "Shop sign lettering"
+    ]
+   },
+   {
+    "name": "Ledger book",
+    "word": "book",
+    "found_by": "name",
+    "picture_texture": false,
+    "text_made": false,
+    "lettering_on_it": [
+     "Ledger book title"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,22 @@
+Place audit of canal lock side (lived_in, damp): WARN. 0 to fix, 1 to look at, 0 known (switched off on purpose), 18 passed.
+PASS place: quick output [the audit]: not a quick trial
+PASS place: stale audit [/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/kitlight/canal_finished.blend]: the audit was made from this exact scene file
+PASS place: roles [every object]: every visible object has a role (105 objects)
+LOOK place: treatments [PK ground.grass / grass]: role ground.grass: wanted but missing displacement.  Fix: worth adding; not required.
+PASS place: treatments [every material]: every required treatment is there
+PASS place: layer amounts [every object]: every layer amount is there and above its floor (state "damp")
+PASS place: off reasons [the settings]: nothing is switched off
+PASS place: normal maps [every normal map]: 13 normal map(s): Non-Color, tangent, wired, pointing the right way
+PASS place: uv [every object]: every normal-mapped object has UVs, none mirrored beyond the limit
+PASS place: displacement [the displacement materials]: displacement is set where the role needs it, on a mesh that can show it
+PASS place: construction [every part]: 89 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose
+PASS place: scale [every sized object]: 46 size(s) fit the real-world facts
+PASS place: plain boxes [the objects]: 0% plain boxes (at most 15%)
+PASS place: shape damage [siblings]: no role has most of its objects as exact copies
+PASS place: ground relief [the roads]: 1 road(s) have real relief and ruts
+PASS place: keep-out [the scattered pieces]: no plant or litter on a wheel track, a crown, a puddle or a keep-out
+PASS place: budgets [the scene]: triangles and scattered pieces are within the budgets
+PASS place: light [the scene]: the scene has light
+PASS place: renderer [the scene]: renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)
+PASS audit written: place-audit.json
+NEXT run: explainer-film-preflight place --place-audit place-audit.json --blend /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/kitlight/canal_finished.blend

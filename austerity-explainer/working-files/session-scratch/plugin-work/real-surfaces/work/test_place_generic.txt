@@ -1,0 +1,20 @@
+== place parts stay general: no word of one trade and period, even-handed presets, real worked examples
+PASS  none of the kept-out words is in any of the 204 text files of the place parts: none found
+PASS    (the check can fail: a text made here with one of the words in it is caught, and one without is not): yes
+PASS    (the scan reaches the skill, an agent, the hook, the workflow and the data): yes
+PASS  no file of the plugin is named after a village in a forest: none
+PASS  the village preset lists at least as many stone, brick, tile, slate, paving or plaster roles as timber, thatch, forest or dirt roles: 6 against 4
+PASS  the village preset starts from the generic state (it does not assume damp ground under trees): got 'dry', expected 'dry'
+PASS  ...and from the same look: got 'lived_in', expected 'lived_in'
+PASS  the village preset names no forest, no road with ruts and no one roof material alone in its notes: walls of stone, brick, plaster or timber under roofs of tile, slate, shingle or thatch; roads paved 
+PASS  the village preset facts are the plain ones (a door, a roof pitch, a wall), none about carts or animals: door_height, door_width, roof_pitch, wall_thickness
+PASS  the kit example settings are the canal lock that was really built: yes
+PASS  the kit holds exactly the canal lock example files (settings, owners, and the 10 variations of its real proof batch) and no other example place: got ['canal-lock-cracks-variations.json', 'canal-lock-ownership.json', 'canal-lock-place-settings.json'], expected ['canal-lock-cracks-variations.json', 'canal-lock-ownership.json', 'canal-lock-place-settings.json']
+PASS  the worked-example file names both real places and says what was measured and what was judged: yes
+PASS  the skill points to the worked-example file and to no other worked example: yes
+PASS  the skill still says the pass and the construction check are REQUIRED for every place (the routing is not weakened): yes
+PASS  the Poly Haven sample has no list of things "not found" to script (such a list is one place's props) and its text names none: about, models, textures
+PASS  the sample spreads over every kind of surface: ground, floor, wall, roof, timber and iron: {'ground': 11, 'floor': 2, 'wall': 5, 'iron': 2, 'roof': 3, 'timber': 2, 'tree': 1}
+PASS  no single role holds more than two sample textures, and the ground (the biggest kind) holds at most half of them: largest kind 11 of 26
+PASS  the sample says it is a small sample and tells the helper to search the site for its own place: yes
+-- place parts stay general: no word of one trade and period, even-handed presets, real worked examples: 18 of 18 checks passed

@@ -1,0 +1,448 @@
+{
+ "steps": [
+  {
+   "step": "roles",
+   "report": {
+    "by_role": {
+     "ground.mud": 1,
+     "ground.gravel": 3,
+     "ground.grass": 2,
+     "water.still": 2,
+     "wall.brick": 10,
+     "stone.footing": 34,
+     "floor.stone": 8,
+     "timber.post": 4,
+     "timber.fence": 10,
+     "timber.plank": 7,
+     "iron.fitting": 6,
+     "timber.beam": 2,
+     "iron.painted": 2,
+     "prop.crate": 1,
+     "prop.barrel": 1,
+     "prop.rope": 1
+    },
+    "fallback": []
+   }
+  },
+  {
+   "step": "roads",
+   "report": {
+    "summary": "1 road(s) shaped into 5 ground object(s): Ground towpath end: a uniform grid of 14 squares of 0.12 m; Ground back verge: a uniform grid of 5967 squares of 0.12 m",
+    "roads": 1,
+    "objects": [
+     "Ground canal bed",
+     "Ground towpath west",
+     "Ground towpath east",
+     "Ground towpath end",
+     "Ground back verge"
+    ],
+    "notes": [
+     "Ground towpath end: a uniform grid of 14 squares of 0.12 m",
+     "Ground back verge: a uniform grid of 5967 squares of 0.12 m"
+    ]
+   }
+  },
+  {
+   "step": "surfaces",
+   "report": {
+    "summary": "16 material(s) made for 16 role(s), 94 slot(s) replaced, 0 kept (they carry their own maps); normal maps 1024 px, 94 object(s) got UVs, 33 bevelled, displacement on 4 object(s)",
+    "materials": [
+     "PK floor.stone / flagstone",
+     "PK ground.grass / grass",
+     "PK ground.gravel / gravel_path",
+     "PK ground.mud / mud",
+     "PK iron.fitting / iron_forged",
+     "PK iron.painted / painted_metal",
+     "PK prop.barrel / timber_planks",
+     "PK prop.crate / timber_planks",
+     "PK prop.rope / rope",
+     "PK stone.footing / stone_rubble",
+     "PK timber.beam / timber_beam",
+     "PK timber.fence / timber_weathered",
+     "PK timber.plank / timber_planks",
+     "PK timber.post / timber_beam",
+     "PK wall.brick / brick",
+     "PK water.still / water_still"
+    ],
+    "map_size_pixels": 1024,
+    "bevelled": [
+     "Gate far balance beam",
+     "Gate far board 1",
+     "Gate far board 2",
+     "Gate far board 3",
+     "Gate far heel post",
+     "Gate far mitre post",
+     "Gate far rail 1",
+     "Gate far rail 2",
+     "Gate far rail 3",
+     "Gate far rail 4",
+     "Gate far rail 5",
+     "Gate near balance beam",
+     "Gate near board 1",
+     "Gate near board 2",
+     "Gate near board 3",
+     "Gate near board 4",
+     "Gate near heel post",
+     "Gate near mitre post",
+     "Gate near rail 1",
+     "Gate near rail 2",
+     "Gate near rail 3",
+     "Gate near rail 4",
+     "Gate near rail 5",
+     "Wall far panel 1",
+     "Wall far panel 2",
+     "Wall far panel 3",
+     "Wall far panel 4",
+     "Wall far panel 5",
+     "Wall near east panel 1",
+     "Wall near east panel 2",
+     "Wall near east panel 3",
+     "Wall near east panel 4",
+     "Wall near west panel 1"
+    ],
+    "displacement": [
+     "Ground canal bed",
+     "Ground towpath west",
+     "Ground towpath east",
+     "Ground towpath end"
+    ],
+    "looks": [
+     "Ground canal bed: the ground mesh is already fine",
+     "Ground towpath west: the ground mesh is already fine",
+     "Ground towpath east: the ground mesh is already fine",
+     "Ground towpath end: the ground mesh is already fine"
+    ],
+    "replaced_slots": 94,
+    "kept_slots": 0
+   }
+  },
+  {
+   "step": "damage",
+   "report": {
+    "summary": "70 object(s) bent, leaned or lumped differently (18 left alone)",
+    "objects": [
+     "Wall near west panel 1",
+     "Coping near west stone 1",
+     "Coping near west stone 2",
+     "Coping near west stone 3",
+     "Wall near east panel 1",
+     "Wall near east panel 2",
+     "Wall near east panel 3",
+     "Wall near east panel 4",
+     "Coping near east stone 1",
+     "Coping near east stone 2",
+     "Coping near east stone 3",
+     "Coping near east stone 4",
+     "Coping near east stone 5",
+     "Coping near east stone 6",
+     "Coping near east stone 7",
+     "Coping near east stone 8",
+     "Coping near east stone 9",
+     "Coping near east stone 10",
+     "Coping near east stone 11",
+     "Wall far panel 1",
+     "Wall far panel 2",
+     "Wall far panel 3",
+     "Wall far panel 4",
+     "Wall far panel 5",
+     "Coping far stone 1",
+     "Coping far stone 2",
+     "Coping far stone 3",
+     "Coping far stone 4",
+     "Coping far stone 5",
+     "Coping far stone 6",
+     "Coping far stone 7",
+     "Coping far stone 8",
+     "Coping far stone 9",
+     "Coping far stone 10",
+     "Coping far stone 11",
+     "Coping far stone 12",
+     "Coping far stone 13",
+     "Coping far stone 14",
+     "Coping far stone 15",
+     "Coping far stone 16",
+     "Trench back wall",
+     "Trench cheek west",
+     "Trench cheek east",
+     "Flight core",
+     "Gate near heel post",
+     "Gate near mitre post",
+     "Gate near rail 1",
+     "Gate near rail 2",
+     "Gate near rail 3",
+     "Gate near rail 4",
+     "Gate near rail 5",
+     "Gate near board 1",
+     "Gate near board 2",
+     "Gate near board 3",
+     "Gate near board 4",
+     "Gate near balance beam",
+     "Gate far heel post",
+     "Gate far mitre post",
+     "Gate far rail 1",
+     "Gate far rail 2",
+     "Gate far rail 3",
+     "Gate far rail 4",
+     "Gate far rail 5",
+     "Gate far board 1",
+     "Gate far board 2",
+     "Gate far board 3",
+     "Gate far balance beam",
+     "Prop crate",
+     "Prop barrel",
+     "Prop rope coil"
+    ],
+    "skipped": 18
+   }
+  },
+  {
+   "step": "plan masks",
+   "report": {
+    "cell_metres": 0.1,
+    "cells": [
+     160,
+     200
+    ],
+    "seconds": 3.72,
+    "source": "whole_scene",
+    "bounds": [
+     -8.0,
+     -10.0,
+     8.0,
+     10.0
+    ]
+   }
+  },
+  {
+   "step": "wear",
+   "report": {
+    "look": "lived_in",
+    "state": "damp",
+    "master": 1.0,
+    "layers_in": [
+     "dirt",
+     "grime",
+     "weathering",
+     "rust",
+     "wetness",
+     "cracks_and_chips",
+     "edge_wear",
+     "moss_and_algae",
+     "rubbish"
+    ],
+    "materials": 15,
+    "skipped": {},
+    "layers_off": [],
+    "dot_metres": 0.007726159924374348,
+    "chains": {
+     "PK ground.mud / mud": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "moss_and_algae",
+      "rubbish"
+     ],
+     "PK ground.gravel / gravel_path": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "moss_and_algae",
+      "rubbish"
+     ],
+     "PK ground.grass / grass": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "moss_and_algae",
+      "rubbish"
+     ],
+     "PK wall.brick / brick": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "edge_wear",
+      "moss_and_algae"
+     ],
+     "PK stone.footing / stone_rubble": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "edge_wear",
+      "moss_and_algae"
+     ],
+     "PK floor.stone / flagstone": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "edge_wear",
+      "rubbish"
+     ],
+     "PK timber.post / timber_beam": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "edge_wear",
+      "moss_and_algae"
+     ],
+     "PK timber.fence / timber_weathered": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "edge_wear",
+      "moss_and_algae"
+     ],
+     "PK timber.plank / timber_planks": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "edge_wear",
+      "moss_and_algae"
+     ],
+     "PK iron.fitting / iron_forged": [
+      "dirt",
+      "rust",
+      "wetness",
+      "edge_wear"
+     ],
+     "PK timber.beam / timber_beam": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "cracks_and_chips",
+      "edge_wear",
+      "moss_and_algae"
+     ],
+     "PK iron.painted / painted_metal": [
+      "dirt",
+      "rust",
+      "wetness",
+      "edge_wear"
+     ],
+     "PK prop.crate / timber_planks": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "edge_wear"
+     ],
+     "PK prop.barrel / timber_planks": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "edge_wear"
+     ],
+     "PK prop.rope / rope": [
+      "dirt",
+      "grime",
+      "weathering",
+      "wetness",
+      "edge_wear"
+     ]
+    }
+   }
+  },
+  {
+   "step": "growth",
+   "report": {
+    "summary": "66 plant piece(s) and 101 litter piece(s) in 11 object(s); none on a wheel track, a worn path, a lane crown, a puddle or within 5 cm of litter",
+    "plants": 66,
+    "litter": 101,
+    "objects": [
+     "PK scatter tuft 0",
+     "PK scatter clover 0",
+     "PK scatter nettle 0",
+     "PK scatter fern 0",
+     "PK scatter bramble 0",
+     "PK scatter moss_cushion 0",
+     "PK scatter leaf 0",
+     "PK scatter pine_needles 0",
+     "PK scatter stick 0",
+     "PK scatter straw 0",
+     "PK scatter dung_lump 0"
+    ],
+    "removed": 0
+   }
+  },
+  {
+   "step": "light",
+   "report": {
+    "summary": "the scene already has light (left as it is)",
+    "added": []
+   }
+  }
+ ],
+ "saved": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/canal_finished.blend",
+ "judged": {
+  "exit": 0,
+  "lines": [
+   "Place audit of canal lock side (lived_in, damp): WARN. 0 to fix, 1 to look at, 0 known (switched off on purpose), 18 passed.",
+   "PASS place: quick output [the audit]: not a quick trial",
+   "PASS place: stale audit [/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/verify/work/canal_finished.blend]: the audit was made from this exact scene file",
+   "PASS place: roles [every object]: every visible object has a role (105 objects)",
+   "LOOK place: treatments [PK ground.grass / grass]: role ground.grass: wanted but missing displacement.  Fix: worth adding; not required.",
+   "PASS place: treatments [every material]: every required treatment is there",
+   "PASS place: layer amounts [every object]: every layer amount is there and above its floor (state \"damp\")",
+   "PASS place: off reasons [the settings]: nothing is switched off",
+   "PASS place: normal maps [every normal map]: 13 normal map(s): Non-Color, tangent, wired, pointing the right way",
+   "PASS place: uv [every object]: every normal-mapped object has UVs, none mirrored beyond the limit",
+   "PASS place: displacement [the displacement materials]: displacement is set where the role needs it, on a mesh that can show it",
+   "PASS place: construction [every part]: 88 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose",
+   "PASS place: scale [every sized object]: 26 size(s) fit the real-world facts",
+   "PASS place: plain boxes [the objects]: 0% plain boxes (at most 15%)",
+   "PASS place: shape damage [siblings]: no role has most of its objects as exact copies",
+   "PASS place: ground relief [the roads]: 1 road(s) have real relief and ruts",
+   "PASS place: keep-out [the scattered pieces]: no plant or litter on a wheel track, a crown, a puddle or a keep-out",
+   "PASS place: budgets [the scene]: triangles and scattered pieces are within the budgets",
+   "PASS place: light [the scene]: the scene has light",
+   "PASS place: renderer [the scene]: renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)",
+   "",
+   "Settings used (film-settings.json):",
+   "  place_surfaces.normal_map_size_min_pixels = 1024 pixels a side (judged)",
+   "  place_audit.unknown_role_objects_allowed = 0 objects (judged)",
+   "  place_audit.required_treatments_missing_allowed = 0 treatments (judged)",
+   "  place_audit.layer_amount_floor_by_look.kept = 0.15 amount (judged)",
+   "  place_audit.layer_amount_floor_by_look.lived_in = 0.25 amount (judged)",
+   "  place_audit.layer_amount_floor_by_look.neglected = 0.4 amount (judged)",
+   "  place_audit.layer_amount_floor_by_look.derelict = 0.5 amount (judged)",
+   "  place_audit.off_share_max = 0.25 share of required role-and-treatment pairs (invented)",
+   "  place_surfaces.normal_direction_correlation_min = 0.25 correlation (judged)",
+   "  place_surfaces.normal_blue_mean_min = 0.85 share of 1 (judged)",
+   "  place_surfaces.normal_red_green_mean_band = [0.47, 0.53] share of 1 (judged)",
+   "  place_surfaces.bump_leftover_strength_max = 0.3 strength (judged)",
+   "  place_surfaces.normal_maps_per_material_max = 4 pictures (judged)",
+   "  place_surfaces.uv_mirrored_face_share_max = 0.02 share of faces (judged)",
+   "  place_construction.float_gap_millimetres_fail = 5 millimetres (judged)",
+   "  place_construction.ground_seat_metres_tolerance = 0.02 metres (invented)",
+   "  place_scale.warn_factor = 1.0 times the range (judged)",
+   "  place_scale.fail_factor = 1.5 times the range (invented)",
+   "  place_audit.plain_box_share_max = 0.15 share of objects (invented)",
+   "  place_wear.shape_sibling_min_count = 4 objects (judged)",
+   "  place_wear.shape_sibling_copy_share_max = 0.5 share of siblings (invented)",
+   "  place_wear.ground_relief_metres_min = 0.03 metres (invented)",
+   "  place_audit.triangles_total_max = 6000000 triangles (judged)",
+   "  place_audit.triangles_per_builder_max = 1500000 triangles (judged)",
+   "  place_audit.scatter_pieces_max = 400000 pieces (invented)",
+   "  place_wear.plan_mask_time_budget_seconds = 120 seconds (invented)"
+  ]
+ }
+}

@@ -1,0 +1,146 @@
+== workflow build-a-place: run with canned helpers
+PASS  the workflow parses (node --check on a copy wrapped as a module): it parses
+PASS    (a copy with a deliberate syntax fault does not parse: the check can fail): yes
+PASS  the script uses no clock, no random numbers, no file access and no agentType (which was not verified): none used
+PASS    (new Date() with no argument is not written): yes
+PASS  the script says in plain words what it does at the top (a "What this does" note): yes
+PASS  the harness ran the happy path without an error: None
+PASS  the meta block is a pure literal (no variables, calls or templates): yes
+PASS  the meta phases are the phase() calls of the script, in order: got ['Plan', 'Ground', 'Build parts', 'Combine', 'Audit', 'Render', 'Check', 'Fix', 'Re-check', 'Report'], expected ['Plan', 'Ground', 'Build parts', 'Combine', 'Audit', 'Render', 'Check', 'Fix', 'Re-check', 'Report']
+PASS  the ten phases are Plan, Ground, Build parts, Combine, Audit, Render, Check, Fix, Re-check, Report: got ['Plan', 'Ground', 'Build parts', 'Combine', 'Audit', 'Render', 'Check', 'Fix', 'Re-check', 'Report'], expected ['Plan', 'Ground', 'Build parts', 'Combine', 'Audit', 'Render', 'Check', 'Fix', 'Re-check', 'Report']
+PASS  the phases began in that order on the happy path: got ['Plan', 'Ground', 'Build parts', 'Combine', 'Audit', 'Render', 'Check', 'Fix', 'Re-check', 'Report'], expected ['Plan', 'Ground', 'Build parts', 'Combine', 'Audit', 'Render', 'Check', 'Fix', 'Re-check', 'Report']
+PASS  the meta has a name, a description and a whenToUse: yes
+PASS  the reading-test line in the script equals the house number place_measures.reading_test_share_min: got 0.75, recorded 0.75 (allowed difference 1e-09)
+      recorded in: kit/film-settings.json place_measures.reading_test_share_min
+      proves: the script and the house numbers cannot drift apart
+PASS  the house number place_checks.fix_rounds is 1 (the script does exactly one fix round): got 1, expected 1
+PASS  happy: every key of the result is there: got ['audit', 'card_time', 'checks', 'combine', 'confirmed', 'final_gate', 'final_render', 'fixes', 'fresh_check', 'ground', 'missing_parts', 'parts', 'plan', 'reading_test', 'recheck', 'render', 'repairs', 'report_markdown', 'stopped'], expected ['audit', 'card_time', 'checks', 'combine', 'confirmed', 'final_gate', 'final_render', 'fixes', 'fresh_check', 'ground', 'missing_parts', 'parts', 'plan', 'reading_test', 'recheck', 'render', 'repairs', 'report_markdown', 'stopped']
+PASS  happy: no canned answer failed its schema and no schema was malformed: all fit
+PASS  happy: the helpers ran in this order (plan, ground, builders, combine, audit, render, checkers, skeptic, one fix round, re-check, gate): got ['plan', 'ground:ground_and_water', 'build:walls_and_steps', 'build:lock_gate', 'build:props', 'build:bank_planting', 'combine', 'audit', 'render', 'check:look', 'check:structure', 'check:process', 'blind:1', 'skeptic', 'fix:lock_gate', 'fix:walls_and_steps', 'combine:fix', 'audit:fix', 'render:fix', 'recheck', 'blind:2', 'gate'], expected ['plan', 'ground:ground_and_water', 'build:walls_and_steps', 'build:lock_gate', 'build:props', 'build:bank_planting', 'combine', 'audit', 'render', 'check:look', 'check:structure', 'check:process', 'blind:1', 'skeptic', 'fix:lock_gate', 'fix:walls_and_steps', 'combine:fix', 'audit:fix', 'render:fix', 'recheck', 'blind:2', 'gate']
+PASS  happy: the audit helper ran before the renderer (nothing is drawn before the audit): yes
+PASS  happy: exactly one fix round: one fixer per owner with a confirmed finding (lock_gate, walls_and_steps), and the settings finding goes to the integrator: got ['fix:lock_gate', 'fix:walls_and_steps'], expected ['fix:lock_gate', 'fix:walls_and_steps']
+PASS    (no second fix round: the re-check problems are reported, not fixed): yes
+PASS  the plugin's own steps are in every builder prompt whatever the brief says: the part pass (finish-part), the construction check and the stage-file safety run, each as a real command: yes
+PASS    (the ground part and a fixer get them too; the ground part checks its stage on the starting scene, the others on the frozen ground): yes
+PASS  the ground builder is told the quick way to freeze the ground (combine on the starting scene, saved as the ground file): yes
+PASS  happy: the squint miss is reported as not fixed on purpose (in the report) and no fixer is given its finding (the far hills): yes
+PASS  happy: the fixers got only their own findings (lock_gate: the board, not the coping stones): yes
+PASS  happy: the settings finding went to the recombine (the integrator), not to a builder: yes
+PASS  happy: the fix round redrew only the view the fixers named (towpath_close): yes
+PASS  happy: the redraw used the existing guard and gave the previous pictures for the squint test: yes
+PASS  happy: the reading test counted the blind reader's words against the planned features (13 of 16 on round 1, 4 of 16 after the fix): final round 2: 4 of 16
+PASS  happy: the first reading test passed (13 of 16 is over the 75 percent line) and was blind: yes
+PASS  happy: the report is plain words with the request, the audit, the pictures, the checkers, the fix round, the final gate and what was not tested: yes
+PASS  happy: the report says what is an ESTIMATE and what is PROVISIONAL, and measured versus judged: yes
+PASS  happy: the final gate ran last, on the fixed scene (round 2): yes
+PASS  happy: a job file, pictures and half-size copies are named in the render prompt, with the renderer rule in the film owner's words: yes
+PASS  happy: the render command is the real verb with a valid shape: yes
+PASS  every prompt (except the blind reader's) starts "First read <plugin>/agents/place-<role>.md and follow it." with the right agent: 22 prompts
+PASS  every prompt (except the blind reader's) says what ${CLAUDE_PLUGIN_ROOT} means (a helper that reads an agent file with the Read tool does not get it expanded): yes
+PASS  every prompt carries the request exactly and the environment notes, except the blind reader's and the planner-independent ones that need neither: yes
+PASS  every prompt except the blind reader's holds the rules (no money, no commit, no keys, never lower a requirement): yes
+PASS  the effort: builders and the others medium, checkers high: yes
+PASS  the builders' fixture reports really carry planted numbers (so the next checks can fail): yes
+PASS  no checker, skeptic or reader prompt holds a number from a builder report (they get bare claims only): 7 prompts clean
+PASS  the look checker gets the claims as bare sentences with the owner (the measured result in brackets is cut off): yes
+PASS    (a builder's own "measured_by" text is never given to a checker): yes
+PASS  the structure checker gets the same claims; the process checker gets none of them: yes
+PASS  the look checker is told it was NOT blind to the feature list; the process checker is told to keep out of the work folder: yes
+PASS  the blind reader's prompt is self-contained: it does not start "First read", names no agent file, holds neither the request nor the environment nor any feature: yes
+PASS  the blind reader is shown half-size pictures with number-only names, and nothing else: yes
+PASS  the blind reading test is labelled blind, and says it is a crude keyword match: yes
+PASS  two runs give the same prompts, in the same order (the script can be resumed): yes
+PASS  a missing request stops the run at once with a plain sentence that names args.request: build-a-place cannot start: args.request (the person's words, exactly as they wrote them) is missing.
+PASS  no args at all lists every missing argument: build-a-place cannot start: args.plugin (the plugin folder); args.kit (the folder that holds place-kit and calculators); args.folder (the folder where the plan, stages, reports and pictures go); args.request (the person's words, exactly as they wrote them) are missing.
+PASS  audit fails once: the owners the audit names repair it (lock_gate, ground_and_water), the integrator combines again, the audit passes, the run goes on: plan, ground:ground_and_water, build:walls_and_steps, build:lock_gate, build:props, build:bank_planting, combine, audit, repair1:lock_gate, repair1:ground_and_water, recombine1, audit1, render, check:look
+PASS    (only one repair round was recorded, and nothing was drawn before the second audit passed): yes
+PASS    (each repairer got only its own problem; the settings problem went to the recombine; the ground repair told the integrator to rebuild the ground): yes
+PASS    (the second audit was asked to prove the second round's file, and the renderer drew that file): yes
+PASS  an audit that always fails stops after two repair rounds and before any picture: plan, ground:ground_and_water, build:walls_and_steps, build:lock_gate, build:props, build:bank_planting, combine, audit, repair1:lock_gate, repair1:ground_and_water, recombine1, audit1, repair2:lock_gate, repair2:ground_and_water, recombine2, audit2
+PASS    (it returns every key, with null for what did not run, and the report names the failing problems and who must decide): yes
+PASS  asking for five repair rounds still gives only two: yes
+PASS  asking for no repair rounds stops at the first failing audit: yes
+PASS  an audit helper that says pass while the preflight exited 1 is not believed: the exit code is a fact, the word is a claim: yes
+PASS  a part that returns nothing is reported as missing, not dropped quietly: yes
+PASS    (it is not combined: the integrator is told, and its stage file is not in the list): yes
+PASS    (the other parts and the run carry on to the end): yes
+PASS  problems of a part that never reported are not sent to a builder that has nothing to fix; the report says so: yes
+PASS  when no builder reports, the run stops and says so: yes
+PASS  when the ground comes back with nothing, nothing else is built: yes
+PASS  when the planner returns nothing, the run stops with a report: yes
+PASS  with 10 parts to build and room for 3, every part is built exactly once (queued, none skipped): 10 builds
+PASS    (never more than 3 builders at one moment, and really 3 at a time): most at once: 3
+PASS    (the run says that the rest wait in a queue): yes
+PASS  the default cap is 4: yes
+PASS  when the checkers find nothing there is no skeptic, no fix round and no re-check, but the phases are still entered and the gate runs: yes
+PASS    (the report says nothing was fixed): yes
+PASS  when only a minor finding is confirmed there is no fix round, and the minor finding is still in the report: yes
+PASS  a skeptic that returns nothing leaves the findings unconfirmed: reported, not acted on: yes
+PASS  a squint-test miss whose cure is to remove character is never sent to a fixer, even when a skeptic confirmed it; it goes to the person: yes
+PASS  stalled: no look checker, no blind reader, no fix round and no re-check; the structure and process checkers still run: yes
+PASS    (stalled: the report says what happened and the queue was never touched): yes
+PASS  render_null: no look checker, no blind reader, no fix round and no re-check; the structure and process checkers still run: yes
+PASS    (render_null: the report says what happened and the queue was never touched): yes
+PASS  when the audit after the fix round fails, nothing is drawn again, there is no re-check, and the first audited file stays final: yes
+PASS  when the pictures after the fix round cannot be drawn there is no re-check and the first audited file stays final: yes
+PASS  a re-check that still finds a fault does not start a second fix round, and the fault is in the report: yes
+PASS  the fresh-check object of a clean run is accepted by the real judge (place_audit_check.py fresh): no FAIL and no shape complaint: Fresh checker (look and structure, blind: False): PASS.
+PASS  the fresh-check object after a fix round (the re-check's answer) is accepted by the real judge: Fresh checker (recheck, blind: False): PASS.
+PASS  a fresh check that still has a fault that does not hold FAILS in the real judge (an unfixed finding cannot slip through): exit 1
+PASS    (the object carries the SHA-1 the checker gave, for the judge to compare): yes
+PASS  when the blind reader's prompt would share a word with the feature list, the reading test says it was not blind: yes
+PASS  renderer eevee and rented false change the render command; finals true does NOT make the rounds draw full size (they stay small and quick), the ONE full-size drawing comes last: yes
+PASS  effort low for builders, max for checkers; the planner follows the effort: yes
+PASS  the Blender path reaches the helpers; the reference pictures reach the planner and the renderer (the guard is not provisional); the accepted file reaches the audit; the ledger the process checker: yes
+PASS  a part the person asked for that the planner left out is added with its brief and built; the person's views win over the planner's: yes
+PASS  every non-blind prompt names the folders of the run and the place and preflight commands by full path: yes
+PASS  the card-time allowances written in the script (builder, fixer, integrator, renderer, checker, planner) equal the house numbers place_card_time.allowance_minutes: script {'builder': 10.0, 'fixer': 5.0, 'integrator': 10.0, 'renderer': 10.0, 'checker': 3.0, 'planner': 0.0}, house {'builder': 10.0, 'fixer': 5.0, 'integrator': 10.0, 'renderer': 10.0, 'checker': 3.0, 'planner': 0.0, 'default': 5.0}
+PASS  card time: a builder's prompt gives its own helper name, its role, the run's ledger and its allowance, and carries the batch rule (one sweep, about 10 variations in ONE batch, at most one more, small quick pictures, full-size once at the end): yes
+PASS    (the ground builder, a fixer and a repairer have their own names and the fixer's 5 minutes; the integrator and the renderer theirs): yes
+PASS    (the planner is told it has no card time and which allowances the others have; the process checker gets the ledger and the allowances and is asked to compare): yes
+PASS  the rounds draw small quick pictures only: no render prompt of the happy path asks for --finals, and each says finals come once, at the very end: yes
+PASS  the report has a Card time section: each helper's reported card seconds against its allowance, the total, and that seconds are not a bill:  (the rented cards) - builder-walls_and_steps (builder): 0 card seconds of 600 allowed; 0 batch(es). - builder-lock_gate (builder): 0 card seconds of 600 allowed; 0 batch(es). - builder-props (builder): 0 card seconds of 600 allowed; 0 batch(es). - builder-bank_planting (builder): 0 card seconds of 
+PASS  the result carries card_time: the ledger path, the allowances, what each helper reported (the largest ledger total of a helper that reported twice), and nobody over: [{'name': 'builder-walls_and_steps', 'role': 'builder', 'card_seconds': 0, 'batches': 0}, {'name': 'builder-lock_gate', 'role': 'builder', 'card_seconds': 0, 'batches': 0}, {'name': 'builder-props', 'role': 'builder', 'card_seconds': 0, 'batches': 0}]
+PASS  a helper that reports more card seconds than its allowance (700 of 600) is named in the result and the report says OVER ITS ALLOWANCE; the process checker is told what was reported: yes
+PASS  finals asked for: the ONE full-size drawing is a single call after the re-check and just before the gate, from the last audited file (the fixed one), only final-size views, no extra preview: audit:fix, render:fix, recheck, blind:2, render:final, gate
+PASS    (the earlier rounds still drew small previews only; the result holds the final render, and the report says full-size pictures were drawn once at the very end): yes
+PASS  finals asked for but there are no pictures to build on: no full-size drawing, and the report says so: yes
+PASS  a full-size drawing that comes back empty is reported (not silently dropped) and does not stop the gate: yes
+PASS  a total for the whole run and a ledger file given in the arguments reach the planner and every helper; the report names the total: yes
+PASS  a card client named in the arguments reaches the builders' batch command as --card-client (and is not in the prompts when none was named): yes
+PASS  "rented: false" reaches every helper that could use the card: no card in this run, a batch only locally on a tiny scene: yes
+PASS  start small (the default, no allViews): the run builds, audits, draws ONLY the first view and stops there for the person's reaction (no checker, no fixer, no other view): build:bank_planting, combine, audit, render
+PASS    (the render prompt names only the first view, says it is the one small test, and the report tells the person how to go on): yes
+PASS    (the planner is told to name first the view that shows the most of the request): yes
+PASS    (firstViewOnly: false goes on to the end like allViews: true): yes
+PASS    (when the first view cannot be drawn, the run still stops there and says so): yes
+PASS  a place for the film (film: true): every view is drawn at 1080 x 1920 (the planner's 1200 x 800 is changed, and the log says so), the previews in the same tall shape (540 x 960): yes
+PASS    (the planner is told to read build-and-paint-a-place and the tips guide, run plan_shot.py for each view and write "for_film": true; without film it is told the wide default): yes
+PASS    (a size the person gave is kept even for the film, and the log says the film-frame check will speak): yes
+PASS  every named view must see a finished horizon: the planner and the ground part are told the world round the place is the ground part's, with the role backdrop and the check "place: world": yes
+PASS  every builder and integrator prompt gives the thread limit (EXPLAINER_FILM_BLENDER_THREADS=2 for the plugin's commands, blender -t 2 for their own runs; default 2): yes
+PASS    (blenderThreads: 3 reaches them as 3): yes
+PASS  every prompt except the blind reader's says never to send a message to a helper that is spending money (it once woke a second copy: 8 extra paid calls): yes
+PASS  no prompt names a verb that explainer-film-place does not print, or an option its --help lacks (8 verbs used: audit, card-time, combine, construction, finish, finish-part, render, variations): all exist
+PASS    (a made-up verb and a made-up option would be found by this check): yes
+PASS  every option written beside explainer-film-preflight place in a prompt is in the preflight's --help: all exist
+PASS  no prompt of any case holds a key, a long hex id, a settings folder, an email-like string or the author's name (676 prompts): none
+PASS    (made-up private text would be found by these patterns): yes
+PASS  the script file itself has no email-like string, long hex id, key-looking value or settings folder name: yes
+PASS  the script and the agent files name no folder of this machine or of the person (no home folder, no scratch folder, no add-on name): yes
+PASS  the script names exactly the five place agent files: got ['place-builder.md', 'place-checker.md', 'place-integrator.md', 'place-planner.md', 'place-renderer.md'], expected ['place-builder.md', 'place-checker.md', 'place-integrator.md', 'place-planner.md', 'place-renderer.md']
+PASS  every agent file the script names exists: all five
+PASS  each agent file has front matter with its name, a real description and effort medium (and no colon-space in the description): all five
+PASS  the agents that must know the finishing pass name the skill: yes
+PASS  every field the script asks for is named in the agent file of the helper that returns it: all named
+PASS  the result shape written in place-checker.md names exactly the fields of the CHECK schema (plus the ones inside its lists): 22 names found
+PASS  the fresh-check judge reads the same field names the CHECK schema has: yes
+PASS  mutation: a script that hands the builders' reports to the checkers is caught by the planted-number check: yes
+PASS  mutation: a script that draws pictures after a failing audit is caught: yes
+PASS  mutation: a script that ignores the cap on builders is caught: yes
+PASS  mutation: a script that tells the blind reader the request is caught: yes
+PASS  mutation: a script that drops a part that returned nothing without a word is caught: yes
+PASS  mutation: a script whose prompts do not start with "First read <agent file>" is caught: yes
+PASS  mutation: a script whose phases are out of step with its meta block is caught: yes
+PASS  mutation: a script that does not stop after the first view by default is caught: yes
+-- workflow build-a-place: run with canned helpers: 142 of 142 checks passed

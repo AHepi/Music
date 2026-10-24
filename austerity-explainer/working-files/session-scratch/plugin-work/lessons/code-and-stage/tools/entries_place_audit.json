@@ -1,0 +1,17 @@
+[
+ {"section": "place_audit", "key": "objects_total_max", "after": "scatter_pieces_max", "entry": {
+  "value": 1000,
+  "unit": "objects in the scene (every kind)",
+  "kind": "judged",
+  "source": "Lessons round (23 October 2026). The courtyard's thousands of leaves took 7 minutes to build one object at a time and about 10 s built in bulk (japanese-courtyard story log 7, measured); the finished courtyard holds 89 objects (log 13); the mine's builder notes say one object per material group, not one per shape. Set well above 89 and far below thousands: object count, not triangles, slows scripts, saving and export"}},
+ {"section": "place_audit", "key": "world", "after": "objects_total_max", "entry": {
+  "value": {"far_object_metres": 100, "large_object_metres": 20, "empty_below_horizon_share_max": 0.0},
+  "unit": "metres from the nearest view camera, metres across, share of a view's rays that go below the horizon and hit nothing",
+  "kind": "invented",
+  "source": "Lessons round: the mine (village_and_sky, ground_and_yard known flaws: empty sky above a dark slab, the ground's square edge in view) and the courtyard (story log 9: hazy backdrop hills blocked the sun until they stopped casting shadows). Any ray below the horizon that hits nothing means the view sees past the edge of the ground; far and large are starting points"}},
+ {"section": "place_audit", "key": "sun_shadowed_share_look", "after": "world", "entry": {
+  "value": 0.5,
+  "unit": "share of the ground points a view sees that are shadowed from the sun",
+  "kind": "invented",
+  "source": "Lessons round: courtyard story log 9 (the sun did nothing: a 4 m hall with the sun low behind it shadowed about 25 m of garden, and hazy hills blocked the sun too; the scene looked flat and the materials were blamed). Shadow length is height / tan(sun height). More than half the seen ground in shadow is a reason to look"}}
+]

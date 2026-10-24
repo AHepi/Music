@@ -1,0 +1,68 @@
+PLAIN WORDS (patch ignores this header; apply from the kit folder with:  patch -p1 < this file)
+FIX 1 of the three kit blockers: the Astra roof sets its materials INSIDE a geometry-nodes modifier and carries its tiles on a hidden object that is not in the scene,
+so the role finder never saw them and no layer (moss, dust film) could reach the roof. describe_scene() now also lists the materials of the EVALUATED scene
+(what the modifier sets, what its instances carry), credited to the scene object that owns them, and puts them AFTER the object's own slot materials.
+TESTED (21 Oct, Blender 5.2.2, headless): role maps of the street and the lockout file are byte-for-byte unchanged; on the courtyard 'Hall roof' gains the three roof materials
+(role roof.tile) and soot and wallgrowth now go into them (5 -> 8 and 102 -> 105 materials). Attribute nodes (type Object) read the OWNING object's custom properties for
+instances, in Cycles and EEVEE alike (tested), so no per-object values had to change.
+NOT TESTED: a picture with the roof mossed (the small EEVEE preview timed out at 200 s on this computer's software graphics).
+
+--- a/apply/roles.py
++++ b/apply/roles.py
+@@ -26,11 +26,44 @@
+         self.hidden = hidden
+ 
+ 
+-def describe_scene(scene=None, include_hidden=True):
+-    """ObjDesc for every object of a Blender scene. props = the object's custom properties plus its mesh's plus each material's, as {name: str(value)}."""
++def evaluated_extra_materials(scene):
++    """{scene object name: [material names]} for materials a scene object really draws with but does not list in its own material slots: those a geometry-nodes modifier sets
++    (the evaluated object has them) and those carried by objects the modifier instances (the Astra roof: 688 copies of a hidden tile that is not in the scene). The material is
++    credited to the SCENE object that owns the geometry, so it takes that object's role. Objects without a geometry-nodes modifier or instances add nothing, so a scene made of plain
++    meshes (the street) gives {} and nothing changes for it. (An Attribute node reads the custom properties of the owning object for such instances: tested in Cycles and EEVEE.)"""
++    import bpy
++    extra = {}
++    if scene is None or bpy.context.scene is None or scene.name != bpy.context.scene.name:
++        return extra
++    try:
++        depsgraph = bpy.context.evaluated_depsgraph_get()
++    except Exception:
++        return extra
++    seen = set()
++    for inst in depsgraph.object_instances:
++        owner = (inst.parent.original if inst.parent is not None else None) if inst.is_instance else inst.object.original
++        if owner is None or owner.name not in scene.objects:
++            continue
++        for slot in inst.object.material_slots:
++            material = slot.material
++            if material is None:
++                continue
++            key = (owner.name, material.name)
++            if key in seen:
++                continue
++            seen.add(key)
++            extra.setdefault(owner.name, []).append(material.name)
++    return extra
++
++
++def describe_scene(scene=None, include_hidden=True, read_evaluated=True):
++    """ObjDesc for every object of a Blender scene. props = the object's custom properties plus its mesh's plus each material's, as {name: str(value)}.
++    read_evaluated: also list the materials that only the evaluated scene has (see evaluated_extra_materials); they are put AFTER the object's own slot materials, so the rule 'the
++    first slot a role claims decides' decides as before for every object that has its own slots."""
+     import bpy
+     scene = scene or bpy.context.scene
+     result = []
++    extra = evaluated_extra_materials(scene) if read_evaluated else {}
+     for obj in scene.objects:
+         materials = []
+         props = {}
+@@ -47,6 +80,9 @@
+                     value = slot.material[key]
+                     if isinstance(value, (str, int, float)):
+                         props.setdefault(key, str(value))
++        for name in extra.get(obj.name, ()):
++            if name not in materials:
++                materials.append(name)
+         hidden = obj.hide_render
+         if hidden and not include_hidden:
+             continue

@@ -1,0 +1,33 @@
+== after_painting: pale patch, the road as filmed, the bottom fifth, clouds
+PASS  a matched wet behind picture passes (two paintings differ dot for dot, so local brightness is compared): lighter share 0.069: The behind picture matches the painting round the near props (0.07 of the ground lighter, limit 0.1, invented): no pale patch.
+PASS  the case that must fail: a dry behind picture behind a wet painting FAILS with "pale patch": lighter share 1.000: pale patch: 1.00 of the ground round the area the near props hid is lighter in the behind picture than in the painting (by more than 8 levels; limit 0.1, invent
+      recorded in: film kit 05 "A dark painted street" (log 37): 59 percent of the hidden road dots lighter with the dry behind painting
+PASS  the limit is marked invented in film-settings.json: yes
+PASS  the case that must warn: a dark wet road with toe 0 arrives under 0.9 (LOOK, "arrives at"): With the page's look (toe 0) the road arrives at 0.497 of its painted brightness (40.0 painted, 19.9 filmed; the finish pass without glow, vignette and grain). Under 0.9 (invented; the wet lockout rea
+      recorded in: the wet lockout road arrived at 0.75 to 0.86 without a toe (log 37)
+PASS  toe 1 lets the same road arrive brighter, and the line still says "arrives at": toe 0: 0.497, toe 1: 0.880; look
+PASS  the fix line for toe 0 names look.toe and vignette 0.25: For a dark, dusk or wet page set toe: 1 and vignette: 0.25 in its look (cinema-stage.js look.toe; the lockout test page does), then check again with --toe 1.
+PASS  an even picture passes the bottom-of-frame check: The bottom fifth is 0% darker than the middle (limit 30%).
+PASS  a plain graded sky passes the sky check: The sky is plain: it spreads 0.0 levels inside the plate's sky area (limit 8, invented; no clouds).
+PASS  the case that must warn: a bottom fifth much darker than the middle gives a LOOK with "bottom fifth": The bottom fifth is 68% darker than the middle (limit 30%, composing.bottom_fifth_darker_max_share; in the log 26 review about 70 percent of frames failed this because the prompts asked for an empty f
+      recorded in: composing.bottom_fifth_darker_max_share 0.3 (log 26 review)
+PASS  the case that must warn: pale blotches in the plate's sky area give a LOOK with "clouds": clouds: inside the plate's sky area the brightness spreads 25.5 levels once each row's own level is taken away (limit 8, invented; a plain or evenly graded sky is close to 0). The painter adds heavy p
+      recorded in: textures logs 19, 24, 25
+PASS  the pale-patch measure: a dry behind picture scores high, a matched one low: controls hold: high dry behind picture 1; low matched wet behind picture 0.0688438
+PASS  the clouds measure: a cloudy sky scores high, a plain graded sky low: controls hold: high cloudy sky 25.6379; low plain graded sky 0.0157347
+PASS  the controls helper refuses a measure tested with only one side (a control that must score low is missing): yes
+PASS  sky: the plate's sky is laid in exactly inside the sky area, and the rest of the painting is untouched: - PASS  a plain sky laid in: the plate's plain sky laid over 29.8% of the frame (the plate's exact sky outline; thin rails and roof edges stay as painted); the sky's spread 23.2 levels before, 0.0 after; written to painting-plain-sky.png (the earlier one kept as painting-plain-sky-previous.png). Look at the edges at full size.
+PASS  sky: the thin rail inside the sky stays as painted (the exact outline, no blur): yes
+PASS  sky: a second run keeps the earlier picture as NAME-previous.png instead of writing over it: A plain sky: painting.png (0 failure(s); a paid re-ask needs the user's yes)
+
+- PASS  a plain sky laid in: the plate's plain sky laid over 29.8% of the frame (the plate's exact sky outline; thin rails
+PASS  sky: the clouds LOOK no longer fires on the result: yes
+PASS  sky: writing over the painting itself is refused: yes
+PASS  keep_previous: an output that is there is kept as NAME-previous.png: yes
+PASS  after_painting.py check takes --toe 0|1: nstead of plain lines
+  --out OUT             also write the JSON result to this file
+  --report REPORT       also write the plain-words report to this file
+  --settings SETTINGS   the settings file (default: kit/film-settings.json, or
+                        the FILM_SETTINGS environment variable)
+
+-- after_painting: pale patch, the road as filmed, the bottom fifth, clouds: 20 of 20 checks passed

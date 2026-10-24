@@ -1,0 +1,33 @@
+{
+ "blender": "5.2.2 LTS",
+ "geometry_nodes_inputs": {
+  "properties": true,
+  "properties_note": "",
+  "item": false,
+  "item_note": "TypeError",
+  "identifier": "Socket_1"
+ },
+ "light_linking": {
+  "entries": 2,
+  "entries_name_their_object": false,
+  "fields": [
+   "bl_rna",
+   "light_linking",
+   "rna_type"
+  ],
+  "paired_by_order": [
+   "probe A",
+   "probe B"
+  ],
+  "states": [
+   "INCLUDE",
+   "EXCLUDE"
+  ],
+  "second_object_excluded": true
+ },
+ "lines": [
+  "Blender 5.2 probe (Blender 5.2.2 LTS):",
+  "  Geometry Nodes inputs: mod.properties.inputs.Socket_1.value works; mod['Socket_1'] (TypeError) does not. Write the first way.",
+  "  light linking: a collection's light-linking entries do not name their object (they hold only light_linking): pair them with collection.objects in the same order (probe A, probe B -> INCLUDE, EXCLUDE)"
+ ]
+}

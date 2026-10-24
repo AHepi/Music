@@ -1,0 +1,78 @@
+== place roles: how objects get a role, and what a role needs
+PASS  the object's own place_role wins over everything: got 'stone.well', expected 'stone.well'
+PASS  ...and says how it was found: got 'place_role property', expected 'place_role property'
+PASS  a never rule wins over a role rule and a name hint: got 'never.helper', expected 'never.helper'
+PASS  a role rule of the settings wins over a name hint (a "wall" named like a cart is a cart): got 'prop.cart', expected 'prop.cart'
+PASS  with no rule the name hint decides: got 'wall.plaster', expected 'wall.plaster'
+PASS  an object nothing matches has no role and says so: yes
+PASS  the unknown object is listed by name, not skipped: got ['qqq xyz'], expected ['qqq xyz']
+PASS  "wall_north" (an underscore) is a wall: wall.plaster
+PASS  "floor_plank_1" is a plank floor, not just a plank: got 'timber.floor', expected 'timber.floor'
+PASS  "Hut 1 roof" is a roof: roof.shingle
+PASS  "ground" is a ground: ground.earth
+PASS  a word inside another word does not count ("fireplace" is not a place, a floor or a wall): got None, expected None
+PASS  a plural collection name is read ("Roofs" decides for "Object.012"): roof.shingle
+PASS  a name like "Object.012" with nothing else to go on is the generic prop (a weak hint that only counts when nothing else fits): got 'prop.generic', expected 'prop.generic'
+PASS  the generic hint does not beat a material hint: got 'timber.plank', expected 'timber.plank'
+PASS  the object's own name counts more than its material: timber.door
+PASS  a barrel with wood staves and iron bands has two slot roles: got ['prop.barrel', 'iron.fitting'], expected ['prop.barrel', 'iron.fitting']
+PASS  the object's own role is the barrel: got 'prop.barrel', expected 'prop.barrel'
+PASS  a rule that names only a material gives that SLOT its role, not the whole object (the barrel stays a barrel, even when the rule is the only one): got ('prop.barrel', ['prop.barrel', 'iron.fitting']), expected ('prop.barrel', ['prop.barrel', 'iron.fitting'])
+PASS  an object with only an "iron band" material and no other clue is iron (the material rule names it when nothing else can): got 'iron.fitting', expected 'iron.fitting'
+PASS  a saved per-slot list wins (the kit keeps it when it changes the materials): got ['prop.wheel', 'iron.fitting'], expected ['prop.wheel', 'iron.fitting']
+PASS  an object with no material still has one slot role: got ['prop.barrel'], expected ['prop.barrel']
+PASS  an unknown object with a stone material gets a stone role as a guess: got 'stone.rock', expected 'stone.rock'
+PASS  an unknown object with an iron material gets an iron role as a guess: got 'iron.fitting', expected 'iron.fitting'
+PASS  an unknown object with nothing to go on gets the generic prop role: got 'prop.generic', expected 'prop.generic'
+PASS  the fallback role is a real role: yes
+PASS  a plaster wall requires normal map, dirt, grime, weathering, wetness, cracks, edge wear, moss and bevels: normal_map, roughness_variation, colour_variation, bevelled_edges, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae
+PASS  ...and wants shape damage: yes
+PASS  a dirt road requires displacement (the role says displace), plants, litter pieces and rubbish: normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, rubbish, plants, litter_pieces, displacement
+PASS  a dirt road does not also "want" displacement (it is required): yes
+PASS  earth, forest floor, gravel and paving ground also require displacement: yes
+PASS  thatch requires displacement too: yes
+PASS  snow is exempt from rubbish, plants and moss and the reasons are written: {'rubbish': 'snow: rubbish would be buried', 'plants': 'snow: nothing grows through it', 'moss_and_algae': 'snow: nothing grows on it'}
+PASS  require_more adds a treatment to a whole class: yes
+PASS  an unknown role needs nothing: got {'required': [], 'wanted': [], 'exempt': {}}, expected {'required': [], 'wanted': [], 'exempt': {}}
+PASS  an off entry with a pattern fits matching roles: got 1, expected 1
+PASS  ...and not other roles: got [], expected []
+PASS  ...and not other treatments: got [], expected []
+PASS  the class of a role is the word before the dot, and never.* is never: yes
+PASS  the backdrop (far scenery) gets no surface pass, like a never role, and is its own class: yes
+PASS  far hills called "Backdrop hills" get the role backdrop by name, a sky dome stays never.sky: got ['backdrop', 'backdrop', 'never.sky'], expected ['backdrop', 'backdrop', 'never.sky']
+PASS  every role has a class that exists, and a surface that exists (or none for never.* and the backdrop): 73 roles
+PASS  every name hint (and every weak name hint) is a valid pattern: got [], expected []
+PASS  every treatment a class names is one of the seventeen: []
+PASS  there are seventeen treatments: got 17, expected 17
+PASS  each of the seventeen has an entry in treatments.json: got ['bevelled_edges', 'colour_variation', 'cracks_and_chips', 'dirt', 'displacement', 'edge_wear', 'grime', 'litter_pieces', 'moss_and_algae', 'normal_map', 'plants', 'roughness_variation', 'rubbish', 'rust', 'shape_damage', 'weathering', 'wetness'], expected ['bevelled_edges', 'colour_variation', 'cracks_and_chips', 'dirt', 'displacement', 'edge_wear', 'grime', 'litter_pieces', 'moss_and_algae', 'normal_map', 'plants', 'roughness_variation', 'rubbish', 'rust', 'shape_damage', 'weathering', 'wetness']
+PASS  each has plain words, the words a person uses, a maker, a test and a checker named: got [], expected []
+PASS  the words a person uses cover the request: normals, displacements, dirt, grime, weeds, weathering, damage: yes
+      proves: a plain request that says any of these words reaches a treatment
+PASS  the nine wear layers are all treatments: yes
+PASS  the names the newcomer judge tried now read as what they are: got {}, expected {}
+      recorded in: judge-blind-newcomers: 70 plain names run through the role guesser
+      proves: a Waterwheel is no longer a cart wheel, nor a Reed bed a roof
+PASS  "Step trench cheek" and "Fish boxes stack" are NOT guessed as steps or a chimney (they stay unknown, so a builder must say): (None, None)
+PASS  there is a role for steps, in the stone class, that is carried by a part and measured for its rise: yes
+PASS  the step-rise fact applies to the ROLE stone.step, not to a name pattern, and reads the rise top to top: {'id': 'step_rise', 'what': "one stair or step rise: how far this step's top stands above what it rests on or the next lower step (top to top)", 'applies_to_role': '^stone\\.step$', 'dimension': 'rise
+PASS  every role has a plain meaning of a line: got [], expected []
+PASS  the role list has one line for every role, grouped by class: yes
+PASS  `explainer-film-place roles --list` prints every role with its meaning, needs no scene and no Blender, and exits 0: exit 0, 88 lines
+PASS  the farm preset's indoor-floor skip does not cover floor.stone (a patio or steps outdoors keep their moss, wear and plants): ['floor.planks', 'floor.tile', 'floor.carpet', 'floor.earth', 'floor.concrete']
+PASS  the garden preset's indoor-floor skip does not cover floor.stone (a patio or steps outdoors keep their moss, wear and plants): ['floor.planks', 'floor.tile', 'floor.carpet', 'floor.earth', 'floor.concrete']
+PASS  the generic preset's indoor-floor skip does not cover floor.stone (a patio or steps outdoors keep their moss, wear and plants): ['floor.planks', 'floor.tile', 'floor.carpet', 'floor.earth', 'floor.concrete']
+PASS  the harbour preset's indoor-floor skip does not cover floor.stone (a patio or steps outdoors keep their moss, wear and plants): ['floor.planks', 'floor.tile', 'floor.carpet', 'floor.earth', 'floor.concrete']
+PASS  the mine preset's indoor-floor skip does not cover floor.stone (a patio or steps outdoors keep their moss, wear and plants): ['floor.planks', 'floor.tile', 'floor.carpet', 'floor.earth', 'floor.concrete']
+PASS  the town preset's indoor-floor skip does not cover floor.stone (a patio or steps outdoors keep their moss, wear and plants): ['floor.planks', 'floor.tile', 'floor.carpet', 'floor.earth', 'floor.concrete']
+PASS  the village preset's indoor-floor skip does not cover floor.stone (a patio or steps outdoors keep their moss, wear and plants): ['floor.planks', 'floor.tile', 'floor.carpet', 'floor.earth', 'floor.concrete']
+PASS  ...so moss is still required on a floor.stone object and a stone.step object of a village, and skipped on a plank floor: yes
+PASS  control: the partial fact on its own would apply to a wall (that is what replacing the whole entry gave): yes
+PASS  a partial own fact keeps the generic fact's pattern (it still applies to doors only) and takes the new range: {'id': 'door_height', 'what': 'a door is about head high and a little more', 'applies_to_role': '^timber\\.door$', 'dimension': 'height', 'min': 0.3, 'max': 0.5, 'unit': 'metres', 'kind': 'judged', 's
+PASS  a new fact of the place is added beside the generic ones: yes
+PASS  railway, station and harbour names read as what they are, or stay unknown (so the builder must say) instead of a wrong guess: got {}, expected {}
+      recorded in: judge-blind-newcomers-round2: the role guesser run on 31 names and 12 collection names
+PASS  a collection "Place: track_and_signals" no longer turns every untagged object in it into a dirt road: prop.generic
+PASS  the bare word "wall" is weak only against a word at the same place: "Brick wall" is brick, "Station building walls" is still the general wall, and so is "wall_north" with a material called "wall_mat" (the name counts more than the material's "mat", which alone would mean a carpet): ('wall.brick', 'wall.plaster', 'wall.plaster')
+PASS  a drafted settings file counts 2 roles from place_role tags and 1 guessed from names (it no longer calls tagged roles "guessed from names"): 2 role(s) from place_role tags, 0 from settings rules, 1 guessed from names (read the guessed ones: a guess can be wrong)
+PASS    (with every object tagged, nothing is called guessed): yes
+-- place roles: how objects get a role, and what a role needs: 72 of 72 checks passed

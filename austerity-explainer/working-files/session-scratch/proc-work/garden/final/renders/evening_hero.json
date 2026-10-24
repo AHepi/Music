@@ -1,0 +1,85 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/garden_real.blend",
+ "args": {
+  "out": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/renders/evening_hero",
+  "camera": "photo",
+  "size": "2400x1600",
+  "samples": 384,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": true,
+  "check_groups": false,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "9aa0c82e4704fe43077802e930659b91a542fb573918d1937de045ae77acfdde",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA L4",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD EPYC 9254 24-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA L4",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 384,
+ "seed": 7,
+ "camera": "photo",
+ "size": [
+  2400,
+  1600,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 1.399999976158142,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 63.83,
+ "files": {
+  "exr": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/renders/evening_hero.exr",
+   "bytes": 27346179,
+   "sha256": "da12d538a8f6890e94bc1885ed4acba478b91aa8a7caa7545a81e54051d719db"
+  },
+  "png": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/renders/evening_hero.png",
+   "bytes": 5096482,
+   "sha256": "e8c40b984e114055b9938fe7fe1f5b8247b423677a292a45e3ba00b6b8fdeb61"
+  }
+ }
+}

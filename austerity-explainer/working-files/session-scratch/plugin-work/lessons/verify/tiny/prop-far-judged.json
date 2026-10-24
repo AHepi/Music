@@ -1,0 +1,325 @@
+{
+ "about": "The judge of one place audit. Facts are in the audit; the verdict and every threshold are here and in film-settings.json (place_* sections).",
+ "verdict": "fail",
+ "place": "one crate",
+ "audit_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/lessons/verify/tiny/prop-far-audit.json",
+ "checks": [
+  {
+   "verdict": "pass",
+   "check": "place: quick output",
+   "where": "the audit",
+   "text": "not a quick trial",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: roles",
+   "where": "every object",
+   "text": "every visible object has a role (2 objects)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: object types",
+   "where": "every drawn object",
+   "text": "everything that is drawn is a mesh (or has a never role)",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "crate colour",
+   "text": "role prop.crate: missing normal_map, roughness_variation, colour_variation, dirt, wetness, edge_wear.",
+   "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "crate colour",
+   "text": "role prop.crate: wanted but missing grime, weathering.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "ground colour",
+   "text": "role ground.earth: missing normal_map, displacement, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, rubbish, plants, litter_pieces.",
+   "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "ground colour",
+   "text": "role ground.earth: wanted but missing moss_and_algae.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "ground colour",
+   "text": "no litter pieces on the ground (1 ground material(s) or object(s)).",
+   "fix": "run explainer-film-place grow."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "ground colour",
+   "text": "no plants on the ground (1 ground material(s) or object(s)).",
+   "fix": "run explainer-film-place grow."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: layer amounts",
+   "where": "every object",
+   "text": "every layer amount is there and above its floor (state \"dry\")",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: off reasons",
+   "where": "the settings",
+   "text": "nothing is switched off",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: normal maps",
+   "where": "every normal map",
+   "text": "0 normal map(s): Non-Color, tangent, wired, pointing the right way",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: uv",
+   "where": "every object",
+   "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: displacement",
+   "where": "ground colour",
+   "text": "ground colour: no displacement (role ground.earth needs it)",
+   "fix": "run explainer-film-place surfaces (it sets the method and grades or subdivides the mesh); roads: explainer-film-place roads."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: construction",
+   "where": "every part",
+   "text": "1 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: scale",
+   "where": "every sized object",
+   "text": "1 size(s) fit the real-world facts",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: plain boxes",
+   "where": "Crate",
+   "text": "50% of the objects are plain sharp-edged boxes (at most 15%).",
+   "fix": "run explainer-film-place surfaces (it bevels every hard-edged role) and damage; if they have run, these objects have a role the surfaces step does not bevel (ground, water, glass, plants, trees), so chamfer their meshes yourself (bmesh.ops.bevel) or give them a role that is not a plain box."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: budgets",
+   "where": "the scene",
+   "text": "triangles and scattered pieces are within the budgets; 4 objects (at most 1,000)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: light",
+   "where": "the scene",
+   "text": "the scene has light",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: renderer",
+   "where": "the scene",
+   "text": "renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: film frame",
+   "where": "the settings",
+   "text": "not marked for the film (\"for_film\" is not true in place-settings.json): any frame shape is allowed",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: world",
+   "where": "View crate",
+   "text": "the view camera View crate stops drawing at 1000 m, but Ground reaches 1958.99 m deep in its view.",
+   "fix": "every view must see a finished horizon: continue the plain ground to the horizon and hide its edge (a low rim bank, faded out beyond about 60 m); put an all-round backdrop of real shapes with the role backdrop (finish turns its shadow off; give it a plain unlit colour); set every view camera's clip end to 1000 m or more; turn the shadow off on far scenery (Object > Visibility > Shadow)."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: sun",
+   "where": "the views",
+   "text": "no view has more than 50% of the ground it sees shadowed from the sun \"Sun\" (50 degrees up)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: lettering",
+   "where": "signs and books",
+   "text": "no sign, notice, placard, poster, name board or book in the place",
+   "fix": ""
+  }
+ ],
+ "calculator": "place_audit_check check",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "place_surfaces.normal_map_size_min_pixels": {
+   "value": 1024,
+   "unit": "pixels a side",
+   "kind": "judged"
+  },
+  "place_audit.unknown_role_objects_allowed": {
+   "value": 0,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_audit.required_treatments_missing_allowed": {
+   "value": 0,
+   "unit": "treatments",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.kept": {
+   "value": 0.15,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.lived_in": {
+   "value": 0.25,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.neglected": {
+   "value": 0.4,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.derelict": {
+   "value": 0.5,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.off_share_max": {
+   "value": 0.25,
+   "unit": "share of required role-and-treatment pairs",
+   "kind": "invented"
+  },
+  "place_surfaces.normal_direction_correlation_min": {
+   "value": 0.25,
+   "unit": "correlation",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_blue_mean_min": {
+   "value": 0.85,
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_red_green_mean_band": {
+   "value": [
+    0.47,
+    0.53
+   ],
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.uv_mirrored_face_share_max": {
+   "value": 0.02,
+   "unit": "share of faces",
+   "kind": "judged"
+  },
+  "place_construction.float_gap_millimetres_fail": {
+   "value": 5,
+   "unit": "millimetres",
+   "kind": "judged"
+  },
+  "place_construction.ground_seat_metres_tolerance": {
+   "value": 0.02,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_scale.warn_factor": {
+   "value": 1.0,
+   "unit": "times the range",
+   "kind": "judged"
+  },
+  "place_scale.fail_factor": {
+   "value": 1.5,
+   "unit": "times the range",
+   "kind": "invented"
+  },
+  "place_audit.plain_box_share_max": {
+   "value": 0.15,
+   "unit": "share of objects",
+   "kind": "invented"
+  },
+  "place_wear.shape_sibling_min_count": {
+   "value": 4,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_wear.shape_sibling_copy_share_max": {
+   "value": 0.5,
+   "unit": "share of siblings",
+   "kind": "invented"
+  },
+  "place_wear.ground_relief_metres_min": {
+   "value": 0.03,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_audit.ground_area_growth_max": {
+   "value": 1.5,
+   "unit": "times",
+   "kind": "judged"
+  },
+  "place_audit.triangles_total_max": {
+   "value": 6000000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.triangles_per_builder_max": {
+   "value": 1500000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.scatter_pieces_max": {
+   "value": 400000,
+   "unit": "pieces",
+   "kind": "invented"
+  },
+  "place_audit.objects_total_max": {
+   "value": 1000,
+   "unit": "objects in the scene (every kind)",
+   "kind": "judged"
+  },
+  "place_audit.world": {
+   "value": {
+    "far_object_metres": 100,
+    "large_object_metres": 20,
+    "empty_below_horizon_share_max": 0.0
+   },
+   "unit": "metres from the nearest view camera, metres across, share of a view's rays that go below the horizon and hit nothing",
+   "kind": "invented"
+  },
+  "place_audit.sun": {
+   "value": {
+    "shadowed_share_look": 0.5,
+    "wear_shade_angle_look_degrees": 20
+   },
+   "unit": "share of the ground points a view sees that are shadowed from the sun; degrees between the sun the wear layers' shade used and the scene's sun lamp",
+   "kind": "invented"
+  }
+ }
+}

@@ -1,0 +1,85 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/garden_painted.blend",
+ "args": {
+  "out": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/renders/painted_hero",
+  "camera": "photo",
+  "size": "2400x1600",
+  "samples": 512,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": null,
+  "evening": false,
+  "exposure": null,
+  "denoise": true,
+  "exr": true,
+  "check_groups": false,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": null,
+ "scene_sha256": "059b1808c60c0e310aba5f514ac7c68372c16489bc92d2cab41ffd3dee7cec76",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ],
+   [
+    "AMD Ryzen 9 7950X 16-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 512,
+ "seed": 7,
+ "camera": "photo",
+ "size": [
+  2400,
+  1600,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 0.5,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 22.57,
+ "files": {
+  "exr": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/renders/painted_hero.exr",
+   "bytes": 37519730,
+   "sha256": "a878eb487dc800ced5f35cc12fba1d49fa17e1ad25de6f7280728c3c3308dbbb"
+  },
+  "png": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/renders/painted_hero.png",
+   "bytes": 5103307,
+   "sha256": "a0ec94b06ffa272de2513763cdf864ccf0d736e7fd315281087e10a97a2fdfe3"
+  }
+ }
+}

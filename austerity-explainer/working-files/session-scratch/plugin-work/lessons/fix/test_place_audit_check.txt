@@ -1,0 +1,127 @@
+== place audit judge: flat hut fails, finished hut passes, planted faults are named
+PASS  the flat hut fails: yes
+PASS  the flat hut failure names normal_map: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names displacement: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names dirt: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names grime: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names weathering: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names cracks_and_chips: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names bevelled_edges: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names shape_damage: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names plants: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the flat hut failure names litter pieces: yes
+      recorded in: fixtures/place/flat_hut_audit.json (made by hand like a plain-box hut)
+PASS  the finished hut passes: got 'pass', expected 'pass'
+PASS  the finished hut has no FAIL line at all: yes
+PASS  a quick trial fails as a final and says "quick": yes
+PASS  a quick trial with --allow-quick is a LOOK, not a fail: got ['warn'], expected ['warn']
+PASS  an audit of this exact scene file is fresh: got ['pass'], expected ['pass']
+PASS  a scene changed after the audit is stale and the failure says so: yes
+PASS  with no scene file given the freshness is only a LOOK: got ['warn'], expected ['warn']
+PASS  a material that lost its dirt is named with the treatment: PK wall.plaster / x: role wall.plaster: missing dirt.
+PASS  an object with no pk_dirt_amount is caught (the silent-zero trap): yes
+PASS  a layer amount below the floor is caught and named: yes
+PASS  wetness at 0 is fine in a dry place: got ['pass'], expected ['pass']
+PASS  wetness at 0 is NOT fine in a damp place: yes
+PASS  moss at 0 is fine for a kept look: got ['pass'], expected ['pass']
+PASS  moss at 0 is NOT fine for a lived-in look: yes
+PASS  a normal map left in sRGB fails: yes
+PASS  a normal map with its green flipped fails and names the axis: yes
+PASS  an axis with no slope is "not informative", not a fail: got ['pass'], expected ['pass']
+PASS  a DirectX map fails: yes
+PASS  a leftover Bump of strength 1 fails: yes
+PASS  a missing end-to-end test light fails as a final: yes
+PASS  a coarse mesh under displacement fails: yes
+PASS  displacement left on Bump Only fails: yes
+PASS  a floating part is named: yes
+PASS  an inside-out part fails: yes
+PASS  a doorway with no floor close below fails: yes
+PASS  a door 1.0 m high fails the scale check: yes
+PASS  the same door against a guessed fact is only a LOOK: got ['warn'], expected ['warn']
+PASS  the place's own facts file overrides the table (a 1.0 m door passes there): got ['pass'], expected ['pass']
+PASS  mostly plain boxes fail and are named: yes
+PASS  twelve boards that are mostly exact copies fail: yes
+PASS  a plant on a wheel track fails (the gate is exact zero): yes
+PASS  a road on flat ground with no ruts fails: yes
+PASS  too many triangles fails: yes
+PASS  a scene with no light fails (it renders black): yes
+PASS  EEVEE forced where a lamp is lit fails with the reason: yes
+PASS  an object with no material at all FAILS by name and names what it lacks (the hole the smoke check found: no material, so no material row to fail): wall_north: 1 object(s) have no material with a surface (no material at all, or one with no nodes), so none of what their role requires is there: normal_map, roughness_variation, colour_variation, dir
+      recorded in: smoke check of the canal lock: a scene of objects with no material passed with zero normal maps, zero wear and zero weeds
+      proves: the per-object check is independent of the material rows
+PASS  ...and the same object with its surface present is not named: yes
+PASS  an exempt object (a helper, scattered litter) is not failed for having no material: yes
+PASS  an object whose role requires nothing in a material (glass) is not failed for having none: yes
+PASS  a ground with no material must still grow plants and litter: both are failed from the ground ROLE, with no ground material row to say it: ground: no litter pieces on the ground (1 ground material(s) or object(s)). | ground: no plants on the ground (1 ground material(s) or object(s)).
+PASS  ...and it passes once plants grow there: yes
+PASS  a ground whose material and role both say "no plants" is reported once, not twice: got 1, expected 1
+PASS  a curve, text or instance that is drawn but is not a mesh FAILS by name (they escaped the whole pass): Rope 1 (a curve object that draws faces), Barrel instance (an empty that instances the collection "barrel"): 2 thing(s) are drawn but are not meshes, so they get no surface and no wear.
+PASS  ...and an audit with none of them passes that check: got ['pass'], expected ['pass']
+PASS  an audit of nothing FAILS (an empty scene, or the wrong file), it no longer passes "every visible object has a role (0 objects)": yes
+PASS  a third of the objects on a fallback role FAILS (the share is 15 percent, not the 50 the design first said): yes
+PASS  ...and one object in nine (11 percent) is only a LOOK: got ['warn'], expected ['warn']
+PASS  a dirt-road object with no road in the settings and no relief FAILS and says to write a road (a plain request drafted none before): ground: a dirt road with no entry in the settings' roads and no real relief (0.000 m, at least 0.03 m): ground: a dirt road with no entry in the settings' roads and no real relief (0.000 m, at least 0
+PASS  ...and the same road with real relief does not: yes
+PASS  ...and one with a road entry is judged by the roads section, not by this: yes
+PASS  a ground object whose outline grew 3.4 times (a curved road turned into its box) FAILS and says so: yes
+PASS  ...and one that kept its outline does not: yes
+PASS  a scene lit only by its world colour is a LOOK ("no lamp, so no direction of light"): got ['warn'], expected ['warn']
+PASS  ...and with a lamp it passes: got ['pass'], expected ['pass']
+PASS  a seat error names the ground it was measured against, so a corner over another ground object can be told from a real fault: wall_north (-2.00 m, the ground it was measured against is "Towpath" at 0.00 m): 1 part(s) is not seated on the ground.
+PASS  ...and its fix says what to do when the ground named is not the one the part stands on: yes
+PASS  a hung part's fix names the framed-in joinery (two carried parts) and the roles that may hang: yes
+PASS  a step with a rise of 1.83 m FAILS the scale check: yes
+PASS  a step with a rise of 17 cm passes: got ['pass'], expected ['pass']
+PASS  an off entry with a one-word reason fails: yes
+PASS  an off entry the place type allows, with a real reason, is KNOWN: got ['known'], expected ['known']
+PASS  an off entry that is not on the place type list is a LOOK for a person: got ['warn'], expected ['warn']
+PASS  switching off most of the pass is called out: yes
+PASS  the command on the finished audit exits 0 (with a LOOK about the missing scene file): exit 0
+PASS  the command on the flat audit exits 1 and prints FAIL lines that say how to fix: exit 1
+PASS  the command on a missing audit exits 2: got 2, expected 2
+PASS  compare says which treatments appeared between the flat and the finished audit: exit 0
+PASS  a fresh check whose claims hold exits 0: got 0, expected 0
+PASS  a fresh check with a claim that does not hold exits 1 and names the claim: exit 1
+PASS  a fresh check that does not say whether it was blind, or what it did not test, is a LOOK (exit 0): exit 0
+PASS  the audit made with this settings file passes the settings check (and says so): exit 0: Place audit of hut (lived_in, dry): PASS. 0 to fix, 0 to look at, 0 known (switched off on purpose), 22 passed.
+PASS place: quick output [the audit]: not a quick trial
+PASS place: roles [every object]
+PASS  a settings file edited after the audit fails it as stale and says what to run: exit 1: Place audit of hut (lived_in, dry): FAIL. 1 to fix, 0 to look at, 0 known (switched off on purpose), 21 passed.
+PASS place: quick output [the audit]: not a quick trial
+PASS place: roles [every object]: every visible object has a role (9 objects)
+PASS place: object types [every drawn object]: everyth
+PASS  control: with no --place-settings the same audit has no settings check at all (the option is what asks for it): exit 0
+PASS  an audit that records no settings hash is a LOOK, not a pass: exit 0
+PASS  a settings file that is not there exits 2 and names the command that makes one: exit 2
+PASS  an audit made before the lessons round: place: film frame says "not measured by this audit" as a LOOK, never a FAIL: ['warn']
+PASS  an audit made before the lessons round: place: world says "not measured by this audit" as a LOOK, never a FAIL: ['warn']
+PASS  an audit made before the lessons round: place: sun says "not measured by this audit" as a LOOK, never a FAIL: ['warn']
+PASS  an audit made before the lessons round: place: lettering says "not measured by this audit" as a LOOK, never a FAIL: ['warn']
+PASS  an audit made before the lessons round: place: budgets says "not measured by this audit" as a LOOK, never a FAIL: ['warn', 'pass']
+PASS  ...so the older audit still has no FAIL line (exit 0): yes
+PASS  a place for the film at a preview size of the same tall shape (540 x 960) passes place: film frame: got ['pass'], expected ['pass']
+PASS  the case that must fail: a view camera set to 1200 x 800 in a place for the film FAILS place: film frame: the views: the place is marked for the film ("for_film": true), but the view camera Camera A is set to 1200 x 800: a film view is the tall 1080 x 1920 frame (9:
+PASS  ...and the same camera is fine when the place is not for the film: got ['pass'], expected ['pass']
+PASS  the case that must fail: 5,000 objects FAIL place: budgets and say to build in bulk: the scene: 5,000 objects in the scene (more than 3,000): build thousands of small shapes in bulk, one object per material, not one object each (an earlier place's leaves took 7 minutes one at a time a
+PASS  a wear-layer sun far from the scene's sun is a LOOK that says to finish again: the wear layers: the wear layers' shade used the fallback, 135 degrees compass and 45 degrees up (the scene has no sun lamp) (compass 135, 45 degrees up), but the scene's sun "Evening sun" stands at c
+PASS  a sign with a lettering picture passes and a bare notice FAILS place: lettering, named: Notice 2 (notice): 1 sign(s), notice(s), placard(s), poster(s), name board(s) or book(s) carry no lettering: no picture texture, no shape made from text, and no
+PASS  a haze volume in the world is a LOOK: yes
+PASS  a prop built alone (3 m across, not for the film) whose close camera sees past its small ground gets a LOOK in place: world, not a FAIL, and the LOOK says why: ['warn']
+PASS  ...the case that must fail: the same prop marked for the film FAILS place: world: yes
+PASS  ...and so does a place 40 m across (the test yard's size): yes
+PASS  a 1000 m clip end with a ground reaching 1959 m deep FAILS, and the fix names the figure needed (at least 1960 m), not only "1000 m or more":  unlit colour); set every view camera's clip end to 1000 m or more and past the far edge of the ground and the backdrop (here: Camera A at least 1960 m); turn the shadow off on far scenery (Object > Visibility > Shadow).
+PASS  1,500 objects (over 1,000, under 3,000) is a LOOK in place: budgets, not a FAIL: a large place can be over for honest reasons: ['warn', 'pass']
+PASS  the case that must fail: a beam with 2.8 m free FAILS place: construction and names its role's own limit (2.5 m), and the fix names every role's limit and the free_span fact: Gallery beam (2.80 m free; its role timber.beam allows 2.5 m): 1 part(s) has a free span longer than its role allows.
+PASS  ...a sourced "free_span" fact in the place's own facts file (3.0 m for the gallery beam) lets it pass, and the pass line names the fact: ['pass', 'pass']
+PASS  ...a free_span fact with no source does not count (the span still FAILS): yes
+PASS  ...and a span longer than the fact allows still FAILS, naming the fact's figure: Gallery beam (3.40 m free; its role timber.beam allows 2.5 m, the place fact gallery_bay_span 3 m): 1 part(s) has a free span longer than its role allows.
+-- place audit judge: flat hut fails, finished hut passes, planted faults are named: 108 of 108 checks passed

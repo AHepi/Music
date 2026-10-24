@@ -1,0 +1,43 @@
+00:06.035  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/final/garden_real.blend"
+[fix] --- step sky
+[fix] sky: realistic look keeps its smooth sky (nothing to do)
+[fix]     (0.0 s)
+[fix] --- step ground
+[fix] ground: realistic look keeps its scan ground (nothing to do)
+[fix]     (0.0 s)
+[fix] --- step pond
+[fix] pond: glossy-ray visibility switched off for ['Hall glow 0', 'Hall glow 1', 'Hall glow 2', 'Hall glow 3', 'Shoji paper'] (they still light the garden and are still seen directly; they are no longer mirrored in the water as white shards)
+[fix]     (0.0 s)
+[fix] --- step toe
+[fix] toe: shadow lift added at the end of the compositor (T 0.03, L0 0.014, tint 0.75,1.0,0.95)
+[fix]     (0.0 s)
+[fix] --- step pine
+[fix] pine: 8 pads kept (body colour x0.72), old needle fringe 2556 triangles replaced by 64385 needle triangles in sprays of 5 (density 700.0/m2 of pad)
+[fix]     (0.3 s)
+[fix] --- step plants
+[fix] plants: tuft tips green, 4 tuft shapes replaced by four different recipes, tuft sizes x0.62-1.7 and tilt +-0.22 rad varied
+[fix] plants: 4 moss tones: colour difference between the two ramp ends cut to 40 percent, mottling scale 9 -> 4.5, cell bump strength 0.35 -> 0.10 and cells 140 -> 320 per object
+[fix] plants: shrub material (lantern shrubs and the far hedge): colour difference halved, cells 26 -> 80 per metre, bump 0.6 -> 0.25
+[fix] plants: lichen amount 0.6 -> 0 on 17 dressed-stone materials and -> 0.12 on 34 natural-stone materials (moss kept)
+[fix]     (0.0 s)
+[fix] --- step maple
+[fix] maple: realistic look keeps its fine leaves (nothing to do)
+[fix]     (0.0 s)
+[fix] --- step hedge
+[fix] hedge: 21 clipped shrubs (3360 triangles) along the far west and south edges of the ground, material Life / shrub
+[fix]     (0.0 s)
+[fix] done in 0.3 s; created ['Fix / far hedge']; changed 14 things
+FINAL_START /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_hero dot-angle nodes set: 120
+00:08.162  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+DEVICES {"requested": "GPU", "backend": "OPTIX", "devices": [["NVIDIA GeForce RTX 4090", "CUDA", false], ["AMD Ryzen 9 7950X 16-Core Processor", "CPU", false], ["NVIDIA GeForce RTX 4090", "OPTIX", true]], "gpu_in_use": true}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+00:44.067  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_hero.exr'
+RENDER_JOB_DONE {"engine": "CYCLES", "samples": 512, "seed": 7, "camera": "photo", "size": [2400, 1600, 100], "render_seconds": 36.28}
+GROUP_CHECK {"groups": ["Combined_sun", "Combined_rim", "Combined_sky", "Combined_fill", "Combined_hall", "Combined_lantern", "Combined_rest"], "rel_error": 0.01139, "share": {"sun": 0.3017, "rim": 0.0036, "sky": 0.3098, "fill": 0.1164, "hall": 0.258, "lantern": 0.0056, "rest": 0.0047}, "denoise_on": true}
+FINAL_START /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_veranda dot-angle nodes set: 120
+DEVICES {"requested": "GPU", "backend": "OPTIX", "devices": [["NVIDIA GeForce RTX 4090", "CUDA", false], ["AMD Ryzen 9 7950X 16-Core Processor", "CPU", false], ["NVIDIA GeForce RTX 4090", "OPTIX", true]], "gpu_in_use": true}
+01:20.640  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_veranda.exr'
+RENDER_JOB_DONE {"engine": "CYCLES", "samples": 512, "seed": 7, "camera": "veranda", "size": [2400, 1600, 100], "render_seconds": 35.19}
+FIX_RENDER_ALL [["real", "real_hero", "ok", "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_hero.png", 39.7], ["real", "real_veranda", "ok", "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/fix/out/final/real_veranda.png", 75.0]] total seconds 75.0
+
+Blender quit

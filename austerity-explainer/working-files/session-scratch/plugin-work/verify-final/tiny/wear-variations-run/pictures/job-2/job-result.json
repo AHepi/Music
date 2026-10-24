@@ -1,0 +1,53 @@
+{
+ "job": 2,
+ "scene": "tiny-wall-finished.blend",
+ "blender": "5.2.2 LTS",
+ "device": "EEVEE",
+ "engine": "EEVEE",
+ "engine_reasons": [
+  "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+ ],
+ "size": [
+  300,
+  200
+ ],
+ "samples": 16,
+ "where": "local",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "fingerprint_at_start": "115efa9ea800ae66",
+ "saved_values": {
+  "dials.dirt.film": [
+   0.4,
+   0.5
+  ],
+  "dials.moss_and_algae.cover": [
+   0.4,
+   0.4
+  ]
+ },
+ "reset_check": {
+  "camera": "Camera A",
+  "file": "reset-check__camera-a.jpg",
+  "engine": "EEVEE",
+  "width": 300,
+  "height": 200,
+  "samples": 16,
+  "seconds": 6.92,
+  "bytes": 8063,
+  "ok": true,
+  "mean_luminance": 0.47973304986953735
+ },
+ "seconds_in_all": 62.8,
+ "reopened": 0,
+ "entries": [
+  "baseline",
+  "v02-cover85-film85",
+  "v05-cover55-film55",
+  "v08-cover45-film75"
+ ],
+ "ok": true,
+ "fingerprint_at_end": "115efa9ea800ae66"
+}

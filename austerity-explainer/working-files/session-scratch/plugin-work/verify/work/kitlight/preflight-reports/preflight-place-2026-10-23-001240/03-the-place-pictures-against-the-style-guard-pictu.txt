@@ -1,0 +1,27 @@
+Picture measures of 2 picture(s) against the guard made from hero_final.jpg: FAIL.
+FAIL place pictures: value range [closeup.jpg]: value range off by more than 0.03: p1 0.039 vs 0.208, p5 0.066 vs 0.251, p25 0.164 vs 0.357, p50 0.226 vs 0.409; mean saturation 0.29 vs the guard's 0.15
+PASS place pictures: detail energy [closeup.jpg]: fine detail is within the guard's band in every region
+FAIL place pictures: flat windows [closeup.jpg]: 127 of 672 windows below the sky are dead flat (spread under 0.01): plain colour with no surface  Fix: give those surfaces normal maps and variation
+FAIL place pictures: palette [closeup.jpg]: 4.37% of pixels are turquoise (at most 0.3%)
+PASS place pictures: value range [hero.jpg]: the value range and mean colour match the guard
+PASS place pictures: detail energy [hero.jpg]: fine detail is within the guard's band in every region
+FAIL place pictures: flat windows [hero.jpg]: 80 of 360 windows below the sky are dead flat (spread under 0.01): plain colour with no surface  Fix: give those surfaces normal maps and variation
+PASS place pictures: palette [hero.jpg]: no strongly coloured, turquoise or blown-out areas
+
+Settings used (film-settings.json):
+  place_measures.detail_energy_blur_pixels = 2 pixels (judged)
+  place_measures.strong_saturation_level = 0.7 saturation (judged)
+  place_measures.turquoise_hue_band = [160, 210] degrees (judged)
+  place_measures.turquoise_saturation_min = 0.35 saturation (judged)
+  place_measures.flat_window_pixels = 96 pixels (judged)
+  place_measures.flat_window_step_pixels = 48 pixels (judged)
+  place_measures.flat_window_std_max = 0.01 luminance spread (judged)
+  place_measures.percentile_tolerance = 0.03 luminance (judged)
+  place_measures.percentile_99_max = 0.92 luminance (judged)
+  place_measures.mean_saturation_tolerance = 0.04 saturation (judged)
+  place_measures.detail_energy_ratio_low = 0.9 times the guard (judged)
+  place_measures.detail_energy_ratio_high = 1.4 times the guard (judged)
+  place_measures.detail_energy_cap = 10 energy (judged)
+  place_measures.strong_saturation_share_max = 0.01 share of pixels (judged)
+  place_measures.turquoise_share_max = 0.003 share of pixels (judged)
+  place_measures.white_patch_pixels_max = 30 pixels (judged)

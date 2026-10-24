@@ -1,0 +1,104 @@
+{
+ "blender": "5.2.2 LTS",
+ "scene_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/astra-work/out/courtyard_final.blend",
+ "args": {
+  "out": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/light/out/rp/r4/evening_real",
+  "camera": "photo",
+  "size": "960x640",
+  "samples": 192,
+  "seed": 7,
+  "engine": "CYCLES",
+  "apply_stage": "real",
+  "evening": true,
+  "exposure": null,
+  "denoise": true,
+  "exr": false,
+  "check_groups": false,
+  "require_gpu": true,
+  "cpu": false,
+  "dry_run": false,
+  "hide": "",
+  "pct": 100,
+  "stage_opts": "",
+  "pano": null
+ },
+ "stage": {
+  "look": "real",
+  "created": [
+   "Hills, farthest",
+   "Hills, foot",
+   "Rim light (maple, hall edge)",
+   "Roof lift (hall roof only)",
+   "veranda"
+  ],
+  "changed": [
+   "Camera -> photo",
+   "Cool sky fill",
+   "Dark plain",
+   "Golden hour sun",
+   "Hills, far",
+   "Hills, middle",
+   "Hills, near",
+   "Lantern light",
+   "Material:Lantern flame",
+   "Scene render settings and compositor",
+   "ViewLayer lightgroups",
+   "World:Golden hour"
+  ],
+  "evening": true
+ },
+ "scene_sha256": "074212b261ca8c90a1aa28090bb1552961b897ab2b04d8efd845747df39ec6f5",
+ "engine": "CYCLES",
+ "device": {
+  "requested": "GPU",
+  "backend": "OPTIX",
+  "devices": [
+   [
+    "NVIDIA GeForce RTX 4090",
+    "OPTIX",
+    true
+   ],
+   [
+    "AMD EPYC 7352 24-Core Processor",
+    "CPU",
+    false
+   ],
+   [
+    "NVIDIA GeForce RTX 4090",
+    "CUDA",
+    false
+   ]
+  ],
+  "gpu_in_use": true
+ },
+ "samples": 192,
+ "seed": 7,
+ "camera": "photo",
+ "size": [
+  960,
+  640,
+  100
+ ],
+ "view_transform": "AgX",
+ "look": "AgX - Punchy",
+ "exposure": 1.399999976158142,
+ "denoise": true,
+ "lightgroups": [
+  "sun",
+  "rim",
+  "sky",
+  "fill",
+  "hall",
+  "lantern",
+  "rest"
+ ],
+ "compositor": true,
+ "render_seconds": 3.53,
+ "files": {
+  "png": {
+   "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/garden/light/out/rp/r4/evening_real.png",
+   "bytes": 743407,
+   "sha256": "dece9de6fb94bdf5434e088408c9348b755e007cb1ad1e1d42d3287f4d39be92"
+  }
+ }
+}

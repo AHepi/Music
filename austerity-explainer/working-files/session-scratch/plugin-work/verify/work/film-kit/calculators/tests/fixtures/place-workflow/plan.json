@@ -1,0 +1,265 @@
+{
+ "place": "village",
+ "place_type": "village",
+ "files": {
+  "style_note": "/path/to/run/plan/style-note.md",
+  "facts": "/path/to/run/plan/real-world-facts.json",
+  "settings": "/path/to/run/plan/place-settings.json",
+  "ownership": "/path/to/run/plan/ownership.json",
+  "acceptance": "/path/to/run/plan/acceptance.json"
+ },
+ "ground_owner": "roads_and_ground",
+ "scene_file": "/path/to/run/scene/start.blend",
+ "look": "lived_in",
+ "state": "damp",
+ "parts": [
+  {
+   "name": "roads and ground",
+   "owner": "roads_and_ground",
+   "collection": "Place: roads_and_ground",
+   "region": [
+    0,
+    0,
+    20,
+    20
+   ],
+   "brief": "The graded ground, two lanes with ruts and hoof prints, the verge, puddle hollows and the view cameras.",
+   "steps_in_order": [
+    "graded ground mesh",
+    "lane shapes",
+    "verge and puddle hollows",
+    "view cameras"
+   ],
+   "triangle_budget": 150000
+  },
+  {
+   "name": "cottages",
+   "owner": "cottages",
+   "collection": "Place: cottages",
+   "region": [
+    0,
+    0,
+    20,
+    20
+   ],
+   "brief": "Three cottages: stone footing, timber frame, thatch roof, chimney, door and step.",
+   "steps_in_order": [
+    "footings and frames",
+    "roofs and bevels",
+    "roles and the part pass"
+   ],
+   "triangle_budget": 250000
+  },
+  {
+   "name": "stable",
+   "owner": "stable",
+   "collection": "Place: stable",
+   "region": [
+    0,
+    0,
+    20,
+    20
+   ],
+   "brief": "An empty stable: three stalls, mangers, a plank door, old straw and dung.",
+   "steps_in_order": [
+    "frame and stalls",
+    "door and mangers",
+    "roles and the part pass"
+   ],
+   "triangle_budget": 120000
+  },
+  {
+   "name": "props",
+   "owner": "props",
+   "collection": "Place: props",
+   "region": [
+    0,
+    0,
+    20,
+    20
+   ],
+   "brief": "Barrels with iron bands, buckets, crates, a handcart, a well, a woodpile, a ladder, a fence.",
+   "steps_in_order": [
+    "barrels and crates",
+    "cart and well",
+    "roles and the part pass"
+   ],
+   "triangle_budget": 120000
+  },
+  {
+   "name": "forest edge",
+   "owner": "forest_edge",
+   "collection": "Place: forest_edge",
+   "region": [
+    0,
+    0,
+    20,
+    20
+   ],
+   "brief": "Pines and broadleaf trees, stumps, logs, rocks, ferns, bramble, nettles, kept off the lanes.",
+   "steps_in_order": [
+    "trees and stumps",
+    "logs and rocks",
+    "roles and the part pass"
+   ],
+   "triangle_budget": 200000
+  }
+ ],
+ "contracts": [
+  "inside 1.2 m of each lane centre line the ground is as it is"
+ ],
+ "frozen": [
+  "cameras",
+  "lights",
+  "the world",
+  "render settings",
+  "the ground height"
+ ],
+ "views": [
+  {
+   "name": "wide",
+   "camera": "View wide",
+   "size": [
+    1200,
+    800
+   ]
+  },
+  {
+   "name": "lane_close",
+   "camera": "View lane_close",
+   "size": [
+    1200,
+    800
+   ]
+  },
+  {
+   "name": "detail_close",
+   "camera": "View detail_close",
+   "size": [
+    1200,
+    800
+   ]
+  }
+ ],
+ "readable_features": [
+  {
+   "name": "wheel ruts with puddles",
+   "keywords": [
+    "rut",
+    "puddle"
+   ]
+  },
+  {
+   "name": "hoof prints",
+   "keywords": [
+    "hoof"
+   ]
+  },
+  {
+   "name": "grass between the ruts",
+   "keywords": [
+    "grass",
+    "centre"
+   ]
+  },
+  {
+   "name": "thatch with moss and a sag",
+   "keywords": [
+    "thatch",
+    "moss"
+   ]
+  },
+  {
+   "name": "plaster cracks on a timber frame",
+   "keywords": [
+    "crack",
+    "plaster"
+   ]
+  },
+  {
+   "name": "silvered planks",
+   "keywords": [
+    "silver",
+    "weathered",
+    "plank"
+   ]
+  },
+  {
+   "name": "stone footings with moss",
+   "keywords": [
+    "footing",
+    "stone"
+   ]
+  },
+  {
+   "name": "soot staining above the chimney",
+   "keywords": [
+    "soot",
+    "smoke",
+    "chimney"
+   ]
+  },
+  {
+   "name": "empty stalls with straw",
+   "keywords": [
+    "stall",
+    "straw",
+    "empty"
+   ]
+  },
+  {
+   "name": "dung or straw by the door",
+   "keywords": [
+    "dung",
+    "straw",
+    "door"
+   ]
+  },
+  {
+   "name": "barrels with rusted bands",
+   "keywords": [
+    "barrel",
+    "rust"
+   ]
+  },
+  {
+   "name": "a cart with spoked wheels",
+   "keywords": [
+    "cart",
+    "wheel"
+   ]
+  },
+  {
+   "name": "a woodpile and chopping block",
+   "keywords": [
+    "woodpile",
+    "chopping"
+   ]
+  },
+  {
+   "name": "a leaning fence",
+   "keywords": [
+    "fence"
+   ]
+  },
+  {
+   "name": "ferns and nettles at the wall feet",
+   "keywords": [
+    "fern",
+    "nettle"
+   ]
+  },
+  {
+   "name": "fallen leaves and logs",
+   "keywords": [
+    "leaves",
+    "log"
+   ]
+  }
+ ],
+ "renderer_hint": "a lit window in one cottage means Cycles",
+ "open_questions": [
+  "the cart gauge is a guess until a source confirms it"
+ ],
+ "notes": ""
+}

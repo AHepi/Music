@@ -1,0 +1,1735 @@
+{
+ "about": "The role table: what each kind of object IS and what treatments it needs. Roles may name example things (thatch, barrel) because this is data, never code. A role is \"class.name\". The class decides which treatments are REQUIRED (the audit fails without them) and which are WANTED (the audit says look). Each role carries a surface id (data/surfaces.json), a displace flag (real displacement only where true), may_hang (a part hung from above is allowed), needs_support (ground: stands on the ground, part: carried by another part, none), max_span_metres (the longest free span of a plank or beam), scale (fact ids in data/real_world_facts.json), dials (multipliers per wear layer, 0 = the layer is not for this role), exempt (treatments the role does not need, with the reason) and name_hints (regular expressions that guess the role from an object, collection or material name when the settings say nothing). Numbers in a role (max_span_metres, dials) share the role's own kind and source. A treatment is REQUIRED only if the kit really makes it and a test proves it (check-presets enforces this).",
+ "classes": {
+  "ground": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish",
+    "plants",
+    "litter_pieces"
+   ],
+   "wanted": [
+    "moss_and_algae",
+    "displacement"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.0,
+     "polish": 0.5,
+     "film": 0.5
+    },
+    "grime": {
+     "soot_under_shelter": 0.0,
+     "runoff_streaks": 0.0,
+     "damp_band": 0.0,
+     "area_share": 0.2
+    },
+    "cracks_and_chips": {
+     "chip_amount": 0.0
+    },
+    "rubbish": {
+     "density": 0.4
+    }
+   }
+  },
+  "floor": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "cracks_and_chips"
+   ],
+   "wanted": [
+    "wetness",
+    "edge_wear",
+    "rubbish",
+    "weathering"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.0,
+     "polish": 0.5
+    },
+    "grime": {
+     "soot_under_shelter": 0.0,
+     "runoff_streaks": 0.0,
+     "damp_band": 0.0
+    },
+    "cracks_and_chips": {
+     "chip_amount": 0.1
+    }
+   }
+  },
+  "wall": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "wanted": [
+    "shape_damage"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
+  },
+  "roof": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "moss_and_algae",
+    "shape_damage"
+   ],
+   "wanted": [],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.0,
+     "dust": 0.3
+    },
+    "grime": {
+     "damp_band": 0.0,
+     "soot_under_shelter": 0.2
+    },
+    "cracks_and_chips": {
+     "chip_amount": 0.1
+    }
+   }
+  },
+  "timber": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "wanted": [
+    "moss_and_algae"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
+  },
+  "stone": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "wanted": [
+    "shape_damage"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "weathering": {
+     "silvering": 0.0,
+     "patina": 0.2
+    }
+   }
+  },
+  "iron": {
+   "requires": [
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "rust",
+    "edge_wear"
+   ],
+   "wanted": [
+    "normal_map",
+    "bevelled_edges"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "dirt": {
+     "foot_splash": 0.2
+    },
+    "weathering": {
+     "silvering": 0.0,
+     "patina": 0.3
+    }
+   }
+  },
+  "prop": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "edge_wear"
+   ],
+   "wanted": [
+    "grime",
+    "weathering",
+    "shape_damage"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
+  },
+  "tree": {
+   "requires": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "moss_and_algae",
+    "dirt"
+   ],
+   "wanted": [],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {
+    "weathering": {
+     "silvering": 0.0
+    }
+   }
+  },
+  "plant": {
+   "requires": [
+    "colour_variation",
+    "roughness_variation"
+   ],
+   "wanted": [],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
+  },
+  "water": {
+   "requires": [
+    "normal_map"
+   ],
+   "wanted": [
+    "colour_variation"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
+  },
+  "glass": {
+   "requires": [],
+   "wanted": [
+    "roughness_variation",
+    "dirt"
+   ],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
+  },
+  "never": {
+   "requires": [],
+   "wanted": [],
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "dial_defaults": {}
+  }
+ },
+ "roles": {
+  "ground.dirt_road": {
+   "class": "ground",
+   "surface": "dirt_road",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "cart_gauge"
+   ],
+   "dials": {
+    "dirt": 1.2,
+    "rubbish": 0.8,
+    "moss_and_algae": 0.0
+   },
+   "name_hints": [
+    "\\broad\\b",
+    "\\blane\\b",
+    "\\btrack\\b",
+    "cart ?way",
+    "dirt ?road"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "note": "ruts, banks and hoof prints are shaped by the roads step"
+  },
+  "ground.mud": {
+   "class": "ground",
+   "surface": "mud",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "wetness": 1.3
+   },
+   "name_hints": [
+    "\\bmud\\b",
+    "mire",
+    "bog"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.forest_floor": {
+   "class": "ground",
+   "surface": "forest_floor",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "moss_and_algae": 1.2
+   },
+   "name_hints": [
+    "forest ?floor",
+    "woodland",
+    "undergrowth",
+    "leaf ?litter ground"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.stone_paving": {
+   "class": "ground",
+   "surface": "cobble_paving",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "moss_and_algae": 1.1
+   },
+   "name_hints": [
+    "paving",
+    "cobble",
+    "flagstone",
+    "\\bsett",
+    "pavement"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.gravel": {
+   "class": "ground",
+   "surface": "gravel_path",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "gravel",
+    "\\bpath\\b",
+    "footpath"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.sand": {
+   "class": "ground",
+   "surface": "sand",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bsand\\b",
+    "beach",
+    "dune"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.snow": {
+   "class": "ground",
+   "surface": "snow",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bsnow\\b"
+   ],
+   "exempt": {
+    "rubbish": "snow: rubbish would be buried",
+    "plants": "snow: nothing grows",
+    "moss_and_algae": "snow"
+   },
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.tarmac": {
+   "class": "ground",
+   "surface": "tarmac",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "tarmac",
+    "asphalt",
+    "\\btarred"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.concrete": {
+   "class": "ground",
+   "surface": "concrete",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "concrete (ground|slab|yard|floor)",
+    "\\bslab\\b",
+    "apron"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.rock": {
+   "class": "ground",
+   "surface": "rock_ore",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "rock ?ground",
+    "bedrock",
+    "\\bcliff",
+    "quarry",
+    "\\bore\\b",
+    "spoil"
+   ],
+   "exempt": {
+    "plants": "bare rock: only a few weeds in cracks, set by the place"
+   },
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.grass": {
+   "class": "ground",
+   "surface": "grass",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "grass",
+    "lawn",
+    "meadow",
+    "pasture",
+    "\\bfield\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "ground.earth": {
+   "class": "ground",
+   "surface": "packed_earth",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bground\\b",
+    "terrain",
+    "\\bsoil\\b",
+    "\\bearth\\b",
+    "\\byard\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "floor.earth": {
+   "class": "floor",
+   "surface": "packed_earth",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "dirt": 1.2
+   },
+   "name_hints": [
+    "earth floor",
+    "dirt floor",
+    "stall floor"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "floor.planks": {
+   "class": "floor",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "plank floor",
+    "wood(en)? floor",
+    "floorboard"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "floor.tile": {
+   "class": "floor",
+   "surface": "tile_floor",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "tile floor",
+    "tiled floor"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "floor.stone": {
+   "class": "floor",
+   "surface": "flagstone",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "stone floor",
+    "flag floor"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "floor.concrete": {
+   "class": "floor",
+   "surface": "concrete",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "concrete floor",
+    "screed"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "floor.carpet": {
+   "class": "floor",
+   "surface": "carpet_fabric",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "carpet",
+    "\\brug\\b",
+    "\\bmat\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.timber_frame": {
+   "class": "wall",
+   "surface": "plaster_lime",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "wall_thickness"
+   ],
+   "dials": {},
+   "name_hints": [
+    "timber.?frame",
+    "half.?timber",
+    "wattle"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.log": {
+   "class": "wall",
+   "surface": "log_wall",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "wall_thickness"
+   ],
+   "dials": {},
+   "name_hints": [
+    "log ?(wall|cabin|house)",
+    "\\blogs?\\b wall"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.stone": {
+   "class": "wall",
+   "surface": "stone_rubble",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "wall_thickness"
+   ],
+   "dials": {
+    "moss_and_algae": 1.1
+   },
+   "name_hints": [
+    "stone ?wall",
+    "rubble",
+    "masonry",
+    "drystone",
+    "\\bgable stone"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.brick": {
+   "class": "wall",
+   "surface": "brick",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "wall_thickness"
+   ],
+   "dials": {},
+   "name_hints": [
+    "brick"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.cob": {
+   "class": "wall",
+   "surface": "cob_wall",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "wall_thickness"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\bcob\\b",
+    "adobe",
+    "mud ?brick"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.concrete": {
+   "class": "wall",
+   "surface": "concrete",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "wall_thickness"
+   ],
+   "dials": {},
+   "name_hints": [
+    "concrete wall",
+    "concrete"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.metal_sheet": {
+   "class": "wall",
+   "surface": "steel_plate",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "sheet metal",
+    "corrugated",
+    "tin (wall|shed)"
+   ],
+   "exempt": {
+    "moss_and_algae": "metal sheet: moss does not take",
+    "bevelled_edges": "folded sheet, no bevel"
+   },
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "wall.interior": {
+   "class": "wall",
+   "surface": "plaster_lime",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "interior wall",
+    "inside wall",
+    "partition"
+   ],
+   "exempt": {
+    "moss_and_algae": "indoors: dry, nothing grows",
+    "weathering": "indoors: no sun or rain on it",
+    "wetness": "indoors: dry floor and walls",
+    "plants": "indoors: no weeds",
+    "litter_pieces": "indoors: swept, no leaves"
+   },
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "note": "indoor wall: the dry-indoors exemptions apply"
+  },
+  "wall.plaster": {
+   "class": "wall",
+   "surface": "plaster_lime",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "wall_thickness"
+   ],
+   "dials": {},
+   "name_hints": [
+    "plaster",
+    "render",
+    "daub",
+    "whitewash",
+    "\\bwall\\b",
+    "\\bhouse\\b",
+    "cottage"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "roof.thatch": {
+   "class": "roof",
+   "surface": "thatch",
+   "displace": true,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "roof_pitch",
+    "thatch_thickness"
+   ],
+   "dials": {
+    "moss_and_algae": 1.3
+   },
+   "name_hints": [
+    "thatch",
+    "\\breed\\b",
+    "straw roof"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "roof.shingle": {
+   "class": "roof",
+   "surface": "shingle_wood",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "roof_pitch"
+   ],
+   "dials": {},
+   "name_hints": [
+    "shingle",
+    "\\broof\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "roof.tile": {
+   "class": "roof",
+   "surface": "roof_tile_clay",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "roof_pitch"
+   ],
+   "dials": {},
+   "name_hints": [
+    "roof ?tile",
+    "\\btiles?\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "roof.slate": {
+   "class": "roof",
+   "surface": "slate",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "roof_pitch"
+   ],
+   "dials": {},
+   "name_hints": [
+    "slate"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "roof.metal": {
+   "class": "roof",
+   "surface": "steel_plate",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "metal roof",
+    "tin roof",
+    "corrugated roof"
+   ],
+   "exempt": {
+    "moss_and_algae": "metal roof: moss does not take"
+   },
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.post": {
+   "class": "timber",
+   "surface": "timber_beam",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "post_size"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\bposts?\\b",
+    "pillar",
+    "stanchion",
+    "upright"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.beam": {
+   "class": "timber",
+   "surface": "timber_beam",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": 2.5,
+   "scale": [
+    "beam_size"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\bbeams?\\b",
+    "rafter",
+    "joist",
+    "lintel",
+    "purlin",
+    "\\bplate\\b",
+    "stringer",
+    "\\bsill\\b",
+    "bearer"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.floor": {
+   "class": "timber",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": 1.38,
+   "scale": [
+    "plank_width"
+   ],
+   "dials": {},
+   "name_hints": [
+    "floor ?plank",
+    "decking",
+    "deck\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.plank": {
+   "class": "timber",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": 1.38,
+   "scale": [
+    "plank_width"
+   ],
+   "dials": {
+    "shape_damage": 1.0
+   },
+   "name_hints": [
+    "plank",
+    "board",
+    "\\bslat"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.door": {
+   "class": "timber",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": true,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "door_height",
+    "door_width",
+    "door_thickness"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\bdoors?\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.shutter": {
+   "class": "timber",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": true,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "shutter_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "shutter"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.fence": {
+   "class": "timber",
+   "surface": "timber_weathered",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": 2.5,
+   "scale": [
+    "fence_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "fence",
+    "palisade",
+    "railing",
+    "\\brail\\b",
+    "\\bgates?\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "timber.generic": {
+   "class": "timber",
+   "surface": "timber_weathered",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "timber",
+    "wood(en)?\\b",
+    "\\boak\\b",
+    "\\bpine\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "stone.footing": {
+   "class": "stone",
+   "surface": "stone_rubble",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "moss_and_algae": 1.2
+   },
+   "name_hints": [
+    "footing",
+    "plinth",
+    "foundation",
+    "padstone",
+    "sill ?stone"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "stone.chimney": {
+   "class": "stone",
+   "surface": "stone_rubble",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "chimney_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "chimney",
+    "flue",
+    "stack\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "stone.well": {
+   "class": "stone",
+   "surface": "stone_rubble",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "well_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\bwell\\b",
+    "trough",
+    "\\bsink\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "stone.rock": {
+   "class": "stone",
+   "surface": "stone_rubble",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "moss_and_algae": 1.2
+   },
+   "name_hints": [
+    "\\brocks?\\b",
+    "boulder",
+    "\\bstone\\b",
+    "cairn"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "iron.sheet": {
+   "class": "iron",
+   "surface": "steel_plate",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "steel",
+    "iron sheet",
+    "\\bplate metal",
+    "girder"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "iron.painted": {
+   "class": "iron",
+   "surface": "painted_metal",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "painted metal",
+    "railing iron",
+    "\\bsign\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "iron.fitting": {
+   "class": "iron",
+   "surface": "iron_forged",
+   "displace": false,
+   "may_hang": true,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "rust": 1.2
+   },
+   "name_hints": [
+    "\\biron\\b",
+    "hinge",
+    "\\bband\\b",
+    "hoop",
+    "\\bnail",
+    "bracket",
+    "latch",
+    "\\bchain\\b",
+    "hook",
+    "cramp",
+    "metal"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.barrel": {
+   "class": "prop",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "barrel_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "barrel",
+    "\\bcask\\b",
+    "keg",
+    "\\btun\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "note": "iron bands: give the band material a rule so its slot gets iron.fitting"
+  },
+  "prop.crate": {
+   "class": "prop",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "crate_size"
+   ],
+   "dials": {},
+   "name_hints": [
+    "crate",
+    "\\bbox\\b",
+    "chest",
+    "\\btrunk\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.cart": {
+   "class": "prop",
+   "surface": "timber_weathered",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "cart_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\bcart\\b",
+    "wagon",
+    "carriage",
+    "barrow"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.wheel": {
+   "class": "prop",
+   "surface": "timber_weathered",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "cart_wheel_diameter"
+   ],
+   "dials": {},
+   "name_hints": [
+    "wheel"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.boat": {
+   "class": "prop",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {
+    "wetness": 1.2
+   },
+   "name_hints": [
+    "\\bboat\\b",
+    "\\bhull\\b",
+    "dinghy",
+    "\\bship\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.furniture": {
+   "class": "prop",
+   "surface": "timber_planks",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "table_height",
+    "bench_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\btable\\b",
+    "\\bchair\\b",
+    "\\bbench\\b",
+    "\\bstool\\b",
+    "shelf",
+    "\\bbed\\b",
+    "cupboard",
+    "\\bdesk\\b",
+    "manger",
+    "trestle"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.wicker": {
+   "class": "prop",
+   "surface": "wicker",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "wicker",
+    "basket",
+    "\\bwattle (fence|panel)"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.cloth": {
+   "class": "prop",
+   "surface": "cloth_sack",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bsack",
+    "cloth",
+    "canvas",
+    "sail",
+    "\\brag\\b",
+    "banner",
+    "tarp"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.rope": {
+   "class": "prop",
+   "surface": "rope",
+   "displace": false,
+   "may_hang": true,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\brope",
+    "\\bnet\\b",
+    "cable",
+    "cordage"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.ceramic": {
+   "class": "prop",
+   "surface": "ceramic_glazed",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bjug\\b",
+    "\\bpot\\b",
+    "\\burn\\b",
+    "amphora",
+    "\\bbowl\\b",
+    "ceramic",
+    "crock"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.straw": {
+   "class": "prop",
+   "surface": "straw",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bstraw\\b",
+    "\\bhay\\b",
+    "bale",
+    "\\bfodder"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.imported": {
+   "class": "prop",
+   "surface": "generic_wood",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "poly ?haven",
+    "imported",
+    "\\bscan\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "note": "its own maps count as normal_map and roughness_variation when they feed those inputs"
+  },
+  "prop.wood": {
+   "class": "prop",
+   "surface": "generic_wood",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bprop\\b",
+    "woodpile",
+    "\\blog pile",
+    "chopping",
+    "bucket",
+    "ladder",
+    "stump block",
+    "\\bblock\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "prop.generic": {
+   "class": "prop",
+   "surface": "generic_stone",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bobject\\b",
+    "\\bthing\\b",
+    "\\bmesh\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work",
+   "note": "the role an object gets when nothing else matched and its material gives no hint (the audit reports every one)"
+  },
+  "tree.bark": {
+   "class": "tree",
+   "surface": "bark",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [
+    "tree_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "\\btree\\b",
+    "trunk",
+    "\\bbark\\b",
+    "\\blog\\b",
+    "branch",
+    "stump"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "plant.foliage": {
+   "class": "plant",
+   "surface": "foliage",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "ground",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "foliage",
+    "leaves",
+    "\\bleaf",
+    "bush",
+    "shrub",
+    "hedge",
+    "\\bfern",
+    "canopy",
+    "needles"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "water.still": {
+   "class": "water",
+   "surface": "water_still",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bwater\\b",
+    "pond",
+    "puddle",
+    "\\blake\\b",
+    "\\bpool\\b",
+    "stream",
+    "\\briver\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "water.sea": {
+   "class": "water",
+   "surface": "water_sea",
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bsea\\b",
+    "\\bocean\\b",
+    "harbour water",
+    "\\bwaves?\\b"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "glass.window": {
+   "class": "glass",
+   "surface": "glass_old",
+   "displace": false,
+   "may_hang": true,
+   "needs_support": "part",
+   "max_span_metres": null,
+   "scale": [
+    "window_width",
+    "window_height"
+   ],
+   "dials": {},
+   "name_hints": [
+    "glass",
+    "window pane",
+    "\\bpane\\b",
+    "glazing",
+    "lantern glass"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "never.sky": {
+   "class": "never",
+   "surface": null,
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "^sky",
+    "backdrop",
+    "horizon",
+    "skydome",
+    "^world"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "never.glow": {
+   "class": "never",
+   "surface": null,
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "\\bglow\\b",
+    "emitter",
+    "flame",
+    "\\bfire\\b",
+    "lamp glow",
+    "light card"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "never.light": {
+   "class": "never",
+   "surface": null,
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "^light",
+    "\\blamp helper",
+    "^sun$"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "never.helper": {
+   "class": "never",
+   "surface": null,
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "helper",
+    "^guide",
+    "^preview",
+    "\\bcamera",
+    "^empty",
+    "^cam ",
+    "^place .* cam",
+    "collision",
+    "proxy"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  },
+  "never.scatter": {
+   "class": "never",
+   "surface": null,
+   "displace": false,
+   "may_hang": false,
+   "needs_support": "none",
+   "max_span_metres": null,
+   "scale": [],
+   "dials": {},
+   "name_hints": [
+    "^pk scatter",
+    "scatter",
+    "^pk litter"
+   ],
+   "exempt": {},
+   "kind": "judged",
+   "source": "the plugin 1.4.0 design (22 October 2026) and the garden, street and mine work"
+  }
+ }
+}

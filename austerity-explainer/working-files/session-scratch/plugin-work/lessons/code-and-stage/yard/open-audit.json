@@ -1,0 +1,4689 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-23T07:49:34",
+ "blender": "5.2.2 LTS",
+ "scene_file": "open.blend",
+ "scene_sha1": "6d4d79c43695402200eb8ebec8b6948562dd2f0d",
+ "settings_file": "place-settings.json",
+ "settings_sha1": "898aa1993aa70e65a1977ccb42cb13e9ad257c08",
+ "place": "yard",
+ "place_type": "generic",
+ "look": "neglected",
+ "state": "damp",
+ "quick": false,
+ "map_size_pixels": null,
+ "mask": {},
+ "masks_from": "whole_scene",
+ "picture": {
+  "camera": null,
+  "height_pixels": null,
+  "set": false
+ },
+ "counts": {
+  "objects_visible": 41,
+  "objects_total": 43,
+  "materials": 8,
+  "triangles": 730,
+  "triangles_by_owner": {
+   "unowned": 730
+  },
+  "scatter_pieces": 0,
+  "ground_area_m2": 1040.0
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.earth": 1,
+   "wall.plaster": 8,
+   "roof.shingle": 2,
+   "timber.door": 2,
+   "timber.post": 9,
+   "timber.fence": 14,
+   "stone.well": 1,
+   "prop.barrel": 1,
+   "iron.fitting": 2,
+   "tree.bark": 1
+  }
+ },
+ "materials": [
+  {
+   "name": "bark_mat",
+   "role": "tree.bark",
+   "roles": [
+    "tree.bark"
+   ],
+   "users": 1,
+   "objects": [
+    "Tree stump"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "moss_and_algae"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "door_mat",
+   "role": "timber.door",
+   "roles": [
+    "timber.door"
+   ],
+   "users": 2,
+   "objects": [
+    "Shed A door",
+    "Shed B door"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "ground_mat",
+   "role": "ground.earth",
+   "roles": [
+    "ground.earth"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "node": null,
+      "method": "BUMP",
+      "depth_metres": 0.0,
+      "max_vertex_displacement": 0.0,
+      "mesh": null
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "count": 0,
+      "per_100_square_metres": 0.0
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "count": 0,
+      "per_100_square_metres": 0.0
+     }
+    }
+   },
+   "missing": [
+    "normal_map",
+    "displacement",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish",
+    "plants",
+    "litter_pieces"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "iron_mat",
+   "role": "iron.fitting",
+   "roles": [
+    "iron.fitting",
+    "timber.post"
+   ],
+   "users": 3,
+   "objects": [
+    "Iron band 1",
+    "Iron band 2",
+    "Iron post"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "rust": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "rust",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "roof_mat",
+   "role": "roof.shingle",
+   "roles": [
+    "roof.shingle"
+   ],
+   "users": 2,
+   "objects": [
+    "Shed A roof",
+    "Shed B roof"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "moss_and_algae",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "stone_mat",
+   "role": "stone.well",
+   "roles": [
+    "stone.well"
+   ],
+   "users": 1,
+   "objects": [
+    "Prop well"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "wall_mat",
+   "role": "wall.plaster",
+   "roles": [
+    "wall.plaster"
+   ],
+   "users": 8,
+   "objects": [
+    "Shed A wall north",
+    "Shed A wall south",
+    "Shed A wall east",
+    "Shed A wall west",
+    "Shed B wall north",
+    "Shed B wall south",
+    "Shed B wall east",
+    "Shed B wall west"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "wood_mat",
+   "role": "prop.barrel",
+   "roles": [
+    "prop.barrel",
+    "timber.fence",
+    "timber.post"
+   ],
+   "users": 23,
+   "objects": [
+    "Fence post 1",
+    "Fence rail 1 low",
+    "Fence rail 1 high",
+    "Fence post 2",
+    "Fence rail 2 low",
+    "Fence rail 2 high",
+    "Fence post 3",
+    "Fence rail 3 low",
+    "Fence rail 3 high",
+    "Fence post 4",
+    "Fence rail 4 low",
+    "Fence rail 4 high"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  }
+ ],
+ "objects": [
+  {
+   "name": "Ground",
+   "role": "ground.earth",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "ground_mat"
+   ],
+   "mesh_name": "Ground",
+   "size": [
+    40.0,
+    26.0,
+    0.0
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 33.0,
+    "subdivided": false,
+    "fine_edge_m": 26.0,
+    "relief_m": 0.0
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish",
+    "displacement"
+   ]
+  },
+  {
+   "name": "Shed A wall north",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed A wall north",
+   "size": [
+    4.2,
+    0.3,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.2333332896232605,
+    "subdivided": false,
+    "fine_edge_m": 2.2333332896232605
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed A wall south",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed A wall south",
+   "size": [
+    4.2,
+    0.3,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.2333332896232605,
+    "subdivided": false,
+    "fine_edge_m": 2.2333332896232605
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed A wall east",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed A wall east",
+   "size": [
+    0.3,
+    3.4,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.9666667183240254,
+    "subdivided": false,
+    "fine_edge_m": 1.9666667183240254
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed A wall west",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed A wall west",
+   "size": [
+    0.3,
+    3.4,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.9666667183240254,
+    "subdivided": false,
+    "fine_edge_m": 1.9666667183240254
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed A roof",
+   "role": "roof.shingle",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "roof_mat"
+   ],
+   "mesh_name": "Shed A roof",
+   "size": [
+    4.6,
+    4.0,
+    1.5626
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 8,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 3.5502383909508106,
+    "subdivided": false,
+    "fine_edge_m": 3.5502383909508106
+   },
+   "missing": [
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Shed A wall north",
+     "Shed A wall south",
+     "Shed A wall east"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 38.0,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed A door",
+   "role": "timber.door",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "door_mat"
+   ],
+   "mesh_name": "Shed A door",
+   "size": [
+    0.9,
+    0.06,
+    1.9
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.9533333169917265,
+    "subdivided": false,
+    "fine_edge_m": 0.9533333169917265
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": 0.0,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "door_height",
+     "dimension": "height",
+     "value": 1.9,
+     "min": 1.6,
+     "max": 2.3,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_width",
+     "dimension": "width",
+     "value": 0.9,
+     "min": 0.6,
+     "max": 2.0,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_thickness",
+     "dimension": "thickness",
+     "value": 0.06,
+     "min": 0.025,
+     "max": 0.1,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed B wall north",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed B wall north",
+   "size": [
+    4.2,
+    0.3,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.2333332896232605,
+    "subdivided": false,
+    "fine_edge_m": 2.2333332896232605
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed B wall south",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed B wall south",
+   "size": [
+    4.2,
+    0.3,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.2333332896232605,
+    "subdivided": false,
+    "fine_edge_m": 2.2333332896232605
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed B wall east",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed B wall east",
+   "size": [
+    0.3,
+    3.4,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.9666667183240254,
+    "subdivided": false,
+    "fine_edge_m": 1.9666667183240254
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed B wall west",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "Shed B wall west",
+   "size": [
+    0.3,
+    3.4,
+    2.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.9666667183240254,
+    "subdivided": false,
+    "fine_edge_m": 1.9666667183240254
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed B roof",
+   "role": "roof.shingle",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "roof_mat"
+   ],
+   "mesh_name": "Shed B roof",
+   "size": [
+    4.6,
+    4.0,
+    1.5626
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 8,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 3.5502383909508106,
+    "subdivided": false,
+    "fine_edge_m": 3.5502383909508106
+   },
+   "missing": [
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Shed B wall north",
+     "Shed B wall south",
+     "Shed B wall east"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 38.0,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Shed B door",
+   "role": "timber.door",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "door_mat"
+   ],
+   "mesh_name": "Shed B door",
+   "size": [
+    0.9,
+    0.06,
+    1.9
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.9533333169917265,
+    "subdivided": false,
+    "fine_edge_m": 0.9533333169917265
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": 0.0,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "door_height",
+     "dimension": "height",
+     "value": 1.9,
+     "min": 1.6,
+     "max": 2.3,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_width",
+     "dimension": "width",
+     "value": 0.9,
+     "min": 0.6,
+     "max": 2.0,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_thickness",
+     "dimension": "thickness",
+     "value": 0.06,
+     "min": 0.025,
+     "max": 0.1,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence post 1",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 1",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence rail 1 low",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 1 low",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 1, Fence post 2"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence rail 1 high",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 1 high",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 1, Fence post 2"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence post 2",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 2",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence rail 2 low",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 2 low",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 2, Fence post 3"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence rail 2 high",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 2 high",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 2, Fence post 3"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence post 3",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 3",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence rail 3 low",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 3 low",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 3, Fence post 4"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence rail 3 high",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 3 high",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 3, Fence post 4"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence post 4",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 4",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence rail 4 low",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 4 low",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 4, Fence post 5"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence rail 4 high",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 4 high",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 4, Fence post 5"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence post 5",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 5",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence rail 5 low",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 5 low",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 5, Fence post 6"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence rail 5 high",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 5 high",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 5, Fence post 6"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence post 6",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 6",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.001,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence rail 6 low",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 6 low",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 6, Fence post 7"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence rail 6 high",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 6 high",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 6, Fence post 7"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence post 7",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 7",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Fence rail 7 low",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 7 low",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 7, Fence post 8"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence rail 7 high",
+   "role": "timber.fence",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence rail 7 high",
+   "size": [
+    2.0,
+    0.05,
+    0.1
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.7166666674117247,
+    "subdivided": false,
+    "fine_edge_m": 0.7166666674117247
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Fence post 7, Fence post 8"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Fence post 8",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Fence post 8",
+   "size": [
+    0.12,
+    0.12,
+    1.2
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.4800000141064326,
+    "subdivided": false,
+    "fine_edge_m": 0.4800000141064326
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.12,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop well",
+   "role": "stone.well",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "stone_mat"
+   ],
+   "mesh_name": "Prop well",
+   "size": [
+    1.4,
+    1.4,
+    0.9
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 76,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.44600549484437013,
+    "subdivided": false,
+    "fine_edge_m": 0.44600549484437013
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "well_height",
+     "dimension": "height",
+     "value": 0.9,
+     "min": 0.3,
+     "max": 1.4,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Prop barrel",
+   "role": "prop.barrel",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wood_mat"
+   ],
+   "mesh_name": "Prop barrel",
+   "size": [
+    0.7,
+    0.7,
+    0.9
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 60,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.39104213963139517,
+    "subdivided": false,
+    "fine_edge_m": 0.39104213963139517
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "barrel_height",
+     "dimension": "height",
+     "value": 0.9,
+     "min": 0.4,
+     "max": 1.3,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Iron band 1",
+   "role": "iron.fitting",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "iron_mat"
+   ],
+   "mesh_name": "Iron band 1",
+   "size": [
+    0.74,
+    0.74,
+    0.05
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 60,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.11291122540252545,
+    "subdivided": false,
+    "fine_edge_m": 0.11291122540252545
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "rust",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Iron band 2",
+   "role": "iron.fitting",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "iron_mat"
+   ],
+   "mesh_name": "Iron band 2",
+   "size": [
+    0.74,
+    0.74,
+    0.05
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 60,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.11291122540252545,
+    "subdivided": false,
+    "fine_edge_m": 0.11291122540252545
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "wetness",
+    "rust",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Iron post",
+   "role": "timber.post",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "iron_mat"
+   ],
+   "mesh_name": "Iron post",
+   "size": [
+    0.1,
+    0.1,
+    1.4
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.5333333263794581,
+    "subdivided": false,
+    "fine_edge_m": 0.5333333263794581
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Tree stump",
+   "role": "tree.bark",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "bark_mat"
+   ],
+   "mesh_name": "Tree stump",
+   "size": [
+    0.8,
+    0.8,
+    0.5
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 60,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.27071483996892115,
+    "subdivided": false,
+    "fine_edge_m": 0.27071483996892115
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "moss_and_algae",
+    "dirt"
+   ],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground",
+    "seat_ground_m": 0.0,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "tree_height",
+     "dimension": "height",
+     "value": 0.5,
+     "min": 1.0,
+     "max": 45.0,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  }
+ ],
+ "siblings": {
+  "wall.plaster": {
+   "count": 8,
+   "copies_share": 0.0,
+   "size_spread": 0.568,
+   "all_damaged": false
+  },
+  "timber.post": {
+   "count": 9,
+   "copies_share": 0.0,
+   "size_spread": 0.053,
+   "all_damaged": false
+  },
+  "timber.fence": {
+   "count": 14,
+   "copies_share": 0.0,
+   "size_spread": 0.0,
+   "all_damaged": false
+  }
+ },
+ "scatter": {
+  "groups": [],
+  "plants_per_100m2": 0.0,
+  "litter_per_100m2": 0.0,
+  "required": {
+   "plants": {
+    "required_by": [
+     "Ground"
+    ],
+    "count": 0,
+    "per_100_square_metres": 0.0,
+    "has": false
+   },
+   "litter_pieces": {
+    "required_by": [
+     "Ground"
+    ],
+    "count": 0,
+    "per_100_square_metres": 0.0,
+    "has": false
+   }
+  }
+ },
+ "normal_maps": {
+  "images": [],
+  "test_light": {
+   "verdict": "pass",
+   "detail": {
+    "ok +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4145,
+     "lit_is_brighter": true
+    },
+    "ok +Y": {
+     "lit_side": 0.7935,
+     "dark_side": 0.4108,
+     "lit_is_brighter": true
+    },
+    "flipped +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4146,
+     "lit_is_brighter": true
+    },
+    "flipped +Y": {
+     "lit_side": 0.4145,
+     "dark_side": 0.7941,
+     "lit_is_brighter": false
+    }
+   },
+   "line": "NORMAL_DIRECTION PASS (sun from +X: 0.794 vs 0.415; sun from +Y: 0.794 vs 0.411; the flipped-green control reads the other way: True)",
+   "control_fails": true
+  }
+ },
+ "displacement": {
+  "materials": [],
+  "objects": [],
+  "too_coarse": []
+ },
+ "roads": [
+  {
+   "name": "main road",
+   "ground_objects": [
+    "Ground"
+   ],
+   "relief_m": 0.0,
+   "ruts_found": false,
+   "rut_depth_m": 0.0,
+   "gauge_m": 1.6,
+   "gauge_in_settings_m": 1.3
+  }
+ ],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [
+   "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+  ],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "lamps": 1,
+  "suns": 1,
+  "world_light": true,
+  "emissive_materials": false,
+  "clip_share": null
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [
+   "floors_indoors"
+  ],
+  "share": 0.0
+ },
+ "construction_summary": {
+  "parts_checked": 40,
+  "objects_checked": 40,
+  "carried": 40,
+  "floating": [],
+  "hung": [
+   "Iron band 1",
+   "Iron band 2"
+  ],
+  "sample_spacing_metres": 0.02,
+  "sampled_coarser": false,
+  "scatter_exempt": 0,
+  "note": "scattered pieces (plants, leaves, litter) and never-roles are exempt on purpose: they stand on the ground by their own roots"
+ },
+ "non_mesh": [],
+ "problems": [],
+ "views": {
+  "for_film": false,
+  "render_size": [
+   1920,
+   1080,
+   100
+  ],
+  "cameras": [
+   {
+    "name": "Camera A",
+    "scene_camera": true,
+    "kind": "PERSP",
+    "lens_mm": 28.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 1000.0,
+    "farthest_depth_m": 27.46,
+    "farthest_object": "Ground",
+    "view_size": null,
+    "rays": 576,
+    "ray_grid": [
+     32,
+     18
+    ],
+    "rays_below_horizon": 512,
+    "empty_below_horizon": 140,
+    "empty_below_horizon_share": 0.2734375,
+    "ground_points": 232,
+    "sun": {
+     "ground_points": 232,
+     "shadowed": 6,
+     "shadowed_share": 0.02586206896551724,
+     "shadowed_by": [
+      {
+       "object": "Shed B wall west",
+       "points": 2
+      },
+      {
+       "object": "Shed B roof",
+       "points": 1
+      },
+      {
+       "object": "Fence post 5",
+       "points": 1
+      },
+      {
+       "object": "Fence post 8",
+       "points": 1
+      },
+      {
+       "object": "Prop barrel",
+       "points": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "world": {
+  "backdrops": [],
+  "backdrops_casting_shadows": [],
+  "far_large_casting_shadows": [],
+  "haze_volume": false
+ },
+ "sun": {
+  "name": "Sun",
+  "compass_degrees": 305.0,
+  "height_degrees": 35.0,
+  "energy": 3.0
+ },
+ "lettering": {
+  "checked": 0,
+  "objects": []
+ }
+}
