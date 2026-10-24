@@ -78,8 +78,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Everything saved to GitHub (log 35):** about 17,400 working files (8.7 GB) and 200 constructed scene files, including the store-only scenes,
   your textures and the Astra add-on, as you chose. Out: videos, audio, other people's work and 27 files with login keys. Map:
   `austerity-explainer/working-files/35 Working files, second save - what is here.md`.
-- **Running:** Opus's second pass on its village (drawing its last final pictures). No rented machines are working; a few cents of worker time
-  were used to fetch the store's scenes.
+- **Opus's second pass done and judged (log 36):** working from the blind judges' words, Opus raised its village from 6.0 to 7.2 out of 10 in a
+  fresh blind round (Sonnet alone 5.6, the plugin village 2.7), best in every view. Still too clean, thatch like scales, black puddles in the
+  stable yard, sandy close-up.
+- **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -579,7 +581,29 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     other people's work, and 27 files with login keys. **Cost:** a few cents of rented-machine time to read and fetch the store's scenes. Map of
     what is where and how to join split scenes: `austerity-explainer/working-files/35 Working files, second save - what is here.md`.
 
+36. **Opus's second pass, with the judges' words (24 October).** You said: "Let's see what Opus can do with one more pass. Give it instructions to
+    make it better." I gave Opus (maximum effort, the same rules: no plugin, Blender through its MCP connection only, no internet, no pictures)
+    its own first pass, every judge's comment on it word for word, what to keep and what to fix, grouped by roads and ground, puddles, the
+    clearing, buildings, and framing. It worked about 1 h 45 min before the computer restarted; a fresh Opus picked up its saved scene and
+    finished in 3 h 9 min more (about 4 h 55 min in all, no rented-machine money). **What changed:** darker damp mud with cracked lumps instead
+    of sand, wandering ruts that are pale when dry and dark when wet, a grass strip down the middle, ragged verges, clumped half-sunk stones,
+    hoof prints where horses walk, 14 dug mud holes where carts turn, murky water facing up, four more cottages, plots and a field, a real old
+    haystack and a cut one, lumpy thatch without floating straws, a half-timbered gable, deep windows, stained limewash, irregular mossy shingles,
+    stalls lit by small real windows instead of a hidden lamp, a lower warmer sun with haze, and every frame recomposed. The scene grew from
+    572 MB to 764 MB unpacked (206 to 251 MB as saved). **Blind judging, round 2** (the same three lenses, 20 pictures under shuffled letters):
+    Opus's second pass 7.2 out of 10 (photograph 7.0, request 7.4, film backdrop 7.1), Opus's first pass 6.0, Sonnet alone 5.6, the plugin
+    village 2.7; the second pass was the best picture in 13 of 15 picks and best in every view. **Still wrong:** surfaces too clean (plaster,
+    fences, trough, no mud at wall feet, no clutter), thatch that reads as scales, black-looking puddles in the stable yard, a close-up like
+    smooth beach sand with few stones, tram-line ruts and a mown lawn from above, perfect-dome haystacks, two cottages that are identical copies.
+    **What it means:** a second pass guided by blind judges' plain words added more than switching from Sonnet to Opus did (6.0 to 7.2, against
+    5.6 to 6.0). Opus listed eight techniques the plugin may not carry (ground colour standing in for distant grass, cracked mud lumps, rut edges
+    broken into lumps, puddle holes dug deeper than ruts, daylight through real openings, hoof prints where horses walk, clearing grass in front
+    of the lens, checking water faces up). Pictures: `36 Village by Opus, second pass - pictures/` (start with the four-way sheet); report,
+    feedback, scripts, logs and the judging in `village-without-plugin-opus/second-pass/`; both scenes, split into three parts each, under
+    `austerity-explainer/working-files/session-scratch/village-control-opus/`.
+
 ## Next step
 
-Waiting for Opus's second pass on its village to finish; then the same three blind judges score its first and second passes beside the
-Sonnet and plugin villages, and its scenes go to GitHub (the first-pass scene split into parts).
+Your rule says a set that used different tools updates the plugin. The one next step: your three runs (Opus rewrites the plugin, Sonnet
+rebuilds the village with it, Opus checks), replacing the plugin's own trees, backdrop, ground and light with what Sonnet and Opus did better on
+their own, and building in the step that helped most: blind judges' plain words, then one fix pass. Waiting for your go-ahead.
