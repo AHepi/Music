@@ -1,0 +1,64 @@
+{
+ "job": 2,
+ "scene": "/workspace/place-jobs/scenes/5dd1c4b4/canal_finished.blend",
+ "settings": "/workspace/place-jobs/scenes/5dd1c4b4/settings-7e7ca009-f3b44ea4/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v02-amount55-cover5",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.55,
+    "dials.moss_and_algae.cover": 0.05,
+    "dials.moss_and_algae.clump_size_metres": 0.2865
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v05-amount95-cover95",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.95,
+    "dials.moss_and_algae.cover": 0.95,
+    "dials.moss_and_algae.clump_size_metres": 0.4575
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v08-amount25-cover35",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.25,
+    "dials.moss_and_algae.cover": 0.35,
+    "dials.moss_and_algae.clump_size_metres": 0.4005
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+Preflight film (before filming): PASS. 0 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+Long step ready: filming the chapter (filming: about 43.8 min).
+
+Made 2026-10-16 11:21:19 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119.
+
+## Inputs not given (the stage runs without them, but checks less)
+
+- --rates RATES: this film's measured seconds a frame (rates.json); without this film's own measured rates the plan uses the table (round 4), which missed round 5 by 52%.
+  Make it: python3 calculators/plan_budget.py profile-commands EVENTS --scene S, film those short pieces, then plan_budget.py measure LOGS --events EVENTS --out rates.json
+
+## Cost and time
+
+- filming: about 43.8 min (2 worker(s), 1 stretch(es) under 2 hours; rates from the table (a fallback))
+- this preflight: 0.1 s
+
+## Checks run
+
+- PASS  a critique newer than every page file, each finding fixed or accepted: 0 fail, 0 look, 0 known, 1 pass, 0 info; exit 0, 0.0 s; preflight.py version d836d994
+  (inside the preflight)
+- PASS  a passed pages report newer than every page file: 0 fail, 0 look, 0 known, 1 pass, 0 info; exit 0, 0.0 s; preflight.py version d836d994
+  (inside the preflight)
+- PASS  filming time, workers, pieces, memory and disk (plan_budget.py filming): 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_budget.py version bdcb5933
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_budget.py filming /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz --scene inflation-chapter-2-newcomers --blender-running no --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119/03-filming-time-workers-pieces-memory-and-disk-plan.json
+
+## Inputs (sha1 when the run ended)
+
+- c2a6092782c6cd0fc8fb7c75ca7b96e510d482da  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz
+- 5f36b2ea290645ee34d943220a14b54ee5ea5be5  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/critique-empty.json
+- 1250e84bf378f18df940db9a2bc9da851036716e  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/pages
+- 9c9d664e68e15d0e47064ba230ea64c187c2bc08  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/pages/page-3.js
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119.json

@@ -1,0 +1,109 @@
+{
+ "job": 1,
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/canal_finished.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/place-settings.json",
+ "out_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/scout/run/pictures/job-1",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "auto",
+ "size": [
+  300,
+  200
+ ],
+ "samples": 8,
+ "quality": 85,
+ "check_reset": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "wet-max",
+   "is_baseline": false,
+   "set": {
+    "amount.wetness": 1.0,
+    "dials.wetness.darken": 0.6,
+    "dials.wetness.wet_roughness": 0.05
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "grime-max",
+   "is_baseline": false,
+   "set": {
+    "amount.grime": 1.0,
+    "dials.grime.darkening": 0.6,
+    "dials.grime.area_share": 0.6
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "dirt-max",
+   "is_baseline": false,
+   "set": {
+    "dials.dirt.film": 1.0,
+    "dials.dirt.dust": 1.0,
+    "dials.dirt.foot_height_metres": 1.5
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "weather-max",
+   "is_baseline": false,
+   "set": {
+    "dials.weathering.silvering": 1.0,
+    "dials.weathering.sun_fade": 1.0,
+    "dials.weathering.patina": 1.0
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "cracks-max",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 1.0,
+    "dials.cracks_and_chips.chip_amount": 1.0,
+    "dials.cracks_and_chips.crack_width_metres": 0.05
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "edge-max",
+   "is_baseline": false,
+   "set": {
+    "dials.edge_wear.width_metres": 0.1,
+    "dials.edge_wear.pale": 0.6
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "all-off",
+   "is_baseline": false,
+   "set": {
+    "master": 0.0
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

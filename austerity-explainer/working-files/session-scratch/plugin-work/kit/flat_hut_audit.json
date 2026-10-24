@@ -1,0 +1,1668 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-22T21:47:32",
+ "blender": "5.2.2 LTS",
+ "scene_file": "flat_hut.blend",
+ "scene_sha1": "3775e6d65002edc5f74be611b50c492faaf7745b",
+ "settings_file": null,
+ "settings_sha1": null,
+ "place": "flat_hut",
+ "place_type": "generic",
+ "look": "lived_in",
+ "state": "dry",
+ "quick": false,
+ "map_size_pixels": null,
+ "mask": {},
+ "masks_from": "whole_scene",
+ "picture": {
+  "camera": null,
+  "height_pixels": null,
+  "set": false
+ },
+ "counts": {
+  "objects_visible": 12,
+  "materials": 5,
+  "triangles": 130,
+  "triangles_by_owner": {
+   "unowned": 130
+  },
+  "scatter_pieces": 0,
+  "ground_area_m2": 196.0
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.earth": 1,
+   "wall.plaster": 4,
+   "roof.shingle": 1,
+   "timber.door": 1,
+   "timber.floor": 5
+  }
+ },
+ "materials": [
+  {
+   "name": "door_mat",
+   "role": "timber.door",
+   "roles": [
+    "timber.door"
+   ],
+   "users": 1,
+   "objects": [
+    "door"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "floor_mat",
+   "role": "timber.floor",
+   "roles": [
+    "timber.floor"
+   ],
+   "users": 5,
+   "objects": [
+    "floor_plank_1",
+    "floor_plank_2",
+    "floor_plank_3",
+    "floor_plank_4",
+    "floor_plank_float"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "ground_mat",
+   "role": "ground.earth",
+   "roles": [
+    "ground.earth"
+   ],
+   "users": 1,
+   "objects": [
+    "ground"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "displacement": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "node": null,
+      "method": "BUMP",
+      "depth_metres": 0.0,
+      "max_vertex_displacement": 0.0,
+      "mesh": null
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "count": 0,
+      "per_100_square_metres": 0.0
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "count": 0,
+      "per_100_square_metres": 0.0
+     }
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "rubbish",
+    "plants",
+    "litter_pieces"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "roof_mat",
+   "role": "roof.shingle",
+   "roles": [
+    "roof.shingle"
+   ],
+   "users": 1,
+   "objects": [
+    "roof"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "moss_and_algae",
+    "shape_damage"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "wall_mat",
+   "role": "wall.plaster",
+   "roles": [
+    "wall.plaster"
+   ],
+   "users": 4,
+   "objects": [
+    "wall_north",
+    "wall_south",
+    "wall_east",
+    "wall_west"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "images": 0,
+      "image_names": [],
+      "space": null,
+      "colourspace": null,
+      "uv_map": null,
+      "reaches_normal": false,
+      "strength": null,
+      "bump_leftover": 0.0,
+      "has_uv_node": false
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [
+    "normal_map",
+    "roughness_variation",
+    "colour_variation",
+    "bevelled_edges",
+    "dirt",
+    "grime",
+    "weathering",
+    "wetness",
+    "cracks_and_chips",
+    "edge_wear",
+    "moss_and_algae"
+   ],
+   "off_with_reason": {},
+   "glows": false
+  }
+ ],
+ "objects": [
+  {
+   "name": "ground",
+   "role": "ground.earth",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "ground_mat"
+   ],
+   "mesh_name": "ground",
+   "size": [
+    14.0,
+    14.0,
+    0.0
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 14.0,
+    "subdivided": false,
+    "relief_m": 0.0
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false
+  },
+  {
+   "name": "wall_north",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "wall_north",
+   "size": [
+    4.3,
+    0.3,
+    2.4
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.333333432674408,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "wall_south",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "wall_south",
+   "size": [
+    4.3,
+    0.3,
+    2.4
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.333333432674408,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "wall_east",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "wall_east",
+   "size": [
+    0.3,
+    3.7,
+    2.4
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.133333384990692,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "wall_west",
+   "role": "wall.plaster",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "wall_mat"
+   ],
+   "mesh_name": "wall_west",
+   "size": [
+    0.3,
+    3.7,
+    2.4
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 2.133333384990692,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "needs_ground": true,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "wall_thickness",
+     "dimension": "thickness",
+     "value": 0.3,
+     "min": 0.1,
+     "max": 0.9,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "roof",
+   "role": "roof.shingle",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "roof_mat"
+   ],
+   "mesh_name": "roof",
+   "size": [
+    4.6,
+    5.0,
+    2.0977
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 8,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 4.094896932612993,
+    "subdivided": false
+   },
+   "missing": [
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "wall_north",
+     "wall_south",
+     "wall_east"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 40.0,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "door",
+   "role": "timber.door",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "door_mat"
+   ],
+   "mesh_name": "door",
+   "size": [
+    0.9,
+    0.05,
+    1.9
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.9499999843537807,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": 0.0,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "door_height",
+     "dimension": "height",
+     "value": 1.9,
+     "min": 1.6,
+     "max": 2.3,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_width",
+     "dimension": "width",
+     "value": 0.9,
+     "min": 0.6,
+     "max": 2.0,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_thickness",
+     "dimension": "thickness",
+     "value": 0.05,
+     "min": 0.025,
+     "max": 0.1,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_1",
+   "role": "timber.floor",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "floor_mat"
+   ],
+   "mesh_name": "floor_plank_1",
+   "size": [
+    0.2,
+    3.0,
+    0.04
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.0800000006953876,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "plank_width",
+     "dimension": "middle",
+     "value": 0.2,
+     "min": 0.08,
+     "max": 0.35,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "plank_thickness",
+     "dimension": "thickness",
+     "value": 0.04,
+     "min": 0.012,
+     "max": 0.08,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_2",
+   "role": "timber.floor",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "floor_mat"
+   ],
+   "mesh_name": "floor_plank_2",
+   "size": [
+    0.2,
+    3.0,
+    0.04
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.0800000006953876,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "plank_width",
+     "dimension": "middle",
+     "value": 0.2,
+     "min": 0.08,
+     "max": 0.35,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "plank_thickness",
+     "dimension": "thickness",
+     "value": 0.04,
+     "min": 0.012,
+     "max": 0.08,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_3",
+   "role": "timber.floor",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "floor_mat"
+   ],
+   "mesh_name": "floor_plank_3",
+   "size": [
+    0.2,
+    3.0,
+    0.04
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.0800000006953876,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "plank_width",
+     "dimension": "middle",
+     "value": 0.2,
+     "min": 0.08,
+     "max": 0.35,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "plank_thickness",
+     "dimension": "thickness",
+     "value": 0.04,
+     "min": 0.012,
+     "max": 0.08,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_4",
+   "role": "timber.floor",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "floor_mat"
+   ],
+   "mesh_name": "floor_plank_4",
+   "size": [
+    0.2,
+    3.0,
+    0.04
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.0800000006953876,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "plank_width",
+     "dimension": "middle",
+     "value": 0.2,
+     "min": 0.08,
+     "max": 0.35,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "plank_thickness",
+     "dimension": "thickness",
+     "value": 0.04,
+     "min": 0.012,
+     "max": 0.08,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_float",
+   "role": "timber.floor",
+   "owner": "unowned",
+   "collection": "Scene Collection",
+   "materials": [
+    "floor_mat"
+   ],
+   "mesh_name": "floor_plank_float",
+   "size": [
+    0.2,
+    3.0,
+    0.04
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 12,
+    "plain_box": true,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 1.0800000006953876,
+    "subdivided": false
+   },
+   "missing": [
+    "bevelled_edges",
+    "shape_damage"
+   ],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": false,
+    "via": [],
+    "hung": false,
+    "hang_allowed": false,
+    "gap_mm": 60.0,
+    "floating": true,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 1.38,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "needs_ground": false,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "plank_width",
+     "dimension": "middle",
+     "value": 0.2,
+     "min": 0.08,
+     "max": 0.35,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "plank_thickness",
+     "dimension": "thickness",
+     "value": 0.04,
+     "min": 0.012,
+     "max": 0.08,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "sun",
+   "role": "never.light",
+   "owner": "unowned",
+   "collection": null,
+   "materials": [],
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "uv": {
+    "has": true
+   },
+   "geometry": {},
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "construction": {
+    "carried": true,
+    "buried_light": true,
+    "parts": 0,
+    "floating": false,
+    "hung": false
+   },
+   "mesh_name": null
+  }
+ ],
+ "siblings": {
+  "wall.plaster": {
+   "count": 4,
+   "copies_share": 0.0,
+   "size_spread": 0.573,
+   "all_damaged": false
+  },
+  "timber.floor": {
+   "count": 5,
+   "copies_share": 0.0,
+   "size_spread": 0.0,
+   "all_damaged": false
+  }
+ },
+ "scatter": {
+  "groups": [],
+  "plants_per_100m2": 0.0,
+  "litter_per_100m2": 0.0
+ },
+ "normal_maps": {
+  "images": [],
+  "test_light": {
+   "verdict": "pass",
+   "detail": {
+    "ok +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4145,
+     "lit_is_brighter": true
+    },
+    "ok +Y": {
+     "lit_side": 0.7935,
+     "dark_side": 0.4108,
+     "lit_is_brighter": true
+    },
+    "flipped +X": {
+     "lit_side": 0.7942,
+     "dark_side": 0.4146,
+     "lit_is_brighter": true
+    },
+    "flipped +Y": {
+     "lit_side": 0.4145,
+     "dark_side": 0.7941,
+     "lit_is_brighter": false
+    }
+   },
+   "line": "NORMAL_DIRECTION PASS (sun from +X: 0.794 vs 0.415; sun from +Y: 0.794 vs 0.411; the flipped-green control reads the other way: True)",
+   "control_fails": true
+  }
+ },
+ "displacement": {
+  "materials": [],
+  "objects": [],
+  "too_coarse": []
+ },
+ "roads": [],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [
+   "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+  ],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "lamps": 1,
+  "suns": 1,
+  "world_light": true,
+  "emissive_materials": false,
+  "clip_share": null
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [
+   "floors_indoors"
+  ],
+  "share": 0.0
+ },
+ "construction_summary": {
+  "parts_checked": 11,
+  "objects_checked": 12,
+  "carried": 11,
+  "floating": [
+   "floor_plank_float"
+  ],
+  "hung": [],
+  "sample_spacing_metres": 0.02,
+  "sampled_coarser": false,
+  "scatter_exempt": 0,
+  "note": "scattered pieces (plants, leaves, litter) and never-roles are exempt on purpose: they stand on the ground by their own roots"
+ },
+ "problems": [
+  "the roads step is not available (surfaces/roads.py)"
+ ]
+}

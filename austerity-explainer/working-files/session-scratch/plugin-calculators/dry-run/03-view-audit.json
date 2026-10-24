@@ -1,0 +1,215 @@
+{
+ "place": "corner-shop",
+ "views": {
+  "counter": {
+   "kind_of_shot": [
+    "interior"
+   ],
+   "reading_spot": "composed",
+   "signs": {
+    "till display": {
+     "plate": {
+      "across": 0.5372,
+      "down": 0.563,
+      "depth": 3.2733,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 3.2831,
+      "facing": 0.997,
+      "across_facing": 0.9997,
+      "back_shows": false,
+      "letter_pixels": 7.0547,
+      "letter_width_pixels": 7.0547,
+      "face_on_pixels": 7.0547,
+      "height_factor": 1.0,
+      "width_factor": 1.0
+     },
+     "composed": {
+      "across": 0.5372,
+      "down": 0.5718,
+      "depth": 2.8735,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 2.8844,
+      "facing": 0.9962,
+      "across_facing": 0.9997,
+      "back_shows": false,
+      "letter_pixels": 8.0363,
+      "letter_width_pixels": 8.0363,
+      "face_on_pixels": 8.0363,
+      "height_factor": 1.0,
+      "width_factor": 1.0,
+      "needed_by_page": true,
+      "verdict": "too small"
+     }
+    },
+    "tobacco sign": {
+     "plate": {
+      "across": 0.6397,
+      "down": 0.436,
+      "depth": 4.6983,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 4.7309,
+      "facing": 0.9931,
+      "across_facing": 0.9958,
+      "back_shows": false,
+      "letter_pixels": 35.1073,
+      "letter_width_pixels": 35.1073,
+      "face_on_pixels": 35.1073,
+      "height_factor": 1.0,
+      "width_factor": 1.0
+     },
+     "composed": {
+      "across": 0.6492,
+      "down": 0.43,
+      "depth": 4.2985,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 4.3331,
+      "facing": 0.992,
+      "across_facing": 0.9953,
+      "back_shows": false,
+      "letter_pixels": 38.3726,
+      "letter_width_pixels": 38.3726,
+      "face_on_pixels": 38.3726,
+      "height_factor": 1.0,
+      "width_factor": 1.0,
+      "needed_by_page": false,
+      "verdict": "legible"
+     }
+    }
+   }
+  }
+ },
+ "stencil_turns": [],
+ "loud_signs": [],
+ "landmarks": [
+  {
+   "view": "counter",
+   "spot": "plate",
+   "landmark": "street lamp across the road",
+   "across": 0.2215,
+   "down": 0.2363,
+   "depth": 11.0783,
+   "top_height": 5.0,
+   "height_for_clear": 4.9528,
+   "verdict": "just under the band"
+  },
+  {
+   "view": "counter",
+   "spot": "composed",
+   "landmark": "street lamp across the road",
+   "across": 0.2097,
+   "down": 0.2265,
+   "depth": 10.6785,
+   "top_height": 5.0,
+   "height_for_clear": 4.8318,
+   "verdict": "just under the band"
+  }
+ ],
+ "figures": [],
+ "continuity": {
+  "counter/all": {
+   "total": 0,
+   "by_group": {}
+  }
+ },
+ "problems": [
+  "till display (\"\u00a51,050\") in counter (composed spot): letters 8.0 px tall, under 20 px. Make the letters 0.035 m tall for 20 px (0.044 m for 25 px), bring it nearer, or let a typed label carry the word."
+ ],
+ "warnings": [
+  "street lamp across the road in counter (plate): its top lands 0.236 down, within 0.02 of the words band; 5.0 m tall (now 5.0) clears 0.24. Look at the plate.",
+  "street lamp across the road in counter (composed): its top lands 0.226 down, within 0.02 of the words band; 4.8 m tall (now 5.0) clears 0.24. Look at the plate."
+ ],
+ "notes": [
+  "Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says)."
+ ],
+ "calculator": "view_audit audit",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "lettering.must_read_min_pixels": {
+   "value": 20,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "lettering.must_read_comfortable_pixels": {
+   "value": 25,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "lettering.not_meant_to_read_max_pixels": {
+   "value": 14,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "views_and_models.view_audit.must_read_facing_min_cos": {
+   "value": 0.85,
+   "unit": "cosine between the sign's face and the way to the camera, across (the width of the letters)",
+   "kind": "invented"
+  },
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "safe_area.title_band_down": {
+   "value": [
+    0.05,
+    0.22
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.landmark_top_min_down": {
+   "value": 0.24,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.text_left_pixels": {
+   "value": 65,
+   "unit": "pixels (0.06 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.text_right_pixels": {
+   "value": 972,
+   "unit": "pixels (0.90 of the width)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share": {
+   "value": 0.85,
+   "unit": "share of the title zone that is sky",
+   "kind": "judged"
+  },
+  "people.head_height_metres": {
+   "value": 0.23,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "people.facing_head_max_pixels": {
+   "value": 24,
+   "unit": "pixels tall",
+   "kind": "invented"
+  },
+  "people.backs_to_camera_min_distance_metres": {
+   "value": 6.0,
+   "unit": "metres from every camera spot along a slide",
+   "kind": "judged"
+  },
+  "views_and_models.view_audit.face_shows_within_degrees": {
+   "value": 100,
+   "unit": "degrees between a figure's facing and the way to the camera",
+   "kind": "invented"
+  },
+  "views_and_models.view_audit.figure_half_width_metres": {
+   "value": 0.25,
+   "unit": "metres either side of a figure's feet",
+   "kind": "judged"
+  }
+ }
+}

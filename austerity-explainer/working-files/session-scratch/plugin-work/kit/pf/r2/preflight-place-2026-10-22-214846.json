@@ -1,0 +1,236 @@
+{
+ "stage": "place",
+ "stage_means": "after building a place and before drawing its views (the order: shots, build the place, place, plates)",
+ "verdict": "warn",
+ "counts": {
+  "fail": 0,
+  "warn": 3,
+  "known": 0,
+  "info": 0,
+  "pass": 15
+ },
+ "guarded_step": "drawing this place's views and plates (the long step: a place that fails is drawn again)",
+ "step_kind": "long",
+ "blocked": false,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.1,
+ "changed_inputs": [],
+ "started": "2026-10-22 21:48:46",
+ "first_lines": [
+  "Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): PASS, with things to look at. 0 to fix, 3 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.",
+  "Long step ready: drawing this place's views and plates (the long step: a place that fails is drawn again)."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "c66d4241",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r2/preflight-place-2026-10-22-214846",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place/finished_hut_audit.json": "53abb80d0027420e1b4535fc55e8624cfc92c422",
+  "/home/user/Music/plugins/explainer-film/kit/film-settings.json": "4470e8985c2b0b5a9fec18d7b88da0378696778e"
+ },
+ "missing": [
+  {
+   "input": "blend",
+   "option": "--blend",
+   "what": "the finished scene file the audit was made from (a changed file makes the audit stale)",
+   "make": "explainer-film-place finish --scene SCENE.blend --save-as FINISHED.blend",
+   "needed_by": "the freshness check of the audit",
+   "required": false,
+   "why": "without it a scene changed after the audit would not be noticed (the audit's own scene_file is used when it is beside the audit)",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "the place audit: surfaces, wear and construction (place_audit_check.py)",
+   "tool": "calculators/place_audit_check.py",
+   "version": "67b75bed",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place/finished_hut_audit.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r2/preflight-place-2026-10-22-214846/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r2/preflight-place-2026-10-22-214846/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r2/preflight-place-2026-10-22-214846/01-the-place-audit-surfaces-wear-and-construction-p.txt",
+   "seconds": 0.05,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "place: quick output",
+     "where": "",
+     "text": "not a quick trial",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: stale audit",
+     "where": "",
+     "text": "not checked: the scene file was not given (--blend FILE.blend), so a changed scene would not be noticed.",
+     "fix": "give --blend with the finished scene file.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: roles",
+     "where": "",
+     "text": "every visible object has a role (9 objects)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: treatments",
+     "where": "",
+     "text": "every required treatment is there",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "every layer amount is there and above its floor (state \"dry\")",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: off reasons",
+     "where": "",
+     "text": "nothing is switched off",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: normal maps",
+     "where": "",
+     "text": "1 normal map(s): Non-Color, tangent, wired, pointing the right way",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: uv",
+     "where": "",
+     "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: displacement",
+     "where": "",
+     "text": "displacement is set where the role needs it, on a mesh that can show it",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: construction",
+     "where": "",
+     "text": "9 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: scale",
+     "where": "",
+     "text": "0 size(s) fit the real-world facts",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: plain boxes",
+     "where": "",
+     "text": "0% plain boxes (at most 15%)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: keep-out",
+     "where": "",
+     "text": "no plant or litter on a wheel track, a crown, a puddle or a keep-out",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: budgets",
+     "where": "",
+     "text": "triangles and scattered pieces are within the budgets",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: light",
+     "where": "",
+     "text": "the scene has light",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: renderer",
+     "where": "",
+     "text": "renderer EEVEE:",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "the audit is about this scene file (freshness)",
+   "tool": "preflight.py place",
+   "version": "c66d4241",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "place: stale audit",
+     "where": "",
+     "text": "not checked: the scene file was not given (--blend FILE.blend), so a changed scene would not be noticed.",
+     "fix": "give --blend with the finished scene file.",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "a fresh checker has looked",
+   "tool": "preflight.py place",
+   "version": "c66d4241",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "place: fresh checker",
+     "where": "",
+     "text": "not checked: no fresh checker has looked at this place (--fresh-check).",
+     "fix": "run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "warn"
+  }
+ ],
+ "known_lists": [],
+ "notes": [
+  "The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look."
+ ],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r2/preflight-place-2026-10-22-214846.md"
+}

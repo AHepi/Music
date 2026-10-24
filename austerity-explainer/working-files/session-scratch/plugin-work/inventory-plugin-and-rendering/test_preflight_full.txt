@@ -1,0 +1,91 @@
+== preflight: stages, accepted problems, missing inputs, the critique and the gate
+PASS  --list names every stage and each input's maker: exit 0, 56 makers listed
+      proves: a model can ask the preflight what each stage needs
+PASS  --example-plan is a plan with every stage: about, kit, reports, script, record, shots, plates, paint, pages, film, finish, accepted
+PASS  the wrapper bin/explainer-film-preflight runs the plugin kit's preflight: exit 0
+PASS  script: the newcomer script is stopped only for its missing key page (exit 1): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 2 check(s) in 0.2 s.
+      recorded in: test_lint_script.py: the newcomer script's only error is the missing key mark
+      proves: the stage runs lint_script.py before and blocks the paid recording on its error
+PASS  script: the first lines say FAIL and block the paid step with its price: Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 2 check(s) in 0.2 s. / Paid step BLOCKED: recording the narration with the voice service (about US$1.10: 6,287 credits: one per letter sent, the cue included; US$19.15 left of the allowance "full redesign"). First fix the failures below (or accept them, with who and when), then run this stage again.
+PASS  script: the voice costs US$1.10 (6,287 credits): got 1.1, recorded 1.1 (allowed difference 0.005)
+      recorded in: test_plan_budget.py: credits 6,287, US$1.10 (counted by text length)
+      proves: only repeats lint_script.py's price
+PASS  script: the allowance left is read from the spend ledger (US$19.15 of "full redesign", the step fits): {"name": "full redesign", "left_dollars": 19.15, "next_cost_dollars": 1.1, "fits": true}
+      recorded in: test_plan_budget.py: the US$20 allowance spent 0.85
+      proves: only repeats plan_budget.py ledger
+PASS  script: the estimated timeline is kept next to the report: [{"what": "the chapter, as estimated from the script", "seconds": 401.7, "note": "saved as /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/inventory-plugin-and-rendering/tmp/preflight-test-axv7orus/preflight-reports/preflight-script-2026-10-22-202451/estimated-timeline.json"}]
+PASS  script: the report hashes its inputs (the script, word times, ledger and film-settings.json) and names each tool's version: ["/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/budget/spend-ledger-logs-10-to-34.json", "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/script/newcomer-narration-script.json", "/home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2/word-times.json", "/home/user/Music/plugins/explainer-film/kit/film-settings.json"]
+PASS  script: with the key page accepted (who and date given) it passes, listing it as known: Preflight script (before recording the narration): PASS, with things to look at. 0 to fix, 11 to look at, 1 known and accepted, 0 input(s) missing; 1 check(s) in 0.2 s.
+PASS  script: an accepted entry without who and date is not used (still exit 1, with a note): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.1 s.
+PASS  script: an accepted entry with a one-letter "check" with "whenever" as its date opens nothing (exit 1, the key page still to fix): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.1 s.
+PASS  script: an accepted entry with a date after today opens nothing (exit 1, the key page still to fix): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.1 s.
+PASS  script: an accepted entry with no stage opens nothing (exit 1, the key page still to fix): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.1 s.
+PASS  script: an accepted entry with no reason opens nothing (exit 1, the key page still to fix): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.1 s.
+PASS  script: an accepted entry with a check that is only part of the name ("key") opens nothing (exit 1, the key page still to fix): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.2 s.
+PASS  script: an accepted entry with a text of two letters and no check ("pa") opens nothing (exit 1, the key page still to fix): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.1 s.
+PASS  script: an accepted entry with a text that is only part of a word ("mark") opens nothing (exit 1, the key page still to fix): Preflight script (before recording the narration): FAIL. 1 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.2 s.
+PASS  script: an entry that matches 5 findings (more than film-settings.json preflight.accepted_entry_most_findings, 3) stops the stage (exit 2); "Key-Page" still matches "key page" exactly: Preflight script (before recording the narration): INPUTS MISSING OR UNUSABLE. 0 to fix, 11 to look at, 1 known and accepted, 1 input(s) missing; 1 check(s) in 0.3 s.
+      proves: a broad acceptance cannot wave a paid step through; each entry's count is listed
+PASS  script: a broken accepted file stops the stage with a plain line (exit 2), not a Python error: Preflight script (before recording the narration): INPUTS MISSING OR UNUSABLE. 0 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 0 check(s) in 0.0 s.
+PASS  script: a broken script file is "given but it cannot be used" (exit 2), not a Python error: Preflight script (before recording the narration): INPUTS MISSING OR UNUSABLE. 0 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 0 check(s) in 0.0 s.
+PASS  plates with nothing given: exit 2, naming the check file, plate, plate facts, render log and shot report, each with its maker: exit 2; missing ['check', 'plate', 'plate_facts', 'render_log', 'shot_report']
+      proves: a stage without its inputs says exactly which file to make and which tool makes it
+PASS  a named input that is not there is reported as given but not found (exit 2): Preflight script (before recording the narration): INPUTS MISSING. 0 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 0 check(s) in 0.0 s.
+PASS  shots: the Works run place_facts, plan_shot, view_audit, plan_effects wind and plan_lights for each view: place_facts.py, plan_shot.py, view_audit.py, plan_effects.py, plan_lights.py, plan_lights.py, preflight.py
+PASS  shots: round 5's W1 and W3 pass the shot planner; the letters too small in W3 (the overview) fail in view_audit: 7 letter faults, all in w3
+      recorded in: test_plan_shot.py (W1 and W3 as built); test_view_audit.py (PETROL in W3 far under 20 px)
+PASS  shots: a check file without "kind_of_shot" is flagged to look at: works-w1-shot-check.json
+PASS  shots: checkout C1's 0.7 m slide fails (1.317 times nearer against 1.286), the hold-out finding: The 0.70 m slide brings the nearest painted thing, basket (its nearest corner 2.21 m away at the end), 1.317 times nearer; the painting's 2672 rows allow 1.286;
+      recorded in: test_plan_shot.py: the slide is 1.317 times nearer and fails; the longest safe slide 0.63 m
+PASS  shots: the notice corner's accepted list is shown as known (4 entries, signed), and its slide is known, not failed: Preflight shots (before building or drawing a place's views): FAIL. 1 to fix, 12 to look at, 1 known and accepted, 0 input(s) missing; 6 check(s) in 0.3 s.
+      recorded in: notice-corner-place-facts.json accepted (decision 38: the user kept the shot)
+PASS  shots: a slide grown worse than it was accepted at stays a failure even with an accepted entry for it (the entry never turns a "worse" finding back into known): fail: The 1.50 m slide brings the nearest painted thing, pail (its nearest corner 3.03
+      recorded in: tester log 35: worse/acc.json moved it to known
+PASS  shots: an accepted entry with "measured" 1.40 makes checkout C1's slide (1.317) known: known: The 0.70 m slide brings the nearest painted thing, basket (its nearest corner 2. / pass: The 0.70 m slide brings the nearest painted thing, basket (its nearest corner 2.
+PASS  shots: accepted at 1.20, the slide now measures 1.317: worse than accepted, so it fails again: 2672 rows allow 1.286; the longest slide for it is 0.63 m. (Accepted at 1.2 by the test, 2026-10-14; it is now 1.3166: worse than accepted, so it counts again.)
+PASS  shots: the brazier smoke crossing man 2 in W1 is shown to look at (it used to be dropped from the report): w1 (slide start) brazier fire: smoke stronger than 0.2 crosses man-2 (a man in smoke reads as a grey ghost; round 1)
+      recorded in: tester log 35: plan_effects wind fire_smoke[1].problems never reached the shots report
+PASS  shots: with the page's named signs per view, unnamed drum letters in W3 are a look, not a failure; the word card given for W3 reaches plan_effects wind (its plume under the lower card fails): 3 letter failure(s) in w3; drums: ['warn', 'warn', 'warn', 'warn']; wind fail
+      recorded in: tester log 35: 7 of the 9 blocking failures were drum and crate letters nobody needs to read
+PASS  shots: a broken check file is "given but it cannot be used" (exit 2), not a Python error: Preflight shots (before building or drawing a place's views): INPUTS MISSING OR UNUSABLE. 0 to fix, 37 to look at, 0 known and accepted, 1 input(s) missing; 6 check(s) in 0.3 s.
+PASS  plates: an empty render log is not a clean render, and a one-line made-up report is not the shot checker's (both fail): log fail, report fail: report.md is not the shot checker's report (it has no "# Shot check:" title and "Made by c
+      recorded in: tester log 35: both passed as "clean render" and "light rules passed" (decision 37)
+PASS  plates: the clean log of another render (it never saves this plate) fails: no log given saves people-test-plate.png (they save: works-w1-behind-plate.png, works-w1-men-gone-plate.png, works-w1-pl
+PASS  plates: the round 5 log that saves works-w1-plate.png passes; the price is worked out from the plate's own size (300 x 220 here): pass; urned and sent (the plate 300 x 220, the house's style-picture size 768 x 1368 (give --style-picture for its real size))
+PASS  plates: a problem the check file "accepted" without who and when counts as new (fail), not known: The subject is only 1.1 times the frame's mean (needs 1.8) (accepted in the check file without who and when, so it counts as new)
+      recorded in: tester log 35: tester/unsigned/known.json came back "known"
+PASS  plates: a known.json the shot checker did not write fails: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/inventory-plugin-and-rendering/tmp/preflight-test
+PASS  pages: pages 3 to 5 fail on 8 lookups without a "which time" and MACHINES readable 0.84 s (exit 1): Preflight pages (while building pages): FAIL. 9 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 2 check(s) in 0.2 s.
+      recorded in: test_plan_page_timing.py (8 lookups; MACHINES 0.84 s)
+PASS  pages: with those nine accepted in the preflight plan it passes, all nine known: Preflight pages (while building pages): PASS. 0 to fix, 0 to look at, 9 known and accepted, 0 input(s) missing; 2 check(s) in 0.2 s.
+      proves: the plan's accepted list reaches plan_page_timing.py and the preflight
+PASS  gate: the passed pages report opens the gate: got 0, expected 0
+PASS  film: the critique is newer than the pages but its must-fix finding is open: blocked: Preflight film (before filming): FAIL. 4 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+PASS  film: the pages report came before the page files were written, so it must run again: {"a critique newer than every page file, each finding fixed or accepted": "fail", "a passed pages report on these events, newer than every page file": "fail", "filming time, workers, pieces, memory and disk (plan_budget.py filming)": "fail"}
+PASS  film: the filming time is planned from the events (about 50 min from the table): {"what": "filming", "seconds": 2628.2, "note": "2 worker(s), 1 stretch(es) under 2 hours; rates from the table (a fallback)"}
+      recorded in: plan_budget.py filming on pages 3-5: 50.7 min with one worker (the table, a fallback)
+PASS  film: events made before the page files were edited are stale: filming is blocked until they are made again: the events file events-pages-3-5.json.gz (2026-10-22 20:24) is older than page-5.js: the pages changed after the events were made
+FAIL  film: with the finding fixed, a fresh critique and a fresh passed pages report, filming is ready (exit 0): Preflight film (before filming): FAIL. 1 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s. / Long step BLOCKED: filming the chapter (filming: about 43.8 min). First fix the failures below (or accept them, with who and when), then run this stage again.
+PASS  film: a critique with an empty JSON {}: exit 2 ("not a critique-film result"): Preflight film (before filming): INPUTS MISSING OR UNUSABLE. 1 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 3 check(s) in 0.1 s.
+PASS  film: a critique with findings kept under another key: exit 2 ("not a critique-film result"): Preflight film (before filming): INPUTS MISSING OR UNUSABLE. 1 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 3 check(s) in 0.1 s.
+PASS  film: a critique with an open "must-fix" (with a hyphen): exit 1, the critique check fail: Preflight film (before filming): FAIL. 2 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+PASS  film: a critique with an open finding with a severity the workflow never uses: exit 1, the critique check fail: Preflight film (before filming): FAIL. 2 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+FAIL  film: a critique with a clean result (confirmed: []) whose critics' raw finding the skeptic rejected: exit 0, the critique check pass: Preflight film (before filming): FAIL. 1 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+PASS  film: a passed pages report made on OTHER events does not count: filming these events is blocked: no pages report in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/inventory-plugin-and-rendering
+      recorded in: tester log 35: filmtest2 filmed events-pages-3-5 on a report about events-test-clean
+PASS  gate: the pages gate stays closed for events the newest report was not made on: GATE pages: CLOSED. The newest report (2026-10-22 20:25:02) was not made on /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/inventory-plugin-and-rendering/tmp/preflight-test-axv7orus/events-test-clean.json.gz: run the stage on these inputs.
+PASS  gate: the newest pages report (on the plan's events) still opens the gate: got 0, expected 0
+PASS  gate: withdrawing an acceptance from the plan closes the gate (the plan is an input): GATE pages: CLOSED. preflight-plan.json changed since the newest report (2026-10-22 20:25:02). Run the stage again.
+PASS  film: a critique older than a page file blocks filming: Preflight film (before filming): FAIL. 3 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.
+      proves: the critique must be newer than every page file
+PASS  gate: an input changed since the newest pages report closes the gate: GATE pages: CLOSED. events-pages-3-5.json.gz changed since the newest report (2026-10-22 20:25:02). Run the stage again.
+PASS  an input that changes while the stage runs makes the report STALE (blocked): ["/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/inventory-plugin-and-rendering/tmp/preflight-test-axv7orus/changing.txt"]
+PASS  plain lines are read as findings when a tool writes no verdicts (sound_gates.py): got ['pass', 'fail', 'warn'], expected ['pass', 'fail', 'warn']
+PASS  a "problems" list counts as a failure only when the tool exits non-zero: got 'warn', expected 'warn'
+PASS  a jump outside the planned cuts (find_jumps.py's JUMP line) is a look for a person, not a block: [{"verdict": "warn", "check": "", "where": "", "text": "JUMP 12.37 s change 41.2 (9.8 times the neighbours)", "fix": ""}]
+      recorded in: tester log 35: the delivered, accepted film 20 showed 46 such jumps (its own moves and fades)
+PASS  --list names the film stage's scene (it is required): film: ... --scene
+PASS  a kit folder that is not there stops with exit 2 and a plain line: Preflight script: INPUTS MISSING OR UNUSABLE. The kit /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/inventory-plugi
+PASS  finish: a broken timeline is "given but it cannot be used" (exit 2), not a Python error: Preflight finish (after finishing): INPUTS MISSING OR UNUSABLE. 1 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 1 check(s) in 0.2 s.
+PASS  a tool that stops with an error is a failure that says so: it stopped with an error: Traceback (most recent call last): | KeyError: step
+-- preflight: stages, accepted problems, missing inputs, the critique and the gate: 64 of 66 checks passed; FAILED: film: with the finding fixed, a fresh critique and a fresh passed pages report, filming is ready (exit 0), film: a critique with a clean result (confirmed: []) whose critics' raw finding the skeptic rejected: exit 0, the critique check pass

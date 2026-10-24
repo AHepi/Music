@@ -1,0 +1,44 @@
+Lights of corner-shop for view counter (subject: till display): 5 light(s).
+No key light found for the subject (a light whose reaches_only names it, or that is aimed at it): give --reference.
+
+ceiling tube (AREA, 60.0 W): fill (none of the above); no shadows
+
+tobacco sign glow (AREA, 5.0 W): lamp (0.04 m from tobacco sign); no shadows
+  housing: tobacco sign (0.04 m); it still lights tobacco sign: add them to its skips
+  close: cigarette shelf (0.25 m): skip them if they come out as bright as the subject
+  PROBLEM lights tobacco sign (its housing; lesson 120, log 32): skip them
+  PROBLEM it lights window (+x) (facing the camera) 0.78 W/m2 against the subject's 0.07: move it behind that face (to an inner face), or link it to skip it; at the same place it would need 9% of its watts
+
+till key (SPOT, None W): accent (reaches only till, till display (the subject's own light)); no shadows
+  housing: counter (0.50 m) (linked out)
+  reach: 1.05 m (the farthest lit part of till display is 0.85 m away, from the place facts' boxes (rough: walls are not in them; use set_measurements.py beam))
+  first surface it should not light: tobacco sign at 2.34 m (linked out: its reaches_only list keeps the light off it)
+  cone that just covers it: 16 degrees aimed at the subject's middle (even light), or 16 degrees aimed at its bottom edge (lit from below; its top stays outside the cone, warm bottom and cool top); blend 0.9; it has 15
+
+street lamp outside (POINT, 600.0 W): lamp (its name says "lamp"); no shadows
+
+vending machine glow (AREA, 80.0 W): fill (none of the above); no shadows
+
+Lamps on the frame (6 checked; the lines meet at 0.500 across, 0.500 down): none in the way.
+
+Shadows: only (none: name a key, fire, doorway or sky light) cast shadows; every other light none. Figures: visible_shadow off, each with a soft foot patch 0.5 x 0.35 m.
+EEVEE for a 1536-wide plate: shadow_pool_size '1024', shadow_resolution_scale 0.703. After every render run plan_lights.py render-log on its log; a shadow fault draws false black wedges (lesson 110).
+Plate time: measure and record it (round 3: about 25 minutes with every light casting, about 6 with three).
+
+2 problem(s). Tuning by small renders (tune_lights) is not built yet: change one named light at a time and re-run the shot checker.
+
+Settings used (film-settings.json):
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  light_planner.shadow_casting_kinds = ["key", "fire", "doorway", "sky"] kinds of light that cast shadows (every other light casts none) (judged)
+  light_planner.foot_patch_metres = [0.5, 0.35] metres (width, depth) of the soft shadow under a figure that casts no shadow (judged)
+  light_planner.container_skip_within_metres = 0.6 metres: a fire's light skips every prop this close (the container it burns in, the chair beside it); other lights get a note for props this close (judged)
+  light_planner.near_surface_within_metres = 1.0 metres: a camera-facing surface this close to a light is checked against the subject (a lamp lights the face it hangs on) (judged)
+  light_planner.reach_margin_metres = 0.2 metres past the farthest lit part of the target (judged)
+  light_planner.cone_blend = 0.9 Blender spot blend (judged)
+  light_planner.lamp_clear_of_subject_pixels = 18 pixels on the film frame between a lamp and the subject's outline box (judged)
+  camera.meeting_point_gap_share_of_width = 0.03 share of the frame width (judged)
+  light_planner.near_ground_light_max = 0.025 W/m2 a light behind the camera may put on the ground at the frame's bottom edge (judged)
+  frame.plate_width_pixels = 1536 pixels (judged)
+  light.shadow_resolution_reference_width = 1080 pixels (scale = min(1, 1080 / width)) (judged)
+  light.shadow_pool_size = 1024 EEVEE setting (measured)

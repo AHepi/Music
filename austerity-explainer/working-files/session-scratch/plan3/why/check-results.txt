@@ -1,0 +1,357 @@
+===== facts 20
+[f0] wrong | Austerity explainer - project story.md
+   QUOTE: a skeptic who re-checked 33 of their
+   PROBLEM: The first critique's verdict lists 35 claims_checked: 24 held and 11 were rejected. The 11 is right, but 33 is not.
+   FIX: a skeptic who re-checked 35 of their
+[f1] wrong | Austerity explainer - project story.md
+   QUOTE: the road empty up to the pit.
+   PROBLEM: The picture (and the skeptic's claims 1 and 9, and best_composition) show a coal tub on a short loose length of rail in the middle of the road. The skeptic says the carriageway is only 'mostly clear'. A barrel also stands on the right pavement past the board.
+   FIX: the road mostly clear up to the pit, apart from a coal tub on a loose length of rail in the middle of it.
+[f2] misleading | Austerity explainer - project story.md
+   QUOTE: Seedance's 10-second video showed a better kind of move (straight toward the notice, no turning) but
+   PROBLEM: The evidence contradicts 'straight toward the notice, no turning'. The camera critic says Seedance 'drifts right onto the right-hand gutter from about 3 s, and turns slightly right in the last third'. The composition critic says it 'crabs right'. The notice is not even in frame until about 2.7 s, so the move cannot head straight at it. The verdict credits it only with 'one direction, a long slowdo
+   FIX: Seedance's 10-second video showed a better kind of move (one continuous approach down the street onto the notice, barely turning, with a long slowdown) but
+[f3] misleading | Austerity explainer - project story.md
+   QUOTE: in our clip about 20%, the rest on
+   PROBLEM: 'the rest on clouds' goes beyond the evidence. measurements.json for clip 29 has no brightest-3% breakdown. The critique says only that the clip's brightest grid cell is top-centre sky and that, at a 10% cut-off, half its bright area is in the top third. The log's own comparison picture ('30 Why it works - do the strongest things agree') outlines a large bright patch on the road by the fire as wel
+   FIX: in our clip about 20%, the rest scattered over the sky, the fire's glow on the road and the lamps
+[f4] misleading | 07 Composing a shot.md
+   QUOTE: in the lockout picture the drum's rim covers the board's corner
+   PROBLEM: This misdescribes the picture. The second critique's kept evidence and its weak spots say the drum's top-right rim (1048,1810) 'almost touches' or 'meets' the board's bottom-left corner (1060,1830): a tangent, the very fault rule 4 forbids. The overlap is a target in the rebuild plan (about 30 px), not something the picture already has.
+   FIX: in the lockout picture the drum's rim almost touches the board's corner (in the rebuild, overlap it clearly)
+[f5] wrong | Lessons.md
+   QUOTE: "PITS WILL DE CLOSED"
+   PROBLEM: This misquotes and misattributes the error. The garble is 'FITE WILL DE CLOSED', from Nano Banana's same-view picture. Read in order, the list implies the quote is Flux's. Flux's error was the year 1929, which the skeptic marks as low confidence; Flux's headings read correctly.
+   FIX: "FITE WILL DE CLOSED" from Nano Banana, and probably 1929 from Flux
+[f6] misleading | Austerity explainer - project story.md
+   QUOTE: for pixel, but jammed the props into one corner, lit the fire on the ground beside a cold drum and
+   PROBLEM: Only the right-hand group is a jam. The Flux picture also has the handcart, barrel and dustbin at the left and a coal tub by the gate. The composition critic calls it 'two clumps on either side of the road', and the pipeline critic notes clutter in the carriageway.
+   FIX: for pixel, but jammed most props into one tight group on the right (with the cart, barrel and bin in a second clump on the left), lit the fire on the ground beside a cold drum and
+[f7] misleading | Austerity explainer - project story.md
+   QUOTE: A model also redraws the
+   PROBLEM: This overstates. Flux kept the street almost pixel-identical (sky difference about 1.6 to 2.6/255). Only Nano Banana and Seedance redrew the street. Each model also ran only once, so 'each time' is untested. The same overstatement appears in Lessons 103 ('Models also redraw the street and props') and in film kit 07 ('they redraw the street and props a little differently each time').
+   FIX: Nano Banana and Seedance redraw the street, and every model redraws the props, so
+[f8] misleading | 07 Composing a shot.md
+   QUOTE: Image models arrange props well when asked to choose their own camera (log 30).
+   PROBLEM: This generalises from one run of one model. Only Nano Banana Pro was given a free camera, once; Flux never was. Seedance also chose its own camera and arranged props poorly ('a prop showroom', props 'lined up across the middle of the road'). The log itself says 'one run of each model only'. Lessons 102's heading, 'Image models arrange well when they choose the camera', has the same problem.
+   FIX: In one run, Nano Banana Pro arranged the props well when it was free to choose the camera (log 30); with our camera it spread them like a catalogue.
+[f9] minor | Austerity explainer - project story.md
+   QUOTE: the same pictures to every model: the empty painted street (the props-removed
+   PROBLEM: This contradicts the same entry's later note and requests.json. Flux was sent 10 pictures (the street plus nine props, with no pail). Decisions 35 repeats it: 'with the same pictures (the empty painted street plus ten prop pictures)'.
+   FIX: the same pictures to every model (Flux, which takes only ten, got nine props): the empty painted street (the props-removed
+[f10] minor | Austerity explainer - project story.md
+   QUOTE: Each was asked to dress the street and choose the camera
+   PROBLEM: The two same-view requests (Nano Banana same view and Flux) said 'keep its camera view'. Only Nano Banana own camera and Seedance were asked to choose the camera.
+   FIX: Each was asked to dress the street (and, in two of the four, to choose the camera)
+[f11] minor | Austerity explainer - project story.md
+   QUOTE: Lowest (3.5 to 4 of 10).
+   PROBLEM: The camera critic scored Flux 5 of 10. That was still lowest of the four model results, but the range quoted leaves it out.
+   FIX: Lowest (3.5 to 5 of 10).
+[f12] minor | Austerity explainer - project story.md
+   QUOTE: clear winner (8 of 10)
+   PROBLEM: The composition and camera critics gave it 8. The pipeline (usefulness) critic gave it 7.
+   FIX: clear winner (7 to 8 of 10)
+[f13] minor | Austerity explainer - project story.md
+   QUOTE: Flux up to about 45 cents;
+   PROBLEM: 45 cents assumes 14.7 MP of inputs, which is 11 pictures. Flux was sent 10: a 1536x2730 street (4.19 MP) plus nine 1024x1024 props (9.44 MP), so 13.6 MP. With the 4.2 MP output that is 17.8 MP x US$0.024, or about 43 cents (output only: about 10 cents). The total stays about US$2.80. Status.md repeats the 45 cents.
+   FIX: Flux up to about 43 cents;
+[f14] minor | 07 Composing a shot.md
+   QUOTE: the frame width with a 60-degree lens.)
+   PROBLEM: 0.027 of the frame width per degree holds for the rebuild plan's 60-degree vertical angle in a 9:16 frame, which is about 36 degrees across. A 60-degree horizontal lens would give about 0.015, so the unqualified wording misleads.
+   FIX: the frame width with a 60-degree vertical lens angle in a 9:16 frame, about 36 degrees across.)
+[f15] minor | 07 Composing a shot.md
+   QUOTE: Only reasons that told the two apart
+   PROBLEM: The second critique kept a supporting reason that does not tell the two apart: the left-right balance, where clip 29 measures 46/54 against 43/57. Rule 10 of this same file says so.
+   FIX: Reasons were kept only if they told the two apart, or (like balance) were needed by both
+[f16] minor | 07 Composing a shot.md
+   QUOTE: Keep anything that must be read left of 0.90 across;
+   PROBLEM: An important point is left out. The liked picture itself fails this rule and rule 4. Its paper's right edge is at 0.91, its chair and pail reach 0.96 to 0.97, and it has three near-touches (lamp glass and winding wheel, drum and board corner, lantern and board rail). Both are listed among the critique's weak spots, so a rebuild that copies the picture exactly would break the kit's own checks.
+   FIX: Keep anything that must be read left of 0.90 across (the liked picture breaks this: paper 0.91, chair and pail 0.96 to 0.97; fix it in the rebuild);
+[f17] minor | 07 Composing a shot.md
+   QUOTE: (the picture: 2.2; clip 29: 0.5)
+   PROBLEM: measurements.json gives a warm light share of 2.33% for the picture. The 2.2 comes from the critic's own count.
+   FIX: (the picture: 2.3; clip 29: 0.5)
+[f18] minor | Austerity explainer - project story.md
+   QUOTE: the touching group of props) points at the notice; in our clip they point at three different places.
+   PROBLEM: This is slightly stronger than the evidence. The lines meet in a zone at the gate and the board's wooden edge, 'not on the paper'; the critique adds that 'the notice wins only because it is the brightest thing next to that zone'. The log entry and Status.md say 'the notice corner', which is accurate.
+   FIX: the touching group of props) points at the notice corner; in our clip they point at three different places.
+[f19] minor | Austerity explainer - project story.md
+   QUOTE: makes a short video from a description and up to 30 pictures.
+   PROBLEM: Nothing in the evidence supports 'up to 30 pictures': not the requests, requests.json, the critiques or the draft note. The test sent 11.
+   FIX: makes a short video from a description and several reference pictures (this test sent 11).
+===== language 67
+[l0] wrong | Austerity explainer - project story.md
+   QUOTE: re-checked 33 of their
+   PROBLEM: Wrong count. The skeptic's list in the first critique (wcpie5an4.output, verdict.claims_checked) has 35 claims, 11 of them rejected. It does not have 33.
+   FIX: re-checked 35 of their
+[l1] wrong | Austerity explainer - project story.md
+   QUOTE: Lowest (3.5 to 4 of 10)
+   PROBLEM: The range is wrong. Flux scored 3.5 (composition critic), 5 (camera critic) and 4 (usefulness critic). It was the lowest of the four results in all three, but its top score was 5, not 4.
+   FIX: Lowest of the four in every critique (3.5 to 5 of 10)
+[l2] wrong | Austerity explainer - project story.md
+   QUOTE: the road empty up to the pit
+   PROBLEM: The picture contradicts this. A coal tub on a short loose length of rail stands in the middle of the road (it shows in '30 Why it works - do the strongest things agree', and the skeptic notes 'coal tub on floating rails in mid-road').
+   FIX: the road clear up to the pit apart from a small coal tub on rails
+[l3] wrong | Austerity explainer - project story.md
+   QUOTE: in our clip about 20%, the rest on
+   PROBLEM: The line goes on with 'clouds);'. The evidence does not support 'the rest on clouds'. The comparison picture's own caption says the clip's brightest parts are 'scattered (sky, fire, lamps)', and it outlines a large bright patch on the road. The critic found only about half of the clip's bright area in the top third.
+   FIX: in our clip about 20%, the rest scattered over the sky, the fire, the lamps and the road (and delete 'clouds' at the start of the next line)
+[l4] wrong | Austerity explainer - project story.md
+   QUOTE: twelve rules, each with a check
+   PROBLEM: Not true of the file. '07 Composing a shot' has a main rule plus twelve numbered rules. Only the main rule and rules 1 to 6 and 11 have a 'Check:'. Rules 7, 8, 9, 10 and 12 have none, although the second critique supplied checks for them.
+   FIX: a main rule and twelve more, eight of the thirteen with a check
+[l5] wrong | Status.md
+   QUOTE: Twelve rules with checks
+   PROBLEM: Same error as the project story: five of the twelve numbered rules in '07 Composing a shot' have no check.
+   FIX: A main rule and twelve more (eight of the thirteen with a check)
+[l6] wrong | Lessons.md
+   QUOTE: "PITS WILL DE CLOSED"
+   PROBLEM: Misquote. Both critiques record the garbled line as 'FITE WILL DE CLOSED' (Nano Banana Pro, same view). The three examples also look like one per model, but 1756 and this line both come from Nano Banana Pro. Flux's error ('probably 1929') is missing and was low confidence.
+   FIX: "FITE WILL DE CLOSED"
+[l7] wrong | 07 Composing a shot.md
+   QUOTE: the frame width with a 60-degree lens.)
+   PROBLEM: Wrong as worded, and 'lens' is jargon. The 0.027 figure holds only when the camera sees 60 degrees from top to bottom of the tall frame (the rebuild plan's 'vertical lens angle 60 degrees'). If it sees 60 degrees side to side, one degree of turn moves where the lines meet about 0.015 of the width.
+   FIX: the frame width when the camera sees 60 degrees from the top to the bottom of the tall frame.)
+[l8] wrong | Austerity explainer - project story.md
+   QUOTE: (never named as MMT in the film)
+   PROBLEM: Breaks the rule never to use the word 'MMT'. It is in the goal section of this same write-up file.
+   FIX: (never named in the film)
+[l9] wrong | 07 Composing a shot.md
+   QUOTE: each time, so their pictures can't be cut together with ours.
+   PROBLEM: The house rules say every document ends with a Traps section. This is the only film-kit document without one (00 to 06 all have it). The plugin copy 'paper-look - 07 Composing a shot.md' has the same gap.
+   FIX: each time, so their pictures can't be cut together with ours.
+
+## Traps
+
+- Never put a model's lettering on screen; use our own 3D notice.
+- A turn during a move slides where the lines meet: check the first, middle and last frames.
+- The measuring tool needs crisp lines: if it finds fewer than about 15, trace them by hand.
+[l10] wrong | 07 Composing a shot.md
+   QUOTE: a picture feels balanced and "hard to change" when its strong signals agree
+   PROBLEM: Two problems. The quotation marks give the user's phrase wrongly: they said 'hard to vary'. 'Strong signals' is a second word for what the heading calls 'every strong thing'.
+   FIX: a picture feels balanced and "hard to vary" when its strong things agree
+[l11] wrong | Austerity explainer - project story.md
+   QUOTE: about US$2.80 for the arranging test, log 30
+   PROBLEM: Two names for one test. The test's files are named '30 Composition test - ...', but the story, the Status heading and the Lessons heading call it 'the arranging test'.
+   FIX: about US$2.80 for the composition test, log 30
+[l12] wrong | Status.md
+   QUOTE: ## Arranging test and why it works
+   PROBLEM: Same thing as the files named '30 Composition test - ...': two names for one test.
+   FIX: ## Composition test and why it works
+[l13] wrong | Lessons.md
+   QUOTE: (the arranging test and why the best picture works, log 30)
+   PROBLEM: Same synonym: the files call it the composition test.
+   FIX: (the composition test and why the best picture works, log 30)
+[l14] wrong | Austerity explainer - project story.md
+   QUOTE: copy the layout and the kind of move
+   PROBLEM: The new word-list row defines 'Composition' for how things in a picture are arranged. Log 30 calls the same thing 'layout' here, in 'do layout work too' and in 'Checked by three critics** (layout, camera, usefulness)' (that critic's own name was composition). Elsewhere it says 'arranged' and 'arrangement'.
+   FIX: copy the composition and the kind of move
+[l15] wrong | Austerity explainer - project story.md
+   QUOTE: the brazier burning
+   PROBLEM: One prop gets four names in log 30: 'oil-drum brazier', 'the brazier burning', 'the burning drum', 'our oil drum', then 'drum'. 07 and the lessons call it 'the drum'.
+   FIX: the drum's fire lit (introduce it once as 'the drum, an oil drum used for a fire', then say 'the drum' everywhere, including 'our drum' for 'our oil drum')
+[l16] wrong | Austerity explainer - project story.md
+   QUOTE: repeats the paper's pale tone
+   PROBLEM: Log 30 calls this thing 'the notice' everywhere else. Here 'the paper' is swapped in for it.
+   FIX: repeats the notice's pale tone
+[l17] wrong | Austerity explainer - project story.md
+   QUOTE: either takes one signal away
+   PROBLEM: The paragraph sets up the bold phrase 'every strong thing in the picture', then switches to 'signal' for the same thing.
+   FIX: either takes one strong thing away
+[l18] wrong | Austerity explainer - project story.md
+   QUOTE: the biggest near things (drum, chair)
+   PROBLEM: 'Things' is swapped in for props. 'Where things stand' says 'the biggest near props', and the user wants 'props' used consistently. The same swap is in 'the biggest near thing is the coal sacks'.
+   FIX: the biggest near props (drum, chair) (and 'the biggest near prop is the coal sacks')
+[l19] wrong | Austerity explainer - project story.md
+   QUOTE: the turn slid that point toward a doorway
+   PROBLEM: Two swaps. The 'doorway' is the colliery door named two sentences earlier ('the lines meet at the colliery door'). 'That point' replaces the word-list term 'where the lines meet'.
+   FIX: the turn slid where the lines meet toward the colliery door
+[l20] wrong | 07 Composing a shot.md
+   QUOTE: the meeting point slid toward a doorway at the edge
+   PROBLEM: 'Meeting point' is a synonym for the word-list term 'where the lines meet'. It also appears in 'moves the meeting point about 0.027', 'the meeting point of the street's lines' and 'slides the meeting point across the frame'. 'A doorway' is the same place the main rule calls 'the colliery door'.
+   FIX: where the lines meet slid toward the colliery door at the edge
+[l21] wrong | Lessons.md
+   QUOTE: meeting point to a doorway at the edge
+   PROBLEM: The same two synonyms as in 07 ('meeting point' for 'where the lines meet', 'a doorway' for the colliery door).
+   FIX: place where the lines meet to the colliery door at the edge
+[l22] wrong | 07 Composing a shot.md
+   QUOTE: the centre of the warm light, the centre of the near group
+   PROBLEM: Rules 3 and 5 call this the 'story group'. 'Near group' is a second name for the same group.
+   FIX: the centre of the warm light, the centre of the story group
+[l23] wrong | 07 Composing a shot.md
+   QUOTE: The people's things (fire, chair, lantern, pail)
+   PROBLEM: Rule 8 calls the props 'the people's things' and 'the work things'. Rule 3 says 'story props' and lesson 101 says 'work props'. The user wants 'props' used consistently, and 'fire' here means the drum.
+   FIX: The story props (drum, chair, lantern, pail) ... The work props (cart, sacks, coal tub, barrel, dustbins)
+[l24] wrong | 07 Composing a shot.md
+   QUOTE: the biggest things near the camera
+   PROBLEM: 'Things' is swapped in for props.
+   FIX: the biggest props near the camera
+[l25] wrong | 07 Composing a shot.md
+   QUOTE: the paper is cool at the top and warm at the bottom
+   PROBLEM: Rule 6 says 'the notice' in one clause and 'the paper' in the next. Rule 5 mixes 'The notice paper', 'on the paper' and 'The paper is at least 1.8 times'. Choose 'the notice' for the printed sheet and 'the board' for what it hangs on.
+   FIX: the notice is cool at the top and warm at the bottom
+[l26] wrong | Lessons.md
+   QUOTE: when its strong signals agree
+   PROBLEM: The story and the heading of 07 say 'strong thing'. This is a synonym.
+   FIX: when its strong things agree
+[l27] wrong | Lessons.md
+   QUOTE: (lines, bright parts, warmth,
+   PROBLEM: Synonyms for word-list terms: 'bright parts' for 'brightest parts', 'warmth' for 'warm light', 'lines' for 'where the lines meet'. The same lesson uses '(thirds lines, a triangle of lights)', which is unexplained jargon, and the story calls the triangle 'three flames'.
+   FIX: (where the lines meet, brightest parts, warm light, ... (things on the lines that divide a picture into thirds, three flames making a triangle)
+[l28] wrong | Decisions.md
+   QUOTE: a 10-second draft at 480p (its cheapest size; it can be finished at 1080p within
+   PROBLEM: '480p' and '1080p' are codes. The project story already says '480 pixels wide' in plain words.
+   FIX: a 10-second draft 480 pixels wide (its cheapest size; it can be finished at full size, 1,080 pixels wide, within
+[l29] wrong | Status.md
+   QUOTE: (on paper, not rendered)
+   PROBLEM: 'Rendered' is unexplained jargon. 'On paper' can be taken literally, but it was a script calculation.
+   FIX: (worked out by calculation, not yet drawn in Blender)
+[l30] wrong | Austerity explainer - project story.md
+   QUOTE: a helper's calculation on paper, not a render
+   PROBLEM: 'Render' is jargon with no word-list row (the word list says Blender 'draws'). It appears again in 'a test render settles it', and 'on paper' reads literally.
+   FIX: a helper's calculation, not a picture drawn in Blender (and 'a test picture drawn in Blender settles it')
+[l31] wrong | Status.md
+   QUOTE: the plugin's kit docs
+   PROBLEM: 'Docs' is an abbreviation.
+   FIX: the plugin's kit documents
+[l32] wrong | Status.md
+   QUOTE: Nano Banana's own-camera picture
+   PROBLEM: The word list names it 'Nano Banana Pro'. 'Nano Banana' is a short form, also used in lesson 103 and in the new file names ('composed by Nano Banana').
+   FIX: Nano Banana Pro's own-camera picture
+[l33] wrong | 07 Composing a shot.md
+   QUOTE: rotation is exactly 90 and Y is 0
+   PROBLEM: Codes ('X rotation', 'Y') with no plain sentence first.
+   FIX: rotation is exactly 90 (level, not tipped up or down) and Y is 0 (not leaning to either side)
+[l34] wrong | 07 Composing a shot.md
+   QUOTE: in Blender only the camera's position has keyframes, never its rotation
+   PROBLEM: 'Keyframes' is unexplained jargon.
+   FIX: in Blender only the camera's position is set to change during the move (those settings are called keyframes), never which way it faces
+[l35] misleading | Austerity explainer - project story.md
+   QUOTE: (straight toward the notice, no turning)
+   PROBLEM: Overstated. The camera critic says Seedance 'turns slightly right in the last third' and 'barely turns'. The notice is not in view until about 2.7 seconds, so the move is not straight toward it from the start.
+   FIX: (one move up the street to the notice, barely turning)
+[l36] misleading | Austerity explainer - project story.md
+   QUOTE: chosen: rebuild the own-camera picture
+   PROBLEM: The text reads 'The route chosen: ...', which says a decision was made. It was only the assistant's recommendation. Status lists it under 'Waiting on you', and Decisions does not record it as a Claude's call.
+   FIX: I recommend (yours to decide): rebuild the own-camera picture
+[l37] misleading | Austerity explainer - project story.md
+   QUOTE: where its weight sits
+   PROBLEM: 'Weight' in a picture is a design term that is never explained. A non-designer cannot tell what '46 to 54 per cent against 43 to 57' measures in 'not an even weight'.
+   FIX: where its weight sits (how strongly each part pulls the eye, from its size, brightness and detail)
+[l38] misleading | Austerity explainer - project story.md
+   QUOTE: on the one-third lines
+   PROBLEM: A design term ('rule of thirds' lines) that a non-designer will not know.
+   FIX: on the lines that divide the picture into thirds
+[l39] misleading | Austerity explainer - project story.md
+   QUOTE: fal's models were given our empty street
+   PROBLEM: 'Model' means two things in log 30: the picture-making programs ('Every model garbled the notice') and 3D objects ('its props look like 3D models'). The new word-list rows call Nano Banana Pro and Seedance 'programs'.
+   FIX: fal's picture- and video-making programs were given our empty street
+[l40] misleading | 07 Composing a shot.md
+   QUOTE: in the lockout picture the drum's rim covers the board's corner
+   PROBLEM: 'The lockout picture' (also 'In the lockout picture:' and '(in the lockout shot:') is a new name for the picture the user liked. It could be read as clip 29, whose file is '29 Test - pit village lockout'.
+   FIX: in the picture the user liked, the drum's rim covers the board's corner
+[l41] misleading | 07 Composing a shot.md
+   QUOTE: Image models arrange props well when asked to choose their own camera (log 30).
+   PROBLEM: Generalised from one run of one program. Only Nano Banana Pro was asked to choose its camera, and the story says 'one run of each model only'.
+   FIX: Nano Banana Pro arranged the props well when asked to choose its own camera (one run, log 30).
+[l42] misleading | Lessons.md
+   QUOTE: Image models arrange well when they choose the camera.
+   PROBLEM: The same overgeneralisation from one run of one program. The next sentence is also missing commas and is hard to read ('Nano Banana Pro kept to our camera spread the props'), and 'layout sketch' is a synonym for composition.
+   FIX: Nano Banana Pro arranged well when it chose the camera (one run). Kept to our camera, Nano Banana Pro spread the props like a catalogue; given a free camera it made the best picture. Use its picture as a composition sketch.
+[l43] misleading | Decisions.md
+   QUOTE: Whether a model's video could replace our own 3D shots is judged separately.
+   PROBLEM: The house rules say the assistant's own calls are listed so the user can overturn them. Two calls are missing: nothing generated goes on screen, and the recommended route is to rebuild in our own 3D street. The story states both.
+   FIX: Whether a model's video could replace our own 3D shots is judged separately.
+- Nothing a model made goes on screen (all garbled the notice); the recommended route is to rebuild the own-camera picture in our own 3D street. Overturn in one line.
+[l44] misleading | 07 Composing a shot.md
+   QUOTE: the whole group fits in a box about a third of
+   PROBLEM: The picture the user liked fails this check: its group spans 0.59 to 0.97 across, which is 0.38 of the frame. The main rule's own check allows 0.40 by 0.50.
+   FIX: the whole group fits in a box at most 0.40 of the frame wide and 0.50 tall (replacing 'about a third of the frame wide')
+[l45] minor | Austerity explainer - project story.md
+   QUOTE: clear winner (8 of 10)
+   PROBLEM: The three first-round critics scored it 8, 8 and 7.
+   FIX: clear winner (7 to 8 of 10)
+[l46] minor | Austerity explainer - project story.md
+   QUOTE: (63% of the brightest parts fall on it
+   PROBLEM: 63.5% comes from the tool's box round the notice, and that box overlaps the chair back. The critic's own count was 'about half on the notice and about 40% on the chair'. The uncertainty is not stated.
+   FIX: (about half to two thirds of the brightest parts fall on it
+[l47] minor | Austerity explainer - project story.md
+   QUOTE: None of the models' pictures can go on screen: all garbled the notice.
+   PROBLEM: Flux's garbling is not certain: the skeptic says 'probably 1929' and calls it 'low confidence' because its notice was too small to read. Status ('every model garbled the notice') and 07 ('every model garbled the notice (one dated it 1756)') make the same flat claim.
+   FIX: None of the models' pictures can go on screen: Nano Banana Pro and Seedance garbled the notice, and Flux's looks wrong too (too small to read for sure).
+[l48] minor | Austerity explainer - project story.md
+   QUOTE: then a cut jumped to a flat close-up
+   PROBLEM: 'Flat close-up' is designer shorthand that a non-designer will not follow.
+   FIX: then a cut jumped to a close-up of the notice seen straight on, with no street or fire
+[l49] minor | Austerity explainer - project story.md
+   QUOTE: The repaint costs about 10 to 50 US cents.
+   PROBLEM: The Next step never says a repaint is part of the step. The word list's term for it is 'Paint-over'. In 'show you the still', 'still' clashes with the word-list term 'Still shot', which means something else.
+   FIX: Painting the picture over in the series' style (a paint-over) costs about 10 to 50 US cents. (and 'show you the picture' for 'show you the still')
+[l50] minor | Austerity explainer - project story.md
+   QUOTE: Spent so far: about US$10.30 in all (
+   PROBLEM: The brackets list only the three latest items. Chapter 1 and chapter 2 come afterwards as separate sentences, so a reader cannot see how US$10.30 adds up. The line is also one very long unwrapped line.
+   FIX: Spent so far: about US$10.30 in all: about US$2.80 for the composition test (log 30), about 50 US cents for plan 3's paint-overs (log 29), about 12 US cents for the SAM 3D test (log 22), about US$5 for chapter 1 and earlier, and about US$1.91 for chapter 2 (details below).
+[l51] minor | Austerity explainer - project story.md
+   QUOTE: Nano Banana Pro 30 cents
+   PROBLEM: Everywhere else the story says 'US cents', and Status says '30 US cents'.
+   FIX: Nano Banana Pro 30 US cents
+[l52] minor | Austerity explainer - project story.md
+   QUOTE: the same pictures to every model
+   PROBLEM: Not quite true: Flux takes only ten pictures, so it got no pail. The story says so later, and Status says 'ten prop pictures' went to Flux.
+   FIX: the same pictures to every model (Flux takes only ten, so it got all but the pail)
+[l53] minor | Austerity explainer - project story.md
+   QUOTE: its bright areas
+   PROBLEM: A synonym for the new word-list term 'Brightest parts'. 'The brightest spot is a cloud' is another variant.
+   FIX: its brightest parts
+[l54] minor | Austerity explainer - project story.md
+   QUOTE: with a new tool, `measure_composition.py`
+   PROBLEM: A program file name in code formatting, in the user's story.
+   FIX: with a new measuring tool (in the film kit)
+[l55] minor | Austerity explainer - project story.md
+   QUOTE: | Draft |
+   PROBLEM: The row defines 'Draft' as Seedance's quick video, but the story also uses 'draft', 'drafts' and 'drafted' for other things (narration drafts, working drafts). The word would then mean two things.
+   FIX: | Seedance draft |
+[l56] minor | Austerity explainer - project story.md
+   QUOTE: | Nano Banana Pro |
+   PROBLEM: The new rows explain Nano Banana Pro and Seedance, but not Flux. Log 30 compares all three, and the word list has no Flux row.
+   FIX: Add a row: | Flux 3 | Black Forest Labs' picture-making program on fal; it repaints our plain pictures in the series' style and takes at most ten pictures at once. |
+[l57] minor | Austerity explainer - project story.md
+   QUOTE: (both critiques agree)
+   PROBLEM: The log speaks of 'three critics' and 'five critics' and never says there were two rounds. 'Both critiques' and 'the two critiques' leave a non-specialist guessing.
+   FIX: (both rounds of critics agree)
+[l58] minor | 07 Composing a shot.md
+   QUOTE: Keep the far side quiet but not empty.
+   PROBLEM: 'Far side' means the side of the frame away from the subject, but rule 8 uses 'far' for distance up the street. It is easy to misread.
+   FIX: Keep the side of the frame away from the subject quiet but not empty.
+[l59] minor | 07 Composing a shot.md
+   QUOTE: stops the frame tipping, but it is only needed, not enough on its own.
+   PROBLEM: An awkward sentence that a non-designer will not follow ('tipping', 'only needed, not enough').
+   FIX: keeps the frame from feeling lopsided, but it does not make the shot work on its own.
+[l60] minor | 07 Composing a shot.md
+   QUOTE: easing in and out
+   PROBLEM: Animation jargon.
+   FIX: starting and stopping gently
+[l61] minor | 07 Composing a shot.md
+   QUOTE: flatten the depth
+   PROBLEM: Designer shorthand.
+   FIX: make near and far things look the same distance away
+[l62] minor | 07 Composing a shot.md
+   QUOTE: (the picture: 2.2; clip 29: 0.5)
+   PROBLEM: The file says the tool gives these numbers, but the tool's measurements.json gives 2.33 for the picture (0.54 for clip 29). 2.2 is the critic's hand count, so someone running the check will get a different number.
+   FIX: (the picture: 2.3; clip 29: 0.5)
+[l63] minor | 07 Composing a shot.md
+   QUOTE: fewer than about 15 slanted lines
+   PROBLEM: 'Slanted lines' is a third name for 'the street's lines' and 'the kerb and gutter lines'.
+   FIX: fewer than about 15 of the street's straight lines
+[l64] minor | Lessons.md
+   QUOTE: Measure a picture before explaining it.
+   PROBLEM: House rule: Lessons.md holds only failures in building or testing. Lesson 104 (and lesson 102) record a method or a finding rather than something that broke and was fixed. The real failure in 104 is that the line-finder found only 7 lines on clip 29.
+   FIX: The line-finder misses soft lines.
+[l65] minor | Decisions.md
+   QUOTE: its light and dark areas, its warm light
+   PROBLEM: In Claude's calls for item 36, 'light and dark areas' is a synonym for 'brightest parts', and the 'weight' that follows is unexplained. Item 35's calls also mix 'our camera view' and 'our view' for 'our camera'.
+   FIX: its brightest parts, its warm light, and where its weight sits (how strongly each part pulls the eye) ... and in item 35: '(keeping our camera, and choosing its own camera), Flux 3 once (keeping our camera)'
+[l66] minor | 30 Why it works - measurements
+   QUOTE: measurements.json
+   PROBLEM: Two files in this folder, 'measurements.json' and 'object boxes.json', have no two-digit number. '01 thirds grid and converging lines.jpg' uses 'converging lines' for the word-list term 'where the lines meet'. In the pictures folder, '00-empty-street.jpg' and '00 Props sheet.jpg' share the number 00.
+   FIX: 06 measurements.json; 07 object boxes.json; 01 thirds grid and where the lines meet.jpg

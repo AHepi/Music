@@ -1,0 +1,10 @@
+{"change": "state, look and a script hook", "scene": "hut-finished.blend", "settings": "place-settings.json", "cameras": ["Camera A"],
+ "variations": [
+  {"name": "wet", "set": {"state": "wet"}},
+  {"name": "derelict", "set": {"look": "derelict"}},
+  {"name": "kept", "set": {"look": "kept"}},
+  {"name": "no-wear", "set": {"master": 0.0}},
+  {"name": "dark-roof", "script": "hooks/darken_roof.py", "args": {"sun": 0.5}, "ranges": {"sun": [0, 2]}},
+  {"name": "dark-roof-near", "script": "hooks/darken_roof.py", "args": {"sun": 0.52}, "ranges": {"sun": [0, 2]}},
+  {"name": "bad-layer", "set": {"amount.rust": 0.2}}
+ ]}

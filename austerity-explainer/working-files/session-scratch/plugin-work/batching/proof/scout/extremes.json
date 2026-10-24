@@ -1,0 +1,16 @@
+{
+ "about": "A scout: one extreme of each wear change, drawn tiny on this computer, to see which change shows in the two cameras before any card seconds are spent.",
+ "change": "which wear change shows",
+ "scene": "../canal_finished.blend",
+ "settings": "../place-settings.json",
+ "cameras": ["Camera A", "Camera B"],
+ "variations": [
+  {"name": "wet-max", "set": {"amount.wetness": 1.0, "dials.wetness.darken": 0.6, "dials.wetness.wet_roughness": 0.05}},
+  {"name": "grime-max", "set": {"amount.grime": 1.0, "dials.grime.darkening": 0.6, "dials.grime.area_share": 0.6}},
+  {"name": "dirt-max", "set": {"dials.dirt.film": 1.0, "dials.dirt.dust": 1.0, "dials.dirt.foot_height_metres": 1.5}},
+  {"name": "weather-max", "set": {"dials.weathering.silvering": 1.0, "dials.weathering.sun_fade": 1.0, "dials.weathering.patina": 1.0}},
+  {"name": "cracks-max", "set": {"dials.cracks_and_chips.crack_density": 1.0, "dials.cracks_and_chips.chip_amount": 1.0, "dials.cracks_and_chips.crack_width_metres": 0.05}},
+  {"name": "edge-max", "set": {"dials.edge_wear.width_metres": 0.1, "dials.edge_wear.pale": 0.6}},
+  {"name": "all-off", "set": {"master": 0.0}}
+ ]
+}

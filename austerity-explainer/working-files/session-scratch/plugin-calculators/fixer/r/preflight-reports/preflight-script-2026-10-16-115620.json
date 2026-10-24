@@ -1,0 +1,247 @@
+{
+ "stage": "script",
+ "stage_means": "before recording the narration",
+ "verdict": "inputs missing",
+ "counts": {
+  "fail": 0,
+  "warn": 11,
+  "known": 1,
+  "info": 4,
+  "pass": 0
+ },
+ "guarded_step": "recording the narration with the voice service",
+ "step_kind": "paid",
+ "blocked": true,
+ "cost_dollars": 1.1,
+ "costs": [
+  {
+   "what": "the narration (voice service)",
+   "dollars": 1.1,
+   "note": "6,287 credits: one per letter sent, the cue included"
+  }
+ ],
+ "times": [
+  {
+   "what": "the chapter, as estimated from the script",
+   "seconds": 401.7,
+   "note": "saved as /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-script-2026-10-16-115620/estimated-timeline.json"
+  }
+ ],
+ "allowance": null,
+ "preflight_seconds": 0.2,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:56:20",
+ "first_lines": [
+  "Preflight script (before recording the narration): INPUTS MISSING OR UNUSABLE. 0 to fix, 11 to look at, 1 known and accepted, 1 input(s) missing; 1 check(s) in 0.2 s.",
+  "Paid step BLOCKED: recording the narration with the voice service (about US$1.10: 6,287 credits: one per letter sent, the cue included). First make (or mend) the inputs listed below, then run this stage again.",
+  "Time: the chapter, as estimated from the script: about 6.7 min."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "2dd7bb91",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-script-2026-10-16-115620",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/script/newcomer-narration-script.json": "090becd91fce74e521c0ce4c0638c3445eba7b83",
+  "/home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2/word-times.json": "eed4faf4a948b7cd4cf82f3d258b5f322bfe7667",
+  "/home/user/Music/plugins/explainer-film/kit/film-settings.json": "6db76b4cce7e8a2b6fdead7d83c7219f24b8180e",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/acc-broad.json": "88025f5118f323547aab85966d1a2cd6695aed00"
+ },
+ "missing": [
+  {
+   "input": "spend_ledger",
+   "option": "--spend-ledger",
+   "what": "the spend ledger (allowances and every paid step so far)",
+   "make": "write one entry per paid step ({\"allowances\": [...], \"entries\": [...]}; format in calculators/plan_budget.py's note)",
+   "needed_by": "plan_budget.py ledger",
+   "required": false,
+   "why": "without it nothing checks the step against what is left of the allowance",
+   "given_but_absent": []
+  },
+  {
+   "input": "accepted",
+   "option": "--accepted",
+   "what": "the problems accepted on purpose (a JSON list of entries, each with \"stage\", a \"check\" or \"text\", \"reason\", \"who\" and \"date\" YYYY-MM-DD)",
+   "make": "write it by hand (see --example-plan's \"accepted\")",
+   "needed_by": "the accepted problems",
+   "required": true,
+   "why": "",
+   "given_but_absent": [],
+   "unusable": "acc-broad.json: the entry {stage 'script', check 'speed'} matches 5 findings (at most 3, film-settings.json preflight.accepted_entry_most_findings): name the \"check\" exactly and add \"page\", \"view\" or a longer \"text\", or write one entry per finding"
+  }
+ ],
+ "checks": [
+  {
+   "title": "script gate (lint_script.py before)",
+   "tool": "narration-tools/lint_script.py",
+   "version": "645b3b03",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/lint_script.py before /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/script/newcomer-narration-script.json --word-times /home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2/word-times.json --timeline-out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-script-2026-10-16-115620/estimated-timeline.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-script-2026-10-16-115620/01-script-gate-lint-script-py-before.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-script-2026-10-16-115620/01-script-gate-lint-script-py-before.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-script-2026-10-16-115620/01-script-gate-lint-script-py-before.txt",
+   "seconds": 0.14,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "main rule",
+     "where": "",
+     "text": "no main_rule named; these sentences are said word for word on more than one page: \"when new money is spent and there are spare workers materials and machines it mostly gets more things made\" (pages 5, 16); \"when nothing is spare it mostly pushes prices up\" (pages 5, 16). Name the rule with main_rule.",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "known",
+     "check": "key page",
+     "where": "",
+     "text": "no page is marked \"key\": true (the page carrying the main idea; it gets a card hold and must not be faster than the median page)",
+     "fix": "",
+     "tool": "lint_script.py",
+     "was": "fail",
+     "accepted": {
+      "reason": "test",
+      "who": "the tester",
+      "date": "2026-10-15",
+      "source": "acc-broad.json"
+     }
+    },
+    {
+     "verdict": "warn",
+     "check": "speed",
+     "where": "page 2",
+     "text": "179 words a minute (over 170): fewer words, or shorter sentences",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "speed",
+     "where": "page 4",
+     "text": "173 words a minute (over 170): fewer words, or shorter sentences",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "speed",
+     "where": "page 13",
+     "text": "174 words a minute (over 170): fewer words, or shorter sentences",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "speed",
+     "where": "page 14",
+     "text": "173 words a minute (over 170): fewer words, or shorter sentences",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "speed",
+     "where": "page 15",
+     "text": "177 words a minute (over 170): fewer words, or shorter sentences",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "stakes",
+     "where": "",
+     "text": "the first 30 s say: \"p. Is that always true? It matters... because when prices go up too fast, the usual cure makes many loans cost more. And that can put people out of work. Who can create new money? Here in New Zealand,\"; words about what is at stake: cost, costs, cure, loan, loans, money, out of work, price, prices, work (a person judges whether the stakes are said this early)",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "unfamiliar words",
+     "where": "",
+     "text": "7 words a newcomer may not know (no common-words list given: words of 9 letters or more are listed): inflation, economists, submarines, Landlords, America's, unfortunate, economist. Each needs an explanation within two sentences, or cut it.",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "names",
+     "where": "",
+     "text": "names and places (is each introduced? will the voice say it right?): New, Zealand, Reserve, Bank, First, World, War, Glasgow, November, Britain's, Parliament, Covid, Mattei, June",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "one word, one meaning",
+     "where": "",
+     "text": "repeated words, to read with their sentences (each should mean one thing): price x19, money x17, worker x13, factory x13, machine x9, work x8, material x8, cost x7, cure x7, bank x7, spent x7, spare x7, people x6, reserve x6, fewer x6",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "info",
+     "check": "who says it",
+     "where": "",
+     "text": "lines that quote someone (check each against its source): page 14: Reserve Bank; page 14: She; page 14: she",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "info",
+     "check": "guess holds",
+     "where": "page 4",
+     "text": "ends on a guess: 4.0 s held after it (hold the shot still through it)",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "info",
+     "check": "guess holds",
+     "where": "page 8",
+     "text": "ends on a guess: 4.0 s held after it (hold the shot still through it)",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "info",
+     "check": "guess holds",
+     "where": "page 10",
+     "text": "ends on a guess: 4.0 s held after it (hold the shot still through it)",
+     "fix": "",
+     "tool": "lint_script.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "guess holds",
+     "where": "page 9",
+     "text": "ends on a question without a guess phrase (\"Are there spare workers, materials and machines to make what\"): if the viewer should think, end with \"Have a guess.\" or mark \"guess\": true",
+     "fix": "",
+     "tool": "lint_script.py"
+    }
+   ],
+   "verdict": "warn"
+  }
+ ],
+ "known_lists": [],
+ "notes": [
+  "Accepted entry {stage 'script', check 'speed'} (acc-broad.json, the tester, 2026-10-15): matched 5 finding(s)",
+  "Accepted entry {stage 'script', check 'key page'} (acc-broad.json, the tester, 2026-10-15): matched 1 finding(s)"
+ ],
+ "accepted_entries": [
+  {
+   "stage": "script",
+   "check": "speed",
+   "reason": "test: speeds are fine",
+   "who": "the tester",
+   "date": "2026-10-15",
+   "source": "acc-broad.json"
+  },
+  {
+   "stage": "script",
+   "check": "key page",
+   "reason": "test",
+   "who": "the tester",
+   "date": "2026-10-15",
+   "source": "acc-broad.json"
+  }
+ ],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-script-2026-10-16-115620.md"
+}

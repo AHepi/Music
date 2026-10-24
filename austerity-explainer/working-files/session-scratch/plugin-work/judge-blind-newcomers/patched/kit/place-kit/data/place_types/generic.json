@@ -1,0 +1,34 @@
+{
+ "about": "Starting preset for a place that is none of the named types (the default). Data only.",
+ "id": "generic",
+ "default_look": "lived_in",
+ "default_state": "dry",
+ "roles_likely": [],
+ "require_more": {},
+ "allowed_off": [
+  {
+   "id": "floors_indoors",
+   "treatments": [
+    "moss_and_algae",
+    "weathering",
+    "wetness",
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows"
+  }
+ ],
+ "footfall_shapes": [],
+ "plan_mask_cell_metres": 0.1,
+ "facts": [
+  "door_height",
+  "door_width",
+  "wall_thickness"
+ ],
+ "notes": "no assumptions about the place",
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

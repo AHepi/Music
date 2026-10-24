@@ -1,0 +1,65 @@
+{
+ "about": "Starting preset for a harbour or quay. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
+ "id": "harbour",
+ "default_look": "neglected",
+ "default_state": "wet",
+ "roles_likely": [
+  "ground.stone_paving",
+  "water.sea",
+  "prop.boat",
+  "prop.rope",
+  "prop.barrel",
+  "timber.beam",
+  "iron.fitting"
+ ],
+ "require_more": {
+  "timber": [
+   "moss_and_algae"
+  ],
+  "stone": [
+   "wetness"
+  ]
+ },
+ "allowed_off": [
+  {
+   "id": "quay_no_growth",
+   "treatments": [
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "ground.stone_paving",
+    "ground.concrete"
+   ],
+   "reason": "a working quay is swept and salted: weeds only in cracks, set by the place"
+  },
+  {
+   "id": "floors_indoors",
+   "treatments": [
+    "moss_and_algae",
+    "weathering",
+    "wetness",
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows"
+  }
+ ],
+ "footfall_shapes": [
+  {
+   "shape": "rect",
+   "note": "draw the quay walking strip by hand"
+  }
+ ],
+ "plan_mask_cell_metres": 0.1,
+ "facts": [
+  "door_height",
+  "door_width"
+ ],
+ "notes": "wet stone, rope, boats, tide marks",
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

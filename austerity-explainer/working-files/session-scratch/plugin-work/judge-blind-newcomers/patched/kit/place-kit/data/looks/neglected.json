@@ -1,0 +1,60 @@
+{
+ "about": "The look \"neglected\": unkept: strong dirt, grime, weeds, moss, rubbish and damp. Only dial values differ between looks (the code is the same).",
+ "id": "neglected",
+ "state_default": "damp",
+ "master": 1.0,
+ "layers": {
+  "dirt": {
+   "amount": 0.85,
+   "dials": {}
+  },
+  "grime": {
+   "amount": 0.8,
+   "dials": {}
+  },
+  "weathering": {
+   "amount": 0.8,
+   "dials": {}
+  },
+  "wetness": {
+   "amount": 0.6,
+   "dials": {}
+  },
+  "cracks_and_chips": {
+   "amount": 0.7,
+   "dials": {}
+  },
+  "edge_wear": {
+   "amount": 0.75,
+   "dials": {}
+  },
+  "moss_and_algae": {
+   "amount": 0.75,
+   "dials": {}
+  },
+  "rust": {
+   "amount": 0.8,
+   "dials": {}
+  },
+  "rubbish": {
+   "amount": 0.75,
+   "dials": {}
+  }
+ },
+ "growth": {
+  "weeds_amount": 0.8,
+  "cushions_amount": 0.5,
+  "litter_amount": 0.75
+ },
+ "budgets": {
+  "grime_area_share": 0.25,
+  "grime_darkening": 0.33,
+  "darkest_mark": 0.1
+ },
+ "kinds": {
+  "amounts": "invented: first tries by the 1.4.0 design (judge by looking)",
+  "budgets": "measured on the street (log 22) and the painted plates (log 25)"
+ },
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

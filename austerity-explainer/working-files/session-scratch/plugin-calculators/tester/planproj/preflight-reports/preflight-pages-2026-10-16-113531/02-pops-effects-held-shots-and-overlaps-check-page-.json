@@ -1,0 +1,110 @@
+{
+ "calculator": "check_page_layout",
+ "events": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/planproj/inputs/events-test-clean.json.gz",
+ "scene": "page-events-test",
+ "pages": [
+  1,
+  2,
+  3
+ ],
+ "verdicts": {
+  "fail": 0,
+  "look": 0,
+  "pass": 6
+ },
+ "problems": [
+  {
+   "check": "effects after their moment",
+   "verdict": "pass",
+   "page": null,
+   "what": "all",
+   "detail": "about 87 moments drawn again out of order came out the same; no live thing is shared between pages",
+   "fix": ""
+  },
+  {
+   "check": "held shots",
+   "verdict": "pass",
+   "page": 1,
+   "what": "page 1",
+   "detail": "held-shot keys only while the camera holds, and every hold has one",
+   "fix": ""
+  },
+  {
+   "check": "held shots",
+   "verdict": "pass",
+   "page": 2,
+   "what": "page 2",
+   "detail": "held-shot keys only while the camera holds, and every hold has one",
+   "fix": ""
+  },
+  {
+   "check": "held shots",
+   "verdict": "pass",
+   "page": 3,
+   "what": "page 3",
+   "detail": "held-shot keys only while the camera holds, and every hold has one",
+   "fix": ""
+  },
+  {
+   "check": "overlaps at events",
+   "verdict": "pass",
+   "page": null,
+   "what": "all",
+   "detail": "no two drawn things in the same place at 52 event moments",
+   "fix": ""
+  },
+  {
+   "check": "pops",
+   "verdict": "pass",
+   "page": null,
+   "what": "all",
+   "detail": "nothing comes or goes in 2 frames or fewer outside a planned cut (22 drawn things, 6 live things)",
+   "fix": ""
+  }
+ ],
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "page_timing.layout.pop_frames_max": {
+   "value": 2,
+   "unit": "frames: a thing that comes or goes in this many frames or fewer, outside a planned cut, is a pop",
+   "kind": "judged",
+   "source": "Design (log 35) page pose sampler: any change completed in under 3 frames that is not a planned cut (log 27's one-frame faults: the scissors' jump, the padlock's glow switching on); lesson 86"
+  },
+  "page_timing.layout.pop_strength_change": {
+   "value": 0.8,
+   "unit": "change in strength (0 to 1) that counts as coming or going",
+   "kind": "invented",
+   "source": "check_page_layout.mjs"
+  },
+  "page_timing.layout.hold_without_still_key_frames": {
+   "value": 15,
+   "unit": "frames of a held camera with no still key before it is reported",
+   "kind": "invented",
+   "source": "check_page_layout.mjs; a held shot without a still key draws the whole set every frame, about 5 times slower (design, log 35; filming.seconds_per_frame_* measured 0.9 s held against 4.3 s sliding)"
+  },
+  "page_timing.layout.camera_still_tolerance": {
+   "value": 0.0001,
+   "unit": "metres (and quaternion parts) a camera may differ between frames and still count as holding",
+   "kind": "invented",
+   "source": "check_page_layout.mjs (page_events.mjs rounds the camera to 0.0001 m)"
+  },
+  "page_timing.layout.jump_pixels_min": {
+   "value": 40,
+   "unit": "pixels a drawn thing's middle may move in one frame before it counts as a jump",
+   "kind": "invented",
+   "source": "check_page_layout.mjs; log 27's one-frame faults (the scissors' jump). Judged on what shows: a label whose words have not come in yet does not count"
+  },
+  "page_timing.overlap_opacity_min": {
+   "value": 0.1,
+   "unit": "strength (0 to 1) both lines must have to count as overlapping",
+   "kind": "judged",
+   "source": "Design (log 35) overlay lint: two text boxes overlapping with both alpha above 0.1"
+  },
+  "page_timing.overlap_pixels_min": {
+   "value": 2,
+   "unit": "pixels two boxes must overlap by, across and down",
+   "kind": "invented",
+   "source": "plan_page_timing.py and check_page_layout.mjs: ignores boxes that only touch"
+  }
+ }
+}

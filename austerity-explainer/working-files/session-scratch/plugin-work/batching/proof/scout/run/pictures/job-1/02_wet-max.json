@@ -1,0 +1,43 @@
+{
+ "name": "wet-max",
+ "is_baseline": false,
+ "set": {
+  "amount.wetness": 1.0,
+  "dials.wetness.darken": 0.6,
+  "dials.wetness.wet_roughness": 0.05
+ },
+ "args": {},
+ "script": null,
+ "notes": [],
+ "pictures": [
+  {
+   "camera": "Camera A",
+   "file": "02_wet-max__camera-a.jpg",
+   "engine": "CYCLES",
+   "width": 300,
+   "height": 200,
+   "samples": 8,
+   "seconds": 1.84,
+   "bytes": 8676,
+   "ok": true,
+   "mean_luminance": 0.41430559754371643
+  },
+  {
+   "camera": "Camera B",
+   "file": "02_wet-max__camera-b.jpg",
+   "engine": "CYCLES",
+   "width": 300,
+   "height": 200,
+   "samples": 8,
+   "seconds": 2.45,
+   "bytes": 8217,
+   "ok": true,
+   "mean_luminance": 0.21214522421360016
+  }
+ ],
+ "ok": true,
+ "reset": "restored exactly",
+ "seconds_apply": 0.01,
+ "seconds_draw": 4.29,
+ "seconds_reset": 0.01
+}

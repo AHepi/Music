@@ -1,0 +1,83 @@
+{
+ "stage": "script",
+ "stage_means": "before recording the narration",
+ "verdict": "fail",
+ "counts": {
+  "fail": 1,
+  "warn": 0,
+  "known": 0,
+  "info": 0,
+  "pass": 0
+ },
+ "guarded_step": "recording the narration with the voice service",
+ "step_kind": "paid",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.1,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:21:48",
+ "first_lines": [
+  "Preflight script (before recording the narration): FAIL. 1 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.1 s.",
+  "Paid step BLOCKED: recording the narration with the voice service. First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-script-2026-10-16-112148",
+ "inputs": {
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/script.txt": "f572d396fae9206628714fb2ce00f72e94f2258f"
+ },
+ "missing": [
+  {
+   "input": "word_times",
+   "option": "--word-times",
+   "what": "an earlier word-times file of the SAME voice (to estimate the timeline before paying)",
+   "make": "narration-tools/extract_word_times.py on an earlier recording; the kit ships examples/inflation-chapter-2/word-times.json",
+   "needed_by": "lint_script.py before",
+   "required": false,
+   "why": "without it no estimated timeline is made and the pages' speeds are not judged",
+   "given_but_absent": []
+  },
+  {
+   "input": "spend_ledger",
+   "option": "--spend-ledger",
+   "what": "the spend ledger (allowances and every paid step so far)",
+   "make": "write one entry per paid step ({\"allowances\": [...], \"entries\": [...]}; format in calculators/plan_budget.py's note)",
+   "needed_by": "plan_budget.py ledger",
+   "required": false,
+   "why": "without it nothing checks the step against what is left of the allowance",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "script gate (lint_script.py before)",
+   "tool": "narration-tools/lint_script.py",
+   "version": "645b3b03",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/lint_script.py before /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/script.txt --timeline-out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-script-2026-10-16-112148/estimated-timeline.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-script-2026-10-16-112148/01-script-gate-lint-script-py-before.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-script-2026-10-16-112148/01-script-gate-lint-script-py-before.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-script-2026-10-16-112148/01-script-gate-lint-script-py-before.txt",
+   "seconds": 0.08,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "fail",
+     "check": "the tool stopped",
+     "where": "",
+     "text": "it stopped with an error: File \"/usr/lib/python3.13/json/decoder.py\", line 345, in decode | obj, end = self.raw_decode(s, idx=_w(s, 0).end()) | ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^ | File \"/usr/lib/python3.13/json/decoder.py\", line 363, in raw_decode | raise JSONDecodeError(\"Expecting value\", s, err.value) from None | json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+     "fix": "",
+     "tool": "lint_script.py"
+    }
+   ],
+   "verdict": "fail"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-script-2026-10-16-112148.md"
+}

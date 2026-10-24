@@ -1,0 +1,234 @@
+{
+ "files": [
+  "no-2-chimney-a-round3.glb",
+  "no-2-chimney-a-round4.glb"
+ ],
+ "checks_run": [
+  "stripes",
+  "same-plane",
+  "floors",
+  "names",
+  "glass",
+  "glow",
+  "sizes",
+  "front"
+ ],
+ "stripes": [
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-brick",
+   "striped_square_metres": 31.2,
+   "of_square_metres": 49.2,
+   "share": 0.634,
+   "placed_copies": 1
+  },
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-chimney-brick",
+   "striped_square_metres": 30.25,
+   "of_square_metres": 36.31,
+   "share": 0.833,
+   "placed_copies": 1
+  },
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-stone-lit-sides",
+   "striped_square_metres": 8.32,
+   "of_square_metres": 8.32,
+   "share": 1.0,
+   "placed_copies": 1
+  },
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-chimney-brick-black",
+   "striped_square_metres": 6.73,
+   "of_square_metres": 22.57,
+   "share": 0.298,
+   "placed_copies": 1
+  },
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-chimney-cap",
+   "striped_square_metres": 5.3,
+   "of_square_metres": 15.09,
+   "share": 0.351,
+   "placed_copies": 1
+  },
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-stone",
+   "striped_square_metres": 4.16,
+   "of_square_metres": 79.99,
+   "share": 0.052,
+   "placed_copies": 1
+  },
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-stone-lit-lane-side",
+   "striped_square_metres": 4.16,
+   "of_square_metres": 4.16,
+   "share": 1.0,
+   "placed_copies": 1
+  },
+  {
+   "file": "no-2-chimney-a-round3.glb",
+   "part": "no-2-chimney-a",
+   "material": "no-2-chimney-brick-sooted",
+   "striped_square_metres": 2.26,
+   "of_square_metres": 6.24,
+   "share": 0.362,
+   "placed_copies": 1
+  }
+ ],
+ "same_plane": [
+  {
+   "objects": [
+    "no-2-chimney-a-round3.glb: no-2-chimney-a",
+    "no-2-chimney-a-round4.glb: no-2-chimney-a"
+   ],
+   "square_metres": 317.1643,
+   "at": [
+    5.8,
+    35.167,
+    24.767
+   ],
+   "facing": [
+    -1.0,
+    0.0,
+    0.0
+   ]
+  }
+ ],
+ "floors_over_ground": [],
+ "names": {
+  "no-2-chimney-a-round3.glb": {
+   "numbered_roots": [],
+   "numbered_parts": [],
+   "root_problem": "its root is \"no-2-chimney-a\", not \"no-2-chimney-a-round3\" (named as the file)",
+   "fails": false,
+   "problems": [
+    "its root is \"no-2-chimney-a\", not \"no-2-chimney-a-round3\" (named as the file)"
+   ]
+  },
+  "no-2-chimney-a-round4.glb": {
+   "numbered_roots": [],
+   "numbered_parts": [],
+   "root_problem": "its root is \"no-2-chimney-a\", not \"no-2-chimney-a-round4\" (named as the file)",
+   "fails": false,
+   "problems": [
+    "its root is \"no-2-chimney-a\", not \"no-2-chimney-a-round4\" (named as the file)"
+   ]
+  }
+ },
+ "glass_alpha_from_picture": [],
+ "glowing_light_base": [],
+ "sizes": {},
+ "fronts": {
+  "no-2-chimney-a-round3.glb": null,
+  "no-2-chimney-a-round4.glb": null
+ },
+ "triangles": {
+  "no-2-chimney-a-round3.glb": 204,
+  "no-2-chimney-a-round4.glb": 204
+ },
+ "blender": {},
+ "glowing_over_a_picture": [],
+ "failed": [
+  "same-plane",
+  "stripes"
+ ],
+ "calculator": "model_lint",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "views_and_models.model_lint.stripe_ratio_of_median": {
+   "value": 0.02,
+   "unit": "share of the part's median texture area per square metre",
+   "kind": "judged"
+  },
+  "views_and_models.model_lint.stripe_report_area_square_metres": {
+   "value": 0.5,
+   "unit": "square metres of striped faces in one part",
+   "kind": "judged"
+  },
+  "views_and_models.model_lint.stripe_face_min_area_square_metres": {
+   "value": 1e-06,
+   "unit": "square metres",
+   "kind": "judged"
+  },
+  "views_and_models.lettering_material_patterns": {
+   "value": [
+    "*-lettering",
+    "*-lettering.0*",
+    "*-stencil",
+    "*-stencil.0*",
+    "*-printing",
+    "*-printing.0*",
+    "*-paper",
+    "*-paper.0*"
+   ],
+   "unit": "material name patterns (lower case, * any letters)",
+   "kind": "judged"
+  },
+  "views_and_models.model_lint.same_plane_gap_metres": {
+   "value": 0.0001,
+   "unit": "metres between the two planes",
+   "kind": "invented"
+  },
+  "views_and_models.model_lint.same_plane_normal_cos": {
+   "value": 0.9999,
+   "unit": "cosine between the two faces' normals (facing the same way)",
+   "kind": "invented"
+  },
+  "views_and_models.model_lint.same_plane_overlap_min_square_metres": {
+   "value": 0.001,
+   "unit": "square metres of overlap (or of raised floor) worth reporting",
+   "kind": "invented"
+  },
+  "models.ground_under_raised_area_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "views_and_models.model_lint.upward_normal_z_min": {
+   "value": 0.9,
+   "unit": "normal's z (1 = straight up)",
+   "kind": "invented"
+  },
+  "views_and_models.model_lint.floor_min_square_metres": {
+   "value": 1.0,
+   "unit": "square metres of a raised floor over another ground",
+   "kind": "invented"
+  },
+  "views_and_models.model_lint.glass_material_patterns": {
+   "value": [
+    "*glass*",
+    "*lens*",
+    "*mantle*"
+   ],
+   "unit": "material name patterns (lower case)",
+   "kind": "judged"
+  },
+  "views_and_models.model_lint.glowing_base_brightness_max": {
+   "value": 0.05,
+   "unit": "base colour brightness (0 to 1, linear)",
+   "kind": "invented"
+  },
+  "models.striped_parts_allowed": {
+   "value": 0,
+   "unit": "parts",
+   "kind": "judged"
+  },
+  "models.coplanar_gap_metres": {
+   "value": 0.01,
+   "unit": "metres",
+   "kind": "judged"
+  }
+ }
+}

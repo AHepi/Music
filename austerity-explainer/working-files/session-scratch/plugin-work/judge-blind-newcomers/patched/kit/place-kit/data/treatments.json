@@ -1,0 +1,364 @@
+{
+ "about": "The seventeen treatments the audit looks for (sixteen from the design plus shape_damage), what each one is in plain words, which of the person's words it covers, which verb makes it, where the audit reads it, and how a smaller model might skip it and what stops that. made_by names a function (check-presets reads the file and finds it); tested_by names a test file and a phrase the test prints.",
+ "treatments": {
+  "normal_map": {
+   "plain": "a real normal map (small bumps and dents) on the surface, pointing the right way",
+   "persons_words": [
+    "normals"
+   ],
+   "made_by": {
+    "verb": "surfaces",
+    "module": "surfaces/materials.py",
+    "function": "give_surfaces"
+   },
+   "checked_by": "materials[].treatments.normal_map and normal_maps[]",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "normal maps are OpenGL"
+   },
+   "applies_to": "all hard surfaces",
+   "skip_and_stop": "bump only, a flipped green channel or an sRGB map: the audit reads the wiring and the direction test"
+  },
+  "displacement": {
+   "plain": "real displacement of the surface where the role says (roads, mud, thatch, rock ground), on a dense mesh",
+   "persons_words": [
+    "displacements"
+   ],
+   "made_by": {
+    "verb": "surfaces",
+    "module": "surfaces/displacement.py",
+    "function": "set_displacement"
+   },
+   "checked_by": "materials[].treatments.displacement.detail",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "displacement is set"
+   },
+   "applies_to": "roles with displace true",
+   "skip_and_stop": "a Displacement node on a flat plane or with Bump Only: the audit reads method, depth and mesh density"
+  },
+  "roughness_variation": {
+   "plain": "roughness that changes across the surface (not one number)",
+   "persons_words": [
+    "roughness"
+   ],
+   "made_by": {
+    "verb": "surfaces",
+    "module": "surfaces/materials.py",
+    "function": "give_surfaces"
+   },
+   "checked_by": "materials[].treatments.roughness_variation",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "roughness varies"
+   },
+   "applies_to": "all",
+   "skip_and_stop": "a constant roughness is read from the Principled node and fails"
+  },
+  "colour_variation": {
+   "plain": "colour that changes across the surface and from object to object",
+   "persons_words": [
+    "colour variation"
+   ],
+   "made_by": {
+    "verb": "surfaces",
+    "module": "surfaces/materials.py",
+    "function": "give_surfaces"
+   },
+   "checked_by": "materials[].treatments.colour_variation",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "colour varies"
+   },
+   "applies_to": "all",
+   "skip_and_stop": "a plain colour fails"
+  },
+  "bevelled_edges": {
+   "plain": "edges that are rounded a little (a razor-sharp box edge reads as a computer model)",
+   "persons_words": [
+    "damage"
+   ],
+   "made_by": {
+    "verb": "surfaces",
+    "module": "surfaces/bevel.py",
+    "function": "bevel_objects"
+   },
+   "checked_by": "objects[].geometry.bevel",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "bevel"
+   },
+   "applies_to": "wall, timber, iron",
+   "skip_and_stop": "the audit counts plain boxes"
+  },
+  "dirt": {
+   "plain": "dirt: soil film, mud splash at wall feet, dust, polish on worn ground",
+   "persons_words": [
+    "dirt"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/dirt.py",
+    "function": "build_dirt"
+   },
+   "checked_by": "materials[].treatments.dirt and objects[].layer_amounts",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer dirt"
+   },
+   "applies_to": "all",
+   "skip_and_stop": "a layer with amount 0 or a missing pk_dirt_amount fails"
+  },
+  "grime": {
+   "plain": "grime: soot, run-off streaks, damp bands, stains",
+   "persons_words": [
+    "grime",
+    "stains"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/grime.py",
+    "function": "build_grime"
+   },
+   "checked_by": "as dirt",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer grime"
+   },
+   "applies_to": "ground, wall, roof, timber, stone",
+   "skip_and_stop": "as dirt"
+  },
+  "weathering": {
+   "plain": "weathering: silvering of timber, sun fade, bleaching, patina",
+   "persons_words": [
+    "weathering"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/weathering.py",
+    "function": "build_weathering"
+   },
+   "checked_by": "as dirt",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer weathering"
+   },
+   "applies_to": "outdoor surfaces",
+   "skip_and_stop": "as dirt"
+  },
+  "wetness": {
+   "plain": "wetness: darker, smoother, puddles by depth; dry, damp or wet by state",
+   "persons_words": [
+    "wetness"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/wetness.py",
+    "function": "build_wetness"
+   },
+   "checked_by": "as dirt (amount 0 is allowed when the state is dry)",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer wetness"
+   },
+   "applies_to": "all outdoor",
+   "skip_and_stop": "as dirt"
+  },
+  "cracks_and_chips": {
+   "plain": "cracks and chips painted into the surface (and bump)",
+   "persons_words": [
+    "cracks",
+    "damage"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/cracks_and_chips.py",
+    "function": "build_cracks_and_chips"
+   },
+   "checked_by": "as dirt",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer cracks_and_chips"
+   },
+   "applies_to": "hard surfaces",
+   "skip_and_stop": "as dirt"
+  },
+  "edge_wear": {
+   "plain": "edge wear: pale rubbed edges and worn corners",
+   "persons_words": [
+    "damage",
+    "edge wear"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/edge_wear.py",
+    "function": "build_edge_wear"
+   },
+   "checked_by": "as dirt",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer edge_wear"
+   },
+   "applies_to": "wall, timber, stone, iron, prop",
+   "skip_and_stop": "as dirt"
+  },
+  "moss_and_algae": {
+   "plain": "moss and algae where it is damp and shady, never on trodden or kept-clear ground",
+   "persons_words": [
+    "moss"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/moss_and_algae.py",
+    "function": "build_moss_and_algae"
+   },
+   "checked_by": "as dirt",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer moss_and_algae"
+   },
+   "applies_to": "walls, roofs, stone, tree, ground (wanted)",
+   "skip_and_stop": "as dirt; indoors it is allowed off with a reason"
+  },
+  "rust": {
+   "plain": "rust on iron: height bands, collars at joins, runs below",
+   "persons_words": [
+    "weathering"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/rust.py",
+    "function": "build_rust"
+   },
+   "checked_by": "as dirt",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer rust"
+   },
+   "applies_to": "iron",
+   "skip_and_stop": "as dirt"
+  },
+  "rubbish": {
+   "plain": "rubbish: muck and litter marks at gutters, wall feet and lane edges, never on the crown",
+   "persons_words": [
+    "rubbish"
+   ],
+   "made_by": {
+    "verb": "age",
+    "module": "wear/layers/rubbish.py",
+    "function": "build_rubbish"
+   },
+   "checked_by": "as dirt",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "layer rubbish"
+   },
+   "applies_to": "ground",
+   "skip_and_stop": "as dirt"
+  },
+  "plants": {
+   "plain": "weeds, tufts, ferns, nettles and moss cushions as small 3D pieces, off the wheel tracks and out of puddles",
+   "persons_words": [
+    "weeds",
+    "moss"
+   ],
+   "made_by": {
+    "verb": "grow",
+    "module": "growth/scatter.py",
+    "function": "scatter_plants"
+   },
+   "checked_by": "scatter.groups[] counts and keep-out counts",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "plants kept out"
+   },
+   "applies_to": "outdoor ground",
+   "skip_and_stop": "the audit counts pieces per 100 square metres and the roots inside keep-out (must be 0)"
+  },
+  "litter_pieces": {
+   "plain": "leaves, sticks, straw, pine needles, dung lumps as small 3D pieces",
+   "persons_words": [
+    "rubbish"
+   ],
+   "made_by": {
+    "verb": "grow",
+    "module": "growth/scatter.py",
+    "function": "scatter_litter"
+   },
+   "checked_by": "scatter.groups[]",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "plants kept out"
+   },
+   "applies_to": "outdoor ground",
+   "skip_and_stop": "as plants"
+  },
+  "shape_damage": {
+   "plain": "damage as SHAPE: boards that bow, corners that chip, no two parts alike (what read at film size in the garden)",
+   "persons_words": [
+    "damage"
+   ],
+   "made_by": {
+    "verb": "damage",
+    "module": "surfaces/damage.py",
+    "function": "damage_objects"
+   },
+   "checked_by": "objects[].geometry.shape_damage and siblings",
+   "tested_by": {
+    "file": "test_place_blender.py",
+    "phrase": "shape damage"
+   },
+   "applies_to": "timber, roof, stone (wanted for wall, prop)",
+   "skip_and_stop": "the audit lists siblings of one role that are exact copies"
+  }
+ },
+ "object_checks": {
+  "uv": "an object under a normal-mapped material has a UV layer and few mirrored faces",
+  "carried": "the part is carried from the ground up (construction check)",
+  "scale_ok": "the size fits the real-world facts table"
+ },
+ "persons_words_map": {
+  "normals": [
+   "normal_map"
+  ],
+  "displacements": [
+   "displacement"
+  ],
+  "dirt": [
+   "dirt"
+  ],
+  "grime and stains": [
+   "grime"
+  ],
+  "weeds": [
+   "plants"
+  ],
+  "weathering": [
+   "weathering",
+   "rust"
+  ],
+  "damage": [
+   "cracks_and_chips",
+   "edge_wear",
+   "bevelled_edges",
+   "shape_damage"
+  ],
+  "moss": [
+   "moss_and_algae",
+   "plants"
+  ],
+  "wetness": [
+   "wetness"
+  ],
+  "rubbish": [
+   "rubbish",
+   "litter_pieces"
+  ],
+  "cracks": [
+   "cracks_and_chips"
+  ],
+  "edge wear": [
+   "edge_wear"
+  ]
+ }
+}

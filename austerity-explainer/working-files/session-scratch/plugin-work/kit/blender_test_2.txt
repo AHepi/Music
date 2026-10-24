@@ -1,0 +1,114 @@
+== place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo
+PASS  the flat hut fails the audit (exit 1): exit 1
+PASS  the flat hut report names normal_map: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names displacement: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names dirt: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names grime: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names weathering: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names cracks_and_chips: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names bevelled_edges: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names shape_damage: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names plants: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names litter: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the report names the plank that floats and says how to fix it: yes
+      proves: the construction check can fail (the negative proof)
+PASS  the audit file holds facts only: no overall verdict, no exit code, no list of checks (the plain-Python judge decides, with the house numbers): yes
+PASS  the audit records the scene file hash, the settings hash, the Blender version and what was measured: yes
+PASS  the good hut finishes and passes the audit at full size (exit 0): got 0, expected 0
+PASS  finishing the hut takes 7.9 s (full size: 1024 px maps, 0.1 m masks): 7.9 s
+PASS  every step reports a plain PASS line (roles, roads, surfaces, damage, plan masks, wear, growth, light): yes
+PASS  it ends by saying what to run next (the preflight place stage): yes
+PASS  a quick trial finishes but is refused as a final by the audit (exit 1) and the line says "quick": exit 1
+PASS  the same quick scene is accepted as a trial with --allow-quick: got 0, expected 0
+PASS  the yard finishes and passes the audit (exit 0 or a LOOK-only warning): exit 0: 
+PASS  every visible object has a kit material (not a plain colour any more): 41 slots
+FAIL  normal maps are OpenGL: every map the kit made agrees with its own height (correlation at least +0.25 on every axis that has a slope): 9 maps checked against their height pictures
+      recorded in: place_surfaces.normal_direction_correlation_min = 0.25
+      proves: the red and green channels point the way Blender's Normal Map node expects
+PASS  ...and a copy of each with its green channel flipped reads wrong on y (the control is not blind): yes
+PASS  ...and every normal map is a Non-Color picture: got {'Non-Color'}, expected {'Non-Color'}
+PASS  ...and every kit material has a Normal Map node fed by the picture and wired to the shader's Normal: []
+PASS  displacement is set on the ground (a Displacement node on the output, method Displacement and Bump): [('Ground', 'BOTH')]
+PASS  ...on a ground mesh fine enough to show it (a graded or uniform grid of thousands of faces, not a flat plane): [72478]
+PASS  roughness varies (the Roughness input is fed by a texture, not one number) on every wall, roof, timber, iron and stone material: yes
+PASS  colour varies (the Base Color input is fed by noise or a colour ramp, not one colour) on every one of them: yes
+PASS  bevel: walls, doors and posts have a Bevel modifier and a Weighted Normal modifier (hardened edges, clean shading): []
+PASS  layer dirt is in a material and has an amount above 0 on the objects that use it: yes
+PASS  layer grime is in a material and has an amount above 0 on the objects that use it: yes
+PASS  layer weathering is in a material and has an amount above 0 on the objects that use it: yes
+PASS  layer wetness is in a material and has an amount above 0 on the objects that use it (the yard is damp): yes
+PASS  layer cracks_and_chips is in a material and has an amount above 0 on the objects that use it: yes
+PASS  layer edge_wear is in a material and has an amount above 0 on the objects that use it: yes
+PASS  layer moss_and_algae is in a material and has an amount above 0 on the objects that use it: yes
+PASS  layer rust is in the iron materials (and only on iron) and has an amount above 0: ['Iron band 1', 'Iron band 2']
+PASS  layer rubbish is in a material and has an amount above 0 on the objects that use it: yes
+PASS  the original plain materials are kept with a fake user (a material nothing uses is dropped when a file is saved): ['bark_mat', 'door_mat', 'ground_mat', 'iron_mat', 'roof_mat', 'stone_mat', 'wall_mat', 'wood_mat']
+PASS  shape damage: siblings of one role (posts, rails, walls) are no longer exact copies (at least 80 percent have a shape of their own): wall.plaster 8 of 8, timber.post 9 of 9, timber.fence 14 of 14
+PASS  ...every wall, post and plank carries a damage modifier with a strength of a few millimetres to a few centimetres: {'wall.plaster': [0.0149], 'timber.door': [0.0149], 'timber.post': [0.0144, 0.0149], 'timber.fence': [0.0149]}
+PASS  ...and damage does not lift anything off the ground (every lowest point is within 6 cm of where it was seated): {}
+PASS  the lane is real geometry: ruts measured from the ground by rays are about as deep as the settings say (within 40 percent of 8 cm): median 7.2 cm, settings 8 cm (from 3.8 to 9.3)
+PASS  ...and the two ruts are a gauge apart (1.3 m, within 15 cm): got 1.32, recorded 1.3 (allowed difference 0.15)
+PASS  plants kept out: no plant or litter piece stands in a wheel rut (counted from the lane's own geometry): got 0, expected 0
+      recorded in: exact-zero gate on the wheel-track mask
+FAIL  plants kept out: ...none within 2 cm of a rut edge: got 7, expected 0
+PASS  plants kept out: ...none in the trodden centre strip of the lane: got 0, expected 0
+PASS  ...but weeds do grow beside the lane and across the yard (the gates are not "no plants at all"): near the lane 150, elsewhere 925, plants 485, litter 646
+PASS  the audit's own recount agrees (every scatter group has 0 on a track, a crown, a puddle, a keep-out and within 5 cm of litter): yes
+PASS  the audit measured the ruts itself (ruts found, depth and gauge recorded): yes
+PASS  dial zero: with the master at 0 the picture is EXACTLY the picture with every layer removed (largest pixel difference): got 0.0, expected 0.0
+      recorded in: measured here: 0.0; the same picture drawn from the same scene
+PASS  determinism: drawing the same scene twice gives the same picture (largest pixel difference): got 0.0, expected 0.0
+PASS  the wear changes the picture (mean pixel change at least 3 percent of the mean brightness): 14.8% of the brightness
+PASS  isolation: each of dirt, grime, weathering, wetness and moss_and_algae on its own changes the picture: {'cracks_and_chips': 0.000769, 'dirt': 0.0082, 'edge_wear': 8.5e-05, 'grime': 0.001706, 'moss_and_algae': 0.000178, 'rubbish': 1e-06, 'weathering': 0.011028, 'wetness': 0.00484}
+PASS  ...and every layer that is in is a layer of the chain, never a stray: yes
+PASS  layer_off takes a layer out of every chain and layer_on puts it back: LAYERTEST 5 0 5 0.0 0.96 'the layer "dirt" has no dial "no_such_dial" (its dials: amount, seed, film, foo
+PASS  set_state moves the wetness amount (dry gives 0, wet gives more than damp) and a dial name that does not exist is an error, not silent: LAYERTEST 5 0 5 0.0 0.96 'the layer "dirt" has no dial "no_such_dial" (its dials: amount, seed, film, foo
+PASS  finishing twice gives the same scene: the same objects, shapes, places, materials and roles: []
+PASS  ...and the same materials and node groups (by name): got (['PK Scatter', 'PK ground.earth / packed_earth', 'PK roof.shingle / shingle_wood', 'PK timber.door / timber_planks', 'PK timber.floor / timber_planks', 'PK wall.plaster / plaster_lime', 'door_mat', 'floor_mat', 'ground_mat', 'roof_mat', 'wall_mat'], ['PK Cracks And Chips', 'PK Dirt', 'PK Edge Wear', 'PK Grime', 'PK Moss And Algae', 'PK Plan', 'PK Rubbish', 'PK Weathering', 'PK Wetness']), expected (['PK Scatter', 'PK ground.earth / packed_earth', 'PK roof.shingle / shingle_wood', 'PK timber.door / timber_planks', 'PK timber.floor / timber_planks', 'PK wall.plaster / plaster_lime', 'door_mat', 'floor_mat', 'ground_mat', 'roof_mat', 'wall_mat'], ['PK Cracks And Chips', 'PK Dirt', 'PK Edge Wear', 'PK Grime', 'PK Moss And Algae', 'PK Plan', 'PK Rubbish', 'PK Weathering', 'PK Wetness'])
+PASS  determinism: finishing the same flat scene twice gives the same pictures (every kit picture has the same pixels): 11 pictures
+FAIL  undo: the original plain materials are back in every slot: got ['door_mat', 'floor_mat', 'roof_mat', 'wall_mat'], expected ['door_mat', 'floor_mat', 'ground_mat', 'roof_mat', 'wall_mat']
+FAIL  undo: every object the builder made is still there and nothing the kit made is left (no scatter pieces, no modifiers, no wear amounts): no
+PASS  undo: the kit's pictures are gone: yes
+PASS  construction: a seated box is carried and does not float: yes
+PASS  construction: a plank 6 cm above the ground floats, with a gap of about 60 mm: yes
+PASS  construction: a plank 3 mm above the ground is within the tolerance and does not float: yes
+PASS  construction: a beam resting on two posts is carried, not hung, and its free span is inside the limit: span 1.9 m of 2.5
+PASS  construction: a beam 3 cm above two posts floats AND each post is called short by about 30 mm: yes
+PASS  construction: a fence rail joined into two posts is carried through them and may hang: yes
+PASS  construction: a beam (a role that may not hang) joined into the side of two posts is called hung and not allowed: yes
+PASS  construction: a rail with only 2 cm inside its post is NOT joined (it floats): yes
+PASS  construction: a closed box turned inside out is found: yes
+PASS  construction: two planks with the same top plane flicker (coplanar faces found): yes
+PASS  construction: a door whose sill is 60 cm above the ground has no floor close below it: yes
+PASS  construction: a plank spanning 2.5 m between two blocks has a free span of about 2.5 m (over its 1.38 m limit): yes
+PASS  construction: a lamp inside a solid is found: yes
+FAIL  one object with two materials gets two roles: the staves a barrel's wood, the band iron: ['PK iron.fitting / iron_forged', 'PK iron.fitting / iron_forged']
+PASS  a material that carries its own picture (hand painted) is kept, not replaced: ['painted by hand']
+PASS  UVs are in metres: the biggest side of every wall box has a UV extent about its real size (0.9 to 1.6 times): [('Shed A wall north', [4.2, 2.2], [4.2, 0.3, 2.2]), ('Shed A wall south', [4.2, 2.2], [4.2, 0.3, 2.21]), ('Shed A wall east', [3.4, 3.4], [0.31, 3.4, 2.21])]
+FAIL  a scene with no light gets one: `light` adds a sun and more, and says so: no
+PASS  renderer-for says EEVEE with its reason for a daylight yard, and the exit code is 0: EEVEE
+PASS  finish-part with an owner that owns nothing touches no object (the hut stays plain boxes): yes
+PASS  normals-test passes the kit's own maps (exit 0): got 0, expected 0
+FAIL  normals-test FAILS a normal map whose green channel was flipped by hand (exit 1) and names the picture: PASS NORMAL_DIRECTION PASS (sun from +X: 0.794 vs 0.415; sun from +Y: 0.794 vs 0.411; the flipped-green control reads the other way: True)
+PASS  D7 low-angle test (packed_earth): displacement with the normal strength at 0.6 does not double the relief (at most 1.3 times the larger of the two alone): 0.97; normal alone 0.67, displacement alone 0.27, both 0.65, both with the normal at full strength 0.79
+      recorded in: measured here (a flat 120 x 120 plane, sun 10 degrees above it, Cycles on the processor, 16 samples)
+PASS  D7 (packed_earth): even at full normal strength the pair is under twice the normal map alone (so no doubling was found at either strength): 1.18
+PASS  D7 low-angle test (dirt_road): displacement with the normal strength at 0.6 does not double the relief (at most 1.3 times the larger of the two alone): 1.10; normal alone 0.76, displacement alone 0.53, both 0.83, both with the normal at full strength 0.95
+      recorded in: measured here (a flat 120 x 120 plane, sun 10 degrees above it, Cycles on the processor, 16 samples)
+PASS  D7 (dirt_road): even at full normal strength the pair is under twice the normal map alone (so no doubling was found at either strength): 1.25
+NOTE  timings measured here (seconds on this computer, Blender finish, hut, full size: 7.9, finish, hut, quick: 2.6, finish, yard (36 x 26 m ground, 41 objects, one lane), full size: 28.5, five tiny Cycles pictures of the hut (192 x 128, 8 samples), normals-test (every map against its height, and the test light): 1.9)
+-- place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo: 83 of 90 checks passed; FAILED: normal maps are OpenGL: every map the kit made agrees with its own height (correlation at least +0.25 on every axis that has a slope), plants kept out: ...none within 2 cm of a rut edge, undo: the original plain materials are back in every slot, undo: every object the builder made is still there and nothing the kit made is left (no scatter pieces, no modifiers, no wear amounts), one object with two materials gets two roles: the staves a barrel's wood, the band iron, a scene with no light gets one: `light` adds a sun and more, and says so, normals-test FAILS a normal map whose green channel was flipped by hand (exit 1) and names the picture
+
+real	1m47.734s
+user	2m25.103s
+sys	0m16.601s

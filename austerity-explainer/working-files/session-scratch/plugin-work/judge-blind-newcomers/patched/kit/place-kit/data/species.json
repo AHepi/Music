@@ -1,0 +1,302 @@
+{
+ "about": "The 3D plant and litter species: chunky designed shapes built in code (growth/pieces.py), where each likes to grow (likes: 0..1 weights on base, damp, shade, wall_foot, edge, seam) and its gates. Sizes are tall (or across for flat things) in centimetres. Colours are sRGB hex, pulled 45 percent toward their own grey so they sit in the style. Gates are exact: a piece whose root is inside footfall 0.6, crown 0.7, keepclear 0.5, a puddle or within 5 cm of litter is never made.",
+ "palette": {
+  "leaf": "#4d6f36",
+  "leaf_light": "#6a8a44",
+  "leaf_dark": "#38552a",
+  "dead": "#a89560",
+  "fern": "#3f6a3a",
+  "bramble": "#4a5a30",
+  "nettle": "#476b34",
+  "moss": "#587a38",
+  "moss_light": "#7a9548",
+  "straw": "#c2a85e",
+  "needle": "#7a5a32",
+  "stick": "#5a4630",
+  "dung": "#4a3a24",
+  "autumn_leaf": "#8a5a2a",
+  "clover": "#5a8040"
+ },
+ "tuning": {
+  "grey_pull": 0.45,
+  "size_range_min_ratio": 3.0,
+  "tuft_meshes_min": 8,
+  "kind": "judged",
+  "source": "the garden ground builder (g6_tufts.py): at least 8 tuft meshes, scale range 3 to 1, colour pulled 45 percent to grey"
+ },
+ "kinds": {
+  "tuft": {
+   "group": "plant",
+   "builder": "tuft",
+   "size_cm": [
+    6,
+    28
+   ],
+   "share": 0.3,
+   "colours": [
+    "leaf",
+    "leaf_light",
+    "dead"
+   ],
+   "likes": {
+    "base": 0.5,
+    "damp": 0.3,
+    "shade": 0.1,
+    "wall_foot": 0.3,
+    "edge": 0.5,
+    "seam": 0.4
+   },
+   "gates": {},
+   "note": "a tuft of 5 to 9 folded blades",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "clover": {
+   "group": "plant",
+   "builder": "rosette",
+   "size_cm": [
+    3,
+    9
+   ],
+   "share": 0.08,
+   "colours": [
+    "clover",
+    "leaf"
+   ],
+   "likes": {
+    "base": 0.4,
+    "damp": 0.4,
+    "shade": 0.2,
+    "wall_foot": 0.1,
+    "edge": 0.3,
+    "seam": 0.6
+   },
+   "gates": {},
+   "note": "a low mat of round leaves",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "nettle": {
+   "group": "plant",
+   "builder": "stalk",
+   "size_cm": [
+    30,
+    90
+   ],
+   "share": 0.1,
+   "colours": [
+    "nettle",
+    "leaf_dark"
+   ],
+   "likes": {
+    "base": 0.3,
+    "damp": 0.5,
+    "shade": 0.3,
+    "wall_foot": 0.7,
+    "edge": 0.4,
+    "seam": 0.1
+   },
+   "gates": {},
+   "note": "tall stalks with toothed leaves, at wall feet and fences",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "fern": {
+   "group": "plant",
+   "builder": "frond",
+   "size_cm": [
+    20,
+    80
+   ],
+   "share": 0.1,
+   "colours": [
+    "fern",
+    "leaf_dark"
+   ],
+   "likes": {
+    "base": 0.2,
+    "damp": 0.7,
+    "shade": 0.8,
+    "wall_foot": 0.3,
+    "edge": 0.2,
+    "seam": 0.0
+   },
+   "gates": {},
+   "note": "arching fronds in shade",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "bramble": {
+   "group": "plant",
+   "builder": "arch",
+   "size_cm": [
+    40,
+    120
+   ],
+   "share": 0.04,
+   "colours": [
+    "bramble",
+    "leaf_dark"
+   ],
+   "likes": {
+    "base": 0.2,
+    "damp": 0.3,
+    "shade": 0.4,
+    "wall_foot": 0.3,
+    "edge": 0.8,
+    "seam": 0.0
+   },
+   "gates": {},
+   "note": "arching thorny stems at the edge of the place",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "moss_cushion": {
+   "group": "plant",
+   "builder": "cushion",
+   "size_cm": [
+    4,
+    18
+   ],
+   "share": 0.12,
+   "colours": [
+    "moss",
+    "moss_light"
+   ],
+   "likes": {
+    "base": 0.2,
+    "damp": 0.8,
+    "shade": 0.8,
+    "wall_foot": 0.5,
+    "edge": 0.3,
+    "seam": 0.5
+   },
+   "gates": {},
+   "note": "lumpy cushions with a rolled edge, never brighter than the stone below",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "leaf": {
+   "group": "litter",
+   "builder": "flake",
+   "size_cm": [
+    3,
+    9
+   ],
+   "share": 0.14,
+   "colours": [
+    "autumn_leaf",
+    "dead",
+    "leaf_dark"
+   ],
+   "likes": {
+    "base": 0.4,
+    "damp": 0.4,
+    "shade": 0.3,
+    "wall_foot": 0.7,
+    "edge": 0.7,
+    "seam": 0.3
+   },
+   "gates": {},
+   "note": "single leaves, at wall feet, gutters and lane edges",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "pine_needles": {
+   "group": "litter",
+   "builder": "clump",
+   "size_cm": [
+    4,
+    12
+   ],
+   "share": 0.05,
+   "colours": [
+    "needle"
+   ],
+   "likes": {
+    "base": 0.5,
+    "damp": 0.3,
+    "shade": 0.5,
+    "wall_foot": 0.2,
+    "edge": 0.4,
+    "seam": 0.2
+   },
+   "gates": {},
+   "note": "a clump of needles",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "stick": {
+   "group": "litter",
+   "builder": "stick",
+   "size_cm": [
+    8,
+    40
+   ],
+   "share": 0.04,
+   "colours": [
+    "stick"
+   ],
+   "likes": {
+    "base": 0.5,
+    "damp": 0.3,
+    "shade": 0.3,
+    "wall_foot": 0.3,
+    "edge": 0.5,
+    "seam": 0.1
+   },
+   "gates": {},
+   "note": "a bent twig",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "straw": {
+   "group": "litter",
+   "builder": "straw",
+   "size_cm": [
+    6,
+    30
+   ],
+   "share": 0.02,
+   "colours": [
+    "straw"
+   ],
+   "likes": {
+    "base": 0.4,
+    "damp": 0.1,
+    "shade": 0.1,
+    "wall_foot": 0.6,
+    "edge": 0.6,
+    "seam": 0.2
+   },
+   "gates": {},
+   "note": "a few straws near doors and carts",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  },
+  "dung_lump": {
+   "group": "litter",
+   "builder": "lump",
+   "size_cm": [
+    3,
+    9
+   ],
+   "share": 0.01,
+   "colours": [
+    "dung"
+   ],
+   "likes": {
+    "base": 0.5,
+    "damp": 0.2,
+    "shade": 0.1,
+    "wall_foot": 0.1,
+    "edge": 0.4,
+    "seam": 0.0
+   },
+   "gates": {},
+   "note": "a lump near stables and tracks (never on the crown)",
+   "kind": "invented",
+   "source": "the plugin 1.4.0 design: a first try, judge by looking"
+  }
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "scene": "inflation-chapter-2-newcomers",
+ "frames": [
+  1407,
+  3704
+ ],
+ "frame_count": 2297,
+ "frame_kinds": {
+  "held_still": 0,
+  "held_live": 2051,
+  "moving": 175,
+  "join": 71
+ },
+ "frame_kinds_by_view": {
+  "stand-in": {
+   "held_still": 0,
+   "held_live": 0,
+   "moving": 0,
+   "join": 15
+  },
+  "3a both gates": {
+   "held_still": 0,
+   "held_live": 231,
+   "moving": 0,
+   "join": 0
+  },
+  "3b the quiet gate": {
+   "held_still": 0,
+   "held_live": 486,
+   "moving": 90,
+   "join": 25
+  },
+  "4a the flat-out gate": {
+   "held_still": 0,
+   "held_live": 519,
+   "moving": 85,
+   "join": 6
+  },
+  "5a the flat-out gate": {
+   "held_still": 0,
+   "held_live": 351,
+   "moving": 0,
+   "join": 0
+  },
+  "5b both factories": {
+   "held_still": 0,
+   "held_live": 464,
+   "moving": 0,
+   "join": 25
+  }
+ },
+ "rates": {
+  "seconds_per_frame": {
+   "held_still": 0.8,
+   "held_live": 0.9,
+   "moving": 4.3,
+   "join": 1.8
+  },
+  "seconds_loading_a_piece": 34,
+  "source": "the table in film-settings.json (round 4, one worker): a fallback, not measured on this film"
+ },
+ "steady_seconds_a_frame": 1.187,
+ "workers": 2,
+ "speed_up": 1.157,
+ "processors": 4,
+ "free_memory_gb": 12.5,
+ "piece_frames": 287,
+ "piece_frames_why": {
+  "by_load": 287,
+  "by_loss": 758
+ },
+ "chunk_frames": 287,
+ "pieces": 10,
+ "chunks": 8,
+ "predicted_seconds": 2628.2,
+ "stretches": [
+  {
+   "from": 1421,
+   "to": 3704,
+   "seconds": 2628.2,
+   "command": "FILM_FROM=1421 FILM_TO=3704 PIECE_FRAMES=287 bash paper-film/tools/film-chapter-parallel.sh inflation-chapter-2-newcomers 2 287"
+  }
+ ],
+ "stretch_limit_seconds": 6600,
+ "lazy": false,
+ "lazy_reasons": [],
+ "film_megabytes": 536,
+ "free_disk_gb": 6.7,
+ "blender_running": [
+  19752
+ ],
+ "problems": [
+  "Blender is running (process 19752): filming alongside it runs about 1.8 times slower and can run out of memory; wait for it to finish (the plan below assumes it has)"
+ ],
+ "notes": [],
+ "calculator": "plan_budget filming",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "filming.seconds_per_frame_held_nothing_live": {
+   "value": {
+    "one_worker": 0.8,
+    "two_workers": 0.57
+   },
+   "unit": "seconds a frame",
+   "kind": "measured"
+  },
+  "filming.seconds_per_frame_held_live_effects": {
+   "value": 0.9,
+   "unit": "seconds a frame, one worker",
+   "kind": "measured"
+  },
+  "filming.seconds_per_frame_sliding": {
+   "value": 4.3,
+   "unit": "seconds a frame, one worker",
+   "kind": "measured"
+  },
+  "filming.peel_frames_cost_factor": {
+   "value": 2,
+   "unit": "times a held frame",
+   "kind": "judged"
+  },
+  "filming.seconds_loading_a_piece": {
+   "value": 34,
+   "unit": "seconds a piece",
+   "kind": "measured"
+  },
+  "filming.workers": {
+   "value": {
+    "two_processors": 1,
+    "four_processors": 2,
+    "two_workers_speed_gain": 0.17
+   },
+   "unit": "workers",
+   "kind": "measured"
+  },
+  "filming.memory_per_piece_gb": {
+   "value": [
+    2.6,
+    2.8
+   ],
+   "unit": "GB of browser memory",
+   "kind": "measured"
+  },
+  "budget_planner.memory_reserve_gb": {
+   "value": 2,
+   "unit": "GB kept free for the system",
+   "kind": "invented"
+  },
+  "budget_planner.piece_load_share_max": {
+   "value": 0.1,
+   "unit": "share of a piece's time spent loading",
+   "kind": "invented"
+  },
+  "budget_planner.restart_loss_max_seconds": {
+   "value": 900,
+   "unit": "seconds of filming a restart may lose",
+   "kind": "judged"
+  },
+  "budget_planner.piece_frames_min": {
+   "value": 60,
+   "unit": "frames",
+   "kind": "judged"
+  },
+  "filming.stretch_max_hours": {
+   "value": 2,
+   "unit": "hours",
+   "kind": "measured"
+  },
+  "budget_planner.stretch_margin_minutes": {
+   "value": 10,
+   "unit": "minutes kept spare in each 2-hour stretch",
+   "kind": "judged"
+  },
+  "budget_planner.busy_machine_factor": {
+   "value": 1.8,
+   "unit": "times slower while Blender renders alongside",
+   "kind": "judged"
+  },
+  "frame.frames_per_second": {
+   "value": 30,
+   "unit": "frames a second",
+   "kind": "judged"
+  },
+  "filming.film_with_grain_megabytes_per_second": {
+   "value": 3.5,
+   "unit": "MB a second",
+   "kind": "measured"
+  },
+  "budget_planner.film_copies": {
+   "value": 2,
+   "unit": "copies of the film on disk at once (pieces and the joined film)",
+   "kind": "judged"
+  },
+  "budget_planner.disk_free_reserve_gb": {
+   "value": 4,
+   "unit": "GB",
+   "kind": "judged"
+  }
+ }
+}

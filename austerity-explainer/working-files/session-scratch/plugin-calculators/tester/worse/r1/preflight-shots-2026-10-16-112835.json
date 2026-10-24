@@ -1,0 +1,459 @@
+{
+ "stage": "shots",
+ "stage_means": "before building or drawing a place's views",
+ "verdict": "fail",
+ "counts": {
+  "fail": 2,
+  "warn": 11,
+  "known": 0,
+  "info": 9,
+  "pass": 15
+ },
+ "guarded_step": "building and rendering the place's views and plates",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.2,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:28:35",
+ "first_lines": [
+  "Preflight shots (before building or drawing a place's views): FAIL. 2 to fix, 11 to look at, 0 known and accepted, 0 input(s) missing; 5 check(s) in 0.2 s.",
+  "Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835",
+ "inputs": {
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/nc-place-facts.json": "efb988761a836dce60d06033d5989422389b388f"
+ },
+ "missing": [
+  {
+   "input": "shot_list",
+   "option": "--shot-list",
+   "what": "a shot list for plan_shot.py (subject, story things, kind of shot; format in calculators/plan_shot.py's note)",
+   "make": "write it by hand; without one each view in the place facts is judged as built",
+   "needed_by": "plan_shot.py",
+   "required": false,
+   "why": "without a shot list each view is judged as built from its place facts",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "place facts are complete (place_facts.py check)",
+   "tool": "calculators/place_facts.py",
+   "version": "bd240e22",
+   "where": "notice-corner",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/nc-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/01-place-facts-are-complete-place-facts-py-check.txt",
+   "seconds": 0.06,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "camera, reach, slide and people for end (plan_shot.py)",
+   "tool": "calculators/plan_shot.py",
+   "version": "6a7fabb5",
+   "where": "notice-corner end",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/nc-place-facts.json --view end --strict --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/02-camera-reach-slide-and-people-for-end-plan-shot-.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/02-camera-reach-slide-and-people-for-end-plan-shot-.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/02-camera-reach-slide-and-people-for-end-plan-shot-.txt",
+   "seconds": 0.08,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "rule2_eye_height",
+     "where": "end",
+     "text": "The eye stands 1.80 m above the view's floor (height 1.38 m) (allowed 1.5 to 1.9 m for still_life).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule2_level",
+     "where": "end",
+     "text": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule1_meeting_point_gap",
+     "where": "end",
+     "text": "The lines meet 0.684 across, 0.439 down; the nearest edge of board is 0.006 of the width away (0 px across, 7 px down, inside its outline); board's outline (an upright box); limit 0.03.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule7_story_reaches_down",
+     "where": "end",
+     "text": "The lowest story thing is pail, reaching 0.945 down (limit 0.7).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "end",
+     "text": "notice (to read) ends 0.885 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule12_story_right_edge",
+     "where": "end",
+     "text": "Story things in the button strip (0.45 to 0.95 down) end at: board 0.97, drum 0.71, chair 0.92, lantern 0.80, pail 0.88 across (limit 0.95).",
+     "fix": "board: move it 0.06 m left, or slide the camera right (a box corner warns early: confirm with the shot checker).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule3_story_box",
+     "where": "end",
+     "text": "The story things fill a box 0.57 wide and 0.51 tall (limit 0.4 x 0.5 for still_life); edges: drum (left), board (right), board (top), pail (bottom).",
+     "fix": "Bring drum or board in about 0.41 m toward the subject (at 3.7 m one share of the width is 2.44 m), or check the kind of shot.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_together_metres",
+     "where": "end",
+     "text": "The story things stand together in the street: the loneliest, pail, is 0.04 m from chair (limit 0.3 m between footprints).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "main_rule_spot_box",
+     "where": "end",
+     "text": "The spots that can be worked out before rendering (where the lines meet 0.68, 0.44; middle of notice 0.80, 0.58; middle of the story things 0.73, 0.69) span 0.11 x 0.25 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "subject_frame_share",
+     "where": "end",
+     "text": "notice fills about 2.5% of the frame (its box; the liked picture's notice 2.9% to 3.3%).",
+     "fix": "Scale notice by about 1.12, or move the camera.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_band",
+     "where": "end",
+     "text": "handcart's middle is 0.50 down (the middle band is 0.45 to 0.62).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_work_prop_share",
+     "where": "end",
+     "text": "handcart covers at most 3.7% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_band",
+     "where": "end",
+     "text": "sacks's middle is 0.53 down (the middle band is 0.45 to 0.62).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_work_prop_share",
+     "where": "end",
+     "text": "sacks covers at most 2.1% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_band",
+     "where": "end",
+     "text": "barrel's middle is 0.53 down (the middle band is 0.45 to 0.62).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_share",
+     "where": "end",
+     "text": "barrel covers at most 0.6% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_band",
+     "where": "end",
+     "text": "dustbins's middle is 0.50 down (the middle band is 0.45 to 0.62).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_share",
+     "where": "end",
+     "text": "dustbins covers at most 0.3% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_bottom_left_share",
+     "where": "end",
+     "text": "In the bottom-left quarter, where the eye enters, the boxes cover: drum 2.4% (over its 1%), handcart 2.0% (over its 1%), sacks 2.1% (over its 1%), dustbins 0.1% (limit 1% a thing; a box covers more than the thing in it, so these are upper bounds).",
+     "fix": "Confirm on the render (the shot checker measures the real outlines); if it holds, move drum, handcart, sacks out of the bottom-left quarter.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "end",
+     "text": "notice's lettered face points 0.0 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "slide_magnification",
+     "where": "end",
+     "text": "The 1.50 m slide brings the nearest painted thing, pail (its nearest corner 3.03 m away at the end), 1.486 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 0.87 m.",
+     "fix": "Shorten the slide to 0.87 m, or move pail back 0.47 m. (Accepted at 1.3 by the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32); it is now 1.4856: worse than accepted.)",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "slide_magnification_ground",
+     "where": "end",
+     "text": "The painted ground at the frame's bottom edge (2.77 m away) comes 1.532 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_lens",
+     "where": "end",
+     "text": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "plate_rows",
+     "where": "end",
+     "text": "For the slide's worst magnification the plate would need 3087 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "letters, loud signs, heads and landmarks (view_audit.py)",
+   "tool": "calculators/view_audit.py",
+   "version": "79e3d2f9",
+   "where": "notice-corner",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/nc-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/03-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/03-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/03-letters-loud-signs-heads-and-landmarks-view-audi.txt",
+   "seconds": 0.04,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "notice-corner",
+     "text": "{\"across\": 0.7956, \"down\": 0.5628, \"depth\": 4.823, \"in_front\": true, \"in_frame\": true, \"distance\": 4.9251, \"facing\": 0.9974, \"across_facing\": 1.0, \"back_shows\": false, \"letter_pixels\": 11.115, \"letter_width_pixels\": 11.3224, \"face_on_pixels\": 11.115, \"height_factor\": 1.0, \"width_factor\": 1.0187, \"ne",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "end",
+     "text": "{\"view\": \"end\", \"spot\": \"plate\", \"landmark\": \"winding wheels top\", \"across\": 0.6178, \"down\": 0.2125, \"depth\": 69.5042, \"top_height\": 26.452, \"height_for_clear\": 24.2234, \"verdict\": \"in the words band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "end",
+     "text": "{\"view\": \"end\", \"spot\": \"plate\", \"landmark\": \"chimney top\", \"across\": 0.4762, \"down\": 0.092, \"depth\": 92.4826, \"top_height\": 47.114, \"height_for_clear\": 31.1778, \"verdict\": \"in the words band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "end",
+     "text": "{\"view\": \"end\", \"spot\": \"composed\", \"landmark\": \"winding wheels top\", \"across\": 0.6139, \"down\": 0.2062, \"depth\": 68.0315, \"top_height\": 26.452, \"height_for_clear\": 23.7777, \"verdict\": \"in the words band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "end",
+     "text": "{\"view\": \"end\", \"spot\": \"composed\", \"landmark\": \"chimney top\", \"across\": 0.471, \"down\": 0.0854, \"depth\": 91.0099, \"top_height\": 47.114, \"height_for_clear\": 30.7321, \"verdict\": \"in the words band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "",
+     "where": "notice-corner",
+     "text": "notice (\"PITS WILL BE CLOSED\") in end (composed spot): letters 11.1 px tall, under 20 px. Make the letters 0.058 m tall for 20 px (0.073 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "notice-corner",
+     "text": "winding wheels top in end (plate): its top lands 0.212 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 24.2 m (now 26.5), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "notice-corner",
+     "text": "chimney top in end (plate): its top lands 0.092 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 31.2 m (now 47.1), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "notice-corner",
+     "text": "winding wheels top in end (composed): its top lands 0.206 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 23.8 m (now 26.5), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "notice-corner",
+     "text": "chimney top in end (composed): its top lands 0.085 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 30.7 m (now 47.1), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "notice-corner",
+     "text": "Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says).",
+     "fix": "",
+     "tool": "view_audit.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "lights for end (plan_lights.py plan)",
+   "tool": "calculators/plan_lights.py",
+   "version": "4836ed1f",
+   "where": "notice-corner end",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/nc-place-facts.json --view end --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/04-lights-for-end-plan-lights-py-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/04-lights-for-end-plan-lights-py-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835/04-lights-for-end-plan-lights-py-plan.txt",
+   "seconds": 0.06,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "notice-corner end",
+     "text": "fire light: lights chair, drum (its props round the fire; lesson 120, log 32): skip them",
+     "fix": "",
+     "tool": "plan_lights.py"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "each view's check file carries its kinds, figures and accepted list",
+   "tool": "preflight.py",
+   "version": "d836d994",
+   "where": "notice-corner",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "info",
+     "check": "check file",
+     "where": "notice-corner end",
+     "text": "no check file given for end: make it after the assemble script with paper-film/blender/make_check_file.py (give it here as --check-files end=FILE to check its keys)",
+     "tool": "preflight.py",
+     "fix": ""
+    }
+   ],
+   "verdict": "pass"
+  }
+ ],
+ "known_lists": [
+  {
+   "source": "nc-place-facts.json (place facts)",
+   "where": "end",
+   "rule": "rule6_lit_from_below",
+   "things": [],
+   "reason": "the finished still measured 0.08 (needs 0.10); the film page lights the notice's own surface with a copy of the warm light and reached 0.23 (log 32)",
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "measured": 0.08,
+   "signed": true
+  },
+  {
+   "source": "nc-place-facts.json (place facts)",
+   "where": "end",
+   "rule": "rule10_quiet_side_weight",
+   "things": [],
+   "reason": "the still's quiet side held 38% (aim 40-48%); the film page measured 46% (log 32)",
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "measured": 0.38,
+   "signed": true
+  },
+  {
+   "source": "nc-place-facts.json (place facts)",
+   "where": "end",
+   "rule": "rule8_bottom_left_share",
+   "things": [],
+   "reason": "the painted end frame's gutter covered 2.1% of the bottom-left quarter (limit 1%): a thin lead-in line, not a dark lump",
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32); the gutter kept as a narrow lead-in line (log 32)",
+   "date": "2026-10-14",
+   "measured": 0.021,
+   "signed": true
+  },
+  {
+   "source": "nc-place-facts.json (place facts)",
+   "where": "end",
+   "rule": "slide_magnification",
+   "things": [],
+   "reason": "the pail comes 1.45 times nearer during the 1.5 m slide (the painting allows about 1.29); the slide was made before plan 34's limit (F13) and the user kept the film",
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "measured": 1.3,
+   "signed": true
+  }
+ ],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/worse/r1/preflight-shots-2026-10-16-112835.md"
+}

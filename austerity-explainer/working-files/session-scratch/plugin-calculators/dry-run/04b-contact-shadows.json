@@ -1,0 +1,36 @@
+{
+ "shadows": [],
+ "calculator": "plan_effects contact-shadows",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "effects_planner.contact_shadow_size_per_footprint_diagonal": {
+   "value": 1.2,
+   "unit": "contact shadow side over the base footprint's diagonal",
+   "kind": "judged"
+  },
+  "composing.resting_floating_metres": {
+   "value": 0.03,
+   "unit": "metres of air",
+   "kind": "judged"
+  },
+  "composing.resting_sunk_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "composing.resting_landed_high_metres": {
+   "value": 0.5,
+   "unit": "metres above the street",
+   "kind": "judged"
+  },
+  "effects.contact_shadow": {
+   "value": {
+    "height_above_ground_metres": 0.012,
+    "opacity": 0.55,
+    "fade_in_seconds": 0.8
+   },
+   "unit": "metres, opacity, seconds",
+   "kind": "judged"
+  }
+ }
+}

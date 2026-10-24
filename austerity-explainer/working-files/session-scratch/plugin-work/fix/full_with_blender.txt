@@ -1,0 +1,64 @@
+skipped  test_after_painting.py  (0.2 s)
+    SKIP  the paintings as the painter returned them and their plate facts are in the working files; set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it
+passed   test_build_a_place_workflow.py  (4.2 s)  workflow build-a-place: run with canned helpers: 114 of 114 checks passed
+passed   test_camera_audit.py  (2.8 s)  camera_audit: old behaviour, page window from the timeline, built-and-painted set checks: 27 of 27 checks passed
+passed   test_check_page_layout.py  (0.4 s)  page layout: pops, effects after their moment, held shots, overlaps: 10 of 10 checks passed
+passed   test_check_shot_kinds.py  (31.1 s)  shot checker: kinds of shot and the accepted list: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_example_check_files.py  (0.5 s)  example check files: kinds of shot, figures and accepted problems: 23 of 23 checks passed
+passed   test_frame_geometry.py  (0.0 s)  frame geometry: recorded cases and hold-outs: 57 of 57 checks passed
+passed   test_frame_geometry_parity.py  (0.2 s)  frame geometry: Python and JavaScript give the same numbers: 31 of 31 checks passed
+passed   test_house_rules.py  (1.9 s)  house rules: a plain note at the top and a --help: 5 of 5 checks passed
+passed   test_lint_script.py  (2.2 s)  script and narration gate: before recording and after: 43 of 43 checks passed
+passed   test_make_check_file.py  (43.3 s)  make_check_file: check files from the scene: 48 of 48 checks passed
+passed   test_model_kit_surfaces.py  (5.3 s)  film model helpers: no Pillow, lossless normal maps, hardened bevels: 18 of 18 checks passed
+passed   test_model_lint.py  (26.5 s)  model_lint: model faults before plates: 28 of 28 checks passed
+passed   test_page_events.py  (27.5 s)  page events: the notes change nothing, and the events are reproducible: 13 of 13 checks passed
+passed   test_paint_request.py  (0.2 s)  paint_request: prompts, preflight and price against the recorded cases: 10 of 10 checks passed; 1 part(s) skipped
+passed   test_picture_measures.py  (3.3 s)  picture measures: made-up pictures with known answers: 42 of 42 checks passed
+passed   test_place_audit_check.py  (0.8 s)  place audit judge: flat hut fails, finished hut passes, planted faults are named: 86 of 86 checks passed
+passed   test_place_blender.py  (126.9 s)  place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo: 103 of 103 checks passed
+passed   test_place_combine.py  (10.0 s)  place combine: ownership between builders, and stage files run in two orders: 27 of 27 checks passed
+FAILED   test_place_data.py  (6.2 s)  place data: presets agree, the checker is not blind, the numbers make sense: 61 of 67 checks passed; FAILED: check_presets: no kit code names a kind of place, check_presets: nothing private or machine-specific is written in the kit, the new skill, agents, workflow or wrapper, the command exits 0 and says "6 of 6 groups passed", the copy used for planting passes before any fault goes in (apart from the test file, which may not exist yet), naming that folder in a sentence is allowed, after every planted fault is taken out the copy is clean again
+    == place data: presets agree, the checker is not blind, the numbers make sense
+    FAIL  check_presets: no kit code names a kind of place: place_kit/surfaces/displacement.py line 1: the place word "forest" (code must work for any place)
+    FAIL  check_presets: nothing private or machine-specific is written in the kit, the new skill, agents, workflow or wrapper: kit/place-kit/DEVIATIONS.md line 96: "/home/" (a personal or machine-specific name)
+    FAIL  the command exits 0 and says "6 of 6 groups passed": 4 of 6 groups passed
+    FAIL  the copy used for planting passes before any fault goes in (apart from the test file, which may not exist yet): [0, 0, 0, 1, 0, 1]
+    FAIL  naming that folder in a sentence is allowed: no
+    FAIL  after every planted fault is taken out the copy is clean again: [0, 0, 0, 1, 0, 1]
+    -- place data: presets agree, the checker is not blind, the numbers make sense: 61 of 67 checks passed; FAILED: check_presets: no kit code names a kind of place, check_presets: nothing private or machine-specific is written in the kit, the new skill, agents, workflow or wrapper, the command exits 0 and says "6 of 6 groups passed", the copy used for planting passes before any fault goes in (apart from the test file, which may not exist yet), naming that folder in a sentence is allowed, after every planted fault is taken out the copy is clean again
+passed   test_place_facts.py  (0.6 s)  place facts: schema, converters and what they carry: 35 of 35 checks passed
+passed   test_place_fixes.py  (84.7 s)  place kit fixes inside Blender: the faults of the smoke check, the review and the newcomer judge: 40 of 40 checks passed
+passed   test_place_hook.py  (0.7 s)  place reminder hook: routing words at the start of a turn: 33 of 33 checks passed
+passed   test_place_render.py  (82.8 s)  place render: the rented-card client (fake card) and the render verb: 64 of 64 checks passed
+passed   test_place_roles.py  (0.2 s)  place roles: how objects get a role, and what a role needs: 62 of 62 checks passed
+passed   test_place_shapes.py  (2.9 s)  place shapes: recipes, normal maps, lane height, graded grid, pieces, flat-map maths: 51 of 51 checks passed
+passed   test_place_skills.py  (2.9 s)  place skills: the words of the plugin against its code: 68 of 68 checks passed; 1 part(s) skipped
+passed   test_plan_budget.py  (2.0 s)  budget planner: money, filming time, pieces, stretches, memory, disk, pushes: 47 of 47 checks passed
+passed   test_plan_effects.py  (2.7 s)  plan_effects: wind, plumes, colour, contact shadows, window change, fire, lint: 52 of 52 checks passed
+passed   test_plan_lights.py  (3.2 s)  plan_lights: watts, reach, cone, links, surfaces, lamps, dark subject, render log, exposure: 31 of 31 checks passed
+passed   test_plan_page_timing.py  (0.7 s)  page timing: pauses, reading times, cuts, margins, words, numbers, stills: 57 of 57 checks passed
+passed   test_plan_shot.py  (0.2 s)  shot planner: recorded cases and the checkout hold-out: 60 of 60 checks passed
+passed   test_plan_states.py  (0.2 s)  plan_states: helper plates, cut or blend, against the Works and the people test: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_preflight.py  (13.5 s)  preflight: stages, accepted problems, missing inputs, the critique and the gate: 66 of 66 checks passed
+passed   test_preflight_place.py  (3.7 s)  preflight: the place stage (audit, freshness, pictures, fresh checker) and the plates stage asking for it: 30 of 30 checks passed
+passed   test_settings.py  (0.1 s)  film settings: the table, its reader and drift in the tools: 43 of 43 checks passed
+passed   test_shot_kind_profiles.py  (0.1 s)  shot-kind profiles against the views the project kept: 17 of 17 checks passed
+skipped  test_sound_gates.py  (0.1 s)
+    SKIP  the soundtrack "Tension and Gravity.mp3" or chapter 2's narration is not on this machine (audio stays out of the repository; name the soundtrack with FILM_SOUNDTRACK, or give the working files with FILM_WORKING_FILES)
+passed   test_view_audit.py  (0.3 s)  view_audit: lettering, figures and landmarks per view: 55 of 55 checks passed
+
+39 test files: 36 passed, 1 failed, 2 skipped.
+Checks: 1577 passed, 6 failed, 8 skipped (6 part(s) of tests and 2 whole test file(s), each with its reason below).
+Time: 8 min 15 s.
+Skipped, and why:
+  - test_after_painting.py: the whole test (the paintings as the painter returned them and their plate facts are in the working files; set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_check_shot_kinds.py: part 2, notice corner: skipped (it needs the project's film kit and experiments, and the working files' redesign/round5-set/notice; set FILM_PROJECT and FILM_WORKING_FILES)
+  - test_check_shot_kinds.py: part 2, Works W1: skipped (round 5's final check folder is in the working files, redesign/round5-set/checks/final-w1-quiet; set FILM_WORKING_FILES)
+  - test_paint_request.py: part B skipped: the project's plates and plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_place_skills.py: not checked as a failure: the marketplace file two folders up says 1.3.0, plugin.json says 1.4.0 (it is outside the plugin folder; whoever publishes sets it)
+  - test_plan_states.py: part B for the Works skipped: its plates or plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_plan_states.py: part B for the people test skipped: its plates or plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_sound_gates.py: the whole test (the soundtrack "Tension and Gravity.mp3" or chapter 2's narration is not on this machine (audio stays out of the repository; name the soundtrack with FILM_SOUNDTRACK, or give the working files with FILM_WORKING_FILES))
+Failed: test_place_data.py
+EXIT 1

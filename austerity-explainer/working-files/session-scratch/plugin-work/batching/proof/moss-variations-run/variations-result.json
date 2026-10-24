@@ -1,0 +1,2268 @@
+{
+ "change": "moss on the lock walls and gate",
+ "change_id": "moss-on-the-lock-walls-and-gate",
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/canal_finished.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/place-settings.json",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "CYCLES",
+ "size": [
+  600,
+  400
+ ],
+ "variations": [
+  {
+   "name": "v01-amount15-cover25",
+   "set": {
+    "amount.moss_and_algae": 0.15,
+    "dials.moss_and_algae.cover": 0.25,
+    "dials.moss_and_algae.clump_size_metres": 0.5715
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v02-amount55-cover5",
+   "set": {
+    "amount.moss_and_algae": 0.55,
+    "dials.moss_and_algae.cover": 0.05,
+    "dials.moss_and_algae.clump_size_metres": 0.2865
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v03-amount65-cover65",
+   "set": {
+    "amount.moss_and_algae": 0.65,
+    "dials.moss_and_algae.cover": 0.65,
+    "dials.moss_and_algae.clump_size_metres": 0.5145
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v04-amount5-cover85",
+   "set": {
+    "amount.moss_and_algae": 0.05,
+    "dials.moss_and_algae.cover": 0.85,
+    "dials.moss_and_algae.clump_size_metres": 0.1155
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v05-amount95-cover95",
+   "set": {
+    "amount.moss_and_algae": 0.95,
+    "dials.moss_and_algae.cover": 0.95,
+    "dials.moss_and_algae.clump_size_metres": 0.4575
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v06-amount45-cover55",
+   "set": {
+    "amount.moss_and_algae": 0.45,
+    "dials.moss_and_algae.cover": 0.55,
+    "dials.moss_and_algae.clump_size_metres": 0.0585
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v07-amount75-cover15",
+   "set": {
+    "amount.moss_and_algae": 0.75,
+    "dials.moss_and_algae.cover": 0.15,
+    "dials.moss_and_algae.clump_size_metres": 0.3435
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v08-amount25-cover35",
+   "set": {
+    "amount.moss_and_algae": 0.25,
+    "dials.moss_and_algae.cover": 0.35,
+    "dials.moss_and_algae.clump_size_metres": 0.4005
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v09-amount85-cover45",
+   "set": {
+    "amount.moss_and_algae": 0.85,
+    "dials.moss_and_algae.cover": 0.45,
+    "dials.moss_and_algae.clump_size_metres": 0.1725
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "v10-amount35-cover75",
+   "set": {
+    "amount.moss_and_algae": 0.35,
+    "dials.moss_and_algae.cover": 0.75,
+    "dials.moss_and_algae.clump_size_metres": 0.2295
+   },
+   "args": {},
+   "script": null
+  }
+ ],
+ "dropped": [],
+ "jobs": [
+  {
+   "index": 1,
+   "job_id": "47a8aa04-74f6-42ed-8a2b-b6aa44532cb0-u1",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 32.4,
+   "wake_up_ms": 821,
+   "billed_work_ms": 32669,
+   "log_tail": "00:09.025  blend            | Read blend: \"/workspace/place-jobs/scenes/5dd1c4b4/canal_finished.blend\"\n00:12.630  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n00:18.451  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/01_v01-amount15-cover25__camera-a.jpg'\n00:19.975  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/01_v01-amount15-cover25__camera-b.jpg'\n00:21.420  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/02_v04-amount5-cover85__camera-a.jpg'\n00:22.860  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/02_v04-amount5-cover85__camera-b.jpg'\n00:24.346  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/03_v07-amount75-cover15__camera-a.jpg'\n00:25.779  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/03_v07-amount75-cover15__camera-b.jpg'\n00:27.262  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/04_v10-amount35-cover75__camera-a.jpg'\n00:28.722  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-1/04_v10-amount35-cover75__camera-b.jpg'\nPASS v01-amount15-cover25: 2 picture(s) in 7.2 s (restored exactly)\nPASS v04-amount5-cover85: 2 picture(s) in 2.8 s (restored exactly)\nPASS v07-amount75-cover15: 2 picture(s) in 2.8 s (restored exactly)\nPASS v10-amount35-cover75: 2 picture(s) in 2.8 s (last of the job)\nPASS variations-worker: job 1: 4 of 4 variation(s), 8 picture(s), 16.4 s, cycles on OPTIX (NVIDIA GeForce RTX 4090)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/moss-variations-run/pictures/job-1"
+  },
+  {
+   "index": 2,
+   "job_id": "65208a3a-eb30-497e-95e3-fc718151a93c-u1",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 20,
+   "wake_up_ms": 17613,
+   "billed_work_ms": 20242,
+   "log_tail": "00:05.905  blend            | Read blend: \"/workspace/place-jobs/scenes/5dd1c4b4/canal_finished.blend\"\n00:07.602  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n00:10.664  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/01_baseline__camera-a.jpg'\n00:11.644  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/01_baseline__camera-b.jpg'\n00:12.515  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/02_v02-amount55-cover5__camera-a.jpg'\n00:13.416  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/02_v02-amount55-cover5__camera-b.jpg'\n00:14.292  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/03_v05-amount95-cover95__camera-a.jpg'\n00:15.170  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/03_v05-amount95-cover95__camera-b.jpg'\n00:16.055  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/04_v08-amount25-cover35__camera-a.jpg'\n00:16.938  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-2/04_v08-amount25-cover35__camera-b.jpg'\nPASS baseline: 2 picture(s) in 4.0 s (restored exactly)\nPASS v02-amount55-cover5: 2 picture(s) in 1.7 s (restored exactly)\nPASS v05-amount95-cover95: 2 picture(s) in 1.7 s (restored exactly)\nPASS v08-amount25-cover35: 2 picture(s) in 1.7 s (last of the job)\nPASS variations-worker: job 2: 4 of 4 variation(s), 8 picture(s), 9.5 s, cycles on OPTIX (NVIDIA GeForce RTX 4090)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/moss-variations-run/pictures/job-2"
+  },
+  {
+   "index": 3,
+   "job_id": "187af1a4-c48a-495b-9334-3061cc353c2b-u2",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-3",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 26.3,
+   "wake_up_ms": 20340,
+   "billed_work_ms": 26571,
+   "log_tail": "00:07.638  blend            | Read blend: \"/workspace/place-jobs/scenes/5dd1c4b4/canal_finished.blend\"\n00:10.339  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n00:15.321  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-3/01_v03-amount65-cover65__camera-a.jpg'\n00:16.838  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-3/01_v03-amount65-cover65__camera-b.jpg'\n00:18.303  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-3/02_v06-amount45-cover55__camera-a.jpg'\n00:19.737  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-3/02_v06-amount45-cover55__camera-b.jpg'\n00:21.247  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-3/03_v09-amount85-cover45__camera-a.jpg'\n00:22.678  render           | Saved: '/workspace/place-jobs/variations-moss-on-the-lock-walls-and-gate-1792725985/job-3/03_v09-amount85-cover45__camera-b.jpg'\nPASS v03-amount65-cover65: 2 picture(s) in 6.4 s (restored exactly)\nPASS v06-amount45-cover55: 2 picture(s) in 2.8 s (restored exactly)\nPASS v09-amount85-cover45: 2 picture(s) in 2.8 s (last of the job)\nPASS variations-worker: job 3: 3 of 3 variation(s), 6 picture(s), 12.5 s, cycles on OPTIX (NVIDIA GeForce RTX 4090)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/moss-variations-run/pictures/job-3"
+  }
+ ],
+ "job_summaries": {
+  "1": {
+   "job": 1,
+   "scene": "canal_finished.blend",
+   "blender": "5.2.2 LTS",
+   "device": "OPTIX (NVIDIA GeForce RTX 4090)",
+   "engine": "CYCLES",
+   "engine_reasons": [
+    "water \"Water lock chamber\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)",
+    "water \"Water upper pound\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 24,
+   "where": "card",
+   "cameras": [
+    "Camera A",
+    "Camera B"
+   ],
+   "fingerprint_at_start": "bfed766b0584cf78",
+   "seconds_in_all": 16.4,
+   "reopened": 0,
+   "entries": [
+    "v01-amount15-cover25",
+    "v04-amount5-cover85",
+    "v07-amount75-cover15",
+    "v10-amount35-cover75"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "c13cfd1ac02a9dbd"
+  },
+  "2": {
+   "job": 2,
+   "scene": "canal_finished.blend",
+   "blender": "5.2.2 LTS",
+   "device": "OPTIX (NVIDIA GeForce RTX 4090)",
+   "engine": "CYCLES",
+   "engine_reasons": [
+    "water \"Water lock chamber\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)",
+    "water \"Water upper pound\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 24,
+   "where": "card",
+   "cameras": [
+    "Camera A",
+    "Camera B"
+   ],
+   "fingerprint_at_start": "bfed766b0584cf78",
+   "seconds_in_all": 9.5,
+   "reopened": 0,
+   "entries": [
+    "baseline",
+    "v02-amount55-cover5",
+    "v05-amount95-cover95",
+    "v08-amount25-cover35"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "b3e2071543d63960"
+  },
+  "3": {
+   "job": 3,
+   "scene": "canal_finished.blend",
+   "blender": "5.2.2 LTS",
+   "device": "OPTIX (NVIDIA GeForce RTX 4090)",
+   "engine": "CYCLES",
+   "engine_reasons": [
+    "water \"Water lock chamber\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)",
+    "water \"Water upper pound\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 24,
+   "where": "card",
+   "cameras": [
+    "Camera A",
+    "Camera B"
+   ],
+   "fingerprint_at_start": "bfed766b0584cf78",
+   "seconds_in_all": 12.5,
+   "reopened": 0,
+   "entries": [
+    "v03-amount65-cover65",
+    "v06-amount45-cover55",
+    "v09-amount85-cover45"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "beed5b4a2fec2341"
+  }
+ },
+ "results": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 4.03,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1899733543395996,
+     "p95": 0.6454745531082153,
+     "range": 0.4555011987686157,
+     "median": 0.3997325599193573,
+     "detail": 2.3629276752471924,
+     "mean_saturation": 0.1615792214870453,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    },
+    "Camera B": {
+     "p5": 0.06726901978254318,
+     "p95": 0.4465504288673401,
+     "range": 0.3792814090847969,
+     "median": 0.22621490061283112,
+     "detail": 2.619323492050171,
+     "mean_saturation": 0.2860272526741028,
+     "squint": 1.0,
+     "flat_windows": 2,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    }
+   },
+   "average": {
+    "p5": 0.1286211870610714,
+    "p95": 0.5460124909877777,
+    "range": 0.4173913039267063,
+    "median": 0.3129737302660942,
+    "detail": 2.4911255836486816,
+    "mean_saturation": 0.22380323708057404,
+    "squint": 1.0,
+    "flat_windows": 1.0,
+    "colour_shift": 0.0,
+    "saturation_shift": 0.0,
+    "detail_change": 0.0
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "01_baseline__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 3.03,
+     "bytes": 25237,
+     "ok": true,
+     "mean_luminance": 0.42755749821662903,
+     "path": "pictures/job-2/01_baseline__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "01_baseline__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 0.94,
+     "bytes": 23741,
+     "ok": true,
+     "mean_luminance": 0.23076499998569489,
+     "path": "pictures/job-2/01_baseline__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v01-amount15-cover25",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.15,
+    "dials.moss_and_algae.cover": 0.25,
+    "dials.moss_and_algae.clump_size_metres": 0.5715
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.02,
+   "seconds_draw": 7.26,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18999505043029785,
+     "p95": 0.6454745531082153,
+     "range": 0.4554795026779175,
+     "median": 0.3994525372982025,
+     "detail": 2.3613357543945312,
+     "mean_saturation": 0.16159023344516754,
+     "squint": 0.9999902248382568,
+     "flat_windows": 0,
+     "colour_shift": 0.004297345416125332,
+     "saturation_shift": 1.1011958122253418e-05,
+     "detail_change": -0.0015919208526611328
+    },
+    "Camera B": {
+     "p5": 0.06753647327423096,
+     "p95": 0.4463372528553009,
+     "range": 0.37880077958106995,
+     "median": 0.22659610211849213,
+     "detail": 2.6047987937927246,
+     "mean_saturation": 0.2862548828125,
+     "squint": 0.9998800754547119,
+     "flat_windows": 2,
+     "colour_shift": 0.02998423244609682,
+     "saturation_shift": 0.0002276301383972168,
+     "detail_change": -0.014524698257446289
+    }
+   },
+   "average": {
+    "p5": 0.1287657618522644,
+    "p95": 0.5459059029817581,
+    "range": 0.4171401411294937,
+    "median": 0.3130243197083473,
+    "detail": 2.483067274093628,
+    "mean_saturation": 0.22392255812883377,
+    "squint": 0.9999351501464844,
+    "flat_windows": 1.0,
+    "colour_shift": 0.017140788931111074,
+    "saturation_shift": 0.00011932104825973511,
+    "detail_change": -0.008058309555053711
+   },
+   "flags": [
+    "does not show in these cameras (nearly the same as the baseline)"
+   ],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "01_v01-amount15-cover25__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 5.71,
+     "bytes": 25159,
+     "ok": true,
+     "mean_luminance": 0.42757654190063477,
+     "path": "pictures/job-1/01_v01-amount15-cover25__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "01_v01-amount15-cover25__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.48,
+     "bytes": 23560,
+     "ok": true,
+     "mean_luminance": 0.2307848483324051,
+     "path": "pictures/job-1/01_v01-amount15-cover25__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v02-amount55-cover5",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.55,
+    "dials.moss_and_algae.cover": 0.05,
+    "dials.moss_and_algae.clump_size_metres": 0.2865
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.02,
+   "seconds_draw": 1.74,
+   "seconds_reset": 0.01,
+   "job": 2,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18999505043029785,
+     "p95": 0.6454745531082153,
+     "range": 0.4554795026779175,
+     "median": 0.3994525372982025,
+     "detail": 2.3613343238830566,
+     "mean_saturation": 0.16159021854400635,
+     "squint": 0.9999900460243225,
+     "flat_windows": 0,
+     "colour_shift": 0.00429076967268233,
+     "saturation_shift": 1.099705696105957e-05,
+     "detail_change": -0.0015933513641357422
+    },
+    "Camera B": {
+     "p5": 0.06753647327423096,
+     "p95": 0.4463372528553009,
+     "range": 0.37880077958106995,
+     "median": 0.22659610211849213,
+     "detail": 2.6048355102539062,
+     "mean_saturation": 0.28625500202178955,
+     "squint": 0.9998799562454224,
+     "flat_windows": 2,
+     "colour_shift": 0.029979157152827132,
+     "saturation_shift": 0.00022774934768676758,
+     "detail_change": -0.014487981796264648
+    }
+   },
+   "average": {
+    "p5": 0.1287657618522644,
+    "p95": 0.5459059029817581,
+    "range": 0.4171401411294937,
+    "median": 0.3130243197083473,
+    "detail": 2.4830849170684814,
+    "mean_saturation": 0.22392261028289795,
+    "squint": 0.9999350011348724,
+    "flat_windows": 1.0,
+    "colour_shift": 0.01713496341275473,
+    "saturation_shift": 0.00011937320232391357,
+    "detail_change": -0.008040666580200195
+   },
+   "flags": [
+    "does not show in these cameras (nearly the same as the baseline)",
+    "nearly the same as #1 v01-amount15-cover25"
+   ],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "02_v02-amount55-cover5__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 0.82,
+     "bytes": 25164,
+     "ok": true,
+     "mean_luminance": 0.4275764226913452,
+     "path": "pictures/job-2/02_v02-amount55-cover5__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "02_v02-amount55-cover5__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 0.89,
+     "bytes": 23563,
+     "ok": true,
+     "mean_luminance": 0.23078472912311554,
+     "path": "pictures/job-2/02_v02-amount55-cover5__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v03-amount65-cover65",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.65,
+    "dials.moss_and_algae.cover": 0.65,
+    "dials.moss_and_algae.clump_size_metres": 0.5145
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.02,
+   "seconds_draw": 6.43,
+   "seconds_reset": 0.02,
+   "job": 3,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1882917732000351,
+     "p95": 0.6454745531082153,
+     "range": 0.45718277990818024,
+     "median": 0.39941802620887756,
+     "detail": 2.357421636581421,
+     "mean_saturation": 0.16267861425876617,
+     "squint": 0.9997561573982239,
+     "flat_windows": 0,
+     "colour_shift": 0.16331508609469858,
+     "saturation_shift": 0.0010993927717208862,
+     "detail_change": -0.005506038665771484
+    },
+    "Camera B": {
+     "p5": 0.06636784970760345,
+     "p95": 0.4450360834598541,
+     "range": 0.37866823375225067,
+     "median": 0.22413569688796997,
+     "detail": 2.5906143188476562,
+     "mean_saturation": 0.2889748811721802,
+     "squint": 0.9985139966011047,
+     "flat_windows": 2,
+     "colour_shift": 0.8895638748934566,
+     "saturation_shift": 0.0029476284980773926,
+     "detail_change": -0.02870917320251465
+    }
+   },
+   "average": {
+    "p5": 0.12732981145381927,
+    "p95": 0.5452553182840347,
+    "range": 0.41792550683021545,
+    "median": 0.31177686154842377,
+    "detail": 2.4740179777145386,
+    "mean_saturation": 0.22582674771547318,
+    "squint": 0.9991350769996643,
+    "flat_windows": 1.0,
+    "colour_shift": 0.5264394804940775,
+    "saturation_shift": 0.0020235106348991394,
+    "detail_change": -0.017107605934143066
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "01_v03-amount65-cover65__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 4.9,
+     "bytes": 25200,
+     "ok": true,
+     "mean_luminance": 0.42695507407188416,
+     "path": "pictures/job-3/01_v03-amount65-cover65__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "01_v03-amount65-cover65__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.48,
+     "bytes": 23635,
+     "ok": true,
+     "mean_luminance": 0.22873090207576752,
+     "path": "pictures/job-3/01_v03-amount65-cover65__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v04-amount5-cover85",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.05,
+    "dials.moss_and_algae.cover": 0.85,
+    "dials.moss_and_algae.clump_size_metres": 0.1155
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 2.84,
+   "seconds_reset": 0.02,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18969647586345673,
+     "p95": 0.6454745531082153,
+     "range": 0.4557780772447586,
+     "median": 0.39944785833358765,
+     "detail": 2.3601109981536865,
+     "mean_saturation": 0.16170139610767365,
+     "squint": 0.9999867081642151,
+     "flat_windows": 0,
+     "colour_shift": 0.01149891320329931,
+     "saturation_shift": 0.00012217462062835693,
+     "detail_change": -0.0028166770935058594
+    },
+    "Camera B": {
+     "p5": 0.06753647327423096,
+     "p95": 0.4463372528553009,
+     "range": 0.37880077958106995,
+     "median": 0.22659610211849213,
+     "detail": 2.601954221725464,
+     "mean_saturation": 0.28610390424728394,
+     "squint": 0.9998701214790344,
+     "flat_windows": 2,
+     "colour_shift": 0.05828845052183535,
+     "saturation_shift": 7.665157318115234e-05,
+     "detail_change": -0.01736927032470703
+    }
+   },
+   "average": {
+    "p5": 0.12861647456884384,
+    "p95": 0.5459059029817581,
+    "range": 0.4172894284129143,
+    "median": 0.3130219802260399,
+    "detail": 2.481032609939575,
+    "mean_saturation": 0.2239026501774788,
+    "squint": 0.9999284148216248,
+    "flat_windows": 1.0,
+    "colour_shift": 0.03489368186256733,
+    "saturation_shift": 9.941309690475464e-05,
+    "detail_change": -0.010092973709106445
+   },
+   "flags": [
+    "does not show in these cameras (nearly the same as the baseline)",
+    "nearly the same as #1 v01-amount15-cover25",
+    "nearly the same as #2 v02-amount55-cover5"
+   ],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "02_v04-amount5-cover85__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.38,
+     "bytes": 25163,
+     "ok": true,
+     "mean_luminance": 0.42751947045326233,
+     "path": "pictures/job-1/02_v04-amount5-cover85__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "02_v04-amount5-cover85__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.42,
+     "bytes": 23570,
+     "ok": true,
+     "mean_luminance": 0.2306595891714096,
+     "path": "pictures/job-1/02_v04-amount5-cover85__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v05-amount95-cover95",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.95,
+    "dials.moss_and_algae.cover": 0.95,
+    "dials.moss_and_algae.clump_size_metres": 0.4575
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 1.72,
+   "seconds_reset": 0.01,
+   "job": 2,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18796785175800323,
+     "p95": 0.6454745531082153,
+     "range": 0.4575067013502121,
+     "median": 0.3989192247390747,
+     "detail": 2.349358320236206,
+     "mean_saturation": 0.16346676647663116,
+     "squint": 0.9994090795516968,
+     "flat_windows": 0,
+     "colour_shift": 0.26399507909317965,
+     "saturation_shift": 0.0018875449895858765,
+     "detail_change": -0.013569355010986328
+    },
+    "Camera B": {
+     "p5": 0.06558588892221451,
+     "p95": 0.4434363543987274,
+     "range": 0.3778504654765129,
+     "median": 0.22189725935459137,
+     "detail": 2.5582711696624756,
+     "mean_saturation": 0.2923051416873932,
+     "squint": 0.9979055523872375,
+     "flat_windows": 2,
+     "colour_shift": 1.6048477039723779,
+     "saturation_shift": 0.006277889013290405,
+     "detail_change": -0.06105232238769531
+    }
+   },
+   "average": {
+    "p5": 0.12677687034010887,
+    "p95": 0.5444554537534714,
+    "range": 0.4176785834133625,
+    "median": 0.31040824204683304,
+    "detail": 2.453814744949341,
+    "mean_saturation": 0.22788595408201218,
+    "squint": 0.9986573159694672,
+    "flat_windows": 1.0,
+    "colour_shift": 0.9344213915327788,
+    "saturation_shift": 0.004082717001438141,
+    "detail_change": -0.03731083869934082
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "03_v05-amount95-cover95__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 0.83,
+     "bytes": 25151,
+     "ok": true,
+     "mean_luminance": 0.426527738571167,
+     "path": "pictures/job-2/03_v05-amount95-cover95__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "03_v05-amount95-cover95__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 0.86,
+     "bytes": 23306,
+     "ok": true,
+     "mean_luminance": 0.22732055187225342,
+     "path": "pictures/job-2/03_v05-amount95-cover95__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v06-amount45-cover55",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.45,
+    "dials.moss_and_algae.cover": 0.55,
+    "dials.moss_and_algae.clump_size_metres": 0.0585
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 2.84,
+   "seconds_reset": 0.01,
+   "job": 3,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1896713823080063,
+     "p95": 0.6454745531082153,
+     "range": 0.45580317080020905,
+     "median": 0.39891451597213745,
+     "detail": 2.452465057373047,
+     "mean_saturation": 0.16060689091682434,
+     "squint": 0.9994113445281982,
+     "flat_windows": 0,
+     "colour_shift": 0.07624642629063874,
+     "saturation_shift": -0.0009723305702209473,
+     "detail_change": 0.08953738212585449
+    },
+    "Camera B": {
+     "p5": 0.06726901978254318,
+     "p95": 0.4945647418498993,
+     "range": 0.4272957220673561,
+     "median": 0.22147530317306519,
+     "detail": 3.4712347984313965,
+     "mean_saturation": 0.28084200620651245,
+     "squint": 0.997717559337616,
+     "flat_windows": 2,
+     "colour_shift": 0.4681025490146593,
+     "saturation_shift": -0.005185246467590332,
+     "detail_change": 0.8519113063812256
+    }
+   },
+   "average": {
+    "p5": 0.12847020104527473,
+    "p95": 0.5700196474790573,
+    "range": 0.4415494464337826,
+    "median": 0.3101949095726013,
+    "detail": 2.9618499279022217,
+    "mean_saturation": 0.2207244485616684,
+    "squint": 0.9985644519329071,
+    "flat_windows": 1.0,
+    "colour_shift": 0.272174487652649,
+    "saturation_shift": -0.0030787885189056396,
+    "detail_change": 0.47072434425354004
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "02_v06-amount45-cover55__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.39,
+     "bytes": 26230,
+     "ok": true,
+     "mean_luminance": 0.427153080701828,
+     "path": "pictures/job-3/02_v06-amount45-cover55__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "02_v06-amount45-cover55__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.42,
+     "bytes": 32298,
+     "ok": true,
+     "mean_luminance": 0.23085157573223114,
+     "path": "pictures/job-3/02_v06-amount45-cover55__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v07-amount75-cover15",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.75,
+    "dials.moss_and_algae.cover": 0.15,
+    "dials.moss_and_algae.clump_size_metres": 0.3435
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 2.88,
+   "seconds_reset": 0.02,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18999505043029785,
+     "p95": 0.6454745531082153,
+     "range": 0.4554795026779175,
+     "median": 0.3994525372982025,
+     "detail": 2.3613076210021973,
+     "mean_saturation": 0.16159021854400635,
+     "squint": 0.9999896287918091,
+     "flat_windows": 0,
+     "colour_shift": 0.004299180069232243,
+     "saturation_shift": 1.099705696105957e-05,
+     "detail_change": -0.0016200542449951172
+    },
+    "Camera B": {
+     "p5": 0.06753647327423096,
+     "p95": 0.4463372528553009,
+     "range": 0.37880077958106995,
+     "median": 0.22659610211849213,
+     "detail": 2.6047987937927246,
+     "mean_saturation": 0.2862548828125,
+     "squint": 0.9998800754547119,
+     "flat_windows": 2,
+     "colour_shift": 0.02998423244609682,
+     "saturation_shift": 0.0002276301383972168,
+     "detail_change": -0.014524698257446289
+    }
+   },
+   "average": {
+    "p5": 0.1287657618522644,
+    "p95": 0.5459059029817581,
+    "range": 0.4171401411294937,
+    "median": 0.3130243197083473,
+    "detail": 2.483053207397461,
+    "mean_saturation": 0.22392255067825317,
+    "squint": 0.9999348521232605,
+    "flat_windows": 1.0,
+    "colour_shift": 0.01714170625766453,
+    "saturation_shift": 0.00011931359767913818,
+    "detail_change": -0.008072376251220703
+   },
+   "flags": [
+    "does not show in these cameras (nearly the same as the baseline)",
+    "nearly the same as #1 v01-amount15-cover25",
+    "nearly the same as #2 v02-amount55-cover5",
+    "nearly the same as #4 v04-amount5-cover85"
+   ],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "03_v07-amount75-cover15__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.42,
+     "bytes": 25150,
+     "ok": true,
+     "mean_luminance": 0.4275765120983124,
+     "path": "pictures/job-1/03_v07-amount75-cover15__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "03_v07-amount75-cover15__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.42,
+     "bytes": 23560,
+     "ok": true,
+     "mean_luminance": 0.2307848483324051,
+     "path": "pictures/job-1/03_v07-amount75-cover15__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v08-amount25-cover35",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.25,
+    "dials.moss_and_algae.cover": 0.35,
+    "dials.moss_and_algae.clump_size_metres": 0.4005
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.01,
+   "seconds_draw": 1.75,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "Camera A": {
+     "p5": 0.19013412296772003,
+     "p95": 0.6454745531082153,
+     "range": 0.4553404301404953,
+     "median": 0.3994525372982025,
+     "detail": 2.3613882064819336,
+     "mean_saturation": 0.16157782077789307,
+     "squint": 0.9999871253967285,
+     "flat_windows": 0,
+     "colour_shift": 0.005100819575364532,
+     "saturation_shift": -1.4007091522216797e-06,
+     "detail_change": -0.001539468765258789
+    },
+    "Camera B": {
+     "p5": 0.06753647327423096,
+     "p95": 0.4463372528553009,
+     "range": 0.37880077958106995,
+     "median": 0.22659610211849213,
+     "detail": 2.6055874824523926,
+     "mean_saturation": 0.28614819049835205,
+     "squint": 0.9998795986175537,
+     "flat_windows": 2,
+     "colour_shift": 0.031079197953708195,
+     "saturation_shift": 0.00012093782424926758,
+     "detail_change": -0.01373600959777832
+    }
+   },
+   "average": {
+    "p5": 0.1288352981209755,
+    "p95": 0.5459059029817581,
+    "range": 0.4170706048607826,
+    "median": 0.3130243197083473,
+    "detail": 2.483487844467163,
+    "mean_saturation": 0.22386300563812256,
+    "squint": 0.9999333620071411,
+    "flat_windows": 1.0,
+    "colour_shift": 0.018090008764536362,
+    "saturation_shift": 5.976855754852295e-05,
+    "detail_change": -0.007637739181518555
+   },
+   "flags": [
+    "does not show in these cameras (nearly the same as the baseline)",
+    "nearly the same as #1 v01-amount15-cover25",
+    "nearly the same as #2 v02-amount55-cover5",
+    "nearly the same as #4 v04-amount5-cover85",
+    "nearly the same as #7 v07-amount75-cover15"
+   ],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "04_v08-amount25-cover35__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 0.85,
+     "bytes": 25166,
+     "ok": true,
+     "mean_luminance": 0.4275765120983124,
+     "path": "pictures/job-2/04_v08-amount25-cover35__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "04_v08-amount25-cover35__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 0.87,
+     "bytes": 23563,
+     "ok": true,
+     "mean_luminance": 0.2307855784893036,
+     "path": "pictures/job-2/04_v08-amount25-cover35__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v09-amount85-cover45",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.85,
+    "dials.moss_and_algae.cover": 0.45,
+    "dials.moss_and_algae.clump_size_metres": 0.1725
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.01,
+   "seconds_draw": 2.85,
+   "seconds_reset": 0.0,
+   "job": 3,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1896713823080063,
+     "p95": 0.6454745531082153,
+     "range": 0.45580317080020905,
+     "median": 0.39941802620887756,
+     "detail": 2.37573504447937,
+     "mean_saturation": 0.16161106526851654,
+     "squint": 0.999942421913147,
+     "flat_windows": 0,
+     "colour_shift": 0.014992350123222893,
+     "saturation_shift": 3.184378147125244e-05,
+     "detail_change": 0.012807369232177734
+    },
+    "Camera B": {
+     "p5": 0.06726901978254318,
+     "p95": 0.4477733373641968,
+     "range": 0.3805043175816536,
+     "median": 0.22551530599594116,
+     "detail": 2.704665184020996,
+     "mean_saturation": 0.285814106464386,
+     "squint": 0.9993611574172974,
+     "flat_windows": 2,
+     "colour_shift": 0.07440276402965537,
+     "saturation_shift": -0.00021314620971679688,
+     "detail_change": 0.0853416919708252
+    }
+   },
+   "average": {
+    "p5": 0.12847020104527473,
+    "p95": 0.546623945236206,
+    "range": 0.4181537441909313,
+    "median": 0.31246666610240936,
+    "detail": 2.540200114250183,
+    "mean_saturation": 0.22371258586645126,
+    "squint": 0.9996517896652222,
+    "flat_windows": 1.0,
+    "colour_shift": 0.04469755707643913,
+    "saturation_shift": -9.065121412277222e-05,
+    "detail_change": 0.049074530601501465
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "03_v09-amount85-cover45__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.41,
+     "bytes": 25380,
+     "ok": true,
+     "mean_luminance": 0.42748966813087463,
+     "path": "pictures/job-3/03_v09-amount85-cover45__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "03_v09-amount85-cover45__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.42,
+     "bytes": 24901,
+     "ok": true,
+     "mean_luminance": 0.2305966019630432,
+     "path": "pictures/job-3/03_v09-amount85-cover45__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v10-amount35-cover75",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.35,
+    "dials.moss_and_algae.cover": 0.75,
+    "dials.moss_and_algae.clump_size_metres": 0.2295
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.01,
+   "seconds_draw": 2.86,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1885388344526291,
+     "p95": 0.6454745531082153,
+     "range": 0.45693571865558624,
+     "median": 0.3994337320327759,
+     "detail": 2.3583080768585205,
+     "mean_saturation": 0.16213762760162354,
+     "squint": 0.9998961091041565,
+     "flat_windows": 0,
+     "colour_shift": 0.09313907706049043,
+     "saturation_shift": 0.0005584061145782471,
+     "detail_change": -0.004619598388671875
+    },
+    "Camera B": {
+     "p5": 0.06636784970760345,
+     "p95": 0.4450360834598541,
+     "range": 0.37866823375225067,
+     "median": 0.22518588602542877,
+     "detail": 2.600165367126465,
+     "mean_saturation": 0.2881152331829071,
+     "squint": 0.9994922280311584,
+     "flat_windows": 2,
+     "colour_shift": 0.5561705679660638,
+     "saturation_shift": 0.0020879805088043213,
+     "detail_change": -0.019158124923706055
+    }
+   },
+   "average": {
+    "p5": 0.12745334208011627,
+    "p95": 0.5452553182840347,
+    "range": 0.41780197620391846,
+    "median": 0.3123098090291023,
+    "detail": 2.4792367219924927,
+    "mean_saturation": 0.22512643039226532,
+    "squint": 0.9996941685676575,
+    "flat_windows": 1.0,
+    "colour_shift": 0.3246548225132771,
+    "saturation_shift": 0.0013231933116912842,
+    "detail_change": -0.011888861656188965
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "04_v10-amount35-cover75__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.39,
+     "bytes": 25164,
+     "ok": true,
+     "mean_luminance": 0.4272042214870453,
+     "path": "pictures/job-1/04_v10-amount35-cover75__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "04_v10-amount35-cover75__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 600,
+     "height": 400,
+     "samples": 24,
+     "seconds": 1.45,
+     "bytes": 23590,
+     "ok": true,
+     "mean_luminance": 0.22949571907520294,
+     "path": "pictures/job-1/04_v10-amount35-cover75__camera-b.jpg"
+    }
+   ]
+  }
+ ],
+ "pairs": [
+  {
+   "a": "baseline",
+   "b": "v01-amount15-cover25",
+   "mean_difference": 0.2738888888888889,
+   "changed_share": 0.0010354166666666667,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.33576666666666666,
+     "changed_share": 0.0019625
+    },
+    "Camera A": {
+     "mean_difference": 0.21201111111111112,
+     "changed_share": 0.00010833333333333333
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v02-amount55-cover5",
+   "mean_difference": 0.27394236111111114,
+   "changed_share": 0.0010354166666666667,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.3358277777777778,
+     "changed_share": 0.0019625
+    },
+    "Camera A": {
+     "mean_difference": 0.21205694444444445,
+     "changed_share": 0.00010833333333333333
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v03-amount65-cover65",
+   "mean_difference": 1.0150256944444445,
+   "changed_share": 0.020860416666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.4414722222222223,
+     "changed_share": 0.030970833333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.5885791666666667,
+     "changed_share": 0.01075
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v04-amount5-cover85",
+   "mean_difference": 0.35815138888888887,
+   "changed_share": 0.0008916666666666666,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.4642125,
+     "changed_share": 0.0016958333333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.25209027777777776,
+     "changed_share": 8.75e-05
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v05-amount95-cover95",
+   "mean_difference": 1.3848652777777777,
+   "changed_share": 0.07225416666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.0222416666666665,
+     "changed_share": 0.11482083333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.7474888888888889,
+     "changed_share": 0.0296875
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v06-amount45-cover55",
+   "mean_difference": 1.6493006944444444,
+   "changed_share": 0.04843333333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.5000847222222222,
+     "changed_share": 0.08798333333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.7985166666666667,
+     "changed_share": 0.008883333333333333
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v07-amount75-cover15",
+   "mean_difference": 0.27406180555555554,
+   "changed_share": 0.0010354166666666667,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.33576666666666666,
+     "changed_share": 0.0019625
+    },
+    "Camera A": {
+     "mean_difference": 0.21235694444444445,
+     "changed_share": 0.00010833333333333333
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 0.2794861111111111,
+   "changed_share": 0.0010541666666666666,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.34374305555555557,
+     "changed_share": 0.0019625
+    },
+    "Camera A": {
+     "mean_difference": 0.21522916666666667,
+     "changed_share": 0.00014583333333333335
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 0.6439854166666666,
+   "changed_share": 0.007727083333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8802180555555555,
+     "changed_share": 0.014395833333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.4077527777777778,
+     "changed_share": 0.0010583333333333334
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.7212562499999999,
+   "changed_share": 0.0021020833333333334,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.0146875,
+     "changed_share": 0.003108333333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.427825,
+     "changed_share": 0.0010958333333333334
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v02-amount55-cover5",
+   "mean_difference": 0.00032291666666666666,
+   "changed_share": 0.0,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.00015,
+     "changed_share": 0.0
+    },
+    "Camera A": {
+     "mean_difference": 0.0004958333333333334,
+     "changed_share": 0.0
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v03-amount65-cover65",
+   "mean_difference": 1.0000173611111112,
+   "changed_share": 0.020866666666666665,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.4160166666666667,
+     "changed_share": 0.0307125
+    },
+    "Camera A": {
+     "mean_difference": 0.5840180555555555,
+     "changed_share": 0.011020833333333334
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v04-amount5-cover85",
+   "mean_difference": 0.246575,
+   "changed_share": 1.2499999999999999e-05,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.3271236111111111,
+     "changed_share": 2.0833333333333333e-05
+    },
+    "Camera A": {
+     "mean_difference": 0.16602638888888888,
+     "changed_share": 4.166666666666667e-06
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v05-amount95-cover95",
+   "mean_difference": 1.3731375,
+   "changed_share": 0.0728375,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.0109583333333334,
+     "changed_share": 0.11496666666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.7353166666666666,
+     "changed_share": 0.030708333333333334
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v06-amount45-cover55",
+   "mean_difference": 1.6407965277777778,
+   "changed_share": 0.047877083333333334,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.4851569444444443,
+     "changed_share": 0.08699166666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.7964361111111111,
+     "changed_share": 0.0087625
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v07-amount75-cover15",
+   "mean_difference": 0.00032291666666666666,
+   "changed_share": 0.0,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.0,
+     "changed_share": 0.0
+    },
+    "Camera A": {
+     "mean_difference": 0.0006458333333333333,
+     "changed_share": 0.0
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 0.053206944444444446,
+   "changed_share": 8.333333333333334e-06,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.05227916666666667,
+     "changed_share": 0.0
+    },
+    "Camera A": {
+     "mean_difference": 0.05413472222222222,
+     "changed_share": 1.6666666666666667e-05
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 0.5947465277777777,
+   "changed_share": 0.007033333333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8027513888888889,
+     "changed_share": 0.013216666666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.38674166666666665,
+     "changed_share": 0.00085
+    }
+   }
+  },
+  {
+   "a": "v01-amount15-cover25",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.6812590277777778,
+   "changed_share": 0.0014083333333333335,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.9590402777777778,
+     "changed_share": 0.0018458333333333334
+    },
+    "Camera A": {
+     "mean_difference": 0.40347777777777777,
+     "changed_share": 0.0009708333333333333
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v03-amount65-cover65",
+   "mean_difference": 1.000051388888889,
+   "changed_share": 0.020866666666666665,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.4160055555555555,
+     "changed_share": 0.0307125
+    },
+    "Camera A": {
+     "mean_difference": 0.5840972222222223,
+     "changed_share": 0.011020833333333334
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v04-amount5-cover85",
+   "mean_difference": 0.24657847222222223,
+   "changed_share": 1.2499999999999999e-05,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.32705972222222224,
+     "changed_share": 2.0833333333333333e-05
+    },
+    "Camera A": {
+     "mean_difference": 0.16609722222222223,
+     "changed_share": 4.166666666666667e-06
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v05-amount95-cover95",
+   "mean_difference": 1.3731604166666669,
+   "changed_share": 0.0728375,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.010877777777778,
+     "changed_share": 0.11496666666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.7354430555555556,
+     "changed_share": 0.030708333333333334
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v06-amount45-cover55",
+   "mean_difference": 1.640763888888889,
+   "changed_share": 0.04787916666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.485129166666667,
+     "changed_share": 0.08699583333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.7963986111111111,
+     "changed_share": 0.0087625
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v07-amount75-cover15",
+   "mean_difference": 0.00035833333333333333,
+   "changed_share": 0.0,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.00015,
+     "changed_share": 0.0
+    },
+    "Camera A": {
+     "mean_difference": 0.0005666666666666667,
+     "changed_share": 0.0
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 0.05299236111111111,
+   "changed_share": 8.333333333333334e-06,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.052345833333333334,
+     "changed_share": 0.0
+    },
+    "Camera A": {
+     "mean_difference": 0.05363888888888889,
+     "changed_share": 1.6666666666666667e-05
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 0.5946347222222222,
+   "changed_share": 0.007033333333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8026902777777778,
+     "changed_share": 0.013216666666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.38657916666666664,
+     "changed_share": 0.00085
+    }
+   }
+  },
+  {
+   "a": "v02-amount55-cover5",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.6814208333333334,
+   "changed_share": 0.0014083333333333335,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.9590180555555555,
+     "changed_share": 0.0018458333333333334
+    },
+    "Camera A": {
+     "mean_difference": 0.4038236111111111,
+     "changed_share": 0.0009708333333333333
+    }
+   }
+  },
+  {
+   "a": "v03-amount65-cover65",
+   "b": "v04-amount5-cover85",
+   "mean_difference": 0.9514395833333333,
+   "changed_share": 0.01535625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.3429319444444445,
+     "changed_share": 0.022241666666666667
+    },
+    "Camera A": {
+     "mean_difference": 0.5599472222222223,
+     "changed_share": 0.008470833333333334
+    }
+   }
+  },
+  {
+   "a": "v03-amount65-cover65",
+   "b": "v05-amount95-cover95",
+   "mean_difference": 0.8265368055555556,
+   "changed_share": 0.012379166666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.1817194444444445,
+     "changed_share": 0.020570833333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.4713541666666667,
+     "changed_share": 0.0041875
+    }
+   }
+  },
+  {
+   "a": "v03-amount65-cover65",
+   "b": "v06-amount45-cover55",
+   "mean_difference": 1.7461361111111111,
+   "changed_share": 0.054356249999999995,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.6629125,
+     "changed_share": 0.09731666666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.8293597222222222,
+     "changed_share": 0.011395833333333332
+    }
+   }
+  },
+  {
+   "a": "v03-amount65-cover65",
+   "b": "v07-amount75-cover15",
+   "mean_difference": 0.9999819444444444,
+   "changed_share": 0.020866666666666665,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.4160166666666667,
+     "changed_share": 0.0307125
+    },
+    "Camera A": {
+     "mean_difference": 0.5839472222222222,
+     "changed_share": 0.011020833333333334
+    }
+   }
+  },
+  {
+   "a": "v03-amount65-cover65",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 1.0038340277777777,
+   "changed_share": 0.021129166666666668,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.420276388888889,
+     "changed_share": 0.031054166666666667
+    },
+    "Camera A": {
+     "mean_difference": 0.5873916666666666,
+     "changed_share": 0.011204166666666666
+    }
+   }
+  },
+  {
+   "a": "v03-amount65-cover65",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 1.1192041666666666,
+   "changed_share": 0.024610416666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.6012152777777777,
+     "changed_share": 0.039016666666666665
+    },
+    "Camera A": {
+     "mean_difference": 0.6371930555555556,
+     "changed_share": 0.010204166666666667
+    }
+   }
+  },
+  {
+   "a": "v03-amount65-cover65",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.7056166666666667,
+   "changed_share": 0.00176875,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.9859291666666666,
+     "changed_share": 0.0027083333333333334
+    },
+    "Camera A": {
+     "mean_difference": 0.42530416666666665,
+     "changed_share": 0.0008291666666666666
+    }
+   }
+  },
+  {
+   "a": "v04-amount5-cover85",
+   "b": "v05-amount95-cover95",
+   "mean_difference": 1.3175597222222222,
+   "changed_share": 0.06638958333333334,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.9273652777777779,
+     "changed_share": 0.10459583333333333
+    },
+    "Camera A": {
+     "mean_difference": 0.7077541666666667,
+     "changed_share": 0.028183333333333335
+    }
+   }
+  },
+  {
+   "a": "v04-amount5-cover85",
+   "b": "v06-amount45-cover55",
+   "mean_difference": 1.6254784722222222,
+   "changed_share": 0.04610625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.465602777777778,
+     "changed_share": 0.08400416666666667
+    },
+    "Camera A": {
+     "mean_difference": 0.7853541666666667,
+     "changed_share": 0.008208333333333333
+    }
+   }
+  },
+  {
+   "a": "v04-amount5-cover85",
+   "b": "v07-amount75-cover15",
+   "mean_difference": 0.24651041666666668,
+   "changed_share": 1.2499999999999999e-05,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.3271236111111111,
+     "changed_share": 2.0833333333333333e-05
+    },
+    "Camera A": {
+     "mean_difference": 0.16589722222222222,
+     "changed_share": 4.166666666666667e-06
+    }
+   }
+  },
+  {
+   "a": "v04-amount5-cover85",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 0.2585375,
+   "changed_share": 3.3333333333333335e-05,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.33497777777777776,
+     "changed_share": 4.5833333333333334e-05
+    },
+    "Camera A": {
+     "mean_difference": 0.18209722222222222,
+     "changed_share": 2.0833333333333333e-05
+    }
+   }
+  },
+  {
+   "a": "v04-amount5-cover85",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 0.6158034722222222,
+   "changed_share": 0.006479166666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8437388888888889,
+     "changed_share": 0.012225
+    },
+    "Camera A": {
+     "mean_difference": 0.38786805555555554,
+     "changed_share": 0.0007333333333333333
+    }
+   }
+  },
+  {
+   "a": "v04-amount5-cover85",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.6249520833333333,
+   "changed_share": 0.0007041666666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8808388888888888,
+     "changed_share": 0.0009625
+    },
+    "Camera A": {
+     "mean_difference": 0.36906527777777776,
+     "changed_share": 0.00044583333333333335
+    }
+   }
+  },
+  {
+   "a": "v05-amount95-cover95",
+   "b": "v06-amount45-cover55",
+   "mean_difference": 1.9900131944444444,
+   "changed_share": 0.08655625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 3.0274875,
+     "changed_share": 0.14504166666666668
+    },
+    "Camera A": {
+     "mean_difference": 0.9525388888888889,
+     "changed_share": 0.028070833333333333
+    }
+   }
+  },
+  {
+   "a": "v05-amount95-cover95",
+   "b": "v07-amount75-cover15",
+   "mean_difference": 1.3730604166666667,
+   "changed_share": 0.0728375,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.0109583333333334,
+     "changed_share": 0.11496666666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.7351625,
+     "changed_share": 0.030708333333333334
+    }
+   }
+  },
+  {
+   "a": "v05-amount95-cover95",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 1.3771027777777778,
+   "changed_share": 0.07298958333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.0137930555555554,
+     "changed_share": 0.11516666666666667
+    },
+    "Camera A": {
+     "mean_difference": 0.7404125,
+     "changed_share": 0.0308125
+    }
+   }
+  },
+  {
+   "a": "v05-amount95-cover95",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 1.4780520833333335,
+   "changed_share": 0.07250625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.1658041666666668,
+     "changed_share": 0.1160625
+    },
+    "Camera A": {
+     "mean_difference": 0.7903,
+     "changed_share": 0.02895
+    }
+   }
+  },
+  {
+   "a": "v05-amount95-cover95",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.9892020833333334,
+   "changed_share": 0.02940833333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.4317652777777778,
+     "changed_share": 0.0462
+    },
+    "Camera A": {
+     "mean_difference": 0.5466388888888889,
+     "changed_share": 0.012616666666666667
+    }
+   }
+  },
+  {
+   "a": "v06-amount45-cover55",
+   "b": "v07-amount75-cover15",
+   "mean_difference": 1.6409694444444445,
+   "changed_share": 0.047877083333333334,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.4851569444444443,
+     "changed_share": 0.08699166666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.7967819444444444,
+     "changed_share": 0.0087625
+    }
+   }
+  },
+  {
+   "a": "v06-amount45-cover55",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 1.6417840277777778,
+   "changed_share": 0.04797916666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.485727777777778,
+     "changed_share": 0.08706666666666667
+    },
+    "Camera A": {
+     "mean_difference": 0.7978402777777778,
+     "changed_share": 0.008891666666666668
+    }
+   }
+  },
+  {
+   "a": "v06-amount45-cover55",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 1.7041055555555555,
+   "changed_share": 0.05223125,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.618316666666667,
+     "changed_share": 0.09560416666666667
+    },
+    "Camera A": {
+     "mean_difference": 0.7898944444444445,
+     "changed_share": 0.008858333333333333
+    }
+   }
+  },
+  {
+   "a": "v06-amount45-cover55",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 1.6168347222222221,
+   "changed_share": 0.04325208333333334,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.470022222222222,
+     "changed_share": 0.07897083333333334
+    },
+    "Camera A": {
+     "mean_difference": 0.7636472222222223,
+     "changed_share": 0.007533333333333334
+    }
+   }
+  },
+  {
+   "a": "v07-amount75-cover15",
+   "b": "v08-amount25-cover35",
+   "mean_difference": 0.05313402777777778,
+   "changed_share": 8.333333333333334e-06,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.05227916666666667,
+     "changed_share": 0.0
+    },
+    "Camera A": {
+     "mean_difference": 0.05398888888888889,
+     "changed_share": 1.6666666666666667e-05
+    }
+   }
+  },
+  {
+   "a": "v07-amount75-cover15",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 0.5947819444444444,
+   "changed_share": 0.007033333333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8027513888888889,
+     "changed_share": 0.013216666666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.3868125,
+     "changed_share": 0.00085
+    }
+   }
+  },
+  {
+   "a": "v07-amount75-cover15",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.6813319444444444,
+   "changed_share": 0.0014083333333333335,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.9590402777777778,
+     "changed_share": 0.0018458333333333334
+    },
+    "Camera A": {
+     "mean_difference": 0.4036236111111111,
+     "changed_share": 0.0009708333333333333
+    }
+   }
+  },
+  {
+   "a": "v08-amount25-cover35",
+   "b": "v09-amount85-cover45",
+   "mean_difference": 0.5982826388888889,
+   "changed_share": 0.00711875,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8084638888888889,
+     "changed_share": 0.013354166666666667
+    },
+    "Camera A": {
+     "mean_difference": 0.3881013888888889,
+     "changed_share": 0.0008833333333333333
+    }
+   }
+  },
+  {
+   "a": "v08-amount25-cover35",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.6878131944444444,
+   "changed_share": 0.00143125,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.9656972222222222,
+     "changed_share": 0.0018458333333333334
+    },
+    "Camera A": {
+     "mean_difference": 0.4099291666666667,
+     "changed_share": 0.0010166666666666666
+    }
+   }
+  },
+  {
+   "a": "v09-amount85-cover45",
+   "b": "v10-amount35-cover75",
+   "mean_difference": 0.8719875,
+   "changed_share": 0.00659375,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.2454305555555556,
+     "changed_share": 0.0118
+    },
+    "Camera A": {
+     "mean_difference": 0.49854444444444446,
+     "changed_share": 0.0013875
+    }
+   }
+  }
+ ],
+ "nearly_the_same": [
+  [
+   "baseline",
+   "v01-amount15-cover25"
+  ],
+  [
+   "baseline",
+   "v02-amount55-cover5"
+  ],
+  [
+   "baseline",
+   "v04-amount5-cover85"
+  ],
+  [
+   "baseline",
+   "v07-amount75-cover15"
+  ],
+  [
+   "baseline",
+   "v08-amount25-cover35"
+  ],
+  [
+   "v01-amount15-cover25",
+   "v02-amount55-cover5"
+  ],
+  [
+   "v01-amount15-cover25",
+   "v04-amount5-cover85"
+  ],
+  [
+   "v01-amount15-cover25",
+   "v07-amount75-cover15"
+  ],
+  [
+   "v01-amount15-cover25",
+   "v08-amount25-cover35"
+  ],
+  [
+   "v02-amount55-cover5",
+   "v04-amount5-cover85"
+  ],
+  [
+   "v02-amount55-cover5",
+   "v07-amount75-cover15"
+  ],
+  [
+   "v02-amount55-cover5",
+   "v08-amount25-cover35"
+  ],
+  [
+   "v04-amount5-cover85",
+   "v07-amount75-cover15"
+  ],
+  [
+   "v04-amount5-cover85",
+   "v08-amount25-cover35"
+  ],
+  [
+   "v07-amount75-cover15",
+   "v08-amount25-cover35"
+  ]
+ ],
+ "invisible": [
+  "v01-amount15-cover25",
+  "v02-amount55-cover5",
+  "v04-amount5-cover85",
+  "v07-amount75-cover15",
+  "v08-amount25-cover35"
+ ],
+ "reset_check": null,
+ "sheet": {
+  "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/moss-variations-run/moss-on-the-lock-walls-and-gate-sheet.jpg",
+  "bytes": 402834,
+  "quality": 70,
+  "scale": 1.0,
+  "width": 1874,
+  "height": 1724
+ },
+ "card_seconds": 179.89999999999998,
+ "card_lines": [
+  "Card seconds (work + wake-up + the idle tail): job 1: work 32.7 + wake-up 0.8 + idle tail 5 = 38.5 s; job 2: work 20.2 + wake-up 17.6 + idle tail 5 = 42.8 s; job 3: work 26.6 + wake-up 20.3 + idle tail 5 = 51.9 s; set-up and downloads 47 s (an estimate from the wall clock); in all 180 s, about US$0.05 (an estimate at the price of the day, US$1.1 an hour; not a bill).",
+  "The 3 job(s) ran side by side: from sending to the last result took 48 s. Wake-up times (waiting for a card to start): 0.8 s, 17.6 s, 20.3 s."
+ ],
+ "estimate_card_seconds": 250.0,
+ "estimate_elapsed_seconds": 106.0,
+ "where": "a rented card",
+ "helper": "batching-proof",
+ "role": "builder",
+ "ledger": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/card-time-ledger.jsonl"
+}

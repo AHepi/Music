@@ -1,0 +1,46 @@
+== place kit inside Blender: audit, finish, treatments, wear, roads, construction, undo
+PASS  the flat hut fails the audit (exit 1): exit 1
+PASS  the flat hut report names normal_map: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names displacement: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names dirt: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names grime: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names weathering: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names cracks_and_chips: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names bevelled_edges: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names shape_damage: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names plants: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the flat hut report names litter: yes
+      recorded in: a hut of plain boxes, made like a model made it from a one-line request
+PASS  the report names the plank that floats and says how to fix it: yes
+      proves: the construction check can fail (the negative proof)
+PASS  the audit file holds facts only: no overall verdict, no exit code, no list of checks (the plain-Python judge decides, with the house numbers): yes
+PASS  the audit records the scene file hash, the settings hash, the Blender version and what was measured: yes
+FAIL  the good hut finishes and passes the audit at full size (exit 0): got 1, expected 0
+PASS  finishing the hut takes 7.8 s (full size: 1024 px maps, 0.1 m masks): 7.8 s
+FAIL  every step reports a plain PASS line (roles, roads, surfaces, damage, plan masks, wear, growth, light): no
+FAIL  it ends by saying what to run next (the preflight place stage): no
+FAIL  a quick trial finishes but is refused as a final by the audit (exit 1) and the line says "quick": exit 1
+FAIL  the same quick scene is accepted as a trial with --allow-quick: got 2, expected 0
+Traceback (most recent call last):
+  File "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_blender.py", line 122, in <module>
+    facts_hut = probe(finished_hut, 'facts')
+  File "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_blender.py", line 76, in probe
+    raise AssertionError(f'probe {name} wrote nothing: ' + done.stdout[-500:] + done.stderr[-300:])
+AssertionError: probe facts wrote nothing: 00:00.416  reports          | ERROR Cannot read file "/tmp/place-blender-test-0sfk8jvo/good-hut-finished.blend": No such file or directory
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit
+
+
+real	0m15.246s
+user	0m16.741s
+sys	0m2.382s

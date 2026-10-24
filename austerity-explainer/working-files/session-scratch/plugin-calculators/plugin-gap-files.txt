@@ -1,0 +1,93 @@
+# Film kit files missing from plugin kit (v1.2.0), code and data only (pieces, recordings, stills, __pycache__ left out)
+examples/house-sample/timeline.json
+examples/inflation-chapter-2-newcomers/timeline-estimated.json
+examples/inflation-chapter-2-newcomers/works-w1-shot-check.json
+examples/inflation-chapter-2-newcomers/works-w1-working-shot-check.json
+examples/inflation-chapter-2-newcomers/works-w2-shot-check.json
+examples/inflation-chapter-2-newcomers/works-w2-slowed-shot-check.json
+examples/inflation-chapter-2-newcomers/works-w3-shot-check.json
+examples/inflation-chapter-2-newcomers/works-w4-shot-check.json
+examples/lockout-test/timeline.json
+examples/notice-corner/shot-check.json
+examples/notice-corner/timeline.json
+examples/people-test/shot-check.json
+examples/people-test/timeline.json
+examples/projection-test/camera.json
+examples/projection-test/timeline.json
+narration-tools/estimate_timeline.py
+paper-film/blender/figures/build_figures.py
+paper-film/blender/figures/fetch_cloth_textures.py
+paper-film/blender/figures/figure_sheet.py
+paper-film/blender/inflation-chapter-2-newcomers/checkout/checkout_choices.py
+paper-film/blender/inflation-chapter-2-newcomers/props/build_chapter_2_props.py
+paper-film/blender/inflation-chapter-2-newcomers/props/chapter_2_choices.py
+paper-film/blender/inflation-chapter-2-newcomers/props/paint_chapter_2_pictures.py
+paper-film/blender/inflation-chapter-2-newcomers/works/assemble_works.py
+paper-film/blender/inflation-chapter-2-newcomers/works/build_factories.py
+paper-film/blender/inflation-chapter-2-newcomers/works/build_far_town.py
+paper-film/blender/inflation-chapter-2-newcomers/works/build_works.sh
+paper-film/blender/inflation-chapter-2-newcomers/works/draw_works_views.py
+paper-film/blender/inflation-chapter-2-newcomers/works/make_works_continuity_sheet.py
+paper-film/blender/inflation-chapter-2-newcomers/works/make_works_sheet.py
+paper-film/blender/inflation-chapter-2-newcomers/works/paint_works_pictures.py
+paper-film/blender/inflation-chapter-2-newcomers/works/works_kit.py
+paper-film/blender/pit-village/assemble_lockout.py
+paper-film/blender/pit-village/assemble_notice_corner.py
+paper-film/blender/pit-village/assemble_people_test.py
+paper-film/blender/pit-village/build_street.py
+paper-film/blender/pit-village/fetch_street_textures.py
+paper-film/blender/pit-village/props/build_scripted_props.py
+paper-film/blender/pit-village/props/convert_poly_haven.py
+paper-film/blender/pit-village/props/download_poly_haven.py
+paper-film/blender/pit-village/props/fonts/00 Fonts - where to get them.md
+paper-film/blender/pit-village/props/fonts/abrilfatface-OFL.txt
+paper-film/blender/pit-village/props/fonts/alfaslabone-OFL.txt
+paper-film/blender/pit-village/props/fonts/oldstandardtt-OFL.txt
+paper-film/blender/pit-village/props/make_sheet.py
+paper-film/blender/pit-village/props/paint_prop_pictures.py
+paper-film/blender/pit-village/props/poly_haven_choices.py
+paper-film/blender/pit-village/props/prop_library.py
+paper-film/blender/pit-village/props/readability_test.py
+paper-film/blender/pit-village/props/render_contact_sheet.py
+paper-film/blender/pit-village/props/scripted_kit.py
+paper-film/blender/pit-village/set_dressing.py
+paper-film/blender/tests/notice_corner_test_scene.py
+paper-film/blender/tests/run-checker-tests.sh
+paper-film/scenes/cinema-test-relief.js
+paper-film/scenes/graphics-test.js
+paper-film/scenes/house-sample.js
+paper-film/scenes/house-sample/house-set.js
+paper-film/scenes/house-sample/page-1.js
+paper-film/scenes/inflation-chapter-2-newcomers.js
+paper-film/scenes/inflation-chapter-2-newcomers/page-3.js
+paper-film/scenes/inflation-chapter-2-newcomers/page-4.js
+paper-film/scenes/inflation-chapter-2-newcomers/page-5.js
+paper-film/scenes/inflation-chapter-2-newcomers/placeholder.js
+paper-film/scenes/inflation-chapter-2-newcomers/works-effects.js
+paper-film/scenes/lazy-loading-test.js
+paper-film/scenes/lockout-test.js
+paper-film/scenes/notice-corner.js
+paper-film/scenes/people-test.js
+paper-film/scenes/pit-village-effects.js
+paper-film/scenes/projected-set.js
+paper-film/scenes/projection-test.js
+paper-film/scenes/sam-3d-petrol-station-test.js
+paper-film/scenes/station-proxies-test.js
+paper-film/scenes/works-states-test.js
+paper-film/tools/fit_station_proxies.py
+paper-film/tools/make_behind_picture.py
+paper-film/tools/make_state_picture.py
+paper-film/tools/station_plates.py
+
+# Files present in both but different (film kit newer)
+paper-film/scenes/cinema-chapter.js (lazy chapters, run-on join, held-shot still key, prepare/pagesAt)
+paper-film/scenes/cinema-kit.js (kit.moving, kit.movingFromHere, MOVING_LAYER import)
+paper-film/scenes/graphics.js (presence fadeOut 0, callout wordsWithLine/corner/side/fadeOut, dotPanel, TEXT_LEFT/TEXT_RIGHT, topShade, buildWords, ruleCard, guessRing, nameTag, priceArrow, pointer)
+paper-film/stage/cinema-stage.js (held shots MOVING_LAYER drawSet, ?samples=N, PEEL_SHADING_IN 0.3, run-on join)
+paper-film/stage/cinema-stage.html (window.prepareFrame)
+paper-film/tools/check_shot.py (story_reaches_down rule 7)
+paper-film/tools/profile_frame.mjs (PROFILE_SCENE)
+paper-film/tools/render-paper-film.mjs (prepareFrame before every frame, still and camera sample)
+07 Composing a shot.md (story_reaches_down); 05 Lessons and traps.md (setFading, built places); 00 START HERE.md and 01 (repository folder, not zips)
+
+# Plugin-only (better in plugin): scenes/cinema-test-pages.js takes ?chapter=; cinema-chapter-template; tools/contact_sheet.py; tools/make_cover.py

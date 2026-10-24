@@ -1,0 +1,187 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "explainer-film/place-facts/1",
+ "title": "Place facts",
+ "description": "What this is: the standard facts file every place's assemble script writes (one per place, for example works-place-facts.json), so every calculator reads the same names instead of one place's one-off keys (works-shot.json's men_at_no_1, no-2-tank-top). It holds the place's views (camera spots, turn, lenses, slide, subject, kind of shot), signs, emitters (chimney mouths, fires), figures, lights, landmark tops, support surfaces (ground, pavement, counter, floor) and an accepted list of the place's known, deliberately kept exceptions. Places are Blender metres: x across, y forward (up the street), z up; three.js is (x, z, -y). Check a file with: python3 kit/calculators/place_facts.py check FILE. Optional fields may be left out; lists that a place has nothing for are written empty ([]).",
+ "type": "object",
+ "required": ["place_facts_version", "place", "about", "made_by", "made_from", "views", "signs", "emitters", "figures", "lights", "landmark_tops", "support_surfaces", "accepted"],
+ "additionalProperties": true,
+ "properties": {
+  "place_facts_version": {"const": 1, "description": "This schema's version."},
+  "place": {"type": "string", "minLength": 1, "description": "The place's short name (works, notice-corner, people-test, checkout)."},
+  "about": {"type": "string", "description": "What the place is, in plain words."},
+  "made_by": {"type": "string", "description": "The script (or converter) that wrote this file."},
+  "made_from": {"type": "array", "items": {"type": "string"}, "description": "The files it was made from."},
+  "interior": {"type": "boolean", "description": "True indoors (props rest on declared support surfaces, the ceiling is the dim top)."},
+  "frame": {"type": "object", "properties": {"width": {"type": "integer", "minimum": 1}, "height": {"type": "integer", "minimum": 1}},
+            "description": "Only when the place uses another frame than film-settings.json's."},
+  "lines": {"type": "object", "additionalProperties": {"$ref": "#/$defs/vector"},
+            "description": "Directions of the place's straight lines (a street rising 0.07 m a metre: [0, 1, 0.069927])."},
+  "lines_key": {"type": "string", "description": "Which of lines the composing rules use."},
+  "painting": {
+   "type": "object",
+   "properties": {
+    "plate_size": {"$ref": "#/$defs/size2"},
+    "returned_size": {"anyOf": [{"$ref": "#/$defs/size2"}, {"type": "null"}], "description": "What the painter returned (its height sets the slide limit)."},
+    "source": {"type": "string"}
+   }
+  },
+  "views": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/view"}},
+  "signs": {"type": "array", "items": {"$ref": "#/$defs/sign"}},
+  "emitters": {"type": "array", "items": {"$ref": "#/$defs/emitter"}},
+  "figures": {"type": "array", "items": {"$ref": "#/$defs/figure"}},
+  "lights": {"type": "array", "items": {"$ref": "#/$defs/light"}},
+  "landmark_tops": {"type": "array", "items": {"$ref": "#/$defs/landmark"}},
+  "support_surfaces": {"type": "array", "items": {"$ref": "#/$defs/surface"}},
+  "props": {"type": "array", "items": {"$ref": "#/$defs/prop"}},
+  "states": {"type": "object", "description": "Optional: the place's states (quiet, working ...), free form."},
+  "accepted": {"type": "array", "items": {"$ref": "#/$defs/accepted"}}
+ },
+ "$defs": {
+  "vector": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+  "size2": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 2, "maxItems": 2},
+  "point_or_null": {"anyOf": [{"$ref": "#/$defs/vector"}, {"type": "null"}]},
+  "view": {
+   "type": "object",
+   "required": ["name", "kind_of_shot", "camera", "subject"],
+   "properties": {
+    "name": {"type": "string", "minLength": 1},
+    "about": {"type": "string"},
+    "kind_of_shot": {"type": "array", "minItems": 1, "items": {"type": "string"},
+                     "description": "Shot-kind profiles in film-settings.json (still_life, crowd, overview, interior, dark_subject); the loosest wins."},
+    "camera": {
+     "type": "object",
+     "required": ["turn_degrees"],
+     "properties": {
+      "composed": {"$ref": "#/$defs/point_or_null", "description": "Where the film camera stands for the shot (the end of a slide)."},
+      "plate": {"$ref": "#/$defs/point_or_null", "description": "Where the plate is drawn from (the start of a slide)."},
+      "turn_degrees": {"type": "number", "description": "+ to the left of straight up +y; the same at both spots (a slide never turns)."},
+      "tilt_degrees": {"type": "number"},
+      "roll_degrees": {"type": "number"},
+      "film_vertical_fov_degrees": {"type": "number", "minimum": 1, "maximum": 179},
+      "plate_vertical_fov_degrees": {"type": "number", "minimum": 1, "maximum": 179},
+      "eye_height_metres": {"type": "number", "description": "Above the surface the viewer stands on."},
+      "floor_height": {"type": "number", "description": "Height (z) of that surface under the camera."},
+      "stands_on": {"type": "string"},
+      "camera_file": {"type": "string"}
+     }
+    },
+    "slide": {
+     "anyOf": [
+      {"type": "null"},
+      {"type": "object", "required": ["start", "end"],
+       "properties": {"start": {"$ref": "#/$defs/vector"}, "end": {"$ref": "#/$defs/vector"}, "length_metres": {"type": "number", "minimum": 0}}}
+     ]
+    },
+    "subject": {
+     "type": "object", "required": ["name", "point"],
+     "properties": {"name": {"type": "string"}, "point": {"$ref": "#/$defs/vector"}, "dark": {"type": "boolean"}, "opening": {"type": "boolean"}}
+    },
+    "painted_points": {"type": "array", "items": {"type": "object", "required": ["name", "point"],
+                       "properties": {"name": {"type": "string"}, "point": {"$ref": "#/$defs/vector"}}},
+                       "description": "Painted things near the camera, for the slide-magnification check (the nearest decides)."},
+    "check_file": {"type": "string"},
+    "states": {"type": "array", "items": {"type": "string"}}
+   }
+  },
+  "sign": {
+   "type": "object",
+   "required": ["name", "centre", "normal", "letter_height_metres", "words", "must_read"],
+   "properties": {
+    "name": {"type": "string"},
+    "centre": {"$ref": "#/$defs/vector"},
+    "normal": {"$ref": "#/$defs/vector", "description": "The way the lettered face looks (unit length)."},
+    "letter_height_metres": {"anyOf": [{"type": "number", "minimum": 0}, {"type": "null"}]},
+    "words": {"type": "string"},
+    "must_read": {"type": "boolean"},
+    "both_faces": {"type": "boolean"},
+    "wraps_degrees": {"type": "number", "description": "A word round a drum reaches this far either side of its front."},
+    "dim_until_named": {"type": "number"},
+    "note": {"type": "string"}
+   }
+  },
+  "emitter": {
+   "type": "object",
+   "required": ["name", "kind", "at"],
+   "properties": {
+    "name": {"type": "string"},
+    "kind": {"enum": ["chimney mouth", "fire", "lamp", "window group", "other"]},
+    "at": {"$ref": "#/$defs/vector"},
+    "radius_metres": {"type": "number", "minimum": 0},
+    "note": {"type": "string"}
+   }
+  },
+  "figure": {
+   "type": "object",
+   "required": ["name", "feet", "turn_degrees", "facing", "height_metres"],
+   "properties": {
+    "name": {"type": "string"},
+    "feet": {"$ref": "#/$defs/vector"},
+    "turn_degrees": {"type": "number", "description": "The model's turn; at 0 it faces +y (its back to a camera looking up +y)."},
+    "facing": {"$ref": "#/$defs/vector", "description": "The way the figure faces (unit, level)."},
+    "height_metres": {"type": "number", "minimum": 0},
+    "figure": {"type": "string", "description": "The figure model."},
+    "group": {"type": "string"},
+    "height_from": {"type": "string", "description": "measured, or the default from film-settings.json when not measured"},
+    "shown_in": {"type": "array", "items": {"type": "string"}}
+   }
+  },
+  "light": {
+   "type": "object",
+   "required": ["name", "at", "watts"],
+   "properties": {
+    "name": {"type": "string"},
+    "kind": {"type": "string"},
+    "at": {"$ref": "#/$defs/vector"},
+    "target": {"$ref": "#/$defs/point_or_null"},
+    "aim": {"$ref": "#/$defs/point_or_null", "description": "A spot light's direction when no target point is known."},
+    "watts": {"anyOf": [{"type": "number", "minimum": 0}, {"type": "null"}]},
+    "colour": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+    "cone_degrees": {"type": "number"},
+    "reach_metres": {"type": "number"},
+    "reaches_only": {"type": "array", "items": {"type": "string"}},
+    "skips": {"type": "array", "items": {"type": "string"}},
+    "in_states": {"type": "array", "items": {"type": "string"}},
+    "note": {"type": "string"}
+   }
+  },
+  "landmark": {
+   "type": "object",
+   "required": ["name", "top"],
+   "properties": {"name": {"type": "string"}, "top": {"$ref": "#/$defs/vector"}, "identifies": {"type": "string"}}
+  },
+  "surface": {
+   "type": "object",
+   "required": ["name", "kind", "height"],
+   "properties": {
+    "name": {"type": "string"},
+    "kind": {"enum": ["ground", "road", "pavement", "floor", "counter", "shelf", "table", "sill", "seat", "other"]},
+    "height": {"type": "number", "description": "z of the surface at `at` (or everywhere when level)."},
+    "at": {"$ref": "#/$defs/vector"},
+    "slope": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2, "description": "Rise in metres a metre along x and y."},
+    "x_range": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+    "y_range": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+    "interior": {"type": "boolean"},
+    "height_from": {"type": "string"}
+   }
+  },
+  "prop": {
+   "type": "object",
+   "required": ["name", "at"],
+   "properties": {"name": {"type": "string"}, "at": {"$ref": "#/$defs/vector"}, "size": {"$ref": "#/$defs/vector"},
+                  "turn_degrees": {"type": "number"}, "role": {"enum": ["subject", "support", "story", "work", "fill", "other"]}}
+  },
+  "accepted": {
+   "type": "object",
+   "required": ["rule", "view", "reason", "who", "date"],
+   "properties": {
+    "rule": {"type": "string", "minLength": 1, "description": "The rule (a shot_kind_profiles rule name, or the checker's words)."},
+    "view": {"type": "string", "minLength": 1},
+    "reason": {"type": "string", "minLength": 1},
+    "who": {"type": "string", "minLength": 1, "description": "Who accepted it: the user (quote), or the helper and where it is written."},
+    "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "measured": {"description": "The number the check found, when there is one."}
+   }
+  }
+ }
+}

@@ -1,0 +1,240 @@
+{
+ "place": "notice-corner",
+ "view": "end",
+ "subject": "notice",
+ "dark_subject": false,
+ "lights": [
+  {
+   "light": "fire light",
+   "kind": "POINT",
+   "watts": 70,
+   "role": "fire",
+   "role_because": "0.55 m from drum fire",
+   "casts_shadow": true,
+   "problems": [
+    "lights chair, drum (its props round the fire; lesson 120, log 32): skip them"
+   ],
+   "notes": [],
+   "housing": [
+    "chair",
+    "drum"
+   ],
+   "nearest_lit": "board",
+   "nearest_lit_metres": 0.6312426237192801,
+   "start_watts": 70.99694794046549
+  },
+  {
+   "light": "notice glow",
+   "kind": "SPOT",
+   "watts": 200,
+   "role": "accent",
+   "role_because": "reaches only board, notice (the subject's own light)",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": [],
+   "housing": [
+    "drum"
+   ],
+   "near": [
+    "chair",
+    "lantern"
+   ],
+   "reach": {
+    "farthest_target_metres": 1.2213665685237671,
+    "nearest_other_metres": 0.1483304209162987,
+    "nearest_other": "chair",
+    "reach_metres": 1.421366568523767,
+    "clear": false,
+    "source": "the place facts' boxes (rough: walls are not in them; use set_measurements.py beam)"
+   },
+   "cones": {
+    "even_cone_degrees": 53.58317748115797,
+    "even_aim": [
+     3.454,
+     22.808,
+     2.754
+    ],
+    "from_below_cone_degrees": 27.917918293282302,
+    "from_below_aim": [
+     3.454,
+     22.808,
+     2.3655
+    ],
+    "from_below_leaves_top_unlit": true
+   }
+  },
+  {
+   "light": "lantern light",
+   "kind": "POINT",
+   "watts": 1,
+   "role": "lamp",
+   "role_because": "0.00 m from lantern",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": [
+    "close to drum, pail: skip them if they come out as bright as the subject"
+   ],
+   "housing": [
+    "lantern"
+   ],
+   "near": [
+    "drum",
+    "pail"
+   ],
+   "nearest_lit": "drum",
+   "nearest_lit_metres": 0.10786333946248856,
+   "start_watts": 2.0729783710288543
+  },
+  {
+   "light": "corner lamp light",
+   "kind": "POINT",
+   "watts": 12,
+   "role": "lamp",
+   "role_because": "0.00 m from corner lamp",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  }
+ ],
+ "subject_light": {
+  "points": 28,
+  "by_light": {
+   "fire light": 6.26949747166357,
+   "notice glow": 16.683176142259054,
+   "lantern light": 0.0523120920984531
+  }
+ },
+ "subject_light_over_key": 1.378933214506359,
+ "lamps": [
+  {
+   "lamp": "corner lamp",
+   "box": [
+    0.8108212149598077,
+    0.27013095502144113,
+    0.8108212149598077,
+    0.27013095502144113
+   ],
+   "depth": 7.520911286641757,
+   "problems": []
+  },
+  {
+   "lamp": "fire light",
+   "box": [
+    0.565633240171814,
+    0.5533199756448168,
+    0.565633240171814,
+    0.5533199756448168
+   ],
+   "depth": 4.158480898850246,
+   "problems": []
+  },
+  {
+   "lamp": "corner lamp light",
+   "box": [
+    0.8108212149598077,
+    0.27013095502144113,
+    0.8108212149598077,
+    0.27013095502144113
+   ],
+   "depth": 7.520911286641757,
+   "problems": []
+  }
+ ],
+ "shadow_casters": [
+  "fire light"
+ ],
+ "eevee": {
+  "shadow_pool_size": "1024",
+  "shadow_resolution_scale": 0.703125
+ },
+ "problems": [
+  "fire light: lights chair, drum (its props round the fire; lesson 120, log 32): skip them"
+ ],
+ "calculator": "plan_lights plan",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light_planner.shadow_casting_kinds": {
+   "value": [
+    "key",
+    "fire",
+    "doorway",
+    "sky"
+   ],
+   "unit": "kinds of light that cast shadows (every other light casts none)",
+   "kind": "judged"
+  },
+  "light_planner.foot_patch_metres": {
+   "value": [
+    0.5,
+    0.35
+   ],
+   "unit": "metres (width, depth) of the soft shadow under a figure that casts no shadow",
+   "kind": "judged"
+  },
+  "light_planner.container_skip_within_metres": {
+   "value": 0.6,
+   "unit": "metres: a fire's light skips every prop this close (the container it burns in, the chair beside it); other lights get a note for props this close",
+   "kind": "judged"
+  },
+  "light_planner.near_surface_within_metres": {
+   "value": 1.0,
+   "unit": "metres: a camera-facing surface this close to a light is checked against the subject (a lamp lights the face it hangs on)",
+   "kind": "judged"
+  },
+  "light_planner.reach_margin_metres": {
+   "value": 0.2,
+   "unit": "metres past the farthest lit part of the target",
+   "kind": "judged"
+  },
+  "light_planner.cone_blend": {
+   "value": 0.9,
+   "unit": "Blender spot blend",
+   "kind": "judged"
+  },
+  "light_planner.subject_light_over_key_max": {
+   "value": 3.0,
+   "unit": "times the light the subject's own key gives it (all lights reaching it together)",
+   "kind": "judged"
+  },
+  "light_planner.lamp_clear_of_subject_pixels": {
+   "value": 18,
+   "unit": "pixels on the film frame between a lamp and the subject's outline box",
+   "kind": "judged"
+  },
+  "camera.meeting_point_gap_share_of_width": {
+   "value": 0.03,
+   "unit": "share of the frame width",
+   "kind": "judged"
+  },
+  "light_planner.near_ground_light_max": {
+   "value": 0.025,
+   "unit": "W/m2 a light behind the camera may put on the ground at the frame's bottom edge",
+   "kind": "judged"
+  },
+  "frame.plate_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light.shadow_resolution_reference_width": {
+   "value": 1080,
+   "unit": "pixels (scale = min(1, 1080 / width))",
+   "kind": "judged"
+  },
+  "light.shadow_pool_size": {
+   "value": "1024",
+   "unit": "EEVEE setting",
+   "kind": "measured"
+  }
+ }
+}

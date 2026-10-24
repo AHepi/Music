@@ -1,0 +1,64 @@
+{
+ "job": 1,
+ "scene": "/workspace/place-jobs/scenes/5dd1c4b4/canal_finished.blend",
+ "settings": "/workspace/place-jobs/scenes/5dd1c4b4/settings-7e7ca009-f3b44ea4/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-cracks-and-chips-on-the-lock-walls-and-1792727910/job-1",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "blend-v06-v10",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.chip_amount": 0.55,
+    "dials.cracks_and_chips.crack_density": 0.85,
+    "dials.cracks_and_chips.crack_width_metres": 0.0116
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "r02",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.chip_amount": 0.6,
+    "dials.cracks_and_chips.crack_density": 0.5875,
+    "dials.cracks_and_chips.crack_width_metres": 0.012
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "r04",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.chip_amount": 0.7,
+    "dials.cracks_and_chips.crack_density": 0.8875,
+    "dials.cracks_and_chips.crack_width_metres": 0.008
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

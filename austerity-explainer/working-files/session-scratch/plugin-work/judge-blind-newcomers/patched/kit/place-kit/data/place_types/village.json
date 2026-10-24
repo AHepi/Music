@@ -1,0 +1,53 @@
+{
+ "about": "Starting preset for a village or hamlet. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
+ "id": "village",
+ "default_look": "lived_in",
+ "default_state": "damp",
+ "roles_likely": [
+  "ground.dirt_road",
+  "ground.forest_floor",
+  "wall.timber_frame",
+  "wall.plaster",
+  "roof.thatch",
+  "timber.post",
+  "stone.footing",
+  "prop.barrel",
+  "tree.bark"
+ ],
+ "require_more": {},
+ "allowed_off": [
+  {
+   "id": "floors_indoors",
+   "treatments": [
+    "moss_and_algae",
+    "weathering",
+    "wetness",
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows"
+  }
+ ],
+ "footfall_shapes": [
+  {
+   "shape": "auto_door_strip",
+   "role": "timber.door",
+   "depth": 1.0,
+   "width": 1.2
+  }
+ ],
+ "plan_mask_cell_metres": 0.1,
+ "facts": [
+  "door_height",
+  "door_width",
+  "cart_gauge",
+  "roof_pitch",
+  "wall_thickness"
+ ],
+ "notes": "dirt lanes with ruts, timber and thatch, trees close by",
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

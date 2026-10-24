@@ -1,0 +1,530 @@
+{
+ "place_facts_version": 1,
+ "place": "notice-corner",
+ "about": "The notice corner (logs 31-32): a lock-out notice on a board in a pit-village street at dusk, a fire drum, a chair with a lantern, a pail; the camera slides 1.5 m toward it without turning. Kept by the user (decision 38: \"Wow that's incredible. Yes keep it.\").",
+ "made_by": "kit/calculators/place_facts.py (notice-corner converter)",
+ "made_from": [
+  "tests/fixtures/notice-corner/notice-corner-shot.json",
+  "tests/fixtures/notice-corner/notice-corner-camera.json",
+  "tests/fixtures/notice-corner/notice-corner-shot-check.json",
+  "tests/fixtures/notice-corner/notice-corner-final-frame-facts.json",
+  "tests/fixtures/notice-corner/notice-corner-paintings.json"
+ ],
+ "interior": false,
+ "views": [
+  {
+   "name": "end",
+   "about": "the composed spot at the end of the slide",
+   "kind_of_shot": [
+    "still_life"
+   ],
+   "camera": {
+    "composed": [
+     3.1,
+     17.85,
+     3.1882
+    ],
+    "plate": [
+     2.9931,
+     16.3538,
+     3.1882
+    ],
+    "turn_degrees": 6.87,
+    "tilt_degrees": 0.0,
+    "roll_degrees": 0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_height_metres": 1.804,
+    "floor_height": 1.3842,
+    "stands_on": "the pavement",
+    "camera_file": "notice-corner-camera.json"
+   },
+   "slide": {
+    "start": [
+     2.9931,
+     16.3538,
+     3.1882
+    ],
+    "end": [
+     3.1,
+     17.85,
+     3.1882
+    ],
+    "length_metres": 1.5
+   },
+   "subject": {
+    "name": "notice",
+    "point": [
+     3.45,
+     22.75,
+     2.8357
+    ]
+   },
+   "painted_points": [
+    {
+     "name": "pail",
+     "point": [
+      3.281,
+      21.15,
+      1.767
+     ]
+    },
+    {
+     "name": "chair",
+     "point": [
+      3.27,
+      21.75,
+      2.162
+     ]
+    },
+    {
+     "name": "drum",
+     "point": [
+      2.78,
+      22.0,
+      2.096
+     ]
+    },
+    {
+     "name": "lantern",
+     "point": [
+      3.275,
+      21.57,
+      2.316
+     ]
+    },
+    {
+     "name": "board",
+     "point": [
+      3.45,
+      22.75,
+      2.633
+     ]
+    },
+    {
+     "name": "notice",
+     "point": [
+      3.454,
+      22.808,
+      2.754
+     ]
+    }
+   ],
+   "check_file": "examples/notice-corner/shot-check.json"
+  }
+ ],
+ "signs": [
+  {
+   "name": "notice",
+   "centre": [
+    3.45,
+    22.75,
+    2.8357
+   ],
+   "normal": [
+    -0.071247,
+    -0.997459,
+    0.0
+   ],
+   "letter_height_metres": 0.0325,
+   "words": "PITS WILL BE CLOSED",
+   "must_read": true,
+   "note": "letter height derived from the 11 px measured in log 32 at 4.88 m; the board is turned square to the composed camera (assemble_notice_corner.py line 109)"
+  }
+ ],
+ "emitters": [
+  {
+   "name": "drum fire",
+   "kind": "fire",
+   "at": [
+    2.7799999713897705,
+    22.0,
+    2.3801
+   ],
+   "radius_metres": 0.26
+  },
+  {
+   "name": "lantern",
+   "kind": "lamp",
+   "at": [
+    3.275,
+    21.57,
+    2.2493
+   ]
+  },
+  {
+   "name": "corner lamp",
+   "kind": "lamp",
+   "at": [
+    3.72,
+    25.5,
+    5.2006
+   ]
+  }
+ ],
+ "figures": [],
+ "lights": [
+  {
+   "name": "fire light",
+   "kind": "POINT",
+   "at": [
+    2.78,
+    22.0,
+    2.9301
+   ],
+   "target": null,
+   "watts": 70
+  },
+  {
+   "name": "notice glow",
+   "kind": "SPOT",
+   "at": [
+    2.78,
+    22.0,
+    2.6301
+   ],
+   "target": [
+    3.45,
+    22.75,
+    2.3251
+   ],
+   "watts": 200,
+   "cone_degrees": 50.0,
+   "reach_metres": 1.399999976158142,
+   "reaches_only": [
+    "notice",
+    "board"
+   ]
+  },
+  {
+   "name": "lantern light",
+   "kind": "POINT",
+   "at": [
+    3.275,
+    21.57,
+    2.2493
+   ],
+   "target": null,
+   "watts": 1,
+   "skips": [
+    "lantern"
+   ],
+   "note": "watts from film-settings.json light.starting_points (assemble_notice_corner.py LANTERN_WATTS)"
+  },
+  {
+   "name": "corner lamp light",
+   "kind": "POINT",
+   "at": [
+    3.72,
+    25.5,
+    5.2006
+   ],
+   "target": null,
+   "watts": 12
+  }
+ ],
+ "landmark_tops": [
+  {
+   "name": "winding wheels top",
+   "top": [
+    0.0,
+    86.0,
+    26.452
+   ],
+   "identifies": "the colliery"
+  },
+  {
+   "name": "chimney top",
+   "top": [
+    -9.5,
+    108.0,
+    47.114
+   ],
+   "identifies": "the colliery"
+  }
+ ],
+ "support_surfaces": [
+  {
+   "name": "pavement",
+   "kind": "pavement",
+   "height": 1.3842,
+   "at": [
+    3.1,
+    17.85,
+    1.3842
+   ],
+   "slope": [
+    0.0,
+    0.069927
+   ],
+   "height_from": "shot_facts eye height under the composed camera (derived)"
+  },
+  {
+   "name": "chair seat",
+   "kind": "seat",
+   "height": 2.13,
+   "at": [
+    3.27,
+    21.75,
+    2.13
+   ],
+   "height_from": "shot_facts support_tops"
+  }
+ ],
+ "props": [
+  {
+   "name": "notice",
+   "at": [
+    3.454,
+    22.808,
+    2.754
+   ],
+   "size": [
+    0.554,
+    0.048,
+    0.777
+   ],
+   "role": "subject"
+  },
+  {
+   "name": "board",
+   "at": [
+    3.45,
+    22.75,
+    2.633
+   ],
+   "size": [
+    0.99,
+    0.287,
+    1.799
+   ],
+   "role": "support"
+  },
+  {
+   "name": "drum",
+   "at": [
+    2.78,
+    22.0,
+    2.096
+   ],
+   "size": [
+    0.787,
+    0.787,
+    0.856
+   ],
+   "role": "story"
+  },
+  {
+   "name": "chair",
+   "at": [
+    3.27,
+    21.75,
+    2.162
+   ],
+   "size": [
+    0.712,
+    0.726,
+    1.004
+   ],
+   "role": "story"
+  },
+  {
+   "name": "lantern",
+   "at": [
+    3.275,
+    21.57,
+    2.316
+   ],
+   "size": [
+    0.189,
+    0.17,
+    0.377
+   ],
+   "role": "story"
+  },
+  {
+   "name": "pail",
+   "at": [
+    3.281,
+    21.15,
+    1.767
+   ],
+   "size": [
+    0.401,
+    0.399,
+    0.297
+   ],
+   "role": "story"
+  },
+  {
+   "name": "lamp post",
+   "at": [
+    3.72,
+    23.25,
+    3.708
+   ],
+   "size": [
+    0.704,
+    0.386,
+    3.871
+   ],
+   "role": "other"
+  },
+  {
+   "name": "handcart",
+   "at": [
+    -0.152,
+    28.3,
+    2.61
+   ],
+   "size": [
+    1.869,
+    2.546,
+    1.103
+   ],
+   "role": "work"
+  },
+  {
+   "name": "sacks",
+   "at": [
+    -1.832,
+    31.119,
+    2.821
+   ],
+   "size": [
+    4.315,
+    6.286,
+    0.574
+   ],
+   "role": "work"
+  },
+  {
+   "name": "barrel",
+   "at": [
+    3.72,
+    30.6,
+    2.723
+   ],
+   "size": [
+    0.742,
+    0.756,
+    0.871
+   ],
+   "role": "work"
+  },
+  {
+   "name": "dustbins",
+   "at": [
+    -3.4,
+    38.0,
+    3.252
+   ],
+   "size": [
+    0.556,
+    1.778,
+    0.906
+   ],
+   "role": "work"
+  },
+  {
+   "name": "winding wheels",
+   "at": [
+    0.0,
+    86.0,
+    24.314
+   ],
+   "size": [
+    8.825,
+    1.9,
+    4.275
+   ],
+   "role": "other"
+  },
+  {
+   "name": "chimney",
+   "at": [
+    -9.5,
+    108.0,
+    25.964
+   ],
+   "size": [
+    5.2,
+    5.2,
+    42.3
+   ],
+   "role": "other"
+  },
+  {
+   "name": "gates",
+   "at": [
+    0.0,
+    71.5,
+    6.507
+   ],
+   "size": [
+    5.95,
+    0.097,
+    2.929
+   ],
+   "role": "other"
+  }
+ ],
+ "accepted": [
+  {
+   "rule": "rule6_lit_from_below",
+   "view": "end",
+   "measured": 0.08,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the finished still measured 0.08 (needs 0.10); the film page lights the notice's own surface with a copy of the warm light and reached 0.23 (log 32)"
+  },
+  {
+   "rule": "rule10_quiet_side_weight",
+   "view": "end",
+   "measured": 0.38,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the still's quiet side held 38% (aim 40-48%); the film page measured 46% (log 32)"
+  },
+  {
+   "rule": "rule8_bottom_left_share",
+   "view": "end",
+   "measured": 0.021,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32); the gutter kept as a narrow lead-in line (log 32)",
+   "date": "2026-10-14",
+   "reason": "the painted end frame's gutter covered 2.1% of the bottom-left quarter (limit 1%): a thin lead-in line, not a dark lump"
+  },
+  {
+   "rule": "slide_magnification",
+   "view": "end",
+   "measured": 1.3,
+   "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+   "date": "2026-10-14",
+   "reason": "the pail comes 1.45 times nearer during the 1.5 m slide (the painting allows about 1.29); the slide was made before plan 34's limit (F13) and the user kept the film"
+  }
+ ],
+ "lines": {
+  "street": [
+   0,
+   1,
+   0.069927
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "street",
+ "painting": {
+  "plate_size": [
+   1536,
+   2730
+  ],
+  "returned_size": [
+   1504,
+   2672
+  ],
+  "source": "notice-corner-paintings.json"
+ }
+}

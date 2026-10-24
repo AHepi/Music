@@ -1,0 +1,203 @@
+{
+ "place": "notice-corner",
+ "views": {
+  "end": {
+   "kind_of_shot": [
+    "still_life"
+   ],
+   "reading_spot": "composed",
+   "signs": {
+    "notice": {
+     "plate": {
+      "across": 0.7956,
+      "down": 0.5481,
+      "depth": 6.2956,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 6.4222,
+      "facing": 0.9985,
+      "across_facing": 1.0,
+      "back_shows": false,
+      "letter_pixels": 8.515,
+      "letter_width_pixels": 8.6735,
+      "face_on_pixels": 8.515,
+      "height_factor": 1.0,
+      "width_factor": 1.0186
+     },
+     "composed": {
+      "across": 0.7956,
+      "down": 0.5628,
+      "depth": 4.823,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 4.9251,
+      "facing": 0.9974,
+      "across_facing": 1.0,
+      "back_shows": false,
+      "letter_pixels": 11.115,
+      "letter_width_pixels": 11.3224,
+      "face_on_pixels": 11.115,
+      "height_factor": 1.0,
+      "width_factor": 1.0187,
+      "needed_by_page": true,
+      "verdict": "too small"
+     }
+    }
+   }
+  }
+ },
+ "stencil_turns": [],
+ "loud_signs": [],
+ "landmarks": [
+  {
+   "view": "end",
+   "spot": "plate",
+   "landmark": "winding wheels top",
+   "across": 0.6178,
+   "down": 0.2125,
+   "depth": 69.5042,
+   "top_height": 26.452,
+   "height_for_clear": 24.2234,
+   "verdict": "in the words band"
+  },
+  {
+   "view": "end",
+   "spot": "plate",
+   "landmark": "chimney top",
+   "across": 0.4762,
+   "down": 0.092,
+   "depth": 92.4826,
+   "top_height": 47.114,
+   "height_for_clear": 31.1778,
+   "verdict": "in the words band"
+  },
+  {
+   "view": "end",
+   "spot": "composed",
+   "landmark": "winding wheels top",
+   "across": 0.6139,
+   "down": 0.2062,
+   "depth": 68.0315,
+   "top_height": 26.452,
+   "height_for_clear": 23.7777,
+   "verdict": "in the words band"
+  },
+  {
+   "view": "end",
+   "spot": "composed",
+   "landmark": "chimney top",
+   "across": 0.471,
+   "down": 0.0854,
+   "depth": 91.0099,
+   "top_height": 47.114,
+   "height_for_clear": 30.7321,
+   "verdict": "in the words band"
+  }
+ ],
+ "figures": [],
+ "continuity": {
+  "end/all": {
+   "total": 0,
+   "by_group": {}
+  }
+ },
+ "problems": [
+  "notice (\"PITS WILL BE CLOSED\") in end (composed spot): letters 11.1 px tall, under 20 px. Make the letters 0.058 m tall for 20 px (0.073 m for 25 px), bring it nearer, or let a typed label carry the word."
+ ],
+ "warnings": [
+  "winding wheels top in end (plate): its top lands 0.212 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 24.2 m (now 26.5), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.",
+  "chimney top in end (plate): its top lands 0.092 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 31.2 m (now 47.1), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.",
+  "winding wheels top in end (composed): its top lands 0.206 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 23.8 m (now 26.5), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.",
+  "chimney top in end (composed): its top lands 0.085 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 30.7 m (now 47.1), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate."
+ ],
+ "notes": [
+  "Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says)."
+ ],
+ "calculator": "view_audit audit",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "lettering.must_read_min_pixels": {
+   "value": 20,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "lettering.must_read_comfortable_pixels": {
+   "value": 25,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "lettering.not_meant_to_read_max_pixels": {
+   "value": 14,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "views_and_models.view_audit.must_read_facing_min_cos": {
+   "value": 0.85,
+   "unit": "cosine between the sign's face and the way to the camera, across (the width of the letters)",
+   "kind": "invented"
+  },
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "safe_area.title_band_down": {
+   "value": [
+    0.05,
+    0.22
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.landmark_top_min_down": {
+   "value": 0.24,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.text_left_pixels": {
+   "value": 65,
+   "unit": "pixels (0.06 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.text_right_pixels": {
+   "value": 972,
+   "unit": "pixels (0.90 of the width)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share": {
+   "value": 0.85,
+   "unit": "share of the title zone that is sky",
+   "kind": "judged"
+  },
+  "people.head_height_metres": {
+   "value": 0.23,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "people.facing_head_max_pixels": {
+   "value": 24,
+   "unit": "pixels tall",
+   "kind": "invented"
+  },
+  "people.backs_to_camera_min_distance_metres": {
+   "value": 6.0,
+   "unit": "metres from every camera spot along a slide",
+   "kind": "judged"
+  },
+  "views_and_models.view_audit.face_shows_within_degrees": {
+   "value": 100,
+   "unit": "degrees between a figure's facing and the way to the camera",
+   "kind": "invented"
+  },
+  "views_and_models.view_audit.figure_half_width_metres": {
+   "value": 0.25,
+   "unit": "metres either side of a figure's feet",
+   "kind": "judged"
+  }
+ }
+}

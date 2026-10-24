@@ -1,0 +1,35 @@
+Painting arrival checks: painted-1.png (2 failure(s); a paid re-ask needs the user's yes)
+
+- PASS  kept lossless: The painting is a lossless file; everything written here is PNG.
+- PASS  resized to the plate: 1504 x 2672 resized to 1536 x 2730 (Lanczos, as the ledgers' paintings were) and read back 0 levels off.
+- PASS  lined up with the plate: Lined up: 0.874 to 0.903 of the outlines on the painting's edges at stretch 1.0010, shift +1.0, +0.5 px (of 1080 wide).
+- FAIL  figures kept their outlines: walker 4 0.63 against its plate baseline 0.99, walker 5 0.77 against its plate baseline 0.85: the painter moved, reshaped, lost or added to them (pass: within 0.05 of the baseline).
+        fix: Look at the named figures at full size; a large drop is a lost or added part (people test: walker 4 painted whole, walker 5's bag lost).
+- PASS  no added people: No figure-sized dark shape the plate does not have.
+- FAIL  figures as dark as in the plate: 8 figure(s) painted much paler against their surround: man stooped 0.13 to 0.51, man arms folded 0.16 to 0.47, man facing 0.15 to 0.47, walker 1 0.24 to 0.62, walker 2 0.17 to 0.58, walker 3 0.20 to 0.59, walker 4 0.45 to 0.74, walker 5 0.28 to 0.66 (limit 0.35, or 1.5 times the plate). On a phone they turn mid-grey and blend into the road (people test).
+        fix: Darken the figures inside their outlines back toward the plate's ratio (free), or re-ask with "Keep the figures as dark as they are in image 1" (a paid re-ask needs the user's yes).
+- LOOK  no skin added on heads: skin-coloured pixels added on 5 head(s): man stooped 168 to 353, man arms folded 137 to 243, man hand on bar 0 to 165, man leaning 16 to 149, man facing 143 to 779 (a face, an ear or a lit cheek the prompt asked against). Look at them at phone size.
+        fix: If it shows on a phone, paint the patch over with the cap's shadow colour (free).
+- LOOK  style against the standard painting: Differs from the standard painting: warm light on 10.0% of the ground against 19.7%. A warning, not a failure: look at it beside the standard.
+
+Settings used (film-settings.json):
+  frame.plate_width_pixels = 1536 pixels (judged)
+  frame.plate_height_pixels = 2730 pixels (judged)
+  painting_tools.after_painting.align_floor = 0.85 share of outline points on painting edges after lining up (judged)
+  painting.align_outline_agreement_aim = 0.9 share of outlines on painting edges (judged)
+  painting_tools.after_painting.align_gain_min = 0.005 share (invented)
+  painting.align_search = {"stretch": [0.985, 1.015], "stretch_step": 0.0025, "shift_pixels": [-12, 12], "shift_step": 2, "fine_stretch": 0.002, "fine_stretch_step": 0.0005, "fine_shift_pixels": 2, "fine_shift_step": 0.5} scale and pixels (frame basis 1080 wide) (judged)
+  painting_tools.after_painting.figure_outline_drop_max = 0.05 share of the figure's outline within 3 px, below its own plate baseline (judged)
+  painting_tools.after_painting.figure_edges = {"painting_canny": [20, 50], "plate_canny": [8, 24], "blur": 1.5, "within_pixels": 3} Canny thresholds, blur pixels, pixels (judged)
+  painting_tools.after_painting.added_figure_blob = {"darker_than_surround": 0.6, "surround_pixels_at_1536": 201, "height_range_factor": [0.6, 1.5], "aspect_range": [1.5, 6.0], "fill_min": 0.45} share of the surround's brightness, pixels, times the height of a 1.75 m person standing at the blob's feet (from the plate camera's eye and horizon), height over width, share of the box (invented)
+  people.figure_height_metres = 1.75 metres (judged)
+  painting_tools.after_painting.figure_surround_ratio_max = 0.35 a figure's brightness over its surround's, in the painting (invented)
+  painting_tools.after_painting.figure_surround_lift_max = 1.5 times the plate's ratio (invented)
+  painting_tools.after_painting.figure_ring_pixels_at_1536 = {"erode": 7, "ring_inner": 13, "ring_outer": 61} pixels on a plate 1536 wide (judged)
+  painting_tools.after_painting.new_skin_pixels_look = 50 skin-coloured pixels added on one head, at 1536 wide (invented)
+  people.head_height_metres = 0.23 metres (judged)
+  painting_tools.after_painting.head_widen_share_of_height = 0.03 share of the figure's height (invented)
+  painting_tools.after_painting.style_standard = {"brightness": 77.4, "spread": 26.1, "colour": 49.8, "ink_share": 0.0671, "line_width_pixels": 2.94, "warm_ground_share": 0.197} mean brightness and its spread (0-255), mean HSV saturation (0-255), share of ink lines, line width (px at 1536), warm share of the lower 45% (measured)
+  painting_tools.after_painting.style_tolerance = {"brightness": 12, "spread": 6, "colour": 12, "ink_share": 0.012, "line_width_ratio": 1.3, "warm_ground_ratio_min": 0.75} levels, levels, levels, share, times, times (invented)
+  painting_tools.after_painting.ink_line = {"blackhat_pixels": 21, "blackhat_min": 18, "dark_max": 45} pixels and levels (judged)
+  painting_tools.after_painting.warm_ground = {"red_minus_blue_min": 18, "brightness_min": 45, "ground_from_down": 0.55} levels and share of the height (judged)

@@ -1,0 +1,72 @@
+{
+ "rate_cents_per_megapixel": 4.8,
+ "rate_from": "read today (2026-10-16)",
+ "lines": [
+  {
+   "what": "counter main",
+   "count": 1,
+   "megapixels_returned": 4.019,
+   "megapixels_sent": 5.244,
+   "cents_each": 44.46,
+   "dollars": 0.4446,
+   "note": ""
+  },
+  {
+   "what": "counter behind",
+   "count": 1,
+   "megapixels_returned": 4.019,
+   "megapixels_sent": 4.019,
+   "cents_each": 38.58,
+   "dollars": 0.3858,
+   "note": ""
+  },
+  {
+   "what": "repaint reserve (0.5 of the paintings)",
+   "dollars": 0.4152
+  }
+ ],
+ "paintings_dollars": 0.8304,
+ "narration_characters": 0,
+ "narration_credits": 0.0,
+ "narration_dollars": 0.0,
+ "total_dollars": 1.2456,
+ "ledger": {
+  "allowance": "corner shop pictures",
+  "allowance_dollars": 2.0,
+  "start": "2026-10-16T09:00",
+  "spent_dollars": 0,
+  "left_dollars": 2.0,
+  "entries_counted": 0,
+  "entries_before_or_outside": 0,
+  "spent_all_entries_dollars": 0
+ },
+ "calculator": "plan_budget cost",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "money.fal_flux_3_edit_cents_per_megapixel": {
+   "value": 4.8,
+   "unit": "US cents a megapixel (returned + every picture sent)",
+   "kind": "measured"
+  },
+  "budget_planner.repaint_share": {
+   "value": 0.5,
+   "unit": "repaints a painting",
+   "kind": "judged"
+  },
+  "money.nano_banana_pro_cents": {
+   "value": 15,
+   "unit": "US cents a picture",
+   "kind": "measured"
+  },
+  "money.elevenlabs_credits_per_letter": {
+   "value": 1.0,
+   "unit": "credits a letter of page text (accent instruction included)",
+   "kind": "measured"
+  },
+  "money.elevenlabs_dollars_per_credit": {
+   "value": 0.000175,
+   "unit": "US dollars a credit",
+   "kind": "judged"
+  }
+ }
+}

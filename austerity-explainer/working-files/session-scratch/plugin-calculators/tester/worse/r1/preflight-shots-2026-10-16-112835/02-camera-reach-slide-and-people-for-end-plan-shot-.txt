@@ -1,0 +1,94 @@
+Shot end (still_life): subject notice on board; story board, drum, chair, lantern, pail.
+Judged: Camera as given: composed spot (3.100, 17.850, 3.188), turned 6.87 degrees; the plate's spot (the slide's start) (2.993, 16.354, 3.188).
+Camera: composed spot [3.1, 17.85, 3.1882], turned 6.87 degrees, eye 1.804 m above the view's floor (height 1.38 m); plate spot [2.9931, 16.3538, 3.1882]; the lines meet 0.684 across, 0.440 down.
+Verdict: FAIL (1 FAIL, 2 info, 6 look, 15 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [FAIL] slide_magnification: The 1.50 m slide brings the nearest painted thing, pail (its nearest corner 3.03 m away at the end), 1.486 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 0.87 m.
+         fix: Shorten the slide to 0.87 m, or move pail back 0.47 m. (Accepted at 1.3 by the user kept the shot: "Wow that's incredible. Yes keep it." (notes/Decisions.md, decision 38, log 32); it is now 1.4856: worse than accepted.)
+  [look] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: board 0.97, drum 0.71, chair 0.92, lantern 0.80, pail 0.88 across (limit 0.95). (estimate)
+         fix: board: move it 0.06 m left, or slide the camera right (a box corner warns early: confirm with the shot checker).
+  [look] rule3_story_box: The story things fill a box 0.57 wide and 0.51 tall (limit 0.4 x 0.5 for still_life); edges: drum (left), board (right), board (top), pail (bottom). (estimate)
+         fix: Bring drum or board in about 0.41 m toward the subject (at 3.7 m one share of the width is 2.44 m), or check the kind of shot.
+  [look] subject_frame_share: notice fills about 2.5% of the frame (its box; the liked picture's notice 2.9% to 3.3%). (estimate)
+         fix: Scale notice by about 1.12, or move the camera.
+  [look] rule8_work_prop_share: handcart covers at most 3.7% of the frame (its box; limit 2%). (estimate)
+  [look] rule8_work_prop_share: sacks covers at most 2.1% of the frame (its box; limit 2%). (estimate)
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: drum 2.4% (over its 1%), handcart 2.0% (over its 1%), sacks 2.1% (over its 1%), dustbins 0.1% (limit 1% a thing; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move drum, handcart, sacks out of the bottom-left quarter.
+  [ok] rule2_eye_height: The eye stands 1.80 m above the view's floor (height 1.38 m) (allowed 1.5 to 1.9 m for still_life).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.684 across, 0.439 down; the nearest edge of board is 0.006 of the width away (0 px across, 7 px down, inside its outline); board's outline (an upright box); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is pail, reaching 0.945 down (limit 0.7). (estimate)
+  [ok] rule12_must_read_right_edge: notice (to read) ends 0.885 across (limit 0.9). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, pail, is 0.04 m from chair (limit 0.3 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.68, 0.44; middle of notice 0.80, 0.58; middle of the story things 0.73, 0.69) span 0.11 x 0.25 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] rule8_work_prop_band: handcart's middle is 0.50 down (the middle band is 0.45 to 0.62). (estimate)
+  [ok] rule8_work_prop_band: sacks's middle is 0.53 down (the middle band is 0.45 to 0.62). (estimate)
+  [ok] rule8_work_prop_band: barrel's middle is 0.53 down (the middle band is 0.45 to 0.62). (estimate)
+  [ok] rule8_work_prop_share: barrel covers at most 0.6% of the frame (its box; limit 2%). (estimate)
+  [ok] rule8_work_prop_band: dustbins's middle is 0.50 down (the middle band is 0.45 to 0.62). (estimate)
+  [ok] rule8_work_prop_share: dustbins covers at most 0.3% of the frame (its box; limit 2%). (estimate)
+  [ok] sign_facing: notice's lettered face points 0.0 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [ok] plate_lens: Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.
+  [info] slide_magnification_ground: The painted ground at the frame's bottom edge (2.77 m away) comes 1.532 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).
+  [info] plate_rows: For the slide's worst magnification the plate would need 3087 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).
+  Assumed: notice: "at" read as its middle; board: "at" read as its middle; drum: "at" read as its middle; chair: "at" read as its middle; lantern: "at" read as its middle; pail: "at" read as its middle; handcart: "at" read as its bottom middle (as its middle it would sink 0.06 m into the surface under it); sacks: "at" read as its middle; barrel: "at" read as its middle; dustbins: "at" read as its middle
+
+
+Settings used (film-settings.json):
+  shot_planner.figure_shoulder_width_metres = 0.47 metres (judged)
+  shot_planner.figure_box_metres = [0.64, 0.54] metres [across, front to back] (measured)
+  people.figure_height_metres = 1.75 metres (judged)
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  frame.film_vertical_fov_degrees = 60.4 degrees, top to bottom (measured)
+  frame.plate_vertical_fov_degrees = 64.4 degrees, top to bottom (judged)
+  shot_kind_profiles.still_life.rules.main_rule_spot_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.still_life.rules.rule1_meeting_point_gap = 0.03 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule2_eye_height = [1.5, 1.9] metres above the surface under the camera (judged)
+  shot_kind_profiles.still_life.rules.rule3_story_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.still_life.rules.rule3_story_together_metres = 0.3 metres between footprints (judged)
+  shot_kind_profiles.still_life.rules.rule4_near_touch = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.still_life.rules.rule4_between_figures = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.still_life.rules.rule5_subject_brightness_ratio = 1.8 times the frame's mean (measured)
+  shot_kind_profiles.still_life.rules.rule5_brightest_share_on_subject = 0.4 share of the brightest 3% (measured)
+  shot_kind_profiles.still_life.rules.rule5_brightest_share_in_story_box = 0.75 share of the brightest 3% (measured)
+  shot_kind_profiles.still_life.rules.rule5_nothing_in_story_as_bright = 0.05 brightness below the subject's median (judged)
+  shot_kind_profiles.still_life.rules.rule5_top_third_brightness = 0.36 mean brightness (0 to 1) (measured)
+  shot_kind_profiles.still_life.rules.rule6_warm_share = [0.015, 0.03] share of the frame (measured)
+  shot_kind_profiles.still_life.rules.rule6_lit_from_below = 0.1 (r - b)/(r + b) bottom minus top (judged)
+  shot_kind_profiles.still_life.rules.rule7_story_reaches_down = 0.7 down the frame (judged)
+  shot_kind_profiles.still_life.rules.rule8_work_prop_share = 0.02 share of the frame (measured)
+  shot_kind_profiles.still_life.rules.rule8_bottom_left_share = 0.01 share of the frame per thing (judged)
+  shot_kind_profiles.still_life.rules.rule10_quiet_side_weight = [0.4, 0.48] share of the weight (judged)
+  shot_kind_profiles.still_life.rules.rule10_nothing_on_quiet_side_outshines = 1.0 times the subject's brightness (judged)
+  shot_kind_profiles.still_life.rules.rule12_must_read_right_edge = 0.9 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule12_story_right_edge = 0.95 share of the width (in 0.45-0.95 down) (judged)
+  shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share = 0.85 share of the title zone that is sky (judged)
+  shot_kind_profiles.still_life.rules.resting_on = the street (ground rays; "landed high" over 0.5 m) rule (judged)
+  shot_kind_profiles.still_life.rules.slide_magnification = painting limit times nearer at the nearest painted surface (measured)
+  camera.eye_height_fix_margin_metres = 0.05 metres (judged)
+  camera.level_tolerance_degrees = 0.5 degrees of tilt or lean (judged)
+  shot_planner.figure_shoes_below_feet_down = 0.012 down the frame (measured)
+  shot_planner.reach_aim_margin_down = 0.02 down the frame, past rule 7's reach (judged)
+  safe_area.button_strip_down = [0.45, 0.95] down the frame (judged)
+  composing.story_depth_behind_support_metres = 0.1 metres (judged)
+  shot_planner.planning_spot_box = [0.3, 0.4] share of width x height (invented)
+  composing.subject_frame_share = [0.029, 0.033] share of the frame (measured)
+  composing.work_prop_middle_band_down = [0.45, 0.62] down the frame (measured)
+  shot_planner.slide_sample_steps = 10 steps along a slide (judged)
+  people.backs_to_camera_min_distance_metres = 6.0 metres from every camera spot along a slide (judged)
+  people.head_height_metres = 0.23 metres (judged)
+  people.facing_head_max_pixels = 24 pixels tall (invented)
+  shot_planner.face_visible_dot_min = -0.2 cosine between the figure's facing and the way to the camera (invented)
+  shot_planner.crowd_min_figures = 3 figures (invented)
+  people.crowd_axis_min_angle_to_view_degrees = 60 degrees (invented)
+  shot_planner.crowd_axis_min_elongation = 1.5 spread along the long axis over the spread across it (invented)
+  shot_planner.sign_edge_on_degrees = 70 degrees between a sign's facing and the way to the camera (judged)
+  camera.slide_magnification_borderline_share = 0.01 share over the limit (invented)
+  shot_planner.check_shot_accepted_worse_share = 0.05 share of the accepted number (invented)
+  frame.plate_frame_edge_fade_share = 0.03 share of the frame (judged)
+  frame.plate_lens_extra_degrees = 4.0 degrees (judged)
+  frame.plate_width_pixels = 1536 pixels (judged)
+  frame.plate_height_pixels = 2730 pixels (judged)
+  composing.clear_overlap_pixels_at_1536 = 20 pixels on a frame 1536 wide (scaled to the frame) (judged)
+  composing.clear_gap_pixels_at_1536 = 25 pixels on a frame 1536 wide (judged)

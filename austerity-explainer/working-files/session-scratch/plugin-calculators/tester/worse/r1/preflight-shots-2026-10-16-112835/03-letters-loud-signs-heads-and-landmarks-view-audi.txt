@@ -1,0 +1,45 @@
+View audit of notice-corner: 1 view(s).
+
+View end (still_life), words read at its composed spot:
+    notice: 11.1 px at 4.8 m, height x1.00, width x1.02; too small
+
+Landmark tops (down the frame; the words band is [0.05, 0.22]):
+    end plate winding wheels top: 0.212 down, 0.618 across; in the words band
+    end plate chimney top: 0.092 down, 0.476 across; in the words band
+    end composed winding wheels top: 0.206 down, 0.614 across; in the words band
+    end composed chimney top: 0.085 down, 0.471 across; in the words band
+
+Continuity (figures in the frame, by view and state):
+    end/all 0
+
+Problems:
+  - notice ("PITS WILL BE CLOSED") in end (composed spot): letters 11.1 px tall, under 20 px. Make the letters 0.058 m tall for 20 px (0.073 m for 25 px), bring it nearer, or let a typed label carry the word.
+
+Look at:
+  - winding wheels top in end (plate): its top lands 0.212 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 24.2 m (now 26.5), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.
+  - chimney top in end (plate): its top lands 0.092 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 31.2 m (now 47.1), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.
+  - winding wheels top in end (composed): its top lands 0.206 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 23.8 m (now 26.5), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.
+  - chimney top in end (composed): its top lands 0.085 down, so it rises through the band kept for typed words (0.05-0.22 down; round 2). Lower it to 30.7 m (now 47.1), move it back, or put the words beside it; the shot checker's rule 12 (the title zone at least 0.85 sky) judges it on the plate.
+
+Notes:
+  - Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says).
+
+Verdict: FAIL (1 problem(s), 4 to look at)
+
+Settings used (film-settings.json):
+  lettering.must_read_min_pixels = 20 pixels tall (judged)
+  lettering.must_read_comfortable_pixels = 25 pixels tall (judged)
+  lettering.not_meant_to_read_max_pixels = 14 pixels tall (judged)
+  views_and_models.view_audit.must_read_facing_min_cos = 0.85 cosine between the sign's face and the way to the camera, across (the width of the letters) (invented)
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  safe_area.title_band_down = [0.05, 0.22] down the frame (judged)
+  safe_area.landmark_top_min_down = 0.24 down the frame (judged)
+  safe_area.text_left_pixels = 65 pixels (0.06 of the width) (judged)
+  safe_area.text_right_pixels = 972 pixels (0.90 of the width) (judged)
+  shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share = 0.85 share of the title zone that is sky (judged)
+  people.head_height_metres = 0.23 metres (judged)
+  people.facing_head_max_pixels = 24 pixels tall (invented)
+  people.backs_to_camera_min_distance_metres = 6.0 metres from every camera spot along a slide (judged)
+  views_and_models.view_audit.face_shows_within_degrees = 100 degrees between a figure's facing and the way to the camera (invented)
+  views_and_models.view_audit.figure_half_width_metres = 0.25 metres either side of a figure's feet (judged)

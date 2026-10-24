@@ -1,0 +1,356 @@
+{
+ "stage": "shots",
+ "stage_means": "before building or drawing a place's views",
+ "verdict": "fail",
+ "counts": {
+  "fail": 2,
+  "warn": 8,
+  "known": 0,
+  "info": 8,
+  "pass": 13
+ },
+ "guarded_step": "building and rendering the place's views and plates",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.3,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:23:36",
+ "first_lines": [
+  "Preflight shots (before building or drawing a place's views): FAIL. 2 to fix, 8 to look at, 0 known and accepted, 0 input(s) missing; 5 check(s) in 0.3 s.",
+  "Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336",
+ "inputs": {
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/corner-shop-place-facts-keyed.json": "5c131ae8873cd8f8f194e7b9485bfc341c6625c7",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/corner-shop-shots.json": "cd6a187d1643c64aa7eb3b68187bea5095c60895"
+ },
+ "missing": [],
+ "checks": [
+  {
+   "title": "place facts are complete (place_facts.py check)",
+   "tool": "calculators/place_facts.py",
+   "version": "bd240e22",
+   "where": "corner-shop",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/corner-shop-place-facts-keyed.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/01-place-facts-are-complete-place-facts-py-check.txt",
+   "seconds": 0.05,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "camera, reach, slide and people (plan_shot.py)",
+   "tool": "calculators/plan_shot.py",
+   "version": "6a7fabb5",
+   "where": "corner-shop",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/corner-shop-place-facts-keyed.json --shots /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/corner-shop-shots.json --strict --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/02-camera-reach-slide-and-people-plan-shot-py.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/02-camera-reach-slide-and-people-plan-shot-py.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/02-camera-reach-slide-and-people-plan-shot-py.txt",
+   "seconds": 0.07,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "rule2_eye_height",
+     "where": "counter planned",
+     "text": "The eye stands 1.60 m above floor (allowed 1.5 to 1.7 m for interior).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule2_level",
+     "where": "counter planned",
+     "text": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "rule1_meeting_point_gap",
+     "where": "counter planned",
+     "text": "The lines meet 0.500 across, 0.500 down; the nearest edge of till is 0.197 of the width away (0 px across, 213 px down); till's outline (an upright box); limit 0.03.",
+     "fix": "Lower the camera 0.37 m (or raise or lower till).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule7_story_reaches_down",
+     "where": "counter planned",
+     "text": "The lowest story thing is basket, reaching 0.720 down (limit 0.7).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "counter planned",
+     "text": "till display (to read) ends 0.596 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_story_right_edge",
+     "where": "counter planned",
+     "text": "Story things in the button strip (0.45 to 0.95 down) end at: basket 0.36 across (limit 0.95).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule3_story_box",
+     "where": "counter planned",
+     "text": "The story things fill a box 0.53 wide and 0.16 tall (limit 0.4 x 0.5 for still_life); edges: basket (left), till display (right), till display (top), basket (bottom).",
+     "fix": "Bring basket or till display in about 0.23 m toward the subject (at 2.7 m one share of the width is 1.79 m), or check the kind of shot.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_together_metres",
+     "where": "counter planned",
+     "text": "The story things stand together in the street: the loneliest, basket, is 0.25 m from till display (limit 0.3 m between footprints).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "main_rule_spot_box",
+     "where": "counter planned",
+     "text": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of till display 0.54, 0.57; middle of the story things 0.24, 0.66) span 0.30 x 0.16 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "subject_frame_share",
+     "where": "counter planned",
+     "text": "till display fills about 0.3% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_band",
+     "where": "counter planned",
+     "text": "cigarette shelf's middle is 0.55 down (the middle band is 0.45 to 0.62).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_work_prop_share",
+     "where": "counter planned",
+     "text": "cigarette shelf covers at most 4.9% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_work_prop_band",
+     "where": "counter planned",
+     "text": "sweets rack's middle is 0.69 down (the middle band is 0.45 to 0.62).",
+     "fix": "Move sweets rack into the middle band, unless only a part of it shows (the checker takes the middle of what shows).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_share",
+     "where": "counter planned",
+     "text": "sweets rack covers at most 0.9% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_bottom_left_share",
+     "where": "counter planned",
+     "text": "In the bottom-left quarter, where the eye enters, the boxes cover: till display 0.1%, basket 3.1% (over its 1%), cigarette shelf 0.6%, counter 15.2% (over its 1%), window 4.2% (over its 1%) (limit 1% a thing; a box covers more than the thing in it, so these are upper bounds).",
+     "fix": "Confirm on the render (the shot checker measures the real outlines); if it holds, move basket, counter, window out of the bottom-left quarter.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "counter planned",
+     "text": "till display's lettered face points 1.4 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "slide_magnification",
+     "where": "counter planned",
+     "text": "The 0.40 m slide brings the nearest painted thing, counter (its nearest corner 2.68 m away at the end), 1.149 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 0.77 m.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "slide_magnification_ground",
+     "where": "counter planned",
+     "text": "The painted ground at the frame's bottom edge (2.75 m away) comes 1.145 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_lens",
+     "where": "counter planned",
+     "text": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_rows",
+     "where": "counter planned",
+     "text": "For the slide's worst magnification the plate would need 2388 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "letters, loud signs, heads and landmarks (view_audit.py)",
+   "tool": "calculators/view_audit.py",
+   "version": "79e3d2f9",
+   "where": "corner-shop",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/corner-shop-place-facts-keyed.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/03-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/03-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/03-letters-loud-signs-heads-and-landmarks-view-audi.txt",
+   "seconds": 0.06,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "corner-shop",
+     "text": "{\"across\": 0.5372, \"down\": 0.5718, \"depth\": 2.8735, \"in_front\": true, \"in_frame\": true, \"distance\": 2.8844, \"facing\": 0.9962, \"across_facing\": 0.9997, \"back_shows\": false, \"letter_pixels\": 8.0363, \"letter_width_pixels\": 8.0363, \"face_on_pixels\": 8.0363, \"height_factor\": 1.0, \"width_factor\": 1.0, \"ne",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "corner-shop",
+     "text": "{\"across\": 0.6492, \"down\": 0.43, \"depth\": 4.2985, \"in_front\": true, \"in_frame\": true, \"distance\": 4.3331, \"facing\": 0.992, \"across_facing\": 0.9953, \"back_shows\": false, \"letter_pixels\": 38.3726, \"letter_width_pixels\": 38.3726, \"face_on_pixels\": 38.3726, \"height_factor\": 1.0, \"width_factor\": 1.0, \"ne",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "counter",
+     "text": "{\"view\": \"counter\", \"spot\": \"plate\", \"landmark\": \"street lamp across the road\", \"across\": 0.2215, \"down\": 0.2363, \"depth\": 11.0783, \"top_height\": 5.0, \"height_for_clear\": 4.9528, \"verdict\": \"just under the band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "counter",
+     "text": "{\"view\": \"counter\", \"spot\": \"composed\", \"landmark\": \"street lamp across the road\", \"across\": 0.2097, \"down\": 0.2265, \"depth\": 10.6785, \"top_height\": 5.0, \"height_for_clear\": 4.8318, \"verdict\": \"just under the band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "",
+     "where": "corner-shop",
+     "text": "till display (\"\u00a51,050\") in counter (composed spot): letters 8.0 px tall, under 20 px. Make the letters 0.035 m tall for 20 px (0.044 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "corner-shop",
+     "text": "street lamp across the road in counter (plate): its top lands 0.236 down, within 0.02 of the words band; 5.0 m tall (now 5.0) clears 0.24. Look at the plate.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "corner-shop",
+     "text": "street lamp across the road in counter (composed): its top lands 0.226 down, within 0.02 of the words band; 4.8 m tall (now 5.0) clears 0.24. Look at the plate.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "corner-shop",
+     "text": "Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says).",
+     "fix": "",
+     "tool": "view_audit.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "lights for counter (plan_lights.py plan)",
+   "tool": "calculators/plan_lights.py",
+   "version": "4836ed1f",
+   "where": "corner-shop counter",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/corner-shop-place-facts-keyed.json --view counter --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/04-lights-for-counter-plan-lights-py-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/04-lights-for-counter-plan-lights-py-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336/04-lights-for-counter-plan-lights-py-plan.txt",
+   "seconds": 0.07,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "corner-shop counter",
+     "text": "tobacco sign glow: lights tobacco sign (its housing; lesson 120, log 32): skip them",
+     "fix": "",
+     "tool": "plan_lights.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "corner-shop counter",
+     "text": "tobacco sign glow: it lights window (+x) (facing the camera) 0.78 W/m2 against the subject's 0.07: move it behind that face (to an inner face), or link it to skip it; at the same place it would need 9% of its watts",
+     "fix": "",
+     "tool": "plan_lights.py"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "each view's check file carries its kinds, figures and accepted list",
+   "tool": "preflight.py",
+   "version": "d836d994",
+   "where": "corner-shop",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "info",
+     "check": "check file",
+     "where": "corner-shop counter",
+     "text": "no check file given for counter: make it after the assemble script with paper-film/blender/make_check_file.py (give it here as --check-files counter=FILE to check its keys)",
+     "tool": "preflight.py",
+     "fix": ""
+    }
+   ],
+   "verdict": "pass"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/dry-run/preflight-reports/preflight-shots-2026-10-16-112336.md"
+}

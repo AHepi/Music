@@ -1,0 +1,83 @@
+{
+ "stage": "script",
+ "stage_means": "before recording the narration",
+ "verdict": "fail",
+ "counts": {
+  "fail": 1,
+  "warn": 0,
+  "known": 0,
+  "info": 0,
+  "pass": 0
+ },
+ "guarded_step": "recording the narration with the voice service",
+ "step_kind": "paid",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.0,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:24:42",
+ "first_lines": [
+  "Preflight script (before recording the narration): FAIL. 1 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 0.0 s.",
+  "Paid step BLOCKED: recording the narration with the voice service. First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/nonexistent/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/kit/preflight-script-2026-10-16-112442",
+ "inputs": {
+  "/home/user/Music/austerity-explainer/chapter-2-inflation/33 Narration script - chapter 2 for newcomers.json": "090becd91fce74e521c0ce4c0638c3445eba7b83"
+ },
+ "missing": [
+  {
+   "input": "word_times",
+   "option": "--word-times",
+   "what": "an earlier word-times file of the SAME voice (to estimate the timeline before paying)",
+   "make": "narration-tools/extract_word_times.py on an earlier recording; the kit ships examples/inflation-chapter-2/word-times.json",
+   "needed_by": "lint_script.py before",
+   "required": false,
+   "why": "without it no estimated timeline is made and the pages' speeds are not judged",
+   "given_but_absent": []
+  },
+  {
+   "input": "spend_ledger",
+   "option": "--spend-ledger",
+   "what": "the spend ledger (allowances and every paid step so far)",
+   "make": "write one entry per paid step ({\"allowances\": [...], \"entries\": [...]}; format in calculators/plan_budget.py's note)",
+   "needed_by": "plan_budget.py ledger",
+   "required": false,
+   "why": "without it nothing checks the step against what is left of the allowance",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "script gate (lint_script.py before)",
+   "tool": "narration-tools/lint_script.py",
+   "version": "missing",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /nonexistent/kit/narration-tools/lint_script.py before '/home/user/Music/austerity-explainer/chapter-2-inflation/33 Narration script - chapter 2 for newcomers.json' --timeline-out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/kit/preflight-script-2026-10-16-112442/estimated-timeline.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/kit/preflight-script-2026-10-16-112442/01-script-gate-lint-script-py-before.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/kit/preflight-script-2026-10-16-112442/01-script-gate-lint-script-py-before.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/kit/preflight-script-2026-10-16-112442/01-script-gate-lint-script-py-before.txt",
+   "seconds": 0.0,
+   "exit": 2,
+   "findings": [
+    {
+     "verdict": "fail",
+     "check": "",
+     "where": "",
+     "text": "ERROR the kit has no narration-tools/lint_script.py (kit: /nonexistent/kit)",
+     "fix": "",
+     "tool": "lint_script.py"
+    }
+   ],
+   "verdict": "fail"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/kit/preflight-script-2026-10-16-112442.md"
+}

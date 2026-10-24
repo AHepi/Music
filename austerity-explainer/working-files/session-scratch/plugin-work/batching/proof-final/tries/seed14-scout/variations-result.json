@@ -1,0 +1,2149 @@
+{
+ "scout": true,
+ "change": "cracks and chips on the lock walls and gate",
+ "change_id": "cracks-and-chips-on-the-lock-walls-and",
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/canal_finished.blend",
+ "scene_checksum": "5dd1c4b412a5a551",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/place-settings.json",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "CYCLES",
+ "size": [
+  240,
+  160
+ ],
+ "variations": [
+  {
+   "name": "v01-crackden98-crackwid25",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.98,
+    "dials.cracks_and_chips.crack_width_metres": 0.014,
+    "dials.cracks_and_chips.chip_amount": 0.65,
+    "amount.cracks_and_chips": 1.37
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "492518bba19a"
+  },
+  {
+   "name": "v02-crackden62-crackwid85",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.62,
+    "dials.cracks_and_chips.crack_width_metres": 0.0428,
+    "dials.cracks_and_chips.chip_amount": 0.35,
+    "amount.cracks_and_chips": 1.65
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "f13692702fc9"
+  },
+  {
+   "name": "v03-crackden90-crackwid15",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.9,
+    "dials.cracks_and_chips.crack_width_metres": 0.0092,
+    "dials.cracks_and_chips.chip_amount": 0.05,
+    "amount.cracks_and_chips": 1.09
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "07baa077fd2e"
+  },
+  {
+   "name": "v04-crackden78-crackwid5",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.78,
+    "dials.cracks_and_chips.crack_width_metres": 0.0044,
+    "dials.cracks_and_chips.chip_amount": 0.15,
+    "amount.cracks_and_chips": 1.51
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "2091b324043c"
+  },
+  {
+   "name": "v05-crackden86-crackwid65",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.86,
+    "dials.cracks_and_chips.crack_width_metres": 0.0332,
+    "dials.cracks_and_chips.chip_amount": 0.75,
+    "amount.cracks_and_chips": 1.93
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "7f42ac8fb185"
+  },
+  {
+   "name": "v06-crackden82-crackwid35",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.82,
+    "dials.cracks_and_chips.crack_width_metres": 0.0188,
+    "dials.cracks_and_chips.chip_amount": 0.85,
+    "amount.cracks_and_chips": 1.23
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "e1e55c8484ec"
+  },
+  {
+   "name": "v07-crackden70-crackwid55",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.7,
+    "dials.cracks_and_chips.crack_width_metres": 0.0284,
+    "dials.cracks_and_chips.chip_amount": 0.25,
+    "amount.cracks_and_chips": 1.79
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "2f90243fe8cb"
+  },
+  {
+   "name": "v08-crackden74-crackwid95",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.74,
+    "dials.cracks_and_chips.crack_width_metres": 0.0476,
+    "dials.cracks_and_chips.chip_amount": 0.45,
+    "amount.cracks_and_chips": 0.81
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "56808b332fb0"
+  },
+  {
+   "name": "v09-crackden94-crackwid45",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.94,
+    "dials.cracks_and_chips.crack_width_metres": 0.0236,
+    "dials.cracks_and_chips.chip_amount": 0.95,
+    "amount.cracks_and_chips": 0.67
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "066ea8686579"
+  },
+  {
+   "name": "v10-crackden66-crackwid75",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.66,
+    "dials.cracks_and_chips.crack_width_metres": 0.038,
+    "dials.cracks_and_chips.chip_amount": 0.55,
+    "amount.cracks_and_chips": 0.95
+   },
+   "args": {},
+   "script": null,
+   "fingerprint": "6091148eb5ac"
+  }
+ ],
+ "dropped": [],
+ "results": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 3.4,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.19107608497142792,
+     "p95": 0.6454745531082153,
+     "range": 0.4543984681367874,
+     "median": 0.39888158440589905,
+     "detail": 3.690969705581665,
+     "mean_saturation": 0.15891948342323303,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    },
+    "Camera B": {
+     "p5": 0.06753647327423096,
+     "p95": 0.45886704325675964,
+     "range": 0.3913305699825287,
+     "median": 0.22905097901821136,
+     "detail": 3.648935556411743,
+     "mean_saturation": 0.2836422324180603,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    }
+   },
+   "average": {
+    "p5": 0.12930627912282944,
+    "p95": 0.5521707981824875,
+    "range": 0.42286451905965805,
+    "median": 0.3139662817120552,
+    "detail": 3.669952630996704,
+    "mean_saturation": 0.22128085792064667,
+    "squint": 1.0,
+    "flat_windows": 0.0,
+    "colour_shift": 0.0,
+    "saturation_shift": 0.0,
+    "detail_change": 0.0
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "01_baseline__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.57,
+     "bytes": 6296,
+     "ok": true,
+     "mean_luminance": 0.4283149242401123,
+     "path": "pictures/job-1/01_baseline__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "01_baseline__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.82,
+     "bytes": 5930,
+     "ok": true,
+     "mean_luminance": 0.23180323839187622,
+     "path": "pictures/job-1/01_baseline__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v01-crackden98-crackwid25",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.98,
+    "dials.cracks_and_chips.crack_width_metres": 0.014,
+    "dials.cracks_and_chips.chip_amount": 0.65,
+    "amount.cracks_and_chips": 1.37
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.35,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1882352977991104,
+     "p95": 0.6454745531082153,
+     "range": 0.4572392553091049,
+     "median": 0.39354586601257324,
+     "detail": 4.167638778686523,
+     "mean_saturation": 0.15795232355594635,
+     "squint": 0.9963666796684265,
+     "flat_windows": 0,
+     "colour_shift": 0.39317450386058495,
+     "saturation_shift": -0.0009671598672866821,
+     "detail_change": 0.4766690731048584
+    },
+    "Camera B": {
+     "p5": 0.06606432050466537,
+     "p95": 0.48184114694595337,
+     "range": 0.415776826441288,
+     "median": 0.220157653093338,
+     "detail": 4.447799205780029,
+     "mean_saturation": 0.2812729775905609,
+     "squint": 0.9951653480529785,
+     "flat_windows": 0,
+     "colour_shift": 0.47008428789736006,
+     "saturation_shift": -0.0023692548274993896,
+     "detail_change": 0.7988636493682861
+    }
+   },
+   "average": {
+    "p5": 0.1271498091518879,
+    "p95": 0.5636578500270844,
+    "range": 0.43650804087519646,
+    "median": 0.3068517595529556,
+    "detail": 4.307718992233276,
+    "mean_saturation": 0.21961265057325363,
+    "squint": 0.9957660138607025,
+    "flat_windows": 0.0,
+    "colour_shift": 0.43162939587897253,
+    "saturation_shift": -0.0016682073473930359,
+    "detail_change": 0.6377663612365723
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "02_v01-crackden98-crackwid25__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.37,
+     "bytes": 6803,
+     "ok": true,
+     "mean_luminance": 0.4231373965740204,
+     "path": "pictures/job-1/02_v01-crackden98-crackwid25__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "02_v01-crackden98-crackwid25__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.97,
+     "bytes": 6808,
+     "ok": true,
+     "mean_luminance": 0.2280845195055008,
+     "path": "pictures/job-1/02_v01-crackden98-crackwid25__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v02-crackden62-crackwid85",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.62,
+    "dials.cracks_and_chips.crack_width_metres": 0.0428,
+    "dials.cracks_and_chips.chip_amount": 0.35,
+    "amount.cracks_and_chips": 1.65
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.22,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1882917732000351,
+     "p95": 0.6454745531082153,
+     "range": 0.45718277990818024,
+     "median": 0.39387452602386475,
+     "detail": 4.092701435089111,
+     "mean_saturation": 0.1585032343864441,
+     "squint": 0.9964936375617981,
+     "flat_windows": 0,
+     "colour_shift": 0.36452713354203903,
+     "saturation_shift": -0.00041624903678894043,
+     "detail_change": 0.4017317295074463
+    },
+    "Camera B": {
+     "p5": 0.06558588892221451,
+     "p95": 0.4532874524593353,
+     "range": 0.3877015635371208,
+     "median": 0.21736863255500793,
+     "detail": 3.9811394214630127,
+     "mean_saturation": 0.28500819206237793,
+     "squint": 0.9917178750038147,
+     "flat_windows": 0,
+     "colour_shift": 0.6766397289163256,
+     "saturation_shift": 0.001365959644317627,
+     "detail_change": 0.33220386505126953
+    }
+   },
+   "average": {
+    "p5": 0.1269388310611248,
+    "p95": 0.5493810027837753,
+    "range": 0.42244217172265053,
+    "median": 0.30562157928943634,
+    "detail": 4.036920428276062,
+    "mean_saturation": 0.221755713224411,
+    "squint": 0.9941057562828064,
+    "flat_windows": 0.0,
+    "colour_shift": 0.5205834312291824,
+    "saturation_shift": 0.00047485530376434326,
+    "detail_change": 0.3669677972793579
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "03_v02-crackden62-crackwid85__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.38,
+     "bytes": 6683,
+     "ok": true,
+     "mean_luminance": 0.42349696159362793,
+     "path": "pictures/job-1/03_v02-crackden62-crackwid85__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "03_v02-crackden62-crackwid85__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.84,
+     "bytes": 6351,
+     "ok": true,
+     "mean_luminance": 0.2255793958902359,
+     "path": "pictures/job-1/03_v02-crackden62-crackwid85__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v03-crackden90-crackwid15",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.9,
+    "dials.cracks_and_chips.crack_width_metres": 0.0092,
+    "dials.cracks_and_chips.chip_amount": 0.05,
+    "amount.cracks_and_chips": 1.09
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.21,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1885388344526291,
+     "p95": 0.6454745531082153,
+     "range": 0.45693571865558624,
+     "median": 0.3935929536819458,
+     "detail": 4.038007736206055,
+     "mean_saturation": 0.15824063122272491,
+     "squint": 0.9975407719612122,
+     "flat_windows": 0,
+     "colour_shift": 0.34755596936999356,
+     "saturation_shift": -0.0006788522005081177,
+     "detail_change": 0.34703803062438965
+    },
+    "Camera B": {
+     "p5": 0.06693412363529205,
+     "p95": 0.4791642129421234,
+     "range": 0.41223008930683136,
+     "median": 0.22106902301311493,
+     "detail": 4.270650863647461,
+     "mean_saturation": 0.2837129831314087,
+     "squint": 0.9960085153579712,
+     "flat_windows": 0,
+     "colour_shift": 0.4700523908280544,
+     "saturation_shift": 7.075071334838867e-05,
+     "detail_change": 0.6217153072357178
+    }
+   },
+   "average": {
+    "p5": 0.12773647904396057,
+    "p95": 0.5623193830251694,
+    "range": 0.4345829039812088,
+    "median": 0.30733098834753036,
+    "detail": 4.154329299926758,
+    "mean_saturation": 0.2209768071770668,
+    "squint": 0.9967746436595917,
+    "flat_windows": 0.0,
+    "colour_shift": 0.408804180099024,
+    "saturation_shift": -0.0003040507435798645,
+    "detail_change": 0.4843766689300537
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "04_v03-crackden90-crackwid15__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.35,
+     "bytes": 6676,
+     "ok": true,
+     "mean_luminance": 0.4237247705459595,
+     "path": "pictures/job-1/04_v03-crackden90-crackwid15__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "04_v03-crackden90-crackwid15__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.85,
+     "bytes": 6651,
+     "ok": true,
+     "mean_luminance": 0.2274930775165558,
+     "path": "pictures/job-1/04_v03-crackden90-crackwid15__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v04-crackden78-crackwid5",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.78,
+    "dials.cracks_and_chips.crack_width_metres": 0.0044,
+    "dials.cracks_and_chips.chip_amount": 0.15,
+    "amount.cracks_and_chips": 1.51
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.2,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.187936469912529,
+     "p95": 0.6454745531082153,
+     "range": 0.45753808319568634,
+     "median": 0.3924697935581207,
+     "detail": 4.208896636962891,
+     "mean_saturation": 0.1582668572664261,
+     "squint": 0.9956961274147034,
+     "flat_windows": 0,
+     "colour_shift": 0.44857248458026716,
+     "saturation_shift": -0.0006526261568069458,
+     "detail_change": 0.5179269313812256
+    },
+    "Camera B": {
+     "p5": 0.06558588892221451,
+     "p95": 0.4778405725955963,
+     "range": 0.4122546836733818,
+     "median": 0.2179913967847824,
+     "detail": 4.398394584655762,
+     "mean_saturation": 0.2839545011520386,
+     "squint": 0.993670642375946,
+     "flat_windows": 0,
+     "colour_shift": 0.6275727744526332,
+     "saturation_shift": 0.0003122687339782715,
+     "detail_change": 0.7494590282440186
+    }
+   },
+   "average": {
+    "p5": 0.12676117941737175,
+    "p95": 0.5616575628519058,
+    "range": 0.4348963834345341,
+    "median": 0.30523059517145157,
+    "detail": 4.303645610809326,
+    "mean_saturation": 0.22111067920923233,
+    "squint": 0.9946833848953247,
+    "flat_windows": 0.0,
+    "colour_shift": 0.5380726295164502,
+    "saturation_shift": -0.00017017871141433716,
+    "detail_change": 0.6336929798126221
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "05_v04-crackden78-crackwid5__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.39,
+     "bytes": 6825,
+     "ok": true,
+     "mean_luminance": 0.42241498827934265,
+     "path": "pictures/job-1/05_v04-crackden78-crackwid5__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "05_v04-crackden78-crackwid5__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.8,
+     "bytes": 6738,
+     "ok": true,
+     "mean_luminance": 0.2261185497045517,
+     "path": "pictures/job-1/05_v04-crackden78-crackwid5__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v05-crackden86-crackwid65",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.86,
+    "dials.cracks_and_chips.crack_width_metres": 0.0332,
+    "dials.cracks_and_chips.chip_amount": 0.75,
+    "amount.cracks_and_chips": 1.93
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.29,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18437020480632782,
+     "p95": 0.6454745531082153,
+     "range": 0.4611043483018875,
+     "median": 0.3896713852882385,
+     "detail": 4.755889415740967,
+     "mean_saturation": 0.15767040848731995,
+     "squint": 0.9868683218955994,
+     "flat_windows": 0,
+     "colour_shift": 0.7415484459531998,
+     "saturation_shift": -0.001249074935913086,
+     "detail_change": 1.0649197101593018
+    },
+    "Camera B": {
+     "p5": 0.06448470801115036,
+     "p95": 0.4750936031341553,
+     "range": 0.4106088951230049,
+     "median": 0.2105286419391632,
+     "detail": 4.700194358825684,
+     "mean_saturation": 0.281049907207489,
+     "squint": 0.983766496181488,
+     "flat_windows": 0,
+     "colour_shift": 0.930185983060368,
+     "saturation_shift": -0.002592325210571289,
+     "detail_change": 1.0512588024139404
+    }
+   },
+   "average": {
+    "p5": 0.12442745640873909,
+    "p95": 0.5602840781211853,
+    "range": 0.4358566217124462,
+    "median": 0.30010001361370087,
+    "detail": 4.728041887283325,
+    "mean_saturation": 0.21936015784740448,
+    "squint": 0.9853174090385437,
+    "flat_windows": 0.0,
+    "colour_shift": 0.8358672145067839,
+    "saturation_shift": -0.0019207000732421875,
+    "detail_change": 1.058089256286621
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "06_v05-crackden86-crackwid65__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.44,
+     "bytes": 7260,
+     "ok": true,
+     "mean_luminance": 0.41826871037483215,
+     "path": "pictures/job-1/06_v05-crackden86-crackwid65__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "06_v05-crackden86-crackwid65__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.84,
+     "bytes": 6987,
+     "ok": true,
+     "mean_luminance": 0.22364313900470734,
+     "path": "pictures/job-1/06_v05-crackden86-crackwid65__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v06-crackden82-crackwid35",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.82,
+    "dials.cracks_and_chips.crack_width_metres": 0.0188,
+    "dials.cracks_and_chips.chip_amount": 0.85,
+    "amount.cracks_and_chips": 1.23
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.25,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18863533437252045,
+     "p95": 0.6454745531082153,
+     "range": 0.4568392187356949,
+     "median": 0.3935929536819458,
+     "detail": 4.099806308746338,
+     "mean_saturation": 0.15806375443935394,
+     "squint": 0.9971189498901367,
+     "flat_windows": 0,
+     "colour_shift": 0.3317635323334869,
+     "saturation_shift": -0.0008557289838790894,
+     "detail_change": 0.40883660316467285
+    },
+    "Camera B": {
+     "p5": 0.06693412363529205,
+     "p95": 0.48340755701065063,
+     "range": 0.4164734333753586,
+     "median": 0.22147059440612793,
+     "detail": 4.411092758178711,
+     "mean_saturation": 0.2800539433956146,
+     "squint": 0.9963216185569763,
+     "flat_windows": 0,
+     "colour_shift": 0.39297674892106166,
+     "saturation_shift": -0.0035882890224456787,
+     "detail_change": 0.7621572017669678
+    }
+   },
+   "average": {
+    "p5": 0.12778472900390625,
+    "p95": 0.564441055059433,
+    "range": 0.43665632605552673,
+    "median": 0.30753177404403687,
+    "detail": 4.255449533462524,
+    "mean_saturation": 0.21905884891748428,
+    "squint": 0.9967202842235565,
+    "flat_windows": 0.0,
+    "colour_shift": 0.36237014062727424,
+    "saturation_shift": -0.002222009003162384,
+    "detail_change": 0.5854969024658203
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "07_v06-crackden82-crackwid35__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.39,
+     "bytes": 6743,
+     "ok": true,
+     "mean_luminance": 0.4239821434020996,
+     "path": "pictures/job-1/07_v06-crackden82-crackwid35__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "07_v06-crackden82-crackwid35__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.86,
+     "bytes": 6802,
+     "ok": true,
+     "mean_luminance": 0.22921152412891388,
+     "path": "pictures/job-1/07_v06-crackden82-crackwid35__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v07-crackden70-crackwid55",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.7,
+    "dials.cracks_and_chips.crack_width_metres": 0.0284,
+    "dials.cracks_and_chips.chip_amount": 0.25,
+    "amount.cracks_and_chips": 1.79
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.27,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18772290647029877,
+     "p95": 0.6454745531082153,
+     "range": 0.45775164663791656,
+     "median": 0.3924697935581207,
+     "detail": 4.291545391082764,
+     "mean_saturation": 0.1590297371149063,
+     "squint": 0.9940540194511414,
+     "flat_windows": 0,
+     "colour_shift": 0.4920650995070796,
+     "saturation_shift": 0.00011025369167327881,
+     "detail_change": 0.6005756855010986
+    },
+    "Camera B": {
+     "p5": 0.065230593085289,
+     "p95": 0.4709753394126892,
+     "range": 0.4057447463274002,
+     "median": 0.21583451330661774,
+     "detail": 4.389225482940674,
+     "mean_saturation": 0.2839803695678711,
+     "squint": 0.9899914264678955,
+     "flat_windows": 0,
+     "colour_shift": 0.7629882055859256,
+     "saturation_shift": 0.000338137149810791,
+     "detail_change": 0.7402899265289307
+    }
+   },
+   "average": {
+    "p5": 0.12647674977779388,
+    "p95": 0.5582249462604523,
+    "range": 0.4317481964826584,
+    "median": 0.30415215343236923,
+    "detail": 4.340385437011719,
+    "mean_saturation": 0.2215050533413887,
+    "squint": 0.9920227229595184,
+    "flat_windows": 0.0,
+    "colour_shift": 0.6275266525465026,
+    "saturation_shift": 0.0002241954207420349,
+    "detail_change": 0.6704328060150146
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "08_v07-crackden70-crackwid55__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.4,
+     "bytes": 6885,
+     "ok": true,
+     "mean_luminance": 0.42168521881103516,
+     "path": "pictures/job-1/08_v07-crackden70-crackwid55__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "08_v07-crackden70-crackwid55__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.86,
+     "bytes": 6698,
+     "ok": true,
+     "mean_luminance": 0.2247534692287445,
+     "path": "pictures/job-1/08_v07-crackden70-crackwid55__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v08-crackden74-crackwid95",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.74,
+    "dials.cracks_and_chips.crack_width_metres": 0.0476,
+    "dials.cracks_and_chips.chip_amount": 0.45,
+    "amount.cracks_and_chips": 0.81
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.18,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1885388344526291,
+     "p95": 0.6454745531082153,
+     "range": 0.45693571865558624,
+     "median": 0.3924697935581207,
+     "detail": 3.935816764831543,
+     "mean_saturation": 0.15848757326602936,
+     "squint": 0.9971716403961182,
+     "flat_windows": 0,
+     "colour_shift": 0.4047694918022601,
+     "saturation_shift": -0.0004319101572036743,
+     "detail_change": 0.24484705924987793
+    },
+    "Camera B": {
+     "p5": 0.06606432050466537,
+     "p95": 0.4588678479194641,
+     "range": 0.39280352741479874,
+     "median": 0.2187529355287552,
+     "detail": 3.8671915531158447,
+     "mean_saturation": 0.28510192036628723,
+     "squint": 0.9949982762336731,
+     "flat_windows": 0,
+     "colour_shift": 0.6571441388871003,
+     "saturation_shift": 0.0014596879482269287,
+     "detail_change": 0.21825599670410156
+    }
+   },
+   "average": {
+    "p5": 0.12730157747864723,
+    "p95": 0.5521712005138397,
+    "range": 0.4248696230351925,
+    "median": 0.30561136454343796,
+    "detail": 3.901504158973694,
+    "mean_saturation": 0.2217947468161583,
+    "squint": 0.9960849583148956,
+    "flat_windows": 0.0,
+    "colour_shift": 0.5309568153446802,
+    "saturation_shift": 0.0005138888955116272,
+    "detail_change": 0.23155152797698975
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "09_v08-crackden74-crackwid95__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.34,
+     "bytes": 6568,
+     "ok": true,
+     "mean_luminance": 0.4231014549732208,
+     "path": "pictures/job-1/09_v08-crackden74-crackwid95__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "09_v08-crackden74-crackwid95__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.83,
+     "bytes": 6248,
+     "ok": true,
+     "mean_luminance": 0.22617076337337494,
+     "path": "pictures/job-1/09_v08-crackden74-crackwid95__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v09-crackden94-crackwid45",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.94,
+    "dials.cracks_and_chips.crack_width_metres": 0.0236,
+    "dials.cracks_and_chips.chip_amount": 0.95,
+    "amount.cracks_and_chips": 0.67
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.46,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.19013412296772003,
+     "p95": 0.6454745531082153,
+     "range": 0.4553404301404953,
+     "median": 0.3949929475784302,
+     "detail": 3.881535530090332,
+     "mean_saturation": 0.15804918110370636,
+     "squint": 0.9989340305328369,
+     "flat_windows": 0,
+     "colour_shift": 0.2087372420439511,
+     "saturation_shift": -0.0008703023195266724,
+     "detail_change": 0.190565824508667
+    },
+    "Camera B": {
+     "p5": 0.06693412363529205,
+     "p95": 0.4843671917915344,
+     "range": 0.41743306815624237,
+     "median": 0.2251294106245041,
+     "detail": 4.228181838989258,
+     "mean_saturation": 0.2810019552707672,
+     "squint": 0.9981778860092163,
+     "flat_windows": 0,
+     "colour_shift": 0.24482187861502838,
+     "saturation_shift": -0.002640277147293091,
+     "detail_change": 0.5792462825775146
+    }
+   },
+   "average": {
+    "p5": 0.12853412330150604,
+    "p95": 0.5649208724498749,
+    "range": 0.43638674914836884,
+    "median": 0.31006117910146713,
+    "detail": 4.054858684539795,
+    "mean_saturation": 0.21952556818723679,
+    "squint": 0.9985559582710266,
+    "flat_windows": 0.0,
+    "colour_shift": 0.22677956032948976,
+    "saturation_shift": -0.0017552897334098816,
+    "detail_change": 0.3849060535430908
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "10_v09-crackden94-crackwid45__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.45,
+     "bytes": 6520,
+     "ok": true,
+     "mean_luminance": 0.4256991147994995,
+     "path": "pictures/job-1/10_v09-crackden94-crackwid45__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "10_v09-crackden94-crackwid45__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 2.01,
+     "bytes": 6615,
+     "ok": true,
+     "mean_luminance": 0.2304655909538269,
+     "path": "pictures/job-1/10_v09-crackden94-crackwid45__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "v10-crackden66-crackwid75",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.66,
+    "dials.cracks_and_chips.crack_width_metres": 0.038,
+    "dials.cracks_and_chips.chip_amount": 0.55,
+    "amount.cracks_and_chips": 0.95
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.01,
+   "seconds_draw": 3.42,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1899905949831009,
+     "p95": 0.6454745531082153,
+     "range": 0.45548395812511444,
+     "median": 0.3947082459926605,
+     "detail": 3.903658866882324,
+     "mean_saturation": 0.15799084305763245,
+     "squint": 0.998446524143219,
+     "flat_windows": 0,
+     "colour_shift": 0.2552771422116003,
+     "saturation_shift": -0.0009286403656005859,
+     "detail_change": 0.21268916130065918
+    },
+    "Camera B": {
+     "p5": 0.06693412363529205,
+     "p95": 0.46615999937057495,
+     "range": 0.3992258757352829,
+     "median": 0.2215372622013092,
+     "detail": 3.919151544570923,
+     "mean_saturation": 0.283119261264801,
+     "squint": 0.9971804022789001,
+     "flat_windows": 0,
+     "colour_shift": 0.4300657631238708,
+     "saturation_shift": -0.0005229711532592773,
+     "detail_change": 0.2702159881591797
+    }
+   },
+   "average": {
+    "p5": 0.12846235930919647,
+    "p95": 0.5558172762393951,
+    "range": 0.42735491693019867,
+    "median": 0.30812275409698486,
+    "detail": 3.9114052057266235,
+    "mean_saturation": 0.22055505216121674,
+    "squint": 0.9978134632110596,
+    "flat_windows": 0.0,
+    "colour_shift": 0.3426714526677356,
+    "saturation_shift": -0.0007258057594299316,
+    "detail_change": 0.24145257472991943
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "11_v10-crackden66-crackwid75__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.42,
+     "bytes": 6537,
+     "ok": true,
+     "mean_luminance": 0.42498570680618286,
+     "path": "pictures/job-1/11_v10-crackden66-crackwid75__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "11_v10-crackden66-crackwid75__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 240,
+     "height": 160,
+     "samples": 8,
+     "seconds": 1.99,
+     "bytes": 6260,
+     "ok": true,
+     "mean_luminance": 0.22811396420001984,
+     "path": "pictures/job-1/11_v10-crackden66-crackwid75__camera-b.jpg"
+    }
+   ]
+  }
+ ],
+ "pairs": [
+  {
+   "a": "baseline",
+   "b": "v01-crackden98-crackwid25",
+   "mean_difference": 2.4057682291666667,
+   "changed_share": 0.07638020833333334,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.6479774305555557,
+     "changed_share": 0.08671875
+    },
+    "Camera A": {
+     "mean_difference": 2.1635590277777776,
+     "changed_share": 0.06604166666666667
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v02-crackden62-crackwid85",
+   "mean_difference": 2.1935243055555556,
+   "changed_share": 0.07240885416666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.456215277777778,
+     "changed_share": 0.08770833333333333
+    },
+    "Camera A": {
+     "mean_difference": 1.9308333333333334,
+     "changed_share": 0.057109375
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v03-crackden90-crackwid15",
+   "mean_difference": 2.1885243055555557,
+   "changed_share": 0.06596354166666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.438793402777778,
+     "changed_share": 0.07807291666666667
+    },
+    "Camera A": {
+     "mean_difference": 1.9382552083333333,
+     "changed_share": 0.05385416666666667
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v04-crackden78-crackwid5",
+   "mean_difference": 2.503142361111111,
+   "changed_share": 0.08197916666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.737690972222222,
+     "changed_share": 0.09078125
+    },
+    "Camera A": {
+     "mean_difference": 2.26859375,
+     "changed_share": 0.07317708333333334
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v05-crackden86-crackwid65",
+   "mean_difference": 3.645269097222222,
+   "changed_share": 0.13639322916666669,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 3.833454861111111,
+     "changed_share": 0.13971354166666666
+    },
+    "Camera A": {
+     "mean_difference": 3.4570833333333333,
+     "changed_share": 0.13307291666666668
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v06-crackden82-crackwid35",
+   "mean_difference": 2.291462673611111,
+   "changed_share": 0.07091145833333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.575625,
+     "changed_share": 0.08557291666666667
+    },
+    "Camera A": {
+     "mean_difference": 2.0073003472222224,
+     "changed_share": 0.05625
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v07-crackden70-crackwid55",
+   "mean_difference": 2.714839409722222,
+   "changed_share": 0.09143229166666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.9760416666666667,
+     "changed_share": 0.10161458333333333
+    },
+    "Camera A": {
+     "mean_difference": 2.4536371527777776,
+     "changed_share": 0.08125
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 2.2078559027777778,
+   "changed_share": 0.078515625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.4214756944444447,
+     "changed_share": 0.09359375
+    },
+    "Camera A": {
+     "mean_difference": 1.994236111111111,
+     "changed_share": 0.0634375
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 1.8543055555555557,
+   "changed_share": 0.04561197916666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.1718836805555557,
+     "changed_share": 0.06296875
+    },
+    "Camera A": {
+     "mean_difference": 1.5367274305555556,
+     "changed_share": 0.028255208333333334
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.7912760416666664,
+   "changed_share": 0.04890625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.0070572916666665,
+     "changed_share": 0.06268229166666667
+    },
+    "Camera A": {
+     "mean_difference": 1.5754947916666666,
+     "changed_share": 0.035130208333333336
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v02-crackden62-crackwid85",
+   "mean_difference": 2.2345182291666665,
+   "changed_share": 0.07361979166666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.549175347222222,
+     "changed_share": 0.09216145833333333
+    },
+    "Camera A": {
+     "mean_difference": 1.919861111111111,
+     "changed_share": 0.055078125
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v03-crackden90-crackwid15",
+   "mean_difference": 1.0807421874999998,
+   "changed_share": 0.0089453125,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.2290625,
+     "changed_share": 0.014739583333333334
+    },
+    "Camera A": {
+     "mean_difference": 0.932421875,
+     "changed_share": 0.0031510416666666666
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v04-crackden78-crackwid5",
+   "mean_difference": 1.0506206597222223,
+   "changed_share": 0.010208333333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.179453125,
+     "changed_share": 0.015078125
+    },
+    "Camera A": {
+     "mean_difference": 0.9217881944444445,
+     "changed_share": 0.005338541666666667
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v05-crackden86-crackwid65",
+   "mean_difference": 2.2459765625,
+   "changed_share": 0.0814453125,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.387717013888889,
+     "changed_share": 0.09151041666666666
+    },
+    "Camera A": {
+     "mean_difference": 2.104236111111111,
+     "changed_share": 0.07138020833333333
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v06-crackden82-crackwid35",
+   "mean_difference": 0.7728298611111111,
+   "changed_share": 0.0010807291666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 0.8129253472222222,
+     "changed_share": 0.000859375
+    },
+    "Camera A": {
+     "mean_difference": 0.732734375,
+     "changed_share": 0.0013020833333333333
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v07-crackden70-crackwid55",
+   "mean_difference": 1.7358333333333333,
+   "changed_share": 0.04309895833333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.9276996527777779,
+     "changed_share": 0.05481770833333333
+    },
+    "Camera A": {
+     "mean_difference": 1.5439670138888888,
+     "changed_share": 0.03138020833333333
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 1.8272439236111113,
+   "changed_share": 0.04587239583333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.2163628472222223,
+     "changed_share": 0.06799479166666667
+    },
+    "Camera A": {
+     "mean_difference": 1.438125,
+     "changed_share": 0.02375
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 1.3563585069444444,
+   "changed_share": 0.027356770833333332,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.4024652777777777,
+     "changed_share": 0.033671875
+    },
+    "Camera A": {
+     "mean_difference": 1.310251736111111,
+     "changed_share": 0.021041666666666667
+    }
+   }
+  },
+  {
+   "a": "v01-crackden98-crackwid25",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.7937717013888888,
+   "changed_share": 0.043229166666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.0391666666666666,
+     "changed_share": 0.05588541666666667
+    },
+    "Camera A": {
+     "mean_difference": 1.5483767361111112,
+     "changed_share": 0.03057291666666667
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v03-crackden90-crackwid15",
+   "mean_difference": 2.1853038194444445,
+   "changed_share": 0.07230468749999999,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.5025086805555556,
+     "changed_share": 0.092109375
+    },
+    "Camera A": {
+     "mean_difference": 1.8680989583333334,
+     "changed_share": 0.0525
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v04-crackden78-crackwid5",
+   "mean_difference": 2.1576822916666667,
+   "changed_share": 0.06817708333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.431875,
+     "changed_share": 0.08408854166666667
+    },
+    "Camera A": {
+     "mean_difference": 1.8834895833333334,
+     "changed_share": 0.052265625
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v05-crackden86-crackwid65",
+   "mean_difference": 2.6215625,
+   "changed_share": 0.08256510416666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.7436631944444443,
+     "changed_share": 0.08546875
+    },
+    "Camera A": {
+     "mean_difference": 2.4994618055555557,
+     "changed_share": 0.07966145833333334
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v06-crackden82-crackwid35",
+   "mean_difference": 2.269709201388889,
+   "changed_share": 0.0757421875,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.6553993055555556,
+     "changed_share": 0.09854166666666667
+    },
+    "Camera A": {
+     "mean_difference": 1.8840190972222222,
+     "changed_share": 0.05294270833333333
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v07-crackden70-crackwid55",
+   "mean_difference": 1.8445269097222223,
+   "changed_share": 0.04740885416666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.06921875,
+     "changed_share": 0.059296875
+    },
+    "Camera A": {
+     "mean_difference": 1.6198350694444446,
+     "changed_share": 0.035520833333333335
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 1.812673611111111,
+   "changed_share": 0.05423177083333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.013802083333333,
+     "changed_share": 0.07005208333333333
+    },
+    "Camera A": {
+     "mean_difference": 1.6115451388888888,
+     "changed_share": 0.038411458333333336
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 2.249609375,
+   "changed_share": 0.07541666666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.665251736111111,
+     "changed_share": 0.0996875
+    },
+    "Camera A": {
+     "mean_difference": 1.8339670138888888,
+     "changed_share": 0.051145833333333335
+    }
+   }
+  },
+  {
+   "a": "v02-crackden62-crackwid85",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.416310763888889,
+   "changed_share": 0.031028645833333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.6048697916666668,
+     "changed_share": 0.04390625
+    },
+    "Camera A": {
+     "mean_difference": 1.2277517361111112,
+     "changed_share": 0.018151041666666666
+    }
+   }
+  },
+  {
+   "a": "v03-crackden90-crackwid15",
+   "b": "v04-crackden78-crackwid5",
+   "mean_difference": 1.0574392361111111,
+   "changed_share": 0.011380208333333332,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.082439236111111,
+     "changed_share": 0.01453125
+    },
+    "Camera A": {
+     "mean_difference": 1.0324392361111112,
+     "changed_share": 0.008229166666666666
+    }
+   }
+  },
+  {
+   "a": "v03-crackden90-crackwid15",
+   "b": "v05-crackden86-crackwid65",
+   "mean_difference": 2.6235590277777776,
+   "changed_share": 0.10338541666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.8656684027777777,
+     "changed_share": 0.12046875
+    },
+    "Camera A": {
+     "mean_difference": 2.381449652777778,
+     "changed_share": 0.08630208333333333
+    }
+   }
+  },
+  {
+   "a": "v03-crackden90-crackwid15",
+   "b": "v06-crackden82-crackwid35",
+   "mean_difference": 1.0467491319444444,
+   "changed_share": 0.010638020833333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.2455295138888889,
+     "changed_share": 0.017994791666666666
+    },
+    "Camera A": {
+     "mean_difference": 0.84796875,
+     "changed_share": 0.00328125
+    }
+   }
+  },
+  {
+   "a": "v03-crackden90-crackwid15",
+   "b": "v07-crackden70-crackwid55",
+   "mean_difference": 1.7921571180555556,
+   "changed_share": 0.050742187499999994,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.9435850694444445,
+     "changed_share": 0.06283854166666666
+    },
+    "Camera A": {
+     "mean_difference": 1.6407291666666666,
+     "changed_share": 0.03864583333333333
+    }
+   }
+  },
+  {
+   "a": "v03-crackden90-crackwid15",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 1.6711892361111111,
+   "changed_share": 0.0355859375,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.0161371527777776,
+     "changed_share": 0.05486979166666667
+    },
+    "Camera A": {
+     "mean_difference": 1.3262413194444445,
+     "changed_share": 0.01630208333333333
+    }
+   }
+  },
+  {
+   "a": "v03-crackden90-crackwid15",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 1.2612065972222222,
+   "changed_share": 0.013945312500000001,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.4063020833333333,
+     "changed_share": 0.02125
+    },
+    "Camera A": {
+     "mean_difference": 1.116111111111111,
+     "changed_share": 0.006640625
+    }
+   }
+  },
+  {
+   "a": "v03-crackden90-crackwid15",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.667986111111111,
+   "changed_share": 0.03619791666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.92828125,
+     "changed_share": 0.048255208333333334
+    },
+    "Camera A": {
+     "mean_difference": 1.4076909722222222,
+     "changed_share": 0.024140625
+    }
+   }
+  },
+  {
+   "a": "v04-crackden78-crackwid5",
+   "b": "v05-crackden86-crackwid65",
+   "mean_difference": 2.2977604166666667,
+   "changed_share": 0.08217447916666668,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.527534722222222,
+     "changed_share": 0.09755208333333333
+    },
+    "Camera A": {
+     "mean_difference": 2.0679861111111113,
+     "changed_share": 0.066796875
+    }
+   }
+  },
+  {
+   "a": "v04-crackden78-crackwid5",
+   "b": "v06-crackden82-crackwid35",
+   "mean_difference": 1.2559939236111113,
+   "changed_share": 0.016549479166666665,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.455451388888889,
+     "changed_share": 0.026536458333333332
+    },
+    "Camera A": {
+     "mean_difference": 1.0565364583333334,
+     "changed_share": 0.0065625
+    }
+   }
+  },
+  {
+   "a": "v04-crackden78-crackwid5",
+   "b": "v07-crackden70-crackwid55",
+   "mean_difference": 1.451037326388889,
+   "changed_share": 0.026028645833333336,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.5749652777777778,
+     "changed_share": 0.033046875
+    },
+    "Camera A": {
+     "mean_difference": 1.327109375,
+     "changed_share": 0.019010416666666665
+    }
+   }
+  },
+  {
+   "a": "v04-crackden78-crackwid5",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 1.8035243055555557,
+   "changed_share": 0.04735677083333334,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.1749131944444446,
+     "changed_share": 0.07
+    },
+    "Camera A": {
+     "mean_difference": 1.4321354166666667,
+     "changed_share": 0.02471354166666667
+    }
+   }
+  },
+  {
+   "a": "v04-crackden78-crackwid5",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 1.6964409722222222,
+   "changed_share": 0.04401041666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.8536024305555556,
+     "changed_share": 0.05513020833333333
+    },
+    "Camera A": {
+     "mean_difference": 1.5392795138888888,
+     "changed_share": 0.032890625
+    }
+   }
+  },
+  {
+   "a": "v04-crackden78-crackwid5",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.8567621527777778,
+   "changed_share": 0.04901041666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.088029513888889,
+     "changed_share": 0.061223958333333335
+    },
+    "Camera A": {
+     "mean_difference": 1.6254947916666667,
+     "changed_share": 0.036796875
+    }
+   }
+  },
+  {
+   "a": "v05-crackden86-crackwid65",
+   "b": "v06-crackden82-crackwid35",
+   "mean_difference": 2.357243923611111,
+   "changed_share": 0.09044270833333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.4755208333333334,
+     "changed_share": 0.09924479166666667
+    },
+    "Camera A": {
+     "mean_difference": 2.238967013888889,
+     "changed_share": 0.081640625
+    }
+   }
+  },
+  {
+   "a": "v05-crackden86-crackwid65",
+   "b": "v07-crackden70-crackwid55",
+   "mean_difference": 1.9598133680555556,
+   "changed_share": 0.049088541666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.045729166666667,
+     "changed_share": 0.05328125
+    },
+    "Camera A": {
+     "mean_difference": 1.8738975694444444,
+     "changed_share": 0.044895833333333336
+    }
+   }
+  },
+  {
+   "a": "v05-crackden86-crackwid65",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 2.5516059027777778,
+   "changed_share": 0.08924479166666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.7498263888888888,
+     "changed_share": 0.10231770833333333
+    },
+    "Camera A": {
+     "mean_difference": 2.353385416666667,
+     "changed_share": 0.076171875
+    }
+   }
+  },
+  {
+   "a": "v05-crackden86-crackwid65",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 2.865390625,
+   "changed_share": 0.10955729166666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 3.0145225694444444,
+     "changed_share": 0.11723958333333333
+    },
+    "Camera A": {
+     "mean_difference": 2.7162586805555557,
+     "changed_share": 0.101875
+    }
+   }
+  },
+  {
+   "a": "v05-crackden86-crackwid65",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 2.706909722222222,
+   "changed_share": 0.09595052083333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.772630208333333,
+     "changed_share": 0.09953125
+    },
+    "Camera A": {
+     "mean_difference": 2.641189236111111,
+     "changed_share": 0.09236979166666667
+    }
+   }
+  },
+  {
+   "a": "v06-crackden82-crackwid35",
+   "b": "v07-crackden70-crackwid55",
+   "mean_difference": 1.872734375,
+   "changed_share": 0.052721354166666665,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.1376909722222224,
+     "changed_share": 0.069921875
+    },
+    "Camera A": {
+     "mean_difference": 1.6077777777777778,
+     "changed_share": 0.035520833333333335
+    }
+   }
+  },
+  {
+   "a": "v06-crackden82-crackwid35",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 1.8122265625,
+   "changed_share": 0.04213541666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.249236111111111,
+     "changed_share": 0.06638020833333333
+    },
+    "Camera A": {
+     "mean_difference": 1.3752170138888888,
+     "changed_share": 0.017890625
+    }
+   }
+  },
+  {
+   "a": "v06-crackden82-crackwid35",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 1.218910590277778,
+   "changed_share": 0.015963541666666668,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.2871788194444445,
+     "changed_share": 0.020859375
+    },
+    "Camera A": {
+     "mean_difference": 1.1506423611111112,
+     "changed_share": 0.011067708333333334
+    }
+   }
+  },
+  {
+   "a": "v06-crackden82-crackwid35",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.7355772569444445,
+   "changed_share": 0.03986979166666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.027265625,
+     "changed_share": 0.054427083333333334
+    },
+    "Camera A": {
+     "mean_difference": 1.443888888888889,
+     "changed_share": 0.0253125
+    }
+   }
+  },
+  {
+   "a": "v07-crackden70-crackwid55",
+   "b": "v08-crackden74-crackwid95",
+   "mean_difference": 1.7995963541666666,
+   "changed_share": 0.048776041666666665,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.1032118055555555,
+     "changed_share": 0.06890625
+    },
+    "Camera A": {
+     "mean_difference": 1.4959809027777777,
+     "changed_share": 0.028645833333333332
+    }
+   }
+  },
+  {
+   "a": "v07-crackden70-crackwid55",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 2.1610980902777777,
+   "changed_share": 0.07044270833333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.4079774305555555,
+     "changed_share": 0.08567708333333333
+    },
+    "Camera A": {
+     "mean_difference": 1.91421875,
+     "changed_share": 0.05520833333333333
+    }
+   }
+  },
+  {
+   "a": "v07-crackden70-crackwid55",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.8330512152777776,
+   "changed_share": 0.05036458333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.034296875,
+     "changed_share": 0.06291666666666666
+    },
+    "Camera A": {
+     "mean_difference": 1.6318055555555555,
+     "changed_share": 0.0378125
+    }
+   }
+  },
+  {
+   "a": "v08-crackden74-crackwid95",
+   "b": "v09-crackden94-crackwid45",
+   "mean_difference": 1.8081597222222223,
+   "changed_share": 0.03950520833333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.158828125,
+     "changed_share": 0.05979166666666667
+    },
+    "Camera A": {
+     "mean_difference": 1.4574913194444445,
+     "changed_share": 0.01921875
+    }
+   }
+  },
+  {
+   "a": "v08-crackden74-crackwid95",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.3113020833333333,
+   "changed_share": 0.0183984375,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.437265625,
+     "changed_share": 0.025677083333333333
+    },
+    "Camera A": {
+     "mean_difference": 1.1853385416666666,
+     "changed_share": 0.011119791666666667
+    }
+   }
+  },
+  {
+   "a": "v09-crackden94-crackwid45",
+   "b": "v10-crackden66-crackwid75",
+   "mean_difference": 1.620251736111111,
+   "changed_share": 0.03212239583333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 1.9169618055555555,
+     "changed_share": 0.048567708333333334
+    },
+    "Camera A": {
+     "mean_difference": 1.3235416666666666,
+     "changed_share": 0.015677083333333335
+    }
+   }
+  }
+ ],
+ "nearly_the_same": [],
+ "invisible": [],
+ "saved_values": {
+  "dials.cracks_and_chips.chip_amount": [
+   0.0,
+   0.45
+  ],
+  "dials.cracks_and_chips.crack_density": [
+   0.5,
+   0.5
+  ],
+  "dials.cracks_and_chips.crack_width_metres": [
+   0.012,
+   0.012
+  ]
+ },
+ "seconds": 37.5,
+ "jobs": [
+  {
+   "index": 1,
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof-final/tries/seed14-scout/pictures/job-1",
+   "where": "this computer",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 37.5,
+   "wall_seconds": 37.5,
+   "wake_up_ms": 0,
+   "billed_work_ms": 0,
+   "job_id": null,
+   "log_tail": "PASS v01-crackden98-crackwid25: 2 picture(s) in 3.3 s (restored exactly)\nPASS v02-crackden62-crackwid85: 2 picture(s) in 3.2 s (restored exactly)\nPASS v03-crackden90-crackwid15: 2 picture(s) in 3.2 s (restored exactly)\nPASS v04-crackden78-crackwid5: 2 picture(s) in 3.2 s (restored exactly)\nPASS v05-crackden86-crackwid65: 2 picture(s) in 3.3 s (restored exactly)\nPASS v06-crackden82-crackwid35: 2 picture(s) in 3.2 s (restored exactly)\nPASS v07-crackden70-crackwid55: 2 picture(s) in 3.3 s (restored exactly)\nPASS v08-crackden74-crackwid95: 2 picture(s) in 3.2 s (restored exactly)\nPASS v09-crackden94-crackwid45: 2 picture(s) in 3.5 s (restored exactly)\nPASS v10-crackden66-crackwid75: 2 picture(s) in 3.4 s (last of the job)\nPASS variations-worker: job 1: 11 of 11 variation(s), 22 picture(s), 36.5 s, cycles on CPU (this computer)\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)"
+  }
+ ],
+ "job_summaries": {
+  "1": {
+   "job": 1,
+   "scene": "canal_finished.blend",
+   "blender": "5.2.2 LTS",
+   "device": "CPU (this computer)",
+   "engine": "CYCLES",
+   "engine_reasons": [
+    "water \"Water lock chamber\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)",
+    "water \"Water upper pound\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)"
+   ],
+   "size": [
+    240,
+    160
+   ],
+   "samples": 8,
+   "where": "local",
+   "cameras": [
+    "Camera A",
+    "Camera B"
+   ],
+   "fingerprint_at_start": "bfed766b0584cf78",
+   "saved_values": {
+    "dials.cracks_and_chips.chip_amount": [
+     0.0,
+     0.45
+    ],
+    "dials.cracks_and_chips.crack_density": [
+     0.5,
+     0.5
+    ],
+    "dials.cracks_and_chips.crack_width_metres": [
+     0.012,
+     0.012
+    ]
+   },
+   "seconds_in_all": 36.5,
+   "reopened": 0,
+   "entries": [
+    "baseline",
+    "v01-crackden98-crackwid25",
+    "v02-crackden62-crackwid85",
+    "v03-crackden90-crackwid15",
+    "v04-crackden78-crackwid5",
+    "v05-crackden86-crackwid65",
+    "v06-crackden82-crackwid35",
+    "v07-crackden70-crackwid55",
+    "v08-crackden74-crackwid95",
+    "v09-crackden94-crackwid45",
+    "v10-crackden66-crackwid75"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "99060652ca4f39a8"
+  }
+ },
+ "would_drop": [],
+ "sheet": {
+  "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof-final/tries/seed14-scout/cracks-and-chips-on-the-lock-walls-and-scout-sheet.jpg",
+  "bytes": 349880,
+  "quality": 76,
+  "scale": 1.0,
+  "width": 1874,
+  "height": 1382
+ }
+}

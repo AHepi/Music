@@ -1,0 +1,43 @@
+{
+ "name": "weather-max",
+ "is_baseline": false,
+ "set": {
+  "dials.weathering.silvering": 1.0,
+  "dials.weathering.sun_fade": 1.0,
+  "dials.weathering.patina": 1.0
+ },
+ "args": {},
+ "script": null,
+ "notes": [],
+ "pictures": [
+  {
+   "camera": "Camera A",
+   "file": "05_weather-max__camera-a.jpg",
+   "engine": "CYCLES",
+   "width": 300,
+   "height": 200,
+   "samples": 8,
+   "seconds": 1.91,
+   "bytes": 8871,
+   "ok": true,
+   "mean_luminance": 0.4379257559776306
+  },
+  {
+   "camera": "Camera B",
+   "file": "05_weather-max__camera-b.jpg",
+   "engine": "CYCLES",
+   "width": 300,
+   "height": 200,
+   "samples": 8,
+   "seconds": 2.63,
+   "bytes": 8618,
+   "ok": true,
+   "mean_luminance": 0.24322018027305603
+  }
+ ],
+ "ok": true,
+ "reset": "restored exactly",
+ "seconds_apply": 0.01,
+ "seconds_draw": 4.55,
+ "seconds_reset": 0.01
+}

@@ -1,0 +1,345 @@
+{
+ "about": "The judge of one place audit. Facts are in the audit; the verdict and every threshold are here and in film-settings.json (place_* sections).",
+ "verdict": "fail",
+ "place": "hut",
+ "audit_file": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place/flat_hut_audit.json",
+ "checks": [
+  {
+   "verdict": "pass",
+   "check": "place: quick output",
+   "where": "the audit",
+   "text": "not a quick trial",
+   "fix": ""
+  },
+  {
+   "verdict": "warn",
+   "check": "place: stale audit",
+   "where": "the audit",
+   "text": "not checked: the scene file was not given (--blend FILE.blend), so a changed scene would not be noticed.",
+   "fix": "give --blend with the finished scene file."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: roles",
+   "where": "every object",
+   "text": "every visible object has a role (9 objects)",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "ground_mat",
+   "text": "role ground.earth: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, rubbish, plants, litter_pieces.",
+   "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "ground_mat",
+   "text": "role ground.earth: wanted but missing displacement, moss_and_algae.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "wall_mat",
+   "text": "role wall.plaster: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae.",
+   "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "roof_mat",
+   "text": "role roof.shingle: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, moss_and_algae.",
+   "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "door_mat",
+   "text": "role timber.door: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.",
+   "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "door_mat",
+   "text": "role timber.door: wanted but missing moss_and_algae.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "floor_mat",
+   "text": "role timber.floor: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.",
+   "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "floor_mat",
+   "text": "role timber.floor: wanted but missing moss_and_algae.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "wall_north, wall_south, wall_east, wall_west, door, floor_plank_1 and 1 more",
+   "text": "7 object(s) lack bevelled_edges.",
+   "fix": "run explainer-film-place surfaces (it bevels with hardened normals)"
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "roof, door, floor_plank_1, floor_plank_2",
+   "text": "4 object(s) lack shape_damage.",
+   "fix": "run explainer-film-place damage"
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "ground_mat",
+   "text": "no litter pieces on the ground (1 ground material(s)).",
+   "fix": "run explainer-film-place grow."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: treatments",
+   "where": "ground_mat",
+   "text": "no plants on the ground (1 ground material(s)).",
+   "fix": "run explainer-film-place grow."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: layer amounts",
+   "where": "ground.earth",
+   "text": "1 object(s) (ground) have no pk_<layer>_amount property for cracks_and_chips, dirt, grime, rubbish, weathering, wetness, so those layers silently read 0 on them.",
+   "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: layer amounts",
+   "where": "roof.shingle",
+   "text": "1 object(s) (roof) have no pk_<layer>_amount property for cracks_and_chips, dirt, grime, moss_and_algae, weathering, wetness, so those layers silently read 0 on them.",
+   "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: layer amounts",
+   "where": "timber.door",
+   "text": "1 object(s) (door) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, weathering, wetness, so those layers silently read 0 on them.",
+   "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: layer amounts",
+   "where": "timber.floor",
+   "text": "2 object(s) (floor_plank_1, floor_plank_2) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, weathering, wetness, so those layers silently read 0 on them.",
+   "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: layer amounts",
+   "where": "wall.plaster",
+   "text": "4 object(s) (wall_east, wall_north, wall_south, wall_west) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, moss_and_algae, weathering, wetness, so those layers silently read 0 on them.",
+   "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: off reasons",
+   "where": "the settings",
+   "text": "nothing is switched off",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: normal maps",
+   "where": "every normal map",
+   "text": "0 normal map(s): Non-Color, tangent, wired, pointing the right way",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: uv",
+   "where": "every object",
+   "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: displacement",
+   "where": "the displacement materials",
+   "text": "displacement is set where the role needs it, on a mesh that can show it",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: construction",
+   "where": "floor_plank_2",
+   "text": "1 part(s) floats: nothing carries it (gap over 5 mm).",
+   "fix": "move it onto a support or add one (a post under the beam, a footing under the post); seat things with seat_on_ground"
+  },
+  {
+   "verdict": "pass",
+   "check": "place: scale",
+   "where": "every sized object",
+   "text": "0 size(s) fit the real-world facts",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: plain boxes",
+   "where": "ground, wall_north, wall_south, wall_east, wall_west, roof and 3 more",
+   "text": "100% of the objects are plain sharp-edged boxes (at most 15%).",
+   "fix": "run explainer-film-place surfaces (bevels) and damage; shape the parts (chamfers, uneven boards)."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: budgets",
+   "where": "the scene",
+   "text": "triangles and scattered pieces are within the budgets",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: light",
+   "where": "the scene",
+   "text": "the scene has light",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: renderer",
+   "where": "the scene",
+   "text": "renderer EEVEE: ",
+   "fix": ""
+  }
+ ],
+ "calculator": "place_audit_check check",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "place_surfaces.normal_map_size_min_pixels": {
+   "value": 1024,
+   "unit": "pixels a side",
+   "kind": "judged"
+  },
+  "place_audit.unknown_role_objects_allowed": {
+   "value": 0,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_audit.required_treatments_missing_allowed": {
+   "value": 0,
+   "unit": "treatments",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.kept": {
+   "value": 0.15,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.lived_in": {
+   "value": 0.25,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.neglected": {
+   "value": 0.4,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.derelict": {
+   "value": 0.5,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.off_share_max": {
+   "value": 0.25,
+   "unit": "share of required role-and-treatment pairs",
+   "kind": "invented"
+  },
+  "place_surfaces.normal_direction_correlation_min": {
+   "value": 0.25,
+   "unit": "correlation",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_blue_mean_min": {
+   "value": 0.85,
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_red_green_mean_band": {
+   "value": [
+    0.47,
+    0.53
+   ],
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.uv_mirrored_face_share_max": {
+   "value": 0.02,
+   "unit": "share of faces",
+   "kind": "judged"
+  },
+  "place_construction.float_gap_millimetres_fail": {
+   "value": 5,
+   "unit": "millimetres",
+   "kind": "judged"
+  },
+  "place_scale.warn_factor": {
+   "value": 1.0,
+   "unit": "times the range",
+   "kind": "judged"
+  },
+  "place_scale.fail_factor": {
+   "value": 1.5,
+   "unit": "times the range",
+   "kind": "invented"
+  },
+  "place_audit.plain_box_share_max": {
+   "value": 0.15,
+   "unit": "share of objects",
+   "kind": "invented"
+  },
+  "place_wear.shape_sibling_min_count": {
+   "value": 4,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_wear.shape_sibling_copy_share_max": {
+   "value": 0.5,
+   "unit": "share of siblings",
+   "kind": "invented"
+  },
+  "place_wear.ground_relief_metres_min": {
+   "value": 0.03,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_audit.triangles_total_max": {
+   "value": 6000000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.triangles_per_builder_max": {
+   "value": 1500000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.scatter_pieces_max": {
+   "value": 400000,
+   "unit": "pieces",
+   "kind": "invented"
+  },
+  "place_wear.plan_mask_time_budget_seconds": {
+   "value": 120,
+   "unit": "seconds",
+   "kind": "invented"
+  },
+  "place_light.clip_share_max": {
+   "value": 0.005,
+   "unit": "share of pixels",
+   "kind": "judged"
+  }
+ }
+}

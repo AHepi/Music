@@ -1,0 +1,24 @@
+PASS before drawing: 10 variation(s) asked, 10 kept.
+PASS plan: 10 variation(s) and the baseline in 3 job(s) (4, 3, 3 variations; the baseline is drawn in job 2), 22 small picture(s) 600 x 400 through 2 camera(s); about 250 card seconds in all and about 106 s from sending to the last picture (an estimate from the house numbers; the first real batch gives better ones)
+PASS batches: batch 1 of at most 2 for the change "cracks-and-chips-on-the-lock-walls-and".
+PASS card time: batching-proof (role builder) has used 180 s of 600 s (10 min); this batch (3 job(s)) needs about 250 s more, 430 s in all.
+ledger: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/card-time-ledger.jsonl
+PASS card: a command-line client
+PASS jobs sent: 3 job(s) at the same time (kit uploaded; the scene and the job files are on the store)
+PASS job 1 (a rented card): COMPLETED, exit 0, work 22.9 s billed, wake-up 0.9 s (the job's own clock: 22.6 s)
+PASS job 2 (a rented card): COMPLETED, exit 0, work 20.3 s billed, wake-up 17.1 s (the job's own clock: 20.1 s)
+PASS job 3 (a rented card): COMPLETED, exit 0, work 26.5 s billed, wake-up 24.3 s (the job's own clock: 26.3 s)
+PASS pictures: 22 drawn for 10 variation(s) and the baseline, cycles, 600 x 400
+LOOK nearly the same: "v02-crackden35-crackwid95" and "v01-crackden25-crackwid45" came out nearly the same (mean difference 0.30 of 255, 0.01% of pixels changed): keep one
+LOOK nearly the same: "v03-crackden15-crackwid65" and "v01-crackden25-crackwid45" came out nearly the same (mean difference 0.37 of 255, 0.04% of pixels changed): keep one
+LOOK nearly the same: "v04-crackden5-crackwid55" and "v01-crackden25-crackwid45" came out nearly the same (mean difference 0.24 of 255, 0.00% of pixels changed): keep one
+LOOK nearly the same: "v09-crackden45-crackwid25" and "v01-crackden25-crackwid45" came out nearly the same (mean difference 0.31 of 255, 0.20% of pixels changed): keep one
+LOOK nearly the same: "v03-crackden15-crackwid65" and "v02-crackden35-crackwid95" came out nearly the same (mean difference 0.24 of 255, 0.01% of pixels changed): keep one
+LOOK nearly the same: "v04-crackden5-crackwid55" and "v02-crackden35-crackwid95" came out nearly the same (mean difference 0.39 of 255, 0.11% of pixels changed): keep one
+LOOK nearly the same: "v09-crackden45-crackwid25" and "v04-crackden5-crackwid55" came out nearly the same (mean difference 0.30 of 255, 0.20% of pixels changed): keep one
+PASS sheet: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/cracks-variations-run/cracks-and-chips-on-the-lock-walls-and-sheet.jpg (382 KB, 1874 x 1604)
+PASS card seconds: Card seconds (work + wake-up + the idle tail): job 1: work 22.9 + wake-up 0.9 + idle tail 5 = 28.8 s; job 2: work 20.3 + wake-up 17.1 + idle tail 5 = 42.4 s; job 3: work 26.5 + wake-up 24.3 + idle tail 5 = 55.8 s; set-up and downloads 31 s (an estimate from the wall clock); in all 158 s, about US$0.05 (an estimate at the price of the day, US$1.1 an hour; not a bill).
+PASS The 3 job(s) ran side by side: from sending to the last result took 53 s. Wake-up times (waiting for a card to start): 0.9 s, 17.1 s, 24.3 s.
+PASS result: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/cracks-variations-run/variations-result.json
+NEXT: look at the sheet with the Read tool; pick one variation, or combine two or three, and draw at most ONE more batch (`explainer-film-place variations refine variations-result.json --pick NAME NAME`); then apply the pick in the real scene, and go on. Draw full-size pictures only once, at the very end.
+exit 0

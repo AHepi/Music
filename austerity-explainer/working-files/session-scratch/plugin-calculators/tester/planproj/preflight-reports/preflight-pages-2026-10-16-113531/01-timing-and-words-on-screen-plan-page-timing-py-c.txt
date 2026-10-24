@@ -1,0 +1,66 @@
+Page timing for page-events-test, pages 1, 2, 3 (1298 frames looked at).
+0 to fix, 1 to look at, 0 known and kept, 102 passed.
+Typed lines: 19 new and 0 carried over from the page before; digits on screen: ABOUT 0%.
+
+NUMBERS
+  LOOK  all: 4%: numbers on screen but no ledger given (--ledger)
+        fix: check each against the research ledger
+
+MARGINS
+  INFO  page 1: page 1: longest line ends 0.817 across (WORKERS); highest letters 0.0615 down (THE GATE)
+  INFO  page 2: page 2: longest line ends 0.851 across (WHAT HAPPENS TO PRICES?); highest letters 0.0604 down (MOST PEOPLE AGREE)
+  INFO  page 3: page 3: longest line ends 0.379 across (THE RULE); highest letters 0.0620 down (THE RULE)
+
+READABLE
+  INFO  page 1: PRICES (word on an arrow): readable 2.87 s (it names the arrow; not counted)
+
+WORD GROUPS
+  INFO  all: these pages: 16 groups in 33 s: one every 2.1 s (plan 34 aims at about one every 6 s over the chapter)
+
+PAUSES AFTER EACH PAGE (the join's wait + its length + settle, plus any hold)
+  page 1 -> 2: peel after 0.30 s for 0.85 s: needs 1.30 s; the timeline has 1.40 s
+  page 2 -> 3: peel after 0.30 s for 0.85 s, hold 4.0 s: needs 4.00 s; the timeline has 4.00 s
+  for assemble_chapter_narration.py: --pauses 1.30,4.00
+  for estimate_timeline.py: --default-pause 1.30 --pause-after 2=4.00
+
+STILLS TO CHECK (50, drawn in one run so page turns are right):
+  node paper-film/tools/render-paper-film.mjs page-events-test STILLS_FOLDER --stills 0.00 1.00 1.27 6.27 7.63 8.43 10.13 10.40 10.67 10.90 12.23 13.40 13.80 14.07 14.30 15.73 16.03 16.80 17.73 18.10 18.93 19.37 19.80 20.07 20.30 20.60 21.03 21.37 21.90 22.07 22.30 23.10 24.00 24.63 25.50 26.37 27.07 27.90 28.23 30.93 31.30 32.03 33.90 34.33 34.80 37.63 39.20 39.53 39.93 40.43
+
+PLANNED CUTS for find_jumps.py (film starting at 0.000 s):
+  10.167 s (10.167 s into the film): page 1: cut to 1b the gate
+  18.965 s (18.965 s into the film): page 1: join (peel) starts (gradual: not a jump)
+  33.940 s (33.940 s into the film): page 2: join (peel) starts (gradual: not a jump)
+  python3 -I paper-film/tools/find_jumps.py FILM.mp4 SHEET.jpg 4 10.167
+
+Settings used (film-settings.json):
+  page_timing.settle_after_join_seconds = 0.15 seconds after a join ends, before the next page's first word (judged)
+  page_timing.join_clear_of_next_word_seconds = 0.1 seconds (judged)
+  timing.page_pause_range_seconds = [1.1, 1.7] seconds (judged)
+  timing.turn_after_last_word_seconds = 0.3 seconds (judged)
+  timing.guess_hold_seconds = 4.0 seconds (judged)
+  page_timing.pause_longer_than_needed_seconds = 0.3 seconds (invented)
+  timing.label_readable_min_seconds = 1.0 seconds at full strength (judged)
+  page_timing.conclusion_on_screen_seconds = 1.2 seconds from when it starts to appear until the cut (one frame short allowed) (judged)
+  page_timing.overlap_opacity_min = 0.1 strength (0 to 1) both lines must have to count as overlapping (judged)
+  page_timing.overlap_pixels_min = 2 pixels two boxes must overlap by, across and down (invented)
+  safe_area.text_left_pixels = 65 pixels (0.06 of the width) (judged)
+  safe_area.text_right_pixels = 972 pixels (0.90 of the width) (judged)
+  safe_area.letter_top_min_down = 0.06 down the frame (judged)
+  safe_area.nothing_to_read_below_down = 0.8 down the frame (the bottom 380 pixels) (judged)
+  safe_area.title_band_down = [0.05, 0.22] down the frame (judged)
+  safe_area.rule_cards_down = [[0.07, 0.15], [0.16, 0.24]] down the frame (judged)
+  page_timing.typed_word_window_seconds = 6.0 seconds either side of when the words show (judged)
+  timing.key_number_hold_seconds = 1.0 seconds (judged)
+  page_timing.number_hold_seconds = [0.5, 0.15] seconds, plus seconds per character shown (judged)
+  page_timing.count_end_after_word_max_seconds = 0.1 seconds after the number's spoken word (judged)
+  timing.word_group_every_seconds = 6 seconds (judged)
+  timing.word_groups_per_page = [3, 5] groups (judged)
+  camera.slide_seconds_range = [2.6, 4.1] seconds (judged)
+  camera.slides_per_page_max = 1 slides (judged)
+  timing.rest_without_change_max_seconds = 1.7 seconds (2.5 on the end card) (judged)
+  timing.end_card_rest_max_seconds = 2.5 seconds (judged)
+  page_timing.still_after_event_seconds = 0.25 seconds after an event (or 0.05 s after its words are full, if later) (judged)
+  page_timing.page_turn_stills_after_last_word_seconds = [0.3, 0.7, 1.2] seconds after each page's last word (judged)
+  page_timing.merge_stills_within_seconds = 0.1 seconds (invented)
+  timing.default_page_pause_seconds = 1.4 seconds (judged)
+  timing.camera_plan_window_seconds = {"before_first_word": 0.8, "after_last_word_end": 1.3} seconds (judged)

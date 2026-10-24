@@ -1,0 +1,40 @@
+Preflight shots (before building or drawing a place's views): FAIL. 1 to fix, 5 to look at, 0 known and accepted, 0 input(s) missing; 5 check(s) in 0.3 s.
+Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-16 11:24:01 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401.
+
+## To fix (these block the next step)
+
+- slide_magnification [c1]: The 0.70 m slide brings the nearest painted thing, basket (its nearest corner 2.21 m away at the end), 1.317 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 0.63 m. (plan_shot.py)
+  Fix: Shorten the slide to 0.63 m, or move basket back 0.05 m.
+
+## To look at (they do not block; a person decides)
+
+- rule8_work_prop_band [c1]: bag rack's middle is 0.75 down (the middle band is 0.45 to 0.62). (plan_shot.py)
+  Fix: Move bag rack into the middle band, unless only a part of it shows (the checker takes the middle of what shows).
+- rule8_work_prop_share [c1]: bag rack covers at most 3.3% of the frame (its box; limit 2%). (plan_shot.py)
+- bounce-to-ceiling: lights basket (its housing; lesson 120, log 32): skip them [checkout c1] (plan_lights.py)
+- the subject gets 62 times its key light (at most 3.0), mostly from bill-warm-bounce: its colour will burn out (rule 5); turn that light down or move it away [checkout c1] (plan_lights.py)
+- kind_of_shot [checkout c1]: checkout-c1-shot-check.json names no "kind_of_shot": the shot checker judges it as a still life (the place facts say interior) (preflight.py)
+  Fix: add "kind_of_shot": [...] (still_life, crowd, overview, interior, dark_subject)
+
+## Checks run
+
+- PASS  place facts are complete (place_facts.py check) [checkout]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/place_facts.py version bd240e22
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/01-place-facts-are-complete-place-facts-py-check.json
+- FAIL  camera, reach, slide and people (plan_shot.py) [checkout]: 1 fail, 2 look, 0 known, 26 pass, 4 info; exit 1, 0.1 s; calculators/plan_shot.py version 6a7fabb5
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --shots /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/checkout-c1-shots.json --strict --shot c1 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/02-camera-reach-slide-and-people-plan-shot-py.json
+- PASS  letters, loud signs, heads and landmarks (view_audit.py) [checkout]: 0 fail, 0 look, 0 known, 0 pass, 15 info; exit 0, 0.1 s; calculators/view_audit.py version 79e3d2f9
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/03-letters-loud-signs-heads-and-landmarks-view-audi.json
+- WARN  lights for c1 (plan_lights.py plan) [checkout c1]: 0 fail, 2 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --view c1 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/04-lights-for-c1-plan-lights-py-plan.json
+- WARN  each view's check file carries its kinds, figures and accepted list [checkout]: 0 fail, 1 look, 0 known, 0 pass, 0 info; exit 0, 0.0 s; preflight.py version d836d994
+  (inside the preflight)
+
+## Inputs (sha1 when the run ended)
+
+- c99326bb83ab803c642182482599bd659f97f607  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json
+- f110f9c47370be780852557a2371fc34f090a19a  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-shot-check.json
+- 46292fba78cc7065c8941b40dad1e97d0fabc064  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/checkout-c1-shots.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401.json

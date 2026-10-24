@@ -1,0 +1,49 @@
+{
+ "job": 2,
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hut-finished.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/place-settings.json",
+ "out_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-2",
+ "cameras": [
+  "Camera A"
+ ],
+ "engine": "cycles",
+ "size": [
+  160,
+  108
+ ],
+ "samples": 6,
+ "quality": 85,
+ "check_reset": false,
+ "entries": [
+  {
+   "name": "derelict",
+   "is_baseline": false,
+   "set": {
+    "look": "derelict"
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "no-wear",
+   "is_baseline": false,
+   "set": {
+    "master": 0.0
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "bad-layer",
+   "is_baseline": false,
+   "set": {
+    "amount.rust": 0.2
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

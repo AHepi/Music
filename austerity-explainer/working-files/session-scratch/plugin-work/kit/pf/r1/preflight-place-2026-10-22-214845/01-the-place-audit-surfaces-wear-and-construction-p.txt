@@ -1,0 +1,58 @@
+Place audit of hut (lived_in, dry): FAIL. 16 to fix, 4 to look at, 0 known (switched off on purpose), 10 passed.
+PASS place: quick output [the audit]: not a quick trial
+LOOK place: stale audit [the audit]: not checked: the scene file was not given (--blend FILE.blend), so a changed scene would not be noticed.  Fix: give --blend with the finished scene file.
+PASS place: roles [every object]: every visible object has a role (9 objects)
+FAIL place: treatments [ground_mat]: role ground.earth: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, rubbish, plants, litter_pieces.  Fix: run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.
+LOOK place: treatments [ground_mat]: role ground.earth: wanted but missing displacement, moss_and_algae.  Fix: worth adding; not required.
+FAIL place: treatments [wall_mat]: role wall.plaster: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae.  Fix: run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.
+FAIL place: treatments [roof_mat]: role roof.shingle: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, moss_and_algae.  Fix: run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.
+FAIL place: treatments [door_mat]: role timber.door: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.  Fix: run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.
+LOOK place: treatments [door_mat]: role timber.door: wanted but missing moss_and_algae.  Fix: worth adding; not required.
+FAIL place: treatments [floor_mat]: role timber.floor: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.  Fix: run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.
+LOOK place: treatments [floor_mat]: role timber.floor: wanted but missing moss_and_algae.  Fix: worth adding; not required.
+FAIL place: treatments [wall_north, wall_south, wall_east, wall_west, door, floor_plank_1 and 1 more]: 7 object(s) lack bevelled_edges.  Fix: run explainer-film-place surfaces (it bevels with hardened normals)
+FAIL place: treatments [roof, door, floor_plank_1, floor_plank_2]: 4 object(s) lack shape_damage.  Fix: run explainer-film-place damage
+FAIL place: treatments [ground_mat]: no litter pieces on the ground (1 ground material(s)).  Fix: run explainer-film-place grow.
+FAIL place: treatments [ground_mat]: no plants on the ground (1 ground material(s)).  Fix: run explainer-film-place grow.
+FAIL place: layer amounts [ground.earth]: 1 object(s) (ground) have no pk_<layer>_amount property for cracks_and_chips, dirt, grime, rubbish, weathering, wetness, so those layers silently read 0 on them.  Fix: run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.
+FAIL place: layer amounts [roof.shingle]: 1 object(s) (roof) have no pk_<layer>_amount property for cracks_and_chips, dirt, grime, moss_and_algae, weathering, wetness, so those layers silently read 0 on them.  Fix: run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.
+FAIL place: layer amounts [timber.door]: 1 object(s) (door) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, weathering, wetness, so those layers silently read 0 on them.  Fix: run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.
+FAIL place: layer amounts [timber.floor]: 2 object(s) (floor_plank_1, floor_plank_2) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, weathering, wetness, so those layers silently read 0 on them.  Fix: run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.
+FAIL place: layer amounts [wall.plaster]: 4 object(s) (wall_east, wall_north, wall_south, wall_west) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, moss_and_algae, weathering, wetness, so those layers silently read 0 on them.  Fix: run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.
+PASS place: off reasons [the settings]: nothing is switched off
+PASS place: normal maps [every normal map]: 0 normal map(s): Non-Color, tangent, wired, pointing the right way
+PASS place: uv [every object]: every normal-mapped object has UVs, none mirrored beyond the limit
+PASS place: displacement [the displacement materials]: displacement is set where the role needs it, on a mesh that can show it
+FAIL place: construction [floor_plank_2]: 1 part(s) floats: nothing carries it (gap over 5 mm).  Fix: move it onto a support or add one (a post under the beam, a footing under the post); seat things with seat_on_ground
+PASS place: scale [every sized object]: 0 size(s) fit the real-world facts
+FAIL place: plain boxes [ground, wall_north, wall_south, wall_east, wall_west, roof and 3 more]: 100% of the objects are plain sharp-edged boxes (at most 15%).  Fix: run explainer-film-place surfaces (bevels) and damage; shape the parts (chamfers, uneven boards).
+PASS place: budgets [the scene]: triangles and scattered pieces are within the budgets
+PASS place: light [the scene]: the scene has light
+PASS place: renderer [the scene]: renderer EEVEE: 
+The place is not finished: do not draw, render or paint it until these pass.
+
+Settings used (film-settings.json):
+  place_surfaces.normal_map_size_min_pixels = 1024 pixels a side (judged)
+  place_audit.unknown_role_objects_allowed = 0 objects (judged)
+  place_audit.required_treatments_missing_allowed = 0 treatments (judged)
+  place_audit.layer_amount_floor_by_look.kept = 0.15 amount (judged)
+  place_audit.layer_amount_floor_by_look.lived_in = 0.25 amount (judged)
+  place_audit.layer_amount_floor_by_look.neglected = 0.4 amount (judged)
+  place_audit.layer_amount_floor_by_look.derelict = 0.5 amount (judged)
+  place_audit.off_share_max = 0.25 share of required role-and-treatment pairs (invented)
+  place_surfaces.normal_direction_correlation_min = 0.25 correlation (judged)
+  place_surfaces.normal_blue_mean_min = 0.85 share of 1 (judged)
+  place_surfaces.normal_red_green_mean_band = [0.47, 0.53] share of 1 (judged)
+  place_surfaces.uv_mirrored_face_share_max = 0.02 share of faces (judged)
+  place_construction.float_gap_millimetres_fail = 5 millimetres (judged)
+  place_scale.warn_factor = 1.0 times the range (judged)
+  place_scale.fail_factor = 1.5 times the range (invented)
+  place_audit.plain_box_share_max = 0.15 share of objects (invented)
+  place_wear.shape_sibling_min_count = 4 objects (judged)
+  place_wear.shape_sibling_copy_share_max = 0.5 share of siblings (invented)
+  place_wear.ground_relief_metres_min = 0.03 metres (invented)
+  place_audit.triangles_total_max = 6000000 triangles (judged)
+  place_audit.triangles_per_builder_max = 1500000 triangles (judged)
+  place_audit.scatter_pieces_max = 400000 pieces (invented)
+  place_wear.plan_mask_time_budget_seconds = 120 seconds (invented)
+  place_light.clip_share_max = 0.005 share of pixels (judged)

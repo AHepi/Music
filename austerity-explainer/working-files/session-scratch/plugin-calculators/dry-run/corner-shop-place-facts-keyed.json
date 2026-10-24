@@ -1,0 +1,403 @@
+{
+ "place_facts_version": 1,
+ "place": "corner-shop",
+ "about": "A family-run corner shop's counter in Japan, 2013, at night, seen from where a customer stands: the counter with a plastic basket of groceries, the till with its small customer price display (the subject), a small lit tobacco sign on the back wall, a window to the night street behind the counter on the left. No people. Written by hand for a dry run (no Blender scene exists); every size is invented in metres. Prop 'at' is the middle of the prop, as in the checkout example.",
+ "made_by": "by hand (dry run of the explainer-film plugin)",
+ "made_from": [
+  "the one-sentence description of the place",
+  "02-plan-shot.json (the shot planner's camera, copied in by hand)"
+ ],
+ "interior": true,
+ "lines": {
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "level",
+ "views": [
+  {
+   "name": "counter",
+   "about": "The counter seen square-on from the customer's side.",
+   "kind_of_shot": [
+    "interior"
+   ],
+   "camera": {
+    "composed": [
+     0.23,
+     -1.6785,
+     1.6
+    ],
+    "plate": [
+     0.2203,
+     -2.0783,
+     1.6
+    ],
+    "turn_degrees": 0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "eye_height_metres": 1.6,
+    "floor_height": 0.0,
+    "stands_on": "floor",
+    "plate_vertical_fov_degrees": 64.4
+   },
+   "slide": {
+    "start": [
+     0.2203,
+     -2.0783,
+     1.6
+    ],
+    "end": [
+     0.23,
+     -1.6785,
+     1.6
+    ],
+    "length_metres": 0.4
+   },
+   "subject": {
+    "name": "till display",
+    "point": [
+     0.3,
+     1.22,
+     1.36
+    ]
+   },
+   "painted_points": [
+    {
+     "name": "counter front edge",
+     "point": [
+      0.0,
+      1.0,
+      0.9
+     ]
+    },
+    {
+     "name": "basket front",
+     "point": [
+      -0.3,
+      1.055,
+      0.95
+     ]
+    },
+    {
+     "name": "till front",
+     "point": [
+      0.42,
+      1.18,
+      1.0
+     ]
+    }
+   ]
+  }
+ ],
+ "signs": [
+  {
+   "name": "till display",
+   "centre": [
+    0.3,
+    1.195,
+    1.36
+   ],
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": 0.014,
+   "words": "¥1,050",
+   "must_read": true,
+   "note": "green glowing digits of the till's customer display, the price with 5% tax"
+  },
+  {
+   "name": "tobacco sign",
+   "centre": [
+    0.65,
+    2.62,
+    1.95
+   ],
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "letter_height_metres": 0.1,
+   "words": "たばこ",
+   "must_read": false,
+   "note": "small lit sign on the back wall; the narration never names it"
+  }
+ ],
+ "emitters": [
+  {
+   "name": "tobacco sign",
+   "kind": "lamp",
+   "at": [
+    0.65,
+    2.62,
+    1.95
+   ],
+   "radius_metres": 0.2,
+   "note": "the small lit sign"
+  },
+  {
+   "name": "street window",
+   "kind": "window group",
+   "at": [
+    -0.55,
+    2.7,
+    1.6
+   ],
+   "note": "the night street seen through the window"
+  }
+ ],
+ "figures": [],
+ "lights": [
+  {
+   "name": "ceiling tube",
+   "kind": "AREA",
+   "at": [
+    0.0,
+    1.5,
+    2.45
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 60.0,
+   "colour": [
+    0.9,
+    0.95,
+    1.0
+   ],
+   "note": "a fluorescent tube over the counter"
+  },
+  {
+   "name": "tobacco sign glow",
+   "kind": "AREA",
+   "at": [
+    0.65,
+    2.58,
+    1.95
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 5.0,
+   "colour": [
+    1.0,
+    0.95,
+    0.85
+   ],
+   "note": "the lit sign's own light"
+  },
+  {
+   "name": "till key",
+   "kind": "SPOT",
+   "at": [
+    0.2,
+    0.5,
+    0.95
+   ],
+   "target": [
+    0.3,
+    1.22,
+    1.36
+   ],
+   "aim": null,
+   "watts": 20.0,
+   "colour": [
+    1.0,
+    0.9,
+    0.75
+   ],
+   "cone_degrees": 15.0,
+   "reaches_only": [
+    "till display",
+    "till"
+   ],
+   "note": "the subject's own narrow key from below"
+  },
+  {
+   "name": "street lamp outside",
+   "kind": "POINT",
+   "at": [
+    -1.8,
+    9.0,
+    4.8
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 600.0,
+   "colour": [
+    1.0,
+    0.85,
+    0.6
+   ]
+  },
+  {
+   "name": "vending machine glow",
+   "kind": "AREA",
+   "at": [
+    -0.9,
+    7.0,
+    1.0
+   ],
+   "target": null,
+   "aim": null,
+   "watts": 80.0,
+   "colour": [
+    0.85,
+    0.92,
+    1.0
+   ],
+   "note": "a drinks vending machine across the street, seen through the window"
+  }
+ ],
+ "landmark_tops": [
+  {
+   "name": "street lamp across the road",
+   "top": [
+    -1.8,
+    9.0,
+    5.0
+   ],
+   "identifies": "the street outside"
+  }
+ ],
+ "support_surfaces": [
+  {
+   "name": "floor",
+   "kind": "floor",
+   "height": 0.0,
+   "interior": true,
+   "height_from": "invented"
+  },
+  {
+   "name": "counter top",
+   "kind": "counter",
+   "height": 0.9,
+   "x_range": [
+    -0.9,
+    0.9
+   ],
+   "y_range": [
+    1.0,
+    1.6
+   ],
+   "interior": true,
+   "height_from": "invented (a usual shop counter)"
+  }
+ ],
+ "props": [
+  {
+   "name": "counter",
+   "at": [
+    0.0,
+    1.3,
+    0.45
+   ],
+   "size": [
+    1.8,
+    0.6,
+    0.9
+   ],
+   "role": "other"
+  },
+  {
+   "name": "basket",
+   "at": [
+    -0.3,
+    1.22,
+    1.05
+   ],
+   "size": [
+    0.48,
+    0.33,
+    0.3
+   ],
+   "role": "story"
+  },
+  {
+   "name": "till",
+   "at": [
+    0.42,
+    1.38,
+    1.04
+   ],
+   "size": [
+    0.38,
+    0.4,
+    0.28
+   ],
+   "role": "support"
+  },
+  {
+   "name": "till display",
+   "at": [
+    0.3,
+    1.22,
+    1.36
+   ],
+   "size": [
+    0.22,
+    0.05,
+    0.08
+   ],
+   "role": "subject"
+  },
+  {
+   "name": "tobacco sign",
+   "at": [
+    0.65,
+    2.66,
+    1.95
+   ],
+   "size": [
+    0.42,
+    0.08,
+    0.16
+   ],
+   "role": "other"
+  },
+  {
+   "name": "window",
+   "at": [
+    -0.55,
+    2.7,
+    1.6
+   ],
+   "size": [
+    1.0,
+    0.05,
+    1.2
+   ],
+   "role": "other"
+  },
+  {
+   "name": "cigarette shelf",
+   "at": [
+    0.55,
+    2.55,
+    1.35
+   ],
+   "size": [
+    0.9,
+    0.25,
+    0.7
+   ],
+   "role": "work"
+  },
+  {
+   "name": "sweets rack",
+   "at": [
+    0.78,
+    1.12,
+    1.0
+   ],
+   "size": [
+    0.2,
+    0.15,
+    0.2
+   ],
+   "role": "work"
+  }
+ ],
+ "accepted": []
+}

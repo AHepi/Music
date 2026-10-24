@@ -1,0 +1,77 @@
+[geometry] focal at 60.4 deg on 1920 high: 1649.4 px (expect 1649.4); plate focal on 2730 high at 64.4: 2168 px (expect 2168)
+
+[lettering] letter heights in px at each composed spot (works-shot.json letter_pixels)
+  w3 bank sign     depth  17.37 m  px  29.0  (works-shot.json 29.0)
+  w3 No. 1 board   depth  29.93 m  px  14.7  (works-shot.json 14.7)
+  w3 No. 2 board   depth  29.93 m  px  13.8  (works-shot.json 13.8)
+  w1 No. 1 board   depth   8.78 m  px  50.0  (works-shot.json 50.0)
+  w2 No. 2 board   depth   8.78 m  px  47.0  (works-shot.json 47.0)
+  w1 PETROL        depth   7.25 m  px  22.1  (works-shot.json 22.1)
+  w2 PETROL        depth   7.25 m  px  22.1  (works-shot.json 22.1)
+  WAGES 0.018 m at 6 m: 4.9 px (round 2: about 5 px); 25 px needs 0.091 m letters at 6 m
+  letter height for 18 px at 4.4 m (notice corner end): 4.8 cm
+
+[figures] W1 composed: feet down and head px (works-shot.json men_seen gives box bottoms 0.704/0.700/0.699)
+  man-1: depth  8.66  feet 0.668 down  head 43.8 px  figure   340 px
+  man-2: depth  8.09  feet 0.697 down  head 46.9 px  figure   308 px
+  man-3: depth  8.35  feet 0.675 down  head 45.4 px  figure   351 px
+  man-4: depth  8.25  feet 0.675 down  head 46.0 px  figure   341 px
+  man-5: depth  7.52  feet 0.692 down  head 50.4 px  figure   371 px
+  man-6: depth  7.42  feet 0.696 down  head 51.1 px  figure   406 px
+  man-7: depth  7.62  feet 0.692 down  head 49.8 px  figure   365 px
+  head at  6.0 m:  63.2 px
+  head at  6.5 m:  58.4 px
+  head at 15.8 m:  24.0 px
+  head at 17.0 m:  22.3 px
+  head at 19.0 m:  20.0 px
+  distance where a head is 24 px: 15.8 m; nearest for a 1.75 m man to be 0.25 of height: 6.01 m
+
+[shot planner] reach, eye height, slide, plate
+  level lane, eye 1.7, feet on the road: d_max for 0.7 down = 7.30 m
+  W1 pavement eye over a man on the pavement: d_max for 0.7 down = 7.29 m
+  round 4 target 0.72: d_max for 0.72 down = 6.64 m
+  W3 eye needed for a tail 24.2 m away at 0.70 down: 5.77 m above lane (used 5.6)
+  slide magnification limit: 1.314; W1 10.0 -> 8.8 m = 1.14; notice corner 5.9 -> 4.4 = 1.34; checkout 3.1 -> 2.4 = 1.29; L_max at d_end 8.8 = 2.76 m
+  turn allowance plate 44 / film 40: 1.23 deg each side; tilt 2.0 deg
+  turn allowance plate 64.4 / film 60.4: 1.38 deg each side; tilt 2.0 deg
+  sideways slide limit for nearest surface 4 m: 0.107 m
+  one degree of turn moves things 0.0267 of the width
+  turn for meeting point 0.684 across: 6.87 deg (notice corner 6.87)
+  notice corner subject share: notice 1.18 x 0.83 m? use board scale 1.11; share formula A*(f/d)^2/(W*H)
+
+[chimney tops vs title band] down of each chimney top from W1 composed and W3
+  w1 no-1-chimney-top: across 0.444 down 0.020
+  w1 no-2-chimney-a-top: across 0.814 down 0.040
+  w1 no-2-chimney-b-top: across 0.897 down 0.110
+  w3 no-1-chimney-top: across 0.375 down 0.228
+  w3 no-2-chimney-a-top: across 0.625 down 0.241
+  w3 no-2-chimney-b-top: across 0.692 down 0.280
+
+[smoke] on-screen travel of No. 2 chimney a plume in W3 plate for two winds (round 5 heavy settings)
+  round 4 wind (0.3,-0.05,-0.95): travel while strength >= 0.1 is 0.044 of width; last visible across 0.670; centre down 0.238-0.271
+  round 5 wind (-0.85,-0.12,-0.5): travel while strength >= 0.1 is 0.188 of width; last visible across 0.432; centre down 0.238-0.265
+  perpendicular to a +y view in three.js axes: (+-1, 0, 0); round 5 chose (-0.85, -0.12, -0.5)
+
+[money]
+  people test at 4.8 c/MP: painting 44.5 c, behind 39.4 c, total 83.9 c (ledger: about 85 c)
+  style picture at full plate size instead of 1 MP would add 7.5 c at 2.4 c/MP (plan: about 7 c)
+  ElevenLabs: 6,300 characters x 0.000175 = US$1.10 (plan: about 1.10); 4,300 credits = US$0.75 (bill: about 0.75)
+  chapter 1 old prices: 47 pictures for 2.55 -> 5.4 c each
+
+[filming time]
+  pages 3-5: 2,283 frames x 1.4 s = 53 min (round 4: 53); x 1.83 = 70 min (round 3: 70)
+  chapter 1: 6,641 frames x 0.85 s = 94 min one worker (Workflows: about 95; log 13 measured about 80)
+  piece frames for 1.2 s/frame, 30 s load: 250 (loss at a stop <= 5.0 min)
+  piece frames for 0.85 s/frame, 3 s load: 60 (loss at a stop <= 0.8 min)
+  piece frames for 12 s/frame, 5 s load: 60 (loss at a stop <= 12.0 min)
+  piece frames for 1.4 s/frame, 45 s load: 322 (loss at a stop <= 7.5 min)
+  stretch frames under 6,600 s at 1.4 s/frame, 2 workers x 1.17: 5515
+
+[light]
+  lantern start watts = 200 x (0.15/1.1)^2 = 3.7 W (hand: 60 -> 1 W)
+  same light per area when a 20 deg 200 W cone widens to 50 deg: 1233 W (so 700 W at 50 deg was 0.6x too strong)
+  shadow resolution scale at 1536 wide: 0.703
+
+[sound]
+  sendable video kbps for 180 s: 1079; size 27.2 MB
+  sendable video kbps for 407 s: 406; size 27.2 MB

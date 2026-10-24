@@ -1,0 +1,1705 @@
+{
+ "objects": [
+  {
+   "name": "ground",
+   "role": "ground.earth",
+   "scatter": false,
+   "faces": 1,
+   "modifiers": [],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "moss_and_algae": 0.35,
+    "rubbish": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK ground.earth / packed_earth",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Rubbish",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK ground.earth / packed_earth",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_packed_earth_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 0.8,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "moss_and_algae": "PK moss_and_algae",
+      "rubbish": "PK rubbish"
+     }
+    }
+   ]
+  },
+  {
+   "name": "wall_north",
+   "role": "wall.plaster",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_plaster_lime_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.0,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "wall_south",
+   "role": "wall.plaster",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_plaster_lime_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.0,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "wall_east",
+   "role": "wall.plaster",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_plaster_lime_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.0,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "wall_west",
+   "role": "wall.plaster",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK wall.plaster / plaster_lime",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_plaster_lime_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.0,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "roof",
+   "role": "roof.shingle",
+   "scatter": false,
+   "faces": 5,
+   "modifiers": [
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK roof.shingle / shingle_wood",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK roof.shingle / shingle_wood",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_shingle_wood_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 0.9,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "door",
+   "role": "timber.door",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK timber.door / timber_planks",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK timber.door / timber_planks",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_timber_planks_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.5,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_1",
+   "role": "timber.floor",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_timber_planks_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.5,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_2",
+   "role": "timber.floor",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_timber_planks_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.5,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_3",
+   "role": "timber.floor",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_timber_planks_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.5,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "floor_plank_4",
+   "role": "timber.floor",
+   "scatter": false,
+   "faces": 6,
+   "modifiers": [
+    [
+     "BEVEL",
+     "PK Bevel"
+    ],
+    [
+     "WEIGHTED_NORMAL",
+     "PK Weighted Normal"
+    ],
+    [
+     "SUBSURF",
+     "PK Damage Cuts"
+    ],
+    [
+     "DISPLACE",
+     "PK Damage"
+    ]
+   ],
+   "amounts": {
+    "dirt": 0.5,
+    "grime": 0.45,
+    "weathering": 0.45,
+    "wetness": 0.0,
+    "cracks_and_chips": 0.4,
+    "edge_wear": 0.45,
+    "moss_and_algae": 0.35
+   },
+   "materials": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "normal_map_wired": true,
+     "normal_picture_colourspace": "Non-Color",
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": true,
+     "colour_varies": true,
+     "wear_groups": [
+      "PK Cracks And Chips",
+      "PK Dirt",
+      "PK Edge Wear",
+      "PK Grime",
+      "PK Moss And Algae",
+      "PK Weathering",
+      "PK Wetness"
+     ]
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK timber.floor / timber_planks",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": true,
+      "detail": {
+       "images": 1,
+       "image_names": [
+        "pk_timber_planks_nor"
+       ],
+       "space": "TANGENT",
+       "colourspace": "Non-Color",
+       "uv_map": "UVMap",
+       "reaches_normal": true,
+       "strength": 1.5,
+       "bump_leftover": 0.0,
+       "has_uv_node": true
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": true,
+     "colour_variation": true,
+     "layers": {
+      "dirt": "PK dirt",
+      "grime": "PK grime",
+      "weathering": "PK weathering",
+      "wetness": "PK wetness",
+      "cracks_and_chips": "PK cracks_and_chips",
+      "edge_wear": "PK edge_wear",
+      "moss_and_algae": "PK moss_and_algae"
+     }
+    }
+   ]
+  },
+  {
+   "name": "PK scatter leaf 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 117,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter pine_needles 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 148,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter stick 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 24,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter straw 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 38,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter dung_lump 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 21,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter tuft 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 753,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter clover 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 99,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter nettle 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 100,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter fern 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 110,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter bramble 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 88,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  },
+  {
+   "name": "PK scatter moss_cushion 0",
+   "role": "never.scatter",
+   "scatter": true,
+   "faces": 528,
+   "modifiers": [],
+   "amounts": {},
+   "materials": [
+    {
+     "name": "PK Scatter",
+     "normal_map_wired": false,
+     "normal_picture_colourspace": null,
+     "displacement_node": false,
+     "displacement_method": "BUMP",
+     "roughness_varies": false,
+     "colour_varies": false,
+     "wear_groups": []
+    }
+   ],
+   "inspected": [
+    {
+     "name": "PK Scatter",
+     "has_tree": true,
+     "principled": true,
+     "glows": false,
+     "normal_map": {
+      "has": false,
+      "detail": {
+       "images": 0,
+       "image_names": [],
+       "space": null,
+       "colourspace": null,
+       "uv_map": null,
+       "reaches_normal": false,
+       "strength": null,
+       "bump_leftover": 0.0,
+       "has_uv_node": false
+      }
+     },
+     "displacement": {
+      "has": false,
+      "detail": {
+       "node": null,
+       "method": "BUMP",
+       "depth_metres": 0.0,
+       "max_vertex_displacement": 0.0,
+       "mesh": null
+      }
+     },
+     "roughness_variation": false,
+     "colour_variation": true,
+     "layers": {}
+    }
+   ]
+  }
+ ],
+ "normal_images": [
+  {
+   "name": "pk_packed_earth_nor",
+   "colourspace": "Non-Color",
+   "size": [
+    1024,
+    1024
+   ],
+   "made_by_kit": true
+  },
+  {
+   "name": "pk_shingle_wood_nor",
+   "colourspace": "Non-Color",
+   "size": [
+    1024,
+    1024
+   ],
+   "made_by_kit": true
+  },
+  {
+   "name": "pk_timber_planks_nor",
+   "colourspace": "Non-Color",
+   "size": [
+    1024,
+    1024
+   ],
+   "made_by_kit": true
+  },
+  {
+   "name": "pk_plaster_lime_nor",
+   "colourspace": "Non-Color",
+   "size": [
+    1024,
+    1024
+   ],
+   "made_by_kit": true
+  }
+ ],
+ "fake_users": [
+  "door_mat",
+  "floor_mat",
+  "ground_mat",
+  "roof_mat",
+  "wall_mat"
+ ],
+ "scatter_objects": 11
+}

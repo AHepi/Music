@@ -1,0 +1,517 @@
+{
+ "stage": "shots",
+ "stage_means": "before building or drawing a place's views",
+ "verdict": "fail",
+ "counts": {
+  "fail": 1,
+  "warn": 5,
+  "known": 0,
+  "info": 19,
+  "pass": 26
+ },
+ "guarded_step": "building and rendering the place's views and plates",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.3,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:24:01",
+ "first_lines": [
+  "Preflight shots (before building or drawing a place's views): FAIL. 1 to fix, 5 to look at, 0 known and accepted, 0 input(s) missing; 5 check(s) in 0.3 s.",
+  "Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json": "c99326bb83ab803c642182482599bd659f97f607",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-shot-check.json": "f110f9c47370be780852557a2371fc34f090a19a",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/checkout-c1-shots.json": "46292fba78cc7065c8941b40dad1e97d0fabc064"
+ },
+ "missing": [],
+ "checks": [
+  {
+   "title": "place facts are complete (place_facts.py check)",
+   "tool": "calculators/place_facts.py",
+   "version": "bd240e22",
+   "where": "checkout",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/01-place-facts-are-complete-place-facts-py-check.txt",
+   "seconds": 0.05,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "camera, reach, slide and people (plan_shot.py)",
+   "tool": "calculators/plan_shot.py",
+   "version": "6a7fabb5",
+   "where": "checkout",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --shots /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/checkout-c1-shots.json --strict --shot c1 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/02-camera-reach-slide-and-people-plan-shot-py.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/02-camera-reach-slide-and-people-plan-shot-py.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/02-camera-reach-slide-and-people-plan-shot-py.txt",
+   "seconds": 0.09,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "rule2_eye_height",
+     "where": "c1",
+     "text": "The eye stands 1.60 m above the view's floor (height 0.00 m) (allowed 1.5 to 1.7 m for interior).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule2_level",
+     "where": "c1",
+     "text": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule1_meeting_point_gap",
+     "where": "c1",
+     "text": "The lines meet 0.500 across, 0.500 down; the nearest edge of bill stand is 0.009 of the width away (10 px across, 0 px down, inside its outline); bill stand's outline (an upright box); limit 0.03.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule7_story_reaches_down",
+     "where": "c1",
+     "text": "The lowest story thing is basket, reaching 0.777 down (limit 0.7).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "c1",
+     "text": "bill (to read) ends 0.816 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "c1",
+     "text": "bread label (to read) ends 0.576 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "c1",
+     "text": "milk label (to read) ends 0.680 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "c1",
+     "text": "butter label (to read) ends 0.600 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "c1",
+     "text": "cheese label (to read) ends 0.700 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "c1",
+     "text": "checkout sign (to read) ends 0.806 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_must_read_right_edge",
+     "where": "c1",
+     "text": "petrol fascia (to read) ends 0.508 across (limit 0.9).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_story_right_edge",
+     "where": "c1",
+     "text": "Story things in the button strip (0.45 to 0.95 down) end at: basket 0.86, divider 0.79 across (limit 0.95).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_box",
+     "where": "c1",
+     "text": "The story things fill a box 0.40 wide and 0.35 tall (limit 0.4 x 0.5 for still_life); edges: basket (left), basket (right), bill (top), basket (bottom).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_together_metres",
+     "where": "c1",
+     "text": "The story things stand together in the street: the loneliest, basket, is 0.00 m from divider (limit 0.3 m between footprints).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "main_rule_spot_box",
+     "where": "c1",
+     "text": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of bill 0.66, 0.53; middle of the story things 0.66, 0.62) span 0.16 x 0.12 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "subject_frame_share",
+     "where": "c1",
+     "text": "bill fills about 6.5% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_band",
+     "where": "c1",
+     "text": "till's middle is 0.61 down (the middle band is 0.45 to 0.62).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_work_prop_share",
+     "where": "c1",
+     "text": "till covers at most 0.9% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_work_prop_band",
+     "where": "c1",
+     "text": "bag rack's middle is 0.75 down (the middle band is 0.45 to 0.62).",
+     "fix": "Move bag rack into the middle band, unless only a part of it shows (the checker takes the middle of what shows).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_work_prop_share",
+     "where": "c1",
+     "text": "bag rack covers at most 3.3% of the frame (its box; limit 2%).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "rule8_work_prop_band",
+     "where": "c1",
+     "text": "crates does not show.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_bottom_left_share",
+     "where": "c1",
+     "text": "In the bottom-left quarter, where the eye enters, the boxes cover: basket 0.7%, divider 0.1%, till 0.9%, bill stand 0.2% (limit 1% a thing; a box covers more than the thing in it, so these are upper bounds).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "c1",
+     "text": "bill's lettered face points 5.9 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "c1",
+     "text": "bread label's lettered face points 1.4 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "c1",
+     "text": "milk label's lettered face points 5.5 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "c1",
+     "text": "butter label's lettered face points 2.5 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "c1",
+     "text": "cheese label's lettered face points 6.2 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "c1",
+     "text": "checkout sign's lettered face points 4.9 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "sign_facing",
+     "where": "c1",
+     "text": "petrol fascia's lettered face points 7.9 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "slide_magnification",
+     "where": "c1",
+     "text": "The 0.70 m slide brings the nearest painted thing, basket (its nearest corner 2.21 m away at the end), 1.317 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 0.63 m.",
+     "fix": "Shorten the slide to 0.63 m, or move basket back 0.05 m.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "slide_magnification_ground",
+     "where": "c1",
+     "text": "The painted ground at the frame's bottom edge (2.75 m away) comes 1.255 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_lens",
+     "where": "c1",
+     "text": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "plate_rows",
+     "where": "c1",
+     "text": "For the slide's worst magnification the plate would need 2736 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "letters, loud signs, heads and landmarks (view_audit.py)",
+   "tool": "calculators/view_audit.py",
+   "version": "79e3d2f9",
+   "where": "checkout",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/03-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/03-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/03-letters-loud-signs-heads-and-landmarks-view-audi.txt",
+   "seconds": 0.06,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "{\"across\": 0.6578, \"down\": 0.5286, \"depth\": 3.0, \"in_front\": true, \"in_frame\": true, \"distance\": 3.0176, \"facing\": 0.9942, \"across_facing\": 0.9947, \"back_shows\": false, \"letter_pixels\": null, \"letter_width_pixels\": null, \"face_on_pixels\": null, \"needed_by_page\": true, \"verdict\": \"letter height not k",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "{\"across\": 0.5386, \"down\": 0.6422, \"depth\": 2.411, \"in_front\": true, \"in_frame\": true, \"distance\": 2.4446, \"facing\": 0.9863, \"across_facing\": 0.9997, \"back_shows\": false, \"letter_pixels\": null, \"letter_width_pixels\": null, \"face_on_pixels\": null, \"needed_by_page\": true, \"verdict\": \"letter height not",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "{\"across\": 0.647, \"down\": 0.6452, \"depth\": 2.431, \"in_front\": true, \"in_frame\": true, \"distance\": 2.4766, \"facing\": 0.9816, \"across_facing\": 0.9954, \"back_shows\": false, \"letter_pixels\": null, \"letter_width_pixels\": null, \"face_on_pixels\": null, \"needed_by_page\": true, \"verdict\": \"letter height not",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "{\"across\": 0.5665, \"down\": 0.6812, \"depth\": 2.295, \"in_front\": true, \"in_frame\": true, \"distance\": 2.3476, \"facing\": 0.9776, \"across_facing\": 0.9991, \"back_shows\": false, \"letter_pixels\": null, \"letter_width_pixels\": null, \"face_on_pixels\": null, \"needed_by_page\": true, \"verdict\": \"letter height not",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "{\"across\": 0.6655, \"down\": 0.6832, \"depth\": 2.279, \"in_front\": true, \"in_frame\": true, \"distance\": 2.3433, \"facing\": 0.9726, \"across_facing\": 0.9942, \"back_shows\": false, \"letter_pixels\": null, \"letter_width_pixels\": null, \"face_on_pixels\": null, \"needed_by_page\": true, \"verdict\": \"letter height not",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "{\"across\": 0.6305, \"down\": 0.2995, \"depth\": 4.8, \"in_front\": true, \"in_frame\": true, \"distance\": 4.946, \"facing\": 0.9705, \"across_facing\": 0.9964, \"back_shows\": false, \"letter_pixels\": null, \"letter_width_pixels\": null, \"face_on_pixels\": null, \"needed_by_page\": true, \"verdict\": \"letter height not kn",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "{\"across\": 0.2888, \"down\": 0.4097, \"depth\": 31.388, \"in_front\": true, \"in_frame\": true, \"distance\": 31.858, \"facing\": 0.9852, \"across_facing\": 0.9906, \"back_shows\": false, \"letter_pixels\": null, \"letter_width_pixels\": null, \"face_on_pixels\": null, \"needed_by_page\": true, \"verdict\": \"letter height no",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "bill in c1 (composed spot): its letter height is not in the place facts; not judged.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "bread label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "milk label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "butter label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "cheese label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "checkout sign in c1 (composed spot): its letter height is not in the place facts; not judged.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "petrol fascia in c1 (composed spot): its letter height is not in the place facts; not judged.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "checkout",
+     "text": "Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says).",
+     "fix": "",
+     "tool": "view_audit.py"
+    }
+   ],
+   "verdict": "pass"
+  },
+  {
+   "title": "lights for c1 (plan_lights.py plan)",
+   "tool": "calculators/plan_lights.py",
+   "version": "4836ed1f",
+   "where": "checkout c1",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json --view c1 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/04-lights-for-c1-plan-lights-py-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/04-lights-for-c1-plan-lights-py-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401/04-lights-for-c1-plan-lights-py-plan.txt",
+   "seconds": 0.11,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "checkout c1",
+     "text": "bounce-to-ceiling: lights basket (its housing; lesson 120, log 32): skip them",
+     "fix": "",
+     "tool": "plan_lights.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "",
+     "where": "checkout c1",
+     "text": "the subject gets 62 times its key light (at most 3.0), mostly from bill-warm-bounce: its colour will burn out (rule 5); turn that light down or move it away",
+     "fix": "",
+     "tool": "plan_lights.py"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "each view's check file carries its kinds, figures and accepted list",
+   "tool": "preflight.py",
+   "version": "d836d994",
+   "where": "checkout",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "kind_of_shot",
+     "where": "checkout c1",
+     "text": "checkout-c1-shot-check.json names no \"kind_of_shot\": the shot checker judges it as a still life (the place facts say interior)",
+     "fix": "add \"kind_of_shot\": [...] (still_life, crowd, overview, interior, dark_subject)",
+     "tool": "preflight.py"
+    }
+   ],
+   "verdict": "warn"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots-c/preflight-shots-2026-10-16-112401.md"
+}

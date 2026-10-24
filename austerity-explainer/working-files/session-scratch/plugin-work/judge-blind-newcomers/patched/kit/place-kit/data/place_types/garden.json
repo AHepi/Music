@@ -1,0 +1,55 @@
+{
+ "about": "Starting preset for a garden or park. Data only: code never names a place type. new-settings copies the allowed_off entries that fit into the settings as \"off\" entries.",
+ "id": "garden",
+ "default_look": "lived_in",
+ "default_state": "damp",
+ "roles_likely": [
+  "ground.grass",
+  "ground.gravel",
+  "stone.rock",
+  "tree.bark",
+  "plant.foliage",
+  "water.still",
+  "timber.post",
+  "timber.plank"
+ ],
+ "require_more": {
+  "ground": [
+   "moss_and_algae"
+  ],
+  "stone": [
+   "moss_and_algae"
+  ]
+ },
+ "allowed_off": [
+  {
+   "id": "floors_indoors",
+   "treatments": [
+    "moss_and_algae",
+    "weathering",
+    "wetness",
+    "plants",
+    "litter_pieces"
+   ],
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows"
+  }
+ ],
+ "footfall_shapes": [
+  {
+   "shape": "polyline",
+   "note": "the path people walk"
+  }
+ ],
+ "plan_mask_cell_metres": 0.1,
+ "facts": [
+  "fence_height",
+  "plank_width",
+  "post_size"
+ ],
+ "notes": "moss, leaves, stones, a path, water",
+ "kind": "invented",
+ "source": "the plugin 1.4.0 design: a first try, judge by looking"
+}

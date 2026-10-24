@@ -1,0 +1,217 @@
+##### summary
+I built the page timing tools. All three run, and their tests pass: 80 checks in my 3 test files. The whole calculators suite also passes (17 of 17 files). I changed nothing in the film kit, spent nothing and did not commit.
+
+What I built:
+1. page_events.mjs runs a cinema chapter in the stage without filming it. Every 30th of a second it writes down what the pages do:
+   - every word lookup, with every time that word is said on the page;
+   - each shot, slide and join;
+   - every flat graphic (words, labels, cards, rings, tags, arrows), with its box in pixels and how visible it is;
+   - the held-shot value and the live effects.
+   To make this possible I added notes to the plugin's graphics.js and cinema-kit.js. The notes only work when the tool switches them on, and filming never does. Each fade-in number now has a name, and graphics.js exports the table as APPEAR_DELAYS (same values).
+   - Proof that normal drawing is unchanged: 5 stills of the test chapter came out byte-for-byte the same three ways: with the notes on, with them off, and with the film kit's original files.
+   - Control: changing one fade by 0.01 s changes 33,822 pixels by up to 13 levels, so the comparison can see a change.
+   - Running time: pages 3 to 5 of chapter 2 take about 2.5 minutes and needed about 2 GB at peak; old chapter 2 takes 12 seconds.
+2. plan_page_timing.py works out the timing from those events:
+   - lookups that don't say which time a repeated word is meant;
+   - the pause after each page, following the skeptic's rule;
+   - reading times, using each kind's appear delay read from graphics.js;
+   - conclusions, words fading a frame before a cut, and a new line drawn over a fading one;
+   - margins, typed words against the narration, numbers against a ledger, and counts that land on their word and hold;
+   - word groups per page, slides tied to words, and stretches where nothing changes;
+   - the list of stills to check (as one render command) and the planned cuts for find_jumps.py.
+   It can also read lookups straight from page files (no browser), and list which filmed chunks to redo after a re-record.
+3. check_page_layout.mjs is the slim pose sampler. It finds:
+   - pops and one-frame jumps outside planned cuts;
+   - effects that depend on what was drawn before (lesson 29), or are shared between pages;
+   - held-shot keys while the camera moves, and holds with no held-shot key;
+   - things drawn in the same place at each event.
+4. A small made-up test chapter (page-events-test.js). It has a clean version and one with 15 planted faults copied from the project's own findings.
+
+What it found:
+- Chapter 2 for newcomers, pages 3 to 5:
+  - 8 lookups (workers, machines, In, More, spare, More, prices, up) don't say which time they mean. Each happens to take the right one.
+  - MACHINES is readable for only 0.84 s. Starting it on "and" would give 1.05 s.
+  - The timeline's pause after page 5 is 3.5 s; the join needs 3.0 s.
+  - Round 4 said every line ends by 0.86 across. In fact WHAT HAPPENS TO PRICES? reaches 0.897 (0.895 measured on the film), still inside the 0.90 limit.
+  - The layout check finds nothing to fix, which agrees with round 4's film.
+- Old chapter 2 (shipped in log 20): 83 things to fix under the newer rules, most of them reading times under 1 s and ambiguous lookups. I confirmed one by eye on a rendered frame: on page 8 the PRICES UP label covers the F of FLAT OUT.
+  - Not a fault: the tool once said BARELY MOVE jumped 585 px in one frame. The render showed nothing, because the words hadn't appeared yet, so I changed the check to judge only what shows.
+##### files
+[
+"/home/user/Music/plugins/explainer-film/kit/paper-film/tools/page_events.mjs",
+"/home/user/Music/plugins/explainer-film/kit/paper-film/tools/check_page_layout.mjs",
+"/home/user/Music/plugins/explainer-film/kit/calculators/plan_page_timing.py",
+"/home/user/Music/plugins/explainer-film/kit/paper-film/scenes/graphics.js",
+"/home/user/Music/plugins/explainer-film/kit/paper-film/scenes/cinema-kit.js",
+"/home/user/Music/plugins/explainer-film/kit/paper-film/scenes/page-events-test.js",
+"/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+"/home/user/Music/plugins/explainer-film/kit/calculators/README.md",
+"/home/user/Music/plugins/explainer-film/kit/kit-sync-notes.md",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_plan_page_timing.py",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_check_page_layout.py",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_page_events.py",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/sources.json",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-old-chapter-2.json.gz",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-old-ch2-page10-before-critique.json.gz",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-test-clean.json.gz",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-test-faults.json.gz",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/page-events-test-timeline.json",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/page-events-test-ledger.json",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/old-chapter-2-ledger.json",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/round4-film-jumps.txt",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/round4-moments.json",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/round4-words-check.txt",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/round4-film-text-edges.json",
+"/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/timeline-estimated.json.gz",
+"/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/page-timing/before/graphics.js",
+"/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/page-timing/before/cinema-kit.js",
+"/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/page-timing/watchdog.sh",
+"/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/page-timing/settings/page_timing_section.json"
+]
+##### tests
+All pass. Run with python3 kit/calculators/tests/run_all.py: 17 of 17 test files passed, mine included.
+
+1. test_plan_page_timing.py: 57 of 57. No browser needed.
+- Appear delays read from graphics.js: buildWords 0.14, a label 0.55, a label with wordsWithLine 0.12. They equal what the running page reported. This proves the Python reading and the code agree.
+- MACHINES (page 3) fails the 1 s reading time:
+  - 0.84 s by the sum and 0.83 s counted frame by frame (round 5 recorded "about 0.85").
+  - With the old 0.55 s wait it would be 0.40 s. Round 4's critic measured about 0.4 on the film (words in at 54.60, full at 54.70, cut at 55.10), so this checks graphics.js against a film measurement, not against itself.
+  - The fix it offers is to start on "and" (53.93 s), which gives 1.05 s.
+- → PRICES UP:
+  - On "prices" it passes: 1.05 s at full strength (the skeptic's corrected number) and up 1.19 s before the cut (round 3: about 1.2).
+  - Moved back to round 3's word "up", it fails: 0.53 s readable (skeptic 0.53) and up 0.68 s before the cut (round 3 recorded about 0.65, the design 0.67; the cut counts from its first frame).
+  - The 1.2 s limit was set from these two cases, so this check partly repeats them.
+- Lookups:
+  - Pages 3 and 5 have 8 lookups that don't say which time. Reading the page files without a browser gives the same 8.
+  - Old chapter 2 on Malina's real recording: with lesson 28's fix taken out, "war" is caught (said 3 times). With lesson 46's fix taken out, "machines" is caught.
+- Pauses:
+  - After page 3: 1.30 s. This only repeats the sum; the timeline has 1.5.
+  - After page 4: 4.0 s, equal to the timeline's 4.0.
+  - After page 5: 3.0 s; the timeline has 3.5, reported as 0.5 s longer than needed.
+  - Neither of the last two is cut to 1.7. The page 4 into 5 run-on passes.
+- Fades at cuts: all 10 lines that end on the two cuts are whole until the cut. Changing one back to round 3's 0.3 s fade makes it fail; that only shows the rule reads the fade setting.
+- Margins:
+  - Highest letters 0.0604 down (round 4: 0.061).
+  - Longest line 0.897 across (round 4 film still: 0.895).
+  - Six typed lines' font-measured boxes against round 4's filmed stills: largest difference 3.4 px. This is a hold-out: the stills were drawn by the film tool, not by this sum.
+- Typed words: 29 new lines plus 2 carried over from page 4, 0 unsaid, no digits. This matches round 4's word check.
+- Numbers on old chapter 2:
+  - All 25 numbers match a ledger I built from the fact recheck. That only repeats the check, since the ledger came from the same source.
+  - Undoing decision 21 (+25% without UP TO) fails.
+  - Page 10 as committed in da5e861 (before the critique) fails: 5.6% held still 0.01 s (lesson 53). After the fix it passes, held 1.35 s. This uses the real files and recording.
+- Word groups per page: 8 of 8, 5 of 5, 7 of 7. Slides: 3.07 s and 2.89 s, both on words.
+- Still list: 69 stills cover 53 of the round 4 helpers' 56 hand-picked event moments, within 0.35 s. This is a hold-out; the 90% pass mark is judged. The three missed were free picks such as "smoke after start".
+- Planned cuts: all 6 jumps find_jumps.py measured on the round 4 film are in the list. This is a hold-out (film pixels against page code). The first piece's cut lands at 7.733 s (recorded 7.73).
+- Re-filming: page 4 made 0.5 s longer gives 8 of 10 chunks to redo; with the pauses absorbing the change, 5. This is a self-consistency check only, with no recorded case.
+- Test chapter: the clean version has nothing to fix; all 9 timing plants are caught (these are plants, not recorded cases).
+- Command line:
+  - With MACHINES and the lookups accepted, it exits 0; without the accepted list it exits 1.
+  - The report names the settings it used, and the still times are space-separated.
+
+2. test_check_page_layout.py: 10 of 10. Needs node, not a browser.
+- The clean test chapter has nothing to fix.
+- The faults version catches all 6 planted faults, and nothing else fails:
+  - a spark left on (lesson 29);
+  - a held-shot key during a slide;
+  - NO SPARE over the fading question (round 3);
+  - a one-frame arrow and a jumping tag (log 27);
+  - a hold with no held-shot key.
+- Pages 3 to 5 have nothing to fix. This agrees with round 4's film ("the only jumps are the planned ones", "NO SPARE never overlaps"), found from page code alone.
+- Old chapter 2 page 8: PRICES UP drawn over FLAT OUT. I confirmed this by eye on one rendered frame; the test itself cannot confirm it.
+- Old chapter 2 has 44 holds without a held-shot key, as expected: it was made before held shots existed.
+
+3. test_page_events.py: 13 of 13. Needs a browser; it skips itself if node_modules or Chromium is missing.
+- 5 stills are byte-identical with the notes on and off, and also with the film kit's original graphics.js and cinema-kit.js (that file lacks setFading, which the scene never calls).
+- The control with one fade made 0.01 s longer differs.
+- The events it writes reproduce the stored fixtures exactly.
+- The appear delays reported by the running page equal the ones read from graphics.js.
+- The clean chapter comes out the same drawn out of order; the faults chapter does not.
+- --help works.
+##### settings_added
+A new section, page_timing, added to /home/user/Music/plugins/explainer-film/kit/film-settings.json in one edit made right after re-reading the file. The file now has 404 entries and settings.py check reports 0 problems.
+
+Main entries:
+- settle_after_join_seconds 0.15 (judged, skeptic)
+- join_clear_of_next_word_seconds 0.1 (judged, design)
+- pause_longer_than_needed_seconds 0.3 (invented)
+- conclusion_on_screen_seconds 1.2 (judged, round 3; counted from when it starts to appear)
+- typed_word_window_seconds 6.0 (judged; the design's 3 s would fail round 4's accepted line)
+- overlap_opacity_min 0.1 (judged)
+- overlap_pixels_min 2 (invented)
+- number_hold_seconds [0.5, 0.15] (judged)
+- count_end_after_word_max_seconds 0.1 (judged)
+- still_after_event_seconds 0.25 (judged)
+- page_turn_stills_after_last_word_seconds [0.3, 0.7, 1.2] (judged)
+- merge_stills_within_seconds 0.1 (invented)
+
+Group page_timing.layout:
+- pop_frames_max 2 (judged)
+- pop_strength_change 0.8 (invented)
+- hold_without_still_key_frames 15 (invented)
+- camera_still_tolerance 0.0001 (invented)
+- jump_pixels_min 40 (invented)
+
+The tools also read existing entries from timing, safe_area and camera, and change none of them. Two things about existing text:
+- timing.conclusion_full_strength_seconds says "full strength", but the accepted round 3 fix is only 1.05 s at full strength. The 1.2 s counts from when the words start to appear, so I added my own key with that meaning.
+- The inventory's hold rule, 0.5 s + 0.15 s per character, gives 1.1 s for 5.6%, but its own example says "about 1.5 s". My source text quotes the inventory as it stands.
+##### api
+Events:
+- Command: node paper-film/tools/page_events.mjs SCENE OUT.json
+- Options:
+  - --pages 3,4,5
+  - --from S / --to S
+  - --step N
+  - --order-check N (default 15; 0 turns it off)
+  - --query a=b
+  - --kit DIR
+  - --serve /URL=DIR (repeatable; for assets or node_modules kept elsewhere)
+  - --render-stills DIR T1 T2 ... (draws stills with the notes switched on)
+  - --help
+- Works on cinema chapters only. Run from the plugin with a symlinked kit, it needs node --preserve-symlinks --preserve-symlinks-main. PAPER_FILM_PLAYWRIGHT can point at playwright-core.
+- Output JSON:
+  - fps, frame_zero_seconds, frame_size, appear_delays, text_left, text_right
+  - pages: number, words, first and last word, join, camera_plans
+  - lookups: page, which, word, n, start, said[], asked_from
+  - frames: f, t, and per page: shot, page_still, camera [x,y,z,qx,qy,qz,qw,fov], effects_shown, effects_key; plus join
+  - items: id, kind, fn, text, at, until, fadeOut, fullAt, group or within, runs, and track [[frame, opacity, box, words_opacity, drawn, counter_text]]
+  - effects (runs per live thing), live_things, shared_live_things, order_differences
+
+Notes in the page code:
+- graphics.js calls globalThis.pageEvents.note({kind, fn, text, at, until, fadeOut, fullAt, opacity, box, ...}) only when globalThis.pageEvents?.on === true.
+- graphics.js exports APPEAR_DELAYS (buildWords 0.14, callout 0.55, calloutWordsWithLine 0.12, hook, counter, credit, placeTitle, ruleCard, guessRing, nameTag, priceArrowWord, dotPanel, lineChart, bars).
+- cinema-kit.js wordClock calls globalThis.pageEvents.lookup({...}) only when the notes are on.
+
+Timing (exits 1 if anything fails):
+- python3 calculators/plan_page_timing.py check EVENTS.json[.gz] [--ledger L.json] [--accepted A.json] [--film-start S] [--conclusion TEXT] [--scene NAME]
+  - Output: verdicts, problems (check, verdict, page, text, detail, fix, numbers), typed_lines, typed_digits.
+  - pauses: per-gap rows, assemble_option ('--pauses ...') and estimate_options ('--default-pause X --pause-after N=S ...').
+  - stills: times with reasons, and a render-paper-film.mjs command.
+  - planned_cuts: in chapter and film seconds, plus a find_jumps.py command. Also camera_audit_windows and appear_delays.
+- lookups TIMELINE PAGE.js:N ... reads lookups from page files with no browser.
+- refilm OLD NEW --chunks FOLDER_OR_LIST [--fps 30] gives moved pages and chunks to redo or keep.
+- delays [--graphics FILE] prints the appear delays.
+- Every command takes --json, --out, --report and --settings.
+- Python functions: Events(data), read_appear_delays(path), check_lookups, lookups_from_page_files, check_pauses, check_readable, check_fades_at_cuts, check_same_place, check_margins, check_typed_words, check_numbers, check_word_groups, check_slides, check_frozen, still_list, planned_cuts, run_refilm, load_json (.gz too).
+- Ledger format: {numbers:[{id, value, unit (% $ x count year), qualifier, said, source}], not_claims:[...]}.
+- Accepted list: [{check, page, text, reason, who, date}]; a match is reported as known.
+
+Layout (exits 1 if anything fails):
+- node paper-film/tools/check_page_layout.mjs EVENTS.json[.gz] [--pages] [--json] [--out] [--report] [--settings]
+- It also exports checkPageLayout(events, settings, pages).
+
+For a preflight runner: run page_events, then the two checks on its output. The exit codes and the JSON verdicts can be used directly.
+##### not_done_or_unsure
+- Not built, from the design: the page skeleton from shots.json; "the picture must not contradict the card"; phone-size copies and contact sheets (only the still list and the render command); the 3D clearance and overlap checks of the pose sampler (the events hold no 3D boxes); the paper-look pose checks (the skeptic dropped them).
+- Not tested: chapter 1's hand pauses (the skeptic says the cinema formula can't reproduce them); lesson 16's typing pause.
+- Pages 3 to 5 alone have one word group every 3.4 s, against plan 34's chapter-wide one every 6 s. Shown as information.
+- What the tools can't see: effects not marked with kit.moving, and numbers drawn on 3D models (old page 7's split-flap counter). The "frozen" check therefore only says "look" on pages without held shots.
+- Pauses for pages not looked at come from their files' joins only. For the chapter 2 stand-in pages that gives 0.95 s dissolves, so don't take the --pauses line for the whole chapter until those pages are built.
+- Three different default pauses now exist for a plain peel: the formula gives 1.3 s, the table 1.4 s, estimate_timeline.py 1.5 s. A person should pick one.
+- Old chapter 2 findings, made under rules written for the newcomer chapter: 32 reading times under 1 s, 27 ambiguous lookups, 6 margin faults, 2 fades at cuts, 6 pages over the word-group limit, 8 unsaid typed words, and a rising 2.75% rate readout held only 0.15 s at the end. Only the page 8 overlap was confirmed by eye.
+- The ambiguous-lookup rule fails 8 lookups on pages 3 and 5 that happen to be right. Each fix is just adding the 1, which I did not do.
+- Fixture timing: the pages 3 to 5 events were made at 09:00 from Works files round 5 was still changing (works-shot.json, cameras). Labels may move if those change.
+- I wrote the ledger for old chapter 2 from the fact recheck myself; the ids are mine. Some qualifier choices are judgements: I did not require "about" for 20,000 or +30%, because the checkers didn't.
+- Memory: a heavy page set uses about 2 GB, even without drawing. I ran with a watchdog that would stop my process below 1.5 GB free; the lowest seen was 1.9 GB, with other helpers' Blender and filming running.
+- I deleted my frame dumps; 5.5 GB of disk is free. Scratch has before-copies of graphics.js and cinema-kit.js, link-only test kits, and the events files.
+- Not committed.

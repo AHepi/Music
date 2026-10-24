@@ -1,0 +1,43 @@
+# What this is: the main painting prompt that paint_request.py fills for the painter (Flux 3 edit on fal). Lines that
+# start with # are notes and are dropped. The first block is the prompt, one part per line, in order; a part whose
+# {slot} comes out empty is dropped, and the lines are joined with spaces. The second block ([sentences]) holds the
+# frames the tool puts its computed lists in. The fixed words are word for word what the notice corner (log 32) and
+# the people test (log 34) sent: the style header made the painter paint instead of returning a near-photograph
+# (lesson 97). Change the words here, not in the code.
+Repaint image 1 completely as a hand-painted illustration in the exact painting style of image 2: the same visible brush strokes, dark ink outlines, simplified painterly textures on brick, stone, slate and wood, and matte painted finish. Nothing should look like a 3D render or a photograph any more.
+{place_sentence}
+Keep image 1's camera, framing, perspective and every shape, outline, size and position exactly as they are, and keep its pattern of light and dark; change only the brushwork and the colour handling.
+{people}
+{keep}
+{notes}
+{lamps}
+{colour}
+{warm}
+{brightest}
+{thin}
+{edges}
+{never_add}
+[sentences]
+keep = Keep: {items}.
+far_group = far up on the {side} {items}
+warm = Warm light stays only where it already is: {places}.
+brightest = Nothing is brighter than the {subject}.
+thin = Thin parts ({items}) stay thin and exactly in place, or are left out; never thicken them.
+edges = Where two things meet or nearly meet, keep each edge exactly where it is and never join them: {pairs}.
+never_add = Never add: {items}.
+never_flames = flames, sparks, smoke or steam anywhere{note}
+never_glows = glows, halos or light rays round any light{note}
+never_people = people, animals or birds
+never_animals = animals or birds
+never_props = extra props{note}
+never_rest = puddles or reflections; a moon, stars or bright clouds; new signs or lettering; new or longer shadows
+people_intro = The people: keep every figure exactly where and as it is, with the same number, size, pose and outline, painted in the same simple way as everything else: {dress}.
+people_near = Near the {subject} there are {count} {noun}: {breakdown}.
+people_far = Far up the street there are {count} very small dark figures {doing}; they are flat dark shapes with no pale spots.
+facing_words = {count} on the {side} facing us, whose face is lost in deep shadow under the peak of his cap, with no lit cheek
+behind_words = {count} seen from behind
+side_words = {count} seen from the side
+no_faces = No faces anywhere: where a face would be there is only dark shadow under the cap, with no eyes, nose, mouth, beard or skin detail; hands are simple dark shapes.
+keep_dark = Keep the figures as dark as they are in image 1.
+count_kept = Add no people and remove none; add no details to them; they must not look like photographs, statues, shop dummies or toys.
+lettering = {item} with plain marks, no readable letters

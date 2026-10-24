@@ -1,0 +1,36 @@
+Preflight paint (after a painting arrives): FAIL. 2 to fix, 2 to look at, 0 known and accepted, 0 input(s) missing; 1 check(s) in 14.3 s.
+Next step BLOCKED: using this painting (cutting it, state pictures, filming it); a failed painting needs a free fix or a paid re-ask. First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-16 11:33:28 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/paint/preflight-paint-2026-10-16-113328.
+
+## To fix (these block the next step)
+
+- figures kept their outlines [people test]: walker 4 0.63 against its plate baseline 0.99, walker 5 0.77 against its plate baseline 0.85: the painter moved, reshaped, lost or added to them (pass: within 0.05 of the baseline). (after_painting.py)
+  Fix: Look at the named figures at full size; a large drop is a lost or added part (people test: walker 4 painted whole, walker 5's bag lost).
+- figures as dark as in the plate [people test]: 8 figure(s) painted much paler against their surround: man stooped 0.13 to 0.51, man arms folded 0.16 to 0.47, man facing 0.15 to 0.47, walker 1 0.24 to 0.62, walker 2 0.17 to 0.58, walker 3 0.20 to 0.59, walker 4 0.45 to 0.74, walker 5 0.28 to 0.66 (limit 0.35, or 1.5 times the plate). On a phone they turn mid-grey and blend into the road (people test). (after_painting.py)
+  Fix: Darken the figures inside their outlines back toward the plate's ratio (free), or re-ask with "Keep the figures as dark as they are in image 1" (a paid re-ask needs the user's yes).
+
+## To look at (they do not block; a person decides)
+
+- no skin added on heads [people test]: skin-coloured pixels added on 5 head(s): man stooped 168 to 353, man arms folded 137 to 243, man hand on bar 0 to 165, man leaning 16 to 149, man facing 143 to 779 (a face, an ear or a lit cheek the prompt asked against). Look at them at phone size. (after_painting.py)
+  Fix: If it shows on a phone, paint the patch over with the cap's shadow colour (free).
+- style against the standard painting [people test]: Differs from the standard painting: warm light on 10.0% of the ground against 19.7%. A warning, not a failure: look at it beside the standard. (after_painting.py)
+
+## Notes
+
+- The lined-up painting (PNG) is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/paint/preflight-paint-2026-10-16-113328/painting-people-test: use that file, not the one the painter returned.
+
+## Checks run
+
+- FAIL  the painting as it arrived (after_painting.py check) [people test]: 2 fail, 2 look, 0 known, 4 pass, 0 info; exit 1, 14.2 s; calculators/after_painting.py version 37572f6a
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/after_painting.py check --painting /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/downloads/painted-1.png --plate /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg --check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-paint-check.json --facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/plate-facts --out-folder /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/paint/preflight-paint-2026-10-16-113328/painting-people-test --helper-plate /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/paint/preflight-paint-2026-10-16-113328/01-the-painting-as-it-arrived-after-painting-py-che.json
+
+## Inputs (sha1 when the run ended)
+
+- a79f81e49c3dccbe0eb6854cbf1838f245b5e40e  /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg
+- 4b7693247f825d779a165259e2457c97019d8ae0  /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg
+- 6bef7584707c4b83a90a09e36a3be7e942fbab72  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-paint-check.json
+- 079a32e9087fbd86c3d2532f4c9b2568791b219a  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/downloads/painted-1.png
+- 8ccc610588650dc9b9917badcb80aee729c4a300  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/plate-facts
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/paint/preflight-paint-2026-10-16-113328.json

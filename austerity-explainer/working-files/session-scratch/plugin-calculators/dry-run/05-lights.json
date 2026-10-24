@@ -1,0 +1,264 @@
+{
+ "place": "corner-shop",
+ "view": "counter",
+ "subject": "till display",
+ "dark_subject": false,
+ "lights": [
+  {
+   "light": "ceiling tube",
+   "kind": "AREA",
+   "watts": 60.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "tobacco sign glow",
+   "kind": "AREA",
+   "watts": 5.0,
+   "role": "lamp",
+   "role_because": "0.04 m from tobacco sign",
+   "casts_shadow": false,
+   "problems": [
+    "lights tobacco sign (its housing; lesson 120, log 32): skip them",
+    "it lights window (+x) (facing the camera) 0.78 W/m2 against the subject's 0.07: move it behind that face (to an inner face), or link it to skip it; at the same place it would need 9% of its watts"
+   ],
+   "notes": [
+    "close to cigarette shelf: skip them if they come out as bright as the subject"
+   ],
+   "housing": [
+    "tobacco sign"
+   ],
+   "near": [
+    "cigarette shelf"
+   ],
+   "brighter_than_subject": [
+    {
+     "surface": "window (+x)",
+     "brightest": 0.7841863897083442
+    },
+    {
+     "surface": "window (-y)",
+     "brightest": 0.10642529574613262
+    }
+   ]
+  },
+  {
+   "light": "till key",
+   "kind": "SPOT",
+   "watts": null,
+   "role": "accent",
+   "role_because": "reaches only till, till display (the subject's own light)",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": [],
+   "housing": [
+    "counter"
+   ],
+   "reach": {
+    "farthest_target_metres": 0.8459513715223337,
+    "nearest_other_metres": 2.33781501010628,
+    "nearest_other": "tobacco sign",
+    "reach_metres": 1.0459513715223336,
+    "clear": true,
+    "source": "the place facts' boxes (rough: walls are not in them; use set_measurements.py beam)"
+   },
+   "cones": {
+    "even_cone_degrees": 16.488197465584754,
+    "even_aim": [
+     0.3,
+     1.22,
+     1.36
+    ],
+    "from_below_cone_degrees": 15.867833510471003,
+    "from_below_aim": [
+     0.3,
+     1.22,
+     1.32
+    ],
+    "from_below_leaves_top_unlit": true
+   }
+  },
+  {
+   "light": "street lamp outside",
+   "kind": "POINT",
+   "watts": 600.0,
+   "role": "lamp",
+   "role_because": "its name says \"lamp\"",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "vending machine glow",
+   "kind": "AREA",
+   "watts": 80.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  }
+ ],
+ "lamps": [
+  {
+   "lamp": "tobacco sign",
+   "box": [
+    0.6492266815279801,
+    0.4300499930337593,
+    0.6492266815279801,
+    0.4300499930337593
+   ],
+   "depth": 4.298500000000001,
+   "problems": []
+  },
+  {
+   "lamp": "ceiling tube",
+   "box": [
+    0.3894853780788743,
+    0.27026172345200755,
+    0.3894853780788743,
+    0.27026172345200755
+   ],
+   "depth": 3.1785,
+   "problems": []
+  },
+  {
+   "lamp": "tobacco sign glow",
+   "box": [
+    0.6506283645762646,
+    0.42939295410487593,
+    0.6506283645762646,
+    0.42939295410487593
+   ],
+   "depth": 4.2585,
+   "problems": []
+  },
+  {
+   "lamp": "till key",
+   "box": [
+    0.4789681336913334,
+    0.7563258706368743,
+    0.4789681336913334,
+    0.7563258706368743
+   ],
+   "depth": 2.1785,
+   "problems": []
+  },
+  {
+   "lamp": "street lamp outside",
+   "box": [
+    0.20966465599268524,
+    0.242559793491051,
+    0.20966465599268524,
+    0.242559793491051
+   ],
+   "depth": 10.6785,
+   "problems": []
+  },
+  {
+   "lamp": "vending machine glow",
+   "box": [
+    0.30113978816855397,
+    0.5593940898169141,
+    0.30113978816855397,
+    0.5593940898169141
+   ],
+   "depth": 8.6785,
+   "problems": []
+  }
+ ],
+ "shadow_casters": [],
+ "eevee": {
+  "shadow_pool_size": "1024",
+  "shadow_resolution_scale": 0.703125
+ },
+ "problems": [
+  "tobacco sign glow: lights tobacco sign (its housing; lesson 120, log 32): skip them",
+  "tobacco sign glow: it lights window (+x) (facing the camera) 0.78 W/m2 against the subject's 0.07: move it behind that face (to an inner face), or link it to skip it; at the same place it would need 9% of its watts"
+ ],
+ "calculator": "plan_lights plan",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light_planner.shadow_casting_kinds": {
+   "value": [
+    "key",
+    "fire",
+    "doorway",
+    "sky"
+   ],
+   "unit": "kinds of light that cast shadows (every other light casts none)",
+   "kind": "judged"
+  },
+  "light_planner.foot_patch_metres": {
+   "value": [
+    0.5,
+    0.35
+   ],
+   "unit": "metres (width, depth) of the soft shadow under a figure that casts no shadow",
+   "kind": "judged"
+  },
+  "light_planner.container_skip_within_metres": {
+   "value": 0.6,
+   "unit": "metres: a fire's light skips every prop this close (the container it burns in, the chair beside it); other lights get a note for props this close",
+   "kind": "judged"
+  },
+  "light_planner.near_surface_within_metres": {
+   "value": 1.0,
+   "unit": "metres: a camera-facing surface this close to a light is checked against the subject (a lamp lights the face it hangs on)",
+   "kind": "judged"
+  },
+  "light_planner.reach_margin_metres": {
+   "value": 0.2,
+   "unit": "metres past the farthest lit part of the target",
+   "kind": "judged"
+  },
+  "light_planner.cone_blend": {
+   "value": 0.9,
+   "unit": "Blender spot blend",
+   "kind": "judged"
+  },
+  "light_planner.lamp_clear_of_subject_pixels": {
+   "value": 18,
+   "unit": "pixels on the film frame between a lamp and the subject's outline box",
+   "kind": "judged"
+  },
+  "camera.meeting_point_gap_share_of_width": {
+   "value": 0.03,
+   "unit": "share of the frame width",
+   "kind": "judged"
+  },
+  "light_planner.near_ground_light_max": {
+   "value": 0.025,
+   "unit": "W/m2 a light behind the camera may put on the ground at the frame's bottom edge",
+   "kind": "judged"
+  },
+  "frame.plate_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light.shadow_resolution_reference_width": {
+   "value": 1080,
+   "unit": "pixels (scale = min(1, 1080 / width))",
+   "kind": "judged"
+  },
+  "light.shadow_pool_size": {
+   "value": "1024",
+   "unit": "EEVEE setting",
+   "kind": "measured"
+  }
+ }
+}

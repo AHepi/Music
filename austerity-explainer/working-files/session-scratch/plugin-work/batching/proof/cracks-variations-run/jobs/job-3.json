@@ -1,0 +1,56 @@
+{
+ "job": 3,
+ "scene": "/workspace/place-jobs/scenes/5dd1c4b4/canal_finished.blend",
+ "settings": "/workspace/place-jobs/scenes/5dd1c4b4/settings-7e7ca009-f3b44ea4/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-cracks-and-chips-on-the-lock-walls-and-1792726263/job-3",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "entries": [
+  {
+   "name": "v03-crackden15-crackwid65",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.15,
+    "dials.cracks_and_chips.crack_width_metres": 0.0332,
+    "dials.cracks_and_chips.chip_amount": 0.75
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v06-crackden75-crackwid35",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.75,
+    "dials.cracks_and_chips.crack_width_metres": 0.0188,
+    "dials.cracks_and_chips.chip_amount": 0.15
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v09-crackden45-crackwid25",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.45,
+    "dials.cracks_and_chips.crack_width_metres": 0.014,
+    "dials.cracks_and_chips.chip_amount": 0.35
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

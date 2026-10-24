@@ -1,0 +1,43 @@
+{
+ "name": "grime-max",
+ "is_baseline": false,
+ "set": {
+  "amount.grime": 1.0,
+  "dials.grime.darkening": 0.6,
+  "dials.grime.area_share": 0.6
+ },
+ "args": {},
+ "script": null,
+ "notes": [],
+ "pictures": [
+  {
+   "camera": "Camera A",
+   "file": "03_grime-max__camera-a.jpg",
+   "engine": "CYCLES",
+   "width": 300,
+   "height": 200,
+   "samples": 8,
+   "seconds": 1.89,
+   "bytes": 8538,
+   "ok": true,
+   "mean_luminance": 0.4128566384315491
+  },
+  {
+   "camera": "Camera B",
+   "file": "03_grime-max__camera-b.jpg",
+   "engine": "CYCLES",
+   "width": 300,
+   "height": 200,
+   "samples": 8,
+   "seconds": 2.53,
+   "bytes": 7859,
+   "ok": true,
+   "mean_luminance": 0.19873102009296417
+  }
+ ],
+ "ok": true,
+ "reset": "restored exactly",
+ "seconds_apply": 0.01,
+ "seconds_draw": 4.43,
+ "seconds_reset": 0.01
+}

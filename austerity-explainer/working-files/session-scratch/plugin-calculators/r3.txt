@@ -1,0 +1,590 @@
+=== BUILT fixes
+SUMMARY: I fixed every item on round 2's list that I was given. I left the W1 and W2 camera places for the next helper, as asked. I paid for nothing and committed nothing, and the kept notice corner is unchanged: its preview matches round 2's in every pixel.
+
+**The factories and the far town**
+- **No. 2's chimneys** are now a paler buff than the mill, sooted only in a narrow band under the cap. The faces toward the lane and the sides give off a little warm light of their own, as if lit by No. 2's own yard.
+  - Before: from street level (W1) their tops read about 15 levels of 255 against the sky's 75.
+  - Now: about 70 at the top and 116 lower down; 105 to 134 in W3.
+  - In W1 and W3 they read as pale, square chimneys with dark caps. No. 1's chimney stays a dark round one (about 10).
+- **The far town** now stands the gasholder and the church on two hills, 38 m high. The hills sit low enough to stay hidden behind the roofs.
+  - In W3 the gasholder's frame and the dome of its bell show whole above the roofs at the upper left, with sky round them. They stand clear of No. 1's chimney and are no longer cut by the frame's edge.
+  - The spire and the top of the church tower stand at the upper right, with sky between them and No. 2's tank.
+  - I moved a few far chimneys and two mills off the hills. The terraces on the hills were dropped (81 terrace rows now, from 132).
+- No. 1's model came out byte-for-byte the same as before.
+
+**The props** (rebuilt: bank sign, lunch tin, jacket and cap, plus one new prop)
+- **The BANK hanging sign** board is now 1.5 x 0.75 m and its letters measure 0.305 m. That is about 24 pixels a letter from W3's camera, up from 15 to 17.
+- **The lunch tin** now has:
+  - dents deep enough to catch the light (4 to 6.5 mm, on a finer mesh);
+  - a pressed lid with a rolled bead round its lower edge;
+  - a wire hinge with four knuckles, and a hasp over a stud;
+  - patches of bright, worn tin on its edges, and rust spots.
+- **The jacket** now has a turned-down collar running into two lapels, with dark lining in the V. The empty shoulders slump down from the collar, the sleeves flow on from them, and the hem hangs unevenly. The tent-shaped point at the nail is gone.
+- **The cap** hangs turned well round on its nail. From 6.5 m the crown is seen at a slant and the peak sticks out below it in profile, so it reads as a cap, not a disc. From the contact sheet's side angle it still looks like a round disc.
+- **New prop, tin-mug-and-wages-envelope:** the envelope stands on its long edge against the mug's front, leaning back 14 degrees, with WAGES facing the camera.
+  - It is its own part, so the film can keep it as its own surface.
+  - The letters are 1.8 cm, about 5 pixels from 6 m, so the typed words on screen still have to do the reading.
+  - The flat envelope and the plain mug are kept as they were, unchanged.
+
+**The figures** (all 11 rebuilt, and the people test redrawn)
+- **The two right-hand men's coats:** round 2's coats came out deep crimson in the film. The film's grade turns anything darker than about 28 levels of 255 black, which removed the green and blue.
+  - Their cloth is now a slate grey and a grey. In the warm light of the lamp and fire they read as a dull grey-brown in the plate (about 46, 39, 32).
+  - I filmed a still and sampled the coats: now 27, 16, 3 and 30, 16, 3. That is an olive or khaki brown (hue about 30 degrees), not red. Round 2's were 19, 1, 1 and 23, 2, 1.
+  - In plain grey light, such as the contact sheets, the slate coat looks dark blue-grey.
+- **Less toy-like:**
+  - coat folds 2.4 times deeper, on rings twice as fine;
+  - creases across the back and at the elbows;
+  - broken hems;
+  - boots 14% shorter and 10% narrower;
+  - the hand on the bar wrapped round the bar as a fist;
+  - the warming hands bent a little down from turned-back cuffs.
+- **The two profile heads:** each turned 18 degrees, so the camera sees mostly the back of the head.
+  - My first try went the wrong way and showed more face. The final turn is the other way: the stooped man to his right, the arms-folded man to his left.
+  - In the new plate the stooped man shows no face; the arms-folded man shows an ear and a sliver of cheek.
+
+**The state picture tool** now writes only lossless pictures (PNG or lossless WebP) and refuses a JPEG. It reads the picture back and prints the largest difference from the main painting where the mask is zero. On the new people test that is 0 levels.
+- The people test page now loads people-test-state.png.
+- The old people-test-state.jpg is deleted, and the new .png is not yet added to git.
+
+**Short names** are renamed to plain words in build_factories, works_kit, build_far_town, draw_works_views and build_figures. Rebuilding showed this changed no shape.
+
+**Two other changes, both small**
+- works_kit's surface material can now give off a little light of its own. Only No. 2's chimneys use it.
+- build_figures can now write a trial build to another folder (the setting FIGURES_OUT).
+
+**Contact sheets:** redrawn for the Works, the props and the figures, and looked at full-size in halves. I also redrew the people test plate and filmed two stills, before and after the cut. The cut leaves no ghost and no shadow behind.
+TESTED: **The kept notice corner**
+- I drew its preview (540 x 960) with assemble_notice_corner.py --preview: all 518,400 pixels are identical to round 2's check picture (largest difference 0).
+- street.blend, street.glb and camera.json have the same fingerprints before and after. git shows no change under assets/models/pit-village.
+- I changed no script that the notice corner uses. The only pit-village script I touched is assemble_people_test.py, and only a comment in it.
+
+**Short names renamed with no change to anything**
+- Factories and town: rebuilt into scratch before and after renaming. All three .glb files and index.json are byte-identical.
+- No. 1, rebuilt with the chimney work in place, is still byte-identical.
+- Figures: every vertex is the same to within 0.0004 mm (float noise only).
+- Props: tin-mug and the flat wages-envelope are byte-identical after splitting their builders into reusable parts.
+
+**The props**
+- Round 2's prop checker reads every .glb directly. All 14 have one root named after the file, the sizes match index.json, and the only digits in any lettering are "No. 1" and "No. 2": "no problems found".
+
+**The figures**
+- I read the files directly: all 11 have exactly one root.
+- The stooped man's lowest hand point is now 1.024 m, still about 13 cm above the brazier's rim.
+
+**The state picture tool**
+- Asked for a .jpg, it stops with a plain message.
+- On round 2's plates and the new ones, written as .png (and once as lossless WebP), the read-back difference outside the mask is 0 levels.
+- The new mask covers 42.3% of the frame (round 2: 42.2%).
+
+**Filming**
+- I filmed two stills of the people test, at 1.0 s and 3.0 s.
+- The coats' colour samples are above. The after-cut still shows no ghost or shadow where the men stood.
+
+**Pictures I looked at, at full size**
+- every trial and final view of W1, W2 and W3;
+- the whole Works contact sheet, in halves, including the phone-size column;
+- the props contact sheet, in halves;
+- the bank sign picture;
+- the lunch tin up close from three sides;
+- the jacket and cap at W4's 6.5 m and at 2 m;
+- three trial ways of hanging the cap;
+- the mug and envelope up close and at 6 m;
+- three plate crops of the men (first try, second try, final plate), with heads and the right-hand men at twice size;
+- the figure sheets (from behind lit by the lamp, side, front), in halves.
+
+**Disk and files**
+- Free disk stayed above 8.8 GB.
+- The largest file in the repository is still notice-corner.blend at 86.8 MB (untouched). No .blend1 backups exist.
+- Nothing is staged or committed: I staged one file deletion by mistake and unstaged it at once.
+NOT DONE: **Not on my list, so not done**
+- **The 42% state-picture mask.** It is unchanged; the fix is to draw the men without long shadows from the fire and lamps.
+- **The yard setts.** The fix for the lane's ground showing through belongs in a Works assembly script that does not exist yet.
+- **Project notes.** I did not touch Workflows.md or Status.md; Workflows.md already has someone else's uncommitted changes. They still need to describe:
+  - the lossless state picture;
+  - the FIGURES_OUT setting;
+  - the new tin-mug-and-wages-envelope prop;
+  - the hills in the far town.
+- **The plan.** I did not record the measured letter sizes in it: the bank sign's 0.305 m and the envelope's 1.8 cm (about 5 pixels at 6 m).
+
+**Partly done, or worth knowing**
+- **No. 2's chimneys were not moved.** Round 2 also suggested moving them outward so sky shows between them and No. 1's roof in W1. They are now pale, square and dark-capped, so they no longer pass for No. 1's. But in W1 they still stand right beside No. 1's roof end, and their tops still sit 0.08 to 0.14 down, in the band kept for typed words. That belongs with the W1 and W2 camera work.
+- **W1 has not been checked** with the film's live smoke or with the real dividing wall.
+- **The warm lit side of No. 2's chimneys is a constant glow** set in the material, the same at every height. It does not fall off higher up.
+- **The figures are better but still somewhat smooth** at the plate's size.
+  - The back and elbow creases show only faintly in the plate's soft light.
+  - The hand on the lamp post reads as a fist on the post. The fingers close round a 3 cm bar and are hidden inside the thicker post.
+  - The arms-folded man still shows an ear and a sliver of cheek.
+  - Judging whether they still look like shop dummies needs a fresh eye, ideally on a real painting.
+- **The two right-hand coats in the film** are brown, but a fairly strong, dark olive-brown: the grade crushes blue at that brightness.
+  - In plain grey light the slate coat reads dark blue-grey. The plan bans only large blue areas, but it is worth a look.
+  - People-test-figures.glb grew from 8.8 to 10.5 MB.
+- **The cap's hang is not physically exact.** It is placed by a hook point and pushed clear of the wall.
+- **The lunch tin now has 13,008 triangles** (733 KB), up from 4,600.
+
+**Someone else's work, not mine**
+- Files I did not change show as changed in git: .gitignore, cinema-chapter.js, cinema-stage.js, projected-set.js, graphics.js, inflation-chapter-2-newcomers.js, and the new page-3/4/5.js and works-effects.js. These are the other helper's.
+- My people test stills were filmed with their current stage files.
+=== BUILT works
+SUMMARY: The Works is assembled, its four views are composed and checked, and all the plates are drawn. Every view passes the main rule. Nothing was paid for and nothing was committed. The kept notice corner is untouched: I changed no shared script and no pit village file.
+
+**What's built**
+The new assemble_works.py opens a lane built by build_street.py with the Works' settings. It then adds:
+- **The lane's ends:** the cross street, and a terrace across it facing up the lane. W3's camera stands at an upstairs window of the middle house, 4.6 m up.
+- **The bank**, in place of the left terrace's third cottage. It has a canted bay window with iron bars, its own glass (bank-window-glass, dark until page 9) and a shallow room behind with its light off. There is a brass plate "BANK" by the door and a hanging "BANK" sign at first-floor height. In W3 the sign's letters are 29 pixels tall.
+- **The works wall:** No. 1's half dark red brick, No. 2's half pale buff. Each gate has brick piers with stone caps, an iron arch carrying its gate board, and a gas lamp on its outer pier. Between the gates the high dividing wall's end rises to the piers' height, and the wall runs higher back between the two yards [T15].
+- **The gates:** separate leaves the film can swing. They are never in a plate. No. 1's gate is chained.
+- **The factories and the far town.** The ground under the yards is lowered, so it no longer shows through the setts.
+- **The props:** PETROL and DIESEL drums at both gates; at No. 1 the brazier, with a lit lantern and a lunch tin on the drums; crates and the hand truck in No. 2's gateway; a handcart of crates in the lane; three crates that pop up in No. 1's gateway; and W4's jacket and cap, upturned crate, mug and WAGES envelope.
+- **The men:** 7 at No. 1 and 8 for No. 2's slowed state. Their backs are to the camera, and each man is at least 6.2 m from any camera that sees him. They cast no long shadows; a small soft patch at their feet keeps them on the ground.
+
+**Settled with the shot checker**
+- **W1 and W2 camera places:** I compared four placings.
+  - Mid-pavement with the gates as planned gave the fewest problems (12 in W1, 4 in W2), and the lines meet on the gate.
+  - Moving the gates 0.9 m or 0.5 m toward the lane's middle pushed the nearest man past the phone buttons.
+  - The plan's original spot by the pier put the camera inside the bank's bay window.
+  - Kept: mid-pavement, gates 7 m apart.
+- **W4** looks from No. 2's inner hinge post. From the outer post the eight men stood one behind another and read as one man.
+- **The drums** stand in small flagged corners in front of each outer pier. Along the house fronts they hid the brazier completely from W1.
+- **No. 1's queue** stands on a slant, so each man shows beside the one in front. Straight along the pavement, the nearest man hid all the others.
+- **W3's eye height** stays at 4.6 m. 5.5 m and 6.5 m brought the queue's tail lower but cleared no problems.
+
+**Main rule** (lines meet, brightest parts, warm light, story group and subject in one area, limit 0.40 × 0.50):
+- W3: 0.17 × 0.07
+- W1 quiet: 0.25 × 0.17
+- W1 working: 0.14 × 0.12
+- W2 flat out: 0.12 × 0.13
+- W2 slowed: 0.13 × 0.18
+- W4: 0.30 × 0.27
+
+**Plates** (1536 × 2730, EEVEE, render logs clean of shadow faults), as JPEGs in the Works folder:
+- W3
+- W1 main (men, windows dark)
+- W1 working (men gone, windows lit)
+- W2 flat out
+- W2 slowed (8 men, two thirds of the windows dark)
+- W4 (no men, no gate leaves)
+- One extra, W1 "men gone" (windows still dark), for page 3's cut on "go".
+
+**State pictures:** I also made state pictures from the plates. Because the men no longer cast long shadows, the area swapped at a time cut fell from 42% of the frame (round 2's people test) to about 7% (W1, men gone) and 5% (W2, slowed). For that, the "men gone" and "slowed" plates keep the yards' lighting the same as the main plates.
+
+**Film files** (none over 90 MB; the largest is 38.9 MB):
+- The set in parts: lane 15.6 MB, factories 8.5 MB, town 6.7 MB, props and No. 1's men 38.9 MB.
+- Own surfaces: signs, gates, pop-up crates, and No. 2's eight men.
+- Four camera files and works-shot.json. It records views, gate hinges, chimney tops, brazier, lantern, drums, bank window, every man with his distance and place in each frame, letter sizes, states, plates and the decisions above.
+
+**Continuity sheet:** No. 1 is left of No. 2 in every view where both show. One round chimney and two square ones throughout. Boards consistent. Men counted: 7, 7, 0, 0, 8, 8. No disagreements.
+
+**Speed:** with every light casting shadows, a plate took about 25 minutes. Now only the fire, the yards' lit doorways and the sky's light cast shadows, and a plate takes about 6.
+TESTED: **Building and files**
+- I ran build_works.sh into the Works folder (lane, assembly and export), then the plate runs.
+- Each part file was read directly. The names the film looks for are all there: no-1-gate and no-2-gate with their left and right leaves, no-1-chain, no-1-crate-1 to 3, the three chimney-top markers, the window groups, man-1 to man-7 and no-2-man-1 to 8, the dividing wall and the bank building.
+- All eight lettering materials have their exact names, and the bank's glass is named bank-window-glass.
+- No file is over 90 MB, there are no .blend1 files anywhere, and 8.1 GB of disk is free.
+
+**The kept notice corner**
+- git shows no change under assets/models/pit-village or paper-film/blender/pit-village apart from another helper's assemble_people_test.py.
+- build_street.py, set_dressing.py, works_kit.py and the checker's three files still carry their old times.
+- I changed no shared script, so no notice-corner preview was needed.
+
+**Shot checker**
+- I ran it on every view about 6 to 8 times while composing, as layout-only checks.
+- The four-way W1/W2 camera comparison is kept in the compare folder; W3's eye height was compared at 4.6, 5.5 and 6.5 m.
+- Final runs used film-size pictures (1080 × 1920, 16 samples, the same state and spot) for W3, W1 quiet, W1 working, W2, W2 slowed and W4, and the main rule passes on all six.
+- On most of these views the checker's own "picture matches the scene" test wrongly called the picture out of date. The men are dark on dark and look alike (one slid sideways lines up with his neighbour), the gates are thin bars, and the boards' strongest edges are their painted borders. So I ran its light rules with the men, gates and boards left out of that one test (check_dark_picture.py in scratch; the checker itself is unchanged). I checked by eye that every measured outline lies on the picture (outlines-sheet.jpg).
+
+**Pictures I looked at**
+- Every preview round, all seven plates, full-size crops of W3's bank and brazier and of the handcart, and the state-picture mask pictures.
+- Render logs: no "Shadow buffer full" and no "Could not allocate shadow atlas".
+
+**State pictures**
+- make_state_picture.py read each one back: it equals the main plate exactly where nothing changed (0 levels).
+- Swap areas: 6.5% (W1, men gone) and 5.2% (W2, slowed).
+
+**Continuity sheet**
+- Built from the final previews and the checker's flat-colour pictures. No disagreements.
+NOT DONE: **Pages still use the stand-in.**
+- works-effects.js (the effects helper's file, which I did not touch) still points at the stand-in folder and loads a single works-set.glb.
+- To use the real Works it needs four changes:
+  - load the four set parts named under "files" in works-shot.json (lane, factories, town, props);
+  - load works-no-2-men.glb, painted for W2 slowed and drawn as dark silhouettes in W4;
+  - switch WORKS_IN_USE to the Works folder;
+  - add W4's camera.
+- My plates and state pictures already use the stand-in's file names.
+
+**Away from the plan, on purpose**
+- **The bank** is the left terrace's third building, 17 to 21.5 m from W3, not in the lane's last third. Any further up, its hanging sign would hang across W1's view; W1's camera stands under it.
+- **W4** looks from No. 2's inner hinge post. The jacket hangs on that post (both inner piers were widened to 0.9 m to hold it), and the crate stands across the hinge's foot.
+- **The lane's head:** the low walls became small flagged corners at each outer pier, with taller yard walls behind. The lantern and the lunch tin sit on the drums, not on a coping.
+- **The two nearest cottages:** windows dark on both sides, and the nearest downpipes taken off.
+- **Shadows:** the men cast no long shadows, and the lamps and lantern cast no shadows at all.
+
+**Checker problems left, and why**
+- **Story group wider than 0.40:** W1 0.49, W2 0.48, W3 0.52 (its two columns are the design), W4 0.73. In W4 the queue seen through the gate is on the left and the jacket and wages are on the right.
+- **"The subject is the brightest" fails:** each subject is a dark iron gate. The fire, the lamps and the lit doorway are brighter beside it.
+- **The words band:** only 39 to 46% of it is sky in the gate views, because the roofs and chimneys fill it. Typed words there need the plan's soft dark band.
+- **Small things:**
+  - The checker says the stooped man "rests on" the brazier. That is how it measures; his feet are on the pavement.
+  - A few men's edges nearly touch.
+  - The chain at No. 1's gate is partly hidden behind the front man in W1.
+  - The bank's bay-window post shows at W1's plate edge, outside the film's frame.
+  - A crate's "THIS WAY UP" shows at the W4 plate's left edge. Its stencil is an own surface, so it stays sharp in the film.
+
+**Not done**
+- Nothing is filmed or painted.
+- I did not check the men's coat colours on film (round 2's red coats). That is the figures helper's work.
+- The working state picture swaps 41% of the frame (the windows and the yard's light), so it suits the planned blend on "start", not a cut.
+- The project notes are not updated, and nothing is committed.
+=== BUILT effects
+SUMMARY: I built the Works' moving things and pages 3, 4 and 5, and put them into the chapter. I filmed the three pages from start to finish (about 76 seconds), using plates in place of the paintings. The only jumps in the film are the planned ones. Nothing was paid for, and the kept notice corner draws exactly as before.
+
+**The real Works set wasn't ready, so the pages use a stand-in for now.**
+- The other helper's assembly script (assemble_works.py) appeared while I was finishing, but it hasn't written its files yet.
+- So I built a rough stand-in in my scratch folder. It has the real factories and far town, a plain wall, seven men from the figure library, the brazier, lantern, drums, boards, gates and crates, plus five small plates. The kit reaches it through a link that git ignores.
+- The other helper's script uses the same file and object names as my code, so the switch should be small.
+
+**1. works-effects.js (shared by every Works page)**
+- **The four states** (No. 1 quiet and working, No. 2 flat out and slowed) and all their settings are in one place: windows, flicker, smoke, gate angle, number of men. Smoke and flicker use fixed seeds, and the wind always blows the same way.
+- **Chimney smoke** starts at the chimney-top markers:
+  - heavy from both of No. 2's chimneys;
+  - thin from one when slowed;
+  - none from No. 1 until "start", then it builds up from the chimney's mouth.
+- **No. 1's fire:** the brazier's flames, sparks, smoke and glow, the lantern's flicker, and a glow on each gate lamp.
+- **No. 2's windows** flicker, and flicker brighter on "busy".
+- **The gate leaves** have their own surfaces and are never in a plate. Each turns on its hinge into the yard. While swinging it is redrawn every frame; at rest it becomes part of the set again. The chain shows only when No. 1's gate is shut.
+- **The crates** spring up one after another, then become part of the set.
+- **Windows change in steps:** the set is redrawn once per step, not every frame.
+- **The bank's window glass** keeps its own surface so it can light up on page 9.
+- **Name tags:** QUIET and FLAT OUT, which becomes THE FLAT-OUT FACTORY SLOWS on "slows" (finding T16).
+- Every frame returns a still key that changes only when the set itself changes.
+
+**2. The pages**
+- **Shots and events:** each page follows the plan's shots, with every event on its spoken word.
+- **Paintings:** a PICTURES list at the top of each page names the plates now. The paintings drop in there later.
+- **Joins:** each page exports its own.
+- **Page 3:**
+  - W3 with the three labels, then the cut to W1.
+  - One 1.2 m slide along the queue that never turns.
+  - A time cut on "go" to a state picture made with make_state_picture.py.
+  - Windows light in 3 steps on "start"; crates pop up on "things"; a level price arrow on "barely".
+  - The plan's fallback (the gate swings, the men fade) works with `PAPER_FILM_QUERY=go=swing`.
+- **Page 4:**
+  - The slide toward No. 2's gate, the words, and the ring that fills over 4 seconds.
+  - Then the guess hold, and it runs on into page 5 with no visible join.
+- **Page 5:**
+  - W2 with NO SPARE, the words building, and a climbing price arrow.
+  - Then W3 with the tags and both rule cards on a dark plate (T13). The upper card's line runs to No. 1's chimney; the lower card's line ends in a short bar across No. 2's two chimneys.
+  - Then the 2-second hold and the page peel.
+  - Page 16 can reuse the same rule drawing.
+
+**3. Wired into the chapter:** pages 3 to 5 are real; the other pages are still stand-ins.
+
+**Small changes to shared files (each proven safe):**
+- **graphics.js:** new word functions added; nothing existing changed.
+- **projected-set.js:** a one-line fix. Before it, redrawing a set's distances a second time (at a view change or when the men leave) failed with a WebGL error.
+- **cinema-stage.js:** a new 'run-on' join. The normal dissolve darkens the middle of the blend, which showed as a flicker at the page 4 into 5 run-on.
+
+**Things that need a decision or a follow-up:**
+- **One more helper plate is needed:** "men gone, windows still dark". The assembly's plate list doesn't include it, but the state picture used on "go" needs it to tell the men's area apart from the windows.
+- **No. 1's smoke after "start" doesn't show in W1's composed frame.** The chimney top is at, or just above, the frame's top edge. In the real layout it should be about 0.05 down, which is inside the band kept for words.
+- **"→ PRICES UP" and its arrow are on screen only about 0.6 seconds** before the cut on "Most" (estimated timing). If the recording is just as tight, the cut could come one word later.
+TESTED: **The whole of pages 3 to 5 was filmed** (chapter frames 1421 to 3704, 76 seconds) with film-chapter-parallel.sh, one worker, PIECE_FRAMES=240.
+- After fixes, three chunks were filmed again: the page 4 into 5 run-on, page 5's climbing arrow, and the bar across No. 2's chimneys.
+- The chunks were joined into one silent film in scratch, then deleted from paper-film/out. Kept there, a later whole-chapter filming would have reused these stand-in pieces.
+
+**The jump finder was run on every chunk, one at a time**, and on a 2-second clip round each of the 9 places where two chunks meet.
+- The only jumps are the planned ones:
+  - the cut from W3 to W1 on "In";
+  - the time cut on "go" (10.7 against a usual 0.46);
+  - the first window step;
+  - the two page peels;
+  - the cut from W2 to W3 on "Most".
+- Neither slide jumps. No seam between chunks jumps (largest change 0.57 to 0.87 against a usual 0.42 to 0.46).
+- **The run-on:**
+  - First filmed with the normal dissolve, it showed a 4-level dip. Its darkening in the middle caused that, not the pictures: page 4's last frame and page 5's first have the same average colour.
+  - With the new 'run-on' join the jump is gone (largest change 0.95).
+
+**Stills were looked at for every event, about 30 in all.**
+- Two problems found that way were fixed: smoke too pale, and labels landing on top of each other.
+- The smoke, the arrow into the gate, the level and climbing price arrows, the tags and the rule-card lines were moved after this round of looking.
+- The fallback "swing" was also checked in stills.
+
+**The kept notice corner is unchanged.** I drew it at 4.5 s and 10 s before my projected-set.js change. Drawn again after that change, and again after the cinema-stage.js change, it is identical in all pixels both times. graphics.js only gained lines; git shows none removed.
+
+**Speed** (the time per frame while filming):
+- frames where the camera holds: about 1.0 to 1.3 s each when nothing else was running, about 2.0 to 2.3 s while the other helper's Blender ran;
+- the slides: 4.4 to 6.6 s a frame.
+
+**Other checks:**
+- The stand-in pages (1, 2, 6 and on) still draw.
+- After the last change to the loader (it now also takes the assembly's set split into several files), stills were drawn again and match the film.
+- Disk: 8.6 GB free.
+- No file in the repository is over 90 MB, and there are no .blend1 files.
+NOT DONE: - **Not yet on the real Works set.** The other helper's export doesn't exist yet: assemble_works.py appeared at 14:19 and has written no files. To switch:
+  1. set `WORKS_IN_USE = WORKS_FOLDER` in works-effects.js;
+  2. update the PICTURES file names at the top of pages 3, 4 and 5 (the assembly writes its plates as .png);
+  3. make the two state pictures from the real plates with make_state_picture.py;
+  4. remove the works-stand-in link (and its line in film-kit/.gitignore).
+  The assembly already uses the names my code reads, including works-camera-VIEW.json, works-shot.json's keys, works-gates.glb, works-pop-up.glb and bank-window glass. The loader also reads its set split into works-set-lane, -factories, -town and -props.
+- **The stand-in lives only in scratch.** If scratch is cleared before the switch, pages 3 to 5 can't load.
+- **The "go" state picture needs one more free helper plate** that the assembly doesn't draw: W1 with the men gone and the cart doors open, but the windows still dark. Without it, the mask can't keep the windows dark until "start".
+- **The state-picture mask covers 43 to 47% of the frame** on the stand-in, because the men cast long shadows. This is round 2's open point: plates drawn with the men casting no long shadows would shrink it.
+- **No. 1's smoke after "start" barely shows in W1's composed frame.** The chimney top is at the frame's top edge, so this needs a camera or chimney choice.
+- **Page 5's "→ PRICES UP" and its arrow show for only about 0.6 s** before the cut on "Most", on the estimated timing.
+- **Placed by eye on the stand-in's layout, not checked against the real set:** labels, tags, the arrow into the gate, the level and climbing price arrows, and where the rule-card lines end. They follow the set's markers and figure positions, so they should move with it, but they need checking.
+- **Not tried at all:**
+  - the bank window lighting (page 9);
+  - the W2 tag and its change to "SLOWS" (pages 6, 11, 12);
+  - the slowed state on screen, and loading No. 2's eight men (pages 12 and 14).
+- **The fallback swing** shows the men see-through for about 1 second while they fade, as any fade does. The time cut is the default.
+- **Not done:** no narration (silent film only), no fresh-viewer review, no shot-checker run, no project notes updated, nothing committed. The other helper changed people-test.js and several Blender scripts at the same time; I didn't touch those.
+=== BUILT pages
+SUMMARY: Pages 3, 4 and 5 now run on the real Works set, with the real cameras and plates (the plates stand in for the paintings). I filmed all three pages: 76 seconds, 2,283 frames. The only jumps in the film are the planned cuts and page turns. The camera never turns. Every word on screen is a short form of what Malina says. Nothing was paid for and nothing was committed, and the kept notice corner draws exactly as before (0 pixels different).
+
+**Switched to the real Works**
+- works-effects.js now reads the real Works folder.
+- I removed the stand-in link and its line in .gitignore, so .gitignore is back as it was.
+
+**Fixed along the way**
+1. **The gate piers looked like orange curtains.** A bug in works_kit.py gave every brick box fine vertical stripes instead of brick: the four gate piers, the end of the dividing wall, and parts of the bank and corner walls. I fixed it with one line and drew all 7 plates again; only the lane's file changed. The piers now show red brick at No. 1 and buff brick at No. 2. W4 changed most (25% of the frame), the other views 3 to 7%.
+2. **No. 1's doorway lit up early.** During page 3's slide, the doorway behind the waiting men came on as soon as the camera moved, long before "go". The picture used behind the men had the doorway lit. I added one free helper plate to assemble_works.py ("quiet, men left out") and made a proper behind picture from it (works-w1-behind.png). The doorway now stays dark until "go".
+3. **The waiting men were near-black on near-black.** W1 is the darkest view, and the stage's tone curve halves such a dark picture: 18 levels on screen, against 37 to 43 for the other views. I made the W1 shot brighter (exposure 1.6, the same for the whole shot), and the queue now shows against the lit pavement. This is for the plates: look at it again when the painting comes.
+4. **Wrong pointing and placing.**
+   - The MACHINES label pointed at a cottage window. It now points at No. 2's lit mill window.
+   - On page 5 the QUIET tag sat on the far town's gasholder. QUIET now sits on No. 1's round chimney, and FLAT OUT between No. 2's two square chimneys.
+5. **Smaller fixes.**
+   - No. 1's smoke after "start" didn't show; it is now a visible wisp at the top edge.
+   - Page 5's climbing price arrow now starts on "prices", so it is on screen about 1.2 seconds instead of 0.6.
+   - Each picture file is now loaded only once.
+
+**State pictures:** made again from the new plates with make_state_picture.py, and each matches its main plate exactly outside its mask.
+- W1 men gone: 8% of the frame changes.
+- W1 working: 50%.
+- W2 slowed: 6.5%.
+- The new W1 behind picture: 5.7%.
+
+**Seconds a frame** (one helper filming; every frame on these pages has live smoke and fire, so held frames are effect frames):
+- Held: W2 about 1.1 s, W3 about 1.26 s, W1 about 1.29 s (1.45 s around the window steps).
+- Sliding: W1 6.35 s, W2 4.50 s.
+- Each piece starts with about 20 to 45 s of page loading.
+- The whole stretch took 70 minutes, 1.83 s a frame on average.
+
+**Jumps:** checked piece by piece and at every place two pieces meet. They are all planned:
+- the cut to W1 on "In";
+- the time cut on "go";
+- the three window steps on "start";
+- the start of each page turn;
+- the cut to W3 on "Most".
+
+Neither slide jumps and the run-on from page 4 into 5 doesn't jump. Just before the cuts at 55.1 s and 107.1 s, the words fade a frame early.
+
+**Would a newcomer see the four things?** I judged this from the stills at phone size.
+- **Two factories:** yes, mostly. Two gates side by side, one dark (red brick, one round chimney) and one bright (buff brick, two square chimneys and a tank). But the "No. 1" and "No. 2" boards are tiny on a phone. The far town's gasholder is also the biggest dark shape above No. 1 and could be taken as part of it.
+- **The quiet one with men waiting:** yes in W1 now: a line of dark men by a fire at a gate. In W3 they are only specks and need the WORKERS label. The shut, chained gate itself hardly shows.
+- **The men going in:** only by the cut. The men vanish, the doorway lights, then the windows light. It works with the words "The workers go in", but you never see them go, and the gate opening barely shows.
+- **The flat-out one with nobody waiting:** very clear.
+TESTED: **Filming:** pages 3 to 5 were filmed with film-chapter-parallel.sh (FILM_FROM=1421, FILM_TO=3704, one worker, PIECE_FRAMES=240). That is 10 pieces, 2,283 frames, 19:17 to 20:27. The pieces were then joined in scratch and removed from paper-film/out, so a later whole-chapter filming won't reuse them.
+
+**Jumps:** find_jumps.py ran on each piece, with the planned cut times given, and on a 2-second clip round each of the 9 places where pieces meet.
+- Planned changes found: 55.1 (the cut to W1), 67.27 ("go"), 68.77 / 69.04 / 69.30 (the window steps), 74.30 (page 3's page turn), 107.17 (the cut to W3) and 122.64 (page 5's page turn).
+- Nothing else jumps. The two slides, the run-on from page 4 into 5 and every meeting place show no jump (largest change 0.4 to 2.0, against 0.42 to 0.50 on ordinary frames).
+- I checked that the 74.30 change is the page-turn's own paper shading (the curling page is drawn 11% darker from its first frame), not my brighter W1.
+
+**Camera:** I wrote the camera's place for every frame of the chapter and ran camera_audit.py on pages 3 to 5: 0 problems. The two slides are the planned ones. In my own check of every frame, the camera always faces the same way and keeps one lens (60.4) on all five shots of these pages. Held shots don't move, and page 4 hands over to page 5 at the same spot.
+
+**Speed:** I worked it out from the filming logs by 60-frame stretch. The W2 slide was measured apart (a 31-frame run less a 1-frame run).
+
+**Stills:**
+- 44 event moments, including the first, middle and last frame of each slide, drawn three times as I fixed things. I looked at them as phone-size sheets and in full-size crops (the gate, the top band, the piers).
+- Film frames match stills drawn alone: about 1.6 to 2 levels on average, which is grain and video squeeze.
+
+**Plates and set:**
+- assemble_works.py was rerun into scratch first. Only works-set-lane.glb changed; the other set files and the cameras are byte-identical, and works-shot.json gained only the new behind plate and state. There are no shadow faults in the render logs.
+- Every plate was compared with the old one before it was copied in.
+- Each state picture was read back: 0 levels different from its main plate outside its mask.
+
+**Kept notice corner:** drawn at 4.5 s and 10 s and identical to before (0 pixels different). I touched no pit-village file or shared stage or graphics file. works_kit.py is used only by the Works scripts.
+
+**Words:** every word on screen was checked against the narration file for pages 3 to 5. Only "No. 1" and "No. 2" carry digits.
+
+**Limits:** no file in the repository is over 90 MB, there are no .blend1 files, and 7.3 GB of disk is free.
+NOT DONE: **No. 2's square chimneys still have stripes.** They live in the factories' own files, built before the fix, and assemble_works.py imports those as they are. Fixing them means:
+- running build_factories.py again;
+- redrawing all 8 plates and remaking the state pictures (about 1 hour).
+
+A far-town rebuild would also pick up the fix; I didn't check the far town for stripes.
+
+**The brighter W1 is for the plates.** W1 runs at exposure 1.6 in page-3.js, a stand-in setting. Look at it again when the painting comes: the notice corner's painting came out brighter than its plate.
+
+**The behind picture once the paintings come:**
+- either one more painting, of works-w1-behind-plate.jpg (a cost, needs your yes);
+- or, free, make_behind_picture.py on the main painting, a plain smudgy fill only seen in thin slivers beside the men. I wrote it but haven't used it in the film.
+
+**Still weak on a phone:**
+- The shut, chained No. 1 gate barely shows (dark iron on a dark doorway), and its opening on "go" doesn't show either.
+- The men are specks in W3.
+- The boards are about 14 pixels a letter in W3.
+- No. 1's smoke is only a faint wisp at the very top, under the words.
+- W2 holds for about 32 seconds across pages 4 and 5 with only the words changing, as the plan has it.
+
+**Small left as is:** the words fade one frame before the cuts at 55.1 s and 107.1 s.
+
+**Not done:**
+- No narration; the timing is the estimated one.
+- The shot checker wasn't run again after the pier fix. The piers are now brick instead of bright orange stripes, so the light measures may shift a little.
+- The "go=swing" fallback and the states for later pages (bank window, slowed No. 2, W4) weren't tried.
+- Project notes not updated, and nothing committed.
+=== CHECKED SUMMARY I checked pages 3 to 5 as a first-time viewer and as a careful checker. I paid for nothing, committed nothing and changed no repository file. My scratch work is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/check-round-3.
+
+**What I checked**
+- The film at /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round3-pages/film/pages-3-to-5-silent.mp4 is newer than every file it uses.
+- I took 46 frames from the film, one at each spoken event, and looked at them at full size, at half size and at phone size, with close-ups of the gate, the men, the chimneys and the top band.
+- I re-ran the jump finder myself on 10 overlapping pieces of the film.
+- I read the camera log, re-ran the shot checker on filmed frames of W1, W2 and W3, checked git and file sizes, and measured the models directly for striped surfaces.
+
+**What holds**
+- **The camera:** it never turns (0.0000 degrees on all five shots), tilts or changes lens (60.4). Both slides are 1.2 m long, start and stop gently on "Workers"/"Call" and "No"/"factory", and stop exactly on the composed frames. Held shots don't move.
+- **Jumps:** every jump is a planned one: the cuts at 55.10 and 107.17, "go" at 67.27, the window steps at 68.77, 69.04 and 69.30, and the two page turns. The run-on from page 4 into page 5 doesn't show, and no place where the original pieces were joined jumps.
+- **The men:** the men leave on "go" with no ghost and no shadow, even with the dark parts of the picture brightened. The slide shows no halo round them. The flat-out factory has nobody waiting.
+- **Words on screen:** every word is a short form of what Malina says. No figure appears except "No. 1" and "No. 2". Every line is held left of 0.90 in the code (TEXT_RIGHT 972); the longest W2 line ends at 0.86.
+- **The views agree:** No. 1 is always on the left; one round chimney against two square ones; the boards and the men's count (7, 7, 0, 0, 8) match.
+- **The main rule** still holds on the filmed frames after the pier fix: W1 0.22 x 0.14, W2 0.12 x 0.13, W3 0.14 x 0.10 (limit 0.40 x 0.50).
+- **The kept notice corner:** git shows nothing changed under assets/models/pit-village, and the files are dated 14 October. Its stills at 4.5 s and 10 s match the earlier ones exactly (0 levels different).
+- **Files:** the largest is notice-corner.blend at 86.8 MB, there are no .blend1 files, and 7.3 GB of disk is free.
+
+**Speed** (from the filming logs)
+- Held frames with live effects: W3 1.26 s, W1 1.29 s (1.45 s around the window steps), W2 1.11 s.
+- Slides: W1 6.35 s a frame, W2 4.50 s.
+- Each piece spends 20 to 45 s loading the page first.
+- All of pages 3 to 5: 70 minutes, 1.83 s a frame.
+
+**What a newcomer would actually see**
+- **Two different factories:** yes, a dark side and a bright side. But the far town's gasholder now looks like a second tank on No. 1's side, and BANK is the most readable word in W3.
+- **Men waiting:** yes in W1, where they read as a group of dark men by a fire. In W3 they are invisible specks on a phone.
+- **"The workers go in":** carried only by the cut and the words. The shut, chained gate barely shows.
+- **Flat out:** after the W2 slide the heavy smoke and No. 2's lit windows can't be seen.
+
+The problems, each with its fix, follow.
+--- must-fix | assets/models/inflation-chapter-2-newcomers/works/no-2-flat-out-factory.glb, no-1-quiet-factory.glb, far-town.glb (and works-set-factories.glb, works-set-town.glb built from them); every Works plate
+PROBLEM: The stripe fault fixed in works_kit.py is still in the factory and far-town models, because they were built before the fix.
+- Measured directly: about 60 to 85% of the brick on No. 2's two square chimneys has its surface squashed into stripes. They read in W1, W2 and W3 as streaked wooden posts, not brick chimneys; their dark caps are streaked too.
+- Also striped: No. 1's chimney (44 of 183 square metres of brick), No. 2's water tank and trestle, both factories' loading doors and lit doorway rooms, and the far town's gasholder, church and mills.
+- These chimneys are the main way to tell the factories apart, and a painter would paint what the plate shows.
+FIX: 1. Run build_factories.py and build_far_town.py again with the fixed works_kit.py.
+2. Then run assemble_works.py (build_works.sh) and redraw all 8 plates.
+3. Remake the state pictures and the behind picture with make_state_picture.py.
+4. Film pages 3 to 5 again (about 1 hour of plates and 70 minutes of filming).
+5. Check the new models with /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/check-round-3/tools/find_stripes.py: it should list no part. Today it lists 15 in No. 1, 27 in No. 2 and 33 in the far town; the lane has only 1.3 square metres on four roofs.
+
+Do this before any painting.
+--- must-fix | The lit loading doorways inside both gates (no-1-doorway-room, no-2-doorway-room; W1 from 'go', all of W2, W3)
+PROBLEM: The 'machines' seen through the lit doorways are flat dark slabs of stepped heights against a bright wall. On a phone they read as a bar chart.
+- They are on screen for about 7 s in W1 behind PRICES BARELY MOVE, for all 32 s of W2 behind PRICES UP, and in W3.
+- An economics film shouldn't show what looks like a graph that Malina never speaks of.
+- A painter would paint them as a bar chart.
+FIX: Model the machines so they read as machines: for example a lathe or loom shape with a flywheel, a belt up to a line shaft and different outlines, not plain boxes in rising steps.
+
+Or keep the doorway's inside a plain lit room with hanging belts and the crates in front.
+
+Then redraw the W1, W2 and W3 plates.
+--- should-fix | W2 composed frame, pages 4 and 5 (about 32 s); also W1 after 'start'
+PROBLEM: The signs of 'flat out' disappear once the slide ends.
+- **Smoke:** No. 2's chimney tops sit about 0.07 down, under THE FLAT-OUT FACTORY and its dark band. The 'heavy smoke' leaves the top edge at once and shows only as a faint wisp.
+- **Windows:** No. 2's mill windows are not in the W2 frame at all; the gable over the gate has only a timber loft door. So 'windows blazing', and the brighter flicker on 'busy', can't be seen. Measured from 75.6 s to 79.8 s: the doorway is 169.5 against 169.4, and the whole frame differs by 2 levels, which is grain.
+- **W1:** No. 1's smoke after 'start' is likewise barely visible.
+- **W3:** the lower rule card on page 5 covers No. 2's smoke for 16 s.
+FIX: - Give No. 2's gable over the gate a row of lit mill windows, in a window group, in place of the blank loft door, so the flicker and 'busy' show in W2. Redraw the W2 plates.
+- Make the smoke visible under the words: either let the plume lie lower and thicker so it crosses about 0.10 to 0.25 down to the right of the words, or lower No. 2's chimney tops in the gate views. Moving them about 15 m further back, or making them about 20 m tall, puts them near 0.18 to 0.25 down in W2 and 0.28 to 0.34 in W3.
+- Check No. 1's smoke in W1 the same way.
+--- should-fix | page-5.js, draw2D: drawQuestion(... until: T.spare + 0.3) and NO SPARE at T.spare + 0.15
+PROBLEM: For about 5 frames (about 96.1 to 96.2 s) NO SPARE is written on top of the fading WHAT HAPPENS TO PRICES? in the same place. It reads "NO SPAREPENS TO PRICES?", with HAVE A GUESS still showing below.
+
+The cause: presence() fades words out before their 'until', so the question is still half visible when NO SPARE comes in.
+FIX: In page-5.js, end the question before NO SPARE starts: use until: T.spare + 0.15, or bring NO SPARE in at T.spare + 0.3. Draw that moment again and look at it.
+--- should-fix | page-5.js, shot 5a: '→ PRICES UP' at 'up' (106.48 s), cut on 'Most' (107.15 s)
+PROBLEM: The page's key conclusion, → PRICES UP, is on screen for only about 0.65 s before the cut, and its last frame is already faded. A newcomer can't read it.
+FIX: Bring '→ PRICES UP' in on 'prices' (105.96 s), together with the climbing arrow, so it is up for about 1.2 s.
+
+Or move the cut to W3 one word later, to 'economists' (107.41 s); the cards only start on 'agree'.
+
+Check again against the real recording.
+--- should-fix | W3 (works-w3-plate.jpg, assemble_works.py placement of man-1 to man-7 and the handcart); W3 is on screen about 69 s and is the master
+PROBLEM: - At phone size the 7 waiting men are one dark smudge at 0.27 to 0.32 across. The checker counts 12 pairs among the men and the brazier whose edges just touch, so they read as a blob, not a queue. WORKERS points at something you can't see.
+- The bottom third of the frame is empty cobbles. The queue's tail ends at 0.66 down, and the handcart stands in the road at about 0.73. Rule 7 is not met; the plan wanted the queue's tail and a handcart coming up the right pavement in the bottom third.
+FIX: In assemble_works.py, stand No. 1's 7 men in single file down the left pavement toward the camera, with clear gaps of about 1.1 to 1.3 m, so each shows on his own and the tail reaches about 0.70 to 0.75 down.
+
+Move the handcart onto the right pavement, nearer the camera, into the bottom third.
+
+Then re-run the W3 shot check and redraw the W3 plate.
+--- should-fix | far-town.glb in W3 (build_far_town.py, gasholder on its hill)
+PROBLEM: Raised on its hill, the gasholder now stands whole, big and dark, right beside No. 1's chimney. It is larger than the chimney.
+
+It is a round tank in a lattice frame, so No. 1's side now also seems to have a 'tank'. That blurs the one-glance difference the plan relies on (a tank only at No. 2), and it can be read as part of No. 1.
+FIX: Make No. 1's chimney the biggest thing on the left. Either:
+- push the gasholder further back and down, and paler and hazier with distance; or
+- move it out of W3 and let the far town show chimneys and the spire there instead.
+
+Then redraw the W3 plate.
+--- should-fix | BANK hanging sign in W3 (pages 3 and 5)
+PROBLEM: BANK is the largest and clearest lettering in the set: about 29-pixel letters, lit by the gas lamp beside it. The No. 1 and No. 2 boards have about 14-pixel letters.
+
+On a phone a newcomer reads BANK before the factory names, on pages that never mention a bank. The plan says the bank stays dim until page 9.
+FIX: In works-effects.js, keep the bank sign's lettering (its own surface, bank-sign-lettering) and its board dim until page 9, then brighten them with the bank window.
+
+Or move that gas lamp off the sign and redraw W3.
+--- should-fix | PETROL and DIESEL drums in W1 and W2 (assemble_works.py, the flagged corners)
+PROBLEM: In both gate views the nearest house front hides most of the drums. Only 'SEL' shows in W1 and 'DIE' in W2; PETROL never shows.
+- These fragments break 'every sign carries real lettering'.
+- Page 11 points at these drums at No. 2's gate, and page 15 comes back to them.
+FIX: Move each pair of drums toward its gate, clear of the house fronts' line, and turn them so both full words face the camera.
+
+Add both drums to must_read in the W1 and W2 check files, then re-run the checker and redraw the plates.
+--- should-fix | No. 1's gate in W1 (works-gates.glb leaves, the chain)
+PROBLEM: The shut, chained gate hardly shows: dark bars on a dark doorway, with the chain hidden behind the front man.
+
+So on 'go' the gate opening can't be seen. 'The workers go in' reads only as the men vanishing and the doorway lighting up.
+FIX: Silhouette the bars with a faint cool light in No. 1's yard behind the gate. Keep the doorway itself dark until 'go'.
+
+Move the chain and padlock to where it shows between the men, or let the front man stand a little aside.
+--- should-fix | Project notes (Workflows.md, Status.md) and the plan
+PROBLEM: No helper updated the notes. They don't yet record:
+- the stripe fix, and that the factories and far town still need rebuilding;
+- that the plates are now in use in place of the stand-in;
+- the plan changes: the bank's place, the cameras mid-pavement, W4 at the inner hinge post, the men without long shadows, and the behind plate in place of the working painting;
+- W1's stand-in exposure of 1.6, and the run-on join;
+- the lossless state picture, FIGURES_OUT, the new mug-and-envelope prop and the far-town hills.
+FIX: Add a short plain section to Workflows.md and Status.md covering these. Add the measured letter sizes to the plan (BANK 0.305 m, WAGES 1.8 cm).
+--- minor | W4 (works-w4-plate.jpg); the page 14 view
+PROBLEM: - The shot checker was not re-run after the pier fix, though 25% of W4's frame changed.
+- The dividing wall seen from inside No. 2's yard is red brick, No. 1's colour, right beside No. 2's buff pier.
+- The cap reads as a flat dark disc.
+FIX: - Give the dividing wall's No. 2 face No. 2's buff brick.
+- Re-run the W4 shot check on a new W4 plate.
+- Look at the cap again when the W4 plate is redrawn.
+--- minor | cinema-stage.js peel shader (all page turns in the series)
+PROBLEM: In its first frame the peel draws the whole old page about 11% darker, because the flat sheet's own shading comes in at once. It shows as a small dimming pop as each page starts to turn: a change of 5.8 against a usual 0.4 at 74.27 s, and 4.7 at 122.64 s.
+FIX: Bring the sheet's shading in over the first few frames of the peel (scale the 0.85 mix by the progress).
+
+Because cinema-stage.js is shared, prove the notice corner's stills unchanged afterwards.
+--- minor | page-3.js and page-5.js, words before the cuts at 55.10 s and 107.17 s
+PROBLEM: The words fade out one frame before each cut, a change of about 2.7 against a usual 0.5, so the cut takes two steps.
+FIX: End the words exactly on the cut: set 'until' one frame later, or use no fade-out at a cut.
+--- minor | page-5.js RULE_CARDS.heading = 116
+PROBLEM: The tops of the letters in MOST ECONOMISTS AGREE sit about 0.047 down. That is above the checker's title area (0.05) and may sit under a phone app's top bar.
+FIX: Move the heading down to about 0.06 or lower, and the cards with it if needed. Keep the lower card clear of the chimney lines.
+--- minor | W1 and the stooped man (worker-stooped-to-brazier)
+PROBLEM: - The fire lights the stooped man's face in profile, so a painter may paint a face.
+- The shot checker finds his body meeting the brazier.
+- W1's exposure of 1.6 is a stand-in: at the cut from W3, No. 1's brick near the lamp turns bright orange rather than dark red-brown.
+FIX: - Turn or lower his head a little more into shadow, and move him about 0.1 m off the drum.
+- Look at the W1 exposure again when the painting comes.
+--- minor | git working tree
+PROBLEM: About 40 new files are untracked: the three page files, works-effects.js, assemble_works.py, build_works.sh, make_works_continuity_sheet.py, make_behind_picture.py, the 30 Works files, tin-mug-and-wages-envelope.glb and people-test-state.png. people-test-state.jpg is deleted. A commit that adds only the changed files would leave the pages unable to load.
+FIX: When the user agrees to a commit, add every new file, including the Works folder and the examples check files, and record the people-test-state.jpg deletion.
+--- minor | works-effects.js states for later pages
+PROBLEM: Not yet tried on the real set:
+- the go=swing fallback;
+- the W2 tag and its change to THE FLAT-OUT FACTORY SLOWS (a long tag centred on the gate, which could run past 0.90);
+- the slowed state with No. 2's 8 men;
+- the W4 silhouettes;
+- the bank window.
+FIX: Draw stills of each of these before pages 6, 9, 11, 12 and 14 are built. Check the SLOWS tag's right edge against 0.90.

@@ -1,0 +1,54 @@
+skipped  test_after_painting.py  (0.4 s)
+    SKIP  the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit)
+passed   test_camera_audit.py  (2.9 s)  camera_audit: old behaviour, page window from the timeline, built-and-painted set checks: 27 of 27 checks passed
+passed   test_check_page_layout.py  (0.5 s)  page layout: pops, effects after their moment, held shots, overlaps: 10 of 10 checks passed
+passed   test_check_shot_kinds.py  (43.3 s)  shot checker: kinds of shot and the accepted list: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_example_check_files.py  (0.4 s)  example check files: kinds of shot, figures and accepted problems: 23 of 23 checks passed
+passed   test_frame_geometry.py  (0.1 s)  frame geometry: recorded cases and hold-outs: 57 of 57 checks passed
+passed   test_frame_geometry_parity.py  (0.3 s)  frame geometry: Python and JavaScript give the same numbers: 31 of 31 checks passed
+passed   test_house_rules.py  (1.8 s)  house rules: a plain note at the top and a --help: 3 of 3 checks passed
+passed   test_lint_script.py  (0.6 s)  script and narration gate: before recording and after: 41 of 41 checks passed; 1 part(s) skipped
+passed   test_make_check_file.py  (0.1 s)  make_check_file: check files from the scene: 13 of 13 checks passed; 1 part(s) skipped
+passed   test_model_lint.py  (0.2 s)  model_lint: model faults before plates: 16 of 16 checks passed; 2 part(s) skipped
+skipped  test_page_events.py  (0.1 s)
+    SKIP  no node_modules with playwright-core and three (set PAPER_FILM_NODE_MODULES)
+passed   test_paint_request.py  (0.4 s)  paint_request: prompts, preflight and price against the recorded cases: 8 of 8 checks passed; 1 part(s) skipped
+passed   test_place_facts.py  (0.7 s)  place facts: schema, converters and what they carry: 35 of 35 checks passed
+passed   test_plan_budget.py  (1.7 s)  budget planner: money, filming time, pieces, stretches, memory, disk, pushes: 47 of 47 checks passed
+passed   test_plan_effects.py  (0.9 s)  plan_effects: wind, plumes, colour, contact shadows, window change, fire, lint: 47 of 47 checks passed; 2 part(s) skipped
+passed   test_plan_lights.py  (1.6 s)  plan_lights: watts, reach, cone, links, surfaces, lamps, dark subject, render log, exposure: 29 of 29 checks passed; 2 part(s) skipped
+passed   test_plan_page_timing.py  (0.7 s)  page timing: pauses, reading times, cuts, margins, words, numbers, stills: 57 of 57 checks passed
+passed   test_plan_shot.py  (0.2 s)  shot planner: recorded cases and the checkout hold-out: 60 of 60 checks passed
+passed   test_plan_states.py  (0.3 s)  plan_states: helper plates, cut or blend, against the Works and the people test: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_preflight.py  (5.4 s)  preflight: stages, accepted problems, missing inputs, the critique and the gate: 31 of 31 checks passed
+passed   test_settings.py  (0.1 s)  film settings: the table, its reader and drift in the tools: 43 of 43 checks passed
+passed   test_shot_kind_profiles.py  (0.1 s)  shot-kind profiles against the views the project kept: 17 of 17 checks passed
+skipped  test_sound_gates.py  (0.1 s)
+    SKIP  the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit)
+passed   test_view_audit.py  (0.3 s)  view_audit: lettering, figures and landmarks per view: 55 of 55 checks passed
+
+25 test files: 22 passed, 0 failed, 3 skipped.
+Checks: 670 passed, 0 failed, 16 skipped (13 part(s) of tests and 3 whole test file(s), each with its reason below).
+Time: 1 min 3 s.
+Skipped, and why:
+  - test_after_painting.py: the whole test (the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit))
+  - test_check_shot_kinds.py: part 2, notice corner: skipped (it needs the project's film kit and experiments, and the working files' redesign/round5-set/notice; set FILM_PROJECT and FILM_WORKING_FILES)
+  - test_check_shot_kinds.py: part 2, Works W1: skipped (round 5's final check folder is in the working files, redesign/round5-set/checks/final-w1-quiet; set FILM_WORKING_FILES)
+  - test_lint_script.py: chapter 2's recordings were not found (the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit)): the audio checks were not run
+  - test_make_check_file.py: part B skipped: no Blender or no project (set BLENDER, or run explainer-film-setup; FILM_PROJECT, or austerity-explainer next to the plugins folder; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)
+  - test_model_lint.py: part B skipped: the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit), or it is not a git repository
+  - test_model_lint.py: part C skipped: no Blender or no project (set BLENDER, or run explainer-film-setup; FILM_PROJECT; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)
+  - test_page_events.py: the whole test (no node_modules with playwright-core and three (set PAPER_FILM_NODE_MODULES))
+  - test_paint_request.py: part B skipped: the project's plates and plate facts are not on this machine (the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit))
+  - test_plan_effects.py: colour checks skipped: the film kit's W3 plate is not on this machine (FILM_KIT, or austerity-explainer/film-kit next to the plugins folder)
+  - test_plan_effects.py: Blender (BLENDER, or explainer-film-setup's machine-settings.env) or the film kit's notice-corner.blend (FILM_KIT) is not on this machine: the live footprint measurement was skipped
+  - test_plan_lights.py: the round 5 plates are not here; the picture exposure check was skipped
+  - test_plan_lights.py: Blender (BLENDER, or explainer-film-setup's machine-settings.env) or the film kit's notice-corner.blend (FILM_KIT) is not on this machine: the live ray cast was skipped
+  - test_plan_states.py: part B for the Works skipped: its plates or plate facts are not on this machine (the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit))
+  - test_plan_states.py: part B for the people test skipped: its plates or plate facts are not on this machine (the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit))
+  - test_sound_gates.py: the whole test (the project's files are not on this machine (FILM_PROJECT, or the folder austerity-explainer next to the plugins folder; FILM_KIT for its film kit))
+
+real	1m3.072s
+user	1m38.346s
+sys	0m11.002s
+exit 0

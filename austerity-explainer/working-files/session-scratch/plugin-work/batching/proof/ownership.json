@@ -1,0 +1,14 @@
+{
+ "about": "Who owns what in the canal lock side. Four owners; the ground is built first and frozen.",
+ "owners": {
+  "ground_and_water": {"collections": ["^Place: ground_and_water$"], "objects": ["^Ground", "^Water"], "materials": ["PK ground.", "PK water."]},
+  "walls_and_steps": {"collections": ["^Place: walls_and_steps$"], "objects": ["^Wall", "^Coping", "^Step", "^Trench", "^Flight"], "materials": []},
+  "lock_gate": {"collections": ["^Place: lock_gate$"], "objects": ["^Gate"], "materials": []},
+  "props": {"collections": ["^Place: props$"], "objects": ["^Prop"], "materials": ["PK prop."]}
+ },
+ "frozen": {"render": true, "cameras": true, "world": true, "lights": true},
+ "contracts": [
+  {"between": ["ground_and_water", "walls_and_steps"], "rule": "walls and steps stand on the frozen bed and towpath height (seat_on_ground); the ground part never moves a wall"},
+  {"between": ["ground_and_water", "lock_gate"], "rule": "the gate stands on the bed"}
+ ]
+}

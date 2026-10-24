@@ -1,0 +1,222 @@
+{
+ "about": "Pictures against a style guard.",
+ "verdict": "pass",
+ "checks": [
+  {
+   "verdict": "pass",
+   "check": "place pictures: value range",
+   "where": "view_a_final.png",
+   "text": "the value range and mean colour match the guard",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place pictures: detail energy",
+   "where": "view_a_final.png",
+   "text": "fine detail is within the guard's band in every region",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place pictures: flat windows",
+   "where": "view_a_final.png",
+   "text": "no flat windows",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place pictures: palette",
+   "where": "view_a_final.png",
+   "text": "no strongly coloured, turquoise or blown-out areas",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place pictures: value range",
+   "where": "view_b_final.png",
+   "text": "the value range and mean colour match the guard",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place pictures: detail energy",
+   "where": "view_b_final.png",
+   "text": "fine detail is within the guard's band in every region",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place pictures: flat windows",
+   "where": "view_b_final.png",
+   "text": "no flat windows",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place pictures: palette",
+   "where": "view_b_final.png",
+   "text": "no strongly coloured, turquoise or blown-out areas",
+   "fix": ""
+  }
+ ],
+ "measures": [
+  {
+   "file": "view_a_final.png",
+   "size": [
+    320,
+    240
+   ],
+   "percentiles": {
+    "1": 0.08260471373796463,
+    "5": 0.16470588743686676,
+    "25": 0.2136164754629135,
+    "50": 0.31586042046546936,
+    "75": 0.34750041365623474,
+    "95": 0.5346392393112183,
+    "99": 0.5662949681282043
+   },
+   "mean_saturation": 0.20651179552078247,
+   "detail_energy": {
+    "all": 3.3039751052856445
+   },
+   "flat_windows": {
+    "windows": 20,
+    "flat": 0,
+    "share_under_0_014": 0.0,
+    "sky_windows": 0,
+    "sky_from": "none"
+   },
+   "strong_saturation_share": 0.0,
+   "turquoise_share": 0.0,
+   "white_patch_pixels": 0,
+   "regions": [
+    "all"
+   ]
+  },
+  {
+   "file": "view_b_final.png",
+   "size": [
+    320,
+    240
+   ],
+   "percentiles": {
+    "1": 0.019875293597579002,
+    "5": 0.0218258835375309,
+    "25": 0.0865262821316719,
+    "50": 0.2996235489845276,
+    "75": 0.3519882261753082,
+    "95": 0.5503255724906921,
+    "99": 0.5735874772071838
+   },
+   "mean_saturation": 0.2541121542453766,
+   "detail_energy": {
+    "all": 3.1610546112060547
+   },
+   "flat_windows": {
+    "windows": 20,
+    "flat": 0,
+    "share_under_0_014": 0.0,
+    "sky_windows": 0,
+    "sky_from": "none"
+   },
+   "strong_saturation_share": 2.604166666666667e-05,
+   "turquoise_share": 0.0,
+   "white_patch_pixels": 0,
+   "regions": [
+    "all"
+   ]
+  }
+ ],
+ "calculator": "picture_measures check",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "place_measures.detail_energy_blur_pixels": {
+   "value": 2,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "place_measures.strong_saturation_level": {
+   "value": 0.7,
+   "unit": "saturation",
+   "kind": "judged"
+  },
+  "place_measures.turquoise_hue_band": {
+   "value": [
+    160,
+    210
+   ],
+   "unit": "degrees",
+   "kind": "judged"
+  },
+  "place_measures.turquoise_saturation_min": {
+   "value": 0.35,
+   "unit": "saturation",
+   "kind": "judged"
+  },
+  "place_measures.flat_window_pixels": {
+   "value": 96,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "place_measures.flat_window_step_pixels": {
+   "value": 48,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "place_measures.flat_window_std_max": {
+   "value": 0.01,
+   "unit": "luminance spread",
+   "kind": "judged"
+  },
+  "place_measures.percentile_tolerance": {
+   "value": 0.03,
+   "unit": "luminance",
+   "kind": "judged"
+  },
+  "place_measures.percentile_99_max": {
+   "value": 0.92,
+   "unit": "luminance",
+   "kind": "judged"
+  },
+  "place_measures.mean_saturation_tolerance": {
+   "value": 0.04,
+   "unit": "saturation",
+   "kind": "judged"
+  },
+  "place_measures.detail_energy_ratio_low": {
+   "value": 0.9,
+   "unit": "times the guard",
+   "kind": "judged"
+  },
+  "place_measures.detail_energy_ratio_high": {
+   "value": 1.4,
+   "unit": "times the guard",
+   "kind": "judged"
+  },
+  "place_measures.detail_energy_cap": {
+   "value": 10,
+   "unit": "energy",
+   "kind": "judged"
+  },
+  "place_measures.flat_window_share_under_0_014_max": {
+   "value": 0.02,
+   "unit": "share of windows",
+   "kind": "judged"
+  },
+  "place_measures.strong_saturation_share_max": {
+   "value": 0.01,
+   "unit": "share of pixels",
+   "kind": "judged"
+  },
+  "place_measures.turquoise_share_max": {
+   "value": 0.003,
+   "unit": "share of pixels",
+   "kind": "judged"
+  },
+  "place_measures.white_patch_pixels_max": {
+   "value": 30,
+   "unit": "pixels",
+   "kind": "judged"
+  }
+ }
+}

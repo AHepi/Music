@@ -1,0 +1,59 @@
+{
+ "about": "Place settings for hut_ok, drafted by explainer-film-place new-settings. Edit it: add role rules for the objects listed in \"unknown\", set the look and state, add roads and footpaths. Every key is optional.",
+ "place": "hut_ok",
+ "place_type": "generic",
+ "look": "lived_in",
+ "state": "dry",
+ "seed": 1,
+ "owners": {},
+ "roles": [],
+ "never": [],
+ "off": [
+  {
+   "layer": "moss_and_algae",
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows",
+   "reason_id": "floors_indoors"
+  },
+  {
+   "layer": "weathering",
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows",
+   "reason_id": "floors_indoors"
+  },
+  {
+   "layer": "wetness",
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows",
+   "reason_id": "floors_indoors"
+  },
+  {
+   "layer": "plants",
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows",
+   "reason_id": "floors_indoors"
+  },
+  {
+   "layer": "litter_pieces",
+   "roles": [
+    "floor.*"
+   ],
+   "reason": "inside the buildings: dry, nothing grows",
+   "reason_id": "floors_indoors"
+  }
+ ],
+ "require_more": {},
+ "roads": [],
+ "footfall": [],
+ "keep_clear": [],
+ "renderer": "auto",
+ "unknown_objects": []
+}

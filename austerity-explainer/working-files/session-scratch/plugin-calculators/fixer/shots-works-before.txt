@@ -1,0 +1,115 @@
+Preflight shots (before building or drawing a place's views): FAIL. 18 to fix, 30 to look at, 0 known and accepted, 0 input(s) missing; 9 check(s) in 0.6 s.
+Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-16 11:45:54 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554.
+
+## To fix (these block the next step)
+
+- rule7_story_reaches_down [w1 from round 4's spot]: The lowest story thing is no-1-drum-diesel, reaching 0.653 down (limit 0.7). (plan_shot.py)
+  Fix: Bring the camera 2.23 m nearer along its view (or no-1-drum-diesel that much nearer the camera): it may stand at most 7.26 m from no-1-drum-diesel's front (the bottom of its box is now 9.50 m away).
+- rule3_story_together_metres [w1 round 4 (single file)]: The story things stand together in the street: the loneliest, man-4, is 0.56 m from man-3 (limit 0.3 m between footprints). (plan_shot.py)
+  Fix: Move man-4 about 0.46 m toward man-3.
+- crowd_axis_angle [this shot (w1 round 4 (single file))]: Crowd "men at No. 1" from this shot (w1 round 4 (single file)): its long axis makes 14 degrees with the view (at least 60; it spreads 2.5 times as far along it as across). (plan_shot.py)
+  Fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+- crowd_axis_angle [view w3 (plate)]: Crowd "men at No. 1" from view w3 (plate): its long axis makes 14 degrees with the view (at least 60; it spreads 2.5 times as far along it as across). (plan_shot.py)
+  Fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+- crowd_head_spacing [w1 round 4 (single file)]: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-3, are 0.57 head widths apart on screen (at least 1.0, so each head can be counted). (plan_shot.py)
+  Fix: Move man-1 or man-3 sideways about 0.07 m (head widths are 0.155 m), or change their heights.
+- rule3_story_together_metres [w1 round 3 (single file)]: The story things stand together in the street: the loneliest, no-1-drum-diesel, is 0.41 m from man-2 (limit 0.3 m between footprints). (plan_shot.py)
+  Fix: Move no-1-drum-diesel about 0.31 m toward man-2.
+- crowd_axis_angle [this shot (w1 round 3 (single file))]: Crowd "men at No. 1" from this shot (w1 round 3 (single file)): its long axis makes 12 degrees with the view (at least 60; it spreads 5.9 times as far along it as across). (plan_shot.py)
+  Fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+- crowd_axis_angle [view w3 (plate)]: Crowd "men at No. 1" from view w3 (plate): its long axis makes 12 degrees with the view (at least 60; it spreads 5.9 times as far along it as across). (plan_shot.py)
+  Fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+- crowd_head_spacing [w1 round 3 (single file)]: Crowd "men at No. 1" from this shot: the closest two heads, man-5 and man-6, are 0.18 head widths apart on screen (at least 1.0, so each head can be counted). (plan_shot.py)
+  Fix: Move man-5 or man-6 sideways about 0.13 m (head widths are 0.155 m), or change their heights.
+- no-1 board ("No. 1") in w3 (plate spot): letters 14.7 px tall, under 20 px. Make the letters 0.363 m tall for 20 px (0.454 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2 board ("No. 2") in w3 (plate spot): letters 13.8 px tall, under 20 px. Make the letters 0.363 m tall for 20 px (0.454 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-1-drum-petrol ("PETROL") in w3 (plate spot): letters 5.6 px tall, under 20 px. Make the letters 0.344 m tall for 20 px (0.430 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-1-drum-diesel ("DIESEL") in w3 (plate spot): letters 6.3 px tall, under 20 px. Make the letters 0.339 m tall for 20 px (0.424 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2-drum-petrol ("PETROL") in w3 (plate spot): letters 5.6 px tall, under 20 px. Make the letters 0.344 m tall for 20 px (0.430 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2-drum-diesel ("DIESEL") in w3 (plate spot): letters 6.3 px tall, under 20 px. Make the letters 0.339 m tall for 20 px (0.424 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2 crates ("THIS WAY UP") in w3 (plate spot): letters 3.2 px tall, under 20 px. Make the letters 0.390 m tall for 20 px (0.488 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2 crates ("THIS WAY UP") in w2 (composed spot): letters 9.4 px tall, under 20 px. Make the letters 0.134 m tall for 20 px (0.167 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2 board ("No. 2") shows its back in w4 (composed spot), as big as 65 px letters would be: a blank plank on screen (round 4, W4). Letter its back too, or turn it. [works] (view_audit.py)
+
+## To look at (they do not block; a person decides)
+
+- rule8_bottom_left_share [w1]: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 3.8% (over its 2%), lantern 0.1%, no-1-drum-diesel 1.9%, man-1 2.1% (over its 2%), man-3 0.4%, man-4 2.5% (over its 2%), man-5 2.9% (over its 2%), man-6 2.4% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate, man-1, man-4, man-5, man-6, no-1-drum-petrol out of the bottom-left quarter.
+- crowd_shoulder_gaps [w1]: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m). (plan_shot.py)
+  Fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+- crowd_visible_share [w1]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 12% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- rule8_bottom_left_share [w1 from round 4's spot]: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 2.1% (over its 2%), lantern 0.1%, no-1-drum-diesel 0.8%, man-1 1.1%, man-3 0.2%, man-4 1.3%, man-5 1.4%, man-6 1.2%, no-1-drum-petrol 0.8%, no-1-worker-2 0.3% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate out of the bottom-left quarter.
+- crowd_shoulder_gaps [w1 from round 4's spot]: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m). (plan_shot.py)
+  Fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+- crowd_visible_share [w1 from round 4's spot]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 13% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- rule8_bottom_left_share [w1 planned]: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 4.2% (over its 2%), lantern 0.1%, no-1-drum-diesel 1.8%, man-1 2.0% (over its 2%), man-3 1.0%, man-4 2.5% (over its 2%), man-5 2.9% (over its 2%), man-6 2.7% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate, man-1, man-4, man-5, man-6, no-1-drum-petrol out of the bottom-left quarter.
+- crowd_shoulder_gaps [w1 planned]: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m). (plan_shot.py)
+  Fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+- crowd_visible_share [w1 planned]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 13% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- rule8_bottom_left_share [w1 round 4 (single file)]: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 2.1% (over its 2%), brazier 0.6%, no-1-drum-diesel 0.4%, man-2 1.3%, no-1-drum-petrol 0.7%, no-1-worker-2 0.3% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate out of the bottom-left quarter.
+- crowd_visible_share [w1 round 4 (single file)]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 0% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- crowd_visible_share [w1 round 3 (single file)]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 0% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- rule8_bottom_left_share [w3]: In the bottom-left quarter, where the eye enters, the boxes cover: two gates and the wall between 2.1% (over its 2%), brazier 0.1%, man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move two gates and the wall between out of the bottom-left quarter.
+- crowd_shoulder_gaps [w3]: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m). (plan_shot.py)
+  Fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+- crowd_visible_share [w3]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 19% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- rule8_bottom_left_share [w3 planned]: In the bottom-left quarter, where the eye enters, the boxes cover: two gates and the wall between 2.1% (over its 2%), brazier 0.1%, man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move two gates and the wall between out of the bottom-left quarter.
+- crowd_shoulder_gaps [w3 planned]: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m). (plan_shot.py)
+  Fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+- crowd_visible_share [w3 planned]: Crowd "men at No. 1": the most hidden figure, man-3, shows about 22% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-3 sideways into a gap, or check on the render.
+- rule8_bottom_left_share [w1 with a planned crowd]: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 3.8% (over its 2%), lantern 0.1%, no-1-drum-diesel 1.9%, men at No. 1 1 2.5% (over its 2%), men at No. 1 2 2.2% (over its 2%), men at No. 1 3 0.3%, men at No. 1 5 2.9% (over its 2%), men at No. 1 6 2.2% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate, men at No. 1 1, men at No. 1 2, men at No. 1 5, men at No. 1 6, no-1-drum-petrol out of the bottom-left quarter.
+- crowd_visible_share [w1 with a planned crowd]: Crowd "men at No. 1": the most hidden figure, men at No. 1 2, shows about 18% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move men at No. 1 2 sideways into a gap, or check on the render.
+- no-1-drum-petrol ("PETROL") in w1 (composed spot): letters 22.1 px, between 20 and 25 px (PETROL and DIESEL read at 22 px in round 4). 0.110 m letters would give 25 px. [works] (view_audit.py)
+- no-2-drum-petrol ("PETROL") in w2 (composed spot): letters 22.1 px, between 20 and 25 px (PETROL and DIESEL read at 22 px in round 4). 0.110 m letters would give 25 px. [works] (view_audit.py)
+- no-1-chimney-top in w3 (plate): its top lands 0.228 down, within 0.02 of the words band; 25.4 m tall (now 26.3) clears 0.24. Look at the plate. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top rise through the words band in w1 (plate) (tops 0.033, 0.052, 0.120 down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 15.5 m or put the words beside them. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top rise through the words band in w1 (composed) (tops 0.020, 0.040, 0.110 down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 15.1 m or put the words beside them. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top, no-2-tank-top rise through the words band in w2 (plate) (tops 0.033, 0.052, 0.120, above the frame down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 8.2 m or put the words beside them. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top, no-2-tank-top rise through the words band in w2 (composed) (tops 0.020, 0.040, 0.110, above the frame down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 7.9 m or put the words beside them. [works] (view_audit.py)
+- 8 of men at No. 2 in w4 (plate) can show their faces, heads 43-48 px (over 24 px): look at the painted faces (the people test's facing man got a blank face, the far walkers face dots; silhouettes were rejected, lesson 137), or turn them away. [works] (view_audit.py)
+- 6 of men at No. 2 in w4 (composed) can show their faces, heads 50-57 px (over 24 px): look at the painted faces (the people test's facing man got a blank face, the far walkers face dots; silhouettes were rejected, lesson 137), or turn them away. [works] (view_audit.py)
+- lantern_light: lights no-1-drum-diesel (its housing; lesson 120, log 32): skip them [works w1] (plan_lights.py)
+
+## Checks run
+
+- PASS  place facts are complete (place_facts.py check) [works]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/place_facts.py version bd240e22
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/01-place-facts-are-complete-place-facts-py-check.json
+- FAIL  camera, reach, slide and people (plan_shot.py) [works]: 9 fail, 20 look, 0 known, 153 pass, 27 info; exit 1, 0.2 s; calculators/plan_shot.py version 6a7fabb5
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --shots /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/works-shots.json --strict --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/02-camera-reach-slide-and-people-plan-shot-py.json
+- FAIL  letters, loud signs, heads and landmarks (view_audit.py) [works]: 9 fail, 9 look, 0 known, 0 pass, 40 info; exit 1, 0.1 s; calculators/view_audit.py version 79e3d2f9
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/03-letters-loud-signs-heads-and-landmarks-view-audi.json
+- PASS  wind and chimney smoke in every view (plan_effects.py wind) [works]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_effects.py version 116ecf19
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_effects.py wind --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/04-wind-and-chimney-smoke-in-every-view-plan-effect.json
+- PASS  lights for w3 (plan_lights.py plan) [works w3]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w3 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/05-lights-for-w3-plan-lights-py-plan.json
+- WARN  lights for w1 (plan_lights.py plan) [works w1]: 0 fail, 1 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w1 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/06-lights-for-w1-plan-lights-py-plan.json
+- PASS  lights for w2 (plan_lights.py plan) [works w2]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w2 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/07-lights-for-w2-plan-lights-py-plan.json
+- PASS  lights for w4 (plan_lights.py plan) [works w4]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w4 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554/08-lights-for-w4-plan-lights-py-plan.json
+- PASS  each view's check file carries its kinds, figures and accepted list [works]: 0 fail, 0 look, 0 known, 0 pass, 4 info; exit 0, 0.0 s; preflight.py version d836d994
+  (inside the preflight)
+
+## Inputs (sha1 when the run ended)
+
+- dc76d4532087fc974f06aa21978f700d87e42833  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/works-shots.json
+- dd2e91ebbe86150e0de41b0caf22224064f1e05a  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/fixer/r/preflight-reports/preflight-shots-2026-10-16-114554.json

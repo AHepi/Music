@@ -1,0 +1,90 @@
+Preflight finish (after finishing): FAIL. 59 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 4 check(s) in 79.8 s.
+Next step BLOCKED: sending or publishing the film. First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-16 11:29:00 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/r/preflight-finish-2026-10-16-112900.
+
+## To fix (these block the next step)
+
+- FAIL length after finishing: 270.333 s against 272.333 s asked (allowed 0.05 s) - an audio step changed the length (resample to 48000 after any loudnorm) (sound_gates.py)
+- FAIL sound alignment: largest offset 40.00 ms (at most 2), weakest match 0.999 (at least 0.8) (sound_gates.py)
+- JUMP into frame 519 (17.30 s): change 3.76, around it 0.91 (find_jumps.py)
+- JUMP into frame 589 (19.63 s): change 7.98, around it 0.03 (find_jumps.py)
+- JUMP into frame 655 (21.83 s): change 1.22, around it 0.02 (find_jumps.py)
+- JUMP into frame 698 (23.27 s): change 2.74, around it 0.40 (find_jumps.py)
+- JUMP into frame 699 (23.30 s): change 5.79, around it 0.62 (find_jumps.py)
+- JUMP into frame 700 (23.33 s): change 5.69, around it 0.64 (find_jumps.py)
+- JUMP into frame 701 (23.37 s): change 5.11, around it 0.71 (find_jumps.py)
+- JUMP into frame 1155 (38.50 s): change 1.81, around it 0.36 (find_jumps.py)
+- JUMP into frame 1265 (42.17 s): change 5.27, around it 0.03 (find_jumps.py)
+- JUMP into frame 1366 (45.53 s): change 36.93, around it 0.24 (find_jumps.py)
+- JUMP into frame 1616 (53.87 s): change 1.52, around it 0.33 (find_jumps.py)
+- JUMP into frame 1687 (56.23 s): change 54.06, around it 0.21 (find_jumps.py)
+- JUMP into frame 1937 (64.57 s): change 1.33, around it 0.04 (find_jumps.py)
+- JUMP into frame 2165 (72.17 s): change 1.39, around it 0.32 (find_jumps.py)
+- JUMP into frame 2187 (72.90 s): change 1.83, around it 0.34 (find_jumps.py)
+- JUMP into frame 2216 (73.87 s): change 8.66, around it 0.05 (find_jumps.py)
+- JUMP into frame 2584 (86.13 s): change 4.13, around it 0.76 (find_jumps.py)
+- JUMP into frame 2761 (92.03 s): change 9.56, around it 1.30 (find_jumps.py)
+- JUMP into frame 2762 (92.07 s): change 10.43, around it 1.40 (find_jumps.py)
+- JUMP into frame 2829 (94.30 s): change 6.25, around it 0.66 (find_jumps.py)
+- JUMP into frame 3268 (108.93 s): change 1.43, around it 0.03 (find_jumps.py)
+- JUMP into frame 3698 (123.27 s): change 1.64, around it 0.28 (find_jumps.py)
+- JUMP into frame 3699 (123.30 s): change 1.40, around it 0.33 (find_jumps.py)
+- JUMP into frame 3700 (123.33 s): change 1.42, around it 0.33 (find_jumps.py)
+- JUMP into frame 3829 (127.63 s): change 9.59, around it 0.23 (find_jumps.py)
+- JUMP into frame 4654 (155.13 s): change 8.99, around it 0.43 (find_jumps.py)
+- JUMP into frame 4867 (162.23 s): change 1.07, around it 0.19 (find_jumps.py)
+- JUMP into frame 5083 (169.43 s): change 1.27, around it 0.03 (find_jumps.py)
+- JUMP into frame 5141 (171.37 s): change 9.79, around it 2.25 (find_jumps.py)
+- JUMP into frame 5382 (179.40 s): change 12.05, around it 0.01 (find_jumps.py)
+- JUMP into frame 5677 (189.23 s): change 1.02, around it 0.21 (find_jumps.py)
+- JUMP into frame 5974 (199.13 s): change 28.77, around it 1.65 (find_jumps.py)
+- JUMP into frame 6210 (207.00 s): change 1.23, around it 0.00 (find_jumps.py)
+- JUMP into frame 6224 (207.47 s): change 10.68, around it 0.01 (find_jumps.py)
+- JUMP into frame 6259 (208.63 s): change 3.51, around it 0.39 (find_jumps.py)
+- JUMP into frame 6260 (208.67 s): change 6.88, around it 0.43 (find_jumps.py)
+- JUMP into frame 6261 (208.70 s): change 6.95, around it 0.46 (find_jumps.py)
+- JUMP into frame 6262 (208.73 s): change 5.39, around it 0.50 (find_jumps.py)
+- JUMP into frame 6263 (208.77 s): change 2.30, around it 0.53 (find_jumps.py)
+- JUMP into frame 6673 (222.43 s): change 1.56, around it 0.11 (find_jumps.py)
+- JUMP into frame 6674 (222.47 s): change 1.78, around it 0.16 (find_jumps.py)
+- JUMP into frame 6675 (222.50 s): change 1.67, around it 0.21 (find_jumps.py)
+- JUMP into frame 6676 (222.53 s): change 1.27, around it 0.25 (find_jumps.py)
+- JUMP into frame 6695 (223.17 s): change 2.39, around it 0.19 (find_jumps.py)
+- JUMP into frame 6696 (223.20 s): change 3.14, around it 0.24 (find_jumps.py)
+- JUMP into frame 6697 (223.23 s): change 2.73, around it 0.35 (find_jumps.py)
+- JUMP into frame 6698 (223.27 s): change 2.07, around it 0.38 (find_jumps.py)
+- JUMP into frame 6725 (224.17 s): change 4.52, around it 0.92 (find_jumps.py)
+- JUMP into frame 6726 (224.20 s): change 4.45, around it 0.92 (find_jumps.py)
+- JUMP into frame 6749 (224.97 s): change 4.07, around it 0.53 (find_jumps.py)
+- JUMP into frame 6750 (225.00 s): change 5.61, around it 0.62 (find_jumps.py)
+- JUMP into frame 6751 (225.03 s): change 5.45, around it 0.83 (find_jumps.py)
+- JUMP into frame 6752 (225.07 s): change 4.17, around it 0.83 (find_jumps.py)
+- JUMP into frame 7124 (237.47 s): change 8.11, around it 0.03 (find_jumps.py)
+- JUMP into frame 7397 (246.57 s): change 1.68, around it 0.01 (find_jumps.py)
+- JUMP into frame 7647 (254.90 s): change 1.64, around it 0.01 (find_jumps.py)
+- JUMP into frame 8035 (267.83 s): change 1.18, around it 0.01 (find_jumps.py)
+
+## Inputs not given (the stage runs without them, but checks less)
+
+- --planned-cuts PLANNED_CUTS: the planned cuts (plan_page_timing.py check's JSON, or the newest pages report); without them every planned cut is listed as a jump to look at.
+  Make it: python3 calculators/plan_page_timing.py check EVENTS --out timing.json (the pages stage keeps one)
+
+## Checks run
+
+- PASS  loudness and true peak of the film (sound_gates.py loudness): 0 fail, 0 look, 0 known, 2 pass, 0 info; exit 0, 3.1 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py loudness '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/r/preflight-finish-2026-10-16-112900/01-loudness-and-true-peak-of-the-film-sound-gates-p.json
+- FAIL  the film is as long as the timeline (sound_gates.py length): 1 fail, 0 look, 0 known, 0 pass, 0 info; exit 1, 0.1 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py length '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' --expected 272.3333 --step finishing --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/r/preflight-finish-2026-10-16-112900/02-the-film-is-as-long-as-the-timeline-sound-gates-.json
+- FAIL  the film's sound against the mix at every page (sound_gates.py alignment): 1 fail, 0 look, 0 known, 0 pass, 0 info; exit 1, 2.4 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py alignment '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/mix-late40ms.flac /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/timeline-plus2.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/r/preflight-finish-2026-10-16-112900/03-the-film-s-sound-against-the-mix-at-every-page-s.json
+- FAIL  jumps between frames, outside the planned cuts (find_jumps.py): 57 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 73.9 s; paper-film/tools/find_jumps.py version 25733920
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/paper-film/tools/find_jumps.py '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/r/preflight-finish-2026-10-16-112900/jumps-sheet.jpg 4
+
+## Inputs (sha1 when the run ended)
+
+- 8154fd50aa5fdce97153553f0bacce5e5a2ed02f  /home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4
+- c3cdd5f59f4656e9a346ff5601775b1582bf0a55  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/mix-late40ms.flac
+- 6452e5e07f883907d0f57b5192eda9bf1e0abb33  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/timeline-plus2.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/finish/r/preflight-finish-2026-10-16-112900.json

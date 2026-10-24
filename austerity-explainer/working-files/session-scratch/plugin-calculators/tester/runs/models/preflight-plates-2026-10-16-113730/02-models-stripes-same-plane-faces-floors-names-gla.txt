@@ -1,0 +1,52 @@
+model_lint: 2 file(s) as one set: no-2-chimney-a-round3.glb, no-2-chimney-a-round4.glb
+  no-2-chimney-a-round3.glb: 204 triangles, 12 parts
+  no-2-chimney-a-round4.glb: 204 triangles, 12 parts
+
+Stripes (squashed texture coordinates):
+  FAIL no-2-chimney-a-round3.glb: 8 striped part(s) (allowed 0)
+      no-2-chimney-a (no-2-brick): 31.2 of 49.2 square metres (63%)
+      no-2-chimney-a (no-2-chimney-brick): 30.25 of 36.31 square metres (83%)
+      no-2-chimney-a (no-2-stone-lit-sides): 8.32 of 8.32 square metres (100%)
+      no-2-chimney-a (no-2-chimney-brick-black): 6.73 of 22.57 square metres (30%)
+      no-2-chimney-a (no-2-chimney-cap): 5.3 of 15.09 square metres (35%)
+      no-2-chimney-a (no-2-stone): 4.16 of 79.99 square metres (5%)
+      no-2-chimney-a (no-2-stone-lit-lane-side): 4.16 of 4.16 square metres (100%)
+      no-2-chimney-a (no-2-chimney-brick-sooted): 2.26 of 6.24 square metres (36%)
+  PASS no-2-chimney-a-round4.glb: 0 striped part(s) (allowed 0)
+  Fix: unwrap those faces again (a box or cube projection); a squashed texture paints as streaks the painter copies.
+
+FAIL Surfaces on the same plane, facing the same way: 1 pair(s) of objects
+      no-2-chimney-a-round3.glb: no-2-chimney-a  and  no-2-chimney-a-round4.glb: no-2-chimney-a: 317.1643 square metres overlap, facing [-1.0, 0.0, 0.0], near [5.8, 35.167, 24.767]
+  Fix: move one surface 0.01 m apart (models.coplanar_gap_metres); they swap colour as the camera moves.
+
+PASS Floors laid just over another ground (0 to 0.05 m above it): 0
+
+Names:
+  WARN no-2-chimney-a-round3.glb: its root is "no-2-chimney-a", not "no-2-chimney-a-round3" (named as the file)
+  WARN no-2-chimney-a-round4.glb: its root is "no-2-chimney-a", not "no-2-chimney-a-round4" (named as the file)
+
+PASS Glass whose see-through value comes from its picture: 0
+
+PASS Glowing materials with a light plain base colour: 0
+
+Fronts (the way each model's lettering faces):
+  no-2-chimney-a-round3.glb: no lettered material (declare its front in the index)
+  no-2-chimney-a-round4.glb: no lettered material (declare its front in the index)
+
+Verdict: FAIL (same-plane, stripes)
+
+Settings used (film-settings.json):
+  views_and_models.model_lint.stripe_ratio_of_median = 0.02 share of the part's median texture area per square metre (judged)
+  views_and_models.model_lint.stripe_report_area_square_metres = 0.5 square metres of striped faces in one part (judged)
+  views_and_models.model_lint.stripe_face_min_area_square_metres = 1e-06 square metres (judged)
+  views_and_models.lettering_material_patterns = ["*-lettering", "*-lettering.0*", "*-stencil", "*-stencil.0*", "*-printing", "*-printing.0*", "*-paper", "*-paper.0*"] material name patterns (lower case, * any letters) (judged)
+  views_and_models.model_lint.same_plane_gap_metres = 0.0001 metres between the two planes (invented)
+  views_and_models.model_lint.same_plane_normal_cos = 0.9999 cosine between the two faces' normals (facing the same way) (invented)
+  views_and_models.model_lint.same_plane_overlap_min_square_metres = 0.001 square metres of overlap (or of raised floor) worth reporting (invented)
+  models.ground_under_raised_area_metres = 0.05 metres (judged)
+  views_and_models.model_lint.upward_normal_z_min = 0.9 normal's z (1 = straight up) (invented)
+  views_and_models.model_lint.floor_min_square_metres = 1.0 square metres of a raised floor over another ground (invented)
+  views_and_models.model_lint.glass_material_patterns = ["*glass*", "*lens*", "*mantle*"] material name patterns (lower case) (judged)
+  views_and_models.model_lint.glowing_base_brightness_max = 0.05 base colour brightness (0 to 1, linear) (invented)
+  models.striped_parts_allowed = 0 parts (judged)
+  models.coplanar_gap_metres = 0.01 metres (judged)

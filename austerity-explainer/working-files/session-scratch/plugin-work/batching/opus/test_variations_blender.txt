@@ -1,0 +1,128 @@
+== place variations: settings, checks before and after drawing, the split, the card and the sheet
+PASS  a set written nested is read as flat dotted keys: {'dials.moss_and_algae.cover': 0.5, 'amount.moss_and_algae': 0.5, 'state': 'wet'}
+PASS  values out of range, a dial that is really an amount, an unknown key, a wrong word and a non-number are each named: "dials.moss_and_algae.cover" is 1.5, outside its range 0 to 1 | the layer "dirt" has no dial "amount" (its dials: seed, film, foot_splash, foot_height_metres, dust, polish; write the layer's strength as amount.dirt) | "colour" is not a sett
+PASS  `keys` lists every setting with its range (dials, amounts, state, look): yes
+PASS  0.50 and 0.55 of a 0-to-1 dial are NOT measurably apart (5 percent), 0.50 and 0.90 are (40 percent): 0.63 and 5.00 times the smallest gap that counts
+PASS  a word that differs always counts (wet against dry), and so does a different seed: yes
+PASS  numbers in a script hook count by their written range, and by a quarter of the larger value when they have none: yes
+PASS  a missing file is a plain sentence that says what to write: the variations file no-such-file.json is not there. Write one (see `explainer-film-place variations --help`) or make one with `explainer-film-place variations m
+PASS  no variations is a plain sentence that says what to write: the variations file /tmp/place-variations-test-3n18ax_h/work/p1.json needs a "variations" list with at least two entries: {"variations": [{"name": "a", "set": {
+PASS  all the problems of a file are said at once: reserved name, unknown key (with the allowed ones), duplicate name, bad name, missing hook, args without a hook, missing scene: the variations file /tmp/place-variations-test-3n18ax_h/work/p2.json has 7 problem(s):
+  - the scene /tmp/place-variations-test-3n18ax_h/work/nothing.blend is not there (save the finished place first; a variation round starts from a saved scene)
+  - "baseline" is a reserved name (the saved scene as 
+PASS  ten amounts 0.2 apart (0 to 2, around the saved 1.0) are kept; the near-duplicate, the empty one and the one equal to the saved scene (1.0) are dropped: got ['m-near', 'nothing', 'same-as-saved'], expected ['m-near', 'nothing', 'same-as-saved']
+PASS  ...and each drop is a plain sentence naming what it is too close to: it is a near-duplicate of "m2": the largest gap between them (moss and algae amount) is 2% of its range, and at least 8% is needed
+PASS  the later variation goes, never the earlier (m-near, 0.45, came after m2, 0.4): yes
+PASS  ten kept variations pass the before-drawing check: got 'ok', expected 'ok'
+PASS  ten variations make 3 jobs (at most 3 cards at once): 4, 4 and 3 entries with the baseline in a job of 3 variations: [4, 4, 3]
+PASS  the baseline is drawn exactly once, first in its job: got 1, expected 1
+PASS  every kept variation is in exactly one job: yes
+PASS  four variations make 2 jobs: got 2, expected 2
+PASS  two variations make 1 job: got 1, expected 1
+PASS  asking for 5 jobs gives at most 3: got 3, expected 3
+PASS  the estimate is in card seconds, a little more than 3 wake-ups, and counts 22 pictures for 11 entries and 2 cameras: 208.0 card s, 90.0 s side by side
+PASS  more than 16 variations is refused as wandering (status refuse and the sentence says what to do): FAIL before drawing: 18 variations is more than 16: that is wandering, not looking. Keep the 10 that differ most and sen
+PASS  ...and so is a batch where nothing is left after the drops: got 'refuse', expected 'refuse'
+PASS  `make` spreads 10 variations so that every pair differs by at least a tenth of the range on EVERY number setting (a Latin hypercube): the closest pair is 0.100 of the range apart
+PASS  ...gives each variation its own name and keeps words in turn: yes
+PASS  the same seed gives the same file, another seed another: got (True, False), expected (True, False)
+PASS  the 10 made variations all survive the check before drawing: yes
+PASS  `refine` blends two picks (the mean of each number) as its first variation and spreads the rest around the blend: yes
+PASS  a pick that is not in the result is named, with the names that are: yes
+PASS  `keys` says what amount and master mean: they SCALE the saved scene, 0 to 2, 1 = as saved: master: 0 to 2 (1 = every wear layer as the saved scene has it; 0 = no wear)
+PASS  an amount of 1.6 is far enough from the saved scene (30 percent of 0 to 2); 1.1 is not (5 percent): it would draw the baseline again: yes
+PASS  with the saved scene's real value (read by a scout) a dial equal to its DEFAULT is far from the scene (0.4 against 0.7), and one equal to the scene is "the baseline again": yes
+PASS  when the materials of the saved scene differ (0.3 here, 0.7 there), a variation counts as far as its LARGEST gap: 0.3 everywhere still changes the materials that had 0.7: yes
+PASS  `make --range KEY LOW HIGH` spreads that setting only over the part of its range that shows (crack density 0.5 to 1, 0.05 apart), the others over their whole range, and says so in "about": [0.525, 0.575, 0.625, 0.675, 0.725, 0.775, 0.825, 0.875, 0.925, 0.975]
+PASS  a wrong --range is a plain sentence: LOW above HIGH, outside the setting's range, a key that is not being spread, a word, not numbers: --range dials.cracks_and_chips.crack_density 0.8 0.2 must ha | --range dials.cracks_and_chips.crack_density 0.5 1.5 must ha | --range names dials.dirt.film, which is not one of the --key | --range cannot limit state: it is a word or a seed, not a nu | --range dials.cracks_and_chips.crack_density needs two numbe
+PASS  a pair of identical pictures is flagged as nearly the same, and so is a copy of the baseline ("does not show"): [['baseline', 'twin-a'], ['brighter', 'brighter-too']]
+PASS  a picture brighter by 40 of 255 is NOT nearly the same as the baseline: yes
+PASS  a change on a small part of the picture (a patch of 30 x 50 pixels) still counts as different (the changed share, not only the mean): 9.10 of 255 on average
+PASS  the measures of the brighter picture: the value range moved up, the colour shifted from the baseline, and the squint score is under 1: colour shift 15.5, squint 0.946
+PASS  the baseline against itself: colour shift 0 and squint 1.0: got (0.0, 1.0), expected (0.0, 1.0)
+PASS  the drift of a reset check: 0 for the same picture, large for another: yes
+PASS  the contact sheet is ONE jpg under 400 KB (400,000 bytes) even for noisy pictures (quality, then size, are lowered until it fits): 359 KB at quality 58, scale 0.9, 1686 x 1206
+PASS  ...and it is a real picture of the right shape for 11 cells in 3 columns: 1686 x 1206
+PASS  the three jobs are sent at the same time: every /run comes before the first wait: /run at [20, 21, 22], first status at 23
+PASS  a variation that failed is named and gives exit 1: got (1, True), expected (1, True)
+PASS  the sentence before drawing names the near-duplicate that was dropped: LOOK dropped "moss-near": it is a near-duplicate of "moss1": the largest gap between them (moss and algae amount) is 1% of its range, and at
+PASS  the result file and the sheet are made even though one variation failed: 303 KB
+PASS  the baseline and every kept variation have a result (9 kept + the baseline = 10; the near-duplicate was dropped): got 10, expected 10
+PASS  the two rubbish variations (settings far apart, pictures identical) are flagged AFTER drawing as not showing: ['rubbish-high', 'rubbish-low']
+PASS  ...and as nearly the same as each other: yes
+PASS  the moss variations, which change the pictures, are not flagged: yes
+PASS  the ledger has one entry for each job with its billed seconds: work 41, 42, 43 + wake-up 22 + idle 5: got [68.0, 69.0, 70.0], expected [68.0, 69.0, 70.0]
+PASS  ...and two for the small jobs, measured: the set-up (uploads and checks, written BEFORE the long wait, so a cut-off command still counts them) and the downloads: [('set-up (uploads and checks) fo', 20), ('downloads for the variations b', 6)]
+PASS  every job got a "sent" line the moment it went out (with an estimate), before any wait; their billed seconds came in later, so none is still counted at its estimate: 3 sent lines
+PASS  ...and one batch entry (the batch rule counts them): yes
+PASS  the sheet's footer carries the card seconds, the wake-up times and says it is an estimate, not a bill: Card seconds (work + wake-up + the idle tail): job 1: work 41.0 + wake-up 22.0 + idle tail 5 = 68.0 s; job 2: work 42.0 + wake-up 22.0 + idle tail 5 = 69.0 s; job 3: work 43.0 + wake-up 22.0 + idle ta
+PASS  the report says where the jobs ran and how many seconds they used: yes
+PASS  every picture came back through the bundle (2 cameras for 10 entries, minus the broken one): 18 pictures
+PASS  no key or endpoint id reaches the report, the result or the ledger: yes
+PASS  `plan` draws nothing: no call to the card, no ledger file, exit 0, and it says the split and the estimate: yes
+PASS  a helper with 590 of its 600 s used is REFUSED before any call is made (exit 1, nothing uploaded, nothing sent): exit 1, 0 call(s)
+PASS  with a written reason a batch estimated at under half again of the allowance may go (the override is written into the ledger); one that would pass even that is refused: LOOK card time: OVER THE ALLOWANCE by 196 s (walls (role builder) has used 590 s of 600 s (10 min); this batch (3 job(s)) needs about 206 s more, 796 s in all).
+PASS  a THIRD batch for the same change is refused before any call ("one batch, look, at most one more"): cene.
+PASS card time: walls (role builder) has used 0 s of 600 s (10 min); this batch (3 job(s)) needs about 206 s more, 206 s in all.
+ledger: /tmp/place-variations-test-3n18ax_h/ledgers/batches.jsonl
+PASS  drawn on this computer (here with the fake blender), no card seconds are used, so even a planner may do it, and the footer says so: look at the sheet with the Read tool; pick one variation, or combine two or three, and draw at most ONE more batch (`explainer-film-place variations refine variations-result.json --pick NAME NAME`); then apply the pick in the real scene, and go on. Draw full-size pictures only once, at the very end.
+PASS  the older command-line client works too: jobs sent with `run`, waited for with `job` (it answers IN_QUEUE first), pictures downloaded: look at the sheet with the Read tool; pick one variation, or combine two or three, and draw at most ONE more batch (`explainer-film-place variations refine variations-result.json --pick NAME NAME`); then apply the pick in the real scene, and go on. Draw full-size pictures only once, at the very end.
+PASS  ...it cannot say what an upload billed, so those steps are counted from the wall clock and MARKED as an estimate in the ledger and on the sheet: ['set-up (uploads and checks) for the variations batch "moss test" (wall clock)', 'downloads for the variations batch "moss test" (wall clock)']
+PASS  ...and its jobs are logged with the wake-up and billed seconds the client printed: yes
+PASS  a job that waits in line past the time limit STOPS the batch with a plain sentence (exit 1); nothing is cancelled or changed:  waited 0 minutes in line. This client cannot ask whether the workers show idle, so it stops at the same time limit as the plugin client does. Nothing was cancelled or changed; tell the account owner.
+PASS  the report and the sheet are SHORT: the variations that came out nearly the same as the baseline are named in ONE line (not pair by pair), and a group of alike variations that DO show is one line too: "a", "b", "c" all came out nearly the same as the baseline (mean difference 0.20 to 0.30 of 255): the change does not show from these cameras, or it changes nothing in this scene, and so they are nearly the same as each other too || "d", "e" and "f" came out nearly the same as each other (mean diffe
+PASS    (each flagged variation still carries its own flag; the first of a group is the one to keep; the full pairs stay in the result file): {'baseline': [], 'a': ['does not show in these cameras (nearly the same as the baseline)'], 'b': ['does not show in these cameras (nearly the same as the baseline)'], 'c': ['does not show in these cameras (nearly the same as the baseline)'], 'd': [], 'e': ['nearly the same as #4 d'], 'f': ['nearly the same as #4 d'], 'g': []}
+PASS  a change name is cut between words, never in the middle of one, and stays within 40 characters: cracks-and-chips-on-the-lock-walls-and
+PASS  `make` writes the scene and the settings beside the file (relative), so the file still works after its folder is copied; the keys come in the order about, change, scene, settings, cameras, variations: ../work/scene.blend
+PASS  `refine` on a finished run writes its scene and settings beside the new file too, names the blend short (blend-moss1-moss3), keeps four decimals, and the new file is read by the real reader: {'name': 'blend-moss1-moss3', 'set': {'amount.moss_and_algae': 0.9}}
+PASS  the scene waits on the store under its own checksum, in the same place for every batch (place-jobs/scenes/<8 letters>/), so the second and last batch does not upload the scene again: ['/tmp/place-variations-test-3n18ax_h/store/place-jobs/scenes/a723b4b9/scene.blend']
+PASS    (the settings file and its owners table wait there too, under their own checksum, and are checked, not sent again): yes
+PASS  the command-line client can tell whether the kit is already on the store (it fetches a small marker file: one small job), so the kit is not uploaded twice: yes
+PASS  `variations scout` draws the same file HERE, in ONE job, tiny (240 x 160 from the house numbers), and writes a result marked as a scout beside the file: g (237 KB)
+PASS scout: drawn here in 0 s; no rented-card seconds were used. Result: /tmp/place-variations-test-3n18ax_h/work/scouted-scout/variations-result.json
+NEXT: look at the scout sheet with the Read tool, then `explainer-film-place variations plan scouted.json` (it uses this scout by itself).
+PASS  ...it finds the two variations that would not show (the fake worker ignores rubbish) and says plan and run will drop them before any card: ['LOOK scout: 2 of 8 variation(s) would not show on a card, so `plan` and `run` will drop them: "rubbish-low", "rubbish-high".']
+PASS  ...it costs no card seconds and is NOT a batch: nothing at all is written into the ledger (the batch rule does not count it): yes
+PASS  ...every variation carries a fingerprint of what it does (settings, hook numbers, hook file), and the scene its checksum, so a scout is only used for the same batch on the same scene: yes
+PASS  `plan` finds the scout by itself and drops what it found nearly the same as the saved scene, each with a sentence, BEFORE any card (6 of 8 left):  picture (an estimate from the house numbers; the first real batch gives better ones)
+PASS batches: batch 1 of at most 2 for the change "scouted-moss".
+PASS card time: walls (role builder) has used 0 s of 600 s (10 min); this batch (2 job(s)) needs about 148 s more, 148 s in all.
+ledger: /tmp/place-variations-test-3n18ax_h/ledgers/scout-plan.jsonl
+NEXT: to draw it, run the same command with `run`.
+PASS  a variation is matched to the scout by WHAT it does, not its name (moss0 renamed moss-zero is still scouted); a new one is named as "not in the scout": ['LOOK scout: 1 variation(s) were not in the scout (new or changed since), so it says nothing about them: "dirt-new".']
+PASS  --no-scout leaves the scout out (said plainly) and nothing is dropped by it: yes
+PASS  a scout of an older version of the scene is NOT used (the .blend changed since), and the sentence says to scout again: yes
+PASS  `run` on the card uses the scout too: only the 6 that show are drawn, the dropped ones are named on the sheet and in the result ("by": "scout"), and none of the 6 came out nearly the same: 7 results, invisible []
+PASS  a batch for the card with no scout gets ONE line saying the free scout exists and what it is for: yes
+PASS  cut off after sending: exit 1, and the three jobs are in the ledger as "sent" lines that COUNT at their estimates (so the allowance still sees them), with no billed seconds yet: exit 1, 3 open, used 203.9
+PASS  ...the run folder keeps the state (the three job ids, not finished) and the report says how to finish it: `variations collect RUN-FOLDER`: yes
+PASS    (`card-time show` says that jobs were sent whose billed seconds are not in yet): yes
+PASS  `collect` finishes it: nothing is sent again, the three jobs get their billed seconds (so no "sent" line counts any more), the pictures come back and the sheet is made: look at the sheet with the Read tool; pick one variation, or combine two or three, and draw at most ONE more batch (`explainer-film-place variations refine variations-result.json --pick NAME NAME`); then apply the pick in the real scene, and go on. Draw full-size pictures only once, at the very end.
+PASS  ...it writes into the ledger the batch was sent with (read from the state), counts no second batch, and the sheet says the jobs were collected later: yes
+PASS  a second `collect` of a finished batch asks nothing of a card and writes nothing: yes
+PASS  the tiny hut (two cameras) is built and finished for the variations: /place-variations-test-3n18ax_h/hut/hut-finished.blend --reports /tmp/place-variations-test-3n18ax_h/hut/preflight-reports --place-settings /tmp/place-variations-test-3n18ax_h/hut/place-settings.json
+
+PASS  the real worker draws every kept variation and the baseline (8 asked, 1 near-duplicate dropped), 2 pictures each: got (0, 8, 16), expected (0, 8, 16)
+PASS  the hook variation that is a near-duplicate was dropped BEFORE drawing, by the hook's own number and its written range: yes
+PASS  every job put the scene back exactly: the fingerprint of every wear input at the end equals the one at the start: a737a0cb58a54c6d/a737a0cb58a54c6d, a737a0cb58a54c6d/a737a0cb58a54c6d, a737a0cb58a54c6d/a737a0cb58a54c6d
+PASS  the baseline drawn AGAIN after all the variations (including a script hook and look and state rewrites) is the same picture as the first (drift under 0.5 of 255): {'job': 2, 'mean_difference_of_255': 0.0}
+PASS  a layer that is in no material of this scene is called out: "changes nothing here" and "does not show": ['changes nothing here: the layer rust is in no material of this scene, so its amount changed nothing', 'does not show in these cameras (nearly the same as the baseline)']
+PASS  state, look, master and the hook each change the pictures (none of them is "nearly the same" as the baseline): invisible: ['no-such-layer']
+PASS  the master at 0 gives the picture without wear: it measurably moved from the baseline, and `moss-high` moved the detail energy: colour shift 2.35
+PASS  the squint score of every variation against the baseline is a number between 0 and 1 and the baseline's own is exactly 1: yes
+PASS  the sheet is one JPG under 400 KB: 230 KB
+PASS  a batch drawn here writes no card seconds: yes
+FAIL  the worker reads what the saved scene has for every dial the job varies (lowest and highest over the materials): moss cover here: [{'dials.moss_and_algae.cover': [0.4, 0.4]}, {}, {}]
+PASS  the free scout on the real hut: drawn here at 240 x 160, the layer that is in no material does not show, twice the dirt (amount 2) DOES show, no ledger line: invisible ['moss-off', 'no-such-layer']; ns-test-3n18ax_h/hut/scout-hut-scout/variations-result.json
+NEXT: look at the scout sheet with the Read tool, then `explainer-film-place variations plan scout-hut.json` (it uses this scout by itself).
+PASS  ...it read the saved scene's moss cover (a lowest-highest pair over the materials) and puts it under the baseline on its sheet: {'dials.moss_and_algae.cover': [0.4, 0.4]}
+PASS  ...and `plan` drops what the scout found would not show (the missing layer), before anything is drawn: last picture (an estimate from the house numbers; the first real batch gives better ones)
+PASS batches: batch 1 of at most 2 for the change "scout-on-the-hut".
+PASS card time: this batch is drawn on this computer, so no rented-card seconds are used.
+NEXT: to draw it, run the same command with `run`.
+PASS  a camera that is not in the scene stops before anything is drawn (exit 2 from the worker, said plainly): got True, expected True
+PASS  the same kind of batch through the card route with Blender as the card's own program: scene, settings, hook and kit uploaded, jobs sent, bundle downloaded, sheet made:  22.0 s.
+PASS result: /tmp/place-variations-test-3n18ax_h/hut/run-card/variations-result.json
+NEXT: look at the sheet with the Read tool; pick one variation, or combine two or three, and draw at most ONE more batch (`explainer-film-place variations refine variations-result.json --pick NAME NAME`); then apply the pick in the real scene, and go on. Draw full-size pictures only once, at the very end.
+PASS  ...the paths in the job files are the card's own (the store), not this computer's, and the hook ran there: yes
+-- place variations: settings, checks before and after drawing, the split, the card and the sheet: 108 of 109 checks passed; FAILED: the worker reads what the saved scene has for every dial the job varies (lowest and highest over the materials): moss cover here

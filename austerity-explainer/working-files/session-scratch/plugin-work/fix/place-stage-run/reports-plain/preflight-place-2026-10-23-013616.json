@@ -1,0 +1,314 @@
+{
+ "stage": "place",
+ "stage_means": "after building a place and before drawing its views (the order: shots, build the place, place, plates)",
+ "verdict": "fail",
+ "counts": {
+  "fail": 12,
+  "warn": 4,
+  "known": 0,
+  "info": 0,
+  "pass": 13
+ },
+ "guarded_step": "drawing this place's views and plates (the long step: a place that fails is drawn again)",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.1,
+ "changed_inputs": [],
+ "started": "2026-10-23 01:36:16",
+ "first_lines": [
+  "Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): FAIL. 12 to fix, 4 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.",
+  "Long step BLOCKED: drawing this place's views and plates (the long step: a place that fails is drawn again). First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d58b2d0e",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/reports-plain/preflight-place-2026-10-23-013616",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/film-settings.json": "60447edc4392ff91e61ce1285327d330ee24c6c0",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/audit-plain.json": "385e807102b3d5c089888a84a5e0f0be658bf8d3",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/hut.blend": "ab7db475a6cd3992ebd5f6632d4fcee8f664850b"
+ },
+ "missing": [],
+ "checks": [
+  {
+   "title": "the place audit: surfaces, wear and construction (place_audit_check.py)",
+   "tool": "calculators/place_audit_check.py",
+   "version": "84f057d6",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/audit-plain.json --skip-freshness --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/reports-plain/preflight-place-2026-10-23-013616/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/reports-plain/preflight-place-2026-10-23-013616/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/reports-plain/preflight-place-2026-10-23-013616/01-the-place-audit-surfaces-wear-and-construction-p.txt",
+   "seconds": 0.06,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "place: quick output",
+     "where": "",
+     "text": "not a quick trial",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: roles",
+     "where": "",
+     "text": "every visible object has a role (12 objects)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: object types",
+     "where": "",
+     "text": "everything that is drawn is a mesh (or has a never role)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.door: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.door: wanted but missing moss_and_algae.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.floor: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.floor: wanted but missing moss_and_algae.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role ground.earth: missing normal_map, displacement, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, rubbish, plants, litter_pieces.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role ground.earth: wanted but missing moss_and_algae.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role roof.shingle: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, moss_and_algae.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role wall.plaster: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "10 object(s) lack bevelled_edges.",
+     "fix": "run explainer-film-place surfaces (it bevels with hardened normals)",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "7 object(s) lack shape_damage.",
+     "fix": "run explainer-film-place damage",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "no litter pieces on the ground (1 ground material(s) or object(s)).",
+     "fix": "run explainer-film-place grow.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "no plants on the ground (1 ground material(s) or object(s)).",
+     "fix": "run explainer-film-place grow.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "every layer amount is there and above its floor (state \"dry\")",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: off reasons",
+     "where": "",
+     "text": "nothing is switched off",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: normal maps",
+     "where": "",
+     "text": "0 normal map(s): Non-Color, tangent, wired, pointing the right way",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: uv",
+     "where": "",
+     "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: displacement",
+     "where": "",
+     "text": "ground_mat: no displacement (role ground.earth needs it)",
+     "fix": "run explainer-film-place surfaces (it sets the method and grades or subdivides the mesh); roads: explainer-film-place roads.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: construction",
+     "where": "",
+     "text": "1 part(s) floats: nothing carries it (gap over 5 mm).",
+     "fix": "move it onto a support or add one (a post under the beam, a footing under the post); seat things with seat_on_ground",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: scale",
+     "where": "",
+     "text": "18 size(s) fit the real-world facts",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: plain boxes",
+     "where": "",
+     "text": "83% of the objects are plain sharp-edged boxes (at most 15%).",
+     "fix": "run explainer-film-place surfaces (it bevels every hard-edged role) and damage; if they have run, these objects have a role the surfaces step does not bevel (ground, water, glass, plants, trees), so chamfer their meshes yourself (bmesh.ops.bevel) or give them a role that is not a plain box.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: shape damage",
+     "where": "",
+     "text": "no role has most of its objects as exact copies",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: budgets",
+     "where": "",
+     "text": "triangles and scattered pieces are within the budgets",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: light",
+     "where": "",
+     "text": "the scene has light",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: renderer",
+     "where": "",
+     "text": "renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "the audit is about this scene file (freshness)",
+   "tool": "preflight.py place",
+   "version": "d58b2d0e",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "place: stale audit",
+     "where": "",
+     "text": "the audit was made from this exact scene file (hut.blend)",
+     "fix": "",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "pass"
+  },
+  {
+   "title": "a fresh checker has looked",
+   "tool": "preflight.py place",
+   "version": "d58b2d0e",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "place: fresh checker",
+     "where": "",
+     "text": "not checked: no fresh checker has looked at this place (--fresh-check).",
+     "fix": "run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "warn"
+  }
+ ],
+ "known_lists": [],
+ "notes": [
+  "The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look."
+ ],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/fix/place-stage-run/reports-plain/preflight-place-2026-10-23-013616.md"
+}

@@ -1,0 +1,17 @@
+PASS before drawing: 6 variation(s) asked, 6 kept.
+PASS plan: 6 variation(s) and the baseline in 2 job(s) (3, 3 variations; the baseline is drawn in job 1), 14 small picture(s) 600 x 400 through 2 camera(s); about 148 card seconds in all and about 90 s from sending to the last picture (an estimate from the house numbers; the first real batch gives better ones)
+LOOK batches: this is batch 2 of 2 for the change "cracks-and-chips-on-the-lock-walls-and": the last one. After it, pick or combine and go on.
+LOOK card time: batching-proof (role builder) has used 338 s of 600 s (10 min); this batch (2 job(s)) needs about 148 s more, 486 s in all: that is 80% or more of the allowance. Plan the rest with fewer pictures.
+ledger: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/card-time-ledger.jsonl
+PASS card: a command-line client
+PASS jobs sent: 2 job(s) at the same time (kit uploaded; the scene and the job files are on the store)
+PASS job 1 (a rented card): COMPLETED, exit 0, work 25.9 s billed, wake-up 0.9 s (the job's own clock: 25.6 s)
+PASS job 2 (a rented card): COMPLETED, exit 0, work 19.2 s billed, wake-up 20.4 s (the job's own clock: 19 s)
+PASS pictures: 14 drawn for 6 variation(s) and the baseline, cycles, 600 x 400
+LOOK nearly the same: "blend-v06-v10", "r03" and "r04" came out nearly the same as each other (mean difference 0.32 to 0.46 of 255; they differ in their settings but not in these cameras): keep one of them
+PASS sheet: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/cracks-batch2-run/cracks-and-chips-on-the-lock-walls-and-sheet.jpg (281 KB, 1874 x 1117)
+PASS card seconds: Card seconds (work + wake-up + the idle tail): job 1: work 25.9 + wake-up 0.9 + idle tail 5 = 31.8 s; job 2: work 19.2 + wake-up 20.4 + idle tail 5 = 44.6 s; set-up and downloads 28 s (an estimate from the wall clock); in all 104 s, about US$0.03 (an estimate at the price of the day, US$1.1 an hour; not a bill).
+PASS The 2 job(s) ran side by side: from sending to the last result took 43 s. Wake-up times (waiting for a card to start): 0.9 s, 20.4 s.
+PASS result: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/cracks-batch2-run/variations-result.json
+NEXT: look at the sheet with the Read tool; pick one variation, or combine two or three, and draw at most ONE more batch (`explainer-film-place variations refine variations-result.json --pick NAME NAME`); then apply the pick in the real scene, and go on. Draw full-size pictures only once, at the very end.
+exit 0

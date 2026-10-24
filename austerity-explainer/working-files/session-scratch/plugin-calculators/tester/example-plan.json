@@ -1,0 +1,84 @@
+{
+ "about": "A preflight plan: the film's files, named once for every stage. Paths are read from this file's folder. Each stage holds one item, or a list of items (one per place, view, painting or chapter).",
+ "kit": "film-kit",
+ "reports": "preflight-reports",
+ "script": {
+  "script": "narration/narration-script.json",
+  "word_times": "film-kit/examples/inflation-chapter-2/word-times.json",
+  "research_ledger": "research/claims.json",
+  "spend_ledger": "spend-ledger.json"
+ },
+ "record": {
+  "script": "narration/narration-script.json",
+  "transcripts": "narration/transcripts",
+  "recordings": "narration/recordings",
+  "word_times": "narration/word-times.json"
+ },
+ "shots": [
+  {
+   "place_facts": "places/works-place-facts.json",
+   "shot_list": "places/works-shots.json",
+   "check_files": {
+    "w1": "places/works-w1-shot-check.json",
+    "w3": "places/works-w3-shot-check.json"
+   }
+  }
+ ],
+ "plates": [
+  {
+   "name": "w1",
+   "view": "w1",
+   "check": "places/works-w1-shot-check.json",
+   "plate": "plates/works-w1-plate.png",
+   "plate_facts": "plates/w1-plate-facts",
+   "render_log": "plates/plates.log",
+   "shot_report": "checks/w1/report.md",
+   "helper_plate": "plates/works-w1-behind-plate.png",
+   "place_facts": "places/works-place-facts.json",
+   "brief": "places/works-brief.json",
+   "spend_ledger": "spend-ledger.json"
+  }
+ ],
+ "paint": [
+  {
+   "name": "w1",
+   "painting": "paintings/w1-returned.png",
+   "plate": "plates/works-w1-plate.png",
+   "check": "places/works-w1-shot-check.json",
+   "plate_facts": "plates/w1-plate-facts",
+   "near_list": "requests/w1/near-list.json"
+  }
+ ],
+ "pages": {
+  "events": "checks/page-events-3-5.json",
+  "scene": "my-chapter",
+  "numbers_ledger": "research/numbers.json",
+  "camera_log": "checks/camera.json"
+ },
+ "film": {
+  "events": "checks/page-events-3-5.json",
+  "scene": "my-chapter",
+  "critique": "checks/critique.json",
+  "page_files": [
+   "film-kit/paper-film/scenes/my-chapter"
+  ],
+  "rates": "checks/rates.json"
+ },
+ "finish": {
+  "film": "deliver/chapter.mp4",
+  "mix": "mix/chapter-mix.flac",
+  "timeline": "narration/timeline.json",
+  "send": "deliver/chapter-send.mp4"
+ },
+ "accepted": [
+  {
+   "stage": "pages",
+   "check": "lookups",
+   "text": "workers",
+   "page": 3,
+   "reason": "takes the first time, which is the one meant",
+   "who": "the director",
+   "date": "2026-10-16"
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+View audit of corner-shop: 1 view(s).
+
+View counter (interior), words read at its composed spot:
+    till display: 8.0 px at 2.9 m, height x1.00, width x1.00; too small
+    tobacco sign: 38.4 px at 4.3 m, height x1.00, width x1.00; legible
+
+Landmark tops (down the frame; the words band is [0.05, 0.22]):
+    counter plate street lamp across the road: 0.236 down, 0.221 across; just under the band
+    counter composed street lamp across the road: 0.226 down, 0.210 across; just under the band
+
+Continuity (figures in the frame, by view and state):
+    counter/all 0
+
+Problems:
+  - till display ("¥1,050") in counter (composed spot): letters 8.0 px tall, under 20 px. Make the letters 0.035 m tall for 20 px (0.044 m for 25 px), bring it nearer, or let a typed label carry the word.
+
+Look at:
+  - street lamp across the road in counter (plate): its top lands 0.236 down, within 0.02 of the words band; 5.0 m tall (now 5.0) clears 0.24. Look at the plate.
+  - street lamp across the road in counter (composed): its top lands 0.226 down, within 0.02 of the words band; 4.8 m tall (now 5.0) clears 0.24. Look at the plate.
+
+Notes:
+  - Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says).
+
+Verdict: FAIL (1 problem(s), 2 to look at)
+
+Settings used (film-settings.json):
+  lettering.must_read_min_pixels = 20 pixels tall (judged)
+  lettering.must_read_comfortable_pixels = 25 pixels tall (judged)
+  lettering.not_meant_to_read_max_pixels = 14 pixels tall (judged)
+  views_and_models.view_audit.must_read_facing_min_cos = 0.85 cosine between the sign's face and the way to the camera, across (the width of the letters) (invented)
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  safe_area.title_band_down = [0.05, 0.22] down the frame (judged)
+  safe_area.landmark_top_min_down = 0.24 down the frame (judged)
+  safe_area.text_left_pixels = 65 pixels (0.06 of the width) (judged)
+  safe_area.text_right_pixels = 972 pixels (0.90 of the width) (judged)
+  shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share = 0.85 share of the title zone that is sky (judged)
+  people.head_height_metres = 0.23 metres (judged)
+  people.facing_head_max_pixels = 24 pixels tall (invented)
+  people.backs_to_camera_min_distance_metres = 6.0 metres from every camera spot along a slide (judged)
+  views_and_models.view_audit.face_shows_within_degrees = 100 degrees between a figure's facing and the way to the camera (invented)
+  views_and_models.view_audit.figure_half_width_metres = 0.25 metres either side of a figure's feet (judged)

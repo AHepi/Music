@@ -1,0 +1,129 @@
+{
+ "stage": "film",
+ "stage_means": "before filming",
+ "verdict": "pass",
+ "counts": {
+  "fail": 0,
+  "warn": 0,
+  "known": 0,
+  "info": 2,
+  "pass": 2
+ },
+ "guarded_step": "filming the chapter",
+ "step_kind": "long",
+ "blocked": false,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [
+  {
+   "what": "filming",
+   "seconds": 2628.2,
+   "note": "2 worker(s), 1 stretch(es) under 2 hours; rates from the table (a fallback)"
+  }
+ ],
+ "allowance": null,
+ "preflight_seconds": 0.1,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:21:19",
+ "first_lines": [
+  "Preflight film (before filming): PASS. 0 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.",
+  "Long step ready: filming the chapter (filming: about 43.8 min)."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz": "c2a6092782c6cd0fc8fb7c75ca7b96e510d482da",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/critique-hyphen.json": "0233ce47ca0e6b8d5c2f25f14d804f4b37ae082b",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/pages": "1250e84bf378f18df940db9a2bc9da851036716e",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/pages/page-3.js": "9c9d664e68e15d0e47064ba230ea64c187c2bc08"
+ },
+ "missing": [
+  {
+   "input": "rates",
+   "option": "--rates",
+   "what": "this film's measured seconds a frame (rates.json)",
+   "make": "python3 calculators/plan_budget.py profile-commands EVENTS --scene S, film those short pieces, then plan_budget.py measure LOGS --events EVENTS --out rates.json",
+   "needed_by": "plan_budget.py filming",
+   "required": false,
+   "why": "without this film's own measured rates the plan uses the table (round 4), which missed round 5 by 52%",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "a critique newer than every page file, each finding fixed or accepted",
+   "tool": "preflight.py",
+   "version": "d836d994",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "critique newer than the pages",
+     "where": "",
+     "text": "the critique (2026-10-16 11:21) is newer than every page file (newest: page-3.js)",
+     "tool": "preflight.py",
+     "fix": ""
+    },
+    {
+     "verdict": "info",
+     "check": "critique finding (must-fix)",
+     "where": "page 3 at 55",
+     "text": "MACHINES unreadable",
+     "fix": "x",
+     "tool": "preflight.py"
+    },
+    {
+     "verdict": "info",
+     "check": "critique findings",
+     "where": "",
+     "text": "1 finding(s) not yet marked \"status\": \"fixed\" or \"accepted\" (with \"who\" and \"date\") in the critique file",
+     "tool": "preflight.py",
+     "fix": ""
+    }
+   ],
+   "verdict": "pass"
+  },
+  {
+   "title": "a passed pages report newer than every page file",
+   "tool": "preflight.py",
+   "version": "d836d994",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "pages report",
+     "where": "",
+     "text": "the newest pages report (2026-10-16 11:21:12) passed and is newer than every page file",
+     "tool": "preflight.py",
+     "fix": ""
+    }
+   ],
+   "verdict": "pass"
+  },
+  {
+   "title": "filming time, workers, pieces, memory and disk (plan_budget.py filming)",
+   "tool": "calculators/plan_budget.py",
+   "version": "bdcb5933",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_budget.py filming /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz --scene inflation-chapter-2-newcomers --blender-running no --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119/03-filming-time-workers-pieces-memory-and-disk-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119/03-filming-time-workers-pieces-memory-and-disk-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119/03-filming-time-workers-pieces-memory-and-disk-plan.txt",
+   "seconds": 0.09,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/filmtest/reports/preflight-film-2026-10-16-112119.md"
+}

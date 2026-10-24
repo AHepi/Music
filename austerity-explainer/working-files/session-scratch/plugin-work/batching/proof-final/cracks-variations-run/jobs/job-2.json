@@ -1,0 +1,68 @@
+{
+ "job": 2,
+ "scene": "/workspace/place-jobs/scenes/5dd1c4b4/canal_finished.blend",
+ "settings": "/workspace/place-jobs/scenes/5dd1c4b4/settings-7e7ca009-f3b44ea4/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-cracks-and-chips-on-the-lock-walls-and-1792730483/job-2",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v02-crackden98-crackwid95",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.98,
+    "dials.cracks_and_chips.crack_width_metres": 0.0476,
+    "dials.cracks_and_chips.chip_amount": 0.95,
+    "amount.cracks_and_chips": 1.09
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v05-crackden62-crackwid15",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.62,
+    "dials.cracks_and_chips.crack_width_metres": 0.0092,
+    "dials.cracks_and_chips.chip_amount": 0.75,
+    "amount.cracks_and_chips": 1.23
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v08-crackden82-crackwid5",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 0.82,
+    "dials.cracks_and_chips.crack_width_metres": 0.0044,
+    "dials.cracks_and_chips.chip_amount": 0.05,
+    "amount.cracks_and_chips": 1.79
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

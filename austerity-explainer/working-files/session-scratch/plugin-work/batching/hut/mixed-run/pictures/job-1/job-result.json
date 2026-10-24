@@ -1,0 +1,42 @@
+{
+ "job": 1,
+ "scene": "hut-finished.blend",
+ "blender": "5.2.2 LTS",
+ "device": "CPU (this computer)",
+ "engine": "CYCLES",
+ "engine_reasons": [
+  "forced to cycles (the rule says eevee: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off))"
+ ],
+ "size": [
+  160,
+  108
+ ],
+ "samples": 6,
+ "where": "local",
+ "cameras": [
+  "Camera A"
+ ],
+ "fingerprint_at_start": "a737a0cb58a54c6d",
+ "reset_check": {
+  "camera": "Camera A",
+  "file": "reset-check__camera-a.jpg",
+  "engine": "CYCLES",
+  "width": 160,
+  "height": 108,
+  "samples": 6,
+  "seconds": 0.43,
+  "bytes": 4056,
+  "ok": true,
+  "mean_luminance": 0.3692677319049835
+ },
+ "seconds_in_all": 2.4,
+ "reopened": 1,
+ "entries": [
+  "baseline",
+  "wet",
+  "kept",
+  "dark-roof"
+ ],
+ "ok": true,
+ "fingerprint_at_end": "a737a0cb58a54c6d"
+}

@@ -1,0 +1,1825 @@
+{
+ "scene": "page-events-test",
+ "pages": [
+  1,
+  2,
+  3
+ ],
+ "frames_sampled": 1298,
+ "verdicts": {
+  "fail": 0,
+  "look": 1,
+  "known": 0,
+  "info": 5,
+  "pass": 102
+ },
+ "problems": [
+  {
+   "check": "numbers",
+   "verdict": "look",
+   "page": null,
+   "text": "4%",
+   "detail": "numbers on screen but no ledger given (--ledger)",
+   "fix": "check each against the research ledger"
+  },
+  {
+   "check": "margins",
+   "verdict": "info",
+   "page": 1,
+   "text": "page 1",
+   "detail": "longest line ends 0.817 across (WORKERS); highest letters 0.0615 down (THE GATE)",
+   "fix": "",
+   "right_across": 0.8169,
+   "top_down": 0.0615
+  },
+  {
+   "check": "margins",
+   "verdict": "info",
+   "page": 2,
+   "text": "page 2",
+   "detail": "longest line ends 0.851 across (WHAT HAPPENS TO PRICES?); highest letters 0.0604 down (MOST PEOPLE AGREE)",
+   "fix": "",
+   "right_across": 0.8513,
+   "top_down": 0.0604
+  },
+  {
+   "check": "margins",
+   "verdict": "info",
+   "page": 3,
+   "text": "page 3",
+   "detail": "longest line ends 0.379 across (THE RULE); highest letters 0.0620 down (THE RULE)",
+   "fix": "",
+   "right_across": 0.3787,
+   "top_down": 0.062
+  },
+  {
+   "check": "readable",
+   "verdict": "info",
+   "page": 1,
+   "text": "PRICES (word on an arrow)",
+   "detail": "readable 2.87 s (it names the arrow; not counted)",
+   "fix": "",
+   "at": 15.785,
+   "full_at": 16.085,
+   "leaves": 18.965,
+   "cut": 18.965,
+   "readable_measured": 2.867,
+   "readable_formula": 2.88,
+   "fn": "priceArrow"
+  },
+  {
+   "check": "word groups",
+   "verdict": "info",
+   "page": null,
+   "text": "these pages",
+   "detail": "16 groups in 33 s: one every 2.1 s (plan 34 aims at about one every 6 s over the chapter)",
+   "fix": "",
+   "groups": 16,
+   "seconds": 32.83
+  },
+  {
+   "check": "fade at cut",
+   "verdict": "pass",
+   "page": 1,
+   "text": "PICTURE TWO BOXES",
+   "detail": "whole until the cut at 10.17 s (fadeOut 0)",
+   "fix": "",
+   "cut": 10.1667
+  },
+  {
+   "check": "fade at cut",
+   "verdict": "pass",
+   "page": 1,
+   "text": "EACH ONE = A WHOLE COUNTRY",
+   "detail": "whole until the cut at 10.17 s (fadeOut 0)",
+   "fix": "",
+   "cut": 10.1667
+  },
+  {
+   "check": "fade at cut",
+   "verdict": "pass",
+   "page": 1,
+   "text": "WORKERS",
+   "detail": "whole until the cut at 10.17 s (fadeOut 0)",
+   "fix": "",
+   "cut": 10.1667
+  },
+  {
+   "check": "fade at cut",
+   "verdict": "pass",
+   "page": 1,
+   "text": "MATERIALS",
+   "detail": "whole until the cut at 10.17 s (fadeOut 0)",
+   "fix": "",
+   "cut": 10.1667
+  },
+  {
+   "check": "frozen",
+   "verdict": "pass",
+   "page": 1,
+   "text": "page 1",
+   "detail": "longest stretch with nothing changing while she speaks: 0.00 s (limit 1.7 s)",
+   "fix": "",
+   "seconds": 0.0
+  },
+  {
+   "check": "frozen",
+   "verdict": "pass",
+   "page": 2,
+   "text": "page 2",
+   "detail": "longest stretch with nothing changing while she speaks: 0.00 s (limit 1.7 s)",
+   "fix": "",
+   "seconds": 0.0
+  },
+  {
+   "check": "frozen",
+   "verdict": "pass",
+   "page": 3,
+   "text": "page 3",
+   "detail": "longest stretch with nothing changing while she speaks: 1.30 s (limit 2.5 s)",
+   "fix": "",
+   "seconds": 1.3
+  },
+  {
+   "check": "joins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "page 1 -> 2 join",
+   "detail": "peel; a new view",
+   "fix": ""
+  },
+  {
+   "check": "joins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "page 2 -> 3 join",
+   "detail": "peel; a new view",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "Picture",
+   "detail": "kit.at('Picture') -> 1.00 (page-events-test.js:69:20)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "country",
+   "detail": "kit.at('country') -> 6.03 (page-events-test.js:69:48)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "workers",
+   "detail": "kit.at('workers', 1) -> 7.38 (page-events-test.js:69:76)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "materials",
+   "detail": "kit.at('materials') -> 8.20 (page-events-test.js:69:109)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "Workers",
+   "detail": "kit.at('Workers', 2) -> 10.14 (page-events-test.js:70:16)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "wait",
+   "detail": "kit.at('wait') -> 10.66 (page-events-test.js:70:44)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "spends",
+   "detail": "kit.at('spends') -> 13.81 (page-events-test.js:70:68)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "So",
+   "detail": "kit.at('So') -> 15.49 (page-events-test.js:70:90)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "prices",
+   "detail": "kit.at('prices') -> 15.79 (page-events-test.js:70:112)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "up",
+   "detail": "kit.at('up') -> 16.55 (page-events-test.js:71:15)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "four",
+   "detail": "kit.at('four') -> 17.85 (page-events-test.js:71:35)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "government",
+   "detail": "kit.at('government') -> 13.16 (page-events-test.js:71:63)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "No",
+   "detail": "kit.at('No') -> 20.07 (page-events-test.js:124:15)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "spare",
+   "detail": "kit.at('spare') -> 20.36 (page-events-test.js:124:36)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "boxes",
+   "detail": "kit.at('boxes') -> 20.78 (page-events-test.js:124:60)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "What",
+   "detail": "kit.at('What') -> 21.66 (page-events-test.js:124:83)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "happens",
+   "detail": "kit.at('happens') -> 22.04 (page-events-test.js:124:108)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "Have",
+   "detail": "kit.at('Have') -> 23.76 (page-events-test.js:124:133)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "guess",
+   "detail": "kit.at('guess') -> 24.39 (page-events-test.js:124:156)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "Most",
+   "detail": "kit.at('Most') -> 25.26 (page-events-test.js:125:17)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "agree",
+   "detail": "kit.at('agree') -> 26.11 (page-events-test.js:125:40)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "this",
+   "detail": "kit.at('this') -> 26.82 (page-events-test.js:125:63)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "The",
+   "detail": "kit.at('The', 1) -> 27.66 (page-events-test.js:125:85)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "prices",
+   "detail": "kit.at('prices', 2) -> 27.99 (page-events-test.js:125:112)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "stay",
+   "detail": "kit.at('stay') -> 30.68 (page-events-test.js:125:139)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "up",
+   "detail": "kit.at('up', 2) -> 31.06 (page-events-test.js:126:16)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "That",
+   "detail": "kit.at('That') -> 31.80 (page-events-test.js:126:39)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "prices",
+   "detail": "kit.at('prices', 1) -> 22.84 (page-events-test.js:128:47)",
+   "fix": ""
+  },
+  {
+   "check": "lookups",
+   "verdict": "pass",
+   "page": 3,
+   "text": "rule",
+   "detail": "kit.at('rule') -> 38.94 (page-events-test.js:179:27)",
+   "fix": ""
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "PICTURE TWO BOXES",
+   "detail": "0.711 across at most, top 0.064 down",
+   "fix": "",
+   "left": 68,
+   "right": 768.1,
+   "top": 123,
+   "bottom": 173,
+   "right_across": 0.7112,
+   "top_down": 0.0641
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "EACH ONE = A WHOLE COUNTRY",
+   "detail": "0.756 across at most, top 0.113 down",
+   "fix": "",
+   "left": 67,
+   "right": 816.4,
+   "top": 216,
+   "bottom": 251,
+   "right_across": 0.7559,
+   "top_down": 0.1125
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "WORKERS",
+   "detail": "0.516 across at most, top 0.590 down",
+   "fix": "",
+   "left": 303.9,
+   "right": 557.2,
+   "top": 1133.1,
+   "bottom": 1201.9,
+   "right_across": 0.5159,
+   "top_down": 0.5902
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "MATERIALS",
+   "detail": "0.730 across at most, top 0.681 down",
+   "fix": "",
+   "left": 504.6,
+   "right": 788.2,
+   "top": 1307.9,
+   "bottom": 1376.8,
+   "right_across": 0.7298,
+   "top_down": 0.6812
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "THE GATE",
+   "detail": "0.387 across at most, top 0.061 down",
+   "fix": "",
+   "left": 67,
+   "right": 417.6,
+   "top": 118,
+   "bottom": 173,
+   "right_across": 0.3867,
+   "top_down": 0.0615
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "WORKERS",
+   "detail": "0.817 across at most, top 0.306 down",
+   "fix": "",
+   "left": 567.1,
+   "right": 882.2,
+   "top": 587.3,
+   "bottom": 640,
+   "right_across": 0.8169,
+   "top_down": 0.3059
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "THE GOVERNMENT SPENDS",
+   "detail": "0.900 across at most, top 0.156 down",
+   "fix": "",
+   "left": 65,
+   "right": 972,
+   "top": 300,
+   "bottom": 410,
+   "right_across": 0.9,
+   "top_down": 0.1562
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "THE GOVERNMENT SPENDS",
+   "detail": "0.599 across at most, top 0.164 down",
+   "fix": "",
+   "left": 96,
+   "right": 646.7,
+   "top": 314.8,
+   "bottom": 345.8,
+   "right_across": 0.5988,
+   "top_down": 0.164
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "NEW MONEY SPENT",
+   "detail": "0.526 across at most, top 0.111 down",
+   "fix": "",
+   "left": 67,
+   "right": 568.1,
+   "top": 213,
+   "bottom": 251,
+   "right_across": 0.526,
+   "top_down": 0.1109
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "\u2192 PRICES GO UP",
+   "detail": "0.428 across at most, top 0.111 down",
+   "fix": "",
+   "left": 67.5,
+   "right": 462.7,
+   "top": 213,
+   "bottom": 251,
+   "right_across": 0.4284,
+   "top_down": 0.1109
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 1,
+   "text": "ABOUT 0%",
+   "detail": "0.775 across at most, top 0.572 down",
+   "fix": "",
+   "left": 236.7,
+   "right": 837.1,
+   "top": 1098,
+   "bottom": 1182,
+   "right_across": 0.7751,
+   "top_down": 0.5719
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "NO SPARE",
+   "detail": "0.392 across at most, top 0.061 down",
+   "fix": "",
+   "left": 69,
+   "right": 423.8,
+   "top": 118,
+   "bottom": 173,
+   "right_across": 0.3924,
+   "top_down": 0.0615
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "SPARE BOXES",
+   "detail": "0.419 across at most, top 0.529 down",
+   "fix": "",
+   "left": 140.7,
+   "right": 452.5,
+   "top": 1016.2,
+   "bottom": 1081.8,
+   "right_across": 0.419,
+   "top_down": 0.5293
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "WHAT HAPPENS TO PRICES?",
+   "detail": "0.851 across at most, top 0.066 down",
+   "fix": "",
+   "left": 66,
+   "right": 919.4,
+   "top": 127,
+   "bottom": 173,
+   "right_across": 0.8513,
+   "top_down": 0.0661
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "HAVE A GUESS",
+   "detail": "0.348 across at most, top 0.108 down",
+   "fix": "",
+   "left": 67,
+   "right": 376.4,
+   "top": 207,
+   "bottom": 239,
+   "right_across": 0.3485,
+   "top_down": 0.1078
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "MOST PEOPLE AGREE",
+   "detail": "0.396 across at most, top 0.060 down",
+   "fix": "",
+   "left": 66,
+   "right": 428.1,
+   "top": 116,
+   "bottom": 143,
+   "right_across": 0.3964,
+   "top_down": 0.0604
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "\u2192 PRICES GO UP",
+   "detail": "0.428 across at most, top 0.111 down",
+   "fix": "",
+   "left": 67.5,
+   "right": 462.7,
+   "top": 213,
+   "bottom": 251,
+   "right_across": 0.4284,
+   "top_down": 0.1109
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 2,
+   "text": "+ STAY UP",
+   "detail": "0.682 across at most, top 0.111 down",
+   "fix": "",
+   "left": 483.6,
+   "right": 737.1,
+   "top": 213,
+   "bottom": 251,
+   "right_across": 0.6825,
+   "top_down": 0.1109
+  },
+  {
+   "check": "margins",
+   "verdict": "pass",
+   "page": 3,
+   "text": "THE RULE",
+   "detail": "0.379 across at most, top 0.062 down",
+   "fix": "",
+   "left": 67,
+   "right": 409,
+   "top": 119,
+   "bottom": 173,
+   "right_across": 0.3787,
+   "top_down": 0.062
+  },
+  {
+   "check": "numbers",
+   "verdict": "pass",
+   "page": 1,
+   "text": "ABOUT 4%",
+   "detail": "lands at 17.90 s (its number is completed by \"four\" at 17.85 s), held still 1.07 s (needs 1.00 s)",
+   "fix": "",
+   "count_end": 17.9,
+   "held": 1.065,
+   "needed": 1.0,
+   "number_word": "four",
+   "number_word_at": 17.85
+  },
+  {
+   "check": "pauses",
+   "verdict": "pass",
+   "page": 1,
+   "text": "page 1 -> 2",
+   "detail": "pause 1.40 s; needs 1.30 s (peel 0.30 s after the last word, 0.85 s long, + 0.15 s to settle; a plain peel, kept within 1.1-1.7 s)",
+   "fix": "",
+   "gap": {
+    "page": 1,
+    "next_page": 2,
+    "join": "peel",
+    "join_after": 0.3,
+    "join_length": 0.85,
+    "hold": 0.0,
+    "needed": 1.3,
+    "recommended": 1.3,
+    "in_timeline": 1.4,
+    "join_clear_of_next_word": 0.25,
+    "sampled": true,
+    "plain_peel": true
+   }
+  },
+  {
+   "check": "pauses",
+   "verdict": "pass",
+   "page": 2,
+   "text": "page 2 -> 3",
+   "detail": "pause 4.00 s; needs 4.00 s (peel 0.30 s after the last word, 0.85 s long, + 0.15 s to settle; guess hold 4.0 s)",
+   "fix": "",
+   "gap": {
+    "page": 2,
+    "next_page": 3,
+    "join": "peel",
+    "join_after": 0.3,
+    "join_length": 0.85,
+    "hold": 4.0,
+    "needed": 1.3,
+    "recommended": 4.0,
+    "in_timeline": 4.0,
+    "join_clear_of_next_word": 2.85,
+    "sampled": true,
+    "plain_peel": false
+   }
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "PICTURE TWO BOXES",
+   "detail": "readable 9.00 s (measured 9.00 s)",
+   "fix": "",
+   "at": 1,
+   "full_at": 1.1400000000000001,
+   "leaves": 10.145,
+   "cut": 10.1667,
+   "readable_measured": 9.0,
+   "readable_formula": 9.005,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "EACH ONE = A WHOLE COUNTRY",
+   "detail": "readable 3.97 s (measured 3.97 s)",
+   "fix": "",
+   "at": 6.03,
+   "full_at": 6.17,
+   "leaves": 10.145,
+   "cut": 10.1667,
+   "readable_measured": 3.967,
+   "readable_formula": 3.975,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "WORKERS",
+   "detail": "readable 2.64 s (measured 2.67 s)",
+   "fix": "",
+   "at": 7.38,
+   "full_at": 7.5,
+   "leaves": 10.145,
+   "cut": 10.1667,
+   "readable_measured": 2.667,
+   "readable_formula": 2.645,
+   "fn": "callout",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "MATERIALS",
+   "detail": "readable 1.83 s (measured 1.83 s)",
+   "fix": "",
+   "at": 8.195,
+   "full_at": 8.315,
+   "leaves": 10.145,
+   "cut": 10.1667,
+   "readable_measured": 1.833,
+   "readable_formula": 1.83,
+   "fn": "callout",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "THE GATE",
+   "detail": "readable 8.68 s (measured 8.67 s)",
+   "fix": "",
+   "at": 10.145,
+   "full_at": 10.285,
+   "leaves": 18.965,
+   "cut": 18.965,
+   "readable_measured": 8.667,
+   "readable_formula": 8.68,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "WORKERS",
+   "detail": "readable 8.07 s (measured 8.07 s)",
+   "fix": "",
+   "at": 10.645,
+   "full_at": 10.895,
+   "leaves": 18.965,
+   "cut": 18.965,
+   "readable_measured": 8.067,
+   "readable_formula": 8.07,
+   "fn": "nameTag",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "THE GOVERNMENT SPENDS",
+   "detail": "readable 1.89 s (measured 1.87 s)",
+   "fix": "",
+   "at": 13.165,
+   "full_at": 13.305,
+   "leaves": 15.194999999999999,
+   "cut": 18.965,
+   "readable_measured": 1.867,
+   "readable_formula": 1.89,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "NEW MONEY SPENT",
+   "detail": "readable 1.24 s (measured 1.23 s)",
+   "fix": "",
+   "at": 13.815,
+   "full_at": 13.955,
+   "leaves": 15.194999999999999,
+   "cut": 18.965,
+   "readable_measured": 1.233,
+   "readable_formula": 1.24,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "\u2192 PRICES GO UP",
+   "detail": "readable 3.04 s (measured 3.03 s); a conclusion, up 3.18 s before the cut",
+   "fix": "",
+   "at": 15.785,
+   "full_at": 15.925,
+   "leaves": 18.965,
+   "cut": 18.965,
+   "readable_measured": 3.033,
+   "readable_formula": 3.04,
+   "fn": "buildWords",
+   "conclusion": true,
+   "up_before_cut": 3.18
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 1,
+   "text": "ABOUT 0%",
+   "detail": "readable 1.32 s (measured 1.30 s)",
+   "fix": "",
+   "at": 17.5,
+   "full_at": 17.65,
+   "leaves": 18.965,
+   "cut": 18.965,
+   "readable_measured": 1.3,
+   "readable_formula": 1.315,
+   "fn": "counter",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 2,
+   "text": "NO SPARE",
+   "detail": "readable 1.27 s (measured 1.27 s)",
+   "fix": "",
+   "at": 20.065,
+   "full_at": 20.205000000000002,
+   "leaves": 21.475,
+   "cut": 33.94,
+   "readable_measured": 1.267,
+   "readable_formula": 1.27,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 2,
+   "text": "SPARE BOXES",
+   "detail": "readable 3.63 s (measured 3.63 s)",
+   "fix": "",
+   "at": 20.78,
+   "full_at": 21.330000000000002,
+   "leaves": 24.96,
+   "cut": 33.94,
+   "readable_measured": 3.633,
+   "readable_formula": 3.63,
+   "fn": "callout",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 2,
+   "text": "WHAT HAPPENS TO PRICES?",
+   "detail": "readable 3.86 s (measured 3.87 s)",
+   "fix": "",
+   "at": 21.805,
+   "full_at": 21.945,
+   "leaves": 25.81,
+   "cut": 33.94,
+   "readable_measured": 3.867,
+   "readable_formula": 3.865,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 2,
+   "text": "HAVE A GUESS",
+   "detail": "readable 1.91 s (measured 1.93 s)",
+   "fix": "",
+   "at": 23.76,
+   "full_at": 23.900000000000002,
+   "leaves": 25.81,
+   "cut": 33.94,
+   "readable_measured": 1.933,
+   "readable_formula": 1.91,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 2,
+   "text": "MOST PEOPLE AGREE",
+   "detail": "readable 7.69 s (measured 7.70 s)",
+   "fix": "",
+   "at": 26.11,
+   "full_at": 26.25,
+   "leaves": 33.94,
+   "cut": 33.94,
+   "readable_measured": 7.7,
+   "readable_formula": 7.69,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 2,
+   "text": "\u2192 PRICES GO UP",
+   "detail": "readable 5.81 s (measured 5.83 s); a conclusion, up 5.95 s before the cut",
+   "fix": "",
+   "at": 27.99,
+   "full_at": 28.13,
+   "leaves": 33.94,
+   "cut": 33.94,
+   "readable_measured": 5.833,
+   "readable_formula": 5.81,
+   "fn": "buildWords",
+   "conclusion": true,
+   "up_before_cut": 5.95
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 2,
+   "text": "+ STAY UP",
+   "detail": "readable 3.12 s (measured 3.13 s)",
+   "fix": "",
+   "at": 30.68,
+   "full_at": 30.82,
+   "leaves": 33.94,
+   "cut": 33.94,
+   "readable_measured": 3.133,
+   "readable_formula": 3.12,
+   "fn": "buildWords",
+   "conclusion": false
+  },
+  {
+   "check": "readable",
+   "verdict": "pass",
+   "page": 3,
+   "text": "THE RULE",
+   "detail": "up from 39.08 s until the page leaves",
+   "fix": "",
+   "at": 38.935,
+   "full_at": 39.075,
+   "leaves": null,
+   "cut": null,
+   "readable_measured": 4.167,
+   "readable_formula": null,
+   "fn": "buildWords"
+  },
+  {
+   "check": "same place",
+   "verdict": "pass",
+   "page": null,
+   "text": "all lines",
+   "detail": "no two lines showing in the same place at once (19 things with words)",
+   "fix": ""
+  },
+  {
+   "check": "slides",
+   "verdict": "pass",
+   "page": 1,
+   "text": "1b the gate: zoom in",
+   "detail": "from \"wait\" (10.66) to \"spends\" (13.81), 3.15 s",
+   "fix": "",
+   "seconds": 3.155
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "PICTURE TWO BOXES",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "EACH ONE = A WHOLE COUNTRY",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "WORKERS",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "MATERIALS",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "THE GATE",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "WORKERS",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "THE GOVERNMENT SPENDS",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "NEW MONEY SPENT",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "\u2192 PRICES GO UP",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "PRICES",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 1,
+   "text": "ABOUT 4%",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 2,
+   "text": "NO SPARE",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 2,
+   "text": "SPARE BOXES",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 2,
+   "text": "WHAT HAPPENS TO PRICES?",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 2,
+   "text": "HAVE A GUESS",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 2,
+   "text": "MOST PEOPLE AGREE",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 2,
+   "text": "\u2192 PRICES GO UP",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 2,
+   "text": "+ STAY UP",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "typed words",
+   "verdict": "pass",
+   "page": 3,
+   "text": "THE RULE",
+   "detail": "every word is said on the page near its moment",
+   "fix": ""
+  },
+  {
+   "check": "word groups",
+   "verdict": "pass",
+   "page": 1,
+   "text": "page 1",
+   "detail": "9 groups of words in 17.7 s (5 lines, 1 cards, 3 labels and tags, 0 other); limit 9 (the larger of 5 and one every 6 s, plus 1 figures and 3 placements)",
+   "fix": "",
+   "groups": 9,
+   "limit": 9
+  },
+  {
+   "check": "word groups",
+   "verdict": "pass",
+   "page": 2,
+   "text": "page 2",
+   "detail": "6 groups of words in 13.6 s (5 lines, 0 cards, 1 labels and tags, 0 other); limit 6 (the larger of 5 and one every 6 s, plus 0 figures and 1 placements)",
+   "fix": "",
+   "groups": 6,
+   "limit": 6
+  },
+  {
+   "check": "word groups",
+   "verdict": "pass",
+   "page": 3,
+   "text": "page 3",
+   "detail": "1 groups of words in 1.6 s (1 lines, 0 cards, 0 labels and tags, 0 other); limit 5 (the larger of 5 and one every 6 s, plus 0 figures and 0 placements)",
+   "fix": "",
+   "groups": 1,
+   "limit": 5
+  }
+ ],
+ "typed_lines": {
+  "new": 19,
+  "carried": 0
+ },
+ "typed_digits": [
+  "ABOUT 0%"
+ ],
+ "pauses": {
+  "gaps": [
+   {
+    "page": 1,
+    "next_page": 2,
+    "join": "peel",
+    "join_after": 0.3,
+    "join_length": 0.85,
+    "hold": 0.0,
+    "needed": 1.3,
+    "recommended": 1.3,
+    "in_timeline": 1.4,
+    "join_clear_of_next_word": 0.25,
+    "sampled": true,
+    "plain_peel": true
+   },
+   {
+    "page": 2,
+    "next_page": 3,
+    "join": "peel",
+    "join_after": 0.3,
+    "join_length": 0.85,
+    "hold": 4.0,
+    "needed": 1.3,
+    "recommended": 4.0,
+    "in_timeline": 4.0,
+    "join_clear_of_next_word": 2.85,
+    "sampled": true,
+    "plain_peel": false
+   }
+  ],
+  "usual": 1.3,
+  "table_default": 1.4,
+  "assemble_option": "--pauses 1.30,4.00",
+  "estimate_options": "--default-pause 1.30 --pause-after 2=4.00"
+ },
+ "stills": {
+  "times": [
+   {
+    "t": 0.0,
+    "why": [
+     "page 1: first frame (the projector view)"
+    ]
+   },
+   {
+    "t": 1.0,
+    "why": [
+     "page 1: first word"
+    ]
+   },
+   {
+    "t": 1.27,
+    "why": [
+     "page 1: \"Picture\"",
+     "page 1: PICTURE TWO BOXES in"
+    ]
+   },
+   {
+    "t": 6.27,
+    "why": [
+     "page 1: \"country\"",
+     "page 1: EACH ONE = A WHOLE COUNTRY in"
+    ]
+   },
+   {
+    "t": 7.63,
+    "why": [
+     "page 1: \"workers\"",
+     "page 1: WORKERS in"
+    ]
+   },
+   {
+    "t": 8.43,
+    "why": [
+     "page 1: \"materials\"",
+     "page 1: MATERIALS in"
+    ]
+   },
+   {
+    "t": 10.13,
+    "why": [
+     "page 1: last frame before cut to 1b the gate",
+     "page 1: cut to 1b the gate (the projector view)"
+    ]
+   },
+   {
+    "t": 10.4,
+    "why": [
+     "page 1: \"Workers\"",
+     "page 1: THE GATE in"
+    ]
+   },
+   {
+    "t": 10.67,
+    "why": [
+     "page 1: 1b the gate zoom in starts"
+    ]
+   },
+   {
+    "t": 10.9,
+    "why": [
+     "page 1: \"wait\"",
+     "page 1: WORKERS in"
+    ]
+   },
+   {
+    "t": 12.23,
+    "why": [
+     "page 1: 1b the gate zoom in middle"
+    ]
+   },
+   {
+    "t": 13.4,
+    "why": [
+     "page 1: \"government\"",
+     "page 1: THE GOVERNMENT SPENDS in",
+     "page 1: THE GOVERNMENT SPENDS in"
+    ]
+   },
+   {
+    "t": 13.8,
+    "why": [
+     "page 1: 1b the gate zoom in ends (the weights view)"
+    ]
+   },
+   {
+    "t": 14.07,
+    "why": [
+     "page 1: \"spends\"",
+     "page 1: NEW MONEY SPENT in"
+    ]
+   },
+   {
+    "t": 14.3,
+    "why": [
+     "page 1: pointer in"
+    ]
+   },
+   {
+    "t": 15.73,
+    "why": [
+     "page 1: \"So\""
+    ]
+   },
+   {
+    "t": 16.03,
+    "why": [
+     "page 1: \"prices\"",
+     "page 1: \u2192 PRICES GO UP in",
+     "page 1: PRICES in"
+    ]
+   },
+   {
+    "t": 16.8,
+    "why": [
+     "page 1: \"up\""
+    ]
+   },
+   {
+    "t": 17.73,
+    "why": [
+     "page 1: ABOUT 0% in"
+    ]
+   },
+   {
+    "t": 18.1,
+    "why": [
+     "page 1: \"four\""
+    ]
+   },
+   {
+    "t": 18.93,
+    "why": [
+     "page 1: last frame before the join (peel)",
+     "page 1: last word + 0.3 s (page turn)",
+     "page 2: first frame (the projector view)"
+    ]
+   },
+   {
+    "t": 19.37,
+    "why": [
+     "page 1: last word + 0.7 s (page turn)",
+     "page 1: join (peel) middle"
+    ]
+   },
+   {
+    "t": 19.8,
+    "why": [
+     "page 1: first frame after the join (peel)",
+     "page 1: last word + 1.2 s (page turn)"
+    ]
+   },
+   {
+    "t": 20.07,
+    "why": [
+     "page 2: first word"
+    ]
+   },
+   {
+    "t": 20.3,
+    "why": [
+     "page 2: \"No\"",
+     "page 2: NO SPARE in"
+    ]
+   },
+   {
+    "t": 20.6,
+    "why": [
+     "page 2: \"spare\""
+    ]
+   },
+   {
+    "t": 21.03,
+    "why": [
+     "page 2: \"boxes\""
+    ]
+   },
+   {
+    "t": 21.37,
+    "why": [
+     "page 2: SPARE BOXES in"
+    ]
+   },
+   {
+    "t": 21.9,
+    "why": [
+     "page 2: \"What\""
+    ]
+   },
+   {
+    "t": 22.07,
+    "why": [
+     "page 2: WHAT HAPPENS TO PRICES? in"
+    ]
+   },
+   {
+    "t": 22.3,
+    "why": [
+     "page 2: \"happens\""
+    ]
+   },
+   {
+    "t": 23.1,
+    "why": [
+     "page 2: \"prices\""
+    ]
+   },
+   {
+    "t": 24.0,
+    "why": [
+     "page 2: \"Have\"",
+     "page 2: HAVE A GUESS in"
+    ]
+   },
+   {
+    "t": 24.63,
+    "why": [
+     "page 2: \"guess\"",
+     "page 2: ring in"
+    ]
+   },
+   {
+    "t": 25.5,
+    "why": [
+     "page 2: \"Most\""
+    ]
+   },
+   {
+    "t": 26.37,
+    "why": [
+     "page 2: \"agree\"",
+     "page 2: MOST PEOPLE AGREE in"
+    ]
+   },
+   {
+    "t": 27.07,
+    "why": [
+     "page 2: \"this\""
+    ]
+   },
+   {
+    "t": 27.9,
+    "why": [
+     "page 2: \"The\""
+    ]
+   },
+   {
+    "t": 28.23,
+    "why": [
+     "page 2: \"prices\"",
+     "page 2: \u2192 PRICES GO UP in"
+    ]
+   },
+   {
+    "t": 30.93,
+    "why": [
+     "page 2: \"stay\"",
+     "page 2: + STAY UP in"
+    ]
+   },
+   {
+    "t": 31.3,
+    "why": [
+     "page 2: \"up\""
+    ]
+   },
+   {
+    "t": 32.03,
+    "why": [
+     "page 2: \"That\""
+    ]
+   },
+   {
+    "t": 33.9,
+    "why": [
+     "page 2: last frame before the join (peel)",
+     "page 2: last word + 0.3 s (page turn)",
+     "page 3: first frame (the projector view)"
+    ]
+   },
+   {
+    "t": 34.33,
+    "why": [
+     "page 2: last word + 0.7 s (page turn)",
+     "page 2: join (peel) middle"
+    ]
+   },
+   {
+    "t": 34.8,
+    "why": [
+     "page 2: first frame after the join (peel)",
+     "page 2: last word + 1.2 s (page turn)"
+    ]
+   },
+   {
+    "t": 37.63,
+    "why": [
+     "page 3: first word"
+    ]
+   },
+   {
+    "t": 39.2,
+    "why": [
+     "page 3: \"rule\"",
+     "page 3: THE RULE in"
+    ]
+   },
+   {
+    "t": 39.53,
+    "why": [
+     "page 3: last word + 0.3 s (page turn)"
+    ]
+   },
+   {
+    "t": 39.93,
+    "why": [
+     "page 3: last word + 0.7 s (page turn)"
+    ]
+   },
+   {
+    "t": 40.43,
+    "why": [
+     "page 3: last word + 1.2 s (page turn)"
+    ]
+   }
+  ],
+  "command": "node paper-film/tools/render-paper-film.mjs page-events-test STILLS_FOLDER --stills 0.00 1.00 1.27 6.27 7.63 8.43 10.13 10.40 10.67 10.90 12.23 13.40 13.80 14.07 14.30 15.73 16.03 16.80 17.73 18.10 18.93 19.37 19.80 20.07 20.30 20.60 21.03 21.37 21.90 22.07 22.30 23.10 24.00 24.63 25.50 26.37 27.07 27.90 28.23 30.93 31.30 32.03 33.90 34.33 34.80 37.63 39.20 39.53 39.93 40.43"
+ },
+ "planned_cuts": {
+  "film_start": 0,
+  "cuts": [
+   {
+    "t": 10.1667,
+    "what": "page 1: cut to 1b the gate",
+    "film_seconds": 10.167
+   },
+   {
+    "t": 18.965,
+    "what": "page 1: join (peel) starts (gradual: not a jump)",
+    "film_seconds": 18.965,
+    "gradual": true
+   },
+   {
+    "t": 33.94,
+    "what": "page 2: join (peel) starts (gradual: not a jump)",
+    "film_seconds": 33.94,
+    "gradual": true
+   }
+  ],
+  "find_jumps_command": "python3 -I paper-film/tools/find_jumps.py FILM.mp4 SHEET.jpg 4 10.167"
+ },
+ "camera_audit_windows": [
+  {
+   "page": 1,
+   "from": 0.2,
+   "to": 19.965
+  },
+  {
+   "page": 2,
+   "from": 19.265,
+   "to": 34.94
+  },
+  {
+   "page": 3,
+   "from": 36.84,
+   "to": 40.535
+  }
+ ],
+ "appear_delays": {
+  "buildWords": 0.14,
+  "callout": 0.55,
+  "calloutWordsWithLine": 0.12,
+  "hook": 0.12,
+  "counter": 0.15,
+  "credit": 0.3,
+  "placeTitle": 0.55,
+  "ruleCard": 0.25,
+  "guessRing": 0.2,
+  "nameTag": 0.25,
+  "priceArrowWord": 0.3,
+  "dotPanel": 0.3,
+  "lineChart": 0.3,
+  "bars": 0.3
+ },
+ "order_differences": 0,
+ "calculator": "plan_page_timing check",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "page_timing.settle_after_join_seconds": {
+   "value": 0.15,
+   "unit": "seconds after a join ends, before the next page's first word",
+   "kind": "judged"
+  },
+  "page_timing.join_clear_of_next_word_seconds": {
+   "value": 0.1,
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "timing.page_pause_range_seconds": {
+   "value": [
+    1.1,
+    1.7
+   ],
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "timing.turn_after_last_word_seconds": {
+   "value": 0.3,
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "timing.guess_hold_seconds": {
+   "value": 4.0,
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "page_timing.pause_longer_than_needed_seconds": {
+   "value": 0.3,
+   "unit": "seconds",
+   "kind": "invented"
+  },
+  "timing.label_readable_min_seconds": {
+   "value": 1.0,
+   "unit": "seconds at full strength",
+   "kind": "judged"
+  },
+  "page_timing.conclusion_on_screen_seconds": {
+   "value": 1.2,
+   "unit": "seconds from when it starts to appear until the cut (one frame short allowed)",
+   "kind": "judged"
+  },
+  "page_timing.overlap_opacity_min": {
+   "value": 0.1,
+   "unit": "strength (0 to 1) both lines must have to count as overlapping",
+   "kind": "judged"
+  },
+  "page_timing.overlap_pixels_min": {
+   "value": 2,
+   "unit": "pixels two boxes must overlap by, across and down",
+   "kind": "invented"
+  },
+  "safe_area.text_left_pixels": {
+   "value": 65,
+   "unit": "pixels (0.06 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.text_right_pixels": {
+   "value": 972,
+   "unit": "pixels (0.90 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.letter_top_min_down": {
+   "value": 0.06,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.nothing_to_read_below_down": {
+   "value": 0.8,
+   "unit": "down the frame (the bottom 380 pixels)",
+   "kind": "judged"
+  },
+  "safe_area.title_band_down": {
+   "value": [
+    0.05,
+    0.22
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.rule_cards_down": {
+   "value": [
+    [
+     0.07,
+     0.15
+    ],
+    [
+     0.16,
+     0.24
+    ]
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "page_timing.typed_word_window_seconds": {
+   "value": 6.0,
+   "unit": "seconds either side of when the words show",
+   "kind": "judged"
+  },
+  "timing.key_number_hold_seconds": {
+   "value": 1.0,
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "page_timing.number_hold_seconds": {
+   "value": [
+    0.5,
+    0.15
+   ],
+   "unit": "seconds, plus seconds per character shown",
+   "kind": "judged"
+  },
+  "page_timing.count_end_after_word_max_seconds": {
+   "value": 0.1,
+   "unit": "seconds after the number's spoken word",
+   "kind": "judged"
+  },
+  "timing.word_group_every_seconds": {
+   "value": 6,
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "timing.word_groups_per_page": {
+   "value": [
+    3,
+    5
+   ],
+   "unit": "groups",
+   "kind": "judged"
+  },
+  "camera.slide_seconds_range": {
+   "value": [
+    2.6,
+    4.1
+   ],
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "camera.slides_per_page_max": {
+   "value": 1,
+   "unit": "slides",
+   "kind": "judged"
+  },
+  "timing.rest_without_change_max_seconds": {
+   "value": 1.7,
+   "unit": "seconds (2.5 on the end card)",
+   "kind": "judged"
+  },
+  "timing.end_card_rest_max_seconds": {
+   "value": 2.5,
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "page_timing.still_after_event_seconds": {
+   "value": 0.25,
+   "unit": "seconds after an event (or 0.05 s after its words are full, if later)",
+   "kind": "judged"
+  },
+  "page_timing.page_turn_stills_after_last_word_seconds": {
+   "value": [
+    0.3,
+    0.7,
+    1.2
+   ],
+   "unit": "seconds after each page's last word",
+   "kind": "judged"
+  },
+  "page_timing.merge_stills_within_seconds": {
+   "value": 0.1,
+   "unit": "seconds",
+   "kind": "invented"
+  },
+  "timing.default_page_pause_seconds": {
+   "value": 1.4,
+   "unit": "seconds",
+   "kind": "judged"
+  },
+  "timing.camera_plan_window_seconds": {
+   "value": {
+    "before_first_word": 0.8,
+    "after_last_word_end": 1.3
+   },
+   "unit": "seconds",
+   "kind": "judged"
+  }
+ }
+}

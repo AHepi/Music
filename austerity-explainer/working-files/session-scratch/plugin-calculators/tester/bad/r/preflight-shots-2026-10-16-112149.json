@@ -1,0 +1,106 @@
+{
+ "stage": "shots",
+ "stage_means": "before building or drawing a place's views",
+ "verdict": "fail",
+ "counts": {
+  "fail": 2,
+  "warn": 0,
+  "known": 0,
+  "info": 0,
+  "pass": 0
+ },
+ "guarded_step": "building and rendering the place's views and plates",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.1,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:21:49",
+ "first_lines": [
+  "Preflight shots (before building or drawing a place's views): FAIL. 2 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.",
+  "Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149",
+ "inputs": {
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/broken.json": "3b0471c6479ff383f806d6c7e38a02edf1002d92"
+ },
+ "missing": [
+  {
+   "input": "shot_list",
+   "option": "--shot-list",
+   "what": "a shot list for plan_shot.py (subject, story things, kind of shot; format in calculators/plan_shot.py's note)",
+   "make": "write it by hand; without one each view in the place facts is judged as built",
+   "needed_by": "plan_shot.py",
+   "required": false,
+   "why": "without a shot list each view is judged as built from its place facts",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "place facts are complete (place_facts.py check)",
+   "tool": "calculators/place_facts.py",
+   "version": "bd240e22",
+   "where": "broken.json",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/broken.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149/01-place-facts-are-complete-place-facts-py-check.txt",
+   "seconds": 0.06,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "fail",
+     "check": "the tool stopped",
+     "where": "broken.json",
+     "text": "it stopped with an error: obj, end = self.raw_decode(s, idx=_w(s, 0).end()) | ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^ | File \"/usr/lib/python3.13/json/decoder.py\", line 361, in raw_decode | obj, end = self.scan_once(s, idx) | ~~~~~~~~~~~~~~^^^^^^^^ | json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+     "fix": "",
+     "tool": "place_facts.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "letters, loud signs, heads and landmarks (view_audit.py)",
+   "tool": "calculators/view_audit.py",
+   "version": "79e3d2f9",
+   "where": "broken.json",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/broken.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149/02-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149/02-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149/02-letters-loud-signs-heads-and-landmarks-view-audi.txt",
+   "seconds": 0.05,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "fail",
+     "check": "the tool stopped",
+     "where": "broken.json",
+     "text": "it stopped with an error: obj, end = self.raw_decode(s, idx=_w(s, 0).end()) | ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^ | File \"/usr/lib/python3.13/json/decoder.py\", line 361, in raw_decode | obj, end = self.scan_once(s, idx) | ~~~~~~~~~~~~~~^^^^^^^^ | json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+     "fix": "",
+     "tool": "view_audit.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "each view's check file carries its kinds, figures and accepted list",
+   "tool": "preflight.py",
+   "version": "d836d994",
+   "where": "broken.json",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/bad/r/preflight-shots-2026-10-16-112149.md"
+}

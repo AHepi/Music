@@ -1,0 +1,56 @@
+{
+ "job": 1,
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hut-finished.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/place-settings.json",
+ "out_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hut-variations-run/pictures/job-1",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "cycles",
+ "size": [
+  160,
+  108
+ ],
+ "samples": 6,
+ "quality": 85,
+ "check_reset": false,
+ "entries": [
+  {
+   "name": "v01-amount50-cover10",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.5,
+    "dials.moss_and_algae.cover": 0.1,
+    "amount.dirt": 0.5
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v03-amount90-cover30",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.9,
+    "dials.moss_and_algae.cover": 0.3,
+    "amount.dirt": 0.9
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v05-amount30-cover70",
+   "is_baseline": false,
+   "set": {
+    "amount.moss_and_algae": 0.3,
+    "dials.moss_and_algae.cover": 0.7,
+    "amount.dirt": 0.3
+   },
+   "args": {},
+   "reset": "auto",
+   "script": null
+  }
+ ]
+}

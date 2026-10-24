@@ -1,0 +1,81 @@
+{
+ "stage": "pages",
+ "stage_means": "while building pages",
+ "verdict": "inputs missing",
+ "counts": {
+  "fail": 1,
+  "warn": 0,
+  "known": 0,
+  "info": 0,
+  "pass": 0
+ },
+ "guarded_step": "filming these pages (run the film stage next)",
+ "step_kind": null,
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.2,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:25:30",
+ "first_lines": [
+  "Preflight pages (while building pages): INPUTS MISSING. 1 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 1 check(s) in 0.2 s.",
+  "Next step BLOCKED: filming these pages (run the film stage next). First make the missing inputs listed below, then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/mk/preflight-pages-2026-10-16-112530",
+ "inputs": {},
+ "missing": [
+  {
+   "input": "events",
+   "option": "--events",
+   "what": "the page events file (what every page does, 30 times a second)",
+   "make": "node paper-film/tools/page_events.mjs SCENE OUT.json --pages 3,4,5 (about a minute a page; or give --scene and --make-events here)",
+   "needed_by": "plan_page_timing.py check, check_page_layout.mjs",
+   "required": true,
+   "why": "",
+   "given_but_absent": []
+  },
+  {
+   "input": "camera_log",
+   "option": "--camera-log",
+   "what": "the camera log of the pages (render-paper-film.mjs SCENE --camera FILE.json 3)",
+   "make": "node paper-film/tools/render-paper-film.mjs SCENE --camera FILE.json 3",
+   "needed_by": "camera_audit.py",
+   "required": false,
+   "why": "without it the camera rule (at most 3 moves a shot, no turn in a slide) is not measured",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "what every page does (page_events.mjs)",
+   "tool": "paper-film/tools/page_events.mjs",
+   "version": "2b4d2593",
+   "where": "",
+   "command": "node /home/user/Music/plugins/explainer-film/kit/paper-film/tools/page_events.mjs page-events-test /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/mk/preflight-pages-2026-10-16-112530/page-events.json",
+   "output_json": null,
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/mk/preflight-pages-2026-10-16-112530/01-what-every-page-does-page-events-mjs.txt",
+   "seconds": 0.17,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "fail",
+     "check": "exit code",
+     "where": "",
+     "text": "it exited 1 (a refusal or a failure): at ModuleLoader.resolve (node:internal/modules/esm/loader:708:38) | at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:310:38) | at ModuleJob._link (node:internal/modules/esm/module_job:182:49) { | code: 'ERR_MODULE_NOT_FOUND' | } | Node.js v22.22.0",
+     "fix": "",
+     "tool": "page_events.mjs"
+    }
+   ],
+   "verdict": "fail"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/mk/preflight-pages-2026-10-16-112530.md"
+}

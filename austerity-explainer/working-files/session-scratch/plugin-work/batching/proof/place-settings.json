@@ -1,0 +1,62 @@
+{
+ "about": "Place settings for canal lock side, drafted by explainer-film-place new-settings. Edit it: add role rules for the objects listed in \"unknown\", set the look and state, add roads and footpaths. Every key is optional.",
+ "place": "canal lock side",
+ "place_type": "harbour",
+ "look": "lived_in",
+ "state": "damp",
+ "seed": 1,
+ "owners": "ownership.json",
+ "roles": [],
+ "never": [],
+ "off": [],
+ "require_more": {
+  "timber": [
+   "moss_and_algae"
+  ],
+  "stone": [
+   "wetness"
+  ]
+ },
+ "roads": [
+  {
+   "name": "towpath",
+   "polyline": [
+    [
+     -7,
+     -1.7
+    ],
+    [
+     7,
+     -1.7
+    ]
+   ],
+   "width": 1.8,
+   "gauge": 0.9,
+   "rut_depth": 0.05,
+   "hoof": true
+  }
+ ],
+ "footfall": [
+  {
+   "shape": "rect",
+   "x0": -3.4,
+   "x1": -2.2,
+   "y0": -2.6,
+   "y1": -0.5
+  }
+ ],
+ "keep_clear": [
+  {
+   "shape": "rect",
+   "x0": -3.6,
+   "x1": -2.0,
+   "y0": -2.8,
+   "y1": -0.5
+  }
+ ],
+ "renderer": "auto",
+ "picture": {
+  "camera": "Camera A",
+  "height_pixels": 800
+ }
+}

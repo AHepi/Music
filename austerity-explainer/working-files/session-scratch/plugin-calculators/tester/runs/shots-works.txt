@@ -1,0 +1,67 @@
+Preflight shots (before building or drawing a place's views): FAIL. 8 to fix, 14 to look at, 0 known and accepted, 0 input(s) missing; 8 check(s) in 0.4 s.
+Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-16 11:23:19 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319.
+
+## To fix (these block the next step)
+
+- no-1 board ("No. 1") in w3 (plate spot): letters 14.7 px tall, under 20 px. Make the letters 0.363 m tall for 20 px (0.454 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2 board ("No. 2") in w3 (plate spot): letters 13.8 px tall, under 20 px. Make the letters 0.363 m tall for 20 px (0.454 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-1-drum-petrol ("PETROL") in w3 (plate spot): letters 5.6 px tall, under 20 px. Make the letters 0.344 m tall for 20 px (0.430 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-1-drum-diesel ("DIESEL") in w3 (plate spot): letters 6.3 px tall, under 20 px. Make the letters 0.339 m tall for 20 px (0.424 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2-drum-petrol ("PETROL") in w3 (plate spot): letters 5.6 px tall, under 20 px. Make the letters 0.344 m tall for 20 px (0.430 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2-drum-diesel ("DIESEL") in w3 (plate spot): letters 6.3 px tall, under 20 px. Make the letters 0.339 m tall for 20 px (0.424 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2 crates ("THIS WAY UP") in w3 (plate spot): letters 3.2 px tall, under 20 px. Make the letters 0.390 m tall for 20 px (0.488 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+- no-2 crates ("THIS WAY UP") in w2 (composed spot): letters 9.4 px tall, under 20 px. Make the letters 0.134 m tall for 20 px (0.167 m for 25 px), bring it nearer, or let a typed label carry the word. [works] (view_audit.py)
+
+## To look at (they do not block; a person decides)
+
+- rule8_bottom_left_share [w1]: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 3.8% (over its 2%), lantern 0.1%, no-1-drum-diesel 1.9%, man-1 2.1% (over its 2%), man-3 0.4%, man-4 2.5% (over its 2%), man-5 2.9% (over its 2%), man-6 2.4% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate, man-1, man-4, man-5, man-6, no-1-drum-petrol out of the bottom-left quarter.
+- crowd_shoulder_gaps [w1]: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m). (plan_shot.py)
+  Fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+- crowd_visible_share [w1]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 12% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- rule8_bottom_left_share [w3]: In the bottom-left quarter, where the eye enters, the boxes cover: two gates and the wall between 2.1% (over its 2%), brazier 0.1%, man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (plan_shot.py)
+  Fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move two gates and the wall between out of the bottom-left quarter.
+- crowd_shoulder_gaps [w3]: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m). (plan_shot.py)
+  Fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+- crowd_visible_share [w3]: Crowd "men at No. 1": the most hidden figure, man-1, shows about 19% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (plan_shot.py)
+  Fix: Move man-1 sideways into a gap, or check on the render.
+- no-1-drum-petrol ("PETROL") in w1 (composed spot): letters 22.1 px, between 20 and 25 px (PETROL and DIESEL read at 22 px in round 4). 0.110 m letters would give 25 px. [works] (view_audit.py)
+- no-2-drum-petrol ("PETROL") in w2 (composed spot): letters 22.1 px, between 20 and 25 px (PETROL and DIESEL read at 22 px in round 4). 0.110 m letters would give 25 px. [works] (view_audit.py)
+- no-1-chimney-top in w3 (plate): its top lands 0.228 down, within 0.02 of the words band; 25.4 m tall (now 26.3) clears 0.24. Look at the plate. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top rise through the words band in w1 (plate) (tops 0.033, 0.052, 0.120 down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 15.5 m or put the words beside them. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top rise through the words band in w1 (composed) (tops 0.020, 0.040, 0.110 down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 15.1 m or put the words beside them. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top, no-2-tank-top rise through the words band in w2 (plate) (tops 0.033, 0.052, 0.120, above the frame down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 8.2 m or put the words beside them. [works] (view_audit.py)
+- no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top, no-2-tank-top rise through the words band in w2 (composed) (tops 0.020, 0.040, 0.110, above the frame down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 7.9 m or put the words beside them. [works] (view_audit.py)
+- lantern_light: lights no-1-drum-diesel (its housing; lesson 120, log 32): skip them [works w1] (plan_lights.py)
+
+## Checks run
+
+- PASS  place facts are complete (place_facts.py check) [works]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/place_facts.py version bd240e22
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319/01-place-facts-are-complete-place-facts-py-check.json
+- WARN  camera, reach, slide and people (plan_shot.py) [works]: 0 fail, 6 look, 0 known, 40 pass, 9 info; exit 0, 0.1 s; calculators/plan_shot.py version 6a7fabb5
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --shots /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/works-shots.json --strict --shot w1 w3 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319/02-camera-reach-slide-and-people-plan-shot-py.json
+- FAIL  letters, loud signs, heads and landmarks (view_audit.py) [works]: 8 fail, 7 look, 0 known, 0 pass, 37 info; exit 1, 0.1 s; calculators/view_audit.py version 79e3d2f9
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w1 --view w2 --view w3 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319/03-letters-loud-signs-heads-and-landmarks-view-audi.json
+- PASS  wind and chimney smoke in every view (plan_effects.py wind) [works]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_effects.py version 116ecf19
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_effects.py wind --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319/04-wind-and-chimney-smoke-in-every-view-plan-effect.json
+- WARN  lights for w1 (plan_lights.py plan) [works w1]: 0 fail, 1 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w1 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319/05-lights-for-w1-plan-lights-py-plan.json
+- PASS  lights for w2 (plan_lights.py plan) [works w2]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w2 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319/06-lights-for-w2-plan-lights-py-plan.json
+- PASS  lights for w3 (plan_lights.py plan) [works w3]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_lights.py version 4836ed1f
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w3 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319/07-lights-for-w3-plan-lights-py-plan.json
+- PASS  each view's check file carries its kinds, figures and accepted list [works]: 0 fail, 0 look, 0 known, 3 pass, 0 info; exit 0, 0.0 s; preflight.py version d836d994
+  (inside the preflight)
+
+## Inputs (sha1 when the run ended)
+
+- dc76d4532087fc974f06aa21978f700d87e42833  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/works-shots.json
+- dd2e91ebbe86150e0de41b0caf22224064f1e05a  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json
+- 95959e006ecfc5a8902517a7eff3628723b6e167  /home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2-newcomers/works-w1-shot-check.json
+- bc6ff9579e6544cda13b003bdc9f03f0a77acbb4  /home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2-newcomers/works-w2-shot-check.json
+- 66a2c36f7f1c27142128b675412f0252526ad900  /home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2-newcomers/works-w3-shot-check.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-calculators/tester/runs/shots/preflight-shots-2026-10-16-112319.json

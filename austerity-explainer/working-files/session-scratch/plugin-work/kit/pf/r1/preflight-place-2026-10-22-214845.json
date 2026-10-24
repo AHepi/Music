@@ -1,0 +1,348 @@
+{
+ "stage": "place",
+ "stage_means": "after building a place and before drawing its views (the order: shots, build the place, place, plates)",
+ "verdict": "fail",
+ "counts": {
+  "fail": 16,
+  "warn": 6,
+  "known": 0,
+  "info": 0,
+  "pass": 10
+ },
+ "guarded_step": "drawing this place's views and plates (the long step: a place that fails is drawn again)",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.1,
+ "changed_inputs": [],
+ "started": "2026-10-22 21:48:45",
+ "first_lines": [
+  "Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): FAIL. 16 to fix, 6 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.1 s.",
+  "Long step BLOCKED: drawing this place's views and plates (the long step: a place that fails is drawn again). First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "c66d4241",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r1/preflight-place-2026-10-22-214845",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place/flat_hut_audit.json": "afa138a60eba0639c9699c2a506bd569393cd137",
+  "/home/user/Music/plugins/explainer-film/kit/film-settings.json": "4470e8985c2b0b5a9fec18d7b88da0378696778e"
+ },
+ "missing": [
+  {
+   "input": "blend",
+   "option": "--blend",
+   "what": "the finished scene file the audit was made from (a changed file makes the audit stale)",
+   "make": "explainer-film-place finish --scene SCENE.blend --save-as FINISHED.blend",
+   "needed_by": "the freshness check of the audit",
+   "required": false,
+   "why": "without it a scene changed after the audit would not be noticed (the audit's own scene_file is used when it is beside the audit)",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "the place audit: surfaces, wear and construction (place_audit_check.py)",
+   "tool": "calculators/place_audit_check.py",
+   "version": "67b75bed",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place/flat_hut_audit.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r1/preflight-place-2026-10-22-214845/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r1/preflight-place-2026-10-22-214845/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r1/preflight-place-2026-10-22-214845/01-the-place-audit-surfaces-wear-and-construction-p.txt",
+   "seconds": 0.05,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "place: quick output",
+     "where": "",
+     "text": "not a quick trial",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: stale audit",
+     "where": "",
+     "text": "not checked: the scene file was not given (--blend FILE.blend), so a changed scene would not be noticed.",
+     "fix": "give --blend with the finished scene file.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: roles",
+     "where": "",
+     "text": "every visible object has a role (9 objects)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role ground.earth: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, rubbish, plants, litter_pieces.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role ground.earth: wanted but missing displacement, moss_and_algae.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role wall.plaster: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role roof.shingle: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, moss_and_algae.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.door: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.door: wanted but missing moss_and_algae.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.floor: missing normal_map, roughness_variation, colour_variation, dirt, grime, weathering, wetness, cracks_and_chips, edge_wear.",
+     "fix": "run explainer-film-place finish (or the verb that makes it: surfaces, age, grow, damage); do not lower the requirement.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role timber.floor: wanted but missing moss_and_algae.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "7 object(s) lack bevelled_edges.",
+     "fix": "run explainer-film-place surfaces (it bevels with hardened normals)",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "4 object(s) lack shape_damage.",
+     "fix": "run explainer-film-place damage",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "no litter pieces on the ground (1 ground material(s)).",
+     "fix": "run explainer-film-place grow.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: treatments",
+     "where": "",
+     "text": "no plants on the ground (1 ground material(s)).",
+     "fix": "run explainer-film-place grow.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "1 object(s) (ground) have no pk_<layer>_amount property for cracks_and_chips, dirt, grime, rubbish, weathering, wetness, so those layers silently read 0 on them.",
+     "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "1 object(s) (roof) have no pk_<layer>_amount property for cracks_and_chips, dirt, grime, moss_and_algae, weathering, wetness, so those layers silently read 0 on them.",
+     "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "1 object(s) (door) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, weathering, wetness, so those layers silently read 0 on them.",
+     "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "2 object(s) (floor_plank_1, floor_plank_2) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, weathering, wetness, so those layers silently read 0 on them.",
+     "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "4 object(s) (wall_east, wall_north, wall_south, wall_west) have no pk_<layer>_amount property for cracks_and_chips, dirt, edge_wear, grime, moss_and_algae, weathering, wetness, so those layers silently read 0 on them.",
+     "fix": "run explainer-film-place age (it writes the amounts), or write pk_<layer>_amount on the object.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: off reasons",
+     "where": "",
+     "text": "nothing is switched off",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: normal maps",
+     "where": "",
+     "text": "0 normal map(s): Non-Color, tangent, wired, pointing the right way",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: uv",
+     "where": "",
+     "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: displacement",
+     "where": "",
+     "text": "displacement is set where the role needs it, on a mesh that can show it",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: construction",
+     "where": "",
+     "text": "1 part(s) floats: nothing carries it (gap over 5 mm).",
+     "fix": "move it onto a support or add one (a post under the beam, a footing under the post); seat things with seat_on_ground",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: scale",
+     "where": "",
+     "text": "0 size(s) fit the real-world facts",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: plain boxes",
+     "where": "",
+     "text": "100% of the objects are plain sharp-edged boxes (at most 15%).",
+     "fix": "run explainer-film-place surfaces (bevels) and damage; shape the parts (chamfers, uneven boards).",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: budgets",
+     "where": "",
+     "text": "triangles and scattered pieces are within the budgets",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: light",
+     "where": "",
+     "text": "the scene has light",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: renderer",
+     "where": "",
+     "text": "renderer EEVEE:",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "the audit is about this scene file (freshness)",
+   "tool": "preflight.py place",
+   "version": "c66d4241",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "place: stale audit",
+     "where": "",
+     "text": "not checked: the scene file was not given (--blend FILE.blend), so a changed scene would not be noticed.",
+     "fix": "give --blend with the finished scene file.",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "a fresh checker has looked",
+   "tool": "preflight.py place",
+   "version": "c66d4241",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "place: fresh checker",
+     "where": "",
+     "text": "not checked: no fresh checker has looked at this place (--fresh-check).",
+     "fix": "run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "warn"
+  }
+ ],
+ "known_lists": [],
+ "notes": [
+  "The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look."
+ ],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/kit/pf/r1/preflight-place-2026-10-22-214845.md"
+}

@@ -1,0 +1,903 @@
+{
+ "change": "state, look and a script hook",
+ "change_id": "state-look-and-a-script-hook",
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hut-finished.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/place-settings.json",
+ "cameras": [
+  "Camera A"
+ ],
+ "engine": "CYCLES",
+ "size": [
+  160,
+  108
+ ],
+ "variations": [
+  {
+   "name": "wet",
+   "set": {
+    "state": "wet"
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "derelict",
+   "set": {
+    "look": "derelict"
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "kept",
+   "set": {
+    "look": "kept"
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "no-wear",
+   "set": {
+    "master": 0.0
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "dark-roof",
+   "set": {},
+   "args": {
+    "sun": 0.5
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hooks/darken_roof.py"
+  },
+  {
+   "name": "bad-layer",
+   "set": {
+    "amount.rust": 0.2
+   },
+   "args": {},
+   "script": null
+  }
+ ],
+ "dropped": [
+  {
+   "name": "dark-roof-near",
+   "why": "it is a near-duplicate of \"dark-roof\": the largest gap between them (args.sun) is 1% of its range, and at least 8% is needed",
+   "like": "dark-roof"
+  }
+ ],
+ "jobs": [
+  {
+   "index": 1,
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-1",
+   "where": "this computer",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 3.1,
+   "wall_seconds": 3.1,
+   "wake_up_ms": 0,
+   "billed_work_ms": 0,
+   "job_id": null,
+   "log_tail": "00:01.025  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-1/01_baseline__camera-a.jpg'\n00:01.480  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-1/02_wet__camera-a.jpg'\n00:01.939  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-1/03_kept__camera-a.jpg'\n00:02.404  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-1/04_dark-roof__camera-a.jpg'\n00:02.407  blend            | Read blend: \"/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hut-finished.blend\"\n00:02.876  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-1/reset-check__camera-a.jpg'\nPASS baseline: 1 picture(s) in 0.6 s (restored exactly)\nPASS wet: 1 picture(s) in 0.5 s (restored exactly)\nPASS kept: 1 picture(s) in 0.5 s (restored exactly)\nPASS dark-roof: 1 picture(s) in 0.5 s (reopened)\nPASS variations-worker: job 1: 4 of 4 variation(s), 4 picture(s), 2.4 s, cycles on CPU (this computer)\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)"
+  },
+  {
+   "index": 2,
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-2",
+   "where": "this computer",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 1.9,
+   "wall_seconds": 1.9,
+   "wake_up_ms": 0,
+   "billed_work_ms": 0,
+   "job_id": null,
+   "log_tail": "00:00.347  blend            | Read blend: \"/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hut-finished.blend\"\n00:00.993  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-2/01_derelict__camera-a.jpg'\n00:01.249  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-2/02_no-wear__camera-a.jpg'\n00:01.706  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/pictures/job-2/03_bad-layer__camera-a.jpg'\nPASS derelict: 1 picture(s) in 0.6 s (restored exactly)\nPASS no-wear: 1 picture(s) in 0.2 s (restored exactly)\nLOOK bad-layer: the layer rust is in no material of this scene, so its amount changed nothing\nPASS bad-layer: 1 picture(s) in 0.5 s (last of the job)\nPASS variations-worker: job 2: 3 of 3 variation(s), 3 picture(s), 1.3 s, cycles on CPU (this computer)\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)"
+  }
+ ],
+ "job_summaries": {
+  "1": {
+   "job": 1,
+   "scene": "hut-finished.blend",
+   "blender": "5.2.2 LTS",
+   "device": "CPU (this computer)",
+   "engine": "CYCLES",
+   "engine_reasons": [
+    "forced to cycles (the rule says eevee: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off))"
+   ],
+   "size": [
+    160,
+    108
+   ],
+   "samples": 6,
+   "where": "local",
+   "cameras": [
+    "Camera A"
+   ],
+   "fingerprint_at_start": "a737a0cb58a54c6d",
+   "reset_check": {
+    "camera": "Camera A",
+    "file": "reset-check__camera-a.jpg",
+    "engine": "CYCLES",
+    "width": 160,
+    "height": 108,
+    "samples": 6,
+    "seconds": 0.43,
+    "bytes": 4056,
+    "ok": true,
+    "mean_luminance": 0.3692677319049835
+   },
+   "seconds_in_all": 2.4,
+   "reopened": 1,
+   "entries": [
+    "baseline",
+    "wet",
+    "kept",
+    "dark-roof"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "a737a0cb58a54c6d"
+  },
+  "2": {
+   "job": 2,
+   "scene": "hut-finished.blend",
+   "blender": "5.2.2 LTS",
+   "device": "CPU (this computer)",
+   "engine": "CYCLES",
+   "engine_reasons": [
+    "forced to cycles (the rule says eevee: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off))"
+   ],
+   "size": [
+    160,
+    108
+   ],
+   "samples": 6,
+   "where": "local",
+   "cameras": [
+    "Camera A"
+   ],
+   "fingerprint_at_start": "a737a0cb58a54c6d",
+   "seconds_in_all": 1.3,
+   "reopened": 0,
+   "entries": [
+    "derelict",
+    "no-wear",
+    "bad-layer"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "a737a0cb58a54c6d"
+  }
+ },
+ "results": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 0.58,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.13101647794246674,
+     "p95": 0.5550603866577148,
+     "range": 0.4240439087152481,
+     "median": 0.3354525566101074,
+     "detail": 4.603320121765137,
+     "mean_saturation": 0.255340576171875,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    }
+   },
+   "average": {
+    "p5": 0.13101647794246674,
+    "p95": 0.5550603866577148,
+    "range": 0.4240439087152481,
+    "median": 0.3354525566101074,
+    "detail": 4.603320121765137,
+    "mean_saturation": 0.255340576171875,
+    "squint": 1.0,
+    "flat_windows": 0.0,
+    "colour_shift": 0.0,
+    "saturation_shift": 0.0,
+    "detail_change": 0.0
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "01_baseline__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 160,
+     "height": 108,
+     "samples": 6,
+     "seconds": 0.57,
+     "bytes": 4056,
+     "ok": true,
+     "mean_luminance": 0.3692677319049835,
+     "path": "pictures/job-1/01_baseline__camera-a.jpg"
+    }
+   ]
+  },
+  {
+   "name": "wet",
+   "is_baseline": false,
+   "set": {
+    "state": "wet"
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 0.45,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.13045020401477814,
+     "p95": 0.5379945039749146,
+     "range": 0.4075442999601364,
+     "median": 0.31866511702537537,
+     "detail": 4.406270980834961,
+     "mean_saturation": 0.2611522674560547,
+     "squint": 0.9973435401916504,
+     "flat_windows": 0,
+     "colour_shift": 1.7127673381735848,
+     "saturation_shift": 0.0058116912841796875,
+     "detail_change": -0.19704914093017578
+    }
+   },
+   "average": {
+    "p5": 0.13045020401477814,
+    "p95": 0.5379945039749146,
+    "range": 0.4075442999601364,
+    "median": 0.31866511702537537,
+    "detail": 4.406270980834961,
+    "mean_saturation": 0.2611522674560547,
+    "squint": 0.9973435401916504,
+    "flat_windows": 0.0,
+    "colour_shift": 1.7127673381735848,
+    "saturation_shift": 0.0058116912841796875,
+    "detail_change": -0.19704914093017578
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "02_wet__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 160,
+     "height": 108,
+     "samples": 6,
+     "seconds": 0.45,
+     "bytes": 4000,
+     "ok": true,
+     "mean_luminance": 0.35329335927963257,
+     "path": "pictures/job-1/02_wet__camera-a.jpg"
+    }
+   ]
+  },
+  {
+   "name": "derelict",
+   "is_baseline": false,
+   "set": {
+    "look": "derelict"
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 0.56,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "Camera A": {
+     "p5": 0.12709490954875946,
+     "p95": 0.5542470812797546,
+     "range": 0.4271521717309952,
+     "median": 0.3368886411190033,
+     "detail": 5.004668712615967,
+     "mean_saturation": 0.2283863127231598,
+     "squint": 0.9840361475944519,
+     "flat_windows": 0,
+     "colour_shift": 1.3952326523922685,
+     "saturation_shift": -0.02695426344871521,
+     "detail_change": 0.4013485908508301
+    }
+   },
+   "average": {
+    "p5": 0.12709490954875946,
+    "p95": 0.5542470812797546,
+    "range": 0.4271521717309952,
+    "median": 0.3368886411190033,
+    "detail": 5.004668712615967,
+    "mean_saturation": 0.2283863127231598,
+    "squint": 0.9840361475944519,
+    "flat_windows": 0.0,
+    "colour_shift": 1.3952326523922685,
+    "saturation_shift": -0.02695426344871521,
+    "detail_change": 0.4013485908508301
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "01_derelict__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 160,
+     "height": 108,
+     "samples": 6,
+     "seconds": 0.56,
+     "bytes": 4341,
+     "ok": true,
+     "mean_luminance": 0.3611668348312378,
+     "path": "pictures/job-2/01_derelict__camera-a.jpg"
+    }
+   ]
+  },
+  {
+   "name": "kept",
+   "is_baseline": false,
+   "set": {
+    "look": "kept"
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 0.46,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1343398094177246,
+     "p95": 0.5576024055480957,
+     "range": 0.4232625961303711,
+     "median": 0.3317984342575073,
+     "detail": 4.616011142730713,
+     "mean_saturation": 0.27745863795280457,
+     "squint": 0.9909270405769348,
+     "flat_windows": 0,
+     "colour_shift": 1.2248360771651743,
+     "saturation_shift": 0.022118061780929565,
+     "detail_change": 0.012691020965576172
+    }
+   },
+   "average": {
+    "p5": 0.1343398094177246,
+    "p95": 0.5576024055480957,
+    "range": 0.4232625961303711,
+    "median": 0.3317984342575073,
+    "detail": 4.616011142730713,
+    "mean_saturation": 0.27745863795280457,
+    "squint": 0.9909270405769348,
+    "flat_windows": 0.0,
+    "colour_shift": 1.2248360771651743,
+    "saturation_shift": 0.022118061780929565,
+    "detail_change": 0.012691020965576172
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "03_kept__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 160,
+     "height": 108,
+     "samples": 6,
+     "seconds": 0.46,
+     "bytes": 3979,
+     "ok": true,
+     "mean_luminance": 0.37587136030197144,
+     "path": "pictures/job-1/03_kept__camera-a.jpg"
+    }
+   ]
+  },
+  {
+   "name": "no-wear",
+   "is_baseline": false,
+   "set": {
+    "master": 0.0
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 0.25,
+   "seconds_reset": 0.01,
+   "job": 2,
+   "measures": {
+    "Camera A": {
+     "p5": 0.13852332532405853,
+     "p95": 0.5654298067092896,
+     "range": 0.426906481385231,
+     "median": 0.33071765303611755,
+     "detail": 4.677420139312744,
+     "mean_saturation": 0.30147576332092285,
+     "squint": 0.9656826257705688,
+     "flat_windows": 0,
+     "colour_shift": 2.402800127972631,
+     "saturation_shift": 0.04613518714904785,
+     "detail_change": 0.07410001754760742
+    }
+   },
+   "average": {
+    "p5": 0.13852332532405853,
+    "p95": 0.5654298067092896,
+    "range": 0.426906481385231,
+    "median": 0.33071765303611755,
+    "detail": 4.677420139312744,
+    "mean_saturation": 0.30147576332092285,
+    "squint": 0.9656826257705688,
+    "flat_windows": 0.0,
+    "colour_shift": 2.402800127972631,
+    "saturation_shift": 0.04613518714904785,
+    "detail_change": 0.07410001754760742
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "02_no-wear__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 160,
+     "height": 108,
+     "samples": 6,
+     "seconds": 0.25,
+     "bytes": 3926,
+     "ok": true,
+     "mean_luminance": 0.38201168179512024,
+     "path": "pictures/job-2/02_no-wear__camera-a.jpg"
+    }
+   ]
+  },
+  {
+   "name": "dark-roof",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun": 0.5
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/hooks/darken_roof.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.0,
+   "seconds_draw": 0.46,
+   "seconds_reset": 0.04,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.09490431845188141,
+     "p95": 0.41307058930397034,
+     "range": 0.31816627085208893,
+     "median": 0.22903530299663544,
+     "detail": 3.4416353702545166,
+     "mean_saturation": 0.28816691040992737,
+     "squint": 0.9040059447288513,
+     "flat_windows": 0,
+     "colour_shift": 12.189361283237291,
+     "saturation_shift": 0.03282633423805237,
+     "detail_change": -1.1616847515106201
+    }
+   },
+   "average": {
+    "p5": 0.09490431845188141,
+    "p95": 0.41307058930397034,
+    "range": 0.31816627085208893,
+    "median": 0.22903530299663544,
+    "detail": 3.4416353702545166,
+    "mean_saturation": 0.28816691040992737,
+    "squint": 0.9040059447288513,
+    "flat_windows": 0.0,
+    "colour_shift": 12.189361283237291,
+    "saturation_shift": 0.03282633423805237,
+    "detail_change": -1.1616847515106201
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "04_dark-roof__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 160,
+     "height": 108,
+     "samples": 6,
+     "seconds": 0.46,
+     "bytes": 3652,
+     "ok": true,
+     "mean_luminance": 0.26210740208625793,
+     "path": "pictures/job-1/04_dark-roof__camera-a.jpg"
+    }
+   ]
+  },
+  {
+   "name": "bad-layer",
+   "is_baseline": false,
+   "set": {
+    "amount.rust": 0.2
+   },
+   "args": {},
+   "script": null,
+   "notes": [
+    "the layer rust is in no material of this scene, so its amount changed nothing"
+   ],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.0,
+   "seconds_draw": 0.45,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "Camera A": {
+     "p5": 0.13101647794246674,
+     "p95": 0.5550603866577148,
+     "range": 0.4240439087152481,
+     "median": 0.3354525566101074,
+     "detail": 4.603320121765137,
+     "mean_saturation": 0.255340576171875,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    }
+   },
+   "average": {
+    "p5": 0.13101647794246674,
+    "p95": 0.5550603866577148,
+    "range": 0.4240439087152481,
+    "median": 0.3354525566101074,
+    "detail": 4.603320121765137,
+    "mean_saturation": 0.255340576171875,
+    "squint": 1.0,
+    "flat_windows": 0.0,
+    "colour_shift": 0.0,
+    "saturation_shift": 0.0,
+    "detail_change": 0.0
+   },
+   "flags": [
+    "changes nothing here: the layer rust is in no material of this scene, so its amount changed nothing",
+    "does not show in these cameras (nearly the same as the baseline)"
+   ],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "03_bad-layer__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 160,
+     "height": 108,
+     "samples": 6,
+     "seconds": 0.45,
+     "bytes": 4056,
+     "ok": true,
+     "mean_luminance": 0.3692677319049835,
+     "path": "pictures/job-2/03_bad-layer__camera-a.jpg"
+    }
+   ]
+  }
+ ],
+ "pairs": [
+  {
+   "a": "baseline",
+   "b": "wet",
+   "mean_difference": 4.297183641975309,
+   "changed_share": 0.025983796296296297,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 4.297183641975309,
+     "changed_share": 0.025983796296296297
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "derelict",
+   "mean_difference": 3.6542824074074076,
+   "changed_share": 0.1015625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 3.6542824074074076,
+     "changed_share": 0.1015625
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "kept",
+   "mean_difference": 2.9717399691358026,
+   "changed_share": 0.07505787037037037,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 2.9717399691358026,
+     "changed_share": 0.07505787037037037
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "no-wear",
+   "mean_difference": 5.378240740740741,
+   "changed_share": 0.25983796296296297,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 5.378240740740741,
+     "changed_share": 0.25983796296296297
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "dark-roof",
+   "mean_difference": 26.91994598765432,
+   "changed_share": 0.9570023148148148,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 26.91994598765432,
+     "changed_share": 0.9570023148148148
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "bad-layer",
+   "mean_difference": 0.0,
+   "changed_share": 0.0,
+   "nearly_the_same": true,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 0.0,
+     "changed_share": 0.0
+    }
+   }
+  },
+  {
+   "a": "wet",
+   "b": "derelict",
+   "mean_difference": 4.884375,
+   "changed_share": 0.2207175925925926,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 4.884375,
+     "changed_share": 0.2207175925925926
+    }
+   }
+  },
+  {
+   "a": "wet",
+   "b": "kept",
+   "mean_difference": 5.782118055555555,
+   "changed_share": 0.24994212962962964,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 5.782118055555555,
+     "changed_share": 0.24994212962962964
+    }
+   }
+  },
+  {
+   "a": "wet",
+   "b": "no-wear",
+   "mean_difference": 7.65,
+   "changed_share": 0.4667824074074074,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 7.65,
+     "changed_share": 0.4667824074074074
+    }
+   }
+  },
+  {
+   "a": "wet",
+   "b": "dark-roof",
+   "mean_difference": 22.808256172839506,
+   "changed_share": 0.9504050925925925,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 22.808256172839506,
+     "changed_share": 0.9504050925925925
+    }
+   }
+  },
+  {
+   "a": "wet",
+   "b": "bad-layer",
+   "mean_difference": 4.297183641975309,
+   "changed_share": 0.025983796296296297,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 4.297183641975309,
+     "changed_share": 0.025983796296296297
+    }
+   }
+  },
+  {
+   "a": "derelict",
+   "b": "kept",
+   "mean_difference": 6.056269290123457,
+   "changed_share": 0.3056712962962963,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 6.056269290123457,
+     "changed_share": 0.3056712962962963
+    }
+   }
+  },
+  {
+   "a": "derelict",
+   "b": "no-wear",
+   "mean_difference": 8.514814814814814,
+   "changed_share": 0.5403935185185185,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 8.514814814814814,
+     "changed_share": 0.5403935185185185
+    }
+   }
+  },
+  {
+   "a": "derelict",
+   "b": "dark-roof",
+   "mean_difference": 25.135918209876543,
+   "changed_share": 0.9189814814814815,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 25.135918209876543,
+     "changed_share": 0.9189814814814815
+    }
+   }
+  },
+  {
+   "a": "derelict",
+   "b": "bad-layer",
+   "mean_difference": 3.6542824074074076,
+   "changed_share": 0.1015625,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 3.6542824074074076,
+     "changed_share": 0.1015625
+    }
+   }
+  },
+  {
+   "a": "kept",
+   "b": "no-wear",
+   "mean_difference": 2.956423611111111,
+   "changed_share": 0.0763888888888889,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 2.956423611111111,
+     "changed_share": 0.0763888888888889
+    }
+   }
+  },
+  {
+   "a": "kept",
+   "b": "dark-roof",
+   "mean_difference": 28.32602237654321,
+   "changed_share": 0.9655092592592592,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 28.32602237654321,
+     "changed_share": 0.9655092592592592
+    }
+   }
+  },
+  {
+   "a": "kept",
+   "b": "bad-layer",
+   "mean_difference": 2.9717399691358026,
+   "changed_share": 0.07505787037037037,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 2.9717399691358026,
+     "changed_share": 0.07505787037037037
+    }
+   }
+  },
+  {
+   "a": "no-wear",
+   "b": "dark-roof",
+   "mean_difference": 29.638078703703705,
+   "changed_share": 0.9708912037037037,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 29.638078703703705,
+     "changed_share": 0.9708912037037037
+    }
+   }
+  },
+  {
+   "a": "no-wear",
+   "b": "bad-layer",
+   "mean_difference": 5.378240740740741,
+   "changed_share": 0.25983796296296297,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 5.378240740740741,
+     "changed_share": 0.25983796296296297
+    }
+   }
+  },
+  {
+   "a": "dark-roof",
+   "b": "bad-layer",
+   "mean_difference": 26.91994598765432,
+   "changed_share": 0.9570023148148148,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera A": {
+     "mean_difference": 26.91994598765432,
+     "changed_share": 0.9570023148148148
+    }
+   }
+  }
+ ],
+ "nearly_the_same": [
+  [
+   "baseline",
+   "bad-layer"
+  ]
+ ],
+ "invisible": [
+  "bad-layer"
+ ],
+ "reset_check": {
+  "job": 1,
+  "mean_difference_of_255": 0.0
+ },
+ "sheet": {
+  "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/mixed-run/state-look-and-a-script-hook-sheet.jpg",
+  "bytes": 159981,
+  "quality": 82,
+  "scale": 1.0,
+  "width": 1270,
+  "height": 874
+ },
+ "card_seconds": 0.0,
+ "card_lines": [
+  "Drawn on this computer in 5 s; no rented-card seconds were used."
+ ],
+ "estimate_card_seconds": 152.0,
+ "estimate_elapsed_seconds": 96.0,
+ "where": "this computer",
+ "helper": "tester",
+ "role": "builder",
+ "ledger": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/hut/ledger2.jsonl"
+}

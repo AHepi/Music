@@ -1,0 +1,24 @@
+Page layout for page-events-test, pages 1, 2, 3: 0 to fix, 0 to look at, 6 passed.
+
+EFFECTS AFTER THEIR MOMENT
+  PASS  all: all: about 87 moments drawn again out of order came out the same; no live thing is shared between pages
+
+HELD SHOTS
+  PASS  page 1: page 1: held-shot keys only while the camera holds, and every hold has one
+  PASS  page 2: page 2: held-shot keys only while the camera holds, and every hold has one
+  PASS  page 3: page 3: held-shot keys only while the camera holds, and every hold has one
+
+OVERLAPS AT EVENTS
+  PASS  all: all: no two drawn things in the same place at 52 event moments
+
+POPS
+  PASS  all: all: nothing comes or goes in 2 frames or fewer outside a planned cut (22 drawn things, 6 live things)
+
+Settings used (film-settings.json):
+  page_timing.layout.pop_frames_max = 2 frames: a thing that comes or goes in this many frames or fewer, outside a planned cut, is a pop (judged)
+  page_timing.layout.pop_strength_change = 0.8 change in strength (0 to 1) that counts as coming or going (invented)
+  page_timing.layout.hold_without_still_key_frames = 15 frames of a held camera with no still key before it is reported (invented)
+  page_timing.layout.camera_still_tolerance = 0.0001 metres (and quaternion parts) a camera may differ between frames and still count as holding (invented)
+  page_timing.layout.jump_pixels_min = 40 pixels a drawn thing's middle may move in one frame before it counts as a jump (invented)
+  page_timing.overlap_opacity_min = 0.1 strength (0 to 1) both lines must have to count as overlapping (judged)
+  page_timing.overlap_pixels_min = 2 pixels two boxes must overlap by, across and down (invented)

@@ -1,0 +1,106 @@
+Page timing for inflation-chapter-2-newcomers, pages 3, 4, 5 (2297 frames looked at).
+8 to fix, 0 to look at, 1 known and kept, 135 passed.
+Typed lines: 29 new and 2 carried over from the page before; digits on screen: none.
+
+LOOKUPS
+  FAIL  page 3: workers: kit.at('workers') (inflation-chapter-2-newcomers/page-3.js:57:74) leaves out which time: "workers" is said 3 times on page 3 (52.67, 57.93, 66.82); it takes the first, 52.67.
+        fix: write kit.at('workers', N) with the time you mean (1 for the first).
+  FAIL  page 3: machines: kit.at('machines') (inflation-chapter-2-newcomers/page-3.js:57:135) leaves out which time: "machines" is said 3 times on page 3 (54.15, 56.35, 68.28); it takes the first, 54.15.
+        fix: write kit.at('machines', N) with the time you mean (1 for the first).
+  FAIL  page 3: In: kit.at('In') (inflation-chapter-2-newcomers/page-3.js:58:14) leaves out which time: "In" is said 2 times on page 3 (55.10, 67.40); it takes the first, 55.10.
+        fix: write kit.at('In', N) with the time you mean (1 for the first).
+  FAIL  page 3: More: kit.at('More') (inflation-chapter-2-newcomers/page-3.js:59:57) leaves out which time: "More" is said 2 times on page 3 (69.55, 70.91); it takes the first, 69.55.
+        fix: write kit.at('More', N) with the time you mean (1 for the first).
+  FAIL  page 5: spare: kit.at('spare') (inflation-chapter-2-newcomers/page-5.js:45:40) leaves out which time: "spare" is said 3 times on page 5 (95.92, 112.06, 117.90); it takes the first, 95.92.
+        fix: write kit.at('spare', N) with the time you mean (1 for the first).
+  FAIL  page 5: More: kit.at('More') (inflation-chapter-2-newcomers/page-5.js:45:63) leaves out which time: "More" is said 3 times on page 5 (100.67, 104.91, 115.67); it takes the first, 100.67.
+        fix: write kit.at('More', N) with the time you mean (1 for the first).
+  FAIL  page 5: prices: kit.at('prices') (inflation-chapter-2-newcomers/page-5.js:45:109) leaves out which time: "prices" is said 2 times on page 5 (105.96, 119.67); it takes the first, 105.96.
+        fix: write kit.at('prices', N) with the time you mean (1 for the first).
+  FAIL  page 5: up: kit.at('up') (inflation-chapter-2-newcomers/page-5.js:45:131) leaves out which time: "up" is said 2 times on page 5 (106.48, 120.03); it takes the first, 106.48.
+        fix: write kit.at('up', N) with the time you mean (1 for the first).
+
+READABLE
+  KNOWN page 3: MACHINES: readable 0.84 s at full strength (measured 0.83 s) before it is cut at 55.10 s; at least 1.0 s
+        fix: start it on "and" (53.93 s): readable 1.05 s; or move the cut one word later
+        accepted: test (tester, 2026-10-16)
+
+MARGINS
+  INFO  page 3: page 3: longest line ends 0.845 across (PICTURE TWO FACTORIES); highest letters 0.0615 down (THE QUIET FACTORY)
+  INFO  page 4: page 4: longest line ends 0.897 across (WHAT HAPPENS TO PRICES?); highest letters 0.0630 down (THE FLAT-OUT FACTORY)
+  INFO  page 5: page 5: longest line ends 0.897 across (WHAT HAPPENS TO PRICES?); highest letters 0.0604 down (MOST ECONOMISTS AGREE)
+
+PAUSES
+  INFO  page 2: page 2 -> 3: pause 1.50 s is 0.55 s longer than this join needs (0.95 s: dissolve 0.30 s after the last word, 0.50 s long, + 0.15 s to settle); the extra time is a rest before the next page
+  INFO  page 5: page 5 -> 6: pause 3.50 s is 0.50 s longer than this join needs (3.00 s: peel 2.00 s after the last word, 0.85 s long, + 0.15 s to settle); the extra time is a rest before the next page
+
+READABLE
+  INFO  page 3: PRICES (word on an arrow): readable 0.90 s (it names the arrow; not counted)
+  INFO  page 5: PRICES (word on an arrow): readable 0.90 s (it names the arrow; not counted)
+
+TYPED WORDS
+  INFO  page 5: WHAT HAPPENS TO PRICES?: "WHAT" was said on page 4; "HAPPENS" was said on page 4; "TO" was said on page 4; "PRICES?" was said on page 4 (carried over)
+  INFO  page 5: HAVE A GUESS: "HAVE" was said on page 4; "A" was said on page 4; "GUESS" was said on page 4 (carried over)
+  INFO  page 5: QUIET: "QUIET" was said on page 3
+  INFO  page 5: FLAT OUT: "FLAT" was said on page 4; "OUT" was said on page 4
+
+WORD GROUPS
+  INFO  all: these pages: 20 groups in 67 s: one every 3.4 s (plan 34 aims at about one every 6 s over the chapter)
+
+PAUSES AFTER EACH PAGE (the join's wait + its length + settle, plus any hold)
+  page 2 -> 3: dissolve after 0.30 s for 0.50 s: needs 0.95 s; the timeline has 1.50 s
+  page 3 -> 4: peel after 0.30 s for 0.85 s: needs 1.30 s; the timeline has 1.50 s
+  page 4 -> 5: run-on after 3.50 s for 0.20 s, hold 4.0 s: needs 4.00 s; the timeline has 4.00 s
+  page 5 -> 6: peel after 2.00 s for 0.85 s: needs 3.00 s; the timeline has 3.50 s
+  pages 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 were not looked at: their pauses below come from their files' joins only (no holds known)
+  for assemble_chapter_narration.py: --pauses 0.95,0.95,1.30,4.00,3.00,0.95,0.95,0.95,0.95,0.95,0.95,0.95,0.95,0.95,0.95
+  for estimate_timeline.py: --default-pause 1.30 --pause-after 1=0.95 2=0.95 4=4.00 5=3.00 6=0.95 7=0.95 8=0.95 9=0.95 10=0.95 11=0.95 12=0.95 13=0.95 14=0.95 15=0.95
+
+STILLS TO CHECK (69, drawn in one run so page turns are right):
+  node paper-film/tools/render-paper-film.mjs inflation-chapter-2-newcomers STILLS_FOLDER --stills 46.90 48.07 48.33 51.50 52.93 53.67 54.40 55.07 55.33 57.93 58.17 59.47 61.00 61.23 61.90 64.10 64.37 67.23 67.50 68.73 69.00 69.27 69.80 71.17 71.43 71.97 73.20 73.43 74.23 74.67 75.13 75.47 79.40 81.97 82.23 83.43 84.70 84.87 85.13 87.20 90.27 91.27 92.07 92.47 92.97 95.23 95.37 95.77 96.17 96.33 100.93 102.50 106.20 106.73 107.13 107.40 107.60 108.23 110.67 112.30 116.53 117.57 120.27 120.90 121.30 121.80 122.57 123.03 123.47
+
+PLANNED CUTS for find_jumps.py (film starting at 0.000 s):
+  55.100 s (55.100 s into the film): page 3: cut to 3b the quiet gate
+  67.267 s (67.267 s into the film): page 3: held picture steps
+  68.767 s (68.767 s into the film): page 3: held picture steps
+  69.033 s (69.033 s into the film): page 3: held picture steps
+  69.300 s (69.300 s into the film): page 3: held picture steps
+  71.200 s (71.200 s into the film): page 3: held picture steps
+  72.000 s (72.000 s into the film): page 3: held picture steps
+  74.275 s (74.275 s into the film): page 3: join (peel) starts (gradual: not a jump)
+  107.167 s (107.167 s into the film): page 5: cut to 5b both factories
+  122.608 s (122.608 s into the film): page 5: join (peel) starts (gradual: not a jump)
+  python3 -I paper-film/tools/find_jumps.py FILM.mp4 SHEET.jpg 4 55.100 67.267 68.767 69.033 69.300 71.200 72.000 107.167
+
+Settings used (film-settings.json):
+  page_timing.settle_after_join_seconds = 0.15 seconds after a join ends, before the next page's first word (judged)
+  page_timing.join_clear_of_next_word_seconds = 0.1 seconds (judged)
+  timing.page_pause_range_seconds = [1.1, 1.7] seconds (judged)
+  timing.turn_after_last_word_seconds = 0.3 seconds (judged)
+  timing.guess_hold_seconds = 4.0 seconds (judged)
+  page_timing.pause_longer_than_needed_seconds = 0.3 seconds (invented)
+  timing.label_readable_min_seconds = 1.0 seconds at full strength (judged)
+  page_timing.conclusion_on_screen_seconds = 1.2 seconds from when it starts to appear until the cut (one frame short allowed) (judged)
+  page_timing.overlap_opacity_min = 0.1 strength (0 to 1) both lines must have to count as overlapping (judged)
+  page_timing.overlap_pixels_min = 2 pixels two boxes must overlap by, across and down (invented)
+  safe_area.text_left_pixels = 65 pixels (0.06 of the width) (judged)
+  safe_area.text_right_pixels = 972 pixels (0.90 of the width) (judged)
+  safe_area.letter_top_min_down = 0.06 down the frame (judged)
+  safe_area.nothing_to_read_below_down = 0.8 down the frame (the bottom 380 pixels) (judged)
+  safe_area.title_band_down = [0.05, 0.22] down the frame (judged)
+  safe_area.rule_cards_down = [[0.07, 0.15], [0.16, 0.24]] down the frame (judged)
+  page_timing.typed_word_window_seconds = 6.0 seconds either side of when the words show (judged)
+  timing.key_number_hold_seconds = 1.0 seconds (judged)
+  page_timing.number_hold_seconds = [0.5, 0.15] seconds, plus seconds per character shown (judged)
+  page_timing.count_end_after_word_max_seconds = 0.1 seconds after the number's spoken word (judged)
+  timing.word_group_every_seconds = 6 seconds (judged)
+  timing.word_groups_per_page = [3, 5] groups (judged)
+  camera.slide_seconds_range = [2.6, 4.1] seconds (judged)
+  camera.slides_per_page_max = 1 slides (judged)
+  timing.rest_without_change_max_seconds = 1.7 seconds (2.5 on the end card) (judged)
+  timing.end_card_rest_max_seconds = 2.5 seconds (judged)
+  page_timing.still_after_event_seconds = 0.25 seconds after an event (or 0.05 s after its words are full, if later) (judged)
+  page_timing.page_turn_stills_after_last_word_seconds = [0.3, 0.7, 1.2] seconds after each page's last word (judged)
+  page_timing.merge_stills_within_seconds = 0.1 seconds (invented)
+  timing.default_page_pause_seconds = 1.4 seconds (judged)
+  timing.camera_plan_window_seconds = {"before_first_word": 0.8, "after_last_word_end": 1.3} seconds (judged)

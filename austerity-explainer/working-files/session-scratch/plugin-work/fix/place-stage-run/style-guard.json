@@ -1,0 +1,59 @@
+{
+ "guards": {
+  "view_a": {
+   "made_from": "view_a_final.png",
+   "view": "view_a",
+   "provisional": true,
+   "percentiles": {
+    "1": 0.08260471373796463,
+    "5": 0.16470588743686676,
+    "25": 0.2136164754629135,
+    "50": 0.31586042046546936,
+    "75": 0.34750041365623474,
+    "95": 0.5346392393112183,
+    "99": 0.5662949681282043
+   },
+   "mean_saturation": 0.20651179552078247,
+   "detail_energy": {
+    "all": 3.3039751052856445
+   },
+   "regions": [
+    "all"
+   ],
+   "accent": {
+    "name": null
+   },
+   "squint_gate": false,
+   "note": "made from the first honest picture: it is provisional until a person accepts it (remove \"provisional\" and write who and when)"
+  },
+  "view_b": {
+   "made_from": "view_b_final.png",
+   "view": "view_b",
+   "provisional": true,
+   "percentiles": {
+    "1": 0.019875293597579002,
+    "5": 0.0218258835375309,
+    "25": 0.0865262821316719,
+    "50": 0.2996235489845276,
+    "75": 0.3519882261753082,
+    "95": 0.5503255724906921,
+    "99": 0.5735874772071838
+   },
+   "mean_saturation": 0.2541121542453766,
+   "detail_energy": {
+    "all": 3.1610546112060547
+   },
+   "regions": [
+    "all"
+   ],
+   "accent": {
+    "name": null
+   },
+   "squint_gate": false,
+   "note": "made from the first honest picture: it is provisional until a person accepts it (remove \"provisional\" and write who and when)"
+  }
+ },
+ "default_view": "view_a",
+ "provisional": true,
+ "note": "one guard per view; a picture is checked against the guard whose view name is in its file name, else the default view's"
+}

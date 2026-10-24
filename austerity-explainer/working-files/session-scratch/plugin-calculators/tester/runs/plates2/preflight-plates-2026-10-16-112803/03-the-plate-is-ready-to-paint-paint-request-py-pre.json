@@ -1,0 +1,444 @@
+{
+ "preflight": [
+  {
+   "check": "render log",
+   "verdict": "pass",
+   "what": "The render log has no render faults.",
+   "numbers": {
+    "faults_found": []
+   },
+   "fix": ""
+  },
+  {
+   "check": "light rules",
+   "verdict": "pass",
+   "what": "The shot check lists no light problem (rules 5 and 6).",
+   "numbers": {
+    "problems": []
+   },
+   "fix": ""
+  },
+  {
+   "check": "thin parts",
+   "verdict": "pass",
+   "what": "No story prop has much thin detail; the prompt names lamp post, gates and winding wheels as thin.",
+   "numbers": {
+    "thin_share_by_group": {
+     "lamp post": 0.076,
+     "gates": 1.0,
+     "winding wheels": 0.93
+    }
+   },
+   "fix": ""
+  },
+  {
+   "check": "lettering",
+   "verdict": "pass",
+   "what": "No lettered group shows in the plate.",
+   "numbers": {
+    "lettered": []
+   },
+   "fix": ""
+  },
+  {
+   "check": "even discs and dark holes",
+   "verdict": "pass",
+   "what": "No even bright disc or near-black hole round the story.",
+   "numbers": {
+    "patches": []
+   },
+   "fix": ""
+  },
+  {
+   "check": "glow inside a hollow",
+   "verdict": "fail",
+   "what": "brazier: 8.0% of the top is lit (limit 2%): the painter lifts a glowing hollow into a bright band (lesson 138). Darken the glow inside it in the plate first.",
+   "numbers": {
+    "brazier": {
+     "glow_share_of_top": 0.0803,
+     "glow_pixels": 470,
+     "body_median": 43.2716
+    }
+   },
+   "fix": "Lower the coals' glow or hide it behind the front rim, then draw the plate again."
+  },
+  {
+   "check": "heads from behind",
+   "verdict": "pass",
+   "what": "No near figure seen from behind has a pale head brighter than its coat (5 checked).",
+   "numbers": {
+    "man stooped": {
+     "head_band": 22.0,
+     "coat": 7.5,
+     "ratio": 2.95
+    },
+    "man arms folded": {
+     "head_band": 15.4,
+     "coat": 10.2,
+     "ratio": 1.51
+    },
+    "man hand on bar": {
+     "head_band": 10.9,
+     "coat": 33.6,
+     "ratio": 0.32
+    },
+    "man leaning": {
+     "head_band": 12.1,
+     "coat": 36.5,
+     "ratio": 0.33
+    },
+    "man facing": {
+     "head_band": 19.4,
+     "coat": 8.6,
+     "ratio": 2.25
+    }
+   },
+   "fix": ""
+  },
+  {
+   "check": "cloth through the film's finish",
+   "verdict": "pass",
+   "what": "No figure's cloth turns red through the film's finish (exposure 1.0).",
+   "numbers": {
+    "man stooped": {
+     "plate": [
+      7,
+      8,
+      9
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    },
+    "man arms folded": {
+     "plate": [
+      9,
+      10,
+      12
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    },
+    "man hand on bar": {
+     "plate": [
+      45,
+      38,
+      31
+     ],
+     "film": [
+      28,
+      17,
+      3
+     ],
+     "hue_degrees": 33.6,
+     "saturation": 0.9
+    },
+    "man leaning": {
+     "plate": [
+      57,
+      45,
+      33
+     ],
+     "film": [
+      47,
+      29,
+      6
+     ],
+     "hue_degrees": 33.0,
+     "saturation": 0.87
+    },
+    "man facing": {
+     "plate": [
+      9,
+      8,
+      7
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    },
+    "walker 1": {
+     "plate": [
+      10,
+      11,
+      11
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    },
+    "walker 2": {
+     "plate": [
+      9,
+      11,
+      13
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    },
+    "walker 3": {
+     "plate": [
+      7,
+      8,
+      8
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    },
+    "walker 4": {
+     "plate": [
+      16,
+      16,
+      15
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    },
+    "walker 5": {
+     "plate": [
+      7,
+      9,
+      10
+     ],
+     "film": [
+      0,
+      0,
+      0
+     ],
+     "hue_degrees": 0.0,
+     "saturation": 0.0
+    }
+   },
+   "fix": ""
+  },
+  {
+   "check": "figures against their surround",
+   "verdict": "look",
+   "what": "man hand on bar and man leaning are barely darker than what surrounds them in the plate (over 0.5 of its brightness); the painter lifts figures about three times toward their surround (people test 0.15 to 0.50), so these will read pale.",
+   "numbers": {
+    "man stooped": 0.135,
+    "man arms folded": 0.16,
+    "man hand on bar": 0.642,
+    "man leaning": 0.644,
+    "man facing": 0.15,
+    "walker 1": 0.238,
+    "walker 2": 0.174,
+    "walker 3": 0.198,
+    "walker 4": 0.43,
+    "walker 5": 0.271
+   },
+   "fix": "Darken their cloth or stand them against a lighter background."
+  },
+  {
+   "check": "figures casting long shadows",
+   "verdict": "not checked",
+   "what": "No helper plate (the plate drawn without the figures) given (--helper-plate).",
+   "numbers": {},
+   "fix": ""
+  },
+  {
+   "check": "hidden figures",
+   "verdict": "look",
+   "what": "walker 6 do not show in the plate at all; the prompt does not count them.",
+   "numbers": {
+    "hidden": [
+     "walker 6"
+    ]
+   },
+   "fix": ""
+  },
+  {
+   "check": "real people",
+   "verdict": "not checked",
+   "what": "No list of real people given (--real-names).",
+   "numbers": {},
+   "fix": ""
+  }
+ ],
+ "failed": 1,
+ "calculator": "paint_request preflight",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "light.render_faults": {
+   "value": [
+    "Shadow buffer full",
+    "Could not allocate shadow atlas"
+   ],
+   "unit": "words in the render log",
+   "kind": "measured"
+  },
+  "painting_tools.paint_request.thin_share_named": {
+   "value": 0.03,
+   "unit": "share of a group's showing pixels that are thin",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.thin_share_remove_or_thicken": {
+   "value": 0.05,
+   "unit": "share of a story group's showing pixels that are thin",
+   "kind": "judged"
+  },
+  "painting.plate_thin_parts_pixels_at_1080": {
+   "value": 6,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.keep_min_frame_share": {
+   "value": 0.0005,
+   "unit": "share of the frame",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.even_disc": {
+   "value": {
+    "spread_levels_max": 2,
+    "saturation_min": 0.5,
+    "value_min": 0.25,
+    "frame_share_min": 0.003,
+    "window_pixels_at_1080": 7
+   },
+   "unit": "levels, shares (0-1), share of the frame, pixels",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.dark_hole_levels_max": {
+   "value": 5,
+   "unit": "levels of 255",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.dark_hole_frame_share_min": {
+   "value": 0.001,
+   "unit": "share of the frame (one connected near-black patch, anywhere)",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.hollow_glow": {
+   "value": {
+    "top_share": 0.3,
+    "brighter_than_body": 2.0,
+    "share_max": 0.02
+   },
+   "unit": "top share of the prop's height; times the prop's median brightness; share of that top",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.near_figure_metres": {
+   "value": 15,
+   "unit": "metres from the plate camera",
+   "kind": "judged"
+  },
+  "people.head_height_metres": {
+   "value": 0.23,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "frame.film_vertical_fov_degrees": {
+   "value": 60.4,
+   "unit": "degrees, top to bottom",
+   "kind": "measured"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.head_band_over_coat_max": {
+   "value": 1.0,
+   "unit": "head band brightness over coat brightness",
+   "kind": "judged"
+  },
+  "people.figure_height_metres": {
+   "value": 1.75,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.coat_band_share_of_height": {
+   "value": [
+    0.2,
+    0.55
+   ],
+   "unit": "share of the figure's height from its top",
+   "kind": "invented"
+  },
+  "painting_tools.paint_request.head_band_pale_min_levels": {
+   "value": 40,
+   "unit": "levels of 255 (brightness of the band under the cap)",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.film_look": {
+   "value": {
+    "exposure": 1.0,
+    "contrast": 1.04,
+    "saturation": 1.0,
+    "shadow_tint": [
+     0.44,
+     0.52,
+     0.56
+    ],
+    "highlight_tint": [
+     0.56,
+     0.5,
+     0.42
+    ],
+    "tint_amount": 0.35,
+    "lift": 0.015
+   },
+   "unit": "the stage's finish settings",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.red_hue_band_degrees": {
+   "value": [
+    345,
+    15
+   ],
+   "unit": "degrees of hue",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.red_saturation_min": {
+   "value": 0.5,
+   "unit": "saturation (0-1) of the colour as filmed",
+   "kind": "judged"
+  },
+  "painting_tools.paint_request.figure_surround_ratio_max_plate": {
+   "value": 0.5,
+   "unit": "a figure's brightness over its surround's, in the plate",
+   "kind": "judged"
+  },
+  "painting_tools.after_painting.figure_ring_pixels_at_1536": {
+   "value": {
+    "erode": 7,
+    "ring_inner": 13,
+    "ring_outer": 61
+   },
+   "unit": "pixels on a plate 1536 wide",
+   "kind": "judged"
+  }
+ }
+}

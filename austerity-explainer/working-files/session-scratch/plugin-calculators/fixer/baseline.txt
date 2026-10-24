@@ -1,0 +1,47 @@
+skipped  test_after_painting.py  (0.2 s)
+    SKIP  the paintings as the painter returned them and their plate facts are in the working files; set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it
+passed   test_camera_audit.py  (2.7 s)  camera_audit: old behaviour, page window from the timeline, built-and-painted set checks: 27 of 27 checks passed
+passed   test_check_page_layout.py  (0.6 s)  page layout: pops, effects after their moment, held shots, overlaps: 10 of 10 checks passed
+passed   test_check_shot_kinds.py  (47.0 s)  shot checker: kinds of shot and the accepted list: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_example_check_files.py  (0.4 s)  example check files: kinds of shot, figures and accepted problems: 23 of 23 checks passed
+passed   test_frame_geometry.py  (0.0 s)  frame geometry: recorded cases and hold-outs: 57 of 57 checks passed
+passed   test_frame_geometry_parity.py  (0.2 s)  frame geometry: Python and JavaScript give the same numbers: 31 of 31 checks passed
+passed   test_house_rules.py  (1.7 s)  house rules: a plain note at the top and a --help: 3 of 3 checks passed
+passed   test_lint_script.py  (2.5 s)  script and narration gate: before recording and after: 43 of 43 checks passed
+passed   test_make_check_file.py  (0.1 s)  make_check_file: check files from the scene: 13 of 13 checks passed; 1 part(s) skipped
+passed   test_model_lint.py  (1.6 s)  model_lint: model faults before plates: 21 of 21 checks passed; 1 part(s) skipped
+passed   test_page_events.py  (47.3 s)  page events: the notes change nothing, and the events are reproducible: 13 of 13 checks passed
+passed   test_paint_request.py  (0.2 s)  paint_request: prompts, preflight and price against the recorded cases: 8 of 8 checks passed; 1 part(s) skipped
+passed   test_place_facts.py  (0.6 s)  place facts: schema, converters and what they carry: 35 of 35 checks passed
+passed   test_plan_budget.py  (1.5 s)  budget planner: money, filming time, pieces, stretches, memory, disk, pushes: 47 of 47 checks passed
+passed   test_plan_effects.py  (2.2 s)  plan_effects: wind, plumes, colour, contact shadows, window change, fire, lint: 51 of 51 checks passed; 1 part(s) skipped
+passed   test_plan_lights.py  (2.8 s)  plan_lights: watts, reach, cone, links, surfaces, lamps, dark subject, render log, exposure: 30 of 30 checks passed; 1 part(s) skipped
+passed   test_plan_page_timing.py  (0.7 s)  page timing: pauses, reading times, cuts, margins, words, numbers, stills: 57 of 57 checks passed
+passed   test_plan_shot.py  (0.3 s)  shot planner: recorded cases and the checkout hold-out: 60 of 60 checks passed
+passed   test_plan_states.py  (0.3 s)  plan_states: helper plates, cut or blend, against the Works and the people test: 10 of 10 checks passed; 2 part(s) skipped
+passed   test_preflight.py  (5.4 s)  preflight: stages, accepted problems, missing inputs, the critique and the gate: 31 of 31 checks passed
+passed   test_settings.py  (0.1 s)  film settings: the table, its reader and drift in the tools: 43 of 43 checks passed
+passed   test_shot_kind_profiles.py  (0.1 s)  shot-kind profiles against the views the project kept: 17 of 17 checks passed
+skipped  test_sound_gates.py  (0.1 s)
+    SKIP  the soundtrack "Tension and Gravity.mp3" or chapter 2's narration is not on this machine (audio stays out of the repository; name the soundtrack with FILM_SOUNDTRACK, or give the working files with FILM_WORKING_FILES)
+passed   test_view_audit.py  (0.3 s)  view_audit: lettering, figures and landmarks per view: 55 of 55 checks passed
+
+25 test files: 23 passed, 0 failed, 2 skipped.
+Checks: 695 passed, 0 failed, 11 skipped (9 part(s) of tests and 2 whole test file(s), each with its reason below).
+Time: 1 min 59 s.
+Skipped, and why:
+  - test_after_painting.py: the whole test (the paintings as the painter returned them and their plate facts are in the working files; set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_check_shot_kinds.py: part 2, notice corner: skipped (it needs the project's film kit and experiments, and the working files' redesign/round5-set/notice; set FILM_PROJECT and FILM_WORKING_FILES)
+  - test_check_shot_kinds.py: part 2, Works W1: skipped (round 5's final check folder is in the working files, redesign/round5-set/checks/final-w1-quiet; set FILM_WORKING_FILES)
+  - test_make_check_file.py: part B skipped: no Blender or no project (set BLENDER, or run explainer-film-setup; FILM_PROJECT, or austerity-explainer next to the plugins folder; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)
+  - test_model_lint.py: part C skipped: no Blender or no project (set BLENDER, or run explainer-film-setup; FILM_PROJECT; VIEWS_AND_MODELS_NO_BLENDER=1 skips it)
+  - test_paint_request.py: part B skipped: the project's plates and plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_plan_effects.py: Blender (BLENDER, or explainer-film-setup's machine-settings.env) or the film kit's notice-corner.blend (FILM_KIT) is not on this machine: the live footprint measurement was skipped
+  - test_plan_lights.py: Blender (BLENDER, or explainer-film-setup's machine-settings.env) or the film kit's notice-corner.blend (FILM_KIT) is not on this machine: the live ray cast was skipped
+  - test_plan_states.py: part B for the Works skipped: its plates or plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_plan_states.py: part B for the people test skipped: its plates or plate facts are not on this machine (set FILM_WORKING_FILES to the folder holding the project's working files from the redesign rounds (redesign/, plan3/, held-back/ ...) to run it)
+  - test_sound_gates.py: the whole test (the soundtrack "Tension and Gravity.mp3" or chapter 2's narration is not on this machine (audio stays out of the repository; name the soundtrack with FILM_SOUNDTRACK, or give the working files with FILM_WORKING_FILES))
+
+real	1m58.916s
+user	1m50.386s
+sys	0m16.922s

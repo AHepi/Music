@@ -1,0 +1,1336 @@
+{
+ "change": "which wear change shows",
+ "change_id": "which-wear-change-shows",
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/canal_finished.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/place-settings.json",
+ "cameras": [
+  "Camera A",
+  "Camera B"
+ ],
+ "engine": "CYCLES",
+ "size": [
+  300,
+  200
+ ],
+ "variations": [
+  {
+   "name": "wet-max",
+   "set": {
+    "amount.wetness": 1.0,
+    "dials.wetness.darken": 0.6,
+    "dials.wetness.wet_roughness": 0.05
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "grime-max",
+   "set": {
+    "amount.grime": 1.0,
+    "dials.grime.darkening": 0.6,
+    "dials.grime.area_share": 0.6
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "dirt-max",
+   "set": {
+    "dials.dirt.film": 1.0,
+    "dials.dirt.dust": 1.0,
+    "dials.dirt.foot_height_metres": 1.5
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "weather-max",
+   "set": {
+    "dials.weathering.silvering": 1.0,
+    "dials.weathering.sun_fade": 1.0,
+    "dials.weathering.patina": 1.0
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "cracks-max",
+   "set": {
+    "dials.cracks_and_chips.crack_density": 1.0,
+    "dials.cracks_and_chips.chip_amount": 1.0,
+    "dials.cracks_and_chips.crack_width_metres": 0.05
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "edge-max",
+   "set": {
+    "dials.edge_wear.width_metres": 0.1,
+    "dials.edge_wear.pale": 0.6
+   },
+   "args": {},
+   "script": null
+  },
+  {
+   "name": "all-off",
+   "set": {
+    "master": 0.0
+   },
+   "args": {},
+   "script": null
+  }
+ ],
+ "dropped": [],
+ "jobs": [
+  {
+   "index": 1,
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/scout/run/pictures/job-1",
+   "where": "this computer",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 35.7,
+   "wall_seconds": 35.7,
+   "wake_up_ms": 0,
+   "billed_work_ms": 0,
+   "job_id": null,
+   "log_tail": "00:33.810  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/scout/run/pictures/job-1/08_all-off__camera-a.jpg'\n00:35.184  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/scout/run/pictures/job-1/08_all-off__camera-b.jpg'\nPASS baseline: 2 picture(s) in 5.2 s (restored exactly)\nPASS wet-max: 2 picture(s) in 4.3 s (restored exactly)\nPASS grime-max: 2 picture(s) in 4.4 s (restored exactly)\nPASS dirt-max: 2 picture(s) in 4.5 s (restored exactly)\nPASS weather-max: 2 picture(s) in 4.5 s (restored exactly)\nPASS cracks-max: 2 picture(s) in 4.6 s (restored exactly)\nPASS edge-max: 2 picture(s) in 4.5 s (restored exactly)\nPASS all-off: 2 picture(s) in 2.4 s (last of the job)\nPASS variations-worker: job 1: 8 of 8 variation(s), 16 picture(s), 34.6 s, cycles on CPU (this computer)\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)"
+  }
+ ],
+ "job_summaries": {
+  "1": {
+   "job": 1,
+   "scene": "canal_finished.blend",
+   "blender": "5.2.2 LTS",
+   "device": "CPU (this computer)",
+   "engine": "CYCLES",
+   "engine_reasons": [
+    "water \"Water lock chamber\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)",
+    "water \"Water upper pound\" is in view (Cycles gives real reflections; EEVEE draws still water as a flat dark slab)"
+   ],
+   "size": [
+    300,
+    200
+   ],
+   "samples": 8,
+   "where": "local",
+   "cameras": [
+    "Camera A",
+    "Camera B"
+   ],
+   "fingerprint_at_start": "bfed766b0584cf78",
+   "seconds_in_all": 34.6,
+   "reopened": 0,
+   "entries": [
+    "baseline",
+    "wet-max",
+    "grime-max",
+    "dirt-max",
+    "weather-max",
+    "cracks-max",
+    "edge-max",
+    "all-off"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "4951ab407cc41a51"
+  }
+ },
+ "results": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 5.22,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.19025805592536926,
+     "p95": 0.6454745531082153,
+     "range": 0.45521649718284607,
+     "median": 0.39891451597213745,
+     "detail": 3.262209892272949,
+     "mean_saturation": 0.1594424694776535,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    },
+    "Camera B": {
+     "p5": 0.06840627640485764,
+     "p95": 0.454105019569397,
+     "range": 0.38569874316453934,
+     "median": 0.22856706380844116,
+     "detail": 3.4267261028289795,
+     "mean_saturation": 0.28407537937164307,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    }
+   },
+   "average": {
+    "p5": 0.12933216616511345,
+    "p95": 0.5497897863388062,
+    "range": 0.4204576201736927,
+    "median": 0.3137407898902893,
+    "detail": 3.3444679975509644,
+    "mean_saturation": 0.22175892442464828,
+    "squint": 1.0,
+    "flat_windows": 0.0,
+    "colour_shift": 0.0,
+    "saturation_shift": 0.0,
+    "detail_change": 0.0
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "01_baseline__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.47,
+     "bytes": 8788,
+     "ok": true,
+     "mean_luminance": 0.4281458854675293,
+     "path": "pictures/job-1/01_baseline__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "01_baseline__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.74,
+     "bytes": 8476,
+     "ok": true,
+     "mean_luminance": 0.23150993883609772,
+     "path": "pictures/job-1/01_baseline__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "wet-max",
+   "is_baseline": false,
+   "set": {
+    "amount.wetness": 1.0,
+    "dials.wetness.darken": 0.6,
+    "dials.wetness.wet_roughness": 0.05
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 4.29,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18236315250396729,
+     "p95": 0.6454745531082153,
+     "range": 0.46311140060424805,
+     "median": 0.3801247477531433,
+     "detail": 3.2573230266571045,
+     "mean_saturation": 0.16374903917312622,
+     "squint": 0.9826961159706116,
+     "flat_windows": 0,
+     "colour_shift": 1.006865527548282,
+     "saturation_shift": 0.004306569695472717,
+     "detail_change": -0.0048868656158447266
+    },
+    "Camera B": {
+     "p5": 0.062178827822208405,
+     "p95": 0.4499049186706543,
+     "range": 0.3877260908484459,
+     "median": 0.20003528892993927,
+     "detail": 3.2550668716430664,
+     "mean_saturation": 0.29230499267578125,
+     "squint": 0.9756912589073181,
+     "flat_windows": 0,
+     "colour_shift": 2.4105646860914973,
+     "saturation_shift": 0.008229613304138184,
+     "detail_change": -0.17165923118591309
+    }
+   },
+   "average": {
+    "p5": 0.12227099016308784,
+    "p95": 0.5476897358894348,
+    "range": 0.42541874572634697,
+    "median": 0.2900800183415413,
+    "detail": 3.2561949491500854,
+    "mean_saturation": 0.22802701592445374,
+    "squint": 0.9791936874389648,
+    "flat_windows": 0.0,
+    "colour_shift": 1.7087151068198896,
+    "saturation_shift": 0.0062680914998054504,
+    "detail_change": -0.0882730484008789
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "02_wet-max__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.84,
+     "bytes": 8676,
+     "ok": true,
+     "mean_luminance": 0.41430559754371643,
+     "path": "pictures/job-1/02_wet-max__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "02_wet-max__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.45,
+     "bytes": 8217,
+     "ok": true,
+     "mean_luminance": 0.21214522421360016,
+     "path": "pictures/job-1/02_wet-max__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "grime-max",
+   "is_baseline": false,
+   "set": {
+    "amount.grime": 1.0,
+    "dials.grime.darkening": 0.6,
+    "dials.grime.area_share": 0.6
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 4.43,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1787451058626175,
+     "p95": 0.6454745531082153,
+     "range": 0.46672944724559784,
+     "median": 0.38574981689453125,
+     "detail": 3.2306666374206543,
+     "mean_saturation": 0.1627730131149292,
+     "squint": 0.9663417935371399,
+     "flat_windows": 0,
+     "colour_shift": 1.1075332812315342,
+     "saturation_shift": 0.003330543637275696,
+     "detail_change": -0.03154325485229492
+    },
+    "Camera B": {
+     "p5": 0.05738745257258415,
+     "p95": 0.4403195083141327,
+     "range": 0.38293205574154854,
+     "median": 0.18550746142864227,
+     "detail": 3.081399917602539,
+     "mean_saturation": 0.28666216135025024,
+     "squint": 0.9452263712882996,
+     "flat_windows": 0,
+     "colour_shift": 4.229025302211327,
+     "saturation_shift": 0.0025867819786071777,
+     "detail_change": -0.34532618522644043
+    }
+   },
+   "average": {
+    "p5": 0.11806627921760082,
+    "p95": 0.542897030711174,
+    "range": 0.4248307514935732,
+    "median": 0.28562863916158676,
+    "detail": 3.1560332775115967,
+    "mean_saturation": 0.22471758723258972,
+    "squint": 0.9557840824127197,
+    "flat_windows": 0.0,
+    "colour_shift": 2.6682792917214306,
+    "saturation_shift": 0.0029586628079414368,
+    "detail_change": -0.18843472003936768
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "03_grime-max__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.89,
+     "bytes": 8538,
+     "ok": true,
+     "mean_luminance": 0.4128566384315491,
+     "path": "pictures/job-1/03_grime-max__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "03_grime-max__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.53,
+     "bytes": 7859,
+     "ok": true,
+     "mean_luminance": 0.19873102009296417,
+     "path": "pictures/job-1/03_grime-max__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "dirt-max",
+   "is_baseline": false,
+   "set": {
+    "dials.dirt.film": 1.0,
+    "dials.dirt.dust": 1.0,
+    "dials.dirt.foot_height_metres": 1.5
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 4.46,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.18658824265003204,
+     "p95": 0.6454745531082153,
+     "range": 0.4588863104581833,
+     "median": 0.3853992223739624,
+     "detail": 3.312297821044922,
+     "mean_saturation": 0.1582474559545517,
+     "squint": 0.9948084950447083,
+     "flat_windows": 0,
+     "colour_shift": 0.6970404727011841,
+     "saturation_shift": -0.0011950135231018066,
+     "detail_change": 0.050087928771972656
+    },
+    "Camera B": {
+     "p5": 0.06606432050466537,
+     "p95": 0.4534968435764313,
+     "range": 0.3874325230717659,
+     "median": 0.21613334119319916,
+     "detail": 3.3454349040985107,
+     "mean_saturation": 0.2833072543144226,
+     "squint": 0.9918908476829529,
+     "flat_windows": 0,
+     "colour_shift": 0.9886712824052679,
+     "saturation_shift": -0.000768125057220459,
+     "detail_change": -0.08129119873046875
+    }
+   },
+   "average": {
+    "p5": 0.1263262815773487,
+    "p95": 0.5494856983423233,
+    "range": 0.4231594167649746,
+    "median": 0.3007662817835808,
+    "detail": 3.3288663625717163,
+    "mean_saturation": 0.22077735513448715,
+    "squint": 0.9933496713638306,
+    "flat_windows": 0.0,
+    "colour_shift": 0.842855877553226,
+    "saturation_shift": -0.0009815692901611328,
+    "detail_change": -0.015601634979248047
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "04_dirt-max__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.88,
+     "bytes": 8842,
+     "ok": true,
+     "mean_luminance": 0.4195570945739746,
+     "path": "pictures/job-1/04_dirt-max__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "04_dirt-max__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.58,
+     "bytes": 8353,
+     "ok": true,
+     "mean_luminance": 0.2240762859582901,
+     "path": "pictures/job-1/04_dirt-max__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "weather-max",
+   "is_baseline": false,
+   "set": {
+    "dials.weathering.silvering": 1.0,
+    "dials.weathering.sun_fade": 1.0,
+    "dials.weathering.patina": 1.0
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 4.55,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.19530117511749268,
+     "p95": 0.6454745531082153,
+     "range": 0.45017337799072266,
+     "median": 0.416565477848053,
+     "detail": 3.317126512527466,
+     "mean_saturation": 0.13873250782489777,
+     "squint": 0.9953476786613464,
+     "flat_windows": 0,
+     "colour_shift": 0.9260482946163012,
+     "saturation_shift": -0.020709961652755737,
+     "detail_change": 0.0549166202545166
+    },
+    "Camera B": {
+     "p5": 0.07119058817625046,
+     "p95": 0.4641971290111542,
+     "range": 0.3930065408349037,
+     "median": 0.24784550070762634,
+     "detail": 3.5017006397247314,
+     "mean_saturation": 0.2323492467403412,
+     "squint": 0.9937289953231812,
+     "flat_windows": 0,
+     "colour_shift": 2.0386424618353325,
+     "saturation_shift": -0.05172613263130188,
+     "detail_change": 0.07497453689575195
+    }
+   },
+   "average": {
+    "p5": 0.13324588164687157,
+    "p95": 0.5548358410596848,
+    "range": 0.4215899594128132,
+    "median": 0.33220548927783966,
+    "detail": 3.4094135761260986,
+    "mean_saturation": 0.18554087728261948,
+    "squint": 0.9945383369922638,
+    "flat_windows": 0.0,
+    "colour_shift": 1.482345378225817,
+    "saturation_shift": -0.03621804714202881,
+    "detail_change": 0.06494557857513428
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "05_weather-max__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.91,
+     "bytes": 8871,
+     "ok": true,
+     "mean_luminance": 0.4379257559776306,
+     "path": "pictures/job-1/05_weather-max__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "05_weather-max__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.63,
+     "bytes": 8618,
+     "ok": true,
+     "mean_luminance": 0.24322018027305603,
+     "path": "pictures/job-1/05_weather-max__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "cracks-max",
+   "is_baseline": false,
+   "set": {
+    "dials.cracks_and_chips.crack_density": 1.0,
+    "dials.cracks_and_chips.chip_amount": 1.0,
+    "dials.cracks_and_chips.crack_width_metres": 0.05
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 4.59,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1868860423564911,
+     "p95": 0.6454745531082153,
+     "range": 0.45858851075172424,
+     "median": 0.39078664779663086,
+     "detail": 3.6990280151367188,
+     "mean_saturation": 0.15968170762062073,
+     "squint": 0.9925601482391357,
+     "flat_windows": 0,
+     "colour_shift": 0.564325454056874,
+     "saturation_shift": 0.00023923814296722412,
+     "detail_change": 0.43681812286376953
+    },
+    "Camera B": {
+     "p5": 0.0657968670129776,
+     "p95": 0.46592673659324646,
+     "range": 0.40012986958026886,
+     "median": 0.21517647802829742,
+     "detail": 3.707726240158081,
+     "mean_saturation": 0.2825840413570404,
+     "squint": 0.9873424768447876,
+     "flat_windows": 0,
+     "colour_shift": 0.7337559396926872,
+     "saturation_shift": -0.0014913380146026611,
+     "detail_change": 0.28100013732910156
+    }
+   },
+   "average": {
+    "p5": 0.12634145468473434,
+    "p95": 0.5557006448507309,
+    "range": 0.42935919016599655,
+    "median": 0.30298156291246414,
+    "detail": 3.7033771276474,
+    "mean_saturation": 0.22113287448883057,
+    "squint": 0.9899513125419617,
+    "flat_windows": 0.0,
+    "colour_shift": 0.6490406968747806,
+    "saturation_shift": -0.0006260499358177185,
+    "detail_change": 0.35890913009643555
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "06_cracks-max__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.91,
+     "bytes": 9479,
+     "ok": true,
+     "mean_luminance": 0.42087414860725403,
+     "path": "pictures/job-1/06_cracks-max__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "06_cracks-max__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.67,
+     "bytes": 9125,
+     "ok": true,
+     "mean_luminance": 0.22573330998420715,
+     "path": "pictures/job-1/06_cracks-max__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "edge-max",
+   "is_baseline": false,
+   "set": {
+    "dials.edge_wear.width_metres": 0.1,
+    "dials.edge_wear.pale": 0.6
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.01,
+   "seconds_draw": 4.5,
+   "seconds_reset": 0.01,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.1935615837574005,
+     "p95": 0.6454745531082153,
+     "range": 0.4519129693508148,
+     "median": 0.40590667724609375,
+     "detail": 3.4737703800201416,
+     "mean_saturation": 0.15564368665218353,
+     "squint": 0.990261435508728,
+     "flat_windows": 0,
+     "colour_shift": 0.5027001319888512,
+     "saturation_shift": -0.0037987828254699707,
+     "detail_change": 0.21156048774719238
+    },
+    "Camera B": {
+     "p5": 0.07232784479856491,
+     "p95": 0.49737414717674255,
+     "range": 0.42504630237817764,
+     "median": 0.2355050891637802,
+     "detail": 3.8558220863342285,
+     "mean_saturation": 0.2617216110229492,
+     "squint": 0.9692692756652832,
+     "flat_windows": 0,
+     "colour_shift": 1.9609028777981545,
+     "saturation_shift": -0.022353768348693848,
+     "detail_change": 0.429095983505249
+    }
+   },
+   "average": {
+    "p5": 0.1329447142779827,
+    "p95": 0.5714243501424789,
+    "range": 0.43847963586449623,
+    "median": 0.320705883204937,
+    "detail": 3.664796233177185,
+    "mean_saturation": 0.20868264883756638,
+    "squint": 0.9797653555870056,
+    "flat_windows": 0.0,
+    "colour_shift": 1.231801504893503,
+    "saturation_shift": -0.01307627558708191,
+    "detail_change": 0.3203282356262207
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "07_edge-max__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.79,
+     "bytes": 9080,
+     "ok": true,
+     "mean_luminance": 0.4347483813762665,
+     "path": "pictures/job-1/07_edge-max__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "07_edge-max__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 2.7,
+     "bytes": 8845,
+     "ok": true,
+     "mean_luminance": 0.24779696762561798,
+     "path": "pictures/job-1/07_edge-max__camera-b.jpg"
+    }
+   ]
+  },
+  {
+   "name": "all-off",
+   "is_baseline": false,
+   "set": {
+    "master": 0.0
+   },
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.02,
+   "seconds_draw": 2.41,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "Camera A": {
+     "p5": 0.19551216065883636,
+     "p95": 0.6454745531082153,
+     "range": 0.44996239244937897,
+     "median": 0.48093727231025696,
+     "detail": 3.780341148376465,
+     "mean_saturation": 0.18800726532936096,
+     "squint": 0.8867983818054199,
+     "flat_windows": 0,
+     "colour_shift": 3.774071099521619,
+     "saturation_shift": 0.02856479585170746,
+     "detail_change": 0.5181312561035156
+    },
+    "Camera B": {
+     "p5": 0.06361490488052368,
+     "p95": 0.540595293045044,
+     "range": 0.47698038816452026,
+     "median": 0.25055766105651855,
+     "detail": 4.360381603240967,
+     "mean_saturation": 0.33967089653015137,
+     "squint": 0.9531221389770508,
+     "flat_windows": 0,
+     "colour_shift": 4.8992415278598935,
+     "saturation_shift": 0.0555955171585083,
+     "detail_change": 0.9336555004119873
+    }
+   },
+   "average": {
+    "p5": 0.12956353276968002,
+    "p95": 0.5930349230766296,
+    "range": 0.4634713903069496,
+    "median": 0.36574746668338776,
+    "detail": 4.070361375808716,
+    "mean_saturation": 0.26383908092975616,
+    "squint": 0.9199602603912354,
+    "flat_windows": 0.0,
+    "colour_shift": 4.3366563136907565,
+    "saturation_shift": 0.04208015650510788,
+    "detail_change": 0.7258933782577515
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "Camera A",
+     "file": "08_all-off__camera-a.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.03,
+     "bytes": 9584,
+     "ok": true,
+     "mean_luminance": 0.4614239037036896,
+     "path": "pictures/job-1/08_all-off__camera-a.jpg"
+    },
+    {
+     "camera": "Camera B",
+     "file": "08_all-off__camera-b.jpg",
+     "engine": "CYCLES",
+     "width": 300,
+     "height": 200,
+     "samples": 8,
+     "seconds": 1.37,
+     "bytes": 9474,
+     "ok": true,
+     "mean_luminance": 0.2509760558605194,
+     "path": "pictures/job-1/08_all-off__camera-b.jpg"
+    }
+   ]
+  }
+ ],
+ "pairs": [
+  {
+   "a": "baseline",
+   "b": "wet-max",
+   "mean_difference": 4.432230555555556,
+   "changed_share": 0.30975833333333336,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 5.127638888888889,
+     "changed_share": 0.38461666666666666
+    },
+    "Camera A": {
+     "mean_difference": 3.736822222222222,
+     "changed_share": 0.2349
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "grime-max",
+   "mean_difference": 6.300855555555556,
+   "changed_share": 0.4155,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 8.440533333333333,
+     "changed_share": 0.57535
+    },
+    "Camera A": {
+     "mean_difference": 4.161177777777778,
+     "changed_share": 0.25565
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "dirt-max",
+   "mean_difference": 2.262697222222222,
+   "changed_share": 0.06609999999999999,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.2179611111111113,
+     "changed_share": 0.06728333333333333
+    },
+    "Camera A": {
+     "mean_difference": 2.3074333333333334,
+     "changed_share": 0.06491666666666666
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "weather-max",
+   "mean_difference": 3.238888888888889,
+   "changed_share": 0.22949999999999998,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 3.3750222222222224,
+     "changed_share": 0.21425
+    },
+    "Camera A": {
+     "mean_difference": 3.1027555555555555,
+     "changed_share": 0.24475
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "cracks-max",
+   "mean_difference": 2.724136111111111,
+   "changed_share": 0.11599166666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 2.8881055555555557,
+     "changed_share": 0.12458333333333334
+    },
+    "Camera A": {
+     "mean_difference": 2.5601666666666665,
+     "changed_share": 0.1074
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "edge-max",
+   "mean_difference": 3.307986111111111,
+   "changed_share": 0.1622,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 4.515055555555556,
+     "changed_share": 0.23111666666666666
+    },
+    "Camera A": {
+     "mean_difference": 2.1009166666666665,
+     "changed_share": 0.09328333333333333
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "all-off",
+   "mean_difference": 8.907680555555554,
+   "changed_share": 0.5106916666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 7.475577777777778,
+     "changed_share": 0.4858166666666667
+    },
+    "Camera A": {
+     "mean_difference": 10.339783333333333,
+     "changed_share": 0.5355666666666666
+    }
+   }
+  },
+  {
+   "a": "wet-max",
+   "b": "grime-max",
+   "mean_difference": 2.9912083333333332,
+   "changed_share": 0.15835,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 3.714938888888889,
+     "changed_share": 0.2204
+    },
+    "Camera A": {
+     "mean_difference": 2.2674777777777777,
+     "changed_share": 0.0963
+    }
+   }
+  },
+  {
+   "a": "wet-max",
+   "b": "dirt-max",
+   "mean_difference": 3.2952833333333333,
+   "changed_share": 0.16105833333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 3.665511111111111,
+     "changed_share": 0.20336666666666667
+    },
+    "Camera A": {
+     "mean_difference": 2.9250555555555557,
+     "changed_share": 0.11875
+    }
+   }
+  },
+  {
+   "a": "wet-max",
+   "b": "weather-max",
+   "mean_difference": 7.086213888888889,
+   "changed_share": 0.4740333333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 7.8177055555555555,
+     "changed_share": 0.4756666666666667
+    },
+    "Camera A": {
+     "mean_difference": 6.354722222222223,
+     "changed_share": 0.4724
+    }
+   }
+  },
+  {
+   "a": "wet-max",
+   "b": "cracks-max",
+   "mean_difference": 4.310022222222222,
+   "changed_share": 0.26592499999999997,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 5.033311111111111,
+     "changed_share": 0.3362833333333333
+    },
+    "Camera A": {
+     "mean_difference": 3.5867333333333336,
+     "changed_share": 0.19556666666666667
+    }
+   }
+  },
+  {
+   "a": "wet-max",
+   "b": "edge-max",
+   "mean_difference": 7.326483333333334,
+   "changed_share": 0.41409166666666664,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 9.26673888888889,
+     "changed_share": 0.5301
+    },
+    "Camera A": {
+     "mean_difference": 5.386227777777778,
+     "changed_share": 0.2980833333333333
+    }
+   }
+  },
+  {
+   "a": "wet-max",
+   "b": "all-off",
+   "mean_difference": 12.342005555555556,
+   "changed_share": 0.5659000000000001,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 11.383061111111111,
+     "changed_share": 0.5743833333333334
+    },
+    "Camera A": {
+     "mean_difference": 13.30095,
+     "changed_share": 0.5574166666666667
+    }
+   }
+  },
+  {
+   "a": "grime-max",
+   "b": "dirt-max",
+   "mean_difference": 5.382691666666666,
+   "changed_share": 0.330125,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 6.570138888888889,
+     "changed_share": 0.44971666666666665
+    },
+    "Camera A": {
+     "mean_difference": 4.1952444444444446,
+     "changed_share": 0.21053333333333332
+    }
+   }
+  },
+  {
+   "a": "grime-max",
+   "b": "weather-max",
+   "mean_difference": 8.975772222222222,
+   "changed_share": 0.5213833333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 11.187244444444444,
+     "changed_share": 0.5968666666666667
+    },
+    "Camera A": {
+     "mean_difference": 6.7643,
+     "changed_share": 0.4459
+    }
+   }
+  },
+  {
+   "a": "grime-max",
+   "b": "cracks-max",
+   "mean_difference": 5.921825,
+   "changed_share": 0.359225,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 7.479338888888889,
+     "changed_share": 0.46918333333333334
+    },
+    "Camera A": {
+     "mean_difference": 4.364311111111111,
+     "changed_share": 0.24926666666666666
+    }
+   }
+  },
+  {
+   "a": "grime-max",
+   "b": "edge-max",
+   "mean_difference": 9.240591666666667,
+   "changed_share": 0.47550833333333337,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 12.639388888888888,
+     "changed_share": 0.6397
+    },
+    "Camera A": {
+     "mean_difference": 5.841794444444444,
+     "changed_share": 0.3113166666666667
+    }
+   }
+  },
+  {
+   "a": "grime-max",
+   "b": "all-off",
+   "mean_difference": 14.084780555555556,
+   "changed_share": 0.6442166666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 14.15081111111111,
+     "changed_share": 0.71605
+    },
+    "Camera A": {
+     "mean_difference": 14.01875,
+     "changed_share": 0.5723833333333334
+    }
+   }
+  },
+  {
+   "a": "dirt-max",
+   "b": "weather-max",
+   "mean_difference": 4.9378416666666665,
+   "changed_share": 0.37324999999999997,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 4.908516666666666,
+     "changed_share": 0.3429333333333333
+    },
+    "Camera A": {
+     "mean_difference": 4.9671666666666665,
+     "changed_share": 0.4035666666666667
+    }
+   }
+  },
+  {
+   "a": "dirt-max",
+   "b": "cracks-max",
+   "mean_difference": 3.0901388888888888,
+   "changed_share": 0.131375,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 3.4300888888888887,
+     "changed_share": 0.15605
+    },
+    "Camera A": {
+     "mean_difference": 2.750188888888889,
+     "changed_share": 0.1067
+    }
+   }
+  },
+  {
+   "a": "dirt-max",
+   "b": "edge-max",
+   "mean_difference": 5.132233333333334,
+   "changed_share": 0.24635833333333332,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 6.2992944444444445,
+     "changed_share": 0.31221666666666664
+    },
+    "Camera A": {
+     "mean_difference": 3.9651722222222223,
+     "changed_share": 0.1805
+    }
+   }
+  },
+  {
+   "a": "dirt-max",
+   "b": "all-off",
+   "mean_difference": 10.18961111111111,
+   "changed_share": 0.5347666666666666,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 8.778372222222222,
+     "changed_share": 0.5276666666666666
+    },
+    "Camera A": {
+     "mean_difference": 11.60085,
+     "changed_share": 0.5418666666666667
+    }
+   }
+  },
+  {
+   "a": "weather-max",
+   "b": "cracks-max",
+   "mean_difference": 4.926425,
+   "changed_share": 0.31299166666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 5.0395055555555555,
+     "changed_share": 0.2936166666666667
+    },
+    "Camera A": {
+     "mean_difference": 4.813344444444445,
+     "changed_share": 0.33236666666666664
+    }
+   }
+  },
+  {
+   "a": "weather-max",
+   "b": "edge-max",
+   "mean_difference": 4.224519444444445,
+   "changed_share": 0.3144,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 5.0073,
+     "changed_share": 0.352
+    },
+    "Camera A": {
+     "mean_difference": 3.4417388888888887,
+     "changed_share": 0.2768
+    }
+   }
+  },
+  {
+   "a": "weather-max",
+   "b": "all-off",
+   "mean_difference": 9.115019444444444,
+   "changed_share": 0.5621666666666667,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 7.730788888888889,
+     "changed_share": 0.54605
+    },
+    "Camera A": {
+     "mean_difference": 10.49925,
+     "changed_share": 0.5782833333333334
+    }
+   }
+  },
+  {
+   "a": "cracks-max",
+   "b": "edge-max",
+   "mean_difference": 5.032611111111111,
+   "changed_share": 0.24969999999999998,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 6.134516666666666,
+     "changed_share": 0.30656666666666665
+    },
+    "Camera A": {
+     "mean_difference": 3.9307055555555555,
+     "changed_share": 0.19283333333333333
+    }
+   }
+  },
+  {
+   "a": "cracks-max",
+   "b": "all-off",
+   "mean_difference": 10.237894444444445,
+   "changed_share": 0.5393083333333333,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 8.895405555555556,
+     "changed_share": 0.5337666666666666
+    },
+    "Camera A": {
+     "mean_difference": 11.580383333333334,
+     "changed_share": 0.54485
+    }
+   }
+  },
+  {
+   "a": "edge-max",
+   "b": "all-off",
+   "mean_difference": 8.582416666666667,
+   "changed_share": 0.5359499999999999,
+   "nearly_the_same": false,
+   "per_camera": {
+    "Camera B": {
+     "mean_difference": 7.9361444444444444,
+     "changed_share": 0.5482333333333334
+    },
+    "Camera A": {
+     "mean_difference": 9.22868888888889,
+     "changed_share": 0.5236666666666666
+    }
+   }
+  }
+ ],
+ "nearly_the_same": [],
+ "invisible": [],
+ "reset_check": null,
+ "sheet": {
+  "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/scout/run/which-wear-change-shows-sheet.jpg",
+  "bytes": 247738,
+  "quality": 82,
+  "scale": 1.0,
+  "width": 1874,
+  "height": 1029
+ },
+ "card_seconds": 0.0,
+ "card_lines": [
+  "Drawn on this computer in 36 s; no rented-card seconds were used."
+ ],
+ "estimate_card_seconds": 138.0,
+ "estimate_elapsed_seconds": 138.0,
+ "where": "this computer",
+ "helper": "batching-scout",
+ "role": "builder",
+ "ledger": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/batching/proof/scout/ledger.jsonl"
+}

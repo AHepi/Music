@@ -1,0 +1,39 @@
+#!/bin/bash
+# What this does: runs the film kit's preflight for one stage of making a film: every calculator and check that
+# applies to that stage, one report in plain words (and as JSON) with pass, look or fail, what is known and accepted,
+# the cost of the paid step the stage guards and the time it takes. A failure blocks the paid or long step that follows.
+# It spends nothing and changes no project file.
+#
+# Stages, in the order a film is made:
+#   script  (before recording)   record  (after recording)    shots   (before building or drawing a place's views)
+#   plates  (before paying for paintings)   paint  (after each painting arrives)   pages  (while building pages)
+#   film    (before filming)     finish  (after finishing)
+#
+# Use: explainer-film-preflight STAGE [--project DIR] [--plan FILE] [inputs ...]
+#      explainer-film-preflight STAGE --gate      did the newest report pass, with its inputs unchanged? (exit 0 or 1)
+#      explainer-film-preflight --list            every stage's inputs, and which tool makes each
+#      explainer-film-preflight --example-plan    an example preflight plan (the film's files named once)
+#      explainer-film-preflight --help            every option
+# Exit: 0 pass, 1 fail (the next paid or long step is blocked), 2 an input is missing (the report says which file to
+# make and which tool makes it).
+#
+# Which kit: --kit DIR (or EXPLAINER_FILM_KIT) names an installed kit (the folder explainer-film-setup made); its own
+# calculators/preflight.py runs, and so do its tools. Without either, the plugin's own kit is used.
+set -u
+HERE="$(cd "$(dirname "$0")/.." && pwd)"
+kit="${EXPLAINER_FILM_KIT:-}"
+previous=""
+for argument in "$@"; do
+  [ "$previous" = "--kit" ] && kit="$argument"
+  case "$argument" in --kit=*) kit="${argument#--kit=}" ;; esac
+  previous="$argument"
+done
+preflight="$HERE/kit/calculators/preflight.py"
+if [ -n "$kit" ] && [ -f "$kit/calculators/preflight.py" ]; then
+  preflight="$kit/calculators/preflight.py"
+fi
+command -v python3 >/dev/null || { echo "explainer-film-preflight: python3 is needed (install Python 3.10 or newer)" >&2; exit 2; }
+if [ -n "$kit" ] && [ "${EXPLAINER_FILM_KIT:-}" = "$kit" ]; then
+  exec python3 -B "$preflight" --kit "$kit" "$@"
+fi
+exec python3 -B "$preflight" "$@"
