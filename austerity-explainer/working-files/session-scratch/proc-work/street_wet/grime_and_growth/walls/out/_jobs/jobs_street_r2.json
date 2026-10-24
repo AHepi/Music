@@ -1,0 +1,99 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "p_base",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730
+  },
+  {
+   "name": "p_soot",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "keep_png": true,
+   "plate_height": 2730
+  },
+  {
+   "name": "m_mask",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "m_washed",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot.washed",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "m_shel",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot.sheltered",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "m_factor",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "layer:soot.factor",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730
+  }
+ ]
+}

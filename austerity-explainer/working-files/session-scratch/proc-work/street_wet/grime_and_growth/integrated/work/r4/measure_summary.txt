@@ -1,0 +1,71 @@
+written /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrated/work/r4/measures_kit.json
+P1 official 21/22 (base 20), all dots 20, without kit 18, harsh grid [], failing ['lockout_B_heavy'], broke [], ok False
+P2 ok False failures 48
+    main_A_heavy road wet/dry 1.867 vs base 1.797 (more than 0.05)
+    main_E_wet road wet/dry 3.630 vs base 3.712 (more than 0.05)
+    main_E_heavy road wet/dry 3.513 vs base 3.576 (more than 0.05)
+    close_A_heavy pavement wet/dry 1.001 vs base 0.949 (more than 0.05)
+    main_C_wet highlight share 0.0345 outside 85 to 115 % of base (0.05)
+P3 soot and dust patches@main                                   marks  152 good  51 (34%) lost 43% crushed 10% FAIL
+P3 soot and dust patches@notice                                 marks  134 good  44 (33%) lost 48% crushed 5% FAIL
+P3 run-off streaks@main                                         marks    0 good   0 (0%) lost 0% crushed 0% FAIL
+P3 run-off streaks@notice                                       marks   81 good   8 (10%) lost 63% crushed 18% FAIL
+P3 whitened or scrubbed steps@main                              marks    0 good   0 (0%) lost 0% crushed 0% FAIL
+P3 whitened or scrubbed steps@notice                            marks    6 good   4 (67%) lost 33% crushed 0% FAIL
+P3 rust@main                                                    marks    0 good   0 (0%) lost 0% crushed 0% FAIL
+P3 rust@notice                                                  marks    3 good   0 (0%) lost 100% crushed 0% FAIL
+P3 cracks in flags, kerbs, setts@main                           marks  257 good  18 (7%) lost 76% crushed 3% FAIL
+P3 cracks in flags, kerbs, setts@notice                         marks  240 good  92 (38%) lost 41% crushed 5% FAIL
+P3 tar patches@main                                             marks    2 good   1 (50%) lost 50% crushed 50% FAIL
+P3 tar patches@notice                                           marks    1 good   1 (100%) lost 0% crushed 0% PASS
+P3 ground film, polish, water marks@main                        marks    5 good   1 (20%) lost 80% crushed 20% FAIL
+P3 ground film, polish, water marks@notice                      marks    3 good   1 (33%) lost 67% crushed 67% FAIL
+P3 weed tufts and moss cushions@main                            marks   66 good  46 (70%) lost 8% crushed 0% PASS
+P3 weed tufts and moss cushions@notice                          marks  188 good  82 (44%) lost 23% crushed 0% FAIL
+P3 moss ribbons and algae fans@main                             marks   68 good   6 (9%) lost 71% crushed 9% FAIL
+P3 moss ribbons and algae fans@notice                           marks   57 good  13 (23%) lost 60% crushed 9% FAIL
+P3 wall-foot band and tide-mark@main                            marks   10 good   0 (0%) lost 70% crushed 70% FAIL
+P3 soot and dust patches@lockout                                marks  162 good  65 (40%) lost 41% crushed 12% FAIL
+P3 run-off streaks@lockout                                      marks   20 good   9 (45%) lost 30% crushed 10% FAIL
+P3 whitened or scrubbed steps@lockout                           marks    0 good   0 (0%) lost 0% crushed 0% FAIL
+P3 rust@lockout                                                 marks    0 good   0 (0%) lost 0% crushed 0% FAIL
+P3 cracks in flags, kerbs, setts@lockout                        marks  220 good  23 (10%) lost 72% crushed 2% FAIL
+P3 tar patches@lockout                                          marks    4 good   1 (25%) lost 50% crushed 0% FAIL
+P3 ground film, polish, water marks@lockout                     marks    7 good   1 (14%) lost 71% crushed 0% FAIL
+P3 weed tufts and moss cushions@lockout                         marks   29 good  29 (100%) lost 0% crushed 0% PASS
+P3 moss ribbons and algae fans@lockout                          marks   11 good   1 (9%) lost 64% crushed 0% FAIL
+P5 plate_main_A_wet plate mean ratio 0.9955 ok False
+      M5 trims: band ratios {'5-10': None, '10-20': 1.0003, '20-40': 1.0049} outside 0.80 to 1.00
+      M5 road: band ratios {'5-10': 0.98, '10-20': 1.0139, '20-40': 0.9956} outside 0.80 to 1.00
+      M5 kerb_gutter: band ratios {'5-10': None, '10-20': 1.0004, '20-40': 0.9854} outside 0.80 to 1.00
+      M5 roofs: band ratios {'5-10': None, '10-20': 1.0163, '20-40': 1.013} outside 0.80 to 1.00
+P5 plate_lockout_B_wet plate mean ratio 1.0032 ok False
+      M5 walls: band ratios {'5-10': None, '10-20': 1.1161, '20-40': 0.9865} outside 0.80 to 1.00
+      M5 walls: band ratios {'5-10': None, '10-20': 1.1161, '20-40': 0.9865} differ by more than 0.08 from band to band
+      M5 trims: band ratios {'5-10': None, '10-20': 1.0977, '20-40': 1.0025} outside 0.80 to 1.00
+      M5 trims: band ratios {'5-10': None, '10-20': 1.0977, '20-40': 1.0025} differ by more than 0.08 from band to band
+      M5 road: band ratios {'5-10': 1.0043, '10-20': 1.0106, '20-40': 0.9971} outside 0.80 to 1.00
+      M5 roofs: band ratios {'5-10': None, '10-20': 0.9966, '20-40': 1.0023} outside 0.80 to 1.00
+      M5 chimneys: band ratios {'5-10': None, '10-20': None, '20-40': 1.0761} outside 0.80 to 1.00
+P5 plate_notice_A_wet plate mean ratio 0.991 ok False
+      M5 walls: band ratios {'5-10': 0.975, '10-20': 1.0613, '20-40': 0.9048} outside 0.80 to 1.00
+      M5 walls: band ratios {'5-10': 0.975, '10-20': 1.0613, '20-40': 0.9048} differ by more than 0.08 from band to band
+      M5 trims: band ratios {'5-10': 1.0528, '10-20': 1.0893, '20-40': 1.0036} outside 0.80 to 1.00
+      M5 trims: band ratios {'5-10': 1.0528, '10-20': 1.0893, '20-40': 1.0036} differ by more than 0.08 from band to band
+      M5 roofs: band ratios {'5-10': 1.0101, '10-20': 1.0309, '20-40': 1.0143} outside 0.80 to 1.00
+      M5 chimneys: band ratios {'5-10': None, '10-20': None, '20-40': 1.1288} outside 0.80 to 1.00
+      M5 paint: band ratios {'5-10': 0.9976, '10-20': 0.9956, '20-40': 1.0015} outside 0.80 to 1.00
+P5 plate_close_road_A_wet plate mean ratio 0.9967 ok False
+      M5 walls: band ratios {'5-10': 1.1338, '10-20': 1.1047, '20-40': 0.9457} outside 0.80 to 1.00
+      M5 walls: band ratios {'5-10': 1.1338, '10-20': 1.1047, '20-40': 0.9457} differ by more than 0.08 from band to band
+      M5 trims: band ratios {'5-10': 1.7552, '10-20': 1.2047, '20-40': 1.0141} outside 0.80 to 1.00
+      M5 trims: band ratios {'5-10': 1.7552, '10-20': 1.2047, '20-40': 1.0141} differ by more than 0.08 from band to band
+      M5 road: band ratios {'5-10': 1.0119, '10-20': 0.9937, '20-40': 0.997} outside 0.80 to 1.00
+      M5 pavement: band ratios {'5-10': 1.0195, '10-20': 1.0485, '20-40': 0.9939} outside 0.80 to 1.00
+      M5 kerb_gutter: band ratios {'5-10': 1.0098, '10-20': 1.0055, '20-40': 0.9974} outside 0.80 to 1.00
+      M5 roofs: band ratios {'5-10': None, '10-20': None, '20-40': 1.0455} outside 0.80 to 1.00
+      M5 paint: band ratios {'5-10': 1.0073, '10-20': 0.9999, '20-40': 0.996} outside 0.80 to 1.00
+P7 street: plates 15.52 s vs base 6.62 s; first picture 1.27 vs 1.19; pieces 58753 vs 58753 -> ['plates 15.5 s over 1.30 x base 6.6 s']
+P7 lockout: plates 6.41 s vs base 3.26 s; first picture 15.58 vs 1.44; pieces 60521 vs 60521 -> ['plates 6.4 s over 1.30 x base 3.3 s', 'first picture 15.6 s over 1.5 x base 1.4 s']
+P4 street forbidden True caps False hue {'plate_main_A_wet': False, 'plate_notice_A_wet': False, 'plate_close_road_A_wet': False}
+P4 lockout forbidden True caps False hue {'plate_lockout_B_wet': False}

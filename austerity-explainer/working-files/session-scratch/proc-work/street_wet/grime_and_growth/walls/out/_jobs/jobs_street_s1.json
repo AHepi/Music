@@ -1,0 +1,128 @@
+{
+ "set": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "s_beauty",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "dials": {
+    "steps": {
+     "whitened_share": 1.0,
+     "scrubbed_share": 0.0
+    }
+   }
+  },
+  {
+   "name": "s_layer_steps",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "layer:steps",
+   "size": [
+    640,
+    480,
+    1
+   ],
+   "dials": {
+    "steps": {
+     "whitened_share": 1.0,
+     "scrubbed_share": 0.0
+    }
+   }
+  },
+  {
+   "name": "s_layer_steps_whitened",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "layer:steps.whitened",
+   "size": [
+    640,
+    480,
+    1
+   ],
+   "dials": {
+    "steps": {
+     "whitened_share": 1.0,
+     "scrubbed_share": 0.0
+    }
+   }
+  },
+  {
+   "name": "s_layer_steps_scrubbed",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "layer:steps.scrubbed",
+   "size": [
+    640,
+    480,
+    1
+   ],
+   "dials": {
+    "steps": {
+     "whitened_share": 1.0,
+     "scrubbed_share": 0.0
+    }
+   }
+  },
+  {
+   "name": "s_layer_steps_dish",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "layer:steps.dish",
+   "size": [
+    640,
+    480,
+    1
+   ],
+   "dials": {
+    "steps": {
+     "whitened_share": 1.0,
+     "scrubbed_share": 0.0
+    }
+   }
+  },
+  {
+   "name": "s_mask_step_top_step_foot_height",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "mask:step_top+step_foot+height",
+   "size": [
+    640,
+    480,
+    1
+   ],
+   "dials": {
+    "steps": {
+     "whitened_share": 1.0,
+     "scrubbed_share": 0.0
+    }
+   }
+  }
+ ],
+ "extra_cameras": []
+}

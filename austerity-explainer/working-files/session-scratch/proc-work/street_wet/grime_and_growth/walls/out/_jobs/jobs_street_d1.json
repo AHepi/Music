@@ -1,0 +1,157 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "d_base",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ]
+  },
+  {
+   "name": "d_m1",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:step_top+step_edge+step_foot",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "d_m2",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:entry_rand+edge_dist+footfall",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "d_m3",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:drip+drip_dist+drip_kind",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "d_m4",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:sheltered+reveal+corner",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "d_m5",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:height+wall_dist+frame_valid",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "d_m6",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:dampness+shade+vertical_foot",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "d_m7",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:tx_cavity+tx_cell+tx_joint",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "p_m3",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:drip+drip_dist+drip_kind",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "p_m5",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "mask:height+dampness+vertical_foot",
+   "size": [
+    960,
+    720,
+    1
+   ]
+  },
+  {
+   "name": "p_base",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ]
+  }
+ ],
+ "extra_cameras": []
+}

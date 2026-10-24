@@ -1,0 +1,175 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "jobs": 5,
+ "seconds_total": 12.6,
+ "registered": {
+  "walls.apply_walls": [
+   "soot"
+  ]
+ },
+ "register_errors": {
+  "ground.apply_ground": "Traceback (most recent call last):\n  File \"/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/kits/weathering/harness/layers.py\", line 34, in register_builders\n    module = importlib.import_module(name)\n  File \"/workspace/blender/5.2/python/lib/python3.13/importlib/__init__.py\", line 88, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1395, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'ground.apply_ground'\n"
+ },
+ "camera_notes": {
+  "flag_close": "feature report missing: aimed at the entry's own look_at"
+ },
+ "kit_report": {
+  "set": "pit_village_street",
+  "scene": "street",
+  "look": "sooty_1926",
+  "master": 1.0,
+  "roles": {
+   "ground.sett": 1,
+   "ground.channel": 1,
+   "ground.kerb": 1,
+   "ground.flag": 1,
+   "ground.yard": 1,
+   "wall.masonry": 28,
+   "wall.trim": 28,
+   "wall.industrial": 7,
+   "chimney": 32,
+   "roof.slate": 28,
+   "timber.paint": 112,
+   "iron.pipe": 28,
+   "iron.post": 5,
+   "iron": 4,
+   "fire": 0,
+   "prop": 0,
+   "sign": 0,
+   "doorway": 28
+  },
+  "hookable": 33,
+  "skipped": {
+   "never": [
+    "brass",
+    "engine_window_glow",
+    "interior_dark",
+    "lamp_glass_glow",
+    "moor",
+    "sky_dome_glow",
+    "window_dark_0",
+    "window_dark_1",
+    "window_dark_2",
+    "window_lit_glow_0",
+    "window_lit_glow_1",
+    "window_lit_glow_2"
+   ]
+  },
+  "chains": {
+   "channel_stones": [
+    "wetness",
+    "rubbish"
+   ],
+   "colliery_brick": [
+    "soot",
+    "wetness"
+   ],
+   "colliery_yard": [
+    "wetness"
+   ],
+   "cottage_brick": [
+    "soot",
+    "wetness"
+   ],
+   "cottage_brick_door_left": [
+    "wetness"
+   ],
+   "cottage_brick_door_right": [
+    "wetness"
+   ],
+   "cottage_stone": [
+    "soot",
+    "wetness"
+   ],
+   "cottage_stone_door_left": [
+    "wetness"
+   ],
+   "cottage_stone_door_right": [
+    "wetness"
+   ],
+   "dark_dressed_stone": [
+    "soot",
+    "wetness"
+   ],
+   "dressed_stone": [
+    "soot",
+    "wetness"
+   ],
+   "kerb_stone": [
+    "wetness",
+    "rubbish"
+   ],
+   "pavement_flags": [
+    "wetness",
+    "rubbish"
+   ],
+   "roof_slate": [
+    "soot",
+    "wetness"
+   ],
+   "street_setts": [
+    "wetness",
+    "joints",
+    "rubbish"
+   ],
+   "boarded_blue": [
+    "soot"
+   ],
+   "boarded_green": [
+    "soot"
+   ],
+   "cast_iron": [
+    "soot"
+   ],
+   "chimney_pot_clay": [
+    "soot"
+   ],
+   "chimney_pot_sooted": [
+    "soot"
+   ],
+   "fascia_board": [
+    "soot"
+   ],
+   "plaster_dark": [
+    "soot"
+   ],
+   "ridge_clay": [
+    "soot"
+   ]
+  },
+  "layers": {
+   "soot": {
+    "on": true,
+    "materials": 14,
+    "values": {
+     "amount": 1.0,
+     "seed": 0.0,
+     "inflate_limit": 6.0,
+     "fade_start": 12.0,
+     "fade_end": 40.0,
+     "wet_follow": 1.0,
+     "film_mult": 0.62,
+     "sheltered_mult": 0.4,
+     "washed_mult": 0.85,
+     "washed_share": 0.2,
+     "floor_mult": 0.3,
+     "grey_pull": 0.3,
+     "mortar_soot": 0.5,
+     "mottle_size": 0.9,
+     "mottle_contrast": 0.5,
+     "edge_sharp": 0.6,
+     "stack_mult": 0.35,
+     "roof_mult": 0.82,
+     "base_lift": 0.0,
+     "mottle_stretch": 2.0,
+     "patch_min_dots": 15.0,
+     "rough_gain": 0.1,
+     "washed_pale": 0.5
+    }
+   }
+  },
+  "unassigned_objects": 93,
+  "log": []
+ }
+}

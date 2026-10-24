@@ -1,0 +1,3559 @@
+{
+ "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/set_copy/street.blend",
+ "scene": "Scene",
+ "materials": {
+  "boarded_blue": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "blue_painted_planks_colour.jpg",
+    "blue_painted_planks_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.7,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[blue_painted_planks_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "boarded_green": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "green_rough_planks_colour.jpg",
+    "green_rough_planks_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.7,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[green_rough_planks_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "brass": {
+   "users": 7,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rusty_metal_02_colour.jpg",
+    "rusty_metal_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.3,
+    "Metallic": 0.9,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rusty_metal_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "cast_iron": {
+   "users": 9,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rusty_metal_02_colour.jpg",
+    "rusty_metal_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.55,
+    "Metallic": 0.6,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rusty_metal_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "channel_stones": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "large_sandstone_blocks_colour.jpg",
+    "large_sandstone_blocks_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.7,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[large_sandstone_blocks_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "chimney_pot_clay": {
+   "users": 4,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "chimney_pot_sooted": {
+   "users": 4,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.9,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "colliery_brick": {
+   "users": 5,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "castle_brick_02_red_colour.jpg",
+    "castle_brick_02_red_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[castle_brick_02_red_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "colliery_yard": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "muddy_tracks_colour.jpg",
+    "muddy_tracks_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.8,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[muddy_tracks_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "cottage_brick": {
+   "users": 4,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "red_brick_colour.jpg",
+    "red_brick_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[red_brick_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "cottage_stone": {
+   "users": 4,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "stone_brick_wall_001_colour.jpg",
+    "stone_brick_wall_001_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[stone_brick_wall_001_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "dark_dressed_stone": {
+   "users": 5,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rock_surface_colour.jpg",
+    "rock_surface_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.9,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rock_surface_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "dressed_stone": {
+   "users": 12,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rock_surface_colour.jpg",
+    "rock_surface_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.9,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rock_surface_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "engine_window_glow": {
+   "users": 1,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "window_lit_2.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[window_lit_2.jpg, sRGB].Color",
+    "Roughness": 0.1,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": "TexImage:Image Texture[window_lit_2.jpg, sRGB].Color",
+    "Emission Strength": 1.6,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "fascia_board": {
+   "users": 4,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "distressed_painted_planks_colour.jpg",
+    "distressed_painted_planks_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.7,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[distressed_painted_planks_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "headframe_steel": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rusty_metal_02_colour.jpg",
+    "rusty_metal_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.6,
+    "Metallic": 0.5,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rusty_metal_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "interior_dark": {
+   "users": 8,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 1.0,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "kerb_stone": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "large_sandstone_blocks_colour.jpg",
+    "large_sandstone_blocks_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[large_sandstone_blocks_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "lamp_glass_glow": {
+   "users": 1,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "lamp_glass.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[lamp_glass.jpg, sRGB].Color",
+    "Roughness": 0.1,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": "TexImage:Image Texture[lamp_glass.jpg, sRGB].Color",
+    "Emission Strength": 8.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "moor": {
+   "users": 2,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "muddy_tracks_colour.jpg",
+    "muddy_tracks_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.95,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[muddy_tracks_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "paint_black": {
+   "users": 4,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.45,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "paint_bottle_green": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.45,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "paint_brown": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.45,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "paint_cream": {
+   "users": 2,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.45,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "paint_maroon": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.45,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "paint_navy": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.45,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "pavement_flags": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "large_grey_tiles_colour.jpg",
+    "large_grey_tiles_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[large_grey_tiles_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "plaster_dark": {
+   "users": 4,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.9,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "ridge_clay": {
+   "users": 5,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "grey_plaster_02_colour.jpg",
+    "grey_plaster_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.8,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[grey_plaster_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "roof_slate": {
+   "users": 7,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "roof_slates_03_colour.jpg",
+    "roof_slates_03_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.5,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[roof_slates_03_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "sky_dome_glow": {
+   "users": 1,
+   "node_count": 4,
+   "groups": [],
+   "images": [
+    "dusk_sky.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 1.0,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": "TexImage:Image Texture[dusk_sky.jpg, sRGB].Color",
+    "Emission Strength": 1.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "spoil_heap": {
+   "users": 2,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rocks_ground_02_colour.jpg",
+    "rocks_ground_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.75,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rocks_ground_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "street_setts": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "square_cobblestone_colour.jpg",
+    "square_cobblestone_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.75,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[square_cobblestone_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "wheel_iron": {
+   "users": 2,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rusty_metal_02_colour.jpg",
+    "rusty_metal_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.5,
+    "Metallic": 0.6,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rusty_metal_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "window_dark_0": {
+   "users": 24,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "window_dark_0.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[window_dark_0.jpg, sRGB].Color",
+    "Roughness": 0.08,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "window_dark_1": {
+   "users": 20,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "window_dark_1.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[window_dark_1.jpg, sRGB].Color",
+    "Roughness": 0.08,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "window_dark_2": {
+   "users": 18,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "window_dark_2.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[window_dark_2.jpg, sRGB].Color",
+    "Roughness": 0.08,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "window_lit_glow_0": {
+   "users": 6,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "window_lit_0.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[window_lit_0.jpg, sRGB].Color",
+    "Roughness": 0.1,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": "TexImage:Image Texture[window_lit_0.jpg, sRGB].Color",
+    "Emission Strength": 4.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "window_lit_glow_1": {
+   "users": 6,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "window_lit_1.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[window_lit_1.jpg, sRGB].Color",
+    "Roughness": 0.1,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": "TexImage:Image Texture[window_lit_1.jpg, sRGB].Color",
+    "Emission Strength": 4.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "window_lit_glow_2": {
+   "users": 12,
+   "node_count": 3,
+   "groups": [],
+   "images": [
+    "window_lit_2.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "TexImage:Image Texture[window_lit_2.jpg, sRGB].Color",
+    "Roughness": 0.1,
+    "Metallic": 0.0,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Emission Color": "TexImage:Image Texture[window_lit_2.jpg, sRGB].Color",
+    "Emission Strength": 4.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  },
+  "wire_rope": {
+   "users": 1,
+   "node_count": 6,
+   "groups": [],
+   "images": [
+    "rusty_metal_02_colour.jpg",
+    "rusty_metal_02_normal.jpg"
+   ],
+   "texcoords": [],
+   "shaders": [
+    "BsdfPrincipled"
+   ],
+   "procedural": [],
+   "principled_count": 1,
+   "principled": {
+    "Base Color": "Mix:Mix.Result",
+    "Roughness": 0.4,
+    "Metallic": 0.7,
+    "Specular IOR Level": 0.5,
+    "Coat Weight": 0.0,
+    "Normal": "NormalMap:Normal Map[rusty_metal_02_normal.jpg].Normal",
+    "Emission Color": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "Emission Strength": 0.0,
+    "Alpha": 1.0
+   },
+   "output_surface": "BsdfPrincipled:Principled BSDF.BSDF"
+  }
+ },
+ "families": {
+  "colliery_chimney": {
+   "count": 1,
+   "first": "colliery_chimney",
+   "faces": 1125,
+   "materials": [
+    "cast_iron",
+    "colliery_brick",
+    "dressed_stone"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -12.1,
+    -6.9,
+    105.4,
+    110.6,
+    4.81,
+    47.11
+   ],
+   "area_m2": 809.3,
+   "up_m2": 137.2,
+   "wall_m2": 525.3,
+   "down_m2": 144.3
+  },
+  "engine_house_glass": {
+   "count": 1,
+   "first": "engine_house_glass",
+   "faces": 78,
+   "materials": [
+    "engine_window_glow",
+    "window_dark_1"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -20.25,
+    -11.18,
+    91.18,
+    99.75,
+    7.51,
+    13.46
+   ],
+   "area_m2": 52.0,
+   "up_m2": 0.0,
+   "wall_m2": 52.0,
+   "down_m2": 0.0
+  },
+  "engine_house_trim": {
+   "count": 1,
+   "first": "engine_house_trim",
+   "faces": 6905,
+   "materials": [
+    "boarded_green",
+    "cast_iron",
+    "colliery_brick",
+    "dressed_stone",
+    "ridge_clay",
+    "roof_slate"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -28.3,
+    -10.65,
+    90.75,
+    101.3,
+    4.81,
+    20.29
+   ],
+   "area_m2": 1393.7,
+   "up_m2": 370.7,
+   "wall_m2": 306.0,
+   "down_m2": 543.6
+  },
+  "engine_house_walls": {
+   "count": 1,
+   "first": "engine_house_walls",
+   "faces": 150,
+   "materials": [
+    "colliery_brick",
+    "interior_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -22.01,
+    -10.99,
+    91.0,
+    101.0,
+    4.81,
+    20.01
+   ],
+   "area_m2": 992.6,
+   "up_m2": 112.0,
+   "wall_m2": 519.6,
+   "down_m2": 222.3
+  },
+  "gas_lamp_glass": {
+   "count": 5,
+   "first": "gas_lamp_0_glass",
+   "faces": 140,
+   "materials": [
+    "lamp_glass_glow"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -3.21,
+    3.21,
+    10.82,
+    64.68,
+    3.77,
+    8.0
+   ],
+   "area_m2": 3.1,
+   "up_m2": 0.0,
+   "wall_m2": 3.0,
+   "down_m2": 0.0
+  },
+  "gas_lamp_post": {
+   "count": 5,
+   "first": "gas_lamp_0_post",
+   "faces": 6000,
+   "materials": [
+    "brass",
+    "cast_iron"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -3.4,
+    3.4,
+    10.76,
+    64.74,
+    0.9,
+    8.41
+   ],
+   "area_m2": 17.7,
+   "up_m2": 1.9,
+   "wall_m2": 9.7,
+   "down_m2": 4.0
+  },
+  "ground": {
+   "count": 1,
+   "first": "ground",
+   "faces": 2135,
+   "materials": [
+    "colliery_yard"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -160.0,
+    160.0,
+    -40.0,
+    260.0,
+    -2.54,
+    5.39
+   ],
+   "area_m2": 96142.2,
+   "up_m2": 96142.2,
+   "wall_m2": 0.0,
+   "down_m2": 0.0
+  },
+  "headframe_lattice": {
+   "count": 1,
+   "first": "headframe_lattice",
+   "faces": 7054,
+   "materials": [
+    "dark_dressed_stone",
+    "headframe_steel"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -12.6,
+    5.1,
+    81.8,
+    90.2,
+    4.31,
+    24.49
+   ],
+   "area_m2": 701.4,
+   "up_m2": 118.1,
+   "wall_m2": 384.4,
+   "down_m2": 158.4
+  },
+  "heapstead_trim": {
+   "count": 1,
+   "first": "heapstead_trim",
+   "faces": 497,
+   "materials": [
+    "boarded_blue",
+    "cast_iron",
+    "dressed_stone",
+    "interior_dark",
+    "roof_slate"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -6.1,
+    6.1,
+    81.3,
+    91.3,
+    5.31,
+    15.51
+   ],
+   "area_m2": 359.4,
+   "up_m2": 6.8,
+   "wall_m2": 68.0,
+   "down_m2": 145.6
+  },
+  "heapstead_walls": {
+   "count": 1,
+   "first": "heapstead_walls",
+   "faces": 17,
+   "materials": [
+    "colliery_brick",
+    "interior_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -5.81,
+    5.81,
+    81.6,
+    91.0,
+    4.81,
+    14.81
+   ],
+   "area_m2": 788.9,
+   "up_m2": 111.2,
+   "wall_m2": 334.3,
+   "down_m2": 220.4
+  },
+  "left_row_cottage_chimney": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_chimney",
+   "faces": 12320,
+   "materials": [
+    "chimney_pot_clay",
+    "chimney_pot_sooted",
+    "cottage_brick",
+    "dressed_stone",
+    "plaster_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -8.35,
+    -6.95,
+    -1.08,
+    62.58,
+    7.81,
+    15.38
+   ],
+   "area_m2": 379.8,
+   "up_m2": 78.8,
+   "wall_m2": 197.3,
+   "down_m2": 89.3
+  },
+  "left_row_cottage_door": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_door",
+   "faces": 11060,
+   "materials": [
+    "brass",
+    "paint_black",
+    "paint_bottle_green",
+    "paint_brown",
+    "paint_maroon",
+    "paint_navy"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.39,
+    -4.22,
+    2.45,
+    63.55,
+    0.56,
+    7.51
+   ],
+   "area_m2": 147.3,
+   "up_m2": 4.0,
+   "wall_m2": 138.6,
+   "down_m2": 4.4
+  },
+  "left_row_cottage_end_chimney": {
+   "count": 2,
+   "first": "left_row_a_cottage_01_end_chimney",
+   "faces": 1760,
+   "materials": [
+    "chimney_pot_clay",
+    "chimney_pot_sooted",
+    "cottage_brick",
+    "dressed_stone",
+    "plaster_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -8.35,
+    -6.95,
+    3.42,
+    44.58,
+    7.81,
+    13.81
+   ],
+   "area_m2": 54.3,
+   "up_m2": 11.3,
+   "wall_m2": 28.2,
+   "down_m2": 12.8
+  },
+  "left_row_cottage_glass_ground": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_glass_ground",
+   "faces": 14,
+   "materials": [
+    "window_dark_0",
+    "window_dark_1",
+    "window_dark_2",
+    "window_lit_glow_0",
+    "window_lit_glow_1",
+    "window_lit_glow_2"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.32,
+    -4.32,
+    0.28,
+    65.72,
+    1.46,
+    7.27
+   ],
+   "area_m2": 21.2,
+   "up_m2": 0.0,
+   "wall_m2": 21.2,
+   "down_m2": 0.0
+  },
+  "left_row_cottage_glass_upper": {
+   "count": 28,
+   "first": "left_row_a_cottage_01_glass_upper_0",
+   "faces": 28,
+   "materials": [
+    "window_dark_0",
+    "window_dark_1",
+    "window_dark_2",
+    "window_lit_glow_1",
+    "window_lit_glow_2"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.32,
+    -4.32,
+    0.33,
+    65.67,
+    4.16,
+    9.77
+   ],
+   "area_m2": 33.0,
+   "up_m2": 0.0,
+   "wall_m2": 33.0,
+   "down_m2": 0.0
+  },
+  "left_row_cottage_rainwater": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_rainwater",
+   "faces": 5432,
+   "materials": [
+    "cast_iron"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.15,
+    -3.7,
+    -0.5,
+    66.5,
+    -0.21,
+    10.94
+   ],
+   "area_m2": 62.1,
+   "up_m2": 4.5,
+   "wall_m2": 40.5,
+   "down_m2": 10.8
+  },
+  "left_row_cottage_roof": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_roof",
+   "faces": 3514,
+   "materials": [
+    "ridge_clay",
+    "roof_slate"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -11.47,
+    -3.83,
+    -0.5,
+    66.5,
+    6.36,
+    13.65
+   ],
+   "area_m2": 1296.5,
+   "up_m2": 5.2,
+   "wall_m2": 81.2,
+   "down_m2": 607.7
+  },
+  "left_row_cottage_trim": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_trim",
+   "faces": 6188,
+   "materials": [
+    "dark_dressed_stone",
+    "dressed_stone",
+    "fascia_board"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -11.45,
+    -3.49,
+    -0.5,
+    66.5,
+    -0.39,
+    11.03
+   ],
+   "area_m2": 429.7,
+   "up_m2": 44.1,
+   "wall_m2": 306.2,
+   "down_m2": 61.7
+  },
+  "left_row_cottage_walls": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_walls",
+   "faces": 448,
+   "materials": [
+    "cottage_brick",
+    "interior_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -11.15,
+    -4.15,
+    -0.5,
+    66.5,
+    -0.34,
+    13.33
+   ],
+   "area_m2": 4373.5,
+   "up_m2": 453.9,
+   "wall_m2": 2500.6,
+   "down_m2": 888.6
+  },
+  "left_row_cottage_window_ground": {
+   "count": 14,
+   "first": "left_row_a_cottage_01_window_ground",
+   "faces": 6146,
+   "materials": [
+    "brass",
+    "paint_cream"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.37,
+    -4.22,
+    0.27,
+    65.72,
+    1.41,
+    7.33
+   ],
+   "area_m2": 48.9,
+   "up_m2": 7.0,
+   "wall_m2": 35.0,
+   "down_m2": 7.0
+  },
+  "left_row_cottage_window_upper": {
+   "count": 28,
+   "first": "left_row_a_cottage_01_window_upper_0",
+   "faces": 12292,
+   "materials": [
+    "brass",
+    "paint_cream"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.37,
+    -4.22,
+    0.32,
+    65.67,
+    4.11,
+    9.83
+   ],
+   "area_m2": 86.4,
+   "up_m2": 12.6,
+   "wall_m2": 61.2,
+   "down_m2": 12.6
+  },
+  "moorland_hills_N": {
+   "count": 2,
+   "first": "moorland_hills_0",
+   "faces": 236,
+   "materials": [
+    "moor"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -450.0,
+    450.0,
+    270.0,
+    480.0,
+    6.86,
+    88.0
+   ],
+   "area_m2": 222676.6,
+   "up_m2": 73871.4,
+   "wall_m2": 0.0,
+   "down_m2": 0.0
+  },
+  "right_row_cottage_chimney": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_chimney",
+   "faces": 12320,
+   "materials": [
+    "chimney_pot_clay",
+    "chimney_pot_sooted",
+    "cottage_stone",
+    "dressed_stone",
+    "plaster_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    6.95,
+    8.35,
+    3.42,
+    67.08,
+    7.81,
+    15.38
+   ],
+   "area_m2": 379.8,
+   "up_m2": 78.8,
+   "wall_m2": 197.3,
+   "down_m2": 89.3
+  },
+  "right_row_cottage_door": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_door",
+   "faces": 11060,
+   "materials": [
+    "brass",
+    "paint_black",
+    "paint_bottle_green",
+    "paint_brown",
+    "paint_maroon",
+    "paint_navy"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    4.22,
+    4.39,
+    0.15,
+    65.85,
+    0.56,
+    7.51
+   ],
+   "area_m2": 147.3,
+   "up_m2": 4.0,
+   "wall_m2": 138.6,
+   "down_m2": 4.4
+  },
+  "right_row_cottage_end_chimney": {
+   "count": 2,
+   "first": "right_row_a_cottage_01_end_chimney",
+   "faces": 1760,
+   "materials": [
+    "chimney_pot_clay",
+    "chimney_pot_sooted",
+    "cottage_stone",
+    "dressed_stone",
+    "plaster_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    6.95,
+    8.35,
+    -1.08,
+    40.08,
+    7.81,
+    13.81
+   ],
+   "area_m2": 54.3,
+   "up_m2": 11.3,
+   "wall_m2": 28.2,
+   "down_m2": 12.8
+  },
+  "right_row_cottage_glass_ground": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_glass_ground",
+   "faces": 14,
+   "materials": [
+    "window_dark_0",
+    "window_dark_1",
+    "window_dark_2",
+    "window_lit_glow_0",
+    "window_lit_glow_2"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    4.32,
+    4.32,
+    2.18,
+    63.82,
+    1.46,
+    7.27
+   ],
+   "area_m2": 21.2,
+   "up_m2": 0.0,
+   "wall_m2": 21.2,
+   "down_m2": 0.0
+  },
+  "right_row_cottage_glass_upper": {
+   "count": 28,
+   "first": "right_row_a_cottage_01_glass_upper_0",
+   "faces": 28,
+   "materials": [
+    "window_dark_0",
+    "window_dark_1",
+    "window_dark_2",
+    "window_lit_glow_0",
+    "window_lit_glow_1",
+    "window_lit_glow_2"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    4.32,
+    4.32,
+    0.13,
+    65.88,
+    4.16,
+    9.77
+   ],
+   "area_m2": 33.0,
+   "up_m2": 0.0,
+   "wall_m2": 33.0,
+   "down_m2": 0.0
+  },
+  "right_row_cottage_rainwater": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_rainwater",
+   "faces": 5432,
+   "materials": [
+    "cast_iron"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    3.7,
+    4.15,
+    -0.5,
+    66.5,
+    -0.21,
+    10.94
+   ],
+   "area_m2": 62.1,
+   "up_m2": 4.5,
+   "wall_m2": 40.5,
+   "down_m2": 10.8
+  },
+  "right_row_cottage_roof": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_roof",
+   "faces": 3514,
+   "materials": [
+    "ridge_clay",
+    "roof_slate"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    3.83,
+    11.47,
+    -0.5,
+    66.5,
+    6.36,
+    13.65
+   ],
+   "area_m2": 1296.5,
+   "up_m2": 5.2,
+   "wall_m2": 81.2,
+   "down_m2": 607.7
+  },
+  "right_row_cottage_trim": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_trim",
+   "faces": 6188,
+   "materials": [
+    "dark_dressed_stone",
+    "dressed_stone",
+    "fascia_board"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    3.49,
+    11.45,
+    -0.5,
+    66.5,
+    -0.39,
+    11.03
+   ],
+   "area_m2": 429.7,
+   "up_m2": 44.1,
+   "wall_m2": 306.2,
+   "down_m2": 61.7
+  },
+  "right_row_cottage_walls": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_walls",
+   "faces": 448,
+   "materials": [
+    "cottage_stone",
+    "interior_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    4.15,
+    11.15,
+    -0.5,
+    66.5,
+    -0.34,
+    13.33
+   ],
+   "area_m2": 4373.5,
+   "up_m2": 453.9,
+   "wall_m2": 2500.6,
+   "down_m2": 888.6
+  },
+  "right_row_cottage_window_ground": {
+   "count": 14,
+   "first": "right_row_a_cottage_01_window_ground",
+   "faces": 6146,
+   "materials": [
+    "brass",
+    "paint_cream"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    4.22,
+    4.37,
+    2.18,
+    63.82,
+    1.41,
+    7.33
+   ],
+   "area_m2": 48.9,
+   "up_m2": 7.0,
+   "wall_m2": 35.0,
+   "down_m2": 7.0
+  },
+  "right_row_cottage_window_upper": {
+   "count": 28,
+   "first": "right_row_a_cottage_01_window_upper_0",
+   "faces": 12292,
+   "materials": [
+    "brass",
+    "paint_cream"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    4.22,
+    4.37,
+    0.12,
+    65.88,
+    4.11,
+    9.83
+   ],
+   "area_m2": 86.4,
+   "up_m2": 12.6,
+   "wall_m2": 61.2,
+   "down_m2": 12.6
+  },
+  "second_winding_house_glass": {
+   "count": 1,
+   "first": "second_winding_house_glass",
+   "faces": 2,
+   "materials": [
+    "window_dark_2"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    19.4,
+    24.6,
+    83.2,
+    83.2,
+    7.31,
+    10.51
+   ],
+   "area_m2": 7.7,
+   "up_m2": 0.0,
+   "wall_m2": 7.7,
+   "down_m2": 0.0
+  },
+  "second_winding_house_trim": {
+   "count": 1,
+   "first": "second_winding_house_trim",
+   "faces": 503,
+   "materials": [
+    "cast_iron",
+    "dressed_stone",
+    "roof_slate"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    17.7,
+    26.3,
+    82.75,
+    91.25,
+    7.16,
+    15.04
+   ],
+   "area_m2": 188.5,
+   "up_m2": 1.6,
+   "wall_m2": 8.9,
+   "down_m2": 89.9
+  },
+  "second_winding_house_walls": {
+   "count": 1,
+   "first": "second_winding_house_walls",
+   "faces": 22,
+   "materials": [
+    "colliery_brick",
+    "interior_dark"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    17.99,
+    26.01,
+    83.0,
+    91.0,
+    4.81,
+    14.91
+   ],
+   "area_m2": 534.9,
+   "up_m2": 64.7,
+   "wall_m2": 264.8,
+   "down_m2": 128.9
+  },
+  "sky_dome": {
+   "count": 1,
+   "first": "sky_dome",
+   "faces": 672,
+   "materials": [
+    "sky_dome_glow"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -1199.82,
+    1199.82,
+    -1159.82,
+    1239.82,
+    -131.85,
+    620.0
+   ],
+   "area_m2": 7170262.8,
+   "up_m2": 2114815.3,
+   "wall_m2": 2463750.8,
+   "down_m2": 0.0
+  },
+  "spoil_heap_main": {
+   "count": 1,
+   "first": "spoil_heap_main",
+   "faces": 1760,
+   "materials": [
+    "spoil_heap"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -62.0,
+    102.0,
+    113.0,
+    237.0,
+    5.01,
+    37.15
+   ],
+   "area_m2": 22286.4,
+   "up_m2": 10952.0,
+   "wall_m2": 0.0,
+   "down_m2": 0.0
+  },
+  "spoil_heap_old": {
+   "count": 1,
+   "first": "spoil_heap_old",
+   "faces": 1760,
+   "materials": [
+    "spoil_heap"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    20.0,
+    103.0,
+    107.0,
+    178.0,
+    5.01,
+    18.99
+   ],
+   "area_m2": 6261.3,
+   "up_m2": 4126.3,
+   "wall_m2": 0.0,
+   "down_m2": 0.0
+  },
+  "street_channels": {
+   "count": 1,
+   "first": "street_channels",
+   "faces": 504,
+   "materials": [
+    "channel_stones"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -2.5,
+    2.5,
+    -12.0,
+    72.0,
+    -0.86,
+    5.03
+   ],
+   "area_m2": 51.6,
+   "up_m2": 51.6,
+   "wall_m2": 0.0,
+   "down_m2": 0.0
+  },
+  "street_kerbs": {
+   "count": 1,
+   "first": "street_kerbs",
+   "faces": 4862,
+   "materials": [
+    "kerb_stone"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -2.68,
+    2.68,
+    -12.0,
+    72.02,
+    -1.19,
+    5.16
+   ],
+   "area_m2": 237.3,
+   "up_m2": 22.2,
+   "wall_m2": 171.6,
+   "down_m2": 32.9
+  },
+  "street_pavements": {
+   "count": 1,
+   "first": "street_pavements",
+   "faces": 168,
+   "materials": [
+    "pavement_flags"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.4,
+    4.4,
+    -12.0,
+    72.0,
+    -0.71,
+    5.19
+   ],
+   "area_m2": 291.4,
+   "up_m2": 291.4,
+   "wall_m2": 0.0,
+   "down_m2": 0.0
+  },
+  "street_setts": {
+   "count": 1,
+   "first": "street_setts",
+   "faces": 1344,
+   "materials": [
+    "street_setts"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -2.2,
+    2.2,
+    -12.0,
+    72.0,
+    -0.84,
+    5.11
+   ],
+   "area_m2": 370.8,
+   "up_m2": 370.8,
+   "wall_m2": 0.0,
+   "down_m2": 0.0
+  },
+  "winding_ropes": {
+   "count": 1,
+   "first": "winding_ropes",
+   "faces": 32,
+   "materials": [
+    "wire_rope"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -11.52,
+    22.02,
+    85.97,
+    96.02,
+    7.91,
+    26.0
+   ],
+   "area_m2": 12.7,
+   "up_m2": 0.0,
+   "wall_m2": 10.3,
+   "down_m2": 1.2
+  },
+  "winding_wheel_left": {
+   "count": 1,
+   "first": "winding_wheel_left",
+   "faces": 1932,
+   "materials": [
+    "wheel_iron"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    -4.41,
+    -0.14,
+    85.05,
+    86.95,
+    22.18,
+    26.45
+   ],
+   "area_m2": 22.2,
+   "up_m2": 1.1,
+   "wall_m2": 15.0,
+   "down_m2": 3.6
+  },
+  "winding_wheel_right": {
+   "count": 1,
+   "first": "winding_wheel_right",
+   "faces": 1932,
+   "materials": [
+    "wheel_iron"
+   ],
+   "uv": [
+    "UVMap"
+   ],
+   "modifiers": [],
+   "hidden_in_render": 0,
+   "bbox": [
+    0.14,
+    4.41,
+    85.05,
+    86.95,
+    22.18,
+    26.45
+   ],
+   "area_m2": 22.2,
+   "up_m2": 1.1,
+   "wall_m2": 15.0,
+   "down_m2": 3.6
+  }
+ },
+ "material_users": {
+  "boarded_blue": {
+   "n": 1,
+   "sample": [
+    "heapstead_trim"
+   ]
+  },
+  "boarded_green": {
+   "n": 1,
+   "sample": [
+    "engine_house_trim"
+   ]
+  },
+  "brass": {
+   "n": 117,
+   "sample": [
+    "right_row_a_cottage_01_door",
+    "right_row_a_cottage_01_window_ground",
+    "right_row_a_cottage_01_window_upper_0",
+    "right_row_a_cottage_01_window_upper_1"
+   ]
+  },
+  "cast_iron": {
+   "n": 37,
+   "sample": [
+    "right_row_a_cottage_01_rainwater",
+    "right_row_a_cottage_02_rainwater",
+    "right_row_a_cottage_03_rainwater",
+    "right_row_a_cottage_04_rainwater"
+   ]
+  },
+  "channel_stones": {
+   "n": 1,
+   "sample": [
+    "street_channels"
+   ]
+  },
+  "chimney_pot_clay": {
+   "n": 32,
+   "sample": [
+    "right_row_a_cottage_01_chimney",
+    "right_row_a_cottage_01_end_chimney",
+    "right_row_a_cottage_02_chimney",
+    "right_row_a_cottage_03_chimney"
+   ]
+  },
+  "chimney_pot_sooted": {
+   "n": 32,
+   "sample": [
+    "right_row_a_cottage_01_chimney",
+    "right_row_a_cottage_01_end_chimney",
+    "right_row_a_cottage_02_chimney",
+    "right_row_a_cottage_03_chimney"
+   ]
+  },
+  "colliery_brick": {
+   "n": 5,
+   "sample": [
+    "heapstead_walls",
+    "engine_house_walls",
+    "engine_house_trim",
+    "second_winding_house_walls"
+   ]
+  },
+  "colliery_yard": {
+   "n": 1,
+   "sample": [
+    "ground"
+   ]
+  },
+  "cottage_brick": {
+   "n": 30,
+   "sample": [
+    "left_row_a_cottage_01_walls",
+    "left_row_a_cottage_01_chimney",
+    "left_row_a_cottage_01_end_chimney",
+    "left_row_a_cottage_02_walls"
+   ]
+  },
+  "cottage_stone": {
+   "n": 30,
+   "sample": [
+    "right_row_a_cottage_01_walls",
+    "right_row_a_cottage_01_chimney",
+    "right_row_a_cottage_01_end_chimney",
+    "right_row_a_cottage_02_walls"
+   ]
+  },
+  "dark_dressed_stone": {
+   "n": 29,
+   "sample": [
+    "right_row_a_cottage_01_trim",
+    "right_row_a_cottage_02_trim",
+    "right_row_a_cottage_03_trim",
+    "right_row_a_cottage_04_trim"
+   ]
+  },
+  "dressed_stone": {
+   "n": 64,
+   "sample": [
+    "right_row_a_cottage_01_trim",
+    "right_row_a_cottage_01_chimney",
+    "right_row_a_cottage_01_end_chimney",
+    "right_row_a_cottage_02_trim"
+   ]
+  },
+  "engine_window_glow": {
+   "n": 1,
+   "sample": [
+    "engine_house_glass"
+   ]
+  },
+  "fascia_board": {
+   "n": 28,
+   "sample": [
+    "right_row_a_cottage_01_trim",
+    "right_row_a_cottage_02_trim",
+    "right_row_a_cottage_03_trim",
+    "right_row_a_cottage_04_trim"
+   ]
+  },
+  "headframe_steel": {
+   "n": 1,
+   "sample": [
+    "headframe_lattice"
+   ]
+  },
+  "interior_dark": {
+   "n": 32,
+   "sample": [
+    "right_row_a_cottage_01_walls",
+    "right_row_a_cottage_02_walls",
+    "right_row_a_cottage_03_walls",
+    "right_row_a_cottage_04_walls"
+   ]
+  },
+  "kerb_stone": {
+   "n": 1,
+   "sample": [
+    "street_kerbs"
+   ]
+  },
+  "lamp_glass_glow": {
+   "n": 5,
+   "sample": [
+    "gas_lamp_0_glass",
+    "gas_lamp_1_glass",
+    "gas_lamp_2_glass",
+    "gas_lamp_3_glass"
+   ]
+  },
+  "moor": {
+   "n": 2,
+   "sample": [
+    "moorland_hills_0",
+    "moorland_hills_1"
+   ]
+  },
+  "paint_black": {
+   "n": 28,
+   "sample": [
+    "right_row_a_cottage_01_door",
+    "right_row_a_cottage_02_door",
+    "right_row_a_cottage_03_door",
+    "right_row_a_cottage_04_door"
+   ]
+  },
+  "paint_bottle_green": {
+   "n": 6,
+   "sample": [
+    "right_row_a_cottage_02_door",
+    "right_row_a_cottage_04_door",
+    "right_row_b_cottage_01_door",
+    "left_row_a_cottage_02_door"
+   ]
+  },
+  "paint_brown": {
+   "n": 6,
+   "sample": [
+    "right_row_a_cottage_06_door",
+    "right_row_a_cottage_07_door",
+    "right_row_a_cottage_08_door",
+    "left_row_a_cottage_05_door"
+   ]
+  },
+  "paint_cream": {
+   "n": 84,
+   "sample": [
+    "right_row_a_cottage_01_window_ground",
+    "right_row_a_cottage_01_window_upper_0",
+    "right_row_a_cottage_01_window_upper_1",
+    "right_row_a_cottage_02_window_ground"
+   ]
+  },
+  "paint_maroon": {
+   "n": 5,
+   "sample": [
+    "right_row_a_cottage_01_door",
+    "right_row_a_cottage_05_door",
+    "right_row_b_cottage_05_door",
+    "right_row_b_cottage_06_door"
+   ]
+  },
+  "paint_navy": {
+   "n": 11,
+   "sample": [
+    "right_row_a_cottage_03_door",
+    "right_row_b_cottage_02_door",
+    "right_row_b_cottage_03_door",
+    "right_row_b_cottage_04_door"
+   ]
+  },
+  "pavement_flags": {
+   "n": 1,
+   "sample": [
+    "street_pavements"
+   ]
+  },
+  "plaster_dark": {
+   "n": 32,
+   "sample": [
+    "right_row_a_cottage_01_chimney",
+    "right_row_a_cottage_01_end_chimney",
+    "right_row_a_cottage_02_chimney",
+    "right_row_a_cottage_03_chimney"
+   ]
+  },
+  "ridge_clay": {
+   "n": 29,
+   "sample": [
+    "right_row_a_cottage_01_roof",
+    "right_row_a_cottage_02_roof",
+    "right_row_a_cottage_03_roof",
+    "right_row_a_cottage_04_roof"
+   ]
+  },
+  "roof_slate": {
+   "n": 31,
+   "sample": [
+    "right_row_a_cottage_01_roof",
+    "right_row_a_cottage_02_roof",
+    "right_row_a_cottage_03_roof",
+    "right_row_a_cottage_04_roof"
+   ]
+  },
+  "sky_dome_glow": {
+   "n": 1,
+   "sample": [
+    "sky_dome"
+   ]
+  },
+  "spoil_heap": {
+   "n": 2,
+   "sample": [
+    "spoil_heap_main",
+    "spoil_heap_old"
+   ]
+  },
+  "street_setts": {
+   "n": 1,
+   "sample": [
+    "street_setts"
+   ]
+  },
+  "wheel_iron": {
+   "n": 2,
+   "sample": [
+    "winding_wheel_left",
+    "winding_wheel_right"
+   ]
+  },
+  "window_dark_0": {
+   "n": 24,
+   "sample": [
+    "right_row_a_cottage_02_glass_upper_1",
+    "right_row_a_cottage_03_glass_upper_1",
+    "right_row_a_cottage_06_glass_upper_1",
+    "right_row_a_cottage_08_glass_upper_1"
+   ]
+  },
+  "window_dark_1": {
+   "n": 20,
+   "sample": [
+    "right_row_a_cottage_01_glass_ground",
+    "right_row_a_cottage_01_glass_upper_1",
+    "right_row_a_cottage_02_glass_upper_0",
+    "right_row_a_cottage_07_glass_upper_1"
+   ]
+  },
+  "window_dark_2": {
+   "n": 18,
+   "sample": [
+    "right_row_a_cottage_04_glass_upper_0",
+    "right_row_a_cottage_04_glass_upper_1",
+    "right_row_a_cottage_05_glass_ground",
+    "right_row_a_cottage_05_glass_upper_0"
+   ]
+  },
+  "window_lit_glow_0": {
+   "n": 6,
+   "sample": [
+    "right_row_a_cottage_02_glass_ground",
+    "right_row_a_cottage_03_glass_ground",
+    "right_row_a_cottage_08_glass_ground",
+    "right_row_b_cottage_03_glass_ground"
+   ]
+  },
+  "window_lit_glow_1": {
+   "n": 6,
+   "sample": [
+    "right_row_a_cottage_05_glass_upper_1",
+    "right_row_a_cottage_06_glass_upper_0",
+    "right_row_b_cottage_01_glass_upper_1",
+    "right_row_b_cottage_03_glass_upper_0"
+   ]
+  },
+  "window_lit_glow_2": {
+   "n": 12,
+   "sample": [
+    "right_row_a_cottage_01_glass_upper_0",
+    "right_row_a_cottage_03_glass_upper_0",
+    "right_row_a_cottage_04_glass_ground",
+    "right_row_a_cottage_07_glass_ground"
+   ]
+  },
+  "wire_rope": {
+   "n": 1,
+   "sample": [
+    "winding_ropes"
+   ]
+  }
+ },
+ "lights": [
+  {
+   "name": "right_row_a_cottage_01_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    0.6,
+    4.78
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_02_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    5.3,
+    2.5
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_03_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    11.7,
+    2.81
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_03_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    9.6,
+    5.41
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_04_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    14.3,
+    3.13
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_05_window_light_upper_1",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    20.7,
+    6.04
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_06_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    25.4,
+    6.36
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_07_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    29.7,
+    4.07
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_a_cottage_08_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    32.3,
+    4.39
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_b_cottage_01_window_light_upper_1",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    42.7,
+    7.58
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_b_cottage_03_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    51.7,
+    5.61
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_b_cottage_03_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    49.6,
+    8.21
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "right_row_b_cottage_05_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    3.7,
+    58.6,
+    8.84
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    0.8,
+    2.18
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    2.9,
+    4.78
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_a_cottage_02_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    7.2,
+    2.5
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_a_cottage_03_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    11.9,
+    5.41
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_a_cottage_05_window_light_ground",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    18.8,
+    3.44
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_a_cottage_06_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    23.1,
+    6.36
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_b_cottage_01_window_light_upper_1",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    40.8,
+    7.58
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_b_cottage_02_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    45.1,
+    7.9
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_b_cottage_03_window_light_upper_1",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    49.8,
+    8.21
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_b_cottage_04_window_light_upper_0",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    54.1,
+    8.53
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "left_row_b_cottage_05_window_light_upper_1",
+   "type": "POINT",
+   "energy": 45.0,
+   "loc": [
+    -3.7,
+    58.8,
+    8.84
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.5
+  },
+  {
+   "name": "gas_lamp_0_light",
+   "type": "POINT",
+   "energy": 260.0,
+   "loc": [
+    3.03,
+    11.0,
+    3.98
+   ],
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ],
+   "radius": 0.12
+  },
+  {
+   "name": "gas_lamp_1_light",
+   "type": "POINT",
+   "energy": 260.0,
+   "loc": [
+    -3.03,
+    25.0,
+    4.96
+   ],
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ],
+   "radius": 0.12
+  },
+  {
+   "name": "gas_lamp_2_light",
+   "type": "POINT",
+   "energy": 260.0,
+   "loc": [
+    3.03,
+    39.0,
+    5.94
+   ],
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ],
+   "radius": 0.12
+  },
+  {
+   "name": "gas_lamp_3_light",
+   "type": "POINT",
+   "energy": 260.0,
+   "loc": [
+    -3.03,
+    53.0,
+    6.92
+   ],
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ],
+   "radius": 0.12
+  },
+  {
+   "name": "gas_lamp_4_light",
+   "type": "POINT",
+   "energy": 260.0,
+   "loc": [
+    3.03,
+    64.5,
+    7.72
+   ],
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ],
+   "radius": 0.12
+  },
+  {
+   "name": "dusk_skylight",
+   "type": "SUN",
+   "energy": 0.3,
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "colour": [
+    0.62,
+    0.72,
+    0.9
+   ],
+   "points_along": [
+    0.198,
+    -0.883,
+    -0.425
+   ],
+   "angle": 0.2094
+  },
+  {
+   "name": "afterglow",
+   "type": "SUN",
+   "energy": 0.2,
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "colour": [
+    1.0,
+    0.62,
+    0.36
+   ],
+   "points_along": [
+    -0.0,
+    0.995,
+    -0.105
+   ],
+   "angle": 0.0092
+  },
+  {
+   "name": "engine_house_light_front",
+   "type": "POINT",
+   "energy": 400.0,
+   "loc": [
+    -19.5,
+    89.8,
+    9.31
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.0
+  },
+  {
+   "name": "engine_house_light_side",
+   "type": "POINT",
+   "energy": 400.0,
+   "loc": [
+    -9.8,
+    96.0,
+    9.31
+   ],
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ],
+   "radius": 0.0
+  }
+ ],
+ "cameras": [
+  {
+   "name": "main_camera",
+   "loc": [
+    0.0,
+    3.0,
+    1.89
+   ],
+   "fov_v_deg": 40.0,
+   "sensor_fit": "VERTICAL",
+   "rot_quat": [
+    0.6659,
+    0.7461,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "side_camera",
+   "loc": [
+    2.0,
+    3.0,
+    1.89
+   ],
+   "fov_v_deg": 40.0,
+   "sensor_fit": "VERTICAL",
+   "rot_quat": [
+    0.6659,
+    0.7461,
+    0.0,
+    0.0
+   ]
+  }
+ ],
+ "active_camera": "main_camera",
+ "empties": {
+  "count": 65,
+  "sample": [
+   "right_row_a_cottage_01_doorway",
+   "right_row_a_cottage_01_chimney_top",
+   "right_row_a_cottage_02_doorway",
+   "right_row_a_cottage_02_chimney_top",
+   "right_row_a_cottage_03_doorway",
+   "right_row_a_cottage_03_chimney_top",
+   "right_row_a_cottage_04_doorway",
+   "right_row_a_cottage_04_chimney_top",
+   "right_row_a_cottage_05_doorway",
+   "right_row_a_cottage_05_chimney_top",
+   "right_row_a_cottage_06_doorway",
+   "right_row_a_cottage_06_chimney_top",
+   "right_row_a_cottage_07_doorway",
+   "right_row_a_cottage_07_chimney_top",
+   "right_row_a_cottage_08_doorway",
+   "right_row_a_cottage_08_chimney_top",
+   "right_row_b_cottage_01_doorway",
+   "right_row_b_cottage_01_chimney_top",
+   "right_row_b_cottage_02_doorway",
+   "right_row_b_cottage_02_chimney_top",
+   "right_row_b_cottage_03_doorway",
+   "right_row_b_cottage_03_chimney_top",
+   "right_row_b_cottage_04_doorway",
+   "right_row_b_cottage_04_chimney_top",
+   "right_row_b_cottage_05_doorway",
+   "right_row_b_cottage_05_chimney_top",
+   "right_row_b_cottage_06_doorway",
+   "right_row_b_cottage_06_chimney_top",
+   "left_row_a_cottage_01_doorway",
+   "left_row_a_cottage_01_chimney_top",
+   "left_row_a_cottage_02_doorway",
+   "left_row_a_cottage_02_chimney_top",
+   "left_row_a_cottage_03_doorway",
+   "left_row_a_cottage_03_chimney_top",
+   "left_row_a_cottage_04_doorway",
+   "left_row_a_cottage_04_chimney_top",
+   "left_row_a_cottage_05_doorway",
+   "left_row_a_cottage_05_chimney_top",
+   "left_row_a_cottage_06_doorway",
+   "left_row_a_cottage_06_chimney_top",
+   "left_row_a_cottage_07_doorway",
+   "left_row_a_cottage_07_chimney_top",
+   "left_row_a_cottage_08_doorway",
+   "left_row_a_cottage_08_chimney_top",
+   "left_row_b_cottage_01_doorway",
+   "left_row_b_cottage_01_chimney_top",
+   "left_row_b_cottage_02_doorway",
+   "left_row_b_cottage_02_chimney_top",
+   "left_row_b_cottage_03_doorway",
+   "left_row_b_cottage_03_chimney_top",
+   "left_row_b_cottage_04_doorway",
+   "left_row_b_cottage_04_chimney_top",
+   "left_row_b_cottage_05_doorway",
+   "left_row_b_cottage_05_chimney_top",
+   "left_row_b_cottage_06_doorway",
+   "left_row_b_cottage_06_chimney_top",
+   "lamp_0",
+   "lamp_1",
+   "lamp_2",
+   "lamp_3"
+  ]
+ },
+ "other_types": {
+  "CAMERA": 2,
+  "EMPTY": 65,
+  "LIGHT": 33,
+  "MESH": 373
+ },
+ "world": {
+  "Background": "ShaderNodeBackground",
+  "World Output": "ShaderNodeOutputWorld",
+  "background_colour": [
+   0.05,
+   0.075,
+   0.1,
+   1.0
+  ],
+  "background_strength": 1.399999976158142,
+  "background_colour_linked": false
+ },
+ "render": {
+  "engine": "BLENDER_EEVEE",
+  "res": [
+   1080,
+   1920,
+   100
+  ],
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.6000000238418579,
+  "samples": 16,
+  "raytracing": false,
+  "shadow_rays": 1,
+  "shadow_steps": 6
+ },
+ "node_groups": [],
+ "collections": {
+  "cameras": 2,
+  "colliery": 17,
+  "cottages": 340,
+  "ground": 1,
+  "lamps": 10,
+  "markers": 65,
+  "preview_lights": 33,
+  "sky": 1,
+  "street": 4
+ }
+}

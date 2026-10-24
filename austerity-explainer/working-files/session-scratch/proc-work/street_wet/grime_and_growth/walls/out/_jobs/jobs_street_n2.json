@@ -1,0 +1,84 @@
+{
+ "set": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "n_a",
+   "camera": "notice",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "layer:runoff",
+   "size": [
+    768,
+    1365,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "n_b",
+   "camera": "notice",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "layer:runoff.streaks",
+   "size": [
+    768,
+    1365,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "n_c",
+   "camera": "notice",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "layer:runoff.pairs",
+   "size": [
+    768,
+    1365,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "n_d",
+   "camera": "notice",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "mask:drip+drip_dist+drip_kind",
+   "size": [
+    768,
+    1365,
+    1
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "n_e",
+   "camera": "notice",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps",
+   "view": "mask:frame_valid+sheltered+height",
+   "size": [
+    768,
+    1365,
+    1
+   ],
+   "plate_height": 2730
+  }
+ ],
+ "extra_cameras": []
+}

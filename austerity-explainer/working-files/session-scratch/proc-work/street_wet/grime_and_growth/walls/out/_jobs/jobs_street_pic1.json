@@ -1,0 +1,622 @@
+{
+ "set": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls/work/tuned/street_set.json",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "pc_base_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ]
+  },
+  {
+   "name": "pc_kit_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps,wallcracks,wallgrowth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ]
+  },
+  {
+   "name": "pc_base_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ]
+  },
+  {
+   "name": "pc_kit_pipe_close",
+   "camera": "pipe_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps,wallcracks,wallgrowth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ]
+  },
+  {
+   "name": "pc_base_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ]
+  },
+  {
+   "name": "pc_kit_wall_close",
+   "camera": "wall_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps,wallcracks,wallgrowth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ]
+  },
+  {
+   "name": "pc_kitwhite_doorstep_close",
+   "camera": "doorstep_close",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps,wallcracks,wallgrowth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    32
+   ],
+   "dials": {
+    "steps": {
+     "whitened_share": 1.0,
+     "scrubbed_share": 0.0
+    }
+   }
+  },
+  {
+   "name": "fl_base_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fl_soot_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fl_runoff_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fl_foot_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fl_steps_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:steps",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fl_wallcracks_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallcracks",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fl_wallgrowth_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallgrowth",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "fl_all_left03",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:soot,runoff,foot,steps,wallcracks,wallgrowth",
+   "view": "beauty",
+   "size": [
+    1000,
+    1500,
+    24
+   ],
+   "plate_height": 2730
+  },
+  {
+   "name": "dl_soot_film_mult_1.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "film_mult": 1.0
+    }
+   }
+  },
+  {
+   "name": "dl_soot_film_mult_0.6",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "film_mult": 0.6
+    }
+   }
+  },
+  {
+   "name": "dl_soot_film_mult_0.4",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "film_mult": 0.4
+    }
+   }
+  },
+  {
+   "name": "dl_soot_washed_pale_0.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "washed_pale": 0.0
+    }
+   }
+  },
+  {
+   "name": "dl_soot_washed_pale_0.5",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "washed_pale": 0.5
+    }
+   }
+  },
+  {
+   "name": "dl_soot_washed_pale_1.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:soot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "soot": {
+     "washed_pale": 1.0
+    }
+   }
+  },
+  {
+   "name": "dl_runoff_strength_0.3",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "runoff": {
+     "strength": 0.3
+    }
+   }
+  },
+  {
+   "name": "dl_runoff_strength_0.6",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "runoff": {
+     "strength": 0.6
+    }
+   }
+  },
+  {
+   "name": "dl_runoff_strength_1.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:runoff",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "runoff": {
+     "strength": 1.0
+    }
+   }
+  },
+  {
+   "name": "dl_foot_splash_strength_0.3",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "foot": {
+     "splash_strength": 0.3
+    }
+   }
+  },
+  {
+   "name": "dl_foot_splash_strength_0.6",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "foot": {
+     "splash_strength": 0.6
+    }
+   }
+  },
+  {
+   "name": "dl_foot_splash_strength_1.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:foot",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "foot": {
+     "splash_strength": 1.0
+    }
+   }
+  },
+  {
+   "name": "dl_wallgrowth_moss_amount_0.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallgrowth",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "wallgrowth": {
+     "moss_amount": 0.0
+    }
+   }
+  },
+  {
+   "name": "dl_wallgrowth_moss_amount_0.5",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallgrowth",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "wallgrowth": {
+     "moss_amount": 0.05
+    }
+   }
+  },
+  {
+   "name": "dl_wallgrowth_moss_amount_1.5",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallgrowth",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "wallgrowth": {
+     "moss_amount": 0.3
+    }
+   }
+  },
+  {
+   "name": "dl_wallcracks_crack_amount_0.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallcracks",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "wallcracks": {
+     "crack_amount": 0.0
+    }
+   }
+  },
+  {
+   "name": "dl_wallcracks_crack_amount_1.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallcracks",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "wallcracks": {
+     "crack_amount": 1.0
+    }
+   }
+  },
+  {
+   "name": "dl_wallcracks_crack_amount_2.0",
+   "camera": "left03",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:wallcracks",
+   "view": "beauty",
+   "size": [
+    600,
+    900,
+    16
+   ],
+   "plate_height": 2730,
+   "dials": {
+    "wallcracks": {
+     "crack_amount": 2.0
+    }
+   }
+  }
+ ],
+ "extra_cameras": [
+  {
+   "name": "right02",
+   "location": [
+    -2.0,
+    6.25,
+    3.87
+   ],
+   "look_at": [
+    4.15,
+    6.25,
+    3.87
+   ],
+   "fov_v": 58.0
+  },
+  {
+   "name": "left02",
+   "location": [
+    2.0,
+    6.25,
+    3.87
+   ],
+   "look_at": [
+    -4.15,
+    6.25,
+    3.87
+   ],
+   "fov_v": 58.0
+  },
+  {
+   "name": "right03",
+   "location": [
+    -2.0,
+    10.75,
+    4.19
+   ],
+   "look_at": [
+    4.15,
+    10.75,
+    4.19
+   ],
+   "fov_v": 58.0
+  },
+  {
+   "name": "left03",
+   "location": [
+    2.0,
+    10.75,
+    4.19
+   ],
+   "look_at": [
+    -4.15,
+    10.75,
+    4.19
+   ],
+   "fov_v": 58.0
+  }
+ ]
+}
