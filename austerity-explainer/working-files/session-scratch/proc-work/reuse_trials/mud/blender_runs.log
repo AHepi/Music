@@ -1,0 +1,13 @@
+2026-10-20 09:15:19 | round 1: first look, 7 views at 512 (finished, patches, relief, colour layer, three masks) | run_views.py
+2026-10-20 09:17:56 | round 2: tuned settings, 7 views at 512 (finished, moss mask, lichen only, ruts mask, earth layer, outline switched on, shared slate layout) | run_views.py
+2026-10-20 09:20:37 | round 3: tuned ruts, clods, stones, basins; 3 seed sets + earth layer at 512 | run_views.py
+2026-10-20 09:23:17 | round 4: new STONES layer, wider ruts; 3 seed sets + stones mask at 512 | run_views.py
+(round 4 attempt 1 failed at once: KeyError 'seed' in stones.py; no picture made)
+2026-10-20 09:23:33 | round 4 (second try): new STONES layer, wider ruts; 3 seed sets + stones mask at 512 | run_views.py
+2026-10-20 09:26:41 | round 5: STONES in three size classes that gather, more contrast; 3 seed sets at 512 | run_views.py
+2026-10-20 09:29:14 | round 6: 1254-dot look and score pipeline test of seed set 1 (colour and height only) | final_bake.py
+2026-10-20 09:36:12 | round 7: close-up window (0.4 tile at true dot size, 502 px) of three variants: base, finer clods, plus dark pits | window_render.py
+2026-10-20 09:36:31 | round 7 (second try; the first stopped at once, wrong folder path in my copy of window_render.py): close-up windows at true dot size: base, finer clods, plus dark pits, and a rut and puddle window | window_render.py
+2026-10-20 09:39:23 | round 8: check of the layout box fix, stone tones, bank tones: two close-ups and two whole-tile views (seed sets 1 and 2) at 502 px | window_render.py
+2026-10-20 09:42:28 | round 11-prep FINAL BAKE: three seed sets at 1254 (colour, 16-bit height, roughness, metallic) plus the height again with the mud height rule for each set | final_bake.py
+2026-10-20 10:04:21 | round 12 CHECKS: half-tile test, layer masks, independence test and node counts | checks_run.py

@@ -1,0 +1,655 @@
+{
+ "summary": "How much carries over: the layered core runs on all five surfaces with no code change. That core is the layer helper and its fixed interface, the four paint layers (COLOUR AND FADE, DAMAGE, MOSS, OUTLINE AND SHADOW), COMBINE, the bake harness and the same-kind score. What changes per surface is the LAYOUT plus one or two small new layers. Brick needs settings only plus one new GRIME layer (soot over bricks and mortar, mottled mortar). Wood needs the slate LAYOUT with board settings, a 10-node 'turn' so the layers' up-down runs along the grain, and a new CRACKS layer, because DAMAGE's cracks only start at a piece edge. Metal needs a new bars-and-panels layout and a new RIVETS layer; MOSS is reused as rust and DAMAGE as chipped paint. Mud has no pieces, so the pieces become the earth clods (a new seamless cell layout); it needs new RUTS and STONES layers (STONES borrows lib/contrib/stone_tools unchanged). Using MOSS as puddle water is unsure. Mud is the most new code with the weakest score evidence. Gravel needs a stone layout: a copy of stone_tools.polygon_stones that also returns each stone's coordinates and size. It also uses GRIME for the soil and its shadow next to stones.\n\nCounted over 52 tool rows (as is + settings only): brick 34, wood 34, metal 33, mud 33, gravel 33. The rest is mostly small copy-and-change-one-line work (recipe wiring, tests). The 'not useful' rows are the painter generators, tracing tools and Geometry Nodes helpers; the painter generators are the baselines.\n\nChecks run today, all in reuse_trials/inventory_checks/:\n(1) All six frozen layer boxes build from the snapshot.\n(2) Turning the bundle a quarter makes the shared paint run along wood grain (look check sheet, by eye).\n(3) Three settings remove the 'slate tongues' on brick: fade_direction 0, fade_length = streak_width, mottle_tallness 1. This corrects the 05 Lessons claim that brick needs a new paint layer.\n(4) Settings above a control's listed range are kept, not cut.\n(5) The five baseline first new tiles re-score exactly as stored: brick 0.725, wood 0.619, metal 0.578, mud 0.407, gravel 0.372; colour groups 0.750, 0.622, 0.540, 0.313, 0.242.\n(6) A text search shows no shared layer reads 'row', and MOSS and DAMAGE are confined to pieces.\n\nTrap found: importing the snapshot writes a __pycache__ folder into it unless sys.dont_write_bytecode = True. It happened once; I deleted the folder I made, and the checksums still match.\n\nNo trial was baked or scored. Verdicts marked 'not tried' are from reading. The look checks are 512-dot colour views and were not scored.",
+ "tools": [
+  {
+   "name": "lib/bake_harness.py",
+   "kind": "shared tool (lib)",
+   "what_it_does": "Turns any recipe into flat colour, height, roughness, metallic and normal pictures by photographing a square from straight above.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Ran today (look check); slate layers and brick reuse baked through it; slate layers at 1254 dots about 3 minutes for colour, height, roughness."
+  },
+  {
+   "name": "lib/recipe_tools.py",
+   "kind": "shared tool (lib)",
+   "what_it_does": "Helpers to add and link nodes and make node groups, plus seamless noise and seamless cells.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Every shared layer sits on it; build check today."
+  },
+  {
+   "name": "lib/texture_compare.py (+ anchors)",
+   "kind": "shared tool (lib)",
+   "what_it_does": "The 'same kind of surface?' score with colour, height, normal and tiling groups, and a side-by-side sheet.",
+   "brick": "as is",
+   "wood": "as is (old wood new tiles were tuned on it: optimistic)",
+   "metal": "as is",
+   "mud": "as is, but weak on mud: also score against the other references as a control",
+   "gravel": "as is (quote the as-baked number)",
+   "evidence": "Re-scored the five first new tiles today: identical to stored numbers."
+  },
+  {
+   "name": "lib/pixel_compare.py",
+   "kind": "shared tool (lib)",
+   "what_it_does": "The 'same picture, dot for dot?' measures and tiers.",
+   "brick": "as is, only to show a new tile is not a copy",
+   "wood": "as is, the same",
+   "metal": "as is, the same",
+   "mud": "as is, the same",
+   "gravel": "as is, the same",
+   "evidence": "Every made-up tile of all six builds is tier none by design (final reports)."
+  },
+  {
+   "name": "lib/description_audit.py",
+   "kind": "shared tool (lib)",
+   "what_it_does": "Checks a description file is a short list of numbers, not a picture in disguise.",
+   "brick": "as is, on the trial's settings file",
+   "wood": "as is, the same",
+   "metal": "as is, the same",
+   "mud": "as is, the same",
+   "gravel": "as is, the same",
+   "evidence": "Reading; a layered recipe only has a settings file of plain numbers (slate's 1.7 KB). Not run today."
+  },
+  {
+   "name": "lib/sweep_tools.py + lib/make_strip.py",
+   "kind": "shared tool (lib)",
+   "what_it_does": "Bakes small squares of one setting at several values and joins them into a labelled strip.",
+   "brick": "as is, with a one-line function building the trial recipe with one setting changed",
+   "wood": "as is, the same",
+   "metal": "as is, the same",
+   "mud": "as is, the same",
+   "gravel": "as is, the same",
+   "evidence": "Reading only: needs a group with a Vector input, which every layered recipe has. Not run today."
+  },
+  {
+   "name": "lib/contrib/builder.py",
+   "kind": "helper (lib/contrib)",
+   "what_it_does": "'Write nodes like a list of sums' helper with seamless noise and cells and a brick-grid helper.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "The layer helper is built on it; build check today."
+  },
+  {
+   "name": "lib/contrib/stone_tools.py",
+   "kind": "helper (lib/contrib)",
+   "what_it_does": "Seamless random stones: one faceted polygon stone per grid cell (polygon_stones) or Voronoi stones, with mask, facet brightness, random numbers.",
+   "brick": "not useful",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "as is, inside a new STONES layer",
+   "gravel": "needs code changes: a copy that also returns each stone's centre coordinates and size for the LAYOUT",
+   "evidence": "Build check today: builds inside an empty layout box (166 nodes); returns mask, outline, face, r, g, bch, inside_distance, present, random_tone, not the stone's own coordinates or radius."
+  },
+  {
+   "name": "lib/contrib/hp_tools.py",
+   "kind": "helper (lib/contrib)",
+   "what_it_does": "Painted-look helpers: streaky seamless noise and cells, warped coordinates, palette ramps, padded photographs, periodicity check.",
+   "brick": "as is, building blocks for GRIME",
+   "wood": "as is, if a CRACKS or GRAIN layer is written",
+   "metal": "as is, streaky noise if MOSS drips are not enough",
+   "mud": "as is, inside RUTS",
+   "gravel": "as is, inside GRIME for the soil",
+   "evidence": "Reading only; not run today."
+  },
+  {
+   "name": "lib/contrib/layout_tools.py",
+   "kind": "helper (lib/contrib)",
+   "what_it_does": "Geometry Nodes group placing one point per brick, slate, plank or plate on a wrapping tile.",
+   "brick": "not useful",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Layers need eleven numbers per dot, not points."
+  },
+  {
+   "name": "lib/contrib/relax_tools.py",
+   "kind": "helper (lib/contrib)",
+   "what_it_does": "Geometry Nodes group pushing overlapping points apart on a wrapping tile.",
+   "brick": "not useful",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Only for a real-geometry route; on gravel it lowered same-kind 0.362 to 0.173."
+  },
+  {
+   "name": "lib/contrib/gn_tools.py",
+   "kind": "helper (lib/contrib)",
+   "what_it_does": "Helpers to build Geometry Nodes groups and photograph real geometry from above.",
+   "brick": "not useful",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Layered route is shader nodes only; six builds found real geometry did not help when maps are colour-made."
+  },
+  {
+   "name": "lib/contrib/periodicity_test.sh",
+   "kind": "helper (lib/contrib)",
+   "what_it_does": "Half-tile test of a recipe with a wrong-roll control.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Reading; slate layers' tests/half_tile_layers.py is fuller."
+  },
+  {
+   "name": "slate_layers/interface/interface.md",
+   "kind": "slate in layers",
+   "what_it_does": "The fixed contract: eleven bundle numbers, four outputs per layer, tile units, seamless rules, declared links, setting names.",
+   "brick": "as is",
+   "wood": "as is, bundle turned (local_y along the grain)",
+   "metal": "as is (pieces = bars and panels)",
+   "mud": "as is (pieces = clods)",
+   "gravel": "as is (pieces = stones, gap = soil)",
+   "evidence": "Brick reuse ran on it unchanged; look check today; no shared layer reads row."
+  },
+  {
+   "name": "layers/layer_interface.py",
+   "kind": "slate in layers",
+   "what_it_does": "Makes the empty layer box with fixed sockets; helper for sums, seamless noise, per-piece random numbers, Amount-0 off switch.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Build check today from the snapshot."
+  },
+  {
+   "name": "layers/layout.py (slate LAYOUT)",
+   "kind": "slate in layers",
+   "what_it_does": "Rows of pieces with random widths, leaning joints, rounded chipped edges; hands out the bundle.",
+   "brick": "settings only: 12 rows of 4, joint 0.016, row gap 0.0148 (not baked)",
+   "wood": "settings only: 5 rows of 1, plus a 10-node turn in the recipe (not baked)",
+   "metal": "needs a new layout",
+   "mud": "needs a new layout",
+   "gravel": "needs a new layout",
+   "evidence": "Range check today: values above a control's listed range are kept."
+  },
+  {
+   "name": "layers/colour_and_fade.py",
+   "kind": "slate in layers",
+   "what_it_does": "Bottom paint: tone per piece, tongues and mottling on piece coordinates, specks, big bleached/damp patches across pieces, palette rounding.",
+   "brick": "settings only: three tongue-removing settings (look check)",
+   "wood": "settings only, on the turned bundle (look check)",
+   "metal": "settings only: steel blue-greys, patches 1.45x taller (not tried)",
+   "mud": "settings only: earth tone per clod, dry/wet areas (not tried)",
+   "gravel": "settings only: tone per stone, fade_direction -1 = lit from top (not tried)",
+   "evidence": "Look check sheet; code reading (tongues multiplied by fade_direction)."
+  },
+  {
+   "name": "layers/damage.py",
+   "kind": "slate in layers",
+   "what_it_does": "Flakes along edges, pits, scratches, cracks from an edge, bites, broken corners; sinks relief.",
+   "brick": "settings only: pale sandy chips at edges and corners",
+   "wood": "needs code changes: cracks only start at a piece edge (board end); or a new CRACKS layer; chips settings only",
+   "metal": "settings only: chipped paint, rust pits, long scratches (not tried)",
+   "mud": "settings only: dark crumbly clod rims (not tried, unsure)",
+   "gravel": "settings only: pale flakes, pits as rust spots (not tried)",
+   "evidence": "Look check zoom; reading; confined to piece_mask."
+  },
+  {
+   "name": "layers/moss.py",
+   "kind": "slate in layers",
+   "what_it_does": "Growth: flat clumps gathered by rules plus lichen discs in colonies; avoids or seeks damage via the declared link.",
+   "brick": "settings only: little or none; change olive tones if kept (teal on red)",
+   "wood": "settings only: moss off, lichen discs in rust browns = rust splatter (too few in look check)",
+   "metal": "settings only, as RUST: drips from upper edges, along bar edges, clumped by panel, damage_attract (not tried)",
+   "mud": "settings only, unsure: as puddle WATER; may need a PUDDLES layer",
+   "gravel": "settings only: off or a few rust spots",
+   "evidence": "Reading: confined to piece_mask, clump noise on piece coordinates; look check."
+  },
+  {
+   "name": "layers/outline_and_shadow.py",
+   "kind": "slate in layers",
+   "what_it_does": "Dark gaps, thin side outline, stepped shadow under each piece's upper edge, lip on lower edge, edge darkening.",
+   "brick": "settings only: mortar colour, thin ring, lip as dark lower rim; mortar texture from GRIME",
+   "wood": "settings only: dark gaps, thin outline, no shadow, no lip",
+   "metal": "settings only for half (creases, shadow under lying bars); bright upper-left edge needs EDGE LIGHT",
+   "mud": "not useful (no joints)",
+   "gravel": "settings only: gap = soil base colour, thin rim, shadow and lip off",
+   "evidence": "Brick reuse sheet; look check; reading."
+  },
+  {
+   "name": "layers/combine.py",
+   "kind": "slate in layers",
+   "what_it_does": "Stacks layers by mask, adds heights and roughness, one metallic number, tone_blend height from paint brightness.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is for colour/height/roughness; per-dot metallic needs code change (not scored)",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Reading: inputs made for every name in recipe.stack_order."
+  },
+  {
+   "name": "recipe/slate_recipe.py",
+   "kind": "slate in layers",
+   "what_it_does": "Wires LAYOUT, layers, declared links, COMBINE; settings order; debug views; shift; tiles_across.",
+   "brick": "needs code changes: copy, swap LAYOUT, add new layers",
+   "wood": "needs code changes, plus the turn",
+   "metal": "needs code changes",
+   "mud": "needs code changes",
+   "gravel": "needs code changes",
+   "evidence": "Brick reuse recipe and the look check recipe are copies of its wiring."
+  },
+  {
+   "name": "recipe/make_controls_table.py",
+   "kind": "slate in layers",
+   "what_it_does": "Writes the controls table from layer files.",
+   "brick": "needs code changes (layer list)",
+   "wood": "needs code changes",
+   "metal": "needs code changes",
+   "mud": "needs code changes",
+   "gravel": "needs code changes",
+   "evidence": "Reading."
+  },
+  {
+   "name": "tests/half_tile_test.py, half_tile_layers.py",
+   "kind": "slate in layers",
+   "what_it_does": "Prove recipe and each layer repeat exactly (half-tile slide, wrong-roll control, 2x2 area).",
+   "brick": "needs code changes: RECIPE line and layer names",
+   "wood": "needs code changes",
+   "metal": "needs code changes",
+   "mud": "needs code changes",
+   "gravel": "needs code changes",
+   "evidence": "Reading: RECIPE = slate_recipe.py written in each file."
+  },
+  {
+   "name": "tests/independence_full.py",
+   "kind": "slate in layers",
+   "what_it_does": "Proves layers are independent (Amount 0, Seed+1; nothing changes outside own mask except declared links).",
+   "brick": "needs code changes",
+   "wood": "needs code changes",
+   "metal": "needs code changes",
+   "mud": "needs code changes",
+   "gravel": "needs code changes",
+   "evidence": "Reading."
+  },
+  {
+   "name": "tests/bake_tools.py",
+   "kind": "slate in layers",
+   "what_it_does": "Bakes many single views of any recipe in one Blender run.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Brick reuse bakes used it."
+  },
+  {
+   "name": "tests/layout_statistics.py",
+   "kind": "slate in layers",
+   "what_it_does": "Measures the slate layout next to the reference's numbers.",
+   "brick": "needs code changes",
+   "wood": "needs code changes",
+   "metal": "needs code changes",
+   "mud": "needs code changes",
+   "gravel": "needs code changes",
+   "evidence": "Reading."
+  },
+  {
+   "name": "integration/colour_character.py",
+   "kind": "slate in layers",
+   "what_it_does": "Measures shares of olive, tan and dark dots of a slate picture.",
+   "brick": "needs code changes (soot, mortar)",
+   "wood": "needs code changes (cracks, rust)",
+   "metal": "needs code changes (rust, stains)",
+   "mud": "needs code changes (water, stones)",
+   "gravel": "needs code changes (soil, stone)",
+   "evidence": "Reading: slate colour rules."
+  },
+  {
+   "name": "integration/make_normal.py",
+   "kind": "slate in layers",
+   "what_it_does": "Normal map from 16-bit height with whole-number Sobel strength, wrapping.",
+   "brick": "as is (strength 6)",
+   "wood": "as is (8)",
+   "metal": "as is (5)",
+   "mud": "as is (9)",
+   "gravel": "as is (10)",
+   "evidence": "Strengths from each build's derivation proof."
+  },
+  {
+   "name": "ladder/make_ladder_table.py",
+   "kind": "slate in layers",
+   "what_it_does": "Scores the 'what each layer adds' bakes and draws a sheet.",
+   "brick": "needs code changes",
+   "wood": "needs code changes",
+   "metal": "needs code changes",
+   "mud": "needs code changes",
+   "gravel": "needs code changes",
+   "evidence": "Reading."
+  },
+  {
+   "name": "controls_sweeps/",
+   "kind": "slate in layers",
+   "what_it_does": "Strips showing what each slate layer setting does.",
+   "brick": "as is for reading",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "On disk; new strips need the sweep tools."
+  },
+  {
+   "name": "reuse/brick_layers_recipe.py + settings_round_2",
+   "kind": "slate in layers",
+   "what_it_does": "Earlier test: same layers on a quick brick layout (40 nodes, 53 settings) plus one settings round.",
+   "brick": "needs code changes, tiny: starting point; columns 4 is a parameter, two mortar-share constants become settings",
+   "wood": "needs code changes: template for a board layout",
+   "metal": "not useful except as wiring template",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Score vs brick reference 0.194 overall, colour 0.152 (reuse/score_against_brick/score.json)."
+  },
+  {
+   "name": "05 Recipe and 05 Lessons - slate in layers",
+   "kind": "slate in layers",
+   "what_it_does": "How the layered slate was made, build order, traps.",
+   "brick": "as is (tongue remark corrected in the inventory)",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Reading."
+  },
+  {
+   "name": "painter generators (recipes/<surface>/generator)",
+   "kind": "per-surface build",
+   "what_it_does": "Draw thousands of flat coloured shapes from a description and photograph them.",
+   "brick": "not useful: different route; the BASELINE",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Their new tiles are the baselines."
+  },
+  {
+   "name": "derivation proofs (analysis/derivation_ceiling.py, 04 guides)",
+   "kind": "per-surface build",
+   "what_it_does": "Show each reference's height is its colour brightness and its normal the slope at a whole-number strength.",
+   "brick": "settings only: tone_blend, strength 6",
+   "wood": "settings only (8)",
+   "metal": "settings only (5)",
+   "mud": "settings only (9)",
+   "gravel": "settings only (10)",
+   "evidence": "Final reports, derivation_ceiling."
+  },
+  {
+   "name": "measured summary numbers (palettes, shares, sizes, spreads)",
+   "kind": "per-surface build",
+   "what_it_does": "Numbers measured once on each reference as a whole.",
+   "brick": "as is: read once as a guide",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "General character, not positions; all cited files exist."
+  },
+  {
+   "name": "per-element lists and traced descriptions",
+   "kind": "per-surface build",
+   "what_it_does": "Positions and outlines of single bricks, rivets, cracks, ruts, stones, patches.",
+   "brick": "not useful (tracing, forbidden)",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "House rules."
+  },
+  {
+   "name": "tracing tools (merge_trace, trace_tools, trace scripts)",
+   "kind": "per-surface build",
+   "what_it_does": "Cut a reference into flat patches and write their outlines.",
+   "brick": "not useful",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Tracing forbidden for trials."
+  },
+  {
+   "name": "samplers (sample_description.py, sampler.py)",
+   "kind": "per-surface build",
+   "what_it_does": "Write new painter descriptions from measured ranges and a seed.",
+   "brick": "not useful (their measured ranges are the useful part)",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Reading."
+  },
+  {
+   "name": "wood_shaders.py 'Wood Grain Gain'",
+   "kind": "per-surface build",
+   "what_it_does": "Seamless dry-brush streaks and hair lines (Vector in, brightness factor out).",
+   "brick": "not useful",
+   "wood": "as is, inside a new GRAIN layer if needed",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Build check today: builds unchanged, 39 nodes."
+  },
+  {
+   "name": "04 Recipe and 04 Lessons guides + checkers' answers",
+   "kind": "per-surface build",
+   "what_it_does": "Each build's story, measured numbers, traps, corrections.",
+   "brick": "as is (reading)",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Read for this inventory."
+  },
+  {
+   "name": "06 Cookbook - start here",
+   "kind": "cookbook",
+   "what_it_does": "Front page: words, which guide for what, results table.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Still says 05 not written; it is now."
+  },
+  {
+   "name": "06 Guide - baking and checking maps",
+   "kind": "cookbook",
+   "what_it_does": "Getting maps out of Blender, score meanings, 17 blind spots.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Read before trusting numbers."
+  },
+  {
+   "name": "06 Guide - descriptions",
+   "kind": "cookbook",
+   "what_it_does": "Fit-and-trace method, ladders, tracing vs procedural.",
+   "brick": "as is, only 'measure first' and 'ladder' parts",
+   "wood": "as is, the same",
+   "metal": "as is, the same",
+   "mud": "as is, the same",
+   "gravel": "as is, the same",
+   "evidence": "Trials do not fit descriptions."
+  },
+  {
+   "name": "06 Guide - geometry nodes, curves, modifiers and physics",
+   "kind": "cookbook",
+   "what_it_does": "Real geometry photographed from above.",
+   "brick": "not useful",
+   "wood": "not useful",
+   "metal": "not useful",
+   "mud": "not useful",
+   "gravel": "not useful",
+   "evidence": "Layered route is shader nodes."
+  },
+  {
+   "name": "06 Guide - pattern makers",
+   "kind": "cookbook",
+   "what_it_does": "Noise, Voronoi, Wave etc.: what each makes, settings, traps.",
+   "brick": "as is (GRIME)",
+   "wood": "as is (CRACKS)",
+   "metal": "as is (RIVETS)",
+   "mud": "as is (RUTS)",
+   "gravel": "as is (GRIME)",
+   "evidence": "Reading."
+  },
+  {
+   "name": "06 Guide - relief",
+   "kind": "cookbook",
+   "what_it_does": "How height and normal come from colour; real relief vs colour-made height.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Decides tone_blend."
+  },
+  {
+   "name": "06 Guide - seamless tiles and coordinates",
+   "kind": "cookbook",
+   "what_it_does": "Donut trick, whole-number layouts, half-tile test.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Every new layer/layout must follow it."
+  },
+  {
+   "name": "06 Guide - shapers",
+   "kind": "cookbook",
+   "what_it_does": "Map Range, Color Ramp, Math, Mix for flat painted steps.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Reading."
+  },
+  {
+   "name": "06 Guide - the painted look",
+   "kind": "cookbook",
+   "what_it_does": "Flat patches, palettes, outline widths, ragged edges, grain.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Reading."
+  },
+  {
+   "name": "06 How to start a new surface - checklist",
+   "kind": "cookbook",
+   "what_it_does": "Six Lessons merged into one ordered checklist.",
+   "brick": "as is, sections 0 and A only",
+   "wood": "as is, the same",
+   "metal": "as is, the same",
+   "mud": "as is, the same",
+   "gravel": "as is, the same",
+   "evidence": "Mentions the layered bundle once; B-G are the painter route."
+  },
+  {
+   "name": "06 Check - what was checked and fixed",
+   "kind": "cookbook",
+   "what_it_does": "Independent check of the cookbook.",
+   "brick": "as is",
+   "wood": "as is",
+   "metal": "as is",
+   "mud": "as is",
+   "gravel": "as is",
+   "evidence": "Reading."
+  }
+ ],
+ "surfaces": [
+  {
+   "surface": "brick",
+   "features": [
+    "12 courses of about 4 bricks (pitch 313.5 dots, spread 59; course pitch 101.9) -> LAYOUT (slate LAYOUT by settings, or quick layout with 4 columns)",
+    "wide pale mortar 22.1% (joints 20.4, bed 18.6 dots) with dirt -> OUTLINE gap colour + GRIME gap mottle (new)",
+    "big flat red/orange patches per brick, some pale/dark bricks -> COLOUR AND FADE with fade_direction 0, fade_length = streak_width, tallness 1",
+    "soot clouds running down over bricks AND mortar -> GRIME clouds (new; MOSS/DAMAGE stop at piece_mask)",
+    "pale spalls at edges and corners -> DAMAGE flakes, corner breaks",
+    "ring: thin dark line top/left, shadow bottom/right -> OUTLINE side outline + lip used as dark lower rim (right-hand shadow missing)",
+    "moss: none seen -> MOSS off or retinted",
+    "height = brightness (mortar high), normal strength 6 -> COMBINE tone_blend 0.7-1"
+   ],
+   "plan": "Start from recipes/slate_layers/reuse/brick_layers_recipe.py and settings_round_2 b1, copied into reuse_trials/brick/. Layout A (try first): slate LAYOUT with rows_per_tile 12, slates_per_row 4, width_spread ~0.2, joint_width 0.016, row_gap 0.0148, row_gap_top_share 0.5, corner_radius 0.007, joint_lean 0 (out-of-range values are kept: checked). Layout B (fallback): the quick layout with 4 columns and mortar shares 0.065/0.18. Bundle: piece = brick; local_y 0 at the top; gap = mortar; base_height mortar low. Shared layers by settings: b1 palette plus the three tongue-removing settings (look check shows round flat patches); pale sandy DAMAGE; MOSS off; OUTLINE with mortar colour and a dark lower rim; tone_blend 0.7-1. One new layer: GRIME (seamless clouds stretched up-down, gap mottle; reads Vector, gap_mask, base_height; stacked last). Measure once: analysis/palette_k16.npy, element_stats.json, generator/sampler_model_brick.json, plus soot share and soot cloud size; never layout_clean.json. Tune with 768-dot colour views, then a 1254 full bake in the background, three seed sets, half-tile and independence tests (copied, RECIPE line changed). Import from the snapshot with sys.dont_write_bytecode = True.",
+   "baseline": "Brick S (7.8 KB) is fitted, not rules (same-kind 0.365). The fair baseline is the sampler's new tiles (9.5 KB rules + stats): same-kind 0.708 mean (0.684-0.730). First new tile recipes/brick/variations/tile_11/colour.png re-scored today: overall 0.725, colour 0.750, height 0.704, normal 0.566. Earlier layered brick: 0.194 overall, colour 0.152 at 1254 dots (round 2's 0.19 was from enlarged 768-dot bakes, not like for like). Compare the overall score and the colour group at 1254 dots with texture_compare brick."
+  },
+  {
+   "surface": "wood",
+   "features": [
+    "five horizontal boards (281, 239, 270, 178, 286 dots), full width -> slate LAYOUT 5 rows x 1 + 10-node turn",
+    "dark wavy gaps 6.8 dots with pebbles -> OUTLINE dark gaps (pebbles left out)",
+    "long strips along grain (24-96 dots), zones ~120x25 -> COLOUR AND FADE on turned bundle (proved by eye)",
+    "fine dry-brush streaks -> COLOUR AND FADE specks; GRAIN layer borrowing Wood Grain Gain only if needed",
+    "long dark cracks along grain (6.4% very dark, median 47 dots, 2.9 wide) -> new CRACKS layer (DAMAGE cracks start only at piece edges)",
+    "4 knots with rings (30-64 dots half-size) -> optional KNOTS layer",
+    "rust splatter 513 blobs in 70 clouds -> MOSS lichen discs in rust browns (appear, too few)",
+    "chipped long edges -> DAMAGE flakes, side_share high",
+    "height = stretch of brightness 12..128, normal 8 -> tone_blend high"
+   ],
+   "plan": "Copy the look check's board recipe (reuse_trials/inventory_checks/look_check_recipe.py) into reuse_trials/wood/. Layout: slate LAYOUT with rows_per_tile 5, slates_per_row 1 (not tried; fall back to the look check's board layout, which works), row_gap 0.0054, row_height_jitter ~0.25, a small butt joint. Then the turn in the recipe: swap local_x/local_y and piece_width/piece_height, and set top_edge_distance = old local_x x old piece_width. Every board needs at least one end per tile, because a piece spanning the tile would show a seam; the reference has no butt joints. Shared layers by settings: palette from wood palette16/S1; fade_direction 0; streak_width ~0.012 across, fade_length ~0.03 and tallness ~2 along; moss coverage 0 with lichen as rust clouds (more, bigger colonies); DAMAGE chips only; OUTLINE dark gaps with no shadow or lip; tone_blend high. New layer truly needed: CRACKS (start anywhere, run along the grain, taper). KNOTS and GRAIN only if missed. Measure once: palette16.json, paint_model.json, wood_measurements.json; never cracks_fitted.json or S1's crack/knot lists. Then a 1254 full bake, three seed sets, tests.",
+   "baseline": "Wood S1 (6.2 KB; invented paint, but its 5 gaps, 20 cracks, 25 splatter clouds and 4 knots are from the reference): same-kind 0.635. Sampler new tiles: 0.626 mean (0.607-0.665), optimistic because the sampler was tuned on that score. First new tile recipes/wood/variations/sample_101/colour.png re-scored today: overall 0.619, colour 0.622, height 0.575, normal 0.533."
+  },
+  {
+   "surface": "metal",
+   "features": [
+    "bare steel, five blue-greys (63%) -> COLOUR AND FADE",
+    "2 upright straps (~136 dots), 2 lying (100-163), 2 diagonal braces -> new METAL LAYOUT (braces in round 2)",
+    "dark creases along bar edges, plate seams -> layout gaps + OUTLINE",
+    "edge drawing: bright line upper/left, long soft shadow lower/right -> OUTLINE shadow under upper edge for lying bars; EDGE LIGHT new if needed",
+    "33 rivets r=19.5 dots, faceted domes, 170-290 dots apart -> new RIVETS layer",
+    "rust blooms 18% + 9% dusty/bare, 9x13-dot patches at edges/rivets, clumped by panel -> MOSS as rust",
+    "rust streaks down from rivets/edges -> MOSS drips (rivet halo optional, recorded as a meaning change)",
+    "chipped paint, pits, two long scratches -> DAMAGE as chipped paint",
+    "dark stains 10% -> COLOUR AND FADE damp patches (cross pieces) or GRIME",
+    "height steep curve of brightness, normal 5 -> tone_blend; metallic one number (per-dot needs a COMBINE change, not scored)"
+   ],
+   "plan": "New METAL LAYOUT (~100-150 nodes). Pieces are bar segments and plate panels; upright bars are cut where they pass under lying bars, so no piece spans the tile. Strap count is a build setting; positions are evenly spread with seeded jitter. gap_mask = creases (2-3 dots) and seams. base_height: bars 0.62, plate 0.45, creases low, so new layers can tell bar from plate. Shared layers by settings with new meanings: MOSS = rust (joint preference = bar edges, patch gate = clumped by panel, long thin drips, lichen = rust spots, damage_attract = rust in chips); DAMAGE = chipped paint in bare-steel colours plus pits and long scratches; COLOUR AND FADE steel tones with 1.45x tall patches; OUTLINE creases plus the shadow under lying bars, lip off. New layer truly needed: RIVETS (discs on the bar centre line at a spacing setting, 8 slices x 4 rings lit from the upper left, dome height; only where base_height says bar). EDGE LIGHT in round 2 if the bright upper-left edge is clearly missing. Measure once: palette_k8/k12.json, edge_profiles.json, description/sampler_model.json, wear shares and patch sizes in the 04 Recipe; never rivets_found.json. Then a 1254 full bake, three seed sets, tests.",
+   "baseline": "Metal S (6.3 KB; the reference's own layout + procedural wear): same-kind 0.523. Sampler new tiles: 0.569 mean (0.525-0.603). First new tile recipes/metal/variations/seed_1/colour.png re-scored today: overall 0.578, colour 0.540, height 0.608, normal 0.431."
+  },
+  {
+   "surface": "mud",
+   "features": [
+    "orange-brown earth 69% of tiny flat clods (median 39 dots, 1.9:1, along ruts) -> new CELL LAYOUT (pieces = clods, no gaps) + COLOUR AND FADE",
+    "34 wheel ruts ~20 dots wide, lit banks, grooves, wet streaks, 2-3 directions -> new RUTS layer",
+    "8 puddles 3,000-31,600 dots, two water tones, scalloped edges -> MOSS as water (unsure) or new PUDDLES",
+    "830 dark angular stones (median 83 dots), lit upper-left, clustered -> lichen discs (small) + new STONES with stone_tools.polygon_stones unchanged",
+    "crumbly fine edges -> DAMAGE dark rims on clod edges (unsure)",
+    "height = stretch 20..128, normal 9 -> tone_blend high"
+   ],
+   "plan": "No pieces in the picture. One piece per tile would restart its coordinates at the tile edge (a seam) and give one random number for everything, so the pieces are the clods. New CELL LAYOUT (~150-250 nodes): a jittered grid of points with wrapped indices; each dot takes its nearest point (3x3 search); cells stretched along the main rut direction; no gaps. Try two cell sizes (clod ~0.006 tile units, or ground patch ~0.04 with specks making the clods) and keep the better by eye. edge_distance = distance to the nearest cell border; base_height = gentle seamless relief with low basins for water. Shared layers: COLOUR AND FADE as earth (one tone per clod, specks, dry/wet areas); MOSS as water with its clump noise and edge rules off and the big patch gate and damp spots on, lichen as small stones; DAMAGE dark clod rims (unsure); OUTLINE off. New layers truly needed: RUTS (seamless wobbling bands in 2-3 directions with dark band, lit bank, groove, wet streaks, sunk height; hp_tools warp) and STONES (polygon_stones unchanged). PUDDLES only if MOSS-as-water shows the clod mosaic. Stack: colour_and_fade, ruts, moss, stones, damage. Measure once: palette_k16.json, non-earth share 31%, fitted_distributions_mud.json and sampler_stats_mud.json summaries; never ruts_main_mud.json or element files. Score against all other references as a control; judge by eye.",
+   "baseline": "Mud S (7.4 KB rules): same-kind 0.267. Sampler new tiles: 0.383 mean (0.353-0.416), but from 112-118 KB descriptions (not small), and the score does not separate them from other surfaces (0.25-0.38 against other references). First new tile recipes/mud/variations/tile_101/colour.png re-scored today: overall 0.407, colour 0.313, height 0.488, normal 0.247."
+  },
+  {
+   "surface": "gravel",
+   "features": [
+    "touching stones 67.8%, five sizes (half the picture >=16-dot radius, a third >=32) -> new STONE LAYOUT (copy of polygon_stones with coordinates, 2-3 sizes, big wins)",
+    "8 stone colours near-black to pale blue-grey, big bluer, small browner -> COLOUR AND FADE per-stone tone and tints",
+    "light from the top (lightness falls 0.061/dot down a stone) -> fade_direction -1",
+    "orange-brown crumbly soil 32% -> OUTLINE gap colour = soil base + GRIME gap mottle (new)",
+    "soil shadow next to stones (31.4 -> 24.6 over 8 dots), no dark outline on stones -> GRIME low-spot darkening from base_height",
+    "facets, rim, flakes, rust spots -> DAMAGE flakes and pits, OUTLINE thin rim, FACETS only if needed",
+    "height fitted R/B mix, normal 10 -> tone_blend"
+   ],
+   "plan": "New STONE LAYOUT: a copy of lib/contrib/stone_tools.polygon_stones in reuse_trials/gravel/ that also returns each stone's centre offset and radius. Two or three grid sizes (e.g. 12, 30, 70 cells); the biggest stone wins. piece = stone; local_x/local_y = offset/(2 radius)+0.5; piece_width/height = 2 radius in tile units; edge_distance = minus the inside distance; gap = soil; base_height = stone dome, soil low next to a stone rising over ~8 dots (only within the stone's own cell). Shared layers by settings: COLOUR AND FADE stone palette with a large tone spread, blue-grey and brownish tints, fade_direction -1; DAMAGE pale flakes and pits as rust; OUTLINE gap colour = soil base, thin rim, no shadow or lip; MOSS off or a few rust spots. New: GRIME (shared with brick) for the soil mottle and the low-spot shadow; FACETS only if the stones look flat (same idea as RIVETS' slices). Measure once: scores/measurements.json, window_spread.json, description/S_v4.json class counts and radii; never stones_found.json. Risks: a grid look (the warp helps), stones limited to about half a cell, and the shadow only reaches the own cell's stone. Then a 1254 full bake, three seed sets, tests.",
+   "baseline": "Gravel S_v4 (2.3 KB rules): same-kind 0.362 as baked (0.435 smoothed-height view; quote as-baked). Sampler new tiles: 0.403 mean as baked (0.365-0.456). First new tile recipes/gravel/variations/out/sample_01/colour.png re-scored today: overall 0.372, colour 0.242, height 0.407, normal 0.415."
+  }
+ ],
+ "inventory_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/reuse_trials/00 Inventory - which tools fit which surface.md"
+}

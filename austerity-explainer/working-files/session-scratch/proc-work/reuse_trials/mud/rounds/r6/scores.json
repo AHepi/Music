@@ -1,0 +1,268 @@
+{
+ "table": {
+  "try_s1": {
+   "overall": 0.413,
+   "colour": 0.398,
+   "height": 0.407,
+   "normal": 0.18,
+   "tiling": 1.0
+  },
+  "baseline tile_101, normal remade at strength 9": {
+   "overall": 0.391,
+   "colour": 0.313,
+   "height": 0.488,
+   "normal": 0.139,
+   "tiling": 1.0
+  },
+  "baseline tile_101, as stored": {
+   "overall": 0.407,
+   "colour": 0.313,
+   "height": 0.488,
+   "normal": 0.247,
+   "tiling": 1.0
+  }
+ },
+ "control_overall_against_other_references": {
+  "try_s1": {
+   "brick": 0.329,
+   "slate": 0.27,
+   "wood": 0.233,
+   "metal": 0.261,
+   "gravel": 0.338
+  },
+  "baseline tile_101, normal remade at strength 9": {
+   "brick": 0.325,
+   "slate": 0.369,
+   "wood": 0.25,
+   "metal": 0.334,
+   "gravel": 0.337
+  }
+ },
+ "full_reports": {
+  "try_s1": {
+   "reference": "mud",
+   "candidate": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/reuse_trials/mud/rounds/r6/try_s1",
+   "overall": 0.413,
+   "groups": {
+    "colour": 0.398,
+    "height": 0.407,
+    "normal": 0.18,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.819,
+    "colour_spectrum": 0.0,
+    "colour_orientation": 0.225,
+    "colour_scale": 0.474,
+    "colour_gradient": 0.102,
+    "seam": 1.0,
+    "height_distribution": 0.425,
+    "height_spectrum": 0.259,
+    "height_gradient": 0.103,
+    "height_colour_link": 0.805,
+    "height_contrast": 0.912,
+    "normal_tilt": 0.0,
+    "normal_components": 0.539,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0103,
+    "colour_spectrum": 0.1929,
+    "colour_orientation": 0.2307,
+    "colour_scale": 0.2106,
+    "colour_gradient": 0.0067,
+    "seam": 0.0,
+    "height_distribution": 0.0575,
+    "height_spectrum": 0.2223,
+    "height_gradient": 0.0135,
+    "height_colour_link": 0.0098,
+    "height_contrast": 0.0442,
+    "normal_tilt": 0.0851,
+    "normal_components": 0.0977,
+    "normal_height_agreement": 0.0701
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.89,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     8.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     30.6,
+     8.3,
+     10.5
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.997,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.8872488702732958,
+     0.8819652109468359
+    ]
+   }
+  },
+  "baseline tile_101, normal remade at strength 9": {
+   "reference": "mud",
+   "candidate": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/reuse_trials/mud/baseline_tile_101",
+   "overall": 0.391,
+   "groups": {
+    "colour": 0.313,
+    "height": 0.488,
+    "normal": 0.139,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.751,
+    "colour_spectrum": 0.0,
+    "colour_orientation": 0.063,
+    "colour_scale": 0.327,
+    "colour_gradient": 0.0,
+    "seam": 1.0,
+    "height_distribution": 0.783,
+    "height_spectrum": 0.255,
+    "height_gradient": 0.1,
+    "height_colour_link": 0.82,
+    "height_contrast": 0.802,
+    "normal_tilt": 0.0,
+    "normal_components": 0.417,
+    "normal_height_agreement": 0.0
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0142,
+    "colour_spectrum": 0.2302,
+    "colour_orientation": 0.279,
+    "colour_scale": 0.2695,
+    "colour_gradient": 0.009,
+    "seam": 0.0,
+    "height_distribution": 0.0217,
+    "height_spectrum": 0.2234,
+    "height_gradient": 0.0135,
+    "height_colour_link": 0.009,
+    "height_contrast": 0.0992,
+    "normal_tilt": 0.0979,
+    "normal_components": 0.1237,
+    "normal_height_agreement": 0.0231
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.86,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     9.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     29.4,
+     8.8,
+     10.2
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.996,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.9348720730248065,
+     0.9284059659487962
+    ]
+   }
+  },
+  "baseline tile_101, as stored": {
+   "reference": "mud",
+   "candidate": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/variations/tile_101",
+   "overall": 0.407,
+   "groups": {
+    "colour": 0.313,
+    "height": 0.488,
+    "normal": 0.247,
+    "tiling": 1.0
+   },
+   "scores": {
+    "colour_distribution": 0.751,
+    "colour_spectrum": 0.0,
+    "colour_orientation": 0.063,
+    "colour_scale": 0.327,
+    "colour_gradient": 0.0,
+    "seam": 1.0,
+    "height_distribution": 0.783,
+    "height_spectrum": 0.255,
+    "height_gradient": 0.1,
+    "height_colour_link": 0.82,
+    "height_contrast": 0.802,
+    "normal_tilt": 0.0,
+    "normal_components": 0.47,
+    "normal_height_agreement": 0.544
+   },
+   "raw_distances": {
+    "colour_distribution": 0.0142,
+    "colour_spectrum": 0.2302,
+    "colour_orientation": 0.279,
+    "colour_scale": 0.2695,
+    "colour_gradient": 0.009,
+    "seam": 0.0,
+    "height_distribution": 0.0217,
+    "height_spectrum": 0.2234,
+    "height_gradient": 0.0135,
+    "height_colour_link": 0.009,
+    "height_contrast": 0.0992,
+    "normal_tilt": 0.0966,
+    "normal_components": 0.1125,
+    "normal_height_agreement": 0.0058
+   },
+   "facts": {
+    "seam_ratio_candidate": 0.86,
+    "seam_ratio_reference": 2.3,
+    "correlation_length_px_reference": [
+     7.0,
+     6.0
+    ],
+    "correlation_length_px_candidate": [
+     8.0,
+     9.0
+    ],
+    "mean_lab_reference": [
+     31.3,
+     8.6,
+     10.9
+    ],
+    "mean_lab_candidate": [
+     29.4,
+     8.8,
+     10.2
+    ],
+    "height_colour_corr_reference": 0.987,
+    "height_colour_corr_candidate": 0.996,
+    "normal_height_corr_reference": [
+     -0.9544975923824034,
+     0.9549594261799115
+    ],
+    "normal_height_corr_candidate": [
+     -0.9498664408307326,
+     0.9480727633034485
+    ]
+   }
+  }
+ }
+}

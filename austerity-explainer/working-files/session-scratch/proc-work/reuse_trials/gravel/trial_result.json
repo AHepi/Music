@@ -1,0 +1,78 @@
+{
+ "_what_this_is": "The short structured answer of the gravel reuse trial (layers used, new parts, node counts, scores, honest judgement, failures, what was not tested). The long version is 'notes - gravel reuse trial.md'.",
+ "surface": "gravel",
+ "layers_used": [
+  {
+   "layer": "layer interface (layer_interface.py)",
+   "how": "unchanged",
+   "why": "every box, shared and new, is built with it; SOIL and FACETS have exactly the same sockets as the shared layers"
+  },
+  {
+   "layer": "COLOUR AND FADE",
+   "how": "settings only",
+   "why": "stone colours (8 measured stone colours dark to light plus a rust-orange 9th), a dark per-stone base tone, flat patches and specks inside each stone, lean to blue-grey; rust stones through the top palette colour, outlier stones and the warm tint"
+  },
+  {
+   "layer": "DAMAGE",
+   "how": "settings only",
+   "why": "small dark and grey-blue chips and pits on stone edges; paints about 6 percent of the dots and adds 0.009 to the score"
+  },
+  {
+   "layer": "OUTLINE AND SHADOW",
+   "how": "settings only, used as 'paint the soil flat'",
+   "why": "its joint colour is the soil's flat base colour in every gap; outline, shadow, lip, drips and spill set to 0 because the reference stones have no dark outline"
+  },
+  {
+   "layer": "COMBINE",
+   "how": "settings only",
+   "why": "stacks colour_and_fade, facets, damage, outline_and_shadow, soil (one input set per name in recipe.stack_order); its own height rule gives 0.643 against 0.658 with the new height box"
+  },
+  {
+   "layer": "MOSS",
+   "how": "tried as rust (settings only), then taken out of the stack",
+   "why": "four tries gave only a few orange flecks and no rusty stones; not worth 419 nodes"
+  },
+  {
+   "layer": "LAYOUT (slate)",
+   "how": "not used",
+   "why": "makes rows of slates, cannot make a heap of stones (by reading; not baked)"
+  }
+ ],
+ "new_parts": [
+  "GRAVEL LAYOUT (gravel_layout.py, 564 nodes): the eleven-number bundle for a heap of angular stones with soil between; three grids of stones (big, middle, small) each turned by its own whole-number step so they do not line up and the tile still repeats, ragged edges, soil dip beside every stone; mostly a copy of lib/contrib/stone_tools.polygon_stones",
+  "SOIL (soil.py, 170 nodes): new paint layer, same sockets; flat soil lumps, tiny crumbs and a two-step shadow read from the layout's base_height; adds about 0.33 to the score",
+  "FACETS (facets.py, 109 nodes): new paint layer, same sockets; random straight cut lines across every stone painted lighter or darker by which way the face looks; adds about 0.12 to the score",
+  "GRAVEL HEIGHT RULE (gravel_height_rule.py, 12 nodes): box after COMBINE making height from the finished colour with the gravel reference's colour mix; a gain of only 0.015 over COMBINE's own rule, so optional"
+ ],
+ "node_counts": "1,976 nodes in all: shared and unchanged 1,111 (COLOUR AND FADE 419, DAMAGE 439, OUTLINE AND SHADOW 216, COMBINE 22, seamless-noise helper 15) = 56 percent; new 855 (GRAVEL LAYOUT 564, SOIL 170, FACETS 109, height rule 12); recipe wiring 10. Without the layout 79 percent would be shared. Lines of code (no comments): reused unchanged 749 (MOSS 189 more, tried and out of the stack), new boxes 295, recipe wiring 132, settings 33 lines (103 settings), tools and tests 638.",
+ "scores": "1254-dot bakes, normal from make_normal.py at strength 10, lib/texture_compare.py gravel. Layered gravel, three seed sets: same-kind 0.658 / 0.618 / 0.589, mean 0.622; colour group 0.721 / 0.655 / 0.630, mean 0.669; height group 0.567 / 0.543 / 0.495, mean 0.535; normal group 0.469 / 0.462 / 0.441, mean 0.457; tiling 1.00. Seed set 1 with COMBINE's own height rule: 0.643 (height 0.446, normal 0.612). The gravel's earlier small recipe, scored the same way: new tile 1 = 0.380 (colour 0.242, height 0.407, normal 0.470); mean of its eight new tiles 0.412 (colour 0.274, height 0.455, normal 0.481), range 0.375 to 0.466. Ladder (seed set 1): COLOUR AND FADE only 0.199; + OUTLINE AND SHADOW 0.204; + DAMAGE 0.213; + FACETS 0.329; + SOIL (finished) 0.658. Half-tile shift test passes (finished colour mean difference 3.9 of 255, 0.13 percent of dots over 40; control 36 and 41 percent), 2 tiles across too; no seam in the 2 x 2 picture.",
+ "reads_as_surface": "yes",
+ "judgement": "Reads as gravel at a glance (dark angular stones in orange-brown crumbly soil, all three seed sets) and scores about 0.21 higher than the gravel's earlier small recipe on the same-kind score (0.622 against 0.412 on average). Up close and next to the reference it is clearly weaker: flat cut-paper stones with a few big faces, one-dot stair-step edges, granite-like mottled soil instead of round orange lumps, stones spread too evenly and not touching, dusty-pink rust stones, and a height that follows the colour (dark stones low, orange soil high) like the reference's maps but not a real relief. The honest answer to how much is reusable: no shared layer needed any change and COLOUR AND FADE, OUTLINE AND SHADOW, DAMAGE, COMBINE and the interface ran by settings alone, but those alone on a gravel layout only reach 0.21; the layout (564 nodes, the biggest part) and two small new layers (SOIL, FACETS) are what make it gravel, so 56 percent of the nodes are shared. The new height box is optional.",
+ "sheet": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/reuse_trials/gravel/sheet_gravel.jpg",
+ "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/reuse_trials/gravel/",
+ "failures": [
+  "Round 1: three upright grids made a plaid of straight soil lines; fixed by turning each grid by its own whole-number step",
+  "MOSS as rust tried four times (rounds 1, 2, 3, 5): only a few orange flecks; dropped from the stack",
+  "Round 4 straight-edged polygon stones scored 0.472; ragged edges and paint changes lifted it to 0.641",
+  "Round 7 went backwards (0.566): calmer crumbs, grain and big patches and darker soil cost height contrast and the normal tilt score (0.50 to 0.12); reverted in round 8",
+  "Round 9: removing the paint tongues (fade_direction 0) looked the same and scored 0.009 lower; kept round 8",
+  "The first final_scores.py counted the COMBINE-rule set among the three seed sets in the mean; found and fixed before reporting",
+  "640-dot views scored with the compare tool are not like for like; used for looking only, every reported score is from a 1254-dot bake",
+  "SOIL mask in the half-tile test differs on 9.7 percent of dots; checked and found spread over fine crumb edges, not a seam",
+  "Folder reached 66 MB; big tuning pictures deleted to stay under 80 MB"
+ ],
+ "untested": [
+  "Final seed sets 2 and 3 were never tuned on (0.04 to 0.07 lower than seed set 1)",
+  "The height blend (0.9) was swept on the round 6 picture, not on the final tile",
+  "Roughness and metallic were baked and looked at but compared with nothing (the reference has none)",
+  "The soil shadow (dip beside each stone) was not looked at separately; it only knows the stone of the dot's own grid square",
+  "The 2 x 2 area of new content (recipe.tiles_across 2) passed the half-tile test but was not looked at or scored",
+  "Other picture sizes (512, 2508) were not baked for scoring",
+  "The shared slate LAYOUT with gravel settings was not baked (believed unable to make stones)",
+  "MOSS and DAMAGE were tried with one meaning each only",
+  "The ladder was run in one order only, and the flat soil of its middle steps inflates the SOIL step",
+  "The normal map was not tried in a 3D render",
+  "The plain bake harness path was not run (the trial's own final_bake.py was)",
+  "The LATER test (realistic moss and damage over the painted colour) was not started"
+ ]
+}
