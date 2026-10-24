@@ -81,6 +81,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Opus's second pass done and judged (log 36):** working from the blind judges' words, Opus raised its village from 6.0 to 7.2 out of 10 in a
   fresh blind round (Sonnet alone 5.6, the plugin village 2.7), best in every view. Still too clean, thatch like scales, black puddles in the
   stable yard, sandy close-up.
+- **The three solo villages in 4K (log 37):** all three drawn at 3840 x 2560 from 11 views each (the five judged views plus six new ones), on
+  the rented cards in about 23 minutes of card time (about 41 US cents), and put side by side two at a time: 33 pictures, sent to you as a zip
+  and saved in `37 Three solo villages in 4K/`. Opus's second-pass scene is also on GitHub whole, in one file, for you to open.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -137,6 +140,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Partial copy (of the repository):** a copy that holds the list of files but downloads a file's contents only when it is needed; used here so
   the 8.7 GB save never had to sit on this computer's small disk. **Split file:** a scene over GitHub's 100 MB limit saved as numbered parts that
   join back into one file.
+- **4K:** a picture 3840 dots wide; here 3840 x 2560, about ten times as many dots as the 1200 x 800 pictures the judges saw. **Large-file
+  store (Git LFS):** GitHub's separate shelf for files over 100 MB; the repository keeps a small note pointing to the file, and GitHub hands
+  out the whole file when you download it. Used for Opus's second-pass scene so it could be saved in one piece.
 
 ## Log (added to, never rewritten)
 
@@ -601,6 +607,25 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     of the lens, checking water faces up). Pictures: `36 Village by Opus, second pass - pictures/` (start with the four-way sheet); report,
     feedback, scripts, logs and the judging in `village-without-plugin-opus/second-pass/`; both scenes, split into three parts each, under
     `austerity-explainer/working-files/session-scratch/village-control-opus/`.
+
+37. **The three solo villages in 4K, side by side (24 October).** You said: "Wow wtf. Do you have those images in high resolution? They're faded
+    and I can't see much detail"; I sent the 1200 x 800 originals. Then: "Yes can you draw the comparison of the three solo runs in 4k using the
+    graphics cards. And take more photos. Stich them two side by side at a time then return the zip folder inline." And while that ran: "push
+    the latest village project file to repo. The whole lot. I want to inspect it." **The scene in one piece:** Opus's second-pass scene
+    (251 MB) is over GitHub's 100 MB limit, so instead of parts I saved it whole in GitHub's large-file store and sent you the link
+    (`village-without-plugin-opus/second-pass/scene/`). **More photos:** helpers placed six new cameras in each layout, one after another on this
+    computer (a second cottage, props close, into the empty stalls, a puddle at ground level, the road into the forest, a low drone view), and
+    checked each at small size; Opus's two passes share one layout, so they share the same six cameras. Nothing else in the scenes changed.
+    **Drawing:** each village with its own light, brightness and samples from its own finals (Opus's second pass also with its own haze per view
+    and finer road relief for its two road views), at 3840 x 2560, with Cycles on rented RTX 4090 cards: 12 jobs, all finished first time,
+    about 1,370 seconds of card time in all (about 41 US cents at 0.03 US cents a second, plus a few cents for sending the three scenes); the
+    account has US$9.88 left. **Checks:** every picture's brightness against its village's own 1200 x 800 picture of the same view (within about
+    3 levels out of 255), one sheet of all 33 looked over for mistakes, a full-size crop of the road (puddle reflections, ruts and hoof prints
+    hold up close). **Stitched:** 33 pictures (11 views x 3 pairings: Sonnet vs Opus second pass, Opus first vs second pass, Sonnet vs Opus first
+    pass), each 7704 x 2680 with a label above each side, zipped with a read-me (146 MB) and sent. **Not done:** no new judging of the 4K
+    pictures; views 01 to 05 keep each village's own framing, so those pairs are not the same spot to the centimetre. **Plugin:** nothing new to
+    add from this step; it used the rented-card route and Blender settings the plugin already carries. Pictures, single 4K pictures, the scenes
+    with the new cameras (Opus's in three parts each) and every script: `37 Three solo villages in 4K/` (start with its "what is here" page).
 
 ## Next step
 
