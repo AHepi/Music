@@ -1,0 +1,135 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "astra.scatter/1"
+    },
+    "kind": {
+      "enum": [
+        "pebble",
+        "moss",
+        "tuft"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 20000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "x": {
+            "type": "number",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "y": {
+            "type": "number",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "z": {
+            "type": "number",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "scale": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "number",
+              "minimum": 1e-05,
+              "maximum": 10
+            }
+          },
+          "rot": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "number",
+              "minimum": -10000,
+              "maximum": 10000
+            }
+          },
+          "traffic": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "habitat": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "contact": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "scale",
+          "rot",
+          "traffic",
+          "habitat",
+          "contact"
+        ]
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Density": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "Traffic Width": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "Waterline": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "Damp Reach": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100
+        },
+        "Contact Influence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "Seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048576
+        }
+      },
+      "required": []
+    }
+  },
+  "required": [
+    "schema",
+    "kind",
+    "records",
+    "controls"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Astra native receiver-local scatter contract",
+  "description": "JSON supplies data only. Receiver and source bank are explicit Blender ID pointers supplied outside JSON. Runtime validates additional uniqueness, source geometry, collection, finite footprint and transform constraints."
+}

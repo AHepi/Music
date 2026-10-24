@@ -1,0 +1,162 @@
+{
+  "$id": "urn:astra-painted-workbench:config:1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "art_status": {
+      "enum": [
+        "neutral_identity",
+        "experimental",
+        "user_authored"
+      ]
+    },
+    "geometry": {
+      "additionalProperties": false,
+      "properties": {
+        "angle_degrees": {
+          "maximum": 179,
+          "minimum": 1,
+          "type": "number"
+        },
+        "bevel_width_m": {
+          "maximum": 0.1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "segments": {
+          "maximum": 4,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "bevel_width_m",
+        "segments",
+        "angle_degrees"
+      ],
+      "type": "object"
+    },
+    "lighting": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "exposure_delta": {
+          "maximum": 3,
+          "minimum": -3,
+          "type": "number"
+        },
+        "tint": {
+          "items": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "exposure_delta",
+        "tint"
+      ],
+      "type": "object"
+    },
+    "material": {
+      "additionalProperties": false,
+      "properties": {
+        "blend": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "family": {
+          "enum": [
+            "wood",
+            "plaster",
+            "stone",
+            "slate",
+            "painted_metal",
+            "fabric"
+          ]
+        },
+        "gloss": {
+          "maximum": 0.12,
+          "minimum": 0,
+          "type": "number"
+        },
+        "scale": {
+          "items": {
+            "maximum": 100,
+            "minimum": 0.01,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        "size": {
+          "maximum": 0.95,
+          "minimum": 0.05,
+          "type": "number"
+        },
+        "slot_scope": {
+          "enum": [
+            "ACTIVE",
+            "ALL"
+          ]
+        },
+        "smooth": {
+          "maximum": 1,
+          "minimum": 0.01,
+          "type": "number"
+        },
+        "tilt": {
+          "maximum": 0.08,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "enabled",
+        "family",
+        "slot_scope",
+        "blend",
+        "size",
+        "smooth",
+        "tilt",
+        "gloss",
+        "scale"
+      ],
+      "type": "object"
+    },
+    "preset_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "preset_id",
+    "art_status",
+    "material",
+    "geometry",
+    "lighting"
+  ],
+  "title": "Astra Painted Workbench settings (data only)",
+  "type": "object"
+}

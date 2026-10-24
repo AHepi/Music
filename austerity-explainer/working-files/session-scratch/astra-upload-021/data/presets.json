@@ -1,0 +1,517 @@
+{
+  "addon_version": "0.1.1",
+  "policy": "Only neutral identity is default. Loading settings never applies them. No look is claimed accepted.",
+  "presets": [
+    {
+      "config": {
+        "art_status": "neutral_identity",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.0,
+          "enabled": false,
+          "family": "wood",
+          "gloss": 0.0,
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.0
+        },
+        "preset_id": "neutral_identity",
+        "schema_version": "1.0.0"
+      },
+      "description": "Testable inert baseline; no edits until explicitly enabled and nonzero",
+      "id": "neutral_identity",
+      "label": "Neutral / no changes",
+      "provenance": {
+        "art_acceptance": "not_applicable",
+        "behavior_validation": "see packaged test report",
+        "origin": "new safe default"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.25,
+          "enabled": true,
+          "family": "wood",
+          "gloss": 0.005,
+          "scale": [
+            8,
+            8,
+            1.5
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.012
+        },
+        "preset_id": "response_wood_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Response-only study; does not author pigment or guarantee a finished painted look",
+      "id": "response_wood_study",
+      "label": "Wood response study (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report; no inherited art verdict",
+        "coordinate_contract": "mesh-local rest coordinates in metres at bind; static meshes only",
+        "origin": "bounded adaptation of shared schema-3 response mechanics",
+        "parameter_status": "new conservative study values, not an accepted production preset"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.25,
+          "enabled": true,
+          "family": "plaster",
+          "gloss": 0.005,
+          "scale": [
+            1.3,
+            1.3,
+            1.8
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.012
+        },
+        "preset_id": "response_plaster_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Response-only study; does not author pigment or guarantee a finished painted look",
+      "id": "response_plaster_study",
+      "label": "Plaster response study (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report; no inherited art verdict",
+        "coordinate_contract": "mesh-local rest coordinates in metres at bind; static meshes only",
+        "origin": "bounded adaptation of shared schema-3 response mechanics",
+        "parameter_status": "new conservative study values, not an accepted production preset"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.25,
+          "enabled": true,
+          "family": "stone",
+          "gloss": 0.005,
+          "scale": [
+            3.5,
+            3.5,
+            6
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.012
+        },
+        "preset_id": "response_stone_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Response-only study; does not author pigment or guarantee a finished painted look",
+      "id": "response_stone_study",
+      "label": "Stone response study (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report; no inherited art verdict",
+        "coordinate_contract": "mesh-local rest coordinates in metres at bind; static meshes only",
+        "origin": "bounded adaptation of shared schema-3 response mechanics",
+        "parameter_status": "new conservative study values, not an accepted production preset"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.25,
+          "enabled": true,
+          "family": "slate",
+          "gloss": 0.005,
+          "scale": [
+            3,
+            3,
+            5
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.012
+        },
+        "preset_id": "response_slate_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Response-only study; does not author pigment or guarantee a finished painted look",
+      "id": "response_slate_study",
+      "label": "Slate response study (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report; no inherited art verdict",
+        "coordinate_contract": "mesh-local rest coordinates in metres at bind; static meshes only",
+        "origin": "bounded adaptation of shared schema-3 response mechanics",
+        "parameter_status": "new conservative study values, not an accepted production preset"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.25,
+          "enabled": true,
+          "family": "painted_metal",
+          "gloss": 0.005,
+          "scale": [
+            2,
+            3,
+            6
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.012
+        },
+        "preset_id": "response_painted_metal_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Response-only study; does not author pigment or guarantee a finished painted look",
+      "id": "response_painted_metal_study",
+      "label": "Painted Metal response study (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report; no inherited art verdict",
+        "coordinate_contract": "mesh-local rest coordinates in metres at bind; static meshes only",
+        "origin": "bounded adaptation of shared schema-3 response mechanics",
+        "parameter_status": "new conservative study values, not an accepted production preset"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.25,
+          "enabled": true,
+          "family": "fabric",
+          "gloss": 0.005,
+          "scale": [
+            5,
+            5,
+            1.8
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.012
+        },
+        "preset_id": "response_fabric_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Response-only study; does not author pigment or guarantee a finished painted look",
+      "id": "response_fabric_study",
+      "label": "Fabric response study (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report; no inherited art verdict",
+        "coordinate_contract": "mesh-local rest coordinates in metres at bind; static meshes only",
+        "origin": "bounded adaptation of shared schema-3 response mechanics",
+        "parameter_status": "new conservative study values, not an accepted production preset"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": true,
+          "exposure_delta": 0,
+          "tint": [
+            0.65,
+            0.8,
+            1
+          ]
+        },
+        "material": {
+          "blend": 0.0,
+          "enabled": false,
+          "family": "wood",
+          "gloss": 0.0,
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.0
+        },
+        "preset_id": "cool_light_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Selected lights only; no world, atmosphere, camera, color management or environment match",
+      "id": "cool_light_study",
+      "label": "Cool selected lights (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report",
+        "origin": "new isolated illumination study",
+        "parameter_status": "proposed values for fixed-camera A/B"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": true,
+          "exposure_delta": 0,
+          "tint": [
+            1,
+            0.82,
+            0.63
+          ]
+        },
+        "material": {
+          "blend": 0.0,
+          "enabled": false,
+          "family": "wood",
+          "gloss": 0.0,
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.0
+        },
+        "preset_id": "warm_light_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Selected lights only; no world, atmosphere, camera, color management or environment match",
+      "id": "warm_light_study",
+      "label": "Warm selected lights (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report",
+        "origin": "new isolated illumination study",
+        "parameter_status": "proposed values for fixed-camera A/B"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.0,
+          "enabled": false,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": true,
+          "exposure_delta": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ]
+        },
+        "material": {
+          "blend": 0.0,
+          "enabled": false,
+          "family": "wood",
+          "gloss": 0.0,
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.0
+        },
+        "preset_id": "light_plus_one_stop",
+        "schema_version": "1.0.0"
+      },
+      "description": "Selected lights only; no world, atmosphere, camera, color management or environment match",
+      "id": "light_plus_one_stop",
+      "label": "Selected lights +1 stop (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "see packaged test report",
+        "origin": "new isolated illumination study",
+        "parameter_status": "proposed values for fixed-camera A/B"
+      }
+    },
+    {
+      "config": {
+        "art_status": "experimental",
+        "geometry": {
+          "angle_degrees": 45.0,
+          "bevel_width_m": 0.002,
+          "enabled": true,
+          "segments": 1
+        },
+        "lighting": {
+          "enabled": false,
+          "exposure_delta": 0.0,
+          "tint": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "material": {
+          "blend": 0.0,
+          "enabled": false,
+          "family": "wood",
+          "gloss": 0.0,
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "size": 0.64,
+          "slot_scope": "ACTIVE",
+          "smooth": 0.2,
+          "tilt": 0.0
+        },
+        "preset_id": "bevel_2mm_study",
+        "schema_version": "1.0.0"
+      },
+      "description": "Unapplied angle-limited modifier; review actual silhouette/contact changes",
+      "id": "bevel_2mm_study",
+      "label": "2 mm edge bevel (experimental)",
+      "provenance": {
+        "art_acceptance": "not_accepted",
+        "behavior_validation": "fixture only; not universal contact preservation",
+        "origin": "bounded standard Blender bevel control"
+      }
+    }
+  ],
+  "schema_version": "1.0.0"
+}

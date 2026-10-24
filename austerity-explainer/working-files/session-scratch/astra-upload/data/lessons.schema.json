@@ -1,0 +1,307 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "addon_version": {
+      "const": "0.1.9"
+    },
+    "evidence_cutoff_utc": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution": {
+      "const": "none; data-only guidance, never scene mutation or authorization"
+    },
+    "source_paths_are_provenance_only": {
+      "const": true
+    },
+    "api_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": "^https://(docs|developer)\\.blender\\.org/"
+          },
+          "checked_utc": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "url",
+          "checked_utc",
+          "scope"
+        ]
+      },
+      "minItems": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "kind": {
+            "enum": [
+              "independent_art_review",
+              "independent_technical_review",
+              "builder_controlled_study",
+              "measured_negative_result",
+              "frozen_study_manifest",
+              "experimental_source_manifest",
+              "measured_geometry_result",
+              "independent_addon_review",
+              "user_feedback"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_bundle_path": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "source_path",
+          "sha256",
+          "kind",
+          "scope",
+          "summary",
+          "source_bundle_path"
+        ]
+      },
+      "minItems": 1
+    },
+    "lessons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "applies_to": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "pigment",
+                "response",
+                "lighting",
+                "atmosphere",
+                "composition",
+                "geometry",
+                "evidence"
+              ]
+            },
+            "minItems": 1
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "validation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "status": {
+                "enum": [
+                  "independently_reviewed_scope",
+                  "controlled_scene_observation",
+                  "measured_local_geometry",
+                  "measured_negative_result",
+                  "user_directed_design_constraint"
+                ]
+              },
+              "scope": {
+                "type": "string",
+                "minLength": 1
+              },
+              "runtime": {
+                "type": "string",
+                "minLength": 1
+              },
+              "not_established": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "status",
+              "scope",
+              "runtime",
+              "not_established"
+            ]
+          },
+          "example_art_acceptance": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "status": {
+                "enum": [
+                  "mixed",
+                  "accepted_in_declared_scope",
+                  "not_applicable",
+                  "pending_independent_review",
+                  "experimental_unaccepted",
+                  "superseded_by_user_feedback"
+                ]
+              },
+              "scope": {
+                "type": "string",
+                "minLength": 1
+              },
+              "review_evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "superseding_evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "status",
+              "scope",
+              "review_evidence_ids",
+              "superseding_evidence_ids"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "coordinate_contract": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "owner": {
+                "type": "string",
+                "minLength": 1
+              },
+              "space": {
+                "type": "string",
+                "minLength": 1
+              },
+              "transform_policy": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "owner",
+              "space",
+              "transform_policy"
+            ]
+          },
+          "unsupported_cases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "guidance": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "recipe_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "applies_to",
+          "claim",
+          "validation",
+          "example_art_acceptance",
+          "evidence_ids",
+          "coordinate_contract",
+          "unsupported_cases",
+          "guidance",
+          "recipe_ids"
+        ]
+      },
+      "minItems": 1
+    },
+    "acceptance_authority": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "addon_version",
+    "evidence_cutoff_utc",
+    "execution",
+    "source_paths_are_provenance_only",
+    "api_sources",
+    "evidence",
+    "lessons",
+    "acceptance_authority"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:astra-painted-workbench:lessons:1.0.0",
+  "title": "Scoped lesson evidence; no executable defaults or automatic acceptance"
+}

@@ -1,0 +1,447 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "seed",
+    "detail_scale",
+    "relief",
+    "paths",
+    "protected",
+    "water",
+    "contacts",
+    "shelter",
+    "pebbles",
+    "moss"
+  ],
+  "properties": {
+    "schema": {
+      "const": "astra.landscape/1"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1048576
+    },
+    "detail_scale": {
+      "type": "number",
+      "minimum": 0.25,
+      "maximum": 3
+    },
+    "relief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "height",
+        "banks"
+      ],
+      "properties": {
+        "height": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.5
+        },
+        "banks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "center",
+              "radius",
+              "weight"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "center": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": -10000,
+                  "maximum": 10000
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "radius": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0.05,
+                  "maximum": 100
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "maxItems": 64
+        }
+      }
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "points",
+          "width",
+          "feather"
+        ],
+        "properties": {
+          "points": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -10000,
+                "maximum": 10000
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "maxItems": 128,
+            "minItems": 2
+          },
+          "width": {
+            "type": "number",
+            "minimum": 0.05,
+            "maximum": 20
+          },
+          "feather": {
+            "type": "number",
+            "minimum": 0.01,
+            "maximum": 10
+          }
+        }
+      },
+      "maxItems": 32
+    },
+    "protected": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "min",
+          "max",
+          "feather"
+        ],
+        "properties": {
+          "min": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -10000,
+              "maximum": 10000
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "max": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -10000,
+              "maximum": 10000
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "feather": {
+            "type": "number",
+            "minimum": 0.01,
+            "maximum": 10
+          }
+        }
+      },
+      "maxItems": 64
+    },
+    "water": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "shore_reach"
+      ],
+      "properties": {
+        "level": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "number",
+              "minimum": -10000,
+              "maximum": 10000
+            }
+          ]
+        },
+        "shore_reach": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 10
+        }
+      }
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "center",
+          "radius",
+          "weight"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "center": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -10000,
+              "maximum": 10000
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "radius": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 100
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "maxItems": 64
+    },
+    "shelter": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "center",
+          "radius",
+          "weight"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "center": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -10000,
+              "maximum": 10000
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "radius": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 100
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "maxItems": 64
+    },
+    "pebbles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "density",
+        "radius",
+        "patches"
+      ],
+      "properties": {
+        "density": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0.015,
+          "maximum": 0.25
+        },
+        "patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "center",
+              "radius",
+              "weight"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "center": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": -10000,
+                  "maximum": 10000
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "radius": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0.05,
+                  "maximum": 100
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "maxItems": 64
+        }
+      }
+    },
+    "moss": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "density",
+        "radius",
+        "body_height",
+        "contact_influence",
+        "shelter_influence",
+        "patches"
+      ],
+      "properties": {
+        "density": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0.03,
+          "maximum": 0.4
+        },
+        "body_height": {
+          "type": "number",
+          "minimum": 0.012,
+          "maximum": 0.15
+        },
+        "contact_influence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "shelter_influence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "center",
+              "radius",
+              "weight"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "center": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": -10000,
+                  "maximum": 10000
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "radius": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0.05,
+                  "maximum": 100
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "maxItems": 64
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Astra transferable landscape schema 1",
+  "description": "Source-local metres. Runtime additionally enforces globally unique zone IDs, noncoincident consecutive path points, protected min<max and <=12000 candidates. JSON is never code."
+}

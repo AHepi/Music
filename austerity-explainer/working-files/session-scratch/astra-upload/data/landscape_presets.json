@@ -1,0 +1,162 @@
+{
+  "version": "0.2.0",
+  "presets": [
+    {
+      "id": "workshop_garden_mechanism_study",
+      "status": "mechanically_tested_art_review_pending",
+      "scope": "Fresh open height-field receiver; zones must be adapted to the actual support/layout",
+      "spec": {
+        "schema": "astra.landscape/1",
+        "seed": 811,
+        "detail_scale": 1.0,
+        "relief": {
+          "height": 0.35,
+          "banks": [
+            {
+              "id": "bank-west",
+              "center": [
+                -2.24,
+                0.0
+              ],
+              "radius": [
+                1.76,
+                2.0999999999999996
+              ],
+              "weight": 1
+            },
+            {
+              "id": "bank-east",
+              "center": [
+                2.56,
+                1.2000000000000002
+              ],
+              "radius": [
+                1.44,
+                1.5
+              ],
+              "weight": 0.65
+            }
+          ]
+        },
+        "paths": [
+          {
+            "points": [
+              [
+                0.0,
+                -3
+              ],
+              [
+                0.0,
+                3
+              ]
+            ],
+            "width": 1.25,
+            "feather": 0.45
+          }
+        ],
+        "protected": [],
+        "water": {
+          "level": null,
+          "shore_reach": 0.5
+        },
+        "contacts": [
+          {
+            "id": "contact-west",
+            "center": [
+              -2.4,
+              0.0
+            ],
+            "radius": [
+              1.6,
+              2.4000000000000004
+            ],
+            "weight": 0.75
+          }
+        ],
+        "shelter": [
+          {
+            "id": "shelter-west",
+            "center": [
+              -2.16,
+              0.0
+            ],
+            "radius": [
+              2.0,
+              2.7
+            ],
+            "weight": 0.8
+          }
+        ],
+        "pebbles": {
+          "density": 20.0,
+          "radius": 0.065,
+          "patches": [
+            {
+              "id": "gravel-west",
+              "center": [
+                -2.0,
+                -0.8999999999999999
+              ],
+              "radius": [
+                1.36,
+                1.6800000000000002
+              ],
+              "weight": 1
+            },
+            {
+              "id": "gravel-east",
+              "center": [
+                2.24,
+                1.2000000000000002
+              ],
+              "radius": [
+                1.36,
+                1.2000000000000002
+              ],
+              "weight": 0.7
+            }
+          ]
+        },
+        "moss": {
+          "density": 13.0,
+          "radius": 0.19,
+          "body_height": 0.055,
+          "contact_influence": 0.65,
+          "shelter_influence": 0.7,
+          "patches": [
+            {
+              "id": "moss-west",
+              "center": [
+                -2.4,
+                0.6000000000000001
+              ],
+              "radius": [
+                1.52,
+                1.7999999999999998
+              ],
+              "weight": 0.95
+            },
+            {
+              "id": "moss-east",
+              "center": [
+                2.6399999999999997,
+                1.6800000000000002
+              ],
+              "radius": [
+                1.04,
+                1.26
+              ],
+              "weight": 0.6
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "excluded_defaults": [
+    "rejected sky prototype",
+    "rejected Toon ramp",
+    "rejected palette pilot",
+    "rejected moss visibility pilot"
+  ]
+}

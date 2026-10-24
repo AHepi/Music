@@ -1,0 +1,354 @@
+{
+  "authority": "Original supplied references and explicit user brief",
+  "checks": [
+    {
+      "id": "light_masses",
+      "label": "Large light/dark masses",
+      "question": "At thumbnail scale compare focal light, background value groups and the amount of black. Bright pixels alone are insufficient.",
+      "result_options": [
+        "not_inspected",
+        "open_issue",
+        "accepted_in_declared_scope",
+        "not_applicable"
+      ]
+    },
+    {
+      "id": "palette",
+      "label": "Warm/cool balance and shadow color",
+      "question": "Compare lit and shadow families, colored fill and broad warm/cool integration, not just a sky or lamp color.",
+      "result_options": [
+        "not_inspected",
+        "open_issue",
+        "accepted_in_declared_scope",
+        "not_applicable"
+      ]
+    },
+    {
+      "id": "depth",
+      "label": "Atmospheric depth and edge loss",
+      "question": "Compare foreground/midground/background contrast, haze color, silhouettes and selective edge softness. Blur is not equivalent to atmosphere.",
+      "result_options": [
+        "not_inspected",
+        "open_issue",
+        "accepted_in_declared_scope",
+        "not_applicable"
+      ],
+      "subchecks": [
+        "Illumination-only versus density-only causal studies",
+        "Density units, domain extent/path length and preserved dark recesses",
+        "Physical scattering versus explicitly artistic world-space depth palette"
+      ]
+    },
+    {
+      "id": "material",
+      "label": "Material-specific painted structure",
+      "question": "At hero and native near scales, inspect broad directional marks, sparse accents, form-following wear and material identity. Inspect shape, edge loss, physical scale and repetition even for authored image masks; avoid wood-like cloth bands, closed polygon stamps and uniform noise.",
+      "result_options": [
+        "not_inspected",
+        "open_issue",
+        "accepted_in_declared_scope",
+        "not_applicable"
+      ]
+    },
+    {
+      "id": "coherence",
+      "label": "People and setting coherence",
+      "question": "Compare scale, shape language, painted finish and lighting of figures with the setting. Do not alter accepted anatomy to conceal a shading mismatch.",
+      "result_options": [
+        "not_inspected",
+        "open_issue",
+        "accepted_in_declared_scope",
+        "not_applicable"
+      ]
+    },
+    {
+      "id": "geometry",
+      "label": "Grounding and usable construction",
+      "question": "Check real visible support, exposed joints, deck clearance and silhouettes. Separate intentional supports from exposed coplanar faces and route obstructions.",
+      "result_options": [
+        "not_inspected",
+        "open_issue",
+        "accepted_in_declared_scope",
+        "not_applicable"
+      ],
+      "subchecks": [
+        "Physical support versus verified pigment/volume envelopes",
+        "Rail/stile exposed faces versus overlapping parked/fixed sheets",
+        "Support, passage clearance and surface competition have separate scopes"
+      ]
+    },
+    {
+      "id": "evidence",
+      "label": "Causal and reproducible evidence",
+      "question": "Bind actual source/scene/image hashes, runtime camera/light fields, engine, samples, seed, view transform and changed modules. Inspect fixed-camera A/Bs before calling a fix accepted.",
+      "result_options": [
+        "not_inspected",
+        "open_issue",
+        "accepted_in_declared_scope",
+        "not_applicable"
+      ],
+      "subchecks": [
+        "Stored-state check versus observed rendered behavior",
+        "Actual in-frame target in each witness",
+        "Finite accepted/open clauses and retained negative tests"
+      ]
+    }
+  ],
+  "rules": [
+    "No automatic art score",
+    "Passing technical checks does not establish art acceptance",
+    "Inspect actual rendered pixels at hero, meaningful alternate, near, and changed-light views",
+    "Generated concept art is labelled reference, never scene evidence",
+    "Existing robustness matrices are not necessarily art-direction A/Bs; state whether world and sky changed",
+    "Preserve failed evidence and strict numerical failures separately from a nonblocking disposition",
+    "Graph/RNA readback proves stored state, not actual renderer efficacy; test actual decoded output.",
+    "Prior scoped findings carry forward only while current user feedback and the actual whole-image goal do not invalidate their artistic closure.",
+    "Verify the affected target is in-frame in every claimed view; offscreen/negative-index crops are invalid evidence.",
+    "Current scene examples can be accepted in their own scope while every built-in non-neutral preset remains experimental.",
+    "A critic pass is not user approval; the Japanese v13 rejection supersedes its prior art completion claim."
+  ],
+  "schema_version": "1.1.0",
+  "scoring": "none",
+  "addon_version": "0.1.9",
+  "separate_gates": [
+    "mechanism_behavior",
+    "material_authoring",
+    "scene_light_and_atmosphere",
+    "whole_image_reference",
+    "geometry_and_delivery"
+  ],
+  "finite_closure": {
+    "required_record": [
+      "criterion",
+      "target_views",
+      "source_scene_image_identity",
+      "preserved_closed_findings",
+      "blocking_remainder",
+      "permitted_next_test",
+      "art_disposition",
+      "stop_condition",
+      "latest_user_feedback",
+      "criterion_adequacy_for_whole_image_goal"
+    ],
+    "reopen_only_on": "Fresh regression, invalidated dependency, broader reference mismatch or explicit user rejection; a restricted ledger may itself need reassessment.",
+    "technical_failures": "Keep raw FAIL and independent nonblocking disposition separate.",
+    "score": "none",
+    "user_feedback_override": "Explicit user rejection supersedes prior critic artistic acceptance. Preserve measured technical facts separately and reopen holistic style assessment."
+  },
+  "procedural_component_gate": {
+    "automatic_score": false,
+    "required": [
+      "Actual evaluated geometry/instance change, restore and save/reopen",
+      "Prototype topology, UV, materials and packed-image identity in addition to transforms",
+      "Coordinate and field-domain ownership; units and static dependencies",
+      "All intended semantic families measured; exclusions and inherited failures retained",
+      "Representative native images and original-reference whole-image assessment"
+    ],
+    "prohibited_inferences": [
+      "18 live modifiers means full parametric scene layout",
+      "Three component hashes mean full-scene pixel identity",
+      "Baseline support means all parameter settings are support-safe",
+      "A critic pass supersedes unresolved user rejection"
+    ]
+  },
+  "cycle07_08_review": {
+    "status": "unfinished_painted_iteration",
+    "scoring": "none",
+    "evidence_ids": [
+      "cycle07_art",
+      "cycle08_art",
+      "cycle08_technical"
+    ],
+    "preserve": [
+      "Inward opening depth and actual structural sections",
+      "Physical water, real metal/brass highlights, dark roof masses and selected crisp edges",
+      "Substantive cycle08 rain, wetness, iron, hill and timber improvements"
+    ],
+    "questions": [
+      "Do large light/dark/color masses lead at thumbnail scale, with meaningful selected/lost edges at ordinary size and material identity in native detail?",
+      "Does factory light/shadow organize its existing floor pigment rather than adding another uniform texture layer?",
+      "Which actual views support mapping/reflection/contact claims, and which were deferred?",
+      "Were numerical repairs, actual visible changes and user acceptance reported separately, without invented defect counts?"
+    ],
+    "unresolved_at_freeze": [
+      "Street curve and image-color-space exact-rebuild serializer blind spots",
+      "Three inherited connected street scalar fields on two boundary owners",
+      "Whole-image painted reference match; no current-cycle alternate-view certification"
+    ]
+  },
+  "recovery_r01_r02_review": {
+    "status": "unfinished_painted_iteration",
+    "scoring": "none",
+    "evidence_cut": "R01/R02 frozen reviewed selection only; R03 excluded",
+    "evidence_ids": [
+      "r01_art",
+      "r01_technical",
+      "r02_art",
+      "r02_technical",
+      "r02_backup_manifest",
+      "r02_restore_test"
+    ],
+    "questions": [
+      "Are generated pigment inputs flat and mapped through the actual face-used UV/rest contract, with all shader destinations disclosed?",
+      "Does stone retain mineral identity rather than continuous wood-like streaking while successful barrel wear is preserved?",
+      "Are protected anchors, new closed meshes and inherited split-face head/palm topology reported separately?",
+      "Were all visible floor owners inspected, including the inherited Mesh_00139 strip, before making a coverage claim?",
+      "Do actual shaft/hub/spoke/rim solids connect, and is ideal-circle contact distinguished from finite-mesh contact?",
+      "Are selected variants, temporary controls, superseded previews and generated concepts clearly identified?",
+      "Are packed editable scenes, earlier baselines, exact source dependencies and verified restore identities safely retained?"
+    ],
+    "unresolved_at_freeze": [
+      "Mesh_00139 material-coverage continuity remains a proposed correction.",
+      "Six reshaped inherited head/palm originals retain split-face topology.",
+      "Optional R01 lower-wrap gap up to 0.415 mm; unchanged and not freshly swept in R02.",
+      "Whole-image light/edge hierarchy, stone identity, near-worker finish, selected road wetness and smoke edges remain open.",
+      "No full clean reconstruction replay or exact restoration of lost later cycles."
+    ]
+  },
+  "recovery_r03_r04_review": {
+    "scoring": "none",
+    "evidence_cut": "Final R03/R04 reviews and prospective R05 plans; no R05 outcomes.",
+    "status": "unfinished_painted_iteration",
+    "selected_technical_baselines": [
+      {
+        "source": "recovery_run04/street/street_recovery_r04_selected_v03.blend",
+        "source_sha256": "cf5c19aa84305715a3c4df605b6b3e00fa43f3e01a878f25c3969a94ddadc8c6",
+        "image": "recovery_run04/street/renders/street_r04_selected_hero_v03.png",
+        "image_sha256": "7282490f3e4b34ba019a4796247a3d02398c78f63937520d1b2246adbc559320",
+        "pixel_dimensions": [
+          900,
+          1600
+        ]
+      },
+      {
+        "source": "recovery_run04/industrial/scenes/mine_recovery_R04_v02_selected.blend",
+        "source_sha256": "255c6bdf582b709d32ee0269e630bbac12815895a1218e7cfacbc82a5a47c936",
+        "image": "recovery_run04/industrial/renders/mine_recovery_R04_v02_hero.png",
+        "image_sha256": "cbc277905e017e679cb42839156722ec92d5d85adccc0ef866e33cc9acf94b79",
+        "pixel_dimensions": [
+          720,
+          1280
+        ]
+      },
+      {
+        "source": "recovery_run04/industrial/scenes/factory_recovery_R04_selected.blend",
+        "source_sha256": "31aeabdea2d87a58731be9bf4d002e0536a3d406c7fb02702dbddb01aa98dbf8",
+        "image": "recovery_run04/industrial/renders/factory_recovery_R04_hero.png",
+        "image_sha256": "9fc964754eff230b73785921a6705bcedccb5f0eb49bd1d1926448bbe643e910",
+        "pixel_dimensions": [
+          720,
+          1280
+        ]
+      }
+    ],
+    "repaired": [
+      "R03 Mesh_00139 floor coverage across 139 active owners",
+      "Five R04 inward street gables repaired in v02 and preserved in v03",
+      "Mine cottage burial repaired by +9.5 m near-ridge move in final v02",
+      "Four unintended Terrace_-1_10 visibility changes restored in street v03"
+    ],
+    "unresolved_art": [
+      "Prominent figure form language",
+      "Street paving grouping",
+      "Factory floor mark hierarchy",
+      "Rear street bend/multi-bay recession",
+      "Mine smoke design",
+      "Mine ridge plane design",
+      "Cottage specificity",
+      "Factory broken oblique air/focal hierarchy"
+    ],
+    "guards": [
+      "Exact owner scope before mutation",
+      "Per-component outward winding and evaluated footprint-perimeter grade/contact before selection",
+      "Matched actual controls with precise light/medium/material attribution",
+      "Generated imagery supplemental; original references remain primary",
+      "Technical pass is not artistic completion; no manufactured defect quota"
+    ]
+  },
+  "recovery_r05_r07_review": {
+    "authority": "Original references and explicit 08:01–08:02 UTC user direction; generated target is not implementation proof.",
+    "native_selection": "Exact frozen R05 street v01, mine G and factory K retained.",
+    "rejected": [
+      "All R06 native/compositor/Eevee candidates",
+      "R07 factory P1/P2 and L1/L2/L3/L4",
+      "R07 mine M1"
+    ],
+    "optional": "R07 street P3v2 static presentation alongside R05; known scalloped unprotected trim and mild sharp collars remain.",
+    "faceted_form_checks": [
+      "No rounded smooth curves; crisp flat surfaces approximate curvature.",
+      "Deliberately uneven form-following planes; varied size/angle/spacing and staggered cuts.",
+      "Avoid uniform radial rings, flat-shade-only fixes, random triangulation and cubic mannequin simplification.",
+      "Compare neutral and hero views and scoped contacts; generated target approval is not current mesh verification."
+    ],
+    "numeric_failures_retained": [
+      "R06 E invalid truncated-name mask",
+      "R06 E2 passed:false with cross-render and float64 exceptions",
+      "R07 original threshold-classified zero assertion false",
+      "R07 monolithic 2× attempt failed; tiled Combined overlap is not identical"
+    ],
+    "separate_proof_roles": [
+      "Native render",
+      "Generated target or flat input",
+      "Compositor replay",
+      "Analysis derivative",
+      "Tiled native-resolution assembly"
+    ],
+    "r08_status": "Excluded: pending work is not a completed outcome in 0.1.7."
+  },
+  "recovery_r09_r10_guidance": {
+    "execution": "none",
+    "guide": "docs/RECOVERY_R09_R10_LESSONS.md",
+    "new_lesson_ids": [
+      "material_specific_plane_design",
+      "geometry_and_normal_evidence",
+      "fixed_distance_fields_and_static_limits",
+      "causal_sources_history_receivers",
+      "full_prototype_support_and_collision",
+      "route_clearance_and_transport",
+      "actor_and_world_scale_controls",
+      "effective_bindings_and_private_dependencies",
+      "frozen_and_regenerated_deposits",
+      "reject_unsupported_construction",
+      "fresh_camera_and_projection_proofs",
+      "zero_controls_and_repeat_floors",
+      "local_validity_and_hero_readability",
+      "height_specific_clearance_and_rebuild",
+      "chronology_and_retracted_findings"
+    ],
+    "scope": "Guidance only; immutable accepted runtime logic remains unchanged. Exact frozen R09/R10 evidence; R11 concepts UNIMPLEMENTED and architecture active/unaccepted at cutoff.",
+    "chronology": "Final R10 11:25 summary and guarded index supersede older pending zero/reopen qualifiers without rewriting prior files.",
+    "open_goals": [
+      "Stronger factory native-hero readability",
+      "Street traffic-derived dirt tracks",
+      "Broader architecture and painted-form transformation"
+    ],
+    "no_new_operator": true
+  },
+  "recovery_r11_r12_guidance": {
+    "execution": "none",
+    "guide": "docs/RECOVERY_R11_R12_LESSONS.md",
+    "new_lesson_ids": [
+      "original_cell_identity_and_randomness",
+      "planar_aperture_union_before_extrusion",
+      "complete_positive_cell_coverage",
+      "minimum_feature_boundary_bevel_policy",
+      "planar_caps_not_generic_dissolve",
+      "saved_geometry_and_effective_material_binding",
+      "supported_route_to_real_arrival",
+      "preserve_road_surface_planes",
+      "architectural_variants_with_measured_joinery",
+      "frozen_source_and_rebuild_prerequisites",
+      "bound_proof_camera_and_actual_images",
+      "saved_semantics_evaluated_uv_and_pixels"
+    ],
+    "scope": "Guidance-only accepted R11 functional checkpoint and exact R12 A4b architecture, not whole-street completion.",
+    "chronology": "Historical R11-unimplemented wording remains exact at its older cutoff; later R11/R12 acceptance is explicitly additive. C3 functional acceptance did not erase its diagnosed seams.",
+    "numeric_limits": "Complete positive coverage is a layout-specific verification target; accepted helper retains floating area/collinearity predicates and is not a universal exact Boolean kernel.",
+    "excluded": [
+      "R13 and later provisional findings",
+      "New runtime operators",
+      "New Blender or image execution"
+    ],
+    "no_new_operator": true
+  }
+}

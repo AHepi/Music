@@ -1,0 +1,13 @@
+# Current snapshot, 2026-10-18 21:32 UTC
+
+Status: working runtime snapshot requested for immediate return. Mechanical integration is tested; full artistic acceptance and final courtyard contact/visual review remain pending. This is not an accepted finished-look preset.
+
+Executed in isolated Blender 5.1.2: registration/unregistration; strict invalid-input tests; deterministic same-seed geometry under renaming and changed transform; meaningful geometry per material family; retained exact source pointers and binding modes; restore and save/reopen; actual native scatter with live controls; supplied roof/stone assets; qualified textile overlay. Latest own results contain 42 transfer checks, 15 reopen checks and 13 targeted mask/topology/support/textile checks, plus native scatter and 11 pure contract tests. These are engineering witnesses, not an aesthetic score.
+
+An independent audit executed 17 adversarial cases including a protected center hidden inside a coarse quad, shared DATA binding edits, shared fake-user flags, mixed slot modes, oversized and displaced bank sources, source-modifier tamper, missing control sockets, injected failures, private Image colorspace isolation, poisoned same-name shader groups, receiver movement, source renaming and heterogeneous path widths. The found defects were corrected and retested. Original failing evidence is retained in the separate working evidence directory.
+
+The corrected workshop before/after/near render completed with a new non-Japanese layout, seed2069 and translated/rotated/uniformly scaled receiver. Relief, variable boards and volumetric moss are visible. This small constructed demonstration still has broad simple moss surfaces and does not establish a finished painted look or broad art generalization. Its final independent pixel review is pending this snapshot.
+
+The actual courtyard consumes the portable native scatter engine through an explicit world-space receiver adapter. Terrain, curved bridge and lower-rock moss remain scene-specific native adapters. Their final overall contact/visual review is pending. No broad claim is made that all prior recipes are fully generalized.
+
+No persistent add-on installation or preferences were changed. Source was registered and executed in isolated processes. Full graphical install/Undo clicks, other operating systems and Blender versions are untested. Native geometry survives without Python handlers; static landscape settings require explicit Rebuild. Finite footprint samples and camera-size estimates cannot certify full contact, readability, ecology, structural safety or artistic quality.

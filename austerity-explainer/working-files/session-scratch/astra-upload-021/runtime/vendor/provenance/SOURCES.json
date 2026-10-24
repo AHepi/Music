@@ -1,0 +1,65 @@
+{
+  "original_library_id": "libfile_cf5b974288f881919d10adcf50dbd1e7",
+  "original_sha256": "fa70b5a62547e05b7f2f26307f7b6fc069be3573032ae4e513c1b54466c5117f",
+  "sources": [
+    {
+      "source": "historical/astra_painted_workbench-0.1.9.zip",
+      "role": "Original add-on installer; exact recovered Library artifact",
+      "sha256": "fa70b5a62547e05b7f2f26307f7b6fc069be3573032ae4e513c1b54466c5117f"
+    },
+    {
+      "source": "../transferable_tools/courtyard_tools/api.py",
+      "role": "Verbatim native roof/stone runtime 0.1.1",
+      "sha256": "db6350ab0c348afbfc12131725a78399f8c6ecfa258d9eb43ca3216152de5e60"
+    },
+    {
+      "source": "../transferable_tools/assets/courtyard_components.blend",
+      "role": "Verbatim native component asset library",
+      "sha256": "f691f865ad9a87bdfbc822c3aa0eb02a2223029a5707f8ecafa135a78c63dee2"
+    },
+    {
+      "source": "../material_study/build/painted_fields_0_1_0/painted_fields.py",
+      "role": "Accepted color-only pigment runtime; optional private_image injection added for isolated reuse. Exact upstream preserved in provenance/upstream/painted_fields.py.",
+      "sha256": "d1f8205a8e1252155c8d1eb47553c8f6b9f28ea61e2afb2087ff481049bab2da"
+    },
+    {
+      "source": "../material_study/build/painted_fields_0_1_0/assets/generated_pigment_atlas_v01.png",
+      "role": "Whole generated pigment atlas; packed on application",
+      "sha256": "a8aeb046cc76f9f633e0397b7343d28cf55c4290511869eca24347d607efc2f1"
+    },
+    {
+      "source": "../microdetail_study/recipe/material_microdetail_v022.py",
+      "role": "Accepted 0.2.2 primitives; optional private_group injection added to defeat same-name substitution. Scene-wide apply/remove never called. Exact upstream preserved in provenance/upstream/material_microdetail_v022.py.",
+      "sha256": "f667a952fa4729aa90cf0b89fef55d06483f4f69dfad642bef5b79d4acb39add"
+    },
+    {
+      "source": "../tile_microdetail_study/recipe/ceramic_edges.py",
+      "role": "Source-identity and ceramic edge-loss lessons; scene-name-specific runtime not blindly generalized",
+      "sha256": "d9547e0288c5e3137a7c688559599a20cf3bf932b5544a670ee86f1fa7438990"
+    },
+    {
+      "source": "../textile_study/delivery/quiet_textiles_v01/foundry_overlay_recipe_0_1_0/foundry_overlay.py",
+      "role": "Verbatim qualified fabric overlay adapter",
+      "sha256": "9a82698d8c3c9af014cd74848871a10853541126d35c84a15df3eec6a12c095a"
+    },
+    {
+      "source": "../lived_in_study/recipe/lived_landscape.py",
+      "role": "Mechanism reference only: bank fields, correlated deposits, body under moss crowns; evolving scene adapter is not vendored",
+      "sha256": "b51b228da1b65a56467e83bdfd13098c41141d4fae9eae35e91c03cc2cc669c9"
+    },
+    {
+      "source": "../background_study/delivery/quiet_background_v01/palette_recipe/background_palette.py",
+      "role": "Exact qualified narrow background palette recipe preserved as reference only. Not exposed as a new automatic palette or scene classifier. Rejected palette pilot remains excluded.",
+      "sha256": "1ab7fcf4269aedd05165a1da4380207f31440a3ed28afa4e6bf6d63fa577523f"
+    }
+  ],
+  "new_code": [
+    "runtime/spec.py",
+    "runtime/landscape.py",
+    "runtime/materials.py",
+    "runtime/ui.py",
+    "runtime/api.py",
+    "runtime/native_scatter.py"
+  ],
+  "adaptation_note": "New runtime is an additive integration into the exact recovered 0.1.9 add-on. Legacy docs are historical; they do not describe the new tested runtime scope."
+}
