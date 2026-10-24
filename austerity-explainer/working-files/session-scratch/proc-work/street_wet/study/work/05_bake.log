@@ -1,0 +1,32 @@
+00:00.989  blend            | Read blend: "/home/user/Music/austerity-explainer/film-kit/assets/models/pit-village/street.blend"
+00:01.363  cycles           | WARNING CUEW initialization failed: Error opening the library
+03:12.400  render           | Saved: 'work/baked_road/close_live.png'
+03:17.475  render           | Saved: 'work/baked_road/wet_colour.png'
+03:21.326  render           | Saved: 'work/baked_road/wet_roughness.png'
+03:25.122  render           | Saved: 'work/baked_road/wet_coat.png'
+03:27.114  render           | Saved: 'work/baked_road/wet_coat_roughness.png'
+03:28.911  render           | Saved: 'work/baked_road/wet_puddle_mask.png'
+03:34.452  render           | Saved: 'work/baked_road/wet_normal.png'
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/study/tools/05_bake_and_export_road.py:176: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  baked.use_nodes = True
+06:54.043  render           | Saved: 'work/baked_road/close_baked.png'
+DRAWN live 191.0
+PHOTOGRAPHED wet_colour 5.1
+PHOTOGRAPHED wet_roughness 3.8
+PHOTOGRAPHED wet_coat 3.8
+PHOTOGRAPHED wet_coat_roughness 2.0
+PHOTOGRAPHED wet_puddle_mask 1.8
+PHOTOGRAPHED wet_normal 5.5
+DRAWN baked 199.5
+INFO Draco is available, use library at /home/user/work/blender-app/blender-5.2.2-linux-x64/lib/libbf_intern_draco_bridge.so
+INFO MeshOptimizer is available, use library at /home/user/work/blender-app/blender-5.2.2-linux-x64/lib/libbf_intern_meshopt_bridge.so
+14:11:54 | INFO: Starting glTF 2.0 export
+14:11:54 | INFO: Extracting primitive: street_setts
+14:11:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+14:11:55 | INFO: Primitives created: 1
+14:11:55 | INFO: Finished glTF 2.0 export in 1.319263219833374 s
+
+REPORT {'times_seconds': {'live_close': 191.0, 'wet_colour': 5.1, 'wet_roughness': 3.8, 'wet_coat': 3.8, 'wet_coat_roughness': 2.0, 'wet_puddle_mask': 1.8, 'wet_normal': 5.5, 'baked_close': 199.5}, 'glb_bytes': 6455856, 'picture_size': [440, 3200]}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

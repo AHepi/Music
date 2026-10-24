@@ -1,0 +1,24 @@
+<!doctype html>
+<!-- What this is: a test page (made by the street wet-look study, a COPY of the film kit's stage files; the film project itself is untouched). It opens the three.js stage
+     code of the film kit (the same three.js 0.169, the same renderer, the same projected-set.js) and offers window.test, which the runner (../../../run_stage_test.mjs) calls to
+     (a) describe what the .glb's materials carry, (b) draw the street with the .glb's own materials and a dusk environment, switching its maps on one at a time,
+     (c) draw the street through the film's real painting projection (projectPaintingOnto) with matte on and off. -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>html, body { margin: 0; background: #000; } canvas { display: block; }</style>
+</head>
+<body>
+<canvas id="stage" width="1080" height="1920"></canvas>
+<script type="importmap">{ "imports": { "three": "/paper-film/node_modules/three/build/three.module.js" } }</script>
+<script type="module">
+  try {
+    const module = await import('../scenes/street-wet-test.js');
+    window.test = await module.setup();
+    window.stageReady = true;
+  } catch (error) {
+    window.stageFailed = String(error && error.stack ? error.stack : error);
+  }
+</script>
+</body>
+</html>

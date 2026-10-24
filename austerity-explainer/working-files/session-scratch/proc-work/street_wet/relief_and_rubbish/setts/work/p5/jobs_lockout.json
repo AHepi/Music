@@ -1,0 +1,139 @@
+{
+ "masks": [
+  [
+   "lockout",
+   1536,
+   2730
+  ]
+ ],
+ "jobs": [
+  {
+   "name": "lockout_B_dry_before",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "variant": "baseline",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_dry_after",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_dry_real",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_wet_before",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "variant": "baseline",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_wet_after",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_wet_real",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_heavy_before",
+   "camera": "lockout",
+   "light": "B",
+   "state": "heavy",
+   "variant": "baseline",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_heavy_after",
+   "camera": "lockout",
+   "light": "B",
+   "state": "heavy",
+   "variant": "joints_layer",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_B_heavy_real",
+   "camera": "lockout",
+   "light": "B",
+   "state": "heavy",
+   "variant": "joints_geometry",
+   "args": {
+    "relief": 0.0
+   },
+   "w": 1536,
+   "h": 2730,
+   "samples": 48
+  },
+  {
+   "name": "lockout_A_heavy_puddlemask",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "variant": "show_masks",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 4
+  },
+  {
+   "name": "lockout_A_wet_puddlemask",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "variant": "show_masks",
+   "args": {},
+   "w": 1536,
+   "h": 2730,
+   "samples": 4
+  }
+ ],
+ "after_apply": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/relief_and_rubbish/setts/tools/register_variants.py"
+}
