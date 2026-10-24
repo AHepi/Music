@@ -1,0 +1,169 @@
+{
+  "$id": "urn:astra-painted-workbench:recipe:1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "art_acceptance": {
+      "const": "requires_human_review"
+    },
+    "config_preset": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "constraints": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "id": {
+      "type": "string"
+    },
+    "required_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.1.0"
+    },
+    "selection_contract": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "implemented_workflow",
+        "proposed_manual_recipe"
+      ]
+    },
+    "steps": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "inspect",
+              "audit_geometry",
+              "sample_support",
+              "load_settings",
+              "preview",
+              "render_before_after",
+              "human_reference_review",
+              "record_review",
+              "acknowledge",
+              "revert_or_keep",
+              "manual_design"
+            ]
+          },
+          "implemented": {
+            "type": "boolean"
+          },
+          "instruction": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "instruction",
+          "implemented"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "stop_conditions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "title": {
+      "type": "string"
+    },
+    "lesson_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "evidence_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unsupported_cases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "coordinate_contract": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acceptance_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "criterion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preserve": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "reopen_only_on": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stop_when": {
+          "type": "string",
+          "minLength": 1
+        },
+        "user_feedback_override": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "criterion",
+        "preserve",
+        "reopen_only_on",
+        "stop_when",
+        "user_feedback_override"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "status",
+    "selection_contract",
+    "config_preset",
+    "constraints",
+    "steps",
+    "required_evidence",
+    "stop_conditions",
+    "art_acceptance",
+    "lesson_ids",
+    "evidence_scope",
+    "unsupported_cases",
+    "coordinate_contract",
+    "acceptance_gate"
+  ],
+  "title": "LLM-readable recipe; never automatically executed",
+  "type": "object"
+}

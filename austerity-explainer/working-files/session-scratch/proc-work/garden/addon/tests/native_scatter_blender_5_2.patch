@@ -1,0 +1,48 @@
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/astra-upload-021/runtime/native_scatter.py	2026-10-18 22:45:00.000000000 +0000
++++ tmp/astra_patched/runtime/native_scatter.py	2026-10-21 21:10:38.394443652 +0000
+@@ -14,6 +14,18 @@
+           'Contact Influence':('NodeSocketFloat',.6,0.,1.),'Seed':('NodeSocketInt',521,0,1048576)}
+ 
+ 
++def _setinput(mod,identifier,value):
++    # 5.2 workaround (probe only): modifier inputs moved to mod.properties.inputs.<identifier>.value
++    if hasattr(mod,'properties') and hasattr(mod.properties,'inputs'):
++        getattr(mod.properties.inputs,identifier).value=value
++    else:mod[identifier]=value
++def _getinput(mod,identifier,default):
++    if hasattr(mod,'properties') and hasattr(mod.properties,'inputs'):
++        try:return getattr(mod.properties.inputs,identifier).value
++        except Exception:return default
++    return mod.get(identifier,default)
++
++
+ def _validate(records,bank,receiver,kind,controls):
+     if kind not in ('pebble','moss','tuft'):raise ValueError('Native scatter kind must be pebble, moss or tuft')
+     if receiver is None or receiver.type!='MESH' or receiver.library:raise ValueError('Choose a local explicit mesh receiver')
+@@ -160,7 +172,7 @@
+     for i,n in enumerate(g.nodes):n.location=((i%6)*230,-(i//6)*190)
+     mod=host.modifiers.new('Astra / Live grounded semantic scatter','NODES');mod.node_group=g
+     for socket in g.interface.items_tree:
+-        if socket.item_type=='SOCKET' and socket.in_out=='INPUT' and socket.name in CONTROLS:mod[socket.identifier]=controls.get(socket.name,CONTROLS[socket.name][1])
++        if socket.item_type=='SOCKET' and socket.in_out=='INPUT' and socket.name in CONTROLS:_setinput(mod,socket.identifier,controls.get(socket.name,CONTROLS[socket.name][1]))
+     host['astra_modifier']=mod.name;host['astra_group']=g;host['astra_source_count']=len(bank.objects)
+     for i,row in enumerate(source_rows):
+         o=row['source'];host['astra_source_'+str(i)]=o;host['astra_source_hash_'+str(i)]=mesh_digest(o.data);host['astra_source_eval_hash_'+str(i)]=row['evaluated_hash']
+@@ -190,7 +202,7 @@
+     if mod is None or mod.type!='NODES' or mod.node_group!=host.get('astra_group'):raise ValueError('Native scatter modifier/group identity changed')
+     sockets={q.name:q for q in mod.node_group.interface.items_tree if q.item_type=='SOCKET' and q.in_out=='INPUT'}
+     if not set(CONTROLS)<=set(sockets):raise ValueError('Native control schema was modified; no values were changed')
+-    for name,value in values.items():mod[sockets[name].identifier]=value
++    for name,value in values.items():_setinput(mod,sockets[name].identifier,value)
+     host.update_tag();bpy.context.view_layer.update();return audit(host)
+ 
+ 
+@@ -220,7 +232,7 @@
+         checks['source_evaluation_unchanged']=False;warnings.append(str(exc))
+     if checks['native_modifier_retained']:
+         sockets={q.name:q for q in mod.node_group.interface.items_tree if q.item_type=='SOCKET' and q.in_out=='INPUT' and q.name in CONTROLS}
+-        values={name:mod.get(q.identifier,q.default_value) for name,q in sockets.items()}
++        values={name:_getinput(mod,q.identifier,q.default_value) for name,q in sockets.items()}
+         checks['complete_control_schema']=set(CONTROLS)<=set(sockets)
+         try:_validate([],bank,receiver,contract['kind'],values);checks['control_ranges']=True
+         except ValueError as exc:checks['control_ranges']=False;warnings.append(str(exc))

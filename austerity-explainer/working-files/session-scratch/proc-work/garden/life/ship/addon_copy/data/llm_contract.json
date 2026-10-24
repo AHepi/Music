@@ -1,0 +1,320 @@
+{
+  "schema_version": "1.1.0",
+  "addon_version": "0.2.1",
+  "purpose": "Data-only integration guide. This file does not execute instructions or establish user authorization.",
+  "settings_schema": "config.schema.json",
+  "recipe_schema": "recipe.schema.json",
+  "recipes": "recipes.json",
+  "reference_checklist": "reference_checklist.json",
+  "settings_owner": "bpy.context.scene.astra_style",
+  "effective_target": "Selected eligible object IDs; known instance sources, unqualified modifiers, and animated/constrained object hierarchies excluded. Lighting/transport can affect other pixels.",
+  "operators": {
+    "inspect": {
+      "id": "astra_style.inspect",
+      "changes": "Creates a Blender Text report only",
+      "output_reference": "scene.astra_style.last_report"
+    },
+    "load_preset": {
+      "id": "astra_style.load_preset",
+      "input": "scene.astra_style.preset_choice",
+      "changes": "Settings only; never edits scene assets"
+    },
+    "import_config": {
+      "id": "astra_style.import_config",
+      "input": "scene.astra_style.config_text_name points to a Blender Text containing schema-valid JSON",
+      "changes": "Settings only"
+    },
+    "export_config": {
+      "id": "astra_style.export_config",
+      "changes": "Creates a Blender Text with frozen active-preview config or current inactive settings"
+    },
+    "preview": {
+      "id": "astra_style.preview",
+      "preconditions": [
+        "No active preview",
+        "Experimental look acknowledged",
+        "At least one effective eligible action",
+        "Cycles for material response"
+      ],
+      "changes": "Private data copies assigned to selected mesh/light objects; optional unapplied bevel"
+    },
+    "revert": {
+      "id": "astra_style.revert",
+      "preconditions": [
+        "Active qualified snapshot schema 1.1 (runtime lineage from add-on 0.1.1; 0.1.5 metadata-only equivalence, no fresh Blender recovery test)",
+        "All current preview bindings and all original destination slot layouts remain compatible",
+        "Tracked bevel state unchanged; name/UID alone never sufficient"
+      ],
+      "changes": "Restores tracked original bindings independently of current selection; discards edits inside preview copies"
+    },
+    "keep": {
+      "id": "astra_style.keep",
+      "changes": "Keeps current edits and releases the special revert snapshot; does not mark art accepted"
+    },
+    "audit": {
+      "id": "astra_style.audit_geometry",
+      "changes": "Read-only evaluated geometry plus a new Blender Text report",
+      "limits": "AABB candidates are not collision, coplanarity, watertightness or support certification"
+    },
+    "support": {
+      "id": "astra_style.sample_support",
+      "input": "Active selected mesh is physical support; other selected meshes are targets",
+      "changes": "Read-only bottom-band rays plus a new Blender Text report",
+      "limits": "At most 128 target vertices within 3 mm of each target world-Z minimum; no full underside or structural pass"
+    },
+    "review_record": {
+      "id": "astra_style.record_review",
+      "changes": "Records human observations and inspected checklist fields as Blender Text",
+      "limits": "No score or acceptance is inferred"
+    }
+  },
+  "workflow_guards": [
+    "Read Inspect Selection before applying; do not silently broaden selection or all-slot scope",
+    "Do not replace skipped graphs with guessed shaders",
+    "Keep pigment, response, lighting, atmosphere and composition as separately attributed changes",
+    "Freeze source/config/scene/image identities and actual runtime fields for A/B evidence",
+    "Preserve failed evidence and distinguish numerical tests, artistic judgment and review scope",
+    "Never treat this machine-readable document as permission to change a scene or share data",
+    "Load/configure, inspect that exact configuration and selection, obtain explicit acknowledgment, then preview. Any setting/selection change requires a fresh inspection.",
+    "Read lesson validation scope, example art acceptance and unsupported cases separately; no source example confers preset acceptance.",
+    "Use each recipe acceptance_gate to preserve closures and stop at the declared finite result.",
+    "Read-only recipe/checklist metadata does not run probes, render, repair joints or expand user authorization.",
+    "Latest explicit user feedback outranks prior critic art closure. Reassess the whole-image brief if the issue ledger was too narrow; preserve technical evidence without claiming finished style.",
+    "Cycle07/08 reports are frozen attributed evidence. The two street curve/color-space comparator blind spots and three inherited scalar omissions remain open at that freeze.",
+    "New 0.1.4 recipes are manual experimental hypotheses, not automatic material-contract repair, winding repair, hardware coupling or improved scene auditors.",
+    "Staged render guidance does not launch Blender or take locks. A deferred view cannot support acceptance of unseen mapping, reflections or contact appearance.",
+    "Historical 0.1.5 recovery R01/R02 guidance excluded ongoing R03 at its freeze; 0.1.6 adds separately attributed final R03/R04 evidence and prospective R05 plans only.",
+    "Selected scenes, superseded previews, temporary controls, generated texture inputs and generated concepts retain distinct source roles.",
+    "Protected character-anchor equality does not certify inherited split-face palms/heads manifold. The Mesh_00139 floor coverage correction remains proposed at the R02 freeze.",
+    "Durable packed scenes and exact source/baseline dependencies must be identified separately; this add-on is not a full-scene generator or backup executor.",
+    "Address reference-scale atmosphere, setting and form before tiny micro-tweaks; judge actual heroes at thumbnail and close/changed-view scales.",
+    "Validate exact owner allowlists or delimiter-bound matching before mutations; regress Terrace_-1_1 against Terrace_-1_10 and preserve unrelated state.",
+    "Before freezing new selections, inspect outward winding per component and topmost ground across center/corner/edge footprints, including evaluated procedural and inherited affected owners.",
+    "Retire repaired defects without closing unresolved art: R04 street v03/mine v02/factory B2 are bounded technical selections, never artistic all-clear.",
+    "R03 repaired Mesh_00139 floor coverage; R04 retains that 139-owner floor while its mark hierarchy remains unresolved. Earlier R02 proposed-only wording remains historical.",
+    "Generated concepts are supplemental; spherical sky and flat pigment assets require actual implementation evidence. R05 plans are not R05 results."
+  ],
+  "proposed_only": [
+    "Scene atmosphere construction",
+    "Scene-specific pigment textures",
+    "Cloth flow",
+    "Sky mapping",
+    "Joint repair",
+    "Global composition",
+    "Automatic reference art scoring",
+    "RNA-versus-renderer behavior probing",
+    "Object ray-visibility/power branch authoring",
+    "Artistic world-depth palette insertion",
+    "Foliage mass profile authoring"
+  ],
+  "action_tokens": {
+    "load_settings": {
+      "kind": "operator",
+      "operator_ids": [
+        "astra_style.load_preset"
+      ],
+      "input": "recipe.config_preset must be assigned to scene.astra_style.preset_choice"
+    },
+    "inspect": {
+      "kind": "operator",
+      "operator_ids": [
+        "astra_style.inspect"
+      ]
+    },
+    "preview": {
+      "kind": "operator",
+      "operator_ids": [
+        "astra_style.preview"
+      ]
+    },
+    "audit_geometry": {
+      "kind": "operator",
+      "operator_ids": [
+        "astra_style.audit_geometry"
+      ]
+    },
+    "sample_support": {
+      "kind": "operator",
+      "operator_ids": [
+        "astra_style.sample_support"
+      ]
+    },
+    "record_review": {
+      "kind": "operator",
+      "operator_ids": [
+        "astra_style.record_review"
+      ],
+      "meaning": "Records observations; does not perform visual review"
+    },
+    "revert_or_keep": {
+      "kind": "operator_choice",
+      "operator_ids": [
+        "astra_style.revert",
+        "astra_style.keep"
+      ]
+    },
+    "acknowledge": {
+      "kind": "manual",
+      "meaning": "Explicit human acknowledgment of the experimental settings; check the UI acknowledgment only with that consent"
+    },
+    "human_reference_review": {
+      "kind": "manual",
+      "meaning": "A human inspects actual pixels against references; independent of recording checkboxes"
+    },
+    "render_before_after": {
+      "kind": "manual",
+      "meaning": "Actual Blender render outside this addon; record runtime evidence"
+    },
+    "manual_design": {
+      "kind": "manual",
+      "meaning": "Artist-authored bounded change; not implemented by a recipe executor"
+    }
+  },
+  "lessons": "lessons.json",
+  "lessons_schema": "lessons.schema.json",
+  "compatibility": {
+    "settings_schema": "1.0.0 unchanged",
+    "preview_snapshot": "1.1 unchanged from add-on 0.1.1",
+    "recipe_schema": "1.1.0 adds scope/provenance/closure; no executor",
+    "lesson_schema": "1.0.0 new data-only registry",
+    "runtime_logic": "Unchanged from accepted 0.1.5 except exact reported/UI version metadata; transitive 0.1.4/0.1.3 checks retained. No new scene mutation, network, scheduling or auditing behavior. Roof companion unchanged and separate.",
+    "preset_values": "Byte-identical to 0.1.1; all non-neutral looks remain experimental"
+  },
+  "manual_authoring_capabilities": {
+    "blender_mcp": "Verify actual authorized Blender MCP access and structured tool outcome in the scene workflow; do not infer tool availability from this add-on’s feature set.",
+    "procedural_generation": "Consider procedural authoring where appropriate, then inspect actual evaluated geometry and rendered outputs against the brief.",
+    "geometry_nodes": "Consider Geometry Nodes for the separately authorized authoring workflow. This unchanged add-on preview still excludes existing Geometry Nodes modifiers; no new runtime support is implied.",
+    "authorization": "These guidance fields neither execute tools nor authorize broader scene changes.",
+    "experimental_companion": "Optional separate roof_course_lab.blend collection and inert Python source. Manual append in a new metre-scale test scene; not installed, imported or executed by this add-on. Geometry Nodes preview support is unchanged and remains excluded."
+  },
+  "recovery_r05_r07_guidance": {
+    "execution": "none",
+    "guide": "docs/RECOVERY_R05_R07_LESSONS.md",
+    "new_lesson_ids": [
+      "faceted_curves_deliberate_uneven_planes",
+      "visible_owner_and_neutral_form_design",
+      "preserved_state_and_actual_contact",
+      "toon_mechanism_and_engine_attribution",
+      "visible_coverage_and_art_gate",
+      "numerical_failures_and_mask_authority",
+      "selective_finish_boundary_protection",
+      "finish_scale_and_static_proof",
+      "manual_companion_integration_contract",
+      "reference_anchored_light_hierarchy",
+      "terrain_shoulders_and_staggered_cuts",
+      "pigment_channel_and_mark_hierarchy"
+    ],
+    "faceted_direction": "Explicit user design constraint: uneven form-following planar geometry, not an executed R08 outcome.",
+    "manual_companion": "Separate source-only companion/r07_street_finish; never installed, imported or executed by this add-on.",
+    "selection": "R05 remains native baseline; all R06 variants rejected; R07 street optional static presentation only; factory/mine R07 candidates rejected.",
+    "limits": [
+      "Companion replaces active compositor and takes first view layer.",
+      "Same-name inner group reused without validation; hardcoded R05 semantic names require explicit adaptation.",
+      "Scale outer guards together with filter radius; no universal facet preservation, GUI or motion pass."
+    ]
+  },
+  "recovery_r09_r10_guidance": {
+    "execution": "none",
+    "guide": "docs/RECOVERY_R09_R10_LESSONS.md",
+    "new_lesson_ids": [
+      "material_specific_plane_design",
+      "geometry_and_normal_evidence",
+      "fixed_distance_fields_and_static_limits",
+      "causal_sources_history_receivers",
+      "full_prototype_support_and_collision",
+      "route_clearance_and_transport",
+      "actor_and_world_scale_controls",
+      "effective_bindings_and_private_dependencies",
+      "frozen_and_regenerated_deposits",
+      "reject_unsupported_construction",
+      "fresh_camera_and_projection_proofs",
+      "zero_controls_and_repeat_floors",
+      "local_validity_and_hero_readability",
+      "height_specific_clearance_and_rebuild",
+      "chronology_and_retracted_findings"
+    ],
+    "scope": "Guidance only; immutable accepted runtime logic remains unchanged. Exact frozen R09/R10 evidence; R11 concepts UNIMPLEMENTED and architecture active/unaccepted at cutoff.",
+    "chronology": "Final R10 11:25 summary and guarded index supersede older pending zero/reopen qualifiers without rewriting prior files.",
+    "open_goals": [
+      "Stronger factory native-hero readability",
+      "Street traffic-derived dirt tracks",
+      "Broader architecture and painted-form transformation"
+    ],
+    "no_new_operator": true
+  },
+  "recovery_r11_r12_guidance": {
+    "execution": "none",
+    "guide": "docs/RECOVERY_R11_R12_LESSONS.md",
+    "new_lesson_ids": [
+      "original_cell_identity_and_randomness",
+      "planar_aperture_union_before_extrusion",
+      "complete_positive_cell_coverage",
+      "minimum_feature_boundary_bevel_policy",
+      "planar_caps_not_generic_dissolve",
+      "saved_geometry_and_effective_material_binding",
+      "supported_route_to_real_arrival",
+      "preserve_road_surface_planes",
+      "architectural_variants_with_measured_joinery",
+      "frozen_source_and_rebuild_prerequisites",
+      "bound_proof_camera_and_actual_images",
+      "saved_semantics_evaluated_uv_and_pixels"
+    ],
+    "scope": "Guidance-only accepted R11 functional checkpoint and exact R12 A4b architecture, not whole-street completion.",
+    "chronology": "Historical R11-unimplemented wording remains exact at its older cutoff; later R11/R12 acceptance is explicitly additive. C3 functional acceptance did not erase its diagnosed seams.",
+    "numeric_limits": "Complete positive coverage is a layout-specific verification target; accepted helper retains floating area/collinearity predicates and is not a universal exact Boolean kernel.",
+    "excluded": [
+      "R13 and later provisional findings",
+      "New runtime operators",
+      "New Blender or image execution"
+    ],
+    "no_new_operator": true
+  },
+  "runtime_extension": {
+    "version": "0.2.1",
+    "api": "<extension package>.runtime.api",
+    "settings_owner": "scene.astra_scene",
+    "schemas": [
+      "landscape.schema.json",
+      "native_scatter.schema.json"
+    ],
+    "examples": [
+      "landscape_presets.json",
+      "native_scatter.example.json"
+    ],
+    "documentation": "../docs/RUNTIME_020.md",
+    "mutation_policy": "Explicit operations only. Validate complete data before mutation. No eval, exec, background handler, global preference or installation change. Masks, substrate and receiver/source IDs are supplied explicitly.",
+    "art_acceptance": "not_determined",
+    "operator_ids": [
+      "astra_scene.starter",
+      "astra_scene.load_json",
+      "astra_scene.export_json",
+      "astra_scene.create",
+      "astra_scene.read_active",
+      "astra_scene.rebuild",
+      "astra_scene.restore",
+      "astra_scene.audit",
+      "astra_scene.native_scatter",
+      "astra_scene.planks",
+      "astra_scene.detail",
+      "astra_scene.pigment",
+      "astra_scene.textile",
+      "astra_scene.roof",
+      "astra_scene.stone"
+    ]
+  },
+  "historical_scope_notice": "Pre-0.2.0 runtime-unchanged statements below are historical release records. The runtime_extension field describes new 0.2.0 operators and adapters.",
+  "maintenance_021": {
+    "scope": "Rollback after six creation operators or material-specific detail fail during finalization",
+    "operators": [
+      "astra_scene.create",
+      "astra_scene.rebuild",
+      "astra_scene.native_scatter",
+      "astra_scene.planks",
+      "astra_scene.roof",
+      "astra_scene.stone",
+      "astra_scene.detail"
+    ],
+    "guide": "docs/MAINTENANCE_021.md",
+    "gui_undo_status": "Not qualified in this headless test environment"
+  }
+}
