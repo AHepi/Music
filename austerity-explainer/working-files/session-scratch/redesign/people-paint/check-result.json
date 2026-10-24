@@ -1,0 +1,224 @@
+{
+ "looks": {
+  "verdict": "works with fixes",
+  "summary": "Verdict: the painted-men approach works, but it needs fixes before it is as good as the notice corner. Drop the silhouette version.\n\nDOES IT READ AS ONE HAND-PAINTED PICTURE IN THE SERIES' STYLE? Mostly yes. The men are painted the same way as the street: brushed wool coats, belts, buttons, collars, hair under the caps, ink outlines and no faces anywhere. My measurements put it very close to the notice corner painting:\n- Overall brightness: 77.4 here, 77.4 in the notice corner. The plate was 48.9.\n- Spread of light and dark: 26.1 and 26.1.\n- Colour strength: 45 against the notice corner's 50 (the plate was 69).\n- Ink lines cover 6.4% of the picture against 6.7%.\n- Lines around the men average 3.7 px wide against about 3 px elsewhere and 2.9 px in the notice corner, so they are about a quarter heavier. That is visible close up but not on a phone.\n- The film is soft in the distance by the same amount as the approved notice corner film: fine detail drops to 0.10\u20130.16 of the painting's here, against 0.07\u20130.13 there. So the softness is not a new fault.\n\nWHAT THE PAINTER IMPROVED OVER THE PLATE:\n- The shop-dummy men with black empty faces became believable painted workers.\n- The cork-like texture on the steps and the plastic-looking walls became brushwork.\n- The flat computer sky became a brushed sky like the notice corner's.\n- The far walkers read better: you can make out a woman in a long skirt and a man with a bundle.\n- Tone and colour now match the series.\n\nWHAT IT LOST:\n- **The dark men against warm light.** In the plate the men were about 15% as bright as what surrounds them (brightness about 8). In the painting they are about 50% (brightness about 39), so on a phone they turn mid-grey and blend into the road. The film's lighting gives this back for the three front men (about 20%). The two men on the right stay pale khaki (64\u201373% of their surroundings).\n- **The fire's warm pool on the road.** It covers about half of what it did in the standard: warm light falls on 11.6% of the ground in the painting and 13.4% in the film, against 19.7% and 26.8% in the notice corner. The warm heart of the picture is small.\n- **The top of the drum.** It became a bright orange band standing above the rim, like a lid or a tin inside the drum. This is the same fault as notice corner lighting round 18, and it sits right at the centre of interest.\n- **The steps at the bottom right.** They became chunky brown blocks with streaky, wood-like strokes. On a phone they read as wooden crates or toy blocks, and they are the heaviest shape in the foreground.\n\nCOMPOSITION:\n- The five men stand in an evenly spaced row, all 6.6\u20138.9 m away, with their heads in one line right on the horizon (44\u201347% of the way down the frame). That makes a static frieze.\n- The street's lines all meet on the cap of the pale man on the right. The far walkers and the gate sit between the men's heads at the same height, which makes that band busy.\n- The group fills 44\u201370% of the frame's height, so the bottom 30% is empty pavement plus the heavy steps. In the standard the subject reaches 74\u201379% of the way down, and the drum is about 30% larger in the frame.\n- The sky at the top (about 20%) leaves good room for captions, as in the standard.\n\nTHE FILM:\n- The time cut is clean: one frame, exactly at 2.000 s (frame 60), with no half-mixed frame. Inside the mask, brightness rises from 61 to 72. Outside it, change at the cut is 1.7 levels against 1.5\u20131.7 for an ordinary frame.\n- The mask covers 44% of the frame, though: the whole lower half and the right-hand wall. So the pavement brushwork shifts a little at the cut. On average the foreground changes 4.1 levels against 1.7 normally, and 5.4% of its pixels change by more than 10 levels. That is hidden by a hard cut and invisible on a phone, but it would show in a dissolve.\n- Smoke rising from the drum lies over the far colliery gate. The gate area brightens from about 65 in the painting to about 85 in the film, and the shut gates and the far walkers fade into it.\n- The added flames and sparks match the standard.\n\nSILHOUETTES: worse.\n- They put 7.6% of the frame near pure black, against 1.7% in the painted film and the standard.\n- Their insides are flat black (brightness about 2) with no brushwork.\n- Thin lit seams show along belts and collars, which makes them look jointed like models.\n- The two men standing under the lamp are pitch black while the pavement at their feet is lit, which is the wrong light.\n- They read as shadow-puppet cut-outs pasted onto a painting.\n\nEverything is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-looks:\n- Comparison pictures: plate-vs-painting.jpg, figures-plate-over-painting.jpg, phone-size-std-painted-gone-silh.png, phone-size-stills.png, drum-plate-painting-state.jpg, drum-at-cut.jpg, steps-plate-painting.jpg, right-men-plate-painting-helper.jpg, cut-foreground-before-after.jpg, smoke-area-1-2-3-4s.png, warm-maps.png\n- Measuring scripts: scripts/\n- All film frames: pf/ (painted) and sf/ (silhouettes)\n\nNo file in the repository was changed and nothing was spent.",
+  "problems": [
+   {
+    "what": "The drum's open top was painted as a bright orange band standing above the rim, like a lid or a second tin inside the drum. The film's flames then sit on top of it. It reads as a model or toy part and repeats the 'drum lining sticking out' fault from notice corner lighting round 18. It is at the very centre of interest.",
+    "where": "people-test-painting.png and people-test-painting-state.png, top of the drum (plate pixels about x 640-900, y 1460-1520); visible in every film frame",
+    "fix": "Paint the top as a dark sooty hollow with only a faint glow low inside, as in the notice corner. Either repaint just the drum top with a small masked edit, or darken and lower the inner-rim glow in the plate before painting so the painter cannot lift it into a band.",
+    "severity": "must-fix"
+   },
+   {
+    "what": "The men lost their dark shape against the light. In the plate they were about 15% as bright as their surroundings; in the painting about 50% (brightness about 39 against about 80), so on a phone they turn mid-grey and blend with the road. The film's lighting brings the three front men back to about 20%. The two men on the right stay pale khaki at 64-73%, so the group splits into three dark men and two pale ones.",
+    "where": "People in the painting; the right pair (hand-on-bar and leaning) in the painted film",
+    "fix": "Keep the stage relighting that darkens the front men. Darken the right pair's coats to the same dark brown-grey, either in the painting or with a stage tint on those two figures, so all five read as dark workers' coats against the lamp-lit pavement.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The fire's warm pool on the road is about half the standard's. Warm light falls on 11.6% of the ground in the painting and 13.4% in the film, against 19.7% and 26.8% in the notice corner. The men stand in what light there is, so the picture's warm heart is small and the road in front of them is cool and flat.",
+    "where": "Road and pavement round the drum, painting and film",
+    "fix": "Strengthen the fire's glow on the road in the stage (the fire_glow_on_road spot) so a warm fan of light spreads on the setts in front of and between the men. Their dark backs against it are what made the plate strong.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The stone steps at the bottom right became chunky brown blocks with streaky, wood-like strokes. On a phone they read as wooden crates or toy blocks. They are the heaviest, warmest shape in the foreground and pull the eye into the corner, away from the men.",
+    "where": "Bottom-right corner of the painting and film (about the last 25% of width and height)",
+    "fix": "Paint the steps as worn grey-blue stone like the flagstones, or keep them out of the frame by moving the camera or the steps. If they stay, make them the same value as the pavement so they recede.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The composition is a static frieze with an empty foreground. Five evenly spaced men in a row have their heads in one line on the horizon (44-47% down the frame), and the far walkers and gate fill the gaps between their heads at the same height. The group occupies 44-70% of the height, leaving the bottom 30% as empty pavement plus the steps. The notice corner's subject reaches 74-79% down, and its drum is about 30% larger in the frame.",
+    "where": "Whole frame (people-test-shot.json figure positions; camera 6.6-8.9 m from the men)",
+    "fix": "Bring the group closer or lower in the frame, about 1.5-2 m nearer, so feet land near 75-80% of the height. Stagger the men in depth: one nearer, one farther. Break the head line, for example by having one man step toward the drum or turn in profile. Keep the far walkers clear of the gaps between heads.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The hand-on-bar man's raised hand reads as a hand to his ear or head, almost like holding a phone. The lamp post he is meant to hold is hidden behind his body, with its base showing between his feet. The leaning man's pale hand on the wall reads as a small pale square, like a stuck-on piece of paper.",
+    "where": "The two men on the right (plate pixels about x 880-1300, y 1180-1720)",
+    "fix": "Move the hand-on-bar man to one side of the lamp post so his hand visibly grips the bar, or give him a different pose. Darken the leaning man's hand to the coat's value.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "Smoke from the drum hangs as a pale veil over the far colliery gate. The gate area brightens from about 65 in the painting to about 85 in the film, the gate bars become faint, and at 1 s the far walkers stand inside the haze. In the notice corner the smoke rose against the dark notice board, not over the end of the street.",
+    "where": "Painted film, centre of the frame round the gate and far walkers (film pixels about x 540-720, y 800-920), all 4 s",
+    "fix": "Thin the smoke, keep it lower and closer to the drum, or let it drift toward the darker right-hand wall so the shut gates stay readable.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The silhouette version does not fit the look. Its figures are flat pure black (brightness about 2 inside, no brushwork) and put 7.6% of the frame near black, against 1.7% in the painted film and 1.7-1.9% in the notice corner film. Thin lit seams show along belts and collars (0.2-1.2% of each figure's inside is brighter than 40), so they look like jointed models. The two men under the kerb lamp are pitch black while the pavement at their feet is lit.",
+    "where": "people-test-silhouettes.mp4, all frames",
+    "fix": "Don't use silhouettes. Use the painted men with the stage darkening the backs that face away from the light.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The state mask covers 44% of the film frame: the whole lower half and the right-hand wall. The second painting's brushwork differs slightly everywhere, so the pavement brushwork shifts at the 2.0 s cut. The foreground changes 4.1 levels on average against 1.7 normally, and 5.4% of its pixels change by more than 10 levels. A hard cut hides it, but a dissolve or a slower change would show the pavement crawling.",
+    "where": "Painted film, frame 59 to 60 (1.967 to 2.000 s), lower half and right wall",
+    "fix": "Shrink the mask to the people, their shadows and a modest margin. Or keep the hard cut and never dissolve on this pair of pictures.",
+    "severity": "minor"
+   },
+   {
+    "what": "The ink outlines round the men average 3.7 px against about 3 px for the rest of the picture and 2.9 px in the notice corner, so the men look a little like stickers when seen full size.",
+    "where": "people-test-painting.png, outlines of the five near men",
+    "fix": "Ask for outlines on the people 'as fine as the outlines on the drum and lamp post'. Or accept it, since it does not show at phone size.",
+    "severity": "minor"
+   },
+   {
+    "what": "The man meant to face us (figure-facing) was painted as seen from behind, or at least ambiguously. A small skin-coloured patch shows under the cap of the left man and of the two on the right, like a cheek or ear at the back of the head.",
+    "where": "Left man and right pair, heads",
+    "fix": "No action needed for a 'seen from behind' test. If a man must face us later, ask for it explicitly and check his face stays in shadow.",
+    "severity": "minor"
+   }
+  ]
+ },
+ "painter-faults": {
+  "verdict": "works with fixes",
+  "summary": "VERDICT: works with fixes. The painter kept the set almost exactly. Removing the people was clean, except that the men's long shadows were left behind. The cut has no seam and no ghost figures, but those leftover shadows stay on the road after the men vanish. That is the one fault worth fixing before this look is approved.\n\n1) PAINTING vs PLATE, shape by shape (measured at full size, 1536 x 2730; 1 plate pixel = 0.76 film pixels):\n- Moved: nothing that matters. Across the frame, shapes match to a median of 2 px.\n  - The 5 near men sit on their plate outlines (centres within 1-8 px). Their ink outlines make them about 3.6 px wider all round, about 2.7 film px.\n  - Steps and flagstone joints are within 1-5 px. The gutter edges are within 5 px for most of the length, up to 12 px at the very bottom; its width is 95-107% of the plate's.\n  - The near lamp post (18 -> 20 px wide), the downpipes (6 -> 8 px), the chimney, the gates and the window sills are all in place.\n- Garbled:\n  - The colliery board reads \"ABNSTINGGOTON COLLIERY\" instead of \"ABBOTSCLOUGH COLLIERY\", and the small lines under it are scribble. This does not reach the film: the weights still shows the board uses the set's own surface, and the film frames read ABBOTSCLOUGH.\n- Changed or lost (all tiny on a phone):\n  - The gates keep about 33 main bars, but the fine short bars in their lower half are gone (about 50 bars across -> about 30). The bars went from 1 to 2 px wide.\n  - The winding-wheel hubs became round discs instead of square blocks. The spoke count looks the same (about 16) and the rims are outlined.\n  - The setts near the camera are drawn about 1.4 times longer.\n- Counts that match:\n  - Lamps: all 4 are there. Glass sizes are within 1-2 px and there is no halo: the ring just outside each lamp is not brighter than further out, except one lamp that sits against a lit wall.\n  - Windows are in the same places in about the same number. The lit pattern is similar, though the painting lights the glass itself rather than the plate's light spilling on the window sides.\n  - People: 5 men and 5 visible walkers, the same as the plate. Walker 6 is hidden in both.\n- Light pattern:\n  - The whole picture is 12.5 L lighter (L is lightness from 0 to 100), the sky 14 L lighter.\n  - The near right stone wall is lifted more (+17.9 L) and the step fronts less (+4.8 L).\n  - The men are still the darkest things on the road (15.7 against the road's 28.6).\n  - The colliery wall's soft diagonal shadow became a hard-edged one.\n- Forbidden things in the painting itself:\n  - None of these appear: flames, smoke, puddles, halos, moon or stars, birds, or extra people.\n  - Small slip: the man facing us has a lit orange jaw under his cap peak, and the far walkers have tiny orange face or hand dots. The prompt said no skin.\n- Not the painter: the film adds flames, sparks and a pale haze above the drum. The haze washes out the colliery gate.\n\n2) PEOPLE-OUT vs PAINTING:\n- Every person was removed, with no ghost outlines. What was filled in behind them follows the real set: the lamp-post base, the doorsteps, the gate and the kerb. Its lightness is within 3 L of what the helper plate predicts.\n- Nothing else changed. Allowing for a 2 px drift, the difference outside the people is 0.9 against 28.8 inside them, and only 0.05% of the frame changed by more than 12. Pixel for pixel, it is redrawn with a sub-pixel to 2 px drift (mean 5.9 levels).\n- Fault: the long cast shadows were not removed; only the shadows right at the feet were.\n  - In the helper plate (no men), the ground where the men's shadows fall is 11.3 L brighter than the lit ground beside it, because it sits in the fire's light pool.\n  - In the plate it is 0.7 L darker. In the painting it is 3.3 L darker, and in the people-out painting still 3.1 L darker.\n  - The people-out painting differs from the painting there by only 0.7 L, so the shadows are unchanged.\n\n3) STATE PICTURE AND THE CUT (frames 1.8-2.2 s; the cut is frame 60):\n- The state picture equals the painting outside the mask (max 1 level) and the lined-up people-out painting inside it.\n- No seam at the mask edge: the two pictures differ by 5 levels on average there. The blend strip is 10% softer, which is invisible in the crops and at phone size.\n- No ghost figures. The shadows of the absent men stay: in the film after the cut, that ground is still 2.6 L darker than beside it (2.9 L before the cut).\n- Besides the people, the only jump is a twitch of fine detail. Outside the people, 2.9% of pixels change by more than 8 levels at the cut, against 0.3% between normal frames. Local shifts are up to 1.2 film px, on the right wall and the pavement, which is under half a pixel at phone size.\n- The lamp-post base and the fire's warm light appearing on the road are correct.\n- The mask swaps 46% of the frame (38.4% fully, 7.6% partly) when the people cover 6.3%.\n\nEvidence is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-painter-faults:\n- findings-sheet.jpg\n- finding-ghost-shadows.jpg\n- cut-before-after-phone.jpg\n- cut-diff-film.jpg\n- diff-tolerant-paint-vs-behind.jpg\n- men-outlines-plate-cyan-painted-red.jpg\n- c-board-zoom.jpg\n- c-gate-lower.jpg\n- c-wheels-zoom.jpg\n- phone-size-before-after.png\n- the scripts in tools/\n\nNo repository file was changed and nothing was spent.",
+  "problems": [
+   {
+    "what": "The men's long cast shadows were not removed in the people-out painting, so the state picture keeps them. After the cut, dark patches and streaks stay on the setts and flagstones where the absent men's shadows fell. That ground should be inside the fire's warm light pool: in the helper plate it is 11.3 L brighter than the ground beside it, but in the people-out painting and the state picture it is 3.1 L darker. In the film after the cut it is still 2.6 L darker, against 2.9 L before.",
+    "where": "people-test-painting-behind.jpg and people-test-painting-state.png: the road and pavement in front of the men, about x 0.08-0.94, y 0.62-0.78 of the frame (blue band in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-painter-faults/ratio-plate-helper.jpg; outlines in finding-ghost-shadows.jpg)",
+    "fix": "Free fix: inside the cast-shadow area, divide out the shadow the renders measured exactly. Take the helper plate over the plate in linear light (helper/plate, clamp about 1-3, blur 3-6 px) and multiply the people-out painting by it before making the state picture. Or, if a repaint is wanted later, redo the people-out step as a masked repaint whose mask covers the people plus that shadow area (plate/helper ratio under 0.75), telling it the warm firelight on the setts continues there.",
+    "severity": "must-fix"
+   },
+   {
+    "what": "The state mask swaps 46% of the frame (38.4% fully, 7.6% partly) when the people cover only 6.3%. This widens the area that twitches at the cut: outside the people, 2.9% of pixels change by more than 8 levels against 0.3% between normal frames, with local shifts up to 1.2 film px on the right wall and pavement. It is not visible at phone size, but it is wasted risk.",
+    "where": "people-test-painting-state-mask.png (built from plate vs helper plate lighting differences)",
+    "fix": "Build the mask from the people plus their cast-shadow area (plate/helper ratio under 0.75), widened by about 20 px, instead of every pixel whose light differs. Optionally warp the people-out painting onto the painting with optical flow before blending.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The colliery board lettering is garbled: 'ABNSTINGGOTON COLLIERY' instead of 'ABBOTSCLOUGH COLLIERY', and the small lines are scribble. It is identical in the people-out painting. The film currently hides it because the board uses the set's own surface (blue in the weights still), and the film frames read ABBOTSCLOUGH.",
+    "where": "people-test-painting.png and people-test-painting-behind.jpg, board at about x 0.51-0.60, y 0.39-0.42",
+    "fix": "Keep the board on the set's own surface in every shot that uses this painting, and check the weights still each time. No repaint needed.",
+    "severity": "minor"
+   },
+   {
+    "what": "The man facing us has a lit orange jaw or cheek under his cap peak (about 52 x 20 plate px, about 13 x 5 px at phone size). The far walkers have tiny orange face or hand dots. The prompt said no skin and only dark shadow under the cap.",
+    "where": "people-test-painting.png: man facing at about x 0.16-0.22, y 0.47-0.48; walkers at y 0.44-0.48",
+    "fix": "Darken that patch to the cap shadow colour with a small hand-masked retouch (free). Or add a line about the jaw and chin to the prompt next time.",
+    "severity": "minor"
+   },
+   {
+    "what": "Thin and fine parts were simplified. The fine short bars in the lower half of the gates are gone (about 50 bars across -> about 30) and bars went from 1 to 2 px wide. The winding-wheel hubs became round discs instead of square blocks. Ink outlines make thin parts about 2 px wider (downpipes 6 -> 8 px, lamp post 18 -> 20 px).",
+    "where": "people-test-painting.png: gates x 0.48-0.61, y 0.43-0.47; wheels x 0.47-0.65, y 0.23-0.29",
+    "fix": "None needed at phone size. If close-ups of the colliery come later, let the set's own surface carry the gates and wheels, as is done for the board.",
+    "severity": "minor"
+   },
+   {
+    "what": "The light pattern moved a little. The whole picture is 12.5 L lighter, the sky 14 L lighter, the near right stone wall 17.9 L lighter and the step fronts only 4.8 L lighter. The step fronts therefore read relatively darker and the right wall relatively brighter than the plate. The colliery wall's soft diagonal shadow became hard-edged. This matches the direction of the Notice corner painting the user liked.",
+    "where": "people-test-painting.png: right wall x 0.86-0.96, y 0.30-0.70; step fronts x 0.76-0.94, y 0.89-0.93",
+    "fix": "Accept, or nudge in the stage's tint if the steps look heavy in the film.",
+    "severity": "minor"
+   },
+   {
+    "what": "The people-out painting kept in the repository is a JPEG, but the state picture was built from the lossless lined-up PNG in the scratch folder. They differ by 1.6 levels on average and up to 50 at edges, so remaking the state picture from the repo file will not match it exactly.",
+    "where": "film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-painting-behind.jpg vs scratchpad/redesign/people-paint/behind-1-aligned.png",
+    "fix": "When the repository is next updated with the user's go-ahead, store the lined-up PNG (or note in people-test-paintings.json that the state picture used the PNG).",
+    "severity": "minor"
+   },
+   {
+    "what": "Not a painter fault: the film shows flames, sparks and a pale haze above the drum, which the painting prompt forbade in the painting. They come from the film stage. The haze softens the colliery gate and door both before and after the cut.",
+    "where": "people-test-painted.mp4, around film x 450-750, y 640-1160",
+    "fix": "Confirm the stage's fire and haze are wanted. If not, turn the haze down so the gate stays crisp.",
+    "severity": "minor"
+   }
+  ]
+ },
+ "figures": {
+  "verdict": "works with fixes",
+  "summary": "FIGURES: THE PAINTED MEN WORK. USE THEM, NOT THE SILHOUETTES.\n\nCount. The painting has the same people as the plate: 5 near men and 5 visible far walkers. The sixth walker is also in neither picture. In the plate he stands completely behind the head of the man with his hand on the bar (0 of his pixels show), and the painting keeps him hidden. The painter added nobody and took nobody away. The \"men gone\" state picture removes all of them cleanly. I found no ghost outlines, shadows or smudges where they stood.\n\nPlace, size and pose (near men). I measured how far the plate's outline of each man is from the nearest painted edge.\n- Facing man: 95% of the outline is within 3 px (at 1536 wide).\n- Arms-folded man: 100%.\n- Stooped man: 91%. The plate scores 92% against itself, so this is as good as the plate.\n- Hand-on-bar man: 95%.\n- Leaning man: 100%.\n- The average distance is 1 px everywhere, which is about a quarter of a pixel on a phone.\nEvery pose is kept: the hands in pockets, the folded arms, the man bending over the drum with his hand on the rim, the raised arm, and the man leaning on the wall with one leg bent.\n\nFaces and added detail (near men). No eyes, noses, mouths or beards anywhere. The men seen from behind got short stippled hair, and small pale ear edges at the sides of the head. Most of those ear edges are already in the plate. The one man where they are new is the hand-on-bar man (0 skin-coloured pixels in the plate, 183 in the painting). They are about one phone pixel wide.\n\nThe man meant to face the camera does show a face, but a blank one. It is a featureless grey-brown oval under the cap peak, lit orange on one cheek. It is not the \"deep shadow\" the prompt asked for, but it is darker than in the plate: 2.5 times as bright as his coat, against 8 times in the plate. On a phone it is a small lighter patch about 10 px wide under the cap. That reads as \"a face in shadow, looking our way\", which is what we want. At full size it is slightly shop-dummy-like. That only matters if a later shot pushes in close to him.\n\nPhoto, dummy, statue or toy? None of the near men look like any of these. They have the same ink outlines, brushwork and dull browns and greys as the street, so they belong to the painting. In the plate they look like plastic figurines; in the painting that is gone.\n\nFar walkers (40 to 60 m away; 68 to 90 px tall in the painting, about 19 to 25 px on a phone in the film). Same places and walking poses: the man with the bag and the man behind him overlapping, the woman in the long dress, the man with a bundle on his shoulder, and the figure by the gates. Small changes:\n- Each walker got a few warm pale dots on the face or hand, 5 to 23 px each against none in the plate. About one phone pixel, so invisible on a phone.\n- The first walker's hand became an orange blob.\n- The bag carried by the walker behind him is lost.\n- The bundle-carrier's legs became stiff straight sticks.\n- Walker 4 was about two-thirds hidden behind the lamp post in the plate (31% showed). The painter painted him whole, standing beside the post. That is a small change to the picture, not a fault you would notice.\n\nPainted versus dark silhouettes at phone size (360 wide). I measured contrast as how much darker each figure is than what is around it.\n- Silhouettes are pure black inside (middle grey value 1 out of 255). Their contrast is 2.8 to 3.3 times; the painted men's is 1.9 to 2.7 times.\n- So the silhouettes jump out more, but they lose almost everything else:\n  - They look like a different medium, black cut-outs or shadow puppets on a painting. They have no ink line and no brushwork, and the fire does not light them.\n  - Where dark things meet, they melt together: the two right-hand men and the black lamp post become one black lump.\n  - You cannot tell whether the left man faces you or not.\n  - The folded arms and coat belts disappear. Thin white belt lines and rim glints show up instead (3% of their inside is brighter than grey 40).\n- The painted men show who is doing what (warming hands, hands in pockets, leaning). They take the same warm light as the street, and the brown coats keep neighbours apart.\n- The weakest read in the painted film is the right-hand pair, whose grey-brown coats sit against the grey stone wall (contrast 1.86). They are still clearly two men.\n\nThe painted men also match the Notice-corner standard (ink-outlined props in warm light). The silhouettes would stand out from it.\n\nVerdict: painted workers seen from behind work in this look. Keep them, with the small fixes below.\n\nFiles are in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-figures. The ones that show the findings:\n- near-left.jpg and near-right.jpg (near men: plate, painting, painting without people)\n- walkers-x3.5.jpg, plus walkers-1-2-5-x8.jpg, walker-3-x8.jpg and walker-4-6-x8.jpg (far walkers)\n- head-*-x5.jpg (the heads)\n- phone-pair-1s.jpg and phone-pixels-x3.jpg (both films at phone size)\n- heads-films-1s-x2.jpg\n- state-figure-area.jpg and state-walkers-x3.jpg (the \"men gone\" picture)\n- outline-chamfer.json and film-per-figure-contrast.json (the measurements)\nThe scripts are in the scripts/ folder there.",
+  "problems": [
+   {
+    "what": "The man meant to face the camera has a blank grey-brown face shape with an orange-lit cheek, not a face lost in deep shadow. It has no eyes, nose or mouth, but at full size it looks a little like a shop dummy. The face is 2.5 times as bright as his coat.",
+    "where": "people-test-painting.png, left man, face under the cap peak (about x 288-330, y 1325-1345 at 1536 wide)",
+    "fix": "Fine for this phone-size shot: on a phone it reads as a shadowed face, about 10 px wide. If a later shot pushes in on a facing man, ask the painter to darken the face to match the coat, or paint over that patch with the cap's shadow colour before projecting.",
+    "severity": "minor"
+   },
+   {
+    "what": "The two right-hand men (hand on bar, leaning) in grey-brown coats are the weakest read in the painted film. They stand against the grey stone wall, at a contrast of 1.86 against 2.1 to 2.7 for the other near men.",
+    "where": "people-test-painted.mp4, right-hand pair by the lamp post, all frames before 2.0 s",
+    "fix": "Still clearly two men on a phone. For the real shot, ask for these coats one step darker or browner than the wall, or move them a little apart from the wall.",
+    "severity": "minor"
+   },
+   {
+    "what": "Walker 4 was about two-thirds hidden behind the lamp post in the plate (31% visible). The painter painted him whole, standing beside the post, so only 63% of his plate outline lies within 3 px of a painted edge.",
+    "where": "people-test-painting.png, small figure by the colliery gate on the right (about x 926-953, y 1223-1291)",
+    "fix": "Leave it: it is harmless and the state picture removes him cleanly. If exact matching matters, put him in the open in the 3D set so the plate and painting agree.",
+    "severity": "minor"
+   },
+   {
+    "what": "Small details added to the far walkers: warm pale face or hand dots (5 to 23 px each, none in the plate), an orange blob for walker 1's hand, the bag of the walker behind him lost, and stiff stick legs on the bundle-carrier.",
+    "where": "people-test-painting.png, far walkers 1, 2, 3, 4 and 5 (x 650-960, y 1215-1320)",
+    "fix": "Invisible on a phone (about one phone pixel each), so no repaint is needed. To prevent it next time, add to the prompt: 'the far walkers are flat dark shapes with no pale spots'.",
+    "severity": "minor"
+   },
+   {
+    "what": "The hand-on-bar man gained pale ear slivers on both sides of the head and stippled hair texture. The plate showed no skin there (0 skin-coloured pixels against 183).",
+    "where": "people-test-painting.png, hand-on-bar man's head (about x 950-1060, y 1210-1320)",
+    "fix": "No action for phone size. It is about one phone pixel wide and reads as the back of a head, which is correct.",
+    "severity": "minor"
+   },
+   {
+    "what": "If the silhouettes were chosen: they are pure black (middle grey 1/255), carry no ink line or brushwork, and are not lit by the fire. They melt into the black lamp post and into each other on the right. They hide whether the left man faces us. They also show stray white belt and rim lines (3% of their inside is brighter than grey 40).",
+    "where": "people-test-silhouettes.mp4, all five near men, all frames",
+    "fix": "Do not use the silhouettes for this look. Keep the painted men (people-test-painted.mp4 approach). If silhouettes are ever wanted as a deliberate 'memory' device, lift them to a dark warm brown, add the painting's ink outline, and switch off the rim and belt lights.",
+    "severity": "should-fix"
+   }
+  ]
+ },
+ "first-viewer": {
+  "summary": "FIRST-TIME VIEWER REPORT (I watched 40 frames per film, one every 0.1 s, at phone size (360 px wide), plus every frame from 1.8 to 2.2 s and full-size crops. I did not open the prompts file, any notes or the masks.)\n\nWHAT HAPPENS IN THE PAINTED FILM: It's dusk on a cobbled pit-village street, with a chimney and the colliery winding wheels at the far end and gas lamps lit. Five men in long coats and caps stand with their backs to us around a burning oil drum. Two stand on the road with their hands behind their backs, one leans over the drum warming his hands, and two in pale coats stand at a house door by the right-hand wall. Tiny figures stand by the colliery gate. The camera doesn't move: drift between the first and last frame is 0.1 px and the zoom changes by 0.0001. The only things moving are the flames, the sparks and a thin smoke wisp. Then, in one frame, every person disappears: frame 59 (1.967 s) has all of them, frame 60 (2.000 s) has none, including the tiny figures by the gate. There is no dissolve and no flash frame. For the last 2 s the street is empty, the drum still burns, and a lamp post that the pale-coated men were hiding stands in plain view.\n\nDOES 2 S READ AS TIME PASSING? No. To me it read as the men blinking out, like a layer switching off or a ghost trick. It did not say \"later, they've gone down the pit\". The measurements show why: away from the men, nothing in the picture changes at the cut. Sky, houses, pavement and wall all stay within 0.3% brightness, the camera doesn't move, the lamps are still lit and the smoke is still there. The fire even looks bigger afterwards: bright flame pixels go from about 480 to about 1,420 per frame, partly because the leaning man's arm no longer hides them. A fire that has just been left matches \"they vanished this second\", not \"hours later\". The whole picture gets 6.8% brighter (luminance 70.4 to 75.2), but all of that comes from the dark figures being removed. With narration or a sound bridge (\"by morning they were gone\u2026\") a viewer might accept it. On its own the picture gives no sign that time has passed.\n\nODD THINGS I NOTICED: (1) The men are completely frozen. Variation inside the figures over 2 s is about 2.4 out of 255, which is only noise, while the fire next to them flickers. You barely notice this in 2 s, but over a longer shot they would look like cardboard. (2) The two pale-coated men by the wall seem to be walking into the house wall. A wall bracket shows on top of one man's shoulder (full size around x 860-870, y 960-980), but you can't see it on a phone. (3) The fire doesn't light the men. The leaning man has his hands right over the flames but has no warm glow anywhere. (4) At full size the men have a heavier, even dark outline than the buildings, which makes them look slightly stuck on. At phone size they sit well, and they clearly read as workers in this painted look.\n\nSILHOUETTES FILM: This is the same 4 s locked-off shot with no cut. The same five poses appear as flat black shapes over the painting without people, with fire and smoke moving and the figures never moving. At phone size they read at once as people seen from behind. The front two are about 134-146 px tall on a 640 px-tall phone frame, and they match the small dark figures by the gate. Up close they look like shadow puppets or holes cut in the picture. Their insides are almost pure black: median luminance 1 out of 255, against 17 for the painted men and 12 for the darkest 1% of the empty scene. The fire puts no light on them. Thin gold rim lines and grey belt and collar lines show at full size, and the heads are smooth egg shapes, so they look like mannequins rendered black. They are clear and graphic, but they belong to a different style from the warm painting.\n\nVERDICT: The painted men from behind work in this look and are better than the silhouettes. But the 2 s time cut does not work yet: it reads as a vanish or glitch, not as time passing. It needs real signs of time passing (see fixes).\n\nEVIDENCE (all in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/):\n- Phone-size sheets every 0.1 s: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/painted-sheet-0.0-1.9.jpg, /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/painted-sheet-2.0-3.9.jpg, /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/sil-sheet-0.0-1.9.jpg, /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/sil-sheet-2.0-3.9.jpg\n- Frame by frame around the cut: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/painted-cut-56-61.jpg\n- What changes at the cut: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/cut-diffmap.jpg\n- Before and after the cut: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/cut-59-vs-60-half.jpg\n- Fire over time, full size: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/fire-zone-fullres.jpg\n- Close-ups of the men: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/tan-men-zoom.jpg, /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/front-men-zoom.jpg\n- Painted men next to silhouettes: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/painted-vs-sil-crop-t1.jpg\n- Close-ups of the silhouettes: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/sil-zoom-left.jpg, /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/sil-zoom-right.jpg\n- Four frames at phone size: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/check-first-viewer/phone-size-four.png\n\nNo repository file was changed.",
+  "verdict": "works with fixes",
+  "problems": [
+   {
+    "what": "The time cut reads as the men vanishing (a glitch or ghost trick), not as time passing. All people, including the tiny figures by the gate, disappear between two frames. Nothing else changes: areas away from the men stay within 0.3% brightness, the camera moves 0.1 px or less, and the light, lamps, sky and smoke are the same.",
+    "where": "people-test-painted.mp4, frame 59 (1.967 s) to frame 60 (2.000 s)",
+    "fix": "Give the empty picture real signs of time passing: change the light (deeper night or a grey dawn, lamps on or off), let the fire burn down to embers with thinner smoke, and leave a trace (a tin mug on the drum, footprints). Use a short dissolve (about 10-15 frames) or a slight change of framing instead of a pixel-identical hard cut. Back it with narration or a sound bridge.",
+    "severity": "must-fix"
+   },
+   {
+    "what": "The fire looks bigger and livelier after the men leave (bright flame pixels about 480 to about 1,420 per frame, partly because the leaning man's arm no longer covers them). A freshly blazing, unattended fire says 'they left this instant', which works against 'later'.",
+    "where": "people-test-painted.mp4 / people-test-painting-state.png, the drum fire after 2.0 s",
+    "fix": "In the state picture and the fire effect, show the fire burned low (embers, small flame, thin smoke) or out.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The men are completely frozen while the flames flicker and the smoke drifts. Variation inside the figures over 2 s is about 2.4 out of 255, which is only noise. Fine for 2 s, but in a longer hold they start to look like cut-outs.",
+    "where": "people-test-painted.mp4, 0-2 s, all five men",
+    "fix": "Keep shots with painted people short (2-3 s), or add a tiny breathing or sway movement or a little fire flicker light on the figures.",
+    "severity": "minor"
+   },
+   {
+    "what": "The fire doesn't light the men: the man leaning over the flames has no warm glow on his hands, sleeve or the side of his coat facing the fire, and the two front men get no warm rim either.",
+    "where": "people-test-painting.png, the man at the drum and the two front men",
+    "fix": "Ask for or paint a warm orange glow on the edges and hands facing the drum, or add a soft orange light pass over the figures near the fire in the film stage.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "The two pale-coated men by the right-hand wall seem to be walking into the house wall. A wall bracket shows on top of the right man's shoulder as a pale patch. Invisible at phone size.",
+    "where": "people-test-painting.png, around x 860-870, y 960-980 (full 1080x1920 frame)",
+    "fix": "Move this pair a little off the wall (or turn them to face a doorway clearly) and make sure the bracket sits behind the figure.",
+    "severity": "minor"
+   },
+   {
+    "what": "After the cut, a tall black lamp post is suddenly in full view where the pale-coated men stood. It was there before, mostly hidden, but at phone size it looks like a new object and adds to the 'something jumped' feeling.",
+    "where": "people-test-painted.mp4, after 2.0 s, lamp post right of the drum",
+    "fix": "Show more of the post before the cut (place the men so it is visible), or accept it once the cut has other signs of time passing.",
+    "severity": "minor"
+   },
+   {
+    "what": "The silhouettes are almost pure black (median 1 out of 255, against 17 for the painted men and 12 for the darkest 1% of the empty scene). They read as people at once, but they look like shadow puppets or holes in the picture: no fire light, smooth mannequin heads, thin gold rim lines and grey belt and collar lines left visible. They belong to a different style from the warm painting.",
+    "where": "people-test-silhouettes.mp4, the whole 4 s",
+    "fix": "Use the painted men. If silhouettes are wanted (for example for anonymous or absent workers), lift them to a dark painted blue-brown (about 15-30 out of 255), add a warm fire rim on edges facing the drum, a little brush texture, and remove the stray inner lines.",
+    "severity": "should-fix"
+   },
+   {
+    "what": "At full size the painted men have a heavier, even dark outline than the buildings, which makes them look slightly stuck on. At phone size they blend in well.",
+    "where": "people-test-painting.png, outlines of all five men",
+    "fix": "Optional: ask for thinner, broken outlines on the figures to match the building linework.",
+    "severity": "minor"
+   }
+  ]
+ }
+}

@@ -1,0 +1,316 @@
+{
+ "about": "Works layout, metres: x across the lane (0 on its centre line, No. 1 at minus x, No. 2 at plus x); y away from the lane (0 at the works wall's face on the lane side); z up from the ground. Place the root at the wall's face on the lane's centre line (for a lane built with --length L, at y = L). In three.js a point (x, y, z) is (x, z, -y).",
+ "models": [
+  {
+   "file": "far-town.glb",
+   "blend": "far-town.blend",
+   "root": "far-town",
+   "description": "The far town beyond the Works: terraced streets, four tall mills, eight mill chimneys, a gasholder and a church spire, about 60 to 450 m behind the works wall.",
+   "size_metres": {
+    "from": [
+     -700.0,
+     42.0,
+     -0.2
+    ],
+    "to": [
+     700.0,
+     900.0,
+     59.6
+    ],
+    "width_x": 1400.0,
+    "depth_y": 858.0,
+    "height_z": 59.8
+   },
+   "facts": {
+    "chimneys": [
+     {
+      "x": -118.0,
+      "y": 160.0,
+      "height": 50.0
+     },
+     {
+      "x": -58.0,
+      "y": 128.0,
+      "height": 42.0
+     },
+     {
+      "x": -150.0,
+      "y": 250.0,
+      "height": 48.0
+     },
+     {
+      "x": 110.0,
+      "y": 330.0,
+      "height": 52.0
+     },
+     {
+      "x": 52.0,
+      "y": 112.0,
+      "height": 40.0
+     },
+     {
+      "x": 98.0,
+      "y": 250.0,
+      "height": 52.0
+     },
+     {
+      "x": 160.0,
+      "y": 196.0,
+      "height": 44.0
+     },
+     {
+      "x": -170.0,
+      "y": 330.0,
+      "height": 36.0
+     }
+    ],
+    "gasholder": {
+     "x": -75.0,
+     "y": 175.0,
+     "diameter": 34.0,
+     "frame_height": 36.0
+    },
+    "spire": {
+     "x": 95.0,
+     "y": 296.0,
+     "height": 58.0
+    },
+    "terrace_rows": 132
+   },
+   "objects": 162,
+   "triangles": 128356,
+   "glb_megabytes": 6.7,
+   "markers": [
+    "far-town-chimney-top-1",
+    "far-town-chimney-top-2",
+    "far-town-chimney-top-3",
+    "far-town-chimney-top-4",
+    "far-town-chimney-top-5",
+    "far-town-chimney-top-6",
+    "far-town-chimney-top-7",
+    "far-town-chimney-top-8"
+   ],
+   "glass_pieces": {},
+   "glass_materials": [],
+   "lettering": "none (no signs, no lettering, no figures)",
+   "surfaces": [
+    "castle_brick_02_red",
+    "muddy_tracks",
+    "red_brick",
+    "roof_slates_03",
+    "rusty_metal_02",
+    "stone_brick_wall_001"
+   ],
+   "licence": "Poly Haven surfaces (CC0); glass pictures painted by paint_works_pictures.py; built by script"
+  },
+  {
+   "file": "no-1-quiet-factory.glb",
+   "blend": "no-1-quiet-factory.blend",
+   "root": "no-1-quiet-factory",
+   "description": "No. 1, the quiet factory (always on the left): dark red-brown brick, one tall round chimney, a four-bay sawtooth roof, no water tank, a two-storey mill front with upper windows, cart doors shut. Saved with every window dark.",
+   "size_metres": {
+    "from": [
+     -25.0,
+     0.6,
+     -0.1
+    ],
+    "to": [
+     -0.3,
+     42.0,
+     27.0
+    ],
+    "width_x": 24.7,
+    "depth_y": 41.4,
+    "height_z": 27.1
+   },
+   "facts": {
+    "mill": {
+     "x": [
+      -22.5,
+      -0.5
+     ],
+     "y": [
+      8.0,
+      30.0
+     ],
+     "eaves": 7.8,
+     "first_floor": 4.2,
+     "ground_floor_windows": [
+      1.0,
+      3.4
+     ],
+     "upper_windows": [
+      5.0,
+      7.2
+     ],
+     "roof": "four-bay sawtooth, bays of 5.5 m rising towards the centre line, peaks 10.2 m"
+    },
+    "round_chimney": {
+     "x": -5.3,
+     "y": 35.0,
+     "height": 26.0,
+     "shaft_diameter": [
+      2.9,
+      1.84
+     ]
+    },
+    "cart_doorway": {
+     "centre_x": -3.4,
+     "width": 3.0,
+     "height": 3.8
+    }
+   },
+   "objects": 97,
+   "triangles": 6306,
+   "glb_megabytes": 6.1,
+   "markers": [
+    "no-1-chimney-top",
+    "no-1-doorway.001"
+   ],
+   "glass_pieces": {
+    "doorway": 1,
+    "step 1": 25,
+    "step 2": 23,
+    "step 3": 26
+   },
+   "glass_materials": [
+    "no-1-doorway-inside-dark",
+    "no-1-mill-window-narrow-dark",
+    "no-1-north-light-dark"
+   ],
+   "lettering": "none (no signs, no lettering, no figures)",
+   "surfaces": [
+    "castle_brick_02_red",
+    "distressed_painted_planks",
+    "grey_plaster_02",
+    "large_sandstone_blocks",
+    "roof_slates_03",
+    "rusty_metal_02",
+    "square_cobblestone"
+   ],
+   "licence": "Poly Haven surfaces (CC0); glass pictures painted by paint_works_pictures.py; built by script"
+  },
+  {
+   "file": "no-2-flat-out-factory.glb",
+   "blend": "no-2-flat-out-factory.blend",
+   "root": "no-2-flat-out-factory",
+   "description": "No. 2, the flat-out factory (always on the right): pale buff-grey brick, two square chimneys, a water tank on a steel trestle, long pitched shed roofs with glazed lanterns, a two-storey mill front with upper windows, cart doors open on a lit works, a taking-in door with a hoist beam. Saved with every window lit.",
+   "size_metres": {
+    "from": [
+     -0.05,
+     0.6,
+     -0.1
+    ],
+    "to": [
+     25.0,
+     42.0,
+     25.0
+    ],
+    "width_x": 25.05,
+    "depth_y": 41.4,
+    "height_z": 25.1
+   },
+   "facts": {
+    "mill": {
+     "x": [
+      0.5,
+      22.5
+     ],
+     "y": [
+      8.0,
+      30.0
+     ],
+     "eaves": 7.8,
+     "first_floor": 4.2,
+     "ground_floor_windows": [
+      1.0,
+      3.4
+     ],
+     "upper_windows": [
+      5.0,
+      7.2
+     ],
+     "roof": "three pitched spans, gables to the lane, ridges 8.85 m, 9.84 m, 9.84 m, lanterns on each ridge"
+    },
+    "square_chimneys": [
+     {
+      "x": 5.3,
+      "y": 35.0,
+      "height": 25.0,
+      "shaft_side": [
+       2.0,
+       1.36
+      ]
+     },
+     {
+      "x": 8.6,
+      "y": 38.5,
+      "height": 23.0,
+      "shaft_side": [
+       2.0,
+       1.36
+      ]
+     }
+    ],
+    "water_tank": {
+     "x": [
+      6.9,
+      9.9
+     ],
+     "y": [
+      9.6,
+      12.6
+     ],
+     "bottom": 12.0,
+     "top": 14.8
+    },
+    "cart_doorway": {
+     "centre_x": 2.9,
+     "width": 2.8,
+     "height": 3.8
+    },
+    "taking_in_door": {
+     "x": [
+      2.2,
+      3.6
+     ],
+     "z": [
+      4.45,
+      7.0
+     ]
+    }
+   },
+   "objects": 110,
+   "triangles": 6582,
+   "glb_megabytes": 7.0,
+   "markers": [
+    "no-2-chimney-a-top",
+    "no-2-chimney-b-top",
+    "no-2-doorway.001",
+    "no-2-tank-top"
+   ],
+   "glass_pieces": {
+    "doorway": 1,
+    "step 1": 26,
+    "step 2": 27,
+    "step 3": 27
+   },
+   "glass_materials": [
+    "no-2-doorway-inside-lit",
+    "no-2-lantern-light-lit",
+    "no-2-mill-window-wide-lit"
+   ],
+   "lettering": "none (no signs, no lettering, no figures)",
+   "surfaces": [
+    "distressed_painted_planks",
+    "grey_plaster_02",
+    "large_sandstone_blocks",
+    "roof_slates_03",
+    "rusty_metal_02",
+    "square_cobblestone",
+    "white_sandstone_bricks"
+   ],
+   "licence": "Poly Haven surfaces (CC0); glass pictures painted by paint_works_pictures.py; built by script"
+  }
+ ]
+}
