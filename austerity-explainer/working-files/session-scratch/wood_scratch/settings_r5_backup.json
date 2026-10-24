@@ -1,0 +1,46 @@
+{
+ "_what_this_is": "Settings of the wood reuse trial (wood_recipe.py reads this). Every shared layer is unchanged; only these numbers differ from slate. Colours from the wood reference's measured 16-colour palette (recipes/wood/analysis/palette16.json), sizes from its measured board, gap, strip and crack numbers (reference_measures.json); then tuned by hand by eye.",
+
+ "recipe.stack_order": "colour_and_fade,moss,damage,cracks,knots,outline_and_shadow", "recipe.height_rule": "combine",
+
+ "layout.rows_per_tile": 5, "layout.slates_per_row": 1, "layout.row_height_jitter": 0.15, "layout.width_spread": 0.0, "layout.row_slide": 1.0,
+ "layout.joint_width": 0.002, "layout.row_gap": 0.0054, "layout.row_gap_top_share": 0.5, "layout.corner_radius": 0.002, "layout.corner_top_factor": 1.0,
+ "layout.corner_bottom_factor": 1.0, "layout.joint_lean": 0.0, "layout.ragged_side": 0.002, "layout.ragged_top": 0.005, "layout.ragged_bottom": 0.005,
+ "layout.ragged_scale": 30.0, "layout.ragged_detail": 3.0, "layout.ragged_chip": 2.0, "layout.bottom_tilt": 0.002, "layout.slate_ramp": 0.0,
+ "layout.bevel_width": 0.003,
+
+ "turn.grain_stretch": 6.0,
+
+ "colour_and_fade.tone_1": "#281c16", "colour_and_fade.tone_2": "#392419", "colour_and_fade.tone_3": "#43322a", "colour_and_fade.tone_4": "#513726",
+ "colour_and_fade.tone_5": "#533f35", "colour_and_fade.tone_6": "#62432f", "colour_and_fade.tone_7": "#705341", "colour_and_fade.tone_8": "#836652",
+ "colour_and_fade.tone_9": "#9c704f", "colour_and_fade.green_tint": "#4f4b4f", "colour_and_fade.warm_tint": "#7c563c",
+ "colour_and_fade.tone_centre": 4.3, "colour_and_fade.tone_spread": 1.0, "colour_and_fade.outlier_share": 0.1, "colour_and_fade.outlier_size": 1.5,
+ "colour_and_fade.tint_amount": 0.4, "colour_and_fade.tint_green_share": 0.7, "colour_and_fade.patch_tint": 0.45, "colour_and_fade.fade_direction": 0.0,
+ "colour_and_fade.fade_length": 0.01, "colour_and_fade.streak_width": 0.013, "colour_and_fade.mottle_tallness": 1.6, "colour_and_fade.streak_contrast": 2.0,
+ "colour_and_fade.top_darkening": 0.0, "colour_and_fade.speck_amount": 2.0, "colour_and_fade.speck_cover": 0.35, "colour_and_fade.speck_size": 0.004,
+ "colour_and_fade.streak_bend": 0.003, "colour_and_fade.edge_ragged": 0.004, "colour_and_fade.bleach_amount": 1.0, "colour_and_fade.bleach_cover": 0.25,
+ "colour_and_fade.stain_amount": 0.8, "colour_and_fade.stain_cover": 0.25, "colour_and_fade.patch_size": 0.3, "colour_and_fade.drift_amount": 0.3,
+ "colour_and_fade.grain_amount": 0.15,
+
+ "moss.coverage": 0.42, "moss.lichen_amount": 0.8, "moss.lichen_clustering": 0.85, "moss.lichen_size": 0.0025, "moss.damage_avoid": 0.5,
+ "moss.lichen_colour": "#5a3424", "moss.lichen_light": "#6a3c26", "moss.lichen_dark": "#3a2a24", "moss.drip_preference": 0.0, "moss.joint_preference": 0.0, "moss.lower_preference": 0.0, "moss.damp_preference": 0.0, "moss.clump_strength": 3.0, "moss.cluster_size": 0.035, "moss.drip_stretch": 1.3, "moss.flow_wobble": 0.004, "moss.edge_raggedness": 1.4, "moss.fringe_amount": 0.0, "moss.patchiness": 0.6, "moss.patch_size": 0.25, "moss.slate_variation": 0.7, "moss.tone_centre": 0.45, "moss.tone_spread": 1.0, "moss.rim_lightening": 0.2, "moss.top_shading": 0.0, "moss.tone_patch_size": 0.03, "moss.tone_1": "#2e2c31", "moss.tone_2": "#3e3b40", "moss.tone_3": "#5a3422", "moss.tone_4": "#6a3c22", "moss.tone_5": "#7a4626",
+
+ "damage.chip_amount": 0.5, "damage.chip_depth": 0.012, "damage.chip_frequency": 90, "damage.chip_clustering": 0.8, "damage.chip_breakup": 0.6,
+ "damage.side_share": 1.0, "damage.corner_gain": 0.5, "damage.notch_amount": 0.15, "damage.notch_depth": 0.006, "damage.corner_break_amount": 0.05,
+ "damage.corner_break_size": 0.012, "damage.crack_amount": 0.2, "damage.crack_length": 0.05, "damage.crack_width": 0.0025, "damage.crack_across_share": 0.0,
+ "damage.scratch_amount": 0.0, "damage.pit_amount": 0.0, "damage.break_colour": "#7c563c", "damage.break_colour_light": "#9c704f",
+ "damage.break_colour_dark": "#4a3426", "damage.hole_colour": "#120d0b",
+
+ "cracks.lip_colour": "#9c704f", "cracks.crack_amount": 0.85, "cracks.lanes": 4.0, "cracks.crack_width": 0.004, "cracks.lip_width": 0.003, "cracks.shortest_share": 0.4, "cracks.width_variation": 0.6, "cracks.lane_middle_share": 0.8, "cracks.stretch_length": 0.067, "cracks.wobble_scale": 120.0,
+
+ "knots.knot_spacing": 0.083, "knots.knot_stretch": 0.233, "knots.ring_count": 6.0, "knots.roughen": 0.2, "knots.ring_strength": 0.6, "knots.halo_reach": 2.2,
+
+ "outline_and_shadow.joint_colour": "#120d0b", "outline_and_shadow.joint_width": 0.0008, "outline_and_shadow.band_width": 0.0008,
+ "outline_and_shadow.side_outline_width": 0.0015, "outline_and_shadow.side_outline_darkness": 0.5, "outline_and_shadow.outline_colour": "#1e1612",
+ "outline_and_shadow.shadow_width": 0.0, "outline_and_shadow.shadow_darkness": 0.0, "outline_and_shadow.black_drips": 0.0,
+ "outline_and_shadow.lip_brightness": 0.0, "outline_and_shadow.edge_darkening": 0.3, "outline_and_shadow.edge_darkening_width": 0.004,
+
+ "combine.tone_blend": 1.0,
+
+ "height_rule.blend": 1.0, "height_rule.grey_at_zero": 12.0, "height_rule.slope": 2.198
+}
