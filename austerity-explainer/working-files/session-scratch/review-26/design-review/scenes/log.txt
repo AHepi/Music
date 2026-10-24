@@ -1,0 +1,55 @@
+ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
+  built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
+  configuration: --prefix=/usr --extra-version=3ubuntu5 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --disable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared
+  libavutil      58. 29.100 / 58. 29.100
+  libavcodec     60. 31.102 / 60. 31.102
+  libavformat    60. 16.100 / 60. 16.100
+  libavdevice    60.  3.100 / 60.  3.100
+  libavfilter     9. 12.100 /  9. 12.100
+  libswscale      7.  5.100 /  7.  5.100
+  libswresample   4. 12.100 /  4. 12.100
+  libpostproc    57.  3.100 / 57.  3.100
+-vsync is deprecated. Use -fps_mode
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.16.100
+  Duration: 00:04:30.33, start: 0.000000, bitrate: 815 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt470bg/unknown/unknown, progressive), 1080x1920 [SAR 1:1 DAR 9:16], 675 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 131 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> mjpeg (native))
+Press [q] to stop, [?] for help
+[Parsed_showinfo_1 @ 0x55e4cb3ee4c0] config in time_base: 1/15360, frame_rate: 30/1
+[Parsed_showinfo_1 @ 0x55e4cb3ee4c0] config out time_base: 0/0, frame_rate: 0/0
+[swscaler @ 0x55e4cb2c0fc0] deprecated pixel format used, make sure you did set range correctly
+[Parsed_showinfo_1 @ 0x55e4cb3ee4c0] n:   0 pts: 699392 pts_time:45.5333 duration:    512 duration_time:0.0333333 fmt:yuv420p cl:center sar:1/1 s:1080x1920 i:P iskey:1 type:I checksum:595082D7 plane_checksum:[7AEF448C B32743FF 2835FA3D] mean:[76 116 139] stdev:[44.3 12.5 15.4]
+[Parsed_showinfo_1 @ 0x55e4cb3ee4c0] color_range:tv color_space:bt470bg color_primaries:unknown color_trc:unknown
+[swscaler @ 0x55e4cb35c300] deprecated pixel format used, make sure you did set range correctly
+    Last message repeated 2 times
+Output #0, image2, to '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/review-26/design-review/scenes/c%03d.jpg':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.16.100
+  Stream #0:0(und): Video: mjpeg, yuvj420p(pc, bt470bg/unknown/unknown, progressive), 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 200 kb/s, 30 fps, 30 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 mjpeg
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    [Parsed_showinfo_1 @ 0x55e4cb3ee4c0] n:   1 pts: 863744 pts_time:56.2333 duration:    512 duration_time:0.0333333 fmt:yuv420p cl:center sar:1/1 s:1080x1920 i:P iskey:1 type:I checksum:77FC8156 plane_checksum:[23C467D8 40370DF8 69EE0B86] mean:[75 116 137] stdev:[47.7 14.1 12.7]
+[Parsed_showinfo_1 @ 0x55e4cb3ee4c0] color_range:tv color_space:bt470bg color_primaries:unknown color_trc:unknown
+frame=    0 fps=0.0 q=3.0 size=       0kB time=00:00:45.53 bitrate=   0.0kbits/s speed=6.45x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=   6x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=5.63x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=5.29x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=4.99x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=4.73x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=4.49x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=4.28x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=4.09x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=3.91x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=3.75x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed= 3.6x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=3.46x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=3.33x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=3.22x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=3.11x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=   3x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.91x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.82x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.73x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.65x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.57x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed= 2.5x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.43x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.37x    frame=    1 fps=0.1 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.31x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.25x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed= 2.2x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.15x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed= 2.1x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=2.05x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=   2x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.96x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.92x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.88x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.84x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed= 1.8x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.77x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.73x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed= 1.7x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.67x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.64x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.61x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.58x    frame=    1 fps=0.0 q=3.0 size=N/A time=00:00:45.53 bitrate=N/A speed=1.56x    [out#0/image2 @ 0x55e4cb279380] video:572kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+frame=    2 fps=0.1 q=3.0 Lsize=N/A time=00:00:56.23 bitrate=N/A speed= 1.9x    

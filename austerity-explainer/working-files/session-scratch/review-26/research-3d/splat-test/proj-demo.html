@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+// Demo of the "render, paint over, shine back" idea with no spending: a picture made from camera A
+// (here Blender's render with a painterly filter, standing in for an AI paint-over) is shone back onto
+// the SAME 3D models from camera A. Moving the camera then shows true 3D: surfaces camera A could not
+// see fall back to the models' own textures instead of smearing.
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+const P = new URLSearchParams(location.search);
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.LinearSRGBColorSpace;   // treat every picture as display values: no conversions
+renderer.toneMapping = THREE.NoToneMapping;
+renderer.setClearColor(new THREE.Color(114 / 255, 135 / 255, 152 / 255));
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+// camera A = Blender's camera (lens 30 mm on a 36 mm sensor, tall frame): vertical field of view 61.93 degrees
+const camA = new THREE.PerspectiveCamera(61.93, W / H, 0.1, 400);
+camA.position.set(1.6, 0.9, 10.5); camA.lookAt(0, 2.2, 0); camA.updateMatrixWorld(); camA.updateProjectionMatrix();
+const loader = new GLTFLoader();
+const plate = await new THREE.TextureLoader().loadAsync(P.get('plate') || 'assets/plate-kuwahara.jpg');
+plate.colorSpace = THREE.NoColorSpace; plate.flipY = true;
+// depth from camera A, so surfaces hidden from A do not receive the picture
+const depthRT = new THREE.WebGLRenderTarget(W, H, { depthTexture: new THREE.DepthTexture(W, H, THREE.FloatType) });
+const uniforms = {
+  plate: { value: plate }, depthA: { value: depthRT.depthTexture },
+  viewA: { value: camA.matrixWorldInverse }, projA: { value: camA.projectionMatrix },
+  nearA: { value: camA.near }, farA: { value: camA.far }, usePlate: { value: P.get('noplate') ? 0.0 : 1.0 },
+};
+function projected(own) {
+  return new THREE.ShaderMaterial({
+    uniforms: { ...uniforms, own: { value: own }, hasOwn: { value: own ? 1.0 : 0.0 } },
+    vertexShader: `varying vec3 wPos; varying vec2 vUv; varying vec3 wN;
+      void main(){ vec4 w = modelMatrix * vec4(position,1.0); wPos = w.xyz; vUv = uv; wN = normalize(mat3(modelMatrix) * normal);
+      gl_Position = projectionMatrix * viewMatrix * w; }`,
+    fragmentShader: `uniform sampler2D plate; uniform sampler2D depthA; uniform sampler2D own; uniform float hasOwn; uniform float usePlate;
+      uniform mat4 viewA; uniform mat4 projA; uniform float nearA; uniform float farA;
+      varying vec3 wPos; varying vec2 vUv; varying vec3 wN;
+      float linZ(float d){ float z = d * 2.0 - 1.0; return 2.0 * nearA * farA / (farA + nearA - z * (farA - nearA)); }
+      void main(){
+        vec3 base = hasOwn > 0.5 ? texture2D(own, vUv).rgb : vec3(0.45);
+        float shade = 0.55 + 0.45 * max(dot(wN, normalize(vec3(-0.4, 0.7, 0.6))), 0.0);   // plain stand-in light
+        vec3 col = base * shade;
+        vec4 c = projA * viewA * vec4(wPos, 1.0); vec3 ndc = c.xyz / c.w; vec2 uv = ndc.xy * 0.5 + 0.5;
+        if (usePlate > 0.5 && c.w > 0.0 && all(greaterThan(uv, vec2(0.0))) && all(lessThan(uv, vec2(1.0)))) {
+          float seen = linZ(texture2D(depthA, uv).r); float mine = linZ(ndc.z * 0.5 + 0.5);
+          if (mine - seen < 0.02 * mine) col = texture2D(plate, uv).rgb;    // camera A saw this point: wear the picture
+        }
+        gl_FragColor = vec4(col, 1.0);
+      }` });
+}
+for (const name of ['assets/town.glb', 'assets/factory-a.glb']) {
+  const g = await loader.loadAsync(name);
+  g.scene.traverse((o) => { if (o.isMesh) { const m = o.material; o.material = projected(m.map || null); } });
+  scene.add(g.scene);
+}
+// first pass: depth as seen from camera A
+renderer.setRenderTarget(depthRT); renderer.render(scene, camA); renderer.setRenderTarget(null);
+const cam = new THREE.PerspectiveCamera(61.93, W / H, 0.1, 400);
+window.__shot = (dx, dy, dz, tx, ty, tz) => {
+  cam.position.set(1.6 + dx, 0.9 + dy, 10.5 + dz); cam.lookAt(0 + tx, 2.2 + ty, 0 + tz); cam.updateMatrixWorld();
+  const s = performance.now(); renderer.render(scene, cam); const url = renderer.domElement.toDataURL('image/jpeg', 0.92);
+  return { ms: performance.now() - s, url };
+};
+window.__ready = true;
+</script></body></html>

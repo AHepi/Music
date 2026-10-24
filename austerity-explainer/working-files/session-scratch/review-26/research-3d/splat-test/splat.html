@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/","@sparkjsdev/spark":"./node_modules/@sparkjsdev/spark/dist/spark.module.js"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark';
+const params = new URLSearchParams(location.search);
+const W = Number(params.get("w") || 1080), H = Number(params.get("h") || 1920);
+const renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H);
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x101418);
+const camera = new THREE.PerspectiveCamera(Number(params.get('fov') || 60), W / H, 0.01, 1000);
+const lodCount = Number(params.get('lod') || 0);
+const sparkOpts = { renderer, apertureAngle: Number(params.get('aperture') || 0), focalDistance: Number(params.get('focus') || 3) };
+if (lodCount) Object.assign(sparkOpts, { enableLod: true, lodSplatCount: lodCount, lodRenderScale: Number(params.get('lodscale') || 1) });
+const spark = new SparkRenderer(sparkOpts);
+scene.add(spark);
+const t0 = performance.now();
+const splat = new SplatMesh(lodCount ? { url: params.get('file'), lod: true } : { url: params.get('file') });
+// World Labs exports use OpenCV-style axes (y down, z forward): flip to three.js
+splat.quaternion.set(1, 0, 0, 0);
+scene.add(splat);
+await splat.initialized;
+const loadMs = performance.now() - t0;
+// optional extra mesh objects, to show splats and ordinary 3D models mixing
+if (params.get('mesh')) {
+  const box = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 0.4), new THREE.MeshStandardMaterial({ color: 0xaa3322 }));
+  box.position.set(0, -0.5, -2);
+  scene.add(box, new THREE.AmbientLight(0xffffff, 1.0), new THREE.DirectionalLight(0xffeedd, 2.0));
+}
+window.__info = { loadMs, numSplats: splat.packedSplats ? splat.packedSplats.numSplats : null };
+window.__renderAt = async (x, y, z, lx, ly, lz) => {
+  camera.position.set(x, y, z); camera.lookAt(lx, ly, lz); camera.updateMatrixWorld();
+  // several renders so the background sort catches up with the new camera position
+  const times = []; let url = '';
+  for (let i = 0; i < 5; i++) {
+    const s = performance.now();
+    renderer.render(scene, camera);
+    url = renderer.domElement.toDataURL('image/jpeg', 0.9);
+    times.push(performance.now() - s);
+    await new Promise(r => setTimeout(r, 200));
+  }
+  // cost of grabbing the picture alone (no new drawing), to subtract
+  const g = performance.now(); renderer.domElement.toDataURL('image/jpeg', 0.9); const grab = performance.now() - g;
+  return { times, grab, url };
+};
+window.__ready = true;
+</script></body></html>

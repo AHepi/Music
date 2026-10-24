@@ -1,0 +1,50 @@
+### eevee16 16:25:48
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 1.0
+RENDER_SECONDS EEVEE 16 [] total 71.3 per_frame [26.8, 24.7, 19.8]
+GPU Mesa | llvmpipe (LLVM 20.1.2, 256 bits) | 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+### eevee64 16:27:01
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 1.1
+RENDER_SECONDS EEVEE 64 [] total 135.9 per_frame [61.3, 74.6]
+GPU Mesa | llvmpipe (LLVM 20.1.2, 256 bits) | 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+### workbench 16:29:20
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 1.1
+RENDER_SECONDS WORKBENCH 8 [] total 5.6 per_frame [4.2, 1.3]
+GPU Mesa | llvmpipe (LLVM 20.1.2, 256 bits) | 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+### eevee16_rt 16:29:27
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 0.9
+RENDER_SECONDS EEVEE 16 ['raytrace'] total 78.5 per_frame [44.6, 33.9]
+GPU Mesa | llvmpipe (LLVM 20.1.2, 256 bits) | 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+### eevee16_kuwahara 16:30:48
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+KUWAHARA inputs ['Image', 'Size', 'Type', 'Uniformity', 'Sharpness', 'Eccentricity', 'High Precision'] ['show_texture', 'bl_idname', 'bl_label', 'bl_description', 'bl_icon', 'bl_static_type', 'bl_width_default', 'bl_width_min', 'bl_width_max', 'bl_height_default', 'bl_height_min', 'bl_height_max']
+SETUP_SECONDS 1.0
+RENDER_SECONDS EEVEE 16 ['kuwahara'] total 39.6 per_frame [18.3, 21.3]
+GPU Mesa | llvmpipe (LLVM 20.1.2, 256 bits) | 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+### eevee16_fog 16:31:29
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 1.0
+RENDER_SECONDS EEVEE 16 ['fog'] total 49.5 per_frame [23.3, 26.2]
+GPU Mesa | llvmpipe (LLVM 20.1.2, 256 bits) | 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+### eevee16_freestyle 16:32:21
+Error: strokes set empty
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 1.1
+RENDER_SECONDS EEVEE 16 ['freestyle'] total 20.8 per_frame [20.8]
+GPU Mesa | llvmpipe (LLVM 20.1.2, 256 bits) | 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+### cycles32 16:32:44
+00:01.648  cycles           | WARNING CUEW initialization failed: Error opening the library
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 1.1
+RENDER_SECONDS CYCLES 32 [] total 102.4 per_frame [102.4]
+GPU info n/a SystemError('GPU functions for drawing requires the gpu module to be initialized. See gpu.init.')
+### cycles128 16:34:28
+00:01.610  cycles           | WARNING CUEW initialization failed: Error opening the library
+MODEL_INFO objects 81 triangles 136300 bbox (-11.05, 14.97, 0.0) (11.25, 23.2, 1.6) focus objs 1
+SETUP_SECONDS 1.1
+RENDER_SECONDS CYCLES 128 [] total 164.9 per_frame [164.9]
+GPU info n/a SystemError('GPU functions for drawing requires the gpu module to be initialized. See gpu.init.')
+### DONE 16:37:15
