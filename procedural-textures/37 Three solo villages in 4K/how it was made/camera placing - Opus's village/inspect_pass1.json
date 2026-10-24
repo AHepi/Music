@@ -1,0 +1,7328 @@
+{
+ "scene": "Scene",
+ "scenes": [
+  "Scene"
+ ],
+ "active_camera": "CamAerial",
+ "render": {
+  "engine": "CYCLES",
+  "res": [
+   1200,
+   800,
+   100
+  ],
+  "samples": 128,
+  "adaptive": true,
+  "adaptive_threshold": 0.019999999552965164,
+  "adaptive_min": 32,
+  "denoise": true,
+  "denoiser": "OPENIMAGEDENOISE",
+  "denoise_passes": "RGB_ALBEDO_NORMAL",
+  "prefilter": "ACCURATE",
+  "device": "CPU",
+  "max_bounces": 6,
+  "diffuse_bounces": 3,
+  "glossy_bounces": 2,
+  "transmission_bounces": 6,
+  "volume_bounces": 0,
+  "transparent_max": 12,
+  "clamp_direct": 0.0,
+  "clamp_indirect": 8.0,
+  "caustics": [
+   false,
+   false
+  ],
+  "blur_glossy": 1.0,
+  "light_tree": true,
+  "film_transparent": false,
+  "filter_width": 1.5,
+  "use_compositing": true,
+  "use_sequencer": true,
+  "persistent": true,
+  "file_format": "JPEG",
+  "quality": 94,
+  "motion_blur": false,
+  "fps": 24,
+  "frame": 1
+ },
+ "colour": {
+  "display": "sRGB",
+  "view": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.44999998807907104,
+  "gamma": 1.0,
+  "curves": false,
+  "sequencer": "sRGB",
+  "working_space": "Linear Rec.709"
+ },
+ "compositor": null,
+ "world": {
+  "name": "Sky",
+  "mist": [
+   5.0,
+   25.0
+  ]
+ },
+ "cameras": {
+  "CamAerial": {
+   "data": "CamAerial",
+   "loc": [
+    -48.0,
+    -70.0,
+    70.0
+   ],
+   "rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_mode": "QUATERNION",
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "lens": 29.0,
+   "sensor": 36.0,
+   "sensor_h": 24.0,
+   "fit": "AUTO",
+   "clip": [
+    0.05000000074505806,
+    1500.0
+   ],
+   "shift": [
+    0.0,
+    0.0
+   ],
+   "type": "PERSP",
+   "dof": {
+    "use": false,
+    "dist": 10.0,
+    "f": 2.799999952316284,
+    "obj": null,
+    "blades": 0,
+    "rot": 0.0,
+    "ratio": 1.0
+   },
+   "collections": [
+    "Cameras"
+   ],
+   "hide_render": false,
+   "anim": false,
+   "data_anim": false,
+   "markers": []
+  },
+  "CamCottage": {
+   "data": "CamCottage",
+   "loc": [
+    -31.799999237060547,
+    -3.4000000953674316,
+    1.688207983970642
+   ],
+   "rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_mode": "QUATERNION",
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "lens": 28.0,
+   "sensor": 36.0,
+   "sensor_h": 24.0,
+   "fit": "AUTO",
+   "clip": [
+    0.05000000074505806,
+    1500.0
+   ],
+   "shift": [
+    0.0,
+    0.0
+   ],
+   "type": "PERSP",
+   "dof": {
+    "use": false,
+    "dist": 10.0,
+    "f": 2.799999952316284,
+    "obj": null,
+    "blades": 0,
+    "rot": 0.0,
+    "ratio": 1.0
+   },
+   "collections": [
+    "Cameras"
+   ],
+   "hide_render": false,
+   "anim": false,
+   "data_anim": false,
+   "markers": []
+  },
+  "CamRoad": {
+   "data": "CamRoad",
+   "loc": [
+    -39.5,
+    -11.75,
+    1.320684790611267
+   ],
+   "rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_mode": "QUATERNION",
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "lens": 26.0,
+   "sensor": 36.0,
+   "sensor_h": 24.0,
+   "fit": "AUTO",
+   "clip": [
+    0.05000000074505806,
+    1500.0
+   ],
+   "shift": [
+    0.0,
+    0.0
+   ],
+   "type": "PERSP",
+   "dof": {
+    "use": false,
+    "dist": 10.0,
+    "f": 2.799999952316284,
+    "obj": null,
+    "blades": 0,
+    "rot": 0.0,
+    "ratio": 1.0
+   },
+   "collections": [
+    "Cameras"
+   ],
+   "hide_render": false,
+   "anim": false,
+   "data_anim": false,
+   "markers": []
+  },
+  "CamRoadClose": {
+   "data": "CamRoadClose",
+   "loc": [
+    -4.900000095367432,
+    -5.550000190734863,
+    0.47011107206344604
+   ],
+   "rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_mode": "QUATERNION",
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "lens": 30.0,
+   "sensor": 36.0,
+   "sensor_h": 24.0,
+   "fit": "AUTO",
+   "clip": [
+    0.05000000074505806,
+    1500.0
+   ],
+   "shift": [
+    0.0,
+    0.0
+   ],
+   "type": "PERSP",
+   "dof": {
+    "use": true,
+    "dist": 3.200000047683716,
+    "f": 5.599999904632568,
+    "obj": null,
+    "blades": 0,
+    "rot": 0.0,
+    "ratio": 1.0
+   },
+   "collections": [
+    "Cameras"
+   ],
+   "hide_render": false,
+   "anim": false,
+   "data_anim": false,
+   "markers": []
+  },
+  "CamStable": {
+   "data": "CamStable",
+   "loc": [
+    2.0,
+    19.200000762939453,
+    1.8487732410430908
+   ],
+   "rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_mode": "QUATERNION",
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "lens": 25.0,
+   "sensor": 36.0,
+   "sensor_h": 24.0,
+   "fit": "AUTO",
+   "clip": [
+    0.05000000074505806,
+    1500.0
+   ],
+   "shift": [
+    0.0,
+    0.0
+   ],
+   "type": "PERSP",
+   "dof": {
+    "use": false,
+    "dist": 10.0,
+    "f": 2.799999952316284,
+    "obj": null,
+    "blades": 0,
+    "rot": 0.0,
+    "ratio": 1.0
+   },
+   "collections": [
+    "Cameras"
+   ],
+   "hide_render": false,
+   "anim": false,
+   "data_anim": false,
+   "markers": []
+  }
+ },
+ "collections": {
+  "name": "Scene Collection",
+  "n_obj": 0,
+  "children": [
+   {
+    "name": "Ground",
+    "n_obj": 19,
+    "children": []
+   },
+   {
+    "name": "Lighting",
+    "n_obj": 1,
+    "children": []
+   },
+   {
+    "name": "Cameras",
+    "n_obj": 5,
+    "children": []
+   },
+   {
+    "name": "Library",
+    "n_obj": 0,
+    "children": [
+     {
+      "name": "lib_grass_short",
+      "n_obj": 4,
+      "children": []
+     },
+     {
+      "name": "lib_grass_tall",
+      "n_obj": 4,
+      "children": []
+     },
+     {
+      "name": "lib_grass_dry",
+      "n_obj": 2,
+      "children": []
+     },
+     {
+      "name": "lib_grass_road",
+      "n_obj": 3,
+      "children": []
+     },
+     {
+      "name": "lib_weeds",
+      "n_obj": 8,
+      "children": []
+     },
+     {
+      "name": "lib_flowers",
+      "n_obj": 6,
+      "children": []
+     },
+     {
+      "name": "lib_nettles",
+      "n_obj": 3,
+      "children": []
+     },
+     {
+      "name": "lib_ferns",
+      "n_obj": 4,
+      "children": []
+     },
+     {
+      "name": "lib_rocks",
+      "n_obj": 6,
+      "children": []
+     },
+     {
+      "name": "lib_pebbles",
+      "n_obj": 6,
+      "children": []
+     },
+     {
+      "name": "lib_trees_broad",
+      "n_obj": 7,
+      "children": []
+     },
+     {
+      "name": "lib_bushes",
+      "n_obj": 3,
+      "children": []
+     },
+     {
+      "name": "lib_trees_conifer",
+      "n_obj": 4,
+      "children": []
+     },
+     {
+      "name": "lib_snags",
+      "n_obj": 1,
+      "children": []
+     },
+     {
+      "name": "lib_gravel",
+      "n_obj": 5,
+      "children": []
+     },
+     {
+      "name": "lib_debris",
+      "n_obj": 5,
+      "children": []
+     },
+     {
+      "name": "lib_dung",
+      "n_obj": 3,
+      "children": []
+     }
+    ]
+   },
+   {
+    "name": "Vegetation",
+    "n_obj": 90,
+    "children": []
+   },
+   {
+    "name": "Forest",
+    "n_obj": 15,
+    "children": []
+   },
+   {
+    "name": "Buildings",
+    "n_obj": 0,
+    "children": [
+     {
+      "name": "B_cottage_a",
+      "n_obj": 14,
+      "children": []
+     },
+     {
+      "name": "B_cottage_b",
+      "n_obj": 10,
+      "children": []
+     },
+     {
+      "name": "B_cottage_c",
+      "n_obj": 12,
+      "children": []
+     },
+     {
+      "name": "B_cottage_d",
+      "n_obj": 11,
+      "children": []
+     },
+     {
+      "name": "B_stable",
+      "n_obj": 15,
+      "children": []
+     }
+    ]
+   },
+   {
+    "name": "Props",
+    "n_obj": 123,
+    "children": []
+   }
+  ]
+ },
+ "objects": [
+  {
+   "n": "terrain",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.19
+   ],
+   "s": [
+    360.0,
+    360.0,
+    6.67
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_main",
+   "t": "MESH",
+   "c": [
+    -0.42,
+    -8.92,
+    -0.3
+   ],
+   "s": [
+    357.45,
+    93.21,
+    1.84
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "puddles_main",
+   "t": "MESH",
+   "c": [
+    -10.66,
+    -8.97,
+    -0.33
+   ],
+   "s": [
+    324.47,
+    81.35,
+    1.44
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_lane_n",
+   "t": "MESH",
+   "c": [
+    6.72,
+    10.87,
+    -0.41
+   ],
+   "s": [
+    11.05,
+    24.69,
+    0.88
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "puddles_lane_n",
+   "t": "MESH",
+   "c": [
+    4.11,
+    6.87,
+    -0.28
+   ],
+   "s": [
+    1.29,
+    1.03,
+    0.05
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_lane_s",
+   "t": "MESH",
+   "c": [
+    -2.76,
+    -91.18,
+    -1.41
+   ],
+   "s": [
+    31.89,
+    168.16,
+    2.57
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "puddles_lane_s",
+   "t": "MESH",
+   "c": [
+    -2.84,
+    -87.23,
+    -1.35
+   ],
+   "s": [
+    21.61,
+    122.54,
+    2.09
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_path_a",
+   "t": "MESH",
+   "c": [
+    -25.71,
+    -3.15,
+    -0.06
+   ],
+   "s": [
+    4.91,
+    8.26,
+    0.48
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_path_c",
+   "t": "MESH",
+   "c": [
+    23.3,
+    -3.59,
+    0.13
+   ],
+   "s": [
+    3.78,
+    9.13,
+    0.38
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_path_well",
+   "t": "MESH",
+   "c": [
+    -9.2,
+    1.21,
+    -0.37
+   ],
+   "s": [
+    5.69,
+    10.68,
+    0.61
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_path_b",
+   "t": "MESH",
+   "c": [
+    -34.5,
+    -14.6,
+    -0.36
+   ],
+   "s": [
+    3.37,
+    6.35,
+    0.34
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "road_path_d",
+   "t": "MESH",
+   "c": [
+    -1.03,
+    22.63,
+    0.13
+   ],
+   "s": [
+    16.24,
+    8.83,
+    0.88
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "yard_901",
+   "t": "MESH",
+   "c": [
+    8.95,
+    24.34,
+    0.07
+   ],
+   "s": [
+    18.31,
+    11.61,
+    0.68
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "yard_901_water",
+   "t": "MESH",
+   "c": [
+    4.67,
+    23.9,
+    0.14
+   ],
+   "s": [
+    1.99,
+    4.28,
+    0.09
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "yard_902",
+   "t": "MESH",
+   "c": [
+    -6.83,
+    7.78,
+    -0.14
+   ],
+   "s": [
+    6.8,
+    6.02,
+    0.51
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "yard_903",
+   "t": "MESH",
+   "c": [
+    -24.23,
+    1.06,
+    0.06
+   ],
+   "s": [
+    4.84,
+    3.87,
+    0.31
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "yard_904",
+   "t": "MESH",
+   "c": [
+    -34.9,
+    -18.19,
+    -0.44
+   ],
+   "s": [
+    4.23,
+    3.83,
+    0.34
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "yard_905",
+   "t": "MESH",
+   "c": [
+    22.56,
+    -8.43,
+    0.07
+   ],
+   "s": [
+    4.42,
+    3.62,
+    0.37
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "yard_906",
+   "t": "MESH",
+   "c": [
+    -8.48,
+    26.4,
+    0.44
+   ],
+   "s": [
+    4.31,
+    3.37,
+    0.31
+   ],
+   "col": "Ground",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "Sun",
+   "t": "LIGHT",
+   "c": [
+    58.62,
+    -58.62,
+    55.92
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Lighting",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_short_0",
+   "t": "MESH",
+   "c": [
+    0.01,
+    -0.02,
+    0.1
+   ],
+   "s": [
+    0.43,
+    0.35,
+    0.22
+   ],
+   "col": "lib_grass_short",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_short_1",
+   "t": "MESH",
+   "c": [
+    0.01,
+    -0.01,
+    0.09
+   ],
+   "s": [
+    0.39,
+    0.4,
+    0.21
+   ],
+   "col": "lib_grass_short",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_short_2",
+   "t": "MESH",
+   "c": [
+    -0.01,
+    0.05,
+    0.12
+   ],
+   "s": [
+    0.44,
+    0.39,
+    0.26
+   ],
+   "col": "lib_grass_short",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_short_3",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.01,
+    0.11
+   ],
+   "s": [
+    0.45,
+    0.4,
+    0.24
+   ],
+   "col": "lib_grass_short",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_tall_0",
+   "t": "MESH",
+   "c": [
+    0.03,
+    0.02,
+    0.49
+   ],
+   "s": [
+    0.83,
+    0.78,
+    0.99
+   ],
+   "col": "lib_grass_tall",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_tall_1",
+   "t": "MESH",
+   "c": [
+    -0.07,
+    0.01,
+    0.49
+   ],
+   "s": [
+    0.87,
+    0.77,
+    1.0
+   ],
+   "col": "lib_grass_tall",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_tall_2",
+   "t": "MESH",
+   "c": [
+    0.03,
+    -0.08,
+    0.31
+   ],
+   "s": [
+    0.76,
+    0.8,
+    0.65
+   ],
+   "col": "lib_grass_tall",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_tall_3",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    0.0,
+    0.58
+   ],
+   "s": [
+    0.94,
+    0.84,
+    1.19
+   ],
+   "col": "lib_grass_tall",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_dry_0",
+   "t": "MESH",
+   "c": [
+    -0.05,
+    0.0,
+    0.31
+   ],
+   "s": [
+    0.5,
+    0.53,
+    0.64
+   ],
+   "col": "lib_grass_dry",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_dry_1",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    0.05,
+    0.33
+   ],
+   "s": [
+    0.53,
+    0.58,
+    0.68
+   ],
+   "col": "lib_grass_dry",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_road_0",
+   "t": "MESH",
+   "c": [
+    0.01,
+    0.01,
+    0.05
+   ],
+   "s": [
+    0.22,
+    0.19,
+    0.13
+   ],
+   "col": "lib_grass_road",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_road_1",
+   "t": "MESH",
+   "c": [
+    -0.03,
+    -0.0,
+    0.06
+   ],
+   "s": [
+    0.23,
+    0.21,
+    0.13
+   ],
+   "col": "lib_grass_road",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "lib_grass_road_2",
+   "t": "MESH",
+   "c": [
+    0.0,
+    -0.02,
+    0.04
+   ],
+   "s": [
+    0.16,
+    0.08,
+    0.1
+   ],
+   "col": "lib_grass_road",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "plantain_0",
+   "t": "MESH",
+   "c": [
+    0.0,
+    -0.0,
+    0.05
+   ],
+   "s": [
+    0.23,
+    0.23,
+    0.1
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "plantain_1",
+   "t": "MESH",
+   "c": [
+    0.0,
+    -0.0,
+    0.04
+   ],
+   "s": [
+    0.16,
+    0.2,
+    0.09
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "plantain_2",
+   "t": "MESH",
+   "c": [
+    -0.01,
+    -0.01,
+    0.07
+   ],
+   "s": [
+    0.25,
+    0.24,
+    0.13
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "dandelion_0",
+   "t": "MESH",
+   "c": [
+    -0.0,
+    0.0,
+    0.08
+   ],
+   "s": [
+    0.33,
+    0.26,
+    0.17
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "dandelion_1",
+   "t": "MESH",
+   "c": [
+    0.02,
+    0.01,
+    0.13
+   ],
+   "s": [
+    0.25,
+    0.3,
+    0.27
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "dandelion_2",
+   "t": "MESH",
+   "c": [
+    -0.01,
+    0.0,
+    0.05
+   ],
+   "s": [
+    0.28,
+    0.33,
+    0.1
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "clover_0",
+   "t": "MESH",
+   "c": [
+    -0.0,
+    -0.01,
+    0.06
+   ],
+   "s": [
+    0.19,
+    0.24,
+    0.12
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "clover_1",
+   "t": "MESH",
+   "c": [
+    0.02,
+    0.01,
+    0.07
+   ],
+   "s": [
+    0.22,
+    0.25,
+    0.14
+   ],
+   "col": "lib_weeds",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "flower_yarrow_0",
+   "t": "MESH",
+   "c": [
+    0.05,
+    0.04,
+    0.29
+   ],
+   "s": [
+    0.14,
+    0.11,
+    0.59
+   ],
+   "col": "lib_flowers",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "flower_buttercup_1",
+   "t": "MESH",
+   "c": [
+    0.03,
+    0.06,
+    0.17
+   ],
+   "s": [
+    0.04,
+    0.13,
+    0.36
+   ],
+   "col": "lib_flowers",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "flower_knapweed_2",
+   "t": "MESH",
+   "c": [
+    0.02,
+    0.02,
+    0.23
+   ],
+   "s": [
+    0.07,
+    0.05,
+    0.47
+   ],
+   "col": "lib_flowers",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "flower_campion_3",
+   "t": "MESH",
+   "c": [
+    0.02,
+    0.03,
+    0.18
+   ],
+   "s": [
+    0.08,
+    0.17,
+    0.39
+   ],
+   "col": "lib_flowers",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "flower_yarrow_4",
+   "t": "MESH",
+   "c": [
+    -0.04,
+    -0.04,
+    0.28
+   ],
+   "s": [
+    0.1,
+    0.27,
+    0.59
+   ],
+   "col": "lib_flowers",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "flower_buttercup_5",
+   "t": "MESH",
+   "c": [
+    -0.05,
+    -0.01,
+    0.19
+   ],
+   "s": [
+    0.18,
+    0.08,
+    0.41
+   ],
+   "col": "lib_flowers",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "nettle_0",
+   "t": "MESH",
+   "c": [
+    0.05,
+    0.09,
+    0.47
+   ],
+   "s": [
+    0.35,
+    0.25,
+    0.96
+   ],
+   "col": "lib_nettles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "nettle_1",
+   "t": "MESH",
+   "c": [
+    -0.06,
+    0.01,
+    0.45
+   ],
+   "s": [
+    0.3,
+    0.35,
+    0.93
+   ],
+   "col": "lib_nettles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "nettle_2",
+   "t": "MESH",
+   "c": [
+    0.06,
+    -0.01,
+    0.38
+   ],
+   "s": [
+    0.36,
+    0.35,
+    0.78
+   ],
+   "col": "lib_nettles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "fern_0",
+   "t": "MESH",
+   "c": [
+    0.04,
+    -0.01,
+    0.04
+   ],
+   "s": [
+    1.07,
+    1.09,
+    0.09
+   ],
+   "col": "lib_ferns",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "fern_1",
+   "t": "MESH",
+   "c": [
+    0.05,
+    0.04,
+    0.06
+   ],
+   "s": [
+    1.24,
+    1.52,
+    0.13
+   ],
+   "col": "lib_ferns",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "fern_2",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    -0.08,
+    0.06
+   ],
+   "s": [
+    1.8,
+    1.37,
+    0.12
+   ],
+   "col": "lib_ferns",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "fern_3",
+   "t": "MESH",
+   "c": [
+    0.07,
+    0.14,
+    0.06
+   ],
+   "s": [
+    1.32,
+    1.48,
+    0.15
+   ],
+   "col": "lib_ferns",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "rock_0",
+   "t": "MESH",
+   "c": [
+    0.02,
+    -0.01,
+    -0.01
+   ],
+   "s": [
+    2.27,
+    2.27,
+    0.86
+   ],
+   "col": "lib_rocks",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "rock_1",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    0.03,
+    -0.01
+   ],
+   "s": [
+    1.58,
+    2.36,
+    1.31
+   ],
+   "col": "lib_rocks",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "rock_2",
+   "t": "MESH",
+   "c": [
+    -0.0,
+    -0.08,
+    -0.0
+   ],
+   "s": [
+    2.27,
+    1.66,
+    1.21
+   ],
+   "col": "lib_rocks",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "rock_3",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    -0.0,
+    0.06
+   ],
+   "s": [
+    2.22,
+    1.57,
+    0.92
+   ],
+   "col": "lib_rocks",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "rock_4",
+   "t": "MESH",
+   "c": [
+    0.04,
+    -0.11,
+    0.02
+   ],
+   "s": [
+    2.46,
+    2.35,
+    1.05
+   ],
+   "col": "lib_rocks",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "rock_5",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    0.01,
+    0.06
+   ],
+   "s": [
+    2.47,
+    1.78,
+    0.89
+   ],
+   "col": "lib_rocks",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pebble_0",
+   "t": "MESH",
+   "c": [
+    0.18,
+    -0.02,
+    0.05
+   ],
+   "s": [
+    2.34,
+    2.35,
+    1.33
+   ],
+   "col": "lib_pebbles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pebble_1",
+   "t": "MESH",
+   "c": [
+    -0.08,
+    0.08,
+    -0.0
+   ],
+   "s": [
+    1.59,
+    2.25,
+    0.98
+   ],
+   "col": "lib_pebbles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pebble_2",
+   "t": "MESH",
+   "c": [
+    0.02,
+    0.06,
+    -0.02
+   ],
+   "s": [
+    2.06,
+    1.99,
+    0.78
+   ],
+   "col": "lib_pebbles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pebble_3",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    0.02,
+    0.02
+   ],
+   "s": [
+    2.02,
+    2.18,
+    0.97
+   ],
+   "col": "lib_pebbles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pebble_4",
+   "t": "MESH",
+   "c": [
+    -0.1,
+    0.04,
+    0.04
+   ],
+   "s": [
+    1.92,
+    2.12,
+    1.0
+   ],
+   "col": "lib_pebbles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pebble_5",
+   "t": "MESH",
+   "c": [
+    -0.03,
+    -0.03,
+    0.0
+   ],
+   "s": [
+    2.55,
+    2.14,
+    0.81
+   ],
+   "col": "lib_pebbles",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_oak_11",
+   "t": "MESH",
+   "c": [
+    0.24,
+    -0.07,
+    5.93
+   ],
+   "s": [
+    11.38,
+    11.51,
+    12.41
+   ],
+   "col": "lib_trees_broad",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_oak_12",
+   "t": "MESH",
+   "c": [
+    1.26,
+    -0.63,
+    6.46
+   ],
+   "s": [
+    13.69,
+    13.98,
+    13.45
+   ],
+   "col": "lib_trees_broad",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_oak_13",
+   "t": "MESH",
+   "c": [
+    -0.21,
+    0.11,
+    7.69
+   ],
+   "s": [
+    11.52,
+    12.76,
+    16.0
+   ],
+   "col": "lib_trees_broad",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_beech_21",
+   "t": "MESH",
+   "c": [
+    1.22,
+    0.62,
+    8.91
+   ],
+   "s": [
+    10.38,
+    9.09,
+    18.34
+   ],
+   "col": "lib_trees_broad",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_beech_22",
+   "t": "MESH",
+   "c": [
+    -0.28,
+    -0.03,
+    8.84
+   ],
+   "s": [
+    10.52,
+    11.03,
+    18.25
+   ],
+   "col": "lib_trees_broad",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_birch_31",
+   "t": "MESH",
+   "c": [
+    -0.36,
+    -0.89,
+    6.58
+   ],
+   "s": [
+    8.27,
+    10.12,
+    13.69
+   ],
+   "col": "lib_trees_broad",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_birch_32",
+   "t": "MESH",
+   "c": [
+    0.25,
+    -0.23,
+    6.65
+   ],
+   "s": [
+    8.25,
+    7.47,
+    13.83
+   ],
+   "col": "lib_trees_broad",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_hazel_41",
+   "t": "MESH",
+   "c": [
+    0.02,
+    0.24,
+    2.19
+   ],
+   "s": [
+    4.67,
+    5.59,
+    4.54
+   ],
+   "col": "lib_bushes",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_hazel_42",
+   "t": "MESH",
+   "c": [
+    -0.06,
+    -0.12,
+    2.2
+   ],
+   "s": [
+    6.27,
+    6.48,
+    4.94
+   ],
+   "col": "lib_bushes",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_hazel_43",
+   "t": "MESH",
+   "c": [
+    -0.19,
+    -0.05,
+    2.16
+   ],
+   "s": [
+    5.21,
+    5.0,
+    4.47
+   ],
+   "col": "lib_bushes",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_spruce_51",
+   "t": "MESH",
+   "c": [
+    -0.03,
+    -0.01,
+    10.97
+   ],
+   "s": [
+    6.49,
+    6.52,
+    22.45
+   ],
+   "col": "lib_trees_conifer",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_spruce_52",
+   "t": "MESH",
+   "c": [
+    -0.04,
+    0.06,
+    8.97
+   ],
+   "s": [
+    6.39,
+    6.33,
+    18.45
+   ],
+   "col": "lib_trees_conifer",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_spruce_53",
+   "t": "MESH",
+   "c": [
+    -0.05,
+    -0.03,
+    12.47
+   ],
+   "s": [
+    7.62,
+    7.62,
+    25.45
+   ],
+   "col": "lib_trees_conifer",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_spruce_54",
+   "t": "MESH",
+   "c": [
+    0.06,
+    -0.03,
+    7.47
+   ],
+   "s": [
+    5.34,
+    5.6,
+    15.45
+   ],
+   "col": "lib_trees_conifer",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "tree_snag_99",
+   "t": "MESH",
+   "c": [
+    0.81,
+    1.26,
+    6.0
+   ],
+   "s": [
+    10.39,
+    8.52,
+    12.58
+   ],
+   "col": "lib_snags",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "gravel_0",
+   "t": "MESH",
+   "c": [
+    -0.01,
+    0.03,
+    0.09
+   ],
+   "s": [
+    1.44,
+    1.58,
+    1.15
+   ],
+   "col": "lib_gravel",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "gravel_1",
+   "t": "MESH",
+   "c": [
+    0.03,
+    0.06,
+    0.11
+   ],
+   "s": [
+    1.81,
+    2.22,
+    1.18
+   ],
+   "col": "lib_gravel",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "gravel_2",
+   "t": "MESH",
+   "c": [
+    0.05,
+    0.02,
+    -0.06
+   ],
+   "s": [
+    1.77,
+    1.67,
+    1.12
+   ],
+   "col": "lib_gravel",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "gravel_3",
+   "t": "MESH",
+   "c": [
+    0.07,
+    -0.12,
+    0.06
+   ],
+   "s": [
+    1.54,
+    1.76,
+    1.14
+   ],
+   "col": "lib_gravel",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "gravel_4",
+   "t": "MESH",
+   "c": [
+    -0.02,
+    0.06,
+    -0.13
+   ],
+   "s": [
+    1.45,
+    1.75,
+    1.37
+   ],
+   "col": "lib_gravel",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "twig_0",
+   "t": "MESH",
+   "c": [
+    0.07,
+    -0.02,
+    0.0
+   ],
+   "s": [
+    0.14,
+    0.05,
+    0.01
+   ],
+   "col": "lib_debris",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "twig_1",
+   "t": "MESH",
+   "c": [
+    0.09,
+    -0.08,
+    -0.0
+   ],
+   "s": [
+    0.18,
+    0.17,
+    0.02
+   ],
+   "col": "lib_debris",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "twig_2",
+   "t": "MESH",
+   "c": [
+    0.13,
+    -0.06,
+    0.0
+   ],
+   "s": [
+    0.26,
+    0.14,
+    0.02
+   ],
+   "col": "lib_debris",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "twig_3",
+   "t": "MESH",
+   "c": [
+    0.07,
+    -0.0,
+    0.0
+   ],
+   "s": [
+    0.15,
+    0.02,
+    0.02
+   ],
+   "col": "lib_debris",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "twig_4",
+   "t": "MESH",
+   "c": [
+    0.13,
+    -0.06,
+    -0.0
+   ],
+   "s": [
+    0.25,
+    0.12,
+    0.01
+   ],
+   "col": "lib_debris",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "dung_0",
+   "t": "MESH",
+   "c": [
+    -0.0,
+    -0.01,
+    0.03
+   ],
+   "s": [
+    0.23,
+    0.19,
+    0.09
+   ],
+   "col": "lib_dung",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "dung_1",
+   "t": "MESH",
+   "c": [
+    0.02,
+    0.04,
+    0.02
+   ],
+   "s": [
+    0.14,
+    0.18,
+    0.07
+   ],
+   "col": "lib_dung",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "dung_2",
+   "t": "MESH",
+   "c": [
+    0.01,
+    0.04,
+    0.02
+   ],
+   "s": [
+    0.2,
+    0.23,
+    0.07
+   ],
+   "col": "lib_dung",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "sc_grass_short",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_grass_tall",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_grass_dry",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_weeds",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_flowers",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_nettles",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_ferns",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rocks",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_forestgrass",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_lane_n",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_lane_n",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_lane_n",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_lane_s",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_lane_s",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_lane_s",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_main",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_main",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_main",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_path_a",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_path_a",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_path_a",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_path_b",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_path_b",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_path_b",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_path_c",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_path_c",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_path_c",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_path_d",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_path_d",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_path_d",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_road_path_well",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_road_path_well",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_road_path_well",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_yard_901",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_yard_901",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_yard_901",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_yard_901_water",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_yard_901_water",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_yard_901_water",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_yard_902",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_yard_902",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_yard_902",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_verge",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_yard_903",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_yard_903",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_yard_903",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_yard_904",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_yard_904",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_yard_904",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_yard_905",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_yard_905",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_yard_905",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgrass_yard_906",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rweeds_yard_906",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rpebble_yard_906",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_lane_n",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_lane_n",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rdung_road_lane_n",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_lane_s",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_lane_s",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rdung_road_lane_s",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_main",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_main",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rdung_road_main",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_path_a",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_path_a",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_path_b",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_path_b",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_path_c",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_path_c",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_path_d",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_path_d",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_road_path_well",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_road_path_well",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_yard_901",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_yard_901",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rdung_yard_901",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_yard_901_water",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_yard_901_water",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rdung_yard_901_water",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_yard_902",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_yard_902",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_yard_903",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_yard_903",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_yard_904",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_yard_904",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_yard_905",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_yard_905",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rgravel_yard_906",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sc_rtwig_yard_906",
+   "t": "MESH",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Vegetation",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_oak_11",
+   "t": "MESH",
+   "c": [
+    1.41,
+    1.38,
+    0.09
+   ],
+   "s": [
+    358.71,
+    358.33,
+    6.42
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_oak_12",
+   "t": "MESH",
+   "c": [
+    1.59,
+    1.3,
+    0.18
+   ],
+   "s": [
+    356.91,
+    358.25,
+    6.2
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_oak_13",
+   "t": "MESH",
+   "c": [
+    1.41,
+    2.38,
+    -0.03
+   ],
+   "s": [
+    356.39,
+    356.1,
+    6.36
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_beech_21",
+   "t": "MESH",
+   "c": [
+    1.22,
+    0.64,
+    0.08
+   ],
+   "s": [
+    358.19,
+    357.05,
+    6.29
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_beech_22",
+   "t": "MESH",
+   "c": [
+    1.52,
+    1.48,
+    -0.03
+   ],
+   "s": [
+    358.53,
+    356.95,
+    6.11
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_birch_31",
+   "t": "MESH",
+   "c": [
+    -7.91,
+    3.65,
+    0.29
+   ],
+   "s": [
+    82.01,
+    85.67,
+    1.58
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_birch_32",
+   "t": "MESH",
+   "c": [
+    1.34,
+    -13.85,
+    -0.27
+   ],
+   "s": [
+    92.99,
+    68.63,
+    1.17
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_spruce_51",
+   "t": "MESH",
+   "c": [
+    1.23,
+    1.52,
+    0.27
+   ],
+   "s": [
+    358.32,
+    358.51,
+    5.49
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_spruce_52",
+   "t": "MESH",
+   "c": [
+    0.87,
+    1.31,
+    0.2
+   ],
+   "s": [
+    357.39,
+    358.36,
+    5.71
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_spruce_53",
+   "t": "MESH",
+   "c": [
+    0.96,
+    1.4,
+    0.35
+   ],
+   "s": [
+    357.51,
+    358.43,
+    5.79
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_spruce_54",
+   "t": "MESH",
+   "c": [
+    2.44,
+    2.39,
+    0.05
+   ],
+   "s": [
+    353.85,
+    355.13,
+    6.42
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_hazel_41",
+   "t": "MESH",
+   "c": [
+    0.36,
+    2.85,
+    0.11
+   ],
+   "s": [
+    351.95,
+    354.71,
+    5.64
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_hazel_42",
+   "t": "MESH",
+   "c": [
+    1.44,
+    2.55,
+    0.2
+   ],
+   "s": [
+    356.66,
+    353.95,
+    6.28
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_hazel_43",
+   "t": "MESH",
+   "c": [
+    1.38,
+    0.91,
+    0.0
+   ],
+   "s": [
+    356.72,
+    357.11,
+    6.01
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "forest_tree_snag_99",
+   "t": "MESH",
+   "c": [
+    0.96,
+    3.36,
+    0.08
+   ],
+   "s": [
+    355.97,
+    337.47,
+    4.74
+   ],
+   "col": "Forest",
+   "mods": [
+    "NODES"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a",
+   "t": "EMPTY",
+   "c": [
+    -24.5,
+    4.8,
+    0.22
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "cottage_a_mortar",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    3.66
+   ],
+   "s": [
+    9.36,
+    6.57,
+    7.97
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_stone",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    3.7
+   ],
+   "s": [
+    9.46,
+    6.68,
+    8.05
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_timber",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    1.81
+   ],
+   "s": [
+    9.24,
+    6.46,
+    2.53
+   ],
+   "col": "B_cottage_a",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_daub",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    1.81
+   ],
+   "s": [
+    9.12,
+    6.33,
+    2.1
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_plank",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    4.7
+   ],
+   "s": [
+    9.25,
+    6.25,
+    3.29
+   ],
+   "col": "B_cottage_a",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_floor",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    0.62
+   ],
+   "s": [
+    8.75,
+    5.96,
+    0.1
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_interior",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    4.63
+   ],
+   "s": [
+    8.86,
+    6.07,
+    6.19
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_plank_dark",
+   "t": "MESH",
+   "c": [
+    -25.39,
+    3.49,
+    1.64
+   ],
+   "s": [
+    8.33,
+    4.23,
+    1.73
+   ],
+   "col": "B_cottage_a",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_iron",
+   "t": "MESH",
+   "c": [
+    -25.38,
+    3.5,
+    1.63
+   ],
+   "s": [
+    8.3,
+    4.2,
+    1.25
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_thatch",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    4.77
+   ],
+   "s": [
+    10.17,
+    7.7,
+    4.08
+   ],
+   "col": "B_cottage_a",
+   "mods": [
+    "SUBSURF"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_thatch_ridge",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.8,
+    6.56
+   ],
+   "s": [
+    9.29,
+    2.43,
+    0.72
+   ],
+   "col": "B_cottage_a",
+   "mods": [
+    "SUBSURF"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_hazel",
+   "t": "MESH",
+   "c": [
+    -24.53,
+    4.8,
+    6.72
+   ],
+   "s": [
+    9.21,
+    2.03,
+    0.31
+   ],
+   "col": "B_cottage_a",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_a_straw",
+   "t": "MESH",
+   "c": [
+    -24.5,
+    4.81,
+    4.56
+   ],
+   "s": [
+    10.39,
+    7.83,
+    4.5
+   ],
+   "col": "B_cottage_a",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b",
+   "t": "EMPTY",
+   "c": [
+    -36.0,
+    -21.0,
+    -0.44
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "B_cottage_b",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "cottage_b_mortar",
+   "t": "MESH",
+   "c": [
+    -36.0,
+    -21.0,
+    2.5
+   ],
+   "s": [
+    8.52,
+    7.4,
+    6.89
+   ],
+   "col": "B_cottage_b",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_stone",
+   "t": "MESH",
+   "c": [
+    -35.88,
+    -20.73,
+    2.54
+   ],
+   "s": [
+    8.91,
+    8.09,
+    6.97
+   ],
+   "col": "B_cottage_b",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_timber",
+   "t": "MESH",
+   "c": [
+    -36.48,
+    -20.78,
+    0.59
+   ],
+   "s": [
+    7.67,
+    7.1,
+    1.96
+   ],
+   "col": "B_cottage_b",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_interior",
+   "t": "MESH",
+   "c": [
+    -36.0,
+    -21.0,
+    3.24
+   ],
+   "s": [
+    7.32,
+    6.2,
+    5.57
+   ],
+   "col": "B_cottage_b",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_plank_dark",
+   "t": "MESH",
+   "c": [
+    -35.05,
+    -18.86,
+    0.5
+   ],
+   "s": [
+    5.06,
+    2.58,
+    1.79
+   ],
+   "col": "B_cottage_b",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_iron",
+   "t": "MESH",
+   "c": [
+    -35.03,
+    -18.82,
+    0.48
+   ],
+   "s": [
+    4.98,
+    2.44,
+    1.28
+   ],
+   "col": "B_cottage_b",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_floor",
+   "t": "MESH",
+   "c": [
+    -36.0,
+    -21.0,
+    -0.38
+   ],
+   "s": [
+    7.29,
+    6.18,
+    0.1
+   ],
+   "col": "B_cottage_b",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_thatch",
+   "t": "MESH",
+   "c": [
+    -36.0,
+    -21.0,
+    3.16
+   ],
+   "s": [
+    9.93,
+    8.82,
+    3.82
+   ],
+   "col": "B_cottage_b",
+   "mods": [
+    "SUBSURF"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_b_straw",
+   "t": "MESH",
+   "c": [
+    -36.01,
+    -21.0,
+    1.43
+   ],
+   "s": [
+    9.88,
+    8.77,
+    0.5
+   ],
+   "col": "B_cottage_b",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c",
+   "t": "EMPTY",
+   "c": [
+    23.0,
+    -11.8,
+    0.16
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "cottage_c_mortar",
+   "t": "MESH",
+   "c": [
+    23.0,
+    -11.8,
+    0.06
+   ],
+   "s": [
+    8.3,
+    5.89,
+    0.9
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_stone",
+   "t": "MESH",
+   "c": [
+    23.0,
+    -11.8,
+    0.06
+   ],
+   "s": [
+    8.4,
+    5.99,
+    0.9
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_timber",
+   "t": "MESH",
+   "c": [
+    21.83,
+    -11.88,
+    1.49
+   ],
+   "s": [
+    10.52,
+    5.93,
+    2.86
+   ],
+   "col": "B_cottage_c",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_daub",
+   "t": "MESH",
+   "c": [
+    23.0,
+    -11.8,
+    1.7
+   ],
+   "s": [
+    8.07,
+    5.66,
+    2.0
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_plank",
+   "t": "MESH",
+   "c": [
+    21.95,
+    -11.87,
+    3.95
+   ],
+   "s": [
+    11.13,
+    7.08,
+    3.67
+   ],
+   "col": "B_cottage_c",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_floor",
+   "t": "MESH",
+   "c": [
+    23.0,
+    -11.8,
+    0.56
+   ],
+   "s": [
+    7.72,
+    5.3,
+    0.1
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_interior",
+   "t": "MESH",
+   "c": [
+    23.0,
+    -11.8,
+    2.2
+   ],
+   "s": [
+    7.82,
+    5.41,
+    1.55
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_plank_dark",
+   "t": "MESH",
+   "c": [
+    23.99,
+    -9.13,
+    1.56
+   ],
+   "s": [
+    3.56,
+    0.58,
+    1.68
+   ],
+   "col": "B_cottage_c",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_iron",
+   "t": "MESH",
+   "c": [
+    24.03,
+    -9.11,
+    1.54
+   ],
+   "s": [
+    3.45,
+    0.46,
+    1.18
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_shingle",
+   "t": "MESH",
+   "c": [
+    23.04,
+    -11.8,
+    4.08
+   ],
+   "s": [
+    9.05,
+    6.91,
+    3.28
+   ],
+   "col": "B_cottage_c",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_c_logs",
+   "t": "MESH",
+   "c": [
+    18.37,
+    -12.08,
+    0.81
+   ],
+   "s": [
+    1.31,
+    4.34,
+    1.09
+   ],
+   "col": "B_cottage_c",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d",
+   "t": "EMPTY",
+   "c": [
+    -10.0,
+    29.0,
+    0.61
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "cottage_d_mortar",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    0.48
+   ],
+   "s": [
+    6.24,
+    5.31,
+    0.64
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_stone",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    0.48
+   ],
+   "s": [
+    6.36,
+    5.43,
+    0.64
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_daub",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    1.57
+   ],
+   "s": [
+    6.2,
+    5.29,
+    1.57
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_timber",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    1.58
+   ],
+   "s": [
+    6.24,
+    5.33,
+    1.66
+   ],
+   "col": "B_cottage_d",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_interior",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    1.95
+   ],
+   "s": [
+    5.92,
+    4.99,
+    0.86
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_plank_dark",
+   "t": "MESH",
+   "c": [
+    -7.87,
+    28.58,
+    1.48
+   ],
+   "s": [
+    2.21,
+    2.76,
+    1.35
+   ],
+   "col": "B_cottage_d",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_iron",
+   "t": "MESH",
+   "c": [
+    -7.88,
+    28.55,
+    1.47
+   ],
+   "s": [
+    2.19,
+    2.77,
+    0.88
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_floor",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    0.73
+   ],
+   "s": [
+    5.66,
+    4.73,
+    0.1
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_thatch",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    3.63
+   ],
+   "s": [
+    7.37,
+    6.44,
+    3.83
+   ],
+   "col": "B_cottage_d",
+   "mods": [
+    "SUBSURF"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cottage_d_straw",
+   "t": "MESH",
+   "c": [
+    -10.0,
+    29.0,
+    1.9
+   ],
+   "s": [
+    7.31,
+    6.39,
+    0.52
+   ],
+   "col": "B_cottage_d",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable",
+   "t": "EMPTY",
+   "c": [
+    8.0,
+    31.5,
+    0.41
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "stable_stone",
+   "t": "MESH",
+   "c": [
+    7.99,
+    31.5,
+    0.29
+   ],
+   "s": [
+    11.92,
+    7.87,
+    0.54
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_timber",
+   "t": "MESH",
+   "c": [
+    8.22,
+    31.48,
+    3.31
+   ],
+   "s": [
+    12.66,
+    8.35,
+    5.79
+   ],
+   "col": "B_stable",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "stable_mortar",
+   "t": "MESH",
+   "c": [
+    8.0,
+    31.5,
+    0.26
+   ],
+   "s": [
+    11.5,
+    7.42,
+    0.5
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_plank",
+   "t": "MESH",
+   "c": [
+    7.98,
+    31.18,
+    3.48
+   ],
+   "s": [
+    12.5,
+    9.15,
+    5.93
+   ],
+   "col": "B_stable",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "stable_plank_dark",
+   "t": "MESH",
+   "c": [
+    12.38,
+    29.82,
+    2.7
+   ],
+   "s": [
+    2.43,
+    4.08,
+    4.21
+   ],
+   "col": "B_stable",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "stable_interior",
+   "t": "MESH",
+   "c": [
+    12.38,
+    29.77,
+    2.65
+   ],
+   "s": [
+    2.42,
+    3.89,
+    4.12
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_iron",
+   "t": "MESH",
+   "c": [
+    8.74,
+    30.78,
+    2.98
+   ],
+   "s": [
+    11.38,
+    8.2,
+    4.35
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_rope",
+   "t": "MESH",
+   "c": [
+    14.21,
+    31.09,
+    3.05
+   ],
+   "s": [
+    0.08,
+    0.08,
+    4.06
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_fresh",
+   "t": "MESH",
+   "c": [
+    6.85,
+    34.45,
+    2.01
+   ],
+   "s": [
+    7.24,
+    0.95,
+    0.71
+   ],
+   "col": "B_stable",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "stable_floor",
+   "t": "MESH",
+   "c": [
+    8.0,
+    31.5,
+    0.41
+   ],
+   "s": [
+    11.01,
+    6.92,
+    0.1
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_straw",
+   "t": "MESH",
+   "c": [
+    6.77,
+    33.14,
+    0.47
+   ],
+   "s": [
+    8.12,
+    3.68,
+    0.1
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_shingle",
+   "t": "MESH",
+   "c": [
+    7.97,
+    31.5,
+    4.72
+   ],
+   "s": [
+    12.48,
+    8.49,
+    3.23
+   ],
+   "col": "B_stable",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "stable_straw.001",
+   "t": "MESH",
+   "c": [
+    6.6,
+    30.92,
+    1.35
+   ],
+   "s": [
+    9.03,
+    8.43,
+    1.82
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "stable_fill",
+   "t": "LIGHT",
+   "c": [
+    6.79,
+    32.79,
+    2.96
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "B_stable",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "trough",
+   "t": "EMPTY",
+   "c": [
+    1.44,
+    28.05,
+    0.37
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "trough_stone",
+   "t": "MESH",
+   "c": [
+    1.44,
+    28.05,
+    0.49
+   ],
+   "s": [
+    1.85,
+    0.74,
+    0.33
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "trough_plank",
+   "t": "MESH",
+   "c": [
+    1.44,
+    28.05,
+    0.83
+   ],
+   "s": [
+    2.03,
+    0.69,
+    0.42
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "trough_water",
+   "t": "MESH",
+   "c": [
+    1.44,
+    28.05,
+    0.96
+   ],
+   "s": [
+    1.93,
+    0.58,
+    0.01
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "trough_iron",
+   "t": "MESH",
+   "c": [
+    1.44,
+    28.05,
+    0.99
+   ],
+   "s": [
+    1.29,
+    0.66,
+    0.1
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "bucket_trough",
+   "t": "EMPTY",
+   "c": [
+    2.41,
+    27.53,
+    0.32
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "bucket_trough_plank",
+   "t": "MESH",
+   "c": [
+    2.41,
+    27.53,
+    0.47
+   ],
+   "s": [
+    0.44,
+    0.44,
+    0.31
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "bucket_trough_iron",
+   "t": "MESH",
+   "c": [
+    2.41,
+    27.53,
+    0.54
+   ],
+   "s": [
+    0.45,
+    0.45,
+    0.37
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "hitching_rail",
+   "t": "EMPTY",
+   "c": [
+    5.51,
+    26.06,
+    0.16
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "hitching_rail_timber",
+   "t": "MESH",
+   "c": [
+    5.51,
+    26.06,
+    0.66
+   ],
+   "s": [
+    2.91,
+    0.39,
+    1.21
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cart",
+   "t": "EMPTY",
+   "c": [
+    13.6,
+    25.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "cart_timber",
+   "t": "MESH",
+   "c": [
+    12.79,
+    24.43,
+    0.88
+   ],
+   "s": [
+    4.62,
+    4.03,
+    1.83
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "cart_iron",
+   "t": "MESH",
+   "c": [
+    13.6,
+    25.0,
+    0.68
+   ],
+   "s": [
+    2.09,
+    2.17,
+    1.36
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "cart_plank",
+   "t": "MESH",
+   "c": [
+    13.55,
+    24.96,
+    1.17
+   ],
+   "s": [
+    2.65,
+    2.34,
+    1.12
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "manure_heap",
+   "t": "EMPTY",
+   "c": [
+    1.53,
+    33.56,
+    0.43
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "manure_heap_muck",
+   "t": "MESH",
+   "c": [
+    1.45,
+    33.57,
+    0.78
+   ],
+   "s": [
+    2.91,
+    2.61,
+    0.79
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "ladder",
+   "t": "EMPTY",
+   "c": [
+    14.9,
+    31.32,
+    0.28
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "ladder_fresh",
+   "t": "MESH",
+   "c": [
+    14.23,
+    31.36,
+    2.48
+   ],
+   "s": [
+    1.43,
+    0.59,
+    4.41
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "pitchfork",
+   "t": "EMPTY",
+   "c": [
+    5.0,
+    28.08,
+    0.23
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "pitchfork_fresh",
+   "t": "MESH",
+   "c": [
+    5.05,
+    28.33,
+    1.2
+   ],
+   "s": [
+    0.18,
+    0.4,
+    1.46
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "pitchfork_iron",
+   "t": "MESH",
+   "c": [
+    5.0,
+    28.13,
+    0.36
+   ],
+   "s": [
+    0.14,
+    0.07,
+    0.29
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "bucket_stable",
+   "t": "EMPTY",
+   "c": [
+    8.94,
+    27.73,
+    0.15
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "bucket_stable_plank",
+   "t": "MESH",
+   "c": [
+    8.94,
+    27.73,
+    0.31
+   ],
+   "s": [
+    0.35,
+    0.35,
+    0.31
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "bucket_stable_iron",
+   "t": "MESH",
+   "c": [
+    8.94,
+    27.73,
+    0.37
+   ],
+   "s": [
+    0.36,
+    0.36,
+    0.37
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "paddock_fence",
+   "t": "EMPTY",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "paddock_fence_timber",
+   "t": "MESH",
+   "c": [
+    24.0,
+    33.03,
+    1.05
+   ],
+   "s": [
+    17.16,
+    19.2,
+    2.56
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "haystack_1",
+   "t": "EMPTY",
+   "c": [
+    20.0,
+    38.6,
+    0.58
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "haystack_1_straw",
+   "t": "MESH",
+   "c": [
+    19.98,
+    38.61,
+    2.23
+   ],
+   "s": [
+    5.01,
+    5.0,
+    3.3
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "haystack_1_fresh",
+   "t": "MESH",
+   "c": [
+    20.04,
+    38.62,
+    2.48
+   ],
+   "s": [
+    0.24,
+    0.21,
+    4.2
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "haystack_1_strands",
+   "t": "MESH",
+   "c": [
+    20.07,
+    38.61,
+    2.08
+   ],
+   "s": [
+    7.35,
+    7.32,
+    3.44
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "haystack_2",
+   "t": "EMPTY",
+   "c": [
+    25.4,
+    39.8,
+    0.78
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "haystack_2_straw",
+   "t": "MESH",
+   "c": [
+    25.41,
+    39.79,
+    2.13
+   ],
+   "s": [
+    3.86,
+    3.87,
+    2.7
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "haystack_2_fresh",
+   "t": "MESH",
+   "c": [
+    25.38,
+    39.74,
+    2.38
+   ],
+   "s": [
+    0.18,
+    0.26,
+    3.6
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "haystack_2_strands",
+   "t": "MESH",
+   "c": [
+    25.41,
+    39.72,
+    1.98
+   ],
+   "s": [
+    5.87,
+    5.78,
+    2.87
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "haystack_3",
+   "t": "EMPTY",
+   "c": [
+    29.3,
+    37.2,
+    0.82
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "haystack_3_straw",
+   "t": "MESH",
+   "c": [
+    29.29,
+    37.22,
+    1.92
+   ],
+   "s": [
+    3.8,
+    3.76,
+    2.2
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "haystack_3_fresh",
+   "t": "MESH",
+   "c": [
+    29.24,
+    37.22,
+    2.17
+   ],
+   "s": [
+    0.28,
+    0.2,
+    3.1
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "haystack_3_strands",
+   "t": "MESH",
+   "c": [
+    29.25,
+    37.21,
+    1.77
+   ],
+   "s": [
+    5.97,
+    5.97,
+    2.4
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "bench_a",
+   "t": "EMPTY",
+   "c": [
+    -25.88,
+    1.75,
+    0.19
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "bench_a_timber",
+   "t": "MESH",
+   "c": [
+    -25.88,
+    1.74,
+    0.43
+   ],
+   "s": [
+    1.53,
+    0.51,
+    0.49
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "butt_a",
+   "t": "EMPTY",
+   "c": [
+    -29.59,
+    2.35,
+    0.22
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "butt_a_plank",
+   "t": "MESH",
+   "c": [
+    -29.59,
+    2.35,
+    0.69
+   ],
+   "s": [
+    0.76,
+    0.75,
+    0.96
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "butt_a_iron",
+   "t": "MESH",
+   "c": [
+    -29.59,
+    2.35,
+    0.7
+   ],
+   "s": [
+    0.76,
+    0.76,
+    0.83
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "woodpile_a",
+   "t": "EMPTY",
+   "c": [
+    -19.54,
+    4.19,
+    0.09
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "woodpile_a_timber",
+   "t": "MESH",
+   "c": [
+    -19.61,
+    4.21,
+    0.71
+   ],
+   "s": [
+    0.91,
+    3.85,
+    1.35
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "woodpile_a_logs",
+   "t": "MESH",
+   "c": [
+    -19.54,
+    4.14,
+    0.78
+   ],
+   "s": [
+    0.96,
+    3.68,
+    1.21
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "chopping_a",
+   "t": "EMPTY",
+   "c": [
+    -29.82,
+    10.69,
+    0.26
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "chopping_a_logs",
+   "t": "MESH",
+   "c": [
+    -29.92,
+    11.06,
+    0.51
+   ],
+   "s": [
+    2.34,
+    2.11,
+    0.5
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "chopping_a_fresh",
+   "t": "MESH",
+   "c": [
+    -29.61,
+    10.92,
+    0.89
+   ],
+   "s": [
+    0.57,
+    0.46,
+    0.35
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "chopping_a_iron",
+   "t": "MESH",
+   "c": [
+    -29.8,
+    10.71,
+    0.75
+   ],
+   "s": [
+    0.2,
+    0.19,
+    0.12
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pots_a",
+   "t": "EMPTY",
+   "c": [
+    -23.53,
+    1.61,
+    0.19
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "pots_a_clay",
+   "t": "MESH",
+   "c": [
+    -23.39,
+    1.63,
+    0.4
+   ],
+   "s": [
+    0.68,
+    0.5,
+    0.42
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "skeps_a",
+   "t": "EMPTY",
+   "c": [
+    -19.84,
+    10.78,
+    0.3
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "skeps_a_plank",
+   "t": "MESH",
+   "c": [
+    -19.84,
+    10.78,
+    0.75
+   ],
+   "s": [
+    1.44,
+    0.62,
+    0.05
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "skeps_a_timber",
+   "t": "MESH",
+   "c": [
+    -19.84,
+    10.78,
+    0.51
+   ],
+   "s": [
+    1.31,
+    0.5,
+    0.42
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "skeps_a_straw",
+   "t": "MESH",
+   "c": [
+    -19.84,
+    10.78,
+    1.02
+   ],
+   "s": [
+    1.43,
+    0.64,
+    0.48
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "skeps_a_interior",
+   "t": "MESH",
+   "c": [
+    -20.04,
+    10.8,
+    0.82
+   ],
+   "s": [
+    0.96,
+    0.2,
+    0.06
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "barrels_c",
+   "t": "EMPTY",
+   "c": [
+    19.89,
+    -8.86,
+    0.02
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "barrels_c_plank",
+   "t": "MESH",
+   "c": [
+    19.54,
+    -8.64,
+    0.47
+   ],
+   "s": [
+    1.34,
+    1.26,
+    0.91
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "barrels_c_iron",
+   "t": "MESH",
+   "c": [
+    19.54,
+    -8.64,
+    0.48
+   ],
+   "s": [
+    1.34,
+    1.27,
+    0.8
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "crates_c",
+   "t": "EMPTY",
+   "c": [
+    25.36,
+    -8.28,
+    0.24
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "crates_c_plank",
+   "t": "MESH",
+   "c": [
+    24.95,
+    -8.25,
+    0.71
+   ],
+   "s": [
+    1.62,
+    0.83,
+    0.94
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "sacks_c",
+   "t": "EMPTY",
+   "c": [
+    21.17,
+    -8.62,
+    0.03
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "sacks_c_burlap",
+   "t": "MESH",
+   "c": [
+    20.95,
+    -8.48,
+    0.34
+   ],
+   "s": [
+    1.01,
+    1.03,
+    0.62
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "sacks_c_rope",
+   "t": "MESH",
+   "c": [
+    20.95,
+    -8.49,
+    0.52
+   ],
+   "s": [
+    0.61,
+    0.65,
+    0.15
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "wheel_lean_c",
+   "t": "EMPTY",
+   "c": [
+    26.88,
+    -8.57,
+    0.35
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "wheel_lean_c_timber",
+   "t": "MESH",
+   "c": [
+    26.89,
+    -8.71,
+    1.0
+   ],
+   "s": [
+    1.3,
+    0.44,
+    1.26
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "wheel_lean_c_iron",
+   "t": "MESH",
+   "c": [
+    26.89,
+    -8.71,
+    1.0
+   ],
+   "s": [
+    1.34,
+    0.43,
+    1.3
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "grindstone_c",
+   "t": "EMPTY",
+   "c": [
+    18.4,
+    -13.32,
+    -0.12
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "grindstone_c_stone",
+   "t": "MESH",
+   "c": [
+    18.4,
+    -13.32,
+    0.63
+   ],
+   "s": [
+    0.85,
+    0.2,
+    0.84
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "grindstone_c_iron",
+   "t": "MESH",
+   "c": [
+    18.4,
+    -13.32,
+    0.63
+   ],
+   "s": [
+    0.1,
+    0.7,
+    0.05
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "grindstone_c_timber",
+   "t": "MESH",
+   "c": [
+    18.4,
+    -13.44,
+    0.27
+   ],
+   "s": [
+    1.11,
+    0.88,
+    0.81
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "grindstone_c_plank",
+   "t": "MESH",
+   "c": [
+    18.4,
+    -13.32,
+    0.3
+   ],
+   "s": [
+    0.63,
+    0.42,
+    0.05
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "bench_b",
+   "t": "EMPTY",
+   "c": [
+    -36.17,
+    -17.69,
+    -0.37
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "bench_b_timber",
+   "t": "MESH",
+   "c": [
+    -36.17,
+    -17.69,
+    -0.13
+   ],
+   "s": [
+    1.32,
+    0.82,
+    0.49
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "butt_b",
+   "t": "EMPTY",
+   "c": [
+    -31.52,
+    -20.15,
+    -0.32
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "butt_b_plank",
+   "t": "MESH",
+   "c": [
+    -31.52,
+    -20.15,
+    0.11
+   ],
+   "s": [
+    0.79,
+    0.79,
+    0.86
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "butt_b_iron",
+   "t": "MESH",
+   "c": [
+    -31.52,
+    -20.15,
+    0.12
+   ],
+   "s": [
+    0.8,
+    0.8,
+    0.75
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "woodpile_b",
+   "t": "EMPTY",
+   "c": [
+    -40.01,
+    -19.43,
+    -0.56
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "woodpile_b_timber",
+   "t": "MESH",
+   "c": [
+    -39.94,
+    -19.47,
+    -0.06
+   ],
+   "s": [
+    1.55,
+    2.74,
+    1.1
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "woodpile_b_logs",
+   "t": "MESH",
+   "c": [
+    -39.99,
+    -19.38,
+    0.05
+   ],
+   "s": [
+    1.55,
+    2.63,
+    1.05
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "chopping_b",
+   "t": "EMPTY",
+   "c": [
+    -39.59,
+    -16.77,
+    -0.47
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "chopping_b_logs",
+   "t": "MESH",
+   "c": [
+    -39.78,
+    -16.72,
+    -0.22
+   ],
+   "s": [
+    1.95,
+    1.97,
+    0.5
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pots_d",
+   "t": "EMPTY",
+   "c": [
+    -11.05,
+    26.22,
+    0.52
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "pots_d_clay",
+   "t": "MESH",
+   "c": [
+    -11.05,
+    26.22,
+    0.7
+   ],
+   "s": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "pots_d_plank",
+   "t": "MESH",
+   "c": [
+    -10.66,
+    26.35,
+    0.67
+   ],
+   "s": [
+    0.39,
+    0.39,
+    0.31
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "pots_d_iron",
+   "t": "MESH",
+   "c": [
+    -10.66,
+    26.35,
+    0.74
+   ],
+   "s": [
+    0.4,
+    0.4,
+    0.37
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "skeps_d",
+   "t": "EMPTY",
+   "c": [
+    -13.54,
+    29.78,
+    0.63
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "skeps_d_plank",
+   "t": "MESH",
+   "c": [
+    -13.54,
+    29.78,
+    1.08
+   ],
+   "s": [
+    0.73,
+    1.46,
+    0.05
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "skeps_d_timber",
+   "t": "MESH",
+   "c": [
+    -13.54,
+    29.78,
+    0.84
+   ],
+   "s": [
+    0.61,
+    1.32,
+    0.42
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "skeps_d_straw",
+   "t": "MESH",
+   "c": [
+    -13.54,
+    29.78,
+    1.34
+   ],
+   "s": [
+    0.75,
+    1.45,
+    0.48
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "skeps_d_interior",
+   "t": "MESH",
+   "c": [
+    -13.58,
+    29.99,
+    1.14
+   ],
+   "s": [
+    0.28,
+    0.96,
+    0.06
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "well",
+   "t": "EMPTY",
+   "c": [
+    -6.8,
+    7.8,
+    -0.09
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "well_stone",
+   "t": "MESH",
+   "c": [
+    -6.8,
+    7.8,
+    0.21
+   ],
+   "s": [
+    2.12,
+    2.08,
+    1.18
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "well_mortar",
+   "t": "MESH",
+   "c": [
+    -6.8,
+    7.8,
+    0.15
+   ],
+   "s": [
+    1.91,
+    1.91,
+    1.07
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "well_interior",
+   "t": "MESH",
+   "c": [
+    -6.8,
+    7.8,
+    -0.99
+   ],
+   "s": [
+    1.3,
+    1.3,
+    3.2
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "well_water",
+   "t": "MESH",
+   "c": [
+    -6.8,
+    7.8,
+    -1.88
+   ],
+   "s": [
+    1.27,
+    1.27,
+    0.01
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "well_timber",
+   "t": "MESH",
+   "c": [
+    -6.75,
+    7.81,
+    0.92
+   ],
+   "s": [
+    2.45,
+    1.1,
+    2.41
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "well_fresh",
+   "t": "MESH",
+   "c": [
+    -6.8,
+    7.8,
+    1.16
+   ],
+   "s": [
+    2.01,
+    0.68,
+    0.16
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "well_rope",
+   "t": "MESH",
+   "c": [
+    -6.71,
+    7.62,
+    1.01
+   ],
+   "s": [
+    0.91,
+    0.8,
+    0.52
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "well_plank",
+   "t": "MESH",
+   "c": [
+    -6.23,
+    7.31,
+    0.92
+   ],
+   "s": [
+    0.41,
+    0.41,
+    0.3
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "well_iron",
+   "t": "MESH",
+   "c": [
+    -6.23,
+    7.31,
+    0.99
+   ],
+   "s": [
+    0.42,
+    0.41,
+    0.37
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "well_shingle",
+   "t": "MESH",
+   "c": [
+    -6.83,
+    7.79,
+    2.1
+   ],
+   "s": [
+    2.81,
+    2.39,
+    0.43
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "signpost",
+   "t": "EMPTY",
+   "c": [
+    -17.2,
+    -9.6,
+    -0.23
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "signpost_timber",
+   "t": "MESH",
+   "c": [
+    -17.2,
+    -9.6,
+    0.77
+   ],
+   "s": [
+    0.15,
+    0.15,
+    2.2
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "signpost_plank",
+   "t": "MESH",
+   "c": [
+    -17.2,
+    -9.88,
+    1.41
+   ],
+   "s": [
+    1.7,
+    1.21,
+    0.6
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "broken_wheel",
+   "t": "EMPTY",
+   "c": [
+    -41.0,
+    -8.0,
+    -0.23
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "broken_wheel_timber",
+   "t": "MESH",
+   "c": [
+    -40.99,
+    -8.0,
+    -0.16
+   ],
+   "s": [
+    1.59,
+    1.59,
+    0.34
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "broken_wheel_iron",
+   "t": "MESH",
+   "c": [
+    -40.99,
+    -8.0,
+    -0.16
+   ],
+   "s": [
+    1.64,
+    1.64,
+    0.18
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "roadside_fence",
+   "t": "EMPTY",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "roadside_fence_timber",
+   "t": "MESH",
+   "c": [
+    -43.73,
+    -8.55,
+    0.18
+   ],
+   "s": [
+    16.64,
+    5.05,
+    2.02
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "roadside_fence2",
+   "t": "EMPTY",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "roadside_fence2_timber",
+   "t": "MESH",
+   "c": [
+    14.02,
+    -5.7,
+    0.3
+   ],
+   "s": [
+    12.09,
+    2.3,
+    2.09
+   ],
+   "col": "Props",
+   "mods": [
+    "BEVEL"
+   ],
+   "inst": ""
+  },
+  {
+   "n": "stone_pile",
+   "t": "EMPTY",
+   "c": [
+    13.0,
+    -8.4,
+    -0.36
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "stone_pile_stone",
+   "t": "MESH",
+   "c": [
+    13.0,
+    -8.26,
+    -0.13
+   ],
+   "s": [
+    1.21,
+    1.13,
+    0.56
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "garden_soil_951.002",
+   "t": "MESH",
+   "c": [
+    -24.33,
+    11.08,
+    0.29
+   ],
+   "s": [
+    6.44,
+    4.7,
+    0.19
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "garden_plants_951.002",
+   "t": "MESH",
+   "c": [
+    -24.33,
+    11.04,
+    0.51
+   ],
+   "s": [
+    5.95,
+    4.06,
+    0.44
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "wattle_garden_951_0",
+   "t": "EMPTY",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "wattle_garden_951_0_withy",
+   "t": "MESH",
+   "c": [
+    -24.34,
+    11.08,
+    0.68
+   ],
+   "s": [
+    7.19,
+    5.44,
+    1.3
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "garden_soil_952.002",
+   "t": "MESH",
+   "c": [
+    -4.76,
+    29.6,
+    0.56
+   ],
+   "s": [
+    3.88,
+    4.19,
+    0.15
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "garden_plants_952.002",
+   "t": "MESH",
+   "c": [
+    -4.77,
+    29.47,
+    0.81
+   ],
+   "s": [
+    3.24,
+    3.43,
+    0.46
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  },
+  {
+   "n": "wattle_garden_952_0",
+   "t": "EMPTY",
+   "c": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": "NONE"
+  },
+  {
+   "n": "wattle_garden_952_0_withy",
+   "t": "MESH",
+   "c": [
+    -4.75,
+    29.6,
+    0.95
+   ],
+   "s": [
+    4.67,
+    4.95,
+    1.28
+   ],
+   "col": "Props",
+   "mods": [],
+   "inst": ""
+  }
+ ],
+ "n_objects_scene": 389
+}
