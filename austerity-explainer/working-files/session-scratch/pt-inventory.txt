@@ -1,0 +1,304 @@
+### A word spoken twice must be asked for by which time | area: timing and words on screen | from: lessons-and-notes
+   how_found : Found three times. Lesson 12 (chapter 1: 'shells', 'in', 'a', 'its', 'it', 'and', 'prices', 'the'), lesson 28 ('war', 'get', 'prices') and lesson 46 ('machines'). Each time it was caught only by checking every lookup by hand against the recording or the page text before filming.
+   final_value_or_rule : kit.at('word', n) with n = which time it is spoken. The default n = 1 silently takes the first.
+   evidence : Lessons.md:43-47, 123-125, 188-189; Workflows.md:273-274; film-kit/paper-film/scenes/cinema-kit.js wordClock lines 52-62
+   computable_from : timeline.json (each page's words) + the page files' kit.at / kit.end calls
+   proposed_calculation : lint_word_lookups: parse every page file for at('w'[, n]) and end('w'[, n]). For each call without n, count matches of key(w) on that page. If the count is above 1, fail and list every occurrence with its time and 3 words either side. Simpler still: make wordClock's find() throw when n is left out and the word occurs more than once.
+   already_automatic : No. wordClock only throws when a word is missing, never when it is ambiguous (cinema-kit.js and paper-kit.js, both in the plugin).
+   llm_tip : Always give the occurrence number for short or common words ('the', 'prices', 'it'), and run the lookup lint before drawing any stills.
+### Trailing dots when matching words | area: timing and words on screen | from: lessons-and-notes
+   how_found : Lesson 45: 'arrives...' was not found as 'arrives'.
+   final_value_or_rule : Drop trailing dots (and other punctuation) when matching words to times.
+   evidence : Lessons.md:186-187; film-kit/paper-film/scenes/cinema-kit.js:56
+   computable_from : timeline
+   proposed_calculation : Already done: key = lowercase, strip [^a-z0-9'.], then strip /\.+$/.
+   already_automatic : Yes, in cinema-kit.js and paper-kit.js (plugin kit).
+   llm_tip : Ask for words in plain lowercase, without punctuation.
+### Longest rest with nothing new on screen | area: timing and words on screen | from: lessons-and-notes
+   how_found : Lesson 16: a 0.7 s pause in typing was flagged as a freeze by the old skill's gate until it was declared as a rest. Decisions (chapter 1): a page rests while Malina speaks for no longer than 1.7 s, except 2.5 s on the end card.
+   final_value_or_rule : At most 1.7 s with no visual change while the voice speaks (2.5 s on the end card).
+   evidence : Lessons.md:61-64; Decisions.md:87-88
+   computable_from : timeline + each page's event times (kit.at calls, stillShot moves, graphics start times)
+   proposed_calculation : rest_check: collect every visual event per page (piece entrances, word pops, camera move starts and ends, graphics starts and ends, state cuts). For each gap between events that overlaps speech, report gaps over 1.7 s (2.5 s on the last page). Run it on the estimated timeline before recording, and again on the real one.
+   already_automatic : No kit tool. The old gate belonged to the anidoodle skill; camera_audit.py measures only the camera.
+   llm_tip : Plan each page as a list of visual events, each with its word. Where two events are more than 1.7 s apart while she talks, add a beat or a slow, named camera move.
+### Pause between pages, and page turn timing | area: timing and words on screen | from: lessons-and-notes
+   how_found : Decisions (chapter 1): pages separated by 1.1 to 1.7 s for the page turn. Chapter 1 used 1.7, 1.4, 1.1, 1.5, 1.5, 1.3, 1.5, 1.4, 1.6, longer where the turn has more to do. The page turns 0.3 s after its last word, once the pieces have folded away.
+   final_value_or_rule : Pause 1.1 to 1.7 s, default 1.4 (assemble). The turn starts 0.3 s after the last word.
+   evidence : Decisions.md:81-82; film-kit/narration-tools/assemble_chapter_narration.py header (DEFAULT_PAUSE 1.4); Workflows.md:72-74; estimate_timeline.py (--default-pause 1.5)
+   computable_from : page files (pieces still standing at the last word, fold-away and peel durations) + timeline
+   proposed_calculation : pause_after(page) = clamp(0.3 + foldaway_seconds(pieces standing at the last word) + 0.5 x peel_seconds, 1.1, 1.7). Add 4.0 s when the page ends on a guess (see 'Guess hold'). Write the list both as --pauses for assemble and as --pause-after for estimate_timeline.
+   already_automatic : Only defaults, and the two tools disagree: 1.4 in assemble, 1.5 in estimate_timeline. Chapter 1's per-page pauses were chosen by hand.
+   llm_tip : Use one default in both tools, and lengthen a pause only where the page turn has more to fold away.
+### Re-recording one page shifts everything after it | area: timing and words on screen | from: lessons-and-notes
+   how_found : Workflows: re-recording one page changes every time after it, so steps 2 to 7 are redone for the whole chapter. Pages ask for words, not seconds, so they retime themselves.
+   final_value_or_rule : Rebuild word times, timeline, mix and captions, and re-film every chunk from the changed page onward.
+   evidence : Workflows.md:42, 244-245
+   computable_from : old timeline vs new timeline, plus the chunk list
+   proposed_calculation : A one-command rebuild (make-style) re-runs extract, assemble, mix and captions. It compares page start times between the old and new timeline and deletes only the film chunks whose frame range moved (every page from the first changed one, unless that page's pause absorbs the change).
+   already_automatic : No. Retiming of pages is automatic; the rebuild and the choice of chunks to re-film are manual.
+   llm_tip : Before re-recording page k, know that every page after k must be re-filmed unless its pause absorbs the length change.
+### Words on screen are short forms of what is said | area: timing and words on screen | from: lessons-and-notes
+   how_found : Decisions (chapter 1, items 13 and 20): words on the pages are short forms of what Malina says, never more. Critics later caught on-screen words that added claims (lesson 53).
+   final_value_or_rule : Every on-screen word or number must be said within its page and near its moment, as the same word, a short form, or the numeral of a spoken number.
+   evidence : Decisions.md:94-95, 164-166, 315-317; Lessons.md:210-214
+   computable_from : page files (word, card and callout texts with their times) + timeline
+   proposed_calculation : words_on_screen_check: for each on-screen text, split it into content words and numbers. For each, search the page's spoken words within +/- 6 s of its appearance (exact, stem, or number-to-words: '8 MILLION' = 'eight million'). List any that are not found for a human to accept as a short form or remove.
+   already_automatic : No.
+   llm_tip : If a word on screen isn't heard at that moment, it is a new claim. Cut it or get it said.
+### Hold the key number still | area: timing and words on screen | from: lessons-and-notes
+   how_found : Lesson 53 critique: a key figure was still counting while it was said, then faded at once, so it was never read. The plugin guide records the rule.
+   final_value_or_rule : A count must finish on its word and hold for at least 1 s afterwards.
+   evidence : Lessons.md:210-214; plugin/skills/build-cinema-page/guide.md ('Hold the key number still')
+   computable_from : page files (counter start, end and fade times) + timeline
+   proposed_calculation : For every counter or number graphic: assert count_end <= at(word_of_number) + 0.1 and visible_until >= count_end + 1.0. Fail with the page and word.
+   already_automatic : No; it is prose in the plugin guide.
+   llm_tip : Finish counts on the spoken number and hold them at least a second.
+### Page-turn ghosts; check page turns in one run | area: checking and critique | from: lessons-and-notes
+   how_found : Lesson 51: one page's words showed on the next during page turns, but only when frames were drawn in sequence; a single test frame looked clean. Fix: the graphics layer is copied per page and reset. Workflows step 5: check page turns at each last word + 0.7 s.
+   final_value_or_rule : Stills at every page's last word + 0.7 s, drawn in ONE run of the whole chapter.
+   evidence : Lessons.md:204-207, 514; Workflows.md:120-121
+   computable_from : timeline
+   proposed_calculation : A tool prints (or runs) the --stills list: for each page, t = last word end + 0.7, plus 0.3 and 1.2 s around it, all in one render-paper-film call.
+   already_automatic : The fix is automatic; the still list is typed by hand.
+   llm_tip : Never check page turns with one still at a time.
+### Still times must be space-separated | area: filming speed and memory | from: lessons-and-notes
+   how_found : Lesson 50: '43.2,47.5' was read as one broken number and the second still failed.
+   final_value_or_rule : --stills T1 T2 ... separated by spaces.
+   evidence : Lessons.md:202-203; render-paper-film.mjs:118-120 (rest.slice(1).map(Number))
+   computable_from : none
+   proposed_calculation : Split each argument on commas too (rest.slice(1).flatMap(s => s.split(',')).map(Number)), and fail on NaN.
+   already_automatic : No.
+   llm_tip : Separate still times with spaces.
+### Automatic still lists for checking pages | area: checking and critique | from: lessons-and-notes
+   how_found : Workflows (paper step 7 and cinema step 4): check every entrance, word, mouth and page turn at full size. Built place step 6: four stills before filming (projector view, end of move, middle, weights view). Lesson 53: get the critique BEFORE filming.
+   final_value_or_rule : Stills at every event, plus the four projected-set views per shot.
+   evidence : Workflows.md:75-77, 112-114, 194-197
+   computable_from : page files (kit.at calls, stillShot moves) + timeline
+   proposed_calculation : make_still_list PAGE: run the page in an 'events' mode that records every kit.at time and every move's from/to; output those times + 0.25 s, the move middles, the projector view (t at shot start), and the weights view at each move end. Then call render-paper-film --stills and a contact sheet.
+   already_automatic : No; times are picked by hand.
+   llm_tip : Let the page's own events choose the stills; never pick times by eye.
+### Check the film in motion | area: checking and critique | from: lessons-and-notes
+   how_found : Lesson 86: pieces popping in for one frame, things passing through floors and flat pale cards only showed in the moving film. A frame-to-frame difference measure finds them.
+   final_value_or_rule : find_jumps.py: a frame whose change is over 4 x the median of the 5 frames either side (and over a floor) is listed. Planned cuts are given so they aren't flagged.
+   evidence : Lessons.md:328-330; film-kit/paper-film/tools/find_jumps.py
+   computable_from : finished film + planned cut times (stillShot boundaries, page turns)
+   proposed_calculation : Pass the planned cut list automatically from the camera file (shot changes) and the timeline (page turns), so only unplanned jumps are reported.
+   already_automatic : find_jumps.py exists (plugin kit); planned cuts are typed by hand.
+   llm_tip : Always run the jump finder on the filmed result before calling it done.
+### Phone-size reading of details | area: checking and critique | from: lessons-and-notes
+   how_found : Lesson 68: stone blocks beside gutter ends looked like little cameras, dark glass made reading glasses look like sunglasses, and figured wood looked like a contour map. A before-and-after judge in the real film frame caught all three.
+   final_value_or_rule : Judge details at phone size in the real frame, before and after.
+   evidence : Lessons.md:269-272
+   computable_from : stills
+   proposed_calculation : Produce phone-size copies (390 px wide) and 2x crops of each hero prop next to each other for critics automatically.
+   already_automatic : No.
+   llm_tip : Ask 'what else could this read as on a phone?' for every new detail.
+### On-screen numbers recomputed from the ledger | area: checking and critique | from: lessons-and-notes
+   how_found : Decision 21: checkers changed UP TO +25% and the hundred-dot panel (1915 was 0.95%), and kept x4 for oil ($2.90 to $11.65 is 4.02 times).
+   final_value_or_rule : Every on-screen number is backed by ledger raw values and rounds honestly.
+   evidence : Decisions.md:330-337
+   computable_from : page files' numbers + ledger raw values
+   proposed_calculation : Each on-screen number names its ledger id; a tool recomputes ratios and percentages from the raw values and flags any rounding error above 5%.
+   already_automatic : No.
+   llm_tip : Recompute every number on screen from its source.
+### Pause between pages, and music before the first word | area: timing and words on screen | from: story-log
+   how_found : Log 07 laid the pages end to end with pauses of 1.1 to 1.7 s, chosen gap by gap: longer where the page turn has more to do.
+   final_value_or_rule : Default 1.4 s (estimate_timeline uses 1.5). Per-gap range 1.1 to 1.7 s, for example --pauses 1.7,1.4,1.1,1.5,1.5,1.3,1.5,1.4,1.6. The first word comes 1.08 s into the music. The estimate adds a 4.0 s tail after the last word.
+   evidence : story L382 (log 07); assemble_chapter_narration.py lines 9-12, 27-31; estimate_timeline.py lines 18-19 and --default-pause
+   computable_from : the page files (what the outgoing page does on its turn) and the join kind and length
+   proposed_calculation : pause = clamp(join.after + join.length + settle + 0.2 s × pieces folding away first, 1.1, 1.7). The defaults are join.after 0.3 s, a 0.85 s peel and 0.3 s to settle (about 1.45 s). For a held guess, use 4.0 s instead (see the guess item).
+   already_automatic : Partly: a default of 1.4 s and a hand-typed --pauses list. Nothing reads the join lengths from the page files.
+   llm_tip : Pauses are not cosmetic: a page turn needs about 1.2 s. Never set a gap below 1.1 s.
+### Planned rests and frozen stretches | area: timing and words on screen | from: story-log
+   how_found : Log 08: the drawing skill's quality gate flagged 18 one-second stretches where only a thin red-pen line or small typing moved, because it looks at a quarter-size picture. A typing pause was declared as a rest.
+   final_value_or_rule : A planned rest lasts at most 1.7 s (2.5 s on the end card). Measure motion at full size.
+   evidence : story L260 (word list), L398-402 (log 08)
+   computable_from : the filmed frames and the page files' declared rests
+   proposed_calculation : Mean frame-to-frame change per second at full resolution. Any stretch over 1.7 s below a small floor (about 0.2 levels) that is not a declared rest or held shot is flagged.
+   already_automatic : Only the anidoodle quality gate (scrapbook look). Nothing in the plugin kit for the cinema look: find_jumps.py looks for jumps, not freezes.
+   llm_tip : Declare rests and held shots in the page file. A check that shrinks frames will miss thin moving lines.
+### Page turn timing | area: timing and words on screen | from: story-log
+   how_found : Log 11: a page turn that swung like a door left white strips, so it became a corner peel with pieces folding away first. Log 13: the turn starts 0.3 s after the page's last word.
+   final_value_or_rule : TURN_AFTER_LAST_WORD 0.30 s. Cinema DEFAULT_JOIN is a peel 0.3 s after the last word, lasting 0.85 s. Pieces fold away first.
+   evidence : story L449-450 (log 11), L469-470 (log 13); paper-film/scenes/paper-chapter.js line 22; cinema-chapter.js line 15
+   computable_from : the timeline
+   proposed_calculation : Already automatic. Add a check that each join ends at least 0.1 s before the next page's first word.
+   already_automatic : Yes, in both engines (plugin kit).
+   llm_tip : Don't hand-time page turns. Set a join kind only where a page needs a dissolve or a dip.
+### A cue word spoken twice on a page | area: timing and words on screen | from: story-log
+   how_found : Log 08: marks tied to the wrong word where a word is spoken twice. Log 13: 'war', 'get' and 'prices' were looked up by their first time.
+   final_value_or_rule : Ask for a word together with its occurrence number.
+   evidence : story L392-393 (log 08), L471 (log 13); paper-film/scenes/cinema-kit.js line 60 (occurrence n)
+   computable_from : the page text and the words each page file asks for
+   proposed_calculation : When a page is built, list every requested word that occurs more than once on that page without an explicit occurrence, with all its times, as a warning.
+   already_automatic : Partly: the occurrence argument exists, but nothing warns when it is missing.
+   llm_tip : When a cue word appears twice in a page's narration, always pass its occurrence.
+### Words on screen in step with cuts, moves and narration | area: timing and words on screen | from: story-log
+   how_found : Log 19: one page's words showed on the next during a page turn. Log 27: the 1925 title lingered through the move down. Log 32: the end titles arrived with a small pop at 8.9 s (the move stops by 8.4 s). Log 34 round 4: words end exactly on each cut, and every word on screen matches the narration.
+   final_value_or_rule : Each title ends at or before its shot's cut and clears as the camera moves. No title from page N shows after its turn starts. On a held end frame, titles fade in after the camera has stopped.
+   evidence : story L581-582 (log 19), L900-902 (log 27), L1247-1248 (log 32), L1378-1380 (log 34); L1324-1325 (log 33: picture notes putting years and prices on screen that Malina never says)
+   computable_from : the page files (title start and end), shot cut times, camera move times and the narration text
+   proposed_calculation : For each 2D title: assert end ≤ next cut; on held shots, start ≥ the last move's end + 0.3 s; fade-in at least 0.3 s (9 frames). Fuzzy-match the title's text to the narration within 3 s of its start; numbers must equal spoken numbers.
+   already_automatic : Not known to be a tool. Checked by helpers in round 4.
+   llm_tip : Every on-screen word should be something Malina says within a few seconds. Never show a year or price she doesn't say.
+### Numbers on screen held still and true to the ledger | area: checking and critique | from: story-log
+   how_found : Log 19: page 10's 5.6% never held still. The fact recheck changed UP TO +25%, LOWEST SINCE 1986 and the last of the hundred dots (0.95%), and kept ×4 (4.02 times) and 'about ½% a year' with reasons.
+   final_value_or_rule : A number stops moving long enough to read. Shown figures stay within rounding of the ledger value and keep its qualifiers ('up to', 'about').
+   evidence : story L583-591, L597-598 (log 19)
+   computable_from : the page files and the research ledger
+   proposed_calculation : Each on-screen number must hold still for at least 0.5 s + 0.15 s per character (about 1.5 s for '5.6%'). Map it to a ledger id; |shown - ledger| must be at most half its last shown digit. Flag a missing qualifier.
+   already_automatic : No. The verify-facts workflow relies on judgement.
+   llm_tip : Put the ledger id next to every on-screen figure in the page file.
+### Finding unplanned jumps between frames | area: checking and critique | from: story-log
+   how_found : Logs 27 and 29: frame-to-frame scans found jumps the stills missed. Log 29's scan found nothing but the planned cut at 7.3 s. Log 32 made find_jumps.py. Logs 13 and 20 measured the joins between chunks as smooth as any two frames in a row.
+   final_value_or_rule : A frame is a jump if its change is more than 4 times the middle value of the 5 frames either side, and over a small floor. Planned cuts are listed.
+   evidence : story L895-897, L969-970, L980-981, L476, L679-680; paper-film/tools/find_jumps.py
+   computable_from : the film, plus the cut times from the camera plans and page joins
+   proposed_calculation : Fill the planned cuts in automatically from the stillShot changes, camera_audit's cuts and the page joins. Run on every filmed piece and every chunk join.
+   already_automatic : find_jumps.py is in the plugin kit; the planned cuts are typed by hand.
+   llm_tip : Scan every finished film for jumps and explain each one as a planned cut or a fault.
+### Contact sheets and how often to look | area: checking and critique | from: story-log
+   how_found : Log 13: about 85 single moments checked at full size before filming, then contact sheets at one frame a second. Logs 19 and 20: one frame every 3 seconds of the finished film. Logs 29 to 32: sheets of two frames a second for motion. Log 27: motion checks found faults stills can't show.
+   final_value_or_rule : Full-size stills before filming. After filming, one frame every 3 s for an overview, two a second for moving shots, plus find_jumps.
+   evidence : story L470-473 (log 13), L623-624 (log 19), L681 (log 20), L886-897 (log 27)
+   computable_from : the timeline (cue words) and the camera plans
+   proposed_calculation : Choose still times automatically: each cue word + 0.5 s; the start, middle and end of each move; the middle of each page turn. Make the sheets automatically.
+   already_automatic : Partly: render-paper-film.mjs --stills and the contact sheet tools, but times are chosen by hand.
+   llm_tip : Choose check moments from the timeline, not at random.
+### Re-recording one page moves everything after it | area: timing and words on screen | from: story-log
+   how_found : Traps and Status: the whole chapter's timing, mix and film must be made again, about 25 minutes of computer time.
+   final_value_or_rule : Redo the timing, the mix and the filming of every page whose times change.
+   evidence : story Traps L1414-1415; Status L320-323
+   computable_from : the old and new timelines
+   proposed_calculation : Compare the two timelines and list the pages whose start or word times changed. Delete only those pages' chunks and film them again.
+   already_automatic : No.
+   llm_tip : Record all pages before filming. A late retake costs a re-film of everything after it.
+### The picture must not contradict the card | area: script and narration | from: redesign-rounds
+   how_found : Round 4 critic: the rule card says MOSTLY MORE THINGS MADE and draws a line to No. 1's chimney, but W3 still shows No. 1 cold with men waiting. Fixed by starting No. 1's working smoke on 'made'. Plan: Japan not shown as either factory; NOT THE ONLY REASON stays; 1915 window thins, not empties (T5, T19); lesson 83.
+   final_value_or_rule : Whenever a card or line points at a thing, its state must match the claim at that moment (live effects can change without a redraw).
+   evidence : round4-result.json critique.findings[12]; works-effects.js lines 97-104; PLAN lines 1384, 1431, 1445
+   computable_from : page events (cards with targets), the states active at each time
+   proposed_calculation : For every pointer or label event, look up the target's state at that time and the claim's keyword (made, quiet, up); keep a small table of claims to required states; flag mismatches.
+   already_automatic : No.
+   llm_tip : For each card with a pointer, ask what the pointed-at thing is doing at that moment; if it contradicts the words, change the picture.
+### Words end exactly on a cut | area: timing and words on screen | from: redesign-rounds
+   how_found : Round 3 check: words faded one frame before each cut (change 2.7 against a usual 0.5), so the cut took two steps. Round 4 added fadeOut 0; film measured the frame before each cut 0.39 to 0.41, the cut about 42 to 46.
+   final_value_or_rule : presence(..., fadeOut = 0) for every word, label, band and arrow that ends on a cut: whole until 'until', gone from it.
+   evidence : KIT/paper-film/scenes/graphics.js lines 21-28 and 112-113; round3-result.json checked.findings[16]; round4-result.json pageFixes.summary and film.tested
+   computable_from : page events and cut times
+   proposed_calculation : When an element's 'until' equals a cut or page-turn time (within one frame), set fadeOut 0 automatically.
+   already_automatic : Yes as an option in the film kit's graphics.js (must be set by hand); plugin kit's presence() lacks it.
+   llm_tip : Any word that lasts until a cut must not fade; set fadeOut 0 so the cut is one clean step.
+### Label reading time before a cut | area: timing and words on screen | from: redesign-rounds
+   how_found : Round 4 critic and film helper measured MACHINES: label words appear 0.3 to 0.55 s after the line starts; 'machines' at 54.17 s, words full at 54.70, cut at 55.10: readable about 0.4 to 0.45 s. Round 5 added wordsWithLine (words in at once, 0.12 s).
+   final_value_or_rule : readable = cut - (word time + delay); default delay 0.55 s, wordsWithLine 0.12 s; MACHINES then reads about 0.85 s. Aim for about 1 s or more.
+   evidence : graphics.js lines 105-118 and 156-158; page-3.js lines 110-116; round4-result.json critique.findings[7] and film.summary item 1
+   computable_from : narration word times, page cut times
+   proposed_calculation : For every label: readable = next_cut - (at + delay); if < 1.0 s use wordsWithLine; if still < 0.8 s move it to an earlier word in the clause or move the cut one word later.
+   already_automatic : No; option exists in the film kit only.
+   llm_tip : Count the seconds a label is fully readable before the next cut; under a second, bring its words in with the line or start it a word earlier.
+### A page's conclusion stays up at least 1.2 s | area: timing and words on screen | from: redesign-rounds
+   how_found : Round 3 check: '-> PRICES UP' came on 'up' (106.48 s) and the cut was on 'Most' (107.15 s): 0.65 s, last frame already faded. Moved to 'prices' (105.96 s) with the arrow: about 1.2 s, full strength on the last frame.
+   final_value_or_rule : Key conclusion visible at full strength for at least 1.2 s before a cut; start it on the first word of its clause.
+   evidence : round3-result.json checked.findings[4]; page-5.js lines 45 and 79; round4-result.json film.summary
+   computable_from : narration word times, cuts
+   proposed_calculation : For cards marked 'key', at = earliest word of its clause such that cut - at >= 1.2 s; else push the cut to the next word (if the next shot's cards start later).
+   already_automatic : No.
+   llm_tip : Start a conclusion on the first word of its phrase, not the last.
+### No two lines in the same place at once | area: timing and words on screen | from: redesign-rounds
+   how_found : Round 3 check: for about 5 frames NO SPARE was drawn over the fading WHAT HAPPENS TO PRICES? ('NO SPAREPENS TO PRICES?') because presence() fades out before 'until'. Fixed: question until spare + 0.12 (0.3 s fade), NO SPARE at spare + 0.15; two empty frames between.
+   final_value_or_rule : A new line in an occupied box starts only after the old one has fully gone: new.at >= old.until + 1 frame (with fadeOut counted inside 'until').
+   evidence : page-5.js lines 65-68; round3-result.json checked.findings[3]; round4-result.json critique.summary 'NO SPARE overlap gone'
+   computable_from : page draw calls with boxes and times
+   proposed_calculation : Collect every text element's box and [at, until]; for overlapping boxes with overlapping time spans, set old.until = new.at - 1/30 s.
+   already_automatic : No.
+   llm_tip : When a line replaces another in the same spot, end the old one a couple of frames before the new one starts.
+### Where typed words may go | area: timing and words on screen | from: redesign-rounds
+   how_found : Plan; round 3 check: MOST ECONOMISTS AGREE tops at 0.047 down, above the title area and under a phone app's top bar; moved to 0.061. Round 3 and 4 measured longest lines at 0.86.
+   final_value_or_rule : Title zone 0.06 to 0.90 across, 0.05 to 0.22 down; left edge 65 px, right limit 972 px (TEXT_LEFT, TEXT_RIGHT); top of any letter at least 0.06 down; rule cards stacked at 0.07 to 0.15 and 0.16 to 0.24 (lower card ends 0.236); heading baseline 142 px. Name tags on a gable 0.21 to 0.23 down (TAG_HEIGHT 5.6 m); THE FLAT-OUT FACTORY SLOWS right edge 0.73.
+   evidence : graphics.js lines 341-346; page-5.js lines 36-40; round3-result.json checked.findings[17]; round4-result.json pageFixes.summary; works-effects.js lines 125-128
+   computable_from : page draw calls (text sizes and positions)
+   proposed_calculation : Measure every drawn string's box with the font metrics; flag top < 0.06 x 1920, right > 972 px, left < 65 px; flag tags whose box crosses the subject's box.
+   already_automatic : Partly: TEXT_RIGHT clamps buildWords; no top-edge or overlap check.
+   llm_tip : Keep every letter at least 0.06 down from the top and left of 0.90 across; phones cover the very top and right.
+### Run-on join between pages without a dip | area: timing and words on screen | from: redesign-rounds
+   how_found : Round 3 effects: page 4 into 5 with the normal dissolve showed a 4-level dip (the dissolve darkens its middle), though both frames had the same average colour.
+   final_value_or_rule : 'run-on' join: plain blend with dip 0; largest change 0.60 to 0.95.
+   evidence : cinema-stage.js lines 433-443; round3-result.json effects.tested 'The run-on'
+   computable_from : page join kind from the plan (same frame continues)
+   proposed_calculation : When two pages share the same view and camera at the join, choose 'run-on' automatically.
+   already_automatic : Yes in film kit; not in plugin kit.
+   llm_tip : When one page runs on in the same frame, use a plain blend, not a dissolve.
+### How many word groups | area: timing and words on screen | from: redesign-rounds
+   how_found : Teaching critic T6: about 130 cards (one every 3 s) against the user's 'minimal'; plan cut to about 65 groups.
+   final_value_or_rule : About one group of words every 6 s (65 in 407 s), 3 to 5 per page; more only where each is a figure or a placement the narrator says (page 7 carries 7). A card stays until the next replaces it or the page turns.
+   evidence : PLAN lines 39-41, 615 and 1432
+   computable_from : page events, narration length
+   proposed_calculation : groups_per_page_max = round(page_seconds / 6) + count of spoken figures; flag pages over it.
+   already_automatic : No.
+   llm_tip : Aim for one group of words about every 6 seconds; let pictures carry the rest.
+### Holds, peels and slide timing | area: timing and words on screen | from: redesign-rounds
+   how_found : Plan's page list and moves table; plan risk: holds cut short by the real recording.
+   final_value_or_rule : Guess hold 4 s with a ring filling over 4 s; rule hold 2 s; final fade 4 s; page peel 0.3 s after the last word; holds written as pauses in the timeline, not seconds in the page. Slides 2.6 to 4.1 s, start and stop on words, one per page at most (user's limit three), never a turn.
+   evidence : PLAN lines 604-621, 1051-1072, 1390
+   computable_from : narration word times
+   proposed_calculation : For each slide pick (start word, stop word) pairs inside the phrase it serves with 2.5 <= gap <= 4.1 s; peel_at = last word end + 0.3 s; insert hold pauses into the timeline before word timing.
+   already_automatic : No.
+   llm_tip : Tie every slide's start and stop to words 2.5 to 4 seconds apart, and write holds into the timeline as pauses.
+### Labels don't cover what they name, and point at something visible | area: timing and words on screen | from: redesign-rounds
+   how_found : Round 3: MACHINES pointed at a cottage window, QUIET sat on the gasholder. Round 4 critic: MACHINES pointed at No. 2's upper windows instead of the flywheel; WORKERS' line ran straight down over the men. Round 5: corner option and a flywheel screen point.
+   final_value_or_rule : Label target = the screen point of a visible, named thing (marker in works-shot.json); line leaves the target sideways (corner dx 120, dy -8) and the words sit on empty ground, not on the target or other story things.
+   evidence : page-3.js line 116; graphics.js lines 114-118; round4-result.json critique.findings[7]; round3-result.json pages.summary item 4
+   computable_from : marker screen points and story boxes from shot facts
+   proposed_calculation : Place label words at the nearest empty spot (no story box, not the title zone of other cards) at 120 to 200 px from the target; route the line with a corner if the straight line crosses the target's box.
+   already_automatic : No.
+   llm_tip : A label's line must not run over the thing it names; send it out sideways to empty ground.
+### Jump finder with the planned cuts named | area: checking and critique | from: redesign-rounds
+   how_found : Every round ran find_jumps.py per piece and on a 2-second clip at each place pieces meet.
+   final_value_or_rule : Ordinary frame change 0.39 to 0.51; a cut about 42 to 46; a time cut about 8.4 to 10.7; anything above about 1.5 that is not a planned event is a fault. Measure the frame before each cut too.
+   evidence : round2-result.json figures.summary; round3-result.json effects.tested; round4-result.json film.tested
+   computable_from : page events (cuts, time cuts, steps), filmed pieces
+   proposed_calculation : Generate the planned-change list from the page events automatically and pass it to find_jumps.py; also measure joins between pieces.
+   already_automatic : Partly: find_jumps.py exists in both kits; planned list typed by hand.
+   llm_tip : Hand the jump finder the list of planned cuts from the page events, and also check where filmed pieces join.
+### Page windows and joins | area: timing and words on screen | from: tools-and-plugin-gap
+   how_found : Chapter 2 build (log 19) and newcomers pages (log 34): pages 4->5 and 8->9 continue in the same frame; page 10->11 cuts because the guess hold fills the pause.
+   final_value_or_rule : DEFAULT_JOIN peel 0.3 s after the last word, 0.85 s long; page drawn from previous last word + 0.3 to own last word + 1.2; plan the camera from firstWordAt - 0.8 to lastWordEnd + 1.3; 'run-on' join (plain blend, no dip) when the next page continues in the same view.
+   evidence : film-kit/paper-film/scenes/cinema-chapter.js line 9 and 15; cinema-stage.js line ~437 ('run-on'); 34 Plan part 2 'Between pages'
+   computable_from : timeline and shot list (view at page end vs next page start)
+   proposed_calculation : Choose the join automatically: same view and same camera at the boundary -> run-on; a guess hold of >= 3 s at the boundary -> cut; otherwise peel.
+   already_automatic : Join timing yes; run-on exists only in the film kit stage (not plugin); the choice is manual.
+   llm_tip : If a page continues in the same frame, use the run-on join; a peel over an unchanged picture looks like a fault.
+### Words that end on a cut, and words that overlap | area: timing and words on screen | from: tools-and-plugin-gap
+   how_found : Log 34 round 3: words faded one frame before each cut, so the cut took two steps (2.7 vs 0.5 change); NO SPARE overlapped the fading question for about 5 frames ('NO SPAREPENS TO PRICES?').
+   final_value_or_rule : presence(..., fadeOut 0) for everything that ends on a cut (whole until the cut, gone after); a word in the same place must be gone before the next comes in (until_A <= at_B).
+   evidence : film-kit/paper-film/scenes/graphics.js presence() lines 25-27; round3-result.json findings 34 and 44; page-3.js draw2D comments
+   computable_from : page draw2D schedule (sampled) and cut times (stillShot names, still-key changes, joins)
+   proposed_calculation : Overlay lint: sample draw2D at 30 fps into an alpha mask per call (or record boxes from buildWords/callout return values); flag any frame where two text boxes overlap with both alpha > 0.1, and any text whose alpha changes in the frame before a cut.
+   already_automatic : No (fixed by hand after a critic found them).
+   llm_tip : End every word exactly on a cut with fadeOut 0, and never bring a new line into a box another line is still fading out of.
+### Minimum readable time for on-screen words | area: timing and words on screen | from: tools-and-plugin-gap
+   how_found : Log 34 round 3: PRICES UP up 0.65 s (last frame already faded) could not be read -> brought in one word earlier, 1.2 s; round 4: MACHINES readable 0.4 s because callout words wait 0.3 s and fade 0.25 s -> wordsWithLine (words in 0.12 s), about 0.85-0.9 s. Chapter 2 critique: hold a key number at least a second after the count ends.
+   final_value_or_rule : Each word group readable (full strength) for >= 1.0 s before it leaves or the cut; callout words appear 0.3 s after the line starts unless wordsWithLine.
+   evidence : round3-result.json finding 35; round4-result.json finding 8; graphics.js callout options (line 117); plugin guide section 9 'Hold the key number still'
+   computable_from : word times, each text item's at/until, cut times
+   proposed_calculation : readable = min(until, next_cut) - (at + appear_delay) where appear_delay = 0.55 for callout (0.12 with wordsWithLine), 0.14 for buildWords; flag readable < 1.0 s (a longer threshold for long lines, e.g. 0.25 s + 0.05 s per character, to be confirmed).
+   already_automatic : No.
+   llm_tip : Start a conclusion's words on an earlier word if the cut comes soon; a label must be fully readable for at least a second.
+### Label line placement | area: timing and words on screen | from: tools-and-plugin-gap
+   how_found : Chapter 2 critique (lines crossing numbers read as strike-through) and log 34 round 4 (WORKERS line ran down over the men; NEW MONEY arrow ended on a lantern, not the chain).
+   final_value_or_rule : Line leaves its thing sideways (corner { dx, dy }), words on empty ground, side forced left/right when needed; arrows end on the named point (gates.no-1.chain at 2.05 m); callout keeps 70 px margin.
+   evidence : graphics.js callout corner/side options; page-3.js callout calls; round4-result.json findings 8, 14
+   computable_from : screen positions of the target (kit.toScreen / works.screen) and the ids.png masks of the view
+   proposed_calculation : Search candidate end points around the target; score each by: label box inside the safe area, not over any story-prop mask, low local detail, line segment crossing no other prop mask and no number box; pick the best and return dx, dy, corner.
+   already_automatic : No (placed by trial stills).
+   llm_tip : Point labels at the thing's edge and put the words on empty ground; never draw the line through what it names.
+### Shot list to page skeleton | area: timing and words on screen | from: tools-and-plugin-gap
+   how_found : Log 34 design: shots.json (30 shots: camera, subject, story props, one slide with distances, beats on words) and make_shots.py/make_pages_md.py generated the plan's text; page files then re-typed the same data by hand.
+   final_value_or_rule : Slides of 0.43-1.5 m, about 3-4 s, from one word to another, never more than one move per shot in the built look; events on quoted words with occurrence counts ('spent' (2)).
+   evidence : chapter-2-inflation/34 Full redesign - working files/design/shots.json, make_shots.py; page-3.js T table
+   computable_from : shots.json and the (estimated) timeline
+   proposed_calculation : make_page_skeleton.py: for each page write the T table from the beats (kit.at(word, n)), one stillShot per shot with its slide as kind 'zoom in' from the start word to the end word using the view's plate and composed spots, the join choice, and draw2D stubs with buildWords at the beat words; flag beats whose word is missing from the timeline.
+   already_automatic : No.
+   llm_tip : Keep the shot list as data and generate page skeletons from it; never retype times.

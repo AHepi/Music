@@ -1,0 +1,362 @@
+Shot w1 (crowd + dark_subject): subject no-1 gate; story brazier, lantern, no-1-drum-diesel, man-1, man-2, man-3, man-4, man-5, man-6, man-7.
+Judged: Camera as given: composed spot (-3.700, 13.200, 1.835), turned -0.00 degrees; the plate's spot (the slide's start) (-3.700, 12.000, 1.835).
+Camera: composed spot [-3.7, 13.2, 1.835], turned -0.0 degrees, eye 1.7 m above the view's floor (height 0.14 m); plate spot [-3.7, 12.0, 1.835]; the lines meet 0.500 across, 0.500 down.
+Verdict: LOOK (3 info, 3 look, 22 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 3.8% (over its 2%), lantern 0.1%, no-1-drum-diesel 1.9%, man-1 2.1% (over its 2%), man-3 0.4%, man-4 2.5% (over its 2%), man-5 2.9% (over its 2%), man-6 2.4% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate, man-1, man-4, man-5, man-6, no-1-drum-petrol out of the bottom-left quarter.
+  [look] crowd_shoulder_gaps: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).
+         fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-1, shows about 12% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-1 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 1.70 m above the view's floor (height 0.14 m) (allowed 1.5 to 1.9 m for still_life).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of no-1 gate is 0.185 of the width away (0 px across, 200 px down, inside its outline); where the lines meet lies inside no-1 gate's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is no-1-drum-diesel, reaching 0.724 down (limit 0.7). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-petrol (to read) ends 0.238 across (limit 0.9). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-diesel (to read) ends 0.436 across (limit 0.9). (estimate)
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: no-1 gate 0.78, brazier 0.80, lantern 0.38, man-1 0.47, man-2 0.74, man-3 0.60, man-4 0.27, man-5 0.35, man-6 0.52, man-7 0.68 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.67 wide and 0.33 tall (limit 0.8 x 0.5 for crowd); edges: man-4 (left), brazier (right), no-1 gate (top), no-1-drum-diesel (bottom). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 0.3 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-1 gate 0.53, 0.54; middle of the story things 0.49, 0.58) span 0.05 x 0.08 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 88 degrees from the camera); its head is 19 px tall at 20.00 m (composed spot (end)); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-6 7.42 m, man-5 7.52 m, man-7 7.62 m, man-2 8.09 m, man-4 8.25 m, man-3 8.35 m, man-1 8.66 m, no-1-worker-1 17.98 m, no-2-worker-1 18.29 m, no-2-worker-2 21.85 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot (end)).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from this shot (w1): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from view w3 (plate): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 1": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).
+  [ok] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-6, are 1.60 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [ok] sign_facing: no-1 board's lettered face points 1.3 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [ok] sign_facing: no-1-drum-petrol's lettered face points 0.4 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] sign_facing: no-1-drum-diesel's lettered face points 3.0 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] slide_magnification: The 1.20 m slide brings the nearest painted thing, no-1-drum-diesel (its nearest corner 6.50 m away at the end), 1.185 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.86 m.
+  [ok] plate_lens: Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.
+  [ok] plate_rows: For the slide's worst magnification the plate would need 2462 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).
+  [info] rule12_must_read_right_edge: no-1 board (to read): not judged, it has no size (its middle lands 0.535 across; give its size under the shot's "things").
+  [info] subject_frame_share: no-1 gate fills about 13.9% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification_ground: The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).
+  Assumed: brazier: as the shot list gives it; lantern: as the shot list gives it; no-1-drum-diesel: "at" read as its bottom middle (as its middle it would sink 0.43 m into the surface under it); man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.83 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-1 gate: as the shot list gives it
+
+Shot w1 from round 4's spot (crowd + dark_subject): subject no-1 gate; story brazier, lantern, no-1-drum-diesel, man-1, man-2, man-3, man-4, man-5, man-6, man-7.
+Judged: Camera as given: composed spot (-3.700, 10.200, 1.835), turned 0.00 degrees; the plate's spot (the slide's start) (-3.700, 9.000, 1.835).
+Camera: composed spot [-3.7, 10.2, 1.835], turned 0.0 degrees, eye 1.7 m above the surface under it; plate spot [-3.7, 9.0, 1.835]; the lines meet 0.500 across, 0.500 down.
+Verdict: FAIL (1 FAIL, 3 info, 3 look, 21 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [FAIL] rule7_story_reaches_down: The lowest story thing is no-1-drum-diesel, reaching 0.653 down (limit 0.7). (estimate)
+         fix: Bring the camera 2.23 m nearer along its view (or no-1-drum-diesel that much nearer the camera): it may stand at most 7.26 m from no-1-drum-diesel's front (the bottom of its box is now 9.50 m away).
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 2.1% (over its 2%), lantern 0.1%, no-1-drum-diesel 0.8%, man-1 1.1%, man-3 0.2%, man-4 1.3%, man-5 1.4%, man-6 1.2%, no-1-drum-petrol 0.8%, no-1-worker-2 0.3% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate out of the bottom-left quarter.
+  [look] crowd_shoulder_gaps: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).
+         fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-1, shows about 13% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-1 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 1.70 m above the surface under it (allowed 1.5 to 1.9 m for still_life).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of no-1 gate is 0.139 of the width away (0 px across, 150 px down, inside its outline); where the lines meet lies inside no-1 gate's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-petrol (to read) ends 0.312 across (limit 0.9). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-diesel (to read) ends 0.455 across (limit 0.9). (estimate)
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: no-1 gate 0.71, brazier 0.72, lantern 0.42, man-1 0.48, man-2 0.67, man-3 0.57, man-4 0.33, man-5 0.39, man-6 0.51, man-7 0.63 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.49 wide and 0.23 tall (limit 0.8 x 0.5 for crowd); edges: man-4 (left), brazier (right), no-1 gate (top), no-1-drum-diesel (bottom). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 0.3 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-1 gate 0.53, 0.53; middle of the story things 0.49, 0.55) span 0.03 x 0.05 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 88 degrees from the camera); its head is 16 px tall at 23.00 m (composed spot (end)); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-6 10.42 m, man-5 10.52 m, man-7 10.62 m, man-2 11.09 m, man-4 11.25 m, man-3 11.35 m, man-1 11.66 m, no-1-worker-1 20.98 m, no-2-worker-1 21.29 m, no-2-worker-2 24.85 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot (end)).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from this shot (w1 from round 4's spot): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from view w3 (plate): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 1": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).
+  [ok] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-6, are 1.67 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [ok] sign_facing: no-1 board's lettered face points 1.0 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [ok] sign_facing: no-1-drum-petrol's lettered face points 3.1 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] sign_facing: no-1-drum-diesel's lettered face points 4.5 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] slide_magnification: The 1.20 m slide brings the nearest painted thing, no-1-drum-diesel (its nearest corner 9.50 m away at the end), 1.126 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 2.72 m.
+  [ok] plate_lens: Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.
+  [ok] plate_rows: For the slide's worst magnification the plate would need 2341 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).
+  [info] rule12_must_read_right_edge: no-1 board (to read): not judged, it has no size (its middle lands 0.526 across; give its size under the shot's "things").
+  [info] subject_frame_share: no-1 gate fills about 7.8% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification_ground: The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).
+  Assumed: brazier: as the shot list gives it; lantern: as the shot list gives it; no-1-drum-diesel: "at" read as its bottom middle (as its middle it would sink 0.43 m into the surface under it); man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.83 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-1 gate: as the shot list gives it
+
+Shot w1 planned (crowd + dark_subject): subject no-1 gate; story brazier, lantern, no-1-drum-diesel, man-1, man-2, man-3, man-4, man-5, man-6, man-7.
+Planned: Rule 1: stand in line with the middle of no-1 gate: -3.500 m across the street's lines (the line through it along the street then lands exactly where the lines meet, whatever the turn). Rule 7: no-1-drum-diesel reaches 0.72 down (the rule's 0.70 plus a 0.02 margin for the render) with the camera 6.91 m back from its middle along the street: the furthest back the camera may stand. Turn: straight along the lines. The slide: 1.2 m toward no-1 gate's middle, level (the same height) and the same turn; it starts (the plate's spot) at (-3.500, 11.893, 1.835). Planned camera: composed spot (-3.500, 13.093, 1.835), turned 0.00 degrees, eye 1.70 m above the floor.
+Camera: composed spot [-3.5, 13.0933, 1.835], turned 0.0 degrees, eye 1.7 m above left pavement; plate spot [-3.5, 11.8933, 1.835]; the lines meet 0.500 across, 0.500 down.
+Verdict: LOOK (3 info, 3 look, 22 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 4.2% (over its 2%), lantern 0.1%, no-1-drum-diesel 1.8%, man-1 2.0% (over its 2%), man-3 1.0%, man-4 2.5% (over its 2%), man-5 2.9% (over its 2%), man-6 2.7% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate, man-1, man-4, man-5, man-6, no-1-drum-petrol out of the bottom-left quarter.
+  [look] crowd_shoulder_gaps: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).
+         fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-1, shows about 13% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-1 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 1.70 m above left pavement (allowed 1.5 to 1.9 m for still_life).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of no-1 gate is 0.183 of the width away (0 px across, 197 px down, inside its outline); where the lines meet lies inside no-1 gate's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is no-1-drum-diesel, reaching 0.720 down (limit 0.7). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-petrol (to read) ends 0.202 across (limit 0.9). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-diesel (to read) ends 0.395 across (limit 0.9). (estimate)
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: no-1 gate 0.75, brazier 0.76, lantern 0.33, man-1 0.43, man-2 0.70, man-3 0.56, man-4 0.24, man-5 0.32, man-6 0.48, man-7 0.64 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.66 wide and 0.32 tall (limit 0.8 x 0.5 for crowd); edges: man-4 (left), brazier (right), no-1 gate (top), no-1-drum-diesel (bottom). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 0.3 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-1 gate 0.50, 0.53; middle of the story things 0.45, 0.58) span 0.05 x 0.08 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 87 degrees from the camera); its head is 19 px tall at 20.11 m (composed spot (end)); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-6 7.53 m, man-5 7.63 m, man-7 7.73 m, man-2 8.20 m, man-4 8.36 m, man-3 8.46 m, man-1 8.77 m, no-1-worker-1 18.09 m, no-2-worker-1 18.39 m, no-2-worker-2 21.96 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot (end)).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from this shot (w1 planned): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from view w3 (plate): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 1": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).
+  [ok] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-6, are 1.39 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [ok] sign_facing: no-1 board's lettered face points 0.0 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [ok] sign_facing: no-1-drum-petrol's lettered face points 1.7 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] sign_facing: no-1-drum-diesel's lettered face points 1.4 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] slide_magnification: The 1.20 m slide brings the nearest painted thing, no-1-drum-diesel (its nearest corner 6.60 m away at the end), 1.182 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.89 m.
+  [ok] plate_lens: Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.
+  [ok] plate_rows: For the slide's worst magnification the plate would need 2455 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).
+  [info] rule12_must_read_right_edge: no-1 board (to read): not judged, it has no size (its middle lands 0.500 across; give its size under the shot's "things").
+  [info] subject_frame_share: no-1 gate fills about 13.6% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification_ground: The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).
+  Assumed: brazier: as the shot list gives it; lantern: as the shot list gives it; no-1-drum-diesel: "at" read as its bottom middle (as its middle it would sink 0.43 m into the surface under it); man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.83 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-1 gate: as the shot list gives it
+
+Shot w1 round 4 (single file) (crowd + dark_subject): subject no-1 gate; story brazier, no-1-drum-diesel, man-1, man-2, man-3, man-4, man-5, man-6, man-7.
+Judged: Camera as given: composed spot (-3.700, 10.200, 1.835), turned 0.00 degrees; the plate's spot (the slide's start) (-3.700, 9.000, 1.835).
+Camera: composed spot [-3.7, 10.2, 1.835], turned 0.0 degrees, eye 1.7 m above the surface under it; plate spot [-3.7, 9.0, 1.835]; the lines meet 0.500 across, 0.500 down.
+Verdict: FAIL (4 FAIL, 2 info, 2 look, 17 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [FAIL] rule3_story_together_metres: The story things stand together in the street: the loneliest, man-4, is 0.56 m from man-3 (limit 0.3 m between footprints). (estimate)
+         fix: Move man-4 about 0.46 m toward man-3.
+  [FAIL] crowd_axis_angle: Crowd "men at No. 1" from this shot (w1 round 4 (single file)): its long axis makes 14 degrees with the view (at least 60; it spreads 2.5 times as far along it as across).
+         fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+  [FAIL] crowd_axis_angle: Crowd "men at No. 1" from view w3 (plate): its long axis makes 14 degrees with the view (at least 60; it spreads 2.5 times as far along it as across).
+         fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+  [FAIL] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-3, are 0.57 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+         fix: Move man-1 or man-3 sideways about 0.07 m (head widths are 0.155 m), or change their heights.
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 2.1% (over its 2%), brazier 0.6%, no-1-drum-diesel 0.4%, man-2 1.3%, no-1-drum-petrol 0.7%, no-1-worker-2 0.3% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate out of the bottom-left quarter.
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-1, shows about 0% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-1 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 1.70 m above the surface under it (allowed 1.5 to 1.9 m for still_life).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of no-1 gate is 0.139 of the width away (0 px across, 150 px down, inside its outline); where the lines meet lies inside no-1 gate's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is man-7, reaching 0.766 down (limit 0.7). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-petrol (to read) ends 0.432 across (limit 0.9). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-diesel (to read) ends 0.536 across (limit 0.9). (estimate)
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: no-1 gate 0.71, brazier 0.37, man-1 0.65, man-2 0.30, man-3 0.65, man-4 0.68, man-5 0.72, man-6 0.76, man-7 0.83 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.63 wide and 0.36 tall (limit 0.8 x 0.5 for crowd); edges: man-2 (left), man-7 (right), no-1 gate (top), man-7 (bottom). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-1 gate 0.53, 0.53; middle of the story things 0.60, 0.59) span 0.10 x 0.09 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 88 degrees from the camera); its head is 16 px tall at 23.00 m (composed spot (end)); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-7 6.00 m, man-6 7.10 m, man-5 8.20 m, man-4 9.30 m, man-3 10.40 m, man-2 10.86 m, man-1 11.66 m, no-1-worker-1 20.98 m, no-2-worker-1 21.29 m, no-2-worker-2 24.85 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-7 at composed spot (end)).
+  [ok] crowd_rows: Crowd "men at No. 1": 7 rows deep from this view (front to back: man-7; man-6; man-5; man-4; man-3; man-2; man-1).
+  [ok] sign_facing: no-1-drum-petrol's lettered face points 7.8 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] sign_facing: no-1-drum-diesel's lettered face points 7.7 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] slide_magnification: The 1.20 m slide brings the nearest painted thing, man-7 (its nearest corner 5.73 m away at the end), 1.209 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.64 m.
+  [ok] plate_lens: Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.
+  [ok] plate_rows: For the slide's worst magnification the plate would need 2513 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).
+  [info] subject_frame_share: no-1 gate fills about 7.8% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification_ground: The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).
+  Assumed: brazier: as the shot list gives it; no-1-drum-diesel: as the shot list gives it; man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.73 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.73 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-1 gate: as the shot list gives it
+
+Shot w1 round 3 (single file) (crowd + dark_subject): subject no-1 gate; story no-1-drum-diesel, man-1, man-2, man-3, man-4, man-5, man-6, man-7.
+Judged: Camera as given: composed spot (-4.100, 10.200, 1.841), turned 0.00 degrees; the plate's spot (the slide's start) (-4.100, 9.000, 1.841).
+Camera: composed spot [-4.1, 10.2, 1.841], turned 0.0 degrees, eye 1.706 m above the surface under it; plate spot [-4.1, 9.0, 1.841]; the lines meet 0.500 across, 0.500 down.
+Verdict: FAIL (4 FAIL, 2 info, 1 look, 18 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [FAIL] rule3_story_together_metres: The story things stand together in the street: the loneliest, no-1-drum-diesel, is 0.41 m from man-2 (limit 0.3 m between footprints). (estimate)
+         fix: Move no-1-drum-diesel about 0.31 m toward man-2.
+  [FAIL] crowd_axis_angle: Crowd "men at No. 1" from this shot (w1 round 3 (single file)): its long axis makes 12 degrees with the view (at least 60; it spreads 5.9 times as far along it as across).
+         fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+  [FAIL] crowd_axis_angle: Crowd "men at No. 1" from view w3 (plate): its long axis makes 12 degrees with the view (at least 60; it spreads 5.9 times as far along it as across).
+         fix: Stand them across the view, not along it: a loose crowd two deep across the gate, backs to the camera, [0.3, 0.5] m between shoulders, the back row about 0.8 m behind.
+  [FAIL] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-5 and man-6, are 0.18 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+         fix: Move man-5 or man-6 sideways about 0.13 m (head widths are 0.155 m), or change their heights.
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-1, shows about 0% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-1 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 1.71 m above the surface under it (allowed 1.5 to 1.9 m for still_life).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of no-1 gate is 0.111 of the width away (120 px across, 0 px down, inside its outline); where the lines meet lies inside no-1 gate's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is man-7, reaching 0.712 down (limit 0.7). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-petrol (to read) ends 0.345 across (limit 0.9). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-diesel (to read) ends 0.334 across (limit 0.9). (estimate)
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: no-1 gate 0.76, man-1 0.60, man-2 0.48, man-3 0.55, man-4 0.62, man-5 0.68, man-6 0.69, man-7 0.78 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.55 wide and 0.30 tall (limit 0.8 x 0.5 for crowd); edges: no-1-drum-diesel (left), man-7 (right), no-1 gate (top), man-7 (bottom). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-1 gate 0.58, 0.53; middle of the story things 0.58, 0.57) span 0.08 x 0.07 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 1.5%, no-1-drum-diesel 0.8%, man-2 1.1%, man-3 0.7%, no-1-drum-petrol 0.7%, no-1-worker-2 0.3% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 89 degrees from the camera); its head is 16 px tall at 23.00 m (composed spot (end)); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-7 6.93 m, man-6 7.71 m, man-5 8.49 m, man-4 9.27 m, man-3 10.05 m, man-2 11.00 m, man-1 11.66 m, no-1-worker-1 20.98 m, no-2-worker-1 21.29 m, no-2-worker-2 24.85 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-7 at composed spot (end)).
+  [ok] crowd_rows: Crowd "men at No. 1": 7 rows deep from this view (front to back: man-7; man-6; man-5; man-4; man-3; man-2; man-1).
+  [ok] sign_facing: no-1-drum-petrol's lettered face points 4.5 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] sign_facing: no-1-drum-diesel's lettered face points 0.0 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] slide_magnification: The 1.20 m slide brings the nearest painted thing, man-7 (its nearest corner 6.66 m away at the end), 1.180 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.91 m.
+  [ok] plate_lens: Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.
+  [ok] plate_rows: For the slide's worst magnification the plate would need 2452 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).
+  [info] subject_frame_share: no-1 gate fills about 7.8% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification_ground: The painted ground at the frame's bottom edge (2.93 m away) comes 1.409 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).
+  Assumed: no-1-drum-diesel: as the shot list gives it; man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.54 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.73 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.73 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-1 gate: as the shot list gives it
+
+Shot w3 (overview + crowd + dark_subject): subject two gates and the wall between; story brazier, no-2-crates, man-1, man-2, man-3, man-4, man-5, man-6, man-7.
+Judged: Camera as given: composed spot (0.000, -7.950, 5.740), turned -0.00 degrees; no slide.
+Camera: composed spot [0.0, -7.95, 5.74], turned -0.0 degrees, eye 5.6 m above the view's floor (height 0.14 m); no slide; the lines meet 0.500 across, 0.500 down.
+Verdict: LOOK (6 info, 3 look, 18 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: two gates and the wall between 2.1% (over its 2%), brazier 0.1%, man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move two gates and the wall between out of the bottom-left quarter.
+  [look] crowd_shoulder_gaps: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).
+         fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-1, shows about 19% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-1 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 5.60 m above the view's floor (height 0.14 m) (allowed 0.8 to 7.0 m for overview).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of two gates and the wall between is 0.142 of the width away (0 px across, 153 px down); where the lines meet lies inside two gates and the wall between's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is man-2, reaching 0.669 down (limit 0.7); the fill prop handcart reaches 0.815, which an overview allows (story or a fill prop (a handcart, crates)).
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: two gates and the wall between 0.75, brazier 0.40, no-2-crates 0.69, man-1 0.30, man-2 0.37, man-3 0.34, man-4 0.24, man-5 0.27, man-6 0.31, man-7 0.35 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.55 wide and 0.09 tall (limit 0.8 x 0.5 for overview + crowd); edges: man-4 (left), two gates and the wall between (right), two gates and the wall between (top), man-2 (bottom). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, no-2-crates, is 1.49 m from two gates and the wall between (limit 2.0 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of two gates and the wall between 0.50, 0.62; middle of the story things 0.45, 0.63) span 0.05 x 0.13 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 84 degrees from the camera); its head is 9 px tall at 41.15 m (composed spot); the house limit 24 px is invented and untested.
+  [ok] people_face_shows: no-2-worker-2's face or profile shows (it faces 93 degrees from the camera); its head is 9 px tall at 43.00 m (composed spot); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-6 28.57 m, no-2-man-6 28.63 m, man-5 28.67 m, no-2-man-5 28.73 m, no-2-man-7 28.75 m, man-7 28.77 m, no-2-man-8 28.90 m, man-2 29.24 m, man-4 29.40 m, no-2-man-3 29.43 m, no-2-man-1 29.45 m, man-3 29.50 m, no-2-man-4 29.53 m, no-2-man-2 29.57 m, man-1 29.81 m, no-1-worker-1 39.13 m, no-2-worker-1 39.44 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from this shot (w3): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from view w1 (composed): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 1": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).
+  [ok] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-6, are 1.12 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [ok] sign_facing: no-1 board's lettered face points 6.7 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [ok] sign_facing: no-2 board's lettered face points 6.7 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [ok] sign_facing: bank sign's lettered face points 13.7 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [info] overview_eye_for_story: For the story itself (man-2) to reach 0.7 down, the eye would have to stand 6.78 m high (it stands 5.74 m).
+  [info] rule12_must_read_right_edge: no-1 board (to read): not judged, it has no size (its middle lands 0.321 across; give its size under the shot's "things").
+  [info] rule12_must_read_right_edge: no-2 board (to read): not judged, it has no size (its middle lands 0.679 across; give its size under the shot's "things").
+  [info] rule12_must_read_right_edge: bank sign (to read): not judged, it has no size (its middle lands 0.127 across; give its size under the shot's "things").
+  [info] subject_frame_share: two gates and the wall between fills about 4.2% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification: A still shot: no slide.
+  Assumed: brazier: as the shot list gives it; handcart: as the shot list gives it; no-2-crates: as the shot list gives it; man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.83 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); two gates and the wall between: as the shot list gives it
+
+Shot w3 planned (overview + crowd + dark_subject): subject two gates and the wall between; story brazier, man-1, man-2, man-3, man-4, man-5, man-6, man-7.
+Planned: Overview: for man-6 to reach 0.72 down the eye must stand 7.46 m high (7.32 m above the view's floor (height 0.14 m)); raise the eye, never tilt. That is above the overview eye range (up to 7.0 m above the view's floor (height 0.14 m)): the eye stays at 7.14 m, and handcart (a fill prop, which an overview allows) makes the reach.
+Camera: composed spot [0.0, -7.95, 7.14], turned 0.0 degrees, eye 7.0 m above the view's floor (height 0.14 m); no slide; the lines meet 0.500 across, 0.500 down.
+Verdict: LOOK (3 info, 3 look, 15 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: two gates and the wall between 2.1% (over its 2%), brazier 0.1%, man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move two gates and the wall between out of the bottom-left quarter.
+  [look] crowd_shoulder_gaps: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).
+         fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-3, shows about 22% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-3 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 7.00 m above the view's floor (height 0.14 m) (allowed 0.8 to 7.0 m for overview).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of two gates and the wall between is 0.212 of the width away (0 px across, 229 px down); where the lines meet lies inside two gates and the wall between's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is man-6, reaching 0.711 down (limit 0.7). (estimate)
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: two gates and the wall between 0.75, brazier 0.40, man-1 0.30, man-2 0.37, man-3 0.34, man-4 0.24, man-5 0.27, man-6 0.31, man-7 0.35 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.55 wide and 0.09 tall (limit 0.8 x 0.5 for overview + crowd); edges: man-4 (left), two gates and the wall between (right), two gates and the wall between (top), man-6 (bottom). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 2.0 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of two gates and the wall between 0.50, 0.66; middle of the story things 0.45, 0.67) span 0.05 x 0.17 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 84 degrees from the camera); its head is 9 px tall at 41.15 m (composed spot); the house limit 24 px is invented and untested.
+  [ok] people_face_shows: no-2-worker-2's face or profile shows (it faces 93 degrees from the camera); its head is 9 px tall at 43.00 m (composed spot); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-6 28.57 m, no-2-man-6 28.63 m, man-5 28.67 m, no-2-man-5 28.73 m, no-2-man-7 28.75 m, man-7 28.77 m, no-2-man-8 28.90 m, man-2 29.24 m, man-4 29.40 m, no-2-man-3 29.43 m, no-2-man-1 29.45 m, man-3 29.50 m, no-2-man-4 29.53 m, no-2-man-2 29.57 m, man-1 29.81 m, no-1-worker-1 39.13 m, no-2-worker-1 39.44 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from this shot (w3 planned): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from view w1 (composed): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 1": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).
+  [ok] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-6, are 1.44 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [info] overview_eye_for_story: For the story itself (man-6) to reach 0.7 down, the eye would have to stand 6.79 m high (it stands 7.14 m).
+  [info] subject_frame_share: two gates and the wall between fills about 4.2% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification: A still shot: no slide.
+  Assumed: brazier: as the shot list gives it; handcart: as the shot list gives it; man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.83 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); two gates and the wall between: as the shot list gives it
+
+Shot w1 with a planned crowd (crowd + dark_subject): subject no-1 gate; story brazier, lantern, no-1-drum-diesel, men at No. 1 1, men at No. 1 2, men at No. 1 3, men at No. 1 4, men at No. 1 5, men at No. 1 6, men at No. 1 7.
+Judged: People: a loose crowd of 7 ("men at No. 1") two deep across the view: the front row (nearest what they face) round (-3.90, 21.60), 4 figures 0.87 m apart (0.40 m between 0.47 m shoulders); the back row of 3 stands 0.8 m behind them (nearer the camera), each between two of the front; backs to the camera, turned 4 to 16 degrees either way, heights 0.96 to 1.04 of 1.75 m. Camera as given: composed spot (-3.700, 13.200, 1.835), turned -0.00 degrees; the plate's spot (the slide's start) (-3.700, 12.000, 1.835).
+Camera: composed spot [-3.7, 13.2, 1.835], turned -0.0 degrees, eye 1.7 m above the view's floor (height 0.14 m); plate spot [-3.7, 12.0, 1.835]; the lines meet 0.500 across, 0.500 down.
+Verdict: LOOK (5 info, 2 look, 23 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [look] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: no-1 gate 3.8% (over its 2%), lantern 0.1%, no-1-drum-diesel 1.9%, men at No. 1 1 2.5% (over its 2%), men at No. 1 2 2.2% (over its 2%), men at No. 1 3 0.3%, men at No. 1 5 2.9% (over its 2%), men at No. 1 6 2.2% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+         fix: Confirm on the render (the shot checker measures the real outlines); if it holds, move no-1 gate, men at No. 1 1, men at No. 1 2, men at No. 1 5, men at No. 1 6, no-1-drum-petrol out of the bottom-left quarter.
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, men at No. 1 2, shows about 18% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move men at No. 1 2 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 1.70 m above the view's floor (height 0.14 m) (allowed 1.5 to 1.9 m for still_life).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule1_meeting_point_gap: The lines meet 0.500 across, 0.500 down; the nearest edge of no-1 gate is 0.185 of the width away (0 px across, 200 px down, inside its outline); where the lines meet lies inside no-1 gate's outline across (dark_subject); limit 0.03. (estimate)
+  [ok] rule7_story_reaches_down: The lowest story thing is no-1-drum-diesel, reaching 0.724 down (limit 0.7). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-petrol (to read) ends 0.238 across (limit 0.9). (estimate)
+  [ok] rule12_must_read_right_edge: no-1-drum-diesel (to read) ends 0.436 across (limit 0.9). (estimate)
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: no-1 gate 0.78, brazier 0.80, lantern 0.38, men at No. 1 1 0.29, men at No. 1 2 0.44, men at No. 1 3 0.60, men at No. 1 4 0.77, men at No. 1 5 0.35, men at No. 1 6 0.53, men at No. 1 7 0.71 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.65 wide and 0.33 tall (limit 0.8 x 0.5 for crowd); edges: men at No. 1 1 (left), brazier (right), no-1 gate (top), no-1-drum-diesel (bottom). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, men at No. 1 1, is 0.23 m from men at No. 1 2 (limit 0.3 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-1 gate 0.53, 0.54; middle of the story things 0.49, 0.58) span 0.04 x 0.08 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 88 degrees from the camera); its head is 19 px tall at 20.00 m (composed spot (end)); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: men at No. 1 5 7.60 m, men at No. 1 6 7.60 m, men at No. 1 7 7.60 m, men at No. 1 1 8.40 m, men at No. 1 2 8.40 m, men at No. 1 3 8.40 m, men at No. 1 4 8.40 m, no-1-worker-1 17.98 m, no-2-worker-1 18.29 m, no-2-worker-2 21.85 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest men at No. 1 5 at composed spot (end)).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from this shot (w1 with a planned crowd): its long axis makes 90 degrees with the view (at least 60; it spreads 2.2 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from view w3 (plate): its long axis makes 90 degrees with the view (at least 60; it spreads 2.2 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 1": 2 rows deep from this view (front to back: men at No. 1 5, men at No. 1 6, men at No. 1 7; men at No. 1 1, men at No. 1 2, men at No. 1 3, men at No. 1 4).
+  [ok] crowd_shoulder_gaps: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): men at No. 1 5-men at No. 1 6 0.40 m, men at No. 1 6-men at No. 1 7 0.40 m, men at No. 1 1-men at No. 1 2 0.40 m, men at No. 1 2-men at No. 1 3 0.40 m, men at No. 1 3-men at No. 1 4 0.40 m (house range 0.3 to 0.5 m).
+  [ok] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, men at No. 1 1 and men at No. 1 5, are 2.13 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [ok] sign_facing: no-1 board's lettered face points 1.3 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).
+  [ok] sign_facing: no-1-drum-petrol's lettered face points 0.4 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] sign_facing: no-1-drum-diesel's lettered face points 3.0 degrees away from the camera (allowed 44: the word wraps that far round).
+  [ok] slide_magnification: The 1.20 m slide brings the nearest painted thing, no-1-drum-diesel (its nearest corner 6.50 m away at the end), 1.185 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.86 m.
+  [ok] plate_lens: Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.
+  [ok] plate_rows: For the slide's worst magnification the plate would need 2462 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).
+  [info] rule12_must_read_right_edge: no-1 board (to read): not judged, it has no size (its middle lands 0.535 across; give its size under the shot's "things").
+  [info] subject_frame_share: no-1 gate fills about 13.9% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life). (estimate)
+  [info] slide_magnification_ground: The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).
+  [info] prop_turn: Turn no-1-drum-petrol 12.45 degrees (+ left) to face its front at camera (its front faces 180 degrees at turn 0).
+  [info] prop_turn: Turn no-1-drum-diesel 5.04 degrees (+ left) to face its front at camera (its front faces 180 degrees at turn 0).
+  Assumed: brazier: as the shot list gives it; lantern: as the shot list gives it; no-1-drum-diesel: "at" read as its bottom middle (as its middle it would sink 0.43 m into the surface under it); no-1 gate: as the shot list gives it; men at No. 1 1: a figure 1.75 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); men at No. 1 2: a figure 1.82 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); men at No. 1 3: a figure 1.68 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); men at No. 1 4: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); men at No. 1 5: a figure 1.71 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); men at No. 1 6: a figure 1.75 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); men at No. 1 7: a figure 1.82 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)
+
+
+Settings used (film-settings.json):
+  shot_planner.figure_shoulder_width_metres = 0.47 metres (judged)
+  shot_planner.figure_box_metres = [0.64, 0.54] metres [across, front to back] (measured)
+  people.figure_height_metres = 1.75 metres (judged)
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  frame.film_vertical_fov_degrees = 60.4 degrees, top to bottom (measured)
+  frame.plate_vertical_fov_degrees = 64.4 degrees, top to bottom (judged)
+  shot_kind_profiles.still_life.rules.main_rule_spot_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.dark_subject.rules.rule1_meeting_point_gap = 0.03 share of the width, across only (judged)
+  shot_kind_profiles.still_life.rules.rule2_eye_height = [1.5, 1.9] metres above the surface under the camera (judged)
+  shot_kind_profiles.crowd.rules.rule3_story_box = [0.8, 0.5] share of width x height (judged)
+  shot_kind_profiles.still_life.rules.rule3_story_together_metres = 0.3 metres between footprints (judged)
+  shot_kind_profiles.still_life.rules.rule4_near_touch = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.crowd.rules.rule4_between_figures = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_subject_brightness_ratio = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_on_subject = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_in_story_box = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_nothing_in_story_as_bright = None replaced (judged)
+  shot_kind_profiles.still_life.rules.rule5_top_third_brightness = 0.36 mean brightness (0 to 1) (measured)
+  shot_kind_profiles.still_life.rules.rule6_warm_share = [0.015, 0.03] share of the frame (measured)
+  shot_kind_profiles.dark_subject.rules.rule6_lit_from_below = None off (judged)
+  shot_kind_profiles.still_life.rules.rule7_story_reaches_down = 0.7 down the frame (judged)
+  shot_kind_profiles.still_life.rules.rule8_work_prop_share = 0.02 share of the frame (measured)
+  shot_kind_profiles.crowd.rules.rule8_bottom_left_share = 0.02 share of the frame per story thing (the subject or a story prop) (judged)
+  shot_kind_profiles.crowd.rules.rule10_quiet_side_weight = [0.4, 0.5] share of the weight (judged)
+  shot_kind_profiles.dark_subject.rules.rule10_nothing_on_quiet_side_outshines = None off (judged)
+  shot_kind_profiles.still_life.rules.rule12_must_read_right_edge = 0.9 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule12_story_right_edge = 0.95 share of the width (in 0.45-0.95 down) (judged)
+  shot_kind_profiles.crowd.rules.rule12_title_zone_sky_share = None replaced (judged)
+  shot_kind_profiles.still_life.rules.resting_on = the street (ground rays; "landed high" over 0.5 m) rule (judged)
+  shot_kind_profiles.still_life.rules.slide_magnification = painting limit times nearer at the nearest painted surface (measured)
+  shot_kind_profiles.dark_subject.rules.silhouette_contrast = 2.2 (surround + 0.05)/(subject + 0.05) over a band round the subject (measured)
+  camera.eye_height_fix_margin_metres = 0.05 metres (judged)
+  camera.level_tolerance_degrees = 0.5 degrees of tilt or lean (judged)
+  shot_planner.figure_shoes_below_feet_down = 0.012 down the frame (measured)
+  shot_planner.reach_aim_margin_down = 0.02 down the frame, past rule 7's reach (judged)
+  safe_area.button_strip_down = [0.45, 0.95] down the frame (judged)
+  shot_planner.planning_spot_box = [0.3, 0.4] share of width x height (invented)
+  composing.subject_frame_share = [0.029, 0.033] share of the frame (measured)
+  composing.work_prop_middle_band_down = [0.45, 0.62] down the frame (measured)
+  shot_kind_profiles.still_life.rules.rule8_bottom_left_share = 0.01 share of the frame per thing (judged)
+  shot_planner.slide_sample_steps = 10 steps along a slide (judged)
+  people.backs_to_camera_min_distance_metres = 6.0 metres from every camera spot along a slide (judged)
+  people.head_height_metres = 0.23 metres (judged)
+  people.facing_head_max_pixels = 24 pixels tall (invented)
+  shot_planner.face_visible_dot_min = -0.2 cosine between the figure's facing and the way to the camera (invented)
+  shot_planner.crowd_min_figures = 3 figures (invented)
+  people.crowd_axis_min_angle_to_view_degrees = 60 degrees (invented)
+  shot_planner.crowd_axis_min_elongation = 1.5 spread along the long axis over the spread across it (invented)
+  people.crowd_back_row_behind_metres = 0.8 metres (judged)
+  people.crowd_shoulder_gap_metres = [0.3, 0.5] metres (judged)
+  shot_planner.figure_head_width_metres = 0.155 metres (measured)
+  people.crowd_head_spacing_head_widths = 1.0 head widths between head centres on screen (judged)
+  people.crowd_figure_visible_share_min = 0.5 share of each figure (judged)
+  shot_planner.sign_edge_on_degrees = 70 degrees between a sign's facing and the way to the camera (judged)
+  frame.painting_returned_size_pixels = [1504, 2672] pixels [width, height] (measured)
+  camera.slide_magnification_borderline_share = 0.01 share over the limit (invented)
+  frame.plate_frame_edge_fade_share = 0.03 share of the frame (judged)
+  frame.plate_lens_extra_degrees = 4.0 degrees (judged)
+  frame.plate_width_pixels = 1536 pixels (judged)
+  frame.plate_height_pixels = 2730 pixels (judged)
+  composing.clear_overlap_pixels_at_1536 = 20 pixels on a frame 1536 wide (scaled to the frame) (judged)
+  composing.clear_gap_pixels_at_1536 = 25 pixels on a frame 1536 wide (judged)
+  shot_kind_profiles.overview.rules.rule2_eye_height = [0.8, 7.0] metres above the surface the checker finds under the camera (judged)
+  shot_kind_profiles.overview.rules.rule3_story_box = [0.6, 0.5] share of width x height (judged)
+  shot_kind_profiles.overview.rules.rule3_story_together_metres = 2.0 metres between footprints (judged)
+  shot_kind_profiles.overview.rules.rule7_story_reaches_down = 0.7 down the frame (judged)
+  shot_kind_profiles.overview.rules.rule10_quiet_side_weight = [0.4, 0.6] share of the weight (judged)
+  camera.eye_height_default_metres = 1.7 metres (judged)
+  people.crowd_turn_degrees = [4, 16] degrees each way (judged)
+  people.crowd_scale_range = [0.96, 1.04] scale (judged)
